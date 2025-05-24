@@ -28,43 +28,7 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const getParam = (key: string, fallback: string = '') => pageParams.get(key) ?? fallback;
 
   const updatePageParams = (newParams: PageParamsOptional) => {
-    setPageParams((prev) => {
-      const next = new URLSearchParams(prev);
-      Object.entries(newParams).forEach(([key, value]) => {
-        if (['limit', 'page'].includes(key)) {
-          // Handle as number
-          const valueAsNumber = parseInt(value as string);
-          if (isNaN(valueAsNumber) || valueAsNumber < 1) {
-            next.set(key, '0');
-          } else {
-            next.set(key, valueAsNumber.toString());
-          }
-        } else if (Array.isArray(value)) {
-          // Handle as array
-          if (value.length === 0) {
-            next.delete(key);
-          } else {
-            next.set(key, value.join(','));
-          }
-        } else if (value == null || value == '') {
-          // Handle as string
-          next.delete(key);
-        } else {
-          next.set(key, value.toString());
-        }
-      });
-      // Clear the some parameters if they match the default
-      const defaults = getDefaultParams(
-        (next.get('objectType') as ObjectType) ?? DEFAULT_OBJECT_TYPE,
-        (next.get('view') as View) ?? DEFAULT_VIEW,
-      );
-      PARAMS_THAT_CLEAR.forEach((param: PageParamKey) => {
-        if (next.get(param) == defaults[param]?.toString()) {
-          next.delete(param);
-        }
-      });
-      return next;
-    });
+    setPageParams((prev) => getNewURLSearchParams(newParams, prev));
   };
 
   const providerValue: PageParamsContextState = useMemo(() => {
@@ -111,6 +75,55 @@ function getDefaultParams(objectType: ObjectType, view: View): PageParams {
     sortBy: SortBy.Population,
     view,
   };
+}
+
+/**
+ * Gets a fresh URL -- good for anchor links where you want to clear out existing parameters
+ * and to enable people to use extra interactions (like open in new window, copy link URL, etc).
+ */
+export function getNewURL(params: PageParamsOptional): string {
+  return `?${getNewURLSearchParams(params).toString()}`;
+}
+
+function getNewURLSearchParams(
+  newParams: PageParamsOptional,
+  prev?: URLSearchParams,
+): URLSearchParams {
+  const next = new URLSearchParams(prev);
+  Object.entries(newParams).forEach(([key, value]) => {
+    if (['limit', 'page'].includes(key)) {
+      // Handle as number
+      const valueAsNumber = parseInt(value as string);
+      if (isNaN(valueAsNumber) || valueAsNumber < 1) {
+        next.set(key, '0');
+      } else {
+        next.set(key, valueAsNumber.toString());
+      }
+    } else if (Array.isArray(value)) {
+      // Handle as array
+      if (value.length === 0) {
+        next.delete(key);
+      } else {
+        next.set(key, value.join(','));
+      }
+    } else if (value == null || value == '') {
+      // Handle as string
+      next.delete(key);
+    } else {
+      next.set(key, value.toString());
+    }
+  });
+  // Clear the some parameters if they match the default
+  const defaults = getDefaultParams(
+    (next.get('objectType') as ObjectType) ?? DEFAULT_OBJECT_TYPE,
+    (next.get('view') as View) ?? DEFAULT_VIEW,
+  );
+  PARAMS_THAT_CLEAR.forEach((param: PageParamKey) => {
+    if (next.get(param) == defaults[param]?.toString()) {
+      next.delete(param);
+    }
+  });
+  return next;
 }
 
 export const usePageParams = () => {

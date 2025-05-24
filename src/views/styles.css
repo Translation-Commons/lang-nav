@@ -99,6 +99,9 @@ div.section {
     margin-bottom: 1em;
 }
 
+dt {
+    font-weight: 600;
+}
 
 @media (min-width: 0px) {
     .CardList {

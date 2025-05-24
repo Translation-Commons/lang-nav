@@ -35,6 +35,8 @@ function getImageSrc(view: View): string {
       return '/lang-nav/table.png';
     case View.Notices:
       return '/lang-nav/warnings.png';
+    case View.About:
+      return '/lang-nav/about.png';
   }
 }
 

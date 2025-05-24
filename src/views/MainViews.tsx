@@ -1,6 +1,7 @@
 import { usePageParams } from '../controls/PageParamsContext';
 import { ObjectType, View } from '../types/PageParamTypes';
 
+import AboutPage from './AboutPage';
 import ObjectDetailsPage from './common/ObjectDetailsPage';
 import LanguageCardList from './language/LanguageCardList';
 import { LanguageHierarchy } from './language/LanguageHierarchy';
@@ -61,6 +62,8 @@ function MainViews() {
     // eslint-disable-next-line no-fallthrough
     case View.Notices:
       return <ViewWarnings />;
+    case View.About:
+      return <AboutPage />;
   }
 }
 

@@ -1,6 +1,6 @@
 # *Lang*uage *Nav*igator
 
-This repository contain a dataset of metadata about the world's languages and language-like objects as well as a website framework to visualize the information.
+This repository contain a dataset about the world's languages and language-like objects as well as a website framework to visualize the information.
 
 ![Preview of the website](/public/preview.png)
 
@@ -37,7 +37,7 @@ We've partnered with various organizations to get data and to provide data to. U
 
 The data comes from multiple sources, primarily [CLDR](https://github.com/unicode-org/cldr/), [Ethnologue](https://www.ethnologue.com/), and [Glottolog](https://glottolog.org/).
 
-## Deployment Instructions
+## Development Instructions
 
 In order to generate the website on an internal server, follow these instructions.
 
@@ -45,7 +45,8 @@ In order to generate the website on an internal server, follow these instruction
 2. Download the repository to your computer -- go to that folder when you are done
 3. Run `npm install` to install relevant Node and Vite packageas
 4. Run `npm run dev` to start the server with some dev options
-  1. or `npm run build`
+   1. or `npm run build` for the public version
+5. Depending on what port is used, the website can now be accessed using a local browser at a URL like http://localhost:5173/
 
 In order to push the changes to the deployed website (github pages site), follow these instructions.
 

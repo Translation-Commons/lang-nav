@@ -7,7 +7,7 @@ import { usePageParams } from '../PageParamsContext';
 
 const LimitInput: React.FC = () => {
   const { limit, objectType, updatePageParams, view } = usePageParams();
-  if ([View.Details, View.Notices].includes(view)) {
+  if ([View.Details, View.Notices, View.About].includes(view)) {
     // Not supported for this view
     return <></>;
   }
@@ -40,7 +40,8 @@ function getLimitableObjectName(view: View) {
     case View.Hierarchy:
       return 'root nodes';
     case View.Details:
-      return '???';
+    case View.About:
+      return 'not applicable';
     case View.Table:
       return 'rows';
     case View.Notices:
