@@ -130,11 +130,15 @@ function createRegionalLocalesForTerritory(
             // Clear attributes that cannot be easily aggregated
             nameEndonym: undefined,
             officialStatus: undefined,
+            populationCensus: undefined, // No census for this aggregated locale
+            censusRecords: [], // No census records for this aggregated locale
+            containedLocales: [loc], // Keep track of the original locales that were aggregated
           };
         } else {
           newLocale.populationSpeaking += loc.populationSpeaking || 0;
           newLocale.populationSpeakingPercent =
             (newLocale.populationSpeaking * 100) / territory.population;
+          newLocale.containedLocales = [...(newLocale.containedLocales || []), loc];
         }
       });
       return locs;
