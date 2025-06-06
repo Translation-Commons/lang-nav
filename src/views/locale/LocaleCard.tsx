@@ -5,7 +5,8 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { LocaleData } from '../../types/DataTypes';
 import ObjectTitle from '../common/ObjectTitle';
 
-import { getOfficialLabel, getPopulationCitation } from './LocaleStrings';
+import LocaleCensusCitation from './LocaleCensusCitation';
+import { getOfficialLabel } from './LocaleStrings';
 
 interface Props {
   locale: LocaleData;
@@ -25,7 +26,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         <h4>Speakers</h4>
         {populationSpeaking.toLocaleString()}
         {' ['}
-        {getPopulationCitation(locale)}
+        <LocaleCensusCitation locale={locale} size="short" />
         {']'}
         {populationSpeakingPercent != null && (
           <div>
