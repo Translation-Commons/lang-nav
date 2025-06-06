@@ -1,3 +1,6 @@
+#sourceURL	https://github.com/unicode-org/cldr/blob/main/common/supplemental/languageGroup.xml
+#dateAccessed	2025-06-06
+#notes	Numerous manual edits attempting to fill in missing data and reconcile some linguistics debates
 ISO 639-5	Constituents
 aav	bbh bfw bru brv hre irr kdt ktv kuf mkh mmj mun ncq ngt nyl oog pac phg ply sct sss tth tto zng
 afa	aal ber btf bvw bxe cdc ckq cus egx glo hdy hig hwo jaf kbz kul kvj mes mlw mmf omv sem tdk tsh ttr xdm
@@ -27,10 +30,10 @@ cdc	ajw anc ank bcw bcy bde bdm bdn bid bol bta bvf bvh bwr bxq ckl cky cla daa 
 cdd	ari cad kii paw wic
 cel	br cnx cy ga gd ghc gv kw nrc oco owl pgl sth wlm xcb xce xga xlp xpi
 cmc	ace cja cje cjm hro huq ibh jra ocm rad rgs rog
-cpe	afs aig bah bi bzj bzk cpi djk fpe gcl gul gyn hwc icr jam kri kww ngm pcm pih pis rop srn tch tcs tpi trf vic wes lir
-cpf	acf cks crs gcf gcr ht lou mfe rcf scf
-cpp	aoa cri fab idb kea mcm mzs pov pre vkp
-crp	cpe cpf cpp sg
+cpe	afs aig bah bi bzj bzk cpi djk fpe gcl gul gyn hwc icr jam kri kww ngm pcm pih pis rop srn tch tcs tpi trf vic wes lir tgh svc gpe
+cpf	acf cks crs gcf gcr ht lou mfe rcf scf kmv
+cpp	aoa cri fab idb kea mcm mzs pov pre vkp tvy
+crp	cpe cpf cpp sg ycr sci hca ccm ccd brc skw nag bpl ihb njt onx mhh
 csu	aja avu bdh bex blm bmi bot bvq bxv dsi efe fgr fuu gbn gqr hor jyy kah kcm krs kwg kwv kxj lap led les lgg lmi log mdi mdj mgc mge mhi mne mwm mwu myb ndp niy nwm sba sbz snm yul
 cus	aa aas ahg arv awn bds bej bji bnl bob bsw byn dal dox drs dsh elo gax gdl gex gii gow gwd hae irk kxc om orc rel sid so ssn ssy tqq tsb wbj wka xan ymm
 day	bei bth byd lra sdo sne sre
@@ -44,7 +47,7 @@ fox	ami bnn byq bzg ckv dru fos kae ppu pwn pyu pzh ssf sxr szy tay trv tsu tvx 
 gem	gme gmq gmw
 gme	got xvn
 gmq	da fo is jut nb nn no non nrn ovd sv
-gmw	act af ang bar cim dcr de drt dum en enm frk frr frs fy gct geh gmh gml goh gpe gsw ksh lb li lng mhn nds nl odt ofs oor osx pdc pdt pfl sco sdz sli sth stl stq swg vel vls wae wep wym yec yi yih yol zea sxu hrx vmf
+gmw	act af ang bar cim dcr de drt dum en enm frk frr frs fy gct geh gmh gml goh gsw ksh lb li lng mhn nds nl odt ofs oor osx pdc pdt pfl sco sdz sli sth stl stq swg vel vls wae wep wym yec yi yih yol zea sxu hrx vmf
 grk	cpg el gmy grc pnt tsd
 hmx	bje bmt bpn buh bwn bwx cqd hma hmc hmd hme hmf hmg hmh hmi hmj hml hmm hmn hmp hmq hms hmv hmw hmy hmz hnj hrm huj ium mji mmr muq mww neo pha pnu sfm shx
 hok	acv atw boi chd cid clo coc coj crz dih esq inz kju klb kyh mov mrc obi peb pef pej peq pom poo ppi puy sei sht sln veo was ynn yuf yum
@@ -56,7 +59,7 @@ ine	aln bat cel cms gem grk hit hlu htx hyx iir imy itc nei oht plq rmd rmu scx 
 ira	ae atn avd bal bgn bhh bjm bqi bsg ckb def deh esh fa fay gbz glk goz gzi hac hrz isk jdt jpr kfm kgn kho kiu ku lki lrc lrl lsa luz mnj mzn ntz nyq okh oru os pal peo prc ps rat rdb sdb sdf sdh sgh sgr sgy shm siy smy sog soj sqo srh srz tg tks tly tov ttt vaf vmh wbl wne xbc xco xkc xkj xkp xme xmn xpr xsc yah yai ydg ysc zum zza pes prd prs haz
 iro	cay chr lre moh ntw one ono see sqn tus
 itc	la osc roa spx umc xae xfa xhr xum xve xvo xvs
-jpx	ja
+jpx	ams ja kzg mvi ojp okn ryn rys ryu tkn xug yoi yox
 kar	blk bwe eky ghk jkm jkp kjp kjt ksw kvl kvq kvt kvu kvy kxf kxk pdu pwo pww wea
 kdo	acz eli lmd taz tlo laf tag ras kcr tms dec jle tqr
 khi	gku gnk gwj hgm hio hnh hts huc knw kqu kqz ktz kwz naq ngh nhr nmn sad shg tyu vaj xam xii xuu
@@ -101,7 +104,7 @@ tai	aho aio blt eee kht ksu lo nod nrr nut pdi phk shn soa tdd th thi tnu tpo ts
 tbq	adi adl apt bee bft bfu bqh bro brx cda cdn cgk chx dka drd duu dz dzl ghe ghh ght gro gvr gyo hut jda jna jul kbg kfk khg kkf kte kzq lae lbf lbj lhm lkh loy mrg nbt neh njz nmm npa nun ola ole prx rgk rnp sbu scp scu sgt sip skj spt syw taj tdg tgf tgj ths tpq tsj tsk ttz twm xkf xkz xns xsr xzh zau adx phj my
 trk	aib alt atv az azb ba bgx chg cjs clw crh cv dlg gag ili jct kaa kdr kim kjh kk klj kmz krc kum ky nog otk oui qwm qxq sah slr sty tk tr tt tyv ug uum uz xbo xpc xqa ybe zkh zkz
 tup	aan ait ama api aqz arr arx asn asu aux avv awe awt cin cod eme gn gnw gub gui gun guq gvj gvo gyr jor jua jur kay kgk kpn ktn kuq kyr kyz mav mdz mnd mpu msp myu nhd omg oym paf pah pak pog psm pta pto skf srq sru taf tpj tpk tpn tpr tqb twt urb uru urz wir wyr xaj xiy xmo yrl yuq
-tut	ain ams jje kzg mvi ojp okm okn oko pkc ryn rys ryu tkn trk tuw xgn xhc xpy xug yoi yox zkg zkt
+tut	trk tuw xgn xhc zkt
 tuw	eve evn gld juc mnc neg oaa oac orh sjo ude ulc
 urj	fiu omk rts syd xcv ykg yux
 wak	dtd has hei kwk myh nuk
