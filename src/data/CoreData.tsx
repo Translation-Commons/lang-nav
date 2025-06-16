@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { loadVariantTagData } from '../data/IANAData'; // issue 6
+import { loadVariantTagData } from '../data/IANAData';
 
 import { CensusID, CensusData } from '../types/CensusTypes';
 import {
@@ -49,7 +49,7 @@ export type CoreData = {
   locales: Record<BCP47LocaleCode, LocaleData>;
   territories: Record<TerritoryCode, TerritoryData>;
   writingSystems: Record<ScriptCode, WritingSystemData>;
-  variantTags: VariantTagData[]; // issue 6
+  variantTags: Record<IANAVariantTag, VariantTagData>;
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySchema = {
