@@ -149,10 +149,12 @@ export interface LocaleData extends ObjectBase {
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
+  containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
 
   // Data added up some references
   populationSpeakingPercent?: number;
   populationWriting?: number;
   populationWritingPercent?: number;
+  populationCensus?: CensusData; // The census record that provides the population estimate
   censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
 }
