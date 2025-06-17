@@ -15,6 +15,7 @@ import { ScopeLevel } from '../types/ScopeLevel';
 
 type PageParamsContextState = PageParams & {
   updatePageParams: (newParams: PageParamsOptional) => void;
+  replaceAllParams: (newParams: PageParamsOptional) => void;
 };
 
 const PageParamsContext = createContext<PageParamsContextState | undefined>(undefined);
@@ -30,6 +31,9 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const updatePageParams = (newParams: PageParamsOptional) => {
     setPageParams((prev) => getNewURLSearchParams(newParams, prev));
   };
+  const replaceAllParams = (newParams: PageParamsOptional) => {
+    setPageParams(getNewURLSearchParams(newParams));
+  };  
 
   const providerValue: PageParamsContextState = useMemo(() => {
     const objectType = getParam('objectType', DEFAULT_OBJECT_TYPE) as ObjectType;
@@ -37,11 +41,11 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     const defaults = getDefaultParams(objectType, view);
     return {
       languageSchema: getParam('languageSchema', defaults.languageSchema) as LanguageSchema,
-      limit: parseInt(getParam('limit', defaults.limit.toString())),
+      limit: parseInt(getParam('limit') || defaults.limit.toString(), 10),
       localeSeparator: getParam('localeSeparator', '') === '-' ? '-' : '_',
       objectID: getParam('objectID', undefined),
       objectType,
-      page: parseInt(getParam('page', defaults.page.toString())),
+      page: parseInt(getParam('page'), defaults.page.toString(), 10),
       scopes: getParam('scopes', defaults.scopes.join(','))
         .split(',')
         .map((s) => s as ScopeLevel)
@@ -51,8 +55,12 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       sortBy: getParam('sortBy', defaults.sortBy) as SortBy,
       view,
       updatePageParams,
+      replaceAllParams,
     };
-  }, [pageParams]);
+  }, [pageParams,
+     updatePageParams,
+      replaceAllParams,
+     ]);
 
   return <PageParamsContext.Provider value={providerValue}>{children}</PageParamsContext.Provider>;
 };
