@@ -11,12 +11,15 @@ import TerritoryCard from '../territory/TerritoryCard';
 import WritingSystemCard from '../writingsystem/WritingSystemCard';
 
 type Props = {
-  object: ObjectData;
+  object?: ObjectData;
   children: React.ReactNode;
 };
 
 const HoverableObject: React.FC<Props> = ({ object, children }) => {
   const { view, updatePageParams } = usePageParams();
+  if (object == null) {
+    return <>{children}</>;
+  }
 
   const getHoverContent = () => {
     switch (object.type) {

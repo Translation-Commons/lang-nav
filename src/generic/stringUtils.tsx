@@ -8,7 +8,7 @@ export function separateTitleAndSubtitle(str: string): [string, string | undefin
 }
 
 export function toTitleCase(str: string): string {
-  return str.replace(/\b\w/g, (char) => char.toUpperCase());
+  return str.toLowerCase().replace(/\b\w/g, (char) => char.toUpperCase());
 }
 
 export function toSentenceCase(str: string): string {

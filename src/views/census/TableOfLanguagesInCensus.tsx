@@ -7,10 +7,11 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { CensusData } from '../../types/CensusTypes';
 import { LocaleData } from '../../types/DataTypes';
-import { ObjectType, SortBy } from '../../types/PageParamTypes';
+import { ObjectType, SearchableField, SortBy } from '../../types/PageParamTypes';
 import { getLanguageScopeLevel, ScopeLevel } from '../../types/ScopeLevel';
 import HoverableObject from '../common/HoverableObject';
-import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
+import { ObjectFieldHighlightedByPageSearch } from '../common/ObjectField';
+import { CodeColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 type Props = {
@@ -83,7 +84,18 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         objects={languagesInCensus}
         columns={[
           CodeColumn,
-          NameColumn,
+          {
+            label: 'Language',
+            render: (object) => (
+              <HoverableObject object={object.language}>
+                <ObjectFieldHighlightedByPageSearch
+                  object={object}
+                  field={SearchableField.EngName}
+                />
+              </HoverableObject>
+            ),
+            sortParam: SortBy.Name,
+          },
           {
             label: 'Population',
             render: (loc) => loc.populationSpeaking,

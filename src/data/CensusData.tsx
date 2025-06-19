@@ -1,3 +1,4 @@
+import { toTitleCase } from '../generic/stringUtils';
 import { CensusData } from '../types/CensusTypes';
 import { LanguageCode } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
@@ -12,6 +13,8 @@ const CENSUS_FILENAMES = [
   'data.un.org/au', // Australia Censuses downloaded from UN data portal
   // Add more census files here as needed
 ];
+
+const DEBUG = false;
 
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
   return await Promise.all(
@@ -139,12 +142,25 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
       continue;
     }
 
-    // Accumulate language names
-    const languageName = parts[1].trim();
-    if (languageNames[languageCode] != null) {
-      languageNames[languageCode] = languageNames[languageCode] + ' / ' + languageName; // If the language code already exists, append the name
-    } else {
-      languageNames[languageCode] = languageName; // Otherwise, just set the name
+    // The language name is in the second column
+    let languageName = parts[1].trim();
+    if (languageName !== '') {
+      // If it starts with a number, that may just be a row number, so clip that out
+      const match = languageName.match(/^\d+(.*)/);
+      if (match != null) {
+        languageName = match[1].trim();
+      }
+      // If the whole name is all caps, convert it to title case, eg. "ENGLISH" -> "English"
+      if (languageName === languageName.toUpperCase()) {
+        languageName = toTitleCase(languageName);
+      }
+
+      // Accumulate language names if it appears in multiple places.
+      if (languageNames[languageCode] != null) {
+        languageNames[languageCode] = languageNames[languageCode] + ' / ' + languageName; // If the language code already exists, append the name
+      } else {
+        languageNames[languageCode] = languageName; // Otherwise, just set the name
+      }
     }
 
     // Add population estimates to censuses when its non-empty
@@ -174,6 +190,26 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
 }
 
 export function addCensusData(coreData: CoreData, censusData: CensusImport): void {
+  // Add alternative language names to the language data
+  Object.entries(censusData.languageNames).forEach(([languageCode, languageName]) => {
+    // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
+    const language = coreData.languagesBySchema.Inclusive[languageCode];
+    if (language != null) {
+      // Split on / since some censuses have multiple names for the same language
+      languageName
+        .split('/')
+        .map((name) => name.trim())
+        .filter((name) => !language.names.includes(name))
+        .forEach((name) => language.names.push(name));
+    } else if (DEBUG) {
+      // TODO: show warning in the "Notices" tool
+      // TODO: support "languages" that are actually locale tags eg. bhum1234-u-sd-inod
+      console.warn(
+        `Language ${languageName} [${languageCode}] not found for census data: ${censusData.censuses[0].ID}`,
+      );
+    }
+  });
+
   // Add the census records to the core data
   for (const census of censusData.censuses) {
     // Add the census to the core data if its not there yet

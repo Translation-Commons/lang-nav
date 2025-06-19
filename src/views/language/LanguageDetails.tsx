@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
@@ -18,197 +18,219 @@ type Props = {
 };
 
 const LanguageDetails: React.FC<Props> = ({ lang }) => {
+  return (
+    <div className="Details">
+      <LanguageIdentification lang={lang} />
+      <LanguageAttributes lang={lang} />
+      <LanguageVitalityAndViability lang={lang} />
+      <LanguageConnections lang={lang} />
+    </div>
+  );
+};
+
+const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { codeISO6391, nameDisplay, nameEndonym, schemaSpecific } = lang;
+  const { Glottolog, ISO, CLDR } = schemaSpecific;
+
+  // nameDisplay and nameEndonym should already be shown in the title for this
+  const otherNames = useMemo(
+    () => lang.names.filter((name) => name != nameDisplay && name != nameEndonym, []),
+    [nameDisplay, lang.names],
+  );
+
+  return (
+    <div className="section">
+      <h3>Identification</h3>
+      {otherNames.length > 0 && (
+        <div>
+          <label>Other names:</label>
+          {otherNames.join(', ')}
+        </div>
+      )}
+      <div>
+        <label>Language Code:</label>
+        {lang.ID}
+      </div>
+      <div>
+        <label>Glottocode:</label>
+        {Glottolog.code ? (
+          <>
+            {Glottolog.code}
+            <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
+              Glottolog
+            </LinkButton>
+          </>
+        ) : (
+          <span className="unsupported">Not in Glottolog</span>
+        )}
+      </div>
+      <div>
+        <label>ISO Code:</label>
+        {ISO.code ? (
+          <>
+            {ISO.code}
+            {codeISO6391 ? ` | ${codeISO6391}` : ''}
+            <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
+          </>
+        ) : (
+          <span className="unsupported">Not in ISO catalog</span>
+        )}
+      </div>
+      <div>
+        <label>CLDR Code:</label>
+        {CLDR.code ? (
+          <>
+            {CLDR.code}
+            <LinkButton
+              href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
+            >
+              CLDR XML
+            </LinkButton>
+          </>
+        ) : (
+          <span className="unsupported">Not in CLDR</span>
+        )}
+      </div>
+      {ISO.code && (
+        <div>
+          <label>Other external links:</label>
+          <LinkButton href={`https://www.ethnologue.com/language/${ISO.code}`}>
+            Ethnologue
+          </LinkButton>
+          <LinkButton href={`https://en.wikipedia.org/wiki/ISO_639:${ISO.code}`}>
+            Wikipedia
+          </LinkButton>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { populationCited, modality, primaryWritingSystem, writingSystems } = lang;
+
+  return (
+    <div className="section">
+      <h3>Attributes</h3>
+      {populationCited && (
+        <div>
+          <label>Population:</label>
+          {populationCited.toLocaleString()}
+        </div>
+      )}
+      {modality && (
+        <div>
+          <label>Modality:</label>
+          {modality}
+        </div>
+      )}
+      {primaryWritingSystem && (
+        <div>
+          <label>Primary Writing System:</label>
+          <HoverableObjectName object={primaryWritingSystem} />
+        </div>
+      )}
+      {Object.values(writingSystems).length > 0 && (
+        <div>
+          <label>Writing Systems:</label>
+          <CommaSeparated>
+            {Object.values(writingSystems)
+              .sort(getSortFunction())
+              .map((writingSystem) => (
+                <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
+              ))}
+          </CommaSeparated>
+        </div>
+      )}
+    </div>
+  );
+};
+
+const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const {
+    vitalityISO,
+    vitalityEth2013,
+    vitalityEth2025,
+    viabilityConfidence,
+    viabilityExplanation,
+  } = lang;
+
+  return (
+    <div className="section">
+      <h3>Vitality & Viability</h3>
+      {vitalityISO && (
+        <div>
+          <label>ISO Vitality / Status:</label>
+          {vitalityISO}
+        </div>
+      )}
+      {vitalityEth2013 && (
+        <div>
+          <label>Ethnologue Vitality (2013):</label>
+          {vitalityEth2013}
+        </div>
+      )}
+      {vitalityEth2025 && (
+        <div>
+          <label>Ethnologue Vitality (2025):</label>
+          {vitalityEth2025}
+        </div>
+      )}
+      <div>
+        <label>Should use in World Atlas:</label>
+        {viabilityConfidence} ... {viabilityExplanation}
+      </div>
+      <div>
+        <label>Internet Technologies:</label>
+        <CLDRCoverageInfo lang={lang} />
+      </div>
+    </div>
+  );
+};
+
+const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSchema } = usePageParams();
   const sortFunction = getSortFunction();
   const {
-    codeISO6391,
     childLanguages,
-    modality,
-    nameDisplay,
-    populationCited,
-    primaryWritingSystem,
-    schemaSpecific,
-    vitalityEth2013,
-    vitalityEth2025,
-    vitalityISO,
-    writingSystems,
+    schemaSpecific: { ISO, Glottolog },
   } = lang;
-  const { Glottolog, ISO, CLDR } = schemaSpecific;
-
-  const otherNames = Object.values(schemaSpecific).reduce<string[]>((otherNames, { name }) => {
-    if (name && nameDisplay !== name && !otherNames.includes(name)) {
-      otherNames.push(name);
-    }
-    return otherNames;
-  }, []);
 
   return (
-    <div className="Details">
-      <div className="section">
-        <h3>Identification</h3>
-        {otherNames.length > 0 && (
-          <div>
-            <label>Other names:</label>
-            {otherNames.join(', ')}
-          </div>
-        )}
+    <div className="section">
+      <h3>Connections</h3>
+      {ISO.parentLanguage && (
         <div>
-          <label>Language Code:</label>
-          {lang.ID}
+          <label>ISO group:</label>
+          <HoverableObjectName object={ISO.parentLanguage} />
         </div>
+      )}
+      {Glottolog.parentLanguage && (
         <div>
-          <label>Glottocode:</label>
-          {Glottolog.code ? (
-            <>
-              {Glottolog.code}
-              <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
-                Glottolog
-              </LinkButton>
-            </>
+          <label>Glottolog group:</label>
+          <HoverableObjectName object={Glottolog.parentLanguage} />
+        </div>
+      )}
+      <div style={{ display: 'flex' }}>
+        <div>
+          <label>Descendent Languages:</label>
+          {childLanguages.length > 0 ? (
+            <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSchema, sortFunction)} />
           ) : (
-            <span className="unsupported">Not in Glottolog</span>
+            <div>
+              <span className="unsupported">No languages come from this language.</span>
+            </div>
           )}
         </div>
         <div>
-          <label>ISO Code:</label>
-          {ISO.code ? (
-            <>
-              {ISO.code}
-              {codeISO6391 ? ` | ${codeISO6391}` : ''}
-              <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Table</LinkButton>
-            </>
+          <label>Locales:</label>
+          {lang.locales.length > 0 ? (
+            <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction)} />
           ) : (
-            <span className="unsupported">Not in ISO catalog</span>
+            <div>
+              <span className="unsupported">There are no recorded locales for this language.</span>
+            </div>
           )}
-        </div>
-        <div>
-          <label>CLDR Code:</label>
-          {CLDR.code ? (
-            <>
-              {CLDR.code}
-              <LinkButton
-                href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
-              >
-                CLDR XML
-              </LinkButton>
-            </>
-          ) : (
-            <span className="unsupported">Not in CLDR</span>
-          )}
-        </div>
-        {ISO.code && (
-          <div>
-            <label>Other external links:</label>
-            <LinkButton href={`https://www.ethnologue.com/language/${ISO.code}`}>
-              Ethnologue
-            </LinkButton>
-            <LinkButton href={`https://en.wikipedia.org/wiki/ISO_639:${ISO.code}`}>
-              Wikipedia
-            </LinkButton>
-          </div>
-        )}
-      </div>
-      <div className="section">
-        <h3>Attributes</h3>
-        {populationCited && (
-          <div>
-            <label>Population:</label>
-            {populationCited.toLocaleString()}
-          </div>
-        )}
-        {modality && ( 
-          <div>
-            <label>Modality:</label>
-            {modality} 
-          </div>
-        )}
-        {primaryWritingSystem && (
-          <div>
-            <label>Primary Writing System:</label>
-            <HoverableObjectName object={primaryWritingSystem} />
-          </div>
-        )}
-        {Object.values(writingSystems).length > 0 && (
-          <div>
-            <label>Writing Systems:</label>
-            <CommaSeparated>
-              {Object.values(writingSystems)
-                .sort(sortFunction)
-                .map((writingSystem) => (
-                  <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
-                ))}
-            </CommaSeparated>
-          </div>
-        )}
-      </div>
-      <div className="section">
-        <h3>Vitality & Viability</h3>
-        {vitalityISO && (
-          <div>
-            <label>ISO Vitality / Status:</label>
-            {vitalityISO}
-          </div>
-        )}
-        {vitalityEth2013 && (
-          <div>
-            <label>Ethnologue Vitality (2013):</label>
-            {vitalityEth2013}
-          </div>
-        )}
-        {vitalityEth2025 && (
-          <div>
-            <label>Ethnologue Vitality (2025):</label>
-            {vitalityEth2025}
-          </div>
-        )}
-        <div>
-          <label>Should use in World Atlas:</label>
-          {lang.viabilityConfidence} ... {lang.viabilityExplanation}
-        </div>
-        <div>
-          <label>Internet Technologies:</label>
-          <CLDRCoverageInfo lang={lang} />
-        </div>
-      </div>
-      <div className="section">
-        <h3>Connections</h3>
-        {ISO.parentLanguage && (
-          <div>
-            <label>ISO group:</label>
-            <HoverableObjectName object={ISO.parentLanguage} />
-          </div>
-        )}
-        {Glottolog.parentLanguage && (
-          <div>
-            <label>Glottolog group:</label>
-            <HoverableObjectName object={Glottolog.parentLanguage} />
-          </div>
-        )}
-        <div style={{ display: 'flex' }}>
-          <div>
-            <label>Descendent Languages:</label>
-            {childLanguages.length > 0 ? (
-              <TreeListRoot
-                rootNodes={getLanguageTreeNodes([lang], languageSchema, sortFunction)}
-              />
-            ) : (
-              <div>
-                <span className="unsupported">No languages come from this language.</span>
-              </div>
-            )}
-          </div>
-          <div>
-            <label>Locales:</label>
-            {lang.locales.length > 0 ? (
-              <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction)} />
-            ) : (
-              <div>
-                <span className="unsupported">
-                  There are no recorded locales for this language.
-                </span>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
