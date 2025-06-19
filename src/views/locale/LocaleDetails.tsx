@@ -5,7 +5,8 @@ import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 
-import { getOfficialLabel, getPopulationCitation } from './LocaleStrings';
+import LocaleCensusCitation from './LocaleCensusCitation';
+import { getOfficialLabel } from './LocaleStrings';
 
 type Props = {
   locale: LocaleData;
@@ -103,7 +104,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <label>Speakers:</label>
         {populationSpeaking.toLocaleString()}
         {' ['}
-        {getPopulationCitation(locale)}
+        <LocaleCensusCitation locale={locale} />
         {']'}
       </div>
       {populationSpeakingPercent != null && (

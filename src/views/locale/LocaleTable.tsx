@@ -6,6 +6,8 @@ import { SortBy } from '../../types/PageParamTypes';
 import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
+import LocaleCensusCitation from './LocaleCensusCitation';
+
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();
 
@@ -20,6 +22,10 @@ const LocaleTable: React.FC = () => {
           render: (object) => object.populationSpeaking,
           isNumeric: true,
           sortParam: SortBy.Population,
+        },
+        {
+          label: 'Population Source',
+          render: (object) => <LocaleCensusCitation locale={object} size="short" />,
         },
         InfoButtonColumn,
       ]}
