@@ -33,8 +33,8 @@ function getImageSrc(view: View): string {
       return '/lang-nav/hierarchy.png';
     case View.Table:
       return '/lang-nav/table.png';
-    case View.Notices:
-      return '/lang-nav/notices.png';
+    case View.Reports:
+      return '/lang-nav/reports.png';
     case View.About:
       return '/lang-nav/about.png';
   }

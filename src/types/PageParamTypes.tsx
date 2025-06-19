@@ -15,7 +15,7 @@ export enum View {
   Details = 'Details',
   Hierarchy = 'Hierarchy',
   Table = 'Table',
-  Notices = 'Notices',
+  Reports = 'Reports',
   About = 'About',
 }
 

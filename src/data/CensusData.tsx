@@ -244,7 +244,7 @@ export function addCensusRecordsToLocales(codeData: CoreData, census: CensusData
         populationPercent: (populationEstimate * 100.0) / census.eligiblePopulation,
       });
     } else {
-      // TODO: show warning in the "Notices" tool
+      // TODO: show warning in the "Reports" tool
     }
   });
 }

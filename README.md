@@ -5,9 +5,9 @@ This repository contain a dataset about the world's languages and language-like 
 ![Preview of the website](/public/preview.png)
 
 There are multiple ways to visualize the data
-|Card List|Details|Hierarchy|Table|Warnings|
+|Card List|Details|Hierarchy|Table|Reports|
 |--|--|--|--|--|
-|<img src="public/cardlist.png" alt="Card List" style="max-width: 200px;" />|<img src="public/details.png" alt="Details" style="max-width: 200px;" />|<img src="public/hierarchy.png" alt="Hierarchy" style="max-width: 200px;" />|<img src="public/table.png" alt="Table" style="max-width: 200px;" />|<img src="public/warnings.png" alt="Warnings" style="max-width: 200px;" />
+|<img src="public/cardlist.png" alt="Card List" style="max-width: 200px;" />|<img src="public/details.png" alt="Details" style="max-width: 200px;" />|<img src="public/hierarchy.png" alt="Hierarchy" style="max-width: 200px;" />|<img src="public/table.png" alt="Table" style="max-width: 200px;" />|<img src="public/reports.png" alt="Reports" style="max-width: 200px;" />
 
 ## Project Overview
 
@@ -96,6 +96,8 @@ Here's a list of planned functionality. Completed functions are checked off.
     - [x] Language families
     - [x] Glottolog
     - [ ] Digital Support details
+    - [ ] Vitality details
+    - [ ] Keyboard availability details
   - [x] Territories
     - [x] Countries & Dependencies
     - [x] Continents & other regions
@@ -107,28 +109,33 @@ Here's a list of planned functionality. Completed functions are checked off.
     - [x] Basic data
     - [x] Relationship w/ other writing systems (containment, lineage)
   - [ ] Language Variants / IANA tags
+  - [x] Censuses
+    - [x] Regular censuses
+    - [ ] Include citation information
+    - [ ] Convert other imported datasets into census-like objects
 - [x] Views
   - [x] Cards
   - [x] Details
   - [x] Hierarchy
   - [x] Table
   - [ ] Map
-  - [x] Warnings
+  - [x] Reports
     - [x] Language name overlap
     - [ ] Invalid languages
     - [ ] Locales that should be added
+    - [ ] Metrics on the data we have
 - [x] Interactivity
   - [x] Search
     - [x] By Code
     - [x] By Name, Endonym
     - [x] Highlight search
     - [x] For Hierarchy
-    - [ ] Using typeahead
+    - [x] Using typeahead
     - [ ] When few results are shown, suggest alternatives
   - [x] Filter
     - [x] By Scope
     - [x] By Country
-    - [ ] Integrate in search bar
+    - [x] Integrate in search bar
   - [x] Hovercard & Tooltips
     - [x] Related objects
     - [x] Field explanations
@@ -144,14 +151,13 @@ Here's a list of planned functionality. Completed functions are checked off.
     - [x] ISO, Glottolog, Inclusive
     - [x] Highlight language codes in each
   - [ ] Add a better guide for different kinds of users
-- [ ] Pages
-  - [ ] Introduction, how to use
-  - [ ] Acknowledgements
+- [x] About Page
+  - [x] Introduction, how to use
+  - [x] Acknowledgements
 - [ ] Future ideas
   - [ ] Database-powered backend
   - [ ] Feedback mechanisms
   - [ ] Metrics
-- [ ] clarify what that vitality levels mean
 
 ## License
 

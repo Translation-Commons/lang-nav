@@ -15,7 +15,7 @@ import LocaleTable from './locale/LocaleTable';
 import TerritoryCardList from './territory/TerritoryCardList';
 import { TerritoryHierarchy } from './territory/TerritoryHierarchy';
 import TerritoryTable from './territory/TerritoryTable';
-import ViewWarnings from './ViewWarnings';
+import ViewReports from './ViewReports';
 import WritingSystemCardList from './writingsystem/WritingSystemCardList';
 import { WritingSystemHierarchy } from './writingsystem/WritingSystemHierarchy';
 import WritingSystemTable from './writingsystem/WritingSystemTable';
@@ -69,8 +69,8 @@ function MainViews() {
           return <WritingSystemTable />;
       }
     // eslint-disable-next-line no-fallthrough
-    case View.Notices:
-      return <ViewWarnings />;
+    case View.Reports:
+      return <ViewReports />;
     case View.About:
       return <AboutPage />;
   }

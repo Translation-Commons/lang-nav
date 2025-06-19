@@ -118,6 +118,21 @@ dt {
     white-space: nowrap;
 }
 
+.ViewReports {
+    text-align: start;
+}
+
+.ViewReports summary {
+    width: 100%;
+    background-color: var(--color-button-secondary);
+    padding: 0.5em;
+    border-radius: .5em;
+    cursor: pointer;
+    text-align: left;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+
 @media (min-width: 0px) {
     .CardList {
         grid-template-columns: repeat(1, 1fr);

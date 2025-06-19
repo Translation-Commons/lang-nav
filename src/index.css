@@ -85,7 +85,7 @@ button {
   background-color: var(--color-button-secondary);
 }
 
-.unsupported {
+.unsupported, .deemphasized {
   font-style: italic;
   font-weight: lighter;
   color: var(--color-text-secondary);
