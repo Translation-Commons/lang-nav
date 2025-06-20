@@ -1,6 +1,5 @@
 import { ScriptCode, TerritoryCode } from './DataTypes';
 import { LanguageCode } from './LanguageTypes';
-import { ObjectType } from './PageParamTypes';
 
 export enum CLDRCoverageLevel {
   Core = 'core', // Language identification
@@ -8,14 +7,6 @@ export enum CLDRCoverageLevel {
   Moderate = 'moderate', // Most date/time/number formats. Timezone and currency information. Translations for common languages/scripts/regions.
   Modern = 'modern', // Translations for emoji characters, measurement units, final date/time formats and translations.
 }
-
-export type CLDRAliasImport = {
-  objectType: ObjectType;
-  original: string;
-  replacement: string;
-  reason: string;
-  comment?: string;
-};
 
 export type CLDRCoverageImport = {
   languageCode: LanguageCode;

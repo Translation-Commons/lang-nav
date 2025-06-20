@@ -1,71 +1,65 @@
-import { CLDRAliasImport, CLDRCoverageLevel, CLDRCoverageImport } from '../types/CLDRTypes';
-import { LanguagesBySchema, LanguageScope } from '../types/LanguageTypes';
-import { ObjectType } from '../types/PageParamTypes';
+import aliases from 'cldr-core/supplemental/aliases.json';
+
+import { CLDRCoverageLevel, CLDRCoverageImport } from '../types/CLDRTypes';
+import { LocaleData } from '../types/DataTypes';
+import { LanguageData, LanguagesBySchema, LanguageScope } from '../types/LanguageTypes';
 
 import { CoreData } from './CoreData';
 
-const DEBUG = false;
+const DEBUG = true;
 
-export async function loadCLDRAliases(): Promise<CLDRAliasImport[] | void> {
-  return await fetch('data/unicode/cldrAliases.tsv')
-    .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .map(parseCLDRAliasLine)
-        .filter((row) => row != null);
-    })
-    .catch((err) => console.error('Error loading TSV:', err));
-}
-
-function parseCLDRAliasLine(line: string): CLDRAliasImport | undefined {
-  const parts = line.match(
-    /<([^A]+)Alias type="([^"]+)" replacement="([^"]+)"\s+reason="([^"]+)"\/>(?:\W*<!-- (.+) -->)?/,
-  );
-  if (parts == null || parts.length < 6) {
-    // Drop rows that are comments
-    return undefined;
-  }
-  let objectType = null;
-  if (parts[1] === 'language') {
-    objectType = ObjectType.Language;
-  } else if (parts[1] === 'script') {
-    objectType = ObjectType.WritingSystem;
-  } else if (parts[1] === 'territory') {
-    objectType = ObjectType.Territory;
-  }
-  if (objectType == null) {
-    return undefined;
-  }
-
-  return {
-    objectType,
-    original: parts[2],
-    replacement: parts[3],
-    reason: parts[4],
-    comment: parts[5],
-  };
-}
-
-export function addCLDRLanguageSchema(
-  languagesBySchema: LanguagesBySchema,
-  cldrAliases: CLDRAliasImport[],
-): void {
+export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): void {
+  // Start with the initialized
   const cldrLanguages = languagesBySchema.CLDR;
-  // const langCodesToReplacement = cldrAliases
-  //   .filter((alias) => alias.objectType === ObjectType.Language)
-  //   .reduce<Record<LanguageCode, CLDRAliasRow>>((langCodesToReplacement, alias) => {
-  //     langCodesToReplacement[alias.original] = alias;
-  //     return langCodesToReplacement;
-  //   }, {});
-  // console.log(langCodesToReplacement);
+
+  // Import the CLDR language aliases and format it a bit
+  const languageAliases = Object.entries(aliases.supplemental.metadata.alias.languageAlias).map(
+    (alias) => {
+      const [code, aliasData] = alias;
+      return {
+        original: code,
+        reason: aliasData._reason,
+        replacement: aliasData._replacement,
+      };
+    },
+  );
 
   // Go through all "overlong" aliases. We already handled most of them by using ISO 639-1 two-letter codes but a few
   // more exist, in particular eg. swc -> sw_CD and prs -> fa_AF
-  cldrAliases
-    .filter((alias) => alias.reason === 'overlong' && alias.objectType === ObjectType.Language)
+  languageAliases
+    .filter(({ reason }) => reason === 'overlong')
     .forEach((alias) => {
       const lang = cldrLanguages[alias.original];
+      let replacementData: LanguageData | LocaleData = cldrLanguages[alias.replacement];
+      if (replacementData == null) {
+        // If the replacement data is not found, it may be a locale -- but we need to convert it to underscored ISO-639-3 form
+        // For example, `sw-CD` replaces `swc`, but we need to convert it to `swc_CD` to match out schema
+        const replacementIdParts = alias.replacement.split('-');
+        // TODO need to add the equivalent locales swa_CD, fas_AF, srp_Latn
+        // const replacementLangID = cldrLanguages[replacementIdParts[0]]?.ID ?? replacementIdParts[0];
+        // replacementData = locales[replacementLangID + '_' + replacementIdParts.slice(1).join('_')];
+        replacementData = cldrLanguages[replacementIdParts[0]];
+      }
+      if (lang != null) {
+        // Add a note that the language code is considered "overlong" and a different language code or locale code should be used instead for CLDR purposes
+        lang.schemaSpecific.CLDR = {
+          code: alias.original,
+          childLanguages: [],
+          notes: (
+            <>
+              This language code <code>{alias.original}</code> is considered &quot;overlong&quot; in
+              CLDR, use <code>{alias.replacement}</code> instead.
+            </>
+          ),
+        };
+        // Add the replacement code as a child language
+        lang.cldrDataProvider = replacementData;
+        if (DEBUG && replacementData == null) {
+          console.warn(
+            `CLDR language ${alias.original} has no replacement data for ${alias.replacement}. This may cause issues.`,
+          );
+        }
+      }
       if (DEBUG && lang != null) {
         console.log('CLDR import', alias, lang);
         // TODO: support locales in CLDR better
@@ -77,33 +71,77 @@ export function addCLDRLanguageSchema(
   // For example, "zh" usually means "Chinese (macrolanguage)" but in CLDR it functionally means cmn "Mandarin Chinese"
   // This is because the macrolanguage tag is better known and of the macrolanguage's consistuents, Mandarin Chinese
   // is the most dominant. Thereby, the canonical entry for "cmn" in the langauge data is functionally "zh" in CLDR.
-  cldrAliases
-    .filter((alias) => alias.reason === 'macrolanguage' && alias.objectType === ObjectType.Language)
+  languageAliases
+    .filter((alias) => alias.reason === 'macrolanguage')
     .forEach((alias) => {
-      // Does the dominant language for the macrolanguage (eg. cmn) exist?
-      const lang = cldrLanguages[alias.original];
+      // Get the constituent language and the macrolanguage that will be replaced by it
+      const constituentLangCode = alias.original; // eg. `cmn`
+      const macroLangCode = alias.replacement; // eg. `zh`
+      const constituentLang = cldrLanguages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
+      const macroLang = cldrLanguages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
+      const notes = (
+        <>
+          The ISO language {macroLang?.nameCanonical} <code>{macroLangCode}</code> is a
+          macrolanguage -- meaning it is a generalization for multiple languages that, while
+          related, have strong lexical or phonological differences. Thereby, CLDR uses it&apos;s
+          largest constituent language {constituentLang?.nameCanonical}{' '}
+          <code>{constituentLangCode}</code> as the canonical representation for the macrolanguage.
+        </>
+      );
 
-      // Does the macrolanguage entry (eg. zh) exist?
-      if (lang != null && cldrLanguages[alias.replacement] != null) {
-        // Remove the symbolic reference but mark the replacement code (eg. cmn) as the parent
-        cldrLanguages[alias.replacement].schemaSpecific.CLDR.parentLanguageCode = lang.ID;
-        cldrLanguages[alias.replacement].schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
-        delete cldrLanguages[alias.replacement];
+      // Does the macrolanguage entry exist?
+      if (constituentLang != null && macroLang != null) {
+        // Add notes to the macrolanguage entry
+        macroLang.cldrDataProvider = constituentLang;
+        macroLang.schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
+        macroLang.schemaSpecific.CLDR.notes = notes;
+        // Remove the symbolic reference in the CLDR list to the macrolanguage object
+        delete cldrLanguages[macroLangCode];
       }
 
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
-      if (lang != null) {
-        cldrLanguages[alias.replacement] = lang;
-        lang.schemaSpecific.CLDR = {
-          code: alias.replacement,
-          childLanguages: [],
-        };
+      if (constituentLang != null) {
+        cldrLanguages[macroLangCode] = constituentLang;
+        constituentLang.schemaSpecific.CLDR.code = macroLangCode;
+        constituentLang.schemaSpecific.CLDR.notes = notes;
 
         // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
-        delete cldrLanguages[alias.original];
+        delete cldrLanguages[constituentLangCode];
       } else {
         // Looks like `him` and `srx` are missing -- perhaps they are discontinued codes
-        if (DEBUG) console.log(alias);
+        if (DEBUG) console.debug(alias);
+      }
+    });
+
+  // Go through all of the "bibliographic" aliases. Like the overlong aliases they are not used but if you reference one a CLDR language will appear.
+
+  // Go through all "overlong" aliases. We already handled most of them by using ISO 639-1 two-letter codes but a few
+  // more exist, in particular eg. swc -> sw_CD and prs -> fa_AF
+  languageAliases
+    .filter(({ reason }) => reason === 'bibliographic')
+    .forEach((alias) => {
+      const lang = cldrLanguages[alias.original];
+      const replacementData: LanguageData = cldrLanguages[alias.replacement];
+      if (lang != null) {
+        lang.schemaSpecific.CLDR = {
+          code: alias.original,
+          childLanguages: [],
+          notes: (
+            <>
+              This language code <code>{alias.original}</code> is an ISO 639-2
+              &quot;bibliographic&quot; language code -- as opposed to a &quot;terminology&quot;
+              code. In modern use these language codes are never used. In CLDR,{' '}
+              <code>{alias.replacement}</code> should be used instead.
+            </>
+          ),
+        };
+        // Add the replacement code as a child language
+        lang.cldrDataProvider = replacementData;
+        if (DEBUG && replacementData == null) {
+          console.warn(
+            `CLDR language ${alias.original} has no replacement data for ${alias.replacement}. This may cause issues.`,
+          );
+        }
       }
     });
 
