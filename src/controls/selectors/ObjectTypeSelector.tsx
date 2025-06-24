@@ -11,17 +11,24 @@ import { usePageParams } from '../PageParamsContext';
 const objectAmbiguousViews = [View.About, View.Details];
 
 const ObjectTypeSelector: React.FC = () => {
-  const { objectType, updatePageParams, view } = usePageParams();
+  const { objectType, replaceAllParams, view } = usePageParams();
   const isCompact = useMediaQuery('(max-width: 1050px)');
   const goToObjectType = useCallback(
-    (objectType: ObjectType) => {
-      updatePageParams({
-        objectType,
-        view: objectAmbiguousViews.includes(view) ? View.CardList : view,
+    (newObjectType: ObjectType) => {
+       const targetView = objectAmbiguousViews.includes(view) ? View.CardList : view;
+
+      console.log(`ObjectTypeSelector: Changing objectType to ${newObjectType}. Resetting all params.`);
+     
+  replaceAllParams({
+        objectType: newObjectType,
+        view: targetView,
+        page: 1,
+        searchString: '',
       });
     },
-    [updatePageParams, view],
+    [replaceAllParams, view],
   );
+
 
   return (
     <Selector selectorLabel={isCompact ? 'Data:' : undefined} appearance="tabs">
