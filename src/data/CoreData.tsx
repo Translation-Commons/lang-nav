@@ -39,6 +39,7 @@ import {
   loadTerritories,
 } from './TerritoryData';
 import { addCLDRLanguageSchema, loadCLDRAliases } from './UnicodeData';
+import { loadIANAVariants, addIANAVariantLocales } from './IANAData';
 
 export type CoreData = {
   censuses: Record<CensusID, CensusData>;
@@ -59,6 +60,7 @@ export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySchema = {
 /**
  * Get core data needed to show the tables -- things like language codes, relationships with other languages.
  */
+   
 export function useCoreData(): {
   loadCoreData: () => Promise<void>;
   coreData: CoreData;
@@ -86,6 +88,7 @@ export function useCoreData(): {
       territories,
       locales,
       writingSystems,
+      ianaVariants,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -98,7 +101,9 @@ export function useCoreData(): {
       loadTerritories(),
       loadLocales(),
       loadWritingSystems(),
+      loadIANAVariants(),
     ]);
+
     if (initialLangs == null || territories == null || locales == null || writingSystems == null) {
       alert('Error loading data. Please check the console for more details.');
       return;
@@ -110,7 +115,8 @@ export function useCoreData(): {
     addISOMacrolanguageData(languagesBySchema.ISO, macroLangs || []);
     addGlottologLanguages(languagesBySchema, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageSchema(languagesBySchema, cldrAliases || []);
-
+    addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
+   
     connectLanguagesToParent(languagesBySchema);
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySchema.Inclusive, territories, writingSystems);
@@ -135,3 +141,4 @@ export function useCoreData(): {
     },
   };
 }
+
