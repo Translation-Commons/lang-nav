@@ -1,0 +1,993 @@
+%%
+Type: variant
+Subtag: 1606nict
+Description: Late Middle French (to 1606)
+Added: 2007-03-20
+Prefix: frm
+Comments: 16th century French as in Jean Nicot, "Thresor de la langue
+  francoyse", 1606, but also including some French similar to that of
+  Rabelais
+%%
+Type: variant
+Subtag: 1694acad
+Description: Early Modern French
+Added: 2007-03-20
+Prefix: fr
+Comments: 17th century French, as catalogued in the "Dictionnaire de
+  l'académie françoise", 4eme ed. 1694; frequently includes
+  elements of Middle French, as this is a transitional period
+%%
+Type: variant
+Subtag: 1901
+Description: Traditional German orthography
+Added: 2005-10-16
+Prefix: de
+%%
+Type: variant
+Subtag: 1959acad
+Description: "Academic" ("governmental") variant of Belarusian as
+  codified in 1959
+Added: 2008-09-30
+Prefix: be
+%%
+Type: variant
+Subtag: 1994
+Description: Standardized Resian orthography
+Added: 2007-07-28
+Prefix: sl-rozaj
+Prefix: sl-rozaj-biske
+Prefix: sl-rozaj-njiva
+Prefix: sl-rozaj-osojs
+Prefix: sl-rozaj-solba
+Comments: For standardized Resian an orthography was published in 1994.
+%%
+Type: variant
+Subtag: 1996
+Description: German orthography of 1996
+Added: 2005-10-16
+Prefix: de
+%%
+Type: variant
+Subtag: abl1943
+Description: Orthographic formulation of 1943 - Official in Brazil
+  (Formulário Ortográfico de 1943 - Oficial no Brasil)
+Added: 2015-05-06
+Prefix: pt-BR
+Comments: Denotes conventions established by the Academia Brasileira de
+  Letras in 1943 and generally used in Brazil until 2009
+%%
+Type: variant
+Subtag: akuapem
+Description: Akuapem Twi
+Added: 2017-06-05
+Prefix: tw
+%%
+Type: variant
+Subtag: alalc97
+Description: ALA-LC Romanization, 1997 edition
+Added: 2009-12-09
+Comments: Romanizations recommended by the American Library Association
+  and the Library of Congress, in "ALA-LC Romanization Tables:
+  Transliteration Schemes for Non-Roman Scripts" (1997), ISBN
+  978-0-8444-0940-5.
+%%
+Type: variant
+Subtag: aluku
+Description: Aluku dialect
+Description: Boni dialect
+Added: 2009-09-05
+Prefix: djk
+Comments: Aluku dialect of the "Busi Nenge Tongo" English-based Creole
+  continuum in Eastern Suriname and Western French Guiana
+%%
+Type: variant
+Subtag: anpezo
+Description: Anpezo standard of Ladin
+Added: 2024-03-04
+Prefix: lld
+Comments: Represents the standard written form of Ladin in Anpezo
+%%
+Type: variant
+Subtag: ao1990
+Description: Portuguese Language Orthographic Agreement of 1990 (Acordo
+  Ortográfico da Língua Portuguesa de 1990)
+Added: 2015-05-06
+Prefix: pt
+Prefix: gl
+Comments: Portuguese orthography conventions established in 1990 but
+  not brought into effect until 2009
+%%
+Type: variant
+Subtag: aranes
+Description: Aranese
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in the Val d'Aran
+%%
+Type: variant
+Subtag: arevela
+Description: Eastern Armenian
+Added: 2006-09-18
+Deprecated: 2018-03-24
+Prefix: hy
+Comments: Preferred tag is hy
+%%
+Type: variant
+Subtag: arevmda
+Description: Western Armenian
+Added: 2006-09-18
+Deprecated: 2018-03-24
+Prefix: hy
+Comments: Preferred tag is hyw
+%%
+Type: variant
+Subtag: arkaika
+Description: Arcaicam Esperantom
+Description: Arkaika Esperanto
+Added: 2020-12-17
+Prefix: eo
+Comments: Archaic Esperanto variant devised by Manuel Halvelik
+%%
+Type: variant
+Subtag: asante
+Description: Asante Twi
+Description: Ashanti Twi
+Added: 2017-06-05
+Prefix: tw
+%%
+Type: variant
+Subtag: auvern
+Description: Auvergnat
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in Auvergne
+%%
+Type: variant
+Subtag: baku1926
+Description: Unified Turkic Latin Alphabet (Historical)
+Added: 2007-04-18
+Prefix: az
+Prefix: ba
+Prefix: crh
+Prefix: kk
+Prefix: krc
+Prefix: ky
+Prefix: sah
+Prefix: tk
+Prefix: tt
+Prefix: uz
+Comments: Denotes alphabet used in Turkic republics/regions of the
+  former USSR in late 1920s, and throughout 1930s, which aspired to
+  represent equivalent phonemes in a unified fashion. Also known as: New
+  Turkic Alphabet; Birlәşdirilmiş Jeni Tyrk
+  Әlifbasь (Birlesdirilmis Jeni Tyrk Elifbasi);
+  Jaŋalif (Janalif).
+%%
+Type: variant
+Subtag: balanka
+Description: The Balanka dialect of Anii
+Added: 2014-02-15
+Prefix: blo
+Comments: Balanka is one of 19 Anii dialects.
+%%
+Type: variant
+Subtag: barla
+Description: The Barlavento dialect group of Kabuverdianu
+Prefix: kea
+Comments: Barlavento is one of the two main dialect groups of
+  Kabuverdianu.
+Added: 2013-12-10
+%%
+Type: variant
+Subtag: basiceng
+Description: Basic English
+Added: 2015-12-29
+Prefix: en
+%%
+Type: variant
+Subtag: bauddha
+Description: Buddhist Hybrid Sanskrit
+Added: 2010-07-28
+Prefix: sa
+%%
+Type: variant
+Subtag: bciav
+Description: BCI Blissymbolics AV
+Added: 2023-05-11
+Prefix: zbl
+Comments: Name given to a subset of the variety of Blissymbolics curated
+  by Blissymbolics Communication International, as represented by
+  entries in the BCI Authorized Vocabulary
+%%
+Type: variant
+Subtag: bcizbl
+Description: BCI Blissymbolics
+Added: 2023-05-11
+Prefix: zbl
+Comments: Name given to the variety of Blissymbolics curated by
+  Blissymbolics Communication International
+%%
+Type: variant
+Subtag: biscayan
+Description: Biscayan dialect of Basque
+Added: 2010-04-13
+Prefix: eu
+%%
+Type: variant
+Subtag: biske
+Description: The San Giorgio dialect of Resian
+Description: The Bila dialect of Resian
+Added: 2007-07-05
+Prefix: sl-rozaj
+Comments: The dialect of San Giorgio/Bila is one of the four major local
+  dialects of Resian
+%%
+Type: variant
+Subtag: blasl
+Description: Black American Sign Language dialect
+Added: 2023-07-31
+Prefix: ase
+Prefix: sgn-ase
+Comments: Black American Sign Language (BASL) or Black Sign Variation
+  (BSV) is a dialect of American Sign Language (ASL)
+%%
+Type: variant
+Subtag: bohoric
+Description: Slovene in Bohorič alphabet
+Added: 2012-06-27
+Prefix: sl
+Comments: The subtag represents the alphabet codified by Adam Bohorič
+  in 1584 and used from the first printed Slovene book and up to the
+  mid-19th century.
+%%
+Type: variant
+Subtag: boont
+Description: Boontling
+Added: 2006-09-18
+Prefix: en
+Comments: Jargon embedded in American English
+%%
+Type: variant
+Subtag: bornholm
+Description: Bornholmsk
+Added: 2019-03-27
+Prefix: da
+%%
+Type: variant
+Subtag: cisaup
+Description: Cisalpine
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in northwestern Italy
+%%
+Type: variant
+Subtag: colb1945
+Description: Portuguese-Brazilian Orthographic Convention of 1945
+  (Convenção Ortográfica Luso-Brasileira de 1945)
+Added: 2015-05-06
+Prefix: pt
+Comments: Portuguese orthography conventions established in 1945,
+  generally in effect until 2009. This reform was not ratified in
+  Brazil.
+%%
+Type: variant
+Subtag: cornu
+Description: Cornu-English
+Description: Cornish English
+Description: Anglo-Cornish
+Added: 2015-12-07
+Prefix: en
+%%
+Type: variant
+Subtag: creiss
+Description: Occitan variants of the Croissant area
+Added: 2018-04-22
+Prefix: oc
+%%
+Type: variant
+Subtag: dajnko
+Description: Slovene in Dajnko alphabet
+Added: 2012-06-27
+Prefix: sl
+Comments: The subtag represents the alphabet codified by Peter Dajnko
+  and used from 1824 to 1839 mostly in Styria (in what is now Eastern
+  Slovenia).
+%%
+Type: variant
+Subtag: ekavsk
+Description: Serbian with Ekavian pronunciation
+Prefix: sr
+Prefix: sr-Latn
+Prefix: sr-Cyrl
+Added: 2013-12-02
+%%
+Type: variant
+Subtag: emodeng
+Description: Early Modern English (1500-1700)
+Added: 2012-02-05
+Prefix: en
+%%
+Type: variant
+Subtag: fascia
+Description: Fascia standard of Ladin
+Added: 2024-03-04
+Prefix: lld
+Comments: Represents the standard written form of Ladin in Fascia which
+  unified the three subvarieties Cazet, Brach and Moenat
+%%
+Type: variant
+Subtag: fodom
+Description: Fodom standard of Ladin
+Added: 2024-03-04
+Prefix: lld
+Comments: Represents the standard written form of Ladin in Livinallongo
+  and Colle Santa Lucia
+%%
+Type: variant
+Subtag: fonipa
+Description: International Phonetic Alphabet
+Added: 2006-12-11
+%%
+Type: variant
+Subtag: fonkirsh
+Description: Kirshenbaum Phonetic Alphabet
+Added: 2018-04-22
+%%
+Type: variant
+Subtag: fonnapa
+Description: North American Phonetic Alphabet
+Description: Americanist Phonetic Notation
+Added: 2016-06-24
+%%
+Type: variant
+Subtag: fonupa
+Description: Uralic Phonetic Alphabet
+Added: 2006-12-11
+%%
+Type: variant
+Subtag: fonxsamp
+Description: X-SAMPA transcription
+Added: 2010-10-23
+Comments: Indicates that the content is transcribed according to X-SAMPA
+%%
+Type: variant
+Subtag: gallo
+Description: Gallo
+Added: 2021-08-05
+Prefix: fr
+%%
+Type: variant
+Subtag: gascon
+Description: Gascon
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in Gascony
+%%
+Type: variant
+Subtag: gherd
+Description: Gherdëina standard of Ladin
+Added: 2024-03-04
+Prefix: lld
+Comments: Represents the standard written form of Ladin in Gherdëina
+%%
+Type: variant
+Subtag: grclass
+Description: Classical Occitan orthography
+Added: 2018-04-22
+Prefix: oc
+Prefix: oc-aranes
+Prefix: oc-auvern
+Prefix: oc-cisaup
+Prefix: oc-creiss
+Prefix: oc-gascon
+Prefix: oc-lemosin
+Prefix: oc-lengadoc
+Prefix: oc-nicard
+Prefix: oc-provenc
+Prefix: oc-vivaraup
+Comments: Classical written standard for Occitan developed in 1935 by
+  Alibèrt
+%%
+Type: variant
+Subtag: grital
+Description: Italian-inspired Occitan orthography
+Added: 2018-04-22
+Prefix: oc
+Prefix: oc-cisaup
+Prefix: oc-nicard
+Prefix: oc-provenc
+%%
+Type: variant
+Subtag: grmistr
+Description: Mistralian or Mistralian-inspired Occitan orthography
+Added: 2018-04-22
+Prefix: oc
+Prefix: oc-aranes
+Prefix: oc-auvern
+Prefix: oc-cisaup
+Prefix: oc-creiss
+Prefix: oc-gascon
+Prefix: oc-lemosin
+Prefix: oc-lengadoc
+Prefix: oc-nicard
+Prefix: oc-provenc
+Prefix: oc-vivaraup
+Comments: Written standard developed by Romanilha in 1853 and used by
+  Mistral and the Félibres, including derived standards such as Escolo
+  dóu Po, Escolo Gaston Febus, and others
+%%
+Type: variant
+Subtag: hanoi
+Description: The Hà Nội variant of Vietnamese
+Added: 2025-03-10
+Prefix: vi
+%%
+Type: variant
+Subtag: hepburn
+Description: Hepburn romanization
+Added: 2009-10-01
+Prefix: ja-Latn
+%%
+Type: variant
+Subtag: heploc
+Description: Hepburn romanization, Library of Congress method
+Added: 2009-10-01
+Deprecated: 2010-02-07
+Preferred-Value: alalc97
+Prefix: ja-Latn-hepburn
+Comments: Preferred tag is ja-Latn-alalc97
+%%
+Type: variant
+Subtag: hognorsk
+Description: Norwegian in Høgnorsk (High Norwegian) orthography
+Added: 2010-01-02
+Prefix: nn
+Comments: Norwegian following Ivar Aasen's orthographical principles,
+  including modern usage.
+%%
+Type: variant
+Subtag: hsistemo
+Description: Standard H-system orthographic fallback for spelling
+  Esperanto
+Added: 2017-03-14
+Prefix: eo
+%%
+Type: variant
+Subtag: huett
+Description: The Huế (province Thừa Thiên) variant of Vietnamese
+Added: 2025-03-10
+Prefix: vi
+%%
+Type: variant
+Subtag: ijekavsk
+Description: Serbian with Ijekavian pronunciation
+Prefix: sr
+Prefix: sr-Latn
+Prefix: sr-Cyrl
+Added: 2013-12-02
+%%
+Type: variant
+Subtag: itihasa
+Description: Epic Sanskrit
+Added: 2010-07-28
+Prefix: sa
+%%
+Type: variant
+Subtag: ivanchov
+Description: Bulgarian in 1899 orthography
+Added: 2017-12-13
+Prefix: bg
+Comments: Bulgarian orthography introduced by Todor Ivanchov in 1899
+%%
+Type: variant
+Subtag: jauer
+Description: Jauer dialect of Romansh
+Added: 2010-06-29
+Prefix: rm
+Comments: The spoken dialect of the Val Müstair, which has no written
+  standard.
+%%
+Type: variant
+Subtag: jyutping
+Description: Jyutping Cantonese Romanization
+Added: 2010-10-23
+Prefix: yue
+Comments: Jyutping romanization of Cantonese
+%%
+Type: variant
+Subtag: kkcor
+Description: Common Cornish orthography of Revived Cornish
+Added: 2008-10-14
+Prefix: kw
+%%
+Type: variant
+Subtag: kleinsch
+Description: Kleinschmidt orthography
+Description: Allattaasitaamut
+Added: 2024-07-20
+Prefix: kl
+Prefix: kl-tunumiit
+Comments: Orthography for Greenlandic designed by Samuel Kleinschmidt,
+  used from 1851 to 1973.
+%%
+Type: variant
+Subtag: kociewie
+Description: The Kociewie dialect of Polish
+Added: 2014-11-27
+Prefix: pl
+Comments: The dialect of Kociewie is spoken in the region around
+  Starogard Gdański, Tczew and Świecie in northern Poland.
+%%
+Type: variant
+Subtag: kscor
+Description: Standard Cornish orthography of Revived Cornish
+Description: Kernowek Standard
+Added: 2012-06-27
+Prefix: kw
+%%
+Type: variant
+Subtag: laukika
+Description: Classical Sanskrit
+Added: 2010-07-28
+Deprecated: 2024-06-08
+Prefix: sa
+Comments: Preferred tag is cls
+%%
+Type: variant
+Subtag: leidentr
+Description: Ancient Egyptian in Leiden Unified Transliteration
+Added: 2025-02-06
+Prefix: egy
+Comments: Recommended by the International Association of Egyptologists
+%%
+Type: variant
+Subtag: lemosin
+Description: Limousin
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in Limousin
+%%
+Type: variant
+Subtag: lengadoc
+Description: Languedocien
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in Languedoc
+%%
+Type: variant
+Subtag: lipaw
+Description: The Lipovaz dialect of Resian
+Description: The Lipovec dialect of Resian
+Added: 2007-08-11
+Prefix: sl-rozaj
+Comments: The dialect of Lipovaz/Lipovec is one of the minor local
+  dialects of Resian
+%%
+Type: variant
+Subtag: ltg1929
+Description: The Latgalian language orthography codified in 1929
+Added: 2022-08-05
+Prefix: ltg
+%%
+Type: variant
+Subtag: ltg2007
+Description: The Latgalian language orthography codified in the language
+  law in 2007
+Added: 2022-06-23
+Prefix: ltg
+%%
+Type: variant
+Subtag: luna1918
+Description: Post-1917 Russian orthography
+Added: 2010-10-10
+Prefix: ru
+Comments: Russian orthography as established by the 1917/1918
+  orthographic reforms
+%%
+Type: variant
+Subtag: mdcegyp
+Description: Ancient Egyptian hieroglyphs encoded in Manuel de Codage
+Added: 2025-02-06
+Prefix: egy
+%%
+Type: variant
+Subtag: mdctrans
+Description: Ancient Egyptian transliteration encoded in Manuel de
+  Codage
+Added: 2025-02-06
+Prefix: egy
+%%
+Type: variant
+Subtag: metelko
+Description: Slovene in Metelko alphabet
+Added: 2012-06-27
+Prefix: sl
+Comments: The subtag represents the alphabet codified by Franc Serafin
+  Metelko and used from 1825 to 1833.
+%%
+Type: variant
+Subtag: monoton
+Description: Monotonic Greek
+Added: 2006-12-11
+Prefix: el
+%%
+Type: variant
+Subtag: ndyuka
+Description: Ndyuka dialect
+Description: Aukan dialect
+Added: 2009-09-05
+Prefix: djk
+Comments: Ndyuka dialect of the "Busi Nenge Tongo" English-based
+  Creole continuum in Eastern Suriname and Western French Guiana
+%%
+Type: variant
+Subtag: nedis
+Description: Natisone dialect
+Description: Nadiza dialect
+Added: 2005-10-16
+Prefix: sl
+%%
+Type: variant
+Subtag: newfound
+Description: Newfoundland English
+Added: 2015-11-25
+Prefix: en-CA
+%%
+Type: variant
+Subtag: nicard
+Description: Niçard
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in Nice
+%%
+Type: variant
+Subtag: njiva
+Description: The Gniva dialect of Resian
+Description: The Njiva dialect of Resian
+Added: 2007-07-05
+Prefix: sl-rozaj
+Comments: The dialect of Gniva/Njiva is one of the four major local
+  dialects of Resian
+%%
+Type: variant
+Subtag: nulik
+Description: Volapük nulik
+Description: Volapük perevidöl
+Description: Volapük nulädik
+Description: de Jong's Volapük
+Description: New Volapük
+Description: Revised Volapük
+Description: Modern Volapük
+Added: 2012-01-28
+Prefix: vo
+%%
+Type: variant
+Subtag: osojs
+Description: The Oseacco dialect of Resian
+Description: The Osojane dialect of Resian
+Added: 2007-07-05
+Prefix: sl-rozaj
+Comments: The dialect of Oseacco/Osojane is one of the four major local
+  dialects of Resian
+%%
+Type: variant
+Subtag: oxendict
+Description: Oxford English Dictionary spelling
+Added: 2015-04-17
+Prefix: en
+%%
+Type: variant
+Subtag: pahawh2
+Description: Pahawh Hmong Second Stage Reduced orthography
+Added: 2017-01-13
+Prefix: mww
+Prefix: hnj
+%%
+Type: variant
+Subtag: pahawh3
+Description: Pahawh Hmong Third Stage Reduced orthography
+Added: 2017-01-13
+Prefix: mww
+Prefix: hnj
+%%
+Type: variant
+Subtag: pahawh4
+Description: Pahawh Hmong Final Version orthography
+Added: 2017-01-13
+Prefix: mww
+Prefix: hnj
+%%
+Type: variant
+Subtag: pamaka
+Description: Pamaka dialect
+Added: 2009-09-05
+Prefix: djk
+Comments: Pamaka dialect of the "Busi Nenge Tongo" English-based
+  Creole continuum in Eastern Suriname and Western French Guiana
+%%
+Type: variant
+Subtag: peano
+Description: Latino Sine Flexione
+Description: Interlingua de API
+Description: Interlingua de Peano
+Prefix: la
+Comments: Peano’s Interlingua, created in 1903 by Giuseppe Peano as an
+  international auxiliary language
+Added: 2020-03-12
+%%
+Type: variant
+Subtag: pehoeji
+Description: Hokkien Vernacular Romanization System
+Description: Pe̍h-ōe-jī orthography/romanization
+Added: 2024-03-04
+Prefix: nan-Latn
+Comments: Modern Hokkien Vernacular Romanization System, evolved from
+  the New Dictionary in the Amoy by John Van Nest Talmage in 1894
+%%
+Type: variant
+Subtag: petr1708
+Description: Petrine orthography
+Added: 2010-10-10
+Prefix: ru
+Comments: Russian orthography from the Petrine orthographic reforms of
+  1708 to the 1917 orthographic reform
+%%
+Type: variant
+Subtag: pinyin
+Description: Pinyin romanization
+Added: 2008-10-14
+Prefix: zh-Latn
+Prefix: bo-Latn
+%%
+Type: variant
+Subtag: polyton
+Description: Polytonic Greek
+Added: 2006-12-11
+Prefix: el
+%%
+Type: variant
+Subtag: provenc
+Description: Provençal
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in Provence
+%%
+Type: variant
+Subtag: puter
+Description: Puter idiom of Romansh
+Added: 2010-06-29
+Prefix: rm
+Comments: Puter is one of the five traditional written standards or
+  "idioms" of the Romansh language.
+%%
+Type: variant
+Subtag: rigik
+Description: Volapük rigik
+Description: Schleyer's Volapük
+Description: Original Volapük
+Description: Classic Volapük
+Added: 2012-01-28
+Prefix: vo
+%%
+Type: variant
+Subtag: rozaj
+Description: Resian
+Description: Resianic
+Description: Rezijan
+Added: 2005-10-16
+Prefix: sl
+%%
+Type: variant
+Subtag: rumgr
+Description: Rumantsch Grischun
+Added: 2010-06-29
+Prefix: rm
+Comments: Supraregional Romansh written standard
+%%
+Type: variant
+Subtag: saigon
+Description: The Sài Gòn variant of Vietnamese
+Added: 2025-03-10
+Prefix: vi
+%%
+Type: variant
+Subtag: scotland
+Description: Scottish Standard English
+Added: 2007-08-31
+Prefix: en
+%%
+Type: variant
+Subtag: scouse
+Description: Scouse
+Added: 2006-09-18
+Prefix: en
+Comments: English Liverpudlian dialect known as 'Scouse'
+%%
+Type: variant
+Subtag: simple
+Description: Simplified form
+Added: 2015-12-29
+%%
+Type: variant
+Subtag: solba
+Description: The Stolvizza dialect of Resian
+Description: The Solbica dialect of Resian
+Added: 2007-07-05
+Prefix: sl-rozaj
+Comments: The dialect of Stolvizza/Solbica is one of the four major
+  local dialects of Resian
+%%
+Type: variant
+Subtag: sotav
+Description: The Sotavento dialect group of Kabuverdianu
+Prefix: kea
+Comments: Sotavento is one of the two main dialect groups of
+  Kabuverdianu.
+Added: 2013-12-10
+%%
+Type: variant
+Subtag: spanglis
+Description: Spanglish
+Added: 2017-02-23
+Prefix: en
+Prefix: es
+Comments: A variety of contact dialects of English and Spanish
+%%
+Type: variant
+Subtag: surmiran
+Description: Surmiran idiom of Romansh
+Added: 2010-06-29
+Prefix: rm
+Comments: Surmiran is one of the five traditional written standards or
+  "idioms" of the Romansh language.
+%%
+Type: variant
+Subtag: sursilv
+Description: Sursilvan idiom of Romansh
+Added: 2010-06-29
+Prefix: rm
+Comments: Sursilvan is one of the five traditional written standards or
+  "idioms" of the Romansh language.
+%%
+Type: variant
+Subtag: sutsilv
+Description: Sutsilvan idiom of Romansh
+Added: 2010-06-29
+Prefix: rm
+Comments: Sutsilvan is one of the five traditional written standards or
+  "idioms" of the Romansh language.
+%%
+Type: variant
+Subtag: synnejyl
+Description: Synnejysk
+Description: South Jutish
+Added: 2021-07-17
+Prefix: da
+%%
+Type: variant
+Subtag: tailo
+Description: Taiwanese Hokkien Romanization System for Hokkien
+  languages
+Description: Tâi-lô orthography/romanization
+Added: 2024-03-04
+Prefix: nan-Latn
+Comments: Taiwanese Hokkien Romanization System (Tâi-lô) published in
+  2006 by the Taiwan Ministry of Education
+%%
+Type: variant
+Subtag: tarask
+Description: Belarusian in Taraskievica orthography
+Added: 2007-04-27
+Prefix: be
+Comments: The subtag represents Branislau Taraskievic's Belarusian
+  orthography as published in "Bielaruski klasycny pravapis" by Juras
+  Buslakou, Vincuk Viacorka, Zmicier Sanko, and Zmicier Sauka (Vilnia-
+  Miensk 2005).
+%%
+Type: variant
+Subtag: tongyong
+Description: Tongyong Pinyin romanization
+Added: 2020-06-08
+Prefix: zh-Latn
+Comments: Former official transcription standard for Mandarin Chinese in
+  Taiwan.
+%%
+Type: variant
+Subtag: tunumiit
+Description: Tunumiisiut
+Description: East Greenlandic
+Description: Østgrønlandsk
+Added: 2020-07-16
+Prefix: kl
+Comments: Also known as Tunumiit oraasiat
+%%
+Type: variant
+Subtag: uccor
+Description: Unified Cornish orthography of Revived Cornish
+Added: 2008-10-14
+Prefix: kw
+%%
+Type: variant
+Subtag: ucrcor
+Description: Unified Cornish Revised orthography of Revived Cornish
+Added: 2008-10-14
+Prefix: kw
+%%
+Type: variant
+Subtag: ulster
+Description: Ulster dialect of Scots
+Added: 2010-04-10
+Prefix: sco
+%%
+Type: variant
+Subtag: unifon
+Description: Unifon phonetic alphabet
+Added: 2013-10-02
+Prefix: en
+Prefix: hup
+Prefix: kyh
+Prefix: tol
+Prefix: yur
+%%
+Type: variant
+Subtag: vaidika
+Description: Vedic Sanskrit
+Added: 2010-07-28
+Deprecated: 2024-06-08
+Prefix: sa
+Comments: The most ancient dialect of Sanskrit used in verse and prose
+  composed until about the 4th century B.C.E.
+Comments: Preferred tag is vsn
+%%
+Type: variant
+Subtag: valbadia
+Description: Val Badia standard of Ladin
+Added: 2024-03-04
+Prefix: lld
+Comments: Represents the standard written form of Ladin in the Val
+  Badia, unifying the three variants Marô, Mesaval and Badiot spoken
+  in this valley
+%%
+Type: variant
+Subtag: valencia
+Description: Valencian
+Added: 2007-03-06
+Prefix: ca
+Comments: Variety spoken in the "Comunidad Valenciana" region of Spain,
+  where it is co-official with Spanish.
+%%
+Type: variant
+Subtag: vallader
+Description: Vallader idiom of Romansh
+Added: 2010-06-29
+Prefix: rm
+Comments: Vallader is one of the five traditional written standards or
+  "idioms" of the Romansh language.
+%%
+Type: variant
+Subtag: vecdruka
+Description: Latvian orthography used before 1920s ("vecā druka")
+Added: 2020-09-26
+Prefix: lv
+Comments: The subtag represents the old orthography of the Latvian
+  language used during c. 1600s–1920s.
+%%
+Type: variant
+Subtag: vivaraup
+Description: Vivaro-Alpine
+Added: 2018-04-22
+Prefix: oc
+Comments: Occitan variant spoken in northeastern Occitania
+%%
+Type: variant
+Subtag: wadegile
+Description: Wade-Giles romanization
+Added: 2008-10-03
+Prefix: zh-Latn
+%%
+Type: variant
+Subtag: xsistemo
+Description: Standard X-system orthographic fallback for spelling
+  Esperanto
+Added: 2017-03-14
+Prefix: eo
