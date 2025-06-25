@@ -4,7 +4,8 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import Highlightable from '../../generic/Highlightable';
 import { anyWordStartsWith } from '../../generic/stringUtils';
 import { ObjectData } from '../../types/DataTypes';
-import { SearchableField } from '../../types/PageParamTypes';
+import { LanguageSchema } from '../../types/LanguageTypes';
+import { ObjectType, SearchableField } from '../../types/PageParamTypes';
 
 interface Props {
   object: ObjectData;
@@ -72,5 +73,33 @@ export function getSearchableField(object: ObjectData, field: SearchableField, q
     case SearchableField.NameOrCode:
     case SearchableField.Territory:
       return object.nameDisplay + ' [' + object.codeDisplay + ']';
+  }
+}
+
+export function getObjectPopulation(
+  object: ObjectData,
+  includeDescendents?: boolean,
+  languageSchema?: LanguageSchema,
+): number {
+  switch (object.type) {
+    case ObjectType.Language:
+      return (
+        (object.populationCited ?? 0) +
+        (includeDescendents && languageSchema
+          ? (object.schemaSpecific[languageSchema].populationOfDescendents ?? 0)
+          : 0)
+      );
+    case ObjectType.Locale:
+      return object.populationSpeaking;
+    case ObjectType.Census:
+      return object.languageCount;
+    case ObjectType.WritingSystem:
+      return (
+        object.populationUpperBound + (includeDescendents ? object.populationOfDescendents : 0)
+      );
+    case ObjectType.Territory:
+      return object.population;
+    default:
+      return 0; // Default case for other types
   }
 }

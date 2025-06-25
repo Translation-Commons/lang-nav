@@ -114,7 +114,7 @@ export async function loadISOLanguageFamilies(): Promise<ISOLanguageFamilyData[]
     .then((text) => {
       return text
         .split('\n')
-        .slice(1)
+        .slice(3) // First 3 lines are headers and comments
         .map((line) => {
           const parts = line.split('\t');
           return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
@@ -132,7 +132,7 @@ export async function loadISOFamiliesToLanguages(): Promise<Record<
     .then((text) => {
       return text
         .split('\n')
-        .slice(1)
+        .slice(4) // First 4 lines are headers and comments
         .reduce<Record<ISO6395LanguageCode, LanguageCode[]>>((families, line) => {
           const parts = line.split('\t');
           families[parts[0]] = parts[1].split(' ');

@@ -4,7 +4,8 @@
     margin: 0px auto;
 }
 
-ul.TreeListRoot, ul.TreeListBranch{
+ul.TreeListRoot,
+ul.TreeListBranch {
     list-style: none;
     margin: 0;
     position: relative;
@@ -42,7 +43,8 @@ ul.TreeListBranch::before {
     z-index: -1;
 }
 
-.TreeListExpandBranch, .TreeListSeeAllDescendents {
+.TreeListExpandBranch,
+.TreeListSeeAllDescendents {
     display: inline-block;
     margin: 0;
     margin-right: 4px;
@@ -62,4 +64,16 @@ ul.TreeListBranch::before {
 
 .TreeListExpandBranch:hover {
     background-color: var(--color-button-hover);
+}
+
+.TreeListPopulation {
+    display: inline-block;
+    position: absolute;
+    right: 0;
+}
+
+.TreeListOptions {
+    margin-top: 1em;
+    display: flex;
+    gap: .5em
 }
