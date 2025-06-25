@@ -29,6 +29,7 @@ export interface CensusData extends ObjectBase {
   age?: string; // eg. 0+, 4+,
   gender?: string; // Any, Male, Female
   sampleRate?: number; // eg. .1, .25, 1 (for 10%, 25%, 100%)
+  respondingPopulation?: number; // The number of individuals who gave a response about their language
   responsesPerIndividual?: string; // eg. 1, 1+, 2+
   notes?: string; // Any additional notes about the census
 

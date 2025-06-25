@@ -50,7 +50,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
 
         populationSource: census.nameDisplay,
         populationSpeaking,
-        populationSpeakingPercent: (populationSpeaking * 100) / census.eligiblePopulation,
+        populationSpeakingPercent:
+          (populationSpeaking * 100) / (census.respondingPopulation || census.eligiblePopulation),
       } as LocaleData;
     })
     .filter((loc) => loc != null);

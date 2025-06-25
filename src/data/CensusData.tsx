@@ -11,6 +11,7 @@ const CENSUS_FILENAMES = [
   'in2011c17', // India 2011 Census C-17 Language Multilingualism
   'np2021', // Nepal 2021 Census
   'data.un.org/au', // Australia Censuses downloaded from UN data portal
+  'data.un.org/ru', // Russia 2010 Census downloaded from UN data portal
   // Add more census files here as needed
 ];
 
@@ -80,21 +81,28 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
       }
       values.forEach((maybeValue, index) => {
         const value = maybeValue != '' ? maybeValue : defaultValue; // Use the default value if the cell is empty
+        if (value == '') {
+          return; // Skip empty values
+        }
         if (key === 'datePublished' || key === 'dateAccessed') {
           censuses[index][key] = new Date(value);
-        } else if (key === 'eligiblePopulation' || key == 'yearCollected') {
+        } else if (
+          key === 'eligiblePopulation' ||
+          key === 'yearCollected' ||
+          key === 'respondingPopulation'
+        ) {
           censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
         } else if (key === 'sampleRate') {
           censuses[index][key] = Number.parseFloat(value);
         } else if (
-          key == 'languageCount' ||
-          key == 'languageEstimates' ||
-          key == 'type' ||
-          key == 'territory' ||
-          key == 'names'
+          key === 'languageCount' ||
+          key === 'languageEstimates' ||
+          key === 'type' ||
+          key === 'territory' ||
+          key === 'names'
         ) {
           // these keys should not be passed in here
-        } else if (value !== '') {
+        } else {
           // Regular strings, but only save if something is filled in
           censuses[index][key] = value;
         }
@@ -241,7 +249,8 @@ export function addCensusRecordsToLocales(codeData: CoreData, census: CensusData
       locale.censusRecords.push({
         census,
         populationEstimate,
-        populationPercent: (populationEstimate * 100.0) / census.eligiblePopulation,
+        populationPercent:
+          (populationEstimate * 100.0) / (census.respondingPopulation || census.eligiblePopulation),
       });
     } else {
       // TODO: show warning in the "Notices" tool
