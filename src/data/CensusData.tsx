@@ -12,6 +12,7 @@ const CENSUS_FILENAMES = [
   'np2021', // Nepal 2021 Census
   'data.un.org/au', // Australia Censuses downloaded from UN data portal
   'data.un.org/ru', // Russia 2010 Census downloaded from UN data portal
+  'es2021', // Spain 2021 Census
   // Add more census files here as needed
 ];
 
@@ -152,7 +153,8 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
 
     // The language name is in the second column
     let languageName = parts[1].trim();
-    if (languageName !== '') {
+    if (languageName !== '' && !languageName.startsWith('#')) {
+      // Leave out language names that start with a # -- that's a single it may not be a good name to add
       // If it starts with a number, that may just be a row number, so clip that out
       const match = languageName.match(/^\d+(.*)/);
       if (match != null) {
