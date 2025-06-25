@@ -6,7 +6,7 @@ import { LanguageData, LanguagesBySchema, LanguageScope } from '../types/Languag
 
 import { CoreData } from './CoreData';
 
-const DEBUG = true;
+const DEBUG = false;
 
 export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): void {
   // Start with the initialized
@@ -42,16 +42,13 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       }
       if (lang != null) {
         // Add a note that the language code is considered "overlong" and a different language code or locale code should be used instead for CLDR purposes
-        lang.schemaSpecific.CLDR = {
-          code: alias.original,
-          childLanguages: [],
-          notes: (
-            <>
-              This language code <code>{alias.original}</code> is considered &quot;overlong&quot; in
-              CLDR, use <code>{alias.replacement}</code> instead.
-            </>
-          ),
-        };
+        lang.schemaSpecific.CLDR.code = undefined;
+        lang.schemaSpecific.CLDR.notes = (
+          <>
+            This language code <code>{alias.original}</code> is considered &quot;overlong&quot; in
+            CLDR, use <code>{alias.replacement}</code> instead.
+          </>
+        );
         // Add the replacement code as a child language
         lang.cldrDataProvider = replacementData;
         if (DEBUG && replacementData == null) {
@@ -93,6 +90,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.cldrDataProvider = constituentLang;
+        macroLang.schemaSpecific.CLDR.code = undefined;
         macroLang.schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
         macroLang.schemaSpecific.CLDR.notes = notes;
         // Remove the symbolic reference in the CLDR list to the macrolanguage object
@@ -113,10 +111,8 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       }
     });
 
-  // Go through all of the "bibliographic" aliases. Like the overlong aliases they are not used but if you reference one a CLDR language will appear.
-
-  // Go through all "overlong" aliases. We already handled most of them by using ISO 639-1 two-letter codes but a few
-  // more exist, in particular eg. swc -> sw_CD and prs -> fa_AF
+  // Go through all of the "bibliographic" aliases. Like the overlong aliases, these language codes
+  // are rarely used but if you reference one -> a supported CLDR language can be used instead.
   languageAliases
     .filter(({ reason }) => reason === 'bibliographic')
     .forEach((alias) => {
@@ -135,8 +131,9 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
             </>
           ),
         };
-        // Add the replacement code as a child language
+        // Add the replacement code as a child language and delete the link to the unsupported one
         lang.cldrDataProvider = replacementData;
+        delete cldrLanguages[alias.original];
         if (DEBUG && replacementData == null) {
           console.warn(
             `CLDR language ${alias.original} has no replacement data for ${alias.replacement}. This may cause issues.`,

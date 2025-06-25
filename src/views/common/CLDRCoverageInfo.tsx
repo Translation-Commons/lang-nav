@@ -21,9 +21,7 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
     cldrDataProvider,
     schemaSpecific: { CLDR },
   } = object;
-  if (object.ID === 'cre' || object.ID === 'cwd') {
-    console.error(object.ID, object.cldrDataProvider, parentNotes);
-  }
+
   if (cldrCoverage == null) {
     if (cldrDataProvider != null) {
       return (

@@ -104,7 +104,7 @@ footer {
 
 code {
   background-color: var(--color-button-secondary);
-  border-radius: .1em;
+  border-radius: .25em;
   padding: 0.25em;
 }
 

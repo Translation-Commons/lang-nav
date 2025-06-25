@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
 import { LocaleData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
@@ -10,10 +11,13 @@ import LocaleCensusCitation from './LocaleCensusCitation';
 
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();
+  const { languageSchema } = usePageParams();
 
   return (
     <ObjectTable<LocaleData>
-      objects={Object.values(locales)}
+      objects={Object.values(locales).filter(
+        (locale) => locale.language?.schemaSpecific[languageSchema].code != null,
+      )}
       columns={[
         CodeColumn,
         NameColumn,
