@@ -74,7 +74,7 @@ The header should include the following rows:
 * `isoRegionCode`: The ISO 3166-1 alpha-2 code of the country (e.g., "CA" for Canada)
 * `yearCollected`: The year the data was collected (e.g., "2021")
 * `eligiblePopulation`: The total population of the country or region the data is from (e.g., "36,328,480" for Canada in 2021)
-  * If the data is from a subset of the population (eg. only people over 15 years old) then this denominator should be the total population of that subset, not the whole country.
+  * If the data is from a subset of the population (eg. only people over 15 years old) then this number should be the total population of that subset, not the whole country.
 * `collectorType`: The type of individual or group that collected the data (e.g., "Government", "NGO", "Academic")
 
 **Recommended Rows**
@@ -91,6 +91,8 @@ More is better, but also if you don't have a value, leave it empty. For instance
   * `responsesPerIndividual`: The number of responses per individual (e.g., "1+" for one or more responses, "1" if every individual has exactly one response)
     * If the number of responses is 1 then we can add up the data without worrying about double counting.
   * `sampleRate`: The sample rate of the data (e.g., "0.25" the data is interpolated from 25% of the population, "1" for the the data is not interpolated) 
+  * `respondingPopulation`: The total number of people who responded to the question about language (eligiblePopulation - the number of people who did not respond to the question)
+    * This is useful to compute the expected percentage of how many people speak the language in the country.
 * **Source / Citation**
   * `collectorName`: The name of the individual or group that collected the data (e.g., "Statistics Canada")
   * `url`: The URL of the census table (e.g., "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810000201")
