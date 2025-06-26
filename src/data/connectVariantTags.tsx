@@ -20,8 +20,8 @@ export function connectVariantTags(
 
     //Link back from LanguageData to VariantTag
     for (const lang of variant.languages) {
-      if (!lang.variantTag) lang.variantTag = [];
-      lang.variantTag.push(variant);
+      if (!lang.variantTags) lang.variantTags = [];
+      lang.variantTags.push(variant);
     }
 
     //Initialize locales array
@@ -33,7 +33,7 @@ export function connectVariantTags(
     const variant = locale.variantTagID ? variantTagMap[locale.variantTagID] : undefined;
     if (variant) {
       variant.locales.push(locale);
-      locale.variantTag = variant;
+      locale.variantTags = variant;
     }
   }
 }
