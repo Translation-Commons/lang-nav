@@ -1,4 +1,4 @@
-import { LocaleData, PopulationSourceCategory } from '../types/DataTypes';
+import { LocaleData, PopulationSourceCategory, VariantTagData } from '../types/DataTypes';
 import { LanguagesBySource } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
@@ -13,6 +13,20 @@ export async function loadIANAVariants(): Promise<IANAVariantData[] | void> {
     .then((res) => res.text())
     .then((rawData) => parseIANAVariants(rawData))
     .catch((err) => console.error('Error loading TSV:', err));
+}
+
+export function convertToVariantTagData(variants: IANAVariantData[]): VariantTagData[] {
+  return variants.map((variant) => ({
+    type: ObjectType.VariantTag,
+    ID: variant.tag,
+    codeDisplay: variant.tag,
+    nameDisplay: variant.name,
+    description: '', // optional enhancement: add multiple Descriptions
+    associatedLanguageCodes: variant.prefixes,
+    languages: [],
+    locales: [],
+    names: [variant.name],
+  }));
 }
 
 export function parseIANAVariants(input: string): IANAVariantData[] {
@@ -61,7 +75,7 @@ export function addIANAVariantLocales(
       locales[localeCode] = {
         ID: localeCode,
         languageCode: iso639_3,
-        variantTag: variant.tag,
+        variantTagID: variant.tag,
         nameDisplay: variant.name,
         localeSource: 'IANA',
         codeDisplay: localeCode,

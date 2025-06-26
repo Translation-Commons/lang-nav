@@ -8,6 +8,7 @@ import CensusCard from '../census/CensusCard';
 import LanguageCard from '../language/LanguageCard';
 import LocaleCard from '../locale/LocaleCard';
 import TerritoryCard from '../territory/TerritoryCard';
+import { VariantTagCard } from '../varianttag/VariantTagCard';
 import WritingSystemCard from '../writingsystem/WritingSystemCard';
 
 type Props = {
@@ -33,6 +34,8 @@ const HoverableObject: React.FC<Props> = ({ object, children }) => {
         return <TerritoryCard territory={object} />;
       case ObjectType.WritingSystem:
         return <WritingSystemCard writingSystem={object} />;
+      case ObjectType.VariantTag:
+        return <VariantTagCard data={object} />;
     }
   };
 

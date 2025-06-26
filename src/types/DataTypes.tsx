@@ -15,7 +15,13 @@ export interface ObjectBase {
   names: string[];
 }
 
-export type ObjectData = CensusData | LanguageData | LocaleData | TerritoryData | WritingSystemData;
+export type ObjectData =
+  | CensusData
+  | LanguageData
+  | LocaleData
+  | TerritoryData
+  | WritingSystemData
+  | VariantTagData;
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;
@@ -138,6 +144,19 @@ export type LocaleInCensus = {
   populationPercent: number;
 };
 
+export interface VariantTagData extends ObjectBase {
+  type: ObjectType.VariantTag;
+  ID: VariantIANATag;
+  codeDisplay: VariantIANATag;
+  nameDisplay: string;
+  description: string;
+  associatedLanguageCodes: LanguageCode[];
+
+  // References to other objects
+  languages: LanguageData[];
+  locales: LocaleData[];
+}
+
 export interface LocaleData extends ObjectBase {
   type: ObjectType.Locale;
 
@@ -150,7 +169,8 @@ export interface LocaleData extends ObjectBase {
   languageCode: LanguageCode;
   territoryCode: TerritoryCode;
   explicitScriptCode?: ScriptCode;
-  variantTag?: VariantIANATag;
+  variantTagID?: VariantIANATag;
+  variantTags?: VariantTagData;
 
   populationSource: PopulationSourceCategory;
   populationSpeaking: number;
@@ -169,4 +189,17 @@ export interface LocaleData extends ObjectBase {
   populationWritingPercent?: number;
   populationCensus?: CensusData; // The census record that provides the population estimate
   censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
+}
+
+export interface VariantTagData extends ObjectBase {
+  type: ObjectType.VariantTag;
+  ID: VariantIANATag;
+  codeDisplay: VariantIANATag;
+  nameDisplay: string;
+  description: string;
+  associatedLanguageCodes: LanguageCode[];
+
+  // References to other objects
+  languages: LanguageData[];
+  locales: LocaleData[];
 }
