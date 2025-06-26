@@ -158,3 +158,16 @@ export interface LocaleData extends ObjectBase {
   populationCensus?: CensusData; // The census record that provides the population estimate
   censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
 }
+
+export interface VariantTagData extends ObjectBase {
+  type: ObjectType.VariantTag;
+  ID: VariantIANATag;
+  codeDisplay: VariantIANATag;
+  nameDisplay: string;
+  description: string;
+  associatedLanguageCodes: LanguageCode[];
+
+  // References to other objects
+  languages: LanguageData[];
+  locales: LocaleData[];
+}
