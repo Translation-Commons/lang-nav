@@ -16,7 +16,13 @@ export interface ObjectBase {
   names: string[];
 }
 
-export type ObjectData = CensusData | LanguageData | LocaleData | TerritoryData | WritingSystemData;
+export type ObjectData = 
+  | CensusData 
+  | LanguageData 
+  | LocaleData 
+  | TerritoryData 
+  | WritingSystemData 
+  | VariantTagData;
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;
