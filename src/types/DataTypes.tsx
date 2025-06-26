@@ -139,7 +139,8 @@ export interface LocaleData extends ObjectBase {
   languageCode: LanguageCode;
   territoryCode: TerritoryCode;
   explicitScriptCode?: ScriptCode;
-  variantTag?: VariantTagData; // variantIANAtag to variantTagData
+  variantTagCode?: VariantIANATag
+  variantTagData?: VariantTagData;
 
   populationEstimate: number; // The canonical population
   populationSource: PopulationSourceCategory;
