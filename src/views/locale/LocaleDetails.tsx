@@ -4,6 +4,7 @@ import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberU
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
+import { VariantTagCard } from '../varianttag/VariantTagCard';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import { getOfficialLabel } from './LocaleStrings';
@@ -78,11 +79,11 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </div>
       )}
       {variantTag && (
-        <div>
-          <label>Variant:</label>
-          {variantTag} <em>[variant not in database]</em>
-        </div>
-      )}
+  <div>
+    <h3>Variant</h3>
+    <HoverableObjectName object={variantTag} />
+  </div>
+)}
     </div>
   );
 };

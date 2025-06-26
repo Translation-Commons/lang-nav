@@ -1,8 +1,12 @@
 import { useState } from 'react';
 
+import { connectVariantTags } from './connectVariantTags'; 
+
 import { CensusID, CensusData } from '../types/CensusTypes';
 import {
   BCP47LocaleCode,
+  VariantTagData,
+  VariantIANATag,
   LocaleData,
   ScriptCode,
   TerritoryCode,
@@ -33,7 +37,7 @@ import {
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
 } from './GlottologData';
-import { loadIANAVariants, addIANAVariantLocales } from './IANAData';
+import { loadIANAVariants, addIANAVariantLocales, convertToVariantTagData } from './IANAData';
 import {
   connectTerritoriesToParent,
   createRegionalLocales,
@@ -47,6 +51,7 @@ export type CoreData = {
   locales: Record<BCP47LocaleCode, LocaleData>;
   territories: Record<TerritoryCode, TerritoryData>;
   writingSystems: Record<ScriptCode, WritingSystemData>;
+  variantTags: VariantTagData[];
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySchema = {
@@ -74,6 +79,7 @@ export function useCoreData(): {
   // Censuses are not population here, but this seems necessary because the state affects the page.
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [censuses, _setCensuses] = useState<Record<CensusID, CensusData>>({});
+  const [variantTags, setVariantTags] = useState<Record<VariantIANATag, VariantTagData>>({});
 
   async function loadCoreData(): Promise<void> {
     const [
@@ -114,6 +120,12 @@ export function useCoreData(): {
     addGlottologLanguages(languagesBySchema, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageDetails(languagesBySchema);
     addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
+    const variantTagArray = convertToVariantTagData(ianaVariants || []);
+    const variantTagMap: Record<VariantIANATag, VariantTagData> = Object.fromEntries(
+       variantTagArray.map(v => [v.ID, v])
+    );
+    connectVariantTags(Object.values(variantTagMap), languagesBySchema.CLDR, locales);
+    setVariantTags(variantTagMap);
 
     connectLanguagesToParent(languagesBySchema);
     connectTerritoriesToParent(territories);
@@ -136,6 +148,7 @@ export function useCoreData(): {
       locales,
       territories,
       writingSystems,
+      variantTags: Object.values(variantTags),
     },
   };
 }

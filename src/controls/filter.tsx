@@ -56,6 +56,8 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
       return object.locales.map((l) => l.territory).filter((t) => t != null);
     case ObjectType.WritingSystem:
       return [object.territoryOfOrigin].filter((t) => t != null);
+    case ObjectType.VariantTag:
+      return [];
   }
 }
 

@@ -33,6 +33,8 @@ const HoverableObject: React.FC<Props> = ({ object, children }) => {
         return <TerritoryCard territory={object} />;
       case ObjectType.WritingSystem:
         return <WritingSystemCard writingSystem={object} />;
+      case ObjectType.VariantTag:
+        return <VariantTagCard data={object} />;
     }
   };
 
