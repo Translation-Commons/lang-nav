@@ -5,7 +5,7 @@ import {
   computeLocaleWritingPopulation,
 } from './PopulationData';
 import { computeContainedTerritoryStats, loadTerritoryGDPLiteracy } from './TerritoryData';
-import { loadCLDRCoverage } from './UnicodeData';
+import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
 
 /**
  * Get more data that is not necessary for the initial page load
@@ -24,6 +24,8 @@ export async function loadSupplementalData(coreData: CoreData): Promise<void> {
       addCensusData(coreData, censusImport);
     }
   });
+  const cldrCensuses = getLanguageCountsFromCLDR(coreData);
+  addCensusData(coreData, { censuses: cldrCensuses, languageNames: {} });
 
   // 001 is the UN code for the World
   computeContainedTerritoryStats(coreData.territories['001']);

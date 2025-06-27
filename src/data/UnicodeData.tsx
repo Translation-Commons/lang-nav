@@ -1,8 +1,11 @@
 import aliases from 'cldr-core/supplemental/aliases.json';
+import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
+import { CensusCollectorType, CensusData } from '../types/CensusTypes';
 import { CLDRCoverageLevel, CLDRCoverageImport } from '../types/CLDRTypes';
 import { LocaleData } from '../types/DataTypes';
 import { LanguageData, LanguagesBySchema, LanguageScope } from '../types/LanguageTypes';
+import { ObjectType } from '../types/PageParamTypes';
 
 import { CoreData } from './CoreData';
 
@@ -105,6 +108,8 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
         cldrLanguages[macroLangCode] = constituentLang;
         constituentLang.schemaSpecific.CLDR.code = macroLangCode;
         constituentLang.schemaSpecific.CLDR.notes = notes;
+        // constituentLang.schemaSpecific.CLDR.parentLanguageCode = macroLang.ID;
+        // constituentLang.schemaSpecific.CLDR.parentLanguage = macroLang;
 
         // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
         delete cldrLanguages[constituentLangCode];
@@ -206,4 +211,80 @@ function parseCLDRCoverageLine(line: string): CLDRCoverageImport {
     percentOfCoreValuesComplete: Number.parseFloat(parts[14]),
     missingFeatures: parts[15]?.split(', '),
   };
+}
+
+type TerritoryLanguagePopulationStrings = {
+  _gdp: string;
+  _literacyPercent: string;
+  _population: string;
+  languagePopulation?: {
+    [localeCode: string]: {
+      _populationPercent: string;
+      _officialStatus: string;
+    };
+  };
+};
+
+export function getLanguageCountsFromCLDR(coreData: CoreData): CensusData[] {
+  const territoryInfoData = territoryInfo.supplemental.territoryInfo;
+  return Object.entries(territoryInfoData)
+    .map(([territoryCode, territoryData]) => {
+      const typedData = territoryData as TerritoryLanguagePopulationStrings;
+      const territoryPopulation = Math.round(parseInt(typedData._population));
+
+      // Get the populations for each language from the CLDR data
+      const rawLangPopulations = typedData.languagePopulation || {};
+      const langPopulations = Object.entries(rawLangPopulations).reduce<Record<string, number>>(
+        (langPopulations, langEntry) => {
+          const [inputLocaleCode, { _populationPercent }] = langEntry;
+          const pop = Math.round((parseFloat(_populationPercent) * territoryPopulation) / 100);
+          // We have to do some messy language code parsing since entries here may be using 2-letter codes (eg. sr not srp) and
+          // they may have script or other locale tags (eg. sr_Latn, ca_valencia, etc.), and they may be part of a macrolanguage
+          // So we have to get the language code part and convert it to ISO 639-3 then add it back to the locale string.
+          const cldrLanguageCode = inputLocaleCode.split('_')[0]; // Get the language code part, e.g. `sr_Latn` -> `sr`
+          const extraCodeParts = inputLocaleCode.split('_').slice(1).join('_'); // Get the rest of the locale code, e.g. `sr_Latn` -> `Latn`
+
+          const languageCode =
+            coreData.languagesBySchema.CLDR[cldrLanguageCode].ID ?? cldrLanguageCode;
+          const localeCode = languageCode + '_' + extraCodeParts;
+          if (languageCode != null) {
+            // Add the language to the population list
+            // In case two entries refer to the same language (eg. hin and hin_Latn) we take the higher value
+            if (langPopulations[languageCode] == null || langPopulations[languageCode] < pop) {
+              langPopulations[languageCode] = pop;
+            }
+          }
+          // When there are extra parts (eg. srp_Latn) we should add that record too
+          // Currently the script cannot handle these cases, but leaving it here for future work.
+          if (extraCodeParts != '') {
+            langPopulations[localeCode] = pop;
+          }
+          return langPopulations;
+        },
+        {},
+      );
+      const territory = coreData.territories[territoryCode];
+
+      const census: CensusData = {
+        type: ObjectType.Census,
+        ID: 'cldr.' + territoryCode,
+        codeDisplay: 'cldr.' + territoryCode,
+        nameDisplay: 'CLDR ' + (territory?.nameDisplay ?? territoryCode),
+        names: ['CLDR ' + (territory?.nameDisplay ?? territoryCode)],
+
+        eligiblePopulation: territoryPopulation,
+        isoRegionCode: territoryCode,
+        yearCollected: new Date().getFullYear(), // This is the year it was collected from CLDR not the actual year of the input data
+        collectorType: CensusCollectorType.CLDR,
+        url: 'https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-core/supplemental/territoryInfo.json',
+        notes:
+          'This data is imported from the latest release of the CLDR data. The year listed is the year the data is published, not the year the data was collected. CLDR is in the process of improving citations and data quality so take these numbers with a grain of salt.',
+
+        languageCount: Object.values(langPopulations).length,
+        languageEstimates: langPopulations,
+      };
+
+      return census;
+    })
+    .filter((census) => census.languageCount > 0);
 }

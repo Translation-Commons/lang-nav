@@ -1,3 +1,4 @@
+import { getCensusCollectorTypeRank } from '../types/CensusTypes';
 import {
   BCP47LocaleCode,
   LocaleData,
@@ -14,6 +15,11 @@ type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
   // Potential filters:
   // acquisitionOrder: Any > L1 > L2 > L3
+
+  // Prefer government sources over CLDR
+  (a, b) =>
+    getCensusCollectorTypeRank(a.census.collectorType) -
+    getCensusCollectorTypeRank(b.census.collectorType),
 
   // Get the most recent census estimate
   (a, b) => b.census.yearCollected - a.census.yearCollected,
