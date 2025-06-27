@@ -38,8 +38,10 @@ export enum LanguageModality {
   MostlySpoken = 'Mostly Spoken (but also written)',
   Spoken = 'Spoken',
   Sign = 'Sign',
+  Understands = 'Understands',
+  Reading = 'Reading',
+  Uses = 'Uses',
 }
-
 
 export enum LanguageScope {
   Family = 'Family',

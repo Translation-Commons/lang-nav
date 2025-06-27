@@ -87,6 +87,8 @@ More is better, but also if you don't have a value, leave it empty. For instance
 * **Population surveyed**
   * `geographicScope`: The geographic scope of the data (e.g., "whole country", "mainland -- without dependencies")
   * `age`: The age of the people surveyed (e.g., "0+" for  "all ages", "15+" for 15 years and older)
+  * `nationality`: The nationality of the people surveyed (e.g., "citizens", "residents", "visitors")
+  * `residentLocation`: How people are associated with geographic areas "de jure" (where people are registered) or "de facto" (where people are currently living or visiting at the time of census)
   * `notes`: Any additional notes about the data
   * `responsesPerIndividual`: The number of responses per individual (e.g., "1+" for one or more responses, "1" if every individual has exactly one response)
     * If the number of responses is 1 then we can add up the data without worrying about double counting.
