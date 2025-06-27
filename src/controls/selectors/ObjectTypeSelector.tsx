@@ -11,16 +11,23 @@ import { usePageParams } from '../PageParamsContext';
 const objectAmbiguousViews = [View.About, View.Details];
 
 const ObjectTypeSelector: React.FC = () => {
-  const { objectType, updatePageParams, view } = usePageParams();
-  const isCompact = useMediaQuery('(max-width: 1050px)');
+  const { objectType, replaceAllParams, view } = usePageParams();
+  const isCompact = useMediaQuery('(max-width: 1015px)');
+
   const goToObjectType = useCallback(
-    (objectType: ObjectType) => {
-      updatePageParams({
-        objectType,
-        view: objectAmbiguousViews.includes(view) ? View.CardList : view,
+    (newObjectType: ObjectType) => {
+      const targetView = objectAmbiguousViews.includes(view) ? View.CardList : view;
+
+      console.log(`ObjectTypeSelector: Changing objectType to ${newObjectType}. Resetting all params.`);
+
+      replaceAllParams({
+        objectType: newObjectType,
+        view: targetView,
+        page: 1,
+        searchString: '',
       });
     },
-    [updatePageParams, view],
+    [replaceAllParams, view],
   );
 
   return (
@@ -44,13 +51,6 @@ const ObjectTypeSelector: React.FC = () => {
 
 const OptionDescription: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   switch (objectType) {
-    case ObjectType.Census:
-      return (
-        <>
-          <label>Census:</label> A count of people in a given area -- for this site this is
-          typically the count of people that speak or understand a language.
-        </>
-      );
     case ObjectType.Language:
       return (
         <>
