@@ -3,10 +3,9 @@ import React, { useMemo } from 'react';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
-import Hoverable from '../../generic/Hoverable';
 import LinkButton from '../../generic/LinkButton';
-import { CLDRCoverageLevel } from '../../types/CLDRTypes';
-import { LanguageData, LanguageScope } from '../../types/LanguageTypes';
+import { LanguageData } from '../../types/LanguageTypes';
+import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
 import HoverableObjectName from '../common/HoverableObjectName';
 import TreeListRoot from '../common/TreeList/TreeListRoot';
 import { getLocaleTreeNodes } from '../locale/LocaleHierarchy';
@@ -182,7 +181,7 @@ const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }
       </div>
       <div>
         <label>Internet Technologies:</label>
-        <CLDRCoverageInfo lang={lang} />
+        <CLDRCoverageInfo object={lang} />
       </div>
     </div>
   );
@@ -236,60 +235,5 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     </div>
   );
 };
-
-export const CLDRCoverageInfo: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const {
-    cldrCoverage,
-    schemaSpecific: { CLDR },
-  } = lang;
-  if (cldrCoverage == null) {
-    if (
-      CLDR.parentLanguage != null &&
-      CLDR.parentLanguage.cldrCoverage != null &&
-      CLDR.scope === LanguageScope.Macrolanguage
-    ) {
-      return (
-        <Hoverable
-          hoverContent={
-            <div>
-              {lang.nameCanonical} [{CLDR.code}] is not directly supported since it is a
-              macrolanguage. Rather it is supported with data from its constituent language:{' '}
-              {CLDR.parentLanguage.nameCanonical} [
-              {CLDR.parentLanguage.schemaSpecific.CLDR.code ?? CLDR.parentLanguage.codeDisplay}]
-            </div>
-          }
-          style={{ textDecoration: 'none', cursor: 'help' }}
-        >
-          ⚠️ <CLDRCoverageInfo lang={CLDR.parentLanguage} />
-        </Hoverable>
-      );
-    }
-    return <span className="unsupported">Not supported by CLDR or ICU.</span>;
-  }
-
-  return (
-    <>
-      CLDR:{' '}
-      <span style={{ color: getCLDRCoverageColor(cldrCoverage.actualCoverageLevel) }}>
-        {cldrCoverage.actualCoverageLevel}
-      </span>{' '}
-      coverage by {cldrCoverage.countOfCLDRLocales} locale
-      {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU: {cldrCoverage.inICU ? '✅' : '❌'}
-    </>
-  );
-};
-
-function getCLDRCoverageColor(coverageLevel: CLDRCoverageLevel): string {
-  switch (coverageLevel) {
-    case CLDRCoverageLevel.Core:
-      return 'var(--color-text-secondary)';
-    case CLDRCoverageLevel.Basic:
-      return 'var(--color-text-yellow)';
-    case CLDRCoverageLevel.Moderate:
-      return 'var(--color-text-green)';
-    case CLDRCoverageLevel.Modern:
-      return 'var(--color-text-blue)';
-  }
-}
 
 export default LanguageDetails;

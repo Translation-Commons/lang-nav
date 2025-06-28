@@ -102,6 +102,12 @@ footer {
   margin-top: 2em;
 }
 
+code {
+  background-color: var(--color-button-secondary);
+  border-radius: .25em;
+  padding: 0.25em;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-text: #f1f1f1;

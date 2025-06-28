@@ -33,13 +33,13 @@ import {
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
 } from './GlottologData';
+import { loadIANAVariants, addIANAVariantLocales } from './IANAData';
 import {
   connectTerritoriesToParent,
   createRegionalLocales,
   loadTerritories,
 } from './TerritoryData';
-import { addCLDRLanguageSchema, loadCLDRAliases } from './UnicodeData';
-import { loadIANAVariants, addIANAVariantLocales } from './IANAData';
+import { addCLDRLanguageDetails } from './UnicodeData';
 
 export type CoreData = {
   censuses: Record<CensusID, CensusData>;
@@ -60,7 +60,7 @@ export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySchema = {
 /**
  * Get core data needed to show the tables -- things like language codes, relationships with other languages.
  */
-   
+
 export function useCoreData(): {
   loadCoreData: () => Promise<void>;
   coreData: CoreData;
@@ -84,7 +84,6 @@ export function useCoreData(): {
       isoLangsToFamilies,
       glottologImport,
       manualGlottocodeToISO,
-      cldrAliases,
       territories,
       locales,
       writingSystems,
@@ -97,7 +96,6 @@ export function useCoreData(): {
       loadISOFamiliesToLanguages(),
       loadGlottologLanguages(),
       loadManualGlottocodeToISO(),
-      loadCLDRAliases(),
       loadTerritories(),
       loadLocales(),
       loadWritingSystems(),
@@ -114,9 +112,9 @@ export function useCoreData(): {
     addISOLanguageFamilyData(languagesBySchema, langFamilies || [], isoLangsToFamilies || {});
     addISOMacrolanguageData(languagesBySchema.ISO, macroLangs || []);
     addGlottologLanguages(languagesBySchema, glottologImport || [], manualGlottocodeToISO || {});
-    addCLDRLanguageSchema(languagesBySchema, cldrAliases || []);
+    addCLDRLanguageDetails(languagesBySchema);
     addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
-   
+
     connectLanguagesToParent(languagesBySchema);
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySchema.Inclusive, territories, writingSystems);
@@ -141,4 +139,3 @@ export function useCoreData(): {
     },
   };
 }
-

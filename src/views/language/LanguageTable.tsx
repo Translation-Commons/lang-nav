@@ -4,10 +4,9 @@ import { getScopeFilter } from '../../controls/filter';
 import { useDataContext } from '../../data/DataContext';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
+import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
 import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
-
-import { CLDRCoverageInfo } from './LanguageDetails';
 
 const LanguageTable: React.FC = () => {
   const { languages } = useDataContext();
@@ -35,7 +34,7 @@ const LanguageTable: React.FC = () => {
         },
         {
           label: 'Internet Technologies',
-          render: (lang) => <CLDRCoverageInfo lang={lang} />,
+          render: (lang) => <CLDRCoverageInfo object={lang} />,
         },
         InfoButtonColumn,
       ]}
