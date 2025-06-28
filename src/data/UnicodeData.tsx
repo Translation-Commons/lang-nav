@@ -90,11 +90,14 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.cldrDataProvider = constituentLang;
-        macroLang.schemaSpecific.CLDR.code = undefined;
+        macroLang.schemaSpecific.CLDR.code = macroLangCode + '**'; // Distinguish the macrolanguage from the constituent language
         macroLang.schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
+        macroLang.schemaSpecific.CLDR.childLanguages = [constituentLang];
         macroLang.schemaSpecific.CLDR.notes = notes;
-        // Remove the symbolic reference in the CLDR list to the macrolanguage object
+        macroLang.schemaSpecific.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
+        // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
+        cldrLanguages[macroLangCode + '**'] = macroLang; // But put it back in with ** to distinguish it
       }
 
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
