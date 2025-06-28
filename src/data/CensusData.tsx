@@ -253,7 +253,7 @@ export function addCensusRecordsToLocales(codeData: CoreData, census: CensusData
           (populationEstimate * 100.0) / (census.respondingPopulation || census.eligiblePopulation),
       });
     } else {
-      // TODO: show warning in the "Notices" tool
+      // TODO: show warning in the "Reports" tool
     }
   });
 }
