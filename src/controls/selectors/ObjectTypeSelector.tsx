@@ -18,6 +18,8 @@ const ObjectTypeSelector: React.FC = () => {
       updatePageParams({
         objectType,
         view: objectAmbiguousViews.includes(view) ? View.CardList : view,
+        searchString: undefined,
+        page: 1,
       });
     },
     [updatePageParams, view],
