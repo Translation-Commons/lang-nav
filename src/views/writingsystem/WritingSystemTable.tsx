@@ -3,7 +3,12 @@ import React from 'react';
 import { useDataContext } from '../../data/DataContext';
 import { WritingSystemData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import {
+  CodeColumn,
+  GranularityColumn,
+  InfoButtonColumn,
+  NameColumn,
+} from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const WritingSystemTable: React.FC = () => {
@@ -13,6 +18,7 @@ const WritingSystemTable: React.FC = () => {
     <ObjectTable<WritingSystemData>
       objects={Object.values(writingSystems)}
       columns={[
+        GranularityColumn,
         CodeColumn,
         NameColumn,
         {

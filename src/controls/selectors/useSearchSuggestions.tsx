@@ -5,7 +5,7 @@ import { uniqueBy } from '../../generic/setUtils';
 import { ObjectType, SearchableField } from '../../types/PageParamTypes';
 import { getSearchableField, HighlightedObjectField } from '../../views/common/ObjectField';
 import { Suggestion } from '../components/TextInput';
-import { getScopeFilter, getSubstringFilterOnQuery } from '../filter';
+import { getGranularityFilter, getSubstringFilterOnQuery } from '../filter';
 import { usePageParams } from '../PageParamsContext';
 
 const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this seems to prevent render lag.
@@ -13,7 +13,7 @@ const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this
 export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy, objectType } = usePageParams();
   const { languages, locales, territories, writingSystems } = useDataContext();
-  const scopeFilter = getScopeFilter();
+  const filterByGranularity = getGranularityFilter();
 
   const objects = useMemo(() => {
     if (searchBy === SearchableField.Territory) {
@@ -34,14 +34,14 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
 
   const getSuggestions = useMemo(() => {
     return async (query: string) => {
-      const substringFilter = getSubstringFilterOnQuery(
+      const filterBySubstring = getSubstringFilterOnQuery(
         query,
         searchBy === SearchableField.Territory ? SearchableField.NameOrCode : searchBy,
       );
       return uniqueBy(
         (objects || [])
-          .filter(scopeFilter)
-          .filter(substringFilter)
+          .filter(filterByGranularity)
+          .filter(filterBySubstring)
           .slice(0, SEARCH_RESULTS_LIMIT)
           .map((object) => {
             let label = <HighlightedObjectField object={object} field={searchBy} query={query} />;
@@ -60,7 +60,7 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
         (item) => item.objectID,
       );
     };
-  }, [objects, scopeFilter, searchBy]);
+  }, [objects, filterByGranularity, searchBy]);
 
   return getSuggestions;
 }

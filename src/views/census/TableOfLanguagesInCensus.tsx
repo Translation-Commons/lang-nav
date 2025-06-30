@@ -8,8 +8,8 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { CensusData } from '../../types/CensusTypes';
 import { LocaleData } from '../../types/DataTypes';
+import { getLanguageGranularity, Granularity } from '../../types/GranularityTypes';
 import { ObjectType, SearchableField, SortBy } from '../../types/PageParamTypes';
-import { getLanguageScopeLevel, ScopeLevel } from '../../types/ScopeLevel';
 import HoverableObject from '../common/HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '../common/ObjectField';
 import { CodeColumn } from '../common/table/CommonColumns';
@@ -44,7 +44,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         language: lang,
         nameDisplay: lang.nameDisplay,
         names: lang.names,
-        scope: lang.scope != null ? getLanguageScopeLevel(lang) : ScopeLevel.Other,
+        granularity: lang.scope != null ? getLanguageGranularity(lang) : Granularity.Special,
 
         territory: census.territory,
         territoryCode: census.isoRegionCode,

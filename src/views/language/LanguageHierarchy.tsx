@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getScopeFilter } from '../../controls/filter';
+import { getGranularityFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
@@ -14,15 +14,15 @@ export const LanguageHierarchy: React.FC = () => {
   const { languageSchema } = usePageParams();
   const { languages } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByGranularity = getGranularityFilter();
 
   const rootNodes = getLanguageTreeNodes(
     Object.values(languages).filter(
-      (lang) => lang.parentLanguage == null || !filterByScope(lang.parentLanguage),
+      (lang) => lang.parentLanguage == null || !filterByGranularity(lang.parentLanguage),
     ),
     languageSchema,
     sortFunction,
-    filterByScope,
+    filterByGranularity,
   );
 
   return (

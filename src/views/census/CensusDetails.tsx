@@ -1,7 +1,7 @@
 import React from 'react';
 
+import GranularitySelector from '../../controls/selectors/GranularitySelector';
 import LimitInput from '../../controls/selectors/LimitInput';
-import ScopeFilterSelector from '../../controls/selectors/ScopeFilterSelector';
 import { CensusData } from '../../types/CensusTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 
@@ -21,7 +21,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
         <h3>Languages</h3>
         <div style={{ textAlign: 'center', display: 'flex' }}>
           <LimitInput />
-          <ScopeFilterSelector />
+          <GranularitySelector />
         </div>
         <TableOfLanguagesInCensus census={census} />
       </div>

@@ -5,7 +5,7 @@ import {
   TerritoryData,
   TerritoryType,
 } from '../types/DataTypes';
-import { getObjectScopeLevel, ScopeLevel } from '../types/ScopeLevel';
+import { getObjectGranularity, Granularity } from '../types/GranularityTypes';
 
 import { CoreData } from './CoreData';
 
@@ -60,7 +60,7 @@ function setLocalePopulationEstimate(locale: LocaleData, record: LocaleInCensus)
 
 // This re-computes regional locales (eg. es_419, Spanish in Latin America).
 function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
-  if (getObjectScopeLevel(territory) !== ScopeLevel.Groups) {
+  if (getObjectGranularity(territory) !== Granularity.Macro) {
     return; // Only recompute for regional locales
   }
   // Re-compute the estimate for the contained territories first.

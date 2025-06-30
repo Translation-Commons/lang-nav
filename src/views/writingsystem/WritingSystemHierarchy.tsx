@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getScopeFilter } from '../../controls/filter';
+import { getGranularityFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { ObjectData, WritingSystemData } from '../../types/DataTypes';
@@ -11,14 +11,14 @@ import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 export const WritingSystemHierarchy: React.FC = () => {
   const { writingSystems } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByGranularity = getGranularityFilter();
 
   const rootNodes = getWritingSystemTreeNodes(
     Object.values(writingSystems).filter(
-      (w) => w.parentWritingSystem == null || !filterByScope(w.parentWritingSystem),
+      (w) => w.parentWritingSystem == null || !filterByGranularity(w.parentWritingSystem),
     ),
     sortFunction,
-    filterByScope,
+    filterByGranularity,
   );
 
   return (

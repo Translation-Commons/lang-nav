@@ -6,8 +6,8 @@ import {
   TerritoryData,
   TerritoryType,
 } from '../types/DataTypes';
+import { getObjectGranularity, Granularity } from '../types/GranularityTypes';
 import { ObjectType } from '../types/PageParamTypes';
-import { getObjectScopeLevel, ScopeLevel } from '../types/ScopeLevel';
 
 const DEBUG = false;
 
@@ -94,7 +94,7 @@ function createRegionalLocalesForTerritory(
   const { containsTerritories } = territory;
   containsTerritories.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
 
-  if (getObjectScopeLevel(territory) !== ScopeLevel.Groups) {
+  if (getObjectGranularity(territory) !== Granularity.Macro) {
     return; // Only going this for regions/continents
   }
 
@@ -120,7 +120,7 @@ function createRegionalLocalesForTerritory(
             codeDisplay: newLocaleCode,
             territoryCode: territory.ID,
             territory,
-            scope: ScopeLevel.Groups,
+            granularity: Granularity.Macro,
 
             // Update the population
             populationSpeaking: loc.populationSpeaking || 0,
@@ -190,7 +190,7 @@ export function computeContainedTerritoryStats(terr: TerritoryData): void {
   containsTerritories.forEach(computeContainedTerritoryStats);
 
   // Recompute the population for territory groups, in case it was updated from other data
-  if (getObjectScopeLevel(terr) === ScopeLevel.Groups) {
+  if (getObjectGranularity(terr) === Granularity.Macro) {
     terr.population = containsTerritories.reduce((sum, t) => sum + (t.population ?? 0), 0);
   }
 

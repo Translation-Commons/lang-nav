@@ -1,6 +1,9 @@
 import { InfoIcon } from 'lucide-react';
 
+import { getGranularityLabel } from '../../../controls/selectors/GranularitySelector';
+import { toTitleCase } from '../../../generic/stringUtils';
 import { ObjectData } from '../../../types/DataTypes';
+import { getObjectGranularity } from '../../../types/GranularityTypes';
 import { SearchableField, SortBy } from '../../../types/PageParamTypes';
 import HoverableObject from '../HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
@@ -32,4 +35,11 @@ export const InfoButtonColumn: TableColumn<ObjectData> = {
       </button>
     </HoverableObject>
   ),
+};
+
+export const GranularityColumn: TableColumn<ObjectData> = {
+  key: 'Granularity',
+  render: (object) =>
+    toTitleCase(getGranularityLabel(object.type, getObjectGranularity(object), 'short')),
+  sortParam: SortBy.Name,
 };

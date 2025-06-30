@@ -1,7 +1,7 @@
 import { anyWordStartsWith } from '../generic/stringUtils';
 import { ObjectData, TerritoryData } from '../types/DataTypes';
+import { getObjectGranularity } from '../types/GranularityTypes';
 import { ObjectType, SearchableField } from '../types/PageParamTypes';
-import { getObjectScopeLevel } from '../types/ScopeLevel';
 import { getSearchableField } from '../views/common/ObjectField';
 
 import { usePageParams } from './PageParamsContext';
@@ -60,18 +60,18 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
 }
 
 /**
- * Provides a function that filters on the scope of an object
+ * Provides a function that filters on the granularities of an object
  */
-export function getScopeFilter(): FilterFunctionType {
-  const { scopes } = usePageParams();
+export function getGranularityFilter(): FilterFunctionType {
+  const { granularities } = usePageParams();
 
-  function scopeFilter(object: ObjectData) {
-    if (scopes.length == 0) {
+  function granularityFilter(object: ObjectData) {
+    if (granularities.length == 0) {
       return true;
     }
-    return scopes.includes(getObjectScopeLevel(object));
+    return granularities.includes(getObjectGranularity(object));
   }
-  return scopeFilter;
+  return granularityFilter;
 }
 
 export function getSliceFunction<T>(): (arr: T[]) => T[] {

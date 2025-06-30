@@ -1,7 +1,11 @@
 import { ArrowUpDownIcon } from 'lucide-react';
 import React, { Dispatch, SetStateAction, useMemo, useState, useCallback } from 'react';
 
-import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../../controls/filter';
+import {
+  getGranularityFilter,
+  getSliceFunction,
+  getSubstringFilter,
+} from '../../../controls/filter';
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getSortFunction } from '../../../controls/sort';
 import HoverableButton from '../../../generic/HoverableButton';
@@ -30,8 +34,8 @@ interface Props<T> {
 function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const { limit } = usePageParams();
   const sortBy = getSortFunction();
-  const substringFilter = getSubstringFilter();
-  const scopeFilter = getScopeFilter();
+  const filterBySubstring = getSubstringFilter();
+  const filterByGranularity = getGranularityFilter();
   const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
 
   const [visibleColumns, setVisibleColumns] = useState(() =>
@@ -52,14 +56,14 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
-    let result = objects.filter(substringFilter ?? (() => true)).filter(scopeFilter);
+    let result = objects.filter(filterBySubstring ?? (() => true)).filter(filterByGranularity);
     if (sortDirectionIsNormal) {
       result = result.sort(sortBy);
     } else {
       result = result.sort((a, b) => -sortBy(a, b));
     }
     return result;
-  }, [sortBy, objects, substringFilter, scopeFilter, sortDirectionIsNormal]);
+  }, [sortBy, objects, filterBySubstring, filterByGranularity, sortDirectionIsNormal]);
   const nRowsAfterFilter = useMemo(
     () => objectsFilteredAndSorted.length,
     [objectsFilteredAndSorted],

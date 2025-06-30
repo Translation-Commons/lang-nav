@@ -1,6 +1,7 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
+import { Granularity } from '../types/GranularityTypes';
 import { LanguageSchema } from '../types/LanguageTypes';
 import {
   ObjectType,
@@ -11,7 +12,6 @@ import {
   SortBy,
   View,
 } from '../types/PageParamTypes';
-import { ScopeLevel } from '../types/ScopeLevel';
 
 type PageParamsContextState = PageParams & {
   updatePageParams: (newParams: PageParamsOptional) => void;
@@ -42,9 +42,9 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       objectID: getParam('objectID', undefined),
       objectType,
       page: parseInt(getParam('page', defaults.page.toString())),
-      scopes: getParam('scopes', defaults.scopes.join(','))
+      granularities: getParam('granularities', defaults.granularities.join(','))
         .split(',')
-        .map((s) => s as ScopeLevel)
+        .map((s) => s as Granularity)
         .filter(Boolean),
       searchBy: getParam('searchBy', defaults.searchBy) as SearchableField,
       searchString: getParam('searchString', defaults.searchString),
@@ -66,10 +66,10 @@ function getDefaultParams(objectType: ObjectType, view: View): PageParams {
     objectID: undefined,
     objectType,
     page: 1,
-    scopes:
+    granularities:
       view === View.Hierarchy && objectType !== ObjectType.Locale
-        ? [ScopeLevel.Groups, ScopeLevel.Individuals]
-        : [ScopeLevel.Individuals],
+        ? [Granularity.Macro, Granularity.Base]
+        : [Granularity.Base],
     searchBy: SearchableField.AllNames,
     searchString: '',
     sortBy: SortBy.Population,
