@@ -15,6 +15,10 @@ const TerritoryTable: React.FC = () => {
     <ObjectTable<TerritoryData>
       objects={Object.values(territories)}
       columns={[
+        {
+          label: 'Type',
+          render: (object) => object.territoryType,
+        },
         CodeColumn,
         NameColumn,
         {
@@ -57,10 +61,6 @@ const TerritoryTable: React.FC = () => {
                 style={{ textDecoration: 'none' }}
               />
             ),
-        },
-        {
-          label: 'Type',
-          render: (object) => object.territoryType,
         },
         InfoButtonColumn,
       ]}

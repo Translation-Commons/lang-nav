@@ -3,9 +3,9 @@
  */
 
 import { CensusData } from './CensusTypes';
+import { Granularity } from './GranularityTypes';
 import { LanguageCode, LanguageData } from './LanguageTypes';
 import { ObjectType } from './PageParamTypes';
-import { ScopeLevel } from './ScopeLevel';
 
 export interface ObjectBase {
   readonly type: ObjectType;
@@ -132,7 +132,7 @@ export interface LocaleData extends ObjectBase {
 
   ID: BCP47LocaleCode;
   codeDisplay: BCP47LocaleCode; // Changes based on the language schema
-  scope: ScopeLevel;
+  granularity: Granularity;
 
   nameDisplay: string;
   nameEndonym?: string;

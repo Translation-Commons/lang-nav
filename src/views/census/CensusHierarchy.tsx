@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getScopeFilter } from '../../controls/filter';
+import { getGranularityFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { CensusData } from '../../types/CensusTypes';
@@ -12,9 +12,13 @@ import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 export const CensusHierarchy: React.FC = () => {
   const { territories } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByGranularity = getGranularityFilter();
 
-  const rootNodes = getCensusTreeNodes(Object.values(territories), sortFunction, filterByScope);
+  const rootNodes = getCensusTreeNodes(
+    Object.values(territories),
+    sortFunction,
+    filterByGranularity,
+  );
 
   return <TreeListPageBody rootNodes={rootNodes} description={<>Censuses</>} />;
 };

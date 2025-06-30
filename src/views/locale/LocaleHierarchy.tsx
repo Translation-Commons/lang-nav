@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getScopeFilter } from '../../controls/filter';
+import { getGranularityFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { LocaleData, ObjectData, WritingSystemData } from '../../types/DataTypes';
@@ -12,9 +12,9 @@ import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 export const LocaleHierarchy: React.FC = () => {
   const { languages } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByGranularity = getGranularityFilter();
 
-  const rootNodes = getLocaleTreeNodes(Object.values(languages), sortFunction, filterByScope);
+  const rootNodes = getLocaleTreeNodes(Object.values(languages), sortFunction, filterByGranularity);
 
   return (
     <TreeListPageBody

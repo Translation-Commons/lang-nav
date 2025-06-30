@@ -1,39 +1,45 @@
 import React from 'react';
 
 import { joinOxfordComma, toSentenceCase } from '../../generic/stringUtils';
+import { Granularity } from '../../types/GranularityTypes';
 import { ObjectType } from '../../types/PageParamTypes';
-import { ScopeLevel } from '../../types/ScopeLevel';
 import { getObjectTypeLabelPlural } from '../../views/common/getObjectName';
+import { LanguageScopesDescription } from '../../views/language/LanguageScopeDescription';
 import MultiChoiceOptions from '../components/MultiChoiceOptions';
 import Selector from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
-const ScopeFilterSelector: React.FC = () => {
-  const { scopes, updatePageParams, objectType } = usePageParams();
+const GranularitySelector: React.FC = () => {
+  const { granularities, updatePageParams, objectType } = usePageParams();
 
-  function getOptionDescription(scope: ScopeLevel | ScopeLevel[]): string {
-    if (Array.isArray(scope)) {
+  function getOptionDescription(granularity: Granularity | Granularity[]): string {
+    if (Array.isArray(granularity)) {
       return toSentenceCase(
-        joinOxfordComma(scope.map((s) => getScopeLevelDescription(objectType, s, 'long'))),
+        joinOxfordComma(granularity.map((s) => getGranularityLabel(objectType, s, 'long'))),
       );
     }
-    return toSentenceCase(getScopeLevelDescription(objectType, scope, 'long'));
+    return toSentenceCase(getGranularityLabel(objectType, granularity, 'long'));
   }
-  function getOptionLabel(scope: ScopeLevel): string {
-    return toSentenceCase(getScopeLevelDescription(objectType, scope, 'short'));
+  function getOptionLabel(granularity: Granularity): string {
+    return toSentenceCase(getGranularityLabel(objectType, granularity, 'short'));
   }
   const selectorDescription = `Filter the ${getObjectTypeLabelPlural(objectType)} shown by the granularity of the code -- eg. grouped objects, individual objects, or parts of objects.`;
 
   return (
-    <Selector selectorLabel="Scope:" selectorDescription={selectorDescription}>
+    <Selector
+      selectorLabel="Granularity:"
+      selectorDescription={
+        objectType == ObjectType.Language ? <LanguageScopesDescription /> : selectorDescription
+      }
+    >
       <MultiChoiceOptions
-        options={Object.values(ScopeLevel)}
-        onToggleOption={(scope: ScopeLevel) =>
-          scopes.includes(scope)
-            ? updatePageParams({ scopes: scopes.filter((s) => s != scope) })
-            : updatePageParams({ scopes: [...scopes, scope] })
+        options={Object.values(Granularity)}
+        onToggleOption={(granularity: Granularity) =>
+          granularities.includes(granularity)
+            ? updatePageParams({ granularities: granularities.filter((s) => s != granularity) })
+            : updatePageParams({ granularities: [...granularities, granularity] })
         }
-        selected={scopes}
+        selected={granularities}
         getOptionLabel={getOptionLabel}
         getOptionDescription={getOptionDescription}
       />
@@ -41,63 +47,63 @@ const ScopeFilterSelector: React.FC = () => {
   );
 };
 
-export function getScopeLevelDescription(
+export function getGranularityLabel(
   objectType: ObjectType,
-  scope: ScopeLevel,
+  granularity: Granularity,
   length: 'long' | 'short',
 ): string {
   switch (objectType) {
-    case ObjectType.Census: // Census scope level is just used to filter the languages in the census language table.
+    case ObjectType.Census: // Census granularity is just used to filter the languages in the census language table.
     case ObjectType.Language:
-      switch (scope) {
-        case ScopeLevel.Groups:
+      switch (granularity) {
+        case Granularity.Macro:
           return 'language families';
-        case ScopeLevel.Individuals:
+        case Granularity.Base:
           return length === 'long' ? 'languages (including macrolanguages)' : 'languages';
-        case ScopeLevel.Parts:
+        case Granularity.Micro:
           return 'dialects';
-        case ScopeLevel.Other:
+        case Granularity.Special:
           return length === 'long' ? 'special codes or unlabeled languages' : 'special codes';
       }
     // eslint-disable-next-line no-fallthrough
     case ObjectType.Locale:
-      switch (scope) {
-        case ScopeLevel.Groups:
+      switch (granularity) {
+        case Granularity.Macro:
           return 'regional locales';
-        case ScopeLevel.Individuals:
+        case Granularity.Base:
           return 'regular locales';
-        case ScopeLevel.Parts:
+        case Granularity.Micro:
           return length === 'long' ? 'locales with additional variant tags' : 'variant locales';
-        case ScopeLevel.Other:
+        case Granularity.Special:
           return length === 'long' ? 'special codes or unlabeled locales' : 'special codes';
       }
     // eslint-disable-next-line no-fallthrough
     case ObjectType.Territory:
-      switch (scope) {
-        case ScopeLevel.Groups:
+      switch (granularity) {
+        case Granularity.Macro:
           return length === 'long' ? 'continents, regions' : 'continents';
-        case ScopeLevel.Individuals:
+        case Granularity.Base:
           return 'countries';
-        case ScopeLevel.Parts:
+        case Granularity.Micro:
           return 'dependencies';
-        case ScopeLevel.Other:
+        case Granularity.Special:
           return length === 'long' ? 'special codes or unlabeled territories' : 'special codes';
       }
     // eslint-disable-next-line no-fallthrough
     case ObjectType.WritingSystem:
-      switch (scope) {
-        case ScopeLevel.Groups:
+      switch (granularity) {
+        case Granularity.Macro:
           return length === 'long'
             ? 'script codes that includes multiple scripts'
             : 'script groups';
-        case ScopeLevel.Individuals:
+        case Granularity.Base:
           return 'major scripts';
-        case ScopeLevel.Parts:
+        case Granularity.Micro:
           return 'script variations';
-        case ScopeLevel.Other:
+        case Granularity.Special:
           return 'special codes';
       }
   }
 }
 
-export default ScopeFilterSelector;
+export default GranularitySelector;
