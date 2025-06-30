@@ -23,16 +23,19 @@ const LanguageTable: React.FC = () => {
         CodeColumn,
         NameColumn,
         {
+          key: 'Scope',
           label: 'Scope',
           render: (lang) => lang.scope ?? lang.scope,
         },
         {
+          key: 'Population', 
           label: 'Population',
           render: (lang) => lang.populationCited,
           isNumeric: true,
           sortParam: SortBy.Population,
         },
         {
+          key: 'InternetTechnologies',
           label: 'Internet Technologies',
           render: (lang) => <CLDRCoverageInfo object={lang} />,
         },

@@ -17,19 +17,22 @@ const TerritoryTable: React.FC = () => {
       columns={[
         CodeColumn,
         NameColumn,
-        {
+        { 
+          key : 'Population',
           label: 'Population',
           render: (object) => object.population,
           isNumeric: true,
           sortParam: SortBy.Population,
         },
         {
+          key: 'Literacy',
           label: 'Literacy',
           render: (object) =>
             object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
           isNumeric: true,
         },
         {
+          key: 'Languages',
           label: 'Languages',
           render: (object) =>
             object.locales.length > 0 && (
@@ -48,6 +51,7 @@ const TerritoryTable: React.FC = () => {
           isNumeric: true,
         },
         {
+          key: 'Biggest Language',
           label: 'Biggest Language',
           render: (object) =>
             object.locales.length > 0 && (
@@ -59,6 +63,7 @@ const TerritoryTable: React.FC = () => {
             ),
         },
         {
+          key: 'Type',
           label: 'Type',
           render: (object) => object.territoryType,
         },

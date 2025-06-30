@@ -16,6 +16,7 @@ const TableOfAllCensuses: React.FC = () => {
         CodeColumn,
         NameColumn,
         {
+          key: 'Languages',
           label: 'Languages',
           render: (census) => census.languageCount,
           isNumeric: true,

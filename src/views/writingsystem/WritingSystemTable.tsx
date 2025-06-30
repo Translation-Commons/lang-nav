@@ -16,6 +16,7 @@ const WritingSystemTable: React.FC = () => {
         CodeColumn,
         NameColumn,
         {
+          key: 'Population',
           label: 'Population',
           render: (object) => object.populationUpperBound,
           isNumeric: true,
