@@ -6,7 +6,7 @@ import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
 import { TableColumn } from './ObjectTable';
 
 export const CodeColumn: TableColumn<ObjectData> = {
-  label: 'ID',
+  key: 'ID',
   render: (object) => (
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />
   ),
@@ -14,7 +14,7 @@ export const CodeColumn: TableColumn<ObjectData> = {
 };
 
 export const NameColumn: TableColumn<ObjectData> = {
-  label: 'Name',
+  key: 'Name',
   render: (object) => (
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.EngName} />
   ),
@@ -22,7 +22,7 @@ export const NameColumn: TableColumn<ObjectData> = {
 };
 
 export const InfoButtonColumn: TableColumn<ObjectData> = {
-  label: 'Info',
+  key: 'Info',
   render: (object) => (
     <HoverableObject object={object}>
       <button className="InfoButton">&#x24D8;</button>

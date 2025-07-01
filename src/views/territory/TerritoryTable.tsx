@@ -17,20 +17,20 @@ const TerritoryTable: React.FC = () => {
       columns={[
         CodeColumn,
         NameColumn,
-        {
-          label: 'Population',
+        { 
+          key : 'Population',
           render: (object) => object.population,
           isNumeric: true,
           sortParam: SortBy.Population,
         },
         {
-          label: 'Literacy',
+          key: 'Literacy',
           render: (object) =>
             object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
           isNumeric: true,
         },
         {
-          label: 'Languages',
+          key: 'Languages',
           render: (object) =>
             object.locales.length > 0 && (
               <Hoverable
@@ -48,7 +48,7 @@ const TerritoryTable: React.FC = () => {
           isNumeric: true,
         },
         {
-          label: 'Biggest Language',
+          key: 'Biggest Language',
           render: (object) =>
             object.locales.length > 0 && (
               <HoverableObjectName
@@ -59,7 +59,7 @@ const TerritoryTable: React.FC = () => {
             ),
         },
         {
-          label: 'Type',
+          key: 'Type',
           render: (object) => object.territoryType,
         },
         InfoButtonColumn,

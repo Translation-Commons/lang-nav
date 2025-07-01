@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useMemo, useState } from 'react';
+import React, { Dispatch, SetStateAction, useMemo, useState, useCallback } from 'react';
 
 import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../../controls/filter';
 import { usePageParams } from '../../../controls/PageParamsContext';
@@ -11,9 +11,9 @@ import VisibleItemsMeter from '../../VisibleItemsMeter';
 import './tableStyles.css';
 
 export interface TableColumn<T> {
-  label: React.ReactNode;
+  label?: React.ReactNode;
   render: (object: T) => React.ReactNode;
-  key?: string;
+  key: string;
   isNumeric?: boolean;
   sortParam?: SortBy;
 }
@@ -32,6 +32,22 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const substringFilter = getSubstringFilter();
   const scopeFilter = getScopeFilter();
   const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
+
+  const [visibleColumns, setVisibleColumns] = useState(() =>
+    Object.fromEntries(columns.map(col => [col.key, true]))
+  );
+
+  const toggleColumn = useCallback((columnKey: string) => {
+    setVisibleColumns(prev => ({
+      ...prev,
+      [columnKey]: !prev[columnKey],
+    }));
+  }, []);
+
+  const currentlyVisibleColumns = useMemo(
+    () => columns.filter(column => visibleColumns[column.key]),
+    [columns, visibleColumns]
+  );
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
@@ -56,12 +72,31 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
         nOverall={objects.length}
         objectType={objects[0]?.type}
       />
+      <details className="column-toggler" style={{ margin: '1rem 0', gap: '1rem' }}>
+        <summary className="collapsible-summary" style={{ cursor: 'pointer' }}>
+          {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
+        </summary>
+        <div className="column-toggler" style={{ margin: '1rem 0', display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
+        {columns.map(column => (
+          <label key={column.key} style={{ cursor: 'pointer' }}>
+            <input
+              type="checkbox"
+              checked={visibleColumns[column.key] || false}
+              onChange={() => toggleColumn(column.key)}
+              style={{ marginRight: '0.5rem' }}
+            />
+            {column.label ?? column.key}
+          </label>
+        ))}
+        </div>
+      </details>
+
       <table className="ObjectTable">
         <thead>
           <tr>
-            {columns.map((column, i) => (
-              <th key={i} style={{ textAlign: 'start' }}>
-                {column.label}
+            {currentlyVisibleColumns.map(column => (
+              <th key={column.key} style={{ textAlign: 'start' }}>
+                {column.label ?? column.key}
                 <SortButton
                   columnSortBy={column.sortParam}
                   setSortDirectionIsNormal={setSortDirectionIsNormal}
@@ -72,15 +107,15 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
         </thead>
         <tbody>
           {sliceFunction(objectsFilteredAndSorted).map((object, i) => (
-            <tr key={i}>
-              {columns.map((column, i) => {
+            <tr key={(object as any).ID || i}>
+              {currentlyVisibleColumns.map(column => {
                 let content = column.render(object);
                 if (typeof content === 'number') {
                   content = content.toLocaleString();
                 }
 
                 return (
-                  <td key={i} className={column.isNumeric ? 'numeric' : undefined}>
+                  <td key={column.key} className={column.isNumeric ? 'numeric' : undefined}>
                     {content}
                   </td>
                 );

@@ -16,7 +16,7 @@ const WritingSystemTable: React.FC = () => {
         CodeColumn,
         NameColumn,
         {
-          label: 'Population',
+          key: 'Population',
           render: (object) => object.populationUpperBound,
           isNumeric: true,
           sortParam: SortBy.Population,
