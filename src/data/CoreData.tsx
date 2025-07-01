@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { VariantTagData } from '../types/DataTypes';
+
 import { connectVariantTags } from './connectVariantTags'; // assuming you put it here
 
 import { CensusID, CensusData } from '../types/CensusTypes';
