@@ -39,7 +39,7 @@ import {
   loadTerritories,
 } from './TerritoryData';
 import { addCLDRLanguageSchema, loadCLDRAliases } from './UnicodeData';
-import { loadIANAVariants, addIANAVariantLocales } from './IANAData';
+import { loadIANAVariants, addIANAVariantLocales, convertToVariantTagData } from './IANAData';
 
 export type CoreData = {
   censuses: Record<CensusID, CensusData>;
@@ -47,6 +47,7 @@ export type CoreData = {
   locales: Record<BCP47LocaleCode, LocaleData>;
   territories: Record<TerritoryCode, TerritoryData>;
   writingSystems: Record<ScriptCode, WritingSystemData>;
+  variantTags: VariantTagData[];
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySchema = {
@@ -116,6 +117,7 @@ export function useCoreData(): {
     addGlottologLanguages(languagesBySchema, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageSchema(languagesBySchema, cldrAliases || []);
     addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
+    const variantTags = convertToVariantTagData(ianaVariants || []);
    
     connectLanguagesToParent(languagesBySchema);
     connectTerritoriesToParent(territories);
