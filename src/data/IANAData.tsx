@@ -80,7 +80,7 @@ export function addIANAVariantLocales(
       locales[localeCode] = {
         ID: localeCode,
         languageCode: iso639_3,
-        variantTag: variant.tag,
+        variantTagID: variant.tag,
         nameDisplay: variant.name,
         scope: ScopeLevel.Parts,
         codeDisplay: localeCode,
