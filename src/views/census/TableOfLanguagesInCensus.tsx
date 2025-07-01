@@ -87,7 +87,6 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           CodeColumn,
           {
             key: 'Languages',
-            label: 'Language',
             render: (object) => (
               <HoverableObject object={object.language}>
                 <ObjectFieldHighlightedByPageSearch
@@ -100,14 +99,12 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Population',
-            label: 'Population',
             render: (loc) => loc.populationSpeaking,
             isNumeric: true,
             sortParam: SortBy.Population,
           },
           {
-            key: 'PercentWithinTerritory',
-            label: 'Percent within Territory',
+            key: 'Percent Within Territory',
             render: (loc) =>
               loc.populationSpeakingPercent != null
                 ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
@@ -116,12 +113,11 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Scope',
-            label: 'Scope',
             render: (loc) => loc.language?.scope,
             isNumeric: false,
           },
           {
-            key: 'LocaleEntry',
+            key: 'Locale Entry',
             label: (
               <Hoverable hoverContent="The locale dataset has a canonical population estimate and may refer to estimates from multiple censuses. Hover for the canonical locale entry or click to see more details. The locale dataset does not contain every combination of language + territory so some may not be found.">
                 Locale Entry
@@ -130,7 +126,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             render: getActualLocaleInfoButton,
           },
           {
-            key: 'PopulationDifference',
+            key: 'Population Difference',
             label: (
               <Hoverable hoverContent="The difference the population estimate in this census is compared to the canonical locale population estimate. This compares percentages, so 8.3% - 10.4% is -2.1 pp (percentage points). Values are colored if the difference is more than 10%.">
                 Population Difference

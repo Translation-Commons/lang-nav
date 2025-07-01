@@ -72,8 +72,11 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
         nOverall={objects.length}
         objectType={objects[0]?.type}
       />
-      <div className="column-toggler" style={{ margin: '1rem 0', display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-        <strong>Show/Hide Columns:</strong>
+      <details className="column-toggler" style={{ margin: '1rem 0', gap: '1rem' }}>
+        <summary className="collapsible-summary" style={{ cursor: 'pointer' }}>
+          {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
+        </summary>
+        <div className="column-toggler" style={{ margin: '1rem 0', display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
         {columns.map(column => (
           <label key={column.key} style={{ cursor: 'pointer' }}>
             <input
@@ -85,7 +88,8 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
             {column.label ?? column.key}
           </label>
         ))}
-      </div>
+        </div>
+      </details>
 
       <table className="ObjectTable">
         <thead>
