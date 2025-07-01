@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { connectVariantTags } from './connectVariantTags'; // assuming you put it here
+
 import { CensusID, CensusData } from '../types/CensusTypes';
 import {
   BCP47LocaleCode,
