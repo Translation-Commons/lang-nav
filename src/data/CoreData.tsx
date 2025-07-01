@@ -120,6 +120,7 @@ export function useCoreData(): {
     addCLDRLanguageSchema(languagesBySchema, cldrAliases || []);
     addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
     const variantTags = convertToVariantTagData(ianaVariants || []);
+    connectVariantTags(variantTags, languagesBySchema.Inclusive, locales);
    
     connectLanguagesToParent(languagesBySchema);
     connectTerritoriesToParent(territories);
@@ -142,6 +143,7 @@ export function useCoreData(): {
       locales,
       territories,
       writingSystems,
+      variantTags,
     },
   };
 }
