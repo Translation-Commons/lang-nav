@@ -9,9 +9,10 @@ const PageNavBar: React.FC = () => {
   return (
     <NavBarContainer>
       <NavBarTitle>
-        <a href="/lang-nav/" style={{ fontWeight: 'lighter' }}>
+        <img src="LangNavLogoNavBar.svg" width="60px" alt="LangNav Logo" />
+        <span>
           <strong>Lang</strong>uage <strong>Nav</strong>igator
-        </a>
+        </span>
       </NavBarTitle>
       <ObjectTypeSelector />
       <ViewSelector />
@@ -48,9 +49,15 @@ const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
         whiteSpace: 'nowrap',
         lineHeight: '1.5',
         margin: '0em 0.5em',
+        display: 'flex',
+        alignItems: 'center',
+        marginLeft: '0.25em',
+        gap: '0.25em',
       }}
     >
-      {children}
+      <a href="/lang-nav/" style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
+        {children}
+      </a>
     </h1>
   );
 };

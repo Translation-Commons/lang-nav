@@ -49,7 +49,7 @@ const LeftAlignedPanel: React.FC<React.PropsWithChildren<{ isOpen: boolean }>> =
       style={{
         width: isOpen ? PANEL_WIDTH : '0',
         overflowY: 'scroll',
-        borderRight: '2px solid var(--color-button-border)',
+        borderRight: '2px solid var(--color-button-primary)',
         transition: 'width 0.3s ease-in-out',
         paddingTop: '0.5em',
       }}
@@ -89,7 +89,7 @@ const SidePanelSection: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div
       style={{
-        borderBottom: '0.125em solid var(--color-button-border)',
+        borderBottom: '0.125em solid var(--color-button-primary)',
         width: PANEL_WIDTH,
         padding: '0.25em 0.5em',
         marginBottom: '0.5em',

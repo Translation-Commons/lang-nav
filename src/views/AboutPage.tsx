@@ -7,7 +7,7 @@ import { LanguageSchema } from '../types/LanguageTypes';
 const AboutPage: React.FC = () => {
   return (
     <div className="AboutPage">
-      <h1>About</h1>
+      <LangNavTitle />
       <div style={{ display: 'flex', gap: 10, marginBottom: 20 }}>
         <a href="#motivation">
           <button>Motivation</button>
@@ -29,7 +29,7 @@ const AboutPage: React.FC = () => {
         </a>
       </div>
       <p>
-        The <strong>Lang</strong>uage <strong>Navi</strong>gator is a tool designed to help people
+        The <strong>Lang</strong>uage <strong>Nav</strong>igator is a tool designed to help people
         explore and understand the relationships between different languages. It provides a
         user-friendly interface for visualizing language families, dialects, and other linguistic
         features and how they are situated across the globe.
@@ -264,6 +264,27 @@ const AboutPage: React.FC = () => {
           </dd>
         </dl>
       </div>
+    </div>
+  );
+};
+
+const LangNavTitle: React.FC = () => {
+  return (
+    <div
+      className="logo"
+      style={{
+        alignItems: 'center',
+        display: 'flex',
+        fontSize: '2em',
+        padding: '0.25em',
+        marginBottom: '0.25em',
+        gap: '0.5em',
+      }}
+    >
+      <img src="LangNavLogo.svg" width="120px" height="60px" alt="LangNav Logo" />
+      <span>
+        <strong>Lang</strong>uage <strong>Nav</strong>igator
+      </span>
     </div>
   );
 };
