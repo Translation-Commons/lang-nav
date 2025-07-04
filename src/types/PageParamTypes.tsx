@@ -1,5 +1,5 @@
+import { Granularity } from './GranularityTypes';
 import { LanguageSchema } from './LanguageTypes';
-import { ScopeLevel } from './ScopeLevel';
 
 export enum ObjectType {
   Language = 'Language',
@@ -37,26 +37,26 @@ export enum SearchableField {
 export type LocaleSeparator = '-' | '_';
 
 export type PageParamKey =
-  | 'objectType'
+  | 'granularities'
   | 'languageSchema'
   | 'limit'
   | 'localeSeparator'
   | 'objectID'
+  | 'objectType'
   | 'page'
-  | 'scopes'
-  | 'searchString'
   | 'searchBy'
+  | 'searchString'
   | 'sortBy'
   | 'view';
 
 export type PageParams = {
+  granularities: Granularity[];
   languageSchema: LanguageSchema;
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
   objectID?: string;
   objectType: ObjectType;
   page: number; // 0 indexed
-  scopes: ScopeLevel[];
   searchBy: SearchableField;
   searchString: string;
   sortBy: SortBy;
@@ -64,13 +64,13 @@ export type PageParams = {
 };
 
 export type PageParamsOptional = {
+  granularities?: Granularity[];
   languageSchema?: LanguageSchema;
   limit?: number;
   localeSeparator?: string;
   objectID?: string;
   objectType?: ObjectType;
   page?: number;
-  scopes?: ScopeLevel[];
   searchBy?: SearchableField;
   searchString?: string;
   sortBy?: SortBy;

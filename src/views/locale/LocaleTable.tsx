@@ -4,7 +4,12 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
 import { LocaleData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import {
+  CodeColumn,
+  GranularityColumn,
+  InfoButtonColumn,
+  NameColumn,
+} from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
@@ -19,6 +24,7 @@ const LocaleTable: React.FC = () => {
         (locale) => locale.language?.schemaSpecific[languageSchema].code != null,
       )}
       columns={[
+        GranularityColumn,
         CodeColumn,
         NameColumn,
         {

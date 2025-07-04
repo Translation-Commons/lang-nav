@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../controls/filter';
+import { getGranularityFilter, getSliceFunction, getSubstringFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
@@ -14,11 +14,11 @@ interface Props<T> {
 function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   const sortBy = getSortFunction();
   const filterBySubstring = getSubstringFilter() || (() => true);
-  const filterByScope = getScopeFilter();
+  const filterByGranularity = getGranularityFilter();
   const sliceFunction = getSliceFunction<T>();
 
-  // Filter results);
-  const objectsFiltered = objects.filter(filterByScope).filter(filterBySubstring);
+  // Filter results
+  const objectsFiltered = objects.filter(filterByGranularity).filter(filterBySubstring);
   // Sort results & limit how many are visible
   const objectsVisible = sliceFunction(objectsFiltered.sort(sortBy));
 

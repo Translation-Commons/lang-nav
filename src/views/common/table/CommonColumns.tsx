@@ -1,4 +1,7 @@
+import { getGranularityLabel } from '../../../controls/selectors/GranularitySelector';
+import { toTitleCase } from '../../../generic/stringUtils';
 import { ObjectData } from '../../../types/DataTypes';
+import { getObjectGranularity } from '../../../types/GranularityTypes';
 import { SearchableField, SortBy } from '../../../types/PageParamTypes';
 import HoverableObject from '../HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
@@ -28,4 +31,11 @@ export const InfoButtonColumn: TableColumn<ObjectData> = {
       <button className="InfoButton">&#x24D8;</button>
     </HoverableObject>
   ),
+};
+
+export const GranularityColumn: TableColumn<ObjectData> = {
+  label: 'Granularity',
+  render: (object) =>
+    toTitleCase(getGranularityLabel(object.type, getObjectGranularity(object), 'short')),
+  sortParam: SortBy.Name,
 };
