@@ -22,13 +22,13 @@ const LocaleTable: React.FC = () => {
         CodeColumn,
         NameColumn,
         {
-          label: 'Population',
+          key: 'Population',
           render: (object) => object.populationSpeaking,
           isNumeric: true,
           sortParam: SortBy.Population,
         },
         {
-          label: 'Population Source',
+          key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
         },
         InfoButtonColumn,

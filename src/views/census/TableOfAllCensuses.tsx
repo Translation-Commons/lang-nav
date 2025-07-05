@@ -16,7 +16,7 @@ const TableOfAllCensuses: React.FC = () => {
         CodeColumn,
         NameColumn,
         {
-          label: 'Languages',
+          key: 'Languages',
           render: (census) => census.languageCount,
           isNumeric: true,
           sortParam: SortBy.Population,
