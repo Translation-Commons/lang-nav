@@ -10,6 +10,12 @@
     border-spacing: 12px 0px;
 }
 
+thead {
+    position: sticky;
+    top: 0;
+    background-color: var(--color-background);
+}
+
 .numeric {
     /* align right for both LTR and RTL views */
     text-align: right;
