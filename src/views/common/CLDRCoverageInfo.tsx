@@ -1,4 +1,5 @@
 import React from 'react';
+import { AlertTriangle, CheckCircle2, Info, XCircle } from 'lucide-react';
 
 import Hoverable from '../../generic/Hoverable';
 import { CLDRCoverageLevel } from '../../types/CLDRTypes';
@@ -47,7 +48,10 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
         {cldrCoverage.actualCoverageLevel}
       </span>{' '}
       coverage by {cldrCoverage.countOfCLDRLocales} locale
-      {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU: {cldrCoverage.inICU ? '✅' : '❌'}
+      {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU: {cldrCoverage.inICU ? 
+  <CheckCircle2 style={{ color: 'var(--color-text-green)' }} size={'1em'} /> : 
+  <XCircle style={{ color: 'var(--color-text-red)' }} size={'1em'} />
+}
     </>
   );
 };
@@ -76,7 +80,11 @@ const NotesIcon: React.FC<{
       hoverContent={formattedNotes}
       style={{ textDecoration: 'none', marginRight: '0.25em' }}
     >
-      {warningNotes ? '⚠️' : 'ⓘ'}
+      {warningNotes ? (
+  <AlertTriangle style={{ color: 'var(--color-text-yellow)' }} size={'1em'} />
+) : (
+  <Info style={{ color: 'var(--color-text-blue)' }} size={'1em'} />
+)}
     </Hoverable>
   );
 };

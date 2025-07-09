@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Info } from 'lucide-react';
 
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { ObjectData } from '../../../types/DataTypes';
@@ -77,7 +78,9 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
         )}
         {showInfoButton && (
           <HoverableObject object={object}>
-            <button className="InfoButton">&#x24D8;</button>
+            <button className="InfoButton">
+              <Info size="1em" />
+            </button>
           </HoverableObject>
         )}
         {showPopulation && population > 0 && (

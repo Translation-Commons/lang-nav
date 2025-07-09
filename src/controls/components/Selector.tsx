@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
 import Hoverable from '../../generic/Hoverable';
 
 type Props = {
   appearance?: 'rounded' | 'tabs';
   children: React.ReactNode;
-  selectorLabel?: string;
+  selectorLabel?: ReactNode;
   selectorDescription?: React.ReactNode;
   size?: 'regular' | 'compact';
 };

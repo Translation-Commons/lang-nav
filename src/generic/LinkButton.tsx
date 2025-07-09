@@ -1,4 +1,5 @@
 import React from 'react';
+import { ExternalLink } from 'lucide-react';
 
 export default function LinkButton({
   href,
@@ -11,6 +12,7 @@ export default function LinkButton({
     <a href={href}>
       <button className="LinkButton" role="link">
         {children}
+        <ExternalLink size="1em" style={{ marginLeft: '4px' }} />
       </button>
     </a>
   );

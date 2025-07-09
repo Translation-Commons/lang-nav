@@ -1,4 +1,5 @@
 import React from 'react';
+import { Search } from 'lucide-react';
 
 import { SearchableField, View } from '../../types/PageParamTypes';
 import Selector from '../components/Selector';
@@ -13,7 +14,7 @@ const SearchBar: React.FC = () => {
   const getSearchSuggestions = useSearchSuggestions();
 
   return (
-    <Selector selectorLabel="🔎">
+    <Selector selectorLabel={<Search size="12px" />}>
       <TextInput
         inputStyle={{ minWidth: '20em' }}
         getSuggestions={getSearchSuggestions}
