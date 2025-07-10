@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Search, ExternalLink, X } from 'lucide-react';
+import { Search, ExternalLink, X as XIcon } from 'lucide-react';
 
 import HoverableButton from '../../generic/HoverableButton';
 import { View } from '../../types/PageParamTypes';
@@ -119,7 +119,7 @@ const TextInput: React.FC<Props> = ({
           setShowSuggestions(false);
         }}
       >
-        <X size="12px" style={{ color: 'white' }} />
+        <XIcon size="0.75em" />
       </button>
     </>
   );

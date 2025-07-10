@@ -48,10 +48,12 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
         {cldrCoverage.actualCoverageLevel}
       </span>{' '}
       coverage by {cldrCoverage.countOfCLDRLocales} locale
-      {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU: {cldrCoverage.inICU ? 
-  <CheckCircle2 style={{ color: 'var(--color-text-green)' }} size={'1em'} /> : 
-  <XCircle style={{ color: 'var(--color-text-red)' }} size={'1em'} />
-}
+      {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU:{' '}
+      {cldrCoverage.inICU ? (
+        <CheckCircle2 style={{ color: 'var(--color-text-green)' }} size={'1em'} />
+      ) : (
+        <XCircle style={{ color: 'var(--color-text-red)' }} size={'1em'} />
+      )}
     </>
   );
 };
@@ -81,10 +83,10 @@ const NotesIcon: React.FC<{
       style={{ textDecoration: 'none', marginRight: '0.25em' }}
     >
       {warningNotes ? (
-  <AlertTriangle style={{ color: 'var(--color-text-yellow)' }} size={'1em'} />
-) : (
-  <Info style={{ color: 'var(--color-text-blue)' }} size={'1em'} />
-)}
+        <AlertTriangle style={{ color: 'var(--color-text-yellow)' }} size={'1em'} />
+      ) : (
+        <Info style={{ color: 'var(--color-text-blue)' }} size={'1em'} />
+      )}
     </Hoverable>
   );
 };

@@ -12,7 +12,7 @@ export default function LinkButton({
     <a href={href}>
       <button className="LinkButton" role="link">
         {children}
-        <ExternalLink size="1em" style={{ marginLeft: '4px' }} />
+        <ExternalLink size="1em" style={{ marginLeft: '0.25em' }} />
       </button>
     </a>
   );

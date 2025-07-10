@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { ExternalLink, X } from 'lucide-react';
+import { ExternalLink, X as XIcon } from 'lucide-react';
 
 import { usePageParams } from '../controls/PageParamsContext';
 import Hoverable from '../generic/Hoverable';
@@ -60,7 +60,7 @@ const ViewModal: React.FC = () => {
             </Hoverable>
             <Hoverable hoverContent="Close modal">
               <button onClick={onClose}>
-                <X size="1em" />
+                <XIcon size="1em" />
               </button>
             </Hoverable>
           </div>

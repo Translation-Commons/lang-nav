@@ -4,9 +4,9 @@ import Hoverable from '../../generic/Hoverable';
 
 type Props = {
   appearance?: 'rounded' | 'tabs';
-  children: React.ReactNode;
+  children: ReactNode;
   selectorLabel?: ReactNode;
-  selectorDescription?: React.ReactNode;
+  selectorDescription?: ReactNode;
   size?: 'regular' | 'compact';
 };
 

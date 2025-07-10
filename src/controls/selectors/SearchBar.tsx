@@ -14,7 +14,7 @@ const SearchBar: React.FC = () => {
   const getSearchSuggestions = useSearchSuggestions();
 
   return (
-    <Selector selectorLabel={<Search size="12px" />}>
+    <Selector selectorLabel={<Search size="0.75em" />}>
       <TextInput
         inputStyle={{ minWidth: '20em' }}
         getSuggestions={getSearchSuggestions}
