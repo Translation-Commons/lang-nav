@@ -141,19 +141,11 @@ const AboutPage: React.FC = () => {
         </p>
         <p>
           Icons used in this website are provided by{' '}
-          <a 
-            href="https://lucide.dev" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
+          <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer">
             Lucide
           </a>
           , and are distributed under the ISC License. You can view the license{' '}
-          <a 
-            href="https://lucide.dev/license" 
-            target="_blank" 
-            rel="noopener noreferrer"
-          >
+          <a href="https://lucide.dev/license" target="_blank" rel="noopener noreferrer">
             here
           </a>
           .

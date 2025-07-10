@@ -1,5 +1,5 @@
+import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
 import React from 'react';
-import { AlertTriangle, CheckCircle2, Info, XCircle } from 'lucide-react';
 
 import Hoverable from '../../generic/Hoverable';
 import { CLDRCoverageLevel } from '../../types/CLDRTypes';
@@ -50,9 +50,9 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
       coverage by {cldrCoverage.countOfCLDRLocales} locale
       {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU:{' '}
       {cldrCoverage.inICU ? (
-        <CheckCircle2 style={{ color: 'var(--color-text-green)' }} size={'1em'} />
+        <CheckCircle2Icon style={{ color: 'var(--color-text-green)' }} size={'1em'} />
       ) : (
-        <XCircle style={{ color: 'var(--color-text-red)' }} size={'1em'} />
+        <XCircleIcon style={{ color: 'var(--color-text-red)' }} size={'1em'} />
       )}
     </>
   );
@@ -83,9 +83,9 @@ const NotesIcon: React.FC<{
       style={{ textDecoration: 'none', marginRight: '0.25em' }}
     >
       {warningNotes ? (
-        <AlertTriangle style={{ color: 'var(--color-text-yellow)' }} size={'1em'} />
+        <AlertTriangleIcon style={{ color: 'var(--color-text-yellow)' }} size={'1em'} />
       ) : (
-        <Info style={{ color: 'var(--color-text-blue)' }} size={'1em'} />
+        <InfoIcon style={{ color: 'var(--color-text-blue)' }} size={'1em'} />
       )}
     </Hoverable>
   );

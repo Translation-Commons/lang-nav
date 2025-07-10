@@ -1,4 +1,4 @@
-import { Info } from 'lucide-react';
+import { InfoIcon } from 'lucide-react';
 
 import { ObjectData } from '../../../types/DataTypes';
 import { SearchableField, SortBy } from '../../../types/PageParamTypes';
@@ -28,7 +28,7 @@ export const InfoButtonColumn: TableColumn<ObjectData> = {
   render: (object) => (
     <HoverableObject object={object}>
       <button className="InfoButton">
-        <Info size="1em" />
+        <InfoIcon size="1em" />
       </button>
     </HoverableObject>
   ),

@@ -1,5 +1,5 @@
+import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
-import { Info } from 'lucide-react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
@@ -153,7 +153,7 @@ const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actua
   return (
     <HoverableObject object={actualLocale}>
       <button className="InfoButton">
-        <Info size="1em" />
+        <InfoIcon size="1em" />
       </button>
     </HoverableObject>
   );
