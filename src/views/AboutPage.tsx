@@ -139,6 +139,7 @@ const AboutPage: React.FC = () => {
           long as you give appropriate credit, provide a link to the license, and indicate if
           changes were made.
         </p>
+        <CreativeCommonsLicense />
         <p>
           Icons used in this website are provided by{' '}
           <a href="https://lucide.dev" target="_blank" rel="noopener noreferrer">
@@ -150,7 +151,6 @@ const AboutPage: React.FC = () => {
           </a>
           .
         </p>
-        <CreativeCommonsLicense />
         <p>
           The source code is available in a{' '}
           <a href="https://github.com/Translation-Commons/lang-nav">Github repository</a>. The data

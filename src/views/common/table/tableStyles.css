@@ -44,7 +44,7 @@ thead {
 }
 
 .collapsible-summary:hover {
-  background-color: #2a2a2a; 
+  background-color: var(--color-button-hover); 
 }
 
 .collapsible-summary:focus {

@@ -1,3 +1,4 @@
+import { SkipBackIcon, SkipForwardIcon, StepBackIcon, StepForwardIcon } from 'lucide-react';
 import React from 'react';
 
 import { usePageParams } from '../PageParamsContext';
@@ -15,17 +16,24 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
 
   return (
     <>
-      {' '}
       Page:{' '}
-      <div className="selector compact rounded">
+      <div
+        className="selector compact rounded"
+        style={{
+          marginBottom: 0,
+          display: 'inline-flex',
+          verticalAlign: 'middle',
+          alignItems: 'normal',
+        }}
+      >
         <button onClick={() => updatePageParams({ page: 1 })} disabled={currentPage === 1}>
-          ⏮
+          <SkipBackIcon size="1em" display="block" />
         </button>
         <button
           onClick={() => updatePageParams({ page: Math.max(1, currentPage - 1) })}
           disabled={currentPage === 1}
         >
-          ◀
+          <StepBackIcon size="1em" display="block" />
         </button>
 
         <input
@@ -41,13 +49,13 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
           onClick={() => updatePageParams({ page: Math.min(totalPages, currentPage + 1) })}
           disabled={currentPage >= totalPages}
         >
-          ▶
+          <StepForwardIcon size="1em" display="block" />
         </button>
         <button
           onClick={() => updatePageParams({ page: totalPages })}
           disabled={currentPage === totalPages}
         >
-          ⏭
+          <SkipForwardIcon size="1em" display="block" />
         </button>
       </div>
     </>

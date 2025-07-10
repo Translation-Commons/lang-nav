@@ -119,7 +119,7 @@ const TextInput: React.FC<Props> = ({
           setShowSuggestions(false);
         }}
       >
-        <XIcon size="0.75em" />
+        <XIcon size="1em" display="block" />
       </button>
     </>
   );
@@ -172,13 +172,13 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     <div className="SuggestionRowWithMultipleInteractions">
       <div>{label}</div>
       <HoverableButton hoverContent={<>Filter by &quot;{searchString}&quot;</>} onClick={setFilter}>
-        <SearchIcon size="1em" />
+        <SearchIcon size="1em" display="block" />
       </HoverableButton>
       <HoverableButton
         hoverContent={<>Go to the details page for {searchString}</>}
         onClick={goToDetails}
       >
-        <ExternalLinkIcon size="1em" />
+        <ExternalLinkIcon size="1em" display="block" />
       </HoverableButton>
     </div>
   );

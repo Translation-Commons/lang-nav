@@ -28,7 +28,7 @@ export const InfoButtonColumn: TableColumn<ObjectData> = {
   render: (object) => (
     <HoverableObject object={object}>
       <button className="InfoButton">
-        <InfoIcon size="1em" />
+        <InfoIcon size="1em" display="block" style={{ verticalAlign: 'middle' }} />
       </button>
     </HoverableObject>
   ),

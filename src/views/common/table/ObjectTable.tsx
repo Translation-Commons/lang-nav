@@ -1,3 +1,4 @@
+import { ArrowUpDownIcon } from 'lucide-react';
 import React, { Dispatch, SetStateAction, useMemo, useState, useCallback } from 'react';
 
 import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../../controls/filter';
@@ -34,19 +35,19 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
 
   const [visibleColumns, setVisibleColumns] = useState(() =>
-    Object.fromEntries(columns.map(col => [col.key, true]))
+    Object.fromEntries(columns.map((col) => [col.key, true])),
   );
 
   const toggleColumn = useCallback((columnKey: string) => {
-    setVisibleColumns(prev => ({
+    setVisibleColumns((prev) => ({
       ...prev,
       [columnKey]: !prev[columnKey],
     }));
   }, []);
 
   const currentlyVisibleColumns = useMemo(
-    () => columns.filter(column => visibleColumns[column.key]),
-    [columns, visibleColumns]
+    () => columns.filter((column) => visibleColumns[column.key]),
+    [columns, visibleColumns],
   );
   const sliceFunction = getSliceFunction<T>();
 
@@ -72,29 +73,32 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
         nOverall={objects.length}
         objectType={objects[0]?.type}
       />
-      <details className="column-toggler" style={{ margin: '1rem 0', gap: '1rem' }}>
+      <details className="column-toggler" style={{ margin: '.5em 0', gap: '.5em 1em' }}>
         <summary className="collapsible-summary" style={{ cursor: 'pointer' }}>
           {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
         </summary>
-        <div className="column-toggler" style={{ margin: '1rem 0', display: 'flex', flexWrap: 'wrap', gap: '1rem' }}>
-        {columns.map(column => (
-          <label key={column.key} style={{ cursor: 'pointer' }}>
-            <input
-              type="checkbox"
-              checked={visibleColumns[column.key] || false}
-              onChange={() => toggleColumn(column.key)}
-              style={{ marginRight: '0.5rem' }}
-            />
-            {column.label ?? column.key}
-          </label>
-        ))}
+        <div
+          className="column-toggler"
+          style={{ margin: '1rem 0', display: 'flex', flexWrap: 'wrap', gap: '1em' }}
+        >
+          {columns.map((column) => (
+            <label key={column.key} style={{ cursor: 'pointer' }}>
+              <input
+                type="checkbox"
+                checked={visibleColumns[column.key] || false}
+                onChange={() => toggleColumn(column.key)}
+                style={{ marginRight: '0.5rem' }}
+              />
+              {column.label ?? column.key}
+            </label>
+          ))}
         </div>
       </details>
 
       <table className="ObjectTable">
         <thead>
           <tr>
-            {currentlyVisibleColumns.map(column => (
+            {currentlyVisibleColumns.map((column) => (
               <th key={column.key} style={{ textAlign: 'start' }}>
                 {column.label ?? column.key}
                 <SortButton
@@ -107,8 +111,8 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
         </thead>
         <tbody>
           {sliceFunction(objectsFilteredAndSorted).map((object, i) => (
-            <tr key={(object as any).ID || i}>
-              {currentlyVisibleColumns.map(column => {
+            <tr key={object.ID || i}>
+              {currentlyVisibleColumns.map((column) => {
                 let content = column.render(object);
                 if (typeof content === 'number') {
                   content = content.toLocaleString();
@@ -155,7 +159,7 @@ const SortButton: React.FC<SortButtonProps> = ({ columnSortBy, setSortDirectionI
       hoverContent="Click to sort by this column or to toggle the sort direction."
       onClick={() => onSortButtonClick(columnSortBy)}
     >
-      ⇅
+      <ArrowUpDownIcon size="1em" display="block" />
     </HoverableButton>
   );
 };
