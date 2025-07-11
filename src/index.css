@@ -5,23 +5,23 @@
 }
 
 :root {
-  --color-text: #222;                        /* Primary text color */
+  --color-text: #222; /* Primary text color */
   --color-text-secondary: grey;
   --color-text-highlight: #ffffa1;
-  --color-background: #ffffff;              /* App/page background */
-  
-  --color-button-border: #06d;     /* Button outlines and inactive text */
-  --color-button-primary: #007bff;           /* Bright, clickable primary action */
-  --color-button-secondary: #f0f0f0;         /* Inactive selection options, secondary buttons */
+  --color-background: #ffffff; /* App/page background */
+
+  --color-button-border: #06d; /* Button outlines and inactive text */
+  --color-button-primary: #007bff; /* Bright, clickable primary action */
+  --color-button-secondary: #f0f0f0; /* Inactive selection options, secondary buttons */
   --color-button-hover: #3399ff; /* selector hovered over or active*/
-  
-  --color-shadow: rgba(0, 0, 0, 0.1);        /* Subtle shadow for depth */
-  
-  --color-text-red: #df7e7c;   
+
+  --color-shadow: rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+
+  --color-text-red: #df7e7c;
   --color-text-orange: #fb8c00;
   --color-text-yellow: #fbc02d;
-  --color-text-green: #43a047; 
-  --color-text-blue: #1e88e5;  
+  --color-text-green: #43a047;
+  --color-text-blue: #1e88e5;
   --color-text-purple: #8e24aa;
 }
 
@@ -81,11 +81,12 @@ button {
   font-family: inherit;
   cursor: pointer;
   transition: border-color 0.25s;
-  color:var(--color-text);
+  color: var(--color-text);
   background-color: var(--color-button-secondary);
 }
 
-.unsupported, .deemphasized {
+.unsupported,
+.deemphasized {
   font-style: italic;
   font-weight: lighter;
   color: var(--color-text-secondary);
@@ -104,7 +105,7 @@ footer {
 
 code {
   background-color: var(--color-button-secondary);
-  border-radius: .25em;
+  border-radius: 0.25em;
   padding: 0.25em;
 }
 
@@ -122,11 +123,11 @@ code {
 
     --color-shadow: rgba(255, 255, 255, 0.5);
 
-    --color-text-red: #ff6e6e;  
-    --color-text-orange: #ffb74d;  
-    --color-text-yellow: #ffeb3b;  
-    --color-text-green: #66bb6a;   
-    --color-text-blue: #42a5f5;  
-    --color-text-purple: #ce93d8;  
+    --color-text-red: #ff6e6e;
+    --color-text-orange: #ffb74d;
+    --color-text-yellow: #ffeb3b;
+    --color-text-green: #66bb6a;
+    --color-text-blue: #42a5f5;
+    --color-text-purple: #ce93d8;
   }
 }
