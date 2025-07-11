@@ -1,0 +1,26 @@
+name: Check Style
+description: Check code style using ESLint and Prettier on pull requests to ensure code quality and consistency.
+
+on:
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  lint-format:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Run Prettier check
+        run: npx prettier --check .
+
+      - name: Run ESLint
+        run: npx eslint . --ext .ts,.tsx
