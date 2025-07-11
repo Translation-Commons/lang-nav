@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { usePageParams } from '../controls/PageParamsContext';
+import { ObjectType } from '../types/PageParamTypes';
 
 import DubiousLanguages from './language/DubiousLanguages';
 import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
@@ -13,22 +14,29 @@ import PotentialLocales from './locale/PotentialLocales';
 const ViewReports: React.FC = () => {
   const { objectType } = usePageParams();
 
-  let reports: React.ReactNode = 'There are no reports for this object type.';
+  return (
+    <div className="ViewReports">
+      <ReportsForObjectType objectType={objectType} />
+    </div>
+  );
+};
+
+const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   switch (objectType) {
-    case 'Locale':
-      reports = <PotentialLocales />;
-      break;
-    case 'Language':
-      reports = (
+    case ObjectType.Locale:
+      return <PotentialLocales />;
+    case ObjectType.Language:
+      return (
         <>
           <DubiousLanguages />
           <LanguagesWithIdenticalNames key="1" />
         </>
       );
-      break;
+    case ObjectType.Census:
+    case ObjectType.Territory:
+    case ObjectType.WritingSystem:
+      return <div>There are no reports for this object type.</div>;
   }
-
-  return <div className="ViewReports">{reports}</div>;
 };
 
 export default ViewReports;

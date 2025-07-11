@@ -143,7 +143,7 @@ const PotentialLocales: React.FC = () => {
           value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}
         />
       </Selector>
-      <details>
+      <details className="collapsible-report">
         <summary>Indigenous ({partitionedLocales.indigenous.length})</summary>
         Of all of the census records collected so far, these locales have more people speaking it
         than the other instantiated locales. This likely means the world population is indigenous to
@@ -153,13 +153,13 @@ const PotentialLocales: React.FC = () => {
         actually have the language but represented by a different aspect.
         <LocaleTable locales={partitionedLocales.indigenous} />
       </details>
-      <details>
+      <details className="collapsible-report">
         <summary>Large Population ({partitionedLocales.largePopulation.length})</summary>
         This is the list of locales native to other countries, but with a significant population in
         other countries.
         <LocaleTable locales={partitionedLocales.largePopulation} />
       </details>
-      <details>
+      <details className="collapsible-report">
         <summary>Likely Redundant ({partitionedLocales.maybeRedundant.length})</summary>
         Locales in this table reflect languages that already exist in territories but not in this
         specific locale ID. For example, they may have an entry with a writing system specified.
@@ -179,13 +179,13 @@ const LocaleTable: React.FC<{
         CodeColumn,
         NameColumn,
         {
-          label: 'Population',
+          key: 'Population',
           render: (object) => object.populationSpeaking,
           isNumeric: true,
           sortParam: SortBy.Population,
         },
         {
-          label: 'Population Source',
+          key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
         },
         InfoButtonColumn,

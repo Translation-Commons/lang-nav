@@ -26,7 +26,7 @@ const DubiousLanguages: React.FC = () => {
     .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]'));
 
   return (
-    <details>
+    <details className="collapsible-report">
       <summary>Dubious languages ({languages.length})</summary>
       These languages have strange language codes and maybe should be removed from the list of
       languages. Some possibilities are:
