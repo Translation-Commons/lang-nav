@@ -1,50 +1,50 @@
 .ObjectTableContainer {
-    display: flex; 
-    align-items: center;
-    flex-direction: column;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
 .ObjectTable {
-    width: fit-content;
-    text-align: start;
-    border-spacing: 12px 0px;
+  width: fit-content;
+  text-align: start;
+  border-spacing: 12px 0px;
 }
 
 thead {
-    position: sticky;
-    top: 0;
-    background-color: var(--color-background);
+  position: sticky;
+  top: 0;
+  background-color: var(--color-background);
 }
 
 .numeric {
-    /* align right for both LTR and RTL views */
-    text-align: right;
+  /* align right for both LTR and RTL views */
+  text-align: right;
 
-    /* equalize the character width */
-    font-family: Avenir, 'Courier New', monospace;
+  /* equalize the character width */
+  font-family: Avenir, 'Courier New', monospace;
 }
 
 .sort {
-    display: inline-block;
-    margin: 0;
-    margin-left: 4px;
-    padding: 2px;
-    border-radius: 2px;
+  display: inline-block;
+  margin: 0;
+  margin-left: 4px;
+  padding: 2px;
+  border-radius: 2px;
 }
 
 .sort.active {
-    background-color: var(--color-button-primary);
-    color: var(--color-background);
+  background-color: var(--color-button-primary);
+  color: var(--color-background);
 }
 
 .collapsible-summary {
-  padding: 4px 8px; 
+  padding: 4px 8px;
   border-radius: 4px;
   transition: background-color 0.2s ease-in-out;
 }
 
 .collapsible-summary:hover {
-  background-color: var(--color-button-hover); 
+  background-color: var(--color-button-hover);
 }
 
 .collapsible-summary:focus {

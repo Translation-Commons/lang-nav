@@ -1,4 +1,3 @@
-import { LanguageModality } from '../types/LanguageTypes';
 import { separateTitleAndSubtitle } from '../generic/stringUtils';
 import {
   LocaleData,
@@ -7,6 +6,7 @@ import {
   WritingSystemData,
   WritingSystemScope,
 } from '../types/DataTypes';
+import { LanguageModality } from '../types/LanguageTypes';
 import { LanguageData } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 import { ScopeLevel } from '../types/ScopeLevel';

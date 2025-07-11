@@ -1,34 +1,32 @@
-
-
 .seeMore {
-    margin: 0px;
-    padding: 0.25em .5em;
-    font-weight: normal;
+  margin: 0px;
+  padding: 0.25em 0.5em;
+  font-weight: normal;
 }
 
 .HoverCard {
-    background: var(--color-background);
-    border-radius: 0.5em;
-    padding: 0.8em 1em;
-    margin: 0.5em;
-    position: fixed;
-    border: 1px solid var(--color-button-secondary);
-    box-shadow: 0 4px 12px var(--color-shadow);
-    pointer-events: none;
-    z-index: 9999;
-    max-width: 30%;
-    text-align: start;
+  background: var(--color-background);
+  border-radius: 0.5em;
+  padding: 0.8em 1em;
+  margin: 0.5em;
+  position: fixed;
+  border: 1px solid var(--color-button-secondary);
+  box-shadow: 0 4px 12px var(--color-shadow);
+  pointer-events: none;
+  z-index: 9999;
+  max-width: 30%;
+  text-align: start;
 }
 
 .HoverCard h3 {
-    /* It's at the top of the card already */
-    margin-top: 0px;
+  /* It's at the top of the card already */
+  margin-top: 0px;
 }
 
 .highlighted {
-    background: var(--color-text-highlight);
+  background: var(--color-text-highlight);
 }
 
 button:hover .highlighted {
-    color: var(--color-text);
+  color: var(--color-text);
 }

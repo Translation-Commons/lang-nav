@@ -14,20 +14,22 @@ There are multiple ways to visualize the data
 ### Motivation
 
 This website was put together to give an overview of the world's languages and language-related concepts. Similar to Ethnologue & Glottolog, the main differences of this are to:
-* **Free** & open to all consumers.
-* Show **all data**, even contested language definitions. Making sure to put contested data in context.
-* Provide **actionable insights** -- make sure the data is clear enough that consumers can come to this page to get answers.
+
+- **Free** & open to all consumers.
+- Show **all data**, even contested language definitions. Making sure to put contested data in context.
+- Provide **actionable insights** -- make sure the data is clear enough that consumers can come to this page to get answers.
 
 Common questions people will come to this resource for are:
-* What's the language code for XXXX?
-* What languages are used in country YYYY?
-* What are the top languages in the world *given some criteria*.
+
+- What's the language code for XXXX?
+- What languages are used in country YYYY?
+- What are the top languages in the world _given some criteria_.
 
 ### Tech Stack
 
-* **Frontend**: The website is rendered in Javascript, particularly React using Typescript.
-* **Backend**: The framework of the website Node and Vite.
-* **Data**: Data files are written in Tab-separated-value format (tsv).
+- **Frontend**: The website is rendered in Javascript, particularly React using Typescript.
+- **Backend**: The framework of the website Node and Vite.
+- **Data**: Data files are written in Tab-separated-value format (tsv).
 
 ### Partners
 
@@ -51,25 +53,25 @@ In order to generate the website on an internal server, follow these instruction
 In order to push the changes to the deployed website (github pages site), follow these instructions.
 
 1. Run `npm run deploy` to deploy the changes. This will
-    1. Build the app into the dist/ folder.
-    2. Push the dist/ contents to the gh-pages branch.
+   1. Build the app into the dist/ folder.
+   2. Push the dist/ contents to the gh-pages branch.
 
 ### Initialization
 
 This is how we created the project originally -- you should not need to run these, but its for background.
 
 2. Initalize the project using vite `npm create vite@latest`
-  1. Choose `lang-nav` as project name. Then React + TypeScript
-3. Change into the `lang-nav` directory and run `npm install`
-4. Setup the linter
-  1. Initialize `npx eslint --init`
-  2. Choose options: what: javascript, use: problems, modules: esm, framework: react, typescript: yes, runs on: browser
-  3. `npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier`
-  4. More magic to get it to run... I had to install ESLint on my IDE (VSCode)
-  5. Some plugins were added after the this library was started like `eslint-plugin-import`
-5. Import other lirbaries
+1. Choose `lang-nav` as project name. Then React + TypeScript
+1. Change into the `lang-nav` directory and run `npm install`
+1. Setup the linter
+1. Initialize `npx eslint --init`
+1. Choose options: what: javascript, use: problems, modules: esm, framework: react, typescript: yes, runs on: browser
+1. `npm install --save-dev prettier eslint-config-prettier eslint-plugin-prettier`
+1. More magic to get it to run... I had to install ESLint on my IDE (VSCode)
+1. Some plugins were added after the this library was started like `eslint-plugin-import`
+1. Import other lirbaries
    1. `npm install react-router-dom`
-6. Start `npm run dev`
+1. Start `npm run dev`
 
 ## How to contribute
 
@@ -77,7 +79,7 @@ This is how we created the project originally -- you should not need to run thes
 
 There's a lot of data shown here but there always could be more. The main way to add or update data is to go to the Tab-separated files directly. They are all in the [public/data](public/data) directory.
 
-If you want to add entries or update values, you can just edit the existing TSVs. 
+If you want to add entries or update values, you can just edit the existing TSVs.
 
 However, if you want to add a lot more data or add contested data it may be better to make new TSVs and then update the website to use those instead.
 
@@ -143,7 +145,7 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [x] Limit
     - [x] Pagination
   - [x] Visual options
-    - [x] Change locale separator (_ or -)
+    - [x] Change locale separator (\_ or -)
   - [ ] Selection
   - [ ] Export
 - [ ] Manage data sources

@@ -27,7 +27,7 @@ const LanguageTable: React.FC = () => {
           render: (lang) => lang.scope ?? lang.scope,
         },
         {
-          key: 'Population', 
+          key: 'Population',
           render: (lang) => lang.populationCited,
           isNumeric: true,
           sortParam: SortBy.Population,

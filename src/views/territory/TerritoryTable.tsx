@@ -17,8 +17,8 @@ const TerritoryTable: React.FC = () => {
       columns={[
         CodeColumn,
         NameColumn,
-        { 
-          key : 'Population',
+        {
+          key: 'Population',
           render: (object) => object.population,
           isNumeric: true,
           sortParam: SortBy.Population,

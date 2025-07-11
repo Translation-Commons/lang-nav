@@ -3,7 +3,7 @@ description: Check code style using ESLint and Prettier on pull requests to ensu
 
 on:
   pull_request:
-    branches: [ "master" ]
+    branches: ['master']
 
 jobs:
   lint-format:
@@ -20,7 +20,7 @@ jobs:
       - run: npm ci
 
       - name: Run Prettier check
-        run: npx prettier --check .
+        run: npx prettier --check . # To auto-fix issues, use --write instead of --check
 
       - name: Run ESLint
-        run: npx eslint . --ext .ts,.tsx
+        run: npx eslint src --ext .ts,.tsx # To auto-fix issues, add --fix
