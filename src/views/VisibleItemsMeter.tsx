@@ -41,7 +41,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ nShown, nFiltered, nOverall, objec
       <div style={{ display: 'inline-block' }}>
         Showing <strong>{nShown}</strong>
         {nOverall > nShown && <> of {<strong>{nOverall}</strong>}</>}{' '}
-        <ObjectTypeLabel manualObjectType={objectType} />.
+        <ObjectTypeLabel manualObjectType={objectType} />.{' '}
         <PaginationControls
           currentPage={page}
           totalPages={limit < 1 ? 1 : Math.ceil(nFiltered / limit)}
@@ -51,10 +51,10 @@ const VisibleItemsMeter: React.FC<Props> = ({ nShown, nFiltered, nOverall, objec
   }
 
   return (
-    <div style={{ display: 'inline-block' }}>
+    <div>
       Showing <strong>{nShown}</strong>
       {nFiltered > nShown && <> of {<strong>{nFiltered}</strong>}</>} filtered{' '}
-      <ObjectTypeLabel manualObjectType={objectType} />.{nOverall > nFiltered && totalItemsLoaded}
+      <ObjectTypeLabel manualObjectType={objectType} />.{nOverall > nFiltered && totalItemsLoaded}{' '}
       <PaginationControls
         currentPage={page}
         totalPages={limit < 1 ? 1 : Math.ceil(nFiltered / limit)}

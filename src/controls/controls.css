@@ -34,6 +34,8 @@
 
 .Options {
     margin: 0 1em;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .selector.tabs button, .selector.tabs input, .selector.tabs label {
@@ -58,7 +60,7 @@
 .selector {
     margin-left: 0.125em;
     margin-right: 0.5em;
-    display: inline-flex;
+    display: flex;
     align-items: end;
     margin-bottom: 0.5em;
 }

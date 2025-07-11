@@ -1,5 +1,5 @@
+import { SearchIcon, ExternalLinkIcon, XIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
-import { Search, ExternalLink, X as XIcon } from 'lucide-react';
 
 import HoverableButton from '../../generic/HoverableButton';
 import { View } from '../../types/PageParamTypes';
@@ -119,7 +119,7 @@ const TextInput: React.FC<Props> = ({
           setShowSuggestions(false);
         }}
       >
-        <XIcon size="0.75em" />
+        <XIcon size="1em" display="block" />
       </button>
     </>
   );
@@ -172,13 +172,13 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     <div className="SuggestionRowWithMultipleInteractions">
       <div>{label}</div>
       <HoverableButton hoverContent={<>Filter by &quot;{searchString}&quot;</>} onClick={setFilter}>
-        <Search size="1em" />
+        <SearchIcon size="1em" display="block" />
       </HoverableButton>
       <HoverableButton
         hoverContent={<>Go to the details page for {searchString}</>}
         onClick={goToDetails}
       >
-        <ExternalLink size="1em" />
+        <ExternalLinkIcon size="1em" display="block" />
       </HoverableButton>
     </div>
   );
