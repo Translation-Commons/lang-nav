@@ -34,7 +34,7 @@ jobs:
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
-          commit_message: 'Style: auto-format with Prettier'
+          commit_message: 'Style: auto-fix with prettier and eslint'
           commit_user_name: 'LangNav Bot'
           commit_user_email: 'noreply@github.com'
           skip_dirty_check: false
