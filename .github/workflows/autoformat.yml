@@ -1,0 +1,40 @@
+name: Auto-format code
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+
+jobs:
+  format:
+    if: github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - run: npm ci
+
+      - name: Run Prettier (auto-fix)
+        run: npx prettier --write .
+
+      - name: Run ESLint (auto-fix)
+        run: npx eslint src --ext .ts,.tsx --fix
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Style: auto-fix with prettier and eslint'
+          commit_user_name: 'LangNav Bot'
+          commit_user_email: 'noreply@github.com'
+          skip_dirty_check: false
