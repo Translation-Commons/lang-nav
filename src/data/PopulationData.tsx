@@ -75,7 +75,10 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
         // potentially different years, we use the population percent of the contained locales
         // and compute the current population based on the latest population of the territory.
         (sum, loc) =>
-          sum + ((loc.populationSpeakingPercent || 0) * (loc.territory?.population || 0)) / 100,
+          sum +
+          Math.round(
+            ((loc.populationSpeakingPercent || 0) * (loc.territory?.population || 0)) / 100,
+          ),
         0,
       ) || 0;
     // The percent needs to be aggregated relative to the size of the child territory in the parent territory
@@ -83,8 +86,10 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
       locale.containedLocales?.reduce(
         (sum, loc) =>
           sum +
-          ((loc.populationSpeakingPercent || 0) * (loc.territory?.population || 0)) /
-            territory.population,
+          Math.round(
+            ((loc.populationSpeakingPercent || 0) * (loc.territory?.population || 0)) /
+              territory.population,
+          ),
         0,
       ) || 0;
   });
