@@ -28,7 +28,6 @@ interface Props<T> {
  * A page that shows tips about problems in the data that may need to be addressed
  */
 function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
-  const { limit } = usePageParams();
   const sortBy = getSortFunction();
   const substringFilter = getSubstringFilter();
   const scopeFilter = getScopeFilter();
@@ -52,7 +51,7 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
-    let result = objects.filter(substringFilter ?? (() => true)).filter(scopeFilter);
+    let result = objects.filter(scopeFilter).filter(substringFilter ?? (() => true));
     if (sortDirectionIsNormal) {
       result = result.sort(sortBy);
     } else {
@@ -60,6 +59,16 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
     }
     return result;
   }, [sortBy, objects, substringFilter, scopeFilter, sortDirectionIsNormal]);
+
+  const nObjectsFilteredByScope = useMemo(
+    () => objects.length - objects.filter(scopeFilter).length,
+    [objects, scopeFilter],
+  );
+  const nObjectsFilteredBySubstring = useMemo(
+    () => objects.length - nObjectsFilteredByScope - objectsFilteredAndSorted.length,
+    [objects, nObjectsFilteredByScope, objectsFilteredAndSorted],
+  );
+
   const nRowsAfterFilter = useMemo(
     () => objectsFilteredAndSorted.length,
     [objectsFilteredAndSorted],
@@ -68,10 +77,18 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   return (
     <div className="ObjectTableContainer">
       <VisibleItemsMeter
-        nShown={nRowsAfterFilter < limit || limit < 1 ? nRowsAfterFilter : limit}
         nFiltered={nRowsAfterFilter}
         nOverall={objects.length}
-        objectType={objects[0]?.type}
+        filterReason={
+          <>
+            {nObjectsFilteredByScope > 0 && (
+              <div>Out of scope: {nObjectsFilteredByScope.toLocaleString()}</div>
+            )}
+            {nObjectsFilteredBySubstring > 0 && (
+              <div>Not matching substring: {nObjectsFilteredBySubstring.toLocaleString()}</div>
+            )}
+          </>
+        }
       />
       <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
         <summary style={{ cursor: 'pointer' }}>
