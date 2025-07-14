@@ -82,6 +82,7 @@ export function parseLocaleLine(line: string): LocaleData {
     codeDisplay: parts[0],
     // All locales from the locale input file should be at the country or smaller level
     scope: variantTag ? ScopeLevel.Parts : ScopeLevel.Individuals,
+    localeSource: 'regularInput',
 
     nameDisplay: parts[1],
     nameEndonym: parts[2] != '' ? parts[2] : undefined,

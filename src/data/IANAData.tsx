@@ -65,6 +65,7 @@ export function addIANAVariantLocales(
         variantTag: variant.tag,
         nameDisplay: variant.name,
         scope: ScopeLevel.Parts,
+        localeSource: 'IANA',
         codeDisplay: localeCode,
         type: ObjectType.Locale,
         populationSource: PopulationSourceCategory.NoSource,

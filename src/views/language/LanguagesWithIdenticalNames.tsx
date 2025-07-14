@@ -44,7 +44,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
   );
 
   return (
-    <details>
+    <details className="collapsible-report">
       <summary>Languages with identical names ({Object.keys(langsWithDupNames).length})</summary>
       The following languages have identical names. This can happen when merging data from multiple
       sources. It gets confusing to find the right language when names overlap. To fix this we

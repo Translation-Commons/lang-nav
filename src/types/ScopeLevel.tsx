@@ -43,7 +43,7 @@ export function getLanguageScopeLevel(lang: LanguageData): ScopeLevel {
   return ScopeLevel.Other;
 }
 
-function getTerritoryScopeLevel(territory: TerritoryData): ScopeLevel {
+export function getTerritoryScopeLevel(territory: TerritoryData): ScopeLevel {
   switch (territory.territoryType) {
     case TerritoryType.World:
     case TerritoryType.Continent:

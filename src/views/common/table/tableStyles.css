@@ -37,16 +37,16 @@ thead {
   color: var(--color-background);
 }
 
-.collapsible-summary {
+summary {
   padding: 4px 8px;
   border-radius: 4px;
   transition: background-color 0.2s ease-in-out;
 }
 
-.collapsible-summary:hover {
+summary:hover {
   background-color: var(--color-button-hover);
 }
 
-.collapsible-summary:focus {
+summary:focus {
   outline: none;
 }

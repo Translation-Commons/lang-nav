@@ -73,14 +73,11 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
         nOverall={objects.length}
         objectType={objects[0]?.type}
       />
-      <details className="column-toggler" style={{ margin: '.5em 0', gap: '.5em 1em' }}>
-        <summary className="collapsible-summary" style={{ cursor: 'pointer' }}>
+      <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
+        <summary style={{ cursor: 'pointer' }}>
           {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
         </summary>
-        <div
-          className="column-toggler"
-          style={{ margin: '1rem 0', display: 'flex', flexWrap: 'wrap', gap: '1em' }}
-        >
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5em' }}>
           {columns.map((column) => (
             <label key={column.key} style={{ cursor: 'pointer' }}>
               <input

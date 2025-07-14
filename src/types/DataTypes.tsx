@@ -133,6 +133,7 @@ export interface LocaleData extends ObjectBase {
   ID: BCP47LocaleCode;
   codeDisplay: BCP47LocaleCode; // Changes based on the language schema
   scope: ScopeLevel;
+  localeSource: 'regularInput' | 'IANA' | 'census'; // Whether this locale is listed in the the regular locale list or not
 
   nameDisplay: string;
   nameEndonym?: string;
