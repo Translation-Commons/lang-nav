@@ -7,10 +7,14 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { CensusData } from '../../types/CensusTypes';
-import { BCP47LocaleCode, LocaleData, PopulationSourceCategory } from '../../types/DataTypes';
+import {
+  BCP47LocaleCode,
+  isTerritoryGroup,
+  LocaleData,
+  PopulationSourceCategory,
+} from '../../types/DataTypes';
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
 import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
-import { getLanguageScopeLevel, getTerritoryScopeLevel, ScopeLevel } from '../../types/ScopeLevel';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { InfoButtonColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
@@ -215,7 +219,6 @@ function getPotentialLocales(
               language: lang,
               nameDisplay: lang.nameDisplay,
               names: lang.names,
-              scope: getLanguageScopeLevel(lang) ?? ScopeLevel.Other,
 
               territory: census.territory,
               territoryCode: census.isoRegionCode,
@@ -250,10 +253,8 @@ function getPotentialLocales(
     return [...Object.values(locales), ...Object.values(allMissingLocales)].reduce<
       Record<LanguageCode, LocaleData[]>
     >((byLanguage, locale) => {
-      if (
-        locale.territory == null ||
-        getTerritoryScopeLevel(locale.territory) === ScopeLevel.Groups
-      ) {
+      const territoryScope = locale.territory?.scope;
+      if (isTerritoryGroup(territoryScope)) {
         return byLanguage; // Skip regional locales, censuses are not at the regional level
       }
 

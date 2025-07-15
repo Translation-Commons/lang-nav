@@ -60,7 +60,7 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Type',
-          render: (object) => object.territoryType,
+          render: (object) => object.scope,
         },
         InfoButtonColumn,
       ]}

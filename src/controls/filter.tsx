@@ -1,7 +1,7 @@
 import { anyWordStartsWith } from '../generic/stringUtils';
-import { ObjectData, TerritoryData } from '../types/DataTypes';
+import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '../types/DataTypes';
+import { LanguageScope } from '../types/LanguageTypes';
 import { ObjectType, SearchableField } from '../types/PageParamTypes';
-import { getObjectScopeLevel } from '../types/ScopeLevel';
 import { getSearchableField } from '../views/common/ObjectField';
 
 import { usePageParams } from './PageParamsContext';
@@ -63,15 +63,42 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
  * Provides a function that filters on the scope of an object
  */
 export function getScopeFilter(): FilterFunctionType {
-  const { scopes } = usePageParams();
+  const { languageScopes, territoryScopes } = usePageParams();
 
   function scopeFilter(object: ObjectData) {
-    if (scopes.length == 0) {
-      return true;
+    switch (object.type) {
+      case ObjectType.Language:
+        return (
+          languageScopes.length == 0 ||
+          languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
+        );
+      case ObjectType.Territory:
+        return territoryScopes.length == 0 || territoryScopes.includes(object.scope);
+      case ObjectType.Locale:
+        return doesLocaleMatchScope(object, languageScopes, territoryScopes);
+      case ObjectType.Census:
+      case ObjectType.WritingSystem:
+        return true;
     }
-    return scopes.includes(getObjectScopeLevel(object));
   }
   return scopeFilter;
+}
+
+function doesLocaleMatchScope(
+  locale: LocaleData,
+  languageScopes: LanguageScope[],
+  territoryScopes: TerritoryScope[],
+): boolean {
+  const languageMatches = languageScopes.includes(
+    locale.language?.scope ?? LanguageScope.SpecialCode,
+  );
+  const territoryMatches = territoryScopes.includes(
+    locale.territory?.scope ?? TerritoryScope.Country,
+  );
+  return (
+    (languageScopes.length == 0 || languageMatches) &&
+    (territoryScopes.length == 0 || territoryMatches)
+  );
 }
 
 export function getSliceFunction<T>(): (arr: T[]) => T[] {

@@ -4,7 +4,7 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { uniqueBy } from '../../generic/setUtils';
-import { TerritoryType } from '../../types/DataTypes';
+import { TerritoryScope } from '../../types/DataTypes';
 import { LanguageData } from '../../types/LanguageTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
@@ -19,7 +19,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
   const sortFunction = getSortFunction();
   const { ID, locales, modality, populationCited, vitalityEth2013 } = lang;
   const countryLocales = uniqueBy(
-    locales.filter((l) => l.territory?.territoryType == TerritoryType.Country).sort(sortFunction),
+    locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode,
   );
 

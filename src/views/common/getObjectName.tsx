@@ -18,7 +18,7 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
     case ObjectType.Locale:
       return undefined;
     case ObjectType.Territory:
-      return object.territoryType;
+      return object.scope;
     case ObjectType.WritingSystem:
       return object.nameDisplay != object.nameFull ? object.nameFull : undefined;
   }
