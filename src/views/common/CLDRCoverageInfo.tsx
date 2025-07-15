@@ -1,6 +1,7 @@
 import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
 import React from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import { CLDRCoverageLevel } from '../../types/CLDRTypes';
 import { LocaleData } from '../../types/DataTypes';
