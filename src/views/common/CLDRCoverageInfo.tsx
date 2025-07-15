@@ -35,7 +35,7 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
     return (
       <>
         <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />
-        <span className="unsupported">Not supported by CLDR or ICU.</span>
+        <Deemphasized>Not supported by CLDR or ICU.</Deemphasized>
       </>
     );
   }
