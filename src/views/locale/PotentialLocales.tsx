@@ -9,10 +9,10 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { CensusData } from '../../types/CensusTypes';
 import {
   BCP47LocaleCode,
+  isTerritoryGroup,
   LocaleData,
   PopulationSourceCategory,
   TerritoryCode,
-  TerritoryScope,
 } from '../../types/DataTypes';
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
 import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
@@ -255,10 +255,7 @@ function getPotentialLocales(
       Record<LanguageCode, LocaleData[]>
     >((byLanguage, locale) => {
       const territoryScope = locale.territory?.scope;
-      if (
-        territoryScope === TerritoryScope.Country ||
-        territoryScope === TerritoryScope.Dependency
-      ) {
+      if (isTerritoryGroup(territoryScope)) {
         return byLanguage; // Skip regional locales, censuses are not at the regional level
       }
 

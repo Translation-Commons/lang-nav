@@ -1,5 +1,5 @@
 import { anyWordStartsWith } from '../generic/stringUtils';
-import { ObjectData, TerritoryData, TerritoryScope } from '../types/DataTypes';
+import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '../types/DataTypes';
 import { LanguageScope } from '../types/LanguageTypes';
 import { ObjectType, SearchableField } from '../types/PageParamTypes';
 import { getSearchableField } from '../views/common/ObjectField';
@@ -75,17 +75,30 @@ export function getScopeFilter(): FilterFunctionType {
       case ObjectType.Territory:
         return territoryScopes.length == 0 || territoryScopes.includes(object.scope);
       case ObjectType.Locale:
-        return (
-          (languageScopes.length == 0 && territoryScopes.length == 0) ||
-          (languageScopes.includes(object.language?.scope ?? LanguageScope.SpecialCode) &&
-            territoryScopes.includes(object.territory?.scope ?? TerritoryScope.Dependency))
-        );
+        return doesLocaleMatchScope(object, languageScopes, territoryScopes);
       case ObjectType.Census:
       case ObjectType.WritingSystem:
         return true;
     }
   }
   return scopeFilter;
+}
+
+function doesLocaleMatchScope(
+  locale: LocaleData,
+  languageScopes: LanguageScope[],
+  territoryScopes: TerritoryScope[],
+): boolean {
+  const languageMatches = languageScopes.includes(
+    locale.language?.scope ?? LanguageScope.SpecialCode,
+  );
+  const territoryMatches = territoryScopes.includes(
+    locale.territory?.scope ?? TerritoryScope.Country,
+  );
+  return (
+    (languageScopes.length == 0 || languageMatches) &&
+    (territoryScopes.length == 0 || territoryMatches)
+  );
 }
 
 export function getSliceFunction<T>(): (arr: T[]) => T[] {
