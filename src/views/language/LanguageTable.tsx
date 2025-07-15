@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import { getScopeFilter } from '../../controls/filter';
 import { useDataContext } from '../../data/DataContext';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
@@ -10,15 +9,10 @@ import ObjectTable from '../common/table/ObjectTable';
 
 const LanguageTable: React.FC = () => {
   const { languages } = useDataContext();
-  const scopeFilter = getScopeFilter();
-  const languagesFiltered = useMemo(
-    () => Object.values(languages).filter(scopeFilter),
-    [scopeFilter],
-  );
 
   return (
     <ObjectTable<LanguageData>
-      objects={languagesFiltered}
+      objects={Object.values(languages)}
       columns={[
         CodeColumn,
         NameColumn,

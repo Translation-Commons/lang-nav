@@ -133,6 +133,14 @@ dt {
   margin-bottom: 1em;
 }
 
+.VisibleItemsMeter {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25em;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 @media (min-width: 0px) {
   .CardList {
     grid-template-columns: repeat(1, 1fr);

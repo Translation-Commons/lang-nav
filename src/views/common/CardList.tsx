@@ -19,6 +19,10 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
 
   // Filter results);
   const objectsFiltered = objects.filter(filterByScope).filter(filterBySubstring);
+  const objectsOutOfScope = objects.filter((object) => !filterByScope(object));
+  const objectsNotMatchingSubstring = objects
+    .filter(filterByScope)
+    .filter((object) => !filterBySubstring(object));
   // Sort results & limit how many are visible
   const objectsVisible = sliceFunction(objectsFiltered.sort(sortBy));
 
@@ -26,7 +30,18 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
     <div>
       <div className="CardListDescription">
         <VisibleItemsMeter
-          nShown={objectsVisible.length}
+          filterReason={
+            <>
+              {objectsOutOfScope.length > 0 && (
+                <div>Out of scope: {objectsOutOfScope.length.toLocaleString()}</div>
+              )}
+              {objectsNotMatchingSubstring.length > 0 && (
+                <div>
+                  Not matching substring: {objectsNotMatchingSubstring.length.toLocaleString()}
+                </div>
+              )}
+            </>
+          }
           nFiltered={objectsFiltered.length}
           nOverall={objects.length}
         />
