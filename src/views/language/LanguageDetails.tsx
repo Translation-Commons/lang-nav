@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
-import Deemphasized from '../../generic/Deemphasized';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
+import Deemphasized from '../../generic/Deemphasized';
 import LinkButton from '../../generic/LinkButton';
 import { LanguageData } from '../../types/LanguageTypes';
 import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
