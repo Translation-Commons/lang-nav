@@ -1,7 +1,6 @@
 import { LocaleData, PopulationSourceCategory } from '../types/DataTypes';
 import { LanguagesBySchema } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
-import { ScopeLevel } from '../types/ScopeLevel';
 
 export interface IANAVariantData {
   tag: string;
@@ -64,7 +63,6 @@ export function addIANAVariantLocales(
         languageCode: iso639_3,
         variantTag: variant.tag,
         nameDisplay: variant.name,
-        scope: ScopeLevel.Parts,
         localeSource: 'IANA',
         codeDisplay: localeCode,
         type: ObjectType.Locale,

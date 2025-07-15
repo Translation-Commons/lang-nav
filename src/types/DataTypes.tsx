@@ -5,7 +5,6 @@
 import { CensusData } from './CensusTypes';
 import { LanguageCode, LanguageData } from './LanguageTypes';
 import { ObjectType } from './PageParamTypes';
-import { ScopeLevel } from './ScopeLevel';
 
 export interface ObjectBase {
   readonly type: ObjectType;
@@ -23,7 +22,7 @@ export type TerritoryCode = ISO3166Code | UNM49Code;
 export type ISO3166Code = string; // ISO 3166-1 alpha-2 code, eg. US, CA, etc.
 export type UNM49Code = string; // UN M49 code, eg. 001, 150, 419, etc.
 
-export enum TerritoryType {
+export enum TerritoryScope {
   World = 'World',
   Continent = 'Continent',
   Region = 'Region',
@@ -32,12 +31,24 @@ export enum TerritoryType {
   Dependency = 'Dependency',
 }
 
+export const isTerritoryGroup = (scope?: TerritoryScope): boolean => {
+  return (
+    scope != null &&
+    [
+      TerritoryScope.World,
+      TerritoryScope.Continent,
+      TerritoryScope.Region,
+      TerritoryScope.Subcontinent,
+    ].includes(scope)
+  );
+};
+
 export interface TerritoryData extends ObjectBase {
   type: ObjectType.Territory;
   ID: TerritoryCode;
   codeDisplay: TerritoryCode;
   nameDisplay: string;
-  territoryType: TerritoryType;
+  scope: TerritoryScope;
   population: number;
   containedUNRegionCode: UNM49Code;
   sovereignCode: ISO3166Code;
@@ -132,7 +143,6 @@ export interface LocaleData extends ObjectBase {
 
   ID: BCP47LocaleCode;
   codeDisplay: BCP47LocaleCode; // Changes based on the language schema
-  scope: ScopeLevel;
   localeSource: 'regularInput' | 'IANA' | 'census'; // Whether this locale is listed in the the regular locale list or not
 
   nameDisplay: string;

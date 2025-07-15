@@ -1,13 +1,13 @@
 import {
   BCP47LocaleCode,
+  isTerritoryGroup,
   LocaleData,
   PopulationSourceCategory,
   TerritoryCode,
   TerritoryData,
-  TerritoryType,
+  TerritoryScope,
 } from '../types/DataTypes';
 import { ObjectType } from '../types/PageParamTypes';
-import { getObjectScopeLevel, ScopeLevel } from '../types/ScopeLevel';
 
 const DEBUG = false;
 
@@ -36,7 +36,7 @@ export function parseTerritoryLine(line: string): TerritoryData {
     codeDisplay: parts[0],
     nameDisplay: parts[1],
     names: [parts[1]],
-    territoryType: parts[2] as TerritoryType,
+    scope: parts[2] as TerritoryScope,
     population: Number.parseInt(parts[3].replace(/,/g, '')),
     containedUNRegionCode: parts[4],
     sovereignCode: parts[5],
@@ -94,7 +94,7 @@ function createRegionalLocalesForTerritory(
   const { containsTerritories } = territory;
   containsTerritories.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
 
-  if (getObjectScopeLevel(territory) !== ScopeLevel.Groups) {
+  if (!isTerritoryGroup(territory.scope)) {
     return; // Only going this for regions/continents
   }
 
@@ -120,7 +120,6 @@ function createRegionalLocalesForTerritory(
             codeDisplay: newLocaleCode,
             territoryCode: territory.ID,
             territory,
-            scope: ScopeLevel.Groups,
 
             // Update the population
             populationSpeaking: loc.populationSpeaking || 0,
@@ -190,7 +189,7 @@ export function computeContainedTerritoryStats(terr: TerritoryData): void {
   containsTerritories.forEach(computeContainedTerritoryStats);
 
   // Recompute the population for territory groups, in case it was updated from other data
-  if (getObjectScopeLevel(terr) === ScopeLevel.Groups) {
+  if (isTerritoryGroup(terr.scope)) {
     terr.population = containsTerritories.reduce((sum, t) => sum + (t.population ?? 0), 0);
   }
 

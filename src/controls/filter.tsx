@@ -1,7 +1,7 @@
 import { anyWordStartsWith } from '../generic/stringUtils';
-import { ObjectData, TerritoryData } from '../types/DataTypes';
+import { ObjectData, TerritoryData, TerritoryScope } from '../types/DataTypes';
+import { LanguageScope } from '../types/LanguageTypes';
 import { ObjectType, SearchableField } from '../types/PageParamTypes';
-import { getObjectScopeLevel } from '../types/ScopeLevel';
 import { getSearchableField } from '../views/common/ObjectField';
 
 import { usePageParams } from './PageParamsContext';
@@ -63,13 +63,27 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
  * Provides a function that filters on the scope of an object
  */
 export function getScopeFilter(): FilterFunctionType {
-  const { scopes } = usePageParams();
+  const { languageScopes, territoryScopes } = usePageParams();
 
   function scopeFilter(object: ObjectData) {
-    if (scopes.length == 0) {
-      return true;
+    switch (object.type) {
+      case ObjectType.Language:
+        return (
+          languageScopes.length == 0 ||
+          languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
+        );
+      case ObjectType.Territory:
+        return territoryScopes.length == 0 || territoryScopes.includes(object.scope);
+      case ObjectType.Locale:
+        return (
+          (languageScopes.length == 0 && territoryScopes.length == 0) ||
+          (languageScopes.includes(object.language?.scope ?? LanguageScope.SpecialCode) &&
+            territoryScopes.includes(object.territory?.scope ?? TerritoryScope.Dependency))
+        );
+      case ObjectType.Census:
+      case ObjectType.WritingSystem:
+        return true;
     }
-    return scopes.includes(getObjectScopeLevel(object));
   }
   return scopeFilter;
 }

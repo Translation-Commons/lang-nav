@@ -3,7 +3,7 @@ import React from 'react';
 import { getScopeFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
-import { ObjectData, TerritoryData, TerritoryType } from '../../types/DataTypes';
+import { ObjectData, TerritoryData, TerritoryScope } from '../../types/DataTypes';
 import { ObjectType } from '../../types/PageParamTypes';
 import { TreeNodeData } from '../common/TreeList/TreeListNode';
 import TreeListPageBody from '../common/TreeList/TreeListPageBody';
@@ -55,8 +55,8 @@ function getTerritoryTreeNode(
     object: territory,
     children: getTerritoryTreeNodes(territory.containsTerritories, sortFunction, filterByScope),
     labelStyle: {
-      fontWeight: territory.territoryType === TerritoryType.Country ? 'bold' : 'normal',
-      fontStyle: territory.territoryType === TerritoryType.Dependency ? 'italic' : 'normal',
+      fontWeight: territory.scope === TerritoryScope.Country ? 'bold' : 'normal',
+      fontStyle: territory.scope === TerritoryScope.Dependency ? 'italic' : 'normal',
     },
   };
 }

@@ -1,7 +1,8 @@
 import React, { createContext, useContext, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-import { LanguageSchema } from '../types/LanguageTypes';
+import { TerritoryScope } from '../types/DataTypes';
+import { LanguageSchema, LanguageScope } from '../types/LanguageTypes';
 import {
   ObjectType,
   PageParamKey,
@@ -11,7 +12,6 @@ import {
   SortBy,
   View,
 } from '../types/PageParamTypes';
-import { ScopeLevel } from '../types/ScopeLevel';
 
 type PageParamsContextState = PageParams & {
   updatePageParams: (newParams: PageParamsOptional) => void;
@@ -37,18 +37,22 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     const defaults = getDefaultParams(objectType, view);
     return {
       languageSchema: getParam('languageSchema', defaults.languageSchema) as LanguageSchema,
+      languageScopes: getParam('languageScopes', defaults.languageScopes.join(','))
+        .split(',')
+        .map((s) => s as LanguageScope)
+        .filter(Boolean),
       limit: parseInt(getParam('limit', defaults.limit.toString())),
       localeSeparator: getParam('localeSeparator', '') === '-' ? '-' : '_',
       objectID: getParam('objectID', undefined),
       objectType,
       page: parseInt(getParam('page', defaults.page.toString())),
-      scopes: getParam('scopes', defaults.scopes.join(','))
-        .split(',')
-        .map((s) => s as ScopeLevel)
-        .filter(Boolean),
       searchBy: getParam('searchBy', defaults.searchBy) as SearchableField,
       searchString: getParam('searchString', defaults.searchString),
       sortBy: getParam('sortBy', defaults.sortBy) as SortBy,
+      territoryScopes: getParam('territoryScopes', defaults.territoryScopes.join(','))
+        .split(',')
+        .map((s) => s as TerritoryScope)
+        .filter(Boolean),
       view,
       updatePageParams,
     };
@@ -59,20 +63,26 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
 // If there is nothing in the URL string, then use this instead
 function getDefaultParams(objectType: ObjectType, view: View): PageParams {
+  const languageScopes = [LanguageScope.Macrolanguage, LanguageScope.Language];
+  let territoryScopes = [TerritoryScope.Country, TerritoryScope.Dependency];
+  if (view === View.Hierarchy) {
+    // By default, show more kinds of objects in the hierarchy view
+    if (objectType === ObjectType.Language) languageScopes.push(LanguageScope.Family);
+    if (objectType === ObjectType.Territory) territoryScopes = Object.values(TerritoryScope);
+  }
+
   return {
     languageSchema: LanguageSchema.Inclusive,
+    languageScopes,
     limit: view === View.Table ? 200 : 8,
     localeSeparator: '_',
     objectID: undefined,
     objectType,
     page: 1,
-    scopes:
-      view === View.Hierarchy && objectType !== ObjectType.Locale
-        ? [ScopeLevel.Groups, ScopeLevel.Individuals]
-        : [ScopeLevel.Individuals],
     searchBy: SearchableField.AllNames,
     searchString: '',
     sortBy: SortBy.Population,
+    territoryScopes,
     view,
   };
 }

@@ -110,7 +110,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {populationSpeakingPercent != null && (
         <div>
           <label style={{ marginLeft: '2em' }}>
-            % in {territory?.territoryType.toLowerCase() ?? 'territory'}:
+            % in {territory?.scope.toLowerCase() ?? 'territory'}:
           </label>
           {numberToFixedUnlessSmall(populationSpeakingPercent)}%
         </div>
@@ -126,7 +126,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {populationWritingPercent != null && (
         <div>
           <label style={{ marginLeft: '2em' }}>
-            % in {territory?.territoryType.toLowerCase() ?? 'territory'}:
+            % in {territory?.scope.toLowerCase() ?? 'territory'}:
           </label>
           {numberToFixedUnlessSmall(populationWritingPercent)}%
         </div>
