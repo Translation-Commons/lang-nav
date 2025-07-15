@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
