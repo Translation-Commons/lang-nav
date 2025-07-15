@@ -60,7 +60,7 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             </LinkButton>
           </>
         ) : (
-          <span className="unsupported">Not in Glottolog</span>
+          <Deemphasized>Not in Glottolog</Deemphasized>
         )}
       </div>
       <div>
@@ -72,7 +72,7 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
           </>
         ) : (
-          <span className="unsupported">Not in ISO catalog</span>
+          <Deemphasized>Not in ISO catalog</Deemphasized>
         )}
       </div>
       <div>
@@ -87,7 +87,7 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             </LinkButton>
           </>
         ) : (
-          <span className="unsupported">Not in CLDR</span>
+          <Deemphasized>Not in CLDR</Deemphasized>
         )}
       </div>
       {ISO.code && (
@@ -217,7 +217,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSchema, sortFunction)} />
           ) : (
             <div>
-              <span className="unsupported">No languages come from this language.</span>
+              <Deemphasized>No languages come from this language.</Deemphasized>
             </div>
           )}
         </div>
@@ -227,7 +227,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction)} />
           ) : (
             <div>
-              <span className="unsupported">There are no recorded locales for this language.</span>
+              <Deemphasized>There are no recorded locales for this language.</Deemphasized>
             </div>
           )}
         </div>
