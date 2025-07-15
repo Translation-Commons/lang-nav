@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import { LocaleData, PopulationSourceCategory } from '../../types/DataTypes';
 import HoverableObject from '../common/HoverableObject';
 
