@@ -308,7 +308,7 @@ function partitionPotentialLocales(
     .forEach((locale) => {
       const descendentLocaleInTerritory = findLocaleDescendingFromThisLocale(
         locale,
-        locale.language?.childLanguages,
+        [locale.language].filter((l) => l != null),
       );
       if (!descendentLocaleInTerritory) {
         locale.containedLocales = [localesSorted[0]];
