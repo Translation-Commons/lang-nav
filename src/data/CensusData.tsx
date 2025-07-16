@@ -1,5 +1,5 @@
 import { toTitleCase } from '../generic/stringUtils';
-import { CensusData } from '../types/CensusTypes';
+import { CensusCollectorType, CensusData } from '../types/CensusTypes';
 import { LanguageCode } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
@@ -61,7 +61,7 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
     yearCollected: 0,
     eligiblePopulation: 0,
     languageEstimates: {},
-    collectorType: '',
+    collectorType: CensusCollectorType.Government,
   }));
 
   // Iterate through the rest of the lines to collect metadata until we hit the break line
@@ -95,6 +95,8 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
           censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
         } else if (key === 'sampleRate') {
           censuses[index][key] = Number.parseFloat(value);
+        } else if (key === 'collectorType') {
+          censuses[index][key] = value as CensusCollectorType;
         } else if (
           key === 'languageCount' ||
           key === 'languageEstimates' ||
