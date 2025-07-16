@@ -82,6 +82,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       // Get the constituent language and the macrolanguage that will be replaced by it
       const constituentLangCode = alias.original; // eg. `cmn`
       const macroLangCode = alias.replacement; // eg. `zh`
+      const macroLangAltCode = macroLangCode + '**';
       const constituentLang = cldrLanguages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
       const macroLang = cldrLanguages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
       const notes = (
@@ -98,14 +99,14 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.cldrDataProvider = constituentLang;
-        macroLang.schemaSpecific.CLDR.code = macroLangCode + '**'; // Distinguish the macrolanguage from the constituent language
+        macroLang.schemaSpecific.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
         macroLang.schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
         macroLang.schemaSpecific.CLDR.childLanguages = [constituentLang];
         macroLang.schemaSpecific.CLDR.notes = notes;
         macroLang.schemaSpecific.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
         // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
-        cldrLanguages[macroLangCode + '**'] = macroLang; // But put it back in with ** to distinguish it
+        cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with ** to distinguish it
       }
 
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
@@ -113,8 +114,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
         cldrLanguages[macroLangCode] = constituentLang;
         constituentLang.schemaSpecific.CLDR.code = macroLangCode;
         constituentLang.schemaSpecific.CLDR.notes = notes;
-        constituentLang.schemaSpecific.CLDR.parentLanguageCode = macroLangCode + '**';
-        // constituentLang.schemaSpecific.CLDR.parentLanguage = macroLang;
+        constituentLang.schemaSpecific.CLDR.parentLanguageCode = macroLangAltCode;
 
         // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
         delete cldrLanguages[constituentLangCode];
