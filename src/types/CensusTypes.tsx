@@ -4,6 +4,11 @@ import { ObjectType } from './PageParamTypes';
 
 // Unique identifier for the census or other source of population data
 export type CensusID = string; // eg. 'ca2021.2', 'us2013.1'
+export enum CensusCollectorType {
+  Government = 'Government',
+  CLDR = 'CLDR',
+  Study = 'Study',
+}
 
 export interface CensusData extends ObjectBase {
   type: ObjectType.Census;
@@ -15,7 +20,7 @@ export interface CensusData extends ObjectBase {
   nameDisplay: string;
   isoRegionCode: TerritoryCode;
   yearCollected: number; // eg. 2021, 2013
-  collectorType: string; // Type of organization (e.g., Government, NGO, Academic)
+  collectorType: CensusCollectorType; // Type of organization (e.g., Government, CLDR)
 
   // Kind of language data collected
   modality?: string; // eg. Spoken, Written, Sign
@@ -51,3 +56,16 @@ export interface CensusData extends ObjectBase {
   // Connections to other objects loaded after the fact
   territory?: TerritoryData;
 }
+
+export const getCensusCollectorTypeRank = (collectorType: CensusCollectorType): number => {
+  switch (collectorType) {
+    case CensusCollectorType.Government:
+      return 1; // Highest priority
+    case CensusCollectorType.Study:
+      return 2; // Medium priority
+    case CensusCollectorType.CLDR:
+      return 3; // Lowest priority
+    default:
+      return 4; // Unknown or unranked
+  }
+};

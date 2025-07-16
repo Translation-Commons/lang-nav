@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { CensusCollectorType } from '../../types/CensusTypes';
 import { LocaleData, PopulationSourceCategory } from '../../types/DataTypes';
 import HoverableObject from '../common/HoverableObject';
 
@@ -12,6 +13,14 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
   const { populationCensus } = locale;
   if (populationCensus != null) {
     const { yearCollected, collectorName, collectorType } = populationCensus;
+    if (collectorType === CensusCollectorType.CLDR) {
+      // Leave out the date from CLDR, it's not available from the source
+      return (
+        <HoverableObject object={populationCensus}>
+          {collectorName ?? collectorType}
+        </HoverableObject>
+      );
+    }
     let name = collectorName;
     if (name == null || name === '' || size === 'short') {
       switch (collectorType) {
