@@ -1,6 +1,7 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
 import Hoverable from '../../generic/Hoverable';
@@ -145,9 +146,9 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
 const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actualLocale }) => {
   if (actualLocale == null) {
     return (
-      <span className="unsupported" style={{ fontSize: '0.8em' }}>
-        not found
-      </span>
+      <Deemphasized>
+         <span style={{ fontSize: '0.8em' }}>not found</span>
+       </Deemphasized>
     );
   }
   return (
