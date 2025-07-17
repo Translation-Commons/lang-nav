@@ -3,15 +3,17 @@ import React from 'react';
 import Hoverable from './Hoverable';
 import { numberToFixedUnlessSmall } from './numberUtils';
 
+import Deemphasized from '../../generic/Deemphasized';
+
 export const PercentageDifference: React.FC<{
   percentNew: number;
   percentOld?: number;
 }> = ({ percentNew, percentOld }) => {
   if (percentOld == null) {
     return (
-      <span className="unsupported" style={{ fontSize: '0.8em' }}>
-        n/a
-      </span>
+      <Deemphasized>
+         <span style={{ fontSize: '0.8em' }}>n/a</span>
+      </Deemphasized>
     );
   }
 
