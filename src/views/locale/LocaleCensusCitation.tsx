@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import { LocaleData, PopulationSourceCategory } from '../../types/DataTypes';
 import HoverableObject from '../common/HoverableObject';
 
@@ -37,12 +38,12 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
       case PopulationSourceCategory.EDL:
         return 'EDL';
       case PopulationSourceCategory.NoSource:
-        return <span className="unsupported">no source</span>;
+        return <Deemphasized>no source</Deemphasized>;
       case PopulationSourceCategory.OtherCitation:
       case PopulationSourceCategory.GeneralizedData:
       case PopulationSourceCategory.Fallback:
       case PopulationSourceCategory.Aggregated:
-        return <span className="unsupported">rough estimate</span>;
+        return <Deemphasized>rough estimate</Deemphasized>;
     }
   }
 
