@@ -20,7 +20,7 @@ export interface TableColumn<T> {
   isInitiallyVisible?: boolean;
   isNumeric?: boolean;
   key: string;
-  label?: React.ReactNode;
+  label?: React.ReactNode; // otherwise will use key as label
   render: (object: T) => React.ReactNode;
   sortParam?: SortBy;
 }

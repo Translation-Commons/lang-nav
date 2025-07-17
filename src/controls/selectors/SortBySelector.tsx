@@ -1,15 +1,11 @@
 import React from 'react';
 
-import { SortBy, View } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/PageParamTypes';
 import Selector, { OptionsDisplay } from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
 const SortBySelector: React.FC = () => {
-  const { sortBy, updatePageParams, view } = usePageParams();
-  if (view === View.Table) {
-    // Supported in the table columns
-    return <></>;
-  }
+  const { sortBy, updatePageParams } = usePageParams();
 
   return (
     <Selector

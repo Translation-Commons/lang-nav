@@ -22,6 +22,10 @@ export enum SortBy {
   Population = 'Population',
   Code = 'Code',
   Name = 'Name',
+  Percent = 'Percent',
+  Endonym = 'Endonym',
+  CountOfLanguages = 'Count of Languages',
+  CountOfTerritories = 'Count of Territories',
 }
 
 export enum SearchableField {

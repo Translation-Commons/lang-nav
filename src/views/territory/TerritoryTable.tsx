@@ -28,13 +28,13 @@ const TerritoryTable: React.FC = () => {
           render: (object) =>
             object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
           isNumeric: true,
+          sortParam: SortBy.Percent,
         },
         {
           key: 'Languages',
           render: (object) =>
             object.locales.length > 0 && (
               <Hoverable
-                style={{ textDecoration: 'none' }}
                 hoverContent={
                   object.locales
                     .slice(0, 20)
@@ -46,6 +46,7 @@ const TerritoryTable: React.FC = () => {
               </Hoverable>
             ),
           isNumeric: true,
+          sortParam: SortBy.CountOfLanguages,
         },
         {
           key: 'Biggest Language',

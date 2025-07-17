@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { useDataContext } from '../../data/DataContext';
+import CommaSeparated from '../../generic/CommaSeparated';
+import Hoverable from '../../generic/Hoverable';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
@@ -37,6 +39,24 @@ const LanguageTable: React.FC = () => {
           key: 'Internet Technologies',
           render: (lang) => <CLDRCoverageInfo object={lang} />,
           isInitiallyVisible: false,
+        },
+        {
+          key: 'Dialects',
+          render: (lang) => (
+            <Hoverable
+              hoverContent={
+                <CommaSeparated>
+                  {lang.childLanguages
+                    .sort((a, b) => (b.populationCited ?? 0) - (a.populationCited ?? 0))
+                    .map((lang) => lang.nameDisplay)}
+                </CommaSeparated>
+              }
+            >
+              {lang.childLanguages.length}
+            </Hoverable>
+          ),
+          isInitiallyVisible: false,
+          sortParam: SortBy.CountOfLanguages,
         },
         InfoButtonColumn,
       ]}
