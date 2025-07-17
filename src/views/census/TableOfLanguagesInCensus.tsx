@@ -1,9 +1,9 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import Deemphasized from '../../generic/Deemphasized';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
+import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
@@ -147,8 +147,8 @@ const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actua
   if (actualLocale == null) {
     return (
       <Deemphasized>
-         <span style={{ fontSize: '0.8em' }}>not found</span>
-       </Deemphasized>
+        <span style={{ fontSize: '0.8em' }}>not found</span>
+      </Deemphasized>
     );
   }
   return (
