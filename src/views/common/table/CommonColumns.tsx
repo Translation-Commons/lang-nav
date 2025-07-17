@@ -23,6 +23,15 @@ export const NameColumn: TableColumn<ObjectData> = {
   sortParam: SortBy.Name,
 };
 
+export const EndonymColumn: TableColumn<ObjectData> = {
+  key: 'Endonym',
+  render: (object) => (
+    <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Endonym} />
+  ),
+  sortParam: SortBy.Endonym,
+  isInitiallyVisible: false,
+};
+
 export const InfoButtonColumn: TableColumn<ObjectData> = {
   key: 'Info',
   render: (object) => (

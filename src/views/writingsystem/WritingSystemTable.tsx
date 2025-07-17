@@ -3,7 +3,12 @@ import React from 'react';
 import { useDataContext } from '../../data/DataContext';
 import { WritingSystemData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import {
+  CodeColumn,
+  EndonymColumn,
+  InfoButtonColumn,
+  NameColumn,
+} from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const WritingSystemTable: React.FC = () => {
@@ -15,6 +20,7 @@ const WritingSystemTable: React.FC = () => {
       columns={[
         CodeColumn,
         NameColumn,
+        EndonymColumn,
         {
           key: 'Population',
           render: (object) => object.populationUpperBound,
