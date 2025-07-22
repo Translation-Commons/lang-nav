@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
@@ -17,19 +17,16 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   const filterByScope = getScopeFilter();
   const sliceFunction = getSliceFunction<T>();
 
-  // Filter results);
-  const objectsFiltered = objects.filter(filterByScope).filter(filterBySubstring);
-  // Sort results & limit how many are visible
-  const objectsVisible = sliceFunction(objectsFiltered.sort(sortBy));
+  // Filter results
+  const objectsVisible = useMemo(
+    () => sliceFunction(objects.filter(filterByScope).filter(filterBySubstring).sort(sortBy)),
+    [objects, filterByScope, filterBySubstring, sortBy, sliceFunction],
+  );
 
   return (
     <div>
       <div className="CardListDescription">
-        <VisibleItemsMeter
-          nShown={objectsVisible.length}
-          nFiltered={objectsFiltered.length}
-          nOverall={objects.length}
-        />
+        <VisibleItemsMeter objects={objects} />
       </div>
       <div className="CardList">
         {objectsVisible.map((object) => (
