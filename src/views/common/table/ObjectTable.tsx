@@ -29,7 +29,7 @@ interface Props<T> {
  */
 function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sortBy = getSortFunction();
-  const substringFilter = getSubstringFilter();
+  const substringFilter = getSubstringFilter() ?? (() => true);
   const scopeFilter = getScopeFilter();
   const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
 
@@ -51,7 +51,7 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
-    let result = objects.filter(scopeFilter).filter(substringFilter ?? (() => true));
+    let result = objects.filter(scopeFilter).filter(substringFilter);
     if (sortDirectionIsNormal) {
       result = result.sort(sortBy);
     } else {
@@ -60,36 +60,9 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
     return result;
   }, [sortBy, objects, substringFilter, scopeFilter, sortDirectionIsNormal]);
 
-  const nObjectsFilteredByScope = useMemo(
-    () => objects.length - objects.filter(scopeFilter).length,
-    [objects, scopeFilter],
-  );
-  const nObjectsFilteredBySubstring = useMemo(
-    () => objects.length - nObjectsFilteredByScope - objectsFilteredAndSorted.length,
-    [objects, nObjectsFilteredByScope, objectsFilteredAndSorted],
-  );
-
-  const nRowsAfterFilter = useMemo(
-    () => objectsFilteredAndSorted.length,
-    [objectsFilteredAndSorted],
-  );
-
   return (
     <div className="ObjectTableContainer">
-      <VisibleItemsMeter
-        nFiltered={nRowsAfterFilter}
-        nOverall={objects.length}
-        filterReason={
-          <>
-            {nObjectsFilteredByScope > 0 && (
-              <div>Out of scope: {nObjectsFilteredByScope.toLocaleString()}</div>
-            )}
-            {nObjectsFilteredBySubstring > 0 && (
-              <div>Not matching substring: {nObjectsFilteredBySubstring.toLocaleString()}</div>
-            )}
-          </>
-        }
-      />
+      <VisibleItemsMeter objects={objects} />
       <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
         <summary style={{ cursor: 'pointer' }}>
           {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
