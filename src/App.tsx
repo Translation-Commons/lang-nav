@@ -1,5 +1,8 @@
+import FilterPanel from './controls/FilterPanel';
+import PageLayout from './controls/PageLayout';
 import PageNavBar from './controls/PageNavBar';
 import { PageParamsProvider } from './controls/PageParamsContext';
+import SearchBar from './controls/selectors/SearchBar';
 import { DataProvider } from './data/DataContext';
 import Footer from './Footer';
 import { HoverCardProvider } from './generic/HoverCardContext';
@@ -11,12 +14,15 @@ function App() {
     <PageParamsProvider>
       <DataProvider>
         <HoverCardProvider>
-          <PageNavBar />
-          <div className="Body">
-            <MainViews />
-          </div>
+          <PageLayout navbar={<PageNavBar />} sidebar={<FilterPanel />} footer={<Footer />}>
+            <span className="Options">
+              <SearchBar />
+            </span>
+            <div className="Body">
+              <MainViews />
+            </div>
+          </PageLayout>
           <ViewModal />
-          <Footer />
         </HoverCardProvider>
       </DataProvider>
     </PageParamsProvider>

@@ -4,7 +4,6 @@
   flex-wrap: wrap;
   margin-top: 0em;
   border-bottom: 0.125em solid var(--color-button-primary);
-  margin-bottom: 0.5em;
   width: 100%;
   row-gap: 0.5em;
   color: var(--color-background);
