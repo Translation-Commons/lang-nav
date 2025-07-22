@@ -11,8 +11,13 @@ const LanguageSchemaSelector: React.FC = () => {
     "Languages have fuzzy boundaries and different authorities categorize potential languages differently. For example, what's a dialect versus a language, or if a language is even attested. Use this option to change what languages appear and what they are considered (family / individual / dialect). This may also change the language code & language name shown.";
 
   return (
-    <Selector selectorLabel="Language Definition" selectorDescription={selectorDescription}>
+    <Selector
+      selectorLabel="Language Definition"
+      selectorDescription={selectorDescription}
+      appearance="list"
+    >
       <SingleChoiceOptions<LanguageSchema>
+        mode="flat"
         options={Object.values(LanguageSchema)}
         onChange={(languageSchema: LanguageSchema) => updatePageParams({ languageSchema })}
         selected={languageSchema}

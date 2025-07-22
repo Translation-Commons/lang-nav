@@ -2,8 +2,10 @@ import React, { ReactNode } from 'react';
 
 import Hoverable from '../../generic/Hoverable';
 
+import './selector.css';
+
 type Props = {
-  appearance?: 'rounded' | 'tabs';
+  appearance?: 'rounded' | 'tabs' | 'list';
   children: ReactNode;
   selectorLabel?: ReactNode;
   selectorDescription?: ReactNode;

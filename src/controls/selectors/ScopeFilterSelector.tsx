@@ -25,8 +25,9 @@ const ScopeFilterSelector: React.FC = () => {
   const selectorDescription = `Filter the ${getObjectTypeLabelPlural(objectType)} shown by the granularity of the code -- eg. grouped objects, individual objects, or parts of objects.`;
 
   return (
-    <Selector selectorLabel="Scope:" selectorDescription={selectorDescription}>
+    <Selector selectorLabel="Scope" selectorDescription={selectorDescription} appearance="list">
       <MultiChoiceOptions
+        mode="flat"
         options={Object.values(ScopeLevel)}
         onToggleOption={(scope: ScopeLevel) =>
           scopes.includes(scope)
