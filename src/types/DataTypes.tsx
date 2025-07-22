@@ -73,7 +73,7 @@ export interface WritingSystemData extends ObjectBase {
 
   nameDisplayOriginal: string;
   nameFull: string;
-  nameEndonym: string;
+  nameEndonym?: string;
   unicodeVersion: number | null;
   sample: string | null;
   rightToLeft: boolean | null;

@@ -121,13 +121,13 @@ Cari	Carian	Carian		5.1	𐊷	no	xcr	TR	Grek		Individual script
 Copt	Coptic	Coptic		4.1	Ϣ	no	cop	EG	Grek		Individual script
 Glag	Glagolitic	Glagolitic	ⰳⰾⰰⰳⱁⰾⰻⱌⰰ	4.1	Ⰰ	no	chu	BG	Grek		Individual script
 Cyrs	Old Cyrillic	Cyrillic (Old Church Slavonic variant)	Словѣньска азъбоукꙑ	1.1			chu	BG	Glag		Individual script
-Cyrl	Cyrillic	Cyrillic		1.1	Я	no	rus	BG	Cyrs		Individual script
+Cyrl	Cyrillic	Cyrillic	Кирилица	1.1	Я	no	rus	BG	Cyrs		Individual script
 Perm	Old Permic	Old Permic	𐍐𐍝𐍑𐍣‎𐍠	7	𐍫	no	kom	RU	Cyrl		Individual script
 Goth	Gothic	Gothic		3.1	𐌰	no	got	UA	Grek		Individual script
 Ital	Old Italic	Old Italic (Etruscan, Oscan, etc.)		3.1	𐌈	no	ett	IT	Grek		Individual script
-Latn	Latin	Latin		1.1	L	no	eng	IT	Ital		Individual script
-Latf	Fraktur Latin	Latin (Fraktur variant)		1.1			deu	DE	Latn		Variation
-Latg	Gaelic Latin	Latin (Gaelic variant)		1.1			gle	IE	Latn		Variation
+Latn	Latin	Latin	Latin	1.1	L	no	eng	IT	Ital		Individual script
+Latf	Fraktur Latin	Latin (Fraktur variant)	𝔉𝔯𝔞𝔨𝔱𝔲𝔯	1.1			deu	DE	Latn		Variation
+Latg	Gaelic Latin	Latin (Gaelic variant)	ᵹaeliċ	1.1			gle	IE	Latn		Variation
 Lisu	Lisu	Lisu (Fraser)		5.2	ꓨ	no	lis	CN	Latn		Individual script
 Moon	Moon	Moon (Moon code, Moon script, Moon type)					eng	GB	Latn		Individual script
 Osge	Osage	Osage	𐓏𐓘𐓻𐓘𐓻𐓟 𐒻𐓟	9	𐒵	no	osa	US	Latn		Individual script

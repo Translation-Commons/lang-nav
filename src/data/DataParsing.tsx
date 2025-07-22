@@ -101,6 +101,7 @@ export function parseLocaleLine(line: string): LocaleData {
 
 export function parseWritingSystem(line: string): WritingSystemData {
   const parts = line.split('\t');
+  const nameEndonym = parts[3] != '' ? parts[3] : undefined;
   return {
     type: ObjectType.WritingSystem,
 
@@ -110,8 +111,8 @@ export function parseWritingSystem(line: string): WritingSystemData {
     nameDisplay: parts[1],
     nameDisplayOriginal: parts[1],
     nameFull: parts[2],
-    nameEndonym: parts[3],
-    names: [parts[1], parts[2], parts[3]],
+    nameEndonym,
+    names: [parts[1], parts[2], nameEndonym].filter((s) => s != null),
     unicodeVersion: parts[4] != '' ? parseFloat(parts[4]) : null,
     sample: parts[5] != '' ? parts[5] : null,
     rightToLeft: parts[6] === 'Yes' ? true : parts[6] === 'no' ? false : null,

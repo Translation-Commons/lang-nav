@@ -57,6 +57,7 @@ const TerritoryTable: React.FC = () => {
                 style={{ textDecoration: 'none' }}
               />
             ),
+          isInitiallyVisible: false,
         },
         {
           key: 'Type',
