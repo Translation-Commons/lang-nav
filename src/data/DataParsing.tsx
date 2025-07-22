@@ -110,7 +110,7 @@ export function parseWritingSystem(line: string): WritingSystemData {
     nameDisplay: parts[1],
     nameDisplayOriginal: parts[1],
     nameFull: parts[2],
-    nameEndonym: parts[3],
+    nameEndonym: parts[3] != '' ? parts[3] : undefined,
     names: [parts[1], parts[2], parts[3]],
     unicodeVersion: parts[4] != '' ? parseFloat(parts[4]) : null,
     sample: parts[5] != '' ? parts[5] : null,
