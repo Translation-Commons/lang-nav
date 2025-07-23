@@ -1,8 +1,16 @@
 import aliases from 'cldr-core/supplemental/aliases.json';
+import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
+import { CensusCollectorType, CensusData } from '../types/CensusTypes';
 import { CLDRCoverageLevel, CLDRCoverageImport } from '../types/CLDRTypes';
 import { LocaleData } from '../types/DataTypes';
-import { LanguageData, LanguagesBySchema, LanguageScope } from '../types/LanguageTypes';
+import {
+  LanguageData,
+  LanguageDictionary,
+  LanguagesBySchema,
+  LanguageScope,
+} from '../types/LanguageTypes';
+import { ObjectType } from '../types/PageParamTypes';
 
 import { CoreData } from './CoreData';
 
@@ -74,6 +82,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       // Get the constituent language and the macrolanguage that will be replaced by it
       const constituentLangCode = alias.original; // eg. `cmn`
       const macroLangCode = alias.replacement; // eg. `zh`
+      const macroLangAltCode = macroLangCode + '**';
       const constituentLang = cldrLanguages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
       const macroLang = cldrLanguages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
       const notes = (
@@ -90,11 +99,14 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.cldrDataProvider = constituentLang;
-        macroLang.schemaSpecific.CLDR.code = undefined;
+        macroLang.schemaSpecific.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
         macroLang.schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
+        macroLang.schemaSpecific.CLDR.childLanguages = [constituentLang];
         macroLang.schemaSpecific.CLDR.notes = notes;
-        // Remove the symbolic reference in the CLDR list to the macrolanguage object
+        macroLang.schemaSpecific.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
+        // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
+        cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with ** to distinguish it
       }
 
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
@@ -102,6 +114,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
         cldrLanguages[macroLangCode] = constituentLang;
         constituentLang.schemaSpecific.CLDR.code = macroLangCode;
         constituentLang.schemaSpecific.CLDR.notes = notes;
+        constituentLang.schemaSpecific.CLDR.parentLanguageCode = macroLangAltCode;
 
         // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
         delete cldrLanguages[constituentLangCode];
@@ -203,4 +216,104 @@ function parseCLDRCoverageLine(line: string): CLDRCoverageImport {
     percentOfCoreValuesComplete: Number.parseFloat(parts[14]),
     missingFeatures: parts[15]?.split(', '),
   };
+}
+
+type TerritoryLanguagePopulationStrings = {
+  _gdp: string;
+  _literacyPercent: string;
+  _population: string;
+  languagePopulation?: {
+    [localeCode: string]: {
+      _populationPercent: string;
+      _officialStatus: string;
+    };
+  };
+};
+
+export function getLanguageCountsFromCLDR(coreData: CoreData): CensusData[] {
+  const territoryInfoData = territoryInfo.supplemental.territoryInfo;
+  return Object.entries(territoryInfoData)
+    .map(([territoryCode, territoryData]) => {
+      const typedData = territoryData as TerritoryLanguagePopulationStrings;
+      const territoryPopulation = Math.round(parseInt(typedData._population));
+
+      // Get the populations for each language from the CLDR data
+      const rawLangPopulations = typedData.languagePopulation || {};
+      const langPopulations = Object.entries(rawLangPopulations).reduce<Record<string, number>>(
+        (accumulator, langEntry) => {
+          const [inputLocaleCode, { _populationPercent }] = langEntry;
+          const pop = Math.round((parseFloat(_populationPercent) * territoryPopulation) / 100);
+          return convertCLDRLangPopToLangNavEntries(
+            accumulator,
+            inputLocaleCode,
+            pop,
+            coreData.languagesBySchema.CLDR,
+          );
+        },
+        {},
+      );
+      const territory = coreData.territories[territoryCode];
+
+      const census: CensusData = {
+        type: ObjectType.Census,
+        ID: 'cldr.' + territoryCode,
+        codeDisplay: 'cldr.' + territoryCode,
+        nameDisplay: 'CLDR ' + (territory?.nameDisplay ?? territoryCode),
+        names: ['CLDR ' + (territory?.nameDisplay ?? territoryCode)],
+
+        eligiblePopulation: territoryPopulation,
+        isoRegionCode: territoryCode,
+        yearCollected: new Date().getFullYear(), // This is the year it was collected from CLDR not the actual year of the input data
+        collectorType: CensusCollectorType.CLDR,
+        url: 'https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-core/supplemental/territoryInfo.json',
+        notes:
+          'This data is imported from the latest release of the CLDR data. The year listed is the year the data is published, not the year the data was collected. CLDR is in the process of improving citations and data quality so take these numbers with a grain of salt.',
+
+        languageCount: Object.values(langPopulations).length,
+        languageEstimates: langPopulations,
+      };
+
+      return census;
+    })
+    .filter((census) => census.languageCount > 0);
+}
+
+function convertCLDRLangPopToLangNavEntries(
+  accumulator: Record<string, number>,
+  inputLocaleCode: string,
+  population: number,
+  cldrLanguages: LanguageDictionary,
+): Record<string, number> {
+  // We have to do some messy language code parsing since entries here may be using 2-letter codes (eg. sr not srp) and
+  // they may have script or other locale tags (eg. sr_Latn, ca_valencia, etc.), and they may be part of a macrolanguage
+  // So we have to get the language code part and convert it to ISO 639-3 then add it back to the locale string.
+  const cldrLanguageCode = inputLocaleCode.split('_')[0]; // Get the language code part, e.g. `sr_Latn` -> `sr`
+  const extraCodeParts = inputLocaleCode.split('_').slice(1).join('_'); // Get the rest of the locale code, e.g. `sr_Latn` -> `Latn`
+
+  let languageCode = cldrLanguages[cldrLanguageCode].ID ?? cldrLanguageCode;
+  if (cldrLanguages[cldrLanguageCode].schemaSpecific?.CLDR?.parentLanguageCode != null) {
+    // If the language a child of a macrolanguage, we don't know from the data if the number
+    // describes the constituent language or the macrolanguage population. Since it's unknown
+    // we will use the macrolanguage.
+    const parentLang = cldrLanguages[cldrLanguageCode].schemaSpecific.CLDR.parentLanguage;
+    if (
+      parentLang != null &&
+      parentLang.schemaSpecific.CLDR.scope === LanguageScope.Macrolanguage
+    ) {
+      languageCode = parentLang.ID;
+    }
+  }
+
+  // Add the language to the population list
+  // In case two entries refer to the same language (eg. hin and hin_Latn) we take the higher value
+  if (accumulator[languageCode] == null || accumulator[languageCode] < population) {
+    accumulator[languageCode] = population;
+  }
+
+  // When there are extra parts (eg. srp_Latn) we should add that record too
+  // Currently the tool cannot handle these cases, but we're leaving it here for future work.
+  if (extraCodeParts != '') {
+    accumulator[languageCode + '_' + extraCodeParts] = population;
+  }
+  return accumulator;
 }

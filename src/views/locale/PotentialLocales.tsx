@@ -7,7 +7,12 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { CensusData } from '../../types/CensusTypes';
-import { BCP47LocaleCode, LocaleData, PopulationSourceCategory } from '../../types/DataTypes';
+import {
+  BCP47LocaleCode,
+  LocaleData,
+  PopulationSourceCategory,
+  TerritoryCode,
+} from '../../types/DataTypes';
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
 import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
 import { getLanguageScopeLevel, getTerritoryScopeLevel, ScopeLevel } from '../../types/ScopeLevel';
@@ -289,10 +294,14 @@ function partitionPotentialLocales(
   // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
   if (largestLocale.localeSource === 'census') {
     // Some censuses include language families -- that's nice complementary data but its usually not a priority
-    const descendentLocaleInTerritory = findLocaleDescendingFromThisLocale(
-      largestLocale,
-      largestLocale.language?.childLanguages,
-    );
+    const descendentLocaleInTerritory = largestLocale.language
+      ? findExtantLocaleInTerritoryDescendingFromLanguage(
+          // start with the language of the locale to find alt codes eg. nan -> nan_Hant
+          // Then it will search child languages and dialects
+          [largestLocale.language],
+          largestLocale.territoryCode,
+        )
+      : null;
     if (!descendentLocaleInTerritory) {
       largestLocale.containedLocales = [localesSorted[1]];
       partitionedLocales.largest.push(largestLocale);
@@ -306,10 +315,14 @@ function partitionPotentialLocales(
   localesOfTheSameLanguage
     .filter((locale) => locale !== largestLocale && locale.localeSource === 'census')
     .forEach((locale) => {
-      const descendentLocaleInTerritory = findLocaleDescendingFromThisLocale(
-        locale,
-        locale.language?.childLanguages,
-      );
+      const descendentLocaleInTerritory = locale.language
+        ? findExtantLocaleInTerritoryDescendingFromLanguage(
+            // start with the language of the locale to find alt codes eg. nan -> nan_Hant
+            // Then it will search child languages and dialects
+            [locale.language],
+            locale.territoryCode,
+          )
+        : null;
       if (!descendentLocaleInTerritory) {
         locale.containedLocales = [localesSorted[0]];
         partitionedLocales.significant.push(locale);
@@ -322,14 +335,17 @@ function partitionPotentialLocales(
   return partitionedLocales;
 }
 
-function findLocaleDescendingFromThisLocale(
-  locale: LocaleData,
+function findExtantLocaleInTerritoryDescendingFromLanguage(
   languages?: LanguageData[],
+  territoryCode?: TerritoryCode,
 ): LocaleData | null {
-  const directDescendent = findLocaleWithSameTerritory(locale, languages);
+  const directDescendent = findLocaleWithSameTerritory(languages, territoryCode);
   const recursiveDescendents =
-    languages?.map((lang) => findLocaleDescendingFromThisLocale(locale, lang.childLanguages)) ?? [];
+    languages?.map((lang) =>
+      findExtantLocaleInTerritoryDescendingFromLanguage(lang.childLanguages, territoryCode),
+    ) ?? [];
   return (
+    // Sort to pick the most populous locale
     [directDescendent, ...recursiveDescendents].filter(Boolean).sort((a, b) => {
       return (b?.populationSpeaking ?? 0) - (a?.populationSpeaking ?? 0);
     })[0] ?? null
@@ -337,15 +353,12 @@ function findLocaleDescendingFromThisLocale(
 }
 
 function findLocaleWithSameTerritory(
-  locale: LocaleData,
   languages?: LanguageData[],
+  territoryCode?: TerritoryCode,
 ): LocaleData | null {
   return (
     languages
-      ?.map(
-        (lang) =>
-          lang.locales.filter((loc) => loc.territoryCode === locale.territoryCode)[0] ?? null,
-      )
+      ?.map((lang) => lang.locales.filter((loc) => loc.territoryCode === territoryCode)[0] ?? null)
       .filter(Boolean)[0] ?? null
   );
 }
