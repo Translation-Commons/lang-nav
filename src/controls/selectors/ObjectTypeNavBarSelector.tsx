@@ -1,15 +1,18 @@
 import React, { useCallback } from 'react';
 
 import { toTitleCase } from '../../generic/stringUtils';
+import { useMediaQuery } from '../../generic/useMediaQuery';
 import { ObjectType, View } from '../../types/PageParamTypes';
 import { getObjectTypeLabelPlural } from '../../views/common/getObjectName';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/SelectorOld';
+import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
 const objectAmbiguousViews = [View.About, View.Details];
 
 const ObjectTypeSelector: React.FC = () => {
   const { objectType, updatePageParams, view } = usePageParams();
+  const isCompact = useMediaQuery('(max-width: 1050px)');
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
       updatePageParams({
@@ -23,20 +26,21 @@ const ObjectTypeSelector: React.FC = () => {
   );
 
   return (
-    <Selector
-      selectorLabel="Entity"
-      optionsDisplay={OptionsDisplay.ButtonList}
-      options={Object.values(ObjectType)}
-      onChange={goToObjectType}
-      selected={objectType}
-      getOptionLabel={(option) => toTitleCase(getObjectTypeLabelPlural(option))}
-      getOptionDescription={(objectType) => (
-        <>
-          <div style={{ marginBottom: 8 }}>Click here to change the kind of entity viewed.</div>
-          <OptionDescription objectType={objectType} />
-        </>
-      )}
-    />
+    <Selector selectorLabel={isCompact ? 'Data:' : undefined} appearance="tabs">
+      <SingleChoiceOptions<ObjectType>
+        options={Object.values(ObjectType)}
+        onChange={goToObjectType}
+        mode={isCompact ? 'dropdown' : 'flat'}
+        selected={objectType}
+        getOptionLabel={(d) => toTitleCase(getObjectTypeLabelPlural(d))}
+        getOptionDescription={(objectType) => (
+          <>
+            <div style={{ marginBottom: 8 }}>Click here to change the kind of entity viewed.</div>
+            <OptionDescription objectType={objectType} />
+          </>
+        )}
+      />
+    </Selector>
   );
 };
 

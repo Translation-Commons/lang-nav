@@ -82,7 +82,16 @@ const TextInput: React.FC<Props> = ({
         onBlur={() => setTimeout(() => setShowSuggestions(false), 500)}
         onFocus={() => setShowSuggestions(true)}
         placeholder={placeholder}
-        style={{ ...inputStyle, width: inputWidth + 5 }}
+        style={{
+          // border: '0.125em solid var(--color-button-primary)',
+          // marginLeft: '-0.125em',
+          // marginRight: '-0.125em',
+          // lineHeight: '1em',
+          // padding: '0.5em',
+          whiteSpace: 'nowrap',
+          ...inputStyle,
+          width: inputWidth + 5,
+        }}
       />
       <span
         ref={spanRef}

@@ -7,10 +7,12 @@ import LanguageSchemaSelector from './selectors/LanguageSchemaSelector';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
+import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import SortBySelector from './selectors/SortBySelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
+import ViewSelector from './selectors/ViewSelector';
 
-const PANEL_WIDTH = '16em';
+const PANEL_WIDTH = '20em';
 
 const SidePanel: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(true);
@@ -19,6 +21,7 @@ const SidePanel: React.FC = () => {
     <LeftAlignedPanel isOpen={isOpen}>
       <SidePanelSection>
         <SidePanelSectionTitle>Data</SidePanelSectionTitle>
+        <ObjectTypeSelector />
         <LanguageSchemaSelector />
       </SidePanelSection>
 
@@ -30,6 +33,7 @@ const SidePanel: React.FC = () => {
 
       <SidePanelSection>
         <SidePanelSectionTitle>View Options</SidePanelSectionTitle>
+        <ViewSelector />
         <LimitInput />
         <SortBySelector />
         <LocaleSeparatorSelector />
@@ -101,11 +105,7 @@ const SidePanelSection: React.FC<React.PropsWithChildren> = ({ children }) => {
 };
 
 const SidePanelSectionTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <div style={{ fontSize: '1.2em', fontWeight: 'lighter', marginBottom: '0.5em' }}>
-      {children}
-    </div>
-  );
+  return <div style={{ fontSize: '1.2em', fontWeight: 'lighter' }}>{children}</div>;
 };
 
 export default SidePanel;

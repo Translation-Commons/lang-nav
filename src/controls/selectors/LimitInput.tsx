@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector from '../components/SelectorOld';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';
 
