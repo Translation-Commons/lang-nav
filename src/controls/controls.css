@@ -1,41 +1,8 @@
-.NavBar {
-  align-items: center;
-  display: flex;
-  flex-wrap: wrap;
-  margin-top: 0em;
-  border-bottom: 0.125em solid var(--color-button-primary);
-  margin-bottom: 0.5em;
-  width: 100%;
-  row-gap: 0.5em;
-  color: var(--color-background);
-  background-color: var(--color-button-primary);
-}
-
-.NavBar h1 {
-  font-size: 1.5em;
-  white-space: nowrap;
-  line-height: 1.5;
-}
-
-.NavBar h1 a {
-  font-weight: lighter;
-}
-
 .NavBar .selector {
   font-size: 1.2em;
   line-height: 1.2em;
   align-content: center;
-}
-
-.NavBar .selector,
-.NavBar h1 {
-  margin: 0em 0.5em 0em 0.5em;
-}
-
-.Options {
-  margin: 0 1em;
-  display: flex;
-  flex-wrap: wrap;
+  margin: 0em 0.5em;
 }
 
 .selector.tabs button,
