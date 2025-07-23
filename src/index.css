@@ -51,15 +51,6 @@ body {
   min-height: 100vh;
 }
 
-.Body {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  text-align: center;
-
-  flex: 1;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
