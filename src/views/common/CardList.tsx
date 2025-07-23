@@ -6,6 +6,8 @@ import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
 import VisibleItemsMeter from '../VisibleItemsMeter';
 
+const CARD_MIN_WIDTH = 300; // Including margins
+
 interface Props<T> {
   objects: T[];
   renderCard: (object: T) => React.ReactNode;
@@ -55,7 +57,7 @@ const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
     return () => observer.disconnect();
   }, []);
 
-  const nColumns = width > 0 ? Math.floor(width / 300) : 1;
+  const nColumns = width > 0 ? Math.floor(width / CARD_MIN_WIDTH) : 1;
 
   return (
     <div
