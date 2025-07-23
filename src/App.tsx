@@ -1,8 +1,7 @@
-import FilterPanel from './controls/FilterPanel';
-import PageLayout from './controls/PageLayout';
 import PageNavBar from './controls/PageNavBar';
 import { PageParamsProvider } from './controls/PageParamsContext';
 import SearchBar from './controls/selectors/SearchBar';
+import SidePanel from './controls/SidePanel';
 import { DataProvider } from './data/DataContext';
 import Footer from './Footer';
 import { HoverCardProvider } from './generic/HoverCardContext';
@@ -14,14 +13,21 @@ function App() {
     <PageParamsProvider>
       <DataProvider>
         <HoverCardProvider>
-          <PageLayout navbar={<PageNavBar />} sidebar={<FilterPanel />} footer={<Footer />}>
-            <span className="Options">
-              <SearchBar />
-            </span>
-            <div className="Body">
-              <MainViews />
+          <div>
+            <PageNavBar />
+            <div style={{ display: 'flex', minHeight: '100vh' }}>
+              <SidePanel />
+              <main style={{ flex: 1, padding: '1em', overflow: 'auto' }}>
+                <span className="Options">
+                  <SearchBar />
+                </span>
+                <div className="Body">
+                  <MainViews />
+                </div>
+              </main>
             </div>
-          </PageLayout>
+            <Footer />
+          </div>
           <ViewModal />
         </HoverCardProvider>
       </DataProvider>

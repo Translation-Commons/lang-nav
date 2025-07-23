@@ -32,6 +32,12 @@
   align-items: start;
 }
 
+.selector.inline.list {
+  flex-direction: row;
+  align-items: center;
+  gap: 1em;
+}
+
 .selector button,
 .selector input,
 .selector label {
@@ -58,6 +64,11 @@
 
 .selector.list button {
   border-radius: 1em;
+  border: 0.125em solid var(--color-button-border);
+}
+
+.selector.list button.selected {
+  border: 0.125em solid var(--color-button-primary);
 }
 
 .selector input {
@@ -87,7 +98,7 @@
   background: var(--color-background);
 }
 
-.selector button:hover {
+.selector button:hover, .selector.list button:hover {
   color: var(--color-background);
   background: var(--color-button-hover);
 }
@@ -109,7 +120,7 @@
   border-top-right-radius: 2em;
 }
 
-.selector .selected {
+.selector .selected, .selector.list .selected {
   background: var(--color-button-primary);
   color: var(--color-background);
 }

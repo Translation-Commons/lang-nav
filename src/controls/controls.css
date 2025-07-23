@@ -30,3 +30,10 @@
 .NavBar h1 {
   margin: 0em 0.5em 0em 0.5em;
 }
+
+.FilterPanelHeader {
+  font-size: 1.2em;
+  font-weight: lighter;
+  margin: 0.5em 0.5em 0.25em 0.5em;
+  border-top: 0.125em solid var(--color-button-primary);
+}

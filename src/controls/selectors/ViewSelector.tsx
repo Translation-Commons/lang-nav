@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useMediaQuery } from '../../generic/useMediaQuery';
 import { View } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
@@ -11,7 +11,7 @@ const ViewSelector: React.FC = () => {
   const isCompact = useMediaQuery('(max-width: 1450px)');
 
   return (
-    <Selector selectorLabel="View:" appearance="tabs">
+    <Selector selectorLabel="View:" appearance={SelectorAppearance.Tabs}>
       <SingleChoiceOptions<View>
         getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
         mode={isCompact ? 'dropdown' : 'flat'}

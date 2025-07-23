@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';
 
@@ -14,8 +14,9 @@ const LimitInput: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Limit:"
+      selectorLabel="Item Limit"
       selectorDescription={`Limit how many ${objectType.toLowerCase()} ${getLimitableObjectName(view)} are shown.`}
+      appearance={SelectorAppearance.InlineList}
     >
       <TextInput
         inputStyle={{ width: '3em' }}

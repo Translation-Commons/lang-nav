@@ -4,7 +4,7 @@ import { toTitleCase } from '../../generic/stringUtils';
 import { useMediaQuery } from '../../generic/useMediaQuery';
 import { ObjectType, View } from '../../types/PageParamTypes';
 import { getObjectTypeLabelPlural } from '../../views/common/getObjectName';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
@@ -26,7 +26,7 @@ const ObjectTypeSelector: React.FC = () => {
   );
 
   return (
-    <Selector selectorLabel={isCompact ? 'Data:' : undefined} appearance="tabs">
+    <Selector selectorLabel={isCompact ? 'Data:' : undefined} appearance={SelectorAppearance.Tabs}>
       <SingleChoiceOptions<ObjectType>
         options={Object.values(ObjectType)}
         onChange={goToObjectType}

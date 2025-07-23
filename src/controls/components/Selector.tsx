@@ -8,6 +8,7 @@ export enum SelectorAppearance {
   Rounded = 'rounded',
   Tabs = 'tabs',
   List = 'list',
+  InlineList = 'inline list',
 }
 
 type Props = {
