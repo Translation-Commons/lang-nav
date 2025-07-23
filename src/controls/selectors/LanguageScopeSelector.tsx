@@ -10,7 +10,7 @@ import { usePageParams } from '../PageParamsContext';
 const LanguageScopeSelector: React.FC = () => {
   const { languageScopes, updatePageParams, objectType } = usePageParams();
 
-  if (![ObjectType.Language, ObjectType.Locale].includes(objectType)) {
+  if (![ObjectType.Language, ObjectType.Locale, ObjectType.Census].includes(objectType)) {
     return null; // Only application for language and locale objects
   }
 

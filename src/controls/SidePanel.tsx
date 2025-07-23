@@ -48,7 +48,7 @@ const LeftAlignedPanel: React.FC<React.PropsWithChildren<{ isOpen: boolean }>> =
     <aside
       style={{
         width: isOpen ? PANEL_WIDTH : '0',
-        overflowY: 'auto',
+        overflowY: 'scroll',
         borderRight: '2px solid var(--color-button-border)',
         transition: 'width 0.3s ease-in-out',
         paddingTop: '0.5em',

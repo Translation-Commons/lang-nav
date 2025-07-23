@@ -19,10 +19,6 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       <CensusSourceSection census={census} />
       <div className="section">
         <h3>Languages</h3>
-        <div style={{ textAlign: 'center', display: 'flex' }}>
-          <LimitInput />
-          <LanguageScopeSelector />
-        </div>
         <TableOfLanguagesInCensus census={census} />
       </div>
     </div>
