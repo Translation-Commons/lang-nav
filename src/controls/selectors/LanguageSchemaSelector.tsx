@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LanguageSchema } from '../../types/LanguageTypes';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
@@ -14,7 +14,7 @@ const LanguageSchemaSelector: React.FC = () => {
     <Selector
       selectorLabel="Language Definition"
       selectorDescription={selectorDescription}
-      appearance="list"
+      appearance={SelectorAppearance.List}
     >
       <SingleChoiceOptions<LanguageSchema>
         mode="flat"

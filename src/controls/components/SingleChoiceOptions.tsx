@@ -36,8 +36,8 @@ function SingleChoiceOptions<T extends React.Key>({
     </HoverableButton>
   ));
 
-  if (mode == 'flat') {
-    return contents;
+  if (mode === 'flat') {
+    return <div className="flatOptions">{contents}</div>;
   }
 
   return (

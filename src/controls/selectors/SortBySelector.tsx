@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SortBy, View } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
@@ -13,8 +13,13 @@ const SortBySelector: React.FC = () => {
   }
 
   return (
-    <Selector selectorLabel="Sort by:" selectorDescription="Choose the order of items in the view.">
+    <Selector
+      selectorLabel="Sort by"
+      selectorDescription="Choose the order of items in the view."
+      appearance={SelectorAppearance.List}
+    >
       <SingleChoiceOptions<SortBy>
+        mode="flat"
         options={Object.values(SortBy)}
         onChange={(sortBy: SortBy) => updatePageParams({ sortBy })}
         selected={sortBy}

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { LocaleSeparator } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
@@ -10,10 +10,12 @@ const LocaleSeparatorSelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Locale Separator:"
+      appearance={SelectorAppearance.List}
+      selectorLabel="Locale Separator"
       selectorDescription="Choose the separator in locale codes, eg. 'ar-EG' or 'ar_EG'"
     >
       <SingleChoiceOptions<LocaleSeparator>
+        mode="flat"
         options={['_', '-']}
         onChange={(localeSeparator: LocaleSeparator) => updatePageParams({ localeSeparator })}
         selected={localeSeparator}

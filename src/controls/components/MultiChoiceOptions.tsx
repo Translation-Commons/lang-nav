@@ -33,9 +33,11 @@ function MultiChoiceOptions<T extends React.Key>({
   const [expanded, setExpanded] = useState(false);
   const popupRef = useClickOutside(() => setExpanded(false));
 
-  return mode == 'flat' ? (
-    contents
-  ) : (
+  if (mode === 'flat') {
+    return <div className="flatOptions">{contents}</div>;
+  }
+
+  return (
     <>
       <HoverableButton
         hoverContent={getOptionDescription(selected)}

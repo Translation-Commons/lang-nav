@@ -49,8 +49,14 @@
   border: none;
 }
 
-.selector.list button {
+.selector.list .flatOptions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 0.5em;
   margin-left: 1em;
+}
+
+.selector.list button {
   border-radius: 1em;
 }
 

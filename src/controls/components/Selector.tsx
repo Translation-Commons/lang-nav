@@ -4,8 +4,14 @@ import Hoverable from '../../generic/Hoverable';
 
 import './selector.css';
 
+export enum SelectorAppearance {
+  Rounded = 'rounded',
+  Tabs = 'tabs',
+  List = 'list',
+}
+
 type Props = {
-  appearance?: 'rounded' | 'tabs' | 'list';
+  appearance?: SelectorAppearance;
   children: ReactNode;
   selectorLabel?: ReactNode;
   selectorDescription?: ReactNode;

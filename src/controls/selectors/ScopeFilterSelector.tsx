@@ -5,7 +5,7 @@ import { ObjectType } from '../../types/PageParamTypes';
 import { ScopeLevel } from '../../types/ScopeLevel';
 import { getObjectTypeLabelPlural } from '../../views/common/getObjectName';
 import MultiChoiceOptions from '../components/MultiChoiceOptions';
-import Selector from '../components/Selector';
+import Selector, { SelectorAppearance } from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
 const ScopeFilterSelector: React.FC = () => {
@@ -25,7 +25,11 @@ const ScopeFilterSelector: React.FC = () => {
   const selectorDescription = `Filter the ${getObjectTypeLabelPlural(objectType)} shown by the granularity of the code -- eg. grouped objects, individual objects, or parts of objects.`;
 
   return (
-    <Selector selectorLabel="Scope" selectorDescription={selectorDescription} appearance="list">
+    <Selector
+      selectorLabel="Scope"
+      selectorDescription={selectorDescription}
+      appearance={SelectorAppearance.List}
+    >
       <MultiChoiceOptions
         mode="flat"
         options={Object.values(ScopeLevel)}

@@ -24,7 +24,7 @@ const PageLayout: React.FC<React.PropsWithChildren<Props>> = ({
         <aside
           style={{
             width: isOpen ? '16em' : '0',
-            overflowY: 'scroll',
+            overflowY: 'auto',
             borderRight: '2px solid var(--color-button-border)',
             transition: 'width 0.3s ease-in-out',
           }}
@@ -53,7 +53,7 @@ const PageLayout: React.FC<React.PropsWithChildren<Props>> = ({
             </HoverableButton>
           </div>
         </aside>
-        <main style={{ flex: 1, padding: '1em', overflow: 'scroll' }}>{children}</main>
+        <main style={{ flex: 1, padding: '1em', overflow: 'auto' }}>{children}</main>
       </div>
       {footer}
     </div>
