@@ -98,7 +98,8 @@
   background: var(--color-background);
 }
 
-.selector button:hover, .selector.list button:hover {
+.selector button:hover,
+.selector.list button:hover {
   color: var(--color-background);
   background: var(--color-button-hover);
 }
@@ -120,7 +121,8 @@
   border-top-right-radius: 2em;
 }
 
-.selector .selected, .selector.list .selected {
+.selector .selected,
+.selector.list .selected {
   background: var(--color-button-primary);
   color: var(--color-background);
 }
