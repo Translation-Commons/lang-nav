@@ -26,7 +26,6 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   );
 
   return (
-    
     <>
       <div style={{ marginBottom: '1em' }}>
         <VisibleItemsMeter objects={objects} />

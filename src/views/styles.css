@@ -129,7 +129,6 @@ dt {
   gap: 0.25em;
   flex-wrap: wrap;
   justify-content: center;
-
 }
 
 @media (min-width: 0px) {
