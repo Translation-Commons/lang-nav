@@ -12,10 +12,11 @@ import VisibleItemsMeter from '../../VisibleItemsMeter';
 import './tableStyles.css';
 
 export interface TableColumn<T> {
+  isInitiallyVisible?: boolean;
+  isNumeric?: boolean;
+  key: string;
   label?: React.ReactNode;
   render: (object: T) => React.ReactNode;
-  key: string;
-  isNumeric?: boolean;
   sortParam?: SortBy;
 }
 
@@ -34,7 +35,7 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
 
   const [visibleColumns, setVisibleColumns] = useState(() =>
-    Object.fromEntries(columns.map((col) => [col.key, true])),
+    Object.fromEntries(columns.map((col) => [col.key, col.isInitiallyVisible ?? true])),
   );
 
   const toggleColumn = useCallback((columnKey: string) => {

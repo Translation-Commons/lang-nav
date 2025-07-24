@@ -57,10 +57,11 @@ const TerritoryTable: React.FC = () => {
                 style={{ textDecoration: 'none' }}
               />
             ),
+          isInitiallyVisible: false,
         },
         {
           key: 'Type',
-          render: (object) => object.territoryType,
+          render: (object) => object.scope,
         },
         InfoButtonColumn,
       ]}

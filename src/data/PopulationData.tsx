@@ -1,11 +1,11 @@
+import { getCensusCollectorTypeRank } from '../types/CensusTypes';
 import {
   BCP47LocaleCode,
+  isTerritoryGroup,
   LocaleData,
   LocaleInCensus,
   TerritoryData,
-  TerritoryType,
 } from '../types/DataTypes';
-import { getObjectScopeLevel, ScopeLevel } from '../types/ScopeLevel';
 
 import { CoreData } from './CoreData';
 
@@ -14,6 +14,11 @@ type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
   // Potential filters:
   // acquisitionOrder: Any > L1 > L2 > L3
+
+  // Prefer government sources over CLDR
+  (a, b) =>
+    getCensusCollectorTypeRank(a.census.collectorType) -
+    getCensusCollectorTypeRank(b.census.collectorType),
 
   // Get the most recent census estimate
   (a, b) => b.census.yearCollected - a.census.yearCollected,
@@ -60,7 +65,7 @@ function setLocalePopulationEstimate(locale: LocaleData, record: LocaleInCensus)
 
 // This re-computes regional locales (eg. es_419, Spanish in Latin America).
 function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
-  if (getObjectScopeLevel(territory) !== ScopeLevel.Groups) {
+  if (!isTerritoryGroup(territory.scope)) {
     return; // Only recompute for regional locales
   }
   // Re-compute the estimate for the contained territories first.
@@ -98,9 +103,7 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
 export function computeLocaleWritingPopulation(locales: Record<BCP47LocaleCode, LocaleData>): void {
   Object.values(locales)
     .filter(
-      (l) =>
-        l.territory?.territoryType === TerritoryType.Country ||
-        l.territory?.territoryType === TerritoryType.Dependency,
+      (l) => !isTerritoryGroup(l.territory?.scope), // Skip regional locales
     )
     .forEach((locale) => {
       const literacyPercent = locale.territory?.literacyPercent ?? 100;

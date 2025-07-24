@@ -4,7 +4,12 @@ import { useDataContext } from '../../data/DataContext';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import {
+  CodeColumn,
+  EndonymColumn,
+  InfoButtonColumn,
+  NameColumn,
+} from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const LanguageTable: React.FC = () => {
@@ -16,9 +21,11 @@ const LanguageTable: React.FC = () => {
       columns={[
         CodeColumn,
         NameColumn,
+        EndonymColumn,
         {
           key: 'Scope',
           render: (lang) => lang.scope ?? lang.scope,
+          isInitiallyVisible: false,
         },
         {
           key: 'Population',
@@ -29,6 +36,7 @@ const LanguageTable: React.FC = () => {
         {
           key: 'Internet Technologies',
           render: (lang) => <CLDRCoverageInfo object={lang} />,
+          isInitiallyVisible: false,
         },
         InfoButtonColumn,
       ]}

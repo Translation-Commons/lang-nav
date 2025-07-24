@@ -31,7 +31,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         {populationSpeakingPercent != null && (
           <div>
             {numberToFixedUnlessSmall(populationSpeakingPercent)}% of{' '}
-            {territory?.territoryType ?? 'territory'}
+            {territory?.scope ?? 'territory'}
           </div>
         )}
       </div>
