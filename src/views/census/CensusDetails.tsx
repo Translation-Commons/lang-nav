@@ -1,7 +1,5 @@
 import React from 'react';
 
-import LanguageScopeSelector from '../../controls/selectors/LanguageScopeSelector';
-import LimitInput from '../../controls/selectors/LimitInput';
 import { CensusData } from '../../types/CensusTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 

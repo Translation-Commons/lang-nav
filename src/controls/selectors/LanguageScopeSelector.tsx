@@ -2,17 +2,12 @@ import React from 'react';
 
 import { toSentenceCase } from '../../generic/stringUtils';
 import { LanguageScope } from '../../types/LanguageTypes';
-import { ObjectType } from '../../types/PageParamTypes';
 import MultiChoiceOptions from '../components/MultiChoiceOptions';
 import Selector from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
 const LanguageScopeSelector: React.FC = () => {
-  const { languageScopes, updatePageParams, objectType } = usePageParams();
-
-  if (![ObjectType.Language, ObjectType.Locale, ObjectType.Census].includes(objectType)) {
-    return null; // Only application for language and locale objects
-  }
+  const { languageScopes, updatePageParams } = usePageParams();
 
   function getOptionLabel(scope: LanguageScope): string {
     return toSentenceCase(getLanguageScopePlural(scope));
