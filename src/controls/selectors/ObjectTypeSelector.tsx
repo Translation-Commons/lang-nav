@@ -53,8 +53,8 @@ const OptionDescription: React.FC<{ objectType: ObjectType }> = ({ objectType })
       return (
         <>
           <label>Language (Languoid):</label>A verbal communication system used by multiple people.
-          Languages should be are mutually intelligible, whereas a dialect is a subset of a language
-          defined by differences in lexicon and pronounciation. Since languages families, contested
+          Languages should be mutually intelligible, whereas a dialect is a subset of a language
+          defined by differences in lexicon and pronunciation. Since languages families, contested
           languages, and dialects are included it is more precise to consider these
           &quot;Languoids&quot;.
         </>
@@ -64,7 +64,7 @@ const OptionDescription: React.FC<{ objectType: ObjectType }> = ({ objectType })
         <>
           <label>Locale:</label>The combination of a language and territory -- used to express how
           many people speak a language in a given area or if a language is officially supported.
-          Some locales specific a particular writing system and/or variation information (dialect,
+          Some locales specify a particular writing system and/or variation information (dialect,
           orthography...).
         </>
       );

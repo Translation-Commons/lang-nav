@@ -55,7 +55,7 @@ function Selector<T extends React.Key>({
         optionsDisplay={optionsDisplay}
       />
 
-      {optionsDisplay === 'dropdown' && (
+      {optionsDisplay === OptionsDisplay.Dropdown && (
         <SelectorOption<T>
           getOptionDescription={getOptionDescription}
           getOptionLabel={(opt) => `${getOptionLabel(opt)} ${expanded ? `▼` : `▶`}`}
