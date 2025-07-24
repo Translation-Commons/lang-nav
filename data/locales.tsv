@@ -565,7 +565,7 @@ odk_IN	Oadki (India)		odk	IN			3 Ethnologue	2,000,000
 pms_IT	Piedmontese (Italy)	Piemontèis	pms	IT			4 EDL	2,000,000	
 sxu_DE	Upper Saxon (Germany)	Sächsisch	sxu	DE			7 Fallback	2,000,000	
 ijs_NG	Southeast Ijo (Nigeria)		ijs	NG			3 Ethnologue	2,000,000	
-epo_001	(World)	Esperanto	epo	     1			7 Fallback	2,000,000	
+epo_001	(World)	Esperanto	epo	001			7 Fallback	2,000,000	
 ben_PK	Bengali (Pakistan)	বাংলা	ben	PK			5 Other	2,000,000	
 eng_PR	English (Puerto Rico)	English	eng	PR			3 Ethnologue	1,999,000	de_facto_official
 zyb_CN	Zhuang, Yang (China)		zyb	CN			3 Ethnologue	1,980,000	
@@ -6991,7 +6991,7 @@ psn_ID	Panasuan (Indonesia)	bahasa Panasuan	psn	ID			3 Ethnologue	800
 ret_ID	Reta (Indonesia)	bahasa Retta	ret	ID			3 Ethnologue	800	
 ssv_VU	Ngen (Vanuatu)		ssv	VU			4 EDL	800	
 szv_CM	Isubu (Cameroon)		szv	CM			3 Ethnologue	800	
-tok_001	Toki Pona (World)	toki pona	tok	     1			5 Other	800	
+tok_001	Toki Pona (World)	toki pona	tok	001			5 Other	800	
 tue_BR	Tuyuca (Brazil)	Docapúaraye	tue	BR			3 Ethnologue	800	
 twg_ID	Tereweng (Indonesia)	bahasa Tereweng	twg	ID			3 Ethnologue	800	
 urb_BR	Kaapor (Brazil)		urb	BR			3 Ethnologue	800	
@@ -7886,7 +7886,7 @@ urr_VU	Löyöp (Vanuatu)		urr	VU			4 EDL	200
 dgg_PG	Doga (Papua New Guinea)		dgg	PG			3 Ethnologue	200	
 igg_PG	Igana (Papua New Guinea)		igg	PG			3 Ethnologue	200	
 cet_NG	Centúúm (Nigeria)		cet	NG			3 Ethnologue	200	
-vol_001	Volapük (World)	Volapük	vol	     1			5 Other	200	
+vol_001	Volapük (World)	Volapük	vol	001			5 Other	200	
 zen_MR	Zenaga (Mauritania)		zen	MR			3 Ethnologue	200	
 uya_NG	Doko-Uyanga (Nigeria)		uya	NG			3 Ethnologue	200	
 wai_ID	Wares (Indonesia)		wai	ID			3 Ethnologue	200	
@@ -8946,7 +8946,7 @@ ash_PE	Tequiraca (Peru)		ash	PE			4 EDL	1
 atx_BR	Arutani (Brazil)		atx	BR			3 Ethnologue	1	
 aux_BR	Auré (Brazil)		aux	BR			3 Ethnologue	1	
 avd_IR	Alviri-Vidari (Iran)		avd	IR			3 Ethnologue	1	
-avk_001	Kotava (World)	Kotava	avk	     1			5 Other	1	
+avk_001	Kotava (World)	Kotava	avk	001			5 Other	1	
 avo_BR	Agavotaguerra (Brazil)		avo	BR			3 Ethnologue	1	
 axg_BR	Arára of Mato Grosso (Brazil)		axg	BR			3 Ethnologue	1	
 bab_SN	Bainouk-Gunyuño (Senegal)		bab	SN			4 EDL	1	
@@ -9023,14 +9023,14 @@ hnj_VN	Hmong Njua (Vietnam)	𞄀𞄄𞄰𞄩𞄍𞄜𞄰	hnj	VN			3 Ethnologue	1
 hpo_MM	Hpon (Myanmar)		hpo	MM			3 Ethnologue	1	
 huw_ID	Hukumina (Indonesia)	bahasa Bambaa	huw	ID			3 Ethnologue	1	
 hvc_HT	Haitian Vodoun Culture Language (Haiti)		hvc	HT			3 Ethnologue	1	
-ina_001	Interlingua (World)	Interlingua	ina	     1			5 Other	1	
+ina_001	Interlingua (World)	Interlingua	ina	001			5 Other	1	
 ina_SE	Interlingua (Sweden)	Interlingua	ina	SE			5 Other	1	
-ile_001	Interlingue (World)	Interlingue	ile	     1			5 Other	1	
+ile_001	Interlingue (World)	Interlingue	ile	001			5 Other	1	
 ile_EE	Interlingue (Estonia)	Interlingue	ile	EE			5 Other	1	
 ign_BO	Ignaciano (Bolivia)		ign	BO			4 EDL	1	
 ihb_ID	Iha Based Pidgin (Indonesia)	bahasa Iha Based Pidgin	ihb	ID			3 Ethnologue	1	
 inb_CO	Inga (Colombia)		inb	CO			4 EDL	1	
-ido_001	Ido (World)	Ido	ido	     1			5 Other	1	
+ido_001	Ido (World)	Ido	ido	001			5 Other	1	
 ido_RU	Ido (Russia)	Ido	ido	RU			1 Census	1	
 ito_BO	Itonama (Bolivia)		ito	BO			4 EDL	1	
 jaj_SB	Zazao (Solomon Islands)		jaj	SB			4 EDL	1	
@@ -9062,7 +9062,7 @@ kzw_BR	Karirí-Xocó (Brazil)		kzw	BR			3 Ethnologue	1
 lcp_TH	Western Lawa (Thailand)		lcp	TH			4 EDL	1	
 lec_BO	Leco (Bolivia)		lec	BO			4 EDL	1	
 len_HN	Honduran Lenca (Honduras)		len	HN			4 EDL	1	
-lfn_001	Lingua Franca Nova (World)	lingua franca nova	lfn	     1			5 Other	1	
+lfn_001	Lingua Franca Nova (World)	lingua franca nova	lfn	001			5 Other	1	
 lgb_SB	Laghu (Solomon Islands)		lgb	SB			4 EDL	1	
 lkd_BR	Lakondê (Brazil)		lkd	BR			3 Ethnologue	1	
 lnn_VU	Lorediakarkar (Vanuatu)		lnn	VU			4 EDL	1	
@@ -9103,7 +9103,7 @@ nil_ID	Nila (Indonesia)	bahasa Nila	nil	ID			3 Ethnologue	1
 njt_SR	Ndyuka-Trio Pidgin (Suriname)		njt	SR			4 EDL	1	
 nlr_AU	Ngarla (Australia)	#N/A	nlr	AU			6 Generalized Data	1	
 nnx_CM	Ngong (Cameroon)		nnx	CM			6 Generalized Data	1	
-nov_001	Novial (World)	Novial	nov	     1			5 Other	1	
+nov_001	Novial (World)	Novial	nov	001			5 Other	1	
 nrr_IN	Nora (India)		nrr	IN			3 Ethnologue	1	
 nuc_BR	Nukini (Brazil)		nuc	BR			3 Ethnologue	1	
 ogo_RU	Khana (Russia)		ogo	RU			1 Census	1	
@@ -9379,7 +9379,7 @@ csp_CN	Southern Ping Chinese (China)		csp	CN			7 Fallback
 cnp_CN	Northern Ping Chinese (China)		cnp	CN			7 Fallback		
 cnp_VN	Northern Ping Chinese (Vietnam)		cnp	VN			7 Fallback		
 ymm_SO	Maay (Somalia)		ymm	SO			7 Fallback		
-igs_001	Interglossa (World)		igs	     1			7 Fallback		
+igs_001	Interglossa (World)		igs	001			7 Fallback		
 pzh_TW	Pazeh (Taiwan)	Pazeh	pzh	TW			7 Fallback		
 pli_Lana_TH	(Thailand, Tai Tham (Lanna))	पालि	pli	TH	Lana		7 Fallback		
 pli_Sinh_LK	(Sri Lanka, Sinhala)	पालि	pli	LK	Sinh		7 Fallback		
@@ -9467,7 +9467,7 @@ gyz_NG	Geji (Nigeria)		gyz	NG			7 Fallback
 kkg_PH	Mabaka Valley Kalinga (Philippines)		kkg	PH			7 Fallback		
 lsn_CN	Tibetan Sign Language (China)		lsn	CN			7 Fallback		
 wdt_CA	Wendat (Canada)		wdt	CA			7 Fallback		
-und_001	Undetermined (World)	undetermined language	und	     1			7 Fallback		
+und_001	Undetermined (World)	undetermined language	und	001			7 Fallback		
 bpe_PG	(Papua New Guinea)		bpe	PG			7 Fallback		
 glb_NG	(Nigeria)		glb	NG			7 Fallback		
 asq_AT	Austrian Sign Language (Austria)	Österreichische Gebärdensprache	asq	AT			7 Fallback		
@@ -9478,7 +9478,7 @@ szy_TW	Sakizaya (Taiwan)	Sakizaya	szy	TW			7 Fallback
 sux_IQ	Sumerian (Iraq)	𒅴𒂠	sux	IQ			7 Fallback		
 hbo_IL	Ancient Hebrew (Israel)	עִבְרִית מִקְרָאִית	hbo	IL			7 Fallback		
 egy_EG	Egyptian (Ancient) (Egypt)	𓂋𓏤𓈖𓆎𓅓𓏏𓊖	egy	EG			7 Fallback		
-jbo_001	Lojban (World)	la .lojban.	jbo	     1			7 Fallback		
+jbo_001	Lojban (World)	la .lojban.	jbo	001			7 Fallback		
 keh_PG	Keak (Papua New Guinea)		keh	PG			7 Fallback		
 mes_TD	Masmaje (Chad)		mes	TD			7 Fallback		
 olm_NG	Oloma (Nigeria)		olm	NG			7 Fallback		
@@ -9503,7 +9503,7 @@ fnb_VU	Fanbak (Vanuatu)		fnb	VU			7 Fallback
 gef_ID	Gerai (Indonesia)	bahasa Gerai	gef	ID			7 Fallback		
 gov_CI	Goo (Côte d’Ivoire)		gov	CI			7 Fallback		
 ikh_NG	Ikhin-Arokho (Nigeria)		ikh	NG			7 Fallback		
-isv_001	Interslavic (World)	Medžuslovjansky	isv	     1			7 Fallback		
+isv_001	Interslavic (World)	Medžuslovjansky	isv	001			7 Fallback		
 izm_NG	Kizamani (Nigeria)		izm	NG			7 Fallback		
 jas_NC	New Caledonian Javanese (New Caledonia)		jas	NC			7 Fallback		
 kjt_TH	Phrae Pwo Karen (Thailand)		kjt	TH			7 Fallback		
@@ -9567,8 +9567,8 @@ akk_IQ	Akkadian (Iraq)	𒀝 𒅗 𒁺 𒌑	akk	IQ			7 Fallback
 ana_CO	Andaqui (Colombia)		ana	CO			7 Fallback		
 atc_PE	Atsahuaca (Peru)		atc	PE			7 Fallback		
 rmd_DK	Traveller Danish (Denmark)		rmd	DK			7 Fallback		
-afh_001	Afrihili (World)	Ɛl-Afrihili	afh	     1			7 Fallback		
-bzt_001	Brithenig (World)		bzt	     1			7 Fallback		
+afh_001	Afrihili (World)	Ɛl-Afrihili	afh	001			7 Fallback		
+bzt_001	Brithenig (World)		bzt	001			7 Fallback		
 ddr_AU	Dhudhuroa (Australia)		ddr	AU			7 Fallback		
 npx_SB	Noipx (Solomon Islands)		npx	SB			7 Fallback		
 nsb_ZA	Lower Nossob (South Africa)		nsb	ZA			7 Fallback		
@@ -9739,7 +9739,7 @@ dcr_VI	Negerhollands (U.S. Virgin Islands)		dcr	VI			7 Fallback
 dlm_HR	Dalmatian (Croatia)		dlm	HR			7 Fallback		
 dmf_NG	Medefaidrin (Nigeria)		dmf	NG			7 Fallback		
 dum_NL	Middle Dutch (ca. 1050-1350) (Netherlands)		dum	NL			7 Fallback		
-dws_001	Dutton World Speedwords (World)		dws	     1			7 Fallback		
+dws_001	Dutton World Speedwords (World)		dws	001			7 Fallback		
 ecr_GR	Eteocretan (Greece)		ecr	GR			7 Fallback		
 elx_IR	Elamite (Iran)		elx	IR			7 Fallback		
 emm_MX	Mamulique (Mexico)		emm	MX			7 Fallback		
@@ -9767,7 +9767,7 @@ hom_SS	Homa (South Sudan)		hom	SS			7 Fallback
 htx_TR	Middle Hittite (Turkey)		htx	TR			7 Fallback		
 iff_VU	Ifo (Vanuatu)		iff	VU			7 Fallback		
 ihw_AU	Bidhawal (Australia)		ihw	AU			7 Fallback		
-ils_001	International Sign (World)		ils	     1			7 Fallback		
+ils_001	International Sign (World)		ils	001			7 Fallback		
 iml_US	Miluk (United States)		iml	US			7 Fallback		
 ims_IT	Marsian (Italy)		ims	IT			7 Fallback		
 inm_YE	Minaean (Yemen)		inm	YE			7 Fallback		
@@ -9779,7 +9779,7 @@ kuz_CL	Kunza (Chile)		kuz	CL			7 Fallback
 kwz_AO	Kwadi (Angola)		kwz	AO			7 Fallback		
 kzk_SB	Kazukuru (Solomon Islands)		kzk	SB			7 Fallback		
 lab_GR	Linear A (Greece)		lab	GR			7 Fallback		
-ldn_001	Láadan (World)	Láadan	ldn	     1			7 Fallback		
+ldn_001	Láadan (World)	Láadan	ldn	001			7 Fallback		
 lhs_SY	Mlahsö (Syria)		lhs	SY			7 Fallback		
 lng_HU	Langobardic (Hungary)		lng	HU			7 Fallback		
 lre_CA	Laurentian (Canada)		lre	CA			7 Fallback		
@@ -9789,14 +9789,14 @@ mkq_US	Bay Miwok (United States)		mkq	US			7 Fallback
 mod_US	Mobilian (United States)		mod	US			7 Fallback		
 mtm_RU	Mator (Russia)		mtm	RU			7 Fallback		
 mtn_NI	Matagalpa (Nicaragua)		mtn	NI			7 Fallback		
-mul_001	Multiple languages (World)	*	mul	     1			7 Fallback		
+mul_001	Multiple languages (World)	*	mul	001			7 Fallback		
 mwu_SS	Mittu (South Sudan)		mwu	SS			7 Fallback		
 mxi_ES	Mozarabic (Spain)	مُزَرَب	mxi	ES			7 Fallback		
-mzg_150	Monastic Sign Language (Europe)		mzg	     150			7 Fallback		
+mzg_150	Monastic Sign Language (Europe)		mzg	00150			7 Fallback		
 nci_MX	Classical Nahuatl (Mexico)	Nāhuatlahtōlli	nci	MX			7 Fallback		
 ndf_RU	Nadruvian (Russia)		ndf	RU			7 Fallback		
 nei_TR	Neo-Hittite (Turkey)		nei	TR			7 Fallback		
-neu_001	Neo (World)		neu	     1			7 Fallback		
+neu_001	Neo (World)		neu	001			7 Fallback		
 nkp_TO	Niuatoputapu (Tonga)		nkp	TO			7 Fallback		
 nrc_AT	Noric (Austria)		nrc	AT			7 Fallback		
 nrc_SI	Noric (Slovenia)		nrc	SI			7 Fallback		
@@ -9869,11 +9869,11 @@ puq_BO	Puquina (Bolivia)		puq	BO			7 Fallback
 pyx_MM	Pyu (Myanmar) (Myanmar)		pyx	MM			7 Fallback		
 quq_ES	Quinqui (Spain)		quq	ES			7 Fallback		
 qwt_US	Kwalhioqua-Tlatskanai (United States)		qwt	US			7 Fallback		
-qya_001	Quenya (World)		qya	     1			7 Fallback		
+qya_001	Quenya (World)		qya	001			7 Fallback		
 qyp_US	Quiripi (United States)		qyp	US			7 Fallback		
 rem_PE	Remo (Peru)		rem	PE			7 Fallback		
 rer_ET	Rer Bare (Ethiopia)		rer	ET			7 Fallback		
-rmv_001	Romanova (World)		rmv	     1			7 Fallback		
+rmv_001	Romanova (World)		rmv	001			7 Fallback		
 rmw_GB	Welsh Romani (United Kingdom)		rmw	GB			7 Fallback		
 rrt_AU	Arritinngithigh (Australia)		rrt	AU			7 Fallback		
 rts_RU	Yurats (Russia)		rts	RU			7 Fallback		
@@ -9883,7 +9883,7 @@ sdt_FR	Shuadit (France)	שואדית	sdt	FR			7 Fallback
 sga_IE	Old Irish (to 900) (Ireland)		sga	IE			7 Fallback		
 sgm_KE	Singa (Kenya)		sgm	KE			7 Fallback		
 sjk_FI	Kemi Sami (Finland)		sjk	FI			7 Fallback		
-sjn_001	Sindarin (World)		sjn	     1			7 Fallback		
+sjn_001	Sindarin (World)		sjn	001			7 Fallback		
 skw_GY	Skepi Creole Dutch (Guyana)		skw	GY			7 Fallback		
 smp_IL	Samaritan (Israel)	עברית שומרונית	smp	IL			7 Fallback		
 sni_PE	Sensi (Peru)		sni	PE			7 Fallback		
@@ -9917,7 +9917,7 @@ txh_BG	Thracian (Bulgaria)		txh	BG			7 Fallback
 txh_TR	Thracian (Turkey)		txh	TR			7 Fallback		
 txr_ES	Tartessian (Spain)		txr	ES			7 Fallback		
 txr_PT	Tartessian (Portugal)		txr	PT			7 Fallback		
-tzl_001	Talossan (World)	Talossan	tzl	     1			7 Fallback		
+tzl_001	Talossan (World)	Talossan	tzl	001			7 Fallback		
 uby_TR	Ubykh (Turkey)	atʷaχəbza	uby	TR			7 Fallback		
 uga_SY	Ugaritic (Syria)		uga	SY			7 Fallback		
 ule_AR	Lule (Argentina)		ule	AR			7 Fallback		
@@ -9981,7 +9981,7 @@ xhr_IT	Hernican (Italy)		xhr	IT			7 Fallback
 xht_TR	Hattic (Turkey)		xht	TR			7 Fallback		
 xhu_SY	Hurrian (Syria)		xhu	SY			7 Fallback		
 xib_ES	Iberian (Spain)		xib	ES			7 Fallback		
-xil_150	Illyrian (Europe)		xil	     150			7 Fallback		
+xil_150	Illyrian (Europe)		xil	00150			7 Fallback		
 xiv_PK	Indus Valley Language (Pakistan)		xiv	PK			7 Fallback		
 xlb_US	Loup B (United States)		xlb	US			7 Fallback		
 xlc_TR	Lycian (Turkey)		xlc	TR			7 Fallback		
@@ -10057,10 +10057,10 @@ xzm_LT	Zemgalian (Lithuania)		xzm	LT			7 Fallback
 xzm_LV	Zemgalian (Latvia)		xzm	LV			7 Fallback		
 xzp_MX	Ancient Zapotec (Mexico)		xzp	MX			7 Fallback		
 yei_CM	Yeni (Cameroon)		yei	CM			7 Fallback		
-zba_001	Balaibalan (World)		zba	     1			7 Fallback		
-zbl_001	Blissymbols (World)		zbl	     1			7 Fallback		
-zxx_001	No linguistic content (World)	no linguistic content	zxx	     1			7 Fallback		
-tlh_001	Klingon (World)	tlhIngan-Hol	tlh	     1			7 Fallback		
+zba_001	Balaibalan (World)		zba	001			7 Fallback		
+zbl_001	Blissymbols (World)		zbl	001			7 Fallback		
+zxx_001	No linguistic content (World)	no linguistic content	zxx	001			7 Fallback		
+tlh_001	Klingon (World)	tlhIngan-Hol	tlh	001			7 Fallback		
 ayy_PH	Ayta, Tayabas (Philippines)		ayy	PH			7 Fallback		
 dit_AU	Dirari (Australia)		dit	AU			7 Fallback		
 ekc_AU	Karnic, Eastern (Australia)		ekc	AU			7 Fallback		
