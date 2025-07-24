@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getScopeFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { TerritoryData } from '../../types/DataTypes';
@@ -13,6 +14,7 @@ interface Props {
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
   const { population, ID, sovereign, locales } = territory;
   const { updatePageParams } = usePageParams();
+  const filterByScope = getScopeFilter();
 
   return (
     <div>
@@ -30,9 +32,11 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         <div>
           <h4>Languages:</h4>
           <CommaSeparated>
-            {Object.values(locales).map((locale) => (
-              <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
-            ))}
+            {Object.values(locales)
+              .filter(filterByScope)
+              .map((locale) => (
+                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
+              ))}
           </CommaSeparated>
         </div>
       )}

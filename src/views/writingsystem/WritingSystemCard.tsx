@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getScopeFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { WritingSystemData, WritingSystemScope } from '../../types/DataTypes';
@@ -22,6 +23,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     scope,
     unicodeVersion,
   } = writingSystem;
+  const filterByScope = getScopeFilter();
   const { updatePageParams } = usePageParams();
 
   return (
@@ -43,9 +45,11 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         <div>
           <label>Languages:</label>
           <CommaSeparated>
-            {Object.values(languages).map((lang) => (
-              <HoverableObjectName key={lang.ID} object={lang} />
-            ))}
+            {Object.values(languages)
+              .filter(filterByScope)
+              .map((lang) => (
+                <HoverableObjectName key={lang.ID} object={lang} />
+              ))}
           </CommaSeparated>
         </div>
       )}

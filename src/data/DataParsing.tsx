@@ -9,7 +9,6 @@ import {
 import { LanguageModality } from '../types/LanguageTypes';
 import { LanguageData } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
-import { ScopeLevel } from '../types/ScopeLevel';
 
 export function parseLanguageLine(line: string): LanguageData {
   const parts = line.split('\t');
@@ -80,8 +79,6 @@ export function parseLocaleLine(line: string): LocaleData {
     type: ObjectType.Locale,
     ID: parts[0],
     codeDisplay: parts[0],
-    // All locales from the locale input file should be at the country or smaller level
-    scope: variantTag ? ScopeLevel.Parts : ScopeLevel.Individuals,
     localeSource: 'regularInput',
 
     nameDisplay: parts[1],
