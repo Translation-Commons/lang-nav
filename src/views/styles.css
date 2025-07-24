@@ -130,3 +130,27 @@ dt {
   flex-wrap: wrap;
   justify-content: center;
 }
+
+@media (min-width: 0px) {
+  .CardList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (min-width: 500px) {
+  .CardList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 800px) {
+  .CardList {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1100px) {
+  .CardList {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

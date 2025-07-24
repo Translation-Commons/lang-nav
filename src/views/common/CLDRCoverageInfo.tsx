@@ -1,6 +1,7 @@
 import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
 import React from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import { CLDRCoverageLevel } from '../../types/CLDRTypes';
 import { LocaleData } from '../../types/DataTypes';
@@ -35,7 +36,7 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
     return (
       <>
         <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />
-        <span className="unsupported">Not supported by CLDR or ICU.</span>
+        <Deemphasized>Not supported by CLDR or ICU.</Deemphasized>
       </>
     );
   }
