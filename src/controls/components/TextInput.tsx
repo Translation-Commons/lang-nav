@@ -1,4 +1,4 @@
-import { SearchIcon, ExternalLinkIcon, XIcon } from 'lucide-react';
+import { ExternalLinkIcon, XIcon, FilterIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import HoverableButton from '../../generic/HoverableButton';
@@ -82,7 +82,10 @@ const TextInput: React.FC<Props> = ({
         onBlur={() => setTimeout(() => setShowSuggestions(false), 500)}
         onFocus={() => setShowSuggestions(true)}
         placeholder={placeholder}
-        style={{ ...inputStyle, width: inputWidth + 5 }}
+        style={{
+          ...inputStyle,
+          width: inputWidth + 5,
+        }}
       />
       <span
         ref={spanRef}
@@ -172,7 +175,7 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     <div className="SuggestionRowWithMultipleInteractions">
       <div>{label}</div>
       <HoverableButton hoverContent={<>Filter by &quot;{searchString}&quot;</>} onClick={setFilter}>
-        <SearchIcon size="1em" display="block" />
+        <FilterIcon size="1em" display="block" />
       </HoverableButton>
       <HoverableButton
         hoverContent={<>Go to the details page for {searchString}</>}

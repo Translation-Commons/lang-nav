@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import Selector from '../../controls/components/Selector';
+import Selector from '../../controls/components/SelectorOld';
 import TextInput from '../../controls/components/TextInput';
 import { getScopeFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';

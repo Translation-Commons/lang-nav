@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ObjectTypeSelector from './selectors/ObjectTypeSelector';
-import ViewSelector from './selectors/ViewSelector';
+import ObjectTypeSelector from './selectors/ObjectTypeNavBarSelector';
+import ViewSelector from './selectors/ViewNavBarSelector';
 
 import './controls.css';
 

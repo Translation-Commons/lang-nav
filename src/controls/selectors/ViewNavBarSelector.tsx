@@ -1,20 +1,25 @@
 import React from 'react';
 
+import { useMediaQuery } from '../../generic/useMediaQuery';
 import { View } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector from '../components/SelectorOld';
+import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import { usePageParams } from '../PageParamsContext';
 
 const ViewSelector: React.FC = () => {
   const { view, updatePageParams } = usePageParams();
+  const isCompact = useMediaQuery('(max-width: 1450px)');
 
   return (
-    <Selector
-      selectorLabel="View:"
-      getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
-      options={Object.values(View)}
-      onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
-      selected={view}
-    />
+    <Selector selectorLabel="View:" appearance="tabs">
+      <SingleChoiceOptions<View>
+        getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
+        mode={isCompact ? 'dropdown' : 'flat'}
+        options={Object.values(View)}
+        onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
+        selected={view}
+      />
+    </Selector>
   );
 };
 

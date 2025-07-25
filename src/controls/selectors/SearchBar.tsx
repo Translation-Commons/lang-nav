@@ -2,7 +2,7 @@ import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
 import { SearchableField, View } from '../../types/PageParamTypes';
-import Selector from '../components/Selector';
+import Selector from '../components/SelectorOld';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';

@@ -2,7 +2,6 @@ import React from 'react';
 
 import { toSentenceCase } from '../../generic/stringUtils';
 import { LanguageScope } from '../../types/LanguageTypes';
-import MultiChoiceOptions from '../components/MultiChoiceOptions';
 import Selector from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
@@ -16,18 +15,18 @@ const LanguageScopeSelector: React.FC = () => {
     'Filter what level of language-type objects are shown, such as families, macrolanguages, languages, dialects, and special codes.';
 
   return (
-    <Selector selectorLabel="Language Scope:" selectorDescription={selectorDescription}>
-      <MultiChoiceOptions
-        options={Object.values(LanguageScope)}
-        onToggleOption={(scope: LanguageScope) =>
-          languageScopes.includes(scope)
-            ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
-            : updatePageParams({ languageScopes: [...languageScopes, scope] })
-        }
-        selected={languageScopes}
-        getOptionLabel={getOptionLabel}
-      />
-    </Selector>
+    <Selector
+      selectorLabel="Language Scope:"
+      selectorDescription={selectorDescription}
+      options={Object.values(LanguageScope)}
+      onChange={(scope: LanguageScope) =>
+        languageScopes.includes(scope)
+          ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
+          : updatePageParams({ languageScopes: [...languageScopes, scope] })
+      }
+      selected={languageScopes}
+      getOptionLabel={getOptionLabel}
+    />
   );
 };
 
