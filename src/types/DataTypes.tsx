@@ -15,12 +15,12 @@ export interface ObjectBase {
   names: string[];
 }
 
-export type ObjectData = 
-  | CensusData 
-  | LanguageData 
-  | LocaleData 
-  | TerritoryData 
-  | WritingSystemData 
+export type ObjectData =
+  | CensusData
+  | LanguageData
+  | LocaleData
+  | TerritoryData
+  | WritingSystemData
   | VariantTagData;
 
 // ISO 3166 territory code OR UN M49 code
@@ -171,7 +171,6 @@ export interface LocaleData extends ObjectBase {
   explicitScriptCode?: ScriptCode;
   variantTagID?: VariantIANATag;
   variantTags?: VariantTagData;
-  
 
   populationSource: PopulationSourceCategory;
   populationSpeaking: number;
@@ -190,7 +189,6 @@ export interface LocaleData extends ObjectBase {
   populationCensus?: CensusData; // The census record that provides the population estimate
   censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
 }
-
 
 export interface VariantTagData extends ObjectBase {
   type: ObjectType.VariantTag;

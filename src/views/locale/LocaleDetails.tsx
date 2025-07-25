@@ -5,8 +5,6 @@ import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 
-
-
 import LocaleCensusCitation from './LocaleCensusCitation';
 import { getOfficialLabel } from './LocaleStrings';
 
@@ -80,11 +78,11 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </div>
       )}
       {variantTags && (
-  <div>
-    <h3>Variant</h3>
-    <HoverableObjectName object={variantTags} />
-  </div>
-)}
+        <div>
+          <h3>Variant</h3>
+          <HoverableObjectName object={variantTags} />
+        </div>
+      )}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { LanguageData } from '../types/LanguageTypes';
 export function connectVariantTags(
   variantTags: VariantTagData[],
   languageMap: Record<string, LanguageData>,
-  locales: Record<string, LocaleData>
+  locales: Record<string, LocaleData>,
 ): void {
   //Link variants to languages and link languages back to variants
   const variantTagMap: Record<string, VariantTagData> = {};
@@ -15,7 +15,7 @@ export function connectVariantTags(
 
     //Link to LanguageData
     variant.languages = variant.associatedLanguageCodes
-      .map(code => languageMap[code])
+      .map((code) => languageMap[code])
       .filter((lang): lang is LanguageData => !!lang);
 
     //Link back from LanguageData to VariantTag

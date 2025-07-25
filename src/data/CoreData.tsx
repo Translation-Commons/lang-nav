@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { connectVariantTags } from './connectVariantTags'; 
+import { connectVariantTags } from './connectVariantTags';
 
 import { CensusID, CensusData } from '../types/CensusTypes';
 import {
@@ -122,7 +122,7 @@ export function useCoreData(): {
     addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
     const variantTagArray = convertToVariantTagData(ianaVariants || []);
     const variantTagMap: Record<VariantIANATag, VariantTagData> = Object.fromEntries(
-       variantTagArray.map(v => [v.ID, v])
+      variantTagArray.map((v) => [v.ID, v]),
     );
     connectVariantTags(Object.values(variantTagMap), languagesBySchema.CLDR, locales);
     setVariantTags(variantTagMap);

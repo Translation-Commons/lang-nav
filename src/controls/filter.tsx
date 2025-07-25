@@ -75,10 +75,7 @@ export function getScopeFilter(): FilterFunctionType {
           languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
         );
       case ObjectType.Territory:
-        return (
-          territoryScopes.length === 0 ||
-          territoryScopes.includes(object.scope)
-        );
+        return territoryScopes.length === 0 || territoryScopes.includes(object.scope);
       case ObjectType.Locale:
         return doesLocaleMatchScope(object, languageScopes, territoryScopes);
       case ObjectType.Census:
