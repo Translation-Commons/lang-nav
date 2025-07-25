@@ -9,6 +9,7 @@ import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
+import ProfileSelector from './selectors/ProfileSelector';
 import SortBySelector from './selectors/SortBySelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
@@ -33,6 +34,7 @@ const SidePanel: React.FC = () => {
     >
       <SidePanelSection panelWidth={panelWidth}>
         <SidePanelSectionTitle>Data</SidePanelSectionTitle>
+        <ProfileSelector />
         <ObjectTypeSelector />
         <LanguageListSourceSelector />
       </SidePanelSection>

@@ -11,7 +11,7 @@ const LocaleSeparatorSelector: React.FC = () => {
     <Selector
       selectorLabel="Locale Separator"
       selectorDescription="Choose the separator in locale codes, eg. 'ar-EG' or 'ar_EG'"
-      options={['_', '-']}
+      options={Object.values(LocaleSeparator)}
       optionsDisplay={OptionsDisplay.ButtonGroup}
       onChange={(localeSeparator: LocaleSeparator) => updatePageParams({ localeSeparator })}
       selected={localeSeparator}
