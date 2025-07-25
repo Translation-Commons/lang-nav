@@ -39,7 +39,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
     languageCode,
     territory,
     territoryCode,
-    variantTag,
+    variantTags,
     writingSystem,
   } = locale;
 
@@ -78,10 +78,10 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           )}
         </div>
       )}
-      {variantTag && (
+      {variantTags && (
   <div>
     <h3>Variant</h3>
-    <HoverableObjectName object={variantTag} />
+    <HoverableObjectName object={variantTags} />
   </div>
 )}
     </div>

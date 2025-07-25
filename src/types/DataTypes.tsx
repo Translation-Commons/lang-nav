@@ -170,7 +170,7 @@ export interface LocaleData extends ObjectBase {
   territoryCode: TerritoryCode;
   explicitScriptCode?: ScriptCode;
   variantTagID?: VariantIANATag;
-  variantTag?: VariantTagData;
+  variantTags?: VariantTagData;
   
 
   populationSource: PopulationSourceCategory;

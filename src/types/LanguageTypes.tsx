@@ -84,7 +84,7 @@ export interface LanguageData extends ObjectBase {
 
   schemaSpecific: Record<LanguageSchema, LanguageDataInSchema>;
   cldrCoverage?: CLDRCoverageData;
-  variantTag?: VariantTagData[]; // links to IANA variant tags
+  variantTags?: VariantTagData[]; // links to IANA variant tags
   cldrDataProvider?: LanguageData | LocaleData;
 
   // References to other objects, filled in after loading the TSV
