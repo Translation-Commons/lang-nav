@@ -5,12 +5,11 @@
 }
 
 :root {
-  --color-text: #222; /* Primary text color */
+  --color-text: #04355c; /* Primary text color */
   --color-text-secondary: grey;
   --color-text-highlight: #ffffa1;
   --color-background: #ffffff; /* App/page background */
 
-  --color-button-border: #06d; /* Button outlines and inactive text */
   --color-button-primary: #007bff; /* Bright, clickable primary action */
   --color-button-secondary: #f0f0f0; /* Inactive selection options, secondary buttons */
   --color-button-hover: #3399ff; /* selector hovered over or active*/
@@ -106,7 +105,6 @@ code {
     --color-background: #121212;
     --color-text-highlight: #575741;
 
-    --color-button-border: #444;
     --color-button-primary: #3399ff;
     --color-button-secondary: #444;
     --color-button-hover: #0061c3;

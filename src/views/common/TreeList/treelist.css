@@ -21,7 +21,7 @@ ul.TreeListBranch::before {
   position: absolute;
   bottom: 10px;
   left: 0;
-  border-left: 2px solid var(--color-button-border);
+  border-left: 2px solid var(--color-button-primary);
   height: 100%;
   z-index: -1;
 }
@@ -38,7 +38,7 @@ ul.TreeListBranch::before {
   top: 0.75em;
   left: -8px;
   width: 20px;
-  border-top: 2px solid var(--color-button-border);
+  border-top: 2px solid var(--color-button-primary);
   background: transparent;
   z-index: -1;
 }
