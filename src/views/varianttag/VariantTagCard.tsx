@@ -3,10 +3,10 @@
 import React from 'react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
+import CommaSeparated from '../../generic/CommaSeparated';
 import { VariantTagData } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
-import CommaSeparated from '../../generic/CommaSeparated';
 
 interface Props {
   data: VariantTagData;

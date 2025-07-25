@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { connectVariantTags } from './connectVariantTags';
-
 import { CensusID, CensusData } from '../types/CensusTypes';
 import {
   BCP47LocaleCode,
@@ -24,6 +22,7 @@ import {
   loadISOLanguages,
   loadISOMacrolanguages,
 } from './AddISOData';
+import { connectVariantTags } from './connectVariantTags';
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,

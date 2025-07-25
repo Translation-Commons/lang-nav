@@ -8,8 +8,8 @@ import CensusCard from '../census/CensusCard';
 import LanguageCard from '../language/LanguageCard';
 import LocaleCard from '../locale/LocaleCard';
 import TerritoryCard from '../territory/TerritoryCard';
-import WritingSystemCard from '../writingsystem/WritingSystemCard';
 import { VariantTagCard } from '../varianttag/VariantTagCard';
+import WritingSystemCard from '../writingsystem/WritingSystemCard';
 
 type Props = {
   object?: ObjectData;
