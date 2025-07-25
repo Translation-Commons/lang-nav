@@ -4,7 +4,7 @@ import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberU
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
-import { VariantTagCard } from '../varianttag/VariantTagCard';
+
 
 
 import LocaleCensusCitation from './LocaleCensusCitation';
