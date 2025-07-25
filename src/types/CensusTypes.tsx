@@ -1,5 +1,5 @@
 import { ObjectBase, TerritoryCode, TerritoryData } from './DataTypes';
-import { LanguageCode } from './LanguageTypes';
+import { LanguageCode, LanguageModality } from './LanguageTypes';
 import { ObjectType } from './PageParamTypes';
 
 // Unique identifier for the census or other source of population data
@@ -23,7 +23,7 @@ export interface CensusData extends ObjectBase {
   collectorType: CensusCollectorType; // Type of organization (e.g., Government, CLDR)
 
   // Kind of language data collected
-  modality?: string; // eg. Spoken, Written, Sign
+  modality?: LanguageModality; // eg. Spoken, Written, Sign
   proficiency?: string; // eg. Conversant or Learning, Fluent, Non-Fluent
   acquisitionOrder?: string; // eg. Any, L1, L2, L3
   domain?: string; // eg. Any, Home, School, Work, Community, Unspecified
