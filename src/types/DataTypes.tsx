@@ -144,6 +144,19 @@ export type LocaleInCensus = {
   populationPercent: number;
 };
 
+export interface VariantTagData extends ObjectBase {
+  type: ObjectType.VariantTag;
+  ID: VariantIANATag;
+  codeDisplay: VariantIANATag;
+  nameDisplay: string;
+  description: string;
+  associatedLanguageCodes: LanguageCode[];
+
+  // References to other objects
+  languages: LanguageData[];
+  locales: LocaleData[];
+}
+
 export interface LocaleData extends ObjectBase {
   type: ObjectType.Locale;
 
@@ -178,15 +191,3 @@ export interface LocaleData extends ObjectBase {
   censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
 }
 
-export interface VariantTagData extends ObjectBase {
-  type: ObjectType.VariantTag;
-  ID: VariantIANATag;
-  codeDisplay: VariantIANATag;
-  nameDisplay: string;
-  description: string;
-  associatedLanguageCodes: LanguageCode[];
-
-  // References to other objects
-  languages: LanguageData[];
-  locales: LocaleData[];
-}

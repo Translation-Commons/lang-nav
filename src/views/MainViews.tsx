@@ -5,7 +5,6 @@ import AboutPage from './AboutPage';
 import CensusCardList from './census/CensusCardList';
 import { CensusHierarchy } from './census/CensusHierarchy';
 import TableOfAllCensuses from './census/TableOfAllCensuses';
-import ObjectDetailsPage from './common/ObjectDetailsPage';
 import LanguageCardList from './language/LanguageCardList';
 import { LanguageHierarchy } from './language/LanguageHierarchy';
 import LanguageTable from './language/LanguageTable';
@@ -37,10 +36,10 @@ function MainViews() {
           return <TerritoryCardList />;
         case ObjectType.WritingSystem:
           return <WritingSystemCardList />;
+        default:
+          return null;
       }
-    // eslint-disable-next-line no-fallthrough
     case View.Details:
-      return <ObjectDetailsPage />;
     case View.Hierarchy:
       switch (objectType) {
         case ObjectType.Census:
@@ -53,8 +52,9 @@ function MainViews() {
           return <TerritoryHierarchy />;
         case ObjectType.WritingSystem:
           return <WritingSystemHierarchy />;
+        default:
+          return null;
       }
-    // eslint-disable-next-line no-fallthrough
     case View.Table:
       switch (objectType) {
         case ObjectType.Census:
@@ -67,9 +67,11 @@ function MainViews() {
           return <TerritoryTable />;
         case ObjectType.WritingSystem:
           return <WritingSystemTable />;
+        default:
+          return null;
       }
-    // eslint-disable-next-line no-fallthrough
     case View.Reports:
+      return <ViewReports />;
       return <ViewReports />;
     case View.About:
       return <AboutPage />;

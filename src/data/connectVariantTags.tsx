@@ -20,8 +20,8 @@ export function connectVariantTags(
 
     //Link back from LanguageData to VariantTag
     for (const lang of variant.languages) {
-      if (!lang.variantTags) lang.variantTags = [];
-      lang.variantTags.push(variant);
+      if (!lang.variantTag) lang.variantTag = [];
+      lang.variantTag.push(variant);
     }
 
     //Initialize locales array
