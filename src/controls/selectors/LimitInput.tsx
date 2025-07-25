@@ -1,24 +1,23 @@
 import React from 'react';
 
 import { View } from '../../types/PageParamTypes';
-import Selector from '../components/SelectorOld';
+import { OptionsDisplay } from '../components/Selector';
+import SelectorLabel from '../components/SelectorLabel';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';
 
 const LimitInput: React.FC = () => {
   const { limit, objectType, updatePageParams, view } = usePageParams();
-  if ([View.About].includes(view)) {
-    // Not supported for this view
-    return <></>;
-  }
 
   return (
-    <Selector
-      selectorLabel="Limit:"
-      selectorDescription={`Limit how many ${objectType.toLowerCase()} ${getLimitableObjectName(view)} are shown.`}
-    >
+    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+      <SelectorLabel
+        description={`Limit how many ${objectType.toLowerCase()} ${getLimitableObjectName(view)} are shown.`}
+        label="Item Limit"
+        optionsDisplay={OptionsDisplay.ButtonList}
+      />
       <TextInput
-        inputStyle={{ width: '3em' }}
+        inputStyle={{ minWidth: '3em' }}
         getSuggestions={async () => [
           { searchString: '8', label: '8' },
           { searchString: '20', label: '20' },
@@ -26,10 +25,11 @@ const LimitInput: React.FC = () => {
           { searchString: '200', label: '200' },
         ]}
         onChange={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
+        optionsDisplay={OptionsDisplay.ButtonList}
         placeholder="∞"
         value={limit < 1 || Number.isNaN(limit) ? '' : limit.toString()}
       />
-    </Selector>
+    </div>
   );
 };
 

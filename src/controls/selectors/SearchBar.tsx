@@ -2,6 +2,7 @@ import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
 import { SearchableField, View } from '../../types/PageParamTypes';
+import { OptionsDisplay } from '../components/Selector';
 import Selector from '../components/SelectorOld';
 import SingleChoiceOptions from '../components/SingleChoiceOptions';
 import TextInput from '../components/TextInput';
@@ -19,6 +20,7 @@ const SearchBar: React.FC = () => {
         inputStyle={{ minWidth: '20em' }}
         getSuggestions={getSearchSuggestions}
         onChange={(searchString: string) => updatePageParams({ searchString })}
+        optionsDisplay={OptionsDisplay.ButtonGroup}
         placeholder="search"
         showGoToDetailsButton={true}
         showTextInputButton={view !== View.Details}

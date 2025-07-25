@@ -1,6 +1,11 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 
-import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../controls/filter';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getScopeFilter,
+  getSliceFunction,
+} from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
@@ -15,14 +20,22 @@ interface Props<T> {
 
 function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   const sortBy = getSortFunction();
-  const filterBySubstring = getSubstringFilter() || (() => true);
+  const filterBySubstring = getFilterBySubstring();
+  const filterByTerritory = getFilterByTerritory();
   const filterByScope = getScopeFilter();
   const sliceFunction = getSliceFunction<T>();
 
   // Filter results
   const objectsVisible = useMemo(
-    () => sliceFunction(objects.filter(filterByScope).filter(filterBySubstring).sort(sortBy)),
-    [objects, filterByScope, filterBySubstring, sortBy, sliceFunction],
+    () =>
+      sliceFunction(
+        objects
+          .filter(filterByScope)
+          .filter(filterByTerritory)
+          .filter(filterBySubstring)
+          .sort(sortBy),
+      ),
+    [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
   );
 
   return (

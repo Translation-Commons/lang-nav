@@ -1,7 +1,12 @@
 import { ArrowUpDownIcon } from 'lucide-react';
 import React, { Dispatch, SetStateAction, useMemo, useState, useCallback } from 'react';
 
-import { getScopeFilter, getSliceFunction, getSubstringFilter } from '../../../controls/filter';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getScopeFilter,
+  getSliceFunction,
+} from '../../../controls/filter';
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getSortFunction } from '../../../controls/sort';
 import HoverableButton from '../../../generic/HoverableButton';
@@ -30,7 +35,8 @@ interface Props<T> {
  */
 function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sortBy = getSortFunction();
-  const substringFilter = getSubstringFilter() ?? (() => true);
+  const filterBySubstring = getFilterBySubstring();
+  const filterByTerritory = getFilterByTerritory();
   const scopeFilter = getScopeFilter();
   const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
 
@@ -52,14 +58,14 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
-    let result = objects.filter(scopeFilter).filter(substringFilter);
+    let result = objects.filter(scopeFilter).filter(filterByTerritory).filter(filterBySubstring);
     if (sortDirectionIsNormal) {
       result = result.sort(sortBy);
     } else {
       result = result.sort((a, b) => -sortBy(a, b));
     }
     return result;
-  }, [sortBy, objects, substringFilter, scopeFilter, sortDirectionIsNormal]);
+  }, [sortBy, objects, filterBySubstring, filterByTerritory, scopeFilter, sortDirectionIsNormal]);
 
   return (
     <div className="ObjectTableContainer">

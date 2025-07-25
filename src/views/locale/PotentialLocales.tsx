@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { OptionsDisplay } from '../../controls/components/Selector';
 import Selector from '../../controls/components/SelectorOld';
 import TextInput from '../../controls/components/TextInput';
 import { getScopeFilter } from '../../controls/filter';
@@ -71,6 +72,7 @@ const PotentialLocales: React.FC = () => {
             { searchString: '5', label: '5%' },
             { searchString: '10', label: '10%' },
           ]}
+          optionsDisplay={OptionsDisplay.ButtonGroup}
           onChange={(percent: string) => setPercentThreshold(Number(percent))}
           placeholder=""
           value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}

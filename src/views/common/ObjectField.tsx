@@ -71,7 +71,6 @@ export function getSearchableField(object: ObjectData, field: SearchableField, q
     case SearchableField.EngName:
       return object.nameDisplay;
     case SearchableField.NameOrCode:
-    case SearchableField.Territory:
       return object.nameDisplay + ' [' + object.codeDisplay + ']';
   }
 }

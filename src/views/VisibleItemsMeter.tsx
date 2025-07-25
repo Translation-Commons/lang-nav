@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { getScopeFilter, getSubstringFilter } from '../controls/filter';
+import { getFilterBySubstring, getFilterByTerritory, getScopeFilter } from '../controls/filter';
 import { usePageParams } from '../controls/PageParamsContext';
 import PaginationControls from '../controls/selectors/PaginationControls';
 import Deemphasized from '../generic/Deemphasized';
@@ -12,26 +12,32 @@ interface Props {
 }
 
 const VisibleItemsMeter: React.FC<Props> = ({ objects }) => {
-  const { page, limit } = usePageParams();
-  const substringFilter = getSubstringFilter() ?? (() => true);
-  const scopeFilter = getScopeFilter();
+  const { page, limit, territoryFilter } = usePageParams();
+  const filterBySubstring = getFilterBySubstring();
+  const filterByTerritory = getFilterByTerritory();
+  const filterByScope = getScopeFilter();
 
-  // Compute amounts
+  // Compute filter breakdown
+  const nInScope = useMemo(() => objects.filter(filterByScope).length, [objects, filterByScope]);
+  const nInTerritory = useMemo(
+    () => objects.filter(filterByScope).filter(filterByTerritory).length,
+    [objects, filterByScope, filterByTerritory],
+  );
+  const nMatchingSubstring = useMemo(
+    () => objects.filter(filterByScope).filter(filterByTerritory).filter(filterBySubstring).length,
+    [objects, filterByScope, filterByTerritory, filterBySubstring],
+  );
+
+  // Compute other counts
   const nOverall = objects.length;
+  const nFilteredByScope = nOverall - nInScope;
+  const nFilteredByTerritory = nInScope - nInTerritory;
+  const nFilteredBySubstring = nInTerritory - nMatchingSubstring;
+  const nFiltered = nMatchingSubstring;
+  const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
-
-  // nFiltered
-  const nInScope = useMemo(() => objects.filter(scopeFilter).length, [objects, scopeFilter]);
-  const nMatchingSubstring = useMemo(
-    () => objects.filter(scopeFilter).filter(substringFilter).length,
-    [objects, scopeFilter, substringFilter],
-  );
-  const nFilteredByScope = nOverall - nInScope;
-  const nFilteredBySubstring = nInScope - nMatchingSubstring;
-  const nFiltered = nMatchingSubstring;
-  const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
 
   // nShown
   let nShown = limit;
@@ -49,6 +55,11 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects }) => {
           hoverContent={
             <>
               {nFilteredByScope > 0 && <div>Out of scope: {nFilteredByScope.toLocaleString()}</div>}
+              {nFilteredByTerritory > 0 && (
+                <div>
+                  Not in territory ({territoryFilter}): {nFilteredByTerritory.toLocaleString()}
+                </div>
+              )}
               {nFilteredBySubstring > 0 && (
                 <div>Not matching substring: {nFilteredBySubstring.toLocaleString()}</div>
               )}

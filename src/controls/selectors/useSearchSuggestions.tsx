@@ -16,28 +16,21 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
   const scopeFilter = getScopeFilter();
 
   const objects = useMemo(() => {
-    if (searchBy === SearchableField.Territory) {
-      return Object.values(territories);
-    } else {
-      switch (objectType) {
-        case ObjectType.Language:
-          return Object.values(languages);
-        case ObjectType.Locale:
-          return Object.values(locales);
-        case ObjectType.Territory:
-          return Object.values(territories);
-        case ObjectType.WritingSystem:
-          return Object.values(writingSystems);
-      }
+    switch (objectType) {
+      case ObjectType.Language:
+        return Object.values(languages);
+      case ObjectType.Locale:
+        return Object.values(locales);
+      case ObjectType.Territory:
+        return Object.values(territories);
+      case ObjectType.WritingSystem:
+        return Object.values(writingSystems);
     }
   }, [objectType, languages, locales, territories, writingSystems, searchBy]);
 
   const getSuggestions = useMemo(() => {
     return async (query: string) => {
-      const substringFilter = getSubstringFilterOnQuery(
-        query,
-        searchBy === SearchableField.Territory ? SearchableField.NameOrCode : searchBy,
-      );
+      const substringFilter = getSubstringFilterOnQuery(query, searchBy);
       return uniqueBy(
         (objects || [])
           .filter(scopeFilter)
@@ -45,15 +38,13 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
           .slice(0, SEARCH_RESULTS_LIMIT)
           .map((object) => {
             let label = <HighlightedObjectField object={object} field={searchBy} query={query} />;
-            let searchString = getSearchableField(object, searchBy);
+            const searchString = getSearchableField(object, searchBy);
             if (searchBy === SearchableField.Code) {
               label = (
                 <>
                   {object.nameDisplay} [{label}]
                 </>
               );
-            } else if (searchBy === SearchableField.Territory) {
-              searchString = object.nameDisplay;
             }
             return { objectID: object.ID, searchString, label };
           }),

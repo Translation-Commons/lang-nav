@@ -31,7 +31,6 @@ export enum SearchableField {
   EngName = 'English Name',
   Endonym = 'Endonym',
   AllNames = 'All Names',
-  Territory = 'Territory',
 }
 
 export type LocaleSeparator = '-' | '_';
@@ -47,6 +46,7 @@ export type PageParamKey =
   | 'searchBy'
   | 'searchString'
   | 'sortBy'
+  | 'territoryFilter'
   | 'territoryScopes'
   | 'view';
 
@@ -61,6 +61,7 @@ export type PageParams = {
   searchBy: SearchableField;
   searchString: string;
   sortBy: SortBy;
+  territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
 };
@@ -76,6 +77,7 @@ export type PageParamsOptional = {
   searchBy?: SearchableField;
   searchString?: string;
   sortBy?: SortBy;
+  territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;
 };

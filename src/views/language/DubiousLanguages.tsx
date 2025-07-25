@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { getSliceFunction, getSubstringFilter } from '../../controls/filter';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getSliceFunction,
+} from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
 import LimitInput from '../../controls/selectors/LimitInput';
 import PaginationControls from '../../controls/selectors/PaginationControls';
@@ -18,11 +22,13 @@ const DubiousLanguages: React.FC = () => {
     territories,
   } = useDataContext();
   const { page, limit } = usePageParams();
-  const filterFunction = getSubstringFilter() ?? (() => true);
+  const filterBySubstring = getFilterBySubstring();
+  const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
   const sliceFunction = getSliceFunction<LanguageData>();
   const languages = Object.values(Inclusive)
-    .filter(filterFunction)
+    .filter(filterBySubstring)
+    .filter(filterByTerritory)
     .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]'));
 
   return (
