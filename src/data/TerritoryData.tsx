@@ -105,7 +105,7 @@ function createRegionalLocalesForTerritory(
           loc.languageCode,
           loc.explicitScriptCode,
           territory.ID,
-          loc.variantTag,
+          loc.variantTags,
         ]
           .filter(Boolean)
           .join('_');

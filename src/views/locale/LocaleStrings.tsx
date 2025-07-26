@@ -4,7 +4,7 @@ export function getLocaleName(locale: LocaleData): string {
   const languageName = locale.language?.nameDisplay ?? locale.languageCode;
   const territoryName = locale.territory?.nameDisplay ?? locale.territoryCode;
   const scriptName = locale.writingSystem != null ? locale.writingSystem.nameDisplay : null;
-  const variantName = locale.variantTag != '' ? locale.variantTag : null;
+  const variantName = locale.variantTags ? locale.variantTags.nameDisplay : null;
 
   return (
     languageName + ' (' + [territoryName, scriptName, variantName].filter(Boolean).join(', ') + ')'
