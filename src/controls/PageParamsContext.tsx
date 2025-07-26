@@ -25,7 +25,7 @@ const PARAMS_THAT_CLEAR: PageParamKey[] = ['limit', 'page', 'searchString', 'sea
 export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [pageParams, setPageParams] = useSearchParams({});
 
-  const getParam = (key: string, fallback: string = '') => pageParams.get(key) ?? fallback;
+  const getParam = (key: PageParamKey, fallback: string = '') => pageParams.get(key) ?? fallback;
 
   const updatePageParams = (newParams: PageParamsOptional) => {
     setPageParams((prev) => getNewURLSearchParams(newParams, prev));
@@ -49,6 +49,7 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
       searchBy: getParam('searchBy', defaults.searchBy) as SearchableField,
       searchString: getParam('searchString', defaults.searchString),
       sortBy: getParam('sortBy', defaults.sortBy) as SortBy,
+      territoryFilter: getParam('territoryFilter', defaults.territoryFilter),
       territoryScopes: getParam('territoryScopes', defaults.territoryScopes.join(','))
         .split(',')
         .map((s) => s as TerritoryScope)
@@ -83,6 +84,7 @@ function getDefaultParams(objectType: ObjectType, view: View): PageParams {
     searchString: '',
     sortBy: SortBy.Population,
     territoryScopes,
+    territoryFilter: '',
     view,
   };
 }

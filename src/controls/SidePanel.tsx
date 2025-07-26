@@ -9,6 +9,7 @@ import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import SortBySelector from './selectors/SortBySelector';
+import TerritoryFilter from './selectors/TerritoryFilter';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
 
@@ -29,6 +30,7 @@ const SidePanel: React.FC = () => {
         <SidePanelSectionTitle>Filters</SidePanelSectionTitle>
         <LanguageScopeSelector />
         <TerritoryScopeSelector />
+        <TerritoryFilter />
       </SidePanelSection>
 
       <SidePanelSection>

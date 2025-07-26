@@ -1,3 +1,5 @@
+import { useCallback } from 'react';
+
 import { anyWordStartsWith } from '../generic/stringUtils';
 import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '../types/DataTypes';
 import { LanguageScope } from '../types/LanguageTypes';
@@ -11,11 +13,9 @@ export type FilterFunctionType = (a: ObjectData) => boolean;
 /**
  * Provide a function that returns true for items that match filters based on substrings of their code or name.
  */
-export function getSubstringFilter(): FilterFunctionType | undefined {
+export function getFilterBySubstring(): FilterFunctionType {
   const { searchBy, searchString } = usePageParams();
-  if (searchString == '') {
-    return undefined;
-  }
+  if (searchString == '') return () => true;
   return getSubstringFilterOnQuery(searchString.toLowerCase(), searchBy);
 }
 
@@ -30,18 +30,40 @@ export function getSubstringFilterOnQuery(
     case SearchableField.EngName:
     case SearchableField.NameOrCode:
       return (a: ObjectData) => anyWordStartsWith(getSearchableField(a, searchBy), queryLowerCase);
-    case SearchableField.Territory:
-      return (a: ObjectData) => {
-        return getTerritoriesRelevantToObject(a)
-          .map((t) => getSearchableField(t, searchBy))
-          .some((t) => anyWordStartsWith(t, queryLowerCase));
-      };
     case SearchableField.AllNames:
       return (a: ObjectData) =>
         a.names
           .map((name) => anyWordStartsWith(name, queryLowerCase))
           .reduce((anyPasses, thisPasses) => anyPasses || thisPasses, false);
   }
+}
+
+/**
+ * Provide a function that returns true for items that are relevant to a territory.
+ */
+export function getFilterByTerritory(): FilterFunctionType {
+  const { territoryFilter } = usePageParams();
+  // Split up strings like "United States [US]" into "US" and "United States"
+  const splitFilter = territoryFilter.split('[');
+  const nameMatch = splitFilter[0]?.toLowerCase().trim();
+  let codeMatch = '';
+  if (territoryFilter.length === 2) {
+    codeMatch = territoryFilter.toUpperCase(); // ISO 3166 alpha-2 code
+  } else if (territoryFilter.length === 3 && territoryFilter.match(/^[0-9]{3}$/)) {
+    codeMatch = territoryFilter; // UN M.49 code (eg. 419 = Latin America and the Caribbean)
+  } else if (splitFilter.length > 1) {
+    codeMatch = splitFilter[1].split(']')[0]?.toUpperCase();
+  }
+
+  return useCallback(
+    (object: ObjectData) => {
+      if (territoryFilter == '') return true;
+      const territories = getTerritoriesRelevantToObject(object);
+      if (codeMatch !== '') return territories.some((t) => t.ID === codeMatch);
+      return territories.some((t) => t.nameDisplay.toLowerCase().startsWith(nameMatch));
+    },
+    [territoryFilter, codeMatch, nameMatch],
+  );
 }
 
 function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {

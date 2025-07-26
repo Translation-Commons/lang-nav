@@ -104,12 +104,6 @@
   color: var(--color-text);
 }
 
-.NoLeftBorder {
-  border-top-left-radius: 0px;
-  border-bottom-left-radius: 0px;
-  border-left: none !important;
-}
-
 .selector button:disabled,
 .selector button:disabled:hover {
   color: var(--color-text-secondary);

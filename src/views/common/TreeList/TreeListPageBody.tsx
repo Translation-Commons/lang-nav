@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
-import { getSubstringFilter } from '../../../controls/filter';
+import { getFilterBySubstring, getFilterByTerritory } from '../../../controls/filter';
 import { usePageParams } from '../../../controls/PageParamsContext';
+import { ObjectData } from '../../../types/DataTypes';
 
 import { filterBranch } from './filterBranch';
 import { TreeNodeData } from './TreeListNode';
 import { TreeListOptionsProvider, TreeListOptionsSelectors } from './TreeListOptions';
 import TreeListRoot from './TreeListRoot';
+
 import './treelist.css';
 
 type Props = {
@@ -16,7 +18,14 @@ type Props = {
 
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   const { limit } = usePageParams();
-  const substringFilterFunction = getSubstringFilter();
+  const filterBySubstring = getFilterBySubstring();
+  const filterByTerritory = getFilterByTerritory();
+  const filterFunction = useCallback(
+    (object: ObjectData) => {
+      return filterBySubstring(object) && filterByTerritory(object);
+    },
+    [filterBySubstring, filterByTerritory],
+  );
 
   return (
     <div className="TreeListView">
@@ -24,7 +33,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
         <div style={{ marginBottom: 8 }}>{description}</div>
         <TreeListRoot
           rootNodes={rootNodes
-            .map((node) => filterBranch(node, substringFilterFunction))
+            .map((node) => filterBranch(node, filterFunction))
             .filter((node) => node != null)
             .slice(0, limit > 0 ? limit : undefined)}
         />

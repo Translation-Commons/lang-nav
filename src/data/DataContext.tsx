@@ -114,3 +114,5 @@ export const useDataContext = () => {
   if (!context) throw new Error('useDataContext must be used within a DataProvider');
   return context;
 };
+
+export default DataProvider;

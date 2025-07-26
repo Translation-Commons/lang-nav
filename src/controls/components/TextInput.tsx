@@ -5,6 +5,8 @@ import HoverableButton from '../../generic/HoverableButton';
 import { View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
+import { OptionsDisplay } from './Selector';
+
 export type Suggestion = {
   objectID?: string;
   searchString: string;
@@ -12,22 +14,24 @@ export type Suggestion = {
 };
 
 type Props = {
-  inputStyle?: React.CSSProperties;
   getSuggestions?: (query: string) => Promise<Suggestion[]>;
+  inputStyle?: React.CSSProperties;
   onChange: (value: string) => void;
+  optionsDisplay: OptionsDisplay;
+  placeholder?: string;
   showGoToDetailsButton?: boolean;
   showTextInputButton?: boolean;
-  placeholder?: string;
   value: string;
 };
 
 const TextInput: React.FC<Props> = ({
-  inputStyle,
   getSuggestions = () => [],
+  inputStyle,
   onChange,
+  optionsDisplay,
+  placeholder,
   showGoToDetailsButton = false,
   showTextInputButton = true,
-  placeholder,
   value,
 }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -83,6 +87,7 @@ const TextInput: React.FC<Props> = ({
         onFocus={() => setShowSuggestions(true)}
         placeholder={placeholder}
         style={{
+          ...(optionsDisplay === OptionsDisplay.ButtonList ? { borderRadius: '0.5em' } : {}),
           ...inputStyle,
           width: inputWidth + 5,
         }}
@@ -114,16 +119,25 @@ const TextInput: React.FC<Props> = ({
           </div>
         </div>
       )}
-      <button
-        className="NoLeftBorder"
-        type="button"
+      <HoverableButton
+        hoverContent="Clear the input"
+        style={
+          optionsDisplay === OptionsDisplay.ButtonList
+            ? { padding: '.5em', borderRadius: '0.5em', border: 'none', marginLeft: '0.5em' }
+            : {
+                marginRight: '0em',
+                borderTopLeftRadius: '0px',
+                borderBottomLeftRadius: '0px',
+                borderLeft: 'none',
+              }
+        }
         onClick={() => {
           setImmediateValue('');
           setShowSuggestions(false);
         }}
       >
         <XIcon size="1em" display="block" />
-      </button>
+      </HoverableButton>
     </>
   );
 };

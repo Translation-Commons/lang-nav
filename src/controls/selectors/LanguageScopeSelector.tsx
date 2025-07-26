@@ -16,7 +16,7 @@ const LanguageScopeSelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Language Scope:"
+      selectorLabel="Language Scope"
       selectorDescription={selectorDescription}
       options={Object.values(LanguageScope)}
       onChange={(scope: LanguageScope) =>

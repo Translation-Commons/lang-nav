@@ -28,6 +28,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
           cursor: onClick ? 'pointer' : 'auto',
           ...style,
         }}
+        type="button"
       >
         {children}
       </button>

@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { getSliceFunction, getSubstringFilter } from '../../controls/filter';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getSliceFunction,
+} from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
 import LimitInput from '../../controls/selectors/LimitInput';
 import PaginationControls from '../../controls/selectors/PaginationControls';
@@ -19,11 +23,13 @@ const LanguagesWithIdenticalNames: React.FC = () => {
     languagesBySchema: { Inclusive },
   } = useDataContext();
   const { page, limit } = usePageParams();
-  const filterFunction = getSubstringFilter() ?? (() => true);
+  const filterBySubstring = getFilterBySubstring();
+  const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
   const sliceFunction = getSliceFunction<[string, LanguageData[]]>();
   const languagesByName = Object.values(Inclusive)
-    .filter(filterFunction)
+    .filter(filterBySubstring)
+    .filter(filterByTerritory)
     .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
       const name = lang.nameDisplay;
       if (languagesByName[name] == null) {
