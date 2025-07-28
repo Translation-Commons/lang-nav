@@ -8,7 +8,7 @@ const TerritorySuggestions: React.FC = () => {
 
   return (
     <div className="separatedButtonList">
-      {['US', 'MX', 'FR', 'DE', 'CN', 'EG'].map(
+      {['US', 'MX', 'FR', 'RU', 'EG', 'CN'].map(
         (code) =>
           territories[code] != null && (
             <HoverableObjectName key={code} object={territories[code]} format="button" />

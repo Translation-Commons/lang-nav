@@ -32,15 +32,11 @@ const ObjectDetailsPage: React.FC = () => {
     };
 
     return (
-      <DetailsContainer title="Details">
-        This view shows details about a particular object -- but no object has been specified. Use
-        another view (Card List, Hierarchy, Table) to find one or click on one of the suggestions
-        below:
-        <div style={{ marginBottom: '2em' }}>
-          <label>{objectType}</label>
-          {suggestionsByObjectType[objectType]}
-        </div>
-        Or try another object type:
+      <DetailsContainer title={objectType + ' Details'}>
+        This page shows details about a particular {objectType} or other related entity. Use the
+        search bar in the page or another view to find one. Here are some suggestions:
+        <div style={{ marginBottom: '2em' }}>{suggestionsByObjectType[objectType]}</div>
+        Or try another object type, for example:
         {Object.entries(suggestionsByObjectType)
           .filter(([dim]) => dim !== objectType)
           .map(([dim, suggestions]) => (

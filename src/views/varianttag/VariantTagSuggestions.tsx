@@ -8,7 +8,7 @@ const VariantTagSuggestions: React.FC = () => {
 
   return (
     <div className="separatedButtonList">
-      {['rumgr', 'valencia', 'pinyin', 'grclass'].map(
+      {['valencia', 'grclass', 'rumgr', 'pinyin'].map(
         (code) =>
           variantTags[code] != null && (
             <HoverableObjectName key={code} object={variantTags[code]} format="button" />

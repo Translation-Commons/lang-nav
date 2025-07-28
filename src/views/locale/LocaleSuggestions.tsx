@@ -8,7 +8,7 @@ const LocaleSuggestions: React.FC = () => {
 
   return (
     <div className="separatedButtonList">
-      {['eng_US', 'spa_419', 'fra_FR', 'deu_DE', 'zho_Hans_CN', 'cmn_CN', 'arb_001'].map(
+      {['eng_US', 'spa_419', 'fra_FR', 'rus_RU', 'arb_001', 'zho_Hans_CN', 'cmn_CN'].map(
         (code) =>
           locales[code] != null && (
             <HoverableObjectName key={code} object={locales[code]} format="button" />

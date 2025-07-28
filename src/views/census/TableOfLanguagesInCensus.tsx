@@ -115,6 +115,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Scope',
             render: (loc) => loc.language?.scope,
+            isInitiallyVisible: false,
             isNumeric: false,
           },
           {

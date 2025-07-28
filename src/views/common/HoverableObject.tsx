@@ -45,7 +45,7 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
       hoverContent={
         <>
           Click to{' '}
-          {view == 'Details'
+          {view === View.Details
             ? 'change page to see the details for:'
             : 'open modal with more information for:'}
           <div>

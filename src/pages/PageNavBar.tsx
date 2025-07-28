@@ -10,7 +10,7 @@ const PageNavBar: React.FC = () => {
           <strong>Lang</strong>uage <strong>Nav</strong>igator
         </span>
       </NavBarTitle>
-      {/* <NavBarLink path="/intro">Intro</NavBarLink> */}
+      <NavBarLink path="/intro">Intro</NavBarLink>
       <NavBarLink path="/data">Data</NavBarLink>
       {/* <NavBarLink path="/details">Details</NavBarLink> */}
       <NavBarLink path="/about">About</NavBarLink>

@@ -8,7 +8,7 @@ const LanguageSuggestions: React.FC = () => {
 
   return (
     <div className="separatedButtonList">
-      {['eng', 'spa', 'fra', 'deu', 'zho', 'ara'].map(
+      {['eng', 'spa', 'fra', 'rus', 'zho', 'ara'].map(
         (code) =>
           languagesBySource.ISO[code] != null && (
             <HoverableObjectName key={code} object={languagesBySource.ISO[code]} format="button" />
