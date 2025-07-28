@@ -1,18 +1,17 @@
-import PageNavBar from './controls/PageNavBar';
-import { PageParamsProvider } from './controls/PageParamsContext';
-import Footer from './Footer';
 import { HoverCardProvider } from './generic/HoverCardContext';
-import PageContents from './views/PageContents';
+import PageFooter from './pages/PageFooter';
+import PageNavBar from './pages/PageNavBar';
+import PageRoutes from './pages/PageRoutes';
+
+import './index.css';
 
 function App() {
   return (
-    <PageParamsProvider>
-      <HoverCardProvider>
-        <PageNavBar />
-        <PageContents />
-        <Footer />
-      </HoverCardProvider>
-    </PageParamsProvider>
+    <HoverCardProvider>
+      <PageNavBar />
+      <PageRoutes />
+      <PageFooter />
+    </HoverCardProvider>
   );
 }
 

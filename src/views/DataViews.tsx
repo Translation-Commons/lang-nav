@@ -1,7 +1,6 @@
 import { usePageParams } from '../controls/PageParamsContext';
 import { ObjectType, View } from '../types/PageParamTypes';
 
-import AboutPage from './AboutPage';
 import CensusCardList from './census/CensusCardList';
 import { CensusHierarchy } from './census/CensusHierarchy';
 import TableOfAllCensuses from './census/TableOfAllCensuses';
@@ -71,8 +70,6 @@ function MainViews() {
     // eslint-disable-next-line no-fallthrough
     case View.Reports:
       return <ViewReports />;
-    case View.About:
-      return <AboutPage />;
   }
 }
 

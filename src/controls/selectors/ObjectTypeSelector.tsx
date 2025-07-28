@@ -6,15 +6,13 @@ import { getObjectTypeLabelPlural } from '../../views/common/getObjectName';
 import Selector, { OptionsDisplay } from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
-const objectAmbiguousViews = [View.About, View.Details];
-
 const ObjectTypeSelector: React.FC = () => {
   const { objectType, updatePageParams, view } = usePageParams();
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
       updatePageParams({
         objectType,
-        view: objectAmbiguousViews.includes(view) ? View.CardList : view,
+        view: view === View.Details ? View.CardList : view,
         searchString: undefined,
         page: 1,
       });

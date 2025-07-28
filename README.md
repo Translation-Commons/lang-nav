@@ -106,14 +106,15 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [x] Locales (languages + territories + potentially other specificity)
     - [x] Basic data
     - [x] Computed regional locales
-    - [ ] Population estimate sources
+    - [x] Population estimate sources
   - [x] Writing Systems
     - [x] Basic data
     - [x] Relationship w/ other writing systems (containment, lineage)
   - [ ] Language Variants / IANA tags
   - [x] Censuses
     - [x] Regular censuses
-    - [ ] Include citation information
+    - [x] Include citation information
+    - [ ] Continue importing new censuses
     - [ ] Convert other imported datasets into census-like objects
 - [x] Views
   - [x] Cards
@@ -124,7 +125,7 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [x] Reports
     - [x] Language name overlap
     - [ ] Invalid languages
-    - [ ] Locales that should be added
+    - [x] Locales that should be added
     - [ ] Metrics on the data we have
 - [x] Interactivity
   - [x] Search

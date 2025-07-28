@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hoverable from './generic/Hoverable';
+import Hoverable from '../generic/Hoverable';
 
 const CreativeCommonsLicense: React.FC = () => {
   return (

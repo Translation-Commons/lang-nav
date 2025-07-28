@@ -2,9 +2,9 @@ import React from 'react';
 
 import SearchBar from '../controls/selectors/SearchBar';
 
-import MainViews from './MainViews';
+import DataViews from './DataViews';
 
-const PageBody: React.FC = () => {
+const DataPageBody: React.FC = () => {
   return (
     <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
       <SearchBar />
@@ -16,10 +16,10 @@ const PageBody: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <MainViews />
+        <DataViews />
       </div>
     </main>
   );
 };
 
-export default PageBody;
+export default DataPageBody;
