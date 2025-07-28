@@ -40,7 +40,6 @@ function getLimitableObjectName(view: View) {
     case View.Hierarchy:
       return 'root nodes';
     case View.Details:
-    case View.About:
       return 'not applicable';
     case View.Table:
       return 'rows';

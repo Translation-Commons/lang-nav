@@ -13,6 +13,8 @@ import TerritoryFilter from './selectors/TerritoryFilter';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
 
+import './controls.css';
+
 const PANEL_WIDTH = '20em';
 
 const SidePanel: React.FC = () => {

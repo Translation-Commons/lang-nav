@@ -42,6 +42,13 @@
 a {
   font-weight: 500;
   text-decoration: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+a:hover {
+  color: inherit;
+  text-decoration: underline;
 }
 
 body {
@@ -73,6 +80,21 @@ button {
   transition: border-color 0.25s;
   color: var(--color-text);
   background-color: var(--color-button-secondary);
+}
+
+button.primary {
+  color: var(--color-background);
+  background-color: var(--color-button-primary);
+}
+
+button:hover {
+  color: var(--color-background);
+  background: var(--color-button-hover);
+}
+
+button:focus {
+  border-color: var(--color-button-hover);
+  background: var(--color-button-hover);
 }
 
 .unsupported,

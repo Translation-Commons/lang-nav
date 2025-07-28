@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useMemo } from 'react';
+import React, { createContext, useCallback, useContext, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { TerritoryScope } from '../types/DataTypes';
@@ -22,14 +22,17 @@ const DEFAULT_OBJECT_TYPE = ObjectType.Language;
 const DEFAULT_VIEW = View.CardList;
 const PARAMS_THAT_CLEAR: PageParamKey[] = ['limit', 'page', 'searchString', 'searchBy'];
 
-export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [pageParams, setPageParams] = useSearchParams({});
 
   const getParam = (key: PageParamKey, fallback: string = '') => pageParams.get(key) ?? fallback;
 
-  const updatePageParams = (newParams: PageParamsOptional) => {
-    setPageParams((prev) => getNewURLSearchParams(newParams, prev));
-  };
+  const updatePageParams = useCallback(
+    (newParams: PageParamsOptional) => {
+      setPageParams((prev) => getNewURLSearchParams(newParams, prev));
+    },
+    [setPageParams],
+  );
 
   const providerValue: PageParamsContextState = useMemo(() => {
     const objectType = getParam('objectType', DEFAULT_OBJECT_TYPE) as ObjectType;
@@ -61,6 +64,8 @@ export const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   return <PageParamsContext.Provider value={providerValue}>{children}</PageParamsContext.Provider>;
 };
+
+export default PageParamsProvider;
 
 // If there is nothing in the URL string, then use this instead
 function getDefaultParams(objectType: ObjectType, view: View): PageParams {

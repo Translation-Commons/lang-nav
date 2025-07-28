@@ -1,9 +1,5 @@
 import React from 'react';
-
-import ObjectTypeSelector from './selectors/ObjectTypeNavBarSelector';
-import ViewSelector from './selectors/ViewNavBarSelector';
-
-import './controls.css';
+import { Link, NavLink } from 'react-router-dom';
 
 const PageNavBar: React.FC = () => {
   return (
@@ -14,15 +10,34 @@ const PageNavBar: React.FC = () => {
           <strong>Lang</strong>uage <strong>Nav</strong>igator
         </span>
       </NavBarTitle>
-      <ObjectTypeSelector />
-      <ViewSelector />
+      {/* <NavBarLink path="/intro">Intro</NavBarLink> */}
+      <NavBarLink path="/data">Data</NavBarLink>
+      {/* <NavBarLink path="/details">Details</NavBarLink> */}
+      <NavBarLink path="/about">About</NavBarLink>
     </NavBarContainer>
+  );
+};
+
+const NavBarLink: React.FC<React.PropsWithChildren<{ path: string }>> = ({ path, children }) => {
+  return (
+    <button className="primary" style={{ padding: '0.5em .5em', margin: '0 0.5em' }}>
+      <NavLink
+        to={path}
+        style={({ isActive }) => ({
+          textDecoration: 'none',
+          fontSize: '1.2em',
+          fontWeight: isActive ? 'bold' : 'lighter',
+        })}
+      >
+        {children}
+      </NavLink>
+    </button>
   );
 };
 
 const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div
+    <nav
       className="NavBar"
       style={{
         alignItems: 'center',
@@ -37,7 +52,7 @@ const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
       }}
     >
       {children}
-    </div>
+    </nav>
   );
 };
 
@@ -55,9 +70,9 @@ const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
         gap: '0.25em',
       }}
     >
-      <a href="/lang-nav/" style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
+      <Link to="/" style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
         {children}
-      </a>
+      </Link>
     </h1>
   );
 };

@@ -16,7 +16,6 @@ export enum View {
   Hierarchy = 'Hierarchy',
   Table = 'Table',
   Reports = 'Reports',
-  About = 'About',
 }
 
 export enum SortBy {

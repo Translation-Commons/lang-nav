@@ -89,25 +89,6 @@ div.section {
   margin-bottom: 1em;
 }
 
-dt {
-  font-weight: 600;
-}
-
-.AboutPage {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: start;
-}
-
-.AboutPage .section {
-  margin-bottom: 2em;
-}
-
-.AboutPage button {
-  white-space: nowrap;
-}
-
 .ViewReports {
   text-align: start;
 }
