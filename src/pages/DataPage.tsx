@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 
+import { HoverCardProvider } from '../generic/HoverCardContext';
 import Loading from '../views/Loading';
 
 const PageParamsProvider = React.lazy(() => import('../controls/PageParamsContext'));
@@ -13,13 +14,16 @@ const DataPage: React.FC = () => {
   return (
     <Suspense fallback={<Loading />}>
       <PageParamsProvider>
-        <DataProvider>
-          <div style={{ display: 'flex', minHeight: '100vh' }}>
-            <SidePanel />
-            <DataPageBody />
-          </div>
-        </DataProvider>
-        <ViewModal />
+        <HoverCardProvider>
+          {/* HoverCardProvider is re-declared so it has access to page parameters, there may be a better way to organize it */}
+          <DataProvider>
+            <div style={{ display: 'flex', minHeight: '100vh' }}>
+              <SidePanel />
+              <DataPageBody />
+            </div>
+          </DataProvider>
+          <ViewModal />
+        </HoverCardProvider>
       </PageParamsProvider>
     </Suspense>
   );

@@ -70,7 +70,7 @@ const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
         gap: '0.25em',
       }}
     >
-      <Link to="." style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
+      <Link to="/" style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
         {children}
       </Link>
     </h1>

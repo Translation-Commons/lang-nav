@@ -1,7 +1,9 @@
-import React, { ReactNode } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 
 import { getNewURL } from '../controls/PageParamsContext';
 import { LanguageSchema } from '../types/LanguageTypes';
+import { PageParamsOptional } from '../types/PageParamTypes';
 
 import CreativeCommonsLicense from './CreativeCommonsLicense';
 
@@ -46,14 +48,17 @@ const AboutPage: React.FC = () => {
             The Language Navigator highlights not only widely spoken languages but also those
             recognized by specific communities, even if they lack global consensus. Where data is
             disputed or incomplete, we aim for transparency. Users can see{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.Inclusive })}>
+            <DataPageLink params={{ languageSchema: LanguageSchema.Inclusive }}>
               all attested languages
-            </a>{' '}
+            </DataPageLink>{' '}
             or choose to follow specific standards like{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.ISO })}>ISO 639-3/5</a>,{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.Glottolog })}>Glottolog</a>,{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.UNESCO })}>UNESCO</a>, or{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.CLDR })}>CLDR</a>.
+            <DataPageLink params={{ languageSchema: LanguageSchema.ISO }}>ISO 639-3/5</DataPageLink>
+            ,{' '}
+            <DataPageLink params={{ languageSchema: LanguageSchema.Glottolog }}>
+              Glottolog
+            </DataPageLink>
+            , <DataPageLink params={{ languageSchema: LanguageSchema.UNESCO }}>UNESCO</DataPageLink>
+            , or <DataPageLink params={{ languageSchema: LanguageSchema.CLDR }}>CLDR</DataPageLink>.
           </DictionaryEntry>
         </dl>
       </Section>
@@ -224,13 +229,17 @@ const AboutPage: React.FC = () => {
             their respective original database (ISO, Glottolog, CLDR). When an object has multiple
             identities, it has been manually matched by the Language Navigator team to a single
             entity. For instance, English is represented in CLDR by the ISO 639-1 code{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.CLDR, objectID: 'eng' })}>en</a>,
-            the ISO 639-3 code{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.ISO, objectID: 'eng' })}>eng</a>,
-            and the Glottocode{' '}
-            <a href={getNewURL({ languageSchema: LanguageSchema.Glottolog, objectID: 'eng' })}>
+            <DataPageLink params={{ languageSchema: LanguageSchema.CLDR, objectID: 'eng' }}>
+              en
+            </DataPageLink>
+            , the ISO 639-3 code{' '}
+            <DataPageLink params={{ languageSchema: LanguageSchema.ISO, objectID: 'eng' }}>
+              eng
+            </DataPageLink>
+            , and the Glottocode{' '}
+            <DataPageLink params={{ languageSchema: LanguageSchema.Glottolog, objectID: 'eng' }}>
               stan1293
-            </a>
+            </DataPageLink>
             .
           </DictionaryEntry>
           <DictionaryEntry term="Names">
@@ -286,7 +295,7 @@ function DictionaryEntry({ term, children }: { term: ReactNode; children: ReactN
   );
 }
 
-const LangNavTitle: React.FC = () => {
+function LangNavTitle() {
   return (
     <div
       className="logo"
@@ -305,6 +314,14 @@ const LangNavTitle: React.FC = () => {
       </span>
     </div>
   );
-};
+}
+
+function DataPageLink({ params, children }: PropsWithChildren<{ params: PageParamsOptional }>) {
+  return (
+    <Link to={'/data' + getNewURL(params)} style={{ textDecoration: 'none' }}>
+      {children}
+    </Link>
+  );
+}
 
 export default AboutPage;
