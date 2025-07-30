@@ -3,7 +3,7 @@ import React from 'react';
 import { useDataContext } from '../../data/DataContext';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
-import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
+import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import {
   CodeColumn,
   EndonymColumn,
@@ -34,8 +34,15 @@ const LanguageTable: React.FC = () => {
           sortParam: SortBy.Population,
         },
         {
-          key: 'Internet Technologies',
-          render: (lang) => <CLDRCoverageInfo object={lang} />,
+          key: 'CLDRCoverage',
+          label: 'CLDR Coverage',
+          render: (lang) => <CLDRCoverageText object={lang} />,
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'ICUSupport',
+          label: 'ICU Support',
+          render: (lang) => <ICUSupportStatus object={lang} />,
           isInitiallyVisible: false,
         },
         InfoButtonColumn,
