@@ -34,13 +34,13 @@ const LanguageTable: React.FC = () => {
           sortParam: SortBy.Population,
         },
         {
-          key: 'CLDRCoverage',
+          key: 'CLDR Coverage',
           label: 'CLDR Coverage',
           render: (lang) => <CLDRCoverageText object={lang} />,
           isInitiallyVisible: false,
         },
         {
-          key: 'ICUSupport',
+          key: 'ICU Support',
           label: 'ICU Support',
           render: (lang) => <ICUSupportStatus object={lang} />,
           isInitiallyVisible: false,
