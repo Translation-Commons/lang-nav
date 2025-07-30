@@ -46,12 +46,6 @@
   max-height: 800px;
   max-width: 600px;
 }
-
-.ModalButtons {
-  display: flex;
-  gap: 8px;
-}
-
 .ModalBody .Details {
   margin-top: 1em;
 }

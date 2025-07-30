@@ -79,7 +79,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
         {showInfoButton && (
           <HoverableObject object={object}>
             <button className="InfoButton">
-              <InfoIcon size="1em" />
+              <InfoIcon size="1em" display="block" />
             </button>
           </HoverableObject>
         )}

@@ -2,7 +2,7 @@ import { ExternalLinkIcon, XIcon } from 'lucide-react';
 import React, { useEffect } from 'react';
 
 import { usePageParams } from '../controls/PageParamsContext';
-import Hoverable from '../generic/Hoverable';
+import HoverableButton from '../generic/HoverableButton';
 import { useClickOutside } from '../generic/useClickOutside';
 import { View } from '../types/PageParamTypes';
 
@@ -46,23 +46,20 @@ const ViewModal: React.FC = () => {
           <div className="ModalTitle">
             <ObjectTitle object={object} />
           </div>
-          <div className="ModalButtons">
-            <Hoverable hoverContent="Expand modal to page">
-              <button
-                onClick={() =>
-                  updatePageParams({
-                    view: View.Details,
-                  })
-                }
-              >
-                <ExternalLinkIcon size="1em" />
-              </button>
-            </Hoverable>
-            <Hoverable hoverContent="Close modal">
-              <button onClick={onClose}>
-                <XIcon size="1em" />
-              </button>
-            </Hoverable>
+          <div style={{ display: 'flex', gap: '.5em' }}>
+            <HoverableButton
+              hoverContent="Expand modal to page"
+              onClick={() =>
+                updatePageParams({
+                  view: View.Details,
+                })
+              }
+            >
+              <ExternalLinkIcon size="1em" display="block" />
+            </HoverableButton>
+            <HoverableButton hoverContent="Close modal" onClick={onClose}>
+              <XIcon size="1em" display="block" />
+            </HoverableButton>
           </div>
         </div>
         <div className="ModalBody">
