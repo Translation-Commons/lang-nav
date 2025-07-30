@@ -20,7 +20,13 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({ children, limit = 4 }) 
         </React.Fragment>
       ))}{' '}
       {limit != null && childArray.length > limit && (
-        <button className="seeMore" onClick={() => setExpanded((prev) => !prev)}>
+        <button
+          style={{
+            padding: '0em 0.25em',
+            fontWeight: 'normal',
+          }}
+          onClick={() => setExpanded((prev) => !prev)}
+        >
           {expanded ? 'see less' : '+' + countOverLimit + ' more'}
         </button>
       )}

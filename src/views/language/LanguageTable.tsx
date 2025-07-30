@@ -1,6 +1,8 @@
 import React from 'react';
 
+import { getUniqueTerritoriesForLanguage } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
+import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
@@ -14,6 +16,7 @@ import ObjectTable from '../common/table/ObjectTable';
 
 const LanguageTable: React.FC = () => {
   const { languages } = useDataContext();
+  const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
 
   return (
     <ObjectTable<LanguageData>
@@ -21,7 +24,7 @@ const LanguageTable: React.FC = () => {
       columns={[
         CodeColumn,
         NameColumn,
-        EndonymColumn,
+        endonymColumn,
         {
           key: 'Scope',
           render: (lang) => lang.scope ?? lang.scope,
@@ -37,6 +40,23 @@ const LanguageTable: React.FC = () => {
           key: 'Internet Technologies',
           render: (lang) => <CLDRCoverageInfo object={lang} />,
           isInitiallyVisible: false,
+        },
+        {
+          key: 'Dialects',
+          render: (lang) => (
+            <HoverableEnumeration
+              items={lang.childLanguages
+                .sort((a, b) => (b.populationCited ?? 0) - (a.populationCited ?? 0))
+                .map((lang) => lang.nameDisplay)}
+            />
+          ),
+          isInitiallyVisible: false,
+          sortParam: SortBy.CountOfLanguages,
+        },
+        {
+          key: 'Territories',
+          render: (lang) => <HoverableEnumeration items={getUniqueTerritoriesForLanguage(lang)} />,
+          sortParam: SortBy.CountOfTerritories,
         },
         InfoButtonColumn,
       ]}

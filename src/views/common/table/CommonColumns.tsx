@@ -28,6 +28,7 @@ export const EndonymColumn: TableColumn<ObjectData> = {
   render: (object) => (
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Endonym} />
   ),
+  sortParam: SortBy.Endonym,
   isInitiallyVisible: false,
 };
 

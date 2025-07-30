@@ -38,6 +38,9 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
       style={{
         display: 'inline-block',
         textDecoration: 'underline',
+        textDecorationStyle: 'dashed',
+        textDecorationThickness: '1px',
+        textDecorationColor: 'var(--color-text-secondary)',
         cursor: onClick ? 'pointer' : 'help',
         ...style,
       }}

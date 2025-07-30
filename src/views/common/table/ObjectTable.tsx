@@ -20,7 +20,7 @@ export interface TableColumn<T> {
   isInitiallyVisible?: boolean;
   isNumeric?: boolean;
   key: string;
-  label?: React.ReactNode;
+  label?: React.ReactNode; // otherwise will use key as label
   render: (object: T) => React.ReactNode;
   sortParam?: SortBy;
 }
@@ -34,7 +34,8 @@ interface Props<T> {
  * A page that shows tips about problems in the data that may need to be addressed
  */
 function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
-  const sortBy = getSortFunction();
+  const { sortBy } = usePageParams();
+  const sortFunction = getSortFunction();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const scopeFilter = getScopeFilter();
@@ -52,20 +53,27 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   }, []);
 
   const currentlyVisibleColumns = useMemo(
-    () => columns.filter((column) => visibleColumns[column.key]),
-    [columns, visibleColumns],
+    () => columns.filter((column) => visibleColumns[column.key] || column.sortParam === sortBy),
+    [columns, visibleColumns, sortBy],
   );
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
     let result = objects.filter(scopeFilter).filter(filterByTerritory).filter(filterBySubstring);
     if (sortDirectionIsNormal) {
-      result = result.sort(sortBy);
+      result = result.sort(sortFunction);
     } else {
-      result = result.sort((a, b) => -sortBy(a, b));
+      result = result.sort((a, b) => -sortFunction(a, b));
     }
     return result;
-  }, [sortBy, objects, filterBySubstring, filterByTerritory, scopeFilter, sortDirectionIsNormal]);
+  }, [
+    sortFunction,
+    objects,
+    filterBySubstring,
+    filterByTerritory,
+    scopeFilter,
+    sortDirectionIsNormal,
+  ]);
 
   return (
     <div className="ObjectTableContainer">

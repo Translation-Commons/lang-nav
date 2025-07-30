@@ -164,6 +164,7 @@ export interface LocaleData extends ObjectBase {
 
   // Data added up some references
   populationSpeakingPercent?: number;
+  literacyPercent?: number;
   populationWriting?: number;
   populationWritingPercent?: number;
   populationCensus?: CensusData; // The census record that provides the population estimate

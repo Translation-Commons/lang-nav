@@ -28,7 +28,9 @@ export function numberToSigFigs(num: number, sigFigs: number): number {
  * this function will still show small numbers.
  */
 export function numberToFixedUnlessSmall(value: number, precision: number = 2): string {
-  if (Math.abs(value) > 1) {
+  if (Math.abs(value) > 10) {
+    return value.toFixed(precision - 1);
+  } else if (Math.abs(value) > 1) {
     return value.toFixed(precision);
   }
   return value.toPrecision(precision);

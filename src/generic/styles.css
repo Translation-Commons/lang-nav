@@ -1,9 +1,3 @@
-.seeMore {
-  margin: 0px;
-  padding: 0.25em 0.5em;
-  font-weight: normal;
-}
-
 .HoverCard {
   background: var(--color-background);
   border-radius: 0.5em;

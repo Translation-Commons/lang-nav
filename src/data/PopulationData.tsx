@@ -106,12 +106,14 @@ export function computeLocaleWritingPopulation(locales: Record<BCP47LocaleCode, 
       (l) => !isTerritoryGroup(l.territory?.scope), // Skip regional locales
     )
     .forEach((locale) => {
-      const literacyPercent = locale.territory?.literacyPercent ?? 100;
+      locale.literacyPercent = locale.territory?.literacyPercent ?? 100;
 
-      locale.populationWriting = Math.round((locale.populationSpeaking * literacyPercent) / 100);
+      locale.populationWriting = Math.round(
+        (locale.populationSpeaking * locale.literacyPercent) / 100,
+      );
       if (locale.populationSpeakingPercent != null) {
         locale.populationWritingPercent =
-          (locale.populationSpeakingPercent * literacyPercent) / 100;
+          (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
       }
     });
 }
