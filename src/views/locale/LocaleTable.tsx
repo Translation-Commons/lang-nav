@@ -37,12 +37,23 @@ const LocaleTable: React.FC = () => {
           sortParam: SortBy.Population,
         },
         {
+          key: 'Literacy',
+          render: (object) =>
+            numberToFixedUnlessSmall(
+              ((object.populationWriting ?? 0) * 100) / object.populationSpeaking || 0,
+              1,
+            ),
+          isInitiallyVisible: false,
+          isNumeric: true,
+          sortParam: SortBy.Literacy,
+        },
+        {
           key: '% in Territory',
           render: (object) =>
             object.populationSpeakingPercent &&
             numberToFixedUnlessSmall(object.populationSpeakingPercent),
           isNumeric: true,
-          sortParam: SortBy.Percent,
+          sortParam: SortBy.RelativePopulation,
         },
         {
           key: 'Population Source',

@@ -98,7 +98,7 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
             return b.type === ObjectType.Territory ? b.population - a.population : -1;
         }
       };
-    case SortBy.Percent:
+    case SortBy.RelativePopulation:
       return (a: ObjectData, b: ObjectData) => {
         switch (a.type) {
           case ObjectType.Census:
@@ -109,6 +109,27 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
           case ObjectType.Locale:
             return b.type === ObjectType.Locale
               ? (b.populationSpeakingPercent ?? 0) - (a.populationSpeakingPercent ?? 0)
+              : -1;
+          case ObjectType.Territory:
+            return b.type === ObjectType.Territory
+              ? // Err, this is not the same percent as above.
+                b.population / (b.parentUNRegion?.population ?? 1) -
+                  a.population / (a.parentUNRegion?.population ?? 1)
+              : -1;
+        }
+      };
+    case SortBy.Literacy:
+      return (a: ObjectData, b: ObjectData) => {
+        switch (a.type) {
+          case ObjectType.Census:
+          case ObjectType.Language:
+          case ObjectType.WritingSystem:
+            // No percent to sort by
+            return 0;
+          case ObjectType.Locale:
+            return b.type === ObjectType.Locale
+              ? (b.populationWriting ?? 0) / (b.populationSpeaking ?? 1) -
+                  (a.populationWriting ?? 0) / (a.populationSpeaking ?? 1)
               : -1;
           case ObjectType.Territory:
             return b.type === ObjectType.Territory
