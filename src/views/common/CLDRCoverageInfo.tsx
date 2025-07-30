@@ -20,7 +20,7 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
   const {
     cldrCoverage,
     cldrDataProvider,
-    schemaSpecific: { CLDR },
+    sourceSpecific: { CLDR },
   } = object;
 
   if (cldrCoverage == null) {

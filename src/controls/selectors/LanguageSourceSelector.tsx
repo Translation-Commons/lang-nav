@@ -1,41 +1,47 @@
 import React from 'react';
 
-import { LanguageSchema } from '../../types/LanguageTypes';
+import { LanguageSource } from '../../types/LanguageTypes';
 import Selector, { OptionsDisplay } from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
-const LanguageSchemaSelector: React.FC = () => {
-  const { languageSchema, updatePageParams } = usePageParams();
-  const selectorDescription =
-    "Languages have fuzzy boundaries and different authorities categorize potential languages differently. For example, what's a dialect versus a language, or if a language is even attested. Use this option to change what languages appear and what they are considered (family / individual / dialect). This may also change the language code & language name shown.";
+const LanguageListSourceSelector: React.FC = () => {
+  const { languageSource, updatePageParams } = usePageParams();
+  const selectorDescription = (
+    <>
+      Languages have fuzzy boundaries and different sources categorize potential languages
+      differently. For example, what&apos;s a dialect versus a language, or if a language is even
+      attested. Use this option to change what languages appear and what they are considered (family
+      / individual / dialect). This may also change the language codes, names, and parent/child
+      relationships.
+    </>
+  );
 
   return (
     <Selector
-      selectorLabel="Language Definition"
+      selectorLabel="Source of the List of Languages"
       selectorDescription={selectorDescription}
-      options={Object.values(LanguageSchema)}
+      options={Object.values(LanguageSource)}
       optionsDisplay={OptionsDisplay.ButtonList}
-      onChange={(languageSchema: LanguageSchema) => updatePageParams({ languageSchema })}
-      selected={languageSchema}
-      getOptionDescription={(languageSchema) => (
-        <LanguageSchemaDescription languageSchema={languageSchema} />
+      onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}
+      selected={languageSource}
+      getOptionDescription={(languageSource) => (
+        <LanguageSourceDescription languageSource={languageSource} />
       )}
     />
   );
 };
 
-const LanguageSchemaDescription: React.FC<{ languageSchema: LanguageSchema }> = ({
-  languageSchema,
+const LanguageSourceDescription: React.FC<{ languageSource: LanguageSource }> = ({
+  languageSource,
 }) => {
-  switch (languageSchema) {
-    case LanguageSchema.Inclusive:
+  switch (languageSource) {
+    case LanguageSource.All:
       return (
         <>
-          <label>Inclusive:</label>Show all languages and dialects, regardless of where it was
-          defined.
+          <label>All:</label>Show all languages and dialects, regardless of where it was defined.
         </>
       );
-    case LanguageSchema.ISO:
+    case LanguageSource.ISO:
       return (
         <>
           <label>International Standards Organization (ISO):</label>The languages and macrolanguages
@@ -45,7 +51,7 @@ const LanguageSchemaDescription: React.FC<{ languageSchema: LanguageSchema }> = 
           languages and macrolanguages or the ISO 639-5 standard for language families.
         </>
       );
-    case LanguageSchema.UNESCO:
+    case LanguageSource.UNESCO:
       return (
         <>
           <label>UNESCO&apos;s World Atlas of Languages (WAL):</label>The languages that have been
@@ -53,14 +59,14 @@ const LanguageSchemaDescription: React.FC<{ languageSchema: LanguageSchema }> = 
           World Atlas of Languages.
         </>
       );
-    case LanguageSchema.Glottolog:
+    case LanguageSource.Glottolog:
       return (
         <>
           <label>Glottolog:</label>The languoids shown in the Glottolog database. This schema will
           include many more language families than ISO.
         </>
       );
-    case LanguageSchema.CLDR:
+    case LanguageSource.CLDR:
       return (
         <>
           <label>CLDR:</label>The languages supported by Unicode&apos;s tooling that is used by most
@@ -75,4 +81,4 @@ const LanguageSchemaDescription: React.FC<{ languageSchema: LanguageSchema }> = 
   }
 };
 
-export default LanguageSchemaSelector;
+export default LanguageListSourceSelector;

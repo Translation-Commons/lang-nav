@@ -151,7 +151,7 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [ ] Export
 - [ ] Manage data sources
   - [x] Show results based on different definitions of what a language is
-    - [x] ISO, Glottolog, Inclusive
+    - [x] ISO, Glottolog, CLDR, All
     - [x] Highlight language codes in each
   - [ ] Add a better guide for different kinds of users
 - [x] About Page

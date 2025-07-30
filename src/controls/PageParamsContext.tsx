@@ -2,7 +2,7 @@ import React, { createContext, useCallback, useContext, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 import { TerritoryScope } from '../types/DataTypes';
-import { LanguageSchema, LanguageScope } from '../types/LanguageTypes';
+import { LanguageSource, LanguageScope } from '../types/LanguageTypes';
 import {
   ObjectType,
   PageParamKey,
@@ -39,11 +39,11 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const view = getParam('view', DEFAULT_VIEW) as View;
     const defaults = getDefaultParams(objectType, view);
     return {
-      languageSchema: getParam('languageSchema', defaults.languageSchema) as LanguageSchema,
       languageScopes: getParam('languageScopes', defaults.languageScopes.join(','))
         .split(',')
         .map((s) => s as LanguageScope)
         .filter(Boolean),
+      languageSource: getParam('languageSource', defaults.languageSource) as LanguageSource,
       limit: parseInt(getParam('limit', defaults.limit.toString())),
       localeSeparator: getParam('localeSeparator', '') === '-' ? '-' : '_',
       objectID: getParam('objectID', undefined),
@@ -78,7 +78,7 @@ function getDefaultParams(objectType: ObjectType, view: View): PageParams {
   }
 
   return {
-    languageSchema: LanguageSchema.Inclusive,
+    languageSource: LanguageSource.All,
     languageScopes,
     limit: view === View.Table ? 200 : 8,
     localeSeparator: '_',

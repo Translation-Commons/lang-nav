@@ -9,7 +9,7 @@ import React, {
 
 import { usePageParams } from '../controls/PageParamsContext';
 import { uniqueBy } from '../generic/setUtils';
-import { LanguageDictionary, LanguageSchema } from '../types/LanguageTypes';
+import { LanguageDictionary, LanguageSource } from '../types/LanguageTypes';
 import { LocaleSeparator } from '../types/PageParamTypes';
 import { getLocaleName } from '../views/locale/LocaleStrings';
 
@@ -22,7 +22,7 @@ type DataContextType = CoreData & {
 
 const DataContext = createContext<DataContextType | undefined>({
   censuses: {},
-  languagesBySchema: EMPTY_LANGUAGES_BY_SCHEMA,
+  languagesBySource: EMPTY_LANGUAGES_BY_SCHEMA,
   languages: {},
   locales: {},
   territories: {},
@@ -33,7 +33,7 @@ const DataContext = createContext<DataContextType | undefined>({
 export const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const { languageSchema, localeSeparator } = usePageParams();
+  const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
   const [loadProgress, setLoadProgress] = useState(0);
   const [languages, setLanguages] = useState<LanguageDictionary>({});
@@ -52,7 +52,7 @@ export const DataProvider: React.FC<{
       const loadSecondaryData = async (coreData: CoreData) => {
         await loadSupplementalData(coreData);
         setLoadProgress(2);
-        // updateLanguageBasedOnSchema(coreData, setLanguages, languageSchema, localeSeparator);
+        // updateLanguageBasedOnSource(coreData, setLanguages, languageSource, localeSeparator);
       };
 
       loadSecondaryData(coreData);
@@ -60,29 +60,29 @@ export const DataProvider: React.FC<{
   }, [coreData, loadProgress]); // this is called once after page load
 
   useEffect(() => {
-    updateLanguageBasedOnSchema(coreData, setLanguages, languageSchema, localeSeparator);
-  }, [languageSchema, loadProgress, localeSeparator]); // when core language data or the language schema changes
+    updateLanguageBasedOnSource(coreData, setLanguages, languageSource, localeSeparator);
+  }, [languageSource, loadProgress, localeSeparator]); // when core language data or the language source changes
 
   return <DataContext.Provider value={{ ...coreData, languages }}>{children}</DataContext.Provider>;
 };
 
-function updateLanguageBasedOnSchema(
+function updateLanguageBasedOnSource(
   coreData: CoreData,
   setLanguages: Dispatch<SetStateAction<LanguageDictionary>>,
-  languageSchema: LanguageSchema,
+  languageSource: LanguageSource,
   localeSeparator: LocaleSeparator,
 ): void {
-  const languages = coreData.languagesBySchema[languageSchema];
+  const languages = coreData.languagesBySource[languageSource];
   // Update language codes and other values used for filtering
   Object.values(languages).forEach((lang) => {
-    const specific = lang.schemaSpecific[languageSchema];
+    const specific = lang.sourceSpecific[languageSource];
     lang.codeDisplay = specific.code ?? lang.ID;
     lang.nameDisplay = specific.name ?? lang.nameCanonical;
     lang.names = uniqueBy(
       [
         lang.nameCanonical,
         lang.nameEndonym,
-        ...Object.values(lang.schemaSpecific).map((l) => l.name),
+        ...Object.values(lang.sourceSpecific).map((l) => l.name),
       ].filter((s) => s != null),
       (s) => s,
     );

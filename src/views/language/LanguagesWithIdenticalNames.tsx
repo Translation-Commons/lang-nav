@@ -12,7 +12,7 @@ import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';
-import { LanguageData, LanguageSchema } from '../../types/LanguageTypes';
+import { LanguageData, LanguageSource } from '../../types/LanguageTypes';
 import TreeListRoot from '../common/TreeList/TreeListRoot';
 import ViewCard from '../ViewCard';
 
@@ -20,14 +20,14 @@ import { getLanguageTreeNodes } from './LanguageHierarchy';
 
 const LanguagesWithIdenticalNames: React.FC = () => {
   const {
-    languagesBySchema: { Inclusive },
+    languagesBySource: { All },
   } = useDataContext();
   const { page, limit } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
   const sliceFunction = getSliceFunction<[string, LanguageData[]]>();
-  const languagesByName = Object.values(Inclusive)
+  const languagesByName = Object.values(All)
     .filter(filterBySubstring)
     .filter(filterByTerritory)
     .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
@@ -88,7 +88,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
           <h3 style={{ marginBottom: 0 }}>{name}</h3>
           <div className="CardList">
             {langs.map((lang) => {
-              const { ISO, Glottolog } = lang.schemaSpecific;
+              const { ISO, Glottolog } = lang.sourceSpecific;
               const otherNames = lang.names.filter(
                 (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
               );
@@ -116,7 +116,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
                     <div>
                       ISO Hierarchy:{' '}
                       <TreeListRoot
-                        rootNodes={getLanguageTreeNodes([lang], LanguageSchema.ISO, sortFunction)}
+                        rootNodes={getLanguageTreeNodes([lang], LanguageSource.ISO, sortFunction)}
                       />
                     </div>
                   )}
@@ -126,7 +126,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
                       <TreeListRoot
                         rootNodes={getLanguageTreeNodes(
                           [lang],
-                          LanguageSchema.Glottolog,
+                          LanguageSource.Glottolog,
                           sortFunction,
                         )}
                       />

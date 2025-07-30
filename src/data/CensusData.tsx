@@ -205,7 +205,7 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
   // Add alternative language names to the language data
   Object.entries(censusData.languageNames).forEach(([languageCode, languageName]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
-    const language = coreData.languagesBySchema.Inclusive[languageCode];
+    const language = coreData.languagesBySource.All[languageCode];
     if (language != null) {
       // Split on / since some censuses have multiple names for the same language
       languageName

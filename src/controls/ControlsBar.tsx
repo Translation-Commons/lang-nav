@@ -1,7 +1,7 @@
 import React from 'react';
 
-import LanguageSchemaSelector from './selectors/LanguageSchemaSelector';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
+import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import SortBySelector from './selectors/SortBySelector';
@@ -12,7 +12,7 @@ import './controls.css';
 const ControlsBar: React.FC = () => {
   return (
     <>
-      <LanguageSchemaSelector />
+      <LanguageSourceSelector />
       <LimitInput />
       <SortBySelector />
       <LanguageScopeSelector />

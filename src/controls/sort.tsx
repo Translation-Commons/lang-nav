@@ -1,14 +1,14 @@
 import { ObjectData } from '../types/DataTypes';
-import { LanguageSchema } from '../types/LanguageTypes';
+import { LanguageSource } from '../types/LanguageTypes';
 import { ObjectType, SortBy, View } from '../types/PageParamTypes';
 
 import { usePageParams } from './PageParamsContext';
 
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
-export function getSortFunction(languageSchema?: LanguageSchema): SortByFunctionType {
-  const { sortBy, view, languageSchema: languageSchemaPageParam } = usePageParams();
-  const effectiveLanguageSchema = languageSchema ?? languageSchemaPageParam;
+export function getSortFunction(languageSource?: LanguageSource): SortByFunctionType {
+  const { sortBy, view, languageSource: languageSourcePageParam } = usePageParams();
+  const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
   switch (sortBy) {
     case SortBy.Code:
@@ -31,8 +31,8 @@ export function getSortFunction(languageSchema?: LanguageSchema): SortByFunction
               ? (b.populationCited ?? 0) -
                   (a.populationCited ?? 0) +
                   (view === View.Hierarchy
-                    ? (b.schemaSpecific[effectiveLanguageSchema].populationOfDescendents ?? 0) -
-                      (a.schemaSpecific[effectiveLanguageSchema].populationOfDescendents ?? 0)
+                    ? (b.sourceSpecific[effectiveLanguageSource].populationOfDescendents ?? 0) -
+                      (a.sourceSpecific[effectiveLanguageSource].populationOfDescendents ?? 0)
                     : 0)
               : -1;
           case ObjectType.Locale:

@@ -34,7 +34,7 @@ const PotentialLocales: React.FC = () => {
   const {
     locales,
     censuses,
-    languagesBySchema: { Inclusive: languages },
+    languagesBySource: { All: languages },
   } = useDataContext();
   const { localeSeparator } = usePageParams();
   const [percentThreshold, setPercentThreshold] = React.useState(0.05);

@@ -1,5 +1,5 @@
 import { LocaleData, PopulationSourceCategory } from '../types/DataTypes';
-import { LanguagesBySchema } from '../types/LanguageTypes';
+import { LanguagesBySource } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
 export interface IANAVariantData {
@@ -44,7 +44,7 @@ export function parseIANAVariants(input: string): IANAVariantData[] {
 }
 
 export function addIANAVariantLocales(
-  languagesBySchema: LanguagesBySchema,
+  languagesBySource: LanguagesBySource,
   locales: Record<string, LocaleData>,
   variants: IANAVariantData[] | void,
 ): void {
@@ -52,7 +52,7 @@ export function addIANAVariantLocales(
 
   for (const variant of variants) {
     for (const prefix of variant.prefixes) {
-      const cldrLang = languagesBySchema.CLDR[prefix];
+      const cldrLang = languagesBySource.CLDR[prefix];
       if (!cldrLang) continue;
 
       const iso639_3 = cldrLang.ID;

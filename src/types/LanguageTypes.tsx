@@ -15,10 +15,10 @@ import { LocaleData, ObjectBase, ScriptCode, WritingSystemData } from './DataTyp
 import { ObjectType } from './PageParamTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
-export type LanguagesBySchema = Record<LanguageSchema, LanguageDictionary>;
+export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
 
-export enum LanguageSchema {
-  Inclusive = 'Inclusive',
+export enum LanguageSource {
+  All = 'All',
   ISO = 'ISO',
   UNESCO = 'UNESCO',
   Glottolog = 'Glottolog',
@@ -58,12 +58,12 @@ export interface LanguageData extends ObjectBase {
 
   // Provided by the TSV files
   ID: LanguageCode; // Stable ID, favors ISO
-  codeDisplay: LanguageCode; // Changes with different language schema
+  codeDisplay: LanguageCode; // Changes with different language source
   codeISO6391?: LanguageCode;
   scope?: LanguageScope;
 
-  nameCanonical: string; // Stays the same with different language schema
-  nameDisplay: string; // May update if a language schema has a different name
+  nameCanonical: string; // Stays the same with different language source
+  nameDisplay: string; // May update if a language source has a different name
   nameSubtitle?: string;
   nameEndonym?: string;
 
@@ -82,7 +82,7 @@ export interface LanguageData extends ObjectBase {
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
 
-  schemaSpecific: Record<LanguageSchema, LanguageDataInSchema>;
+  sourceSpecific: Record<LanguageSource, LanguageDataInSource>;
   cldrCoverage?: CLDRCoverageData;
   cldrDataProvider?: LanguageData | LocaleData;
 
@@ -94,8 +94,8 @@ export interface LanguageData extends ObjectBase {
   childLanguages: LanguageData[];
 }
 
-// Since languages can be categorized by ISO, Glottolog, or other schema, these values will vary based on the language schema
-type LanguageDataInSchema = {
+// Since languages can be categorized by ISO, Glottolog, or other source, these values will vary based on the language source
+type LanguageDataInSource = {
   code?: LanguageCode;
   name?: string;
   scope?: LanguageScope;
