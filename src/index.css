@@ -97,13 +97,6 @@ button:focus {
   background: var(--color-button-hover);
 }
 
-.unsupported,
-.deemphasized {
-  font-style: italic;
-  font-weight: lighter;
-  color: var(--color-text-secondary);
-}
-
 footer {
   align-items: center;
   background-color: var(--color-button-secondary);

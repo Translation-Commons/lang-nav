@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
+import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
@@ -143,9 +144,9 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
 const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actualLocale }) => {
   if (actualLocale == null) {
     return (
-      <span className="unsupported" style={{ fontSize: '0.8em' }}>
-        not found
-      </span>
+      <Deemphasized>
+        <span style={{ fontSize: '0.8em' }}>not found</span>
+      </Deemphasized>
     );
   }
   return (
