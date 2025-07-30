@@ -11,12 +11,12 @@ import LocaleCensusCitation from './LocaleCensusCitation';
 
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();
-  const { languageSchema } = usePageParams();
+  const { languageSource } = usePageParams();
 
   return (
     <ObjectTable<LocaleData>
       objects={Object.values(locales).filter(
-        (locale) => locale.language?.schemaSpecific[languageSchema].code != null,
+        (locale) => locale.language?.sourceSpecific[languageSource].code != null,
       )}
       columns={[
         CodeColumn,

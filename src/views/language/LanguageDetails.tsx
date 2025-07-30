@@ -28,8 +28,8 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
 };
 
 const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { codeISO6391, nameDisplay, nameEndonym, schemaSpecific } = lang;
-  const { Glottolog, ISO, CLDR } = schemaSpecific;
+  const { codeISO6391, nameDisplay, nameEndonym, sourceSpecific } = lang;
+  const { Glottolog, ISO, CLDR } = sourceSpecific;
 
   // nameDisplay and nameEndonym should already be shown in the title for this
   const otherNames = useMemo(
@@ -188,11 +188,11 @@ const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }
 };
 
 const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { languageSchema } = usePageParams();
+  const { languageSource } = usePageParams();
   const sortFunction = getSortFunction();
   const {
     childLanguages,
-    schemaSpecific: { ISO, Glottolog },
+    sourceSpecific: { ISO, Glottolog },
   } = lang;
 
   return (
@@ -214,7 +214,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         <div>
           <label>Descendent Languages:</label>
           {childLanguages.length > 0 ? (
-            <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSchema, sortFunction)} />
+            <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSource, sortFunction)} />
           ) : (
             <div>
               <span className="unsupported">No languages come from this language.</span>

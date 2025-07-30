@@ -1,5 +1,5 @@
 import { TerritoryScope } from './DataTypes';
-import { LanguageSchema, LanguageScope } from './LanguageTypes';
+import { LanguageSource, LanguageScope } from './LanguageTypes';
 
 export enum ObjectType {
   Language = 'Language',
@@ -35,7 +35,7 @@ export enum SearchableField {
 export type LocaleSeparator = '-' | '_';
 
 export type PageParamKey =
-  | 'languageSchema'
+  | 'languageSource'
   | 'languageScopes'
   | 'limit'
   | 'localeSeparator'
@@ -50,8 +50,8 @@ export type PageParamKey =
   | 'view';
 
 export type PageParams = {
-  languageSchema: LanguageSchema;
   languageScopes: LanguageScope[];
+  languageSource: LanguageSource;
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
   objectID?: string;
@@ -66,8 +66,8 @@ export type PageParams = {
 };
 
 export type PageParamsOptional = {
-  languageSchema?: LanguageSchema;
   languageScopes?: LanguageScope[];
+  languageSource?: LanguageSource;
   limit?: number;
   localeSeparator?: string;
   objectID?: string;

@@ -20,7 +20,7 @@ type Props = {
 
 const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
   const {
-    languagesBySchema: { Inclusive: langObjects },
+    languagesBySource: { All: langObjects },
     locales,
   } = useDataContext();
   const { localeSeparator } = usePageParams();

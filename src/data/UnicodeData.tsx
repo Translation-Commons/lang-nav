@@ -7,7 +7,7 @@ import { LocaleData } from '../types/DataTypes';
 import {
   LanguageData,
   LanguageDictionary,
-  LanguagesBySchema,
+  LanguagesBySource,
   LanguageScope,
 } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
@@ -16,9 +16,9 @@ import { CoreData } from './CoreData';
 
 const DEBUG = false;
 
-export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): void {
+export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): void {
   // Start with the initialized
-  const cldrLanguages = languagesBySchema.CLDR;
+  const cldrLanguages = languagesBySource.CLDR;
 
   // Import the CLDR language aliases and format it a bit
   const languageAliases = Object.entries(aliases.supplemental.metadata.alias.languageAlias).map(
@@ -41,7 +41,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       let replacementData: LanguageData | LocaleData = cldrLanguages[alias.replacement];
       if (replacementData == null) {
         // If the replacement data is not found, it may be a locale -- but we need to convert it to underscored ISO-639-3 form
-        // For example, `sw-CD` replaces `swc`, but we need to convert it to `swc_CD` to match out schema
+        // For example, `sw-CD` replaces `swc`, but we need to convert it to `swc_CD` to match out source
         const replacementIdParts = alias.replacement.split('-');
         // TODO need to add the equivalent locales swa_CD, fas_AF, srp_Latn
         // const replacementLangID = cldrLanguages[replacementIdParts[0]]?.ID ?? replacementIdParts[0];
@@ -50,8 +50,8 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       }
       if (lang != null) {
         // Add a note that the language code is considered "overlong" and a different language code or locale code should be used instead for CLDR purposes
-        lang.schemaSpecific.CLDR.code = undefined;
-        lang.schemaSpecific.CLDR.notes = (
+        lang.sourceSpecific.CLDR.code = undefined;
+        lang.sourceSpecific.CLDR.notes = (
           <>
             This language code <code>{alias.original}</code> is considered &quot;overlong&quot; in
             CLDR, use <code>{alias.replacement}</code> instead.
@@ -99,11 +99,11 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.cldrDataProvider = constituentLang;
-        macroLang.schemaSpecific.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
-        macroLang.schemaSpecific.CLDR.scope = LanguageScope.Macrolanguage;
-        macroLang.schemaSpecific.CLDR.childLanguages = [constituentLang];
-        macroLang.schemaSpecific.CLDR.notes = notes;
-        macroLang.schemaSpecific.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
+        macroLang.sourceSpecific.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
+        macroLang.sourceSpecific.CLDR.scope = LanguageScope.Macrolanguage;
+        macroLang.sourceSpecific.CLDR.childLanguages = [constituentLang];
+        macroLang.sourceSpecific.CLDR.notes = notes;
+        macroLang.sourceSpecific.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
         // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
         cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with ** to distinguish it
@@ -112,9 +112,9 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
       if (constituentLang != null) {
         cldrLanguages[macroLangCode] = constituentLang;
-        constituentLang.schemaSpecific.CLDR.code = macroLangCode;
-        constituentLang.schemaSpecific.CLDR.notes = notes;
-        constituentLang.schemaSpecific.CLDR.parentLanguageCode = macroLangAltCode;
+        constituentLang.sourceSpecific.CLDR.code = macroLangCode;
+        constituentLang.sourceSpecific.CLDR.notes = notes;
+        constituentLang.sourceSpecific.CLDR.parentLanguageCode = macroLangAltCode;
 
         // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
         delete cldrLanguages[constituentLangCode];
@@ -132,7 +132,7 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       const lang = cldrLanguages[alias.original];
       const replacementData: LanguageData = cldrLanguages[alias.replacement];
       if (lang != null) {
-        lang.schemaSpecific.CLDR = {
+        lang.sourceSpecific.CLDR = {
           code: alias.original,
           childLanguages: [],
           notes: (
@@ -155,11 +155,11 @@ export function addCLDRLanguageDetails(languagesBySchema: LanguagesBySchema): vo
       }
     });
 
-  languagesBySchema.CLDR = cldrLanguages;
+  languagesBySource.CLDR = cldrLanguages;
 }
 
 export async function loadCLDRCoverage(coreData: CoreData): Promise<void> {
-  const cldrLanguages = coreData.languagesBySchema.CLDR;
+  const cldrLanguages = coreData.languagesBySource.CLDR;
 
   return await fetch('data/unicode/cldrCoverage.tsv')
     .then((res) => res.text())
@@ -181,7 +181,7 @@ export async function loadCLDRCoverage(coreData: CoreData): Promise<void> {
           return;
         }
         lang.nameEndonym ??= cldrCov.nameEndonym;
-        lang.schemaSpecific.CLDR.name = cldrCov.nameDisplay;
+        lang.sourceSpecific.CLDR.name = cldrCov.nameDisplay;
         lang.cldrCoverage = {
           countOfCLDRLocales: cldrCov.countOfCLDRLocales,
           targetCoverageLevel: cldrCov.targetCoverageLevel,
@@ -247,7 +247,7 @@ export function getLanguageCountsFromCLDR(coreData: CoreData): CensusData[] {
             accumulator,
             inputLocaleCode,
             pop,
-            coreData.languagesBySchema.CLDR,
+            coreData.languagesBySource.CLDR,
           );
         },
         {},
@@ -291,14 +291,14 @@ function convertCLDRLangPopToLangNavEntries(
   const extraCodeParts = inputLocaleCode.split('_').slice(1).join('_'); // Get the rest of the locale code, e.g. `sr_Latn` -> `Latn`
 
   let languageCode = cldrLanguages[cldrLanguageCode].ID ?? cldrLanguageCode;
-  if (cldrLanguages[cldrLanguageCode].schemaSpecific?.CLDR?.parentLanguageCode != null) {
+  if (cldrLanguages[cldrLanguageCode].sourceSpecific?.CLDR?.parentLanguageCode != null) {
     // If the language a child of a macrolanguage, we don't know from the data if the number
     // describes the constituent language or the macrolanguage population. Since it's unknown
     // we will use the macrolanguage.
-    const parentLang = cldrLanguages[cldrLanguageCode].schemaSpecific.CLDR.parentLanguage;
+    const parentLang = cldrLanguages[cldrLanguageCode].sourceSpecific.CLDR.parentLanguage;
     if (
       parentLang != null &&
-      parentLang.schemaSpecific.CLDR.scope === LanguageScope.Macrolanguage
+      parentLang.sourceSpecific.CLDR.scope === LanguageScope.Macrolanguage
     ) {
       languageCode = parentLang.ID;
     }

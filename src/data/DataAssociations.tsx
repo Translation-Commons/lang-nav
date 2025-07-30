@@ -9,23 +9,22 @@ import {
 import {
   LanguageData,
   LanguageDictionary,
-  LanguagesBySchema,
-  LanguageSchema,
+  LanguagesBySource,
+  LanguageSource,
   LanguageScope,
 } from '../types/LanguageTypes';
 import { getLocaleName } from '../views/locale/LocaleStrings';
 
-export function connectLanguagesToParent(languagesBySchema: LanguagesBySchema): void {
+export function connectLanguagesToParent(languagesBySource: LanguagesBySource): void {
   // Connect general parents
-  Object.values(languagesBySchema[LanguageSchema.Inclusive]).forEach((lang) => {
-    Object.values(LanguageSchema).forEach((schema) => {
-      const parentCode = lang.schemaSpecific[schema].parentLanguageCode;
+  Object.values(languagesBySource[LanguageSource.All]).forEach((lang) => {
+    Object.values(LanguageSource).forEach((source) => {
+      const parentCode = lang.sourceSpecific[source].parentLanguageCode;
       if (parentCode != null) {
-        const parent =
-          languagesBySchema[schema][parentCode] ?? languagesBySchema.Inclusive[parentCode];
+        const parent = languagesBySource[source][parentCode] ?? languagesBySource.All[parentCode];
         if (parent != null) {
-          lang.schemaSpecific[schema].parentLanguage = parent;
-          parent.schemaSpecific[schema].childLanguages.push(lang);
+          lang.sourceSpecific[source].parentLanguage = parent;
+          parent.sourceSpecific[source].childLanguages.push(lang);
         }
       }
     });
@@ -136,32 +135,32 @@ export function connectLocales(
  * Recompose the structure of languages, leaving the primary index intact but also
  * creating 4 other indices based on the definitions of languages from ISO, UNESCO, Glottolog, and CLDR
  */
-export function groupLanguagesBySchema(languages: LanguageDictionary): LanguagesBySchema {
+export function groupLanguagesBySource(languages: LanguageDictionary): LanguagesBySource {
   return {
-    Inclusive: languages,
+    All: languages,
     ISO: Object.values(languages).reduce<LanguageDictionary>((isoLangs, lang) => {
-      const code = lang.schemaSpecific.ISO.code;
+      const code = lang.sourceSpecific.ISO.code;
       if (code != null) {
         isoLangs[code] = lang;
       }
       return isoLangs;
     }, {}),
     UNESCO: Object.values(languages).reduce<LanguageDictionary>((unescoLangs, lang) => {
-      const code = lang.schemaSpecific.UNESCO.code;
+      const code = lang.sourceSpecific.UNESCO.code;
       if (code != null && lang.viabilityConfidence != null && lang.viabilityConfidence != 'No') {
         unescoLangs[code] = lang;
       }
       return unescoLangs;
     }, {}),
     Glottolog: Object.values(languages).reduce<LanguageDictionary>((glottoLangs, lang) => {
-      const code = lang.schemaSpecific.Glottolog.code;
+      const code = lang.sourceSpecific.Glottolog.code;
       if (code != null) {
         glottoLangs[code] = lang;
       }
       return glottoLangs;
     }, {}),
     CLDR: Object.values(languages).reduce<LanguageDictionary>((cldrLangs, lang) => {
-      const code = lang.codeISO6391 ?? lang.schemaSpecific.ISO.code;
+      const code = lang.codeISO6391 ?? lang.sourceSpecific.ISO.code;
       if (code != null && lang.scope !== LanguageScope.Family) {
         cldrLangs[code] = lang;
       }
@@ -171,7 +170,7 @@ export function groupLanguagesBySchema(languages: LanguageDictionary): Languages
 }
 
 export function computeOtherPopulationStatistics(
-  languagesBySchema: LanguagesBySchema,
+  languagesBySource: LanguagesBySource,
   writingSystems: Record<ScriptCode, WritingSystemData>,
 ): void {
   // Organizing writing systems by population is a bit funny because some fundamental writing systems
@@ -183,11 +182,11 @@ export function computeOtherPopulationStatistics(
     .forEach(computeWritingSystemDescendentPopulation);
 
   // Need to compute the language descendent populations 3 times because nodes will be organized
-  // differently in the different language schemas
-  Object.values(LanguageSchema).forEach((schema) => {
-    Object.values(languagesBySchema[schema])
-      .filter((lang) => lang.schemaSpecific[schema].parentLanguage == null) // start at roots
-      .forEach((lang) => computeLanguageDescendentPopulation(lang, schema));
+  // differently in the different language sources
+  Object.values(LanguageSource).forEach((source) => {
+    Object.values(languagesBySource[source])
+      .filter((lang) => lang.sourceSpecific[source].parentLanguage == null) // start at roots
+      .forEach((lang) => computeLanguageDescendentPopulation(lang, source));
   });
 }
 
@@ -201,12 +200,12 @@ function computeWritingSystemDescendentPopulation(writingSystem: WritingSystemDa
   return descendentPopulation + writingSystem.populationUpperBound;
 }
 
-function computeLanguageDescendentPopulation(lang: LanguageData, schema: LanguageSchema): number {
-  const { childLanguages } = lang.schemaSpecific[schema];
+function computeLanguageDescendentPopulation(lang: LanguageData, source: LanguageSource): number {
+  const { childLanguages } = lang.sourceSpecific[source];
   const descendentPopulation = childLanguages.reduce(
-    (total, childLang) => total + computeLanguageDescendentPopulation(childLang, schema),
+    (total, childLang) => total + computeLanguageDescendentPopulation(childLang, source),
     1,
   );
-  lang.schemaSpecific[schema].populationOfDescendents = descendentPopulation;
+  lang.sourceSpecific[source].populationOfDescendents = descendentPopulation;
   return descendentPopulation + (lang.populationCited ?? 0) + 1; // Tiebreaker = number of child nodes
 }

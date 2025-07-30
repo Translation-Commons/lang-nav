@@ -5,13 +5,13 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { ObjectData } from '../../types/DataTypes';
-import { LanguageData, LanguageSchema, LanguageScope } from '../../types/LanguageTypes';
+import { LanguageData, LanguageSource, LanguageScope } from '../../types/LanguageTypes';
 import { ObjectType } from '../../types/PageParamTypes';
 import { TreeNodeData } from '../common/TreeList/TreeListNode';
 import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 
 export const LanguageHierarchy: React.FC = () => {
-  const { languageSchema } = usePageParams();
+  const { languageSource } = usePageParams();
   const { languages } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
@@ -20,7 +20,7 @@ export const LanguageHierarchy: React.FC = () => {
     Object.values(languages).filter(
       (lang) => lang.parentLanguage == null || !filterByScope(lang.parentLanguage),
     ),
-    languageSchema,
+    languageSource,
     sortFunction,
     filterByScope,
   );
@@ -40,20 +40,20 @@ export const LanguageHierarchy: React.FC = () => {
 
 export function getLanguageTreeNodes(
   languages: LanguageData[],
-  languageSchema: LanguageSchema,
+  languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean = () => true,
 ): TreeNodeData[] {
   return languages
     .filter(filterFunction)
     .sort(sortFunction)
-    .map((lang) => getLanguageTreeNode(lang, languageSchema, sortFunction, filterFunction))
+    .map((lang) => getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction))
     .filter((node) => node != null);
 }
 
 function getLanguageTreeNode(
   lang: LanguageData,
-  languageSchema: LanguageSchema,
+  languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean,
 ): TreeNodeData {
@@ -61,8 +61,8 @@ function getLanguageTreeNode(
     type: ObjectType.Language,
     object: lang,
     children: getLanguageTreeNodes(
-      lang.schemaSpecific[languageSchema].childLanguages,
-      languageSchema,
+      lang.sourceSpecific[languageSource].childLanguages,
+      languageSource,
       sortFunction,
       filterFunction,
     ),

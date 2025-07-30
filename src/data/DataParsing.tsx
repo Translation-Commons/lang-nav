@@ -22,8 +22,8 @@ export function parseLanguageLine(line: string): LanguageData {
   const parentLanguageCode = parts[11] != '' ? parts[11] : undefined;
   const parentISOCode = parts[11] != '' && parts[11].length <= 3 ? parts[11] : undefined;
   const parentGlottocode = parts[12] != '' ? parts[12] : undefined;
-  const schemaSpecific = {
-    Inclusive: { code, name: nameDisplay, parentLanguageCode, childLanguages: [] },
+  const sourceSpecific = {
+    All: { code, name: nameDisplay, parentLanguageCode, childLanguages: [] },
     ISO: { code, parentLanguageCode: parentISOCode, childLanguages: [] },
     UNESCO: { code, name: nameDisplay, parentLanguageCode: parentISOCode, childLanguages: [] },
     Glottolog: {
@@ -62,7 +62,7 @@ export function parseLanguageLine(line: string): LanguageData {
     primaryScriptCode: parts[5] != '' ? parts[5] : undefined,
 
     // References to other objects, filled in with DataAssociations methods
-    schemaSpecific,
+    sourceSpecific,
     locales: [],
     primaryWritingSystem: undefined,
     writingSystems: {},

@@ -37,15 +37,15 @@ const ObjectDetails: React.FC<Props> = ({ object, objectID }) => {
 
 export function getObjectFromID(inputObjectID?: string): ObjectData | undefined {
   const { objectID: pageObjectID } = usePageParams();
-  const { censuses, languagesBySchema, territories, writingSystems, locales } = useDataContext();
+  const { censuses, languagesBySource, territories, writingSystems, locales } = useDataContext();
   const objectID = inputObjectID ?? pageObjectID;
 
   if (objectID == null) return undefined;
 
   return (
     censuses[objectID] ??
-    languagesBySchema.Inclusive[objectID] ??
-    languagesBySchema.Glottolog[objectID] ?? // The Glottolog lookup should no longer be necessary since objects have a stable ID field, but keep just in case
+    languagesBySource.All[objectID] ??
+    languagesBySource.Glottolog[objectID] ?? // The Glottolog lookup should no longer be necessary since objects have a stable ID field, but keep just in case
     territories[objectID] ??
     locales[objectID] ??
     writingSystems[objectID]

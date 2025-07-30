@@ -5,7 +5,7 @@ import {
   LanguageCode,
   LanguageData,
   LanguageDictionary,
-  LanguagesBySchema,
+  LanguagesBySource,
   LanguageScope,
 } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
@@ -157,9 +157,9 @@ export function addISODataToLanguages(
     lang.codeISO6391 = isoLang.codeISO6391;
     lang.vitalityISO = isoLang.vitality;
     lang.scope = isoLang.scope;
-    lang.schemaSpecific.ISO.scope = isoLang.scope;
-    lang.schemaSpecific.ISO.name = isoLang.name;
-    lang.schemaSpecific.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    lang.sourceSpecific.ISO.scope = isoLang.scope;
+    lang.sourceSpecific.ISO.name = isoLang.name;
+    lang.sourceSpecific.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
   });
 }
 
@@ -184,7 +184,7 @@ export function addISOMacrolanguageData(
       if (DEBUG) console.log(`Constituent language ${relation.codeConstituent} not found`);
       return;
     }
-    const parentLanguageCode = constituent.schemaSpecific.ISO.parentLanguageCode;
+    const parentLanguageCode = constituent.sourceSpecific.ISO.parentLanguageCode;
     if (parentLanguageCode != macro.ID) {
       if (DEBUG)
         // As of 2025-04-30 all exceptions to this are temporary
@@ -203,20 +203,20 @@ export function addISOMacrolanguageData(
 }
 
 export function addISOLanguageFamilyData(
-  languagesBySchema: LanguagesBySchema,
+  languagesBySource: LanguagesBySource,
   families: ISOLanguageFamilyData[],
   isoLangsToFamilies: Record<ISO6395LanguageCode, LanguageCode[]>,
 ): void {
   // Add new language entries for language families, otherwise fill in missing data
   families.forEach((family) => {
-    const familyEntry = languagesBySchema.ISO[family.code];
+    const familyEntry = languagesBySource.ISO[family.code];
     // trim excess from the name
     const name = family.name.replace(/ languages| \(family\)/gi, '');
 
     // If the entry is missing, create a new one
     if (familyEntry == null) {
-      const schemaSpecific = {
-        Inclusive: { code: family.code, parentLanguageCode: family.parent, childLanguages: [] },
+      const sourceSpecific = {
+        All: { code: family.code, parentLanguageCode: family.parent, childLanguages: [] },
         ISO: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
         UNESCO: { childLanguages: [] }, // Not including lang families in UNESCO's WAL
         Glottolog: { childLanguages: [] }, // No glottolog data
@@ -233,22 +233,22 @@ export function addISOLanguageFamilyData(
         scope: LanguageScope.Family,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Language family',
-        schemaSpecific,
+        sourceSpecific,
         writingSystems: {},
         locales: [],
         childLanguages: [],
       };
-      languagesBySchema.Inclusive[family.code] = familyEntry;
-      languagesBySchema.ISO[family.code] = familyEntry;
+      languagesBySource.All[family.code] = familyEntry;
+      languagesBySource.ISO[family.code] = familyEntry;
     } else {
       // familyEntry exists, but it may be missing data
       if (!familyEntry.nameDisplay || familyEntry.nameDisplay === '0') {
         familyEntry.nameDisplay = family.name;
       }
-      familyEntry.schemaSpecific.Inclusive.parentLanguageCode = family.parent;
-      familyEntry.schemaSpecific.ISO.parentLanguageCode = family.parent;
-      familyEntry.schemaSpecific.ISO.scope = LanguageScope.Family;
-      familyEntry.schemaSpecific.ISO.name = name;
+      familyEntry.sourceSpecific.All.parentLanguageCode = family.parent;
+      familyEntry.sourceSpecific.ISO.parentLanguageCode = family.parent;
+      familyEntry.sourceSpecific.ISO.scope = LanguageScope.Family;
+      familyEntry.sourceSpecific.ISO.name = name;
       familyEntry.scope = LanguageScope.Family;
     }
   });
@@ -258,14 +258,14 @@ export function addISOLanguageFamilyData(
   Object.entries(isoLangsToFamilies).forEach(([familyCode, constituentLanguages]) => {
     constituentLanguages.forEach((langCode) => {
       // Get the language checking the 3-letter language code (or the 2-letter that is used in CLDR)
-      const lang = languagesBySchema.ISO[langCode] ?? languagesBySchema.CLDR[langCode];
+      const lang = languagesBySource.ISO[langCode] ?? languagesBySource.CLDR[langCode];
       if (lang == null) {
         console.log(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;
       }
       // languages may already have macrolanguage parents but if its unset, set the parent
-      lang.schemaSpecific.Inclusive.parentLanguageCode ??= familyCode;
-      lang.schemaSpecific.ISO.parentLanguageCode ??= familyCode;
+      lang.sourceSpecific.All.parentLanguageCode ??= familyCode;
+      lang.sourceSpecific.ISO.parentLanguageCode ??= familyCode;
     });
   });
 }

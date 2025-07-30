@@ -9,7 +9,7 @@ import {
   TerritoryData,
   WritingSystemData,
 } from '../types/DataTypes';
-import { LanguagesBySchema } from '../types/LanguageTypes';
+import { LanguagesBySource } from '../types/LanguageTypes';
 
 import {
   addISODataToLanguages,
@@ -25,7 +25,7 @@ import {
   connectLanguagesToParent,
   connectLocales,
   connectWritingSystems,
-  groupLanguagesBySchema,
+  groupLanguagesBySource,
 } from './DataAssociations';
 import { loadLanguages, loadLocales, loadWritingSystems } from './DataLoader';
 import {
@@ -43,14 +43,14 @@ import { addCLDRLanguageDetails } from './UnicodeData';
 
 export type CoreData = {
   censuses: Record<CensusID, CensusData>;
-  languagesBySchema: LanguagesBySchema;
+  languagesBySource: LanguagesBySource;
   locales: Record<BCP47LocaleCode, LocaleData>;
   territories: Record<TerritoryCode, TerritoryData>;
   writingSystems: Record<ScriptCode, WritingSystemData>;
 };
 
-export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySchema = {
-  Inclusive: {},
+export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
+  All: {},
   ISO: {},
   Glottolog: {},
   UNESCO: {},
@@ -65,8 +65,8 @@ export function useCoreData(): {
   loadCoreData: () => Promise<void>;
   coreData: CoreData;
 } {
-  const [languagesBySchema, setLanguagesBySchema] =
-    useState<LanguagesBySchema>(EMPTY_LANGUAGES_BY_SCHEMA);
+  const [languagesBySource, setLanguagesBySource] =
+    useState<LanguagesBySource>(EMPTY_LANGUAGES_BY_SCHEMA);
   const [locales, setLocales] = useState<Record<BCP47LocaleCode, LocaleData>>({});
   const [territories, setTerritories] = useState<Record<TerritoryCode, TerritoryData>>({});
   const [writingSystems, setWritingSystems] = useState<Record<ScriptCode, WritingSystemData>>({});
@@ -108,21 +108,21 @@ export function useCoreData(): {
     }
 
     addISODataToLanguages(initialLangs, isoLangs || []);
-    const languagesBySchema = groupLanguagesBySchema(initialLangs);
-    addISOLanguageFamilyData(languagesBySchema, langFamilies || [], isoLangsToFamilies || {});
-    addISOMacrolanguageData(languagesBySchema.ISO, macroLangs || []);
-    addGlottologLanguages(languagesBySchema, glottologImport || [], manualGlottocodeToISO || {});
-    addCLDRLanguageDetails(languagesBySchema);
-    addIANAVariantLocales(languagesBySchema, locales, ianaVariants);
+    const languagesBySource = groupLanguagesBySource(initialLangs);
+    addISOLanguageFamilyData(languagesBySource, langFamilies || [], isoLangsToFamilies || {});
+    addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
+    addGlottologLanguages(languagesBySource, glottologImport || [], manualGlottocodeToISO || {});
+    addCLDRLanguageDetails(languagesBySource);
+    addIANAVariantLocales(languagesBySource, locales, ianaVariants);
 
-    connectLanguagesToParent(languagesBySchema);
+    connectLanguagesToParent(languagesBySource);
     connectTerritoriesToParent(territories);
-    connectWritingSystems(languagesBySchema.Inclusive, territories, writingSystems);
-    connectLocales(languagesBySchema.Inclusive, territories, writingSystems, locales);
+    connectWritingSystems(languagesBySource.All, territories, writingSystems);
+    connectLocales(languagesBySource.All, territories, writingSystems, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
-    computeOtherPopulationStatistics(languagesBySchema, writingSystems);
+    computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
-    setLanguagesBySchema(languagesBySchema);
+    setLanguagesBySource(languagesBySource);
     setTerritories(territories);
     setLocales(locales);
     setWritingSystems(writingSystems);
@@ -132,7 +132,7 @@ export function useCoreData(): {
     loadCoreData,
     coreData: {
       censuses,
-      languagesBySchema,
+      languagesBySource,
       locales,
       territories,
       writingSystems,

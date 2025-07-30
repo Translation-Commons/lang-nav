@@ -2,7 +2,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getNewURL } from '../controls/PageParamsContext';
-import { LanguageSchema } from '../types/LanguageTypes';
+import { LanguageSource } from '../types/LanguageTypes';
 import { PageParamsOptional } from '../types/PageParamTypes';
 
 import CreativeCommonsLicense from './CreativeCommonsLicense';
@@ -48,17 +48,17 @@ const AboutPage: React.FC = () => {
             The Language Navigator highlights not only widely spoken languages but also those
             recognized by specific communities, even if they lack global consensus. Where data is
             disputed or incomplete, we aim for transparency. Users can see{' '}
-            <DataPageLink params={{ languageSchema: LanguageSchema.Inclusive }}>
+            <DataPageLink params={{ languageSource: LanguageSource.All }}>
               all attested languages
             </DataPageLink>{' '}
             or choose to follow specific standards like{' '}
-            <DataPageLink params={{ languageSchema: LanguageSchema.ISO }}>ISO 639-3/5</DataPageLink>
+            <DataPageLink params={{ languageSource: LanguageSource.ISO }}>ISO 639-3/5</DataPageLink>
             ,{' '}
-            <DataPageLink params={{ languageSchema: LanguageSchema.Glottolog }}>
+            <DataPageLink params={{ languageSource: LanguageSource.Glottolog }}>
               Glottolog
             </DataPageLink>
-            , <DataPageLink params={{ languageSchema: LanguageSchema.UNESCO }}>UNESCO</DataPageLink>
-            , or <DataPageLink params={{ languageSchema: LanguageSchema.CLDR }}>CLDR</DataPageLink>.
+            , <DataPageLink params={{ languageSource: LanguageSource.UNESCO }}>UNESCO</DataPageLink>
+            , or <DataPageLink params={{ languageSource: LanguageSource.CLDR }}>CLDR</DataPageLink>.
           </DictionaryEntry>
         </dl>
       </Section>
@@ -229,15 +229,15 @@ const AboutPage: React.FC = () => {
             their respective original database (ISO, Glottolog, CLDR). When an object has multiple
             identities, it has been manually matched by the Language Navigator team to a single
             entity. For instance, English is represented in CLDR by the ISO 639-1 code{' '}
-            <DataPageLink params={{ languageSchema: LanguageSchema.CLDR, objectID: 'eng' }}>
+            <DataPageLink params={{ languageSource: LanguageSource.CLDR, objectID: 'eng' }}>
               en
             </DataPageLink>
             , the ISO 639-3 code{' '}
-            <DataPageLink params={{ languageSchema: LanguageSchema.ISO, objectID: 'eng' }}>
+            <DataPageLink params={{ languageSource: LanguageSource.ISO, objectID: 'eng' }}>
               eng
             </DataPageLink>
             , and the Glottocode{' '}
-            <DataPageLink params={{ languageSchema: LanguageSchema.Glottolog, objectID: 'eng' }}>
+            <DataPageLink params={{ languageSource: LanguageSource.Glottolog, objectID: 'eng' }}>
               stan1293
             </DataPageLink>
             .

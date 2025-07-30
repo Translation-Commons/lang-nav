@@ -17,7 +17,7 @@ import ViewCard from '../ViewCard';
 
 const DubiousLanguages: React.FC = () => {
   const {
-    languagesBySchema: { Inclusive, CLDR },
+    languagesBySource: { All, CLDR },
     writingSystems,
     territories,
   } = useDataContext();
@@ -26,7 +26,7 @@ const DubiousLanguages: React.FC = () => {
   const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
   const sliceFunction = getSliceFunction<LanguageData>();
-  const languages = Object.values(Inclusive)
+  const languages = Object.values(All)
     .filter(filterBySubstring)
     .filter(filterByTerritory)
     .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]'));
@@ -65,7 +65,7 @@ const DubiousLanguages: React.FC = () => {
           const relatedObjects = codePieces
             .map(
               (partialCode) =>
-                Inclusive[partialCode] ??
+                All[partialCode] ??
                 CLDR[partialCode] ??
                 territories[partialCode] ??
                 writingSystems[partialCode],

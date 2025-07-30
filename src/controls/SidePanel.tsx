@@ -3,8 +3,8 @@ import React from 'react';
 
 import HoverableButton from '../generic/HoverableButton';
 
-import LanguageSchemaSelector from './selectors/LanguageSchemaSelector';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
+import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
@@ -25,7 +25,7 @@ const SidePanel: React.FC = () => {
       <SidePanelSection>
         <SidePanelSectionTitle>Data</SidePanelSectionTitle>
         <ObjectTypeSelector />
-        <LanguageSchemaSelector />
+        <LanguageListSourceSelector />
       </SidePanelSection>
 
       <SidePanelSection>
