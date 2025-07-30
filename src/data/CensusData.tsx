@@ -1,6 +1,6 @@
 import { toTitleCase } from '../generic/stringUtils';
 import { CensusCollectorType, CensusData } from '../types/CensusTypes';
-import { LanguageCode } from '../types/LanguageTypes';
+import { LanguageCode, LanguageModality } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
 import { CoreData } from './CoreData';
@@ -13,6 +13,8 @@ const CENSUS_FILENAMES = [
   'data.un.org/au', // Australia Censuses downloaded from UN data portal
   'data.un.org/ru', // Russia 2010 Census downloaded from UN data portal
   'es2021', // Spain 2021 Census
+  'data.un.org/bs', // Bahamas 2010 Census downloaded from UN data portal
+  'yt', // Mayotte Censuses
   // Add more census files here as needed
 ];
 
@@ -97,6 +99,8 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
           censuses[index][key] = Number.parseFloat(value);
         } else if (key === 'collectorType') {
           censuses[index][key] = value as CensusCollectorType;
+        } else if (key === 'modality') {
+          censuses[index][key] = value as LanguageModality;
         } else if (
           key === 'languageCount' ||
           key === 'languageEstimates' ||
@@ -226,6 +230,12 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
   for (const census of censusData.censuses) {
     // Add the census to the core data if its not there yet
     if (coreData.censuses[census.ID] == null) {
+      // Drop census tables which have a "#" in the codeDisplay -- that means they are provided for context
+      // but LangNav doesn't have a good way to show it.
+      if (census.codeDisplay.includes('#')) {
+        continue;
+      }
+
       coreData.censuses[census.ID] = census;
 
       // Add the territory reference to it

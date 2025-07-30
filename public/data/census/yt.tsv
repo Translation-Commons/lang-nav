@@ -1,0 +1,28 @@
+#codeDisplay		yt2007	yt2002write	yt2002speak	yt2006L1	yt2006speak	#yt2006L1raw	#yt2006speakraw
+#nameDisplay		Mayotte 2007	Mayotte 2002 Writing	Mayotte 2002 Spoken	Mayotte 2006 Mothertongue	Mayotte 2006 Spoken	Mayotte 2006 Mothertongue Original	Mayotte 2006 Spoken Original
+#isoRegionCode	YT							
+#yearCollected		2007	2002	2002	2006	2006	2006	2006
+#datePublished		2009						
+#eligiblePopulation		108,187	92738	92738	133053	133053	2743	2743
+#sampleRate					0.02061584481	0.02061584481		
+#modality		Spoken	Written	Spoken	Spoken	Spoken	Spoken	Spoken
+#acquisitionOrder			Any	Any	L1	Any	L1	Any
+#age		14+	15+	15+	9+	9+	9+	9+
+#responsesPerIndividual		1	1+	1+	1+	1+	1+	1+
+#url		https://data.un.org/Data.aspx?d=POP&f=tableCode:27	http://www.insee.fr/fr/insee_regions/mayotte/themes/dossiers/rp/rp2002/for5.xls	https://web.archive.org/web/20150924164057/https://www.insee.fr/fr/insee_regions/mayotte/themes/dossiers/rp/rp2002/for4.xls	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf
+#collectorType		Government	Government	Government	Study			
+#notes		Census - de jure - complete tabulation			Recomputed from a highly sampled sociolinguistic dataset. Targetting "Mothertongue"			
+swb	Mahorais/Shimaore		37840	80140	71789	115009	1480	2371
+fra	French/Français	6,696	50607	54784	1795	74166	37	1529
+fra	#French-Other languages	61,668						
+mul	Local language	39,823						
+wni	Shinsdzwani/Anjouanais				29055	45887	599	946
+buc	Kibushi/Shibushi				17705	37495	365	773
+ara	#Arabe		31065	3199	485	14067	10	290
+mlg	Malgache		7208	23561				
+mul	Dialectes comoriens			23876				
+zdj	Shingazidza				10332	18093	213	373
+mul	Autres			4358	534	1601	11	33
+wlc	Shimwali/Mohélien				1067	3395	22	70
+mul	Dialectes malgaches			2277				
+kian1236	Kiantalaotsi				291	1164	6	24
