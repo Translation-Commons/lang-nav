@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '../../data/DataContext';
-import Hoverable from '../../generic/Hoverable';
+import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { TerritoryData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
@@ -28,23 +28,15 @@ const TerritoryTable: React.FC = () => {
           render: (object) =>
             object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
           isNumeric: true,
-          sortParam: SortBy.Percent,
+          sortParam: SortBy.Literacy,
         },
         {
           key: 'Languages',
-          render: (object) =>
-            object.locales.length > 0 && (
-              <Hoverable
-                hoverContent={
-                  object.locales
-                    .slice(0, 20)
-                    .map((l) => l.language?.nameDisplay ?? l.nameDisplay)
-                    .join(', ') + (object.locales.length > 20 ? '...' : '')
-                }
-              >
-                {object.locales.length}
-              </Hoverable>
-            ),
+          render: (object) => (
+            <HoverableEnumeration
+              items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
+            />
+          ),
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },
@@ -59,6 +51,15 @@ const TerritoryTable: React.FC = () => {
               />
             ),
           isInitiallyVisible: false,
+        },
+        {
+          key: 'Contains Territories',
+          render: (object) => (
+            <HoverableEnumeration items={object.containsTerritories.map((t) => t.nameDisplay)} />
+          ),
+          isInitiallyVisible: false,
+          isNumeric: true,
+          sortParam: SortBy.CountOfTerritories,
         },
         {
           key: 'Type',

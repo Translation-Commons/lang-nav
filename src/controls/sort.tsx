@@ -1,5 +1,6 @@
+import { uniqueBy } from '../generic/setUtils';
 import { ObjectData } from '../types/DataTypes';
-import { LanguageSource } from '../types/LanguageTypes';
+import { LanguageData, LanguageSource } from '../types/LanguageTypes';
 import { ObjectType, SortBy, View } from '../types/PageParamTypes';
 
 import { usePageParams } from './PageParamsContext';
@@ -36,7 +37,10 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
       return (a: ObjectData, b: ObjectData) => {
         switch (a.type) {
           case ObjectType.Language:
-            return b.type === ObjectType.Language ? b.locales.length - a.locales.length : -1;
+            return b.type === ObjectType.Language
+              ? getUniqueTerritoriesForLanguage(b).length -
+                  getUniqueTerritoriesForLanguage(a).length
+              : -1;
           case ObjectType.Locale:
             return 0; // Each locale only has one territory
           case ObjectType.Census:
@@ -128,8 +132,7 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
             return 0;
           case ObjectType.Locale:
             return b.type === ObjectType.Locale
-              ? (b.populationWriting ?? 0) / (b.populationSpeaking ?? 1) -
-                  (a.populationWriting ?? 0) / (a.populationSpeaking ?? 1)
+              ? (b.literacyPercent ?? 0) - (a.literacyPercent ?? 0)
               : -1;
           case ObjectType.Territory:
             return b.type === ObjectType.Territory
@@ -139,4 +142,59 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
         }
       };
   }
+}
+
+export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy[] {
+  switch (objectType) {
+    case ObjectType.Locale:
+      return [
+        SortBy.Code,
+        SortBy.Name,
+        SortBy.Endonym,
+        SortBy.Population,
+        SortBy.Literacy,
+        SortBy.RelativePopulation,
+        SortBy.CountOfLanguages,
+      ];
+    case ObjectType.Territory:
+      return [
+        SortBy.Code,
+        SortBy.Name,
+        SortBy.Population,
+        SortBy.Literacy,
+        SortBy.CountOfLanguages,
+        SortBy.CountOfTerritories,
+      ];
+    case ObjectType.Language:
+      return [
+        SortBy.Code,
+        SortBy.Name,
+        SortBy.Endonym,
+        SortBy.Population,
+        // SortBy.Literacy, Data not available yet
+        SortBy.CountOfTerritories,
+        SortBy.CountOfLanguages,
+      ];
+    case ObjectType.Census:
+      return [SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
+    case ObjectType.WritingSystem:
+      return [
+        SortBy.Code,
+        SortBy.Name,
+        SortBy.Endonym,
+        SortBy.Population,
+        // SortBy.Literacy, Data not available yet
+        SortBy.CountOfLanguages,
+      ];
+  }
+}
+
+export function getUniqueTerritoriesForLanguage(lang: LanguageData): string[] {
+  return uniqueBy(
+    lang.locales
+      .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0))
+      .map((l) => l.territory?.nameDisplay ?? l.territoryCode)
+      .filter((name) => name != null && name !== ''),
+    (name) => name,
+  );
 }
