@@ -8,14 +8,12 @@ import { LocaleData } from '../../types/DataTypes';
 import { LanguageData } from '../../types/LanguageTypes';
 import { ObjectType } from '../../types/PageParamTypes';
 
-type Props = {
+export const CLDRCoverageText: React.FC<{
   object: LanguageData | LocaleData;
-  parentNotes?: React.ReactNode; // Notes from something referencing this cldr coverage.
-};
-
-export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
+  parentNotes?: React.ReactNode;
+}> = ({ object, parentNotes }) => {
   if (object.type !== ObjectType.Language) {
-    return 'TODO: CLDRCoverageInfo for LocaleData';
+    return null;
   }
 
   const {
@@ -27,7 +25,7 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
   if (cldrCoverage == null) {
     if (cldrDataProvider != null) {
       return (
-        <CLDRCoverageInfo
+        <CLDRCoverageText
           object={cldrDataProvider}
           parentNotes={[parentNotes, CLDR.notes].filter((n) => n != null)}
         />
@@ -36,20 +34,43 @@ export const CLDRCoverageInfo: React.FC<Props> = ({ object, parentNotes }) => {
     return (
       <>
         <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />
-        <Deemphasized>Not supported by CLDR or ICU.</Deemphasized>
+        <Deemphasized>Not supported by CLDR.</Deemphasized>
       </>
     );
   }
 
+  const coverageLevel = cldrCoverage.actualCoverageLevel;
+  const capitalizedLevel = coverageLevel.charAt(0).toUpperCase() + coverageLevel.slice(1);
+
   return (
     <>
-      <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />
-      CLDR:{' '}
+      <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />{' '}
       <span style={{ color: getCLDRCoverageColor(cldrCoverage.actualCoverageLevel) }}>
-        {cldrCoverage.actualCoverageLevel}
+        {capitalizedLevel}
       </span>{' '}
       coverage by {cldrCoverage.countOfCLDRLocales} locale
-      {cldrCoverage.countOfCLDRLocales > 1 && 's'}. ICU:{' '}
+      {cldrCoverage.countOfCLDRLocales > 1 && 's'}.
+    </>
+  );
+};
+
+export const ICUSupportStatus: React.FC<{ object: LanguageData | LocaleData }> = ({ object }) => {
+  if (object.type !== ObjectType.Language) {
+    return null;
+  }
+
+  const { cldrCoverage, cldrDataProvider } = object;
+
+  if (cldrCoverage == null) {
+    if (cldrDataProvider != null) {
+      return <ICUSupportStatus object={cldrDataProvider} />;
+    }
+    return <Deemphasized>N/A</Deemphasized>;
+  }
+
+  return (
+    <>
+      {' '}
       {cldrCoverage.inICU ? (
         <CheckCircle2Icon
           style={{ color: 'var(--color-text-green)', verticalAlign: 'middle' }}

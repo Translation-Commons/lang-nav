@@ -6,7 +6,7 @@ import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';
 import LinkButton from '../../generic/LinkButton';
 import { LanguageData } from '../../types/LanguageTypes';
-import { CLDRCoverageInfo } from '../common/CLDRCoverageInfo';
+import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import HoverableObjectName from '../common/HoverableObjectName';
 import TreeListRoot from '../common/TreeList/TreeListRoot';
 import { getLocaleTreeNodes } from '../locale/LocaleHierarchy';
@@ -181,8 +181,12 @@ const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }
         {viabilityConfidence} ... {viabilityExplanation}
       </div>
       <div>
-        <label>Internet Technologies:</label>
-        <CLDRCoverageInfo object={lang} />
+        <label>CLDR Coverage:</label>
+        <CLDRCoverageText object={lang} />
+      </div>
+      <div>
+        <label>ICU Support:</label>
+        <ICUSupportStatus object={lang} />
       </div>
     </div>
   );
