@@ -27,6 +27,11 @@
   padding: 0.5em 0.5em;
   white-space: nowrap;
 }
+/* .selector.inlineDropdown .selector.inlineDropdown button, .hoverableText {
+  background-color: transparent;
+  color: var(--color-button-primary);
+}
+ */
 
 .selector input {
   color: var(--color-background);

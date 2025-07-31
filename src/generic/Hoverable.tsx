@@ -26,24 +26,15 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
 
   return (
     <span
+      className="hoverableText"
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={hideHoverCard}
       onClick={() => {
         hideHoverCard();
-        if (onClick != null) {
-          onClick();
-        }
+        if (onClick != null) onClick();
       }}
-      style={{
-        display: 'inline-block',
-        textDecoration: 'underline',
-        textDecorationStyle: 'dashed',
-        textDecorationThickness: '1px',
-        textDecorationColor: 'var(--color-text-secondary)',
-        cursor: onClick ? 'pointer' : 'help',
-        ...style,
-      }}
+      style={{ display: 'inline-block', cursor: onClick ? 'pointer' : 'help', ...style }}
     >
       {children}
     </span>

@@ -1,3 +1,4 @@
+import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
 import Hoverable from '../../generic/Hoverable';
@@ -15,9 +16,12 @@ const SelectorLabel: React.FC<Props> = ({ label, description, optionsDisplay, st
   if (label == null) return null;
   return (
     <span style={{ ...getStyle(optionsDisplay), ...style }}>
-      <Hoverable hoverContent={description} style={{ textDecoration: 'none' }}>
-        {label}
-      </Hoverable>
+      {label}
+      {description && (
+        <Hoverable hoverContent={description} style={{ marginLeft: '0.25em' }}>
+          <InfoIcon size="1em" style={{ verticalAlign: 'middle' }} />
+        </Hoverable>
+      )}
     </span>
   );
 };
