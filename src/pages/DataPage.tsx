@@ -21,8 +21,8 @@ const DataPage: React.FC = () => {
               <SidePanel />
               <DataPageBody />
             </div>
+            <ViewModal />
           </DataProvider>
-          <ViewModal />
         </HoverCardProvider>
       </PageParamsProvider>
     </Suspense>
