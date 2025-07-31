@@ -7,6 +7,7 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { LocaleData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
+import PopulationWarning from '../common/PopulationWarning';
 import {
   CodeColumn,
   EndonymColumn,
@@ -31,6 +32,12 @@ const LocaleTable: React.FC = () => {
         NameColumn,
         EndonymColumn,
         {
+          label: (
+            <>
+              Population
+              <PopulationWarning />
+            </>
+          ),
           key: 'Population',
           render: (object) => object.populationSpeaking,
           isNumeric: true,

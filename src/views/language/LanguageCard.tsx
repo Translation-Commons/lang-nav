@@ -8,6 +8,7 @@ import { TerritoryScope } from '../../types/DataTypes';
 import { LanguageData } from '../../types/LanguageTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
+import PopulationWarning from '../common/PopulationWarning';
 
 interface Props {
   lang: LanguageData;
@@ -32,7 +33,9 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
       </h3>
       {populationCited != null && (
         <div>
-          <h4>Speakers</h4>
+          <h4>
+            Population <PopulationWarning />
+          </h4>
           {populationCited.toLocaleString()}
         </div>
       )}

@@ -8,6 +8,7 @@ import LinkButton from '../../generic/LinkButton';
 import { LanguageData } from '../../types/LanguageTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import HoverableObjectName from '../common/HoverableObjectName';
+import PopulationWarning from '../common/PopulationWarning';
 import TreeListRoot from '../common/TreeList/TreeListRoot';
 import { getLocaleTreeNodes } from '../locale/LocaleHierarchy';
 
@@ -114,7 +115,10 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <h3>Attributes</h3>
       {populationCited && (
         <div>
-          <label>Population:</label>
+          <label>
+            Population
+            <PopulationWarning />:
+          </label>
           {populationCited.toLocaleString()}
         </div>
       )}

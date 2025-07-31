@@ -6,6 +6,7 @@ import CommaSeparated from '../../generic/CommaSeparated';
 import { WritingSystemData, WritingSystemScope } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
+import PopulationWarning from '../common/PopulationWarning';
 
 interface Props {
   writingSystem: WritingSystemData;
@@ -55,7 +56,11 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
       )}
       {populationUpperBound > 100 && ( // Values less than 100 are suspcious and probably spurious
         <div>
-          <label>Population (estimate, at most):</label>
+          <label>
+            Population (Upper bound
+            <PopulationWarning />
+            {'):'}
+          </label>
           {populationUpperBound.toLocaleString()}
         </div>
       )}
