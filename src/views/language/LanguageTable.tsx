@@ -6,6 +6,7 @@ import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { LanguageData } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
+import PopulationWarning from '../common/PopulationWarning';
 import {
   CodeColumn,
   EndonymColumn,
@@ -31,6 +32,12 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
         },
         {
+          label: (
+            <>
+              Population
+              <PopulationWarning />
+            </>
+          ),
           key: 'Population',
           render: (lang) => lang.populationCited,
           isNumeric: true,

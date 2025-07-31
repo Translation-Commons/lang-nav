@@ -4,6 +4,7 @@ import { useDataContext } from '../../data/DataContext';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { WritingSystemData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
+import PopulationWarning from '../common/PopulationWarning';
 import {
   CodeColumn,
   EndonymColumn,
@@ -24,6 +25,12 @@ const WritingSystemTable: React.FC = () => {
         NameColumn,
         endonymColumn,
         {
+          label: (
+            <>
+              Population
+              <PopulationWarning />
+            </>
+          ),
           key: 'Population',
           render: (object) => object.populationUpperBound,
           isNumeric: true,

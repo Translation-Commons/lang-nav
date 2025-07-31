@@ -4,6 +4,7 @@ import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { WritingSystemData } from '../../types/DataTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
+import PopulationWarning from '../common/PopulationWarning';
 
 type Props = {
   writingSystem: WritingSystemData;
@@ -56,7 +57,11 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         </div>
         {populationUpperBound > 100 && ( // Values less than 100 are suspcious and probably spurious
           <div>
-            <label>Population (Upper Bound):</label>
+            <label>
+              Population (Upper Bound
+              <PopulationWarning />
+              ):
+            </label>
             {populationUpperBound.toLocaleString()}
           </div>
         )}
