@@ -110,7 +110,7 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
         </div>
       );
     case OptionsDisplay.ButtonGroup:
-      return <div ref={containerRef}>{children}</div>;
+      return <>{children}</>;
     case OptionsDisplay.Dropdown:
       if (isExpanded) {
         return (
@@ -118,7 +118,6 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
             <div
               className="dropdown"
               style={{
-                border: '0.125em solid var(--color-button-primary)',
                 alignItems: 'end',
                 position: 'absolute',
                 display: 'flex',
@@ -154,7 +153,7 @@ function Options<T extends React.Key>({
   optionsDisplay,
   selected,
 }: OptionsProps<T>) {
-  return options.map((option) => (
+  return options.map((option, i) => (
     <SelectorOption<T>
       key={option}
       getOptionDescription={getOptionDescription}
@@ -163,6 +162,13 @@ function Options<T extends React.Key>({
       option={option}
       optionsDisplay={optionsDisplay}
       isSelected={Array.isArray(selected) ? selected.includes(option) : selected === option}
+      position={
+        i == 0
+          ? PositionInGroup.First
+          : i == options.length - 1
+            ? PositionInGroup.Last
+            : PositionInGroup.Middle
+      }
     />
   ));
 }
@@ -170,44 +176,70 @@ function Options<T extends React.Key>({
 type OptionProps<T extends React.Key> = {
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
+  isSelected: boolean;
   onClick: (value: T) => void;
   option: T;
   optionsDisplay: OptionsDisplay;
-  isSelected: boolean;
+  position?: PositionInGroup; // used for styling
 };
 
 function SelectorOption<T extends React.Key>({
   getOptionDescription = () => undefined,
   getOptionLabel = (val: T) => val as string,
+  isSelected,
   onClick,
   option,
   optionsDisplay,
-  isSelected,
+  position = PositionInGroup.Standalone,
 }: OptionProps<T>) {
   return (
     <HoverableButton
       className={'selectorOption ' + (isSelected ? 'selected' : 'notselected')}
       hoverContent={getOptionDescription(option)}
       onClick={() => onClick(option)}
-      style={getOptionStyle(optionsDisplay, isSelected)}
+      style={getOptionStyle(optionsDisplay, isSelected, position)}
     >
       {getOptionLabel(option)}
     </HoverableButton>
   );
 }
 
-function getOptionStyle(optionsDisplay: OptionsDisplay, isSelected: boolean): React.CSSProperties {
-  let borderRadius = '0px';
+export function getOptionStyle(
+  optionsDisplay: OptionsDisplay,
+  isSelected: boolean,
+  position: PositionInGroup,
+): React.CSSProperties {
+  let borderRadius: string | undefined = '0px';
   let border = '0.125em solid var(--color-button-primary)';
+  let width = undefined;
+  let margin = undefined;
   switch (optionsDisplay) {
     case OptionsDisplay.ButtonGroup:
-      borderRadius = '0.25em';
+      if (position === PositionInGroup.Last) {
+        borderRadius = '0 1em 1em 0';
+      } else if (position === PositionInGroup.First) {
+        borderRadius = '1em 0 0 1em';
+      }
       break;
     case OptionsDisplay.ButtonList:
       borderRadius = '1em';
       if (!isSelected) border = '0.125em solid var(--color-button-secondary)';
       break;
     case OptionsDisplay.Dropdown:
+      width = '100%';
+      borderRadius = undefined;
+      if (position === PositionInGroup.First) {
+        borderRadius = '1em 1em 0 0';
+        margin = '0 0 -0.125em 0';
+      } else if (position === PositionInGroup.Last) {
+        borderRadius = '0 0 1em 1em';
+        margin = '0';
+      } else if (position === PositionInGroup.Middle) {
+        margin = '0 0 -0.125em 0';
+      } else if (position === PositionInGroup.Standalone) {
+        borderRadius = '1em';
+        width = 'fit-content';
+      }
       break;
   }
 
@@ -217,8 +249,17 @@ function getOptionStyle(optionsDisplay: OptionsDisplay, isSelected: boolean): Re
     cursor: 'pointer',
     lineHeight: '1em',
     padding: '0.5em',
+    margin,
+    width,
     whiteSpace: 'nowrap',
   };
+}
+
+export enum PositionInGroup {
+  Standalone = 'standalone',
+  First = 'first',
+  Last = 'last',
+  Middle = 'middle',
 }
 
 export default Selector;

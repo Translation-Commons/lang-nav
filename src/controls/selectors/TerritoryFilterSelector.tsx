@@ -9,15 +9,22 @@ import TextInput, { Suggestion } from '../components/TextInput';
 import { getScopeFilter } from '../filter';
 import { usePageParams } from '../PageParamsContext';
 
-const TerritoryFilter: React.FC = () => {
+const TerritoryFilterSelector: React.FC = () => {
   const { territoryFilter, updatePageParams } = usePageParams();
   const { territories } = useDataContext();
   const filterByScope = getScopeFilter();
 
   const getSuggestions = useMemo(() => {
     return async (query: string): Promise<Suggestion[]> => {
+      const lowerCaseQuery = query.toLowerCase();
       return Object.values(territories)
         .filter(filterByScope)
+        .filter((territory) =>
+          getSearchableField(territory, SearchableField.NameOrCode)
+            .toLowerCase()
+            .split(/\W/g)
+            .some((word) => word.startsWith(lowerCaseQuery)),
+        )
         .map((object) => {
           const label = (
             <HighlightedObjectField
@@ -33,11 +40,12 @@ const TerritoryFilter: React.FC = () => {
   }, [territories, filterByScope]);
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+    <div className="selector" style={{ display: 'flex', alignItems: 'end' }}>
       <SelectorLabel
         optionsDisplay={OptionsDisplay.ButtonList}
         label="Territory"
         description="Filter results by ones relevant in a territory."
+        style={{ lineHeight: '1.25em' }}
       />
       <TextInput
         inputStyle={{ minWidth: '10em' }}
@@ -51,4 +59,4 @@ const TerritoryFilter: React.FC = () => {
   );
 };
 
-export default TerritoryFilter;
+export default TerritoryFilterSelector;
