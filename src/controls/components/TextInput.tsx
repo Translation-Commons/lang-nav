@@ -5,7 +5,7 @@ import HoverableButton from '../../generic/HoverableButton';
 import { View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
-import { OptionsDisplay } from './Selector';
+import { getOptionStyle, OptionsDisplay, PositionInGroup } from './Selector';
 
 export type Suggestion = {
   objectID?: string;
@@ -105,12 +105,18 @@ const TextInput: React.FC<Props> = ({
       </span>
       {showSuggestions && suggestions.length > 0 && (
         <div className="SelectorPopupAnchor">
-          <div className="SelectorPopup">
+          <div className="SelectorPopup" style={{ border: 'none' }}>
             {suggestions.map((s, i) => (
               <SuggestionRow
                 key={i}
+                position={
+                  i === 0
+                    ? PositionInGroup.First
+                    : i === suggestions.length - 1
+                      ? PositionInGroup.Last
+                      : PositionInGroup.Middle
+                }
                 setImmediateValue={setImmediateValue}
-                setShowSuggestions={setShowSuggestions}
                 showTextInputButton={showTextInputButton}
                 showGoToDetailsButton={showGoToDetailsButton}
                 suggestion={s}
@@ -143,14 +149,15 @@ const TextInput: React.FC<Props> = ({
 };
 
 type SuggestionRowProps = {
+  position?: PositionInGroup;
   setImmediateValue: (value: string) => void;
-  setShowSuggestions: (show: boolean) => void;
   showGoToDetailsButton?: boolean;
   showTextInputButton?: boolean;
   suggestion: Suggestion;
 };
 
 const SuggestionRow: React.FC<SuggestionRowProps> = ({
+  position = PositionInGroup.Standalone,
   setImmediateValue,
   showGoToDetailsButton,
   showTextInputButton,
@@ -165,19 +172,29 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
   const goToDetails = () => {
     updatePageParams({ objectID, view: View.Details, searchString });
   };
+  const style = getOptionStyle(
+    OptionsDisplay.Dropdown,
+    false, // isSelected is always false here
+    position,
+  );
 
   // Some simplier states if we have 1 button
   if (!showGoToDetailsButton) {
     if (!showTextInputButton) {
       return label;
     }
-    return <button onClick={setFilter}>{label}</button>;
+    return (
+      <button onClick={setFilter} style={style}>
+        {label}
+      </button>
+    );
   }
   if (!showTextInputButton) {
     return (
       <HoverableButton
         hoverContent={<>Go to the details page for {searchString}</>}
         onClick={goToDetails}
+        style={style}
       >
         {label}
       </HoverableButton>
@@ -186,14 +203,41 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
 
   // The more complex case, where we have 2 buttons
   return (
-    <div className="SuggestionRowWithMultipleInteractions">
-      <div>{label}</div>
-      <HoverableButton hoverContent={<>Filter by &quot;{searchString}&quot;</>} onClick={setFilter}>
+    <div
+      className="SuggestionRowWithMultipleInteractions"
+      style={{
+        ...style,
+        display: 'flex',
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: '0.125em',
+        justifyContent: 'end',
+        backgroundColor: 'var(--color-background)',
+      }}
+    >
+      <div
+        style={{
+          whiteSpace: 'nowrap',
+          maxWidth: '12em',
+          overflow: 'hidden',
+          textOverflow: 'ellipsis',
+          paddingLeft: '1em',
+          margin: 'none',
+        }}
+      >
+        {label}
+      </div>
+      <HoverableButton
+        hoverContent={<>Filter by &quot;{searchString}&quot;</>}
+        onClick={setFilter}
+        style={{ width: 'fit-content' }}
+      >
         <FilterIcon size="1em" display="block" />
       </HoverableButton>
       <HoverableButton
         hoverContent={<>Go to the details page for {searchString}</>}
         onClick={goToDetails}
+        style={{ width: 'fit-content' }}
       >
         <ExternalLinkIcon size="1em" display="block" />
       </HoverableButton>
