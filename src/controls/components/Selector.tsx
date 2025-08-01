@@ -1,71 +1,54 @@
 import React, { ReactNode, useState } from 'react';
 
 import HoverableButton from '../../generic/HoverableButton';
+import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
 import { useClickOutside } from '../../generic/useClickOutside';
 
 import SelectorLabel from './SelectorLabel';
 
 export enum OptionsDisplay {
   Dropdown = 'dropdown', // Formatting is still off for these
+  InlineDropdown = 'inlineDropdown', // Used to be inline with text
   ButtonGroup = 'buttonGroup', // Unsure if we want to keep this
   ButtonList = 'buttonList',
 }
 
 type Props<T extends React.Key> = {
   appearance?: 'rounded' | 'tabs';
-  selectorLabel?: ReactNode;
-  selectorDescription?: ReactNode;
-  size?: 'regular' | 'compact';
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
-  optionsDisplay?: OptionsDisplay;
   onChange: (value: T) => void;
   options: readonly T[];
+  optionsDisplay?: OptionsDisplay;
   selected: T | T[];
+  selectorDescription?: ReactNode;
+  selectorLabel?: ReactNode;
 };
 
 function Selector<T extends React.Key>({
-  selectorLabel,
-  selectorDescription,
-  size = 'regular',
   getOptionDescription = () => undefined,
   getOptionLabel = (val) => val as string,
-  selected,
-  optionsDisplay = OptionsDisplay.ButtonList,
   onChange,
   options,
+  optionsDisplay = OptionsDisplay.ButtonList,
+  selected,
+  selectorDescription,
+  selectorLabel,
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const optionsRef = useClickOutside(() => setExpanded(false));
 
   return (
-    <div
-      className={'selector ' + size + ' ' + optionsDisplay}
-      style={{
-        marginLeft: '0.125em',
-        marginRight: '0.5em',
-        display: 'flex',
-        flexDirection: optionsDisplay === OptionsDisplay.ButtonList ? 'column' : 'row',
-        alignItems: optionsDisplay === OptionsDisplay.ButtonList ? 'start' : 'end',
-        gap: optionsDisplay === OptionsDisplay.ButtonGroup ? '-0.125em' : '0',
-      }}
-    >
-      <SelectorLabel
-        label={selectorLabel}
-        description={selectorDescription}
-        optionsDisplay={optionsDisplay}
-      />
-
-      {optionsDisplay === OptionsDisplay.Dropdown && (
-        <SelectorOption<T>
-          getOptionDescription={getOptionDescription}
-          getOptionLabel={(opt) => `${getOptionLabel(opt)} ${expanded ? `▼` : `▶`}`}
-          onClick={() => setExpanded((prev) => !prev)}
-          option={Array.isArray(selected) ? selected[0] : selected}
+    <SelectorContainer optionsDisplay={optionsDisplay}>
+      {selectorLabel && (
+        <SelectorLabel
+          label={selectorLabel}
+          description={selectorDescription}
           optionsDisplay={optionsDisplay}
-          isSelected={true}
         />
       )}
+
+      {/* The dropdown menu or the button list */}
       <OptionsContainer
         isExpanded={expanded}
         containerRef={optionsRef}
@@ -83,9 +66,53 @@ function Selector<T extends React.Key>({
           selected={selected}
         />
       </OptionsContainer>
-    </div>
+
+      {/* Standalone option to open/close the dropdown menu */}
+      {(optionsDisplay === OptionsDisplay.Dropdown ||
+        optionsDisplay === OptionsDisplay.InlineDropdown) && (
+        <SelectorOption<T>
+          getOptionDescription={getOptionDescription}
+          getOptionLabel={(opt) => `${getOptionLabel(opt)} ${expanded ? `▼` : `▶`}`}
+          onClick={() => setExpanded((prev) => !prev)}
+          option={Array.isArray(selected) ? selected[0] : selected}
+          optionsDisplay={optionsDisplay}
+          isSelected={true}
+        />
+      )}
+    </SelectorContainer>
   );
 }
+
+const SelectorContainer: React.FC<
+  React.PropsWithChildren<{
+    optionsDisplay?: OptionsDisplay;
+  }>
+> = ({ children, optionsDisplay }) => {
+  const style: React.CSSProperties = {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'end',
+    marginLeft: '0.125em',
+    marginRight: '0.5em',
+    marginBottom: '0.5em',
+  };
+  if (optionsDisplay === OptionsDisplay.ButtonList) {
+    style.flexDirection = 'column';
+    style.alignItems = 'start';
+  } else if (optionsDisplay === OptionsDisplay.InlineDropdown) {
+    style.marginLeft = '0';
+    style.marginRight = '0';
+    style.marginBottom = '0';
+  } else if (optionsDisplay === OptionsDisplay.ButtonGroup) {
+    style.gap = '-0.125em'; // Overlap the buttons slightly
+  }
+
+  return (
+    <div className={'selector ' + optionsDisplay} style={style}>
+      {children}
+    </div>
+  );
+};
 
 type OptionsContainerProps = {
   isExpanded?: boolean;
@@ -104,7 +131,7 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
       return (
         <div
           ref={containerRef}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25em 0.5em', marginLeft: '1em' }}
+          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25em 0.25em', marginLeft: '1em' }}
         >
           {children}
         </div>
@@ -112,19 +139,21 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
     case OptionsDisplay.ButtonGroup:
       return <>{children}</>;
     case OptionsDisplay.Dropdown:
+    case OptionsDisplay.InlineDropdown:
       if (isExpanded) {
         return (
           <div style={{ position: 'relative' }} ref={containerRef}>
             <div
               className="dropdown"
               style={{
-                alignItems: 'end',
+                alignItems: 'start',
                 position: 'absolute',
                 display: 'flex',
-                right: '0px',
+                left: '0px',
                 flexDirection: 'column',
                 width: 'fit-content',
                 zIndex: 100,
+                marginTop: optionsDisplay === OptionsDisplay.InlineDropdown ? '0.25em' : '0',
               }}
             >
               {children}
@@ -162,13 +191,7 @@ function Options<T extends React.Key>({
       option={option}
       optionsDisplay={optionsDisplay}
       isSelected={Array.isArray(selected) ? selected.includes(option) : selected === option}
-      position={
-        i == 0
-          ? PositionInGroup.First
-          : i == options.length - 1
-            ? PositionInGroup.Last
-            : PositionInGroup.Middle
-      }
+      position={getPositionInGroup(i, options.length)}
     />
   ));
 }
@@ -209,57 +232,68 @@ export function getOptionStyle(
   isSelected: boolean,
   position: PositionInGroup,
 ): React.CSSProperties {
-  let borderRadius: string | undefined = '0px';
-  let border = '0.125em solid var(--color-button-primary)';
-  let width = undefined;
-  let margin = undefined;
+  // Standard option style
+  const style: React.CSSProperties = {
+    border: '0.125em solid var(--color-button-primary)',
+    borderRadius: '0px',
+    cursor: 'pointer',
+    lineHeight: '1em',
+    padding: '0.5em',
+    whiteSpace: 'nowrap',
+  };
+  // Customize based on position and display type
   switch (optionsDisplay) {
     case OptionsDisplay.ButtonGroup:
       if (position === PositionInGroup.Last) {
-        borderRadius = '0 1em 1em 0';
+        style.marginLeft = '-0.125em';
+        style.borderRadius = '0 1em 1em 0';
       } else if (position === PositionInGroup.First) {
-        borderRadius = '1em 0 0 1em';
+        style.borderRadius = '1em 0 0 1em';
+      } else if (position === PositionInGroup.Middle) {
+        style.marginLeft = '-0.125em';
       }
       break;
     case OptionsDisplay.ButtonList:
-      borderRadius = '1em';
-      if (!isSelected) border = '0.125em solid var(--color-button-secondary)';
+      style.borderRadius = '1em';
+      if (!isSelected) style.border = '0.125em solid var(--color-button-secondary)';
       break;
+    case OptionsDisplay.InlineDropdown:
+      // The standalone option should match the regular page text
+      if (position === PositionInGroup.Standalone) {
+        style.backgroundColor = 'transparent';
+        style.color = 'var(--color-text)';
+        style.border = 'none';
+        style.padding = '0';
+        return style;
+      }
+      // otherwise return the Dropdown style
+      return getOptionStyle(OptionsDisplay.Dropdown, isSelected, position);
     case OptionsDisplay.Dropdown:
-      width = '100%';
-      borderRadius = undefined;
+      style.textAlign = 'left';
+      style.width = '100%';
+      style.borderRadius = undefined;
       if (position === PositionInGroup.First) {
-        borderRadius = '1em 1em 0 0';
-        margin = '0 0 -0.125em 0';
+        style.borderRadius = '1em 1em 0 0';
+        style.margin = '0 0 -0.125em 0';
+        style.borderBottom = 'none';
       } else if (position === PositionInGroup.Last) {
-        borderRadius = '0 0 1em 1em';
-        margin = '0';
+        style.borderRadius = '0 0 1em 1em';
+        style.margin = '0';
+        style.borderTop = 'none';
       } else if (position === PositionInGroup.Middle) {
-        margin = '0 0 -0.125em 0';
+        style.margin = '0 0 -0.125em 0';
+        style.borderTop = 'none';
+        style.borderBottom = 'none';
+      } else if (position === PositionInGroup.Only) {
+        style.borderRadius = '1em';
       } else if (position === PositionInGroup.Standalone) {
-        borderRadius = '1em';
-        width = 'fit-content';
+        style.borderRadius = '1em';
+        style.width = 'fit-content';
       }
       break;
   }
 
-  return {
-    border,
-    borderRadius,
-    cursor: 'pointer',
-    lineHeight: '1em',
-    padding: '0.5em',
-    margin,
-    width,
-    whiteSpace: 'nowrap',
-  };
-}
-
-export enum PositionInGroup {
-  Standalone = 'standalone',
-  First = 'first',
-  Last = 'last',
-  Middle = 'middle',
+  return style;
 }
 
 export default Selector;
