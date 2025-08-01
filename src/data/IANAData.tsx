@@ -19,45 +19,92 @@ export async function loadIANAVariants(): Promise<VariantTagDictionary | void> {
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
+enum IANAVariantKey {
+  Type = 'Type',
+  Subtag = 'Subtag',
+  Added = 'Added',
+  Description = 'Description',
+  Prefix = 'Prefix',
+  Comments = 'Comments',
+}
+
 export function parseIANAVariants(input: string): VariantTagDictionary {
   const entries = input.split('%%');
   const variants: VariantTagDictionary = {};
 
   for (const entry of entries) {
-    const lines = entry
-      .trim()
-      .split('\n')
-      .map((l) => l.trim());
-    const typeLine = lines.find((l) => l.startsWith('Type:'));
-    if (!typeLine || !typeLine.includes('variant')) continue;
+    ////// Example data:
+    // Type: variant
+    // Subtag: baku1926
+    // Description: Unified Turkic Latin Alphabet (Historical)
+    // Added: 2007-04-18
+    // Prefix: az
+    // Prefix: ba
+    // Prefix: crh
+    // Prefix: kk
+    // Prefix: krc
+    // Prefix: ky
+    // Prefix: sah
+    // Prefix: tk
+    // Prefix: tt
+    // Prefix: uz
+    // Comments: Denotes alphabet used in Turkic republics/regions of the
+    //   former USSR in late 1920s, and throughout 1930s, which aspired to
+    //   represent equivalent phonemes in a unified fashion. Also known as: New
+    //   Turkic Alphabet; Birlәşdirilmiş Jeni Tyrk
+    //   Әlifbasь (Birlesdirilmis Jeni Tyrk Elifbasi);
+    //   Jaŋalif (Janalif).
 
-    const tag = entry.match(/Subtag:\s*(\S+)/)?.[1];
-    const name = lines
-      .find((l) => l.startsWith('Description:'))
-      ?.replace('Description:', '')
-      .trim();
-    const comment = lines
-      .find((l) => l.startsWith('Comment:'))
-      ?.replace('Comment:', '')
-      .trim();
+    // Iterate through the lines, filling in new values or
+    const data: Record<IANAVariantKey, string[]> = {
+      [IANAVariantKey.Type]: [],
+      [IANAVariantKey.Subtag]: [],
+      [IANAVariantKey.Added]: [],
+      [IANAVariantKey.Description]: [],
+      [IANAVariantKey.Prefix]: [],
+      [IANAVariantKey.Comments]: [],
+    };
+    let lastKey: IANAVariantKey = IANAVariantKey.Type;
 
+    for (const line of entry.split('\n')) {
+      if (line.trim() === '') continue; // Skip empty lines
+      const [key, value] = line.split(':');
+      switch (key) {
+        case IANAVariantKey.Type:
+        case IANAVariantKey.Subtag:
+        case IANAVariantKey.Added:
+        case IANAVariantKey.Prefix:
+        case IANAVariantKey.Description:
+        case IANAVariantKey.Comments:
+          data[key as IANAVariantKey].push(value.trim());
+          lastKey = key as IANAVariantKey;
+          break;
+        default: // there is no field, its just appended to the prior field like for comments
+          data[lastKey].push(key.trim());
+      }
+    }
+
+    if (data.Type[0] !== 'variant') continue; // Only process variants
+
+    const ianaTag = data.Subtag[0];
+    const name = data.Description.join(' '); // the Description is effectively the name
     // Extract prefixes (language codes) from the entry
-    // Prefixes are usually language codes but can be composites like zh-Latn-pinyin
-    // or oc-lengadoc-grclass
-    const prefixes = lines
-      .filter((l) => l.startsWith('Prefix:'))
-      .map((l) => l.replace('Prefix:', '').trim());
-    const languageCodes = unique(prefixes.map((l) => l.split(/\W/)[0]));
+    // Prefixes are usually language codes but can be composites like zh-Latn-pinyin or oc-lengadoc-grclass
+    const languageCodes = unique(data.Prefix.map((l) => l.split(/\W/)[0]));
+    const localeCodes = data.Prefix.map((l) => l + '-' + ianaTag);
+    const added = data.Added[0] ? new Date(data.Added[0]) : undefined;
 
-    if (tag && name) {
-      variants[tag] = {
+    if (ianaTag && name) {
+      variants[ianaTag] = {
         type: ObjectType.VariantTag,
-        ID: tag,
-        codeDisplay: tag,
+        ID: ianaTag,
+        codeDisplay: ianaTag,
         nameDisplay: name,
-        description: comment,
-        prefixes: prefixes,
+        description: data.Comments.join(' '), // It's called comments but its functionally a description
+        added,
+        prefixes: data.Prefix,
         languageCodes: languageCodes,
+        localeCodes: localeCodes,
         languages: [],
         locales: [],
         names: [name],
