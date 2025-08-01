@@ -1,15 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { PropsWithChildren, ReactNode, useEffect } from 'react';
 
-import { usePageParams } from '../../controls/PageParamsContext';
-import { ObjectType } from '../../types/PageParamTypes';
-import CensusSuggestions from '../census/CensusSuggestions';
-import LanguageSuggestions from '../language/LanguageSuggestions';
-import LocaleSuggestions from '../locale/LocaleSuggestions';
-import TerritorySuggestions from '../territory/TerritorySuggestions';
-import WritingSystemSuggestions from '../writingsystem/WritingSystemSuggestions';
+import { usePageParams } from '../../../controls/PageParamsContext';
+import { ObjectType } from '../../../types/PageParamTypes';
+import CensusSuggestions from '../../census/CensusSuggestions';
+import LanguageSuggestions from '../../language/LanguageSuggestions';
+import LocaleSuggestions from '../../locale/LocaleSuggestions';
+import TerritorySuggestions from '../../territory/TerritorySuggestions';
+import VariantTagSuggestions from '../../varianttag/VariantTagSuggestions';
+import WritingSystemSuggestions from '../../writingsystem/WritingSystemSuggestions';
+import getObjectFromID from '../getObjectFromID';
+import ObjectTitle from '../ObjectTitle';
 
-import ObjectDetails, { getObjectFromID } from './ObjectDetails';
-import ObjectTitle from './ObjectTitle';
+import ObjectDetails from './ObjectDetails';
 
 const ObjectDetailsPage: React.FC = () => {
   const { objectType, updatePageParams } = usePageParams();
@@ -26,11 +28,11 @@ const ObjectDetailsPage: React.FC = () => {
       [ObjectType.Locale]: <LocaleSuggestions />,
       [ObjectType.Territory]: <TerritorySuggestions />,
       [ObjectType.WritingSystem]: <WritingSystemSuggestions />,
-      [ObjectType.VariantTag]: <>TODO: Add variant tag suggestions</>,
+      [ObjectType.VariantTag]: <VariantTagSuggestions />,
     };
 
     return (
-      <div className="DetailsPage">
+      <DetailsContainer title="Details">
         This view shows details about a particular object -- but no object has been specified. Use
         another view (Card List, Hierarchy, Table) to find one or click on one of the suggestions
         below:
@@ -47,16 +49,32 @@ const ObjectDetailsPage: React.FC = () => {
               {suggestions}
             </div>
           ))}
-      </div>
+      </DetailsContainer>
     );
   }
 
   return (
-    <div className="DetailsPage">
-      <h2>
-        <ObjectTitle object={object} />
-      </h2>
+    <DetailsContainer title={<ObjectTitle object={object} />}>
       <ObjectDetails object={object} />
+    </DetailsContainer>
+  );
+};
+
+const DetailsContainer: React.FC<PropsWithChildren<{ title: ReactNode }>> = ({
+  children,
+  title,
+}) => {
+  return (
+    <div
+      style={{
+        maxWidth: '800px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        textAlign: 'start',
+      }}
+    >
+      <h2>{title}</h2>
+      {children}
     </div>
   );
 };

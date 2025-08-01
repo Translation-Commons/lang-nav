@@ -8,7 +8,8 @@ import { View } from '../types/PageParamTypes';
 
 import './modal.css';
 
-import ObjectDetails, { getObjectFromID } from './common/ObjectDetails';
+import ObjectDetails from './common/details/ObjectDetails';
+import getObjectFromID from './common/getObjectFromID';
 import ObjectTitle from './common/ObjectTitle';
 
 const ViewModal: React.FC = () => {
