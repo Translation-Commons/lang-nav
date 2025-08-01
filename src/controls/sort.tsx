@@ -1,4 +1,5 @@
 import { uniqueBy } from '../generic/setUtils';
+import { CensusData } from '../types/CensusTypes';
 import { ObjectData } from '../types/DataTypes';
 import { LanguageData, LanguageSource } from '../types/LanguageTypes';
 import { ObjectType, SortBy, View } from '../types/PageParamTypes';
@@ -151,6 +152,18 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
               : -1;
         }
       };
+
+    case SortBy.Date:
+      return (a, b) => {
+        const dateA = (a as CensusData).yearCollected || 0;
+
+        const dateB = (b as CensusData).yearCollected || 0;
+
+        return dateB - dateA; // Sorts descending (newest first)
+      };
+
+    default:
+      return () => 0;
   }
 }
 
@@ -186,7 +199,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.CountOfLanguages,
       ];
     case ObjectType.Census:
-      return [SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
+      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
     case ObjectType.WritingSystem:
       return [
         SortBy.Code,
