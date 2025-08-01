@@ -37,7 +37,6 @@ function Selector<T extends React.Key>({
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const optionsRef = useClickOutside(() => setExpanded(false));
-  // const optionsRef = useClickOutside(() => setExpanded(true));
 
   return (
     <SelectorContainer optionsDisplay={optionsDisplay}>
