@@ -78,6 +78,8 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
       return object.locales.map((l) => l.territory).filter((t) => t != null);
     case ObjectType.WritingSystem:
       return [object.territoryOfOrigin].filter((t) => t != null);
+    case ObjectType.VariantTag:
+      return [];
   }
 }
 
@@ -87,22 +89,24 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
 export function getScopeFilter(): FilterFunctionType {
   const { languageScopes, territoryScopes } = usePageParams();
 
-  function scopeFilter(object: ObjectData) {
+  function scopeFilter(object: ObjectData): boolean {
     switch (object.type) {
       case ObjectType.Language:
         return (
-          languageScopes.length == 0 ||
+          languageScopes.length === 0 ||
           languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
         );
       case ObjectType.Territory:
-        return territoryScopes.length == 0 || territoryScopes.includes(object.scope);
+        return territoryScopes.length === 0 || territoryScopes.includes(object.scope);
       case ObjectType.Locale:
         return doesLocaleMatchScope(object, languageScopes, territoryScopes);
       case ObjectType.Census:
       case ObjectType.WritingSystem:
+      case ObjectType.VariantTag:
         return true;
     }
   }
+
   return scopeFilter;
 }
 

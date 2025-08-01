@@ -26,6 +26,7 @@ const ObjectDetailsPage: React.FC = () => {
       [ObjectType.Locale]: <LocaleSuggestions />,
       [ObjectType.Territory]: <TerritorySuggestions />,
       [ObjectType.WritingSystem]: <WritingSystemSuggestions />,
+      [ObjectType.VariantTag]: <>TODO: Add variant tag suggestions</>,
     };
 
     return (

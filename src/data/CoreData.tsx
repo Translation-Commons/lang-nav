@@ -33,7 +33,12 @@ import {
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
 } from './GlottologData';
-import { loadIANAVariants, addIANAVariantLocales } from './IANAData';
+import {
+  loadIANAVariants,
+  addIANAVariantLocales,
+  connectVariantTags,
+  VariantTagDictionary,
+} from './IANAData';
 import {
   connectTerritoriesToParent,
   createRegionalLocales,
@@ -47,6 +52,7 @@ export type CoreData = {
   locales: Record<BCP47LocaleCode, LocaleData>;
   territories: Record<TerritoryCode, TerritoryData>;
   writingSystems: Record<ScriptCode, WritingSystemData>;
+  variantTags: VariantTagDictionary;
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
@@ -70,10 +76,11 @@ export function useCoreData(): {
   const [locales, setLocales] = useState<Record<BCP47LocaleCode, LocaleData>>({});
   const [territories, setTerritories] = useState<Record<TerritoryCode, TerritoryData>>({});
   const [writingSystems, setWritingSystems] = useState<Record<ScriptCode, WritingSystemData>>({});
+  const [variantTags, setVariantTags] = useState<VariantTagDictionary>({});
 
-  // Censuses are not population here, but this seems necessary because the state affects the page.
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [censuses, _setCensuses] = useState<Record<CensusID, CensusData>>({});
+  // Censuses are not populated here, but this seems necessary because the state affects the page.
+
+  const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
 
   async function loadCoreData(): Promise<void> {
     const [
@@ -87,7 +94,7 @@ export function useCoreData(): {
       territories,
       locales,
       writingSystems,
-      ianaVariants,
+      variantTags,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -102,7 +109,13 @@ export function useCoreData(): {
       loadIANAVariants(),
     ]);
 
-    if (initialLangs == null || territories == null || locales == null || writingSystems == null) {
+    if (
+      initialLangs == null ||
+      territories == null ||
+      locales == null ||
+      writingSystems == null ||
+      variantTags == null
+    ) {
       alert('Error loading data. Please check the console for more details.');
       return;
     }
@@ -113,19 +126,22 @@ export function useCoreData(): {
     addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageDetails(languagesBySource);
-    addIANAVariantLocales(languagesBySource, locales, ianaVariants);
+    addIANAVariantLocales(languagesBySource, locales, variantTags);
 
     connectLanguagesToParent(languagesBySource);
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySource.All, territories, writingSystems);
     connectLocales(languagesBySource.All, territories, writingSystems, locales);
+    connectVariantTags(variantTags, languagesBySource.CLDR, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
+    setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setLanguagesBySource(languagesBySource);
     setTerritories(territories);
     setLocales(locales);
     setWritingSystems(writingSystems);
+    setVariantTags(variantTags);
   }
 
   return {
@@ -136,6 +152,7 @@ export function useCoreData(): {
       locales,
       territories,
       writingSystems,
+      variantTags,
     },
   };
 }

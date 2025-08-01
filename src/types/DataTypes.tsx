@@ -15,7 +15,13 @@ export interface ObjectBase {
   names: string[];
 }
 
-export type ObjectData = CensusData | LanguageData | LocaleData | TerritoryData | WritingSystemData;
+export type ObjectData =
+  | CensusData
+  | LanguageData
+  | LocaleData
+  | TerritoryData
+  | WritingSystemData
+  | VariantTagData;
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;
@@ -110,7 +116,6 @@ export interface WritingSystemData extends ObjectBase {
 
 // BCP-47 Locale	Locale Display Name	Native Locale Name	Language Code	Territory ISO	Explicit Script	Variant IANA Tag	Pop Source	Best Guess	Official Language
 export type BCP47LocaleCode = string; // BCP-47 formatted locale, eg. en_US, fr_CA, etc.
-export type VariantIANATag = string; // IANA tag, eg. valencia (for cat-ES-valencia)
 
 export enum PopulationSourceCategory {
   Census = '1 Census',
@@ -150,7 +155,7 @@ export interface LocaleData extends ObjectBase {
   languageCode: LanguageCode;
   territoryCode: TerritoryCode;
   explicitScriptCode?: ScriptCode;
-  variantTag?: VariantIANATag;
+  variantTagCode?: VariantIANATag; // TODO Variant tags can be singular (eg. roh-rumgr) or composite (eg. oc-lengadoc-grclass)
 
   populationSource: PopulationSourceCategory;
   populationSpeaking: number;
@@ -161,6 +166,7 @@ export interface LocaleData extends ObjectBase {
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
   containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
+  variantTag?: VariantTagData;
 
   // Data added up some references
   populationSpeakingPercent?: number;
@@ -169,4 +175,19 @@ export interface LocaleData extends ObjectBase {
   populationWritingPercent?: number;
   populationCensus?: CensusData; // The census record that provides the population estimate
   censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
+}
+
+export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valencia
+export interface VariantTagData extends ObjectBase {
+  type: ObjectType.VariantTag;
+  ID: VariantIANATag;
+  codeDisplay: VariantIANATag;
+  nameDisplay: string;
+  description?: string;
+  prefixes: string[]; // Usually language codes but sometimes composites like zh-Latn-pinyin or oc-lengadoc-grclass
+  languageCodes: LanguageCode[];
+
+  // References to other objects
+  languages: LanguageData[];
+  locales: LocaleData[];
 }

@@ -7,7 +7,7 @@ export enum ObjectType {
   Census = 'Census',
   Territory = 'Territory',
   WritingSystem = 'Writing System',
-  // VariantTag = 'Variant Tag',
+  VariantTag = 'Variant Tag',
 }
 
 export enum View {

@@ -8,6 +8,7 @@ import {
   TerritoryScope,
 } from '../types/DataTypes';
 import { ObjectType } from '../types/PageParamTypes';
+import { getLocaleCode } from '../views/locale/LocaleStrings';
 
 const DEBUG = false;
 
@@ -101,14 +102,7 @@ function createRegionalLocalesForTerritory(
   const territoryLocales = containsTerritories.reduce<Record<BCP47LocaleCode, LocaleData>>(
     (locs, childTerritory) => {
       childTerritory.locales.forEach((loc) => {
-        const newLocaleCode = [
-          loc.languageCode,
-          loc.explicitScriptCode,
-          territory.ID,
-          loc.variantTag,
-        ]
-          .filter(Boolean)
-          .join('_');
+        const newLocaleCode = getLocaleCode(loc, '_', territory.ID);
         const newLocale = locs[newLocaleCode];
         if (newLocale == null) {
           // It isn't found yet, create it

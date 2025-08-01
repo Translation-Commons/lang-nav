@@ -11,7 +11,7 @@ import React from 'react';
 
 import { CensusID } from './CensusTypes';
 import { CLDRCoverageData } from './CLDRTypes';
-import { LocaleData, ObjectBase, ScriptCode, WritingSystemData } from './DataTypes';
+import { LocaleData, ObjectBase, ScriptCode, VariantTagData, WritingSystemData } from './DataTypes';
 import { ObjectType } from './PageParamTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -84,6 +84,7 @@ export interface LanguageData extends ObjectBase {
 
   sourceSpecific: Record<LanguageSource, LanguageDataInSource>;
   cldrCoverage?: CLDRCoverageData;
+  variantTags?: VariantTagData[]; // links to IANA variant tags
   cldrDataProvider?: LanguageData | LocaleData;
 
   // References to other objects, filled in after loading the TSV

@@ -98,7 +98,7 @@ export function getObjectPopulation(
       );
     case ObjectType.Territory:
       return object.population;
-    default:
-      return 0; // Default case for other types
+    case ObjectType.VariantTag:
+      return 0; // Variant tags don't have a population
   }
 }
