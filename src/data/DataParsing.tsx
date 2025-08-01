@@ -73,7 +73,7 @@ export function parseLanguageLine(line: string): LanguageData {
 export function parseLocaleLine(line: string): LocaleData {
   const parts = line.split('\t');
   const nameEndonym = parts[2] != '' ? parts[2] : undefined;
-  const variantTags = parts[6] != '' ? parts[6] : undefined;
+  const variantTagCode = parts[6] != '' ? parts[6].toLowerCase() : undefined;
 
   return {
     type: ObjectType.Locale,
@@ -87,7 +87,7 @@ export function parseLocaleLine(line: string): LocaleData {
     languageCode: parts[3],
     territoryCode: parts[4],
     explicitScriptCode: parts[5] != '' ? parts[5] : undefined,
-    variantTags,
+    variantTagCode,
     populationSource: parts[7] as PopulationSourceCategory,
     populationSpeaking: Number.parseInt(parts[8]?.replace(/,/g, '')),
     officialStatus: parts[9] != '' ? (parts[9] as OfficialStatus) : undefined,

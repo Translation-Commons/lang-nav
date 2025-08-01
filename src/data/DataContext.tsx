@@ -11,7 +11,7 @@ import { usePageParams } from '../controls/PageParamsContext';
 import { uniqueBy } from '../generic/setUtils';
 import { LanguageDictionary, LanguageSource } from '../types/LanguageTypes';
 import { LocaleSeparator } from '../types/PageParamTypes';
-import { getLocaleName } from '../views/locale/LocaleStrings';
+import { getLocaleCode, getLocaleName } from '../views/locale/LocaleStrings';
 
 import { CoreData, EMPTY_LANGUAGES_BY_SCHEMA, useCoreData } from './CoreData';
 import { loadSupplementalData } from './SupplementalData';
@@ -27,6 +27,7 @@ const DataContext = createContext<DataContextType | undefined>({
   locales: {},
   territories: {},
   writingSystems: {},
+  variantTags: {},
 });
 
 // Create a provider component
@@ -94,14 +95,7 @@ function updateLanguageBasedOnSource(
 
   // Update locales too, their codes and their names
   Object.values(coreData.locales).forEach((loc) => {
-    loc.codeDisplay = [
-      loc.language?.codeDisplay ?? loc.languageCode,
-      loc.explicitScriptCode,
-      loc.territoryCode,
-      loc.variantTag,
-    ]
-      .filter(Boolean)
-      .join(localeSeparator);
+    loc.codeDisplay = getLocaleCode(loc, localeSeparator);
     loc.nameDisplay = getLocaleName(loc);
   });
 

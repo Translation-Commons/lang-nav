@@ -202,6 +202,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const {
     childLanguages,
     sourceSpecific: { ISO, Glottolog },
+    variantTags,
   } = lang;
 
   return (
@@ -217,6 +218,16 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         <div>
           <label>Glottolog group:</label>
           <HoverableObjectName object={Glottolog.parentLanguage} />
+        </div>
+      )}
+      {variantTags && variantTags.length > 0 && (
+        <div>
+          <label>Variant Tags:</label>
+          <CommaSeparated>
+            {variantTags.map((tag) => (
+              <HoverableObjectName key={tag.ID} object={tag} />
+            ))}
+          </CommaSeparated>
         </div>
       )}
       <div style={{ display: 'flex' }}>

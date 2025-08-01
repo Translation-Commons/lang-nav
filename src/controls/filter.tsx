@@ -102,9 +102,8 @@ export function getScopeFilter(): FilterFunctionType {
         return doesLocaleMatchScope(object, languageScopes, territoryScopes);
       case ObjectType.Census:
       case ObjectType.WritingSystem:
+      case ObjectType.VariantTag:
         return true;
-      default:
-        return false; // ✅ Ensures a boolean is always returned
     }
   }
 

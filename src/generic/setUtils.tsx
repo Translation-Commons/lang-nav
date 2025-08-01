@@ -9,3 +9,7 @@ export function uniqueBy<T>(items: T[], keyFn: (item: T) => string | number): T[
     }, {}),
   );
 }
+
+export function unique<T extends string | number>(items: T[]): T[] {
+  return uniqueBy(items, (item) => item);
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Deemphasized from '../../generic/Deemphasized';
 import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
@@ -38,7 +39,8 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
     languageCode,
     territory,
     territoryCode,
-    variantTags,
+    variantTag,
+    variantTagCode,
     writingSystem,
   } = locale;
 
@@ -51,7 +53,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           <HoverableObjectName object={language} />
         ) : (
           <span>
-            {languageCode} <em>[language not in database]</em>
+            {languageCode} <Deemphasized>[language not in database]</Deemphasized>
           </span>
         )}
       </div>
@@ -61,7 +63,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           <HoverableObjectName object={territory} />
         ) : (
           <span>
-            {territoryCode} <em>[territory not in database]</em>
+            {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
           </span>
         )}
       </div>
@@ -72,15 +74,21 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
             <HoverableObjectName object={writingSystem} />
           ) : (
             <span>
-              {explicitScriptCode} <em>[writing system not in database]</em>
+              {explicitScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
             </span>
           )}
         </div>
       )}
-      {variantTags && (
+      {variantTagCode && (
         <div>
-          <h3>Variant</h3>
-          <HoverableObjectName object={variantTags} />
+          <label>Variant:</label>
+          {variantTag ? (
+            <HoverableObjectName object={variantTag} />
+          ) : (
+            <span>
+              {variantTagCode} <Deemphasized>[variant not in database]</Deemphasized>
+            </span>
+          )}
         </div>
       )}
     </div>

@@ -12,7 +12,7 @@ interface Props {
   data: VariantTagData;
 }
 
-export const VariantTagCard: React.FC<Props> = ({ data }) => {
+const VariantTagCard: React.FC<Props> = ({ data }) => {
   const { updatePageParams } = usePageParams();
   const { ID, codeDisplay, nameDisplay, description, languages } = data;
 
@@ -51,3 +51,5 @@ export const VariantTagCard: React.FC<Props> = ({ data }) => {
     </div>
   );
 };
+
+export default VariantTagCard;

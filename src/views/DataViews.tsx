@@ -4,6 +4,7 @@ import { ObjectType, View } from '../types/PageParamTypes';
 import CensusCardList from './census/CensusCardList';
 import { CensusHierarchy } from './census/CensusHierarchy';
 import TableOfAllCensuses from './census/TableOfAllCensuses';
+import ObjectDetailsPage from './common/ObjectDetailsPage';
 import LanguageCardList from './language/LanguageCardList';
 import { LanguageHierarchy } from './language/LanguageHierarchy';
 import LanguageTable from './language/LanguageTable';
@@ -13,6 +14,7 @@ import LocaleTable from './locale/LocaleTable';
 import TerritoryCardList from './territory/TerritoryCardList';
 import { TerritoryHierarchy } from './territory/TerritoryHierarchy';
 import TerritoryTable from './territory/TerritoryTable';
+import VariantTagCardList from './varianttag/VariantTagCardList';
 import ViewReports from './ViewReports';
 import WritingSystemCardList from './writingsystem/WritingSystemCardList';
 import { WritingSystemHierarchy } from './writingsystem/WritingSystemHierarchy';
@@ -35,10 +37,12 @@ function MainViews() {
           return <TerritoryCardList />;
         case ObjectType.WritingSystem:
           return <WritingSystemCardList />;
-        default:
-          return null;
+        case ObjectType.VariantTag:
+          return <VariantTagCardList />;
       }
+    // eslint-disable-next-line no-fallthrough
     case View.Details:
+      return <ObjectDetailsPage />;
     case View.Hierarchy:
       switch (objectType) {
         case ObjectType.Census:
@@ -51,9 +55,10 @@ function MainViews() {
           return <TerritoryHierarchy />;
         case ObjectType.WritingSystem:
           return <WritingSystemHierarchy />;
-        default:
-          return null;
+        case ObjectType.VariantTag:
+          return <>Not yet Implemented</>;
       }
+    // eslint-disable-next-line no-fallthrough
     case View.Table:
       switch (objectType) {
         case ObjectType.Census:
@@ -66,9 +71,10 @@ function MainViews() {
           return <TerritoryTable />;
         case ObjectType.WritingSystem:
           return <WritingSystemTable />;
-        default:
-          return null;
+        case ObjectType.VariantTag:
+          return <>Not yet Implemented</>;
       }
+    // eslint-disable-next-line no-fallthrough
     case View.Reports:
       return <ViewReports />;
   }

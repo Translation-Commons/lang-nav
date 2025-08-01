@@ -51,6 +51,8 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
             return b.type === ObjectType.Territory
               ? b.containsTerritories.length - a.containsTerritories.length
               : -1;
+          case ObjectType.VariantTag:
+            return 0; // Not a useful sort for variant tags
         }
       };
     case SortBy.CountOfLanguages:
@@ -72,6 +74,10 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
               : -1;
           case ObjectType.Territory:
             return b.type === ObjectType.Territory ? b.locales.length - a.locales.length : -1;
+          case ObjectType.VariantTag:
+            return b.type === ObjectType.VariantTag
+              ? (b.languageCodes?.length || 0) - (a.languageCodes?.length || 0)
+              : -1;
         }
       };
     case SortBy.Population:
@@ -100,6 +106,8 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
               : -1;
           case ObjectType.Territory:
             return b.type === ObjectType.Territory ? b.population - a.population : -1;
+          case ObjectType.VariantTag:
+            return 0; // Not yet available for variant tags
         }
       };
     case SortBy.RelativePopulation:
@@ -108,7 +116,8 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
           case ObjectType.Census:
           case ObjectType.Language:
           case ObjectType.WritingSystem:
-            // No percent to sort by
+          case ObjectType.VariantTag:
+            // No relative population to sort by
             return 0;
           case ObjectType.Locale:
             return b.type === ObjectType.Locale
@@ -128,7 +137,8 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
           case ObjectType.Census:
           case ObjectType.Language:
           case ObjectType.WritingSystem:
-            // No percent to sort by
+          case ObjectType.VariantTag:
+            // No literacy value to sort by
             return 0;
           case ObjectType.Locale:
             return b.type === ObjectType.Locale
@@ -186,6 +196,9 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         // SortBy.Literacy, Data not available yet
         SortBy.CountOfLanguages,
       ];
+    case ObjectType.VariantTag:
+      // TODO Population can be derived from locales
+      return [SortBy.Code, SortBy.Name, SortBy.CountOfLanguages];
   }
 }
 
