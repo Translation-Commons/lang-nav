@@ -10,6 +10,7 @@ type Props<T extends React.Key> = {
   onChange: (value: T) => void;
   options: readonly T[];
   selected: T;
+  style?: React.CSSProperties;
 };
 
 function SingleChoiceOptions<T extends React.Key>({
@@ -19,6 +20,7 @@ function SingleChoiceOptions<T extends React.Key>({
   onChange,
   options,
   selected,
+  style,
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const popupRef = useClickOutside(() => setExpanded(false));
@@ -46,11 +48,12 @@ function SingleChoiceOptions<T extends React.Key>({
         hoverContent={getOptionDescription(selected)}
         className="selected LastChild"
         onClick={() => setExpanded((prev) => !prev)}
+        style={style}
       >
         {getOptionLabel(selected)} {expanded ? `▼` : `▶`}
       </HoverableButton>
       {expanded && (
-        <div className="SelectorPopupAnchor" ref={popupRef}>
+        <div style={{ position: 'relative' }} ref={popupRef}>
           <div className="SelectorPopup">{contents}</div>
         </div>
       )}

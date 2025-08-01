@@ -2,10 +2,11 @@ import { ExternalLinkIcon, XIcon, FilterIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import HoverableButton from '../../generic/HoverableButton';
+import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
 import { View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
-import { getOptionStyle, OptionsDisplay, PositionInGroup } from './Selector';
+import { getOptionStyle, OptionsDisplay } from './Selector';
 
 export type Suggestion = {
   objectID?: string;
@@ -75,6 +76,35 @@ const TextInput: React.FC<Props> = ({
 
   return (
     <>
+      {showSuggestions && suggestions.length > 0 && (
+        <div style={{ position: 'relative' }}>
+          <div
+            className="SelectorPopup"
+            style={{
+              background: 'var(--color-background)',
+              border: 'none',
+              alignItems: 'start',
+              position: 'absolute',
+              display: 'flex',
+              left: '0px',
+              flexDirection: 'column',
+              width: 'fit-content',
+              zIndex: 100,
+            }}
+          >
+            {suggestions.map((s, i) => (
+              <SuggestionRow
+                key={i}
+                position={getPositionInGroup(i, suggestions.length)}
+                setImmediateValue={setImmediateValue}
+                showTextInputButton={showTextInputButton}
+                showGoToDetailsButton={showGoToDetailsButton}
+                suggestion={s}
+              />
+            ))}
+          </div>
+        </div>
+      )}
       <input
         type="text"
         className={immediateValue === '' ? 'empty' : ''}
@@ -103,28 +133,6 @@ const TextInput: React.FC<Props> = ({
       >
         {value || ' '}
       </span>
-      {showSuggestions && suggestions.length > 0 && (
-        <div className="SelectorPopupAnchor">
-          <div className="SelectorPopup" style={{ border: 'none' }}>
-            {suggestions.map((s, i) => (
-              <SuggestionRow
-                key={i}
-                position={
-                  i === 0
-                    ? PositionInGroup.First
-                    : i === suggestions.length - 1
-                      ? PositionInGroup.Last
-                      : PositionInGroup.Middle
-                }
-                setImmediateValue={setImmediateValue}
-                showTextInputButton={showTextInputButton}
-                showGoToDetailsButton={showGoToDetailsButton}
-                suggestion={s}
-              />
-            ))}
-          </div>
-        </div>
-      )}
       <HoverableButton
         hoverContent="Clear the input"
         style={

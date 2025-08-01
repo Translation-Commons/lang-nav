@@ -19,20 +19,11 @@
   background-color: transparent;
 }
 
-.selector {
-  margin-left: 0.125em;
-  margin-right: 0.5em;
-  display: flex;
-  align-items: end;
-  margin-bottom: 0.5em;
-}
 
 .selector button,
 .selector input,
 .selector label {
   border: 0.125em solid var(--color-button-primary);
-  margin-left: -0.125em;
-  margin-right: -0.125em;
   line-height: 1em;
   padding: 0.5em 0.5em;
   white-space: nowrap;
@@ -101,10 +92,6 @@
 .selector button:disabled:hover {
   color: var(--color-text-secondary);
   pointer-events: none;
-}
-
-.SelectorPopupAnchor {
-  position: relative;
 }
 
 .SelectorPopup {

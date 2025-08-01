@@ -16,11 +16,13 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
 
   return (
     <>
-      Page:{' '}
+      Page:
       <div
         className="selector compact rounded"
         style={{
           marginBottom: 0,
+          marginLeft: '0.5em',
+          marginRight: '0.5em',
           display: 'inline-flex',
           verticalAlign: 'middle',
           alignItems: 'normal',

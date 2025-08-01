@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { toTitleCase } from '../../generic/stringUtils';
 import { ObjectType, View } from '../../types/PageParamTypes';
 import { getObjectTypeLabelPlural } from '../../views/common/getObjectName';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
 const ObjectTypeSelector: React.FC = () => {
@@ -23,7 +23,6 @@ const ObjectTypeSelector: React.FC = () => {
   return (
     <Selector
       selectorLabel="Entity"
-      optionsDisplay={OptionsDisplay.ButtonList}
       options={Object.values(ObjectType)}
       onChange={goToObjectType}
       selected={objectType}

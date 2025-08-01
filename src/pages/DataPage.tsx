@@ -17,7 +17,7 @@ const DataPage: React.FC = () => {
         <HoverCardProvider>
           {/* HoverCardProvider is re-declared so it has access to page parameters, there may be a better way to organize it */}
           <DataProvider>
-            <div style={{ display: 'flex', minHeight: '100vh' }}>
+            <div style={{ display: 'flex', height: '100vh' }}>
               <SidePanel />
               <DataPageBody />
             </div>

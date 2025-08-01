@@ -47,7 +47,7 @@ function MultiChoiceOptions<T extends React.Key>({
         {selected.length > 1 && 'Multiple selected'} {expanded ? `▼` : `▶`}
       </HoverableButton>
       {expanded && (
-        <div className="SelectorPopupAnchor" ref={popupRef}>
+        <div style={{ position: 'relative' }} ref={popupRef}>
           <div className="SelectorPopup">{contents}</div>
         </div>
       )}
