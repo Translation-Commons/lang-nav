@@ -113,16 +113,18 @@ div.section {
   justify-content: center;
 }
 
-.hoverableText, .selector .hoverableText {
+.hoverableText,
+.selector .hoverableText {
   background-color: transparent;
   color: var(--color-button-primary);
   cursor: pointer;
   border-radius: 0.5em;
   padding: 0 0.25em;
-  margin: 0 -.25em;
+  margin: 0 -0.25em;
 }
 
-.hoverableText:hover, .selector .hoverableText:hover {
+.hoverableText:hover,
+.selector .hoverableText:hover {
   color: var(--color-button-primary);
   background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
 }
