@@ -43,7 +43,7 @@ const TerritoryFilterSelector: React.FC = () => {
     <div className="selector" style={{ display: 'flex', alignItems: 'end' }}>
       <SelectorLabel
         optionsDisplay={OptionsDisplay.ButtonList}
-        label="Territory"
+        label="Territory Filter"
         description="Filter results by ones relevant in a territory."
         style={{ lineHeight: '1.25em' }}
       />

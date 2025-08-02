@@ -5,13 +5,16 @@ import { ObjectType, View } from '../../types/PageParamTypes';
 import Selector, { OptionsDisplay } from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
+import ObjectPath from './ObjectPath';
+
 const PathNav: React.FC = () => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em', flexWrap: 'wrap' }}>
+    <PathContainer>
       <ObjectTypeSelector />
       <SlashIcon size="1em" />
       <ViewSelector />
-    </div>
+      <ObjectPath />
+    </PathContainer>
   );
 };
 
@@ -20,6 +23,7 @@ const ObjectTypeSelector: React.FC = () => {
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
       updatePageParams({
+        objectID: undefined,
         objectType,
         view,
         searchString: undefined,
@@ -49,6 +53,19 @@ const ViewSelector: React.FC = () => {
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
       selected={view}
     />
+  );
+};
+
+export const PathContainer: React.FC<{
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}> = ({ children, style }) => {
+  return (
+    <div
+      style={{ display: 'flex', alignItems: 'center', gap: '0.5em', flexWrap: 'wrap', ...style }}
+    >
+      {children}
+    </div>
   );
 };
 

@@ -65,7 +65,6 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects }) => {
               )}
             </>
           }
-          style={{ textDecoration: 'none' }}
         >
           <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
         </Hoverable>

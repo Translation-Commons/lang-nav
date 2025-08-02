@@ -83,6 +83,7 @@ const TextInput: React.FC<Props> = ({
             style={{
               background: 'var(--color-background)',
               border: 'none',
+              borderRadius: '1em',
               alignItems: 'start',
               position: 'absolute',
               display: 'flex',

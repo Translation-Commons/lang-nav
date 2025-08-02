@@ -37,6 +37,7 @@ function Selector<T extends React.Key>({
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const optionsRef = useClickOutside(() => setExpanded(false));
+  // const optionsRef = useClickOutside(() => setExpanded(true));
 
   return (
     <SelectorContainer optionsDisplay={optionsDisplay}>
@@ -154,6 +155,10 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
                 width: 'fit-content',
                 zIndex: 100,
                 marginTop: optionsDisplay === OptionsDisplay.InlineDropdown ? '0.25em' : '0',
+                backgroundColor: 'var(--color-background)',
+                borderRadius: '1em',
+                maxHeight: '20em',
+                overflowY: 'auto',
               }}
             >
               {children}
@@ -215,9 +220,14 @@ function SelectorOption<T extends React.Key>({
   optionsDisplay,
   position = PositionInGroup.Standalone,
 }: OptionProps<T>) {
+  let className = 'selectorOption';
+  if (isSelected) className += ' selected';
+  if (!isSelected) className += ' unselected';
+  if (optionsDisplay === OptionsDisplay.InlineDropdown && position === PositionInGroup.Standalone)
+    className += ' hoverableText';
   return (
     <HoverableButton
-      className={'selectorOption ' + (isSelected ? 'selected' : 'notselected')}
+      className={className}
       hoverContent={getOptionDescription(option)}
       onClick={() => onClick(option)}
       style={getOptionStyle(optionsDisplay, isSelected, position)}
@@ -260,10 +270,10 @@ export function getOptionStyle(
     case OptionsDisplay.InlineDropdown:
       // The standalone option should match the regular page text
       if (position === PositionInGroup.Standalone) {
-        style.backgroundColor = 'transparent';
-        style.color = 'var(--color-text)';
+        style.margin = '-0.25em';
         style.border = 'none';
-        style.padding = '0';
+        style.borderRadius = '.5em';
+        style.padding = '0.25em';
         return style;
       }
       // otherwise return the Dropdown style
