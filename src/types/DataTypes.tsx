@@ -186,6 +186,7 @@ export interface VariantTagData extends ObjectBase {
   description?: string;
   prefixes: string[]; // Usually language codes but sometimes composites like zh-Latn-pinyin or oc-lengadoc-grclass
   languageCodes: LanguageCode[];
+  dateAdded?: string;
 
   // References to other objects
   languages: LanguageData[];
