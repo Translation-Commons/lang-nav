@@ -1,16 +1,14 @@
 import { ExternalLinkIcon } from 'lucide-react';
 import React from 'react';
 
-export default function LinkButton({
-  href,
-  children,
-}: {
+type Props = {
   href: string;
-  children: React.ReactNode;
-} & React.AnchorHTMLAttributes<HTMLAnchorElement>) {
+};
+
+export default function LinkButton({ href, children }: React.PropsWithChildren<Props>) {
   return (
     <a href={href}>
-      <button className="LinkButton" role="link">
+      <button role="link" style={{ marginLeft: '1em', marginBottom: '0.25em', padding: '0.25em' }}>
         {children}
         <ExternalLinkIcon size="1em" style={{ marginLeft: '0.25em' }} />
       </button>

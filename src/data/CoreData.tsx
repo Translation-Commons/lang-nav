@@ -12,15 +12,6 @@ import {
 import { LanguagesBySource } from '../types/LanguageTypes';
 
 import {
-  addISODataToLanguages,
-  addISOLanguageFamilyData,
-  addISOMacrolanguageData,
-  loadISOFamiliesToLanguages,
-  loadISOLanguageFamilies,
-  loadISOLanguages,
-  loadISOMacrolanguages,
-} from './AddISOData';
-import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
   connectLocales,
@@ -39,6 +30,16 @@ import {
   connectVariantTags,
   VariantTagDictionary,
 } from './IANAData';
+import { addISORetirementsToLanguages, loadISORetirements } from './iso/ISORetirements';
+import {
+  addISODataToLanguages,
+  addISOLanguageFamilyData,
+  addISOMacrolanguageData,
+  loadISOFamiliesToLanguages,
+  loadISOLanguageFamilies,
+  loadISOLanguages,
+  loadISOMacrolanguages,
+} from './ISOData';
 import {
   connectTerritoriesToParent,
   createRegionalLocales,
@@ -80,7 +81,6 @@ export function useCoreData(): {
   const [variantTags, setVariantTags] = useState<VariantTagDictionary>({});
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
-
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
 
   async function loadCoreData(): Promise<void> {
@@ -90,6 +90,7 @@ export function useCoreData(): {
       macroLangs,
       langFamilies,
       isoLangsToFamilies,
+      isoRetirements,
       glottologImport,
       manualGlottocodeToISO,
       territories,
@@ -102,6 +103,7 @@ export function useCoreData(): {
       loadISOMacrolanguages(),
       loadISOLanguageFamilies(),
       loadISOFamiliesToLanguages(),
+      loadISORetirements(),
       loadGlottologLanguages(),
       loadManualGlottocodeToISO(),
       loadTerritories(),
@@ -125,6 +127,7 @@ export function useCoreData(): {
     const languagesBySource = groupLanguagesBySource(initialLangs);
     addISOLanguageFamilyData(languagesBySource, langFamilies || [], isoLangsToFamilies || {});
     addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
+    addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageDetails(languagesBySource);
     addIANAVariantLocales(languagesBySource, locales, variantTags);

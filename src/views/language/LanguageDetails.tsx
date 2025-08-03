@@ -1,11 +1,13 @@
+import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';
+import Hoverable from '../../generic/Hoverable';
 import LinkButton from '../../generic/LinkButton';
-import { LanguageData } from '../../types/LanguageTypes';
+import { LanguageData, LanguageField } from '../../types/LanguageTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
@@ -71,6 +73,14 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <>
             {ISO.code}
             {codeISO6391 ? ` | ${codeISO6391}` : ''}
+            {lang.warnings && lang.warnings[LanguageField.isoCode] && (
+              <Hoverable
+                hoverContent={lang.warnings[LanguageField.isoCode]}
+                style={{ marginLeft: '0.125em' }}
+              >
+                <TriangleAlertIcon size="1em" color="var(--color-text-yellow)" />
+              </Hoverable>
+            )}
             <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
           </>
         ) : (

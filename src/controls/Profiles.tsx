@@ -83,30 +83,24 @@ export function getDefaultParams(
   view?: View | undefined,
   profile?: ProfileType | undefined,
 ): PageParams {
-  let defaults = GLOBAL_DEFAULTS;
+  let params = GLOBAL_DEFAULTS;
   if (profile != null) {
-    defaults = {
-      ...defaults,
-      ...DEFAULTS_BY_PROFILE[profile],
-    };
-    defaults.profile = profile;
+    // Merge global defaults with profile-specific defaults
+    params = { ...params, ...DEFAULTS_BY_PROFILE[profile] };
+    params.profile = profile;
   }
-  if (view != null) {
-    defaults.view = view;
-  }
-  if (objectType != null) {
-    defaults.objectType = objectType;
-  }
+  if (view != null) params.view = view;
+  if (objectType != null) params.objectType = objectType;
+
   // Apply a few view-specific defaults
-  if (defaults.view === View.Hierarchy) {
-    if (defaults.objectType === ObjectType.Language)
-      defaults.languageScopes.push(LanguageScope.Family);
-    if (defaults.objectType === ObjectType.Territory)
-      defaults.territoryScopes = Object.values(TerritoryScope);
-  } else if (defaults.view === View.Table) {
-    defaults.limit = 200; // Show more results in table view
+  if (params.view === View.Hierarchy) {
+    if (params.objectType === ObjectType.Language) params.languageScopes.push(LanguageScope.Family);
+    if (params.objectType === ObjectType.Territory)
+      params.territoryScopes = Object.values(TerritoryScope);
+  } else if (params.view === View.Table) {
+    params.limit = 200; // Show more results in table view
   }
-  return defaults;
+  return params;
 }
 
 export function getProfileIcon(profile: ProfileType, color: string): ReactNode {

@@ -1,11 +1,14 @@
-import React from 'react';
+import { TriangleAlertIcon } from 'lucide-react';
+import React, { ReactNode } from 'react';
 
 import { getUniqueTerritoriesForLanguage } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
+import Hoverable from '../../generic/Hoverable';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
-import { LanguageData } from '../../types/LanguageTypes';
+import { LanguageData, LanguageField } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
+import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
 import {
   CodeColumn,
@@ -18,12 +21,28 @@ import ObjectTable from '../common/table/ObjectTable';
 const LanguageTable: React.FC = () => {
   const { languages } = useDataContext();
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
+  const codeColumn = {
+    ...CodeColumn,
+    render: (lang: LanguageData): ReactNode => (
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        {lang.codeDisplay}
+        {lang.warnings && lang.warnings[LanguageField.isoCode] && (
+          <Hoverable
+            hoverContent={lang.warnings[LanguageField.isoCode]}
+            style={{ marginLeft: '0.125em' }}
+          >
+            <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
+          </Hoverable>
+        )}
+      </div>
+    ),
+  };
 
   return (
     <ObjectTable<LanguageData>
       objects={Object.values(languages)}
       columns={[
-        CodeColumn,
+        codeColumn,
         NameColumn,
         endonymColumn,
         {
@@ -53,6 +72,12 @@ const LanguageTable: React.FC = () => {
           key: 'ICU Support',
           label: 'ICU Support',
           render: (lang) => <ICUSupportStatus object={lang} />,
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'Parent Language',
+          render: (lang) =>
+            lang.parentLanguage && <HoverableObjectName object={lang.parentLanguage} />,
           isInitiallyVisible: false,
         },
         {

@@ -6,7 +6,7 @@ import {
   WritingSystemData,
   WritingSystemScope,
 } from '../types/DataTypes';
-import { LanguageModality } from '../types/LanguageTypes';
+import { getBaseLanguageData, LanguageModality } from '../types/LanguageTypes';
 import { LanguageData } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
@@ -37,10 +37,8 @@ export function parseLanguageLine(line: string): LanguageData {
   const nameEndonym = parts[3] != '' ? parts[3] : undefined;
 
   return {
-    type: ObjectType.Language,
+    ...getBaseLanguageData(code, nameDisplay),
 
-    ID: code,
-    codeDisplay: code,
     scope: undefined, // Added by imports
 
     nameCanonical: nameDisplay,
@@ -62,12 +60,7 @@ export function parseLanguageLine(line: string): LanguageData {
     modality: parts[4] !== '' ? (parts[4] as LanguageModality) : undefined,
     primaryScriptCode: parts[5] != '' ? parts[5] : undefined,
 
-    // References to other objects, filled in with DataAssociations methods
     sourceSpecific,
-    locales: [],
-    primaryWritingSystem: undefined,
-    writingSystems: {},
-    childLanguages: [],
   };
 }
 

@@ -54,6 +54,13 @@ export enum LanguageScope {
   SpecialCode = 'Special',
 }
 
+// This field enumerates fields about the language that could have additional context.
+// Right now it's limited to just warnings, but it should also be used when adding
+// the capacity to flag new feedback.
+export enum LanguageField {
+  isoCode = 'ISO Code',
+}
+
 export interface LanguageData extends ObjectBase {
   type: ObjectType.Language;
 
@@ -72,7 +79,7 @@ export interface LanguageData extends ObjectBase {
   vitalityEth2013?: string;
   vitalityEth2025?: string;
   digitalSupport?: string;
-  viabilityConfidence: string;
+  viabilityConfidence?: string;
   viabilityExplanation?: string;
 
   populationAdjusted?: number;
@@ -88,12 +95,44 @@ export interface LanguageData extends ObjectBase {
   variantTags?: VariantTagData[]; // links to IANA variant tags
   cldrDataProvider?: LanguageData | LocaleData;
 
+  warnings: Partial<Record<LanguageField, string>>;
+
   // References to other objects, filled in after loading the TSV
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
+}
+
+export function getEmptyLanguageSourceSpecificData(): Record<LanguageSource, LanguageDataInSource> {
+  return {
+    All: { childLanguages: [] },
+    ISO: { childLanguages: [] },
+    BCP: { childLanguages: [] },
+    UNESCO: { childLanguages: [] },
+    Glottolog: { childLanguages: [] },
+    CLDR: { childLanguages: [] },
+  };
+}
+
+// Used to create a new language object with minimal data
+export function getBaseLanguageData(code: LanguageCode, name: string): LanguageData {
+  return {
+    type: ObjectType.Language,
+    ID: code,
+    codeDisplay: code,
+    nameCanonical: name,
+    nameDisplay: name,
+    names: [name],
+    populationEstimates: {},
+    sourceSpecific: getEmptyLanguageSourceSpecificData(),
+    variantTags: [],
+    locales: [],
+    writingSystems: {},
+    childLanguages: [],
+    warnings: {},
+  };
 }
 
 // Since languages can be categorized by ISO, Glottolog, or other source, these values will vary based on the language source
