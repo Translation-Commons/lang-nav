@@ -18,11 +18,12 @@ export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
 
 export enum LanguageSource {
-  All = 'All',
-  ISO = 'ISO',
-  UNESCO = 'UNESCO',
+  All = 'All', // All combined, preferring ISO codes, otherwise Glottocodes
+  ISO = 'ISO', // ISO 639-3, 639-5
+  BCP = 'BCP', // ISO but preferring 639-1 codes
+  UNESCO = 'UNESCO', //  limiting to languages in the UNESCO World Atlas of Languages
   Glottolog = 'Glottolog',
-  CLDR = 'CLDR',
+  CLDR = 'CLDR', // ISO but with some CLDR-specific aliasing
 }
 
 // TODO Replace generic strings with some form of validation

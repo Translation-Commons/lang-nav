@@ -125,10 +125,10 @@ export function addIANAVariantLocales(
 
   Object.values(variants).forEach((variant) => {
     variant.languageCodes.forEach((prefix) => {
-      const cldrLang = languagesBySource.CLDR[prefix];
-      if (!cldrLang) return;
+      const bcpLang = languagesBySource.BCP[prefix];
+      if (!bcpLang) return;
 
-      const iso639_3 = cldrLang.ID;
+      const iso639_3 = bcpLang.ID;
       const localeCode = `${prefix}_${variant.ID}`;
 
       locales[localeCode] = {

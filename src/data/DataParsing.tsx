@@ -25,6 +25,7 @@ export function parseLanguageLine(line: string): LanguageData {
   const sourceSpecific = {
     All: { code, name: nameDisplay, parentLanguageCode, childLanguages: [] },
     ISO: { code, parentLanguageCode: parentISOCode, childLanguages: [] },
+    BCP: { code, parentLanguageCode: parentISOCode, childLanguages: [] },
     UNESCO: { code, name: nameDisplay, parentLanguageCode: parentISOCode, childLanguages: [] },
     Glottolog: {
       code: parts[1] != '' ? parts[1] : undefined,

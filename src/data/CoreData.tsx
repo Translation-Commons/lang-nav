@@ -58,6 +58,7 @@ export type CoreData = {
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
   All: {},
   ISO: {},
+  BCP: {},
   Glottolog: {},
   UNESCO: {},
   CLDR: {},
@@ -132,7 +133,7 @@ export function useCoreData(): {
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySource.All, territories, writingSystems);
     connectLocales(languagesBySource.All, territories, writingSystems, locales);
-    connectVariantTags(variantTags, languagesBySource.CLDR, locales);
+    connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     computeOtherPopulationStatistics(languagesBySource, writingSystems);
 

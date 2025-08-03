@@ -159,6 +159,9 @@ export function addISODataToLanguages(
     lang.scope = isoLang.scope;
     lang.sourceSpecific.ISO.scope = isoLang.scope;
     lang.sourceSpecific.ISO.name = isoLang.name;
+    lang.sourceSpecific.BCP.scope = isoLang.scope;
+    lang.sourceSpecific.BCP.name = isoLang.name;
+    lang.sourceSpecific.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.sourceSpecific.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
   });
 }
@@ -218,6 +221,7 @@ export function addISOLanguageFamilyData(
       const sourceSpecific = {
         All: { code: family.code, parentLanguageCode: family.parent, childLanguages: [] },
         ISO: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
+        BCP: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
         UNESCO: { childLanguages: [] }, // Not including lang families in UNESCO's WAL
         Glottolog: { childLanguages: [] }, // No glottolog data
         CLDR: { childLanguages: [] }, // CLDR does not include language families
@@ -240,6 +244,7 @@ export function addISOLanguageFamilyData(
       };
       languagesBySource.All[family.code] = familyEntry;
       languagesBySource.ISO[family.code] = familyEntry;
+      languagesBySource.BCP[family.code] = familyEntry;
     } else {
       // familyEntry exists, but it may be missing data
       if (!familyEntry.nameDisplay || familyEntry.nameDisplay === '0') {
@@ -249,6 +254,9 @@ export function addISOLanguageFamilyData(
       familyEntry.sourceSpecific.ISO.parentLanguageCode = family.parent;
       familyEntry.sourceSpecific.ISO.scope = LanguageScope.Family;
       familyEntry.sourceSpecific.ISO.name = name;
+      familyEntry.sourceSpecific.BCP.parentLanguageCode = family.parent;
+      familyEntry.sourceSpecific.BCP.scope = LanguageScope.Family;
+      familyEntry.sourceSpecific.BCP.name = name;
       familyEntry.scope = LanguageScope.Family;
     }
   });
@@ -257,8 +265,8 @@ export function addISOLanguageFamilyData(
   // Iterate again to point constituent languages to the language family
   Object.entries(isoLangsToFamilies).forEach(([familyCode, constituentLanguages]) => {
     constituentLanguages.forEach((langCode) => {
-      // Get the language checking the 3-letter language code (or the 2-letter that is used in CLDR)
-      const lang = languagesBySource.ISO[langCode] ?? languagesBySource.CLDR[langCode];
+      // Get the langauge using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
+      const lang = languagesBySource.BCP[langCode];
       if (lang == null) {
         console.log(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;
@@ -266,6 +274,7 @@ export function addISOLanguageFamilyData(
       // languages may already have macrolanguage parents but if its unset, set the parent
       lang.sourceSpecific.All.parentLanguageCode ??= familyCode;
       lang.sourceSpecific.ISO.parentLanguageCode ??= familyCode;
+      lang.sourceSpecific.BCP.parentLanguageCode ??= familyCode;
     });
   });
 }
