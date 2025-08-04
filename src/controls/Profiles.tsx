@@ -22,7 +22,7 @@ export enum ProfileType {
 const GLOBAL_DEFAULTS: PageParams = {
   languageSource: LanguageSource.All,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
-  limit: 8,
+  limit: 12,
   localeSeparator: LocaleSeparator.Underscore,
   objectID: undefined,
   objectType: ObjectType.Language,
@@ -31,6 +31,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   searchBy: SearchableField.AllNames,
   searchString: '',
   sortBy: SortBy.Population,
+  sortDirection: 'normal',
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   territoryFilter: '',
   view: View.CardList,

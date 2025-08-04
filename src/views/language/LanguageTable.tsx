@@ -64,12 +64,14 @@ const LanguageTable: React.FC = () => {
                 .map((lang) => lang.nameDisplay)}
             />
           ),
+          isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.CountOfLanguages,
         },
         {
           key: 'Territories',
           render: (lang) => <HoverableEnumeration items={getUniqueTerritoriesForLanguage(lang)} />,
+          isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
         },
         InfoButtonColumn,

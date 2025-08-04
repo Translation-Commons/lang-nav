@@ -102,6 +102,9 @@ function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
       case 'languageSource':
         params.languageSource = value as LanguageSource;
         break;
+      case 'sortDirection':
+        params.sortDirection = value === 'reverse' ? value : 'normal';
+        break;
 
       // Freeform strings
       case 'objectID':
@@ -159,10 +162,12 @@ function getNewURLSearchParams(
   );
   Array.from(next.entries()).forEach(([key, value]) => {
     const defaultValue = defaults[key as PageParamKey];
-    if (key === 'profile' && value !== ProfileType.LanguageEthusiast) {
-      // "defaults" will always be set to the current profile, so don't clear it
-      return;
-    }
+
+    // Don't remove view or profile because they change on defaults
+    if (key === 'view') return;
+    if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
+
+    // If the default is the empty array you can remove it
     if (value === '[]' && Array.isArray(defaultValue) && defaultValue.length === 0) {
       next.delete(key);
       return;

@@ -1,46 +1,20 @@
 import React from 'react';
 
 import { View } from '../../types/PageParamTypes';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
 const ViewSelector: React.FC = () => {
   const { view, updatePageParams } = usePageParams();
 
   return (
-    <>
-      <Selector
-        selectorLabel="View"
-        getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
-        options={Object.values(View)}
-        onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
-        selected={view}
-      />
-      <Selector
-        selectorLabel="View"
-        getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
-        options={Object.values(View)}
-        optionsDisplay={OptionsDisplay.ButtonGroup}
-        onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
-        selected={view}
-      />
-      <Selector
-        selectorLabel="View"
-        getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
-        options={Object.values(View)}
-        optionsDisplay={OptionsDisplay.Dropdown}
-        onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
-        selected={view}
-      />
-      <Selector
-        selectorLabel="View"
-        getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
-        options={Object.values(View)}
-        optionsDisplay={OptionsDisplay.InlineDropdown}
-        onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
-        selected={view}
-      />
-    </>
+    <Selector
+      selectorLabel="View"
+      getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
+      options={Object.values(View)}
+      onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
+      selected={view}
+    />
   );
 };
 
