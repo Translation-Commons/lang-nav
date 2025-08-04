@@ -56,6 +56,7 @@ export type PageParamKey =
   | 'searchBy'
   | 'searchString'
   | 'sortBy'
+  | 'sortDirection'
   | 'territoryFilter'
   | 'territoryScopes'
   | 'view';
@@ -72,6 +73,7 @@ export type PageParams = {
   searchBy: SearchableField;
   searchString: string;
   sortBy: SortBy;
+  sortDirection: 'normal' | 'reverse'; // true for normal, false for reverse
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
@@ -89,6 +91,7 @@ export type PageParamsOptional = {
   searchBy?: SearchableField;
   searchString?: string;
   sortBy?: SortBy;
+  sortDirection?: 'normal' | 'reverse';
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;

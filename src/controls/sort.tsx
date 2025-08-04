@@ -12,9 +12,25 @@ export function getSortFunction(
   includeDescendents?: boolean,
   languageSource?: LanguageSource,
 ): SortByFunctionType {
-  const { sortBy, languageSource: languageSourcePageParam } = usePageParams();
+  const { sortBy, languageSource: languageSourcePageParam, sortDirection } = usePageParams();
   const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
+  const sortFunction = getSortFunctionParameterized(
+    sortBy,
+    effectiveLanguageSource,
+    includeDescendents ?? false,
+  );
+  if (sortDirection === 'reverse') {
+    return (a, b) => -sortFunction(a, b);
+  }
+  return sortFunction;
+}
+
+function getSortFunctionParameterized(
+  sortBy: SortBy,
+  effectiveLanguageSource: LanguageSource,
+  includeDescendents: boolean,
+): SortByFunctionType {
   switch (sortBy) {
     case SortBy.Code:
       return (a: ObjectData, b: ObjectData) => {

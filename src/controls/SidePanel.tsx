@@ -11,6 +11,7 @@ import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 import SortBySelector from './selectors/SortBySelector';
+import SortDirectionSelector from './selectors/SortDirectionSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
@@ -51,6 +52,7 @@ const SidePanel: React.FC = () => {
         <ViewSelector />
         <LimitInput />
         <SortBySelector />
+        <SortDirectionSelector />
         <LocaleSeparatorSelector />
       </SidePanelSection>
 

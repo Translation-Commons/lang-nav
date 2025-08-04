@@ -1,5 +1,4 @@
-import { ArrowUpDownIcon } from 'lucide-react';
-import React, { Dispatch, SetStateAction, useMemo, useState, useCallback } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 
 import {
   getFilterBySubstring,
@@ -9,12 +8,12 @@ import {
 } from '../../../controls/filter';
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getSortFunction } from '../../../controls/sort';
-import HoverableButton from '../../../generic/HoverableButton';
 import { ObjectData } from '../../../types/DataTypes';
 import { SortBy } from '../../../types/PageParamTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
 
 import './tableStyles.css';
+import TableSortButton from './TableSortButton';
 
 export interface TableColumn<T> {
   isInitiallyVisible?: boolean;
@@ -39,7 +38,6 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const scopeFilter = getScopeFilter();
-  const [sortDirectionIsNormal, setSortDirectionIsNormal] = useState(true);
 
   const [visibleColumns, setVisibleColumns] = useState(() =>
     Object.fromEntries(columns.map((col) => [col.key, col.isInitiallyVisible ?? true])),
@@ -59,21 +57,12 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const sliceFunction = getSliceFunction<T>();
 
   const objectsFilteredAndSorted = useMemo(() => {
-    let result = objects.filter(scopeFilter).filter(filterByTerritory).filter(filterBySubstring);
-    if (sortDirectionIsNormal) {
-      result = result.sort(sortFunction);
-    } else {
-      result = result.sort((a, b) => -sortFunction(a, b));
-    }
-    return result;
-  }, [
-    sortFunction,
-    objects,
-    filterBySubstring,
-    filterByTerritory,
-    scopeFilter,
-    sortDirectionIsNormal,
-  ]);
+    return objects
+      .filter(scopeFilter)
+      .filter(filterByTerritory)
+      .filter(filterBySubstring)
+      .sort(sortFunction);
+  }, [sortFunction, objects, filterBySubstring, filterByTerritory, scopeFilter]);
 
   return (
     <div className="ObjectTableContainer">
@@ -103,10 +92,7 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
             {currentlyVisibleColumns.map((column) => (
               <th key={column.key} style={{ textAlign: 'start' }}>
                 {column.label ?? column.key}
-                <SortButton
-                  columnSortBy={column.sortParam}
-                  setSortDirectionIsNormal={setSortDirectionIsNormal}
-                />
+                <TableSortButton columnSortBy={column.sortParam} isNumeric={column.isNumeric} />
               </th>
             ))}
           </tr>
@@ -133,37 +119,4 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
     </div>
   );
 }
-
-type SortButtonProps = {
-  columnSortBy?: SortBy;
-  setSortDirectionIsNormal: Dispatch<SetStateAction<boolean>>;
-};
-
-const SortButton: React.FC<SortButtonProps> = ({ columnSortBy, setSortDirectionIsNormal }) => {
-  const { sortBy, updatePageParams } = usePageParams();
-
-  if (!columnSortBy) {
-    return <></>;
-  }
-
-  function onSortButtonClick(newSortBy: SortBy): void {
-    if (sortBy != newSortBy) {
-      setSortDirectionIsNormal(true);
-      updatePageParams({ sortBy: newSortBy });
-    } else {
-      setSortDirectionIsNormal((prev) => !prev);
-    }
-  }
-
-  return (
-    <HoverableButton
-      className={sortBy === columnSortBy ? 'sort active' : 'sort'}
-      hoverContent="Click to sort by this column or to toggle the sort direction."
-      onClick={() => onSortButtonClick(columnSortBy)}
-    >
-      <ArrowUpDownIcon size="1em" display="block" />
-    </HoverableButton>
-  );
-};
-
 export default ObjectTable;
