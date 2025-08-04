@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { TerritoryScope } from '../types/DataTypes';
 import { LanguageSource, LanguageScope } from '../types/LanguageTypes';
 import {
+  LocaleSeparator,
   ObjectType,
   PageParamKey,
   PageParams,
@@ -13,85 +14,104 @@ import {
   View,
 } from '../types/PageParamTypes';
 
+import { getDefaultParams, ProfileType } from './Profiles';
+
 type PageParamsContextState = PageParams & {
   updatePageParams: (newParams: PageParamsOptional) => void;
 };
 
 const PageParamsContext = createContext<PageParamsContextState | undefined>(undefined);
-const DEFAULT_OBJECT_TYPE = ObjectType.Language;
-const DEFAULT_VIEW = View.CardList;
-const PARAMS_THAT_CLEAR: PageParamKey[] = ['limit', 'page', 'searchString', 'searchBy'];
 
 const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [pageParams, setPageParams] = useSearchParams({});
-
-  const getParam = (key: PageParamKey, fallback: string = '') => pageParams.get(key) ?? fallback;
+  const [urlPageParams, setURLPageParams] = useSearchParams({});
 
   const updatePageParams = useCallback(
     (newParams: PageParamsOptional) => {
-      setPageParams((prev) => getNewURLSearchParams(newParams, prev));
+      setURLPageParams((prev) => getNewURLSearchParams(newParams, prev));
     },
-    [setPageParams],
+    [setURLPageParams],
   );
 
   const providerValue: PageParamsContextState = useMemo(() => {
-    const objectType = getParam('objectType', DEFAULT_OBJECT_TYPE) as ObjectType;
-    const view = getParam('view', DEFAULT_VIEW) as View;
-    const defaults = getDefaultParams(objectType, view);
+    const instantiatedParams = getParamsFromURL(urlPageParams);
+
+    const defaults = getDefaultParams(
+      instantiatedParams.objectType,
+      instantiatedParams.view,
+      instantiatedParams.profile,
+    );
+
+    Object.keys(instantiatedParams).forEach((key) => {
+      const typedKey = key as keyof PageParamsOptional;
+      if (instantiatedParams[typedKey] == null) delete instantiatedParams[typedKey];
+    });
     return {
-      languageScopes: getParam('languageScopes', defaults.languageScopes.join(','))
-        .split(',')
-        .map((s) => s as LanguageScope)
-        .filter(Boolean),
-      languageSource: getParam('languageSource', defaults.languageSource) as LanguageSource,
-      limit: parseInt(getParam('limit', defaults.limit.toString())),
-      localeSeparator: getParam('localeSeparator', '') === '-' ? '-' : '_',
-      objectID: getParam('objectID', undefined),
-      objectType,
-      page: parseInt(getParam('page', defaults.page.toString())),
-      searchBy: getParam('searchBy', defaults.searchBy) as SearchableField,
-      searchString: getParam('searchString', defaults.searchString),
-      sortBy: getParam('sortBy', defaults.sortBy) as SortBy,
-      territoryFilter: getParam('territoryFilter', defaults.territoryFilter),
-      territoryScopes: getParam('territoryScopes', defaults.territoryScopes.join(','))
-        .split(',')
-        .map((s) => s as TerritoryScope)
-        .filter(Boolean),
-      view,
+      ...defaults,
+      ...instantiatedParams,
       updatePageParams,
     };
-  }, [pageParams]);
+  }, [urlPageParams, updatePageParams]);
 
   return <PageParamsContext.Provider value={providerValue}>{children}</PageParamsContext.Provider>;
 };
 
 export default PageParamsProvider;
 
-// If there is nothing in the URL string, then use this instead
-function getDefaultParams(objectType: ObjectType, view: View): PageParams {
-  const languageScopes = [LanguageScope.Macrolanguage, LanguageScope.Language];
-  let territoryScopes = [TerritoryScope.Country, TerritoryScope.Dependency];
-  if (view === View.Hierarchy) {
-    // By default, show more kinds of objects in the hierarchy view
-    if (objectType === ObjectType.Language) languageScopes.push(LanguageScope.Family);
-    if (objectType === ObjectType.Territory) territoryScopes = Object.values(TerritoryScope);
-  }
+function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
+  const params: PageParamsOptional = {};
+  urlParams.forEach((value, keyUntyped) => {
+    const key = keyUntyped as PageParamKey;
+    switch (key) {
+      // Numeric values
+      case 'page':
+        params.page = parseInt(value) || 1; // Default to 1 if parsing fails
+        break;
+      case 'limit':
+        params.limit = parseInt(value) || 10; // Default to 10 if parsing fails
+        break;
 
-  return {
-    languageSource: LanguageSource.All,
-    languageScopes,
-    limit: view === View.Table ? 200 : 8,
-    localeSeparator: '_',
-    objectID: undefined,
-    objectType,
-    page: 1,
-    searchBy: SearchableField.AllNames,
-    searchString: '',
-    sortBy: SortBy.Population,
-    territoryScopes,
-    territoryFilter: '',
-    view,
-  };
+      // Arrays
+      case 'languageScopes':
+        if (value === '[]') params.languageScopes = [];
+        else params.languageScopes = value.split(',').filter(Boolean) as LanguageScope[];
+        break;
+      case 'territoryScopes':
+        if (value === '[]') params[key] = [];
+        else params[key] = value.split(',').filter(Boolean) as TerritoryScope[];
+        break;
+
+      // Enum values
+      case 'objectType':
+        params.objectType = value as ObjectType;
+        break;
+      case 'view':
+        params.view = value as View;
+        break;
+      case 'profile':
+        params.profile = value as ProfileType;
+        break;
+      case 'searchBy':
+        params.searchBy = value as SearchableField;
+        break;
+      case 'sortBy':
+        params.sortBy = value as SortBy;
+        break;
+      case 'localeSeparator':
+        params.localeSeparator = value as LocaleSeparator;
+        break;
+      case 'languageSource':
+        params.languageSource = value as LanguageSource;
+        break;
+
+      // Freeform strings
+      case 'objectID':
+      case 'searchString':
+      case 'territoryFilter':
+        params[key] = value; // Default to undefined if empty
+        break;
+    }
+  });
+  return params;
 }
 
 /**
@@ -119,7 +139,7 @@ function getNewURLSearchParams(
     } else if (Array.isArray(value)) {
       // Handle as array
       if (value.length === 0) {
-        next.delete(key);
+        next.set(key, '[]'); // To differentiate empty array from an undefined array
       } else {
         next.set(key, value.join(','));
       }
@@ -130,16 +150,28 @@ function getNewURLSearchParams(
       next.set(key, value.toString());
     }
   });
-  // Clear the some parameters if they match the default
+
+  // Clear the parameters that match the default
   const defaults = getDefaultParams(
-    (next.get('objectType') as ObjectType) ?? DEFAULT_OBJECT_TYPE,
-    (next.get('view') as View) ?? DEFAULT_VIEW,
+    next.get('objectType') as ObjectType,
+    next.get('view') as View,
+    next.get('profile') as ProfileType,
   );
-  PARAMS_THAT_CLEAR.forEach((param: PageParamKey) => {
-    if (next.get(param) == defaults[param]?.toString()) {
-      next.delete(param);
+  Array.from(next.entries()).forEach(([key, value]) => {
+    const defaultValue = defaults[key as PageParamKey];
+    if (key === 'profile' && value !== ProfileType.LanguageEthusiast) {
+      // "defaults" will always be set to the current profile, so don't clear it
+      return;
+    }
+    if (value === '[]' && Array.isArray(defaultValue) && defaultValue.length === 0) {
+      next.delete(key);
+      return;
+    }
+    if (value === defaults[key as PageParamKey]?.toString()) {
+      next.delete(key);
     }
   });
+
   return next;
 }
 

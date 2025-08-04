@@ -1,3 +1,5 @@
+import { ProfileType } from '../controls/Profiles';
+
 import { TerritoryScope } from './DataTypes';
 import { LanguageSource, LanguageScope } from './LanguageTypes';
 
@@ -37,7 +39,10 @@ export enum SearchableField {
   AllNames = 'All Names',
 }
 
-export type LocaleSeparator = '-' | '_';
+export enum LocaleSeparator {
+  Underscore = '_',
+  Hyphen = '-',
+}
 
 export type PageParamKey =
   | 'languageSource'
@@ -47,6 +52,7 @@ export type PageParamKey =
   | 'objectID'
   | 'objectType'
   | 'page'
+  | 'profile'
   | 'searchBy'
   | 'searchString'
   | 'sortBy'
@@ -62,6 +68,7 @@ export type PageParams = {
   objectID?: string;
   objectType: ObjectType;
   page: number; // 0 indexed
+  profile: ProfileType;
   searchBy: SearchableField;
   searchString: string;
   sortBy: SortBy;
@@ -74,10 +81,11 @@ export type PageParamsOptional = {
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;
-  localeSeparator?: string;
+  localeSeparator?: LocaleSeparator;
   objectID?: string;
   objectType?: ObjectType;
   page?: number;
+  profile?: ProfileType;
   searchBy?: SearchableField;
   searchString?: string;
   sortBy?: SortBy;
