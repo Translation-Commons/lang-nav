@@ -15,6 +15,8 @@ import {
 } from '../types/LanguageTypes';
 import { getLocaleName } from '../views/locale/LocaleStrings';
 
+const MAX_ISO_LANG_CODE_LENGTH = 3;
+
 export function connectLanguagesToParent(languagesBySource: LanguagesBySource): void {
   // Connect general parents
   Object.values(languagesBySource[LanguageSource.All]).forEach((lang) => {
@@ -140,30 +142,33 @@ export function groupLanguagesBySource(languages: LanguageDictionary): Languages
     All: languages,
     ISO: Object.values(languages).reduce<LanguageDictionary>((isoLangs, lang) => {
       const code = lang.sourceSpecific.ISO.code;
-      if (code != null) {
-        isoLangs[code] = lang;
-      }
+      if (code != null && code.length <= MAX_ISO_LANG_CODE_LENGTH) isoLangs[code] = lang;
       return isoLangs;
+    }, {}),
+    BCP: Object.values(languages).reduce<LanguageDictionary>((bcpLangs, lang) => {
+      const code = lang.codeISO6391 ?? lang.sourceSpecific.ISO.code;
+      if (code != null && code.length <= MAX_ISO_LANG_CODE_LENGTH) bcpLangs[code] = lang;
+      return bcpLangs;
     }, {}),
     UNESCO: Object.values(languages).reduce<LanguageDictionary>((unescoLangs, lang) => {
       const code = lang.sourceSpecific.UNESCO.code;
-      if (code != null && lang.viabilityConfidence != null && lang.viabilityConfidence != 'No') {
+      if (code != null && lang.viabilityConfidence != null && lang.viabilityConfidence != 'No')
         unescoLangs[code] = lang;
-      }
       return unescoLangs;
     }, {}),
     Glottolog: Object.values(languages).reduce<LanguageDictionary>((glottoLangs, lang) => {
       const code = lang.sourceSpecific.Glottolog.code;
-      if (code != null) {
-        glottoLangs[code] = lang;
-      }
+      if (code != null) glottoLangs[code] = lang;
       return glottoLangs;
     }, {}),
     CLDR: Object.values(languages).reduce<LanguageDictionary>((cldrLangs, lang) => {
       const code = lang.codeISO6391 ?? lang.sourceSpecific.ISO.code;
-      if (code != null && lang.scope !== LanguageScope.Family) {
+      if (
+        code != null &&
+        lang.scope !== LanguageScope.Family &&
+        code.length <= MAX_ISO_LANG_CODE_LENGTH
+      )
         cldrLangs[code] = lang;
-      }
       return cldrLangs;
     }, {}),
   };
