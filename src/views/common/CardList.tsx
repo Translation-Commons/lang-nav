@@ -10,6 +10,11 @@ import { getSortFunction } from '../../controls/sort';
 import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
 import VisibleItemsMeter from '../VisibleItemsMeter';
+// When there is only one visible result we want to show the full details
+// view instead of a miniature card. Import the ObjectDetails component
+// from the local details folder. This component knows how to render the
+// appropriate details page for each object type (language, census, etc).
+import ObjectDetails from './details/ObjectDetails';
 
 const CARD_MIN_WIDTH = 300; // Including margins
 
@@ -37,6 +42,23 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
       ),
     [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
   );
+
+  // If there is exactly one visible object we should show the full details
+  // view instead of a list of cards. This mirrors the behaviour of the
+  // dedicated Details view and provides the user with more context about
+  // the single result. We still show the VisibleItemsMeter at the top to
+  // maintain context about the number of filtered objects vs total.
+  if (objectsVisible.length === 1) {
+    const [singleObject] = objectsVisible;
+    return (
+      <>
+        <div style={{ marginBottom: '1em' }}>
+          <VisibleItemsMeter objects={objects} />
+        </div>
+        <ObjectDetails object={singleObject} />
+      </>
+    );
+  }
 
   return (
     <>
