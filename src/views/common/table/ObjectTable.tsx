@@ -11,6 +11,8 @@ import { getSortFunction } from '../../../controls/sort';
 import { ObjectData } from '../../../types/DataTypes';
 import { SortBy } from '../../../types/PageParamTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
+// Show a single result in detail when only one row matches the filters.
+import ObjectDetails from '../details/ObjectDetails';
 
 import './tableStyles.css';
 import TableSortButton from './TableSortButton';
@@ -116,6 +118,17 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
           ))}
         </tbody>
       </table>
+
+      {/* If there is exactly one object after filtering and sorting, display its full details
+          below the table. This gives users more information when only one result
+          remains. We don't use the sliceFunction here because we want to base
+          the condition on all filtered objects, not just the ones shown on the
+          current page. */}
+      {objectsFilteredAndSorted.length === 1 && (
+        <div style={{ marginTop: '1em' }}>
+          <ObjectDetails object={objectsFilteredAndSorted[0]} />
+        </div>
+      )}
     </div>
   );
 }
