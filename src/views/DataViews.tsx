@@ -4,7 +4,7 @@ import { ObjectType, View } from '../types/PageParamTypes';
 import CensusCardList from './census/CensusCardList';
 import { CensusHierarchy } from './census/CensusHierarchy';
 import TableOfAllCensuses from './census/TableOfAllCensuses';
-import ObjectDetailsPage from './common/ObjectDetailsPage';
+import ObjectDetailsPage from './common/details/ObjectDetailsPage';
 import LanguageCardList from './language/LanguageCardList';
 import { LanguageHierarchy } from './language/LanguageHierarchy';
 import LanguageTable from './language/LanguageTable';

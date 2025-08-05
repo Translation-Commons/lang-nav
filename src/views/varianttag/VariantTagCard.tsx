@@ -14,7 +14,7 @@ interface Props {
 
 const VariantTagCard: React.FC<Props> = ({ data }) => {
   const { updatePageParams } = usePageParams();
-  const { ID, codeDisplay, nameDisplay, description, languages } = data;
+  const { ID, nameDisplay, languages } = data;
 
   return (
     <div>
@@ -25,18 +25,9 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
       </h3>
 
       <div>
-        <label>Tag:</label> {codeDisplay}
+        <label>Name:</label>
+        {nameDisplay}
       </div>
-
-      <div>
-        <label>Name:</label> {nameDisplay}
-      </div>
-
-      {description && (
-        <div>
-          <label>Description:</label> {description}
-        </div>
-      )}
 
       {languages && Object.values(languages).length > 0 && (
         <div>

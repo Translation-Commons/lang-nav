@@ -51,6 +51,18 @@ const LanguageSourceDescription: React.FC<{ languageSource: LanguageSource }> = 
           languages and macrolanguages or the ISO 639-5 standard for language families.
         </>
       );
+    case LanguageSource.BCP:
+      return (
+        <>
+          <label>Best Current Practice (BCP):</label> The Internet Engineering Task Force
+          (IETF)&apos;s Best Current Practice (BCP) 47 standard defines how language codes should be
+          composed for usage on the internet. It is largely based on the ISO 639 standard -- the big
+          difference is that it recommends using the ISO 639-1 2-letter codes when available. That
+          standard also includes how complex descriptions are defined, such as handling specific
+          variants (eg. <code>en-US</code> for American English, <code>en-GB</code> for British
+          English, or <code>zh-Hant</code> for Traditional Chinese).
+        </>
+      );
     case LanguageSource.UNESCO:
       return (
         <>

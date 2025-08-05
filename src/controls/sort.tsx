@@ -2,17 +2,36 @@ import { uniqueBy } from '../generic/setUtils';
 import { CensusData } from '../types/CensusTypes';
 import { ObjectData, VariantTagData } from '../types/DataTypes';
 import { LanguageData, LanguageSource } from '../types/LanguageTypes';
-import { ObjectType, SortBy, View } from '../types/PageParamTypes';
+import { ObjectType, SortBy } from '../types/PageParamTypes';
 
 import { usePageParams } from './PageParamsContext';
 
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
 // TODO, it may be more performant to make a sortKey function
-export function getSortFunction(languageSource?: LanguageSource): SortByFunctionType {
-  const { sortBy, view, languageSource: languageSourcePageParam } = usePageParams();
+export function getSortFunction(
+  includeDescendents?: boolean,
+  languageSource?: LanguageSource,
+): SortByFunctionType {
+  const { sortBy, languageSource: languageSourcePageParam, sortDirection } = usePageParams();
   const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
+  const sortFunction = getSortFunctionParameterized(
+    sortBy,
+    effectiveLanguageSource,
+    includeDescendents ?? false,
+  );
+  if (sortDirection === 'reverse') {
+    return (a, b) => -sortFunction(a, b);
+  }
+  return sortFunction;
+}
+
+function getSortFunctionParameterized(
+  sortBy: SortBy,
+  effectiveLanguageSource: LanguageSource,
+  includeDescendents: boolean,
+): SortByFunctionType {
   switch (sortBy) {
     case SortBy.Code:
       return (a: ObjectData, b: ObjectData) => {
@@ -88,7 +107,7 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
             return b.type === ObjectType.Language
               ? (b.populationCited ?? 0) -
                   (a.populationCited ?? 0) +
-                  (view === View.Hierarchy
+                  (includeDescendents
                     ? (b.sourceSpecific[effectiveLanguageSource].populationOfDescendents ?? 0) -
                       (a.sourceSpecific[effectiveLanguageSource].populationOfDescendents ?? 0)
                     : 0)
@@ -101,9 +120,7 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
             return b.type === ObjectType.WritingSystem
               ? b.populationUpperBound -
                   a.populationUpperBound +
-                  (view === View.Hierarchy
-                    ? b.populationOfDescendents - a.populationOfDescendents
-                    : 0)
+                  (includeDescendents ? b.populationOfDescendents - a.populationOfDescendents : 0)
               : -1;
           case ObjectType.Territory:
             return b.type === ObjectType.Territory ? b.population - a.population : -1;

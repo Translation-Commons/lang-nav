@@ -11,6 +11,7 @@ const ObjectTypeSelector: React.FC = () => {
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
       updatePageParams({
+        objectID: undefined,
         objectType,
         view: view === View.Details ? View.CardList : view,
         searchString: undefined,

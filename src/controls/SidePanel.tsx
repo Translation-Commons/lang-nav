@@ -9,7 +9,9 @@ import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
+import ProfileSelector from './selectors/ProfileSelector';
 import SortBySelector from './selectors/SortBySelector';
+import SortDirectionSelector from './selectors/SortDirectionSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
@@ -17,7 +19,7 @@ import ViewSelector from './selectors/ViewSelector';
 import './controls.css';
 
 const SidePanel: React.FC = () => {
-  const [isOpen, setIsOpen] = React.useState(true);
+  const [isOpen, setIsOpen] = React.useState(false);
   const [panelWidth, setPanelWidth] = React.useState(300); // but will change to pixels on resize
 
   // maybe collapse the panel if we click outside -- do UX testing first
@@ -33,6 +35,7 @@ const SidePanel: React.FC = () => {
     >
       <SidePanelSection panelWidth={panelWidth}>
         <SidePanelSectionTitle>Data</SidePanelSectionTitle>
+        <ProfileSelector />
         <ObjectTypeSelector />
         <LanguageListSourceSelector />
       </SidePanelSection>
@@ -49,6 +52,7 @@ const SidePanel: React.FC = () => {
         <ViewSelector />
         <LimitInput />
         <SortBySelector />
+        <SortDirectionSelector />
         <LocaleSeparatorSelector />
       </SidePanelSection>
 

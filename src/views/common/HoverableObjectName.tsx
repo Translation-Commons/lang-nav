@@ -9,6 +9,7 @@ type Props = {
   labelSource?: 'name' | 'code' | 'territory' | 'language';
   format?: 'text' | 'button';
   style?: React.CSSProperties;
+  className?: string;
 };
 
 const HoverableObjectName: React.FC<Props> = ({

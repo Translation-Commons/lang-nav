@@ -12,7 +12,8 @@ const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this
 
 export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy, objectType } = usePageParams();
-  const { languages, locales, territories, writingSystems } = useDataContext();
+  const { languages, locales, territories, writingSystems, censuses, variantTags } =
+    useDataContext();
   const scopeFilter = getScopeFilter();
 
   const objects = useMemo(() => {
@@ -25,8 +26,21 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
         return Object.values(territories);
       case ObjectType.WritingSystem:
         return Object.values(writingSystems);
+      case ObjectType.Census:
+        return Object.values(censuses);
+      case ObjectType.VariantTag:
+        return Object.values(variantTags);
     }
-  }, [objectType, languages, locales, territories, writingSystems, searchBy]);
+  }, [
+    objectType,
+    languages,
+    locales,
+    territories,
+    writingSystems,
+    censuses,
+    variantTags,
+    searchBy,
+  ]);
 
   const getSuggestions = useMemo(() => {
     return async (query: string) => {

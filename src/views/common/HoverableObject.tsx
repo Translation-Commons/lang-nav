@@ -3,7 +3,7 @@ import React from 'react';
 import { usePageParams } from '../../controls/PageParamsContext';
 import Hoverable from '../../generic/Hoverable';
 import { ObjectData } from '../../types/DataTypes';
-import { ObjectType } from '../../types/PageParamTypes';
+import { ObjectType, View } from '../../types/PageParamTypes';
 import CensusCard from '../census/CensusCard';
 import LanguageCard from '../language/LanguageCard';
 import LocaleCard from '../locale/LocaleCard';
@@ -53,7 +53,12 @@ const HoverableObject: React.FC<Props> = ({ object, children }) => {
           {getHoverContent()}
         </>
       }
-      onClick={() => updatePageParams({ objectID: object.ID })}
+      onClick={() =>
+        updatePageParams({
+          objectType: view === View.Details ? object.type : undefined,
+          objectID: object.ID,
+        })
+      }
     >
       {children}
     </Hoverable>

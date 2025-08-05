@@ -1,14 +1,17 @@
-import { ExternalLinkIcon, XIcon } from 'lucide-react';
+import { ExpandIcon, XIcon } from 'lucide-react';
 import React, { useEffect } from 'react';
 
 import { usePageParams } from '../controls/PageParamsContext';
+import ObjectPath from '../controls/pathnav/ObjectPath';
+import { PathContainer } from '../controls/pathnav/PathNav';
 import HoverableButton from '../generic/HoverableButton';
 import { useClickOutside } from '../generic/useClickOutside';
 import { View } from '../types/PageParamTypes';
 
 import './modal.css';
 
-import ObjectDetails, { getObjectFromID } from './common/ObjectDetails';
+import ObjectDetails from './common/details/ObjectDetails';
+import getObjectFromID from './common/getObjectFromID';
 import ObjectTitle from './common/ObjectTitle';
 
 const ViewModal: React.FC = () => {
@@ -55,14 +58,17 @@ const ViewModal: React.FC = () => {
                 })
               }
             >
-              <ExternalLinkIcon size="1em" display="block" />
+              <ExpandIcon size="1.5em" display="block" />
             </HoverableButton>
             <HoverableButton hoverContent="Close modal" onClick={onClose}>
-              <XIcon size="1em" display="block" />
+              <XIcon size="1.5em" display="block" />
             </HoverableButton>
           </div>
         </div>
         <div className="ModalBody">
+          <PathContainer style={{ marginTop: '0.5em' }}>
+            <ObjectPath />
+          </PathContainer>
           <ObjectDetails object={object} />
         </div>
       </div>
