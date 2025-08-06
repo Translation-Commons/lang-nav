@@ -13,6 +13,7 @@ export default function getObjectFromID(inputObjectID?: string): ObjectData | un
   return (
     censuses[objectID] ??
     languagesBySource.All[objectID] ??
+    languagesBySource.BCP[objectID] ??
     languagesBySource.Glottolog[objectID] ?? // The Glottolog lookup should no longer be necessary since objects have a stable ID field, but keep just in case
     territories[objectID] ??
     locales[objectID] ??

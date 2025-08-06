@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '../../data/DataContext';
+import Deemphasized from '../../generic/Deemphasized';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { CensusData } from '../../types/CensusTypes';
 import { SortBy } from '../../types/PageParamTypes';
@@ -28,7 +29,6 @@ const TableOfAllCensuses: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },
-
         {
           key: 'Eligible Population',
           render: (census) =>
@@ -37,6 +37,20 @@ const TableOfAllCensuses: React.FC = () => {
               : 'Unknown',
           isNumeric: true,
           sortParam: SortBy.Population,
+        },
+        {
+          key: 'Year Collected',
+          render: (census) =>
+            census.collectorType !== 'CLDR' ? (
+              new Date(census.yearCollected + '-07-01').toLocaleDateString(undefined, {
+                year: 'numeric',
+              })
+            ) : (
+              <Deemphasized>multiple</Deemphasized>
+            ),
+          isInitiallyVisible: false,
+          isNumeric: true,
+          sortParam: SortBy.Date,
         },
         InfoButtonColumn,
       ]}

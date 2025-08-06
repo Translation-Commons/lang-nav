@@ -25,6 +25,11 @@ type Props = {
   value: string;
 };
 
+/*
+ * Known issues: This component uses useEffect to debounce inputs and to update the field
+ * if it is updated in another place -- but there still seems to be an issue and it may
+ * cause the history to be reset. Adding 2 TextInputs on the same page may freeze the page.
+ */
 const TextInput: React.FC<Props> = ({
   getSuggestions = () => [],
   inputStyle,

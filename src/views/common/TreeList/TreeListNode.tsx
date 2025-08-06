@@ -77,10 +77,8 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
           </>
         )}
         {showInfoButton && (
-          <HoverableObject object={object}>
-            <button className="InfoButton">
-              <InfoIcon size="1em" display="block" />
-            </button>
+          <HoverableObject object={object} style={{ marginLeft: '0.125em' }}>
+            <InfoIcon size="1em" />
           </HoverableObject>
         )}
         {showPopulation && population > 0 && (

@@ -16,7 +16,17 @@ export const CensusHierarchy: React.FC = () => {
 
   const rootNodes = getCensusTreeNodes(Object.values(territories), sortFunction, filterByScope);
 
-  return <TreeListPageBody rootNodes={rootNodes} description={<>Censuses</>} />;
+  return (
+    <TreeListPageBody
+      rootNodes={rootNodes}
+      description={
+        <>
+          This view shows censuses and census tables, organized by the country they were collected
+          for.
+        </>
+      }
+    />
+  );
 };
 
 export function getCensusTreeNodes(

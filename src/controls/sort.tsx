@@ -1,8 +1,8 @@
 import { uniqueBy } from '../generic/setUtils';
-import { CensusData } from '../types/CensusTypes';
-import { ObjectData, VariantTagData } from '../types/DataTypes';
+import { ObjectData } from '../types/DataTypes';
 import { LanguageData, LanguageSource } from '../types/LanguageTypes';
 import { ObjectType, SortBy } from '../types/PageParamTypes';
+import { getObjectPopulation } from '../views/common/ObjectField';
 
 import { usePageParams } from './PageParamsContext';
 
@@ -102,31 +102,11 @@ function getSortFunctionParameterized(
       };
     case SortBy.Population:
       return (a: ObjectData, b: ObjectData) => {
-        switch (a.type) {
-          case ObjectType.Language:
-            return b.type === ObjectType.Language
-              ? (b.populationCited ?? 0) -
-                  (a.populationCited ?? 0) +
-                  (includeDescendents
-                    ? (b.sourceSpecific[effectiveLanguageSource].populationOfDescendents ?? 0) -
-                      (a.sourceSpecific[effectiveLanguageSource].populationOfDescendents ?? 0)
-                    : 0)
-              : -1;
-          case ObjectType.Locale:
-            return b.type === ObjectType.Locale ? b.populationSpeaking - a.populationSpeaking : -1;
-          case ObjectType.Census:
-            return b.type === ObjectType.Census ? b.eligiblePopulation - a.eligiblePopulation : -1;
-          case ObjectType.WritingSystem:
-            return b.type === ObjectType.WritingSystem
-              ? b.populationUpperBound -
-                  a.populationUpperBound +
-                  (includeDescendents ? b.populationOfDescendents - a.populationOfDescendents : 0)
-              : -1;
-          case ObjectType.Territory:
-            return b.type === ObjectType.Territory ? b.population - a.population : -1;
-          case ObjectType.VariantTag:
-            return 0; // Not yet available for variant tags
-        }
+        // Default order is descending (bigger populations first)
+        return (
+          getObjectPopulation(b, includeDescendents, effectiveLanguageSource) -
+          getObjectPopulation(a, includeDescendents, effectiveLanguageSource)
+        );
       };
     case SortBy.RelativePopulation:
       return (a: ObjectData, b: ObjectData) => {
@@ -218,8 +198,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.CountOfLanguages,
       ];
     case ObjectType.VariantTag:
-      // TODO Population can be derived from locales
-      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.CountOfLanguages];
+      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
   }
 }
 
@@ -232,14 +211,13 @@ export function getUniqueTerritoriesForLanguage(lang: LanguageData): string[] {
     (name) => name,
   );
 }
+
 function getDate(object: ObjectData): number {
   switch (object.type) {
     case ObjectType.Census:
-      return (object as CensusData).yearCollected || 0;
-    case ObjectType.VariantTag: {
-      const dateString = (object as VariantTagData).dateAdded;
-      return dateString ? new Date(dateString).getTime() : 0;
-    }
+      return object.yearCollected;
+    case ObjectType.VariantTag:
+      return object.dateAdded?.getTime() ?? 0;
     default:
       return 0;
   }

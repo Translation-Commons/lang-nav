@@ -14,9 +14,10 @@ import WritingSystemCard from '../writingsystem/WritingSystemCard';
 type Props = {
   object?: ObjectData;
   children: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
-const HoverableObject: React.FC<Props> = ({ object, children }) => {
+const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
   const { view, updatePageParams } = usePageParams();
   if (object == null) {
     return <>{children}</>;
@@ -59,6 +60,7 @@ const HoverableObject: React.FC<Props> = ({ object, children }) => {
           objectID: object.ID,
         })
       }
+      style={style}
     >
       {children}
     </Hoverable>
