@@ -11,7 +11,6 @@ import { getSortFunction } from '../../../controls/sort';
 import { ObjectData } from '../../../types/DataTypes';
 import { SortBy } from '../../../types/PageParamTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
-// Show a single result in detail when only one row matches the filters.
 import ObjectDetails from '../details/ObjectDetails';
 
 import './tableStyles.css';
