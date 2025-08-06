@@ -11,10 +11,6 @@ import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
 import VisibleItemsMeter from '../VisibleItemsMeter';
 
-// When there is only one visible result we want to show the full details
-// view instead of a miniature card. Import the ObjectDetails component
-// from the local details folder. This component knows how to render the
-// appropriate details page for each object type (language, census, etc).
 import ObjectDetails from './details/ObjectDetails';
 
 const CARD_MIN_WIDTH = 300; // Including margins
