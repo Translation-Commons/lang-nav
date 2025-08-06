@@ -29,6 +29,7 @@ export enum SortBy {
   CountOfTerritories = 'Count of Territories',
   RelativePopulation = 'Relative Population',
   Literacy = 'Literacy',
+  Date = 'Date',
 }
 
 export enum SearchableField {

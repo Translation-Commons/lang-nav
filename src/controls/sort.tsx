@@ -1,5 +1,6 @@
 import { uniqueBy } from '../generic/setUtils';
-import { ObjectData } from '../types/DataTypes';
+import { CensusData } from '../types/CensusTypes';
+import { ObjectData, VariantTagData } from '../types/DataTypes';
 import { LanguageData, LanguageSource } from '../types/LanguageTypes';
 import { ObjectType, SortBy } from '../types/PageParamTypes';
 
@@ -168,6 +169,9 @@ function getSortFunctionParameterized(
               : -1;
         }
       };
+
+    case SortBy.Date:
+      return (a, b) => getDate(b) - getDate(a);
   }
 }
 
@@ -203,7 +207,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.CountOfLanguages,
       ];
     case ObjectType.Census:
-      return [SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
+      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
     case ObjectType.WritingSystem:
       return [
         SortBy.Code,
@@ -215,7 +219,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
       ];
     case ObjectType.VariantTag:
       // TODO Population can be derived from locales
-      return [SortBy.Code, SortBy.Name, SortBy.CountOfLanguages];
+      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.CountOfLanguages];
   }
 }
 
@@ -227,4 +231,16 @@ export function getUniqueTerritoriesForLanguage(lang: LanguageData): string[] {
       .filter((name) => name != null && name !== ''),
     (name) => name,
   );
+}
+function getDate(object: ObjectData): number {
+  switch (object.type) {
+    case ObjectType.Census:
+      return (object as CensusData).yearCollected || 0;
+    case ObjectType.VariantTag: {
+      const dateString = (object as VariantTagData).dateAdded;
+      return dateString ? new Date(dateString).getTime() : 0;
+    }
+    default:
+      return 0;
+  }
 }

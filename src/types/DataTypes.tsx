@@ -184,6 +184,8 @@ export interface VariantTagData extends ObjectBase {
   codeDisplay: VariantIANATag;
   nameDisplay: string;
   description?: string;
+
+  dateAdded?: string;
   added?: Date;
   prefixes: string[]; // Usually language codes but sometimes composites like zh-Latn or oc-lengadoc
   languageCodes: LanguageCode[]; // zh, oc, etc.
