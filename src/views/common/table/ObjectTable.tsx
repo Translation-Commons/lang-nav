@@ -126,7 +126,9 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
           current page. */}
       {objectsFilteredAndSorted.length === 1 && (
         <div style={{ marginTop: '1em' }}>
-          <ObjectDetails object={objectsFilteredAndSorted[0]} />
+          <DetailsContainer title={<ObjectTitle object={objectsFilteredAndSorted[0]} />}>
+            <ObjectDetails object={objectsFilteredAndSorted[0]} />
+          </DetailsContainer>
         </div>
       )}
     </div>
