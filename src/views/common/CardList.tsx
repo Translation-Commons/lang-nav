@@ -11,6 +11,8 @@ import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
 import VisibleItemsMeter from '../VisibleItemsMeter';
 
+import ObjectDetails from './details/ObjectDetails';
+
 const CARD_MIN_WIDTH = 300; // Including margins
 
 interface Props<T> {
@@ -37,6 +39,24 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
       ),
     [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
   );
+
+  // If there is exactly one visible object we should show the full details
+  // view instead of a list of cards. This mirrors the behaviour of the
+  // dedicated Details view and provides the user with more context about
+  // the single result. We still show the VisibleItemsMeter at the top to
+  // maintain context about the number of filtered objects vs total.
+  if (objectsVisible.length === 1) {
+    return (
+      <>
+        <div style={{ marginBottom: '1em' }}>
+          <VisibleItemsMeter objects={objects} />
+        </div>
+        <DetailsContainer title={<ObjectTitle object={objectsVisible[0]} />}>
+          <ObjectDetails object={objectsVisible[0]} />
+        </DetailsContainer>
+      </>
+    );
+  }
 
   return (
     <>
