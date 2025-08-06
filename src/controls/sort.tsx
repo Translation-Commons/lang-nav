@@ -171,12 +171,7 @@ function getSortFunctionParameterized(
       };
 
     case SortBy.Date:
-      return (a, b) => {
-        const dateA = getDate(a);
-        const dateB = getDate(b);
-
-        return dateB - dateA; // Sorts descending (newest first)
-      };
+      return (a, b) => getDate(b) - getDate(a);
   }
 }
 
