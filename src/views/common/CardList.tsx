@@ -46,13 +46,14 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   // the single result. We still show the VisibleItemsMeter at the top to
   // maintain context about the number of filtered objects vs total.
   if (objectsVisible.length === 1) {
-    const [singleObject] = objectsVisible;
     return (
       <>
         <div style={{ marginBottom: '1em' }}>
           <VisibleItemsMeter objects={objects} />
         </div>
-        <ObjectDetails object={singleObject} />
+        <DetailsContainer title={<ObjectTitle object={objectsVisible[0]} />}>
+          <ObjectDetails object={objectsVisible[0]} />
+        </DetailsContainer>
       </>
     );
   }
