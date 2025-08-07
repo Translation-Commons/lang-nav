@@ -9,7 +9,7 @@ type Props = {
 };
 
 const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
-  const { ID, added, prefixes, nameDisplay, description, languages, locales } = variantTag;
+  const { ID, dateAdded, prefixes, nameDisplay, description, languages, locales } = variantTag;
 
   return (
     <div className="Details">
@@ -29,10 +29,10 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
             {description}
           </div>
         )}
-        {added && (
+        {dateAdded && (
           <div>
             <label>Added: </label>
-            {added.toLocaleDateString()}
+            {dateAdded.toLocaleDateString()}
           </div>
         )}
       </div>

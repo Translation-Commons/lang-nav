@@ -35,10 +35,8 @@ export const EndonymColumn: TableColumn<ObjectData> = {
 export const InfoButtonColumn: TableColumn<ObjectData> = {
   key: 'Info',
   render: (object) => (
-    <HoverableObject object={object}>
-      <button className="InfoButton">
-        <InfoIcon size="1em" display="block" style={{ verticalAlign: 'middle' }} />
-      </button>
+    <HoverableObject object={object} style={{ verticalAlign: 'middle' }}>
+      <InfoIcon size="1em" display="block" />
     </HoverableObject>
   ),
 };

@@ -110,6 +110,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
                 ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
                 : 'N/A',
             isNumeric: true,
+            sortParam: SortBy.RelativePopulation,
           },
           {
             key: 'Scope',
@@ -150,10 +151,8 @@ const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actua
     );
   }
   return (
-    <HoverableObject object={actualLocale}>
-      <button className="InfoButton">
-        <InfoIcon size="1em" />
-      </button>
+    <HoverableObject object={actualLocale} style={{ verticalAlign: 'middle' }}>
+      <InfoIcon size="1em" display="block" />
     </HoverableObject>
   );
 };

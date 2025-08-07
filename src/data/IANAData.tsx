@@ -92,7 +92,7 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
     // Prefixes are usually language codes but can be composites like zh-Latn-pinyin or oc-lengadoc-grclass
     const languageCodes = unique(data.Prefix.map((l) => l.split(/\W/)[0]));
     const localeCodes = data.Prefix.map((l) => l + '-' + ianaTag);
-    const added = data.Added[0] ? new Date(data.Added[0]) : undefined;
+    const dateAdded = data.Added[0] ? new Date(data.Added[0]) : undefined;
 
     if (ianaTag && name) {
       variants[ianaTag] = {
@@ -101,7 +101,7 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
         codeDisplay: ianaTag,
         nameDisplay: name,
         description: data.Comments.join(' '), // It's called comments but its functionally a description
-        added,
+        dateAdded,
         prefixes: data.Prefix,
         languageCodes: languageCodes,
         localeCodes: localeCodes,

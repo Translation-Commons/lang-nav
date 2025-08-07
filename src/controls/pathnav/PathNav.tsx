@@ -1,6 +1,7 @@
 import { SlashIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
+import ObjectTypeDescription from '../../strings/ObjectTypeDescription';
 import { ObjectType, View } from '../../types/PageParamTypes';
 import Selector, { OptionsDisplay } from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
@@ -39,6 +40,7 @@ const ObjectTypeSelector: React.FC = () => {
       options={Object.values(ObjectType)}
       onChange={goToObjectType}
       selected={objectType}
+      getOptionDescription={(objectType) => <ObjectTypeDescription objectType={objectType} />}
     />
   );
 };

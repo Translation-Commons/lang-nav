@@ -75,6 +75,7 @@ export function getSearchableField(object: ObjectData, field: SearchableField, q
   }
 }
 
+// TODO make better upperbound/lowerbound population estimates when we don't have exact numbers
 export function getObjectPopulation(
   object: ObjectData,
   includeDescendents?: boolean,
@@ -99,6 +100,6 @@ export function getObjectPopulation(
     case ObjectType.Territory:
       return object.population;
     case ObjectType.VariantTag:
-      return 0; // Variant tags don't have a population
+      return object.languages.reduce((sum, lang) => sum + (lang.populationCited || 0), 0);
   }
 }

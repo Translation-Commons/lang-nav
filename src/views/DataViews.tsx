@@ -15,10 +15,13 @@ import TerritoryCardList from './territory/TerritoryCardList';
 import { TerritoryHierarchy } from './territory/TerritoryHierarchy';
 import TerritoryTable from './territory/TerritoryTable';
 import VariantTagCardList from './varianttag/VariantTagCardList';
+import { VariantTagHierarchy } from './varianttag/VariantTagHierarchy';
+import VariantTagTable from './varianttag/VariantTagTable';
 import ViewReports from './ViewReports';
 import WritingSystemCardList from './writingsystem/WritingSystemCardList';
 import { WritingSystemHierarchy } from './writingsystem/WritingSystemHierarchy';
 import WritingSystemTable from './writingsystem/WritingSystemTable';
+
 import './styles.css';
 
 function MainViews() {
@@ -56,7 +59,7 @@ function MainViews() {
         case ObjectType.WritingSystem:
           return <WritingSystemHierarchy />;
         case ObjectType.VariantTag:
-          return <>Not yet Implemented</>;
+          return <VariantTagHierarchy />;
       }
     // eslint-disable-next-line no-fallthrough
     case View.Table:
@@ -72,7 +75,7 @@ function MainViews() {
         case ObjectType.WritingSystem:
           return <WritingSystemTable />;
         case ObjectType.VariantTag:
-          return <>Not yet Implemented</>;
+          return <VariantTagTable />;
       }
     // eslint-disable-next-line no-fallthrough
     case View.Reports:

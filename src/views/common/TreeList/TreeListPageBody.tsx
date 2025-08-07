@@ -30,7 +30,17 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   return (
     <div className="TreeListView">
       <TreeListOptionsProvider>
-        <div style={{ marginBottom: 8 }}>{description}</div>
+        <div style={{ marginBottom: 8 }}>
+          {description}
+          {limit < rootNodes.length && (
+            <>
+              {' '}
+              {limit} of {rootNodes.length} root nodes are shown. Update the item limit in the
+              options panel to see more.
+            </>
+          )}
+        </div>
+
         <TreeListRoot
           rootNodes={rootNodes
             .map((node) => filterBranch(node, filterFunction))
