@@ -1,0 +1,106 @@
+#codeDisplay		np2001	np2011
+#nameDisplay		Nepal 2001	Nepal 2011
+#isoRegionCode	NP		
+#yearCollected		2001	2011
+#datePublished		2002	2013
+#eligiblePopulation		22,736,934	26,494,504
+#notes	Census - de jure - complete tabulation		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+mul	#Total	22,736,934	26,494,504
+npi	Nepali	11,053,255	11,826,953
+mai	Maithali	2,797,582	3,092,530
+bho	Bhojpuri	1,712,536	1,584,958
+mul	#Other		1,596,760
+thar1284	Tharu	1,331,546	1,529,875
+nucl1729	Tamang	1,179,145	1,353,311
+new	Newari	825,458	846,557
+vjk	Bajjika	237,947	793,416
+maga1261	Magar	770,116	788,530
+urd	Urdu	174,840	691,546
+awa	Awadhi	560,744	501,752
+bap	Bantawa	371,056	132,583
+lif	Limbu	333,633	343,603
+gvr	Gurung	338,925	325,622
+mis	#Unknown	168,340	47,718
+rjs	Rajbansi	129,829	122,214
+xsr	Sherpa	129,771	115,010
+hin	Hindi	105,765	77,569
+rab	Chamling	44,093	76,800
+sat	Santhali	40,260	49,858
+cdm	Chepang	36,807	48,476
+dhw	Danuwari	31,849	45,821
+suz	Sunuvari	26,611	37,898
+mag	Magahi	30	35,614
+bbu	Kulung	18,686	33,170
+	Jhangar	28,615	
+mjz	Majhi		24,422
+ben	Bengali	23,602	21,061
+thf	Thami	18,991	23,151
+mwr	Marwari	22,637	
+mjz	Manjhi	21,841	
+byh	Bhujel/Khawas	10,733	21,715
+tdh	Thulung	14,034	20,659
+ybh	Yakkha	14,648	20,443
+dhi	Dhimal	17,308	19,300
+anp	Angika	15,892	18,555
+rav	Sangpang	10,810	18,270
+klr	Khaling	9,288	14,467
+wme	Wambule/Umbule	4,471	13,470
+kra	Kumal	6,533	12,222
+dry	Darai	10,210	11,677
+bhj	Bahing	2,765	11,658
+scp	Yholmo	3,986	10,176
+ncd	Nachhiring	3,553	10,041
+ybi	Yamphu/Yamphe	1,722	9,208
+bmj	Bote	2,823	8,766
+ghal1246	Ghale	1,649	8,092
+dus	Dumi	5,271	7,638
+lep	Lepcha/Lapche	2,826	7,499
+pum	Puma	4,310	6,686
+ths	Thakali	6,441	5,242
+raa	Dungmali	221	6,260
+chx	Chhantyal/Chhantel	5,912	4,283
+nsp	Nepali Sign Language	5,743	4,476
+bod	Tibetan	5,277	4,445
+jul	Jirel	4,919	4,829
+mewa1252	Mewahang	904	4,650
+brx	Meche	3,301	4,375
+rji	Raji	2,413	3,758
+lbr	Lohorung	1,207	3,716
+ctn	Chhintang	8	3,712
+	Paharo	2,995	3,458
+drq	Dura	3,397	2,156
+kkt	Koi/Koyu	2,641	1,271
+kdq	Koche	54	2,080
+cur	Chhiling	1,314	2,046
+eng	English	1,037	2,032
+jee	Jero/Jerung	271	1,763
+vay	Hayu	1,743	1,520
+bee	Byangshi	1,734	480
+san	Sanskrit	823	1,669
+khr	Khariya	1,575	238
+tij	Tilung	310	1,424
+xis	Kisan	489	1,178
+pan	Punjabi	1,165	808
+zho	Chinese	1,101	242
+bgc	Hariyanwi	33	889
+lhm	Lhomi	4	808
+kzq	Kaike	794	50
+ori	Oriya	159	584
+rau	Raute	518	461
+snd	Sindhi	72	518
+asm	Assamese	3	476
+	Churauti	408	
+	Sam	23	401
+brd	Baram/Maramu	342	155
+kyw	Kurmali	13	227
+lii	Lingkhim	97	129
+sck	Sadhani	2	122
+syw	Kagate	10	99
+kgg	Kusunda	87	28
+dzo	Dzonkha	9	55
+lus	Mizo	8	32
+	Kuki	9	29
+nag	Nagamese	6	10

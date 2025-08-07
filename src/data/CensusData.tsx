@@ -15,6 +15,7 @@ const CENSUS_FILENAMES = [
   'es2021', // Spain 2021 Census
   'data.un.org/bs', // Bahamas 2010 Census downloaded from UN data portal
   'yt', // Mayotte Censuses
+  'data.un.org/np', // Nepal 2001 & 2011 Censuses downloaded from UN data portal
   // Add more census files here as needed
 ];
 
