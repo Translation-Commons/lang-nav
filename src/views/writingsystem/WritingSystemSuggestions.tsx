@@ -8,7 +8,7 @@ const WritingSystemSuggestions: React.FC = () => {
 
   return (
     <div className="separatedButtonList">
-      {['Latn', 'Hans', 'Hant', 'Arab'].map(
+      {['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'].map(
         (code) =>
           writingSystems[code] != null && (
             <HoverableObjectName key={code} object={writingSystems[code]} format="button" />

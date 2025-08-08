@@ -1,3 +1,13 @@
+import {
+  Building2Icon,
+  ExpandIcon,
+  LandmarkIcon,
+  LaughIcon,
+  PersonStandingIcon,
+  SchoolIcon,
+} from 'lucide-react';
+import { ReactNode } from 'react';
+
 import { TerritoryScope } from '../types/DataTypes';
 import { LanguageSource, LanguageScope } from '../types/LanguageTypes';
 import {
@@ -12,6 +22,7 @@ import {
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default
+  CommunityMember = 'Community Member', // Different intro experience
   Academic = 'Academic', // ISO, Table view
   TechDeveloper = 'Tech Developer', // CLDR, Table view
   PolicyMaker = 'Policy Maker', // UNESCO,
@@ -37,23 +48,27 @@ const GLOBAL_DEFAULTS: PageParams = {
   view: View.CardList,
 };
 
-const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
+export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
   [ProfileType.LanguageEthusiast]: {
     // Nothing, default profile is based on this
+  },
+  [ProfileType.CommunityMember]: {
+    view: View.Details,
+    languageScopes: [], // Shorthand for all languoids
+    searchString: '', // Default to empty search but included here since its an important filter
   },
   [ProfileType.Academic]: {
     view: View.Table,
     languageSource: LanguageSource.ISO,
-    territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   },
   [ProfileType.TechDeveloper]: {
     view: View.Table,
     languageSource: LanguageSource.CLDR,
-    territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
+    territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.PolicyMaker]: {
     languageSource: LanguageSource.UNESCO,
-    territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
+    territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.ShowMeEverything]: {
     languageSource: LanguageSource.All,
@@ -88,4 +103,21 @@ export function getDefaultParams(
     defaults.limit = 200; // Show more results in table view
   }
   return defaults;
+}
+
+export function getProfileIcon(profile: ProfileType, color: string): ReactNode {
+  switch (profile) {
+    case ProfileType.LanguageEthusiast:
+      return <LaughIcon size={64} color={color} />;
+    case ProfileType.CommunityMember:
+      return <PersonStandingIcon size={64} color={color} />;
+    case ProfileType.Academic:
+      return <SchoolIcon size={64} color={color} />;
+    case ProfileType.TechDeveloper:
+      return <Building2Icon size={64} color={color} />;
+    case ProfileType.PolicyMaker:
+      return <LandmarkIcon size={64} color={color} />;
+    case ProfileType.ShowMeEverything:
+      return <ExpandIcon size={64} color={color} />;
+  }
 }

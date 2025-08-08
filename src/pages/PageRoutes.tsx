@@ -2,6 +2,7 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 import AboutPage from './AboutPage';
 import DataPage from './DataPage';
+import IntroPage from './IntroPage';
 
 export default function PageRoutes() {
   return (
@@ -9,8 +10,8 @@ export default function PageRoutes() {
       <RemoveTrailingSlash />
       <Routes>
         <Route path="*" element={<div>Page not found</div>} />
-        <Route path="/" element={<Navigate to="/data" replace />} />
-        {/* <Route path={LangNavPageName.Intro} element={<IntroPage />} /> */}
+        <Route path="/" element={<Navigate to={LangNavPageName.Intro} replace />} />
+        <Route path={LangNavPageName.Intro} element={<IntroPage />} />
         <Route path={LangNavPageName.Data} element={<DataPage />} />
         {/* <Route path={LangNavPageName.Details} element={<DetailsPage />} /> */}
         <Route path={LangNavPageName.About} element={<AboutPage />} />
@@ -39,7 +40,7 @@ const RemoveTrailingSlash = ({ ...rest }) => {
 
 // TODO
 export enum LangNavPageName {
-  // Intro = 'intro',
+  Intro = 'intro',
   Data = 'data',
   // Details = 'details',
   About = 'about',
