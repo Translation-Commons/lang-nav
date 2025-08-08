@@ -45,7 +45,6 @@ const TerritoryFilterSelector: React.FC = () => {
         optionsDisplay={OptionsDisplay.ButtonList}
         label="Territory Filter"
         description="Filter results by ones relevant in a territory."
-        style={{ lineHeight: '1.25em' }}
       />
       <TextInput
         inputStyle={{ minWidth: '10em' }}

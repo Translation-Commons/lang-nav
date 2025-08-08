@@ -1,8 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { OptionsDisplay } from '../../controls/components/Selector';
-import Selector from '../../controls/components/SelectorOld';
-import TextInput from '../../controls/components/TextInput';
 import { getScopeFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
@@ -22,6 +19,7 @@ import { InfoButtonColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
+import { usePotentialLocaleThreshold } from './PotentialLocaleThreshold';
 
 type PartitionedLocales = {
   largest: LocaleData[];
@@ -37,7 +35,7 @@ const PotentialLocales: React.FC = () => {
     languagesBySource: { All: languages },
   } = useDataContext();
   const { localeSeparator } = usePageParams();
-  const [percentThreshold, setPercentThreshold] = React.useState(0.05);
+  const { percentThreshold, percentThresholdSelector } = usePotentialLocaleThreshold();
   const potentialLocales = getPotentialLocales(
     Object.values(censuses),
     locales,
@@ -55,29 +53,8 @@ const PotentialLocales: React.FC = () => {
         number of actualized locales is smaller than the possible ones. However ones that appear
         here may be worth considering.
       </p>
-      <Selector
-        selectorLabel="Percent Threshold:"
-        selectorDescription={`Limit results by the minimum percent population in a territory that uses the language.`}
-      >
-        <TextInput
-          inputStyle={{ width: '3em' }}
-          getSuggestions={async () => [
-            { searchString: '0.001', label: '0.001%' },
-            { searchString: '0.005', label: '0.005%' },
-            { searchString: '0.01', label: '0.01%' },
-            { searchString: '0.05', label: '0.05%' },
-            { searchString: '0.1', label: '0.1%' },
-            { searchString: '0.5', label: '0.5%' },
-            { searchString: '1', label: '1%' },
-            { searchString: '5', label: '5%' },
-            { searchString: '10', label: '10%' },
-          ]}
-          optionsDisplay={OptionsDisplay.ButtonGroup}
-          onChange={(percent: string) => setPercentThreshold(Number(percent))}
-          placeholder=""
-          value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}
-        />
-      </Selector>
+
+      {percentThresholdSelector}
 
       <SubReport title="Largest Populations" locales={potentialLocales.largest}>
         Of all of the census records collected so far, these locales have more people speaking it

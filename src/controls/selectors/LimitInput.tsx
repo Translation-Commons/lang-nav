@@ -11,7 +11,6 @@ const LimitInput: React.FC = () => {
   return (
     <div className="selector" style={{ display: 'flex', alignItems: 'end' }}>
       <SelectorLabel
-        style={{ lineHeight: '1.25em' }}
         description={`Limit how many results are shown.`}
         label="Item Limit"
         optionsDisplay={OptionsDisplay.ButtonList}

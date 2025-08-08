@@ -1,5 +1,4 @@
 import React from 'react';
-import './styles.css';
 
 // Escape regex special characters in the search pattern
 function escapeRegExp(string: string) {

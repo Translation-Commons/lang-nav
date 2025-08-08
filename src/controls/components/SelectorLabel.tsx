@@ -9,17 +9,16 @@ type Props = {
   label?: ReactNode;
   description?: ReactNode;
   optionsDisplay: OptionsDisplay;
-  style?: React.CSSProperties;
 };
 
-const SelectorLabel: React.FC<Props> = ({ label, description, optionsDisplay, style }) => {
+const SelectorLabel: React.FC<Props> = ({ label, description, optionsDisplay }) => {
   if (label == null) return null;
   return (
-    <span style={{ ...getStyle(optionsDisplay), ...style }}>
-      {label}
+    <span style={getStyle(optionsDisplay)}>
+      <div>{label}</div>
       {description && (
-        <Hoverable hoverContent={description} style={{ marginLeft: '0.25em' }}>
-          <InfoIcon size="1em" style={{ verticalAlign: 'middle' }} />
+        <Hoverable hoverContent={description}>
+          <InfoIcon size="1em" display="block" />
         </Hoverable>
       )}
     </span>
@@ -28,9 +27,13 @@ const SelectorLabel: React.FC<Props> = ({ label, description, optionsDisplay, st
 
 function getStyle(optionsDisplay: OptionsDisplay): React.CSSProperties {
   const style: React.CSSProperties = {
+    display: 'flex',
+    gap: '0.25em',
     lineHeight: '1em',
+    alignItems: 'center',
     fontWeight: 'bold',
     padding: '0.5em',
+    margin: 'auto 0', // Vertically center
     whiteSpace: 'nowrap',
     borderRadius: '1em',
   };

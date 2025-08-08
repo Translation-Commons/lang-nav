@@ -14,7 +14,6 @@ export enum OptionsDisplay {
 }
 
 type Props<T extends React.Key> = {
-  appearance?: 'rounded' | 'tabs';
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
   onChange: (value: T) => void;

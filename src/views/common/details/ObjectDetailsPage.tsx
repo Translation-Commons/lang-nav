@@ -61,14 +61,7 @@ const DetailsContainer: React.FC<PropsWithChildren<{ title: ReactNode }>> = ({
   title,
 }) => {
   return (
-    <div
-      style={{
-        maxWidth: '800px',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-        textAlign: 'start',
-      }}
-    >
+    <div style={{ maxWidth: '800px', marginLeft: 'auto', marginRight: 'auto', textAlign: 'start' }}>
       <h2>{title}</h2>
       {children}
     </div>

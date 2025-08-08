@@ -1,8 +1,9 @@
 import { XIcon } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import HoverableButton from '../../generic/HoverableButton';
 import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
+import { useAutoAdjustedWidth } from '../../generic/useAutoAdjustedWidth';
 import { PageParamKey, View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
@@ -38,15 +39,7 @@ const TextInput: React.FC<Props> = ({
   placeholder,
   value,
 }) => {
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const [inputWidth, setInputWidth] = useState(50);
-
-  // Used to calculate the width of the input box
-  useEffect(() => {
-    if (spanRef.current) {
-      setInputWidth(spanRef.current.offsetWidth + 10); // add some buffer
-    }
-  }, [value]);
+  const { CalculateWidthFromHere, width } = useAutoAdjustedWidth(value);
 
   // Using a new variable immediateValue to allow users to edit the input box without causing computational
   // changes that could slow down rendering and cause a bad UX.
@@ -122,38 +115,17 @@ const TextInput: React.FC<Props> = ({
         style={{
           ...(optionsDisplay === OptionsDisplay.ButtonList ? { borderRadius: '0.5em' } : {}),
           ...inputStyle,
-          width: inputWidth + 5,
+          width: width + 5,
         }}
       />
-      <span
-        ref={spanRef}
-        style={{
-          position: 'absolute',
-          visibility: 'hidden',
-          whiteSpace: 'pre',
-          font: 'inherit',
-        }}
-      >
-        {value || ' '}
-      </span>
-      <HoverableButton
-        hoverContent="Clear the input"
-        style={
-          optionsDisplay === OptionsDisplay.ButtonList
-            ? { padding: '.5em', borderRadius: '0.5em', border: 'none', marginLeft: '0.5em' }
-            : {
-                marginRight: '0em',
-                borderRadius: '0 1em 1em 0',
-                borderLeft: 'none',
-              }
-        }
+      {CalculateWidthFromHere}
+      <ClearButton
         onClick={() => {
           setImmediateValue('');
           setShowSuggestions(false);
         }}
-      >
-        <XIcon size="1em" display="block" />
-      </HoverableButton>
+        optionsDisplay={optionsDisplay}
+      />
     </>
   );
 };
@@ -202,6 +174,25 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     <button onClick={setFilter} style={style}>
       {label}
     </button>
+  );
+};
+
+const ClearButton: React.FC<{
+  onClick: () => void;
+  optionsDisplay: OptionsDisplay;
+}> = ({ onClick, optionsDisplay }) => {
+  return (
+    <HoverableButton
+      hoverContent="Clear the input"
+      style={
+        optionsDisplay === OptionsDisplay.ButtonList
+          ? { padding: '.5em', borderRadius: '0.5em', border: 'none', marginLeft: '0em' }
+          : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }
+      }
+      onClick={onClick}
+    >
+      <XIcon size="1em" display="block" />
+    </HoverableButton>
   );
 };
 

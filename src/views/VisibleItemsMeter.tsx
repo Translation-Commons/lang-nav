@@ -45,7 +45,15 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects }) => {
   if (page === nPages /* last page */) nShown = nFiltered - (nPages - 1) * limit;
 
   return (
-    <div className="VisibleItemsMeter">
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'row',
+        gap: '0.25em',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+      }}
+    >
       <div>
         Showing <strong>{nShown.toLocaleString()}</strong>
         {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.

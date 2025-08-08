@@ -70,18 +70,6 @@
   background: var(--color-button-hover);
 }
 
-.selector.rounded button:first-child,
-.selector.rounded label:first-child {
-  border-bottom-left-radius: 2em;
-  border-top-left-radius: 2em;
-}
-
-.selector.rounded button:last-child,
-.selector.rounded button.LastChild {
-  border-bottom-right-radius: 2em;
-  border-top-right-radius: 2em;
-}
-
 .selector .selected {
   background: var(--color-button-primary);
   color: var(--color-background);
@@ -110,9 +98,6 @@
   z-index: 100;
 }
 
-.rounded .SelectorPopup {
-  border-radius: 1.15em !important;
-}
 .tabs .SelectorPopup {
   border-radius: 0em 0em 0.6em 0.6em;
 }
@@ -125,18 +110,6 @@
   font-size: 1em;
   text-align: end;
   margin: 0px;
-}
-
-.rounded .SelectorPopup button:first-child {
-  border-radius: 1em 1em 0em 0em;
-}
-
-.rounded .SelectorPopup button:last-child {
-  border-radius: 0em 0em 1em 1em;
-}
-
-.rounded .SelectorPopup button:first-child:last-child {
-  border-radius: 1em 1em 1em 1em;
 }
 
 .tabs .SelectorPopup button:last-child {

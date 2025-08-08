@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './styles.css';
 
 type CommaSeparatedProps = {
   children: React.ReactNode;
@@ -21,10 +20,7 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({ children, limit = 4 }) 
       ))}{' '}
       {limit != null && childArray.length > limit && (
         <button
-          style={{
-            padding: '0em 0.25em',
-            fontWeight: 'normal',
-          }}
+          style={{ padding: '0em 0.25em', fontWeight: 'normal' }}
           onClick={() => setExpanded((prev) => !prev)}
         >
           {expanded ? 'see less' : '+' + countOverLimit + ' more'}

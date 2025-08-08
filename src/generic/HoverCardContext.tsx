@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useLayoutEffect, useRef, useState } from 'react';
-import './styles.css';
 
 type HoverCardData = {
   content: React.ReactNode;
@@ -65,6 +64,17 @@ export const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
           ref={cardRef}
           className="HoverCard"
           style={{
+            background: 'var(--color-background)',
+            borderRadius: '0.5em',
+            padding: '0.8em 1em',
+            margin: '0.5em',
+            position: 'fixed',
+            border: '1px solid var(--color-button-secondary)',
+            boxShadow: '0 4px 12px var(--color-shadow)',
+            pointerEvents: 'none',
+            zIndex: 9999,
+            maxWidth: '30%',
+            textAlign: 'start',
             top: hoverCard.y + 10,
             left: hoverCard.x + 10,
           }}

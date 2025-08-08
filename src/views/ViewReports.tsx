@@ -15,7 +15,7 @@ const ViewReports: React.FC = () => {
   const { objectType } = usePageParams();
 
   return (
-    <div className="ViewReports">
+    <div style={{ textAlign: 'start' }}>
       <ReportsForObjectType objectType={objectType} />
     </div>
   );
