@@ -166,6 +166,7 @@ function getNewURLSearchParams(
     // Don't remove view or profile because they change on defaults
     if (key === 'view') return;
     if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
+    if (key === 'objectType' && value !== ObjectType.Language) return;
 
     // If the default is the empty array you can remove it
     if (value === '[]' && Array.isArray(defaultValue) && defaultValue.length === 0) {

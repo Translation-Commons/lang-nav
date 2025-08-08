@@ -9,7 +9,7 @@ const LimitInput: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+    <div className="selector" style={{ display: 'flex', alignItems: 'end' }}>
       <SelectorLabel
         style={{ lineHeight: '1.25em' }}
         description={`Limit how many results are shown.`}

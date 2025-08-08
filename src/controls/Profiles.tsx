@@ -94,10 +94,14 @@ export function getDefaultParams(
   if (view != null) {
     defaults.view = view;
   }
+  if (objectType != null) {
+    defaults.objectType = objectType;
+  }
   // Apply a few view-specific defaults
   if (defaults.view === View.Hierarchy) {
-    if (objectType === ObjectType.Language) defaults.languageScopes.push(LanguageScope.Family);
-    if (objectType === ObjectType.Territory)
+    if (defaults.objectType === ObjectType.Language)
+      defaults.languageScopes.push(LanguageScope.Family);
+    if (defaults.objectType === ObjectType.Territory)
       defaults.territoryScopes = Object.values(TerritoryScope);
   } else if (defaults.view === View.Table) {
     defaults.limit = 200; // Show more results in table view

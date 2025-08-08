@@ -45,22 +45,23 @@ export enum LocaleSeparator {
   Hyphen = '-',
 }
 
-export type PageParamKey =
-  | 'languageSource'
-  | 'languageScopes'
-  | 'limit'
-  | 'localeSeparator'
-  | 'objectID'
-  | 'objectType'
-  | 'page'
-  | 'profile'
-  | 'searchBy'
-  | 'searchString'
-  | 'sortBy'
-  | 'sortDirection'
-  | 'territoryFilter'
-  | 'territoryScopes'
-  | 'view';
+export enum PageParamKey {
+  languageSource = 'languageSource',
+  languageScopes = 'languageScopes',
+  limit = 'limit',
+  localeSeparator = 'localeSeparator',
+  objectID = 'objectID',
+  objectType = 'objectType',
+  page = 'page',
+  profile = 'profile',
+  searchBy = 'searchBy',
+  searchString = 'searchString',
+  sortBy = 'sortBy',
+  sortDirection = 'sortDirection',
+  territoryFilter = 'territoryFilter',
+  territoryScopes = 'territoryScopes',
+  view = 'view',
+}
 
 export type PageParams = {
   languageScopes: LanguageScope[];
