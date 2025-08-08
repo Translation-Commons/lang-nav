@@ -1,9 +1,9 @@
-import { ExternalLinkIcon, XIcon, FilterIcon } from 'lucide-react';
+import { XIcon } from 'lucide-react';
 import React, { useEffect, useRef, useState } from 'react';
 
 import HoverableButton from '../../generic/HoverableButton';
 import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
-import { View } from '../../types/PageParamTypes';
+import { PageParamKey, View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
 import { getOptionStyle, OptionsDisplay } from './Selector';
@@ -19,9 +19,8 @@ type Props = {
   inputStyle?: React.CSSProperties;
   onChange: (value: string) => void;
   optionsDisplay: OptionsDisplay;
+  pageParameter?: PageParamKey;
   placeholder?: string;
-  showGoToDetailsButton?: boolean;
-  showTextInputButton?: boolean;
   value: string;
 };
 
@@ -35,9 +34,8 @@ const TextInput: React.FC<Props> = ({
   inputStyle,
   onChange,
   optionsDisplay,
+  pageParameter,
   placeholder,
-  showGoToDetailsButton = false,
-  showTextInputButton = true,
   value,
 }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -101,10 +99,9 @@ const TextInput: React.FC<Props> = ({
             {suggestions.map((s, i) => (
               <SuggestionRow
                 key={i}
+                pageParameter={pageParameter}
                 position={getPositionInGroup(i, suggestions.length)}
                 setImmediateValue={setImmediateValue}
-                showTextInputButton={showTextInputButton}
-                showGoToDetailsButton={showGoToDetailsButton}
                 suggestion={s}
               />
             ))}
@@ -146,8 +143,7 @@ const TextInput: React.FC<Props> = ({
             ? { padding: '.5em', borderRadius: '0.5em', border: 'none', marginLeft: '0.5em' }
             : {
                 marginRight: '0em',
-                borderTopLeftRadius: '0px',
-                borderBottomLeftRadius: '0px',
+                borderRadius: '0 1em 1em 0',
                 borderLeft: 'none',
               }
         }
@@ -163,22 +159,20 @@ const TextInput: React.FC<Props> = ({
 };
 
 type SuggestionRowProps = {
+  pageParameter?: PageParamKey;
   position?: PositionInGroup;
   setImmediateValue: (value: string) => void;
-  showGoToDetailsButton?: boolean;
-  showTextInputButton?: boolean;
   suggestion: Suggestion;
 };
 
 const SuggestionRow: React.FC<SuggestionRowProps> = ({
+  pageParameter,
   position = PositionInGroup.Standalone,
   setImmediateValue,
-  showGoToDetailsButton,
-  showTextInputButton,
   suggestion,
 }) => {
   const { objectID, searchString, label } = suggestion;
-  const { updatePageParams } = usePageParams();
+  const { updatePageParams, view } = usePageParams();
 
   const setFilter = () => {
     setImmediateValue(searchString);
@@ -192,18 +186,7 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     position,
   );
 
-  // Some simplier states if we have 1 button
-  if (!showGoToDetailsButton) {
-    if (!showTextInputButton) {
-      return label;
-    }
-    return (
-      <button onClick={setFilter} style={style}>
-        {label}
-      </button>
-    );
-  }
-  if (!showTextInputButton) {
+  if (view == View.Details && pageParameter === PageParamKey.searchString) {
     return (
       <HoverableButton
         hoverContent={<>Go to the details page for {searchString}</>}
@@ -215,47 +198,10 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     );
   }
 
-  // The more complex case, where we have 2 buttons
   return (
-    <div
-      className="SuggestionRowWithMultipleInteractions"
-      style={{
-        ...style,
-        display: 'flex',
-        flexDirection: 'row',
-        alignItems: 'center',
-        padding: '0.125em',
-        justifyContent: 'end',
-        backgroundColor: 'var(--color-background)',
-      }}
-    >
-      <div
-        style={{
-          whiteSpace: 'nowrap',
-          maxWidth: '12em',
-          overflow: 'hidden',
-          textOverflow: 'ellipsis',
-          paddingLeft: '1em',
-          margin: 'none',
-        }}
-      >
-        {label}
-      </div>
-      <HoverableButton
-        hoverContent={<>Filter by &quot;{searchString}&quot;</>}
-        onClick={setFilter}
-        style={{ width: 'fit-content' }}
-      >
-        <FilterIcon size="1em" display="block" />
-      </HoverableButton>
-      <HoverableButton
-        hoverContent={<>Go to the details page for {searchString}</>}
-        onClick={goToDetails}
-        style={{ width: 'fit-content' }}
-      >
-        <ExternalLinkIcon size="1em" display="block" />
-      </HoverableButton>
-    </div>
+    <button onClick={setFilter} style={style}>
+      {label}
+    </button>
   );
 };
 

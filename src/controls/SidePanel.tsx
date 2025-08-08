@@ -19,7 +19,7 @@ import ViewSelector from './selectors/ViewSelector';
 import './controls.css';
 
 const SidePanel: React.FC = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(true);
   const [panelWidth, setPanelWidth] = React.useState(300); // but will change to pixels on resize
 
   // maybe collapse the panel if we click outside -- do UX testing first

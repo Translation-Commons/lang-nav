@@ -16,13 +16,14 @@ export enum OptionsDisplay {
 type Props<T extends React.Key> = {
   appearance?: 'rounded' | 'tabs';
   getOptionDescription?: (value: T) => React.ReactNode;
-  getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
+  getOptionLabel?: (value: T) => React.ReactNode;
   onChange: (value: T) => void;
   options: readonly T[];
   optionsDisplay?: OptionsDisplay;
   selected: T | T[];
   selectorDescription?: ReactNode;
   selectorLabel?: ReactNode;
+  selectorStyle?: React.CSSProperties;
 };
 
 function Selector<T extends React.Key>({
@@ -34,13 +35,14 @@ function Selector<T extends React.Key>({
   selected,
   selectorDescription,
   selectorLabel,
+  selectorStyle,
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const optionsRef = useClickOutside(() => setExpanded(false));
   // const optionsRef = useClickOutside(() => setExpanded(true));
 
   return (
-    <SelectorContainer optionsDisplay={optionsDisplay}>
+    <SelectorContainer optionsDisplay={optionsDisplay} manualStyle={selectorStyle}>
       {selectorLabel && (
         <SelectorLabel
           label={selectorLabel}
@@ -86,13 +88,14 @@ function Selector<T extends React.Key>({
 
 const SelectorContainer: React.FC<
   React.PropsWithChildren<{
+    manualStyle?: React.CSSProperties;
     optionsDisplay?: OptionsDisplay;
   }>
-> = ({ children, optionsDisplay }) => {
+> = ({ children, optionsDisplay, manualStyle }) => {
   const style: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'end',
+    alignItems: 'center',
     marginLeft: '0.125em',
     marginRight: '0.5em',
     marginBottom: '0.5em',
@@ -109,7 +112,7 @@ const SelectorContainer: React.FC<
   }
 
   return (
-    <div className={'selector ' + optionsDisplay} style={style}>
+    <div className={'selector ' + optionsDisplay} style={{ ...style, ...manualStyle }}>
       {children}
     </div>
   );
