@@ -20,6 +20,7 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
     fontSize: '1em',
     fontWeight: 'normal',
     margin: '0 -0.125em',
+    borderRadius: '0',
   };
 
   return (
