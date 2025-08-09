@@ -40,15 +40,14 @@ const TerritoryFilterSelector: React.FC = () => {
   }, [territories, filterByScope]);
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'end' }}>
+    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
       <SelectorLabel
         optionsDisplay={OptionsDisplay.ButtonList}
         label="Territory Filter"
         description="Filter results by ones relevant in a territory."
-        style={{ lineHeight: '1.25em' }}
       />
       <TextInput
-        inputStyle={{ minWidth: '10em' }}
+        inputStyle={{ minWidth: '5em' }}
         optionsDisplay={OptionsDisplay.ButtonList}
         getSuggestions={getSuggestions}
         onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}

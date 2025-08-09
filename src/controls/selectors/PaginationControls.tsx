@@ -14,11 +14,20 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
     return <></>;
   }
 
+  const compactStyle: React.CSSProperties = {
+    lineHeight: '1.5',
+    padding: '0em 0.25em',
+    fontSize: '1em',
+    fontWeight: 'normal',
+    margin: '0 -0.125em',
+    borderRadius: '0',
+  };
+
   return (
     <>
       Page:
       <div
-        className="selector compact rounded"
+        className="selector"
         style={{
           marginBottom: 0,
           marginLeft: '0.5em',
@@ -28,12 +37,17 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
           alignItems: 'normal',
         }}
       >
-        <button onClick={() => updatePageParams({ page: 1 })} disabled={currentPage === 1}>
+        <button
+          onClick={() => updatePageParams({ page: 1 })}
+          disabled={currentPage === 1}
+          style={{ ...compactStyle, borderRadius: '1em 0 0 1em' }}
+        >
           <SkipBackIcon size="1em" display="block" />
         </button>
         <button
           onClick={() => updatePageParams({ page: Math.max(1, currentPage - 1) })}
           disabled={currentPage === 1}
+          style={compactStyle}
         >
           <StepBackIcon size="1em" display="block" />
         </button>
@@ -44,18 +58,20 @@ const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
           max={totalPages}
           value={currentPage}
           onChange={(event) => updatePageParams({ page: parseInt(event.target.value) })}
-          style={{ width: 50, textAlign: 'center' }}
+          style={{ ...compactStyle, width: 50, textAlign: 'center' }}
         />
 
         <button
           onClick={() => updatePageParams({ page: Math.min(totalPages, currentPage + 1) })}
           disabled={currentPage >= totalPages}
+          style={compactStyle}
         >
           <StepForwardIcon size="1em" display="block" />
         </button>
         <button
           onClick={() => updatePageParams({ page: totalPages })}
           disabled={currentPage === totalPages}
+          style={{ ...compactStyle, borderRadius: '0 1em 1em 0' }}
         >
           <SkipForwardIcon size="1em" display="block" />
         </button>

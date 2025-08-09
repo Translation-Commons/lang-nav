@@ -113,6 +113,14 @@ code {
   padding: 0.25em;
 }
 
+.highlighted {
+  background: var(--color-text-highlight);
+}
+
+button:hover .highlighted {
+  color: var(--color-text);
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --color-text: #f1f1f1;

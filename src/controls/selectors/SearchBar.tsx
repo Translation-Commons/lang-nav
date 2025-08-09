@@ -15,7 +15,10 @@ const SearchBar: React.FC = () => {
   const border = '0.125em solid var(--color-button-primary)';
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}>
+    <div
+      className="selector"
+      style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}
+    >
       <div
         style={{ marginRight: '-0.125em', border, padding: '0.5em', borderRadius: '1em 0 0 1em' }}
       >

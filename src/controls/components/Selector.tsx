@@ -4,6 +4,7 @@ import HoverableButton from '../../generic/HoverableButton';
 import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
 import { useClickOutside } from '../../generic/useClickOutside';
 
+import { SelectorDropdown } from './SelectorDropdown';
 import SelectorLabel from './SelectorLabel';
 
 export enum OptionsDisplay {
@@ -14,7 +15,6 @@ export enum OptionsDisplay {
 }
 
 type Props<T extends React.Key> = {
-  appearance?: 'rounded' | 'tabs';
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
   onChange: (value: T) => void;
@@ -39,7 +39,6 @@ function Selector<T extends React.Key>({
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const optionsRef = useClickOutside(() => setExpanded(false));
-  // const optionsRef = useClickOutside(() => setExpanded(true));
 
   return (
     <SelectorContainer optionsDisplay={optionsDisplay} manualStyle={selectorStyle}>
@@ -120,7 +119,7 @@ const SelectorContainer: React.FC<
 
 type OptionsContainerProps = {
   isExpanded?: boolean;
-  containerRef?: React.RefObject<HTMLDivElement | null>;
+  containerRef: React.RefObject<HTMLDivElement | null>;
   optionsDisplay?: OptionsDisplay;
 };
 
@@ -145,29 +144,7 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
     case OptionsDisplay.Dropdown:
     case OptionsDisplay.InlineDropdown:
       if (isExpanded) {
-        return (
-          <div style={{ position: 'relative' }} ref={containerRef}>
-            <div
-              className="dropdown"
-              style={{
-                alignItems: 'start',
-                position: 'absolute',
-                display: 'flex',
-                left: '0px',
-                flexDirection: 'column',
-                width: 'fit-content',
-                zIndex: 100,
-                marginTop: optionsDisplay === OptionsDisplay.InlineDropdown ? '0.25em' : '0',
-                backgroundColor: 'var(--color-background)',
-                borderRadius: '1em',
-                maxHeight: '20em',
-                overflowY: 'auto',
-              }}
-            >
-              {children}
-            </div>
-          </div>
-        );
+        return <SelectorDropdown containerRef={containerRef}>{children}</SelectorDropdown>;
       }
       return null;
   }
@@ -295,6 +272,7 @@ export function getOptionStyle(
         style.borderTop = 'none';
       } else if (position === PositionInGroup.Middle) {
         style.margin = '0 0 -0.125em 0';
+        style.borderRadius = '0';
         style.borderTop = 'none';
         style.borderBottom = 'none';
       } else if (position === PositionInGroup.Only) {

@@ -9,9 +9,8 @@ const LimitInput: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'end' }}>
+    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
       <SelectorLabel
-        style={{ lineHeight: '1.25em' }}
         description={`Limit how many results are shown.`}
         label="Item Limit"
         optionsDisplay={OptionsDisplay.ButtonList}

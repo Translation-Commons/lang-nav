@@ -99,31 +99,31 @@ const SidePanelToggleButton: React.FC<{
   panelWidth: number;
 }> = ({ isOpen, onClick, panelWidth }) => {
   return (
-    <div className="selector rounded">
-      <HoverableButton
-        hoverContent={isOpen ? 'Close side panel' : 'Open side panel to customize view'}
-        className={isOpen ? 'selected' : ''}
-        onClick={onClick}
+    <HoverableButton
+      hoverContent={isOpen ? 'Close side panel' : 'Open side panel to customize view'}
+      className={isOpen ? 'selected primary' : 'primary'}
+      onClick={onClick}
+      style={{
+        borderRadius: '1em',
+        padding: '.5em',
+        position: 'fixed',
+        top: '50%',
+        left: isOpen ? panelWidth : '1.5em',
+        transform: 'translateX(-50%) translateY(-50%)', // move it to the center of its position
+        zIndex: 1000,
+        transition: 'left 0.3s ease-in-out',
+      }}
+      aria-label={isOpen ? 'Close side panel' : 'Open side panel to customize view'}
+    >
+      <ChevronRightIcon
+        size="1em"
+        display="block"
         style={{
-          position: 'fixed',
-          top: '50%',
-          left: isOpen ? panelWidth : '1.5em',
-          transform: 'translateX(-50%) translateY(-50%)', // move it to the center of its position
-          zIndex: 1000,
-          transition: 'left 0.3s ease-in-out',
+          transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+          transition: 'transform 0.3s ease-in-out',
         }}
-        aria-label={isOpen ? 'Close side panel' : 'Open side panel to customize view'}
-      >
-        <ChevronRightIcon
-          size="1em"
-          display="block"
-          style={{
-            transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-            transition: 'transform 0.3s ease-in-out',
-          }}
-        />
-      </HoverableButton>
-    </div>
+      />
+    </HoverableButton>
   );
 };
 

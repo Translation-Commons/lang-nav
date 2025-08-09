@@ -1,12 +1,14 @@
 import { XIcon } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import HoverableButton from '../../generic/HoverableButton';
 import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
+import { useAutoAdjustedWidth } from '../../generic/useAutoAdjustedWidth';
 import { PageParamKey, View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
 import { getOptionStyle, OptionsDisplay } from './Selector';
+import { SelectorDropdown } from './SelectorDropdown';
 
 export type Suggestion = {
   objectID?: string;
@@ -38,15 +40,7 @@ const TextInput: React.FC<Props> = ({
   placeholder,
   value,
 }) => {
-  const spanRef = useRef<HTMLSpanElement>(null);
-  const [inputWidth, setInputWidth] = useState(50);
-
-  // Used to calculate the width of the input box
-  useEffect(() => {
-    if (spanRef.current) {
-      setInputWidth(spanRef.current.offsetWidth + 10); // add some buffer
-    }
-  }, [value]);
+  const { CalculateWidthFromHere, width } = useAutoAdjustedWidth(value);
 
   // Using a new variable immediateValue to allow users to edit the input box without causing computational
   // changes that could slow down rendering and cause a bad UX.
@@ -80,33 +74,17 @@ const TextInput: React.FC<Props> = ({
   return (
     <>
       {showSuggestions && suggestions.length > 0 && (
-        <div style={{ position: 'relative' }}>
-          <div
-            className="SelectorPopup"
-            style={{
-              background: 'var(--color-background)',
-              border: 'none',
-              borderRadius: '1em',
-              alignItems: 'start',
-              position: 'absolute',
-              display: 'flex',
-              left: '0px',
-              flexDirection: 'column',
-              width: 'fit-content',
-              zIndex: 100,
-            }}
-          >
-            {suggestions.map((s, i) => (
-              <SuggestionRow
-                key={i}
-                pageParameter={pageParameter}
-                position={getPositionInGroup(i, suggestions.length)}
-                setImmediateValue={setImmediateValue}
-                suggestion={s}
-              />
-            ))}
-          </div>
-        </div>
+        <SelectorDropdown>
+          {suggestions.map((s, i) => (
+            <SuggestionRow
+              key={i}
+              pageParameter={pageParameter}
+              position={getPositionInGroup(i, suggestions.length)}
+              setImmediateValue={setImmediateValue}
+              suggestion={s}
+            />
+          ))}
+        </SelectorDropdown>
       )}
       <input
         type="text"
@@ -120,40 +98,21 @@ const TextInput: React.FC<Props> = ({
         onFocus={() => setShowSuggestions(true)}
         placeholder={placeholder}
         style={{
-          ...(optionsDisplay === OptionsDisplay.ButtonList ? { borderRadius: '0.5em' } : {}),
+          borderRadius: optionsDisplay === OptionsDisplay.ButtonList ? '0.5em' : undefined,
+          padding: '0.5em',
+          lineHeight: '1.5em',
           ...inputStyle,
-          width: inputWidth + 5,
+          width: width + 5,
         }}
       />
-      <span
-        ref={spanRef}
-        style={{
-          position: 'absolute',
-          visibility: 'hidden',
-          whiteSpace: 'pre',
-          font: 'inherit',
-        }}
-      >
-        {value || ' '}
-      </span>
-      <HoverableButton
-        hoverContent="Clear the input"
-        style={
-          optionsDisplay === OptionsDisplay.ButtonList
-            ? { padding: '.5em', borderRadius: '0.5em', border: 'none', marginLeft: '0.5em' }
-            : {
-                marginRight: '0em',
-                borderRadius: '0 1em 1em 0',
-                borderLeft: 'none',
-              }
-        }
+      {CalculateWidthFromHere}
+      <ClearButton
         onClick={() => {
           setImmediateValue('');
           setShowSuggestions(false);
         }}
-      >
-        <XIcon size="1em" display="block" />
-      </HoverableButton>
+        optionsDisplay={optionsDisplay}
+      />
     </>
   );
 };
@@ -202,6 +161,26 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     <button onClick={setFilter} style={style}>
       {label}
     </button>
+  );
+};
+
+const ClearButton: React.FC<{
+  onClick: () => void;
+  optionsDisplay: OptionsDisplay;
+}> = ({ onClick, optionsDisplay }) => {
+  return (
+    <HoverableButton
+      hoverContent="Clear the input"
+      style={{
+        ...(optionsDisplay === OptionsDisplay.ButtonList
+          ? { borderRadius: '0.5em', border: 'none' }
+          : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }),
+        padding: '0.5em',
+      }}
+      onClick={onClick}
+    >
+      <XIcon size="1em" display="block" />
+    </HoverableButton>
   );
 };
 

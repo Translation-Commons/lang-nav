@@ -11,13 +11,6 @@
   margin-top: 0px;
 }
 
-.DetailsPage {
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  text-align: start;
-}
-
 .Details {
   text-align: left;
 }
@@ -63,17 +56,6 @@ a:hover {
   padding: 4px;
 }
 
-.compact button,
-.compact input,
-.compact label,
-button.compact {
-  line-height: 1.5;
-  padding: 0em 0.25em;
-  font-size: 1em;
-  font-weight: normal;
-  margin: 0 -0.125em;
-}
-
 div h1:first-child,
 div h2:first-child,
 div h3:first-child {
@@ -82,10 +64,6 @@ div h3:first-child {
 
 div.section {
   margin-bottom: 1em;
-}
-
-.ViewReports {
-  text-align: start;
 }
 
 .collapsible-report > summary {
@@ -97,14 +75,6 @@ div.section {
   text-align: left;
   font-size: 1.2em;
   margin-bottom: 1em;
-}
-
-.VisibleItemsMeter {
-  display: flex;
-  flex-direction: row;
-  gap: 0.25em;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .hoverableText,
