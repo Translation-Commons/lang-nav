@@ -1,4 +1,6 @@
 import {
+  getEmptyLanguageSourceSpecificData,
+  getBaseLanguageData,
   ISO6391LanguageCode,
   ISO6393LanguageCode,
   ISO6395LanguageCode,
@@ -8,7 +10,6 @@ import {
   LanguagesBySource,
   LanguageScope,
 } from '../types/LanguageTypes';
-import { ObjectType } from '../types/PageParamTypes';
 
 export enum ISOLanguageVitality {
   Living = 'Living',
@@ -74,7 +75,7 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
 }
 
 export async function loadISOLanguages(): Promise<ISOLanguage6393Data[] | void> {
-  return await fetch('data/iso/languages639-3.tsv')
+  return await fetch('data/iso/iso-639-3.tab')
     .then((res) => res.text())
     .then((text) => {
       return text.split('\n').slice(1).map(parseISOLanguage6393Line);
@@ -219,28 +220,19 @@ export function addISOLanguageFamilyData(
     // If the entry is missing, create a new one
     if (familyEntry == null) {
       const sourceSpecific = {
+        ...getEmptyLanguageSourceSpecificData(),
         All: { code: family.code, parentLanguageCode: family.parent, childLanguages: [] },
         ISO: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
         BCP: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
-        UNESCO: { childLanguages: [] }, // Not including lang families in UNESCO's WAL
-        Glottolog: { childLanguages: [] }, // No glottolog data
-        CLDR: { childLanguages: [] }, // CLDR does not include language families
       };
 
       const familyEntry: LanguageData = {
-        type: ObjectType.Language,
-        ID: family.code,
-        codeDisplay: family.code,
-        nameCanonical: name,
-        nameDisplay: name,
+        ...getBaseLanguageData(family.code, name),
         names: [name, family.name],
         scope: LanguageScope.Family,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Language family',
         sourceSpecific,
-        writingSystems: {},
-        locales: [],
-        childLanguages: [],
       };
       languagesBySource.All[family.code] = familyEntry;
       languagesBySource.ISO[family.code] = familyEntry;
@@ -265,8 +257,8 @@ export function addISOLanguageFamilyData(
   // Iterate again to point constituent languages to the language family
   Object.entries(isoLangsToFamilies).forEach(([familyCode, constituentLanguages]) => {
     constituentLanguages.forEach((langCode) => {
-      // Get the langauge using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
-      const lang = languagesBySource.BCP[langCode];
+      // Get the language using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
+      const lang = languagesBySource.BCP[langCode] ?? languagesBySource.ISO[langCode];
       if (lang == null) {
         console.log(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;

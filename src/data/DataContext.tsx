@@ -53,7 +53,6 @@ export const DataProvider: React.FC<{
       const loadSecondaryData = async (coreData: CoreData) => {
         await loadSupplementalData(coreData);
         setLoadProgress(2);
-        // updateLanguageBasedOnSource(coreData, setLanguages, languageSource, localeSeparator);
       };
 
       loadSecondaryData(coreData);

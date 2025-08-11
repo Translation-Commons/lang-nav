@@ -1,11 +1,12 @@
 import {
+  getEmptyLanguageSourceSpecificData,
+  getBaseLanguageData,
   Glottocode,
   LanguageCode,
   LanguageData,
   LanguagesBySource,
   LanguageScope,
 } from '../types/LanguageTypes';
-import { ObjectType } from '../types/PageParamTypes';
 
 const DEBUG = false;
 
@@ -102,15 +103,13 @@ export function addGlottologLanguages(
     if (lang == null) {
       // Create new LanguageData
       const sourceSpecific = {
+        ...getEmptyLanguageSourceSpecificData(),
         All: {
           code: glottoCode,
           scope,
           parentLanguageCode: parentLanguageCode ?? parentGlottocode,
           childLanguages: [],
         },
-        ISO: { childLanguages: [] },
-        BCP: { childLanguages: [] },
-        UNESCO: { childLanguages: [] },
         Glottolog: {
           code: glottoCode,
           name,
@@ -118,22 +117,13 @@ export function addGlottologLanguages(
           parentLanguageCode: parentGlottocode,
           childLanguages: [],
         },
-        CLDR: { childLanguages: [] },
       };
       const newLang: LanguageData = {
-        type: ObjectType.Language,
-        ID: glottoCode,
-        codeDisplay: glottoCode,
-        nameCanonical: name,
-        nameDisplay: name,
-        names: [name],
+        ...getBaseLanguageData(glottoCode, name),
         scope,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Glottolog entry not found in ISO',
         sourceSpecific,
-        writingSystems: {},
-        locales: [],
-        childLanguages: [],
       };
       languagesBySource.All[glottoCode] = newLang;
       languagesBySource.Glottolog[glottoCode] = newLang;
