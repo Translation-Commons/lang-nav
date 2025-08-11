@@ -16,13 +16,12 @@ Glottocode	ISO Code	Name
 <contested>	nai	North American Indian
 <contested>	omv	Omotic
 <contested>	paa	Papuan
-<contested>	phi	Philippine
+<contested>	pqw	Western Malayo-Polynesian
 <contested>	sai	South American Indian
 <contested>	tbq	Tibeto-Burman
-<contested>	pqw	Western Malayo-Polynesian
-<redundant>	sqj	Albanian
 <redundant>	euq	Basque
 <redundant>	qwe	Quechuan
+<redundant>	sqj	Albanian
 abkh1242	ccn	North Caucasian
 afro1255	afa	Afro-Asiatic
 algi1248	aql	Algic
@@ -63,6 +62,7 @@ eski1264	esx	Eskimo-Aleut
 fren1279	cpf	Creoles and pidgins, French‑based
 geji1247	gji	Geji
 germ1287	gem	Germanic
+grea1284	phi	Philippine
 gree1276	grk	Greek
 hmon1336	hmx	Hmong-Mien
 ijoo1239	ijo	Ijo
