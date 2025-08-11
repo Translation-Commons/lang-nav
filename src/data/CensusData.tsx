@@ -16,6 +16,7 @@ const CENSUS_FILENAMES = [
   'data.un.org/bs', // Bahamas 2010 Census downloaded from UN data portal
   'yt', // Mayotte Censuses
   'data.un.org/np', // Nepal 2001 & 2011 Censuses downloaded from UN data portal
+  'lr', // Liberia Censuses
   // Add more census files here as needed
 ];
 

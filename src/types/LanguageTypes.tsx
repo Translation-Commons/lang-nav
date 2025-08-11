@@ -44,6 +44,7 @@ export enum LanguageModality {
   Understands = 'Understands',
   Reading = 'Reading',
   Uses = 'Uses',
+  Ethnicity = 'Ethnicity',
 }
 
 export enum LanguageScope {
