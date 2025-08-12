@@ -60,7 +60,7 @@ const ObjectDetailsPage: React.FC = () => {
   );
 };
 
-const DetailsContainer: React.FC<PropsWithChildren<{ title: ReactNode }>> = ({
+export const DetailsContainer: React.FC<PropsWithChildren<{ title: ReactNode }>> = ({
   children,
   title,
 }) => {
