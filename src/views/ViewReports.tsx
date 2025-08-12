@@ -3,6 +3,7 @@ import React from 'react';
 import { usePageParams } from '../controls/PageParamsContext';
 import { ObjectType } from '../types/PageParamTypes';
 
+import TableOfCountriesWithCensuses from './census/TableOfCountriesWithCensuses';
 import DubiousLanguages from './language/DubiousLanguages';
 import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
 import PotentialLocales from './locale/PotentialLocales';
@@ -33,6 +34,7 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
         </>
       );
     case ObjectType.Census:
+      return <TableOfCountriesWithCensuses />;
     case ObjectType.Territory:
     case ObjectType.WritingSystem:
       return <div>There are no reports for this object type.</div>;
