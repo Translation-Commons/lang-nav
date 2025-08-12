@@ -13,7 +13,10 @@ import VisibleItemsMeter from '../VisibleItemsMeter';
 
 import ObjectDetails from './details/ObjectDetails';
 
-const CARD_MIN_WIDTH = 300; // Including margins
+import ObjectTitle from './ObjectTitle';
+import { DetailsContainer } from './details/ObjectDetailsPage';
+
+const CARD_MIN_WIDTH = 300; 
 
 interface Props<T> {
   objects: T[];
@@ -27,7 +30,6 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   const filterByScope = getScopeFilter();
   const sliceFunction = getSliceFunction<T>();
 
-  // Filter results
   const objectsVisible = useMemo(
     () =>
       sliceFunction(
@@ -40,11 +42,7 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
     [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
   );
 
-  // If there is exactly one visible object we should show the full details
-  // view instead of a list of cards. This mirrors the behaviour of the
-  // dedicated Details view and provides the user with more context about
-  // the single result. We still show the VisibleItemsMeter at the top to
-  // maintain context about the number of filtered objects vs total.
+ 
   if (objectsVisible.length === 1) {
     return (
       <>
