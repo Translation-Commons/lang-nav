@@ -12,11 +12,10 @@ import ViewCard from '../ViewCard';
 import VisibleItemsMeter from '../VisibleItemsMeter';
 
 import ObjectDetails from './details/ObjectDetails';
-
-import ObjectTitle from './ObjectTitle';
 import { DetailsContainer } from './details/ObjectDetailsPage';
+import ObjectTitle from './ObjectTitle';
 
-const CARD_MIN_WIDTH = 300; 
+const CARD_MIN_WIDTH = 300;
 
 interface Props<T> {
   objects: T[];
@@ -42,7 +41,6 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
     [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
   );
 
- 
   if (objectsVisible.length === 1) {
     return (
       <>

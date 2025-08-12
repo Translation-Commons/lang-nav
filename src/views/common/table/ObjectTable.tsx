@@ -12,9 +12,8 @@ import { ObjectData } from '../../../types/DataTypes';
 import { SortBy } from '../../../types/PageParamTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
 import ObjectDetails from '../details/ObjectDetails';
-
-import ObjectTitle from '../ObjectTitle';
 import { DetailsContainer } from '../details/ObjectDetailsPage';
+import ObjectTitle from '../ObjectTitle';
 
 import './tableStyles.css';
 import TableSortButton from './TableSortButton';
@@ -23,7 +22,7 @@ export interface TableColumn<T> {
   isInitiallyVisible?: boolean;
   isNumeric?: boolean;
   key: string;
-  label?: React.ReactNode; 
+  label?: React.ReactNode;
   render: (object: T) => React.ReactNode;
   sortParam?: SortBy;
 }
@@ -129,4 +128,3 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   );
 }
 export default ObjectTable;
-
