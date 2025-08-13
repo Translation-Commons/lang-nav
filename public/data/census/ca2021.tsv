@@ -237,7 +237,7 @@ kat	Georgian	3,010			2,315
 hmx	Hmong-Mien languages	720			615
 ium	Iu Mien				40
 hmz	Sinicized Miao				570
-ine	Indo-European languages	5,849,775			4,210,825
+#ine	Indo-European languages	5,849,775			4,210,825
 sqi	Albanian	38,345			30,700
 hye	Armenian	44,500			37,525
 balt1263	Balto-Slavic languages	820,305			587,015

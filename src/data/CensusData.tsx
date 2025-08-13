@@ -17,6 +17,8 @@ const CENSUS_FILENAMES = [
   'yt', // Mayotte Censuses
   'data.un.org/np', // Nepal 2001 & 2011 Censuses downloaded from UN data portal
   'lr', // Liberia Censuses
+  'us2023', // United States 2023 American Community Surveys
+  'us_asc', // United States American Community Survey
   // Add more census files here as needed
 ];
 
@@ -152,10 +154,14 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
     }
 
     const languageCode = parts[0].trim() as LanguageCode;
-    if (['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCode)) {
+    if (
+      ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCode) ||
+      languageCode.startsWith('#')
+    ) {
       // Skip header and special language codes
       // 'Language Code' is the header, 'mul' is for multiple languages, 'mis' is for missing languages,
       // 'und' is for undefined languages, and 'zxx' is for no linguistic content
+      // '#' is for languages that are technically listed but the data shouldn't be used due to a quality issue
       continue;
     }
 
@@ -191,11 +197,18 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
         console.warn(`Skipping extra population estimate for ${languageCode} in line: ${line}`);
         return;
       }
+      let popEstimate = Number.parseInt(part.replace(/,/g, ''));
+      if (isNaN(popEstimate)) {
+        // If the population estimate is not a number, set it to 1.
+        // We set it to 1, not 0, because we want to show that there is a population registered and usually
+        // non-numbers are values like "too small to disclose the exact amount" but still non-zero.
+        popEstimate = 1;
+      }
       if (censuses[i].languageEstimates[languageCode] != null) {
         // If the language estimate already exists, add the estimate
-        censuses[i].languageEstimates[languageCode] += Number.parseInt(part.replace(/,/g, ''));
+        censuses[i].languageEstimates[languageCode] += popEstimate;
       } else {
-        censuses[i].languageEstimates[languageCode] = Number.parseInt(part.replace(/,/g, ''));
+        censuses[i].languageEstimates[languageCode] = popEstimate;
         censuses[i].languageCount += 1; // Increment the language count for the census
       }
     });
