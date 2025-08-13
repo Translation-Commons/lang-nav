@@ -11,6 +11,9 @@ import { getSortFunction } from '../../../controls/sort';
 import { ObjectData } from '../../../types/DataTypes';
 import { SortBy } from '../../../types/PageParamTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
+import ObjectDetails from '../details/ObjectDetails';
+import { DetailsContainer } from '../details/ObjectDetailsPage';
+import ObjectTitle from '../ObjectTitle';
 
 import './tableStyles.css';
 import TableSortButton from './TableSortButton';
@@ -19,7 +22,7 @@ export interface TableColumn<T> {
   isInitiallyVisible?: boolean;
   isNumeric?: boolean;
   key: string;
-  label?: React.ReactNode; // otherwise will use key as label
+  label?: React.ReactNode;
   render: (object: T) => React.ReactNode;
   sortParam?: SortBy;
 }
@@ -29,9 +32,6 @@ interface Props<T> {
   columns: TableColumn<T>[];
 }
 
-/**
- * A page that shows tips about problems in the data that may need to be addressed
- */
 function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   const { sortBy } = usePageParams();
   const sortFunction = getSortFunction();
@@ -116,6 +116,14 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
           ))}
         </tbody>
       </table>
+
+      {objectsFilteredAndSorted.length === 1 && (
+        <div style={{ marginTop: '1em' }}>
+          <DetailsContainer title={<ObjectTitle object={objectsFilteredAndSorted[0]} />}>
+            <ObjectDetails object={objectsFilteredAndSorted[0]} />
+          </DetailsContainer>
+        </div>
+      )}
     </div>
   );
 }

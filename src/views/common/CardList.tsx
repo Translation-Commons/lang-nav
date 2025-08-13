@@ -11,7 +11,11 @@ import { ObjectData } from '../../types/DataTypes';
 import ViewCard from '../ViewCard';
 import VisibleItemsMeter from '../VisibleItemsMeter';
 
-const CARD_MIN_WIDTH = 300; // Including margins
+import ObjectDetails from './details/ObjectDetails';
+import { DetailsContainer } from './details/ObjectDetailsPage';
+import ObjectTitle from './ObjectTitle';
+
+const CARD_MIN_WIDTH = 300;
 
 interface Props<T> {
   objects: T[];
@@ -25,7 +29,6 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   const filterByScope = getScopeFilter();
   const sliceFunction = getSliceFunction<T>();
 
-  // Filter results
   const objectsVisible = useMemo(
     () =>
       sliceFunction(
@@ -37,6 +40,19 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
       ),
     [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
   );
+
+  if (objectsVisible.length === 1) {
+    return (
+      <>
+        <div style={{ marginBottom: '1em' }}>
+          <VisibleItemsMeter objects={objects} />
+        </div>
+        <DetailsContainer title={<ObjectTitle object={objectsVisible[0]} />}>
+          <ObjectDetails object={objectsVisible[0]} />
+        </DetailsContainer>
+      </>
+    );
+  }
 
   return (
     <>
