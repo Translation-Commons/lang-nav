@@ -4,10 +4,12 @@ import { ObjectType } from './PageParamTypes';
 
 // Unique identifier for the census or other source of population data
 export type CensusID = string; // eg. 'ca2021.2', 'us2013.1'
+
+// Ranked by priority
 export enum CensusCollectorType {
   Government = 'Government',
-  CLDR = 'CLDR',
   Study = 'Study',
+  CLDR = 'CLDR',
 }
 
 export interface CensusData extends ObjectBase {

@@ -13,6 +13,7 @@ import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';
 import { LanguageData, LanguageSource } from '../../types/LanguageTypes';
+import CollapsibleReport from '../common/CollapsibleReport';
 import TreeListRoot from '../common/TreeList/TreeListRoot';
 import ViewCard from '../ViewCard';
 
@@ -50,8 +51,9 @@ const LanguagesWithIdenticalNames: React.FC = () => {
   );
 
   return (
-    <details className="collapsible-report">
-      <summary>Languages with identical names ({Object.keys(langsWithDupNames).length})</summary>
+    <CollapsibleReport
+      title={`Languages with identical names (${Object.keys(langsWithDupNames).length})`}
+    >
       The following languages have identical names. This can happen when merging data from multiple
       sources. It gets confusing to find the right language when names overlap. To fix this we
       should change names with these possible options:
@@ -138,7 +140,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
           </div>
         </div>
       ))}
-    </details>
+    </CollapsibleReport>
   );
 };
 

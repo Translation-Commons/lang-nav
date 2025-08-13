@@ -14,6 +14,7 @@ import {
 } from '../../types/DataTypes';
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
 import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
+import CollapsibleReport from '../common/CollapsibleReport';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTable from '../common/table/ObjectTable';
 
@@ -99,13 +100,10 @@ const SubReport: React.FC<{
 }> = ({ title, children, locales }) => {
   const filterByScope = getScopeFilter();
   return (
-    <details className="collapsible-report">
-      <summary>
-        {title} ({locales.filter(filterByScope).length})
-      </summary>
+    <CollapsibleReport title={`${title} (${locales.filter(filterByScope).length})`}>
       {children}
       <PotentialLocalesTable locales={locales} />
-    </details>
+    </CollapsibleReport>
   );
 };
 

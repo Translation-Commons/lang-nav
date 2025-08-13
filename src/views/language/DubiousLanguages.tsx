@@ -12,6 +12,7 @@ import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import Deemphasized from '../../generic/Deemphasized';
 import { LanguageData } from '../../types/LanguageTypes';
+import CollapsibleReport from '../common/CollapsibleReport';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ViewCard from '../ViewCard';
 
@@ -32,8 +33,7 @@ const DubiousLanguages: React.FC = () => {
     .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]'));
 
   return (
-    <details className="collapsible-report">
-      <summary>Dubious languages ({languages.length})</summary>
+    <CollapsibleReport title={`Dubious languages (${languages.length})`}>
       These languages have strange language codes and maybe should be removed from the list of
       languages. Some possibilities are:
       <ol>
@@ -105,7 +105,7 @@ const DubiousLanguages: React.FC = () => {
           );
         })}
       </div>
-    </details>
+    </CollapsibleReport>
   );
 };
 
