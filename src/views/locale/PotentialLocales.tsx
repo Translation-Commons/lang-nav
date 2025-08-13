@@ -15,7 +15,6 @@ import {
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
 import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
-import { InfoButtonColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
@@ -150,7 +149,6 @@ const PotentialLocalesTable: React.FC<{
           key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
         },
-        InfoButtonColumn,
         {
           key: 'Related Locale',
           render: (object) => {
