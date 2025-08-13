@@ -5,7 +5,7 @@ import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { TerritoryData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const TerritoryTable: React.FC = () => {
@@ -65,7 +65,6 @@ const TerritoryTable: React.FC = () => {
           key: 'Type',
           render: (object) => object.scope,
         },
-        InfoButtonColumn,
       ]}
     />
   );

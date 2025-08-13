@@ -5,7 +5,7 @@ import Deemphasized from '../../generic/Deemphasized';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { CensusData } from '../../types/CensusTypes';
 import { SortBy } from '../../types/PageParamTypes';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const TableOfAllCensuses: React.FC = () => {
@@ -52,7 +52,6 @@ const TableOfAllCensuses: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.Date,
         },
-        InfoButtonColumn,
       ]}
     />
   );

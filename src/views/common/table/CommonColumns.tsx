@@ -1,11 +1,11 @@
-import { InfoIcon } from 'lucide-react';
-
 import { ObjectData } from '../../../types/DataTypes';
 import { SearchableField, SortBy } from '../../../types/PageParamTypes';
 import HoverableObject from '../HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
 
 import { TableColumn } from './ObjectTable';
+
+const NAME_COLUMN_MAX_WIDTH = '20em';
 
 export const CodeColumn: TableColumn<ObjectData> = {
   key: 'ID',
@@ -18,7 +18,9 @@ export const CodeColumn: TableColumn<ObjectData> = {
 export const NameColumn: TableColumn<ObjectData> = {
   key: 'Name',
   render: (object) => (
-    <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.EngName} />
+    <HoverableObject object={object} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
+      <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.EngName} />
+    </HoverableObject>
   ),
   sortParam: SortBy.Name,
 };
@@ -30,13 +32,4 @@ export const EndonymColumn: TableColumn<ObjectData> = {
   ),
   sortParam: SortBy.Endonym,
   isInitiallyVisible: false,
-};
-
-export const InfoButtonColumn: TableColumn<ObjectData> = {
-  key: 'Info',
-  render: (object) => (
-    <HoverableObject object={object} style={{ verticalAlign: 'middle' }}>
-      <InfoIcon size="1em" display="block" />
-    </HoverableObject>
-  ),
 };

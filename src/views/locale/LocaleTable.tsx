@@ -8,12 +8,7 @@ import { LocaleData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
-import {
-  CodeColumn,
-  EndonymColumn,
-  InfoButtonColumn,
-  NameColumn,
-} from '../common/table/CommonColumns';
+import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
@@ -85,7 +80,6 @@ const LocaleTable: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },
-        InfoButtonColumn,
       ]}
     />
   );

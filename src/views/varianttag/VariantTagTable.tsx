@@ -7,7 +7,7 @@ import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { VariantTagData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { getObjectPopulation } from '../common/ObjectField';
-import { CodeColumn, InfoButtonColumn, NameColumn } from '../common/table/CommonColumns';
+import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const VariantTagTable: React.FC = () => {
@@ -56,7 +56,6 @@ const VariantTagTable: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.Population,
         },
-        InfoButtonColumn,
       ]}
     />
   );

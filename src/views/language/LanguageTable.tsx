@@ -10,12 +10,7 @@ import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
-import {
-  CodeColumn,
-  EndonymColumn,
-  InfoButtonColumn,
-  NameColumn,
-} from '../common/table/CommonColumns';
+import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const LanguageTable: React.FC = () => {
@@ -99,7 +94,6 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
         },
-        InfoButtonColumn,
       ]}
     />
   );

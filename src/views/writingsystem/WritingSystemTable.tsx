@@ -5,12 +5,7 @@ import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { WritingSystemData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import PopulationWarning from '../common/PopulationWarning';
-import {
-  CodeColumn,
-  EndonymColumn,
-  InfoButtonColumn,
-  NameColumn,
-} from '../common/table/CommonColumns';
+import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const WritingSystemTable: React.FC = () => {
@@ -46,7 +41,6 @@ const WritingSystemTable: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },
-        InfoButtonColumn,
       ]}
     />
   );
