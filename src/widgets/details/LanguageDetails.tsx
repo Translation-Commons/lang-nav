@@ -7,6 +7,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
+import LanguagePluralInfo from '@entities/language/LanguagePluralInfo';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
@@ -33,6 +34,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageAttributes lang={lang} />
       <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
+      <LanguagePluralInfo lang={lang} />
     </div>
   );
 };
