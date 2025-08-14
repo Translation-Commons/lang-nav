@@ -1,0 +1,70 @@
+import React, { useState } from 'react';
+
+import { getNewURL } from '../controls/PageParamsContext';
+import { ObjectType, PageParamKey, PageParamsOptional, View } from '../types/PageParamTypes';
+
+const CommonObjectives: React.FC = () => {
+  return (
+    <div style={{ textAlign: 'center', margin: '2em auto', maxWidth: '600px' }}>
+      <h2 style={{ marginBottom: '0.5em' }}>Common Objectives</h2>
+      <ul style={{ textAlign: 'left', width: 'fit-content', margin: '0 auto' }}>
+        <Objective
+          label="Find information about a language."
+          inputPlaceholder="Enter a language name"
+          inputParam={PageParamKey.searchString}
+          urlParams={{}}
+        />
+        <Objective
+          label="See the languages in a country."
+          inputPlaceholder="Enter a country"
+          inputParam={PageParamKey.territoryFilter}
+          urlParams={{ view: View.Table, objectType: ObjectType.Locale }}
+        />
+        <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
+      </ul>
+    </div>
+  );
+};
+
+type ObjectiveProps = {
+  label: string;
+  inputPlaceholder?: string;
+  inputParam?: keyof PageParamsOptional;
+  urlParams: PageParamsOptional;
+};
+
+const Objective: React.FC<ObjectiveProps> = ({
+  inputPlaceholder,
+  inputParam,
+  label,
+  urlParams,
+}) => {
+  const [inputText, setInputText] = useState('');
+  let params: PageParamsOptional = { ...urlParams };
+  if (inputParam) params = { [inputParam]: inputText, ...urlParams };
+
+  return (
+    <li>
+      {label}
+      {inputParam && (
+        <input
+          style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
+          placeholder={inputPlaceholder}
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+      )}
+      <GoButton params={params} />
+    </li>
+  );
+};
+
+const GoButton: React.FC<{ params: PageParamsOptional }> = ({ params }) => {
+  return (
+    <a href={`data${getNewURL(params)}`}>
+      <button style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}>GO</button>
+    </a>
+  );
+};
+
+export default CommonObjectives;

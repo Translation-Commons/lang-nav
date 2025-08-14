@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { getNewURL } from '../controls/PageParamsContext';
-import { DEFAULTS_BY_PROFILE, getProfileIcon, ProfileType } from '../controls/Profiles';
-import { PageParamsOptional } from '../types/PageParamTypes';
+import CommonObjectives from './CommonObjectives';
 
 const IntroPage: React.FC = () => {
   return (
@@ -23,21 +21,10 @@ const IntroPage: React.FC = () => {
         geographic distribution, digital support, and writing systems.
       </p>
       <p>
-        To get started, click on the &quot;Data&quot; tab in the navigation bar above. Or select a
-        profile that matches your interests -- this will configure some page settings to get you
-        closer to what you probably want to see.
+        To get started, click on the &quot;Data&quot; tab in the navigation bar above. Or, choose
+        from the common objectives below.
       </p>
-      <div>
-        {Object.values(ProfileType).map((profile) => (
-          <LangNavProfile
-            key={profile}
-            icon={getProfileIcon(profile, 'var(--color-text)')}
-            urlParams={DEFAULTS_BY_PROFILE[profile]}
-          >
-            {profile}
-          </LangNavProfile>
-        ))}
-      </div>
+      <CommonObjectives />
     </IntroPageContainer>
   );
 };
@@ -57,25 +44,5 @@ function IntroPageContainer({ children }: React.PropsWithChildren) {
     </div>
   );
 }
-
-type LangNavProfileProps = {
-  icon: React.ReactNode;
-  urlParams?: PageParamsOptional;
-};
-
-const LangNavProfile: React.FC<React.PropsWithChildren<LangNavProfileProps>> = ({
-  children,
-  urlParams,
-  icon,
-}) => {
-  return (
-    <a href={`data${getNewURL(urlParams ?? {})}`}>
-      <button style={{ padding: '0.5em 1em', margin: '0.5em', borderRadius: '1em' }}>
-        {icon && <div>{icon}</div>}
-        {children}
-      </button>
-    </a>
-  );
-};
 
 export default IntroPage;
