@@ -1,0 +1,73 @@
+#codeDisplay		ca1996	ca2001	ca2006	#ca2011	ca2016	#ca2021
+#nameDisplay		Canada 1996	Canada 2001	Canada 2006	Canada 2011	Canada 2016	Canada 2021
+#isoRegionCode	CA						
+#yearCollected		1996	2001	2006	2011	2016	2021
+#datePublished		1997	2009	2017	2013	2017	2022
+#eligiblePopulation		28,528,125	27,129,865	31,241,030	32,852,325	34,767,255	36,991,980
+#notes	Census - de jure - complete tabulation				numbers don't match the trend this year		missing a lot of languages
+#modality			Spoken	Spoken			
+#domain			Home	Home			
+#acquisitionOrder			L1	L1		Any	Any
+#responsesPerIndividual		1	1		1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27						
+#sampleRate			0.2	0.2			
+#collectorType	Government						
+Language Code	Language Name	ca1996	ca2001	ca2006	ca2011	ca2016	ca2021
+mul	Total	28,528,125	27,129,865	31,241,030	32,852,325	34,767,255	36,991,980
+eng	English	16,890,615	17,352,315	17,882,780	22,254,905	25,897,805	27,434,615
+fra	French	6,636,660	6,703,330	6,817,655	6,886,690	8,152,115	8,359,245
+mul	Other	2,066,140			69,930	1,364,270	446,425
+zho	Chinese	715,640	853,745		805,005	1,290,095	1,346,690
+pan	Punjabi	201,785	271,220	367,505	327,960	568,375	828,955
+sem	Semitic			312,790	37,275	611,545	777,600
+spa	Spanish	212,890	245,500	345,345	248,495	553,500	
+ara	Arabic	148,555	199,940	261,640	183,885	514,195	
+tgl	Tagalog		174,060	235,615	194,690	525,375	
+ita	Italian	484,500	469,485	455,040	136,600	318,245	258,870
+deu	German	450,140	438,085	450,570	93,835	271,865	
+fas	Iranian			159,805	139,865	253,705	
+mul	Indo Pakistani				296,205		
+por	Portuguese	211,290	213,810	219,275	95,565	213,025	231,420
+mul	Native Indian				39,405	228,350	
+rus	Russian			133,580	112,150	194,305	226,300
+mul	African				60,105	215,005	160,195
+pol	Polish	213,410	208,375	211,175	86,195	158,990	140,100
+mul	Indigenous						184,140
+kor	Korean			125,570	105,455	157,220	179,750
+ukr	Ukrainian	162,695		134,500	24,645	69,485	74,570
+mul	Indo Chinese				137,290		
+nld	Dutch	133,805		128,900	10,975	49,180	
+ell	Greek			117,285	49,395	114,915	
+hbs	Serbo-Croatian			12,510	4,815	7,995	111,385
+mul	Pakistani				111,210		
+mul	Creole and Telegu			60,140	35,940	109,335	
+cre	Cree			78,855	40,175	102,560	
+ron	Romanian			78,500	51,655	94,830	90,340
+hun	Hungarian			73,340	20,910	44,145	
+srp	Serbian			51,670	34,380	58,240	61,255
+tur	Turkish			24,740	19,035	35,800	57,655
+jpn	Japanese			40,200	18,960	48,640	55,340
+mul	Scandinavian			43,900			14,955
+iku	Inuktitut				26,775	39,030	38,140
+hye	Armenian			30,130	19,390	34,490	37,620
+ces	Czech			24,450	6,420	16,305	
+oji	Ojibway			24,190	5,720	21,800	
+mis	Malago				22,720		
+fin	Finnish			21,030	2,870	9,025	
+bul	Bulgarian			16,790	12,040	19,330	18,190
+slk	Slovak			18,825	4,735	12,825	
+dan	Danish			18,730	870	6,325	
+yid	Yiddish			16,295	7,155	10,820	
+bat	Baltic			15,335		8,380	7,730
+slv	Slovenian			13,135	2,265	6,165	
+lit	Lithuanian			8,335	2,145	4,895	4,570
+est	Estonian			8,245	1,275	3,345	2,925
+swe	Swedish			8,220	995	5,665	6,305
+nor	Norwegian			7,225	410	2,695	2,875
+lav	Lettish			7,000	1,730		
+vls	Flemish			5,665	395	1,535	1,265
+cel	Celtic			3,330	55	3,175	
+gle	Gaelic			1,815	195	2,520	
+isl	Icelandic			2,090	235	855	
+cym	Welsh			1,405	90	655	
+ale	Eskimo				255		

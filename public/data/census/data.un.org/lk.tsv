@@ -1,0 +1,17 @@
+#codeDisplay		lk2001
+#nameDisplay		Sri Lanka 2001
+#isoRegionCode		LK
+#yearCollected		2001
+#datePublished		2009
+#eligiblePopulation		14,006,337
+#notes		Data does not cover all districts (18 completed, 3 missing, 4 partial). Census - de facto - complete tabulation
+#modality		Spoken
+#age		10+
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	lk2001
+mul	Total	14,006,337
+eng	English	13,012,813
+sin	Sinhalese	2,837,464
+tam	Tamil	2,014,057

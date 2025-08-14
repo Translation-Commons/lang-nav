@@ -19,6 +19,10 @@ const CENSUS_FILENAMES = [
   'lr', // Liberia Censuses
   'us2023', // United States 2023 American Community Surveys
   'us_asc', // United States American Community Survey
+  'data.un.org/pr', // Puerto Rico Censuses downloaded from UN data portal
+  'data.un.org/ca', // Canada Censuses downloaded from UN data portal
+  'data.un.org/fi', // Finland Censuses downloaded from UN data portal
+  'data.un.org/lk', // Sri Lanka Censuses downloaded from UN data portal
   // Add more census files here as needed
 ];
 
@@ -247,7 +251,7 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
     if (coreData.censuses[census.ID] == null) {
       // Drop census tables which have a "#" in the codeDisplay -- that means they are provided for context
       // but LangNav doesn't have a good way to show it.
-      if (census.codeDisplay.includes('#')) {
+      if (census.codeDisplay.startsWith('#')) {
         continue;
       }
 

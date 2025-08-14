@@ -7,7 +7,7 @@
 #respondingPopulation		15,985,167	17,867,823	18,727,528	20,422,229	21,892,063	23,967,365
 #notes		Census - de facto - complete tabulation	Census - de jure - complete tabulation	Including population in off-shore, migratory and shipping. Census - de jure - complete tabulation	Including population in off-shore, migratory and shipping. Census - de jure - complete tabulation	Census - de jure - complete tabulation	No reliance should be placed on small numbers. Census - de jure - complete tabulation
 #age		5+					
-#acqusitionOrder							Any
+#acquisitionOrder							Any
 #responsesPerIndividual		1	1	1	1	1	1+
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27						
 #collectorType	Government						

@@ -1,4 +1,4 @@
-#codeDisplay		us.2000	us.asc.2008	us.asc.2013	us.asc.2021	#us.asc.2021.moe	us.asc.2021.noeng	#us.asc.2021.noeng.moe
+#codeDisplay		us.2000	us.asc.2008	us.asc.2013	us.asc.2021.1	#us.asc.2021.1.moe	us.asc.2021.2	#us.asc.2021.2.moe
 #nameDisplay		US 2000	US ASC 2008	US ASC 2013	US ASC 2021	US ASC 2021 Margin of error	US ASC 2021 Speaks English less than "Very well"	US ASC 2021 Speaks English less than "Very well" margin of error
 #isoRegionCode	US							
 #yearCollected		2000	2008	2013	2021	2021	2021	2021
@@ -16,7 +16,7 @@
 #acquisitionOrder	L1							
 #domain	Home							
 #responsesPerIndividual	1+							
-#eligiblePopulation		262,375,152	280,564,877	291,484,482	310,300,000		310,300,000	
+#eligiblePopulation		262,375,152	280,564,877	291,484,482	310,300,000	310,300,000	310,300,000	310,300,000
 #notes								
 Language Code	Language Name from Source		US ASC 2008	US ASC 2013	US ASC 2021	US ASC 2021 Margin of error	US ASC 2021 Speaks English less than "Very well"	US ASC 2021 Speaks English less than "Very well" margin of error
 mul	Population 5 years and over	262,375,152	280,564,877	291,484,482	310,300,000	4,330	25,540,000	112,900

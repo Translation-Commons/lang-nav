@@ -56,6 +56,7 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
   );
   const sliceFunction = getSliceFunction<T>();
 
+  // TODO don't filter objects for an unrelated page search on a different object type
   const objectsFilteredAndSorted = useMemo(() => {
     return objects
       .filter(scopeFilter)
