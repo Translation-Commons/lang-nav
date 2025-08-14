@@ -41,14 +41,12 @@ const Objective: React.FC<ObjectiveProps> = ({
 }) => {
   const [inputText, setInputText] = useState('');
   let params: PageParamsOptional = { ...urlParams };
-  if (inputParam != null) {
-    params = { [inputParam]: inputText, ...urlParams };
-  }
+  if (inputParam) params = { [inputParam]: inputText, ...urlParams };
 
   return (
     <li>
       {label}
-      {inputParam != null && (
+      {inputParam && (
         <input
           style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
           placeholder={inputPlaceholder}
