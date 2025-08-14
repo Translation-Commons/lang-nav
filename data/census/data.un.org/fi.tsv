@@ -1,0 +1,98 @@
+#codeDisplay		fi2000	fi2010	fi2021
+#nameDisplay		Finland 2000	Finland 2010	Finland 2021
+#isoRegionCode	FI			
+#yearCollected		2000	2010	2021
+#datePublished		2001	2011	2022
+#eligiblePopulation		5,181,115	5,375,276	5,533,793
+#notes	Census - de jure - complete tabulation			
+#modality		Spoken		
+#age				
+#domain		Home		
+#acquisitionOrder		L1		
+#responsesPerIndividual		1	1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	fi2000	fi2010	fi2021
+mul	Total	5,181,115	5,375,276	5,533,793
+fin	Finnish	4,788,497	4,857,903	4,811,067
+swe	Swedish	291,657	291,153	287,871
+rus	Russian	28,205	54,559	84,190
+est	Estonian	10,176	28,493	49,551
+ara	Arabic	4,892	10,415	34,282
+eng	English	6,919	12,855	23,433
+som	Somali	6,454	12,985	22,794
+kur	Kurd	3,115	8,032	15,368
+fas	Persian	1,205	5,020	15,105
+zho	Chinese	2,907	7,546	13,778
+sqi	Albanian	3,293	7,113	12,664
+vie	Vietnamese	3,588	5,637	11,562
+tha	Thai	1,458	5,722	10,553
+mul	Other	2,111	10,124	1,494
+tur	Turkish	2,435	5,374	9,492
+spa	Spanish	1,946	4,594	9,151
+deu	German	3,298	5,447	6,841
+ukr	Ukrainian	337	1,287	5,961
+pol	Polish	1,157	2,883	5,695
+ron	Romanian	604	1,702	5,463
+tgl	Tagalog	568	1,445	5,315
+fra	French	1,585	2,972	4,966
+ben	Bengali	524	1,792	4,749
+nep	Nepali	87	1,194	4,636
+urd	Urdu	309	1,222	3,846
+por	Portuguese	433	1,621	3,558
+ita	Italian	833	1,698	3,130
+bul	Bulgarian	486	1,168	3,114
+hun	Hungarian	1,089	1,947	3,088
+hin	Hindi	428	1,275	2,944
+lav	Latvian	169	810	2,604
+swa	Swahili	133	904	2,560
+bos	Bosnian			2,452
+tam	Tamil	231	951	2,230
+hbs	Serbo-Croatian	2,166	1,400	1,282
+smi	Saami	1,734	1,832	2,008
+nld	Dutch	650	1,233	1,851
+ell	Greek	450	712	1,789
+jpn	Japanese	561	1,104	1,689
+lit	Lithuanian	166	707	1,672
+amh	Amharigna	312	952	1,662
+tir	Tigrigna	76	221	1,662
+pus	Pashto	92	551	1,360
+kin	Kinyarwanda			1,226
+pan	Punjabi	346	729	1,193
+tel	Telugu	52	654	1,138
+uzb	Uzbek			1,095
+yor	Yoruba			1,044
+kor	Korean	126	378	954
+mis	Unknown	104	285	946
+ibo	Ibo (Igbo)	68	388	938
+lin	Lingala	256	660	929
+ces	Czech	240	428	847
+ind	Indonesian	93	305	803
+nor	Norwegian	471	613	781
+che	Chechen			736
+srp	Serbian		256	727
+mya	Burmese	53	534	688
+slk	Slovak	71	283	687
+twi	Twi			670
+dan	Danish	397	464	652
+mar	Marathi			636
+mal	Malayalam			633
+tuk	Turkmen	96	228	568
+aze	Azerbaijani	120	303	534
+aka	Akan			487
+sin	Sinhalese	117	236	472
+heb	Hebrew	263	426	467
+hrv	Croatian	68	142	433
+khm	Cambodian	100	237	376
+mkd	Macedonian	87	194	356
+wol	Wolof	58	165	336
+hye	Armenian	106	228	331
+uig	Uyghur			316
+kan	Kannada			289
+kik	Kikuyu			282
+kat	Georgian	61	124	234
+guj	Gujarati			224
+tat	Tatar	109	156	207
+isl	Icelandic	118	141	166
+kon	Kongo	93	164	156
+akl	Aklanon	106		

@@ -1,0 +1,19 @@
+#codeDisplay		pr2000	pr2010
+#nameDisplay		Puerto Rico 2000	Puerto Rico 2010
+#isoRegionCode	PR		
+#yearCollected		2000	2010
+#datePublished		2009	2015
+#eligiblePopulation		3,515,228	3,498,886
+#notes	Including armed forces stationed in the area. Census - de jure - complete tabulation		
+#age	5+		
+#acqusitionOrder			Any
+#responsesPerIndividual		1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+mul	Total	3,515,228	3,498,886
+spa	Spanish	3,001,286	3,363,190
+eng	English	506,661	158,887
+mul	European	4,003	2,931
+mul	Asian	3,054	973
+mul	Other		403
+mis	Not stated	224	
