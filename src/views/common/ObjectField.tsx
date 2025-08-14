@@ -92,7 +92,7 @@ export function getObjectPopulation(
     case ObjectType.Locale:
       return object.populationSpeaking;
     case ObjectType.Census:
-      return object.languageCount;
+      return object.eligiblePopulation;
     case ObjectType.WritingSystem:
       return (
         object.populationUpperBound + (includeDescendents ? object.populationOfDescendents : 0)
