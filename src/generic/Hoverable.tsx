@@ -10,7 +10,7 @@ type HoverableProps = {
 };
 
 const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, style }) => {
-  const { showHoverCard, hideHoverCard } = useHoverCard();
+  const { showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
 
   if (hoverContent == null) {
     return <>{children}</>;
@@ -20,16 +20,11 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
     showHoverCard(hoverContent, e.clientX, e.clientY);
   };
 
-  const handleMouseMove = (e: React.MouseEvent) => {
-    showHoverCard(hoverContent, e.clientX, e.clientY);
-  };
-
   return (
     <span
       className="hoverableText"
       onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={hideHoverCard}
+      onMouseLeave={onMouseLeaveTriggeringElement}
       onClick={() => {
         hideHoverCard();
         if (onClick != null) onClick();
