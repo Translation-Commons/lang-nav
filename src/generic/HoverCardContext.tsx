@@ -96,37 +96,38 @@ export const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       value={{ showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement }}
     >
       {children}
-      {hoverCard.visible && (
-        <HoverCardContext.Provider
-          value={{
-            showHoverCard: () => null,
-            hideHoverCard: () => null,
-            onMouseLeaveTriggeringElement: () => null,
+      <HoverCardContext.Provider
+        value={{
+          showHoverCard: () => null,
+          hideHoverCard: () => null,
+          onMouseLeaveTriggeringElement: () => null,
+        }}
+      >
+        {/** Prevent hovercard propagation */}
+        <div
+          ref={cardRef}
+          className="HoverCard"
+          style={{
+            background: 'var(--color-background)',
+            borderRadius: '0.5em',
+            padding: '0.8em 1em',
+            margin: '0.5em',
+            position: 'fixed',
+            border: '1px solid var(--color-button-secondary)',
+            boxShadow: '0 4px 12px var(--color-shadow)',
+            zIndex: 9999,
+            maxWidth: '30%',
+            textAlign: 'start',
+            transition: 'opacity 0.6s, top 0.3s, left 0.3s',
+            opacity: hoverCard.visible ? 1 : 0,
+            pointerEvents: hoverCard.visible ? 'auto' : 'none',
+            top: hoverCard.y + 5,
+            left: hoverCard.x + 5,
           }}
         >
-          {/** Prevent hovercard propagation */}
-          <div
-            ref={cardRef}
-            className="HoverCard"
-            style={{
-              background: 'var(--color-background)',
-              borderRadius: '0.5em',
-              padding: '0.8em 1em',
-              margin: '0.5em',
-              position: 'fixed',
-              border: '1px solid var(--color-button-secondary)',
-              boxShadow: '0 4px 12px var(--color-shadow)',
-              zIndex: 9999,
-              maxWidth: '30%',
-              textAlign: 'start',
-              top: hoverCard.y,
-              left: hoverCard.x,
-            }}
-          >
-            {hoverCard.content}
-          </div>
-        </HoverCardContext.Provider>
-      )}
+          {hoverCard.content}
+        </div>
+      </HoverCardContext.Provider>
     </HoverCardContext.Provider>
   );
 };
