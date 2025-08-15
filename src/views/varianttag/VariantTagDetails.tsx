@@ -2,6 +2,7 @@ import React from 'react';
 
 import CommaSeparated from '../../generic/CommaSeparated';
 import { VariantTagData } from '../../types/DataTypes';
+import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
@@ -15,54 +16,35 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
   return (
     <div className="Details">
       <DetailsSection title="Attributes">
-        <div>
-          <label>IANA Code:</label>
-          {ID}
-        </div>
-        <div>
-          <label>Name: </label>
-          {nameDisplay}
-        </div>
-        {description && (
-          <div>
-            <label>Description: </label>
-            {description}
-          </div>
-        )}
-        {dateAdded && (
-          <div>
-            <label>Added: </label>
-            {dateAdded.toLocaleDateString()}
-          </div>
-        )}
+        <DetailsField title="IANA Code:">{ID}</DetailsField>
+        <DetailsField title="Name:">{nameDisplay}</DetailsField>
+        {description && <DetailsField title="Description:">{description}</DetailsField>}
+        {dateAdded && <DetailsField title="Added:">{dateAdded.toLocaleDateString()}</DetailsField>}
       </DetailsSection>
 
       <DetailsSection title="Connections">
         {prefixes.length > 0 && (
-          <div>
-            <label>Declared Prefixes:</label>
+          <DetailsField title="Declared Prefixes:">
             <CommaSeparated>{prefixes}</CommaSeparated>
-          </div>
+          </DetailsField>
         )}
         {languages.length > 0 && (
-          <div>
-            <label>Language:</label>
+          <DetailsField title="Languages:">
             <CommaSeparated>
               {Object.values(languages).map((lang) => (
                 <HoverableObjectName key={lang.ID} object={lang} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
         {locales.length > 0 && (
-          <div>
-            <label>Locales:</label>
+          <DetailsField title="Locales:">
             <CommaSeparated>
               {Object.values(locales).map((locale) => (
                 <HoverableObjectName key={locale.ID} object={locale} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
       </DetailsSection>
     </div>

@@ -4,6 +4,7 @@ import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { getCurrencyCompactLong } from '../../generic/numberUtils';
 import { TerritoryData } from '../../types/DataTypes';
+import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
@@ -28,85 +29,67 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
   return (
     <div className="Details">
       <DetailsSection title="Attributes">
-        <div>
-          <label>Territory ID:</label>
-          {ID}
-        </div>
+        <DetailsField title="Territory ID:">{ID}</DetailsField>
         {!Number.isNaN(population) && (
-          <div>
-            <label>Population:</label>
-            {population.toLocaleString()}
-          </div>
+          <DetailsField title="Population:">{population.toLocaleString()}</DetailsField>
         )}
         {literacyPercent && !Number.isNaN(literacyPercent) && (
-          <div>
-            <label>Literacy:</label>
-            {literacyPercent.toFixed(1)}%
-          </div>
+          <DetailsField title="Literacy:">{literacyPercent.toFixed(1)}%</DetailsField>
         )}
         {gdp && !Number.isNaN(gdp) && (
-          <div>
-            <label>Gross Domestic Product:</label>
-            {getCurrencyCompactLong(gdp)}
-          </div>
+          <DetailsField title="Gross Domestic Product:">{getCurrencyCompactLong(gdp)}</DetailsField>
         )}
       </DetailsSection>
 
       <DetailsSection title="Connections">
         {locales.length > 0 && (
-          <div>
-            <label>Languages:</label>
+          <DetailsField title="Languages:">
             <CommaSeparated>
               {Object.values(locales).map((locale) => (
                 <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
 
         {parentUNRegion != null && (
-          <div>
-            <label>In UN region:</label>
+          <DetailsField title="In UN region:">
             <HoverableObjectName object={parentUNRegion} />
-          </div>
+          </DetailsField>
         )}
         {containsTerritories.length > 0 && (
-          <div>
-            <label>Contains:</label>
+          <DetailsField title="Contains:">
             <CommaSeparated>
               {containsTerritories.sort(getSortFunction()).map((territory) => (
                 <HoverableObjectName key={territory.ID} object={territory} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
 
         {sovereign != null && (
-          <div>
-            <label>Administered by:</label>
+          <DetailsField title="Administered by:">
             <HoverableObjectName object={sovereign} />
-          </div>
+          </DetailsField>
         )}
         {dependentTerritories.length > 0 && (
-          <div>
-            <label>Administers:</label>
+          <DetailsField title="Administers:">
             <CommaSeparated>
               {dependentTerritories.sort(getSortFunction()).map((territory) => (
                 <HoverableObjectName key={territory.ID} object={territory} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
 
         {censuses.length > 0 && (
-          <div>
-            <label>Census Tables:</label>
+          <DetailsField title="Census Tables:">
             <CommaSeparated>
               {censuses.sort(getSortFunction()).map((census) => (
                 <HoverableObjectName key={census.ID} object={census} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
       </DetailsSection>
     </div>

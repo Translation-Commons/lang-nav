@@ -9,6 +9,7 @@ import Hoverable from '../../generic/Hoverable';
 import LinkButton from '../../generic/LinkButton';
 import { LanguageData, LanguageField } from '../../types/LanguageTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
+import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
@@ -45,17 +46,10 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Identification">
       {otherNames.length > 0 && (
-        <div>
-          <label>Other names:</label>
-          {otherNames.join(', ')}
-        </div>
+        <DetailsField title="Other names:">{otherNames.join(', ')}</DetailsField>
       )}
-      <div>
-        <label>Language Code:</label>
-        {lang.ID}
-      </div>
-      <div>
-        <label>Glottocode:</label>
+      <DetailsField title="Language Code:">{lang.ID}</DetailsField>
+      <DetailsField title="Glottocode:">
         {Glottolog.code ? (
           <>
             {Glottolog.code}
@@ -66,9 +60,8 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         ) : (
           <Deemphasized>Not in Glottolog</Deemphasized>
         )}
-      </div>
-      <div>
-        <label>ISO Code:</label>
+      </DetailsField>
+      <DetailsField title="ISO Code:">
         {ISO.code ? (
           <>
             {ISO.code}
@@ -86,9 +79,8 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         ) : (
           <Deemphasized>Not in ISO catalog</Deemphasized>
         )}
-      </div>
-      <div>
-        <label>CLDR Code:</label>
+      </DetailsField>
+      <DetailsField title="CLDR Code:">
         {CLDR.code ? (
           <>
             {CLDR.code}
@@ -101,17 +93,16 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         ) : (
           <Deemphasized>Not in CLDR</Deemphasized>
         )}
-      </div>
+      </DetailsField>
       {ISO.code && (
-        <div>
-          <label>Other external links:</label>
+        <DetailsField title="Other external links:">
           <LinkButton href={`https://www.ethnologue.com/language/${ISO.code}`}>
             Ethnologue
           </LinkButton>
           <LinkButton href={`https://en.wikipedia.org/wiki/ISO_639:${ISO.code}`}>
             Wikipedia
           </LinkButton>
-        </div>
+        </DetailsField>
       )}
     </DetailsSection>
   );
@@ -123,29 +114,25 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Attributes">
       {populationCited && (
-        <div>
-          <label>
-            Population
-            <PopulationWarning />:
-          </label>
+        <DetailsField
+          title={
+            <>
+              Population
+              <PopulationWarning />:
+            </>
+          }
+        >
           {populationCited.toLocaleString()}
-        </div>
+        </DetailsField>
       )}
-      {modality && (
-        <div>
-          <label>Modality:</label>
-          {modality}
-        </div>
-      )}
+      {modality && <DetailsField title="Modality:">{modality}</DetailsField>}
       {primaryWritingSystem && (
-        <div>
-          <label>Primary Writing System:</label>
+        <DetailsField title="Primary Writing System:">
           <HoverableObjectName object={primaryWritingSystem} />
-        </div>
+        </DetailsField>
       )}
       {Object.values(writingSystems).length > 0 && (
-        <div>
-          <label>Writing Systems:</label>
+        <DetailsField title="Writing Systems:">
           <CommaSeparated>
             {Object.values(writingSystems)
               .sort(getSortFunction())
@@ -153,7 +140,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
               ))}
           </CommaSeparated>
-        </div>
+        </DetailsField>
       )}
     </DetailsSection>
   );
@@ -170,36 +157,22 @@ const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }
 
   return (
     <DetailsSection title="Vitality & Viability">
-      {vitalityISO && (
-        <div>
-          <label>ISO Vitality / Status:</label>
-          {vitalityISO}
-        </div>
-      )}
+      {vitalityISO && <DetailsField title="ISO Vitality / Status:">{vitalityISO}</DetailsField>}
       {vitalityEth2013 && (
-        <div>
-          <label>Ethnologue Vitality (2013):</label>
-          {vitalityEth2013}
-        </div>
+        <DetailsField title="Ethnologue Vitality (2013):">{vitalityEth2013}</DetailsField>
       )}
       {vitalityEth2025 && (
-        <div>
-          <label>Ethnologue Vitality (2025):</label>
-          {vitalityEth2025}
-        </div>
+        <DetailsField title="Ethnologue Vitality (2025):">{vitalityEth2025}</DetailsField>
       )}
-      <div>
-        <label>Should use in World Atlas:</label>
+      <DetailsField title="Should use in World Atlas:">
         {viabilityConfidence} ... {viabilityExplanation}
-      </div>
-      <div>
-        <label>CLDR Coverage:</label>
+      </DetailsField>
+      <DetailsField title="CLDR Coverage:">
         <CLDRCoverageText object={lang} />
-      </div>
-      <div>
-        <label>ICU Support:</label>
+      </DetailsField>
+      <DetailsField title="ICU Support:">
         <ICUSupportStatus object={lang} />
-      </div>
+      </DetailsField>
     </DetailsSection>
   );
 };
@@ -216,30 +189,26 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Connections">
       {ISO.parentLanguage && (
-        <div>
-          <label>ISO group:</label>
+        <DetailsField title="ISO group:">
           <HoverableObjectName object={ISO.parentLanguage} />
-        </div>
+        </DetailsField>
       )}
       {Glottolog.parentLanguage && (
-        <div>
-          <label>Glottolog group:</label>
+        <DetailsField title="Glottolog group:">
           <HoverableObjectName object={Glottolog.parentLanguage} />
-        </div>
+        </DetailsField>
       )}
       {variantTags && variantTags.length > 0 && (
-        <div>
-          <label>Variant Tags:</label>
+        <DetailsField title="Variant Tags:">
           <CommaSeparated>
             {variantTags.map((tag) => (
               <HoverableObjectName key={tag.ID} object={tag} />
             ))}
           </CommaSeparated>
-        </div>
+        </DetailsField>
       )}
-      <div style={{ display: 'flex' }}>
-        <div>
-          <label>Descendent Languages:</label>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        <DetailsField title="Descendent Languages:">
           {childLanguages.length > 0 ? (
             <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSource, sortFunction)} />
           ) : (
@@ -247,9 +216,8 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               <Deemphasized>No languages come from this language.</Deemphasized>
             </div>
           )}
-        </div>
-        <div>
-          <label>Locales:</label>
+        </DetailsField>
+        <DetailsField title="Locales:">
           {lang.locales.length > 0 ? (
             <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction)} />
           ) : (
@@ -257,7 +225,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               <Deemphasized>There are no recorded locales for this language.</Deemphasized>
             </div>
           )}
-        </div>
+        </DetailsField>
       </div>
     </DetailsSection>
   );

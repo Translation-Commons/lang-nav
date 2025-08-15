@@ -3,6 +3,8 @@ import React from 'react';
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { WritingSystemData } from '../../types/DataTypes';
+import DetailsField from '../common/details/DetailsField';
+import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
 
@@ -29,59 +31,48 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
 
   return (
     <div className="Details">
-      <div>
-        <h3>Attributes</h3>
-        <div>
-          <label>Scope:</label>
-          {scope}
-        </div>
+      <DetailsSection title="Attributes">
+        <DetailsField title="Scope:">{scope}</DetailsField>
         {rightToLeft != null && (
-          <div>
-            <label>Direction:</label>
+          <DetailsField title="Direction">
             {rightToLeft ? 'Right to Left' : 'Left to Right'}
-          </div>
+          </DetailsField>
         )}
-        {sample && (
-          <div>
-            <label>Sample:</label>
-            {sample}
-          </div>
-        )}
-        <div>
-          <label>Unicode Support:</label>
+        {sample && <DetailsField title="Sample">{sample}</DetailsField>}
+        <DetailsField title="Unicode Support:">
           {unicodeVersion != null ? (
             `since version ${unicodeVersion}`
           ) : (
             <em>Not supported by Unicode</em>
           )}
-        </div>
+        </DetailsField>
         {populationUpperBound > 100 && ( // Values less than 100 are suspcious and probably spurious
-          <div>
-            <label>
-              Population (Upper Bound
-              <PopulationWarning />
-              ):
-            </label>
+          <DetailsField
+            title={
+              <>
+                Population (Upper Bound
+                <PopulationWarning />
+                ):
+              </>
+            }
+          >
             {populationUpperBound.toLocaleString()}
-          </div>
+          </DetailsField>
         )}
-      </div>
+      </DetailsSection>
 
-      <div>
-        <h3>Connections</h3>
+      <DetailsSection title="Connections">
         {primaryLanguageCode != null && (
-          <div>
-            <label>Primary language:</label>
+          <DetailsField title="Primary language:">
             {primaryLanguage != null ? (
               <HoverableObjectName object={primaryLanguage} />
             ) : (
               primaryLanguageCode
             )}
-          </div>
+          </DetailsField>
         )}
         {Object.values(languages).length > 0 && (
-          <div>
-            <label>Languages:</label>
+          <DetailsField title="Languages:">
             <CommaSeparated>
               {Object.values(languages)
                 .sort(getSortFunction())
@@ -89,54 +80,49 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
                   <HoverableObjectName key={lang.ID} object={lang} />
                 ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
 
         {territoryOfOrigin && (
-          <div>
-            <label>Territory of Origin:</label>
+          <DetailsField title="Territory of Origin:">
             <HoverableObjectName object={territoryOfOrigin} />
-          </div>
+          </DetailsField>
         )}
 
         {localesWhereExplicit.length > 0 && (
-          <div>
-            <label>Locales (where writing system is explicit):</label>
+          <DetailsField title="Locales (where writing system is explicit):">
             <CommaSeparated>
               {localesWhereExplicit.sort(getSortFunction()).map((locale) => (
                 <HoverableObjectName key={locale.ID} object={locale} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
 
         {parentWritingSystem && (
-          <div>
-            <label>Originated from:</label>
+          <DetailsField title="Originated from:">
             <HoverableObjectName object={parentWritingSystem} />
-          </div>
+          </DetailsField>
         )}
         {childWritingSystems.length > 0 && (
-          <div>
-            <label>Inspired:</label>
+          <DetailsField title="Inspired:">
             <CommaSeparated>
               {childWritingSystems.sort(getSortFunction()).map((writingSystem) => (
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
         {containsWritingSystems.length > 0 && (
-          <div>
-            <label>Contains:</label>
+          <DetailsField title="Contains:">
             <CommaSeparated>
               {containsWritingSystems.sort(getSortFunction()).map((writingSystem) => (
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
               ))}
             </CommaSeparated>
-          </div>
+          </DetailsField>
         )}
-      </div>
+      </DetailsSection>
     </div>
   );
 };

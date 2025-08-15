@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CensusData } from '../../types/CensusTypes';
+import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
@@ -27,37 +28,20 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
   const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, modality } = census;
   return (
     <DetailsSection title="Primary Information">
-      <div>
-        <label>Territory:</label>
+      <DetailsField title="Territory:">
         {territory != null ? (
           <HoverableObjectName object={territory} />
         ) : (
           <span>{isoRegionCode}</span>
         )}
-      </div>
-      <div>
-        <label>Year:</label> {census.yearCollected}
-      </div>
-      {modality != null && (
-        <div>
-          <label>Modality:</label> {modality}
-        </div>
-      )}
-      {proficiency != null && (
-        <div>
-          <label>Proficiency:</label> {proficiency}
-        </div>
-      )}
+      </DetailsField>
+      <DetailsField title="Year:">{census.yearCollected}</DetailsField>
+      {modality != null && <DetailsField title="Modality:">{modality}</DetailsField>}
+      {proficiency != null && <DetailsField title="Proficiency:">{proficiency}</DetailsField>}
       {acquisitionOrder != null && (
-        <div>
-          <label>Acquisition Order:</label> {acquisitionOrder}
-        </div>
+        <DetailsField title="Acquisition Order:">{acquisitionOrder}</DetailsField>
       )}
-      {domain != null && (
-        <div>
-          <label>Where language used:</label> {domain}
-        </div>
-      )}
+      {domain != null && <DetailsField title="Where language used:">{domain}</DetailsField>}
     </DetailsSection>
   );
 }
@@ -76,44 +60,28 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Population Characteristics">
-      <div>
-        <label>Eligible Population:</label> {eligiblePopulation.toLocaleString()}
-      </div>
+      <DetailsField title="Eligible Population:">
+        {eligiblePopulation.toLocaleString()}
+      </DetailsField>
       {respondingPopulation && (
-        <div>
-          <label>Responding Population:</label> {respondingPopulation.toLocaleString()}
-        </div>
+        <DetailsField title="Responding Population:">
+          {respondingPopulation.toLocaleString()}
+        </DetailsField>
       )}
       {sampleRate && (
-        <div>
-          <label>Sample rate:</label> {(sampleRate * 100).toLocaleString()}%
-        </div>
+        <DetailsField title="Sample rate:">{(sampleRate * 100).toLocaleString()}%</DetailsField>
       )}
       {languagesIncluded != null && (
-        <div>
-          <label>Languages Included:</label> {languagesIncluded}
-        </div>
+        <DetailsField title="Languages Included:">{languagesIncluded}</DetailsField>
       )}
       {geographicScope != null && (
-        <div>
-          <label>Geographic Scope:</label> {geographicScope}
-        </div>
+        <DetailsField title="Geographic Scope:">{geographicScope}</DetailsField>
       )}
-      {age != null && (
-        <div>
-          <label>Age:</label> {age}
-        </div>
-      )}
+      {age != null && <DetailsField title="Age:">{age}</DetailsField>}
       {responsesPerIndividual != null && (
-        <div>
-          <label>Responses per Individual:</label> {responsesPerIndividual}
-        </div>
+        <DetailsField title="Responses per Individual:">{responsesPerIndividual}</DetailsField>
       )}
-      {notes != null && (
-        <div>
-          <label>Notes:</label> {notes}
-        </div>
-      )}
+      {notes != null && <DetailsField title="Notes:">{notes}</DetailsField>}
     </DetailsSection>
   );
 }
@@ -132,45 +100,28 @@ function CensusSourceSection({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Source">
-      <div>
-        <label>Collected by:</label>
+      <DetailsField title="Collected by:">
         {collectorName == null ? collectorType : `${collectorName} (${collectorType})`}
-      </div>
-      {tableName && (
-        <div>
-          <label>Table Name:</label> {tableName}
-        </div>
-      )}
-      {columnName && (
-        <div>
-          <label>Column Name:</label> {columnName}
-        </div>
-      )}
-      {citation && (
-        <div>
-          <label>Citation:</label>
-          {citation}
-        </div>
-      )}
+      </DetailsField>
+      {tableName && <DetailsField title="Table Name:">{tableName}</DetailsField>}
+      {columnName && <DetailsField title="Column Name:">{columnName}</DetailsField>}
+      {citation && <DetailsField title="Citation:">{citation}</DetailsField>}
       {url && (
-        <div>
-          <label>URL:</label>
+        <DetailsField title="URL:">
           <a href={url} target="_blank" rel="noopener noreferrer">
             {url}
           </a>
-        </div>
+        </DetailsField>
       )}
       {datePublished && (
-        <div>
-          <label>Date Published:</label>
+        <DetailsField title="Date Published:">
           {new Date(datePublished).toLocaleDateString()}
-        </div>
+        </DetailsField>
       )}
       {dateAccessed && (
-        <div>
-          <label>Date Accessed:</label>
+        <DetailsField title="Date Accessed:">
           {new Date(dateAccessed).toLocaleDateString()}
-        </div>
+        </DetailsField>
       )}
     </DetailsSection>
   );

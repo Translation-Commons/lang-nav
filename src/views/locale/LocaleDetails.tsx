@@ -4,6 +4,7 @@ import Deemphasized from '../../generic/Deemphasized';
 import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
+import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
@@ -22,10 +23,7 @@ const LocaleDetails: React.FC<Props> = ({ locale }) => {
       <LocalePopulationSection locale={locale} />
       {officialStatus && (
         <DetailsSection title="Other">
-          <div>
-            <label>Government status:</label>
-            {getOfficialLabel(officialStatus)}
-          </div>
+          <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
         </DetailsSection>
       )}
     </div>
@@ -46,8 +44,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
   return (
     <DetailsSection title="Definition">
-      <div>
-        <label>Language:</label>
+      <DetailsField title="Language:">
         {language ? (
           <HoverableObjectName object={language} />
         ) : (
@@ -55,9 +52,8 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
             {languageCode} <Deemphasized>[language not in database]</Deemphasized>
           </span>
         )}
-      </div>
-      <div>
-        <label>Territory:</label>
+      </DetailsField>
+      <DetailsField title="Territory:">
         {territory ? (
           <HoverableObjectName object={territory} />
         ) : (
@@ -65,10 +61,9 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
             {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
           </span>
         )}
-      </div>
+      </DetailsField>
       {explicitScriptCode && (
-        <div>
-          <label>Writing System:</label>
+        <DetailsField title="Writing System:">
           {writingSystem ? (
             <HoverableObjectName object={writingSystem} />
           ) : (
@@ -76,11 +71,10 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
               {explicitScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
             </span>
           )}
-        </div>
+        </DetailsField>
       )}
       {variantTagCode && (
-        <div>
-          <label>Variant:</label>
+        <DetailsField title="Variant Tag:">
           {variantTag ? (
             <HoverableObjectName object={variantTag} />
           ) : (
@@ -88,7 +82,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
               {variantTagCode} <Deemphasized>[variant not in database]</Deemphasized>
             </span>
           )}
-        </div>
+        </DetailsField>
       )}
     </DetailsSection>
   );
@@ -106,41 +100,45 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
   return (
     <DetailsSection title="Population">
-      <div>
-        <label>Speakers:</label>
+      <DetailsField title="Speakers:">
         {populationSpeaking.toLocaleString()}
         {' ['}
         <LocaleCensusCitation locale={locale} />
         {']'}
-      </div>
+      </DetailsField>
       {populationSpeakingPercent != null && (
-        <div>
-          <label style={{ marginLeft: '2em' }}>
-            % in {territory?.scope.toLowerCase() ?? 'territory'}:
-          </label>
+        <DetailsField
+          title={
+            <span style={{ marginLeft: '2em' }}>
+              % in {territory?.scope.toLowerCase() ?? 'territory'}:
+            </span>
+          }
+        >
           {numberToFixedUnlessSmall(populationSpeakingPercent)}%
-        </div>
+        </DetailsField>
       )}
       {populationWriting && territory && (
-        <div>
-          <label>Writers:</label>~{numberToSigFigs(populationWriting, 3).toLocaleString()}
+        <DetailsField title="Writers:">
+          ~{numberToSigFigs(populationWriting, 3).toLocaleString()}
           {' [previous estimate * literacy'}
           {territory.literacyPercent != null && ` (${territory.literacyPercent}%)`}
           {']'}
-        </div>
+        </DetailsField>
       )}
       {populationWritingPercent != null && (
-        <div>
-          <label style={{ marginLeft: '2em' }}>
-            % in {territory?.scope.toLowerCase() ?? 'territory'}:
-          </label>
+        <DetailsField
+          title={
+            <span style={{ marginLeft: '2em' }}>
+              % in {territory?.scope.toLowerCase() ?? 'territory'}:
+            </span>
+          }
+        >
           {numberToFixedUnlessSmall(populationWritingPercent)}%
-        </div>
+        </DetailsField>
       )}
 
       {censusRecords?.length > 0 && (
-        <div>
-          <label>Other Censuses:</label>
+        <DetailsField title="Other Censuses:">
           <table style={{ marginLeft: '2em', borderSpacing: '1em 0' }}>
             <thead>
               <tr>
@@ -174,7 +172,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 ))}
             </tbody>
           </table>
-        </div>
+        </DetailsField>
       )}
     </DetailsSection>
   );
