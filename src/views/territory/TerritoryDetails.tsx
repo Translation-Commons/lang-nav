@@ -4,6 +4,7 @@ import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { getCurrencyCompactLong } from '../../generic/numberUtils';
 import { TerritoryData } from '../../types/DataTypes';
+import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 type Props = {
@@ -26,8 +27,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
 
   return (
     <div className="Details">
-      <div className="section">
-        <h3>Attributes</h3>
+      <DetailsSection title="Attributes">
         <div>
           <label>Territory ID:</label>
           {ID}
@@ -50,10 +50,9 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
             {getCurrencyCompactLong(gdp)}
           </div>
         )}
-      </div>
+      </DetailsSection>
 
-      <div className="section">
-        <h3>Connections</h3>
+      <DetailsSection title="Connections">
         {locales.length > 0 && (
           <div>
             <label>Languages:</label>
@@ -109,7 +108,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
             </CommaSeparated>
           </div>
         )}
-      </div>
+      </DetailsSection>
     </div>
   );
 };

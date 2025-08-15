@@ -279,7 +279,7 @@ function ScrollButton({ href, children }: { href: string; children: ReactNode })
 
 function Section({ id, title, children }: { id: string; title: string; children: ReactNode }) {
   return (
-    <div className="section" id={id} style={{ marginBottom: '2em' }}>
+    <div id={id} style={{ marginBottom: '2em' }}>
       <h2>{title}</h2>
       {children}
     </div>

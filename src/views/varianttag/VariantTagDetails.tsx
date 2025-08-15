@@ -2,6 +2,7 @@ import React from 'react';
 
 import CommaSeparated from '../../generic/CommaSeparated';
 import { VariantTagData } from '../../types/DataTypes';
+import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 type Props = {
@@ -13,8 +14,7 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
 
   return (
     <div className="Details">
-      <div className="section">
-        <h3>Attributes</h3>
+      <DetailsSection title="Attributes">
         <div>
           <label>IANA Code:</label>
           {ID}
@@ -35,10 +35,9 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
             {dateAdded.toLocaleDateString()}
           </div>
         )}
-      </div>
+      </DetailsSection>
 
-      <div className="section">
-        <h3>Connections</h3>
+      <DetailsSection title="Connections">
         {prefixes.length > 0 && (
           <div>
             <label>Declared Prefixes:</label>
@@ -65,7 +64,7 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
             </CommaSeparated>
           </div>
         )}
-      </div>
+      </DetailsSection>
     </div>
   );
 };

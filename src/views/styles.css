@@ -56,10 +56,6 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-div.section {
-  margin-bottom: 1em;
-}
-
 .collapsible-report > summary {
   width: 100%;
   background-color: var(--color-button-secondary);

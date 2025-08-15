@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { CensusData } from '../../types/CensusTypes';
+import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 import TableOfLanguagesInCensus from './TableOfLanguagesInCensus';
@@ -15,10 +16,9 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       <CensusPrimarySection census={census} />
       <CensusPopulationCharacteristics census={census} />
       <CensusSourceSection census={census} />
-      <div className="section">
-        <h3>Languages</h3>
+      <DetailsSection title="Languages">
         <TableOfLanguagesInCensus census={census} />
-      </div>
+      </DetailsSection>
     </div>
   );
 };
@@ -26,7 +26,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
 function CensusPrimarySection({ census }: { census: CensusData }) {
   const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, modality } = census;
   return (
-    <div className="section">
+    <DetailsSection title="Primary Information">
       <div>
         <label>Territory:</label>
         {territory != null ? (
@@ -58,7 +58,7 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
           <label>Where language used:</label> {domain}
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 }
 
@@ -75,8 +75,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
   } = census;
 
   return (
-    <div className="section">
-      <h3>Population Characteristics</h3>
+    <DetailsSection title="Population Characteristics">
       <div>
         <label>Eligible Population:</label> {eligiblePopulation.toLocaleString()}
       </div>
@@ -115,7 +114,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
           <label>Notes:</label> {notes}
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 }
 
@@ -132,8 +131,7 @@ function CensusSourceSection({ census }: { census: CensusData }) {
   } = census;
 
   return (
-    <div className="section">
-      <h3>Source</h3>
+    <DetailsSection title="Source">
       <div>
         <label>Collected by:</label>
         {collectorName == null ? collectorType : `${collectorName} (${collectorType})`}
@@ -174,7 +172,7 @@ function CensusSourceSection({ census }: { census: CensusData }) {
           {new Date(dateAccessed).toLocaleDateString()}
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 }
 

@@ -9,6 +9,7 @@ import Hoverable from '../../generic/Hoverable';
 import LinkButton from '../../generic/LinkButton';
 import { LanguageData, LanguageField } from '../../types/LanguageTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
+import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 import PopulationWarning from '../common/PopulationWarning';
 import TreeListRoot from '../common/TreeList/TreeListRoot';
@@ -42,8 +43,7 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   );
 
   return (
-    <div className="section">
-      <h3>Identification</h3>
+    <DetailsSection title="Identification">
       {otherNames.length > 0 && (
         <div>
           <label>Other names:</label>
@@ -113,7 +113,7 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </LinkButton>
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 };
 
@@ -121,8 +121,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { populationCited, modality, primaryWritingSystem, writingSystems } = lang;
 
   return (
-    <div className="section">
-      <h3>Attributes</h3>
+    <DetailsSection title="Attributes">
       {populationCited && (
         <div>
           <label>
@@ -156,7 +155,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 };
 
@@ -170,8 +169,7 @@ const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }
   } = lang;
 
   return (
-    <div className="section">
-      <h3>Vitality & Viability</h3>
+    <DetailsSection title="Vitality & Viability">
       {vitalityISO && (
         <div>
           <label>ISO Vitality / Status:</label>
@@ -202,7 +200,7 @@ const LanguageVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }
         <label>ICU Support:</label>
         <ICUSupportStatus object={lang} />
       </div>
-    </div>
+    </DetailsSection>
   );
 };
 
@@ -216,8 +214,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   } = lang;
 
   return (
-    <div className="section">
-      <h3>Connections</h3>
+    <DetailsSection title="Connections">
       {ISO.parentLanguage && (
         <div>
           <label>ISO group:</label>
@@ -262,7 +259,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           )}
         </div>
       </div>
-    </div>
+    </DetailsSection>
   );
 };
 

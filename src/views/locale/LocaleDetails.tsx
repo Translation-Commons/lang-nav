@@ -4,6 +4,7 @@ import Deemphasized from '../../generic/Deemphasized';
 import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { LocaleData } from '../../types/DataTypes';
+import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
@@ -20,13 +21,12 @@ const LocaleDetails: React.FC<Props> = ({ locale }) => {
       <LocaleDefinitionSection locale={locale} />
       <LocalePopulationSection locale={locale} />
       {officialStatus && (
-        <div className="section">
-          <h3>Other</h3>
+        <DetailsSection title="Other">
           <div>
             <label>Government status:</label>
             {getOfficialLabel(officialStatus)}
           </div>
-        </div>
+        </DetailsSection>
       )}
     </div>
   );
@@ -45,8 +45,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
   } = locale;
 
   return (
-    <div className="section">
-      <h3>Definition</h3>
+    <DetailsSection title="Definition">
       <div>
         <label>Language:</label>
         {language ? (
@@ -91,7 +90,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           )}
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 };
 
@@ -106,8 +105,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
   } = locale;
 
   return (
-    <div className="section">
-      <h3>Population</h3>
+    <DetailsSection title="Population">
       <div>
         <label>Speakers:</label>
         {populationSpeaking.toLocaleString()}
@@ -178,7 +176,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           </table>
         </div>
       )}
-    </div>
+    </DetailsSection>
   );
 };
 
