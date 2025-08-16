@@ -1,0 +1,19 @@
+#codeDisplay		gu2000	gu2010
+#nameDisplay		Guam 2000	Guam 2010
+#isoRegionCode	GU		
+#yearCollected		2000	2010
+#datePublished		2002	2013
+#eligiblePopulation		138,020	145,069
+#notes		Including armed forces stationed in the area. Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#age	5+		
+#responsesPerIndividual			1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	gu2000	gu2010
+mul	Total	138,020	145,069
+eng	English	52,831	63,238
+fil	Pilipino	30,588	30,720
+cha	Chamorro	30,708	25,827
+mul	#Other Pacific Islands	9,416	14,441
+mul	#Asian	9,624	9,192
+mis	#Unknown		1,651

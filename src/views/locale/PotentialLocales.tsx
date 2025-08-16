@@ -142,6 +142,7 @@ const PotentialLocalesTable: React.FC<{
             object.populationSpeakingPercent &&
             numberToFixedUnlessSmall(object.populationSpeakingPercent),
           isNumeric: true,
+          sortParam: SortBy.RelativePopulation,
         },
         {
           key: 'Population Source',

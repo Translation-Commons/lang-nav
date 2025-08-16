@@ -10,27 +10,43 @@ const CENSUS_FILENAMES = [
   'in2011c16', // India 2011 Census C-16 Mother Tongue
   'in2011c17', // India 2011 Census C-17 Language Multilingualism
   'np2021', // Nepal 2021 Census
-  'data.un.org/au', // Australia Censuses downloaded from UN data portal
-  'data.un.org/ru', // Russia 2010 Census downloaded from UN data portal
   'es2021', // Spain 2021 Census
-  'data.un.org/bs', // Bahamas 2010 Census downloaded from UN data portal
   'yt', // Mayotte Censuses
-  'data.un.org/np', // Nepal 2001 & 2011 Censuses downloaded from UN data portal
   'lr', // Liberia Censuses
   'us2023', // United States 2023 American Community Surveys
   'us_asc', // United States American Community Survey
-  'data.un.org/pr', // Puerto Rico Censuses downloaded from UN data portal
-  'data.un.org/ca', // Canada Censuses downloaded from UN data portal
-  'data.un.org/fi', // Finland Censuses downloaded from UN data portal
-  'data.un.org/lk', // Sri Lanka Censuses downloaded from UN data portal
   // Add more census files here as needed
+];
+
+// Government censuses downloaded from the UN data portal
+const UN_CENSUS_FILENAMES = [
+  'ai',
+  'as',
+  'au',
+  'sc',
+  'ax',
+  'bs',
+  'ie',
+  'ca',
+  'fi',
+  'gu',
+  'lk',
+  'mp',
+  'np',
+  'pr',
+  'ru',
 ];
 
 const DEBUG = false;
 
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
+  const filenames = [
+    ...CENSUS_FILENAMES,
+    ...UN_CENSUS_FILENAMES.map((name) => 'data.un.org/' + name),
+  ];
+
   return await Promise.all(
-    CENSUS_FILENAMES.map(
+    filenames.map(
       async (filename) =>
         await fetch(`data/census/${filename}.tsv`)
           .then((res) => res.text())

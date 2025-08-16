@@ -1,0 +1,15 @@
+#codeDisplay		ax2000
+#nameDisplay		Åland Islands 2000
+#isoRegionCode		AX
+#yearCollected		2000
+#datePublished		2009
+#eligiblePopulation		25,776
+#notes		Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	ax2000
+mul	Total	25,776
+swe	Swedish	24,169
+fin	Finnish	1,238
+mul	Other	369

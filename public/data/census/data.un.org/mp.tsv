@@ -1,0 +1,20 @@
+#codeDisplay		mp2000
+#nameDisplay		Northern Mariana Islands 2000
+#isoRegionCode		MP
+#yearCollected		2000
+#datePublished		2005
+#eligiblePopulation		63,429
+#respondingPopulation		63,429
+#notes		Census - de facto - complete tabulation
+#age		5+
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	mp2000
+mul	Total	63,429
+fil	Pilipino	15,487
+zho	Chinese	14,862
+cha	Chamorro	14,179
+eng	English	6,819
+mul	Other	6,063
+mul	Other Pacific Islands	6,019
