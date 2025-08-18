@@ -1,0 +1,17 @@
+#codeDisplay		as2000
+#nameDisplay		American Samoa 2000
+#isoRegionCode		AS
+#yearCollected		2000
+#datePublished		2001
+#eligiblePopulation		49,471
+#notes		Including armed forces stationed in the area. Census - de jure - complete tabulation
+#age		5+
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	as2000
+mul	Total	49,471
+smo	Samoan	44,833
+eng	English	1,440
+ton	Tongan	1,204
+mul	Other Pacific Islands	1,035
+mul	Asian	769
