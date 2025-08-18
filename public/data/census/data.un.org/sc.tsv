@@ -1,0 +1,16 @@
+#codeDisplay		sc2002
+#nameDisplay		Seychelles 2002
+#isoRegionCode		SC
+#yearCollected		2002
+#datePublished		2005
+#eligiblePopulation		81,755
+#notes		Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	sc2002
+mul	Total	81,755
+crs	Creole	74,593
+eng	English	3,760
+mul	Other	2,951
+fra	French	451

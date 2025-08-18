@@ -1,0 +1,75 @@
+#codeDisplay		lt2001	lt2011	lt2021
+#nameDisplay		Lithuania 2001	Lithuania 2011	Lithuania 2021
+#isoRegionCode	LT			
+#yearCollected		2001	2011	2021
+#datePublished		2003	2014	2022
+#eligiblePopulation		3,483,972	3,026,184	2,810,761
+#notes	Census - de jure - complete tabulation			
+#modality		Spoken		
+#domain		Home		
+#acquisitionOrder		L1		
+#responsesPerIndividual	1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	lt2001	lt2011	lt2021
+mul	Total	3,483,972	3,026,184	2,810,761
+lit	Lithuanian	2,855,780	2,583,745	2,398,353
+rus	Russian	277,318	218,383	190,733
+pol	Polish	195,016	160,506	143,931
+mis	Not stated	121,830	43,906	
+mul	Two languages			49,066
+mul	Other	119	433	17,135
+bel	Belorussian	16,028	7,114	6,708
+ukr	Ukrainian	8,185	5,340	4,835
+rom	Romani (Gypsy)	2,062	1,348	
+lav	Latvian	1,749	1,002	
+deu	German	963	528	
+hye	Armenian	760	575	
+yid	Yiddish	556	41	
+tat	Tatar	478	291	
+aze	Azerbaijani	425	366	
+ron	Moldavian	386	268	
+eng	English	281	293	
+kat	Georgian	189	190	
+est	Estonian	187	123	
+heb	Jewish		170	
+ara	Arabic	139	126	
+kdr	Karaite	119	75	
+fra	French	85	95	
+chv	Chuvash	94	54	
+spa	Spanish	46	94	
+tur	Turkish	32	82	
+dan	Danish	55	78	
+uzb	Uzbek	72	59	
+bul	Bulgarian	57	68	
+fin	Finnish	67	44	
+ron	Romanian	65	65	
+zho	Chinese	51	64	
+hun	Hungarian	59	32	
+vie	Vietnamese	52	54	
+oss	Ossetian	50	27	
+kaz	Kazakh	48	46	
+kom	Komi	47	26	
+ita	Italian	24	45	
+che	Chechen	33	43	
+bak	Bashkir	41	26	
+nld	Dutch	19	37	
+lez	Lezgi	33	24	
+kor	Korean	32	13	
+nor	Norwegian	18	32	
+urd	Urdu	32	14	
+chm	Mari	30	18	
+swe	Swedish	30	26	
+mdf	Moksa-mordvi	28	23	
+ell	Greek	19	26	
+krl	Karelian	26		
+udm	Udmurt	25	17	
+tgk	Tajik	23	14	
+por	Portuguese	14	22	
+heb	Hebrew	21	20	
+hin	Hindi	14	18	
+fas	Persian	17	16	
+tuk	Turkmen	17	8	
+ces	Czech	14	12	
+gag	Gagauz	12	10	
+mis	Unknown		0	

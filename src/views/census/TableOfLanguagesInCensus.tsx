@@ -11,6 +11,7 @@ import { CensusData } from '../../types/CensusTypes';
 import { LocaleData } from '../../types/DataTypes';
 import { ObjectType, SearchableField, SortBy } from '../../types/PageParamTypes';
 import HoverableObject from '../common/HoverableObject';
+import HoverableObjectName from '../common/HoverableObjectName';
 import { ObjectFieldHighlightedByPageSearch } from '../common/ObjectField';
 import { CodeColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
@@ -52,6 +53,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         populationSpeaking,
         populationSpeakingPercent:
           (populationSpeaking * 100) / (census.respondingPopulation || census.eligiblePopulation),
+        populationCensus: census,
       } as LocaleData;
     })
     .filter((loc) => loc != null);
@@ -136,6 +138,16 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             ),
             render: getPopulationDifference,
             isNumeric: true,
+          },
+          {
+            key: 'Primary Territory',
+            render: (loc) => {
+              const territory = loc.language?.locales.sort(
+                (a, b) => b.populationSpeaking - a.populationSpeaking,
+              )[0]?.territory;
+              return territory ? <HoverableObjectName object={territory} /> : null;
+            },
+            isInitiallyVisible: true,
           },
         ]}
       />
