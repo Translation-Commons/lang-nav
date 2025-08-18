@@ -23,18 +23,20 @@ const UN_CENSUS_FILENAMES = [
   'ai',
   'as',
   'au',
-  'sc',
   'ax',
   'bs',
-  'ie',
   'ca',
+  'et',
   'fi',
   'gu',
+  'ie',
   'lk',
+  'lt',
   'mp',
   'np',
   'pr',
   'ru',
+  'sc',
 ];
 
 const DEBUG = false;
