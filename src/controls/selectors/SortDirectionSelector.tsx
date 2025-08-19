@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { toTitleCase } from '../../generic/stringUtils';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';
 
 const SortDirectionSelector: React.FC = () => {
@@ -10,7 +11,7 @@ const SortDirectionSelector: React.FC = () => {
   return (
     <Selector
       selectorLabel="Sort Direction"
-      optionsDisplay={OptionsDisplay.ButtonGroup}
+      display={SelectorDisplay.ButtonGroup}
       options={['normal', 'reverse']}
       getOptionLabel={(direction) => toTitleCase(direction)}
       getOptionDescription={(direction) =>

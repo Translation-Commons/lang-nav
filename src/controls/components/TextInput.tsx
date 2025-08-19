@@ -7,8 +7,9 @@ import { useAutoAdjustedWidth } from '../../generic/useAutoAdjustedWidth';
 import { PageParamKey, View } from '../../types/PageParamTypes';
 import { usePageParams } from '../PageParamsContext';
 
-import { getOptionStyle, OptionsDisplay } from './Selector';
+import { SelectorDisplay } from './SelectorDisplay';
 import { SelectorDropdown } from './SelectorDropdown';
+import { getOptionStyle } from './SelectorOption';
 
 export type Suggestion = {
   objectID?: string;
@@ -20,7 +21,7 @@ type Props = {
   getSuggestions?: (query: string) => Promise<Suggestion[]>;
   inputStyle?: React.CSSProperties;
   onChange: (value: string) => void;
-  optionsDisplay: OptionsDisplay;
+  display: SelectorDisplay;
   pageParameter?: PageParamKey;
   placeholder?: string;
   value: string;
@@ -35,7 +36,7 @@ const TextInput: React.FC<Props> = ({
   getSuggestions = () => [],
   inputStyle,
   onChange,
-  optionsDisplay,
+  display,
   pageParameter,
   placeholder,
   value,
@@ -98,7 +99,7 @@ const TextInput: React.FC<Props> = ({
         onFocus={() => setShowSuggestions(true)}
         placeholder={placeholder}
         style={{
-          borderRadius: optionsDisplay === OptionsDisplay.ButtonList ? '0.5em' : undefined,
+          borderRadius: display === SelectorDisplay.ButtonList ? '0.5em' : undefined,
           padding: '0.5em',
           lineHeight: '1.5em',
           ...inputStyle,
@@ -111,7 +112,7 @@ const TextInput: React.FC<Props> = ({
           setImmediateValue('');
           setShowSuggestions(false);
         }}
-        optionsDisplay={optionsDisplay}
+        display={display}
       />
     </>
   );
@@ -140,7 +141,7 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     updatePageParams({ objectID, view: View.Details, searchString });
   };
   const style = getOptionStyle(
-    OptionsDisplay.Dropdown,
+    SelectorDisplay.Dropdown,
     false, // isSelected is always false here
     position,
   );
@@ -166,13 +167,13 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
 
 const ClearButton: React.FC<{
   onClick: () => void;
-  optionsDisplay: OptionsDisplay;
-}> = ({ onClick, optionsDisplay }) => {
+  display: SelectorDisplay;
+}> = ({ onClick, display }) => {
   return (
     <HoverableButton
       hoverContent="Clear the input"
       style={{
-        ...(optionsDisplay === OptionsDisplay.ButtonList
+        ...(display === SelectorDisplay.ButtonList
           ? { borderRadius: '0.5em', border: 'none' }
           : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }),
         padding: '0.5em',

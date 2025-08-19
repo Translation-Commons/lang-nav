@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { SortBy } from '../../types/PageParamTypes';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';
 import { getSortBysApplicableToObjectType } from '../sort';
 
@@ -16,7 +17,7 @@ const SortBySelector: React.FC = () => {
       options={Object.values(SortBy).filter((sb) => applicableSortBys.includes(sb))}
       onChange={(sortBy: SortBy) => updatePageParams({ sortBy })}
       selected={sortBy}
-      optionsDisplay={OptionsDisplay.ButtonList}
+      display={SelectorDisplay.ButtonList}
     />
   );
 };

@@ -1,25 +1,19 @@
 import React, { ReactNode, useState } from 'react';
 
-import HoverableButton from '../../generic/HoverableButton';
-import { getPositionInGroup, PositionInGroup } from '../../generic/PositionInGroup';
+import { getPositionInGroup } from '../../generic/PositionInGroup';
 import { useClickOutside } from '../../generic/useClickOutside';
 
+import { SelectorDisplay } from './SelectorDisplay';
 import { SelectorDropdown } from './SelectorDropdown';
 import SelectorLabel from './SelectorLabel';
-
-export enum OptionsDisplay {
-  Dropdown = 'dropdown', // Formatting is still off for these
-  InlineDropdown = 'inlineDropdown', // Used to be inline with text
-  ButtonGroup = 'buttonGroup', // Unsure if we want to keep this
-  ButtonList = 'buttonList',
-}
+import SelectorOption from './SelectorOption';
 
 type Props<T extends React.Key> = {
+  display?: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
   onChange: (value: T) => void;
   options: readonly T[];
-  optionsDisplay?: OptionsDisplay;
   selected: T | T[];
   selectorDescription?: ReactNode;
   selectorLabel?: ReactNode;
@@ -27,11 +21,11 @@ type Props<T extends React.Key> = {
 };
 
 function Selector<T extends React.Key>({
+  display = SelectorDisplay.ButtonList,
   getOptionDescription = () => undefined,
   getOptionLabel = (val) => val as string,
   onChange,
   options,
-  optionsDisplay = OptionsDisplay.ButtonList,
   selected,
   selectorDescription,
   selectorLabel,
@@ -41,21 +35,13 @@ function Selector<T extends React.Key>({
   const optionsRef = useClickOutside(() => setExpanded(false));
 
   return (
-    <SelectorContainer optionsDisplay={optionsDisplay} manualStyle={selectorStyle}>
+    <SelectorContainer display={display} manualStyle={selectorStyle}>
       {selectorLabel && (
-        <SelectorLabel
-          label={selectorLabel}
-          description={selectorDescription}
-          optionsDisplay={optionsDisplay}
-        />
+        <SelectorLabel label={selectorLabel} description={selectorDescription} display={display} />
       )}
 
       {/* The dropdown menu or the button list */}
-      <OptionsContainer
-        isExpanded={expanded}
-        containerRef={optionsRef}
-        optionsDisplay={optionsDisplay}
-      >
+      <OptionsContainer isExpanded={expanded} containerRef={optionsRef} display={display}>
         <Options<T>
           getOptionDescription={getOptionDescription}
           getOptionLabel={getOptionLabel}
@@ -64,20 +50,20 @@ function Selector<T extends React.Key>({
             onChange(option);
           }}
           options={options}
-          optionsDisplay={optionsDisplay}
+          display={display}
           selected={selected}
         />
       </OptionsContainer>
 
       {/* Standalone option to open/close the dropdown menu */}
-      {(optionsDisplay === OptionsDisplay.Dropdown ||
-        optionsDisplay === OptionsDisplay.InlineDropdown) && (
+      {(display === SelectorDisplay.Dropdown || display === SelectorDisplay.InlineDropdown) && (
         <SelectorOption<T>
           getOptionDescription={getOptionDescription}
-          getOptionLabel={(opt) => `${getOptionLabel(opt)} ${expanded ? `▼` : `▶`}`}
+          getOptionLabel={getOptionLabel}
+          labelSuffix={expanded ? ' ▼' : ' ▶'}
           onClick={() => setExpanded((prev) => !prev)}
-          option={Array.isArray(selected) ? selected[0] : selected}
-          optionsDisplay={optionsDisplay}
+          option={selected}
+          display={display}
           isSelected={true}
         />
       )}
@@ -88,9 +74,9 @@ function Selector<T extends React.Key>({
 const SelectorContainer: React.FC<
   React.PropsWithChildren<{
     manualStyle?: React.CSSProperties;
-    optionsDisplay?: OptionsDisplay;
+    display?: SelectorDisplay;
   }>
-> = ({ children, optionsDisplay, manualStyle }) => {
+> = ({ children, display, manualStyle }) => {
   const style: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'row',
@@ -99,19 +85,19 @@ const SelectorContainer: React.FC<
     marginRight: '0.5em',
     marginBottom: '0.5em',
   };
-  if (optionsDisplay === OptionsDisplay.ButtonList) {
+  if (display === SelectorDisplay.ButtonList) {
     style.flexDirection = 'column';
     style.alignItems = 'start';
-  } else if (optionsDisplay === OptionsDisplay.InlineDropdown) {
+  } else if (display === SelectorDisplay.InlineDropdown) {
     style.marginLeft = '0';
     style.marginRight = '0';
     style.marginBottom = '0';
-  } else if (optionsDisplay === OptionsDisplay.ButtonGroup) {
+  } else if (display === SelectorDisplay.ButtonGroup) {
     style.gap = '-0.125em'; // Overlap the buttons slightly
   }
 
   return (
-    <div className={'selector ' + optionsDisplay} style={{ ...style, ...manualStyle }}>
+    <div className={'selector ' + display} style={{ ...style, ...manualStyle }}>
       {children}
     </div>
   );
@@ -120,17 +106,17 @@ const SelectorContainer: React.FC<
 type OptionsContainerProps = {
   isExpanded?: boolean;
   containerRef: React.RefObject<HTMLDivElement | null>;
-  optionsDisplay?: OptionsDisplay;
+  display?: SelectorDisplay;
 };
 
 const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>> = ({
   children,
   containerRef,
   isExpanded,
-  optionsDisplay,
+  display,
 }) => {
-  switch (optionsDisplay) {
-    case OptionsDisplay.ButtonList:
+  switch (display) {
+    case SelectorDisplay.ButtonList:
       return (
         <div
           ref={containerRef}
@@ -139,10 +125,10 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
           {children}
         </div>
       );
-    case OptionsDisplay.ButtonGroup:
+    case SelectorDisplay.ButtonGroup:
       return <>{children}</>;
-    case OptionsDisplay.Dropdown:
-    case OptionsDisplay.InlineDropdown:
+    case SelectorDisplay.Dropdown:
+    case SelectorDisplay.InlineDropdown:
       if (isExpanded) {
         return <SelectorDropdown containerRef={containerRef}>{children}</SelectorDropdown>;
       }
@@ -151,20 +137,20 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
 };
 
 type OptionsProps<T extends React.Key> = {
+  display: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
   onClick: (value: T) => void;
   options: readonly T[];
   selected: T | T[];
-  optionsDisplay: OptionsDisplay;
 };
 
 function Options<T extends React.Key>({
+  display,
   getOptionDescription = () => undefined,
-  getOptionLabel = (val) => val as string,
+  getOptionLabel,
   onClick,
   options,
-  optionsDisplay,
   selected,
 }: OptionsProps<T>) {
   return options.map((option, i) => (
@@ -174,117 +160,11 @@ function Options<T extends React.Key>({
       getOptionLabel={getOptionLabel}
       onClick={onClick}
       option={option}
-      optionsDisplay={optionsDisplay}
+      display={display}
       isSelected={Array.isArray(selected) ? selected.includes(option) : selected === option}
       position={getPositionInGroup(i, options.length)}
     />
   ));
-}
-
-type OptionProps<T extends React.Key> = {
-  getOptionDescription?: (value: T) => React.ReactNode;
-  getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
-  isSelected: boolean;
-  onClick: (value: T) => void;
-  option: T;
-  optionsDisplay: OptionsDisplay;
-  position?: PositionInGroup; // used for styling
-};
-
-function SelectorOption<T extends React.Key>({
-  getOptionDescription = () => undefined,
-  getOptionLabel = (val: T) => val as string,
-  isSelected,
-  onClick,
-  option,
-  optionsDisplay,
-  position = PositionInGroup.Standalone,
-}: OptionProps<T>) {
-  let className = 'selectorOption';
-  if (isSelected) className += ' selected';
-  if (!isSelected) className += ' unselected';
-  if (optionsDisplay === OptionsDisplay.InlineDropdown && position === PositionInGroup.Standalone)
-    className += ' hoverableText';
-  return (
-    <HoverableButton
-      className={className}
-      hoverContent={getOptionDescription(option)}
-      onClick={() => onClick(option)}
-      style={getOptionStyle(optionsDisplay, isSelected, position)}
-    >
-      {getOptionLabel(option)}
-    </HoverableButton>
-  );
-}
-
-export function getOptionStyle(
-  optionsDisplay: OptionsDisplay,
-  isSelected: boolean,
-  position: PositionInGroup,
-): React.CSSProperties {
-  // Standard option style
-  const style: React.CSSProperties = {
-    border: '0.125em solid var(--color-button-primary)',
-    borderRadius: '0px',
-    cursor: 'pointer',
-    lineHeight: '1em',
-    padding: '0.5em',
-    whiteSpace: 'nowrap',
-  };
-  // Customize based on position and display type
-  switch (optionsDisplay) {
-    case OptionsDisplay.ButtonGroup:
-      if (position === PositionInGroup.Last) {
-        style.marginLeft = '-0.125em';
-        style.borderRadius = '0 1em 1em 0';
-      } else if (position === PositionInGroup.First) {
-        style.borderRadius = '1em 0 0 1em';
-      } else if (position === PositionInGroup.Middle) {
-        style.marginLeft = '-0.125em';
-      }
-      break;
-    case OptionsDisplay.ButtonList:
-      style.borderRadius = '1em';
-      if (!isSelected) style.border = '0.125em solid var(--color-button-secondary)';
-      break;
-    case OptionsDisplay.InlineDropdown:
-      // The standalone option should match the regular page text
-      if (position === PositionInGroup.Standalone) {
-        style.margin = '-0.25em';
-        style.border = 'none';
-        style.borderRadius = '.5em';
-        style.padding = '0.25em';
-        return style;
-      }
-      // otherwise return the Dropdown style
-      return getOptionStyle(OptionsDisplay.Dropdown, isSelected, position);
-    case OptionsDisplay.Dropdown:
-      style.textAlign = 'left';
-      style.width = '100%';
-      style.borderRadius = undefined;
-      if (position === PositionInGroup.First) {
-        style.borderRadius = '1em 1em 0 0';
-        style.margin = '0 0 -0.125em 0';
-        style.borderBottom = 'none';
-      } else if (position === PositionInGroup.Last) {
-        style.borderRadius = '0 0 1em 1em';
-        style.margin = '0';
-        style.borderTop = 'none';
-      } else if (position === PositionInGroup.Middle) {
-        style.margin = '0 0 -0.125em 0';
-        style.borderRadius = '0';
-        style.borderTop = 'none';
-        style.borderBottom = 'none';
-      } else if (position === PositionInGroup.Only) {
-        style.borderRadius = '1em';
-      } else if (position === PositionInGroup.Standalone) {
-        style.borderRadius = '1em';
-        style.width = 'fit-content';
-      }
-      break;
-  }
-
-  return style;
 }
 
 export default Selector;

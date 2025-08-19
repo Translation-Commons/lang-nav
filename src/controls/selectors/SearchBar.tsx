@@ -2,7 +2,7 @@ import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
 import { PageParamKey } from '../../types/PageParamTypes';
-import { OptionsDisplay } from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';
 
@@ -28,7 +28,7 @@ const SearchBar: React.FC = () => {
         inputStyle={{ minWidth: '20em', marginRight: '-0.125em', borderRight: 'none' }}
         getSuggestions={getSearchSuggestions}
         onChange={(searchString: string) => updatePageParams({ searchString })}
-        optionsDisplay={OptionsDisplay.ButtonGroup}
+        display={SelectorDisplay.ButtonGroup}
         placeholder="search"
         pageParameter={PageParamKey.searchString}
         value={searchString}

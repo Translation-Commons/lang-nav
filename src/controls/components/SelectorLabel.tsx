@@ -3,18 +3,18 @@ import React, { ReactNode } from 'react';
 
 import Hoverable from '../../generic/Hoverable';
 
-import { OptionsDisplay } from './Selector';
+import { SelectorDisplay } from './SelectorDisplay';
 
 type Props = {
   label?: ReactNode;
   description?: ReactNode;
-  optionsDisplay: OptionsDisplay;
+  display: SelectorDisplay;
 };
 
-const SelectorLabel: React.FC<Props> = ({ label, description, optionsDisplay }) => {
+const SelectorLabel: React.FC<Props> = ({ label, description, display }) => {
   if (label == null) return null;
   return (
-    <span style={getStyle(optionsDisplay)}>
+    <span style={getStyle(display)}>
       <div>{label}</div>
       {description && (
         <Hoverable hoverContent={description}>
@@ -25,7 +25,7 @@ const SelectorLabel: React.FC<Props> = ({ label, description, optionsDisplay }) 
   );
 };
 
-function getStyle(optionsDisplay: OptionsDisplay): React.CSSProperties {
+function getStyle(display: SelectorDisplay): React.CSSProperties {
   const style: React.CSSProperties = {
     display: 'flex',
     gap: '0.25em',
@@ -38,19 +38,19 @@ function getStyle(optionsDisplay: OptionsDisplay): React.CSSProperties {
     borderRadius: '1em',
   };
 
-  switch (optionsDisplay) {
-    case OptionsDisplay.ButtonGroup:
+  switch (display) {
+    case SelectorDisplay.ButtonGroup:
       style.borderRadius = '1em 0 0 1em';
       style.marginLeft = '-0.125em'; // This may just be a remnant of the old style
       style.marginRight = '-0.125em';
       break;
-    case OptionsDisplay.ButtonList:
+    case SelectorDisplay.ButtonList:
       style.borderRadius = '1em 0 0 1em';
       break;
-    case OptionsDisplay.InlineDropdown:
+    case SelectorDisplay.InlineDropdown:
       style.padding = '0 0.5em';
       break;
-    case OptionsDisplay.Dropdown:
+    case SelectorDisplay.Dropdown:
       // nothing special
       break;
   }
