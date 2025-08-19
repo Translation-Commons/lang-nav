@@ -8,7 +8,7 @@ import {
 import { LanguageDictionary, LanguagesBySource } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
-export type VariantIANATag = string; // IANA tag, eg. valencia (for cat-ES-valencia)
+export type VariantIANATag = string; 
 
 export type VariantTagDictionary = Record<VariantIANATag, VariantTagData>;
 
@@ -33,29 +33,7 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
   const variants: VariantTagDictionary = {};
 
   for (const entry of entries) {
-    ////// Example data:
-    // Type: variant
-    // Subtag: baku1926
-    // Description: Unified Turkic Latin Alphabet (Historical)
-    // Added: 2007-04-18
-    // Prefix: az
-    // Prefix: ba
-    // Prefix: crh
-    // Prefix: kk
-    // Prefix: krc
-    // Prefix: ky
-    // Prefix: sah
-    // Prefix: tk
-    // Prefix: tt
-    // Prefix: uz
-    // Comments: Denotes alphabet used in Turkic republics/regions of the
-    //   former USSR in late 1920s, and throughout 1930s, which aspired to
-    //   represent equivalent phonemes in a unified fashion. Also known as: New
-    //   Turkic Alphabet; Birlәşdirilmiş Jeni Tyrk
-    //   Әlifbasь (Birlesdirilmis Jeni Tyrk Elifbasi);
-    //   Jaŋalif (Janalif).
 
-    // Iterate through the lines, filling in new values or
     const data: Record<IANAVariantKey, string[]> = {
       [IANAVariantKey.Type]: [],
       [IANAVariantKey.Subtag]: [],
@@ -67,7 +45,7 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
     let lastKey: IANAVariantKey = IANAVariantKey.Type;
 
     for (const line of entry.split('\n')) {
-      if (line.trim() === '') continue; // Skip empty lines
+      if (line.trim() === '') continue; 
       const [key, value] = line.split(':');
       switch (key) {
         case IANAVariantKey.Type:
@@ -79,17 +57,15 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
           data[key as IANAVariantKey].push(value.trim());
           lastKey = key as IANAVariantKey;
           break;
-        default: // there is no field, its just appended to the prior field like for comments
+        default:
           data[lastKey].push(key.trim());
       }
     }
 
-    if (data.Type[0] !== 'variant') continue; // Only process variants
-
+    if (data.Type[0] !== 'variant') continue; 
     const ianaTag = data.Subtag[0];
-    const name = data.Description.join(' '); // the Description is effectively the name
-    // Extract prefixes (language codes) from the entry
-    // Prefixes are usually language codes but can be composites like zh-Latn-pinyin or oc-lengadoc-grclass
+    const name = data.Description.join(' ');
+    
     const languageCodes = unique(data.Prefix.map((l) => l.split(/\W/)[0]));
     const localeCodes = data.Prefix.map((l) => l + '-' + ianaTag);
     const dateAdded = data.Added[0] ? new Date(data.Added[0]) : undefined;
@@ -100,7 +76,7 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
         ID: ianaTag,
         codeDisplay: ianaTag,
         nameDisplay: name,
-        description: data.Comments.join(' '), // It's called comments but its functionally a description
+        description: data.Comments.join(' '),
         dateAdded,
         prefixes: data.Prefix,
         languageCodes: languageCodes,
@@ -115,7 +91,6 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
   return variants;
 }
 
-// TODO support complex variants like zh-Latn-pinyin or oc-lengadoc-grclass
 export function addIANAVariantLocales(
   languagesBySource: LanguagesBySource,
   locales: Record<BCP47LocaleCode, LocaleData>,
@@ -124,27 +99,60 @@ export function addIANAVariantLocales(
   if (!variants) return;
 
   Object.values(variants).forEach((variant) => {
-    variant.languageCodes.forEach((prefix) => {
-      const bcpLang = languagesBySource.BCP[prefix];
-      if (!bcpLang) return;
+    variant.localeCodes.forEach((fullCode) => {
+      
+      const parts = fullCode.split('-');
+      if (parts.length === 0) return;
+      const languageSubtag = parts[0];
+      const lang = languagesBySource.BCP[languageSubtag];
+      if (!lang) return;
+      const iso639_3 = lang.ID;
 
-      const iso639_3 = bcpLang.ID;
-      const localeCode = `${prefix}_${variant.ID}`;
+      let scriptCode: string | undefined = undefined;
+      let regionCode = '';
+      const variantSubtags: string[] = [];
 
-      locales[localeCode] = {
-        ID: localeCode,
-        languageCode: iso639_3,
-        variantTagCode: variant.ID,
-        nameDisplay: variant.nameDisplay,
-        localeSource: 'IANA',
-        codeDisplay: localeCode,
-        type: ObjectType.Locale,
-        populationSource: PopulationSourceCategory.NoSource,
-        populationSpeaking: 0,
-        censusRecords: [],
-        territoryCode: '',
-        names: [variant.nameDisplay],
-      };
+      for (let i = 1; i < parts.length; i++) {
+        const subtag = parts[i];
+       
+        if (!scriptCode && /^[A-Z][a-z]{3}$/.test(subtag)) {
+          scriptCode = subtag;
+          continue;
+        }
+       
+        if (regionCode === '' && (/^[A-Z]{2}$/.test(subtag) || /^[0-9]{3}$/.test(subtag))) {
+          regionCode = subtag;
+          continue;
+        }
+       
+        variantSubtags.push(subtag);
+      }
+
+     
+      const idParts: string[] = [iso639_3];
+      if (scriptCode) idParts.push(scriptCode);
+      if (regionCode) idParts.push(regionCode);
+      if (variantSubtags.length > 0) idParts.push(...variantSubtags);
+      const localeCode = idParts.join('_');
+
+      
+      if (!locales[localeCode]) {
+        locales[localeCode] = {
+          ID: localeCode,
+          languageCode: iso639_3,
+          territoryCode: regionCode,
+          explicitScriptCode: scriptCode,
+          variantTagCodes: variantSubtags.length > 0 ? variantSubtags : undefined,
+          nameDisplay: variant.nameDisplay,
+          localeSource: 'IANA',
+          codeDisplay: localeCode,
+          type: ObjectType.Locale,
+          populationSource: PopulationSourceCategory.NoSource,
+          populationSpeaking: 0,
+          censusRecords: [],
+          names: [variant.nameDisplay],
+        };
+      }
     });
   });
 }
@@ -154,9 +162,9 @@ export function connectVariantTags(
   languages: LanguageDictionary,
   locales: Record<BCP47LocaleCode, LocaleData>,
 ): void {
-  // Link variants to languages and link languages back to variants
+ 
   Object.values(variantTags).forEach((variant) => {
-    // Link languages to variants
+
     variant.languageCodes.forEach((langCode) => {
       const lang = languages[langCode];
       if (lang) {
@@ -165,25 +173,30 @@ export function connectVariantTags(
         if (!lang.variantTags) lang.variantTags = [];
         lang.variantTags.push(variant);
       } else {
-        // Known missing languages from CLDR
-        // tw (variants akuapem, asante)
-        // sgn (variant blasl)
-        // console.warn(`Language code ${langCode} not found for variant ${variant.ID}`);
+        
       }
     });
   });
 
-  // Link locales to variants and vice versa
   Object.values(locales).forEach((locale) => {
-    const { variantTagCode } = locale;
-    if (!variantTagCode) return; // Skip if no variant tag ID
-    const variant = variantTags[variantTagCode];
-    if (!variant) {
-      console.warn(`Variant tag ${variantTagCode} not found for locale ${locale.ID}`);
-      return;
-    }
+    const { variantTagCodes } = locale;
+    if (!variantTagCodes || variantTagCodes.length === 0) return;
 
-    variant.locales.push(locale);
-    locale.variantTag = variant;
+    const resolvedTags: VariantTagData[] = [];
+    variantTagCodes.forEach((tagCode) => {
+      const variant = variantTags[tagCode];
+      if (!variant) {
+        console.warn(`Variant tag ${tagCode} not found for locale ${locale.ID}`);
+        return;
+      }
+     
+      variant.locales.push(locale);
+      resolvedTags.push(variant);
+    });
+    if (resolvedTags.length > 0) {
+      locale.variantTags = resolvedTags;
+     
+      locale.variantTag = resolvedTags[0];
+    }
   });
 }

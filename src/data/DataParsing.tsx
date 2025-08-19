@@ -32,14 +32,14 @@ export function parseLanguageLine(line: string): LanguageData {
       parentLanguageCode: parentGlottocode,
       childLanguages: [],
     },
-    CLDR: { childLanguages: [] }, // Empty for now
+    CLDR: { childLanguages: [] }, 
   };
   const nameEndonym = parts[3] != '' ? parts[3] : undefined;
 
   return {
     ...getBaseLanguageData(code, nameDisplay),
 
-    scope: undefined, // Added by imports
+    scope: undefined, 
 
     nameCanonical: nameDisplay,
     nameDisplay,
@@ -47,7 +47,7 @@ export function parseLanguageLine(line: string): LanguageData {
     nameEndonym,
     names: [nameDisplay, nameSubtitle, nameEndonym].filter((s) => s != null),
 
-    vitalityISO: undefined, // Added by ISO import
+    vitalityISO: undefined,
     vitalityEth2013: parts[6] != '' ? parts[6] : undefined,
     vitalityEth2025: parts[7] != '' ? parts[7] : undefined,
     digitalSupport: parts[8] != '' ? parts[8] : undefined,
@@ -67,7 +67,11 @@ export function parseLanguageLine(line: string): LanguageData {
 export function parseLocaleLine(line: string): LocaleData {
   const parts = line.split('\t');
   const nameEndonym = parts[2] != '' ? parts[2] : undefined;
-  const variantTagCode = parts[6] != '' ? parts[6].toLowerCase() : undefined;
+
+  const variantTagCodesRaw = parts[6] != '' ? parts[6].toLowerCase() : undefined;
+  const variantTagCodes = variantTagCodesRaw
+    ? variantTagCodesRaw.split('-').filter((v) => v.length > 0)
+    : undefined;
 
   return {
     type: ObjectType.Locale,
@@ -81,12 +85,12 @@ export function parseLocaleLine(line: string): LocaleData {
     languageCode: parts[3],
     territoryCode: parts[4],
     explicitScriptCode: parts[5] != '' ? parts[5] : undefined,
-    variantTagCode,
+    variantTagCodes,
     populationSource: parts[7] as PopulationSourceCategory,
     populationSpeaking: Number.parseInt(parts[8]?.replace(/,/g, '')),
     officialStatus: parts[9] != '' ? (parts[9] as OfficialStatus) : undefined,
 
-    censusRecords: [], // Populated later
+    censusRecords: [],
   };
 }
 
@@ -112,11 +116,9 @@ export function parseWritingSystem(line: string): WritingSystemData {
     parentWritingSystemCode: parts[9] != '' ? parts[9] : null,
     containsWritingSystemsCodes: parts[10] != '' ? parts[10].split(', ') : [],
 
-    // Derived when combining other data
     populationUpperBound: 0,
     populationOfDescendents: 0,
 
-    // References to other objects, filled in with DataAssociations methods
     languages: {},
     localesWhereExplicit: [],
     primaryLanguage: undefined,
