@@ -3,6 +3,7 @@ import { CoreData } from './CoreData';
 import {
   computeLocalePopulationFromCensuses,
   computeLocaleWritingPopulation,
+  computeVariantTagPopulations,
 } from './PopulationData';
 import { computeContainedTerritoryStats, loadTerritoryGDPLiteracy } from './TerritoryData';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
@@ -31,4 +32,7 @@ export async function loadSupplementalData(coreData: CoreData): Promise<void> {
   computeContainedTerritoryStats(coreData.territories['001']);
   computeLocalePopulationFromCensuses(coreData);
   computeLocaleWritingPopulation(coreData.locales);
+
+  // Once locale populations have been computed, update variant tag populations.
+  computeVariantTagPopulations(coreData.variantTags);
 }

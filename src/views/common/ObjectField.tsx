@@ -99,7 +99,24 @@ export function getObjectPopulation(
       );
     case ObjectType.Territory:
       return object.population;
-    case ObjectType.VariantTag:
-      return object.languages.reduce((sum, lang) => sum + (lang.populationCited || 0), 0);
+    case ObjectType.VariantTag: {
+      // For variant tags, attempt to return a cited population first (based on locale data),
+      // otherwise fall back to an upper bound (based on language populations),
+      // and finally fall back to summing language populations if no precomputed values exist.
+      // We cast the object to VariantTagData so we can access the extra properties safely.
+      const variant = object as any;
+      const cited = variant.populationCited;
+      if (typeof cited === 'number' && cited > 0) {
+        return cited;
+      }
+      const upper = variant.populationUpperBound;
+      if (typeof upper === 'number' && upper > 0) {
+        return upper;
+      }
+      // Fallback: sum the populationCited values from associated languages
+      return (variant.languages || []).reduce((sum: number, lang: any) => {
+        return sum + (lang.populationCited || 0);
+      }, 0);
+    }
   }
 }

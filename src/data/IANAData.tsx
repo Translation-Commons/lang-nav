@@ -156,6 +156,9 @@ export function connectVariantTags(
 ): void {
   // Link variants to languages and link languages back to variants
   Object.values(variantTags).forEach((variant) => {
+    // Ensure population upper bound is initialised
+    variant.populationUpperBound = 0;
+
     // Link languages to variants
     variant.languageCodes.forEach((langCode) => {
       const lang = languages[langCode];
@@ -171,6 +174,17 @@ export function connectVariantTags(
         // console.warn(`Language code ${langCode} not found for variant ${variant.ID}`);
       }
     });
+
+    // Compute an upper bound for the potential population of this variant tag.  This is based on
+    // the populations of all languages that this variant declares as a prefix.  It is not meant to
+    // represent actual speaker counts, but rather the maximum number of people who could conceivably
+    // use this variant if every speaker of the associated languages adopted it.  Languages without
+    // a cited population are treated as zero.
+    if (variant.languages && variant.languages.length > 0) {
+      variant.populationUpperBound = variant.languages.reduce((sum, lang) => {
+        return sum + (lang.populationCited || 0);
+      }, 0);
+    }
   });
 
   // Link locales to variants and vice versa

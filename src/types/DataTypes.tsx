@@ -193,4 +193,19 @@ export interface VariantTagData extends ObjectBase {
   // References to other objects
   languages: LanguageData[];
   locales: LocaleData[];
+
+  /**
+   * A lower bound on the number of speakers explicitly citing this variant tag in a census or locale record.
+   * This value is derived by summing the populationSpeaking field of all locales that reference this variant tag.
+   * It may be zero if no locales explicitly cite this variant tag or if population data has not yet been loaded.
+   */
+  populationCited?: number;
+
+  /**
+   * An upper bound estimate of the potential population that could use this variant.
+   * This is computed as the sum of the cited populations of all languages for which this tag is declared as a prefix.
+   * In other words, it represents how many people might speak a language that could employ this variant,
+   * regardless of whether they actually do so.  It is not meant to be an exact speaker count.
+   */
+  populationUpperBound?: number;
 }
