@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useDataContext } from '../../data/DataContext';
 import { SearchableField } from '../../types/PageParamTypes';
 import { getSearchableField, HighlightedObjectField } from '../../views/common/ObjectField';
-import { OptionsDisplay } from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput, { Suggestion } from '../components/TextInput';
 import { getScopeFilter } from '../filter';
@@ -42,13 +42,13 @@ const TerritoryFilterSelector: React.FC = () => {
   return (
     <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
       <SelectorLabel
-        optionsDisplay={OptionsDisplay.ButtonList}
+        display={SelectorDisplay.ButtonList}
         label="Territory Filter"
         description="Filter results by ones relevant in a territory."
       />
       <TextInput
         inputStyle={{ minWidth: '5em' }}
-        optionsDisplay={OptionsDisplay.ButtonList}
+        display={SelectorDisplay.ButtonList}
         getSuggestions={getSuggestions}
         onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}
         placeholder="Filter name or code"

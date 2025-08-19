@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OptionsDisplay } from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';
@@ -13,7 +13,7 @@ const LimitInput: React.FC = () => {
       <SelectorLabel
         description={`Limit how many results are shown.`}
         label="Item Limit"
-        optionsDisplay={OptionsDisplay.ButtonList}
+        display={SelectorDisplay.ButtonList}
       />
       <TextInput
         inputStyle={{ minWidth: '3em' }}
@@ -24,7 +24,7 @@ const LimitInput: React.FC = () => {
           { searchString: '200', label: '200' },
         ]}
         onChange={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
-        optionsDisplay={OptionsDisplay.ButtonList}
+        display={SelectorDisplay.ButtonList}
         placeholder="∞"
         value={limit < 1 || Number.isNaN(limit) ? '' : limit.toString()}
       />

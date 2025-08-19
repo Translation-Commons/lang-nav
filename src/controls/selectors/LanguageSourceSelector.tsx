@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { LanguageSource } from '../../types/LanguageTypes';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';
 
 const LanguageListSourceSelector: React.FC = () => {
@@ -21,7 +22,7 @@ const LanguageListSourceSelector: React.FC = () => {
       selectorLabel="Source of the List of Languages"
       selectorDescription={selectorDescription}
       options={Object.values(LanguageSource)}
-      optionsDisplay={OptionsDisplay.ButtonList}
+      display={SelectorDisplay.ButtonList}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}
       selected={languageSource}
       getOptionDescription={(languageSource) => (
