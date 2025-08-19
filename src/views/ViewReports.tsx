@@ -7,6 +7,7 @@ import TableOfCountriesWithCensuses from './census/TableOfCountriesWithCensuses'
 import DubiousLanguages from './language/DubiousLanguages';
 import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
 import PotentialLocales from './locale/PotentialLocales';
+import LocaleCitationCounts from './locale/LocaleCitationCounts';
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.
@@ -25,7 +26,13 @@ const ViewReports: React.FC = () => {
 const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   switch (objectType) {
     case ObjectType.Locale:
-      return <PotentialLocales />;
+      // For locales we show both a high‑level citation summary and potential locales to add.
+      return (
+        <>
+          <LocaleCitationCounts />
+          <PotentialLocales />
+        </>
+      );
     case ObjectType.Language:
       return (
         <>
