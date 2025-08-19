@@ -5,6 +5,7 @@ import {
   LocaleData,
   LocaleInCensus,
   TerritoryData,
+  VariantTagData,
 } from '../types/DataTypes';
 
 import { CoreData } from './CoreData';
@@ -116,4 +117,21 @@ export function computeLocaleWritingPopulation(locales: Record<BCP47LocaleCode, 
           (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
       }
     });
+}
+
+/**
+ * Compute the cited population for each variant tag based on locales.  After locale populations have been
+ * determined (e.g. via computeLocalePopulationFromCensuses), this function will iterate through all variant
+ * tags and sum the populationSpeaking from their associated locales.  The result is stored on the
+ * populationCited property of each VariantTagData.  If a variant tag has no associated locales or
+ * none of its locales have population information, the cited population will be set to zero.
+ */
+export function computeVariantTagPopulations(variantTags: Record<string, VariantTagData>): void {
+  Object.values(variantTags).forEach((variant) => {
+    // Sum the populationSpeaking for all locales that reference this variant tag
+    const total = variant.locales?.reduce((sum, locale) => {
+      return sum + (locale.populationSpeaking || 0);
+    }, 0) ?? 0;
+    variant.populationCited = total;
+  });
 }

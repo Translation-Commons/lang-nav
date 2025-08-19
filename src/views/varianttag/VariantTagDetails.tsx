@@ -11,7 +11,17 @@ type Props = {
 };
 
 const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
-  const { ID, dateAdded, prefixes, nameDisplay, description, languages, locales } = variantTag;
+  const {
+    ID,
+    dateAdded,
+    prefixes,
+    nameDisplay,
+    description,
+    languages,
+    locales,
+    populationCited,
+    populationUpperBound,
+  } = variantTag as any;
 
   return (
     <div className="Details">
@@ -20,6 +30,12 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
         <DetailsField title="Name:">{nameDisplay}</DetailsField>
         {description && <DetailsField title="Description:">{description}</DetailsField>}
         {dateAdded && <DetailsField title="Added:">{dateAdded.toLocaleDateString()}</DetailsField>}
+        {typeof populationCited === 'number' && populationCited > 0 && (
+          <DetailsField title="Cited Population:">{populationCited.toLocaleString()}</DetailsField>
+        )}
+        {typeof populationUpperBound === 'number' && populationUpperBound > 0 && (
+          <DetailsField title="Potential Population:">{populationUpperBound.toLocaleString()}</DetailsField>
+        )}
       </DetailsSection>
 
       <DetailsSection title="Connections">
