@@ -21,17 +21,14 @@ export function getLocaleCode(
   localeSeparator: LocaleSeparator,
   territoryOverride?: ISO3166Code,
 ): string {
-  const components: string[] = [];
- 
-  components.push(locale.language?.codeDisplay ?? locale.languageCode);
-  if (locale.explicitScriptCode) components.push(locale.explicitScriptCode);
-  const territory = territoryOverride ?? locale.territoryCode;
-  if (territory) components.push(territory);
-  // Include all variant subtags
-  if (locale.variantTagCodes && locale.variantTagCodes.length > 0) {
-    components.push(...locale.variantTagCodes);
-  }
-  return components.filter(Boolean).join(localeSeparator);
+ return [
+    locale.language?.codeDisplay ?? locale.languageCode,
+    locale.explicitScriptCode,
+    territoryOverride ?? locale.territoryCode,
+    ...locale.variantTagCodes,
+  ]
+    .filter(Boolean)
+    .join(localeSeparator);
 }
 
 export function getOfficialLabel(officialStatus: OfficialStatus): string {
