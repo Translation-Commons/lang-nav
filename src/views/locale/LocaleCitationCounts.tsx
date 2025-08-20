@@ -1,8 +1,9 @@
 import React from 'react';
-import { useDataContext } from '../../data/DataContext';
+
 import { getScopeFilter } from '../../controls/filter';
-import CollapsibleReport from '../common/CollapsibleReport';
+import { useDataContext } from '../../data/DataContext';
 import { CensusCollectorType } from '../../types/CensusTypes';
+import CollapsibleReport from '../common/CollapsibleReport';
 
 const LocaleCitationCounts: React.FC = () => {
   const { locales } = useDataContext();
@@ -13,8 +14,7 @@ const LocaleCitationCounts: React.FC = () => {
   const withCensusLocales = filteredLocales.filter((loc) => loc.populationCensus != null);
   const totalLocales = filteredLocales.length;
   const withCensusCount = withCensusLocales.length;
-  const citationPercent =
-    totalLocales > 0 ? Math.round((withCensusCount / totalLocales) * 100) : 0;
+  const citationPercent = totalLocales > 0 ? Math.round((withCensusCount / totalLocales) * 100) : 0;
 
   // Breakdown by collectorType: Government, CLDR, Study, Other
   const breakdown = withCensusLocales.reduce(
@@ -95,9 +95,7 @@ const LocaleCitationCounts: React.FC = () => {
         <ul>
           {Object.entries(langScopeGroups).map(([scope, counts]) => {
             const percent =
-              counts.total > 0
-                ? ((counts.withCensus / counts.total) * 100).toFixed(1)
-                : '0';
+              counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
             return (
               <li key={scope}>
                 {scope}: {percent}% ({counts.withCensus}/{counts.total})
@@ -113,9 +111,7 @@ const LocaleCitationCounts: React.FC = () => {
         <ul>
           {Object.entries(terrScopeGroups).map(([scope, counts]) => {
             const percent =
-              counts.total > 0
-                ? ((counts.withCensus / counts.total) * 100).toFixed(1)
-                : '0';
+              counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
             return (
               <li key={scope}>
                 {scope}: {percent}% ({counts.withCensus}/{counts.total})
@@ -129,4 +125,3 @@ const LocaleCitationCounts: React.FC = () => {
 };
 
 export default LocaleCitationCounts;
-

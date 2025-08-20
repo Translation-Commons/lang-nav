@@ -6,8 +6,8 @@ import { ObjectType } from '../types/PageParamTypes';
 import TableOfCountriesWithCensuses from './census/TableOfCountriesWithCensuses';
 import DubiousLanguages from './language/DubiousLanguages';
 import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
-import PotentialLocales from './locale/PotentialLocales';
 import LocaleCitationCounts from './locale/LocaleCitationCounts';
+import PotentialLocales from './locale/PotentialLocales';
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.
