@@ -1,8 +1,10 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
+import Hoverable from '../generic/Hoverable';
 import HoverableButton from '../generic/HoverableButton';
 import { useClickOutside } from '../generic/useClickOutside';
+import { ObjectiveList } from '../pages/CommonObjectives';
 
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
@@ -33,22 +35,23 @@ const SidePanel: React.FC = () => {
       setPanelWidth={setPanelWidth}
       panelRef={panelRef}
     >
-      <SidePanelSection panelWidth={panelWidth}>
-        <SidePanelSectionTitle>Data</SidePanelSectionTitle>
+      <SidePanelSection panelWidth={panelWidth} title="Common Actions">
+        <ObjectiveList />
+      </SidePanelSection>
+
+      <SidePanelSection panelWidth={panelWidth} title="Data">
         <ProfileSelector />
         <ObjectTypeSelector />
         <LanguageListSourceSelector />
       </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth}>
-        <SidePanelSectionTitle>Filters</SidePanelSectionTitle>
+      <SidePanelSection panelWidth={panelWidth} title="Filters">
         <LanguageScopeSelector />
         <TerritoryScopeSelector />
         <TerritoryFilterSelector />
       </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth}>
-        <SidePanelSectionTitle>View Options</SidePanelSectionTitle>
+      <SidePanelSection panelWidth={panelWidth} title="View Options">
         <ViewSelector />
         <LimitInput />
         <SortBySelector />
@@ -83,7 +86,6 @@ const LeftAlignedPanel: React.FC<
         overflowX: 'hidden',
         borderRight: '2px solid var(--color-button-primary)',
         transition: 'max-width 0.3s ease-in-out',
-        paddingTop: '0.5em',
         position: 'relative',
       }}
     >
@@ -127,26 +129,34 @@ const SidePanelToggleButton: React.FC<{
   );
 };
 
-const SidePanelSection: React.FC<React.PropsWithChildren<{ panelWidth: number }>> = ({
-  children,
-  panelWidth,
-}) => {
+const SidePanelSection: React.FC<
+  React.PropsWithChildren<{ panelWidth: number; title: string }>
+> = ({ children, panelWidth, title }) => {
+  const [isCollapsed, setIsCollapsed] = React.useState(true);
+
   return (
     <div
       style={{
-        borderBottom: '0.125em solid var(--color-button-primary)',
+        borderTop: '0.125em solid var(--color-button-primary)',
         width: panelWidth,
-        padding: '0.25em 0.5em',
         marginBottom: '0.5em',
       }}
     >
-      {children}
+      <HoverableButton
+        style={{
+          fontSize: '1.2em',
+          fontWeight: 'lighter',
+          borderRadius: '0',
+          width: '100%',
+          textAlign: 'left',
+        }}
+        onClick={() => setIsCollapsed((prev) => !prev)}
+      >
+        {title} {isCollapsed ? '▼' : '▶'}
+      </HoverableButton>
+      <div style={{ padding: '0.25em 0.5em' }}>{isCollapsed && children}</div>
     </div>
   );
-};
-
-const SidePanelSectionTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <div style={{ fontSize: '1.2em', fontWeight: 'lighter' }}>{children}</div>;
 };
 
 const DraggableResizeBorder: React.FC<{
