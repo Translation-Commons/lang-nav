@@ -89,25 +89,28 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
 export function getScopeFilter(): FilterFunctionType {
   const { languageScopes, territoryScopes } = usePageParams();
 
-  function scopeFilter(object: ObjectData): boolean {
-    switch (object.type) {
-      case ObjectType.Language:
-        return (
-          languageScopes.length === 0 ||
-          languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
-        );
-      case ObjectType.Territory:
-        return territoryScopes.length === 0 || territoryScopes.includes(object.scope);
-      case ObjectType.Locale:
-        return doesLocaleMatchScope(object, languageScopes, territoryScopes);
-      case ObjectType.Census:
-      case ObjectType.WritingSystem:
-      case ObjectType.VariantTag:
-        return true;
-    }
-  }
+  const filterByScope = useCallback(
+    (object: ObjectData): boolean => {
+      switch (object.type) {
+        case ObjectType.Language:
+          return (
+            languageScopes.length === 0 ||
+            languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
+          );
+        case ObjectType.Territory:
+          return territoryScopes.length === 0 || territoryScopes.includes(object.scope);
+        case ObjectType.Locale:
+          return doesLocaleMatchScope(object, languageScopes, territoryScopes);
+        case ObjectType.Census:
+        case ObjectType.WritingSystem:
+        case ObjectType.VariantTag:
+          return true;
+      }
+    },
+    [languageScopes, territoryScopes],
+  );
 
-  return scopeFilter;
+  return filterByScope;
 }
 
 function doesLocaleMatchScope(
