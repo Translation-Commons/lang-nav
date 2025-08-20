@@ -55,6 +55,7 @@ const FilterPath: React.FC = () => {
       <>
         In &quot;{territoryFilter}&quot;
         <HoverableButton
+          buttonType="reset"
           onClick={() => updatePageParams({ territoryFilter: '' })}
           style={{ padding: '0.25em' }}
         >
@@ -72,6 +73,7 @@ const FilterPath: React.FC = () => {
         />{' '}
         contains &quot;{searchString}&quot;
         <HoverableButton
+          buttonType="reset"
           onClick={() => updatePageParams({ searchString: '' })}
           style={{ padding: '0.25em' }}
         >

@@ -14,9 +14,9 @@ export enum ObjectType {
 
 export enum View {
   CardList = 'Cards',
-  Details = 'Details',
-  Hierarchy = 'Hierarchy',
   Table = 'Table',
+  Hierarchy = 'Hierarchy',
+  Details = 'Details',
   Reports = 'Reports',
 }
 

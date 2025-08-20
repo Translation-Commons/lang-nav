@@ -17,7 +17,7 @@ type Props = {
 };
 
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
-  const { limit } = usePageParams();
+  const { limit, searchString } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const filterFunction = useCallback(
@@ -43,7 +43,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
 
         <TreeListRoot
           rootNodes={rootNodes
-            .map((node) => filterBranch(node, filterFunction))
+            .map((node) => filterBranch(node, searchString != '' ? filterFunction : undefined))
             .filter((node) => node != null)
             .slice(0, limit > 0 ? limit : undefined)}
         />

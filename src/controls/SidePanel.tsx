@@ -132,7 +132,7 @@ const SidePanelToggleButton: React.FC<{
 const SidePanelSection: React.FC<
   React.PropsWithChildren<{ panelWidth: number; title: string }>
 > = ({ children, panelWidth, title }) => {
-  const [isCollapsed, setIsCollapsed] = React.useState(true);
+  const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
     <div
@@ -150,11 +150,11 @@ const SidePanelSection: React.FC<
           width: '100%',
           textAlign: 'left',
         }}
-        onClick={() => setIsCollapsed((prev) => !prev)}
+        onClick={() => setIsExpanded((prev) => !prev)}
       >
-        {title} {isCollapsed ? '▼' : '▶'}
+        {title} {isExpanded ? '▼' : '▶'}
       </HoverableButton>
-      <div style={{ padding: '0.25em 0.5em' }}>{isCollapsed && children}</div>
+      <div style={{ padding: '0.25em 0.5em' }}>{isExpanded && children}</div>
     </div>
   );
 };

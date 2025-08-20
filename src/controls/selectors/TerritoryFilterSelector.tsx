@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '../../data/DataContext';
-import { SearchableField } from '../../types/PageParamTypes';
+import { PageParamKey, SearchableField } from '../../types/PageParamTypes';
 import { getSearchableField, HighlightedObjectField } from '../../views/common/ObjectField';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
@@ -47,11 +47,12 @@ const TerritoryFilterSelector: React.FC = () => {
         description="Filter results by ones relevant in a territory."
       />
       <TextInput
-        inputStyle={{ minWidth: '5em', marginLeft: '2em' }}
+        inputStyle={{ minWidth: '8em', marginLeft: '2em' }}
         display={SelectorDisplay.ButtonList}
         getSuggestions={getSuggestions}
         onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}
-        placeholder="Filter name or code"
+        pageParameter={PageParamKey.territoryFilter}
+        placeholder="Name or code"
         value={territoryFilter}
       />
     </div>
