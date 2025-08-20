@@ -83,16 +83,19 @@ export function getDefaultParams(
   view?: View | undefined,
   profile?: ProfileType | undefined,
 ): PageParams {
-  let params = GLOBAL_DEFAULTS;
+  let params = { ...GLOBAL_DEFAULTS }; // De-structure to avoid mutation
+
+  // Merge global defaults with profile-specific defaults
   if (profile != null) {
-    // Merge global defaults with profile-specific defaults
     params = { ...params, ...DEFAULTS_BY_PROFILE[profile] };
     params.profile = profile;
   }
+
+  // Directly set the view & objectType if provided
   if (view != null) params.view = view;
   if (objectType != null) params.objectType = objectType;
 
-  // Apply a few view-specific defaults
+  // Apply a few view-specific overrides
   if (params.view === View.Hierarchy) {
     if (params.objectType === ObjectType.Language) params.languageScopes.push(LanguageScope.Family);
     if (params.objectType === ObjectType.Territory)

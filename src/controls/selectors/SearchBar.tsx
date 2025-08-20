@@ -15,9 +15,9 @@ const SearchBar: React.FC = () => {
   const border = '0.125em solid var(--color-button-primary)';
 
   return (
-    <div
+    <form
       className="selector"
-      style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}
+      style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '0.5em' }}
     >
       <div
         style={{ marginRight: '-0.125em', border, padding: '0.5em', borderRadius: '1em 0 0 1em' }}
@@ -34,7 +34,7 @@ const SearchBar: React.FC = () => {
         value={searchString}
       />
       <SearchBySelector />
-    </div>
+    </form>
   );
 };
 

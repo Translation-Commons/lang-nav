@@ -7,21 +7,27 @@ const CommonObjectives: React.FC = () => {
   return (
     <div style={{ textAlign: 'center', margin: '2em auto', maxWidth: '600px' }}>
       <h2 style={{ marginBottom: '0.5em' }}>Common Objectives</h2>
-      <ul style={{ textAlign: 'left', width: 'fit-content', margin: '0 auto' }}>
-        <Objective
-          label="Find information about a language."
-          inputPlaceholder="Enter a language name"
-          inputParam={PageParamKey.searchString}
-          urlParams={{}}
-        />
-        <Objective
-          label="See the languages in a country."
-          inputPlaceholder="Enter a country"
-          inputParam={PageParamKey.territoryFilter}
-          urlParams={{ view: View.Table, objectType: ObjectType.Locale }}
-        />
-        <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
-      </ul>
+      <ObjectiveList />
+    </div>
+  );
+};
+
+export const ObjectiveList: React.FC = () => {
+  return (
+    <div style={{ textAlign: 'left', width: 'fit-content', margin: '0 auto' }}>
+      <Objective
+        label="Find information about a language."
+        inputPlaceholder="Enter a language name"
+        inputParam={PageParamKey.searchString}
+        urlParams={{}}
+      />
+      <Objective
+        label="See the languages in a country."
+        inputPlaceholder="Enter a country"
+        inputParam={PageParamKey.territoryFilter}
+        urlParams={{ view: View.Table, objectType: ObjectType.Locale }}
+      />
+      <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
     </div>
   );
 };
@@ -44,11 +50,10 @@ const Objective: React.FC<ObjectiveProps> = ({
   if (inputParam) params = { [inputParam]: inputText, ...urlParams };
 
   return (
-    <li>
+    <div style={{ marginBottom: '0.5em' }}>
       {label}
-
       <form
-        style={{ display: 'inline' }}
+        style={{ display: 'inline-flex' }}
         onSubmit={(e) => {
           e.preventDefault();
           window.location.href = `data${getNewURL(params)}`;
@@ -64,7 +69,7 @@ const Objective: React.FC<ObjectiveProps> = ({
         )}
         <GoButton params={params} />
       </form>
-    </li>
+    </div>
   );
 };
 

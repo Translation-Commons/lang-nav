@@ -20,7 +20,7 @@ const TerritoryScopeSelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Territory Scope"
+      selectorLabel="Territory Type"
       selectorDescription={selectorDescription}
       options={Object.values(TerritoryScope)}
       onChange={(scope: TerritoryScope) =>

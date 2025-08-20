@@ -89,6 +89,7 @@ const TextInput: React.FC<Props> = ({
       )}
       <input
         type="text"
+        id={pageParameter}
         className={immediateValue === '' ? 'empty' : ''}
         value={immediateValue}
         onChange={(ev) => {
@@ -171,14 +172,15 @@ const ClearButton: React.FC<{
 }> = ({ onClick, display }) => {
   return (
     <HoverableButton
+      buttonType="reset"
       hoverContent="Clear the input"
+      onClick={onClick}
       style={{
         ...(display === SelectorDisplay.ButtonList
           ? { borderRadius: '0.5em', border: 'none' }
           : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }),
         padding: '0.5em',
       }}
-      onClick={onClick}
     >
       <XIcon size="1em" display="block" />
     </HoverableButton>

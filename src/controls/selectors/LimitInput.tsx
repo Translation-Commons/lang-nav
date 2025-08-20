@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { PageParamKey } from '../../types/PageParamTypes';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput from '../components/TextInput';
@@ -25,6 +26,7 @@ const LimitInput: React.FC = () => {
         ]}
         onChange={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
         display={SelectorDisplay.ButtonList}
+        pageParameter={PageParamKey.limit}
         placeholder="∞"
         value={limit < 1 || Number.isNaN(limit) ? '' : limit.toString()}
       />
