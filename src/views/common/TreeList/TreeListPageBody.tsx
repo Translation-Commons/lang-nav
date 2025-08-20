@@ -43,7 +43,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
 
         <TreeListRoot
           rootNodes={rootNodes
-            .map((node) => filterBranch(node, searchString != '' ? filterFunction : undefined))
+            .map((node) => filterBranch(node, searchString !== '' ? filterFunction : undefined))
             .filter((node) => node != null)
             .slice(0, limit > 0 ? limit : undefined)}
         />

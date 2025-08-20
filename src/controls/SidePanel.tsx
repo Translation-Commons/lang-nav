@@ -1,7 +1,6 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '../generic/Hoverable';
 import HoverableButton from '../generic/HoverableButton';
 import { useClickOutside } from '../generic/useClickOutside';
 import { ObjectiveList } from '../pages/CommonObjectives';
