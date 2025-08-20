@@ -77,15 +77,9 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {variantTagCodes && variantTagCodes.length > 0 && (
         <DetailsField title="Variant Tag:">
           {variantTags && variantTags.length > 0 ? (
-            <span>
-              {}
-              {variantTags.map((tag, idx) => (
-                <React.Fragment key={tag.ID}>
-                  {idx > 0 && ', '}
-                  <HoverableObjectName object={tag} />
-                </React.Fragment>
-              ))}
-            </span>
+            <CommaSeparated>
+              {variantTags.map((tag, i) => <HoverableObjectName object={tag} key={i} />)}
+            </CommaSeparated>
           ) : (
             <span>
               {variantTagCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
