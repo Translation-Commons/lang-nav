@@ -46,23 +46,34 @@ const Objective: React.FC<ObjectiveProps> = ({
   return (
     <li>
       {label}
-      {inputParam && (
-        <input
-          style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
-          placeholder={inputPlaceholder}
-          value={inputText}
-          onChange={(e) => setInputText(e.target.value)}
-        />
-      )}
-      <GoButton params={params} />
+
+      <form
+        style={{ display: 'inline' }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          window.location.href = `data${getNewURL(params)}`;
+        }}
+      >
+        {inputParam && (
+          <input
+            style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
+            placeholder={inputPlaceholder}
+            value={inputText}
+            onChange={(e) => setInputText(e.target.value)}
+          />
+        )}
+        <GoButton params={params} />
+      </form>
     </li>
   );
 };
 
 const GoButton: React.FC<{ params: PageParamsOptional }> = ({ params }) => {
   return (
-    <a href={`data${getNewURL(params)}`}>
-      <button style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}>GO</button>
+    <a href={`data${getNewURL(params)}`} style={{ marginLeft: '0.5em' }}>
+      <button style={{ padding: '0.25em 0.5em' }} type="submit">
+        GO
+      </button>
     </a>
   );
 };

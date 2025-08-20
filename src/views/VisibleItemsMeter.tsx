@@ -9,11 +9,12 @@ import { ObjectData } from '../types/DataTypes';
 
 interface Props {
   objects: ObjectData[];
+  shouldFilterUsingSearchBar?: boolean;
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ objects }) => {
+const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBar = true }) => {
   const { page, limit, territoryFilter } = usePageParams();
-  const filterBySubstring = getFilterBySubstring();
+  const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
   const filterByScope = getScopeFilter();
 
