@@ -129,11 +129,7 @@ export function addIANAVariantLocales(
       }
 
      
-      const idParts: string[] = [iso639_3];
-      if (scriptCode) idParts.push(scriptCode);
-      if (regionCode) idParts.push(regionCode);
-      if (variantSubtags.length > 0) idParts.push(...variantSubtags);
-      const localeCode = idParts.join('_');
+      const localeCode = [iso639_3, scriptCode, regionCode, ...variantSubtags].filter(Boolean).join('_');
 
       
       if (!locales[localeCode]) {
