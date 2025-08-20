@@ -1,16 +1,12 @@
-/**
- * This file provides types for the data used in the application.
- */
-
 import { CensusData } from './CensusTypes';
 import { LanguageCode, LanguageData } from './LanguageTypes';
 import { ObjectType } from './PageParamTypes';
 
 export interface ObjectBase {
   readonly type: ObjectType;
-  readonly ID: string; // A stable ID to use with indexing
-  codeDisplay: string; // The code for the object -- may change, like if the language schema changes
-  nameDisplay: string; // The name for the object -- may change with data from different sources
+  readonly ID: string;
+  codeDisplay: string;
+  nameDisplay: string;
   nameEndonym?: string;
   names: string[];
 }
@@ -23,10 +19,9 @@ export type ObjectData =
   | WritingSystemData
   | VariantTagData;
 
-// ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;
-export type ISO3166Code = string; // ISO 3166-1 alpha-2 code, eg. US, CA, etc.
-export type UNM49Code = string; // UN M49 code, eg. 001, 150, 419, etc.
+export type ISO3166Code = string; 
+export type UNM49Code = string;
 
 export enum TerritoryScope {
   World = 'World',
@@ -59,11 +54,9 @@ export interface TerritoryData extends ObjectBase {
   containedUNRegionCode: UNM49Code;
   sovereignCode: ISO3166Code;
 
-  // Supplemental data
   literacyPercent?: number;
   gdp?: number;
 
-  // References to other objects, filled in after loading the TSV
   parentUNRegion?: TerritoryData;
   containsTerritories: TerritoryData[];
   sovereign?: TerritoryData;
@@ -72,7 +65,7 @@ export interface TerritoryData extends ObjectBase {
   censuses: CensusData[];
 }
 
-export type ScriptCode = string; // ISO 15924 script code, eg. Latn, Cyrl, etc.
+export type ScriptCode = string;
 
 export enum WritingSystemScope {
   Group = 'Group',
@@ -85,7 +78,7 @@ export interface WritingSystemData extends ObjectBase {
   type: ObjectType.WritingSystem;
 
   ID: ScriptCode;
-  codeDisplay: ScriptCode; // This should be stable
+  codeDisplay: ScriptCode;
   scope: WritingSystemScope;
 
   nameDisplayOriginal: string;
@@ -99,12 +92,10 @@ export interface WritingSystemData extends ObjectBase {
   parentWritingSystemCode: ScriptCode | null;
   containsWritingSystemsCodes: ScriptCode[];
 
-  // Derived when combining data
   populationUpperBound: number;
   nameDisplay: string;
   populationOfDescendents: number;
 
-  // References to other objects, filled in after loading the TSV
   primaryLanguage?: LanguageData;
   territoryOfOrigin?: TerritoryData;
   languages: Record<LanguageCode, LanguageData>;
@@ -114,9 +105,7 @@ export interface WritingSystemData extends ObjectBase {
   containsWritingSystems: WritingSystemData[];
 }
 
-// BCP-47 Locale	Locale Display Name	Native Locale Name	Language Code	Territory ISO	Explicit Script	Variant IANA Tag	Pop Source	Best Guess	Official Language
-export type BCP47LocaleCode = string; // BCP-47 formatted locale, eg. en_US, fr_CA, etc.
-
+export type BCP47LocaleCode = string; 
 export enum PopulationSourceCategory {
   Census = '1 Census',
   Study = '2 Study',
@@ -147,37 +136,38 @@ export interface LocaleData extends ObjectBase {
   type: ObjectType.Locale;
 
   ID: BCP47LocaleCode;
-  codeDisplay: BCP47LocaleCode; // Changes based on the language schema
-  localeSource: 'regularInput' | 'IANA' | 'census'; // Whether this locale is listed in the the regular locale list or not
+  codeDisplay: BCP47LocaleCode; 
+  localeSource: 'regularInput' | 'IANA' | 'census';
 
   nameDisplay: string;
   nameEndonym?: string;
   languageCode: LanguageCode;
   territoryCode: TerritoryCode;
   explicitScriptCode?: ScriptCode;
-  variantTagCode?: VariantIANATag; // TODO Variant tags can be singular (eg. roh-rumgr) or composite (eg. oc-lengadoc-grclass)
+  
+  variantTagCodes?: VariantIANATag[];
+
+  variantTags?: VariantTagData[];
 
   populationSource: PopulationSourceCategory;
   populationSpeaking: number;
   officialStatus?: OfficialStatus;
 
-  // References to other objects, filled in after loading the TSV
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
-  containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
+  containedLocales?: LocaleData[];
   variantTag?: VariantTagData;
 
-  // Data added up some references
   populationSpeakingPercent?: number;
   literacyPercent?: number;
   populationWriting?: number;
   populationWritingPercent?: number;
-  populationCensus?: CensusData; // The census record that provides the population estimate
-  censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
+  populationCensus?: CensusData;
+  censusRecords: LocaleInCensus[]; 
 }
 
-export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valencia
+export type VariantIANATag = string;
 export interface VariantTagData extends ObjectBase {
   type: ObjectType.VariantTag;
   ID: VariantIANATag;
@@ -186,11 +176,10 @@ export interface VariantTagData extends ObjectBase {
   description?: string;
 
   dateAdded?: Date;
-  prefixes: string[]; // Usually language codes but sometimes composites like zh-Latn or oc-lengadoc
-  languageCodes: LanguageCode[]; // zh, oc, etc.
-  localeCodes: BCP47LocaleCode[]; // would look like zh-Latn-pinyin or oc-lengadoc-grclass
+  prefixes: string[]; 
+  languageCodes: LanguageCode[];
+  localeCodes: BCP47LocaleCode[]; 
 
-  // References to other objects
   languages: LanguageData[];
   locales: LocaleData[];
 }
