@@ -10,7 +10,14 @@
 import React from 'react';
 
 import { CLDRCoverageData } from './CLDRTypes';
-import { LocaleData, ObjectBase, ScriptCode, VariantTagData, WritingSystemData } from './DataTypes';
+import {
+  LocaleData,
+  ObjectBase,
+  ScriptCode,
+  VariantTagData,
+  WikipediaData,
+  WritingSystemData,
+} from './DataTypes';
 import { ObjectType } from './PageParamTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -96,6 +103,7 @@ export interface LanguageData extends ObjectBase {
   cldrDataProvider?: LanguageData | LocaleData;
 
   warnings: Partial<Record<LanguageField, string>>;
+  wikipedia?: WikipediaData;
 
   // References to other objects, filled in after loading the TSV
   locales: LocaleData[];

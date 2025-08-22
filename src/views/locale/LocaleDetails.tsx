@@ -7,6 +7,7 @@ import { LocaleData } from '../../types/DataTypes';
 import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
+import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import { getOfficialLabel } from './LocaleStrings';
@@ -16,16 +17,21 @@ type Props = {
 };
 
 const LocaleDetails: React.FC<Props> = ({ locale }) => {
-  const { officialStatus } = locale;
+  const { officialStatus, wikipedia } = locale;
   return (
     <div className="Details">
       <LocaleDefinitionSection locale={locale} />
       <LocalePopulationSection locale={locale} />
-      {officialStatus && (
-        <DetailsSection title="Other">
+      <DetailsSection title="Other">
+        {officialStatus && (
           <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
-        </DetailsSection>
-      )}
+        )}
+        {wikipedia && (
+          <DetailsField title="Wikipedia:">
+            <ObjectWikipediaInfo object={locale} />
+          </DetailsField>
+        )}
+      </DetailsSection>
     </div>
   );
 };

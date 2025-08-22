@@ -160,6 +160,7 @@ export interface LocaleData extends ObjectBase {
   populationSource: PopulationSourceCategory;
   populationSpeaking: number;
   officialStatus?: OfficialStatus;
+  wikipedia?: WikipediaData;
 
   // References to other objects, filled in after loading the TSV
   language?: LanguageData;
@@ -194,3 +195,22 @@ export interface VariantTagData extends ObjectBase {
   languages: LanguageData[];
   locales: LocaleData[];
 }
+
+export enum WikipediaStatus {
+  Active = 'Active',
+  Closed = 'Closed',
+  Incubator = 'Incubator',
+}
+
+export type WikipediaData = {
+  titleEnglish: string;
+  titleLocal: string;
+  status: WikipediaStatus;
+  languageName: string;
+  scriptCodes: ScriptCode[];
+  wikipediaSubdomain: string; // eg. en, fr, simple, zh-classical, map-bms
+  localeCode: BCP47LocaleCode; // eg. eng, fra, mis, lzh, bany1247
+  articles: number;
+  activeUsers: number;
+  url: string;
+};
