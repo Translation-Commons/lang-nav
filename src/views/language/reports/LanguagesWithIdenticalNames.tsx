@@ -4,20 +4,19 @@ import {
   getFilterBySubstring,
   getFilterByTerritory,
   getSliceFunction,
-} from '../../controls/filter';
-import { usePageParams } from '../../controls/PageParamsContext';
-import LimitInput from '../../controls/selectors/LimitInput';
-import PaginationControls from '../../controls/selectors/PaginationControls';
-import { getSortFunction } from '../../controls/sort';
-import { useDataContext } from '../../data/DataContext';
-import CommaSeparated from '../../generic/CommaSeparated';
-import Deemphasized from '../../generic/Deemphasized';
-import { LanguageData, LanguageSource } from '../../types/LanguageTypes';
-import CollapsibleReport from '../common/CollapsibleReport';
-import TreeListRoot from '../common/TreeList/TreeListRoot';
-import ViewCard from '../ViewCard';
-
-import { getLanguageTreeNodes } from './LanguageHierarchy';
+} from '../../../controls/filter';
+import { usePageParams } from '../../../controls/PageParamsContext';
+import LimitInput from '../../../controls/selectors/LimitInput';
+import PaginationControls from '../../../controls/selectors/PaginationControls';
+import { getSortFunction } from '../../../controls/sort';
+import { useDataContext } from '../../../data/DataContext';
+import CommaSeparated from '../../../generic/CommaSeparated';
+import Deemphasized from '../../../generic/Deemphasized';
+import { LanguageData, LanguageSource } from '../../../types/LanguageTypes';
+import CollapsibleReport from '../../common/CollapsibleReport';
+import TreeListRoot from '../../common/TreeList/TreeListRoot';
+import ViewCard from '../../ViewCard';
+import { getLanguageTreeNodes } from '../LanguageHierarchy';
 
 const LanguagesWithIdenticalNames: React.FC = () => {
   const {

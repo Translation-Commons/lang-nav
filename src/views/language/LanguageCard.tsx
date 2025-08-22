@@ -18,7 +18,7 @@ interface Props {
 const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
   const { updatePageParams } = usePageParams();
   const sortFunction = getSortFunction();
-  const { ID, locales, modality, populationCited, vitalityEth2013 } = lang;
+  const { ID, locales, modality, populationEstimate, vitalityEth2013 } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode,
@@ -31,12 +31,12 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
           <ObjectTitle object={lang} highlightSearchMatches={true} />
         </a>
       </h3>
-      {populationCited != null && (
+      {populationEstimate != null && (
         <div>
           <h4>
             Population <PopulationWarning />
           </h4>
-          {populationCited.toLocaleString()}
+          {populationEstimate.toLocaleString()}
         </div>
       )}
       {modality != null && (
