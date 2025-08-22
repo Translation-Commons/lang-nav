@@ -88,6 +88,7 @@ function updateLanguageBasedOnSource(
     );
     lang.scope = specific.scope ?? lang.scope;
     lang.populationOfDescendents = specific.populationOfDescendents ?? undefined;
+    lang.populationEstimate = lang.populationCited ?? specific.populationOfDescendents;
     lang.parentLanguage = specific.parentLanguage ?? undefined;
     lang.childLanguages = specific.childLanguages ?? [];
   });
