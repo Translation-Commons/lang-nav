@@ -4,8 +4,9 @@ import { usePageParams } from '../controls/PageParamsContext';
 import { ObjectType } from '../types/PageParamTypes';
 
 import TableOfCountriesWithCensuses from './census/TableOfCountriesWithCensuses';
-import DubiousLanguages from './language/DubiousLanguages';
-import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
+import DubiousLanguages from './language/reports/DubiousLanguages';
+import LanguagesLargestDescendant from './language/reports/LanguagesLargestDescendant';
+import LanguagesWithIdenticalNames from './language/reports/LanguagesWithIdenticalNames';
 import PotentialLocales from './locale/PotentialLocales';
 
 /**
@@ -30,7 +31,8 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
       return (
         <>
           <DubiousLanguages />
-          <LanguagesWithIdenticalNames key="1" />
+          <LanguagesWithIdenticalNames />
+          <LanguagesLargestDescendant />
         </>
       );
     case ObjectType.Census:

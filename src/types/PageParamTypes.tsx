@@ -3,6 +3,17 @@ import { ProfileType } from '../controls/Profiles';
 import { TerritoryScope } from './DataTypes';
 import { LanguageSource, LanguageScope } from './LanguageTypes';
 
+export enum ExternalConcepts {
+  LanguageFamily = 'Language Family',
+  Language = 'Language',
+  Dialect = 'Dialect',
+  Orthography = 'Orthography',
+  Locale = 'Locale',
+  Census = 'Census',
+  Territory = 'Territory',
+  WritingSystem = 'Writing System',
+}
+
 export enum ObjectType {
   Language = 'Language',
   Locale = 'Locale',
@@ -30,6 +41,8 @@ export enum SortBy {
   RelativePopulation = 'Relative Population',
   Literacy = 'Literacy',
   Date = 'Date',
+  PopulationAttested = 'Population Attested',
+  PopulationOfDescendents = 'Population of Descendents',
 }
 
 export enum SearchableField {

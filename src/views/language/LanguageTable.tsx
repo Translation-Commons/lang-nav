@@ -1,4 +1,4 @@
-import { TriangleAlertIcon } from 'lucide-react';
+import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
 import { getUniqueTerritoriesForLanguage } from '../../controls/sort';
@@ -46,16 +46,57 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
         },
         {
+          key: 'Population',
           label: (
             <>
               Population
               <PopulationWarning />
             </>
           ),
-          key: 'Population',
-          render: (lang) => lang.populationCited,
+          render: (lang) => lang.populationEstimate,
           isNumeric: true,
           sortParam: SortBy.Population,
+        },
+        {
+          key: 'Population Attested',
+          label: (
+            <>
+              Population
+              <br />
+              Attested
+              <Hoverable hoverContent="This comes from a citable source (citations still needed).">
+                <InfoIcon size="1em" />
+              </Hoverable>
+            </>
+          ),
+          render: (lang) => lang.populationCited,
+          isNumeric: true,
+          isInitiallyVisible: false,
+          sortParam: SortBy.PopulationAttested,
+        },
+        {
+          key: 'Population of Descendents',
+          label: (
+            <>
+              Population of
+              <br />
+              Descendents
+              <PopulationWarning />
+            </>
+          ),
+          render: (lang) => (
+            <>
+              {(lang.populationOfDescendents ?? 0) > (lang.populationEstimate ?? 0) ? (
+                <Hoverable hoverContent="Computed population of descendants exceeds population estimate.">
+                  <TriangleAlertIcon style={{ color: 'var(--color-text-yellow)' }} size="1em" />
+                </Hoverable>
+              ) : null}
+              {lang.populationOfDescendents?.toLocaleString()}
+            </>
+          ),
+          isNumeric: true,
+          isInitiallyVisible: false,
+          sortParam: SortBy.PopulationOfDescendents,
         },
         {
           key: 'CLDR Coverage',
