@@ -16,7 +16,6 @@ import { LanguageData, LanguageSource } from '../../../types/LanguageTypes';
 import CollapsibleReport from '../../common/CollapsibleReport';
 import TreeListRoot from '../../common/TreeList/TreeListRoot';
 import ViewCard from '../../ViewCard';
-
 import { getLanguageTreeNodes } from '../LanguageHierarchy';
 
 const LanguagesWithIdenticalNames: React.FC = () => {
