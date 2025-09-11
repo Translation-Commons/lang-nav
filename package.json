@@ -14,7 +14,7 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage"
+    "test:coverage": "vitest run --coverage""build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
   },
   "dependencies": {
     "cldr-core": "^47.0.0",
