@@ -1,7 +1,7 @@
+import cldrLocalesData from '../../public/data/unicode/cldrLocales.json';
 import type { CLDRLocaleIndex, CLDRLocaleSupport } from '../types/CLDRLocaleTypes';
 
 // Import the generated JSON instead of requiring it.
-import cldrLocalesData from '../../public/data/unicode/cldrLocales.json';
 
 // Cast to the correct interface
 const rawData: CLDRLocaleIndex = cldrLocalesData as unknown as CLDRLocaleIndex;

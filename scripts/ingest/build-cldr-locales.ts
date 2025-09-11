@@ -29,17 +29,10 @@ const CHARTS_TSV_BASE = `https://raw.githubusercontent.com/unicode-org/cldr-stag
   /\.0\.0$/,
   '',
 )}/tsv`;
-const CLDR_REPO_RAW_BASE =
-  'https://raw.githubusercontent.com/unicode-org/cldr/main/common/main';
+const CLDR_REPO_RAW_BASE = 'https://raw.githubusercontent.com/unicode-org/cldr/main/common/main';
 
 // Output location
-const OUTPUT_FILE = path.join(
-  process.cwd(),
-  'public',
-  'data',
-  'unicode',
-  'cldrLocales.json',
-);
+const OUTPUT_FILE = path.join(process.cwd(), 'public', 'data', 'unicode', 'cldrLocales.json');
 
 /** Simple TSV parser (no quoted fields needed for CLDR TSVs) */
 function parseTsv(tsv: string): Record<string, string>[] {
@@ -132,14 +125,14 @@ async function buildCldrLocales(): Promise<void> {
     if (!value || value.trim() === '' || value.trim() === '—') return undefined;
     const num = parseFloat(value);
     return Number.isFinite(num) ? num : undefined;
-    };
+  };
 
   for (const loc of localeList) {
     const tier = available.core.includes(loc)
       ? 'core'
       : available.modern.includes(loc)
-      ? 'modern'
-      : 'full';
+        ? 'modern'
+        : 'full';
     const isDefault = available.defaultContent?.includes(loc) ?? false;
     const coverage = coverageMap[loc];
     const missing = missingMap[loc];
@@ -166,9 +159,7 @@ async function buildCldrLocales(): Promise<void> {
       icuIncluded: coverage?.ICU?.toLowerCase().includes('icu') ?? false,
       defaultRegion: coverage?.['Default Region'] || undefined,
       notes:
-        coverage && coverage['Missing Features']
-          ? coverage['Missing Features'].split(/,\s*/)
-          : [],
+        coverage && coverage['Missing Features'] ? coverage['Missing Features'].split(/,\s*/) : [],
       missingCounts: missing
         ? {
             found: Number.parseInt(missing.Found || '0', 10),
