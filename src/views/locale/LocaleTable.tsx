@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
+import { getCldrLocale } from '../../data/cldrLocales';
 import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
@@ -12,7 +13,6 @@ import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonCol
 import ObjectTable from '../common/table/ObjectTable';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
-import { getCldrLocale } from '../../data/cldrLocales';
 
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();

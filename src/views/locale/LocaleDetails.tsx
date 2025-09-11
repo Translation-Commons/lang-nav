@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getCldrLocale } from '../../data/cldrLocales';
 import Deemphasized from '../../generic/Deemphasized';
 import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
@@ -9,7 +10,6 @@ import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
-import { getCldrLocale } from '../../data/cldrLocales';
 import { getOfficialLabel } from './LocaleStrings';
 
 type Props = { locale: LocaleData };
@@ -191,8 +191,12 @@ const LocaleCLDRSupportSection: React.FC<{ locale: LocaleData }> = ({ locale }) 
   return (
     <DetailsSection title="CLDR Support">
       <DetailsField title="Tier:">{cldr.tier}</DetailsField>
-      <DetailsField title="Present in CLDR:">{cldr.presentInCLDRDatabase ? 'Yes' : 'No'}</DetailsField>
-      <DetailsField title="Default Locale:">{cldr.localeIsDefaultForLanguage ? 'Yes' : 'No'}</DetailsField>
+      <DetailsField title="Present in CLDR:">
+        {cldr.presentInCLDRDatabase ? 'Yes' : 'No'}
+      </DetailsField>
+      <DetailsField title="Default Locale:">
+        {cldr.localeIsDefaultForLanguage ? 'Yes' : 'No'}
+      </DetailsField>
       <DetailsField title="Target / Computed Level:">
         {cldr.targetLevel ?? '—'} / {cldr.computedLevel ?? '—'}
       </DetailsField>
@@ -204,7 +208,8 @@ const LocaleCLDRSupportSection: React.FC<{ locale: LocaleData }> = ({ locale }) 
       )}
       {cldr.missingCounts && (
         <DetailsField title="Missing Counts:">
-          {cldr.missingCounts.found} found / {cldr.missingCounts.unconfirmed} unconfirmed / {cldr.missingCounts.missing} missing
+          {cldr.missingCounts.found} found / {cldr.missingCounts.unconfirmed} unconfirmed /{' '}
+          {cldr.missingCounts.missing} missing
         </DetailsField>
       )}
       {cldr.notes && cldr.notes.length > 0 && (
