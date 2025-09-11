@@ -2,6 +2,7 @@ import React from 'react';
 
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
+import TableOfLanguagesInTerritory from './TableOfLanguagesInTerritory';
 import { getCurrencyCompactLong } from '../../generic/numberUtils';
 import { TerritoryData } from '../../types/DataTypes';
 import DetailsField from '../common/details/DetailsField';
@@ -42,15 +43,6 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       </DetailsSection>
 
       <DetailsSection title="Connections">
-        {locales.length > 0 && (
-          <DetailsField title="Languages:">
-            <CommaSeparated>
-              {Object.values(locales).map((locale) => (
-                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
-              ))}
-            </CommaSeparated>
-          </DetailsField>
-        )}
 
         {parentUNRegion != null && (
           <DetailsField title="In UN region:">
@@ -92,6 +84,13 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
           </DetailsField>
         )}
       </DetailsSection>
+
+      {/* Languages table for the territory */}
+      {locales.length > 0 && (
+        <DetailsSection title="Languages">
+          <TableOfLanguagesInTerritory territory={territory} />
+        </DetailsSection>
+      )}
     </div>
   );
 };
