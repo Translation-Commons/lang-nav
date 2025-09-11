@@ -9,7 +9,8 @@
     "lint": "eslint src --ext ts,tsx",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
   },
   "dependencies": {
     "cldr-core": "^47.0.0",
@@ -20,6 +21,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
+    "@types/node": "^24.3.1",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
