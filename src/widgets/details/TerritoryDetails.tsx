@@ -1,4 +1,5 @@
 import React from 'react';
+import TableOfLanguagesInTerritory from 'src/views/territory/TableOfLanguagesInTerritory';
 
 import { getSortFunction } from '@features/sorting/sort';
 
@@ -44,16 +45,6 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       </DetailsSection>
 
       <DetailsSection title="Connections">
-        {locales && locales.length > 0 && (
-          <DetailsField title="Languages:">
-            <CommaSeparated>
-              {Object.values(locales).map((locale) => (
-                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
-              ))}
-            </CommaSeparated>
-          </DetailsField>
-        )}
-
         {parentUNRegion != null && (
           <DetailsField title="In UN region:">
             <HoverableObjectName object={parentUNRegion} />
@@ -94,6 +85,13 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
           </DetailsField>
         )}
       </DetailsSection>
+
+      {/* Languages table for the territory */}
+      {locales && locales.length > 0 && (
+        <DetailsSection title="Languages">
+          <TableOfLanguagesInTerritory territory={territory} />
+        </DetailsSection>
+      )}
     </div>
   );
 };
