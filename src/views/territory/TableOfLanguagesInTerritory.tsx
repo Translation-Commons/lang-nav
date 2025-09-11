@@ -4,11 +4,7 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { LocaleData, TerritoryData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
-import {
-  CodeColumn,
-  NameColumn,
-  EndonymColumn,
-} from '../common/table/CommonColumns';
+import { CodeColumn, NameColumn, EndonymColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 import LocaleCensusCitation from '../locale/LocaleCensusCitation';
 import { getOfficialLabel } from '../locale/LocaleStrings';
@@ -34,22 +30,17 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
         EndonymColumn,
         {
           key: 'Language',
-          render: (loc) => (
-            <HoverableObjectName object={loc} labelSource="language" />
-          ),
+          render: (loc) => <HoverableObjectName object={loc} labelSource="language" />,
           sortParam: SortBy.Name,
         },
         {
           key: 'Territory',
-          render: (loc) => (
-            <HoverableObjectName object={loc} labelSource="territory" />
-          ),
+          render: (loc) => <HoverableObjectName object={loc} labelSource="territory" />,
           isInitiallyVisible: false,
         },
         {
           key: 'Official Status',
-          render: (loc) =>
-            loc.officialStatus ? getOfficialLabel(loc.officialStatus) : 'None',
+          render: (loc) => (loc.officialStatus ? getOfficialLabel(loc.officialStatus) : 'None'),
         },
         {
           key: 'Speakers',
@@ -60,8 +51,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
                 <>
                   {' '}
                   [
-                  <LocaleCensusCitation locale={loc} size="short" />
-                  ]
+                  <LocaleCensusCitation locale={loc} size="short" />]
                 </>
               )}
             </span>

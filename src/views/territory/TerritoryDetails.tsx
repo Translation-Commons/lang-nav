@@ -2,12 +2,13 @@ import React from 'react';
 
 import { getSortFunction } from '../../controls/sort';
 import CommaSeparated from '../../generic/CommaSeparated';
-import TableOfLanguagesInTerritory from './TableOfLanguagesInTerritory';
 import { getCurrencyCompactLong } from '../../generic/numberUtils';
 import { TerritoryData } from '../../types/DataTypes';
 import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
+
+import TableOfLanguagesInTerritory from './TableOfLanguagesInTerritory';
 
 type Props = {
   territory: TerritoryData;
@@ -43,7 +44,6 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       </DetailsSection>
 
       <DetailsSection title="Connections">
-
         {parentUNRegion != null && (
           <DetailsField title="In UN region:">
             <HoverableObjectName object={parentUNRegion} />
