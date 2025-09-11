@@ -51,6 +51,7 @@ const ViewModal: React.FC = () => {
           </div>
           <div style={{ display: 'flex', gap: '.5em' }}>
             <HoverableButton
+              buttonType="submit"
               hoverContent="Expand modal to page"
               onClick={() =>
                 updatePageParams({
@@ -60,7 +61,7 @@ const ViewModal: React.FC = () => {
             >
               <ExpandIcon size="1.5em" display="block" />
             </HoverableButton>
-            <HoverableButton hoverContent="Close modal" onClick={onClose}>
+            <HoverableButton buttonType="reset" hoverContent="Close modal" onClick={onClose}>
               <XIcon size="1.5em" display="block" />
             </HoverableButton>
           </div>

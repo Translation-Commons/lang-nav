@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '../../data/DataContext';
-import { SearchableField } from '../../types/PageParamTypes';
+import { PageParamKey, SearchableField } from '../../types/PageParamTypes';
 import { getSearchableField, HighlightedObjectField } from '../../views/common/ObjectField';
-import { OptionsDisplay } from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput, { Suggestion } from '../components/TextInput';
 import { getScopeFilter } from '../filter';
@@ -40,18 +40,19 @@ const TerritoryFilterSelector: React.FC = () => {
   }, [territories, filterByScope]);
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+    <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
       <SelectorLabel
-        optionsDisplay={OptionsDisplay.ButtonList}
-        label="Territory Filter"
+        display={SelectorDisplay.ButtonList}
+        label="Relevant to Territory"
         description="Filter results by ones relevant in a territory."
       />
       <TextInput
-        inputStyle={{ minWidth: '5em' }}
-        optionsDisplay={OptionsDisplay.ButtonList}
+        inputStyle={{ minWidth: '8em', marginLeft: '2em' }}
+        display={SelectorDisplay.ButtonList}
         getSuggestions={getSuggestions}
         onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}
-        placeholder="Filter name or code"
+        pageParameter={PageParamKey.territoryFilter}
+        placeholder="Name or code"
         value={territoryFilter}
       />
     </div>

@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { SearchableField } from '../../types/PageParamTypes';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';
 
 const SearchBySelector: React.FC = () => {
@@ -11,7 +12,7 @@ const SearchBySelector: React.FC = () => {
     <Selector
       selectorLabel="Search by"
       options={Object.values(SearchableField)}
-      optionsDisplay={OptionsDisplay.Dropdown}
+      display={SelectorDisplay.Dropdown}
       onChange={(searchBy) => updatePageParams({ searchBy })}
       selected={searchBy}
       selectorStyle={{ marginLeft: '1em', marginBottom: '0em' }}

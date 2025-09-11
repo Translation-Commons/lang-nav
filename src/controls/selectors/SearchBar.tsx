@@ -2,7 +2,7 @@ import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
 import { PageParamKey } from '../../types/PageParamTypes';
-import { OptionsDisplay } from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import TextInput from '../components/TextInput';
 import { usePageParams } from '../PageParamsContext';
 
@@ -15,9 +15,9 @@ const SearchBar: React.FC = () => {
   const border = '0.125em solid var(--color-button-primary)';
 
   return (
-    <div
+    <form
       className="selector"
-      style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em' }}
+      style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '0.5em' }}
     >
       <div
         style={{ marginRight: '-0.125em', border, padding: '0.5em', borderRadius: '1em 0 0 1em' }}
@@ -28,13 +28,13 @@ const SearchBar: React.FC = () => {
         inputStyle={{ minWidth: '20em', marginRight: '-0.125em', borderRight: 'none' }}
         getSuggestions={getSearchSuggestions}
         onChange={(searchString: string) => updatePageParams({ searchString })}
-        optionsDisplay={OptionsDisplay.ButtonGroup}
+        display={SelectorDisplay.ButtonGroup}
         placeholder="search"
         pageParameter={PageParamKey.searchString}
         value={searchString}
       />
       <SearchBySelector />
-    </div>
+    </form>
   );
 };
 

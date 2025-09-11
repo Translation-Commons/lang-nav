@@ -1,14 +1,17 @@
 import React from 'react';
 
 import { TerritoryScope } from '../../types/DataTypes';
-import { ObjectType } from '../../types/PageParamTypes';
+import { ObjectType, View } from '../../types/PageParamTypes';
 import Selector from '../components/Selector';
 import { usePageParams } from '../PageParamsContext';
 
 const TerritoryScopeSelector: React.FC = () => {
-  const { territoryScopes, updatePageParams, objectType } = usePageParams();
+  const { territoryScopes, updatePageParams, objectType, view } = usePageParams();
 
-  if (![ObjectType.Territory, ObjectType.Locale].includes(objectType)) {
+  if (
+    ![ObjectType.Territory, ObjectType.Locale].includes(objectType) &&
+    !(view === View.Reports && objectType === ObjectType.Census)
+  ) {
     return null; // Only applicable for territory and locale objects
   }
 
@@ -17,7 +20,7 @@ const TerritoryScopeSelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Territory Scope"
+      selectorLabel="Territory Type"
       selectorDescription={selectorDescription}
       options={Object.values(TerritoryScope)}
       onChange={(scope: TerritoryScope) =>
