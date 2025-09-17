@@ -212,5 +212,5 @@ function computeLanguageDescendentPopulation(lang: LanguageData, source: Languag
     1,
   );
   lang.sourceSpecific[source].populationOfDescendents = descendentPopulation;
-  return descendentPopulation + (lang.populationCited ?? 0) + 1; // Tiebreaker = number of child nodes
+  return Math.max(lang.populationCited || 0, descendentPopulation) + 1; // Tiebreaker = number of child nodes
 }

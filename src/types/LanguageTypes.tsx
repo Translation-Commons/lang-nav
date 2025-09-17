@@ -9,7 +9,6 @@
 
 import React from 'react';
 
-import { CensusID } from './CensusTypes';
 import { CLDRCoverageData } from './CLDRTypes';
 import { LocaleData, ObjectBase, ScriptCode, VariantTagData, WritingSystemData } from './DataTypes';
 import { ObjectType } from './PageParamTypes';
@@ -85,7 +84,7 @@ export interface LanguageData extends ObjectBase {
 
   populationAdjusted?: number;
   populationCited?: number;
-  populationEstimates?: Record<CensusID, number>;
+  populationEstimate?: number;
   populationOfDescendents?: number;
 
   modality?: LanguageModality;
@@ -104,6 +103,7 @@ export interface LanguageData extends ObjectBase {
   writingSystems: Record<ScriptCode, WritingSystemData>;
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
+  largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
 }
 
 export function getEmptyLanguageSourceSpecificData(): Record<LanguageSource, LanguageDataInSource> {
@@ -126,7 +126,6 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     nameCanonical: name,
     nameDisplay: name,
     names: [name],
-    populationEstimates: {},
     sourceSpecific: getEmptyLanguageSourceSpecificData(),
     variantTags: [],
     locales: [],

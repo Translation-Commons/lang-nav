@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { OptionsDisplay } from '../../controls/components/Selector';
+import { SelectorDisplay } from '../../controls/components/SelectorDisplay';
 import SelectorLabel from '../../controls/components/SelectorLabel';
 import TextInput from '../../controls/components/TextInput';
 
@@ -13,7 +13,7 @@ export function usePotentialLocaleThreshold(): {
   const percentThresholdSelector = (
     <div className="selector" style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}>
       <SelectorLabel
-        optionsDisplay={OptionsDisplay.ButtonGroup}
+        display={SelectorDisplay.ButtonGroup}
         label="Percent Threshold:"
         description={`Limit results by the minimum percent population in a territory that uses the language.`}
       />
@@ -30,7 +30,7 @@ export function usePotentialLocaleThreshold(): {
           { searchString: '5', label: '5%' },
           { searchString: '10', label: '10%' },
         ]}
-        optionsDisplay={OptionsDisplay.ButtonGroup}
+        display={SelectorDisplay.ButtonGroup}
         onChange={(percent: string) => setPercentThreshold(Number(percent))}
         placeholder=""
         value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}

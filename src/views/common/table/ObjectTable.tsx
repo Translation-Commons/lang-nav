@@ -30,12 +30,17 @@ export interface TableColumn<T> {
 interface Props<T> {
   objects: T[];
   columns: TableColumn<T>[];
+  shouldFilterUsingSearchBar?: boolean;
 }
 
-function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
+function ObjectTable<T extends ObjectData>({
+  objects,
+  columns,
+  shouldFilterUsingSearchBar = true,
+}: Props<T>) {
   const { sortBy } = usePageParams();
   const sortFunction = getSortFunction();
-  const filterBySubstring = getFilterBySubstring();
+  const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
   const scopeFilter = getScopeFilter();
 
@@ -67,7 +72,10 @@ function ObjectTable<T extends ObjectData>({ objects, columns }: Props<T>) {
 
   return (
     <div className="ObjectTableContainer">
-      <VisibleItemsMeter objects={objects} />
+      <VisibleItemsMeter
+        objects={objects}
+        shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
+      />
       <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
         <summary style={{ cursor: 'pointer' }}>
           {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.

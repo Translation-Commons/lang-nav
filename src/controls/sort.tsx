@@ -2,25 +2,22 @@ import { uniqueBy } from '../generic/setUtils';
 import { ObjectData } from '../types/DataTypes';
 import { LanguageData, LanguageSource } from '../types/LanguageTypes';
 import { ObjectType, SortBy } from '../types/PageParamTypes';
-import { getObjectPopulation } from '../views/common/ObjectField';
+import {
+  getObjectPopulation,
+  getObjectPopulationAttested,
+  getObjectPopulationOfDescendents,
+} from '../views/common/ObjectField';
 
 import { usePageParams } from './PageParamsContext';
 
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
 // TODO, it may be more performant to make a sortKey function
-export function getSortFunction(
-  includeDescendents?: boolean,
-  languageSource?: LanguageSource,
-): SortByFunctionType {
+export function getSortFunction(languageSource?: LanguageSource): SortByFunctionType {
   const { sortBy, languageSource: languageSourcePageParam, sortDirection } = usePageParams();
   const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
-  const sortFunction = getSortFunctionParameterized(
-    sortBy,
-    effectiveLanguageSource,
-    includeDescendents ?? false,
-  );
+  const sortFunction = getSortFunctionParameterized(sortBy, effectiveLanguageSource);
   if (sortDirection === 'reverse') {
     return (a, b) => -sortFunction(a, b);
   }
@@ -30,7 +27,6 @@ export function getSortFunction(
 function getSortFunctionParameterized(
   sortBy: SortBy,
   effectiveLanguageSource: LanguageSource,
-  includeDescendents: boolean,
 ): SortByFunctionType {
   switch (sortBy) {
     case SortBy.Code:
@@ -103,20 +99,32 @@ function getSortFunctionParameterized(
     case SortBy.Population:
       return (a: ObjectData, b: ObjectData) => {
         // Default order is descending (bigger populations first)
+        return getObjectPopulation(b) - getObjectPopulation(a);
+      };
+    case SortBy.PopulationAttested:
+      return (a: ObjectData, b: ObjectData) => {
+        return getObjectPopulationAttested(b) - getObjectPopulationAttested(a);
+      };
+    case SortBy.PopulationOfDescendents:
+      return (a: ObjectData, b: ObjectData) => {
         return (
-          getObjectPopulation(b, includeDescendents, effectiveLanguageSource) -
-          getObjectPopulation(a, includeDescendents, effectiveLanguageSource)
+          getObjectPopulationOfDescendents(b, effectiveLanguageSource) -
+          getObjectPopulationOfDescendents(a, effectiveLanguageSource)
         );
       };
     case SortBy.RelativePopulation:
       return (a: ObjectData, b: ObjectData) => {
         switch (a.type) {
           case ObjectType.Census:
-          case ObjectType.Language:
           case ObjectType.WritingSystem:
           case ObjectType.VariantTag:
             // No relative population to sort by
             return 0;
+          case ObjectType.Language:
+            return b.type === ObjectType.Language
+              ? (b.largestDescendant?.populationEstimate ?? 0) / (b.populationEstimate ?? 1) -
+                  (a.largestDescendant?.populationEstimate ?? 0) / (a.populationEstimate ?? 1)
+              : -1;
           case ObjectType.Locale:
             return b.type === ObjectType.Locale
               ? (b.populationSpeakingPercent ?? 0) - (a.populationSpeakingPercent ?? 0)
@@ -185,6 +193,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         // SortBy.Literacy, Data not available yet
         SortBy.CountOfTerritories,
         SortBy.CountOfLanguages,
+        SortBy.PopulationAttested,
       ];
     case ObjectType.Census:
       return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
@@ -196,6 +205,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Population,
         // SortBy.Literacy, Data not available yet
         SortBy.CountOfLanguages,
+        SortBy.PopulationOfDescendents,
       ];
     case ObjectType.VariantTag:
       return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];

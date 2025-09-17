@@ -3,9 +3,11 @@ import React, { useCallback } from 'react';
 
 import ObjectTypeDescription from '../../strings/ObjectTypeDescription';
 import { ObjectType, View } from '../../types/PageParamTypes';
-import Selector, { OptionsDisplay } from '../components/Selector';
+import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';
 
+import FilterPath from './FilterPath';
 import ObjectPath from './ObjectPath';
 
 const PathNav: React.FC = () => {
@@ -14,6 +16,7 @@ const PathNav: React.FC = () => {
       <ObjectTypeSelector />
       <SlashIcon size="1em" />
       <ViewSelector />
+      <FilterPath />
       <ObjectPath />
     </PathContainer>
   );
@@ -36,7 +39,7 @@ const ObjectTypeSelector: React.FC = () => {
 
   return (
     <Selector
-      optionsDisplay={OptionsDisplay.InlineDropdown}
+      display={SelectorDisplay.InlineDropdown}
       options={Object.values(ObjectType)}
       onChange={goToObjectType}
       selected={objectType}
@@ -50,7 +53,7 @@ const ViewSelector: React.FC = () => {
 
   return (
     <Selector
-      optionsDisplay={OptionsDisplay.InlineDropdown}
+      display={SelectorDisplay.InlineDropdown}
       options={Object.values(View)}
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
       selected={view}

@@ -13,3 +13,11 @@ export function uniqueBy<T>(items: T[], keyFn: (item: T) => string | number): T[
 export function unique<T extends string | number>(items: T[]): T[] {
   return uniqueBy(items, (item) => item);
 }
+
+export function areArraysIdentical<T>(a: T[], b: T[]): boolean {
+  if (a.length !== b.length) {
+    return false;
+  }
+  const setB = new Set(b);
+  return a.every((item) => setB.has(item));
+}

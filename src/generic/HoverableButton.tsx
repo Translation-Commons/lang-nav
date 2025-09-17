@@ -3,6 +3,7 @@ import React from 'react';
 import { useHoverCard } from './HoverCardContext';
 
 type HoverableProps = {
+  buttonType?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
   className?: string;
   hoverContent?: React.ReactNode;
@@ -11,6 +12,7 @@ type HoverableProps = {
 };
 
 const HoverableButton: React.FC<HoverableProps> = ({
+  buttonType = 'button',
   children,
   className,
   hoverContent,
@@ -28,7 +30,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
           cursor: onClick ? 'pointer' : 'auto',
           ...style,
         }}
-        type="button"
+        type={buttonType}
       >
         {children}
       </button>
@@ -59,6 +61,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
         cursor: onClick ? 'pointer' : 'auto',
         ...style,
       }}
+      type={buttonType}
     >
       {children}
     </button>

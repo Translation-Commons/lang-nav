@@ -85,6 +85,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
       )}
       <ObjectTable<LocaleData>
         objects={languagesInCensus}
+        shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
           {

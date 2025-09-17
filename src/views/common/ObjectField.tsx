@@ -76,30 +76,46 @@ export function getSearchableField(object: ObjectData, field: SearchableField, q
 }
 
 // TODO make better upperbound/lowerbound population estimates when we don't have exact numbers
-export function getObjectPopulation(
-  object: ObjectData,
-  includeDescendents?: boolean,
-  languageSource?: LanguageSource,
-): number {
+export function getObjectPopulation(object: ObjectData): number {
   switch (object.type) {
     case ObjectType.Language:
-      return (
-        (object.populationCited ?? 0) +
-        (includeDescendents && languageSource
-          ? (object.sourceSpecific[languageSource].populationOfDescendents ?? 0)
-          : 0)
-      );
+      return object.populationEstimate ?? 0;
     case ObjectType.Locale:
       return object.populationSpeaking;
     case ObjectType.Census:
       return object.eligiblePopulation;
     case ObjectType.WritingSystem:
-      return (
-        object.populationUpperBound + (includeDescendents ? object.populationOfDescendents : 0)
-      );
+      return object.populationUpperBound;
     case ObjectType.Territory:
       return object.population;
     case ObjectType.VariantTag:
-      return object.languages.reduce((sum, lang) => sum + (lang.populationCited || 0), 0);
+      return object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0);
+  }
+}
+
+export function getObjectPopulationAttested(object: ObjectData): number {
+  switch (object.type) {
+    case ObjectType.Language:
+      return object.populationCited ?? 0;
+    case ObjectType.Locale:
+      return object.populationCensus != null ? (object.populationSpeaking ?? 0) : 0;
+    default:
+      return 0;
+  }
+}
+
+export function getObjectPopulationOfDescendents(
+  object: ObjectData,
+  languageSource?: LanguageSource,
+): number {
+  switch (object.type) {
+    case ObjectType.Language:
+      return languageSource
+        ? (object.sourceSpecific[languageSource].populationOfDescendents ?? 0)
+        : (object.populationOfDescendents ?? 0);
+    case ObjectType.WritingSystem:
+      return object.populationOfDescendents;
+    default:
+      return 0;
   }
 }

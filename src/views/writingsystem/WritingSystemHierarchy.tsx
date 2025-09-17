@@ -10,7 +10,7 @@ import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 
 export const WritingSystemHierarchy: React.FC = () => {
   const { writingSystems } = useDataContext();
-  const sortFunction = getSortFunction(true /* includeDescendents */);
+  const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
 
   const rootNodes = getWritingSystemTreeNodes(

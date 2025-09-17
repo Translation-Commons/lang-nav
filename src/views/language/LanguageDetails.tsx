@@ -109,11 +109,11 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 };
 
 const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { populationCited, modality, primaryWritingSystem, writingSystems } = lang;
+  const { populationEstimate, modality, primaryWritingSystem, writingSystems } = lang;
 
   return (
     <DetailsSection title="Attributes">
-      {populationCited && (
+      {populationEstimate && (
         <DetailsField
           title={
             <>
@@ -122,7 +122,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             </>
           }
         >
-          {populationCited.toLocaleString()}
+          {populationEstimate.toLocaleString()}
         </DetailsField>
       )}
       {modality && <DetailsField title="Modality:">{modality}</DetailsField>}

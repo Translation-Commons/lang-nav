@@ -4,17 +4,17 @@ import {
   getFilterBySubstring,
   getFilterByTerritory,
   getSliceFunction,
-} from '../../controls/filter';
-import { usePageParams } from '../../controls/PageParamsContext';
-import LimitInput from '../../controls/selectors/LimitInput';
-import PaginationControls from '../../controls/selectors/PaginationControls';
-import { getSortFunction } from '../../controls/sort';
-import { useDataContext } from '../../data/DataContext';
-import Deemphasized from '../../generic/Deemphasized';
-import { LanguageData } from '../../types/LanguageTypes';
-import CollapsibleReport from '../common/CollapsibleReport';
-import HoverableObjectName from '../common/HoverableObjectName';
-import ViewCard from '../ViewCard';
+} from '../../../controls/filter';
+import { usePageParams } from '../../../controls/PageParamsContext';
+import LimitInput from '../../../controls/selectors/LimitInput';
+import PaginationControls from '../../../controls/selectors/PaginationControls';
+import { getSortFunction } from '../../../controls/sort';
+import { useDataContext } from '../../../data/DataContext';
+import Deemphasized from '../../../generic/Deemphasized';
+import { LanguageData } from '../../../types/LanguageTypes';
+import CollapsibleReport from '../../common/CollapsibleReport';
+import HoverableObjectName from '../../common/HoverableObjectName';
+import ViewCard from '../../ViewCard';
 
 const DubiousLanguages: React.FC = () => {
   const {
@@ -85,7 +85,7 @@ const DubiousLanguages: React.FC = () => {
               </div>
               <div>
                 <label>Population:</label>
-                {lang.populationCited ?? <Deemphasized>no population</Deemphasized>}
+                {lang.populationEstimate || <Deemphasized>no population</Deemphasized>}
               </div>
               <div>
                 <label>Potentially related objects:</label>
