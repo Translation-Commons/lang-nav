@@ -27,11 +27,6 @@ const LocaleCitationCounts: React.FC = () => {
     },
     {} as Record<CensusCollectorType, number>,
   );
-  const govCount = breakdown[CensusCollectorType.Government] ?? 0;
-  const cldrCount = breakdown[CensusCollectorType.CLDR] ?? 0;
-  const studyCount = breakdown[CensusCollectorType.Study] ?? 0;
-  const otherCount = withCensusCount - govCount - cldrCount - studyCount;
-
   // Group by language scope and territory scope
   const langScopeGroups: Record<string, { total: number; withCensus: number }> = {};
   const terrScopeGroups: Record<string, { total: number; withCensus: number }> = {};
