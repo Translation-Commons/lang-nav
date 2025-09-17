@@ -93,7 +93,7 @@ const LocaleCitationCounts: React.FC = () => {
 
       {/* Breakdown by territory scope */}
       <div>
-        <strong>Breakdown by territory scope:</strong>
+        <strong>Percent of locales with citations by territory scope:</strong>
         <ul>
           {Object.entries(terrScopeGroups).map(([scope, counts]) => {
             const percent =
