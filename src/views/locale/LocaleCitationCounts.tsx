@@ -17,7 +17,7 @@ const LocaleCitationCounts: React.FC = () => {
   const citationPercent = totalLocales > 0 ? Math.round((withCensusCount / totalLocales) * 100) : 0;
 
   // Breakdown by collectorType: Government, CLDR, Study, Other
-  const breakdown = withCensusLocales.reduce(
+  const citationsByCollectorType = withCensusLocales.reduce(
     (acc, loc) => {
       const collector = loc.populationCensus?.collectorType;
       if (collector != null) {
