@@ -77,7 +77,7 @@ const LocaleCitationCounts: React.FC = () => {
 
       {/* Breakdown by language scope */}
       <div style={{ marginBottom: '1em' }}>
-        <strong>Breakdown by language scope:</strong>
+        <strong>Percent of locales with citations by language scope:</strong>
         <ul>
           {Object.entries(langScopeGroups).map(([scope, counts]) => {
             const percent =
