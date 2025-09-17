@@ -63,30 +63,15 @@ const LocaleCitationCounts: React.FC = () => {
       <div style={{ marginBottom: '1em' }}>
         <strong>Census source breakdown:</strong>
         <ul>
-          <li>
-            Government: {govCount} (
-            {withCensusCount > 0 ? ((govCount / withCensusCount) * 100).toFixed(1) : '0'}
-            %)
-          </li>
-          <li>
-            CLDR: {cldrCount} (
-            {withCensusCount > 0 ? ((cldrCount / withCensusCount) * 100).toFixed(1) : '0'}
-            %)
-          </li>
-          {studyCount > 0 && (
-            <li>
-              Study: {studyCount} (
-              {withCensusCount > 0 ? ((studyCount / withCensusCount) * 100).toFixed(1) : '0'}
-              %)
-            </li>
-          )}
-          {otherCount > 0 && (
-            <li>
-              Other: {otherCount} (
-              {withCensusCount > 0 ? ((otherCount / withCensusCount) * 100).toFixed(1) : '0'}
-              %)
-            </li>
-          )}
+          {Object.entries(citationsByCollectorType).map(([type, count]) => {
+            const percent =
+              withCensusCount > 0 ? ((count / withCensusCount) * 100).toFixed(1) : '0';
+            return (
+              <li key={type}>
+                {type}: {percent}% ({count}/{withCensusCount})
+              </li>
+            );
+          })}
         </ul>
       </div>
 
