@@ -22,12 +22,10 @@ const LocaleCitationCounts: React.FC = () => {
       const collector = loc.populationCensus?.collectorType;
       if (collector != null) {
         acc[collector] = (acc[collector] ?? 0) + 1;
-      } else {
-        acc.other = (acc.other ?? 0) + 1;
-      }
+      } // locales without citations not counted
       return acc;
     },
-    {} as Record<string, number>,
+    {} as Record<CensusCollectorType, number>,
   );
   const govCount = breakdown[CensusCollectorType.Government] ?? 0;
   const cldrCount = breakdown[CensusCollectorType.CLDR] ?? 0;
