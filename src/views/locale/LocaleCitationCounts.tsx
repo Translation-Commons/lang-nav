@@ -37,15 +37,17 @@ const LocaleCitationCounts: React.FC = () => {
       Object.values(TerritoryScope).map((scope) => [scope, { total: 0, withCensus: 0 }]),
     ) as Record<TerritoryScope, { total: number; withCensus: number }>;
   filteredLocales.forEach((loc) => {
-    const langScope = loc.language?.scope ?? 'Unknown';
-    if (!langScopeGroups[langScope]) langScopeGroups[langScope] = { total: 0, withCensus: 0 };
-    langScopeGroups[langScope].total++;
-    if (loc.populationCensus != null) langScopeGroups[langScope].withCensus++;
+    const langScope = loc.language?.scope;
+    if (langScope) {
+      citationsByLangScope[langScope].total++;
+      if (loc.populationCensus != null) citationsByLangScope[langScope].withCensus++;
+    }
 
-    const terrScope = loc.territory?.scope ?? 'Unknown';
-    if (!terrScopeGroups[terrScope]) terrScopeGroups[terrScope] = { total: 0, withCensus: 0 };
-    terrScopeGroups[terrScope].total++;
-    if (loc.populationCensus != null) terrScopeGroups[terrScope].withCensus++;
+    const terrScope = loc.territory?.scope;
+    if (terrScope) {
+      citationsByTerrScope[terrScope].total++;
+      if (loc.populationCensus != null) citationsByTerrScope[terrScope].withCensus++;
+    }
   });
 
   return (
