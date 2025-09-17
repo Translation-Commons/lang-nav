@@ -80,6 +80,7 @@ const LocaleCitationCounts: React.FC = () => {
         <strong>Percent of locales with citations by language scope:</strong>
         <ul>
           {Object.entries(langScopeGroups).map(([scope, counts]) => {
+            if (counts.total === 0) return null;
             const percent =
               counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
             return (
