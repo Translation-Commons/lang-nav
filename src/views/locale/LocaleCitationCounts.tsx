@@ -28,8 +28,14 @@ const LocaleCitationCounts: React.FC = () => {
     {} as Record<CensusCollectorType, number>,
   );
   // Group by language scope and territory scope
-  const langScopeGroups: Record<string, { total: number; withCensus: number }> = {};
-  const terrScopeGroups: Record<string, { total: number; withCensus: number }> = {};
+  const citationsByLangScope: Record<LanguageScope, { total: number; withCensus: number }> =
+    Object.fromEntries(
+      Object.values(LanguageScope).map((scope) => [scope, { total: 0, withCensus: 0 }]),
+    ) as Record<LanguageScope, { total: number; withCensus: number }>;
+  const citationsByTerrScope: Record<TerritoryScope, { total: number; withCensus: number }> =
+    Object.fromEntries(
+      Object.values(TerritoryScope).map((scope) => [scope, { total: 0, withCensus: 0 }]),
+    ) as Record<TerritoryScope, { total: number; withCensus: number }>;
   filteredLocales.forEach((loc) => {
     const langScope = loc.language?.scope ?? 'Unknown';
     if (!langScopeGroups[langScope]) langScopeGroups[langScope] = { total: 0, withCensus: 0 };
