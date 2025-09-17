@@ -4,11 +4,10 @@ import { usePageParams } from '../controls/PageParamsContext';
 import { ObjectType } from '../types/PageParamTypes';
 
 import TableOfCountriesWithCensuses from './census/TableOfCountriesWithCensuses';
-
 import DubiousLanguages from './language/DubiousLanguages';
 import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
-import LocaleCitationCounts from './locale/LocaleCitationCounts';
 import LanguagesLargestDescendant from './language/reports/LanguagesLargestDescendant';
+import LocaleCitationCounts from './locale/LocaleCitationCounts';
 import PotentialLocales from './locale/PotentialLocales';
 
 /**
