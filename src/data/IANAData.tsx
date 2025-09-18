@@ -129,7 +129,7 @@ export function addIANAVariantLocales(
       if (!bcpLang) return;
 
       const iso639_3 = bcpLang.ID;
-      const localeCode = `${prefix}_${variant.ID}`;
+      const localeCode = `${iso639_3}_${variant.ID}`;
 
       locales[localeCode] = {
         ID: localeCode,

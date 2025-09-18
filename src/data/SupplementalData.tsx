@@ -6,6 +6,7 @@ import {
 } from './PopulationData';
 import { computeContainedTerritoryStats, loadTerritoryGDPLiteracy } from './TerritoryData';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
+import { loadAndApplyWikipediaData } from './WikipediaData';
 
 /**
  * Get more data that is not necessary for the initial page load
@@ -16,7 +17,11 @@ export async function loadSupplementalData(coreData: CoreData): Promise<void> {
   }
 
   // TODO - this should be done in parallel so we cannot pass in things we are mutating
-  await Promise.all([loadCLDRCoverage(coreData), loadTerritoryGDPLiteracy(coreData.territories)]);
+  await Promise.all([
+    loadCLDRCoverage(coreData),
+    loadTerritoryGDPLiteracy(coreData.territories),
+    loadAndApplyWikipediaData(coreData),
+  ]);
 
   const censusImports = await loadCensusData();
   censusImports.forEach((censusImport) => {

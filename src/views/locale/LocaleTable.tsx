@@ -7,6 +7,7 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { LocaleData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
+import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
@@ -79,6 +80,11 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
+        },
+        {
+          key: 'Wikipedia',
+          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          isInitiallyVisible: false,
         },
       ]}
     />
