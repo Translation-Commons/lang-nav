@@ -9,6 +9,7 @@ import { LanguageData } from '../../types/LanguageTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
 import PopulationWarning from '../common/PopulationWarning';
+import LanguageVitalityMeter from './LanguageVitalityMeter';
 
 interface Props {
   lang: LanguageData;
@@ -45,12 +46,10 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
           {modality}
         </div>
       )}
-      {vitalityEth2013 != null && (
-        <div>
-          <h4>Vitality</h4>
-          {vitalityEth2013}
-        </div>
-      )}
+      <div>
+        <h4>Vitality</h4>
+        <LanguageVitalityMeter value={vitalityEth2013} />
+      </div>
 
       {includeRelations && countryLocales.length > 0 && (
         <div>
