@@ -1,0 +1,105 @@
+#codeDisplay		mu2000	mu2011
+#nameDisplay		Mauritius 2000	Mauritius 2011
+#isoRegionCode		MU	MU
+#yearCollected		2000	2011
+#datePublished		2003	2012
+#eligiblePopulation		1,178,848	1,236,817
+#notes		Census - de jure - complete tabulation	Excludes the islands of St. Brandon and Agalega. Census - de jure - complete tabulation
+#modality		Spoken	
+#domain		Home	
+#acquisitionOrder		Any	
+#responsesPerIndividual		1	1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	mu2000	mu2011
+mul	Total	1,178,848	1,236,817
+mfe	Creole	826,152	1,069,874
+bho	Bhojpuri	142,387	65,289
+mfe	#Creole and Bhojpuri	64,105	7,104
+bho	#Creole and Bhojpuri	64,105	7,104
+fra	French	39,953	51,214
+mfe	#Creole and French	33,795	7,001
+fra	#Creole and French	33,795	7,001
+hin	Hindi	7,250	8,690
+hin	#Bhojpuri and Hindi	7,298	238
+bho	#Bhojpuri and Hindi	7,298	238
+ben	Bengali		7,139
+zho	Chinese	6,796	2,258
+mfe	#Creole and Other European languages	5,952	
+eng	English	3,512	5,573
+mfe	#Creole and Hindi	4,572	790
+hin	#Creole and Hindi	4,572	790
+tam	Tamil	3,623	1,134
+mfe	#Creole and Tamil	3,274	284
+tam	#Creole and Tamil	3,274	284
+mis	Not stated	3,093	1,549
+mfe	#Creole and Telegu	2,841	152
+tel	#Creole and Telegu	2,841	152
+mul	Other European and Oriental	2,501	
+mul	Other European Languages	756	84
+mul	Other Oriental	722	
+tel	Telugu	2,169	1,600
+mar	Marathi	1,888	490
+mfe	#Creole and Other Oriental languages	1,881	
+urd	Urdu	1,789	814
+mfe	#Creole and Urdu	3,536	110
+urd	#Creole and Urdu	3,536	110
+fra	#French and Other European	1,719	21
+mfe	#Creole and Marathi	1,656	94
+mar	#Creole and Marathi	1,656	94
+mfe	#Creole and Chinese	1,506	303
+zho	#Creole and Chinese	1,506	303
+mlg	Malagasy		1,283
+cmn	Mandarin	996	637
+sin	Sinhalese		815
+mul	Other	807	45
+hak	Hakka	610	330
+fra	#French and Oriental	430	11
+mfe	#Creole and English		340
+eng	#Creole and English		340
+eng	#English and French		322
+fra	#English and French		322
+mul	Other Indian		291
+mul	Other mixed Indian		159
+guj	Gujarati	241	253
+zho	#Other Chinese	212	20
+bho	#Bhojpuri and Urdu	166	
+urd	#Bhojpuri and Urdu	166	
+yue	Cantonese	134	31
+zho	#Chinese and Mandarin		109
+cmn	#Chinese and Mandarin		109
+eng	#English and Oriental		87
+bho	#Bhojpuri and Marathi	86	2
+mar	#Bhojpuri and Marathi	86	2
+ara	Arabic	82	36
+hin	Hindi and Other Oriental	73	
+zho	#Chinese and English	63	
+eng	#Chinese and English	63	
+bho	#Bhojpuri and Telegu	52	1
+tel	#Bhojpuri and Telegu	52	1
+mfe	#Creole and Other		41
+rus	Russian		40
+zho	#Chinese and Oriental	39	
+mul	Other mixed European		39
+afr	Afrikaans		36
+hin	#Hindi and Urdu	8	34
+urd	#Hindi and Urdu	8	34
+bho	Bhojpuri and Oriental	30	
+hin	#Hindi and Marathi	26	3
+mar	#Hindi and Marathi	26	3
+hin	#Hindi and Tamil	18	
+tam	#Hindi and Tamil	18	
+hin	#Hindi and Telegu	18	
+tel	#Hindi and Telegu	18	
+zho	#Chinese and European		14
+bho	#Bhojpuri and Tamil	13	4
+tam	#Bhojpuri and Tamil	13	4
+swa	Swahili		11
+mul	Other mixed Chinese		10
+mul	English and Other European		8
+mar	#Marathi and Tamil	8	
+tam	#Marathi and Tamil	8	
+tam	Tamil and Other Oriental	4	
+mul	Marathi and Oriental	3	
+tam	Tamil and Telegu	3	
+tel	Tamil and Telegu	3	
