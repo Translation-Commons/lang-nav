@@ -5,6 +5,7 @@ import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
+
 import LanguageVitalityMeter from './LanguageVitalityMeter';
 
 const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }) => {

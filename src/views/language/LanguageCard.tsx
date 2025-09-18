@@ -9,6 +9,7 @@ import { LanguageData } from '../../types/LanguageTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
 import PopulationWarning from '../common/PopulationWarning';
+
 import LanguageVitalityMeter from './LanguageVitalityMeter';
 
 interface Props {
