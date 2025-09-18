@@ -13,7 +13,7 @@ export default function LinkButton({ href, children }: React.PropsWithChildren<P
         style={{
           marginLeft: '0.5em',
           marginBottom: '0.25em',
-          padding: children != '' ? '0.25em' : '0',
+          padding: children !== '' ? '0.25em' : '0',
         }}
       >
         {children}
