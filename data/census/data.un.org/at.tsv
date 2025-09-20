@@ -1,0 +1,59 @@
+#codeDisplay		at2001
+#nameDisplay		Austria 2001
+#isoRegionCode		AT
+#yearCollected		2001
+#datePublished		2003
+#eligiblePopulation		8,032,926
+#notes		Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	at2001
+mul	Total	8,032,926
+deu	German	7,115,780
+tur	Turkish	183,445
+srp	Serbian	177,320
+hrv	Croatian	131,307
+eng	English	58,582
+hun	Hungarian	40,583
+bos	Bosnian	34,857
+pol	Polish	30,598
+sqi	Albanian	28,212
+slv	Slovenian	24,855
+burg1244	Burgenland Croatian	19,412
+ckm	#Burgenland Croatian dialect of Chakavian	19,412
+ces	Czech	17,742
+ara	Arabic	17,592
+ron	Romanian	16,885
+ita	Italian	10,742
+fas	Persian	10,665
+slk	Slovak	10,234
+fra	French	10,190
+spa	Spanish	9,976
+zho	Chinese	9,960
+mul	Oriental	9,018
+rus	Russian	8,446
+rom	Romany	6,273
+fil	Pilipino	5,582
+bul	Bulgarian	5,388
+mkd	Macedonian	5,145
+nld	Dutch	3,802
+mul	Indian	3,582
+por	Portuguese	3,197
+ell	Greek	3,098
+swe	Swedish	2,683
+mul	Other European Languages	2,316
+vie	Vietnamese	2,310
+klr	Khaling	2,133
+mul	Other African	1,816
+jpn	Japanese	1,806
+tha	Thai	1,593
+kor	Korean	1,264
+heb	Hebrew	1,189
+fin	Finnish	987
+dan	Danish	735
+nor	Norwegian	569
+wind1243	Windisch	568
+slv	#Windisch dialect of Slovene	568
+ind	Indonesian	451
+mul	Other	38
