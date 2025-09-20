@@ -21,7 +21,9 @@ const CENSUS_FILENAMES = [
 // Government censuses downloaded from the UN data portal
 const UN_CENSUS_FILENAMES = [
   'ai',
+  'ar',
   'as',
+  'at',
   'au',
   'ax',
   'bs',
@@ -29,14 +31,20 @@ const UN_CENSUS_FILENAMES = [
   'et',
   'fi',
   'gu',
+  'hk',
+  'hr',
   'ie',
   'lk',
   'lt',
+  'mo',
   'mp',
+  'mu',
   'np',
+  'pf',
   'pr',
   'ru',
   'sc',
+  'to',
 ];
 
 const DEBUG = false;

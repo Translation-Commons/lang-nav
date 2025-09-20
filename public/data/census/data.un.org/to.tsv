@@ -1,0 +1,24 @@
+#codeDisplay		to1996	to2006	to2021
+#nameDisplay		Tonga 1996	Tonga 2006	Tonga 2021
+#isoRegionCode	TO			
+#yearCollected		1996	2006	2021
+#datePublished		1998	2009	2023
+#eligiblePopulation		80,198	85,575	89,254
+#notes		Census - de facto - complete tabulation	Census - de jure - complete tabulation	Census - de facto - complete tabulation
+#age		6+	6+	5+
+#acquisitionOrder				Any
+#responsesPerIndividual		1	1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	to1996	to2006	to2021
+mul	Total	80,198	85,575	89,254
+ton	Tongan	20,133	9,143	
+eng	English	474	1,020	
+mis	#Tongan original, counting bilingual			85,406
+mis	#English original, counting bilingual			78,997
+ton	#Tongan only, derived from other rows			7,626
+eng	#English only, derived from other rows			1,217
+eng	#English and Tongan	58,411	74,472	77,780
+ton	#English and Tongan	58,411	74,472	77,780
+mul	Other	1,180	940	8,629
+mis	Not stated		26	758
