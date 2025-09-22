@@ -4,15 +4,10 @@ import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 import { CensusCollectorType, CensusData } from '../types/CensusTypes';
 import { CLDRCoverageLevel, CLDRCoverageImport } from '../types/CLDRTypes';
 import { LocaleData } from '../types/DataTypes';
-import {
-  LanguageData,
-  LanguageDictionary,
-  LanguagesBySource,
-  LanguageScope,
-} from '../types/LanguageTypes';
+import { LanguageData, LanguagesBySource, LanguageScope } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
-import { CoreData } from './CoreData';
+import { DataContextType } from './DataContext';
 
 const DEBUG = false;
 
@@ -158,9 +153,9 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
   languagesBySource.CLDR = cldrLanguages;
 }
 
-export async function loadCLDRCoverage(coreData: CoreData): Promise<void> {
-  const cldrLanguages = coreData.languagesBySource.CLDR;
-
+export async function loadCLDRCoverage(
+  getLanguage: (id: string) => LanguageData | undefined,
+): Promise<void> {
   return await fetch('data/unicode/cldrCoverage.tsv')
     .then((res) => res.text())
     .then((text) => {
@@ -170,8 +165,8 @@ export async function loadCLDRCoverage(coreData: CoreData): Promise<void> {
         .slice(SKIP_THREE_HEADER_ROWS)
         .map(parseCLDRCoverageLine);
       cldrCoverage.forEach((cldrCov) => {
-        const lang = cldrLanguages[cldrCov.languageCode];
-        if (lang == null) {
+        const lang = getLanguage(cldrCov.languageCode);
+        if (lang?.type !== ObjectType.Language) {
           console.log('During CLDR import ', cldrCov.languageCode, 'missing from languages');
           return;
         }
@@ -230,7 +225,7 @@ type TerritoryLanguagePopulationStrings = {
   };
 };
 
-export function getLanguageCountsFromCLDR(coreData: CoreData): CensusData[] {
+export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusData[] {
   const territoryInfoData = territoryInfo.supplemental.territoryInfo;
   return Object.entries(territoryInfoData)
     .map(([territoryCode, territoryData]) => {
@@ -247,12 +242,12 @@ export function getLanguageCountsFromCLDR(coreData: CoreData): CensusData[] {
             accumulator,
             inputLocaleCode,
             pop,
-            coreData.languagesBySource.CLDR,
+            dataContext.getLanguage,
           );
         },
         {},
       );
-      const territory = coreData.territories[territoryCode];
+      const territory = dataContext.getTerritory(territoryCode);
 
       const census: CensusData = {
         type: ObjectType.Census,
@@ -282,7 +277,7 @@ function convertCLDRLangPopToLangNavEntries(
   accumulator: Record<string, number>,
   inputLocaleCode: string,
   population: number,
-  cldrLanguages: LanguageDictionary,
+  getLanguage: (code: string) => LanguageData | undefined,
 ): Record<string, number> {
   // We have to do some messy language code parsing since entries here may be using 2-letter codes (eg. sr not srp) and
   // they may have script or other locale tags (eg. sr_Latn, ca_valencia, etc.), and they may be part of a macrolanguage
@@ -290,12 +285,13 @@ function convertCLDRLangPopToLangNavEntries(
   const cldrLanguageCode = inputLocaleCode.split('_')[0]; // Get the language code part, e.g. `sr_Latn` -> `sr`
   const extraCodeParts = inputLocaleCode.split('_').slice(1).join('_'); // Get the rest of the locale code, e.g. `sr_Latn` -> `Latn`
 
-  let languageCode = cldrLanguages[cldrLanguageCode].ID ?? cldrLanguageCode;
-  if (cldrLanguages[cldrLanguageCode].sourceSpecific?.CLDR?.parentLanguageCode != null) {
+  const language = getLanguage(cldrLanguageCode);
+  let languageCode = language?.ID ?? cldrLanguageCode;
+  if (language?.sourceSpecific?.CLDR?.parentLanguageCode != null) {
     // If the language a child of a macrolanguage, we don't know from the data if the number
     // describes the constituent language or the macrolanguage population. Since it's unknown
     // we will use the macrolanguage.
-    const parentLang = cldrLanguages[cldrLanguageCode].sourceSpecific.CLDR.parentLanguage;
+    const parentLang = language.sourceSpecific.CLDR.parentLanguage;
     if (
       parentLang != null &&
       parentLang.sourceSpecific.CLDR.scope === LanguageScope.Macrolanguage

@@ -15,7 +15,7 @@ import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonCol
 import ObjectTable from '../common/table/ObjectTable';
 
 const LanguageTable: React.FC = () => {
-  const { languages } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
   const codeColumn = {
     ...CodeColumn,
@@ -36,7 +36,7 @@ const LanguageTable: React.FC = () => {
 
   return (
     <ObjectTable<LanguageData>
-      objects={Object.values(languages)}
+      objects={languagesInSelectedSource}
       columns={[
         codeColumn,
         NameColumn,

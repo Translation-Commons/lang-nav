@@ -13,7 +13,7 @@ const TerritoryTable: React.FC = () => {
 
   return (
     <ObjectTable<TerritoryData>
-      objects={Object.values(territories)}
+      objects={territories}
       columns={[
         CodeColumn,
         NameColumn,

@@ -5,14 +5,14 @@ import {
   WikipediaData,
   WikipediaStatus,
 } from '../types/DataTypes';
-import { LanguageDictionary } from '../types/LanguageTypes';
+import { LanguageData } from '../types/LanguageTypes';
 
-import { CoreData } from './CoreData';
+import { DataContextType } from './DataContext';
 
-export async function loadAndApplyWikipediaData(coreData: CoreData): Promise<void> {
+export async function loadAndApplyWikipediaData(dataContext: DataContextType): Promise<void> {
   const wikiData = await loadWikipediaData();
   if (wikiData) {
-    applyWikipediaData(coreData.languagesBySource.All, coreData.locales, wikiData);
+    applyWikipediaData(dataContext.getLanguage, dataContext.getLocale, wikiData);
   }
 }
 
@@ -48,19 +48,19 @@ async function loadWikipediaData(): Promise<WikipediaData[] | void> {
 // both a closed Muscogee wikipedia as well as a new one with Incubator status -- the
 // former gets overrides by the Incubator one.
 export function applyWikipediaData(
-  languages: LanguageDictionary,
-  locales: Record<BCP47LocaleCode, LocaleData>,
+  getLanguage: (id: string) => LanguageData | undefined,
+  getLocale: (id: string) => LocaleData | undefined,
   wikiData: WikipediaData[],
 ): void {
   wikiData.forEach((wiki) => {
     // Most Wikipedias simply correspond to a language, eg. eng
-    const lang = languages[wiki.localeCode];
+    const lang = getLanguage(wiki.localeCode);
     if (lang) {
       lang.wikipedia = wiki;
     }
 
     // Some have extra locale data eg. bel_tarask
-    const locale = locales[wiki.localeCode];
+    const locale = getLocale(wiki.localeCode);
     if (locale) {
       locale.wikipedia = wiki;
     }
@@ -69,7 +69,7 @@ export function applyWikipediaData(
     if (wiki.scriptCodes.length > 0) {
       wiki.scriptCodes.forEach((script) => {
         const scriptLocaleCode = `${wiki.localeCode}_${script}` as BCP47LocaleCode;
-        const scriptLocale = locales[scriptLocaleCode];
+        const scriptLocale = getLocale(scriptLocaleCode);
         if (scriptLocale) {
           scriptLocale.wikipedia = wiki;
         }

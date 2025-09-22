@@ -29,17 +29,14 @@ type PartitionedLocales = {
 };
 
 const PotentialLocales: React.FC = () => {
-  const {
-    locales,
-    censuses,
-    languagesBySource: { All: languages },
-  } = useDataContext();
+  const { censuses, getLanguage, getLocale, locales } = useDataContext();
   const { localeSeparator } = usePageParams();
   const { percentThreshold, percentThresholdSelector } = usePotentialLocaleThreshold();
   const potentialLocales = getPotentialLocales(
     Object.values(censuses),
+    getLanguage,
+    getLocale,
     locales,
-    languages,
     localeSeparator,
     percentThreshold,
   );
@@ -166,8 +163,9 @@ const PotentialLocalesTable: React.FC<{
 
 function getPotentialLocales(
   censuses: CensusData[],
-  locales: Record<BCP47LocaleCode, LocaleData>,
-  languages: Record<LanguageCode, LanguageData>,
+  getLanguage: (code: string) => LanguageData | undefined,
+  getLocale: (code: string) => LocaleData | undefined,
+  locales: LocaleData[],
   localeSeparator: LocaleSeparator,
   percentThreshold: number,
 ): PartitionedLocales {
@@ -177,8 +175,8 @@ function getPotentialLocales(
       censuses.reduce<Record<BCP47LocaleCode, LocaleData>>((missing, census) => {
         Object.entries(census.languageEstimates ?? {})?.forEach(([langID, populationEstimate]) => {
           const localeID = langID + '_' + census.isoRegionCode;
-          const lang = languages[langID];
-          if (locales[localeID] || lang == null) {
+          const lang = getLanguage(langID);
+          if (getLocale(localeID) || lang == null) {
             return; // Locale already exists or language is missing, skip
           }
           const populationPercent = (populationEstimate * 100) / census.eligiblePopulation;
@@ -222,12 +220,12 @@ function getPotentialLocales(
         });
         return missing;
       }, {}),
-    [censuses, languages, locales, localeSeparator, percentThreshold],
+    [censuses, localeSeparator, percentThreshold],
   );
 
   // Group all locales (actual & missing) by language
   const allLocalesByLanguage = useMemo(() => {
-    return [...Object.values(locales), ...Object.values(allMissingLocales)].reduce<
+    return [...locales, ...Object.values(allMissingLocales)].reduce<
       Record<LanguageCode, LocaleData[]>
     >((byLanguage, locale) => {
       const territoryScope = locale.territory?.scope;

@@ -22,6 +22,7 @@ export type ObjectData =
   | TerritoryData
   | WritingSystemData
   | VariantTagData;
+export type ObjectDictionary = Record<string, ObjectData>;
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;

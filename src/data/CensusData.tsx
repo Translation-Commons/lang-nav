@@ -1,9 +1,10 @@
 import { toTitleCase } from '../generic/stringUtils';
 import { CensusCollectorType, CensusData } from '../types/CensusTypes';
+import { LocaleData } from '../types/DataTypes';
 import { LanguageCode, LanguageModality } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
-import { CoreData } from './CoreData';
+import { DataContextType } from './DataContext';
 
 const CENSUS_FILENAMES = [
   'ca2021', // Canada 2021 Census
@@ -250,11 +251,11 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
   };
 }
 
-export function addCensusData(coreData: CoreData, censusData: CensusImport): void {
+export function addCensusData(dataContext: DataContextType, censusData: CensusImport): void {
   // Add alternative language names to the language data
   Object.entries(censusData.languageNames).forEach(([languageCode, languageName]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
-    const language = coreData.languagesBySource.All[languageCode];
+    const language = dataContext.getLanguage(languageCode);
     if (language != null) {
       // Split on / since some censuses have multiple names for the same language
       languageName
@@ -274,24 +275,24 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
   // Add the census records to the core data
   for (const census of censusData.censuses) {
     // Add the census to the core data if its not there yet
-    if (coreData.censuses[census.ID] == null) {
+    if (dataContext.censuses[census.ID] == null) {
       // Drop census tables which have a "#" in the codeDisplay -- that means they are provided for context
       // but LangNav doesn't have a good way to show it.
       if (census.codeDisplay.startsWith('#')) {
         continue;
       }
 
-      coreData.censuses[census.ID] = census;
+      dataContext.censuses[census.ID] = census;
 
       // Add the territory reference to it
-      const territory = coreData.territories[census.isoRegionCode];
-      if (territory != null) {
+      const territory = dataContext.getTerritory(census.isoRegionCode);
+      if (territory != null && territory.type === ObjectType.Territory) {
         census.territory = territory;
         territory.censuses.push(census);
       }
 
       // Create references to census from the locale data
-      addCensusRecordsToLocales(coreData, census);
+      addCensusRecordsToLocales(dataContext.getLocale, census);
     } else {
       // It's reloaded twice on dev mode
       // console.warn(`Census data for ${census.ID} already exists, skipping.`);
@@ -299,11 +300,14 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
   }
 }
 
-export function addCensusRecordsToLocales(codeData: CoreData, census: CensusData): void {
+export function addCensusRecordsToLocales(
+  getLocale: (id: string) => LocaleData | undefined,
+  census: CensusData,
+): void {
   Object.entries(census.languageEstimates).forEach(([languageCode, populationEstimate]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
-    const locale = codeData.locales[languageCode + '_' + census.isoRegionCode];
-    if (locale != null) {
+    const locale = getLocale(languageCode + '_' + census.isoRegionCode);
+    if (locale?.type === ObjectType.Locale) {
       // Add the census to the locale
       locale.censusRecords.push({
         census,

@@ -14,7 +14,7 @@ const WritingSystemTable: React.FC = () => {
 
   return (
     <ObjectTable<WritingSystemData>
-      objects={Object.values(writingSystems)}
+      objects={writingSystems}
       columns={[
         CodeColumn,
         NameColumn,
