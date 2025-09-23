@@ -49,7 +49,7 @@ const LanguageVitalityMeter: React.FC<Props> = ({ value }) => {
       min={0}
       max={9}
       value={meterValue}
-      title={`Vitality: ${value} (${meterValue}/9)`}
+      title={`Vitality: ${value}`}
       style={{ width: '100%' }}
     />
   );
