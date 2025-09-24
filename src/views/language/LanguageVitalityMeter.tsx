@@ -54,8 +54,9 @@ const LanguageVitalityMeter: React.FC<Props> = ({ value }) => {
       max={9} // National
       value={meterValue}
       title={`Vitality: ${value}`}
-      style={{ width: '100%' }}
-    />
+        style={{ width: '100%', minWidth: '8em' }}
+      />
+    </Hoverable>
   );
 };
 
