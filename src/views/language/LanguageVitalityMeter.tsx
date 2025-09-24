@@ -46,8 +46,11 @@ const LanguageVitalityMeter: React.FC<Props> = ({ value }) => {
 
   return (
     <meter
-      min={0}
-      max={9}
+      min={0} // Extinct
+      low={3} // Shifting
+      high={7} // Trade
+      optimum={8} // Regional
+      max={9} // National
       value={meterValue}
       title={`Vitality: ${value}`}
       style={{ width: '100%' }}
