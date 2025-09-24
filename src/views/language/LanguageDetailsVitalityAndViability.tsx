@@ -22,8 +22,8 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
       {vitalityISO && <DetailsField title="ISO Vitality / Status:">{vitalityISO}</DetailsField>}
       {vitalityEth2013 && (
         <DetailsField title="Ethnologue Vitality (2013):">
-            <span>{vitalityEth2013} </span>
-            <LanguageVitalityMeter value={vitalityEth2013} />
+          <span>{vitalityEth2013} </span>
+          <LanguageVitalityMeter value={vitalityEth2013} />
         </DetailsField>
       )}
       {vitalityEth2025 && (
