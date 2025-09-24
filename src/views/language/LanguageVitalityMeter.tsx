@@ -45,7 +45,8 @@ const LanguageVitalityMeter: React.FC<Props> = ({ value }) => {
   const meterValue = getMeterValue(value);
 
   return (
-    <meter
+    <Hoverable hoverContent={value}>
+      <meter
       min={0} // Extinct
       low={3} // Shifting
       high={7} // Trade
