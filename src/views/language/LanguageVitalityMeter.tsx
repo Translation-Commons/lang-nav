@@ -1,6 +1,7 @@
 import React from 'react';
 
 import Deemphasized from '../../generic/Deemphasized';
+import Hoverable from '../../generic/Hoverable';
 
 interface Props {
   value?: string;
