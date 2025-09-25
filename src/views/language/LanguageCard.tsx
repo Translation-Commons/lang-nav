@@ -20,7 +20,7 @@ interface Props {
 const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
   const { updatePageParams } = usePageParams();
   const sortFunction = getSortFunction();
-  const { ID, locales, modality, populationEstimate, vitalityEth2013 } = lang;
+  const { ID, locales, modality, populationEstimate } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode,
@@ -48,8 +48,8 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
         </div>
       )}
       <div>
-        <h4>Vitality</h4>
-        <LanguageVitalityMeter value={vitalityEth2013} />
+        <h4>Vitality Metascore</h4>
+        <LanguageVitalityMeter lang={lang} />
       </div>
 
       {includeRelations && countryLocales.length > 0 && (
