@@ -12,12 +12,10 @@
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27				
 Language Code	Language Name	mo2001	mo2011	mo2016	mo2021
 mul	Total	424,203	539,131	632,857	663,782
-yue	Cantonese		449,274	506,625	537,981
-zho	#Cantonese counting for macrolanguage		449,274	506,625	537,981
+zho/yue	Cantonese		449,274	506,625	537,981
 zho	Chinese	411,482			
 zho	Other Chinese		30,590	33,453	36,032
-cmn	Mandarin		27,129	34,606	31,405
-zho	#Mandarin counting for macrolanguage		27,129	34,606	31,405
+zho/cmn	Mandarin		27,129	34,606	31,405
 eng	English	2,792	12,155	17,639	23,635
 tgl	Tagalog	3,450	9,415	18,953	19,154
 mul	Other	3,666	6,546	17,906	11,626

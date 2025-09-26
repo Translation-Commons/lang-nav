@@ -12,16 +12,15 @@ Language Code	Language Name	at2001
 mul	Total	8,032,926
 deu	German	7,115,780
 tur	Turkish	183,445
-srp	Serbian	177,320
-hrv	Croatian	131,307
+hbs/srp	Serbian	177,320
+hbs/hrv	Croatian	131,307
 eng	English	58,582
 hun	Hungarian	40,583
-bos	Bosnian	34,857
+hbs/bos	Bosnian	34,857
 pol	Polish	30,598
 sqi	Albanian	28,212
 slv	Slovenian	24,855
-burg1244	Burgenland Croatian	19,412
-ckm	#Burgenland Croatian dialect of Chakavian	19,412
+hbs/ckm/burg1244	Burgenland Croatian	19,412
 ces	Czech	17,742
 ara	Arabic	17,592
 ron	Romanian	16,885
@@ -53,7 +52,6 @@ heb	Hebrew	1,189
 fin	Finnish	987
 dan	Danish	735
 nor	Norwegian	569
-wind1243	Windisch	568
-slv	#Windisch dialect of Slovene	568
+slv/wind1243	Windisch	568
 ind	Indonesian	451
 mul	Other	38
