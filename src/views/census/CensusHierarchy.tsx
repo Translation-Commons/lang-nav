@@ -14,7 +14,7 @@ export const CensusHierarchy: React.FC = () => {
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
 
-  const rootNodes = getCensusTreeNodes(Object.values(territories), sortFunction, filterByScope);
+  const rootNodes = getCensusTreeNodes(territories, sortFunction, filterByScope);
 
   return (
     <TreeListPageBody

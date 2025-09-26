@@ -12,7 +12,7 @@ export const VariantTagHierarchy: React.FC = () => {
   const { variantTags } = useDataContext();
   const sortFunction = getSortFunction();
 
-  const nodeHierarchy = getNodeHierarchy(Object.values(variantTags));
+  const nodeHierarchy = getNodeHierarchy(variantTags);
   const rootNodes: TreeNodeData[] = getTreeNodes(nodeHierarchy, sortFunction);
 
   return (

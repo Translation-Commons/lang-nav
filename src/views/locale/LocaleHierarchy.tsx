@@ -10,11 +10,11 @@ import { TreeNodeData } from '../common/TreeList/TreeListNode';
 import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 
 export const LocaleHierarchy: React.FC = () => {
-  const { languages } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
 
-  const rootNodes = getLocaleTreeNodes(Object.values(languages), sortFunction, filterByScope);
+  const rootNodes = getLocaleTreeNodes(languagesInSelectedSource, sortFunction, filterByScope);
 
   return (
     <TreeListPageBody

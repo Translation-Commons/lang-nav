@@ -14,9 +14,7 @@ export const TerritoryHierarchy: React.FC = () => {
   const filterByScope = getScopeFilter();
 
   const rootNodes = getTerritoryTreeNodes(
-    Object.values(territories).filter(
-      (t) => t.parentUNRegion == null || !filterByScope(t.parentUNRegion),
-    ),
+    territories.filter((t) => t.parentUNRegion == null || !filterByScope(t.parentUNRegion)),
     sortFunction,
     filterByScope,
   );

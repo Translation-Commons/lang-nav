@@ -9,7 +9,7 @@ import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const TableOfAllCensuses: React.FC = () => {
-  const { censuses, languages } = useDataContext();
+  const { censuses, getLanguage } = useDataContext();
 
   return (
     <ObjectTable<CensusData>
@@ -22,7 +22,7 @@ const TableOfAllCensuses: React.FC = () => {
           render: (census) => (
             <HoverableEnumeration
               items={Object.keys(census.languageEstimates).map(
-                (lang) => languages[lang]?.nameDisplay ?? lang,
+                (lang) => getLanguage(lang)?.nameDisplay ?? lang,
               )}
             />
           ),

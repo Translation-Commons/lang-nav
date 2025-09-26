@@ -15,7 +15,7 @@ const VariantTagTable: React.FC = () => {
 
   return (
     <ObjectTable<VariantTagData>
-      objects={Object.values(variantTags)}
+      objects={variantTags}
       columns={[
         CodeColumn,
         NameColumn,

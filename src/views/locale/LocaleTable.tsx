@@ -20,7 +20,7 @@ const LocaleTable: React.FC = () => {
 
   return (
     <ObjectTable<LocaleData>
-      objects={Object.values(locales).filter(
+      objects={locales.filter(
         (locale) => locale.language?.sourceSpecific[languageSource].code != null,
       )}
       columns={[
