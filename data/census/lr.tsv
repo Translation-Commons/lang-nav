@@ -5,14 +5,12 @@
 #datePublished	June 2024			
 #eligiblePopulation		5,250,187	3,489,072	2,101,628
 #tableName	Table 4.2: Major ethnic groups by type of residence, 1984, 2008 and 2022			
-#modality	Ethnicity			
 #age	0+			
 #url	https://lisgis.gov.lr/censusreport/thematic/ThematicReportonPopulationSizeDistributionandStructure.pdf			
 #collectorType	Government			
 #collectorName	Liberia Institute of Statistics & Geo-Information Services			
 Language Code	Language Name	Liberia Ethnicity 2022	Liberia Ethnicity 2008	Liberia Ethnicity 1984
-kpe	Kpelle	1,060,538	708,282	407,716
-xpe	#Liberian Kpelle	1,060,538	708,282	407,716
+kpe/xpe	Kpelle	1,060,538	708,282	407,716
 bsq	Bassa	714,025	467,536	290,025
 grb	Grebo	519,769	348,907	189,147
 dnj	Gio	414,765	279,126	163,927
@@ -21,7 +19,7 @@ kro	Kru	288,760	209,344	153,419
 lom	Lorma	252,009	177,943	117,691
 guer1244	Krahn	236,258	139,563	79,862
 kss	Kissi	225,758	167,475	84,065
-mnk	Mandingo	220,508	115,139	107,183
+man/mnk	Mandingo	220,508	115,139	107,183
 gol	Gola	199,507	153,519	84,065
 vai	Vai	199,507	139,563	75,659
 mul	Other African tribe	157,506	48,847	33,626
