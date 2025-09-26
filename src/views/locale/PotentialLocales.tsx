@@ -220,7 +220,7 @@ function getPotentialLocales(
         });
         return missing;
       }, {}),
-    [censuses, localeSeparator, percentThreshold],
+    [censuses, localeSeparator, percentThreshold, getLanguage, getLocale],
   );
 
   // Group all locales (actual & missing) by language
