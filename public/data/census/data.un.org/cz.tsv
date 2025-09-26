@@ -1,0 +1,26 @@
+#codeDisplay		cz2001	cz2011	cz2021
+#nameDisplay		Czechia 2001	Czechia 2011	Czechia 2021
+#isoRegionCode	CZ			
+#yearCollected		2001	2011	2021
+#datePublished		2003	2012	2022
+#eligiblePopulation		10,230,060	10,436,560	10,524,167
+#respondingPopulation		522,663		1,310,180
+#notes	Census - de jure - complete tabulation			
+#responsesPerIndividual		1	1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	cz2001	cz2011	cz2021
+mul	Total	10,230,060	10,436,560	10,524,167
+ces	Czech	9,707,397	9,263,300	9,213,987
+mis	Not stated	76,868		759,394
+mis	Unknown		464,056	
+mul	Other	99,258	416,432	
+slk	Slovak	208,723	154,465	225,246
+ukr	Ukrainian		48,250	123,738
+rus	Russian	18,746	31,622	96,361
+pol	Polish	50,738	33,597	49,669
+deu	German	41,328	14,148	31,756
+eng	English	3,791	7,202	30,478
+rom	Romany	23,211	2,711	28,102
+rsk	Ruthenian		777	1,276
+her	Herero		0	
