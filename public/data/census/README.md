@@ -42,7 +42,7 @@ Sometimes a row of data from a census does not have an easy to use language code
 
 If you are not sure which one to use, use `und`.
 
-**Dialects**: If a row is a dialect, try to find the most precise language code. That could be the glottocode, for example `wind1243` for Windisch, rather than Slovenian `slv` (for which it is a dialect). If the rows are mutually exclusive (individuals aren't counted multiple times) then you can add a macrolanguage indicator so its counted as data for the dialect & the language (presuming there is no separate Slovenian row that would double count the Windisch speakers).
+**Dialects**: If a row is a dialect, try to find the most precise language code. That could be the glottocode, for example `wind1243` for Windisch, rather than Slovenian `slv` (for which it is a dialect). If the rows are mutually exclusive (individuals aren't counted multiple times) then you can add a macrolanguage indicator so its counted as data for the dialect & the language (presuming there is no separate Slovenian row that would double count the Windisch speakers). So the row would look like `slv/wind1243`.
 
 **Language Families**: Some censuses may include language family data in addition to individual languages. For data completeness, it may be useful to include that data as well. You will have to use ISO 639-5 language family codes or glottocodes for these entries. If you need help finding the right code, it can be useful to use the Hierarchy view and use the language family in the search term. The canadian census in this regard is very helpful here since the data comes in a hierarchical form, so you can look up language codes using the tool directly, eg. http://translation-commons.github.io/lang-nav/?view=Hierarchy&searchString=atha&searchBy=English+Name+or+ID
 
@@ -156,25 +156,25 @@ While you add data, you may notice that some rows could be counted for a specifi
 In order to do this, add a new column where the top of it says "#macrolanguage" -- that's a special indicator that will let the census processor know to also count that language row for the code indicated in that column if indicated.
 
 ```
-#codeDisplay		#macrolanguage	at2001
-#nameDisplay			Austria 2001
+#codeDisplay		at2001
+#nameDisplay		Austria 2001
 ...
-Language Code	Language Name		at2001
-mul	Total		8,032,926
-deu	German		7,115,780
-tur	Turkish		183,445
-srp	Serbian	hbs	177,320
-hrv	Croatian	hbs	131,307
-eng	English		58,582
-hun	Hungarian		40,583
-bos	Bosnian	hbs	34,857
+Language Code	Language Name	at2001
+mul	Total	8,032,926
+deu	German	7,115,780
+tur	Turkish	183,445
+hbs/srp	Serbian	177,320
+hrv	Croatian	131,307
+eng	English	58,582
+hun	Hungarian	40,583
+hbs/bos	Bosnian	34,857
 ...
-burg1244	Burgenland Croatian	ckm	19,412
+hbs/ckm/burg1244	Burgenland Croatian	19,412
 ...
-wind1243	Windisch	slv	568
+slv/wind1243	Windisch	568
 ```
 
-Note that this example shows a rare but possible case where the language row should actually be counted 3 times: Burgenland Croatian should be counted for `burg1244` Burgenland Croatian, `ckm` Chakavian, and `hbs` Serbo-Croatian -- the system does not handle 3 assignments at the moment.
+Note that this example shows a rare but possible case where the language row should actually be counted 3 times: Burgenland Croatian should be counted for `burg1244` Burgenland Croatian, `ckm` Chakavian, and `hbs` Serbo-Croatian, note that they are all 3 listed.
 
 ## Step 5: Plug it in
 

@@ -1,80 +1,80 @@
-#codeDisplay		#macrolanguage	et2007
-#nameDisplay			Ethiopia 2007
-#isoRegionCode	ET		
-#yearCollected			2007
-#datePublished			2010
-#eligiblePopulation			73,750,932
-#notes			Census - de facto - complete tabulation, languages decoded with help of this publication: https://www.researchgate.net/publication/309661432_Ethnic_Group_and_Mother_Tongue_in_the_Ethiopian_Censuses_of_1994_and_2007
-#responsesPerIndividual	1		
-#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
-#collectorType	Government		
-Language Code	Language Name		et2007
-mul	Total		73,750,932
-orm	Oromigna		24,930,424
-amh	Amharigna		21,634,396
-som	Somaligna		4,609,274
-tir	Tigrigna		4,324,933
-sid	Sidamigna		2,981,471
-wal	Wetawitgna		1,627,955
-sgw	Guragigna		1,481,836
-mul	Other Ethiopian		1,329,834
-aar	Affarigna		1,281,284
-hdy	Hadiyigna		1,253,894
-gmv	Gamogna		1,070,626
-drs	Gedeogina		974,609
-stv	Shitagna		880,818
-kbr	Keffigna		834,918
-ktb	Kembatigna		614,807
-awn	Agew/Awingigna		488,507
-gof	Goffigna		358,887
-bcq	Benchigna		347,636
-aiw	Arigna		285,473
-kxc	Konsogna		242,059
-alw	Alabigna		226,604
-xan	Agew/Kamyrgna		213,355
-guk	Gumzigna		179,348
-nus	Nuwerigna		153,407
-mym	Meenigna		145,333
-timb1262	Timbarogna	ktb	97,806
-mdy	Maliegna		94,746
-bst	Basketigna		92,586
-jnj	Yemsagna		92,177
-anu	Anywakgna		90,579
-dwr	Kontigna		81,578
-liq	Marekogna		58,788
-alw	Kebinigna		51,333
-gdl	Gidoligna		49,927
-dsh	Dasenechgna		47,986
-amf	Hammerigna		47,531
-bji	Burijgna		46,419
-agj	Argobigna		43,682
-she	Shekegna		38,911
-bwo	Shinashigna		37,459
-oyd	Oydigna		36,946
-mdx	Dizigna		33,927
-doz	Dorzigna		30,098
-har	Hararigna		25,810
-nnj	Nyangatomigna		24,303
-mul	Other Foreign Languages		20,102
-zay	Zeysigna		18,512
-tsb	Tsamaigna		18,048
-cra	Charrigna		13,100
-dox	Mosiyagna		9,552
-kmw	Komigna		8,534
-merr1238	Merigna	bcq	8,159
-kun	Kunamigna		7,428
-muz	Mursygna		7,386
-arv	Arboriegna		7,211
-noz	Naogna		7,188
-mpe	Mesengogna		6,443
-bodi1253	Bodigna	mym	5,770
-fada1248	Fadashigna	wti	4,484
-xwg	Guagugna		3,282
-kcx	Kechamigna		2,829
-kqy	Koyrigna		2,473
-eng	English		1,867
-dwr	Kulogna		1,478
-	Gegatogna		1,421
-dim	Dimegna		574
-shee1239	Shegna	bcq	492
-kmq	Kewamigna		319
+#codeDisplay		et2007
+#nameDisplay		Ethiopia 2007
+#isoRegionCode	ET	
+#yearCollected		2007
+#datePublished		2010
+#eligiblePopulation		73,750,932
+#notes		Census - de facto - complete tabulation, languages decoded with help of this publication: https://www.researchgate.net/publication/309661432_Ethnic_Group_and_Mother_Tongue_in_the_Ethiopian_Censuses_of_1994_and_2007
+#responsesPerIndividual	1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	et2007
+mul	Total	73,750,932
+orm	Oromigna	24,930,424
+amh	Amharigna	21,634,396
+som	Somaligna	4,609,274
+tir	Tigrigna	4,324,933
+sid	Sidamigna	2,981,471
+wal	Wetawitgna	1,627,955
+sgw	Guragigna	1,481,836
+mul	Other Ethiopian	1,329,834
+aar	Affarigna	1,281,284
+hdy	Hadiyigna	1,253,894
+gmv	Gamogna	1,070,626
+drs	Gedeogina	974,609
+stv	Shitagna	880,818
+kbr	Keffigna	834,918
+ktb	Kembatigna	614,807
+awn	Agew/Awingigna	488,507
+gof	Goffigna	358,887
+bcq	Benchigna	347,636
+aiw	Arigna	285,473
+kxc	Konsogna	242,059
+alw	Alabigna	226,604
+xan	Agew/Kamyrgna	213,355
+guk	Gumzigna	179,348
+nus	Nuwerigna	153,407
+mym	Meenigna	145,333
+ktb/timb1262	Timbarogna	97,806
+mdy	Maliegna	94,746
+bst	Basketigna	92,586
+jnj	Yemsagna	92,177
+anu	Anywakgna	90,579
+dwr	Kontigna	81,578
+liq	Marekogna	58,788
+alw	Kebinigna	51,333
+gdl	Gidoligna	49,927
+dsh	Dasenechgna	47,986
+amf	Hammerigna	47,531
+bji	Burijgna	46,419
+agj	Argobigna	43,682
+she	Shekegna	38,911
+bwo	Shinashigna	37,459
+oyd	Oydigna	36,946
+mdx	Dizigna	33,927
+doz	Dorzigna	30,098
+har	Hararigna	25,810
+nnj	Nyangatomigna	24,303
+mul	Other Foreign Languages	20,102
+zay	Zeysigna	18,512
+tsb	Tsamaigna	18,048
+cra	Charrigna	13,100
+dox	Mosiyagna	9,552
+kmw	Komigna	8,534
+bcq/merr1238	Merigna	8,159
+kun	Kunamigna	7,428
+muz	Mursygna	7,386
+arv	Arboriegna	7,211
+noz	Naogna	7,188
+mpe	Mesengogna	6,443
+mym/bodi1253	Bodigna	5,770
+wti/fada1248	Fadashigna	4,484
+xwg	Guagugna	3,282
+kcx	Kechamigna	2,829
+kqy	Koyrigna	2,473
+eng	English	1,867
+dwr	Kulogna	1,478
+	Gegatogna	1,421
+dim	Dimegna	574
+bcq/shee1239	Shegna	492
+kmq	Kewamigna	319

@@ -62,12 +62,6 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       return tsvColumnNumber + 2; // +2 to account for the skipped columns
     })
     .filter((col) => col !== null);
-
-  // Optional Column to indicate a language should also be counted for a macrolanguage
-  // For example the row `chew1246` Chichewa should be also counted for `nya`
-  const macrolanguageColumnNumber = lines[0]
-    .split('\t')
-    .findIndex((col) => col.toLowerCase() === '#macrolanguage');
   if (tsvColumnsWithData.length <= 0) {
     throw new Error('No census data found in the file.');
   }
@@ -171,10 +165,12 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       continue; // Skip lines that do not have enough data
     }
 
-    const languageCode = parts[0].trim() as LanguageCode;
+    const languageCodes = parts[0].split('/').map((code) => code.trim());
     if (
-      ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCode) ||
-      languageCode.startsWith('#')
+      languageCodes.length === 0 ||
+      languageCodes[0] === '' ||
+      ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCodes[0]) ||
+      languageCodes[0].startsWith('#')
     ) {
       // Skip header and special language codes
       // 'Language Code' is the header, 'mul' is for multiple languages, 'mis' is for missing languages,
@@ -197,7 +193,9 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
         languageName = toTitleCase(languageName);
       }
 
-      // Accumulate language names if it appears in multiple places.
+      // Accumulate language names if it appears in multiple places
+      // If there are multiple language codes, use the last one since that's usually the most specific
+      const languageCode = languageCodes[languageCodes.length - 1] as LanguageCode;
       if (languageNames[languageCode] != null) {
         languageNames[languageCode] = languageNames[languageCode] + ' / ' + languageName; // If the language code already exists, append the name
       } else {
@@ -219,27 +217,16 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
         popEstimate = 1;
       }
 
-      // Add the population estimate to the specific language code
-      if (censuses[i].languageEstimates[languageCode] != null) {
-        // If the language estimate already exists, add the estimate
-        censuses[i].languageEstimates[languageCode] += popEstimate;
-      } else {
-        censuses[i].languageEstimates[languageCode] = popEstimate;
-        censuses[i].languageCount += 1; // Increment the language count for the census
-      }
-
-      // If there is a macrolanguage column and it has a value, also add the population to that macrolanguage
-      if (macrolanguageColumnNumber !== -1) {
-        const macroLangCode = parts[macrolanguageColumnNumber].trim() as LanguageCode;
-        if (macroLangCode !== '') {
-          if (censuses[i].languageEstimates[macroLangCode] != null) {
-            censuses[i].languageEstimates[macroLangCode] += popEstimate;
-          } else {
-            censuses[i].languageEstimates[macroLangCode] = popEstimate;
-            censuses[i].languageCount += 1; // Increment the language count for the census
-          }
+      // Add the population estimate to the indicated language codes
+      languageCodes.forEach((code) => {
+        if (censuses[i].languageEstimates[code] != null) {
+          // If the language estimate already exists, add the estimate
+          censuses[i].languageEstimates[code] += popEstimate;
+        } else {
+          censuses[i].languageEstimates[code] = popEstimate;
+          censuses[i].languageCount += 1; // Increment the language count for the census
         }
-      }
+      });
     });
   }
 
