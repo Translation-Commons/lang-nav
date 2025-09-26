@@ -85,7 +85,6 @@ export function getISOScore(vitality: string): number | null {
 export function computeVitalityMetascore(lang: LanguageData): {
   score: number | null;
   explanation: string;
-  sources: string[];
 } {
   const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
   const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
