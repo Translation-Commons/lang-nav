@@ -18,7 +18,6 @@ mis	#Tongan original, counting bilingual			85,406
 mis	#English original, counting bilingual			78,997
 ton	#Tongan only, derived from other rows			7,626
 eng	#English only, derived from other rows			1,217
-eng	#English and Tongan	58,411	74,472	77,780
-ton	#English and Tongan	58,411	74,472	77,780
+eng/ton	#English and Tongan	58,411	74,472	77,780
 mul	Other	1,180	940	8,629
 mis	Not stated		26	758

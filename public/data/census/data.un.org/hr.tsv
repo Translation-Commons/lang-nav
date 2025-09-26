@@ -10,21 +10,17 @@
 #collectorType	Government			
 Language Code	Language Name	hr2001	hr2011	hr2021
 mul	Total	4,437,460	4,284,889	3,871,833
-hrv	Croatian	4,265,081	4,096,305	3,687,735
-hbs	#Croatian counting for the macrolanguage	4,265,081	4,096,305	3,687,735
-srp	Serbian	44,629	52,879	45,004
-hbs	#Serbian counting for the macrolanguage	44,629	52,879	45,004
+hbs/hrv	Croatian	4,265,081	4,096,305	3,687,735
+hbs/srp	Serbian	44,629	52,879	45,004
 mis	Unknown	16,709	9,329	20,840
 ita	Italian	20,521	18,573	12,890
-bos	Bosnian		16,856	17,531
-hbs	#Bosnian counting for the macrolanguage		16,856	17,531
+hbs/bos	Bosnian		16,856	17,531
 sqi	Albanian	14,621	17,069	13,503
 rom	#Romani		14,369	15,269
 hun	Hungarian	12,650	10,231	7,218
 slv	Slovenian	11,872	9,220	7,620
 mul	Other	2,824	5,367	9,910
-bos	Bosniac	9,197		
-bos	#Bosniac counting for the macrolanguage	9,197		
+hbs/bos	Bosniac	9,197		
 hbs	Serbo-Croatian	4,961	7,822	8,182
 hbs	Croato-Serbian		3,059	4,278
 hbs	#Croato-Serbian or Serbo-croatian	2,054		
@@ -37,10 +33,9 @@ ces	Czech	7,178	6,292	4,915
 rsk	Ruthenian	1,828	1,472	1,011
 ron	Romanian	1,205	955	671
 ukr	Ukrainian	1,027	1,008	1,198
-cnr	Montenegrin	460	876	943
-hbs	#Montenegrin counting for the macrolanguage	460	876	943
+hbs/cnr	Montenegrin	460	876	943
 pol	Polish	536	639	730
 tur	Turkish	347	342	368
 bul	Bulgarian	265	293	263
 heb	Hebrew	8	30	82
-rmy	Vlach	7	14	40
+rom/rmy	Vlach	7	14	40
