@@ -1,0 +1,27 @@
+#codeDisplay		#macrolanguage	mw1998	mw2008	#Notes
+#nameDisplay			Malawi 1998	Malawi 2008	
+#isoRegionCode	MW				
+#yearCollected			1998	2008	
+#datePublished			2000	2009	
+#eligiblePopulation			9,933,868	13,029,498	
+#notes	Census - de facto - complete tabulation				
+#responsesPerIndividual	1				
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27				
+#collectorType	Government				
+Language Code	Language Name		mw1998	mw2008	
+mul	Total		9,933,868	13,029,498	
+chew1246	Chichewa	nya	5,679,482	4,252,204	
+lon	Chilomwe		241,576	2,288,285	
+yao	Chiyao		999,024	1,760,843	
+ngon1270	Chingoni	nya	74,198	1,492,850	Ngoni is an ethnic group that may speak multiple languages but we're presuming Chichewa [nya] is the primary one in Malawi. Ngoni [xnj] is a dead language.
+nucl1395	Chinyanja	nya	1,272,205	754,410	
+tum	Chitumbuka		939,109	1,152,017	
+swk	Chisena		264,172	467,958	
+mul	Other		105,343	357,615	
+tog	Chitonga		165,654	270,833	
+nkon1246	Chinkhonde	nyy	84,000	129,914	
+lai	Chilambya		44,385	59,452	
+nyak1261	Chinyakyusa	nyy	24,824	18,751	
+seng1277	Chisenga	tum	19,959	24,366	
+eng	English		17,479		
+por	Portuguese		2,458		
