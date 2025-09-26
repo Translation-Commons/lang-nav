@@ -23,10 +23,10 @@ const LanguageVitalityMeter: React.FC<Props> = ({ lang }) => {
     >
       <meter
         min={0} // Extinct
-        low={3} // Shifting/Endangered
-        high={7} // Trade/Stable
-        optimum={8} // Regional/Institutional
-        max={9} // National/Living
+        low={3} // Shifting/Endangered -- below this, the meter is colored red
+        high={7} // Trade/Stable -- below this, the meter is colored yellow
+        optimum={8} // Regional -- tells the renderer that high and above is green
+        max={9} // National/Institutional/Living
         value={metascore.score}
         title={`Vitality Metascore: ${metascore.score.toFixed(1)}`}
         style={{ width: '100%', minWidth: '8em' }}
