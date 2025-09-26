@@ -8,6 +8,8 @@ import DetailsField from '../common/details/DetailsField';
 import DetailsSection from '../common/details/DetailsSection';
 import HoverableObjectName from '../common/HoverableObjectName';
 
+import TableOfLanguagesInTerritory from './TableOfLanguagesInTerritory';
+
 type Props = {
   territory: TerritoryData;
 };
@@ -42,16 +44,6 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       </DetailsSection>
 
       <DetailsSection title="Connections">
-        {locales.length > 0 && (
-          <DetailsField title="Languages:">
-            <CommaSeparated>
-              {Object.values(locales).map((locale) => (
-                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
-              ))}
-            </CommaSeparated>
-          </DetailsField>
-        )}
-
         {parentUNRegion != null && (
           <DetailsField title="In UN region:">
             <HoverableObjectName object={parentUNRegion} />
@@ -92,6 +84,13 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
           </DetailsField>
         )}
       </DetailsSection>
+
+      {/* Languages table for the territory */}
+      {locales.length > 0 && (
+        <DetailsSection title="Languages">
+          <TableOfLanguagesInTerritory territory={territory} />
+        </DetailsSection>
+      )}
     </div>
   );
 };
