@@ -48,7 +48,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
         </div>
       )}
       <div>
-        <h4>Vitality Metascore</h4>
+        <h4>Vitality</h4>
         <LanguageVitalityMeter lang={lang} />
       </div>
 
