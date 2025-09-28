@@ -134,7 +134,7 @@ export function addIANAVariantLocales(
       locales[localeCode] = {
         ID: localeCode,
         languageCode: iso639_3,
-        variantTagCode: variant.ID,
+        variantTagCodes: [variant.ID],
         nameDisplay: variant.nameDisplay,
         localeSource: 'IANA',
         codeDisplay: localeCode,
@@ -175,15 +175,19 @@ export function connectVariantTags(
 
   // Link locales to variants and vice versa
   Object.values(locales).forEach((locale) => {
-    const { variantTagCode } = locale;
-    if (!variantTagCode) return; // Skip if no variant tag ID
-    const variant = variantTags[variantTagCode];
-    if (!variant) {
-      console.warn(`Variant tag ${variantTagCode} not found for locale ${locale.ID}`);
-      return;
-    }
+    const { variantTagCodes } = locale;
+    if (!variantTagCodes || variantTagCodes.length === 0) return; // Skip if no variant tag ID
 
-    variant.locales.push(locale);
-    locale.variantTag = variant;
+    variantTagCodes.forEach((variantTagCode) => {
+      const variant = variantTags[variantTagCode];
+      if (!variant) {
+        console.warn(`Variant tag ${variantTagCode} not found for locale ${locale.ID}`);
+        return;
+      }
+
+      variant.locales.push(locale);
+      if (!locale.variantTags) locale.variantTags = [];
+      locale.variantTags.push(variant);
+    });
   });
 }

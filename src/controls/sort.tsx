@@ -178,7 +178,8 @@ export function getUniqueTerritoriesForLanguage(lang: LanguageData): string[] {
     lang.locales
       .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0))
       .map((l) => l.territory?.nameDisplay ?? l.territoryCode)
-      .filter((name) => name != null && name !== ''),
+      .filter((name) => name != null)
+      .filter((name) => name !== ''),
     (name) => name,
   );
 }

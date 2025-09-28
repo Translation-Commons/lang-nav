@@ -8,7 +8,8 @@ import {
 } from '../types/DataTypes';
 import { getBaseLanguageData, LanguageModality } from '../types/LanguageTypes';
 import { LanguageData } from '../types/LanguageTypes';
-import { ObjectType } from '../types/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '../types/PageParamTypes';
+import { getLocaleCodeFromTags, parseLocaleCode } from '../views/locale/LocaleStrings';
 
 export function parseLanguageLine(line: string): LanguageData {
   const parts = line.split('\t');
@@ -69,29 +70,32 @@ export function parseLocaleLine(line: string): LocaleData | null {
   if (parts.length === 1 && parts[0] === '') {
     // Empty line, ignore
     return null;
-  } else if (parts.length !== 10) {
+  } else if (parts.length !== 6) {
     console.error(`Locale line not the right length, ${parts.length} parts: ${line}`);
     return null;
   }
+  const inputLocaleID = parts[0];
+  const localeParts = parseLocaleCode(inputLocaleID);
+  const { languageCode, scriptCode, territoryCode, variantTagCodes } = localeParts;
+  const localeID = getLocaleCodeFromTags(localeParts, LocaleSeparator.Underscore);
   const nameEndonym = parts[2] || undefined;
-  const variantTagCode = (parts[6] || undefined)?.toLowerCase();
 
   return {
     type: ObjectType.Locale,
-    ID: parts[0],
-    codeDisplay: parts[0],
+    ID: localeID,
+    codeDisplay: localeID,
     localeSource: 'regularInput',
 
     nameDisplay: parts[1],
     nameEndonym: parts[2] || undefined,
     names: [parts[1], nameEndonym].filter((s) => s != null),
-    languageCode: parts[3],
-    territoryCode: parts[4],
-    explicitScriptCode: parts[5] || undefined,
-    variantTagCode,
-    populationSource: parts[7] as PopulationSourceCategory,
-    populationSpeaking: Number.parseInt(parts[8]?.replace(/,/g, '')),
-    officialStatus: (parts[9] || undefined) as OfficialStatus | undefined,
+    languageCode,
+    territoryCode,
+    scriptCode,
+    variantTagCodes,
+    populationSource: parts[3] as PopulationSourceCategory,
+    populationSpeaking: Number.parseInt(parts[4]?.replace(/,/g, '')),
+    officialStatus: (parts[5] || undefined) as OfficialStatus | undefined,
   };
 }
 

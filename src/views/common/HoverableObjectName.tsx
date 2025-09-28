@@ -25,7 +25,7 @@ const HoverableObjectName: React.FC<Props> = ({
     if (labelSource == 'language') {
       label = object.language?.nameDisplay ?? object.languageCode;
     } else if (labelSource == 'territory') {
-      label = object.territory?.nameDisplay ?? object.territoryCode;
+      label = object.territory?.nameDisplay ?? object.territoryCode ?? '[no territory]';
     }
   }
 

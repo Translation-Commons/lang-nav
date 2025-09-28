@@ -156,9 +156,9 @@ export interface LocaleData extends ObjectBase {
   nameDisplay: string;
   nameEndonym?: string;
   languageCode: LanguageCode;
-  territoryCode: TerritoryCode;
-  explicitScriptCode?: ScriptCode;
-  variantTagCode?: VariantIANATag; // TODO Variant tags can be singular (eg. roh-rumgr) or composite (eg. oc-lengadoc-grclass)
+  territoryCode?: TerritoryCode;
+  scriptCode?: ScriptCode;
+  variantTagCodes?: VariantIANATag[];
 
   populationSource?: PopulationSourceCategory;
   populationSpeaking: number;
@@ -170,7 +170,7 @@ export interface LocaleData extends ObjectBase {
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
   containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
-  variantTag?: VariantTagData;
+  variantTags?: VariantTagData[];
 
   // Data added up some references
   populationSpeakingPercent?: number;

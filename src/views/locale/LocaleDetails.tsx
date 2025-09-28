@@ -38,13 +38,13 @@ const LocaleDetails: React.FC<Props> = ({ locale }) => {
 
 const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const {
-    explicitScriptCode,
+    scriptCode,
     language,
     languageCode,
     territory,
     territoryCode,
-    variantTag,
-    variantTagCode,
+    variantTags,
+    variantTagCodes,
     writingSystem,
   } = locale;
 
@@ -59,33 +59,35 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           </span>
         )}
       </DetailsField>
-      <DetailsField title="Territory:">
-        {territory ? (
-          <HoverableObjectName object={territory} />
-        ) : (
-          <span>
-            {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
-          </span>
-        )}
-      </DetailsField>
-      {explicitScriptCode && (
+      {(territory || territoryCode) && (
+        <DetailsField title="Territory:">
+          {territory ? (
+            <HoverableObjectName object={territory} />
+          ) : (
+            <span>
+              {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
+            </span>
+          )}
+        </DetailsField>
+      )}
+      {scriptCode && (
         <DetailsField title="Writing System:">
           {writingSystem ? (
             <HoverableObjectName object={writingSystem} />
           ) : (
             <span>
-              {explicitScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
+              {scriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
             </span>
           )}
         </DetailsField>
       )}
-      {variantTagCode && (
-        <DetailsField title="Variant Tag:">
-          {variantTag ? (
-            <HoverableObjectName object={variantTag} />
+      {variantTagCodes && variantTagCodes.length > 0 && (
+        <DetailsField title={`Variant Tag${variantTagCodes.length > 1 ? 's' : ''}:`}>
+          {variantTags ? (
+            variantTags.map((tag) => <HoverableObjectName key={tag.ID} object={tag} />)
           ) : (
             <span>
-              {variantTagCode} <Deemphasized>[variant not in database]</Deemphasized>
+              {variantTagCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
             </span>
           )}
         </DetailsField>
