@@ -1,0 +1,24 @@
+#codeDisplay		al2011	al2023
+#nameDisplay		Albania 2011	Albania 2023
+#isoRegionCode		AL	AL
+#yearCollected		2011	2023
+#datePublished		2013	2024
+#eligiblePopulation		2,800,138	2,402,113
+#notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#responsesPerIndividual		1	1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	al2011	al2023
+mul	Total	2,800,138	2,402,113
+sqi	Albanian	2,765,610	2,187,788
+mis	Unknown		134,453
+mul	Other	1,870	37,033
+mis	Not stated	3,843	29,120
+ell	Greek	15,196	
+mul	Mixed		13,719
+mkd	Macedonian	4,443	
+rom	Romani (Gypsy)	4,025	
+rup	Aromanian	3,848	
+tur	Turkish	714	
+ita	Italian	523	
+hbs	Serbo-Croatian	66	
