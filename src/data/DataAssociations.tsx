@@ -54,6 +54,7 @@ export function connectWritingSystems(
 
     if (language != null) {
       writingSystem.primaryLanguage = language;
+      if (!writingSystem.languages) writingSystem.languages = {};
       writingSystem.languages[language.ID] = language;
       language.writingSystems[writingSystem.ID] = writingSystem;
     }
@@ -62,9 +63,10 @@ export function connectWritingSystems(
     }
     if (parentWritingSystem != null) {
       writingSystem.parentWritingSystem = parentWritingSystem;
+      if (!parentWritingSystem.childWritingSystems) parentWritingSystem.childWritingSystems = [];
       parentWritingSystem.childWritingSystems.push(writingSystem);
     }
-    if (containsWritingSystemsCodes.length > 0) {
+    if (containsWritingSystemsCodes && containsWritingSystemsCodes.length > 0) {
       writingSystem.containsWritingSystems = containsWritingSystemsCodes
         .map((code) => writingSystems[code])
         .filter(Boolean);
@@ -77,7 +79,10 @@ export function connectWritingSystems(
     if (primaryScriptCode != null) {
       const primaryWritingSystem = writingSystems[primaryScriptCode];
       if (primaryWritingSystem != null) {
+        if (!primaryWritingSystem.languages) primaryWritingSystem.languages = {};
         primaryWritingSystem.languages[language.ID] = language;
+        if (!primaryWritingSystem.populationUpperBound)
+          primaryWritingSystem.populationUpperBound = 0;
         primaryWritingSystem.populationUpperBound += language.populationCited || 0;
         language.primaryWritingSystem = primaryWritingSystem;
         language.writingSystems[primaryWritingSystem.ID] = primaryWritingSystem;
@@ -108,6 +113,7 @@ export function connectLocales(
       : null;
 
     if (territory != null) {
+      if (!territory.locales) territory.locales = [];
       territory.locales.push(locale);
       locale.territory = territory;
       locale.populationSpeakingPercent = (locale.populationSpeaking * 100) / territory.population;
@@ -117,12 +123,15 @@ export function connectLocales(
       locale.language = language;
     }
     if (writingSystem != null) {
+      if (!writingSystem.localesWhereExplicit) writingSystem.localesWhereExplicit = [];
       writingSystem.localesWhereExplicit.push(locale);
       locale.writingSystem = writingSystem;
 
       if (language != null) {
+        if (!writingSystem.languages) writingSystem.languages = {};
         writingSystem.languages[language.ID] = language;
         if (language.primaryScriptCode != locale.explicitScriptCode) {
+          if (!writingSystem.populationUpperBound) writingSystem.populationUpperBound = 0;
           writingSystem.populationUpperBound += locale.populationSpeaking || 0;
         }
       }
@@ -197,12 +206,13 @@ export function computeOtherPopulationStatistics(
 
 function computeWritingSystemDescendentPopulation(writingSystem: WritingSystemData): number {
   const { childWritingSystems } = writingSystem;
-  const descendentPopulation = childWritingSystems.reduce(
-    (total, childSystem) => total + computeWritingSystemDescendentPopulation(childSystem),
-    0,
-  );
+  const descendentPopulation =
+    childWritingSystems?.reduce(
+      (total, childSystem) => total + computeWritingSystemDescendentPopulation(childSystem),
+      0,
+    ) || 0;
   writingSystem.populationOfDescendents = descendentPopulation;
-  return descendentPopulation + writingSystem.populationUpperBound;
+  return descendentPopulation + (writingSystem.populationUpperBound ?? 0);
 }
 
 function computeLanguageDescendentPopulation(lang: LanguageData, source: LanguageSource): number {

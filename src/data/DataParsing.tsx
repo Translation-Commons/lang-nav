@@ -92,8 +92,6 @@ export function parseLocaleLine(line: string): LocaleData | null {
     populationSource: parts[7] as PopulationSourceCategory,
     populationSpeaking: Number.parseInt(parts[8]?.replace(/,/g, '')),
     officialStatus: parts[9] !== '' ? (parts[9] as OfficialStatus) : undefined,
-
-    censusRecords: [], // Populated later
   };
 }
 
@@ -111,25 +109,12 @@ export function parseWritingSystem(line: string): WritingSystemData {
     nameFull: parts[2],
     nameEndonym,
     names: [parts[1], parts[2], nameEndonym].filter((s) => s != null),
-    unicodeVersion: parts[4] !== '' ? parseFloat(parts[4]) : null,
-    sample: parts[5] !== '' ? parts[5] : null,
-    rightToLeft: parts[6] === 'Yes' ? true : parts[6] === 'no' ? false : null,
-    primaryLanguageCode: parts[7] !== '' ? parts[7] : null,
-    territoryOfOriginCode: parts[8] !== '' ? parts[8] : null,
-    parentWritingSystemCode: parts[9] !== '' ? parts[9] : null,
+    unicodeVersion: parts[4] !== '' ? parseFloat(parts[4]) : undefined,
+    sample: parts[5] !== '' ? parts[5] : undefined,
+    rightToLeft: parts[6] === 'Yes' ? true : parts[6] === 'no' ? false : undefined,
+    primaryLanguageCode: parts[7] !== '' ? parts[7] : undefined,
+    territoryOfOriginCode: parts[8] !== '' ? parts[8] : undefined,
+    parentWritingSystemCode: parts[9] !== '' ? parts[9] : undefined,
     containsWritingSystemsCodes: parts[10] !== '' ? parts[10].split(', ') : [],
-
-    // Derived when combining other data
-    populationUpperBound: 0,
-    populationOfDescendents: 0,
-
-    // References to other objects, filled in with DataAssociations methods
-    languages: {},
-    localesWhereExplicit: [],
-    primaryLanguage: undefined,
-    territoryOfOrigin: undefined,
-    parentWritingSystem: undefined,
-    childWritingSystems: [],
-    containsWritingSystems: [],
   };
 }

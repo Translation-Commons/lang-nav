@@ -143,7 +143,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </DetailsField>
       )}
 
-      {censusRecords?.length > 0 && (
+      {censusRecords && censusRecords.length > 0 && (
         <DetailsField title="Other Censuses:">
           <table style={{ marginLeft: '2em', borderSpacing: '1em 0' }}>
             <thead>

@@ -85,9 +85,9 @@ export function getObjectPopulation(object: ObjectData): number {
     case ObjectType.Census:
       return object.eligiblePopulation;
     case ObjectType.WritingSystem:
-      return object.populationUpperBound;
+      return object.populationUpperBound ?? 0;
     case ObjectType.Territory:
-      return object.population;
+      return object.population ?? 0;
     case ObjectType.VariantTag:
       return object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0);
   }
@@ -114,7 +114,7 @@ export function getObjectPopulationOfDescendents(
         ? (object.sourceSpecific[languageSource].populationOfDescendents ?? 0)
         : (object.populationOfDescendents ?? 0);
     case ObjectType.WritingSystem:
-      return object.populationOfDescendents;
+      return object.populationOfDescendents ?? 0;
     default:
       return 0;
   }

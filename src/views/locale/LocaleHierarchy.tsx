@@ -116,6 +116,7 @@ function getTerritoryNodesForWritingSystem(
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean,
 ): TreeNodeData[] {
+  if (!writingSystem.localesWhereExplicit) return [];
   return writingSystem.localesWhereExplicit
     .filter((locale) => locale.languageCode === languageID)
     .filter(filterFunction)

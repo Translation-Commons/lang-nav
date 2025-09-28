@@ -30,9 +30,9 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
     case ObjectType.Locale:
       return object.containedLocales ?? [];
     case ObjectType.Territory:
-      return [...object.containsTerritories, ...object.dependentTerritories];
+      return [...(object.containsTerritories ?? []), ...(object.dependentTerritories ?? [])];
     case ObjectType.WritingSystem:
-      return object.childWritingSystems;
+      return object.childWritingSystems ?? [];
     case ObjectType.VariantTag:
       return object.locales;
   }

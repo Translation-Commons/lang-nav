@@ -211,6 +211,7 @@ function getPotentialLocales(
               missing[localeID].populationSpeakingPercent = populationPercent;
               missing[localeID].populationCensus = census;
             }
+            if (missing[localeID].censusRecords == null) missing[localeID].censusRecords = [];
             missing[localeID].censusRecords.push({
               census,
               populationEstimate,

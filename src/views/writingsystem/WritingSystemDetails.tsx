@@ -46,7 +46,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             <em>Not supported by Unicode</em>
           )}
         </DetailsField>
-        {populationUpperBound > 100 && ( // Values less than 100 are suspcious and probably spurious
+        {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspcious and probably spurious
           <DetailsField
             title={
               <>
@@ -56,7 +56,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
               </>
             }
           >
-            {populationUpperBound.toLocaleString()}
+            {populationUpperBound?.toLocaleString()}
           </DetailsField>
         )}
       </DetailsSection>
@@ -71,7 +71,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             )}
           </DetailsField>
         )}
-        {Object.values(languages).length > 0 && (
+        {languages && Object.values(languages).length > 0 && (
           <DetailsField title="Languages:">
             <CommaSeparated>
               {Object.values(languages)
@@ -89,7 +89,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           </DetailsField>
         )}
 
-        {localesWhereExplicit.length > 0 && (
+        {localesWhereExplicit && localesWhereExplicit.length > 0 && (
           <DetailsField title="Locales (where writing system is explicit):">
             <CommaSeparated>
               {localesWhereExplicit.sort(getSortFunction()).map((locale) => (
@@ -104,7 +104,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             <HoverableObjectName object={parentWritingSystem} />
           </DetailsField>
         )}
-        {childWritingSystems.length > 0 && (
+        {childWritingSystems && childWritingSystems.length > 0 && (
           <DetailsField title="Inspired:">
             <CommaSeparated>
               {childWritingSystems.sort(getSortFunction()).map((writingSystem) => (
@@ -113,7 +113,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             </CommaSeparated>
           </DetailsField>
         )}
-        {containsWritingSystems.length > 0 && (
+        {containsWritingSystems && containsWritingSystems.length > 0 && (
           <DetailsField title="Contains:">
             <CommaSeparated>
               {containsWritingSystems.sort(getSortFunction()).map((writingSystem) => (

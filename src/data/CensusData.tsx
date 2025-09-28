@@ -269,6 +269,7 @@ export function addCensusData(dataContext: DataContextType, censusData: CensusIm
       const territory = dataContext.getTerritory(census.isoRegionCode);
       if (territory != null && territory.type === ObjectType.Territory) {
         census.territory = territory;
+        if (territory.censuses == null) territory.censuses = [];
         territory.censuses.push(census);
       }
 
@@ -290,6 +291,7 @@ export function addCensusRecordsToLocales(
     const locale = getLocale(languageCode + '_' + census.isoRegionCode);
     if (locale?.type === ObjectType.Locale) {
       // Add the census to the locale
+      if (locale.censusRecords == null) locale.censusRecords = [];
       locale.censusRecords.push({
         census,
         populationEstimate,

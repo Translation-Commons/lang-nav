@@ -33,11 +33,12 @@ const WritingSystemTable: React.FC = () => {
         },
         {
           key: 'Languages',
-          render: (object) => (
-            <HoverableEnumeration
-              items={Object.values(object.languages).map((l) => l.nameDisplay)}
-            />
-          ),
+          render: (object) =>
+            object.languages && (
+              <HoverableEnumeration
+                items={Object.values(object.languages).map((l) => l.nameDisplay)}
+              />
+            ),
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },
