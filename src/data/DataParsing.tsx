@@ -64,8 +64,15 @@ export function parseLanguageLine(line: string): LanguageData {
   };
 }
 
-export function parseLocaleLine(line: string): LocaleData {
+export function parseLocaleLine(line: string): LocaleData | null {
   const parts = line.split('\t');
+  if (parts.length === 1 && parts[0] === '') {
+    // Empty line, ignore
+    return null;
+  } else if (parts.length !== 10) {
+    console.error(`Locale line not the right length, ${parts.length} parts: ${line}`);
+    return null;
+  }
   const nameEndonym = parts[2] != '' ? parts[2] : undefined;
   const variantTagCode = parts[6] != '' ? parts[6].toLowerCase() : undefined;
 
