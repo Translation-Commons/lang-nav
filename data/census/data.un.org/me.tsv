@@ -1,0 +1,25 @@
+#codeDisplay		me2003	me2011
+#nameDisplay		Montenegro 2003	Montenegro 2011
+#isoRegionCode	ME		
+#yearCollected		2003	2011
+#datePublished		2009	2013
+#eligiblePopulation		620,145	620,029
+#notes	Census - de jure - complete tabulation		
+#responsesPerIndividual		1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	me2003	me2011
+mul	Total	620,145	620,029
+hbs/srp	Serbian	393,740	265,895
+hbs/cnr	Montenegrin	136,208	229,251
+hbs/bos	Bosnian	14,172	33,077
+sqi	Albanian	32,603	32,671
+hbs/bos	Bosniac	19,906	3,662
+mul	Other	3,101	16,687
+mis	Unknown	13,902	0
+rom	Romani (Gypsy)	2,602	5,169
+hbs/hrv	Croatian	2,791	2,791
+mkd	Macedonian	507	529
+hun	Hungarian	255	225
+slv	Slovenian	232	107
+deu	German	126	129

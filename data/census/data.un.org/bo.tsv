@@ -1,0 +1,22 @@
+#codeDisplay		bo2001	bo2012
+#nameDisplay		Bolivia 2001	Bolivia 2012
+#isoRegionCode	BO		
+#yearCollected		2001	2012
+#datePublished		2007	2014
+#eligiblePopulation		8,274,325	10,059,856
+#notes	Census - de facto - complete tabulation		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	bo2001	bo2012
+mul	Total	8,274,325	10,059,856
+spa	Spanish	3,908,562	6,173,421
+mul	Other combinations	2,620,858	12,849
+que	Quechua	632,092	1,613,210
+mis	Unknown		1,064,536
+aym	Aymara	263,011	998,314
+mul	Other	750,170	54,600
+mul	Foreign	34,889	90,935
+grn	Guarani	11,810	51,991
+aym/que	#Aymara-Quechua	37,061	
+mul	Native	15,872	

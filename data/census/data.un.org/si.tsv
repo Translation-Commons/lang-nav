@@ -1,0 +1,26 @@
+#codeDisplay		si2002
+#nameDisplay		Slovenia 2002
+#isoRegionCode		SI
+#yearCollected		2002
+#datePublished		2003
+#eligiblePopulation		1,964,036
+#notes		Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	si2002
+mul	Total	1,964,036
+slv	Slovenian	1,723,434
+hbs/hrv	Croatian	54,079
+mis	Unknown	52,316
+hbs	Serbo-Croatian	36,391
+hbs/bos	Bosnian	31,499
+hbs/srp	Serbian	31,329
+hun	Hungarian	7,713
+sqi	Albanian	7,177
+mul	Other	5,652
+mkd	Macedonian	4,760
+rom	Romany	3,834
+ita	Italian	3,762
+deu	German	1,628
+hbs/cnr	Montenegrin	462
