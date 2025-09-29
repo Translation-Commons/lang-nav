@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { LanguageData } from '../../types/LanguageTypes';
 
 export enum VitalityMeterType {
