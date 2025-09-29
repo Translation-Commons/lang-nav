@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { LanguageData } from '../../types/LanguageTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import DetailsField from '../common/details/DetailsField';
