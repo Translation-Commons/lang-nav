@@ -42,7 +42,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
           {sample}
         </div>
       )}
-      {Object.values(languages).length > 0 && (
+      {languages && Object.values(languages).length > 0 && (
         <div>
           <label>Languages:</label>
           <CommaSeparated>
@@ -54,14 +54,14 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
           </CommaSeparated>
         </div>
       )}
-      {populationUpperBound > 100 && ( // Values less than 100 are suspcious and probably spurious
+      {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspcious and probably spurious
         <div>
           <label>
             Population (Upper bound
             <PopulationWarning />
             {'):'}
           </label>
-          {populationUpperBound.toLocaleString()}
+          {populationUpperBound?.toLocaleString()}
         </div>
       )}
       {scope === WritingSystemScope.Variation && parentWritingSystem && (
@@ -70,16 +70,18 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
           <HoverableObjectName object={parentWritingSystem} />
         </div>
       )}
-      {scope == WritingSystemScope.Group && containsWritingSystems.length > 0 && (
-        <div>
-          <label>Contains:</label>
-          <CommaSeparated>
-            {containsWritingSystems.map((w) => (
-              <HoverableObjectName key={w.ID} object={w} />
-            ))}
-          </CommaSeparated>
-        </div>
-      )}
+      {scope == WritingSystemScope.Group &&
+        containsWritingSystems &&
+        containsWritingSystems.length > 0 && (
+          <div>
+            <label>Contains:</label>
+            <CommaSeparated>
+              {containsWritingSystems.map((w) => (
+                <HoverableObjectName key={w.ID} object={w} />
+              ))}
+            </CommaSeparated>
+          </div>
+        )}
     </div>
   );
 };

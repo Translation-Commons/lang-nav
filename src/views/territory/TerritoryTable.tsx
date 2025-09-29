@@ -32,17 +32,19 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Languages',
-          render: (object) => (
-            <HoverableEnumeration
-              items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
-            />
-          ),
+          render: (object) =>
+            object.locales && (
+              <HoverableEnumeration
+                items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
+              />
+            ),
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },
         {
           key: 'Biggest Language',
           render: (object) =>
+            object.locales &&
             object.locales.length > 0 && (
               <HoverableObjectName
                 labelSource="language"
@@ -54,9 +56,10 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Contains Territories',
-          render: (object) => (
-            <HoverableEnumeration items={object.containsTerritories.map((t) => t.nameDisplay)} />
-          ),
+          render: (object) =>
+            object.containsTerritories && (
+              <HoverableEnumeration items={object.containsTerritories.map((t) => t.nameDisplay)} />
+            ),
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,

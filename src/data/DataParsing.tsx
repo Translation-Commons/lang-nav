@@ -48,17 +48,17 @@ export function parseLanguageLine(line: string): LanguageData {
     names: [nameDisplay, nameSubtitle, nameEndonym].filter((s) => s != null),
 
     vitalityISO: undefined, // Added by ISO import
-    vitalityEth2013: parts[6] !== '' ? parts[6] : undefined,
-    vitalityEth2025: parts[7] !== '' ? parts[7] : undefined,
-    digitalSupport: parts[8] !== '' ? parts[8] : undefined,
-    viabilityConfidence: parts[13] !== '' ? parts[13] : 'No',
-    viabilityExplanation: parts[14] !== '' ? parts[14] : undefined,
+    vitalityEth2013: parts[6] || undefined,
+    vitalityEth2025: parts[7] || undefined,
+    digitalSupport: parts[8] || undefined,
+    viabilityConfidence: parts[13] || undefined,
+    viabilityExplanation: parts[14] || undefined,
 
     populationAdjusted,
     populationCited,
 
-    modality: parts[4] !== '' ? (parts[4] as LanguageModality) : undefined,
-    primaryScriptCode: parts[5] !== '' ? parts[5] : undefined,
+    modality: (parts[4] || undefined) as LanguageModality | undefined,
+    primaryScriptCode: parts[5] || undefined,
 
     sourceSpecific,
   };
@@ -73,8 +73,8 @@ export function parseLocaleLine(line: string): LocaleData | null {
     console.error(`Locale line not the right length, ${parts.length} parts: ${line}`);
     return null;
   }
-  const nameEndonym = parts[2] !== '' ? parts[2] : undefined;
-  const variantTagCode = parts[6] !== '' ? parts[6].toLowerCase() : undefined;
+  const nameEndonym = parts[2] || undefined;
+  const variantTagCode = (parts[6] || undefined)?.toLowerCase();
 
   return {
     type: ObjectType.Locale,
@@ -83,23 +83,21 @@ export function parseLocaleLine(line: string): LocaleData | null {
     localeSource: 'regularInput',
 
     nameDisplay: parts[1],
-    nameEndonym: parts[2] !== '' ? parts[2] : undefined,
+    nameEndonym: parts[2] || undefined,
     names: [parts[1], nameEndonym].filter((s) => s != null),
     languageCode: parts[3],
     territoryCode: parts[4],
-    explicitScriptCode: parts[5] !== '' ? parts[5] : undefined,
+    explicitScriptCode: parts[5] || undefined,
     variantTagCode,
     populationSource: parts[7] as PopulationSourceCategory,
     populationSpeaking: Number.parseInt(parts[8]?.replace(/,/g, '')),
-    officialStatus: parts[9] !== '' ? (parts[9] as OfficialStatus) : undefined,
-
-    censusRecords: [], // Populated later
+    officialStatus: (parts[9] || undefined) as OfficialStatus | undefined,
   };
 }
 
 export function parseWritingSystem(line: string): WritingSystemData {
   const parts = line.split('\t');
-  const nameEndonym = parts[3] !== '' ? parts[3] : undefined;
+  const nameEndonym = parts[3] || undefined;
   return {
     type: ObjectType.WritingSystem,
 
@@ -111,25 +109,12 @@ export function parseWritingSystem(line: string): WritingSystemData {
     nameFull: parts[2],
     nameEndonym,
     names: [parts[1], parts[2], nameEndonym].filter((s) => s != null),
-    unicodeVersion: parts[4] !== '' ? parseFloat(parts[4]) : null,
-    sample: parts[5] !== '' ? parts[5] : null,
-    rightToLeft: parts[6] === 'Yes' ? true : parts[6] === 'no' ? false : null,
-    primaryLanguageCode: parts[7] !== '' ? parts[7] : null,
-    territoryOfOriginCode: parts[8] !== '' ? parts[8] : null,
-    parentWritingSystemCode: parts[9] !== '' ? parts[9] : null,
+    unicodeVersion: parts[4] !== '' ? parseFloat(parts[4]) : undefined,
+    sample: parts[5] || undefined,
+    rightToLeft: parts[6] === 'Yes' ? true : parts[6] === 'no' ? false : undefined,
+    primaryLanguageCode: parts[7] || undefined,
+    territoryOfOriginCode: parts[8] || undefined,
+    parentWritingSystemCode: parts[9] || undefined,
     containsWritingSystemsCodes: parts[10] !== '' ? parts[10].split(', ') : [],
-
-    // Derived when combining other data
-    populationUpperBound: 0,
-    populationOfDescendents: 0,
-
-    // References to other objects, filled in with DataAssociations methods
-    languages: {},
-    localesWhereExplicit: [],
-    primaryLanguage: undefined,
-    territoryOfOrigin: undefined,
-    parentWritingSystem: undefined,
-    childWritingSystems: [],
-    containsWritingSystems: [],
   };
 }

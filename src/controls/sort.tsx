@@ -51,50 +51,11 @@ function getSortFunctionParameterized(
       };
     case SortBy.CountOfTerritories:
       return (a: ObjectData, b: ObjectData) => {
-        switch (a.type) {
-          case ObjectType.Language:
-            return b.type === ObjectType.Language
-              ? getUniqueTerritoriesForLanguage(b).length -
-                  getUniqueTerritoriesForLanguage(a).length
-              : -1;
-          case ObjectType.Locale:
-            return 0; // Each locale only has one territory
-          case ObjectType.Census:
-            return 0; // Each census only has one territory
-          case ObjectType.WritingSystem:
-            return 0; // Not a useful sort for writing systems
-          case ObjectType.Territory:
-            return b.type === ObjectType.Territory
-              ? b.containsTerritories.length - a.containsTerritories.length
-              : -1;
-          case ObjectType.VariantTag:
-            return 0; // Not a useful sort for variant tags
-        }
+        return getCountOfTerritories(b) - getCountOfTerritories(a);
       };
     case SortBy.CountOfLanguages:
       return (a: ObjectData, b: ObjectData) => {
-        switch (a.type) {
-          case ObjectType.Language:
-            return b.type === ObjectType.Language
-              ? b.childLanguages.length - a.childLanguages.length
-              : -1;
-          case ObjectType.Locale:
-            return b.type === ObjectType.Locale
-              ? (b.containedLocales?.length || 0) - (a.containedLocales?.length || 0)
-              : -1;
-          case ObjectType.Census:
-            return b.type === ObjectType.Census ? b.languageCount - a.languageCount : -1;
-          case ObjectType.WritingSystem:
-            return b.type === ObjectType.WritingSystem
-              ? Object.values(b.languages).length - Object.values(a.languages).length
-              : -1;
-          case ObjectType.Territory:
-            return b.type === ObjectType.Territory ? b.locales.length - a.locales.length : -1;
-          case ObjectType.VariantTag:
-            return b.type === ObjectType.VariantTag
-              ? (b.languageCodes?.length || 0) - (a.languageCodes?.length || 0)
-              : -1;
-        }
+        return getCountOfLanguages(b) - getCountOfLanguages(a);
       };
     case SortBy.Population:
       return (a: ObjectData, b: ObjectData) => {
@@ -229,6 +190,39 @@ function getDate(object: ObjectData): number {
     case ObjectType.VariantTag:
       return object.dateAdded?.getTime() ?? 0;
     default:
+      return 0;
+  }
+}
+
+function getCountOfLanguages(object: ObjectData): number {
+  switch (object.type) {
+    case ObjectType.Language:
+      return object.childLanguages.length;
+    case ObjectType.Locale:
+      return object.containedLocales?.length || 0;
+    case ObjectType.Census:
+      return object.languageCount;
+    case ObjectType.WritingSystem:
+      return object.languages ? Object.values(object.languages).length : 0;
+    case ObjectType.Territory:
+      return object.locales?.length || 0;
+    case ObjectType.VariantTag:
+      return object.languageCodes?.length || 0;
+    default:
+      return 0;
+  }
+}
+
+function getCountOfTerritories(object: ObjectData): number {
+  switch (object.type) {
+    case ObjectType.Language:
+      return getUniqueTerritoriesForLanguage(object).length;
+    case ObjectType.Territory:
+      return object.containsTerritories?.length || 0;
+    case ObjectType.Locale:
+    case ObjectType.Census:
+    case ObjectType.WritingSystem:
+    case ObjectType.VariantTag:
       return 0;
   }
 }

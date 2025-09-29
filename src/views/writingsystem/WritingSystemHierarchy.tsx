@@ -54,14 +54,12 @@ function getWritingSystemTreeNode(
   return {
     type: ObjectType.WritingSystem,
     object: writingSystem,
-    children: getWritingSystemTreeNodes(
-      writingSystem.childWritingSystems,
-      sortFunction,
-      filterFunction,
-    ),
+    children: writingSystem.childWritingSystems
+      ? getWritingSystemTreeNodes(writingSystem.childWritingSystems, sortFunction, filterFunction)
+      : [],
     labelStyle: {
-      fontWeight: writingSystem.populationOfDescendents > 100 ? 'bold' : 'normal',
-      fontStyle: writingSystem.populationUpperBound <= 100 ? 'italic' : 'normal',
+      fontWeight: (writingSystem?.populationOfDescendents ?? 0) > 100 ? 'bold' : 'normal',
+      fontStyle: (writingSystem?.populationUpperBound ?? 0) <= 100 ? 'italic' : 'normal',
     },
   };
 }

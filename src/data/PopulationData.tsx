@@ -23,17 +23,15 @@ const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
 
 export function computeLocalePopulationFromCensuses(dataContext: DataContextType): void {
   dataContext.locales.forEach((locale) => {
-    let records = locale.censusRecords;
-    if (records.length === 0) {
-      return; // No census records, nothing to compute
-    }
+    if (!locale.censusRecords || locale.censusRecords.length === 0) return; // No census records, nothing to compute
+    let records = [...locale.censusRecords];
 
     // Apply a series of rules to determine the best population estimate.
     for (const rule of POPULATION_ESTIMATE_RULES) {
       records = records.sort(rule);
       // Filter the records to ones that match the first one
       const bestRecords = records.filter((otherRecord) => rule(records[0], otherRecord) === 0);
-      if (bestRecords.length == 1) {
+      if (bestRecords.length === 1) {
         // If we have a single best record, use it
         setLocalePopulationEstimate(locale, bestRecords[0]);
         return; // We found a unique best estimate
@@ -63,11 +61,11 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData | undefined)
     return; // Only recompute for regional locales
   }
   // Re-compute the estimate for the contained territories first.
-  territory.containsTerritories.forEach((childTerritory) => {
+  territory.containsTerritories?.forEach((childTerritory) => {
     recomputeRegionalLocalePopulation(childTerritory);
   });
   // Now go through the locales and re-compute their population
-  territory.locales.forEach((locale) => {
+  territory.locales?.forEach((locale) => {
     locale.populationSpeaking =
       locale.containedLocales?.reduce(
         // Each absolute number may come from a different year, so instead of adding up censuses from
