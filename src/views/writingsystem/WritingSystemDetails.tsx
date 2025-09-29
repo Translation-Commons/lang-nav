@@ -46,7 +46,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             <em>Not supported by Unicode</em>
           )}
         </DetailsField>
-        {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspcious and probably spurious
+        {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspicious and probably spurious
           <DetailsField
             title={
               <>
