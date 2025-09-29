@@ -28,10 +28,10 @@ export function computeLocalePopulationFromCensuses(dataContext: DataContextType
 
     // Apply a series of rules to determine the best population estimate.
     for (const rule of POPULATION_ESTIMATE_RULES) {
-      records = records?.sort(rule);
+      records = records.sort(rule);
       // Filter the records to ones that match the first one
-      const bestRecords = records?.filter((otherRecord) => rule(records[0], otherRecord) === 0);
-      if (bestRecords?.length == 1) {
+      const bestRecords = records.filter((otherRecord) => rule(records[0], otherRecord) === 0);
+      if (bestRecords.length === 1) {
         // If we have a single best record, use it
         setLocalePopulationEstimate(locale, bestRecords[0]);
         return; // We found a unique best estimate
