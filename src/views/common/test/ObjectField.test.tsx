@@ -26,9 +26,10 @@ describe('HighlightedObjectField', () => {
         query="Eng"
       />,
     );
-    // expect(screen.getByText(/English/)).toBeNull();
-    expect(screen.getByText(/Eng/)).toBeInTheDocument();
-    expect(screen.getByText(/lish/)).toBeInTheDocument();
+    // There is no component with "English" because it is split into two spans
+    expect(screen.queryByText('English')).not.toBeInTheDocument();
+    expect(screen.getByText('Eng')).toBeInTheDocument();
+    expect(screen.getByText('lish')).toBeInTheDocument();
   });
 });
 
