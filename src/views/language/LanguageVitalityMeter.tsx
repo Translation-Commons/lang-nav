@@ -4,31 +4,62 @@ import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import { LanguageData } from '../../types/LanguageTypes';
 
-import { computeVitalityMetascore } from './LanguageVitalityComputation';
+import {
+  VitalityMeterType,
+  computeVitalityMetascore,
+  getAllVitalityScores,
+} from './LanguageVitalityComputation';
 
 interface Props {
   lang: LanguageData;
+  type: VitalityMeterType;
 }
 
-const LanguageVitalityMeter: React.FC<Props> = ({ lang }) => {
-  const metascore = computeVitalityMetascore(lang);
+const LanguageVitalityMeter: React.FC<Props> = ({ lang, type }) => {
+  const scores = getAllVitalityScores(lang);
 
-  if (metascore.score === null) {
+  let value: number | null = null;
+  let hoverText: React.ReactNode = '';
+
+  switch (type) {
+    case VitalityMeterType.Metascore: {
+      const meta = computeVitalityMetascore(lang);
+      value = meta.score;
+      hoverText = meta.explanation;
+      break;
+    }
+    case VitalityMeterType.ISO: {
+      value = scores.iso.score;
+      hoverText = scores.iso.explanation;
+      break;
+    }
+    case VitalityMeterType.Eth2013: {
+      value = scores.eth2013.score;
+      hoverText = scores.eth2013.explanation;
+      break;
+    }
+    case VitalityMeterType.Eth2025: {
+      value = scores.eth2025.score;
+      hoverText = scores.eth2025.explanation;
+      break;
+    }
+    default:
+      break;
+  }
+
+  if (value === null) {
     return <Deemphasized>Data not available</Deemphasized>;
   }
 
   return (
-    <Hoverable
-      hoverContent={`Vitality Metascore: ${metascore.score.toFixed(1)} (${metascore.explanation})`}
-    >
+    <Hoverable hoverContent={hoverText}>
       <meter
         min={0} // Extinct
         low={3} // Shifting/Endangered -- below this, the meter is colored red
         high={7} // Trade/Stable -- below this, the meter is colored yellow
         optimum={8} // Regional -- tells the renderer that high and above is green
         max={9} // National/Institutional/Living
-        value={metascore.score}
-        title={`Vitality Metascore: ${metascore.score.toFixed(1)}`}
+        value={value}
         style={{ width: '100%', minWidth: '8em' }}
       />
     </Hoverable>

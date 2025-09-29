@@ -1,4 +1,12 @@
+import React from 'react';
 import { LanguageData } from '../../types/LanguageTypes';
+
+export enum VitalityMeterType {
+  Metascore = 'Metascore',
+  ISO = 'ISO',
+  Eth2013 = 'Eth2013',
+  Eth2025 = 'Eth2025',
+}
 
 /**
  * Maps Ethnologue 2013 vitality levels to 0-9 scale
@@ -84,70 +92,135 @@ export function getISOScore(vitality: string): number | null {
  */
 export function computeVitalityMetascore(lang: LanguageData): {
   score: number | null;
-  explanation: string;
+  explanation: React.ReactNode;
 } {
   const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
   const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
   const isoScore = getISOScore(lang.vitalityISO || '');
 
-  const sources: string[] = [];
-  let explanation = '';
+  let explanation: React.ReactNode = '';
 
   if (eth2013Score !== null && eth2025Score !== null) {
     // Both Ethnologue values exist - return average
     const average = (eth2013Score + eth2025Score) / 2;
-    sources.push('Ethnologue 2013', 'Ethnologue 2025');
-    explanation = `Average of Ethnologue 2013 (${eth2013Score}) and Ethnologue 2025 (${eth2025Score}) = ${average}`;
-    return { score: average, explanation, sources };
+    explanation = (
+      <div>
+        <div>{average.toFixed(1)}</div>
+        <div style={{ marginTop: '0.25em' }}>Average of Ethnologue 2013 and Ethnologue 2025</div>
+        <div style={{ marginLeft: '2em' }}>
+          Ethnologue 2013: {eth2013Score}
+          {lang.vitalityEth2013 ? ` (${lang.vitalityEth2013})` : ''}
+        </div>
+        <div style={{ marginLeft: '2em' }}>
+          Ethnologue 2025: {eth2025Score}
+          {lang.vitalityEth2025 ? ` (${lang.vitalityEth2025})` : ''}
+        </div>
+      </div>
+    );
+    return { score: average, explanation };
   }
 
   if (eth2013Score !== null) {
     // Only Ethnologue 2013 exists
-    sources.push('Ethnologue 2013');
-    explanation = `Ethnologue 2013 score: ${eth2013Score}`;
-    return { score: eth2013Score, explanation, sources };
+    explanation = (
+      <div>
+        <div>{eth2013Score}</div>
+        <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2013</div>
+        <div style={{ marginLeft: '2em' }}>
+          Ethnologue 2013: {eth2013Score}
+          {lang.vitalityEth2013 ? ` (${lang.vitalityEth2013})` : ''}
+        </div>
+      </div>
+    );
+    return { score: eth2013Score, explanation };
   }
 
   if (eth2025Score !== null) {
     // Only Ethnologue 2025 exists
-    sources.push('Ethnologue 2025');
-    explanation = `Ethnologue 2025 score: ${eth2025Score}`;
-    return { score: eth2025Score, explanation, sources };
+    explanation = (
+      <div>
+        <div>{eth2025Score}</div>
+        <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2025</div>
+        <div style={{ marginLeft: '2em' }}>
+          Ethnologue 2025: {eth2025Score}
+          {lang.vitalityEth2025 ? ` (${lang.vitalityEth2025})` : ''}
+        </div>
+      </div>
+    );
+    return { score: eth2025Score, explanation };
   }
 
   if (isoScore !== null) {
     // Use ISO as fallback
-    sources.push('ISO');
-    explanation = `ISO score: ${isoScore}`;
-    return { score: isoScore, explanation, sources };
+    explanation = (
+      <div>
+        <div>{isoScore}</div>
+        <div style={{ marginTop: '0.25em' }}>Based on ISO Vitality / Status</div>
+        <div style={{ marginLeft: '2em' }}>
+          ISO: {isoScore}
+          {lang.vitalityISO ? ` (${lang.vitalityISO})` : ''}
+        </div>
+      </div>
+    );
+    return { score: isoScore, explanation };
   }
 
   // No vitality data available
   explanation = 'No vitality data available';
-  return { score: null, explanation, sources };
+  return { score: null, explanation };
 }
 
 /**
  * Gets all available vitality scores for a language
  */
 export function getAllVitalityScores(lang: LanguageData): {
-  iso: { score: number | null; value: string | null };
-  eth2013: { score: number | null; value: string | null };
-  eth2025: { score: number | null; value: string | null };
-  metascore: { score: number | null; explanation: string; sources: string[] };
+  iso: { score: number | null; value: string | null; explanation: React.ReactNode };
+  eth2013: { score: number | null; value: string | null; explanation: React.ReactNode };
+  eth2025: { score: number | null; value: string | null; explanation: React.ReactNode };
+  metascore: { score: number | null; explanation: React.ReactNode };
 } {
   return {
     iso: {
       score: getISOScore(lang.vitalityISO || ''),
       value: lang.vitalityISO || null,
+      explanation: (
+        <div>
+          <div>{getISOScore(lang.vitalityISO || '') ?? 'N/A'}</div>
+          <div style={{ marginTop: '0.25em' }}>Based on ISO Vitality / Status</div>
+          <div style={{ marginLeft: '2em' }}>
+            ISO: {getISOScore(lang.vitalityISO || '') ?? 'N/A'}
+            {lang.vitalityISO ? ` (${lang.vitalityISO})` : ''}
+          </div>
+        </div>
+      ),
     },
     eth2013: {
       score: getEthnologue2013Score(lang.vitalityEth2013 || ''),
       value: lang.vitalityEth2013 || null,
+      explanation: (
+        <div>
+          <div>{getEthnologue2013Score(lang.vitalityEth2013 || '') ?? 'N/A'}</div>
+          <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2013</div>
+          <div style={{ marginLeft: '2em' }}>
+            Ethnologue 2013: {getEthnologue2013Score(lang.vitalityEth2013 || '') ?? 'N/A'}
+            {lang.vitalityEth2013 ? ` (${lang.vitalityEth2013})` : ''}
+          </div>
+        </div>
+      ),
     },
     eth2025: {
       score: getEthnologue2025Score(lang.vitalityEth2025 || ''),
       value: lang.vitalityEth2025 || null,
+      explanation: (
+        <div>
+          <div>{getEthnologue2025Score(lang.vitalityEth2025 || '') ?? 'N/A'}</div>
+          <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2025</div>
+          <div style={{ marginLeft: '2em' }}>
+            Ethnologue 2025: {getEthnologue2025Score(lang.vitalityEth2025 || '') ?? 'N/A'}
+            {lang.vitalityEth2025 ? ` (${lang.vitalityEth2025})` : ''}
+          </div>
+        </div>
+      ),
     },
     metascore: computeVitalityMetascore(lang),
   };

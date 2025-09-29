@@ -11,6 +11,7 @@ import ObjectTitle from '../common/ObjectTitle';
 import PopulationWarning from '../common/PopulationWarning';
 
 import LanguageVitalityMeter from './LanguageVitalityMeter';
+import { VitalityMeterType } from './LanguageVitalityComputation';
 
 interface Props {
   lang: LanguageData;
@@ -49,7 +50,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
       )}
       <div>
         <h4>Vitality</h4>
-        <LanguageVitalityMeter lang={lang} />
+        <LanguageVitalityMeter lang={lang} type={VitalityMeterType.Metascore} />
       </div>
 
       {includeRelations && countryLocales.length > 0 && (
