@@ -39,8 +39,8 @@ export function parseTerritoryLine(line: string): TerritoryData {
     names: [parts[1]],
     scope: parts[2] as TerritoryScope,
     population: Number.parseInt(parts[3].replace(/,/g, '')),
-    containedUNRegionCode: parts[4] !== '' ? parts[4] : '',
-    sovereignCode: parts[5] !== '' ? parts[5] : '',
+    containedUNRegionCode: parts[4] || undefined,
+    sovereignCode: parts[5] || undefined,
   };
 }
 

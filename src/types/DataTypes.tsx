@@ -57,10 +57,10 @@ export interface TerritoryData extends ObjectBase {
   nameDisplay: string;
   scope: TerritoryScope;
   population: number;
-  containedUNRegionCode?: UNM49Code;
-  sovereignCode?: ISO3166Code;
 
   // Supplemental data
+  containedUNRegionCode?: UNM49Code;
+  sovereignCode?: ISO3166Code;
   literacyPercent?: number;
   gdp?: number;
 
