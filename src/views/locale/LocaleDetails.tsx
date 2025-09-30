@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';
 import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
@@ -22,16 +23,7 @@ const LocaleDetails: React.FC<Props> = ({ locale }) => {
     <div className="Details">
       <LocaleDefinitionSection locale={locale} />
       <LocalePopulationSection locale={locale} />
-      <DetailsSection title="Other">
-        {officialStatus && (
-          <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
-        )}
-        {wikipedia && (
-          <DetailsField title="Wikipedia:">
-            <ObjectWikipediaInfo object={locale} />
-          </DetailsField>
-        )}
-      </DetailsSection>
+      <LocaleOtherSection locale={locale} />
     </div>
   );
 };
@@ -84,7 +76,11 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {variantTagCodes && variantTagCodes.length > 0 && (
         <DetailsField title={`Variant Tag${variantTagCodes.length > 1 ? 's' : ''}:`}>
           {variantTags ? (
-            variantTags.map((tag) => <HoverableObjectName key={tag.ID} object={tag} />)
+            <CommaSeparated>
+              {variantTags.map((tag) => (
+                <HoverableObjectName key={tag.ID} object={tag} />
+              ))}
+            </CommaSeparated>
           ) : (
             <span>
               {variantTagCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
@@ -108,12 +104,16 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
   return (
     <DetailsSection title="Population">
-      <DetailsField title="Speakers:">
-        {populationSpeaking.toLocaleString()}
-        {' ['}
-        <LocaleCensusCitation locale={locale} />
-        {']'}
-      </DetailsField>
+      {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
+
+      {populationSpeaking != null && (
+        <DetailsField title="Speakers:">
+          {populationSpeaking.toLocaleString()}
+          {' ['}
+          <LocaleCensusCitation locale={locale} />
+          {']'}
+        </DetailsField>
+      )}
       {populationSpeakingPercent != null && (
         <DetailsField
           title={
@@ -125,7 +125,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           {numberToFixedUnlessSmall(populationSpeakingPercent)}%
         </DetailsField>
       )}
-      {populationWriting && territory && (
+      {populationWriting != null && territory && (
         <DetailsField title="Writers:">
           ~{numberToSigFigs(populationWriting, 3).toLocaleString()}
           {' [previous estimate * literacy'}
@@ -180,6 +180,23 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 ))}
             </tbody>
           </table>
+        </DetailsField>
+      )}
+    </DetailsSection>
+  );
+};
+
+const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
+  const { officialStatus, wikipedia } = locale;
+  return (
+    <DetailsSection title="Other">
+      {!officialStatus && !wikipedia && <Deemphasized>No additional data available.</Deemphasized>}
+      {officialStatus && (
+        <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
+      )}
+      {wikipedia && (
+        <DetailsField title="Wikipedia:">
+          <ObjectWikipediaInfo object={locale} />
         </DetailsField>
       )}
     </DetailsSection>

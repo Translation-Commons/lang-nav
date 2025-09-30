@@ -114,7 +114,8 @@ export function connectLocales(
       if (!territory.locales) territory.locales = [];
       territory.locales.push(locale);
       locale.territory = territory;
-      locale.populationSpeakingPercent = (locale.populationSpeaking * 100) / territory.population;
+      if (locale.populationSpeaking)
+        locale.populationSpeakingPercent = (locale.populationSpeaking * 100) / territory.population;
     }
     if (language != null) {
       language.locales.push(locale);

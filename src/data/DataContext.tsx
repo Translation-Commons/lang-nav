@@ -173,7 +173,11 @@ function updateLanguageBasedOnSource(
   // Update locales too, their codes and their names
   Object.values(locales).forEach((loc) => {
     loc.codeDisplay = getLocaleCode(loc, localeSeparator);
-    loc.nameDisplay = getLocaleName(loc);
+    const localeName = getLocaleName(loc);
+    loc.nameDisplay = localeName; // Set the display name
+
+    // Add it to the names array so it can be used in search
+    if (!loc.names.includes(localeName)) loc.names.push(localeName);
   });
 }
 

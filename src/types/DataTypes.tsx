@@ -161,7 +161,7 @@ export interface LocaleData extends ObjectBase {
   variantTagCodes?: VariantIANATag[];
 
   populationSource?: PopulationSourceCategory;
-  populationSpeaking: number;
+  populationSpeaking?: number;
   officialStatus?: OfficialStatus;
   wikipedia?: WikipediaData;
 

@@ -29,7 +29,7 @@ export function getLocaleCode(
     .join(localeSeparator);
 }
 
-type LocaleTags = {
+export type LocaleTags = {
   languageCode: string;
   scriptCode?: string;
   territoryCode?: string;
