@@ -43,7 +43,6 @@ const ViewModal: React.FC = () => {
 
   return (
     <div className="ModalOverlay">
-      {/* onClick={(e) => e.target === e.currentTarget && onClose()} */}
       <div className="Modal" aria-modal="true" role="dialog" ref={modalRef}>
         <div className="ModalHeader">
           <div className="ModalTitle">
@@ -56,6 +55,7 @@ const ViewModal: React.FC = () => {
               onClick={() =>
                 updatePageParams({
                   view: View.Details,
+                  objectType: object.type,
                 })
               }
             >
