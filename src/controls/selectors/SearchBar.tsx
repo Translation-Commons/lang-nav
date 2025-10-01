@@ -12,7 +12,9 @@ import { useSearchSuggestions } from './useSearchSuggestions';
 const SearchBar: React.FC = () => {
   const { searchString, updatePageParams } = usePageParams();
   const getSearchSuggestions = useSearchSuggestions();
-  const border = '0.125em solid var(--color-button-primary)';
+  const setSearchString = (value: string) => {
+    updatePageParams({ searchString: value });
+  };
 
   return (
     <form
@@ -20,19 +22,24 @@ const SearchBar: React.FC = () => {
       style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '0.5em' }}
     >
       <div
-        style={{ marginRight: '-0.125em', border, padding: '0.5em', borderRadius: '1em 0 0 1em' }}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          borderRadius: '.75em',
+          border: '0.125em solid var(--color-button-primary)',
+        }}
       >
-        <SearchIcon size="1em" display="block" />
+        <SearchIcon size="1em" display="block" style={{ padding: '0.5em' }} />
+        <TextInput
+          inputStyle={{ minWidth: '20em', border: 'none' }}
+          getSuggestions={getSearchSuggestions}
+          onChange={setSearchString}
+          display={SelectorDisplay.ButtonList}
+          placeholder="search"
+          pageParameter={PageParamKey.searchString}
+          value={searchString}
+        />
       </div>
-      <TextInput
-        inputStyle={{ minWidth: '20em', marginRight: '-0.125em', borderRight: 'none' }}
-        getSuggestions={getSearchSuggestions}
-        onChange={(searchString: string) => updatePageParams({ searchString })}
-        display={SelectorDisplay.ButtonGroup}
-        placeholder="search"
-        pageParameter={PageParamKey.searchString}
-        value={searchString}
-      />
       <SearchBySelector />
     </form>
   );
