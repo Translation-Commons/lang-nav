@@ -17,7 +17,7 @@ fra	French/Français	6,696	50607	54784	1795	74166	37	1529
 fra	#French-Other languages	61,668						
 mul	Local language	39,823						
 wni	Shinsdzwani/Anjouanais				29055	45887	599	946
-buc	Kibushi/Shibushi				17705	37495	365	773
+mlg/buc	Kibushi/Shibushi				17705	37495	365	773
 ara	#Arabe		31065	3199	485	14067	10	290
 mlg	Malgache		7208	23561				
 mul	Dialectes comoriens			23876				
@@ -25,4 +25,4 @@ zdj	Shingazidza				10332	18093	213	373
 mul	Autres			4358	534	1601	11	33
 wlc	Shimwali/Mohélien				1067	3395	22	70
 mul	Dialectes malgaches			2277				
-kian1236	Kiantalaotsi				291	1164	6	24
+mlg/buc/kian1236	Kiantalaotsi				291	1164	6	24

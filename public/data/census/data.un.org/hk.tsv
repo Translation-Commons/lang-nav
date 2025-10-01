@@ -1,0 +1,20 @@
+#codeDisplay		hk2001	hk2006	hk2011	hk2016	hk2021
+#nameDisplay		Hong Kong 2001	Hong Kong 2006	Hong Kong 2011	Hong Kong 2016	Hong Kong 2021
+#isoRegionCode	HK					
+#yearCollected		2001	2006	2011	2016	2021
+#datePublished		2002	2011	2013	2017	2022
+#eligiblePopulation		6,417,739	6,640,344	6,808,433	7,048,969	7,179,127
+#notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#age			5+	5+	5+	
+#responsesPerIndividual	1					
+#languagesIncluded						
+#sampleRate			0.1	0.1	0.1	0.1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27					
+#collectorType	Government					
+Language Code	Language Name	hk2001	hk2006	hk2011	hk2016	hk2021
+mul	Total	6,417,739	6,640,344	6,808,433	7,048,969	7,179,127
+zho/yue	Cantonese	5,726,972	6,030,960	6,095,213	6,264,700	6,328,947
+zho	#Other Chinese	352,562	289,027	273,745	221,247	204,571
+eng	English	203,598	187,281	238,288	300,417	330,782
+zho/cmn	Putonghua (Mandarin)	55,410	60,859	94,399	131,406	165,451
+mul	Other	79,197	72,217	106,788	131,199	149,376

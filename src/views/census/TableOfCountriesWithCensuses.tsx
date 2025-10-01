@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
@@ -12,18 +12,17 @@ import ObjectTable from '../common/table/ObjectTable';
 
 const TableOfCountriesWithCensuses: React.FC = () => {
   const { territories } = useDataContext();
-  const territoryArray = useMemo(() => Object.values(territories), [territories]);
 
   return (
     <CollapsibleReport title="Countries with Censuses">
       <ObjectTable<TerritoryData>
-        objects={territoryArray}
+        objects={territories}
         columns={[
           CodeColumn,
           NameColumn,
           {
             key: 'Censuses',
-            render: (territory) => territory.censuses.length,
+            render: (territory) => territory.censuses?.length,
             isNumeric: true,
           },
           ...Object.values(CensusCollectorType).map((collectorType) => ({
@@ -33,7 +32,7 @@ const TableOfCountriesWithCensuses: React.FC = () => {
                 <div style={{ maxWidth: '10em' }}>
                   <CommaSeparated limit={1}>
                     {territory.censuses
-                      .filter((census) => census.collectorType === collectorType)
+                      ?.filter((census) => census.collectorType === collectorType)
                       .map((census) => (
                         <HoverableObjectName key={census.ID} object={census} />
                       ))}
@@ -50,7 +49,7 @@ const TableOfCountriesWithCensuses: React.FC = () => {
           },
           {
             key: 'Languages',
-            render: (territory) => territory.locales.length,
+            render: (territory) => territory.locales?.length,
             isNumeric: true,
             sortParam: SortBy.CountOfLanguages,
           },

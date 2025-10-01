@@ -28,7 +28,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         {population.toLocaleString()}
       </div>
 
-      {locales.length > 0 && (
+      {locales && locales.length > 0 && (
         <div>
           <h4>Languages:</h4>
           <CommaSeparated>

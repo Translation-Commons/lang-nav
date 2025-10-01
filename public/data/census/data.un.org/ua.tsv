@@ -1,0 +1,23 @@
+#codeDisplay		ua2001
+#nameDisplay		Ukraine 2001
+#isoRegionCode		UA
+#yearCollected		2001
+#datePublished		2003
+#eligiblePopulation		48,240,902
+#respondingPopulation		48,039,465
+#notes		Census - de facto - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	ua2001
+mul	Total	48,240,902
+ukr	Ukrainian	32,577,468
+rus	Russian	14,273,670
+mul	Other	408,675
+tat	Tatar	231,314
+mis	Not stated	201,437
+ron/mold1248	Moldavian	185,032
+hun	Hungarian	161,618
+ron	Romanian	142,671
+bel	Belorussian	56,249
+slk	Slovak	2,768

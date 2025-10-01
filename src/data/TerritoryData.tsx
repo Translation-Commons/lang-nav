@@ -39,16 +39,8 @@ export function parseTerritoryLine(line: string): TerritoryData {
     names: [parts[1]],
     scope: parts[2] as TerritoryScope,
     population: Number.parseInt(parts[3].replace(/,/g, '')),
-    containedUNRegionCode: parts[4],
-    sovereignCode: parts[5],
-
-    // Reference to other objects, filled in with DataAssociations methods
-    parentUNRegion: undefined,
-    containsTerritories: [],
-    sovereign: undefined,
-    dependentTerritories: [],
-    locales: [],
-    censuses: [],
+    containedUNRegionCode: parts[4] || undefined,
+    sovereignCode: parts[5] || undefined,
   };
 }
 
@@ -57,17 +49,23 @@ export function connectTerritoriesToParent(
 ): void {
   Object.values(territoriesByCode).forEach((territory) => {
     // Connect UN regions
-    if (territory.containedUNRegionCode != '') {
+    if (territory.containedUNRegionCode) {
       const containedUNRegion = territoriesByCode[territory.containedUNRegionCode];
       if (containedUNRegion != null) {
+        if (!containedUNRegion.containsTerritories) {
+          containedUNRegion.containsTerritories = [];
+        }
         containedUNRegion.containsTerritories.push(territory);
         territory.parentUNRegion = containedUNRegion;
       }
     }
     // Connect dependencies to sovereigns
-    if (territory.sovereignCode != '') {
+    if (territory.sovereignCode) {
       const sovereign = territoriesByCode[territory.sovereignCode];
       if (sovereign != null) {
+        if (!sovereign.dependentTerritories) {
+          sovereign.dependentTerritories = [];
+        }
         sovereign.dependentTerritories.push(territory);
         territory.sovereign = sovereign;
       }
@@ -93,15 +91,15 @@ function createRegionalLocalesForTerritory(
 ): void {
   // Make sure that territories within are processed first
   const { containsTerritories } = territory;
-  containsTerritories.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
+  containsTerritories?.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
 
   if (!isTerritoryGroup(territory.scope)) {
     return; // Only going this for regions/continents
   }
 
-  const territoryLocales = containsTerritories.reduce<Record<BCP47LocaleCode, LocaleData>>(
+  const territoryLocales = containsTerritories?.reduce<Record<BCP47LocaleCode, LocaleData>>(
     (locs, childTerritory) => {
-      childTerritory.locales.forEach((loc) => {
+      childTerritory.locales?.forEach((loc) => {
         const newLocaleCode = getLocaleCode(loc, LocaleSeparator.Underscore, territory.ID);
         const newLocale = locs[newLocaleCode];
         if (newLocale == null) {
@@ -140,7 +138,7 @@ function createRegionalLocalesForTerritory(
   );
 
   // Save it to the territory
-  territory.locales = Object.values(territoryLocales)
+  territory.locales = Object.values(territoryLocales ?? {})
     .filter((loc) => loc.populationSpeaking > 10) // Avoid creating too many locale objects
     .sort((a, b) => b.populationSpeaking - a.populationSpeaking);
   territory.locales.forEach((loc) => (allLocales[loc.ID] = loc));
@@ -150,7 +148,7 @@ function createRegionalLocalesForTerritory(
 }
 
 export async function loadTerritoryGDPLiteracy(
-  territories: Record<TerritoryCode, TerritoryData>,
+  getTerritory: (id: string) => TerritoryData | undefined,
 ): Promise<void> {
   return await fetch('data/territories_gdp_literacy.tsv')
     .then((res) => res.text())
@@ -164,7 +162,7 @@ export async function loadTerritoryGDPLiteracy(
           return { code: parts[0], gdp: parseInt(parts[1]), literacyPercent: parseFloat(parts[2]) };
         });
       newTerritoriesData.forEach((newTerrData) => {
-        const territory = territories[newTerrData.code];
+        const territory = getTerritory(newTerrData.code);
         if (territory == null) {
           // Known exclusive: Antarctica (AQ) intentionally left out because its poorly defined linguistically
           if (DEBUG) console.log('Loading new territory data. Territory not found', newTerrData);
@@ -177,23 +175,25 @@ export async function loadTerritoryGDPLiteracy(
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
-export function computeContainedTerritoryStats(terr: TerritoryData): void {
+export function computeContainedTerritoryStats(terr: TerritoryData | undefined): void {
+  if (!terr) return;
+
   // Make sure that territories within are computed
   const { containsTerritories } = terr;
-  containsTerritories.forEach(computeContainedTerritoryStats);
+  containsTerritories?.forEach(computeContainedTerritoryStats);
 
   // Recompute the population for territory groups, in case it was updated from other data
   if (isTerritoryGroup(terr.scope)) {
-    terr.population = containsTerritories.reduce((sum, t) => sum + (t.population ?? 0), 0);
+    terr.population = containsTerritories?.reduce((sum, t) => sum + (t.population ?? 0), 0) ?? 0;
   }
 
   // GDP is easy, just add it up
-  terr.gdp ??= containsTerritories.reduce((sum, t) => sum + (t.gdp ?? 0), 0);
+  terr.gdp ??= containsTerritories?.reduce((sum, t) => sum + (t.gdp ?? 0), 0);
 
   // For literacy we will combine proportional to the population
   terr.literacyPercent ??=
-    containsTerritories.reduce(
+    (containsTerritories?.reduce(
       (sum, t) => sum + (t.literacyPercent ?? 0) * (t.population ?? 0),
       0,
-    ) / terr.population;
+    ) ?? 0) / terr.population;
 }

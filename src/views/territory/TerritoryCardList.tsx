@@ -10,7 +10,7 @@ const TerritoryCardList: React.FC = () => {
 
   return (
     <CardList
-      objects={Object.values(territories)}
+      objects={territories}
       renderCard={(territory) => <TerritoryCard territory={territory} />}
     />
   );

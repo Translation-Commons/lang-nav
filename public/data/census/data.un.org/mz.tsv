@@ -1,0 +1,26 @@
+#codeDisplay		mz1997	mz2007	mz2017
+#nameDisplay		Mozambique 1997	Mozambique 2007	Mozambique 2017
+#isoRegionCode	MZ			
+#yearCollected		1997	2007	2017
+#datePublished		2001	2009	2022
+#eligiblePopulation		12,536,778	20,252,223	22,243,373
+#notes		Census - de jure - complete tabulation	Census - de facto - complete tabulation	Census - de jure - complete tabulation
+#age		5+		
+#responsesPerIndividual		1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	mz1997	mz2007	mz2017
+mul	Total	12,536,778	20,252,223	
+por	Portuguese	809,186	8,246,713	3,709,868
+mul	Other Foreign Languages	49,574	7,976,158	115,177
+vmw	Emakhuwa	3,291,916		5,866,643
+mul	Other Mozambique	4,142,714		2,942,527
+tso	Xichangana	1,423,327		1,926,879
+ngl	Lomwe			1,606,600
+seh	Sena			1,586,703
+nya	Nyanja			1,532,411
+chw	Echuwabo	786,715		1,060,852
+ngl	Elomwe	985,920		
+seh	Cisena	876,057		
+mis	Unknown	163,292	147,898	201,455
+zxx	None	8,077		

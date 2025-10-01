@@ -9,12 +9,13 @@ import { LanguageData, LanguageField } from '../../types/LanguageTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
 import HoverableObjectName from '../common/HoverableObjectName';
+import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const LanguageTable: React.FC = () => {
-  const { languages } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
   const codeColumn = {
     ...CodeColumn,
@@ -35,7 +36,7 @@ const LanguageTable: React.FC = () => {
 
   return (
     <ObjectTable<LanguageData>
-      objects={Object.values(languages)}
+      objects={languagesInSelectedSource}
       columns={[
         codeColumn,
         NameColumn,
@@ -134,6 +135,11 @@ const LanguageTable: React.FC = () => {
           render: (lang) => <HoverableEnumeration items={getUniqueTerritoriesForLanguage(lang)} />,
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
+        },
+        {
+          key: 'Wikipedia',
+          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          isInitiallyVisible: false,
         },
       ]}
     />

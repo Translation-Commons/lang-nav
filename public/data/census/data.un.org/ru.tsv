@@ -90,10 +90,10 @@ kjh	Khakass			42,604
 ell	Greek	17,655	10,918	42,518
 kor	Korean	26,662	12,673	42,384
 lat	Latin	17,888	5,424	40,200
-myv	Erzya-Mordvin	40,045	36,776	
+mord1256/myv	Erzya-Mordvin	40,045	36,776	
 fin	Finnish	14,075	4,675	38,873
 abq	Abaza	30,194	28,576	37,831
-myv	Erzya-Mordvinian			36,726
+mord1256/myv	Erzya-Mordvinian			36,726
 kur	Kurd			34,699
 jpn	Japanese	16,543	4,304	33,855
 kur	Kurdish	31,703	27,157	
@@ -110,7 +110,7 @@ lav	Latvian	8,565	2,648	22,079
 yrk	Nenet			21,926
 ron	Romanian	7,901	2,587	21,201
 mul	Other			20,580
-mdf	Moksha-Mordvin	19,911	18,047	
+mord1256/mdf	Moksha-Mordvin	19,911	18,047	
 mul	Dagestani	19,235	14,649	
 heb	Hebrew	10,569	4,608	18,822
 ani	Andi	18,133	17,286	5,800
@@ -167,7 +167,7 @@ khv	Khvarshi	2,216	2,195
 vep	Veps	2,173	1,444	
 tin	Tindal			2,152
 trk	Turkic	1,513	759	2,025
-mdf	Moksa-mordvi			2,025
+mord1256/mdf	Moksa-mordvi			2,025
 slv	Slovenian	443	216	2,023
 aii	Assyrian	1,922	1,397	
 khv	Khvarshin			1,737
@@ -440,7 +440,7 @@ luo	Doluo	1	1
 mas	Masai	1	0	
 mul	Gambian	1	1	
 mul	South African	1	0	
-art-slovio	Slovio	1	0	
+art/art-slovio	Slovio	1	0	
 mul	Himalayan	1	1	
 ogo	Khana	1	0	
 quc	Kiche	1	0	

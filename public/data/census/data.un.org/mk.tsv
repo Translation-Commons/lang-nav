@@ -1,0 +1,21 @@
+#codeDisplay		mk2002	mk2021
+#nameDisplay		North Macedonia 2002	North Macedonia 2021
+#isoRegionCode	MK		
+#yearCollected		2002	2021
+#datePublished		2003	2024
+#eligiblePopulation		2,022,547	1,836,713
+#notes	Census - de jure - complete tabulation		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	mk2002	mk2021
+mul	Total	2,022,547	1,836,713
+mkd	Macedonian	1,344,815	1,127,394
+sqi	Albanian	507,989	447,001
+mul	Other	19,241	137,454
+tur	Turkish	71,757	62,723
+rom	Romany	38,528	31,721
+hbs/srp	Serbian	24,773	11,252
+hbs/bos	Bosniac	8,560	15,615
+rom/rmy	Vlach	6,884	3,151
+mis	Unknown		402

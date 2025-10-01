@@ -21,10 +21,7 @@ type Props = {
 };
 
 const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
-  const {
-    languagesBySource: { All: langObjects },
-    locales,
-  } = useDataContext();
+  const { getLanguage, getLocale } = useDataContext();
   const { localeSeparator } = usePageParams();
 
   const langsNotFound: string[] = [];
@@ -32,7 +29,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
   // Create new locale data objects based on the census results
   const languagesInCensus: LocaleData[] = Object.entries(census.languageEstimates)
     .map(([langID, populationSpeaking]) => {
-      const lang = langObjects[langID];
+      const lang = getLanguage(langID);
       if (lang == null) {
         langsNotFound.push(langID);
         return null;
@@ -60,19 +57,19 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
 
   const getActualLocaleInfoButton = useCallback(
     (mockedLocale: LocaleData): React.ReactNode => (
-      <ActualLocaleInfoButton actualLocale={locales[mockedLocale.ID]} />
+      <ActualLocaleInfoButton actualLocale={getLocale(mockedLocale.ID)} />
     ),
-    [locales],
+    [getLocale],
   );
 
   const getPopulationDifference = useCallback(
     (mockedLocale: LocaleData): React.ReactNode => (
       <PercentageDifference
         percentNew={mockedLocale.populationSpeakingPercent || 0}
-        percentOld={locales[mockedLocale.ID]?.populationSpeakingPercent}
+        percentOld={getLocale(mockedLocale.ID)?.populationSpeakingPercent}
       />
     ),
-    [locales],
+    [getLocale],
   );
 
   return (

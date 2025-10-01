@@ -1,33 +1,49 @@
-import React, {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useContext,
-  useEffect,
-  useState,
-} from 'react';
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { usePageParams } from '../controls/PageParamsContext';
 import { uniqueBy } from '../generic/setUtils';
-import { LanguageDictionary, LanguageSource } from '../types/LanguageTypes';
-import { LocaleSeparator } from '../types/PageParamTypes';
+import {
+  LocaleData,
+  ObjectData,
+  TerritoryData,
+  VariantTagData,
+  WritingSystemData,
+} from '../types/DataTypes';
+import { LanguageData, LanguageSource } from '../types/LanguageTypes';
+import { LocaleSeparator, ObjectType } from '../types/PageParamTypes';
 import { getLocaleCode, getLocaleName } from '../views/locale/LocaleStrings';
 
-import { CoreData, EMPTY_LANGUAGES_BY_SCHEMA, useCoreData } from './CoreData';
+import { CoreDataArrays, useCoreData } from './CoreData';
 import { loadSupplementalData } from './SupplementalData';
 
-type DataContextType = CoreData & {
-  languages: LanguageDictionary;
+type DataGetters = {
+  getObject(id: string): ObjectData | undefined;
+  getLanguage: (id: string) => LanguageData | undefined;
+  getLocale: (id: string) => LocaleData | undefined;
+  getTerritory: (id: string) => TerritoryData | undefined;
+  getWritingSystem: (id: string) => WritingSystemData | undefined;
+  getVariantTag: (id: string) => VariantTagData | undefined;
 };
 
+export type DataContextType = CoreDataArrays &
+  DataGetters & {
+    languagesInSelectedSource: LanguageData[];
+  };
+
 const DataContext = createContext<DataContextType | undefined>({
+  allLanguoids: [],
   censuses: {},
-  languagesBySource: EMPTY_LANGUAGES_BY_SCHEMA,
-  languages: {},
-  locales: {},
-  territories: {},
-  writingSystems: {},
-  variantTags: {},
+  languagesInSelectedSource: [],
+  locales: [],
+  territories: [],
+  variantTags: [],
+  writingSystems: [],
+  getObject: () => undefined,
+  getLanguage: () => undefined,
+  getLocale: () => undefined,
+  getTerritory: () => undefined,
+  getWritingSystem: () => undefined,
+  getVariantTag: () => undefined,
 });
 
 // Create a provider component
@@ -37,7 +53,6 @@ export const DataProvider: React.FC<{
   const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
   const [loadProgress, setLoadProgress] = useState(0);
-  const [languages, setLanguages] = useState<LanguageDictionary>({});
 
   useEffect(() => {
     const loadPrimaryData = async () => {
@@ -47,34 +62,96 @@ export const DataProvider: React.FC<{
     loadPrimaryData();
   }, []); // this is called once after page load
 
+  const getObject = useCallback(
+    (id: string): ObjectData | undefined => coreData.objects[id],
+    [coreData],
+  );
+  const getLanguage = useCallback(
+    (id: string): LanguageData | undefined => {
+      const obj = coreData.objects[id];
+      return obj?.type === ObjectType.Language ? (obj as LanguageData) : undefined;
+    },
+    [coreData],
+  );
+  const getLocale = useCallback(
+    (id: string): LocaleData | undefined => {
+      const obj = coreData.objects[id];
+      return obj?.type === ObjectType.Locale ? (obj as LocaleData) : undefined;
+    },
+    [coreData],
+  );
+  const getTerritory = useCallback(
+    (id: string): TerritoryData | undefined => {
+      const obj = coreData.objects[id];
+      return obj?.type === ObjectType.Territory ? (obj as TerritoryData) : undefined;
+    },
+    [coreData],
+  );
+  const getWritingSystem = useCallback(
+    (id: string): WritingSystemData | undefined => {
+      const obj = coreData.objects[id];
+      return obj?.type === ObjectType.WritingSystem ? (obj as WritingSystemData) : undefined;
+    },
+    [coreData],
+  );
+  const getVariantTag = useCallback(
+    (id: string): VariantTagData | undefined => {
+      const obj = coreData.objects[id];
+      return obj?.type === ObjectType.VariantTag ? (obj as VariantTagData) : undefined;
+    },
+    [coreData],
+  );
+  const languagesInSelectedSource = useMemo(
+    () => coreData.allLanguoids.filter((lang) => lang.sourceSpecific[languageSource] != null),
+    [coreData, languageSource],
+  );
+
+  const dataContext = useMemo(
+    () => ({
+      ...coreData,
+      languagesInSelectedSource,
+      getObject,
+      getLanguage,
+      getLocale,
+      getTerritory,
+      getWritingSystem,
+      getVariantTag,
+    }),
+    [coreData],
+  );
+
   // After the main load, load additional data
   useEffect(() => {
     if (loadProgress === 1) {
-      const loadSecondaryData = async (coreData: CoreData) => {
-        await loadSupplementalData(coreData);
+      const loadSecondaryData = async (dataContext: DataContextType) => {
+        await loadSupplementalData(dataContext);
         setLoadProgress(2);
       };
 
-      loadSecondaryData(coreData);
+      loadSecondaryData(dataContext);
     }
   }, [coreData, loadProgress]); // this is called once after page load
 
   useEffect(() => {
-    updateLanguageBasedOnSource(coreData, setLanguages, languageSource, localeSeparator);
+    updateLanguageBasedOnSource(
+      languagesInSelectedSource,
+      coreData.locales,
+      languageSource,
+      localeSeparator,
+    );
   }, [languageSource, loadProgress, localeSeparator]); // when core language data or the language source changes
 
-  return <DataContext.Provider value={{ ...coreData, languages }}>{children}</DataContext.Provider>;
+  return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
 };
 
 function updateLanguageBasedOnSource(
-  coreData: CoreData,
-  setLanguages: Dispatch<SetStateAction<LanguageDictionary>>,
+  languages: LanguageData[],
+  locales: LocaleData[],
   languageSource: LanguageSource,
   localeSeparator: LocaleSeparator,
 ): void {
-  const languages = coreData.languagesBySource[languageSource];
   // Update language codes and other values used for filtering
-  Object.values(languages).forEach((lang) => {
+  languages.forEach((lang) => {
     const specific = lang.sourceSpecific[languageSource];
     lang.codeDisplay = specific.code ?? lang.ID;
     lang.nameDisplay = specific.name ?? lang.nameCanonical;
@@ -94,12 +171,10 @@ function updateLanguageBasedOnSource(
   });
 
   // Update locales too, their codes and their names
-  Object.values(coreData.locales).forEach((loc) => {
+  Object.values(locales).forEach((loc) => {
     loc.codeDisplay = getLocaleCode(loc, localeSeparator);
     loc.nameDisplay = getLocaleName(loc);
   });
-
-  setLanguages({ ...languages });
 }
 
 // Custom hook for easier usage

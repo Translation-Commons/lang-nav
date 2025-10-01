@@ -2,14 +2,14 @@ import { useState } from 'react';
 
 import { CensusID, CensusData } from '../types/CensusTypes';
 import {
-  BCP47LocaleCode,
   LocaleData,
-  ScriptCode,
-  TerritoryCode,
+  ObjectData,
   TerritoryData,
+  VariantTagData,
   WritingSystemData,
 } from '../types/DataTypes';
-import { LanguagesBySource } from '../types/LanguageTypes';
+import { LanguageData, LanguagesBySource } from '../types/LanguageTypes';
+import { ObjectType } from '../types/PageParamTypes';
 
 import {
   computeOtherPopulationStatistics,
@@ -24,12 +24,7 @@ import {
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
 } from './GlottologData';
-import {
-  loadIANAVariants,
-  addIANAVariantLocales,
-  connectVariantTags,
-  VariantTagDictionary,
-} from './IANAData';
+import { loadIANAVariants, addIANAVariantLocales, connectVariantTags } from './IANAData';
 import { addISORetirementsToLanguages, loadISORetirements } from './iso/ISORetirements';
 import {
   addISODataToLanguages,
@@ -47,13 +42,17 @@ import {
 } from './TerritoryData';
 import { addCLDRLanguageDetails } from './UnicodeData';
 
-export type CoreData = {
+export type CoreDataArrays = {
+  allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets
+  locales: LocaleData[];
+  territories: TerritoryData[];
+  variantTags: VariantTagData[];
+  writingSystems: WritingSystemData[];
   censuses: Record<CensusID, CensusData>;
-  languagesBySource: LanguagesBySource;
-  locales: Record<BCP47LocaleCode, LocaleData>;
-  territories: Record<TerritoryCode, TerritoryData>;
-  writingSystems: Record<ScriptCode, WritingSystemData>;
-  variantTags: VariantTagDictionary;
+};
+
+export type CoreData = CoreDataArrays & {
+  objects: Record<string, ObjectData>;
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
@@ -73,12 +72,8 @@ export function useCoreData(): {
   loadCoreData: () => Promise<void>;
   coreData: CoreData;
 } {
-  const [languagesBySource, setLanguagesBySource] =
-    useState<LanguagesBySource>(EMPTY_LANGUAGES_BY_SCHEMA);
-  const [locales, setLocales] = useState<Record<BCP47LocaleCode, LocaleData>>({});
-  const [territories, setTerritories] = useState<Record<TerritoryCode, TerritoryData>>({});
-  const [writingSystems, setWritingSystems] = useState<Record<ScriptCode, WritingSystemData>>({});
-  const [variantTags, setVariantTags] = useState<VariantTagDictionary>({});
+  const [allLanguoids, setAllLanguoids] = useState<LanguageData[]>([]);
+  const [objects, setObjects] = useState<Record<string, ObjectData>>({});
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
@@ -141,22 +136,35 @@ export function useCoreData(): {
     computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
-    setLanguagesBySource(languagesBySource);
-    setTerritories(territories);
-    setLocales(locales);
-    setWritingSystems(writingSystems);
-    setVariantTags(variantTags);
+    setAllLanguoids(Object.values(languagesBySource.All));
+    setObjects({
+      // All combined into one big object map for easy lookup but the ID formats are unique so its OK
+      ...languagesBySource.Glottolog, // aaaa0000
+      ...languagesBySource.ISO, // aaa
+      ...languagesBySource.BCP, // aa | aaa
+      ...territories, // AA | 000
+      ...locales, // aa_Aaaa_AA... etc.
+      ...writingSystems, // Aaaa
+      ...variantTags, // These may be arbitrary, but usually 6-8 alphabetic
+    });
   }
 
   return {
     loadCoreData,
     coreData: {
+      allLanguoids,
+      locales: Object.values(objects).filter((o): o is LocaleData => o.type === ObjectType.Locale),
+      territories: Object.values(objects).filter(
+        (o): o is TerritoryData => o.type === ObjectType.Territory,
+      ),
+      variantTags: Object.values(objects).filter(
+        (o): o is VariantTagData => o.type === ObjectType.VariantTag,
+      ),
+      writingSystems: Object.values(objects).filter(
+        (o): o is WritingSystemData => o.type === ObjectType.WritingSystem,
+      ),
       censuses,
-      languagesBySource,
-      locales,
-      territories,
-      writingSystems,
-      variantTags,
+      objects,
     },
   };
 }

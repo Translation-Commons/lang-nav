@@ -17,11 +17,13 @@ const LocaleCitationCounts: React.FC = () => {
   const citationPercent = totalLocales > 0 ? Math.round((withCensusCount / totalLocales) * 100) : 0;
 
   // Breakdown by collectorType: Government, CLDR, Study, Other
+
   const citationsByCollectorType = withCensusLocales.reduce(
     (acc, loc) => {
       const collector = loc.populationCensus?.collectorType;
       if (collector != null) {
         acc[collector] = (acc[collector] ?? 0) + 1;
+
       } // locales without citations not counted
       return acc;
     },
@@ -63,6 +65,7 @@ const LocaleCitationCounts: React.FC = () => {
       <div style={{ marginBottom: '1em' }}>
         <strong>Census source breakdown:</strong>
         <ul>
+
           {Object.entries(citationsByCollectorType).map(([type, count]) => {
             const percent =
               withCensusCount > 0 ? ((count / withCensusCount) * 100).toFixed(1) : '0';
@@ -72,15 +75,42 @@ const LocaleCitationCounts: React.FC = () => {
               </li>
             );
           })}
+
+          <li>
+            Government: {govCount} (
+            {withCensusCount > 0 ? ((govCount / withCensusCount) * 100).toFixed(1) : '0'}
+            %)
+          </li>
+          <li>
+            CLDR: {cldrCount} (
+            {withCensusCount > 0 ? ((cldrCount / withCensusCount) * 100).toFixed(1) : '0'}
+            %)
+          </li>
+          {studyCount > 0 && (
+            <li>
+              Study: {studyCount} (
+              {withCensusCount > 0 ? ((studyCount / withCensusCount) * 100).toFixed(1) : '0'}
+              %)
+            </li>
+          )}
+          {otherCount > 0 && (
+            <li>
+              Other: {otherCount} (
+              {withCensusCount > 0 ? ((otherCount / withCensusCount) * 100).toFixed(1) : '0'}
+              %)
+            </li>
+          )}
+
         </ul>
       </div>
 
       {/* Breakdown by language scope */}
       <div style={{ marginBottom: '1em' }}>
-        <strong>Percent of locales with citations by language scope:</strong>
+        <strong>Breakdown by language scope:</strong>
         <ul>
           {Object.entries(langScopeGroups).map(([scope, counts]) => {
-            if (counts.total === 0) return null;
+        if (counts.total === 0) return null;
+
             const percent =
               counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
             return (
@@ -94,7 +124,7 @@ const LocaleCitationCounts: React.FC = () => {
 
       {/* Breakdown by territory scope */}
       <div>
-        <strong>Percent of locales with citations by territory scope:</strong>
+        <strong>Breakdown by territory scope:</strong>
         <ul>
           {Object.entries(terrScopeGroups).map(([scope, counts]) => {
             if (counts.total === 0) return null;

@@ -42,7 +42,7 @@ Sometimes a row of data from a census does not have an easy to use language code
 
 If you are not sure which one to use, use `und`.
 
-**Inferred Entries**: [Process not finalized] Iterating through the data you may realize there's only a dialect of a popular language listed (eg. High German only, not German generally) or only a language group (eg. Serbo-Croatian). In these cases, it may be important to add an artificial entry for the missing common language -- do that but also add a comment in the file noting that this is an artificial entry and why it was added.
+**Dialects**: If a row is a dialect, try to find the most precise language code. That could be the glottocode, for example `wind1243` for Windisch, rather than Slovenian `slv` (for which it is a dialect). If the rows are mutually exclusive (individuals aren't counted multiple times) then you can add a macrolanguage indicator so its counted as data for the dialect & the language (presuming there is no separate Slovenian row that would double count the Windisch speakers). So the row would look like `slv/wind1243`.
 
 **Language Families**: Some censuses may include language family data in addition to individual languages. For data completeness, it may be useful to include that data as well. You will have to use ISO 639-5 language family codes or glottocodes for these entries. If you need help finding the right code, it can be useful to use the Hierarchy view and use the language family in the search term. The canadian census in this regard is very helpful here since the data comes in a hierarchical form, so you can look up language codes using the tool directly, eg. http://translation-commons.github.io/lang-nav/?view=Hierarchy&searchString=atha&searchBy=English+Name+or+ID
 
@@ -145,13 +145,42 @@ taq	Tamasheq				75
 tzm	Tamazight	4,735			2,950
 ```
 
+### Notes column
+
+If you'd like to leave notes, you can start a column where the top row starts with "#" -- eg. "# Notes" or "#Sampled Data" -- data in this column will be ignored during the import process but will be left in the file for reference.
+
+### Macrolanguages
+
+While you add data, you may notice that some rows could be counted for a specific dialect OR for a macrolanguage. The 2 most common occurrences are 1: The row says "Windisch", a dialect of Slovenian. The ID should be the most precise one, in this case the glottocode `wind1243` , but we also want to count it for `slv` Slovenian. Another common case is when censuses list Chinese, Mandarin, and/or Cantonese. If the categories are mutually exclusive, they should count for the macrolanguage `zho` Chinese as well as their specific language code (`yue` and `cmn`).
+
+In order to do this, add a new column where the top of it says "#macrolanguage" -- that's a special indicator that will let the census processor know to also count that language row for the code indicated in that column if indicated.
+
+```
+#codeDisplay		at2001
+#nameDisplay		Austria 2001
+...
+Language Code	Language Name	at2001
+mul	Total	8,032,926
+deu	German	7,115,780
+tur	Turkish	183,445
+hbs/srp	Serbian	177,320
+hrv	Croatian	131,307
+eng	English	58,582
+hun	Hungarian	40,583
+hbs/bos	Bosnian	34,857
+...
+hbs/ckm/burg1244	Burgenland Croatian	19,412
+...
+slv/wind1243	Windisch	568
+```
+
+Note that this example shows a rare but possible case where the language row should actually be counted 3 times: Burgenland Croatian should be counted for `burg1244` Burgenland Croatian, `ckm` Chakavian, and `hbs` Serbo-Croatian, note that they are all 3 listed.
+
 ## Step 5: Plug it in
 
-Add the new filename to the file that imports the census data. Find the variable `CENSUS_FILENAMES` in [CensusData.tsx](/src/dataloading/CensusData.tsx) and add the new filename. Test out that the new data is loaded by running the project locally (instructions in the [README](/README.md)).
+Add the new filename to the `censusList.txt` file in this directory. Test out that the new data is loaded by running the project locally (instructions in the [README](/README.md)).
 
-Check the census table view at your local domain eg. `https://localhost:####/lang-nav/?objectType=Census&view=Table` to make sure your new censuses appear and there are roughly as many languages as you expected. Noting that `mis`/`und`/`mul` languages have already been filtered out.
+Check the census table view at your local domain eg. `https://localhost:5173/lang-nav/data?objectType=Census&view=Table` to make sure your new censuses appear and there are roughly as many languages as you expected. Noting that `mis`/`und`/`mul` languages have already been filtered out.
 
-where `<censusID>` is the name of the file you added without the `.tsv` extension (e.g., `ca2021` for `ca2021.tsv`).
-
-It's recommended to check the details view `<https://localhost:####>`/lang-nav/?view=Details&objectID=`<censusID>` for each census table you added.
+It's recommended to check the details view `https://localhost:5173/lang-nav/?view=Details&objectID=<censusID>` for each census table you added.
 Once the file is read in with the others, test it out on your local host and if it looks good, then you submit a pull request to the main project.

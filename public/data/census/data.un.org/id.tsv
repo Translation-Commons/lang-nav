@@ -1,0 +1,24 @@
+#codeDisplay		id2010
+#nameDisplay		Indonesia 2010
+#isoRegionCode		ID
+#yearCollected		2010
+#datePublished		2015
+#eligiblePopulation		214,063,055
+#notes		Census - de jure - complete tabulation
+#age		5+
+#acquisitionOrder		L1
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	id2010
+mul	Total	214,063,055
+jav	Javanese	68,221,557
+mul	Other	44,751,638
+ind	Indonesian	42,766,100
+sun	Sundanese	32,438,979
+mad	Madurese	7,785,269
+min	Minangkabau	4,237,806
+bjn	Banjarese	3,653,280
+bug	Buginese	3,512,114
+ban	Balinese	3,372,261
+btk	Batak	3,324,051
