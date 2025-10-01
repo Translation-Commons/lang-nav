@@ -23,7 +23,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
   const { ID, locales, modality, populationEstimate, vitalityEth2013 } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
-    (l) => l.territoryCode,
+    (l) => l.territoryCode ?? '',
   );
 
   return (

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';
 import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
@@ -17,34 +18,24 @@ type Props = {
 };
 
 const LocaleDetails: React.FC<Props> = ({ locale }) => {
-  const { officialStatus, wikipedia } = locale;
   return (
     <div className="Details">
       <LocaleDefinitionSection locale={locale} />
       <LocalePopulationSection locale={locale} />
-      <DetailsSection title="Other">
-        {officialStatus && (
-          <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
-        )}
-        {wikipedia && (
-          <DetailsField title="Wikipedia:">
-            <ObjectWikipediaInfo object={locale} />
-          </DetailsField>
-        )}
-      </DetailsSection>
+      <LocaleOtherSection locale={locale} />
     </div>
   );
 };
 
 const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const {
-    explicitScriptCode,
+    scriptCode,
     language,
     languageCode,
     territory,
     territoryCode,
-    variantTag,
-    variantTagCode,
+    variantTags,
+    variantTagCodes,
     writingSystem,
   } = locale;
 
@@ -59,33 +50,39 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           </span>
         )}
       </DetailsField>
-      <DetailsField title="Territory:">
-        {territory ? (
-          <HoverableObjectName object={territory} />
-        ) : (
-          <span>
-            {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
-          </span>
-        )}
-      </DetailsField>
-      {explicitScriptCode && (
+      {(territory || territoryCode) && (
+        <DetailsField title="Territory:">
+          {territory ? (
+            <HoverableObjectName object={territory} />
+          ) : (
+            <span>
+              {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
+            </span>
+          )}
+        </DetailsField>
+      )}
+      {scriptCode && (
         <DetailsField title="Writing System:">
           {writingSystem ? (
             <HoverableObjectName object={writingSystem} />
           ) : (
             <span>
-              {explicitScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
+              {scriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
             </span>
           )}
         </DetailsField>
       )}
-      {variantTagCode && (
-        <DetailsField title="Variant Tag:">
-          {variantTag ? (
-            <HoverableObjectName object={variantTag} />
+      {variantTagCodes && variantTagCodes.length > 0 && (
+        <DetailsField title={`Variant Tag${variantTagCodes.length > 1 ? 's' : ''}:`}>
+          {variantTags ? (
+            <CommaSeparated>
+              {variantTags.map((tag) => (
+                <HoverableObjectName key={tag.ID} object={tag} />
+              ))}
+            </CommaSeparated>
           ) : (
             <span>
-              {variantTagCode} <Deemphasized>[variant not in database]</Deemphasized>
+              {variantTagCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
             </span>
           )}
         </DetailsField>
@@ -106,12 +103,16 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
   return (
     <DetailsSection title="Population">
-      <DetailsField title="Speakers:">
-        {populationSpeaking.toLocaleString()}
-        {' ['}
-        <LocaleCensusCitation locale={locale} />
-        {']'}
-      </DetailsField>
+      {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
+
+      {populationSpeaking != null && (
+        <DetailsField title="Speakers:">
+          {populationSpeaking.toLocaleString()}
+          {' ['}
+          <LocaleCensusCitation locale={locale} />
+          {']'}
+        </DetailsField>
+      )}
       {populationSpeakingPercent != null && (
         <DetailsField
           title={
@@ -123,7 +124,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           {numberToFixedUnlessSmall(populationSpeakingPercent)}%
         </DetailsField>
       )}
-      {populationWriting && territory && (
+      {populationWriting != null && territory && (
         <DetailsField title="Writers:">
           ~{numberToSigFigs(populationWriting, 3).toLocaleString()}
           {' [previous estimate * literacy'}
@@ -178,6 +179,23 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 ))}
             </tbody>
           </table>
+        </DetailsField>
+      )}
+    </DetailsSection>
+  );
+};
+
+const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
+  const { officialStatus, wikipedia } = locale;
+  return (
+    <DetailsSection title="Other">
+      {!officialStatus && !wikipedia && <Deemphasized>No additional data available.</Deemphasized>}
+      {officialStatus && (
+        <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
+      )}
+      {wikipedia && (
+        <DetailsField title="Wikipedia:">
+          <ObjectWikipediaInfo object={locale} />
         </DetailsField>
       )}
     </DetailsSection>

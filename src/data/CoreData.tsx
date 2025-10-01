@@ -125,7 +125,7 @@ export function useCoreData(): {
     addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageDetails(languagesBySource);
-    addIANAVariantLocales(languagesBySource, locales, variantTags);
+    addIANAVariantLocales(languagesBySource.BCP, locales, variantTags);
 
     connectLanguagesToParent(languagesBySource);
     connectTerritoriesToParent(territories);

@@ -1,12 +1,8 @@
 import { unique } from '../generic/setUtils';
-import {
-  BCP47LocaleCode,
-  LocaleData,
-  PopulationSourceCategory,
-  VariantTagData,
-} from '../types/DataTypes';
-import { LanguageDictionary, LanguagesBySource } from '../types/LanguageTypes';
-import { ObjectType } from '../types/PageParamTypes';
+import { BCP47LocaleCode, LocaleData, VariantTagData } from '../types/DataTypes';
+import { LanguageDictionary } from '../types/LanguageTypes';
+import { LocaleSeparator, ObjectType } from '../types/PageParamTypes';
+import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '../views/locale/LocaleStrings';
 
 export type VariantIANATag = string; // IANA tag, eg. valencia (for cat-ES-valencia)
 
@@ -117,36 +113,50 @@ export function parseIANAVariants(input: string): VariantTagDictionary {
 
 // TODO support complex variants like zh-Latn-pinyin or oc-lengadoc-grclass
 export function addIANAVariantLocales(
-  languagesBySource: LanguagesBySource,
+  languagesBCP: LanguageDictionary,
   locales: Record<BCP47LocaleCode, LocaleData>,
   variants: VariantTagDictionary | void,
 ): void {
   if (!variants) return;
 
   Object.values(variants).forEach((variant) => {
-    variant.languageCodes.forEach((prefix) => {
-      const bcpLang = languagesBySource.BCP[prefix];
-      if (!bcpLang) return;
+    variant.prefixes.forEach((prefix) => {
+      if (prefix === 'sgn-ase') return; // known bad data
 
-      const iso639_3 = bcpLang.ID;
-      const localeCode = `${iso639_3}_${variant.ID}`;
+      const localeParts = parseLocaleCode(prefix);
+      const iso639_3 = languagesBCP[localeParts.languageCode]?.ID;
+      if (!iso639_3) return; // Shouldn't happen, but just in case
+      localeParts.languageCode = iso639_3;
 
-      locales[localeCode] = {
-        ID: localeCode,
-        languageCode: iso639_3,
-        variantTagCode: variant.ID,
-        nameDisplay: variant.nameDisplay,
-        localeSource: 'IANA',
-        codeDisplay: localeCode,
-        type: ObjectType.Locale,
-        populationSource: PopulationSourceCategory.NoSource,
-        populationSpeaking: 0,
-        censusRecords: [],
-        territoryCode: '',
-        names: [variant.nameDisplay],
-      };
+      // Add both the variant's prefix and the prefix with the variant to the locale list if it isn't yet present
+      addVariantLocale(localeParts, locales);
+      addVariantLocale(
+        { ...localeParts, variantTagCodes: [...(localeParts.variantTagCodes ?? []), variant.ID] },
+        locales,
+      );
     });
   });
+}
+
+function addVariantLocale(
+  localeTags: LocaleTags,
+  locales: Record<BCP47LocaleCode, LocaleData>,
+): void {
+  const localeCode = getLocaleCodeFromTags(localeTags, LocaleSeparator.Underscore);
+  if (!localeCode.includes('_')) return; // Don't add language-only locales
+  if (locales[localeCode]) return; // Already exists
+
+  locales[localeCode] = {
+    type: ObjectType.Locale,
+    ID: localeCode,
+    codeDisplay: localeCode,
+    ...localeTags, // languageCode, scriptCode, territoryCode, variantTagCodes
+    localeSource: 'IANA',
+
+    // Names are withheld but they are added later when all of the locale objects have been linked
+    nameDisplay: '',
+    names: [],
+  };
 }
 
 export function connectVariantTags(
@@ -175,15 +185,19 @@ export function connectVariantTags(
 
   // Link locales to variants and vice versa
   Object.values(locales).forEach((locale) => {
-    const { variantTagCode } = locale;
-    if (!variantTagCode) return; // Skip if no variant tag ID
-    const variant = variantTags[variantTagCode];
-    if (!variant) {
-      console.warn(`Variant tag ${variantTagCode} not found for locale ${locale.ID}`);
-      return;
-    }
+    const { variantTagCodes } = locale;
+    if (!variantTagCodes || variantTagCodes.length === 0) return; // Skip if no variant tag ID
 
-    variant.locales.push(locale);
-    locale.variantTag = variant;
+    variantTagCodes.forEach((variantTagCode) => {
+      const variant = variantTags[variantTagCode];
+      if (!variant) {
+        console.warn(`Variant tag ${variantTagCode} not found for locale ${locale.ID}`);
+        return;
+      }
+
+      variant.locales.push(locale);
+      if (!locale.variantTags) locale.variantTags = [];
+      locale.variantTags.push(variant);
+    });
   });
 }

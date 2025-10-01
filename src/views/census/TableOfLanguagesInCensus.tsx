@@ -141,7 +141,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             key: 'Primary Territory',
             render: (loc) => {
               const territory = loc.language?.locales.sort(
-                (a, b) => b.populationSpeaking - a.populationSpeaking,
+                (a, b) => (b.populationSpeaking ?? -1) - (a.populationSpeaking ?? -1),
               )[0]?.territory;
               return territory ? <HoverableObjectName object={territory} /> : null;
             },

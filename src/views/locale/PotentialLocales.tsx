@@ -205,7 +205,7 @@ function getPotentialLocales(
               censusRecords: [{ census, populationEstimate, populationPercent }],
             };
           } else {
-            if (missing[localeID].populationSpeaking < populationEstimate) {
+            if ((missing[localeID].populationSpeaking ?? 0) < populationEstimate) {
               // If we already have a locale but the population estimate is higher, update it
               missing[localeID].populationSpeaking = populationEstimate;
               missing[localeID].populationSpeakingPercent = populationPercent;
@@ -261,7 +261,7 @@ function partitionPotentialLocales(
     return (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0);
   });
   const largestLocale = localesSorted.reduce((max, locale) => {
-    return locale.populationSpeaking > max.populationSpeaking ? locale : max;
+    return (locale.populationSpeaking ?? 0) > (max.populationSpeaking ?? 0) ? locale : max;
   }, localesSorted[0]);
   // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
   if (largestLocale.localeSource === 'census') {

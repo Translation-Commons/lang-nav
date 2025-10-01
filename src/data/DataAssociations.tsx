@@ -106,17 +106,17 @@ export function connectLocales(
   locales: Record<BCP47LocaleCode, LocaleData>,
 ): void {
   Object.values(locales).forEach((locale) => {
-    const territory = territories[locale.territoryCode];
+    const territory = locale.territoryCode ? territories[locale.territoryCode] : undefined;
     const language = languages[locale.languageCode];
-    const writingSystem = locale.explicitScriptCode
-      ? writingSystems[locale.explicitScriptCode]
-      : null;
+    const writingSystem = locale.scriptCode ? writingSystems[locale.scriptCode] : undefined;
 
     if (territory != null) {
       if (!territory.locales) territory.locales = [];
       territory.locales.push(locale);
       locale.territory = territory;
-      locale.populationSpeakingPercent = (locale.populationSpeaking * 100) / territory.population;
+      if (locale.populationSpeaking)
+        locale.populationSpeakingPercent =
+          (locale.populationSpeaking * 100) / (territory.population || 1);
     }
     if (language != null) {
       language.locales.push(locale);
@@ -130,9 +130,9 @@ export function connectLocales(
       if (language != null) {
         if (!writingSystem.languages) writingSystem.languages = {};
         writingSystem.languages[language.ID] = language;
-        if (language.primaryScriptCode != locale.explicitScriptCode) {
+        if (language.primaryScriptCode != locale.scriptCode && locale.populationSpeaking != null) {
           if (!writingSystem.populationUpperBound) writingSystem.populationUpperBound = 0;
-          writingSystem.populationUpperBound += locale.populationSpeaking || 0;
+          writingSystem.populationUpperBound += locale.populationSpeaking;
         }
       }
     }

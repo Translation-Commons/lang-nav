@@ -114,8 +114,11 @@ function createRegionalLocalesForTerritory(
             territory,
 
             // Update the population
-            populationSpeaking: loc.populationSpeaking || 0,
-            populationSpeakingPercent: (loc.populationSpeaking * 100) / territory.population,
+            populationSpeaking: loc.populationSpeaking,
+            populationSpeakingPercent:
+              loc.populationSpeaking != null
+                ? (loc.populationSpeaking * 100) / territory.population
+                : undefined,
             populationSource: PopulationSourceCategory.Aggregated,
 
             // Clear attributes that cannot be easily aggregated
@@ -126,10 +129,13 @@ function createRegionalLocalesForTerritory(
             containedLocales: [loc], // Keep track of the original locales that were aggregated
           };
         } else {
-          newLocale.populationSpeaking += loc.populationSpeaking || 0;
-          newLocale.populationSpeakingPercent =
-            (newLocale.populationSpeaking * 100) / territory.population;
-          newLocale.containedLocales = [...(newLocale.containedLocales || []), loc];
+          if (loc.populationSpeaking != null) {
+            if (newLocale.populationSpeaking == null) newLocale.populationSpeaking = 0;
+            newLocale.populationSpeaking += loc.populationSpeaking || 0;
+            newLocale.populationSpeakingPercent =
+              (newLocale.populationSpeaking * 100) / territory.population;
+            newLocale.containedLocales = [...(newLocale.containedLocales || []), loc];
+          }
         }
       });
       return locs;
@@ -139,8 +145,8 @@ function createRegionalLocalesForTerritory(
 
   // Save it to the territory
   territory.locales = Object.values(territoryLocales ?? {})
-    .filter((loc) => loc.populationSpeaking > 10) // Avoid creating too many locale objects
-    .sort((a, b) => b.populationSpeaking - a.populationSpeaking);
+    .filter((loc) => (loc.populationSpeaking ?? 0) > 10) // Avoid creating too many locale objects
+    .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0));
   territory.locales.forEach((loc) => (allLocales[loc.ID] = loc));
   // At the moment its not being saved to the master locale list
   // Also this should be done after locales are matched to languages

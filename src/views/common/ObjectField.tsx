@@ -81,7 +81,7 @@ export function getObjectPopulation(object: ObjectData): number {
     case ObjectType.Language:
       return object.populationEstimate ?? 0;
     case ObjectType.Locale:
-      return object.populationSpeaking;
+      return object.populationSpeaking ?? 0;
     case ObjectType.Census:
       return object.eligiblePopulation;
     case ObjectType.WritingSystem:

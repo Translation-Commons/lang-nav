@@ -10,7 +10,12 @@ export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[
     case ObjectType.Language:
       return [...getObjectParents(object.parentLanguage), object.parentLanguage];
     case ObjectType.Locale:
-      return [object.language, object.writingSystem, object.territory, object.variantTag];
+      return [
+        object.language,
+        object.writingSystem,
+        object.territory,
+        ...(object.variantTags ?? []),
+      ];
     case ObjectType.Territory:
       return [...getObjectParents(object.parentUNRegion), object.parentUNRegion];
     case ObjectType.WritingSystem:
