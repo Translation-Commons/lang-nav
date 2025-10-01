@@ -115,7 +115,8 @@ export function connectLocales(
       territory.locales.push(locale);
       locale.territory = territory;
       if (locale.populationSpeaking)
-        locale.populationSpeakingPercent = (locale.populationSpeaking * 100) / territory.population;
+        locale.populationSpeakingPercent =
+          (locale.populationSpeaking * 100) / (territory.population || 1);
     }
     if (language != null) {
       language.locales.push(locale);
@@ -129,9 +130,9 @@ export function connectLocales(
       if (language != null) {
         if (!writingSystem.languages) writingSystem.languages = {};
         writingSystem.languages[language.ID] = language;
-        if (language.primaryScriptCode != locale.scriptCode) {
+        if (language.primaryScriptCode != locale.scriptCode && locale.populationSpeaking != null) {
           if (!writingSystem.populationUpperBound) writingSystem.populationUpperBound = 0;
-          writingSystem.populationUpperBound += locale.populationSpeaking || 0;
+          writingSystem.populationUpperBound += locale.populationSpeaking;
         }
       }
     }

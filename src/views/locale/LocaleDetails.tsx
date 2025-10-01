@@ -18,7 +18,6 @@ type Props = {
 };
 
 const LocaleDetails: React.FC<Props> = ({ locale }) => {
-  const { officialStatus, wikipedia } = locale;
   return (
     <div className="Details">
       <LocaleDefinitionSection locale={locale} />

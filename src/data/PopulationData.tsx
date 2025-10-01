@@ -100,6 +100,7 @@ export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
     .forEach((locale) => {
       locale.literacyPercent = locale.territory?.literacyPercent ?? 100;
 
+      if (locale.populationSpeaking == null) return;
       locale.populationWriting = Math.round(
         (locale.populationSpeaking * locale.literacyPercent) / 100,
       );
