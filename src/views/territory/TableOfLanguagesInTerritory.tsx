@@ -34,11 +34,6 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           sortParam: SortBy.Name,
         },
         {
-          key: 'Territory',
-          render: (loc) => <HoverableObjectName object={loc} labelSource="territory" />,
-          isInitiallyVisible: false,
-        },
-        {
           key: 'Official Status',
           render: (loc) => (loc.officialStatus ? getOfficialLabel(loc.officialStatus) : <Deemphasized>None</Deemphasized>),
         },
