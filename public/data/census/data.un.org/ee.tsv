@@ -1,0 +1,35 @@
+#codeDisplay		ee2000	ee2011	ee2021
+#nameDisplay		Estonia 2000	Estonia 2011	Estonia 2021
+#isoRegionCode	EE			
+#yearCollected		2000	2011	2021
+#datePublished		2002	2013	2022
+#eligiblePopulation		1,370,052	1,294,455	1,331,824
+#notes	Census - de jure - complete tabulation			
+#responsesPerIndividual	1			
+#acquisitionOrder	L1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	ee2000	ee2011	ee2021
+mul	Total	1,370,052	1,294,455	1,331,824
+est	Estonian	921,817	887,216	895,493
+rus	Russian	406,755	383,118	379,210
+mul	Other	7,243	2,479	13,076
+ukr	Ukrainian	11,923	8,016	12,431
+mis	Unknown	9,189	1,723	8,176
+bel	Belorussian	4,953	1,664	1,650
+fin	Finnish	4,554	2,621	4,276
+eng	English		878	3,879
+lav	Latvian	1,242	999	2,510
+deu	German		522	1,834
+spa	Spanish		189	1,378
+tat	Tatar	1,229	806	645
+lit	Lithuanian	1,147	905	1,110
+aze	Azerbaijani		656	1,118
+ita	Italian		215	1,048
+hye	Armenian		717	842
+swe	Swedish		285	818
+pol	Polish		435	693
+kat	Georgian		262	692
+rom	Romany		361	531
+ron	Moldavian		237	292
+chv	Chuvash		151	122

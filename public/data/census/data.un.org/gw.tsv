@@ -1,0 +1,20 @@
+#codeDisplay		gw2009
+#nameDisplay		Guinea-Bissau 2009
+#isoRegionCode		GW
+#yearCollected		2009
+#datePublished		2015
+#eligiblePopulation		1,435,032
+#notes		Census - de jure - complete tabulation
+#modality		Spoken
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	gw2009
+mul	Total	1,435,032
+pov	Creole	1,303,743
+por	Portuguese	390,727
+fra	French	73,883
+eng	English	42,194
+mul	Other	25,642
+spa	Spanish	6,946
+rus	Russian	2,104

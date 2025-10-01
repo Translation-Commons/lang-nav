@@ -1,0 +1,20 @@
+#codeDisplay		by1999	by2009	by2019
+#nameDisplay		Belarus 1999	Belarus 2009	Belarus 2019
+#isoRegionCode	BY			
+#yearCollected		1999	2009	2019
+#datePublished		2009	2011	2021
+#eligiblePopulation		10,045,237	9,503,807	9,413,446
+#notes	Census - de jure - complete tabulation			
+#modality			Spoken	Spoken
+#domain			Home	Home
+#acquisitionOrder			L1	L1
+#responsesPerIndividual		1		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+Language Code	Language Name	by1999	by2009	by2019
+mul	Total	10,045,237	9,503,807	9,413,446
+rus	Russian	6,308,031	6,672,964	6,718,557
+bel	Belorussian	3,682,607	2,227,124	2,447,764
+mul	Other	13,151	295,671	234,320
+pol	Polish	19,872	4,216	4,508
+ukr	Ukrainian	16,127	6,279	8,055
+lit	Lithuanian	978	277	242
