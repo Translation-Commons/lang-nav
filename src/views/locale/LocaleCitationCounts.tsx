@@ -23,7 +23,6 @@ const LocaleCitationCounts: React.FC = () => {
       const collector = loc.populationCensus?.collectorType;
       if (collector != null) {
         acc[collector] = (acc[collector] ?? 0) + 1;
-
       } // locales without citations not counted
       return acc;
     },
@@ -65,7 +64,6 @@ const LocaleCitationCounts: React.FC = () => {
       <div style={{ marginBottom: '1em' }}>
         <strong>Census source breakdown:</strong>
         <ul>
-
           {Object.entries(citationsByCollectorType).map(([type, count]) => {
             const percent =
               withCensusCount > 0 ? ((count / withCensusCount) * 100).toFixed(1) : '0';
@@ -100,7 +98,6 @@ const LocaleCitationCounts: React.FC = () => {
               %)
             </li>
           )}
-
         </ul>
       </div>
 
@@ -109,7 +106,7 @@ const LocaleCitationCounts: React.FC = () => {
         <strong>Breakdown by language scope:</strong>
         <ul>
           {Object.entries(langScopeGroups).map(([scope, counts]) => {
-        if (counts.total === 0) return null;
+            if (counts.total === 0) return null;
 
             const percent =
               counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
