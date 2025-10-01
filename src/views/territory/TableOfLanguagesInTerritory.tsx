@@ -18,7 +18,7 @@ type Props = {
  * Uses LocaleData so we can show population, percent, and official status.
  */
 const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
-  const locales: LocaleData[] = (territory.locales ?? []).slice();
+  const { locales } = territory;
 
   return (
     <ObjectTable<LocaleData>
