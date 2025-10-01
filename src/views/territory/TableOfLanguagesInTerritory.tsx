@@ -40,7 +40,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
         },
         {
           key: 'Official Status',
-          render: (loc) => (loc.officialStatus ? getOfficialLabel(loc.officialStatus) : 'None'),
+          render: (loc) => (loc.officialStatus ? getOfficialLabel(loc.officialStatus) : <Deemphasized>None</Deemphasized>),
         },
         {
           key: 'Speakers',
