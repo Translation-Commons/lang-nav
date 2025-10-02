@@ -13,6 +13,7 @@ export const CodeColumn: TableColumn<ObjectData> = {
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />
   ),
   sortParam: SortBy.Code,
+  columnGroup: 'Codes',
 };
 
 export const NameColumn: TableColumn<ObjectData> = {
@@ -23,6 +24,7 @@ export const NameColumn: TableColumn<ObjectData> = {
     </HoverableObject>
   ),
   sortParam: SortBy.Name,
+  columnGroup: 'Names',
 };
 
 export const EndonymColumn: TableColumn<ObjectData> = {
@@ -32,4 +34,5 @@ export const EndonymColumn: TableColumn<ObjectData> = {
   ),
   sortParam: SortBy.Endonym,
   isInitiallyVisible: false,
+  columnGroup: 'Names',
 };

@@ -6,7 +6,11 @@ import {
   WritingSystemData,
   WritingSystemScope,
 } from '../types/DataTypes';
-import { getBaseLanguageData, LanguageModality } from '../types/LanguageTypes';
+import {
+  getBaseLanguageData,
+  getEmptyLanguageSourceSpecificData,
+  LanguageModality,
+} from '../types/LanguageTypes';
 import { LanguageData } from '../types/LanguageTypes';
 import { LocaleSeparator, ObjectType } from '../types/PageParamTypes';
 import { getLocaleCodeFromTags, parseLocaleCode } from '../views/locale/LocaleStrings';
@@ -15,6 +19,8 @@ export function parseLanguageLine(line: string): LanguageData {
   const parts = line.split('\t');
   const nameFull = parts[2];
   const [nameDisplay, nameSubtitle] = separateTitleAndSubtitle(nameFull);
+  const nameEndonym = parts[3] !== '' ? parts[3] : undefined;
+
   const populationAdjusted =
     parts[9] !== '' ? Number.parseInt(parts[9].replace(/,/g, '')) : undefined;
   const populationCited =
@@ -23,19 +29,26 @@ export function parseLanguageLine(line: string): LanguageData {
   const parentLanguageCode = parts[11] !== '' ? parts[11] : undefined;
   const parentISOCode = parts[11] !== '' && parts[11].length <= 3 ? parts[11] : undefined;
   const parentGlottocode = parts[12] !== '' ? parts[12] : undefined;
-  const sourceSpecific = {
-    All: { code, name: nameDisplay, parentLanguageCode, childLanguages: [] },
-    ISO: { code, parentLanguageCode: parentISOCode, childLanguages: [] },
-    BCP: { code, parentLanguageCode: parentISOCode, childLanguages: [] },
-    UNESCO: { code, name: nameDisplay, parentLanguageCode: parentISOCode, childLanguages: [] },
-    Glottolog: {
-      code: parts[1] !== '' ? parts[1] : undefined,
-      parentLanguageCode: parentGlottocode,
-      childLanguages: [],
-    },
-    CLDR: { childLanguages: [] }, // Empty for now
+
+  // Initialize the data that depends on the language source
+  const sourceSpecific = getEmptyLanguageSourceSpecificData();
+  sourceSpecific.All = { code, name: nameDisplay, parentLanguageCode, childLanguages: [] };
+  sourceSpecific.Glottolog = {
+    code: parts[1] !== '' ? parts[1] : undefined,
+    parentLanguageCode: parentGlottocode,
+    childLanguages: [],
   };
-  const nameEndonym = parts[3] !== '' ? parts[3] : undefined;
+  if (code.length <= 3) {
+    sourceSpecific.ISO = { code, parentLanguageCode: parentISOCode, childLanguages: [] };
+    sourceSpecific.BCP = { code, parentLanguageCode: parentISOCode, childLanguages: [] };
+    // UNESCO may have different requirements
+    sourceSpecific.UNESCO = {
+      code,
+      name: nameDisplay,
+      parentLanguageCode: parentISOCode,
+      childLanguages: [],
+    };
+  }
 
   return {
     ...getBaseLanguageData(code, nameDisplay),
