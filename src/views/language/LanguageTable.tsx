@@ -22,14 +22,7 @@ const LanguageTable: React.FC = () => {
     render: (lang: LanguageData): ReactNode => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {lang.codeDisplay}
-        {lang.warnings && lang.warnings[LanguageField.isoCode] && (
-          <Hoverable
-            hoverContent={lang.warnings[LanguageField.isoCode]}
-            style={{ marginLeft: '0.125em' }}
-          >
-            <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
-          </Hoverable>
-        )}
+        {<MaybeISOWarning lang={lang} />}
       </div>
     ),
   };
@@ -39,6 +32,23 @@ const LanguageTable: React.FC = () => {
       objects={languagesInSelectedSource}
       columns={[
         codeColumn,
+        {
+          key: 'ISO 639-3',
+          render: (lang) => (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {lang.sourceSpecific.ISO.code}
+              {<MaybeISOWarning lang={lang} />}
+            </div>
+          ),
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
+        {
+          key: 'Glottocode',
+          render: (lang) => lang.sourceSpecific.Glottolog.code,
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
         NameColumn,
         endonymColumn,
         {
@@ -57,6 +67,7 @@ const LanguageTable: React.FC = () => {
           render: (lang) => lang.populationEstimate,
           isNumeric: true,
           sortParam: SortBy.Population,
+          columnGroup: 'Population',
         },
         {
           key: 'Population Attested',
@@ -74,6 +85,7 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationAttested,
+          columnGroup: 'Population',
         },
         {
           key: 'Population of Descendents',
@@ -98,18 +110,21 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationOfDescendents,
+          columnGroup: 'Population',
         },
         {
           key: 'CLDR Coverage',
           label: 'CLDR Coverage',
           render: (lang) => <CLDRCoverageText object={lang} />,
           isInitiallyVisible: false,
+          columnGroup: 'Digital Support',
         },
         {
           key: 'ICU Support',
           label: 'ICU Support',
           render: (lang) => <ICUSupportStatus object={lang} />,
           isInitiallyVisible: false,
+          columnGroup: 'Digital Support',
         },
         {
           key: 'Parent Language',
@@ -140,10 +155,22 @@ const LanguageTable: React.FC = () => {
           key: 'Wikipedia',
           render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
           isInitiallyVisible: false,
+          columnGroup: 'Digital Support',
         },
       ]}
     />
   );
 };
+
+function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | null {
+  return lang.warnings && lang.warnings[LanguageField.isoCode] ? (
+    <Hoverable
+      hoverContent={lang.warnings[LanguageField.isoCode]}
+      style={{ marginLeft: '0.125em' }}
+    >
+      <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
+    </Hoverable>
+  ) : null;
+}
 
 export default LanguageTable;

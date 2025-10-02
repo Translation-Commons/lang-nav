@@ -38,6 +38,7 @@ const LocaleTable: React.FC = () => {
           render: (object) => object.populationSpeaking,
           isNumeric: true,
           sortParam: SortBy.Population,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
@@ -48,6 +49,7 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.Literacy,
+          columnGroup: 'Demographics',
         },
         {
           key: '% in Territory',
@@ -63,10 +65,12 @@ const LocaleTable: React.FC = () => {
             ),
           isNumeric: true,
           sortParam: SortBy.RelativePopulation,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Contained Locales',
