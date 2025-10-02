@@ -1,0 +1,218 @@
+#codeDisplay		nz1996	nz2001	nz2006	nz2013	nz2018
+#nameDisplay		New Zealand 1996	New Zealand 2001	New Zealand 2006	New Zealand 2013	New Zealand 2018
+#isoRegionCode	NZ					
+#yearCollected		1996	2001	2006	2013	2018
+#datePublished		2005	2009	2009	2016	2019
+#eligiblePopulation		3,452,937	3,563,796	4,027,947	4,242,048	4,699,755
+#notes		Census - de jure - complete tabulation. Significant data entry problems -- many languages misnamed	Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation	Residents. Census - de jure - complete tabulation
+#modality		Spoken	Spoken	Spoken		
+#age						
+#domain						
+#acquisitionOrder	Any					
+#responsesPerIndividual						
+#languagesIncluded						
+#sampleRate						
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27					
+#collectorType	Government					
+Language Code	Language Name	nz1996	nz2001	nz2006	nz2013	nz2018
+mul	Total	3,452,937	3,563,796	4,027,947	4,242,048	4,699,755
+eng	English	3,290,454	3,425,304	3,673,626	3,819,972	4,482,132
+eng	English and Other					18
+mri	Maori	153,666	160,527	157,110	148,395	185,955
+smo	Samoan		81,036	85,428	86,406	101,937
+smo	#Sambal	70,875				
+zxx	None	91,830	76,053	75,570	67,509	101,751
+zho/cmn	Northern Chinese	18,483	26,514	41,394	52,263	95,253
+hin	Hindi		22,749	44,586	66,312	69,471
+hin	#Hiligaynon, Ilonggo	12,879				
+hin	Hindi Bat		135	6	12	6
+fra	French	45,216	49,719	53,754	49,125	55,116
+zho/yue	Yue	33,576	37,140	44,154	44,625	52,767
+zho	Sinitic nfd	12,912			42,753	51,501
+zho	Sinitic		23,148	4,128	216	219
+tgl	Tagalog	5,607	7,827	12,483	29,016	43,278
+deu	German		33,984	37,509	36,642	41,385
+deu	#Georgian	31,983				
+spa	Spanish	10,692	14,676	21,642	26,982	38,823
+afr	Afrikaans	5,109	12,783	21,123	27,387	36,966
+ton	Tongan	19,113	23,043	29,499	31,839	35,820
+pan	Punjabi	2,940	5,541	10,713	19,749	34,227
+kor	Korean		15,876	26,967	26,373	31,323
+kor	#Kontigna	11,157				
+nld	Dutch	27,471	26,277	26,982	24,006	23,343
+nzs	New Zealand Sign Language	26,589	27,285	24,090	20,235	22,986
+hif	Fiji Hindi		189	525	1,674	26,805
+jpn	Japanese		19,938	20,883	20,151	24,885
+jpn	#Jama Mapun	18,759				
+guj	Gujarati		11,145	15,870	17,505	22,200
+guj	#Gubatnon	8,757				
+rus	Russian		5,550	7,896	9,426	12,543
+rus	#Runyoro	3,429				
+ara	Arabic	4,134	7,956	9,852	10,743	12,399
+por	Portuguese		1,833	3,378	5,625	10,569
+por	#Ponapen	1,281				
+tam	Tamil	2,370	3,807	5,634	6,840	10,107
+ita	Italian		7,215	8,514	8,214	9,903
+ita	#Isneg	6,291				
+rar	Cook Islands Maori	8,565	9,372	9,702	8,124	7,833
+tha	Thai	3,144	4,620	6,300	7,599	9,066
+urd	Urdu	1,500	2,949	4,251	5,046	7,824
+vie	Vietnamese	3,099	3,423	4,317	5,376	7,755
+khm	Khmer		4,989	6,039	6,729	7,551
+khm	#Khassonke	3,993				
+sin	Sinhalese	2,007	3,213	3,918	5,220	7,266
+fij	Fijian	3,159	3,588	4,977	6,273	7,143
+fas	Persian	1,584	2,478	4,305	5,064	7,002
+fas	Iranian		72	33	39	39
+msa	Malay	5,295	4,938	6,750	6,783	
+ind	Bahasa Indonesia	2,817	3,792	4,773	4,884	6,282
+hbs	Serbo-Croatian	5,439	5,949	6,111	5,349	5,502
+niu	Nieuan	5,838			4,548	
+niu	Niuean		5,478	5,484		4,182
+minn1248	Min	5,478	5,526	5,733	5,166	5,760
+tel	Telugu	555	1,419	2,838	3,402	5,754
+mar	Marathi		861	2,562	2,907	4,770
+mal	Malayalam		588	2,139	4,365	
+inc	Indo-Aryan		2,940	4,293	3,951	3,009
+ell	#Gowa	3,591				
+ell	Greek		3,504	3,339	2,952	2,925
+ben	Bengali	1,353	1,467	2,265	2,418	3,468
+swe	Swedish	1,782	1,998	2,406	2,640	3,330
+nep	Nepali		396	612	1,881	3,261
+pol	Polish		2,463	2,592	2,619	3,114
+pol	#Pohnpeian/Mwoakilloan/Pingelapese	2,514				
+tvl	Tuvaluan	555	1,398	1,872	2,349	2,898
+tkl	Tokelauan	2,595	2,808	2,796	2,466	2,406
+#ibb	#Ibibio	2,574				
+bnt	Bantu		1,176	2,478	2,565	2,268
+ces	Czech		861	1,050	1,527	2,460
+dan	Danish	2,121	2,091	2,229	2,127	2,343
+mya	Burmese		432	570	1,713	2,325
+bisa1264	Bisa		393	516	1,500	2,217
+gil	Kiribati		609	1,017	1,479	2,196
+ron	Romanian		753	1,857	1,947	1,998
+hun	Hungarian		1,191	1,476	1,716	1,953
+hun	#Hoklo	1,227				
+som	Somali	816	1,635	1,875	1,326	1,242
+syr	Assyrian	978	1,476	1,851	1,668	1,443
+kan	Kannada		414	891	1,047	1,692
+heb	Hebrew		972	1,431	1,347	1,662
+pus	Pashto		462	942	1,272	1,611
+ceb	Cebuano		270	492	1,014	1,506
+tur	Turkish		726	918	1,107	1,476
+pqw	Western Malayo-Polynesian		663	591	1,032	1,416
+lao	Lao	1,356	1,356	1,326	1,278	1,380
+nan/chao1238	Tieu-Chow		399	729	1,026	1,329
+nor	Norwegian		1,005	1,104	969	1,245
+zho/hak	Hakka		492	816	798	1,215
+gle	Irish		735	696	1,026	1,176
+cym	Welsh	840	1,155	1,077	1,035	1,083
+swa	Swahili		951	1,086	1,134	1,092
+zul	Zulu		801	1,134	879	996
+ukr	Ukrainian		516	714	816	1,080
+zho/wuu	Wu		261	354	447	1,080
+roa	Romance		1,041	888	708	3
+kur	Kurd		603	807	828	924
+kok	Konkani		210	588	717	915
+amh	Amharigna		468	636	756	912
+sla	Slavic		897	441	174	99
+fin	Finnish		522	510	636	858
+bul	Bulgarian		507	816	822	840
+mkd	Macedonian		621	822	738	801
+ilo	Ilocano		195	264	543	816
+slk	Slovak		186	345	534	804
+bis	Bislama		390	459	558	798
+gla	Scottish Gaelic		618	669	543	549
+tbq	Tibeto-Lolo-Burman		216	96	489	669
+sem	Semitic		306	453	567	537
+sqi	Albanian	78	534	363	321	348
+aus	Australian		471	297	156	84
+tir	Tigrinya		186	258	378	453
+mkh	Mon-Khmer		414	174	174	114
+fry	Friesian		327	384	342	327
+cat	Catalan		69	93	204	381
+tai	Tai-Kadai		93	84	213	378
+snd	Sindhi		54	186	210	348
+pis	Solomon Islands Pidgin		72	129	153	339
+lav	Latvian		252	264	276	333
+rtm	Rotuman		168	213	297	333
+slv	Slovenian		210	222	264	321
+tpi	Tok Pisin		126	171	231	309
+tah	Tahitian		282	273	240	273
+paa	Papuan Languages		279		180	120
+sco	Scots		273	192	204	174
+crp	Creole		93	177	252	165
+est	Estonian		114	96	138	234
+yor	Yoruba		60	117	165	231
+lit	Lithuanian		96	120	165	216
+art	Artificial Languages	180	3	3	9	6
+pkp	Pukapukan		108	150	162	177
+cus	Cushitic		144	174	159	153
+isl	Icelandic		111	144	174	153
+hye	Armenian	87	132	147	150	168
+yid	Yiddish		168	51	90	39
+epo	Esperanto		165	123	105	102
+mlt	Maltese		120	147	120	117
+jav	Javanese		69	87	108	144
+kas	Kashimiri		51	81	102	135
+ase	American sign language		24	39	81	129
+ori	Oriya		48	51	69	129
+aze	Azeris		33	42	72	123
+cel	Celtic		120	39	33	18
+bod	Tibetan		81	72	96	120
+hmx	Miaow-Yao		114	33	51	66
+nau	Nauruan		72	84	99	69
+bfi	British sign language		93	66	63	48
+kat	Georgian	#31,983	66	57	81	78
+ssa	Nilo-Saharan		24	54	78	42
+bel	Belorussian		33	57	63	75
+dra	Dravidian		3	30	72	30
+micr1243	Micronesian		72	33	45	30
+rom	Romani (Gypsy)		69	27	18	18
+asf	Australian sign language		30	66	24	30
+earl1243	Neo Melanesian		63	54	45	45
+eus	Basque		21	24	21	54
+hau	Hausa		33	39	42	48
+cdc	Chadic		36	9	9	6
+mis	Not stated					36
+mfe	Mauritian Creole		3	12	21	30
+ful	Fulani		24	15	18	12
+gmq	North Germanic		18	18	24	18
+shn	Shan		18	12	15	15
+mtq	Viet-Muong		18	3	6	
+bat	Baltic		6		3	3
+bre	Breton		3	3	3	3
+mul	Other		81	204,177	57	48
+mul	Other Balto-Slavic	3,282				
+mul	West Germanic nie	1,515			6	3,210
+mul	Pidgins and Creoles	2,037	870	1,026	873	435
+mul	West Germanic		1,038	1,767	1,719	
+mul	Other Indo-Aryan	1,362				
+mul	Other Sino-Tibeto-Burman	1,227				
+mul	Other Afro-Asiatic	1,209				36
+mul	Other Celtic	1,188				
+mul	Other Romance	1,119				
+mul	Other Central-Eastern Malayo-Polynesian	1,083				
+mul	Other Niger-Congo (Congo-Kordafanian)	996	444	246	357	324
+mul	Non-Indigenous	909				
+mul	Other Western Malayo-Polynesian	900				
+mul	Other Sign Language	864	813	726	600	297
+mul	Solomon Islands Languages (non Central-Pacific)		852	153	363	117
+mul	Other Germanic	711				
+mul	Bantu nfd	669	24		102	69
+mul	Pidgin English		618	408	378	507
+mul	Romance nie	84				585
+mul	Other Uralic	540				
+mul	Turko-Altaic	522	105	144	171	237
+mul	Other Dravidian	441				
+mul	Other Iranian	357				
+mul	Miscellaneous Language Groupings	345	81	27		
+mul	Central Pacific		318	216	255	141
+mul	Amerind		144	75	105	42
+mul	Creole and French		15	6	15	141
+mul	Vanuatu Languages		18	66	132	135
+mul	Other Tai-Kadai	30	93			
+mul	Other Austroasiatic	42				18
+mul	Uralic		18	6	15	
+mul	Other Language Isolates	15			15	
+mul	Caucasian		6	9	6	

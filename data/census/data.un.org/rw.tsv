@@ -1,0 +1,47 @@
+#codeDisplay		rw2002
+#nameDisplay		Rwanda 2002
+#isoRegionCode		RW
+#yearCollected		2002
+#datePublished		2011
+#eligiblePopulation		7,963,809
+#respondingPopulation		7,938,863
+#notes		Residents. Census - de jure - complete tabulation
+#modality		Spoken
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	rw2002
+mul	Total	7,963,809
+kin	Kinyarwanda	7,420,785
+kin/fra	#Kiny-French	127,445
+kin/swa	#Kiny-Swahili	116,147
+kin/fra/eng	#Kiny-French-English	75,446
+kin/fra/swa	#Kiny-French-Swah	47,106
+kin	#Kiny-Others languages	40,962
+kin/fra/swa/eng	#Kiny-French-Swah-English	33,603
+mis	Not stated	24,946
+kin/eng	#Kiny-English	15,158
+kin/swa	#Kiny-Swah-Other	8,528
+kin/swa/eng	#Kiny-Swah-Englisha	7,222
+kin/fra/swa/eng	#Kiny-French-Swah-Eng-Other	5,869
+kin/fra/swa	#Kiny-French-Swah-Other	5,156
+eng	English	4,930
+swa	Swahili	4,709
+kin/eng	#Kiny-English-Other	4,403
+fra	French	3,032
+kin/swa/eng	#Kiny-Swah-English-Other	2,575
+mul	Other	2,342
+fra/swa	#French-Swahili	2,275
+kin/fra	#Kiny-French-Other	2,003
+fra/eng	#Franc-English	1,967
+kin/fra/eng	#Kiny-French-English Other	1,803
+fra/swa	#French-Swah-Other	942
+zxx	Dumb	838
+swa/eng	#Swahili - English	825
+swa	#Swah-Other languages	705
+eng	#English and Other	544
+swa/eng	Swah-English-Other	371
+fra/swa/eng	Franc-Swah-English	324
+fra/eng	French-English-Other	317
+fra/swa/eng	Franc-Swah-English-Other	267
+fra	French-Other languages	264

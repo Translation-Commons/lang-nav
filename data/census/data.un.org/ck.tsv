@@ -1,0 +1,19 @@
+#codeDisplay		ck2011
+#nameDisplay		Cook Islands 2011
+#isoRegionCode		CK
+#yearCollected		2011
+#datePublished		2014
+#eligiblePopulation		14,974
+#notes		Census - de jure - complete tabulation
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	ck2011
+mul	Total	14,974
+eng	English	12,933
+rar	Cook Islands Maori	10,809
+mul	Other	1,317
+fij	Fijian	269
+fil	Pilipino	163
+fra	French	138
+smo	Samoan	95
