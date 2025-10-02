@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { LanguageData } from '../../types/LanguageTypes';
+import LinkButton from '../../generic/LinkButton';
 
 export enum VitalityMeterType {
   Metascore = 'Metascore',
@@ -20,21 +21,26 @@ export function getEthnologue2013Score(vitality: string): number | null {
   switch (vitality.toLowerCase()) {
     case 'national':
       return 9;
+    case 'provincial': 
     case 'regional':
       return 8;
     case 'trade':
+    case 'wider communication': 
       return 7;
     case 'educational':
       return 6;
     case 'written':
+    case 'developing': 
       return 5;
+    case 'vigorous': 
     case 'threatened':
       return 4;
     case 'shifting':
       return 3;
     case 'moribund':
-      return 2;
     case 'nearly extinct':
+      return 2;
+    case 'dormant':
       return 1;
     case 'extinct':
       return 0;
@@ -51,13 +57,13 @@ export function getEthnologue2025Score(vitality: string): number | null {
   if (!vitality) return null;
 
   switch (vitality.toLowerCase()) {
-    case 'institutional':
+    case '1 institutional':
       return 9;
-    case 'stable':
+    case '2 stable':
       return 6;
-    case 'endangered':
+    case '3 endangered':
       return 3;
-    case 'extinct':
+    case '4 extinct':
       return 0;
     default:
       return null;
@@ -86,6 +92,68 @@ export function getISOScore(vitality: string): number | null {
 }
 
 /**
+ * Generates ReactNode explanations for vitality scores
+ */
+export function getVitalityExplanation(
+  type: VitalityMeterType,
+  lang: LanguageData,
+  score: number | null
+): React.ReactNode {
+  switch (type) {
+    case VitalityMeterType.ISO:
+      return (
+        <div>
+          <div>ISO Vitality: {lang.vitalityISO}</div>
+          <div>Normalized to a score of {score} out of 9.</div>
+        </div>
+      );
+
+    case VitalityMeterType.Eth2013:
+      return (
+        <div>
+          <div>Ethnologue 2013 Vitality: {lang.vitalityEth2013} 
+            <LinkButton href="https://www.ethnologue.com/methodology/#language-status">methodology</LinkButton>
+          </div>
+          <div>Normalized to a score of {score} out of 9.</div>
+        </div>
+      );
+
+    case VitalityMeterType.Eth2025:
+      return (
+        <div>
+          <div>Ethnologue 2025 Vitality: {lang.vitalityEth2025}</div>
+          <div>Normalized to a score of {score} out of 9.</div>
+        </div>
+      );
+
+    case VitalityMeterType.Metascore:
+      const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
+      const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
+
+      if (eth2013Score !== null && eth2025Score !== null) {
+        // Both Ethnologue values exist - return average
+        const average = (eth2013Score + eth2025Score) / 2;
+        return (
+          <div>
+            <div>Ethnologue changed the methodology of its vitality scores. So we convert them to a normalized score and averaged the data from 2013 and 2025. Average: {average.toFixed(1)}.</div>
+            <div style={{ marginLeft: '2em' }}>
+              2013: {lang.vitalityEth2013} ({eth2013Score}) <LinkButton href="https://www.ethnologue.com/methodology/#language-status">methodology</LinkButton>
+            </div>
+            <div style={{ marginLeft: '2em' }}>
+              2025: {lang.vitalityEth2025?.split(' ')[1]} ({eth2025Score})
+            </div>
+          </div>
+        );
+      }
+      // No vitality data available
+      return 'No vitality data available';
+
+    default:
+      return 'Unknown vitality type';
+  }
+}
+
+/**
  * Computes the vitality metascore for a language using the algorithm:
  * 1. If both Ethnologue 2013 & 2025 values exist, return the average
  * 2. If only one Ethnologue value exists, return that
@@ -99,130 +167,53 @@ export function computeVitalityMetascore(lang: LanguageData): {
   const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
   const isoScore = getISOScore(lang.vitalityISO || '');
 
-  let explanation: React.ReactNode = '';
+  let score: number | null = null;
+  let explanation: React.ReactNode = 'No vitality data available';
 
   if (eth2013Score !== null && eth2025Score !== null) {
     // Both Ethnologue values exist - return average
-    const average = (eth2013Score + eth2025Score) / 2;
-    explanation = (
-      <div>
-        <div>{average.toFixed(1)}</div>
-        <div style={{ marginTop: '0.25em' }}>Average of Ethnologue 2013 and Ethnologue 2025</div>
-        <div style={{ marginLeft: '2em' }}>
-          Ethnologue 2013: {eth2013Score}
-          {lang.vitalityEth2013 ? ` (${lang.vitalityEth2013})` : ''}
-        </div>
-        <div style={{ marginLeft: '2em' }}>
-          Ethnologue 2025: {eth2025Score}
-          {lang.vitalityEth2025 ? ` (${lang.vitalityEth2025})` : ''}
-        </div>
-      </div>
-    );
-    return { score: average, explanation };
-  }
-
-  if (eth2013Score !== null) {
+    score = (eth2013Score + eth2025Score) / 2;
+    explanation = getVitalityExplanation(VitalityMeterType.Metascore, lang, score);
+  } else if (eth2013Score !== null) {
     // Only Ethnologue 2013 exists
-    explanation = (
-      <div>
-        <div>{eth2013Score}</div>
-        <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2013</div>
-        <div style={{ marginLeft: '2em' }}>
-          Ethnologue 2013: {eth2013Score}
-          {lang.vitalityEth2013 ? ` (${lang.vitalityEth2013})` : ''}
-        </div>
-      </div>
-    );
-    return { score: eth2013Score, explanation };
-  }
-
-  if (eth2025Score !== null) {
+    score = eth2013Score;
+    explanation = getVitalityExplanation(VitalityMeterType.Eth2013, lang, score);
+  } else if (eth2025Score !== null) {
     // Only Ethnologue 2025 exists
-    explanation = (
-      <div>
-        <div>{eth2025Score}</div>
-        <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2025</div>
-        <div style={{ marginLeft: '2em' }}>
-          Ethnologue 2025: {eth2025Score}
-          {lang.vitalityEth2025 ? ` (${lang.vitalityEth2025})` : ''}
-        </div>
-      </div>
-    );
-    return { score: eth2025Score, explanation };
-  }
-
-  if (isoScore !== null) {
+    score = eth2025Score;
+    explanation = getVitalityExplanation(VitalityMeterType.Eth2025, lang, score);
+  } else if (isoScore !== null) {
     // Use ISO as fallback
-    explanation = (
-      <div>
-        <div>{isoScore}</div>
-        <div style={{ marginTop: '0.25em' }}>Based on ISO Vitality / Status</div>
-        <div style={{ marginLeft: '2em' }}>
-          ISO: {isoScore}
-          {lang.vitalityISO ? ` (${lang.vitalityISO})` : ''}
-        </div>
-      </div>
-    );
-    return { score: isoScore, explanation };
+    score = isoScore;
+    explanation = getVitalityExplanation(VitalityMeterType.ISO, lang, score);
   }
-
-  // No vitality data available
-  explanation = 'No vitality data available';
-  return { score: null, explanation };
+  return { score, explanation };
 }
 
 /**
  * Gets all available vitality scores for a language
  */
-export function getAllVitalityScores(lang: LanguageData): {
-  iso: { score: number | null; value: string | null; explanation: React.ReactNode };
-  eth2013: { score: number | null; value: string | null; explanation: React.ReactNode };
-  eth2025: { score: number | null; value: string | null; explanation: React.ReactNode };
-  metascore: { score: number | null; explanation: React.ReactNode };
-} {
+export function getAllVitalityScores(
+  lang: LanguageData
+): Record<VitalityMeterType, { score: number | null; explanation: React.ReactNode }> {
+  const isoScore = getISOScore(lang.vitalityISO || '');
+  const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
+  const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
+  const metascoreResult = computeVitalityMetascore(lang);
+
   return {
-    iso: {
-      score: getISOScore(lang.vitalityISO || ''),
-      value: lang.vitalityISO || null,
-      explanation: (
-        <div>
-          <div>{getISOScore(lang.vitalityISO || '') ?? 'N/A'}</div>
-          <div style={{ marginTop: '0.25em' }}>Based on ISO Vitality / Status</div>
-          <div style={{ marginLeft: '2em' }}>
-            ISO: {getISOScore(lang.vitalityISO || '') ?? 'N/A'}
-            {lang.vitalityISO ? ` (${lang.vitalityISO})` : ''}
-          </div>
-        </div>
-      ),
+    [VitalityMeterType.ISO]: {
+      score: isoScore,
+      explanation: getVitalityExplanation(VitalityMeterType.ISO, lang, isoScore),
     },
-    eth2013: {
-      score: getEthnologue2013Score(lang.vitalityEth2013 || ''),
-      value: lang.vitalityEth2013 || null,
-      explanation: (
-        <div>
-          <div>{getEthnologue2013Score(lang.vitalityEth2013 || '') ?? 'N/A'}</div>
-          <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2013</div>
-          <div style={{ marginLeft: '2em' }}>
-            Ethnologue 2013: {getEthnologue2013Score(lang.vitalityEth2013 || '') ?? 'N/A'}
-            {lang.vitalityEth2013 ? ` (${lang.vitalityEth2013})` : ''}
-          </div>
-        </div>
-      ),
+    [VitalityMeterType.Eth2013]: {
+      score: eth2013Score,
+      explanation: getVitalityExplanation(VitalityMeterType.Eth2013, lang, eth2013Score),
     },
-    eth2025: {
-      score: getEthnologue2025Score(lang.vitalityEth2025 || ''),
-      value: lang.vitalityEth2025 || null,
-      explanation: (
-        <div>
-          <div>{getEthnologue2025Score(lang.vitalityEth2025 || '') ?? 'N/A'}</div>
-          <div style={{ marginTop: '0.25em' }}>Based on Ethnologue 2025</div>
-          <div style={{ marginLeft: '2em' }}>
-            Ethnologue 2025: {getEthnologue2025Score(lang.vitalityEth2025 || '') ?? 'N/A'}
-            {lang.vitalityEth2025 ? ` (${lang.vitalityEth2025})` : ''}
-          </div>
-        </div>
-      ),
+    [VitalityMeterType.Eth2025]: {
+      score: eth2025Score,
+      explanation: getVitalityExplanation(VitalityMeterType.Eth2025, lang, eth2025Score),
     },
-    metascore: computeVitalityMetascore(lang),
-  };
+    [VitalityMeterType.Metascore]: metascoreResult,
+  } as Record<VitalityMeterType, { score: number | null; explanation: React.ReactNode }>;
 }
