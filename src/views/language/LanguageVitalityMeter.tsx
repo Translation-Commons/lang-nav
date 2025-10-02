@@ -6,7 +6,6 @@ import { LanguageData } from '../../types/LanguageTypes';
 
 import {
   VitalityMeterType,
-  computeVitalityMetascore,
   getAllVitalityScores,
 } from './LanguageVitalityComputation';
 
@@ -17,35 +16,7 @@ interface Props {
 
 const LanguageVitalityMeter: React.FC<Props> = ({ lang, type }) => {
   const scores = getAllVitalityScores(lang);
-
-  let value: number | null = null;
-  let hoverText: React.ReactNode = '';
-
-  switch (type) {
-    case VitalityMeterType.Metascore: {
-      const meta = computeVitalityMetascore(lang);
-      value = meta.score;
-      hoverText = meta.explanation;
-      break;
-    }
-    case VitalityMeterType.ISO: {
-      value = scores.iso.score;
-      hoverText = scores.iso.explanation;
-      break;
-    }
-    case VitalityMeterType.Eth2013: {
-      value = scores.eth2013.score;
-      hoverText = scores.eth2013.explanation;
-      break;
-    }
-    case VitalityMeterType.Eth2025: {
-      value = scores.eth2025.score;
-      hoverText = scores.eth2025.explanation;
-      break;
-    }
-    default:
-      break;
-  }
+  const { score: value, explanation: hoverText } = scores[type];
 
   if (value === null) {
     return <Deemphasized>Data not available</Deemphasized>;
