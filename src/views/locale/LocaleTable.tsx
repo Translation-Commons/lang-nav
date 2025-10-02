@@ -68,6 +68,15 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Demographics',
         },
         {
+          key: '% of Worldwide in Language',
+          render: (object) =>
+            object.populationSpeaking &&
+            numberToFixedUnlessSmall(
+              (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+            ),
+          isNumeric: true,
+        },
+        {
           key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
           columnGroup: 'Demographics',

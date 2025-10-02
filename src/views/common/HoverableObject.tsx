@@ -23,14 +23,6 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
     return <>{children}</>;
   }
 
-  const onClick = useCallback(() => {
-    const newParams: PageParamsOptional = { objectID: object.ID };
-    if (view === View.Details) {
-      newParams.objectType = object.type;
-    }
-    updatePageParams(newParams);
-  }, [object, updatePageParams, view]);
-
   const getHoverContent = () => {
     switch (object.type) {
       case ObjectType.Census:
