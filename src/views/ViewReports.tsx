@@ -4,9 +4,10 @@ import { usePageParams } from '../controls/PageParamsContext';
 import { ObjectType } from '../types/PageParamTypes';
 
 import TableOfCountriesWithCensuses from './census/TableOfCountriesWithCensuses';
-import DubiousLanguages from './language/reports/DubiousLanguages';
+import DubiousLanguages from './language/DubiousLanguages';
+import LanguagesWithIdenticalNames from './language/LanguagesWithIdenticalNames';
 import LanguagesLargestDescendant from './language/reports/LanguagesLargestDescendant';
-import LanguagesWithIdenticalNames from './language/reports/LanguagesWithIdenticalNames';
+import LocaleCitationCounts from './locale/LocaleCitationCounts';
 import PotentialLocales from './locale/PotentialLocales';
 
 /**
@@ -26,7 +27,13 @@ const ViewReports: React.FC = () => {
 const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   switch (objectType) {
     case ObjectType.Locale:
-      return <PotentialLocales />;
+      // For locales we show both a high‑level citation summary and potential locales to add.
+      return (
+        <>
+          <LocaleCitationCounts />
+          <PotentialLocales />
+        </>
+      );
     case ObjectType.Language:
       return (
         <>
