@@ -1,0 +1,38 @@
+#codeDisplay		ch2000	ch2011	ch2020
+#nameDisplay		Switzerland 2000	Switzerland 2011	Switzerland 2020
+#isoRegionCode	CH			
+#yearCollected		2000	2011	2020
+#datePublished		2003	2012	2022
+#eligiblePopulation		7,288,010	7,684,834	7,187,715
+#notes		Census - de facto - complete tabulation	Permanent residents. Census - de jure - complete tabulation	Permanent residents. Sample survey - de jure
+#modality				Understands
+#age			15+	15+
+#acquisitionOrder				Any
+#responsesPerIndividual		1	1	
+#sampleRate			0.0338	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	ch2000	ch2011	ch2020
+mul	Total	7,288,010	7,684,834	7,187,715
+deu	German	4,640,359	4,303,980	4,479,599
+fra	French	1,485,056	1,477,706	1,626,953
+mul	Other European Languages	15,227	14,018	668,390
+ita	Italian	470,961	554,422	593,729
+eng	English	73,425	286,928	480,054
+mul	Other Slavic Languages	31,380	65,163	291,615
+por	Portuguese	89,527	209,874	254,171
+sqi	Albanian	94,937	170,873	203,255
+spa	Spanish	77,506	138,770	176,007
+hbs	Serbo-Croatian	103,350	168,716	170,335
+mul	Other	102,525	74,306	157,668
+tur	Turkish	44,523	75,496	78,416
+ara	Arabic		32,484	45,699
+roh	Romanche	35,095	35,850	35,311
+hun	Hungarian		14,626	27,387
+nld	Dutch	11,840	22,167	23,138
+ell	Greek		8,415	15,256
+ces	Czech		10,963	13,221
+swe	Swedish	5,560	9,226	8,376
+dan	Danish	2,750	5,216	4,387
+fin	Finnish	2,628	3,925	4,657
+nor	Norwegian	1,361	1,709	1,913

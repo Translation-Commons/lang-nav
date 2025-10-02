@@ -1,7 +1,9 @@
+import { CopyIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { getScopeFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
+import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { CensusData } from '../../types/CensusTypes';
@@ -96,9 +98,26 @@ const SubReport: React.FC<{
   title: string;
 }> = ({ title, children, locales }) => {
   const filterByScope = getScopeFilter();
+  const sortFunction = getSortFunction();
+  const { limit, page } = usePageParams();
+  const exportLocales = locales
+    .filter(filterByScope)
+    .sort(sortFunction)
+    .slice(limit * (page - 1), Math.min(limit * page, locales.length))
+    .map((l) => `${l.ID}\t${l.nameDisplay} (${l.territory?.nameDisplay})\t\t\t\t\n`)
+    .join('');
+
   return (
     <CollapsibleReport title={`${title} (${locales.filter(filterByScope).length})`}>
-      {children}
+      {children}{' '}
+      <button
+        style={{ padding: '0.25em' }}
+        onClick={() => {
+          navigator.clipboard.writeText(exportLocales);
+        }}
+      >
+        Copy visible locales to Clipboard
+      </button>
       <PotentialLocalesTable locales={locales} />
     </CollapsibleReport>
   );
@@ -142,6 +161,15 @@ const PotentialLocalesTable: React.FC<{
           sortParam: SortBy.RelativePopulation,
         },
         {
+          key: '% of Worldwide in Language',
+          render: (object) =>
+            object.populationSpeaking &&
+            numberToFixedUnlessSmall(
+              (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+            ),
+          isNumeric: true,
+        },
+        {
           key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
         },
@@ -155,6 +183,21 @@ const PotentialLocalesTable: React.FC<{
               )
             );
           },
+        },
+        {
+          key: 'Copy',
+          render: (object) => (
+            <button
+              style={{ padding: '0.25em' }}
+              onClick={() => {
+                navigator.clipboard.writeText(
+                  `${object.ID}\t${object.nameDisplay} (${object.territory?.nameDisplay})\t\t\t\t\n`,
+                );
+              }}
+            >
+              <CopyIcon size="1em" display="block" />
+            </button>
+          ),
         },
       ]}
     />

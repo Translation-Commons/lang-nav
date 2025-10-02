@@ -1,0 +1,21 @@
+#codeDisplay		fm2000
+#nameDisplay		Micronesia 2000
+#isoRegionCode		FM
+#yearCollected		2000
+#datePublished		2005
+#eligiblePopulation		92,225
+#notes		Census - de jure - complete tabulation
+#age		5+
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	fm2000
+mul	Total	92,225
+chk	Chuukese	48,174
+pon	Pohnpeian/Mwoakilloan/Pingelapese	24,321
+kos	Kosraean	6,622
+yap	Yapese	5,132
+uli	Ulithian/Mwoakilloan/Pingelapese	4,033
+mul	Other	1,606
+eng	English	1,322
+mul	Asian	1,015
