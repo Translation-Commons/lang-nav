@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { LanguageData } from '../../types/LanguageTypes';
 import LinkButton from '../../generic/LinkButton';
+import { LanguageData } from '../../types/LanguageTypes';
 
 export enum VitalityMeterType {
   Metascore = 'Metascore',
@@ -21,18 +21,18 @@ export function getEthnologue2013Score(vitality: string): number | null {
   switch (vitality.toLowerCase()) {
     case 'national':
       return 9;
-    case 'provincial': 
+    case 'provincial':
     case 'regional':
       return 8;
     case 'trade':
-    case 'wider communication': 
+    case 'wider communication':
       return 7;
     case 'educational':
       return 6;
     case 'written':
-    case 'developing': 
+    case 'developing':
       return 5;
-    case 'vigorous': 
+    case 'vigorous':
     case 'threatened':
       return 4;
     case 'shifting':
@@ -97,7 +97,7 @@ export function getISOScore(vitality: string): number | null {
 export function getVitalityExplanation(
   type: VitalityMeterType,
   lang: LanguageData,
-  score: number | null
+  score: number | null,
 ): React.ReactNode {
   switch (type) {
     case VitalityMeterType.ISO:
@@ -111,8 +111,11 @@ export function getVitalityExplanation(
     case VitalityMeterType.Eth2013:
       return (
         <div>
-          <div>Ethnologue 2013 Vitality: {lang.vitalityEth2013} 
-            <LinkButton href="https://www.ethnologue.com/methodology/#language-status">methodology</LinkButton>
+          <div>
+            Ethnologue 2013 Vitality: {lang.vitalityEth2013}
+            <LinkButton href="https://www.ethnologue.com/methodology/#language-status">
+              methodology
+            </LinkButton>
           </div>
           <div>Normalized to a score of {score} out of 9.</div>
         </div>
@@ -126,7 +129,7 @@ export function getVitalityExplanation(
         </div>
       );
 
-    case VitalityMeterType.Metascore:
+    case VitalityMeterType.Metascore: {
       const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
       const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
 
@@ -135,9 +138,16 @@ export function getVitalityExplanation(
         const average = (eth2013Score + eth2025Score) / 2;
         return (
           <div>
-            <div>Ethnologue changed the methodology of its vitality scores. So we convert them to a normalized score and averaged the data from 2013 and 2025. Average: {average.toFixed(1)}.</div>
+            <div>
+              Ethnologue changed the methodology of its vitality scores. So we convert them to a
+              normalized score and averaged the data from 2013 and 2025. Average:{' '}
+              {average.toFixed(1)}.
+            </div>
             <div style={{ marginLeft: '2em' }}>
-              2013: {lang.vitalityEth2013} ({eth2013Score}) <LinkButton href="https://www.ethnologue.com/methodology/#language-status">methodology</LinkButton>
+              2013: {lang.vitalityEth2013} ({eth2013Score}){' '}
+              <LinkButton href="https://www.ethnologue.com/methodology/#language-status">
+                methodology
+              </LinkButton>
             </div>
             <div style={{ marginLeft: '2em' }}>
               2025: {lang.vitalityEth2025?.split(' ')[1]} ({eth2025Score})
@@ -147,6 +157,7 @@ export function getVitalityExplanation(
       }
       // No vitality data available
       return 'No vitality data available';
+    }
 
     default:
       return 'Unknown vitality type';
@@ -194,7 +205,7 @@ export function computeVitalityMetascore(lang: LanguageData): {
  * Gets all available vitality scores for a language
  */
 export function getAllVitalityScores(
-  lang: LanguageData
+  lang: LanguageData,
 ): Record<VitalityMeterType, { score: number | null; explanation: React.ReactNode }> {
   const isoScore = getISOScore(lang.vitalityISO || '');
   const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');

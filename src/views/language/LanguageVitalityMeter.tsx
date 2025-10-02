@@ -4,10 +4,7 @@ import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import { LanguageData } from '../../types/LanguageTypes';
 
-import {
-  VitalityMeterType,
-  getAllVitalityScores,
-} from './LanguageVitalityComputation';
+import { VitalityMeterType, getAllVitalityScores } from './LanguageVitalityComputation';
 
 interface Props {
   lang: LanguageData;
