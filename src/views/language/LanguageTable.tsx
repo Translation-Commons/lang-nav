@@ -1,4 +1,4 @@
-import { InfoIcon, TriangleAlertIcon, Wifi, WifiHigh, WifiLow, WifiOff } from 'lucide-react';
+import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
 import { getUniqueTerritoriesForLanguage } from '../../controls/sort';
@@ -14,55 +14,13 @@ import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
-import {
-  computeVitalityMetascore,
-  getAllVitalityScores,
-  getVitalityExplanation,
-  VitalityMeterType,
-} from './LanguageVitalityComputation';
+import LanguageVitalityCell from './LanguageVitalityCell';
+import { VitalityMeterType } from './LanguageVitalityComputation';
 
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
 
-  // Helper functions for vitality display
-  function scoreBucket(score: number | null): 0 | 1 | 2 | 3 {
-    if (score === null) return 0;
-    if (score >= 7) return 3; // strong
-    if (score >= 4) return 2; // medium
-    if (score >= 1) return 1; // low
-    return 0; // none/extinct
-  }
-
-  function bucketIcon(bucket: 0 | 1 | 2 | 3) {
-    switch (bucket) {
-      case 3:
-        return <WifiHigh size="1em" />;
-      case 2:
-        return <Wifi size="1em" />;
-      case 1:
-        return <WifiLow size="1em" />;
-      default:
-        return <WifiOff size="1em" />;
-    }
-  }
-
-  function bucketColor(bucket: 0 | 1 | 2 | 3): string {
-    switch (bucket) {
-      case 3:
-        return 'var(--color-text-green)';
-      case 2:
-        return 'var(--color-text-yellow)';
-      case 1:
-        return 'var(--color-text-orange)';
-      default:
-        return 'var(--color-text-red)';
-    }
-  }
-
-  function scoreLabel(score: number | null): string {
-    if (score === null) return '—';
-    return String(score);
-  }
+  // (vitality helpers moved into LanguageVitalityCell)
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
   const codeColumn = {
     ...CodeColumn,
@@ -160,108 +118,25 @@ const LanguageTable: React.FC = () => {
           columnGroup: 'Population',
         },
         {
-          key: 'Vitality (Meta)',
-          label: 'Vitality (Meta)',
-          render: (lang) => {
-            const { score, explanation } = computeVitalityMetascore(lang);
-            const b = scoreBucket(score);
-            return (
-              <Hoverable hoverContent={explanation}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35em',
-                    color: bucketColor(b),
-                  }}
-                >
-                  {bucketIcon(b)}
-                  <span style={{ fontVariantNumeric: 'tabular-nums' }}>{scoreLabel(score)}</span>
-                </div>
-              </Hoverable>
-            );
-          },
-          isNumeric: true,
+          key: 'Vitality',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
           columnGroup: 'Vitality',
         },
         {
-          key: 'Vitality (ISO)',
-          label: 'Vitality (ISO)',
-          render: (lang) => {
-            const all = getAllVitalityScores(lang);
-            const s = all[VitalityMeterType.ISO].score;
-            const b = scoreBucket(s);
-            return (
-              <Hoverable hoverContent={getVitalityExplanation(VitalityMeterType.ISO, lang, s)}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35em',
-                    color: bucketColor(b),
-                  }}
-                >
-                  {bucketIcon(b)}
-                  <span style={{ fontVariantNumeric: 'tabular-nums' }}>{scoreLabel(s)}</span>
-                </div>
-              </Hoverable>
-            );
-          },
-          isNumeric: true,
+          key: 'Vitality: ISO',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.ISO} />,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
         },
         {
-          key: 'Vitality (Eth 2013)',
-          label: 'Vitality (Eth 2013)',
-          render: (lang) => {
-            const all = getAllVitalityScores(lang);
-            const s = all[VitalityMeterType.Eth2013].score;
-            const b = scoreBucket(s);
-            return (
-              <Hoverable hoverContent={getVitalityExplanation(VitalityMeterType.Eth2013, lang, s)}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35em',
-                    color: bucketColor(b),
-                  }}
-                >
-                  {bucketIcon(b)}
-                  <span style={{ fontVariantNumeric: 'tabular-nums' }}>{scoreLabel(s)}</span>
-                </div>
-              </Hoverable>
-            );
-          },
-          isNumeric: true,
+          key: 'Vitality: Ethnologue 2013',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2013} />,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
         },
         {
-          key: 'Vitality (Eth 2025)',
-          label: 'Vitality (Eth 2025)',
-          render: (lang) => {
-            const all = getAllVitalityScores(lang);
-            const s = all[VitalityMeterType.Eth2025].score;
-            const b = scoreBucket(s);
-            return (
-              <Hoverable hoverContent={getVitalityExplanation(VitalityMeterType.Eth2025, lang, s)}>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '0.35em',
-                    color: bucketColor(b),
-                  }}
-                >
-                  {bucketIcon(b)}
-                  <span style={{ fontVariantNumeric: 'tabular-nums' }}>{scoreLabel(s)}</span>
-                </div>
-              </Hoverable>
-            );
-          },
-          isNumeric: true,
+          key: 'Vitality: Ethnologue 2025',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2025} />,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
         },

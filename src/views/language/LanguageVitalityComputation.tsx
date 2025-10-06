@@ -83,6 +83,7 @@ export function getISOScore(vitality: string): number | null {
     case 'constructed':
       return 3;
     case 'historical':
+    case 'historic':
       return 1;
     case 'extinct':
       return 0;
@@ -101,6 +102,7 @@ export function getVitalityExplanation(
 ): React.ReactNode {
   switch (type) {
     case VitalityMeterType.ISO:
+      if (score === null) return 'No vitality data available';
       return (
         <div>
           <div>ISO Vitality: {lang.vitalityISO}</div>
@@ -109,6 +111,7 @@ export function getVitalityExplanation(
       );
 
     case VitalityMeterType.Eth2013:
+      if (score === null) return 'No vitality data available';
       return (
         <div>
           <div>
@@ -122,9 +125,10 @@ export function getVitalityExplanation(
       );
 
     case VitalityMeterType.Eth2025:
+      if (score === null) return 'No vitality data available';
       return (
         <div>
-          <div>Ethnologue 2025 Vitality: {lang.vitalityEth2025}</div>
+          <div>Ethnologue 2025 Vitality: {lang.vitalityEth2025?.split(' ')[1]}</div>
           <div>Normalized to a score of {score} out of 9.</div>
         </div>
       );
