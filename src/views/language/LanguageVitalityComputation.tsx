@@ -176,6 +176,7 @@ export function getVitalityExplanation(
  */
 export function computeVitalityMetascore(lang: LanguageData): {
   score: number | null;
+  label: string | null;
   explanation: React.ReactNode;
 } {
   const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
@@ -183,26 +184,31 @@ export function computeVitalityMetascore(lang: LanguageData): {
   const isoScore = getISOScore(lang.vitalityISO || '');
 
   let score: number | null = null;
+  let label: string | null = null;
   let explanation: React.ReactNode = 'No vitality data available';
 
   if (eth2013Score !== null && eth2025Score !== null) {
     // Both Ethnologue values exist - return average
     score = (eth2013Score + eth2025Score) / 2;
+    label = score.toFixed(1);  // For metascore, use the numerical value as label
     explanation = getVitalityExplanation(VitalityMeterType.Metascore, lang, score);
   } else if (eth2013Score !== null) {
     // Only Ethnologue 2013 exists
     score = eth2013Score;
+    label = lang.vitalityEth2013 || null;
     explanation = getVitalityExplanation(VitalityMeterType.Eth2013, lang, score);
   } else if (eth2025Score !== null) {
     // Only Ethnologue 2025 exists
     score = eth2025Score;
+    label = lang.vitalityEth2025?.split(' ')[1] || null;
     explanation = getVitalityExplanation(VitalityMeterType.Eth2025, lang, score);
   } else if (isoScore !== null) {
     // Use ISO as fallback
     score = isoScore;
+    label = lang.vitalityISO || null;
     explanation = getVitalityExplanation(VitalityMeterType.ISO, lang, score);
   }
-  return { score, explanation };
+  return { score, label, explanation };
 }
 
 /**
@@ -210,7 +216,7 @@ export function computeVitalityMetascore(lang: LanguageData): {
  */
 export function getAllVitalityScores(
   lang: LanguageData,
-): Record<VitalityMeterType, { score: number | null; explanation: React.ReactNode }> {
+): Record<VitalityMeterType, { score: number | null; label: string | null; explanation: React.ReactNode }> {
   const isoScore = getISOScore(lang.vitalityISO || '');
   const eth2013Score = getEthnologue2013Score(lang.vitalityEth2013 || '');
   const eth2025Score = getEthnologue2025Score(lang.vitalityEth2025 || '');
@@ -219,16 +225,19 @@ export function getAllVitalityScores(
   return {
     [VitalityMeterType.ISO]: {
       score: isoScore,
+      label: lang.vitalityISO || null,
       explanation: getVitalityExplanation(VitalityMeterType.ISO, lang, isoScore),
     },
     [VitalityMeterType.Eth2013]: {
       score: eth2013Score,
+      label: lang.vitalityEth2013 || null,
       explanation: getVitalityExplanation(VitalityMeterType.Eth2013, lang, eth2013Score),
     },
     [VitalityMeterType.Eth2025]: {
       score: eth2025Score,
+      label: lang.vitalityEth2025?.split(' ')[1] || null,
       explanation: getVitalityExplanation(VitalityMeterType.Eth2025, lang, eth2025Score),
     },
     [VitalityMeterType.Metascore]: metascoreResult,
-  } as Record<VitalityMeterType, { score: number | null; explanation: React.ReactNode }>;
+  } as Record<VitalityMeterType, { score: number | null; label: string | null; explanation: React.ReactNode }>;
 }

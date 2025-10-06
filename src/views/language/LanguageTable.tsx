@@ -118,7 +118,7 @@ const LanguageTable: React.FC = () => {
           columnGroup: 'Population',
         },
         {
-          key: 'Vitality',
+          key: 'Vitality: Metascore',
           render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
           columnGroup: 'Vitality',
         },

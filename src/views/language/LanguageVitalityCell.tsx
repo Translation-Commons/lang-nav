@@ -1,13 +1,11 @@
-import { WifiIcon, WifiHighIcon, WifiLow, WifiOff } from 'lucide-react';
+import { WifiIcon, WifiHighIcon, WifiLowIcon, WifiOffIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '../../generic/Hoverable';
 import { LanguageData } from '../../types/LanguageTypes';
 
 import {
-  computeVitalityMetascore,
   getAllVitalityScores,
-  getVitalityExplanation,
   VitalityMeterType,
 } from './LanguageVitalityComputation';
 
@@ -39,9 +37,9 @@ const BucketIcon: React.FC<{ bucket: VitalityBucket }> = ({ bucket }) => {
     case VitalityBucket.Medium:
       return <WifiHighIcon size="1em" />;
     case VitalityBucket.Low:
-      return <WifiLow size="1em" />;
+      return <WifiLowIcon size="1em" />;
     case VitalityBucket.Extinct:
-      return <WifiOff size="1em" />;
+      return <WifiOffIcon size="1em" />;
     case VitalityBucket.Unknown:
     default:
       return null;
@@ -64,19 +62,7 @@ function bucketColor(bucket: VitalityBucket): string {
 }
 
 const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type }) => {
-  let vitalityScore: number | null = null;
-  let hover: React.ReactNode = null;
-
-  if (type === VitalityMeterType.Metascore) {
-    const result = computeVitalityMetascore(lang);
-    vitalityScore = result.score;
-    hover = result.explanation;
-  } else {
-    const all = getAllVitalityScores(lang);
-    vitalityScore = all[type].score;
-    hover = getVitalityExplanation(type, lang, vitalityScore);
-  }
-
+  const { score: vitalityScore, explanation: hover } = getAllVitalityScores(lang)[type];
   const bucket = getScoreBucket(vitalityScore);
 
   return (
@@ -90,7 +76,11 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type 
         }}
       >
         <BucketIcon bucket={bucket} />
-        <span style={{ fontVariantNumeric: 'tabular-nums' }}>{vitalityScore ?? '—'}</span>
+        <span>
+          {type === VitalityMeterType.Metascore ? 
+            (vitalityScore?.toFixed(1) ?? '—') :
+            (getAllVitalityScores(lang)[type].label ?? '—')}
+        </span>
       </div>
     </Hoverable>
   );
