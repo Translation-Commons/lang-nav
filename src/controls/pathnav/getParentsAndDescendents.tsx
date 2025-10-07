@@ -29,7 +29,7 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
   if (object == null) return [];
   switch (object.type) {
     case ObjectType.Census:
-      return [];
+      return (object.territory?.censuses ?? []).filter((c) => c.ID !== object.ID);
     case ObjectType.Language:
       return object.childLanguages;
     case ObjectType.Locale:
@@ -46,7 +46,7 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
 export function getDescendantsName(object: ObjectData, count: number): string {
   switch (object.type) {
     case ObjectType.Census:
-      return 'n/a';
+      return 'other census' + (count > 1 ? 'es' : '') + ' in the territory';
     case ObjectType.Language:
       switch (object.scope) {
         case LanguageScope.Family:

@@ -142,6 +142,7 @@ export function useCoreData(): {
       ...languagesBySource.Glottolog, // aaaa0000
       ...languagesBySource.ISO, // aaa
       ...languagesBySource.BCP, // aa | aaa
+      ...languagesBySource.All, // A few languages like `mol` aren't in those sets but should still be indexed
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa

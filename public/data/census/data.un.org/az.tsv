@@ -1,0 +1,31 @@
+#codeDisplay		#az1999	az2009	az2019	#notes
+#nameDisplay		Azerbaijan 1999	Azerbaijan 2009	Azerbaijan 2019	
+#isoRegionCode	AZ				
+#yearCollected		1999	2009	2019	
+#datePublished		2001	2011	2022	
+#eligiblePopulation		7,873,826	8,922,447	9,814,381	
+#notes	Census - de jure - complete tabulation				
+#modality		Spoken			
+#domain		Home			
+#acquisitionOrder	L1				
+#responsesPerIndividual	1				
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27				
+#collectorType	Government				
+Language Code	Language Name	az1999	az2009	az2019	
+mul	Total	7,873,826	8,922,447	9,814,381	
+aze	Azerbaijani	7,181,436	8,253,196	9,431,757	
+mul	Other	7,184	176,887	133,579	
+lzz	Laz	171,027			
+rus	Russian	140,660	122,449	70,587	
+hye	Armenian	120,606	120,237	52	
+tly	Talyshi	68,857	68,689	43,280	
+ava	Avar	49,963	46,610	45,580	
+tur	Turkish	41,100	32,064	27,156	
+tat	Tatar	26,005	24,146	15,750	
+ttt	Tat	9,069	22,803	8,730	
+ukr	Ukrainian	9,314	20,988	8,328	
+tkr	Tsakhur	15,772	11,734	12,873	
+kat	Georgian	14,577	10,356	8,214	
+heb	Jewish	7,764	8,493	4,966	
+cld	#Khaling	6,388			Label probably is "Chaldean" which may refer to Iraqis in general or Chaldean Neo-Aramaic
+udi	Udin	4,104	3,795	3,529	

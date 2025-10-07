@@ -71,7 +71,7 @@ rsl	#Sign Languages			120,528
 ady	Adyge			119,463
 rom	Chamalin / Gypsy	108,425	95,412	
 xal	Kalmyk	107,742	100,826	
-ron	Moldavian	46,500	21,742	96,061
+ron/mol	Moldavian	46,500	21,742	96,061
 nog	Nogai	85,640	78,173	87,119
 kir	Kyrgyz	85,655	65,406	
 ita	Italian	37,135	10,893	83,202
@@ -180,7 +180,7 @@ chu	Old Church Slavonic	1,352	659
 mns	Mansi	1,346	1,008	938
 udi	Udin	1,320	1,002	
 tele1257	Teleut	1,246	1,113	975
-msa	Malay	101	46	1,221
+msa/zlm	Malay	101	46	1,221
 sqi	Albanian	380	197	1,209
 alab1256	Alabugat-Tatar	2	1	1,144
 dlg	Dolgang			1,054
@@ -200,7 +200,7 @@ tha	Thai	594	230	588
 itl	Itelmen	532	395	82
 tuba1280	Tubalar	527	344	229
 urd	Urdu	321	156	522
-ind	Indonesian	321	124	515
+msa/ind	Indonesian	321	124	515
 bod	Tibetan	232	91	513
 ale	Eskimo			508
 mkd	Macedonian	260	112	507

@@ -138,6 +138,16 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             isNumeric: true,
           },
           {
+            key: 'Percent of Worldwide in Language',
+            render: (object) =>
+              object.populationSpeaking &&
+              numberToFixedUnlessSmall(
+                (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
+              ) + '%',
+            isNumeric: true,
+            isInitiallyVisible: false,
+          },
+          {
             key: 'Primary Territory',
             render: (loc) => {
               const territory = loc.language?.locales.sort(
