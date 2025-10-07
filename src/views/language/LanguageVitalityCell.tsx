@@ -4,10 +4,7 @@ import React from 'react';
 import Hoverable from '../../generic/Hoverable';
 import { LanguageData } from '../../types/LanguageTypes';
 
-import {
-  getAllVitalityScores,
-  VitalityMeterType,
-} from './LanguageVitalityComputation';
+import { getAllVitalityScores, VitalityMeterType } from './LanguageVitalityComputation';
 
 export interface LanguageVitalityCellProps {
   lang: LanguageData;
