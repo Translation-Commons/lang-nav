@@ -59,7 +59,7 @@ function bucketColor(bucket: VitalityBucket): string {
 }
 
 const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type }) => {
-  const { score: vitalityScore, explanation: hover } = getAllVitalityScores(lang)[type];
+  const { score: vitalityScore, explanation: hover, label } = getAllVitalityScores(lang)[type];
   const bucket = getScoreBucket(vitalityScore);
 
   return (
@@ -76,7 +76,7 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type 
         <span>
           {type === VitalityMeterType.Metascore
             ? (vitalityScore?.toFixed(1) ?? '—')
-            : (getAllVitalityScores(lang)[type].label ?? '—')}
+            : (label ?? '—')}
         </span>
       </div>
     </Hoverable>
