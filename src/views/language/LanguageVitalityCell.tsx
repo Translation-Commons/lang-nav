@@ -74,9 +74,9 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type 
       >
         <BucketIcon bucket={bucket} />
         <span>
-          {type === VitalityMeterType.Metascore ? 
-            (vitalityScore?.toFixed(1) ?? '—') :
-            (getAllVitalityScores(lang)[type].label ?? '—')}
+          {type === VitalityMeterType.Metascore
+            ? (vitalityScore?.toFixed(1) ?? '—')
+            : (getAllVitalityScores(lang)[type].label ?? '—')}
         </span>
       </div>
     </Hoverable>
