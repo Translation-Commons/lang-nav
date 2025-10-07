@@ -11,6 +11,7 @@ import {
   BCP47LocaleCode,
   isTerritoryGroup,
   LocaleData,
+  LocaleSource,
   PopulationSourceCategory,
   TerritoryCode,
 } from '../../types/DataTypes';
@@ -229,7 +230,7 @@ function getPotentialLocales(
 
           if (missing[localeID] == null) {
             missing[localeID] = {
-              localeSource: 'census',
+              localeSource: LocaleSource.Census,
               type: ObjectType.Locale,
               ID: langID + '_' + census.isoRegionCode,
               codeDisplay: lang.codeDisplay + localeSeparator + census.isoRegionCode,
@@ -241,7 +242,7 @@ function getPotentialLocales(
               territory: census.territory,
               territoryCode: census.isoRegionCode,
 
-              populationSource: PopulationSourceCategory.Census,
+              populationSource: PopulationSourceCategory.Official,
               populationSpeaking: populationEstimate,
               populationSpeakingPercent: populationPercent,
               populationCensus: census,

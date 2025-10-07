@@ -1,6 +1,7 @@
 import { separateTitleAndSubtitle } from '../generic/stringUtils';
 import {
   LocaleData,
+  LocaleSource,
   OfficialStatus,
   PopulationSourceCategory,
   WritingSystemData,
@@ -97,7 +98,7 @@ export function parseLocaleLine(line: string): LocaleData | null {
     type: ObjectType.Locale,
     ID: localeID,
     codeDisplay: localeID,
-    localeSource: 'regularInput',
+    localeSource: LocaleSource.StableDatabase,
 
     nameDisplay: parts[1],
     nameEndonym: parts[2] || undefined,

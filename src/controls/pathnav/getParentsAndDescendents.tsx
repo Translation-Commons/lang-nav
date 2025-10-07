@@ -60,7 +60,7 @@ export function getDescendantsName(object: ObjectData, count: number): string {
       }
       return 'dialect' + (count > 1 ? 's' : '');
     case ObjectType.Locale:
-      return 'variant' + (count > 1 ? 's' : '');
+      return 'related locale' + (count > 1 ? 's' : '');
     case ObjectType.Territory:
       switch (object.scope) {
         case TerritoryScope.World:
