@@ -19,8 +19,6 @@ import { VitalityMeterType } from './LanguageVitalityComputation';
 
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
-
-  // (vitality helpers moved into LanguageVitalityCell)
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
   const codeColumn = {
     ...CodeColumn,
