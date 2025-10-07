@@ -1,0 +1,29 @@
+#codeDisplay		md2004	md2014
+#nameDisplay		Moldova 2004	Moldova 2014
+#isoRegionCode	MD		
+#yearCollected		2004	2014
+#datePublished		2009	2016
+#eligiblePopulation		3,383,332	2,804,801
+#notes		Excluding non-residents present in country at time of census. Census - de facto - complete tabulation	Not including Transnistria. Census - de facto - complete tabulation
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	md2004	md2014
+mul	Total	3,383,332	2,804,801
+ron/mol	Moldavian	2,029,847	1,544,726
+ron	Romanian	558,508	639,339
+rus	Russian	380,796	263,523
+ukr	Ukrainian	186,394	107,252
+gag	Gagauz	137,774	114,532
+mis	Unknown	14,108	81,486
+bul	Bulgarian	54,401	41,756
+mul	Other	21,504	2,794
+rom	Romani (Gypsy)		7,574
+bel	Belorussian		627
+hye	Armenian		449
+aze	Azerbaijani		257
+deu	German		136
+heb	Jewish		118
+tat	Tatar		108
+uzb	Uzbek		103
+kaz	Kazakh		21

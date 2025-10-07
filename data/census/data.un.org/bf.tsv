@@ -1,0 +1,44 @@
+#codeDisplay		bf2006
+#nameDisplay		Burkina Faso 2006
+#isoRegionCode		BF
+#yearCollected		2006
+#datePublished		2009
+#eligiblePopulation		14,017,262
+#respondingPopulation		12,606,887
+#notes		Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	bf2006
+mul	Total	14,017,262
+mos	Mooré	6,363,975
+mis	Not stated	1,410,375
+ful	Fulfuldé	1,171,354
+gux	Gourmanchéma	771,879
+mul	Other	638,004
+dyu	Dioula	616,148
+bib	Bisa	398,926
+bwam1247/box	Bwamu	268,001
+dgi	Dagara	246,724
+mand1437	San	233,179
+lob	Lobiri	220,172
+lee	Lyelé	212,531
+mis	Unknown	192,924
+bobo1253	Bobo	181,373
+senu1239	Senoufo	172,884
+fra	French	170,047
+nuni1253	Nuni	146,581
+rkm	Dafing	134,681
+taq	Tamachéque	122,019
+xsm	Kasena (Paga)	83,602
+	Goin	51,908
+son/dje/kaad1238	Sonrhaï	43,192
+grus1239	Gurunsi	40,298
+dogo1299	Dogon	36,551
+mul	African	30,367
+sif	Siamou	17,441
+sos	Sembla	16,023
+kus	Koussassé	12,786
+	Ko	10,301
+myk	Minianka	2,684
+sld	Siassala	332
