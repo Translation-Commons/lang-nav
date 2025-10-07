@@ -14,6 +14,9 @@ import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
+import LanguageVitalityCell from './LanguageVitalityCell';
+import { VitalityMeterType } from './LanguageVitalityComputation';
+
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
@@ -111,6 +114,29 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationOfDescendents,
           columnGroup: 'Population',
+        },
+        {
+          key: 'Vitality: Metascore',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
+          columnGroup: 'Vitality',
+        },
+        {
+          key: 'Vitality: ISO',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.ISO} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Vitality',
+        },
+        {
+          key: 'Vitality: Ethnologue 2013',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2013} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Vitality',
+        },
+        {
+          key: 'Vitality: Ethnologue 2025',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2025} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Vitality',
         },
         {
           key: 'CLDR Coverage',
