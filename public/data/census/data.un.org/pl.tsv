@@ -1,0 +1,50 @@
+#codeDisplay		pl2002	pl2011	pl2021
+#nameDisplay		Poland 2002	Poland 2011	Poland 2021
+#isoRegionCode	PL			
+#yearCollected		2002	2011	2021
+#datePublished		2003	2013	2023
+#eligiblePopulation		38,230,080	38,044,565	37,019,327
+#notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#modality		Spoken		
+#domain		Home		Home
+#acquisitionOrder	Any			
+#responsesPerIndividual		1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	pl2002	pl2011	pl2021
+mul	Total	38,230,080	38,044,565	37,019,327
+pol	Polish	37,405,335	37,374,595	36,799,278
+szl	Silesian	56,643	522,492	456,374
+mis	Unknown	261,246	498,233	17,122
+eng	English	89,874	80,882	495,656
+ukr	Ukrainian	22,698	26,442	235,574
+deu	German	204,573	63,622	96,589
+rus	Russian	15,299	21,916	146,030
+csb	Kashubian	52,665	107,478	88,460
+mul	Other	3,592	17,494	43,268
+bel	Belorussian	40,650	26,691	19,951
+fra	French	15,282	8,889	21,314
+ita	Italian	12,001	7,729	20,475
+spa	Spanish	4,154	4,644	20,134
+rom	Romany	15,788	13,635	6,980
+vie	Vietnamese	1,883	3,973	10,739
+sgn/pso	Sign Languages			10,530
+rue/lemk1239	Lemko		6,175	6,015
+zho	Chinese			5,874
+lit	Lithuanian	5,838	5,052	5,288
+rue/lemk1239	Ruthenian	5,627		
+tur	Turkish			4,741
+ara	Arabic	1,835	2,384	4,706
+nld	Netherlandic	2,768	1,853	4,244
+por	Portuguese			4,194
+kat	Georgian			4,012
+hye	Armenian	872	2,207	3,702
+ces	Czech	1,482	1,432	3,641
+ell	Greek	3,166	1,123	2,937
+nor	Norwegian	733	697	2,972
+swe	Swedish	1,842	1,064	2,450
+bul	Bulgarian	1,076	1,698	2,278
+slk	Slovak	921	875	1,899
+hun	Hungarian	908	896	1,664
+dan	Danish	759	543	1,050
+hbs/srp	Serbian	570	386	1,048

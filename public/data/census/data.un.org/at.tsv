@@ -43,7 +43,7 @@ ell	Greek	3,098
 swe	Swedish	2,683
 mul	Other European Languages	2,316
 vie	Vietnamese	2,310
-mis	Khaling	2,133
+cld	#Khaling	2,133
 mul	Other African	1,816
 jpn	Japanese	1,806
 tha	Thai	1,593
@@ -53,5 +53,5 @@ fin	Finnish	987
 dan	Danish	735
 nor	Norwegian	569
 slv/wind1243	Windisch	568
-ind	Indonesian	451
+msa/ind	Indonesian	451
 mul	Other	38

@@ -36,10 +36,7 @@ const ViewModal: React.FC = () => {
     };
   }, [onClose, view]);
 
-  if (objectID == null || view === View.Details) {
-    return <></>;
-  }
-  if (object == null) return <></>;
+  if (object == null || view === View.Details) return <></>;
 
   return (
     <div className="ModalOverlay">

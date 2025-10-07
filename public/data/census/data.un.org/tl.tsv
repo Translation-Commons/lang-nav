@@ -1,0 +1,53 @@
+#codeDisplay		tl2004	tl2015
+#nameDisplay		Timor-Leste 2004	Timor-Leste 2015
+#isoRegionCode	TL		
+#yearCollected		2004	2015
+#datePublished		2011	2019
+#eligiblePopulation		741,530	1,179,654
+#notes		Census - de facto - complete tabulation	Census - de jure - complete tabulation
+#age		6+	
+#acquisitionOrder			Any
+#responsesPerIndividual		1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	tl2004	tl2015
+mul	Total	741,530	1,179,654
+tdt	Tetum Prasa	133,102	361,027
+mgm/mamb1307	Mambai	131,472	195,778
+lva	Makuva	100	123,840
+mkz/maka1317	Makasai	90,018	5,787
+tet	Tetum-terik	45,944	71,418
+bkx	Baikenu	28,235	69,190
+kem	Kemek	51,057	68,995
+bfn	Bunak	50,631	64,686
+tkd	Tokodede	31,814	46,784
+tet	Tetum	45,362	3,168
+ddg	Fataluku	28,893	41,500
+adb	Rahesuk	1,654	21,227
+wmh	Waima' a	14,506	21,227
+aoz	Atoni	17,470	
+nxa	Naueti	11,321	16,507
+gal	Galoli	10,998	16,266
+krd/midi1237	Midiki	9,262	14,616
+idt	Idate	9,717	14,178
+mjb	Makalero	5,981	8,686
+eng	English	808	7,271
+krd/kair1266	Kairui	4,278	3,946
+wlh	Bekais	3,222	4,075
+lka	Lakalei	2,753	3,669
+msa/ind	Indonesian	2,411	2,711
+adb	Raklungu	1,780	2,331
+hbu	Habun	1,586	2,214
+adb	Resuk	2,017	1,852
+ilu/dadu1237	Dadu'a	1,242	1,990
+por	Portuguese	702	1,384
+llg	Lolein	1,075	1,155
+zho	Chinese	511	827
+east2733	Isni	647	700
+mul	Other	354	617
+gal/nana1259	Nanaek	320	321
+adb	Adabe	29	260
+adb	Atauran	96	242
+east2733	Idalaka	9	211
+msa/zlm	Malay	146	63
+kawa1289	Kawaimina	7	41
