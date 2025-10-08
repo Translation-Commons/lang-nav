@@ -105,7 +105,7 @@ const SubReport: React.FC<{
     .filter(filterByScope)
     .sort(sortFunction)
     .slice(limit * (page - 1), Math.min(limit * page, locales.length))
-    .map((l) => `${l.ID}\t${l.nameDisplay} (${l.territory?.nameDisplay})\t\t\t\t\n`)
+    .map(getLocaleExportString)
     .join('');
 
   return (
@@ -162,13 +162,14 @@ const PotentialLocalesTable: React.FC<{
           sortParam: SortBy.RelativePopulation,
         },
         {
-          key: '% of Worldwide in Language',
+          key: '% of Global Language Speakers',
           render: (object) =>
             object.populationSpeaking &&
             numberToFixedUnlessSmall(
               (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
             ),
           isNumeric: true,
+          sortParam: SortBy.PercentOfGlobalLanguageSpeakers,
         },
         {
           key: 'Population Source',
@@ -190,11 +191,7 @@ const PotentialLocalesTable: React.FC<{
           render: (object) => (
             <button
               style={{ padding: '0.25em' }}
-              onClick={() => {
-                navigator.clipboard.writeText(
-                  `${object.ID}\t${object.nameDisplay} (${object.territory?.nameDisplay})\t\t\t\t\n`,
-                );
-              }}
+              onClick={() => navigator.clipboard.writeText(getLocaleExportString(object))}
             >
               <CopyIcon size="1em" display="block" />
             </button>
@@ -204,6 +201,10 @@ const PotentialLocalesTable: React.FC<{
     />
   );
 };
+
+function getLocaleExportString(locale: LocaleData): string {
+  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\tOfficial\t${locale.populationSpeaking}\t\n`;
+}
 
 function getPotentialLocales(
   censuses: CensusData[],

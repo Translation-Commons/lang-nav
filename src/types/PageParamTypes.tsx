@@ -38,7 +38,8 @@ export enum SortBy {
   Endonym = 'Endonym',
   CountOfLanguages = 'Count of Languages',
   CountOfTerritories = 'Count of Territories',
-  RelativePopulation = 'Relative Population',
+  RelativePopulation = 'Relative Population', // Too make this more explicit
+  PercentOfGlobalLanguageSpeakers = '% of Global Language Speakers',
   Literacy = 'Literacy',
   Date = 'Date',
   PopulationAttested = 'Population Attested',

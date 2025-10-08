@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import CommaSeparated from '../../generic/CommaSeparated';
 import Deemphasized from '../../generic/Deemphasized';

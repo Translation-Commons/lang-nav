@@ -69,7 +69,7 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Demographics',
         },
         {
-          key: '% of Worldwide in Language',
+          key: '% of Global Language Speakers',
           render: (object) =>
             object.populationSpeaking &&
             numberToFixedUnlessSmall(
@@ -77,6 +77,7 @@ const LocaleTable: React.FC = () => {
             ),
           isNumeric: true,
           isInitiallyVisible: false,
+          sortParam: SortBy.PercentOfGlobalLanguageSpeakers,
           columnGroup: 'Demographics',
         },
         {

@@ -108,7 +108,7 @@ export function parseLocaleLine(line: string): LocaleData | null {
     scriptCode,
     variantTagCodes,
     populationSource: parts[3] as PopulationSourceCategory,
-    populationSpeaking: Number.parseInt(parts[4]?.replace(/,/g, '')),
+    populationSpeaking: parts[4] !== '' ? Number.parseInt(parts[4]?.replace(/,/g, '')) : undefined,
     officialStatus: (parts[5] || undefined) as OfficialStatus | undefined,
   };
 }
