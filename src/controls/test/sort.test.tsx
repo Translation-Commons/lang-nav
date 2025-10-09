@@ -1,6 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
-import { getBaseLanguageData, LanguageData } from '../../types/LanguageTypes';
+import { TerritoryData } from '../../types/DataTypes';
+import { getBaseLanguageData, LanguageData, LanguageSource } from '../../types/LanguageTypes';
 import { ObjectType, SortBy } from '../../types/PageParamTypes';
 import { getSortFunctionParameterized } from '../sort';
 
@@ -25,12 +26,15 @@ describe('Vitality Sorting', () => {
   describe('VitalityMetascore', () => {
     it('sorts languages by metascore high to low', () => {
       const langs = [
-        createLanguageWithVitality('en', 'English', { eth2013: 'National', eth2025: '1 Institutional' }), // 9
+        createLanguageWithVitality('en', 'English', {
+          eth2013: 'National',
+          eth2025: '1 Institutional',
+        }), // 9
         createLanguageWithVitality('fr', 'French', { eth2013: 'Vigorous' }), // 4
         createLanguageWithVitality('es', 'Spanish', { eth2013: 'Shifting' }), // 3
       ];
 
-      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, 'ISO' as any);
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, LanguageSource.ISO);
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('en'); // highest score
@@ -44,7 +48,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('fr', 'French', { eth2013: 'Vigorous' }), // 4
       ];
 
-      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, 'ISO' as any);
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, LanguageSource.ISO);
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('fr'); // has data
@@ -53,15 +57,17 @@ describe('Vitality Sorting', () => {
 
     it('sorts non-language objects to the end', () => {
       const lang = createLanguageWithVitality('en', 'English', { eth2013: 'National' });
-      const territory = {
+      const territory: TerritoryData = {
         type: ObjectType.Territory,
         ID: 'US',
         codeDisplay: 'US',
         nameDisplay: 'United States',
         names: ['United States'],
-      } as any;
+        scope: 'Country' as TerritoryData['scope'],
+        population: 0,
+      };
 
-      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, 'ISO' as any);
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, LanguageSource.ISO);
       const sorted = [territory, lang].sort(sortFn);
 
       expect(sorted[0].type).toBe(ObjectType.Language); // language first
@@ -77,7 +83,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('la', 'Latin', { iso: 'Extinct' }), // 0
       ];
 
-      const sortFn = getSortFunctionParameterized(SortBy.VitalityISO, 'ISO' as any);
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityISO, LanguageSource.ISO);
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('en');
@@ -94,7 +100,10 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('gd', 'Scottish Gaelic', { eth2013: 'Shifting' }), // 3
       ];
 
-      const sortFn = getSortFunctionParameterized(SortBy.VitalityEthnologue2013, 'ISO' as any);
+      const sortFn = getSortFunctionParameterized(
+        SortBy.VitalityEthnologue2013,
+        LanguageSource.ISO,
+      );
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('en');
@@ -111,7 +120,10 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('gd', 'Scottish Gaelic', { eth2025: '3 Endangered' }), // 3
       ];
 
-      const sortFn = getSortFunctionParameterized(SortBy.VitalityEthnologue2025, 'ISO' as any);
+      const sortFn = getSortFunctionParameterized(
+        SortBy.VitalityEthnologue2025,
+        LanguageSource.ISO,
+      );
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('en');

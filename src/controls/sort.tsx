@@ -7,7 +7,6 @@ import {
   getObjectPopulationAttested,
   getObjectPopulationOfDescendents,
 } from '../views/common/ObjectField';
-
 import {
   computeVitalityMetascore,
   getEthnologue2013Score,
@@ -133,53 +132,53 @@ export function getSortFunctionParameterized(
       return (a: ObjectData, b: ObjectData) => {
         const aVal =
           a.type === ObjectType.Language
-            ? computeVitalityMetascore(a as LanguageData).score ?? -1
+            ? (computeVitalityMetascore(a as LanguageData).score ?? -1)
             : -1;
         const bVal =
           b.type === ObjectType.Language
-            ? computeVitalityMetascore(b as LanguageData).score ?? -1
+            ? (computeVitalityMetascore(b as LanguageData).score ?? -1)
             : -1;
         return (bVal as number) - (aVal as number);
       };
-    
+
     case SortBy.VitalityISO:
       return (a: ObjectData, b: ObjectData) => {
         const aVal =
           a.type === ObjectType.Language
-            ? getISOScore((a as LanguageData).vitalityISO ?? '') ?? -1
+            ? (getISOScore((a as LanguageData).vitalityISO ?? '') ?? -1)
             : -1;
         const bVal =
           b.type === ObjectType.Language
-            ? getISOScore((b as LanguageData).vitalityISO ?? '') ?? -1
+            ? (getISOScore((b as LanguageData).vitalityISO ?? '') ?? -1)
             : -1;
         return bVal - aVal;
       };
-    
+
     case SortBy.VitalityEthnologue2013:
       return (a: ObjectData, b: ObjectData) => {
         const aVal =
           a.type === ObjectType.Language
-            ? getEthnologue2013Score((a as LanguageData).vitalityEth2013 ?? '') ?? -1
+            ? (getEthnologue2013Score((a as LanguageData).vitalityEth2013 ?? '') ?? -1)
             : -1;
         const bVal =
           b.type === ObjectType.Language
-            ? getEthnologue2013Score((b as LanguageData).vitalityEth2013 ?? '') ?? -1
+            ? (getEthnologue2013Score((b as LanguageData).vitalityEth2013 ?? '') ?? -1)
             : -1;
         return bVal - aVal;
       };
-    
+
     case SortBy.VitalityEthnologue2025:
       return (a: ObjectData, b: ObjectData) => {
         const aVal =
           a.type === ObjectType.Language
-            ? getEthnologue2025Score((a as LanguageData).vitalityEth2025 ?? '') ?? -1
+            ? (getEthnologue2025Score((a as LanguageData).vitalityEth2025 ?? '') ?? -1)
             : -1;
         const bVal =
           b.type === ObjectType.Language
-            ? getEthnologue2025Score((b as LanguageData).vitalityEth2025 ?? '') ?? -1
+            ? (getEthnologue2025Score((b as LanguageData).vitalityEth2025 ?? '') ?? -1)
             : -1;
         return bVal - aVal;
-      };      
+      };
   }
 }
 
