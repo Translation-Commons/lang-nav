@@ -74,6 +74,7 @@ describe('Vitality Sorting', () => {
         names: ['United States'],
         scope: 'Country' as TerritoryData['scope'],
         population: 0,
+        populationFromUN: 0,
       };
 
       const sortFn = getSortFunctionParameterized(

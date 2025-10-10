@@ -31,6 +31,8 @@ export async function loadTerritories(): Promise<Record<TerritoryCode, Territory
 
 export function parseTerritoryLine(line: string): TerritoryData {
   const parts = line.split('\t');
+  const population = parts[3] != '' ? Number.parseInt(parts[3].replace(/,/g, '')) : 0;
+
   return {
     type: ObjectType.Territory,
 
@@ -39,7 +41,8 @@ export function parseTerritoryLine(line: string): TerritoryData {
     nameDisplay: parts[1],
     names: [parts[1]],
     scope: parts[2] as TerritoryScope,
-    population: Number.parseInt(parts[3].replace(/,/g, '')),
+    population, // This may be recomputed later
+    populationFromUN: population,
     containedUNRegionCode: parts[4] || undefined,
     sovereignCode: parts[5] || undefined,
   };
@@ -91,7 +94,7 @@ function createRegionalLocalesForTerritory(
   allLocales: Record<BCP47LocaleCode, LocaleData>,
 ): void {
   // Make sure that territories within are processed first
-  const { containsTerritories } = territory;
+  const containsTerritories = territory.containsTerritories ?? [];
   containsTerritories?.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
 
   if (!isTerritoryGroup(territory.scope)) {

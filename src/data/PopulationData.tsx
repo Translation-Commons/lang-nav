@@ -1,3 +1,4 @@
+import { sumBy, uniqueBy } from '../generic/setUtils';
 import { getCensusCollectorTypeRank } from '../types/CensusTypes';
 import { isTerritoryGroup, LocaleData, LocaleInCensus, TerritoryData } from '../types/DataTypes';
 
@@ -93,6 +94,7 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData | undefined)
 }
 
 export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
+  // Country & Dependencies have literacy values from the UN
   locales
     .filter(
       (l) => !isTerritoryGroup(l.territory?.scope), // Skip regional locales
@@ -107,6 +109,21 @@ export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
       if (locale.populationSpeakingPercent != null) {
         locale.populationWritingPercent =
           (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
+      }
+    });
+
+  // Compute regional literacy by adding up the writing populations of the contained locales
+  locales
+    .filter((l) => isTerritoryGroup(l.territory?.scope))
+    .forEach((locale) => {
+      locale.populationWriting = sumBy(
+        uniqueBy(locale.containedLocales ?? [], (loc) => loc.territoryCode || ''),
+        (locale) => locale.populationWriting ?? 0,
+      );
+      if (locale.populationSpeaking && locale.populationWriting) {
+        locale.literacyPercent = Math.round(
+          (locale.populationWriting * 100) / locale.populationSpeaking,
+        );
       }
     });
 }

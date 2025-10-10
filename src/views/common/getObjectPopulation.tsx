@@ -1,7 +1,9 @@
 import { sumBy } from '../../generic/setUtils';
-import { LocaleData, ObjectData, TerritoryData } from '../../types/DataTypes';
+import { ObjectData } from '../../types/DataTypes';
 import { LanguageSource } from '../../types/LanguageTypes';
 import { ObjectType } from '../../types/PageParamTypes';
+
+import { getTerritoryBiggestLocale } from './getObjectMiscFields';
 
 // TODO make better upperbound/lowerbound population estimates when we don't have exact numbers
 // SortBy.Population
@@ -18,7 +20,9 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
     case ObjectType.Territory:
       return object.population;
     case ObjectType.VariantTag:
-      return object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0);
+      return object.languages.length > 0
+        ? object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0)
+        : undefined;
   }
 }
 
@@ -29,10 +33,14 @@ export function getObjectPopulationAttested(object: ObjectData): number | undefi
       return object.populationCited;
     case ObjectType.Locale:
       return object.populationCensus != null ? object.populationSpeaking : undefined;
-    case ObjectType.Census:
-    case ObjectType.WritingSystem:
     case ObjectType.Territory:
+      return object.populationFromUN;
+    case ObjectType.Census:
+      return object.eligiblePopulation;
+    case ObjectType.WritingSystem:
     case ObjectType.VariantTag:
+      // There are no sources for population numbers for these, the population
+      // numbers above are derived analytically
       return undefined;
   }
 }
@@ -56,28 +64,6 @@ export function getObjectPopulationOfDescendents(
     case ObjectType.Census:
     case ObjectType.Locale:
     case ObjectType.VariantTag:
-      return undefined;
-  }
-}
-
-export function getTerritoryBiggestLocale(territory: TerritoryData): LocaleData | undefined {
-  return (territory?.locales || []).sort(
-    (a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0),
-  )[0];
-}
-
-// SortBy.Language
-export function getObjectMostImportantLanguageName(object: ObjectData): string | undefined {
-  switch (object.type) {
-    case ObjectType.Territory:
-      return getTerritoryBiggestLocale(object)?.language?.nameDisplay;
-    case ObjectType.Locale:
-      return object.language?.nameDisplay;
-    case ObjectType.Language:
-      return object.nameDisplay;
-    case ObjectType.Census:
-    case ObjectType.VariantTag:
-    case ObjectType.WritingSystem:
       return undefined;
   }
 }
@@ -108,11 +94,11 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
   switch (object.type) {
     case ObjectType.Locale:
       return object.language && object.populationSpeaking
-        ? object.populationSpeaking / (object.language.populationEstimate ?? 1)
+        ? (object.populationSpeaking * 100) / (object.language.populationEstimate ?? 1)
         : undefined;
     case ObjectType.Language:
       return object.parentLanguage && object.populationEstimate
-        ? object.populationEstimate / (object.parentLanguage.populationEstimate ?? 1)
+        ? (object.populationEstimate * 100) / (object.parentLanguage.populationEstimate ?? 1)
         : undefined;
     case ObjectType.Census:
     case ObjectType.Territory:
