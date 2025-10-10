@@ -2,6 +2,7 @@ import {
   BCP47LocaleCode,
   isTerritoryGroup,
   LocaleData,
+  LocaleSource,
   PopulationSourceCategory,
   TerritoryCode,
   TerritoryData,
@@ -105,13 +106,23 @@ function createRegionalLocalesForTerritory(
         if (newLocale == null) {
           // It isn't found yet, create it
           locs[newLocaleCode] = {
-            ...loc, // Inherit most properties (codes, population...)
-
-            // But we need to set a new locale code and territory code
+            // Set a new locale code and territory code
+            type: ObjectType.Locale,
             ID: newLocaleCode,
             codeDisplay: newLocaleCode,
+            localeSource: LocaleSource.CreateRegionalLocales,
+
+            // Recognize the new region territory
             territoryCode: territory.ID,
             territory,
+
+            // Add other parts of the locale code
+            languageCode: loc.languageCode,
+            language: loc.language,
+            scriptCode: loc.scriptCode,
+            writingSystem: loc.writingSystem,
+            variantTagCodes: loc.variantTagCodes != null ? [...loc.variantTagCodes] : [], // dereference the array
+            variantTags: loc.variantTags != null ? [...loc.variantTags] : [], // dereference the array
 
             // Update the population
             populationSpeaking: loc.populationSpeaking,
@@ -121,11 +132,9 @@ function createRegionalLocalesForTerritory(
                 : undefined,
             populationSource: PopulationSourceCategory.Aggregated,
 
-            // Clear attributes that cannot be easily aggregated
-            nameEndonym: undefined,
-            officialStatus: undefined,
-            populationCensus: undefined, // No census for this aggregated locale
-            censusRecords: [], // No census records for this aggregated locale
+            // Add stubs for required fields
+            names: [],
+            nameDisplay: newLocaleCode, // Will be computed later
             containedLocales: [loc], // Keep track of the original locales that were aggregated
           };
         } else {

@@ -121,13 +121,13 @@ export interface WritingSystemData extends ObjectBase {
 export type BCP47LocaleCode = string; // BCP-47 formatted locale, eg. en_US, fr_CA, etc.
 
 export enum PopulationSourceCategory {
-  Census = '1 Census',
-  Study = '2 Study',
-  Ethnologue = '3 Ethnologue',
-  EDL = '4 EDL',
-  OtherCitation = '5 Other',
-  GeneralizedData = '6 Generalized Data',
-  Fallback = '7 Fallback',
+  Official = 'Official', // Has a cited source
+  UnverifiedOfficial = 'Unverified Official', // Source lost in merge but allegedly official
+  Study = 'Study',
+  Ethnologue = 'Ethnologue',
+  EDL = 'EDL', // Endangered Languages Project
+  CLDR = 'CLDR', // Unicode's Common Locale Data Repository
+  Other = 'Other',
   NoSource = '',
   Aggregated = 'Aggregated',
 }
@@ -146,12 +146,19 @@ export type LocaleInCensus = {
   populationPercent: number;
 };
 
+export enum LocaleSource {
+  StableDatabase = 'StableDatabase', // the standard source, kept in locales.tsv
+  IANA = 'IANA', // created when importing IANA variant tags
+  Census = 'census', // created when importing census data
+  CreateRegionalLocales = 'createRegionalLocales', // created when generating aggregated regional locales
+}
+
 export interface LocaleData extends ObjectBase {
   type: ObjectType.Locale;
 
   ID: BCP47LocaleCode;
   codeDisplay: BCP47LocaleCode; // Changes based on the language schema
-  localeSource: 'regularInput' | 'IANA' | 'census'; // Whether this locale is listed in the the regular locale list or not
+  localeSource: LocaleSource;
 
   nameDisplay: string;
   nameEndonym?: string;

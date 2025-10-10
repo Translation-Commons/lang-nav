@@ -34,7 +34,7 @@ hye	Armenian	508,127	397,440	660,935
 fra	French	235,199	47,348	616,394
 kbd	Kabardian	4,857	4,311	515,672
 dar	Dargan			485,705
-aze	Azerbaijani	291,484	227,307	473,044
+aze/azj	Azerbaijani	291,484	227,307	473,044
 oss	Ossetian	344,907	332,068	451,431
 kbd	Kabardino-Circassian	450,276	435,901	
 sah	Yakut	377,722	363,096	450,140
@@ -66,8 +66,7 @@ lbe	Lak	87,957	84,301	145,895
 tgk	Tadzhik			141,938
 rom	Romany			128,197
 tab	Tabasaran	87,214	82,069	126,136
-sgn	Sign Languages			120,528
-rsl	#Sign Languages			120,528
+sgn/rsl	#Sign Languages			120,528
 ady	Adyge			119,463
 rom	Chamalin / Gypsy	108,425	95,412	
 xal	Kalmyk	107,742	100,826	

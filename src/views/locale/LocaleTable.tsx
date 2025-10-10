@@ -4,6 +4,7 @@ import { usePageParams } from '../../controls/PageParamsContext';
 import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
+import { toSentenceCase } from '../../generic/stringUtils';
 import { LocaleData } from '../../types/DataTypes';
 import { SortBy } from '../../types/PageParamTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
@@ -68,13 +69,16 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Demographics',
         },
         {
-          key: '% of Worldwide in Language',
+          key: '% of Global Language Speakers',
           render: (object) =>
             object.populationSpeaking &&
             numberToFixedUnlessSmall(
               (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
             ),
           isNumeric: true,
+          isInitiallyVisible: false,
+          sortParam: SortBy.PercentOfGlobalLanguageSpeakers,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Population Source',
@@ -97,6 +101,11 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Wikipedia',
           render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'Locale Source',
+          render: (object) => toSentenceCase(object.localeSource),
           isInitiallyVisible: false,
         },
       ]}

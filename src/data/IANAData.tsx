@@ -1,5 +1,5 @@
 import { unique } from '../generic/setUtils';
-import { BCP47LocaleCode, LocaleData, VariantTagData } from '../types/DataTypes';
+import { BCP47LocaleCode, LocaleData, LocaleSource, VariantTagData } from '../types/DataTypes';
 import { LanguageDictionary } from '../types/LanguageTypes';
 import { LocaleSeparator, ObjectType } from '../types/PageParamTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '../views/locale/LocaleStrings';
@@ -151,7 +151,7 @@ function addVariantLocale(
     ID: localeCode,
     codeDisplay: localeCode,
     ...localeTags, // languageCode, scriptCode, territoryCode, variantTagCodes
-    localeSource: 'IANA',
+    localeSource: LocaleSource.IANA,
 
     // Names are withheld but they are added later when all of the locale objects have been linked
     nameDisplay: '',

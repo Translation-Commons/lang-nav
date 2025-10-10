@@ -98,6 +98,27 @@ function getSortFunctionParameterized(
               : -1;
         }
       };
+    case SortBy.PercentOfGlobalLanguageSpeakers:
+      return (a: ObjectData, b: ObjectData) => {
+        switch (a.type) {
+          case ObjectType.Census:
+          case ObjectType.WritingSystem:
+          case ObjectType.VariantTag:
+          case ObjectType.Territory:
+            // No relative population to sort by
+            return 0;
+          case ObjectType.Language:
+            return b.type === ObjectType.Language
+              ? (b.populationEstimate ?? 0) / (b.parentLanguage?.populationEstimate ?? 1) -
+                  (a.populationEstimate ?? 0) / (a.parentLanguage?.populationEstimate ?? 1)
+              : -1;
+          case ObjectType.Locale:
+            return b.type === ObjectType.Locale
+              ? (b.populationSpeaking ?? 0) / (b.language?.populationEstimate ?? 1) -
+                  (a.populationSpeaking ?? 0) / (a.language?.populationEstimate ?? 1)
+              : -1;
+        }
+      };
     case SortBy.Literacy:
       return (a: ObjectData, b: ObjectData) => {
         switch (a.type) {
@@ -134,6 +155,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Population,
         SortBy.Literacy,
         SortBy.RelativePopulation,
+        SortBy.PercentOfGlobalLanguageSpeakers,
         SortBy.CountOfLanguages,
       ];
     case ObjectType.Territory:

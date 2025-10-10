@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import {
   LocaleData,
+  LocaleSource,
   PopulationSourceCategory,
   TerritoryScope,
   WritingSystemScope,
@@ -19,7 +20,7 @@ describe('getLocaleName', () => {
       populationSource: PopulationSourceCategory.NoSource,
       populationSpeaking: 0,
       censusRecords: [],
-      localeSource: 'regularInput',
+      localeSource: LocaleSource.StableDatabase,
       nameDisplay: 'Chinese (Pinyin)',
       names: ['Chinese (Pinyin)'],
       languageCode: 'zh',
@@ -38,7 +39,7 @@ describe('getLocaleName', () => {
       populationSource: PopulationSourceCategory.NoSource,
       populationSpeaking: 0,
       censusRecords: [],
-      localeSource: 'regularInput',
+      localeSource: LocaleSource.StableDatabase,
       nameDisplay: 'Chinese (Pinyin)',
       names: ['Chinese (Pinyin)'],
       languageCode: 'zh',
