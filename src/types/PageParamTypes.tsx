@@ -2,6 +2,7 @@ import { ProfileType } from '../controls/Profiles';
 
 import { TerritoryScope } from './DataTypes';
 import { LanguageSource, LanguageScope } from './LanguageTypes';
+import { DisplaySortDirection, SortBy } from './SortTypes';
 
 export enum ExternalConcepts {
   LanguageFamily = 'Language Family',
@@ -29,21 +30,6 @@ export enum View {
   Hierarchy = 'Hierarchy',
   Details = 'Details',
   Reports = 'Reports',
-}
-
-export enum SortBy {
-  Population = 'Population',
-  Code = 'Code',
-  Name = 'Name',
-  Endonym = 'Endonym',
-  CountOfLanguages = 'Count of Languages',
-  CountOfTerritories = 'Count of Territories',
-  RelativePopulation = 'Relative Population', // Too make this more explicit
-  PercentOfGlobalLanguageSpeakers = '% of Global Language Speakers',
-  Literacy = 'Literacy',
-  Date = 'Date',
-  PopulationAttested = 'Population Attested',
-  PopulationOfDescendents = 'Population of Descendents',
 }
 
 export enum SearchableField {
@@ -89,7 +75,7 @@ export type PageParams = {
   searchBy: SearchableField;
   searchString: string;
   sortBy: SortBy;
-  sortDirection: 'normal' | 'reverse'; // true for normal, false for reverse
+  sortDirection: DisplaySortDirection;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
@@ -107,7 +93,7 @@ export type PageParamsOptional = {
   searchBy?: SearchableField;
   searchString?: string;
   sortBy?: SortBy;
-  sortDirection?: 'normal' | 'reverse';
+  sortDirection?: DisplaySortDirection;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;

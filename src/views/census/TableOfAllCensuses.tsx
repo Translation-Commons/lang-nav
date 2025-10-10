@@ -4,7 +4,7 @@ import { useDataContext } from '../../data/DataContext';
 import Deemphasized from '../../generic/Deemphasized';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { CensusData } from '../../types/CensusTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 

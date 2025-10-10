@@ -10,9 +10,9 @@ import {
   PageParams,
   PageParamsOptional,
   SearchableField,
-  SortBy,
   View,
 } from '../types/PageParamTypes';
+import { DisplaySortDirection, SortBy } from '../types/SortTypes';
 
 import { getDefaultParams, ProfileType } from './Profiles';
 
@@ -103,7 +103,8 @@ function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
         params.languageSource = value as LanguageSource;
         break;
       case PageParamKey.sortDirection:
-        params.sortDirection = value === 'reverse' ? value : 'normal';
+        params.sortDirection =
+          value === '-1' ? DisplaySortDirection.Reverse : DisplaySortDirection.Normal;
         break;
 
       // Freeform strings

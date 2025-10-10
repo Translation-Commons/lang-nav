@@ -9,7 +9,7 @@ import {
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getSortFunction } from '../../../controls/sort';
 import { ObjectData } from '../../../types/DataTypes';
-import { SortBy } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
 import ObjectDetails from '../details/ObjectDetails';
 import { DetailsContainer } from '../details/ObjectDetailsPage';

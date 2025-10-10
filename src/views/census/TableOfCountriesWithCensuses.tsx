@@ -4,7 +4,7 @@ import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { CensusCollectorType } from '../../types/CensusTypes';
 import { TerritoryData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import CollapsibleReport from '../common/CollapsibleReport';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';

@@ -2,8 +2,9 @@ import { ArrowDown01, ArrowDown10, ArrowDownAZ, ArrowDownZA } from 'lucide-react
 import React, { useCallback } from 'react';
 
 import { usePageParams } from '../../../controls/PageParamsContext';
+import { getNormalSortDirection } from '../../../controls/sort';
 import HoverableButton from '../../../generic/HoverableButton';
-import { SortBy } from '../../../types/PageParamTypes';
+import { SortBy, DisplaySortDirection, TechnicalSortDirection } from '../../../types/SortTypes';
 
 type Props = {
   columnSortBy?: SortBy;
@@ -11,21 +12,23 @@ type Props = {
 };
 
 const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) => {
-  const { sortBy, updatePageParams, sortDirection } = usePageParams();
+  const { sortBy, updatePageParams, sortDirection: normalOrReverse } = usePageParams();
 
   if (!columnSortBy) {
     return <></>;
   }
+  const currentSortDirection = getNormalSortDirection(sortBy) * normalOrReverse;
+  const normalSortDirection = getNormalSortDirection(columnSortBy);
 
   const onSortButtonClick = useCallback(
     (newSortBy: SortBy): void => {
       if (sortBy != newSortBy) {
-        updatePageParams({ sortBy: newSortBy, sortDirection: 'normal' });
+        updatePageParams({ sortBy: newSortBy, sortDirection: DisplaySortDirection.Normal });
       } else {
-        updatePageParams({ sortDirection: sortDirection === 'normal' ? 'reverse' : 'normal' });
+        updatePageParams({ sortDirection: currentSortDirection * -1 });
       }
     },
-    [sortBy, updatePageParams, sortDirection],
+    [sortBy, updatePageParams, currentSortDirection],
   );
 
   return (
@@ -41,20 +44,32 @@ const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) =
       hoverContent="Click to sort by this column or to toggle the sort direction."
       onClick={() => onSortButtonClick(columnSortBy)}
     >
-      <SortButtonIcon isNumeric={isNumeric} sortDirection={sortDirection} />
+      <SortButtonIcon
+        isNumeric={isNumeric}
+        sortDirection={sortBy === columnSortBy ? currentSortDirection : normalSortDirection}
+      />
     </HoverableButton>
   );
 };
 
 type SortButtonIconProps = {
   isNumeric?: boolean;
-  sortDirection?: 'normal' | 'reverse';
+  sortDirection?: TechnicalSortDirection;
 };
 
 function SortButtonIcon({ isNumeric, sortDirection }: SortButtonIconProps) {
-  if (isNumeric && sortDirection === 'reverse') return <ArrowDown01 size="1em" display="block" />;
-  if (isNumeric && sortDirection === 'normal') return <ArrowDown10 size="1em" display="block" />;
-  if (!isNumeric && sortDirection === 'reverse') return <ArrowDownZA size="1em" display="block" />;
-  return <ArrowDownAZ size="1em" display="block" />;
+  if (isNumeric) {
+    if (sortDirection === TechnicalSortDirection.Ascending) {
+      return <ArrowDown01 size="1em" display="block" />;
+    } else {
+      return <ArrowDown10 size="1em" display="block" />;
+    }
+  } else {
+    if (sortDirection === TechnicalSortDirection.Ascending) {
+      return <ArrowDownAZ size="1em" display="block" />;
+    } else {
+      return <ArrowDownZA size="1em" display="block" />;
+    }
+  }
 }
 export default TableSortButton;

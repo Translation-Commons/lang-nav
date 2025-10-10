@@ -6,7 +6,7 @@ import CommaSeparated from '../../generic/CommaSeparated';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { toSentenceCase } from '../../generic/stringUtils';
 import { LocaleData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
@@ -65,7 +65,7 @@ const LocaleTable: React.FC = () => {
               </>
             ),
           isNumeric: true,
-          sortParam: SortBy.RelativePopulation,
+          sortParam: SortBy.PercentOfTerritoryPopulation,
           columnGroup: 'Demographics',
         },
         {
@@ -77,7 +77,7 @@ const LocaleTable: React.FC = () => {
             ),
           isNumeric: true,
           isInitiallyVisible: false,
-          sortParam: SortBy.PercentOfGlobalLanguageSpeakers,
+          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           columnGroup: 'Demographics',
         },
         {

@@ -3,7 +3,7 @@ import React from 'react';
 import { useDataContext } from '../../data/DataContext';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { TerritoryData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
