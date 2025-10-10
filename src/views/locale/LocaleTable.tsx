@@ -97,6 +97,39 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Language',
+          render: (object) => <HoverableObjectName object={object.language} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          sortParam: SortBy.Language,
+        },
+        {
+          key: 'Territory',
+          render: (object) => <HoverableObjectName object={object.territory} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Writing System',
+          render: (object) => <HoverableObjectName object={object.writingSystem} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Variant Tags',
+          render: (object) =>
+            object.variantTags && (
+              <CommaSeparated limit={1}>
+                {object.variantTags.map((vt) => (
+                  <HoverableObjectName object={vt} key={vt.ID} />
+                ))}
+              </CommaSeparated>
+            ),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
         },
         {
           key: 'Wikipedia',

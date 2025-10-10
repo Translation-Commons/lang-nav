@@ -6,7 +6,7 @@ import { numberToFixedUnlessSmall } from '../../../generic/numberUtils';
 import { LanguageData } from '../../../types/LanguageTypes';
 import { SortBy } from '../../../types/SortTypes';
 import CollapsibleReport from '../../common/CollapsibleReport';
-import { getObjectBiggestDescendentRelativePopulation } from '../../common/getObjectPopulation';
+import { getObjectPopulationPercentInBiggestDescendentLanguage } from '../../common/getObjectPopulation';
 import HoverableObjectName from '../../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../../common/table/CommonColumns';
 import ObjectTable from '../../common/table/ObjectTable';
@@ -107,11 +107,11 @@ const LanguagesLargestDescendant: React.FC = () => {
           {
             key: '% Descendent',
             render: (lang: LanguageData) => {
-              const relativePopulation = getObjectBiggestDescendentRelativePopulation(lang);
+              const relativePopulation = getObjectPopulationPercentInBiggestDescendentLanguage(lang);
               return relativePopulation ? numberToFixedUnlessSmall(relativePopulation * 100) : null;
             },
             isNumeric: true,
-            sortParam: SortBy.BiggestDescendentRelativePopulation,
+            sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
           },
         ]}
         objects={filteredLanguages}

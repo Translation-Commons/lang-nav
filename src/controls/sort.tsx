@@ -1,7 +1,7 @@
 import { ObjectData } from '../types/DataTypes';
 import { LanguageSource } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
-import { DisplaySortDirection, SortBy, TechnicalSortDirection } from '../types/SortTypes';
+import { SortBehavior, SortBy, SortDirection } from '../types/SortTypes';
 import {
   getCountOfLanguages,
   getCountOfTerritories,
@@ -9,12 +9,13 @@ import {
   getObjectLiteracy,
 } from '../views/common/getObjectMiscFields';
 import {
-  getObjectBiggestDescendentRelativePopulation,
+  getObjectPopulationPercentInBiggestDescendentLanguage,
   getObjectPopulation,
   getObjectPopulationAttested,
   getObjectPopulationOfDescendents,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
-  getObjectPopulationRelativeToTerritory,
+  getObjectPercentOfTerritoryPopulation,
+  getObjectMostImportantLanguageName,
 } from '../views/common/getObjectPopulation';
 
 import { usePageParams } from './PageParamsContext';
@@ -22,10 +23,10 @@ import { usePageParams } from './PageParamsContext';
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
 export function getSortFunction(languageSource?: LanguageSource): SortByFunctionType {
-  const { sortBy, languageSource: languageSourcePageParam, sortDirection } = usePageParams();
+  const { sortBy, languageSource: languageSourcePageParam, sortBehavior } = usePageParams();
   const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
-  return getSortFunctionParameterized(sortBy, effectiveLanguageSource, sortDirection);
+  return getSortFunctionParameterized(sortBy, effectiveLanguageSource, sortBehavior);
 }
 
 function getSortField(
@@ -48,6 +49,8 @@ function getSortField(
       return getObjectLiteracy(object);
     case SortBy.Date:
       return getObjectDate(object);
+    case SortBy.Language:
+      return getObjectMostImportantLanguageName(object);
 
     // Population
     case SortBy.Population:
@@ -56,10 +59,10 @@ function getSortField(
       return getObjectPopulationAttested(object);
     case SortBy.PopulationOfDescendents:
       return getObjectPopulationOfDescendents(object, effectiveLanguageSource);
-    case SortBy.BiggestDescendentRelativePopulation:
-      return getObjectBiggestDescendentRelativePopulation(object);
+    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+      return getObjectPopulationPercentInBiggestDescendentLanguage(object);
     case SortBy.PercentOfTerritoryPopulation:
-      return getObjectPopulationRelativeToTerritory(object);
+      return getObjectPercentOfTerritoryPopulation(object);
     case SortBy.PercentOfOverallLanguageSpeakers:
       return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
   }
@@ -68,7 +71,7 @@ function getSortField(
 function getSortFunctionParameterized(
   sortBy: SortBy,
   effectiveLanguageSource: LanguageSource,
-  sortDirection: DisplaySortDirection,
+  sortDirection: SortBehavior,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;
   return (a: ObjectData, b: ObjectData) => {
@@ -82,23 +85,24 @@ function getSortFunctionParameterized(
   };
 }
 
-export function getNormalSortDirection(sortBy: SortBy): TechnicalSortDirection {
+export function getNormalSortDirection(sortBy: SortBy): SortDirection {
   switch (sortBy) {
     case SortBy.Name:
     case SortBy.Endonym:
     case SortBy.Code:
-      return TechnicalSortDirection.Ascending; // A to Z
+    case SortBy.Language:
+      return SortDirection.Ascending; // A to Z
     case SortBy.Date:
     case SortBy.Population:
     case SortBy.PopulationAttested:
     case SortBy.PopulationOfDescendents:
-    case SortBy.BiggestDescendentRelativePopulation:
+    case SortBy.PopulationPercentInBiggestDescendentLanguage:
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.Literacy:
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
-      return TechnicalSortDirection.Descending; // High to Low
+      return SortDirection.Descending; // High to Low
   }
 }
 

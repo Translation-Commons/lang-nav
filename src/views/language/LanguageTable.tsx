@@ -158,6 +158,7 @@ const LanguageTable: React.FC = () => {
           render: (lang) =>
             lang.parentLanguage && <HoverableObjectName object={lang.parentLanguage} />,
           isInitiallyVisible: false,
+          columnGroup: 'Relations',
         },
         {
           key: 'Dialects',
@@ -171,6 +172,7 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Relations',
         },
         {
           key: 'Territories',
@@ -183,6 +185,7 @@ const LanguageTable: React.FC = () => {
           ),
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
+          columnGroup: 'Relations',
         },
         {
           key: 'Wikipedia',

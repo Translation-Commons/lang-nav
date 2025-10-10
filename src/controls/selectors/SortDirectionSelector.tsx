@@ -1,26 +1,26 @@
 import React from 'react';
 
-import { DisplaySortDirection } from '../../types/SortTypes';
+import { SortBehavior } from '../../types/SortTypes';
 import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';
 
 const SortDirectionSelector: React.FC = () => {
-  const { sortDirection, updatePageParams } = usePageParams();
+  const { sortBehavior, updatePageParams } = usePageParams();
 
   return (
-    <Selector<DisplaySortDirection>
+    <Selector<SortBehavior>
       selectorLabel="Sort Direction"
       display={SelectorDisplay.ButtonGroup}
-      options={[DisplaySortDirection.Normal, DisplaySortDirection.Reverse]}
-      getOptionLabel={(direction) => DisplaySortDirection[direction]}
+      options={[SortBehavior.Normal, SortBehavior.Reverse]}
+      getOptionLabel={(direction) => SortBehavior[direction]}
       getOptionDescription={(direction) =>
-        direction === DisplaySortDirection.Normal
+        direction === SortBehavior.Normal
           ? 'Sort with high numbers first / first letter in alphabet first.'
           : 'Sort with low numbers first / last letter in alphabet first.'
       }
-      onChange={(direction: DisplaySortDirection) => updatePageParams({ sortDirection: direction })}
-      selected={sortDirection}
+      onChange={(behavior: SortBehavior) => updatePageParams({ sortBehavior: behavior })}
+      selected={sortBehavior}
     />
   );
 };

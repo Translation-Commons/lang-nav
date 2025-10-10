@@ -12,6 +12,7 @@ export function getUniqueTerritoriesForLanguage(lang: LanguageData): TerritoryDa
     .filter((t) => t != null);
 }
 
+// SortBy.Date
 export function getObjectDate(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Census:
@@ -26,6 +27,7 @@ export function getObjectDate(object: ObjectData): number | undefined {
   }
 }
 
+// SortBy.CountOfLanguages
 export function getCountOfLanguages(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
@@ -43,12 +45,17 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
   }
 }
 
+export function getTerritoryChildren(territory: TerritoryData): TerritoryData[] {
+  return [...(territory.containsTerritories ?? []), ...(territory.dependentTerritories ?? [])];
+}
+
+// SortBy.CountOfTerritories
 export function getCountOfTerritories(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
       return getUniqueTerritoriesForLanguage(object).length;
     case ObjectType.Territory:
-      return object.containsTerritories?.length;
+      return getTerritoryChildren(object).length;
     case ObjectType.Locale:
     case ObjectType.Census:
     case ObjectType.WritingSystem:
@@ -57,6 +64,7 @@ export function getCountOfTerritories(object: ObjectData): number | undefined {
   }
 }
 
+// SortBy.Literacy
 export function getObjectLiteracy(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Census:
@@ -85,6 +93,5 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
         (locale.literacyPercent ?? locale.territory?.literacyPercent ?? 0) *
         (locale.populationSpeaking ?? 0),
     ) / totalLocalePopulation;
-  //   console.log(lang.ID, locales[0], totalLocalePopulation, computedLiteracy);
   return computedLiteracy || undefined;
 }

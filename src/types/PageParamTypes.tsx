@@ -2,7 +2,7 @@ import { ProfileType } from '../controls/Profiles';
 
 import { TerritoryScope } from './DataTypes';
 import { LanguageSource, LanguageScope } from './LanguageTypes';
-import { DisplaySortDirection, SortBy } from './SortTypes';
+import { SortBehavior, SortBy } from './SortTypes';
 
 export enum ExternalConcepts {
   LanguageFamily = 'Language Family',
@@ -56,8 +56,8 @@ export enum PageParamKey {
   profile = 'profile',
   searchBy = 'searchBy',
   searchString = 'searchString',
+  sortBehavior = 'sortBehavior',
   sortBy = 'sortBy',
-  sortDirection = 'sortDirection',
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
   view = 'view',
@@ -74,8 +74,8 @@ export type PageParams = {
   profile: ProfileType;
   searchBy: SearchableField;
   searchString: string;
+  sortBehavior: SortBehavior;
   sortBy: SortBy;
-  sortDirection: DisplaySortDirection;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
@@ -92,8 +92,8 @@ export type PageParamsOptional = {
   profile?: ProfileType;
   searchBy?: SearchableField;
   searchString?: string;
+  sortBehavior?: SortBehavior;
   sortBy?: SortBy;
-  sortDirection?: DisplaySortDirection;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;

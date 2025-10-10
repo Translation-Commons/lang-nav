@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getNormalSortDirection } from '../../../controls/sort';
 import HoverableButton from '../../../generic/HoverableButton';
-import { SortBy, DisplaySortDirection, TechnicalSortDirection } from '../../../types/SortTypes';
+import { SortBy, SortBehavior, SortDirection } from '../../../types/SortTypes';
 
 type Props = {
   columnSortBy?: SortBy;
@@ -12,23 +12,23 @@ type Props = {
 };
 
 const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) => {
-  const { sortBy, updatePageParams, sortDirection: normalOrReverse } = usePageParams();
+  const { sortBy, updatePageParams, sortBehavior } = usePageParams();
 
   if (!columnSortBy) {
     return <></>;
   }
-  const currentSortDirection = getNormalSortDirection(sortBy) * normalOrReverse;
+  const currentSortDirection = getNormalSortDirection(sortBy) * sortBehavior;
   const normalSortDirection = getNormalSortDirection(columnSortBy);
 
   const onSortButtonClick = useCallback(
     (newSortBy: SortBy): void => {
       if (sortBy != newSortBy) {
-        updatePageParams({ sortBy: newSortBy, sortDirection: DisplaySortDirection.Normal });
+        updatePageParams({ sortBy: newSortBy, sortBehavior: SortBehavior.Normal });
       } else {
-        updatePageParams({ sortDirection: currentSortDirection * -1 });
+        updatePageParams({ sortBehavior: sortBehavior * -1 });
       }
     },
-    [sortBy, updatePageParams, currentSortDirection],
+    [sortBy, updatePageParams, sortBehavior],
   );
 
   return (
@@ -54,18 +54,18 @@ const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) =
 
 type SortButtonIconProps = {
   isNumeric?: boolean;
-  sortDirection?: TechnicalSortDirection;
+  sortDirection?: SortDirection;
 };
 
 function SortButtonIcon({ isNumeric, sortDirection }: SortButtonIconProps) {
   if (isNumeric) {
-    if (sortDirection === TechnicalSortDirection.Ascending) {
+    if (sortDirection === SortDirection.Ascending) {
       return <ArrowDown01 size="1em" display="block" />;
     } else {
       return <ArrowDown10 size="1em" display="block" />;
     }
   } else {
-    if (sortDirection === TechnicalSortDirection.Ascending) {
+    if (sortDirection === SortDirection.Ascending) {
       return <ArrowDownAZ size="1em" display="block" />;
     } else {
       return <ArrowDownZA size="1em" display="block" />;
