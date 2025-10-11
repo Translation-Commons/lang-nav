@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import { usePageParams } from '../PageParamsContext';

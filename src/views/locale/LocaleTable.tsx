@@ -6,7 +6,7 @@ import CommaSeparated from '../../generic/CommaSeparated';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { toSentenceCase } from '../../generic/stringUtils';
 import { LocaleData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
@@ -65,7 +65,7 @@ const LocaleTable: React.FC = () => {
               </>
             ),
           isNumeric: true,
-          sortParam: SortBy.RelativePopulation,
+          sortParam: SortBy.PercentOfTerritoryPopulation,
           columnGroup: 'Demographics',
         },
         {
@@ -77,7 +77,7 @@ const LocaleTable: React.FC = () => {
             ),
           isNumeric: true,
           isInitiallyVisible: false,
-          sortParam: SortBy.PercentOfGlobalLanguageSpeakers,
+          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           columnGroup: 'Demographics',
         },
         {
@@ -97,6 +97,39 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Language',
+          render: (object) => <HoverableObjectName object={object.language} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          sortParam: SortBy.Language,
+        },
+        {
+          key: 'Territory',
+          render: (object) => <HoverableObjectName object={object.territory} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Writing System',
+          render: (object) => <HoverableObjectName object={object.writingSystem} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Variant Tags',
+          render: (object) =>
+            object.variantTags && (
+              <CommaSeparated limit={1}>
+                {object.variantTags.map((vt) => (
+                  <HoverableObjectName object={vt} key={vt.ID} />
+                ))}
+              </CommaSeparated>
+            ),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
         },
         {
           key: 'Wikipedia',

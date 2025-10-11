@@ -4,8 +4,9 @@ import Selector from '../../../controls/components/Selector';
 import { useDataContext } from '../../../data/DataContext';
 import { numberToFixedUnlessSmall } from '../../../generic/numberUtils';
 import { LanguageData } from '../../../types/LanguageTypes';
-import { SortBy } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import CollapsibleReport from '../../common/CollapsibleReport';
+import { getObjectPopulationPercentInBiggestDescendentLanguage } from '../../common/getObjectPopulation';
 import HoverableObjectName from '../../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../../common/table/CommonColumns';
 import ObjectTable from '../../common/table/ObjectTable';
@@ -105,16 +106,13 @@ const LanguagesLargestDescendant: React.FC = () => {
 
           {
             key: '% Descendent',
-            render: (lang: LanguageData) =>
-              lang.largestDescendant
-                ? numberToFixedUnlessSmall(
-                    ((lang.largestDescendant?.populationEstimate || 0) /
-                      (lang.populationEstimate || 0)) *
-                      100,
-                  )
-                : null,
+            render: (lang: LanguageData) => {
+              const relativePopulation =
+                getObjectPopulationPercentInBiggestDescendentLanguage(lang);
+              return relativePopulation ? numberToFixedUnlessSmall(relativePopulation * 100) : null;
+            },
             isNumeric: true,
-            sortParam: SortBy.RelativePopulation,
+            sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
           },
         ]}
         objects={filteredLanguages}

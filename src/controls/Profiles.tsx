@@ -16,9 +16,9 @@ import {
   PageParams,
   PageParamsOptional,
   SearchableField,
-  SortBy,
   View,
 } from '../types/PageParamTypes';
+import { SortBehavior, SortBy } from '../types/SortTypes';
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default
@@ -41,8 +41,8 @@ const GLOBAL_DEFAULTS: PageParams = {
   profile: ProfileType.LanguageEthusiast,
   searchBy: SearchableField.AllNames,
   searchString: '',
+  sortBehavior: SortBehavior.Normal,
   sortBy: SortBy.Population,
-  sortDirection: 'normal',
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   territoryFilter: '',
   view: View.CardList,
