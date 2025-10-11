@@ -16,7 +16,8 @@ import {
   TerritoryCode,
 } from '../../types/DataTypes';
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
-import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import CollapsibleReport from '../common/CollapsibleReport';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTable from '../common/table/ObjectTable';
@@ -159,7 +160,7 @@ const PotentialLocalesTable: React.FC<{
             object.populationSpeakingPercent &&
             numberToFixedUnlessSmall(object.populationSpeakingPercent),
           isNumeric: true,
-          sortParam: SortBy.RelativePopulation,
+          sortParam: SortBy.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
@@ -169,7 +170,7 @@ const PotentialLocalesTable: React.FC<{
               (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
             ),
           isNumeric: true,
-          sortParam: SortBy.PercentOfGlobalLanguageSpeakers,
+          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',

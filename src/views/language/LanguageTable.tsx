@@ -1,13 +1,14 @@
 import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import { getUniqueTerritoriesForLanguage } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
+import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { LanguageData, LanguageField } from '../../types/LanguageTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
+import { getObjectLiteracy, getUniqueTerritoriesForLanguage } from '../common/getObjectMiscFields';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
@@ -157,6 +158,7 @@ const LanguageTable: React.FC = () => {
           render: (lang) =>
             lang.parentLanguage && <HoverableObjectName object={lang.parentLanguage} />,
           isInitiallyVisible: false,
+          columnGroup: 'Relations',
         },
         {
           key: 'Dialects',
@@ -170,18 +172,37 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Relations',
         },
         {
           key: 'Territories',
-          render: (lang) => <HoverableEnumeration items={getUniqueTerritoriesForLanguage(lang)} />,
+          render: (lang) => (
+            <HoverableEnumeration
+              items={getUniqueTerritoriesForLanguage(lang).map(
+                (territory) => territory.nameDisplay,
+              )}
+            />
+          ),
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
+          columnGroup: 'Relations',
         },
         {
           key: 'Wikipedia',
           render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
           isInitiallyVisible: false,
           columnGroup: 'Digital Support',
+        },
+        {
+          key: 'Literacy',
+          render: (lang) => {
+            const literacy = getObjectLiteracy(lang);
+            if (literacy == null) return <Deemphasized>—</Deemphasized>;
+            return literacy.toFixed(1);
+          },
+          isInitiallyVisible: false,
+          sortParam: SortBy.Literacy,
+          isNumeric: true,
         },
       ]}
     />

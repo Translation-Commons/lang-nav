@@ -2,6 +2,7 @@ import { ProfileType } from '../controls/Profiles';
 
 import { TerritoryScope } from './DataTypes';
 import { LanguageSource, LanguageScope } from './LanguageTypes';
+import { SortBehavior, SortBy } from './SortTypes';
 
 export enum ExternalConcepts {
   LanguageFamily = 'Language Family',
@@ -31,21 +32,6 @@ export enum View {
   Reports = 'Reports',
 }
 
-export enum SortBy {
-  Population = 'Population',
-  Code = 'Code',
-  Name = 'Name',
-  Endonym = 'Endonym',
-  CountOfLanguages = 'Count of Languages',
-  CountOfTerritories = 'Count of Territories',
-  RelativePopulation = 'Relative Population', // Too make this more explicit
-  PercentOfGlobalLanguageSpeakers = '% of Global Language Speakers',
-  Literacy = 'Literacy',
-  Date = 'Date',
-  PopulationAttested = 'Population Attested',
-  PopulationOfDescendents = 'Population of Descendents',
-}
-
 export enum SearchableField {
   Code = 'ID',
   NameOrCode = 'English Name or ID',
@@ -70,8 +56,8 @@ export enum PageParamKey {
   profile = 'profile',
   searchBy = 'searchBy',
   searchString = 'searchString',
+  sortBehavior = 'sortBehavior',
   sortBy = 'sortBy',
-  sortDirection = 'sortDirection',
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
   view = 'view',
@@ -88,8 +74,8 @@ export type PageParams = {
   profile: ProfileType;
   searchBy: SearchableField;
   searchString: string;
+  sortBehavior: SortBehavior;
   sortBy: SortBy;
-  sortDirection: 'normal' | 'reverse'; // true for normal, false for reverse
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
@@ -106,8 +92,8 @@ export type PageParamsOptional = {
   profile?: ProfileType;
   searchBy?: SearchableField;
   searchString?: string;
+  sortBehavior?: SortBehavior;
   sortBy?: SortBy;
-  sortDirection?: 'normal' | 'reverse';
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;

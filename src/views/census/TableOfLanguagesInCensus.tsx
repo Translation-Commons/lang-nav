@@ -9,7 +9,8 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { CensusData } from '../../types/CensusTypes';
 import { LocaleData } from '../../types/DataTypes';
-import { ObjectType, SearchableField, SortBy } from '../../types/PageParamTypes';
+import { ObjectType, SearchableField } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import HoverableObject from '../common/HoverableObject';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { ObjectFieldHighlightedByPageSearch } from '../common/ObjectField';
@@ -110,7 +111,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
                 ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
                 : 'N/A',
             isNumeric: true,
-            sortParam: SortBy.RelativePopulation,
+            sortParam: SortBy.PercentOfTerritoryPopulation,
           },
           {
             key: 'Scope',
@@ -146,6 +147,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               ) + '%',
             isNumeric: true,
             isInitiallyVisible: false,
+            sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           },
           {
             key: 'Primary Territory',
