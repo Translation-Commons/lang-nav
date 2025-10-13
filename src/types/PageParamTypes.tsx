@@ -43,7 +43,6 @@ export enum SortBy {
   Date = 'Date',
   PopulationAttested = 'Population Attested',
   PopulationOfDescendents = 'Population of Descendents',
-  // New vitality-based sorts
   VitalityMetascore = 'Vitality: Metascore',
   VitalityISO = 'Vitality: ISO',
   VitalityEthnologue2013 = 'Vitality: Ethnologue 2013',
