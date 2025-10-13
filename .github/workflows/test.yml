@@ -1,19 +1,45 @@
 name: CI - Test
 
 on:
-  push:
-    branches: [main]
   pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
 
 jobs:
   test:
+    if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
-      - run: npm ci
-      - run: npm run test:run
-      - run: npm run test:coverage
+          
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run vitest (.test.tsx) tests
+        run: npm run test:run
+
+      - name: Compute vitest test coverage, it saves to an untracked JSON file
+        run: npm run test:coverage
+
+      - name: Produce markdown file that's easier to track based on the test coverage
+        run: node scripts/coverage-summary.mjs > test-coverage.md
+
+      - name: Commit changes to summary
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Style: auto-fix with prettier and eslint'
+          commit_user_name: 'LangNav Bot'
+          commit_user_email: 'noreply@github.com'
+          skip_dirty_check: false
