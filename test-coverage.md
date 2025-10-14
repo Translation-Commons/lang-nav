@@ -1,6 +1,6 @@
 ### Test Coverage (Vitest)
 
-| Path                                     |   Lines | Branchs |   Funcs |   Stmts |
+| Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
 | `All files`                              |     3.5 |    69.9 |    55.0 |     3.5 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
