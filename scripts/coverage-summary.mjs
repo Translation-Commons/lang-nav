@@ -19,14 +19,14 @@ function printPercent (num) {
 }
 function printFileRow(path, coverage) {
     printGenericRow([
-        '`'+path+'`',
+        `\`${path}\``,
         printPercent(coverage.lines.pct),
         printPercent(coverage.branches.pct),
         printPercent(coverage.functions.pct),
         printPercent(coverage.statements.pct),
     ]);
 }
-printGenericRow(['Path', 'Lines', 'Branchs', 'Funcs', 'Stmts']);
+printGenericRow(['Path', 'Lines', 'Branches', 'Funcs', 'Stmts']);
 printGenericRow(['-'.repeat(40), '------:', '------:', '------:', '------:']);
 
 function addCoverage(a, b) {
