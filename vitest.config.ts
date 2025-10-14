@@ -10,8 +10,18 @@ export default defineConfig({
     globals: true,
     reporters: ['default'],
     coverage: {
+      reporter: ['text', 'json', 'json-summary'],
       provider: 'v8',
-      exclude: ['src/main.tsx', 'src/vite-env.d.ts', '**/*.d.ts', '**/types/**', '**/*.stories.*'],
+      enabled: true,
+      exclude: [
+        'src/main.tsx',
+        'src/vite-env.d.ts',
+        '**/*.d.ts',
+        '**/types/**',
+        '**/*.stories.*',
+        'dist/**',
+        '*.config.*',
+      ],
       thresholds: {
         statements: 0,
         branches: 0,
