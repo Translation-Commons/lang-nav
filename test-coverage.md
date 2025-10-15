@@ -2,12 +2,12 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `All files`                              |     6.1 |    66.2 |    51.0 |     6.1 |
+| `All files`                              |     6.1 |    66.3 |    51.0 |     6.1 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |     6.2 |    66.4 |    51.2 |     6.2 |
+| `  src`                                  |     6.2 |    66.5 |    51.2 |     6.2 |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
-| `    controls`                           |     8.0 |    34.5 |    38.1 |     8.0 |
+| `    controls`                           |     8.0 |    35.2 |    38.1 |     8.0 |
 | `      components`                       |     0   |    33.3 |    33.3 |     0   |
 | `        Selector.tsx`                   |     0   |     0   |     0   |     0   |
 | `        SelectorDisplay.tsx`            |     0   |     0   |     0   |     0   |
@@ -43,7 +43,7 @@
 | `        useSearchSuggestions.tsx`       |     0   |     0   |     0   |     0   |
 | `        ViewSelector.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `      SidePanel.tsx`                    |     0   |     0   |     0   |     0   |
-| `      sort.tsx`                         |    54.5 |    28.6 |    60.0 |    54.5 |
+| `      sort.tsx`                         |    54.5 |    29.8 |    60.0 |    54.5 |
 | `    data`                               |     7.8 |    81.6 |    42.1 |     7.8 |
 | `      CensusData.tsx`                   |     0   |     0   |     0   |     0   |
 | `      CoreData.tsx`                     |     0   |     0   |     0   |     0   |
