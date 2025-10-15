@@ -7,7 +7,7 @@
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
 | `  src`                                  |    14.6 |    76.3 |    52.1 |    14.6 |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
-| `    controls`                           |     8.3 |    71.3 |    38.1 |     8.3 |
+| `    controls`                           |     8.2 |    71.3 |    38.1 |     8.2 |
 | `      components`                       |     0   |    33.3 |    33.3 |     0   |
 | `        Selector.tsx`                   |     0   |     0   |     0   |     0   |
 | `        SelectorDisplay.tsx`            |     0   |     0   |     0   |     0   |
@@ -43,7 +43,7 @@
 | `        useSearchSuggestions.tsx`       |     0   |     0   |     0   |     0   |
 | `        ViewSelector.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `      SidePanel.tsx`                    |     0   |     0   |     0   |     0   |
-| `      sort.tsx`                         |    62.3 |    84.1 |    60.0 |    62.3 |
+| `      sort.tsx`                         |    63.3 |    84.1 |    60.0 |    63.3 |
 | `    data`                               |    28.8 |    75.0 |    25.7 |    28.8 |
 | `      CensusData.tsx`                   |     2.7 |   100.0 |     0   |     2.7 |
 | `      CoreData.tsx`                     |    17.6 |   100.0 |     0   |    17.6 |
