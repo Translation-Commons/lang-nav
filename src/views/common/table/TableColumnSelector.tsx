@@ -1,10 +1,13 @@
 import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
+import { usePageParams } from '../../../controls/PageParamsContext';
 import Hoverable from '../../../generic/Hoverable';
+import { groupBy } from '../../../generic/setUtils';
 import { ObjectData } from '../../../types/DataTypes';
 
 import { TableColumn } from './ObjectTable';
+import TableSortButton from './TableSortButton';
 
 function TableColumnSelector<T extends ObjectData>({
   columns,
@@ -17,7 +20,7 @@ function TableColumnSelector<T extends ObjectData>({
   visibleColumns: Record<string, boolean>;
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
-  const columnsByGroup = getColumnsByGroup(columns);
+  const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
 
   return (
     <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
@@ -45,20 +48,6 @@ function TableColumnSelector<T extends ObjectData>({
         ))}
       </div>
     </details>
-  );
-}
-
-function getColumnsByGroup<T extends ObjectData>(
-  columns: TableColumn<T>[],
-): Record<string, TableColumn<T>[]> {
-  return columns.reduce(
-    (groups, column) => {
-      const group = column.columnGroup || column.key;
-      if (!groups[group]) groups[group] = [];
-      groups[group].push(column);
-      return groups;
-    },
-    {} as Record<string, TableColumn<T>[]>,
   );
 }
 
@@ -136,10 +125,18 @@ function ColumnCheckbox<T extends ObjectData>({
   isChecked: boolean;
   toggleColumn: (key: string) => void;
 }): React.ReactNode {
+  const { sortBy } = usePageParams();
   return (
     <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal' }}>
-      <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
+      <input
+        type="checkbox"
+        checked={isChecked || sortBy === column.sortParam}
+        onChange={() => toggleColumn(column.key)}
+      />
       {column.label ?? column.key}
+      {column.sortParam && (
+        <TableSortButton columnSortBy={column.sortParam} isNumeric={column.isNumeric} />
+      )}
     </label>
   );
 }

@@ -1,5 +1,6 @@
 import { ObjectData } from '../../../types/DataTypes';
-import { SearchableField, SortBy } from '../../../types/PageParamTypes';
+import { SearchableField } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import HoverableObject from '../HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
 

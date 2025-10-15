@@ -1,12 +1,22 @@
-import { uniqueBy } from '../generic/setUtils';
 import { ObjectData } from '../types/DataTypes';
 import { LanguageData, LanguageSource } from '../types/LanguageTypes';
-import { ObjectType, SortBy } from '../types/PageParamTypes';
+import { ObjectType } from '../types/PageParamTypes';
+import { SortBehavior, SortBy, SortDirection } from '../types/SortTypes';
+import {
+  getCountOfLanguages,
+  getCountOfTerritories,
+  getObjectDate,
+  getObjectLiteracy,
+} from '../views/common/getObjectMiscFields';
 import {
   getObjectPopulation,
   getObjectPopulationAttested,
   getObjectPopulationOfDescendents,
-} from '../views/common/ObjectField';
+  getObjectPopulationPercentInBiggestDescendentLanguage,
+  getObjectPopulationRelativeToOverallLanguageSpeakers,
+  getObjectPercentOfTerritoryPopulation,
+  getObjectMostImportantLanguageName,
+} from '../views/common/getObjectPopulation';
 import {
   computeVitalityMetascore,
   getEthnologue2013Score,
@@ -18,131 +28,128 @@ import { usePageParams } from './PageParamsContext';
 
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
-// TODO, it may be more performant to make a sortKey function
 export function getSortFunction(languageSource?: LanguageSource): SortByFunctionType {
-  const { sortBy, languageSource: languageSourcePageParam, sortDirection } = usePageParams();
+  const { sortBy, languageSource: languageSourcePageParam, sortBehavior } = usePageParams();
   const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
-  const sortFunction = getSortFunctionParameterized(sortBy, effectiveLanguageSource);
-  if (sortDirection === 'reverse') {
-    return (a, b) => -sortFunction(a, b);
+  return getSortFunctionParameterized(sortBy, effectiveLanguageSource, sortBehavior);
+}
+
+function getSortField(
+  object: ObjectData,
+  sortBy: SortBy,
+  effectiveLanguageSource: LanguageSource,
+): string | number | undefined {
+  switch (sortBy) {
+    case SortBy.Code:
+      return object.codeDisplay;
+    case SortBy.Name:
+      return object.nameDisplay;
+    case SortBy.Endonym:
+      return object.nameEndonym;
+    case SortBy.CountOfTerritories:
+      return getCountOfTerritories(object);
+    case SortBy.CountOfLanguages:
+      return getCountOfLanguages(object);
+    case SortBy.Literacy:
+      return getObjectLiteracy(object);
+    case SortBy.Date:
+      return getObjectDate(object);
+    case SortBy.Language:
+      return getObjectMostImportantLanguageName(object);
+
+    // Population
+    case SortBy.Population:
+      return getObjectPopulation(object);
+    case SortBy.PopulationAttested:
+      return getObjectPopulationAttested(object);
+    case SortBy.PopulationOfDescendents:
+      return getObjectPopulationOfDescendents(object, effectiveLanguageSource);
+    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+      return getObjectPopulationPercentInBiggestDescendentLanguage(object);
+    case SortBy.PercentOfTerritoryPopulation:
+      return getObjectPercentOfTerritoryPopulation(object);
+    case SortBy.PercentOfOverallLanguageSpeakers:
+      return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
+
+    // Vitality
+    case SortBy.VitalityMetascore: {
+      // Only process language objects, non-language objects sort to the end
+      if (object.type !== ObjectType.Language) {
+        return -Infinity;
+      }
+      const languageData = object as LanguageData;
+      const vitalityResult = computeVitalityMetascore(languageData);
+      // If no vitality data, sort to end but before non-language objects
+      return vitalityResult?.score ?? -1;
+    }
+    case SortBy.VitalityISO: {
+      if (object.type !== ObjectType.Language) {
+        return -Infinity;
+      }
+      const languageData = object as LanguageData;
+      return getISOScore(languageData.vitalityISO ?? '') ?? -1;
+    }
+    case SortBy.VitalityEthnologue2013: {
+      if (object.type !== ObjectType.Language) {
+        return -Infinity;
+      }
+      const languageData = object as LanguageData;
+      return getEthnologue2013Score(languageData.vitalityEth2013 ?? '') ?? -1;
+    }
+    case SortBy.VitalityEthnologue2025: {
+      if (object.type !== ObjectType.Language) {
+        return -Infinity;
+      }
+      const languageData = object as LanguageData;
+      return getEthnologue2025Score(languageData.vitalityEth2025 ?? '') ?? -1;
+    }
   }
-  return sortFunction;
 }
 
 export function getSortFunctionParameterized(
   sortBy: SortBy,
   effectiveLanguageSource: LanguageSource,
+  sortDirection: SortBehavior,
 ): SortByFunctionType {
+  const direction = getNormalSortDirection(sortBy) * sortDirection;
+  return (a: ObjectData, b: ObjectData) => {
+    const aField = getSortField(a, sortBy, effectiveLanguageSource);
+    const bField = getSortField(b, sortBy, effectiveLanguageSource);
+    if (aField == null) return bField == null ? 0 : 1;
+    if (bField == null) return -1; // puts last regardless of ascending/descending
+    if (aField > bField) return direction;
+    if (bField > aField) return -direction;
+    return 0;
+  };
+}
+
+export function getNormalSortDirection(sortBy: SortBy): SortDirection {
   switch (sortBy) {
-    case SortBy.Code:
-      return (a: ObjectData, b: ObjectData) => {
-        if (a.codeDisplay > b.codeDisplay) return 1;
-        if (b.codeDisplay > a.codeDisplay) return -1;
-        return 0;
-      };
     case SortBy.Name:
-      return (a: ObjectData, b: ObjectData) => {
-        if (a.nameDisplay > b.nameDisplay) return 1;
-        if (b.nameDisplay > a.nameDisplay) return -1;
-        return 0;
-      };
     case SortBy.Endonym:
-      return (a: ObjectData, b: ObjectData) => {
-        if (a.nameEndonym == null) return b.nameEndonym == null ? 0 : 1;
-        if (b.nameEndonym == null) return -1;
-        if (a.nameEndonym > b.nameEndonym) return 1;
-        if (b.nameEndonym > a.nameEndonym) return -1;
-        return 0;
-      };
-    case SortBy.CountOfTerritories:
-      return (a: ObjectData, b: ObjectData) => {
-        return getCountOfTerritories(b) - getCountOfTerritories(a);
-      };
-    case SortBy.CountOfLanguages:
-      return (a: ObjectData, b: ObjectData) => {
-        return getCountOfLanguages(b) - getCountOfLanguages(a);
-      };
-    case SortBy.Population:
-      return (a: ObjectData, b: ObjectData) => {
-        // Default order is descending (bigger populations first)
-        return getObjectPopulation(b) - getObjectPopulation(a);
-      };
-    case SortBy.PopulationAttested:
-      return (a: ObjectData, b: ObjectData) => {
-        return getObjectPopulationAttested(b) - getObjectPopulationAttested(a);
-      };
-    case SortBy.PopulationOfDescendents:
-      return (a: ObjectData, b: ObjectData) => {
-        return (
-          getObjectPopulationOfDescendents(b, effectiveLanguageSource) -
-          getObjectPopulationOfDescendents(a, effectiveLanguageSource)
-        );
-      };
-    case SortBy.RelativePopulation:
-      return (a: ObjectData, b: ObjectData) => {
-        switch (a.type) {
-          case ObjectType.Census:
-          case ObjectType.WritingSystem:
-          case ObjectType.VariantTag:
-            // No relative population to sort by
-            return 0;
-          case ObjectType.Language:
-            return b.type === ObjectType.Language
-              ? (b.largestDescendant?.populationEstimate ?? 0) / (b.populationEstimate ?? 1) -
-                  (a.largestDescendant?.populationEstimate ?? 0) / (a.populationEstimate ?? 1)
-              : -1;
-          case ObjectType.Locale:
-            return b.type === ObjectType.Locale
-              ? (b.populationSpeakingPercent ?? 0) - (a.populationSpeakingPercent ?? 0)
-              : -1;
-          case ObjectType.Territory:
-            return b.type === ObjectType.Territory
-              ? // Err, this is not the same percent as above.
-                b.population / (b.parentUNRegion?.population ?? 1) -
-                  a.population / (a.parentUNRegion?.population ?? 1)
-              : -1;
-        }
-      };
-    case SortBy.Literacy:
-      return (a: ObjectData, b: ObjectData) => {
-        switch (a.type) {
-          case ObjectType.Census:
-          case ObjectType.Language:
-          case ObjectType.WritingSystem:
-          case ObjectType.VariantTag:
-            // No literacy value to sort by
-            return 0;
-          case ObjectType.Locale:
-            return b.type === ObjectType.Locale
-              ? (b.literacyPercent ?? 0) - (a.literacyPercent ?? 0)
-              : -1;
-          case ObjectType.Territory:
-            return b.type === ObjectType.Territory
-              ? // Err, this is not the same percent as above.
-                (b.literacyPercent ?? 0) - (a.literacyPercent ?? 0)
-              : -1;
-        }
-      };
-
+    case SortBy.Code:
+    case SortBy.Language:
+      return SortDirection.Ascending; // A to Z
     case SortBy.Date:
-      return (a, b) => getDate(b) - getDate(a);
-
+    case SortBy.Population:
+    case SortBy.PopulationAttested:
+    case SortBy.PopulationOfDescendents:
+    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.PercentOfTerritoryPopulation:
+    case SortBy.PercentOfOverallLanguageSpeakers:
+    case SortBy.Literacy:
+    case SortBy.CountOfLanguages:
+    case SortBy.CountOfTerritories:
     case SortBy.VitalityMetascore:
-      return makeVitalityComparator((lang) => computeVitalityMetascore(lang).score);
-    
     case SortBy.VitalityISO:
-      return makeVitalityComparator((lang) => getISOScore(lang.vitalityISO ?? ''));
-    
     case SortBy.VitalityEthnologue2013:
-      return makeVitalityComparator((lang) => getEthnologue2013Score(lang.vitalityEth2013 ?? ''));
-    
     case SortBy.VitalityEthnologue2025:
-      return makeVitalityComparator((lang) => getEthnologue2025Score(lang.vitalityEth2025 ?? ''));
-      
+      return SortDirection.Descending; // High to Low
   }
 }
 
+/** Not necessarily exhaustive, just the ones that will appear in the sidebar */
 export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy[] {
   switch (objectType) {
     case ObjectType.Locale:
@@ -152,7 +159,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Endonym,
         SortBy.Population,
         SortBy.Literacy,
-        SortBy.RelativePopulation,
+        SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.CountOfLanguages,
       ];
     case ObjectType.Territory:
@@ -170,7 +177,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Name,
         SortBy.Endonym,
         SortBy.Population,
-        // SortBy.Literacy, Data not available yet
+        SortBy.Literacy,
         SortBy.CountOfTerritories,
         SortBy.CountOfLanguages,
         SortBy.PopulationAttested,
@@ -195,69 +202,4 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
     case ObjectType.VariantTag:
       return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
   }
-}
-
-export function getUniqueTerritoriesForLanguage(lang: LanguageData): string[] {
-  return uniqueBy(
-    lang.locales
-      .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0))
-      .map((l) => l.territory?.nameDisplay ?? l.territoryCode)
-      .filter((name) => name != null)
-      .filter((name) => name !== ''),
-    (name) => name,
-  );
-}
-
-function getDate(object: ObjectData): number {
-  switch (object.type) {
-    case ObjectType.Census:
-      return object.yearCollected;
-    case ObjectType.VariantTag:
-      return object.dateAdded?.getTime() ?? 0;
-    default:
-      return 0;
-  }
-}
-
-function getCountOfLanguages(object: ObjectData): number {
-  switch (object.type) {
-    case ObjectType.Language:
-      return object.childLanguages.length;
-    case ObjectType.Locale:
-      return object.containedLocales?.length || 0;
-    case ObjectType.Census:
-      return object.languageCount;
-    case ObjectType.WritingSystem:
-      return object.languages ? Object.values(object.languages).length : 0;
-    case ObjectType.Territory:
-      return object.locales?.length || 0;
-    case ObjectType.VariantTag:
-      return object.languageCodes?.length || 0;
-    default:
-      return 0;
-  }
-}
-
-function getCountOfTerritories(object: ObjectData): number {
-  switch (object.type) {
-    case ObjectType.Language:
-      return getUniqueTerritoriesForLanguage(object).length;
-    case ObjectType.Territory:
-      return object.containsTerritories?.length || 0;
-    case ObjectType.Locale:
-    case ObjectType.Census:
-    case ObjectType.WritingSystem:
-    case ObjectType.VariantTag:
-      return 0;
-  }
-}
-
-function makeVitalityComparator(
-  getScore: (lang: LanguageData) => number | null | undefined
-): SortByFunctionType {
-  return (a: ObjectData, b: ObjectData) => {
-    const aVal = a.type === ObjectType.Language ? getScore(a) ?? -1 : -1;
-    const bVal = b.type === ObjectType.Language ? getScore(b) ?? -1 : -1;
-    return bVal - aVal; // higher score first
-  };
 }
