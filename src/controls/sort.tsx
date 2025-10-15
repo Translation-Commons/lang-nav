@@ -76,33 +76,33 @@ function getSortField(
     case SortBy.VitalityMetascore: {
       // Only process language objects, non-language objects sort to the end
       if (object.type !== ObjectType.Language) {
-        return -Infinity;
+        return undefined;
       }
       const languageData = object as LanguageData;
       const vitalityResult = computeVitalityMetascore(languageData);
       // If no vitality data, sort to end but before non-language objects
-      return vitalityResult?.score ?? -1;
+      return vitalityResult?.score ?? undefined;
     }
     case SortBy.VitalityISO: {
       if (object.type !== ObjectType.Language) {
-        return -Infinity;
+        return undefined;
       }
       const languageData = object as LanguageData;
-      return getISOScore(languageData.vitalityISO ?? '') ?? -1;
+      return getISOScore(languageData.vitalityISO ?? '') ?? undefined;
     }
     case SortBy.VitalityEthnologue2013: {
       if (object.type !== ObjectType.Language) {
-        return -Infinity;
+        return undefined;
       }
       const languageData = object as LanguageData;
-      return getEthnologue2013Score(languageData.vitalityEth2013 ?? '') ?? -1;
+      return getEthnologue2013Score(languageData.vitalityEth2013 ?? '') ?? undefined;
     }
     case SortBy.VitalityEthnologue2025: {
       if (object.type !== ObjectType.Language) {
-        return -Infinity;
+        return undefined;
       }
       const languageData = object as LanguageData;
-      return getEthnologue2025Score(languageData.vitalityEth2025 ?? '') ?? -1;
+      return getEthnologue2025Score(languageData.vitalityEth2025 ?? '') ?? undefined;
     }
   }
 }
