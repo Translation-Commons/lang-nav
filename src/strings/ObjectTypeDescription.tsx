@@ -1,6 +1,5 @@
+import { ObjectType } from '@widgets/PageParamTypes';
 import React from 'react';
-
-import { ObjectType } from '../types/PageParamTypes';
 
 const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   switch (objectType) {
