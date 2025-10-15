@@ -119,23 +119,27 @@ const LanguageTable: React.FC = () => {
         {
           key: 'Vitality: Metascore',
           render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
+          sortParam: SortBy.VitalityMetascore,
           columnGroup: 'Vitality',
         },
         {
           key: 'Vitality: ISO',
           render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.ISO} />,
+          sortParam: SortBy.VitalityISO,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
         },
         {
           key: 'Vitality: Ethnologue 2013',
           render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2013} />,
+          sortParam: SortBy.VitalityEthnologue2013,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
         },
         {
           key: 'Vitality: Ethnologue 2025',
           render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2025} />,
+          sortParam: SortBy.VitalityEthnologue2025,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
         },

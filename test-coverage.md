@@ -2,12 +2,12 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `All files`                              |     3.5 |    69.9 |    55.0 |     3.5 |
+| `All files`                              |     6.0 |    66.3 |    51.0 |     6.0 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |     3.5 |    70.2 |    55.3 |     3.5 |
+| `  src`                                  |     6.1 |    66.5 |    51.2 |     6.1 |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
-| `    controls`                           |     3.5 |    46.9 |    36.8 |     3.5 |
+| `    controls`                           |     7.5 |    35.2 |    38.1 |     7.5 |
 | `      components`                       |     0   |    33.3 |    33.3 |     0   |
 | `        Selector.tsx`                   |     0   |     0   |     0   |     0   |
 | `        SelectorDisplay.tsx`            |     0   |     0   |     0   |     0   |
@@ -43,7 +43,7 @@
 | `        useSearchSuggestions.tsx`       |     0   |     0   |     0   |     0   |
 | `        ViewSelector.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `      SidePanel.tsx`                    |     0   |     0   |     0   |     0   |
-| `      sort.tsx`                         |     0   |   100.0 |   100.0 |     0   |
+| `      sort.tsx`                         |    52.6 |    29.8 |    60.0 |    52.6 |
 | `    data`                               |     7.8 |    81.6 |    42.1 |     7.8 |
 | `      CensusData.tsx`                   |     0   |     0   |     0   |     0   |
 | `      CoreData.tsx`                     |     0   |     0   |     0   |     0   |
@@ -61,7 +61,7 @@
 | `      TerritoryData.tsx`                |     0   |     0   |     0   |     0   |
 | `      UnicodeData.tsx`                  |     0   |     0   |     0   |     0   |
 | `      WikipediaData.tsx`                |     0   |   100.0 |   100.0 |     0   |
-| `    generic`                            |     7.4 |    64.5 |    45.5 |     7.4 |
+| `    generic`                            |     8.7 |    69.0 |    38.5 |     8.7 |
 | `      CommaSeparated.tsx`               |     0   |     0   |     0   |     0   |
 | `      Deemphasized.tsx`                 |     0   |   100.0 |   100.0 |     0   |
 | `      Highlightable.tsx`                |    87.5 |    71.4 |   100.0 |    87.5 |
@@ -69,11 +69,11 @@
 | `      HoverableButton.tsx`              |     0   |   100.0 |   100.0 |     0   |
 | `      HoverableEnumeration.tsx`         |     0   |   100.0 |   100.0 |     0   |
 | `      HoverCardContext.tsx`             |     0   |     0   |     0   |     0   |
-| `      LinkButton.tsx`                   |     0   |     0   |     0   |     0   |
+| `      LinkButton.tsx`                   |     4.2 |   100.0 |     0   |     4.2 |
 | `      numberUtils.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      PercentageDifference.tsx`         |     0   |   100.0 |   100.0 |     0   |
 | `      PositionInGroup.tsx`              |     0   |     0   |     0   |     0   |
-| `      setUtils.tsx`                     |     0   |     0   |     0   |     0   |
+| `      setUtils.tsx`                     |    13.2 |   100.0 |     0   |    13.2 |
 | `      stringUtils.tsx`                  |    51.6 |   100.0 |    40.0 |    51.6 |
 | `      useAutoAdjustedWidth.tsx`         |     0   |     0   |     0   |     0   |
 | `      useClickOutside.tsx`              |     0   |     0   |     0   |     0   |
@@ -91,7 +91,7 @@
 | `    strings`                            |     0   |   100.0 |   100.0 |     0   |
 | `      ObjectTypeDescription.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    views`                              |     1.4 |    71.0 |    67.4 |     1.4 |
+| `    views`                              |     4.8 |    75.6 |    59.8 |     4.8 |
 | `      census`                           |     0   |    87.5 |    87.5 |     0   |
 | `        CensusCard.tsx`                 |     0   |   100.0 |   100.0 |     0   |
 | `        CensusCardList.tsx`             |     0   |   100.0 |   100.0 |     0   |
@@ -101,7 +101,7 @@
 | `        TableOfAllCensuses.tsx`         |     0   |   100.0 |   100.0 |     0   |
 | `        TableOfCountriesWithCensuses.tsx` |     0   |   100.0 |   100.0 |     0   |
 | `        TableOfLanguagesInCensus.tsx`   |     0   |     0   |     0   |     0   |
-| `      common`                           |     2.3 |    58.3 |    53.6 |     2.3 |
+| `      common`                           |     3.8 |    61.8 |    36.6 |     3.8 |
 | `        CardList.tsx`                   |     0   |     0   |     0   |     0   |
 | `        CLDRCoverageInfo.tsx`           |     0   |     0   |     0   |     0   |
 | `        CollapsibleReport.tsx`          |     0   |   100.0 |   100.0 |     0   |
@@ -111,9 +111,9 @@
 | `          ObjectDetails.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `          ObjectDetailsPage.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `        getObjectFromID.tsx`            |     0   |     0   |     0   |     0   |
-| `        getObjectMiscFields.tsx`        |     0   |     0   |     0   |     0   |
+| `        getObjectMiscFields.tsx`        |    10.7 |   100.0 |     0   |    10.7 |
 | `        getObjectName.tsx`              |     0   |   100.0 |   100.0 |     0   |
-| `        getObjectPopulation.tsx`        |     0   |     0   |     0   |     0   |
+| `        getObjectPopulation.tsx`        |     8.0 |   100.0 |     0   |     8.0 |
 | `        HoverableObject.tsx`            |     0   |     0   |     0   |     0   |
 | `        HoverableObjectName.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `        ObjectField.tsx`                |    64.6 |    72.7 |    66.7 |    64.6 |
@@ -133,7 +133,7 @@
 | `          TreeListRoot.tsx`             |     0   |   100.0 |   100.0 |     0   |
 | `      DataPageBody.tsx`                 |     0   |   100.0 |   100.0 |     0   |
 | `      DataViews.tsx`                    |     0   |     0   |     0   |     0   |
-| `      language`                         |     0   |    53.8 |    53.8 |     0   |
+| `      language`                         |    13.2 |    76.3 |    61.1 |    13.2 |
 | `        LanguageCard.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageCardList.tsx`           |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageDetails.tsx`            |     0   |     0   |     0   |     0   |
@@ -142,7 +142,7 @@
 | `        LanguageSuggestions.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageTable.tsx`              |     0   |     0   |     0   |     0   |
 | `        LanguageVitalityCell.tsx`       |     0   |     0   |     0   |     0   |
-| `        LanguageVitalityComputation.tsx` |     0   |   100.0 |   100.0 |     0   |
+| `        LanguageVitalityComputation.tsx` |    83.9 |    81.3 |    83.3 |    83.9 |
 | `        LanguageVitalityMeter.tsx`      |     0   |   100.0 |   100.0 |     0   |
 | `        reports`                        |     0   |     0   |     0   |     0   |
 | `          DubiousLanguages.tsx`         |     0   |     0   |     0   |     0   |

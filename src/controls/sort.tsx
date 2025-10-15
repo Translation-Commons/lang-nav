@@ -1,5 +1,5 @@
 import { ObjectData } from '../types/DataTypes';
-import { LanguageSource } from '../types/LanguageTypes';
+import { LanguageData, LanguageSource } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 import { SortBehavior, SortBy, SortDirection } from '../types/SortTypes';
 import {
@@ -9,14 +9,20 @@ import {
   getObjectLiteracy,
 } from '../views/common/getObjectMiscFields';
 import {
-  getObjectPopulationPercentInBiggestDescendentLanguage,
   getObjectPopulation,
   getObjectPopulationAttested,
   getObjectPopulationOfDescendents,
+  getObjectPopulationPercentInBiggestDescendentLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
   getObjectPercentOfTerritoryPopulation,
   getObjectMostImportantLanguageName,
 } from '../views/common/getObjectPopulation';
+import {
+  computeVitalityMetascore,
+  getEthnologue2013Score,
+  getEthnologue2025Score,
+  getISOScore,
+} from '../views/language/LanguageVitalityComputation';
 
 import { usePageParams } from './PageParamsContext';
 
@@ -65,10 +71,28 @@ function getSortField(
       return getObjectPercentOfTerritoryPopulation(object);
     case SortBy.PercentOfOverallLanguageSpeakers:
       return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
+
+    // Vitality
+    case SortBy.VitalityMetascore:
+      return object.type === ObjectType.Language
+        ? (computeVitalityMetascore(object)?.score ?? undefined)
+        : undefined;
+    case SortBy.VitalityISO:
+      return object.type === ObjectType.Language
+        ? (getISOScore((object as LanguageData).vitalityISO ?? '') ?? undefined)
+        : undefined;
+    case SortBy.VitalityEthnologue2013:
+      return object.type === ObjectType.Language
+        ? (getEthnologue2013Score((object as LanguageData).vitalityEth2013 ?? '') ?? undefined)
+        : undefined;
+    case SortBy.VitalityEthnologue2025:
+      return object.type === ObjectType.Language
+        ? (getEthnologue2025Score((object as LanguageData).vitalityEth2025 ?? '') ?? undefined)
+        : undefined;
   }
 }
 
-function getSortFunctionParameterized(
+export function getSortFunctionParameterized(
   sortBy: SortBy,
   effectiveLanguageSource: LanguageSource,
   sortDirection: SortBehavior,
@@ -102,6 +126,10 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.Literacy:
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
+    case SortBy.VitalityMetascore:
+    case SortBy.VitalityISO:
+    case SortBy.VitalityEthnologue2013:
+    case SortBy.VitalityEthnologue2025:
       return SortDirection.Descending; // High to Low
   }
 }
@@ -138,6 +166,11 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.CountOfTerritories,
         SortBy.CountOfLanguages,
         SortBy.PopulationAttested,
+        // New vitality sorts
+        SortBy.VitalityMetascore,
+        SortBy.VitalityISO,
+        SortBy.VitalityEthnologue2013,
+        SortBy.VitalityEthnologue2025,
       ];
     case ObjectType.Census:
       return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];

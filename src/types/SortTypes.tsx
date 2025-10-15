@@ -15,6 +15,10 @@ export enum SortBy {
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
   PopulationPercentInBiggestDescendentLanguage = 'Biggest Descendent Relative Population',
+  VitalityMetascore = 'Vitality: Metascore',
+  VitalityISO = 'Vitality: ISO',
+  VitalityEthnologue2013 = 'Vitality: Ethnologue 2013',
+  VitalityEthnologue2025 = 'Vitality: Ethnologue 2025',
 }
 
 // Human-friendly display direction for sorting
