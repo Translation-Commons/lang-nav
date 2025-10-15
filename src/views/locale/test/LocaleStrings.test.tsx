@@ -55,6 +55,7 @@ describe('getLocaleName', () => {
         nameDisplay: 'China',
         scope: TerritoryScope.Country,
         population: 1e9,
+        populationFromUN: 1e9,
         names: ['China'],
       },
       writingSystem: {

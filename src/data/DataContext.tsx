@@ -133,7 +133,7 @@ export const DataProvider: React.FC<{
   }, [coreData, loadProgress]); // this is called once after page load
 
   useEffect(() => {
-    updateLanguageBasedOnSource(
+    updateLanguagesBasedOnSource(
       languagesInSelectedSource,
       coreData.locales,
       languageSource,
@@ -144,7 +144,7 @@ export const DataProvider: React.FC<{
   return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
 };
 
-function updateLanguageBasedOnSource(
+export function updateLanguagesBasedOnSource(
   languages: LanguageData[],
   locales: LocaleData[],
   languageSource: LanguageSource,

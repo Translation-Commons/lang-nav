@@ -1,7 +1,29 @@
 import { sumBy, uniqueBy } from '../../generic/setUtils';
-import { ObjectData, TerritoryData, TerritoryScope } from '../../types/DataTypes';
+import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '../../types/DataTypes';
 import { LanguageData } from '../../types/LanguageTypes';
 import { ObjectType } from '../../types/PageParamTypes';
+
+export function getTerritoryBiggestLocale(territory: TerritoryData): LocaleData | undefined {
+  return (territory?.locales || []).sort(
+    (a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0),
+  )[0];
+}
+
+// SortBy.Language
+export function getObjectMostImportantLanguageName(object: ObjectData): string | undefined {
+  switch (object.type) {
+    case ObjectType.Territory:
+      return getTerritoryBiggestLocale(object)?.language?.nameDisplay;
+    case ObjectType.Locale:
+      return object.language?.nameDisplay;
+    case ObjectType.Language:
+      return object.nameDisplay;
+    case ObjectType.Census:
+    case ObjectType.VariantTag:
+    case ObjectType.WritingSystem:
+      return undefined;
+  }
+}
 
 export function getUniqueTerritoriesForLanguage(lang: LanguageData): TerritoryData[] {
   return uniqueBy(
@@ -13,12 +35,17 @@ export function getUniqueTerritoriesForLanguage(lang: LanguageData): TerritoryDa
 }
 
 // SortBy.Date
-export function getObjectDate(object: ObjectData): number | undefined {
+export function getObjectDateAsNumber(object: ObjectData): number | undefined {
+  const date = getObjectDate(object);
+  return date ? date.getTime() : undefined;
+}
+
+export function getObjectDate(object: ObjectData): Date | undefined {
   switch (object.type) {
     case ObjectType.Census:
-      return object.yearCollected;
+      return new Date(object.yearCollected + '-01-02'); // The 2nd so timezone changes don't affect the year
     case ObjectType.VariantTag:
-      return object.dateAdded?.getTime();
+      return object.dateAdded;
     case ObjectType.Language:
     case ObjectType.Locale:
     case ObjectType.WritingSystem:
@@ -33,13 +60,15 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
     case ObjectType.Language:
       return object.childLanguages.length;
     case ObjectType.Locale:
-      return object.containedLocales?.length;
+      return object.containedLocales?.length; // Actually count of locales, not languages
     case ObjectType.Census:
       return object.languageCount;
     case ObjectType.WritingSystem:
       return object.languages ? Object.values(object.languages).length : undefined;
     case ObjectType.Territory:
-      return object.locales?.length;
+      return object.locales && object.locales.length > 0
+        ? uniqueBy(object.locales, (loc) => loc.languageCode).length
+        : undefined;
     case ObjectType.VariantTag:
       return object.languageCodes?.length;
   }

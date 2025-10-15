@@ -5,8 +5,9 @@ import { SortBehavior, SortBy, SortDirection } from '../types/SortTypes';
 import {
   getCountOfLanguages,
   getCountOfTerritories,
-  getObjectDate,
+  getObjectDateAsNumber,
   getObjectLiteracy,
+  getObjectMostImportantLanguageName,
 } from '../views/common/getObjectMiscFields';
 import {
   getObjectPopulation,
@@ -15,7 +16,6 @@ import {
   getObjectPopulationPercentInBiggestDescendentLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
   getObjectPercentOfTerritoryPopulation,
-  getObjectMostImportantLanguageName,
 } from '../views/common/getObjectPopulation';
 import {
   computeVitalityMetascore,
@@ -54,7 +54,7 @@ function getSortField(
     case SortBy.Literacy:
       return getObjectLiteracy(object);
     case SortBy.Date:
-      return getObjectDate(object);
+      return getObjectDateAsNumber(object);
     case SortBy.Language:
       return getObjectMostImportantLanguageName(object);
 
@@ -74,21 +74,17 @@ function getSortField(
 
     // Vitality
     case SortBy.VitalityMetascore:
-      return object.type === ObjectType.Language
-        ? (computeVitalityMetascore(object)?.score ?? undefined)
-        : undefined;
+      if (object.type !== ObjectType.Language) return undefined;
+      return computeVitalityMetascore(object)?.score ?? undefined;
     case SortBy.VitalityISO:
-      return object.type === ObjectType.Language
-        ? (getISOScore((object as LanguageData).vitalityISO ?? '') ?? undefined)
-        : undefined;
+      if (object.type !== ObjectType.Language) return undefined;
+      return getISOScore(object.vitalityISO ?? '') ?? undefined;
     case SortBy.VitalityEthnologue2013:
-      return object.type === ObjectType.Language
-        ? (getEthnologue2013Score((object as LanguageData).vitalityEth2013 ?? '') ?? undefined)
-        : undefined;
+      if (object.type !== ObjectType.Language) return undefined;
+      return getEthnologue2013Score(object.vitalityEth2013 ?? '') ?? undefined;
     case SortBy.VitalityEthnologue2025:
-      return object.type === ObjectType.Language
-        ? (getEthnologue2025Score((object as LanguageData).vitalityEth2025 ?? '') ?? undefined)
-        : undefined;
+      if (object.type !== ObjectType.Language) return undefined;
+      return getEthnologue2025Score(object.vitalityEth2025 ?? '') ?? undefined;
   }
 }
 

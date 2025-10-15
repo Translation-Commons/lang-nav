@@ -6,7 +6,7 @@ import { sumBy } from '../../generic/setUtils';
 import { TerritoryData } from '../../types/DataTypes';
 import { SortBy } from '../../types/SortTypes';
 import { getTerritoryChildren } from '../common/getObjectMiscFields';
-import { getTerritoryBiggestLocale } from '../common/getObjectPopulation';
+import { getTerritoryBiggestLocale } from '../common/getObjectMiscFields';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';

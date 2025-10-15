@@ -56,7 +56,8 @@ export interface TerritoryData extends ObjectBase {
   codeDisplay: TerritoryCode;
   nameDisplay: string;
   scope: TerritoryScope;
-  population: number;
+  population: number; // May be reduced when re-computing with dependent territories
+  populationFromUN: number; // Imported by the TSV
 
   // Supplemental data
   containedUNRegionCode?: UNM49Code;

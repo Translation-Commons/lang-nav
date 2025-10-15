@@ -211,7 +211,7 @@ function computeWritingSystemDescendentPopulation(writingSystem: WritingSystemDa
       (total, childSystem) => total + computeWritingSystemDescendentPopulation(childSystem),
       0,
     ) || 0;
-  writingSystem.populationOfDescendents = descendentPopulation;
+  writingSystem.populationOfDescendents = descendentPopulation || undefined;
   return descendentPopulation + (writingSystem.populationUpperBound ?? 0);
 }
 
