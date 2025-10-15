@@ -73,37 +73,22 @@ function getSortField(
       return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
 
     // Vitality
-    case SortBy.VitalityMetascore: {
-      // Only process language objects, non-language objects sort to the end
-      if (object.type !== ObjectType.Language) {
-        return undefined;
-      }
-      const languageData = object as LanguageData;
-      const vitalityResult = computeVitalityMetascore(languageData);
-      // If no vitality data, sort to end but before non-language objects
-      return vitalityResult?.score ?? undefined;
-    }
-    case SortBy.VitalityISO: {
-      if (object.type !== ObjectType.Language) {
-        return undefined;
-      }
-      const languageData = object as LanguageData;
-      return getISOScore(languageData.vitalityISO ?? '') ?? undefined;
-    }
-    case SortBy.VitalityEthnologue2013: {
-      if (object.type !== ObjectType.Language) {
-        return undefined;
-      }
-      const languageData = object as LanguageData;
-      return getEthnologue2013Score(languageData.vitalityEth2013 ?? '') ?? undefined;
-    }
-    case SortBy.VitalityEthnologue2025: {
-      if (object.type !== ObjectType.Language) {
-        return undefined;
-      }
-      const languageData = object as LanguageData;
-      return getEthnologue2025Score(languageData.vitalityEth2025 ?? '') ?? undefined;
-    }
+    case SortBy.VitalityMetascore:
+      return object.type === ObjectType.Language
+        ? (computeVitalityMetascore(object)?.score ?? undefined)
+        : undefined;
+    case SortBy.VitalityISO:
+      return object.type === ObjectType.Language
+        ? (getISOScore((object as LanguageData).vitalityISO ?? '') ?? undefined)
+        : undefined;
+    case SortBy.VitalityEthnologue2013:
+      return object.type === ObjectType.Language
+        ? (getEthnologue2013Score((object as LanguageData).vitalityEth2013 ?? '') ?? undefined)
+        : undefined;
+    case SortBy.VitalityEthnologue2025:
+      return object.type === ObjectType.Language
+        ? (getEthnologue2025Score((object as LanguageData).vitalityEth2025 ?? '') ?? undefined)
+        : undefined;
   }
 }
 
