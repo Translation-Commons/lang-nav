@@ -35,7 +35,7 @@ describe('Vitality Sorting', () => {
       const langs = [
         createLanguageWithVitality('en', 'English', {
           eth2013: 'National',
-          eth2025: '1 Institutional',
+          eth2025: 'Institutional',
         }), // 9
         createLanguageWithVitality('fr', 'French', { eth2013: 'Vigorous' }), // 4
         createLanguageWithVitality('es', 'Spanish', { eth2013: 'Shifting' }), // 3
@@ -140,9 +140,9 @@ describe('Vitality Sorting', () => {
   describe('VitalityEthnologue2025', () => {
     it('sorts by Ethnologue 2025 scores', () => {
       const langs = [
-        createLanguageWithVitality('en', 'English', { eth2025: '1 Institutional' }), // 9
-        createLanguageWithVitality('fr', 'French', { eth2025: '2 Stable' }), // 6
-        createLanguageWithVitality('gd', 'Scottish Gaelic', { eth2025: '3 Endangered' }), // 3
+        createLanguageWithVitality('en', 'English', { eth2025: 'Institutional' }), // 9
+        createLanguageWithVitality('fr', 'French', { eth2025: 'Stable' }), // 6
+        createLanguageWithVitality('gd', 'Scottish Gaelic', { eth2025: 'Endangered' }), // 3
       ];
 
       const sortFn = getSortFunctionParameterized(
