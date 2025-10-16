@@ -1,20 +1,19 @@
 import { LanguageData } from '@entities/language/LanguageTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import ViewCard from '@features/cardlist/ViewCard';
 import { useDataContext } from '@features/data-loading/DataContext';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getSliceFunction,
+} from '@features/filtering/filter';
+import CollapsibleReport from '@features/reports/CollapsibleReport';
+import { getSortFunction } from '@features/sorting/sort';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LimitInput from '@widgets/controls/selectors/LimitInput';
 import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import React, { useMemo } from 'react';
-
-import ViewCard from '../../../features/cardlist/ViewCard';
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getSliceFunction,
-} from '../../../features/filtering/filter';
-import CollapsibleReport from '../../../features/reports/CollapsibleReport';
-import { getSortFunction } from '../../../features/sorting/sort';
 
 const DubiousLanguages: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =

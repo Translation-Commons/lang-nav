@@ -2,17 +2,17 @@ import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
+import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
 import LinkButton from '@shared/ui/LinkButton';
 import { usePageParams } from '@widgets/PageParamsProvider';
+import PopulationWarning from '@widgets/PopulationWarning';
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { getSortFunction } from '../../features/sorting/sort';
-import PopulationWarning from '../../widgets/PopulationWarning';
 import { getLocaleTreeNodes } from '../locale/LocaleHierarchy';
 
 import LanguageDetailsVitalityAndViability from './LanguageDetailsVitalityAndViability';

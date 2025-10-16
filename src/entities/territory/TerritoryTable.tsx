@@ -4,12 +4,11 @@ import { TerritoryData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
+import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
+import ObjectTable from '@features/table/ObjectTable';
 import { sumBy } from '@shared/lib/setUtils';
 import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
 import React from 'react';
-
-import { CodeColumn, NameColumn } from '../../features/table/CommonColumns';
-import ObjectTable from '../../features/table/ObjectTable';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();

@@ -4,9 +4,8 @@
 
 import { ObjectType } from '@widgets/PageParamTypes';
 
-import { LanguageCode, LanguageData } from '../language/LanguageTypes';
-
 import { CensusData } from '../census/CensusTypes';
+import { LanguageCode, LanguageData } from '../language/LanguageTypes';
 
 export interface ObjectBase {
   readonly type: ObjectType;

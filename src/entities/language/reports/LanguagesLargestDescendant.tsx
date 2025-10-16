@@ -2,14 +2,13 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendentLanguage } from '@entities/lib/getObjectPopulation';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import { useDataContext } from '@features/data-loading/DataContext';
+import CollapsibleReport from '@features/reports/CollapsibleReport';
 import { SortBy } from '@features/sorting/SortTypes';
+import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
+import ObjectTable from '@features/table/ObjectTable';
+import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Selector from '@widgets/controls/components/Selector';
 import React, { useMemo } from 'react';
-
-import CollapsibleReport from '../../../features/reports/CollapsibleReport';
-import { CodeColumn, NameColumn } from '../../../features/table/CommonColumns';
-import ObjectTable from '../../../features/table/ObjectTable';
-import { numberToFixedUnlessSmall } from '../../../shared/lib/numberUtils';
 
 const LanguagesLargestDescendant: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();

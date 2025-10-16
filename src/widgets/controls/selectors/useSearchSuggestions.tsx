@@ -1,10 +1,10 @@
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 import { useDataContext } from '@features/data-loading/DataContext';
+import { getScopeFilter, getSubstringFilterOnQuery } from '@features/filtering/filter';
 import { uniqueBy } from '@shared/lib/setUtils';
 import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
 import { useMemo } from 'react';
 
-import { getScopeFilter, getSubstringFilterOnQuery } from '../../../features/filtering/filter';
 import { usePageParams } from '../../PageParamsProvider';
 import { Suggestion } from '../components/TextInput';
 

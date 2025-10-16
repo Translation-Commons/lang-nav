@@ -1,8 +1,7 @@
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+import { getMockedObjects } from '@tests/MockObjects';
 import { describe, expect, it } from 'vitest';
-
-import { getMockedObjects } from '../../tests/MockObjects';
 
 import { getSortFunctionParameterized } from './sort';
 import { SortBehavior, SortBy } from './SortTypes';

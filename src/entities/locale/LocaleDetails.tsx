@@ -2,12 +2,12 @@ import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
+import { numberToFixedUnlessSmall, numberToSigFigs } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 import React from 'react';
 
-import { numberToFixedUnlessSmall, numberToSigFigs } from '../../shared/lib/numberUtils';
 import ObjectWikipediaInfo from '../ui/ObjectWikipediaInfo';
 
 import LocaleCensusCitation from './LocaleCensusCitation';

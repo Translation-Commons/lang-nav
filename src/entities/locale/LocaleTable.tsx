@@ -2,15 +2,15 @@ import { LocaleData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
+import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
+import ObjectTable from '@features/table/ObjectTable';
+import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import { usePageParams } from '@widgets/PageParamsProvider';
+import PopulationWarning from '@widgets/PopulationWarning';
 import React from 'react';
 
-import { CodeColumn, EndonymColumn, NameColumn } from '../../features/table/CommonColumns';
-import ObjectTable from '../../features/table/ObjectTable';
-import { numberToFixedUnlessSmall } from '../../shared/lib/numberUtils';
-import PopulationWarning from '../../widgets/PopulationWarning';
 import ObjectWikipediaInfo from '../ui/ObjectWikipediaInfo';
 
 import LocaleCensusCitation from './LocaleCensusCitation';

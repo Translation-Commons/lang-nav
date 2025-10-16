@@ -1,5 +1,13 @@
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import ViewCard from '@features/cardlist/ViewCard';
 import { useDataContext } from '@features/data-loading/DataContext';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getSliceFunction,
+} from '@features/filtering/filter';
+import CollapsibleReport from '@features/reports/CollapsibleReport';
+import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -8,14 +16,6 @@ import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import React, { useMemo } from 'react';
 
-import ViewCard from '../../../features/cardlist/ViewCard';
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getSliceFunction,
-} from '../../../features/filtering/filter';
-import CollapsibleReport from '../../../features/reports/CollapsibleReport';
-import { getSortFunction } from '../../../features/sorting/sort';
 import { getLanguageTreeNodes } from '../LanguageHierarchy';
 
 const LanguagesWithIdenticalNames: React.FC = () => {

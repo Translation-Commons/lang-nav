@@ -1,12 +1,11 @@
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData, VariantTagData } from '@entities/types/DataTypes';
 import { useDataContext } from '@features/data-loading/DataContext';
+import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 import { ObjectType } from '@widgets/PageParamTypes';
 import React from 'react';
-
-import { getSortFunction } from '../../features/sorting/sort';
 
 export const VariantTagHierarchy: React.FC = () => {
   const { variantTags } = useDataContext();

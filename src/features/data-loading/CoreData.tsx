@@ -1,5 +1,5 @@
-import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import { CensusID, CensusData } from '@entities/census/CensusTypes';
+import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
   ObjectData,

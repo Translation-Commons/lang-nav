@@ -1,7 +1,6 @@
 import { useClickOutside } from '@shared/hooks/useClickOutside';
+import { getPositionInGroup } from '@shared/lib/PositionInGroup';
 import React, { ReactNode, useState } from 'react';
-
-import { getPositionInGroup } from '../../../shared/lib/PositionInGroup';
 
 import { SelectorDisplay } from './SelectorDisplay';
 import { SelectorDropdown } from './SelectorDropdown';

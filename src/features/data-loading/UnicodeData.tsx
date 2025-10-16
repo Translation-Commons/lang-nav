@@ -1,5 +1,5 @@
-import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel, CLDRCoverageImport } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
 import { ObjectType } from '@widgets/PageParamTypes';

@@ -1,9 +1,9 @@
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 import { useDataContext } from '@features/data-loading/DataContext';
+import { getScopeFilter } from '@features/filtering/filter';
 import { PageParamKey, SearchableField } from '@widgets/PageParamTypes';
 import React, { useMemo } from 'react';
 
-import { getScopeFilter } from '../../../features/filtering/filter';
 import { usePageParams } from '../../PageParamsProvider';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';

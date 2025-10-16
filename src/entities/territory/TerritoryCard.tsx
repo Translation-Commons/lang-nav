@@ -1,11 +1,10 @@
 import { TerritoryData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
+import { getScopeFilter } from '@features/filtering/filter';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import React from 'react';
-
-import { getScopeFilter } from '../../features/filtering/filter';
 
 interface Props {
   territory: TerritoryData;

@@ -1,9 +1,8 @@
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
+import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import React from 'react';
-
-import { numberToFixedUnlessSmall } from '../../shared/lib/numberUtils';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import { getOfficialLabel } from './LocaleStrings';

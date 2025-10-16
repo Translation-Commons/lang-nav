@@ -17,10 +17,9 @@ import WritingSystemCardList from '@entities/writingsystem/WritingSystemCardList
 import { WritingSystemHierarchy } from '@entities/writingsystem/WritingSystemHierarchy';
 import WritingSystemTable from '@entities/writingsystem/WritingSystemTable';
 import ObjectDetailsPage from '@features/details/ObjectDetailsPage';
+import ViewReports from '@features/reports/ViewReports';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { ObjectType, View } from '@widgets/PageParamTypes';
-
-import ViewReports from '../features/reports/ViewReports';
 
 import './styles.css';
 

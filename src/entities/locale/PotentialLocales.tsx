@@ -1,5 +1,5 @@
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { CensusData } from '@entities/census/CensusTypes';
+import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import {
   BCP47LocaleCode,
   isTerritoryGroup,
@@ -10,17 +10,16 @@ import {
 } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import { useDataContext } from '@features/data-loading/DataContext';
+import { getScopeFilter } from '@features/filtering/filter';
+import CollapsibleReport from '@features/reports/CollapsibleReport';
+import { getSortFunction } from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';
+import ObjectTable from '@features/table/ObjectTable';
+import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
 import { CopyIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
-
-import { getScopeFilter } from '../../features/filtering/filter';
-import CollapsibleReport from '../../features/reports/CollapsibleReport';
-import { getSortFunction } from '../../features/sorting/sort';
-import ObjectTable from '../../features/table/ObjectTable';
-import { numberToFixedUnlessSmall } from '../../shared/lib/numberUtils';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import { usePotentialLocaleThreshold } from './PotentialLocaleThreshold';

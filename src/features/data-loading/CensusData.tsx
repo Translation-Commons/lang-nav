@@ -1,5 +1,5 @@
-import { LanguageCode, LanguageModality } from '@entities/language/LanguageTypes';
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import { LanguageCode, LanguageModality } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/types/DataTypes';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import { ObjectType } from '@widgets/PageParamTypes';

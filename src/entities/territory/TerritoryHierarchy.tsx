@@ -1,12 +1,11 @@
 import { ObjectData, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
 import { useDataContext } from '@features/data-loading/DataContext';
+import { getScopeFilter } from '@features/filtering/filter';
+import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 import { ObjectType } from '@widgets/PageParamTypes';
 import React from 'react';
-
-import { getScopeFilter } from '../../features/filtering/filter';
-import { getSortFunction } from '../../features/sorting/sort';
 
 export const TerritoryHierarchy: React.FC = () => {
   const { territories } = useDataContext();
