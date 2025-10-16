@@ -1,7 +1,9 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
-import Hoverable from '@shared/ui/Hoverable';
 import { WifiIcon, WifiHighIcon, WifiLowIcon, WifiOffIcon } from 'lucide-react';
 import React from 'react';
+
+import { LanguageData } from '@entities/language/LanguageTypes';
+
+import Hoverable from '@shared/ui/Hoverable';
 
 import { getAllVitalityScores, VitalityMeterType } from './LanguageVitalityComputation';
 

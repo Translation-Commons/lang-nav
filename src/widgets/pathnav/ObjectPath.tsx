@@ -1,10 +1,12 @@
+import { SlashIcon } from 'lucide-react';
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
-import { SlashIcon } from 'lucide-react';
-import React from 'react';
 
 import ObjectPathChildren from './ObjectPathChildren';
 import ObjectPathParents from './ObjectPathParents';

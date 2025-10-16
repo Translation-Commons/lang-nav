@@ -1,3 +1,6 @@
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   computeVitalityMetascore,
@@ -21,8 +24,6 @@ import {
   getObjectPercentOfTerritoryPopulation,
 } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
 
 import { SortBehavior, SortBy, SortDirection } from './SortTypes';
 

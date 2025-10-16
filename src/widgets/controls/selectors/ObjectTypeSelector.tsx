@@ -1,7 +1,10 @@
-import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
-import { toTitleCase } from '@shared/lib/stringUtils';
-import { ObjectType, View } from '@widgets/PageParamTypes';
 import React, { useCallback } from 'react';
+
+import { ObjectType, View } from '@widgets/PageParamTypes';
+
+import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
+
+import { toTitleCase } from '@shared/lib/stringUtils';
 
 import ObjectTypeDescription from '../../../strings/ObjectTypeDescription';
 import { usePageParams } from '../../PageParamsProvider';

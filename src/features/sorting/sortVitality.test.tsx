@@ -1,11 +1,13 @@
+import { describe, it, expect } from 'vitest';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import {
   getBaseLanguageData,
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
 import { TerritoryData } from '@entities/types/DataTypes';
-import { ObjectType } from '@widgets/PageParamTypes';
-import { describe, it, expect } from 'vitest';
 
 import { getSortFunctionParameterized } from './sort';
 import { SortBy, SortBehavior } from './SortTypes';

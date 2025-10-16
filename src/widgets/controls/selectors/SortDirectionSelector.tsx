@@ -1,5 +1,6 @@
-import { SortBehavior } from '@features/sorting/SortTypes';
 import React from 'react';
+
+import { SortBehavior } from '@features/sorting/SortTypes';
 
 import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';

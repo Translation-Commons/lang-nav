@@ -1,11 +1,15 @@
-import { WritingSystemData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
+import PopulationWarning from '@widgets/PopulationWarning';
+
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
 import { getSortFunction } from '@features/sorting/sort';
+
+import { WritingSystemData } from '@entities/types/DataTypes';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import PopulationWarning from '@widgets/PopulationWarning';
-import React from 'react';
 
 type Props = {
   writingSystem: WritingSystemData;

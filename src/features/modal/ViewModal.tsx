@@ -1,14 +1,18 @@
-import getObjectFromID from '@entities/lib/getObjectFromID';
-import ObjectTitle from '@entities/ui/ObjectTitle';
-import ObjectDetails from '@features/details/ObjectDetails';
-import { useClickOutside } from '@shared/hooks/useClickOutside';
-import HoverableButton from '@shared/ui/HoverableButton';
+import { ExpandIcon, XIcon } from 'lucide-react';
+import React, { useEffect } from 'react';
+
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { View } from '@widgets/PageParamTypes';
 import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
-import { ExpandIcon, XIcon } from 'lucide-react';
-import React, { useEffect } from 'react';
+
+import ObjectDetails from '@features/details/ObjectDetails';
+
+import getObjectFromID from '@entities/lib/getObjectFromID';
+import ObjectTitle from '@entities/ui/ObjectTitle';
+
+import { useClickOutside } from '@shared/hooks/useClickOutside';
+import HoverableButton from '@shared/ui/HoverableButton';
 
 import './modal.css';
 

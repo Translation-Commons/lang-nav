@@ -1,6 +1,7 @@
-import Hoverable from '@shared/ui/Hoverable';
 import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
+
+import Hoverable from '@shared/ui/Hoverable';
 
 import { SelectorDisplay } from './SelectorDisplay';
 

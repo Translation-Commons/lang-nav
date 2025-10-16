@@ -3,6 +3,8 @@
  * to test various edge cases.
  */
 
+import { describe, it, expect } from 'vitest';
+
 import {
   getCountOfLanguages,
   getCountOfTerritories,
@@ -10,8 +12,8 @@ import {
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
 } from '@entities/lib/getObjectMiscFields';
+
 import { getMockedObjects } from '@tests/MockObjects';
-import { describe, it, expect } from 'vitest';
 
 const mockedObjects = getMockedObjects();
 

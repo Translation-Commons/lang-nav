@@ -1,6 +1,6 @@
-import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import React, { createContext, useCallback, useContext, useMemo } from 'react';
+import { useSearchParams } from 'react-router-dom';
+
 import {
   LocaleSeparator,
   ObjectType,
@@ -10,8 +10,11 @@ import {
   SearchableField,
   View,
 } from '@widgets/PageParamTypes';
-import React, { createContext, useCallback, useContext, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+
+import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+
+import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { getDefaultParams, ProfileType } from './controls/Profiles';
 

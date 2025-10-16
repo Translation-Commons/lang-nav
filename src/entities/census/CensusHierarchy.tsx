@@ -1,11 +1,14 @@
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import React from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
 import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
-import { ObjectType } from '@widgets/PageParamTypes';
-import React from 'react';
+
+import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
 
 import { CensusData } from './CensusTypes';
 

@@ -1,6 +1,8 @@
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
-import { useDataContext } from '@features/data-loading/DataContext';
 import React from 'react';
+
+import { useDataContext } from '@features/data-loading/DataContext';
+
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 const CensusSuggestions: React.FC = () => {
   const { censuses } = useDataContext();

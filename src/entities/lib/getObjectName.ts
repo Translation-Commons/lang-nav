@@ -1,6 +1,7 @@
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
-import { ObjectType } from '@widgets/PageParamTypes';
 
 export function getObjectSubtitle(object: ObjectData): string | undefined {
   switch (object.type) {

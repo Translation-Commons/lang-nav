@@ -1,9 +1,12 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import { groupBy } from '@shared/lib/setUtils';
-import Hoverable from '@shared/ui/Hoverable';
-import { usePageParams } from '@widgets/PageParamsProvider';
 import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+
+import { ObjectData } from '@entities/types/DataTypes';
+
+import { groupBy } from '@shared/lib/setUtils';
+import Hoverable from '@shared/ui/Hoverable';
 
 import { TableColumn } from './ObjectTable';
 import TableSortButton from './TableSortButton';

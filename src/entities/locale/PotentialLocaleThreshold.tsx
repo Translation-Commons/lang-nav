@@ -1,7 +1,8 @@
+import React, { ReactNode } from 'react';
+
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 import SelectorLabel from '@widgets/controls/components/SelectorLabel';
 import TextInput from '@widgets/controls/components/TextInput';
-import React, { ReactNode } from 'react';
 
 export function usePotentialLocaleThreshold(): {
   percentThreshold: number;

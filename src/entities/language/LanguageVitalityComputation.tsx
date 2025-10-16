@@ -1,6 +1,8 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
-import LinkButton from '@shared/ui/LinkButton';
 import React from 'react';
+
+import { LanguageData } from '@entities/language/LanguageTypes';
+
+import LinkButton from '@shared/ui/LinkButton';
 
 export enum VitalityMeterType {
   Metascore = 'Metascore',

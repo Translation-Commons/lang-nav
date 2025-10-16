@@ -1,10 +1,12 @@
+import aliases from 'cldr-core/supplemental/aliases.json';
+import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel, CLDRCoverageImport } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
-import { ObjectType } from '@widgets/PageParamTypes';
-import aliases from 'cldr-core/supplemental/aliases.json';
-import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
 import { DataContextType } from './DataContext';
 

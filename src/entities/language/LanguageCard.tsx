@@ -1,13 +1,17 @@
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import PopulationWarning from '@widgets/PopulationWarning';
+
+import { getSortFunction } from '@features/sorting/sort';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
-import { getSortFunction } from '@features/sorting/sort';
+
 import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import PopulationWarning from '@widgets/PopulationWarning';
-import React from 'react';
 
 import { VitalityMeterType } from './LanguageVitalityComputation';
 import LanguageVitalityMeter from './LanguageVitalityMeter';

@@ -1,7 +1,8 @@
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
+
 import AboutPage from '@pages/AboutPage';
 import DataPage from '@pages/DataPage';
 import IntroPage from '@pages/IntroPage';
-import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 
 export default function PageRoutes() {
   return (

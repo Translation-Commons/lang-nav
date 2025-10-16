@@ -1,11 +1,14 @@
-import { TerritoryData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
 import { getSortFunction } from '@features/sorting/sort';
+
+import { TerritoryData } from '@entities/types/DataTypes';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import { getCurrencyCompactLong } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import React from 'react';
 
 type Props = {
   territory: TerritoryData;

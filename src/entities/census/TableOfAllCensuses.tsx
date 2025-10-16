@@ -1,12 +1,15 @@
-import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
+
+import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
-import React from 'react';
 
 import { CensusCollectorType, CensusData } from './CensusTypes';
 

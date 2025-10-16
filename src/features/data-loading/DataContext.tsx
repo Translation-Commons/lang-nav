@@ -1,3 +1,8 @@
+import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
 import {
@@ -7,10 +12,8 @@ import {
   VariantTagData,
   WritingSystemData,
 } from '@entities/types/DataTypes';
+
 import { uniqueBy } from '@shared/lib/setUtils';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import { CoreDataArrays, useCoreData } from './CoreData';
 import { loadSupplementalData } from './SupplementalData';

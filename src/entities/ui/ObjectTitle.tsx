@@ -1,9 +1,12 @@
-import { getObjectSubtitle } from '@entities/lib/getObjectName';
-import { ObjectData } from '@entities/types/DataTypes';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import React from 'react';
+
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { SearchableField } from '@widgets/PageParamTypes';
-import React from 'react';
+
+import { getObjectSubtitle } from '@entities/lib/getObjectName';
+import { ObjectData } from '@entities/types/DataTypes';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { ObjectFieldHighlightedByPageSearch } from './ObjectField';
 

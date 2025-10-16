@@ -1,4 +1,9 @@
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import React, { useMemo } from 'react';
+
+import LimitInput from '@widgets/controls/selectors/LimitInput';
+import PaginationControls from '@widgets/controls/selectors/PaginationControls';
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import ViewCard from '@features/cardlist/ViewCard';
 import { useDataContext } from '@features/data-loading/DataContext';
 import {
@@ -9,12 +14,11 @@ import {
 import CollapsibleReport from '@features/reports/CollapsibleReport';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
+
+import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import LimitInput from '@widgets/controls/selectors/LimitInput';
-import PaginationControls from '@widgets/controls/selectors/PaginationControls';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import React, { useMemo } from 'react';
 
 import { getLanguageTreeNodes } from '../LanguageHierarchy';
 

@@ -1,3 +1,5 @@
+import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+
 import {
   getBaseLanguageData,
   getEmptyLanguageSourceSpecificData,
@@ -13,8 +15,8 @@ import {
   WritingSystemData,
   WritingSystemScope,
 } from '@entities/types/DataTypes';
+
 import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
 
 export function parseLanguageLine(line: string): LanguageData {
   const parts = line.split('\t');

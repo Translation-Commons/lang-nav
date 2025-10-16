@@ -1,5 +1,9 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React, { useMemo } from 'react';
+
+import LimitInput from '@widgets/controls/selectors/LimitInput';
+import PaginationControls from '@widgets/controls/selectors/PaginationControls';
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import ViewCard from '@features/cardlist/ViewCard';
 import { useDataContext } from '@features/data-loading/DataContext';
 import {
@@ -9,11 +13,11 @@ import {
 } from '@features/filtering/filter';
 import CollapsibleReport from '@features/reports/CollapsibleReport';
 import { getSortFunction } from '@features/sorting/sort';
+
+import { LanguageData } from '@entities/language/LanguageTypes';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import Deemphasized from '@shared/ui/Deemphasized';
-import LimitInput from '@widgets/controls/selectors/LimitInput';
-import PaginationControls from '@widgets/controls/selectors/PaginationControls';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import React, { useMemo } from 'react';
 
 const DubiousLanguages: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =

@@ -1,6 +1,7 @@
+import React, { ReactNode } from 'react';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
-import React, { ReactNode } from 'react';
 
 type Props = {
   items?: string[];

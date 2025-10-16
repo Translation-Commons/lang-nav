@@ -1,3 +1,5 @@
+import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleStrings';
 import {
@@ -6,8 +8,8 @@ import {
   LocaleSource,
   VariantTagData,
 } from '@entities/types/DataTypes';
+
 import { unique } from '@shared/lib/setUtils';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
 
 export type VariantIANATag = string; // IANA tag, eg. valencia (for cat-ES-valencia)
 

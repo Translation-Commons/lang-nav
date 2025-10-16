@@ -2,6 +2,23 @@
  * This is a set of mock objects for testing purposes.
  */
 
+import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+
+import {
+  computeOtherPopulationStatistics,
+  connectLanguagesToParent,
+  connectLocales,
+  connectWritingSystems,
+} from '@features/data-loading/DataAssociations';
+import { updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
+import { connectVariantTags } from '@features/data-loading/IANAData';
+import { computeLocaleWritingPopulation } from '@features/data-loading/PopulationData';
+import {
+  computeContainedTerritoryStats,
+  connectTerritoriesToParent,
+  createRegionalLocales,
+} from '@features/data-loading/TerritoryData';
+
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
   getBaseLanguageData,
@@ -19,21 +36,6 @@ import {
   WritingSystemData,
   WritingSystemScope,
 } from '@entities/types/DataTypes';
-import {
-  computeOtherPopulationStatistics,
-  connectLanguagesToParent,
-  connectLocales,
-  connectWritingSystems,
-} from '@features/data-loading/DataAssociations';
-import { updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
-import { connectVariantTags } from '@features/data-loading/IANAData';
-import { computeLocaleWritingPopulation } from '@features/data-loading/PopulationData';
-import {
-  computeContainedTerritoryStats,
-  connectTerritoriesToParent,
-  createRegionalLocales,
-} from '@features/data-loading/TerritoryData';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
 
 function getDisconnectedMockedObjects(): ObjectDictionary {
   // Languages

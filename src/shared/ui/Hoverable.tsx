@@ -1,5 +1,6 @@
-import { useHoverCard } from '@widgets/HoverCardContext';
 import React from 'react';
+
+import { useHoverCard } from '@widgets/HoverCardContext';
 
 type HoverableProps = {
   children: React.ReactNode;

@@ -1,9 +1,12 @@
+import React from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
-import { ObjectType } from '@widgets/PageParamTypes';
-import React from 'react';
 
 const ObjectWikipediaInfo: React.FC<{ object: ObjectData; size?: 'normal' | 'compact' }> = ({
   object,

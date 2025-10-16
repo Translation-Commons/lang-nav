@@ -1,6 +1,8 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import { useDataContext } from '@features/data-loading/DataContext';
 import { usePageParams } from '@widgets/PageParamsProvider';
+
+import { useDataContext } from '@features/data-loading/DataContext';
+
+import { ObjectData } from '@entities/types/DataTypes';
 
 export default function getObjectFromID(inputObjectID?: string): ObjectData | undefined {
   const { objectID: pageObjectID } = usePageParams();

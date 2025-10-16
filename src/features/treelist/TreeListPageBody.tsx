@@ -1,7 +1,10 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import { getFilterBySubstring, getFilterByTerritory } from '@features/filtering/filter';
-import { usePageParams } from '@widgets/PageParamsProvider';
 import React, { useCallback } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+
+import { getFilterBySubstring, getFilterByTerritory } from '@features/filtering/filter';
+
+import { ObjectData } from '@entities/types/DataTypes';
 
 import { filterBranch } from './filterBranch';
 import { TreeNodeData } from './TreeListNode';

@@ -1,3 +1,7 @@
+import React from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import CensusDetails from '@entities/census/CensusDetails';
 import LanguageDetails from '@entities/language/LanguageDetails';
 import getObjectFromID from '@entities/lib/getObjectFromID';
@@ -6,8 +10,6 @@ import TerritoryDetails from '@entities/territory/TerritoryDetails';
 import { ObjectData } from '@entities/types/DataTypes';
 import VariantTagDetails from '@entities/varianttag/VariantTagDetails';
 import WritingSystemDetails from '@entities/writingsystem/WritingSystemDetails';
-import { ObjectType } from '@widgets/PageParamTypes';
-import React from 'react';
 
 // You can get the details by an object or just its ID
 type Props = { object?: ObjectData; objectID?: string };

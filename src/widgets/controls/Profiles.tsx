@@ -1,14 +1,3 @@
-import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
-import {
-  LocaleSeparator,
-  ObjectType,
-  PageParams,
-  PageParamsOptional,
-  SearchableField,
-  View,
-} from '@widgets/PageParamTypes';
 import {
   Building2Icon,
   ExpandIcon,
@@ -18,6 +7,20 @@ import {
   SchoolIcon,
 } from 'lucide-react';
 import { ReactNode } from 'react';
+
+import {
+  LocaleSeparator,
+  ObjectType,
+  PageParams,
+  PageParamsOptional,
+  SearchableField,
+  View,
+} from '@widgets/PageParamTypes';
+
+import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+
+import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default

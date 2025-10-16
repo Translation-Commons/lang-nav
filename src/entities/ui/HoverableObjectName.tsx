@@ -1,6 +1,8 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import { ObjectType } from '@widgets/PageParamTypes';
 import React from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
+import { ObjectData } from '@entities/types/DataTypes';
 
 import HoverableObject from './HoverableObject';
 

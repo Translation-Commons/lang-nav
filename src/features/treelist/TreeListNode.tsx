@@ -1,11 +1,13 @@
+import { InfoIcon } from 'lucide-react';
+import React, { useEffect, useState } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType, SearchableField, View } from '@widgets/PageParamTypes';
+
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
 import HoverableObject from '@entities/ui/HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, SearchableField, View } from '@widgets/PageParamTypes';
-import { InfoIcon } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
 
 import './treelist.css';
 import { useTreeListOptionsContext } from './TreeListOptions';

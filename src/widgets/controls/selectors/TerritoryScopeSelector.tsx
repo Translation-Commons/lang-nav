@@ -1,6 +1,8 @@
-import { TerritoryScope } from '@entities/types/DataTypes';
-import { ObjectType, View } from '@widgets/PageParamTypes';
 import React from 'react';
+
+import { ObjectType, View } from '@widgets/PageParamTypes';
+
+import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';

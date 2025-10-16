@@ -1,10 +1,13 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import React, { useMemo, useState, useCallback } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import ObjectDetails from '@features/details/ObjectDetails';
 import { DetailsContainer } from '@features/details/ObjectDetailsPage';
 import { SortBy } from '@features/sorting/SortTypes';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import React, { useMemo, useState, useCallback } from 'react';
+
+import { ObjectData } from '@entities/types/DataTypes';
+import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import {
   getFilterBySubstring,
@@ -15,9 +18,10 @@ import {
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getSortFunction } from '../sorting/sort';
 
-import './tableStyles.css';
 import TableColumnSelector from './TableColumnSelector';
 import TableSortButton from './TableSortButton';
+
+import './tableStyles.css';
 
 export interface TableColumn<T> {
   columnGroup?: string; // "Key" for the parent column

@@ -1,9 +1,12 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import { anyWordStartsWith } from '@shared/lib/stringUtils';
-import Highlightable from '@shared/ui/Highlightable';
+import React from 'react';
+
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { SearchableField } from '@widgets/PageParamTypes';
-import React from 'react';
+
+import { ObjectData } from '@entities/types/DataTypes';
+
+import { anyWordStartsWith } from '@shared/lib/stringUtils';
+import Highlightable from '@shared/ui/Highlightable';
 
 interface Props {
   object: ObjectData;

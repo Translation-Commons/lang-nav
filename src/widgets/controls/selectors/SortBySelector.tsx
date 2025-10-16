@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { getSortBysApplicableToObjectType } from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';
-import React from 'react';
 
 import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';

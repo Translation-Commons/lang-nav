@@ -1,11 +1,14 @@
 // src/views/varianttag/VariantTagCard.tsx
 
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import { VariantTagData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
+
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import React from 'react';
 
 interface Props {
   data: VariantTagData;

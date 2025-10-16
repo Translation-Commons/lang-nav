@@ -1,3 +1,5 @@
+import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+
 import { getLocaleCode } from '@entities/locale/LocaleStrings';
 import {
   BCP47LocaleCode,
@@ -9,7 +11,6 @@ import {
   TerritoryData,
   TerritoryScope,
 } from '@entities/types/DataTypes';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
 
 const DEBUG = false;
 

@@ -1,3 +1,9 @@
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType, View } from '@widgets/PageParamTypes';
+
+import ObjectDetailsPage from '@features/details/ObjectDetailsPage';
+import ViewReports from '@features/reports/ViewReports';
+
 import CensusCardList from '@entities/census/CensusCardList';
 import { CensusHierarchy } from '@entities/census/CensusHierarchy';
 import TableOfAllCensuses from '@entities/census/TableOfAllCensuses';
@@ -16,10 +22,6 @@ import VariantTagTable from '@entities/varianttag/VariantTagTable';
 import WritingSystemCardList from '@entities/writingsystem/WritingSystemCardList';
 import { WritingSystemHierarchy } from '@entities/writingsystem/WritingSystemHierarchy';
 import WritingSystemTable from '@entities/writingsystem/WritingSystemTable';
-import ObjectDetailsPage from '@features/details/ObjectDetailsPage';
-import ViewReports from '@features/reports/ViewReports';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, View } from '@widgets/PageParamTypes';
 
 import './styles.css';
 

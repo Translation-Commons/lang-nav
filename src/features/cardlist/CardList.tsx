@@ -1,8 +1,10 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+
 import ObjectDetails from '@features/details/ObjectDetails';
 import { DetailsContainer } from '@features/details/ObjectDetailsPage';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+
+import { ObjectData } from '@entities/types/DataTypes';
+import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import {
   getFilterBySubstring,

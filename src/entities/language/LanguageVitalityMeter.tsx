@@ -1,7 +1,9 @@
+import React from 'react';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
-import React from 'react';
 
 import { VitalityMeterType, getAllVitalityScores } from './LanguageVitalityComputation';
 

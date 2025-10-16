@@ -1,3 +1,8 @@
+import React, { PropsWithChildren, ReactNode } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import CensusSuggestions from '@entities/census/CensusSuggestions';
 import LanguageSuggestions from '@entities/language/LanguageSuggestions';
 import getObjectFromID from '@entities/lib/getObjectFromID';
@@ -6,9 +11,6 @@ import TerritorySuggestions from '@entities/territory/TerritorySuggestions';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 import VariantTagSuggestions from '@entities/varianttag/VariantTagSuggestions';
 import WritingSystemSuggestions from '@entities/writingsystem/WritingSystemSuggestions';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
-import React, { PropsWithChildren, ReactNode } from 'react';
 
 import ObjectDetails from './ObjectDetails';
 

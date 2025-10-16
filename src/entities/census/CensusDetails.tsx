@@ -1,7 +1,9 @@
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
-import React from 'react';
+
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { CensusData } from './CensusTypes';
 import TableOfLanguagesInCensus from './TableOfLanguagesInCensus';

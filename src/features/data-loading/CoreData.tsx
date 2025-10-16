@@ -1,12 +1,7 @@
-import { CensusID, CensusData } from '@entities/census/CensusTypes';
-import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
-import {
-  LocaleData,
-  ObjectData,
-  TerritoryData,
-  VariantTagData,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { useState } from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
@@ -25,8 +20,16 @@ import {
   createRegionalLocales,
   loadTerritories,
 } from '@features/data-loading/TerritoryData';
-import { ObjectType } from '@widgets/PageParamTypes';
-import { useState } from 'react';
+
+import { CensusID, CensusData } from '@entities/census/CensusTypes';
+import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
+import {
+  LocaleData,
+  ObjectData,
+  TerritoryData,
+  VariantTagData,
+  WritingSystemData,
+} from '@entities/types/DataTypes';
 
 import {
   addGlottologLanguages,

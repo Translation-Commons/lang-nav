@@ -1,7 +1,9 @@
+import { ProfileType } from '@widgets/controls/Profiles';
+
+import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
-import { ProfileType } from '@widgets/controls/Profiles';
 
 export enum ExternalConcepts {
   LanguageFamily = 'Language Family',

@@ -1,7 +1,9 @@
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
-import { ObjectType } from '@widgets/PageParamTypes';
 
 export function getTerritoryBiggestLocale(territory: TerritoryData): LocaleData | undefined {
   return (territory?.locales || []).sort(

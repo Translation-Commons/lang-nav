@@ -1,9 +1,13 @@
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import { useMemo } from 'react';
+
+import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter, getSubstringFilterOnQuery } from '@features/filtering/filter';
+
+import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+
 import { uniqueBy } from '@shared/lib/setUtils';
-import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
-import { useMemo } from 'react';
 
 import { usePageParams } from '../../PageParamsProvider';
 import { Suggestion } from '../components/TextInput';

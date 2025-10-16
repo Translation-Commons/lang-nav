@@ -1,5 +1,6 @@
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import React from 'react';
+
+import { LanguageSource } from '@entities/language/LanguageTypes';
 
 import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';

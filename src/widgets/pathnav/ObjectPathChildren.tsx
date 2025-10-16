@@ -1,10 +1,13 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import { getSortFunction } from '@features/sorting/sort';
+import { SlashIcon } from 'lucide-react';
+import React from 'react';
+
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 import { usePageParams } from '@widgets/PageParamsProvider';
-import { SlashIcon } from 'lucide-react';
-import React from 'react';
+
+import { getSortFunction } from '@features/sorting/sort';
+
+import { ObjectData } from '@entities/types/DataTypes';
 
 import { getDescendantsName, getObjectChildren } from './getParentsAndDescendents';
 

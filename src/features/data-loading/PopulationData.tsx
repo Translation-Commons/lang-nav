@@ -5,6 +5,7 @@ import {
   LocaleInCensus,
   TerritoryData,
 } from '@entities/types/DataTypes';
+
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { DataContextType } from './DataContext';

@@ -1,5 +1,6 @@
-import { ObjectType, PageParamKey, PageParamsOptional, View } from '@widgets/PageParamTypes';
 import React, { useState } from 'react';
+
+import { ObjectType, PageParamKey, PageParamsOptional, View } from '@widgets/PageParamTypes';
 
 import { getNewURL } from './PageParamsProvider';
 

@@ -1,5 +1,6 @@
-import CommonObjectives from '@widgets/CommonObjectives';
 import React from 'react';
+
+import CommonObjectives from '@widgets/CommonObjectives';
 
 const IntroPage: React.FC = () => {
   return (

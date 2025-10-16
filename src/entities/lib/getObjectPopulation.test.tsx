@@ -1,3 +1,5 @@
+import { describe, it, expect } from 'vitest';
+
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getObjectPercentOfTerritoryPopulation,
@@ -8,8 +10,8 @@ import {
   getObjectPopulationRelativeToOverallLanguageSpeakers,
 } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
+
 import { getMockedObjects } from '@tests/MockObjects';
-import { describe, it, expect } from 'vitest';
 
 const mockedObjects = getMockedObjects();
 

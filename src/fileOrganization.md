@@ -13,7 +13,16 @@ Order from top-level to more specific:
   - At the moment there are both generic folders like `entities/ui/` and type-specific folders like `entities/language/`.
 - `shared/`: Contains shared utilities and components that are not specific to any single feature or entity, such as UI components like `HoverableEnumeration`.
 
-They are available as modules in the code so instead of a relative import like:
+## Nested Folders
+
+Following this design approach, scripts and components may be in the same folder. For example, in `src/shared` you will find
+- `ui/`: Contains UI components, like `LinkButton.tsx`.
+- `lib/`: Contains utility functions like `setUtils.ts`.
+- `hooks/`: Contains React hooks, like `useAutoAdjustedWidth.tsx`.
+
+## Module Imports
+
+Now, when you import files, instead of using relative paths like:
 ```typescript
 import LanguageDetails from '../../entities/language/LanguageDetails';
 ```
@@ -22,9 +31,4 @@ You would use a module import like:
 import LanguageDetails from '@entities/language/LanguageDetails';
 ```
 
-## Nested Folders
-
-Following this design approach, scripts and components may be in the same folder. For example, in `src/shared` you will find
-- `ui/`: Contains UI components, like `LinkButton.tsx`.
-- `lib/`: Contains utility functions like `setUtils.ts`.
-- `hooks/`: Contains React hooks, like `useAutoAdjustedWidth.tsx`.
+Module imports are also ordered as seen above.

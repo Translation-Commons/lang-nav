@@ -1,8 +1,10 @@
-import { CensusCollectorType } from '@entities/census/CensusTypes';
+import React from 'react';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
 import CollapsibleReport from '@features/reports/CollapsibleReport';
-import React from 'react';
+
+import { CensusCollectorType } from '@entities/census/CensusTypes';
 
 const LocaleCitationCounts: React.FC = () => {
   const { locales } = useDataContext();

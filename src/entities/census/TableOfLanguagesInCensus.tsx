@@ -1,19 +1,23 @@
-import { LocaleData } from '@entities/types/DataTypes';
-import HoverableObject from '@entities/ui/HoverableObject';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
+import { InfoIcon } from 'lucide-react';
+import React, { useCallback } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
+
+import { LocaleData } from '@entities/types/DataTypes';
+import HoverableObject from '@entities/ui/HoverableObject';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
+
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
-import { InfoIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
 
 import { CensusData } from './CensusTypes';
 

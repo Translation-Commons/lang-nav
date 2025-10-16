@@ -1,3 +1,7 @@
+import { describe, expect, it } from 'vitest';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
@@ -6,8 +10,6 @@ import {
   TerritoryScope,
   WritingSystemScope,
 } from '@entities/types/DataTypes';
-import { ObjectType } from '@widgets/PageParamTypes';
-import { describe, expect, it } from 'vitest';
 
 import { getLocaleName, parseLocaleCode } from '../LocaleStrings';
 

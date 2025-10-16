@@ -1,10 +1,11 @@
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
+import { SlashIcon } from 'lucide-react';
+import React, { useCallback } from 'react';
+
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { ObjectType, View } from '@widgets/PageParamTypes';
-import { SlashIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
 
 import FilterPath from './FilterPath';
 import ObjectPath from './ObjectPath';

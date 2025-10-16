@@ -1,19 +1,23 @@
+import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
+import React, { ReactNode } from 'react';
+
+import PopulationWarning from '@widgets/PopulationWarning';
+
+import { useDataContext } from '@features/data-loading/DataContext';
+import { SortBy } from '@features/sorting/SortTypes';
+import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
+import ObjectTable from '@features/table/ObjectTable';
+
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import {
   getObjectLiteracy,
   getUniqueTerritoriesForLanguage,
 } from '@entities/lib/getObjectMiscFields';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
-import { useDataContext } from '@features/data-loading/DataContext';
-import { SortBy } from '@features/sorting/SortTypes';
-import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
 import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
-import PopulationWarning from '@widgets/PopulationWarning';
-import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
-import React, { ReactNode } from 'react';
 
 import { CLDRCoverageText, ICUSupportStatus } from '../ui/CLDRCoverageInfo';
 import ObjectWikipediaInfo from '../ui/ObjectWikipediaInfo';

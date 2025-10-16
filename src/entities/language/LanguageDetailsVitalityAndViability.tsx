@@ -1,7 +1,9 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import React from 'react';
+
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
-import React from 'react';
+
+import { LanguageData } from '@entities/language/LanguageTypes';
 
 import { CLDRCoverageText, ICUSupportStatus } from '../ui/CLDRCoverageInfo';
 import ObjectWikipediaInfo from '../ui/ObjectWikipediaInfo';

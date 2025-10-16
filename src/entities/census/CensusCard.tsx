@@ -1,7 +1,9 @@
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import React from 'react';
 
 import { CensusData } from './CensusTypes';
 

@@ -1,3 +1,8 @@
+import React, { useCallback } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType, PageParamsOptional, View } from '@widgets/PageParamTypes';
+
 import CensusCard from '@entities/census/CensusCard';
 import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
@@ -5,10 +10,8 @@ import TerritoryCard from '@entities/territory/TerritoryCard';
 import { ObjectData } from '@entities/types/DataTypes';
 import VariantTagCard from '@entities/varianttag/VariantTagCard';
 import WritingSystemCard from '@entities/writingsystem/WritingSystemCard';
+
 import Hoverable from '@shared/ui/Hoverable';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, PageParamsOptional, View } from '@widgets/PageParamTypes';
-import React, { useCallback } from 'react';
 
 type Props = {
   object?: ObjectData;

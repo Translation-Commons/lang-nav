@@ -1,5 +1,6 @@
-import { View } from '@widgets/PageParamTypes';
 import React from 'react';
+
+import { View } from '@widgets/PageParamTypes';
 
 import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';

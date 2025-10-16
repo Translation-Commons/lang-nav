@@ -1,11 +1,15 @@
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import PopulationWarning from '@widgets/PopulationWarning';
+
+import { getScopeFilter } from '@features/filtering/filter';
+
 import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
-import { getScopeFilter } from '@features/filtering/filter';
+
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import PopulationWarning from '@widgets/PopulationWarning';
-import React from 'react';
 
 interface Props {
   writingSystem: WritingSystemData;

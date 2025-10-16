@@ -1,9 +1,12 @@
-import { VariantTagData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
+
+import { VariantTagData } from '@entities/types/DataTypes';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import React from 'react';
 
 type Props = {
   variantTag: VariantTagData;

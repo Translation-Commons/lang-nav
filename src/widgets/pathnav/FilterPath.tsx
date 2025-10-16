@@ -1,15 +1,18 @@
-import { LanguageScope } from '@entities/language/LanguageTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
-import { areArraysIdentical } from '@shared/lib/setUtils';
-import Deemphasized from '@shared/ui/Deemphasized';
-import HoverableButton from '@shared/ui/HoverableButton';
+import { SlashIcon, XIcon } from 'lucide-react';
+import React, { Fragment } from 'react';
+
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 import { getDefaultParams } from '@widgets/controls/Profiles';
 import { usePageParams } from '@widgets/PageParamsProvider';
 import { SearchableField, View } from '@widgets/PageParamTypes';
-import { SlashIcon, XIcon } from 'lucide-react';
-import React, { Fragment } from 'react';
+
+import { LanguageScope } from '@entities/language/LanguageTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
+
+import { areArraysIdentical } from '@shared/lib/setUtils';
+import Deemphasized from '@shared/ui/Deemphasized';
+import HoverableButton from '@shared/ui/HoverableButton';
 
 const FilterPath: React.FC = () => {
   const {

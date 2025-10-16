@@ -1,14 +1,17 @@
-import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
-import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
-import { TerritoryData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
+
+import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
+import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
+import { TerritoryData } from '@entities/types/DataTypes';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import { sumBy } from '@shared/lib/setUtils';
 import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
-import React from 'react';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();

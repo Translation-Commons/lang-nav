@@ -1,11 +1,13 @@
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import TableOfCountriesWithCensuses from '@entities/census/TableOfCountriesWithCensuses';
 import DubiousLanguages from '@entities/language/reports/DubiousLanguages';
 import LanguagesLargestDescendant from '@entities/language/reports/LanguagesLargestDescendant';
 import LanguagesWithIdenticalNames from '@entities/language/reports/LanguagesWithIdenticalNames';
 import PotentialLocales from '@entities/locale/PotentialLocales';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
-import React from 'react';
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.

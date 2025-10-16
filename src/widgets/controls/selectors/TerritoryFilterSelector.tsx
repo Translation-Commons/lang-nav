@@ -1,8 +1,11 @@
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import React, { useMemo } from 'react';
+
+import { PageParamKey, SearchableField } from '@widgets/PageParamTypes';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
-import { PageParamKey, SearchableField } from '@widgets/PageParamTypes';
-import React, { useMemo } from 'react';
+
+import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 
 import { usePageParams } from '../../PageParamsProvider';
 import { SelectorDisplay } from '../components/SelectorDisplay';

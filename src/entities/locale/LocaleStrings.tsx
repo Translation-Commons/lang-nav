@@ -1,5 +1,6 @@
-import { ISO3166Code, LocaleData, OfficialStatus } from '@entities/types/DataTypes';
 import { LocaleSeparator } from '@widgets/PageParamTypes';
+
+import { ISO3166Code, LocaleData, OfficialStatus } from '@entities/types/DataTypes';
 
 export function getLocaleName(locale: LocaleData): string {
   const languageName = locale.language?.nameDisplay ?? locale.languageCode;

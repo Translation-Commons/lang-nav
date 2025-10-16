@@ -1,6 +1,8 @@
-import { LanguageScope } from '@entities/language/LanguageTypes';
-import { toSentenceCase } from '@shared/lib/stringUtils';
 import React from 'react';
+
+import { LanguageScope } from '@entities/language/LanguageTypes';
+
+import { toSentenceCase } from '@shared/lib/stringUtils';
 
 import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';

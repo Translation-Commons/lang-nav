@@ -1,6 +1,7 @@
+import React from 'react';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
-import React from 'react';
 
 import { numberToFixedUnlessSmall } from '../lib/numberUtils';
 

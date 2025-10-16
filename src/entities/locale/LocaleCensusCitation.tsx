@@ -1,8 +1,10 @@
+import React from 'react';
+
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
 import HoverableObject from '@entities/ui/HoverableObject';
+
 import Deemphasized from '@shared/ui/Deemphasized';
-import React from 'react';
 
 type Props = {
   locale: LocaleData;

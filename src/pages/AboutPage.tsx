@@ -1,9 +1,11 @@
-import { LanguageSource } from '@entities/language/LanguageTypes';
+import React, { PropsWithChildren, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
+
 import CreativeCommonsLicense from '@widgets/CreativeCommonsLicense';
 import { getNewURL } from '@widgets/PageParamsProvider';
 import { PageParamsOptional } from '@widgets/PageParamTypes';
-import React, { PropsWithChildren, ReactNode } from 'react';
-import { Link } from 'react-router-dom';
+
+import { LanguageSource } from '@entities/language/LanguageTypes';
 
 const AboutPage: React.FC = () => {
   return (

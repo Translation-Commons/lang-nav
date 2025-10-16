@@ -1,12 +1,15 @@
-import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import React from 'react';
+
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
+
+import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
+import HoverableObjectName from '@entities/ui/HoverableObjectName';
+
 import { numberToFixedUnlessSmall, numberToSigFigs } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
-import React from 'react';
 
 import ObjectWikipediaInfo from '../ui/ObjectWikipediaInfo';
 

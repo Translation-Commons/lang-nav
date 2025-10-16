@@ -1,5 +1,6 @@
-import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { describe, it, expect } from 'vitest';
+
+import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
 import {
   computeVitalityMetascore,

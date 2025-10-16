@@ -7,8 +7,9 @@
 // should be formatted like ab or abc. But there are some languoids with different
 // kinds of language codes here as well. This is the main index key for languages and languoids
 
-import { ObjectType } from '@widgets/PageParamTypes';
 import React from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
 
 import { CLDRCoverageData } from '../types/CLDRTypes';
 import {

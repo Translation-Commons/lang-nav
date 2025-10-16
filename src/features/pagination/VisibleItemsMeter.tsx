@@ -1,9 +1,12 @@
-import { ObjectData } from '@entities/types/DataTypes';
-import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import React, { useMemo } from 'react';
+
 import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 import { usePageParams } from '@widgets/PageParamsProvider';
-import React, { useMemo } from 'react';
+
+import { ObjectData } from '@entities/types/DataTypes';
+
+import Deemphasized from '@shared/ui/Deemphasized';
+import Hoverable from '@shared/ui/Hoverable';
 
 import { getFilterBySubstring, getFilterByTerritory, getScopeFilter } from '../filtering/filter';
 

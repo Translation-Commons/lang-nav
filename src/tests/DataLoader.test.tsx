@@ -1,5 +1,6 @@
-import { loadLanguages, loadLocales, loadWritingSystems } from '@features/data-loading/DataLoader';
 import { describe, expect, it } from 'vitest';
+
+import { loadLanguages, loadLocales, loadWritingSystems } from '@features/data-loading/DataLoader';
 
 describe('loadLocales', () => {
   it('loads locales without error', async () => {

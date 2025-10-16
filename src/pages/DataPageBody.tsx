@@ -1,6 +1,7 @@
+import React from 'react';
+
 import SearchBar from '@widgets/controls/selectors/SearchBar';
 import PathNav from '@widgets/pathnav/PathNav';
-import React from 'react';
 
 import DataViews from './DataViews';
 

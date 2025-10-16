@@ -1,6 +1,7 @@
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
-import { ObjectType } from '@widgets/PageParamTypes';
 
 export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[] {
   if (object == null) return [];

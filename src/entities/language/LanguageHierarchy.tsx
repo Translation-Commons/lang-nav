@@ -1,13 +1,16 @@
-import { LanguageData, LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import React from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
 import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
-import React from 'react';
+
+import { LanguageData, LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 export const LanguageHierarchy: React.FC = () => {
   const { languageSource } = usePageParams();

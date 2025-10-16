@@ -1,10 +1,13 @@
+import { useCallback } from 'react';
+
+import { usePageParams } from '@widgets/PageParamsProvider';
+import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
+
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
 import { getSearchableField } from '@entities/ui/ObjectField';
+
 import { anyWordStartsWith } from '@shared/lib/stringUtils';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
-import { useCallback } from 'react';
 
 export type FilterFunctionType = (a: ObjectData) => boolean;
 

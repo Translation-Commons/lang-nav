@@ -1,11 +1,14 @@
+import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
+import React from 'react';
+
+import { ObjectType } from '@widgets/PageParamTypes';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
+
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
-import { ObjectType } from '@widgets/PageParamTypes';
-import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
-import React from 'react';
 
 export const CLDRCoverageText: React.FC<{
   object: LanguageData | LocaleData;

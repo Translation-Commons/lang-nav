@@ -1,7 +1,9 @@
-import LanguageCard from '@entities/language/LanguageCard';
+import React from 'react';
+
 import CardList from '@features/cardlist/CardList';
 import { useDataContext } from '@features/data-loading/DataContext';
-import React from 'react';
+
+import LanguageCard from '@entities/language/LanguageCard';
 
 const LanguageCardList: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
