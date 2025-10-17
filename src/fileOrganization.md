@@ -5,6 +5,7 @@ Note: This is still a work in progress -- not all files have been moved to their
 ## Folder Structure
 
 Order from top-level to more specific:
+
 - `app/`: Contains the root application component and global providers.
 - `pages/`: Contains page-level components that represent different views in the application, such as data pages for languages, locales, etc. Each page may have its own subfolder for specific components related to that page.
 - `features/`: Contains reusable features that can be shared across different parts of the application, such as data loading, filtering, sorting, and table components.
@@ -16,6 +17,7 @@ Order from top-level to more specific:
 ## Nested Folders
 
 Following this design approach, scripts and components may be in the same folder. For example, in `src/shared` you will find
+
 - `ui/`: Contains UI components, like `LinkButton.tsx`.
 - `lib/`: Contains utility functions like `setUtils.ts`.
 - `hooks/`: Contains React hooks, like `useAutoAdjustedWidth.tsx`.
@@ -23,10 +25,13 @@ Following this design approach, scripts and components may be in the same folder
 ## Module Imports
 
 Now, when you import files, instead of using relative paths like:
+
 ```typescript
 import LanguageDetails from '../../entities/language/LanguageDetails';
 ```
+
 You would use a module import like:
+
 ```typescript
 import LanguageDetails from '@entities/language/LanguageDetails';
 ```
