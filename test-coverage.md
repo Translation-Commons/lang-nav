@@ -2,10 +2,10 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `All files`                              |    14.5 |    76.1 |    51.9 |    14.5 |
+| `All files`                              |    14.3 |    76.1 |    51.9 |    14.3 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |    14.6 |    76.3 |    52.1 |    14.6 |
+| `  src`                                  |    14.4 |    76.3 |    52.1 |    14.4 |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    controls`                           |     8.2 |    71.3 |    38.1 |     8.2 |
 | `      components`                       |     0   |    33.3 |    33.3 |     0   |
@@ -91,7 +91,7 @@
 | `    strings`                            |     0   |   100.0 |   100.0 |     0   |
 | `      ObjectTypeDescription.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    views`                              |    13.2 |    79.4 |    75.5 |    13.2 |
+| `    views`                              |    12.9 |    79.4 |    75.5 |    12.9 |
 | `      census`                           |     0   |    87.5 |    87.5 |     0   |
 | `        CensusCard.tsx`                 |     0   |   100.0 |   100.0 |     0   |
 | `        CensusCardList.tsx`             |     0   |   100.0 |   100.0 |     0   |
@@ -101,7 +101,7 @@
 | `        TableOfAllCensuses.tsx`         |     0   |   100.0 |   100.0 |     0   |
 | `        TableOfCountriesWithCensuses.tsx` |     0   |   100.0 |   100.0 |     0   |
 | `        TableOfLanguagesInCensus.tsx`   |     0   |     0   |     0   |     0   |
-| `      common`                           |    31.2 |    78.9 |    75.0 |    31.2 |
+| `      common`                           |    29.4 |    78.9 |    75.0 |    29.4 |
 | `        CardList.tsx`                   |     0   |     0   |     0   |     0   |
 | `        CLDRCoverageInfo.tsx`           |     0   |     0   |     0   |     0   |
 | `        CollapsibleReport.tsx`          |     0   |   100.0 |   100.0 |     0   |
