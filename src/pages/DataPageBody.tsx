@@ -3,7 +3,7 @@ import React from 'react';
 import SearchBar from '@widgets/controls/selectors/SearchBar';
 import PathNav from '@widgets/pathnav/PathNav';
 
-import DataViews from './DataViews';
+import DataViews from './dataviews/DataViews';
 
 const DataPageBody: React.FC = () => {
   return (

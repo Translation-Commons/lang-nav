@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
+import { getNewURL } from '@features/page-params/getNewURL';
 import {
   ObjectType,
   PageParamKey,
   PageParamsOptional,
   View,
 } from '@features/page-params/PageParamTypes';
-
-import { getNewURL } from '../features/page-params/getNewURL';
 
 const CommonObjectives: React.FC = () => {
   return (
