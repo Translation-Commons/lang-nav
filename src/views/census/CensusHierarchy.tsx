@@ -14,7 +14,7 @@ export const CensusHierarchy: React.FC = () => {
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
 
-  const rootNodes = getCensusTreeNodes(Object.values(territories), sortFunction, filterByScope);
+  const rootNodes = getCensusTreeNodes(territories, sortFunction, filterByScope);
 
   return (
     <TreeListPageBody
@@ -36,7 +36,7 @@ export function getCensusTreeNodes(
 ): TreeNodeData[] {
   return territories
     .filter(filterFunction ?? (() => true))
-    .filter((territory) => territory.censuses.length > 0)
+    .filter((territory) => territory.censuses && territory.censuses.length > 0)
     .sort(sortFunction)
     .map((t) => getTerritoryTreeNode(t, sortFunction, filterFunction));
 }
@@ -58,6 +58,7 @@ function getCensusNodesForTerritory(
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean,
 ): TreeNodeData[] {
+  if (!territory.censuses) return [];
   return territory.censuses
     .filter(filterFunction)
     .sort(sortFunction)

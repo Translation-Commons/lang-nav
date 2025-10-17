@@ -10,7 +10,7 @@ const WritingSystemCardList: React.FC = () => {
 
   return (
     <CardList
-      objects={Object.values(writingSystems)}
+      objects={writingSystems}
       renderCard={(writingSystem) => <WritingSystemCard writingSystem={writingSystem} />}
     />
   );

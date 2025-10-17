@@ -1,0 +1,22 @@
+#codeDisplay		tk2006	tk2011	tk2016
+#nameDisplay		Tokelau 2006	Tokelau 2011	Tokelau 2016
+#isoRegionCode	TK			
+#yearCollected		2006	2011	2016
+#datePublished		2008	2013	2020
+#eligiblePopulation		1,065	1,143	1,499
+#notes		Census - de jure - complete tabulation	Residents. Census - de jure - complete tabulation	Usual resident population. Census - de facto - complete tabulation
+#modality		Spoken	Spoken	
+#acquisitionOrder	Any			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	tk2006	tk2011	tk2016
+mul	Total		1,143	
+tkl	Tokelauan	1,023	1,069	1,055
+eng	English	622	673	582
+smo	Samoan	447	520	320
+tvl	Tuvaluan	77	133	134
+zxx	None	32	47	36
+mul	Other	15	29	33
+gil	Kiribati	11	31	18
+mis	Not stated	9	7	9
+mis	Unknown		0	

@@ -7559,7 +7559,7 @@ bzg	babu1240	Babuza				Dormant	3 Endangered	Still	0			cent2106	Yes
 bzt	brit1244	Brithenig			Latn				0			arti1236	Possibly	Constructed language
 caj	chan1322	Chané			Latn		4 Extinct	Still	0			tere1279	No	Extinct language
 cana1267	cana1267	Canaanite										nort3165		
-cat_valencia	vale1252	Valencian										cata1290	Possibly	This is a locale
+vale1252	vale1252	Valencian										cata1290	Possibly	This is a locale
 cax-x-ilv		Chiquitano (Ilv)												
 cbe	chip1236	Chipiajes				Extinct			0			book1242	No	Declared non-existent by ISO
 cbh	cagu1236	Cagua				Extinct			0			book1242	No	Declared non-existent by ISO
@@ -8254,3 +8254,4 @@ zra		Kara (Korea)							0				Probably not	Historical langauge
 zrp	zarp1238	Zarphatic			Hebr	Extinct			0			book1242	No	Extinct language
 zsk		Kaskean							0				Probably not	Historical langauge
 zxx		Not applicable	no linguistic content						0				No	Control code
+mol	mold1248	Moldavian		Spoken & Written	Latn							east2865	Probably not	Old ISO system considered it its own language. Now it is just considered a dialect of Romanian by ISO

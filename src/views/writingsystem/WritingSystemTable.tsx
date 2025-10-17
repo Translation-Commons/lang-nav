@@ -3,7 +3,7 @@ import React from 'react';
 import { useDataContext } from '../../data/DataContext';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { WritingSystemData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
@@ -14,7 +14,7 @@ const WritingSystemTable: React.FC = () => {
 
   return (
     <ObjectTable<WritingSystemData>
-      objects={Object.values(writingSystems)}
+      objects={writingSystems}
       columns={[
         CodeColumn,
         NameColumn,
@@ -33,11 +33,12 @@ const WritingSystemTable: React.FC = () => {
         },
         {
           key: 'Languages',
-          render: (object) => (
-            <HoverableEnumeration
-              items={Object.values(object.languages).map((l) => l.nameDisplay)}
-            />
-          ),
+          render: (object) =>
+            object.languages && (
+              <HoverableEnumeration
+                items={Object.values(object.languages).map((l) => l.nameDisplay)}
+              />
+            ),
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
         },

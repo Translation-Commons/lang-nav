@@ -4,16 +4,13 @@ import { useDataContext } from '../../data/DataContext';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 const WritingSystemSuggestions: React.FC = () => {
-  const { writingSystems } = useDataContext();
+  const { getWritingSystem } = useDataContext();
 
   return (
     <div className="separatedButtonList">
-      {['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'].map(
-        (code) =>
-          writingSystems[code] != null && (
-            <HoverableObjectName key={code} object={writingSystems[code]} format="button" />
-          ),
-      )}
+      {['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'].map((code) => (
+        <HoverableObjectName key={code} object={getWritingSystem(code)} format="button" />
+      ))}
     </div>
   );
 };

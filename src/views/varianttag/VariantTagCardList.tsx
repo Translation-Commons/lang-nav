@@ -10,7 +10,7 @@ const VariantTagCardList: React.FC = () => {
 
   return (
     <CardList
-      objects={Object.values(variantTags)}
+      objects={variantTags}
       renderCard={(variantTag) => <VariantTagCard data={variantTag} />}
     />
   );

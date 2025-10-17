@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
-import { getScopeFilter } from '../../controls/filter';
 import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { ObjectData, WritingSystemData } from '../../types/DataTypes';
@@ -11,14 +10,14 @@ import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 export const WritingSystemHierarchy: React.FC = () => {
   const { writingSystems } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
 
-  const rootNodes = getWritingSystemTreeNodes(
-    Object.values(writingSystems).filter(
-      (w) => w.parentWritingSystem == null || !filterByScope(w.parentWritingSystem),
-    ),
-    sortFunction,
-    filterByScope,
+  const rootNodes = useMemo(
+    () =>
+      getWritingSystemTreeNodes(
+        writingSystems.filter((w) => w.parentWritingSystem == null),
+        sortFunction,
+      ),
+    [writingSystems, sortFunction],
   );
 
   return (
@@ -55,14 +54,12 @@ function getWritingSystemTreeNode(
   return {
     type: ObjectType.WritingSystem,
     object: writingSystem,
-    children: getWritingSystemTreeNodes(
-      writingSystem.childWritingSystems,
-      sortFunction,
-      filterFunction,
-    ),
+    children: writingSystem.childWritingSystems
+      ? getWritingSystemTreeNodes(writingSystem.childWritingSystems, sortFunction, filterFunction)
+      : [],
     labelStyle: {
-      fontWeight: writingSystem.populationOfDescendents > 100 ? 'bold' : 'normal',
-      fontStyle: writingSystem.populationUpperBound <= 100 ? 'italic' : 'normal',
+      fontWeight: (writingSystem?.populationOfDescendents ?? 0) > 100 ? 'bold' : 'normal',
+      fontStyle: (writingSystem?.populationUpperBound ?? 0) <= 100 ? 'italic' : 'normal',
     },
   };
 }

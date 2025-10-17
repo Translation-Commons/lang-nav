@@ -1,13 +1,8 @@
+import { sumBy, uniqueBy } from '../generic/setUtils';
 import { getCensusCollectorTypeRank } from '../types/CensusTypes';
-import {
-  BCP47LocaleCode,
-  isTerritoryGroup,
-  LocaleData,
-  LocaleInCensus,
-  TerritoryData,
-} from '../types/DataTypes';
+import { isTerritoryGroup, LocaleData, LocaleInCensus, TerritoryData } from '../types/DataTypes';
 
-import { CoreData } from './CoreData';
+import { DataContextType } from './DataContext';
 
 type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 
@@ -27,19 +22,17 @@ const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
   (a, b) => b.populationPercent - a.populationPercent,
 ];
 
-export function computeLocalePopulationFromCensuses(coreData: CoreData): void {
-  Object.values(coreData.locales).forEach((locale) => {
-    let records = locale.censusRecords;
-    if (records.length === 0) {
-      return; // No census records, nothing to compute
-    }
+export function computeLocalePopulationFromCensuses(dataContext: DataContextType): void {
+  dataContext.locales.forEach((locale) => {
+    if (!locale.censusRecords || locale.censusRecords.length === 0) return; // No census records, nothing to compute
+    let records = [...locale.censusRecords];
 
     // Apply a series of rules to determine the best population estimate.
     for (const rule of POPULATION_ESTIMATE_RULES) {
       records = records.sort(rule);
       // Filter the records to ones that match the first one
       const bestRecords = records.filter((otherRecord) => rule(records[0], otherRecord) === 0);
-      if (bestRecords.length == 1) {
+      if (bestRecords.length === 1) {
         // If we have a single best record, use it
         setLocalePopulationEstimate(locale, bestRecords[0]);
         return; // We found a unique best estimate
@@ -54,7 +47,7 @@ export function computeLocalePopulationFromCensuses(coreData: CoreData): void {
 
   // Re-compute the population for regional locales
   // Start with the world territory (001) and then go down to groups
-  recomputeRegionalLocalePopulation(coreData.territories['001']);
+  recomputeRegionalLocalePopulation(dataContext.getTerritory('001'));
 }
 
 function setLocalePopulationEstimate(locale: LocaleData, record: LocaleInCensus): void {
@@ -64,16 +57,16 @@ function setLocalePopulationEstimate(locale: LocaleData, record: LocaleInCensus)
 }
 
 // This re-computes regional locales (eg. es_419, Spanish in Latin America).
-function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
-  if (!isTerritoryGroup(territory.scope)) {
+function recomputeRegionalLocalePopulation(territory: TerritoryData | undefined): void {
+  if (territory == null || !isTerritoryGroup(territory.scope)) {
     return; // Only recompute for regional locales
   }
   // Re-compute the estimate for the contained territories first.
-  territory.containsTerritories.forEach((childTerritory) => {
+  territory.containsTerritories?.forEach((childTerritory) => {
     recomputeRegionalLocalePopulation(childTerritory);
   });
   // Now go through the locales and re-compute their population
-  territory.locales.forEach((locale) => {
+  territory.locales?.forEach((locale) => {
     locale.populationSpeaking =
       locale.containedLocales?.reduce(
         // Each absolute number may come from a different year, so instead of adding up censuses from
@@ -100,20 +93,37 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData): void {
   });
 }
 
-export function computeLocaleWritingPopulation(locales: Record<BCP47LocaleCode, LocaleData>): void {
-  Object.values(locales)
+export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
+  // Country & Dependencies have literacy values from the UN
+  locales
     .filter(
       (l) => !isTerritoryGroup(l.territory?.scope), // Skip regional locales
     )
     .forEach((locale) => {
       locale.literacyPercent = locale.territory?.literacyPercent ?? 100;
 
+      if (locale.populationSpeaking == null) return;
       locale.populationWriting = Math.round(
         (locale.populationSpeaking * locale.literacyPercent) / 100,
       );
       if (locale.populationSpeakingPercent != null) {
         locale.populationWritingPercent =
           (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
+      }
+    });
+
+  // Compute regional literacy by adding up the writing populations of the contained locales
+  locales
+    .filter((l) => isTerritoryGroup(l.territory?.scope))
+    .forEach((locale) => {
+      locale.populationWriting = sumBy(
+        uniqueBy(locale.containedLocales ?? [], (loc) => loc.territoryCode || ''),
+        (locale) => locale.populationWriting ?? 0,
+      );
+      if (locale.populationSpeaking && locale.populationWriting) {
+        locale.literacyPercent = Math.round(
+          (locale.populationWriting * 100) / locale.populationSpeaking,
+        );
       }
     });
 }

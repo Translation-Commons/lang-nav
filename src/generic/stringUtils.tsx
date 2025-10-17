@@ -12,7 +12,9 @@ export function toTitleCase(str: string): string {
 }
 
 export function toSentenceCase(str: string): string {
-  return str.replace(/\b\w/, (char) => char.toUpperCase());
+  return str
+    .replace(/\b\w/, (char) => char.toUpperCase())
+    .replace(/([a-z])([A-Z])/g, (_match, p1, p2) => p1 + ' ' + p2.toLowerCase());
 }
 
 export function joinOxfordComma(strs: string[]): string {

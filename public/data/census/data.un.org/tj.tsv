@@ -1,0 +1,20 @@
+#codeDisplay		tj2000	tj2010
+#nameDisplay		Tajikistan 2000	Tajikistan 2010
+#isoRegionCode	TJ		
+#yearCollected		2000	2010
+#datePublished		2007	2012
+#eligiblePopulation		6,039,917	7,564,502
+#notes	Census - de facto - complete tabulation		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	tj2000	tj2010
+mul	Total	6,039,917	7,564,502
+tgk	Tajik	4,886,853	6,384,880
+uzb	Uzbek	927,449	926,692
+mul	Other	75,853	147,101
+rus	Russian	67,972	40,598
+kir	Kyrgyz	64,423	60,140
+tat	Tatar	15,153	4,203
+ukr	Ukrainian	1,570	451
+kaz	Kazakh	644	437

@@ -5,9 +5,11 @@ import { getCldrLocale } from '../../data/cldrLocales';
 import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
+import { toSentenceCase } from '../../generic/stringUtils';
 import { LocaleData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import HoverableObjectName from '../common/HoverableObjectName';
+import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
@@ -20,7 +22,7 @@ const LocaleTable: React.FC = () => {
 
   return (
     <ObjectTable<LocaleData>
-      objects={Object.values(locales).filter(
+      objects={locales.filter(
         (locale) => locale.language?.sourceSpecific[languageSource].code != null,
       )}
       columns={[
@@ -38,6 +40,7 @@ const LocaleTable: React.FC = () => {
           render: (object) => object.populationSpeaking,
           isNumeric: true,
           sortParam: SortBy.Population,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
@@ -48,6 +51,7 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.Literacy,
+          columnGroup: 'Demographics',
         },
         {
           key: '% in Territory',
@@ -61,11 +65,25 @@ const LocaleTable: React.FC = () => {
               </>
             ),
           isNumeric: true,
-          sortParam: SortBy.RelativePopulation,
+          sortParam: SortBy.PercentOfTerritoryPopulation,
+          columnGroup: 'Demographics',
+        },
+        {
+          key: '% of Global Language Speakers',
+          render: (object) =>
+            object.populationSpeaking &&
+            numberToFixedUnlessSmall(
+              (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+            ),
+          isNumeric: true,
+          isInitiallyVisible: false,
+          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Population Source',
           render: (object) => <LocaleCensusCitation locale={object} size="short" />,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Contained Locales',
@@ -79,6 +97,49 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Language',
+          render: (object) => <HoverableObjectName object={object.language} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          sortParam: SortBy.Language,
+        },
+        {
+          key: 'Territory',
+          render: (object) => <HoverableObjectName object={object.territory} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Writing System',
+          render: (object) => <HoverableObjectName object={object.writingSystem} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Variant Tags',
+          render: (object) =>
+            object.variantTags && (
+              <CommaSeparated limit={1}>
+                {object.variantTags.map((vt) => (
+                  <HoverableObjectName object={vt} key={vt.ID} />
+                ))}
+              </CommaSeparated>
+            ),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Wikipedia',
+          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'Locale Source',
+          render: (object) => toSentenceCase(object.localeSource),
+          isInitiallyVisible: false,
         },
 
         // ------- CLDR columns (hidden by default) -------

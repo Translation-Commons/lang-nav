@@ -11,6 +11,11 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
     "build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
+    "test": "vitest",
+    "test:watch": "vitest --watch",
+    "test:ui": "vitest --ui",
+    "test:run": "vitest run",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "cldr-core": "^47.0.0",
@@ -21,12 +26,16 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
-    "@types/node": "^24.3.1",
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.7.2",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.30.1",
     "@typescript-eslint/parser": "^8.30.1",
     "@vitejs/plugin-react": "^4.3.4",
+    "@vitest/coverage-v8": "^3.2.4",
     "eslint": "^9.30.1",
     "eslint-config-prettier": "^10.1.2",
     "eslint-plugin-import": "^2.31.0",
@@ -36,10 +45,13 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "gh-pages": "^6.3.0",
     "globals": "^16.0.0",
+    "jsdom": "^27.0.0",
+    "msw": "^2.11.3",
     "prettier": "^3.6.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.30.1",
-    "vite": "^6.3.1"
+    "vite": "^6.3.1",
+    "vitest": "^3.2.4"
   },
   "prettier": {
     "singleQuote": true,

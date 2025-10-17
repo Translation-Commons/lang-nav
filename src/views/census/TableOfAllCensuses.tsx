@@ -3,13 +3,15 @@ import React from 'react';
 import { useDataContext } from '../../data/DataContext';
 import Deemphasized from '../../generic/Deemphasized';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
-import { CensusData } from '../../types/CensusTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { CensusCollectorType, CensusData } from '../../types/CensusTypes';
+import { SortBy } from '../../types/SortTypes';
+import { getObjectPercentOfTerritoryPopulation } from '../common/getObjectPopulation';
+import HoverableObjectName from '../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
 const TableOfAllCensuses: React.FC = () => {
-  const { censuses, languages } = useDataContext();
+  const { censuses, getLanguage } = useDataContext();
 
   return (
     <ObjectTable<CensusData>
@@ -22,7 +24,7 @@ const TableOfAllCensuses: React.FC = () => {
           render: (census) => (
             <HoverableEnumeration
               items={Object.keys(census.languageEstimates).map(
-                (lang) => languages[lang]?.nameDisplay ?? lang,
+                (lang) => getLanguage(lang)?.nameDisplay ?? lang,
               )}
             />
           ),
@@ -37,11 +39,28 @@ const TableOfAllCensuses: React.FC = () => {
               : 'Unknown',
           isNumeric: true,
           sortParam: SortBy.Population,
+          columnGroup: 'Population',
+        },
+        {
+          key: 'Percent of Current Population',
+          render: (census) =>
+            census.territory && census.eligiblePopulation != null
+              ? getObjectPercentOfTerritoryPopulation(census)?.toFixed(1)
+              : 'Unknown',
+          isNumeric: true,
+          isInitiallyVisible: false,
+          sortParam: SortBy.PercentOfTerritoryPopulation,
+          columnGroup: 'Population',
+        },
+        {
+          key: 'Territory',
+          render: (census) => <HoverableObjectName object={census.territory} />,
+          isInitiallyVisible: false,
         },
         {
           key: 'Year Collected',
           render: (census) =>
-            census.collectorType !== 'CLDR' ? (
+            census.collectorType !== CensusCollectorType.CLDR ? (
               new Date(census.yearCollected + '-07-01').toLocaleDateString(undefined, {
                 year: 'numeric',
               })

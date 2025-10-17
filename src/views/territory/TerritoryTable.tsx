@@ -2,8 +2,11 @@ import React from 'react';
 
 import { useDataContext } from '../../data/DataContext';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
+import { sumBy } from '../../generic/setUtils';
 import { TerritoryData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
+import { getTerritoryChildren } from '../common/getObjectMiscFields';
+import { getTerritoryBiggestLocale } from '../common/getObjectMiscFields';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
@@ -13,7 +16,7 @@ const TerritoryTable: React.FC = () => {
 
   return (
     <ObjectTable<TerritoryData>
-      objects={Object.values(territories)}
+      objects={territories}
       columns={[
         CodeColumn,
         NameColumn,
@@ -22,6 +25,7 @@ const TerritoryTable: React.FC = () => {
           render: (object) => object.population,
           isNumeric: true,
           sortParam: SortBy.Population,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
@@ -29,37 +33,70 @@ const TerritoryTable: React.FC = () => {
             object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
           isNumeric: true,
           sortParam: SortBy.Literacy,
+          columnGroup: 'Demographics',
         },
         {
           key: 'Languages',
-          render: (object) => (
-            <HoverableEnumeration
-              items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
-            />
-          ),
+          render: (object) =>
+            object.locales && (
+              <HoverableEnumeration
+                items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
+              />
+            ),
           isNumeric: true,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Language',
         },
         {
           key: 'Biggest Language',
           render: (object) =>
+            object.locales &&
             object.locales.length > 0 && (
               <HoverableObjectName
                 labelSource="language"
-                object={object.locales[0]}
+                object={getTerritoryBiggestLocale(object)}
                 style={{ textDecoration: 'none' }}
               />
             ),
           isInitiallyVisible: false,
+          sortParam: SortBy.Language,
+          columnGroup: 'Language',
         },
         {
-          key: 'Contains Territories',
+          key: 'Biggest Language %',
+          render: (object) =>
+            object.locales ? object.locales[0].populationSpeakingPercent?.toFixed(1) + '%' : null,
+          isInitiallyVisible: false,
+          isNumeric: true,
+          sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
+          columnGroup: 'Language',
+        },
+        {
+          key: 'Contained UN Region',
+          render: (object) => object.parentUNRegion?.nameDisplay,
+          isInitiallyVisible: false,
+          columnGroup: 'Relations',
+        },
+        {
+          key: 'Territories and/or Dependencies',
           render: (object) => (
-            <HoverableEnumeration items={object.containsTerritories.map((t) => t.nameDisplay)} />
+            <HoverableEnumeration items={getTerritoryChildren(object).map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
+          columnGroup: 'Relations',
+        },
+        {
+          key: 'Population of Dependencies',
+          render: (object) =>
+            object.dependentTerritories && object.dependentTerritories.length > 0
+              ? sumBy(object.dependentTerritories, (t) => t.population ?? 0)
+              : null,
+          isInitiallyVisible: false,
+          isNumeric: true,
+          sortParam: SortBy.PopulationOfDescendents,
+          columnGroup: 'Relations',
         },
         {
           key: 'Type',

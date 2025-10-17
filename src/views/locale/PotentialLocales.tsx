@@ -1,7 +1,9 @@
+import { CopyIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { getScopeFilter } from '../../controls/filter';
 import { usePageParams } from '../../controls/PageParamsContext';
+import { getSortFunction } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { CensusData } from '../../types/CensusTypes';
@@ -9,11 +11,13 @@ import {
   BCP47LocaleCode,
   isTerritoryGroup,
   LocaleData,
+  LocaleSource,
   PopulationSourceCategory,
   TerritoryCode,
 } from '../../types/DataTypes';
 import { LanguageCode, LanguageData } from '../../types/LanguageTypes';
-import { LocaleSeparator, ObjectType, SortBy } from '../../types/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import CollapsibleReport from '../common/CollapsibleReport';
 import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTable from '../common/table/ObjectTable';
@@ -29,17 +33,14 @@ type PartitionedLocales = {
 };
 
 const PotentialLocales: React.FC = () => {
-  const {
-    locales,
-    censuses,
-    languagesBySource: { All: languages },
-  } = useDataContext();
+  const { censuses, getLanguage, getLocale, locales } = useDataContext();
   const { localeSeparator } = usePageParams();
   const { percentThreshold, percentThresholdSelector } = usePotentialLocaleThreshold();
   const potentialLocales = getPotentialLocales(
     Object.values(censuses),
+    getLanguage,
+    getLocale,
     locales,
-    languages,
     localeSeparator,
     percentThreshold,
   );
@@ -99,9 +100,26 @@ const SubReport: React.FC<{
   title: string;
 }> = ({ title, children, locales }) => {
   const filterByScope = getScopeFilter();
+  const sortFunction = getSortFunction();
+  const { limit, page } = usePageParams();
+  const exportLocales = locales
+    .filter(filterByScope)
+    .sort(sortFunction)
+    .slice(limit * (page - 1), Math.min(limit * page, locales.length))
+    .map(getLocaleExportString)
+    .join('');
+
   return (
     <CollapsibleReport title={`${title} (${locales.filter(filterByScope).length})`}>
-      {children}
+      {children}{' '}
+      <button
+        style={{ padding: '0.25em' }}
+        onClick={() => {
+          navigator.clipboard.writeText(exportLocales);
+        }}
+      >
+        Copy visible locales to Clipboard
+      </button>
       <PotentialLocalesTable locales={locales} />
     </CollapsibleReport>
   );
@@ -142,7 +160,17 @@ const PotentialLocalesTable: React.FC<{
             object.populationSpeakingPercent &&
             numberToFixedUnlessSmall(object.populationSpeakingPercent),
           isNumeric: true,
-          sortParam: SortBy.RelativePopulation,
+          sortParam: SortBy.PercentOfTerritoryPopulation,
+        },
+        {
+          key: '% of Global Language Speakers',
+          render: (object) =>
+            object.populationSpeaking &&
+            numberToFixedUnlessSmall(
+              (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+            ),
+          isNumeric: true,
+          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',
@@ -159,15 +187,31 @@ const PotentialLocalesTable: React.FC<{
             );
           },
         },
+        {
+          key: 'Copy',
+          render: (object) => (
+            <button
+              style={{ padding: '0.25em' }}
+              onClick={() => navigator.clipboard.writeText(getLocaleExportString(object))}
+            >
+              <CopyIcon size="1em" display="block" />
+            </button>
+          ),
+        },
       ]}
     />
   );
 };
 
+function getLocaleExportString(locale: LocaleData): string {
+  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\tOfficial\t${locale.populationSpeaking}\t\n`;
+}
+
 function getPotentialLocales(
   censuses: CensusData[],
-  locales: Record<BCP47LocaleCode, LocaleData>,
-  languages: Record<LanguageCode, LanguageData>,
+  getLanguage: (code: string) => LanguageData | undefined,
+  getLocale: (code: string) => LocaleData | undefined,
+  locales: LocaleData[],
   localeSeparator: LocaleSeparator,
   percentThreshold: number,
 ): PartitionedLocales {
@@ -177,8 +221,8 @@ function getPotentialLocales(
       censuses.reduce<Record<BCP47LocaleCode, LocaleData>>((missing, census) => {
         Object.entries(census.languageEstimates ?? {})?.forEach(([langID, populationEstimate]) => {
           const localeID = langID + '_' + census.isoRegionCode;
-          const lang = languages[langID];
-          if (locales[localeID] || lang == null) {
+          const lang = getLanguage(langID);
+          if (getLocale(localeID) || lang == null) {
             return; // Locale already exists or language is missing, skip
           }
           const populationPercent = (populationEstimate * 100) / census.eligiblePopulation;
@@ -188,7 +232,7 @@ function getPotentialLocales(
 
           if (missing[localeID] == null) {
             missing[localeID] = {
-              localeSource: 'census',
+              localeSource: LocaleSource.Census,
               type: ObjectType.Locale,
               ID: langID + '_' + census.isoRegionCode,
               codeDisplay: lang.codeDisplay + localeSeparator + census.isoRegionCode,
@@ -200,19 +244,20 @@ function getPotentialLocales(
               territory: census.territory,
               territoryCode: census.isoRegionCode,
 
-              populationSource: PopulationSourceCategory.Census,
+              populationSource: PopulationSourceCategory.Official,
               populationSpeaking: populationEstimate,
               populationSpeakingPercent: populationPercent,
               populationCensus: census,
               censusRecords: [{ census, populationEstimate, populationPercent }],
             };
           } else {
-            if (missing[localeID].populationSpeaking < populationEstimate) {
+            if ((missing[localeID].populationSpeaking ?? 0) < populationEstimate) {
               // If we already have a locale but the population estimate is higher, update it
               missing[localeID].populationSpeaking = populationEstimate;
               missing[localeID].populationSpeakingPercent = populationPercent;
               missing[localeID].populationCensus = census;
             }
+            if (missing[localeID].censusRecords == null) missing[localeID].censusRecords = [];
             missing[localeID].censusRecords.push({
               census,
               populationEstimate,
@@ -222,12 +267,12 @@ function getPotentialLocales(
         });
         return missing;
       }, {}),
-    [censuses, languages, locales, localeSeparator, percentThreshold],
+    [censuses, localeSeparator, percentThreshold, getLanguage, getLocale],
   );
 
   // Group all locales (actual & missing) by language
   const allLocalesByLanguage = useMemo(() => {
-    return [...Object.values(locales), ...Object.values(allMissingLocales)].reduce<
+    return [...locales, ...Object.values(allMissingLocales)].reduce<
       Record<LanguageCode, LocaleData[]>
     >((byLanguage, locale) => {
       const territoryScope = locale.territory?.scope;
@@ -262,7 +307,7 @@ function partitionPotentialLocales(
     return (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0);
   });
   const largestLocale = localesSorted.reduce((max, locale) => {
-    return locale.populationSpeaking > max.populationSpeaking ? locale : max;
+    return (locale.populationSpeaking ?? 0) > (max.populationSpeaking ?? 0) ? locale : max;
   }, localesSorted[0]);
   // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
   if (largestLocale.localeSource === 'census') {

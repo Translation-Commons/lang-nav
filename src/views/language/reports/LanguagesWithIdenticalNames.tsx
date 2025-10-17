@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import {
   getFilterBySubstring,
@@ -19,26 +19,26 @@ import ViewCard from '../../ViewCard';
 import { getLanguageTreeNodes } from '../LanguageHierarchy';
 
 const LanguagesWithIdenticalNames: React.FC = () => {
-  const {
-    languagesBySource: { All },
-  } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
   const { page, limit } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
   const sliceFunction = getSliceFunction<[string, LanguageData[]]>();
-  const languagesByName = Object.values(All)
-    .filter(filterBySubstring)
-    .filter(filterByTerritory)
-    .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
-      const name = lang.nameDisplay;
-      if (languagesByName[name] == null) {
-        languagesByName[name] = [lang];
-      } else {
-        languagesByName[name].push(lang);
-      }
-      return languagesByName;
-    }, {});
+  const languagesByName = useMemo(() => {
+    return languagesInSelectedSource
+      .filter(filterBySubstring)
+      .filter(filterByTerritory)
+      .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
+        const name = lang.nameDisplay;
+        if (languagesByName[name] == null) {
+          languagesByName[name] = [lang];
+        } else {
+          languagesByName[name].push(lang);
+        }
+        return languagesByName;
+      }, {});
+  }, [languagesInSelectedSource, filterBySubstring, filterByTerritory]);
   const langsWithDupNames = Object.entries(languagesByName).reduce<Record<string, LanguageData[]>>(
     (duplicatedNames, [name, langs]) => {
       if (langs.length > 1) {

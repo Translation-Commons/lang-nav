@@ -1,0 +1,23 @@
+#codeDisplay		hu2001	hu2011	hu2022
+#nameDisplay		Hungary 2001	Hungary 2011	Hungary 2022
+#isoRegionCode	HU			
+#yearCollected		2001	2011	2022
+#datePublished		2009	2013	2024
+#eligiblePopulation		10,198,315	9,937,628	9,603,634
+#notes		Census - de facto - complete tabulation	Census - de facto - complete tabulation	Census - de jure - complete tabulation
+#modality		Spoken		
+#acquisitionOrder	Any			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	hu2001	hu2011	hu2022
+mul	Total		9,937,628	9,603,634
+hun	Hungarian	10,177,223	8,409,049	9,483,824
+mul	Other		52,386	2,662,404
+mis	Not stated		1,443,840	0
+deu	German	1,040,786	38,248	1,207,058
+ron	Romanian	77,071	13,886	137,884
+rom	Romany	94,721	54,339	39,767
+slk	Slovak	60,664	9,888	37,803
+hbs/hrv	Croatian	42,549	13,716	29,687
+hbs/srp	Serbian	25,483	3,708	30,764
+slv	Slovenian	5,643	1,723	3,537

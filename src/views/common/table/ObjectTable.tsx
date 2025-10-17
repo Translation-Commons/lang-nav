@@ -9,16 +9,18 @@ import {
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getSortFunction } from '../../../controls/sort';
 import { ObjectData } from '../../../types/DataTypes';
-import { SortBy } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
 import ObjectDetails from '../details/ObjectDetails';
 import { DetailsContainer } from '../details/ObjectDetailsPage';
 import ObjectTitle from '../ObjectTitle';
 
 import './tableStyles.css';
+import TableColumnSelector from './TableColumnSelector';
 import TableSortButton from './TableSortButton';
 
 export interface TableColumn<T> {
+  columnGroup?: string; // "Key" for the parent column
   isInitiallyVisible?: boolean;
   isNumeric?: boolean;
   key: string;
@@ -48,10 +50,10 @@ function ObjectTable<T extends ObjectData>({
     Object.fromEntries(columns.map((col) => [col.key, col.isInitiallyVisible ?? true])),
   );
 
-  const toggleColumn = useCallback((columnKey: string) => {
+  const toggleColumn = useCallback((columnKey: string, isVisible?: boolean) => {
     setVisibleColumns((prev) => ({
       ...prev,
-      [columnKey]: !prev[columnKey],
+      [columnKey]: isVisible ?? !prev[columnKey],
     }));
   }, []);
 
@@ -76,24 +78,12 @@ function ObjectTable<T extends ObjectData>({
         objects={objects}
         shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
       />
-      <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
-        <summary style={{ cursor: 'pointer' }}>
-          {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
-        </summary>
-        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '.5em' }}>
-          {columns.map((column) => (
-            <label key={column.key} style={{ cursor: 'pointer' }}>
-              <input
-                type="checkbox"
-                checked={visibleColumns[column.key] || false}
-                onChange={() => toggleColumn(column.key)}
-                style={{ marginRight: '0.5rem' }}
-              />
-              {column.label ?? column.key}
-            </label>
-          ))}
-        </div>
-      </details>
+      <TableColumnSelector
+        columns={columns}
+        currentlyVisibleColumns={currentlyVisibleColumns}
+        visibleColumns={visibleColumns}
+        toggleColumn={toggleColumn}
+      />
 
       <table className="ObjectTable">
         <thead>

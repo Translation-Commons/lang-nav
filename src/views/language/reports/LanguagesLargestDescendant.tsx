@@ -4,26 +4,26 @@ import Selector from '../../../controls/components/Selector';
 import { useDataContext } from '../../../data/DataContext';
 import { numberToFixedUnlessSmall } from '../../../generic/numberUtils';
 import { LanguageData } from '../../../types/LanguageTypes';
-import { SortBy } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import CollapsibleReport from '../../common/CollapsibleReport';
+import { getObjectPopulationPercentInBiggestDescendentLanguage } from '../../common/getObjectPopulation';
 import HoverableObjectName from '../../common/HoverableObjectName';
 import { CodeColumn, NameColumn } from '../../common/table/CommonColumns';
 import ObjectTable from '../../common/table/ObjectTable';
 
 const LanguagesLargestDescendant: React.FC = () => {
-  const { languages } = useDataContext();
-  const languagesArr = useMemo(() => Object.values(languages), [languages]);
+  const { languagesInSelectedSource } = useDataContext();
 
   // TODO move this algorithm earlier in the data processing pipeline so it doesn't need to be
   // recomputed every time the component renders.
 
   // Clear the largest descendants first since it may change a lot if the schema changes.
-  languagesArr.forEach((lang) => {
+  languagesInSelectedSource.forEach((lang) => {
     lang.largestDescendant = undefined;
   });
 
   // Compute the largest descendants for each language
-  languagesArr.forEach((lang) => {
+  languagesInSelectedSource.forEach((lang) => {
     lang.largestDescendant = getLargestDescendant(lang);
   });
 
@@ -32,7 +32,7 @@ const LanguagesLargestDescendant: React.FC = () => {
 
   const filteredLanguages = useMemo(
     () =>
-      languagesArr.filter((lang) => {
+      languagesInSelectedSource.filter((lang) => {
         if (
           lang.largestDescendant == null ||
           lang.populationEstimate == null ||
@@ -45,7 +45,7 @@ const LanguagesLargestDescendant: React.FC = () => {
           100;
         return percent >= minimumPercentThreshold && percent <= maximumPercentThreshold;
       }),
-    [languagesArr, minimumPercentThreshold, maximumPercentThreshold],
+    [languagesInSelectedSource, minimumPercentThreshold, maximumPercentThreshold],
   );
 
   return (
@@ -106,16 +106,13 @@ const LanguagesLargestDescendant: React.FC = () => {
 
           {
             key: '% Descendent',
-            render: (lang: LanguageData) =>
-              lang.largestDescendant
-                ? numberToFixedUnlessSmall(
-                    ((lang.largestDescendant?.populationEstimate || 0) /
-                      (lang.populationEstimate || 0)) *
-                      100,
-                  )
-                : null,
+            render: (lang: LanguageData) => {
+              const relativePopulation =
+                getObjectPopulationPercentInBiggestDescendentLanguage(lang);
+              return relativePopulation ? numberToFixedUnlessSmall(relativePopulation * 100) : null;
+            },
             isNumeric: true,
-            sortParam: SortBy.RelativePopulation,
+            sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
           },
         ]}
         objects={filteredLanguages}

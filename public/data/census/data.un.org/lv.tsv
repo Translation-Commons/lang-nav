@@ -1,0 +1,34 @@
+#codeDisplay		lv2000	lv2011
+#nameDisplay		Latvia 2000	Latvia 2011
+#isoRegionCode	LV		
+#yearCollected		2000	2011
+#datePublished		2003	2013
+#eligiblePopulation		2,377,383	2,070,371
+#notes	Census - de jure - complete tabulation		
+#modality	Spoken		
+#domain	Home		
+#acquisitionOrder	L1		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	lv2000	lv2011
+mul	Total	2,377,383	2,070,371
+lav	Latvian	1,473,267	1,164,894
+rus	Russian	865,006	698,757
+mis	Unknown		193,559
+mul	Other	19,423	6,922
+pol	Polish	5,725	1,774
+rom	Romani (Gypsy)	3,990	
+lit	Lithuanian	3,843	2,164
+ukr	Ukrainian	2,369	1,664
+bel	Belorussian	1,228	637
+eng	English	570	
+yid	Yiddish	499	
+hye	Armenian	423	
+aze	Azerbaijani	230	
+deu	German	203	
+tat	Tatar	146	
+est	Estonian	145	
+kat	Georgian	134	
+ron/mol	Moldavian	102	
+swe	Swedish	80	

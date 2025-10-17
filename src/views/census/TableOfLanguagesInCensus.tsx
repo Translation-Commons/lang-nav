@@ -9,7 +9,8 @@ import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
 import { PercentageDifference } from '../../generic/PercentageDifference';
 import { CensusData } from '../../types/CensusTypes';
 import { LocaleData } from '../../types/DataTypes';
-import { ObjectType, SearchableField, SortBy } from '../../types/PageParamTypes';
+import { ObjectType, SearchableField } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import HoverableObject from '../common/HoverableObject';
 import HoverableObjectName from '../common/HoverableObjectName';
 import { ObjectFieldHighlightedByPageSearch } from '../common/ObjectField';
@@ -21,10 +22,7 @@ type Props = {
 };
 
 const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
-  const {
-    languagesBySource: { All: langObjects },
-    locales,
-  } = useDataContext();
+  const { getLanguage, getLocale } = useDataContext();
   const { localeSeparator } = usePageParams();
 
   const langsNotFound: string[] = [];
@@ -32,7 +30,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
   // Create new locale data objects based on the census results
   const languagesInCensus: LocaleData[] = Object.entries(census.languageEstimates)
     .map(([langID, populationSpeaking]) => {
-      const lang = langObjects[langID];
+      const lang = getLanguage(langID);
       if (lang == null) {
         langsNotFound.push(langID);
         return null;
@@ -60,19 +58,19 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
 
   const getActualLocaleInfoButton = useCallback(
     (mockedLocale: LocaleData): React.ReactNode => (
-      <ActualLocaleInfoButton actualLocale={locales[mockedLocale.ID]} />
+      <ActualLocaleInfoButton actualLocale={getLocale(mockedLocale.ID)} />
     ),
-    [locales],
+    [getLocale],
   );
 
   const getPopulationDifference = useCallback(
     (mockedLocale: LocaleData): React.ReactNode => (
       <PercentageDifference
         percentNew={mockedLocale.populationSpeakingPercent || 0}
-        percentOld={locales[mockedLocale.ID]?.populationSpeakingPercent}
+        percentOld={getLocale(mockedLocale.ID)?.populationSpeakingPercent}
       />
     ),
-    [locales],
+    [getLocale],
   );
 
   return (
@@ -113,7 +111,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
                 ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
                 : 'N/A',
             isNumeric: true,
-            sortParam: SortBy.RelativePopulation,
+            sortParam: SortBy.PercentOfTerritoryPopulation,
           },
           {
             key: 'Scope',
@@ -141,10 +139,21 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             isNumeric: true,
           },
           {
+            key: 'Percent of Worldwide in Language',
+            render: (object) =>
+              object.populationSpeaking &&
+              numberToFixedUnlessSmall(
+                (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
+              ) + '%',
+            isNumeric: true,
+            isInitiallyVisible: false,
+            sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+          },
+          {
             key: 'Primary Territory',
             render: (loc) => {
               const territory = loc.language?.locales.sort(
-                (a, b) => b.populationSpeaking - a.populationSpeaking,
+                (a, b) => (b.populationSpeaking ?? -1) - (a.populationSpeaking ?? -1),
               )[0]?.territory;
               return territory ? <HoverableObjectName object={territory} /> : null;
             },

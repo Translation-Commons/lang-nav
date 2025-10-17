@@ -1,0 +1,35 @@
+#codeDisplay		cy2001	cy2011	cy2021
+#nameDisplay		Cyprus 2001	Cyprus 2011	Cyprus 2021
+#isoRegionCode	CY			
+#yearCollected		2001	2011	2021
+#datePublished		2002	2013	2024
+#eligiblePopulation		689,565	840,407	923,381
+#respondingPopulation		688,705	835,113	912,270
+#notes		Data refer to government controlled areas. Residents. Census - de jure - complete tabulation	Data refer to government controlled areas. Census - de jure - complete tabulation	Data refer to government controlled areas. Census - de jure - complete tabulation
+#responsesPerIndividual		1		1
+#acquisitionOrder	L1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	cy2001	cy2011	cy2021
+mul	Total	689,565	840,407	923,381
+ell	Greek	632,539	679,833	733,732
+eng	English	16,086	34,814	44,482
+mul	Other	2,602		25,761
+ron	Romanian	2,029	24,270	18,691
+rus	Russian	13,530	20,984	21,642
+ara	Arabic	3,793	9,762	19,663
+bul	Bulgarian	2,585	18,388	14,678
+mis	Not stated	860	5,294	11,111
+fil	Pilipino	3,458	9,109	7,554
+hin	#Indian	1,288	3,160	8,370
+sin	#Sri Lankan	4,967	7,157	6,060
+pol	Polish	213	2,805	2,013
+fra	French	588	1,139	2,546
+deu	German	963	1,294	2,281
+zho	Chinese	778	1,218	2,179
+tur	Turkish	341	1,405	1,551
+hye	Armenian	1,373	1,409	1,067
+hbs	Yugoslav	1,060	483	
+hun	Hungarian	94	593	
+spa	Spanish	225	522	
+ita	Italian	193	343	

@@ -10,6 +10,9 @@ import HoverableObjectName from '../common/HoverableObjectName';
 import ObjectTitle from '../common/ObjectTitle';
 import PopulationWarning from '../common/PopulationWarning';
 
+import { VitalityMeterType } from './LanguageVitalityComputation';
+import LanguageVitalityMeter from './LanguageVitalityMeter';
+
 interface Props {
   lang: LanguageData;
   includeRelations?: boolean;
@@ -18,10 +21,10 @@ interface Props {
 const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
   const { updatePageParams } = usePageParams();
   const sortFunction = getSortFunction();
-  const { ID, locales, modality, populationEstimate, vitalityEth2013 } = lang;
+  const { ID, locales, modality, populationEstimate } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
-    (l) => l.territoryCode,
+    (l) => l.territoryCode ?? '',
   );
 
   return (
@@ -45,12 +48,10 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
           {modality}
         </div>
       )}
-      {vitalityEth2013 != null && (
-        <div>
-          <h4>Vitality</h4>
-          {vitalityEth2013}
-        </div>
-      )}
+      <div>
+        <h4>Vitality</h4>
+        <LanguageVitalityMeter lang={lang} type={VitalityMeterType.Metascore} />
+      </div>
 
       {includeRelations && countryLocales.length > 0 && (
         <div>

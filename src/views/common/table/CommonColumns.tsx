@@ -1,5 +1,6 @@
 import { ObjectData } from '../../../types/DataTypes';
-import { SearchableField, SortBy } from '../../../types/PageParamTypes';
+import { SearchableField } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import HoverableObject from '../HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
 
@@ -13,6 +14,7 @@ export const CodeColumn: TableColumn<ObjectData> = {
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />
   ),
   sortParam: SortBy.Code,
+  columnGroup: 'Codes',
 };
 
 export const NameColumn: TableColumn<ObjectData> = {
@@ -23,6 +25,7 @@ export const NameColumn: TableColumn<ObjectData> = {
     </HoverableObject>
   ),
   sortParam: SortBy.Name,
+  columnGroup: 'Names',
 };
 
 export const EndonymColumn: TableColumn<ObjectData> = {
@@ -32,4 +35,5 @@ export const EndonymColumn: TableColumn<ObjectData> = {
   ),
   sortParam: SortBy.Endonym,
   isInitiallyVisible: false,
+  columnGroup: 'Names',
 };

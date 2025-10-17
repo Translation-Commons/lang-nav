@@ -28,6 +28,7 @@ export async function loadLocales(): Promise<Record<BCP47LocaleCode, LocaleData>
         .split('\n')
         .slice(1)
         .map(parseLocaleLine)
+        .filter((locale) => locale != null)
         .reduce<Record<BCP47LocaleCode, LocaleData>>((localesByCode, locale) => {
           localesByCode[locale.ID] = locale;
           return localesByCode;
