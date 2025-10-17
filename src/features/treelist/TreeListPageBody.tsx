@@ -1,8 +1,7 @@
 import React, { useCallback } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-
 import { getFilterBySubstring, getFilterByTerritory } from '@features/filtering/filter';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

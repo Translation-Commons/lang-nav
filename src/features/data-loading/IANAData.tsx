@@ -1,4 +1,4 @@
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleStrings';

@@ -1,4 +1,4 @@
-import { LocaleSeparator } from '@widgets/PageParamTypes';
+import { LocaleSeparator } from '@features/page-params/PageParamTypes';
 
 import { ISO3166Code, LocaleData, OfficialStatus } from '@entities/types/DataTypes';
 

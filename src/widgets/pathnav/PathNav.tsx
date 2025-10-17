@@ -3,8 +3,9 @@ import React, { useCallback } from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, View } from '@widgets/PageParamTypes';
+
+import { ObjectType, View } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 

@@ -1,5 +1,4 @@
-import { SearchableField } from '@widgets/PageParamTypes';
-
+import { SearchableField } from '@features/page-params/PageParamTypes';
 import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';

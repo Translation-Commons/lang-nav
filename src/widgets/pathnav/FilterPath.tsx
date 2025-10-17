@@ -3,9 +3,10 @@ import React, { Fragment } from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
-import { getDefaultParams } from '@widgets/controls/Profiles';
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { SearchableField, View } from '@widgets/PageParamTypes';
+
+import { SearchableField, View } from '@features/page-params/PageParamTypes';
+import { getDefaultParams } from '@features/page-params/Profiles';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';

@@ -1,8 +1,8 @@
 import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';

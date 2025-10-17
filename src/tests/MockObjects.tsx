@@ -2,8 +2,6 @@
  * This is a set of mock objects for testing purposes.
  */
 
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
-
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
@@ -18,6 +16,7 @@ import {
   connectTerritoriesToParent,
   createRegionalLocales,
 } from '@features/data-loading/TerritoryData';
+import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {

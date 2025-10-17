@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import {
   getBaseLanguageData,

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
-
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';

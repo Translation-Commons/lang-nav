@@ -1,7 +1,5 @@
 import { useState } from 'react';
 
-import { ObjectType } from '@widgets/PageParamTypes';
-
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
@@ -20,6 +18,7 @@ import {
   createRegionalLocales,
   loadTerritories,
 } from '@features/data-loading/TerritoryData';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusID, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';

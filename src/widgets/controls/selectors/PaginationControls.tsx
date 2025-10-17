@@ -1,7 +1,7 @@
 import { SkipBackIcon, SkipForwardIcon, StepBackIcon, StepForwardIcon } from 'lucide-react';
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 type Props = {
   currentPage: number;

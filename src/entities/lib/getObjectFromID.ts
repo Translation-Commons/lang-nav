@@ -1,6 +1,5 @@
-import { usePageParams } from '@widgets/PageParamsProvider';
-
 import { useDataContext } from '@features/data-loading/DataContext';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

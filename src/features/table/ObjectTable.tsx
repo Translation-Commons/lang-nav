@@ -1,9 +1,8 @@
 import React, { useMemo, useState, useCallback } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-
 import ObjectDetails from '@features/details/ObjectDetails';
 import { DetailsContainer } from '@features/details/ObjectDetailsPage';
+import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';

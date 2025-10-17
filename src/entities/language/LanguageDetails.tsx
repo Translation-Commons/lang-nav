@@ -1,11 +1,11 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import DetailsField from '@features/details/DetailsField';
 import DetailsSection from '@features/details/DetailsSection';
+import { usePageParams } from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 

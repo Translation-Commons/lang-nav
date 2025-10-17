@@ -2,7 +2,7 @@
  * This file provides types for the data used in the application.
  */
 
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusData } from '../census/CensusTypes';
 import { LanguageCode, LanguageData } from '../language/LanguageTypes';

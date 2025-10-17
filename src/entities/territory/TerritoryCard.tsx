@@ -1,8 +1,7 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-
 import { getScopeFilter } from '@features/filtering/filter';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { TerritoryData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';

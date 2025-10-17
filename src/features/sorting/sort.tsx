@@ -1,5 +1,5 @@
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import {

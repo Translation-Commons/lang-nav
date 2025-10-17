@@ -1,11 +1,10 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
-
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
+import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 import CollapsibleReport from '@features/reports/CollapsibleReport';
 import { getSortFunction } from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';

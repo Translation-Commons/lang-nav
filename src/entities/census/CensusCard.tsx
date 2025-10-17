@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';

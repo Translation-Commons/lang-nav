@@ -1,4 +1,4 @@
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageModality } from '@entities/language/LanguageTypes';

@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { ObjectType } from '@widgets/PageParamTypes';
-
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';

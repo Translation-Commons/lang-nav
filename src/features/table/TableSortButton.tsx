@@ -1,8 +1,7 @@
 import { ArrowDown01, ArrowDown10, ArrowDownAZ, ArrowDownZA } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-
+import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy, SortBehavior, SortDirection } from '@features/sorting/SortTypes';
 
 import HoverableButton from '@shared/ui/HoverableButton';

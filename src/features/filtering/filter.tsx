@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
+import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';

@@ -1,10 +1,9 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
-
 import { useDataContext } from '@features/data-loading/DataContext';
+import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';

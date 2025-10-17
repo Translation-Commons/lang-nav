@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import { useDataContext } from '@features/data-loading/DataContext';
+import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';

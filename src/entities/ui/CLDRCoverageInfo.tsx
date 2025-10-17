@@ -1,7 +1,7 @@
 import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
 import React from 'react';
 
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';

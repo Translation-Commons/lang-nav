@@ -3,7 +3,7 @@ import React, { Suspense } from 'react';
 import { HoverCardProvider } from '@widgets/HoverCardContext';
 import Loading from '@widgets/Loading';
 
-const PageParamsProvider = React.lazy(() => import('@widgets/PageParamsProvider'));
+const PageParamsProvider = React.lazy(() => import('@features/page-params/PageParamsProvider'));
 const DataProvider = React.lazy(() => import('@features/data-loading/DataContext'));
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
 const SidePanel = React.lazy(() => import('@widgets/controls/SidePanel'));

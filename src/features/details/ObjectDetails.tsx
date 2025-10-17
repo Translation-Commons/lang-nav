@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import CensusDetails from '@entities/census/CensusDetails';
 import LanguageDetails from '@entities/language/LanguageDetails';

@@ -1,8 +1,8 @@
 import { XIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { PageParamKey, View } from '@widgets/PageParamTypes';
+import { PageParamKey, View } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';

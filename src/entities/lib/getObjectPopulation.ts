@@ -1,4 +1,4 @@
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';

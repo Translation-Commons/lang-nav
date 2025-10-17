@@ -1,7 +1,7 @@
 import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
+import { usePageParams } from '@features/page-params/usePageParams';
 
+import { ProfileType } from '../../../features/page-params/Profiles';
 import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplay';
-import { ProfileType } from '../Profiles';
 
 const ProfileSelector: React.FC = () => {
   const { profile, updatePageParams } = usePageParams();

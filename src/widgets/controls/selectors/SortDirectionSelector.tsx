@@ -1,7 +1,6 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-
+import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBehavior } from '@features/sorting/SortTypes';
 
 import Selector from '../components/Selector';

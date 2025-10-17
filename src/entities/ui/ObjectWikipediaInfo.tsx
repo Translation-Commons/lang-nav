@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';

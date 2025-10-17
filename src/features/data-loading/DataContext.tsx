@@ -1,7 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { LocaleSeparator, ObjectType } from '@widgets/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';

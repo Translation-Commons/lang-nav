@@ -1,7 +1,7 @@
 import aliases from 'cldr-core/supplemental/aliases.json';
 import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';

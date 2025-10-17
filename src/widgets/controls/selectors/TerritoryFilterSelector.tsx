@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { PageParamKey, SearchableField } from '@widgets/PageParamTypes';
-
 import { useDataContext } from '@features/data-loading/DataContext';
 import { getScopeFilter } from '@features/filtering/filter';
+import { PageParamKey, SearchableField } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 

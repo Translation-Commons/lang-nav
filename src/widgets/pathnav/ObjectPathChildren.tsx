@@ -3,8 +3,8 @@ import React from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
-import { usePageParams } from '@widgets/PageParamsProvider';
 
+import { usePageParams } from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';

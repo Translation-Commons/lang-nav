@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import { getScopeFilter } from '@features/filtering/filter';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';

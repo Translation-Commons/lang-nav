@@ -1,12 +1,12 @@
 import { ExpandIcon, XIcon } from 'lucide-react';
 import React, { useEffect } from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { View } from '@widgets/PageParamTypes';
 import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import ObjectDetails from '@features/details/ObjectDetails';
+import { View } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import ObjectTitle from '@entities/ui/ObjectTitle';

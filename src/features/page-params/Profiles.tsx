@@ -8,6 +8,11 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
+import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+
+import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
+
 import {
   LocaleSeparator,
   ObjectType,
@@ -15,12 +20,7 @@ import {
   PageParamsOptional,
   SearchableField,
   View,
-} from '@widgets/PageParamTypes';
-
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
-
-import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
+} from './PageParamTypes';
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default

@@ -2,8 +2,9 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
 import CreativeCommonsLicense from '@widgets/CreativeCommonsLicense';
-import { getNewURL } from '@widgets/PageParamsProvider';
-import { PageParamsOptional } from '@widgets/PageParamTypes';
+
+import { getNewURL } from '@features/page-params/getNewURL';
+import { PageParamsOptional } from '@features/page-params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 

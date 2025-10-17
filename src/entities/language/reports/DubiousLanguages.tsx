@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import LimitInput from '@widgets/controls/selectors/LimitInput';
 import PaginationControls from '@widgets/controls/selectors/PaginationControls';
-import { usePageParams } from '@widgets/PageParamsProvider';
 
 import ViewCard from '@features/cardlist/ViewCard';
 import { useDataContext } from '@features/data-loading/DataContext';
@@ -11,6 +10,7 @@ import {
   getFilterByTerritory,
   getSliceFunction,
 } from '@features/filtering/filter';
+import { usePageParams } from '@features/page-params/usePageParams';
 import CollapsibleReport from '@features/reports/CollapsibleReport';
 import { getSortFunction } from '@features/sorting/sort';
 

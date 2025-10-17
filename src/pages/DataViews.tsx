@@ -1,7 +1,6 @@
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType, View } from '@widgets/PageParamTypes';
-
 import ObjectDetailsPage from '@features/details/ObjectDetailsPage';
+import { ObjectType, View } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 import ViewReports from '@features/reports/ViewReports';
 
 import CensusCardList from '@entities/census/CensusCardList';

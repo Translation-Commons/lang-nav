@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { usePageParams } from '@widgets/PageParamsProvider';
-import { ObjectType } from '@widgets/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 
 import TableOfCountriesWithCensuses from '@entities/census/TableOfCountriesWithCensuses';
 import DubiousLanguages from '@entities/language/reports/DubiousLanguages';
