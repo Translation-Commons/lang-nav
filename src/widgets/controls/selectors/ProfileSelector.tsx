@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { usePageParams } from '../../PageParamsProvider';
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import { ProfileType } from '../Profiles';

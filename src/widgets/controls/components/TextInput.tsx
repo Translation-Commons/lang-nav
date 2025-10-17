@@ -1,13 +1,12 @@
 import { XIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
 import { PageParamKey, View } from '@widgets/PageParamTypes';
 
 import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
 import HoverableButton from '@shared/ui/HoverableButton';
-
-import { usePageParams } from '../../PageParamsProvider';
 
 import { SelectorDisplay } from './SelectorDisplay';
 import { SelectorDropdown } from './SelectorDropdown';

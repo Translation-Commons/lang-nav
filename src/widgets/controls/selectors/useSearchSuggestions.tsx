@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
 import { ObjectType, SearchableField } from '@widgets/PageParamTypes';
 
 import { useDataContext } from '@features/data-loading/DataContext';
@@ -9,7 +10,6 @@ import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectF
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
-import { usePageParams } from '../../PageParamsProvider';
 import { Suggestion } from '../components/TextInput';
 
 const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this seems to prevent render lag.

@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
+
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
 
-import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';
 
 const LanguageScopeSelector: React.FC = () => {

@@ -6,7 +6,7 @@ import { SearchableField } from '@widgets/PageParamTypes';
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { HighlightedObjectField, getSearchableField } from '@entities/ui/ObjectField';
 
-vi.mock('@features/controls/PageParamsContext', () => ({
+vi.mock('@widgets/PageParamsProvider', () => ({
   usePageParams: vi.fn(),
 }));
 

@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
 import { PageParamKey } from '@widgets/PageParamTypes';
 
-import { usePageParams } from '../../PageParamsProvider';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput from '../components/TextInput';

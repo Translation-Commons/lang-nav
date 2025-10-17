@@ -1,10 +1,10 @@
 import React from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
 import { ObjectType, View } from '@widgets/PageParamTypes';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 
-import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';
 
 const TerritoryScopeSelector: React.FC = () => {

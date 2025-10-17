@@ -67,6 +67,7 @@ export default defineConfig([
             { pattern: "@features/**", group: "internal", position: "after" },
             { pattern: "@entities/**", group: "internal", position: "after" },
             { pattern: "@shared/**",   group: "internal", position: "after" },
+            { pattern: "@strings/**",  group: "internal", position: "after" },
             { pattern: "@tests/**",    group: "internal", position: "after" }
           ],
           pathGroupsExcludedImportTypes: ['builtin'],

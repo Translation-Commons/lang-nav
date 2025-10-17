@@ -64,7 +64,7 @@ const LanguageTable: React.FC = () => {
         endonymColumn,
         {
           key: 'Scope',
-          render: (lang) => lang.scope ?? lang.scope,
+          render: (lang) => lang.scope,
           isInitiallyVisible: false,
         },
         {

@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
 import { LocaleSeparator } from '@widgets/PageParamTypes';
 
-import { usePageParams } from '../../PageParamsProvider';
 import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 

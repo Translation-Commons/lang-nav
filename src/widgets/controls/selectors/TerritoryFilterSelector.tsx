@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import { usePageParams } from '@widgets/PageParamsProvider';
 import { PageParamKey, SearchableField } from '@widgets/PageParamTypes';
 
 import { useDataContext } from '@features/data-loading/DataContext';
@@ -7,7 +8,6 @@ import { getScopeFilter } from '@features/filtering/filter';
 
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 
-import { usePageParams } from '../../PageParamsProvider';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput, { Suggestion } from '../components/TextInput';
