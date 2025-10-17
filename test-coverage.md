@@ -54,6 +54,7 @@
 | `        PotentialLocales.tsx`           |     0   |     0   |     0   |     0   |
 | `        PotentialLocaleThreshold.tsx`   |     0   |     0   |     0   |     0   |
 | `      territory`                        |     0   |   100.0 |   100.0 |     0   |
+| `        TableOfLanguagesInTerritory.tsx` |     0   |   100.0 |   100.0 |     0   |
 | `        TerritoryCard.tsx`              |     0   |   100.0 |   100.0 |     0   |
 | `        TerritoryCardList.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        TerritoryDetails.tsx`           |     0   |   100.0 |   100.0 |     0   |
