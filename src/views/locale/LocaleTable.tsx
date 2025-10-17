@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { usePageParams } from '../../controls/PageParamsContext';
+import { getCldrLocale } from '../../data/cldrLocales';
 import { useDataContext } from '../../data/DataContext';
 import CommaSeparated from '../../generic/CommaSeparated';
 import { numberToFixedUnlessSmall } from '../../generic/numberUtils';
@@ -58,7 +59,6 @@ const LocaleTable: React.FC = () => {
             object.populationSpeakingPercent && (
               <>
                 {numberToFixedUnlessSmall(object.populationSpeakingPercent)}
-                {/* If the number is greater than 10%, add an invisible 0 for alignment */}
                 {object.populationSpeakingPercent > 10 && (
                   <span style={{ visibility: 'hidden' }}>0</span>
                 )}
@@ -139,6 +139,58 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Locale Source',
           render: (object) => toSentenceCase(object.localeSource),
+          isInitiallyVisible: false,
+        },
+
+        // ------- CLDR columns (hidden by default) -------
+        {
+          key: 'CLDR Tier',
+          label: 'CLDR Tier',
+          render: (loc: LocaleData) => {
+            const cldr = getCldrLocale(loc.ID);
+            return cldr ? cldr.tier : null;
+          },
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'CLDR Level',
+          label: 'CLDR Level',
+          render: (loc: LocaleData) => {
+            const cldr = getCldrLocale(loc.ID);
+            return cldr ? (
+              <span>
+                {cldr.targetLevel ?? '—'} / {cldr.computedLevel ?? '—'}
+              </span>
+            ) : null;
+          },
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'CLDR Confirmed %',
+          label: 'Confirmed %',
+          render: (loc: LocaleData) => {
+            const cldr = getCldrLocale(loc.ID);
+            return cldr?.confirmedPct != null ? cldr.confirmedPct : null;
+          },
+          isInitiallyVisible: false,
+          isNumeric: true,
+        },
+        {
+          key: 'CLDR ICU',
+          label: 'ICU',
+          render: (loc: LocaleData) => {
+            const cldr = getCldrLocale(loc.ID);
+            return cldr?.icuIncluded ? '✓' : '—';
+          },
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'CLDR Default',
+          label: 'Default Locale',
+          render: (loc: LocaleData) => {
+            const cldr = getCldrLocale(loc.ID);
+            return cldr?.localeIsDefaultForLanguage ? '★' : '—';
+          },
           isInitiallyVisible: false,
         },
       ]}
