@@ -1,3 +1,5 @@
+import path from 'node:path';
+
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vitest/config';
 
@@ -5,7 +7,7 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
-    setupFiles: ['./src/setupTests.ts'],
+    setupFiles: ['./src/tests/setupTests.ts'],
     include: ['src/**/*.{test,spec}.{ts,tsx}'],
     globals: true,
     reporters: ['default'],
@@ -14,7 +16,7 @@ export default defineConfig({
       provider: 'v8',
       enabled: true,
       exclude: [
-        'src/main.tsx',
+        'src/app/main.tsx',
         'src/vite-env.d.ts',
         '**/*.d.ts',
         '**/types/**',
@@ -28,6 +30,18 @@ export default defineConfig({
         functions: 0,
         lines: 0,
       },
+    },
+  },
+  resolve: {
+    alias: {
+      '@app': path.resolve(__dirname, 'src/app'),
+      '@pages': path.resolve(__dirname, 'src/pages'),
+      '@widgets': path.resolve(__dirname, 'src/widgets'),
+      '@features': path.resolve(__dirname, 'src/features'),
+      '@entities': path.resolve(__dirname, 'src/entities'),
+      '@shared': path.resolve(__dirname, 'src/shared'),
+      '@strings': path.resolve(__dirname, 'src/strings'),
+      '@tests': path.resolve(__dirname, 'src/tests'),
     },
   },
 });

@@ -1,11 +1,12 @@
 import React, { PropsWithChildren, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getNewURL } from '../controls/PageParamsContext';
-import { LanguageSource } from '../types/LanguageTypes';
-import { PageParamsOptional } from '../types/PageParamTypes';
+import CreativeCommonsLicense from '@widgets/CreativeCommonsLicense';
 
-import CreativeCommonsLicense from './CreativeCommonsLicense';
+import { getNewURL } from '@features/page-params/getNewURL';
+import { PageParamsOptional } from '@features/page-params/PageParamTypes';
+
+import { LanguageSource } from '@entities/language/LanguageTypes';
 
 const AboutPage: React.FC = () => {
   return (

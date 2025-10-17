@@ -1,13 +1,13 @@
 import React, { Suspense } from 'react';
 
-import { HoverCardProvider } from '../generic/HoverCardContext';
-import Loading from '../views/Loading';
+import { HoverCardProvider } from '@widgets/HoverCardContext';
+import Loading from '@widgets/Loading';
 
-const PageParamsProvider = React.lazy(() => import('../controls/PageParamsContext'));
-const DataProvider = React.lazy(() => import('../data/DataContext'));
-const DataPageBody = React.lazy(() => import('../views/DataPageBody'));
-const SidePanel = React.lazy(() => import('../controls/SidePanel'));
-const ViewModal = React.lazy(() => import('../views/ViewModal'));
+const PageParamsProvider = React.lazy(() => import('@features/page-params/PageParamsProvider'));
+const DataProvider = React.lazy(() => import('@features/data-loading/DataContext'));
+const DataPageBody = React.lazy(() => import('./DataPageBody'));
+const SidePanel = React.lazy(() => import('@widgets/controls/SidePanel'));
+const ViewModal = React.lazy(() => import('@features/modal/ViewModal'));
 
 const DataPage: React.FC = () => {
   /* DataProvider and many other data components have more lines of code so they are loaded lazily */
