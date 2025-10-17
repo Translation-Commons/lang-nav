@@ -9,13 +9,14 @@ import {
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { getSortFunction } from '../../../controls/sort';
 import { ObjectData } from '../../../types/DataTypes';
-import { SortBy } from '../../../types/PageParamTypes';
+import { SortBy } from '../../../types/SortTypes';
 import VisibleItemsMeter from '../../VisibleItemsMeter';
 import ObjectDetails from '../details/ObjectDetails';
 import { DetailsContainer } from '../details/ObjectDetailsPage';
 import ObjectTitle from '../ObjectTitle';
 
 import './tableStyles.css';
+import TableColumnSelector from './TableColumnSelector';
 import TableSortButton from './TableSortButton';
 
 /*
@@ -60,6 +61,7 @@ function csvEscape(value: unknown): string {
 
 export interface TableColumn<T> {
   /** Whether the column is visible by default in the UI */
+  columnGroup?: string; // "Key" for the parent column
   isInitiallyVisible?: boolean;
   /** Flag a column as containing numeric values; influences sorting and alignment */
   isNumeric?: boolean;
@@ -102,10 +104,10 @@ function ObjectTable<T extends ObjectData>({
     Object.fromEntries(columns.map((col) => [col.key, col.isInitiallyVisible ?? true])),
   );
 
-  const toggleColumn = useCallback((columnKey: string) => {
+  const toggleColumn = useCallback((columnKey: string, isVisible?: boolean) => {
     setVisibleColumns((prev) => ({
       ...prev,
-      [columnKey]: !prev[columnKey],
+      [columnKey]: isVisible ?? !prev[columnKey],
     }));
   }, []);
 
@@ -175,6 +177,7 @@ function ObjectTable<T extends ObjectData>({
 
   return (
     <div className="ObjectTableContainer">
+
       <div
         style={{
           display: 'flex',
@@ -189,6 +192,12 @@ function ObjectTable<T extends ObjectData>({
           objects={objects}
           shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
         />
+       <TableColumnSelector
+         columns={columns}
+         currentlyVisibleColumns={currentlyVisibleColumns}
+         visibleColumns={visibleColumns}
+         toggleColumn={toggleColumn}
+       />
         <button
           type="button"
           onClick={handleExportCsv}
@@ -218,7 +227,7 @@ function ObjectTable<T extends ObjectData>({
           ))}
         </div>
       </details>
-
+        
       <table className="ObjectTable">
         <thead>
           <tr>

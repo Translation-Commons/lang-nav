@@ -6,11 +6,11 @@ import CardList from '../common/CardList';
 import LanguageCard from './LanguageCard';
 
 const LanguageCardList: React.FC = () => {
-  const { languages } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
 
   return (
     <CardList
-      objects={Object.values(languages)}
+      objects={languagesInSelectedSource}
       renderCard={(lang) => <LanguageCard lang={lang} includeRelations={true} />}
     />
   );

@@ -4,8 +4,9 @@ import React, { useEffect, useState } from 'react';
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { ObjectData } from '../../../types/DataTypes';
 import { ObjectType, SearchableField, View } from '../../../types/PageParamTypes';
+import { getObjectPopulation } from '../getObjectPopulation';
 import HoverableObject from '../HoverableObject';
-import { getObjectPopulation, ObjectFieldHighlightedByPageSearch } from '../ObjectField';
+import { ObjectFieldHighlightedByPageSearch } from '../ObjectField';
 
 import './treelist.css';
 import { useTreeListOptionsContext } from './TreeListOptions';
@@ -81,7 +82,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
             <InfoIcon size="1em" />
           </HoverableObject>
         )}
-        {showPopulation && population > 0 && (
+        {showPopulation && population && (
           <div className="TreeListPopulation">{population.toLocaleString()}</div>
         )}
       </>

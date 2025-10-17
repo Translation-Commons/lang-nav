@@ -1,0 +1,22 @@
+#codeDisplay		li2010	li2015
+#nameDisplay		Liechtenstein 2010	Liechtenstein 2015
+#isoRegionCode	LI		
+#yearCollected		2010	2015
+#datePublished		2013	2019
+#eligiblePopulation		36,149	37,622
+#notes	Census - de jure - complete tabulation		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	li2010	li2015
+mul	Total	36,149	37,622
+deu	German	34,171	34,438
+ita	Italian	412	570
+mul	Other	302	558
+tur	Turkish	268	476
+por	Portuguese	284	425
+spa	Spanish	227	348
+srp	Serbian	244	325
+sqi	Albanian	143	241
+eng	English	59	139
+fra	French	39	102

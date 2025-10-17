@@ -23,7 +23,11 @@ export function getSubstringFilterOnQuery(
   query: string,
   searchBy: SearchableField,
 ): FilterFunctionType {
-  const queryLowerCase = query.toLowerCase();
+  // Convert query to lowercase and remove accents for accent-insensitive matching
+  const queryLowerCase = query
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
   switch (searchBy) {
     case SearchableField.Code:
     case SearchableField.Endonym:

@@ -1,43 +1,58 @@
 import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import { getUniqueTerritoriesForLanguage } from '../../controls/sort';
 import { useDataContext } from '../../data/DataContext';
+import Deemphasized from '../../generic/Deemphasized';
 import Hoverable from '../../generic/Hoverable';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { LanguageData, LanguageField } from '../../types/LanguageTypes';
-import { SortBy } from '../../types/PageParamTypes';
+import { SortBy } from '../../types/SortTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '../common/CLDRCoverageInfo';
+import { getObjectLiteracy, getUniqueTerritoriesForLanguage } from '../common/getObjectMiscFields';
 import HoverableObjectName from '../common/HoverableObjectName';
+import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
 import PopulationWarning from '../common/PopulationWarning';
 import { CodeColumn, EndonymColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
+import LanguageVitalityCell from './LanguageVitalityCell';
+import { VitalityMeterType } from './LanguageVitalityComputation';
+
 const LanguageTable: React.FC = () => {
-  const { languages } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
   const codeColumn = {
     ...CodeColumn,
     render: (lang: LanguageData): ReactNode => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {lang.codeDisplay}
-        {lang.warnings && lang.warnings[LanguageField.isoCode] && (
-          <Hoverable
-            hoverContent={lang.warnings[LanguageField.isoCode]}
-            style={{ marginLeft: '0.125em' }}
-          >
-            <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
-          </Hoverable>
-        )}
+        {<MaybeISOWarning lang={lang} />}
       </div>
     ),
   };
 
   return (
     <ObjectTable<LanguageData>
-      objects={Object.values(languages)}
+      objects={languagesInSelectedSource}
       columns={[
         codeColumn,
+        {
+          key: 'ISO 639-3',
+          render: (lang) => (
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+              {lang.sourceSpecific.ISO.code}
+              {<MaybeISOWarning lang={lang} />}
+            </div>
+          ),
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
+        {
+          key: 'Glottocode',
+          render: (lang) => lang.sourceSpecific.Glottolog.code,
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
         NameColumn,
         endonymColumn,
         {
@@ -56,6 +71,7 @@ const LanguageTable: React.FC = () => {
           render: (lang) => lang.populationEstimate,
           isNumeric: true,
           sortParam: SortBy.Population,
+          columnGroup: 'Population',
         },
         {
           key: 'Population Attested',
@@ -73,6 +89,7 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationAttested,
+          columnGroup: 'Population',
         },
         {
           key: 'Population of Descendents',
@@ -97,24 +114,55 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationOfDescendents,
+          columnGroup: 'Population',
+        },
+        {
+          key: 'Vitality: Metascore',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
+          sortParam: SortBy.VitalityMetascore,
+          columnGroup: 'Vitality',
+        },
+        {
+          key: 'Vitality: ISO',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.ISO} />,
+          sortParam: SortBy.VitalityISO,
+          isInitiallyVisible: false,
+          columnGroup: 'Vitality',
+        },
+        {
+          key: 'Vitality: Ethnologue 2013',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2013} />,
+          sortParam: SortBy.VitalityEthnologue2013,
+          isInitiallyVisible: false,
+          columnGroup: 'Vitality',
+        },
+        {
+          key: 'Vitality: Ethnologue 2025',
+          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2025} />,
+          sortParam: SortBy.VitalityEthnologue2025,
+          isInitiallyVisible: false,
+          columnGroup: 'Vitality',
         },
         {
           key: 'CLDR Coverage',
           label: 'CLDR Coverage',
           render: (lang) => <CLDRCoverageText object={lang} />,
           isInitiallyVisible: false,
+          columnGroup: 'Digital Support',
         },
         {
           key: 'ICU Support',
           label: 'ICU Support',
           render: (lang) => <ICUSupportStatus object={lang} />,
           isInitiallyVisible: false,
+          columnGroup: 'Digital Support',
         },
         {
           key: 'Parent Language',
           render: (lang) =>
             lang.parentLanguage && <HoverableObjectName object={lang.parentLanguage} />,
           isInitiallyVisible: false,
+          columnGroup: 'Relations',
         },
         {
           key: 'Dialects',
@@ -128,16 +176,52 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           isInitiallyVisible: false,
           sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Relations',
         },
         {
           key: 'Territories',
-          render: (lang) => <HoverableEnumeration items={getUniqueTerritoriesForLanguage(lang)} />,
+          render: (lang) => (
+            <HoverableEnumeration
+              items={getUniqueTerritoriesForLanguage(lang).map(
+                (territory) => territory.nameDisplay,
+              )}
+            />
+          ),
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
+          columnGroup: 'Relations',
+        },
+        {
+          key: 'Wikipedia',
+          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          isInitiallyVisible: false,
+          columnGroup: 'Digital Support',
+        },
+        {
+          key: 'Literacy',
+          render: (lang) => {
+            const literacy = getObjectLiteracy(lang);
+            if (literacy == null) return <Deemphasized>—</Deemphasized>;
+            return literacy.toFixed(1);
+          },
+          isInitiallyVisible: false,
+          sortParam: SortBy.Literacy,
+          isNumeric: true,
         },
       ]}
     />
   );
 };
+
+function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | null {
+  return lang.warnings && lang.warnings[LanguageField.isoCode] ? (
+    <Hoverable
+      hoverContent={lang.warnings[LanguageField.isoCode]}
+      style={{ marginLeft: '0.125em' }}
+    >
+      <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
+    </Hoverable>
+  ) : null;
+}
 
 export default LanguageTable;

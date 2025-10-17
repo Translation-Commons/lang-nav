@@ -1,0 +1,29 @@
+#codeDisplay		kg1999
+#nameDisplay		Kyrgyzstan 1999
+#isoRegionCode		KG
+#yearCollected		1999
+#datePublished		2007
+#eligiblePopulation		4,657,496
+#notes		Data refer to selected nationalities by mother tongue. Census - de jure - complete tabulation
+#domain		Home
+#acquisitionOrder		L1
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	kg1999
+mul	Total	4,657,496
+kir	Kyrgyz	3,118,919
+uzb	Uzbek	654,527
+rus	Russian	602,806
+dng	Dungan	50,109
+tgk	Tajik	39,054
+uig	Uyghur	33,256
+tat	Tatar	32,589
+kaz	Kazakh	32,473
+mul	Other	24,159
+tur	Turkish	20,528
+kur	Kurd	11,165
+aze	Azerbaijani	10,660
+ukr	Ukrainian	10,390
+kor	Korean	9,798
+deu	German	7,063

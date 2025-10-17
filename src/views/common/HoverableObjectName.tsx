@@ -5,7 +5,7 @@ import { ObjectType } from '../../types/PageParamTypes';
 import HoverableObject from '../common/HoverableObject';
 
 type Props = {
-  object: ObjectData;
+  object?: ObjectData;
   labelSource?: 'name' | 'code' | 'territory' | 'language';
   format?: 'text' | 'button';
   style?: React.CSSProperties;
@@ -18,12 +18,14 @@ const HoverableObjectName: React.FC<Props> = ({
   format = 'text',
   style,
 }) => {
+  if (!object) return null;
+
   let label = labelSource == 'code' ? object.codeDisplay : object.nameDisplay;
   if (object.type === ObjectType.Locale) {
     if (labelSource == 'language') {
       label = object.language?.nameDisplay ?? object.languageCode;
     } else if (labelSource == 'territory') {
-      label = object.territory?.nameDisplay ?? object.territoryCode;
+      label = object.territory?.nameDisplay ?? object.territoryCode ?? '[no territory]';
     }
   }
 

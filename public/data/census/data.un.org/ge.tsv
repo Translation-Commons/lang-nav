@@ -1,0 +1,21 @@
+#codeDisplay		ge2002	ge2014
+#nameDisplay		Georgia 2002	Georgia 2014
+#isoRegionCode	GE		
+#yearCollected		2002	2014
+#datePublished		2009	2016
+#eligiblePopulation		4,371,535	3,713,804
+#notes	Census - de jure - complete tabulation		
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	ge2002	ge2014
+mul	Total	4,371,535	3,713,804
+mul	Native	4,335,202	
+kat	Georgian	18,582	3,254,852
+aze	Azeris	218	231,436
+hye	Armenian	122	144,812
+rus	Russian	16,355	45,920
+mul	Other	904	30,742
+oss	Ossetian	9	5,698
+abk	Abkhazian	143	272
+mis	Unknown		72

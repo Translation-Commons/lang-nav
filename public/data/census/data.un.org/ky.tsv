@@ -1,0 +1,23 @@
+#codeDisplay		ky1999	ky2010	ky2021
+#nameDisplay		Cayman Islands 1999	Cayman Islands 2010	Cayman Islands 2021
+#isoRegionCode	KY			
+#yearCollected		1999	2010	2021
+#datePublished		2007	2012	2024
+#eligiblePopulation		39,020	55,036	68,811
+#notes		Census - de jure - complete tabulation	Excluding the institutional population. Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#responsesPerIndividual			1	1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	ky1999	ky2010	ky2021
+mul	Total	39,020	55,036	68,811
+eng	English	37,078	50,019	61,070
+spa	Spanish	1,249	2,188	2,711
+fil	Filipino			2,643
+mul	Other	465	2,565	705
+mul	Indian			756
+mis	Not stated			472
+por	Portuguese	88	133	167
+fra	French	46	64	139
+deu	German	65	35	73
+sgn	Sign Languages			39
+ita	Italian		32	37

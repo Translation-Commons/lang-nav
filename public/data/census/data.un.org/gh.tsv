@@ -1,0 +1,82 @@
+#codeDisplay		gh2000	gh2010
+#nameDisplay		Ghana 2000	Ghana 2010
+#isoRegionCode		GH	GH
+#yearCollected		2000	2010
+#datePublished		2005	2013
+#eligiblePopulation		17,436,592	23,823,594
+#notes		Census - de facto - complete tabulation	Data refer only to persons who were Ghanaians by birth and Ghanaians by dual citizenship. Census - de facto - complete tabulation
+#responsesPerIndividual		1	1
+#languagesIncluded			
+#sampleRate			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	gh2000	gh2010
+mul	Total	17,436,592	23,823,594
+aka/twi/asan1239	Asante	2,578,829	3,820,807
+ewe	Ewe	2,212,113	3,323,072
+aka/fat	Fante	1,723,573	2,757,219
+abr	Boron (Brong)	794,526	1,172,537
+dag	Dagomba	746,924	1,051,123
+gada1257/ada	Dangme	748,014	1,007,170
+dga	Dagarte (Dagaba)	641,926	924,417
+xon	Kokomba	474,293	831,393
+aka/akye1239	Akyem	600,282	763,406
+gada1257/gaa	Ga	587,412	744,884
+aka/twi/akua1239	Akuapem	513,561	626,228
+gur/nank1248	Nankansi and Gur	93,337	588,365
+kus	Kusasi	379,007	534,618
+aka/twi/kwaw1238	Kwahu	329,241	442,760
+gur/fraf1238	Namnam Frafra	426,019	49,165
+maw	Mamprusi	200,393	315,992
+gjn	Gonja	211,703	309,527
+sfw	Sefwi	211,334	305,356
+mul	Other tribes originating from outside Ghana (Hausa, Fulani, Zabrama, etc.)		290,786
+wss	Wasa	251,963	273,482
+nzi	Nzema	207,474	271,671
+mul	Other	269,301	
+aha	Ahanta	253,415	174,765
+aka/agon1238	Agona	238,947	111,383
+sisa1248	Sisala	165,535	218,932
+bib	Busanga	137,740	200,632
+aka/ahaf1238	Ahafo	185,228	86,851
+bim	Bimoba	113,130	176,223
+wlx	Walba (Wala)	173,536	84,810
+ntch1241/bud	Basare (Kyamba)		169,299
+bwu	Builsa (Kangyaga)	118,709	168,409
+cpn	Kyerepon, Larteh	156,890	
+xsm	Kasena (Paga)	116,141	148,666
+aka/asen1242	Asen (Assin)	147,114	142,362
+aka	Akan nec	140,425	15,368
+nlu	Yefi, Ntwumuru	113,334	140,050
+mos	Mosi		139,962
+kdh	Kotokoli		133,709
+cpn	Cherepong, Larteh, Anum-Boso		132,080
+afu	Awutu, Efutu	108,723	128,704
+aka/dank1238	Denkyira	89,963	124,362
+grus1239	Other Grusi	43,205	116,156
+any/aowi1238	Aowin	109,946	66,403
+dag/nanu1239	Nanumba	78,812	100,367
+aka/kwaw1238	Akwamu	97,178	43,467
+cko	Chokosi	63,910	91,275
+akp/akpa1243	Akpafu, Lolobi	71,535	71,933
+grus1239	Grusi nec	68,640	53,745
+mis	Wangara	45,488	68,045
+mzw	Mo	55,174	42,857
+gada1257	Ga-Dangme nec	51,791	14,233
+mis	Kyamba	51,299	
+mul	All other tribes originating from Ghana		43,758
+gurm1249	Gurma nec	27,074	41,972
+vag	Vagala	41,684	13,892
+mul	Guan nec	41,652	17,576
+nkq	Nkomi, Wiase, Dwan		32,464
+avn	Avatime, Nyongbo	29,343	27,174
+nzi/eval1238	Evalue	25,839	27,810
+mis	Nkkonya	25,599	20,353
+mul	Mole-Dagbani nec	25,268	5,789
+mul	Mande nec	10,215	1,165
+saf	Salfalba	7,827	5,002
+pil	Pilapila	5,058	2,254
+ful	Fulani		4,243
+bci	Bawle		4,056
+mis	Chamba (Kyamba)		3,650
+mul	All other tribes		1,685

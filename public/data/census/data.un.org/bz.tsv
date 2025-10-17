@@ -1,0 +1,29 @@
+#codeDisplay		bz2000	bz2010
+#nameDisplay		Belize 2000	Belize 2010
+#isoRegionCode	BZ		
+#yearCollected		2000	2010
+#datePublished		2005	2014
+#eligiblePopulation		205,123	303,422
+#notes		Data refer to usual language, defined as the language currently spoken, or most often spoken, by the individual in his or her present home., Census - de facto - complete tabulation	Census - de jure - complete tabulation
+#modality		Spoken	
+#age			4+
+#domain		Home	
+#acquisitionOrder	Any		
+#responsesPerIndividual		1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	bz2000	bz2010
+mul	Total	205,123	
+eng	English	7,946	183,903
+spa	Spanish	94,422	165,296
+bzj	Creole	67,527	130,467
+kek	Maya Ketchi	10,142	17,581
+mop	Maya Mopan	6,909	10,649
+deu	German	6,783	9,364
+cab	Garifuna	6,929	8,442
+mul	Other	990	2,729
+zho	Chinese	1,607	2,600
+yua	Maya Yucateca	1,176	2,518
+mis	Unknown	412	928
+zxx	None		609
+hin	Hindi	280	

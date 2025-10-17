@@ -1,0 +1,23 @@
+#codeDisplay		pk2017
+#nameDisplay		Pakistan 2017
+#isoRegionCode		PK
+#yearCollected		2017
+#datePublished		2021
+#eligiblePopulation		207,684,626
+#notes		Excluding data for Azad Jammu and Kashmir, and Gilgit Baltistan. Census - de jure - complete tabulation
+#responsesPerIndividual		L1
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	pk2017
+mul	Total	207,684,626
+lah/pan	Punjabi	80,536,390
+pus	Pushtu	37,885,441
+snd	Sindhi	30,256,372
+lah/skr	Saraiki	25,324,637
+urd	Urdu	14,706,159
+bal	Balochi	6,281,087
+lah/hind1271	Hindko	5,065,879
+mul	Other	4,701,315
+brh	Brahui	2,567,677
+kas	Kashimiri	359,669

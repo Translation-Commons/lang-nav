@@ -42,7 +42,7 @@ fil	Pilipino or Tagalog		78,876
 mal	Malayalam		2,968	7,091	25,111	53,206	78,738
 aus	Australian Indigenous languages	44,192	50,978	5,536	61,798		78,656
 mul	African Languages (excl. North Africa)		20,796	38,457	73,741		
-ind	Indonesian	25,925	38,724	42,037	55,869	67,891	73,179
+msa/ind	Indonesian	25,925	38,724	42,037	55,869	67,891	73,179
 pes	Persian (excluding Dari)					58,313	72,498
 mkd	Macedonian	68,126	71,996	67,833	68,848	66,019	66,173
 fra	French	38,058	39,643	43,215	57,740	70,873	70,740
@@ -75,7 +75,7 @@ zxx	Non-verbal/inadequately described		11,860	27,002	21,908
 hun	Hungarian	25,846	24,484	21,561	20,880	19,895	17,043
 mar	Marathi		2,265	4,047	8,572	13,055	22,263
 cld	Chaldean Neo-Aramaic					17,172	21,684
-msa	Malay	9,679	9,430	11,361	16,565	17,942	21,324
+msa/zlm	Malay	9,679	9,430	11,361	16,565	17,942	21,324
 ton	Tongan		10,591	12,727	16,007	17,691	20,757
 snd	Sindhi		20,661			1,592	2,635
 nan	Min Nan				16,374	17,905	20,059

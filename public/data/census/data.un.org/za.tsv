@@ -1,0 +1,41 @@
+#codeDisplay		za1996	za2001	za2011
+#nameDisplay		South Africa 1996	South Africa 2001	South Africa 2011
+#isoRegionCode	ZA			
+#yearCollected		1996	2001	2011
+#datePublished		2005	2005	2013
+#eligiblePopulation		40,583,570	44,819,778	50,961,443
+#notes		Data have been adjusted for underenumeration, estimated at 10.69 per cent. Census - de facto - complete tabulation	Census - de facto - complete tabulation	Census - de facto - complete tabulation
+#responsesPerIndividual	1			
+#acquisitionOrder	L1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	za1996	za2001	za2011
+mul	Total	40,583,570	44,819,778	50,961,443
+zul	Isizulu	9,200,144	10,677,305	11,587,374
+xho	Isixhosa	7,196,118	7,907,153	8,154,258
+afr	Afrikaans	5,811,547	5,983,426	6,855,082
+eng	English	3,457,467	3,673,203	4,892,623
+nso	Sepedi	3,695,846	4,208,980	4,618,576
+tsn	Setswana	3,301,774	3,677,016	4,067,248
+sot	Sesotho	3,104,197	3,555,186	3,849,563
+tso	Xitsonga	1,756,105	1,992,207	2,277,148
+ssw	Siswati	1,013,193	1,194,431	1,297,046
+ven	Tshivenda	876,408	1,021,757	1,209,388
+nbl	Isindebele	586,961	711,821	1,090,223
+mul	Other	80,642	217,293	1,062,913
+mis	Unknown	355,538		
+por	Portuguese	33,614		
+deu	German	30,034		
+sna	Shona	14,488		
+guj	Gujarti	9,541		
+fra	French	9,268		
+zho	Chinese	8,533		
+ell	Greek	7,588		
+urd	Urdu	7,214		
+ita	Italian	5,768		
+hin	Hindi	5,510		
+nld	Dutch	5,466		
+tam	Tamil	4,870		
+ara	Arabic	2,256		
+tel	Telugu	2,171		
+swa	Swahili	1,309		

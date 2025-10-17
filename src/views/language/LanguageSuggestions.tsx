@@ -4,16 +4,13 @@ import { useDataContext } from '../../data/DataContext';
 import HoverableObjectName from '../common/HoverableObjectName';
 
 const LanguageSuggestions: React.FC = () => {
-  const { languagesBySource } = useDataContext();
+  const { getLanguage } = useDataContext();
 
   return (
     <div className="separatedButtonList">
-      {['eng', 'spa', 'fra', 'rus', 'zho', 'ara'].map(
-        (code) =>
-          languagesBySource.ISO[code] != null && (
-            <HoverableObjectName key={code} object={languagesBySource.ISO[code]} format="button" />
-          ),
-      )}
+      {['eng', 'spa', 'fra', 'rus', 'zho', 'ara'].map((code) => (
+        <HoverableObjectName key={code} object={getLanguage(code)} format="button" />
+      ))}
     </div>
   );
 };

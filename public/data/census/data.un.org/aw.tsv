@@ -1,0 +1,20 @@
+#codeDisplay		aw2000
+#nameDisplay		Aruba 2000
+#isoRegionCode		AW
+#yearCollected		2000
+#datePublished		2009
+#eligiblePopulation		86,408
+#notes		Census - de jure - complete tabulation
+#age		5+
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	aw2000
+mul	Total	86,408
+pap	Papiamento	59,984
+spa	Spanish	11,368
+eng	English	7,001
+nld	Dutch	5,289
+mul	Other	1,781
+mis	Unknown	759
+por	Portuguese	225

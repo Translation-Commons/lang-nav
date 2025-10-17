@@ -8,12 +8,7 @@ import LocaleCard from './LocaleCard';
 const LocaleCardList: React.FC = () => {
   const { locales } = useDataContext();
 
-  return (
-    <CardList
-      objects={Object.values(locales)}
-      renderCard={(locale) => <LocaleCard locale={locale} />}
-    />
-  );
+  return <CardList objects={locales} renderCard={(locale) => <LocaleCard locale={locale} />} />;
 };
 
 export default LocaleCardList;

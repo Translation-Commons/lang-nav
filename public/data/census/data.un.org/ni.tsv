@@ -1,0 +1,20 @@
+#codeDisplay		ni2005
+#nameDisplay		Nicaragua 2005
+#isoRegionCode		NI
+#yearCollected		2005
+#datePublished		2010
+#eligiblePopulation		5,142,098
+#notes		Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	ni2005
+mul	Total	5,142,098
+spa	Spanish	4,897,793
+miq	Miskitu	113,855
+mis	Mestizo of the Caribbean Coast	102,154
+bzk	Creole	18,420
+yan	Mayangna-Sumu	8,537
+rma	Rama	744
+cab	Garifuna	512
+ulw	Ulwa	83

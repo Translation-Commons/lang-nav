@@ -1,0 +1,22 @@
+#codeDisplay		pe2007	pe2017
+#nameDisplay		Peru 2007	Peru 2017
+#isoRegionCode		PE	PE
+#yearCollected		2007	2017
+#datePublished		2013	2019
+#eligiblePopulation		25,810,331	27,946,060
+#notes		Census - de facto - complete tabulation	Census - de facto - complete tabulation
+#age		3+	3+
+#responsesPerIndividual		1	1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	pe2007	pe2017
+mul	Total	25,810,331	27,946,060
+spa	Spanish	21,713,165	23,178,478
+que	Quechua	3,360,331	3,799,780
+aym	Aymara	443,248	450,010
+mis	Unknown		230,064
+mul	Autoctonos	174,410	118,415
+cni	Asháninka	67,724	73,567
+mul	Other Foreign Languages	21,434	49,876
+mul	Other		35,423
+mul	Other Sign Language	30,019	10,447

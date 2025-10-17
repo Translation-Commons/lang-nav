@@ -35,8 +35,7 @@ xan	Agew/Kamyrgna	213,355
 guk	Gumzigna	179,348
 nus	Nuwerigna	153,407
 mym	Meenigna	145,333
-timb1262	Timbarogna	97,806
-ktb	#Timbarogna	97,806
+ktb/timb1262	Timbarogna	97,806
 mdy	Maliegna	94,746
 bst	Basketigna	92,586
 jnj	Yemsagna	92,177
@@ -62,17 +61,14 @@ tsb	Tsamaigna	18,048
 cra	Charrigna	13,100
 dox	Mosiyagna	9,552
 kmw	Komigna	8,534
-merr1238	Merigna	8,159
-bcq	#Merigna	8,159
+bcq/merr1238	Merigna	8,159
 kun	Kunamigna	7,428
 muz	Mursygna	7,386
 arv	Arboriegna	7,211
 noz	Naogna	7,188
 mpe	Mesengogna	6,443
-bodi1253	Bodigna	5,770
-mym	#Bodigna	5,770
-fada1248	Fadashigna	4,484
-wti	#Fadashigna	4,484
+mym/bodi1253	Bodigna	5,770
+wti/fada1248	Fadashigna	4,484
 xwg	Guagugna	3,282
 kcx	Kechamigna	2,829
 kqy	Koyrigna	2,473
@@ -80,6 +76,5 @@ eng	English	1,867
 dwr	Kulogna	1,478
 	Gegatogna	1,421
 dim	Dimegna	574
-shee1239	Shegna	492
-bcq	#Shegna	492
+bcq/shee1239	Shegna	492
 kmq	Kewamigna	319

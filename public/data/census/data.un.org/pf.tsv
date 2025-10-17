@@ -1,0 +1,20 @@
+#codeDisplay		pf2007	pf2017	pf2022
+#nameDisplay		French Polynesia 2007	French Polynesia 2017	French Polynesia 2022
+#isoRegionCode	PF			
+#yearCollected		2007	2017	2022
+#datePublished		2012	2021	2024
+#eligiblePopulation		192,176	275,918	220,923
+#notes		Census - de facto - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#age		15+		
+#responsesPerIndividual		1	1	1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	pf2007	pf2017	pf2022
+mul	Total	192,176	275,918	220,923
+fra	French	131,672	157,343	168,464
+mis	Unknown		62,810	
+poly1242	Polynesian	57,475	53,459	50,375
+mul	Asian	2,036	1,320	959
+mul	European	622	740	882
+mul	Other	371	246	97
+zxx	Non-verbal, so described			146

@@ -10,7 +10,12 @@ export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[
     case ObjectType.Language:
       return [...getObjectParents(object.parentLanguage), object.parentLanguage];
     case ObjectType.Locale:
-      return [object.language, object.writingSystem, object.territory, object.variantTag];
+      return [
+        object.language,
+        object.writingSystem,
+        object.territory,
+        ...(object.variantTags ?? []),
+      ];
     case ObjectType.Territory:
       return [...getObjectParents(object.parentUNRegion), object.parentUNRegion];
     case ObjectType.WritingSystem:
@@ -24,15 +29,15 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
   if (object == null) return [];
   switch (object.type) {
     case ObjectType.Census:
-      return [];
+      return (object.territory?.censuses ?? []).filter((c) => c.ID !== object.ID);
     case ObjectType.Language:
       return object.childLanguages;
     case ObjectType.Locale:
       return object.containedLocales ?? [];
     case ObjectType.Territory:
-      return [...object.containsTerritories, ...object.dependentTerritories];
+      return [...(object.containsTerritories ?? []), ...(object.dependentTerritories ?? [])];
     case ObjectType.WritingSystem:
-      return object.childWritingSystems;
+      return object.childWritingSystems ?? [];
     case ObjectType.VariantTag:
       return object.locales;
   }
@@ -41,7 +46,7 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
 export function getDescendantsName(object: ObjectData, count: number): string {
   switch (object.type) {
     case ObjectType.Census:
-      return 'n/a';
+      return 'other census' + (count > 1 ? 'es' : '') + ' in the territory';
     case ObjectType.Language:
       switch (object.scope) {
         case LanguageScope.Family:
@@ -55,7 +60,7 @@ export function getDescendantsName(object: ObjectData, count: number): string {
       }
       return 'dialect' + (count > 1 ? 's' : '');
     case ObjectType.Locale:
-      return 'variant' + (count > 1 ? 's' : '');
+      return 'related locale' + (count > 1 ? 's' : '');
     case ObjectType.Territory:
       switch (object.scope) {
         case TerritoryScope.World:

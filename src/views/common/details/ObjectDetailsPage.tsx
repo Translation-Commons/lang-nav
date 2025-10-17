@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, ReactNode, useEffect } from 'react';
+import React, { PropsWithChildren, ReactNode } from 'react';
 
 import { usePageParams } from '../../../controls/PageParamsContext';
 import { ObjectType } from '../../../types/PageParamTypes';
@@ -14,12 +14,8 @@ import ObjectTitle from '../ObjectTitle';
 import ObjectDetails from './ObjectDetails';
 
 const ObjectDetailsPage: React.FC = () => {
-  const { objectType, updatePageParams } = usePageParams();
+  const { objectType } = usePageParams();
   const object = getObjectFromID();
-
-  useEffect(() => {
-    if (object?.type != null) updatePageParams({ objectType: object?.type });
-  }, [object?.type]);
 
   if (object == null) {
     const suggestionsByObjectType = {

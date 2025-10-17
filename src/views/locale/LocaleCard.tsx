@@ -22,19 +22,21 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
           <ObjectTitle object={locale} highlightSearchMatches={true} />
         </a>
       </h3>
-      <div>
-        <h4>Speakers</h4>
-        {populationSpeaking.toLocaleString()}
-        {' ['}
-        <LocaleCensusCitation locale={locale} size="short" />
-        {']'}
-        {populationSpeakingPercent != null && (
-          <div>
-            {numberToFixedUnlessSmall(populationSpeakingPercent)}% of{' '}
-            {territory?.scope ?? 'territory'}
-          </div>
-        )}
-      </div>
+      {populationSpeaking != null && (
+        <div>
+          <h4>Speakers</h4>
+          {populationSpeaking.toLocaleString()}
+          {' ['}
+          <LocaleCensusCitation locale={locale} size="short" />
+          {']'}
+          {populationSpeakingPercent != null && (
+            <div>
+              {numberToFixedUnlessSmall(populationSpeakingPercent)}% of{' '}
+              {territory?.scope ?? 'territory'}
+            </div>
+          )}
+        </div>
+      )}
       {officialStatus && (
         <div>
           <h4>Government status</h4>

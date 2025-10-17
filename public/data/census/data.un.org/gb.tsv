@@ -1,0 +1,29 @@
+#codeDisplay		gb2011
+#nameDisplay		United Kingdom 2011
+#isoRegionCode		GB
+#yearCollected		2011
+#datePublished		2013
+#eligiblePopulation		63,182,178
+#notes		Excluding Channel Islands, Isle of Man. Census - de jure - complete tabulation
+#responsesPerIndividual		1
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	gb2011
+mul	Total	63,182,178
+eng	English	58,249,154
+mul	Other	2,012,949
+pol	Polish	660,138
+urd	Urdu	303,669
+pan	Panjabi	303,621
+ben	Bengali	235,731
+guj	Gujarati	218,577
+ara	Arabic	181,708
+fra	French	166,998
+zho	Chinese	162,698
+por	Portuguese	142,622
+spa	Spanish	134,149
+tam	Tamil	108,581
+tur	Turkish	106,581
+ita	Italian	102,248
+som	Somali	92,754

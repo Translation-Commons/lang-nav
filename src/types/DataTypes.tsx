@@ -22,6 +22,7 @@ export type ObjectData =
   | TerritoryData
   | WritingSystemData
   | VariantTagData;
+export type ObjectDictionary = Record<string, ObjectData>;
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;
@@ -55,21 +56,22 @@ export interface TerritoryData extends ObjectBase {
   codeDisplay: TerritoryCode;
   nameDisplay: string;
   scope: TerritoryScope;
-  population: number;
-  containedUNRegionCode: UNM49Code;
-  sovereignCode: ISO3166Code;
+  population: number; // May be reduced when re-computing with dependent territories
+  populationFromUN: number; // Imported by the TSV
 
   // Supplemental data
+  containedUNRegionCode?: UNM49Code;
+  sovereignCode?: ISO3166Code;
   literacyPercent?: number;
   gdp?: number;
 
   // References to other objects, filled in after loading the TSV
   parentUNRegion?: TerritoryData;
-  containsTerritories: TerritoryData[];
+  containsTerritories?: TerritoryData[];
   sovereign?: TerritoryData;
-  dependentTerritories: TerritoryData[];
-  locales: LocaleData[];
-  censuses: CensusData[];
+  dependentTerritories?: TerritoryData[];
+  locales?: LocaleData[];
+  censuses?: CensusData[];
 }
 
 export type ScriptCode = string; // ISO 15924 script code, eg. Latn, Cyrl, etc.
@@ -88,43 +90,45 @@ export interface WritingSystemData extends ObjectBase {
   codeDisplay: ScriptCode; // This should be stable
   scope: WritingSystemScope;
 
-  nameDisplayOriginal: string;
-  nameFull: string;
+  nameDisplay: string;
+  nameDisplayOriginal?: string;
+  nameFull?: string;
   nameEndonym?: string;
-  unicodeVersion: number | null;
-  sample: string | null;
-  rightToLeft: boolean | null;
-  primaryLanguageCode: LanguageCode | null;
-  territoryOfOriginCode: TerritoryCode | null;
-  parentWritingSystemCode: ScriptCode | null;
-  containsWritingSystemsCodes: ScriptCode[];
+  names: string[];
+
+  unicodeVersion?: number;
+  sample?: string;
+  rightToLeft?: boolean;
+  primaryLanguageCode?: LanguageCode;
+  territoryOfOriginCode?: TerritoryCode;
+  parentWritingSystemCode?: ScriptCode;
+  containsWritingSystemsCodes?: ScriptCode[];
 
   // Derived when combining data
-  populationUpperBound: number;
-  nameDisplay: string;
-  populationOfDescendents: number;
+  populationUpperBound?: number;
+  populationOfDescendents?: number;
 
   // References to other objects, filled in after loading the TSV
   primaryLanguage?: LanguageData;
   territoryOfOrigin?: TerritoryData;
-  languages: Record<LanguageCode, LanguageData>;
-  localesWhereExplicit: LocaleData[];
+  languages?: Record<LanguageCode, LanguageData>;
+  localesWhereExplicit?: LocaleData[];
   parentWritingSystem?: WritingSystemData;
-  childWritingSystems: WritingSystemData[];
-  containsWritingSystems: WritingSystemData[];
+  childWritingSystems?: WritingSystemData[];
+  containsWritingSystems?: WritingSystemData[];
 }
 
 // BCP-47 Locale	Locale Display Name	Native Locale Name	Language Code	Territory ISO	Explicit Script	Variant IANA Tag	Pop Source	Best Guess	Official Language
 export type BCP47LocaleCode = string; // BCP-47 formatted locale, eg. en_US, fr_CA, etc.
 
 export enum PopulationSourceCategory {
-  Census = '1 Census',
-  Study = '2 Study',
-  Ethnologue = '3 Ethnologue',
-  EDL = '4 EDL',
-  OtherCitation = '5 Other',
-  GeneralizedData = '6 Generalized Data',
-  Fallback = '7 Fallback',
+  Official = 'Official', // Has a cited source
+  UnverifiedOfficial = 'Unverified Official', // Source lost in merge but allegedly official
+  Study = 'Study',
+  Ethnologue = 'Ethnologue',
+  EDL = 'EDL', // Endangered Languages Project
+  CLDR = 'CLDR', // Unicode's Common Locale Data Repository
+  Other = 'Other',
   NoSource = '',
   Aggregated = 'Aggregated',
 }
@@ -143,30 +147,38 @@ export type LocaleInCensus = {
   populationPercent: number;
 };
 
+export enum LocaleSource {
+  StableDatabase = 'StableDatabase', // the standard source, kept in locales.tsv
+  IANA = 'IANA', // created when importing IANA variant tags
+  Census = 'census', // created when importing census data
+  CreateRegionalLocales = 'createRegionalLocales', // created when generating aggregated regional locales
+}
+
 export interface LocaleData extends ObjectBase {
   type: ObjectType.Locale;
 
   ID: BCP47LocaleCode;
   codeDisplay: BCP47LocaleCode; // Changes based on the language schema
-  localeSource: 'regularInput' | 'IANA' | 'census'; // Whether this locale is listed in the the regular locale list or not
+  localeSource: LocaleSource;
 
   nameDisplay: string;
   nameEndonym?: string;
   languageCode: LanguageCode;
-  territoryCode: TerritoryCode;
-  explicitScriptCode?: ScriptCode;
-  variantTagCode?: VariantIANATag; // TODO Variant tags can be singular (eg. roh-rumgr) or composite (eg. oc-lengadoc-grclass)
+  territoryCode?: TerritoryCode;
+  scriptCode?: ScriptCode;
+  variantTagCodes?: VariantIANATag[];
 
-  populationSource: PopulationSourceCategory;
-  populationSpeaking: number;
+  populationSource?: PopulationSourceCategory;
+  populationSpeaking?: number;
   officialStatus?: OfficialStatus;
+  wikipedia?: WikipediaData;
 
   // References to other objects, filled in after loading the TSV
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
   containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
-  variantTag?: VariantTagData;
+  variantTags?: VariantTagData[];
 
   // Data added up some references
   populationSpeakingPercent?: number;
@@ -174,7 +186,7 @@ export interface LocaleData extends ObjectBase {
   populationWriting?: number;
   populationWritingPercent?: number;
   populationCensus?: CensusData; // The census record that provides the population estimate
-  censusRecords: LocaleInCensus[]; // Maps census ID to population estimate
+  censusRecords?: LocaleInCensus[]; // Maps census ID to population estimate
 }
 
 export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valencia
@@ -194,3 +206,22 @@ export interface VariantTagData extends ObjectBase {
   languages: LanguageData[];
   locales: LocaleData[];
 }
+
+export enum WikipediaStatus {
+  Active = 'Active',
+  Closed = 'Closed',
+  Incubator = 'Incubator',
+}
+
+export type WikipediaData = {
+  titleEnglish: string;
+  titleLocal: string;
+  status: WikipediaStatus;
+  languageName: string;
+  scriptCodes: ScriptCode[];
+  wikipediaSubdomain: string; // eg. en, fr, simple, zh-classical, map-bms
+  localeCode: BCP47LocaleCode; // eg. eng, fra, mis, lzh, bany1247
+  articles: number;
+  activeUsers: number;
+  url: string;
+};

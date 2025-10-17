@@ -10,11 +10,11 @@ import { TreeNodeData } from '../common/TreeList/TreeListNode';
 import TreeListPageBody from '../common/TreeList/TreeListPageBody';
 
 export const LocaleHierarchy: React.FC = () => {
-  const { languages } = useDataContext();
+  const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
 
-  const rootNodes = getLocaleTreeNodes(Object.values(languages), sortFunction, filterByScope);
+  const rootNodes = getLocaleTreeNodes(languagesInSelectedSource, sortFunction, filterByScope);
 
   return (
     <TreeListPageBody
@@ -61,7 +61,7 @@ function getWritingSystemNodesForLanguage(
   filterFunction: (a: ObjectData) => boolean,
 ): TreeNodeData[] {
   const territoryNodesWithoutWritingSystems = lang.locales
-    .filter((locale) => locale.explicitScriptCode == null)
+    .filter((locale) => locale.scriptCode == null)
     .sort(sortFunction)
     .map((territory) => getLocaleNodeForTerritory(territory));
   const otherWritingSystemNodes = Object.values(lang.writingSystems)
@@ -116,6 +116,7 @@ function getTerritoryNodesForWritingSystem(
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean,
 ): TreeNodeData[] {
+  if (!writingSystem.localesWhereExplicit) return [];
   return writingSystem.localesWhereExplicit
     .filter((locale) => locale.languageCode === languageID)
     .filter(filterFunction)

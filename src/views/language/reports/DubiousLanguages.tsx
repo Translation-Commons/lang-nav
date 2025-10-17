@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import {
   getFilterBySubstring,
@@ -17,23 +17,24 @@ import HoverableObjectName from '../../common/HoverableObjectName';
 import ViewCard from '../../ViewCard';
 
 const DubiousLanguages: React.FC = () => {
-  const {
-    languagesBySource: { All, CLDR },
-    writingSystems,
-    territories,
-  } = useDataContext();
+  const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
+    useDataContext();
   const { page, limit } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
   const sliceFunction = getSliceFunction<LanguageData>();
-  const languages = Object.values(All)
-    .filter(filterBySubstring)
-    .filter(filterByTerritory)
-    .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]'));
+  const languagesFiltered = useMemo(
+    () =>
+      languagesInSelectedSource
+        .filter(filterBySubstring)
+        .filter(filterByTerritory)
+        .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
+    [languagesInSelectedSource, filterBySubstring, filterByTerritory],
+  );
 
   return (
-    <CollapsibleReport title={`Dubious languages (${languages.length})`}>
+    <CollapsibleReport title={`Dubious languages (${languagesFiltered.length})`}>
       These languages have strange language codes and maybe should be removed from the list of
       languages. Some possibilities are:
       <ol>
@@ -56,21 +57,20 @@ const DubiousLanguages: React.FC = () => {
         <LimitInput />
         <PaginationControls
           currentPage={page}
-          totalPages={limit < 1 ? 1 : Math.ceil(languages.length / limit)}
+          totalPages={limit < 1 ? 1 : Math.ceil(languagesFiltered.length / limit)}
         />
       </div>
       <div className="CardList" style={{ marginBottom: '1em' }}>
-        {sliceFunction(languages.sort(sortFunction)).map((lang) => {
+        {sliceFunction(languagesFiltered.sort(sortFunction)).map((lang) => {
           const codePieces = lang.codeDisplay.split(/-|_/);
           const relatedObjects = codePieces
             .map(
               (partialCode) =>
-                All[partialCode] ??
-                CLDR[partialCode] ??
-                territories[partialCode] ??
-                writingSystems[partialCode],
+                getLanguage(partialCode) ??
+                getTerritory(partialCode) ??
+                getWritingSystem(partialCode),
             )
-            .filter(Boolean);
+            .filter((object) => object != null);
           // TODO if its a language + territory, check if the locale exists
           // TODO check if there is an IANA variant tag.
           return (

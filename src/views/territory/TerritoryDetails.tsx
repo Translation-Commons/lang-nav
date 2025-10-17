@@ -42,7 +42,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       </DetailsSection>
 
       <DetailsSection title="Connections">
-        {locales.length > 0 && (
+        {locales && locales.length > 0 && (
           <DetailsField title="Languages:">
             <CommaSeparated>
               {Object.values(locales).map((locale) => (
@@ -57,7 +57,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
             <HoverableObjectName object={parentUNRegion} />
           </DetailsField>
         )}
-        {containsTerritories.length > 0 && (
+        {containsTerritories && containsTerritories.length > 0 && (
           <DetailsField title="Contains:">
             <CommaSeparated>
               {containsTerritories.sort(getSortFunction()).map((territory) => (
@@ -72,7 +72,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
             <HoverableObjectName object={sovereign} />
           </DetailsField>
         )}
-        {dependentTerritories.length > 0 && (
+        {dependentTerritories && dependentTerritories.length > 0 && (
           <DetailsField title="Administers:">
             <CommaSeparated>
               {dependentTerritories.sort(getSortFunction()).map((territory) => (
@@ -82,7 +82,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
           </DetailsField>
         )}
 
-        {censuses.length > 0 && (
+        {censuses && censuses.length > 0 && (
           <DetailsField title="Census Tables:">
             <CommaSeparated>
               {censuses.sort(getSortFunction()).map((census) => (

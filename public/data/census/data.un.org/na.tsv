@@ -1,0 +1,24 @@
+#codeDisplay		na2001	na2011
+#nameDisplay		Namibia 2001	Namibia 2011
+#isoRegionCode	NA		
+#yearCollected		2001	2011
+#datePublished		2010	2014
+#eligiblePopulation		1,219,756	2,064,489
+#notes		Census - de facto - complete tabulation	Census - de facto - complete tabulation
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	na2001	na2011
+mul	Total	1,219,756	2,064,489
+ndon1253	Ovambo	584,718	1,018,848
+naq	Nama	42,377	233,614
+kwn	Kavango	108,344	215,057
+afr	Afrikaans	214,333	180,029
+her	Herero	62,565	173,077
+eng	English	129,359	50,225
+mis	Caprivi	52,503	92,956
+mul	Other	7,600	64,260
+mis	Bushmen	3,422	19,535
+deu	German	7,230	11,154
+tsn	Tswana	2,384	5,311
+mis	Unknown	4,923	423

@@ -1,58 +1,37 @@
 import { toTitleCase } from '../generic/stringUtils';
 import { CensusCollectorType, CensusData } from '../types/CensusTypes';
+import { LocaleData } from '../types/DataTypes';
 import { LanguageCode, LanguageModality } from '../types/LanguageTypes';
 import { ObjectType } from '../types/PageParamTypes';
 
-import { CoreData } from './CoreData';
-
-const CENSUS_FILENAMES = [
-  'ca2021', // Canada 2021 Census
-  'in2011c16', // India 2011 Census C-16 Mother Tongue
-  'in2011c17', // India 2011 Census C-17 Language Multilingualism
-  'np2021', // Nepal 2021 Census
-  'es2021', // Spain 2021 Census
-  'yt', // Mayotte Censuses
-  'lr', // Liberia Censuses
-  'us2023', // United States 2023 American Community Surveys
-  'us_asc', // United States American Community Survey
-  // Add more census files here as needed
-];
-
-// Government censuses downloaded from the UN data portal
-const UN_CENSUS_FILENAMES = [
-  'ai',
-  'as',
-  'au',
-  'ax',
-  'bs',
-  'ca',
-  'et',
-  'fi',
-  'gu',
-  'ie',
-  'lk',
-  'lt',
-  'mp',
-  'np',
-  'pr',
-  'ru',
-  'sc',
-];
+import { DataContextType } from './DataContext';
 
 const DEBUG = false;
 
+export async function getCensusFilepaths(directory: string): Promise<string[]> {
+  // Load census filenames from the text file
+  return await fetch(`${directory}/censusList.txt`)
+    .then((res) => res.text())
+    .then((text) =>
+      text
+        .split('\n')
+        .map((line) => line.trim())
+        .filter((line) => line !== '')
+        .map((line) => `${directory}/${line}.tsv`),
+    );
+}
+
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
-  const filenames = [
-    ...CENSUS_FILENAMES,
-    ...UN_CENSUS_FILENAMES.map((name) => 'data.un.org/' + name),
-  ];
+  // Load census filenames from the text file
+  const CENSUS_FILEPATHS = await getCensusFilepaths('data/census');
+  const UN_CENSUS_FILEPATHS = await getCensusFilepaths('data/census/data.un.org');
 
   return await Promise.all(
-    filenames.map(
-      async (filename) =>
-        await fetch(`data/census/${filename}.tsv`)
+    [...CENSUS_FILEPATHS, ...UN_CENSUS_FILEPATHS].map(
+      async (filePath) =>
+        await fetch(filePath)
           .then((res) => res.text())
-          .then((fileInput) => parseCensusImport(fileInput, filename))
+          .then((fileInput) => parseCensusImport(fileInput, filePath))
           .catch((err) => console.error('Error loading TSV:', err)),
     ),
   );
@@ -66,20 +45,30 @@ type CensusImport = {
   languageNames: Record<LanguageCode, string>;
 };
 
-function parseCensusImport(fileInput: string, filename: string): CensusImport {
+function parseCensusImport(fileInput: string, filePath: string): CensusImport {
   const lines = fileInput.split('\n');
+  const filename = filePath.match(/\/([^/]+)\.tsv$/)?.[1] || 'census';
 
   // Create an array based on the number of census columns
   // (number of censusNames, which is columns after the first two)
   // This will be used to initialize metadatas and other arrays
-  const censusCount = lines[0].split('\t').length - 2; // -2 because the first 2 columns are the language code and language name
-  if (censusCount <= 0) {
+  const tsvColumnsWithData = lines[0]
+    .split('\t')
+    .slice(2) // Skip the first 2 columns since they are the metadata field names & the default values
+    .map((col, tsvColumnNumber) => {
+      // Drop columns which have a "#" in the codeDisplay -- that means they are provided for context
+      // but LangNav doesn't have a good way to show it.
+      if (col[0] === '#') return null;
+      return tsvColumnNumber + 2; // +2 to account for the skipped columns
+    })
+    .filter((col) => col !== null);
+  if (tsvColumnsWithData.length <= 0) {
     throw new Error('No census data found in the file.');
   }
-  const censuses: CensusData[] = Array.from({ length: censusCount }, (_, index) => ({
+  const censuses: CensusData[] = tsvColumnsWithData.map((_tsvColumnNumber, index) => ({
     type: ObjectType.Census,
     ID: filename + '.' + (index + 1),
-    codeDisplay: filename + '.' + (index + 1),
+    codeDisplay: filename + '.' + (index + 1), // May be overridden later
 
     // This will be set later -- its just initialized here because they are strictly required
     nameDisplay: '',
@@ -102,7 +91,8 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
       const parts = line.split('\t').map((part) => part.trim());
       const key = parts[0].slice(1) as keyof CensusData;
       const defaultValue = parts[1] || ''; // Default value is the second column, or empty if not provided
-      const values = parts.slice(2); // Columns 3+ are values for each census
+      const values = tsvColumnsWithData.map((col) => parts[col]); // Get the values from importable columns (ones without # prefix)
+
       if (values.length !== censuses.length) {
         console.error(
           `Census field ${key} has ${values.length + 1} columns but expected ${censuses.length + 1}. Check the file format for ${filename}.`,
@@ -175,10 +165,13 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
       continue; // Skip lines that do not have enough data
     }
 
-    const languageCode = parts[0].trim() as LanguageCode;
+    // Most rows specific a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
+    const languageCodes = parts[0].split('/').map((code) => code.trim());
     if (
-      ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCode) ||
-      languageCode.startsWith('#')
+      languageCodes.length === 0 ||
+      languageCodes[0] === '' ||
+      ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCodes[0]) ||
+      languageCodes[0].startsWith('#')
     ) {
       // Skip header and special language codes
       // 'Language Code' is the header, 'mul' is for multiple languages, 'mis' is for missing languages,
@@ -201,7 +194,9 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
         languageName = toTitleCase(languageName);
       }
 
-      // Accumulate language names if it appears in multiple places.
+      // Accumulate language names if it appears in multiple places
+      // If there are multiple language codes, use the last one since that's usually the most specific
+      const languageCode = languageCodes[languageCodes.length - 1] as LanguageCode;
       if (languageNames[languageCode] != null) {
         languageNames[languageCode] = languageNames[languageCode] + ' / ' + languageName; // If the language code already exists, append the name
       } else {
@@ -210,14 +205,10 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
     }
 
     // Add population estimates to censuses when its non-empty
-    parts.slice(2).forEach((part, i) => {
+    tsvColumnsWithData.forEach((tsvColumnNumber, i) => {
+      const part = parts[tsvColumnNumber];
       if (part.trim() === '') {
         return; // Skip empty parts
-      }
-      if (i >= censuses.length) {
-        // There are more records for this language than there are census declarations
-        console.warn(`Skipping extra population estimate for ${languageCode} in line: ${line}`);
-        return;
       }
       let popEstimate = Number.parseInt(part.replace(/,/g, ''));
       if (isNaN(popEstimate)) {
@@ -226,13 +217,18 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
         // non-numbers are values like "too small to disclose the exact amount" but still non-zero.
         popEstimate = 1;
       }
-      if (censuses[i].languageEstimates[languageCode] != null) {
-        // If the language estimate already exists, add the estimate
-        censuses[i].languageEstimates[languageCode] += popEstimate;
-      } else {
-        censuses[i].languageEstimates[languageCode] = popEstimate;
-        censuses[i].languageCount += 1; // Increment the language count for the census
-      }
+
+      // Add the population estimate to the indicated language codes
+      languageCodes.forEach((code) => {
+        if (code === '') return;
+        if (censuses[i].languageEstimates[code] != null) {
+          // If the language estimate already exists, add the estimate
+          censuses[i].languageEstimates[code] += popEstimate;
+        } else {
+          censuses[i].languageEstimates[code] = popEstimate;
+          censuses[i].languageCount += 1; // Increment the language count for the census
+        }
+      });
     });
   }
 
@@ -242,11 +238,11 @@ function parseCensusImport(fileInput: string, filename: string): CensusImport {
   };
 }
 
-export function addCensusData(coreData: CoreData, censusData: CensusImport): void {
+export function addCensusData(dataContext: DataContextType, censusData: CensusImport): void {
   // Add alternative language names to the language data
   Object.entries(censusData.languageNames).forEach(([languageCode, languageName]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
-    const language = coreData.languagesBySource.All[languageCode];
+    const language = dataContext.getLanguage(languageCode);
     if (language != null) {
       // Split on / since some censuses have multiple names for the same language
       languageName
@@ -266,24 +262,19 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
   // Add the census records to the core data
   for (const census of censusData.censuses) {
     // Add the census to the core data if its not there yet
-    if (coreData.censuses[census.ID] == null) {
-      // Drop census tables which have a "#" in the codeDisplay -- that means they are provided for context
-      // but LangNav doesn't have a good way to show it.
-      if (census.codeDisplay.startsWith('#')) {
-        continue;
-      }
-
-      coreData.censuses[census.ID] = census;
+    if (dataContext.censuses[census.ID] == null) {
+      dataContext.censuses[census.ID] = census;
 
       // Add the territory reference to it
-      const territory = coreData.territories[census.isoRegionCode];
-      if (territory != null) {
+      const territory = dataContext.getTerritory(census.isoRegionCode);
+      if (territory != null && territory.type === ObjectType.Territory) {
         census.territory = territory;
+        if (territory.censuses == null) territory.censuses = [];
         territory.censuses.push(census);
       }
 
       // Create references to census from the locale data
-      addCensusRecordsToLocales(coreData, census);
+      addCensusRecordsToLocales(dataContext.getLocale, census);
     } else {
       // It's reloaded twice on dev mode
       // console.warn(`Census data for ${census.ID} already exists, skipping.`);
@@ -291,12 +282,16 @@ export function addCensusData(coreData: CoreData, censusData: CensusImport): voi
   }
 }
 
-export function addCensusRecordsToLocales(codeData: CoreData, census: CensusData): void {
+export function addCensusRecordsToLocales(
+  getLocale: (id: string) => LocaleData | undefined,
+  census: CensusData,
+): void {
   Object.entries(census.languageEstimates).forEach(([languageCode, populationEstimate]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
-    const locale = codeData.locales[languageCode + '_' + census.isoRegionCode];
-    if (locale != null) {
+    const locale = getLocale(languageCode + '_' + census.isoRegionCode);
+    if (locale?.type === ObjectType.Locale) {
       // Add the census to the locale
+      if (locale.censusRecords == null) locale.censusRecords = [];
       locale.censusRecords.push({
         census,
         populationEstimate,

@@ -1,0 +1,23 @@
+#codeDisplay		pw1995	pw2000	pw2005
+#nameDisplay		Palau 1995	Palau 2000	Palau 2005
+#isoRegionCode	PW			
+#yearCollected		1995	2000	2005
+#datePublished		2005	2005	2008
+#eligiblePopulation		15,463	17,821	18,544
+#notes	Census - de jure - complete tabulation			
+#age			5+	5+
+#responsesPerIndividual		1	1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	pw1995	pw2000	pw2005
+mul	Total	15,463	17,821	18,544
+pau	Palauan	10,154	11,525	12,354
+eng	English	3,196	1,675	2,871
+fil	Pilipino	1,076	2,398	2,000
+zho	Chinese	519	1,022	331
+cal	Carolinian	310	260	136
+jpn	Japanese	105	264	124
+mul	Other Asian	11	263	
+mul	Other	10	178	244
+kor	Korean	11	138	61
+mul	Other Micronesian	71	98	131

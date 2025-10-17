@@ -1,0 +1,21 @@
+#codeDisplay		am2001	am2011	am2022
+#nameDisplay		Armenia 2001	Armenia 2011	Armenia 2022
+#isoRegionCode	AM			
+#yearCollected		2001	2011	2022
+#datePublished		2003	2013	2024
+#eligiblePopulation		3,213,011	3,018,854	2,932,731
+#notes	Census - de jure - complete tabulation			
+#modality		Spoken		
+#domain		Home		
+#acquisitionOrder		L1		
+#responsesPerIndividual	1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	am2001	am2011	am2022
+mul	Total	3,213,011	3,018,854	2,932,731
+hye	Armenian	3,139,152	2,956,615	2,851,158
+rus	Russian	29,563	23,484	40,770
+kmr	Ezidian	31,799	30,973	28,681
+mul	Other	11,679	7,020	9,177
+mis	Unknown			2,129
+ukr	Ukrainian	818	733	816

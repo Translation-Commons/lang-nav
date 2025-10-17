@@ -5,8 +5,8 @@ import { useDataContext } from '../../data/DataContext';
 import Hoverable from '../../generic/Hoverable';
 import HoverableEnumeration from '../../generic/HoverableEnumeration';
 import { VariantTagData } from '../../types/DataTypes';
-import { SortBy } from '../../types/PageParamTypes';
-import { getObjectPopulation } from '../common/ObjectField';
+import { SortBy } from '../../types/SortTypes';
+import { getObjectPopulation } from '../common/getObjectPopulation';
 import { CodeColumn, NameColumn } from '../common/table/CommonColumns';
 import ObjectTable from '../common/table/ObjectTable';
 
@@ -15,7 +15,7 @@ const VariantTagTable: React.FC = () => {
 
   return (
     <ObjectTable<VariantTagData>
-      objects={Object.values(variantTags)}
+      objects={variantTags}
       columns={[
         CodeColumn,
         NameColumn,

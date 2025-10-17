@@ -17,7 +17,7 @@ const TerritoryFilterSelector: React.FC = () => {
   const getSuggestions = useMemo(() => {
     return async (query: string): Promise<Suggestion[]> => {
       const lowerCaseQuery = query.toLowerCase();
-      return Object.values(territories)
+      return territories
         .filter(filterByScope)
         .filter((territory) =>
           getSearchableField(territory, SearchableField.NameOrCode)

@@ -92,6 +92,7 @@ const TextInput: React.FC<Props> = ({
         id={pageParameter}
         className={immediateValue === '' ? 'empty' : ''}
         value={immediateValue}
+        autoComplete="off" // It's already handled
         onChange={(ev) => {
           setImmediateValue(ev.target.value);
           setShowSuggestions(true);
@@ -132,37 +133,46 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
   setImmediateValue,
   suggestion,
 }) => {
-  const { objectID, searchString, label } = suggestion;
-  const { updatePageParams, view } = usePageParams();
-
-  const setFilter = () => {
-    setImmediateValue(searchString);
-  };
-  const goToDetails = () => {
-    updatePageParams({ objectID, view: View.Details, searchString });
-  };
+  const { view } = usePageParams();
   const style = getOptionStyle(
     SelectorDisplay.Dropdown,
     false, // isSelected is always false here
     position,
   );
-
   if (view == View.Details && pageParameter === PageParamKey.searchString) {
-    return (
-      <HoverableButton
-        hoverContent={<>Go to the details page for {searchString}</>}
-        onClick={goToDetails}
-        style={style}
-      >
-        {label}
-      </HoverableButton>
-    );
+    return <SuggestionRowDetails suggestion={suggestion} style={style} />;
   }
 
+  const setFilter = () => {
+    setImmediateValue(suggestion.searchString);
+  };
+
   return (
-    <button onClick={setFilter} style={style}>
-      {label}
+    <button onClick={setFilter} style={style} role="option" type="button">
+      {suggestion.label}
     </button>
+  );
+};
+
+const SuggestionRowDetails: React.FC<{
+  suggestion: Suggestion;
+  style?: React.CSSProperties;
+}> = ({ style, suggestion }) => {
+  const { objectID, searchString, label } = suggestion;
+  const { updatePageParams } = usePageParams();
+
+  const goToDetails = () => {
+    updatePageParams({ objectID, view: View.Details, searchString });
+  };
+
+  return (
+    <HoverableButton
+      hoverContent={<>Go to the details page for {searchString}</>}
+      onClick={goToDetails}
+      style={style}
+    >
+      {label}
+    </HoverableButton>
   );
 };
 
