@@ -13,8 +13,8 @@ export interface CLDRLocaleSupport {
   /** Script code, e.g. "Latn" (optional) */
   script?: string;
 
-  /** Tier of locale support: core, modern or full */
-  tier: 'core' | 'modern' | 'full';
+  /** Tier of locale support: core, basic, moderate or modern */
+  tier: 'core' | 'basic' | 'moderate' | 'modern';
 
   /**
    * True if this locale is listed in defaultContent.json. Indicates that the

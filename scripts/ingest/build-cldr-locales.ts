@@ -18,21 +18,9 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
-// CLDR release version to pull. When bumping this version, update
-// both the charts path and the cldr-core package version.
-const CLDR_RELEASE = '47.0.0';
-
-// Base URLs (pinned to the release above)
-const CLDR_CORE_BASE = `https://cdn.jsdelivr.net/npm/cldr-core@${CLDR_RELEASE}`;
-const CHARTS_TSV_BASE = `https://raw.githubusercontent.com/unicode-org/cldr-staging/main/docs/charts/${CLDR_RELEASE.replace(
-  /\.0\.0$/,
-  '',
-)}/tsv`;
-const CLDR_REPO_RAW_BASE = 'https://raw.githubusercontent.com/unicode-org/cldr/main/common/main';
-
-// Output location
-const OUTPUT_FILE = path.join(process.cwd(), 'public', 'data', 'unicode', 'cldrLocales.json');
+const OUTPUT_FILE = path.join(process.cwd(), 'public/data/unicode/cldrLocales.json');
 
 /** Simple TSV parser (no quoted fields needed for CLDR TSVs) */
 function parseTsv(tsv: string): Record<string, string>[] {
