@@ -1,5 +1,6 @@
 import React from 'react';
-import TableOfLanguagesInTerritory from 'src/views/territory/TableOfLanguagesInTerritory';
+
+import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerritory';
 
 import { getSortFunction } from '@features/sorting/sort';
 
