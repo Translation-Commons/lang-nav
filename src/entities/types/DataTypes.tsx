@@ -181,7 +181,8 @@ export interface LocaleData extends ObjectBase {
   containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
   variantTags?: VariantTagData[];
 
-  // Data added up some references
+  // Data computed from other references, particularly territories.tsv and censuses
+  populationAdjusted?: number; // Speaking population adjusted to latest territory population
   populationSpeakingPercent?: number;
   literacyPercent?: number;
   populationWriting?: number;

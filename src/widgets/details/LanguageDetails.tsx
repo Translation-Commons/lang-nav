@@ -6,6 +6,9 @@ import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import LanguageDetailsVitalityAndViability from '@entities/language/LanguageDetailsVitalityAndViability';
+import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
+import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
+import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
@@ -16,7 +19,6 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
 import LinkButton from '@shared/ui/LinkButton';
 
-import PopulationWarning from '../PopulationWarning';
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
 
@@ -111,20 +113,30 @@ const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 };
 
 const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { populationEstimate, modality, primaryWritingSystem, writingSystems } = lang;
+  const {
+    populationEstimate,
+    modality,
+    primaryWritingSystem,
+    writingSystems,
+    populationFromLocales,
+    populationOfDescendents,
+  } = lang;
 
   return (
     <DetailsSection title="Attributes">
       {populationEstimate && (
-        <DetailsField
-          title={
-            <>
-              Population
-              <PopulationWarning />:
-            </>
-          }
-        >
-          {populationEstimate.toLocaleString()}
+        <DetailsField title="Population Estimate:">
+          <LanguagePopulationEstimate lang={lang} />
+        </DetailsField>
+      )}
+      {populationOfDescendents && (
+        <DetailsField title="Population of Descendents:">
+          <LanguagePopulationOfDescendents lang={lang} />
+        </DetailsField>
+      )}
+      {populationFromLocales && (
+        <DetailsField title="Population from Locales:">
+          <LanguagePopulationFromLocales lang={lang} />
         </DetailsField>
       )}
       {modality && <DetailsField title="Modality:">{modality}</DetailsField>}

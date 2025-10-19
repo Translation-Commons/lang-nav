@@ -1,6 +1,7 @@
 import React from 'react';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
+import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
@@ -94,6 +95,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const {
     censusRecords,
+    populationAdjusted,
     populationSpeaking,
     populationSpeakingPercent,
     populationWriting,
@@ -104,6 +106,12 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
   return (
     <DetailsSection title="Population">
       {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
+
+      {populationAdjusted && (
+        <DetailsField title="Population Adjusted to 2025:">
+          <LocalePopulationAdjusted locale={locale} />
+        </DetailsField>
+      )}
 
       {populationSpeaking != null && (
         <DetailsField title="Speakers:">
@@ -128,7 +136,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <DetailsField title="Writers:">
           ~{numberToSigFigs(populationWriting, 3).toLocaleString()}
           {' [previous estimate * literacy'}
-          {territory.literacyPercent != null && ` (${territory.literacyPercent}%)`}
+          {territory.literacyPercent != null && ` (${territory.literacyPercent.toFixed(1)}%)`}
           {']'}
         </DetailsField>
       )}

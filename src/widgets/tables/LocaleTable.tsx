@@ -1,14 +1,11 @@
 import React from 'react';
 
-import PopulationWarning from '@widgets/PopulationWarning';
-
 import { useDataContext } from '@features/data-loading/DataContext';
 import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
 
-import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocaleData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
@@ -16,6 +13,8 @@ import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();
@@ -30,19 +29,7 @@ const LocaleTable: React.FC = () => {
         CodeColumn,
         NameColumn,
         EndonymColumn,
-        {
-          label: (
-            <>
-              Population
-              <PopulationWarning />
-            </>
-          ),
-          key: 'Population',
-          render: (object) => object.populationSpeaking,
-          isNumeric: true,
-          sortParam: SortBy.Population,
-          columnGroup: 'Demographics',
-        },
+        ...LocalePopulationColumns,
         {
           key: 'Literacy',
           render: (object) =>
@@ -52,40 +39,6 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           isNumeric: true,
           sortParam: SortBy.Literacy,
-          columnGroup: 'Demographics',
-        },
-        {
-          key: '% in Territory',
-          render: (object) =>
-            object.populationSpeakingPercent && (
-              <>
-                {numberToFixedUnlessSmall(object.populationSpeakingPercent)}
-                {/* If the number is greater than 10%, add an invisible 0 for alignment */}
-                {object.populationSpeakingPercent > 10 && (
-                  <span style={{ visibility: 'hidden' }}>0</span>
-                )}
-              </>
-            ),
-          isNumeric: true,
-          sortParam: SortBy.PercentOfTerritoryPopulation,
-          columnGroup: 'Demographics',
-        },
-        {
-          key: '% of Global Language Speakers',
-          render: (object) =>
-            object.populationSpeaking &&
-            numberToFixedUnlessSmall(
-              (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
-            ),
-          isNumeric: true,
-          isInitiallyVisible: false,
-          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
-          columnGroup: 'Demographics',
-        },
-        {
-          key: 'Population Source',
-          render: (object) => <LocaleCensusCitation locale={object} size="short" />,
-          columnGroup: 'Demographics',
         },
         {
           key: 'Contained Locales',

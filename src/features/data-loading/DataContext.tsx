@@ -132,7 +132,7 @@ export const DataProvider: React.FC<{
 
       loadSecondaryData(dataContext);
     }
-  }, [coreData, loadProgress]); // this is called once after page load
+  }, [dataContext, loadProgress]); // this is called once after page load
 
   useEffect(() => {
     updateLanguagesBasedOnSource(

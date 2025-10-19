@@ -1,7 +1,5 @@
-import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
+import { TriangleAlertIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
-
-import PopulationWarning from '@widgets/PopulationWarning';
 
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
@@ -9,19 +7,19 @@ import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonCol
 import ObjectTable from '@features/table/ObjectTable';
 
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
-import LanguageVitalityCell from '@entities/language/LanguageVitalityCell';
-import { VitalityMeterType } from '@entities/language/LanguageVitalityComputation';
 import {
   getObjectLiteracy,
   getUniqueTerritoriesForLanguage,
 } from '@entities/lib/getObjectMiscFields';
-import { CLDRCoverageText, ICUSupportStatus } from '@entities/ui/CLDRCoverageInfo';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
-import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
 import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
+
+import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
+import { LanguagePopulationColumns } from './columns/LanguagePopulationColumns';
+import { LanguageVitalityColumns } from './columns/LanguageVitalityColumns';
 
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
@@ -65,103 +63,9 @@ const LanguageTable: React.FC = () => {
           render: (lang) => lang.scope,
           isInitiallyVisible: false,
         },
-        {
-          key: 'Population',
-          label: (
-            <>
-              Population
-              <PopulationWarning />
-            </>
-          ),
-          render: (lang) => lang.populationEstimate,
-          isNumeric: true,
-          sortParam: SortBy.Population,
-          columnGroup: 'Population',
-        },
-        {
-          key: 'Population Attested',
-          label: (
-            <>
-              Population
-              <br />
-              Attested
-              <Hoverable hoverContent="This comes from a citable source (citations still needed).">
-                <InfoIcon size="1em" />
-              </Hoverable>
-            </>
-          ),
-          render: (lang) => lang.populationCited,
-          isNumeric: true,
-          isInitiallyVisible: false,
-          sortParam: SortBy.PopulationAttested,
-          columnGroup: 'Population',
-        },
-        {
-          key: 'Population of Descendents',
-          label: (
-            <>
-              Population of
-              <br />
-              Descendents
-              <PopulationWarning />
-            </>
-          ),
-          render: (lang) => (
-            <>
-              {(lang.populationOfDescendents ?? 0) > (lang.populationEstimate ?? 0) ? (
-                <Hoverable hoverContent="Computed population of descendants exceeds population estimate.">
-                  <TriangleAlertIcon style={{ color: 'var(--color-text-yellow)' }} size="1em" />
-                </Hoverable>
-              ) : null}
-              {lang.populationOfDescendents?.toLocaleString()}
-            </>
-          ),
-          isNumeric: true,
-          isInitiallyVisible: false,
-          sortParam: SortBy.PopulationOfDescendents,
-          columnGroup: 'Population',
-        },
-        {
-          key: 'Vitality: Metascore',
-          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
-          sortParam: SortBy.VitalityMetascore,
-          columnGroup: 'Vitality',
-        },
-        {
-          key: 'Vitality: ISO',
-          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.ISO} />,
-          sortParam: SortBy.VitalityISO,
-          isInitiallyVisible: false,
-          columnGroup: 'Vitality',
-        },
-        {
-          key: 'Vitality: Ethnologue 2013',
-          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2013} />,
-          sortParam: SortBy.VitalityEthnologue2013,
-          isInitiallyVisible: false,
-          columnGroup: 'Vitality',
-        },
-        {
-          key: 'Vitality: Ethnologue 2025',
-          render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Eth2025} />,
-          sortParam: SortBy.VitalityEthnologue2025,
-          isInitiallyVisible: false,
-          columnGroup: 'Vitality',
-        },
-        {
-          key: 'CLDR Coverage',
-          label: 'CLDR Coverage',
-          render: (lang) => <CLDRCoverageText object={lang} />,
-          isInitiallyVisible: false,
-          columnGroup: 'Digital Support',
-        },
-        {
-          key: 'ICU Support',
-          label: 'ICU Support',
-          render: (lang) => <ICUSupportStatus object={lang} />,
-          isInitiallyVisible: false,
-          columnGroup: 'Digital Support',
-        },
+        ...LanguagePopulationColumns,
+        ...LanguageVitalityColumns,
+        ...LanguageDigitalSupportColumns,
         {
           key: 'Parent Language',
           render: (lang) =>
@@ -195,12 +99,6 @@ const LanguageTable: React.FC = () => {
           isNumeric: true,
           sortParam: SortBy.CountOfTerritories,
           columnGroup: 'Relations',
-        },
-        {
-          key: 'Wikipedia',
-          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
-          isInitiallyVisible: false,
-          columnGroup: 'Digital Support',
         },
         {
           key: 'Literacy',

@@ -51,6 +51,21 @@ export function computeLocalePopulationFromCensuses(dataContext: DataContextType
     setLocalePopulationEstimate(locale, records[0]);
   });
 
+  // Compute the adjusted population for each locale
+  dataContext.locales.forEach((locale) => {
+    if (locale.populationSpeakingPercent == null) {
+      locale.populationAdjusted = locale.populationSpeaking;
+    } else if (locale.populationSpeakingPercent === 0) {
+      // console.log(locale);
+      // locale.populationAdjusted = 0; skip
+    } else {
+      // Re-compute the adjusted population based on the latest territory population
+      locale.populationAdjusted = Math.round(
+        (locale.populationSpeakingPercent / 100.0) * (locale.territory?.population || 1),
+      );
+    }
+  });
+
   // Re-compute the population for regional locales
   // Start with the world territory (001) and then go down to groups
   recomputeRegionalLocalePopulation(dataContext.getTerritory('001'));
@@ -73,30 +88,44 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData | undefined)
   });
   // Now go through the locales and re-compute their population
   territory.locales?.forEach((locale) => {
-    locale.populationSpeaking =
-      locale.containedLocales?.reduce(
+    const uniqueContainedLocales = uniqueBy(
+      locale.containedLocales ?? [],
+      (loc) => loc.territoryCode || '',
+    );
+
+    // Adjusted population comes from the sum of the contained locales
+    locale.populationAdjusted =
+      sumBy(
+        uniqueContainedLocales,
         // Each absolute number may come from a different year, so instead of adding up censuses from
         // potentially different years, we use the population percent of the contained locales
         // and compute the current population based on the latest population of the territory.
-        (sum, loc) =>
-          sum +
-          Math.round(
-            ((loc.populationSpeakingPercent || 0) * (loc.territory?.population || 0)) / 100,
-          ),
-        0,
-      ) || 0;
-    // The percent needs to be aggregated relative to the size of the child territory in the parent territory
-    locale.populationSpeakingPercent =
-      locale.containedLocales?.reduce(
-        (sum, loc) =>
-          sum +
-          Math.round(
-            ((loc.populationSpeakingPercent || 0) * (loc.territory?.population || 0)) /
-              territory.population,
-          ),
-        0,
-      ) || 0;
+        (loc) => loc.populationAdjusted,
+      ) || undefined;
+    // Since this is regional locales, we set the speaking population and percent accordingly
+    locale.populationSpeaking =
+      sumBy(uniqueContainedLocales, (loc) => loc.populationSpeaking || 0) || undefined;
+
+    // Compute the percent based on the adjusted population for regional locales.
+    if (locale.populationAdjusted) {
+      locale.populationSpeakingPercent =
+        (locale.populationAdjusted / (territory.population || 1)) * 100;
+    }
   });
+
+  // As a last step, if this is the World territory, update the language populations
+  // This is safe because after recursion we should have computed everything else already.
+  if (territory.ID === '001') {
+    territory.locales
+      ?.filter((l) => l.scriptCode == null && (l.variantTagCodes || []).length === 0)
+      .forEach((locale) => {
+        const language = locale.language;
+        if (language == null || locale.populationAdjusted == null) return;
+        language.populationFromLocales = locale.populationAdjusted;
+        language.populationEstimate =
+          Math.max(language.populationEstimate ?? 0, locale.populationAdjusted) || undefined;
+      });
+  }
 }
 
 export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
@@ -113,8 +142,7 @@ export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
         (locale.populationSpeaking * locale.literacyPercent) / 100,
       );
       if (locale.populationSpeakingPercent != null) {
-        locale.populationWritingPercent =
-          (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
+        locale.populationWritingPercent = locale.populationSpeakingPercent * locale.literacyPercent;
       }
     });
 

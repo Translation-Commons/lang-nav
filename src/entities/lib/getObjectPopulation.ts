@@ -14,7 +14,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
     case ObjectType.Language:
       return object.populationEstimate;
     case ObjectType.Locale:
-      return object.populationSpeaking;
+      return object.populationAdjusted;
     case ObjectType.Census:
       return object.eligiblePopulation;
     case ObjectType.WritingSystem:
@@ -34,7 +34,7 @@ export function getObjectPopulationAttested(object: ObjectData): number | undefi
     case ObjectType.Language:
       return object.populationCited;
     case ObjectType.Locale:
-      return object.populationCensus != null ? object.populationSpeaking : undefined;
+      return object.populationSpeaking;
     case ObjectType.Territory:
       return object.populationFromUN;
     case ObjectType.Census:

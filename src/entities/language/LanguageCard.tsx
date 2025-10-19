@@ -13,6 +13,7 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 import { VitalityMeterType } from './LanguageVitalityComputation';
 import LanguageVitalityMeter from './LanguageVitalityMeter';
 
@@ -39,10 +40,8 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
       </h3>
       {populationEstimate != null && (
         <div>
-          <h4>
-            Population <PopulationWarning />
-          </h4>
-          {populationEstimate.toLocaleString()}
+          <h4>Population</h4>
+          <LanguagePopulationEstimate lang={lang} />
         </div>
       )}
       {modality != null && (
