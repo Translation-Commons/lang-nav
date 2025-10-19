@@ -33,6 +33,7 @@ export enum ProfileType {
 }
 
 const GLOBAL_DEFAULTS: PageParams = {
+  columns: undefined,
   languageSource: LanguageSource.All,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   limit: 12,

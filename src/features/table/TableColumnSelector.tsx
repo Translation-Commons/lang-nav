@@ -13,13 +13,11 @@ import TableSortButton from './TableSortButton';
 
 function TableColumnSelector<T extends ObjectData>({
   columns,
-  currentlyVisibleColumns,
-  visibleColumns,
+  columnVisibility,
   toggleColumn,
 }: {
   columns: TableColumn<T>[];
-  currentlyVisibleColumns: TableColumn<T>[];
-  visibleColumns: Record<string, boolean>;
+  columnVisibility: Record<string, boolean>;
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
@@ -27,7 +25,8 @@ function TableColumnSelector<T extends ObjectData>({
   return (
     <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
       <summary style={{ cursor: 'pointer' }}>
-        {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
+        {Object.values(columnVisibility).filter(Boolean).length}/{columns.length} columns visible,
+        click here to toggle.
       </summary>
       <div
         style={{
@@ -44,7 +43,7 @@ function TableColumnSelector<T extends ObjectData>({
             key={group}
             group={group}
             columns={columns}
-            visibleColumns={visibleColumns}
+            columnVisibility={columnVisibility}
             toggleColumn={toggleColumn}
           />
         ))}
@@ -56,19 +55,19 @@ function TableColumnSelector<T extends ObjectData>({
 function ColumnGroup<T extends ObjectData>({
   group,
   columns,
-  visibleColumns,
+  columnVisibility,
   toggleColumn,
 }: {
   group: string;
   columns: TableColumn<T>[];
-  visibleColumns: Record<string, boolean>;
+  columnVisibility: Record<string, boolean>;
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
   // If all columns are visible, this function will turn them all off
   // If no columns are visible, this function will turn them all on
   // If some columns are visible, this function will turn them all on
-  const allVisible = columns.every((col) => visibleColumns[col.key]);
-  const someVisible = columns.some((col) => visibleColumns[col.key]);
+  const allVisible = columns.every((col) => columnVisibility[col.key]);
+  const someVisible = columns.some((col) => columnVisibility[col.key]);
   const toggleSelectAll = useCallback(() => {
     columns.forEach((col) => toggleColumn(col.key, !allVisible));
   }, [columns, toggleColumn, allVisible]);
@@ -110,7 +109,7 @@ function ColumnGroup<T extends ObjectData>({
         <ColumnCheckbox
           key={column.key}
           column={column}
-          isChecked={visibleColumns[column.key] || false}
+          isChecked={columnVisibility[column.key] || false}
           toggleColumn={toggleColumn}
         />
       ))}

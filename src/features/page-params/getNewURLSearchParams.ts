@@ -54,5 +54,7 @@ export function getNewURLSearchParams(
     }
   });
 
+  // When changing the object type, some parameters may be too different (eg. the table columns selected)
+
   return next;
 }
