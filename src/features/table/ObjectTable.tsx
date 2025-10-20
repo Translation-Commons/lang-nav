@@ -52,7 +52,8 @@ function ObjectTable<T extends ObjectData>({
   const scopeFilter = getScopeFilter();
   const sliceFunction = getSliceFunction<T>();
 
-  const { visibleColumns, toggleColumn, columnVisibility } = useColumnVisibility(columns);
+  const { visibleColumns, toggleColumn, columnVisibility, resetColumnVisibility } =
+    useColumnVisibility(columns);
 
   // TODO don't filter objects for an unrelated page search on a different object type
   const objectsFilteredAndSorted = useMemo(() => {
@@ -72,6 +73,7 @@ function ObjectTable<T extends ObjectData>({
       <TableColumnSelector
         columns={columns}
         columnVisibility={columnVisibility}
+        resetColumnVisibility={resetColumnVisibility}
         toggleColumn={toggleColumn}
       />
 

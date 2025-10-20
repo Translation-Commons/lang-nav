@@ -45,24 +45,25 @@ export default function useStoredParams<T>(
     }
   }, [key, value]);
 
-  // listen for storage events to sync across tabs
-  useEffect(() => {
-    const handle = (e: StorageEvent) => {
-      if (e.storageArea !== sessionStorage) return;
-      if (e.key !== key) return;
-      try {
-        if (e.newValue == null) {
-          setValueState(resolveDefault());
-        } else {
-          setValueState(JSON.parse(e.newValue) as T);
-        }
-      } catch {
-        setValueState(resolveDefault());
-      }
-    };
-    window.addEventListener('storage', handle);
-    return () => window.removeEventListener('storage', handle);
-  }, [key, resolveDefault]);
+  // Commented out, only applicable to `localStorage`
+  // // listen for storage events to sync across tabs
+  // useEffect(() => {
+  //   const handle = (e: StorageEvent) => {
+  //     if (e.storageArea !== sessionStorage) return;
+  //     if (e.key !== key) return;
+  //     try {
+  //       if (e.newValue == null) {
+  //         setValueState(resolveDefault());
+  //       } else {
+  //         setValueState(JSON.parse(e.newValue) as T);
+  //       }
+  //     } catch {
+  //       setValueState(resolveDefault());
+  //     }
+  //   };
+  //   window.addEventListener('storage', handle);
+  //   return () => window.removeEventListener('storage', handle);
+  // }, [key, resolveDefault]);
 
   const setValue = useCallback(
     (updater: Updater<T>) => {

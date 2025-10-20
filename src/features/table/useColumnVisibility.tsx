@@ -13,6 +13,7 @@ function useColumnVisibility<T extends ObjectData>(
   toggleColumn: (columnKey: string, isVisible?: boolean) => void;
   visibleColumns: TableColumn<T>[];
   columnVisibility: Record<string, boolean>;
+  resetColumnVisibility: () => void;
 } {
   const { sortBy } = usePageParams();
 
@@ -24,9 +25,11 @@ function useColumnVisibility<T extends ObjectData>(
   // allColumnVisibility maps column keys to whether they are visible, persisted in stored params
   // Column keys that are reused (like ID, Name) are reused so if you turn on/off an ID column
   // then switch table views the state will remain.
-  const { value: allColumnVisibility, setValue: setAllColumnVisibility } = useStoredParams<
-    Record<string, boolean>
-  >('column-visibility', defaultColumnVisibility);
+  const {
+    value: allColumnVisibility,
+    setValue: setAllColumnVisibility,
+    clear: resetColumnVisibility,
+  } = useStoredParams<Record<string, boolean>>('column-visibility', defaultColumnVisibility);
 
   const toggleColumn = useCallback(
     (columnKey: string, isVisible?: boolean) => {
@@ -50,14 +53,14 @@ function useColumnVisibility<T extends ObjectData>(
         defaultColumnVisibility[col.key];
       return acc;
     }, {});
-  }, [allColumnVisibility, columns]);
+  }, [allColumnVisibility, columns, defaultColumnVisibility, sortBy]);
 
   const visibleColumns = useMemo(
     () => columns.filter((column) => columnVisibility[column.key]),
-    [columns, columnVisibility, sortBy],
+    [columns, columnVisibility],
   );
 
-  return { visibleColumns, toggleColumn, columnVisibility };
+  return { visibleColumns, toggleColumn, columnVisibility, resetColumnVisibility };
 }
 
 export default useColumnVisibility;

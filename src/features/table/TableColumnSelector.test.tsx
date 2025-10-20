@@ -34,6 +34,7 @@ describe('TableColumnSelector', () => {
         <TableColumnSelector
           columns={columns}
           columnVisibility={columnVisibility}
+          resetColumnVisibility={vi.fn()}
           toggleColumn={toggleMock}
         />
       </HoverCardProvider>,
@@ -57,6 +58,7 @@ describe('TableColumnSelector', () => {
         <TableColumnSelector
           columns={columns}
           columnVisibility={columnVisibility}
+          resetColumnVisibility={vi.fn()}
           toggleColumn={toggleMock}
         />
       </HoverCardProvider>,
@@ -87,6 +89,7 @@ describe('TableColumnSelector', () => {
         <TableColumnSelector
           columns={columns}
           columnVisibility={columnVisibility}
+          resetColumnVisibility={vi.fn()}
           toggleColumn={toggleMock}
         />
       </HoverCardProvider>,

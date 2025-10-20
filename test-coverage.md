@@ -50,7 +50,7 @@
 | `      writingsystem`                    |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemCard.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemSuggestions.tsx`   |     0   |   100.0 |   100.0 |     0   |
-| `    features`                           |    26.9 |    75.3 |    28.8 |    26.9 |
+| `    features`                           |    27.2 |    75.3 |    28.8 |    27.2 |
 | `      data-loading`                     |    28.8 |    75.0 |    25.7 |    28.8 |
 | `        CensusData.tsx`                 |     2.7 |   100.0 |     0   |     2.7 |
 | `        CoreData.tsx`                   |    17.6 |   100.0 |     0   |    17.6 |
@@ -88,10 +88,10 @@
 | `        SortTypes.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      stored-params`                    |     0   |     0   |     0   |     0   |
 | `        useStoredParams.tsx`            |     0   |     0   |     0   |     0   |
-| `      table`                            |    47.9 |    79.4 |    60.0 |    47.9 |
+| `      table`                            |    48.5 |    79.4 |    60.0 |    48.5 |
 | `        CommonColumns.tsx`              |     0   |     0   |     0   |     0   |
 | `        ObjectTable.tsx`                |     0   |     0   |     0   |     0   |
-| `        TableColumnSelector.tsx`        |    96.4 |    90.5 |   100.0 |    96.4 |
+| `        TableColumnSelector.tsx`        |    96.6 |    90.5 |   100.0 |    96.6 |
 | `        TableSortButton.tsx`            |    77.2 |    80.0 |    66.7 |    77.2 |
 | `        useColumnVisibility.tsx`        |     0   |     0   |     0   |     0   |
 | `      treelist`                         |     0   |    40.0 |    40.0 |     0   |

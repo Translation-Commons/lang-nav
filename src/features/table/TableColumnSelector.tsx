@@ -7,6 +7,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
 import Hoverable from '@shared/ui/Hoverable';
+import HoverableButton from '@shared/ui/HoverableButton';
 
 import { TableColumn } from './ObjectTable';
 import TableSortButton from './TableSortButton';
@@ -14,10 +15,12 @@ import TableSortButton from './TableSortButton';
 function TableColumnSelector<T extends ObjectData>({
   columns,
   columnVisibility,
+  resetColumnVisibility,
   toggleColumn,
 }: {
   columns: TableColumn<T>[];
   columnVisibility: Record<string, boolean>;
+  resetColumnVisibility: () => void;
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
@@ -47,6 +50,13 @@ function TableColumnSelector<T extends ObjectData>({
             toggleColumn={toggleColumn}
           />
         ))}
+        <HoverableButton
+          onClick={resetColumnVisibility}
+          style={{ height: 'fit-content', justifySelf: 'end', alignSelf: 'end' }}
+          hoverContent="Reset to default column visibility"
+        >
+          Reset
+        </HoverableButton>
       </div>
     </details>
   );
@@ -128,7 +138,7 @@ function ColumnCheckbox<T extends ObjectData>({
 }): React.ReactNode {
   const { sortBy } = usePageParams();
   return (
-    <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal' }}>
+    <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
       <input
         type="checkbox"
         checked={isChecked || sortBy === column.sortParam}
