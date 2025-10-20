@@ -24,14 +24,15 @@ import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
 
+// Readonly, don't mutate the TableColumn definitions
 export interface TableColumn<T> {
-  columnGroup?: string; // "Key" for the parent column
-  isInitiallyVisible?: boolean;
-  isNumeric?: boolean;
-  key: string;
-  label?: React.ReactNode;
-  render: (object: T) => React.ReactNode;
-  sortParam?: SortBy;
+  readonly columnGroup?: string; // "Key" for the parent column
+  readonly isInitiallyVisible?: boolean;
+  readonly isNumeric?: boolean;
+  readonly key: string;
+  readonly label?: React.ReactNode;
+  readonly render: (object: T) => React.ReactNode;
+  readonly sortParam?: SortBy;
 }
 
 interface Props<T> {

@@ -22,6 +22,7 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
 
   return (
     <span
+      data-testid="hoverable"
       className="hoverableText"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={onMouseLeaveTriggeringElement}

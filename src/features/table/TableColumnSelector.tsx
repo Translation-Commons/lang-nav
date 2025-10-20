@@ -21,12 +21,12 @@ function TableColumnSelector<T extends ObjectData>({
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
+  const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
   return (
     <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
       <summary style={{ cursor: 'pointer' }}>
-        {Object.values(columnVisibility).filter(Boolean).length}/{columns.length} columns visible,
-        click here to toggle.
+        {nVisible}/{columns.length} columns visible, click here to toggle.
       </summary>
       <div
         style={{
