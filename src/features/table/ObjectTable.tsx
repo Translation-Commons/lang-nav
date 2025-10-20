@@ -1,10 +1,9 @@
-import React, { useMemo, useState, useCallback } from 'react';
+import React, { useMemo } from 'react';
 
 import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
-import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -21,17 +20,19 @@ import { getSortFunction } from '../sorting/sort';
 
 import TableColumnSelector from './TableColumnSelector';
 import TableSortButton from './TableSortButton';
+import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
 
+// Readonly, don't mutate the TableColumn definitions
 export interface TableColumn<T> {
-  columnGroup?: string; // "Key" for the parent column
-  isInitiallyVisible?: boolean;
-  isNumeric?: boolean;
-  key: string;
-  label?: React.ReactNode;
-  render: (object: T) => React.ReactNode;
-  sortParam?: SortBy;
+  readonly columnGroup?: string; // "Key" for the parent column
+  readonly isInitiallyVisible?: boolean;
+  readonly isNumeric?: boolean;
+  readonly key: string;
+  readonly label?: React.ReactNode;
+  readonly render: (object: T) => React.ReactNode;
+  readonly sortParam?: SortBy;
 }
 
 interface Props<T> {
@@ -45,28 +46,14 @@ function ObjectTable<T extends ObjectData>({
   columns,
   shouldFilterUsingSearchBar = true,
 }: Props<T>) {
-  const { sortBy } = usePageParams();
   const sortFunction = getSortFunction();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
   const scopeFilter = getScopeFilter();
-
-  const [visibleColumns, setVisibleColumns] = useState(() =>
-    Object.fromEntries(columns.map((col) => [col.key, col.isInitiallyVisible ?? true])),
-  );
-
-  const toggleColumn = useCallback((columnKey: string, isVisible?: boolean) => {
-    setVisibleColumns((prev) => ({
-      ...prev,
-      [columnKey]: isVisible ?? !prev[columnKey],
-    }));
-  }, []);
-
-  const currentlyVisibleColumns = useMemo(
-    () => columns.filter((column) => visibleColumns[column.key] || column.sortParam === sortBy),
-    [columns, visibleColumns, sortBy],
-  );
   const sliceFunction = getSliceFunction<T>();
+
+  const { visibleColumns, toggleColumn, columnVisibility, resetColumnVisibility } =
+    useColumnVisibility(columns);
 
   // TODO don't filter objects for an unrelated page search on a different object type
   const objectsFilteredAndSorted = useMemo(() => {
@@ -85,15 +72,15 @@ function ObjectTable<T extends ObjectData>({
       />
       <TableColumnSelector
         columns={columns}
-        currentlyVisibleColumns={currentlyVisibleColumns}
-        visibleColumns={visibleColumns}
+        columnVisibility={columnVisibility}
+        resetColumnVisibility={resetColumnVisibility}
         toggleColumn={toggleColumn}
       />
 
       <table className="ObjectTable">
         <thead>
           <tr>
-            {currentlyVisibleColumns.map((column) => (
+            {visibleColumns.map((column) => (
               <th key={column.key} style={{ textAlign: 'start' }}>
                 {column.label ?? column.key}
                 <TableSortButton columnSortBy={column.sortParam} isNumeric={column.isNumeric} />
@@ -104,7 +91,7 @@ function ObjectTable<T extends ObjectData>({
         <tbody>
           {sliceFunction(objectsFilteredAndSorted).map((object, i) => (
             <tr key={object.ID || i}>
-              {currentlyVisibleColumns.map((column) => {
+              {visibleColumns.map((column) => {
                 let content = column.render(object);
                 if (typeof content === 'number') {
                   content = content.toLocaleString();

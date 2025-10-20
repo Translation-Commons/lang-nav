@@ -2,10 +2,10 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `All files`                              |    14.8 |    75.5 |    51.1 |    14.8 |
+| `All files`                              |    17.3 |    75.5 |    51.4 |    17.3 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |    14.9 |    75.6 |    51.3 |    14.9 |
+| `  src`                                  |    17.4 |    75.6 |    51.6 |    17.4 |
 | `    app`                                |     0   |     0   |     0   |     0   |
 | `      App.tsx`                          |     0   |     0   |     0   |     0   |
 | `      PageRoutes.tsx`                   |     0   |     0   |     0   |     0   |
@@ -50,7 +50,7 @@
 | `      writingsystem`                    |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemCard.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemSuggestions.tsx`   |     0   |   100.0 |   100.0 |     0   |
-| `    features`                           |    23.0 |    74.0 |    24.7 |    23.0 |
+| `    features`                           |    27.2 |    75.3 |    28.8 |    27.2 |
 | `      data-loading`                     |    28.8 |    75.0 |    25.7 |    28.8 |
 | `        CensusData.tsx`                 |     2.7 |   100.0 |     0   |     2.7 |
 | `        CoreData.tsx`                   |    17.6 |   100.0 |     0   |    17.6 |
@@ -86,11 +86,14 @@
 | `      sorting`                          |    68.6 |    84.8 |    60.0 |    68.6 |
 | `        sort.tsx`                       |    63.3 |    84.1 |    60.0 |    63.3 |
 | `        SortTypes.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      table`                            |     0   |     0   |     0   |     0   |
+| `      stored-params`                    |     0   |     0   |     0   |     0   |
+| `        useStoredParams.tsx`            |     0   |     0   |     0   |     0   |
+| `      table`                            |    48.5 |    79.4 |    60.0 |    48.5 |
 | `        CommonColumns.tsx`              |     0   |     0   |     0   |     0   |
 | `        ObjectTable.tsx`                |     0   |     0   |     0   |     0   |
-| `        TableColumnSelector.tsx`        |     0   |     0   |     0   |     0   |
-| `        TableSortButton.tsx`            |     0   |     0   |     0   |     0   |
+| `        TableColumnSelector.tsx`        |    96.6 |    90.5 |   100.0 |    96.6 |
+| `        TableSortButton.tsx`            |    77.2 |    80.0 |    66.7 |    77.2 |
+| `        useColumnVisibility.tsx`        |     0   |     0   |     0   |     0   |
 | `      treelist`                         |     0   |    40.0 |    40.0 |     0   |
 | `        filterBranch.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `        TreeListNode.tsx`               |     0   |     0   |     0   |     0   |
@@ -109,7 +112,7 @@
 | `        ViewReports.tsx`                |     0   |   100.0 |   100.0 |     0   |
 | `        ViewTable.tsx`                  |     0   |     0   |     0   |     0   |
 | `      IntroPage.tsx`                    |     0   |   100.0 |   100.0 |     0   |
-| `    shared`                             |    12.3 |    76.3 |    55.2 |    12.3 |
+| `    shared`                             |    26.2 |    71.7 |    52.9 |    26.2 |
 | `      containers`                       |     0   |   100.0 |   100.0 |     0   |
 | `        CollapsibleReport.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        DetailsField.tsx`               |     0   |   100.0 |   100.0 |     0   |
@@ -120,17 +123,17 @@
 | `        useClickOutside.tsx`            |     0   |     0   |     0   |     0   |
 | `        useDebounce.tsx`                |     0   |     0   |     0   |     0   |
 | `        useMediaQuery.tsx`              |     0   |     0   |     0   |     0   |
-| `      lib`                              |    31.1 |    88.2 |    41.7 |    31.1 |
+| `      lib`                              |    43.4 |    90.0 |    50.0 |    43.4 |
 | `        numberUtils.ts`                 |     0   |   100.0 |   100.0 |     0   |
 | `        PositionInGroup.ts`             |     0   |     0   |     0   |     0   |
-| `        setUtils.ts`                    |    44.7 |    83.3 |    40.0 |    44.7 |
+| `        setUtils.ts`                    |    78.9 |    88.9 |    60.0 |    78.9 |
 | `        stringUtils.ts`                 |    51.6 |   100.0 |    40.0 |    51.6 |
-| `      ui`                               |     9.9 |    76.9 |    77.8 |     9.9 |
+| `      ui`                               |    31.8 |    61.1 |    57.1 |    31.8 |
 | `        CommaSeparated.tsx`             |     0   |     0   |     0   |     0   |
 | `        Deemphasized.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `        Highlightable.tsx`              |    87.5 |    71.4 |   100.0 |    87.5 |
-| `        Hoverable.tsx`                  |     0   |   100.0 |   100.0 |     0   |
-| `        HoverableButton.tsx`            |     0   |   100.0 |   100.0 |     0   |
+| `        Hoverable.tsx`                  |    83.3 |    50.0 |    66.7 |    83.3 |
+| `        HoverableButton.tsx`            |    58.0 |    33.3 |    25.0 |    58.0 |
 | `        HoverableEnumeration.tsx`       |     0   |   100.0 |   100.0 |     0   |
 | `        LinkButton.tsx`                 |     4.2 |   100.0 |     0   |     4.2 |
 | `        PercentageDifference.tsx`       |     0   |   100.0 |   100.0 |     0   |
@@ -139,7 +142,7 @@
 | `    tests`                              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      MockObjects.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      testServer.ts`                    |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    widgets`                            |     0   |    59.4 |    59.4 |     0   |
+| `    widgets`                            |     1.5 |    60.0 |    57.1 |     1.5 |
 | `      cardlists`                        |     0   |    85.7 |    85.7 |     0   |
 | `        CardList.tsx`                   |     0   |     0   |     0   |     0   |
 | `        CensusCardList.tsx`             |     0   |   100.0 |   100.0 |     0   |
@@ -184,7 +187,7 @@
 | `        TerritoryDetails.tsx`           |     0   |   100.0 |   100.0 |     0   |
 | `        VariantTagDetails.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemDetails.tsx`       |     0   |   100.0 |   100.0 |     0   |
-| `      HoverCardContext.tsx`             |     0   |     0   |     0   |     0   |
+| `      HoverCardContext.tsx`             |    72.8 |    58.3 |    33.3 |    72.8 |
 | `      Loading.tsx`                      |     0   |   100.0 |   100.0 |     0   |
 | `      PageFooter.tsx`                   |     0   |   100.0 |   100.0 |     0   |
 | `      PageNavBar.tsx`                   |     0   |   100.0 |   100.0 |     0   |

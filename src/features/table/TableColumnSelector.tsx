@@ -7,27 +7,29 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
 import Hoverable from '@shared/ui/Hoverable';
+import HoverableButton from '@shared/ui/HoverableButton';
 
 import { TableColumn } from './ObjectTable';
 import TableSortButton from './TableSortButton';
 
 function TableColumnSelector<T extends ObjectData>({
   columns,
-  currentlyVisibleColumns,
-  visibleColumns,
+  columnVisibility,
+  resetColumnVisibility,
   toggleColumn,
 }: {
   columns: TableColumn<T>[];
-  currentlyVisibleColumns: TableColumn<T>[];
-  visibleColumns: Record<string, boolean>;
+  columnVisibility: Record<string, boolean>;
+  resetColumnVisibility: () => void;
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
+  const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
   return (
     <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
       <summary style={{ cursor: 'pointer' }}>
-        {currentlyVisibleColumns.length}/{columns.length} columns visible, click here to toggle.
+        {nVisible}/{columns.length} columns visible, click here to toggle.
       </summary>
       <div
         style={{
@@ -44,10 +46,17 @@ function TableColumnSelector<T extends ObjectData>({
             key={group}
             group={group}
             columns={columns}
-            visibleColumns={visibleColumns}
+            columnVisibility={columnVisibility}
             toggleColumn={toggleColumn}
           />
         ))}
+        <HoverableButton
+          onClick={resetColumnVisibility}
+          style={{ height: 'fit-content', justifySelf: 'end', alignSelf: 'end' }}
+          hoverContent="Reset to default column visibility"
+        >
+          Reset
+        </HoverableButton>
       </div>
     </details>
   );
@@ -56,19 +65,19 @@ function TableColumnSelector<T extends ObjectData>({
 function ColumnGroup<T extends ObjectData>({
   group,
   columns,
-  visibleColumns,
+  columnVisibility,
   toggleColumn,
 }: {
   group: string;
   columns: TableColumn<T>[];
-  visibleColumns: Record<string, boolean>;
+  columnVisibility: Record<string, boolean>;
   toggleColumn: (key: string, isVisible?: boolean) => void;
 }): React.ReactNode {
   // If all columns are visible, this function will turn them all off
   // If no columns are visible, this function will turn them all on
   // If some columns are visible, this function will turn them all on
-  const allVisible = columns.every((col) => visibleColumns[col.key]);
-  const someVisible = columns.some((col) => visibleColumns[col.key]);
+  const allVisible = columns.every((col) => columnVisibility[col.key]);
+  const someVisible = columns.some((col) => columnVisibility[col.key]);
   const toggleSelectAll = useCallback(() => {
     columns.forEach((col) => toggleColumn(col.key, !allVisible));
   }, [columns, toggleColumn, allVisible]);
@@ -110,7 +119,7 @@ function ColumnGroup<T extends ObjectData>({
         <ColumnCheckbox
           key={column.key}
           column={column}
-          isChecked={visibleColumns[column.key] || false}
+          isChecked={columnVisibility[column.key] || false}
           toggleColumn={toggleColumn}
         />
       ))}
@@ -129,7 +138,7 @@ function ColumnCheckbox<T extends ObjectData>({
 }): React.ReactNode {
   const { sortBy } = usePageParams();
   return (
-    <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal' }}>
+    <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
       <input
         type="checkbox"
         checked={isChecked || sortBy === column.sortParam}
