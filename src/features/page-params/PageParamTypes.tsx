@@ -47,7 +47,6 @@ export enum LocaleSeparator {
 }
 
 export enum PageParamKey {
-  columns = 'columns',
   languageSource = 'languageSource',
   languageScopes = 'languageScopes',
   limit = 'limit',
@@ -66,7 +65,6 @@ export enum PageParamKey {
 }
 
 export type PageParams = {
-  columns?: number; // Encoded version of columns to show in table view
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
@@ -85,7 +83,6 @@ export type PageParams = {
 };
 
 export type PageParamsOptional = {
-  columns?: number;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;
