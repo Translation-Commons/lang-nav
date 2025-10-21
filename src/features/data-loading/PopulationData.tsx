@@ -8,7 +8,7 @@ import {
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
-import { DataContextType } from './DataContext';
+import { DataContextType } from './context/useDataContext';
 
 type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 
@@ -53,10 +53,13 @@ export function computeLocalePopulationFromCensuses(dataContext: DataContextType
 
   // Compute the adjusted population for each locale
   dataContext.locales.forEach((locale) => {
+    if (!isTerritoryGroup(locale.territory?.scope)) {
+      // skip regional locales
+      return;
+    }
     if (locale.populationSpeakingPercent == null) {
       locale.populationAdjusted = locale.populationSpeaking;
     } else if (locale.populationSpeakingPercent === 0) {
-      // console.log(locale);
       // locale.populationAdjusted = 0; skip
     } else {
       // Re-compute the adjusted population based on the latest territory population

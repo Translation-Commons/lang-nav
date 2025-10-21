@@ -8,9 +8,12 @@ import {
   connectLocales,
   connectWritingSystems,
 } from '@features/data-loading/DataAssociations';
-import { updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
+import { DataContextType, updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
 import { connectVariantTags } from '@features/data-loading/IANAData';
-import { computeLocaleWritingPopulation } from '@features/data-loading/PopulationData';
+import {
+  computeLocalePopulationFromCensuses,
+  computeLocaleWritingPopulation,
+} from '@features/data-loading/PopulationData';
 import {
   computeContainedTerritoryStats,
   connectTerritoriesToParent,
@@ -312,5 +315,40 @@ export function getMockedObjects(): ObjectDictionary {
   // Add computed territory locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
   computeLocaleWritingPopulation(Object.values(locales));
+
+  // From PopulationData
+  const dataContext = getMockedDataContext(objects);
+  computeLocalePopulationFromCensuses(dataContext);
   return objects;
+}
+
+function getMockedDataContext(objects: ObjectDictionary): DataContextType {
+  const objectArray = Object.values(objects);
+  const languages = objectArray.filter((obj) => obj.type === ObjectType.Language);
+  const locales = objectArray.filter((obj) => obj.type === ObjectType.Locale);
+  const territories = objectArray.filter((obj) => obj.type === ObjectType.Territory);
+  const writingSystems = objectArray.filter((obj) => obj.type === ObjectType.WritingSystem);
+  const variantTags = objectArray.filter((obj) => obj.type === ObjectType.VariantTag);
+
+  const dataContext: DataContextType = {
+    allLanguoids: languages,
+    censuses: { be0590: objects.be0590 as CensusData },
+    languagesInSelectedSource: languages,
+    locales,
+    territories,
+    writingSystems,
+    variantTags,
+    getObject: (id: string) => objects[id],
+    getLanguage: (id: string) =>
+      objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
+    getLocale: (id: string) => (objects[id]?.type === ObjectType.Locale ? objects[id] : undefined),
+    getTerritory: (id: string) =>
+      objects[id]?.type === ObjectType.Territory ? objects[id] : undefined,
+    getWritingSystem: (id: string) =>
+      objects[id]?.type === ObjectType.WritingSystem ? objects[id] : undefined,
+    getVariantTag: (id: string) =>
+      objects[id]?.type === ObjectType.VariantTag ? objects[id] : undefined,
+  };
+
+  return dataContext;
 }

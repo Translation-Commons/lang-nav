@@ -4,7 +4,7 @@ import { HoverCardProvider } from '@widgets/HoverCardContext';
 import Loading from '@widgets/Loading';
 
 const PageParamsProvider = React.lazy(() => import('@features/page-params/PageParamsProvider'));
-const DataProvider = React.lazy(() => import('@features/data-loading/DataContext'));
+const DataProvider = React.lazy(() => import('@features/data-loading/context/useDataContext'));
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
 const SidePanel = React.lazy(() => import('@widgets/controls/SidePanel'));
 const ViewModal = React.lazy(() => import('@features/modal/ViewModal'));

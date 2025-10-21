@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import LimitInput from '@widgets/controls/selectors/LimitInput';
 import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 
-import { useDataContext } from '@features/data-loading/DataContext';
+import { useDataContext } from '@features/data-loading/context/useDataContext';
 import {
   getFilterBySubstring,
   getFilterByTerritory,
