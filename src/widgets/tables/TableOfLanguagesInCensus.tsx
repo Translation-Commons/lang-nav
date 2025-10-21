@@ -6,7 +6,7 @@ import { ObjectType, SearchableField } from '@features/page-params/PageParamType
 import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData } from '@entities/types/DataTypes';
@@ -103,7 +103,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Population',
             render: (loc) => loc.populationSpeaking,
-            isNumeric: true,
+            valueType: ValueType.Numeric,
             sortParam: SortBy.Population,
           },
           {
@@ -112,14 +112,14 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               loc.populationSpeakingPercent != null
                 ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
                 : 'N/A',
-            isNumeric: true,
+            valueType: ValueType.Numeric,
             sortParam: SortBy.PercentOfTerritoryPopulation,
           },
           {
             key: 'Scope',
             render: (loc) => loc.language?.scope,
             isInitiallyVisible: false,
-            isNumeric: false,
+            valueType: ValueType.Enum,
           },
           {
             key: 'Locale Entry',
@@ -138,7 +138,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               </Hoverable>
             ),
             render: getPopulationDifference,
-            isNumeric: true,
+            valueType: ValueType.Numeric,
           },
           {
             key: 'Percent of Worldwide in Language',
@@ -147,7 +147,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               numberToFixedUnlessSmall(
                 (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
               ) + '%',
-            isNumeric: true,
+            valueType: ValueType.Numeric,
             isInitiallyVisible: false,
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           },
