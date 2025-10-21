@@ -3,7 +3,7 @@ import React from 'react';
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
@@ -25,7 +25,7 @@ const TerritoryTable: React.FC = () => {
         {
           key: 'Population',
           render: (object) => object.population,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Population,
           columnGroup: 'Demographics',
         },
@@ -33,7 +33,7 @@ const TerritoryTable: React.FC = () => {
           key: 'Literacy',
           render: (object) =>
             object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Literacy,
           columnGroup: 'Demographics',
         },
@@ -45,7 +45,7 @@ const TerritoryTable: React.FC = () => {
                 items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
               />
             ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Language',
         },
@@ -69,7 +69,7 @@ const TerritoryTable: React.FC = () => {
           render: (object) =>
             object.locales ? object.locales[0].populationSpeakingPercent?.toFixed(1) + '%' : null,
           isInitiallyVisible: false,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
           columnGroup: 'Language',
         },
@@ -85,7 +85,7 @@ const TerritoryTable: React.FC = () => {
             <HoverableEnumeration items={getTerritoryChildren(object).map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.CountOfTerritories,
           columnGroup: 'Relations',
         },
@@ -96,13 +96,14 @@ const TerritoryTable: React.FC = () => {
               ? sumBy(object.dependentTerritories, (t) => t.population ?? 0)
               : null,
           isInitiallyVisible: false,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.PopulationOfDescendents,
           columnGroup: 'Relations',
         },
         {
           key: 'Type',
           render: (object) => object.scope,
+          valueType: ValueType.Enum,
         },
       ]}
     />

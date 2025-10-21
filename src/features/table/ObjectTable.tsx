@@ -24,11 +24,16 @@ import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
 
+export enum ValueType {
+  Numeric = 'numeric',
+  String = 'string',
+  Enum = 'enum',
+}
 // Readonly, don't mutate the TableColumn definitions
 export interface TableColumn<T> {
   readonly columnGroup?: string; // "Key" for the parent column
   readonly isInitiallyVisible?: boolean;
-  readonly isNumeric?: boolean;
+  readonly valueType?: ValueType;
   readonly key: string;
   readonly label?: React.ReactNode;
   readonly render: (object: T) => React.ReactNode;
@@ -83,7 +88,7 @@ function ObjectTable<T extends ObjectData>({
             {visibleColumns.map((column) => (
               <th key={column.key} style={{ textAlign: 'start' }}>
                 {column.label ?? column.key}
-                <TableSortButton columnSortBy={column.sortParam} isNumeric={column.isNumeric} />
+                <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
               </th>
             ))}
           </tr>
@@ -98,7 +103,10 @@ function ObjectTable<T extends ObjectData>({
                 }
 
                 return (
-                  <td key={column.key} className={column.isNumeric ? 'numeric' : undefined}>
+                  <td
+                    key={column.key}
+                    className={column.valueType === ValueType.Numeric ? 'numeric' : undefined}
+                  >
                     {content}
                   </td>
                 );

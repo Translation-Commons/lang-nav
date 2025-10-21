@@ -6,7 +6,7 @@ import PopulationWarning from '@widgets/PopulationWarning';
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import LanguageVitalityCell from '@entities/language/LanguageVitalityCell';
@@ -74,7 +74,7 @@ const LanguageTable: React.FC = () => {
             </>
           ),
           render: (lang) => lang.populationEstimate,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Population,
           columnGroup: 'Population',
         },
@@ -91,7 +91,7 @@ const LanguageTable: React.FC = () => {
             </>
           ),
           render: (lang) => lang.populationCited,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationAttested,
           columnGroup: 'Population',
@@ -116,7 +116,7 @@ const LanguageTable: React.FC = () => {
               {lang.populationOfDescendents?.toLocaleString()}
             </>
           ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           isInitiallyVisible: false,
           sortParam: SortBy.PopulationOfDescendents,
           columnGroup: 'Population',
@@ -126,6 +126,7 @@ const LanguageTable: React.FC = () => {
           render: (lang) => <LanguageVitalityCell lang={lang} type={VitalityMeterType.Metascore} />,
           sortParam: SortBy.VitalityMetascore,
           columnGroup: 'Vitality',
+          valueType: ValueType.Enum,
         },
         {
           key: 'Vitality: ISO',
@@ -133,6 +134,7 @@ const LanguageTable: React.FC = () => {
           sortParam: SortBy.VitalityISO,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
+          valueType: ValueType.Enum,
         },
         {
           key: 'Vitality: Ethnologue 2013',
@@ -140,6 +142,7 @@ const LanguageTable: React.FC = () => {
           sortParam: SortBy.VitalityEthnologue2013,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
+          valueType: ValueType.Enum,
         },
         {
           key: 'Vitality: Ethnologue 2025',
@@ -147,6 +150,7 @@ const LanguageTable: React.FC = () => {
           sortParam: SortBy.VitalityEthnologue2025,
           isInitiallyVisible: false,
           columnGroup: 'Vitality',
+          valueType: ValueType.Enum,
         },
         {
           key: 'CLDR Coverage',
@@ -178,7 +182,7 @@ const LanguageTable: React.FC = () => {
                 .map((lang) => lang.nameDisplay)}
             />
           ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           isInitiallyVisible: false,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Relations',
@@ -192,7 +196,7 @@ const LanguageTable: React.FC = () => {
               )}
             />
           ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.CountOfTerritories,
           columnGroup: 'Relations',
         },
@@ -211,7 +215,7 @@ const LanguageTable: React.FC = () => {
           },
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
         },
       ]}
     />

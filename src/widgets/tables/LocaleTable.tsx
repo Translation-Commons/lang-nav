@@ -6,7 +6,7 @@ import { useDataContext } from '@features/data-loading/DataContext';
 import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocaleData } from '@entities/types/DataTypes';
@@ -39,7 +39,7 @@ const LocaleTable: React.FC = () => {
           ),
           key: 'Population',
           render: (object) => object.populationSpeaking,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Population,
           columnGroup: 'Demographics',
         },
@@ -50,7 +50,7 @@ const LocaleTable: React.FC = () => {
               ? numberToFixedUnlessSmall(object.literacyPercent)
               : null,
           isInitiallyVisible: false,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Literacy,
           columnGroup: 'Demographics',
         },
@@ -66,7 +66,7 @@ const LocaleTable: React.FC = () => {
                 )}
               </>
             ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.PercentOfTerritoryPopulation,
           columnGroup: 'Demographics',
         },
@@ -77,7 +77,7 @@ const LocaleTable: React.FC = () => {
             numberToFixedUnlessSmall(
               (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
             ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           isInitiallyVisible: false,
           sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           columnGroup: 'Demographics',
@@ -97,7 +97,7 @@ const LocaleTable: React.FC = () => {
             </CommaSeparated>
           ),
           isInitiallyVisible: false,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Linked Data',
         },

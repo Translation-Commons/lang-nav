@@ -1,4 +1,11 @@
-import { ArrowDown01, ArrowDown10, ArrowDownAZ, ArrowDownZA } from 'lucide-react';
+import {
+  ArrowDown01,
+  ArrowDown10,
+  ArrowDownAZ,
+  ArrowDownNarrowWide,
+  ArrowDownWideNarrow,
+  ArrowDownZA,
+} from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { usePageParams } from '@features/page-params/usePageParams';
@@ -8,12 +15,14 @@ import HoverableButton from '@shared/ui/HoverableButton';
 
 import { getNormalSortDirection } from '../sorting/sort';
 
+import { ValueType } from './ObjectTable';
+
 type Props = {
   columnSortBy?: SortBy;
-  isNumeric?: boolean;
+  valueType?: ValueType;
 };
 
-const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) => {
+const TableSortButton: React.FC<Props> = ({ columnSortBy, valueType = ValueType.String }) => {
   const { sortBy, updatePageParams, sortBehavior } = usePageParams();
 
   if (!columnSortBy) {
@@ -47,7 +56,7 @@ const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) =
       onClick={() => onSortButtonClick(columnSortBy)}
     >
       <SortButtonIcon
-        isNumeric={isNumeric}
+        valueType={valueType}
         sortDirection={sortBy === columnSortBy ? currentSortDirection : normalSortDirection}
       />
     </HoverableButton>
@@ -55,16 +64,22 @@ const TableSortButton: React.FC<Props> = ({ columnSortBy, isNumeric = false }) =
 };
 
 type SortButtonIconProps = {
-  isNumeric?: boolean;
+  valueType?: ValueType;
   sortDirection?: SortDirection;
 };
 
-function SortButtonIcon({ isNumeric, sortDirection }: SortButtonIconProps) {
-  if (isNumeric) {
+function SortButtonIcon({ valueType, sortDirection }: SortButtonIconProps) {
+  if (valueType === ValueType.Numeric) {
     if (sortDirection === SortDirection.Ascending) {
       return <ArrowDown01 size="1em" display="block" />;
     } else {
       return <ArrowDown10 size="1em" display="block" />;
+    }
+  } else if (valueType === ValueType.Enum) {
+    if (sortDirection === SortDirection.Ascending) {
+      return <ArrowDownWideNarrow size="1em" display="block" />;
+    } else {
+      return <ArrowDownNarrowWide size="1em" display="block" />;
     }
   } else {
     if (sortDirection === SortDirection.Ascending) {

@@ -5,7 +5,7 @@ import PopulationWarning from '@widgets/PopulationWarning';
 import { useDataContext } from '@features/data-loading/DataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
 
@@ -31,7 +31,7 @@ const WritingSystemTable: React.FC = () => {
           ),
           key: 'Population',
           render: (object) => object.populationUpperBound,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Population,
         },
         {
@@ -42,7 +42,7 @@ const WritingSystemTable: React.FC = () => {
                 items={Object.values(object.languages).map((l) => l.nameDisplay)}
               />
             ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
         },
       ]}
