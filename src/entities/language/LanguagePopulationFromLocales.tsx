@@ -26,35 +26,37 @@ const Descendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   ).map((locales) => locales[0]);
 
   return (
-    <table>
-      <caption>
-        Computed by adding up populations from data in countries across the world, linearly adjusted
-        to 2025 numbers.
-      </caption>
-      {
-        localesFromUniqueTerritories
-          .map((locale) => (
-            <tr key={locale.ID}>
-              <td>
-                <HoverableObjectName object={locale} labelSource="territory" />
+    <>
+      Computed by adding up populations from data in countries across the world, linearly adjusted
+      to 2025 numbers.
+      <table>
+        <tbody>
+          {localesFromUniqueTerritories
+            .slice(0, 10) /* limit to first 10 */
+            .map((locale) => (
+              <tr key={locale.ID}>
+                <td>
+                  <HoverableObjectName object={locale} labelSource="territory" />
+                </td>
+                <td style={{ textAlign: 'right' }}>
+                  {locale.populationAdjusted?.toLocaleString()}
+                </td>
+              </tr>
+            ))}
+          {localesFromUniqueTerritories.length > 10 && (
+            <tr>
+              <td>+{localesFromUniqueTerritories.length - 10} more</td>
+              <td style={{ textAlign: 'right' }}>
+                {sumBy(
+                  localesFromUniqueTerritories.slice(10),
+                  (locale) => locale.populationAdjusted || 0,
+                ).toLocaleString()}
               </td>
-              <td style={{ textAlign: 'right' }}>{locale.populationAdjusted?.toLocaleString()}</td>
             </tr>
-          ))
-          .slice(0, 10) /* limit to first 10 */
-      }
-      {localesFromUniqueTerritories.length > 10 && (
-        <tr>
-          <td>+{localesFromUniqueTerritories.length - 10} more</td>
-          <td style={{ textAlign: 'right' }}>
-            {sumBy(
-              localesFromUniqueTerritories.slice(10),
-              (locale) => locale.populationAdjusted || 0,
-            ).toLocaleString()}
-          </td>
-        </tr>
-      )}
-    </table>
+          )}
+        </tbody>
+      </table>
+    </>
   );
 };
 

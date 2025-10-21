@@ -1,3 +1,4 @@
+import { InfoIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { DetailsContainer } from '@pages/dataviews/ViewDetails';
@@ -25,7 +26,6 @@ import TableSortButton from './TableSortButton';
 import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
-import { InfoIcon } from 'lucide-react';
 
 const MAX_COLUMN_WIDTH = '10em';
 

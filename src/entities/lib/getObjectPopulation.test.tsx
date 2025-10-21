@@ -61,19 +61,23 @@ describe('getObjectPopulationAttested', () => {
       HA: 15600,
       BE: 12000,
       dori0123: 2500,
-      dori0123_001: undefined, // regional locale, no census
-      dori0123_123: undefined, // regional locale, no census
-      dori0123_ER: undefined, // no dori0123dova census
       be0590: 12000,
       sjn: 24000,
-      sjn_001: undefined, // regional locale, no census
-      sjn_123: undefined, // regional locale, no census
-      sjn_Teng_001: undefined, // regional locale, no census
-      sjn_Teng_123: undefined, // regional locale, no census
-      sjn_Teng_BE: undefined, // not provided by the census
-      sjn_ER: undefined, // no census
       sjn_BE: 9000,
-      tolkorth: undefined, // missing language data
+      sjn_ER: 1920, // no census but using the data from the locale database
+
+      // Regional locales have data because they are summed up from the locales inside
+      dori0123_001: 1800,
+      dori0123_123: 1800,
+      dori0123_ER: 1800,
+      sjn_001: 10920,
+      sjn_123: 10920,
+      sjn_Teng_001: 9000,
+      sjn_Teng_123: 9000,
+      sjn_Teng_BE: 9000,
+
+      // No data
+      tolkorth: undefined,
     });
   });
 });

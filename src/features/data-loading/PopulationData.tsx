@@ -142,7 +142,8 @@ export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
         (locale.populationSpeaking * locale.literacyPercent) / 100,
       );
       if (locale.populationSpeakingPercent != null) {
-        locale.populationWritingPercent = locale.populationSpeakingPercent * locale.literacyPercent;
+        locale.populationWritingPercent =
+          (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
       }
     });
 

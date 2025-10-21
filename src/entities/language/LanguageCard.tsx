@@ -1,7 +1,5 @@
 import React from 'react';
 
-import PopulationWarning from '@widgets/PopulationWarning';
-
 import { usePageParams } from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 

@@ -1,5 +1,3 @@
-import PopulationWarning from '@widgets/PopulationWarning';
-
 import { SortBy } from '@features/sorting/SortTypes';
 import { TableColumn } from '@features/table/ObjectTable';
 

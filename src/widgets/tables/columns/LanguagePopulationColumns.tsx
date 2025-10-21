@@ -23,7 +23,7 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Population Attested',
-    description: 'This comes from crawled from other language databases (citations still needed).',
+    description: 'This comes from other language databases (citations still needed).',
     render: (lang) => lang.populationCited,
     isNumeric: true,
     isInitiallyVisible: false,
