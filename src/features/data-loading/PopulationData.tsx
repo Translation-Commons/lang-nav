@@ -53,10 +53,6 @@ export function computeLocalePopulationFromCensuses(dataContext: DataContextType
 
   // Compute the adjusted population for each locale
   dataContext.locales.forEach((locale) => {
-    if (!isTerritoryGroup(locale.territory?.scope)) {
-      // skip regional locales
-      return;
-    }
     if (locale.populationSpeakingPercent == null) {
       locale.populationAdjusted = locale.populationSpeaking;
     } else if (locale.populationSpeakingPercent === 0) {
@@ -91,10 +87,14 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData | undefined)
   });
   // Now go through the locales and re-compute their population
   territory.locales?.forEach((locale) => {
+    // For these locales, sometimes there are multiple contained locales with the same territory code like zh_Hans_SG and zh_Hant_SG
+    // so get only unique locales
     const uniqueContainedLocales = uniqueBy(
-      locale.containedLocales ?? [],
+      (locale.containedLocales ?? []).sort(
+        (a, b) => (b.populationAdjusted || 0) - (a.populationAdjusted || 0),
+      ),
       (loc) => loc.territoryCode || '',
-    );
+    ).filter((loc) => loc.territoryCode !== '');
 
     // Adjusted population comes from the sum of the contained locales
     locale.populationAdjusted =

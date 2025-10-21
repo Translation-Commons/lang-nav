@@ -21,12 +21,13 @@ describe('getObjectPopulation', () => {
       Object.values(mockedObjects).map((obj) => [obj.ID, getObjectPopulation(obj as ObjectData)]),
     );
     expect(results).toEqual({
-      '001': 30000, // recomputed, reduced to the 3 countries we have data for BE, HA, ER
-      '123': 30000, // recomputed, reduced to the 3 countries we have data for BE, HA, ER
-      Teng: 9000, // all from sjn_Teng_BE
+      '001': 50000, // recomputed 123+AM
+      '123': 30000, // recomputed BE+HA+ER
+      AM: 20000,
+      BE: 12000,
       ER: 2400,
       HA: 15600,
-      BE: 12000,
+      Teng: 9000, // all from sjn_Teng_BE
       dori0123: 2500,
       dori0123_001: 1800,
       dori0123_123: 1800,
@@ -54,12 +55,13 @@ describe('getObjectPopulationAttested', () => {
       ]),
     );
     expect(results).toEqual({
-      '001': 1000000,
+      '001': 50000,
       '123': 30000,
-      Teng: undefined, // not attested, derived from sjn_Teng_BE
+      AM: 20000,
+      BE: 12000,
       ER: 2400,
       HA: 15600,
-      BE: 12000,
+      Teng: undefined, // not attested, derived from sjn_Teng_BE
       dori0123: 2500,
       be0590: 12000,
       sjn: 24000,
@@ -125,20 +127,21 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
     );
     expect(results).toEqual({
       '001': undefined, // world is not contained in a larger territory
-      '123': '100.0', // middle earth is the only region in this limited data
+      '123': '60.0', // 30000/50000 of the world
+      AM: '40.0', // 20000/50000 of the world
       Teng: undefined,
       ER: '8.0', // ER in 123
       HA: '52.0', // HA in 123
       BE: '40.0', // BE in 123
       dori0123: undefined,
-      dori0123_001: '0.2', // dori0123_001 is 0.2% of the world
+      dori0123_001: '3.6', // dori0123_001 is 3.6% of the world
       dori0123_123: '6.0', // dori0123_123 is 6% of middle earth
       dori0123_ER: '75.0', // dori0123_ER is 75% of ER
       be0590: undefined,
       sjn: undefined,
-      sjn_001: '1.1',
+      sjn_001: '21.8',
       sjn_123: '36.4',
-      sjn_Teng_001: '0.9',
+      sjn_Teng_001: '18.0',
       sjn_Teng_123: '30.0',
       sjn_Teng_BE: '75.0',
       sjn_ER: '80.0',
@@ -157,8 +160,9 @@ describe('getObjectPopulationPercentInBiggestDescendentLanguage', () => {
       ]),
     );
     expect(results).toEqual({
-      '001': '1.1', // middle earth is 1.1% the population of the world in this estimate
+      '001': '21.8', // size of middle earth compared to world
       '123': '36.4', // Beleriand is the biggest region in middle earth with this limited data
+      AM: undefined,
       Teng: undefined,
       ER: '80.0', // sjn_ER is 80% of ER
       BE: '75.0', // sjn_BE is 75% of BE

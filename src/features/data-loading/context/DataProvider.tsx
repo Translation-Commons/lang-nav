@@ -19,7 +19,7 @@ import { updateLanguagesBasedOnSource } from './updateLanguagesBasedOnSource';
 import { DataContext, DataContextType } from './useDataContext';
 
 // Create a provider component
-export const DataProvider: React.FC<{
+const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { languageSource, localeSeparator } = usePageParams();
@@ -115,3 +115,5 @@ export const DataProvider: React.FC<{
 
   return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
 };
+
+export default DataProvider;

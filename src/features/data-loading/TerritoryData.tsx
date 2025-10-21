@@ -12,6 +12,8 @@ import {
   TerritoryScope,
 } from '@entities/types/DataTypes';
 
+import { sumBy } from '@shared/lib/setUtils';
+
 const DEBUG = false;
 
 export async function loadTerritories(): Promise<Record<TerritoryCode, TerritoryData> | void> {
@@ -210,7 +212,8 @@ export function computeContainedTerritoryStats(terr: TerritoryData | undefined):
 
   // Recompute the population for territory groups, in case it was updated from other data
   if (isTerritoryGroup(terr.scope)) {
-    terr.population = containsTerritories?.reduce((sum, t) => sum + (t.population ?? 0), 0) ?? 0;
+    const newPopulation = sumBy(containsTerritories ?? [], (t) => t.population ?? 0);
+    if (newPopulation) terr.population = newPopulation;
   }
 
   // GDP is easy, just add it up

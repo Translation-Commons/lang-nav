@@ -2,7 +2,7 @@ import { SortBy } from '@features/sorting/SortTypes';
 import { TableColumn } from '@features/table/ObjectTable';
 
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
-import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
+import LanguagePopulationFromDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
@@ -22,7 +22,7 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     columnGroup: 'Population',
   },
   {
-    key: 'Population Attested',
+    key: 'Population (Direct)',
     description: 'This comes from other language databases (citations still needed).',
     render: (lang) => lang.populationCited,
     isNumeric: true,
@@ -31,17 +31,17 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     columnGroup: 'Population',
   },
   {
-    key: 'Population of Descendents',
+    key: 'Population (from Dialects)',
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
-    render: (lang) => <LanguagePopulationOfDescendents lang={lang} />,
+    render: (lang) => <LanguagePopulationFromDescendents lang={lang} />,
     isNumeric: true,
     isInitiallyVisible: false,
     sortParam: SortBy.PopulationOfDescendents,
     columnGroup: 'Population',
   },
   {
-    key: 'Population Aggregated',
+    key: 'Population (from Locales)',
     description: (
       <>
         This data comes from adding up the populations of all locales for this language. The

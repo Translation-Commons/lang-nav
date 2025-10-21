@@ -9,7 +9,7 @@ import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
-    key: 'Population Adjusted',
+    key: 'Population (Adjusted)',
     description: (
       <>
         Most population records become outdated over time. In order to figure out the current
@@ -23,7 +23,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     columnGroup: 'Demographics',
   },
   {
-    key: 'Population Cited',
+    key: 'Population (Direct)',
     description: 'This is the original population number cited from sourced data.',
     render: (object) => object.populationSpeaking,
     isNumeric: true,
