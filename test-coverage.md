@@ -5,7 +5,7 @@
 | `All files`                              |    17.2 |    74.3 |    51.3 |    17.2 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |    17.4 |    74.4 |    51.5 |    17.4 |
+| `  src`                                  |    17.3 |    74.4 |    51.5 |    17.3 |
 | `    app`                                |     0   |     0   |     0   |     0   |
 | `      App.tsx`                          |     0   |     0   |     0   |     0   |
 | `      PageRoutes.tsx`                   |     0   |     0   |     0   |     0   |
@@ -54,8 +54,8 @@
 | `      writingsystem`                    |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemCard.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        WritingSystemSuggestions.tsx`   |     0   |   100.0 |   100.0 |     0   |
-| `    features`                           |    26.7 |    73.2 |    30.8 |    26.7 |
-| `      data-loading`                     |    27.9 |    71.9 |    28.6 |    27.9 |
+| `    features`                           |    26.5 |    73.2 |    30.8 |    26.5 |
+| `      data-loading`                     |    27.7 |    71.9 |    28.6 |    27.7 |
 | `        CensusData.tsx`                 |     2.7 |   100.0 |     0   |     2.7 |
 | `        context`                        |     0   |    33.3 |    33.3 |     0   |
 | `          DataProvider.tsx`             |     0   |     0   |     0   |     0   |
@@ -73,7 +73,7 @@
 | `        ISOData.tsx`                    |     5.4 |   100.0 |     0   |     5.4 |
 | `        PopulationData.tsx`             |    56.8 |    44.0 |    42.9 |    56.8 |
 | `        SupplementalData.tsx`           |    19.2 |   100.0 |     0   |    19.2 |
-| `        TerritoryData.tsx`              |    61.8 |    69.6 |    57.1 |    61.8 |
+| `        TerritoryData.tsx`              |    60.2 |    69.6 |    57.1 |    60.2 |
 | `        UnicodeData.tsx`                |     3.9 |   100.0 |     0   |     3.9 |
 | `        WikipediaData.tsx`              |     1.8 |   100.0 |     0   |     1.8 |
 | `      filtering`                        |     0   |     0   |     0   |     0   |
