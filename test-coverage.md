@@ -2,10 +2,10 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `All files`                              |    21.1 |    76.1 |    34.0 |    21.1 |
+| `All files`                              |    21.2 |    76.9 |    34.6 |    21.2 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |    21.2 |    76.2 |    34.1 |    21.2 |
+| `  src`                                  |    21.4 |    77.0 |    34.7 |    21.4 |
 | `    app`                                |     0   |     0   |     0   |     0   |
 | `      App.tsx`                          |     0   |     0   |     0   |     0   |
 | `      PageRoutes.tsx`                   |     0   |     0   |     0   |     0   |
@@ -50,7 +50,7 @@
 | `      writingsystem`                    |    15.3 |   100.0 |     0   |    15.3 |
 | `        WritingSystemCard.tsx`          |    12.3 |   100.0 |     0   |    12.3 |
 | `        WritingSystemSuggestions.tsx`   |    33.3 |   100.0 |     0   |    33.3 |
-| `    features`                           |    30.3 |    77.3 |    23.7 |    30.3 |
+| `    features`                           |    30.8 |    79.1 |    24.6 |    30.8 |
 | `      data-loading`                     |    28.8 |    75.0 |    25.7 |    28.8 |
 | `        CensusData.tsx`                 |     2.7 |   100.0 |     0   |     2.7 |
 | `        CoreData.tsx`                   |    17.6 |   100.0 |     0   |    17.6 |
@@ -88,11 +88,11 @@
 | `        SortTypes.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      stored-params`                    |     1.9 |   100.0 |     0   |     1.9 |
 | `        useStoredParams.tsx`            |     1.9 |   100.0 |     0   |     1.9 |
-| `      table`                            |    60.2 |    84.8 |    50.0 |    60.2 |
+| `      table`                            |    65.0 |    95.3 |    58.3 |    65.0 |
 | `        CommonColumns.tsx`              |    82.8 |   100.0 |     0   |    82.8 |
 | `        ObjectTable.tsx`                |    18.8 |   100.0 |     0   |    18.8 |
 | `        TableColumnSelector.tsx`        |    96.6 |    90.5 |   100.0 |    96.6 |
-| `        TableSortButton.tsx`            |    71.9 |    72.7 |    66.7 |    71.9 |
+| `        TableSortButton.tsx`            |   100.0 |   100.0 |   100.0 |   100.0 |
 | `        useColumnVisibility.tsx`        |     9.3 |   100.0 |     0   |     9.3 |
 | `      treelist`                         |    16.5 |   100.0 |     0   |    16.5 |
 | `        filterBranch.tsx`               |     4.2 |   100.0 |     0   |     4.2 |
@@ -112,7 +112,7 @@
 | `        ViewReports.tsx`                |     0   |   100.0 |   100.0 |     0   |
 | `        ViewTable.tsx`                  |     0   |     0   |     0   |     0   |
 | `      IntroPage.tsx`                    |     0   |   100.0 |   100.0 |     0   |
-| `    shared`                             |    30.0 |    70.0 |    36.1 |    30.0 |
+| `    shared`                             |    31.1 |    70.7 |    38.9 |    31.1 |
 | `      containers`                       |     9.8 |   100.0 |    50.0 |     9.8 |
 | `        CollapsibleReport.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `        DetailsField.tsx`               |    25.0 |   100.0 |     0   |    25.0 |
@@ -128,12 +128,12 @@
 | `        PositionInGroup.ts`             |     0   |     0   |     0   |     0   |
 | `        setUtils.ts`                    |    78.9 |    88.9 |    60.0 |    78.9 |
 | `        stringUtils.ts`                 |    51.6 |   100.0 |    40.0 |    51.6 |
-| `      ui`                               |    36.3 |    60.0 |    42.9 |    36.3 |
+| `      ui`                               |    38.6 |    62.5 |    50.0 |    38.6 |
 | `        CommaSeparated.tsx`             |    13.6 |   100.0 |     0   |    13.6 |
 | `        Deemphasized.tsx`               |    25.0 |   100.0 |     0   |    25.0 |
 | `        Highlightable.tsx`              |    87.5 |    71.4 |   100.0 |    87.5 |
 | `        Hoverable.tsx`                  |    83.3 |    50.0 |    66.7 |    83.3 |
-| `        HoverableButton.tsx`            |    58.0 |    33.3 |    25.0 |    58.0 |
+| `        HoverableButton.tsx`            |    68.0 |    50.0 |    50.0 |    68.0 |
 | `        HoverableEnumeration.tsx`       |     0   |   100.0 |   100.0 |     0   |
 | `        LinkButton.tsx`                 |     4.2 |   100.0 |     0   |     4.2 |
 | `        PercentageDifference.tsx`       |     8.6 |   100.0 |     0   |     8.6 |
