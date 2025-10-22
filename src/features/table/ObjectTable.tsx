@@ -1,3 +1,4 @@
+import { InfoIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { DetailsContainer } from '@pages/dataviews/ViewDetails';
@@ -8,6 +9,8 @@ import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
+
+import Hoverable from '@shared/ui/Hoverable';
 
 import {
   getFilterBySubstring,
@@ -24,6 +27,8 @@ import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
 
+const MAX_COLUMN_WIDTH = '10em';
+
 // Readonly, don't mutate the TableColumn definitions
 export interface TableColumn<T> {
   readonly columnGroup?: string; // "Key" for the parent column
@@ -31,6 +36,7 @@ export interface TableColumn<T> {
   readonly isNumeric?: boolean;
   readonly key: string;
   readonly label?: React.ReactNode;
+  readonly description?: React.ReactNode;
   readonly render: (object: T) => React.ReactNode;
   readonly sortParam?: SortBy;
 }
@@ -81,8 +87,13 @@ function ObjectTable<T extends ObjectData>({
         <thead>
           <tr>
             {visibleColumns.map((column) => (
-              <th key={column.key} style={{ textAlign: 'start' }}>
+              <th key={column.key} style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH }}>
                 {column.label ?? column.key}
+                {column.description && (
+                  <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
+                    <InfoIcon size="1em" display="block" />
+                  </Hoverable>
+                )}
                 <TableSortButton columnSortBy={column.sortParam} isNumeric={column.isNumeric} />
               </th>
             ))}
@@ -98,7 +109,11 @@ function ObjectTable<T extends ObjectData>({
                 }
 
                 return (
-                  <td key={column.key} className={column.isNumeric ? 'numeric' : undefined}>
+                  <td
+                    key={column.key}
+                    className={column.isNumeric ? 'numeric' : undefined}
+                    style={{ maxWidth: MAX_COLUMN_WIDTH }}
+                  >
                     {content}
                   </td>
                 );

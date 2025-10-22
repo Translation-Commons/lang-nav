@@ -8,9 +8,12 @@ import {
   connectLocales,
   connectWritingSystems,
 } from '@features/data-loading/DataAssociations';
-import { updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
+import { DataContextType, updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
 import { connectVariantTags } from '@features/data-loading/IANAData';
-import { computeLocaleWritingPopulation } from '@features/data-loading/PopulationData';
+import {
+  computeLocalePopulationFromCensuses,
+  computeLocaleWritingPopulation,
+} from '@features/data-loading/PopulationData';
 import {
   computeContainedTerritoryStats,
   connectTerritoriesToParent,
@@ -106,7 +109,21 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
     names: ['Middle Earth', 'Ennorath', 'Endor'],
     scope: TerritoryScope.Continent,
     population: 30000, // will be recomputed later
-    populationFromUN: 30000,
+    populationFromUN: 30000, // This is a gross underestimate, just here to keep the numbers smaller so its easier to read
+    containedUNRegionCode: '001',
+  };
+  const AM: TerritoryData = {
+    // The lands west of Middle-earth
+    type: ObjectType.Territory,
+    ID: 'AM',
+    codeDisplay: 'Aman',
+    nameDisplay: 'Aman',
+    nameEndonym: 'aman',
+    names: ['Aman', 'The Undying Lands', 'aman'],
+    scope: TerritoryScope.Continent,
+    population: 20000,
+    populationFromUN: 20000,
+    literacyPercent: 98.0,
     containedUNRegionCode: '001',
   };
   const world: TerritoryData = {
@@ -117,8 +134,8 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'arda',
     names: ['Arda', 'World', 'Aþāraphelūn', 'Ardhon'],
     scope: TerritoryScope.World,
-    population: 1000000, // will be recomputed later since we only have Middle Earth
-    populationFromUN: 1000000,
+    population: 50000,
+    populationFromUN: 50000,
   };
 
   // Censuses
@@ -230,6 +247,7 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
     ER,
     HA,
     middleEarth,
+    AM,
     world,
 
     // Censuses
@@ -273,6 +291,7 @@ export function getMockedObjects(): ObjectDictionary {
     BE: objects.BE as TerritoryData,
     ER: objects.ER as TerritoryData,
     HA: objects.HA as TerritoryData,
+    AM: objects.AM as TerritoryData,
     '123': objects.middleEarth as TerritoryData,
     '001': objects.world as TerritoryData,
   };
@@ -312,5 +331,40 @@ export function getMockedObjects(): ObjectDictionary {
   // Add computed territory locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
   computeLocaleWritingPopulation(Object.values(locales));
+
+  // From PopulationData
+  const dataContext = getMockedDataContext(objects);
+  computeLocalePopulationFromCensuses(dataContext);
   return objects;
+}
+
+function getMockedDataContext(objects: ObjectDictionary): DataContextType {
+  const objectArray = Object.values(objects);
+  const languages = objectArray.filter((obj) => obj.type === ObjectType.Language);
+  const locales = objectArray.filter((obj) => obj.type === ObjectType.Locale);
+  const territories = objectArray.filter((obj) => obj.type === ObjectType.Territory);
+  const writingSystems = objectArray.filter((obj) => obj.type === ObjectType.WritingSystem);
+  const variantTags = objectArray.filter((obj) => obj.type === ObjectType.VariantTag);
+
+  const dataContext: DataContextType = {
+    allLanguoids: languages,
+    censuses: { be0590: objects.be0590 as CensusData },
+    languagesInSelectedSource: languages,
+    locales,
+    territories,
+    writingSystems,
+    variantTags,
+    getObject: (id: string) => objects[id],
+    getLanguage: (id: string) =>
+      objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
+    getLocale: (id: string) => (objects[id]?.type === ObjectType.Locale ? objects[id] : undefined),
+    getTerritory: (id: string) =>
+      objects[id]?.type === ObjectType.Territory ? objects[id] : undefined,
+    getWritingSystem: (id: string) =>
+      objects[id]?.type === ObjectType.WritingSystem ? objects[id] : undefined,
+    getVariantTag: (id: string) =>
+      objects[id]?.type === ObjectType.VariantTag ? objects[id] : undefined,
+  };
+
+  return dataContext;
 }

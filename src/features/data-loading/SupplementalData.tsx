@@ -1,5 +1,5 @@
 import { addCensusData, loadCensusData } from './CensusData';
-import { DataContextType } from './DataContext';
+import { DataContextType } from './context/useDataContext';
 import {
   computeLocalePopulationFromCensuses,
   computeLocaleWritingPopulation,

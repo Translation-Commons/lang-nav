@@ -2,7 +2,7 @@ import React from 'react';
 
 import CardList from '@widgets/cardlists/CardList';
 
-import { useDataContext } from '@features/data-loading/DataContext';
+import { useDataContext } from '@features/data-loading/context/useDataContext';
 
 import VariantTagCard from '@entities/varianttag/VariantTagCard';
 

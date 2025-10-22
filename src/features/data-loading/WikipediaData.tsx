@@ -7,7 +7,7 @@ import {
   WikipediaStatus,
 } from '@entities/types/DataTypes';
 
-import { DataContextType } from './DataContext';
+import { DataContextType } from './context/useDataContext';
 
 export async function loadAndApplyWikipediaData(dataContext: DataContextType): Promise<void> {
   const wikiData = await loadWikipediaData();
