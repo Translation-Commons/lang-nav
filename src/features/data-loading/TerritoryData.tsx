@@ -152,13 +152,6 @@ function createRegionalLocalesForTerritory(
             newLocale.containedLocales = [...(newLocale.containedLocales || []), loc];
           }
         }
-        console.log(
-          locs[newLocaleCode].ID,
-          locs[newLocaleCode].populationSpeaking,
-          locs[newLocaleCode].populationSpeaking,
-          locs[newLocaleCode].populationSpeakingPercent,
-          locs[newLocaleCode].territory?.population,
-        );
       });
       return locs;
     },
