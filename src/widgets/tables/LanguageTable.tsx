@@ -10,6 +10,7 @@ import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonCol
 import ObjectTable from '@features/table/ObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
+import LanguagePluralInfo from '@entities/language/LanguagePluralInfo';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import {
   getObjectLiteracy,
@@ -112,6 +113,11 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
           valueType: TableValueType.Numeric,
+        },
+        {
+          key: 'Plural rules',
+          render: (lang) => <LanguagePluralInfo lang={lang} />,
+          isInitiallyVisible: false,
         },
       ]}
     />
