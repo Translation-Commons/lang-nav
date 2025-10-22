@@ -69,24 +69,25 @@ type SortButtonIconProps = {
 };
 
 function SortButtonIcon({ valueType, sortDirection }: SortButtonIconProps) {
-  if (valueType === ValueType.Numeric) {
-    if (sortDirection === SortDirection.Ascending) {
-      return <ArrowDown01 size="1em" display="block" />;
-    } else {
-      return <ArrowDown10 size="1em" display="block" />;
-    }
-  } else if (valueType === ValueType.Enum) {
-    if (sortDirection === SortDirection.Ascending) {
-      return <ArrowDownWideNarrow size="1em" display="block" />;
-    } else {
-      return <ArrowDownNarrowWide size="1em" display="block" />;
-    }
-  } else {
-    if (sortDirection === SortDirection.Ascending) {
-      return <ArrowDownAZ size="1em" display="block" />;
-    } else {
-      return <ArrowDownZA size="1em" display="block" />;
-    }
+  switch (valueType) {
+    case ValueType.Numeric:
+      return sortDirection === SortDirection.Ascending ? (
+        <ArrowDown01 size="1em" display="block" />
+      ) : (
+        <ArrowDown10 size="1em" display="block" />
+      );
+    case ValueType.Enum:
+      return sortDirection === SortDirection.Ascending ? (
+        <ArrowDownNarrowWide size="1em" display="block" />
+      ) : (
+        <ArrowDownWideNarrow size="1em" display="block" />
+      );
+    default:
+      return sortDirection === SortDirection.Ascending ? (
+        <ArrowDownAZ size="1em" display="block" />
+      ) : (
+        <ArrowDownZA size="1em" display="block" />
+      );
   }
 }
 export default TableSortButton;
