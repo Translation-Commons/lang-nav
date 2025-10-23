@@ -5,11 +5,12 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import Deemphasized from '@shared/ui/Deemphasized';
 import Hoverable from '@shared/ui/Hoverable';
 
-import { VitalityMeterType, getAllVitalityScores } from './LanguageVitalityComputation';
+import { getAllVitalityScores } from './LanguageVitalityComputation';
+import { VitalitySource } from './VitalityTypes';
 
 interface Props {
   lang: LanguageData;
-  type: VitalityMeterType;
+  type: VitalitySource;
 }
 
 const LanguageVitalityMeter: React.FC<Props> = ({ lang, type }) => {

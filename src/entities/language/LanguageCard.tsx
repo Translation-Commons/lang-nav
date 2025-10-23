@@ -12,8 +12,8 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
-import { VitalityMeterType } from './LanguageVitalityComputation';
-import LanguageVitalityMeter from './LanguageVitalityMeter';
+import LanguageVitalityMeter from './vitality/VitalityMeter';
+import { VitalitySource } from './vitality/VitalityTypes';
 
 interface Props {
   lang: LanguageData;
@@ -50,7 +50,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
       )}
       <div>
         <h4>Vitality</h4>
-        <LanguageVitalityMeter lang={lang} type={VitalityMeterType.Metascore} />
+        <LanguageVitalityMeter lang={lang} type={VitalitySource.Metascore} />
       </div>
 
       {includeRelations && countryLocales.length > 0 && (

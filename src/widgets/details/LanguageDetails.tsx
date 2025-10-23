@@ -5,11 +5,11 @@ import { usePageParams } from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
-import LanguageDetailsVitalityAndViability from '@entities/language/LanguageDetailsVitalityAndViability';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import DetailsField from '@shared/containers/DetailsField';

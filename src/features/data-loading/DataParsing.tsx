@@ -6,6 +6,10 @@ import {
   LanguageModality,
 } from '@entities/language/LanguageTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import {
+  parseVitalityEthnologue2013,
+  parseVitalityEthnologue2025,
+} from '@entities/language/vitality/VitalityParsing';
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleStrings';
 import {
   LocaleData,
@@ -65,8 +69,8 @@ export function parseLanguageLine(line: string): LanguageData {
     names: [nameDisplay, nameSubtitle, nameEndonym].filter((s) => s != null),
 
     vitalityISO: undefined, // Added by ISO import
-    vitalityEth2013: parts[6] || undefined,
-    vitalityEth2025: parts[7] || undefined,
+    vitalityEth2013: parseVitalityEthnologue2013(parts[6]),
+    vitalityEth2025: parseVitalityEthnologue2025(parts[7]),
     digitalSupport: parts[8] || undefined,
     viabilityConfidence: parts[13] || undefined,
     viabilityExplanation: parts[14] || undefined,
