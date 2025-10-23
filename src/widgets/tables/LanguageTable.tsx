@@ -4,7 +4,7 @@ import React, { ReactNode } from 'react';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import {
@@ -82,7 +82,7 @@ const LanguageTable: React.FC = () => {
                 .map((lang) => lang.nameDisplay)}
             />
           ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           isInitiallyVisible: false,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Relations',
@@ -96,7 +96,7 @@ const LanguageTable: React.FC = () => {
               )}
             />
           ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.CountOfTerritories,
           columnGroup: 'Relations',
         },
@@ -109,7 +109,7 @@ const LanguageTable: React.FC = () => {
           },
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
         },
       ]}
     />

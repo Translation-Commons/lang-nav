@@ -7,7 +7,7 @@ import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamType
 import { usePageParams } from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';
-import ObjectTable from '@features/table/ObjectTable';
+import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -152,7 +152,7 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Population',
           render: (object) => object.populationSpeaking,
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.Population,
         },
         {
@@ -160,7 +160,7 @@ const PotentialLocalesTable: React.FC<{
           render: (object) =>
             object.populationSpeakingPercent &&
             numberToFixedUnlessSmall(object.populationSpeakingPercent),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.PercentOfTerritoryPopulation,
         },
         {
@@ -170,7 +170,7 @@ const PotentialLocalesTable: React.FC<{
             numberToFixedUnlessSmall(
               (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
             ),
-          isNumeric: true,
+          valueType: ValueType.Numeric,
           sortParam: SortBy.PercentOfOverallLanguageSpeakers,
         },
         {
