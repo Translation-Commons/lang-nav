@@ -29,9 +29,9 @@ describe('parseVitalityISO', () => {
     expect(parseVitalityISO('Extinct')).toBe(0);
   });
 
-  it('returns null for empty or unknown values', () => {
-    expect(parseVitalityISO('')).toBe(null);
-    expect(parseVitalityISO('unknown')).toBe(null);
+  it('returns undefined for empty or unknown values', () => {
+    expect(parseVitalityISO('')).toBeUndefined();
+    expect(parseVitalityISO('unknown')).toBeUndefined();
   });
 });
 
@@ -49,9 +49,9 @@ describe('parseVitalityEthnologue2013', () => {
     expect(parseVitalityEthnologue2013('Extinct')).toBe(0);
   });
 
-  it('returns null for unknown values', () => {
-    expect(parseVitalityEthnologue2013('')).toBe(null);
-    expect(parseVitalityEthnologue2013('unknown')).toBe(null);
+  it('returns undefined for unknown values', () => {
+    expect(parseVitalityEthnologue2013('')).toBeUndefined();
+    expect(parseVitalityEthnologue2013('unknown')).toBeUndefined();
   });
 });
 
@@ -63,9 +63,9 @@ describe('parseVitalityEthnologue2025', () => {
     expect(parseVitalityEthnologue2025('Extinct')).toBe(0);
   });
 
-  it('returns null for unknown values', () => {
-    expect(parseVitalityEthnologue2025('')).toBe(null);
-    expect(parseVitalityEthnologue2025('1 Institutional')).toBe(null);
+  it('returns undefined for unknown values', () => {
+    expect(parseVitalityEthnologue2025('')).toBeUndefined();
+    expect(parseVitalityEthnologue2025('1 Institutional')).toBeUndefined();
   });
 });
 
@@ -99,9 +99,9 @@ describe('computeVitalityMetascore', () => {
     expect(result).toBe(9);
   });
 
-  it('returns null when no vitality data exists', () => {
+  it('returns undefined when no vitality data exists', () => {
     const lang = getBaseLanguageData('en', 'English');
     const result = getVitalityMetascore(lang);
-    expect(result).toBe(null);
+    expect(result).toBeUndefined();
   });
 });
