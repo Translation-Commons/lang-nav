@@ -91,9 +91,10 @@ export interface LanguageData extends ObjectBase {
   viabilityExplanation?: string;
 
   populationAdjusted?: number;
-  populationCited?: number;
   populationEstimate?: number;
-  populationOfDescendents?: number;
+  populationCited?: number; // from languages.tsv
+  populationOfDescendents?: number; // computed from child languages
+  populationFromLocales?: number; // aggregated from locale data
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;

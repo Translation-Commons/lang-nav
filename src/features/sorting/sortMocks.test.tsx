@@ -17,6 +17,7 @@ describe('getSortByParameterized', () => {
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '001',
       '123',
+      'AM',
       'BE',
       'ER',
       'HA',
@@ -42,6 +43,7 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(SortBy.Name, LanguageSource.All, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'AM', // Aman
       '001', // Arda
       'BE', // Beleriand
       'be0590', // Beleriand Census 590
@@ -73,6 +75,7 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'AM', // aman
       '001', // arda
       'BE', // beˈlerjand
       'dori0123', // dorjaθɪn
@@ -116,6 +119,7 @@ describe('getSortByParameterized', () => {
       'dori0123', // dorjaθɪn
       'BE', // beˈlerjand
       '001', // arda
+      'AM', // aman
       // All below have no provided endonym, stable to input order
       'be0590',
       'sjn_BE',
@@ -140,10 +144,11 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      '123',
       '001',
+      '123',
       'sjn',
-      'tolkorth',
+      'tolkorth', // Potential population same as sjn
+      'AM',
       'HA',
       'BE',
       'be0590',
@@ -189,6 +194,7 @@ describe('getSortByParameterized', () => {
       'BE',
       'be0590',
       'HA',
+      'AM',
       'sjn',
       'tolkorth',
       '123',
@@ -211,6 +217,7 @@ describe('getSortByParameterized', () => {
       'ER',
       'HA',
       '123',
+      'AM',
       '001',
       'be0590',
       'sjn_BE',
@@ -236,19 +243,20 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      '123', // 100.0, middle earth is the only region in this limited data
       'sjn_ER', // 80.0,
       'sjn_BE', // 75.0,
       'dori0123_ER', // 75.0, // dori0123_ER is 75% of ER
       'sjn_Teng_BE', // 75.0,
+      '123', // 60% of world
       'HA', // 52.0 of middle earth
       'BE', // 40.0 of middle earth
+      'AM', // 40 of world
       'sjn_123', // 36.4 of middle earth
       'sjn_Teng_123', // 30.0 of middle earth
+      'sjn_001', // 21.8 of world
+      'sjn_Teng_001', // 18 of world
       'ER', // 8.0 of middle earth
       'dori0123_123', // 6.0 of middle earth
-      'sjn_001', // 1.1 of world
-      'sjn_Teng_001', // 0.9 of world
       'dori0123_001', // 0.2 of world
       'sjn', // undefined,
       'dori0123', // undefined,
@@ -284,6 +292,7 @@ describe('getSortByParameterized', () => {
       'ER',
       'HA',
       '123',
+      'AM',
       '001',
       'be0590',
       'Teng',
@@ -307,6 +316,7 @@ describe('getSortByParameterized', () => {
       'sjn',
       'dori0123',
       'HA',
+      'AM',
       'be0590',
       'sjn_BE',
       'sjn_ER',
@@ -349,6 +359,7 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_001',
       // All below have no associated language, stable to input order
       'HA',
+      'AM',
       'be0590',
       'Teng',
       'tolkorth',
@@ -368,6 +379,7 @@ describe('getSortByParameterized', () => {
       'ER',
       'HA',
       '123',
+      'AM',
       '001',
       'sjn_BE',
       'sjn_ER',
@@ -407,6 +419,7 @@ describe('getSortByParameterized', () => {
       'dori0123_001', // 1 locale: dori0123_123
       'dori0123', // 0 dialects
       'HA', // undefined
+      'AM',
       'sjn_BE',
       'sjn_ER',
       'dori0123_ER',
@@ -424,11 +437,12 @@ describe('getSortByParameterized', () => {
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '123', // 3 territories: ER, BE, HA
       'sjn', // 2 territories: ER, BE
+      '001', // 2 territories: 123, AM
       'dori0123', // 1 territory: ER
-      '001', // 1 territory: 123
       'BE', // 0 contained territories (eg. dependencies)
       'ER',
       'HA',
+      'AM',
       // undefined
       'be0590', // undefined for censuses
       'sjn_BE', // undefined for locales
@@ -455,8 +469,9 @@ describe('getSortByParameterized', () => {
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'HA', // 99.0
+      'AM', // 98.0
+      '001', // 96.2, averaged from Aman & Middle Earth by computeContainedTerritoryStats
       '123', // 95.1, averaged from territories by computeContainedTerritoryStats
-      '001', // 95.1
       'dori0123', // 95.0, only in Eriador
       'ER', // 95.0 literacy rate for Eriador
       'sjn_ER', // 95.0
@@ -478,16 +493,3 @@ describe('getSortByParameterized', () => {
     ]);
   });
 });
-
-// '001': '95.1', // averaged from territories by computeContainedTerritoryStats
-// '123': '95.1', // averaged from territories by computeContainedTerritoryStats
-// Teng: undefined,
-// ER: '95.0',
-// HA: '99.0',
-// BE: '90.0',
-// dori0123: '95.0',
-// dori0123_001: undefined,
-// dori0123_123: undefined,
-// dori0123_ER: undefined,
-// be0590: undefined,
-// sjn: '90.9', // averaged from locales

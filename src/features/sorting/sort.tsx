@@ -163,7 +163,6 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.CountOfTerritories,
         SortBy.CountOfLanguages,
         SortBy.PopulationAttested,
-        // New vitality sorts
         SortBy.VitalityMetascore,
         SortBy.VitalityISO,
         SortBy.VitalityEthnologue2013,

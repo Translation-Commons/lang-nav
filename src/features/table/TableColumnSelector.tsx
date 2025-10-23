@@ -1,4 +1,4 @@
-import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
+import { InfoIcon, SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { usePageParams } from '@features/page-params/usePageParams';
@@ -94,26 +94,27 @@ function ColumnGroup<T extends ObjectData>({
         display: 'flex',
         flexDirection: 'column',
         marginRight: '1em',
-        alignItems: 'flex-start',
+        textAlign: 'start',
+        maxWidth: '12em',
       }}
     >
       {columns.length > 1 && (
-        <strong>
-          {group}
-          <Hoverable
-            hoverContent={toggleSelectHoverContent}
-            onClick={toggleSelectAll}
-            style={{ marginLeft: '0.125em' }}
-          >
+        <Hoverable
+          hoverContent={toggleSelectHoverContent}
+          onClick={toggleSelectAll}
+          style={{ display: 'flex', alignItems: 'center' }}
+        >
+          <div style={{ fontWeight: 'bold' }}>{group}</div>
+          <div style={{ marginLeft: '0.25em' }}>
             {allVisible ? (
-              <SquareCheckIcon size="1em" />
+              <SquareCheckIcon size="1em" display="block" />
             ) : someVisible ? (
-              <SquareMinusIcon size="1em" />
+              <SquareMinusIcon size="1em" display="block" />
             ) : (
-              <SquareIcon size="1em" />
+              <SquareIcon size="1em" display="block" />
             )}
-          </Hoverable>
-        </strong>
+          </div>
+        </Hoverable>
       )}
       {columns.map((column) => (
         <ColumnCheckbox
@@ -145,6 +146,11 @@ function ColumnCheckbox<T extends ObjectData>({
         onChange={() => toggleColumn(column.key)}
       />
       {column.label ?? column.key}
+      {column.description && (
+        <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
+          <InfoIcon size="1em" display="block" />
+        </Hoverable>
+      )}
       {column.sortParam && (
         <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
       )}

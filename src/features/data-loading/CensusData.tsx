@@ -6,7 +6,7 @@ import { LocaleData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 
-import { DataContextType } from './DataContext';
+import { DataContextType } from './context/useDataContext';
 
 const DEBUG = false;
 

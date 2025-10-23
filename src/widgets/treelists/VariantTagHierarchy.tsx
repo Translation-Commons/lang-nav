@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/DataContext';
+import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import { getSortFunction } from '@features/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';

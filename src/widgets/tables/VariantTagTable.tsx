@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/DataContext';
+import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable, { ValueType } from '@features/table/ObjectTable';

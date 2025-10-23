@@ -23,8 +23,9 @@ describe('getObjectLiteracy', () => {
       Object.values(mockedObjects).map((obj) => [obj.ID, getObjectLiteracy(obj)?.toFixed(1)]),
     );
     expect(results).toEqual({
-      '001': '95.1', // averaged from territories by computeContainedTerritoryStats
+      '001': '96.2', // averaged from Aman & Middle Earth by computeContainedTerritoryStats
       '123': '95.1', // averaged from territories by computeContainedTerritoryStats
+      AM: '98.0',
       Teng: undefined,
       ER: '95.0',
       HA: '99.0',
@@ -141,10 +142,11 @@ describe('getCountOfTerritories', () => {
       Object.values(mockedObjects).map((obj) => [obj.ID, getCountOfTerritories(obj)]),
     );
     expect(results).toEqual({
-      '001': 1, // 123
+      '001': 2, // 123, AM
       '123': 3, // ER, BE, HA
       Teng: undefined,
-      ER: 0, // no territories contained
+      AM: 0, // no territories contained
+      ER: 0,
       HA: 0,
       BE: 0,
       dori0123: 1, // ER

@@ -1,10 +1,9 @@
-import React, { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
 import { usePageParams } from '@features/page-params/usePageParams';
 
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
-import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
   ObjectData,
@@ -13,43 +12,14 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
-import { uniqueBy } from '@shared/lib/setUtils';
+import { useCoreData } from '../CoreData';
+import { loadSupplementalData } from '../SupplementalData';
 
-import { CoreDataArrays, useCoreData } from './CoreData';
-import { loadSupplementalData } from './SupplementalData';
-
-type DataGetters = {
-  getObject(id: string): ObjectData | undefined;
-  getLanguage: (id: string) => LanguageData | undefined;
-  getLocale: (id: string) => LocaleData | undefined;
-  getTerritory: (id: string) => TerritoryData | undefined;
-  getWritingSystem: (id: string) => WritingSystemData | undefined;
-  getVariantTag: (id: string) => VariantTagData | undefined;
-};
-
-export type DataContextType = CoreDataArrays &
-  DataGetters & {
-    languagesInSelectedSource: LanguageData[];
-  };
-
-const DataContext = createContext<DataContextType | undefined>({
-  allLanguoids: [],
-  censuses: {},
-  languagesInSelectedSource: [],
-  locales: [],
-  territories: [],
-  variantTags: [],
-  writingSystems: [],
-  getObject: () => undefined,
-  getLanguage: () => undefined,
-  getLocale: () => undefined,
-  getTerritory: () => undefined,
-  getWritingSystem: () => undefined,
-  getVariantTag: () => undefined,
-});
+import { updateLanguagesBasedOnSource } from './updateLanguagesBasedOnSource';
+import { DataContext, DataContextType } from './useDataContext';
 
 // Create a provider component
-export const DataProvider: React.FC<{
+const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { languageSource, localeSeparator } = usePageParams();
@@ -144,50 +114,6 @@ export const DataProvider: React.FC<{
   }, [languageSource, loadProgress, localeSeparator]); // when core language data or the language source changes
 
   return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
-};
-
-export function updateLanguagesBasedOnSource(
-  languages: LanguageData[],
-  locales: LocaleData[],
-  languageSource: LanguageSource,
-  localeSeparator: LocaleSeparator,
-): void {
-  // Update language codes and other values used for filtering
-  languages.forEach((lang) => {
-    const specific = lang.sourceSpecific[languageSource];
-    lang.codeDisplay = specific.code ?? lang.ID;
-    lang.nameDisplay = specific.name ?? lang.nameCanonical;
-    lang.names = uniqueBy(
-      [
-        lang.nameCanonical,
-        lang.nameEndonym,
-        ...Object.values(lang.sourceSpecific).map((l) => l.name),
-      ].filter((s) => s != null),
-      (s) => s,
-    );
-    lang.scope = specific.scope ?? lang.scope;
-    lang.populationOfDescendents = specific.populationOfDescendents ?? undefined;
-    lang.populationEstimate = lang.populationCited ?? specific.populationOfDescendents;
-    lang.parentLanguage = specific.parentLanguage ?? undefined;
-    lang.childLanguages = specific.childLanguages ?? [];
-  });
-
-  // Update locales too, their codes and their names
-  Object.values(locales).forEach((loc) => {
-    loc.codeDisplay = getLocaleCode(loc, localeSeparator);
-    const localeName = getLocaleName(loc);
-    loc.nameDisplay = localeName; // Set the display name
-
-    // Add it to the names array so it can be used in search
-    if (!loc.names.includes(localeName)) loc.names.push(localeName);
-  });
-}
-
-// Custom hook for easier usage
-export const useDataContext = () => {
-  const context = useContext(DataContext);
-  if (!context) throw new Error('useDataContext must be used within a DataProvider');
-  return context;
 };
 
 export default DataProvider;
