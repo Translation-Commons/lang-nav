@@ -21,6 +21,12 @@ import {
   WritingSystemData,
 } from '../types/DataTypes';
 
+import {
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+  VitalityISO,
+} from './vitality/VitalityTypes';
+
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
 
@@ -83,9 +89,9 @@ export interface LanguageData extends ObjectBase {
   nameSubtitle?: string;
   nameEndonym?: string;
 
-  vitalityISO?: string;
-  vitalityEth2013?: string;
-  vitalityEth2025?: string;
+  vitalityISO?: VitalityISO;
+  vitalityEth2013?: VitalityEthnologueFine;
+  vitalityEth2025?: VitalityEthnologueCoarse;
   digitalSupport?: string;
   viabilityConfidence?: string;
   viabilityExplanation?: string;

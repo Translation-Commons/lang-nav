@@ -10,14 +10,8 @@ import {
   LanguagesBySource,
   LanguageScope,
 } from '@entities/language/LanguageTypes';
-
-export enum ISOLanguageVitality {
-  Living = 'Living',
-  Extinct = 'Extinct',
-  SpecialCode = 'Special Code',
-  Constructed = 'Constructed',
-  Historic = 'Historic',
-}
+import { parseVitalityISO } from '@entities/language/vitality/VitalityParsing';
+import { VitalityISO } from '@entities/language/vitality/VitalityTypes';
 
 type ISOLanguage6393Data = {
   codeISO6393: ISO6393LanguageCode; // ISO 639-3
@@ -25,7 +19,7 @@ type ISOLanguage6393Data = {
   //   codeTerminological: LanguageCode; // ISO 639-2t
   codeISO6391: ISO6391LanguageCode | undefined;
   scope: LanguageScope | undefined;
-  vitality: ISOLanguageVitality | undefined;
+  vitality: VitalityISO | undefined;
   name: string;
 };
 
@@ -44,23 +38,6 @@ function getScopeFromLetterCode(code: string): LanguageScope | undefined {
   }
 }
 
-function getVitalityFromLetterCode(code: string): ISOLanguageVitality | undefined {
-  switch (code) {
-    case 'C':
-      return ISOLanguageVitality.Constructed;
-    case 'E':
-      return ISOLanguageVitality.Extinct;
-    case 'H':
-      return ISOLanguageVitality.Historic;
-    case 'L':
-      return ISOLanguageVitality.Living;
-    case 'S':
-      return ISOLanguageVitality.SpecialCode;
-    default:
-      return undefined;
-  }
-}
-
 function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
   const parts = line.split('\t');
   return {
@@ -69,7 +46,7 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
     // codeTerminological: parts[2], // Not used
     codeISO6391: parts[3] != '' ? parts[3] : undefined,
     scope: getScopeFromLetterCode(parts[4]),
-    vitality: getVitalityFromLetterCode(parts[5]),
+    vitality: parseVitalityISO(parts[5]),
     name: parts[6],
   };
 }

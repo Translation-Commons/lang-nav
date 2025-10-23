@@ -1,15 +1,16 @@
-import { WifiIcon, WifiHighIcon, WifiLowIcon, WifiOffIcon } from 'lucide-react';
+import { WifiIcon, WifiHighIcon, WifiLowIcon, WifiZeroIcon } from 'lucide-react';
 import React from 'react';
-
-import { LanguageData } from '@entities/language/LanguageTypes';
 
 import Hoverable from '@shared/ui/Hoverable';
 
-import { getAllVitalityScores, VitalityMeterType } from './LanguageVitalityComputation';
+import { LanguageData } from '../LanguageTypes';
+
+import { getAllVitalityScores } from './LanguageVitalityComputation';
+import { VitalitySource } from './VitalityTypes';
 
 export interface LanguageVitalityCellProps {
   lang: LanguageData;
-  type: VitalityMeterType;
+  type: VitalitySource;
 }
 
 export enum VitalityBucket {
@@ -20,8 +21,8 @@ export enum VitalityBucket {
   Unknown = 'Unknown',
 }
 
-function getScoreBucket(score: number | null): VitalityBucket {
-  if (score === null) return VitalityBucket.Unknown;
+function getScoreBucket(score: number | undefined): VitalityBucket {
+  if (score == null) return VitalityBucket.Unknown;
   if (score >= 7) return VitalityBucket.Strong;
   if (score >= 4) return VitalityBucket.Medium;
   if (score >= 1) return VitalityBucket.Low;
@@ -37,7 +38,7 @@ const BucketIcon: React.FC<{ bucket: VitalityBucket }> = ({ bucket }) => {
     case VitalityBucket.Low:
       return <WifiLowIcon size="1em" />;
     case VitalityBucket.Extinct:
-      return <WifiOffIcon size="1em" />;
+      return <WifiZeroIcon size="1em" />;
     case VitalityBucket.Unknown:
     default:
       return null;
@@ -75,9 +76,7 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type 
       >
         <BucketIcon bucket={bucket} />
         <span>
-          {type === VitalityMeterType.Metascore
-            ? (vitalityScore?.toFixed(1) ?? '—')
-            : (label ?? '—')}
+          {type === VitalitySource.Metascore ? (vitalityScore?.toFixed(1) ?? '—') : (label ?? '—')}
         </span>
       </div>
     </Hoverable>

@@ -2,12 +2,7 @@ import { ObjectType } from '@features/page-params/PageParamTypes';
 import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  computeVitalityMetascore,
-  getEthnologue2013Score,
-  getEthnologue2025Score,
-  getISOScore,
-} from '@entities/language/LanguageVitalityComputation';
+import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 import {
   getCountOfLanguages,
   getCountOfTerritories,
@@ -76,16 +71,16 @@ function getSortField(
     // Vitality
     case SortBy.VitalityMetascore:
       if (object.type !== ObjectType.Language) return undefined;
-      return computeVitalityMetascore(object)?.score ?? undefined;
+      return getVitalityMetascore(object);
     case SortBy.VitalityISO:
       if (object.type !== ObjectType.Language) return undefined;
-      return getISOScore(object.vitalityISO ?? '') ?? undefined;
+      return object.vitalityISO;
     case SortBy.VitalityEthnologue2013:
       if (object.type !== ObjectType.Language) return undefined;
-      return getEthnologue2013Score(object.vitalityEth2013 ?? '') ?? undefined;
+      return object.vitalityEth2013;
     case SortBy.VitalityEthnologue2025:
       if (object.type !== ObjectType.Language) return undefined;
-      return getEthnologue2025Score(object.vitalityEth2025 ?? '') ?? undefined;
+      return object.vitalityEth2025;
   }
 }
 
