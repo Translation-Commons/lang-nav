@@ -58,13 +58,13 @@ export function getEthnologue2025Score(vitality: string): number | null {
   if (!vitality) return null;
 
   switch (vitality.toLowerCase()) {
-    case '1 institutional':
+    case 'institutional':
       return 9;
-    case '2 stable':
+    case 'stable':
       return 6;
-    case '3 endangered':
+    case 'endangered':
       return 3;
-    case '4 extinct':
+    case 'extinct':
       return 0;
     default:
       return null;
@@ -129,7 +129,7 @@ export function getVitalityExplanation(
       if (score === null) return 'No vitality data available';
       return (
         <div>
-          <div>Ethnologue 2025 Vitality: {lang.vitalityEth2025?.split(' ')[1]}</div>
+          <div>Ethnologue 2025 Vitality: {lang.vitalityEth2025}</div>
           <div>Normalized to a score of {score} out of 9.</div>
         </div>
       );
@@ -155,7 +155,7 @@ export function getVitalityExplanation(
               </LinkButton>
             </div>
             <div style={{ marginLeft: '2em' }}>
-              2025: {lang.vitalityEth2025?.split(' ')[1]} ({eth2025Score})
+              2025: {lang.vitalityEth2025} ({eth2025Score})
             </div>
           </div>
         );
@@ -201,7 +201,7 @@ export function computeVitalityMetascore(lang: LanguageData): {
   } else if (eth2025Score !== null) {
     // Only Ethnologue 2025 exists
     score = eth2025Score;
-    label = lang.vitalityEth2025?.split(' ')[1] || null;
+    label = lang.vitalityEth2025 || null;
     explanation = getVitalityExplanation(VitalityMeterType.Eth2025, lang, score);
   } else if (isoScore !== null) {
     // Use ISO as fallback
@@ -239,7 +239,7 @@ export function getAllVitalityScores(
     },
     [VitalityMeterType.Eth2025]: {
       score: eth2025Score,
-      label: lang.vitalityEth2025?.split(' ')[1] || null,
+      label: lang.vitalityEth2025 || null,
       explanation: getVitalityExplanation(VitalityMeterType.Eth2025, lang, eth2025Score),
     },
     [VitalityMeterType.Metascore]: metascoreResult,

@@ -56,10 +56,10 @@ describe('getEthnologue2013Score', () => {
 
 describe('getEthnologue2025Score', () => {
   it('returns correct scores for all levels', () => {
-    expect(getEthnologue2025Score('1 Institutional')).toBe(9);
-    expect(getEthnologue2025Score('2 Stable')).toBe(6);
-    expect(getEthnologue2025Score('3 Endangered')).toBe(3);
-    expect(getEthnologue2025Score('4 Extinct')).toBe(0);
+    expect(getEthnologue2025Score('Institutional')).toBe(9);
+    expect(getEthnologue2025Score('Stable')).toBe(6);
+    expect(getEthnologue2025Score('Endangered')).toBe(3);
+    expect(getEthnologue2025Score('Extinct')).toBe(0);
   });
 
   it('returns null for unknown values', () => {
@@ -71,7 +71,7 @@ describe('computeVitalityMetascore', () => {
   it('returns average when both Ethnologue values exist', () => {
     const lang = getBaseLanguageData('en', 'English');
     lang.vitalityEth2013 = 'National'; // 9
-    lang.vitalityEth2025 = '2 Stable'; // 6
+    lang.vitalityEth2025 = 'Stable'; // 6
     const result = computeVitalityMetascore(lang);
     expect(result.score).toBe(7.5); // (9 + 6) / 2
   });
@@ -85,7 +85,7 @@ describe('computeVitalityMetascore', () => {
 
   it('uses Ethnologue 2025 when only it exists', () => {
     const lang = getBaseLanguageData('en', 'English');
-    lang.vitalityEth2025 = '3 Endangered'; // 3
+    lang.vitalityEth2025 = 'Endangered'; // 3
     const result = computeVitalityMetascore(lang);
     expect(result.score).toBe(3);
   });
