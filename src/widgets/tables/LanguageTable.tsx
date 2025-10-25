@@ -6,9 +6,9 @@ import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
-import LanguagePluralCategories from '@entities/language/grammar/LanguagePluralCategories';
-import LanguagePluralRuleExamplesGrid from '@entities/language/grammar/LanguagePluralGrid';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
+import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import {
   getObjectLiteracy,
   getUniqueTerritoriesForLanguage,
