@@ -7,7 +7,8 @@ import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
-import LanguagePluralInfo from '@entities/language/LanguagePluralInfo';
+import LanguagePluralCategories from '@entities/language/grammar/LanguagePluralCategories';
+import LanguagePluralGridButton from '@entities/language/grammar/LanguagePluralGridToggle';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
@@ -34,7 +35,6 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageAttributes lang={lang} />
       <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
-      <LanguagePluralInfo lang={lang} />
     </div>
   );
 };
@@ -158,6 +158,14 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
+      <DetailsField title="Plural Categories:">
+        <div
+          style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}
+        >
+          <LanguagePluralCategories lang={lang} />
+          <LanguagePluralGridButton lang={lang} />
+        </div>
+      </DetailsField>
     </DetailsSection>
   );
 };
