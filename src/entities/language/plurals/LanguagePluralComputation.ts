@@ -88,16 +88,7 @@ export function getConditionFunction(cond: string): PluralRulePassesFunction {
   }
 
   // #5 parse the "values" string into something that can compare against numbers
-  const valueMatch = (num: number): boolean => {
-    if (values.includes('..')) {
-      const [startStr, endStr] = values.split('..');
-      const start = parseInt(startStr, 10);
-      const end = parseInt(endStr, 10);
-      return start <= num && num <= end;
-    }
-    const valueList = values.split(',');
-    return valueList.includes(String(num));
-  };
+  const valueMatch = getValueMatchFunction(values, symbol);
 
   // #6 check if the input number matches the condition
   return (num: number | string) =>
@@ -108,6 +99,22 @@ export function getConditionFunction(cond: string): PluralRulePassesFunction {
     ) ===
     // #7 if the operator is "=" then stay normal, but if "!=" then invert
     (operator === '=');
+}
+
+function getValueMatchFunction(values: string, symbol: string): (num: number) => boolean {
+  if (values.includes(',')) {
+    const valueList = values.split(',');
+    return (num: number) => valueList.some((value) => getValueMatchFunction(value, symbol)(num));
+  }
+  if (values.includes('..')) {
+    const [startStr, endStr] = values.split('..');
+    const start = parseInt(startStr, 10);
+    const end = parseInt(endStr, 10);
+    return (num: number) => {
+      return start <= num && num <= end && (symbol !== 'n' || Number.isInteger(num));
+    };
+  }
+  return (num: number) => values.split(',').includes(String(num));
 }
 
 /**
@@ -136,17 +143,6 @@ export function getVariableFromNumberOrString(symbol: string, num: number | stri
     }
     // Recompute trailing zeros since the decimal point has moved
     trailingZeros = String(numAsNumber).split('.')[1]?.length || 0;
-  }
-
-  if (num === '1.000001e6') {
-    console.log(
-      symbol,
-      num,
-      trailingZeros,
-      compactExponent,
-      numAsNumber,
-      getVariableFromNumber(symbol, numAsNumber, trailingZeros, compactExponent),
-    );
   }
   return getVariableFromNumber(symbol, numAsNumber, trailingZeros, compactExponent);
 }
