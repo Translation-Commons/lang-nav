@@ -2,28 +2,28 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `All files`                              |    21.3 |    78.3 |    32.6 |    21.3 |
+| `All files`                              |    21.4 |    79.0 |    32.6 |    21.4 |
 | `  scripts`                              |     0   |     0   |     0   |     0   |
 | `    coverage-summary.mjs`               |     0   |     0   |     0   |     0   |
-| `  src`                                  |    21.5 |    78.4 |    32.7 |    21.5 |
+| `  src`                                  |    21.5 |    79.1 |    32.7 |    21.5 |
 | `    app`                                |     0   |     0   |     0   |     0   |
 | `      App.tsx`                          |     0   |     0   |     0   |     0   |
 | `      PageRoutes.tsx`                   |     0   |     0   |     0   |     0   |
-| `    entities`                           |    33.2 |    86.2 |    35.6 |    33.2 |
+| `    entities`                           |    33.6 |    87.7 |    35.6 |    33.6 |
 | `      census`                           |    25.0 |   100.0 |     0   |    25.0 |
 | `        CensusCard.tsx`                 |    19.2 |   100.0 |     0   |    19.2 |
 | `        CensusSuggestions.tsx`          |    28.6 |   100.0 |     0   |    28.6 |
 | `        CensusTypes.tsx`                |    31.3 |   100.0 |     0   |    31.3 |
-| `      language`                         |    33.1 |    90.6 |    29.2 |    33.1 |
+| `      language`                         |    33.8 |    93.3 |    29.2 |    33.8 |
 | `        LanguageCard.tsx`               |    23.5 |   100.0 |     0   |    23.5 |
 | `        LanguagePopulationEstimate.tsx` |    27.8 |   100.0 |     0   |    27.8 |
 | `        LanguagePopulationFromDescendents.tsx` |     9.7 |   100.0 |     0   |     9.7 |
 | `        LanguagePopulationFromLocales.tsx` |    12.5 |   100.0 |     0   |    12.5 |
 | `        LanguageSuggestions.tsx`        |    33.3 |   100.0 |     0   |    33.3 |
 | `        LanguageTypes.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
-| `        plurals`                        |    32.6 |    87.7 |    33.3 |    32.6 |
+| `        plurals`                        |    34.1 |    92.9 |    33.3 |    34.1 |
 | `          LanguagePluralCategories.tsx` |    21.9 |   100.0 |     0   |    21.9 |
-| `          LanguagePluralComputation.ts` |    88.6 |    88.9 |   100.0 |    88.6 |
+| `          LanguagePluralComputation.ts` |    96.3 |    94.0 |   100.0 |    96.3 |
 | `          LanguagePluralGrid.tsx`       |    24.6 |   100.0 |     0   |    24.6 |
 | `          LanguagePluralGridToggle.tsx` |    25.9 |   100.0 |     0   |    25.9 |
 | `          LanguagePluralRuleSymbolsUsed.tsx` |     0   |     0   |     0   |     0   |
