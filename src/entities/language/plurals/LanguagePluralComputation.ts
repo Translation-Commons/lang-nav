@@ -122,7 +122,7 @@ function getValueMatchFunction(values: string, symbol: string): (num: number) =>
  * Thereby, we need to extract information from them first.
  */
 export function getVariableFromNumberOrString(symbol: string, num: number | string): number {
-  // Not necessary if the imput is already a number
+  // Not necessary if the input is already a number
   if (typeof num === 'number') return getVariableFromNumber(symbol, num, 0, 0);
 
   // If its a string, extract relevant parts
@@ -174,10 +174,8 @@ function getVariableFromNumber(
   }
 }
 
-export function expandPluralExamples(
-  examples: string,
-  decimalDigits?: number,
-): (number | string)[] {
+// Returns strings to perserve trailing zeros and exponential format
+export function expandPluralExamples(examples: string, decimalDigits?: number): string[] {
   // Expand compressed example lists like "0, 1, 2~4, 1.0, 3c6" into full arrays
   return examples
     .split(',')
@@ -188,8 +186,10 @@ export function expandPluralExamples(
         const [startStr, endStr] = part.split('~');
         const start = parseFloat(startStr);
         const end = parseFloat(endStr);
+
+        // Use a smaller step for decimals
         const step = decimalDigits && decimalDigits > 0 ? Math.pow(10, -decimalDigits) : 1;
-        return Array.from({ length: Math.floor((end - start) / step) + 1 }, (_, i) =>
+        return Array.from({ length: Math.round((end - start) / step) + 1 }, (_, i) =>
           (start + i * step).toFixed(decimalDigits),
         );
       }
