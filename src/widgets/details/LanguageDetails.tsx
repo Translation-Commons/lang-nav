@@ -7,12 +7,12 @@ import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
-import LanguagePluralCategories from '@entities/language/grammar/LanguagePluralCategories';
-import LanguagePluralGridButton from '@entities/language/grammar/LanguagePluralGridToggle';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
+import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 
 import DetailsField from '@shared/containers/DetailsField';

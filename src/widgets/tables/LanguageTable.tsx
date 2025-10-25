@@ -10,9 +10,9 @@ import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonCol
 import ObjectTable from '@features/table/ObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
-import LanguagePluralCategories from '@entities/language/grammar/LanguagePluralCategories';
-import LanguagePluralRuleExamplesGrid from '@entities/language/grammar/LanguagePluralGrid';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
+import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import {
   getObjectLiteracy,
   getUniqueTerritoriesForLanguage,
