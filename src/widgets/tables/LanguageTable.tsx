@@ -6,7 +6,8 @@ import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable, { ValueType } from '@features/table/ObjectTable';
 
-import LanguagePluralInfo from '@entities/language/LanguagePluralInfo';
+import LanguagePluralCategories from '@entities/language/grammar/LanguagePluralCategories';
+import LanguagePluralRuleExamplesGrid from '@entities/language/grammar/LanguagePluralGrid';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import {
   getObjectLiteracy,
@@ -114,8 +115,15 @@ const LanguageTable: React.FC = () => {
         },
         {
           key: 'Plural rules',
-          render: (lang) => <LanguagePluralInfo lang={lang} />,
+          render: (lang) => <LanguagePluralCategories lang={lang} />,
           isInitiallyVisible: false,
+          columnGroup: 'Grammar',
+        },
+        {
+          key: 'Plural rule examples',
+          render: (lang) => <LanguagePluralRuleExamplesGrid lang={lang} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Grammar',
         },
       ]}
     />
