@@ -49,7 +49,7 @@ const FilterPath: React.FC = () => {
         </HoverableButton>
       </>
     ),
-    
+
     // Ethnologue 2013 Filter
     vitalityEth2013.length > 0 && (
       <>
@@ -63,7 +63,7 @@ const FilterPath: React.FC = () => {
         </HoverableButton>
       </>
     ),
-    
+
     // Ethnologue 2025 Filter
     vitalityEth2025.length > 0 && (
       <>
@@ -78,32 +78,34 @@ const FilterPath: React.FC = () => {
       </>
     ),
 
-    !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
-      <Selector
-        selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(LanguageScope)}
-        display={SelectorDisplay.InlineDropdown}
-        onChange={(scope: LanguageScope) =>
-          languageScopes.includes(scope)
-            ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
-            : updatePageParams({ languageScopes: [...languageScopes, scope] })
-        }
-        selected={languageScopes}
-      />
-    ),
-    !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
-      <Selector
-        selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(TerritoryScope)}
-        display={SelectorDisplay.InlineDropdown}
-        onChange={(scope: TerritoryScope) =>
-          territoryScopes.includes(scope)
-            ? updatePageParams({ territoryScopes: territoryScopes.filter((s) => s != scope) })
-            : updatePageParams({ territoryScopes: [...territoryScopes, scope] })
-        }
-        selected={territoryScopes}
-      />
-    ),
+    languageScopes.length > 0 &&
+      !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
+        <Selector
+          selectorStyle={{ marginLeft: '0' }}
+          options={Object.values(LanguageScope)}
+          display={SelectorDisplay.InlineDropdown}
+          onChange={(scope: LanguageScope) =>
+            languageScopes.includes(scope)
+              ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
+              : updatePageParams({ languageScopes: [...languageScopes, scope] })
+          }
+          selected={languageScopes}
+        />
+      ),
+    territoryScopes.length > 0 &&
+      !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
+        <Selector
+          selectorStyle={{ marginLeft: '0' }}
+          options={Object.values(TerritoryScope)}
+          display={SelectorDisplay.InlineDropdown}
+          onChange={(scope: TerritoryScope) =>
+            territoryScopes.includes(scope)
+              ? updatePageParams({ territoryScopes: territoryScopes.filter((s) => s != scope) })
+              : updatePageParams({ territoryScopes: [...territoryScopes, scope] })
+          }
+          selected={territoryScopes}
+        />
+      ),
     territoryFilter !== '' && (
       <>
         In &quot;{territoryFilter}&quot;
