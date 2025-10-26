@@ -1,6 +1,11 @@
 import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
+import {
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+  VitalityISO,
+} from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import {
@@ -12,6 +17,20 @@ import {
   View,
 } from './PageParamTypes';
 import { ProfileType } from './Profiles';
+
+// Helper function to parse numeric enum arrays from URL strings
+function parseNumericEnumArray<T extends number>(
+  value: string,
+  enumObject: Record<string, unknown>,
+): T[] {
+  if (value === '[]') return [];
+  const validValues = Object.values(enumObject).filter((v) => typeof v === 'number') as T[];
+  return value
+    .split(',')
+    .filter(Boolean)
+    .map((item) => parseInt(item, 10))
+    .filter((item): item is T => validValues.includes(item as T));
+}
 
 export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
   const params: PageParamsOptional = {};
@@ -34,6 +53,16 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.territoryScopes:
         if (value === '[]') params[key] = [];
         else params[key] = value.split(',').filter(Boolean) as TerritoryScope[];
+        break;
+      // Add new vitality array parsing
+      case PageParamKey.vitalityISO:
+        params.vitalityISO = parseNumericEnumArray(value, VitalityISO);
+        break;
+      case PageParamKey.vitalityEth2013:
+        params.vitalityEth2013 = parseNumericEnumArray(value, VitalityEthnologueFine);
+        break;
+      case PageParamKey.vitalityEth2025:
+        params.vitalityEth2025 = parseNumericEnumArray(value, VitalityEthnologueCoarse);
         break;
 
       // Enum values
