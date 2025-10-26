@@ -5,28 +5,22 @@ import ObjectDetails from '@widgets/details/ObjectDetails';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import { usePageParams } from '@features/page-params/usePageParams';
 
-import CensusSuggestions from '@entities/census/CensusSuggestions';
-import LanguageSuggestions from '@entities/language/LanguageSuggestions';
 import getObjectFromID from '@entities/lib/getObjectFromID';
-import LocaleSuggestions from '@entities/locale/LocaleSuggestions';
-import TerritorySuggestions from '@entities/territory/TerritorySuggestions';
+import ObjectSuggestions from '@entities/ui/ObjectSuggestions';
 import ObjectTitle from '@entities/ui/ObjectTitle';
-import VariantTagSuggestions from '@entities/varianttag/VariantTagSuggestions';
-import WritingSystemSuggestions from '@entities/writingsystem/WritingSystemSuggestions';
 
 const ViewDetails: React.FC = () => {
   const { objectType } = usePageParams();
   const object = getObjectFromID();
 
   if (object == null) {
-    const suggestionsByObjectType = {
-      [ObjectType.Census]: <CensusSuggestions />,
-      [ObjectType.Language]: <LanguageSuggestions />,
-      [ObjectType.Locale]: <LocaleSuggestions />,
-      [ObjectType.Territory]: <TerritorySuggestions />,
-      [ObjectType.WritingSystem]: <WritingSystemSuggestions />,
-      [ObjectType.VariantTag]: <VariantTagSuggestions />,
-    };
+    const suggestionsByObjectType = Object.values(ObjectType).reduce(
+      (acc, type) => {
+        acc[type] = <ObjectSuggestions objectType={type} />;
+        return acc;
+      },
+      {} as Record<ObjectType, React.ReactNode>,
+    );
 
     return (
       <DetailsContainer title={objectType + ' Details'}>
