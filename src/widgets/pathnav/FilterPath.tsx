@@ -9,6 +9,11 @@ import { getDefaultParams } from '@features/page-params/Profiles';
 import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
+import {
+  getVitalityISOLabel,
+  getVitalityEthnologueFineLabel,
+  getVitalityEthnologueCoarseLabel,
+} from '@entities/language/vitality/VitalityStrings';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
@@ -22,12 +27,57 @@ const FilterPath: React.FC = () => {
     searchString,
     territoryFilter,
     territoryScopes,
+    vitalityISO,
+    vitalityEth2013,
+    vitalityEth2025,
     updatePageParams,
     view,
   } = usePageParams();
   const defaultParams = getDefaultParams();
 
   const filters = [
+    // Vitality ISO Filter
+    vitalityISO.length > 0 && (
+      <>
+        ISO Vitality: {vitalityISO.map(getVitalityISOLabel).join(', ')}
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ vitalityISO: [] })}
+          style={{ padding: '0.25em' }}
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+    
+    // Ethnologue 2013 Filter
+    vitalityEth2013.length > 0 && (
+      <>
+        Ethnologue 2013: {vitalityEth2013.map(getVitalityEthnologueFineLabel).join(', ')}
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ vitalityEth2013: [] })}
+          style={{ padding: '0.25em' }}
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+    
+    // Ethnologue 2025 Filter
+    vitalityEth2025.length > 0 && (
+      <>
+        Ethnologue 2025: {vitalityEth2025.map(getVitalityEthnologueCoarseLabel).join(', ')}
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ vitalityEth2025: [] })}
+          style={{ padding: '0.25em' }}
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+
     !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
       <Selector
         selectorStyle={{ marginLeft: '0' }}
