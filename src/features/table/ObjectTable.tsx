@@ -15,6 +15,7 @@ import Hoverable from '@shared/ui/Hoverable';
 import {
   getFilterBySubstring,
   getFilterByTerritory,
+  getFilterByVitality,
   getScopeFilter,
   getSliceFunction,
 } from '../filtering/filter';
@@ -60,6 +61,7 @@ function ObjectTable<T extends ObjectData>({
   const sortFunction = getSortFunction();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
+  const filterByVitality = getFilterByVitality();
   const scopeFilter = getScopeFilter();
   const sliceFunction = getSliceFunction<T>();
 
@@ -70,10 +72,11 @@ function ObjectTable<T extends ObjectData>({
   const objectsFilteredAndSorted = useMemo(() => {
     return objects
       .filter(scopeFilter)
+      .filter(filterByVitality)
       .filter(filterByTerritory)
       .filter(filterBySubstring)
       .sort(sortFunction);
-  }, [sortFunction, objects, filterBySubstring, filterByTerritory, scopeFilter]);
+  }, [sortFunction, objects, filterBySubstring, filterByTerritory, filterByVitality, scopeFilter]);
 
   return (
     <div className="ObjectTableContainer">

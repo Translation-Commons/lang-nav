@@ -1,6 +1,10 @@
 import React, { useCallback } from 'react';
 
-import { getFilterBySubstring, getFilterByTerritory } from '@features/filtering/filter';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getFilterByVitality,
+} from '@features/filtering/filter';
 import { usePageParams } from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -21,11 +25,12 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   const { limit, searchString } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
+  const filterByVitality = getFilterByVitality();
   const filterFunction = useCallback(
     (object: ObjectData) => {
-      return filterBySubstring(object) && filterByTerritory(object);
+      return filterBySubstring(object) && filterByTerritory(object) && filterByVitality(object);
     },
-    [filterBySubstring, filterByTerritory],
+    [filterBySubstring, filterByTerritory, filterByVitality],
   );
 
   return (
