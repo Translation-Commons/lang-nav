@@ -17,6 +17,7 @@ import SortDirectionSelector from './selectors/SortDirectionSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
+import VitalitySelector from './selectors/VitalitySelector';
 
 import './controls.css';
 
@@ -49,6 +50,7 @@ const SidePanel: React.FC = () => {
         <LanguageScopeSelector />
         <TerritoryScopeSelector />
         <TerritoryFilterSelector />
+        <VitalitySelector />
       </SidePanelSection>
 
       <SidePanelSection panelWidth={panelWidth} title="View Options">
