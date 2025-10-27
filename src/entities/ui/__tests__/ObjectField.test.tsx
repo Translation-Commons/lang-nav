@@ -1,14 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 import { SearchableField } from '@features/page-params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { HighlightedObjectField, getSearchableField } from '@entities/ui/ObjectField';
-
-vi.mock('@widgets/PageParamsProvider', () => ({
-  usePageParams: vi.fn(),
-}));
 
 const mockedLanguage = getBaseLanguageData('en', 'English');
 mockedLanguage.nameEndonym = 'ENGLISH';
