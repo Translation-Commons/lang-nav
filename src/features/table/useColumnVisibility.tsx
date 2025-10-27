@@ -5,7 +5,7 @@ import useStoredParams from '@features/stored-params/useStoredParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { TableColumn } from './ObjectTable';
+import TableColumn from './TableColumn';
 
 function useColumnVisibility<T extends ObjectData>(
   columns: TableColumn<T>[],

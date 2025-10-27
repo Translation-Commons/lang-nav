@@ -5,7 +5,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import HoverableObject from '@entities/ui/HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
-import { TableColumn } from './ObjectTable';
+import TableColumn from './TableColumn';
 
 const NAME_COLUMN_MAX_WIDTH = '20em';
 

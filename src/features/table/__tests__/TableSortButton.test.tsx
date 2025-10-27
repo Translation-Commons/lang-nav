@@ -6,8 +6,8 @@ import { SortBy, SortBehavior } from '@features/sorting/SortTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import { ValueType } from '../ObjectTable';
 import TableSortButton from '../TableSortButton';
+import TableValueType from '../TableValueType';
 
 vi.mock('@features/page-params/usePageParams', () => ({
   default: vi.fn(),
@@ -119,7 +119,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Population} valueType={ValueType.Numeric} />);
+    render(<TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Numeric} />);
 
     // Check for ArrowDown01 icon (numeric ascending)
     const svg = screen.getByRole('button').querySelector('svg');
@@ -137,7 +137,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Population} valueType={ValueType.Numeric} />);
+    render(<TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Numeric} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -153,7 +153,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={ValueType.Enum} />);
+    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.Enum} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -166,7 +166,7 @@ describe('SortButtonIcon', () => {
       createMockUsePageParams({ sortBy: SortBy.Name, sortBehavior: SortBehavior.Reverse }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={ValueType.Enum} />);
+    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.Enum} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -182,7 +182,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={ValueType.String} />);
+    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.String} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -198,7 +198,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={ValueType.String} />);
+    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.String} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -230,7 +230,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={ValueType.String} />);
+    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.String} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();

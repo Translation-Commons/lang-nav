@@ -15,14 +15,14 @@ import HoverableButton from '@shared/ui/HoverableButton';
 
 import { getNormalSortDirection } from '../sorting/sort';
 
-import { ValueType } from './ObjectTable';
+import TableValueType from './TableValueType';
 
 type Props = {
   columnSortBy?: SortBy;
-  valueType?: ValueType;
+  valueType?: TableValueType;
 };
 
-const TableSortButton: React.FC<Props> = ({ columnSortBy, valueType = ValueType.String }) => {
+const TableSortButton: React.FC<Props> = ({ columnSortBy, valueType = TableValueType.String }) => {
   const { sortBy, updatePageParams, sortBehavior } = usePageParams();
 
   if (!columnSortBy) {
@@ -64,19 +64,19 @@ const TableSortButton: React.FC<Props> = ({ columnSortBy, valueType = ValueType.
 };
 
 type SortButtonIconProps = {
-  valueType?: ValueType;
+  valueType?: TableValueType;
   sortDirection?: SortDirection;
 };
 
 function SortButtonIcon({ valueType, sortDirection }: SortButtonIconProps) {
   switch (valueType) {
-    case ValueType.Numeric:
+    case TableValueType.Numeric:
       return sortDirection === SortDirection.Ascending ? (
         <ArrowDown01 size="1em" display="block" />
       ) : (
         <ArrowDown10 size="1em" display="block" />
       );
-    case ValueType.Enum:
+    case TableValueType.Enum:
       return sortDirection === SortDirection.Ascending ? (
         <ArrowDownNarrowWide size="1em" display="block" />
       ) : (

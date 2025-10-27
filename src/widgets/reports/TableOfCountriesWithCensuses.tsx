@@ -3,7 +3,8 @@ import React from 'react';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/types/DataTypes';
@@ -25,7 +26,7 @@ const TableOfCountriesWithCensuses: React.FC = () => {
           {
             key: 'Censuses',
             render: (territory) => territory.censuses?.length,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
           },
           ...Object.values(CensusCollectorType).map((collectorType) => ({
             key: collectorType,
@@ -46,13 +47,13 @@ const TableOfCountriesWithCensuses: React.FC = () => {
           {
             key: 'Population',
             render: (territory) => territory.population,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.Population,
           },
           {
             key: 'Languages',
             render: (territory) => territory.locales?.length,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.CountOfLanguages,
           },
         ]}

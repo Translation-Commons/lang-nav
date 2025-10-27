@@ -5,7 +5,8 @@ import Selector from '@widgets/controls/components/Selector';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendentLanguage } from '@entities/lib/getObjectPopulation';
@@ -76,7 +77,7 @@ const LanguagesLargestDescendant: React.FC = () => {
           {
             key: 'Population',
             render: (lang: LanguageData) => lang.populationEstimate,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.Population,
           },
           {
@@ -88,7 +89,7 @@ const LanguagesLargestDescendant: React.FC = () => {
               </>
             ),
             render: (lang: LanguageData) => lang.populationOfDescendents,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.PopulationOfDescendents,
           },
           {
@@ -104,7 +105,7 @@ const LanguagesLargestDescendant: React.FC = () => {
           {
             key: 'Descendent Population',
             render: (lang: LanguageData) => lang.largestDescendant?.populationEstimate || null,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
           },
 
           {
@@ -114,7 +115,7 @@ const LanguagesLargestDescendant: React.FC = () => {
                 getObjectPopulationPercentInBiggestDescendentLanguage(lang);
               return relativePopulation ? numberToFixedUnlessSmall(relativePopulation * 100) : null;
             },
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
           },
         ]}

@@ -9,7 +9,7 @@ import { groupBy } from '@shared/lib/setUtils';
 import Hoverable from '@shared/ui/Hoverable';
 import HoverableButton from '@shared/ui/HoverableButton';
 
-import { TableColumn } from './ObjectTable';
+import TableColumn from './TableColumn';
 import TableSortButton from './TableSortButton';
 
 function TableColumnSelector<T extends ObjectData>({

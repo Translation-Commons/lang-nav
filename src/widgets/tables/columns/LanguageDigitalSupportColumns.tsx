@@ -1,4 +1,4 @@
-import { TableColumn } from '@features/table/ObjectTable';
+import TableColumn from '@features/table/TableColumn';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { CLDRCoverageText, ICUSupportStatus } from '@entities/ui/CLDRCoverageInfo';

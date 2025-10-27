@@ -4,7 +4,8 @@ import { useDataContext } from '@features/data-loading/context/useDataContext';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import { LocaleData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
@@ -37,7 +38,7 @@ const LocaleTable: React.FC = () => {
               ? numberToFixedUnlessSmall(object.literacyPercent)
               : null,
           isInitiallyVisible: false,
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.Literacy,
         },
         {
@@ -50,7 +51,7 @@ const LocaleTable: React.FC = () => {
             </CommaSeparated>
           ),
           isInitiallyVisible: false,
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Linked Data',
         },
