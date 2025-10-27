@@ -4,6 +4,11 @@ import { ObjectType, SearchableField } from '@features/page-params/PageParamType
 import { usePageParams } from '@features/page-params/usePageParams';
 
 import { LanguageScope, LanguageData } from '@entities/language/LanguageTypes';
+import {
+  VitalityISO,
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+} from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, ObjectData, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
 import { getSearchableField } from '@entities/ui/ObjectField';
 
@@ -133,54 +138,61 @@ function doesLocaleMatchScope(
 }
 
 /**
- * Provides a function that filters languages based on their vitality status from three different sources:
- * 1. ISO classification (Living, Constructed, Historical, Extinct, Special)
- * 2. Ethnologue 2013 (National, Regional, Trade, etc.)
- * 3. Ethnologue 2025 (Institutional, Stable, Endangered, Extinct)
+ * Creates a filter function for language vitality based on ISO and Ethnologue status.
+ * @param params Vitality parameters from ISO and Ethnologue (2013/2025)
+ * @returns Filter function that matches objects against the vitality criteria
  *
- * Non-language objects always pass the filter.
- * Languages must match ALL active vitality filters to pass.
- * Languages with missing vitality data are excluded when that vitality type is filtered.
- *
- * Example:
- * - No filters: all objects pass
- * - ISO filter [Living]: passes living languages, excludes others
- * - ISO [Living] + Eth2025 [Stable]: passes only living languages that are also stable
+ * Non-language objects pass through. Languages must match all active filters,
+ * and those with missing data are excluded when that filter is active.
+ */
+export function buildVitalityFilterFunction(params: {
+  vitalityISO: VitalityISO[];
+  vitalityEth2013: VitalityEthnologueFine[];
+  vitalityEth2025: VitalityEthnologueCoarse[];
+}): FilterFunctionType {
+  const { vitalityISO, vitalityEth2013, vitalityEth2025 } = params;
+
+  return (object: ObjectData): boolean => {
+    // Only filter language objects
+    if (object.type !== ObjectType.Language) {
+      return true;
+    }
+
+    const language = object as LanguageData;
+
+    // No filters active = pass all
+    if (!vitalityISO.length && !vitalityEth2013.length && !vitalityEth2025.length) {
+      return true;
+    }
+
+    // For each active filter, check if language matches
+    // Languages with missing data are excluded when that filter is active
+    const isoMatches =
+      !vitalityISO.length ||
+      (language.vitalityISO != null && vitalityISO.includes(language.vitalityISO));
+
+    const eth2013Matches =
+      !vitalityEth2013.length ||
+      (language.vitalityEth2013 != null && vitalityEth2013.includes(language.vitalityEth2013));
+
+    const eth2025Matches =
+      !vitalityEth2025.length ||
+      (language.vitalityEth2025 != null && vitalityEth2025.includes(language.vitalityEth2025));
+
+    // Must match all active filters
+    return isoMatches && eth2013Matches && eth2025Matches;
+  };
+}
+
+/**
+ * React hook version of the vitality filter function.
+ * Provides a memoized function that filters languages based on their vitality status.
  */
 export function getFilterByVitality(): FilterFunctionType {
   const { vitalityISO, vitalityEth2013, vitalityEth2025 } = usePageParams();
 
   return useCallback(
-    (object: ObjectData): boolean => {
-      // Only filter language objects
-      if (object.type !== ObjectType.Language) {
-        return true;
-      }
-
-      const language = object as LanguageData;
-
-      // No filters active = pass all
-      if (!vitalityISO.length && !vitalityEth2013.length && !vitalityEth2025.length) {
-        return true;
-      }
-
-      // For each active filter, check if language matches
-      // Languages with missing data are excluded when that filter is active
-      const isoMatches =
-        !vitalityISO.length ||
-        (language.vitalityISO != null && vitalityISO.includes(language.vitalityISO));
-
-      const eth2013Matches =
-        !vitalityEth2013.length ||
-        (language.vitalityEth2013 != null && vitalityEth2013.includes(language.vitalityEth2013));
-
-      const eth2025Matches =
-        !vitalityEth2025.length ||
-        (language.vitalityEth2025 != null && vitalityEth2025.includes(language.vitalityEth2025));
-
-      // Must match all active filters
-      return isoMatches && eth2013Matches && eth2025Matches;
-    },
+    buildVitalityFilterFunction({ vitalityISO, vitalityEth2013, vitalityEth2025 }),
     [vitalityISO, vitalityEth2013, vitalityEth2025],
   );
 }
