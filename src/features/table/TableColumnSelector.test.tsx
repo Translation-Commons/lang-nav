@@ -1,8 +1,6 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
-import { HoverCardProvider } from '@widgets/HoverCardContext';
-
 import { usePageParams } from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 
@@ -10,6 +8,9 @@ import TableColumnSelector from './TableColumnSelector';
 
 vi.mock('@features/page-params/usePageParams', () => ({
   usePageParams: vi.fn(),
+}));
+vi.mock('@widgets/HoverCardContext', () => ({
+  useHoverCard: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
 }));
 
 beforeEach(() => {
@@ -19,7 +20,7 @@ beforeEach(() => {
 
 describe('TableColumnSelector', () => {
   it('renders summary with visible/total columns', () => {
-    (usePageParams as unknown as Mock).mockReturnValue({ sortBy: null });
+    (usePageParams as Mock).mockReturnValue({ sortBy: null });
 
     const columns = [
       { key: 'Population', sortParam: SortBy.Population, render: () => null },
@@ -30,21 +31,19 @@ describe('TableColumnSelector', () => {
     const toggleMock = vi.fn();
 
     render(
-      <HoverCardProvider>
-        <TableColumnSelector
-          columns={columns}
-          columnVisibility={columnVisibility}
-          resetColumnVisibility={vi.fn()}
-          toggleColumn={toggleMock}
-        />
-      </HoverCardProvider>,
+      <TableColumnSelector
+        columns={columns}
+        columnVisibility={columnVisibility}
+        resetColumnVisibility={vi.fn()}
+        toggleColumn={toggleMock}
+      />,
     );
 
     expect(screen.getByText(/2\/3 columns visible/i)).toBeTruthy();
   });
 
   it('checkboxes reflect columnVisibility and sortBy overrides', () => {
-    (usePageParams as unknown as Mock).mockReturnValue({ sortBy: SortBy.Name });
+    (usePageParams as Mock).mockReturnValue({ sortBy: SortBy.Name });
 
     const columns = [
       { key: 'Population', sortParam: SortBy.Population, render: () => null },
@@ -54,14 +53,12 @@ describe('TableColumnSelector', () => {
     const toggleMock = vi.fn();
 
     render(
-      <HoverCardProvider>
-        <TableColumnSelector
-          columns={columns}
-          columnVisibility={columnVisibility}
-          resetColumnVisibility={vi.fn()}
-          toggleColumn={toggleMock}
-        />
-      </HoverCardProvider>,
+      <TableColumnSelector
+        columns={columns}
+        columnVisibility={columnVisibility}
+        resetColumnVisibility={vi.fn()}
+        toggleColumn={toggleMock}
+      />,
     );
 
     const populationCheckbox = screen.getByLabelText('Population') as HTMLInputElement;
@@ -74,7 +71,7 @@ describe('TableColumnSelector', () => {
   });
 
   it('group header toggle calls toggleColumn for each column in the group and individual checkbox toggles call toggleColumn with only the key', () => {
-    (usePageParams as unknown as Mock).mockReturnValue({ sortBy: null });
+    (usePageParams as Mock).mockReturnValue({ sortBy: null });
 
     const columns = [
       { key: 'Population', columnGroup: 'Group', render: () => null },
@@ -85,14 +82,12 @@ describe('TableColumnSelector', () => {
     const toggleMock = vi.fn();
 
     render(
-      <HoverCardProvider>
-        <TableColumnSelector
-          columns={columns}
-          columnVisibility={columnVisibility}
-          resetColumnVisibility={vi.fn()}
-          toggleColumn={toggleMock}
-        />
-      </HoverCardProvider>,
+      <TableColumnSelector
+        columns={columns}
+        columnVisibility={columnVisibility}
+        resetColumnVisibility={vi.fn()}
+        toggleColumn={toggleMock}
+      />,
     );
 
     // Click the first group Hoverable (mocked as button with data-testid "hoverable")

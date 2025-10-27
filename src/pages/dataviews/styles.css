@@ -41,15 +41,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.separatedButtonList {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  gap: 1em;
-  justify-content: center;
-  margin-top: 1em;
-}
-
 div h1:first-child,
 div h2:first-child,
 div h3:first-child {
