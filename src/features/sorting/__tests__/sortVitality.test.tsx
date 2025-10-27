@@ -15,8 +15,8 @@ import {
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryData } from '@entities/types/DataTypes';
 
-import { getSortFunctionParameterized } from './sort';
-import { SortBy, SortBehavior } from './SortTypes';
+import { getSortFunctionParameterized } from '../sort';
+import { SortBy, SortBehavior } from '../SortTypes';
 
 // Helper to create a language with vitality data
 function createLanguageWithVitality(

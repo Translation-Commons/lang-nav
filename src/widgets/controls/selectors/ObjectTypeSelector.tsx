@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { ObjectType, View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 

@@ -1,17 +1,15 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
-import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
 import * as FilterModule from '@features/filtering/filter';
-import PageParamsProvider from '@features/page-params/PageParamsProvider';
 import { ObjectType } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 import * as SortModule from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
-import { createMockUsePageParams } from '@tests/MockObjects';
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import ObjectTable, { TableColumn, ValueType } from '../ObjectTable';
 
@@ -33,39 +31,8 @@ vi.mock('@features/sorting/sort', () => ({
 }));
 
 vi.mock('@features/page-params/usePageParams', () => ({
-  usePageParams: vi.fn(),
+  default: vi.fn(),
 }));
-
-vi.mock('@features/stored-params/useStoredParams', () => {
-  let storedValue = {};
-  const mockStoredParams = vi
-    .fn()
-    .mockImplementation((_key: string, defaultValue: Record<string, boolean>) => {
-      if (Object.keys(storedValue).length === 0) {
-        storedValue = { ...defaultValue };
-      }
-      return {
-        value: storedValue,
-        setValue: vi
-          .fn()
-          .mockImplementation(
-            (
-              updater:
-                | Record<string, boolean>
-                | ((prev: Record<string, boolean>) => Record<string, boolean>),
-            ) => {
-              storedValue =
-                typeof updater === 'function'
-                  ? updater(storedValue)
-                  : { ...storedValue, ...updater };
-            },
-          ),
-        clear: vi.fn(),
-        remove: vi.fn(),
-      };
-    });
-  return { default: mockStoredParams };
-});
 
 describe('ObjectTable', () => {
   const mockObjects: ObjectData[] = [
@@ -121,7 +88,7 @@ describe('ObjectTable', () => {
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
     vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
-    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({}));
+    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
   });
 
   afterEach(() => {
@@ -130,24 +97,12 @@ describe('ObjectTable', () => {
 
   // Helper function to eliminate render wrapper duplication
   const renderObjectTable = (props = {}) => {
-    return render(
-      <BrowserRouter>
-        <PageParamsProvider>
-          <ObjectTable objects={mockObjects} columns={mockColumns} {...props} />
-        </PageParamsProvider>
-      </BrowserRouter>,
-    );
+    return render(<ObjectTable objects={mockObjects} columns={mockColumns} {...props} />);
   };
 
   // Helper function to eliminate rerender duplication
   const rerenderObjectTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
-    rerender(
-      <BrowserRouter>
-        <PageParamsProvider>
-          <ObjectTable objects={mockObjects} columns={mockColumns} {...props} />
-        </PageParamsProvider>
-      </BrowserRouter>,
-    );
+    rerender(<ObjectTable objects={mockObjects} columns={mockColumns} {...props} />);
   };
 
   // Helper function to eliminate column header assertions
@@ -262,14 +217,14 @@ describe('ObjectTable', () => {
     expectColumnHeaders();
 
     // Open column selector
-    await act(async () => {
-      await fireEvent.click(screen.getByText(/2\/2 columns visible, click here to toggle/i));
+    act(() => {
+      fireEvent.click(screen.getByText(/2\/2 columns visible, click here to toggle/i));
     });
 
     // Click checkbox to hide Population column
-    await act(async () => {
+    act(() => {
       const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
-      await fireEvent.click(populationCheckbox);
+      fireEvent.click(populationCheckbox);
     });
 
     // Force rerender to ensure state updates are applied
@@ -281,15 +236,27 @@ describe('ObjectTable', () => {
     expect(screen.getAllByRole('columnheader')).toHaveLength(1);
 
     // Click checkbox to show Population column again
-    await act(async () => {
+    act(() => {
       const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
-      await fireEvent.click(populationCheckbox);
+      fireEvent.click(populationCheckbox);
     });
 
     // Force rerender to ensure state updates are applied
     rerenderObjectTable(rerender);
 
     // Verify both columns are visible again
+    expectColumnHeaders();
+
+    // Clicking to turn off the name column does not affect visibility since it is the sort column
+    act(() => {
+      const nameCheckbox = screen.getByRole('checkbox', { name: /name/i });
+      fireEvent.click(nameCheckbox);
+    });
+
+    // Force rerender to ensure state updates are applied
+    rerenderObjectTable(rerender);
+
+    // Both columns should still be visible
     expectColumnHeaders();
   });
 });

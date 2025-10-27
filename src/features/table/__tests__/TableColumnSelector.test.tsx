@@ -1,13 +1,13 @@
 import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 
-import TableColumnSelector from './TableColumnSelector';
+import TableColumnSelector from '../TableColumnSelector';
 
 vi.mock('@features/page-params/usePageParams', () => ({
-  usePageParams: vi.fn(),
+  default: vi.fn(),
 }));
 vi.mock('@widgets/HoverCardContext', () => ({
   useHoverCard: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),

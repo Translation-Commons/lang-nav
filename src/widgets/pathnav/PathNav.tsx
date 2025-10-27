@@ -5,7 +5,7 @@ import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
 import { ObjectType, View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 

@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 

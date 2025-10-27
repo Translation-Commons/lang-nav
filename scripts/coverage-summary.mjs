@@ -53,7 +53,7 @@ Object.entries(inputItems).forEach(([name, coverage]) => {
   pathComponents.forEach((pathSegment, index) => {
     let nextNode = currentNode.children[pathSegment];
     if (!nextNode) {
-      nextNode = { name: pathSegment, coverage, children: {}, depth: index + 1 };
+      nextNode = { name: pathSegment, coverage, children: {}, depth: index };
     } else {
       nextNode.coverage = addCoverage(nextNode.coverage, coverage);
     }
@@ -63,13 +63,15 @@ Object.entries(inputItems).forEach(([name, coverage]) => {
 });
 
 // Print out the tree structure
-function printNode(node, depth = 0) {
-  const parentPath = '\u00A0\u00A0'.repeat(node.depth);
-  const fullPath = parentPath + (node.name || 'All files');
-  printFileRow(fullPath, node.coverage);
+function printNode(node) {
+  if (node.name){
+    const parentPath = '\u00A0\u00A0'.repeat(node.depth);
+    const fullPath = parentPath + (node.name || '');
+    printFileRow(fullPath, node.coverage);
+  }
   Object.values(node.children)
     .sort((a, b) => a.name.localeCompare(b.name))
-    .forEach((child) => printNode(child, depth + 1));
+    .forEach((child) => printNode(child));
 }
 printNode(root);
 

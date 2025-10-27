@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import { ObjectType, PageParamsOptional, View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import CensusCard from '@entities/census/CensusCard';
 import LanguageCard from '@entities/language/LanguageCard';

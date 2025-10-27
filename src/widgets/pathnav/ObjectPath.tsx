@@ -2,7 +2,7 @@ import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
 import { ObjectType } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';

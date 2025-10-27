@@ -3,7 +3,7 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
 import { ObjectType } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import ObjectSuggestions from '@entities/ui/ObjectSuggestions';

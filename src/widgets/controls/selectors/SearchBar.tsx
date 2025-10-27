@@ -2,7 +2,7 @@ import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
 import { PageParamKey } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { SelectorDisplay } from '../components/SelectorDisplay';
 import TextInput from '../components/TextInput';

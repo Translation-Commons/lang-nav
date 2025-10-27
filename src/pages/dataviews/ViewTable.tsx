@@ -6,7 +6,7 @@ import VariantTagTable from '@widgets/tables/VariantTagTable';
 import WritingSystemTable from '@widgets/tables/WritingSystemTable';
 
 import { ObjectType } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import './styles.css';
 
