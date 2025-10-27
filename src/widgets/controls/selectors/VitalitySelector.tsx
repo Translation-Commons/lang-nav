@@ -22,13 +22,7 @@ export const VitalityISOSelector: React.FC = () => {
     <Selector
       selectorLabel="ISO Language Status"
       selectorDescription="Filter languages by their ISO status (Living, Extinct, etc.)"
-      options={[
-        VitalityISO.Living,
-        VitalityISO.Constructed,
-        VitalityISO.Historical,
-        VitalityISO.Extinct,
-        VitalityISO.SpecialCode,
-      ]}
+      options={Object.values(VitalityISO).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityISO) =>
         vitalityISO.includes(value)
           ? updatePageParams({ vitalityISO: vitalityISO.filter((v) => v !== value) })
@@ -47,18 +41,7 @@ export const VitalityEth2013Selector: React.FC = () => {
     <Selector
       selectorLabel="Ethnologue 2013 Status"
       selectorDescription="Filter languages by their Ethnologue 2013 vitality classification"
-      options={[
-        VitalityEthnologueFine.National,
-        VitalityEthnologueFine.Regional,
-        VitalityEthnologueFine.Trade,
-        VitalityEthnologueFine.Educational,
-        VitalityEthnologueFine.Developing,
-        VitalityEthnologueFine.Threatened,
-        VitalityEthnologueFine.Shifting,
-        VitalityEthnologueFine.Moribund,
-        VitalityEthnologueFine.Dormant,
-        VitalityEthnologueFine.Extinct,
-      ]}
+      options={Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityEthnologueFine) =>
         vitalityEth2013.includes(value)
           ? updatePageParams({ vitalityEth2013: vitalityEth2013.filter((v) => v !== value) })
@@ -77,12 +60,7 @@ export const VitalityEth2025Selector: React.FC = () => {
     <Selector
       selectorLabel="Ethnologue 2025 Status"
       selectorDescription="Filter languages by their Ethnologue 2025 vitality classification"
-      options={[
-        VitalityEthnologueCoarse.Institutional,
-        VitalityEthnologueCoarse.Stable,
-        VitalityEthnologueCoarse.Endangered,
-        VitalityEthnologueCoarse.Extinct,
-      ]}
+      options={Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityEthnologueCoarse) =>
         vitalityEth2025.includes(value)
           ? updatePageParams({ vitalityEth2025: vitalityEth2025.filter((v) => v !== value) })

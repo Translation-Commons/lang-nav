@@ -54,7 +54,6 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         if (value === '[]') params[key] = [];
         else params[key] = value.split(',').filter(Boolean) as TerritoryScope[];
         break;
-      // Add new vitality array parsing
       case PageParamKey.vitalityISO:
         params.vitalityISO = parseNumericEnumArray(value, VitalityISO);
         break;
