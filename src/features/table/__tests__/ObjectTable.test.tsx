@@ -1,0 +1,295 @@
+import { render, screen, fireEvent, act } from '@testing-library/react';
+import { BrowserRouter } from 'react-router-dom';
+import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+
+import * as FilterModule from '@features/filtering/filter';
+import PageParamsProvider from '@features/page-params/PageParamsProvider';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
+import * as SortModule from '@features/sorting/sort';
+import { SortBy } from '@features/sorting/SortTypes';
+
+import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+
+import { createMockUsePageParams } from '@tests/MockObjects';
+
+import ObjectTable, { TableColumn, ValueType } from '../ObjectTable';
+
+vi.mock('@widgets/HoverCardContext', () => ({
+  useHoverCard: vi.fn().mockReturnValue({}),
+}));
+
+vi.mock('@features/filtering/filter', () => ({
+  getFilterBySubstring: vi.fn(),
+  getFilterByTerritory: vi.fn(),
+  getFilterByVitality: vi.fn(),
+  getScopeFilter: vi.fn(),
+  getSliceFunction: vi.fn(),
+}));
+
+vi.mock('@features/sorting/sort', () => ({
+  getSortFunction: vi.fn(),
+  getNormalSortDirection: vi.fn().mockReturnValue(1),
+}));
+
+vi.mock('@features/page-params/usePageParams', () => ({
+  usePageParams: vi.fn(),
+}));
+
+vi.mock('@features/stored-params/useStoredParams', () => {
+  let storedValue = {};
+  const mockStoredParams = vi
+    .fn()
+    .mockImplementation((_key: string, defaultValue: Record<string, boolean>) => {
+      if (Object.keys(storedValue).length === 0) {
+        storedValue = { ...defaultValue };
+      }
+      return {
+        value: storedValue,
+        setValue: vi
+          .fn()
+          .mockImplementation(
+            (
+              updater:
+                | Record<string, boolean>
+                | ((prev: Record<string, boolean>) => Record<string, boolean>),
+            ) => {
+              storedValue =
+                typeof updater === 'function'
+                  ? updater(storedValue)
+                  : { ...storedValue, ...updater };
+            },
+          ),
+        clear: vi.fn(),
+        remove: vi.fn(),
+      };
+    });
+  return { default: mockStoredParams };
+});
+
+describe('ObjectTable', () => {
+  const mockObjects: ObjectData[] = [
+    {
+      ID: '1',
+      type: ObjectType.Territory,
+      codeDisplay: 'T1',
+      nameDisplay: 'Test Territory 1',
+      names: ['Test Territory 1'],
+      scope: TerritoryScope.Country,
+      population: 1000,
+      populationFromUN: 1000,
+    },
+    {
+      ID: '2',
+      type: ObjectType.Territory,
+      codeDisplay: 'T2',
+      nameDisplay: 'Test Territory 2',
+      names: ['Test Territory 2'],
+      scope: TerritoryScope.Country,
+      population: 2000,
+      populationFromUN: 2000,
+    },
+  ];
+
+  const mockColumns: TableColumn<ObjectData>[] = [
+    {
+      key: 'name',
+      label: 'Name',
+      render: (obj) => obj.nameDisplay,
+      sortParam: SortBy.Name,
+      valueType: ValueType.String,
+    },
+    {
+      key: 'population',
+      label: 'Population',
+      render: (obj) => {
+        if (obj.type === ObjectType.Territory) {
+          return obj.population.toLocaleString();
+        }
+        return '';
+      },
+      sortParam: SortBy.Population,
+      valueType: ValueType.Numeric,
+    },
+  ];
+
+  beforeEach(() => {
+    // Set up default mock implementations
+    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
+    vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
+    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({}));
+  });
+
+  afterEach(() => {
+    vi.clearAllMocks();
+  });
+
+  // Helper function to eliminate render wrapper duplication
+  const renderObjectTable = (props = {}) => {
+    return render(
+      <BrowserRouter>
+        <PageParamsProvider>
+          <ObjectTable objects={mockObjects} columns={mockColumns} {...props} />
+        </PageParamsProvider>
+      </BrowserRouter>,
+    );
+  };
+
+  // Helper function to eliminate rerender duplication
+  const rerenderObjectTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
+    rerender(
+      <BrowserRouter>
+        <PageParamsProvider>
+          <ObjectTable objects={mockObjects} columns={mockColumns} {...props} />
+        </PageParamsProvider>
+      </BrowserRouter>,
+    );
+  };
+
+  // Helper function to eliminate column header assertions
+  const expectColumnHeaders = (expectedCount = 2) => {
+    expect(screen.getAllByRole('columnheader')).toHaveLength(expectedCount);
+    expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
+    expect(screen.getByRole('columnheader', { name: /Population/i })).toBeInTheDocument();
+  };
+
+  it('renders table with all columns and data', () => {
+    renderObjectTable();
+
+    // Check column headers
+    expectColumnHeaders();
+
+    // Check data rows
+    mockObjects.forEach((obj) => {
+      expect(screen.getByText(obj.nameDisplay)).toBeInTheDocument();
+      if (obj.type === ObjectType.Territory) {
+        expect(screen.getByText(obj.population.toLocaleString())).toBeInTheDocument();
+      }
+    });
+  });
+
+  it('applies filtering functions', () => {
+    const mockSubstringFilter = vi.fn(() => true);
+    const mockTerritoryFilter = vi.fn(() => true);
+    const mockVitalityFilter = vi.fn(() => true);
+    const mockScopeFilter = vi.fn(() => true);
+
+    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
+    vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(mockTerritoryFilter);
+    vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
+    vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
+
+    renderObjectTable();
+
+    expect(mockSubstringFilter).toHaveBeenCalled();
+    expect(mockTerritoryFilter).toHaveBeenCalled();
+    expect(mockVitalityFilter).toHaveBeenCalled();
+    expect(mockScopeFilter).toHaveBeenCalled();
+  });
+
+  it('applies sorting function', () => {
+    const mockSort = vi.fn(() => 0);
+    vi.mocked(SortModule.getSortFunction).mockReturnValue(mockSort);
+
+    renderObjectTable();
+
+    expect(mockSort).toHaveBeenCalled();
+  });
+
+  it('handles filtering that excludes all objects', () => {
+    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => false);
+
+    renderObjectTable();
+
+    mockObjects.forEach((obj) => {
+      expect(screen.queryByText(obj.nameDisplay)).not.toBeInTheDocument();
+    });
+  });
+
+  it('shows details view when exactly one object is visible', () => {
+    // Make filter return true only for the first object
+    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue((obj) => obj.ID === '1');
+
+    renderObjectTable();
+
+    // Should show details for the first object
+    expect(screen.getByText('Test Territory 1', { selector: 'strong' })).toBeInTheDocument();
+    expect(screen.queryByText('Test Territory 2')).not.toBeInTheDocument();
+  });
+
+  it('applies slicing function to filtered results', () => {
+    const mockSlice = vi.fn((items) => items.slice(0, 1));
+    vi.mocked(FilterModule.getSliceFunction).mockReturnValue(mockSlice);
+
+    renderObjectTable();
+
+    expect(mockSlice).toHaveBeenCalled();
+    expect(screen.getByRole('cell', { name: 'Test Territory 1' })).toBeInTheDocument();
+    expect(screen.queryByRole('cell', { name: 'Test Territory 2' })).not.toBeInTheDocument();
+  });
+
+  it('formats numeric values correctly', () => {
+    const numericObject = {
+      ...mockObjects[0],
+      population: 1234567,
+    };
+
+    renderObjectTable({ objects: [numericObject] });
+
+    expect(screen.getByRole('cell', { name: '1,234,567' })).toBeInTheDocument();
+  });
+
+  it('disables search bar filter when shouldFilterUsingSearchBar is false', () => {
+    const mockSubstringFilter = vi.fn();
+    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
+
+    renderObjectTable({ shouldFilterUsingSearchBar: false });
+
+    expect(mockSubstringFilter).not.toHaveBeenCalled();
+    mockObjects.forEach((obj) => {
+      expect(screen.getByText(obj.nameDisplay)).toBeInTheDocument();
+    });
+  });
+
+  it('handles column visibility toggling', async () => {
+    const { rerender } = renderObjectTable();
+
+    // Initially, both columns should be visible
+    expectColumnHeaders();
+
+    // Open column selector
+    await act(async () => {
+      await fireEvent.click(screen.getByText(/2\/2 columns visible, click here to toggle/i));
+    });
+
+    // Click checkbox to hide Population column
+    await act(async () => {
+      const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
+      await fireEvent.click(populationCheckbox);
+    });
+
+    // Force rerender to ensure state updates are applied
+    rerenderObjectTable(rerender);
+
+    // Verify only Name column is visible
+    expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
+    expect(screen.queryByRole('columnheader', { name: /Population/i })).not.toBeInTheDocument();
+    expect(screen.getAllByRole('columnheader')).toHaveLength(1);
+
+    // Click checkbox to show Population column again
+    await act(async () => {
+      const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
+      await fireEvent.click(populationCheckbox);
+    });
+
+    // Force rerender to ensure state updates are applied
+    rerenderObjectTable(rerender);
+
+    // Verify both columns are visible again
+    expectColumnHeaders();
+  });
+});

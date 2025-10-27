@@ -1,6 +1,11 @@
 import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import {
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+  VitalityISO,
+} from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { ProfileType } from './Profiles';
@@ -62,6 +67,9 @@ export enum PageParamKey {
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
   view = 'view',
+  vitalityISO = 'vitalityISO',
+  vitalityEth2013 = 'vitalityEth2013',
+  vitalityEth2025 = 'vitalityEth2025',
 }
 
 export type PageParams = {
@@ -80,6 +88,9 @@ export type PageParams = {
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
+  vitalityISO: VitalityISO[];
+  vitalityEth2013: VitalityEthnologueFine[];
+  vitalityEth2025: VitalityEthnologueCoarse[];
 };
 
 export type PageParamsOptional = {
@@ -98,4 +109,7 @@ export type PageParamsOptional = {
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;
+  vitalityISO?: VitalityISO[];
+  vitalityEth2013?: VitalityEthnologueFine[];
+  vitalityEth2025?: VitalityEthnologueCoarse[];
 };

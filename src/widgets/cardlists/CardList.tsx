@@ -5,6 +5,7 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 import {
   getFilterBySubstring,
   getFilterByTerritory,
+  getFilterByVitality,
   getScopeFilter,
   getSliceFunction,
 } from '@features/filtering/filter';
@@ -30,6 +31,7 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const filterByScope = getScopeFilter();
+  const filterByVitality = getFilterByVitality();
   const sliceFunction = getSliceFunction<T>();
 
   const objectsVisible = useMemo(
@@ -37,11 +39,20 @@ function CardList<T extends ObjectData>({ objects, renderCard }: Props<T>) {
       sliceFunction(
         objects
           .filter(filterByScope)
+          .filter(filterByVitality)
           .filter(filterByTerritory)
           .filter(filterBySubstring)
           .sort(sortBy),
       ),
-    [objects, filterByScope, filterByTerritory, filterBySubstring, sortBy, sliceFunction],
+    [
+      objects,
+      filterByScope,
+      filterByVitality,
+      filterByTerritory,
+      filterBySubstring,
+      sortBy,
+      sliceFunction,
+    ],
   );
 
   if (objectsVisible.length === 1) {
