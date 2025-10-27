@@ -1,23 +1,17 @@
 import { screen, fireEvent, render } from '@testing-library/react';
 import React from 'react';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
-import {
-  LocaleSeparator,
-  ObjectType,
-  View,
-  SearchableField,
-} from '@features/page-params/PageParamTypes';
-import { ProfileType } from '@features/page-params/Profiles';
+import { View, SearchableField, PageParamsOptional } from '@features/page-params/PageParamTypes';
 import { usePageParams } from '@features/page-params/usePageParams';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   VitalityISO,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
+
+import { createMockUsePageParams } from '@tests/MockObjects';
 
 import FilterPath from './FilterPath';
 
@@ -43,32 +37,25 @@ vi.mock('@shared/ui/HoverableButton', () => ({
 }));
 
 describe('FilterPath', () => {
-  const mockUpdatePageParams = vi.fn();
+  let mockUsePageParams: ReturnType<typeof createMockUsePageParams>;
+  let mockUpdatePageParams: ReturnType<typeof vi.fn>;
 
-  const defaultMockParams = {
-    languageScopes: [],
-    territoryScopes: [],
-    vitalityISO: [],
-    vitalityEth2013: [],
-    vitalityEth2025: [],
-    searchBy: SearchableField.AllNames,
-    searchString: '',
-    territoryFilter: '',
-    languageSource: LanguageSource.All,
-    objectID: undefined,
-    objectType: ObjectType.Language,
-    page: 1,
-    profile: ProfileType.LanguageEthusiast,
-    view: View.CardList,
-    limit: 12,
-    localeSeparator: LocaleSeparator.Underscore,
-    sortBehavior: SortBehavior.Normal,
-    sortBy: SortBy.Population,
-    updatePageParams: mockUpdatePageParams,
+  // Helper function to eliminate mock setup duplication
+  const setupMockParams = (overrides: PageParamsOptional = {}) => {
+    mockUsePageParams = createMockUsePageParams(overrides);
+    mockUsePageParams.updatePageParams = mockUpdatePageParams;
+    (usePageParams as Mock).mockReturnValue(mockUsePageParams);
+  };
+
+  // Helper function to eliminate clear button interaction duplication
+  const clickClearButton = () => {
+    const clearButton = screen.getByRole('button', { name: 'reset' });
+    fireEvent.click(clearButton);
   };
 
   beforeEach(() => {
-    vi.mocked(usePageParams).mockReturnValue(defaultMockParams);
+    mockUpdatePageParams = vi.fn();
+    setupMockParams();
     mockUpdatePageParams.mockReset();
   });
 
@@ -78,91 +65,53 @@ describe('FilterPath', () => {
   });
 
   it('displays ISO vitality filter when selected', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityISO: [VitalityISO.Living],
-    });
-
+    setupMockParams({ vitalityISO: [VitalityISO.Living] });
     render(<FilterPath />);
     expect(screen.getByText(/ISO Vitality:/)).toBeInTheDocument();
     expect(screen.getByText(/Living/)).toBeInTheDocument();
   });
 
   it('displays Ethnologue 2013 filter when selected', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityEth2013: [VitalityEthnologueFine.National],
-    });
-
+    setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
     render(<FilterPath />);
     expect(screen.getByText(/Ethnologue 2013:/)).toBeInTheDocument();
     expect(screen.getByText(/National/)).toBeInTheDocument();
   });
 
   it('displays Ethnologue 2025 filter when selected', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityEth2025: [VitalityEthnologueCoarse.Stable],
-    });
-
+    setupMockParams({ vitalityEth2025: [VitalityEthnologueCoarse.Stable] });
     render(<FilterPath />);
     expect(screen.getByText(/Ethnologue 2025:/)).toBeInTheDocument();
     expect(screen.getByText(/Stable/)).toBeInTheDocument();
   });
 
   it('clears ISO vitality filter when X button is clicked', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityISO: [VitalityISO.Living],
-    });
-
+    setupMockParams({ vitalityISO: [VitalityISO.Living] });
     render(<FilterPath />);
-    const clearButton = screen.getByRole('button', { name: /reset/i });
-    fireEvent.click(clearButton);
-
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({
-      vitalityISO: [],
-    });
+    clickClearButton();
+    expect(mockUpdatePageParams).toHaveBeenCalledWith({ vitalityISO: [] });
   });
 
   it('clears Ethnologue 2013 filter when X button is clicked', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityEth2013: [VitalityEthnologueFine.National],
-    });
-
+    setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
     render(<FilterPath />);
-    const clearButton = screen.getByRole('button', { name: /reset/i });
-    fireEvent.click(clearButton);
-
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({
-      vitalityEth2013: [],
-    });
+    clickClearButton();
+    expect(mockUpdatePageParams).toHaveBeenCalledWith({ vitalityEth2013: [] });
   });
 
   it('clears Ethnologue 2025 filter when X button is clicked', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityEth2025: [VitalityEthnologueCoarse.Stable],
-    });
-
+    setupMockParams({ vitalityEth2025: [VitalityEthnologueCoarse.Stable] });
     render(<FilterPath />);
-    const clearButton = screen.getByRole('button', { name: /reset/i });
-    fireEvent.click(clearButton);
-
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({
-      vitalityEth2025: [],
-    });
+    clickClearButton();
+    expect(mockUpdatePageParams).toHaveBeenCalledWith({ vitalityEth2025: [] });
   });
 
   it('displays multiple vitality filters correctly', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
+    setupMockParams({
       vitalityISO: [VitalityISO.Living],
       vitalityEth2013: [VitalityEthnologueFine.National],
       vitalityEth2025: [VitalityEthnologueCoarse.Stable],
     });
-
     render(<FilterPath />);
     expect(screen.getByText(/ISO Vitality:/)).toBeInTheDocument();
     expect(screen.getByText(/Living/)).toBeInTheDocument();
@@ -173,59 +122,34 @@ describe('FilterPath', () => {
   });
 
   it('displays multiple values within same vitality type', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      vitalityISO: [VitalityISO.Living, VitalityISO.Constructed],
-    });
-
+    setupMockParams({ vitalityISO: [VitalityISO.Living, VitalityISO.Constructed] });
     render(<FilterPath />);
     expect(screen.getByText(/Living, Constructed/)).toBeInTheDocument();
   });
 
   it('does not display vitality filters in details view', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      view: View.Details,
-      vitalityISO: [VitalityISO.Living],
-    });
-
+    setupMockParams({ view: View.Details, vitalityISO: [VitalityISO.Living] });
     render(<FilterPath />);
     expect(screen.queryByText(/ISO Vitality:/)).not.toBeInTheDocument();
   });
 
   it('displays and clears territory filter', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
-      territoryFilter: 'TestTerritory',
-    });
-
+    setupMockParams({ territoryFilter: 'TestTerritory' });
     render(<FilterPath />);
     expect(screen.getByText(/TestTerritory/)).toBeInTheDocument();
-
-    const clearButton = screen.getByRole('button', { name: /reset/i });
-    fireEvent.click(clearButton);
-
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({
-      territoryFilter: '',
-    });
+    clickClearButton();
+    expect(mockUpdatePageParams).toHaveBeenCalledWith({ territoryFilter: '' });
   });
 
   it('displays and clears search string with field', () => {
-    vi.mocked(usePageParams).mockReturnValue({
-      ...defaultMockParams,
+    setupMockParams({
       searchString: 'TestSearch',
       searchBy: SearchableField.AllNames,
     });
-
     render(<FilterPath />);
     expect(screen.getByText(/contains/)).toBeInTheDocument();
     expect(screen.getByText(/TestSearch/)).toBeInTheDocument();
-
-    const clearButton = screen.getByRole('button', { name: /reset/i });
-    fireEvent.click(clearButton);
-
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({
-      searchString: '',
-    });
+    clickClearButton();
+    expect(mockUpdatePageParams).toHaveBeenCalledWith({ searchString: '' });
   });
 });

@@ -1,6 +1,4 @@
-/**
- * This is a set of mock objects for testing purposes.
- */
+import { vi } from 'vitest';
 
 import {
   computeOtherPopulationStatistics,
@@ -19,7 +17,16 @@ import {
   connectTerritoriesToParent,
   createRegionalLocales,
 } from '@features/data-loading/TerritoryData';
-import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+import { PageParamsContextState } from '@features/page-params/PageParamsContext';
+import {
+  LocaleSeparator,
+  ObjectType,
+  PageParamsOptional,
+  SearchableField,
+  View,
+} from '@features/page-params/PageParamTypes';
+import { ProfileType } from '@features/page-params/Profiles';
+import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
@@ -367,4 +374,39 @@ function getMockedDataContext(objects: ObjectDictionary): DataContextType {
   };
 
   return dataContext;
+}
+
+/**
+ * Creates a mock PageParamsContextState object for testing purposes.
+ * This provides sensible defaults that can be overridden as needed.
+ *
+ * @param overrides - Optional overrides for specific PageParams properties
+ * @returns A mock PageParamsContextState object
+ */
+export function createMockUsePageParams(
+  overrides: PageParamsOptional = {},
+): PageParamsContextState {
+  const mockUpdatePageParams = vi.fn();
+
+  return {
+    vitalityISO: [],
+    vitalityEth2013: [],
+    vitalityEth2025: [],
+    languageScopes: [],
+    languageSource: LanguageSource.ISO,
+    limit: 10,
+    localeSeparator: LocaleSeparator.Underscore,
+    objectType: ObjectType.Language,
+    page: 0,
+    profile: ProfileType.LanguageEthusiast,
+    searchBy: SearchableField.NameOrCode,
+    searchString: '',
+    sortBehavior: SortBehavior.Normal,
+    sortBy: null as unknown as SortBy,
+    territoryFilter: '',
+    territoryScopes: [],
+    view: View.CardList,
+    updatePageParams: mockUpdatePageParams,
+    ...overrides,
+  };
 }

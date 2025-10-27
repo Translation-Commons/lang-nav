@@ -18,6 +18,11 @@ import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
+  getVitalityISOLabel,
+  getVitalityEthnologueFineLabel,
+  getVitalityEthnologueCoarseLabel,
+} from '@entities/language/vitality/VitalityStrings';
+import {
   VitalityISO,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
@@ -79,11 +84,11 @@ describe('VitalitySelector', () => {
   it('renders all three vitality selectors', () => {
     render(
       <HoverCardProvider>
-        <div className="flex flex-col gap-4">
+        <>
           <VitalityISOSelector />
           <VitalityEth2013Selector />
           <VitalityEth2025Selector />
-        </div>
+        </>
       </HoverCardProvider>,
     );
 
@@ -99,10 +104,11 @@ describe('VitalitySelector', () => {
           <VitalityISOSelector />
         </HoverCardProvider>,
       );
-      const expected = ['Living', 'Constructed', 'Historical', 'Extinct', 'Unknown'];
+      const expected = Object.values(VitalityISO).filter((v) => typeof v === 'number');
 
       expected.forEach((status) => {
-        expect(screen.getByText(status)).toBeInTheDocument();
+        const label = getVitalityISOLabel(status);
+        expect(screen.getByText(label)).toBeInTheDocument();
       });
     });
 
@@ -118,7 +124,7 @@ describe('VitalitySelector', () => {
 
       // Test selection
       const livingButton = screen.getByRole('button', { name: 'Living' });
-      expect(livingButton).toHaveClass('unselected');
+      expect(livingButton).toHaveClass('selectorOption unselected');
       await user.click(livingButton);
       expect(mockUpdatePageParams).toHaveBeenCalledWith({
         vitalityISO: [VitalityISO.Living],
@@ -137,7 +143,7 @@ describe('VitalitySelector', () => {
 
       // Test deselection
       const selectedLivingButton = screen.getByRole('button', { name: 'Living' });
-      expect(selectedLivingButton).toHaveClass('selected');
+      expect(selectedLivingButton).toHaveClass('selectorOption selected');
       await user.click(selectedLivingButton);
       expect(mockUpdatePageParams).toHaveBeenCalledWith({
         vitalityISO: [],
@@ -153,21 +159,11 @@ describe('VitalitySelector', () => {
         </HoverCardProvider>,
       );
 
-      const expected = [
-        'National',
-        'Regional',
-        'Trade',
-        'Educational',
-        'Developing',
-        'Threatened',
-        'Shifting',
-        'Moribund',
-        'Dormant',
-        'Extinct',
-      ];
+      const expected = Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number');
 
       expected.forEach((status) => {
-        expect(screen.getByText(status)).toBeInTheDocument();
+        const label = getVitalityEthnologueFineLabel(status);
+        expect(screen.getByText(label)).toBeInTheDocument();
       });
     });
 
@@ -183,7 +179,7 @@ describe('VitalitySelector', () => {
 
       // Test selection
       const nationalButton = screen.getByRole('button', { name: 'National' });
-      expect(nationalButton).toHaveClass('unselected');
+      expect(nationalButton).toHaveClass('selectorOption unselected');
       await user.click(nationalButton);
       expect(mockUpdatePageParams).toHaveBeenCalledWith({
         vitalityEth2013: [VitalityEthnologueFine.National],
@@ -202,7 +198,7 @@ describe('VitalitySelector', () => {
 
       // Test deselection
       const selectedNational = screen.getByRole('button', { name: 'National' });
-      expect(selectedNational).toHaveClass('selected');
+      expect(selectedNational).toHaveClass('selectorOption selected');
 
       // Reset the mock to ensure we only track new calls
       mockUpdatePageParams.mockClear();
@@ -225,10 +221,11 @@ describe('VitalitySelector', () => {
         </HoverCardProvider>,
       );
 
-      const expected = ['Institutional', 'Stable', 'Endangered', 'Extinct'];
+      const expected = Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number');
 
       expected.forEach((status) => {
-        expect(screen.getByText(status)).toBeInTheDocument();
+        const label = getVitalityEthnologueCoarseLabel(status);
+        expect(screen.getByText(label)).toBeInTheDocument();
       });
     });
 
@@ -244,7 +241,7 @@ describe('VitalitySelector', () => {
 
       // Test selection
       const institutionalButton = screen.getByRole('button', { name: 'Institutional' });
-      expect(institutionalButton).toHaveClass('unselected');
+      expect(institutionalButton).toHaveClass('selectorOption unselected');
       await user.click(institutionalButton);
       expect(mockUpdatePageParams).toHaveBeenCalledWith({
         vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
@@ -263,7 +260,7 @@ describe('VitalitySelector', () => {
 
       // Test deselection
       const selectedInstitutional = screen.getByRole('button', { name: 'Institutional' });
-      expect(selectedInstitutional).toHaveClass('selected');
+      expect(selectedInstitutional).toHaveClass('selectorOption selected');
 
       // Reset the mock to ensure we only track new calls
       mockUpdatePageParams.mockClear();

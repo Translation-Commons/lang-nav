@@ -2,24 +2,22 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
-import { HoverCardProvider } from '@widgets/HoverCardContext';
-
 import * as FilterModule from '@features/filtering/filter';
 import PageParamsProvider from '@features/page-params/PageParamsProvider';
-import {
-  ObjectType,
-  LocaleSeparator,
-  View,
-  SearchableField,
-} from '@features/page-params/PageParamTypes';
-import { ProfileType } from '@features/page-params/Profiles';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import { usePageParams } from '@features/page-params/usePageParams';
 import * as SortModule from '@features/sorting/sort';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { SortBy } from '@features/sorting/SortTypes';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
+import { createMockUsePageParams } from '@tests/MockObjects';
+
 import ObjectTable, { TableColumn, ValueType } from '../ObjectTable';
+
+vi.mock('@widgets/HoverCardContext', () => ({
+  useHoverCard: vi.fn().mockReturnValue({}),
+}));
 
 vi.mock('@features/filtering/filter', () => ({
   getFilterBySubstring: vi.fn(),
@@ -35,28 +33,7 @@ vi.mock('@features/sorting/sort', () => ({
 }));
 
 vi.mock('@features/page-params/usePageParams', () => ({
-  usePageParams: vi.fn().mockReturnValue({
-    vitalityISO: [],
-    vitalityEth2013: [],
-    vitalityEth2025: [],
-    languageScopes: [],
-    languageSource: LanguageSource.ISO,
-    limit: 10,
-    localeSeparator: LocaleSeparator.Underscore,
-    objectType: ObjectType.Language,
-    page: 0,
-    profile: 'default' as ProfileType,
-    searchBy: SearchableField.NameOrCode,
-    searchString: '',
-    sortBehavior: SortBehavior.Normal,
-    sortBy: null as unknown as SortBy,
-    setSortBy: vi.fn(),
-    clearSortBy: vi.fn(),
-    territoryFilter: '',
-    territoryScopes: [],
-    view: View.CardList,
-    updatePageParams: vi.fn(),
-  }),
+  usePageParams: vi.fn(),
 }));
 
 vi.mock('@features/stored-params/useStoredParams', () => {
@@ -144,30 +121,47 @@ describe('ObjectTable', () => {
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
     vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
+    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({}));
   });
 
   afterEach(() => {
     vi.clearAllMocks();
   });
 
-  const TestWrapper = ({ children }: { children: React.ReactNode }) => (
-    <BrowserRouter>
-      <PageParamsProvider>
-        <HoverCardProvider>{children}</HoverCardProvider>
-      </PageParamsProvider>
-    </BrowserRouter>
-  );
-
-  it('renders table with all columns and data', () => {
-    render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
+  // Helper function to eliminate render wrapper duplication
+  const renderObjectTable = (props = {}) => {
+    return render(
+      <BrowserRouter>
+        <PageParamsProvider>
+          <ObjectTable objects={mockObjects} columns={mockColumns} {...props} />
+        </PageParamsProvider>
+      </BrowserRouter>,
     );
+  };
 
-    // Check column headers
+  // Helper function to eliminate rerender duplication
+  const rerenderObjectTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
+    rerender(
+      <BrowserRouter>
+        <PageParamsProvider>
+          <ObjectTable objects={mockObjects} columns={mockColumns} {...props} />
+        </PageParamsProvider>
+      </BrowserRouter>,
+    );
+  };
+
+  // Helper function to eliminate column header assertions
+  const expectColumnHeaders = (expectedCount = 2) => {
+    expect(screen.getAllByRole('columnheader')).toHaveLength(expectedCount);
     expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
     expect(screen.getByRole('columnheader', { name: /Population/i })).toBeInTheDocument();
+  };
+
+  it('renders table with all columns and data', () => {
+    renderObjectTable();
+
+    // Check column headers
+    expectColumnHeaders();
 
     // Check data rows
     mockObjects.forEach((obj) => {
@@ -189,11 +183,7 @@ describe('ObjectTable', () => {
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
 
-    render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    renderObjectTable();
 
     expect(mockSubstringFilter).toHaveBeenCalled();
     expect(mockTerritoryFilter).toHaveBeenCalled();
@@ -205,11 +195,7 @@ describe('ObjectTable', () => {
     const mockSort = vi.fn(() => 0);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(mockSort);
 
-    render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    renderObjectTable();
 
     expect(mockSort).toHaveBeenCalled();
   });
@@ -217,11 +203,7 @@ describe('ObjectTable', () => {
   it('handles filtering that excludes all objects', () => {
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => false);
 
-    render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    renderObjectTable();
 
     mockObjects.forEach((obj) => {
       expect(screen.queryByText(obj.nameDisplay)).not.toBeInTheDocument();
@@ -232,11 +214,7 @@ describe('ObjectTable', () => {
     // Make filter return true only for the first object
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue((obj) => obj.ID === '1');
 
-    render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    renderObjectTable();
 
     // Should show details for the first object
     expect(screen.getByText('Test Territory 1', { selector: 'strong' })).toBeInTheDocument();
@@ -247,11 +225,7 @@ describe('ObjectTable', () => {
     const mockSlice = vi.fn((items) => items.slice(0, 1));
     vi.mocked(FilterModule.getSliceFunction).mockReturnValue(mockSlice);
 
-    render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    renderObjectTable();
 
     expect(mockSlice).toHaveBeenCalled();
     expect(screen.getByRole('cell', { name: 'Test Territory 1' })).toBeInTheDocument();
@@ -264,11 +238,7 @@ describe('ObjectTable', () => {
       population: 1234567,
     };
 
-    render(
-      <TestWrapper>
-        <ObjectTable objects={[numericObject]} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    renderObjectTable({ objects: [numericObject] });
 
     expect(screen.getByRole('cell', { name: '1,234,567' })).toBeInTheDocument();
   });
@@ -277,15 +247,7 @@ describe('ObjectTable', () => {
     const mockSubstringFilter = vi.fn();
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
 
-    render(
-      <TestWrapper>
-        <ObjectTable
-          objects={mockObjects}
-          columns={mockColumns}
-          shouldFilterUsingSearchBar={false}
-        />
-      </TestWrapper>,
-    );
+    renderObjectTable({ shouldFilterUsingSearchBar: false });
 
     expect(mockSubstringFilter).not.toHaveBeenCalled();
     mockObjects.forEach((obj) => {
@@ -294,20 +256,14 @@ describe('ObjectTable', () => {
   });
 
   it('handles column visibility toggling', async () => {
-    const { rerender } = render(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    const { rerender } = renderObjectTable();
 
     // Initially, both columns should be visible
-    expect(screen.getAllByRole('columnheader')).toHaveLength(2);
-    expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
-    expect(screen.getByRole('columnheader', { name: /Population/i })).toBeInTheDocument();
+    expectColumnHeaders();
 
     // Open column selector
     await act(async () => {
-      await fireEvent.click(screen.getByText(/2\/2 columns visible/i));
+      await fireEvent.click(screen.getByText(/2\/2 columns visible, click here to toggle/i));
     });
 
     // Click checkbox to hide Population column
@@ -317,11 +273,7 @@ describe('ObjectTable', () => {
     });
 
     // Force rerender to ensure state updates are applied
-    rerender(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    rerenderObjectTable(rerender);
 
     // Verify only Name column is visible
     expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
@@ -335,15 +287,9 @@ describe('ObjectTable', () => {
     });
 
     // Force rerender to ensure state updates are applied
-    rerender(
-      <TestWrapper>
-        <ObjectTable objects={mockObjects} columns={mockColumns} />
-      </TestWrapper>,
-    );
+    rerenderObjectTable(rerender);
 
     // Verify both columns are visible again
-    expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
-    expect(screen.getByRole('columnheader', { name: /Population/i })).toBeInTheDocument();
-    expect(screen.getAllByRole('columnheader')).toHaveLength(2);
+    expectColumnHeaders();
   });
 });
