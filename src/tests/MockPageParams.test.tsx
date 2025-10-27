@@ -33,6 +33,9 @@ export const createMockUsePageParams = (
   languageSource: LanguageSource.All,
   localeSeparator: LocaleSeparator.Underscore,
   territoryFilter: '',
+  vitalityISO: [],
+  vitalityEth2013: [],
+  vitalityEth2025: [],
   ...overrides,
 });
 
