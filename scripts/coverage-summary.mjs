@@ -66,8 +66,7 @@ Object.entries(inputItems).forEach(([name, coverage]) => {
 function printNode(node) {
   if (node.name) {
     const parentPath = '\u00A0\u00A0'.repeat(node.depth);
-    const fullPath = parentPath + (node.name || '');
-    printFileRow(fullPath, node.coverage);
+    printFileRow(parentPath + node.name, node.coverage);
   }
   Object.values(node.children)
     .sort((a, b) => a.name.localeCompare(b.name))
