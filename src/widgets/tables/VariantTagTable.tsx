@@ -4,7 +4,8 @@ import React from 'react';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { VariantTagData } from '@entities/types/DataTypes';
@@ -25,7 +26,7 @@ const VariantTagTable: React.FC = () => {
           key: 'Date Added',
           render: (object) => object.dateAdded?.toLocaleDateString(),
           isInitiallyVisible: false,
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.Date,
         },
         {
@@ -33,7 +34,7 @@ const VariantTagTable: React.FC = () => {
           render: (object) => (
             <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
           ),
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
         },
         {
@@ -55,7 +56,7 @@ const VariantTagTable: React.FC = () => {
           ),
           render: (object) => getObjectPopulation(object),
           isInitiallyVisible: false,
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,
         },
       ]}

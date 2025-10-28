@@ -3,7 +3,8 @@ import React from 'react';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
@@ -30,7 +31,7 @@ const TableOfAllCensuses: React.FC = () => {
               )}
             />
           ),
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
         },
         {
@@ -39,7 +40,7 @@ const TableOfAllCensuses: React.FC = () => {
             census.eligiblePopulation != null
               ? census.eligiblePopulation.toLocaleString()
               : 'Unknown',
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,
           columnGroup: 'Population',
         },
@@ -49,7 +50,7 @@ const TableOfAllCensuses: React.FC = () => {
             census.territory && census.eligiblePopulation != null
               ? getObjectPercentOfTerritoryPopulation(census)?.toFixed(1)
               : 'Unknown',
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           isInitiallyVisible: false,
           sortParam: SortBy.PercentOfTerritoryPopulation,
           columnGroup: 'Population',
@@ -70,7 +71,7 @@ const TableOfAllCensuses: React.FC = () => {
               <Deemphasized>multiple</Deemphasized>
             ),
           isInitiallyVisible: false,
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.Date,
         },
       ]}

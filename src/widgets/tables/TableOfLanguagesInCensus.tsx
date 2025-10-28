@@ -6,7 +6,8 @@ import { ObjectType, SearchableField } from '@features/page-params/PageParamType
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData } from '@entities/types/DataTypes';
@@ -103,7 +104,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Population',
             render: (loc) => loc.populationSpeaking,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.Population,
           },
           {
@@ -112,14 +113,14 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               loc.populationSpeakingPercent != null
                 ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
                 : 'N/A',
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             sortParam: SortBy.PercentOfTerritoryPopulation,
           },
           {
             key: 'Scope',
             render: (loc) => loc.language?.scope,
             isInitiallyVisible: false,
-            valueType: ValueType.Enum,
+            valueType: TableValueType.Enum,
           },
           {
             key: 'Locale Entry',
@@ -138,7 +139,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               </Hoverable>
             ),
             render: getPopulationDifference,
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
           },
           {
             key: 'Percent of Worldwide in Language',
@@ -147,7 +148,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               numberToFixedUnlessSmall(
                 (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
               ) + '%',
-            valueType: ValueType.Numeric,
+            valueType: TableValueType.Numeric,
             isInitiallyVisible: false,
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           },

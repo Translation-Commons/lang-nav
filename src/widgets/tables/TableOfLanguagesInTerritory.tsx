@@ -2,7 +2,8 @@ import React from 'react';
 
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
-import ObjectTable, { ValueType } from '@features/table/ObjectTable';
+import ObjectTable from '@features/table/ObjectTable';
+import TableValueType from '@features/table/TableValueType';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
@@ -51,13 +52,13 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
         {
           key: 'Population',
           render: (loc) => loc.populationSpeaking?.toLocaleString() ?? '—',
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,
         },
         {
           key: 'Population Source',
           render: (loc) => <LocaleCensusCitation locale={loc} size="short" />,
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           isInitiallyVisible: false,
         },
         {
@@ -73,7 +74,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
             ) : (
               'N/A'
             ),
-          valueType: ValueType.Numeric,
+          valueType: TableValueType.Numeric,
           sortParam: SortBy.PercentOfTerritoryPopulation,
         },
       ]}

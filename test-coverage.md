@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    29.1 |    75.3 |    43.2 |    29.1 |
+| `src`                                    |    29.1 |    75.3 |    43.3 |    29.1 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -50,7 +50,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    38.6 |    77.5 |    30.5 |    38.6 |
+| `  features`                             |    38.7 |    77.4 |    31.1 |    38.7 |
 | `    data-loading`                       |    28.6 |    71.9 |    26.8 |    28.6 |
 | `      CensusData.tsx`                   |     2.7 |   100.0 |     0   |     2.7 |
 | `      context`                          |    11.4 |    50.0 |    11.1 |    11.4 |
@@ -92,11 +92,13 @@
 | `      SortTypes.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    stored-params`                      |    72.2 |    64.3 |   100.0 |    72.2 |
 | `      useStoredParams.tsx`              |    72.2 |    64.3 |   100.0 |    72.2 |
-| `    table`                              |    94.8 |    88.7 |    76.9 |    94.8 |
+| `    table`                              |    94.9 |    88.6 |    78.6 |    94.9 |
 | `      CommonColumns.tsx`                |    82.8 |   100.0 |     0   |    82.8 |
-| `      ObjectTable.tsx`                  |    94.7 |    75.0 |   100.0 |    94.7 |
+| `      ObjectTable.tsx`                  |    94.5 |    69.2 |   100.0 |    94.5 |
+| `      TableColumn.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      TableColumnSelector.tsx`          |    94.3 |    87.0 |   100.0 |    94.3 |
 | `      TableSortButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
+| `      TableValueType.ts`                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      useColumnVisibility.tsx`          |    97.7 |    90.9 |   100.0 |    97.7 |
 | `    treelist`                           |    16.5 |   100.0 |     0   |    16.5 |
 | `      filterBranch.tsx`                 |     4.2 |   100.0 |     0   |     4.2 |
@@ -210,7 +212,7 @@
 | `      LanguagesWithIdenticalNames.tsx`  |     0   |     0   |     0   |     0   |
 | `      PotentialLocales.tsx`             |     0   |     0   |     0   |     0   |
 | `      TableOfCountriesWithCensuses.tsx` |     0   |   100.0 |   100.0 |     0   |
-| `    tables`                             |     3.4 |    50.0 |    38.5 |     3.4 |
+| `    tables`                             |     3.5 |    50.0 |    38.5 |     3.5 |
 | `      columns`                          |     0   |    25.0 |    25.0 |     0   |
 | `        LanguageDigitalSupportColumns.tsx` |     0   |   100.0 |   100.0 |     0   |
 | `        LanguagePopulationColumns.tsx`  |     0   |     0   |     0   |     0   |
@@ -219,8 +221,8 @@
 | `      LanguageTable.tsx`                |     0   |     0   |     0   |     0   |
 | `      LocaleTable.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      TableOfAllCensuses.tsx`           |     0   |   100.0 |   100.0 |     0   |
-| `      TableOfLanguagesInCensus.tsx`     |    11.7 |   100.0 |     0   |    11.7 |
-| `      TableOfLanguagesInTerritory.tsx`  |    16.4 |   100.0 |     0   |    16.4 |
+| `      TableOfLanguagesInCensus.tsx`     |    12.3 |   100.0 |     0   |    12.3 |
+| `      TableOfLanguagesInTerritory.tsx`  |    17.7 |   100.0 |     0   |    17.7 |
 | `      TerritoryTable.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `      VariantTagTable.tsx`              |     0   |     0   |     0   |     0   |
 | `      WritingSystemTable.tsx`           |     0   |   100.0 |   100.0 |     0   |

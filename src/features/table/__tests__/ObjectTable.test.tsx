@@ -11,7 +11,9 @@ import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import ObjectTable, { TableColumn, ValueType } from '../ObjectTable';
+import ObjectTable from '../ObjectTable';
+import TableColumn from '../TableColumn';
+import TableValueType from '../TableValueType';
 
 vi.mock('@widgets/HoverCardContext', () => ({
   useHoverCard: vi.fn().mockReturnValue({}),
@@ -64,7 +66,7 @@ describe('ObjectTable', () => {
       label: 'Name',
       render: (obj) => obj.nameDisplay,
       sortParam: SortBy.Name,
-      valueType: ValueType.String,
+      valueType: TableValueType.String,
     },
     {
       key: 'population',
@@ -76,7 +78,7 @@ describe('ObjectTable', () => {
         return '';
       },
       sortParam: SortBy.Population,
-      valueType: ValueType.Numeric,
+      valueType: TableValueType.Numeric,
     },
   ];
 

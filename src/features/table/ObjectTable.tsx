@@ -1,11 +1,9 @@
 import { InfoIcon } from 'lucide-react';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
 import ObjectDetails from '@widgets/details/ObjectDetails';
-
-import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
@@ -22,30 +20,14 @@ import {
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getSortFunction } from '../sorting/sort';
 
+import TableColumn from './TableColumn';
 import TableColumnSelector from './TableColumnSelector';
 import TableSortButton from './TableSortButton';
 import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
 
-export enum ValueType {
-  Numeric = 'numeric',
-  String = 'string',
-  Enum = 'enum',
-}
 const MAX_COLUMN_WIDTH = '10em';
-
-// Readonly, don't mutate the TableColumn definitions
-export interface TableColumn<T> {
-  readonly columnGroup?: string; // "Key" for the parent column
-  readonly isInitiallyVisible?: boolean;
-  readonly valueType?: ValueType;
-  readonly key: string;
-  readonly label?: React.ReactNode;
-  readonly description?: React.ReactNode;
-  readonly render: (object: T) => React.ReactNode;
-  readonly sortParam?: SortBy;
-}
 
 interface Props<T> {
   objects: T[];
@@ -119,7 +101,7 @@ function ObjectTable<T extends ObjectData>({
                 return (
                   <td
                     key={column.key}
-                    className={column.valueType === ValueType.Numeric ? 'numeric' : undefined}
+                    className={column.valueType}
                     style={{ maxWidth: MAX_COLUMN_WIDTH }}
                   >
                     {content}

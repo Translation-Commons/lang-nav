@@ -1,5 +1,6 @@
 import { SortBy } from '@features/sorting/SortTypes';
-import { TableColumn, ValueType } from '@features/table/ObjectTable';
+import TableColumn from '@features/table/TableColumn';
+import TableValueType from '@features/table/TableValueType';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
@@ -18,7 +19,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
       </>
     ),
     render: (object) => <LocalePopulationAdjusted locale={object} />,
-    valueType: ValueType.Numeric,
+    valueType: TableValueType.Numeric,
     sortParam: SortBy.Population,
     columnGroup: 'Demographics',
   },
@@ -26,7 +27,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: 'Population (Direct)',
     description: 'This is the original population number cited from sourced data.',
     render: (object) => object.populationSpeaking,
-    valueType: ValueType.Numeric,
+    valueType: TableValueType.Numeric,
     sortParam: SortBy.PopulationAttested,
     columnGroup: 'Demographics',
   },
@@ -40,7 +41,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
           {object.populationSpeakingPercent > 10 && <span style={{ visibility: 'hidden' }}>0</span>}
         </>
       ),
-    valueType: ValueType.Numeric,
+    valueType: TableValueType.Numeric,
     sortParam: SortBy.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
   },
@@ -51,7 +52,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
       numberToFixedUnlessSmall(
         (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
       ),
-    valueType: ValueType.Numeric,
+    valueType: TableValueType.Numeric,
     isInitiallyVisible: false,
     sortParam: SortBy.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',
