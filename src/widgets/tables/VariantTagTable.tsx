@@ -10,8 +10,8 @@ import TableValueType from '@features/table/TableValueType';
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { VariantTagData } from '@entities/types/DataTypes';
 
-import Hoverable from '@shared/ui/Hoverable';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 
 const VariantTagTable: React.FC = () => {
   const { variantTags } = useDataContext();

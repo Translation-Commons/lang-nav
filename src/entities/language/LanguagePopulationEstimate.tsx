@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 import LanguagePopulationOfDescendents from './LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';

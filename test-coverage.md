@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    29.1 |    75.3 |    43.3 |    29.1 |
+| `src`                                    |    30.2 |    76.0 |    45.2 |    30.2 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -50,7 +50,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    38.7 |    77.4 |    31.1 |    38.7 |
+| `  features`                             |    41.9 |    78.6 |    38.0 |    41.9 |
 | `    data-loading`                       |    28.6 |    71.9 |    26.8 |    28.6 |
 | `      CensusData.tsx`                   |     2.7 |   100.0 |     0   |     2.7 |
 | `      context`                          |    11.4 |    50.0 |    11.1 |    11.4 |
@@ -74,6 +74,14 @@
 | `      WikipediaData.tsx`                |     1.8 |   100.0 |     0   |     1.8 |
 | `    filtering`                          |    25.0 |   100.0 |    11.1 |    25.0 |
 | `      filter.tsx`                       |    25.0 |   100.0 |    11.1 |    25.0 |
+| `    hovercard`                          |    99.0 |    87.3 |    88.9 |    99.0 |
+| `      EmptyHoverCardProvider.tsx`       |   100.0 |   100.0 |    50.0 |   100.0 |
+| `      Hoverable.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
+| `      HoverableButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
+| `      HoverableEnumeration.tsx`         |   100.0 |    87.5 |   100.0 |   100.0 |
+| `      HoverCardContext.tsx`             |   100.0 |   100.0 |   100.0 |   100.0 |
+| `      HoverCardProvider.tsx`            |    97.6 |    80.0 |   100.0 |    97.6 |
+| `      useHoverCard.tsx`                 |   100.0 |    50.0 |   100.0 |   100.0 |
 | `    modal`                              |     0   |     0   |     0   |     0   |
 | `      ViewModal.tsx`                    |     0   |     0   |     0   |     0   |
 | `    page-params`                        |    40.6 |    47.1 |    14.3 |    40.6 |
@@ -118,7 +126,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    44.5 |    80.7 |    54.1 |    44.5 |
+| `  shared`                               |    36.9 |    82.2 |    51.7 |    36.9 |
 | `    containers`                         |    48.8 |   100.0 |   100.0 |    48.8 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -134,13 +142,10 @@
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
 | `      setUtils.ts`                      |    78.9 |    88.9 |    60.0 |    78.9 |
 | `      stringUtils.ts`                   |    51.6 |   100.0 |    40.0 |    51.6 |
-| `    ui`                                 |    46.6 |    75.0 |    57.1 |    46.6 |
+| `    ui`                                 |    27.9 |    75.0 |    50.0 |    27.9 |
 | `      CommaSeparated.tsx`               |    13.6 |   100.0 |     0   |    13.6 |
 | `      Deemphasized.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      Highlightable.tsx`                |    87.5 |    71.4 |   100.0 |    87.5 |
-| `      Hoverable.tsx`                    |    83.3 |    80.0 |    66.7 |    83.3 |
-| `      HoverableButton.tsx`              |    92.0 |    66.7 |    50.0 |    92.0 |
-| `      HoverableEnumeration.tsx`         |     0   |   100.0 |   100.0 |     0   |
 | `      LinkButton.tsx`                   |     4.2 |   100.0 |     0   |     4.2 |
 | `      PercentageDifference.tsx`         |     8.6 |   100.0 |     0   |     8.6 |
 | `  strings`                              |     0   |   100.0 |   100.0 |     0   |
@@ -148,7 +153,7 @@
 | `  tests`                                |    99.1 |    85.7 |    50.0 |    99.1 |
 | `    MockObjects.tsx`                    |    99.0 |    83.3 |    44.4 |    99.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    13.9 |    62.1 |    48.3 |    13.9 |
+| `  widgets`                              |    14.1 |    62.1 |    49.2 |    14.1 |
 | `    cardlists`                          |    53.9 |    93.3 |   100.0 |    53.9 |
 | `      CardList.tsx`                     |    96.5 |    88.9 |   100.0 |    96.5 |
 | `      CensusCardList.tsx`               |     0   |   100.0 |   100.0 |     0   |
@@ -194,7 +199,6 @@
 | `      TerritoryDetails.tsx`             |    55.5 |     6.7 |   100.0 |    55.5 |
 | `      VariantTagDetails.tsx`            |    15.4 |   100.0 |     0   |    15.4 |
 | `      WritingSystemDetails.tsx`         |     8.2 |   100.0 |     0   |     8.2 |
-| `    HoverCardContext.tsx`               |     4.3 |   100.0 |     0   |     4.3 |
 | `    Loading.tsx`                        |     0   |   100.0 |   100.0 |     0   |
 | `    PageFooter.tsx`                     |     0   |   100.0 |   100.0 |     0   |
 | `    PageNavBar.tsx`                     |     0   |   100.0 |   100.0 |     0   |

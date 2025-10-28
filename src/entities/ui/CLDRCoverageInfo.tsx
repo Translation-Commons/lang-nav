@@ -8,7 +8,7 @@ import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 export const CLDRCoverageText: React.FC<{
   object: LanguageData | LocaleData;

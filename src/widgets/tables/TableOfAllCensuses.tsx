@@ -11,7 +11,7 @@ import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPo
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 
 const TableOfAllCensuses: React.FC = () => {
   const { censuses, getLanguage } = useDataContext();

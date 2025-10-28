@@ -12,7 +12,7 @@ import { TerritoryData } from '@entities/types/DataTypes';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { sumBy } from '@shared/lib/setUtils';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();

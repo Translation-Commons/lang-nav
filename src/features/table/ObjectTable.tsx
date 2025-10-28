@@ -8,7 +8,7 @@ import ObjectDetails from '@widgets/details/ObjectDetails';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 import {
   getFilterBySubstring,

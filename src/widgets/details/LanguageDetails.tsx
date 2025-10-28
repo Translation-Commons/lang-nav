@@ -16,7 +16,7 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 import LinkButton from '@shared/ui/LinkButton';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';

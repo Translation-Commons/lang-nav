@@ -6,7 +6,7 @@ import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 export const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   if (locale.populationAdjusted == null) return null;

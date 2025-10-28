@@ -20,7 +20,7 @@ vi.mock('@features/page-params/usePageParams', () => ({
   default: vi.fn(),
 }));
 
-vi.mock('@shared/ui/HoverableButton', () => ({
+vi.mock('@features/hovercard/HoverableButton', () => ({
   default: ({
     children,
     onClick,

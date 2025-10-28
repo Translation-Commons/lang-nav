@@ -12,7 +12,7 @@ import getObjectFromID from '@entities/lib/getObjectFromID';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
-import HoverableButton from '@shared/ui/HoverableButton';
+import HoverableButton from '@features/hovercard/HoverableButton';
 
 import './modal.css';
 

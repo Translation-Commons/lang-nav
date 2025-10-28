@@ -17,7 +17,7 @@ import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 
 type Props = {

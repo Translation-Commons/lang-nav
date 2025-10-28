@@ -18,7 +18,7 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
-import HoverableButton from '@shared/ui/HoverableButton';
+import HoverableButton from '@features/hovercard/HoverableButton';
 
 const FilterPath: React.FC = () => {
   const {

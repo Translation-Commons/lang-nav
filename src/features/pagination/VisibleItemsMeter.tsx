@@ -7,7 +7,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 import { getFilterBySubstring, getFilterByTerritory, getScopeFilter } from '../filtering/filter';
 

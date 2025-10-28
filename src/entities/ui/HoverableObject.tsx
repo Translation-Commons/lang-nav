@@ -11,7 +11,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import VariantTagCard from '@entities/varianttag/VariantTagCard';
 import WritingSystemCard from '@entities/writingsystem/WritingSystemCard';
 
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 type Props = {
   object?: ObjectData;

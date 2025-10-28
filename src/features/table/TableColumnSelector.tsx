@@ -6,8 +6,8 @@ import usePageParams from '@features/page-params/usePageParams';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
-import Hoverable from '@shared/ui/Hoverable';
-import HoverableButton from '@shared/ui/HoverableButton';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableButton from '@features/hovercard/HoverableButton';
 
 import TableColumn from './TableColumn';
 import TableSortButton from './TableSortButton';

@@ -11,7 +11,7 @@ import React, { useCallback } from 'react';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy, SortBehavior, SortDirection } from '@features/sorting/SortTypes';
 
-import HoverableButton from '@shared/ui/HoverableButton';
+import HoverableButton from '@features/hovercard/HoverableButton';
 
 import { getNormalSortDirection } from '../sorting/sort';
 

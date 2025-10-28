@@ -1,11 +1,7 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useState,
-} from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+
+import EmptyHoverCardProvider from './EmptyHoverCardProvider';
+import HoverCardContext from './HoverCardContext';
 
 type HoverCardData = {
   content: React.ReactNode;
@@ -14,15 +10,7 @@ type HoverCardData = {
   visible: boolean;
 };
 
-type HoverCardContextType = {
-  showHoverCard: (content: React.ReactNode, x: number, y: number) => void;
-  hideHoverCard: () => void;
-  onMouseLeaveTriggeringElement: () => void; // Callback when the mouse leaves the triggering element
-};
-
-const HoverCardContext = createContext<HoverCardContextType | undefined>(undefined);
-
-export const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [hoverCard, setHoverCard] = useState<HoverCardData>({
     content: null,
     x: 0,
@@ -96,13 +84,7 @@ export const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
       value={{ showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement }}
     >
       {children}
-      <HoverCardContext.Provider
-        value={{
-          showHoverCard: () => null,
-          hideHoverCard: () => null,
-          onMouseLeaveTriggeringElement: () => null,
-        }}
-      >
+      <EmptyHoverCardProvider>
         {/** Prevent hovercard propagation */}
         <div
           ref={cardRef}
@@ -127,13 +109,9 @@ export const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ chi
         >
           {hoverCard.content}
         </div>
-      </HoverCardContext.Provider>
+      </EmptyHoverCardProvider>
     </HoverCardContext.Provider>
   );
 };
 
-export const useHoverCard = () => {
-  const context = useContext(HoverCardContext);
-  if (!context) throw new Error('useHoverCard must be used within a HoverCardProvider');
-  return context;
-};
+export default HoverCardProvider;

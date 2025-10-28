@@ -24,9 +24,7 @@ vi.mock('@features/sorting/sort', () => ({ getSortFunction: vi.fn() }));
 vi.mock('@features/page-params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams()),
 }));
-vi.mock('@widgets/HoverCardContext', () => ({
-  useHoverCard: vi.fn().mockReturnValue({}),
-}));
+vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
 
 describe('CardList', () => {
   const mockObjects: ObjectData[] = [

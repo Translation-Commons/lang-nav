@@ -3,7 +3,7 @@ import React from 'react';
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { groupBy, sumBy } from '@shared/lib/setUtils';
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 import { LanguageData } from './LanguageTypes';
 

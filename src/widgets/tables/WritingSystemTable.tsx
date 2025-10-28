@@ -10,7 +10,7 @@ import TableValueType from '@features/table/TableValueType';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
 
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 
 const WritingSystemTable: React.FC = () => {
   const { writingSystems } = useDataContext();

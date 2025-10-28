@@ -15,8 +15,8 @@ import {
 import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
 import { LanguagePopulationColumns } from './columns/LanguagePopulationColumns';
