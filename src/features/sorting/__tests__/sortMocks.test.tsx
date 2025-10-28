@@ -5,8 +5,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { getMockedObjects } from '@tests/MockObjects';
 
-import { getSortFunctionParameterized } from './sort';
-import { SortBehavior, SortBy } from './SortTypes';
+import { getSortFunctionParameterized } from '../sort';
+import { SortBehavior, SortBy } from '../SortTypes';
 
 const mockedObjects = getMockedObjects();
 

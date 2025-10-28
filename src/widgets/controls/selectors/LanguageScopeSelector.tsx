@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 

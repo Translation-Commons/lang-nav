@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import Selector from '../components/Selector';
 

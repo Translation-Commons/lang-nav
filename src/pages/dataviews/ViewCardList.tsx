@@ -6,7 +6,7 @@ import VariantTagCardList from '@widgets/cardlists/VariantTagCardList';
 import WritingSystemCardList from '@widgets/cardlists/WritingSystemCardList';
 
 import { ObjectType } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import './styles.css';
 

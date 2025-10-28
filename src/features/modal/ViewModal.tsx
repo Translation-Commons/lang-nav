@@ -6,7 +6,7 @@ import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import { View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import ObjectTitle from '@entities/ui/ObjectTitle';

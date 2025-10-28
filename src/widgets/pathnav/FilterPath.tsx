@@ -6,7 +6,7 @@ import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
 import { SearchableField, View } from '@features/page-params/PageParamTypes';
 import { getDefaultParams } from '@features/page-params/Profiles';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {

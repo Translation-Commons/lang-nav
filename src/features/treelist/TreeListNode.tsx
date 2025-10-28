@@ -2,7 +2,7 @@ import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import { ObjectType, SearchableField, View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';

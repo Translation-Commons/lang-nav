@@ -3,7 +3,7 @@ import React from 'react';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
 import { View, SearchableField, PageParamsOptional } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import {
   VitalityISO,
@@ -11,13 +11,13 @@ import {
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 
-import { createMockUsePageParams } from '@tests/MockObjects';
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import FilterPath from './FilterPath';
+import FilterPath from '../FilterPath';
 
 // Mock hooks and components
 vi.mock('@features/page-params/usePageParams', () => ({
-  usePageParams: vi.fn(),
+  default: vi.fn(),
 }));
 
 vi.mock('@shared/ui/HoverableButton', () => ({
@@ -37,14 +37,13 @@ vi.mock('@shared/ui/HoverableButton', () => ({
 }));
 
 describe('FilterPath', () => {
-  let mockUsePageParams: ReturnType<typeof createMockUsePageParams>;
-  let mockUpdatePageParams: ReturnType<typeof vi.fn>;
+  let updatePageParams: (params: PageParamsOptional) => void;
 
   // Helper function to eliminate mock setup duplication
   const setupMockParams = (overrides: PageParamsOptional = {}) => {
-    mockUsePageParams = createMockUsePageParams(overrides);
-    mockUsePageParams.updatePageParams = mockUpdatePageParams;
+    const mockUsePageParams = createMockUsePageParams(overrides);
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
+    updatePageParams = mockUsePageParams.updatePageParams;
   };
 
   // Helper function to eliminate clear button interaction duplication
@@ -54,9 +53,7 @@ describe('FilterPath', () => {
   };
 
   beforeEach(() => {
-    mockUpdatePageParams = vi.fn();
     setupMockParams();
-    mockUpdatePageParams.mockReset();
   });
 
   it('shows "No filters applied" when no filters are active', () => {
@@ -89,21 +86,21 @@ describe('FilterPath', () => {
     setupMockParams({ vitalityISO: [VitalityISO.Living] });
     render(<FilterPath />);
     clickClearButton();
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({ vitalityISO: [] });
+    expect(updatePageParams).toHaveBeenCalledWith({ vitalityISO: [] });
   });
 
   it('clears Ethnologue 2013 filter when X button is clicked', () => {
     setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
     render(<FilterPath />);
     clickClearButton();
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({ vitalityEth2013: [] });
+    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEth2013: [] });
   });
 
   it('clears Ethnologue 2025 filter when X button is clicked', () => {
     setupMockParams({ vitalityEth2025: [VitalityEthnologueCoarse.Stable] });
     render(<FilterPath />);
     clickClearButton();
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({ vitalityEth2025: [] });
+    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEth2025: [] });
   });
 
   it('displays multiple vitality filters correctly', () => {
@@ -138,7 +135,7 @@ describe('FilterPath', () => {
     render(<FilterPath />);
     expect(screen.getByText(/TestTerritory/)).toBeInTheDocument();
     clickClearButton();
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({ territoryFilter: '' });
+    expect(updatePageParams).toHaveBeenCalledWith({ territoryFilter: '' });
   });
 
   it('displays and clears search string with field', () => {
@@ -150,6 +147,6 @@ describe('FilterPath', () => {
     expect(screen.getByText(/contains/)).toBeInTheDocument();
     expect(screen.getByText(/TestSearch/)).toBeInTheDocument();
     clickClearButton();
-    expect(mockUpdatePageParams).toHaveBeenCalledWith({ searchString: '' });
+    expect(updatePageParams).toHaveBeenCalledWith({ searchString: '' });
   });
 });

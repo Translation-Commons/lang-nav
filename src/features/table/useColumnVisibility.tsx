@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 import useStoredParams from '@features/stored-params/useStoredParams';
 
 import { ObjectData } from '@entities/types/DataTypes';

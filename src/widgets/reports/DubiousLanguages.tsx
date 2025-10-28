@@ -9,7 +9,7 @@ import {
   getFilterByTerritory,
   getSliceFunction,
 } from '@features/filtering/filter';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';

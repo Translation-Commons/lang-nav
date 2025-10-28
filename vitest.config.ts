@@ -23,6 +23,7 @@ export default defineConfig({
         '**/*.stories.*',
         'dist/**',
         '*.config.*',
+        'scripts/coverage-summary.mjs',
       ],
       thresholds: {
         statements: 0,

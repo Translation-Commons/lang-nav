@@ -14,7 +14,7 @@ vi.mock('../../lib/getObjectFromID', () => ({
   default: vi.fn((id: string) => getBaseLanguageData(id, `OBJ:${id}`)),
 }));
 vi.mock('@features/page-params/usePageParams', () => ({
-  usePageParams: vi.fn().mockReturnValue(createMockUsePageParams({})),
+  default: vi.fn().mockReturnValue(createMockUsePageParams({})),
 }));
 vi.mock('@widgets/HoverCardContext', () => ({ useHoverCard: vi.fn().mockReturnValue({}) }));
 

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

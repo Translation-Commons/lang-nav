@@ -1,5 +1,5 @@
 import { View } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 import ViewCardList from './ViewCardList';
 import ViewDetails from './ViewDetails';

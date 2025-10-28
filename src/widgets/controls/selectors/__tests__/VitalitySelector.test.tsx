@@ -1,22 +1,10 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+import { describe, expect, it, beforeEach, afterEach, vi, Mock } from 'vitest';
 
-import { HoverCardProvider } from '@widgets/HoverCardContext';
+import { PageParamsOptional } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
 
-import {
-  ObjectType,
-  LocaleSeparator,
-  View,
-  SearchableField,
-  PageParams,
-  PageParamsOptional,
-} from '@features/page-params/PageParamTypes';
-import { ProfileType } from '@features/page-params/Profiles';
-import * as PageParamsHook from '@features/page-params/usePageParams';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
-
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getVitalityISOLabel,
   getVitalityEthnologueFineLabel,
@@ -28,6 +16,8 @@ import {
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
+
 import {
   VitalityISOSelector,
   VitalityEth2013Selector,
@@ -35,46 +25,24 @@ import {
 } from '../VitalitySelector';
 
 vi.mock('@features/page-params/usePageParams', () => ({
-  usePageParams: vi.fn(),
+  default: vi.fn(),
+}));
+vi.mock('@widgets/HoverCardContext', () => ({
+  useHoverCard: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
 }));
 
-type PageParamsContextState = PageParams & {
-  updatePageParams: (updates: PageParamsOptional) => void;
-};
-
-const mockUpdatePageParams = vi.fn();
-
-// Shared mock state generator
-const createMockState = (
-  vitality: {
-    vitalityISO?: VitalityISO[];
-    vitalityEth2013?: VitalityEthnologueFine[];
-    vitalityEth2025?: VitalityEthnologueCoarse[];
-  } = {},
-): PageParamsContextState => ({
-  vitalityISO: vitality.vitalityISO ?? [],
-  vitalityEth2013: vitality.vitalityEth2013 ?? [],
-  vitalityEth2025: vitality.vitalityEth2025 ?? [],
-  updatePageParams: mockUpdatePageParams,
-  languageScopes: [],
-  languageSource: LanguageSource.ISO,
-  limit: 10,
-  localeSeparator: LocaleSeparator.Underscore,
-  objectType: ObjectType.Language,
-  page: 0,
-  profile: 'default' as ProfileType,
-  searchBy: SearchableField.NameOrCode,
-  searchString: '',
-  sortBehavior: SortBehavior.Normal,
-  sortBy: SortBy.Name,
-  territoryFilter: '',
-  territoryScopes: [],
-  view: View.CardList,
-});
-
 describe('VitalitySelector', () => {
+  let updatePageParams: (params: PageParamsOptional) => void;
+
+  // Helper function to eliminate mock setup duplication
+  const setupMockParams = (overrides: PageParamsOptional = {}) => {
+    const mockUsePageParams = createMockUsePageParams(overrides);
+    (usePageParams as Mock).mockReturnValue(mockUsePageParams);
+    updatePageParams = mockUsePageParams.updatePageParams;
+  };
+
   beforeEach(() => {
-    vi.mocked(PageParamsHook.usePageParams).mockReturnValue(createMockState());
+    setupMockParams();
   });
 
   afterEach(() => {
@@ -83,13 +51,11 @@ describe('VitalitySelector', () => {
 
   it('renders all three vitality selectors', () => {
     render(
-      <HoverCardProvider>
-        <>
-          <VitalityISOSelector />
-          <VitalityEth2013Selector />
-          <VitalityEth2025Selector />
-        </>
-      </HoverCardProvider>,
+      <>
+        <VitalityISOSelector />
+        <VitalityEth2013Selector />
+        <VitalityEth2025Selector />
+      </>,
     );
 
     expect(screen.getByText('ISO Language Status')).toBeInTheDocument();
@@ -99,11 +65,7 @@ describe('VitalitySelector', () => {
 
   describe('VitalityISOSelector', () => {
     it('displays all ISO vitality options', () => {
-      render(
-        <HoverCardProvider>
-          <VitalityISOSelector />
-        </HoverCardProvider>,
-      );
+      render(<VitalityISOSelector />);
       const expected = Object.values(VitalityISO).filter((v) => typeof v === 'number');
 
       expected.forEach((status) => {
@@ -116,48 +78,30 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(
-        <HoverCardProvider>
-          <VitalityISOSelector />
-        </HoverCardProvider>,
-      );
+      const { rerender } = render(<VitalityISOSelector />);
 
       // Test selection
       const livingButton = screen.getByRole('button', { name: 'Living' });
       expect(livingButton).toHaveClass('selectorOption unselected');
       await user.click(livingButton);
-      expect(mockUpdatePageParams).toHaveBeenCalledWith({
-        vitalityISO: [VitalityISO.Living],
-      });
+      expect(updatePageParams).toHaveBeenCalledWith({ vitalityISO: [VitalityISO.Living] });
 
       // Update mock to simulate selected state and rerender
-      vi.mocked(PageParamsHook.usePageParams).mockReturnValue(
-        createMockState({ vitalityISO: [VitalityISO.Living] }),
-      );
+      setupMockParams({ vitalityISO: [VitalityISO.Living] });
 
-      rerender(
-        <HoverCardProvider>
-          <VitalityISOSelector />
-        </HoverCardProvider>,
-      );
+      rerender(<VitalityISOSelector />);
 
       // Test deselection
       const selectedLivingButton = screen.getByRole('button', { name: 'Living' });
       expect(selectedLivingButton).toHaveClass('selectorOption selected');
       await user.click(selectedLivingButton);
-      expect(mockUpdatePageParams).toHaveBeenCalledWith({
-        vitalityISO: [],
-      });
+      expect(updatePageParams).toHaveBeenCalledWith({ vitalityISO: [] });
     });
   });
 
   describe('VitalityEth2013Selector', () => {
     it('displays all Ethnologue 2013 vitality options', () => {
-      render(
-        <HoverCardProvider>
-          <VitalityEth2013Selector />
-        </HoverCardProvider>,
-      );
+      render(<VitalityEth2013Selector />);
 
       const expected = Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number');
 
@@ -171,43 +115,30 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(
-        <HoverCardProvider>
-          <VitalityEth2013Selector />
-        </HoverCardProvider>,
-      );
+      const { rerender } = render(<VitalityEth2013Selector />);
 
       // Test selection
       const nationalButton = screen.getByRole('button', { name: 'National' });
       expect(nationalButton).toHaveClass('selectorOption unselected');
       await user.click(nationalButton);
-      expect(mockUpdatePageParams).toHaveBeenCalledWith({
+      expect(updatePageParams).toHaveBeenCalledWith({
         vitalityEth2013: [VitalityEthnologueFine.National],
       });
 
       // Update mock to simulate selected state and rerender
-      vi.mocked(PageParamsHook.usePageParams).mockReturnValue(
-        createMockState({ vitalityEth2013: [VitalityEthnologueFine.National] }),
-      );
+      setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
 
-      rerender(
-        <HoverCardProvider>
-          <VitalityEth2013Selector />
-        </HoverCardProvider>,
-      );
+      rerender(<VitalityEth2013Selector />);
 
       // Test deselection
       const selectedNational = screen.getByRole('button', { name: 'National' });
       expect(selectedNational).toHaveClass('selectorOption selected');
 
-      // Reset the mock to ensure we only track new calls
-      mockUpdatePageParams.mockClear();
-
       // Click to deselect
       await user.click(selectedNational);
 
       // Verify the expected state after deselection
-      expect(mockUpdatePageParams).toHaveBeenCalledWith({
+      expect(updatePageParams).toHaveBeenCalledWith({
         vitalityEth2013: [],
       });
     });
@@ -215,11 +146,7 @@ describe('VitalitySelector', () => {
 
   describe('VitalityEth2025Selector', () => {
     it('displays all Ethnologue 2025 vitality options', () => {
-      render(
-        <HoverCardProvider>
-          <VitalityEth2025Selector />
-        </HoverCardProvider>,
-      );
+      render(<VitalityEth2025Selector />);
 
       const expected = Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number');
 
@@ -233,43 +160,32 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(
-        <HoverCardProvider>
-          <VitalityEth2025Selector />
-        </HoverCardProvider>,
-      );
+      const { rerender } = render(<VitalityEth2025Selector />);
 
       // Test selection
       const institutionalButton = screen.getByRole('button', { name: 'Institutional' });
       expect(institutionalButton).toHaveClass('selectorOption unselected');
       await user.click(institutionalButton);
-      expect(mockUpdatePageParams).toHaveBeenCalledWith({
+      expect(updatePageParams).toHaveBeenCalledWith({
         vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
       });
 
       // Update mock to simulate selected state and rerender
-      vi.mocked(PageParamsHook.usePageParams).mockReturnValue(
-        createMockState({ vitalityEth2025: [VitalityEthnologueCoarse.Institutional] }),
+      vi.mocked(usePageParams).mockReturnValue(
+        createMockUsePageParams({ vitalityEth2025: [VitalityEthnologueCoarse.Institutional] }),
       );
 
-      rerender(
-        <HoverCardProvider>
-          <VitalityEth2025Selector />
-        </HoverCardProvider>,
-      );
+      rerender(<VitalityEth2025Selector />);
 
       // Test deselection
       const selectedInstitutional = screen.getByRole('button', { name: 'Institutional' });
       expect(selectedInstitutional).toHaveClass('selectorOption selected');
 
-      // Reset the mock to ensure we only track new calls
-      mockUpdatePageParams.mockClear();
-
       // Click to deselect
       await user.click(selectedInstitutional);
 
       // The mock should be called with empty array for deselection
-      expect(mockUpdatePageParams).toHaveBeenCalledWith({
+      expect(updatePageParams).toHaveBeenCalledWith({
         vitalityEth2025: [],
       });
     });

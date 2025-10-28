@@ -7,7 +7,7 @@ import PotentialLocales from '@widgets/reports/PotentialLocales';
 import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithCensuses';
 
 import { ObjectType } from '@features/page-params/PageParamTypes';
-import { usePageParams } from '@features/page-params/usePageParams';
+import usePageParams from '@features/page-params/usePageParams';
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.
