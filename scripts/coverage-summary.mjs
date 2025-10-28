@@ -64,7 +64,7 @@ Object.entries(inputItems).forEach(([name, coverage]) => {
 
 // Print out the tree structure
 function printNode(node) {
-  if (node.name){
+  if (node.name) {
     const parentPath = '\u00A0\u00A0'.repeat(node.depth);
     const fullPath = parentPath + (node.name || '');
     printFileRow(fullPath, node.coverage);
