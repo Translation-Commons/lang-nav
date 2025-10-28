@@ -72,7 +72,7 @@ h4 {
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  padding: 0.5em 0.75em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
@@ -80,6 +80,13 @@ button {
   transition: border-color 0.25s;
   color: var(--color-text);
   background-color: var(--color-button-secondary);
+}
+
+.button-inline-icon {
+  padding: .125em .25em .125em .125em;
+  vertical-align: sub;
+  height: 1em;
+  width: 1em;
 }
 
 button.primary {
