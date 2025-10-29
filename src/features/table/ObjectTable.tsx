@@ -63,14 +63,16 @@ function ObjectTable<T extends ObjectData>({
 
   return (
     <div className="ObjectTableContainer">
-      <TableExport
-        visibleColumns={visibleColumns}
-        objectsFilteredAndSorted={objectsFilteredAndSorted}
-      />
-      <VisibleItemsMeter
-        objects={objects}
-        shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-      />
+      <div style={{ display: 'flex', alignItems: 'center' }}>
+        <VisibleItemsMeter
+          objects={objects}
+          shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
+        />
+        <TableExport
+          visibleColumns={visibleColumns}
+          objectsFilteredAndSorted={objectsFilteredAndSorted}
+        />
+      </div>
       <TableColumnSelector
         columns={columns}
         columnVisibility={columnVisibility}
