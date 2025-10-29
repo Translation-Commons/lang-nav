@@ -1,9 +1,10 @@
 import { CopyIcon } from 'lucide-react';
 import React, { Fragment, ReactNode } from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableButton from '@features/hovercard/HoverableButton';
+
 import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';
-import Hoverable from '@shared/ui/Hoverable';
-import HoverableButton from '@shared/ui/HoverableButton';
 import LinkButton from '@shared/ui/LinkButton';
 
 import { getConditionFunction } from './LanguagePluralComputation';

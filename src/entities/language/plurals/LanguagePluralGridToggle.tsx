@@ -1,7 +1,7 @@
 import { GridIcon } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 
-import HoverableButton from '@shared/ui/HoverableButton';
+import HoverableButton from '@features/hovercard/HoverableButton';
 
 import { LanguageData } from '../LanguageTypes';
 
