@@ -1,8 +1,10 @@
 import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
+
+import Selector from '@widgets/controls/components/Selector';
+import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
 import EmptyHoverCardProvider from '@features/hovercard/EmptyHoverCardProvider';
-import HoverableButton from '@features/hovercard/HoverableButton';
 import { PageParamsContext } from '@features/page-params/PageParamsContext';
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -16,6 +18,14 @@ import TableColumn from './TableColumn';
 interface Props<T> {
   visibleColumns: TableColumn<T>[];
   objectsFilteredAndSorted: T[];
+}
+
+enum ExportType {
+  DownloadCSV = 'Download CSV',
+  DownloadTSV = 'Download TSV',
+  CopyCSV = 'Copy CSV',
+  CopyTSV = 'Copy TSV',
+  Unchosen = 'Export',
 }
 
 function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndSorted }: Props<T>) {
@@ -45,99 +55,116 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
     [objectsFilteredAndSorted, pageParams, visibleColumns],
   );
 
-  /**
-   * Build a CSV from the currently visible columns and the filtered+sorted objects
-   * and trigger a download in the browser.
-   */
   const handleExportFile = useCallback(
-    (separator: ',' | '\t') => {
-      if (objectsFilteredAndSorted.length === 0) return;
-      setIsExporting(true);
-      try {
-        const data = prepareDataForExport(separator);
-        const blob = new Blob([data], { type: 'text/csv;charset=utf-8' });
-        const ts = new Date().toISOString().replace(/[:.]/g, '-');
-
-        const filename = `langnav-export-${ts}.${separator === ',' ? `csv` : `tsv`}`;
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = filename;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        URL.revokeObjectURL(link.href);
-      } finally {
-        setIsExporting(false);
-      }
+    async (separator: ',' | '\t') => {
+      const data = prepareDataForExport(separator);
+      const filetype = separator === ',' ? 'csv' : 'tsv';
+      const blob = new Blob([data], { type: `text/${filetype};charset=utf-8` });
+      const ts = new Date().toISOString().replace(/[:.]/g, '-');
+      const filename = `langnav-export-${ts}.${filetype}`;
+      const link = document.createElement('a');
+      link.href = URL.createObjectURL(blob);
+      link.download = filename;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(link.href);
     },
-    [objectsFilteredAndSorted, prepareDataForExport, pageParams],
+    [prepareDataForExport],
   );
 
   const handleClipboardExport = useCallback(
-    (separator: ',' | '\t' = ',') => {
+    async (separator: ',' | '\t' = ',') => {
+      const data = prepareDataForExport(separator);
+      navigator.clipboard.writeText(data);
+    },
+    [prepareDataForExport],
+  );
+
+  const handleExport = useCallback(
+    (exportType: ExportType) => {
       if (objectsFilteredAndSorted.length === 0) return;
       setIsExporting(true);
-      try {
-        const data = prepareDataForExport(separator);
-        navigator.clipboard.writeText(data);
-      } finally {
-        setIsExporting(false);
-      }
+      void (async () => {
+        try {
+          switch (exportType) {
+            case ExportType.DownloadCSV:
+              await handleExportFile(',');
+              break;
+            case ExportType.DownloadTSV:
+              await handleExportFile('\t');
+              break;
+            case ExportType.CopyCSV:
+              await handleClipboardExport(',');
+              break;
+            case ExportType.CopyTSV:
+              await handleClipboardExport('\t');
+              break;
+          }
+        } finally {
+          setIsExporting(false);
+        }
+      })();
     },
-    [objectsFilteredAndSorted, prepareDataForExport, pageParams],
+    [handleClipboardExport, handleExportFile],
   );
 
   return (
-    <HoverableButton
-      hoverContent={
-        <>
-          <button
-            type="button"
-            onClick={() => handleExportFile(',')}
-            disabled={isExporting || objectsFilteredAndSorted.length === 0}
-            title="Export visible rows & columns to comma-separated values (CSV) file"
-            style={{ cursor: isExporting ? 'default' : 'pointer' }}
-          >
-            {isExporting ? <LoadingIcon /> : <DownloadIcon className="button-inline-icon" />}
-            {isExporting ? 'Preparing download…' : 'Download CSV'}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleExportFile('\t')}
-            disabled={isExporting || objectsFilteredAndSorted.length === 0}
-            title="Export visible rows & columns to tab-separated values (TSV) file"
-            style={{ cursor: isExporting ? 'default' : 'pointer' }}
-          >
-            {isExporting ? <LoadingIcon /> : <DownloadIcon className="button-inline-icon" />}
-            {isExporting ? 'Preparing download…' : 'Download TSV'}
-          </button>
-          <button
-            type="button"
-            onClick={() => handleClipboardExport(',')}
-            disabled={isExporting || objectsFilteredAndSorted.length === 0}
-            title="Copy visible rows & columns to clipboard as comma-separated values (CSV)"
-            style={{ cursor: isExporting ? 'default' : 'pointer' }}
-          >
-            {isExporting ? <LoadingIcon /> : <CopyIcon className="button-inline-icon" />}
-            Copy CSV
-          </button>
-          <button
-            type="button"
-            onClick={() => handleClipboardExport('\t')}
-            disabled={isExporting || objectsFilteredAndSorted.length === 0}
-            title="Copy visible rows & columns to clipboard as tab-separated values (TSV)"
-            style={{ cursor: isExporting ? 'default' : 'pointer' }}
-          >
-            {isExporting ? <LoadingIcon /> : <CopyIcon className="button-inline-icon" />}
-            Copy TSV
-          </button>
-        </>
-      }
-    >
-      <ExternalLinkIcon className="button-inline-icon" />
-      Export
-    </HoverableButton>
+    <Selector
+      display={SelectorDisplay.Dropdown}
+      options={Object.values(ExportType).filter((et) => et !== ExportType.Unchosen)}
+      onChange={handleExport}
+      selected={ExportType.Unchosen}
+      getOptionLabel={(exportType: ExportType) => (
+        <ExportLabel exportType={exportType} isExporting={isExporting} />
+      )}
+      getOptionDescription={getExportDescription}
+    />
   );
+}
+
+const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = ({
+  exportType,
+  isExporting,
+}) => {
+  switch (exportType) {
+    case ExportType.DownloadCSV:
+    case ExportType.DownloadTSV:
+      return (
+        <>
+          <DownloadIcon className="button-inline-icon" /> {exportType}
+        </>
+      );
+    case ExportType.CopyCSV:
+    case ExportType.CopyTSV:
+      return (
+        <>
+          <CopyIcon className="button-inline-icon" /> {exportType}
+        </>
+      );
+    case ExportType.Unchosen:
+      return (
+        <>
+          {isExporting ? <LoadingIcon /> : <ExternalLinkIcon className="button-inline-icon" />}{' '}
+          {exportType}
+        </>
+      );
+  }
+};
+
+function getExportDescription(exportType: ExportType) {
+  switch (exportType) {
+    case ExportType.DownloadCSV:
+      return 'Export visible rows & columns to comma-separated values (CSV) file';
+    case ExportType.DownloadTSV:
+      return 'Export visible rows & columns to tab-separated values (TSV) file';
+    case ExportType.CopyCSV:
+      return 'Copy visible rows & columns to clipboard as comma-separated values (CSV)';
+    case ExportType.CopyTSV:
+      return 'Copy visible rows & columns to clipboard as tab-separated values (TSV)';
+    case ExportType.Unchosen:
+      return 'Export';
+  }
 }
 
 export default TableExport;
