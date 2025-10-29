@@ -15,10 +15,6 @@ import ObjectTable from '../ObjectTable';
 import TableColumn from '../TableColumn';
 import TableValueType from '../TableValueType';
 
-vi.mock('@widgets/HoverCardContext', () => ({
-  useHoverCard: vi.fn().mockReturnValue({}),
-}));
-
 vi.mock('@features/filtering/filter', () => ({
   getFilterBySubstring: vi.fn(),
   getFilterByTerritory: vi.fn(),
@@ -32,9 +28,8 @@ vi.mock('@features/sorting/sort', () => ({
   getNormalSortDirection: vi.fn().mockReturnValue(1),
 }));
 
-vi.mock('@features/page-params/usePageParams', () => ({
-  default: vi.fn(),
-}));
+vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
 
 describe('ObjectTable', () => {
   const mockObjects: ObjectData[] = [

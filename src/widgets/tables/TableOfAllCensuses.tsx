@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -8,10 +10,8 @@ import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
 
 const TableOfAllCensuses: React.FC = () => {
   const { censuses, getLanguage } = useDataContext();

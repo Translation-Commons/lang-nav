@@ -1,6 +1,7 @@
-import { HoverCardProvider } from '@widgets/HoverCardContext';
 import PageFooter from '@widgets/PageFooter';
 import PageNavBar from '@widgets/PageNavBar';
+
+import HoverCardProvider from '@features/hovercard/HoverCardProvider';
 
 import PageRoutes from './PageRoutes';
 

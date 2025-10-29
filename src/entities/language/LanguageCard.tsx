@@ -1,11 +1,11 @@
 import React from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import { uniqueBy } from '@shared/lib/setUtils';

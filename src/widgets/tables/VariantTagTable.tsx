@@ -2,6 +2,8 @@ import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -9,9 +11,6 @@ import TableValueType from '@features/table/TableValueType';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { VariantTagData } from '@entities/types/DataTypes';
-
-import Hoverable from '@shared/ui/Hoverable';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
 
 const VariantTagTable: React.FC = () => {
   const { variantTags } = useDataContext();

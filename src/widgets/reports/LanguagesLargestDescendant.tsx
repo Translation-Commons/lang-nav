@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import Selector from '@widgets/controls/components/Selector';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -10,7 +11,6 @@ import TableValueType from '@features/table/TableValueType';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendentLanguage } from '@entities/lib/getObjectPopulation';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';

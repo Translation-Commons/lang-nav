@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
 
-import { HoverCardProvider } from '@widgets/HoverCardContext';
 import Loading from '@widgets/Loading';
+
+import HoverCardProvider from '@features/hovercard/HoverCardProvider';
 
 const PageParamsProvider = React.lazy(() => import('@features/page-params/PageParamsProvider'));
 const DataProvider = React.lazy(() => import('@features/data-loading/context/DataProvider'));

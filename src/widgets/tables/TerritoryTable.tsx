@@ -1,6 +1,8 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -9,10 +11,8 @@ import TableValueType from '@features/table/TableValueType';
 import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { sumBy } from '@shared/lib/setUtils';
-import HoverableEnumeration from '@shared/ui/HoverableEnumeration';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();

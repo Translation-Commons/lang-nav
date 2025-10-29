@@ -1,10 +1,11 @@
 import React from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsField from '@shared/containers/DetailsField';

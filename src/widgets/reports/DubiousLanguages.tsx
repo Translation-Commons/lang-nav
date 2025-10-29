@@ -9,11 +9,11 @@ import {
   getFilterByTerritory,
   getSliceFunction,
 } from '@features/filtering/filter';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import ViewCard from '@shared/containers/ViewCard';

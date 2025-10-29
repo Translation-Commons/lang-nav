@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
@@ -8,7 +9,6 @@ import ObjectTable from '@features/table/ObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { LocaleData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';

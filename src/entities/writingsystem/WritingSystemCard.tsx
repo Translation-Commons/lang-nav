@@ -3,10 +3,10 @@ import React from 'react';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import { getScopeFilter } from '@features/filtering/filter';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';

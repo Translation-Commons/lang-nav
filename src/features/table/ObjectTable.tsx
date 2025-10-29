@@ -5,10 +5,10 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
+import Hoverable from '@features/hovercard/Hoverable';
+
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
-
-import Hoverable from '@shared/ui/Hoverable';
 
 import {
   getFilterBySubstring,

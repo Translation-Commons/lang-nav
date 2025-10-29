@@ -1,8 +1,9 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
+import HoverableButton from '@features/hovercard/HoverableButton';
+
 import { useClickOutside } from '@shared/hooks/useClickOutside';
-import HoverableButton from '@shared/ui/HoverableButton';
 
 import { ObjectiveList } from '../CommonObjectives';
 

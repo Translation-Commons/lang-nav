@@ -1,12 +1,13 @@
 import React from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { isTerritoryGroup, LocaleData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@shared/ui/Hoverable';
 
 export const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   if (locale.populationAdjusted == null) return null;

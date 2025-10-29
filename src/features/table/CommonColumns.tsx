@@ -1,8 +1,8 @@
+import HoverableObject from '@features/hovercard/HoverableObject';
 import { SearchableField } from '@features/page-params/PageParamTypes';
 import { SortBy } from '@features/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
-import HoverableObject from '@entities/ui/HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import TableColumn from './TableColumn';

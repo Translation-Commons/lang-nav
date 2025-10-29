@@ -1,7 +1,7 @@
 import { WifiIcon, WifiHighIcon, WifiLowIcon, WifiZeroIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 import { LanguageData } from '../LanguageTypes';
 

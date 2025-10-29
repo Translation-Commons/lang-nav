@@ -9,8 +9,8 @@ import TableColumnSelector from '../TableColumnSelector';
 vi.mock('@features/page-params/usePageParams', () => ({
   default: vi.fn(),
 }));
-vi.mock('@widgets/HoverCardContext', () => ({
-  useHoverCard: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
+vi.mock('@features/hovercard/useHoverCard', () => ({
+  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
 }));
 
 beforeEach(() => {

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hoverable from '@shared/ui/Hoverable';
+import Hoverable from '@features/hovercard/Hoverable';
 
 const PopulationWarning: React.FC = () => {
   return (

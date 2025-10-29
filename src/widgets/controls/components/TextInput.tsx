@@ -1,12 +1,12 @@
 import { XIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
+import HoverableButton from '@features/hovercard/HoverableButton';
 import { PageParamKey, View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
-import HoverableButton from '@shared/ui/HoverableButton';
 
 import { SelectorDisplay } from './SelectorDisplay';
 import { SelectorDropdown } from './SelectorDropdown';

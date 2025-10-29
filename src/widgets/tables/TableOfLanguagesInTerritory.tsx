@@ -1,5 +1,6 @@
 import React from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -8,7 +9,6 @@ import TableValueType from '@features/table/TableValueType';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';

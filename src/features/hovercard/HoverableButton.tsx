@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useHoverCard } from '@widgets/HoverCardContext';
+import useHoverCard from './useHoverCard';
 
 type HoverableProps = {
   buttonType?: 'button' | 'submit' | 'reset';
