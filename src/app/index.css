@@ -83,7 +83,7 @@ button {
 }
 
 .button-inline-icon {
-  padding: .125em .25em .125em .125em;
+  padding: 0.125em 0.25em 0.125em 0.125em;
   vertical-align: sub;
   height: 1em;
   width: 1em;
