@@ -8,8 +8,6 @@ import {
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
-import { DataContextType } from './context/useDataContext';
-
 type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 
 const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
@@ -28,8 +26,11 @@ const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
   (a, b) => b.populationPercent - a.populationPercent,
 ];
 
-export function computeLocalePopulationFromCensuses(dataContext: DataContextType): void {
-  dataContext.locales.forEach((locale) => {
+export function computeLocalePopulationFromCensuses(
+  locales: Record<string, LocaleData>,
+  world: TerritoryData,
+): void {
+  Object.values(locales).forEach((locale) => {
     if (!locale.censusRecords || locale.censusRecords.length === 0) return; // No census records, nothing to compute
     let records = [...locale.censusRecords];
 
@@ -52,7 +53,7 @@ export function computeLocalePopulationFromCensuses(dataContext: DataContextType
   });
 
   // Compute the adjusted population for each locale
-  dataContext.locales.forEach((locale) => {
+  Object.values(locales).forEach((locale) => {
     if (locale.populationSpeakingPercent == null) {
       locale.populationAdjusted = locale.populationSpeaking;
     } else if (locale.populationSpeakingPercent === 0) {
@@ -67,7 +68,7 @@ export function computeLocalePopulationFromCensuses(dataContext: DataContextType
 
   // Re-compute the population for regional locales
   // Start with the world territory (001) and then go down to groups
-  recomputeRegionalLocalePopulation(dataContext.getTerritory('001'));
+  recomputeRegionalLocalePopulation(world);
 }
 
 function setLocalePopulationEstimate(locale: LocaleData, record: LocaleInCensus): void {
@@ -131,9 +132,9 @@ function recomputeRegionalLocalePopulation(territory: TerritoryData | undefined)
   }
 }
 
-export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
+export function computeLocaleWritingPopulation(locales: Record<string, LocaleData>): void {
   // Country & Dependencies have literacy values from the UN
-  locales
+  Object.values(locales)
     .filter(
       (l) => !isTerritoryGroup(l.territory?.scope), // Skip regional locales
     )
@@ -151,7 +152,7 @@ export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
     });
 
   // Compute regional literacy by adding up the writing populations of the contained locales
-  locales
+  Object.values(locales)
     .filter((l) => isTerritoryGroup(l.territory?.scope))
     .forEach((locale) => {
       locale.populationWriting = sumBy(

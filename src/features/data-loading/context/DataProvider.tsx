@@ -13,10 +13,9 @@ import {
 } from '@entities/types/DataTypes';
 
 import { useCoreData } from '../CoreData';
-import { loadSupplementalData } from '../SupplementalData';
 
 import { updateLanguagesBasedOnSource } from './updateLanguagesBasedOnSource';
-import { DataContext, DataContextType } from './useDataContext';
+import { DataContext } from './useDataContext';
 
 // Create a provider component
 const DataProvider: React.FC<{
@@ -91,18 +90,6 @@ const DataProvider: React.FC<{
     }),
     [coreData],
   );
-
-  // After the main load, load additional data
-  useEffect(() => {
-    if (loadProgress === 1) {
-      const loadSecondaryData = async (dataContext: DataContextType) => {
-        await loadSupplementalData(dataContext);
-        setLoadProgress(2);
-      };
-
-      loadSecondaryData(dataContext);
-    }
-  }, [dataContext, loadProgress]); // this is called once after page load
 
   useEffect(() => {
     updateLanguagesBasedOnSource(

@@ -1,10 +1,11 @@
+import { updateLanguagesBasedOnSource } from '@features/data-loading/context/updateLanguagesBasedOnSource';
+import { DataContextType } from '@features/data-loading/context/useDataContext';
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
   connectLocales,
   connectWritingSystems,
 } from '@features/data-loading/DataAssociations';
-import { DataContextType, updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
 import { connectVariantTags } from '@features/data-loading/IANAData';
 import {
   computeLocalePopulationFromCensuses,
@@ -322,19 +323,19 @@ export function getMockedObjects(): ObjectDictionary {
   );
 
   // From SupplementalData
-  computeContainedTerritoryStats(territories['001']);
+  const world = territories['001']; // 001 is the UN code for the World
+  computeContainedTerritoryStats(world);
 
   // Add computed territory locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
-  computeLocaleWritingPopulation(Object.values(locales));
+  computeLocaleWritingPopulation(locales);
 
   // From PopulationData
-  const dataContext = getMockedDataContext(objects);
-  computeLocalePopulationFromCensuses(dataContext);
+  computeLocalePopulationFromCensuses(locales, world);
   return objects;
 }
 
-function getMockedDataContext(objects: ObjectDictionary): DataContextType {
+export function getMockedDataContext(objects: ObjectDictionary): DataContextType {
   const objectArray = Object.values(objects);
   const languages = objectArray.filter((obj) => obj.type === ObjectType.Language);
   const locales = objectArray.filter((obj) => obj.type === ObjectType.Locale);

@@ -169,7 +169,7 @@ function createRegionalLocalesForTerritory(
 }
 
 export async function loadTerritoryGDPLiteracy(
-  getTerritory: (id: string) => TerritoryData | undefined,
+  territories: Record<TerritoryCode, TerritoryData>,
 ): Promise<void> {
   return await fetch('data/territories_gdp_literacy.tsv')
     .then((res) => res.text())
@@ -183,7 +183,7 @@ export async function loadTerritoryGDPLiteracy(
           return { code: parts[0], gdp: parseInt(parts[1]), literacyPercent: parseFloat(parts[2]) };
         });
       newTerritoriesData.forEach((newTerrData) => {
-        const territory = getTerritory(newTerrData.code);
+        const territory = territories[newTerrData.code];
         if (territory == null) {
           // Known exclusive: Antarctica (AQ) intentionally left out because its poorly defined linguistically
           if (DEBUG) console.log('Loading new territory data. Territory not found', newTerrData);

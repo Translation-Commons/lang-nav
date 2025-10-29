@@ -1,23 +1,5 @@
 import { useState } from 'react';
 
-import {
-  computeOtherPopulationStatistics,
-  connectLanguagesToParent,
-  connectLocales,
-  connectWritingSystems,
-  groupLanguagesBySource,
-} from '@features/data-loading/DataAssociations';
-import { loadLanguages, loadLocales, loadWritingSystems } from '@features/data-loading/DataLoader';
-import {
-  loadIANAVariants,
-  addIANAVariantLocales,
-  connectVariantTags,
-} from '@features/data-loading/IANAData';
-import {
-  connectTerritoriesToParent,
-  createRegionalLocales,
-  loadTerritories,
-} from '@features/data-loading/TerritoryData';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
@@ -32,10 +14,19 @@ import {
 
 import { loadAllCensuses } from './CensusData';
 import {
+  computeOtherPopulationStatistics,
+  connectLanguagesToParent,
+  connectLocales,
+  connectWritingSystems,
+  groupLanguagesBySource,
+} from './DataAssociations';
+import { loadLanguages, loadLocales, loadWritingSystems } from './DataLoader';
+import {
   addGlottologLanguages,
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
 } from './GlottologData';
+import { loadIANAVariants, addIANAVariantLocales, connectVariantTags } from './IANAData';
 import { addISORetirementsToLanguages, loadISORetirements } from './iso/ISORetirements';
 import {
   addISODataToLanguages,
@@ -46,7 +37,19 @@ import {
   loadISOLanguages,
   loadISOMacrolanguages,
 } from './ISOData';
-import { addCLDRLanguageDetails } from './UnicodeData';
+import {
+  computeLocalePopulationFromCensuses,
+  computeLocaleWritingPopulation,
+} from './PopulationData';
+import {
+  computeContainedTerritoryStats,
+  connectTerritoriesToParent,
+  createRegionalLocales,
+  loadTerritories,
+  loadTerritoryGDPLiteracy,
+} from './TerritoryData';
+import { addCLDRLanguageDetails, loadCLDRCoverage } from './UnicodeData';
+import { loadAndApplyWikipediaData } from './WikipediaData';
 
 export type CoreDataArrays = {
   allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets
@@ -82,6 +85,7 @@ export function useCoreData(): {
   const [objects, setObjects] = useState<Record<string, ObjectData>>({});
 
   async function loadCoreData(): Promise<void> {
+    // Stage 1: Load all most data objects in parallel
     const [
       initialLangs,
       isoLangs,
@@ -121,6 +125,7 @@ export function useCoreData(): {
       return;
     }
 
+    // Stage 2: Compile objects
     addISODataToLanguages(initialLangs, isoLangs || []);
     const languagesBySource = groupLanguagesBySource(initialLangs);
     addISOLanguageFamilyData(languagesBySource, langFamilies || [], isoLangsToFamilies || {});
@@ -130,6 +135,7 @@ export function useCoreData(): {
     addCLDRLanguageDetails(languagesBySource);
     addIANAVariantLocales(languagesBySource.BCP, locales, variantTags);
 
+    // Stage 3: Connect related data, eg. language.territory = territory...
     connectLanguagesToParent(languagesBySource);
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySource.All, territories, writingSystems);
@@ -138,7 +144,7 @@ export function useCoreData(): {
     createRegionalLocales(territories, locales); // create them after connecting them
     computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
-    // Load census data
+    // Stage 4: Load census data
     const languageLookup = {
       ...languagesBySource.Glottolog, // aaaa0000
       ...languagesBySource.ISO, // aaa
@@ -147,6 +153,19 @@ export function useCoreData(): {
     };
     const censuses = await loadAllCensuses(languageLookup, locales, territories);
 
+    // Stage 5: Load supplemental data
+    await Promise.all([
+      loadCLDRCoverage(languageLookup),
+      loadTerritoryGDPLiteracy(territories),
+      loadAndApplyWikipediaData(languageLookup, locales),
+    ]);
+
+    const world = territories['001']; // 001 is the UN code for the World
+    computeContainedTerritoryStats(world);
+    computeLocalePopulationFromCensuses(locales, world);
+    computeLocaleWritingPopulation(locales);
+
+    // Stage 6: Finalize state
     setAllLanguoids(Object.values(languagesBySource.All));
     setObjects({
       // All combined into one big object map for easy lookup but the ID formats are unique so its OK

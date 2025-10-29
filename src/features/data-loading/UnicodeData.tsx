@@ -157,9 +157,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
   languagesBySource.CLDR = cldrLanguages;
 }
 
-export async function loadCLDRCoverage(
-  getLanguage: (id: string) => LanguageData | undefined,
-): Promise<void> {
+export async function loadCLDRCoverage(languages: LanguageDictionary): Promise<void> {
   return await fetch('data/unicode/cldrCoverage.tsv')
     .then((res) => res.text())
     .then((text) => {
@@ -169,7 +167,7 @@ export async function loadCLDRCoverage(
         .slice(SKIP_THREE_HEADER_ROWS)
         .map(parseCLDRCoverageLine);
       cldrCoverage.forEach((cldrCov) => {
-        const lang = getLanguage(cldrCov.languageCode);
+        const lang = languages[cldrCov.languageCode];
         if (lang?.type !== ObjectType.Language) {
           console.log('During CLDR import ', cldrCov.languageCode, 'missing from languages');
           return;
