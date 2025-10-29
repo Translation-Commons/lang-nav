@@ -1,10 +1,9 @@
 import React from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import getObjectFromID from '../lib/getObjectFromID';
-
-import HoverableObjectName from './HoverableObjectName';
 
 const ObjectSuggestions: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   return (

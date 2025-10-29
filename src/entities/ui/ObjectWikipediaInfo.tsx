@@ -1,9 +1,9 @@
 import React from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';

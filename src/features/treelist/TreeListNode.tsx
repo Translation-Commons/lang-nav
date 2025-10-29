@@ -1,12 +1,12 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
+import HoverableObject from '@features/hovercard/HoverableObject';
 import { ObjectType, SearchableField, View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
-import HoverableObject from '@entities/ui/HoverableObject';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import './treelist.css';

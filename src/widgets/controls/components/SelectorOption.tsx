@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 
-import { PositionInGroup } from '@shared/lib/PositionInGroup';
 import HoverableButton from '@features/hovercard/HoverableButton';
+
+import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import { SelectorDisplay } from './SelectorDisplay';
 

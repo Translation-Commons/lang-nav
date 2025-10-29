@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -8,7 +9,6 @@ import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import CommaSeparated from '@shared/ui/CommaSeparated';

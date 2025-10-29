@@ -1,6 +1,7 @@
 import { AlertTriangleIcon, CheckCircle2Icon, InfoIcon, XCircleIcon } from 'lucide-react';
 import React from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -8,7 +9,6 @@ import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@features/hovercard/Hoverable';
 
 export const CLDRCoverageText: React.FC<{
   object: LanguageData | LocaleData;

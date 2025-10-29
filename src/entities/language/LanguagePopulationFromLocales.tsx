@@ -1,9 +1,9 @@
 import React from 'react';
 
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 
 import { groupBy, sumBy } from '@shared/lib/setUtils';
-import Hoverable from '@features/hovercard/Hoverable';
 
 import { LanguageData } from './LanguageTypes';
 

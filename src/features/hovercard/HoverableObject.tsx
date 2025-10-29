@@ -1,5 +1,6 @@
 import React, { useCallback } from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
 import { ObjectType, PageParamsOptional, View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -10,8 +11,6 @@ import TerritoryCard from '@entities/territory/TerritoryCard';
 import { ObjectData } from '@entities/types/DataTypes';
 import VariantTagCard from '@entities/varianttag/VariantTagCard';
 import WritingSystemCard from '@entities/writingsystem/WritingSystemCard';
-
-import Hoverable from '@features/hovercard/Hoverable';
 
 type Props = {
   object?: ObjectData;

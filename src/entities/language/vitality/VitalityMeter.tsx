@@ -1,9 +1,10 @@
 import React from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@features/hovercard/Hoverable';
 
 import { getAllVitalityScores } from './LanguageVitalityComputation';
 import { VitalitySource } from './VitalityTypes';

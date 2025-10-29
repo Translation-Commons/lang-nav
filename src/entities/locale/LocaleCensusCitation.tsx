@@ -1,8 +1,9 @@
 import React from 'react';
 
+import HoverableObject from '@features/hovercard/HoverableObject';
+
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
-import HoverableObject from '@entities/ui/HoverableObject';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

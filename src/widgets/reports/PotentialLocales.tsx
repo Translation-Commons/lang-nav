@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { getScopeFilter } from '@features/filtering/filter';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
@@ -22,7 +23,6 @@ import {
   PopulationSourceCategory,
   TerritoryCode,
 } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';

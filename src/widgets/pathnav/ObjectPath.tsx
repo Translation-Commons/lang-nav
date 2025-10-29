@@ -1,12 +1,12 @@
 import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import ObjectPathChildren from './ObjectPathChildren';
 import ObjectPathParents from './ObjectPathParents';

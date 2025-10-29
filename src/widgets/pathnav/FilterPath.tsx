@@ -4,6 +4,7 @@ import React, { Fragment } from 'react';
 import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
+import HoverableButton from '@features/hovercard/HoverableButton';
 import { SearchableField, View } from '@features/page-params/PageParamTypes';
 import { getDefaultParams } from '@features/page-params/Profiles';
 import usePageParams from '@features/page-params/usePageParams';
@@ -18,7 +19,6 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
-import HoverableButton from '@features/hovercard/HoverableButton';
 
 const FilterPath: React.FC = () => {
   const {

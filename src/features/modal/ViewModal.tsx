@@ -5,6 +5,7 @@ import ObjectDetails from '@widgets/details/ObjectDetails';
 import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
+import HoverableButton from '@features/hovercard/HoverableButton';
 import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -12,7 +13,6 @@ import getObjectFromID from '@entities/lib/getObjectFromID';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
-import HoverableButton from '@features/hovercard/HoverableButton';
 
 import './modal.css';
 

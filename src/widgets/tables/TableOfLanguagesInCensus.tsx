@@ -2,6 +2,9 @@ import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableObject from '@features/hovercard/HoverableObject';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
@@ -11,13 +14,10 @@ import TableValueType from '@features/table/TableValueType';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData } from '@entities/types/DataTypes';
-import HoverableObject from '@entities/ui/HoverableObject';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@features/hovercard/Hoverable';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 
 type Props = {

@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 
 import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 
+import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@features/hovercard/Hoverable';
 
 import { getFilterBySubstring, getFilterByTerritory, getScopeFilter } from '../filtering/filter';
 

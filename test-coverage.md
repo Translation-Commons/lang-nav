@@ -2,11 +2,11 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    30.2 |    76.0 |    45.2 |    30.2 |
+| `src`                                    |    30.2 |    76.6 |    45.2 |    30.2 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    40.9 |    79.9 |    50.6 |    40.9 |
+| `  entities`                             |    39.3 |    82.9 |    48.6 |    39.3 |
 | `    census`                             |    23.8 |   100.0 |     0   |    23.8 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    31.3 |   100.0 |     0   |    31.3 |
@@ -38,10 +38,8 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    17.9 |   100.0 |     0   |    17.9 |
 | `      TerritoryCard.tsx`                |    17.9 |   100.0 |     0   |    17.9 |
-| `    ui`                                 |    45.2 |    43.6 |    53.3 |    45.2 |
+| `    ui`                                 |    36.1 |    56.0 |    41.7 |    36.1 |
 | `      CLDRCoverageInfo.tsx`             |    10.0 |   100.0 |     0   |    10.0 |
-| `      HoverableObject.tsx`              |    80.0 |    22.2 |   100.0 |    80.0 |
-| `      HoverableObjectName.tsx`          |    73.9 |    20.0 |   100.0 |    73.9 |
 | `      ObjectField.tsx`                  |    64.6 |    72.7 |    66.7 |    64.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    46.0 |    20.0 |   100.0 |    46.0 |
@@ -50,7 +48,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    41.9 |    78.6 |    38.0 |    41.9 |
+| `  features`                             |    42.8 |    78.2 |    39.2 |    42.8 |
 | `    data-loading`                       |    28.6 |    71.9 |    26.8 |    28.6 |
 | `      CensusData.tsx`                   |     2.7 |   100.0 |     0   |     2.7 |
 | `      context`                          |    11.4 |    50.0 |    11.1 |    11.4 |
@@ -74,11 +72,13 @@
 | `      WikipediaData.tsx`                |     1.8 |   100.0 |     0   |     1.8 |
 | `    filtering`                          |    25.0 |   100.0 |    11.1 |    25.0 |
 | `      filter.tsx`                       |    25.0 |   100.0 |    11.1 |    25.0 |
-| `    hovercard`                          |    99.0 |    87.3 |    88.9 |    99.0 |
+| `    hovercard`                          |    96.3 |    81.7 |    90.5 |    96.3 |
 | `      EmptyHoverCardProvider.tsx`       |   100.0 |   100.0 |    50.0 |   100.0 |
 | `      Hoverable.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverableButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverableEnumeration.tsx`         |   100.0 |    87.5 |   100.0 |   100.0 |
+| `      HoverableObject.tsx`              |    85.5 |    58.3 |   100.0 |    85.5 |
+| `      HoverableObjectName.tsx`          |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      HoverCardContext.tsx`             |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverCardProvider.tsx`            |    97.6 |    80.0 |   100.0 |    97.6 |
 | `      useHoverCard.tsx`                 |   100.0 |    50.0 |   100.0 |   100.0 |

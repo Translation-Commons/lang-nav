@@ -1,6 +1,8 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
@@ -10,13 +12,11 @@ import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulati
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@features/hovercard/Hoverable';
 import LinkButton from '@shared/ui/LinkButton';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';

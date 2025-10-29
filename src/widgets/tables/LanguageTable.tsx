@@ -2,6 +2,9 @@ import { TriangleAlertIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import Hoverable from '@features/hovercard/Hoverable';
+import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
@@ -12,11 +15,8 @@ import {
   getObjectLiteracy,
   getUniqueTerritoriesForLanguage,
 } from '@entities/lib/getObjectMiscFields';
-import HoverableObjectName from '@entities/ui/HoverableObjectName';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
 import { LanguagePopulationColumns } from './columns/LanguagePopulationColumns';

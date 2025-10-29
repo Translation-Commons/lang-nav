@@ -1,9 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
-import Hoverable from '../Hoverable';
 import HoverableButton from '../HoverableButton';
-import HoverableEnumeration from '../HoverableEnumeration';
 
 // Mock the hook used by the components
 const showHoverCard = vi.fn();
