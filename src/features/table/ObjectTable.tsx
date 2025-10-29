@@ -63,7 +63,7 @@ function ObjectTable<T extends ObjectData>({
 
   return (
     <div className="ObjectTableContainer">
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
         <VisibleItemsMeter
           objects={objects}
           shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}

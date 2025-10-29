@@ -106,7 +106,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
         }
       })();
     },
-    [handleClipboardExport, handleExportFile],
+    [handleClipboardExport, handleExportFile, objectsFilteredAndSorted.length],
   );
 
   return (
@@ -163,7 +163,7 @@ function getExportDescription(exportType: ExportType) {
     case ExportType.CopyTSV:
       return 'Copy visible rows & columns to clipboard as tab-separated values (TSV)';
     case ExportType.Unchosen:
-      return 'Export data (selected columns ';
+      return 'Export data: selected columns and filtered rows) to CSV or TSV';
   }
 }
 
