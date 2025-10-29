@@ -163,7 +163,7 @@ function getExportDescription(exportType: ExportType) {
     case ExportType.CopyTSV:
       return 'Copy visible rows & columns to clipboard as tab-separated values (TSV)';
     case ExportType.Unchosen:
-      return 'Export';
+      return 'Export data (selected columns ';
   }
 }
 
