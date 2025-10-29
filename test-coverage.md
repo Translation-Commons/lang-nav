@@ -2,11 +2,11 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    30.2 |    76.6 |    45.2 |    30.2 |
+| `src`                                    |    31.7 |    77.6 |    47.4 |    31.7 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    39.3 |    82.9 |    48.6 |    39.3 |
+| `  entities`                             |    39.9 |    81.9 |    50.0 |    39.9 |
 | `    census`                             |    23.8 |   100.0 |     0   |    23.8 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    31.3 |   100.0 |     0   |    31.3 |
@@ -38,9 +38,9 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    17.9 |   100.0 |     0   |    17.9 |
 | `      TerritoryCard.tsx`                |    17.9 |   100.0 |     0   |    17.9 |
-| `    ui`                                 |    36.1 |    56.0 |    41.7 |    36.1 |
+| `    ui`                                 |    40.0 |    51.6 |    50.0 |    40.0 |
 | `      CLDRCoverageInfo.tsx`             |    10.0 |   100.0 |     0   |    10.0 |
-| `      ObjectField.tsx`                  |    64.6 |    72.7 |    66.7 |    64.6 |
+| `      ObjectField.tsx`                  |    87.5 |    58.8 |   100.0 |    87.5 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    46.0 |    20.0 |   100.0 |    46.0 |
 | `      ObjectWikipediaInfo.tsx`          |    13.7 |   100.0 |     0   |    13.7 |
@@ -48,7 +48,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    42.8 |    78.2 |    39.2 |    42.8 |
+| `  features`                             |    44.6 |    78.8 |    42.0 |    44.6 |
 | `    data-loading`                       |    28.6 |    71.9 |    26.8 |    28.6 |
 | `      CensusData.tsx`                   |     2.7 |   100.0 |     0   |     2.7 |
 | `      context`                          |    11.4 |    50.0 |    11.1 |    11.4 |
@@ -72,7 +72,7 @@
 | `      WikipediaData.tsx`                |     1.8 |   100.0 |     0   |     1.8 |
 | `    filtering`                          |    25.0 |   100.0 |    11.1 |    25.0 |
 | `      filter.tsx`                       |    25.0 |   100.0 |    11.1 |    25.0 |
-| `    hovercard`                          |    96.3 |    81.7 |    90.5 |    96.3 |
+| `    hovercard`                          |    96.3 |    83.1 |    90.5 |    96.3 |
 | `      EmptyHoverCardProvider.tsx`       |   100.0 |   100.0 |    50.0 |   100.0 |
 | `      Hoverable.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverableButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -81,7 +81,7 @@
 | `      HoverableObjectName.tsx`          |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      HoverCardContext.tsx`             |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverCardProvider.tsx`            |    97.6 |    80.0 |   100.0 |    97.6 |
-| `      useHoverCard.tsx`                 |   100.0 |    50.0 |   100.0 |   100.0 |
+| `      useHoverCard.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    modal`                              |     0   |     0   |     0   |     0   |
 | `      ViewModal.tsx`                    |     0   |     0   |     0   |     0   |
 | `    page-params`                        |    40.6 |    47.1 |    14.3 |    40.6 |
@@ -100,11 +100,12 @@
 | `      SortTypes.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    stored-params`                      |    72.2 |    64.3 |   100.0 |    72.2 |
 | `      useStoredParams.tsx`              |    72.2 |    64.3 |   100.0 |    72.2 |
-| `    table`                              |    94.9 |    88.6 |    78.6 |    94.9 |
-| `      CommonColumns.tsx`                |    82.8 |   100.0 |     0   |    82.8 |
-| `      ObjectTable.tsx`                  |    94.5 |    69.2 |   100.0 |    94.5 |
+| `    table`                              |    93.4 |    87.3 |    94.4 |    93.4 |
+| `      CommonColumns.tsx`                |    96.5 |   100.0 |    66.7 |    96.5 |
+| `      ObjectTable.tsx`                  |    94.9 |    69.2 |   100.0 |    94.9 |
 | `      TableColumn.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      TableColumnSelector.tsx`          |    94.3 |    87.0 |   100.0 |    94.3 |
+| `      TableExport.tsx`                  |    86.4 |    83.3 |   100.0 |    86.4 |
 | `      TableSortButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      TableValueType.ts`                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      useColumnVisibility.tsx`          |    97.7 |    90.9 |   100.0 |    97.7 |
@@ -126,7 +127,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    36.9 |    82.2 |    51.7 |    36.9 |
+| `  shared`                               |    41.7 |    84.6 |    56.3 |    41.7 |
 | `    containers`                         |    48.8 |   100.0 |   100.0 |    48.8 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -137,23 +138,25 @@
 | `      useClickOutside.tsx`              |    87.5 |    80.0 |   100.0 |    87.5 |
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
-| `    lib`                                |    57.5 |    92.0 |    42.9 |    57.5 |
+| `    lib`                                |    61.5 |    90.0 |    50.0 |    61.5 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
 | `      setUtils.ts`                      |    78.9 |    88.9 |    60.0 |    78.9 |
+| `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      stringUtils.ts`                   |    51.6 |   100.0 |    40.0 |    51.6 |
-| `    ui`                                 |    27.9 |    75.0 |    50.0 |    27.9 |
+| `    ui`                                 |    36.4 |    90.0 |    57.1 |    36.4 |
 | `      CommaSeparated.tsx`               |    13.6 |   100.0 |     0   |    13.6 |
 | `      Deemphasized.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      Highlightable.tsx`                |    87.5 |    71.4 |   100.0 |    87.5 |
+| `      Highlightable.tsx`                |    95.8 |    87.5 |   100.0 |    95.8 |
 | `      LinkButton.tsx`                   |     4.2 |   100.0 |     0   |     4.2 |
+| `      LoadingIcon.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      PercentageDifference.tsx`         |     8.6 |   100.0 |     0   |     8.6 |
 | `  strings`                              |     0   |   100.0 |   100.0 |     0   |
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |    99.1 |    85.7 |    50.0 |    99.1 |
 | `    MockObjects.tsx`                    |    99.0 |    83.3 |    44.4 |    99.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    14.1 |    62.1 |    49.2 |    14.1 |
+| `  widgets`                              |    15.2 |    67.7 |    50.8 |    15.2 |
 | `    cardlists`                          |    53.9 |    93.3 |   100.0 |    53.9 |
 | `      CardList.tsx`                     |    96.5 |    88.9 |   100.0 |    96.5 |
 | `      CensusCardList.tsx`               |     0   |   100.0 |   100.0 |     0   |
@@ -163,13 +166,13 @@
 | `      VariantTagCardList.tsx`           |     0   |   100.0 |   100.0 |     0   |
 | `      WritingSystemCardList.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `    CommonObjectives.tsx`               |     0   |     0   |     0   |     0   |
-| `    controls`                           |    22.9 |    71.3 |    70.7 |    22.9 |
-| `      components`                       |    51.0 |    60.9 |    70.6 |    51.0 |
-| `        Selector.tsx`                   |    95.8 |    70.0 |    77.8 |    95.8 |
+| `    controls`                           |    27.0 |    80.4 |    75.6 |    27.0 |
+| `      components`                       |    62.4 |    77.8 |    82.4 |    62.4 |
+| `        Selector.tsx`                   |    97.5 |    93.1 |    88.9 |    97.5 |
 | `        SelectorDisplay.tsx`            |   100.0 |   100.0 |   100.0 |   100.0 |
-| `        SelectorDropdown.tsx`           |     3.8 |   100.0 |     0   |     3.8 |
+| `        SelectorDropdown.tsx`           |   100.0 |   100.0 |   100.0 |   100.0 |
 | `        SelectorLabel.tsx`              |    84.1 |    33.3 |   100.0 |    84.1 |
-| `        SelectorOption.tsx`             |    64.3 |    61.1 |    75.0 |    64.3 |
+| `        SelectorOption.tsx`             |    86.7 |    72.0 |    75.0 |    86.7 |
 | `        TextInput.tsx`                  |     0   |     0   |     0   |     0   |
 | `      ControlsBar.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      selectors`                        |     9.2 |    87.5 |    72.7 |     9.2 |
