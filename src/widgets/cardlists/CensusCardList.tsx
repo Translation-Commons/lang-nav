@@ -9,12 +9,7 @@ import CensusCard from '@entities/census/CensusCard';
 const CensusCardList: React.FC = () => {
   const { censuses } = useDataContext();
 
-  return (
-    <CardList
-      objects={Object.values(censuses)}
-      renderCard={(census) => <CensusCard census={census} />}
-    />
-  );
+  return <CardList objects={censuses} renderCard={(census) => <CensusCard census={census} />} />;
 };
 
 export default CensusCardList;

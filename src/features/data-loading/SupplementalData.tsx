@@ -1,11 +1,10 @@
-import { addCensusData, loadCensusData } from './CensusData';
 import { DataContextType } from './context/useDataContext';
 import {
   computeLocalePopulationFromCensuses,
   computeLocaleWritingPopulation,
 } from './PopulationData';
 import { computeContainedTerritoryStats, loadTerritoryGDPLiteracy } from './TerritoryData';
-import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
+import { loadCLDRCoverage } from './UnicodeData';
 import { loadAndApplyWikipediaData } from './WikipediaData';
 
 /**
@@ -22,15 +21,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadTerritoryGDPLiteracy(dataContext.getTerritory),
     loadAndApplyWikipediaData(dataContext),
   ]);
-
-  const censusImports = await loadCensusData();
-  censusImports.forEach((censusImport) => {
-    if (censusImport != null) {
-      addCensusData(dataContext, censusImport);
-    }
-  });
-  const cldrCensuses = getLanguageCountsFromCLDR(dataContext);
-  addCensusData(dataContext, { censuses: cldrCensuses, languageNames: {} });
 
   // 001 is the UN code for the World
   computeContainedTerritoryStats(dataContext.getTerritory('001'));

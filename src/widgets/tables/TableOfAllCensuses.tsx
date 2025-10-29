@@ -18,7 +18,7 @@ const TableOfAllCensuses: React.FC = () => {
 
   return (
     <ObjectTable<CensusData>
-      objects={Object.values(censuses)}
+      objects={censuses}
       columns={[
         CodeColumn,
         NameColumn,

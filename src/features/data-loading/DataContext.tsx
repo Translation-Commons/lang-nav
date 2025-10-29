@@ -34,7 +34,7 @@ export type DataContextType = CoreDataArrays &
 
 const DataContext = createContext<DataContextType | undefined>({
   allLanguoids: [],
-  censuses: {},
+  censuses: [],
   languagesInSelectedSource: [],
   locales: [],
   territories: [],

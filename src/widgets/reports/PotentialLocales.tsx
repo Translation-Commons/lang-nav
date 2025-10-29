@@ -39,7 +39,7 @@ const PotentialLocales: React.FC = () => {
   const { localeSeparator } = usePageParams();
   const { percentThreshold, percentThresholdSelector } = usePotentialLocaleThreshold();
   const potentialLocales = getPotentialLocales(
-    Object.values(censuses),
+    censuses,
     getLanguage,
     getLocale,
     locales,

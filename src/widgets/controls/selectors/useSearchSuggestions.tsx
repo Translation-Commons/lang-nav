@@ -30,7 +30,7 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
       case ObjectType.WritingSystem:
         return writingSystems;
       case ObjectType.Census:
-        return Object.values(censuses);
+        return censuses;
       case ObjectType.VariantTag:
         return variantTags;
     }

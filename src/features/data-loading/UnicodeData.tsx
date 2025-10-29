@@ -4,11 +4,14 @@ import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
+import {
+  LanguageData,
+  LanguageDictionary,
+  LanguagesBySource,
+  LanguageScope,
+} from '@entities/language/LanguageTypes';
 import { CLDRCoverageLevel, CLDRCoverageImport } from '@entities/types/CLDRTypes';
-import { LocaleData } from '@entities/types/DataTypes';
-
-import { DataContextType } from './context/useDataContext';
+import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
 const DEBUG = false;
 
@@ -226,7 +229,10 @@ type TerritoryLanguagePopulationStrings = {
   };
 };
 
-export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusData[] {
+export function getLanguageCountsFromCLDR(
+  languages: LanguageDictionary,
+  territories: Record<string, TerritoryData>,
+): CensusData[] {
   const territoryInfoData = territoryInfo.supplemental.territoryInfo;
   return Object.entries(territoryInfoData)
     .map(([territoryCode, territoryData]) => {
@@ -239,16 +245,11 @@ export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusD
         (accumulator, langEntry) => {
           const [inputLocaleCode, { _populationPercent }] = langEntry;
           const pop = Math.round((parseFloat(_populationPercent) * territoryPopulation) / 100);
-          return convertCLDRLangPopToLangNavEntries(
-            accumulator,
-            inputLocaleCode,
-            pop,
-            dataContext.getLanguage,
-          );
+          return convertCLDRLangPopToLangNavEntries(accumulator, inputLocaleCode, pop, languages);
         },
         {},
       );
-      const territory = dataContext.getTerritory(territoryCode);
+      const territory = territories[territoryCode];
 
       const census: CensusData = {
         type: ObjectType.Census,
@@ -278,7 +279,7 @@ function convertCLDRLangPopToLangNavEntries(
   accumulator: Record<string, number>,
   inputLocaleCode: string,
   population: number,
-  getLanguage: (code: string) => LanguageData | undefined,
+  languages: LanguageDictionary,
 ): Record<string, number> {
   // We have to do some messy language code parsing since entries here may be using 2-letter codes (eg. sr not srp) and
   // they may have script or other locale tags (eg. sr_Latn, ca_valencia, etc.), and they may be part of a macrolanguage
@@ -286,7 +287,7 @@ function convertCLDRLangPopToLangNavEntries(
   const cldrLanguageCode = inputLocaleCode.split('_')[0]; // Get the language code part, e.g. `sr_Latn` -> `sr`
   const extraCodeParts = inputLocaleCode.split('_').slice(1).join('_'); // Get the rest of the locale code, e.g. `sr_Latn` -> `Latn`
 
-  const language = getLanguage(cldrLanguageCode);
+  const language = languages[cldrLanguageCode];
   let languageCode = language?.ID ?? cldrLanguageCode;
   if (language?.sourceSpecific?.CLDR?.parentLanguageCode != null) {
     // If the language a child of a macrolanguage, we don't know from the data if the number

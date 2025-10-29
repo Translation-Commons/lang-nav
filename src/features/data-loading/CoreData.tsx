@@ -20,7 +20,7 @@ import {
 } from '@features/data-loading/TerritoryData';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
-import { CensusID, CensusData } from '@entities/census/CensusTypes';
+import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
@@ -30,6 +30,7 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
+import { loadAllCensuses } from './CensusData';
 import {
   addGlottologLanguages,
   loadGlottologLanguages,
@@ -53,7 +54,7 @@ export type CoreDataArrays = {
   territories: TerritoryData[];
   variantTags: VariantTagData[];
   writingSystems: WritingSystemData[];
-  censuses: Record<CensusID, CensusData>;
+  censuses: CensusData[];
 };
 
 export type CoreData = CoreDataArrays & {
@@ -79,9 +80,6 @@ export function useCoreData(): {
 } {
   const [allLanguoids, setAllLanguoids] = useState<LanguageData[]>([]);
   const [objects, setObjects] = useState<Record<string, ObjectData>>({});
-
-  // Censuses are not populated here, but this seems necessary because the state affects the page.
-  const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
 
   async function loadCoreData(): Promise<void> {
     const [
@@ -140,18 +138,24 @@ export function useCoreData(): {
     createRegionalLocales(territories, locales); // create them after connecting them
     computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
-    setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
-    setAllLanguoids(Object.values(languagesBySource.All));
-    setObjects({
-      // All combined into one big object map for easy lookup but the ID formats are unique so its OK
+    // Load census data
+    const languageLookup = {
       ...languagesBySource.Glottolog, // aaaa0000
       ...languagesBySource.ISO, // aaa
       ...languagesBySource.BCP, // aa | aaa
       ...languagesBySource.All, // A few languages like `mol` aren't in those sets but should still be indexed
+    };
+    const censuses = await loadAllCensuses(languageLookup, locales, territories);
+
+    setAllLanguoids(Object.values(languagesBySource.All));
+    setObjects({
+      // All combined into one big object map for easy lookup but the ID formats are unique so its OK
+      ...languageLookup, // aaaa0000 | aaa | aa
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa
-      ...variantTags, // These may be arbitrary, but usually 6-8 alphabetic
+      ...variantTags, // These may be arbitrary, but usually 4-8 alphanumeric characters
+      ...censuses,
     });
   }
 
@@ -169,7 +173,7 @@ export function useCoreData(): {
       writingSystems: Object.values(objects).filter(
         (o): o is WritingSystemData => o.type === ObjectType.WritingSystem,
       ),
-      censuses,
+      censuses: Object.values(objects).filter((o): o is CensusData => o.type === ObjectType.Census),
       objects,
     },
   };

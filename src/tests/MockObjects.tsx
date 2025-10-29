@@ -344,7 +344,7 @@ function getMockedDataContext(objects: ObjectDictionary): DataContextType {
 
   const dataContext: DataContextType = {
     allLanguoids: languages,
-    censuses: { be0590: objects.be0590 as CensusData },
+    censuses: [objects.be0590 as CensusData],
     languagesInSelectedSource: languages,
     locales,
     territories,
