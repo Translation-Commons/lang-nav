@@ -27,7 +27,11 @@ export function updateLanguagesBasedOnSource(
     );
     lang.scope = specific.scope ?? lang.scope;
     lang.populationOfDescendents = specific.populationOfDescendents ?? undefined;
-    lang.populationEstimate = lang.populationCited ?? specific.populationOfDescendents;
+    lang.populationEstimate =
+      Math.max(
+        lang.populationCited ?? specific.populationOfDescendents ?? 0,
+        lang.populationFromLocales ?? 0,
+      ) || undefined;
     lang.parentLanguage = specific.parentLanguage ?? undefined;
     lang.childLanguages = specific.childLanguages ?? [];
   });
