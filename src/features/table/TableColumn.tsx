@@ -17,6 +17,15 @@ interface TableColumn<T> {
   /** Function that renders rich React content for a cell */
   readonly render: (object: T) => React.ReactNode;
 
+  /**
+   * Supply an explicit plain value for CSV export.
+   * When not provided, the table will attempt to extract text from the result of
+   * the `render` function. Use this when your render output contains icons,
+   * links, or other complex markup and you want a clean text representation in
+   * the exported CSV.
+   */
+  readonly exportValue?: (object: T) => string | number | boolean | null | undefined;
+
   /** Indicate the type of data in the column; influences sorting and alignment */
   readonly valueType?: TableValueType;
 

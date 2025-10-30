@@ -22,6 +22,7 @@ import { getSortFunction } from '../sorting/sort';
 
 import TableColumn from './TableColumn';
 import TableColumnSelector from './TableColumnSelector';
+import TableExport from './TableExport';
 import TableSortButton from './TableSortButton';
 import useColumnVisibility from './useColumnVisibility';
 
@@ -62,10 +63,16 @@ function ObjectTable<T extends ObjectData>({
 
   return (
     <div className="ObjectTableContainer">
-      <VisibleItemsMeter
-        objects={objects}
-        shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-      />
+      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+        <VisibleItemsMeter
+          objects={objects}
+          shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
+        />
+        <TableExport
+          visibleColumns={visibleColumns}
+          objectsFilteredAndSorted={objectsFilteredAndSorted}
+        />
+      </div>
       <TableColumnSelector
         columns={columns}
         columnVisibility={columnVisibility}

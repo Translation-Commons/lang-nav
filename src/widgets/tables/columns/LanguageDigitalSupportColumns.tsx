@@ -9,6 +9,7 @@ export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = [
     key: 'CLDR Coverage',
     label: 'CLDR Coverage',
     render: (lang) => <CLDRCoverageText object={lang} />,
+    exportValue: (lang) => lang.cldrCoverage?.actualCoverageLevel,
     isInitiallyVisible: false,
     columnGroup: 'Digital Support',
   },

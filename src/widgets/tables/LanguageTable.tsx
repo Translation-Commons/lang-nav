@@ -108,6 +108,7 @@ const LanguageTable: React.FC = () => {
             if (literacy == null) return <Deemphasized>—</Deemphasized>;
             return literacy.toFixed(1);
           },
+          exportValue: (lang) => getObjectLiteracy(lang)?.toFixed(1),
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
           valueType: TableValueType.Numeric,
