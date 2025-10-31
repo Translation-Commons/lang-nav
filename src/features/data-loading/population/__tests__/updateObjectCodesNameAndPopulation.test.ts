@@ -5,7 +5,6 @@ import {
   getDisconnectedMockedObjects,
   getMockedObjectDictionaries,
 } from '@features/__tests__/MockObjects';
-import { computeLocalePopulationFromCensuses } from '@features/data-loading/population/computeLocalePopulationFromCensuses';
 import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';

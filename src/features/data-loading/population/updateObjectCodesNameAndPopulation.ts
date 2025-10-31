@@ -86,14 +86,6 @@ function updateObjectNamesAndCodes(
       (s) => s,
     );
     lang.scope = specific.scope ?? lang.scope;
-    lang.populationOfDescendents = specific.populationOfDescendents ?? undefined;
-    lang.populationEstimate =
-      Math.max(
-        lang.populationCited ?? specific.populationOfDescendents ?? 0,
-        lang.populationFromLocales ?? 0,
-      ) || undefined;
-    lang.parentLanguage = specific.parentLanguage ?? undefined;
-    lang.childLanguages = specific.childLanguages ?? [];
   });
 
   // Update locales too, their codes and their names

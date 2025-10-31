@@ -3,20 +3,23 @@ import { LocaleData, LocaleInCensus } from '@entities/types/DataTypes';
 
 type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 
+// Feature flags to enable/disable specific population estimate rules.
+// Set to false to temporarily disable the rule, true to enable.
+const ENABLE_COLLECTOR_TYPE_RANKING = 0; // Prefer government sources over CLDR
+const ENABLE_YEAR_COLLECTED_RANKING = 0; // Prefer most recent census estimate
+
 const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
   // Potential filters:
   // acquisitionOrder: Any > L1 > L2 > L3
 
   // Prefer government sources over CLDR
-  // Temporarily disabled
   (a, b) =>
     (getCensusCollectorTypeRank(a.census.collectorType) -
       getCensusCollectorTypeRank(b.census.collectorType)) *
-    0,
+    ENABLE_COLLECTOR_TYPE_RANKING,
 
   // Get the most recent census estimate
-  // Temporarily disabled
-  (a, b) => (b.census.yearCollected - a.census.yearCollected) * 0,
+  (a, b) => (b.census.yearCollected - a.census.yearCollected) * ENABLE_YEAR_COLLECTED_RANKING,
 
   // Just get the highest number
   (a, b) => b.populationPercent - a.populationPercent,
