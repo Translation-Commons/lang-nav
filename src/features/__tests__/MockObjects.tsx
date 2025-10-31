@@ -1,15 +1,16 @@
+import { addCensusData } from '@features/data-loading/CensusData';
+import { DataContextType } from '@features/data-loading/context/useDataContext';
+import { CoreDataArrays } from '@features/data-loading/CoreData';
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
   connectLocales,
   connectWritingSystems,
 } from '@features/data-loading/DataAssociations';
-import { DataContextType, updateLanguagesBasedOnSource } from '@features/data-loading/DataContext';
 import { connectVariantTags } from '@features/data-loading/IANAData';
-import {
-  computeLocalePopulationFromCensuses,
-  computeLocaleWritingPopulation,
-} from '@features/data-loading/PopulationData';
+import { computeLocalePopulationFromCensuses } from '@features/data-loading/population/computeLocalePopulationFromCensuses';
+import { computeLocaleWritingPopulation } from '@features/data-loading/population/computeLocaleWritingPopulation';
+import { updateObjectCodesNameAndPopulation } from '@features/data-loading/population/updateObjectCodesNameAndPopulation';
 import {
   computeContainedTerritoryStats,
   connectTerritoriesToParent,
@@ -35,7 +36,7 @@ import {
   WritingSystemScope,
 } from '@entities/types/DataTypes';
 
-function getDisconnectedMockedObjects(): ObjectDictionary {
+export function getDisconnectedMockedObjects(): ObjectDictionary {
   // Languages
   const sjn: LanguageData = {
     ...getBaseLanguageData('sjn', 'Sindarin'), // sjn
@@ -116,7 +117,7 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
     nameDisplay: 'Aman',
     nameEndonym: 'aman',
     names: ['Aman', 'The Undying Lands', 'aman'],
-    scope: TerritoryScope.Continent,
+    scope: TerritoryScope.Country, // not really a country, but for our purposes here we need to treat it as one
     population: 20000,
     populationFromUN: 20000,
     literacyPercent: 98.0,
@@ -148,7 +149,7 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
     isoRegionCode: 'BE',
     eligiblePopulation: BE.population,
     languageEstimates: {
-      sjn: 9000,
+      sjn: 9300, // 77.5%, increased to test out the population recomputation
     },
     languageCount: 1,
   };
@@ -242,9 +243,9 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
     BE,
     ER,
     HA,
-    middleEarth,
+    '123': middleEarth,
     AM,
-    world,
+    '001': world,
 
     // Censuses
     be0590,
@@ -263,13 +264,31 @@ function getDisconnectedMockedObjects(): ObjectDictionary {
   };
 }
 
-/**
- * This function generates a set of data to quickly mock in tests without needing to load in the TSVs.
- *
- * @returns A set of mock objects for testing purposes.
- */
-export function getMockedObjects(): ObjectDictionary {
-  const objects = getDisconnectedMockedObjects();
+export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArrays {
+  const objects = inputObjects ?? getDisconnectedMockedObjects();
+  const objectArray = Object.values(objects);
+  return {
+    allLanguoids: objectArray.filter((obj) => obj.type === ObjectType.Language),
+    locales: objectArray.filter((obj) => obj.type === ObjectType.Locale),
+    territories: objectArray.filter((obj) => obj.type === ObjectType.Territory),
+    writingSystems: objectArray.filter((obj) => obj.type === ObjectType.WritingSystem),
+    variantTags: objectArray.filter((obj) => obj.type === ObjectType.VariantTag),
+    censuses: { be0590: objects.be0590 as CensusData },
+  };
+}
+
+export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
+  objects: ObjectDictionary;
+  censuses: Record<string, CensusData>;
+  languagesBySource: Record<LanguageSource, Record<string, LanguageData>>;
+  languages: Record<string, LanguageData>;
+  locales: Record<string, LocaleData>;
+  territories: Record<string, TerritoryData>;
+  writingSystems: Record<string, WritingSystemData>;
+  variantTags: Record<string, VariantTagData>;
+} {
+  const objects = inputObjects ?? getDisconnectedMockedObjects();
+  const objectsArray = Object.values(objects);
   const languagesBySource: Record<LanguageSource, Record<string, LanguageData>> = {
     All: {
       sjn: objects.sjn as LanguageData,
@@ -283,68 +302,137 @@ export function getMockedObjects(): ObjectDictionary {
     Glottolog: {},
     CLDR: {},
   };
-  const territories: Record<string, TerritoryData> = {
-    BE: objects.BE as TerritoryData,
-    ER: objects.ER as TerritoryData,
-    HA: objects.HA as TerritoryData,
-    AM: objects.AM as TerritoryData,
-    '123': objects.middleEarth as TerritoryData,
-    '001': objects.world as TerritoryData,
+  const territories: Record<string, TerritoryData> = objectsArray
+    .filter((obj) => obj.type === ObjectType.Territory)
+    .reduce<Record<string, TerritoryData>>((acc, territory) => {
+      acc[territory.ID] = territory;
+      return acc;
+    }, {});
+  const writingSystems: Record<string, WritingSystemData> = objectsArray
+    .filter((obj) => obj.type === ObjectType.WritingSystem)
+    .reduce<Record<string, WritingSystemData>>((acc, writingSystem) => {
+      acc[writingSystem.ID] = writingSystem;
+      return acc;
+    }, {});
+  const locales: Record<string, LocaleData> = objectsArray
+    .filter((obj) => obj.type === ObjectType.Locale)
+    .reduce<Record<string, LocaleData>>((acc, locale) => {
+      acc[locale.ID] = locale;
+      return acc;
+    }, {});
+  const variantTags: Record<string, VariantTagData> = objectsArray
+    .filter((obj) => obj.type === ObjectType.VariantTag)
+    .reduce<Record<string, VariantTagData>>((acc, variantTag) => {
+      acc[variantTag.ID] = variantTag;
+      return acc;
+    }, {});
+  const censuses: Record<string, CensusData> = objectsArray
+    .filter((obj) => obj.type === ObjectType.Census)
+    .reduce<Record<string, CensusData>>((acc, census) => {
+      acc[census.ID] = census;
+      return acc;
+    }, {});
+  return {
+    objects,
+    censuses,
+    languagesBySource,
+    languages: languagesBySource.All,
+    locales,
+    territories,
+    writingSystems,
+    variantTags,
   };
-  const writingSystems: Record<string, WritingSystemData> = {
-    Teng: objects.Teng as WritingSystemData,
-  };
-  const locales: Record<string, LocaleData> = {
-    sjn_BE: objects.sjn_BE as LocaleData,
-    sjn_ER: objects.sjn_ER as LocaleData,
-    dori0123_ER: objects.dori0123_ER as LocaleData,
-    sjn_Teng_BE: objects.sjn_Teng_BE as LocaleData,
-  };
-  const variantTags: Record<string, VariantTagData> = {
-    tolkorth: objects.tolkorth as VariantTagData,
-  };
+}
 
-  // From CoreData
+// Makes all of the symbolic connections between the various objects
+// Also creates the regional locales, eg. sjn_BE -> sjn_123 & -> sjn_001
+export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDictionary {
+  const {
+    objects,
+    languagesBySource,
+    territories,
+    writingSystems,
+    locales,
+    variantTags,
+    censuses,
+  } = getMockedObjectDictionaries(inputObjects);
+
   connectLanguagesToParent(languagesBySource);
   connectTerritoriesToParent(territories);
   connectWritingSystems(languagesBySource.All, territories, writingSystems);
   connectLocales(languagesBySource.All, territories, writingSystems, locales);
   connectVariantTags(variantTags, languagesBySource.BCP, locales);
-  createRegionalLocales(territories, locales); // create them after connecting them
+  createRegionalLocales(territories, locales);
+
+  // Update the objects dictionary with the regional locales
+  Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
+
+  // Usually does in the supplemental data load step, we will add censuses connections here
+  addCensusData(
+    (id) => languagesBySource.All[id],
+    (id) => locales[id],
+    (id) => territories[id],
+    {},
+    { censuses: Object.values(censuses), languageNames: {} },
+  );
+
+  return objects;
+}
+
+/**
+ * This function generates a set of data to quickly mock in tests without needing to load in the TSVs.
+ *
+ * @returns A set of mock objects for testing purposes. These have been processed to connect
+ * child objects to eachother and also with attributes computed by the various algorithms.
+ */
+export function getFullyInstantiatedMockedObjects(
+  inputObjects?: ObjectDictionary,
+): ObjectDictionary {
+  const objects = inputObjects ?? getDisconnectedMockedObjects();
+
+  // Initial connections and algorithms
+  connectMockedObjects(objects);
+  const { languagesBySource, writingSystems, locales } = getMockedObjectDictionaries(objects);
   computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
   // From DataContext
-  updateLanguagesBasedOnSource(
+  const world = objects['001'] as TerritoryData;
+  updateObjectCodesNameAndPopulation(
     [objects.sjn, objects.dori0123] as LanguageData[],
     Object.values(locales),
+    world,
     LanguageSource.All,
     LocaleSeparator.Hyphen,
   );
 
   // From SupplementalData
-  computeContainedTerritoryStats(territories['001']);
+  computeContainedTerritoryStats(world);
 
   // Add computed territory locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
   computeLocaleWritingPopulation(Object.values(locales));
-
-  // From PopulationData
-  const dataContext = getMockedDataContext(objects);
-  computeLocalePopulationFromCensuses(dataContext);
+  computeLocalePopulationFromCensuses(Object.values(locales));
   return objects;
 }
 
-function getMockedDataContext(objects: ObjectDictionary): DataContextType {
+export function getMockedDataContext(objects: ObjectDictionary): DataContextType {
   const objectArray = Object.values(objects);
   const languages = objectArray.filter((obj) => obj.type === ObjectType.Language);
   const locales = objectArray.filter((obj) => obj.type === ObjectType.Locale);
   const territories = objectArray.filter((obj) => obj.type === ObjectType.Territory);
   const writingSystems = objectArray.filter((obj) => obj.type === ObjectType.WritingSystem);
   const variantTags = objectArray.filter((obj) => obj.type === ObjectType.VariantTag);
+  const censuses = objectArray.reduce(
+    (acc, obj) => {
+      if (obj.type === ObjectType.Census) acc[obj.ID] = obj;
+      return acc;
+    },
+    {} as Record<string, CensusData>,
+  );
 
   const dataContext: DataContextType = {
     allLanguoids: languages,
-    censuses: { be0590: objects.be0590 as CensusData },
+    censuses,
     languagesInSelectedSource: languages,
     locales,
     territories,

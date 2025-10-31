@@ -1,7 +1,10 @@
 import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
+import HoverableButton from '@features/hovercard/HoverableButton';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import { ObjectType, SearchableField, View } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { groupBy, sumBy } from '@shared/lib/setUtils';
 
@@ -18,6 +21,8 @@ const LanguagePopulationFromLocales: React.FC<{ lang: LanguageData }> = ({ lang 
 };
 
 const Descendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { updatePageParams } = usePageParams();
+
   const localesFromUniqueTerritories = Object.values(
     groupBy(
       lang.locales.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0)),
@@ -56,6 +61,19 @@ const Descendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           )}
         </tbody>
       </table>
+      <HoverableButton
+        onClick={() =>
+          updatePageParams({
+            searchString: lang.ID + '_',
+            searchBy: SearchableField.Code,
+            view: View.Table,
+            objectType: ObjectType.Locale,
+          })
+        }
+        style={{ display: 'block' }}
+      >
+        See more details in the locale table
+      </HoverableButton>
     </>
   );
 };

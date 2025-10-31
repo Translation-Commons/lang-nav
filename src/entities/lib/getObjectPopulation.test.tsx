@@ -1,5 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
+import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getObjectPercentOfTerritoryPopulation,
@@ -11,9 +13,7 @@ import {
 } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getMockedObjects } from '@tests/MockObjects';
-
-const mockedObjects = getMockedObjects();
+const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getObjectPopulation', () => {
   it('returns population for objects', () => {
@@ -25,22 +25,22 @@ describe('getObjectPopulation', () => {
       '123': 30000, // recomputed BE+HA+ER
       AM: 20000,
       BE: 12000,
-      ER: 2400,
-      HA: 15600,
-      Teng: 9000, // all from sjn_Teng_BE
-      dori0123: 2500,
+      be0590: 12000,
       dori0123_001: 1800,
       dori0123_123: 1800,
       dori0123_ER: 1800,
-      be0590: 12000,
-      sjn: 24000,
-      sjn_001: 10920,
-      sjn_123: 10920,
+      dori0123: 2500,
+      ER: 2400,
+      HA: 15600,
+      sjn_001: 11220,
+      sjn_123: 11220,
+      sjn_BE: 9300, // Increased by the be0590 census
+      sjn_ER: 1920,
       sjn_Teng_001: 9000,
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
-      sjn_ER: 1920,
-      sjn_BE: 9000,
+      sjn: 24000,
+      Teng: 9000, // all from sjn_Teng_BE
       tolkorth: 24000, // Estimated from sjn
     });
   });
@@ -65,15 +65,15 @@ describe('getObjectPopulationAttested', () => {
       dori0123: 2500,
       be0590: 12000,
       sjn: 24000,
-      sjn_BE: 9000,
+      sjn_BE: 9300, // Increased by the be0590 census
       sjn_ER: 1920, // no census but using the data from the locale database
 
       // Regional locales have data because they are summed up from the locales inside
       dori0123_001: 1800,
       dori0123_123: 1800,
       dori0123_ER: 1800,
-      sjn_001: 10920,
-      sjn_123: 10920,
+      sjn_001: 11220,
+      sjn_123: 11220,
       sjn_Teng_001: 9000,
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
@@ -95,23 +95,23 @@ describe('getObjectPopulationOfDescendents', () => {
     expect(results).toEqual({
       '001': undefined,
       '123': undefined,
-      Teng: undefined, // all from sjn_Teng_BE
-      ER: undefined,
-      HA: undefined,
       BE: undefined,
-      dori0123: 1, // 1 from being a leaf node
+      be0590: undefined,
       dori0123_001: undefined,
       dori0123_123: undefined,
       dori0123_ER: undefined,
-      be0590: undefined,
-      sjn: 2502, // From dori0123 + 2 for each node
+      dori0123: 1, // 1 from being a leaf node
+      ER: undefined,
+      HA: undefined,
       sjn_001: undefined,
       sjn_123: undefined,
+      sjn_BE: undefined,
+      sjn_ER: undefined,
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
-      sjn_ER: undefined,
-      sjn_BE: undefined,
+      sjn: 2502, // From dori0123 + 2 for each node
+      Teng: undefined, // all from sjn_Teng_BE
       tolkorth: undefined,
     });
   });
@@ -129,23 +129,23 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
       '001': undefined, // world is not contained in a larger territory
       '123': '60.0', // 30000/50000 of the world
       AM: '40.0', // 20000/50000 of the world
-      Teng: undefined,
-      ER: '8.0', // ER in 123
-      HA: '52.0', // HA in 123
       BE: '40.0', // BE in 123
-      dori0123: undefined,
+      be0590: '100.0', // be0590 covers all of BE,
       dori0123_001: '3.6', // dori0123_001 is 3.6% of the world
       dori0123_123: '6.0', // dori0123_123 is 6% of middle earth
       dori0123_ER: '75.0', // dori0123_ER is 75% of ER
-      be0590: undefined,
-      sjn: undefined,
-      sjn_001: '21.8',
-      sjn_123: '36.4',
+      dori0123: undefined,
+      ER: '8.0', // ER in 123
+      HA: '52.0', // HA in 123
+      sjn_001: '22.4',
+      sjn_123: '37.4',
+      sjn_BE: '77.5',
+      sjn_ER: '80.0',
       sjn_Teng_001: '18.0',
       sjn_Teng_123: '30.0',
       sjn_Teng_BE: '75.0',
-      sjn_ER: '80.0',
-      sjn_BE: '75.0',
+      sjn: undefined,
+      Teng: undefined,
       tolkorth: undefined,
     });
   });
@@ -160,25 +160,26 @@ describe('getObjectPopulationPercentInBiggestDescendentLanguage', () => {
       ]),
     );
     expect(results).toEqual({
-      '001': '21.8', // size of middle earth compared to world
-      '123': '36.4', // Beleriand is the biggest region in middle earth with this limited data
+      '001': '22.4', // size of middle earth compared to world
+      '123': '37.4', // Beleriand is the biggest region in middle earth with this limited data
       AM: undefined,
-      Teng: undefined,
-      ER: '80.0', // sjn_ER is 80% of ER
-      BE: '75.0', // sjn_BE is 75% of BE
-      dori0123: undefined,
+      BE: '77.5', // sjn_BE is 77.5% of BE -- increased because of the be0590 census
+      be0590: undefined,
       dori0123_001: undefined,
       dori0123_123: undefined,
       dori0123_ER: undefined,
-      be0590: undefined,
-      sjn: undefined,
+      dori0123: undefined,
+      ER: '80.0', // sjn_ER is 80% of ER
+      HA: undefined,
       sjn_001: undefined,
       sjn_123: undefined,
+      sjn_BE: undefined,
+      sjn_ER: undefined,
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
-      sjn_ER: undefined,
-      sjn_BE: undefined,
+      sjn: undefined,
+      Teng: undefined,
       tolkorth: undefined,
     });
   });
@@ -195,22 +196,24 @@ describe('getObjectPopulationRelativeToOverallLanguageSpeakers', () => {
     expect(results).toEqual({
       '001': undefined,
       '123': undefined,
-      Teng: undefined,
-      ER: undefined,
+      AM: undefined,
       BE: undefined,
-      dori0123: '10.4',
+      be0590: undefined,
       dori0123_001: '72.0',
       dori0123_123: '72.0',
       dori0123_ER: '72.0',
-      be0590: undefined,
-      sjn: undefined,
-      sjn_001: '45.5',
-      sjn_123: '45.5',
+      dori0123: '10.4',
+      ER: undefined,
+      HA: undefined,
+      sjn_001: '46.8',
+      sjn_123: '46.8',
+      sjn_BE: '38.8',
+      sjn_ER: '8.0',
       sjn_Teng_001: '37.5',
       sjn_Teng_123: '37.5',
       sjn_Teng_BE: '37.5',
-      sjn_ER: '8.0',
-      sjn_BE: '37.5',
+      sjn: undefined,
+      Teng: undefined,
       tolkorth: undefined,
     });
   });

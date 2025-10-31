@@ -2,19 +2,19 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    31.5 |    78.9 |    46.6 |    31.5 |
+| `src`                                    |    32.3 |    78.8 |    52.8 |    32.3 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    38.6 |    84.9 |    46.5 |    38.6 |
-| `    census`                             |    23.8 |   100.0 |     0   |    23.8 |
+| `  entities`                             |    38.8 |    84.3 |    47.5 |    38.8 |
+| `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
-| `      CensusTypes.tsx`                  |    31.3 |   100.0 |     0   |    31.3 |
-| `    language`                           |    38.1 |    94.2 |    37.5 |    38.1 |
+| `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
+| `    language`                           |    37.9 |    94.2 |    37.5 |    37.9 |
 | `      LanguageCard.tsx`                 |    23.5 |   100.0 |     0   |    23.5 |
 | `      LanguagePopulationEstimate.tsx`   |    27.8 |   100.0 |     0   |    27.8 |
 | `      LanguagePopulationFromDescendents.tsx` |     9.7 |   100.0 |     0   |     9.7 |
-| `      LanguagePopulationFromLocales.tsx` |    12.5 |   100.0 |     0   |    12.5 |
+| `      LanguagePopulationFromLocales.tsx` |    14.3 |   100.0 |     0   |    14.3 |
 | `      LanguageTypes.tsx`                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      plurals`                          |    34.3 |    95.2 |    36.0 |    34.3 |
 | `        LanguagePluralCategories.tsx`   |    21.9 |   100.0 |     0   |    21.9 |
@@ -57,28 +57,32 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    44.6 |    78.8 |    42.0 |    44.6 |
-| `    data-loading`                       |    28.6 |    71.9 |    26.8 |    28.6 |
-| `      CensusData.tsx`                   |     2.7 |   100.0 |     0   |     2.7 |
-| `      context`                          |    11.4 |    50.0 |    11.1 |    11.4 |
+| `  features`                             |    50.6 |    79.0 |    58.6 |    50.6 |
+| `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
+| `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
+| `    data-loading`                       |    32.0 |    72.5 |    56.1 |    32.0 |
+| `      CensusData.tsx`                   |    19.3 |    90.0 |    40.0 |    19.3 |
+| `      context`                          |    13.6 |     0   |     0   |    13.6 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
-| `        updateLanguagesBasedOnSource.ts` |     0   |   100.0 |   100.0 |     0   |
 | `        useDataContext.tsx`             |    81.0 |   100.0 |     0   |    81.0 |
-| `      CoreData.tsx`                     |    17.6 |   100.0 |     0   |    17.6 |
-| `      DataAssociations.tsx`             |    65.7 |    58.3 |    85.7 |    65.7 |
-| `      DataContext.tsx`                  |    39.0 |    72.7 |    11.1 |    39.0 |
+| `      CoreData.tsx`                     |     0   |     0   |     0   |     0   |
+| `      DataAssociations.tsx`             |    65.7 |    61.5 |    85.7 |    65.7 |
 | `      DataLoader.tsx`                   |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      DataParsing.tsx`                  |    96.3 |    93.8 |   100.0 |    96.3 |
-| `      GlottologData.tsx`                |     2.9 |   100.0 |     0   |     2.9 |
-| `      IANAData.tsx`                     |    24.6 |    60.0 |    20.0 |    24.6 |
-| `      iso`                              |     6.7 |   100.0 |     0   |     6.7 |
-| `        ISORetirements.tsx`             |     6.7 |   100.0 |     0   |     6.7 |
-| `      ISOData.tsx`                      |     3.3 |   100.0 |     0   |     3.3 |
-| `      PopulationData.tsx`               |    56.8 |    44.0 |    42.9 |    56.8 |
-| `      SupplementalData.tsx`             |    19.2 |   100.0 |     0   |    19.2 |
-| `      TerritoryData.tsx`                |    60.2 |    69.6 |    57.1 |    60.2 |
-| `      UnicodeData.tsx`                  |     3.9 |   100.0 |     0   |     3.9 |
-| `      WikipediaData.tsx`                |     1.8 |   100.0 |     0   |     1.8 |
+| `      GlottologData.tsx`                |     0   |     0   |     0   |     0   |
+| `      IANAData.tsx`                     |    24.6 |    70.0 |    20.0 |    24.6 |
+| `      iso`                              |     0   |     0   |     0   |     0   |
+| `        ISORetirements.tsx`             |     0   |     0   |     0   |     0   |
+| `      ISOData.tsx`                      |     0   |     0   |     0   |     0   |
+| `      population`                       |    99.4 |    67.5 |   100.0 |    99.4 |
+| `        computeLocalePopulationFromCensuses.ts` |    97.7 |    84.2 |   100.0 |    97.7 |
+| `        computeLocaleWritingPopulation.ts` |   100.0 |    58.3 |   100.0 |   100.0 |
+| `        computeRegionalLocalePopulation.ts` |   100.0 |    57.1 |   100.0 |   100.0 |
+| `        updateObjectCodesNameAndPopulation.ts` |   100.0 |    72.2 |   100.0 |   100.0 |
+| `      SupplementalData.tsx`             |     0   |     0   |     0   |     0   |
+| `      TerritoryData.tsx`                |    60.2 |    67.4 |    57.1 |    60.2 |
+| `      UnicodeData.tsx`                  |     0   |     0   |     0   |     0   |
+| `      WikipediaData.tsx`                |     0   |   100.0 |   100.0 |     0   |
 | `    filtering`                          |    25.0 |   100.0 |    11.1 |    25.0 |
 | `      filter.tsx`                       |    25.0 |   100.0 |    11.1 |    25.0 |
 | `    hovercard`                          |    96.3 |    83.1 |    90.5 |    96.3 |
@@ -163,8 +167,7 @@
 | `      PercentageDifference.tsx`         |     8.6 |   100.0 |     0   |     8.6 |
 | `  strings`                              |     0   |   100.0 |   100.0 |     0   |
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
-| `  tests`                                |    99.1 |    85.7 |    50.0 |    99.1 |
-| `    MockObjects.tsx`                    |    99.0 |    83.3 |    44.4 |    99.0 |
+| `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
 | `  widgets`                              |    15.2 |    67.7 |    50.8 |    15.2 |
 | `    cardlists`                          |    53.9 |    93.3 |   100.0 |    53.9 |

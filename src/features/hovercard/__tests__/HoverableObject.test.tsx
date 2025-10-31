@@ -1,14 +1,12 @@
-import { describe } from 'node:test';
-
 import { render, screen } from '@testing-library/react';
-import { expect, it, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
-import { getMockedObjects } from '@tests/MockObjects';
+import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
 import HoverableObject from '../HoverableObject';
 import HoverableObjectName from '../HoverableObjectName';
 
-const mockedObjects = getMockedObjects();
+const mockedObjects = getFullyInstantiatedMockedObjects();
 
 const showHoverCard = vi.fn();
 vi.mock('@features/hovercard/useHoverCard', () => ({

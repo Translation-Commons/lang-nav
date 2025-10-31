@@ -1,12 +1,10 @@
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { LanguageCode, LanguageModality } from '@entities/language/LanguageTypes';
-import { LocaleData } from '@entities/types/DataTypes';
+import { LanguageCode, LanguageData, LanguageModality } from '@entities/language/LanguageTypes';
+import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
-
-import { DataContextType } from './context/useDataContext';
 
 const DEBUG = false;
 
@@ -240,11 +238,17 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
   };
 }
 
-export function addCensusData(dataContext: DataContextType, censusData: CensusImport): void {
+export function addCensusData(
+  getLanguage: (id: string) => LanguageData | undefined,
+  getLocale: (id: string) => LocaleData | undefined,
+  getTerritory: (id: string) => TerritoryData | undefined,
+  censuses: Record<string, CensusData>,
+  censusImport: CensusImport,
+): void {
   // Add alternative language names to the language data
-  Object.entries(censusData.languageNames).forEach(([languageCode, languageName]) => {
+  Object.entries(censusImport.languageNames).forEach(([languageCode, languageName]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
-    const language = dataContext.getLanguage(languageCode);
+    const language = getLanguage(languageCode);
     if (language != null) {
       // Split on / since some censuses have multiple names for the same language
       languageName
@@ -256,19 +260,19 @@ export function addCensusData(dataContext: DataContextType, censusData: CensusIm
       // TODO: show warning in the "Notices" tool
       // TODO: support "languages" that are actually locale tags eg. bhum1234-u-sd-inod
       console.warn(
-        `Language ${languageName} [${languageCode}] not found for census data: ${censusData.censuses[0].ID}`,
+        `Language ${languageName} [${languageCode}] not found for census data: ${censusImport.censuses[0].ID}`,
       );
     }
   });
 
   // Add the census records to the core data
-  for (const census of censusData.censuses) {
+  for (const census of censusImport.censuses) {
     // Add the census to the core data if its not there yet
-    if (dataContext.censuses[census.ID] == null) {
-      dataContext.censuses[census.ID] = census;
+    if (censuses[census.ID] == null) {
+      censuses[census.ID] = census;
 
       // Add the territory reference to it
-      const territory = dataContext.getTerritory(census.isoRegionCode);
+      const territory = getTerritory(census.isoRegionCode);
       if (territory != null && territory.type === ObjectType.Territory) {
         census.territory = territory;
         if (territory.censuses == null) territory.censuses = [];
@@ -276,7 +280,7 @@ export function addCensusData(dataContext: DataContextType, censusData: CensusIm
       }
 
       // Create references to census from the locale data
-      addCensusRecordsToLocales(dataContext.getLocale, census);
+      addCensusRecordsToLocales(getLocale, census);
     } else {
       // It's reloaded twice on dev mode
       // console.warn(`Census data for ${census.ID} already exists, skipping.`);

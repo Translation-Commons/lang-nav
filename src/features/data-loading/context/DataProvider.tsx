@@ -13,9 +13,9 @@ import {
 } from '@entities/types/DataTypes';
 
 import { useCoreData } from '../CoreData';
+import { updateObjectCodesNameAndPopulation } from '../population/updateObjectCodesNameAndPopulation';
 import { loadSupplementalData } from '../SupplementalData';
 
-import { updateLanguagesBasedOnSource } from './updateLanguagesBasedOnSource';
 import { DataContext, DataContextType } from './useDataContext';
 
 // Create a provider component
@@ -104,14 +104,23 @@ const DataProvider: React.FC<{
     }
   }, [dataContext, loadProgress]); // this is called once after page load
 
+  const world = getTerritory('001')!;
   useEffect(() => {
-    updateLanguagesBasedOnSource(
+    updateObjectCodesNameAndPopulation(
       languagesInSelectedSource,
       coreData.locales,
+      world,
       languageSource,
       localeSeparator,
     );
-  }, [languageSource, loadProgress, localeSeparator]); // when core language data or the language source changes
+  }, [
+    languagesInSelectedSource,
+    coreData.locales,
+    languageSource,
+    world,
+    loadProgress,
+    localeSeparator,
+  ]); // when core language data or the language source changes
 
   return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
 };
