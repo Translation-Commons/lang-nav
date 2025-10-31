@@ -11,6 +11,8 @@ import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulatio
 import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
+import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 
 import DetailsField from '@shared/containers/DetailsField';
@@ -156,6 +158,14 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
+      <DetailsField title="Plural Categories:">
+        <div
+          style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}
+        >
+          <LanguagePluralCategories lang={lang} />
+          <LanguagePluralGridButton lang={lang} />
+        </div>
+      </DetailsField>
     </DetailsSection>
   );
 };

@@ -2,20 +2,29 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    31.7 |    77.6 |    47.4 |    31.7 |
+| `src`                                    |    31.5 |    78.9 |    46.6 |    31.5 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    39.9 |    81.9 |    50.0 |    39.9 |
+| `  entities`                             |    38.6 |    84.9 |    46.5 |    38.6 |
 | `    census`                             |    23.8 |   100.0 |     0   |    23.8 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    31.3 |   100.0 |     0   |    31.3 |
-| `    language`                           |    41.3 |    93.3 |    39.1 |    41.3 |
+| `    language`                           |    38.1 |    94.2 |    37.5 |    38.1 |
 | `      LanguageCard.tsx`                 |    23.5 |   100.0 |     0   |    23.5 |
 | `      LanguagePopulationEstimate.tsx`   |    27.8 |   100.0 |     0   |    27.8 |
 | `      LanguagePopulationFromDescendents.tsx` |     9.7 |   100.0 |     0   |     9.7 |
 | `      LanguagePopulationFromLocales.tsx` |    12.5 |   100.0 |     0   |    12.5 |
 | `      LanguageTypes.tsx`                |   100.0 |   100.0 |   100.0 |   100.0 |
+| `      plurals`                          |    34.3 |    95.2 |    36.0 |    34.3 |
+| `        LanguagePluralCategories.tsx`   |    21.9 |   100.0 |     0   |    21.9 |
+| `        LanguagePluralComputation.ts`   |    97.1 |    96.4 |   100.0 |    97.1 |
+| `        LanguagePluralGrid.tsx`         |    24.6 |   100.0 |     0   |    24.6 |
+| `        LanguagePluralGridToggle.tsx`   |    25.9 |   100.0 |     0   |    25.9 |
+| `        LanguagePluralRuleSymbolsUsed.tsx` |     0   |     0   |     0   |     0   |
+| `        PluralRuleExplanation.tsx`      |     8.3 |   100.0 |     0   |     8.3 |
+| `        PluralRuleSymbolExplanation.tsx` |     9.4 |   100.0 |     0   |     9.4 |
+| `        PluralStrings.ts`               |     9.1 |   100.0 |     0   |     9.1 |
 | `      vitality`                         |    44.4 |    92.8 |    46.7 |    44.4 |
 | `        LanguageDetailsVitalityAndViability.tsx` |    21.6 |   100.0 |     0   |    21.6 |
 | `        LanguageVitalityCell.tsx`       |     0   |     0   |     0   |     0   |
@@ -127,15 +136,16 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    41.7 |    84.6 |    56.3 |    41.7 |
+| `  shared`                               |    34.0 |    84.6 |    54.5 |    34.0 |
 | `    containers`                         |    48.8 |   100.0 |   100.0 |    48.8 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      DetailsSection.tsx`               |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      ViewCard.tsx`                     |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    hooks`                              |    18.2 |    50.0 |    40.0 |    18.2 |
+| `    hooks`                              |     8.9 |    50.0 |    33.3 |     8.9 |
 | `      useAutoAdjustedWidth.tsx`         |     0   |     0   |     0   |     0   |
 | `      useClickOutside.tsx`              |    87.5 |    80.0 |   100.0 |    87.5 |
+| `      useCopyToClipboard.tsx`           |     1.1 |   100.0 |     0   |     1.1 |
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
 | `    lib`                                |    61.5 |    90.0 |    50.0 |    61.5 |
@@ -196,7 +206,7 @@
 | `    CreativeCommonsLicense.tsx`         |     0   |   100.0 |   100.0 |     0   |
 | `    details`                            |    17.6 |     9.1 |    11.8 |    17.6 |
 | `      CensusDetails.tsx`                |     6.0 |   100.0 |     0   |     6.0 |
-| `      LanguageDetails.tsx`              |    14.2 |   100.0 |     0   |    14.2 |
+| `      LanguageDetails.tsx`              |    14.6 |   100.0 |     0   |    14.6 |
 | `      LocaleDetails.tsx`                |     9.4 |   100.0 |     0   |     9.4 |
 | `      ObjectDetails.tsx`                |    67.7 |    14.3 |   100.0 |    67.7 |
 | `      TerritoryDetails.tsx`             |    55.5 |     6.7 |   100.0 |    55.5 |

@@ -11,6 +11,8 @@ import ObjectTable from '@features/table/ObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
+import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import {
   getObjectLiteracy,
   getUniqueTerritoriesForLanguage,
@@ -112,6 +114,18 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
           valueType: TableValueType.Numeric,
+        },
+        {
+          key: 'Plural rules',
+          render: (lang) => <LanguagePluralCategories lang={lang} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Grammar',
+        },
+        {
+          key: 'Plural rule examples',
+          render: (lang) => <LanguagePluralRuleExamplesGrid lang={lang} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Grammar',
         },
       ]}
     />
