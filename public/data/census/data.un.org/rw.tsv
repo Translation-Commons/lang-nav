@@ -36,12 +36,12 @@ kin/fra	#Kiny-French-Other	2,003
 fra/eng	#Franc-English	1,967
 kin/fra/eng	#Kiny-French-English Other	1,803
 fra/swa	#French-Swah-Other	942
-zxx	Dumb	838
+zxx	#Dumb	838
 swa/eng	#Swahili - English	825
 swa	#Swah-Other languages	705
 eng	#English and Other	544
-swa/eng	Swah-English-Other	371
-fra/swa/eng	Franc-Swah-English	324
-fra/eng	French-English-Other	317
-fra/swa/eng	Franc-Swah-English-Other	267
-fra	French-Other languages	264
+swa/eng	#Swah-English-Other	371
+fra/swa/eng	#Franc-Swah-English	324
+fra/eng	#French-English-Other	317
+fra/swa/eng	#Franc-Swah-English-Other	267
+fra	#French-Other languages	264

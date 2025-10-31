@@ -206,7 +206,7 @@ const PotentialLocalesTable: React.FC<{
 };
 
 function getLocaleExportString(locale: LocaleData): string {
-  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\tOfficial\t${locale.populationSpeaking}\t\n`;
+  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${locale.officialStatus ?? ''}\t${locale.populationSpeaking}\t\n`;
 }
 
 function getPotentialLocales(
@@ -247,6 +247,7 @@ function getPotentialLocales(
               territoryCode: census.isoRegionCode,
 
               populationSource: PopulationSourceCategory.Official,
+              populationAdjusted: populationEstimate,
               populationSpeaking: populationEstimate,
               populationSpeakingPercent: populationPercent,
               populationCensus: census,

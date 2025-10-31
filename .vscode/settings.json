@@ -1,0 +1,20 @@
+{
+    // --- Editor formatting ---
+    "editor.formatOnSave": true,
+    // --- Let ESLint run code actions on save ---
+    "editor.codeActionsOnSave": {
+        "source.fixAll": "always", // run all fixers (includes prettier if wired)
+        "source.fixAll.eslint": "always" // explicitly run eslint --fix
+    },
+    // --- ESLint integration ---
+    "eslint.enable": true,
+    "eslint.run": "onType",
+    "eslint.format.enable": true,
+    "eslint.useFlatConfig": true,
+    "eslint.validate": [
+        "typescript",
+        "typescriptreact",
+        "javascript",
+        "javascriptreact"
+    ],
+}

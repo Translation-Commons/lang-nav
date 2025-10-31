@@ -10,6 +10,7 @@ import {
   LanguagesBySource,
   LanguageScope,
 } from '@entities/language/LanguageTypes';
+import { setLanguageNames } from '@entities/language/setLanguageNames';
 import { parseVitalityISO } from '@entities/language/vitality/VitalityParsing';
 import { VitalityISO } from '@entities/language/vitality/VitalityTypes';
 
@@ -141,6 +142,7 @@ export function addISODataToLanguages(
     lang.sourceSpecific.BCP.name = isoLang.name;
     lang.sourceSpecific.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.sourceSpecific.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    setLanguageNames(lang);
   });
 }
 

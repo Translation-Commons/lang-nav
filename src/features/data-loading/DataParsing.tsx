@@ -66,7 +66,7 @@ export function parseLanguageLine(line: string): LanguageData {
     nameDisplay,
     nameSubtitle,
     nameEndonym,
-    names: [nameDisplay, nameSubtitle, nameEndonym].filter((s) => s != null),
+    names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
     vitalityISO: undefined, // Added by ISO import
     vitalityEth2013: parseVitalityEthnologue2013(parts[6]),
