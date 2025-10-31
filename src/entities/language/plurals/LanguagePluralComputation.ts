@@ -1,5 +1,7 @@
 // Explanation of how to parse plural rules can be found here:
 // https://unicode.org/reports/tr35/tr35-numbers.html?#Language_Plural_Rules
+import { get } from 'http';
+
 import plurals from 'cldr-core/supplemental/plurals.json';
 
 import { LanguageData } from '../LanguageTypes';
@@ -126,27 +128,47 @@ export function getVariableFromNumberOrString(symbol: string, num: number | stri
   if (typeof num === 'number') return getVariableFromNumber(symbol, num, 0, 0);
 
   // If its a string, extract relevant parts
-  let trailingZeros = num.split('.')[1]?.length || 0;
+  let trailingZeros = getTrailingZeros(num);
   const compactExponent = parseInt(num.split(/e|c/)[1]) || 0;
   let numAsNumber = parseFloat(num);
+
+  // This is complicated because we have to move the decimal point according to the compact exponent
+  // eg. 1.2345e3  =>  1234.5
+  // So we have to split it into parts (1, 234, and 5) and recombine
   if (compactExponent) {
     // Don't immediately use parseFloat because it is too imprecise in JS, rather move the period in the string then parse
-    const [integerPart, fractionPart = ''] = num.split('e')[0].split('.');
+    const [integerPart, decimalPart = ''] = num.split(/e|c/)[0].split('.');
+    const decimalDigits = decimalPart.length;
+
+    // Move the decimal point according to the compact exponent
     numAsNumber = parseInt(integerPart) * Math.pow(10, compactExponent);
-    if (fractionPart.length === 0) {
-      // add nothing
-    } else if (fractionPart.length > compactExponent) {
-      numAsNumber += parseInt(fractionPart.slice(0, compactExponent));
-      numAsNumber += parseFloat('0.' + fractionPart.slice(compactExponent));
+    // For the decimal part, our results will depend on how many digits are moved
+    if (decimalDigits === 0) {
+      // There is no decimalPart part, so just continue
+    } else if (decimalDigits > compactExponent) {
+      // Some of the decimal part is moved to the integer part, some remains in the decimal
+      numAsNumber += parseInt(decimalPart.slice(0, compactExponent));
+      numAsNumber += parseFloat('0.' + decimalPart.slice(compactExponent));
     } else {
-      numAsNumber += parseInt(fractionPart) * Math.pow(10, compactExponent - fractionPart.length);
+      // If there aren't enough decimal digits, add zeros to move the decimal point over far enough
+      numAsNumber += parseInt(decimalPart) * Math.pow(10, compactExponent - decimalDigits);
     }
-    // Recompute trailing zeros since the decimal point has moved
-    trailingZeros = String(numAsNumber).split('.')[1]?.length || 0;
+    // Recompute trailing zeros on the part that remains fractional
+    trailingZeros = getTrailingZeros('0.' + decimalPart.slice(compactExponent));
   }
   return getVariableFromNumber(symbol, numAsNumber, trailingZeros, compactExponent);
 }
 
+function getTrailingZeros(numStr: string): number {
+  return numStr.match(/(?:\.([0-9]*?)(0+))$/)?.[2]?.length || 0;
+}
+
+/**
+ * Note we use a lot of string manipulation here to preserve precision.
+ *
+ * You can get the fraction part of a number using mod, eg. 1.65 % 1 = 0.65, but due
+ * to floating point precision limitations in JS, the result is 0.6499999999999999.
+ */
 function getVariableFromNumber(
   symbol: string,
   num: number,
@@ -163,7 +185,7 @@ function getVariableFromNumber(
     case 'w': // the number of visible fraction digits in N, without trailing zeros.
       return String(num).split('.')[1]?.length ?? 0;
     case 'f': // the visible fraction digits in N, with trailing zeros, expressed as an integer.
-      return parseInt(String(num).split('.')[1]?.padEnd(trailingZeros, '0')) || 0;
+      return (parseInt(String(num).split('.')[1]) || 0) * Math.pow(10, trailingZeros);
     case 't': // the visible fraction digits in N, without trailing zeros, expressed as an integer.
       return parseInt(String(num).split('.')[1]) || 0;
     case 'c': // compact decimal exponent value: exponent of the power of 10 used in compact decimal formatting.

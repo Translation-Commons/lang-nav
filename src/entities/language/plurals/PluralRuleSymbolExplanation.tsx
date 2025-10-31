@@ -22,9 +22,12 @@ const SymbolToExample: React.FC<{ symbol: string; exampleNum?: string | number }
 }) => {
   const num = exampleNum ?? '123.450';
   if (symbol === '%') {
+    const [integerPart, decimalPart = '0'] = String(num).split('.');
+    const result = (parseInt(integerPart) % 100) + '.' + decimalPart;
+
     return (
       <>
-        <code>{num} % 100</code> = <code>{Number(num) % 100}</code>
+        <code>{num} % 100</code> = <code>{result}</code>
       </>
     );
   }

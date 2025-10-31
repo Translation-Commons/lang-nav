@@ -3,13 +3,12 @@ import { describe } from 'node:test';
 import plurals from 'cldr-core/supplemental/plurals.json';
 import { expect, it } from 'vitest';
 
-import { getBaseLanguageData } from '../LanguageTypes';
-
+import { getBaseLanguageData } from '../../LanguageTypes';
 import {
   convertStringRulesToRuleDeterminer,
   expandPluralExamples,
   findLanguagePluralRules,
-} from './LanguagePluralComputation';
+} from '../LanguagePluralComputation';
 
 describe('convertStringRulesToRuleDeterminer', () => {
   it('correctly determines the plural rules for all examples', () => {

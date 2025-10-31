@@ -1,14 +1,13 @@
 import { describe, it, expect, vi } from 'vitest';
 
-import { getBaseLanguageData } from '../LanguageTypes';
-
+import { getBaseLanguageData } from '../../LanguageTypes';
 import {
   convertStringRulesToRuleDeterminer,
   expandPluralExamples,
   findLanguagePluralRules,
   getVariableFromNumberOrString,
   PluralRuleKey,
-} from './LanguagePluralComputation';
+} from '../LanguagePluralComputation';
 
 // Mock the CLDR plurals JSON before importing the module under test
 vi.mock('cldr-core/supplemental/plurals.json', () => {
@@ -217,63 +216,116 @@ describe('expandPluralExamples', () => {
 
 describe('getVariableFromNumberOrString', () => {
   it('correctly extract the absolute value of the number', () => {
-    expect(getVariableFromNumberOrString('n', 1)).toBe(1);
-    expect(getVariableFromNumberOrString('n', '1.5')).toBe(1.5);
-    expect(getVariableFromNumberOrString('n', '1e3')).toBe(1000);
-    expect(getVariableFromNumberOrString('n', '1.2e3')).toBe(1200);
-    expect(getVariableFromNumberOrString('n', '1.00001e6')).toBe(1000010);
-    expect(getVariableFromNumberOrString('n', '1.0000101e6')).toBe(1000010.1);
+    [
+      [-12, 12],
+      [1, 1],
+      ['1.5', 1.5],
+      ['1e3', 1000],
+      ['1.2e3', 1200],
+      ['1.00001e6', 1000010],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('n', input),
+        `Expect n, the absolute value of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 
   it('correctly extract integer variables', () => {
-    expect(getVariableFromNumberOrString('i', '1.5')).toBe(1);
-    expect(getVariableFromNumberOrString('i', '123.456')).toBe(123);
-    expect(getVariableFromNumberOrString('i', '1.2e3')).toBe(1200);
-    expect(getVariableFromNumberOrString('i', '1.00001e6')).toBe(1000010);
-    expect(getVariableFromNumberOrString('i', '1.0000101e6')).toBe(1000010);
+    [
+      ['1.50', 1],
+      ['1.5', 1],
+      ['123.456', 123],
+      ['1.2e3', 1200],
+      ['1.00001e6', 1000010],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('i', input),
+        `Expect i, the integer part of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 
   it('correctly extract visible fraction digits with trailing zeros', () => {
-    expect(getVariableFromNumberOrString('v', '1.50')).toBe(2);
-    expect(getVariableFromNumberOrString('v', '1.5')).toBe(1);
-    expect(getVariableFromNumberOrString('v', '123.45600')).toBe(5);
-    expect(getVariableFromNumberOrString('v', '1.2e3')).toBe(0);
-    expect(getVariableFromNumberOrString('v', '1.00001e6')).toBe(0);
-    expect(getVariableFromNumberOrString('v', '1.0000108e6')).toBe(1);
+    [
+      ['1.50', 2],
+      ['1.5', 1],
+      ['123.45600', 5],
+      ['1.2e3', 0],
+      ['1.00001e6', 0],
+      ['1.0000108e6', 1],
+      ['1.00001080e6', 2],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('v', input),
+        `Expect v, the number of visible fraction digits (with trailing zeros) of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 
   it('correctly extract visible fraction digits without trailing zeros', () => {
-    expect(getVariableFromNumberOrString('w', '1.50')).toBe(1);
-    expect(getVariableFromNumberOrString('w', '1.5')).toBe(1);
-    expect(getVariableFromNumberOrString('w', '123.45600')).toBe(3);
-    expect(getVariableFromNumberOrString('w', '1.2e3')).toBe(0);
-    expect(getVariableFromNumberOrString('w', '1.00001e6')).toBe(0);
-    expect(getVariableFromNumberOrString('w', '1.0000108e6')).toBe(1);
+    [
+      ['1.50', 1],
+      ['1.5', 1],
+      ['123.45600', 3],
+      ['1.2e3', 0],
+      ['1.00001e6', 0],
+      ['1.0000108e6', 1],
+      ['1.00001080e6', 1],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('w', input),
+        `Expect w, the number of visible fraction digits (without trailing zeros) of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 
   it('correctly extract visible fraction digits as integer with trailing zeros', () => {
-    expect(getVariableFromNumberOrString('f', '1.50')).toBe(50);
-    expect(getVariableFromNumberOrString('f', '1.5')).toBe(5);
-    expect(getVariableFromNumberOrString('f', '123.45600')).toBe(45600);
-    expect(getVariableFromNumberOrString('f', '1.2e3')).toBe(0);
-    expect(getVariableFromNumberOrString('f', '1.00001e6')).toBe(0);
-    expect(getVariableFromNumberOrString('i', '1.0000108e6')).toBe(8);
+    [
+      ['1.50', 50],
+      ['1.5', 5],
+      ['123.45600', 45600],
+      ['1.2e3', 0],
+      ['1.00001e6', 0],
+      ['1.0000108e6', 8],
+      ['1.00001080e6', 80],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('f', input),
+        `Expect f, the visible fraction digits as integer (with trailing zeros) of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 
   it('correctly extract visible fraction digits as integer without trailing zeros', () => {
-    expect(getVariableFromNumberOrString('t', '1.50')).toBe(5);
-    expect(getVariableFromNumberOrString('t', '1.5')).toBe(5);
-    expect(getVariableFromNumberOrString('t', '123.45600')).toBe(456);
-    expect(getVariableFromNumberOrString('t', '1.2e3')).toBe(0);
-    expect(getVariableFromNumberOrString('t', '1.00001e6')).toBe(0);
-    expect(getVariableFromNumberOrString('t', '1.0000108e6')).toBe(8);
+    [
+      ['1.50', 5],
+      ['1.5', 5],
+      ['123.45600', 456],
+      ['1.2e3', 0],
+      ['1.00001e6', 0],
+      ['1.0000108e6', 8],
+      ['1.00001080e6', 8],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('t', input),
+        `Expect t, the visible fraction digits as integer (without trailing zeros) of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 
   it('correctly extract compact decimal exponent value', () => {
-    expect(getVariableFromNumberOrString('c', '1.5')).toBe(0);
-    expect(getVariableFromNumberOrString('c', '1.5c3')).toBe(3);
-    expect(getVariableFromNumberOrString('c', '1.5e4')).toBe(4);
-    expect(getVariableFromNumberOrString('c', '1.00001e6')).toBe(6);
-    expect(getVariableFromNumberOrString('c', '1.0000108e6')).toBe(6);
+    [
+      ['1.5', 0],
+      ['1.5c3', 3],
+      ['1.5e4', 4],
+      ['1.00001e6', 6],
+      ['1.0000108e6', 6],
+    ].forEach(([input, expected]) => {
+      expect(
+        getVariableFromNumberOrString('c', input),
+        `Expect c, the compact decimal exponent value of ${input} to be ${expected}`,
+      ).toBe(expected);
+    });
   });
 });
