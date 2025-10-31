@@ -1,14 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
+import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
-
-import { getMockedObjects } from '@tests/MockObjects';
 
 import { getSortFunctionParameterized } from '../sort';
 import { SortBehavior, SortBy } from '../SortTypes';
 
-const mockedObjects = getMockedObjects();
+const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getSortByParameterized', () => {
   it('sortBy: Code', () => {
@@ -184,11 +184,11 @@ describe('getSortByParameterized', () => {
       'sjn_ER',
       'ER',
       'dori0123',
-      'sjn_BE',
       'Teng',
-      'sjn_Teng_BE',
+      'sjn_Teng_BE', // lower than sjn_BE because not updated by census
       'sjn_Teng_123',
       'sjn_Teng_001',
+      'sjn_BE', // increased because of the be0590 locale
       'sjn_123',
       'sjn_001',
       'BE',
@@ -213,10 +213,10 @@ describe('getSortByParameterized', () => {
       'sjn',
       'dori0123',
       // All undefined after this, stable to input order
+      '123',
       'BE',
       'ER',
       'HA',
-      '123',
       'AM',
       '001',
       'be0590',
@@ -243,6 +243,7 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'be0590', // 100.0% of Beleriand in the census
       'sjn_ER', // 80.0,
       'sjn_BE', // 75.0,
       'dori0123_ER', // 75.0, // dori0123_ER is 75% of ER
@@ -261,7 +262,6 @@ describe('getSortByParameterized', () => {
       'sjn', // undefined,
       'dori0123', // undefined,
       '001', // undefined, // world is not contained in a larger territory
-      'be0590', // undefined,
       'Teng', // undefined,
       'tolkorth', // undefined,
     ]);
@@ -286,12 +286,12 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_001',
       'dori0123', // 10.4
       'sjn_ER', // 8.0
-      'sjn',
       // All below undefined, stable to input order
+      '123',
+      'sjn',
       'BE',
       'ER',
       'HA',
-      '123',
       'AM',
       '001',
       'be0590',
@@ -345,10 +345,10 @@ describe('getSortByParameterized', () => {
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
-      'sjn', // Sindarin
+      '123', // Sindarin
+      'sjn',
       'BE',
       'ER',
-      '123',
       '001',
       'sjn_BE',
       'sjn_ER',
@@ -373,12 +373,12 @@ describe('getSortByParameterized', () => {
       'tolkorth', // 2020-01-01
       'be0590', // 2000-01-02
       // All below have no associated date, stable to input order
+      '123',
       'sjn',
       'dori0123',
       'BE',
       'ER',
       'HA',
-      '123',
       'AM',
       '001',
       'sjn_BE',
@@ -403,8 +403,8 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'ER', // 2 languages: sjn, dori0123
       '123', // 2 languages: sjn, dori0123
+      'ER', // 2 languages: sjn, dori0123
       '001', // 2 languages: sjn, dori0123
       'tolkorth', // 2 languages: eng, spa
       'sjn_123', // 2 locales: sjn_ER, sjn_BE

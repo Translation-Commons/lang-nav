@@ -5,6 +5,8 @@
 
 import { describe, it, expect } from 'vitest';
 
+import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+
 import {
   getCountOfLanguages,
   getCountOfTerritories,
@@ -13,9 +15,7 @@ import {
   getObjectMostImportantLanguageName,
 } from '@entities/lib/getObjectMiscFields';
 
-import { getMockedObjects } from '@tests/MockObjects';
-
-const mockedObjects = getMockedObjects();
+const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getObjectLiteracy', () => {
   it('returns population for objects', () => {
