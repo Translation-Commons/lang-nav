@@ -1,6 +1,5 @@
 // Explanation of how to parse plural rules can be found here:
 // https://unicode.org/reports/tr35/tr35-numbers.html?#Language_Plural_Rules
-import { get } from 'http';
 
 import plurals from 'cldr-core/supplemental/plurals.json';
 
