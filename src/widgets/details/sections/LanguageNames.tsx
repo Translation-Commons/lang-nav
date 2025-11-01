@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import LanguageCanonicalName from '@entities/language/LanguageCanonicalName';
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -11,12 +11,8 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { Glottolog, ISO, CLDR } = sourceSpecific;
 
   // nameDisplay and nameEndonym should already be shown in the title for this
-  const otherNames = useMemo(
-    () =>
-      lang.names.filter(
-        (name) => ![nameDisplay, nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),
-      ),
-    [nameDisplay, lang.names],
+  const otherNames = lang.names.filter(
+    (name) => ![nameDisplay, nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),
   );
 
   return (
@@ -24,16 +20,16 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <DetailsField title="Canonical Name:">
         <LanguageCanonicalName lang={lang} />
       </DetailsField>
-      {nameEndonym && nameDisplay != nameEndonym && (
+      {nameEndonym && nameDisplay !== nameEndonym && (
         <DetailsField title="Endonym:">{nameEndonym}</DetailsField>
       )}
-      {Glottolog.name && nameDisplay != Glottolog.name && (
+      {Glottolog.name && nameDisplay !== Glottolog.name && (
         <DetailsField title="Glottolog Name:">{Glottolog.name}</DetailsField>
       )}
-      {ISO.name && nameDisplay != ISO.name && (
+      {ISO.name && nameDisplay !== ISO.name && (
         <DetailsField title="ISO Name:">{ISO.name}</DetailsField>
       )}
-      {CLDR.name && nameDisplay != CLDR.name && (
+      {CLDR.name && nameDisplay !== CLDR.name && (
         <DetailsField title="CLDR Name:">{CLDR.name}</DetailsField>
       )}
       {otherNames.length > 0 && (

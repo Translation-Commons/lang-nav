@@ -12,7 +12,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'ISO Name',
     render: (lang) =>
-      lang.nameDisplay != lang.sourceSpecific.ISO.name ? (
+      lang.nameDisplay !== lang.sourceSpecific.ISO.name ? (
         lang.sourceSpecific.ISO.name
       ) : (
         <Deemphasized>{lang.sourceSpecific.ISO.name}</Deemphasized>
@@ -30,7 +30,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'CLDR Name',
     render: (lang) =>
-      lang.nameDisplay != lang.sourceSpecific.CLDR.name ? (
+      lang.nameDisplay !== lang.sourceSpecific.CLDR.name ? (
         lang.sourceSpecific.CLDR.name
       ) : (
         <Deemphasized>{lang.sourceSpecific.CLDR.name}</Deemphasized>
@@ -41,7 +41,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Glottolog Name',
     render: (lang) =>
-      lang.nameDisplay != lang.sourceSpecific.Glottolog.name ? (
+      lang.nameDisplay !== lang.sourceSpecific.Glottolog.name ? (
         lang.sourceSpecific.Glottolog.name
       ) : (
         <Deemphasized>{lang.sourceSpecific.Glottolog.name}</Deemphasized>
