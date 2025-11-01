@@ -1,7 +1,5 @@
-import { TriangleAlertIcon } from 'lucide-react';
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
@@ -10,7 +8,7 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
-import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
@@ -19,10 +17,12 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
+
+import LanguageCodes from './sections/LanguageCodes';
+import LanguageNames from './sections/LanguageNames';
 
 type Props = {
   lang: LanguageData;
@@ -31,86 +31,12 @@ type Props = {
 const LanguageDetails: React.FC<Props> = ({ lang }) => {
   return (
     <div className="Details">
-      <LanguageIdentification lang={lang} />
+      <LanguageNames lang={lang} />
+      <LanguageCodes lang={lang} />
       <LanguageAttributes lang={lang} />
       <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
     </div>
-  );
-};
-
-const LanguageIdentification: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { codeISO6391, nameDisplay, nameEndonym, sourceSpecific } = lang;
-  const { Glottolog, ISO, CLDR } = sourceSpecific;
-
-  // nameDisplay and nameEndonym should already be shown in the title for this
-  const otherNames = useMemo(
-    () => lang.names.filter((name) => name != nameDisplay && name != nameEndonym, []),
-    [nameDisplay, lang.names],
-  );
-
-  return (
-    <DetailsSection title="Identification">
-      {otherNames.length > 0 && (
-        <DetailsField title="Other names:">{otherNames.join(', ')}</DetailsField>
-      )}
-      <DetailsField title="Language Code:">{lang.ID}</DetailsField>
-      <DetailsField title="Glottocode:">
-        {Glottolog.code ? (
-          <>
-            {Glottolog.code}
-            <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
-              Glottolog
-            </LinkButton>
-          </>
-        ) : (
-          <Deemphasized>Not in Glottolog</Deemphasized>
-        )}
-      </DetailsField>
-      <DetailsField title="ISO Code:">
-        {ISO.code ? (
-          <>
-            {ISO.code}
-            {codeISO6391 ? ` | ${codeISO6391}` : ''}
-            {lang.warnings && lang.warnings[LanguageField.isoCode] && (
-              <Hoverable
-                hoverContent={lang.warnings[LanguageField.isoCode]}
-                style={{ marginLeft: '0.125em' }}
-              >
-                <TriangleAlertIcon size="1em" color="var(--color-text-yellow)" />
-              </Hoverable>
-            )}
-            <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
-          </>
-        ) : (
-          <Deemphasized>Not in ISO catalog</Deemphasized>
-        )}
-      </DetailsField>
-      <DetailsField title="CLDR Code:">
-        {CLDR.code ? (
-          <>
-            {CLDR.code}
-            <LinkButton
-              href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
-            >
-              CLDR XML
-            </LinkButton>
-          </>
-        ) : (
-          <Deemphasized>Not in CLDR</Deemphasized>
-        )}
-      </DetailsField>
-      {ISO.code && (
-        <DetailsField title="Other external links:">
-          <LinkButton href={`https://www.ethnologue.com/language/${ISO.code}`}>
-            Ethnologue
-          </LinkButton>
-          <LinkButton href={`https://en.wikipedia.org/wiki/ISO_639:${ISO.code}`}>
-            Wikipedia
-          </LinkButton>
-        </DetailsField>
-      )}
-    </DetailsSection>
   );
 };
 

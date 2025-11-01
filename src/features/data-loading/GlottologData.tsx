@@ -7,6 +7,7 @@ import {
   LanguagesBySource,
   LanguageScope,
 } from '@entities/language/LanguageTypes';
+import { setLanguageNames } from '@entities/language/setLanguageNames';
 
 const DEBUG = false;
 
@@ -127,6 +128,7 @@ export function addGlottologLanguages(
       };
       languagesBySource.All[glottoCode] = newLang;
       languagesBySource.Glottolog[glottoCode] = newLang;
+      setLanguageNames(newLang);
     } else {
       // Fill in missing data
       if (parentGlottocode != null) {
@@ -135,6 +137,7 @@ export function addGlottologLanguages(
       }
       lang.sourceSpecific.Glottolog.scope = scope;
       lang.sourceSpecific.Glottolog.name = name;
+      setLanguageNames(lang);
       if (lang.scope == null) {
         lang.scope = scope;
       } else if (DEBUG && scope != lang.scope) {

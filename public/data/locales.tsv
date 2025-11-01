@@ -14,7 +14,7 @@ eng_PK	English (Pakistan)	English	CLDR	126,182,000	official
 eng_NG	English (Nigeria)	English	CLDR	125,475,910	official
 spa_MX	Spanish (Mexico)	Español (México)	Unverified Official	119,110,612	de_facto_official
 jpn_JP	Japanese (Japan)	日本語	CLDR	117,041,900	official
-lah_PK	Lahnda (Pakistan)	ਲਹਿੰਦੀ	Official	110,926,906	
+lah_PK	Panjabic (Pakistan)	ਲਹਿੰਦੀ	Official	110,926,906	
 urd_PK	Urdu (Pakistan)	اردو	Ethnologue	109,100,000	official
 ben_IN	Bangla (India)	বাংলা	Official	107,472,243	official_regional
 ara_EG	Arabic (Egypt)	العربية	CLDR	104,572,180	official
@@ -1295,7 +1295,7 @@ kyw_IN	Kudmali (India)		Official	311,175	recognized_regional
 ara_ER	Arabic (Eritrea)	العربية	CLDR	310,854	official
 mua_CM	Mundang (Cameroon)	MUNDAŊ	CLDR	309,661	
 gjn_GH	Gonja (Ghana)		Official	309,527	
-lah_US	Lahnda (United States)		Official	309,400	
+lah_US	Panjabic (United States)		Official	309,400	
 rus_CA	Russian (Canada)	Русский	Official	309,235	
 mse_TD	Musey (Chad)		Ethnologue	308,000	
 bua_RU	Buriat (Russia)	буряад	Official	306,857	official_regional
@@ -1893,7 +1893,7 @@ nlv_MX	Nahuatl, Orizaba (Mexico)		Ethnologue	120,000
 tos_MX	Sierra Totonac (Mexico)		Ethnologue	120,000	
 yaz_NG	Lokaa (Nigeria)		Ethnologue	120,000	
 zmb_CD	Zimba (Congo - Kinshasa)		Ethnologue	120,000	
-lah_IN	Lahnda (India)	ਲਹਿੰਦੀ	Unverified Official	119,279	
+lah_IN	Panjabic (India)	ਲਹਿੰਦੀ	Unverified Official	119,279	
 skr_IN	Saraiki (India)	سرائیکی	Official	119,279	
 mnw_TH	Mon (Thailand)	ဘာသာမန်	CLDR	118,866	
 gag_MD	Gagauz (Moldova)	Gagauz dili	CLDR	118,784	recognized
@@ -6518,7 +6518,7 @@ yrb_PG	Yareba (Papua New Guinea)		Ethnologue	750
 kjq_US	Western Keres (United States)		Unverified Official	747	
 pqm_US	Malecite-Passamaquoddy (United States)	Peskotomuhkati	Official	747	
 rma_NI	Rama (Nicaragua)		Official	744	
-nah_US	Naga Pidgin (United States)	Náhuatl	Official	741	
+nah_US	Nahuatl (United States)	Náhuatl	Official	741	
 aur_PG	Aruek (Papua New Guinea)		Ethnologue	740	
 dny_BR	Dení (Brazil)		Ethnologue	740	
 jqr_PE	Jaqaru (Peru)		Ethnologue	740	
@@ -10353,3 +10353,15 @@ zsl_ZM	Zambian Sign Language (Zambia)
 zsm_MY	Standard Malay (Malaysia)	bahasa Melayu Standard			
 zua_NG	Zeem (Nigeria)				
 zxx_001	No linguistic content (World)	no linguistic content			
+nah_MX	Nahuatl (Mexico)		Official	1651958	
+ber_ES	Berber languages (Spain)		 	59797	
+lah_CA	Panjabic (Canada)		 	828955	
+lah_AU	Panjabic (Australia)		 	239033	
+lah_GB	Panjabic (United Kingdom)		 	303621	
+hnj_US	Mong Njua (United States)			119687	
+pnt_TR	Pontic (Turkey)			5131	
+rtm_AU	Rotuman (Australia)			378	
+agu_MX	Aguacateco (Mexico)			1997	
+nau_AU	Nauruan (Australia)			312	
+tvl_AU	Tuvaluan (Australia)			333	
+rsk_HR	Ruthenian (Croatia)			1828	

@@ -1,5 +1,5 @@
 Language Code	Glottocode	Display Name	Endonym	Medium	Biggest Script	Ethnologue Vitality 2013	Ethnologue Vitality 2025	Eth Digital Support	Adjusted Populaiton	Population	Parent Language	Parent Glottocode	Recommendation	Recommendation Reason
-zho	clas1255	Chinese (macrolanguage)	中文	Spoken & Written	Hans	National			0	1,296,041,185		sini1245	Yes, with caveat	Huge macrolanguage category with very distinct constituents -- try to include those as well as this, this usually signifies the written form, regardless of spoken language
+zho	clas1255	Chinese languages	中文	Spoken & Written	Hans	National			0	1,296,041,185		sini1245	Yes, with caveat	Huge macrolanguage category with very distinct constituents -- try to include those as well as this, this usually signifies the written form, regardless of spoken language
 eng	stan1293	English	English	Spoken & Written	Latn	National	Institutional	Thriving	0	1,243,492,288		macr1271	Yes	
 cmn	mand1415	Mandarin Chinese	普通话	Mostly Spoken (but also written)	Hans	National	Institutional	Thriving	0	951,666,932	zho	mand1471	Yes, with caveat	Established variant of a macrolanguage -- many systems may label this as `zh` but it is much clearer to show both, even though there is overlap
 hin	hind1269	Hindi	हिन्दी	Spoken & Written	Deva	National	Institutional	Thriving	0	694,325,639		hind1270	Yes	
@@ -8,22 +8,22 @@ ara	arab1395	Arabic	العربية	Written	Arab	National			0	345,771,433		arab13
 fra	stan1290	French	français	Spoken & Written	Latn	National	Institutional	Thriving	0	314,723,138		glob1239	Yes	
 ben	beng1280	Bengali	বাংলা	Spoken & Written	Beng	National	Institutional	Vital	0	269,324,750		gaud1238	Yes	
 por	port1283	Portuguese	português	Spoken & Written	Latn	National	Institutional	Thriving	0	237,766,546		braz1247	Yes	
-msa	mala1538	Malay (macrolanguage)	Melayu	Spoken & Written	Latn				0	215,343,873		mala1554	Yes	There is a language code for the individual language, but most usages will just use this
+msa	mala1538	Malayic	Melayu	Spoken & Written	Latn				0	215,343,873		mala1554	Yes	There is a language code for the individual language, but most usages will just use this
 ind	indo1316	Indonesian	Indonesia	Spoken & Written	Latn	National	Institutional	Thriving	0	198,413,080	msa	stan1327	Yes	Well established variant of the macrolanguage
 rus	russ1263	Russian	русский	Spoken & Written	Cyrl	National	Institutional	Thriving	0	192,723,175		east1426	Yes	
 urd	urdu1245	Urdu	اردو	Spoken & Written	Arab	National	Institutional	Vital	0	177,411,858		hind1270	Yes	
-swa	swah1254	Swahili (macrolanguage)	Kiswahili	Spoken & Written	Latn				0	152,711,966		saba1282	Yes	There is a language code for the individual language, but most usages will just use this
+swa	swah1254	Swahili	Kiswahili	Spoken & Written	Latn				0	152,711,966		saba1282	Yes	There is a language code for the individual language, but most usages will just use this
 deu	stan1295	German	Deutsch	Spoken & Written	Latn	National	Institutional	Thriving	0	129,811,629		glob1243	Yes	
-pan	panj1256	Punjabi	ਪੰਜਾਬੀ	Spoken & Written	Guru	Provincial	Institutional	Vital	0	128,655,912		east2727	Yes	
+pan	panj1256	Punjabi	ਪੰਜਾਬੀ	Spoken & Written	Guru	Provincial	Institutional	Vital	0	128,655,912	lah	east2727	Yes	
 jpn	nucl1643	Japanese	日本語	Spoken & Written	Jpan	National	Institutional	Thriving	117,268,000	120,858,498		japa1258	Yes	
 arb	stan1318	Standard Arabic	العربية الفصحى	Written	Arab	National	Institutional	Thriving	0	120,650,002	ara	arab1395	Yes, with caveat	To distinguish written dialect. Technically this is not a spoken language but virtually all literate Arabic dialect speakers use this for writing Arabic
-lah	lahn1241	Lahnda (macrolanguage)	ਲਹਿੰਦੀ	Mostly Spoken (but also written)	Arab				0	104,863,350		sind1278	Probably not	This language grouping is academically disputed
+lah	lahn1241	Panjabic	ਲਹਿੰਦੀ	Mostly Spoken (but also written)	Arab				0	104,863,350		sind1278	Probably not	This language grouping is academically disputed
 mar	mara1378	Marathi	मराठी	Spoken & Written	Deva	Provincial	Institutional	Vital	0	99,241,607		mode1268	Yes	
 tel	telu1262	Telugu	తెలుగు	Spoken & Written	Telu	Provincial	Institutional	Vital	0	95,058,027		telu1265	Yes	
 pnb	west2386	Western Panjabi	ਪੰਜਾਬੀ	Mostly Spoken (but also written)	Arab	Developing	Stable	Ascending	0	92,610,000	lah	lahn1241	Possibly	May overlap with "pa"
 tam	tami1289	Tamil	தமிழ்	Spoken & Written	Taml	Provincial	Institutional	Thriving	0	84,433,131		tami1300	Yes	
 vie	viet1252	Vietnamese	tiếng Việt	Spoken & Written	Latn	National	Institutional	Thriving	0	83,878,768		viet1251	Yes	
-fas	fars1255	Persian (macrolanguage)	فارسی	Spoken & Written	Arab				0	82,184,394		fars1254	Yes, with caveat	In spoken context its member languages are very different
+fas	fars1255	Persian	فارسی	Spoken & Written	Arab				0	82,184,394		fars1254	Yes, with caveat	In spoken context its member languages are very different
 yue	yuec1235	Yue Chinese	粵語	Mostly Spoken (but also written)	Hant	Provincial	Institutional	Vital	0	81,036,897	zho	yuep1234	Yes	Established variant of a macrolanguage
 tur	nucl1301	Turkish	Türkçe	Spoken & Written	Latn	National	Institutional	Thriving	0	80,031,468		west2406	Yes	
 kor	kore1280	Korean	한국어	Spoken & Written	Kore	National	Institutional	Thriving	646,707	77,718,059		kore1284	Yes	
@@ -39,10 +39,10 @@ tha	thai1261	Thai	ไทย	Spoken & Written	Thai	National	Institutional	Thrivin
 bho	bhoj1244	Bhojpuri	भोजपुरी	Mostly Spoken (but also written)	Deva	Educational	Institutional	Vital	0	52,645,994		bhoj1246	Yes	
 pes	west2369	Iranian Persian	فارسی	Mostly Spoken (but also written)	Arab	National	Institutional	Vital	0	49,600,000	fas	fars1255	Yes, with caveat	Very different spoken than Afghan Dari
 fil	fili1244	Filipino	Filipino	Spoken & Written	Latn	National	Institutional	Vital	0	47,099,332		taga1269	Yes, with caveat	Tagalog [tgl] as a language code is usually intended for the native language of the people of the Manila area, whereas Filipino [fil] is the modern lingua franca of the country with significant Spanish and English influences.
-swh	swah1253	Swahili (individual language)	kiswahili	Spoken & Written	Latn	National	Institutional	Vital	0	47,000,000	swa	momb1256	Probably not	It is the "individual" version of the macrolanguage code
+swh	swah1253	Coastal Swahili	kiswahili	Spoken & Written	Latn	National	Institutional	Vital	0	47,000,000	swa	momb1256	Probably not	It is the "individual" version of the macrolanguage code
 cjy	jiny1235	Jinyu Chinese	晋语	Mostly Spoken (but also written)	Hans	Vigorous	Stable	Emerging	0	45,000,000	zho	nort3155	Yes	Established variant of a macrolanguage
 tgl	taga1270	Tagalog	Tagálog	Spoken & Written	Latn	Wider Communication	Institutional	Vital	0	43,331,201		taga1269	Yes, with caveat	Tagalog [tgl] as a language code is usually intended for the native language of the people of the Manila area, whereas Filipino [fil] is the modern lingua franca of the country with significant Spanish and English influences.
-ori	macr1269	Oriya (macrolanguage)	ଓଡ଼ିଆ	Spoken & Written	Orya				0	42,597,953		oriy1254	Yes	There is a language code for the individual language, but most usages will just use this
+ori	macr1269	Oriya languages	ଓଡ଼ିଆ	Spoken & Written	Orya				0	42,597,953		oriy1254	Yes	There is a language code for the individual language, but most usages will just use this
 mya	nucl1310	Burmese	မြန်မာဘာသာ	Spoken & Written	Mymr	National	Institutional	Vital	0	42,442,391		nucl1811	Yes	
 pol	poli1260	Polish	polski	Spoken & Written	Latn	National	Institutional	Thriving	0	41,661,928		poli1262	Yes	
 nan	minn1241	Min Nan Chinese	閩南語	Mostly Spoken (but also written)	Hans	Vigorous	Institutional	Ascending	0	41,517,875	zho	coas1318	Yes	Established variant of a macrolanguage
@@ -56,15 +56,15 @@ orm	nucl1736	Oromo	Oromoo	Spoken & Written	Latn				0	34,995,670		nucl1701	Yes
 uzb	uzbe1247	Uzbek	O'zbek	Spoken & Written	Latn				0	34,916,016		uygh1240	Yes	
 hak	hakk1236	Hakka Chinese	客家話	Spoken	Hans	Developing	Institutional	Ascending	0	34,476,071	zho	midd1354	Yes	Established variant of a macrolanguage
 ukr	ukra1253	Ukrainian	українська	Spoken & Written	Cyrl	National	Institutional	Thriving	0	34,276,844		ukra1257	Yes	
-ory	oriy1255	Oriya (individual language)	ଓଡ଼ିଆ	Spoken & Written	Orya	Provincial	Institutional	Vital	0	34,125,398	ori	macr1269	Probably not	It is the "individual" version of the macrolanguage code
+ory	oriy1255	Oriya	ଓଡ଼ିଆ	Spoken & Written	Orya	Provincial	Institutional	Vital	0	34,125,398	ori	macr1269	Probably not	It is the "individual" version of the macrolanguage code
 sun	sund1252	Sundanese	bahasa Sunda	Spoken & Written	Latn	Developing	Stable	Vital	0	32,400,035		mala1545	Yes	
 nld	dutc1256	Dutch	Nederlands	Spoken & Written	Latn	National	Institutional	Thriving	0	31,781,801		glob1241	Yes	
-nep	east1436	Nepali (macrolanguage)	नेपाली	Spoken & Written	Deva				0	31,073,132		indo1310	Yes	There is a language code for the individual language, but most usages will just use this
+nep	east1436	Nepali languages	नेपाली	Spoken & Written	Deva				0	31,073,132		indo1310	Yes	There is a language code for the individual language, but most usages will just use this
 arq	alge1239	Algerian Arabic	دريرية	Spoken	Arab	Wider Communication	Institutional	Ascending	0	30,590,000	ara	nort3191	Yes, with caveat	To distinguish spoken dialect
 pcm	nige1257	Nigerian Pidgin	Naijá	Mostly Spoken (but also written)	Latn	Wider Communication	Institutional	Ascending	0	30,000,000		nige1258	Yes	
 prs	dari1249	Dari	دری	Spoken & Written	Arab	National	Institutional	Vital	0	29,755,277	fas	east2745	Yes, with caveat	Very different spoken than Iranian Persian
 ary	moro1292	Moroccan Arabic	الداريجة	Spoken	Arab	Wider Communication	Institutional	Ascending	0	29,490,001	ara	moro1295	Yes, with caveat	To distinguish spoken dialect
-skr	sera1259	Seraiki	سرائیکی	Mostly Spoken (but also written)	Arab	Developing	Stable	Ascending	0	28,958,579	lah	sira1271	Yes	Well established variant of the macrolanguage
+skr	sera1259	Saraiki	سرائیکی	Mostly Spoken (but also written)	Arab	Developing	Stable	Ascending	0	28,958,579	lah	sira1271	Yes	Well established variant of the macrolanguage
 zsm	stan1306	Standard Malay	bahasa Melayu Standard	Spoken & Written	Latn	National	Institutional	Thriving	0	28,000,000	msa	stan1327	Possibly	But probably want to use macrolanguage
 zul	zulu1248	Zulu	isiZulu	Spoken & Written	Latn	National	Institutional	Vital	0	27,716,894		ngun1267	Yes	
 ibo	nucl1417	Igbo	Igbo	Spoken & Written	Latn	Provincial	Institutional	Vital	0	27,135,491		cent2417	Yes	
@@ -83,14 +83,14 @@ csl	chin1283	Chinese Sign Language	中國手語	Sign	Zxxx	Developing	Stable	Emer
 ron	roma1327	Romanian	română	Spoken & Written	Latn	National	Institutional	Thriving	0	19,610,518		east2865	Yes	
 xho	xhos1239	Xhosa	isiXhosa	Spoken & Written	Latn	National	Institutional	Vital	0	19,169,500		ngun1267	Yes	
 afr	afri1274	Afrikaans	Afrikaans	Spoken & Written	Latn	National	Institutional	Vital	0	19,147,812		afri1273	Yes	
-zlm	mala1479	Malay (individual language)		Spoken & Written	Latn	Wider Communication		Thriving	0	18,410,000	msa	sing1270	Probably not	It is the "individual" version of the macrolanguage code
+zlm	mala1479	Common Malay		Spoken & Written	Latn	Wider Communication		Thriving	0	18,410,000	msa	sing1270	Probably not	It is the "individual" version of the macrolanguage code
 ful	fula1264	Fulah	Fulfulde	Mostly Spoken (but also written)	Latn				0	18,152,738		peul1234	Yes, with caveat	Member languages may be very different
 mai	mait1250	Maithili	मैथिली		Deva	Provincial	Institutional	Vital	0	17,774,304		mait1254	Yes	
 kur	kurd1259	Kurdish	Kurdî (Kurmancî)	Spoken & Written	Latn				0	17,064,332		laki1246	Yes	
 som	soma1255	Somali	Af-Soomaali	Spoken & Written	Latn	National	Institutional	Vital	0	16,619,318		east2653	Yes	
 tts	nort2741	Northeastern Thai	ภาษาอีสาน	Spoken & Written	Thai	Vigorous	Stable	Emerging	0	16,467,806		sako1234	Yes	
 hne	chha1249	Chhattisgarhi			Deva	Educational	Stable	Ascending	0	16,350,661		east2726	Yes	
-khm	cent1989	Central Khmer	ភាសាខ្មែរ	Spoken & Written	Khmr	National	Institutional	Vital	0	16,129,913		khme1253	Yes	
+khm	cent1989	Khmer	ភាសាខ្មែរ	Spoken & Written	Khmr	National	Institutional	Vital	0	16,129,913		khme1253	Yes	
 rkt	rang1265	Rangpuri	দেশী		Beng	Developing	Stable	Ascending	0	15,965,000		kamt1242	Yes	
 nya	nyan1308	Chichewa	chiCheŵa	Spoken & Written	Latn	Wider Communication	Institutional	Vital	0	15,626,318		nyan1319	Yes	
 sin	sinh1246	Sinhala	සිංහල	Spoken & Written	Sinh	National	Institutional	Vital	0	15,418,355		sinh1247	Yes	
@@ -158,7 +158,7 @@ mad	nucl1460	Madurese	Bhâsa Madhurâ	Spoken & Written	Latn	Developing	Stable	As
 cat	stan1289	Catalan	català	Spoken & Written	Latn	Provincial	Institutional	Vital	0	7,740,118		sout3183	Yes	
 ayn	sana1295	Sanaani Arabic			Arab	Vigorous	Stable	Emerging	0	7,600,000	ara	jude1277	Yes, with caveat	To distinguish spoken dialect
 kmb	kimb1241	Kimbundu			Latn	Wider Communication	Institutional	Ascending	0	7,588,972		mbun1247	Yes	
-hmn	grea1295	Hmong (macrolanguage)	Hmoob		Latn				0	7,579,757		west2803	Yes	
+hmn	grea1295	Hmong languages	Hmoob		Latn				0	7,579,757		west2803	Yes	
 plt	plat1254	Plateau Malagasy			Latn	National	Institutional	Vital	0	7,529,640	mlg	cent2382	Possibly	But probably want to use macrolanguage
 run	rund1242	Rundi	Ikirundi	Spoken & Written	Latn	National	Institutional	Vital	0	7,476,873		rund1244	Yes	
 kas	kash1277	Kashmiri	کٲشُر	Spoken & Written	Arab	Educational	Institutional	Vital	0	7,272,520		kash1285	Yes	
@@ -193,7 +193,7 @@ sck	sadr1248	Sadri	नागपुरी		Deva	Wider Communication	Institutional
 kab	kaby1243	Kabyle	Taqbaylit	Spoken & Written	Latn	Developing	Institutional	Vital	0	5,037,415		kaby1244	Yes	
 lmn	lamb1269	Lambadi			Telu	Developing	Stable	Ascending	0	5,028,806		west2831	Yes	
 gpe	ghan1244	Ghanaian Pidgin English		Spoken & Written	Latn	Wider Communication	Institutional	Ascending	0	5,002,000		coas1331	Yes	
-ktu	kitu1246	Kituba (Democratic Republic of Congo)			Latn	Developing	Institutional	Ascending	0	5,000,002		koon1247	Yes	
+ktu	kitu1246	Kituba (DRC)			Latn	Developing	Institutional	Ascending	0	5,000,002		koon1247	Yes	
 bew	beta1252	Betawi	Betawi	Spoken & Written	Latn	Threatened	Endangered	Ascending	0	5,000,000		beta1260	Yes	
 tpi	tokp1240	Tok Pisin	Tok pisin	Spoken & Written	Latn	National	Institutional	Ascending	0	4,989,416		earl1243	Yes	
 luo	luok1236	Dholuo	Dholuo		Latn	Developing	Stable	Ascending	0	4,927,959		adho1242	Yes	
@@ -226,7 +226,7 @@ kam	kamb1297	Kamba (Kenya)	Kikamba		Latn	Developing	Institutional	Ascending	0	3,
 kln	kale1246	Kalenjin	Kalenjin		Latn				0	3,678,212		sout2830	Yes	
 bjn	banj1239	Banjar	Basa Banjar	Spoken & Written	Latn	Wider Communication	Institutional	Ascending	0	3,655,000	msa	banj1241	Possibly	But probably want to use macrolanguage
 gom	goan1235	Goan Konkani	ಕೊಂಕಣಿ	Spoken & Written	Deva	Developing	Stable	Ascending	0	3,630,000	kok	mara1422	Yes	Strong differences from other members of the macrolanguage
-kok	mara1422	Konkani (macrolanguage)	कोंकणी		Deva				0	3,630,000		mara1416	Possibly	It may be better to distinguish the individual dialects
+kok	mara1422	Konkani languages	कोंकणी		Deva				0	3,630,000		mara1416	Possibly	It may be better to distinguish the individual dialects
 ayl	liby1240	Libyan Arabic			Arab	Wider Communication	Institutional	Ascending	0	3,594,000	ara	nort3191	Yes, with caveat	To distinguish spoken dialect
 lir	libe1240	Liberian English			Latn	Wider Communication	Institutional	Emerging	0	3,559,228		engl1287	Yes	
 ndc	ndau1241	Ndau			Latn	Developing	Stable	Ascending	0	3,551,998		core1255	Yes	
@@ -263,7 +263,7 @@ sdh	sout2640	Southern Kurdish	‫کوردی خوارگ‬		Arab	Vigorous	Endange
 swv	shek1243	Shekhawati			Deva	Developing	Stable	Ascending	0	3,000,000	mwr	raja1256	Possibly	But probably want to use macrolanguage
 ven	vend1245	Venda	tshiVenḓa	Spoken & Written	Latn	National	Institutional	Vital	0	2,999,200		nucl1826	Yes	
 hoj	hado1235	Haroti			Deva	Developing	Stable	Ascending	0	2,944,356	raj	east2890	Possibly	But probably want to use macrolanguage
-npi	nepa1254	Nepali (individual language)		Spoken & Written	Deva	National	Institutional	Vital	0	2,930,000	nep	east1436	Probably not	It is the "individual" version of the macrolanguage code
+npi	nepa1254	Common Nepali		Spoken & Written	Deva	National	Institutional	Vital	0	2,930,000	nep	east1436	Probably not	It is the "individual" version of the macrolanguage code
 fuf	pula1262	Pular	Pular		Latn	Provincial	Stable	Ascending	0	2,929,200	ful	fula1264	Possibly	But probably want to use macrolanguage
 glg	gali1258	Galician	galego	Spoken & Written	Latn	Provincial	Institutional	Vital	0	2,922,837		gali1263	Yes	
 uzs	sout2699	Southern Uzbek	اوزبیک تورکچه		Arab	Wider Communication	Institutional	Emerging	0	2,910,000	uzb	uzbe1247	Possibly	But probably want to use macrolanguage
@@ -273,14 +273,14 @@ fon	fonn1241	Fon	fɔ̀ngbè	Spoken & Written	Latn	Wider Communication	Institutio
 sag	sang1328	Sango	Sängö	Spoken & Written	Latn	National	Institutional	Ascending	0	2,816,626		sang1327	Yes	
 quh	sout2991	South Bolivian Quechua	Qullasuyu qhichwa simi		Latn	Developing	Stable	Ascending	0	2,785,120	que	sout3406	Possibly	But probably want to use macrolanguage
 aym	nucl1667	Aymara	Aymar aru	Spoken & Written	Latn				0	2,765,332		ayma1253	Yes	
-doi	indo1311	Dogri (macrolanguage)	डोगरी		Deva				0	2,763,985		kang1292	Yes	There is a language code for the individual language, but most usages will just use this
+doi	indo1311	Dogri languages	डोगरी		Deva				0	2,763,985		kang1292	Yes	There is a language code for the individual language, but most usages will just use this
 jam	jama1262	Jamaican Creole English	Jumiekan Patwa	Spoken & Written	Latn	Wider Communication	Stable	Ascending	0	2,754,094		jama1264	Yes	
 pcc	bouy1240	Bouyei			Latn	Vigorous	Stable	Ascending	0	2,658,600		nort3189	Yes	
 pam	pamp1243	Kapampangan	Kapampángan	Spoken & Written	Latn	Wider Communication	Institutional	Ascending	0	2,650,371		cent2080	Yes	
 spv	samb1325	Sambalpuri			Orya	Educational	Institutional	Emerging	0	2,630,381	ori	macr1269	Possibly	But probably want to use macrolanguage
 tcy	tulu1258	Tulu	ತುಳು	Spoken & Written	Knda	Developing	Stable	Ascending	0	2,625,267		tulu1263	Yes	
 bel	bela1254	Belarusian	беларуская	Spoken & Written	Cyrl	National	Stable	Vital	0	2,608,626		east1426	Yes	
-dgo	dogr1250	Dogri (individual language)	डोगरी		Deva	Educational	Institutional	Ascending	0	2,600,000	doi	indo1311	Probably not	It is the "individual" version of the macrolanguage code
+dgo	dogr1250	Common Dogri	डोगरी		Deva	Educational	Institutional	Ascending	0	2,600,000	doi	indo1311	Probably not	It is the "individual" version of the macrolanguage code
 meo	keda1251	Kedah Malay			Latn	Wider Communication	Institutional	Ascending	0	2,600,000	msa	keda1253	Possibly	But probably want to use macrolanguage
 sas	sasa1249	Sasak	ᬪᬵᬲᬵᬲᬓ᭄ᬱᬓ᭄		Latn	Educational	Stable	Ascending	0	2,600,000		sasa1248	Yes	
 lit	lith1251	Lithuanian	Lietuvių	Spoken & Written	Latn	National	Institutional	Vital	0	2,589,854		east2280	Yes	
@@ -452,7 +452,7 @@ luz	sout2647	Southern Luri	لری دۊمنی		Arab	Vigorous	Stable	Ascending	0	1
 zch	cent2009	Central Hongshuihe Zhuang			Hani	Vigorous	Stable	Still	0	1,080,000	zha	west3011	Possibly	But probably want to use macrolanguage
 kbd	kaba1278	Kabardian	Къэбэрдей	Spoken & Written	Cyrl	Developing	Endangered	Ascending	0	1,078,133		circ1239	Yes	
 tig	tigr1270	Tigre	ትግሬ		Ethi	Educational	Institutional	Ascending	0	1,074,717		tigr1277	Yes	
-yid		Yiddish	יידיש	Spoken & Written	Hebr				0	1,062,835			Possibly	It may be better to distinguish the individual dialects
+yid		Yiddish languages	יידיש	Spoken & Written	Hebr				0	1,062,835			Possibly	It may be better to distinguish the individual dialects
 mfe	mori1278	Morisyen	morisyin		Latn	Developing	Institutional	Ascending	0	1,060,906		isle1246	Yes	
 srd		Sardinian	sardu	Spoken & Written	Latn				0	1,060,000			Yes	
 trp	kokb1239	Kok Borok			Latn	Educational	Institutional	Ascending	0	1,040,484		tipp1238	Yes	
@@ -480,7 +480,7 @@ chw	chuw1238	Chuwabu			Latn	Developing	Stable	Ascending	0	1,000,000		chuw1240	Ye
 cnp	nort3268	Northern Ping Chinese			Hans		Stable	Still	0	1,000,000	zho	ping1245	Yes	Established variant of a macrolanguage
 dib	sout2833	South Central Dinka			Latn	Educational	Stable	Emerging	0	1,000,000	din	dink1262	Possibly	But probably want to use macrolanguage
 dik	sout2832	Southwestern Dinka			Latn	Educational	Stable	Ascending	0	1,000,000	din	dink1262	Possibly	But probably want to use macrolanguage
-diq	diml1238	Dimli (individual language)		Spoken & Written	Latn	Educational	Endangered	Emerging	0	1,000,000	zza	zaza1246	Possibly	But probably want to use macrolanguage
+diq	diml1238	Common Dimli		Spoken & Written	Latn	Educational	Endangered	Emerging	0	1,000,000	zza	zaza1246	Possibly	But probably want to use macrolanguage
 dks	sout2834	Southeastern Dinka			Latn	Educational	Stable	Emerging	0	1,000,000	din	dink1262	Possibly	But probably want to use macrolanguage
 ekk	esto1258	Standard Estonian		Spoken & Written	Latn	National	Institutional	Vital	0	1,000,000	est	cent2329	Possibly	But probably want to use macrolanguage
 eth	ethi1238	Ethiopian Sign Language			Zxxx	Educational	Stable	Emerging	0	1,000,000		asli1244	Yes	
@@ -580,7 +580,7 @@ ebu	embu1241	Kiembu	Kĩembu		Latn	Vigorous	Stable	Ascending	0	739,000		cent2274	
 yua	yuca1254	Yucatec Maya			Latn	Developing	Stable	Ascending	0	737,536		yuca1253	Yes	
 pcd	pica1241	Picard	picard	Spoken & Written	Latn	Developing	Endangered	Ascending	0	736,000		cent2283	Yes	
 fia	nobi1240	Nobiin			Arab	Vigorous	Endangered	Ascending	0	732,000		nobi1239	Yes	
-zne	zand1248	Zande (individual language)			Latn	Developing	Institutional	Ascending	0	730,000		zand1247	Yes	
+zne	zand1248	Common Zande			Latn	Developing	Institutional	Ascending	0	730,000		zand1247	Yes	
 fip	fipa1238	Fipa			Latn	Vigorous	Stable	Emerging	0	713,000		fipa1240	Yes	
 blt	taid1247	Tai Dam	ꪼꪕꪒꪾ		Tavt	Developing	Stable	Ascending	0	709,000		blac1269	Yes	
 aiq	aima1241	Aimaq			Arab	Vigorous	Stable	Still	0	701,000		east2745	Yes	
@@ -588,7 +588,7 @@ chv	chuv1255	Chuvash	Чӑваш	Spoken & Written	Cyrl	Educational	Endangered	Vit
 aoz	uabm1237	Uab Meto	bahasa Uab Meto		Latn	Developing	Stable	Ascending	0	700,000		nort3357	Yes	
 gbr	gbag1258	Gbagyi			Latn	Developing	Endangered	Emerging	0	700,000		gbag1256	Yes	
 gyn	creo1235	Guyanese Creole English			Latn	Educational	Institutional	Ascending	0	700,000		barb1267	Yes	
-yaf	yaka1269	Yaka (Democratic Republic of Congo)			Latn	Vigorous	Stable	Still	0	700,000		yaka1278	Yes	
+yaf	yaka1269	Yaka (DRC)			Latn	Vigorous	Stable	Still	0	700,000		yaka1278	Yes	
 ktb	kamb1316	Kambaata			Ethi	Educational	Institutional	Ascending	0	694,322		kamb1318	Yes	
 nim	nila1242	Nilamba			Latn	Vigorous	Stable	Emerging	0	682,000		nyat1247	Yes	
 wln	wall1255	Walloon	walon	Spoken & Written	Latn	Threatened	Endangered	Vital	0	671,104		oila1234	Yes	
@@ -697,7 +697,7 @@ lob	lobi1245	Lobi			Latn	Developing	Stable	Emerging	0	442,000		lobi1246	Yes
 ziw	zigu1244	Zigula			Latn	Vigorous	Endangered	Ascending	0	442,000		zigu1243	Yes	
 srb	sora1254	Sora			Sora	Developing	Stable	Emerging	0	439,684		sora1256	Yes	
 nyu	nyun1248	Nyungwe			Latn	Wider Communication	Institutional	Ascending	0	439,000		sena1270	Yes	
-sng	sang1331	Sanga (Democratic Republic of Congo)			Latn	Developing	Stable	Emerging	0	431,000		kaon1242	Yes	
+sng	sang1331	Sanga (DRC)			Latn	Developing	Stable	Emerging	0	431,000		kaon1242	Yes	
 cbk	chav1241	Chavacano	Chavacano	Spoken & Written	Latn	Educational	Endangered	Ascending	0	430,202		tern1253	Yes	
 kff	koya1251	Koya			Latn	Developing	Stable	Ascending	0	426,242		hill1257	Yes	
 mls	nucl1440	Masalit			Latn	Vigorous	Stable	Emerging	0	425,000		masa1301	Yes	
@@ -726,7 +726,7 @@ anc	ngas1240	Ngas			Latn	Vigorous	Stable	Ascending	0	400,000		west2717	Yes
 bfs	sout2730	Southern Bai			Latn	Vigorous	Stable	Still	0	400,000		sout3254	Yes	
 flr	fuli1240	Fuliiru			Latn	Developing	Stable	Ascending	0	400,000		fuli1242	Yes	
 fmu	farw1235	Far Western Muria			Deva	Vigorous	Stable	Emerging	0	400,000		east2880	Yes	
-kmw	komo1260	Komo (Democratic Republic of Congo)			Latn	Vigorous	Endangered	Ascending	0	400,000		bila1258	Yes	
+kmw	komo1260	Komo (DRC)			Latn	Vigorous	Endangered	Ascending	0	400,000		bila1258	Yes	
 lea	lega1249	Lega-Shabunda			Latn	Developing	Stable	Emerging	0	400,000		west2869	Yes	
 lol	mong1338	Mongo			Latn	Developing	Stable	Emerging	0	400,000		lomo1242	Yes	
 mut	west2408	Western Muria			Deva	Vigorous	Stable	Emerging	0	400,000		muri1262	Yes	
@@ -860,7 +860,7 @@ wsg	utno1237	Gondi, Adilabad			Gong		Institutional	Ascending	0	300,000	gon	sout2
 wxa	waxi1236	Waxianghua			Hani	Threatened	Endangered	Emerging	0	300,000	sini1245	sini1245	Yes	
 yer	taro1263	Tarok			Latn		Stable	Ascending	0	300,000		taro1266	Yes	
 nzi	nzim1238	Nzima			Latn	Educational	Institutional	Ascending	0	299,000		jwir1243	Yes	
-bmy	bemb1258	Bemba (Democratic Republic of Congo)							0	296,000		book1242	No	Declared non-existent by ISO
+bmy	bemb1258	Bemba (DRC)							0	296,000		book1242	No	Declared non-existent by ISO
 mde	maba1277	Maba (Chad)			Arab	Wider Communication	Institutional	Ascending	0	296,000		nucl1441	Yes	
 kfs	bila1253	Bilaspuri			Deva	Vigorous	Stable	Ascending	0	295,805		cham1331	Yes	
 twh	taid1250	Tai Dón			Latn	Vigorous	Stable	Emerging	0	295,000		whit1265	Yes	
@@ -985,7 +985,7 @@ saq	samb1315	Samburu	Kisampur		Latn	Vigorous	Stable	Ascending	0	222,000		nucl143
 asp	alge1235	Algerian Sign Language			Zxxx	Vigorous	Stable	Still	0	220,000		lsfi1234	Yes	
 gso	sout2785	Southwest Gbaya			Latn	Developing	Stable	Emerging	0	220,000	gba	gbay1284	Possibly	But probably want to use macrolanguage
 mzv	manz1243	Manza			Latn	Vigorous	Stable	Emerging	0	220,000		manz1242	Yes	
-nxd	ngan1302	Ngando (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	220,000		lomo1242	Yes	
+nxd	ngan1302	Ngando (DRC)			Latn	Vigorous	Stable	Emerging	0	220,000		lomo1242	Yes	
 sav	saaf1238	Saafi-Saafi			Latn	Developing	Stable	Ascending	0	220,000		saaf1239	Yes	
 tod	toma1245	Toma			Latn	Educational	Stable	Ascending	0	220,000		loma1259	Yes	
 mpg	marb1239	Marba			Latn	Developing	Stable	Ascending	0	218,000		marb1245	Yes	
@@ -1098,7 +1098,7 @@ dgl	dong1288	Dongolawi			Arab	Threatened	Endangered	Emerging	0	180,000		kenu1236
 dnw	west2594	Western Dani			Latn	Developing	Stable	Ascending	0	180,000		cent2233	Yes	
 enb	mark1255	Markweeta			Latn	Developing	Stable	Ascending	0	180,000	kln	nort3239	Possibly	But probably want to use macrolanguage
 hac	gura1251	Gurani			Arab	Shifting	Endangered	Ascending	0	180,000		gora1267	Yes	
-kel	kela1254	Kela (Democratic Republic of Congo)			Latn	Vigorous	Stable	Still	0	180,000		yela1238	Yes	
+kel	kela1254	Kela (DRC)			Latn	Vigorous	Stable	Still	0	180,000		yela1238	Yes	
 kez	kuke1242	Kukele			Latn	Developing	Stable	Emerging	0	180,000		kuke1241	Yes	
 ktp	kadu1253	Kaduo			Plrd	Vigorous	Stable	Still	0	180,000		bika1252	Yes	
 mzc	mada1271	Madagascar Sign Language			Zxxx	Vigorous	Stable	Emerging	0	180,000		norw1261	Yes	
@@ -1144,12 +1144,12 @@ llb	lolo1261	Lolo			Latn	Developing	Stable	Emerging	0	162,000		lolo1269	Yes
 rbb	ruma1248	Rumai Palaung			Mymr	Vigorous	Stable	Ascending	0	161,600		west2791	Yes	
 tcc	dato1239	Datooga			Latn	Developing	Stable	Emerging	0	161,000		nort3277	Yes	
 kyk	kama1363	Kamayo			Latn	Vigorous	Institutional	Emerging	0	160,699		mans1261	Yes	
-khy	kele1255	Kele (Democratic Republic of Congo)			Latn	Developing	Stable	Emerging	0	160,000		kele1265	Yes	
+khy	kele1255	Kele (DRC)			Latn	Developing	Stable	Emerging	0	160,000		kele1265	Yes	
 ruc	ruul1235	Ruuli			Latn	Threatened	Stable	Emerging	0	160,000		nort3228	Yes	
 yiv	nort2718	Northern Nisu			Yiii		Endangered	Still	0	160,000		nort2717	Yes	
 bpr	koro1310	Koronadal Blaan			Latn	Educational	Stable	Ascending	0	159,677		blaa1241	Yes	
 bmq	bomu1247	Bomu			Latn	Developing	Stable	Ascending	0	159,000		bwam1247	Yes	
-kiu	kirm1248	Kirmanjki (individual language)	Shar Ma		Latn	Educational	Endangered	Ascending	0	158,000	zza	zaza1246	Possibly	But probably want to use macrolanguage
+kiu	kirm1248	Common Kirmanjki	Shar Ma		Latn	Educational	Endangered	Ascending	0	158,000	zza	zaza1246	Possibly	But probably want to use macrolanguage
 mrt	marg1265	Marghi Central			Latn	Vigorous	Stable	Emerging	0	158,000		bium1270	Yes	
 mym	meen1242	Me'en			Ethi	Educational	Institutional	Ascending	0	157,300		past1248	Yes	
 bud	ntch1242	Ntcham			Latn	Developing	Stable	Ascending	0	157,000		ntch1241	Yes	
@@ -1186,7 +1186,7 @@ kyu	west2409	Western Kayah			Kali	Developing	Stable	Ascending	0	150,000		kaya131
 lnl	sout2787	South Central Banda			Latn	Vigorous	Stable	Emerging	0	150,000		sout2786	Yes	
 mhy	maan1238	Ma'anyan			Latn	Threatened	Endangered	Emerging	0	150,000		maan1240	Yes	
 mzb	tumz1238	Tumzabt	تومزابت			Threatened	Stable	Emerging	0	150,000		moza1250	Yes	
-ngc	ngom1268	Ngombe (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	150,000		ngom1274	Yes	
+ngc	ngom1268	Ngombe (DRC)			Latn	Vigorous	Stable	Emerging	0	150,000		ngom1274	Yes	
 nyj	nyan1304	Nyanga			Latn	Vigorous	Stable	Emerging	0	150,000		nyan1317	Yes	
 sur	mwag1236	Mwaghavul			Latn	Wider Communication	Stable	Ascending	0	150,000		west2717	Yes	
 tbt	temb1270	Tembo (Kitembo)			Latn	Developing	Stable	Emerging	0	150,000		fore1272	Yes	
@@ -1672,7 +1672,7 @@ dbm	dugu1249	Duguri			Latn	Shifting	Endangered	Still	0	65,000		jara1275	Yes
 gbs	gbes1238	Gbesi Gbe			Latn	Vigorous	Stable	Still	0	65,000		west2934	Yes	
 ken	keny1279	Kenyang	Kɛnyaŋ		Latn	Developing	Stable	Ascending	0	65,000		mamf1238	Yes	
 mfo	mbee1249	Mbe			Latn	Developing	Stable	Emerging	0	65,000		ekoi1237	Yes	
-mnh	mono1270	Mono (Democratic Republic of Congo)			Latn	Vigorous	Stable	Ascending	0	65,000		mids1242	Yes	
+mnh	mono1270	Mono (DRC)			Latn	Vigorous	Stable	Ascending	0	65,000		mids1242	Yes	
 smy	semn1249	Semnani			Arab	Vigorous	Stable	Still	0	65,000		nort3177	Yes	
 wlo	woli1241	Wolio			Arab	Threatened	Endangered	Emerging	0	65,000		woli1240	Yes	
 xwe	xwel1235	Xwela Gbe			Latn	Vigorous	Stable	Emerging	0	65,000		west2934	Yes	
@@ -1980,7 +1980,7 @@ bqk	band1342	Banda-Mbrès			Latn	Vigorous	Stable	Emerging	0	42,500		cent2022	Yes
 imo	imbo1238	Imbongu			Latn	Developing	Stable	Emerging	0	42,500		auag1234	Yes	
 mgb	mara1396	Mararit			Latn	Vigorous	Stable	Emerging	0	42,400		tama1329	Yes	
 kjf	khal1270	Khalaj				Developing			0	42,100		book1242	No	Declared non-existent by ISO
-bcp	bali1274	Bali (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	42,000		bali1286	Yes	
+bcp	bali1274	Bali (DRC)			Latn	Vigorous	Stable	Emerging	0	42,000		bali1286	Yes	
 lse	luse1252	Lusengo			Latn	Vigorous	Stable	Still	0	42,000		ngir1248	Yes	
 mmz	maba1270	Mabaale			Latn	Vigorous	Stable	Still	0	42,000		libi1242	Yes	
 wbi	vwan1235	Vwanji			Latn	Developing	Stable	Ascending	0	41,800		wanj1243	Yes	
@@ -2335,7 +2335,7 @@ gnd	zulg1242	Zulgo-Gemzek			Latn	Developing	Stable	Ascending	0	26,000		meri1245	
 ipi	ipil1240	Ipili			Latn	Developing	Stable	Emerging	0	26,000		enga1251	Yes	
 isn	isan1243	Isanzu			Latn	Threatened	Endangered	Emerging	0	26,000		nyat1247	Yes	
 kpb	mull1244	Mullu Kurumba				Vigorous	Stable	Still	0	26,000		mala1541	Yes	
-lel	lele1265	Lele (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	26,000		bush1251	Yes	
+lel	lele1265	Lele (DRC)			Latn	Vigorous	Stable	Emerging	0	26,000		bush1251	Yes	
 lln	lele1276	Lele (Chad)			Latn	Developing	Stable	Emerging	0	26,000		east2721	Yes	
 poi	high1276	Highland Popoluca			Latn	Developing	Stable	Ascending	0	26,000		gulf1238	Yes	
 ymc	sout2722	Southern Muji					Stable	Still	0	26,000		nort2715	Yes	
@@ -2505,7 +2505,7 @@ tse	tuni1249	Tunisian Sign Language			Zxxx	Vigorous	Stable	Still	0	21,200		ital1
 ygr	yaga1260	Yagaria			Latn		Stable	Emerging	0	21,100		kama1374	Yes	
 avi	avik1243	Avikam			Latn	Developing	Stable	Still	0	21,000		avik1242	Yes	
 bfn	buna1278	Bunak	bahasa Bunak		Latn	Vigorous	Stable	Ascending	0	21,000		timo1261	Yes	
-bkp	boko1263	Boko (Democratic Republic of Congo)			Latn	Vigorous	Stable	Still	0	21,000		loba1240	Yes	
+bkp	boko1263	Boko (DRC)			Latn	Vigorous	Stable	Still	0	21,000		loba1240	Yes	
 csg	chil1264	Chilean Sign Language			Zxxx	Developing	Stable	Emerging	0	21,000		deaf1237	Yes	
 cwb	main1272	Maindo			Latn	Vigorous	Endangered	Emerging	0	21,000		chuw1240	Yes	
 dgd	daga1272	Dagaari Dioula			Latn	Vigorous	Stable	Emerging	0	21,000		sout3209	Yes	
@@ -3094,7 +3094,7 @@ ons	onoo1246	Ono			Latn	Developing	Stable	Emerging	0	11,000		kala1410	Yes
 tim	timb1251	Timbe			Latn	Developing	Stable	Emerging	0	11,000		timb1264	Yes	
 vif	vili1238	Vili			Latn	Vigorous	Stable	Ascending	0	11,000		vili1240	Yes	
 xem	kemb1249	Kembayan			Latn	Vigorous	Endangered	Emerging	0	11,000		sout2922	Yes	
-zmw	mbod1238	Mbo (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	11,000		ndak1244	Yes	
+zmw	mbod1238	Mbo (DRC)			Latn	Vigorous	Stable	Emerging	0	11,000		ndak1244	Yes	
 ntr	delo1240	Delo			Latn	Developing	Stable	Emerging	0	10,900		delo1241	Yes	
 agj	argo1244	Argobba			Ethi	Threatened	Endangered	Emerging	0	10,860		amha1244	Yes	
 bbq	bama1251	Bamali			Latn	Vigorous	Stable	Emerging	0	10,800		nunm1234	Yes	
@@ -3806,7 +3806,7 @@ sgg	swis1240	Swiss-German Sign Language	Deutschschweizer Gebärdensprache		Zxxx	
 sie	sima1258	Simaa			Latn	Vigorous	Stable	Emerging	0	6,000		sima1262	Yes	
 sjb	saja1241	Sajau Basap			Latn	Vigorous	Endangered	Still	0	6,000		puna1281	Yes	
 skq	sini1242	Sininkere			Latn	Threatened	Stable	Still	0	6,000		soni1258	Yes	
-soc	sode1235	So (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	6,000		baso1234	Yes	
+soc	sode1235	So (DRC)			Latn	Vigorous	Stable	Emerging	0	6,000		baso1234	Yes	
 tbg	nort2920	North Tairora			Latn	Developing	Stable	Emerging	0	6,000		tair1260	Yes	
 tdr	todr1244	Todrah			Latn	Vigorous	Stable	Still	0	6,000		hres1236	Yes	
 tgc	tiga1245	Tigak			Latn	Developing	Endangered	Emerging	0	6,000		tung1294	Yes	
@@ -4050,7 +4050,7 @@ kbh	cams1241	Camsá			Latn	Developing	Stable	Ascending	0	4,773			Yes
 pps	sanl1248	San Luís Temalacayuca Popoloca			Latn	Vigorous	Stable	Emerging	0	4,730		popo1294	Yes	
 tin	tind1238	Tindi			Cyrl	Threatened	Endangered	Emerging	0	4,730		bagv1240	Yes	
 zpg	guev1238	Guevea De Humboldt Zapotec			Latn	Developing	Stable	Ascending	0	4,720	zap	nort3369	Possibly	Will be hard to find specific data, may be better to use macrolanguage
-msj	made1252	Ma (Democratic Republic of Congo)			Latn	Vigorous	Stable	Emerging	0	4,700		mbai1246	Yes	
+msj	made1252	Ma (DRC)			Latn	Vigorous	Stable	Emerging	0	4,700		mbai1246	Yes	
 zum	kumz1235	Kumzari			Arab	Moribund	Endangered	Emerging	0	4,700		mode1259	Yes	
 ctn	chhi1245	Chhintange			Deva	Threatened	Endangered	Still	0	4,699		grea1285	Yes	
 chx	chan1310	Chantyal			Deva	Threatened	Endangered	Emerging	0	4,676		thak1244	Yes	
@@ -7551,7 +7551,7 @@ bte	gamo1241	Gamo-Ningi			Latn	Dormant	Endangered	Still	0			ning1277	Yes, with c
 btk	toba1265	Batak languages										suma1277	Probably not	Language family -- there mare many other languages that are part of this
 bue	beot1247	Beothuk			Latn		Extinct	Still	0				No	Extinct language
 bvv	bani1254	Baniva			Latn	Extinct	Extinct	Still	0			maip1247	No	Extinct language
-bxx	born1252	Borna (Democratic Republic of Congo)							0			book1242	No	Declared non-existent by ISO
+bxx	born1252	Borna (DRC)							0			book1242	No	Declared non-existent by ISO
 byq	basa1287	Basay				Extinct	Extinct	Still	0			nort2900	No	Extinct language
 byr-x-waga		Yipma/Wagamwa												
 byt	bert1249	Berti				Extinct	Extinct	Still	0			east2432	No	Extinct language

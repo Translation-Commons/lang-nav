@@ -7,7 +7,7 @@ type Props = {
 
 export default function LinkButton({ href, children }: React.PropsWithChildren<Props>) {
   return (
-    <a href={href}>
+    <a href={href} target="_blank" rel="noopener noreferrer">
       <button
         role="link"
         style={{

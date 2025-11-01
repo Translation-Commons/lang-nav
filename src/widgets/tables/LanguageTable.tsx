@@ -6,7 +6,7 @@ import Hoverable from '@features/hovercard/Hoverable';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
-import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
+import { CodeColumn } from '@features/table/CommonColumns';
 import ObjectTable from '@features/table/ObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
@@ -21,12 +21,12 @@ import {
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
+import { LanguageNameColumns } from './columns/LanguageNameColumns';
 import { LanguagePopulationColumns } from './columns/LanguagePopulationColumns';
 import { LanguageVitalityColumns } from './columns/LanguageVitalityColumns';
 
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
-  const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
   const codeColumn = {
     ...CodeColumn,
     render: (lang: LanguageData): ReactNode => (
@@ -59,8 +59,7 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           columnGroup: 'Codes',
         },
-        NameColumn,
-        endonymColumn,
+        ...LanguageNameColumns,
         {
           key: 'Scope',
           render: (lang) => lang.scope,
