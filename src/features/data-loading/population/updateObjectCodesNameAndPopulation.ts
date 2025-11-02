@@ -4,8 +4,6 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
-import { uniqueBy } from '@shared/lib/setUtils';
-
 import { computeLocalePopulationFromCensuses } from './computeLocalePopulationFromCensuses';
 import { computeRegionalLocalePopulation } from './computeRegionalLocalePopulation';
 
@@ -77,14 +75,6 @@ function updateObjectNamesAndCodes(
     const specific = lang.sourceSpecific[languageSource];
     lang.codeDisplay = specific.code ?? lang.ID;
     lang.nameDisplay = specific.name ?? lang.nameCanonical;
-    lang.names = uniqueBy(
-      [
-        lang.nameCanonical,
-        lang.nameEndonym,
-        ...Object.values(lang.sourceSpecific).map((l) => l.name),
-      ].filter((s) => s != null),
-      (s) => s,
-    );
     lang.scope = specific.scope ?? lang.scope;
   });
 
