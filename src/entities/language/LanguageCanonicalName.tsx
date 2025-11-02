@@ -8,13 +8,13 @@ import Pill from '@shared/ui/Pill';
 import { LanguageData } from './LanguageTypes';
 
 const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { codeDisplay, codeISO6391, nameDisplay, sourceSpecific } = lang;
+  const { codeDisplay, codeISO6391, nameCanonical, sourceSpecific } = lang;
   const { Glottolog, ISO, CLDR } = sourceSpecific;
 
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
-      {nameDisplay}
-      {Glottolog.name === nameDisplay && (
+      {nameCanonical}
+      {Glottolog.name === nameCanonical && (
         <Hoverable
           hoverContent={
             <>
@@ -29,7 +29,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <Pill>Glottolog</Pill>
         </Hoverable>
       )}
-      {ISO.name === nameDisplay && (
+      {ISO.name === nameCanonical && (
         <Hoverable
           hoverContent={
             <>
@@ -44,7 +44,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <Pill>ISO</Pill>
         </Hoverable>
       )}
-      {CLDR.name === nameDisplay && (
+      {CLDR.name === nameCanonical && (
         <Hoverable
           hoverContent={
             <>
