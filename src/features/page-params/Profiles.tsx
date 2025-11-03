@@ -88,13 +88,16 @@ export function getDefaultParams(
   view?: View | undefined,
   profile?: ProfileType | undefined,
 ): PageParams {
-  let params = { ...GLOBAL_DEFAULTS }; // De-structure to avoid mutation
+  let params = GLOBAL_DEFAULTS;
 
   // Merge global defaults with profile-specific defaults
   if (profile != null) {
     params = { ...params, ...DEFAULTS_BY_PROFILE[profile] };
     params.profile = profile;
   }
+
+  // Clone to avoid mutating the defaults
+  params = structuredClone(params);
 
   // Directly set the view & objectType if provided
   if (view != null) params.view = view;
