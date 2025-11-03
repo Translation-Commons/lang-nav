@@ -12,6 +12,7 @@ type OptionProps<T extends React.Key> = {
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
   isSelected: boolean;
   labelSuffix?: ReactNode; // Appeals after the label
+  labelWhenEmpty?: string; // for multi-select options
   onClick: (value: T) => void;
   option: T | T[];
   position?: PositionInGroup; // used for styling
@@ -23,6 +24,7 @@ function SelectorOption<T extends React.Key>({
   getOptionLabel = (val) => val as string,
   isSelected,
   labelSuffix,
+  labelWhenEmpty,
   onClick,
   option,
   position = PositionInGroup.Standalone,
@@ -32,23 +34,72 @@ function SelectorOption<T extends React.Key>({
   if (!isSelected) className += ' unselected';
   if (display === SelectorDisplay.InlineDropdown && position === PositionInGroup.Standalone)
     className += ' hoverableText';
+
   return (
     <HoverableButton
       className={className}
       hoverContent={
-        getOptionDescription
-          ? Array.isArray(option)
-            ? option.map(getOptionDescription).join('\n')
-            : getOptionDescription(option)
-          : null
+        <OptionDescription<T> option={option} getOptionDescription={getOptionDescription} />
       }
       onClick={() => onClick(Array.isArray(option) ? option[0] : option)}
       style={getOptionStyle(display, isSelected, position)}
     >
-      {Array.isArray(option) ? option.map(getOptionLabel).join(' or ') : getOptionLabel(option)}
+      <OptionLabel<T>
+        option={option}
+        labelWhenEmpty={labelWhenEmpty}
+        getOptionLabel={getOptionLabel}
+      />
       {labelSuffix}
     </HoverableButton>
   );
+}
+
+type OptionDescriptionProps<T> = {
+  option: T | T[];
+  getOptionDescription?: (value: T) => React.ReactNode;
+};
+
+function OptionDescription<T extends React.Key>({
+  option,
+  getOptionDescription,
+}: OptionDescriptionProps<T>) {
+  if (!getOptionDescription) return undefined;
+  if (Array.isArray(option)) {
+    if (option.length === 0) return undefined;
+    return option.map((opt, idx) => (
+      <React.Fragment key={idx}>
+        {idx > 0 && ', '}
+        {getOptionDescription(opt)}
+      </React.Fragment>
+    ));
+  }
+  return getOptionDescription(option);
+}
+
+type OptionLabelProps<T> = {
+  option: T | T[];
+  labelWhenEmpty?: string;
+  getOptionLabel: (value: T) => React.ReactNode;
+};
+
+function OptionLabel<T extends React.Key>({
+  option,
+  labelWhenEmpty,
+  getOptionLabel,
+}: OptionLabelProps<T>) {
+  if (Array.isArray(option)) {
+    if (option.length === 0) {
+      return labelWhenEmpty ?? 'None';
+    } else {
+      return option.map((opt, idx) => (
+        <React.Fragment key={String(opt)}>
+          {idx > 0 && ' or '}
+          {getOptionLabel(opt)}
+        </React.Fragment>
+      ));
+    }
+  }
+  return getOptionLabel(option);
 }
 
 export function getOptionStyle(

@@ -11,7 +11,8 @@ import {
 import { ProfileType } from '@features/page-params/Profiles';
 import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
 
 const mockUpdatePageParams = vi.fn();
 
@@ -28,8 +29,8 @@ export const createMockUsePageParams = (
   profile: ProfileType.LanguageEthusiast,
   page: 1,
   limit: 10,
-  languageScopes: [],
-  territoryScopes: [],
+  languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
+  territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   languageSource: LanguageSource.All,
   localeSeparator: LocaleSeparator.Underscore,
   territoryFilter: '',
