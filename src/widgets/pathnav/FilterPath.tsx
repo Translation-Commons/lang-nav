@@ -78,34 +78,34 @@ const FilterPath: React.FC = () => {
       </>
     ),
 
-    languageScopes.length > 0 &&
-      !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
-        <Selector
-          selectorStyle={{ marginLeft: '0' }}
-          options={Object.values(LanguageScope)}
-          display={SelectorDisplay.InlineDropdown}
-          onChange={(scope: LanguageScope) =>
-            languageScopes.includes(scope)
-              ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
-              : updatePageParams({ languageScopes: [...languageScopes, scope] })
-          }
-          selected={languageScopes}
-        />
-      ),
-    territoryScopes.length > 0 &&
-      !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
-        <Selector
-          selectorStyle={{ marginLeft: '0' }}
-          options={Object.values(TerritoryScope)}
-          display={SelectorDisplay.InlineDropdown}
-          onChange={(scope: TerritoryScope) =>
-            territoryScopes.includes(scope)
-              ? updatePageParams({ territoryScopes: territoryScopes.filter((s) => s != scope) })
-              : updatePageParams({ territoryScopes: [...territoryScopes, scope] })
-          }
-          selected={territoryScopes}
-        />
-      ),
+    !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
+      <Selector
+        selectorStyle={{ marginLeft: '0' }}
+        options={Object.values(LanguageScope)}
+        display={SelectorDisplay.InlineDropdown}
+        labelWhenEmpty="Any Languoid"
+        onChange={(scope: LanguageScope) =>
+          languageScopes.includes(scope)
+            ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
+            : updatePageParams({ languageScopes: [...languageScopes, scope] })
+        }
+        selected={languageScopes}
+      />
+    ),
+    !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
+      <Selector
+        selectorStyle={{ marginLeft: '0' }}
+        options={Object.values(TerritoryScope)}
+        display={SelectorDisplay.InlineDropdown}
+        labelWhenEmpty="Any Geography"
+        onChange={(scope: TerritoryScope) =>
+          territoryScopes.includes(scope)
+            ? updatePageParams({ territoryScopes: territoryScopes.filter((s) => s != scope) })
+            : updatePageParams({ territoryScopes: [...territoryScopes, scope] })
+        }
+        selected={territoryScopes}
+      />
+    ),
     territoryFilter !== '' && (
       <>
         In &quot;{territoryFilter}&quot;

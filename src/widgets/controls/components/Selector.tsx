@@ -12,6 +12,7 @@ type Props<T extends React.Key> = {
   display?: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
+  labelWhenEmpty?: string; // for multi-select options
   onChange: (value: T) => void;
   options: readonly T[];
   selected: T | T[];
@@ -24,6 +25,7 @@ function Selector<T extends React.Key>({
   display = SelectorDisplay.ButtonList,
   getOptionDescription = () => undefined,
   getOptionLabel = (val) => val as string,
+  labelWhenEmpty,
   onChange,
   options,
   selected,
@@ -57,14 +59,14 @@ function Selector<T extends React.Key>({
 
       {/* Standalone option to open/close the dropdown menu */}
       {(display === SelectorDisplay.Dropdown || display === SelectorDisplay.InlineDropdown) && (
-        <SelectorOption<T>
+        <DropdownButton<T>
+          display={display}
           getOptionDescription={getOptionDescription}
           getOptionLabel={getOptionLabel}
-          labelSuffix={expanded ? ' ▼' : ' ▶'}
-          onClick={() => setExpanded((prev) => !prev)}
-          option={selected}
-          display={display}
-          isSelected={true}
+          isExpanded={expanded}
+          labelWhenEmpty={labelWhenEmpty}
+          selected={selected}
+          toggleDropdown={() => setExpanded((prev) => !prev)}
         />
       )}
     </SelectorContainer>
@@ -165,6 +167,39 @@ function Options<T extends React.Key>({
       position={getPositionInGroup(i, options.length)}
     />
   ));
+}
+
+type DropdownButtonProps<T extends React.Key> = {
+  display: SelectorDisplay;
+  getOptionDescription?: (value: T) => React.ReactNode;
+  getOptionLabel?: (value: T) => React.ReactNode;
+  isExpanded: boolean;
+  labelWhenEmpty?: string;
+  selected: T | T[];
+  toggleDropdown: () => void;
+};
+
+function DropdownButton<T extends React.Key>({
+  display,
+  getOptionDescription,
+  getOptionLabel,
+  isExpanded,
+  labelWhenEmpty,
+  selected,
+  toggleDropdown,
+}: DropdownButtonProps<T>) {
+  return (
+    <SelectorOption<T>
+      display={display}
+      getOptionDescription={getOptionDescription}
+      getOptionLabel={getOptionLabel}
+      isSelected={true}
+      labelSuffix={isExpanded ? ' ▼' : ' ▶'}
+      labelWhenEmpty={labelWhenEmpty}
+      onClick={() => toggleDropdown()}
+      option={selected}
+    />
+  );
 }
 
 export default Selector;
