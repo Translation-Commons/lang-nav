@@ -8493,7 +8493,6 @@ aky_IN	Aka-Kol (India)		Other	1
 ama_BR	Amanayé (Brazil)		Other	1	
 amg_AU	Amurdak (Australia)		Other	1	
 aox_BR	Atorada (Brazil)		Other	1	
-apc_MX	Arabic, North Levantine Spoken (Mexico)	‫العامية‬	Other	1	
 api_BR	Apiaká (Brazil)		Other	1	
 apq_IN	A-Pucikwar (India)		Other	1	
 arb_EH	Arabic, Standard (Western Sahara)	العربية الفصحى	Other	1	
@@ -9265,7 +9264,6 @@ mpr_SB	Vangunu (Solomon Islands)
 mra_TH	Mlabri (Thailand)				
 mrm_VU	Merlav (Vanuatu)				
 mrn_SB	Cheke Holo (Solomon Islands)				
-mrq_PF	North Marquesan (French Polynesia)				
 mrt_NG	Marghi Central (Nigeria)				
 msc_GN	Sankaran Maninka (Guinea)				
 msh_MG	Masikoro Malagasy (Madagascar)				
@@ -11062,3 +11060,28 @@ hokk1242_TH	Hokkien (Thailand)			17600
 nan_TH	Min-nan (Thailand)			17600	
 hokk1242_BN	Hokkien (Brunei)			13300	
 nan_BN	Min-nan (Brunei)			13300	
+myn_MX	Mayan (Mexico)			2494197	
+oto_MX	Otomi (Mexico)			298861	
+mixt1427_MX	Mixtec (Mexico)			526593	
+toto1252_MX	Totonac (Mexico)			256344	
+maza1295_MX	Macatecan (Mexico)			237212	
+maza1293_MX	Mazahua (Mexico)			153797	
+meph1234_MX	Mephaa (Mexico)			147432	
+chin1484_MX	Chinantecan (Mexico)			144394	
+tara1323_MX	Tarascan (Mexico)			142459	
+mixe1286_MX	Mixe (Mexico)			139760	
+tara1321_MX	Tarahumaran (Mexico)			91554	
+zoqu1261_MX	Zoque (Mexico)			74089	
+rar_PF	Rarotongan (French Polynesia)			1700	
+rap_PF	Rapanui (French Polynesia)			1100	
+pih_PF	Pitcairn-Norfolk (French Polynesia)			300	
+mrq_PF	North Marquesan (French Polynesia)			3900	
+amuz1254_MX	Amuzgoan (Mexico)		Official	59884	
+chat1268_MX	Chatino (Mexico)		Official	40722	
+cora1260_MX	Coran (Mexico)		Official	33226	
+triq1251_MX	Trique (Mexico)		Official	23846	
+cuic1234_MX	Cuicatec (Mexico)		Official	10192	
+huav1256_MX	Huavean (Mexico)		Official	7442	
+pame1260_MX	Pamean (Mexico)		Official	11627	
+tepe1243_MX	Tepehua (Mexico)		Official	8321	
+kjb_MX	Q'anjob'al (Mexico)		Official	10851	

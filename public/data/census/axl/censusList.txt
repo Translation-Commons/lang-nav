@@ -28,6 +28,7 @@ axl.ne
 axl.nf
 axl.ng
 axl.no
+axl.pf
 axl.pn
 axl.qa
 axl.sg
