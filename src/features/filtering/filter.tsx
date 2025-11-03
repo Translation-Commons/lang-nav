@@ -152,11 +152,10 @@ export function buildVitalityFilterFunction(params: {
 }): FilterFunctionType {
   const { vitalityISO, vitalityEth2013, vitalityEth2025 } = params;
 
-  return (object: ObjectData): boolean => {
+  const filterByVitality = (object: ObjectData | undefined): boolean => {
     // Only filter language objects
-    if (object.type !== ObjectType.Language) {
-      return true;
-    }
+    if (object?.type === ObjectType.Locale) return filterByVitality(object.language);
+    if (object?.type !== ObjectType.Language) return true;
 
     const language = object as LanguageData;
 
@@ -182,6 +181,8 @@ export function buildVitalityFilterFunction(params: {
     // Must match all active filters
     return isoMatches && eth2013Matches && eth2025Matches;
   };
+
+  return filterByVitality;
 }
 
 /**

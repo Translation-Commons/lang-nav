@@ -10,6 +10,8 @@ export function getVitalityISOLabel(vitality: VitalityISO | undefined): string {
       return 'Historical';
     case VitalityISO.Extinct:
       return 'Extinct';
+    case VitalityISO.SpecialCode:
+      return 'Special Code';
     default:
       return 'Unknown';
   }

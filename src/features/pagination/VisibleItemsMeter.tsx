@@ -9,7 +9,12 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { getFilterBySubstring, getFilterByTerritory, getScopeFilter } from '../filtering/filter';
+import {
+  getFilterBySubstring,
+  getFilterByTerritory,
+  getFilterByVitality,
+  getScopeFilter,
+} from '../filtering/filter';
 
 interface Props {
   objects: ObjectData[];
@@ -21,23 +26,28 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
   const filterByScope = getScopeFilter();
+  const filterByVitality = getFilterByVitality();
 
   // Compute filter breakdown
-  const nInScope = useMemo(() => objects.filter(filterByScope).length, [objects, filterByScope]);
-  const nInTerritory = useMemo(
-    () => objects.filter(filterByScope).filter(filterByTerritory).length,
-    [objects, filterByScope, filterByTerritory],
-  );
-  const nMatchingSubstring = useMemo(
-    () => objects.filter(filterByScope).filter(filterByTerritory).filter(filterBySubstring).length,
-    [objects, filterByScope, filterByTerritory, filterBySubstring],
-  );
+  const [nInScope, nInTerritory, nInVitality, nMatchingSubstring] = useMemo(() => {
+    const filteredByScope = objects.filter(filterByScope);
+    const filteredByTerritory = filteredByScope.filter(filterByTerritory);
+    const filteredByVitality = filteredByTerritory.filter(filterByVitality);
+    const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
+    return [
+      filteredByScope.length,
+      filteredByTerritory.length,
+      filteredByVitality.length,
+      filteredBySubstring.length,
+    ];
+  }, [objects, filterByScope, filterByTerritory, filterByVitality, filterBySubstring]);
 
   // Compute other counts
   const nOverall = objects.length;
   const nFilteredByScope = nOverall - nInScope;
   const nFilteredByTerritory = nInScope - nInTerritory;
-  const nFilteredBySubstring = nInTerritory - nMatchingSubstring;
+  const nFilteredByVitality = nInTerritory - nInVitality;
+  const nFilteredBySubstring = nInVitality - nMatchingSubstring;
   const nFiltered = nMatchingSubstring;
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
   if (nOverall === 0) {
@@ -72,6 +82,9 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
                 <div>
                   Not in territory ({territoryFilter}): {nFilteredByTerritory.toLocaleString()}
                 </div>
+              )}
+              {nFilteredByVitality > 0 && (
+                <div>Not in vitality: {nFilteredByVitality.toLocaleString()}</div>
               )}
               {nFilteredBySubstring > 0 && (
                 <div>Not matching substring: {nFilteredBySubstring.toLocaleString()}</div>
