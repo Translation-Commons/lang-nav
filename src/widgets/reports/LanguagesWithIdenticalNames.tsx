@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
 import LimitInput from '@widgets/controls/selectors/LimitInput';
-import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import {
@@ -9,7 +8,7 @@ import {
   getFilterByTerritory,
   getSliceFunction,
 } from '@features/filtering/filter';
-import usePageParams from '@features/page-params/usePageParams';
+import PaginationControls from '@features/pagination/PaginationControls';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
@@ -24,7 +23,6 @@ import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 
 const LanguagesWithIdenticalNames: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
-  const { page, limit } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
@@ -77,10 +75,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
       </ol>
       <div>
         <LimitInput />
-        <PaginationControls
-          currentPage={page}
-          totalPages={limit < 1 ? 1 : Math.ceil(Object.keys(langsWithDupNames).length / limit)}
-        />
+        <PaginationControls itemCount={Object.keys(langsWithDupNames).length} />
       </div>
       {sliceFunction(
         Object.entries(langsWithDupNames).sort((a, b) => {
