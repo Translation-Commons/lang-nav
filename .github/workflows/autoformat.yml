@@ -38,3 +38,17 @@ jobs:
           commit_user_name: 'LangNav Bot'
           commit_user_email: 'noreply@github.com'
           skip_dirty_check: false
+
+      - name: Compute vitest test coverage, it saves to an untracked JSON file
+        run: npm run test:coverage
+
+      - name: Produce markdown file that's easier to track based on the test coverage
+        run: node scripts/coverage-summary.mjs > test-coverage.md
+
+      - name: Commit changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'Testing: update test coverage'
+          commit_user_name: 'LangNav Bot'
+          commit_user_email: 'noreply@github.com'
+          skip_dirty_check: false
