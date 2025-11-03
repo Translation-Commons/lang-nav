@@ -25,7 +25,9 @@ import {
 } from '../VitalitySelector';
 
 vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/hovercard/useHoverCard', () => ({
+  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
+}));
 
 describe('VitalitySelector', () => {
   let updatePageParams: (params: PageParamsOptional) => void;

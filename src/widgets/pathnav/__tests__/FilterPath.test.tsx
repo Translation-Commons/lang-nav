@@ -149,4 +149,10 @@ describe('FilterPath', () => {
     clickClearButton();
     expect(updatePageParams).toHaveBeenCalledWith({ searchString: '' });
   });
+
+  it('shows "Any Languoids" when the language scope filter is an empty array, meaning to allow any language-like objects to pass', () => {
+    setupMockParams({ languageScopes: [] });
+    render(<FilterPath />);
+    expect(screen.getByText(/Any Languoid/)).toBeInTheDocument();
+  });
 });
