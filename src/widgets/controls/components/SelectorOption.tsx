@@ -39,7 +39,9 @@ function SelectorOption<T extends React.Key>({
     <HoverableButton
       className={className}
       hoverContent={
-        <OptionDescription<T> option={option} getOptionDescription={getOptionDescription} />
+        getOptionDescription && (
+          <OptionDescription<T> option={option} getOptionDescription={getOptionDescription} />
+        )
       }
       onClick={() => onClick(Array.isArray(option) ? option[0] : option)}
       style={getOptionStyle(display, isSelected, position)}
@@ -56,14 +58,13 @@ function SelectorOption<T extends React.Key>({
 
 type OptionDescriptionProps<T> = {
   option: T | T[];
-  getOptionDescription?: (value: T) => React.ReactNode;
+  getOptionDescription: (value: T) => React.ReactNode;
 };
 
 function OptionDescription<T extends React.Key>({
   option,
   getOptionDescription,
 }: OptionDescriptionProps<T>) {
-  if (!getOptionDescription) return undefined;
   if (Array.isArray(option)) {
     if (option.length === 0) return undefined;
     return option.map((opt, idx) => (

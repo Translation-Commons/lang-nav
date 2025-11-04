@@ -1,5 +1,7 @@
+import { XIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
+import HoverableButton from '@features/hovercard/HoverableButton';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -18,9 +20,9 @@ type FilterExplanationProps = {
 
 const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   objects,
-  shouldFilterUsingSearchBar,
+  shouldFilterUsingSearchBar = true,
 }) => {
-  const { territoryFilter } = usePageParams();
+  const { territoryFilter, updatePageParams, searchString } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
   const filterByScope = getScopeFilter();
@@ -47,22 +49,86 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
+  if (
+    nFilteredByScope === 0 &&
+    nFilteredByTerritory === 0 &&
+    nFilteredByVitality === 0 &&
+    nFilteredBySubstring === 0
+  ) {
+    return null;
+  }
 
   return (
-    <>
-      {nFilteredByScope > 0 && <div>Out of scope: {nFilteredByScope.toLocaleString()}</div>}
-      {nFilteredByTerritory > 0 && (
-        <div>
-          Not in territory ({territoryFilter}): {nFilteredByTerritory.toLocaleString()}
-        </div>
-      )}
-      {nFilteredByVitality > 0 && (
-        <div>Not passing vitality filter: {nFilteredByVitality.toLocaleString()}</div>
-      )}
-      {nFilteredBySubstring > 0 && (
-        <div>Not matching substring: {nFilteredBySubstring.toLocaleString()}</div>
-      )}
-    </>
+    <table>
+      <tbody>
+        {nFilteredByScope > 0 && (
+          <tr>
+            <td style={{ textAlign: 'left' }}>Out of scope:</td>
+            <td className="numeric">{nFilteredByScope.toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the scope filters"
+                onClick={() => updatePageParams({ languageScopes: [], territoryScopes: [] })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredByTerritory > 0 && (
+          <tr>
+            <td style={{ textAlign: 'left' }}>Not in territory ({territoryFilter}):</td>
+            <td className="numeric">{nFilteredByTerritory.toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the territory filter"
+                onClick={() => updatePageParams({ territoryFilter: '' })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredByVitality > 0 && (
+          <tr>
+            <td style={{ textAlign: 'left' }}>Not passing vitality filter:</td>
+            <td className="numeric">{nFilteredByVitality.toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the vitality filters"
+                onClick={() =>
+                  updatePageParams({ vitalityEth2025: [], vitalityISO: [], vitalityEth2013: [] })
+                }
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredBySubstring > 0 && (
+          <tr>
+            <td style={{ textAlign: 'left' }}>Not matching substring ({searchString}):</td>
+            <td className="numeric">{nFilteredBySubstring.toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the search string filter"
+                onClick={() => updatePageParams({ searchString: '' })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+      </tbody>
+    </table>
   );
 };
 

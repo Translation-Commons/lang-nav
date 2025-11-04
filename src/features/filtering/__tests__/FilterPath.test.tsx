@@ -13,7 +13,7 @@ import {
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import FilterPath from '../FilterPath';
+import FilterPath from '../../../features/filtering/FilterPath';
 
 // Mock hooks and components
 vi.mock('@features/page-params/usePageParams', () => ({

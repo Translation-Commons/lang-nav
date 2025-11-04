@@ -5,6 +5,7 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
+import FilterBreakdown from '@features/filtering/FilterBreakdown';
 import Hoverable from '@features/hovercard/Hoverable';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -125,6 +126,12 @@ function ObjectTable<T extends ObjectData>({
           <DetailsContainer title={<ObjectTitle object={objectsFilteredAndSorted[0]} />}>
             <ObjectDetails object={objectsFilteredAndSorted[0]} />
           </DetailsContainer>
+        </div>
+      )}
+      {objectsFilteredAndSorted.length === 0 && (
+        <div style={{ marginTop: '1em' }}>
+          All results are filtered out.
+          <FilterBreakdown objects={objects} />
         </div>
       )}
     </div>
