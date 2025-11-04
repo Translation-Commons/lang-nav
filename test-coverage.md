@@ -6,7 +6,7 @@
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    38.8 |    84.7 |    47.5 |    38.8 |
+| `  entities`                             |    38.7 |    84.7 |    47.5 |    38.7 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -40,7 +40,7 @@
 | `      getObjectMiscFields.ts`           |   100.0 |    83.1 |   100.0 |   100.0 |
 | `      getObjectName.ts`                 |    25.5 |    20.0 |    33.3 |    25.5 |
 | `      getObjectPopulation.ts`           |    94.6 |    82.0 |   100.0 |    94.6 |
-| `    locale`                             |    19.1 |    87.0 |    35.7 |    19.1 |
+| `    locale`                             |    18.6 |    87.0 |    35.7 |    18.6 |
 | `      LocaleCard.tsx`                   |    19.4 |   100.0 |     0   |    19.4 |
 | `      LocaleCensusCitation.tsx`         |     8.8 |   100.0 |     0   |     8.8 |
 | `      LocaleCitationCounts.tsx`         |     0   |   100.0 |   100.0 |     0   |
@@ -137,7 +137,7 @@
 | `    AboutPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
 | `    DataPage.tsx`                       |     0   |     0   |     0   |     0   |
 | `    DataPageBody.tsx`                   |     0   |   100.0 |   100.0 |     0   |
-| `    dataviews`                          |     9.7 |    33.3 |    28.6 |     9.7 |
+| `    dataviews`                          |     9.5 |    33.3 |    28.6 |     9.5 |
 | `      DataViews.tsx`                    |     0   |     0   |     0   |     0   |
 | `      ViewCardList.tsx`                 |     0   |     0   |     0   |     0   |
 | `      ViewDetails.tsx`                  |    38.3 |   100.0 |    50.0 |    38.3 |
