@@ -5,6 +5,8 @@ import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 
+import { ObjectData } from '@entities/types/DataTypes';
+
 import {
   getFilterBySubstring,
   getFilterByTerritory,
@@ -24,7 +26,7 @@ const useFilteredObjects = ({
   useSubstring = true,
   useTerritory = true,
   useVitality = true,
-}: UseFilteredObjectsParams) => {
+}: UseFilteredObjectsParams): { filteredObjects: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const { objectType } = usePageParams();
   const { languagesInSelectedSource, locales, territories, writingSystems, variantTags, censuses } =
@@ -79,7 +81,7 @@ const useFilteredObjects = ({
     sortFunction,
   ]);
 
-  return filteredObjects;
+  return { filteredObjects };
 };
 
 export default useFilteredObjects;

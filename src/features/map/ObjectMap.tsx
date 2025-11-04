@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { getSliceFunction } from '@features/filtering/filter';
 import useHoverCard from '@features/hovercard/useHoverCard';
@@ -38,10 +38,9 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
   );
 
   return (
-    <div style={{ maxWidth }}>
+    <div style={{ maxWidth, width: '100%' }}>
       <svg
         width="100%"
-        height="auto"
         viewBox={`-180 -90 360 180`}
         preserveAspectRatio="xMidYMid meet"
         style={{
@@ -93,17 +92,23 @@ const HoverableCircle: React.FC<{
     object.latitude,
     object.longitude < -170 ? object.longitude + 360 : object.longitude,
   );
+  const [isActive, setIsActive] = useState(false);
   return (
     <circle
       cx={x * 180 - 10} // The map is 10 degrees rotated to perserve land borders
       cy={-y * 90}
       r={2}
-      cursor="help"
-      fill="transparent"
+      fill={isActive ? 'var(--color-button-primary)' : 'transparent'}
       stroke="var(--color-button-primary)"
       strokeWidth={1}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={(e: React.MouseEvent) => {
+        onMouseEnter(e);
+        setIsActive(true);
+      }}
+      onMouseLeave={() => {
+        onMouseLeave();
+        setIsActive(false);
+      }}
     />
   );
 };

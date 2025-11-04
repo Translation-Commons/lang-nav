@@ -109,6 +109,7 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Latitude,
           valueType: TableValueType.Numeric,
+          columnGroup: 'Location',
         },
         {
           key: 'Longitude',
@@ -117,6 +118,7 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Longitude,
           valueType: TableValueType.Numeric,
+          columnGroup: 'Location',
         },
         {
           key: 'Literacy',
