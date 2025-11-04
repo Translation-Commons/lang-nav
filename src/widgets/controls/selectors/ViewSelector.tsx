@@ -27,6 +27,8 @@ function getImageSrc(view: View): string {
       return '/lang-nav/details.png';
     case View.Hierarchy:
       return '/lang-nav/hierarchy.png';
+    case View.Map:
+      return '/lang-nav/map.png';
     case View.Table:
       return '/lang-nav/table.png';
     case View.Reports:
