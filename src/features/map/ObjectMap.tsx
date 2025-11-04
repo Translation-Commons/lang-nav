@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { getSliceFunction } from '@features/filtering/filter';
 import useHoverCard from '@features/hovercard/useHoverCard';
@@ -8,12 +8,23 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
+import { getRobinsonCoordinates } from './getRobinsonCoordinates';
+
 type Props = {
   objects: ObjectData[];
   width?: number; // in pixels
+  borders?: 'no_borders' | 'countries' | 'subdivisions';
 };
 
-const ObjectMap: React.FC<Props> = ({ objects, width = 600 }) => {
+const ROBINSON_MAPS = {
+  no_borders: 'https://upload.wikimedia.org/wikipedia/commons/0/0d/WorldMap.svg',
+  countries:
+    'https://upload.wikimedia.org/wikipedia/commons/5/5e/BlankMap-World-Sovereign_Nations.svg',
+  subdivisions:
+    'https://upload.wikimedia.org/wikipedia/commons/d/d9/Blank_Map_World_Secondary_Political_Divisions.svg',
+};
+
+const ObjectMap: React.FC<Props> = ({ objects, width = 600, borders = 'no_borders' }) => {
   const sliceFunction = getSliceFunction<ObjectData>();
   const renderableObjects: LanguageData[] = useMemo(() => {
     return sliceFunction(
@@ -44,37 +55,60 @@ const ObjectMap: React.FC<Props> = ({ objects, width = 600 }) => {
       >
         {/* External equirectangular SVG background (world map) */}
         <image
-          href="https://upload.wikimedia.org/wikipedia/commons/9/9f/BlankMap-World-Equirectangular.svg"
-          x={-186}
-          y={-97.75} // squishing since the svg has extra padding
-          width={400}
-          height={198}
+          href={ROBINSON_MAPS[borders]}
+          x={-180}
+          y={-90}
+          width={360}
+          height={180}
           preserveAspectRatio="none"
           opacity={1}
           pointerEvents="none"
         />
 
         {renderableObjects.map((obj, idx) => {
-          if (obj.latitude == null || obj.longitude == null) {
-            return null;
-          }
-          return (
-            <g key={idx}>
-              <circle
-                cx={obj.longitude}
-                cy={-obj.latitude}
-                r={2}
-                fill="red"
-                stroke="black"
-                strokeWidth={0.5}
+          if (obj.type === ObjectType.Language) {
+            return (
+              <HoverableCircle
+                object={obj}
+                key={idx}
                 onMouseEnter={buildOnMouseEnter(obj)}
                 onMouseLeave={onMouseLeaveTriggeringElement}
               />
-            </g>
-          );
+            );
+          }
+          if (obj.type === ObjectType.Territory) {
+            // Territories are not shown on the map for now
+            return null;
+          }
         })}
       </svg>
     </div>
+  );
+};
+
+const HoverableCircle: React.FC<{
+  object: ObjectData;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  onMouseLeave: () => void;
+}> = ({ object, onMouseEnter, onMouseLeave }) => {
+  if (object.type !== ObjectType.Language) return null;
+  if (object.latitude == null || object.longitude == null) {
+    return null;
+  }
+  const { x, y } = getRobinsonCoordinates(object.latitude, object.longitude);
+  return (
+    <circle
+      cx={x * 180 - 10}
+      cy={-y * 90}
+      r={2}
+      // fill="red"
+      cursor="help"
+      fill="transparent"
+      stroke="var(--color-button-primary)"
+      strokeWidth={0.5}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
+    />
   );
 };
 

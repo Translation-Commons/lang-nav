@@ -1,38 +1,23 @@
-import { getSliceFunction } from '@features/filtering/filter';
 import useFilteredObjects from '@features/filtering/useFilteredObjects';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import ObjectMap from '@features/map/ObjectMap';
-
-import { ObjectData } from '@entities/types/DataTypes';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
+import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 
 import './styles.css';
 
 function ViewMap() {
+  const { objectType } = usePageParams();
   const filteredObjects = useFilteredObjects({});
-  const sliceFunction = getSliceFunction<ObjectData>();
+
+  if (objectType !== ObjectType.Language) {
+    return <div>Map view is in Beta mode and is only available for Languages.</div>;
+  }
 
   return (
     <>
-      <ObjectMap objects={filteredObjects} />
-
-      <table style={{ textAlign: 'left' }}>
-        <thead>
-          <tr>
-            <th>ID</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          {sliceFunction(filteredObjects).map((obj) => (
-            <tr key={obj.ID}>
-              <td>{obj.ID}</td>
-              <td>
-                <HoverableObjectName object={obj} />
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <VisibleItemsMeter objects={filteredObjects} />
+      <ObjectMap objects={filteredObjects} borders={'no_borders'} />
     </>
   );
 }
