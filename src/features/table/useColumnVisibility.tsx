@@ -1,4 +1,5 @@
-import { useCallback, useMemo } from 'react';
+import LZString from 'lz-string';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import usePageParams from '@features/page-params/usePageParams';
 import useStoredParams from '@features/stored-params/useStoredParams';
@@ -15,7 +16,7 @@ function useColumnVisibility<T extends ObjectData>(
   columnVisibility: Record<string, boolean>;
   resetColumnVisibility: () => void;
 } {
-  const { sortBy } = usePageParams();
+  const { sortBy, updatePageParams, columns: visibleColumnsEncoded } = usePageParams();
 
   const defaultColumnVisibility = useMemo(
     () => Object.fromEntries(columns.map((col) => [col.key, col.isInitiallyVisible ?? true])),
@@ -30,6 +31,18 @@ function useColumnVisibility<T extends ObjectData>(
     setValue: setAllColumnVisibility,
     clear: resetColumnVisibility,
   } = useStoredParams<Record<string, boolean>>('column-visibility', defaultColumnVisibility);
+
+  const compressedVisibility = LZString.compressToEncodedURIComponent(
+    JSON.stringify(allColumnVisibility),
+  );
+
+  useEffect(() => {
+    // Update the URL param when allColumnVisibility changes
+    updatePageParams({ columns: compressedVisibility });
+  }, [allColumnVisibility, compressedVisibility]);
+
+  const decompressed = LZString.decompressFromEncodedURIComponent(visibleColumnsEncoded);
+  console.log(decompressed, visibleColumnsEncoded);
 
   const toggleColumn = useCallback(
     (columnKey: string, isVisible?: boolean) => {
