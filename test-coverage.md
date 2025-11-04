@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    33.4 |    78.8 |    54.4 |    33.4 |
+| `src`                                    |    33.4 |    78.7 |    54.4 |    33.4 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -63,7 +63,7 @@
 | `  features`                             |    52.6 |    78.5 |    62.6 |    52.6 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
-| `    data-loading`                       |    31.9 |    73.3 |    56.9 |    31.9 |
+| `    data-loading`                       |    31.9 |    73.2 |    56.9 |    31.9 |
 | `      CensusData.tsx`                   |    21.7 |    90.9 |    50.0 |    21.7 |
 | `      context`                          |    13.6 |     0   |     0   |    13.6 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
@@ -77,8 +77,8 @@
 | `      iso`                              |     0   |     0   |     0   |     0   |
 | `        ISORetirements.tsx`             |     0   |     0   |     0   |     0   |
 | `      ISOData.tsx`                      |     0   |     0   |     0   |     0   |
-| `      population`                       |    99.4 |    66.7 |   100.0 |    99.4 |
-| `        computeLocalePopulationFromCensuses.ts` |    97.7 |    85.0 |   100.0 |    97.7 |
+| `      population`                       |    99.4 |    66.2 |   100.0 |    99.4 |
+| `        computeLocalePopulationFromCensuses.ts` |    97.7 |    84.2 |   100.0 |    97.7 |
 | `        computeLocaleWritingPopulation.ts` |   100.0 |    58.3 |   100.0 |   100.0 |
 | `        computeRegionalLocalePopulation.ts` |   100.0 |    57.1 |   100.0 |   100.0 |
 | `        updateObjectCodesNameAndPopulation.ts` |   100.0 |    66.7 |   100.0 |   100.0 |
