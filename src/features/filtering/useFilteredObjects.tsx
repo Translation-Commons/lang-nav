@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
+import { getSortFunction } from '@features/sorting/sort';
 
 import {
   getFilterBySubstring,
@@ -32,6 +33,7 @@ const useFilteredObjects = ({
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
   const filterByTerritory = useTerritory ? getFilterByTerritory() : () => true;
   const filterByVitality = useVitality ? getFilterByVitality() : () => true;
+  const sortFunction = getSortFunction();
 
   const objects = useMemo(() => {
     switch (objectType) {
@@ -59,14 +61,23 @@ const useFilteredObjects = ({
   ]);
 
   const filteredObjects = useMemo(() => {
-    return objects.filter(
-      (obj) =>
-        filterByScope(obj) &&
-        filterBySubstring(obj) &&
-        filterByTerritory(obj) &&
-        filterByVitality(obj),
-    );
-  }, [objects, filterByScope, filterBySubstring, filterByTerritory, filterByVitality]);
+    return objects
+      .filter(
+        (obj) =>
+          filterByScope(obj) &&
+          filterBySubstring(obj) &&
+          filterByTerritory(obj) &&
+          filterByVitality(obj),
+      )
+      .sort(sortFunction);
+  }, [
+    objects,
+    filterByScope,
+    filterBySubstring,
+    filterByTerritory,
+    filterByVitality,
+    sortFunction,
+  ]);
 
   return filteredObjects;
 };
