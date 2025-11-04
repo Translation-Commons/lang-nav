@@ -44,6 +44,9 @@ function useColumnVisibility<T extends ObjectData>(
   const decompressed = LZString.decompressFromEncodedURIComponent(visibleColumnsEncoded);
   console.log(decompressed, visibleColumnsEncoded);
 
+  // 
+  const newColumnsEncoded =
+
   const toggleColumn = useCallback(
     (columnKey: string, isVisible?: boolean) => {
       setAllColumnVisibility((prev) => {
