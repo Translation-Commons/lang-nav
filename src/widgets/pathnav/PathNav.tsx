@@ -10,6 +10,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 
 import FilterPath from '../../features/filtering/FilterPath';
+
 import ObjectPath from './ObjectPath';
 
 const PathNav: React.FC = () => {
