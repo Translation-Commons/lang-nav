@@ -1,10 +1,9 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { getSliceFunction } from '@features/filtering/filter';
 import useHoverCard from '@features/hovercard/useHoverCard';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
@@ -26,10 +25,8 @@ const ROBINSON_MAPS = {
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_borders' }) => {
   const sliceFunction = getSliceFunction<ObjectData>();
-  const renderableObjects: LanguageData[] = useMemo(() => {
-    return sliceFunction(
-      objects.filter((obj) => obj.type === ObjectType.Language),
-    ) as LanguageData[];
+  const renderableObjects = useMemo(() => {
+    return sliceFunction(objects.filter((obj) => obj.type === ObjectType.Language));
   }, [objects, sliceFunction]);
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
 
@@ -76,10 +73,6 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
               />
             );
           }
-          if (obj.type === ObjectType.Territory) {
-            // Territories are not shown on the map for now
-            return null;
-          }
         })}
       </svg>
     </div>
@@ -95,17 +88,20 @@ const HoverableCircle: React.FC<{
   if (object.latitude == null || object.longitude == null) {
     return null;
   }
-  const { x, y } = getRobinsonCoordinates(object.latitude, object.longitude);
+
+  const { x, y } = getRobinsonCoordinates(
+    object.latitude,
+    object.longitude < -170 ? object.longitude + 360 : object.longitude,
+  );
   return (
     <circle
-      cx={x * 180 - 10}
+      cx={x * 180 - 10} // The map is 10 degrees rotated to perserve land borders
       cy={-y * 90}
       r={2}
-      // fill="red"
       cursor="help"
-      fill="var(--color-button-primary)"
+      fill="transparent"
       stroke="var(--color-button-primary)"
-      strokeWidth={0.5}
+      strokeWidth={1}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     />
