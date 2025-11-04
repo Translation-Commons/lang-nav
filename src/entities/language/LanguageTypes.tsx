@@ -113,6 +113,9 @@ export interface LanguageData extends ObjectBase {
   warnings: Partial<Record<LanguageField, string>>;
   wikipedia?: WikipediaData;
 
+  latitude?: number;
+  longitude?: number;
+
   // References to other objects, filled in after loading the TSV
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
