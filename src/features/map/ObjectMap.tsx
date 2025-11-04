@@ -12,7 +12,7 @@ import { getRobinsonCoordinates } from './getRobinsonCoordinates';
 
 type Props = {
   objects: ObjectData[];
-  width?: number; // in pixels
+  maxWidth?: number; // in pixels
   borders?: 'no_borders' | 'countries' | 'subdivisions';
 };
 
@@ -24,7 +24,7 @@ const ROBINSON_MAPS = {
     'https://upload.wikimedia.org/wikipedia/commons/d/d9/Blank_Map_World_Secondary_Political_Divisions.svg',
 };
 
-const ObjectMap: React.FC<Props> = ({ objects, width = 600, borders = 'no_borders' }) => {
+const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_borders' }) => {
   const sliceFunction = getSliceFunction<ObjectData>();
   const renderableObjects: LanguageData[] = useMemo(() => {
     return sliceFunction(
@@ -41,7 +41,7 @@ const ObjectMap: React.FC<Props> = ({ objects, width = 600, borders = 'no_border
   );
 
   return (
-    <div style={{ width }}>
+    <div style={{ maxWidth }}>
       <svg
         width="100%"
         height="auto"
@@ -103,7 +103,7 @@ const HoverableCircle: React.FC<{
       r={2}
       // fill="red"
       cursor="help"
-      fill="transparent"
+      fill="var(--color-button-primary)"
       stroke="var(--color-button-primary)"
       strokeWidth={0.5}
       onMouseEnter={onMouseEnter}

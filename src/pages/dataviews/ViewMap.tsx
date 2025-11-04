@@ -15,10 +15,14 @@ function ViewMap() {
   }
 
   return (
-    <>
+    <div style={{ textAlign: 'center', margin: '0 auto' }}>
+      These coordinates show the &quot;primary&quot; location of the languages, as defined by
+      Glottolog. This could be the centroid of the area where the language is spoken, or a
+      significant location such as a major city where the language has a presence. It does not
+      represent all the locations where the language is spoken.
       <VisibleItemsMeter objects={filteredObjects} />
       <ObjectMap objects={filteredObjects} borders={'no_borders'} />
-    </>
+    </div>
   );
 }
 
