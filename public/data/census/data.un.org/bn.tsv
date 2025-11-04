@@ -1,0 +1,21 @@
+#codeDisplay		bn2021
+#nameDisplay		Brunei Darussalam 2021
+#isoRegionCode		BN
+#yearCollected		2021
+#datePublished		2023
+#eligiblePopulation		400,362
+#notes		Census - de jure - complete tabulation
+#age		3+
+#responsesPerIndividual		1
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	bn2021
+mul	Total	400,362
+eng/msa/kxd	#English and Malay	227,663
+msa/kxd	Malay	68,558
+mul	Other	64,736
+eng/zho/msa/kxd	#English, Chinese and Malay	23,865
+eng	English	7,193
+zho	Chinese	3,278
+zho/eng	#Chinese and English	3,211
+zho/msa/kxd	#Chinese and Malay	1,858

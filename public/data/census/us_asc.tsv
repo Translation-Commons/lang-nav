@@ -269,8 +269,8 @@ cjm	Cham	920	891	1,050	1,705	516	672	237
 cjm	Eastern Cham							
 jra	Jarai				1,402	457	907	354
 rad	Rade				1,320	487	809	315
-zsm	Malay	10,670	12,440	14,580	14,840	1,555	4,437	887
-ind	Indonesian	48,140	60,657	67,410	75,360	3,236	28,590	2,035
+msa/zlm	Malay	10,670	12,440	14,580	14,840	1,555	4,437	887
+msa/ind	Indonesian	48,140	60,657	67,410	75,360	3,236	28,590	2,035
 max	Moluccan	70						
 min	Minangkabau			15				
 ace	Achinese		32	small number				
@@ -638,7 +638,7 @@ sis	Siuslaw		6	10
 kla	Klamath	170	95	205				
 nmu	Mountain Maidu	205	319	200				
 mjd	Northwest Maidu		32	small number				
-msa	Southern Maidu			small number				
+nsz	Southern Maidu			small number				
 mul	Other Penutian languages				1,127	345	60	53
 myh	Makah	230	176	150				
 kwk	Kwakiutl	80	85	175				

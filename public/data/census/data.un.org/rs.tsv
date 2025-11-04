@@ -1,0 +1,32 @@
+#codeDisplay		rs2002	rs2011	rs2022
+#nameDisplay		Serbia 2002	Serbia 2011	Serbia 2022
+#isoRegionCode	RS			
+#yearCollected		2002	2011	2022
+#datePublished		2003	2013	2024
+#eligiblePopulation		7,498,001	7,186,862	6,647,003
+#notes		Excludes data for Kosovo and Metohia. Census - de jure - complete tabulation	Excludes data for Kosovo and Metohia. Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#responsesPerIndividual	1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	rs2002	rs2011	rs2022
+mul	Total	7,498,001	7,186,862	6,647,003
+hbs/srp	Serbian	6,620,699	6,330,919	5,607,558
+mul	Other	40,858	39,463	347,472
+hun	Hungarian	286,508	243,146	170,875
+hbs/bos	Bosniac	134,749	138,871	145,329
+rom	Romani (Gypsy)	82,242	100,668	79,687
+mis	Not stated		46,499	88,122
+mis	Unknown	63,877	81,692	2,875
+sqi	Albanian	63,835	10,040	65,475
+slk	Slovak	57,498	49,796	38,584
+rup	Vlach	54,818	43,095	23,216
+ron	Romanian	34,515	29,075	21,477
+hbs/hrv	Croatian	27,588	19,223	12,048
+bul	Bulgarian	16,459	13,337	7,939
+mkd	Macedonian	14,355	12,706	8,375
+rue/rsk	Ruthenian		11,340	8,725
+rus	Russian		3,179	11,255
+hbs/bunj1247	Bunjevacki		6,835	3,319
+hbs/cnr	Montenegrin		2,519	1,981
+slv	Slovenian		2,269	1,302
+deu	German		2,190	1,389

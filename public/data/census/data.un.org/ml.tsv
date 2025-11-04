@@ -1,0 +1,40 @@
+#codeDisplay		ml1998	ml2009
+#nameDisplay		Mali 1998	Mali 2009
+#isoRegionCode	ML		
+#yearCollected		1998	2009
+#datePublished		2007	2014
+#eligiblePopulation		7,620,672	11,109,312
+#notes		Census - de jure - complete tabulation	Census - de facto - complete tabulation
+#modality		Spoken	
+#age			6+
+#domain		Home	
+#acquisitionOrder		Any	
+#responsesPerIndividual		1	
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	ml1998	ml2009
+mul	Total	7,620,672	11,109,312
+bam	Bambara		5,165,830
+mani1303	Malinke	4,101,548	622,108
+ful/ffm	Peul/ Foulfoulbé	316,529	1,042,987
+dogo1299	Dogon	541,214	791,435
+samo1309	Samogo	704,818	55,603
+snk	Maraka/ Soninké		702,926
+son/dje	Sonraï/ Djerma		619,598
+ara/mey	Maure	502,201	122,713
+myk	Minianka	85,484	476,200
+dje	Djerma	466,364	
+tmh	Tamachen	238,121	377,797
+ful/ffm	Peul	316,529	
+bobo1253	Bobo	195,115	238,497
+bozo1252	Bozo	135,614	205,225
+snk	Sonink	196,738	
+kao	Kassonke	96,820	129,438
+mis	Unknown		76,778
+mul	Other Mali Language		61,014
+rkm	Dafing		50,786
+ara	Arabe		38,218
+senu1239	Senoufo	36,588	
+mul	Other African		34,679
+mul	Other		8,865
+hau	Haoussa	3,518	

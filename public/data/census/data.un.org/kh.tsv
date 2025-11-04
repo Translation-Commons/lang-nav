@@ -1,0 +1,46 @@
+#codeDisplay		kh1998	kh2008	kh2019
+#nameDisplay		Cambodia 1998	Cambodia 2008	Cambodia 2019
+#isoRegionCode	KH			
+#yearCollected		1998	2008	2019
+#datePublished		2009	2009	2024
+#eligiblePopulation		11,437,656	13,395,682	15,552,211
+#notes	Census - de facto - complete tabulation			
+#responsesPerIndividual	1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	kh1998	kh2008	kh2019
+mul	Total	11,437,656	13,395,682	15,552,211
+khm	Khmer	10,942,066	12,901,447	14,890,322
+mul	Other	276,081	389,424	7,413
+cja	Chaam			275,217
+vie	Vietnamese	140,328	72,775	78,075
+zho	Chinese	26,721	6,530	94,432
+mnon1259	Phnong			36,585
+tpu	Tumpoon			36,373
+jra	Chaaraay			26,922
+lao	Lao	24,854	18,515	13,633
+mis	Not stated	22,791		2,937
+krr	Krueng			21,453
+kdt	Kuoy			16,762
+brb	#Proav			10,086
+krv	Kaaveat			7,569
+tha	Thai	2,482	2,458	6,649
+rka	Kraol			5,630
+eng	English	1,427	2,360	5,264
+stie1250	Stieng			4,908
+kor	Korean		904	2,607
+fra	French	906	873	1,523
+	Thmoon			1,164
+jpn	Japanese		396	1,159
+	Lomwe			1,033
+mela1257	Mel			984
+pcb	Por			944
+syo	Suoy			775
+	Ro Ong			573
+krr	Klueng			413
+	Kchruk			266
+scq	S'ouch			209
+rad	Raadear			179
+	Khogn			109
+mnw	Mon			27
+	Kchak			16

@@ -50,7 +50,27 @@ export default defineConfig([
       'import/order': [
         'warn',
         {
-          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
+          groups: [
+            'builtin', // fs, path, url, etc.
+            'external', // react, lodash, etc.
+            'internal', // @shared, @features, ...
+            'parent', // ../
+            'sibling', // ./
+            'index', // ./ (index)
+            'object', // import('pkg').prop
+            'type', // import type { X } ...
+          ],
+          pathGroups: [
+            { pattern: '@app/**', group: 'internal', position: 'after' },
+            { pattern: '@pages/**', group: 'internal', position: 'after' },
+            { pattern: '@widgets/**', group: 'internal', position: 'after' },
+            { pattern: '@features/**', group: 'internal', position: 'after' },
+            { pattern: '@entities/**', group: 'internal', position: 'after' },
+            { pattern: '@shared/**', group: 'internal', position: 'after' },
+            { pattern: '@strings/**', group: 'internal', position: 'after' },
+            { pattern: '@tests/**', group: 'internal', position: 'after' },
+          ],
+          pathGroupsExcludedImportTypes: ['builtin'],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
         },

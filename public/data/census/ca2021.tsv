@@ -177,7 +177,7 @@ hil	Hiligaynon	16,385			12,170
 ibl	Ibaloi				485
 ibg	Ibanag				540
 ilo	Ilocano	61,680			48,375
-ind	Indonesian	19,815			11,995
+msa/ind	Indonesian	19,815			11,995
 itv	Itawit				285
 ivv	Ivatan				50
 jra	Jarai				225
@@ -188,7 +188,7 @@ krj	Kinaray-a	860			790
 mlg	Malagasy languages	3,885			2,175
 plt	Merina	2,355			1,120
 und	Malagasy, n.o.s.	1,570			1,065
-zlm	Malay	10,770			3,765
+msa/zlm	Malay	10,770			3,765
 mdr	Mandar				115
 mri	Maori				95
 msb	Masbatenyo				50

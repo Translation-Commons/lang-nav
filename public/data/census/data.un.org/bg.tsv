@@ -1,0 +1,18 @@
+#codeDisplay		bg2011	bg2021
+#nameDisplay		Bulgaria 2011	Bulgaria 2021
+#isoRegionCode	BG		
+#yearCollected		2011	2021
+#datePublished		2012	2023
+#eligiblePopulation		7,364,570	6,519,789
+#notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation
+#responsesPerIndividual	1		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	bg2011	bg2021
+mul	Total	7,364,570	6,519,789
+bul	Bulgarian	5,659,024	5,037,607
+mis	Unknown	722,416	616,681
+tur	Turkish	605,802	514,386
+rom	Romani (Gypsy)	281,217	227,974
+mul	Other	48,547	62,906
+mis	Not stated	47,564	60,235

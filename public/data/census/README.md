@@ -36,7 +36,7 @@ While it would be great to just copy-paste the data into a tab-separated-value (
 Sometimes a row of data from a census does not have an easy to use language code. For completeness it is good to keep that row but to use a special language code. These rows will be dropped during the import process but will be kept in the file for reference. The following codes are used for these special cases:
 
 - `und` is used for "undetermined" languages - the common case when you don't know. For instance, multiple languages are named "Tonga" -- without additional context clues you may not know which one is meant.
-- `mul` is used for "multiple languages" - such as a row that says "Indigenous languages" or "Other Languages" -- however you can use language family codes if the row corresponds to a language family like "Germanic languages".
+- `mul` is used for "multiple languages" - such as a row that says "Indigenous languages" or "Other Languages" -- however you can use language family codes if the row corresponds to a language family like `gem` for "Germanic languages".
 - `mis` is used for "uncoded languages" like a dialect without an ISO code or glottocode.
 - `zxx` is used for "no linguistic content" -- such as "no language" or "none".
 

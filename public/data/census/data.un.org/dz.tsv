@@ -1,0 +1,21 @@
+#codeDisplay		dz2008
+#nameDisplay		Algeria 2008
+#isoRegionCode		DZ
+#yearCollected		2008
+#datePublished		2015
+#eligiblePopulation		30,650,175
+#notes		Data refer to population in housing units and collective living quarters only. Census - de jure - complete tabulation
+#age		5+
+#responsesPerIndividual		1
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	dz2008
+mul	Total	30,650,175
+ara	Arabic	12,330,798
+ara/fra	#Arabic and French	8,286,452
+zxx	None	6,881,134
+mul	Other	2,573,642
+fra	French	395,816
+mis	Unknown	175,070
+eng	English	7,263

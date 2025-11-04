@@ -1,0 +1,37 @@
+#codeDisplay		ro2002	ro2011	ro2021
+#nameDisplay		Romania 2002	Romania 2011	Romania 2021
+#isoRegionCode	RO			
+#yearCollected		2002	2011	2021
+#datePublished		2003	2014	2023
+#eligiblePopulation		21,680,974	20,121,641	19,053,815
+#respondingPopulation		21,678,844	18,891,613	16,551,437
+#notes		Census - de jure - complete tabulation	Data refer to usual resident population. Census - de facto - complete tabulation	Census - de jure - complete tabulation
+#modality		Spoken		
+#domain		Home		
+#acquisitionOrder		L1		
+#responsesPerIndividual	1			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	ro2002	ro2011	ro2021
+mul	Total	21,680,974	20,121,641	19,053,815
+ron	Romanian	19,736,517	17,176,544	15,153,198
+mis	Not stated	2,130	1,230,028	2,502,378
+hun	Hungarian	1,443,970	1,259,914	1,038,806
+rom	Romani (Gypsy)	237,570	245,677	199,050
+ukr	Ukrainian	57,407	48,910	40,861
+deu	German	44,888	26,557	15,943
+rus	Russian	29,246	18,946	14,414
+tur	Turkish	28,115	25,302	17,101
+tat	Tatar	21,272	17,677	13,805
+mul	Other	13,621	17,610	20,957
+hbs/srp	Serbian	20,411	16,805	10,058
+slk	Slovak	16,027	12,802	9,241
+bul	Bulgarian	6,735	6,518	4,478
+hbs/hrv	Croatian	6,355	5,167	4,664
+ell	Greek	4,170	2,561	1,069
+ita	Italian	2,531	2,949	4,105
+ces	Czech	3,381	2,174	1,130
+pol	Polish	2,690	2,079	1,539
+zho	Chinese	2,266	2,039	
+yid	Yiddish	951	643	597
+hye	Armenian	721	739	421

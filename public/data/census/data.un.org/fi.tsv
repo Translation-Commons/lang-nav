@@ -58,7 +58,7 @@ amh	Amharigna	312	952	1,662
 tir	Tigrigna	76	221	1,662
 pus	Pashto	92	551	1,360
 kin	Kinyarwanda			1,226
-pan	Punjabi	346	729	1,193
+lah/pan	Punjabi	346	729	1,193
 tel	Telugu	52	654	1,138
 uzb	Uzbek			1,095
 yor	Yoruba			1,044
@@ -67,7 +67,7 @@ mis	Unknown	104	285	946
 ibo	Ibo (Igbo)	68	388	938
 lin	Lingala	256	660	929
 ces	Czech	240	428	847
-ind	Indonesian	93	305	803
+msa/ind	Indonesian	93	305	803
 nor	Norwegian	471	613	781
 che	Chechen			736
 srp	Serbian		256	727
