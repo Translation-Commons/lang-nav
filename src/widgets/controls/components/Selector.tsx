@@ -23,7 +23,7 @@ type Props<T extends React.Key> = {
 
 function Selector<T extends React.Key>({
   display = SelectorDisplay.ButtonList,
-  getOptionDescription = () => undefined,
+  getOptionDescription,
   getOptionLabel = (val) => val as string,
   labelWhenEmpty,
   onChange,
@@ -149,7 +149,7 @@ type OptionsProps<T extends React.Key> = {
 
 function Options<T extends React.Key>({
   display,
-  getOptionDescription = () => undefined,
+  getOptionDescription,
   getOptionLabel,
   onClick,
   options,

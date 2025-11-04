@@ -20,6 +20,11 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+/**
+ * Shows the current active filters as a path-like breadcrumb.
+ *
+ * For example: ISO Vitality: Extinct / Macrolanguage or Language or Dialect / In "United States [US]" / Name contains "n"
+ */
 const FilterPath: React.FC = () => {
   const {
     languageScopes,
@@ -42,6 +47,7 @@ const FilterPath: React.FC = () => {
         ISO Vitality: {vitalityISO.map(getVitalityISOLabel).join(', ')}
         <HoverableButton
           buttonType="reset"
+          hoverContent="Clear the vitality filter based on ISO"
           onClick={() => updatePageParams({ vitalityISO: [] })}
           style={{ padding: '0.25em' }}
         >
@@ -56,6 +62,7 @@ const FilterPath: React.FC = () => {
         Ethnologue 2013: {vitalityEth2013.map(getVitalityEthnologueFineLabel).join(', ')}
         <HoverableButton
           buttonType="reset"
+          hoverContent="Clear the vitality filter based on Ethnologue 2013"
           onClick={() => updatePageParams({ vitalityEth2013: [] })}
           style={{ padding: '0.25em' }}
         >
@@ -70,6 +77,7 @@ const FilterPath: React.FC = () => {
         Ethnologue 2025: {vitalityEth2025.map(getVitalityEthnologueCoarseLabel).join(', ')}
         <HoverableButton
           buttonType="reset"
+          hoverContent="Clear the vitality filter based on Ethnologue 2025"
           onClick={() => updatePageParams({ vitalityEth2025: [] })}
           style={{ padding: '0.25em' }}
         >
@@ -113,6 +121,7 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           onClick={() => updatePageParams({ territoryFilter: '' })}
           style={{ padding: '0.25em' }}
+          hoverContent="Clear territory filter"
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>
@@ -129,6 +138,7 @@ const FilterPath: React.FC = () => {
         contains &quot;{searchString}&quot;
         <HoverableButton
           buttonType="reset"
+          hoverContent="Clear the search substring filter"
           onClick={() => updatePageParams({ searchString: '' })}
           style={{ padding: '0.25em' }}
         >

@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react';
 
 import LimitInput from '@widgets/controls/selectors/LimitInput';
-import PaginationControls from '@widgets/controls/selectors/PaginationControls';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import {
@@ -10,7 +9,7 @@ import {
   getSliceFunction,
 } from '@features/filtering/filter';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import usePageParams from '@features/page-params/usePageParams';
+import PaginationControls from '@features/pagination/PaginationControls';
 import { getSortFunction } from '@features/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -22,7 +21,6 @@ import Deemphasized from '@shared/ui/Deemphasized';
 const DubiousLanguages: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
     useDataContext();
-  const { page, limit } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByTerritory = getFilterByTerritory();
   const sortFunction = getSortFunction();
@@ -58,10 +56,7 @@ const DubiousLanguages: React.FC = () => {
       </ol>
       <div>
         <LimitInput />
-        <PaginationControls
-          currentPage={page}
-          totalPages={limit < 1 ? 1 : Math.ceil(languagesFiltered.length / limit)}
-        />
+        <PaginationControls itemCount={languagesFiltered.length} />
       </div>
       <div className="CardList" style={{ marginBottom: '1em' }}>
         {sliceFunction(languagesFiltered.sort(sortFunction)).map((lang) => {

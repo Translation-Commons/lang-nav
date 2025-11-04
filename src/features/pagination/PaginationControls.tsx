@@ -4,12 +4,12 @@ import React from 'react';
 import usePageParams from '@features/page-params/usePageParams';
 
 type Props = {
-  currentPage: number;
-  totalPages: number;
+  itemCount: number;
 };
 
-const PaginationControls: React.FC<Props> = ({ currentPage, totalPages }) => {
-  const { updatePageParams } = usePageParams();
+const PaginationControls: React.FC<Props> = ({ itemCount }) => {
+  const { page: currentPage, limit, updatePageParams } = usePageParams();
+  const totalPages = limit < 1 ? 1 : Math.ceil(itemCount / limit);
   if (totalPages <= 1) {
     return <></>;
   }
