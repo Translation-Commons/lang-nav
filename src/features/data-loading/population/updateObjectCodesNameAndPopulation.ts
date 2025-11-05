@@ -55,7 +55,7 @@ function updateParentsAndDescendents(
   // Clear vitality cache before updating relationships since childLanguages will change
   // This ensures family vitality scores are recomputed with the new relationships
   clearFamilyVitalityCache();
-  
+
   languages.forEach((lang) => {
     const specific = lang.sourceSpecific[languageSource];
     lang.populationOfDescendents = specific.populationOfDescendents ?? undefined;

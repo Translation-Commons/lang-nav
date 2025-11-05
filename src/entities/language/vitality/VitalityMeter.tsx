@@ -6,9 +6,9 @@ import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
 import { getAllVitalityScores } from './LanguageVitalityComputation';
 import { VitalitySource } from './VitalityTypes';
-import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
 
 interface Props {
   lang: LanguageData;

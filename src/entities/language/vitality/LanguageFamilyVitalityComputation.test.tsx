@@ -1,16 +1,14 @@
 import { describe, it, expect, vi, beforeEach, afterEach, type Mock } from 'vitest';
 
-import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { getBaseLanguageData, LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
-import { VitalitySource } from './VitalityTypes';
-
 // Mock the per-language vitality aggregator used by the family computation
 vi.mock('./LanguageVitalityComputation', () => ({
   getAllVitalityScores: vi.fn(),
 }));
-
 import { getAllVitalityScores } from './LanguageVitalityComputation';
+import { AllVitalityInfo, VitalitySource } from './VitalityTypes';
 
 describe('getFamilyVitalityScores', () => {
   beforeEach(() => {
@@ -68,7 +66,7 @@ describe('getFamilyVitalityScores', () => {
     family.childLanguages = [langA, langB, dialect];
 
     // Mock per-language vitality scores. Dialect should be ignored by the computation.
-    (getAllVitalityScores as unknown as Mock).mockImplementation((lang: any) => {
+    (getAllVitalityScores as unknown as Mock).mockImplementation((lang: LanguageData) => {
       if (lang.ID === 'deu') {
         return {
           [VitalitySource.ISO]: { score: 9 },
@@ -132,14 +130,14 @@ describe('getFamilyVitalityScores', () => {
 
     family.childLanguages = [parent, nestedFamily];
 
-    (getAllVitalityScores as unknown as Mock).mockImplementation((lang: any) => {
+    (getAllVitalityScores as unknown as Mock).mockImplementation((lang: LanguageData) => {
       if (lang.ID === 'p') {
         return {
           [VitalitySource.ISO]: { score: 9 },
           [VitalitySource.Eth2013]: { score: 9 },
           [VitalitySource.Eth2025]: { score: 9 },
           [VitalitySource.Metascore]: { score: 9 },
-        };
+        } as AllVitalityInfo;
       }
       if (lang.ID === 'c') {
         return {
@@ -147,9 +145,9 @@ describe('getFamilyVitalityScores', () => {
           [VitalitySource.Eth2013]: { score: 0 },
           [VitalitySource.Eth2025]: { score: 0 },
           [VitalitySource.Metascore]: { score: 0 },
-        };
+        } as AllVitalityInfo;
       }
-      return {} as any;
+      return {} as AllVitalityInfo;
     });
 
     const result = getFamilyVitalityScores(family);
@@ -159,5 +157,3 @@ describe('getFamilyVitalityScores', () => {
     expect(result[VitalitySource.ISO].label).toBe('Constructed');
   });
 });
-
-

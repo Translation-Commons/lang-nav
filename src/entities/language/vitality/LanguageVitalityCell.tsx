@@ -5,9 +5,9 @@ import Hoverable from '@features/hovercard/Hoverable';
 
 import { LanguageData, LanguageScope } from '../LanguageTypes';
 
+import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
 import { getAllVitalityScores } from './LanguageVitalityComputation';
 import { VitalitySource } from './VitalityTypes';
-import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
 
 export interface LanguageVitalityCellProps {
   lang: LanguageData;
@@ -65,7 +65,7 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type 
   let vitalityScore: number | undefined;
   let hover: React.ReactNode;
   let label: string | undefined;
-  
+
   if (lang.scope === LanguageScope.Family) {
     ({ score: vitalityScore, explanation: hover, label } = getFamilyVitalityScores(lang)[type]);
   } else {

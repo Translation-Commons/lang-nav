@@ -2,8 +2,8 @@ import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
-import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 import { getFamilyVitalityScores } from '@entities/language/vitality/LanguageFamilyVitalityComputation';
+import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import {
   getCountOfLanguages,

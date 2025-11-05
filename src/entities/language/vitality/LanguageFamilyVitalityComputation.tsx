@@ -1,4 +1,5 @@
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+
 import { getAllVitalityScores } from './LanguageVitalityComputation';
 import {
   getVitalityEthnologueCoarseLabel,
@@ -19,8 +20,6 @@ const familyVitalityCache = new Map<LanguageData, AllVitalityInfo>();
 
 // Cache for flattened descendants to avoid repeated tree traversal
 const descendantsCache = new Map<LanguageData, LanguageData[]>();
-
-
 
 /**
  * Map a numeric score to the nearest ISO vitality enum value
@@ -159,17 +158,16 @@ function flattenDescendants(lang: LanguageData): LanguageData[] {
       result.push(...flattenDescendants(child));
     }
   }
-  
+
   // Cache the result
   descendantsCache.set(lang, result);
   return result;
 }
 
-
 /**
  * Compute vitality for a family across all sources (ISO, Ethnologue, Metascore).
  * Returns an AllVitalityInfo object — same structure as individual languages.
- * 
+ *
  * Results are memoized using Map to avoid recomputation during sorting.
  * Cache is automatically cleared when family relationships are updated via clearFamilyVitalityCache().
  */
@@ -230,10 +228,7 @@ export function getFamilyVitalityScores(family: LanguageData): AllVitalityInfo {
     results[src] = {
       score,
       label: label ?? '—',
-      explanation:
-        den > 0
-          ? explanation
-          : 'No vitality data available for descendants.',
+      explanation: den > 0 ? explanation : 'No vitality data available for descendants.',
     } satisfies VitalityInfo;
   }
 
@@ -241,4 +236,3 @@ export function getFamilyVitalityScores(family: LanguageData): AllVitalityInfo {
   familyVitalityCache.set(family, results);
   return results;
 }
-
