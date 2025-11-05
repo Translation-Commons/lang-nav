@@ -22,6 +22,7 @@ import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
 
 import LanguageCodes from './sections/LanguageCodes';
+import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
 
 type Props = {
@@ -36,6 +37,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageAttributes lang={lang} />
       <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
+      <LanguageLocation lang={lang} />
     </div>
   );
 };

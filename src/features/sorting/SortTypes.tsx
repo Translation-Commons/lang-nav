@@ -8,6 +8,8 @@ export enum SortBy {
   Literacy = 'Literacy',
   Date = 'Date',
   Language = 'Language',
+  Latitude = 'Latitude',
+  Longitude = 'Longitude',
 
   // Extra population metrics
   PopulationAttested = 'Population Attested',
@@ -15,6 +17,8 @@ export enum SortBy {
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
   PopulationPercentInBiggestDescendentLanguage = 'Biggest Descendent Relative Population',
+
+  // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',
   VitalityISO = 'Vitality: ISO',
   VitalityEthnologue2013 = 'Vitality: Ethnologue 2013',

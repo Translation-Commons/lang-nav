@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 
@@ -21,7 +22,7 @@ interface Props {
 }
 
 const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
-  const { updatePageParams } = usePageParams();
+  const { updatePageParams, view } = usePageParams();
   const sortFunction = getSortFunction();
   const { ID, locales, modality, populationEstimate } = lang;
   const countryLocales = uniqueBy(
@@ -36,6 +37,12 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
           <ObjectTitle object={lang} highlightSearchMatches={true} />
         </a>
       </h3>
+      {view === View.Map && lang.longitude != null && lang.latitude != null && (
+        <div>
+          <h4>Coordinates</h4>
+          {lang.latitude!.toFixed(2)}°, {lang.longitude.toFixed(2)}°
+        </div>
+      )}
       {populationEstimate != null && (
         <div>
           <h4>Population</h4>
