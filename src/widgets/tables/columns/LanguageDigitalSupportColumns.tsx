@@ -7,7 +7,6 @@ import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = [
   {
     key: 'CLDR Coverage',
-    label: 'CLDR Coverage',
     render: (lang) => <CLDRCoverageText object={lang} />,
     exportValue: (lang) => lang.cldrCoverage?.actualCoverageLevel,
     isInitiallyVisible: false,
@@ -15,7 +14,6 @@ export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'ICU Support',
-    label: 'ICU Support',
     render: (lang) => <ICUSupportStatus object={lang} />,
     isInitiallyVisible: false,
     columnGroup: 'Digital Support',

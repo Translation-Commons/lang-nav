@@ -86,7 +86,7 @@ function ObjectTable<T extends ObjectData>({
           <tr>
             {visibleColumns.map((column) => (
               <th key={column.key} style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH }}>
-                {column.label ?? column.key}
+                {column.key}
                 {column.description && (
                   <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
                     <InfoIcon size="1em" display="block" />
