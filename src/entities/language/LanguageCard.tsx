@@ -37,7 +37,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
           <ObjectTitle object={lang} highlightSearchMatches={true} />
         </a>
       </h3>
-      {view === View.Map && lang.longitude != null && (
+      {view === View.Map && lang.longitude != null && lang.latitude != null && (
         <div>
           <h4>Coordinates</h4>
           {lang.latitude!.toFixed(2)}°, {lang.longitude.toFixed(2)}°

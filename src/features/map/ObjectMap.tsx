@@ -95,7 +95,7 @@ const HoverableCircle: React.FC<{
   const [isActive, setIsActive] = useState(false);
   return (
     <circle
-      cx={x * 180 - 10} // The map is 10 degrees rotated to perserve land borders
+      cx={x * 180 - 10} // The map is 10 degrees rotated to preserve land borders
       cy={-y * 90}
       r={2}
       fill={isActive ? 'var(--color-button-primary)' : 'transparent'}
