@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    33.4 |    78.7 |    54.4 |    33.4 |
+| `src`                                    |    33.3 |    78.7 |    54.6 |    33.3 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -60,7 +60,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    52.6 |    78.5 |    62.6 |    52.6 |
+| `  features`                             |    52.6 |    78.5 |    63.0 |    52.6 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
 | `    data-loading`                       |    31.9 |    73.2 |    56.9 |    31.9 |
@@ -101,8 +101,8 @@
 | `      HoverCardContext.tsx`             |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverCardProvider.tsx`            |    97.6 |    80.0 |   100.0 |    97.6 |
 | `      useHoverCard.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    map`                                |    44.9 |   100.0 |    25.0 |    44.9 |
-| `      getRobinsonCoordinates.ts`        |    79.4 |   100.0 |    50.0 |    79.4 |
+| `    map`                                |    40.2 |   100.0 |    33.3 |    40.2 |
+| `      getRobinsonCoordinates.ts`        |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      ObjectMap.tsx`                    |    18.9 |   100.0 |     0   |    18.9 |
 | `    modal`                              |     0   |     0   |     0   |     0   |
 | `      ViewModal.tsx`                    |     0   |     0   |     0   |     0   |
