@@ -5,8 +5,10 @@ import {
   getWritingSystemsRelevantToObject,
 } from '@features/transforms/filtering/filterByConnections';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { getFamilyVitalityScores } from '@entities/language/vitality/LanguageFamilyVitalityComputation';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
+import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import {
   getCountOfLanguages,
   getCountOfTerritories,
@@ -89,15 +91,27 @@ export function getSortField(
     // Vitality
     case SortBy.VitalityMetascore:
       if (object.type !== ObjectType.Language) return undefined;
+      if (object.scope === LanguageScope.Family) {
+        return getFamilyVitalityScores(object)[VitalitySource.Metascore].score;
+      }
       return getVitalityMetascore(object);
     case SortBy.ISOStatus:
       if (object.type !== ObjectType.Language) return undefined;
+      if (object.scope === LanguageScope.Family) {
+        return getFamilyVitalityScores(object)[VitalitySource.ISO].score;
+      }
       return object.ISO.status;
     case SortBy.VitalityEthnologue2013:
       if (object.type !== ObjectType.Language) return undefined;
+      if (object.scope === LanguageScope.Family) {
+        return getFamilyVitalityScores(object)[VitalitySource.Eth2013].score;
+      }
       return object.vitalityEth2013;
     case SortBy.VitalityEthnologue2025:
       if (object.type !== ObjectType.Language) return undefined;
+      if (object.scope === LanguageScope.Family) {
+        return getFamilyVitalityScores(object)[VitalitySource.Eth2025].score;
+      }
       return object.vitalityEth2025;
   }
 }

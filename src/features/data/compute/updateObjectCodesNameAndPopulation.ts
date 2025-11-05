@@ -1,6 +1,7 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { clearFamilyVitalityCache } from '@entities/language/vitality/LanguageFamilyVitalityComputation';
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
@@ -51,6 +52,10 @@ function updateParentsAndDescendants(
   languages: LanguageData[],
   languageSource: LanguageSource,
 ): void {
+  // Clear vitality cache before updating relationships since childLanguages will change
+  // This ensures family vitality scores are recomputed with the new relationships
+  clearFamilyVitalityCache();
+
   languages.forEach((lang) => {
     const specific = lang[languageSource];
     lang.populationOfDescendants = specific.populationOfDescendants ?? undefined;
