@@ -2,15 +2,15 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    33.6 |    78.9 |    55.2 |    33.6 |
+| `src`                                    |    34.3 |    78.6 |    56.0 |    34.3 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    38.8 |    84.7 |    47.5 |    38.8 |
+| `  entities`                             |    41.8 |    83.6 |    50.9 |    41.8 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
-| `    language`                           |    37.9 |    94.0 |    38.0 |    37.9 |
+| `    language`                           |    43.2 |    90.3 |    45.6 |    43.2 |
 | `      LanguageCanonicalName.tsx`        |    10.6 |   100.0 |     0   |    10.6 |
 | `      LanguageCard.tsx`                 |    23.5 |   100.0 |     0   |    23.5 |
 | `      LanguagePopulationEstimate.tsx`   |    27.8 |   100.0 |     0   |    27.8 |
@@ -27,11 +27,12 @@
 | `        PluralRuleSymbolExplanation.tsx` |     9.4 |   100.0 |     0   |     9.4 |
 | `        PluralStrings.ts`               |     9.1 |   100.0 |     0   |     9.1 |
 | `      setLanguageNames.ts`              |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      vitality`                         |    44.4 |    91.7 |    46.7 |    44.4 |
+| `      vitality`                         |    55.2 |    85.9 |    63.6 |    55.2 |
 | `        LanguageDetailsVitalityAndViability.tsx` |    21.6 |   100.0 |     0   |    21.6 |
+| `        LanguageFamilyVitalityComputation.tsx` |    88.5 |    75.0 |   100.0 |    88.5 |
 | `        LanguageVitalityCell.tsx`       |     0   |     0   |     0   |     0   |
 | `        LanguageVitalityComputation.tsx` |    14.3 |   100.0 |    16.7 |    14.3 |
-| `        VitalityMeter.tsx`              |    21.7 |   100.0 |     0   |    21.7 |
+| `        VitalityMeter.tsx`              |    23.3 |   100.0 |     0   |    23.3 |
 | `        VitalityParsing.ts`             |    98.6 |    93.0 |   100.0 |    98.6 |
 | `        VitalityStrings.ts`             |    95.1 |    88.0 |   100.0 |    95.1 |
 | `        VitalityTypes.ts`               |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -59,10 +60,10 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    53.7 |    78.7 |    63.9 |    53.7 |
+| `  features`                             |    53.7 |    78.3 |    63.9 |    53.7 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
-| `    data-loading`                       |    31.9 |    73.2 |    56.9 |    31.9 |
+| `    data-loading`                       |    32.0 |    73.2 |    56.9 |    32.0 |
 | `      CensusData.tsx`                   |    21.7 |    90.9 |    50.0 |    21.7 |
 | `      context`                          |    13.6 |     0   |     0   |    13.6 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
@@ -113,8 +114,8 @@
 | `    pagination`                         |    45.9 |    69.2 |    66.7 |    45.9 |
 | `      PaginationControls.tsx`           |     6.3 |   100.0 |     0   |     6.3 |
 | `      VisibleItemsMeter.tsx`            |    89.7 |    69.2 |   100.0 |    89.7 |
-| `    sorting`                            |    68.6 |    93.2 |    60.0 |    68.6 |
-| `      sort.tsx`                         |    63.3 |    92.8 |    60.0 |    63.3 |
+| `    sorting`                            |    66.8 |    87.5 |    60.0 |    66.8 |
+| `      sort.tsx`                         |    61.8 |    86.9 |    60.0 |    61.8 |
 | `      SortTypes.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    stored-params`                      |    72.2 |    64.3 |   100.0 |    72.2 |
 | `      useStoredParams.tsx`              |    72.2 |    64.3 |   100.0 |    72.2 |
