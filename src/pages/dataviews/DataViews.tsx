@@ -4,6 +4,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import ViewCardList from './ViewCardList';
 import ViewDetails from './ViewDetails';
 import ViewFamilyTree from './ViewFamilyTree';
+import ViewMap from './ViewMap';
 import ViewReports from './ViewReports';
 import ViewTable from './ViewTable';
 
@@ -23,6 +24,8 @@ function DataViews() {
       return <ViewTable />;
     case View.Reports:
       return <ViewReports />;
+    case View.Map:
+      return <ViewMap />;
   }
 }
 

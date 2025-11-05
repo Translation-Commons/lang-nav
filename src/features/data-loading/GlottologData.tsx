@@ -18,8 +18,8 @@ export type GlottologData = {
   isoCode?: LanguageCode;
   // familyGlottocode?: Glottocode;
   scope: LanguageScope;
-  // latitude?: number;
-  // longitude?: number;
+  latitude?: number;
+  longitude?: number;
 };
 
 function strToLanguageScope(str: string): LanguageScope {
@@ -43,8 +43,8 @@ function parseGlottolog(line: string): GlottologData {
     isoCode: parts[3] != '' ? parts[3] : undefined,
     // familyGlottocode: parts[4] != '' ? parts[4] : undefined,
     scope: strToLanguageScope(parts[5]),
-    // latitude: parts[6] != '' ? parseFloat(parts[6]) : undefined,
-    // longitude: parts[7] != '' ? parseFloat(parts[7]) : undefined,
+    latitude: parts[6] != '' ? parseFloat(parts[6]) : undefined,
+    longitude: parts[7] != '' ? parseFloat(parts[7]) : undefined,
   };
 }
 
@@ -96,7 +96,7 @@ export function addGlottologLanguages(
 
   // Add new glottocodes from the import
   glottologImport.forEach((importedLanguage) => {
-    const { glottoCode, parentGlottocode, scope, name } = importedLanguage;
+    const { glottoCode, parentGlottocode, scope, name, latitude, longitude } = importedLanguage;
     const lang = languagesBySource.Glottolog[glottoCode];
     const parentLanguageCode =
       parentGlottocode != null ? languagesBySource.Glottolog[parentGlottocode]?.ID : undefined;
@@ -125,6 +125,8 @@ export function addGlottologLanguages(
         viabilityConfidence: 'No',
         viabilityExplanation: 'Glottolog entry not found in ISO',
         sourceSpecific,
+        latitude,
+        longitude,
       };
       languagesBySource.All[glottoCode] = newLang;
       languagesBySource.Glottolog[glottoCode] = newLang;
@@ -137,6 +139,8 @@ export function addGlottologLanguages(
       }
       lang.sourceSpecific.Glottolog.scope = scope;
       lang.sourceSpecific.Glottolog.name = name;
+      lang.latitude = latitude;
+      lang.longitude = longitude;
       setLanguageNames(lang);
       if (lang.scope == null) {
         lang.scope = scope;

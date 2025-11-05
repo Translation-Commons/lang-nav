@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
 import React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
@@ -41,7 +41,9 @@ describe('TableExport', () => {
     // Click export button to open the menu
     const button = screen.queryByText('Export ▶');
     expect(button).toBeTruthy();
-    fireEvent.click(button!);
+    act(() => {
+      fireEvent.click(button!);
+    });
 
     // Ensure options are now visible
     expect(screen.queryByText('Copy TSV')).toBeTruthy();
@@ -56,7 +58,9 @@ describe('TableExport', () => {
     render(<TableExport visibleColumns={columns} objectsFilteredAndSorted={objects} />);
 
     // Open the menu to show `Copy TSV` option
-    fireEvent.click(screen.getByText('Export ▶'));
+    act(() => {
+      fireEvent.click(screen.getByText('Export ▶'));
+    });
 
     // Clicking on Copy TSV will copy data to clipboard
     // Ensure navigator.clipboard exists in the test environment (jsdom/vitest may not provide it)
@@ -68,7 +72,9 @@ describe('TableExport', () => {
     }
     const writeTextSpy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
     const copyTsvOption = screen.getByText('Copy TSV');
-    await fireEvent.click(copyTsvOption);
+    act(() => {
+      fireEvent.click(copyTsvOption);
+    });
     await waitFor(() => {
       expect(writeTextSpy).toHaveBeenCalledWith(
         'ID\tName\neng\tEnglish\nfra\tFrench\nspa\tSpanish',

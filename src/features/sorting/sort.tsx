@@ -53,6 +53,10 @@ function getSortField(
       return getObjectDateAsNumber(object);
     case SortBy.Language:
       return getObjectMostImportantLanguageName(object);
+    case SortBy.Latitude:
+      return object.type === ObjectType.Language ? object.latitude : undefined;
+    case SortBy.Longitude:
+      return object.type === ObjectType.Language ? object.longitude : undefined;
 
     // Population
     case SortBy.Population:
@@ -107,6 +111,8 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.Endonym:
     case SortBy.Code:
     case SortBy.Language:
+    case SortBy.Longitude:
+    case SortBy.Latitude:
       return SortDirection.Ascending; // A to Z
     case SortBy.Date:
     case SortBy.Population:
@@ -162,6 +168,8 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.VitalityISO,
         SortBy.VitalityEthnologue2013,
         SortBy.VitalityEthnologue2025,
+        SortBy.Latitude,
+        SortBy.Longitude,
       ];
     case ObjectType.Census:
       return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];

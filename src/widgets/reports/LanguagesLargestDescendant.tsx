@@ -82,12 +82,6 @@ const LanguagesLargestDescendant: React.FC = () => {
           },
           {
             key: 'Estimated Population of Descendents',
-            label: (
-              <>
-                Estimated Population
-                <br /> of Descendents
-              </>
-            ),
             render: (lang: LanguageData) => lang.populationOfDescendents,
             valueType: TableValueType.Numeric,
             sortParam: SortBy.PopulationOfDescendents,

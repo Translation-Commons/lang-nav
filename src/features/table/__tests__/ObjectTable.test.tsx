@@ -57,15 +57,13 @@ describe('ObjectTable', () => {
 
   const mockColumns: TableColumn<ObjectData>[] = [
     {
-      key: 'name',
-      label: 'Name',
+      key: 'Name',
       render: (obj) => obj.nameDisplay,
       sortParam: SortBy.Name,
       valueType: TableValueType.String,
     },
     {
-      key: 'population',
-      label: 'Population',
+      key: 'Population',
       render: (obj) => {
         if (obj.type === ObjectType.Territory) {
           return obj.population.toLocaleString();
