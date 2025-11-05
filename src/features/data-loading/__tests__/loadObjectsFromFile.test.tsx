@@ -1,6 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
-import { loadLanguages, loadLocales, loadWritingSystems } from '@features/data-loading/DataLoader';
+import {
+  loadLanguages,
+  loadLocales,
+  loadTerritories,
+  loadWritingSystems,
+} from '@features/data-loading/loadObjectsFromFile';
 
 describe('loadLocales', () => {
   it('loads locales without error', async () => {
@@ -26,5 +31,14 @@ describe('loadWritingSystems', () => {
     expect(writingSystems).not.toBeNull();
     if (!writingSystems) return; // For TypeScript
     expect(Object.values(writingSystems).length).toBeGreaterThan(200);
+  });
+});
+
+describe('loadTerritories', () => {
+  it('loads territories without error', async () => {
+    const territories = await loadTerritories();
+    expect(territories).not.toBeNull();
+    if (!territories) return; // For TypeScript
+    expect(Object.values(territories).length).toBeGreaterThan(200);
   });
 });

@@ -13,13 +13,10 @@ export async function getCensusFilepaths(directory: string): Promise<string[]> {
   // Load census filenames from the text file
   return await fetch(`${directory}/censusList.txt`)
     .then((res) => res.text())
-    .then((text) =>
-      text
-        .split('\n')
-        .map((line) => line.trim())
-        .filter((line) => line !== '')
-        .map((line) => `${directory}/${line}.tsv`),
-    );
+    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
+    .then((text) => text.split('\n'))
+    .then((lines) => lines.map((line) => line.trim()).filter((line) => line !== ''))
+    .then((lines) => lines.map((line) => `${directory}/${line}.tsv`));
 }
 
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
@@ -32,6 +29,9 @@ export async function loadCensusData(): Promise<(CensusImport | void)[]> {
       async (filePath) =>
         await fetch(filePath)
           .then((res) => res.text())
+          .then(
+            (text) => '' + text /* mutate the string to drop ExternalStringData and save memory  */,
+          )
           .then((fileInput) => parseCensusImport(fileInput, filePath))
           .catch((err) => console.error('Error loading TSV:', err)),
     ),

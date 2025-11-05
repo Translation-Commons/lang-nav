@@ -16,22 +16,6 @@ import { sumBy } from '@shared/lib/setUtils';
 
 const DEBUG = false;
 
-export async function loadTerritories(): Promise<Record<TerritoryCode, TerritoryData> | void> {
-  return await fetch('data/territories.tsv')
-    .then((res) => res.text())
-    .then((text) => {
-      const territories = text.split('\n').slice(1).map(parseTerritoryLine);
-      return territories.reduce<Record<TerritoryCode, TerritoryData>>(
-        (territoriesByCode, territory) => {
-          territoriesByCode[territory.ID] = territory;
-          return territoriesByCode;
-        },
-        {},
-      );
-    })
-    .catch((err) => console.error('Error loading TSV:', err));
-}
-
 export function parseTerritoryLine(line: string): TerritoryData {
   const parts = line.split('\t');
   const population = parts[3] != '' ? Number.parseInt(parts[3].replace(/,/g, '')) : 0;
@@ -96,6 +80,8 @@ function createRegionalLocalesForTerritory(
   territory: TerritoryData,
   allLocales: Record<BCP47LocaleCode, LocaleData>,
 ): void {
+  if (!territory) return;
+
   // Make sure that territories within are processed first
   const containsTerritories = territory.containsTerritories ?? [];
   containsTerritories?.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));

@@ -55,6 +55,7 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
 export async function loadISOLanguages(): Promise<ISOLanguage6393Data[] | void> {
   return await fetch('data/iso/iso-639-3.tab')
     .then((res) => res.text())
+    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
     .then((text) => {
       return text.split('\n').slice(1).map(parseISOLanguage6393Line);
     })
@@ -69,14 +70,13 @@ type ISOMacrolanguageData = {
 export async function loadISOMacrolanguages(): Promise<ISOMacrolanguageData[] | void> {
   return await fetch('data/iso/macrolanguages.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(1)
-        .map((line) => {
-          const parts = line.split('\t');
-          return { codeMacro: parts[0], codeConstituent: parts[1] };
-        });
+    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
+    .then((text) => text.split('\n').slice(1))
+    .then((lines) => {
+      return lines.map((line) => {
+        const parts = line.split('\t');
+        return { codeMacro: parts[0], codeConstituent: parts[1] };
+      });
     })
     .catch((err) => console.error('Error loading TSV:', err));
 }
@@ -90,15 +90,14 @@ type ISOLanguageFamilyData = {
 export async function loadISOLanguageFamilies(): Promise<ISOLanguageFamilyData[] | void> {
   return await fetch('data/iso/families639-5.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(3) // First 3 lines are headers and comments
-        .map((line) => {
-          const parts = line.split('\t');
-          return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
-        });
-    })
+    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
+    .then((text) => text.split('\n').slice(3)) // First 3 lines are headers and comments
+    .then((lines) =>
+      lines.map((line) => {
+        const parts = line.split('\t');
+        return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
+      }),
+    )
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -108,16 +107,11 @@ export async function loadISOFamiliesToLanguages(): Promise<Record<
 > | void> {
   return await fetch('data/iso/familiesToLanguages.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(4) // First 4 lines are headers and comments
-        .reduce<Record<ISO6395LanguageCode, LanguageCode[]>>((families, line) => {
-          const parts = line.split('\t');
-          families[parts[0]] = parts[1].split(' ');
-          return families;
-        }, {});
-    })
+    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
+    .then((text) => text.split('\n').slice(4)) // First 4 lines are headers and comments
+    .then((lines) => lines.map((line) => line.split('\t')))
+    .then((entries) => entries.map(([family, languages]) => [family, languages.split(' ')]))
+    .then((entries) => Object.fromEntries(entries))
     .catch((err) => console.error('Error loading TSV:', err));
 }
 

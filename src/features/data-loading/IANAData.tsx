@@ -9,7 +9,7 @@ import {
   VariantTagData,
 } from '@entities/types/DataTypes';
 
-import { unique } from '@shared/lib/setUtils';
+import { toDictionary, unique } from '@shared/lib/setUtils';
 
 export type VariantIANATag = string; // IANA tag, eg. valencia (for cat-ES-valencia)
 
@@ -18,7 +18,11 @@ export type VariantTagDictionary = Record<VariantIANATag, VariantTagData>;
 export async function loadIANAVariants(): Promise<VariantTagDictionary | void> {
   return await fetch(`data/iana_variants.txt`)
     .then((res) => res.text())
-    .then((rawData) => parseIANAVariants(rawData))
+    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
+    .then((text) => text.split('%%'))
+    .then((variantBlocks) => variantBlocks.map(parseIANAVariant))
+    .then((variants) => variants.filter((v) => v !== null))
+    .then((variants) => toDictionary(variants, (v) => v.ID))
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -31,91 +35,85 @@ enum IANAVariantKey {
   Comments = 'Comments',
 }
 
-export function parseIANAVariants(input: string): VariantTagDictionary {
-  const entries = input.split('%%');
-  const variants: VariantTagDictionary = {};
+export function parseIANAVariant(input: string): VariantTagData | null {
+  ////// Example data:
+  // Type: variant
+  // Subtag: baku1926
+  // Description: Unified Turkic Latin Alphabet (Historical)
+  // Added: 2007-04-18
+  // Prefix: az
+  // Prefix: ba
+  // Prefix: crh
+  // Prefix: kk
+  // Prefix: krc
+  // Prefix: ky
+  // Prefix: sah
+  // Prefix: tk
+  // Prefix: tt
+  // Prefix: uz
+  // Comments: Denotes alphabet used in Turkic republics/regions of the
+  //   former USSR in late 1920s, and throughout 1930s, which aspired to
+  //   represent equivalent phonemes in a unified fashion. Also known as: New
+  //   Turkic Alphabet; Birlәşdirilmiş Jeni Tyrk
+  //   Әlifbasь (Birlesdirilmis Jeni Tyrk Elifbasi);
+  //   Jaŋalif (Janalif).
 
-  for (const entry of entries) {
-    ////// Example data:
-    // Type: variant
-    // Subtag: baku1926
-    // Description: Unified Turkic Latin Alphabet (Historical)
-    // Added: 2007-04-18
-    // Prefix: az
-    // Prefix: ba
-    // Prefix: crh
-    // Prefix: kk
-    // Prefix: krc
-    // Prefix: ky
-    // Prefix: sah
-    // Prefix: tk
-    // Prefix: tt
-    // Prefix: uz
-    // Comments: Denotes alphabet used in Turkic republics/regions of the
-    //   former USSR in late 1920s, and throughout 1930s, which aspired to
-    //   represent equivalent phonemes in a unified fashion. Also known as: New
-    //   Turkic Alphabet; Birlәşdirilmiş Jeni Tyrk
-    //   Әlifbasь (Birlesdirilmis Jeni Tyrk Elifbasi);
-    //   Jaŋalif (Janalif).
+  // Iterate through the lines, filling in new values or
+  const data: Record<IANAVariantKey, string[]> = {
+    [IANAVariantKey.Type]: [],
+    [IANAVariantKey.Subtag]: [],
+    [IANAVariantKey.Added]: [],
+    [IANAVariantKey.Description]: [],
+    [IANAVariantKey.Prefix]: [],
+    [IANAVariantKey.Comments]: [],
+  };
+  let lastKey: IANAVariantKey = IANAVariantKey.Type;
 
-    // Iterate through the lines, filling in new values or
-    const data: Record<IANAVariantKey, string[]> = {
-      [IANAVariantKey.Type]: [],
-      [IANAVariantKey.Subtag]: [],
-      [IANAVariantKey.Added]: [],
-      [IANAVariantKey.Description]: [],
-      [IANAVariantKey.Prefix]: [],
-      [IANAVariantKey.Comments]: [],
-    };
-    let lastKey: IANAVariantKey = IANAVariantKey.Type;
-
-    for (const line of entry.split('\n')) {
-      if (line.trim() === '') continue; // Skip empty lines
-      const [key, value] = line.split(':');
-      switch (key) {
-        case IANAVariantKey.Type:
-        case IANAVariantKey.Subtag:
-        case IANAVariantKey.Added:
-        case IANAVariantKey.Prefix:
-        case IANAVariantKey.Description:
-        case IANAVariantKey.Comments:
-          data[key as IANAVariantKey].push(value.trim());
-          lastKey = key as IANAVariantKey;
-          break;
-        default: // there is no field, its just appended to the prior field like for comments
-          data[lastKey].push(key.trim());
-      }
-    }
-
-    if (data.Type[0] !== 'variant') continue; // Only process variants
-
-    const ianaTag = data.Subtag[0];
-    const name = data.Description.join(' '); // the Description is effectively the name
-    // Extract prefixes (language codes) from the entry
-    // Prefixes are usually language codes but can be composites like zh-Latn-pinyin or oc-lengadoc-grclass
-    const languageCodes = unique(data.Prefix.map((l) => l.split(/\W/)[0]));
-    const localeCodes = data.Prefix.map((l) => l + '-' + ianaTag);
-    const dateAdded = data.Added[0] ? new Date(data.Added[0]) : undefined;
-
-    if (ianaTag && name) {
-      variants[ianaTag] = {
-        type: ObjectType.VariantTag,
-        ID: ianaTag,
-        codeDisplay: ianaTag,
-        nameDisplay: name,
-        description: data.Comments.join(' '), // It's called comments but its functionally a description
-        dateAdded,
-        prefixes: data.Prefix,
-        languageCodes: languageCodes,
-        localeCodes: localeCodes,
-        languages: [],
-        locales: [],
-        names: [name],
-      };
+  for (const line of input.split('\n')) {
+    if (line.trim() === '') continue; // Skip empty lines
+    const [key, value] = line.split(':');
+    switch (key) {
+      case IANAVariantKey.Type:
+      case IANAVariantKey.Subtag:
+      case IANAVariantKey.Added:
+      case IANAVariantKey.Prefix:
+      case IANAVariantKey.Description:
+      case IANAVariantKey.Comments:
+        data[key as IANAVariantKey].push(value.trim());
+        lastKey = key as IANAVariantKey;
+        break;
+      default: // there is no field, its just appended to the prior field like for comments
+        data[lastKey].push(key.trim());
     }
   }
 
-  return variants;
+  if (data.Type[0] !== 'variant') return null; // Only process variants
+
+  const ianaTag = data.Subtag[0];
+  const name = data.Description.join(' '); // the Description is effectively the name
+  // Extract prefixes (language codes) from the entry
+  // Prefixes are usually language codes but can be composites like zh-Latn-pinyin or oc-lengadoc-grclass
+  const languageCodes = unique(data.Prefix.map((l) => l.split(/\W/)[0]));
+  const localeCodes = data.Prefix.map((l) => l + '-' + ianaTag);
+  const dateAdded = data.Added[0] ? new Date(data.Added[0]) : undefined;
+
+  if (ianaTag && name) {
+    return {
+      type: ObjectType.VariantTag,
+      ID: ianaTag,
+      codeDisplay: ianaTag,
+      nameDisplay: name,
+      description: data.Comments.join(' '), // It's called comments but its functionally a description
+      dateAdded,
+      prefixes: data.Prefix,
+      languageCodes: languageCodes,
+      localeCodes: localeCodes,
+      languages: [],
+      locales: [],
+      names: [name],
+    };
+  }
+  return null;
 }
 
 // TODO support complex variants like zh-Latn-pinyin or oc-lengadoc-grclass
