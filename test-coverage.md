@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    33.3 |    78.7 |    54.6 |    33.3 |
+| `src`                                    |    33.3 |    79.0 |    54.5 |    33.3 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -60,7 +60,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    52.6 |    78.5 |    63.0 |    52.6 |
+| `  features`                             |    52.4 |    78.9 |    62.7 |    52.4 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
 | `    data-loading`                       |    31.9 |    73.2 |    56.9 |    31.9 |
@@ -91,12 +91,12 @@
 | `      FilterBreakdown.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      FilterPath.tsx`                   |    89.8 |    95.2 |    66.7 |    89.8 |
 | `      useFilteredObjects.tsx`           |     0   |     0   |     0   |     0   |
-| `    hovercard`                          |    96.3 |    83.1 |    90.5 |    96.3 |
+| `    hovercard`                          |    97.6 |    86.8 |    90.0 |    97.6 |
 | `      EmptyHoverCardProvider.tsx`       |   100.0 |   100.0 |    50.0 |   100.0 |
 | `      Hoverable.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverableButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverableEnumeration.tsx`         |   100.0 |    87.5 |   100.0 |   100.0 |
-| `      HoverableObject.tsx`              |    85.5 |    58.3 |   100.0 |    85.5 |
+| `      HoverableObject.tsx`              |    88.2 |    80.0 |   100.0 |    88.2 |
 | `      HoverableObjectName.tsx`          |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      HoverCardContext.tsx`             |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverCardProvider.tsx`            |    97.6 |    80.0 |   100.0 |    97.6 |
@@ -123,11 +123,11 @@
 | `      SortTypes.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    stored-params`                      |    72.2 |    64.3 |   100.0 |    72.2 |
 | `      useStoredParams.tsx`              |    72.2 |    64.3 |   100.0 |    72.2 |
-| `    table`                              |    90.6 |    86.6 |    88.9 |    90.6 |
+| `    table`                              |    90.6 |    87.4 |    88.9 |    90.6 |
 | `      CommonColumns.tsx`                |    96.5 |   100.0 |    66.7 |    96.5 |
-| `      ObjectTable.tsx`                  |    95.1 |    71.4 |   100.0 |    95.1 |
+| `      ObjectTable.tsx`                  |    95.1 |    76.9 |   100.0 |    95.1 |
 | `      TableColumn.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      TableColumnSelector.tsx`          |    94.3 |    87.0 |   100.0 |    94.3 |
+| `      TableColumnSelector.tsx`          |    94.3 |    86.4 |   100.0 |    94.3 |
 | `      TableExport.tsx`                  |    76.4 |    79.2 |    75.0 |    76.4 |
 | `      TableSortButton.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      TableValueType.ts`                |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -246,7 +246,7 @@
 | `      LanguagesWithIdenticalNames.tsx`  |     0   |     0   |     0   |     0   |
 | `      PotentialLocales.tsx`             |     0   |     0   |     0   |     0   |
 | `      TableOfCountriesWithCensuses.tsx` |     0   |   100.0 |   100.0 |     0   |
-| `    tables`                             |     3.2 |    45.5 |    35.7 |     3.2 |
+| `    tables`                             |     3.1 |    45.5 |    35.7 |     3.1 |
 | `      columns`                          |     0   |    20.0 |    20.0 |     0   |
 | `        LanguageDigitalSupportColumns.tsx` |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageNameColumns.tsx`        |     0   |     0   |     0   |     0   |
@@ -256,7 +256,7 @@
 | `      LanguageTable.tsx`                |     0   |     0   |     0   |     0   |
 | `      LocaleTable.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      TableOfAllCensuses.tsx`           |     0   |   100.0 |   100.0 |     0   |
-| `      TableOfLanguagesInCensus.tsx`     |    12.3 |   100.0 |     0   |    12.3 |
+| `      TableOfLanguagesInCensus.tsx`     |    11.7 |   100.0 |     0   |    11.7 |
 | `      TableOfLanguagesInTerritory.tsx`  |    17.7 |   100.0 |     0   |    17.7 |
 | `      TerritoryTable.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `      VariantTagTable.tsx`              |     0   |     0   |     0   |     0   |
