@@ -2,11 +2,11 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    33.3 |    79.0 |    54.5 |    33.3 |
+| `src`                                    |    33.2 |    79.0 |    54.5 |    33.2 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    38.8 |    84.7 |    47.1 |    38.8 |
+| `  entities`                             |    38.6 |    84.7 |    47.1 |    38.6 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -138,11 +138,11 @@
 | `      TreeListOptions.tsx`              |    18.4 |   100.0 |     0   |    18.4 |
 | `      TreeListPageBody.tsx`             |    22.5 |   100.0 |     0   |    22.5 |
 | `      TreeListRoot.tsx`                 |    26.7 |   100.0 |     0   |    26.7 |
-| `  pages`                                |     3.5 |    45.5 |    41.7 |     3.5 |
+| `  pages`                                |     3.4 |    45.5 |    41.7 |     3.4 |
 | `    AboutPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
 | `    DataPage.tsx`                       |     0   |     0   |     0   |     0   |
 | `    DataPageBody.tsx`                   |     0   |   100.0 |   100.0 |     0   |
-| `    dataviews`                          |     9.5 |    33.3 |    28.6 |     9.5 |
+| `    dataviews`                          |     7.6 |    28.6 |    25.0 |     7.6 |
 | `      DataViews.tsx`                    |     0   |     0   |     0   |     0   |
 | `      ViewCardList.tsx`                 |     0   |     0   |     0   |     0   |
 | `      ViewDetails.tsx`                  |    38.3 |   100.0 |    50.0 |    38.3 |
