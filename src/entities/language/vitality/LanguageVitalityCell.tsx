@@ -3,8 +3,9 @@ import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 
-import { LanguageData } from '../LanguageTypes';
+import { LanguageData, LanguageScope } from '../LanguageTypes';
 
+import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
 import { getAllVitalityScores } from './LanguageVitalityComputation';
 import { VitalitySource } from './VitalityTypes';
 
@@ -61,7 +62,15 @@ function bucketColor(bucket: VitalityBucket): string {
 }
 
 const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type }) => {
-  const { score: vitalityScore, explanation: hover, label } = getAllVitalityScores(lang)[type];
+  let vitalityScore: number | undefined;
+  let hover: React.ReactNode;
+  let label: string | undefined;
+
+  if (lang.scope === LanguageScope.Family) {
+    ({ score: vitalityScore, explanation: hover, label } = getFamilyVitalityScores(lang)[type]);
+  } else {
+    ({ score: vitalityScore, explanation: hover, label } = getAllVitalityScores(lang)[type]);
+  }
   const bucket = getScoreBucket(vitalityScore);
 
   return (
