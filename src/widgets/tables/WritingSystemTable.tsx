@@ -1,7 +1,5 @@
 import React from 'react';
 
-import PopulationWarning from '@widgets/PopulationWarning';
-
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import { SortBy } from '@features/sorting/SortTypes';
@@ -23,13 +21,13 @@ const WritingSystemTable: React.FC = () => {
         NameColumn,
         endonymColumn,
         {
-          label: (
+          key: 'Population',
+          description: (
             <>
-              Population
-              <PopulationWarning />
+              An imprecise estimate of how many people use this writing system worldwide, calculated
+              by adding up the population for all of the languages that use the writing system..
             </>
           ),
-          key: 'Population',
           render: (object) => object.populationUpperBound,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,

@@ -9,8 +9,6 @@ interface TableColumn<T> {
   readonly key: string;
   /** Description shown when hovering over an info icon next to the column */
   readonly description?: React.ReactNode;
-  /**  Label shown in the table; falls back to `key`. Useful to add additional markup */
-  readonly label?: React.ReactNode;
   /** The group this column belongs to, used to organize columns in the UI */
   readonly columnGroup?: string;
 
