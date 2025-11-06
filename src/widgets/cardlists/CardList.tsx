@@ -18,7 +18,7 @@ import ObjectDetails from '../details/ObjectDetails';
 import ResponsiveGrid from './ResponsiveGrid';
 
 const CardList: React.FC = () => {
-  const { filteredObjects } = useFilteredObjects({});
+  const { filteredObjects, allObjectsInType } = useFilteredObjects({});
   const { getCurrentObjects } = usePagination<ObjectData>();
   const currentObjects = useMemo(
     () => getCurrentObjects(filteredObjects),
@@ -27,27 +27,27 @@ const CardList: React.FC = () => {
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-      <VisibleItemsMeter objects={filteredObjects} />
+      <VisibleItemsMeter objects={allObjectsInType} />
       {currentObjects.length === 0 && <Deemphasized>No objects found.</Deemphasized>}
       {currentObjects.length === 1 && (
         <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
           <ObjectDetails object={currentObjects[0]} />
         </DetailsContainer>
       )}
-      {currentObjects.length > 1 && (
-        <>
-          <ResponsiveGrid>
-            {currentObjects.map((object) => (
-              <ViewCard key={object.ID}>
-                <ObjectCard object={object} />
-              </ViewCard>
-            ))}
-          </ResponsiveGrid>
 
-          {/* Display another visible item meter at the bottom for convenience. */}
-          <VisibleItemsMeter objects={filteredObjects} />
-        </>
+      {/* Main grid */}
+      {currentObjects.length > 1 && (
+        <ResponsiveGrid>
+          {currentObjects.map((object) => (
+            <ViewCard key={object.ID}>
+              <ObjectCard object={object} />
+            </ViewCard>
+          ))}
+        </ResponsiveGrid>
       )}
+
+      {/* Display another visible item meter at the bottom for convenience. */}
+      {currentObjects.length > 1 && <VisibleItemsMeter objects={allObjectsInType} />}
     </div>
   );
 };

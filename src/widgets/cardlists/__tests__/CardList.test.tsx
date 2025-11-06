@@ -6,6 +6,8 @@ import useFilteredObjects from '@features/filtering/useFilteredObjects';
 import { ObjectType, PageParamsOptional } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
+import { TerritoryScope } from '@entities/types/DataTypes';
+
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import CardList from '../CardList';
@@ -16,17 +18,21 @@ vi.mock('@features/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
 
 describe('CardList', () => {
   const mockedObjects = getFullyInstantiatedMockedObjects();
+  const territories = Object.values(mockedObjects)
+    .filter((obj) => obj.type === ObjectType.Territory)
+    .sort((a, b) => b.population - a.population);
 
   // Helper function to eliminate mock setup duplication
   function setupMockParams(overrides: PageParamsOptional = {}) {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams(overrides));
   }
 
-  function setupMockFilteredObjects() {
+  function setupMockFilteredObjects(countryOnly: boolean = false) {
     (useFilteredObjects as Mock).mockReturnValue({
-      filteredObjects: Object.values(mockedObjects)
-        .filter((obj) => obj.type === ObjectType.Territory)
-        .sort((a, b) => b.population - a.population),
+      filteredObjects: territories.filter(
+        (obj) => !countryOnly || obj.scope === TerritoryScope.Country,
+      ),
+      allObjectsInType: territories,
     });
   }
 
@@ -75,5 +81,27 @@ describe('CardList', () => {
 
     expect(cards[0]).toHaveTextContent('Aman');
     expect(cards[1]).toHaveTextContent('Harad');
+  });
+
+  it('when the objects are filtered, the visible item meter shows correct counts', () => {
+    setupMockFilteredObjects(true); // countryOnly = true
+
+    const { container, getAllByText } = render(<CardList />);
+
+    // Meter appears correctly
+    expect(container).toHaveTextContent('Showing 4 results.');
+    expect(container).toHaveTextContent('2 filtered out.');
+
+    // There are 4 country-scope territories in the mocked data
+    const meters = getAllByText(/Showing/);
+    expect(meters.length).toBe(2); // One at top and one at bottom
+
+    // Only the countries are shown
+    const cards = container.getElementsByClassName('ViewCard');
+    expect(cards.length).toBe(4);
+    expect(cards[0]).toHaveTextContent('Aman');
+    expect(cards[1]).toHaveTextContent('Harad');
+    expect(cards[2]).toHaveTextContent('Beleriand');
+    expect(cards[3]).toHaveTextContent('Eriador');
   });
 });

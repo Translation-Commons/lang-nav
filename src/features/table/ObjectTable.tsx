@@ -1,4 +1,3 @@
-import { InfoIcon } from 'lucide-react';
 import { useMemo } from 'react';
 
 import { DetailsContainer } from '@pages/dataviews/ViewDetails';
@@ -6,7 +5,6 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
-import Hoverable from '@features/hovercard/Hoverable';
 import usePagination from '@features/pagination/usePagination';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -21,15 +19,13 @@ import {
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getSortFunction } from '../sorting/sort';
 
+import ObjectTableContent from './ObjectTableContent';
 import TableColumn from './TableColumn';
 import TableColumnSelector from './TableColumnSelector';
 import TableExport from './TableExport';
-import TableSortButton from './TableSortButton';
 import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
-
-const MAX_COLUMN_WIDTH = '10em';
 
 interface Props<T> {
   objects: T[];
@@ -61,9 +57,10 @@ function ObjectTable<T extends ObjectData>({
       .filter(filterBySubstring)
       .sort(sortFunction);
   }, [sortFunction, objects, filterBySubstring, filterByTerritory, filterByVitality, scopeFilter]);
+  const currentObjects = getCurrentObjects(objectsFilteredAndSorted);
 
   return (
-    <div className="ObjectTableContainer">
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
         <VisibleItemsMeter
           objects={objects}
@@ -80,58 +77,31 @@ function ObjectTable<T extends ObjectData>({
         resetColumnVisibility={resetColumnVisibility}
         toggleColumn={toggleColumn}
       />
+      <ObjectTableContent visibleColumns={visibleColumns} objects={currentObjects} />
 
-      <table className="ObjectTable">
-        <thead>
-          <tr>
-            {visibleColumns.map((column) => (
-              <th key={column.key} style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH }}>
-                {column.key}
-                {column.description && (
-                  <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
-                    <InfoIcon size="1em" display="block" />
-                  </Hoverable>
-                )}
-                <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
-              </th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {getCurrentObjects(objectsFilteredAndSorted).map((object, i) => (
-            <tr key={object.ID || i}>
-              {visibleColumns.map((column) => {
-                let content = column.render(object);
-                if (typeof content === 'number') {
-                  content = content.toLocaleString();
-                }
-
-                return (
-                  <td
-                    key={column.key}
-                    className={column.valueType}
-                    style={{ maxWidth: MAX_COLUMN_WIDTH }}
-                  >
-                    {content}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-
-      {objectsFilteredAndSorted.length === 1 && (
-        <div style={{ marginTop: '1em' }}>
-          <DetailsContainer title={<ObjectTitle object={objectsFilteredAndSorted[0]} />}>
-            <ObjectDetails object={objectsFilteredAndSorted[0]} />
-          </DetailsContainer>
-        </div>
+      {currentObjects.length === 1 && (
+        <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
+          <ObjectDetails object={currentObjects[0]} />
+        </DetailsContainer>
       )}
-      {objectsFilteredAndSorted.length === 0 && (
-        <div style={{ marginTop: '1em' }}>
+      {currentObjects.length === 0 && (
+        <div>
           All results are filtered out.
           <FilterBreakdown objects={objects} />
+        </div>
+      )}
+
+      {/* Repeat the visible item meter and export button at the bottom for convenience. */}
+      {currentObjects.length > 1 && (
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+          <VisibleItemsMeter
+            objects={objects}
+            shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
+          />
+          <TableExport
+            visibleColumns={visibleColumns}
+            objectsFilteredAndSorted={objectsFilteredAndSorted}
+          />
         </div>
       )}
     </div>

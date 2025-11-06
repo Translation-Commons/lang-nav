@@ -27,7 +27,7 @@ function TableColumnSelector<T extends ObjectData>({
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
   return (
-    <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
+    <details style={{ gap: '.5em 1em' }}>
       <summary style={{ cursor: 'pointer' }}>
         {nVisible}/{columns.length} columns visible, click here to toggle.
       </summary>
