@@ -116,7 +116,7 @@ export function addISODataToLanguages(
   isoLanguages.forEach((isoLang) => {
     const lang = languages[isoLang.codeISO6393];
     if (lang == null) {
-      if (DEBUG) console.log(`${isoLang.codeISO6393} not found`);
+      if (DEBUG) console.debug(`${isoLang.codeISO6393} not found`);
       return;
     }
 
@@ -148,25 +148,25 @@ export function addISOMacrolanguageData(
     const macro = languages[relation.codeMacro];
     const constituent = languages[relation.codeConstituent];
     if (parent == null) {
-      if (DEBUG) console.log(`Macrolanguage ${relation.codeMacro} not found`);
+      if (DEBUG) console.debug(`Macrolanguage ${relation.codeMacro} not found`);
       return;
     }
     if (constituent == null) {
-      if (DEBUG) console.log(`Constituent language ${relation.codeConstituent} not found`);
+      if (DEBUG) console.debug(`Constituent language ${relation.codeConstituent} not found`);
       return;
     }
     const parentLanguageCode = constituent.sourceSpecific.ISO.parentLanguageCode;
     if (parentLanguageCode != macro.ID) {
       if (DEBUG)
         // As of 2025-04-30 all exceptions to this are temporary
-        console.log(
+        console.debug(
           `parent different for ${constituent.ID}. Is ${parentLanguageCode} but should be ${macro.ID}`,
         );
     }
     if (macro.scope !== LanguageScope.Macrolanguage) {
       if (DEBUG)
         // As of 2025-04-30 all macrolanguage are correctly labeled above
-        console.log(
+        console.debug(
           `Macrolanguage ${macro.ID} should be considered a macrolanguage, instead it is a ${macro.scope}`,
         );
     }
@@ -227,7 +227,7 @@ export function addISOLanguageFamilyData(
       // Get the language using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
       const lang = languagesBySource.BCP[langCode] ?? languagesBySource.ISO[langCode];
       if (lang == null) {
-        console.log(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
+        console.debug(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;
       }
       // languages may already have macrolanguage parents but if its unset, set the parent

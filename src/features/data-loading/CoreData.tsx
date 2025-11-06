@@ -126,20 +126,6 @@ export function useCoreData(): {
       alert('Error loading data. Please check the console for more details.');
       return;
     }
-    console.log('Core data loaded', {
-      initialLangs,
-      isoLangs,
-      macroLangs,
-      langFamilies,
-      isoLangsToFamilies,
-      isoRetirements,
-      glottologImport,
-      manualGlottocodeToISO,
-      territories,
-      locales,
-      writingSystems,
-      variantTags,
-    });
 
     addISODataToLanguages(initialLangs, isoLangs || []);
     const languagesBySource = groupLanguagesBySource(initialLangs);

@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    33.3 |    79.0 |    54.5 |    33.3 |
+| `src`                                    |    33.5 |    78.9 |    55.1 |    33.5 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -60,30 +60,30 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    52.4 |    78.9 |    62.7 |    52.4 |
+| `  features`                             |    52.9 |    78.8 |    64.2 |    52.9 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
-| `    data-loading`                       |    31.9 |    73.2 |    56.9 |    31.9 |
-| `      CensusData.tsx`                   |    21.7 |    90.9 |    50.0 |    21.7 |
+| `    data-loading`                       |    32.6 |    72.8 |    61.0 |    32.6 |
+| `      CensusData.tsx`                   |    22.1 |    90.9 |    50.0 |    22.1 |
 | `      context`                          |    13.6 |     0   |     0   |    13.6 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
 | `        useDataContext.tsx`             |    81.0 |   100.0 |     0   |    81.0 |
 | `      CoreData.tsx`                     |     0   |     0   |     0   |     0   |
 | `      DataAssociations.tsx`             |    65.7 |    61.5 |    85.7 |    65.7 |
-| `      DataLoader.tsx`                   |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      DataParsing.tsx`                  |    97.2 |    98.0 |   100.0 |    97.2 |
 | `      GlottologData.tsx`                |     0   |     0   |     0   |     0   |
-| `      IANAData.tsx`                     |    24.6 |    70.0 |    20.0 |    24.6 |
+| `      IANAData.tsx`                     |    24.8 |    70.0 |    20.0 |    24.8 |
 | `      iso`                              |     0   |     0   |     0   |     0   |
 | `        ISORetirements.tsx`             |     0   |     0   |     0   |     0   |
 | `      ISOData.tsx`                      |     0   |     0   |     0   |     0   |
+| `      loadObjectsFromFile.ts`           |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      population`                       |    99.4 |    66.2 |   100.0 |    99.4 |
 | `        computeLocalePopulationFromCensuses.ts` |    97.7 |    84.2 |   100.0 |    97.7 |
 | `        computeLocaleWritingPopulation.ts` |   100.0 |    58.3 |   100.0 |   100.0 |
 | `        computeRegionalLocalePopulation.ts` |   100.0 |    57.1 |   100.0 |   100.0 |
 | `        updateObjectCodesNameAndPopulation.ts` |   100.0 |    66.7 |   100.0 |   100.0 |
 | `      SupplementalData.tsx`             |     0   |     0   |     0   |     0   |
-| `      TerritoryData.tsx`                |    60.2 |    67.4 |    57.1 |    60.2 |
+| `      TerritoryData.tsx`                |    76.3 |    66.7 |    83.3 |    76.3 |
 | `      UnicodeData.tsx`                  |     0   |     0   |     0   |     0   |
 | `      WikipediaData.tsx`                |     0   |   100.0 |   100.0 |     0   |
 | `    filtering`                          |    75.5 |    77.8 |    76.9 |    75.5 |
@@ -151,7 +151,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    34.7 |    86.2 |    58.8 |    34.7 |
+| `  shared`                               |    36.3 |    86.7 |    60.0 |    36.3 |
 | `    containers`                         |    48.8 |   100.0 |   100.0 |    48.8 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -163,10 +163,10 @@
 | `      useCopyToClipboard.tsx`           |     1.1 |   100.0 |     0   |     1.1 |
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
-| `    lib`                                |    68.4 |    91.7 |    62.5 |    68.4 |
+| `    lib`                                |    71.5 |    92.1 |    64.7 |    71.5 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
-| `      setUtils.ts`                      |   100.0 |    93.3 |   100.0 |   100.0 |
+| `      setUtils.ts`                      |   100.0 |    94.1 |   100.0 |   100.0 |
 | `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      stringUtils.ts`                   |    51.6 |   100.0 |    40.0 |    51.6 |
 | `    ui`                                 |    33.5 |    90.0 |    50.0 |    33.5 |

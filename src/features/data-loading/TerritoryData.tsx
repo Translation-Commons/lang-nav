@@ -172,7 +172,7 @@ export async function loadTerritoryGDPLiteracy(
         const territory = getTerritory(newTerrData.code);
         if (territory == null) {
           // Known exclusive: Antarctica (AQ) intentionally left out because its poorly defined linguistically
-          if (DEBUG) console.log('Loading new territory data. Territory not found', newTerrData);
+          if (DEBUG) console.debug('Loading new territory data. Territory not found', newTerrData);
           return;
         }
         territory.literacyPercent = newTerrData.literacyPercent;

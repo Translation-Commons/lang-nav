@@ -36,7 +36,7 @@ export async function loadTerritories(): Promise<Record<string, TerritoryData> |
 
 async function loadObjectsFromFile<T extends ObjectData>(
   filePath: string,
-  parseLine: (line: string) => T | null,
+  parseLine: (line: string) => T | undefined,
 ): Promise<Record<string, T> | void> {
   return await fetch(filePath)
     .then((res) => res.text())

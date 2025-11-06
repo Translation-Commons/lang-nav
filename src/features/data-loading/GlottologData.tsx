@@ -141,7 +141,7 @@ export function addGlottologLanguages(
       if (lang.scope == null) {
         lang.scope = scope;
       } else if (DEBUG && scope != lang.scope) {
-        console.log(`${glottoCode} scope is ${scope} in glottolog but ${lang.scope} in ISO`);
+        console.debug(`${glottoCode} scope is ${scope} in glottolog but ${lang.scope} in ISO`);
       }
     }
   });

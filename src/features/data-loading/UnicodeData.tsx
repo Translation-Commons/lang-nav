@@ -62,7 +62,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
         }
       }
       if (DEBUG && lang != null) {
-        console.log('CLDR import', alias, lang);
+        console.debug('CLDR import', alias, lang);
         // TODO: support locales in CLDR better
       }
     });
@@ -168,7 +168,7 @@ export async function loadCLDRCoverage(
       cldrCoverage.forEach((cldrCov) => {
         const lang = getLanguage(cldrCov.languageCode);
         if (lang?.type !== ObjectType.Language) {
-          console.log('During CLDR import ', cldrCov.languageCode, 'missing from languages');
+          console.debug('During CLDR import ', cldrCov.languageCode, 'missing from languages');
           return;
         }
         if (cldrCov.explicitScriptCode != null) {
