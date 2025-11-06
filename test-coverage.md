@@ -60,10 +60,10 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    52.9 |    78.8 |    64.2 |    52.9 |
+| `  features`                             |    53.1 |    78.8 |    64.2 |    53.1 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
-| `    data-loading`                       |    32.6 |    72.8 |    61.0 |    32.6 |
+| `    data-loading`                       |    32.8 |    72.8 |    61.0 |    32.8 |
 | `      CensusData.tsx`                   |    22.1 |    90.9 |    50.0 |    22.1 |
 | `      context`                          |    13.6 |     0   |     0   |    13.6 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
