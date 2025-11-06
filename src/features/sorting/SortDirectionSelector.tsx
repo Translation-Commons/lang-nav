@@ -3,8 +3,8 @@ import React from 'react';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBehavior } from '@features/sorting/SortTypes';
 
-import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplay';
+import Selector from '../../widgets/controls/components/Selector';
+import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
 
 const SortDirectionSelector: React.FC = () => {
   const { sortBehavior, updatePageParams } = usePageParams();
@@ -20,7 +20,7 @@ const SortDirectionSelector: React.FC = () => {
           ? 'Sort with high numbers first / first letter in alphabet first.'
           : 'Sort with low numbers first / last letter in alphabet first.'
       }
-      onChange={(behavior: SortBehavior) => updatePageParams({ sortBehavior: behavior })}
+      onChange={(sortBehavior) => updatePageParams({ sortBehavior })}
       selected={sortBehavior}
     />
   );

@@ -2,10 +2,13 @@ import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
+import ColorBySelector from '@features/sorting/ColorBySelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
 import LimitInput from '../../features/pagination/LimitInput';
+import SortBySelector from '../../features/sorting/SortBySelector';
+import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
@@ -13,8 +16,6 @@ import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import ProfileSelector from './selectors/ProfileSelector';
-import SortBySelector from './selectors/SortBySelector';
-import SortDirectionSelector from './selectors/SortDirectionSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
@@ -59,6 +60,7 @@ const SidePanel: React.FC = () => {
         <LimitInput />
         <SortBySelector />
         <SortDirectionSelector />
+        <ColorBySelector />
         <LocaleSeparatorSelector />
       </SidePanelSection>
 

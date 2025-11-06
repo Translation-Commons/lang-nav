@@ -35,3 +35,5 @@ export enum SortDirection {
   Ascending = 1, // A to Z, 0 to 9999999
   Descending = -1,
 }
+
+export type ColorBy = SortBy | 'None';

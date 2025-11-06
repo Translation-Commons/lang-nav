@@ -8,7 +8,7 @@ import { SelectorDropdown } from './SelectorDropdown';
 import SelectorLabel from './SelectorLabel';
 import SelectorOption from './SelectorOption';
 
-type Props<T extends React.Key> = {
+type Props<T> = {
   display?: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
@@ -143,7 +143,7 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
   }
 };
 
-type OptionsProps<T extends React.Key> = {
+type OptionsProps<T> = {
   display: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
@@ -174,7 +174,7 @@ function Options<T extends React.Key>({
   ));
 }
 
-type DropdownButtonProps<T extends React.Key> = {
+type DropdownButtonProps<T> = {
   display: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;

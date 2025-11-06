@@ -1,4 +1,4 @@
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorBy, SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
@@ -88,6 +88,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         break;
       case PageParamKey.sortBehavior:
         params.sortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
+        break;
+      case PageParamKey.colorBy:
+        params.colorBy = value as ColorBy;
         break;
 
       // Freeform strings
