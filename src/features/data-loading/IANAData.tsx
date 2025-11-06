@@ -18,7 +18,6 @@ export type VariantTagDictionary = Record<VariantIANATag, VariantTagData>;
 export async function loadIANAVariants(): Promise<VariantTagDictionary | void> {
   return await fetch(`data/iana_variants.txt`)
     .then((res) => res.text())
-    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
     .then((text) => text.split('%%'))
     .then((variantBlocks) => variantBlocks.map(parseIANAVariant))
     .then((variants) => variants.filter((v) => v !== null))

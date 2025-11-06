@@ -40,7 +40,6 @@ async function loadObjectsFromFile<T extends ObjectData>(
 ): Promise<Record<string, T> | void> {
   return await fetch(filePath)
     .then((res) => res.text())
-    .then((text) => '' + text /* mutate the string to drop ExternalStringData and save memory  */)
     .then((text) => text.split('\n').slice(1))
     .then((lines) => lines.map(parseLine))
     .then((objects) => objects.filter((obj) => obj != null))

@@ -19,7 +19,6 @@ export async function loadAndApplyWikipediaData(dataContext: DataContextType): P
 async function loadWikipediaData(): Promise<WikipediaData[] | void> {
   return await fetch('data/wikipedias.tsv')
     .then((res) => res.text())
-    .then((text) => '' + text /* mutate the string to drop ExternalStringData store  */)
     .then((text) => text.split('\n').slice(1))
     .then((lines) => lines.map(parseWikipediaData))
     .catch((err) => console.error('Error loading TSV:', err));
