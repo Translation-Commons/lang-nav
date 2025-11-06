@@ -85,14 +85,14 @@ export function parseLanguageLine(line: string): LanguageData {
   };
 }
 
-export function parseLocaleLine(line: string): LocaleData | null {
+export function parseLocaleLine(line: string): LocaleData | undefined {
   const parts = line.split('\t');
   if (parts.length === 1 && parts[0] === '') {
     // Empty line, ignore
-    return null;
+    return undefined;
   } else if (parts.length !== 6) {
     console.error(`Locale line not the right length, ${parts.length} parts: ${line}`);
-    return null;
+    return undefined;
   }
   const inputLocaleID = parts[0];
   const localeParts = parseLocaleCode(inputLocaleID);

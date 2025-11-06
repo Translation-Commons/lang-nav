@@ -55,9 +55,7 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
 export async function loadISOLanguages(): Promise<ISOLanguage6393Data[] | void> {
   return await fetch('data/iso/iso-639-3.tab')
     .then((res) => res.text())
-    .then((text) => {
-      return text.split('\n').slice(1).map(parseISOLanguage6393Line);
-    })
+    .then((text) => text.split('\n').slice(1).map(parseISOLanguage6393Line))
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -69,14 +67,12 @@ type ISOMacrolanguageData = {
 export async function loadISOMacrolanguages(): Promise<ISOMacrolanguageData[] | void> {
   return await fetch('data/iso/macrolanguages.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(1)
-        .map((line) => {
-          const parts = line.split('\t');
-          return { codeMacro: parts[0], codeConstituent: parts[1] };
-        });
+    .then((text) => text.split('\n').slice(1))
+    .then((lines) => {
+      return lines.map((line) => {
+        const parts = line.split('\t');
+        return { codeMacro: parts[0], codeConstituent: parts[1] };
+      });
     })
     .catch((err) => console.error('Error loading TSV:', err));
 }
@@ -90,15 +86,13 @@ type ISOLanguageFamilyData = {
 export async function loadISOLanguageFamilies(): Promise<ISOLanguageFamilyData[] | void> {
   return await fetch('data/iso/families639-5.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(3) // First 3 lines are headers and comments
-        .map((line) => {
-          const parts = line.split('\t');
-          return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
-        });
-    })
+    .then((text) => text.split('\n').slice(3)) // First 3 lines are headers and comments
+    .then((lines) =>
+      lines.map((line) => {
+        const parts = line.split('\t');
+        return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
+      }),
+    )
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -108,16 +102,10 @@ export async function loadISOFamiliesToLanguages(): Promise<Record<
 > | void> {
   return await fetch('data/iso/familiesToLanguages.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(4) // First 4 lines are headers and comments
-        .reduce<Record<ISO6395LanguageCode, LanguageCode[]>>((families, line) => {
-          const parts = line.split('\t');
-          families[parts[0]] = parts[1].split(' ');
-          return families;
-        }, {});
-    })
+    .then((text) => text.split('\n').slice(4)) // First 4 lines are headers and comments
+    .then((lines) => lines.map((line) => line.split('\t')))
+    .then((entries) => entries.map(([family, languages]) => [family, languages.split(' ')]))
+    .then((entries) => Object.fromEntries(entries))
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -128,7 +116,7 @@ export function addISODataToLanguages(
   isoLanguages.forEach((isoLang) => {
     const lang = languages[isoLang.codeISO6393];
     if (lang == null) {
-      if (DEBUG) console.log(`${isoLang.codeISO6393} not found`);
+      if (DEBUG) console.debug(`${isoLang.codeISO6393} not found`);
       return;
     }
 
@@ -160,25 +148,25 @@ export function addISOMacrolanguageData(
     const macro = languages[relation.codeMacro];
     const constituent = languages[relation.codeConstituent];
     if (parent == null) {
-      if (DEBUG) console.log(`Macrolanguage ${relation.codeMacro} not found`);
+      if (DEBUG) console.debug(`Macrolanguage ${relation.codeMacro} not found`);
       return;
     }
     if (constituent == null) {
-      if (DEBUG) console.log(`Constituent language ${relation.codeConstituent} not found`);
+      if (DEBUG) console.debug(`Constituent language ${relation.codeConstituent} not found`);
       return;
     }
     const parentLanguageCode = constituent.sourceSpecific.ISO.parentLanguageCode;
     if (parentLanguageCode != macro.ID) {
       if (DEBUG)
         // As of 2025-04-30 all exceptions to this are temporary
-        console.log(
+        console.debug(
           `parent different for ${constituent.ID}. Is ${parentLanguageCode} but should be ${macro.ID}`,
         );
     }
     if (macro.scope !== LanguageScope.Macrolanguage) {
       if (DEBUG)
         // As of 2025-04-30 all macrolanguage are correctly labeled above
-        console.log(
+        console.debug(
           `Macrolanguage ${macro.ID} should be considered a macrolanguage, instead it is a ${macro.scope}`,
         );
     }
@@ -239,7 +227,7 @@ export function addISOLanguageFamilyData(
       // Get the language using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
       const lang = languagesBySource.BCP[langCode] ?? languagesBySource.ISO[langCode];
       if (lang == null) {
-        console.log(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
+        console.debug(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;
       }
       // languages may already have macrolanguage parents but if its unset, set the parent

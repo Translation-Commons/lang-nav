@@ -7,16 +7,20 @@ import {
   connectWritingSystems,
   groupLanguagesBySource,
 } from '@features/data-loading/DataAssociations';
-import { loadLanguages, loadLocales, loadWritingSystems } from '@features/data-loading/DataLoader';
 import {
   loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
 } from '@features/data-loading/IANAData';
 import {
+  loadLanguages,
+  loadLocales,
+  loadTerritories,
+  loadWritingSystems,
+} from '@features/data-loading/loadObjectsFromFile';
+import {
   connectTerritoriesToParent,
   createRegionalLocales,
-  loadTerritories,
 } from '@features/data-loading/TerritoryData';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
