@@ -1,67 +1,38 @@
-import { render, screen } from '@testing-library/react';
-import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+import { render } from '@testing-library/react';
+import { describe, expect, it, beforeEach, afterEach, vi, Mock } from 'vitest';
 
-import * as FilterModule from '@features/filtering/filter';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import * as SortModule from '@features/sorting/sort';
-
-import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import useFilteredObjects from '@features/filtering/useFilteredObjects';
+import { ObjectType, PageParamsOptional } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import CardList from '../CardList';
 
-vi.mock('@features/filtering/filter', () => ({
-  getFilterBySubstring: vi.fn(),
-  getFilterByTerritory: vi.fn(),
-  getFilterByVitality: vi.fn(),
-  getScopeFilter: vi.fn(),
-  getSliceFunction: vi.fn(),
-}));
-
-vi.mock('@features/sorting/sort', () => ({ getSortFunction: vi.fn() }));
-
-vi.mock('@features/page-params/usePageParams', () => ({
-  default: vi.fn().mockReturnValue(createMockUsePageParams()),
-}));
+vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
 
 describe('CardList', () => {
-  const mockObjects: ObjectData[] = [
-    {
-      ID: '1',
-      type: ObjectType.Territory,
-      codeDisplay: 'T1',
-      nameDisplay: 'Test Territory 1',
-      names: ['Test Territory 1'],
-      scope: TerritoryScope.Country,
-      population: 1000,
-      populationFromUN: 1000,
-    },
-    {
-      ID: '2',
-      type: ObjectType.Territory,
-      codeDisplay: 'T2',
-      nameDisplay: 'Test Territory 2',
-      names: ['Test Territory 2'],
-      scope: TerritoryScope.Country,
-      population: 2000,
-      populationFromUN: 2000,
-    },
-  ];
+  const mockedObjects = getFullyInstantiatedMockedObjects();
 
-  const mockRenderCard = (object: ObjectData) => (
-    <div data-testid={`card-${object.ID}`}>{object.nameDisplay}</div>
-  );
+  // Helper function to eliminate mock setup duplication
+  function setupMockParams(overrides: PageParamsOptional = {}) {
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams(overrides));
+  }
+
+  function setupMockFilteredObjects() {
+    (useFilteredObjects as Mock).mockReturnValue({
+      filteredObjects: Object.values(mockedObjects)
+        .filter((obj) => obj.type === ObjectType.Territory)
+        .sort((a, b) => b.population - a.population),
+    });
+  }
 
   beforeEach(() => {
-    // Set up default mock implementations
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
-    vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
+    setupMockParams();
+    setupMockFilteredObjects();
   });
 
   afterEach(() => {
@@ -69,72 +40,40 @@ describe('CardList', () => {
   });
 
   it('renders a list of cards', () => {
-    render(<CardList objects={mockObjects} renderCard={mockRenderCard} />);
+    const { container } = render(<CardList />);
+    const cards = container.getElementsByClassName('ViewCard');
 
-    mockObjects.forEach((obj) => {
-      expect(screen.getByTestId(`card-${obj.ID}`)).toBeInTheDocument();
-      expect(screen.getByText(obj.nameDisplay)).toBeInTheDocument();
-    });
-  });
-
-  it('applies filtering functions', () => {
-    const mockSubstringFilter = vi.fn(() => true);
-    const mockTerritoryFilter = vi.fn(() => true);
-    const mockVitalityFilter = vi.fn(() => true);
-    const mockScopeFilter = vi.fn(() => true);
-
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
-    vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(mockTerritoryFilter);
-    vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
-    vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
-
-    render(<CardList objects={mockObjects} renderCard={mockRenderCard} />);
-
-    expect(mockSubstringFilter).toHaveBeenCalled();
-    expect(mockTerritoryFilter).toHaveBeenCalled();
-    expect(mockVitalityFilter).toHaveBeenCalled();
-    expect(mockScopeFilter).toHaveBeenCalled();
-  });
-
-  it('applies sorting function', () => {
-    const mockSort = vi.fn(() => 0);
-    vi.mocked(SortModule.getSortFunction).mockReturnValue(mockSort);
-
-    render(<CardList objects={mockObjects} renderCard={mockRenderCard} />);
-
-    expect(mockSort).toHaveBeenCalled();
-  });
-
-  it('handles filtering that excludes all objects', () => {
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => false);
-
-    render(<CardList objects={mockObjects} renderCard={mockRenderCard} />);
-
-    mockObjects.forEach((obj) => {
-      expect(screen.queryByTestId(`card-${obj.ID}`)).not.toBeInTheDocument();
-    });
+    // These are the territories from the mocked data, sorted by population descending
+    expect(cards[0]).toHaveTextContent('Arda');
+    expect(cards[1]).toHaveTextContent('Middle Earth');
+    expect(cards[2]).toHaveTextContent('Aman');
+    expect(cards[3]).toHaveTextContent('Harad');
+    expect(cards[4]).toHaveTextContent('Beleriand');
+    expect(cards[5]).toHaveTextContent('Eriador');
   });
 
   it('shows details view when exactly one object is visible', () => {
     // Make filter return true only for the first object
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue((obj) => obj.ID === '1');
+    setupMockParams({ limit: 1 });
+    const { container } = render(<CardList />);
+    const cards = container.getElementsByClassName('ViewCard');
 
-    render(<CardList objects={mockObjects} renderCard={mockRenderCard} />);
+    // It should not render any card elements
+    expect(cards.length).toBe(0);
 
-    // Should show details container instead of card grid
-    expect(screen.getByText('Test Territory 1')).toBeInTheDocument();
-    expect(screen.queryByText('Test Territory 2')).not.toBeInTheDocument();
+    // Rather it will show the details view
+    expect(container).toHaveTextContent('Arda arda');
+    expect(container).toHaveTextContent('Contains:Middle Earth');
   });
 
-  it('applies slicing function to filtered results', () => {
-    const mockSlice = vi.fn((items) => items.slice(0, 1));
-    vi.mocked(FilterModule.getSliceFunction).mockReturnValue(mockSlice);
+  it('applies pagination to filtered results', () => {
+    setupMockParams({ limit: 2, page: 2 });
 
-    render(<CardList objects={mockObjects} renderCard={mockRenderCard} />);
+    const { container } = render(<CardList />);
+    const cards = container.getElementsByClassName('ViewCard');
+    expect(cards.length).toBe(2);
 
-    expect(mockSlice).toHaveBeenCalled();
-    // When only 1 item is visible, we show details instead of card
-    expect(screen.getByText('Test Territory 1')).toBeInTheDocument();
-    expect(screen.queryByText('Test Territory 2')).not.toBeInTheDocument();
+    expect(cards[0]).toHaveTextContent('Aman');
+    expect(cards[1]).toHaveTextContent('Harad');
   });
 });

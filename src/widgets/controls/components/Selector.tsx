@@ -43,7 +43,12 @@ function Selector<T extends React.Key>({
       )}
 
       {/* The dropdown menu or the button list */}
-      <OptionsContainer isExpanded={expanded} containerRef={optionsRef} display={display}>
+      <OptionsContainer
+        isExpanded={expanded}
+        containerRef={optionsRef}
+        display={display}
+        hasSelectorLabel={!!selectorLabel}
+      >
         <Options<T>
           getOptionDescription={getOptionDescription}
           getOptionLabel={getOptionLabel}
@@ -83,17 +88,10 @@ const SelectorContainer: React.FC<
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: '0.125em',
-    marginRight: '0.5em',
-    marginBottom: '0.5em',
   };
   if (display === SelectorDisplay.ButtonList) {
     style.flexDirection = 'column';
     style.alignItems = 'start';
-  } else if (display === SelectorDisplay.InlineDropdown) {
-    style.marginLeft = '0';
-    style.marginRight = '0';
-    style.marginBottom = '0';
   } else if (display === SelectorDisplay.ButtonGroup) {
     style.gap = '-0.125em'; // Overlap the buttons slightly
   }
@@ -106,23 +104,30 @@ const SelectorContainer: React.FC<
 };
 
 type OptionsContainerProps = {
-  isExpanded?: boolean;
   containerRef: React.RefObject<HTMLDivElement | null>;
   display?: SelectorDisplay;
+  hasSelectorLabel: boolean;
+  isExpanded?: boolean;
 };
 
 const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>> = ({
   children,
   containerRef,
-  isExpanded,
   display,
+  hasSelectorLabel,
+  isExpanded,
 }) => {
   switch (display) {
     case SelectorDisplay.ButtonList:
       return (
         <div
           ref={containerRef}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25em 0.25em', marginLeft: '1em' }}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.25em',
+            marginLeft: hasSelectorLabel ? '1em' : 'none',
+          }}
         >
           {children}
         </div>

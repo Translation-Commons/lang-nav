@@ -197,9 +197,3 @@ export function getFilterByVitality(): FilterFunctionType {
     [vitalityISO, vitalityEth2013, vitalityEth2025],
   );
 }
-
-export function getSliceFunction<T>(): (arr: T[]) => T[] {
-  const { page, limit } = usePageParams();
-  return (arr: T[]) =>
-    limit < 1 || arr.length < limit ? arr : arr.slice(limit * (page - 1), limit * page);
-}

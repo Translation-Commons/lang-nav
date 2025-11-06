@@ -7,6 +7,7 @@ import ObjectDetails from '@widgets/details/ObjectDetails';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
 import Hoverable from '@features/hovercard/Hoverable';
+import usePagination from '@features/pagination/usePagination';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
@@ -16,7 +17,6 @@ import {
   getFilterByTerritory,
   getFilterByVitality,
   getScopeFilter,
-  getSliceFunction,
 } from '../filtering/filter';
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getSortFunction } from '../sorting/sort';
@@ -47,7 +47,7 @@ function ObjectTable<T extends ObjectData>({
   const filterByTerritory = getFilterByTerritory();
   const filterByVitality = getFilterByVitality();
   const scopeFilter = getScopeFilter();
-  const sliceFunction = getSliceFunction<T>();
+  const { getCurrentObjects } = usePagination<T>();
 
   const { visibleColumns, toggleColumn, columnVisibility, resetColumnVisibility } =
     useColumnVisibility(columns);
@@ -98,7 +98,7 @@ function ObjectTable<T extends ObjectData>({
           </tr>
         </thead>
         <tbody>
-          {sliceFunction(objectsFilteredAndSorted).map((object, i) => (
+          {getCurrentObjects(objectsFilteredAndSorted).map((object, i) => (
             <tr key={object.ID || i}>
               {visibleColumns.map((column) => {
                 let content = column.render(object);

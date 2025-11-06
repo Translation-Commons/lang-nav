@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
 import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
-import PaginationControls from '@features/pagination/PaginationControls';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -15,6 +14,9 @@ import {
   getFilterByVitality,
   getScopeFilter,
 } from '../filtering/filter';
+
+import LimitSelector from './LimitSelector';
+import PaginationControls from './PaginationControls';
 
 interface Props {
   objects: ObjectData[];
@@ -60,7 +62,17 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
       }}
     >
       <div>
-        Showing <strong>{nShown.toLocaleString()}</strong>
+        Showing{' '}
+        <Hoverable
+          hoverContent={
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+              <div>Set the maximum number of results that can appear.</div>
+              <LimitSelector />
+            </div>
+          }
+        >
+          {nShown.toLocaleString()}
+        </Hoverable>
         {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
       </div>
       {nOverall > nFiltered && (

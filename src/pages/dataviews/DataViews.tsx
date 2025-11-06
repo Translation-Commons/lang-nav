@@ -1,7 +1,8 @@
+import CardList from '@widgets/cardlists/CardList';
+
 import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
-import ViewCardList from './ViewCardList';
 import ViewDetails from './ViewDetails';
 import ViewFamilyTree from './ViewFamilyTree';
 import ViewMap from './ViewMap';
@@ -15,7 +16,7 @@ function DataViews() {
 
   switch (view) {
     case View.CardList:
-      return <ViewCardList />;
+      return <CardList />;
     case View.Details:
       return <ViewDetails />;
     case View.Hierarchy:

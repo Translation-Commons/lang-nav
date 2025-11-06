@@ -7,7 +7,17 @@ export function getNewURLSearchParams(
 ): URLSearchParams {
   const next = new URLSearchParams(prev);
   Object.entries(newParams).forEach(([key, value]) => {
-    if (['limit', 'page'].includes(key)) {
+    if (key === PageParamKey.limit) {
+      // Handle as number
+      const valueAsNumber = parseInt(value as string);
+      if (valueAsNumber > 1e6 || valueAsNumber < 0) {
+        next.set(key, '-1');
+      } else if (isNaN(valueAsNumber) || valueAsNumber < 1) {
+        next.set(key, '0');
+      } else {
+        next.set(key, valueAsNumber.toString());
+      }
+    } else if (key === PageParamKey.page) {
       // Handle as number
       const valueAsNumber = parseInt(value as string);
       if (isNaN(valueAsNumber) || valueAsNumber < 1) {
