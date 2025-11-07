@@ -5,13 +5,14 @@ import usePageParams from '@features/page-params/usePageParams';
 import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { getColorGradientFunction } from './getColorGradientFunction';
 import { getNormalSortDirection, getSortField } from './sort';
 import { ColorBy, SortBy, SortDirection } from './SortTypes';
 
 type Props = { objects: ObjectData[]; colorBy?: ColorBy };
 
 const useColors = ({ objects, colorBy }: Props) => {
-  const { colorBy: colorByParam } = usePageParams();
+  const { colorBy: colorByParam, colorGradient } = usePageParams();
   colorBy = colorBy ?? colorByParam;
 
   const min = getMinimumValue(colorBy);
@@ -20,6 +21,7 @@ const useColors = ({ objects, colorBy }: Props) => {
     colorBy == 'None' ? SortDirection.Ascending : getNormalSortDirection(colorBy);
   const shouldUseLogScale = shouldUseLogarithmicScale(colorBy);
   const range = shouldUseLogScale ? Math.log10(max - min) : max - min;
+  const applyColorGradient = getColorGradientFunction(colorGradient);
 
   const getNormalizedValue = useCallback(
     (object: ObjectData): number | undefined => {
@@ -38,7 +40,7 @@ const useColors = ({ objects, colorBy }: Props) => {
       if (numericValue < min) return 0;
       if (numericValue > max) return 1;
 
-      numericValue -= min;
+      numericValue -= min; // eg. shift to 0-based, eg. -180..+180  =>  0..360
       if (shouldUseLogScale) numericValue = Math.log10(numericValue);
       return numericValue / range;
     },
@@ -67,24 +69,9 @@ const useColors = ({ objects, colorBy }: Props) => {
       const num = getScaledNumber(object);
       if (num == null) return undefined; // have customers handle undefined, eg. gray or transparent
 
-      // Define endpoint colors (in RGB)
-      const orange = [255, 165, 0]; // #FFA500
-      const white = [255, 255, 255]; // #FFFFFF
-      const blue = [0, 102, 204]; // #0066CC (a mid blue)
-
-      // Interpolate to white
-      let rgb: number[];
-      if (num < 0.5) {
-        const k = num / 0.5;
-        rgb = orange.map((o, i) => Math.round(o + (white[i] - o) * k));
-      } else {
-        const k = (num - 0.5) / 0.5;
-        rgb = white.map((w, i) => Math.round(w + (blue[i] - w) * k));
-      }
-
-      return `rgb(${rgb[0]}, ${rgb[1]}, ${rgb[2]})`;
+      return applyColorGradient(num);
     },
-    [getNormalizedValue],
+    [getScaledNumber, applyColorGradient],
   );
 
   return {

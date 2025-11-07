@@ -1,4 +1,4 @@
-import { ColorBy, SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import {
@@ -54,6 +54,7 @@ export enum LocaleSeparator {
 
 export enum PageParamKey {
   colorBy = 'colorBy',
+  colorGradient = 'colorGradient',
   languageSource = 'languageSource',
   languageScopes = 'languageScopes',
   limit = 'limit',
@@ -76,6 +77,7 @@ export enum PageParamKey {
 
 export type PageParams = {
   colorBy: ColorBy;
+  colorGradient: ColorGradient;
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
@@ -98,6 +100,7 @@ export type PageParams = {
 
 export type PageParamsOptional = {
   colorBy?: ColorBy;
+  colorGradient?: ColorGradient;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;

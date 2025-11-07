@@ -3,6 +3,7 @@ import React from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
 import ColorBySelector from '@features/sorting/ColorBySelector';
+import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
@@ -61,6 +62,7 @@ const SidePanel: React.FC = () => {
         <SortBySelector />
         <SortDirectionSelector />
         <ColorBySelector />
+        <ColorGradientSelector />
         <LocaleSeparatorSelector />
       </SidePanelSection>
 

@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
@@ -34,6 +34,7 @@ export enum ProfileType {
 
 const GLOBAL_DEFAULTS: PageParams = {
   colorBy: 'None',
+  colorGradient: ColorGradient.DivergingBlueToOrange,
   languageSource: LanguageSource.All,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   limit: 12,
