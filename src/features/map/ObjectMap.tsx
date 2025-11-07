@@ -4,6 +4,7 @@ import useHoverCard from '@features/hovercard/useHoverCard';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import usePagination from '@features/pagination/usePagination';
+import ColorBar from '@features/sorting/ColorBar';
 import useColors from '@features/sorting/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -33,7 +34,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
     [objects, getCurrentObjects],
   );
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const { getColor } = useColors({ objects });
+  const coloringFunctions = useColors({ objects });
 
   const buildOnMouseEnter = useCallback(
     (obj: ObjectData) => (e: React.MouseEvent) => {
@@ -70,7 +71,11 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
           if (obj.type === ObjectType.Language) {
             return (
               <HoverableCircle
-                color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
+                color={
+                  colorBy === 'None'
+                    ? undefined
+                    : (coloringFunctions.getColor(obj) ?? 'transparent')
+                }
                 key={idx}
                 object={obj}
                 onMouseEnter={buildOnMouseEnter(obj)}
@@ -80,6 +85,8 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
           }
         })}
       </svg>
+
+      {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
     </div>
   );
 };

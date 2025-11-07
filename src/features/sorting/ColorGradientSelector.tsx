@@ -8,7 +8,7 @@ import { toSentenceCase } from '@shared/lib/stringUtils';
 import Selector from '../../widgets/controls/components/Selector';
 import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
 
-import { getColorGradientFunction } from './getColorGradientFunction';
+import BaseColorBar from './BaseColorBar';
 
 const ColorGradientSelector: React.FC = () => {
   const { colorBy, colorGradient, updatePageParams } = usePageParams();
@@ -24,30 +24,13 @@ const ColorGradientSelector: React.FC = () => {
       display={SelectorDisplay.Dropdown}
       getOptionLabel={(colorGradient) => (
         <div style={{ minWidth: '4em', height: '16px', display: 'inline-block' }}>
-          <GradientBar colorGradient={colorGradient} />
+          <BaseColorBar colorGradient={colorGradient} />
         </div>
       )}
       getOptionDescription={getGradientLabel}
     />
   );
 };
-
-function GradientBar({ colorGradient }: { colorGradient: ColorGradient }) {
-  const colorFunc = getColorGradientFunction(colorGradient);
-  return [...Array(51).keys()].map((i) => {
-    return (
-      <div
-        key={i}
-        style={{
-          backgroundColor: colorFunc(i / 50),
-          width: '2%',
-          height: '100%',
-          display: 'inline-block',
-        }}
-      />
-    );
-  });
-}
 
 function getGradientLabel(colorGradient: ColorGradient): string {
   const key = Object.entries(ColorGradient).find(([, value]) => value === colorGradient)?.[0] || '';

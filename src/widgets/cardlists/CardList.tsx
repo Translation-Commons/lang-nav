@@ -5,6 +5,7 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 import useFilteredObjects from '@features/filtering/useFilteredObjects';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
+import useColors from '@features/sorting/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
@@ -24,6 +25,7 @@ const CardList: React.FC = () => {
     () => getCurrentObjects(filteredObjects),
     [filteredObjects, getCurrentObjects],
   );
+  const { getColor } = useColors({ objects: filteredObjects });
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
@@ -39,7 +41,7 @@ const CardList: React.FC = () => {
       {currentObjects.length > 1 && (
         <ResponsiveGrid>
           {currentObjects.map((object) => (
-            <ViewCard key={object.ID}>
+            <ViewCard key={object.ID} style={{ backgroundColor: getColor(object) ?? 'inherit' }}>
               <ObjectCard object={object} />
             </ViewCard>
           ))}
