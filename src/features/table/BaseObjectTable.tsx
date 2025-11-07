@@ -1,7 +1,6 @@
 import { InfoIcon } from 'lucide-react';
 
 import Hoverable from '@features/hovercard/Hoverable';
-import usePagination from '@features/pagination/usePagination';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -15,7 +14,7 @@ type Props<T> = {
 
 const MAX_COLUMN_WIDTH = '10em';
 
-function ObjectTableContent<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
+function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
   return (
     <table
       style={{
@@ -65,4 +64,4 @@ function ObjectTableContent<T extends ObjectData>({ visibleColumns, objects }: P
   );
 }
 
-export default ObjectTableContent;
+export default BaseObjectTable;

@@ -19,7 +19,7 @@ import {
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getSortFunction } from '../sorting/sort';
 
-import ObjectTableContent from './ObjectTableContent';
+import BaseObjectTable from './BaseObjectTable';
 import TableColumn from './TableColumn';
 import TableColumnSelector from './TableColumnSelector';
 import TableExport from './TableExport';
@@ -33,7 +33,7 @@ interface Props<T> {
   shouldFilterUsingSearchBar?: boolean;
 }
 
-function ObjectTable<T extends ObjectData>({
+function InteractiveObjectTable<T extends ObjectData>({
   objects,
   columns,
   shouldFilterUsingSearchBar = true,
@@ -77,7 +77,9 @@ function ObjectTable<T extends ObjectData>({
         resetColumnVisibility={resetColumnVisibility}
         toggleColumn={toggleColumn}
       />
-      <ObjectTableContent visibleColumns={visibleColumns} objects={currentObjects} />
+
+      {/* The actual <table> component */}
+      <BaseObjectTable visibleColumns={visibleColumns} objects={currentObjects} />
 
       {currentObjects.length === 1 && (
         <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
@@ -107,4 +109,4 @@ function ObjectTable<T extends ObjectData>({
     </div>
   );
 }
-export default ObjectTable;
+export default InteractiveObjectTable;

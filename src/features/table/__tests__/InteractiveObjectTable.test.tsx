@@ -11,7 +11,7 @@ import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import ObjectTable from '../ObjectTable';
+import ObjectTable from '../InteractiveObjectTable';
 import TableColumn from '../TableColumn';
 import TableValueType from '../TableValueType';
 
@@ -31,7 +31,7 @@ vi.mock('@features/sorting/sort', () => ({
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
 vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
 
-describe('ObjectTable', () => {
+describe('InteractiveObjectTable', () => {
   const mockObjects: ObjectData[] = [
     {
       ID: '1',

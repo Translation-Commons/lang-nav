@@ -5,7 +5,7 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { LocaleData } from '@entities/types/DataTypes';
@@ -22,7 +22,7 @@ const LocaleTable: React.FC = () => {
   const { languageSource } = usePageParams();
 
   return (
-    <ObjectTable<LocaleData>
+    <InteractiveObjectTable<LocaleData>
       objects={locales.filter(
         (locale) => locale.language?.sourceSpecific[languageSource].code != null,
       )}
