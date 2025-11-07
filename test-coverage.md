@@ -6,7 +6,7 @@
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    41.0 |    84.2 |    48.5 |    41.0 |
+| `  entities`                             |    41.0 |    84.3 |    48.5 |    41.0 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -49,10 +49,10 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    49.8 |    58.5 |    53.8 |    49.8 |
+| `    ui`                                 |    49.8 |    59.5 |    53.8 |    49.8 |
 | `      CLDRCoverageInfo.tsx`             |    10.0 |   100.0 |     0   |    10.0 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
-| `      ObjectField.tsx`                  |    89.6 |    66.7 |   100.0 |    89.6 |
+| `      ObjectField.tsx`                  |    89.6 |    68.4 |   100.0 |    89.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
 | `      ObjectWikipediaInfo.tsx`          |    13.7 |   100.0 |     0   |    13.7 |
