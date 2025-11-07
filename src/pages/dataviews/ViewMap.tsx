@@ -1,9 +1,9 @@
-import { getSliceFunction } from '@features/filtering/filter';
 import useFilteredObjects from '@features/filtering/useFilteredObjects';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import ObjectMap from '@features/map/ObjectMap';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
+import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -15,13 +15,13 @@ import './styles.css';
 function ViewMap() {
   const { objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});
-  const sliceFunction = getSliceFunction<ObjectData>();
+  const { getCurrentObjects } = usePagination<ObjectData>();
 
   if (objectType !== ObjectType.Language) {
     return <div>Map view is in Beta mode and is only available for Languages.</div>;
   }
 
-  const objectsWithoutCoordinates = sliceFunction(filteredObjects).filter((obj) =>
+  const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) =>
     obj.type === ObjectType.Language ? obj.latitude == null || obj.longitude == null : true,
   );
 

@@ -6,7 +6,7 @@ import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -70,7 +70,7 @@ const LanguagesLargestDescendant: React.FC = () => {
         selected={maximumPercentThreshold}
         onChange={(value: number) => setMaximumPercentThreshold(value)}
       />
-      <ObjectTable<LanguageData>
+      <InteractiveObjectTable<LanguageData>
         columns={[
           CodeColumn,
           NameColumn,

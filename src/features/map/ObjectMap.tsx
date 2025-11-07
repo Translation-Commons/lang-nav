@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import { getSliceFunction } from '@features/filtering/filter';
 import useHoverCard from '@features/hovercard/useHoverCard';
 import { ObjectType } from '@features/page-params/PageParamTypes';
+import usePagination from '@features/pagination/usePagination';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
@@ -24,10 +24,11 @@ const ROBINSON_MAPS = {
 };
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_borders' }) => {
-  const sliceFunction = getSliceFunction<ObjectData>();
-  const renderableObjects = useMemo(() => {
-    return sliceFunction(objects.filter((obj) => obj.type === ObjectType.Language));
-  }, [objects, sliceFunction]);
+  const { getCurrentObjects } = usePagination<ObjectData>();
+  const renderableObjects = useMemo(
+    () => getCurrentObjects(objects.filter((obj) => obj.type === ObjectType.Language)),
+    [objects, getCurrentObjects],
+  );
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
 
   const buildOnMouseEnter = useCallback(

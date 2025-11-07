@@ -1,8 +1,9 @@
 import React from 'react';
 
+import LimitInput from '../../features/pagination/LimitInput';
+
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageSourceSelector from './selectors/LanguageSourceSelector';
-import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import SortBySelector from './selectors/SortBySelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';

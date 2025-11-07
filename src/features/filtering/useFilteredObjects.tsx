@@ -26,7 +26,7 @@ const useFilteredObjects = ({
   useSubstring = true,
   useTerritory = true,
   useVitality = true,
-}: UseFilteredObjectsParams): { filteredObjects: ObjectData[] } => {
+}: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const { objectType } = usePageParams();
   const { languagesInSelectedSource, locales, territories, writingSystems, variantTags, censuses } =
@@ -81,7 +81,7 @@ const useFilteredObjects = ({
     sortFunction,
   ]);
 
-  return { filteredObjects };
+  return { filteredObjects, allObjectsInType: objects };
 };
 
 export default useFilteredObjects;

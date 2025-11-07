@@ -18,7 +18,7 @@ const SortBySelector: React.FC = () => {
       options={Object.values(SortBy).filter((sb) => applicableSortBys.includes(sb))}
       onChange={(sortBy: SortBy) => updatePageParams({ sortBy })}
       selected={sortBy}
-      display={SelectorDisplay.ButtonList}
+      display={SelectorDisplay.Dropdown}
     />
   );
 };

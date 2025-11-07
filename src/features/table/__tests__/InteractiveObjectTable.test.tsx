@@ -11,7 +11,7 @@ import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import ObjectTable from '../ObjectTable';
+import ObjectTable from '../InteractiveObjectTable';
 import TableColumn from '../TableColumn';
 import TableValueType from '../TableValueType';
 
@@ -31,7 +31,7 @@ vi.mock('@features/sorting/sort', () => ({
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
 vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
 
-describe('ObjectTable', () => {
+describe('InteractiveObjectTable', () => {
   const mockObjects: ObjectData[] = [
     {
       ID: '1',
@@ -81,7 +81,7 @@ describe('ObjectTable', () => {
     vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
+    // vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
   });
@@ -171,15 +171,13 @@ describe('ObjectTable', () => {
     expect(screen.queryByText('Test Territory 2')).not.toBeInTheDocument();
   });
 
-  it('applies slicing function to filtered results', () => {
-    const mockSlice = vi.fn((items) => items.slice(0, 1));
-    vi.mocked(FilterModule.getSliceFunction).mockReturnValue(mockSlice);
+  it('applies pagination to filtered results', () => {
+    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ limit: 1, page: 2 }));
 
     renderObjectTable();
 
-    expect(mockSlice).toHaveBeenCalled();
-    expect(screen.getByRole('cell', { name: 'Test Territory 1' })).toBeInTheDocument();
-    expect(screen.queryByRole('cell', { name: 'Test Territory 2' })).not.toBeInTheDocument();
+    expect(screen.queryByRole('cell', { name: 'Test Territory 1' })).not.toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: 'Test Territory 2' })).toBeInTheDocument();
   });
 
   it('formats numeric values correctly', () => {

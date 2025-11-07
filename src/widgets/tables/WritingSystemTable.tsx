@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
@@ -14,7 +14,7 @@ const WritingSystemTable: React.FC = () => {
   const endonymColumn = { ...EndonymColumn, isInitiallyVisible: true };
 
   return (
-    <ObjectTable<WritingSystemData>
+    <InteractiveObjectTable<WritingSystemData>
       objects={writingSystems}
       columns={[
         CodeColumn,

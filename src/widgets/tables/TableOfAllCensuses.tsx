@@ -5,7 +5,7 @@ import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
@@ -17,7 +17,7 @@ const TableOfAllCensuses: React.FC = () => {
   const { censuses, getLanguage } = useDataContext();
 
   return (
-    <ObjectTable<CensusData>
+    <InteractiveObjectTable<CensusData>
       objects={Object.values(censuses)}
       columns={[
         CodeColumn,

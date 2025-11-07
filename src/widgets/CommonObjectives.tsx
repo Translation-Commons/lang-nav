@@ -24,7 +24,7 @@ export const ObjectiveList: React.FC = () => {
         label="Find information about a language."
         inputPlaceholder="Enter a language name"
         inputParam={PageParamKey.searchString}
-        urlParams={{}}
+        urlParams={{ limit: 1 }}
       />
       <Objective
         label="See the languages in a country."

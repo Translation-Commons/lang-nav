@@ -3,9 +3,9 @@ import React from 'react';
 import { PageParamKey } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
-import { SelectorDisplay } from '../components/SelectorDisplay';
-import SelectorLabel from '../components/SelectorLabel';
-import TextInput from '../components/TextInput';
+import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
+import SelectorLabel from '../../widgets/controls/components/SelectorLabel';
+import TextInput from '../../widgets/controls/components/TextInput';
 
 const LimitInput: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
@@ -24,12 +24,15 @@ const LimitInput: React.FC = () => {
           { searchString: '20', label: '20' },
           { searchString: '100', label: '100' },
           { searchString: '200', label: '200' },
+          { searchString: '1000', label: '1000' },
+          { searchString: '-1', label: '∞' },
+          { searchString: '', label: 'default' },
         ]}
         onChange={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
         display={SelectorDisplay.ButtonList}
         pageParameter={PageParamKey.limit}
         placeholder="∞"
-        value={limit < 1 || Number.isNaN(limit) ? '' : limit.toString()}
+        value={limit.toString()}
       />
     </div>
   );

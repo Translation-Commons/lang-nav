@@ -5,11 +5,11 @@ import HoverableButton from '@features/hovercard/HoverableButton';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
+import LimitInput from '../../features/pagination/LimitInput';
 import { ObjectiveList } from '../CommonObjectives';
 
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
-import LimitInput from './selectors/LimitInput';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import ProfileSelector from './selectors/ProfileSelector';
@@ -157,7 +157,16 @@ const SidePanelSection: React.FC<
       >
         {title} {isExpanded ? '▼' : '▶'}
       </HoverableButton>
-      <div style={{ padding: '0.25em 0.5em' }}>{isExpanded && children}</div>
+      <div
+        style={{
+          padding: '0.25em 0.5em',
+          display: isExpanded ? 'flex' : 'none',
+          gap: '0.5em',
+          flexDirection: 'column',
+        }}
+      >
+        {isExpanded && children}
+      </div>
     </div>
   );
 };
