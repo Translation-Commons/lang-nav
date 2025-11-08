@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { ColorGradient } from '@features/sorting/SortTypes';
 
@@ -11,8 +12,13 @@ import { SelectorDisplay } from '../../widgets/controls/components/SelectorDispl
 import BaseColorBar from './BaseColorBar';
 
 const ColorGradientSelector: React.FC = () => {
-  const { colorBy, colorGradient, updatePageParams } = usePageParams();
+  const { colorBy, colorGradient, updatePageParams, view } = usePageParams();
+
+  // Only showing if coloring is enabled
   if (colorBy == 'None') return null;
+
+  // Only applicable to the card list and map views
+  if (view !== View.Map && view !== View.CardList) return null;
 
   return (
     <Selector<ColorGradient>

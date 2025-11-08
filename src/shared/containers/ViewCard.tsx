@@ -8,6 +8,7 @@ interface Props {
 const ViewCard: React.FC<Props> = ({ children, style }) => {
   return (
     <div
+      className="ViewCard"
       style={{
         borderWidth: '1px',
         borderRadius: '0.5em',

@@ -3,13 +3,20 @@ export enum SortBy {
   Code = 'Code',
   Name = 'Name',
   Endonym = 'Endonym',
-  CountOfLanguages = 'Count of Languages',
-  CountOfTerritories = 'Count of Territories',
   Literacy = 'Literacy',
-  Date = 'Date',
-  Language = 'Language',
+
+  // Vitality metrics
+  VitalityMetascore = 'Vitality: Metascore',
+  VitalityISO = 'Vitality: ISO',
+  VitalityEthnologue2013 = 'Vitality: Ethnologue 2013',
+  VitalityEthnologue2025 = 'Vitality: Ethnologue 2025',
+
   Latitude = 'Latitude',
   Longitude = 'Longitude',
+  Date = 'Date',
+  CountOfLanguages = 'Count of Languages',
+  CountOfTerritories = 'Count of Territories',
+  Language = 'Language',
 
   // Extra population metrics
   PopulationAttested = 'Population Attested',
@@ -17,12 +24,6 @@ export enum SortBy {
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
   PopulationPercentInBiggestDescendentLanguage = 'Biggest Descendent Relative Population',
-
-  // Vitality metrics
-  VitalityMetascore = 'Vitality: Metascore',
-  VitalityISO = 'Vitality: ISO',
-  VitalityEthnologue2013 = 'Vitality: Ethnologue 2013',
-  VitalityEthnologue2025 = 'Vitality: Ethnologue 2025',
 }
 
 // Human-friendly display direction for sorting

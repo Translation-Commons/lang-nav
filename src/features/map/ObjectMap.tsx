@@ -30,7 +30,8 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
   const { colorBy } = usePageParams();
   const { getCurrentObjects } = usePagination<ObjectData>();
   const renderableObjects = useMemo(
-    () => getCurrentObjects(objects.filter((obj) => obj.type === ObjectType.Language)),
+    // Reverse so the "first" objects are drawn on top.
+    () => getCurrentObjects(objects.filter((obj) => obj.type === ObjectType.Language)).reverse(),
     [objects, getCurrentObjects],
   );
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
