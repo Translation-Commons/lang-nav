@@ -314,7 +314,7 @@ function LangNavTitle() {
       }}
     >
       <img
-        src={`./logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
+        src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
         width="120px"
         height="60px"
         alt="LangNav Logo"

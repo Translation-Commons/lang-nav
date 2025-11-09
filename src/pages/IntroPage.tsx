@@ -10,7 +10,7 @@ const IntroPage: React.FC = () => {
   return (
     <IntroPageContainer>
       <img
-        src={`./logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
+        src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
         width="240px"
         height="120px"
         alt="LangNav Logo"

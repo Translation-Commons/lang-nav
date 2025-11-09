@@ -38,6 +38,9 @@ export function usePageBrightness() {
     return () => window.removeEventListener('storage', onStorage);
   }, []);
 
+  // Intentionally no listener for system theme changes when preference is 'follow device'
+  // Since the CSS will automatically pick up on it via the media query
+
   // Public API
   return {
     preference,

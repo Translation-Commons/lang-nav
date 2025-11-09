@@ -14,16 +14,6 @@ export default function PageRoutes() {
         <Route path={LangNavPageName.Intro} element={<IntroPage />} />
         <Route path={LangNavPageName.Data} element={<DataPage />} />
         <Route path={LangNavPageName.About} element={<AboutPage />} />
-        <Route
-          path="/logo/*"
-          element={
-            <img
-              src={window.location.pathname}
-              alt="logo"
-              style={{ maxWidth: '100%', height: 'auto' }}
-            />
-          }
-        />
       </Routes>
     </>
   );

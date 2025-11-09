@@ -7,9 +7,7 @@ import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplay';
 
 const PageBrightnessSelector: React.FC = () => {
-  //   const { PageBrightness, updatePageParams, objectType } = usePageParams();
   const { preference, setPreference } = usePageBrightness();
-  //   const (theme, setPageBrightness) = useStoredParams('theme', PageBrightnessPreference);
 
   return (
     <Selector<PageBrightnessPreference>
