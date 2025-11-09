@@ -39,7 +39,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report>summary {
+.collapsible-report > summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;
