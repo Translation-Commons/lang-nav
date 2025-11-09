@@ -43,12 +43,11 @@ const useColors = ({ objects, colorBy }: Props): ColoringFunctions => {
       }
 
       if (maxValue === minValue) return 1; // avoid division by zero
-      if (numericValue < minValue) return 0;
       if (numericValue > maxValue) return 1;
 
       // eg. shift to 0-based, eg. -180..+180  =>  0..360
       numericValue -= minValue;
-
+      if (numericValue <= 0) return 0;
       if (shouldUseLogScale) return Math.log10(numericValue) / range;
       return numericValue / range;
     },

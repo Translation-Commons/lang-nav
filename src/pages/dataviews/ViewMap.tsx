@@ -10,14 +10,13 @@ import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import ColorBySelector from '@features/sorting/ColorBySelector';
 import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
 
+import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import './styles.css';
-import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
-
-import { toTitleCase } from '@shared/lib/stringUtils';
 
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
