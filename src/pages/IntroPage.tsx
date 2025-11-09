@@ -2,11 +2,15 @@ import React from 'react';
 
 import CommonObjectives from '@widgets/CommonObjectives';
 
+import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+
 const IntroPage: React.FC = () => {
+  const { pageBrightness } = usePageBrightness();
+
   return (
     <IntroPageContainer>
       <img
-        src="LangNavLogo.svg"
+        src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
         width="240px"
         height="120px"
         alt="LangNav Logo"

@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    35.1 |    79.2 |    54.0 |    35.1 |
+| `src`                                    |    34.9 |    79.0 |    53.8 |    34.9 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -60,7 +60,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    51.3 |    78.7 |    61.9 |    51.3 |
+| `  features`                             |    51.1 |    78.4 |    61.6 |    51.1 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
 | `    data-loading`                       |    32.8 |    72.8 |    61.0 |    32.8 |
@@ -101,9 +101,9 @@
 | `      HoverCardContext.tsx`             |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      HoverCardProvider.tsx`            |    97.6 |    80.0 |   100.0 |    97.6 |
 | `      useHoverCard.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    map`                                |    38.8 |   100.0 |    33.3 |    38.8 |
+| `    map`                                |    38.5 |   100.0 |    33.3 |    38.5 |
 | `      getRobinsonCoordinates.ts`        |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      ObjectMap.tsx`                    |    19.6 |   100.0 |     0   |    19.6 |
+| `      ObjectMap.tsx`                    |    19.4 |   100.0 |     0   |    19.4 |
 | `    modal`                              |     0   |     0   |     0   |     0   |
 | `      ViewModal.tsx`                    |     0   |     0   |     0   |     0   |
 | `    page-params`                        |    36.9 |    45.0 |    25.0 |    36.9 |
@@ -132,8 +132,8 @@
 | `      SortDirectionSelector.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `      SortTypes.tsx`                    |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      useColors.tsx`                    |     6.7 |   100.0 |     0   |     6.7 |
-| `    stored-params`                      |    72.2 |    66.7 |   100.0 |    72.2 |
-| `      useStoredParams.tsx`              |    72.2 |    66.7 |   100.0 |    72.2 |
+| `    stored-params`                      |    55.0 |    60.0 |    50.0 |    55.0 |
+| `      useStoredParams.tsx`              |    55.0 |    60.0 |    50.0 |    55.0 |
 | `    table`                              |    91.0 |    87.8 |    89.5 |    91.0 |
 | `      BaseObjectTable.tsx`              |    89.6 |    57.1 |   100.0 |    89.6 |
 | `      CommonColumns.tsx`                |    96.5 |   100.0 |    66.7 |    96.5 |
@@ -162,24 +162,25 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    41.9 |    87.5 |    62.2 |    41.9 |
+| `  shared`                               |    39.5 |    86.3 |    60.5 |    39.5 |
 | `    containers`                         |    60.4 |   100.0 |   100.0 |    60.4 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      DetailsSection.tsx`               |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      ViewCard.tsx`                     |   100.0 |   100.0 |   100.0 |   100.0 |
-| `    hooks`                              |     8.9 |    50.0 |    33.3 |     8.9 |
+| `    hooks`                              |     7.5 |    44.4 |    28.6 |     7.5 |
 | `      useAutoAdjustedWidth.tsx`         |     0   |     0   |     0   |     0   |
 | `      useClickOutside.tsx`              |    87.5 |    80.0 |   100.0 |    87.5 |
 | `      useCopyToClipboard.tsx`           |     1.1 |   100.0 |     0   |     1.1 |
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
-| `    lib`                                |    74.1 |    92.9 |    66.7 |    74.1 |
+| `      usePageBrightness.tsx`            |     0   |     0   |     0   |     0   |
+| `    lib`                                |    73.6 |    92.9 |    66.7 |    73.6 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
 | `      setUtils.ts`                      |   100.0 |    94.1 |   100.0 |   100.0 |
 | `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
-| `      stringUtils.ts`                   |    65.9 |   100.0 |    50.0 |    65.9 |
+| `      stringUtils.ts`                   |    64.4 |   100.0 |    50.0 |    64.4 |
 | `    ui`                                 |    41.8 |    88.9 |    55.6 |    41.8 |
 | `      CommaSeparated.tsx`               |    77.3 |    87.5 |    50.0 |    77.3 |
 | `      Deemphasized.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -192,12 +193,12 @@
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    15.3 |    67.7 |    43.5 |    15.3 |
+| `  widgets`                              |    15.2 |    67.9 |    44.0 |    15.2 |
 | `    cardlists`                          |    95.7 |    75.0 |   100.0 |    95.7 |
 | `      CardList.tsx`                     |   100.0 |    75.0 |   100.0 |   100.0 |
 | `      ResponsiveGrid.tsx`               |    89.7 |    75.0 |   100.0 |    89.7 |
 | `    CommonObjectives.tsx`               |     0   |     0   |     0   |     0   |
-| `    controls`                           |    32.2 |    81.4 |    76.3 |    32.2 |
+| `    controls`                           |    31.7 |    81.6 |    76.9 |    31.7 |
 | `      components`                       |    63.1 |    80.6 |    84.2 |    63.1 |
 | `        Selector.tsx`                   |    97.9 |    93.3 |   100.0 |    97.9 |
 | `        SelectorDisplay.tsx`            |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -205,11 +206,12 @@
 | `        SelectorLabel.tsx`              |    84.1 |    33.3 |   100.0 |    84.1 |
 | `        SelectorOption.tsx`             |    75.5 |    78.6 |    66.7 |    75.5 |
 | `        TextInput.tsx`                  |     0   |     0   |     0   |     0   |
-| `      selectors`                        |    11.0 |    86.2 |    72.2 |    11.0 |
+| `      selectors`                        |    10.6 |    86.7 |    73.7 |    10.6 |
 | `        LanguageScopeSelector.tsx`      |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageSourceSelector.tsx`     |     0   |   100.0 |   100.0 |     0   |
 | `        LocaleSeparatorSelector.tsx`    |     0   |   100.0 |   100.0 |     0   |
 | `        ObjectTypeSelector.tsx`         |     0   |     0   |     0   |     0   |
+| `        PageBrightnessSelector.tsx`     |     0   |   100.0 |   100.0 |     0   |
 | `        ProfileSelector.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `        SearchBar.tsx`                  |     0   |     0   |     0   |     0   |
 | `        SearchBySelector.tsx`           |     0   |   100.0 |   100.0 |     0   |

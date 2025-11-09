@@ -8,6 +8,8 @@ import { PageParamsOptional } from '@features/page-params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 
+import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+
 const AboutPage: React.FC = () => {
   return (
     <PageContainer>
@@ -297,6 +299,8 @@ function DictionaryEntry({ term, children }: { term: ReactNode; children: ReactN
 }
 
 function LangNavTitle() {
+  const { pageBrightness } = usePageBrightness();
+
   return (
     <div
       className="logo"
@@ -309,7 +313,12 @@ function LangNavTitle() {
         gap: '0.5em',
       }}
     >
-      <img src="LangNavLogo.svg" width="120px" height="60px" alt="LangNav Logo" />
+      <img
+        src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
+        width="120px"
+        height="60px"
+        alt="LangNav Logo"
+      />
       <span>
         <strong>Lang</strong>uage <strong>Nav</strong>igator
       </span>

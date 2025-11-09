@@ -8,6 +8,11 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <style>
+    :root {
+      --color-text: #04355c;
+      --color-pointer: #e17919;
+    }
+
     #logoImage text {
       alignment-baseline: central;
       text-anchor: middle;
@@ -16,43 +21,20 @@
     #logoImage path {
       transform-origin: center;
     }
-    #logoImage rect {
-      fill: #007bff;
-    }
     #logoImage text, #logoImage #compass {
-      fill: #fff;
+      fill: var(--color-text);
     }
     #logoImage #outerCircle {
-      stroke: #fff;
+      stroke: var(--color-text);
     }
     #logoImage #pointerLarge {
-      fill: #fb8c00;
+      fill: var(--color-pointer);
     }
     #logoImage #innerCircle {
       fill: #ddd;
     }
-    
-    @media (prefers-color-scheme: dark) {
-      #logoImage rect {
-        fill: #3399ff;
-      }
-      #logoImage text, #logoImage #compass {
-        fill: #04355c;
-      }
-      #logoImage #outerCircle {
-        stroke: #04355c;
-      }
-      #logoImage #pointerLarge {
-        stroke: #e17919;
-      }
-      #logoImage #innerCircle {
-        fill: #ddd; 
-      }
-    }
-    
   </style>
   <g id="logoImage">
-    <rect id="bg" x="0" y="0" width="100%" height="100%" />
     <g id="compass">
       <circle id="outerCircle"
          style="fill:none; stroke-width:20; stroke-opacity:1"

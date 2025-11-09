@@ -18,6 +18,7 @@ export interface UseStoredParamsReturn<T> {
 export default function useStoredParams<T>(
   key: string,
   defaultValue: T | (() => T),
+  store: 'session' | 'local' = 'session', // "Session" will only persist in the tab, "Local" will persist across tabs
 ): UseStoredParamsReturn<T> {
   const resolveDefault = useCallback(() => {
     return typeof defaultValue === 'function' ? (defaultValue as () => T)() : defaultValue;
@@ -25,79 +26,95 @@ export default function useStoredParams<T>(
 
   const read = useCallback((): T => {
     try {
-      const raw = sessionStorage.getItem(key);
+      const raw = store === 'session' ? sessionStorage.getItem(key) : localStorage.getItem(key);
       if (raw == null) return resolveDefault();
       return JSON.parse(raw) as T;
     } catch {
       // if parse fails, reset to default
       return resolveDefault();
     }
-  }, [key, resolveDefault]);
+  }, [key, resolveDefault, store]);
 
   const [value, setValueState] = useState<T>(() => read());
 
-  // write to sessionStorage when value changes
+  // write to local/sessionStorage when value changes
   useEffect(() => {
     try {
-      sessionStorage.setItem(key, JSON.stringify(value));
+      if (store === 'session') {
+        sessionStorage.setItem(key, JSON.stringify(value));
+      } else {
+        localStorage.setItem(key, JSON.stringify(value));
+      }
     } catch {
       // ignore quota / serialization errors
     }
-  }, [key, value]);
+  }, [key, value, store]);
 
-  // Commented out, only applicable to `localStorage`
-  // // listen for storage events to sync across tabs
-  // useEffect(() => {
-  //   const handle = (e: StorageEvent) => {
-  //     if (e.storageArea !== sessionStorage) return;
-  //     if (e.key !== key) return;
-  //     try {
-  //       if (e.newValue == null) {
-  //         setValueState(resolveDefault());
-  //       } else {
-  //         setValueState(JSON.parse(e.newValue) as T);
-  //       }
-  //     } catch {
-  //       setValueState(resolveDefault());
-  //     }
-  //   };
-  //   window.addEventListener('storage', handle);
-  //   return () => window.removeEventListener('storage', handle);
-  // }, [key, resolveDefault]);
+  // listen for storage events to sync across tabs
+  useEffect(() => {
+    const handle = (e: StorageEvent) => {
+      if (store === 'session') return; // sessionStorage is per-tab only
+      if (e.storageArea !== localStorage) return;
+      if (e.key !== key) return;
+      try {
+        if (e.newValue == null) {
+          setValueState(resolveDefault());
+        } else {
+          setValueState(JSON.parse(e.newValue) as T);
+        }
+      } catch {
+        setValueState(resolveDefault());
+      }
+    };
+    window.addEventListener('storage', handle);
+    return () => window.removeEventListener('storage', handle);
+  }, [key, resolveDefault, store]);
 
   const setValue = useCallback(
     (updater: Updater<T>) => {
       setValueState((prev) => {
         const next = typeof updater === 'function' ? (updater as (p: T) => T)(prev) : updater;
         try {
-          sessionStorage.setItem(key, JSON.stringify(next));
+          if (store === 'session') {
+            sessionStorage.setItem(key, JSON.stringify(next));
+          } else {
+            localStorage.setItem(key, JSON.stringify(next));
+          }
         } catch {
           // ignore
         }
         return next;
       });
     },
-    [key],
+    [key, store],
   );
 
   const clear = useCallback(() => {
     const def = resolveDefault();
     try {
-      sessionStorage.setItem(key, JSON.stringify(def));
+      if (store === 'session') {
+        sessionStorage.setItem(key, JSON.stringify(def));
+      } else {
+        localStorage.setItem(key, JSON.stringify(def));
+      }
     } catch {
       // ignore
     }
     setValueState(def);
-  }, [key, resolveDefault]);
+  }, [key, resolveDefault, store]);
 
   const remove = useCallback(() => {
     try {
-      sessionStorage.removeItem(key);
+      if (store === 'session') {
+        sessionStorage.removeItem(key);
+      } else {
+        localStorage.removeItem(key);
+      }
     } catch {
       // ignore
     }
     setValueState(resolveDefault());
-  }, [key, resolveDefault]);
+  }, [key, resolveDefault, store]);
 
   return { value, setValue, clear, remove };
 }

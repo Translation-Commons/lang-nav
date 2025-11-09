@@ -13,6 +13,7 @@ export function toTitleCase(str: string): string {
 
 export function toSentenceCase(str: string): string {
   return str
+    .replace(/_/g, ' ')
     .replace(/\b\w/, (char) => char.toUpperCase())
     .replace(/([a-z])([A-Z])/g, (_match, p1, p2) => p1 + ' ' + p2.toLowerCase());
 }

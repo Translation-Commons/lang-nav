@@ -5,16 +5,8 @@
   /* Guarantee it always spans the viewport */
 }
 
-.object-map-circle {
-  transition:
-    fill 0.25s,
-    stroke 0.25s;
-  mix-blend-mode: normal;
-  /* mix-blend-mode: hard-light; */
-  /* stroke: hsl(210, 100%, 60%); */
-}
-
-:root {
+:root,
+:root.light {
   --color-text: #04355c;
   /* Primary text color */
   --color-text-secondary: grey;
@@ -166,4 +158,25 @@ button:hover .highlighted {
     --color-text-blue: #42a5f5;
     --color-text-purple: #ce93d8;
   }
+}
+
+/* Keep this in sync with the above @media query */
+:root.dark {
+  --color-text: #f1f1f1;
+  --color-text-secondary: #aaaaaa;
+  --color-background: #121212;
+  --color-text-highlight: #575741;
+
+  --color-button-primary: #3399ff;
+  --color-button-secondary: #444;
+  --color-button-hover: #0061c3;
+
+  --color-shadow: rgba(255, 255, 255, 0.5);
+
+  --color-text-red: #ff6e6e;
+  --color-text-orange: #ffb74d;
+  --color-text-yellow: #ffeb3b;
+  --color-text-green: #66bb6a;
+  --color-text-blue: #42a5f5;
+  --color-text-purple: #ce93d8;
 }

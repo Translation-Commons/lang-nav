@@ -39,17 +39,18 @@ export enum SortDirection {
 
 export type ColorBy = SortBy | 'None';
 
+// Force it not to use 0 because that will be treated as falsy and removed
 export enum ColorGradient {
-  DivergingBlueToOrange, // Blue - White - Orange
-  DivergingOrangeToBlue, // Orange - White - Blue
-  DivergingRedToGreen, // Red - White - Green
-  DivergingGreenToRed, // Green - White - Red
-  StopLightRedToGreen, // Red - Yellow - Green
-  StopLightGreenToRed, // Green - Yellow - Red
-  HueRainbowBlueToRed, // Blue - Green - Yellow - Orange - Red
-  HueRainbowRedToBlue, // Red - Orange - Yellow - Green - Blue
-  SequentialBlue, // Light to Dark Blue
-  SequentialBlueReverse, // Dark to Light Blue
-  SequentialOrange, // Light to Dark Orange
-  SequentialOrangeReverse, // Dark to Light Orange
+  DivergingBlueToOrange = 1, // Blue - White - Orange
+  DivergingOrangeToBlue = 2, // Orange - White - Blue
+  DivergingRedToGreen = 3, // Red - White - Green
+  DivergingGreenToRed = 4, // Green - White - Red
+  StopLightRedToGreen = 11, // Red - Yellow - Green
+  StopLightGreenToRed = 12, // Green - Yellow - Red
+  HueRainbowBlueToRed = 21, // Blue - Green - Yellow - Orange - Red
+  HueRainbowRedToBlue = 22, // Red - Orange - Yellow - Green - Blue
+  SequentialBlue = 31, // Light to Dark Blue
+  SequentialBlueReverse = 32, // Dark to Light Blue
+  SequentialOrange = 33, // Light to Dark Orange
+  SequentialOrangeReverse = 34, // Dark to Light Orange
 }

@@ -1,11 +1,18 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+
 const PageNavBar: React.FC = () => {
+  const { pageBrightness } = usePageBrightness();
   return (
     <NavBarContainer>
       <NavBarTitle>
-        <img src="LangNavLogoNavBar.svg" width="60px" alt="LangNav Logo" />
+        <img
+          src={`/lang-nav/logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
+          width="60px"
+          alt="LangNav Logo"
+        />
         <span>
           <strong>Lang</strong>uage <strong>Nav</strong>igator
         </span>

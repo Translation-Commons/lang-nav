@@ -16,6 +16,7 @@ import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
+import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
@@ -64,6 +65,7 @@ const SidePanel: React.FC = () => {
         <ColorBySelector />
         <ColorGradientSelector />
         <LocaleSeparatorSelector />
+        <PageBrightnessSelector />
       </SidePanelSection>
 
       <SidePanelToggleButton
