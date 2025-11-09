@@ -5,15 +5,6 @@
   /* Guarantee it always spans the viewport */
 }
 
-.object-map-circle {
-  transition:
-    fill 0.25s,
-    stroke 0.25s;
-  mix-blend-mode: normal;
-  /* mix-blend-mode: hard-light; */
-  /* stroke: hsl(210, 100%, 60%); */
-}
-
 :root {
   --color-text: #04355c;
   /* Primary text color */
@@ -167,3 +158,46 @@ button:hover .highlighted {
     --color-text-purple: #ce93d8;
   }
 }
+
+/* Keep this in sync with the above @media query */
+:root.dark {
+  --color-text: #f1f1f1;
+  --color-text-secondary: #aaaaaa;
+  --color-background: #121212;
+  --color-text-highlight: #575741;
+
+  --color-button-primary: #3399ff;
+  --color-button-secondary: #444;
+  --color-button-hover: #0061c3;
+
+  --color-shadow: rgba(255, 255, 255, 0.5);
+
+  --color-text-red: #ff6e6e;
+  --color-text-orange: #ffb74d;
+  --color-text-yellow: #ffeb3b;
+  --color-text-green: #66bb6a;
+  --color-text-blue: #42a5f5;
+  --color-text-purple: #ce93d8;
+}
+
+/* @media (color-scheme: light) {
+:root {
+  --color-text: #04355c;
+  --color-text-secondary: grey;
+  --color-text-highlight: #ffffa1;
+  --color-background: #ffffff;
+
+  --color-button-primary: #007bff;
+  --color-button-secondary: #f0f0f0;
+  --color-button-hover: #3399ff;
+
+  --color-shadow: rgba(0, 0, 0, 0.1);
+
+  --color-text-red: #df7e7c;
+  --color-text-orange: #fb8c00;
+  --color-text-yellow: #fbc02d;
+  --color-text-green: #43a047;
+  --color-text-blue: #1e88e5;
+  --color-text-purple: #8e24aa;
+}
+} */

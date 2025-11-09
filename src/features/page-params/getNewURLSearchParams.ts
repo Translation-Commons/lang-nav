@@ -63,6 +63,8 @@ export function getNewURLSearchParams(
       next.delete(key);
       return;
     }
+    if (key === 'colorGradient')
+      console.log('checking colorGradient', value, defaults[key as PageParamKey]?.toString());
     if (value === defaults[key as PageParamKey]?.toString()) {
       next.delete(key);
     }

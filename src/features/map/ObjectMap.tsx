@@ -115,7 +115,7 @@ const HoverableCircle: React.FC<{
       r={2}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
-      // style={{ mixBlendMode: 'hard-light' }}
+      style={{ transition: 'fill 0.25s, stroke 0.25s' }}
       className="object-map-circle"
       strokeWidth={1}
       onMouseEnter={(e: React.MouseEvent) => {

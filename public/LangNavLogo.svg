@@ -30,7 +30,7 @@
     }
     
     @media (prefers-color-scheme: dark) {
-      #logoImage text, #logoImage #compass {
+      #logoImage text, #logoImage #compass, #logoImage #innerCircle {
         fill: #f1f1f1;
       }
       #logoImage #outerCircle {
@@ -39,8 +39,17 @@
       #logoImage #pointerLarge {
         stroke: #fb8c00;
       }
-      #logoImage #innerCircle {
-        fill: #f1f1f1; 
+    }
+
+    .light {
+      #logoImage text, #logoImage #compass, #logoImage #innerCircle {
+        fill: #04355c;
+      }
+      #logoImage #outerCircle {
+        stroke: #04355c;
+      }
+      #logoImage #pointerLarge {
+        stroke: #e17919;
       }
     }
   </style>
