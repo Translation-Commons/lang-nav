@@ -162,7 +162,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    39.6 |    86.3 |    60.5 |    39.6 |
+| `  shared`                               |    39.5 |    86.3 |    60.5 |    39.5 |
 | `    containers`                         |    60.4 |   100.0 |   100.0 |    60.4 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -175,12 +175,12 @@
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
 | `      usePageBrightness.tsx`            |     0   |     0   |     0   |     0   |
-| `    lib`                                |    74.1 |    92.9 |    66.7 |    74.1 |
+| `    lib`                                |    73.6 |    92.9 |    66.7 |    73.6 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
 | `      setUtils.ts`                      |   100.0 |    94.1 |   100.0 |   100.0 |
 | `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
-| `      stringUtils.ts`                   |    65.9 |   100.0 |    50.0 |    65.9 |
+| `      stringUtils.ts`                   |    64.4 |   100.0 |    50.0 |    64.4 |
 | `    ui`                                 |    41.8 |    88.9 |    55.6 |    41.8 |
 | `      CommaSeparated.tsx`               |    77.3 |    87.5 |    50.0 |    77.3 |
 | `      Deemphasized.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
