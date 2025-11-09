@@ -5,9 +5,9 @@ This repository contain a dataset about the world's languages and language-like 
 ![Preview of the website](/public/preview.png)
 
 There are multiple ways to visualize the data
-|Card List|Details|Hierarchy|Table|Reports|
-|--|--|--|--|--|
-|<img src="public/cardlist.png" alt="Card List" style="max-width: 200px;" />|<img src="public/details.png" alt="Details" style="max-width: 200px;" />|<img src="public/hierarchy.png" alt="Hierarchy" style="max-width: 200px;" />|<img src="public/table.png" alt="Table" style="max-width: 200px;" />|<img src="public/reports.png" alt="Reports" style="max-width: 200px;" />
+| Card List                                                                   | Details                                                                  | Hierarchy                                                                    | Table                                                                | Reports                                                                  | Map                                                              |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------- |
+| <img src="public/cardlist.png" alt="Card List" style="max-width: 200px;" /> | <img src="public/details.png" alt="Details" style="max-width: 200px;" /> | <img src="public/hierarchy.png" alt="Hierarchy" style="max-width: 200px;" /> | <img src="public/table.png" alt="Table" style="max-width: 200px;" /> | <img src="public/reports.png" alt="Reports" style="max-width: 200px;" /> | <img src="public/map.png" alt="Map" style="max-width: 200px;" /> |
 
 ## Project Overview
 
@@ -97,8 +97,8 @@ Here's a list of planned functionality. Completed functions are checked off.
     - [x] ISO parent/child connections
     - [x] Language families
     - [x] Glottolog
-    - [ ] Digital Support details
-    - [ ] Vitality details
+    - [x] Digital Support details
+    - [x] Vitality details
     - [ ] Keyboard availability details
   - [x] Territories
     - [x] Countries & Dependencies
@@ -110,18 +110,20 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [x] Writing Systems
     - [x] Basic data
     - [x] Relationship w/ other writing systems (containment, lineage)
-  - [ ] Language Variants / IANA tags
+  - [x] Language Variants / IANA tags
   - [x] Censuses
     - [x] Regular censuses
     - [x] Include citation information
-    - [ ] Continue importing new censuses
+    - [x] Continue importing new censuses
     - [ ] Convert other imported datasets into census-like objects
 - [x] Views
   - [x] Cards
   - [x] Details
   - [x] Hierarchy
   - [x] Table
-  - [ ] Map
+  - [x] Map
+    - [ ] Extend for more data layers
+  - [ ] Graphs
   - [x] Reports
     - [x] Language name overlap
     - [ ] Invalid languages
@@ -148,7 +150,7 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [x] Visual options
     - [x] Change locale separator (\_ or -)
   - [ ] Selection
-  - [ ] Export
+  - [x] Export
 - [ ] Manage data sources
   - [x] Show results based on different definitions of what a language is
     - [x] ISO, Glottolog, CLDR, All

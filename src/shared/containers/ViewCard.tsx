@@ -2,7 +2,7 @@ import React from 'react';
 
 interface Props {
   children: React.ReactNode;
-  style: React.CSSProperties;
+  style?: React.CSSProperties;
 }
 
 const ViewCard: React.FC<Props> = ({ children, style }) => {
