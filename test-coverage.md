@@ -106,7 +106,7 @@
 | `      ObjectMap.tsx`                    |    19.4 |   100.0 |     0   |    19.4 |
 | `    modal`                              |     0   |     0   |     0   |     0   |
 | `      ViewModal.tsx`                    |     0   |     0   |     0   |     0   |
-| `    page-params`                        |    36.7 |    45.0 |    25.0 |    36.7 |
+| `    page-params`                        |    36.9 |    45.0 |    25.0 |    36.9 |
 | `      getNewURL.ts`                     |     0   |     0   |     0   |     0   |
 | `      getNewURLSearchParams.ts`         |     0   |   100.0 |   100.0 |     0   |
 | `      getParamsFromURL.ts`              |     0   |     0   |     0   |     0   |
