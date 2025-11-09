@@ -8,19 +8,9 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <style>
-    :root, .light {
+    :root {
       --color-text: #fff;
       --color-bg: #007bff;
-    }
-     .dark {
-      --color-text: #04355c;
-      --color-bg: #3399ff;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --color-text: #04355c;
-        --color-bg: #3399ff;
-      }
     }
 
     #logoImage text {

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 export type PageBrightnessPreference = 'light' | 'dark' | 'follow device';
 export type PageBrightness = 'light' | 'dark';
@@ -8,11 +8,13 @@ export function usePageBrightness() {
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
   const [preference, setPreference] = useState<PageBrightnessPreference>(() => {
-    return (localStorage.getItem('theme') as PageBrightnessPreference | null) ?? 'follow device';
+    return (
+      (localStorage.getItem('page-brightness') as PageBrightnessPreference | null) ??
+      'follow device'
+    );
   });
 
-  const resolvedPageBrightness: PageBrightness =
-    preference === 'follow device' ? getSystemPageBrightness() : preference;
+  const pageBrightness = preference === 'follow device' ? getSystemPageBrightness() : preference;
 
   // Apply the resolved theme to <html> (or <body>)
   useEffect(() => {
@@ -22,13 +24,24 @@ export function usePageBrightness() {
 
   // Persist preference (not resolved value)
   useEffect(() => {
-    localStorage.setItem('theme', preference);
+    localStorage.setItem('page-brightness', preference);
   }, [preference]);
+
+  // Listen to storage changes
+  useEffect(() => {
+    const onStorage = (e: StorageEvent) => {
+      if (e.key !== 'page-brightness') return;
+      const newPref = (e.newValue as PageBrightnessPreference | null) ?? 'follow device';
+      setPreference((prev) => (prev === newPref ? prev : newPref));
+    };
+    window.addEventListener('storage', onStorage);
+    return () => window.removeEventListener('storage', onStorage);
+  }, []);
 
   // Public API
   return {
     preference,
-    resolvedPageBrightness,
+    pageBrightness,
     setPreference,
   };
 }
