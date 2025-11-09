@@ -11,7 +11,11 @@ import { SelectorDisplay } from '../../widgets/controls/components/SelectorDispl
 
 import BaseColorBar from './BaseColorBar';
 
-const ColorGradientSelector: React.FC = () => {
+type Props = {
+  display?: SelectorDisplay;
+};
+
+const ColorGradientSelector: React.FC<Props> = ({ display = SelectorDisplay.Dropdown }) => {
   const { colorBy, colorGradient, updatePageParams, view } = usePageParams();
 
   // Only showing if coloring is enabled
@@ -22,12 +26,12 @@ const ColorGradientSelector: React.FC = () => {
 
   return (
     <Selector<ColorGradient>
-      selectorLabel="Color gradient"
+      selectorLabel={display === SelectorDisplay.Dropdown ? 'Color gradient' : undefined}
       selectorDescription="Choose the range of colors used to represent values."
       options={Object.values(ColorGradient).filter((cg) => typeof cg === 'number')}
       onChange={(colorGradient) => updatePageParams({ colorGradient })}
       selected={colorGradient}
-      display={SelectorDisplay.Dropdown}
+      display={display}
       getOptionLabel={(colorGradient) => (
         <div style={{ minWidth: '4em', height: '16px', display: 'inline-block' }}>
           <BaseColorBar colorGradient={colorGradient} />

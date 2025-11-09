@@ -6,9 +6,9 @@ import { ColorGradient } from './SortTypes';
 export function getColorGradientFunction(colorGradient: ColorGradient): (value: number) => string {
   switch (colorGradient) {
     case ColorGradient.DivergingBlueToOrange:
-      //   hsl(240, 80%, 60%) -> hsl(135, 80%, 100%) -> hsl(30, 80%, 60%)
+      //   hsl(240, 90%, 60%) -> hsl(135, 90%, 100%) -> hsl(30, 90%, 60%)
       return (value: number) => {
-        return `hsl(${value < 0.5 ? 240 : 30}, 80%, ${100 - Math.abs(value - 0.5) * 80}%)`;
+        return `hsl(${value < 0.5 ? 240 : 30}, 90%, ${100 - Math.abs(value - 0.5) * 80}%)`;
       };
     case ColorGradient.DivergingRedToGreen:
       // hsl(0, 80%, 60%) ->  hsl(0, 80%, 100%) ->  hsl(120, 80%, 60%)

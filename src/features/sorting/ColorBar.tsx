@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -32,14 +32,14 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
     return null;
   }
 
-  const ticks = getTicks(coloringFunctions);
+  const ticks = useMemo(() => getTicks(coloringFunctions), [coloringFunctions]);
 
   return (
     <div style={{ width: '100%' }}>
       <div style={{ height: '1em', width: '100%' }}>
         <BaseColorBar colorGradient={colorGradient} />
       </div>
-      <div style={{ position: 'relative', height: '1.5em', width: '100%' }}>
+      <div style={{ position: 'relative', height: '2.5em', width: '100%' }}>
         {ticks.map(({ position, label }, index) => (
           <div
             key={index}
