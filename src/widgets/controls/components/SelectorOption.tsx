@@ -6,7 +6,7 @@ import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import { SelectorDisplay } from './SelectorDisplay';
 
-type OptionProps<T extends React.Key> = {
+type OptionProps<T> = {
   display: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer

@@ -31,10 +31,10 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
   return getSortFunctionParameterized(sortBy, effectiveLanguageSource, sortBehavior);
 }
 
-function getSortField(
+export function getSortField(
   object: ObjectData,
   sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource,
+  effectiveLanguageSource: LanguageSource = LanguageSource.All,
 ): string | number | undefined {
   switch (sortBy) {
     case SortBy.Code:

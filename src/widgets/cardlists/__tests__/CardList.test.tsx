@@ -15,6 +15,9 @@ import CardList from '../CardList';
 vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
 vi.mock('@features/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
+vi.mock('@features/sorting/useColors', () => ({
+  default: vi.fn().mockReturnValue({ getColor: () => 'inherit' }),
+}));
 
 describe('CardList', () => {
   const mockedObjects = getFullyInstantiatedMockedObjects();

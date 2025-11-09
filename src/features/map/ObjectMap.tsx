@@ -2,7 +2,10 @@ import React, { useCallback, useMemo, useState } from 'react';
 
 import useHoverCard from '@features/hovercard/useHoverCard';
 import { ObjectType } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
 import usePagination from '@features/pagination/usePagination';
+import ColorBar from '@features/sorting/ColorBar';
+import useColors from '@features/sorting/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
@@ -24,12 +27,15 @@ const ROBINSON_MAPS = {
 };
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_borders' }) => {
+  const { colorBy } = usePageParams();
   const { getCurrentObjects } = usePagination<ObjectData>();
   const renderableObjects = useMemo(
-    () => getCurrentObjects(objects.filter((obj) => obj.type === ObjectType.Language)),
+    // Reverse so the "first" objects are drawn on top.
+    () => getCurrentObjects(objects.filter((obj) => obj.type === ObjectType.Language)).reverse(),
     [objects, getCurrentObjects],
   );
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
+  const coloringFunctions = useColors({ objects });
 
   const buildOnMouseEnter = useCallback(
     (obj: ObjectData) => (e: React.MouseEvent) => {
@@ -66,8 +72,13 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
           if (obj.type === ObjectType.Language) {
             return (
               <HoverableCircle
-                object={obj}
+                color={
+                  colorBy === 'None'
+                    ? undefined
+                    : (coloringFunctions.getColor(obj) ?? 'transparent')
+                }
                 key={idx}
+                object={obj}
                 onMouseEnter={buildOnMouseEnter(obj)}
                 onMouseLeave={onMouseLeaveTriggeringElement}
               />
@@ -75,15 +86,18 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800, borders = 'no_bor
           }
         })}
       </svg>
+
+      {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
     </div>
   );
 };
 
 const HoverableCircle: React.FC<{
+  color?: string;
   object: ObjectData;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
-}> = ({ object, onMouseEnter, onMouseLeave }) => {
+}> = ({ object, color, onMouseEnter, onMouseLeave }) => {
   if (object.type !== ObjectType.Language) return null;
   if (object.latitude == null || object.longitude == null) {
     return null;
@@ -99,8 +113,10 @@ const HoverableCircle: React.FC<{
       cx={x * 180 - 10} // The map is 10 degrees rotated to preserve land borders
       cy={-y * 90}
       r={2}
-      fill={isActive ? 'var(--color-button-primary)' : 'transparent'}
-      stroke="var(--color-button-primary)"
+      fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
+      stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
+      // style={{ mixBlendMode: 'hard-light' }}
+      className="object-map-circle"
       strokeWidth={1}
       onMouseEnter={(e: React.MouseEvent) => {
         onMouseEnter(e);

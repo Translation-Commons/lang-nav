@@ -1,3 +1,5 @@
+import { ColorBy } from '@features/sorting/SortTypes';
+
 import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
@@ -45,6 +47,7 @@ export function getNewURLSearchParams(
     next.get('objectType') as ObjectType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
+    next.get('colorBy') as ColorBy,
   );
   Array.from(next.entries()).forEach(([key, value]) => {
     const defaultValue = defaults[key as PageParamKey];
@@ -53,6 +56,7 @@ export function getNewURLSearchParams(
     if (key === 'objectType' && value !== ObjectType.Language) return;
     if (key === 'view') return;
     if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
+    if (key === 'colorBy' && value !== 'None') return;
 
     // If the default is the empty array you can remove it
     if (value === '[]' && Array.isArray(defaultValue) && defaultValue.length === 0) {
