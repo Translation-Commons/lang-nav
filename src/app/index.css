@@ -5,7 +5,8 @@
   /* Guarantee it always spans the viewport */
 }
 
-:root {
+:root,
+:root.light {
   --color-text: #04355c;
   /* Primary text color */
   --color-text-secondary: grey;
