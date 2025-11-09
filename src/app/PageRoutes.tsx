@@ -13,8 +13,17 @@ export default function PageRoutes() {
         <Route path="/" element={<Navigate to={LangNavPageName.Intro} replace />} />
         <Route path={LangNavPageName.Intro} element={<IntroPage />} />
         <Route path={LangNavPageName.Data} element={<DataPage />} />
-        {/* <Route path={LangNavPageName.Details} element={<DetailsPage />} /> */}
         <Route path={LangNavPageName.About} element={<AboutPage />} />
+        <Route
+          path="/logo/*"
+          element={
+            <img
+              src={window.location.pathname}
+              alt="logo"
+              style={{ maxWidth: '100%', height: 'auto' }}
+            />
+          }
+        />
       </Routes>
     </>
   );
@@ -38,10 +47,8 @@ const RemoveTrailingSlash = ({ ...rest }) => {
   } else return null;
 };
 
-// TODO
 export enum LangNavPageName {
   Intro = 'intro',
   Data = 'data',
-  // Details = 'details',
   About = 'about',
 }

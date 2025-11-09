@@ -9,8 +9,8 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <style>
     :root {
-      --color-text: #04355c;
-      --color-pointer: #e17919;
+      --color-text: #f1f1f1;
+      --color-pointer: #fb8c00;
     }
 
     #logoImage text {

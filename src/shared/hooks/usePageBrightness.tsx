@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export type PageBrightnessPreference = 'light' | 'dark' | 'follow device';
 export type PageBrightness = 'light' | 'dark';

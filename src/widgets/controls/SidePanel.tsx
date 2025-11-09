@@ -65,8 +65,8 @@ const SidePanel: React.FC = () => {
         <ColorBySelector />
         <ColorGradientSelector />
         <LocaleSeparatorSelector />
+        <PageBrightnessSelector />
       </SidePanelSection>
-      <PageBrightnessSelector />
 
       <SidePanelToggleButton
         isOpen={isOpen}
