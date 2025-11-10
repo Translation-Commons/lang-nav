@@ -7,6 +7,7 @@ import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
+import TerritoryFilterSelector from '../../features/filtering/TerritoryFilterSelector';
 import LimitInput from '../../features/pagination/LimitInput';
 import SortBySelector from '../../features/sorting/SortBySelector';
 import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
@@ -19,7 +20,6 @@ import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
-import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
 import {
@@ -68,7 +68,7 @@ const SidePanel: React.FC = () => {
           panelWidth={panelWidth}
           title="Filter"
           optionsName="filters"
-          alwaysShownNodes={<TerritoryFilterSelector />}
+          alwaysShownNodes={<TerritoryFilterSelector display={SelectorDisplay.ButtonList} />}
         >
           <LanguageScopeSelector />
           <TerritoryScopeSelector />

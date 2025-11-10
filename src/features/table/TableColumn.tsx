@@ -7,6 +7,8 @@ import TableValueType from './TableValueType';
 interface TableColumn<T> {
   /** Unique key for the column, also used as the plain text header for the column in the export  */
   readonly key: string;
+  /** Human-readable name for the column header */
+  readonly label?: React.ReactNode;
   /** Description shown when hovering over an info icon next to the column */
   readonly description?: React.ReactNode;
   /** The group this column belongs to, used to organize columns in the UI */

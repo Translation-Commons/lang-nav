@@ -5,17 +5,13 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
+import { getFilterByTerritory } from '@features/filtering/filterByConnections';
 import usePagination from '@features/pagination/usePagination';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-  getScopeFilter,
-} from '../filtering/filter';
+import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from '../filtering/filter';
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getSortFunction } from '../sorting/sort';
 

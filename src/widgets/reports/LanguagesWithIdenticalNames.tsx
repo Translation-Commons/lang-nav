@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getFilterBySubstring, getFilterByTerritory } from '@features/filtering/filter';
+import { getFilterBySubstring } from '@features/filtering/filter';
+import { getFilterByTerritory } from '@features/filtering/filterByConnections';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';

@@ -27,7 +27,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
         <tr>
           {visibleColumns.map((column) => (
             <th key={column.key} style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH }}>
-              {column.key}
+              {column.label ?? column.key}
               {column.description && (
                 <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
                   <InfoIcon size="1em" display="block" />
