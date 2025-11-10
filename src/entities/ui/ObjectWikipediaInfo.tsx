@@ -50,18 +50,14 @@ export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ obje
   return <span style={{ color: getStatusColor(wikipedia.status) }}>{wikipedia.status}</span>;
 };
 
-export const WikipediaArticles: React.FC<{ object?: ObjectData; showURL?: boolean }> = ({
-  object,
-}) => {
+export const WikipediaArticles: React.FC<{ object?: ObjectData }> = ({ object }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
   if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
 
   return object.wikipedia.articles.toLocaleString();
 };
 
-export const WikipediaActiveUsers: React.FC<{ object?: ObjectData; showURL?: boolean }> = ({
-  object,
-}) => {
+export const WikipediaActiveUsers: React.FC<{ object?: ObjectData }> = ({ object }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
   if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
 

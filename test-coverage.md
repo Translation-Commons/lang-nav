@@ -6,7 +6,7 @@
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    39.7 |    84.1 |    44.7 |    39.7 |
+| `  entities`                             |    39.8 |    84.1 |    44.7 |    39.8 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -52,8 +52,8 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    46.2 |    58.5 |    33.3 |    46.2 |
-| `      CLDRCoverageInfo.tsx`             |    14.6 |   100.0 |     0   |    14.6 |
+| `    ui`                                 |    47.1 |    58.5 |    33.3 |    47.1 |
+| `      CLDRCoverageInfo.tsx`             |    15.8 |   100.0 |     0   |    15.8 |
 | `      CLDRCoverageLevels.tsx`           |     7.9 |   100.0 |     0   |     7.9 |
 | `      CLDRWarningNotes.tsx`             |    18.6 |   100.0 |     0   |    18.6 |
 | `      ICUSupportStatus.tsx`             |    25.0 |   100.0 |     0   |    25.0 |
@@ -61,7 +61,7 @@
 | `      ObjectField.tsx`                  |    89.6 |    66.7 |   100.0 |    89.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
-| `      ObjectWikipediaInfo.tsx`          |    16.2 |   100.0 |     0   |    16.2 |
+| `      ObjectWikipediaInfo.tsx`          |    17.2 |   100.0 |     0   |    17.2 |
 | `    varianttag`                         |    20.0 |   100.0 |     0   |    20.0 |
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |

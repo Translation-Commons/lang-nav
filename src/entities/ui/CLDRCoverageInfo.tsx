@@ -11,9 +11,6 @@ import { getCLDRCoverageColor } from './CLDRCoverageLevels';
 
 export const ObjectCLDRCoverageLevel: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object.type !== ObjectType.Language) return null;
-  if (object.ID === 'cmn') {
-    console.log('Debug cmn coverage', object.cldrCoverage);
-  }
 
   const { cldrCoverage, cldrDataProvider } = object;
 
