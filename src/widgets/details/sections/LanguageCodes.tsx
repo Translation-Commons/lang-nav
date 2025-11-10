@@ -21,9 +21,11 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <DetailsField
         title="Glottocode:"
         endContent={
-          <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
-            Glottolog
-          </LinkButton>
+          Glottolog.code && (
+            <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
+              Glottolog
+            </LinkButton>
+          )
         }
       >
         {Glottolog.code ? <>{Glottolog.code}</> : <Deemphasized>Not in Glottolog</Deemphasized>}
@@ -54,11 +56,13 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <DetailsField
         title="CLDR Code:"
         endContent={
-          <LinkButton
-            href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
-          >
-            CLDR XML
-          </LinkButton>
+          CLDR.code && (
+            <LinkButton
+              href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
+            >
+              CLDR XML
+            </LinkButton>
+          )
         }
       >
         {CLDR.code ? <>{CLDR.code}</> : <Deemphasized>Not in CLDR</Deemphasized>}

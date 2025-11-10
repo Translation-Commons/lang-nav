@@ -5,6 +5,7 @@ import TableValueType from '@features/table/TableValueType';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationFromDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
+import LanguagePopulationInSelectedTerritory from '@entities/language/LanguagePopulationInSelectedTerritory';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
@@ -50,6 +51,14 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) => <LanguagePopulationFromLocales lang={lang} />,
+    valueType: TableValueType.Numeric,
+    isInitiallyVisible: false,
+    columnGroup: 'Population',
+  },
+  {
+    key: 'Population (in Territory)',
+    description: 'The population of this language in the currently selected territory.',
+    render: (lang) => <LanguagePopulationInSelectedTerritory lang={lang} />,
     valueType: TableValueType.Numeric,
     isInitiallyVisible: false,
     columnGroup: 'Population',

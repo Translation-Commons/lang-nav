@@ -50,7 +50,7 @@ export const CLDRCoverageText: React.FC<{
 
   const warnings = <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />;
 
-  if (verbosity == 'coverage level') {
+  if (verbosity === 'coverage level') {
     return (
       <>
         {warnings}{' '}
@@ -59,7 +59,7 @@ export const CLDRCoverageText: React.FC<{
         </span>
       </>
     );
-  } else if (verbosity == 'count of locales') {
+  } else if (verbosity === 'count of locales') {
     return (
       <>
         {warnings} {cldrCoverage.countOfCLDRLocales}

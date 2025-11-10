@@ -21,7 +21,7 @@ const columns: TableColumn<LanguageData>[] = [
       <>
         The canonical language code used throughout this application. Generally if there is an ISO
         639-3 or ISO 639-5 code assigned to the language, that is used. Most other language families
-        and dialects without an ISO code have a Glottocode. A entries may have a custom code from
+        and dialects without an ISO code have a Glottocode. Some entries may have a custom code from
         other source, but the entry may be contentious.
       </>
     ),
@@ -62,7 +62,7 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) =>
-      lang.sourceSpecific.BCP.code != lang.sourceSpecific.ISO.code ? (
+      lang.sourceSpecific.BCP.code !== lang.sourceSpecific.ISO.code ? (
         lang.sourceSpecific.BCP.code
       ) : (
         <Deemphasized>{lang.sourceSpecific.BCP.code}</Deemphasized>
@@ -83,7 +83,7 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) =>
-      lang.sourceSpecific.CLDR.code != lang.sourceSpecific.ISO.code ? (
+      lang.sourceSpecific.CLDR.code !== lang.sourceSpecific.ISO.code ? (
         lang.sourceSpecific.CLDR.code
       ) : (
         <Deemphasized>{lang.sourceSpecific.CLDR.code}</Deemphasized>

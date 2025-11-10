@@ -14,6 +14,7 @@ import TableValueType from '@features/table/TableValueType';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import {
@@ -42,7 +43,7 @@ const LanguageTable: React.FC = () => {
           key: 'Scope',
           render: (lang) => lang.scope,
           isInitiallyVisible: false,
-          columnGroup: 'Other',
+          columnGroup: 'Context',
         },
         {
           key: 'ISO Retirement',
@@ -60,7 +61,27 @@ const LanguageTable: React.FC = () => {
             );
           },
           isInitiallyVisible: false,
-          columnGroup: 'Other',
+          columnGroup: 'Context',
+        },
+        {
+          key: 'Modality',
+          render: (lang) => lang.modality ?? <Deemphasized>—</Deemphasized>,
+          isInitiallyVisible: false,
+          columnGroup: 'Context',
+        },
+        {
+          key: 'Writing Systems',
+          description: (
+            <>
+              The writing systems used to write this language. The possible values come from ISO
+              15924, which include some combined systems like <code>Hani</code> including all
+              Chinese Characters, including Simplified <code>Hans</code> or Traditional{' '}
+              <code>Hant</code>.
+            </>
+          ),
+          render: (lang) => <LanguageWritingSystems lang={lang} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Context',
         },
         ...LanguagePopulationColumns,
         ...LanguageVitalityColumns,
@@ -128,7 +149,7 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
           valueType: TableValueType.Numeric,
-          columnGroup: 'Other',
+          columnGroup: 'Vitality',
         },
         {
           key: 'Plural rules',
