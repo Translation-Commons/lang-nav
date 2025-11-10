@@ -8,6 +8,7 @@ import TableColumn from '@features/table/TableColumn';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -84,7 +85,10 @@ const columns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) =>
       lang.sourceSpecific.CLDR.code !== lang.sourceSpecific.ISO.code ? (
-        lang.sourceSpecific.CLDR.code
+        <>
+          {lang.sourceSpecific.CLDR.code}
+          <CLDRWarningNotes object={lang} />
+        </>
       ) : (
         <Deemphasized>{lang.sourceSpecific.CLDR.code}</Deemphasized>
       ),

@@ -1,11 +1,12 @@
+import { ObjectType } from '@features/page-params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
+import TableValueType from '@features/table/TableValueType';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import {
-  CLDRCoverageText,
-  CoverageLevelsExplanation,
-  ICUSupportStatus,
-} from '@entities/ui/CLDRCoverageInfo';
+import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
+import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
+import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
+import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 import {
   WikipediaActiveUsers,
   WikipediaArticles,
@@ -36,7 +37,12 @@ const columns: TableColumn<LanguageData>[] = [
         <CoverageLevelsExplanation />
       </>
     ),
-    render: (lang) => <CLDRCoverageText object={lang} verbosity="coverage level" />,
+    render: (lang) => (
+      <>
+        <ObjectCLDRCoverageLevel object={lang} />
+        <CLDRWarningNotes object={lang} />
+      </>
+    ),
     exportValue: (lang) => lang.cldrCoverage?.actualCoverageLevel,
   },
   {
@@ -48,12 +54,19 @@ const columns: TableColumn<LanguageData>[] = [
         <code>it_SM</code>, and <code>it_VA</code>.
       </>
     ),
-    render: (lang) => <CLDRCoverageText object={lang} verbosity="count of locales" />,
+    render: (lang) => <ObjectCLDRLocaleCount object={lang} />,
+    valueType: TableValueType.Numeric,
     exportValue: (lang) => lang.cldrCoverage?.countOfCLDRLocales,
   },
   {
     key: 'ICU Support',
     render: (lang) => <ICUSupportStatus object={lang} />,
+    exportValue: (lang) => {
+      if (lang.cldrCoverage?.inICU !== undefined) return lang.cldrCoverage.inICU;
+      if (lang.cldrDataProvider?.type === ObjectType.Language)
+        return lang.cldrDataProvider.cldrCoverage?.inICU;
+      return undefined;
+    },
   },
   {
     key: 'Wikipedia Status',
