@@ -2,20 +2,21 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    34.9 |    79.0 |    53.8 |    34.9 |
+| `src`                                    |    34.5 |    79.0 |    53.1 |    34.5 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    41.0 |    84.3 |    48.5 |    41.0 |
+| `  entities`                             |    40.1 |    84.3 |    45.5 |    40.1 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
-| `    language`                           |    37.8 |    94.0 |    38.0 |    37.8 |
+| `    language`                           |    37.2 |    94.0 |    37.3 |    37.2 |
 | `      LanguageCanonicalName.tsx`        |    10.6 |   100.0 |     0   |    10.6 |
 | `      LanguageCard.tsx`                 |    22.8 |   100.0 |     0   |    22.8 |
 | `      LanguagePopulationEstimate.tsx`   |    27.8 |   100.0 |     0   |    27.8 |
 | `      LanguagePopulationFromDescendents.tsx` |     9.7 |   100.0 |     0   |     9.7 |
 | `      LanguagePopulationFromLocales.tsx` |    14.3 |   100.0 |     0   |    14.3 |
+| `      LanguageRetirementReason.tsx`     |    14.3 |   100.0 |     0   |    14.3 |
 | `      LanguageTypes.tsx`                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      plurals`                          |    34.3 |    95.2 |    36.0 |    34.3 |
 | `        LanguagePluralCategories.tsx`   |    21.9 |   100.0 |     0   |    21.9 |
@@ -27,8 +28,8 @@
 | `        PluralRuleSymbolExplanation.tsx` |     9.4 |   100.0 |     0   |     9.4 |
 | `        PluralStrings.ts`               |     9.1 |   100.0 |     0   |     9.1 |
 | `      setLanguageNames.ts`              |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      vitality`                         |    44.4 |    91.7 |    46.7 |    44.4 |
-| `        LanguageDetailsVitalityAndViability.tsx` |    21.6 |   100.0 |     0   |    21.6 |
+| `      vitality`                         |    43.6 |    91.7 |    46.7 |    43.6 |
+| `        LanguageDetailsVitalityAndViability.tsx` |    18.8 |   100.0 |     0   |    18.8 |
 | `        LanguageVitalityCell.tsx`       |     0   |     0   |     0   |     0   |
 | `        LanguageVitalityComputation.tsx` |    14.3 |   100.0 |    16.7 |    14.3 |
 | `        VitalityMeter.tsx`              |    21.7 |   100.0 |     0   |    21.7 |
@@ -49,21 +50,21 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    49.8 |    59.5 |    53.8 |    49.8 |
-| `      CLDRCoverageInfo.tsx`             |    10.0 |   100.0 |     0   |    10.0 |
+| `    ui`                                 |    44.2 |    59.5 |    36.8 |    44.2 |
+| `      CLDRCoverageInfo.tsx`             |     8.2 |   100.0 |     0   |     8.2 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
 | `      ObjectField.tsx`                  |    89.6 |    68.4 |   100.0 |    89.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
-| `      ObjectWikipediaInfo.tsx`          |    13.7 |   100.0 |     0   |    13.7 |
+| `      ObjectWikipediaInfo.tsx`          |    16.2 |   100.0 |     0   |    16.2 |
 | `    varianttag`                         |    20.0 |   100.0 |     0   |    20.0 |
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    51.1 |    78.4 |    61.6 |    51.1 |
+| `  features`                             |    50.9 |    78.4 |    61.6 |    50.9 |
 | `    __tests__`                          |    90.7 |    92.3 |    75.0 |    90.7 |
 | `      MockObjects.tsx`                  |    90.7 |    92.3 |    75.0 |    90.7 |
-| `    data-loading`                       |    32.8 |    72.8 |    61.0 |    32.8 |
+| `    data-loading`                       |    32.5 |    72.8 |    61.0 |    32.5 |
 | `      CensusData.tsx`                   |    22.1 |    90.9 |    50.0 |    22.1 |
 | `      context`                          |    13.6 |     0   |     0   |    13.6 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
@@ -162,8 +163,8 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    39.5 |    86.3 |    60.5 |    39.5 |
-| `    containers`                         |    60.4 |   100.0 |   100.0 |    60.4 |
+| `  shared`                               |    40.2 |    86.3 |    60.5 |    40.2 |
+| `    containers`                         |    65.0 |   100.0 |   100.0 |    65.0 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      DetailsSection.tsx`               |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -193,7 +194,7 @@
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    15.2 |    67.9 |    44.0 |    15.2 |
+| `  widgets`                              |    14.9 |    68.1 |    44.5 |    14.9 |
 | `    cardlists`                          |    95.7 |    75.0 |   100.0 |    95.7 |
 | `      CardList.tsx`                     |   100.0 |    75.0 |   100.0 |   100.0 |
 | `      ResponsiveGrid.tsx`               |    89.7 |    75.0 |   100.0 |    89.7 |
@@ -222,13 +223,13 @@
 | `        VitalitySelector.tsx`           |    87.9 |   100.0 |    85.7 |    87.9 |
 | `      SidePanel.tsx`                    |     0   |     0   |     0   |     0   |
 | `    CreativeCommonsLicense.tsx`         |     0   |   100.0 |   100.0 |     0   |
-| `    details`                            |    20.2 |    39.1 |    10.5 |    20.2 |
+| `    details`                            |    20.4 |    39.1 |    10.5 |    20.4 |
 | `      CensusDetails.tsx`                |     6.0 |   100.0 |     0   |     6.0 |
 | `      LanguageDetails.tsx`              |    18.9 |   100.0 |     0   |    18.9 |
 | `      LocaleDetails.tsx`                |     9.4 |   100.0 |     0   |     9.4 |
 | `      ObjectDetails.tsx`                |    67.7 |    14.3 |   100.0 |    67.7 |
-| `      sections`                         |    19.4 |   100.0 |     0   |    19.4 |
-| `        LanguageCodes.tsx`              |    15.5 |   100.0 |     0   |    15.5 |
+| `      sections`                         |    20.6 |   100.0 |     0   |    20.6 |
+| `        LanguageCodes.tsx`              |    17.5 |   100.0 |     0   |    17.5 |
 | `        LanguageLocation.tsx`           |    30.4 |   100.0 |     0   |    30.4 |
 | `        LanguageNames.tsx`              |    18.5 |   100.0 |     0   |    18.5 |
 | `      TerritoryDetails.tsx`             |    70.8 |    50.0 |   100.0 |    70.8 |
@@ -250,14 +251,15 @@
 | `      LanguagesWithIdenticalNames.tsx`  |     0   |     0   |     0   |     0   |
 | `      PotentialLocales.tsx`             |     0   |     0   |     0   |     0   |
 | `      TableOfCountriesWithCensuses.tsx` |     0   |   100.0 |   100.0 |     0   |
-| `    tables`                             |     7.4 |    46.2 |    31.6 |     7.4 |
-| `      columns`                          |     0   |    20.0 |    20.0 |     0   |
+| `    tables`                             |     6.6 |    50.0 |    35.0 |     6.6 |
+| `      columns`                          |     0   |    16.7 |    16.7 |     0   |
+| `        LanguageCodeColumns.tsx`        |     0   |     0   |     0   |     0   |
 | `        LanguageDigitalSupportColumns.tsx` |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageNameColumns.tsx`        |     0   |     0   |     0   |     0   |
 | `        LanguagePopulationColumns.tsx`  |     0   |     0   |     0   |     0   |
 | `        LanguageVitalityColumns.tsx`    |     0   |     0   |     0   |     0   |
 | `        LocalePopulationColumns.tsx`    |     0   |     0   |     0   |     0   |
-| `      LanguageTable.tsx`                |     0   |     0   |     0   |     0   |
+| `      LanguageTable.tsx`                |     0   |   100.0 |   100.0 |     0   |
 | `      LocaleTable.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      TableOfAllCensuses.tsx`           |     0   |   100.0 |   100.0 |     0   |
 | `      TableOfLanguagesInCensus.tsx`     |    11.7 |   100.0 |     0   |    11.7 |
