@@ -31,8 +31,8 @@ describe('getSearchableField', () => {
     expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingl')).toBe('Inglés');
   });
 
-  it('does not yet search on accent marks, instead going to the next one', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingle')).toBe('Inglese');
+  it('Searches on accent marks as well', () => {
+    expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingle')).toBe('Inglés');
   });
 
   it('returns codeDisplay for Code', () => {

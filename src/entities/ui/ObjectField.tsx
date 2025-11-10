@@ -50,20 +50,13 @@ export const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
   field,
   query,
 }) => {
-  return (
-    <Highlightable
-      text={getSearchableField(object, field, query)}
-      searchPattern={query}
-    />
-  );
+  return <Highlightable text={getSearchableField(object, field, query)} searchPattern={query} />;
 };
 
 export function getSearchableField(object: ObjectData, field: SearchableField, query?: string) {
   switch (field) {
     case SearchableField.AllNames:
-      return (
-        object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? ''
-      );
+      return object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? '';
     case SearchableField.Code:
       return object.codeDisplay;
     case SearchableField.Endonym:
