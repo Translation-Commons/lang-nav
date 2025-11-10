@@ -2,11 +2,11 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    34.3 |    78.9 |    52.6 |    34.3 |
+| `src`                                    |    34.3 |    78.9 |    52.7 |    34.3 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    39.8 |    84.1 |    44.7 |    39.8 |
+| `  entities`                             |    39.6 |    84.1 |    44.7 |    39.6 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -52,13 +52,13 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    47.1 |    59.5 |    33.3 |    47.1 |
+| `    ui`                                 |    46.2 |    59.5 |    33.3 |    46.2 |
 | `      CLDRCoverageInfo.tsx`             |    15.8 |   100.0 |     0   |    15.8 |
 | `      CLDRCoverageLevels.tsx`           |     7.9 |   100.0 |     0   |     7.9 |
 | `      CLDRWarningNotes.tsx`             |    18.6 |   100.0 |     0   |    18.6 |
 | `      ICUSupportStatus.tsx`             |    25.0 |   100.0 |     0   |    25.0 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
-| `      ObjectField.tsx`                  |    89.6 |    68.4 |   100.0 |    89.6 |
+| `      ObjectField.tsx`                  |    88.1 |    68.4 |   100.0 |    88.1 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
 | `      ObjectWikipediaInfo.tsx`          |    17.2 |   100.0 |     0   |    17.2 |
@@ -92,8 +92,8 @@
 | `      TerritoryData.tsx`                |    76.3 |    66.7 |    83.3 |    76.3 |
 | `      UnicodeData.tsx`                  |     0   |     0   |     0   |     0   |
 | `      WikipediaData.tsx`                |     0   |   100.0 |   100.0 |     0   |
-| `    filtering`                          |    93.1 |    76.4 |    79.3 |    93.1 |
-| `      filter.tsx`                       |    91.4 |    68.8 |   100.0 |    91.4 |
+| `    filtering`                          |    93.0 |    76.4 |    79.3 |    93.0 |
+| `      filter.tsx`                       |    91.1 |    68.8 |   100.0 |    91.1 |
 | `      FilterBreakdown.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      FilterPath.tsx`                   |    89.8 |    95.2 |    66.7 |    89.8 |
 | `      useFilteredObjects.tsx`           |    92.3 |    55.5 |    40.0 |    92.3 |
@@ -168,7 +168,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    40.3 |    86.3 |    60.5 |    40.3 |
+| `  shared`                               |    42.1 |    86.8 |    61.5 |    42.1 |
 | `    containers`                         |    65.0 |   100.0 |   100.0 |    65.0 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -181,16 +181,16 @@
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
 | `      usePageBrightness.tsx`            |     0   |     0   |     0   |     0   |
-| `    lib`                                |    73.6 |    92.9 |    66.7 |    73.6 |
+| `    lib`                                |    74.7 |    93.0 |    68.4 |    74.7 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
 | `      setUtils.ts`                      |   100.0 |    94.1 |   100.0 |   100.0 |
 | `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
-| `      stringUtils.ts`                   |    64.4 |   100.0 |    50.0 |    64.4 |
-| `    ui`                                 |    42.0 |    88.9 |    55.6 |    42.0 |
+| `      stringUtils.ts`                   |    68.6 |   100.0 |    57.1 |    68.6 |
+| `    ui`                                 |    45.6 |    90.0 |    55.6 |    45.6 |
 | `      CommaSeparated.tsx`               |    66.7 |    87.5 |    50.0 |    66.7 |
 | `      Deemphasized.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      Highlightable.tsx`                |    95.8 |    87.5 |   100.0 |    95.8 |
+| `      Highlightable.tsx`                |    94.7 |    90.0 |   100.0 |    94.7 |
 | `      LinkButton.tsx`                   |     4.2 |   100.0 |     0   |     4.2 |
 | `      LoadingIcon.tsx`                  |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      PercentageDifference.tsx`         |     8.6 |   100.0 |     0   |     8.6 |
