@@ -8,48 +8,70 @@ import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/Data
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
-const ObjectWikipediaInfo: React.FC<{ object: ObjectData; size?: 'normal' | 'compact' }> = ({
-  object,
-  size = 'normal',
-}) => {
-  if (!(object.type === ObjectType.Language || object.type === ObjectType.Locale)) {
-    return null;
-  }
+const ObjectWikipediaInfo: React.FC<{ object: ObjectData }> = ({ object }) => {
+  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
 
-  if (!object.wikipedia) {
-    // Locales often don't have specific Wikipedias, but their language may
-    if (object.type === ObjectType.Locale) {
-      const language = object.language;
-      if (language?.wikipedia) {
-        return (
-          <>
-            <span style={{ color: getStatusColor(language.wikipedia.status) }}>
-              {language.wikipedia.status}
-            </span>{' '}
-            (see <HoverableObjectName object={language} />)
-          </>
-        );
-      }
-    }
-
-    return <Deemphasized>No Wikipedia</Deemphasized>;
-  }
+  // If the object doesn't have a direct wikipedia, then we may be able to find the status
+  // from the linked language (for locales) the logic is handled in WikipediaStatusDisplay
+  if (!object.wikipedia) return <WikipediaStatusDisplay object={object} />;
 
   const wikipedia = object.wikipedia as WikipediaData;
 
   return (
     <>
-      <span style={{ color: getStatusColor(wikipedia.status) }}>{wikipedia.status}</span>
+      <WikipediaStatusDisplay object={object} />
       {wikipedia.status === WikipediaStatus.Active && (
         <>
           {': '}
-          {wikipedia.articles.toLocaleString()} articles
-          {size === 'normal' && `, ${wikipedia.activeUsers.toLocaleString()} active users`}
+          <WikipediaArticles object={object} /> articles, <WikipediaActiveUsers object={object} />{' '}
+          active users
         </>
       )}
-      <LinkButton href={wikipedia.url}>{size === 'normal' ? wikipedia.url : ''}</LinkButton>
     </>
   );
+};
+
+export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ object }) => {
+  if (object?.type === ObjectType.Locale && !object.wikipedia) {
+    if (object.language?.wikipedia) {
+      return (
+        <>
+          <WikipediaStatusDisplay object={object.language} /> (see{' '}
+          <HoverableObjectName object={object.language} labelSource="code" />)
+        </>
+      );
+    }
+    return null;
+  }
+  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
+  const { wikipedia } = object;
+  if (!wikipedia) return <Deemphasized>No wiki</Deemphasized>;
+
+  return <span style={{ color: getStatusColor(wikipedia.status) }}>{wikipedia.status}</span>;
+};
+
+export const WikipediaArticles: React.FC<{ object?: ObjectData }> = ({ object }) => {
+  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
+  if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
+
+  return object.wikipedia.articles.toLocaleString();
+};
+
+export const WikipediaActiveUsers: React.FC<{ object?: ObjectData }> = ({ object }) => {
+  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
+  if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
+
+  return object.wikipedia.activeUsers.toLocaleString();
+};
+
+export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }> = ({
+  object,
+  showURL = false,
+}) => {
+  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
+  if (!object.wikipedia) return null;
+
+  return <LinkButton href={object.wikipedia.url}>{showURL && object.wikipedia.url}</LinkButton>;
 };
 
 function getStatusColor(status: WikipediaStatus) {

@@ -89,7 +89,7 @@ const LocaleTable: React.FC = () => {
         },
         {
           key: 'Wikipedia',
-          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          render: (object) => <ObjectWikipediaInfo object={object} />,
           isInitiallyVisible: false,
         },
         {

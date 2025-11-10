@@ -134,6 +134,10 @@ export function connectLocales(
           if (!writingSystem.populationUpperBound) writingSystem.populationUpperBound = 0;
           writingSystem.populationUpperBound += locale.populationSpeaking;
         }
+
+        // Connect the writing system to the language if not already connected
+        if (language.writingSystems[writingSystem.ID] == null)
+          language.writingSystems[writingSystem.ID] = writingSystem;
       }
     }
 

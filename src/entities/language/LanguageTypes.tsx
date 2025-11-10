@@ -9,6 +9,7 @@
 
 import React from 'react';
 
+import { RetirementReason } from '@features/data-loading/iso/ISORetirements';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { CLDRCoverageData } from '../types/CLDRTypes';
@@ -81,7 +82,6 @@ export interface LanguageData extends ObjectBase {
   // Provided by the TSV files
   ID: LanguageCode; // Stable ID, favors ISO
   codeDisplay: LanguageCode; // Changes with different language source
-  codeISO6391?: LanguageCode;
   scope?: LanguageScope;
 
   nameCanonical: string; // Stays the same with different language source
@@ -104,6 +104,8 @@ export interface LanguageData extends ObjectBase {
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
+  codeISO6391?: LanguageCode;
+  retirementReason?: RetirementReason;
 
   sourceSpecific: Record<LanguageSource, LanguageDataInSource>;
   cldrCoverage?: CLDRCoverageData;

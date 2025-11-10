@@ -14,6 +14,7 @@ import { CoreDataArrays } from '../CoreData';
 type DataGetters = {
   getObject(id: string): ObjectData | undefined;
   getLanguage: (id: string) => LanguageData | undefined;
+  getCLDRLanguage: (id: string) => LanguageData | undefined;
   getLocale: (id: string) => LocaleData | undefined;
   getTerritory: (id: string) => TerritoryData | undefined;
   getWritingSystem: (id: string) => WritingSystemData | undefined;
@@ -33,6 +34,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   territories: [],
   variantTags: [],
   writingSystems: [],
+  getCLDRLanguage: () => undefined,
   getObject: () => undefined,
   getLanguage: () => undefined,
   getLocale: () => undefined,

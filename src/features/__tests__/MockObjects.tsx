@@ -441,6 +441,12 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     getObject: (id: string) => objects[id],
     getLanguage: (id: string) =>
       objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
+    getCLDRLanguage: (id: string) =>
+      Object.values(objects).find(
+        (obj) =>
+          obj.type === ObjectType.Language &&
+          (obj as LanguageData).sourceSpecific.CLDR?.code === id,
+      ) as LanguageData | undefined,
     getLocale: (id: string) => (objects[id]?.type === ObjectType.Locale ? objects[id] : undefined),
     getTerritory: (id: string) =>
       objects[id]?.type === ObjectType.Territory ? objects[id] : undefined,

@@ -45,6 +45,12 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
+  const getCLDRLanguage = useCallback(
+    (id: string): LanguageData | undefined => {
+      return coreData.allLanguoids.find((lang) => lang.sourceSpecific.CLDR?.code === id);
+    },
+    [coreData],
+  );
   const getLocale = useCallback(
     (id: string): LocaleData | undefined => {
       const obj = coreData.objects[id];
@@ -84,6 +90,7 @@ const DataProvider: React.FC<{
       languagesInSelectedSource,
       getObject,
       getLanguage,
+      getCLDRLanguage,
       getLocale,
       getTerritory,
       getWritingSystem,

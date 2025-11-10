@@ -1,16 +1,20 @@
-import { TriangleAlertIcon } from 'lucide-react';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import {
+  getRetirementReasonLabel,
+  RetirementReason,
+} from '@features/data-loading/iso/ISORetirements';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
-import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
-import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
+import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import {
@@ -20,6 +24,7 @@ import {
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { LanguageCodeColumns } from './columns/LanguageCodeColumns';
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
 import { LanguageNameColumns } from './columns/LanguageNameColumns';
 import { LanguagePopulationColumns } from './columns/LanguagePopulationColumns';
@@ -27,43 +32,56 @@ import { LanguageVitalityColumns } from './columns/LanguageVitalityColumns';
 
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
-  const codeColumn = {
-    ...CodeColumn,
-    render: (lang: LanguageData): ReactNode => (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
-        {lang.codeDisplay}
-        {<MaybeISOWarning lang={lang} />}
-      </div>
-    ),
-  };
 
   return (
     <InteractiveObjectTable<LanguageData>
       objects={languagesInSelectedSource}
       columns={[
-        codeColumn,
-        {
-          key: 'ISO 639-3',
-          render: (lang) => (
-            <div style={{ display: 'flex', alignItems: 'center' }}>
-              {lang.sourceSpecific.ISO.code}
-              {<MaybeISOWarning lang={lang} />}
-            </div>
-          ),
-          isInitiallyVisible: false,
-          columnGroup: 'Codes',
-        },
-        {
-          key: 'Glottocode',
-          render: (lang) => lang.sourceSpecific.Glottolog.code,
-          isInitiallyVisible: false,
-          columnGroup: 'Codes',
-        },
+        ...LanguageCodeColumns,
         ...LanguageNameColumns,
         {
           key: 'Scope',
           render: (lang) => lang.scope,
           isInitiallyVisible: false,
+          columnGroup: 'Context',
+        },
+        {
+          key: 'ISO Retirement',
+          render: (lang) => {
+            let retirementReason = lang.retirementReason ?? undefined;
+            if (!retirementReason && lang.sourceSpecific.ISO.code == null) {
+              retirementReason = RetirementReason.NeverISO;
+            }
+            return retirementReason ? (
+              <Hoverable hoverContent={<LanguageRetirementReason lang={lang} />}>
+                {getRetirementReasonLabel(retirementReason)}
+              </Hoverable>
+            ) : (
+              <Deemphasized>n/a</Deemphasized>
+            );
+          },
+          isInitiallyVisible: false,
+          columnGroup: 'Context',
+        },
+        {
+          key: 'Modality',
+          render: (lang) => lang.modality ?? <Deemphasized>—</Deemphasized>,
+          isInitiallyVisible: false,
+          columnGroup: 'Context',
+        },
+        {
+          key: 'Writing Systems',
+          description: (
+            <>
+              The writing systems used to write this language. The possible values come from ISO
+              15924, which include some combined systems like <code>Hani</code> including all
+              Chinese Characters, including Simplified <code>Hans</code> or Traditional{' '}
+              <code>Hant</code>.
+            </>
+          ),
+          render: (lang) => <LanguageWritingSystems lang={lang} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Context',
         },
         ...LanguagePopulationColumns,
         ...LanguageVitalityColumns,
@@ -131,6 +149,7 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
           valueType: TableValueType.Numeric,
+          columnGroup: 'Vitality',
         },
         {
           key: 'Plural rules',
@@ -148,16 +167,5 @@ const LanguageTable: React.FC = () => {
     />
   );
 };
-
-function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | null {
-  return lang.warnings && lang.warnings[LanguageField.isoCode] ? (
-    <Hoverable
-      hoverContent={lang.warnings[LanguageField.isoCode]}
-      style={{ marginLeft: '0.125em' }}
-    >
-      <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
-    </Hoverable>
-  ) : null;
-}
 
 export default LanguageTable;
