@@ -19,7 +19,6 @@ interface Props {
  */
 export const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ object, field }) => {
   const { searchBy: pageSearchBy, searchString } = usePageParams();
-  const lowercaseSearchString = searchString.toLowerCase();
 
   if (pageSearchBy === field) {
     return <HighlightedObjectField object={object} query={searchString} field={field} />;
@@ -37,7 +36,7 @@ export const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ object, fi
     return <HighlightedObjectField object={object} query={searchString} field={field} />;
   }
   // Otherwise don't highlight, just return the field value
-  return getSearchableField(object, field, lowercaseSearchString);
+  return getSearchableField(object, field, searchString);
 };
 
 interface HighlightedObjectFieldProps {
@@ -54,7 +53,7 @@ export const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
   return (
     <Highlightable
       text={getSearchableField(object, field, query)}
-      searchPattern={query.toLowerCase()}
+      searchPattern={query}
     />
   );
 };
@@ -63,7 +62,7 @@ export function getSearchableField(object: ObjectData, field: SearchableField, q
   switch (field) {
     case SearchableField.AllNames:
       return (
-        object.names.filter((name) => anyWordStartsWith(name, query?.toLowerCase() ?? ''))[0] ?? ''
+        object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? ''
       );
     case SearchableField.Code:
       return object.codeDisplay;

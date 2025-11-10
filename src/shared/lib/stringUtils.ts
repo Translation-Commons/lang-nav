@@ -30,15 +30,27 @@ export function joinOxfordComma(strs: string[]): string {
 }
 
 /**
- * Split the input string non-letter characters (\P{L}) and see if any word matches the inputted query.
+ * Normalize a string by removing accent marks (diacritics) for accent-insensitive comparison.
+ * Uses NFD normalization followed by removal of combining diacritical marks.
+ */
+export function normalizeAccents(str: string): string {
+  return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+}
+
+/**
+ * Split the input string on non-letter characters (\P{L}) and see if any word matches the inputted query.
  * Sometimes inputted queries may contain whitespace -- for that cause we check if the general
  * input also matches.
+ * Both the string and query are normalized to be accent-insensitive and case-insensitive.
  */
-export function anyWordStartsWith(str: string, lowercaseQuery: string) {
+export function anyWordStartsWith(str: string, query: string) {
   const strLowercase = str.toLowerCase();
+  const queryLowercase = query.toLowerCase();
+  const normalizedStr = normalizeAccents(strLowercase);
+  const normalizedQuery = normalizeAccents(queryLowercase);
   return (
-    strLowercase.split(/\P{L}/u).some((s) => s.startsWith(lowercaseQuery)) ||
-    strLowercase.startsWith(lowercaseQuery)
+    normalizedStr.split(/\P{L}/u).some((s) => s.startsWith(normalizedQuery)) ||
+    normalizedStr.startsWith(normalizedQuery)
   );
 }
 
