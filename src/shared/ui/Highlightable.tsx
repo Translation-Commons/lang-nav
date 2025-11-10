@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { normalizeAccents } from '@shared/lib/stringUtils';
 
 // Escape regex special characters in the search pattern
@@ -20,7 +21,7 @@ const Highlightable: React.FC<Props> = ({ text, searchPattern }) => {
   const normalizedText = normalizeAccents(text.toLowerCase());
   const normalizedPattern = normalizeAccents(searchPattern.toLowerCase());
   const safePattern = escapeRegExp(normalizedPattern);
-  
+
   // \P{L} = non-letter character. Preferred over \s because it works better for unicode characters
   const searchResult = normalizedText.match(
     new RegExp(`(^|.*\\P{L})(${safePattern})(?:(.*\\P{L})(${safePattern}))*?(.*)`, 'iu'),
@@ -30,7 +31,6 @@ const Highlightable: React.FC<Props> = ({ text, searchPattern }) => {
     return text;
   }
 
- 
   const parts: React.ReactNode[] = [];
   let textPos = 0;
 
@@ -40,12 +40,12 @@ const Highlightable: React.FC<Props> = ({ text, searchPattern }) => {
 
     const originalLength = part.length;
     const originalPart = text.substring(textPos, textPos + originalLength);
-    
+
     if (i % 2 === 0) {
       parts.push(
         <span key={i} className="highlighted">
           {originalPart}
-        </span>
+        </span>,
       );
     } else {
       parts.push(originalPart);
