@@ -38,7 +38,8 @@ export function normalizeAccents(str: string): string {
 }
 
 /**
- * Split the input string on non-letter characters (\P{L}) and see if any word matches the inputted query.
+ * Split the input string on non-alphanumeric characters and see if any word matches the inputted query.
+ * Splits on characters that are neither letters (\p{L}) nor numbers (\p{N}), so alphanumeric codes
  * Sometimes inputted queries may contain whitespace -- for that cause we check if the general
  * input also matches.
  * Both the string and query are normalized to be accent-insensitive and case-insensitive.
@@ -49,7 +50,7 @@ export function anyWordStartsWith(str: string, query: string) {
   const normalizedStr = normalizeAccents(strLowercase);
   const normalizedQuery = normalizeAccents(queryLowercase);
   return (
-    normalizedStr.split(/\P{L}/u).some((s) => s.startsWith(normalizedQuery)) ||
+    normalizedStr.split(/[^\p{L}\p{N}]/u).some((s) => s.startsWith(normalizedQuery)) ||
     normalizedStr.startsWith(normalizedQuery)
   );
 }
