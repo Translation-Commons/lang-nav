@@ -10,10 +10,13 @@ import { LocaleData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
+type verbosity = 'coverage level' | 'count of locales' | 'full';
+
 export const CLDRCoverageText: React.FC<{
   object: LanguageData | LocaleData;
   parentNotes?: React.ReactNode;
-}> = ({ object, parentNotes }) => {
+  verbosity?: verbosity;
+}> = ({ object, parentNotes, verbosity = 'full' }) => {
   if (object.type !== ObjectType.Language) {
     return null;
   }
@@ -30,13 +33,14 @@ export const CLDRCoverageText: React.FC<{
         <CLDRCoverageText
           object={cldrDataProvider}
           parentNotes={[parentNotes, CLDR.notes].filter((n) => n != null)}
+          verbosity={verbosity}
         />
       );
     }
     return (
       <>
         <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />
-        <Deemphasized>Not supported by CLDR.</Deemphasized>
+        <Deemphasized>{verbosity === 'full' ? 'Not supported by CLDR.' : 'n/a'}</Deemphasized>
       </>
     );
   }
@@ -44,9 +48,28 @@ export const CLDRCoverageText: React.FC<{
   const coverageLevel = cldrCoverage.actualCoverageLevel;
   const capitalizedLevel = coverageLevel.charAt(0).toUpperCase() + coverageLevel.slice(1);
 
+  const warnings = <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />;
+
+  if (verbosity == 'coverage level') {
+    return (
+      <>
+        {warnings}{' '}
+        <span style={{ color: getCLDRCoverageColor(cldrCoverage.actualCoverageLevel) }}>
+          {capitalizedLevel}
+        </span>
+      </>
+    );
+  } else if (verbosity == 'count of locales') {
+    return (
+      <>
+        {warnings} {cldrCoverage.countOfCLDRLocales}
+      </>
+    );
+  }
+
   return (
     <>
-      <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />{' '}
+      {warnings}{' '}
       <span style={{ color: getCLDRCoverageColor(cldrCoverage.actualCoverageLevel) }}>
         {capitalizedLevel}
       </span>{' '}
@@ -67,24 +90,16 @@ export const ICUSupportStatus: React.FC<{ object: LanguageData | LocaleData }> =
     if (cldrDataProvider != null) {
       return <ICUSupportStatus object={cldrDataProvider} />;
     }
-    return <Deemphasized>N/A</Deemphasized>;
+    return <Deemphasized>n/a</Deemphasized>;
   }
 
-  return (
-    <>
-      {' '}
-      {cldrCoverage.inICU ? (
-        <CheckCircle2Icon
-          style={{ color: 'var(--color-text-green)', verticalAlign: 'middle' }}
-          size={'1em'}
-        />
-      ) : (
-        <XCircleIcon
-          style={{ color: 'var(--color-text-red)', verticalAlign: 'middle' }}
-          size={'1em'}
-        />
-      )}
-    </>
+  return cldrCoverage.inICU ? (
+    <CheckCircle2Icon
+      style={{ color: 'var(--color-text-green)', verticalAlign: 'middle' }}
+      size={'1em'}
+    />
+  ) : (
+    <XCircleIcon style={{ color: 'var(--color-text-red)', verticalAlign: 'middle' }} size={'1em'} />
   );
 };
 
@@ -133,3 +148,31 @@ function getCLDRCoverageColor(coverageLevel: CLDRCoverageLevel): string {
       return 'var(--color-text-blue)';
   }
 }
+
+function getCoverageLevelExplanation(coverageLevel: CLDRCoverageLevel): string {
+  switch (coverageLevel) {
+    case CLDRCoverageLevel.Core:
+      return 'Core data like the letters in the alphabet, the name, demographics, and basic time formatting.';
+    case CLDRCoverageLevel.Basic:
+      return 'Common date, time and currency formatting, as well as core strings for basic UI elements.';
+    case CLDRCoverageLevel.Moderate:
+      return 'Translations of country names, language names, timezones, calendars. Additional number formatting.';
+    case CLDRCoverageLevel.Modern:
+      return 'Emoji, advanced number formats, measurement units.';
+  }
+}
+
+export const CoverageLevelsExplanation: React.FC = () => {
+  return (
+    <ul>
+      {Object.values(CLDRCoverageLevel).map((level) => (
+        <li key={level}>
+          <strong style={{ color: getCLDRCoverageColor(level) }}>
+            {level.charAt(0).toUpperCase() + level.slice(1)}
+          </strong>
+          : {getCoverageLevelExplanation(level)}
+        </li>
+      ))}
+    </ul>
+  );
+};

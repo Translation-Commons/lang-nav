@@ -12,6 +12,7 @@ export enum RetirementReason {
   Duplicate = 'D',
   Split = 'S',
   Merged = 'M',
+  NeverISO = 'Never ISO',
 }
 
 export type ISORetirementData = {
@@ -111,6 +112,7 @@ export function addISORetirementsToLanguages(
     }
 
     // Add retirement information
+    lang.retirementReason = retirement.reason;
     lang.warnings[LanguageField.isoCode] = retirementExplanation;
     lang.viabilityConfidence ??= 'No';
     lang.viabilityExplanation ??= retirementExplanation;
@@ -118,7 +120,7 @@ export function addISORetirementsToLanguages(
 }
 
 function getRetirementExplanation(retirement: ISORetirementData): string {
-  const stringStart = 'Language code retired on ISO: ';
+  const stringStart = `The language code [${retirement.id}] was retired on ISO: `;
   const stringEnd = `Effective ${retirement.effectiveDate.toLocaleDateString()}.`;
 
   switch (retirement.reason) {
@@ -142,5 +144,24 @@ function getRetirementExplanation(retirement: ISORetirementData): string {
         `Merged -- this language was merged into \`${retirement.changeTo}\`. ` +
         stringEnd
       );
+    case RetirementReason.NeverISO:
+      return `Never ISO -- this language was never officially part of any ISO 639 standard.`;
+  }
+}
+
+export function getRetirementReasonLabel(reason: RetirementReason): string | undefined {
+  switch (reason) {
+    case RetirementReason.NonExistent:
+      return 'Non-Existent';
+    case RetirementReason.Duplicate:
+      return 'Duplicate';
+    case RetirementReason.Split:
+      return 'Split';
+    case RetirementReason.Merged:
+      return 'Merged';
+    case RetirementReason.NeverISO:
+      return 'Never ISO';
+    default:
+      return undefined;
   }
 }

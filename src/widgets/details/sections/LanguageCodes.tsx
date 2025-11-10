@@ -3,6 +3,7 @@ import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 
+import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
@@ -17,50 +18,50 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Codes">
       <DetailsField title="Language Code:">{lang.ID}</DetailsField>
-      <DetailsField title="Glottocode:">
-        {Glottolog.code ? (
-          <>
-            {Glottolog.code}
-            <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
-              Glottolog
-            </LinkButton>
-          </>
-        ) : (
-          <Deemphasized>Not in Glottolog</Deemphasized>
-        )}
+      <DetailsField
+        title="Glottocode:"
+        endContent={
+          <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
+            Glottolog
+          </LinkButton>
+        }
+      >
+        {Glottolog.code ? <>{Glottolog.code}</> : <Deemphasized>Not in Glottolog</Deemphasized>}
       </DetailsField>
-      <DetailsField title="ISO Code:">
+      <DetailsField
+        title="ISO Code:"
+        endContent={
+          <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
+        }
+      >
         {ISO.code ? (
           <>
             {ISO.code}
             {codeISO6391 ? ` | ${codeISO6391}` : ''}
             {lang.warnings && lang.warnings[LanguageField.isoCode] && (
               <Hoverable
-                hoverContent={lang.warnings[LanguageField.isoCode]}
+                hoverContent={<LanguageRetirementReason lang={lang} />}
                 style={{ marginLeft: '0.125em' }}
               >
                 <TriangleAlertIcon size="1em" color="var(--color-text-yellow)" />
               </Hoverable>
             )}
-            <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
           </>
         ) : (
           <Deemphasized>Not in ISO catalog</Deemphasized>
         )}
       </DetailsField>
-      <DetailsField title="CLDR Code:">
-        {CLDR.code ? (
-          <>
-            {CLDR.code}
-            <LinkButton
-              href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
-            >
-              CLDR XML
-            </LinkButton>
-          </>
-        ) : (
-          <Deemphasized>Not in CLDR</Deemphasized>
-        )}
+      <DetailsField
+        title="CLDR Code:"
+        endContent={
+          <LinkButton
+            href={`https://github.com/unicode-org/cldr/blob/main/common/main/${CLDR.code}.xml`}
+          >
+            CLDR XML
+          </LinkButton>
+        }
+      >
+        {CLDR.code ? <>{CLDR.code}</> : <Deemphasized>Not in CLDR</Deemphasized>}
       </DetailsField>
       {ISO.code && (
         <DetailsField title="Other external links:">
