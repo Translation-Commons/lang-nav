@@ -63,10 +63,12 @@ function getWritingSystemNodesForLanguage(
 ): TreeNodeData[] {
   const territoryNodesWithoutWritingSystems = lang.locales
     .filter((locale) => locale.scriptCode == null)
+    .filter(filterFunction)
     .sort(sortFunction)
     .map((territory) => getLocaleNodeForTerritory(territory));
   const otherWritingSystemNodes = Object.values(lang.writingSystems)
     .filter((ws) => ws.ID != lang.primaryScriptCode)
+    .filter(filterFunction)
     .sort(sortFunction)
     .map((writingSystem) =>
       getLocaleNodeForWritingSystem(writingSystem, lang.ID, sortFunction, filterFunction),

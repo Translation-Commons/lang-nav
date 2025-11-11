@@ -1,10 +1,7 @@
 import React, { useCallback } from 'react';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-} from '@features/filtering/filter';
+import { getFilterBySubstring, getFilterByVitality } from '@features/filtering/filter';
+import { getFilterByTerritory } from '@features/filtering/filterByConnections';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';

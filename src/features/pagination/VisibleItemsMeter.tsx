@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
+import { getFilterByTerritory } from '@features/filtering/filterByConnections';
 import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -8,12 +9,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-  getScopeFilter,
-} from '../filtering/filter';
+import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from '../filtering/filter';
 
 import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';

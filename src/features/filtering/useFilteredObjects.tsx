@@ -7,12 +7,8 @@ import { getSortFunction } from '@features/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-  getScopeFilter,
-} from './filter';
+import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
+import { getFilterByTerritory } from './filterByConnections';
 
 type UseFilteredObjectsParams = {
   useScope?: boolean;

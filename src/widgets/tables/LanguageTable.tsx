@@ -19,7 +19,7 @@ import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralC
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import {
   getObjectLiteracy,
-  getUniqueTerritoriesForLanguage,
+  getUniqueCountriesForLanguage,
 } from '@entities/lib/getObjectMiscFields';
 
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -108,12 +108,10 @@ const LanguageTable: React.FC = () => {
           columnGroup: 'Relations',
         },
         {
-          key: 'Territories',
+          key: 'Countries',
           render: (lang) => (
             <HoverableEnumeration
-              items={getUniqueTerritoriesForLanguage(lang).map(
-                (territory) => territory.nameDisplay,
-              )}
+              items={getUniqueCountriesForLanguage(lang).map((territory) => territory.nameDisplay)}
             />
           ),
           valueType: TableValueType.Numeric,

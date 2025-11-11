@@ -2,6 +2,7 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
 import * as FilterModule from '@features/filtering/filter';
+import * as ConnectionFilters from '@features/filtering/filterByConnections';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import * as SortModule from '@features/sorting/sort';
@@ -17,10 +18,12 @@ import TableValueType from '../TableValueType';
 
 vi.mock('@features/filtering/filter', () => ({
   getFilterBySubstring: vi.fn(),
-  getFilterByTerritory: vi.fn(),
   getFilterByVitality: vi.fn(),
   getScopeFilter: vi.fn(),
-  getSliceFunction: vi.fn(),
+}));
+
+vi.mock('@features/filtering/filterByConnections', () => ({
+  getFilterByTerritory: vi.fn(),
 }));
 
 vi.mock('@features/sorting/sort', () => ({
@@ -78,10 +81,9 @@ describe('InteractiveObjectTable', () => {
   beforeEach(() => {
     // Set up default mock implementations
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(() => true);
+    vi.mocked(ConnectionFilters.getFilterByTerritory).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
-    // vi.mocked(FilterModule.getSliceFunction).mockReturnValue((items) => items);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
   });
@@ -129,7 +131,7 @@ describe('InteractiveObjectTable', () => {
     const mockScopeFilter = vi.fn(() => true);
 
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
-    vi.mocked(FilterModule.getFilterByTerritory).mockReturnValue(mockTerritoryFilter);
+    vi.mocked(ConnectionFilters.getFilterByTerritory).mockReturnValue(mockTerritoryFilter);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
 

@@ -6,12 +6,8 @@ import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-  getScopeFilter,
-} from './filter';
+import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
+import { getFilterByTerritory } from './filterByConnections';
 
 type FilterExplanationProps = {
   objects: ObjectData[];
