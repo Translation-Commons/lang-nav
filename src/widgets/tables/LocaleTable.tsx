@@ -40,6 +40,41 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Literacy,
+          columnGroup: 'Writing',
+        },
+        {
+          key: 'Writing System (specified)',
+          description: (
+            <>
+              Some locales specify a writing system, for instance{' '}
+              <code>
+                zh_<strong>Hant</strong>_TW
+              </code>{' '}
+              means it specifically refers to Traditional Han characters.
+            </>
+          ),
+          render: (object) => <HoverableObjectName object={object.writingSystem} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Writing',
+        },
+        {
+          key: 'Writing System (inferred)',
+          description: (
+            <>
+              Some locales do not include a writing system but it can usually be inferred based on
+              the primary writing system for the language. For instance, <code>zh_CN</code> could be
+              written in <code>Hant</code> or <code>Hans</code> writing. Since the primary writing
+              system in China is the Simplified character, it can be inferred to be{' '}
+              <code>Hans</code>.
+            </>
+          ),
+          render: (object) => (
+            <HoverableObjectName
+              object={object.writingSystem ?? object.language?.primaryWritingSystem}
+            />
+          ),
+          isInitiallyVisible: false,
+          columnGroup: 'Writing',
         },
         {
           key: 'Contained Locales',
@@ -65,12 +100,6 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Territory',
           render: (object) => <HoverableObjectName object={object.territory} />,
-          isInitiallyVisible: false,
-          columnGroup: 'Linked Data',
-        },
-        {
-          key: 'Writing System',
-          render: (object) => <HoverableObjectName object={object.writingSystem} />,
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
         },

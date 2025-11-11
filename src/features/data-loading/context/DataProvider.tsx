@@ -18,18 +18,25 @@ import { loadSupplementalData } from '../SupplementalData';
 
 import { DataContext, DataContextType } from './useDataContext';
 
+enum LoadingStage {
+  Initial,
+  HasCoreData,
+  HasSupplementalData,
+  AlgorithmsFinished,
+}
+
 // Create a provider component
 const DataProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
   const { languageSource, localeSeparator } = usePageParams();
   const { coreData, loadCoreData } = useCoreData();
-  const [loadProgress, setLoadProgress] = useState(0);
+  const [loadProgress, setLoadProgress] = useState<LoadingStage>(LoadingStage.Initial);
 
   useEffect(() => {
     const loadPrimaryData = async () => {
       await loadCoreData();
-      setLoadProgress(1);
+      setLoadProgress(LoadingStage.HasCoreData);
     };
     loadPrimaryData();
   }, []); // this is called once after page load
@@ -101,10 +108,10 @@ const DataProvider: React.FC<{
 
   // After the main load, load additional data
   useEffect(() => {
-    if (loadProgress === 1) {
+    if (loadProgress === LoadingStage.HasCoreData) {
       const loadSecondaryData = async (dataContext: DataContextType) => {
         await loadSupplementalData(dataContext);
-        setLoadProgress(2);
+        setLoadProgress(LoadingStage.HasSupplementalData);
       };
 
       loadSecondaryData(dataContext);
@@ -120,6 +127,8 @@ const DataProvider: React.FC<{
       languageSource,
       localeSeparator,
     );
+    if (loadProgress === LoadingStage.HasSupplementalData)
+      setLoadProgress(LoadingStage.AlgorithmsFinished);
   }, [
     languagesInSelectedSource,
     coreData.locales,

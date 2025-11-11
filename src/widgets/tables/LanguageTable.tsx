@@ -69,20 +69,6 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           columnGroup: 'Context',
         },
-        {
-          key: 'Writing Systems',
-          description: (
-            <>
-              The writing systems used to write this language. The possible values come from ISO
-              15924, which include some combined systems like <code>Hani</code> including all
-              Chinese Characters, including Simplified <code>Hans</code> or Traditional{' '}
-              <code>Hant</code>.
-            </>
-          ),
-          render: (lang) => <LanguageWritingSystems lang={lang} />,
-          isInitiallyVisible: false,
-          columnGroup: 'Context',
-        },
         ...LanguagePopulationColumns,
         ...LanguageVitalityColumns,
         ...LanguageDigitalSupportColumns,
@@ -137,6 +123,20 @@ const LanguageTable: React.FC = () => {
           columnGroup: 'Location',
         },
         {
+          key: 'Writing Systems',
+          description: (
+            <>
+              The writing systems used to write this language. The possible values come from ISO
+              15924, which include some combined systems like <code>Hani</code> including all
+              Chinese Characters, including Simplified <code>Hans</code> or Traditional{' '}
+              <code>Hant</code>.
+            </>
+          ),
+          render: (lang) => <LanguageWritingSystems lang={lang} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Writing',
+        },
+        {
           key: 'Literacy',
           render: (lang) => {
             const literacy = getObjectLiteracy(lang);
@@ -147,7 +147,7 @@ const LanguageTable: React.FC = () => {
           isInitiallyVisible: false,
           sortParam: SortBy.Literacy,
           valueType: TableValueType.Numeric,
-          columnGroup: 'Vitality',
+          columnGroup: 'Writing',
         },
         {
           key: 'Plural rules',

@@ -31,6 +31,7 @@ const FilterPath: React.FC = () => {
     searchString,
     territoryFilter,
     territoryScopes,
+    writingSystemFilter,
     vitalityISO,
     vitalityEth2013,
     vitalityEth2025,
@@ -119,6 +120,19 @@ const FilterPath: React.FC = () => {
           onClick={() => updatePageParams({ territoryFilter: '' })}
           style={{ padding: '0.25em' }}
           hoverContent="Clear territory filter"
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+    writingSystemFilter !== '' && (
+      <>
+        In &quot;{writingSystemFilter}&quot;
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ writingSystemFilter: '' })}
+          style={{ padding: '0.25em' }}
+          hoverContent="Clear writing system filter"
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>

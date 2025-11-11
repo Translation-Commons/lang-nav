@@ -90,8 +90,8 @@ export function getSortField(
 
 export function getSortFunctionParameterized(
   sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource,
-  sortDirection: SortBehavior,
+  effectiveLanguageSource: LanguageSource = LanguageSource.All,
+  sortDirection: SortBehavior = SortBehavior.Normal,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;
   return (a: ObjectData, b: ObjectData) => {

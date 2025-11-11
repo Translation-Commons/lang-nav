@@ -49,6 +49,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   sortBy: SortBy.Population,
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   territoryFilter: '',
+  writingSystemFilter: '',
   vitalityISO: [],
   vitalityEth2013: [],
   vitalityEth2025: [],

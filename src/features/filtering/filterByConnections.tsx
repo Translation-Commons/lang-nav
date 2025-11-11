@@ -3,9 +3,23 @@ import { useCallback } from 'react';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import { ObjectData, TerritoryData, WritingSystemData } from '@entities/types/DataTypes';
+
+import { toTitleCase } from '@shared/lib/stringUtils';
 
 import { FilterFunctionType } from './filter';
+
+/**
+ * Returns a combined function that will filter objects by other objects they are connected to.
+ */
+export function getFilterByConnections(): FilterFunctionType {
+  const filterByTerritory = getFilterByTerritory();
+  const filterByWritingSystem = getFilterByWritingSystem();
+  return useCallback(
+    (object: ObjectData) => filterByTerritory(object) && filterByWritingSystem(object),
+    [filterByTerritory, filterByWritingSystem],
+  );
+}
 
 /**
  * Provide a function that returns true for items that are relevant to a territory.
@@ -49,5 +63,48 @@ function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
       return [object.territoryOfOrigin].filter((t) => t != null);
     case ObjectType.VariantTag:
       return [];
+  }
+}
+
+export function getFilterByWritingSystem(): FilterFunctionType {
+  const { writingSystemFilter } = usePageParams();
+  // Split up strings like "United States [US]" into "US" and "United States"
+  const splitFilter = writingSystemFilter.split('[');
+  const nameMatch = splitFilter[0]?.toLowerCase().trim();
+  let codeMatch = '';
+  if (writingSystemFilter.length === 4 && writingSystemFilter.match(/[A-Z][a-z]{3}/)) {
+    codeMatch = writingSystemFilter.toUpperCase(); // ISO 15924 code
+  } else if (splitFilter.length > 1) {
+    const codeSection = splitFilter[1].split(']')[0];
+    if (codeSection) codeMatch = toTitleCase(codeSection);
+  }
+
+  return useCallback(
+    (object: ObjectData) => {
+      if (!writingSystemFilter) return true;
+      const scripts = getWritingSystemsRelevantToObject(object);
+      if (codeMatch !== '') return scripts.some((ws) => ws.ID === codeMatch);
+      return scripts.some((ws) => ws.nameDisplay.toLowerCase().startsWith(nameMatch));
+    },
+    [writingSystemFilter, codeMatch, nameMatch],
+  );
+}
+
+function getWritingSystemsRelevantToObject(object: ObjectData): WritingSystemData[] {
+  switch (object.type) {
+    case ObjectType.Territory:
+      return object.locales?.flatMap((loc) => loc.writingSystem).filter((ws) => !!ws) ?? [];
+    case ObjectType.Locale:
+      return [object.writingSystem ?? object.language?.primaryWritingSystem].filter((ws) => !!ws);
+    case ObjectType.Census:
+      return []; // Not easy to get
+    case ObjectType.Language:
+      return Object.values(object.writingSystems ?? {});
+    case ObjectType.WritingSystem:
+      return [object, object.parentWritingSystem, ...(object.childWritingSystems ?? [])].filter(
+        (ws) => !!ws,
+      );
+    case ObjectType.VariantTag:
+      return []; // Not easy to get
   }
 }

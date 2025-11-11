@@ -69,6 +69,7 @@ export enum PageParamKey {
   sortBy = 'sortBy',
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
+  writingSystemFilter = 'writingSystemFilter',
   view = 'view',
   vitalityISO = 'vitalityISO',
   vitalityEth2013 = 'vitalityEth2013',
@@ -92,6 +93,7 @@ export type PageParams = {
   sortBy: SortBy;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
+  writingSystemFilter: string;
   view: View;
   vitalityISO: VitalityISO[];
   vitalityEth2013: VitalityEthnologueFine[];
@@ -115,6 +117,7 @@ export type PageParamsOptional = {
   sortBy?: SortBy;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
+  writingSystemFilter?: string;
   view?: View;
   vitalityISO?: VitalityISO[];
   vitalityEth2013?: VitalityEthnologueFine[];

@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
-import { getFilterByTerritory } from '@features/filtering/filterByConnections';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -22,7 +22,7 @@ interface Props {
 const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBar = true }) => {
   const { page, limit } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const filterByScope = getScopeFilter();
   const filterByVitality = getFilterByVitality();
 
@@ -31,10 +31,10 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   const nFiltered = useMemo(() => {
     return objects
       .filter(filterByScope)
-      .filter(filterByTerritory)
+      .filter(filterByConnections)
       .filter(filterByVitality)
       .filter(filterBySubstring).length;
-  }, [objects, filterByScope, filterByTerritory, filterByVitality, filterBySubstring]);
+  }, [objects, filterByScope, filterByConnections, filterByVitality, filterBySubstring]);
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);

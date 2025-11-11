@@ -5,7 +5,7 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
-import { getFilterByTerritory } from '@features/filtering/filterByConnections';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import usePagination from '@features/pagination/usePagination';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -36,7 +36,7 @@ function InteractiveObjectTable<T extends ObjectData>({
 }: Props<T>) {
   const sortFunction = getSortFunction();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const filterByVitality = getFilterByVitality();
   const scopeFilter = getScopeFilter();
   const { getCurrentObjects } = usePagination<T>();
@@ -49,10 +49,17 @@ function InteractiveObjectTable<T extends ObjectData>({
     return objects
       .filter(scopeFilter)
       .filter(filterByVitality)
-      .filter(filterByTerritory)
+      .filter(filterByConnections)
       .filter(filterBySubstring)
       .sort(sortFunction);
-  }, [sortFunction, objects, filterBySubstring, filterByTerritory, filterByVitality, scopeFilter]);
+  }, [
+    sortFunction,
+    objects,
+    filterBySubstring,
+    filterByConnections,
+    filterByVitality,
+    scopeFilter,
+  ]);
   const currentObjects = getCurrentObjects(objectsFilteredAndSorted);
 
   return (
