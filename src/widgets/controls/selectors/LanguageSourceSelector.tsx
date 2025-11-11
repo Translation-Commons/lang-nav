@@ -5,6 +5,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import { LanguageSource } from '@entities/language/LanguageTypes';
 
 import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplayContext';
 
 const LanguageListSourceSelector: React.FC = () => {
   const { languageSource, updatePageParams } = usePageParams();
@@ -25,6 +26,7 @@ const LanguageListSourceSelector: React.FC = () => {
       options={Object.values(LanguageSource)}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}
       selected={languageSource}
+      display={SelectorDisplay.ButtonList}
       getOptionDescription={(languageSource) => (
         <LanguageSourceDescription languageSource={languageSource} />
       )}

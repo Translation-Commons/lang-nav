@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
+import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplayContext';
 
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -39,6 +40,7 @@ const LimitSelector: React.FC = () => {
         onChange={(limitStr: string) => updatePageParams({ limit: LIMIT_OPTIONS[limitStr] })}
         selected={selectedFromPresent || 'custom'}
         selectorStyle={{ maxWidth: 200 }}
+        display={SelectorDisplay.ButtonList}
       />
       or pick it manually
       <div
