@@ -4,7 +4,6 @@ import { PageBrightnessPreference, usePageBrightness } from '@shared/hooks/usePa
 import { toSentenceCase } from '@shared/lib/stringUtils';
 
 import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplay';
 
 const PageBrightnessSelector: React.FC = () => {
   const { preference, setPreference } = usePageBrightness();
@@ -16,7 +15,6 @@ const PageBrightnessSelector: React.FC = () => {
       options={['light', 'dark', 'follow device']}
       onChange={(preference: PageBrightnessPreference) => setPreference(preference)}
       selected={preference}
-      display={SelectorDisplay.Dropdown}
       getOptionLabel={toSentenceCase}
     />
   );

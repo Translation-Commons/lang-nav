@@ -1,4 +1,7 @@
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@widgets/controls/components/SelectorDisplayContext';
 
 import useFilteredObjects from '@features/filtering/useFilteredObjects';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
@@ -50,16 +53,18 @@ function ViewMap() {
       </div>
       <VisibleItemsMeter objects={filteredObjects} />
       <ObjectMap objects={filteredObjects} borders={'no_borders'} />
-      <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
-        <div>
-          {colorBy === 'None'
-            ? 'You can color the circles using this selector:'
-            : `Circles are colored by `}
+      <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+        <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
+          <div>
+            {colorBy === 'None'
+              ? 'You can color the circles using this selector:'
+              : `Circles are colored by `}
+          </div>
+          <ColorBySelector />
+          <div>{colorBy !== 'None' && 'using the color gradient'}</div>
+          <ColorGradientSelector />
         </div>
-        <ColorBySelector display={SelectorDisplay.InlineDropdown} />
-        <div>{colorBy !== 'None' && 'using the color gradient'}</div>
-        <ColorGradientSelector display={SelectorDisplay.InlineDropdown} />
-      </div>
+      </SelectorDisplayProvider>
       {objectsWithoutCoordinates.length > 0 && (
         <div>
           The following {getObjectTypeLabelPlural(objectType)} do not have defined coordinates:{' '}

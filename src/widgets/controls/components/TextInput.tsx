@@ -8,7 +8,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
 
-import { SelectorDisplay } from './SelectorDisplay';
+import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 import { SelectorDropdown } from './SelectorDropdown';
 import { getOptionStyle } from './SelectorOption';
 
@@ -22,7 +22,6 @@ type Props = {
   getSuggestions?: (query: string) => Promise<Suggestion[]>;
   inputStyle?: React.CSSProperties;
   onChange: (value: string) => void;
-  display: SelectorDisplay;
   pageParameter?: PageParamKey;
   placeholder?: string;
   value: string;
@@ -37,12 +36,12 @@ const TextInput: React.FC<Props> = ({
   getSuggestions = () => [],
   inputStyle,
   onChange,
-  display,
   pageParameter,
   placeholder,
   value,
 }) => {
   const { CalculateWidthFromHere, width } = useAutoAdjustedWidth(value);
+  const { display } = useSelectorDisplay();
 
   // Using a new variable immediateValue to allow users to edit the input box without causing computational
   // changes that could slow down rendering and cause a bad UX.
@@ -115,7 +114,6 @@ const TextInput: React.FC<Props> = ({
           setImmediateValue('');
           setShowSuggestions(false);
         }}
-        display={display}
       />
     </>
   );
@@ -179,8 +177,8 @@ const SuggestionRowDetails: React.FC<{
 
 const ClearButton: React.FC<{
   onClick: () => void;
-  display: SelectorDisplay;
-}> = ({ onClick, display }) => {
+}> = ({ onClick }) => {
+  const { display } = useSelectorDisplay();
   return (
     <HoverableButton
       buttonType="reset"

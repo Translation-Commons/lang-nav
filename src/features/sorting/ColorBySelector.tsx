@@ -1,19 +1,21 @@
 import React from 'react';
 
+import {
+  SelectorDisplay,
+  useSelectorDisplay,
+} from '@widgets/controls/components/SelectorDisplayContext';
+
 import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortBysApplicableToObjectType } from '@features/sorting/sort';
 import { ColorBy, SortBy } from '@features/sorting/SortTypes';
 
 import Selector from '../../widgets/controls/components/Selector';
-import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
 
-type Props = {
-  display?: SelectorDisplay;
-};
-
-const ColorBySelector: React.FC<Props> = ({ display = SelectorDisplay.Dropdown }) => {
+const ColorBySelector: React.FC = () => {
   const { colorBy, updatePageParams, objectType, view } = usePageParams();
+  const { display } = useSelectorDisplay();
+
   const applicableColorBys = getSortBysApplicableToObjectType(objectType);
   const colorByOptions: ColorBy[] = [
     'None',
@@ -25,12 +27,11 @@ const ColorBySelector: React.FC<Props> = ({ display = SelectorDisplay.Dropdown }
 
   return (
     <Selector<ColorBy>
-      selectorLabel={display === SelectorDisplay.Dropdown ? 'Color by' : undefined}
+      selectorLabel={display === SelectorDisplay.Dropdown ? 'Color By' : undefined}
       selectorDescription="Choose the color coding for items in the view."
       options={colorByOptions}
       onChange={(colorBy) => updatePageParams({ colorBy })}
       selected={colorBy}
-      display={display}
     />
   );
 };

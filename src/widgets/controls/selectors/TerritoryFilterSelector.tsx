@@ -7,7 +7,6 @@ import usePageParams from '@features/page-params/usePageParams';
 
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 
-import { SelectorDisplay } from '../components/SelectorDisplay';
 import SelectorLabel from '../components/SelectorLabel';
 import TextInput, { Suggestion } from '../components/TextInput';
 
@@ -44,13 +43,11 @@ const TerritoryFilterSelector: React.FC = () => {
   return (
     <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
       <SelectorLabel
-        display={SelectorDisplay.ButtonList}
         label="Relevant to Territory"
         description="Filter results by ones relevant in a territory."
       />
       <TextInput
         inputStyle={{ minWidth: '8em', marginLeft: '2em' }}
-        display={SelectorDisplay.ButtonList}
         getSuggestions={getSuggestions}
         onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}
         pageParameter={PageParamKey.territoryFilter}

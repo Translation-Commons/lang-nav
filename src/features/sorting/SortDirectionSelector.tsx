@@ -4,7 +4,6 @@ import usePageParams from '@features/page-params/usePageParams';
 import { SortBehavior } from '@features/sorting/SortTypes';
 
 import Selector from '../../widgets/controls/components/Selector';
-import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
 
 const SortDirectionSelector: React.FC = () => {
   const { sortBehavior, updatePageParams } = usePageParams();
@@ -12,7 +11,6 @@ const SortDirectionSelector: React.FC = () => {
   return (
     <Selector<SortBehavior>
       selectorLabel="Sort Direction"
-      display={SelectorDisplay.ButtonGroup}
       options={[SortBehavior.Normal, SortBehavior.Reverse]}
       getOptionLabel={(direction) => SortBehavior[direction]}
       getOptionDescription={(direction) =>

@@ -12,6 +12,7 @@ import SortBySelector from '../../features/sorting/SortBySelector';
 import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
+import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
@@ -21,7 +22,11 @@ import ProfileSelector from './selectors/ProfileSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
-import VitalitySelector from './selectors/VitalitySelector';
+import {
+  VitalityEth2013Selector,
+  VitalityEth2025Selector,
+  VitalityISOSelector,
+} from './selectors/VitalitySelector';
 
 import './controls.css';
 
@@ -40,39 +45,59 @@ const SidePanel: React.FC = () => {
       setPanelWidth={setPanelWidth}
       panelRef={panelRef}
     >
-      <SidePanelSection panelWidth={panelWidth} title="Common Actions">
-        <ObjectiveList />
-      </SidePanelSection>
+      <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
+        <SidePanelSection
+          panelWidth={panelWidth}
+          title="Common Actions"
+          optionsName="common actions"
+        >
+          <ObjectiveList />
+        </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth} title="Data">
-        <ProfileSelector />
-        <ObjectTypeSelector />
-        <LanguageListSourceSelector />
-      </SidePanelSection>
+        <SidePanelSection
+          panelWidth={panelWidth}
+          title="Data"
+          optionsName="data options"
+          alwaysShownNodes={<ObjectTypeSelector />}
+        >
+          <ProfileSelector />
+          <LanguageListSourceSelector />
+        </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth} title="Filters">
-        <LanguageScopeSelector />
-        <TerritoryScopeSelector />
-        <TerritoryFilterSelector />
-        <VitalitySelector />
-      </SidePanelSection>
+        <SidePanelSection
+          panelWidth={panelWidth}
+          title="Filter"
+          optionsName="filters"
+          alwaysShownNodes={<TerritoryFilterSelector />}
+        >
+          <LanguageScopeSelector />
+          <TerritoryScopeSelector />
+          <VitalityISOSelector />
+          <VitalityEth2013Selector />
+          <VitalityEth2025Selector />
+        </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth} title="View Options">
-        <ViewSelector />
-        <LimitInput />
-        <SortBySelector />
-        <SortDirectionSelector />
-        <ColorBySelector />
-        <ColorGradientSelector />
-        <LocaleSeparatorSelector />
-        <PageBrightnessSelector />
-      </SidePanelSection>
+        <SidePanelSection
+          panelWidth={panelWidth}
+          title="View"
+          optionsName="view options"
+          alwaysShownNodes={<ViewSelector />}
+        >
+          <LimitInput />
+          <SortBySelector />
+          <SortDirectionSelector />
+          <ColorBySelector />
+          <ColorGradientSelector />
+          <LocaleSeparatorSelector />
+          <PageBrightnessSelector />
+        </SidePanelSection>
 
-      <SidePanelToggleButton
-        isOpen={isOpen}
-        onClick={() => setIsOpen((open) => !open)}
-        panelWidth={panelWidth}
-      />
+        <SidePanelToggleButton
+          isOpen={isOpen}
+          onClick={() => setIsOpen((open) => !open)}
+          panelWidth={panelWidth}
+        />
+      </SelectorDisplayProvider>
     </LeftAlignedPanel>
   );
 };
@@ -139,8 +164,13 @@ const SidePanelToggleButton: React.FC<{
 };
 
 const SidePanelSection: React.FC<
-  React.PropsWithChildren<{ panelWidth: number; title: string }>
-> = ({ children, panelWidth, title }) => {
+  React.PropsWithChildren<{
+    panelWidth: number;
+    title: string;
+    alwaysShownNodes?: React.ReactNode;
+    optionsName: string;
+  }>
+> = ({ children, panelWidth, title, alwaysShownNodes, optionsName }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
@@ -151,27 +181,37 @@ const SidePanelSection: React.FC<
         marginBottom: '0.5em',
       }}
     >
-      <HoverableButton
+      <div
         style={{
           fontSize: '1.2em',
           fontWeight: 'lighter',
           borderRadius: '0',
           width: '100%',
           textAlign: 'left',
+          backgroundColor: 'var(--color-button-secondary)',
+          padding: '0.5em',
         }}
-        onClick={() => setIsExpanded((prev) => !prev)}
       >
-        {title} {isExpanded ? '▼' : '▶'}
-      </HoverableButton>
+        {title}
+      </div>
       <div
         style={{
+          display: 'flex',
           padding: '0.25em 0.5em',
-          display: isExpanded ? 'flex' : 'none',
           gap: '0.5em',
           flexDirection: 'column',
         }}
       >
+        {alwaysShownNodes}
         {isExpanded && children}
+        {
+          <HoverableButton
+            style={{ padding: '0em 0.25em' }}
+            onClick={() => setIsExpanded((prev) => !prev)}
+          >
+            {isExpanded ? `close extra ${optionsName} ▲` : `see all ${optionsName} ▶`}
+          </HoverableButton>
+        }
       </div>
     </div>
   );
