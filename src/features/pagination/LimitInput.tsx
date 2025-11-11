@@ -3,7 +3,6 @@ import React from 'react';
 import { PageParamKey } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
-import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
 import SelectorLabel from '../../widgets/controls/components/SelectorLabel';
 import TextInput from '../../widgets/controls/components/TextInput';
 
@@ -12,11 +11,7 @@ const LimitInput: React.FC = () => {
 
   return (
     <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
-      <SelectorLabel
-        description={`Limit how many results are shown.`}
-        label="Item Limit"
-        display={SelectorDisplay.ButtonList}
-      />
+      <SelectorLabel description="Limit how many results are shown." label="Item Limit" />
       <TextInput
         inputStyle={{ minWidth: '3em' }}
         getSuggestions={async () => [
@@ -29,7 +24,6 @@ const LimitInput: React.FC = () => {
           { searchString: '', label: 'default' },
         ]}
         onChange={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
-        display={SelectorDisplay.ButtonList}
         pageParameter={PageParamKey.limit}
         placeholder="∞"
         value={limit.toString()}

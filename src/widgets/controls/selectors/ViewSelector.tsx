@@ -4,6 +4,7 @@ import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplayContext';
 
 const ViewSelector: React.FC = () => {
   const { view, updatePageParams } = usePageParams();
@@ -14,6 +15,7 @@ const ViewSelector: React.FC = () => {
       getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
       options={Object.values(View)}
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
+      display={SelectorDisplay.ButtonList}
       selected={view}
     />
   );

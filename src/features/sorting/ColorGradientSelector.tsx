@@ -1,5 +1,10 @@
 import React from 'react';
 
+import {
+  SelectorDisplay,
+  useSelectorDisplay,
+} from '@widgets/controls/components/SelectorDisplayContext';
+
 import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import { ColorGradient } from '@features/sorting/SortTypes';
@@ -7,16 +12,12 @@ import { ColorGradient } from '@features/sorting/SortTypes';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 
 import Selector from '../../widgets/controls/components/Selector';
-import { SelectorDisplay } from '../../widgets/controls/components/SelectorDisplay';
 
 import BaseColorBar from './BaseColorBar';
 
-type Props = {
-  display?: SelectorDisplay;
-};
-
-const ColorGradientSelector: React.FC<Props> = ({ display = SelectorDisplay.Dropdown }) => {
+const ColorGradientSelector: React.FC = () => {
   const { colorBy, colorGradient, updatePageParams, view } = usePageParams();
+  const { display } = useSelectorDisplay();
 
   // Only showing if coloring is enabled
   if (colorBy == 'None') return null;
@@ -31,7 +32,6 @@ const ColorGradientSelector: React.FC<Props> = ({ display = SelectorDisplay.Drop
       options={Object.values(ColorGradient).filter((cg) => typeof cg === 'number')}
       onChange={(colorGradient) => updatePageParams({ colorGradient })}
       selected={colorGradient}
-      display={display}
       getOptionLabel={(colorGradient) => (
         <div style={{ minWidth: '4em', height: '16px', display: 'inline-block' }}>
           <BaseColorBar colorGradient={colorGradient} />

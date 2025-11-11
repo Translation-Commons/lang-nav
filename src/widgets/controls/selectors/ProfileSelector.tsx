@@ -4,7 +4,6 @@ import { ProfileType } from '@features/page-params/Profiles';
 import usePageParams from '@features/page-params/usePageParams';
 
 import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplay';
 
 const ProfileSelector: React.FC = () => {
   const { profile, updatePageParams } = usePageParams();
@@ -16,7 +15,6 @@ const ProfileSelector: React.FC = () => {
       options={Object.values(ProfileType)}
       onChange={(profile: ProfileType) => updatePageParams({ profile })}
       selected={profile}
-      display={SelectorDisplay.Dropdown}
     />
   );
 };

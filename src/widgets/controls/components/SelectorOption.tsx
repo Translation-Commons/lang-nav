@@ -4,10 +4,9 @@ import HoverableButton from '@features/hovercard/HoverableButton';
 
 import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
-import { SelectorDisplay } from './SelectorDisplay';
+import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 
 type OptionProps<T> = {
-  display: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
   isSelected: boolean;
@@ -19,7 +18,6 @@ type OptionProps<T> = {
 };
 
 function SelectorOption<T extends React.Key>({
-  display,
   getOptionDescription,
   getOptionLabel = (val) => val as string,
   isSelected,
@@ -30,6 +28,7 @@ function SelectorOption<T extends React.Key>({
   position = PositionInGroup.Standalone,
 }: OptionProps<T>) {
   let className = 'selectorOption';
+  const { display } = useSelectorDisplay();
   if (isSelected) className += ' selected';
   if (!isSelected) className += ' unselected';
   if (display === SelectorDisplay.InlineDropdown && position === PositionInGroup.Standalone)

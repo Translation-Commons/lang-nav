@@ -22,6 +22,7 @@ export const VitalityISOSelector: React.FC = () => {
     <Selector
       selectorLabel="ISO Language Status"
       selectorDescription="Filter languages by their ISO status (Living, Extinct, etc.)"
+      labelWhenEmpty="Any"
       options={Object.values(VitalityISO).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityISO) =>
         vitalityISO.includes(value)
@@ -39,8 +40,9 @@ export const VitalityEth2013Selector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Ethnologue 2013 Status"
+      selectorLabel="Vitality Eth 2013"
       selectorDescription="Filter languages by their Ethnologue 2013 vitality classification"
+      labelWhenEmpty="Any"
       options={Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityEthnologueFine) =>
         vitalityEth2013.includes(value)
@@ -58,8 +60,9 @@ export const VitalityEth2025Selector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Ethnologue 2025 Status"
+      selectorLabel="Vitality Eth 2025"
       selectorDescription="Filter languages by their Ethnologue 2025 vitality classification"
+      labelWhenEmpty="Any"
       options={Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityEthnologueCoarse) =>
         vitalityEth2025.includes(value)
@@ -71,15 +74,3 @@ export const VitalityEth2025Selector: React.FC = () => {
     />
   );
 };
-
-const VitalitySelector: React.FC = () => {
-  return (
-    <div className="flex flex-col gap-4">
-      <VitalityISOSelector />
-      <VitalityEth2013Selector />
-      <VitalityEth2025Selector />
-    </div>
-  );
-};
-
-export default VitalitySelector;

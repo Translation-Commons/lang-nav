@@ -12,6 +12,7 @@ import SortBySelector from '../../features/sorting/SortBySelector';
 import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
+import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
@@ -21,7 +22,11 @@ import ProfileSelector from './selectors/ProfileSelector';
 import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
-import VitalitySelector from './selectors/VitalitySelector';
+import {
+  VitalityEth2013Selector,
+  VitalityEth2025Selector,
+  VitalityISOSelector,
+} from './selectors/VitalitySelector';
 
 import './controls.css';
 
@@ -54,7 +59,9 @@ const SidePanel: React.FC = () => {
         <LanguageScopeSelector />
         <TerritoryScopeSelector />
         <TerritoryFilterSelector />
-        <VitalitySelector />
+        <VitalityISOSelector />
+        <VitalityEth2013Selector />
+        <VitalityEth2025Selector />
       </SidePanelSection>
 
       <SidePanelSection panelWidth={panelWidth} title="View Options">
@@ -139,8 +146,8 @@ const SidePanelToggleButton: React.FC<{
 };
 
 const SidePanelSection: React.FC<
-  React.PropsWithChildren<{ panelWidth: number; title: string }>
-> = ({ children, panelWidth, title }) => {
+  React.PropsWithChildren<{ panelWidth: number; title: string; selectorDisplay?: SelectorDisplay }>
+> = ({ children, panelWidth, title, selectorDisplay = SelectorDisplay.Dropdown }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
 
   return (
@@ -171,7 +178,9 @@ const SidePanelSection: React.FC<
           flexDirection: 'column',
         }}
       >
-        {isExpanded && children}
+        <SelectorDisplayProvider display={selectorDisplay}>
+          {isExpanded && children}
+        </SelectorDisplayProvider>
       </div>
     </div>
   );

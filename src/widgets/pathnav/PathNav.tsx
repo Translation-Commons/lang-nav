@@ -2,7 +2,10 @@ import { SlashIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@widgets/controls/components/SelectorDisplayContext';
 
 import { ObjectType, View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
@@ -42,7 +45,6 @@ const ObjectTypeSelector: React.FC = () => {
 
   return (
     <Selector
-      display={SelectorDisplay.InlineDropdown}
       options={Object.values(ObjectType)}
       onChange={goToObjectType}
       selected={objectType}
@@ -56,7 +58,6 @@ const ViewSelector: React.FC = () => {
 
   return (
     <Selector
-      display={SelectorDisplay.InlineDropdown}
       options={Object.values(View)}
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
       selected={view}
@@ -72,7 +73,9 @@ export const PathContainer: React.FC<{
     <div
       style={{ display: 'flex', alignItems: 'center', gap: '0.5em', flexWrap: 'wrap', ...style }}
     >
-      {children}
+      <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+        {children}
+      </SelectorDisplayProvider>
     </div>
   );
 };
