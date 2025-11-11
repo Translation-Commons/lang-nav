@@ -2,17 +2,18 @@ import { LocaleSeparator } from '@features/page-params/PageParamTypes';
 
 import { ISO3166Code, LocaleData, OfficialStatus } from '@entities/types/DataTypes';
 
-export function getLocaleName(locale: LocaleData): string {
+export function getLocaleName(locale: LocaleData, includeTerritory: boolean = true): string {
   const languageName = locale.language?.nameDisplay ?? locale.languageCode;
-  const territoryName = locale.territory?.nameDisplay ?? locale.territoryCode;
+  const territoryName = includeTerritory
+    ? (locale.territory?.nameDisplay ?? locale.territoryCode)
+    : null;
   const scriptName = locale.writingSystem?.nameDisplay ?? locale.scriptCode;
   const variantNames =
     locale.variantTags?.map((tag) => tag.nameDisplay).join(', ') ??
     locale.variantTagCodes?.join(', ');
+  const extraBits = [territoryName, scriptName, variantNames].filter(Boolean).join(', ');
 
-  return (
-    languageName + ' (' + [territoryName, scriptName, variantNames].filter(Boolean).join(', ') + ')'
-  );
+  return extraBits ? languageName + ' (' + extraBits + ')' : languageName;
 }
 
 export function getLocaleCode(

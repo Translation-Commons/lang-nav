@@ -4,10 +4,11 @@ import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
-import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
+import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
+import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
@@ -28,7 +29,12 @@ const LocaleTable: React.FC = () => {
       )}
       columns={[
         CodeColumn,
-        NameColumn,
+        {
+          key: 'Name',
+          render: (object) => <LocaleNameWithFilters locale={object} />,
+          sortParam: SortBy.Name,
+          columnGroup: 'Names',
+        },
         EndonymColumn,
         ...LocalePopulationColumns,
         {
