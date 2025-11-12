@@ -146,6 +146,7 @@ describe('getSortByParameterized', () => {
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '001',
       '123',
+      'Teng',
       'sjn',
       'tolkorth', // Potential population same as sjn
       'AM',
@@ -155,7 +156,6 @@ describe('getSortByParameterized', () => {
       'sjn_123',
       'sjn_001',
       'sjn_BE',
-      'Teng',
       'sjn_Teng_BE',
       'sjn_Teng_123',
       'sjn_Teng_001',
@@ -184,7 +184,6 @@ describe('getSortByParameterized', () => {
       'sjn_ER',
       'ER',
       'dori0123',
-      'Teng',
       'sjn_Teng_BE', // lower than sjn_BE because not updated by census
       'sjn_Teng_123',
       'sjn_Teng_001',
@@ -197,6 +196,7 @@ describe('getSortByParameterized', () => {
       'AM',
       'sjn',
       'tolkorth',
+      'Teng',
       '123',
       '001',
     ]);
@@ -353,6 +353,7 @@ describe('getSortByParameterized', () => {
       'sjn_BE',
       'sjn_ER',
       'sjn_Teng_BE',
+      'tolkorth',
       'sjn_123',
       'sjn_Teng_123',
       'sjn_001',
@@ -362,7 +363,6 @@ describe('getSortByParameterized', () => {
       'AM',
       'be0590',
       'Teng',
-      'tolkorth',
     ]);
   });
 
@@ -406,12 +406,12 @@ describe('getSortByParameterized', () => {
       '123', // 2 languages: sjn, dori0123
       'ER', // 2 languages: sjn, dori0123
       '001', // 2 languages: sjn, dori0123
+      'Teng', // 2 languages: sjn, dori0123
       'tolkorth', // 2 languages: eng, spa
       'sjn_123', // 2 locales: sjn_ER, sjn_BE
       'sjn', // 1 dialect: dori0123
       'BE', // 1 locale: sjn_BE
       'be0590', // 1 language: sjn
-      'Teng', // 1 language: sjn
       'sjn_Teng_123', // 1 locale: sjn_Teng_BE
       'dori0123_123', // 1 locale: dori0123_ER
       'sjn_001', // 1 locale: sjn_123

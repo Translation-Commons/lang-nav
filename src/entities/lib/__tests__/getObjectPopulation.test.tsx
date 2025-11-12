@@ -40,7 +40,7 @@ describe('getObjectPopulation', () => {
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
       sjn: 24000,
-      Teng: 9000, // all from sjn_Teng_BE
+      Teng: 26500, // some from sjn_Teng_BE, but also from the primary script for sjn & dori0123
       tolkorth: 24000, // Estimated from sjn
     });
   });

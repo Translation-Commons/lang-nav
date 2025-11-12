@@ -24,6 +24,8 @@ vi.mock('@features/filtering/filter', () => ({
 
 vi.mock('@features/filtering/filterByConnections', () => ({
   getFilterByConnections: vi.fn(),
+  getFilterByTerritory: vi.fn().mockReturnValue(() => true),
+  getFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
 }));
 
 vi.mock('@features/sorting/sort', () => ({

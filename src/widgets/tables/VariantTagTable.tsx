@@ -3,6 +3,7 @@ import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
@@ -10,6 +11,8 @@ import TableValueType from '@features/table/TableValueType';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { VariantTagData } from '@entities/types/DataTypes';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
 
 const VariantTagTable: React.FC = () => {
   const { variantTags } = useDataContext();
@@ -30,10 +33,25 @@ const VariantTagTable: React.FC = () => {
         {
           key: 'Languages',
           render: (object) => (
+            <>
+              <CommaSeparated limit={1} limitText="short">
+                {object.languages.map((lang) => (
+                  <HoverableObjectName object={lang} key={lang.ID} />
+                ))}
+              </CommaSeparated>
+            </>
+          ),
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Language,
+        },
+        {
+          key: 'Language Count',
+          render: (object) => (
             <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
           ),
           valueType: TableValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
+          isInitiallyVisible: false,
         },
         {
           key: 'Potential Population',

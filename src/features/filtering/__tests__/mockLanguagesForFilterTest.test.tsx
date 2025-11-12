@@ -4,7 +4,14 @@ import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
-import { LocaleData, LocaleSource, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import {
+  LocaleData,
+  LocaleSource,
+  TerritoryData,
+  TerritoryScope,
+  WritingSystemData,
+  WritingSystemScope,
+} from '@entities/types/DataTypes';
 
 export function getMockLanguages() {
   const US: TerritoryData = {
@@ -29,34 +36,61 @@ export function getMockLanguages() {
     type: ObjectType.Locale,
     localeSource: LocaleSource.CreateRegionalLocales,
   };
+  const Latn: WritingSystemData = {
+    ID: 'Latn',
+    codeDisplay: 'Latn',
+    nameDisplay: 'Latin',
+    names: ['Latin'],
+    type: ObjectType.WritingSystem,
+    scope: WritingSystemScope.IndividualScript,
+  };
+  const Cyrl: WritingSystemData = {
+    ID: 'Cyrl',
+    codeDisplay: 'Cyrl',
+    nameDisplay: 'Cyrillic',
+    names: ['Cyrillic'],
+    type: ObjectType.WritingSystem,
+    scope: WritingSystemScope.IndividualScript,
+  };
 
   const ine = getBaseLanguageData('ine', 'Indo-European languages');
   ine.scope = LanguageScope.Family;
   ine.locales = [mul_US];
+  ine.writingSystems = { Latn, Cyrl };
   const eng = getBaseLanguageData('eng', 'English');
   eng.scope = LanguageScope.Language;
   eng.locales = [mul_US];
+  eng.writingSystems = { Latn };
+  eng.primaryWritingSystem = Latn;
   eng.vitalityEth2013 = VitalityEthnologueFine.National;
   const spa = getBaseLanguageData('spa', 'Spanish');
   spa.scope = LanguageScope.Language;
   spa.locales = [mul_US];
   spa.vitalityEth2013 = VitalityEthnologueFine.National;
+  spa.writingSystems = { Latn };
   const fra = getBaseLanguageData('fra', 'French');
   fra.scope = LanguageScope.Language;
   fra.locales = [mul_US];
   fra.vitalityEth2013 = VitalityEthnologueFine.Regional;
+  fra.writingSystems = { Latn };
   const deu = getBaseLanguageData('deu', 'German');
   deu.scope = LanguageScope.Language;
+  deu.writingSystems = { Latn };
   const ita = getBaseLanguageData('ita', 'Italian');
   ita.scope = LanguageScope.Language;
+  ita.writingSystems = { Latn };
+  const rus = getBaseLanguageData('rus', 'Russian');
+  rus.scope = LanguageScope.Language;
+  rus.writingSystems = { Cyrl };
+  rus.locales = [mul_US];
   const zho = getBaseLanguageData('zho', 'Chinese');
   zho.scope = LanguageScope.Macrolanguage;
-  return [ine, eng, spa, fra, deu, ita, zho];
+  return [ine, eng, spa, fra, deu, ita, rus, zho];
 }
 
 describe('Mock Languages for Filter Tests', () => {
   it('provides mock languages with expected properties', () => {
     const languages = getMockLanguages();
-    expect(languages.length).toBe(7);
+    expect(languages.length).toBe(8);
   });
 });

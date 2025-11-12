@@ -107,7 +107,7 @@ const LanguagesLargestDescendant: React.FC = () => {
             render: (lang: LanguageData) => {
               const relativePopulation =
                 getObjectPopulationPercentInBiggestDescendentLanguage(lang);
-              return relativePopulation ? numberToFixedUnlessSmall(relativePopulation * 100) : null;
+              return relativePopulation ? numberToFixedUnlessSmall(relativePopulation) : null;
             },
             valueType: TableValueType.Numeric,
             sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,

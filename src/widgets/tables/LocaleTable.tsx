@@ -70,7 +70,7 @@ const LocaleTable: React.FC = () => {
               Some locales do not include a writing system but it can usually be inferred based on
               the primary writing system for the language. For instance, <code>zh_CN</code> could be
               written in <code>Hant</code> or <code>Hans</code> writing. Since the primary writing
-              system in China is the Simplified character, it can be inferred to be{' '}
+              system in China is the Simplified characters, it can be inferred to be{' '}
               <code>Hans</code>.
             </>
           ),

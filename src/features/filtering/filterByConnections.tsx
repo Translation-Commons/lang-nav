@@ -73,7 +73,7 @@ export function getFilterByWritingSystem(): FilterFunctionType {
   const nameMatch = splitFilter[0]?.toLowerCase().trim();
   let codeMatch = '';
   if (writingSystemFilter.length === 4 && writingSystemFilter.match(/[A-Z][a-z]{3}/)) {
-    codeMatch = writingSystemFilter.toUpperCase(); // ISO 15924 code
+    codeMatch = toTitleCase(writingSystemFilter); // ISO 15924 code
   } else if (splitFilter.length > 1) {
     const codeSection = splitFilter[1].split(']')[0];
     if (codeSection) codeMatch = toTitleCase(codeSection);

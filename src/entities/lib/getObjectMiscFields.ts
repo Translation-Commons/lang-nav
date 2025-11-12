@@ -20,8 +20,9 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
       return object.language?.nameDisplay;
     case ObjectType.Language:
       return object.nameDisplay;
-    case ObjectType.Census:
     case ObjectType.VariantTag:
+      return object.languages?.[0]?.nameDisplay;
+    case ObjectType.Census:
     case ObjectType.WritingSystem:
       return undefined;
   }

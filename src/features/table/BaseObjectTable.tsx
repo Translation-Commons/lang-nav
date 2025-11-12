@@ -23,7 +23,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
         borderSpacing: '12px 0px',
       }}
     >
-      <thead>
+      <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1 }}>
         <tr>
           {visibleColumns.map((column) => (
             <th key={column.key} style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH }}>

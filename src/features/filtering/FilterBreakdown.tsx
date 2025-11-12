@@ -39,7 +39,14 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       filteredByVitality.length,
       filteredBySubstring.length,
     ];
-  }, [objects, filterByScope, filterByTerritory, filterByVitality, filterBySubstring]);
+  }, [
+    objects,
+    filterByScope,
+    filterByTerritory,
+    filterByWritingSystem,
+    filterByVitality,
+    filterBySubstring,
+  ]);
 
   const nOverall = objects.length;
   const nFilteredByScope = nOverall - nInScope;
