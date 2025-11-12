@@ -146,6 +146,7 @@ describe('getSortByParameterized', () => {
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '001',
       '123',
+      'Teng',
       'sjn',
       'tolkorth', // Potential population same as sjn
       'AM',
@@ -155,7 +156,6 @@ describe('getSortByParameterized', () => {
       'sjn_123',
       'sjn_001',
       'sjn_BE',
-      'Teng',
       'sjn_Teng_BE',
       'sjn_Teng_123',
       'sjn_Teng_001',
@@ -184,7 +184,6 @@ describe('getSortByParameterized', () => {
       'sjn_ER',
       'ER',
       'dori0123',
-      'Teng',
       'sjn_Teng_BE', // lower than sjn_BE because not updated by census
       'sjn_Teng_123',
       'sjn_Teng_001',
@@ -197,6 +196,7 @@ describe('getSortByParameterized', () => {
       'AM',
       'sjn',
       'tolkorth',
+      'Teng',
       '123',
       '001',
     ]);
@@ -352,7 +352,9 @@ describe('getSortByParameterized', () => {
       '001',
       'sjn_BE',
       'sjn_ER',
+      'Teng',
       'sjn_Teng_BE',
+      'tolkorth',
       'sjn_123',
       'sjn_Teng_123',
       'sjn_001',
@@ -361,6 +363,70 @@ describe('getSortByParameterized', () => {
       'HA',
       'AM',
       'be0590',
+    ]);
+  });
+
+  it('sortBy: Writing System', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(
+      SortBy.WritingSystem,
+      LanguageSource.All,
+      SortBehavior.Normal,
+    );
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      '123', // Tengwar
+      'sjn',
+      'dori0123',
+      'BE',
+      '001',
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER',
+      'Teng',
+      'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      // All below have no associated language, stable to input order
+      'ER',
+      'HA',
+      'AM',
+      'be0590',
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: Territory', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(
+      SortBy.Territory,
+      LanguageSource.All,
+      SortBehavior.Normal,
+    );
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'AM', // Aman
+      '001', // Arda
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      'sjn', // Beleriand
+      'BE',
+      'be0590',
+      'sjn_BE',
+      'sjn_Teng_BE',
+      'dori0123',
+      'ER', // Eriador
+      'sjn_ER',
+      'dori0123_ER',
+      'HA', // Harad
+      '123', // Middle Earth
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      // All below have no associated territory, stable to input order
       'Teng',
       'tolkorth',
     ]);
@@ -406,12 +472,12 @@ describe('getSortByParameterized', () => {
       '123', // 2 languages: sjn, dori0123
       'ER', // 2 languages: sjn, dori0123
       '001', // 2 languages: sjn, dori0123
+      'Teng', // 2 languages: sjn, dori0123
       'tolkorth', // 2 languages: eng, spa
       'sjn_123', // 2 locales: sjn_ER, sjn_BE
       'sjn', // 1 dialect: dori0123
       'BE', // 1 locale: sjn_BE
       'be0590', // 1 language: sjn
-      'Teng', // 1 language: sjn
       'sjn_Teng_123', // 1 locale: sjn_Teng_BE
       'dori0123_123', // 1 locale: dori0123_ER
       'sjn_001', // 1 locale: sjn_123

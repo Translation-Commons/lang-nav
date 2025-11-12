@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
+import WritingSystemFilterSelector from '@features/filtering/WritingSystemFilterSelector';
 import HoverableButton from '@features/hovercard/HoverableButton';
 import ColorBySelector from '@features/sorting/ColorBySelector';
 import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
@@ -70,6 +71,7 @@ const SidePanel: React.FC = () => {
           optionsName="filters"
           alwaysShownNodes={<TerritoryFilterSelector display={SelectorDisplay.ButtonList} />}
         >
+          <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageScopeSelector />
           <TerritoryScopeSelector />
           <VitalityISOSelector />

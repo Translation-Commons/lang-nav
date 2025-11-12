@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { getFilterBySubstring } from '@features/filtering/filter';
-import { getFilterByTerritory } from '@features/filtering/filterByConnections';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
@@ -19,16 +19,16 @@ const DubiousLanguages: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
     useDataContext();
   const filterBySubstring = getFilterBySubstring();
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
   const { getCurrentObjects } = usePagination<LanguageData>();
   const languagesFiltered = useMemo(
     () =>
       languagesInSelectedSource
         .filter(filterBySubstring)
-        .filter(filterByTerritory)
+        .filter(filterByConnections)
         .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
-    [languagesInSelectedSource, filterBySubstring, filterByTerritory],
+    [languagesInSelectedSource, filterBySubstring, filterByConnections],
   );
 
   return (

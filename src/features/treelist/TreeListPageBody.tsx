@@ -1,7 +1,7 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { getFilterBySubstring, getFilterByVitality } from '@features/filtering/filter';
-import { getFilterByTerritory } from '@features/filtering/filterByConnections';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -19,15 +19,40 @@ type Props = {
 };
 
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
-  const { limit, searchString } = usePageParams();
+  const {
+    limit,
+    searchString,
+    territoryFilter,
+    writingSystemFilter,
+    vitalityEth2013,
+    vitalityEth2025,
+    vitalityISO,
+  } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const filterByVitality = getFilterByVitality();
+  const filterActive = useMemo(
+    () =>
+      searchString ||
+      territoryFilter ||
+      writingSystemFilter ||
+      vitalityEth2013 ||
+      vitalityEth2025 ||
+      vitalityISO,
+    [
+      searchString,
+      territoryFilter,
+      writingSystemFilter,
+      vitalityEth2013,
+      vitalityEth2025,
+      vitalityISO,
+    ],
+  );
   const filterFunction = useCallback(
     (object: ObjectData) => {
-      return filterBySubstring(object) && filterByTerritory(object) && filterByVitality(object);
+      return filterBySubstring(object) && filterByConnections(object) && filterByVitality(object);
     },
-    [filterBySubstring, filterByTerritory, filterByVitality],
+    [filterBySubstring, filterByConnections, filterByVitality],
   );
 
   return (
@@ -46,7 +71,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
 
         <TreeListRoot
           rootNodes={rootNodes
-            .map((node) => filterBranch(node, searchString !== '' ? filterFunction : undefined))
+            .map((node) => filterBranch(node, filterActive ? filterFunction : undefined))
             .filter((node) => node != null)
             .slice(0, limit > 0 ? limit : undefined)}
         />

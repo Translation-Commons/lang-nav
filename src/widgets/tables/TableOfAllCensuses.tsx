@@ -59,6 +59,7 @@ const TableOfAllCensuses: React.FC = () => {
           key: 'Territory',
           render: (census) => <HoverableObjectName object={census.territory} />,
           isInitiallyVisible: false,
+          sortParam: SortBy.Territory,
         },
         {
           key: 'Year Collected',

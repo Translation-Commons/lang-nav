@@ -23,7 +23,9 @@ vi.mock('@features/filtering/filter', () => ({
 }));
 
 vi.mock('@features/filtering/filterByConnections', () => ({
-  getFilterByTerritory: vi.fn(),
+  getFilterByConnections: vi.fn(),
+  getFilterByTerritory: vi.fn().mockReturnValue(() => true),
+  getFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
 }));
 
 vi.mock('@features/sorting/sort', () => ({
@@ -81,7 +83,7 @@ describe('InteractiveObjectTable', () => {
   beforeEach(() => {
     // Set up default mock implementations
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => true);
-    vi.mocked(ConnectionFilters.getFilterByTerritory).mockReturnValue(() => true);
+    vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
@@ -126,19 +128,19 @@ describe('InteractiveObjectTable', () => {
 
   it('applies filtering functions', () => {
     const mockSubstringFilter = vi.fn(() => true);
-    const mockTerritoryFilter = vi.fn(() => true);
+    const mockConnectionsFilter = vi.fn(() => true);
     const mockVitalityFilter = vi.fn(() => true);
     const mockScopeFilter = vi.fn(() => true);
 
     vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
-    vi.mocked(ConnectionFilters.getFilterByTerritory).mockReturnValue(mockTerritoryFilter);
+    vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(mockConnectionsFilter);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
 
     renderObjectTable();
 
     expect(mockSubstringFilter).toHaveBeenCalled();
-    expect(mockTerritoryFilter).toHaveBeenCalled();
+    expect(mockConnectionsFilter).toHaveBeenCalled();
     expect(mockVitalityFilter).toHaveBeenCalled();
     expect(mockScopeFilter).toHaveBeenCalled();
   });

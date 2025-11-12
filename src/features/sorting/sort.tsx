@@ -1,3 +1,7 @@
+import {
+  getTerritoriesRelevantToObject,
+  getWritingSystemsRelevantToObject,
+} from '@features/filtering/filterByConnections';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
@@ -53,6 +57,10 @@ export function getSortField(
       return getObjectDateAsNumber(object);
     case SortBy.Language:
       return getObjectMostImportantLanguageName(object);
+    case SortBy.WritingSystem:
+      return getWritingSystemsRelevantToObject(object)?.[0]?.nameDisplay;
+    case SortBy.Territory:
+      return getTerritoriesRelevantToObject(object)?.[0]?.nameDisplay;
     case SortBy.Latitude:
       return object.type === ObjectType.Language ? object.latitude : undefined;
     case SortBy.Longitude:
@@ -90,8 +98,8 @@ export function getSortField(
 
 export function getSortFunctionParameterized(
   sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource,
-  sortDirection: SortBehavior,
+  effectiveLanguageSource: LanguageSource = LanguageSource.All,
+  sortDirection: SortBehavior = SortBehavior.Normal,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;
   return (a: ObjectData, b: ObjectData) => {
@@ -111,6 +119,8 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.Endonym:
     case SortBy.Code:
     case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
     case SortBy.Longitude:
     case SortBy.Latitude:
       return SortDirection.Ascending; // A to Z
@@ -144,6 +154,9 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Literacy,
         SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.CountOfLanguages,
+        SortBy.Language,
+        SortBy.WritingSystem,
+        SortBy.Territory,
       ];
     case ObjectType.Territory:
       return [
@@ -163,6 +176,8 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Literacy,
         SortBy.CountOfTerritories,
         SortBy.CountOfLanguages,
+        SortBy.WritingSystem,
+        SortBy.Territory,
         SortBy.PopulationAttested,
         SortBy.VitalityMetascore,
         SortBy.VitalityISO,
@@ -172,7 +187,14 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Longitude,
       ];
     case ObjectType.Census:
-      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
+      return [
+        SortBy.Date,
+        SortBy.Code,
+        SortBy.Name,
+        SortBy.Population,
+        SortBy.Territory,
+        SortBy.CountOfLanguages,
+      ];
     case ObjectType.WritingSystem:
       return [
         SortBy.Code,
@@ -180,6 +202,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Endonym,
         SortBy.Population,
         // SortBy.Literacy, Data not available yet
+        SortBy.Language,
         SortBy.CountOfLanguages,
         SortBy.PopulationOfDescendents,
       ];

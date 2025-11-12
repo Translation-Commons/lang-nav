@@ -49,6 +49,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   sortBy: SortBy.Population,
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   territoryFilter: '',
+  writingSystemFilter: '',
   vitalityISO: [],
   vitalityEth2013: [],
   vitalityEth2025: [],
@@ -171,6 +172,8 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.Endonym:
     case SortBy.Code:
     case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
       // More of a spectrum rather than directional
       return ColorGradient.HueRainbowBlueToRed;
   }

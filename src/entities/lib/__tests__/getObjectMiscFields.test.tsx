@@ -56,9 +56,11 @@ describe('getObjectMostImportantLanguageName', () => {
     expect(results).toEqual({
       '001': 'Sindarin',
       '123': 'Sindarin',
-      Teng: undefined,
+      Teng: 'Sindarin',
+      AM: undefined,
       ER: 'Sindarin',
       BE: 'Sindarin',
+      HA: undefined,
       dori0123: 'Doriathrin',
       dori0123_001: 'Doriathrin',
       dori0123_123: 'Doriathrin',
@@ -72,7 +74,7 @@ describe('getObjectMostImportantLanguageName', () => {
       sjn_Teng_BE: 'Sindarin',
       sjn_ER: 'Sindarin',
       sjn_BE: 'Sindarin',
-      tolkorth: undefined,
+      tolkorth: 'Sindarin',
     });
   });
 });
@@ -114,7 +116,7 @@ describe('getCountOfLanguages', () => {
     expect(results).toEqual({
       '001': 2, // sjn, dori0123
       '123': 2, // sjn, dori0123
-      Teng: 1,
+      Teng: 2, // sjn, dori0123
       ER: 2, // sjn, dori0123
       HA: undefined,
       BE: 1, // sjn

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { getFilterBySubstring } from '@features/filtering/filter';
-import { getFilterByTerritory } from '@features/filtering/filterByConnections';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
@@ -21,13 +21,13 @@ import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 const LanguagesWithIdenticalNames: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const filterBySubstring = getFilterBySubstring();
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
   const { getCurrentObjects } = usePagination<[string, LanguageData[]]>();
   const languagesByName = useMemo(() => {
     return languagesInSelectedSource
       .filter(filterBySubstring)
-      .filter(filterByTerritory)
+      .filter(filterByConnections)
       .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
         const name = lang.nameDisplay;
         if (languagesByName[name] == null) {
@@ -37,7 +37,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
         }
         return languagesByName;
       }, {});
-  }, [languagesInSelectedSource, filterBySubstring, filterByTerritory]);
+  }, [languagesInSelectedSource, filterBySubstring, filterByConnections]);
   const langsWithDupNames = Object.entries(languagesByName).reduce<Record<string, LanguageData[]>>(
     (duplicatedNames, [name, langs]) => {
       if (langs.length > 1) {

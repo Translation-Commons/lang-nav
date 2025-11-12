@@ -4,10 +4,11 @@ import React, { useMemo } from 'react';
 import HoverableButton from '@features/hovercard/HoverableButton';
 import usePageParams from '@features/page-params/usePageParams';
 
+import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
-import { getFilterByTerritory } from './filterByConnections';
+import { getFilterByTerritory, getFilterByWritingSystem } from './filterByConnections';
 
 type FilterExplanationProps = {
   objects: ObjectData[];
@@ -18,49 +19,63 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   objects,
   shouldFilterUsingSearchBar = true,
 }) => {
-  const { territoryFilter, updatePageParams, searchString } = usePageParams();
+  const { territoryFilter, writingSystemFilter, updatePageParams, searchString } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
+  const filterByWritingSystem = getFilterByWritingSystem();
   const filterByScope = getScopeFilter();
   const filterByVitality = getFilterByVitality();
 
-  const [nInScope, nInTerritory, nInVitality, nMatchingSubstring] = useMemo(() => {
+  const [nInScope, nInTerritory, nWrittenIn, nInVitality, nMatchingSubstring] = useMemo(() => {
     const filteredByScope = objects.filter(filterByScope);
     const filteredByTerritory = filteredByScope.filter(filterByTerritory);
-    const filteredByVitality = filteredByTerritory.filter(filterByVitality);
+    const filteredByWritingSystem = filteredByTerritory.filter(filterByWritingSystem);
+    const filteredByVitality = filteredByWritingSystem.filter(filterByVitality);
     const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
     return [
       filteredByScope.length,
       filteredByTerritory.length,
+      filteredByWritingSystem.length,
       filteredByVitality.length,
       filteredBySubstring.length,
     ];
-  }, [objects, filterByScope, filterByTerritory, filterByVitality, filterBySubstring]);
+  }, [
+    objects,
+    filterByScope,
+    filterByTerritory,
+    filterByWritingSystem,
+    filterByVitality,
+    filterBySubstring,
+  ]);
 
   const nOverall = objects.length;
   const nFilteredByScope = nOverall - nInScope;
   const nFilteredByTerritory = nInScope - nInTerritory;
-  const nFilteredByVitality = nInTerritory - nInVitality;
+  const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
+  const nFilteredByVitality = nWrittenIn - nInVitality;
   const nFilteredBySubstring = nInVitality - nMatchingSubstring;
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
-  if (
-    nFilteredByScope === 0 &&
-    nFilteredByTerritory === 0 &&
-    nFilteredByVitality === 0 &&
-    nFilteredBySubstring === 0
-  ) {
-    return null;
-  }
+
+  // Return an empty component if nothing was filtered
+  if (nOverall === nMatchingSubstring) return null;
+
+  // Cut out the codes if the filter is a combination of name + code, eg. "India [IN]"
+  const formattedTerritoryFilter = territoryFilter.split('[')[0].trim();
+  const formattedWritingFilter = writingSystemFilter.split('[')[0].trim(); // cuts out the territory code if its included
 
   return (
     <table>
       <tbody>
+        <tr>
+          <td>All {getObjectTypeLabelPlural(objects[0].type)}</td>
+          <td className="numeric">{nOverall.toLocaleString()}</td>
+        </tr>
         {nFilteredByScope > 0 && (
           <tr>
-            <td style={{ textAlign: 'left' }}>Out of scope:</td>
-            <td className="numeric">{nFilteredByScope.toLocaleString()}</td>
+            <td>Out of scope:</td>
+            <td className="numeric">{(nFilteredByScope * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -75,8 +90,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
         {nFilteredByTerritory > 0 && (
           <tr>
-            <td style={{ textAlign: 'left' }}>Not in territory ({territoryFilter}):</td>
-            <td className="numeric">{nFilteredByTerritory.toLocaleString()}</td>
+            <td>Not in territory &quot;{formattedTerritoryFilter}&quot;:</td>
+            <td className="numeric">{(nFilteredByTerritory * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -89,10 +104,26 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
             </td>
           </tr>
         )}
+        {nFilteredByWritingSystem > 0 && (
+          <tr>
+            <td>Not written in &quot;{formattedWritingFilter}&quot;:</td>
+            <td className="numeric">{(nFilteredByWritingSystem * -1).toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the writing system filter"
+                onClick={() => updatePageParams({ writingSystemFilter: '' })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
         {nFilteredByVitality > 0 && (
           <tr>
-            <td style={{ textAlign: 'left' }}>Not passing vitality filter:</td>
-            <td className="numeric">{nFilteredByVitality.toLocaleString()}</td>
+            <td>Not passing vitality filter:</td>
+            <td className="numeric">{(nFilteredByVitality * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -109,8 +140,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
         {nFilteredBySubstring > 0 && (
           <tr>
-            <td style={{ textAlign: 'left' }}>Not matching substring ({searchString}):</td>
-            <td className="numeric">{nFilteredBySubstring.toLocaleString()}</td>
+            <td>Not matching substring ({searchString}):</td>
+            <td className="numeric">{(nFilteredBySubstring * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -123,6 +154,14 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
             </td>
           </tr>
         )}
+        <tr>
+          <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
+            Results
+          </td>
+          <td className="numeric" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
+            {nMatchingSubstring.toLocaleString()}
+          </td>
+        </tr>
       </tbody>
     </table>
   );
