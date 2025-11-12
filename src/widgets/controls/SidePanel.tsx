@@ -52,7 +52,7 @@ const SidePanel: React.FC = () => {
           title="Common Actions"
           optionsName="common actions"
         >
-          <div></div>
+          <div>{/* intentionally blank */}</div>
           <ObjectiveList />
         </SidePanelSection>
 

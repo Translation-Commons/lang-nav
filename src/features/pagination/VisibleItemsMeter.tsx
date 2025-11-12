@@ -107,7 +107,7 @@ const HighLimitWarning: React.FC = () => {
 
   return (
     <div>
-      <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow' }} />
+      <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} />
       There are <strong>{limit}</strong> items visible, this may impact page performance. Consider
       reducing it to{' '}
       <HoverableButton
