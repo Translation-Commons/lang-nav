@@ -53,13 +53,13 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    47.1 |    58.5 |    33.3 |    47.1 |
+| `    ui`                                 |    47.1 |    59.5 |    33.3 |    47.1 |
 | `      CLDRCoverageInfo.tsx`             |    15.8 |   100.0 |     0   |    15.8 |
 | `      CLDRCoverageLevels.tsx`           |     7.9 |   100.0 |     0   |     7.9 |
 | `      CLDRWarningNotes.tsx`             |    18.6 |   100.0 |     0   |    18.6 |
 | `      ICUSupportStatus.tsx`             |    25.0 |   100.0 |     0   |    25.0 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
-| `      ObjectField.tsx`                  |    89.6 |    66.7 |   100.0 |    89.6 |
+| `      ObjectField.tsx`                  |    89.6 |    68.4 |   100.0 |    89.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
 | `      ObjectWikipediaInfo.tsx`          |    17.2 |   100.0 |     0   |    17.2 |
