@@ -1,8 +1,11 @@
+import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import FilterBreakdown from '@features/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import Hoverable from '@features/hovercard/Hoverable';
+import HoverableButton from '@features/hovercard/HoverableButton';
+import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -48,49 +51,90 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   if (page === nPages /* last page */) nShown = nFiltered - (nPages - 1) * limit;
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        gap: '0.25em',
-        flexWrap: 'wrap',
-        justifyContent: 'center',
-      }}
-    >
-      <div>
-        Showing{' '}
-        <Hoverable
-          hoverContent={
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-              <div>Set the maximum number of results that can appear.</div>
-              <LimitSelector />
-            </div>
-          }
-        >
-          {nShown.toLocaleString()}
-        </Hoverable>
-        {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
-      </div>
-      {nOverall > nFiltered && (
-        <Hoverable
-          hoverContent={
-            <FilterBreakdown
-              objects={objects}
-              shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-            />
-          }
-        >
-          <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
-        </Hoverable>
-      )}
-      {nPages > 1 && (
+    <div>
+      <HighLimitWarning />
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'row',
+          gap: '0.25em',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+        }}
+      >
         <div>
-          On <PaginationControls itemCount={nFiltered} />
-          of {nPages.toLocaleString()}.
+          Showing{' '}
+          <Hoverable
+            hoverContent={
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+                <div>Set the maximum number of results that can appear.</div>
+                <LimitSelector />
+              </div>
+            }
+          >
+            {nShown.toLocaleString()}
+          </Hoverable>
+          {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
         </div>
-      )}
+        {nOverall > nFiltered && (
+          <Hoverable
+            hoverContent={
+              <FilterBreakdown
+                objects={objects}
+                shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
+              />
+            }
+          >
+            <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
+          </Hoverable>
+        )}
+        {nPages > 1 && (
+          <div>
+            On <PaginationControls itemCount={nFiltered} />
+            of {nPages.toLocaleString()}.
+          </div>
+        )}
+      </div>
     </div>
   );
 };
+
+const HighLimitWarning: React.FC = () => {
+  const { limit, view, updatePageParams } = usePageParams();
+  const threshold = getLimitThreshold(view);
+
+  if (limit <= threshold) return null;
+
+  return (
+    <div>
+      <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} />
+      There are <strong>{limit}</strong> items visible, this may impact page performance. Consider
+      reducing it to{' '}
+      <HoverableButton
+        onClick={() => updatePageParams({ limit: threshold })}
+        style={{ padding: '0 0.25em' }}
+      >
+        {threshold}
+      </HoverableButton>
+      .
+    </div>
+  );
+};
+
+function getLimitThreshold(view: View): number {
+  switch (view) {
+    case View.Map:
+      return 1000;
+    case View.Table:
+      return 200;
+    case View.CardList:
+      return 20;
+    case View.Hierarchy:
+    case View.Reports:
+      return 10;
+    case View.Details:
+      return 5;
+  }
+}
 
 export default VisibleItemsMeter;

@@ -52,25 +52,18 @@ const SidePanel: React.FC = () => {
           title="Common Actions"
           optionsName="common actions"
         >
+          <div>{/* intentionally blank */}</div>
           <ObjectiveList />
         </SidePanelSection>
 
-        <SidePanelSection
-          panelWidth={panelWidth}
-          title="Data"
-          optionsName="data options"
-          alwaysShownNodes={<ObjectTypeSelector />}
-        >
+        <SidePanelSection panelWidth={panelWidth} title="Data" optionsName="data options">
+          <ObjectTypeSelector />
           <ProfileSelector />
           <LanguageListSourceSelector />
         </SidePanelSection>
 
-        <SidePanelSection
-          panelWidth={panelWidth}
-          title="Filter"
-          optionsName="filters"
-          alwaysShownNodes={<TerritoryFilterSelector display={SelectorDisplay.ButtonList} />}
-        >
+        <SidePanelSection panelWidth={panelWidth} title="Filter" optionsName="filters">
+          <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />
           <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageScopeSelector />
           <TerritoryScopeSelector />
@@ -79,12 +72,8 @@ const SidePanel: React.FC = () => {
           <VitalityEth2025Selector />
         </SidePanelSection>
 
-        <SidePanelSection
-          panelWidth={panelWidth}
-          title="View"
-          optionsName="view options"
-          alwaysShownNodes={<ViewSelector />}
-        >
+        <SidePanelSection panelWidth={panelWidth} title="View" optionsName="view options">
+          <ViewSelector />
           <LimitInput />
           <SortBySelector />
           <SortDirectionSelector />
@@ -169,11 +158,11 @@ const SidePanelSection: React.FC<
   React.PropsWithChildren<{
     panelWidth: number;
     title: string;
-    alwaysShownNodes?: React.ReactNode;
     optionsName: string;
   }>
-> = ({ children, panelWidth, title, alwaysShownNodes, optionsName }) => {
+> = ({ children, panelWidth, title, optionsName }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const childArray = React.Children.toArray(children);
 
   return (
     <div
@@ -204,8 +193,8 @@ const SidePanelSection: React.FC<
           flexDirection: 'column',
         }}
       >
-        {alwaysShownNodes}
-        {isExpanded && children}
+        {childArray[0]}
+        {isExpanded && childArray.slice(1)}
         {
           <HoverableButton
             style={{ padding: '0em 0.25em' }}

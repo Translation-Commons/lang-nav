@@ -22,7 +22,9 @@ const IntroPage: React.FC = () => {
       <p>
         This website is a comprehensive resource for exploring and understanding languages. It
         provides access to a wide range of linguistic data, including language classification,
-        geographic distribution, digital support, and writing systems.
+        geographic distribution, digital support, and writing systems. The website is in beta{' '}
+        <em>β</em> mode -- meaning that most functionality is present but there still may be errors,
+        particularly with data.
       </p>
       <p>
         To get started, click on the &quot;Data&quot; tab in the navigation bar above. Or, choose

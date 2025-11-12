@@ -2,11 +2,11 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    34.4 |    79.0 |    53.5 |    34.4 |
+| `src`                                    |    34.4 |    78.7 |    53.5 |    34.4 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    40.1 |    82.7 |    46.1 |    40.1 |
+| `  entities`                             |    40.0 |    82.7 |    46.1 |    40.0 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -15,7 +15,7 @@
 | `      LanguageCard.tsx`                 |    22.8 |   100.0 |     0   |    22.8 |
 | `      LanguagePopulationEstimate.tsx`   |    27.8 |   100.0 |     0   |    27.8 |
 | `      LanguagePopulationFromDescendents.tsx` |     9.7 |   100.0 |     0   |     9.7 |
-| `      LanguagePopulationFromLocales.tsx` |    14.3 |   100.0 |     0   |    14.3 |
+| `      LanguagePopulationFromLocales.tsx` |    15.2 |   100.0 |     0   |    15.2 |
 | `      LanguagePopulationInSelectedTerritory.tsx` |     0   |     0   |     0   |     0   |
 | `      LanguageRetirementReason.tsx`     |    14.3 |   100.0 |     0   |    14.3 |
 | `      LanguageTypes.tsx`                |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -67,7 +67,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    50.4 |    79.1 |    61.1 |    50.4 |
+| `  features`                             |    50.4 |    78.6 |    61.2 |    50.4 |
 | `    __tests__`                          |    89.3 |    92.3 |    75.0 |    89.3 |
 | `      MockObjects.tsx`                  |    89.3 |    92.3 |    75.0 |    89.3 |
 | `    data-loading`                       |    32.8 |    71.7 |    60.0 |    32.8 |
@@ -125,12 +125,12 @@
 | `      PageParamTypes.tsx`               |   100.0 |   100.0 |   100.0 |   100.0 |
 | `      Profiles.tsx`                     |    59.4 |    20.0 |    33.3 |    59.4 |
 | `      usePageParams.tsx`                |    40.0 |   100.0 |     0   |    40.0 |
-| `    pagination`                         |    65.2 |    76.9 |    41.7 |    65.2 |
+| `    pagination`                         |    64.1 |    64.7 |    46.7 |    64.1 |
 | `      LimitInput.tsx`                   |     0   |   100.0 |   100.0 |     0   |
 | `      LimitSelector.tsx`                |    26.2 |   100.0 |     0   |    26.2 |
 | `      PaginationControls.tsx`           |    88.9 |    50.0 |    14.3 |    88.9 |
 | `      usePagination.tsx`                |   100.0 |    83.3 |   100.0 |   100.0 |
-| `      VisibleItemsMeter.tsx`            |    97.0 |    84.6 |   100.0 |    97.0 |
+| `      VisibleItemsMeter.tsx`            |    82.8 |    61.9 |    80.0 |    82.8 |
 | `    sorting`                            |    26.9 |    92.1 |    44.4 |    26.9 |
 | `      BaseColorBar.tsx`                 |    11.8 |   100.0 |     0   |    11.8 |
 | `      ColorBar.tsx`                     |     7.9 |   100.0 |     0   |     7.9 |
@@ -160,11 +160,11 @@
 | `      TreeListOptions.tsx`              |    18.4 |   100.0 |     0   |    18.4 |
 | `      TreeListPageBody.tsx`             |    15.2 |   100.0 |     0   |    15.2 |
 | `      TreeListRoot.tsx`                 |    26.7 |   100.0 |     0   |    26.7 |
-| `  pages`                                |     3.5 |    50.0 |    45.5 |     3.5 |
+| `  pages`                                |     3.4 |    50.0 |    45.5 |     3.4 |
 | `    AboutPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
 | `    DataPage.tsx`                       |     0   |     0   |     0   |     0   |
 | `    DataPageBody.tsx`                   |     0   |   100.0 |   100.0 |     0   |
-| `    dataviews`                          |     8.1 |    33.3 |    28.6 |     8.1 |
+| `    dataviews`                          |     8.0 |    33.3 |    28.6 |     8.0 |
 | `      DataViews.tsx`                    |     0   |     0   |     0   |     0   |
 | `      ViewDetails.tsx`                  |    38.3 |   100.0 |    50.0 |    38.3 |
 | `      ViewFamilyTree.tsx`               |     0   |     0   |     0   |     0   |
@@ -203,7 +203,7 @@
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    14.8 |    68.2 |    45.0 |    14.8 |
+| `  widgets`                              |    14.7 |    68.2 |    45.0 |    14.7 |
 | `    cardlists`                          |    95.7 |    75.0 |   100.0 |    95.7 |
 | `      CardList.tsx`                     |   100.0 |    75.0 |   100.0 |   100.0 |
 | `      ResponsiveGrid.tsx`               |    89.7 |    75.0 |   100.0 |    89.7 |
@@ -216,7 +216,7 @@
 | `        SelectorLabel.tsx`              |    86.7 |    57.1 |   100.0 |    86.7 |
 | `        SelectorOption.tsx`             |    70.4 |    69.2 |    66.7 |    70.4 |
 | `        TextInput.tsx`                  |     0   |     0   |     0   |     0   |
-| `      selectors`                        |    12.3 |    89.7 |    82.4 |    12.3 |
+| `      selectors`                        |    12.1 |    89.7 |    82.4 |    12.1 |
 | `        LanguageScopeSelector.tsx`      |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageSourceSelector.tsx`     |     0   |   100.0 |   100.0 |     0   |
 | `        LocaleSeparatorSelector.tsx`    |     0   |   100.0 |   100.0 |     0   |
