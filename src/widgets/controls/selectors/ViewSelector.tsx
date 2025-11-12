@@ -16,6 +16,15 @@ const ViewSelector: React.FC = () => {
       options={Object.values(View)}
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
       display={SelectorDisplay.ButtonList}
+      getOptionLabel={(view) =>
+        view === View.Map ? (
+          <>
+            Map <em>β</em>
+          </>
+        ) : (
+          view
+        )
+      }
       selected={view}
     />
   );

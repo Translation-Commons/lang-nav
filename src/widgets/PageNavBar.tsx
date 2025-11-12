@@ -14,7 +14,7 @@ const PageNavBar: React.FC = () => {
           alt="LangNav Logo"
         />
         <span>
-          <strong>Lang</strong>uage <strong>Nav</strong>igator
+          <strong>Lang</strong>uage <strong>Nav</strong>igator <em>β</em>
         </span>
       </NavBarTitle>
       <NavBarLink path="/intro">Intro</NavBarLink>

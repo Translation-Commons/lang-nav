@@ -61,6 +61,15 @@ const ViewSelector: React.FC = () => {
       options={Object.values(View)}
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
       selected={view}
+      getOptionLabel={(view) =>
+        view === View.Map || view === View.Reports ? (
+          <>
+            {view} <em>β</em>
+          </>
+        ) : (
+          view
+        )
+      }
     />
   );
 };
