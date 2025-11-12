@@ -352,6 +352,7 @@ describe('getSortByParameterized', () => {
       '001',
       'sjn_BE',
       'sjn_ER',
+      'Teng',
       'sjn_Teng_BE',
       'tolkorth',
       'sjn_123',
@@ -362,7 +363,72 @@ describe('getSortByParameterized', () => {
       'HA',
       'AM',
       'be0590',
+    ]);
+  });
+
+  it('sortBy: Writing System', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(
+      SortBy.WritingSystem,
+      LanguageSource.All,
+      SortBehavior.Normal,
+    );
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      '123', // Tengwar
+      'sjn',
+      'dori0123',
+      'BE',
+      '001',
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER',
       'Teng',
+      'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      // All below have no associated language, stable to input order
+      'ER',
+      'HA',
+      'AM',
+      'be0590',
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: Territory', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(
+      SortBy.Territory,
+      LanguageSource.All,
+      SortBehavior.Normal,
+    );
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'AM', // Aman
+      '001', // Arda
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      'sjn', // Beleriand
+      'BE',
+      'be0590',
+      'sjn_BE',
+      'sjn_Teng_BE',
+      'dori0123',
+      'ER', // Eriador
+      'sjn_ER',
+      'dori0123_ER',
+      'HA', // Harad
+      '123', // Middle Earth
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      // All below have no associated territory, stable to input order
+      'Teng',
+      'tolkorth',
     ]);
   });
 

@@ -172,6 +172,8 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.Endonym:
     case SortBy.Code:
     case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
       // More of a spectrum rather than directional
       return ColorGradient.HueRainbowBlueToRed;
   }

@@ -1,13 +1,17 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { getTerritoriesRelevantToObject } from '@features/filtering/filterByConnections';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableValueType from '@features/table/TableValueType';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
 
 const WritingSystemTable: React.FC = () => {
   const { writingSystems } = useDataContext();
@@ -21,7 +25,7 @@ const WritingSystemTable: React.FC = () => {
         NameColumn,
         endonymColumn,
         {
-          key: 'Population',
+          key: 'Potential Population',
           description: (
             <>
               An imprecise estimate of how many people use this writing system worldwide, calculated
@@ -36,12 +40,40 @@ const WritingSystemTable: React.FC = () => {
           key: 'Languages',
           render: (object) =>
             object.languages && (
+              <CommaSeparated limit={1} limitText="short">
+                {Object.values(object.languages)
+                  .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+                  .map((l) => (
+                    <HoverableObjectName object={l} key={l.ID} />
+                  ))}
+              </CommaSeparated>
+            ),
+          sortParam: SortBy.Language,
+        },
+        {
+          key: 'Language Count',
+          render: (object) =>
+            object.languages && (
               <HoverableEnumeration
                 items={Object.values(object.languages).map((l) => l.nameDisplay)}
               />
             ),
           valueType: TableValueType.Numeric,
           sortParam: SortBy.CountOfLanguages,
+          isInitiallyVisible: false,
+        },
+        {
+          key: 'Area of Origin',
+          render: (object) =>
+            getTerritoriesRelevantToObject(object).length > 0 && (
+              <CommaSeparated limit={1} limitText="short">
+                {getTerritoriesRelevantToObject(object).map((territory) => (
+                  <HoverableObjectName object={territory} key={territory.ID} />
+                ))}
+              </CommaSeparated>
+            ),
+          sortParam: SortBy.Territory,
+          isInitiallyVisible: false,
         },
       ]}
     />

@@ -81,6 +81,9 @@ function getTicks(
     case SortBy.Name:
     case SortBy.Endonym:
     case SortBy.Code:
+    case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
       return pickDistributedTicksFromRange(
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         numberOfTicks,

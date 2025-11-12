@@ -80,6 +80,7 @@ const LocaleTable: React.FC = () => {
             />
           ),
           isInitiallyVisible: false,
+          sortParam: SortBy.WritingSystem,
           columnGroup: 'Writing',
         },
         {
@@ -107,6 +108,7 @@ const LocaleTable: React.FC = () => {
           key: 'Territory',
           render: (object) => <HoverableObjectName object={object.territory} />,
           isInitiallyVisible: false,
+          sortParam: SortBy.Territory,
           columnGroup: 'Linked Data',
         },
         {

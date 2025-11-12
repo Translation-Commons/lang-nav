@@ -125,6 +125,8 @@ function getMinimumValue(colorBy: ColorBy): number {
     case SortBy.Endonym:
     case SortBy.Code:
     case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
       return convertAlphaToNumber(''); // 0
   }
 }
@@ -161,6 +163,8 @@ function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
     case SortBy.Endonym:
     case SortBy.Code:
     case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
       return convertAlphaToNumber('ZZZZZZZZZZ');
   }
 }

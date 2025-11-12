@@ -5,6 +5,7 @@ import usePageParams from '@features/page-params/usePageParams';
 
 import { ObjectData, TerritoryData, WritingSystemData } from '@entities/types/DataTypes';
 
+import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
 
 import { FilterFunctionType } from './filter';
@@ -49,7 +50,7 @@ export function getFilterByTerritory(): FilterFunctionType {
   );
 }
 
-function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
+export function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
   switch (object.type) {
     case ObjectType.Territory:
       return [object, object.parentUNRegion, object.sovereign].filter((t) => t != null);
@@ -90,7 +91,7 @@ export function getFilterByWritingSystem(): FilterFunctionType {
   );
 }
 
-function getWritingSystemsRelevantToObject(object: ObjectData): WritingSystemData[] {
+export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSystemData[] {
   switch (object.type) {
     case ObjectType.Territory:
       return object.locales?.flatMap((loc) => loc.writingSystem).filter((ws) => !!ws) ?? [];
@@ -99,7 +100,12 @@ function getWritingSystemsRelevantToObject(object: ObjectData): WritingSystemDat
     case ObjectType.Census:
       return []; // Not easy to get
     case ObjectType.Language:
-      return Object.values(object.writingSystems ?? {});
+      return uniqueBy(
+        [object.primaryWritingSystem, ...Object.values(object.writingSystems ?? {})].filter(
+          (ws) => !!ws,
+        ),
+        (ws) => ws.ID,
+      );
     case ObjectType.WritingSystem:
       return [object, object.parentWritingSystem, ...(object.childWritingSystems ?? [])].filter(
         (ws) => !!ws,

@@ -22,6 +22,7 @@ import {
   getUniqueCountriesForLanguage,
 } from '@entities/lib/getObjectMiscFields';
 
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LanguageCodeColumns } from './columns/LanguageCodeColumns';
@@ -96,10 +97,23 @@ const LanguageTable: React.FC = () => {
         {
           key: 'Countries',
           render: (lang) => (
+            <CommaSeparated limit={1} limitText="short">
+              {getUniqueCountriesForLanguage(lang).map((territory) => (
+                <HoverableObjectName object={territory} key={territory.ID} />
+              ))}
+            </CommaSeparated>
+          ),
+          sortParam: SortBy.Territory,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Country Count',
+          render: (lang) => (
             <HoverableEnumeration
               items={getUniqueCountriesForLanguage(lang).map((territory) => territory.nameDisplay)}
             />
           ),
+          isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.CountOfTerritories,
           columnGroup: 'Location',
@@ -134,6 +148,7 @@ const LanguageTable: React.FC = () => {
           ),
           render: (lang) => <LanguageWritingSystems lang={lang} />,
           isInitiallyVisible: false,
+          sortParam: SortBy.WritingSystem,
           columnGroup: 'Writing',
         },
         {

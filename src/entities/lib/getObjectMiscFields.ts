@@ -22,8 +22,13 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
       return object.nameDisplay;
     case ObjectType.VariantTag:
       return object.languages?.[0]?.nameDisplay;
-    case ObjectType.Census:
     case ObjectType.WritingSystem:
+      return object.languages
+        ? Object.values(object.languages).sort(
+            (a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0),
+          )[0].nameDisplay
+        : undefined;
+    case ObjectType.Census:
       return undefined;
   }
 }

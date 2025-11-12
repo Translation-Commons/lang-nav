@@ -56,9 +56,11 @@ describe('getObjectMostImportantLanguageName', () => {
     expect(results).toEqual({
       '001': 'Sindarin',
       '123': 'Sindarin',
-      Teng: undefined,
+      Teng: 'Sindarin',
+      AM: undefined,
       ER: 'Sindarin',
       BE: 'Sindarin',
+      HA: undefined,
       dori0123: 'Doriathrin',
       dori0123_001: 'Doriathrin',
       dori0123_123: 'Doriathrin',

@@ -17,6 +17,8 @@ export enum SortBy {
   CountOfLanguages = 'Count of Languages',
   CountOfTerritories = 'Count of Territories',
   Language = 'Language',
+  WritingSystem = 'Writing System',
+  Territory = 'Territory',
 
   // Extra population metrics
   PopulationAttested = 'Population Attested',
