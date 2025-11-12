@@ -27,7 +27,11 @@ function ViewMap() {
   const { getCurrentObjects } = usePagination<ObjectData>();
 
   if (objectType !== ObjectType.Language) {
-    return <div>Map view is in Beta mode and is only available for Languages.</div>;
+    return (
+      <div>
+        Map view is in Beta <em>β</em> mode and is only available for Languages.
+      </div>
+    );
   }
 
   const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) =>

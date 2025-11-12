@@ -6,6 +6,8 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { ObjectType, SearchableField, View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
+import { TerritoryScope } from '@entities/types/DataTypes';
+
 import { groupBy, sumBy } from '@shared/lib/setUtils';
 
 import { LanguageData } from './LanguageTypes';
@@ -25,7 +27,9 @@ const Descendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
   const localesFromUniqueTerritories = Object.values(
     groupBy(
-      lang.locales.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0)),
+      lang.locales
+        .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
+        .sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0)),
       (locale) => locale.territoryCode || '',
     ),
   ).map((locales) => locales[0]);

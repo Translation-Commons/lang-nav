@@ -17,9 +17,9 @@ const ViewSelector: React.FC = () => {
       onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
       display={SelectorDisplay.ButtonList}
       getOptionLabel={(view) =>
-        view === View.Map ? (
+        [View.Map, View.Reports].includes(view) ? (
           <>
-            Map <em>β</em>
+            {view} <em>β</em>
           </>
         ) : (
           view
