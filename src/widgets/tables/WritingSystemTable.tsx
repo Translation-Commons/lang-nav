@@ -7,6 +7,7 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
@@ -19,6 +20,7 @@ const WritingSystemTable: React.FC = () => {
 
   return (
     <InteractiveObjectTable<WritingSystemData>
+      tableID={TableID.WritingSystems}
       objects={writingSystems}
       columns={[
         CodeColumn,

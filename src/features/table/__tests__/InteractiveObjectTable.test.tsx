@@ -14,6 +14,7 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import ObjectTable from '../InteractiveObjectTable';
 import TableColumn from '../TableColumn';
+import TableID from '../TableID';
 import TableValueType from '../TableValueType';
 
 vi.mock('@features/filtering/filter', () => ({
@@ -96,12 +97,26 @@ describe('InteractiveObjectTable', () => {
 
   // Helper function to eliminate render wrapper duplication
   const renderObjectTable = (props = {}) => {
-    return render(<ObjectTable objects={mockObjects} columns={mockColumns} {...props} />);
+    return render(
+      <ObjectTable
+        objects={mockObjects}
+        columns={mockColumns}
+        tableID={TableID.Territories}
+        {...props}
+      />,
+    );
   };
 
   // Helper function to eliminate rerender duplication
   const rerenderObjectTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
-    rerender(<ObjectTable objects={mockObjects} columns={mockColumns} {...props} />);
+    rerender(
+      <ObjectTable
+        objects={mockObjects}
+        columns={mockColumns}
+        tableID={TableID.Territories}
+        {...props}
+      />,
+    );
   };
 
   // Helper function to eliminate column header assertions
@@ -223,6 +238,10 @@ describe('InteractiveObjectTable', () => {
       const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
       fireEvent.click(populationCheckbox);
     });
+    // manually changing the columns
+    vi.mocked(usePageParams).mockReturnValue(
+      createMockUsePageParams({ sortBy: SortBy.Name, columns: { [TableID.Territories]: 1n } }),
+    );
 
     // Force rerender to ensure state updates are applied
     rerenderObjectTable(rerender);
@@ -237,6 +256,9 @@ describe('InteractiveObjectTable', () => {
       const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
       fireEvent.click(populationCheckbox);
     });
+    vi.mocked(usePageParams).mockReturnValue(
+      createMockUsePageParams({ sortBy: SortBy.Name, columns: { [TableID.Territories]: 3n } }),
+    );
 
     // Force rerender to ensure state updates are applied
     rerenderObjectTable(rerender);

@@ -52,9 +52,12 @@ export enum LocaleSeparator {
   Hyphen = '-',
 }
 
+export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
+
 export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
+  columns = 'columns',
   languageSource = 'languageSource',
   languageScopes = 'languageScopes',
   limit = 'limit',
@@ -79,6 +82,7 @@ export enum PageParamKey {
 export type PageParams = {
   colorBy: ColorBy;
   colorGradient: ColorGradient;
+  columns: TableIDToBinarizedColumnVisibility;
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
@@ -103,6 +107,7 @@ export type PageParams = {
 export type PageParamsOptional = {
   colorBy?: ColorBy;
   colorGradient?: ColorGradient;
+  columns?: TableIDToBinarizedColumnVisibility;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;

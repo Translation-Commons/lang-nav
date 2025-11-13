@@ -9,6 +9,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { CensusData } from '@entities/census/CensusTypes';
@@ -84,6 +85,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         </div>
       )}
       <InteractiveObjectTable<LocaleData>
+        tableID={TableID.LanguagesInCensus}
         objects={languagesInCensus}
         shouldFilterUsingSearchBar={false}
         columns={[
