@@ -22,8 +22,8 @@ const TableOfAllCensuses: React.FC = () => {
       tableID={TableID.Censuses}
       objects={Object.values(censuses)}
       columns={[
-        CodeColumn,
-        NameColumn,
+        { ...CodeColumn, columnGroup: 'ID' },
+        { ...NameColumn, columnGroup: 'ID' },
         {
           key: 'Languages',
           render: (census) => (
@@ -58,10 +58,56 @@ const TableOfAllCensuses: React.FC = () => {
           columnGroup: 'Population',
         },
         {
+          key: 'Acquisition Order',
+          description: (
+            <>
+              If the data for the language specifically refers to a persons <code>L1</code> first
+              language (or mothertongue) or <code>L2</code> second language, ....
+            </>
+          ),
+          render: (census) => census.acquisitionOrder,
+          isInitiallyVisible: false,
+          columnGroup: 'Characteristics',
+        },
+        {
+          key: 'Modality',
+          description:
+            'How the language is conveyed -- in spoken word, written word. Alternatively some censuses just report ethnicity.',
+          render: (census) => census.modality,
+          isInitiallyVisible: false,
+          columnGroup: 'Characteristics',
+        },
+        {
+          key: 'Domain',
+          description: 'Where the language is used',
+          render: (census) => census.domain,
+          isInitiallyVisible: false,
+          columnGroup: 'Characteristics',
+        },
+        {
+          key: 'Age',
+          render: (census) => census.age,
+          isInitiallyVisible: false,
+          columnGroup: 'Characteristics',
+        },
+        {
           key: 'Territory',
           render: (census) => <HoverableObjectName object={census.territory} />,
           isInitiallyVisible: false,
           sortParam: SortBy.Territory,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Collector Type',
+          render: (census) => census.collectorType,
+          isInitiallyVisible: false,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Collector Name',
+          render: (census) => census.collectorName,
+          isInitiallyVisible: false,
+          columnGroup: 'Location',
         },
         {
           key: 'Year Collected',
@@ -76,6 +122,21 @@ const TableOfAllCensuses: React.FC = () => {
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Date,
+          columnGroup: 'Time',
+        },
+        {
+          key: 'Date Published',
+          render: (census) => census.datePublished?.toLocaleDateString(),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          columnGroup: 'Time',
+        },
+        {
+          key: 'Date Accessed',
+          render: (census) => census.dateAccessed?.toLocaleDateString(),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          columnGroup: 'Time',
         },
       ]}
     />

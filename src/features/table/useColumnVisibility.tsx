@@ -76,7 +76,7 @@ function useColumnVisibility<T extends ObjectData>(
     const newColumns = { ...columnsVisibleForAllTables };
     delete newColumns[tableID];
     updatePageParams({ columns: newColumns });
-  }, [columnsVisibleForAllTables, tableID, columns, sortBy, updatePageParams]);
+  }, [columnsVisibleForAllTables, tableID, updatePageParams]);
 
   return { visibleColumns, toggleColumn, setColumns, columnVisibility, resetColumnVisibility };
 }
@@ -126,8 +126,10 @@ export function parseColumnVisibilityBinaries(str: string): TableIDToBinarizedCo
   const result: TableIDToBinarizedColumnVisibility = {};
   str.split('_').forEach((pair) => {
     const [tableID, binaryStr] = pair.split('-');
-    const binary = parseBigInt(binaryStr);
-    if (tableID) result[parseInt(tableID) as TableID] = binary;
+    if (tableID && binaryStr) {
+      const binary = parseBigInt(binaryStr);
+      result[parseInt(tableID) as TableID] = binary;
+    }
   });
   return result;
 }

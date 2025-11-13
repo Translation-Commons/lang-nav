@@ -88,20 +88,6 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Writing',
         },
         {
-          key: 'Contained Locales',
-          render: (loc) => (
-            <CommaSeparated limit={2}>
-              {loc.containedLocales?.map((child) => (
-                <HoverableObjectName object={child} key={child.ID} />
-              ))}
-            </CommaSeparated>
-          ),
-          isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
-          sortParam: SortBy.CountOfLanguages,
-          columnGroup: 'Linked Data',
-        },
-        {
           key: 'Language',
           render: (object) => <HoverableObjectName object={object.language} />,
           isInitiallyVisible: false,
@@ -126,6 +112,20 @@ const LocaleTable: React.FC = () => {
               </CommaSeparated>
             ),
           isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Contains Locales',
+          render: (loc) => (
+            <CommaSeparated limit={2}>
+              {loc.containedLocales?.map((child) => (
+                <HoverableObjectName object={child} key={child.ID} />
+              ))}
+            </CommaSeparated>
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Linked Data',
         },
         {

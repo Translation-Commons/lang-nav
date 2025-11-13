@@ -89,13 +89,14 @@ describe('TableColumnSelector', () => {
       Name: true,
       ID: false,
     };
-    const toggleMock = vi.fn();
+    const toggleColumn = vi.fn();
+    const setColumns = vi.fn();
     const visibilityModule = {
       columnVisibility,
-      toggleColumn: toggleMock,
+      toggleColumn,
       resetColumnVisibility: vi.fn(),
       visibleColumns: columns.filter((col) => columnVisibility[col.key]),
-      setColumns: vi.fn(),
+      setColumns,
     };
 
     render(<TableColumnSelector columns={columns} visibilityModule={visibilityModule} />);
@@ -106,12 +107,11 @@ describe('TableColumnSelector', () => {
     fireEvent.click(hoverables[0]);
 
     // group had two columns; since they were all visible, toggle should be called with isVisible = false
-    expect(toggleMock).toHaveBeenCalledWith('Population', false);
-    expect(toggleMock).toHaveBeenCalledWith('Name', false);
+    expect(setColumns).toHaveBeenCalledWith(['Population', 'Name'], false);
 
     // Clicking an individual checkbox should call toggleColumn with only the key
     const idCheckbox = screen.getByLabelText('ID') as HTMLInputElement;
     fireEvent.click(idCheckbox);
-    expect(toggleMock).toHaveBeenCalledWith('ID');
+    expect(toggleColumn).toHaveBeenCalledWith('ID');
   });
 });

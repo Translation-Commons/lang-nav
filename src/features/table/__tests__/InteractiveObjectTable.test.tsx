@@ -238,6 +238,10 @@ describe('InteractiveObjectTable', () => {
       const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
       fireEvent.click(populationCheckbox);
     });
+    // manually changing the columns
+    vi.mocked(usePageParams).mockReturnValue(
+      createMockUsePageParams({ sortBy: SortBy.Name, columns: { [TableID.Territories]: 1n } }),
+    );
 
     // Force rerender to ensure state updates are applied
     rerenderObjectTable(rerender);
@@ -252,6 +256,9 @@ describe('InteractiveObjectTable', () => {
       const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
       fireEvent.click(populationCheckbox);
     });
+    vi.mocked(usePageParams).mockReturnValue(
+      createMockUsePageParams({ sortBy: SortBy.Name, columns: { [TableID.Territories]: 3n } }),
+    );
 
     // Force rerender to ensure state updates are applied
     rerenderObjectTable(rerender);
