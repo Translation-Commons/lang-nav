@@ -45,10 +45,13 @@ export function getLanguageTreeNodes(
   languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean = () => true,
-  depth: number,
+  depth: number = 0,
 ): TreeNodeData[] {
   if (depth > 30) {
-    console.warn('getLanguageTreeNodes exceeded max depth of 30, possible circular reference');
+    console.warn(
+      'getLanguageTreeNodes exceeded max depth of 30, possible circular reference for language',
+      languages[0],
+    );
     return [];
   }
   return languages
