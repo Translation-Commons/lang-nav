@@ -11,18 +11,16 @@ import { groupBy } from '@shared/lib/setUtils';
 
 import TableColumn from './TableColumn';
 import TableSortButton from './TableSortButton';
+import { ColumnVisibilityModule } from './useColumnVisibility';
 
 function TableColumnSelector<T extends ObjectData>({
   columns,
-  columnVisibility,
-  resetColumnVisibility,
-  toggleColumn,
+  visibilityModule,
 }: {
   columns: TableColumn<T>[];
-  columnVisibility: Record<string, boolean>;
-  resetColumnVisibility: () => void;
-  toggleColumn: (key: string, isVisible?: boolean) => void;
+  visibilityModule: ColumnVisibilityModule<T>;
 }): React.ReactNode {
+  const { columnVisibility, resetColumnVisibility } = visibilityModule;
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
@@ -43,11 +41,10 @@ function TableColumnSelector<T extends ObjectData>({
       >
         {Object.entries(columnsByGroup).map(([group, columns]) => (
           <ColumnGroup
-            key={group}
-            group={group}
             columns={columns}
-            columnVisibility={columnVisibility}
-            toggleColumn={toggleColumn}
+            group={group}
+            key={group}
+            visibilityModule={visibilityModule}
           />
         ))}
         <HoverableButton
@@ -63,15 +60,13 @@ function TableColumnSelector<T extends ObjectData>({
 }
 
 function ColumnGroup<T extends ObjectData>({
-  group,
   columns,
-  columnVisibility,
-  toggleColumn,
+  visibilityModule: { columnVisibility, toggleColumn, setColumns },
+  group,
 }: {
-  group: string;
   columns: TableColumn<T>[];
-  columnVisibility: Record<string, boolean>;
-  toggleColumn: (key: string, isVisible?: boolean) => void;
+  visibilityModule: ColumnVisibilityModule<T>;
+  group: string;
 }): React.ReactNode {
   // If all columns are visible, this function will turn them all off
   // If no columns are visible, this function will turn them all on
@@ -79,8 +74,11 @@ function ColumnGroup<T extends ObjectData>({
   const allVisible = columns.every((col) => columnVisibility[col.key]);
   const someVisible = columns.some((col) => columnVisibility[col.key]);
   const toggleSelectAll = useCallback(() => {
-    columns.forEach((col) => toggleColumn(col.key, !allVisible));
-  }, [columns, toggleColumn, allVisible]);
+    setColumns(
+      columns.map((col) => col.key),
+      !allVisible,
+    );
+  }, [columns, setColumns, allVisible]);
   const toggleSelectHoverContent = allVisible
     ? 'All columns visible. Click to hide all columns in this group.'
     : someVisible

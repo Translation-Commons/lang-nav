@@ -44,8 +44,7 @@ function InteractiveObjectTable<T extends ObjectData>({
   const scopeFilter = getScopeFilter();
   const { getCurrentObjects } = usePagination<T>();
 
-  const { visibleColumns, toggleColumn, columnVisibility, resetColumnVisibility } =
-    useColumnVisibility(columns, tableID);
+  const visibilityModule = useColumnVisibility(columns, tableID);
 
   // TODO don't filter objects for an unrelated page search on a different object type
   const objectsFilteredAndSorted = useMemo(() => {
@@ -73,19 +72,18 @@ function InteractiveObjectTable<T extends ObjectData>({
           shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
         />
         <TableExport
-          visibleColumns={visibleColumns}
+          visibleColumns={visibilityModule.visibleColumns}
           objectsFilteredAndSorted={objectsFilteredAndSorted}
         />
       </div>
-      <TableColumnSelector
-        columns={columns}
-        columnVisibility={columnVisibility}
-        resetColumnVisibility={resetColumnVisibility}
-        toggleColumn={toggleColumn}
-      />
+      <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
 
       {/* The actual <table> component */}
-      <BaseObjectTable visibleColumns={visibleColumns} objects={currentObjects} tableID={tableID} />
+      <BaseObjectTable
+        visibleColumns={visibilityModule.visibleColumns}
+        objects={currentObjects}
+        tableID={tableID}
+      />
 
       {currentObjects.length === 1 && (
         <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
@@ -107,7 +105,7 @@ function InteractiveObjectTable<T extends ObjectData>({
             shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
           />
           <TableExport
-            visibleColumns={visibleColumns}
+            visibleColumns={visibilityModule.visibleColumns}
             objectsFilteredAndSorted={objectsFilteredAndSorted}
           />
         </div>

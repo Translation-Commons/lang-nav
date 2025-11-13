@@ -1,4 +1,5 @@
 import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { parseColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
@@ -32,6 +33,9 @@ function parseNumericEnumArray<T extends number>(
     .filter((item): item is T => validValues.includes(item as T));
 }
 
+/**
+ * This function is important for parsing the URL parameters
+ */
 export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
   const params: PageParamsOptional = {};
   urlParams.forEach((value, keyUntyped) => {
@@ -62,6 +66,11 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         break;
       case PageParamKey.vitalityEth2025:
         params.vitalityEth2025 = parseNumericEnumArray(value, VitalityEthnologueCoarse);
+        break;
+
+      // Object mapping (columns)
+      case PageParamKey.columns:
+        params.columns = parseColumnVisibilityBinaries(value);
         break;
 
       // Enum values

@@ -1,8 +1,12 @@
 import { ColorBy } from '@features/sorting/SortTypes';
+import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 
 import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
+/**
+ * This is used to make the next version of the page parameters in the URL.
+ */
 export function getNewURLSearchParams(
   newParams: PageParamsOptional,
   prev?: URLSearchParams,
@@ -28,11 +32,11 @@ export function getNewURLSearchParams(
         next.set(key, valueAsNumber.toString());
       }
     } else if (key === PageParamKey.columns) {
-      // Handle as Record<number, number>
-      if (Object.keys(value).length === 0) {
+      const valueTyped = value as Record<number, bigint>;
+      if (Object.keys(valueTyped).length === 0) {
         next.delete(key);
       } else {
-        next.set(key, JSON.stringify(value));
+        next.set(key, stringifyColumnVisibilityBinaries(valueTyped));
       }
     } else if (Array.isArray(value)) {
       // Handle as array

@@ -1,11 +1,12 @@
+// Only add new table IDs at the bottom to preserve existing urls
 enum TableID {
   // Primary tables
-  Languages,
-  Territories,
-  WritingSystems,
-  Locales,
   Censuses,
+  Languages,
+  Locales,
+  Territories,
   VariantTags,
+  WritingSystems,
 
   // Specialized tables
   LanguagesInCensus,

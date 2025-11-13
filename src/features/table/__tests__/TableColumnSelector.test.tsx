@@ -27,17 +27,21 @@ describe('TableColumnSelector', () => {
       { key: 'Name', sortParam: SortBy.Name, render: () => null },
       { key: 'ID', sortParam: SortBy.Code, render: () => null },
     ];
-    const columnVisibility = { Population: true, Name: true, ID: false };
+    const columnVisibility: { [key: string]: boolean } = {
+      Population: true,
+      Name: true,
+      ID: false,
+    };
     const toggleMock = vi.fn();
+    const visibilityModule = {
+      columnVisibility,
+      toggleColumn: toggleMock,
+      resetColumnVisibility: vi.fn(),
+      visibleColumns: columns.filter((col) => columnVisibility[col.key]),
+      setColumns: vi.fn(),
+    };
 
-    render(
-      <TableColumnSelector
-        columns={columns}
-        columnVisibility={columnVisibility}
-        resetColumnVisibility={vi.fn()}
-        toggleColumn={toggleMock}
-      />,
-    );
+    render(<TableColumnSelector columns={columns} visibilityModule={visibilityModule} />);
 
     expect(screen.getByText(/2\/3 columns visible/i)).toBeTruthy();
   });
@@ -49,17 +53,17 @@ describe('TableColumnSelector', () => {
       { key: 'Population', sortParam: SortBy.Population, render: () => null },
       { key: 'Name', sortParam: SortBy.Name, render: () => null },
     ];
-    const columnVisibility = { Population: true, Name: false };
+    const columnVisibility: { [key: string]: boolean } = { Population: true, Name: false };
     const toggleMock = vi.fn();
+    const visibilityModule = {
+      columnVisibility,
+      toggleColumn: toggleMock,
+      resetColumnVisibility: vi.fn(),
+      visibleColumns: columns.filter((col) => columnVisibility[col.key]),
+      setColumns: vi.fn(),
+    };
 
-    render(
-      <TableColumnSelector
-        columns={columns}
-        columnVisibility={columnVisibility}
-        resetColumnVisibility={vi.fn()}
-        toggleColumn={toggleMock}
-      />,
-    );
+    render(<TableColumnSelector columns={columns} visibilityModule={visibilityModule} />);
 
     const populationCheckbox = screen.getByLabelText('Population') as HTMLInputElement;
     const nameCheckbox = screen.getByLabelText('Name') as HTMLInputElement;
@@ -78,17 +82,21 @@ describe('TableColumnSelector', () => {
       { key: 'Name', columnGroup: 'Group', render: () => null },
       { key: 'ID', render: () => null },
     ];
-    const columnVisibility = { Population: true, Name: true, ID: false };
+    const columnVisibility: { [key: string]: boolean } = {
+      Population: true,
+      Name: true,
+      ID: false,
+    };
     const toggleMock = vi.fn();
+    const visibilityModule = {
+      columnVisibility,
+      toggleColumn: toggleMock,
+      resetColumnVisibility: vi.fn(),
+      visibleColumns: columns.filter((col) => columnVisibility[col.key]),
+      setColumns: vi.fn(),
+    };
 
-    render(
-      <TableColumnSelector
-        columns={columns}
-        columnVisibility={columnVisibility}
-        resetColumnVisibility={vi.fn()}
-        toggleColumn={toggleMock}
-      />,
-    );
+    render(<TableColumnSelector columns={columns} visibilityModule={visibilityModule} />);
 
     // Click the first group Hoverable (mocked as button with data-testid "hoverable")
     const hoverables = screen.getAllByTestId('hoverable');
