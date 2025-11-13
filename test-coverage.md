@@ -276,9 +276,9 @@
 | `      TerritoryTable.tsx`               |     0   |   100.0 |   100.0 |     0   |
 | `      VariantTagTable.tsx`              |     0   |     0   |     0   |     0   |
 | `      WritingSystemTable.tsx`           |     0   |   100.0 |   100.0 |     0   |
-| `    treelists`                          |     4.1 |    75.0 |    21.4 |     4.1 |
+| `    treelists`                          |     4.0 |    75.0 |    21.4 |     4.0 |
 | `      CensusHierarchy.tsx`              |     0   |   100.0 |   100.0 |     0   |
-| `      LanguageHierarchy.tsx`            |    13.8 |   100.0 |     0   |    13.8 |
+| `      LanguageHierarchy.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
 | `      LocaleHierarchy.tsx`              |     6.4 |   100.0 |     0   |     6.4 |
 | `      TerritoryHierarchy.tsx`           |     0   |   100.0 |   100.0 |     0   |
 | `      VariantTagHierarchy.tsx`          |     0   |   100.0 |   100.0 |     0   |

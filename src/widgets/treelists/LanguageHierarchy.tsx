@@ -24,6 +24,7 @@ export const LanguageHierarchy: React.FC = () => {
     languageSource,
     sortFunction,
     filterByScope,
+    0,
   );
 
   return (
@@ -44,11 +45,16 @@ export function getLanguageTreeNodes(
   languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean = () => true,
+  depth: number,
 ): TreeNodeData[] {
+  if (depth > 30) {
+    console.warn('getLanguageTreeNodes exceeded max depth of 30, possible circular reference');
+    return [];
+  }
   return languages
     .filter(filterFunction)
     .sort(sortFunction)
-    .map((lang) => getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction))
+    .map((lang) => getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction, depth))
     .filter((node) => node != null);
 }
 
@@ -57,6 +63,7 @@ function getLanguageTreeNode(
   languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean,
+  depth: number,
 ): TreeNodeData {
   return {
     type: ObjectType.Language,
@@ -66,6 +73,7 @@ function getLanguageTreeNode(
       languageSource,
       sortFunction,
       filterFunction,
+      depth + 1,
     ),
     labelStyle: {
       fontWeight:
