@@ -4,6 +4,7 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
@@ -30,6 +31,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
 
   return (
     <InteractiveObjectTable<LocaleData>
+      tableID={TableID.LanguagesInTerritory}
       objects={locales}
       shouldFilterUsingSearchBar={false}
       columns={[

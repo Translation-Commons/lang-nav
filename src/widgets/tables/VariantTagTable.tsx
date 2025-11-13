@@ -7,6 +7,7 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
@@ -19,6 +20,7 @@ const VariantTagTable: React.FC = () => {
 
   return (
     <InteractiveObjectTable<VariantTagData>
+      tableID={TableID.VariantTags}
       objects={variantTags}
       columns={[
         CodeColumn,

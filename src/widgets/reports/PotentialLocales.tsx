@@ -9,6 +9,7 @@ import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { CensusData } from '@entities/census/CensusTypes';
@@ -133,6 +134,7 @@ const PotentialLocalesTable: React.FC<{
 }> = ({ locales }) => {
   return (
     <InteractiveObjectTable<LocaleData>
+      tableID={TableID.PotentialLocales}
       objects={locales}
       columns={[
         {

@@ -27,6 +27,13 @@ export function getNewURLSearchParams(
       } else {
         next.set(key, valueAsNumber.toString());
       }
+    } else if (key === PageParamKey.columns) {
+      // Handle as Record<number, number>
+      if (Object.keys(value).length === 0) {
+        next.delete(key);
+      } else {
+        next.set(key, JSON.stringify(value));
+      }
     } else if (Array.isArray(value)) {
       // Handle as array
       if (value.length === 0) {

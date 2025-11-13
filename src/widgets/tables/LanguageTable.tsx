@@ -10,6 +10,7 @@ import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
@@ -36,6 +37,7 @@ const LanguageTable: React.FC = () => {
 
   return (
     <InteractiveObjectTable<LanguageData>
+      tableID={TableID.Languages}
       objects={languagesInSelectedSource}
       columns={[
         ...LanguageCodeColumns,

@@ -1,5 +1,4 @@
-import LZString from 'lz-string';
-import { useCallback, useEffect, useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import usePageParams from '@features/page-params/usePageParams';
 import useStoredParams from '@features/stored-params/useStoredParams';
@@ -7,9 +6,11 @@ import useStoredParams from '@features/stored-params/useStoredParams';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import TableColumn from './TableColumn';
+import TableID from './TableID';
 
 function useColumnVisibility<T extends ObjectData>(
   columns: TableColumn<T>[],
+  tableID: TableID,
 ): {
   toggleColumn: (columnKey: string, isVisible?: boolean) => void;
   visibleColumns: TableColumn<T>[];
@@ -32,30 +33,47 @@ function useColumnVisibility<T extends ObjectData>(
     clear: resetColumnVisibility,
   } = useStoredParams<Record<string, boolean>>('column-visibility', defaultColumnVisibility);
 
-  const compressedVisibility = LZString.compressToEncodedURIComponent(
-    JSON.stringify(allColumnVisibility),
+  // iterate through the columns and for every visible column, set a bit to 1, else 0
+  const visibleColumnsBinarized = columns.reduce(
+    (bin, col, i) =>
+      col.sortParam === sortBy || allColumnVisibility[col.key] ? bin + (1 << i) : bin,
+    0,
   );
 
-  useEffect(() => {
-    // Update the URL param when allColumnVisibility changes
-    updatePageParams({ columns: compressedVisibility });
-  }, [allColumnVisibility, compressedVisibility]);
+  const visibleColumnsDecoded = columns.reduce<Record<string, boolean>>((acc, col, i) => {
+    acc[col.key] =
+      ((visibleColumnsBinarized >> i) & 1) === 1 ||
+      (allColumnVisibility[col.key] ?? defaultColumnVisibility[col.key]);
+    return acc;
+  }, {});
 
-  const decompressed = LZString.decompressFromEncodedURIComponent(visibleColumnsEncoded);
-  console.log(decompressed, visibleColumnsEncoded);
+  // const visibleColumnsBinary = columns.map((col, i) =>
+  //   (col.sortParam === sortBy || allColumnVisibility[col.key]) ??
+  //   defaultColumnVisibility[col.key]
+  //     ? '1'
+  //     : '0',
+  // ).join('');
 
-  // 
-  const newColumnsEncoded =
+  // const visibleColumnsEncoded = useMemo(() => {visibleColumnsBinary
+
+  // const compressedVisibility = LZString.compressToEncodedURIComponent(
+  //   JSON.stringify(allColumnVisibility),
+  // );
+
+  // useEffect(() => {
+  //   // Update the URL param when allColumnVisibility changes
+  //   updatePageParams({ columns: compressedVisibility });
+  // }, [allColumnVisibility, compressedVisibility]);
+
+  // const decompressed = LZString.decompressFromEncodedURIComponent(visibleColumnsEncoded);
+  // console.log(decompressed, visibleColumnsEncoded);
 
   const toggleColumn = useCallback(
     (columnKey: string, isVisible?: boolean) => {
-      setAllColumnVisibility((prev) => {
-        const newVisibility = {
-          ...prev,
-          [columnKey]: isVisible ?? !prev[columnKey],
-        };
-        return newVisibility;
-      });
+      setAllColumnVisibility((prev) => ({
+        ...prev,
+        [columnKey]: isVisible ?? !prev[columnKey],
+      }));
     },
     [setAllColumnVisibility],
   );

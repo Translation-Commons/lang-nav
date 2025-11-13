@@ -5,11 +5,13 @@ import Hoverable from '@features/hovercard/Hoverable';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import TableColumn from './TableColumn';
+import TableID from './TableID';
 import TableSortButton from './TableSortButton';
 
 type Props<T> = {
   visibleColumns: TableColumn<T>[];
   objects: T[];
+  tableID: TableID;
 };
 
 const MAX_COLUMN_WIDTH = '10em';

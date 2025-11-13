@@ -19,6 +19,7 @@ import BaseObjectTable from './BaseObjectTable';
 import TableColumn from './TableColumn';
 import TableColumnSelector from './TableColumnSelector';
 import TableExport from './TableExport';
+import TableID from './TableID';
 import useColumnVisibility from './useColumnVisibility';
 
 import './tableStyles.css';
@@ -27,12 +28,14 @@ interface Props<T> {
   objects: T[];
   columns: TableColumn<T>[];
   shouldFilterUsingSearchBar?: boolean;
+  tableID: TableID;
 }
 
 function InteractiveObjectTable<T extends ObjectData>({
   objects,
   columns,
   shouldFilterUsingSearchBar = true,
+  tableID,
 }: Props<T>) {
   const sortFunction = getSortFunction();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
@@ -42,7 +45,7 @@ function InteractiveObjectTable<T extends ObjectData>({
   const { getCurrentObjects } = usePagination<T>();
 
   const { visibleColumns, toggleColumn, columnVisibility, resetColumnVisibility } =
-    useColumnVisibility(columns);
+    useColumnVisibility(columns, tableID);
 
   // TODO don't filter objects for an unrelated page search on a different object type
   const objectsFilteredAndSorted = useMemo(() => {
@@ -82,7 +85,7 @@ function InteractiveObjectTable<T extends ObjectData>({
       />
 
       {/* The actual <table> component */}
-      <BaseObjectTable visibleColumns={visibleColumns} objects={currentObjects} />
+      <BaseObjectTable visibleColumns={visibleColumns} objects={currentObjects} tableID={tableID} />
 
       {currentObjects.length === 1 && (
         <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>

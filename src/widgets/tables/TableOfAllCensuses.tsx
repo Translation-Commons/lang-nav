@@ -6,6 +6,7 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
@@ -18,6 +19,7 @@ const TableOfAllCensuses: React.FC = () => {
 
   return (
     <InteractiveObjectTable<CensusData>
+      tableID={TableID.Censuses}
       objects={Object.values(censuses)}
       columns={[
         CodeColumn,

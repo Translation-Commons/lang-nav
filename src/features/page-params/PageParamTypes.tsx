@@ -80,7 +80,7 @@ export enum PageParamKey {
 export type PageParams = {
   colorBy: ColorBy;
   colorGradient: ColorGradient;
-  columns: string;
+  columns: Record<number, number>;
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
@@ -105,7 +105,7 @@ export type PageParams = {
 export type PageParamsOptional = {
   colorBy?: ColorBy;
   colorGradient?: ColorGradient;
-  columns?: string;
+  columns?: Record<number, number>;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;

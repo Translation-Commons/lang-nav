@@ -6,15 +6,18 @@ import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
+import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 
@@ -24,6 +27,7 @@ const LocaleTable: React.FC = () => {
 
   return (
     <InteractiveObjectTable<LocaleData>
+      tableID={TableID.Locales}
       objects={locales.filter(
         (locale) => locale.language?.sourceSpecific[languageSource].code != null,
       )}
@@ -123,6 +127,15 @@ const LocaleTable: React.FC = () => {
             ),
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Official Status',
+          render: (loc) =>
+            loc.officialStatus ? (
+              getOfficialLabel(loc.officialStatus)
+            ) : (
+              <Deemphasized>None</Deemphasized>
+            ),
         },
         {
           key: 'Wikipedia',
