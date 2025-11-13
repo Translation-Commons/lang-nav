@@ -4,6 +4,8 @@ import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
+
 import TableColumnSelector from '../TableColumnSelector';
 
 vi.mock('@features/page-params/usePageParams', () => ({
@@ -20,7 +22,7 @@ beforeEach(() => {
 
 describe('TableColumnSelector', () => {
   it('renders summary with visible/total columns', () => {
-    (usePageParams as Mock).mockReturnValue({ sortBy: null });
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: undefined }));
 
     const columns = [
       { key: 'Population', sortParam: SortBy.Population, render: () => null },
@@ -47,7 +49,7 @@ describe('TableColumnSelector', () => {
   });
 
   it('checkboxes reflect columnVisibility and sortBy overrides', () => {
-    (usePageParams as Mock).mockReturnValue({ sortBy: SortBy.Name });
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
 
     const columns = [
       { key: 'Population', sortParam: SortBy.Population, render: () => null },
@@ -75,7 +77,7 @@ describe('TableColumnSelector', () => {
   });
 
   it('group header toggle calls toggleColumn for each column in the group and individual checkbox toggles call toggleColumn with only the key', () => {
-    (usePageParams as Mock).mockReturnValue({ sortBy: null });
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: undefined }));
 
     const columns = [
       { key: 'Population', columnGroup: 'Group', render: () => null },

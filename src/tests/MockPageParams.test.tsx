@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { describe, expect, it, vi } from 'vitest';
 
 import { PageParamsContextState } from '@features/page-params/PageParamsContext';
@@ -5,15 +6,18 @@ import { ObjectType, PageParamsOptional, View } from '@features/page-params/Page
 import { getDefaultParams } from '@features/page-params/Profiles';
 import { SortBy } from '@features/sorting/SortTypes';
 
-const mockUpdatePageParams = vi.fn();
-
 export const createMockUsePageParams = (
   overrides: PageParamsOptional = {},
-): PageParamsContextState => ({
-  ...getDefaultParams(),
-  updatePageParams: mockUpdatePageParams,
-  ...overrides,
-});
+): PageParamsContextState => {
+  // const [params, setParams] = useState({ ...getDefaultParams(), ...overrides });
+  let params = { ...getDefaultParams(), ...overrides };
+  const updatePageParams = vi.fn().mockImplementation((newParams: PageParamsOptional) => {
+    // setParams((prev) => ({ ...prev, ...newParams }));
+    params = { ...params, ...newParams };
+  });
+
+  return { ...params, updatePageParams: updatePageParams };
+};
 
 describe('createMockUsePageParams', () => {
   it('creates a mock PageParamsContextState with default values', () => {
@@ -22,7 +26,6 @@ describe('createMockUsePageParams', () => {
     expect(mockParams.sortBy).toBe(SortBy.Population);
     expect(mockParams.objectType).toBe(ObjectType.Language);
     expect(mockParams.view).toBe(View.CardList);
-    expect(mockParams.updatePageParams).toBe(mockUpdatePageParams);
   });
 
   it('overrides default values when provided', () => {

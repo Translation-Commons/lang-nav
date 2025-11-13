@@ -41,10 +41,10 @@ function useColumnVisibility<T extends ObjectData>(
   );
 
   const toggleColumn = useCallback(
-    (columnKey: string, isVisible?: boolean) => {
+    (columnKey: string) => {
       const binary = getBinaryForColumnVisibility(columns, {
         ...columnVisibility,
-        [columnKey]: isVisible ?? !columnVisibility[columnKey],
+        [columnKey]: !columnVisibility[columnKey],
       });
       updatePageParams({
         columns: {
