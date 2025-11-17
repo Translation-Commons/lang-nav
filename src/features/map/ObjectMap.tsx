@@ -6,6 +6,7 @@ import useColors from '@features/transforms/coloring/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import CountryMap from './CountryMap';
 import MapCircles from './MapCircles';
 
 type Props = {
@@ -29,6 +30,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
       </div>
 
       {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
+      <CountryMap highlighted={new Set(['GB', 'AU', 'us'])} />
     </div>
   );
 };
