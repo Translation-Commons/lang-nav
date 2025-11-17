@@ -27,10 +27,10 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
           style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
         />
         <MapCircles objects={objects} scalar={800 / maxWidth} />
+        <CountryMap highlighted={new Set(['GB', 'AU', 'us'])} />
       </div>
 
       {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
-      <CountryMap highlighted={new Set(['GB', 'AU', 'us'])} />
     </div>
   );
 };
