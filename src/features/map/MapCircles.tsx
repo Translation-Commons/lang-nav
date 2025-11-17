@@ -49,6 +49,7 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
         position: 'absolute',
         width: '100%',
         aspectRatio: 1.979, // Aspect ratio of the map_world.svg
+        pointerEvents: 'none', // So that the svg doesn't block mouse events to the underlying map
       }}
     >
       {renderableObjects.map((obj) => {
@@ -99,7 +100,7 @@ const HoverableCircle: React.FC<{
       r={computedRadiusMultiplier * scalar}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
-      style={{ transition: 'fill 0.25s, stroke 0.25s' }}
+      style={{ transition: 'fill 0.25s, stroke 0.25s', pointerEvents: 'fill' }}
       className="object-map-circle"
       strokeWidth={1 * scalar}
       onMouseEnter={(e: React.MouseEvent) => {

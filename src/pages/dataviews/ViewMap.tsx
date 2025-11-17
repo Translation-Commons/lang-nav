@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import MapContainer from '@features/map/MapContainer';
 import ObjectMap from '@features/map/ObjectMap';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
@@ -19,8 +20,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
-
 import './styles.css';
+
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});
@@ -41,15 +42,7 @@ function ViewMap() {
   );
 
   return (
-    <div
-      style={{
-        alignItems: 'center',
-        margin: '0 auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1em',
-      }}
-    >
+    <MapContainer>
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
       <VisibleItemsMeter objects={filteredObjects} />
@@ -76,7 +69,7 @@ function ViewMap() {
           </CommaSeparated>
         </div>
       )}
-    </div>
+    </MapContainer>
   );
 }
 

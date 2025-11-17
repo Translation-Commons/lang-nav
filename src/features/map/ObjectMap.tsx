@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
@@ -15,7 +16,7 @@ type Props = {
 };
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
-  const { colorBy } = usePageParams();
+  const { colorBy, objectType } = usePageParams();
   const coloringFunctions = useColors({ objects });
 
   return (
@@ -26,8 +27,8 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
           src="./data/wiki/map_world.svg"
           style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
         />
+        {objectType === ObjectType.Territory && <CountryMap objects={objects} />}
         <MapCircles objects={objects} scalar={800 / maxWidth} />
-        <CountryMap highlighted={new Set(['GB', 'AU', 'us'])} />
       </div>
 
       {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
