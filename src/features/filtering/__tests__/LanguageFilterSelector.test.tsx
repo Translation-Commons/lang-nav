@@ -44,7 +44,7 @@ describe('LanguageFilterSelector', () => {
 
   it('basically renders', () => {
     render(<LanguageFilterSelector />);
-    expect(screen.getByText(/With Language/)).toBeTruthy();
+    expect(screen.getByText(/Language/)).toBeTruthy();
   });
 
   it('suggests all languages when no search string is provided', async () => {

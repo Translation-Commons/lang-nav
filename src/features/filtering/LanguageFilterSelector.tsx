@@ -57,7 +57,7 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
     <SelectorDisplayProvider display={display}>
       <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
         <SelectorLabel
-          label="With Language"
+          label="Language"
           description={
             <>
               Filter results to those relevant to a specific language, language family, or dialect.
