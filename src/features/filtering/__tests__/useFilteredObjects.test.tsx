@@ -99,6 +99,7 @@ describe('useFilteredObjects', () => {
     const { filteredObjects } = getHookResult({ useScope: false });
     expect(filteredObjects.map((obj) => obj.ID)).toEqual([
       'ine', // usually filtered out as family
+      'gem',
       'eng',
       'spa',
       'fra',
@@ -115,6 +116,7 @@ describe('useFilteredObjects', () => {
     const { filteredObjects } = getHookResult({});
     expect(filteredObjects.map((obj) => obj.ID)).toEqual([
       'ine',
+      'gem',
       'eng',
       'spa',
       'fra',

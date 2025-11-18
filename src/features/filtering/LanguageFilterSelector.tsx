@@ -88,8 +88,8 @@ const LanguageFilterDescription: React.FC = () => {
     case ObjectType.Language:
       return (
         <>
-          If the selected entry is a language family, then it will show all languages inside that
-          family.
+          <strong>Language view only:</strong> Selecting a language family will show the languages
+          in the family. Dialects will also appear if they are enabled.
         </>
       );
     case ObjectType.Territory:

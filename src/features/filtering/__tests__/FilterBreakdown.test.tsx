@@ -78,8 +78,8 @@ describe('FilterBreakdown', () => {
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('numeric');
     expect(numericCells.length).toBe(8);
-    expect(numericCells[0].textContent).toBe('9'); // start out with 8 languages
-    expect(numericCells[1].textContent).toBe('-1'); // ine is out of scope: Language or Macrolanguage
+    expect(numericCells[0].textContent).toBe('10'); // start out with 8 languages
+    expect(numericCells[1].textContent).toBe('-2'); // ine, gem is out of scope: Language or Macrolanguage
     expect(numericCells[2].textContent).toBe('-3'); // deu, ita, zho are not in US in the test data
     expect(numericCells[3].textContent).toBe('-1'); // rus is not written in the Latin script
     expect(numericCells[4].textContent).toBe('-1'); // nav is not in the Indo-European language family
@@ -145,8 +145,8 @@ describe('FilterBreakdown', () => {
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('numeric');
     expect(numericCells.length).toBe(3);
-    expect(numericCells[0].textContent).toBe('9'); // total languages
-    expect(numericCells[1].textContent).toBe('-1'); // ine is out of scope: Language or Macrolanguage
+    expect(numericCells[0].textContent).toBe('10'); // total languages
+    expect(numericCells[1].textContent).toBe('-2'); // ine, gem is out of scope: Language or Macrolanguage
     expect(numericCells[2].textContent).toBe('8'); // resulting languages
   });
 });
