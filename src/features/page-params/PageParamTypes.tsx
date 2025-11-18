@@ -58,6 +58,7 @@ export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
   columns = 'columns',
+  languageFilter = 'languageFilter',
   languageSource = 'languageSource',
   languageScopes = 'languageScopes',
   limit = 'limit',
@@ -83,6 +84,7 @@ export type PageParams = {
   colorBy: ColorBy;
   colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
+  languageFilter: string;
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
@@ -108,6 +110,7 @@ export type PageParamsOptional = {
   colorBy?: ColorBy;
   colorGradient?: ColorGradient;
   columns?: TableIDToBinarizedColumnVisibility;
+  languageFilter?: string;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;

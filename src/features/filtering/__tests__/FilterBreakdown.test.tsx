@@ -47,6 +47,7 @@ describe('FilterBreakdown', () => {
       languageScopes: [],
       territoryFilter: '',
       writingSystemFilter: '',
+      languageFilter: '',
       vitalityEth2013: [],
       searchString: '',
     });
@@ -59,6 +60,7 @@ describe('FilterBreakdown', () => {
     setupMockParams({
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
+      languageFilter: 'ine', // Indo-European family
       vitalityEth2013: [VitalityEthnologueFine.National],
       searchString: 'spa',
     });
@@ -69,23 +71,25 @@ describe('FilterBreakdown', () => {
     expect(screen.getByText(/Out of scope:/i)).toBeTruthy();
     expect(screen.getByText(/Not in territory "US":/i)).toBeTruthy();
     expect(screen.getByText(/Not written in "Latn":/i)).toBeTruthy();
+    expect(screen.getByText(/Not related to language "ine":/i)).toBeTruthy();
     expect(screen.getByText(/Not passing vitality filter:/i)).toBeTruthy();
     expect(screen.getByText(/Not matching substring \(spa\):/i)).toBeTruthy();
 
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('numeric');
-    expect(numericCells.length).toBe(7);
-    expect(numericCells[0].textContent).toBe('8'); // start out with 8 languages
+    expect(numericCells.length).toBe(8);
+    expect(numericCells[0].textContent).toBe('9'); // start out with 8 languages
     expect(numericCells[1].textContent).toBe('-1'); // ine is out of scope: Language or Macrolanguage
     expect(numericCells[2].textContent).toBe('-3'); // deu, ita, zho are not in US in the test data
     expect(numericCells[3].textContent).toBe('-1'); // rus is not written in the Latin script
-    expect(numericCells[4].textContent).toBe('-1'); // fra fails vitality "National"
-    expect(numericCells[5].textContent).toBe('-1'); // eng fails substring "spa"
-    expect(numericCells[6].textContent).toBe('1'); // spa is the only language left
+    expect(numericCells[4].textContent).toBe('-1'); // nav is not in the Indo-European language family
+    expect(numericCells[5].textContent).toBe('-1'); // fra fails vitality "National"
+    expect(numericCells[6].textContent).toBe('-1'); // eng fails substring "spa"
+    expect(numericCells[7].textContent).toBe('1'); // spa is the only language left
 
     // There should be four clear buttons (one per message)
     const buttons = screen.getAllByRole('button');
-    expect(buttons.length).toBe(5);
+    expect(buttons.length).toBe(6);
 
     // Click each button and ensure updatePageParams is called with expected payload
     fireEvent.click(buttons[0]);
@@ -98,8 +102,9 @@ describe('FilterBreakdown', () => {
     fireEvent.click(buttons[2]);
     fireEvent.click(buttons[3]);
     fireEvent.click(buttons[4]);
+    fireEvent.click(buttons[5]);
 
-    expect(updatePageParams).toHaveBeenCalledTimes(5);
+    expect(updatePageParams).toHaveBeenCalledTimes(6);
   });
 
   it('does not apply substring filter when shouldFilterUsingSearchBar is false', () => {
@@ -133,14 +138,15 @@ describe('FilterBreakdown', () => {
     expect(screen.queryByText(/Out of scope:/i)).toBeTruthy(); // ine
     expect(screen.queryByText(/Not in territory/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not written in/i)).toBeNull(); // not active
+    expect(screen.queryByText(/Not related to language/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not passing vitality filter/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not matching substring/i)).toBeNull(); // not active
 
     // Check the cells showing the missing counts
     const numericCells = container.getElementsByClassName('numeric');
     expect(numericCells.length).toBe(3);
-    expect(numericCells[0].textContent).toBe('8'); // total languages
+    expect(numericCells[0].textContent).toBe('9'); // total languages
     expect(numericCells[1].textContent).toBe('-1'); // ine is out of scope: Language or Macrolanguage
-    expect(numericCells[2].textContent).toBe('7'); // resulting languages
+    expect(numericCells[2].textContent).toBe('8'); // resulting languages
   });
 });

@@ -83,14 +83,24 @@ export function getMockLanguages() {
   rus.scope = LanguageScope.Language;
   rus.writingSystems = { Cyrl };
   rus.locales = [mul_US];
+
+  [eng, spa, fra, deu, ita, rus].forEach((lang) => {
+    lang.parentLanguage = ine;
+  });
+
+  const nav = getBaseLanguageData('nav', 'Navajo');
+  nav.scope = LanguageScope.Language;
+  nav.writingSystems = { Latn };
+  nav.locales = [mul_US];
+  nav.vitalityEth2013 = VitalityEthnologueFine.Threatened;
   const zho = getBaseLanguageData('zho', 'Chinese');
   zho.scope = LanguageScope.Macrolanguage;
-  return [ine, eng, spa, fra, deu, ita, rus, zho];
+  return [ine, eng, spa, fra, deu, ita, rus, nav, zho];
 }
 
 describe('Mock Languages for Filter Tests', () => {
   it('provides mock languages with expected properties', () => {
     const languages = getMockLanguages();
-    expect(languages.length).toBe(8);
+    expect(languages.length).toBe(9);
   });
 });

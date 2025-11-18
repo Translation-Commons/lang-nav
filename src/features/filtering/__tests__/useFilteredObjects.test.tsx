@@ -57,6 +57,7 @@ describe('useFilteredObjects', () => {
       'deu',
       'ita',
       'rus',
+      'nav',
       'zho',
     ]);
   });
@@ -79,7 +80,7 @@ describe('useFilteredObjects', () => {
   it('filters by territory', () => {
     setupMockParams({ territoryFilter: 'US' });
     const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa', 'fra', 'rus']);
+    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa', 'fra', 'rus', 'nav']);
   });
 
   it('allows composite filters (territory + vitality)', () => {
@@ -104,6 +105,7 @@ describe('useFilteredObjects', () => {
       'deu',
       'ita',
       'rus',
+      'nav',
       'zho',
     ]);
   });
@@ -119,6 +121,7 @@ describe('useFilteredObjects', () => {
       'deu',
       'ita',
       'rus',
+      'nav',
       'zho',
     ]);
   });
@@ -129,6 +132,7 @@ describe('useFilteredObjects', () => {
     expect(filteredObjects.map((obj) => obj.ID)).toEqual([
       'spa', // Spanish
       'rus', // Russian
+      'nav', // Navajo
       'ita', // Italian
       'deu', // German
       // 'ine', // Indo-European not included since its filtered out as family

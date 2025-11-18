@@ -7,7 +7,9 @@ import { LanguageSource } from '@entities/language/LanguageTypes';
 import Selector from '../components/Selector';
 import { SelectorDisplay } from '../components/SelectorDisplayContext';
 
-const LanguageListSourceSelector: React.FC = () => {
+type Props = { display: SelectorDisplay };
+
+const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
   const { languageSource, updatePageParams } = usePageParams();
   const selectorDescription = (
     <>
@@ -21,12 +23,14 @@ const LanguageListSourceSelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Source of the List of Languages"
+      selectorLabel={
+        display !== SelectorDisplay.InlineDropdown ? 'Source of the List of Languages' : undefined
+      }
       selectorDescription={selectorDescription}
       options={Object.values(LanguageSource)}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}
       selected={languageSource}
-      display={SelectorDisplay.ButtonList}
+      display={display}
       getOptionDescription={(languageSource) => (
         <LanguageSourceDescription languageSource={languageSource} />
       )}
@@ -96,4 +100,4 @@ const LanguageSourceDescription: React.FC<{ languageSource: LanguageSource }> = 
   }
 };
 
-export default LanguageListSourceSelector;
+export default LanguageSourceSelector;

@@ -108,6 +108,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       // Freeform strings
       case PageParamKey.objectID:
       case PageParamKey.searchString:
+      case PageParamKey.languageFilter:
       case PageParamKey.territoryFilter:
       case PageParamKey.writingSystemFilter:
         params[key] = value; // Default to undefined if empty

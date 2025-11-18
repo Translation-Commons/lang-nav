@@ -1,6 +1,7 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
+import LanguageFilterSelector from '@features/filtering/LanguageFilterSelector';
 import WritingSystemFilterSelector from '@features/filtering/WritingSystemFilterSelector';
 import HoverableButton from '@features/hovercard/HoverableButton';
 import ColorBySelector from '@features/sorting/ColorBySelector';
@@ -16,7 +17,7 @@ import { ObjectiveList } from '../CommonObjectives';
 
 import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
-import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
+import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
@@ -58,13 +59,14 @@ const SidePanel: React.FC = () => {
 
         <SidePanelSection panelWidth={panelWidth} title="Data" optionsName="data options">
           <ObjectTypeSelector />
+          <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
           <ProfileSelector />
-          <LanguageListSourceSelector />
         </SidePanelSection>
 
         <SidePanelSection panelWidth={panelWidth} title="Filter" optionsName="filters">
           <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />
           <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
+          <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageScopeSelector />
           <TerritoryScopeSelector />
           <VitalityISOSelector />
