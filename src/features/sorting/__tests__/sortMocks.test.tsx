@@ -374,11 +374,10 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      '123', // Tengwar
-      'sjn',
+      'sjn', // Tengwar
       'dori0123',
       'BE',
-      '001',
+      'ER',
       'sjn_BE',
       'sjn_ER',
       'dori0123_ER',
@@ -390,10 +389,11 @@ describe('getSortByParameterized', () => {
       'sjn_001',
       'sjn_Teng_001',
       'dori0123_001',
-      // All below have no associated language, stable to input order
-      'ER',
+      // All below have no associated writing system, stable to input order
+      '123',
       'HA',
       'AM',
+      '001',
       'be0590',
       'tolkorth',
     ]);

@@ -2,7 +2,9 @@ import React, { useCallback, useMemo } from 'react';
 
 import { getFilterBySubstring, getFilterByVitality } from '@features/filtering/filter';
 import { getFilterByConnections } from '@features/filtering/filterByConnections';
+import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
+import LimitSelector from '@features/pagination/LimitSelector';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -24,6 +26,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
     searchString,
     territoryFilter,
     writingSystemFilter,
+    languageFilter,
     vitalityEth2013,
     vitalityEth2025,
     vitalityISO,
@@ -36,6 +39,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       searchString ||
       territoryFilter ||
       writingSystemFilter ||
+      languageFilter ||
       vitalityEth2013 ||
       vitalityEth2025 ||
       vitalityISO,
@@ -43,6 +47,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       searchString,
       territoryFilter,
       writingSystemFilter,
+      languageFilter,
       vitalityEth2013,
       vitalityEth2025,
       vitalityISO,
@@ -58,13 +63,22 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   return (
     <div className="TreeListView">
       <TreeListOptionsProvider>
-        <div style={{ marginBottom: 8 }}>
+        <div style={{ marginBottom: '.5em' }}>
           {description}
           {limit < rootNodes.length && (
             <>
               {' '}
-              {limit} of {rootNodes.length} root nodes are shown. Update the item limit in the
-              options panel to see more.
+              <Hoverable
+                hoverContent={
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+                    <div>Set the number of root nodes that are shown.</div>
+                    <LimitSelector />
+                  </div>
+                }
+              >
+                {limit.toLocaleString()}
+              </Hoverable>{' '}
+              of {rootNodes.length.toLocaleString()} root nodes are shown.
             </>
           )}
         </div>

@@ -36,6 +36,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   colorBy: 'None',
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
+  languageFilter: '',
   languageSource: LanguageSource.All,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   limit: 12,

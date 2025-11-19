@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplayContext';
+import LanguageSourceSelector from '@widgets/controls/selectors/LanguageSourceSelector';
+
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { getScopeFilter } from '@features/filtering/filter';
 import { ObjectType } from '@features/page-params/PageParamTypes';
@@ -33,7 +36,18 @@ export const LanguageHierarchy: React.FC = () => {
       description={
         <>
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
-          different people disagree on what it is a language/dialect/etc.
+          different sources disagree on what is a language/dialect/etc. Change source:{' '}
+          <div
+            style={{
+              display: 'inline-block',
+              height: '1em',
+              verticalAlign: 'top',
+              padding: '0.25em 0',
+            }}
+          >
+            <LanguageSourceSelector display={SelectorDisplay.InlineDropdown} />
+          </div>
+          .
         </>
       }
     />
