@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    35.5 |    79.1 |    53.8 |    35.5 |
+| `src`                                    |    35.5 |    79.2 |    53.8 |    35.5 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -53,13 +53,13 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    47.1 |    58.5 |    33.3 |    47.1 |
+| `    ui`                                 |    47.1 |    59.5 |    33.3 |    47.1 |
 | `      CLDRCoverageInfo.tsx`             |    15.8 |   100.0 |     0   |    15.8 |
 | `      CLDRCoverageLevels.tsx`           |     7.9 |   100.0 |     0   |     7.9 |
 | `      CLDRWarningNotes.tsx`             |    18.6 |   100.0 |     0   |    18.6 |
 | `      ICUSupportStatus.tsx`             |    25.0 |   100.0 |     0   |    25.0 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
-| `      ObjectField.tsx`                  |    89.6 |    66.7 |   100.0 |    89.6 |
+| `      ObjectField.tsx`                  |    89.6 |    68.4 |   100.0 |    89.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
 | `      ObjectWikipediaInfo.tsx`          |    17.2 |   100.0 |     0   |    17.2 |
@@ -205,19 +205,19 @@
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    17.5 |    69.3 |    45.5 |    17.5 |
+| `  widgets`                              |    17.5 |    69.5 |    45.5 |    17.5 |
 | `    cardlists`                          |    95.7 |    75.0 |   100.0 |    95.7 |
 | `      CardList.tsx`                     |   100.0 |    75.0 |   100.0 |   100.0 |
 | `      ResponsiveGrid.tsx`               |    89.7 |    75.0 |   100.0 |    89.7 |
 | `    CommonObjectives.tsx`               |     0   |     0   |     0   |     0   |
-| `    controls`                           |    44.6 |    82.9 |    76.0 |    44.6 |
-| `      components`                       |    86.8 |    81.9 |    80.6 |    86.8 |
+| `    controls`                           |    44.6 |    83.1 |    76.0 |    44.6 |
+| `      components`                       |    86.8 |    82.1 |    80.6 |    86.8 |
 | `        Selector.tsx`                   |    98.0 |    94.1 |   100.0 |    98.0 |
 | `        SelectorDisplayContext.tsx`     |   100.0 |   100.0 |    66.7 |   100.0 |
 | `        SelectorDropdown.tsx`           |   100.0 |   100.0 |   100.0 |   100.0 |
 | `        SelectorLabel.tsx`              |    86.7 |    57.1 |   100.0 |    86.7 |
 | `        SelectorOption.tsx`             |    70.4 |    69.2 |    66.7 |    70.4 |
-| `        TextInput.tsx`                  |    86.4 |    82.6 |    70.0 |    86.4 |
+| `        TextInput.tsx`                  |    86.4 |    83.3 |    70.0 |    86.4 |
 | `      selectors`                        |    13.8 |    89.3 |    72.2 |    13.8 |
 | `        LanguageScopeSelector.tsx`      |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageSourceSelector.tsx`     |    10.6 |   100.0 |     0   |    10.6 |
