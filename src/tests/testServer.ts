@@ -23,6 +23,7 @@ export const handlers = [
   makeFileAvailable('data/languages.tsv'),
   makeFileAvailable('data/locales.tsv'),
   makeFileAvailable('data/writingSystems.tsv'),
+  makeFileAvailable('data/territories.tsv'),
 ];
 
 export const server = setupServer(...handlers);

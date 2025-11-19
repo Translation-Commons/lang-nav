@@ -16,22 +16,6 @@ import { sumBy } from '@shared/lib/setUtils';
 
 const DEBUG = false;
 
-export async function loadTerritories(): Promise<Record<TerritoryCode, TerritoryData> | void> {
-  return await fetch('data/territories.tsv')
-    .then((res) => res.text())
-    .then((text) => {
-      const territories = text.split('\n').slice(1).map(parseTerritoryLine);
-      return territories.reduce<Record<TerritoryCode, TerritoryData>>(
-        (territoriesByCode, territory) => {
-          territoriesByCode[territory.ID] = territory;
-          return territoriesByCode;
-        },
-        {},
-      );
-    })
-    .catch((err) => console.error('Error loading TSV:', err));
-}
-
 export function parseTerritoryLine(line: string): TerritoryData {
   const parts = line.split('\t');
   const population = parts[3] != '' ? Number.parseInt(parts[3].replace(/,/g, '')) : 0;
@@ -96,6 +80,8 @@ function createRegionalLocalesForTerritory(
   territory: TerritoryData,
   allLocales: Record<BCP47LocaleCode, LocaleData>,
 ): void {
+  if (!territory) return;
+
   // Make sure that territories within are processed first
   const containsTerritories = territory.containsTerritories ?? [];
   containsTerritories?.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
@@ -162,10 +148,14 @@ function createRegionalLocalesForTerritory(
   territory.locales = Object.values(territoryLocales ?? {})
     .filter((loc) => (loc.populationSpeaking ?? 0) > 10) // Avoid creating too many locale objects
     .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0));
-  territory.locales.forEach((loc) => (allLocales[loc.ID] = loc));
-  // At the moment its not being saved to the master locale list
-  // Also this should be done after locales are matched to languages
-  // -- so these regional locales are not added to the language's locale list
+
+  // Connect locale edges
+  territory.locales.forEach((loc) => {
+    // Add the new locale to the master list
+    allLocales[loc.ID] = loc;
+    // Also add the locale to the language's locale list
+    if (loc.language) loc.language.locales.push(loc);
+  });
 }
 
 export async function loadTerritoryGDPLiteracy(
@@ -186,7 +176,7 @@ export async function loadTerritoryGDPLiteracy(
         const territory = getTerritory(newTerrData.code);
         if (territory == null) {
           // Known exclusive: Antarctica (AQ) intentionally left out because its poorly defined linguistically
-          if (DEBUG) console.log('Loading new territory data. Territory not found', newTerrData);
+          if (DEBUG) console.debug('Loading new territory data. Territory not found', newTerrData);
           return;
         }
         territory.literacyPercent = newTerrData.literacyPercent;

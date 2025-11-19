@@ -2,7 +2,6 @@ import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
 import EmptyHoverCardProvider from '@features/hovercard/EmptyHoverCardProvider';
 import { PageParamsContext } from '@features/page-params/PageParamsContext';
@@ -111,7 +110,6 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
 
   return (
     <Selector
-      display={SelectorDisplay.Dropdown}
       options={Object.values(ExportType).filter((et) => et !== ExportType.Unchosen)}
       onChange={handleExport}
       selected={ExportType.Unchosen}

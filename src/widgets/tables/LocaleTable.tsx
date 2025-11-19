@@ -4,16 +4,20 @@ import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
-import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
+import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
+import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 
@@ -22,13 +26,19 @@ const LocaleTable: React.FC = () => {
   const { languageSource } = usePageParams();
 
   return (
-    <ObjectTable<LocaleData>
+    <InteractiveObjectTable<LocaleData>
+      tableID={TableID.Locales}
       objects={locales.filter(
         (locale) => locale.language?.sourceSpecific[languageSource].code != null,
       )}
       columns={[
         CodeColumn,
-        NameColumn,
+        {
+          key: 'Name',
+          render: (object) => <LocaleNameWithFilters locale={object} />,
+          sortParam: SortBy.Name,
+          columnGroup: 'Names',
+        },
         EndonymColumn,
         ...LocalePopulationColumns,
         {
@@ -40,20 +50,42 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Literacy,
+          columnGroup: 'Writing',
         },
         {
-          key: 'Contained Locales',
-          render: (loc) => (
-            <CommaSeparated limit={2}>
-              {loc.containedLocales?.map((child) => (
-                <HoverableObjectName object={child} key={child.ID} />
-              ))}
-            </CommaSeparated>
+          key: 'Writing System (specified)',
+          description: (
+            <>
+              Some locales specify a writing system, for instance{' '}
+              <code>
+                zh_<strong>Hant</strong>_TW
+              </code>{' '}
+              means it specifically refers to Traditional Han characters.
+            </>
+          ),
+          render: (object) => <HoverableObjectName object={object.writingSystem} />,
+          isInitiallyVisible: false,
+          columnGroup: 'Writing',
+        },
+        {
+          key: 'Writing System (inferred)',
+          description: (
+            <>
+              Some locales do not include a writing system but it can usually be inferred based on
+              the primary writing system for the language. For instance, <code>zh_CN</code> could be
+              written in <code>Hant</code> or <code>Hans</code> writing. Since the primary writing
+              system in China is the Simplified characters, it can be inferred to be{' '}
+              <code>Hans</code>.
+            </>
+          ),
+          render: (object) => (
+            <HoverableObjectName
+              object={object.writingSystem ?? object.language?.primaryWritingSystem}
+            />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
-          sortParam: SortBy.CountOfLanguages,
-          columnGroup: 'Linked Data',
+          sortParam: SortBy.WritingSystem,
+          columnGroup: 'Writing',
         },
         {
           key: 'Language',
@@ -66,12 +98,7 @@ const LocaleTable: React.FC = () => {
           key: 'Territory',
           render: (object) => <HoverableObjectName object={object.territory} />,
           isInitiallyVisible: false,
-          columnGroup: 'Linked Data',
-        },
-        {
-          key: 'Writing System',
-          render: (object) => <HoverableObjectName object={object.writingSystem} />,
-          isInitiallyVisible: false,
+          sortParam: SortBy.Territory,
           columnGroup: 'Linked Data',
         },
         {
@@ -88,8 +115,31 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Linked Data',
         },
         {
+          key: 'Contains Locales',
+          render: (loc) => (
+            <CommaSeparated limit={2}>
+              {loc.containedLocales?.map((child) => (
+                <HoverableObjectName object={child} key={child.ID} />
+              ))}
+            </CommaSeparated>
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Official Status',
+          render: (loc) =>
+            loc.officialStatus ? (
+              getOfficialLabel(loc.officialStatus)
+            ) : (
+              <Deemphasized>None</Deemphasized>
+            ),
+        },
+        {
           key: 'Wikipedia',
-          render: (object) => <ObjectWikipediaInfo object={object} size="compact" />,
+          render: (object) => <ObjectWikipediaInfo object={object} />,
           isInitiallyVisible: false,
         },
         {

@@ -19,27 +19,25 @@ export async function loadAndApplyWikipediaData(dataContext: DataContextType): P
 async function loadWikipediaData(): Promise<WikipediaData[] | void> {
   return await fetch('data/wikipedias.tsv')
     .then((res) => res.text())
-    .then((text) => {
-      return text
-        .split('\n')
-        .slice(1)
-        .map((line) => {
-          const parts = line.split('\t');
-          return {
-            titleEnglish: parts[0],
-            titleLocal: parts[1],
-            status: parts[2] as WikipediaStatus,
-            languageName: parts[3],
-            scriptCodes: parts[4] ? (parts[4].split('/') as ScriptCode[]) : [],
-            wikipediaSubdomain: parts[5],
-            localeCode: parts[6] as BCP47LocaleCode,
-            articles: parseInt(parts[7].replace(/,/g, '')),
-            activeUsers: parseInt(parts[8].replace(/,/g, '')),
-            url: parts[9],
-          } as WikipediaData;
-        });
-    })
+    .then((text) => text.split('\n').slice(1))
+    .then((lines) => lines.map(parseWikipediaData))
     .catch((err) => console.error('Error loading TSV:', err));
+}
+
+function parseWikipediaData(line: string): WikipediaData {
+  const parts = line.split('\t');
+  return {
+    titleEnglish: parts[0],
+    titleLocal: parts[1],
+    status: parts[2] as WikipediaStatus,
+    languageName: parts[3],
+    scriptCodes: parts[4] ? (parts[4].split('/') as ScriptCode[]) : [],
+    wikipediaSubdomain: parts[5],
+    localeCode: parts[6] as BCP47LocaleCode,
+    articles: parseInt(parts[7].replace(/,/g, '')),
+    activeUsers: parseInt(parts[8].replace(/,/g, '')),
+    url: parts[9],
+  } as WikipediaData;
 }
 
 // Add wikipedia data to corresponding objects (languages, locales)

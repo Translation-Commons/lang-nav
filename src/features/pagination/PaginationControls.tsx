@@ -1,6 +1,13 @@
-import { SkipBackIcon, SkipForwardIcon, StepBackIcon, StepForwardIcon } from 'lucide-react';
+import {
+  SkipBackIcon,
+  SkipForwardIcon,
+  StepBackIcon,
+  StepForwardIcon,
+  TriangleAlertIcon,
+} from 'lucide-react';
 import React from 'react';
 
+import HoverableButton from '@features/hovercard/HoverableButton';
 import usePageParams from '@features/page-params/usePageParams';
 
 type Props = {
@@ -42,14 +49,14 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
           disabled={currentPage === 1}
           style={{ ...compactStyle, borderRadius: '1em 0 0 1em' }}
         >
-          <SkipBackIcon size="1em" display="block" />
+          <SkipBackIcon size="1em" style={{ display: 'block' }} />
         </button>
         <button
           onClick={() => updatePageParams({ page: Math.max(1, currentPage - 1) })}
           disabled={currentPage === 1}
           style={compactStyle}
         >
-          <StepBackIcon size="1em" display="block" />
+          <StepBackIcon size="1em" style={{ display: 'block' }} />
         </button>
 
         <input
@@ -61,19 +68,29 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
           style={{ ...compactStyle, width: 50, textAlign: 'center' }}
         />
 
+        {currentPage > totalPages && (
+          <HoverableButton
+            onClick={() => updatePageParams({ page: totalPages })}
+            hoverContent="This page number is out of range. Showing the first page instead. Click to go to the actually last page."
+            style={{ margin: 'none', padding: 0, borderRadius: 0 }}
+          >
+            <TriangleAlertIcon size="1em" style={{ display: 'block' }} />
+          </HoverableButton>
+        )}
+
         <button
           onClick={() => updatePageParams({ page: Math.min(totalPages, currentPage + 1) })}
           disabled={currentPage >= totalPages}
           style={compactStyle}
         >
-          <StepForwardIcon size="1em" display="block" />
+          <StepForwardIcon size="1em" style={{ display: 'block' }} />
         </button>
         <button
           onClick={() => updatePageParams({ page: totalPages })}
           disabled={currentPage === totalPages}
           style={{ ...compactStyle, borderRadius: '0 1em 1em 0' }}
         >
-          <SkipForwardIcon size="1em" display="block" />
+          <SkipForwardIcon size="1em" style={{ display: 'block' }} />
         </button>
       </div>
     </>

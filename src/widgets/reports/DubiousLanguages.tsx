@@ -1,15 +1,12 @@
 import React, { useMemo } from 'react';
 
-import LimitInput from '@widgets/controls/selectors/LimitInput';
-
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getSliceFunction,
-} from '@features/filtering/filter';
+import { getFilterBySubstring } from '@features/filtering/filter';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
+import usePagination from '@features/pagination/usePagination';
 import { getSortFunction } from '@features/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -22,16 +19,16 @@ const DubiousLanguages: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
     useDataContext();
   const filterBySubstring = getFilterBySubstring();
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
-  const sliceFunction = getSliceFunction<LanguageData>();
+  const { getCurrentObjects } = usePagination<LanguageData>();
   const languagesFiltered = useMemo(
     () =>
       languagesInSelectedSource
         .filter(filterBySubstring)
-        .filter(filterByTerritory)
+        .filter(filterByConnections)
         .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
-    [languagesInSelectedSource, filterBySubstring, filterByTerritory],
+    [languagesInSelectedSource, filterBySubstring, filterByConnections],
   );
 
   return (
@@ -59,7 +56,7 @@ const DubiousLanguages: React.FC = () => {
         <PaginationControls itemCount={languagesFiltered.length} />
       </div>
       <div className="CardList" style={{ marginBottom: '1em' }}>
-        {sliceFunction(languagesFiltered.sort(sortFunction)).map((lang) => {
+        {getCurrentObjects(languagesFiltered.sort(sortFunction)).map((lang) => {
           const codePieces = lang.codeDisplay.split(/-|_/);
           const relatedObjects = codePieces
             .map(

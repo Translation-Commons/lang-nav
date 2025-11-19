@@ -7,6 +7,7 @@ import {
   PageParamsOptional,
   View,
 } from '@features/page-params/PageParamTypes';
+import { SortBy } from '@features/sorting/SortTypes';
 
 const CommonObjectives: React.FC = () => {
   return (
@@ -24,7 +25,7 @@ export const ObjectiveList: React.FC = () => {
         label="Find information about a language."
         inputPlaceholder="Enter a language name"
         inputParam={PageParamKey.searchString}
-        urlParams={{}}
+        urlParams={{ limit: 1 }}
       />
       <Objective
         label="See the languages in a country."
@@ -33,6 +34,10 @@ export const ObjectiveList: React.FC = () => {
         urlParams={{ view: View.Table, objectType: ObjectType.Locale }}
       />
       <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
+      <Objective
+        label="View a map of endangered languages."
+        urlParams={{ view: View.Map, limit: -1, colorBy: SortBy.VitalityEthnologue2013 }}
+      />
     </div>
   );
 };

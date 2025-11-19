@@ -1,14 +1,13 @@
 import React, { useMemo } from 'react';
 
-import LimitInput from '@widgets/controls/selectors/LimitInput';
+import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getSliceFunction,
-} from '@features/filtering/filter';
+import { getFilterBySubstring } from '@features/filtering/filter';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
+import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
+import usePagination from '@features/pagination/usePagination';
 import { getSortFunction } from '@features/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
@@ -16,6 +15,7 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import ViewCard from '@shared/containers/ViewCard';
+import { unique } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -24,13 +24,13 @@ import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 const LanguagesWithIdenticalNames: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const filterBySubstring = getFilterBySubstring();
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
-  const sliceFunction = getSliceFunction<[string, LanguageData[]]>();
+  const { getCurrentObjects } = usePagination<[string, LanguageData[]]>();
   const languagesByName = useMemo(() => {
     return languagesInSelectedSource
       .filter(filterBySubstring)
-      .filter(filterByTerritory)
+      .filter(filterByConnections)
       .reduce<Record<string, LanguageData[]>>((languagesByName, lang) => {
         const name = lang.nameDisplay;
         if (languagesByName[name] == null) {
@@ -40,7 +40,8 @@ const LanguagesWithIdenticalNames: React.FC = () => {
         }
         return languagesByName;
       }, {});
-  }, [languagesInSelectedSource, filterBySubstring, filterByTerritory]);
+  }, [languagesInSelectedSource, filterBySubstring, filterByConnections]);
+  console.log(Object.entries(languagesByName).slice(0, 5));
   const langsWithDupNames = Object.entries(languagesByName).reduce<Record<string, LanguageData[]>>(
     (duplicatedNames, [name, langs]) => {
       if (langs.length > 1) {
@@ -77,7 +78,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
         <LimitInput />
         <PaginationControls itemCount={Object.keys(langsWithDupNames).length} />
       </div>
-      {sliceFunction(
+      {getCurrentObjects(
         Object.entries(langsWithDupNames).sort((a, b) => {
           const aData = a[1][0];
           const bData = b[1][0];
@@ -87,54 +88,56 @@ const LanguagesWithIdenticalNames: React.FC = () => {
         <div key={name} style={{ marginBottom: '1em' }}>
           <h3 style={{ marginBottom: 0 }}>{name}</h3>
           <div className="CardList">
-            {langs.map((lang) => {
-              const { ISO, Glottolog } = lang.sourceSpecific;
-              const otherNames = lang.names.filter(
-                (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
-              );
-              return (
-                <ViewCard key={lang.ID}>
-                  <div>
-                    <label>Other Names:</label>
-                    <CommaSeparated>
-                      {otherNames.length > 0 ? otherNames : <Deemphasized>none</Deemphasized>}
-                    </CommaSeparated>
-                  </div>
-                  <div>
-                    <label>ISO code:</label>
-                    {ISO.code}
-                  </div>
-                  <div>
-                    <label>Glottocode:</label>
-                    {Glottolog.code}
-                  </div>
-                  <div>
-                    <label>Scope:</label>
-                    {lang.scope ?? <Deemphasized>Unknown</Deemphasized>}
-                  </div>
-                  {ISO.code != null && (
+            <ResponsiveGrid>
+              {langs.map((lang) => {
+                const { ISO, Glottolog } = lang.sourceSpecific;
+                const otherNames = lang.names.filter(
+                  (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
+                );
+                return (
+                  <ViewCard key={lang.ID}>
                     <div>
-                      ISO Hierarchy:{' '}
-                      <TreeListRoot
-                        rootNodes={getLanguageTreeNodes([lang], LanguageSource.ISO, sortFunction)}
-                      />
+                      <label>ID(s):</label>{' '}
+                      {unique(
+                        [lang.ID, ISO.code, lang.codeISO6391, Glottolog.code].filter(
+                          (id) => id != null,
+                        ),
+                      ).join(', ')}
                     </div>
-                  )}
-                  {Glottolog.code != null && (
                     <div>
-                      Glottolog Hierarchy:{' '}
-                      <TreeListRoot
-                        rootNodes={getLanguageTreeNodes(
-                          [lang],
-                          LanguageSource.Glottolog,
-                          sortFunction,
-                        )}
-                      />
+                      <label>Other Names:</label>
+                      <CommaSeparated>
+                        {otherNames.length > 0 ? otherNames : <Deemphasized>none</Deemphasized>}
+                      </CommaSeparated>
                     </div>
-                  )}
-                </ViewCard>
-              );
-            })}
+                    <div>
+                      <label>Scope:</label>
+                      {lang.scope ?? <Deemphasized>Unknown</Deemphasized>}
+                    </div>
+                    {ISO.code != null && (
+                      <div>
+                        ISO Hierarchy:{' '}
+                        <TreeListRoot
+                          rootNodes={getLanguageTreeNodes([lang], LanguageSource.ISO, sortFunction)}
+                        />
+                      </div>
+                    )}
+                    {Glottolog.code != null && (
+                      <div>
+                        Glottolog Hierarchy:{' '}
+                        <TreeListRoot
+                          rootNodes={getLanguageTreeNodes(
+                            [lang],
+                            LanguageSource.Glottolog,
+                            sortFunction,
+                          )}
+                        />
+                      </div>
+                    )}
+                  </ViewCard>
+                );
+              })}
+            </ResponsiveGrid>
           </div>
         </div>
       ))}

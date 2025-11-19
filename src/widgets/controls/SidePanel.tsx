@@ -1,24 +1,34 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
+import LanguageFilterSelector from '@features/filtering/LanguageFilterSelector';
+import WritingSystemFilterSelector from '@features/filtering/WritingSystemFilterSelector';
 import HoverableButton from '@features/hovercard/HoverableButton';
+import ColorBySelector from '@features/sorting/ColorBySelector';
+import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
+import TerritoryFilterSelector from '../../features/filtering/TerritoryFilterSelector';
+import LimitInput from '../../features/pagination/LimitInput';
+import SortBySelector from '../../features/sorting/SortBySelector';
+import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
+import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';
 import LanguageScopeSelector from './selectors/LanguageScopeSelector';
-import LanguageListSourceSelector from './selectors/LanguageSourceSelector';
-import LimitInput from './selectors/LimitInput';
+import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
+import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
-import SortBySelector from './selectors/SortBySelector';
-import SortDirectionSelector from './selectors/SortDirectionSelector';
-import TerritoryFilterSelector from './selectors/TerritoryFilterSelector';
 import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
-import VitalitySelector from './selectors/VitalitySelector';
+import {
+  VitalityEth2013Selector,
+  VitalityEth2025Selector,
+  VitalityISOSelector,
+} from './selectors/VitalitySelector';
 
 import './controls.css';
 
@@ -37,36 +47,50 @@ const SidePanel: React.FC = () => {
       setPanelWidth={setPanelWidth}
       panelRef={panelRef}
     >
-      <SidePanelSection panelWidth={panelWidth} title="Common Actions">
-        <ObjectiveList />
-      </SidePanelSection>
+      <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
+        <SidePanelSection
+          panelWidth={panelWidth}
+          title="Common Actions"
+          optionsName="common actions"
+        >
+          <div>{/* intentionally blank */}</div>
+          <ObjectiveList />
+        </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth} title="Data">
-        <ProfileSelector />
-        <ObjectTypeSelector />
-        <LanguageListSourceSelector />
-      </SidePanelSection>
+        <SidePanelSection panelWidth={panelWidth} title="Data" optionsName="data options">
+          <ObjectTypeSelector />
+          <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
+          <ProfileSelector />
+        </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth} title="Filters">
-        <LanguageScopeSelector />
-        <TerritoryScopeSelector />
-        <TerritoryFilterSelector />
-        <VitalitySelector />
-      </SidePanelSection>
+        <SidePanelSection panelWidth={panelWidth} title="Filter" optionsName="filters">
+          <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />
+          <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
+          <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
+          <LanguageScopeSelector />
+          <TerritoryScopeSelector />
+          <VitalityISOSelector />
+          <VitalityEth2013Selector />
+          <VitalityEth2025Selector />
+        </SidePanelSection>
 
-      <SidePanelSection panelWidth={panelWidth} title="View Options">
-        <ViewSelector />
-        <LimitInput />
-        <SortBySelector />
-        <SortDirectionSelector />
-        <LocaleSeparatorSelector />
-      </SidePanelSection>
+        <SidePanelSection panelWidth={panelWidth} title="View" optionsName="view options">
+          <ViewSelector />
+          <LimitInput />
+          <SortBySelector />
+          <SortDirectionSelector />
+          <ColorBySelector />
+          <ColorGradientSelector />
+          <LocaleSeparatorSelector />
+          <PageBrightnessSelector />
+        </SidePanelSection>
 
-      <SidePanelToggleButton
-        isOpen={isOpen}
-        onClick={() => setIsOpen((open) => !open)}
-        panelWidth={panelWidth}
-      />
+        <SidePanelToggleButton
+          isOpen={isOpen}
+          onClick={() => setIsOpen((open) => !open)}
+          panelWidth={panelWidth}
+        />
+      </SelectorDisplayProvider>
     </LeftAlignedPanel>
   );
 };
@@ -133,9 +157,14 @@ const SidePanelToggleButton: React.FC<{
 };
 
 const SidePanelSection: React.FC<
-  React.PropsWithChildren<{ panelWidth: number; title: string }>
-> = ({ children, panelWidth, title }) => {
+  React.PropsWithChildren<{
+    panelWidth: number;
+    title: string;
+    optionsName: string;
+  }>
+> = ({ children, panelWidth, title, optionsName }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
+  const childArray = React.Children.toArray(children);
 
   return (
     <div
@@ -145,19 +174,38 @@ const SidePanelSection: React.FC<
         marginBottom: '0.5em',
       }}
     >
-      <HoverableButton
+      <div
         style={{
           fontSize: '1.2em',
           fontWeight: 'lighter',
           borderRadius: '0',
           width: '100%',
           textAlign: 'left',
+          backgroundColor: 'var(--color-button-secondary)',
+          padding: '0.5em',
         }}
-        onClick={() => setIsExpanded((prev) => !prev)}
       >
-        {title} {isExpanded ? '▼' : '▶'}
-      </HoverableButton>
-      <div style={{ padding: '0.25em 0.5em' }}>{isExpanded && children}</div>
+        {title}
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          padding: '0.25em 0.5em',
+          gap: '0.5em',
+          flexDirection: 'column',
+        }}
+      >
+        {childArray[0]}
+        {isExpanded && childArray.slice(1)}
+        {
+          <HoverableButton
+            style={{ padding: '0em 0.25em' }}
+            onClick={() => setIsExpanded((prev) => !prev)}
+          >
+            {isExpanded ? `close extra ${optionsName} ▲` : `see all ${optionsName} ▶`}
+          </HoverableButton>
+        }
+      </div>
     </div>
   );
 };

@@ -61,12 +61,8 @@ export async function loadManualGlottocodeToISO(): Promise<Record<
 > | void> {
   return await fetch('data/iso/manualGlottocodeToISO.tsv')
     .then((res) => res.text())
-    .then((text) =>
-      text
-        .split('\n')
-        .slice(1)
-        .map((line) => line.split('\t')),
-    )
+    .then((text) => text.split('\n').slice(1))
+    .then((lines) => lines.map((line) => line.split('\t')))
     .then(Object.fromEntries)
     .catch((err) => console.error('Error loading TSV:', err));
 }
@@ -145,7 +141,7 @@ export function addGlottologLanguages(
       if (lang.scope == null) {
         lang.scope = scope;
       } else if (DEBUG && scope != lang.scope) {
-        console.log(`${glottoCode} scope is ${scope} in glottolog but ${lang.scope} in ISO`);
+        console.debug(`${glottoCode} scope is ${scope} in glottolog but ${lang.scope} in ISO`);
       }
     }
   });

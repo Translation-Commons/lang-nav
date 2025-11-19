@@ -5,7 +5,8 @@ import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
@@ -18,7 +19,8 @@ const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();
 
   return (
-    <ObjectTable<TerritoryData>
+    <InteractiveObjectTable<TerritoryData>
+      tableID={TableID.Territories}
       objects={territories}
       columns={[
         CodeColumn,

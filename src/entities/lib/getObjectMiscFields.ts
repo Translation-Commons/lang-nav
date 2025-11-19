@@ -20,16 +20,24 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
       return object.language?.nameDisplay;
     case ObjectType.Language:
       return object.nameDisplay;
-    case ObjectType.Census:
     case ObjectType.VariantTag:
+      return object.languages?.[0]?.nameDisplay;
     case ObjectType.WritingSystem:
+      return object.languages
+        ? Object.values(object.languages).sort(
+            (a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0),
+          )[0].nameDisplay
+        : undefined;
+    case ObjectType.Census:
       return undefined;
   }
 }
 
-export function getUniqueTerritoriesForLanguage(lang: LanguageData): TerritoryData[] {
+export function getUniqueCountriesForLanguage(lang: LanguageData): TerritoryData[] {
   return uniqueBy(
-    lang.locales.sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0)),
+    lang.locales
+      .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
+      .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0)),
     (loc) => loc.territoryCode ?? '',
   )
     .map((loc) => loc.territory)
@@ -84,7 +92,7 @@ export function getTerritoryChildren(territory: TerritoryData): TerritoryData[] 
 export function getCountOfTerritories(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return getUniqueTerritoriesForLanguage(object).length;
+      return getUniqueCountriesForLanguage(object).length;
     case ObjectType.Territory:
       return getTerritoryChildren(object).length;
     case ObjectType.Locale:

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplayContext';
+import LanguageSourceSelector from '@widgets/controls/selectors/LanguageSourceSelector';
+
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { getScopeFilter } from '@features/filtering/filter';
 import { ObjectType } from '@features/page-params/PageParamTypes';
@@ -24,6 +27,7 @@ export const LanguageHierarchy: React.FC = () => {
     languageSource,
     sortFunction,
     filterByScope,
+    0,
   );
 
   return (
@@ -32,7 +36,18 @@ export const LanguageHierarchy: React.FC = () => {
       description={
         <>
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
-          different people disagree on what it is a language/dialect/etc.
+          different sources disagree on what is a language/dialect/etc. Change source:{' '}
+          <div
+            style={{
+              display: 'inline-block',
+              height: '1em',
+              verticalAlign: 'top',
+              padding: '0.25em 0',
+            }}
+          >
+            <LanguageSourceSelector display={SelectorDisplay.InlineDropdown} />
+          </div>
+          .
         </>
       }
     />
@@ -44,11 +59,19 @@ export function getLanguageTreeNodes(
   languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean = () => true,
+  depth: number = 0,
 ): TreeNodeData[] {
+  if (depth > 30) {
+    console.warn(
+      'getLanguageTreeNodes exceeded max depth of 30, possible circular reference for language',
+      languages[0],
+    );
+    return [];
+  }
   return languages
     .filter(filterFunction)
     .sort(sortFunction)
-    .map((lang) => getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction))
+    .map((lang) => getLanguageTreeNode(lang, languageSource, sortFunction, filterFunction, depth))
     .filter((node) => node != null);
 }
 
@@ -57,6 +80,7 @@ function getLanguageTreeNode(
   languageSource: LanguageSource,
   sortFunction: (a: ObjectData, b: ObjectData) => number,
   filterFunction: (a: ObjectData) => boolean,
+  depth: number,
 ): TreeNodeData {
   return {
     type: ObjectType.Language,
@@ -66,6 +90,7 @@ function getLanguageTreeNode(
       languageSource,
       sortFunction,
       filterFunction,
+      depth + 1,
     ),
     labelStyle: {
       fontWeight:

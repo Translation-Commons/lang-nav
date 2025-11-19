@@ -1,15 +1,3 @@
-.ObjectTableContainer {
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-}
-
-.ObjectTable {
-  width: fit-content;
-  text-align: start;
-  border-spacing: 12px 0px;
-}
-
 thead {
   position: sticky;
   top: 0;

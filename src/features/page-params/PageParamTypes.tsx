@@ -1,4 +1,4 @@
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import {
@@ -34,8 +34,8 @@ export enum View {
   CardList = 'Cards',
   Table = 'Table',
   Hierarchy = 'Hierarchy',
-  Map = 'Map',
   Details = 'Details',
+  Map = 'Map',
   Reports = 'Reports',
 }
 
@@ -52,7 +52,13 @@ export enum LocaleSeparator {
   Hyphen = '-',
 }
 
+export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
+
 export enum PageParamKey {
+  colorBy = 'colorBy',
+  colorGradient = 'colorGradient',
+  columns = 'columns',
+  languageFilter = 'languageFilter',
   languageSource = 'languageSource',
   languageScopes = 'languageScopes',
   limit = 'limit',
@@ -67,6 +73,7 @@ export enum PageParamKey {
   sortBy = 'sortBy',
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
+  writingSystemFilter = 'writingSystemFilter',
   view = 'view',
   vitalityISO = 'vitalityISO',
   vitalityEth2013 = 'vitalityEth2013',
@@ -74,6 +81,10 @@ export enum PageParamKey {
 }
 
 export type PageParams = {
+  colorBy: ColorBy;
+  colorGradient: ColorGradient;
+  columns: TableIDToBinarizedColumnVisibility;
+  languageFilter: string;
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
@@ -88,6 +99,7 @@ export type PageParams = {
   sortBy: SortBy;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
+  writingSystemFilter: string;
   view: View;
   vitalityISO: VitalityISO[];
   vitalityEth2013: VitalityEthnologueFine[];
@@ -95,6 +107,10 @@ export type PageParams = {
 };
 
 export type PageParamsOptional = {
+  colorBy?: ColorBy;
+  colorGradient?: ColorGradient;
+  columns?: TableIDToBinarizedColumnVisibility;
+  languageFilter?: string;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;
@@ -109,6 +125,7 @@ export type PageParamsOptional = {
   sortBy?: SortBy;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
+  writingSystemFilter?: string;
   view?: View;
   vitalityISO?: VitalityISO[];
   vitalityEth2013?: VitalityEthnologueFine[];

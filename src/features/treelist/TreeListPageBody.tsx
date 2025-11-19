@@ -1,11 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-} from '@features/filtering/filter';
+import { getFilterBySubstring, getFilterByVitality } from '@features/filtering/filter';
+import { getFilterByConnections } from '@features/filtering/filterByConnections';
+import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
+import LimitSelector from '@features/pagination/LimitSelector';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -22,34 +21,71 @@ type Props = {
 };
 
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
-  const { limit, searchString } = usePageParams();
+  const {
+    limit,
+    searchString,
+    territoryFilter,
+    writingSystemFilter,
+    languageFilter,
+    vitalityEth2013,
+    vitalityEth2025,
+    vitalityISO,
+  } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
-  const filterByTerritory = getFilterByTerritory();
+  const filterByConnections = getFilterByConnections();
   const filterByVitality = getFilterByVitality();
+  const filterActive = useMemo(
+    () =>
+      searchString ||
+      territoryFilter ||
+      writingSystemFilter ||
+      languageFilter ||
+      vitalityEth2013 ||
+      vitalityEth2025 ||
+      vitalityISO,
+    [
+      searchString,
+      territoryFilter,
+      writingSystemFilter,
+      languageFilter,
+      vitalityEth2013,
+      vitalityEth2025,
+      vitalityISO,
+    ],
+  );
   const filterFunction = useCallback(
     (object: ObjectData) => {
-      return filterBySubstring(object) && filterByTerritory(object) && filterByVitality(object);
+      return filterBySubstring(object) && filterByConnections(object) && filterByVitality(object);
     },
-    [filterBySubstring, filterByTerritory, filterByVitality],
+    [filterBySubstring, filterByConnections, filterByVitality],
   );
 
   return (
     <div className="TreeListView">
       <TreeListOptionsProvider>
-        <div style={{ marginBottom: 8 }}>
+        <div style={{ marginBottom: '.5em' }}>
           {description}
           {limit < rootNodes.length && (
             <>
               {' '}
-              {limit} of {rootNodes.length} root nodes are shown. Update the item limit in the
-              options panel to see more.
+              <Hoverable
+                hoverContent={
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+                    <div>Set the number of root nodes that are shown.</div>
+                    <LimitSelector />
+                  </div>
+                }
+              >
+                {limit.toLocaleString()}
+              </Hoverable>{' '}
+              of {rootNodes.length.toLocaleString()} root nodes are shown.
             </>
           )}
         </div>
 
         <TreeListRoot
           rootNodes={rootNodes
-            .map((node) => filterBranch(node, searchString !== '' ? filterFunction : undefined))
+            .map((node) => filterBranch(node, filterActive ? filterFunction : undefined))
             .filter((node) => node != null)
             .slice(0, limit > 0 ? limit : undefined)}
         />

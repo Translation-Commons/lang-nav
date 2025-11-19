@@ -3,7 +3,7 @@ import React from 'react';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 
 import Selector from '../Selector';
-import { SelectorDisplay } from '../SelectorDisplay';
+import { SelectorDisplay, SelectorDisplayProvider } from '../SelectorDisplayContext';
 
 vi.mock('@shared/hooks/useClickOutside', () => ({ useClickOutside: () => React.createRef() }));
 vi.mock('@features/hovercard/useHoverCard', () => ({
@@ -29,13 +29,14 @@ describe('Selector component', () => {
     expect(screen.getByText('My Label')).toBeTruthy();
   });
 
-  it('renders all options in ButtonList (default) display', () => {
+  it('renders all options in ButtonList display', () => {
     render(
       <Selector
         options={['a', 'b']}
         selected={'a'}
         onChange={() => {}}
         getOptionLabel={(str) => `option-${str}`}
+        display={SelectorDisplay.ButtonList}
       />,
     );
 
@@ -50,12 +51,9 @@ describe('Selector component', () => {
   it('toggles dropdown when standalone option is clicked and calls onChange for options inside dropdown', () => {
     const handleChange = vi.fn();
     render(
-      <Selector
-        display={SelectorDisplay.Dropdown}
-        options={['one', 'two']}
-        selected={'one'}
-        onChange={handleChange}
-      />,
+      <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
+        <Selector options={['one', 'two']} selected={'one'} onChange={handleChange} />
+      </SelectorDisplayProvider>,
     );
 
     // Initially dropdown should not be rendered

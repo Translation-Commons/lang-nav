@@ -4,7 +4,8 @@ import { useDataContext } from '@features/data-loading/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
@@ -18,7 +19,8 @@ const TableOfCountriesWithCensuses: React.FC = () => {
 
   return (
     <CollapsibleReport title="Countries with Censuses">
-      <ObjectTable<TerritoryData>
+      <InteractiveObjectTable<TerritoryData>
+        tableID={TableID.CountriesWithCensuses}
         objects={territories}
         columns={[
           CodeColumn,

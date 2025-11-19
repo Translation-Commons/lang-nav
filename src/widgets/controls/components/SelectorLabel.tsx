@@ -3,15 +3,15 @@ import React, { ReactNode } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 
-import { SelectorDisplay } from './SelectorDisplay';
+import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 
 type Props = {
   label?: ReactNode;
   description?: ReactNode;
-  display: SelectorDisplay;
 };
 
-const SelectorLabel: React.FC<Props> = ({ label, description, display }) => {
+const SelectorLabel: React.FC<Props> = ({ label, description }) => {
+  const { display } = useSelectorDisplay();
   if (label == null) return null;
   return (
     <span style={getStyle(display)}>

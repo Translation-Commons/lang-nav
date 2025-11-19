@@ -17,6 +17,7 @@ export function getCurrencyCompactLong(num: number): string {
 
 export function numberToSigFigs(num: number, sigFigs: number): number {
   if (num === 0) return 0;
+
   const factor = Math.pow(10, sigFigs - Math.ceil(Math.log10(Math.abs(num))));
   return Math.round(num * factor) / factor;
 }

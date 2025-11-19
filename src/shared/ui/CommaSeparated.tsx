@@ -1,11 +1,17 @@
+import { ChevronLeft } from 'lucide-react';
 import React, { useState } from 'react';
 
 type CommaSeparatedProps = {
   children: React.ReactNode;
   limit?: number | null; // Optionally will clamp the list
+  limitText?: 'words' | 'short';
 };
 
-const CommaSeparated: React.FC<CommaSeparatedProps> = ({ children, limit = 4 }) => {
+const CommaSeparated: React.FC<CommaSeparatedProps> = ({
+  children,
+  limit = 4,
+  limitText = 'words',
+}) => {
   const childArray = React.Children.toArray(children);
   const [expanded, setExpanded] = useState(false);
   const countOverLimit = childArray.length - (limit ?? 0);
@@ -23,7 +29,17 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({ children, limit = 4 }) 
           style={{ padding: '0em 0.25em', fontWeight: 'normal' }}
           onClick={() => setExpanded((prev) => !prev)}
         >
-          {expanded ? 'see less' : '+' + countOverLimit + ' more'}
+          {limitText === 'words' ? (
+            expanded ? (
+              'see less'
+            ) : (
+              '+' + countOverLimit + ' more'
+            )
+          ) : expanded ? (
+            <ChevronLeft size="1.25em" display="block" style={{ margin: '0em -0.25em' }} />
+          ) : (
+            '+' + countOverLimit
+          )}
         </button>
       )}
     </span>

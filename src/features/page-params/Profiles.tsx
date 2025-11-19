@@ -8,7 +8,7 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
@@ -33,6 +33,10 @@ export enum ProfileType {
 }
 
 const GLOBAL_DEFAULTS: PageParams = {
+  colorBy: 'None',
+  colorGradient: ColorGradient.DivergingBlueToOrange,
+  columns: {},
+  languageFilter: '',
   languageSource: LanguageSource.All,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   limit: 12,
@@ -47,6 +51,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   sortBy: SortBy.Population,
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   territoryFilter: '',
+  writingSystemFilter: '',
   vitalityISO: [],
   vitalityEth2013: [],
   vitalityEth2025: [],
@@ -87,6 +92,7 @@ export function getDefaultParams(
   objectType?: ObjectType,
   view?: View | undefined,
   profile?: ProfileType | undefined,
+  colorBy?: ColorBy | undefined,
 ): PageParams {
   let params = GLOBAL_DEFAULTS;
 
@@ -102,6 +108,7 @@ export function getDefaultParams(
   // Directly set the view & objectType if provided
   if (view != null) params.view = view;
   if (objectType != null) params.objectType = objectType;
+  if (colorBy != null) params.colorBy = colorBy;
 
   // Apply a few view-specific overrides
   if (params.view === View.Hierarchy) {
@@ -110,7 +117,15 @@ export function getDefaultParams(
       params.territoryScopes = Object.values(TerritoryScope);
   } else if (params.view === View.Table) {
     params.limit = 200; // Show more results in table view
+  } else if (params.view === View.Map) {
+    params.limit = 100; // Show more results in map view
   }
+
+  // Get default gradient for colorBys
+  if (params.colorBy !== 'None') {
+    params.colorGradient = getGradientForColorBy(params.colorBy);
+  }
+
   return params;
 }
 
@@ -128,5 +143,40 @@ export function getProfileIcon(profile: ProfileType, color: string): ReactNode {
       return <LandmarkIcon size={64} color={color} />;
     case ProfileType.ShowMeEverything:
       return <ExpandIcon size={64} color={color} />;
+  }
+}
+
+function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
+  if (colorBy === 'None') return ColorGradient.DivergingBlueToOrange;
+
+  switch (colorBy) {
+    case SortBy.Population:
+    case SortBy.PopulationAttested:
+    case SortBy.PopulationOfDescendents:
+    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.PercentOfOverallLanguageSpeakers:
+    case SortBy.PercentOfTerritoryPopulation:
+    case SortBy.CountOfLanguages:
+    case SortBy.CountOfTerritories:
+    case SortBy.Date:
+      // Low values are blue, high values are orange
+      return ColorGradient.DivergingBlueToOrange;
+    case SortBy.VitalityMetascore:
+    case SortBy.VitalityISO:
+    case SortBy.VitalityEthnologue2013:
+    case SortBy.VitalityEthnologue2025:
+    case SortBy.Literacy:
+      // "Bad" values are red, "Good" values are green
+      return ColorGradient.StopLightRedToGreen;
+    case SortBy.Longitude:
+    case SortBy.Latitude:
+    case SortBy.Name:
+    case SortBy.Endonym:
+    case SortBy.Code:
+    case SortBy.Language:
+    case SortBy.WritingSystem:
+    case SortBy.Territory:
+      // More of a spectrum rather than directional
+      return ColorGradient.HueRainbowBlueToRed;
   }
 }

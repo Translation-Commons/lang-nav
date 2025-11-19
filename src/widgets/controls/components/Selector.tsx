@@ -3,12 +3,16 @@ import React, { ReactNode, useState } from 'react';
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 import { getPositionInGroup } from '@shared/lib/PositionInGroup';
 
-import { SelectorDisplay } from './SelectorDisplay';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+  useSelectorDisplay,
+} from './SelectorDisplayContext';
 import { SelectorDropdown } from './SelectorDropdown';
 import SelectorLabel from './SelectorLabel';
 import SelectorOption from './SelectorOption';
 
-type Props<T extends React.Key> = {
+type Props<T> = {
   display?: SelectorDisplay;
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
@@ -22,7 +26,7 @@ type Props<T extends React.Key> = {
 };
 
 function Selector<T extends React.Key>({
-  display = SelectorDisplay.ButtonList,
+  display,
   getOptionDescription,
   getOptionLabel = (val) => val as string,
   labelWhenEmpty,
@@ -37,30 +41,30 @@ function Selector<T extends React.Key>({
   const optionsRef = useClickOutside(() => setExpanded(false));
 
   return (
-    <SelectorContainer display={display} manualStyle={selectorStyle}>
-      {selectorLabel && (
-        <SelectorLabel label={selectorLabel} description={selectorDescription} display={display} />
-      )}
+    <SelectorContainer manualStyle={selectorStyle} manualDisplay={display}>
+      {selectorLabel && <SelectorLabel label={selectorLabel} description={selectorDescription} />}
 
-      {/* The dropdown menu or the button list */}
-      <OptionsContainer isExpanded={expanded} containerRef={optionsRef} display={display}>
-        <Options<T>
-          getOptionDescription={getOptionDescription}
-          getOptionLabel={getOptionLabel}
-          onClick={(option) => {
-            setExpanded(false);
-            onChange(option);
-          }}
-          options={options}
-          display={display}
-          selected={selected}
-        />
-      </OptionsContainer>
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+        {/* The dropdown menu or the button list */}
+        <OptionsContainer
+          isExpanded={expanded}
+          containerRef={optionsRef}
+          hasSelectorLabel={!!selectorLabel}
+        >
+          <Options<T>
+            getOptionDescription={getOptionDescription}
+            getOptionLabel={getOptionLabel}
+            onClick={(option) => {
+              setExpanded(false);
+              onChange(option);
+            }}
+            options={options}
+            selected={selected}
+          />
+        </OptionsContainer>
 
-      {/* Standalone option to open/close the dropdown menu */}
-      {(display === SelectorDisplay.Dropdown || display === SelectorDisplay.InlineDropdown) && (
+        {/* Standalone option to open/close the dropdown menu */}
         <DropdownButton<T>
-          display={display}
           getOptionDescription={getOptionDescription}
           getOptionLabel={getOptionLabel}
           isExpanded={expanded}
@@ -68,7 +72,7 @@ function Selector<T extends React.Key>({
           selected={selected}
           toggleDropdown={() => setExpanded((prev) => !prev)}
         />
-      )}
+      </div>
     </SelectorContainer>
   );
 }
@@ -76,53 +80,61 @@ function Selector<T extends React.Key>({
 const SelectorContainer: React.FC<
   React.PropsWithChildren<{
     manualStyle?: React.CSSProperties;
-    display?: SelectorDisplay;
+    manualDisplay?: SelectorDisplay;
   }>
-> = ({ children, display, manualStyle }) => {
+> = ({ children, manualStyle, manualDisplay }) => {
+  const { display: inheritedDisplay } = useSelectorDisplay();
+  const display = manualDisplay ?? inheritedDisplay;
+
   const style: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginLeft: '0.125em',
-    marginRight: '0.5em',
-    marginBottom: '0.5em',
+    flexWrap: 'wrap',
   };
   if (display === SelectorDisplay.ButtonList) {
     style.flexDirection = 'column';
     style.alignItems = 'start';
-  } else if (display === SelectorDisplay.InlineDropdown) {
-    style.marginLeft = '0';
-    style.marginRight = '0';
-    style.marginBottom = '0';
   } else if (display === SelectorDisplay.ButtonGroup) {
     style.gap = '-0.125em'; // Overlap the buttons slightly
   }
 
-  return (
+  // Prepare the container. If there was a manual display, then wrap in a provider.
+  const container = (
     <div className={'selector ' + display} style={{ ...style, ...manualStyle }}>
       {children}
     </div>
   );
+  if (manualDisplay)
+    return <SelectorDisplayProvider display={manualDisplay}>{container}</SelectorDisplayProvider>;
+  return container;
 };
 
 type OptionsContainerProps = {
-  isExpanded?: boolean;
   containerRef: React.RefObject<HTMLDivElement | null>;
-  display?: SelectorDisplay;
+  hasSelectorLabel: boolean;
+  isExpanded?: boolean;
 };
 
 const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>> = ({
   children,
   containerRef,
+  hasSelectorLabel,
   isExpanded,
-  display,
 }) => {
+  const { display } = useSelectorDisplay();
+
   switch (display) {
     case SelectorDisplay.ButtonList:
       return (
         <div
           ref={containerRef}
-          style={{ display: 'flex', flexWrap: 'wrap', gap: '0.25em 0.25em', marginLeft: '1em' }}
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '0.25em',
+            marginLeft: hasSelectorLabel ? '1em' : 'none',
+          }}
         >
           {children}
         </div>
@@ -138,8 +150,7 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
   }
 };
 
-type OptionsProps<T extends React.Key> = {
-  display: SelectorDisplay;
+type OptionsProps<T> = {
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
   onClick: (value: T) => void;
@@ -148,7 +159,6 @@ type OptionsProps<T extends React.Key> = {
 };
 
 function Options<T extends React.Key>({
-  display,
   getOptionDescription,
   getOptionLabel,
   onClick,
@@ -162,15 +172,13 @@ function Options<T extends React.Key>({
       getOptionLabel={getOptionLabel}
       onClick={onClick}
       option={option}
-      display={display}
       isSelected={Array.isArray(selected) ? selected.includes(option) : selected === option}
       position={getPositionInGroup(i, options.length)}
     />
   ));
 }
 
-type DropdownButtonProps<T extends React.Key> = {
-  display: SelectorDisplay;
+type DropdownButtonProps<T> = {
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode;
   isExpanded: boolean;
@@ -180,7 +188,6 @@ type DropdownButtonProps<T extends React.Key> = {
 };
 
 function DropdownButton<T extends React.Key>({
-  display,
   getOptionDescription,
   getOptionLabel,
   isExpanded,
@@ -188,9 +195,12 @@ function DropdownButton<T extends React.Key>({
   selected,
   toggleDropdown,
 }: DropdownButtonProps<T>) {
+  const { display } = useSelectorDisplay();
+  if (display !== SelectorDisplay.Dropdown && display !== SelectorDisplay.InlineDropdown)
+    return null;
+
   return (
     <SelectorOption<T>
-      display={display}
       getOptionDescription={getOptionDescription}
       getOptionLabel={getOptionLabel}
       isSelected={true}

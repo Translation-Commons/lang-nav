@@ -25,6 +25,11 @@ import {
 } from '../VitalitySelector';
 
 vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@widgets/controls/components/SelectorDisplayContext', () => ({
+  useSelectorDisplay: vi.fn().mockReturnValue({ display: 'buttonList' }),
+  SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown' },
+  SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
+}));
 vi.mock('@features/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
 }));
@@ -57,8 +62,8 @@ describe('VitalitySelector', () => {
     );
 
     expect(screen.getByText('ISO Language Status')).toBeInTheDocument();
-    expect(screen.getByText('Ethnologue 2013 Status')).toBeInTheDocument();
-    expect(screen.getByText('Ethnologue 2025 Status')).toBeInTheDocument();
+    expect(screen.getByText('Vitality Eth 2013')).toBeInTheDocument();
+    expect(screen.getByText('Vitality Eth 2025')).toBeInTheDocument();
   });
 
   describe('VitalityISOSelector', () => {

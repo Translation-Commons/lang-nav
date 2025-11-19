@@ -7,33 +7,29 @@ import { getSortFunction } from '@features/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import {
-  getFilterBySubstring,
-  getFilterByTerritory,
-  getFilterByVitality,
-  getScopeFilter,
-} from './filter';
+import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
+import { getFilterByConnections } from './filterByConnections';
 
 type UseFilteredObjectsParams = {
   useScope?: boolean;
   useSubstring?: boolean;
-  useTerritory?: boolean;
+  useConnections?: boolean;
   useVitality?: boolean;
 };
 
 const useFilteredObjects = ({
   useScope = true,
   useSubstring = true,
-  useTerritory = true,
+  useConnections = true,
   useVitality = true,
-}: UseFilteredObjectsParams): { filteredObjects: ObjectData[] } => {
+}: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const { objectType } = usePageParams();
   const { languagesInSelectedSource, locales, territories, writingSystems, variantTags, censuses } =
     useDataContext();
   const filterByScope = useScope ? getScopeFilter() : () => true;
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
-  const filterByTerritory = useTerritory ? getFilterByTerritory() : () => true;
+  const filterByConnections = useConnections ? getFilterByConnections() : () => true;
   const filterByVitality = useVitality ? getFilterByVitality() : () => true;
   const sortFunction = getSortFunction();
 
@@ -68,7 +64,7 @@ const useFilteredObjects = ({
         (obj) =>
           filterByScope(obj) &&
           filterBySubstring(obj) &&
-          filterByTerritory(obj) &&
+          filterByConnections(obj) &&
           filterByVitality(obj),
       )
       .sort(sortFunction);
@@ -76,12 +72,12 @@ const useFilteredObjects = ({
     objects,
     filterByScope,
     filterBySubstring,
-    filterByTerritory,
+    filterByConnections,
     filterByVitality,
     sortFunction,
   ]);
 
-  return { filteredObjects };
+  return { filteredObjects, allObjectsInType: objects };
 };
 
 export default useFilteredObjects;

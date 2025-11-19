@@ -8,7 +8,8 @@ import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamType
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
 import { SortBy } from '@features/sorting/SortTypes';
-import ObjectTable from '@features/table/ObjectTable';
+import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 
 import { CensusData } from '@entities/census/CensusTypes';
@@ -132,7 +133,8 @@ const PotentialLocalesTable: React.FC<{
   showRelatedLocales?: boolean;
 }> = ({ locales }) => {
   return (
-    <ObjectTable<LocaleData>
+    <InteractiveObjectTable<LocaleData>
+      tableID={TableID.PotentialLocales}
       objects={locales}
       columns={[
         {

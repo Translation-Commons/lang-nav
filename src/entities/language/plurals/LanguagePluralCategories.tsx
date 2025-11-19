@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 
+import Deemphasized from '@shared/ui/Deemphasized';
+
 import { LanguageData } from '../LanguageTypes';
 
 import { findLanguagePluralRules, PluralRuleKey } from './LanguagePluralComputation';
@@ -13,7 +15,7 @@ const LanguagePluralCategories: React.FC<{ lang: LanguageData }> = ({ lang }) =>
   // If we didn't find any, or they are empty, return nothing
   const pluralRules = useMemo(() => findLanguagePluralRules(lang), [lang]);
   if (!pluralRules || pluralRules.length === 0) {
-    return <></>;
+    return <Deemphasized>not available</Deemphasized>;
   }
 
   return (

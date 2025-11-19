@@ -44,6 +44,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     names: ['Sindarin', 'sɪndarɪn', '', 'Elvish', 'Elven Tongue', 'Edhellen'],
     populationEstimate: 14400,
     populationCited: 24000,
+    primaryScriptCode: 'Teng',
   };
   const dori0123: LanguageData = {
     ...getBaseLanguageData('dori0123', 'Doriathrin'), // dori0123
@@ -51,6 +52,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     names: ['Central Sindarin', 'Doriathrin', '', 'dorjaθɪn'],
     populationEstimate: 2500,
     populationCited: 2500,
+    primaryScriptCode: 'Teng',
     sourceSpecific: {
       ...getEmptyLanguageSourceSpecificData(),
       All: { childLanguages: [], parentLanguageCode: 'sjn' },
@@ -441,6 +443,12 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     getObject: (id: string) => objects[id],
     getLanguage: (id: string) =>
       objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
+    getCLDRLanguage: (id: string) =>
+      Object.values(objects).find(
+        (obj) =>
+          obj.type === ObjectType.Language &&
+          (obj as LanguageData).sourceSpecific.CLDR?.code === id,
+      ) as LanguageData | undefined,
     getLocale: (id: string) => (objects[id]?.type === ObjectType.Locale ? objects[id] : undefined),
     getTerritory: (id: string) =>
       objects[id]?.type === ObjectType.Territory ? objects[id] : undefined,

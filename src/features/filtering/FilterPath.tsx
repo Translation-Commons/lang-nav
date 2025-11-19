@@ -2,7 +2,6 @@ import { SlashIcon, XIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
 import { SearchableField, View } from '@features/page-params/PageParamTypes';
@@ -32,6 +31,8 @@ const FilterPath: React.FC = () => {
     searchString,
     territoryFilter,
     territoryScopes,
+    writingSystemFilter,
+    languageFilter,
     vitalityISO,
     vitalityEth2013,
     vitalityEth2025,
@@ -90,7 +91,6 @@ const FilterPath: React.FC = () => {
       <Selector
         selectorStyle={{ marginLeft: '0' }}
         options={Object.values(LanguageScope)}
-        display={SelectorDisplay.InlineDropdown}
         labelWhenEmpty="Any Languoid"
         onChange={(scope: LanguageScope) =>
           languageScopes.includes(scope)
@@ -104,7 +104,6 @@ const FilterPath: React.FC = () => {
       <Selector
         selectorStyle={{ marginLeft: '0' }}
         options={Object.values(TerritoryScope)}
-        display={SelectorDisplay.InlineDropdown}
         labelWhenEmpty="Any Geography"
         onChange={(scope: TerritoryScope) =>
           territoryScopes.includes(scope)
@@ -127,11 +126,36 @@ const FilterPath: React.FC = () => {
         </HoverableButton>
       </>
     ),
+    writingSystemFilter !== '' && (
+      <>
+        In &quot;{writingSystemFilter}&quot;
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ writingSystemFilter: '' })}
+          style={{ padding: '0.25em' }}
+          hoverContent="Clear writing system filter"
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+    languageFilter !== '' && (
+      <>
+        Language &quot;{languageFilter}&quot;
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ languageFilter: '' })}
+          style={{ padding: '0.25em' }}
+          hoverContent="Clear language filter"
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
     searchString !== '' && (
       <>
         <Selector
           options={Object.values(SearchableField)}
-          display={SelectorDisplay.InlineDropdown}
           onChange={(searchBy) => updatePageParams({ searchBy })}
           selected={searchBy}
         />{' '}

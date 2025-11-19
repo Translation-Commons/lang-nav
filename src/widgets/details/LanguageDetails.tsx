@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { getScopeFilter } from '@features/filtering/filter';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
@@ -101,6 +102,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const sortFunction = getSortFunction();
+  const filterByScope = getScopeFilter();
   const {
     childLanguages,
     sourceSpecific: { ISO, Glottolog },
@@ -140,7 +142,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         </DetailsField>
         <DetailsField title="Locales:">
           {lang.locales.length > 0 ? (
-            <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction)} />
+            <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction, filterByScope)} />
           ) : (
             <div>
               <Deemphasized>There are no recorded locales for this language.</Deemphasized>

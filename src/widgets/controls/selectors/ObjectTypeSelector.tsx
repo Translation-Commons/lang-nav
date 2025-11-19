@@ -10,6 +10,7 @@ import { toTitleCase } from '@shared/lib/stringUtils';
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 
 import Selector from '../components/Selector';
+import { SelectorDisplay } from '../components/SelectorDisplayContext';
 
 const ObjectTypeSelector: React.FC = () => {
   const { objectType, updatePageParams, view } = usePageParams();
@@ -32,6 +33,7 @@ const ObjectTypeSelector: React.FC = () => {
       options={Object.values(ObjectType)}
       onChange={goToObjectType}
       selected={objectType}
+      display={SelectorDisplay.ButtonList}
       getOptionLabel={(option) => toTitleCase(getObjectTypeLabelPlural(option))}
       getOptionDescription={(objectType) => (
         <>

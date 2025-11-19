@@ -18,10 +18,9 @@ import { VitalitySource } from './vitality/VitalityTypes';
 
 interface Props {
   lang: LanguageData;
-  includeRelations?: boolean;
 }
 
-const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
+const LanguageCard: React.FC<Props> = ({ lang }) => {
   const { updatePageParams, view } = usePageParams();
   const sortFunction = getSortFunction();
   const { ID, locales, modality, populationEstimate } = lang;
@@ -60,7 +59,7 @@ const LanguageCard: React.FC<Props> = ({ lang, includeRelations }) => {
         <LanguageVitalityMeter lang={lang} type={VitalitySource.Metascore} />
       </div>
 
-      {includeRelations && countryLocales.length > 0 && (
+      {countryLocales.length > 0 && (
         <div>
           <h4>Countries:</h4>
           <CommaSeparated>

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Hoverable from '@features/hovercard/Hoverable';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
@@ -14,6 +15,7 @@ import { numberToFixedUnlessSmall, numberToSigFigs } from '@shared/lib/numberUti
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
+import Pill from '@shared/ui/Pill';
 
 type Props = {
   locale: LocaleData;
@@ -72,6 +74,23 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
               {scriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
             </span>
           )}
+        </DetailsField>
+      )}
+      {!scriptCode && language?.primaryWritingSystem && (
+        <DetailsField title="Writing System:">
+          <HoverableObjectName object={language?.primaryWritingSystem} />{' '}
+          <Hoverable
+            hoverContent={
+              <>
+                The locale does not include an explicit writing system code. Depending on the
+                context it may mean there is no specific writing system (this locale refers to any).
+                In practice in most IT systems it assumes the primary writing system for the
+                language <HoverableObjectName object={language} />.
+              </>
+            }
+          >
+            <Pill>inferred</Pill>
+          </Hoverable>
         </DetailsField>
       )}
       {variantTagCodes && variantTagCodes.length > 0 && (

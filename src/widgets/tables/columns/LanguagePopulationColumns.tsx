@@ -1,3 +1,6 @@
+import HoverableButton from '@features/hovercard/HoverableButton';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
 import { SortBy } from '@features/sorting/SortTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
@@ -5,7 +8,32 @@ import TableValueType from '@features/table/TableValueType';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationFromDescendents from '@entities/language/LanguagePopulationFromDescendents';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
+import LanguagePopulationInSelectedTerritory from '@entities/language/LanguagePopulationInSelectedTerritory';
 import { LanguageData } from '@entities/language/LanguageTypes';
+
+const PopulationInTerritoryLabel: React.FC = () => {
+  const { territoryFilter } = usePageParams();
+  if (!territoryFilter) return 'Population (in Territory, unselected)';
+
+  const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
+  return <>Population (in {formattedTerritory})</>;
+};
+
+const PopulationInTerritoryDescription: React.FC = () => {
+  const { territoryFilter, updatePageParams } = usePageParams();
+  if (!territoryFilter)
+    return 'Select a territory in the filters in the side panel to see population in that territory.';
+
+  const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
+  return (
+    <>
+      The population of this language in {formattedTerritory}. For more details and sorting, see the{' '}
+      <HoverableButton onClick={() => updatePageParams({ objectType: ObjectType.Locale })}>
+        Locale Table
+      </HoverableButton>
+    </>
+  );
+};
 
 export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
   {
@@ -50,6 +78,15 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) => <LanguagePopulationFromLocales lang={lang} />,
+    valueType: TableValueType.Numeric,
+    isInitiallyVisible: false,
+    columnGroup: 'Population',
+  },
+  {
+    key: 'Population (in Territory)',
+    label: <PopulationInTerritoryLabel />,
+    description: <PopulationInTerritoryDescription />,
+    render: (lang) => <LanguagePopulationInSelectedTerritory lang={lang} />,
     valueType: TableValueType.Numeric,
     isInitiallyVisible: false,
     columnGroup: 'Population',

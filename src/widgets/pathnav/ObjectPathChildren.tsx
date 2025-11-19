@@ -2,7 +2,6 @@ import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
 import Selector from '@widgets/controls/components/Selector';
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplay';
 
 import usePageParams from '@features/page-params/usePageParams';
 import { getSortFunction } from '@features/sorting/sort';
@@ -37,7 +36,6 @@ const ObjectPathChildren: React.FC<{ object?: ObjectData }> = ({ object }) => {
       <Selector<string>
         onChange={(childID) => updatePageParams({ objectID: childID, objectType: object.type })}
         selected={children.length + ' ' + descendantsName}
-        display={SelectorDisplay.InlineDropdown}
         options={childIDs}
         getOptionLabel={(childID) => {
           const child = children.find((c) => c.ID === childID);

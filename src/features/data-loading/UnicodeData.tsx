@@ -62,7 +62,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
         }
       }
       if (DEBUG && lang != null) {
-        console.log('CLDR import', alias, lang);
+        console.debug('CLDR import', alias, lang);
         // TODO: support locales in CLDR better
       }
     });
@@ -155,7 +155,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
 }
 
 export async function loadCLDRCoverage(
-  getLanguage: (id: string) => LanguageData | undefined,
+  getCLDRLanguage: (id: string) => LanguageData | undefined,
 ): Promise<void> {
   return await fetch('data/unicode/cldrCoverage.tsv')
     .then((res) => res.text())
@@ -166,9 +166,9 @@ export async function loadCLDRCoverage(
         .slice(SKIP_THREE_HEADER_ROWS)
         .map(parseCLDRCoverageLine);
       cldrCoverage.forEach((cldrCov) => {
-        const lang = getLanguage(cldrCov.languageCode);
+        const lang = getCLDRLanguage(cldrCov.languageCode);
         if (lang?.type !== ObjectType.Language) {
-          console.log('During CLDR import ', cldrCov.languageCode, 'missing from languages');
+          console.debug('During CLDR import ', cldrCov.languageCode, 'missing from languages');
           return;
         }
         if (cldrCov.explicitScriptCode != null) {

@@ -16,7 +16,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
 
   // TODO - this should be done in parallel so we cannot pass in things we are mutating
   await Promise.all([
-    loadCLDRCoverage(dataContext.getLanguage),
+    loadCLDRCoverage(dataContext.getCLDRLanguage),
     loadTerritoryGDPLiteracy(dataContext.getTerritory),
     loadAndApplyWikipediaData(dataContext),
   ]);

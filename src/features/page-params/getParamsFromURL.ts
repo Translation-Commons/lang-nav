@@ -1,4 +1,5 @@
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { parseColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
@@ -32,6 +33,9 @@ function parseNumericEnumArray<T extends number>(
     .filter((item): item is T => validValues.includes(item as T));
 }
 
+/**
+ * This function is important for parsing the URL parameters
+ */
 export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
   const params: PageParamsOptional = {};
   urlParams.forEach((value, keyUntyped) => {
@@ -64,6 +68,11 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         params.vitalityEth2025 = parseNumericEnumArray(value, VitalityEthnologueCoarse);
         break;
 
+      // Object mapping (columns)
+      case PageParamKey.columns:
+        params.columns = parseColumnVisibilityBinaries(value);
+        break;
+
       // Enum values
       case PageParamKey.objectType:
         params.objectType = value as ObjectType;
@@ -89,11 +98,19 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.sortBehavior:
         params.sortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
         break;
+      case PageParamKey.colorBy:
+        params.colorBy = value as ColorBy;
+        break;
+      case PageParamKey.colorGradient:
+        params.colorGradient = parseInt(value) as ColorGradient;
+        break;
 
       // Freeform strings
       case PageParamKey.objectID:
       case PageParamKey.searchString:
+      case PageParamKey.languageFilter:
       case PageParamKey.territoryFilter:
+      case PageParamKey.writingSystemFilter:
         params[key] = value; // Default to undefined if empty
         break;
     }

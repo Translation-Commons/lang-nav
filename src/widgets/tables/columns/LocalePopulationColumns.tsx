@@ -30,6 +30,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     valueType: TableValueType.Numeric,
     sortParam: SortBy.PopulationAttested,
     columnGroup: 'Demographics',
+    isInitiallyVisible: false,
   },
   {
     key: '% in Territory',
