@@ -1,13 +1,15 @@
+// Stable to input order
 export function uniqueBy<T>(items: T[], keyFn: (item: T) => string | number): T[] {
-  return Object.values(
-    items.reduce<Record<string | number, T>>((dict, item) => {
-      const key = keyFn(item);
-      if (dict[key] == null) {
-        dict[key] = item;
-      }
-      return dict;
-    }, {}),
-  );
+  const hasSeen = new Set<string | number>();
+  return items.filter((item) => {
+    const key = keyFn(item);
+    if (hasSeen.has(key)) {
+      return false;
+    } else {
+      hasSeen.add(key);
+      return true;
+    }
+  });
 }
 
 export function unique<T extends string | number>(items: T[]): T[] {

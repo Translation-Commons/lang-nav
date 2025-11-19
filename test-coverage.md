@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    35.5 |    79.2 |    53.8 |    35.5 |
+| `src`                                    |    35.7 |    79.4 |    53.8 |    35.7 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -67,7 +67,7 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    50.2 |    79.4 |    61.0 |    50.2 |
+| `  features`                             |    50.5 |    79.9 |    61.0 |    50.5 |
 | `    __tests__`                          |    89.3 |    92.3 |    75.0 |    89.3 |
 | `      MockObjects.tsx`                  |    89.3 |    92.3 |    75.0 |    89.3 |
 | `    data-loading`                       |    32.8 |    71.7 |    60.0 |    32.8 |
@@ -93,10 +93,10 @@
 | `      TerritoryData.tsx`                |    76.8 |    66.7 |    83.3 |    76.8 |
 | `      UnicodeData.tsx`                  |     0   |     0   |     0   |     0   |
 | `      WikipediaData.tsx`                |     0   |   100.0 |   100.0 |     0   |
-| `    filtering`                          |    75.6 |    81.1 |    74.4 |    75.6 |
+| `    filtering`                          |    77.2 |    82.9 |    74.4 |    77.2 |
 | `      filter.tsx`                       |    97.0 |    75.0 |   100.0 |    97.0 |
 | `      FilterBreakdown.tsx`              |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      filterByConnections.tsx`          |    85.0 |    82.9 |   100.0 |    85.0 |
+| `      filterByConnections.tsx`          |    92.7 |    86.4 |   100.0 |    92.7 |
 | `      FilterPath.tsx`                   |    79.1 |    87.0 |    54.5 |    79.1 |
 | `      LanguageFilterSelector.tsx`       |    75.0 |   100.0 |    66.7 |    75.0 |
 | `      TerritoryFilterSelector.tsx`      |     0   |     0   |     0   |     0   |
@@ -174,7 +174,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    44.8 |    88.2 |    65.8 |    44.8 |
+| `  shared`                               |    44.9 |    88.3 |    65.8 |    44.9 |
 | `    containers`                         |    65.0 |   100.0 |   100.0 |    65.0 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -187,10 +187,10 @@
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
 | `      usePageBrightness.tsx`            |     0   |     0   |     0   |     0   |
-| `    lib`                                |    75.0 |    93.2 |    72.2 |    75.0 |
+| `    lib`                                |    75.2 |    93.3 |    72.2 |    75.2 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
 | `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
-| `      setUtils.ts`                      |   100.0 |    94.1 |   100.0 |   100.0 |
+| `      setUtils.ts`                      |   100.0 |    94.4 |   100.0 |   100.0 |
 | `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      stringUtils.ts`                   |    68.9 |   100.0 |    66.7 |    68.9 |
 | `    ui`                                 |    42.0 |    88.9 |    55.6 |    42.0 |
@@ -205,19 +205,19 @@
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    17.5 |    69.5 |    45.5 |    17.5 |
+| `  widgets`                              |    17.5 |    69.3 |    45.5 |    17.5 |
 | `    cardlists`                          |    95.7 |    75.0 |   100.0 |    95.7 |
 | `      CardList.tsx`                     |   100.0 |    75.0 |   100.0 |   100.0 |
 | `      ResponsiveGrid.tsx`               |    89.7 |    75.0 |   100.0 |    89.7 |
 | `    CommonObjectives.tsx`               |     0   |     0   |     0   |     0   |
-| `    controls`                           |    44.6 |    83.1 |    76.0 |    44.6 |
-| `      components`                       |    86.8 |    82.1 |    80.6 |    86.8 |
+| `    controls`                           |    44.6 |    82.9 |    76.0 |    44.6 |
+| `      components`                       |    86.8 |    81.9 |    80.6 |    86.8 |
 | `        Selector.tsx`                   |    98.0 |    94.1 |   100.0 |    98.0 |
 | `        SelectorDisplayContext.tsx`     |   100.0 |   100.0 |    66.7 |   100.0 |
 | `        SelectorDropdown.tsx`           |   100.0 |   100.0 |   100.0 |   100.0 |
 | `        SelectorLabel.tsx`              |    86.7 |    57.1 |   100.0 |    86.7 |
 | `        SelectorOption.tsx`             |    70.4 |    69.2 |    66.7 |    70.4 |
-| `        TextInput.tsx`                  |    86.4 |    83.3 |    70.0 |    86.4 |
+| `        TextInput.tsx`                  |    86.4 |    82.6 |    70.0 |    86.4 |
 | `      selectors`                        |    13.8 |    89.3 |    72.2 |    13.8 |
 | `        LanguageScopeSelector.tsx`      |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageSourceSelector.tsx`     |    10.6 |   100.0 |     0   |    10.6 |

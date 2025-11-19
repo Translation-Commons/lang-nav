@@ -6,7 +6,12 @@ import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { ObjectData, TerritoryData, WritingSystemData } from '@entities/types/DataTypes';
+import {
+  ObjectData,
+  TerritoryData,
+  TerritoryScope,
+  WritingSystemData,
+} from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
@@ -55,6 +60,13 @@ export function getFilterByTerritory(): FilterFunctionType {
   );
 }
 
+/**
+ * The first should be the best default territory for the object.
+ *
+ * Sorting matters. The first territory should be the most relevant one.
+ * Languages: The first are the biggest countries, then the regions or dependencies
+ * Territories: The first is the territory itself, then the regions that contain it
+ */
 export function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
   switch (object.type) {
     case ObjectType.Territory:
@@ -70,7 +82,18 @@ export function getTerritoriesRelevantToObject(object: ObjectData): TerritoryDat
     case ObjectType.Census:
       return [object.territory].filter((t) => t != null);
     case ObjectType.Language:
-      return object.locales.map((l) => l.territory).filter((t) => t != null);
+      return uniqueBy(
+        object.locales
+          .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0))
+          .map((l) => l.territory)
+          .filter((t) => t != null)
+          .sort(
+            (a, b) =>
+              (a.scope === TerritoryScope.Country ? -1 : 1) -
+              (b.scope === TerritoryScope.Country ? -1 : 1),
+          ),
+        (t) => t.ID,
+      );
     case ObjectType.WritingSystem:
       return [object.territoryOfOrigin].filter((t) => t != null);
     case ObjectType.VariantTag:

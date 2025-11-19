@@ -36,7 +36,7 @@ export const LanguageHierarchy: React.FC = () => {
       description={
         <>
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
-          different sources disagree on what it is a language/dialect/etc. Change source:{' '}
+          different sources disagree on what is a language/dialect/etc. Change source:{' '}
           <div
             style={{
               display: 'inline-block',

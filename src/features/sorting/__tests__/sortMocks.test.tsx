@@ -389,7 +389,7 @@ describe('getSortByParameterized', () => {
       'sjn_001',
       'sjn_Teng_001',
       'dori0123_001',
-      // All below have no associated language, stable to input order
+      // All below have no associated writing system, stable to input order
       '123',
       'HA',
       'AM',
