@@ -2,7 +2,7 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    35.7 |    79.4 |    53.8 |    35.7 |
+| `src`                                    |    35.7 |    79.5 |    53.8 |    35.7 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
@@ -205,19 +205,19 @@
 | `    ObjectTypeDescription.tsx`          |     0   |   100.0 |   100.0 |     0   |
 | `  tests`                                |   100.0 |   100.0 |   100.0 |   100.0 |
 | `    testServer.ts`                      |   100.0 |   100.0 |   100.0 |   100.0 |
-| `  widgets`                              |    17.5 |    69.3 |    45.5 |    17.5 |
+| `  widgets`                              |    17.5 |    69.5 |    45.5 |    17.5 |
 | `    cardlists`                          |    95.7 |    75.0 |   100.0 |    95.7 |
 | `      CardList.tsx`                     |   100.0 |    75.0 |   100.0 |   100.0 |
 | `      ResponsiveGrid.tsx`               |    89.7 |    75.0 |   100.0 |    89.7 |
 | `    CommonObjectives.tsx`               |     0   |     0   |     0   |     0   |
-| `    controls`                           |    44.6 |    82.9 |    76.0 |    44.6 |
-| `      components`                       |    86.8 |    81.9 |    80.6 |    86.8 |
+| `    controls`                           |    44.6 |    83.1 |    76.0 |    44.6 |
+| `      components`                       |    86.8 |    82.1 |    80.6 |    86.8 |
 | `        Selector.tsx`                   |    98.0 |    94.1 |   100.0 |    98.0 |
 | `        SelectorDisplayContext.tsx`     |   100.0 |   100.0 |    66.7 |   100.0 |
 | `        SelectorDropdown.tsx`           |   100.0 |   100.0 |   100.0 |   100.0 |
 | `        SelectorLabel.tsx`              |    86.7 |    57.1 |   100.0 |    86.7 |
 | `        SelectorOption.tsx`             |    70.4 |    69.2 |    66.7 |    70.4 |
-| `        TextInput.tsx`                  |    86.4 |    82.6 |    70.0 |    86.4 |
+| `        TextInput.tsx`                  |    86.4 |    83.3 |    70.0 |    86.4 |
 | `      selectors`                        |    13.8 |    89.3 |    72.2 |    13.8 |
 | `        LanguageScopeSelector.tsx`      |     0   |   100.0 |   100.0 |     0   |
 | `        LanguageSourceSelector.tsx`     |    10.6 |   100.0 |     0   |    10.6 |
