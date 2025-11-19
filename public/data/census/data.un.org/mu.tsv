@@ -58,7 +58,7 @@ zho/cmn	#Chinese and Mandarin		109
 eng	#English and Oriental		87
 bho/mar	#Bhojpuri and Marathi	86	2
 ara	Arabic	82	36
-hin	Hindi and Other Oriental	73	
+hin	#Hindi and Other Oriental	73	
 zho/eng	#Chinese and English	63	
 bho/tel	#Bhojpuri and Telegu	52	1
 mfe	#Creole and Other		41
@@ -67,7 +67,7 @@ zho	#Chinese and Oriental	39
 mul	Other mixed European		39
 afr	Afrikaans		36
 hin/urd	#Hindi and Urdu	8	34
-bho	Bhojpuri and Oriental	30	
+bho	#Bhojpuri and Oriental	30	
 hin/mar	#Hindi and Marathi	26	3
 hin/tam	#Hindi and Tamil	18	
 hin/tel	#Hindi and Telegu	18	
