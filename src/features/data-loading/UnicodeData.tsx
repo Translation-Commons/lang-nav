@@ -292,7 +292,7 @@ function convertCLDRLangPopToLangNavEntries(
     // describes the constituent language or the macrolanguage population. Since it's unknown
     // we will use the macrolanguage.
     const parentLang = language.CLDR.parentLanguage;
-    if (parentLang != null && parentLang.CLDR.scope === LanguageScope.Macrolanguage) {
+    if (parentLang?.CLDR.scope === LanguageScope.Macrolanguage) {
       languageCode = parentLang.ID;
     }
   }
