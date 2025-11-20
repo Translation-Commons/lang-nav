@@ -1,5 +1,4 @@
 import {
-  getEmptyLanguageSourceSpecificData,
   getBaseLanguageData,
   LanguageCode,
   LanguageField,
@@ -70,7 +69,7 @@ export function addISORetirementsToLanguages(
     // Remove the language links from ISO based sources or make a new language entry
     if (lang) {
       lang.warnings[LanguageField.isoCode] = retirementExplanation;
-      // lang.sourceSpecific.ISO.scope = LanguageScope.SpecialCode; // Maybe
+      // lang.ISO.scope = LanguageScope.SpecialCode; // Maybe
 
       // Remove from ISO-based language lists (we are just leaving it in the "All" source)
       delete languagesBySource.ISO[retirement.id];
@@ -80,35 +79,32 @@ export function addISORetirementsToLanguages(
 
       if (retirement.changeTo) {
         // If there's a changeTo, update the codeDisplay to the new code
-        lang.sourceSpecific.ISO.parentLanguageCode = retirement.changeTo;
-        lang.sourceSpecific.BCP.parentLanguageCode = retirement.changeTo;
+        lang.ISO.parentLanguageCode = retirement.changeTo;
+        lang.BCP.parentLanguageCode = retirement.changeTo;
       }
     } else {
       const childLanguages = retirement.splitLanguages
-        .map((code) => languagesBySource.All[code])
+        .map((code) => languagesBySource.Combined[code])
         .filter((lang) => lang != null);
 
       lang = {
         ...getBaseLanguageData(retirement.id, retirement.languageName),
         scope: LanguageScope.SpecialCode,
-        sourceSpecific: {
-          ...getEmptyLanguageSourceSpecificData(),
-          All: {
-            code: retirement.id,
-            name: retirement.languageName,
-            scope: LanguageScope.SpecialCode,
-            parentLanguageCode: retirement.changeTo || undefined,
-            childLanguages,
-          },
-          ISO: {
-            code: retirement.id,
-            childLanguages: [],
-          },
+        Combined: {
+          code: retirement.id,
+          name: retirement.languageName,
+          scope: LanguageScope.SpecialCode,
+          parentLanguageCode: retirement.changeTo || undefined,
+          childLanguages,
+        },
+        ISO: {
+          code: retirement.id,
+          childLanguages: [],
         },
       };
 
       // Add the language to the all list, but with the retirement warning
-      languagesBySource.All[retirement.id] = lang;
+      languagesBySource.Combined[retirement.id] = lang;
     }
 
     // Add retirement information

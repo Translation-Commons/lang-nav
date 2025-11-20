@@ -1,12 +1,12 @@
 import { unique } from '@shared/lib/setUtils';
 
-import { LanguageData } from './LanguageTypes';
+import { LanguageData, LanguageSource } from './LanguageTypes';
 
 export function setLanguageNames(lang: LanguageData, additionalNames: string[] = []): void {
   const names = [
     lang.nameCanonical,
     lang.nameEndonym,
-    ...Object.values(lang.sourceSpecific).map((l) => l.name),
+    ...Object.values(LanguageSource).map((src) => lang[src].name),
     ...lang.names,
     ...additionalNames,
   ].filter((s) => s != null);

@@ -42,7 +42,7 @@ const LanguageSourceDescription: React.FC<{ languageSource: LanguageSource }> = 
   languageSource,
 }) => {
   switch (languageSource) {
-    case LanguageSource.All:
+    case LanguageSource.Combined:
       return (
         <>
           <label>All:</label>Show all languages and dialects, regardless of where it was defined.

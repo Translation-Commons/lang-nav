@@ -1,5 +1,4 @@
 import {
-  getEmptyLanguageSourceSpecificData,
   getBaseLanguageData,
   ISO6391LanguageCode,
   ISO6393LanguageCode,
@@ -121,15 +120,15 @@ export function addISODataToLanguages(
     }
 
     // Fill out ISO information on the language data
-    lang.codeISO6391 = isoLang.codeISO6391;
+    lang.ISO.code6391 = isoLang.codeISO6391;
     lang.vitalityISO = isoLang.vitality;
     lang.scope = isoLang.scope;
-    lang.sourceSpecific.ISO.scope = isoLang.scope;
-    lang.sourceSpecific.ISO.name = isoLang.name;
-    lang.sourceSpecific.BCP.scope = isoLang.scope;
-    lang.sourceSpecific.BCP.name = isoLang.name;
-    lang.sourceSpecific.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
-    lang.sourceSpecific.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    lang.ISO.scope = isoLang.scope;
+    lang.ISO.name = isoLang.name;
+    lang.BCP.scope = isoLang.scope;
+    lang.BCP.name = isoLang.name;
+    lang.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    lang.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     setLanguageNames(lang);
   });
 }
@@ -155,7 +154,7 @@ export function addISOMacrolanguageData(
       if (DEBUG) console.debug(`Constituent language ${relation.codeConstituent} not found`);
       return;
     }
-    const parentLanguageCode = constituent.sourceSpecific.ISO.parentLanguageCode;
+    const parentLanguageCode = constituent.ISO.parentLanguageCode;
     if (parentLanguageCode != macro.ID) {
       if (DEBUG)
         // As of 2025-04-30 all exceptions to this are temporary
@@ -187,10 +186,9 @@ export function addISOLanguageFamilyData(
     // If the entry is missing, create a new one
     if (familyEntry == null) {
       const sourceSpecific = {
-        ...getEmptyLanguageSourceSpecificData(),
-        All: { code: family.code, parentLanguageCode: family.parent, childLanguages: [] },
-        ISO: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
-        BCP: { code: family.code, name, parentLanguageCode: family.parent, childLanguages: [] },
+        Combined: { code: family.code, parentLanguageCode: family.parent },
+        ISO: { code: family.code, name, parentLanguageCode: family.parent },
+        BCP: { code: family.code, name, parentLanguageCode: family.parent },
       };
 
       const familyEntry: LanguageData = {
@@ -199,9 +197,9 @@ export function addISOLanguageFamilyData(
         scope: LanguageScope.Family,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Language family',
-        sourceSpecific,
+        ...sourceSpecific,
       };
-      languagesBySource.All[family.code] = familyEntry;
+      languagesBySource.Combined[family.code] = familyEntry;
       languagesBySource.ISO[family.code] = familyEntry;
       languagesBySource.BCP[family.code] = familyEntry;
     } else {
@@ -209,13 +207,13 @@ export function addISOLanguageFamilyData(
       if (!familyEntry.nameDisplay || familyEntry.nameDisplay === '0') {
         familyEntry.nameDisplay = family.name;
       }
-      familyEntry.sourceSpecific.All.parentLanguageCode = family.parent;
-      familyEntry.sourceSpecific.ISO.parentLanguageCode = family.parent;
-      familyEntry.sourceSpecific.ISO.scope = LanguageScope.Family;
-      familyEntry.sourceSpecific.ISO.name = name;
-      familyEntry.sourceSpecific.BCP.parentLanguageCode = family.parent;
-      familyEntry.sourceSpecific.BCP.scope = LanguageScope.Family;
-      familyEntry.sourceSpecific.BCP.name = name;
+      familyEntry.Combined.parentLanguageCode = family.parent;
+      familyEntry.ISO.parentLanguageCode = family.parent;
+      familyEntry.ISO.scope = LanguageScope.Family;
+      familyEntry.ISO.name = name;
+      familyEntry.BCP.parentLanguageCode = family.parent;
+      familyEntry.BCP.scope = LanguageScope.Family;
+      familyEntry.BCP.name = name;
       familyEntry.scope = LanguageScope.Family;
     }
   });
@@ -231,9 +229,9 @@ export function addISOLanguageFamilyData(
         return;
       }
       // languages may already have macrolanguage parents but if its unset, set the parent
-      lang.sourceSpecific.All.parentLanguageCode ??= familyCode;
-      lang.sourceSpecific.ISO.parentLanguageCode ??= familyCode;
-      lang.sourceSpecific.BCP.parentLanguageCode ??= familyCode;
+      lang.Combined.parentLanguageCode ??= familyCode;
+      lang.ISO.parentLanguageCode ??= familyCode;
+      lang.BCP.parentLanguageCode ??= familyCode;
     });
   });
 }

@@ -54,7 +54,7 @@ const DataProvider: React.FC<{
   );
   const getCLDRLanguage = useCallback(
     (id: string): LanguageData | undefined => {
-      return coreData.allLanguoids.find((lang) => lang.sourceSpecific.CLDR?.code === id);
+      return coreData.allLanguoids.find((lang) => lang.CLDR?.code === id);
     },
     [coreData],
   );
@@ -86,10 +86,20 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
-  const languagesInSelectedSource = useMemo(
-    () => coreData.allLanguoids.filter((lang) => lang.sourceSpecific[languageSource] != null),
-    [coreData, languageSource],
-  );
+  const languagesInSelectedSource = useMemo(() => {
+    // Update dependent fields whenever language source or locale separator changes
+    updateObjectCodesNameAndPopulation(
+      coreData.allLanguoids,
+      coreData.locales,
+      coreData.objects['001'] as TerritoryData, // The world territory
+      languageSource,
+      localeSeparator,
+    );
+    if (loadProgress === LoadingStage.HasSupplementalData)
+      setLoadProgress(LoadingStage.AlgorithmsFinished);
+
+    return coreData.allLanguoids.filter((lang) => lang[languageSource].code != null);
+  }, [coreData, languageSource, localeSeparator, loadProgress]);
 
   const dataContext = useMemo(
     () => ({
@@ -117,26 +127,6 @@ const DataProvider: React.FC<{
       loadSecondaryData(dataContext);
     }
   }, [dataContext, loadProgress]); // this is called once after page load
-
-  const world = getTerritory('001')!;
-  useEffect(() => {
-    updateObjectCodesNameAndPopulation(
-      languagesInSelectedSource,
-      coreData.locales,
-      world,
-      languageSource,
-      localeSeparator,
-    );
-    if (loadProgress === LoadingStage.HasSupplementalData)
-      setLoadProgress(LoadingStage.AlgorithmsFinished);
-  }, [
-    languagesInSelectedSource,
-    coreData.locales,
-    languageSource,
-    world,
-    loadProgress,
-    localeSeparator,
-  ]); // when core language data or the language source changes
 
   return <DataContext.Provider value={dataContext}>{children}</DataContext.Provider>;
 };

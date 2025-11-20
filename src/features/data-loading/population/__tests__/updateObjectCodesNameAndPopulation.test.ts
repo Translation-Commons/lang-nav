@@ -39,7 +39,7 @@ describe('updateObjectCodesNameAndPopulation', () => {
       [sjn, dori0123],
       Object.values(mockedDictionaries.locales),
       mockedDictionaries.territories['001'],
-      LanguageSource.All,
+      LanguageSource.Combined,
       LocaleSeparator.Hyphen,
     );
 
@@ -75,7 +75,7 @@ describe('updateObjectCodesNameAndPopulation', () => {
       [sjn, dori0123],
       [...Object.values(mockedDictionaries.locales), newLocale], // Include the new locale
       mockedDictionaries.territories['001'],
-      LanguageSource.All,
+      LanguageSource.Combined,
       LocaleSeparator.Hyphen,
     );
 

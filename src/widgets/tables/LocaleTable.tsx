@@ -28,9 +28,7 @@ const LocaleTable: React.FC = () => {
   return (
     <InteractiveObjectTable<LocaleData>
       tableID={TableID.Locales}
-      objects={locales.filter(
-        (locale) => locale.language?.sourceSpecific[languageSource].code != null,
-      )}
+      objects={locales.filter((locale) => locale.language?.[languageSource].code != null)}
       columns={[
         CodeColumn,
         {

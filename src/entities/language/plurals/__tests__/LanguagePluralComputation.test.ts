@@ -81,9 +81,9 @@ describe('findLanguagePluralRules', () => {
     ]);
   });
 
-  it('returns plural rules for a language using codeISO6391', () => {
+  it('returns plural rules for a language using ISO 639-1 code', () => {
     const lang = getBaseLanguageData('fra', 'French');
-    lang.codeISO6391 = 'fr';
+    lang.ISO.code6391 = 'fr';
 
     const rules = findLanguagePluralRules(lang);
     const conditions = rules?.map(([key, rule]) => [key, rule.split('@')[0].trim()]); // Simplify for test comparison
@@ -95,9 +95,9 @@ describe('findLanguagePluralRules', () => {
     ]);
   });
 
-  it('falls back to CLDR sourceSpecific code when codeISO6391 is missing and filters out empty rules', () => {
+  it('falls back to CLDR code when ISO 639-1 code is missing and filters out empty rules', () => {
     const lang = getBaseLanguageData('cmn', 'Mandarin');
-    lang.sourceSpecific.CLDR.code = 'zh'; // CLDR treats 'zh' as the code for Mandarin
+    lang.CLDR.code = 'zh'; // CLDR treats 'zh' as the code for Mandarin
 
     const rules = findLanguagePluralRules(lang);
     const conditions = rules?.map(([key, rule]) => [key, rule.split('@')[0].trim()]); // Simplify for test comparison
@@ -108,7 +108,7 @@ describe('findLanguagePluralRules', () => {
 
   it('languages without plural rules return null', () => {
     const lang = getBaseLanguageData('jpn', 'Japanese'); // Japanese misssing from test set
-    lang.codeISO6391 = 'ja';
+    lang.ISO.code6391 = 'ja';
 
     const rules = findLanguagePluralRules(lang);
     expect(rules).toBeNull();

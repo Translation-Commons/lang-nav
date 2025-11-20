@@ -51,7 +51,7 @@ const AboutPage: React.FC = () => {
             The Language Navigator highlights not only widely spoken languages but also those
             recognized by specific communities, even if they lack global consensus. Where data is
             disputed or incomplete, we aim for transparency. Users can see{' '}
-            <DataPageLink params={{ languageSource: LanguageSource.All }}>
+            <DataPageLink params={{ languageSource: LanguageSource.Combined }}>
               all attested languages
             </DataPageLink>{' '}
             or choose to follow specific standards like{' '}

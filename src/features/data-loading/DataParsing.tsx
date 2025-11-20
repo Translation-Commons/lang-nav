@@ -1,10 +1,6 @@
 import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 
-import {
-  getBaseLanguageData,
-  getEmptyLanguageSourceSpecificData,
-  LanguageModality,
-} from '@entities/language/LanguageTypes';
+import { getBaseLanguageData, LanguageModality } from '@entities/language/LanguageTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   parseVitalityEthnologue2013,
@@ -37,27 +33,7 @@ export function parseLanguageLine(line: string): LanguageData {
   const parentISOCode = parts[11] !== '' && parts[11].length <= 3 ? parts[11] : undefined;
   const parentGlottocode = parts[12] !== '' ? parts[12] : undefined;
 
-  // Initialize the data that depends on the language source
-  const sourceSpecific = getEmptyLanguageSourceSpecificData();
-  sourceSpecific.All = { code, name: nameDisplay, parentLanguageCode, childLanguages: [] };
-  sourceSpecific.Glottolog = {
-    code: parts[1] !== '' ? parts[1] : undefined,
-    parentLanguageCode: parentGlottocode,
-    childLanguages: [],
-  };
-  if (code.length <= 3) {
-    sourceSpecific.ISO = { code, parentLanguageCode: parentISOCode, childLanguages: [] };
-    sourceSpecific.BCP = { code, parentLanguageCode: parentISOCode, childLanguages: [] };
-    // UNESCO may have different requirements
-    sourceSpecific.UNESCO = {
-      code,
-      name: nameDisplay,
-      parentLanguageCode: parentISOCode,
-      childLanguages: [],
-    };
-  }
-
-  return {
+  const language = {
     ...getBaseLanguageData(code, nameDisplay),
 
     scope: undefined, // Added by imports
@@ -80,9 +56,25 @@ export function parseLanguageLine(line: string): LanguageData {
 
     modality: (parts[4] || undefined) as LanguageModality | undefined,
     primaryScriptCode: parts[5] || undefined,
-
-    sourceSpecific,
+    Combined: { code, name: nameDisplay, parentLanguageCode },
+    Glottolog: {
+      code: parts[1] !== '' ? parts[1] : undefined,
+      parentLanguageCode: parentGlottocode,
+    },
   };
+
+  if (code.length <= 3) {
+    language.ISO = { code, parentLanguageCode: parentISOCode };
+    language.BCP = { code, parentLanguageCode: parentISOCode };
+    // UNESCO may have different requirements
+    language.UNESCO = {
+      code,
+      name: nameDisplay,
+      parentLanguageCode: parentISOCode,
+    };
+  }
+
+  return language;
 }
 
 export function parseLocaleLine(line: string): LocaleData | undefined {

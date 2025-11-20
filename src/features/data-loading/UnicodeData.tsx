@@ -46,8 +46,8 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       }
       if (lang != null) {
         // Add a note that the language code is considered "overlong" and a different language code or locale code should be used instead for CLDR purposes
-        lang.sourceSpecific.CLDR.code = undefined;
-        lang.sourceSpecific.CLDR.notes = (
+        lang.CLDR.code = undefined;
+        lang.CLDR.notes = (
           <>
             This language code <code>{alias.original}</code> is considered &quot;overlong&quot; in
             CLDR, use <code>{alias.replacement}</code> instead.
@@ -95,11 +95,11 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
         macroLang.cldrDataProvider = constituentLang;
-        macroLang.sourceSpecific.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
-        macroLang.sourceSpecific.CLDR.scope = LanguageScope.Macrolanguage;
-        macroLang.sourceSpecific.CLDR.childLanguages = [constituentLang];
-        macroLang.sourceSpecific.CLDR.notes = notes;
-        macroLang.sourceSpecific.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
+        macroLang.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
+        macroLang.CLDR.scope = LanguageScope.Macrolanguage;
+        macroLang.CLDR.childLanguages = [constituentLang];
+        macroLang.CLDR.notes = notes;
+        macroLang.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
         // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
         cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with ** to distinguish it
@@ -108,9 +108,9 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)
       if (constituentLang != null) {
         cldrLanguages[macroLangCode] = constituentLang;
-        constituentLang.sourceSpecific.CLDR.code = macroLangCode;
-        constituentLang.sourceSpecific.CLDR.notes = notes;
-        constituentLang.sourceSpecific.CLDR.parentLanguageCode = macroLangAltCode;
+        constituentLang.CLDR.code = macroLangCode;
+        constituentLang.CLDR.notes = notes;
+        constituentLang.CLDR.parentLanguageCode = macroLangAltCode;
 
         // Remove the old link (eg. from cmn) since it's now canonical for the macrolanguage code (zh)
         delete cldrLanguages[constituentLangCode];
@@ -128,7 +128,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       const lang = cldrLanguages[alias.original];
       const replacementData: LanguageData = cldrLanguages[alias.replacement];
       if (lang != null) {
-        lang.sourceSpecific.CLDR = {
+        lang.CLDR = {
           code: alias.original,
           childLanguages: [],
           notes: (
@@ -177,7 +177,7 @@ export async function loadCLDRCoverage(
           return;
         }
         lang.nameEndonym ??= cldrCov.nameEndonym;
-        lang.sourceSpecific.CLDR.name = cldrCov.nameDisplay;
+        lang.CLDR.name = cldrCov.nameDisplay;
         lang.cldrCoverage = {
           countOfCLDRLocales: cldrCov.countOfCLDRLocales,
           targetCoverageLevel: cldrCov.targetCoverageLevel,
@@ -288,15 +288,12 @@ function convertCLDRLangPopToLangNavEntries(
 
   const language = getLanguage(cldrLanguageCode);
   let languageCode = language?.ID ?? cldrLanguageCode;
-  if (language?.sourceSpecific?.CLDR?.parentLanguageCode != null) {
+  if (language?.CLDR?.parentLanguageCode != null) {
     // If the language a child of a macrolanguage, we don't know from the data if the number
     // describes the constituent language or the macrolanguage population. Since it's unknown
     // we will use the macrolanguage.
-    const parentLang = language.sourceSpecific.CLDR.parentLanguage;
-    if (
-      parentLang != null &&
-      parentLang.sourceSpecific.CLDR.scope === LanguageScope.Macrolanguage
-    ) {
+    const parentLang = language.CLDR.parentLanguage;
+    if (parentLang != null && parentLang.CLDR.scope === LanguageScope.Macrolanguage) {
       languageCode = parentLang.ID;
     }
   }

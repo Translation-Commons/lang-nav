@@ -7,7 +7,7 @@ const LanguageRetirementReason: React.FC<{ lang: LanguageData }> = ({ lang }) =>
   if (!explanation) {
     // If there is no formal ISO retirement, we should check if it never was ISO.
 
-    if (lang.sourceSpecific.ISO.code == null) {
+    if (lang.ISO.code == null) {
       return <>This languoid was never assigned an ISO 639 code.</>;
     }
     return undefined; // It is not retired and it is part of the ISO standard

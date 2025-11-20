@@ -50,7 +50,7 @@ const LanguageTable: React.FC = () => {
         key: 'ISO Retirement',
         render: (lang) => {
           let retirementReason = lang.retirementReason ?? undefined;
-          if (!retirementReason && lang.sourceSpecific.ISO.code == null) {
+          if (!retirementReason && lang.ISO.code == null) {
             retirementReason = RetirementReason.NeverISO;
           }
           return retirementReason ? (

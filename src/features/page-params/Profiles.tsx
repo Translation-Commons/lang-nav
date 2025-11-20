@@ -37,7 +37,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
   languageFilter: '',
-  languageSource: LanguageSource.All,
+  languageSource: LanguageSource.Combined,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   limit: 12,
   localeSeparator: LocaleSeparator.Underscore,
@@ -81,7 +81,7 @@ export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
     territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.ShowMeEverything]: {
-    languageSource: LanguageSource.All,
+    languageSource: LanguageSource.Combined,
     languageScopes: [], // Shorthand for all languoids
     territoryScopes: [], // Shorthand for all territories
     limit: 200, // Show more results

@@ -38,7 +38,7 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
 export function getSortField(
   object: ObjectData,
   sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource = LanguageSource.All,
+  effectiveLanguageSource: LanguageSource = LanguageSource.Combined,
 ): string | number | undefined {
   switch (sortBy) {
     case SortBy.Code:
@@ -98,7 +98,7 @@ export function getSortField(
 
 export function getSortFunctionParameterized(
   sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource = LanguageSource.All,
+  effectiveLanguageSource: LanguageSource = LanguageSource.Combined,
   sortDirection: SortBehavior = SortBehavior.Normal,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;

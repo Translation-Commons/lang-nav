@@ -90,7 +90,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
           <div className="CardList">
             <ResponsiveGrid>
               {langs.map((lang) => {
-                const { ISO, Glottolog } = lang.sourceSpecific;
+                const { ISO, Glottolog } = lang;
                 const otherNames = lang.names.filter(
                   (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
                 );
@@ -99,7 +99,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
                     <div>
                       <label>ID(s):</label>{' '}
                       {unique(
-                        [lang.ID, ISO.code, lang.codeISO6391, Glottolog.code].filter(
+                        [lang.ID, ISO.code, ISO.code6391, Glottolog.code].filter(
                           (id) => id != null,
                         ),
                       ).join(', ')}
