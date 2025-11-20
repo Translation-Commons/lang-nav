@@ -11,6 +11,7 @@ import TableValueType from '@features/table/TableValueType';
 
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
+import LocaleTableCLDRRows from '@entities/locale/LocaleTableCLDRRows';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
@@ -145,6 +146,7 @@ const LocaleTable: React.FC = () => {
           render: (object) => toSentenceCase(object.localeSource),
           isInitiallyVisible: false,
         },
+        ...LocaleTableCLDRRows,
       ]}
     />
   );
