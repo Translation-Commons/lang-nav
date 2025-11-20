@@ -4,7 +4,7 @@ import { ObjectType } from '@features/page-params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import {
-  VitalityISO,
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
@@ -15,7 +15,7 @@ import { buildVitalityFilterFunction } from '../filter';
 describe('buildVitalityFilterFunction', () => {
   const mockLanguage = {
     ...getBaseLanguageData('test-lang', 'Test Language'),
-    vitalityISO: VitalityISO.Living,
+    ISO: { status: LanguageISOStatus.Living },
     vitalityEth2013: VitalityEthnologueFine.National,
     vitalityEth2025: VitalityEthnologueCoarse.Institutional,
   };
@@ -33,7 +33,7 @@ describe('buildVitalityFilterFunction', () => {
 
   it('returns true for non-language objects', () => {
     const filter = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
@@ -42,7 +42,7 @@ describe('buildVitalityFilterFunction', () => {
 
   it('returns true when no vitality filters are active', () => {
     const filter = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
@@ -51,14 +51,14 @@ describe('buildVitalityFilterFunction', () => {
 
   it('filters by ISO vitality', () => {
     const filterMatch = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living],
+      isoStatus: [LanguageISOStatus.Living],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
     expect(filterMatch(mockLanguage)).toBe(true);
 
     const filterNoMatch = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Extinct],
+      isoStatus: [LanguageISOStatus.Extinct],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
@@ -67,14 +67,14 @@ describe('buildVitalityFilterFunction', () => {
 
   it('filters by Ethnologue 2013', () => {
     const filterMatch = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [VitalityEthnologueFine.National],
       vitalityEth2025: [],
     });
     expect(filterMatch(mockLanguage)).toBe(true);
 
     const filterNoMatch = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [VitalityEthnologueFine.Threatened],
       vitalityEth2025: [],
     });
@@ -83,14 +83,14 @@ describe('buildVitalityFilterFunction', () => {
 
   it('filters by Ethnologue 2025', () => {
     const filterMatch = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [],
       vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
     });
     expect(filterMatch(mockLanguage)).toBe(true);
 
     const filterNoMatch = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [],
       vitalityEth2025: [VitalityEthnologueCoarse.Endangered],
     });
@@ -99,14 +99,14 @@ describe('buildVitalityFilterFunction', () => {
 
   it('handles multiple vitality filters', () => {
     const filterAllMatch = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living],
+      isoStatus: [LanguageISOStatus.Living],
       vitalityEth2013: [VitalityEthnologueFine.National],
       vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
     });
     expect(filterAllMatch(mockLanguage)).toBe(true);
 
     const filterPartialMatch = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living],
+      isoStatus: [LanguageISOStatus.Living],
       vitalityEth2013: [VitalityEthnologueFine.Threatened],
       vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
     });
@@ -116,12 +116,12 @@ describe('buildVitalityFilterFunction', () => {
   it('handles missing vitality data', () => {
     const mockIncompleteLanguage = {
       ...getBaseLanguageData('test-lang-incomplete', 'Test Language Incomplete'),
-      vitalityISO: VitalityISO.Living,
+      ISO: { status: LanguageISOStatus.Living },
       // Missing Ethnologue data
     };
 
     const filter = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [VitalityEthnologueFine.National],
       vitalityEth2025: [],
     });
@@ -130,14 +130,14 @@ describe('buildVitalityFilterFunction', () => {
 
   it('handles multiple values for same vitality type', () => {
     const filter = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living, VitalityISO.Constructed],
+      isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
     expect(filter(mockLanguage)).toBe(true);
 
     const filterNoMatch = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Extinct, VitalityISO.Constructed],
+      isoStatus: [LanguageISOStatus.Extinct, LanguageISOStatus.Constructed],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
@@ -147,7 +147,7 @@ describe('buildVitalityFilterFunction', () => {
   it('handles complex combinations of vitality filters', () => {
     // Test with multiple values in each category
     const complexFilter = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living, VitalityISO.Constructed],
+      isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
       vitalityEth2013: [VitalityEthnologueFine.National, VitalityEthnologueFine.Regional],
       vitalityEth2025: [VitalityEthnologueCoarse.Institutional, VitalityEthnologueCoarse.Stable],
     });
@@ -155,7 +155,7 @@ describe('buildVitalityFilterFunction', () => {
 
     // Test with non-matching combinations
     const nonMatchingFilter = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living],
+      isoStatus: [LanguageISOStatus.Living],
       vitalityEth2013: [VitalityEthnologueFine.Regional], // Doesn't match National
       vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
     });
@@ -169,7 +169,7 @@ describe('buildVitalityFilterFunction', () => {
     };
 
     const filter = buildVitalityFilterFunction({
-      vitalityISO: [VitalityISO.Living],
+      isoStatus: [LanguageISOStatus.Living],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });
@@ -177,7 +177,7 @@ describe('buildVitalityFilterFunction', () => {
 
     // Should pass when no filters are active
     const noFilterActive = buildVitalityFilterFunction({
-      vitalityISO: [],
+      isoStatus: [],
       vitalityEth2013: [],
       vitalityEth2025: [],
     });

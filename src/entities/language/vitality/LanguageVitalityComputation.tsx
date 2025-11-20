@@ -8,7 +8,7 @@ import LinkButton from '@shared/ui/LinkButton';
 import {
   getVitalityEthnologueCoarseLabel,
   getVitalityEthnologueFineLabel,
-  getVitalityISOLabel,
+  getLanguageISOStatusLabel,
 } from './VitalityStrings';
 import { AllVitalityInfo, VitalityInfo, VitalitySource } from './VitalityTypes';
 
@@ -64,7 +64,7 @@ export function getVitalityExplanation(
       if (ISO.status == null) return <Deemphasized>No ISO status available</Deemphasized>;
       return (
         <div>
-          <div>ISO Status: {getVitalityISOLabel(ISO.status)}</div>
+          <div>ISO Status: {getLanguageISOStatusLabel(ISO.status)}</div>
           <div>Normalized to a score of {ISO.status} out of 9.</div>
         </div>
       );
@@ -178,7 +178,7 @@ export function getVitalityInfo(source: VitalitySource, lang: LanguageData): Vit
     case VitalitySource.ISO:
       return {
         score: lang.ISO.status,
-        label: getVitalityISOLabel(lang.ISO.status!),
+        label: getLanguageISOStatusLabel(lang.ISO.status!),
         explanation: getVitalityExplanation(VitalitySource.ISO, lang),
       };
     case VitalitySource.Eth2013:

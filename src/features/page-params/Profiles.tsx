@@ -36,9 +36,10 @@ const GLOBAL_DEFAULTS: PageParams = {
   colorBy: 'None',
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
+  isoStatus: [],
   languageFilter: '',
-  languageSource: LanguageSource.Combined,
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
+  languageSource: LanguageSource.Combined,
   limit: 12,
   localeSeparator: LocaleSeparator.Underscore,
   objectID: undefined,
@@ -49,13 +50,12 @@ const GLOBAL_DEFAULTS: PageParams = {
   searchString: '',
   sortBehavior: SortBehavior.Normal,
   sortBy: SortBy.Population,
-  territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   territoryFilter: '',
-  writingSystemFilter: '',
-  vitalityISO: [],
+  territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
+  view: View.CardList,
   vitalityEth2013: [],
   vitalityEth2025: [],
-  view: View.CardList,
+  writingSystemFilter: '',
 };
 
 export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
@@ -162,7 +162,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
     case SortBy.VitalityMetascore:
-    case SortBy.VitalityISO:
+    case SortBy.ISOStatus:
     case SortBy.VitalityEthnologue2013:
     case SortBy.VitalityEthnologue2025:
     case SortBy.Literacy:

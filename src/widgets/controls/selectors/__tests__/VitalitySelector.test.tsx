@@ -6,12 +6,12 @@ import { PageParamsOptional } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 
 import {
-  getVitalityISOLabel,
+  getLanguageISOStatusLabel,
   getVitalityEthnologueFineLabel,
   getVitalityEthnologueCoarseLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import {
-  VitalityISO,
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
@@ -19,7 +19,7 @@ import {
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import {
-  VitalityISOSelector,
+  LanguageISOStatusSelector,
   VitalityEth2013Selector,
   VitalityEth2025Selector,
 } from '../VitalitySelector';
@@ -55,7 +55,7 @@ describe('VitalitySelector', () => {
   it('renders all three vitality selectors', () => {
     render(
       <>
-        <VitalityISOSelector />
+        <LanguageISOStatusSelector />
         <VitalityEth2013Selector />
         <VitalityEth2025Selector />
       </>,
@@ -66,13 +66,13 @@ describe('VitalitySelector', () => {
     expect(screen.getByText('Vitality Eth 2025')).toBeInTheDocument();
   });
 
-  describe('VitalityISOSelector', () => {
+  describe('LanguageISOStatusSelector', () => {
     it('displays all ISO vitality options', () => {
-      render(<VitalityISOSelector />);
-      const expected = Object.values(VitalityISO).filter((v) => typeof v === 'number');
+      render(<LanguageISOStatusSelector />);
+      const expected = Object.values(LanguageISOStatus).filter((v) => typeof v === 'number');
 
       expected.forEach((status) => {
-        const label = getVitalityISOLabel(status);
+        const label = getLanguageISOStatusLabel(status);
         expect(screen.getByText(label)).toBeInTheDocument();
       });
     });
@@ -81,24 +81,24 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(<VitalityISOSelector />);
+      const { rerender } = render(<LanguageISOStatusSelector />);
 
       // Test selection
       const livingButton = screen.getByRole('button', { name: 'Living' });
       expect(livingButton).toHaveClass('selectorOption unselected');
       await user.click(livingButton);
-      expect(updatePageParams).toHaveBeenCalledWith({ vitalityISO: [VitalityISO.Living] });
+      expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [LanguageISOStatus.Living] });
 
       // Update mock to simulate selected state and rerender
-      setupMockParams({ vitalityISO: [VitalityISO.Living] });
+      setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
 
-      rerender(<VitalityISOSelector />);
+      rerender(<LanguageISOStatusSelector />);
 
       // Test deselection
       const selectedLivingButton = screen.getByRole('button', { name: 'Living' });
       expect(selectedLivingButton).toHaveClass('selectorOption selected');
       await user.click(selectedLivingButton);
-      expect(updatePageParams).toHaveBeenCalledWith({ vitalityISO: [] });
+      expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
     });
   });
 

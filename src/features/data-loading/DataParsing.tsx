@@ -44,7 +44,6 @@ export function parseLanguageLine(line: string): LanguageData {
     nameEndonym,
     names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
-    vitalityISO: undefined, // Added by ISO import
     vitalityEth2013: parseVitalityEthnologue2013(parts[6]),
     vitalityEth2025: parseVitalityEthnologue2025(parts[7]),
     digitalSupport: parts[8] || undefined,

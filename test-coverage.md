@@ -53,10 +53,10 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    47.6 |    58.5 |    33.3 |    47.6 |
+| `    ui`                                 |    47.5 |    58.5 |    33.3 |    47.5 |
 | `      CLDRCoverageInfo.tsx`             |    15.8 |   100.0 |     0   |    15.8 |
 | `      CLDRCoverageLevels.tsx`           |     7.9 |   100.0 |     0   |     7.9 |
-| `      CLDRWarningNotes.tsx`             |    20.5 |   100.0 |     0   |    20.5 |
+| `      CLDRWarningNotes.tsx`             |    20.0 |   100.0 |     0   |    20.0 |
 | `      ICUSupportStatus.tsx`             |    25.0 |   100.0 |     0   |    25.0 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
 | `      ObjectField.tsx`                  |    89.6 |    66.7 |   100.0 |    89.6 |
@@ -77,7 +77,7 @@
 | `        useDataContext.tsx`             |    81.8 |   100.0 |     0   |    81.8 |
 | `      CoreData.tsx`                     |     0   |     0   |     0   |     0   |
 | `      DataAssociations.tsx`             |    70.9 |    57.8 |    85.7 |    70.9 |
-| `      DataParsing.tsx`                  |    97.2 |    98.0 |   100.0 |    97.2 |
+| `      DataParsing.tsx`                  |    97.1 |    98.0 |   100.0 |    97.1 |
 | `      GlottologData.tsx`                |     0   |     0   |     0   |     0   |
 | `      IANAData.tsx`                     |    24.8 |    70.0 |    20.0 |    24.8 |
 | `      iso`                              |     0   |     0   |     0   |     0   |
@@ -132,9 +132,9 @@
 | `      PaginationControls.tsx`           |    88.9 |    50.0 |    14.3 |    88.9 |
 | `      usePagination.tsx`                |   100.0 |    83.3 |   100.0 |   100.0 |
 | `      VisibleItemsMeter.tsx`            |    83.7 |    61.9 |    80.0 |    83.7 |
-| `    sorting`                            |    26.9 |    92.1 |    44.4 |    26.9 |
+| `    sorting`                            |    26.7 |    92.1 |    44.4 |    26.7 |
 | `      BaseColorBar.tsx`                 |    11.8 |   100.0 |     0   |    11.8 |
-| `      ColorBar.tsx`                     |     7.9 |   100.0 |     0   |     7.9 |
+| `      ColorBar.tsx`                     |     7.6 |   100.0 |     0   |     7.6 |
 | `      ColorBySelector.tsx`              |     0   |   100.0 |   100.0 |     0   |
 | `      ColorGradientSelector.tsx`        |     0   |   100.0 |   100.0 |     0   |
 | `      getColorGradientFunction.tsx`     |     4.4 |   100.0 |     0   |     4.4 |
@@ -174,7 +174,7 @@
 | `      ViewReports.tsx`                  |     0   |   100.0 |   100.0 |     0   |
 | `      ViewTable.tsx`                    |     0   |     0   |     0   |     0   |
 | `    IntroPage.tsx`                      |     0   |   100.0 |   100.0 |     0   |
-| `  shared`                               |    44.9 |    88.3 |    65.8 |    44.9 |
+| `  shared`                               |    44.9 |    88.5 |    65.8 |    44.9 |
 | `    containers`                         |    65.0 |   100.0 |   100.0 |    65.0 |
 | `      CollapsibleReport.tsx`            |     0   |   100.0 |   100.0 |     0   |
 | `      DetailsField.tsx`                 |   100.0 |   100.0 |   100.0 |   100.0 |
@@ -187,9 +187,9 @@
 | `      useDebounce.tsx`                  |     0   |     0   |     0   |     0   |
 | `      useMediaQuery.tsx`                |     0   |     0   |     0   |     0   |
 | `      usePageBrightness.tsx`            |     0   |     0   |     0   |     0   |
-| `    lib`                                |    75.2 |    93.3 |    72.2 |    75.2 |
+| `    lib`                                |    75.2 |    93.5 |    72.2 |    75.2 |
 | `      numberUtils.ts`                   |    12.0 |   100.0 |     0   |    12.0 |
-| `      PositionInGroup.ts`               |   100.0 |    85.7 |   100.0 |   100.0 |
+| `      PositionInGroup.ts`               |   100.0 |    87.5 |   100.0 |   100.0 |
 | `      setUtils.ts`                      |   100.0 |    94.4 |   100.0 |   100.0 |
 | `      stringExportUtils.tsx`            |   100.0 |    80.0 |   100.0 |   100.0 |
 | `      stringUtils.ts`                   |    68.9 |   100.0 |    66.7 |    68.9 |

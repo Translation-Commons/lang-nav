@@ -5,32 +5,32 @@ import usePageParams from '@features/page-params/usePageParams';
 import {
   getVitalityEthnologueCoarseLabel,
   getVitalityEthnologueFineLabel,
-  getVitalityISOLabel,
+  getLanguageISOStatusLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import {
-  VitalityISO,
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 
 import Selector from '../components/Selector';
 
-export const VitalityISOSelector: React.FC = () => {
-  const { vitalityISO, updatePageParams } = usePageParams();
+export const LanguageISOStatusSelector: React.FC = () => {
+  const { isoStatus, updatePageParams } = usePageParams();
 
   return (
     <Selector
       selectorLabel="ISO Language Status"
       selectorDescription="Filter languages by their ISO status (Living, Extinct, etc.)"
       labelWhenEmpty="Any"
-      options={Object.values(VitalityISO).filter((v) => typeof v === 'number')}
-      onChange={(value: VitalityISO) =>
-        vitalityISO.includes(value)
-          ? updatePageParams({ vitalityISO: vitalityISO.filter((v) => v !== value) })
-          : updatePageParams({ vitalityISO: [...vitalityISO, value] })
+      options={Object.values(LanguageISOStatus).filter((v) => typeof v === 'number')}
+      onChange={(value: LanguageISOStatus) =>
+        isoStatus.includes(value)
+          ? updatePageParams({ isoStatus: isoStatus.filter((v) => v !== value) })
+          : updatePageParams({ isoStatus: [...isoStatus, value] })
       }
-      selected={vitalityISO}
-      getOptionLabel={getVitalityISOLabel}
+      selected={isoStatus}
+      getOptionLabel={getLanguageISOStatusLabel}
     />
   );
 };

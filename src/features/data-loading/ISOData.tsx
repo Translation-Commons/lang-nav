@@ -10,8 +10,8 @@ import {
   LanguageScope,
 } from '@entities/language/LanguageTypes';
 import { setLanguageNames } from '@entities/language/setLanguageNames';
-import { parseVitalityISO } from '@entities/language/vitality/VitalityParsing';
-import { VitalityISO } from '@entities/language/vitality/VitalityTypes';
+import { parseLanguageISOStatus } from '@entities/language/vitality/VitalityParsing';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 type ISOLanguage6393Data = {
   codeISO6393: ISO6393LanguageCode; // ISO 639-3
@@ -19,7 +19,7 @@ type ISOLanguage6393Data = {
   //   codeTerminological: LanguageCode; // ISO 639-2t
   codeISO6391: ISO6391LanguageCode | undefined;
   scope: LanguageScope | undefined;
-  vitality: VitalityISO | undefined;
+  vitality: LanguageISOStatus | undefined;
   name: string;
 };
 
@@ -46,7 +46,7 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
     // codeTerminological: parts[2], // Not used
     codeISO6391: parts[3] != '' ? parts[3] : undefined,
     scope: getScopeFromLetterCode(parts[4]),
-    vitality: parseVitalityISO(parts[5]),
+    vitality: parseLanguageISOStatus(parts[5]),
     name: parts[6],
   };
 }

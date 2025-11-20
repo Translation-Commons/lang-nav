@@ -25,7 +25,7 @@ import {
 import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  VitalityISO,
+  LanguageISOStatus,
 } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -123,7 +123,7 @@ export interface LanguageData extends ObjectBase {
   Combined: LanguageDataInSource;
   ISO: LanguageDataInSource & {
     code6391?: string;
-    status?: VitalityISO;
+    status?: LanguageISOStatus;
     retirementReason?: RetirementReason;
   };
   BCP: LanguageDataInSource;

@@ -15,9 +15,9 @@ export const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
     columnGroup: 'Vitality',
   },
   {
-    key: 'Vitality: ISO',
+    key: 'ISO Status',
     render: (lang) => <LanguageVitalityCell lang={lang} type={VitalitySource.ISO} />,
-    sortParam: SortBy.VitalityISO,
+    sortParam: SortBy.ISOStatus,
     isInitiallyVisible: false,
     valueType: TableValueType.Enum,
     columnGroup: 'Vitality',

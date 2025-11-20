@@ -27,7 +27,7 @@ import ViewSelector from './selectors/ViewSelector';
 import {
   VitalityEth2013Selector,
   VitalityEth2025Selector,
-  VitalityISOSelector,
+  LanguageISOStatusSelector,
 } from './selectors/VitalitySelector';
 
 import './controls.css';
@@ -69,7 +69,7 @@ const SidePanel: React.FC = () => {
           <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageScopeSelector />
           <TerritoryScopeSelector />
-          <VitalityISOSelector />
+          <LanguageISOStatusSelector />
           <VitalityEth2013Selector />
           <VitalityEth2025Selector />
         </SidePanelSection>

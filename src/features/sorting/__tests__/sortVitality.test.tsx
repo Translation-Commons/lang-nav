@@ -9,9 +9,9 @@ import {
   LanguageSource,
 } from '@entities/language/LanguageTypes';
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  VitalityISO,
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryData } from '@entities/types/DataTypes';
 
@@ -23,7 +23,7 @@ function createLanguageWithVitality(
   code: LanguageCode,
   name: string,
   vitality: Partial<{
-    iso: VitalityISO;
+    iso: LanguageISOStatus;
     eth2013: VitalityEthnologueFine;
     eth2025: VitalityEthnologueCoarse;
   }>,
@@ -103,16 +103,16 @@ describe('Vitality Sorting', () => {
     });
   });
 
-  describe('VitalityISO', () => {
+  describe('LanguageISOStatus', () => {
     it('sorts by ISO vitality scores', () => {
       const langs = [
-        createLanguageWithVitality('en', 'English', { iso: VitalityISO.Living }), // 9
-        createLanguageWithVitality('eo', 'Esperanto', { iso: VitalityISO.Constructed }), // 3
-        createLanguageWithVitality('la', 'Latin', { iso: VitalityISO.Extinct }), // 0
+        createLanguageWithVitality('en', 'English', { iso: LanguageISOStatus.Living }), // 9
+        createLanguageWithVitality('eo', 'Esperanto', { iso: LanguageISOStatus.Constructed }), // 3
+        createLanguageWithVitality('la', 'Latin', { iso: LanguageISOStatus.Extinct }), // 0
       ];
 
       const sortFn = getSortFunctionParameterized(
-        SortBy.VitalityISO,
+        SortBy.ISOStatus,
         LanguageSource.ISO,
         SortBehavior.Normal,
       );

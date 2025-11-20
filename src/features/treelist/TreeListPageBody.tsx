@@ -29,7 +29,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
     languageFilter,
     vitalityEth2013,
     vitalityEth2025,
-    vitalityISO,
+    isoStatus,
   } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
@@ -42,7 +42,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       languageFilter ||
       vitalityEth2013 ||
       vitalityEth2025 ||
-      vitalityISO,
+      isoStatus,
     [
       searchString,
       territoryFilter,
@@ -50,7 +50,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       languageFilter,
       vitalityEth2013,
       vitalityEth2025,
-      vitalityISO,
+      isoStatus,
     ],
   );
   const filterFunction = useCallback(

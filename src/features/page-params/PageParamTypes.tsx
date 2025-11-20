@@ -2,9 +2,9 @@ import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  VitalityISO,
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -75,7 +75,7 @@ export enum PageParamKey {
   territoryScopes = 'territoryScopes',
   writingSystemFilter = 'writingSystemFilter',
   view = 'view',
-  vitalityISO = 'vitalityISO',
+  isoStatus = 'isoStatus',
   vitalityEth2013 = 'vitalityEth2013',
   vitalityEth2025 = 'vitalityEth2025',
 }
@@ -84,6 +84,7 @@ export type PageParams = {
   colorBy: ColorBy;
   colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
+  isoStatus: LanguageISOStatus[];
   languageFilter: string;
   languageScopes: LanguageScope[];
   languageSource: LanguageSource;
@@ -99,17 +100,17 @@ export type PageParams = {
   sortBy: SortBy;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
-  writingSystemFilter: string;
   view: View;
-  vitalityISO: VitalityISO[];
   vitalityEth2013: VitalityEthnologueFine[];
   vitalityEth2025: VitalityEthnologueCoarse[];
+  writingSystemFilter: string;
 };
 
 export type PageParamsOptional = {
   colorBy?: ColorBy;
   colorGradient?: ColorGradient;
   columns?: TableIDToBinarizedColumnVisibility;
+  isoStatus?: LanguageISOStatus[];
   languageFilter?: string;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
@@ -125,9 +126,8 @@ export type PageParamsOptional = {
   sortBy?: SortBy;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
-  writingSystemFilter?: string;
   view?: View;
-  vitalityISO?: VitalityISO[];
   vitalityEth2013?: VitalityEthnologueFine[];
   vitalityEth2025?: VitalityEthnologueCoarse[];
+  writingSystemFilter?: string;
 };

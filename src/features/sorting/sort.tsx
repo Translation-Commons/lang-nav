@@ -84,7 +84,7 @@ export function getSortField(
     case SortBy.VitalityMetascore:
       if (object.type !== ObjectType.Language) return undefined;
       return getVitalityMetascore(object);
-    case SortBy.VitalityISO:
+    case SortBy.ISOStatus:
       if (object.type !== ObjectType.Language) return undefined;
       return object.ISO.status;
     case SortBy.VitalityEthnologue2013:
@@ -135,7 +135,7 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
     case SortBy.VitalityMetascore:
-    case SortBy.VitalityISO:
+    case SortBy.ISOStatus:
     case SortBy.VitalityEthnologue2013:
     case SortBy.VitalityEthnologue2025:
       return SortDirection.Descending; // High to Low
@@ -180,7 +180,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Territory,
         SortBy.PopulationAttested,
         SortBy.VitalityMetascore,
-        SortBy.VitalityISO,
+        SortBy.ISOStatus,
         SortBy.VitalityEthnologue2013,
         SortBy.VitalityEthnologue2025,
         SortBy.Latitude,
