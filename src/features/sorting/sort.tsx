@@ -62,9 +62,13 @@ export function getSortField(
     case SortBy.Territory:
       return getTerritoriesRelevantToObject(object)?.[0]?.nameDisplay;
     case SortBy.Latitude:
-      return object.type === ObjectType.Language ? object.latitude : undefined;
+      return object.type === ObjectType.Language || object.type === ObjectType.Territory
+        ? object.latitude
+        : undefined;
     case SortBy.Longitude:
-      return object.type === ObjectType.Language ? object.longitude : undefined;
+      return object.type === ObjectType.Language || object.type === ObjectType.Territory
+        ? object.longitude
+        : undefined;
 
     // Population
     case SortBy.Population:
@@ -166,6 +170,8 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Literacy,
         SortBy.CountOfLanguages,
         SortBy.CountOfTerritories,
+        SortBy.Latitude,
+        SortBy.Longitude,
       ];
     case ObjectType.Language:
       return [

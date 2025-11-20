@@ -14,6 +14,7 @@ import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();
@@ -24,6 +25,18 @@ const TerritoryTable: React.FC = () => {
       objects={territories}
       columns={[
         CodeColumn,
+        {
+          key: 'ISO Alpha-3 Code',
+          render: (object) => object.codeAlpha3 || null,
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
+        {
+          key: 'ISO Numeric Code',
+          render: (object) => object.codeNumeric || null,
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
         NameColumn,
         {
           key: 'Population',
@@ -102,6 +115,24 @@ const TerritoryTable: React.FC = () => {
           valueType: TableValueType.Numeric,
           sortParam: SortBy.PopulationOfDescendents,
           columnGroup: 'Relations',
+        },
+        {
+          key: 'Latitude',
+          render: (obj) => obj.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
+          exportValue: (obj) => obj.latitude?.toFixed(4) ?? '',
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Latitude,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Longitude',
+          render: (obj) => obj.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
+          exportValue: (obj) => obj.longitude?.toFixed(4) ?? '',
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Longitude,
+          columnGroup: 'Location',
         },
         {
           key: 'Type',
