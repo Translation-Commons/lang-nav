@@ -1,4 +1,4 @@
- {
+{
   "name": "lang-nav",
   "private": true,
   "version": "0.0.0",
@@ -10,19 +10,20 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
-    "build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
     "test:run": "vitest run",
-    "test:coverage": "vitest run --coverage""build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
+    "test:coverage": "vitest run --coverage",
+    "build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
   },
   "dependencies": {
     "cldr-core": "^47.0.0",
     "lucide-react": "^0.525.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.5.1"
+    "react-router-dom": "^7.5.1",
+    "ts-node": "^10.9.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",

@@ -1,6 +1,6 @@
 import type { CLDRLocaleIndex, CLDRLocaleSupport } from '@entities/types/CLDRLocaleTypes';
 
-import cldrLocalesData from '../../public/data/unicode/cldrLocales.json';
+import cldrLocalesData from '../../../public/data/unicode/cldrLocales.json';
 
 // Import the generated JSON instead of requiring it.
 

@@ -26,7 +26,6 @@ const CHARTS_TSV_BASE = `https://raw.githubusercontent.com/unicode-org/cldr-stag
   '',
 )}/tsv`;
 const CLDR_REPO_RAW_BASE = 'https://raw.githubusercontent.com/unicode-org/cldr/main/common/main';
-import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
 const OUTPUT_FILE = path.join(process.cwd(), 'public/data/unicode/cldrLocales.json');
 
