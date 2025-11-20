@@ -86,7 +86,7 @@ function getLanguageTreeNode(
     type: ObjectType.Language,
     object: lang,
     children: getLanguageTreeNodes(
-      lang.sourceSpecific[languageSource].childLanguages,
+      lang[languageSource].childLanguages ?? [],
       languageSource,
       sortFunction,
       filterFunction,

@@ -89,7 +89,7 @@ describe('getObjectPopulationOfDescendents', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationOfDescendents(obj as ObjectData, LanguageSource.All),
+        getObjectPopulationOfDescendents(obj as ObjectData, LanguageSource.Combined),
       ]),
     );
     expect(results).toEqual({

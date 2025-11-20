@@ -6,32 +6,36 @@ import { getVitalityMetascore } from './LanguageVitalityComputation';
 import {
   parseVitalityEthnologue2013,
   parseVitalityEthnologue2025,
-  parseVitalityISO,
+  parseLanguageISOStatus,
 } from './VitalityParsing';
-import { VitalityEthnologueCoarse, VitalityEthnologueFine, VitalityISO } from './VitalityTypes';
+import {
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+  LanguageISOStatus,
+} from './VitalityTypes';
 
-describe('parseVitalityISO', () => {
+describe('parseLanguageISOStatus', () => {
   it('returns 9 for Living', () => {
-    expect(parseVitalityISO('Living')).toBe(9);
-    expect(parseVitalityISO('living')).toBe(9); // case-insensitive
+    expect(parseLanguageISOStatus('Living')).toBe(9);
+    expect(parseLanguageISOStatus('living')).toBe(9); // case-insensitive
   });
 
   it('returns 3 for Constructed', () => {
-    expect(parseVitalityISO('Constructed')).toBe(3);
+    expect(parseLanguageISOStatus('Constructed')).toBe(3);
   });
 
   it('returns 1 for Historical', () => {
-    expect(parseVitalityISO('Historical')).toBe(1);
-    expect(parseVitalityISO('historic')).toBe(1);
+    expect(parseLanguageISOStatus('Historical')).toBe(1);
+    expect(parseLanguageISOStatus('historic')).toBe(1);
   });
 
   it('returns 0 for Extinct', () => {
-    expect(parseVitalityISO('Extinct')).toBe(0);
+    expect(parseLanguageISOStatus('Extinct')).toBe(0);
   });
 
   it('returns undefined for empty or unknown values', () => {
-    expect(parseVitalityISO('')).toBeUndefined();
-    expect(parseVitalityISO('unknown')).toBeUndefined();
+    expect(parseLanguageISOStatus('')).toBeUndefined();
+    expect(parseLanguageISOStatus('unknown')).toBeUndefined();
   });
 });
 
@@ -94,7 +98,7 @@ describe('computeVitalityMetascore', () => {
 
   it('falls back to ISO when no Ethnologue data exists', () => {
     const lang = getBaseLanguageData('en', 'English');
-    lang.vitalityISO = VitalityISO.Living; // 9
+    lang.ISO.status = LanguageISOStatus.Living; // 9
     const result = getVitalityMetascore(lang);
     expect(result).toBe(9);
   });

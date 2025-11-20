@@ -52,7 +52,7 @@ function updateParentsAndDescendents(
   languageSource: LanguageSource,
 ): void {
   languages.forEach((lang) => {
-    const specific = lang.sourceSpecific[languageSource];
+    const specific = lang[languageSource];
     lang.populationOfDescendents = specific.populationOfDescendents ?? undefined;
     lang.populationEstimate =
       Math.max(
@@ -72,7 +72,7 @@ function updateObjectNamesAndCodes(
 ): void {
   // Update language codes and other values used for filtering
   languages.forEach((lang) => {
-    const specific = lang.sourceSpecific[languageSource];
+    const specific = lang[languageSource];
     lang.codeDisplay = specific.code ?? lang.ID;
     lang.nameDisplay = specific.name ?? lang.nameCanonical;
     lang.scope = specific.scope ?? lang.scope;

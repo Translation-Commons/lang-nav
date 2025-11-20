@@ -103,11 +103,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
-  const {
-    childLanguages,
-    sourceSpecific: { ISO, Glottolog },
-    variantTags,
-  } = lang;
+  const { childLanguages, ISO, Glottolog, variantTags } = lang;
 
   return (
     <DetailsSection title="Connections">

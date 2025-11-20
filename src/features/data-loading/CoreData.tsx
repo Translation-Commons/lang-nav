@@ -65,7 +65,7 @@ export type CoreData = CoreDataArrays & {
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
-  All: {},
+  Combined: {},
   ISO: {},
   BCP: {},
   Glottolog: {},
@@ -138,20 +138,20 @@ export function useCoreData(): {
 
     connectLanguagesToParent(languagesBySource);
     connectTerritoriesToParent(territories);
-    connectWritingSystems(languagesBySource.All, territories, writingSystems);
-    connectLocales(languagesBySource.All, territories, writingSystems, locales);
+    connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
+    connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     computeOtherPopulationStatistics(languagesBySource, writingSystems);
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
-    setAllLanguoids(Object.values(languagesBySource.All));
+    setAllLanguoids(Object.values(languagesBySource.Combined));
     setObjects({
       // All combined into one big object map for easy lookup but the ID formats are unique so its OK
       ...languagesBySource.Glottolog, // aaaa0000
       ...languagesBySource.ISO, // aaa
       ...languagesBySource.BCP, // aa | aaa
-      ...languagesBySource.All, // A few languages like `mol` aren't in those sets but should still be indexed
+      ...languagesBySource.Combined, // A few languages like `mol` aren't in those sets but should still be indexed
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa

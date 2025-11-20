@@ -7,8 +7,7 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { nameDisplay, nameEndonym, sourceSpecific } = lang;
-  const { Glottolog, ISO, CLDR } = sourceSpecific;
+  const { nameDisplay, nameEndonym, Glottolog, ISO, CLDR } = lang;
 
   // nameDisplay and nameEndonym should already be shown in the title for this
   const otherNames = lang.names.filter(

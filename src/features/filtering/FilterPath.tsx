@@ -10,7 +10,7 @@ import usePageParams from '@features/page-params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
-  getVitalityISOLabel,
+  getLanguageISOStatusLabel,
   getVitalityEthnologueFineLabel,
   getVitalityEthnologueCoarseLabel,
 } from '@entities/language/vitality/VitalityStrings';
@@ -26,30 +26,30 @@ import Deemphasized from '@shared/ui/Deemphasized';
  */
 const FilterPath: React.FC = () => {
   const {
+    isoStatus,
+    languageFilter,
     languageScopes,
     searchBy,
     searchString,
     territoryFilter,
     territoryScopes,
-    writingSystemFilter,
-    languageFilter,
-    vitalityISO,
-    vitalityEth2013,
-    vitalityEth2025,
     updatePageParams,
     view,
+    vitalityEth2013,
+    vitalityEth2025,
+    writingSystemFilter,
   } = usePageParams();
   const defaultParams = getDefaultParams();
 
   const filters = [
     // Vitality ISO Filter
-    vitalityISO.length > 0 && (
+    isoStatus.length > 0 && (
       <>
-        ISO Vitality: {vitalityISO.map(getVitalityISOLabel).join(', ')}
+        ISO Status: {isoStatus.map(getLanguageISOStatusLabel).join(', ')}
         <HoverableButton
           buttonType="reset"
           hoverContent="Clear the vitality filter based on ISO"
-          onClick={() => updatePageParams({ vitalityISO: [] })}
+          onClick={() => updatePageParams({ isoStatus: [] })}
           style={{ padding: '0.25em' }}
         >
           <XIcon size="1em" display="block" />

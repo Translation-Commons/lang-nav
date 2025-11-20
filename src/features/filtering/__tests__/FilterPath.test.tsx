@@ -6,7 +6,7 @@ import { View, SearchableField, PageParamsOptional } from '@features/page-params
 import usePageParams from '@features/page-params/usePageParams';
 
 import {
-  VitalityISO,
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
@@ -61,10 +61,10 @@ describe('FilterPath', () => {
     expect(screen.getByText('No filters applied')).toBeInTheDocument();
   });
 
-  it('displays ISO vitality filter when selected', () => {
-    setupMockParams({ vitalityISO: [VitalityISO.Living] });
+  it('displays ISO status filter when selected', () => {
+    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
     render(<FilterPath />);
-    expect(screen.getByText(/ISO Vitality:/)).toBeInTheDocument();
+    expect(screen.getByText(/ISO Status:/)).toBeInTheDocument();
     expect(screen.getByText(/Living/)).toBeInTheDocument();
   });
 
@@ -83,10 +83,10 @@ describe('FilterPath', () => {
   });
 
   it('clears ISO vitality filter when X button is clicked', () => {
-    setupMockParams({ vitalityISO: [VitalityISO.Living] });
+    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
     render(<FilterPath />);
     clickClearButton();
-    expect(updatePageParams).toHaveBeenCalledWith({ vitalityISO: [] });
+    expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
   });
 
   it('clears Ethnologue 2013 filter when X button is clicked', () => {
@@ -105,12 +105,12 @@ describe('FilterPath', () => {
 
   it('displays multiple vitality filters correctly', () => {
     setupMockParams({
-      vitalityISO: [VitalityISO.Living],
+      isoStatus: [LanguageISOStatus.Living],
       vitalityEth2013: [VitalityEthnologueFine.National],
       vitalityEth2025: [VitalityEthnologueCoarse.Stable],
     });
     render(<FilterPath />);
-    expect(screen.getByText(/ISO Vitality:/)).toBeInTheDocument();
+    expect(screen.getByText(/ISO Status:/)).toBeInTheDocument();
     expect(screen.getByText(/Living/)).toBeInTheDocument();
     expect(screen.getByText(/Ethnologue 2013:/)).toBeInTheDocument();
     expect(screen.getByText(/National/)).toBeInTheDocument();
@@ -119,13 +119,13 @@ describe('FilterPath', () => {
   });
 
   it('displays multiple values within same vitality type', () => {
-    setupMockParams({ vitalityISO: [VitalityISO.Living, VitalityISO.Constructed] });
+    setupMockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
     render(<FilterPath />);
     expect(screen.getByText(/Living, Constructed/)).toBeInTheDocument();
   });
 
   it('does not display vitality filters in details view', () => {
-    setupMockParams({ view: View.Details, vitalityISO: [VitalityISO.Living] });
+    setupMockParams({ view: View.Details, isoStatus: [LanguageISOStatus.Living] });
     render(<FilterPath />);
     expect(screen.queryByText(/ISO Vitality:/)).not.toBeInTheDocument();
   });

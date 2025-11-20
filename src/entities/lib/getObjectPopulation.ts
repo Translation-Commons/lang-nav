@@ -55,7 +55,7 @@ export function getObjectPopulationOfDescendents(
   switch (object.type) {
     case ObjectType.Language:
       return languageSource
-        ? object.sourceSpecific[languageSource].populationOfDescendents
+        ? object[languageSource].populationOfDescendents
         : object.populationOfDescendents;
     case ObjectType.WritingSystem:
       return object.populationOfDescendents;

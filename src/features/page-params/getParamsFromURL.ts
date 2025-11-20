@@ -5,7 +5,7 @@ import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes'
 import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  VitalityISO,
+  LanguageISOStatus,
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -58,8 +58,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         if (value === '[]') params[key] = [];
         else params[key] = value.split(',').filter(Boolean) as TerritoryScope[];
         break;
-      case PageParamKey.vitalityISO:
-        params.vitalityISO = parseNumericEnumArray(value, VitalityISO);
+      case PageParamKey.isoStatus:
+        params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);
         break;
       case PageParamKey.vitalityEth2013:
         params.vitalityEth2013 = parseNumericEnumArray(value, VitalityEthnologueFine);

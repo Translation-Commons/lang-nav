@@ -25,14 +25,14 @@ import {
 import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  VitalityISO,
+  LanguageISOStatus,
 } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
 
 export enum LanguageSource {
-  All = 'All', // All combined, preferring ISO codes, otherwise Glottocodes
+  Combined = 'Combined', // All combined, with preferred values
   ISO = 'ISO', // ISO 639-3, 639-5
   BCP = 'BCP', // ISO but preferring 639-1 codes
   UNESCO = 'UNESCO', //  limiting to languages in the UNESCO World Atlas of Languages
@@ -89,7 +89,6 @@ export interface LanguageData extends ObjectBase {
   nameSubtitle?: string;
   nameEndonym?: string;
 
-  vitalityISO?: VitalityISO;
   vitalityEth2013?: VitalityEthnologueFine;
   vitalityEth2025?: VitalityEthnologueCoarse;
   digitalSupport?: string;
@@ -104,13 +103,6 @@ export interface LanguageData extends ObjectBase {
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
-  codeISO6391?: LanguageCode;
-  retirementReason?: RetirementReason;
-
-  sourceSpecific: Record<LanguageSource, LanguageDataInSource>;
-  cldrCoverage?: CLDRCoverageData;
-  variantTags?: VariantTagData[]; // links to IANA variant tags
-  cldrDataProvider?: LanguageData | LocaleData;
 
   warnings: Partial<Record<LanguageField, string>>;
   wikipedia?: WikipediaData;
@@ -125,16 +117,21 @@ export interface LanguageData extends ObjectBase {
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
-}
+  variantTags?: VariantTagData[]; // links to IANA variant tags
 
-export function getEmptyLanguageSourceSpecificData(): Record<LanguageSource, LanguageDataInSource> {
-  return {
-    All: { childLanguages: [] },
-    ISO: { childLanguages: [] },
-    BCP: { childLanguages: [] },
-    UNESCO: { childLanguages: [] },
-    Glottolog: { childLanguages: [] },
-    CLDR: { childLanguages: [] },
+  // Fields that change based on the language source
+  Combined: LanguageDataInSource;
+  ISO: LanguageDataInSource & {
+    code6391?: string;
+    status?: LanguageISOStatus;
+    retirementReason?: RetirementReason;
+  };
+  BCP: LanguageDataInSource;
+  UNESCO: LanguageDataInSource;
+  Glottolog: LanguageDataInSource;
+  CLDR: LanguageDataInSource & {
+    coverage?: CLDRCoverageData;
+    dataProvider?: LanguageData | LocaleData;
   };
 }
 
@@ -147,12 +144,19 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     nameCanonical: name,
     nameDisplay: name,
     names: [name],
-    sourceSpecific: getEmptyLanguageSourceSpecificData(),
     variantTags: [],
     locales: [],
     writingSystems: {},
     childLanguages: [],
     warnings: {},
+
+    // Source-specific data
+    Combined: {},
+    ISO: {},
+    BCP: {},
+    UNESCO: {},
+    Glottolog: {},
+    CLDR: {},
   };
 }
 
@@ -164,6 +168,6 @@ type LanguageDataInSource = {
   populationOfDescendents?: number;
   parentLanguageCode?: LanguageCode;
   parentLanguage?: LanguageData;
-  childLanguages: LanguageData[];
+  childLanguages?: LanguageData[];
   notes?: React.ReactNode;
 };

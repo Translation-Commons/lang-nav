@@ -1,5 +1,4 @@
 import {
-  getEmptyLanguageSourceSpecificData,
   getBaseLanguageData,
   Glottocode,
   LanguageCode,
@@ -85,7 +84,7 @@ export function addGlottologLanguages(
     const glottolang = languagesBySource.Glottolog[glottoCode];
     const isoLang = languagesBySource.ISO[isoCode];
     if (glottolang == null && isoLang != null) {
-      isoLang.sourceSpecific.Glottolog.code = glottoCode;
+      isoLang.Glottolog.code = glottoCode;
       languagesBySource.Glottolog[glottoCode] = isoLang;
     }
   });
@@ -100,19 +99,16 @@ export function addGlottologLanguages(
     if (lang == null) {
       // Create new LanguageData
       const sourceSpecific = {
-        ...getEmptyLanguageSourceSpecificData(),
-        All: {
+        Combined: {
           code: glottoCode,
           scope,
           parentLanguageCode: parentLanguageCode ?? parentGlottocode,
-          childLanguages: [],
         },
         Glottolog: {
           code: glottoCode,
           name,
           scope,
           parentLanguageCode: parentGlottocode,
-          childLanguages: [],
         },
       };
       const newLang: LanguageData = {
@@ -120,21 +116,21 @@ export function addGlottologLanguages(
         scope,
         viabilityConfidence: 'No',
         viabilityExplanation: 'Glottolog entry not found in ISO',
-        sourceSpecific,
+        ...sourceSpecific,
         latitude,
         longitude,
       };
-      languagesBySource.All[glottoCode] = newLang;
+      languagesBySource.Combined[glottoCode] = newLang;
       languagesBySource.Glottolog[glottoCode] = newLang;
       setLanguageNames(newLang);
     } else {
       // Fill in missing data
       if (parentGlottocode != null) {
-        lang.sourceSpecific.All.parentLanguageCode = parentLanguageCode ?? parentGlottocode; // Prefer original parentage
-        lang.sourceSpecific.Glottolog.parentLanguageCode = parentGlottocode;
+        lang.Combined.parentLanguageCode = parentLanguageCode ?? parentGlottocode; // Prefer original parentage
+        lang.Glottolog.parentLanguageCode = parentGlottocode;
       }
-      lang.sourceSpecific.Glottolog.scope = scope;
-      lang.sourceSpecific.Glottolog.name = name;
+      lang.Glottolog.scope = scope;
+      lang.Glottolog.name = name;
       lang.latitude = latitude;
       lang.longitude = longitude;
       setLanguageNames(lang);

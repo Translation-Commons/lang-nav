@@ -21,7 +21,6 @@ import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamType
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {
   getBaseLanguageData,
-  getEmptyLanguageSourceSpecificData,
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
@@ -53,10 +52,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     populationEstimate: 2500,
     populationCited: 2500,
     primaryScriptCode: 'Teng',
-    sourceSpecific: {
-      ...getEmptyLanguageSourceSpecificData(),
-      All: { childLanguages: [], parentLanguageCode: 'sjn' },
-    },
+    Combined: { parentLanguageCode: 'sjn' },
   };
 
   // Territories
@@ -292,7 +288,7 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
   const objects = inputObjects ?? getDisconnectedMockedObjects();
   const objectsArray = Object.values(objects);
   const languagesBySource: Record<LanguageSource, Record<string, LanguageData>> = {
-    All: {
+    Combined: {
       sjn: objects.sjn as LanguageData,
       dori0123: objects.dori0123 as LanguageData,
     },
@@ -338,7 +334,7 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
     objects,
     censuses,
     languagesBySource,
-    languages: languagesBySource.All,
+    languages: languagesBySource.Combined,
     locales,
     territories,
     writingSystems,
@@ -361,8 +357,8 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
 
   connectLanguagesToParent(languagesBySource);
   connectTerritoriesToParent(territories);
-  connectWritingSystems(languagesBySource.All, territories, writingSystems);
-  connectLocales(languagesBySource.All, territories, writingSystems, locales);
+  connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
+  connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
   connectVariantTags(variantTags, languagesBySource.BCP, locales);
   createRegionalLocales(territories, locales);
 
@@ -371,7 +367,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
 
   // Usually does in the supplemental data load step, we will add censuses connections here
   addCensusData(
-    (id) => languagesBySource.All[id],
+    (id) => languagesBySource.Combined[id],
     (id) => locales[id],
     (id) => territories[id],
     {},
@@ -403,7 +399,7 @@ export function getFullyInstantiatedMockedObjects(
     [objects.sjn, objects.dori0123] as LanguageData[],
     Object.values(locales),
     world,
-    LanguageSource.All,
+    LanguageSource.Combined,
     LocaleSeparator.Hyphen,
   );
 
@@ -445,9 +441,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
       objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
     getCLDRLanguage: (id: string) =>
       Object.values(objects).find(
-        (obj) =>
-          obj.type === ObjectType.Language &&
-          (obj as LanguageData).sourceSpecific.CLDR?.code === id,
+        (obj) => obj.type === ObjectType.Language && (obj as LanguageData).CLDR?.code === id,
       ) as LanguageData | undefined,
     getLocale: (id: string) => (objects[id]?.type === ObjectType.Locale ? objects[id] : undefined),
     getTerritory: (id: string) =>

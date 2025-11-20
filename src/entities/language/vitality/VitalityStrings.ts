@@ -1,16 +1,20 @@
-import { VitalityEthnologueCoarse, VitalityEthnologueFine, VitalityISO } from './VitalityTypes';
+import {
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+  LanguageISOStatus,
+} from './VitalityTypes';
 
-export function getVitalityISOLabel(vitality: VitalityISO | undefined): string {
+export function getLanguageISOStatusLabel(vitality: LanguageISOStatus | undefined): string {
   switch (vitality) {
-    case VitalityISO.Living:
+    case LanguageISOStatus.Living:
       return 'Living';
-    case VitalityISO.Constructed:
+    case LanguageISOStatus.Constructed:
       return 'Constructed';
-    case VitalityISO.Historical:
+    case LanguageISOStatus.Historical:
       return 'Historical';
-    case VitalityISO.Extinct:
+    case LanguageISOStatus.Extinct:
       return 'Extinct';
-    case VitalityISO.SpecialCode:
+    case LanguageISOStatus.SpecialCode:
       return 'Special Code';
     default:
       return 'Unknown';

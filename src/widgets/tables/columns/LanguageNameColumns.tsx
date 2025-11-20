@@ -12,10 +12,10 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'ISO Name',
     render: (lang) =>
-      lang.nameDisplay !== lang.sourceSpecific.ISO.name ? (
-        lang.sourceSpecific.ISO.name
+      lang.nameDisplay !== lang.ISO.name ? (
+        lang.ISO.name
       ) : (
-        <Deemphasized>{lang.sourceSpecific.ISO.name}</Deemphasized>
+        <Deemphasized>{lang.ISO.name}</Deemphasized>
       ),
     description: (
       <>
@@ -30,10 +30,10 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'CLDR Name',
     render: (lang) =>
-      lang.nameDisplay !== lang.sourceSpecific.CLDR.name ? (
-        lang.sourceSpecific.CLDR.name
+      lang.nameDisplay !== lang.CLDR.name ? (
+        lang.CLDR.name
       ) : (
-        <Deemphasized>{lang.sourceSpecific.CLDR.name}</Deemphasized>
+        <Deemphasized>{lang.CLDR.name}</Deemphasized>
       ),
     isInitiallyVisible: false,
     columnGroup: 'Names',
@@ -41,10 +41,10 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Glottolog Name',
     render: (lang) =>
-      lang.nameDisplay !== lang.sourceSpecific.Glottolog.name ? (
-        lang.sourceSpecific.Glottolog.name
+      lang.nameDisplay !== lang.Glottolog.name ? (
+        lang.Glottolog.name
       ) : (
-        <Deemphasized>{lang.sourceSpecific.Glottolog.name}</Deemphasized>
+        <Deemphasized>{lang.Glottolog.name}</Deemphasized>
       ),
     isInitiallyVisible: false,
     columnGroup: 'Names',
@@ -52,7 +52,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Other Names',
     render: (lang) => {
-      const { Glottolog, ISO, CLDR } = lang.sourceSpecific;
+      const { Glottolog, ISO, CLDR } = lang;
       const otherNames = lang.names.filter(
         (name) =>
           ![lang.nameDisplay, lang.nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),

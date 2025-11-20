@@ -5,9 +5,9 @@ import usePageParams from '@features/page-params/usePageParams';
 
 import { LanguageScope, LanguageData } from '@entities/language/LanguageTypes';
 import {
-  VitalityISO,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
+  LanguageISOStatus,
 } from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 import { getSearchableField } from '@entities/ui/ObjectField';
@@ -103,12 +103,11 @@ function doesLocaleMatchScope(
  * and those with missing data are excluded when that filter is active.
  */
 export function buildVitalityFilterFunction(params: {
-  vitalityISO: VitalityISO[];
+  isoStatus: LanguageISOStatus[];
   vitalityEth2013: VitalityEthnologueFine[];
   vitalityEth2025: VitalityEthnologueCoarse[];
 }): FilterFunctionType {
-  const { vitalityISO, vitalityEth2013, vitalityEth2025 } = params;
-
+  const { isoStatus, vitalityEth2013, vitalityEth2025 } = params;
   const filterByVitality = (object: ObjectData | undefined): boolean => {
     // Only filter language objects
     if (object?.type === ObjectType.Locale) return filterByVitality(object.language);
@@ -117,15 +116,14 @@ export function buildVitalityFilterFunction(params: {
     const language = object as LanguageData;
 
     // No filters active = pass all
-    if (!vitalityISO.length && !vitalityEth2013.length && !vitalityEth2025.length) {
+    if (!isoStatus.length && !vitalityEth2013.length && !vitalityEth2025.length) {
       return true;
     }
 
     // For each active filter, check if language matches
     // Languages with missing data are excluded when that filter is active
     const isoMatches =
-      !vitalityISO.length ||
-      (language.vitalityISO != null && vitalityISO.includes(language.vitalityISO));
+      !isoStatus.length || (language.ISO.status != null && isoStatus.includes(language.ISO.status));
 
     const eth2013Matches =
       !vitalityEth2013.length ||
@@ -147,10 +145,11 @@ export function buildVitalityFilterFunction(params: {
  * Provides a memoized function that filters languages based on their vitality status.
  */
 export function getFilterByVitality(): FilterFunctionType {
-  const { vitalityISO, vitalityEth2013, vitalityEth2025 } = usePageParams();
+  const { isoStatus, vitalityEth2013, vitalityEth2025 } = usePageParams();
 
-  return useCallback(
-    buildVitalityFilterFunction({ vitalityISO, vitalityEth2013, vitalityEth2025 }),
-    [vitalityISO, vitalityEth2013, vitalityEth2025],
-  );
+  return useCallback(buildVitalityFilterFunction({ isoStatus, vitalityEth2013, vitalityEth2025 }), [
+    isoStatus,
+    vitalityEth2013,
+    vitalityEth2025,
+  ]);
 }

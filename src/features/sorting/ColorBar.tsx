@@ -3,14 +3,14 @@ import React, { useMemo } from 'react';
 import usePageParams from '@features/page-params/usePageParams';
 
 import {
+  getLanguageISOStatusLabel,
   getVitalityEthnologueCoarseLabel,
   getVitalityEthnologueFineLabel,
-  getVitalityISOLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  VitalityISO,
 } from '@entities/language/vitality/VitalityTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
@@ -91,13 +91,18 @@ function getTicks(
         position: getNormalizedValue(convertAlphaToNumber(letter)),
         label: letter,
       }));
-    case SortBy.VitalityISO:
+    case SortBy.ISOStatus:
       return pickDistributedTicksFromRange(
-        [VitalityISO.Extinct, VitalityISO.Historical, VitalityISO.Constructed, VitalityISO.Living],
+        [
+          LanguageISOStatus.Extinct,
+          LanguageISOStatus.Historical,
+          LanguageISOStatus.Constructed,
+          LanguageISOStatus.Living,
+        ],
         numberOfTicks,
       ).map((value) => ({
         position: getNormalizedValue(value),
-        label: getVitalityISOLabel(value),
+        label: getLanguageISOStatusLabel(value),
       }));
     case SortBy.VitalityEthnologue2013:
       return pickDistributedTicksFromRange(

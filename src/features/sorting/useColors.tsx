@@ -102,7 +102,7 @@ function getMinimumValue(colorBy: ColorBy): number {
       return -180;
     case SortBy.Latitude:
       return -90;
-    case SortBy.VitalityISO:
+    case SortBy.ISOStatus:
       return -1;
     case SortBy.Population:
     case SortBy.PopulationAttested:
@@ -136,7 +136,7 @@ function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
     case 'None':
       return 0;
     case SortBy.VitalityMetascore:
-    case SortBy.VitalityISO:
+    case SortBy.ISOStatus:
     case SortBy.VitalityEthnologue2013:
     case SortBy.VitalityEthnologue2025:
       return VitalityEthnologueCoarse.Institutional; // 9;
@@ -177,7 +177,7 @@ function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
     case SortBy.PopulationPercentInBiggestDescendentLanguage:
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
-    case SortBy.VitalityISO: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
+    case SortBy.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
       return true;
     default:
       return false;

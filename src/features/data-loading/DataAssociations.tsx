@@ -19,14 +19,16 @@ const MAX_ISO_LANG_CODE_LENGTH = 3;
 
 export function connectLanguagesToParent(languagesBySource: LanguagesBySource): void {
   // Connect general parents
-  Object.values(languagesBySource[LanguageSource.All]).forEach((lang) => {
+  Object.values(languagesBySource[LanguageSource.Combined]).forEach((lang) => {
     Object.values(LanguageSource).forEach((source) => {
-      const parentCode = lang.sourceSpecific[source].parentLanguageCode;
+      const parentCode = lang[source].parentLanguageCode;
       if (parentCode != null) {
-        const parent = languagesBySource[source][parentCode] ?? languagesBySource.All[parentCode];
+        const parent =
+          languagesBySource[source][parentCode] ?? languagesBySource.Combined[parentCode];
         if (parent != null) {
-          lang.sourceSpecific[source].parentLanguage = parent;
-          parent.sourceSpecific[source].childLanguages.push(lang);
+          lang[source].parentLanguage = parent;
+          if (parent[source].childLanguages == null) parent[source].childLanguages = [];
+          parent[source].childLanguages.push(lang);
         }
       }
     });
@@ -152,30 +154,30 @@ export function connectLocales(
  */
 export function groupLanguagesBySource(languages: LanguageDictionary): LanguagesBySource {
   return {
-    All: languages,
+    Combined: languages,
     ISO: Object.values(languages).reduce<LanguageDictionary>((isoLangs, lang) => {
-      const code = lang.sourceSpecific.ISO.code;
+      const code = lang.ISO.code;
       if (code != null && code.length <= MAX_ISO_LANG_CODE_LENGTH) isoLangs[code] = lang;
       return isoLangs;
     }, {}),
     BCP: Object.values(languages).reduce<LanguageDictionary>((bcpLangs, lang) => {
-      const code = lang.codeISO6391 ?? lang.sourceSpecific.ISO.code;
+      const code = lang.ISO.code6391 ?? lang.ISO.code;
       if (code != null && code.length <= MAX_ISO_LANG_CODE_LENGTH) bcpLangs[code] = lang;
       return bcpLangs;
     }, {}),
     UNESCO: Object.values(languages).reduce<LanguageDictionary>((unescoLangs, lang) => {
-      const code = lang.sourceSpecific.UNESCO.code;
+      const code = lang.UNESCO.code;
       if (code != null && lang.viabilityConfidence != null && lang.viabilityConfidence != 'No')
         unescoLangs[code] = lang;
       return unescoLangs;
     }, {}),
     Glottolog: Object.values(languages).reduce<LanguageDictionary>((glottoLangs, lang) => {
-      const code = lang.sourceSpecific.Glottolog.code;
+      const code = lang.Glottolog.code;
       if (code != null) glottoLangs[code] = lang;
       return glottoLangs;
     }, {}),
     CLDR: Object.values(languages).reduce<LanguageDictionary>((cldrLangs, lang) => {
-      const code = lang.codeISO6391 ?? lang.sourceSpecific.ISO.code;
+      const code = lang.ISO.code6391 ?? lang.ISO.code;
       if (
         code != null &&
         lang.scope !== LanguageScope.Family &&
@@ -203,7 +205,7 @@ export function computeOtherPopulationStatistics(
   // differently in the different language sources
   Object.values(LanguageSource).forEach((source) => {
     Object.values(languagesBySource[source])
-      .filter((lang) => lang.sourceSpecific[source].parentLanguage == null) // start at roots
+      .filter((lang) => lang[source].parentLanguage == null) // start at roots
       .forEach((lang) => computeLanguageDescendentPopulation(lang, source));
   });
 }
@@ -220,11 +222,11 @@ function computeWritingSystemDescendentPopulation(writingSystem: WritingSystemDa
 }
 
 function computeLanguageDescendentPopulation(lang: LanguageData, source: LanguageSource): number {
-  const { childLanguages } = lang.sourceSpecific[source];
+  const childLanguages = lang[source].childLanguages ?? [];
   const descendentPopulation = childLanguages.reduce(
     (total, childLang) => total + computeLanguageDescendentPopulation(childLang, source),
     1,
   );
-  lang.sourceSpecific[source].populationOfDescendents = descendentPopulation;
+  lang[source].populationOfDescendents = descendentPopulation;
   return Math.max(lang.populationCited || 0, descendentPopulation) + 1; // Tiebreaker = number of child nodes
 }
