@@ -52,7 +52,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
 
   return (
     <div>
-      <HighLimitWarning />
+      <HighLimitWarning nShown={nShown} />
       <div
         style={{
           display: 'flex',
@@ -99,11 +99,11 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   );
 };
 
-const HighLimitWarning: React.FC = () => {
+const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
   const { limit, view, updatePageParams } = usePageParams();
   const threshold = getLimitThreshold(view);
 
-  if (limit <= threshold) return null;
+  if (nShown <= threshold) return null;
 
   return (
     <div>

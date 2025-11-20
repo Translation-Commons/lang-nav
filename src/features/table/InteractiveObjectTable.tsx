@@ -98,7 +98,7 @@ function InteractiveObjectTable<T extends ObjectData>({
       )}
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
-      {currentObjects.length > 1 && (
+      {currentObjects.length > 10 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
           <VisibleItemsMeter
             objects={objects}

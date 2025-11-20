@@ -2,7 +2,11 @@ import { addCensusData, loadCensusData } from './CensusData';
 import { DataContextType } from './context/useDataContext';
 import { computeLocalePopulationFromCensuses } from './population/computeLocalePopulationFromCensuses';
 import { computeLocaleWritingPopulation } from './population/computeLocaleWritingPopulation';
-import { computeContainedTerritoryStats, loadTerritoryGDPLiteracy } from './TerritoryData';
+import {
+  computeContainedTerritoryStats,
+  loadCountryCoordinates,
+  loadTerritoryGDPLiteracy,
+} from './TerritoryData';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
 import { loadAndApplyWikipediaData } from './WikipediaData';
 
@@ -18,6 +22,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   await Promise.all([
     loadCLDRCoverage(dataContext.getCLDRLanguage),
     loadTerritoryGDPLiteracy(dataContext.getTerritory),
+    loadCountryCoordinates(dataContext.getTerritory),
     loadAndApplyWikipediaData(dataContext),
   ]);
 
