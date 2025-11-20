@@ -1,0 +1,2 @@
+`map_world.svg` comes from <https://upload.wikimedia.org/wikipedia/commons/0/0d/WorldMap.svg>
+`map_countries.svg` comes from <https://upload.wikimedia.org/wikipedia/commons/5/5e/BlankMap-World-Sovereign_Nations.svg>

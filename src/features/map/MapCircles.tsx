@@ -1,0 +1,109 @@
+import React, { useCallback, useMemo, useRef, useState } from 'react';
+
+import useHoverCard from '@features/hovercard/useHoverCard';
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
+import usePagination from '@features/pagination/usePagination';
+import useColors from '@features/sorting/useColors';
+
+import { ObjectData } from '@entities/types/DataTypes';
+import ObjectCard from '@entities/ui/ObjectCard';
+
+import { getRobinsonCoordinates } from './getRobinsonCoordinates';
+
+type Props = {
+  objects: ObjectData[];
+  maxWidth?: number; // in pixels
+};
+
+const MapCircles: React.FC<Props> = ({ objects }) => {
+  const { colorBy } = usePageParams();
+  const { getCurrentObjects } = usePagination<ObjectData>();
+  const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
+  const svgRef = useRef<SVGSVGElement>(null);
+  const coloringFunctions = useColors({ objects });
+
+  const renderableObjects = useMemo(
+    // Reverse so the "first" objects are drawn on top.
+    () => getCurrentObjects(objects).reverse(),
+    [objects, getCurrentObjects],
+  );
+
+  const buildOnMouseEnter = useCallback(
+    (obj: ObjectData) => (e: React.MouseEvent) => {
+      showHoverCard(<ObjectCard object={obj} />, e.clientX, e.clientY);
+    },
+    [showHoverCard],
+  );
+
+  return (
+    <svg
+      ref={svgRef}
+      viewBox={`-180 -90 360 180`}
+      preserveAspectRatio="xMidYMid meet"
+      style={{
+        border: '1px solid #ccc',
+        display: 'block',
+        top: 0,
+        left: 0,
+        position: 'absolute',
+        width: '100%',
+        aspectRatio: 1.979, // Aspect ratio of the map_world.svg
+      }}
+    >
+      {renderableObjects.map((obj, idx) => {
+        return (
+          <HoverableCircle
+            color={
+              colorBy === 'None' ? undefined : (coloringFunctions.getColor(obj) ?? 'transparent')
+            }
+            key={idx}
+            object={obj}
+            onMouseEnter={buildOnMouseEnter(obj)}
+            onMouseLeave={onMouseLeaveTriggeringElement}
+          />
+        );
+      })}
+    </svg>
+  );
+};
+
+const HoverableCircle: React.FC<{
+  color?: string;
+  object: ObjectData;
+  onMouseEnter: (e: React.MouseEvent) => void;
+  onMouseLeave: () => void;
+}> = ({ object, color, onMouseEnter, onMouseLeave }) => {
+  if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
+  if (object.latitude == null || object.longitude == null) {
+    return null;
+  }
+
+  const { x, y } = getRobinsonCoordinates(
+    object.latitude,
+    object.longitude < -170 ? object.longitude + 360 : object.longitude,
+  );
+  const [isActive, setIsActive] = useState(false);
+  return (
+    <circle
+      cx={x * 180 - 10} // The map is 10 degrees rotated to preserve land borders
+      cy={-y * 90}
+      r={2}
+      fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
+      stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
+      style={{ transition: 'fill 0.25s, stroke 0.25s' }}
+      className="object-map-circle"
+      strokeWidth={1}
+      onMouseEnter={(e: React.MouseEvent) => {
+        onMouseEnter(e);
+        setIsActive(true);
+      }}
+      onMouseLeave={() => {
+        onMouseLeave();
+        setIsActive(false);
+      }}
+    />
+  );
+};
+
+export default MapCircles;
