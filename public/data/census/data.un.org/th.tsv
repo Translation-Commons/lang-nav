@@ -1,0 +1,37 @@
+#codeDisplay		th2000	th2010
+#nameDisplay		Thailand 2000	Thailand 2010
+#isoRegionCode	TH		
+#yearCollected		2000	2010
+#datePublished		2009	2013
+#eligiblePopulation		56,281,538	65,981,659
+#notes	Census - de jure - complete tabulation		
+#age		5+	
+#responsesPerIndividual	1		
+#sampleRate			
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
+#collectorType	Government		
+Language Code	Language Name	th2000	th2010
+mul	Total	56,281,538	65,981,659
+tha	Thai	52,325,037	59,866,190
+mul	Other	33,481	3,518,502
+kxm	Khamae	1,291,024	
+msa/zlm	Malay	1,202,911	2,913
+mya	Burmese	67,061	827,713
+mis	Ti	44,004	787,696
+sout1554	Karen	317,968	441,114
+mis	Unknown	325,134	
+eng	English	48,202	323,779
+zho	Chinese	231,350	111,866
+meo	Meo	112,686	
+jpn	Japanese	38,565	70,667
+lhu	Lahu	70,058	
+ahk	Akha	54,241	
+lao	Lau	31,583	
+vie	Vietnamese	25,037	8,281
+lis	Lisu	24,476	
+hin	Hindi		22,938
+yao	Yao	21,238	
+kjg	Khamu	6,246	
+mul	Indian	5,598	
+zho/cmn/xina1239	Haw yannanese	3,247	
+prt	Htin	2,317	

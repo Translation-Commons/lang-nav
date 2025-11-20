@@ -1,0 +1,96 @@
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import TableColumn from '@features/table/TableColumn';
+import TableValueType from '@features/table/TableValueType';
+
+import { LanguageData } from '@entities/language/LanguageTypes';
+import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
+import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
+import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
+import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
+import {
+  WikipediaActiveUsers,
+  WikipediaArticles,
+  WikipediaLink,
+  WikipediaStatusDisplay,
+} from '@entities/ui/ObjectWikipediaInfo';
+
+import LinkButton from '@shared/ui/LinkButton';
+
+const columns: TableColumn<LanguageData>[] = [
+  {
+    key: 'Digital Support (Ethnologue)',
+    description: (
+      <>
+        See more about the Digital Language Divide project on
+        <LinkButton href="https://www.ethnologue.com/insights/digital-language-divide/">
+          Ethnologue
+        </LinkButton>
+      </>
+    ),
+    render: (lang) => lang.digitalSupport,
+  },
+  {
+    key: 'CLDR Coverage Level',
+    description: (
+      <>
+        CLDR data is collected in tiers, later tiers include data from the prior tier.{' '}
+        <CoverageLevelsExplanation />
+      </>
+    ),
+    render: (lang) => (
+      <>
+        <ObjectCLDRCoverageLevel object={lang} />
+        <CLDRWarningNotes object={lang} />
+      </>
+    ),
+    exportValue: (lang) => lang.cldrCoverage?.actualCoverageLevel,
+  },
+  {
+    key: 'CLDR Locales',
+    description: (
+      <>
+        The number of locales in CLDR, variations of languages for different regions and uses. For
+        example Italian <code>it</code> has 4 variations: <code>it_IT</code>, <code>it_CH</code>,{' '}
+        <code>it_SM</code>, and <code>it_VA</code>.
+      </>
+    ),
+    render: (lang) => <ObjectCLDRLocaleCount object={lang} />,
+    valueType: TableValueType.Numeric,
+    exportValue: (lang) => lang.cldrCoverage?.countOfCLDRLocales,
+  },
+  {
+    key: 'ICU Support',
+    render: (lang) => <ICUSupportStatus object={lang} />,
+    exportValue: (lang) => {
+      if (lang.cldrCoverage?.inICU !== undefined) return lang.cldrCoverage.inICU;
+      if (lang.cldrDataProvider?.type === ObjectType.Language)
+        return lang.cldrDataProvider.cldrCoverage?.inICU;
+      return undefined;
+    },
+  },
+  {
+    key: 'Wikipedia Status',
+    render: (object) => (
+      <>
+        <WikipediaStatusDisplay object={object} />
+        <WikipediaLink object={object} />
+      </>
+    ),
+  },
+  {
+    key: 'Wikipedia Articles',
+    render: (object) => <WikipediaArticles object={object} />,
+  },
+  {
+    key: 'Wikipedia Active Users',
+    render: (object) => <WikipediaActiveUsers object={object} />,
+  },
+];
+
+export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = columns.map(
+  (col: TableColumn<LanguageData>) => ({
+    ...col,
+    isInitiallyVisible: false,
+    columnGroup: 'Digital Support',
+  }),
+);

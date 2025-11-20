@@ -1,0 +1,27 @@
+thead {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-background);
+}
+
+.numeric {
+  /* align right for both LTR and RTL views */
+  text-align: right;
+
+  /* equalize the character width */
+  font-family: Avenir, 'Courier New', monospace;
+}
+
+summary {
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.2s ease-in-out;
+}
+
+summary:hover {
+  background-color: var(--color-button-hover);
+}
+
+summary:focus {
+  outline: none;
+}

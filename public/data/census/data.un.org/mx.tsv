@@ -1,0 +1,101 @@
+#codeDisplay		mx2005	mx2010	mx2020
+#nameDisplay		Mexico 2005	Mexico 2010	Mexico 2020
+#isoRegionCode	MX			
+#yearCollected		2005	2010	2020
+#datePublished		2008	2011	2021
+#eligiblePopulation		93,077,145	106,178,671	119,976,584
+#notes		Census - de jure - complete tabulation	Census - de facto - complete tabulation	Census - de jure - complete tabulation
+#modality			Spoken	
+#age		5+	3+	3+
+#domain				
+#acquisitionOrder	Any			
+#responsesPerIndividual				
+#languagesIncluded			Indigenous	
+#sampleRate				
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#collectorType	Government			
+Language Code	Language Name	mx2005	mx2010	mx2020
+mul	Total	93,077,145	106,178,671	119,976,584
+spa	Spanish	83,704,299		112,497,368
+mul	Native	6,011,202		7,364,645
+mul	Spanish and native language			6,423,548
+mis	Not stated	3,361,644		114,571
+nah	Náhuatl	1,376,026	1,586,884	1,651,958
+myn	Maya	759,000	796,405	774,755
+tzh	Tzeltal	371,730	474,298	589,144
+tzo	Tzotzil	329,937	429,168	550,274
+mixt1427	Mixtecas languages	423,216	494,454	526,593
+zap	Zapotecas languages	410,901	460,683	490,845
+oto	Otomí	239,850	288,052	298,861
+toto1252	Totonaca	230,930	250,252	256,344
+ctu	Chol	185,299	222,051	254,715
+maza1295	Mazateco	206,559	230,124	237,212
+mul	Other native languages non specified	190,883	150,454	22,777
+hus	Huasteco	149,532	166,952	168,729
+maza1293	Mazahua	111,840	136,717	153,797
+nort3350	Tlapaneco	98,573	127,244	147,432
+mul	Chinantecas languages	125,706	137,413	144,394
+tsz	Purépecha	105,556	128,344	142,459
+mixe1286	Mixe	115,824	136,736	139,760
+tara1321	Tarahumara	75,371	89,503	91,554
+zoqu1261	Zoque	54,004	65,372	74,018
+toj	Tojolabal	43,169	54,201	66,953
+chf	Chontal de Tabasco	32,470	37,091	60,563
+hch	Huichol	35,724	47,625	60,263
+amuz1254	Amuzgo	1,169	2,030	59,884
+chat1268	Chatino	42,791	47,327	52,076
+amu	Amuzgo de Guerrero	37,779	45,889	
+tla	Tepehuano de Durango	22,549	26,804	44,386
+poi	Popoluca	35,127	42,473	8,427
+mfy	Mayo	32,702	39,759	38,507
+poi	Popoluca de la Sierra	1,241	21	36,113
+cora1260	Cora	17,086	21,445	33,226
+triq1251	Triqui	23,846	27,137	29,545
+yaq	Yaqui	14,162	17,592	19,376
+huav1256	Huave	15,993	18,264	18,827
+popo1294	Popoloca	16,163	18,485	17,274
+cuic1234	Cuicateco	12,610	13,037	12,961
+pame1260	Pame	9,720	11,627	11,924
+mam	Mame	7,492	10,467	11,369
+kanj1263	Kanjobal	8,526	9,625	10,851
+ntp	Tepehuano de Chihuahua	6,802	8,399	9,855
+tepe1243	Tepehua	8,321	8,968	8,884
+chd	Chontal de Oaxaca	3,413	4,412	5,613
+azg	Amuzgo de Oaxaca	4,813	5,203	
+pos	Sayulteco			4,765
+cac	Chuj	2,180	2,632	3,516
+tepe1281	Tepehuano	2,330	3,040	317
+knj	Akateko			2,894
+mul	Other native languages of America	174	837	2,453
+pei	Chichimeca jonaz	1,625	2,295	2,364
+mat	Ocuilteco	842	745	2,238
+var	Guarijío	1,648	2,201	2,139
+agu	Aguacateco	21	1,997	20
+east2878	Chontal	695	1,104	1,704
+kek	Kekchí	1,070	1,279	1,599
+mza	Tacuate	1	1,584	
+matl1258	Matlatzinca	1,134	1,106	1,245
+pia	Pima	738	867	1,037
+mul	Other native languages of Mexico	914	147	
+coz	Chocho	616	814	847
+sei	Seri	595	795	723
+lac	Lacandón	44	20	771
+jac	Jacalteco	400	602	481
+quc	Quiché	251	391	589
+coj	Cochimí	34	88	495
+kic	Kikapú	157	446	63
+poq	Popoluca de Texistepec	1	1	368
+dih	Kumiai	264	293	
+ppi	Paipai	200	200	231
+ixc	Ixcateco	213	190	195
+ood	Pápago	116	161	203
+coc	Cucapá	116	145	176
+cak	Cakchiquel	154	143	169
+mhc/moto1243	Motocintleco	110	106	126
+ixl	Ixil	77	83	117
+ttc	Teko			78
+plo	Popoluca de Oluta	37	1	77
+klb	Kiliwa	36	46	76
+zoqu1261	Ayapaneco	1	4	71
+zap/solt1234	Solteco	1	10	
+zap/papa1270	Papabuco	5	2	

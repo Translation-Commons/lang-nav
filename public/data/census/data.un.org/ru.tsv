@@ -34,7 +34,7 @@ hye	Armenian	508,127	397,440	660,935
 fra	French	235,199	47,348	616,394
 kbd	Kabardian	4,857	4,311	515,672
 dar	Dargan			485,705
-aze	Azerbaijani	291,484	227,307	473,044
+aze/azj	Azerbaijani	291,484	227,307	473,044
 oss	Ossetian	344,907	332,068	451,431
 kbd	Kabardino-Circassian	450,276	435,901	
 sah	Yakut	377,722	363,096	450,140
@@ -66,12 +66,11 @@ lbe	Lak	87,957	84,301	145,895
 tgk	Tadzhik			141,938
 rom	Romany			128,197
 tab	Tabasaran	87,214	82,069	126,136
-sgn	Sign Languages			120,528
-rsl	#Sign Languages			120,528
+sgn/rsl	#Sign Languages			120,528
 ady	Adyge			119,463
 rom	Chamalin / Gypsy	108,425	95,412	
 xal	Kalmyk	107,742	100,826	
-ron	Moldavian	46,500	21,742	96,061
+ron/mol	Moldavian	46,500	21,742	96,061
 nog	Nogai	85,640	78,173	87,119
 kir	Kyrgyz	85,655	65,406	
 ita	Italian	37,135	10,893	83,202
@@ -90,10 +89,10 @@ kjh	Khakass			42,604
 ell	Greek	17,655	10,918	42,518
 kor	Korean	26,662	12,673	42,384
 lat	Latin	17,888	5,424	40,200
-myv	Erzya-Mordvin	40,045	36,776	
+mord1256/myv	Erzya-Mordvin	40,045	36,776	
 fin	Finnish	14,075	4,675	38,873
 abq	Abaza	30,194	28,576	37,831
-myv	Erzya-Mordvinian			36,726
+mord1256/myv	Erzya-Mordvinian			36,726
 kur	Kurd			34,699
 jpn	Japanese	16,543	4,304	33,855
 kur	Kurdish	31,703	27,157	
@@ -110,7 +109,7 @@ lav	Latvian	8,565	2,648	22,079
 yrk	Nenet			21,926
 ron	Romanian	7,901	2,587	21,201
 mul	Other			20,580
-mdf	Moksha-Mordvin	19,911	18,047	
+mord1256/mdf	Moksha-Mordvin	19,911	18,047	
 mul	Dagestani	19,235	14,649	
 heb	Hebrew	10,569	4,608	18,822
 ani	Andi	18,133	17,286	5,800
@@ -167,7 +166,7 @@ khv	Khvarshi	2,216	2,195
 vep	Veps	2,173	1,444	
 tin	Tindal			2,152
 trk	Turkic	1,513	759	2,025
-mdf	Moksa-mordvi			2,025
+mord1256/mdf	Moksa-mordvi			2,025
 slv	Slovenian	443	216	2,023
 aii	Assyrian	1,922	1,397	
 khv	Khvarshin			1,737
@@ -180,7 +179,7 @@ chu	Old Church Slavonic	1,352	659
 mns	Mansi	1,346	1,008	938
 udi	Udin	1,320	1,002	
 tele1257	Teleut	1,246	1,113	975
-msa	Malay	101	46	1,221
+msa/zlm	Malay	101	46	1,221
 sqi	Albanian	380	197	1,209
 alab1256	Alabugat-Tatar	2	1	1,144
 dlg	Dolgang			1,054
@@ -200,7 +199,7 @@ tha	Thai	594	230	588
 itl	Itelmen	532	395	82
 tuba1280	Tubalar	527	344	229
 urd	Urdu	321	156	522
-ind	Indonesian	321	124	515
+msa/ind	Indonesian	321	124	515
 bod	Tibetan	232	91	513
 ale	Eskimo			508
 mkd	Macedonian	260	112	507
@@ -271,7 +270,7 @@ che	Kistin	50	45
 fiu	Finno-Ugric	48	28	
 oaa	Ujlta			47
 kdr	Karaim	45	30	
-pan	Punjabi	45	23	
+lah/pan	Punjabi	45	23	
 ale	Aleutian			45
 tat	Teptyar	44	39	
 clw	Chulym-Turkic			44
@@ -440,7 +439,7 @@ luo	Doluo	1	1
 mas	Masai	1	0	
 mul	Gambian	1	1	
 mul	South African	1	0	
-art-slovio	Slovio	1	0	
+art/art-slovio	Slovio	1	0	
 mul	Himalayan	1	1	
 ogo	Khana	1	0	
 quc	Kiche	1	0	

@@ -1,0 +1,92 @@
+import { SlashIcon } from 'lucide-react';
+import React, { useCallback } from 'react';
+
+import Selector from '@widgets/controls/components/Selector';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@widgets/controls/components/SelectorDisplayContext';
+
+import { ObjectType, View } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
+
+import ObjectTypeDescription from '@strings/ObjectTypeDescription';
+
+import FilterPath from '../../features/filtering/FilterPath';
+
+import ObjectPath from './ObjectPath';
+
+const PathNav: React.FC = () => {
+  return (
+    <PathContainer>
+      <ObjectTypeSelector />
+      <SlashIcon size="1em" />
+      <ViewSelector />
+      <FilterPath />
+      <ObjectPath />
+    </PathContainer>
+  );
+};
+
+const ObjectTypeSelector: React.FC = () => {
+  const { objectType, updatePageParams, view } = usePageParams();
+  const goToObjectType = useCallback(
+    (objectType: ObjectType) => {
+      updatePageParams({
+        objectID: undefined,
+        objectType,
+        view,
+        searchString: undefined,
+        page: 1,
+      });
+    },
+    [updatePageParams, view],
+  );
+
+  return (
+    <Selector
+      options={Object.values(ObjectType)}
+      onChange={goToObjectType}
+      selected={objectType}
+      getOptionDescription={(objectType) => <ObjectTypeDescription objectType={objectType} />}
+    />
+  );
+};
+
+const ViewSelector: React.FC = () => {
+  const { view, updatePageParams } = usePageParams();
+
+  return (
+    <Selector
+      options={Object.values(View)}
+      onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
+      selected={view}
+      getOptionLabel={(view) =>
+        [View.Map, View.Reports].includes(view) ? (
+          <>
+            {view} <em>β</em>
+          </>
+        ) : (
+          view
+        )
+      }
+    />
+  );
+};
+
+export const PathContainer: React.FC<{
+  children: React.ReactNode;
+  style?: React.CSSProperties;
+}> = ({ children, style }) => {
+  return (
+    <div
+      style={{ display: 'flex', alignItems: 'center', gap: '0.5em', flexWrap: 'wrap', ...style }}
+    >
+      <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+        {children}
+      </SelectorDisplayProvider>
+    </div>
+  );
+};
+
+export default PathNav;

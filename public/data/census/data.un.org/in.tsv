@@ -1,0 +1,35 @@
+#codeDisplay		in2001
+#nameDisplay		India 2001
+#isoRegionCode		IN
+#yearCollected		2001
+#datePublished		2007
+#eligiblePopulation		1,028,610,328
+#notes		Census - de facto - complete tabulation
+#languagesIncluded		Official
+#sampleRate		
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	in2001
+mul	Total	1,028,610,328
+hin	Hindi	422,048,642
+ben	Bengali	83,369,769
+tel	Telugu	74,002,856
+mar	Marathi	71,936,894
+tam	Tamil	60,793,814
+urd	Urdu	51,536,111
+guj	Gujarati	46,091,617
+kan	Kannada	37,924,011
+mal	Malayalam	33,066,392
+ori	Oriya	33,017,446
+lah/pan	Punjabi	29,102,477
+asm	Assamese	13,168,484
+mai	Maithali	12,179,122
+sat	Santali	6,469,600
+kas	Kashimiri	5,527,698
+nep	Nepali	2,871,749
+snd	Sindhi	2,535,485
+kok	Konkani	2,489,015
+doi	Dogri	2,282,589
+mni	Manipuri (Meithei)	1,466,705
+brx	Bodo	1,350,478
+san	Sanskrit	14,135

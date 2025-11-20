@@ -1,12 +1,16 @@
 import React from 'react';
 
-import CommonObjectives from './CommonObjectives';
+import CommonObjectives from '@widgets/CommonObjectives';
+
+import { usePageBrightness } from '@shared/hooks/usePageBrightness';
 
 const IntroPage: React.FC = () => {
+  const { pageBrightness } = usePageBrightness();
+
   return (
     <IntroPageContainer>
       <img
-        src="LangNavLogo.svg"
+        src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
         width="240px"
         height="120px"
         alt="LangNav Logo"
@@ -18,7 +22,9 @@ const IntroPage: React.FC = () => {
       <p>
         This website is a comprehensive resource for exploring and understanding languages. It
         provides access to a wide range of linguistic data, including language classification,
-        geographic distribution, digital support, and writing systems.
+        geographic distribution, digital support, and writing systems. The website is in beta{' '}
+        <em>β</em> mode -- meaning that most functionality is present but there still may be errors,
+        particularly with data.
       </p>
       <p>
         To get started, click on the &quot;Data&quot; tab in the navigation bar above. Or, choose

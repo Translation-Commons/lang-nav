@@ -1,0 +1,24 @@
+#codeDisplay		ar2022
+#nameDisplay		Argentina 2022
+#isoRegionCode		AR
+#yearCollected		2022
+#datePublished		2024
+#eligiblePopulation		46,044,703
+#notes		Census - de jure - complete tabulation
+#modality		Spoken
+#domain		Home
+#responsesPerIndividual		1
+#languagesIncluded		Indigenous
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	ar2022
+mul	Total	382,697
+mis	#Not stated	82,156
+mul	#Other	60,498
+grn	Guarani	54,897
+wich1261	Wichi	50,701
+tob	Qom/Toba	39,388
+quh	Kolla	28,242
+que	Quechua	26,749
+arn	Mapuche	26,163
+calc1235	Diaguita	13,903

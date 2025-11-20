@@ -1,0 +1,29 @@
+#codeDisplay		ec2010
+#nameDisplay		Ecuador 2010
+#isoRegionCode		EC
+#yearCollected		2010
+#datePublished		2012
+#eligiblePopulation		14,585,458
+#notes		Census - de facto - complete tabulation
+#modality		Spoken
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	ec2010
+mul	Total	14,585,458
+spa	Castellano	13,570,858
+colo1257	Kichwa	591,448
+mul	Foreign	323,492
+jiv	Shuar Chich	61,910
+acu	Achuar Chic	13,456
+cbi	Cha`Palaa	9,393
+mul	Other	3,456
+kwi	Awapít	3,131
+cof	Tsa`Fiqui	2,838
+auc	Waotededo	1,766
+con	A`Ingae	1,077
+acu	Shiwiar Chi	942
+sja	Zia Pedee	509
+sey	Paicoca	492
+zro	Zapara	367
+anb	Andoa	323

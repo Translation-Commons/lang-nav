@@ -15,7 +15,7 @@
 #collectorType	Government				
 Language Code	Language Name	Mothertongue	Second Language	Ancestor's Language	L1+L2
 zxx	No Second language		14,023,086		14,023,086
-npi	Nepali	13,084,457	13,482,904	10,137,006	26,567,361
+nep/npi	Nepali	13,084,457	13,482,904	10,137,006	26,567,361
 mai	Maithili	3,222,389	267,621	2,959,876	3,490,010
 bho	Bhojpuri	1,820,795	138,572	1,768,618	1,959,367
 thar1284	Tharu	1,714,091	89,606	1,764,709	1,803,697
@@ -24,25 +24,25 @@ vjk	Bajjika	1,133,764	86,062	1,145,924	1,219,826
 awa	Avadhi	864,276	75,651	911,800	939,927
 new	Nepalbhasha(Newari)	863,380	32,604	1,179,946	895,984
 maga1261	Magar Dhut	810,315	54,143	1,248,003	864,458
-dty	Doteli	494,864	14,344	526,910	509,208
+nep/dty	Doteli	494,864	14,344	526,910	509,208
 urd	Urdu	413,785	72,128	569,626	485,913
 grea1285	Yakthung/Limbu	350,436	19,705	408,577	370,141
 gvr	Gurung	328,074	23,698	467,697	351,772
 mag	Magahi	230,117	29,191	423,568	259,308
-mis	Baitadeli	152,666	9,521	410,602	162,187
+nep/dty	Baitadeli	152,666	9,521	410,602	162,187
 mis	Rai	144,512	14,398	228,502	158,910
-acch1238	Achhami	141,444	6,522	396,503	147,966
+nep/npi/acch1238	Achhami	141,444	6,522	396,503	147,966
 bap	Bantawa	138,003	43,536	151,346	181,539
 rjs	Rajbanshi	130,163	4,103	134,198	134,266
 xsr	Sherpa	117,896	9,435	128,494	127,331
 mis	Khash	117,511	2,607	326,512	120,118
-bajh1238	Bajhangi	99,631	2,641	212,108	102,272
+npe/npi/bajh1238	Bajhangi	99,631	2,641	212,108	102,272
 hin	Hindi	98,399	223,106	92,295	321,505
 kham1286	Magar Kham	91,753	16,814	129,021	108,567
 rab	Chamling	89,037	29,253	100,754	118,290
 thr	Ranatharu	77,766	871	78,049	78,637
 cdm	Chepang	58,392	833	77,958	59,225
-baju1244	Bajureli	56,486	1,076	120,224	57,562
+nep/npi/baju1244	Bajureli	56,486	1,076	120,224	57,562
 sat	Santhali	53,677	703	56,620	54,380
 dhw	Danuwar	49,992	845	61,224	50,837
 mis	Darchuleli	45,649	4,272	154,156	49,921
@@ -94,7 +94,7 @@ mis	Koyee	4,152	928	4,455	5,080
 lbr	Lohorung	3,884	28	4,925	3,912
 mis	Kewarat	3,469	38	3,508	3,507
 mis	Dolpali	3,244	127	4,875	3,371
-done1239	Done	3,100		3,519	3,100
+dwz/done1239	Done	3,100		3,519	3,100
 muk	Mugali	2,834	23	2,914	2,857
 jee	Jero/Jerung	2,817	1,245	3,007	4,062
 mis	Karmarong	2,619	34	2,675	2,653
@@ -116,8 +116,8 @@ kzq	Magar Kaike	1,225	515	2,030	1,740
 soi	Sonaha	1,182	35	1,223	1,217
 vay	Hayu/Vayu	1,133	349	2,492	1,482
 xis	Kisan	1,004	33	1,161	1,037
-pan	Punjabi	871	1,274	1,152	2,145
-dhul1234	Dhuleli	786	187	745	973
+lah/pan	Punjabi	871	1,274	1,152	2,145
+bee/dhul1234	Dhuleli	786	187	745	973
 rau	Khamchi(Raute)	741	526	827	1,267
 lii	Lungkhim	702		738	702
 loy	Lowa	624		648	624
@@ -131,7 +131,7 @@ kdq	Koche	332	335	1,180	667
 snd	Sindhi	291	217	398	508
 phw	Phangduwali	247	85	241	332
 byw	Belhare	177	1,491	173	1,668
-sure1238	Surel	174	64	201	238
+suz/sure1238	Surel	174	64	201	238
 und	Malpande	161	78	207	239
 khr	Khariya	132		220	132
 mis	Sadhani	122	125	130	247

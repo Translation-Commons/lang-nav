@@ -1,10 +1,10 @@
-#codeDisplay		ca1996	ca2001	ca2006	#ca2011	ca2016	#ca2021
+#codeDisplay		ca1996	ca2001	ca2006	#ca2011	ca2016	ca2021
 #nameDisplay		Canada 1996	Canada 2001	Canada 2006	Canada 2011	Canada 2016	Canada 2021
 #isoRegionCode	CA						
 #yearCollected		1996	2001	2006	2011	2016	2021
 #datePublished		1997	2009	2017	2013	2017	2022
 #eligiblePopulation		28,528,125	27,129,865	31,241,030	32,852,325	34,767,255	36,991,980
-#notes	Census - de jure - complete tabulation				numbers don't match the trend this year		missing a lot of languages
+#notes	Census - de jure - complete tabulation				numbers don't match the trend this year		
 #modality			Spoken	Spoken			
 #domain			Home	Home			
 #acquisitionOrder			L1	L1		Any	Any
@@ -18,7 +18,7 @@ eng	English	16,890,615	17,352,315	17,882,780	22,254,905	25,897,805	27,434,615
 fra	French	6,636,660	6,703,330	6,817,655	6,886,690	8,152,115	8,359,245
 mul	Other	2,066,140			69,930	1,364,270	446,425
 zho	Chinese	715,640	853,745		805,005	1,290,095	1,346,690
-pan	Punjabi	201,785	271,220	367,505	327,960	568,375	828,955
+lah/pan	Punjabi	201,785	271,220	367,505	327,960	568,375	828,955
 sem	Semitic			312,790	37,275	611,545	777,600
 spa	Spanish	212,890	245,500	345,345	248,495	553,500	
 ara	Arabic	148,555	199,940	261,640	183,885	514,195	

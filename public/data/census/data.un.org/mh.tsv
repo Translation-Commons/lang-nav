@@ -1,0 +1,22 @@
+#codeDisplay		mh1999
+#nameDisplay		Marshall Islands 1999
+#isoRegionCode		MH
+#yearCollected		1999
+#datePublished		2001
+#eligiblePopulation		43,188
+#notes		Census - de facto - complete tabulation
+#modality		Spoken
+#age		5+
+#acquisitionOrder		Any
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
+#collectorType	Government	
+Language Code	Language Name	mh1999
+mul	Total	43,188
+mah	Marshallese	42,495
+eng	English	23,247
+mul	Other	699
+micr1243	Micronesian	595
+mul	Other Pacific Islands	540
+jpn	Japanese	365
+fil	Pilipino	275
+zho	Chinese	79
