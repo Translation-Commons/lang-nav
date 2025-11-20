@@ -18,7 +18,14 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
+
+const CLDR_RELEASE = '43.0.0';
+const CLDR_CORE_BASE = `https://cdn.jsdelivr.net/npm/cldr-core@${CLDR_RELEASE}`;
+const CHARTS_TSV_BASE = `https://raw.githubusercontent.com/unicode-org/cldr-staging/main/docs/charts/${CLDR_RELEASE.replace(
+  /\.0\.0$/,
+  '',
+)}/tsv`;
+const CLDR_REPO_RAW_BASE = 'https://raw.githubusercontent.com/unicode-org/cldr/main/common/main';
 
 const OUTPUT_FILE = path.join(process.cwd(), 'public/data/unicode/cldrLocales.json');
 
