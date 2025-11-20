@@ -54,7 +54,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
           </>
         );
         // Add the replacement code as a child language
-        lang.cldrDataProvider = replacementData;
+        lang.CLDR.dataProvider = replacementData;
         if (DEBUG && replacementData == null) {
           console.warn(
             `CLDR language ${alias.original} has no replacement data for ${alias.replacement}. This may cause issues.`,
@@ -94,7 +94,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       // Does the macrolanguage entry exist?
       if (constituentLang != null && macroLang != null) {
         // Add notes to the macrolanguage entry
-        macroLang.cldrDataProvider = constituentLang;
+        macroLang.CLDR.dataProvider = constituentLang;
         macroLang.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
         macroLang.CLDR.scope = LanguageScope.Macrolanguage;
         macroLang.CLDR.childLanguages = [constituentLang];
@@ -130,7 +130,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       if (lang != null) {
         lang.CLDR = {
           code: alias.original,
-          childLanguages: [],
+          dataProvider: replacementData,
           notes: (
             <>
               This language code <code>{alias.original}</code> is an ISO 639-2
@@ -141,7 +141,6 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
           ),
         };
         // Add the replacement code as a child language and delete the link to the unsupported one
-        lang.cldrDataProvider = replacementData;
         delete cldrLanguages[alias.original];
         if (DEBUG && replacementData == null) {
           console.warn(
@@ -178,7 +177,7 @@ export async function loadCLDRCoverage(
         }
         lang.nameEndonym ??= cldrCov.nameEndonym;
         lang.CLDR.name = cldrCov.nameDisplay;
-        lang.cldrCoverage = {
+        lang.CLDR.coverage = {
           countOfCLDRLocales: cldrCov.countOfCLDRLocales,
           targetCoverageLevel: cldrCov.targetCoverageLevel,
           actualCoverageLevel: cldrCov.actualCoverageLevel,

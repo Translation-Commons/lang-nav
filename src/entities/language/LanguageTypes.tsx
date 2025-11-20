@@ -89,7 +89,6 @@ export interface LanguageData extends ObjectBase {
   nameSubtitle?: string;
   nameEndonym?: string;
 
-  vitalityISO?: VitalityISO;
   vitalityEth2013?: VitalityEthnologueFine;
   vitalityEth2025?: VitalityEthnologueCoarse;
   digitalSupport?: string;
@@ -104,11 +103,6 @@ export interface LanguageData extends ObjectBase {
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
-  retirementReason?: RetirementReason;
-
-  cldrCoverage?: CLDRCoverageData;
-  variantTags?: VariantTagData[]; // links to IANA variant tags
-  cldrDataProvider?: LanguageData | LocaleData;
 
   warnings: Partial<Record<LanguageField, string>>;
   wikipedia?: WikipediaData;
@@ -123,14 +117,22 @@ export interface LanguageData extends ObjectBase {
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
+  variantTags?: VariantTagData[]; // links to IANA variant tags
 
   // Fields that change based on the language source
   Combined: LanguageDataInSource;
-  ISO: LanguageDataInSource & { code6391?: string };
+  ISO: LanguageDataInSource & {
+    code6391?: string;
+    status?: VitalityISO;
+    retirementReason?: RetirementReason;
+  };
   BCP: LanguageDataInSource;
   UNESCO: LanguageDataInSource;
   Glottolog: LanguageDataInSource;
-  CLDR: LanguageDataInSource;
+  CLDR: LanguageDataInSource & {
+    coverage?: CLDRCoverageData;
+    dataProvider?: LanguageData | LocaleData;
+  };
 }
 
 // Used to create a new language object with minimal data

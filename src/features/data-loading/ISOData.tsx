@@ -121,7 +121,7 @@ export function addISODataToLanguages(
 
     // Fill out ISO information on the language data
     lang.ISO.code6391 = isoLang.codeISO6391;
-    lang.vitalityISO = isoLang.vitality;
+    lang.ISO.status = isoLang.vitality;
     lang.scope = isoLang.scope;
     lang.ISO.scope = isoLang.scope;
     lang.ISO.name = isoLang.name;

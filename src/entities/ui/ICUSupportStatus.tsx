@@ -10,16 +10,16 @@ import Deemphasized from '@shared/ui/Deemphasized';
 const ICUSupportStatus: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object.type !== ObjectType.Language) return null;
 
-  const { cldrCoverage, cldrDataProvider } = object;
+  const { coverage, dataProvider } = object.CLDR;
 
-  if (cldrCoverage == null) {
-    if (cldrDataProvider != null) {
-      return <ICUSupportStatus object={cldrDataProvider} />;
+  if (coverage == null) {
+    if (dataProvider != null) {
+      return <ICUSupportStatus object={dataProvider} />;
     }
     return <Deemphasized>n/a</Deemphasized>;
   }
 
-  return cldrCoverage.inICU ? (
+  return coverage.inICU ? (
     <CheckCircle2Icon
       style={{ color: 'var(--color-text-green)', verticalAlign: 'middle' }}
       size={'1em'}

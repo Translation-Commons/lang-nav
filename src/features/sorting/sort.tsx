@@ -86,7 +86,7 @@ export function getSortField(
       return getVitalityMetascore(object);
     case SortBy.VitalityISO:
       if (object.type !== ObjectType.Language) return undefined;
-      return object.vitalityISO;
+      return object.ISO.status;
     case SortBy.VitalityEthnologue2013:
       if (object.type !== ObjectType.Language) return undefined;
       return object.vitalityEth2013;

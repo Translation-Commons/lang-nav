@@ -43,7 +43,7 @@ const columns: TableColumn<LanguageData>[] = [
         <CLDRWarningNotes object={lang} />
       </>
     ),
-    exportValue: (lang) => lang.cldrCoverage?.actualCoverageLevel,
+    exportValue: (lang) => lang.CLDR.coverage?.actualCoverageLevel,
   },
   {
     key: 'CLDR Locales',
@@ -56,15 +56,15 @@ const columns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => <ObjectCLDRLocaleCount object={lang} />,
     valueType: TableValueType.Numeric,
-    exportValue: (lang) => lang.cldrCoverage?.countOfCLDRLocales,
+    exportValue: (lang) => lang.CLDR.coverage?.countOfCLDRLocales,
   },
   {
     key: 'ICU Support',
     render: (lang) => <ICUSupportStatus object={lang} />,
     exportValue: (lang) => {
-      if (lang.cldrCoverage?.inICU !== undefined) return lang.cldrCoverage.inICU;
-      if (lang.cldrDataProvider?.type === ObjectType.Language)
-        return lang.cldrDataProvider.cldrCoverage?.inICU;
+      if (lang.CLDR.coverage?.inICU !== undefined) return lang.CLDR.coverage.inICU;
+      if (lang.CLDR.dataProvider?.type === ObjectType.Language)
+        return lang.CLDR.dataProvider.CLDR.coverage?.inICU;
       return undefined;
     },
   },

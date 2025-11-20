@@ -94,7 +94,7 @@ describe('computeVitalityMetascore', () => {
 
   it('falls back to ISO when no Ethnologue data exists', () => {
     const lang = getBaseLanguageData('en', 'English');
-    lang.vitalityISO = VitalityISO.Living; // 9
+    lang.ISO.status = VitalityISO.Living; // 9
     const result = getVitalityMetascore(lang);
     expect(result).toBe(9);
   });

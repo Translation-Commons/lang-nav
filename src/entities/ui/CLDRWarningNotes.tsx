@@ -13,13 +13,14 @@ const CLDRWarningNotes: React.FC<{
 }> = ({ object, parentNotes }) => {
   if (object.type !== ObjectType.Language) return null;
 
-  const { cldrCoverage, cldrDataProvider, CLDR } = object;
+  const { CLDR } = object;
+  const { coverage, dataProvider } = CLDR;
 
-  if (cldrCoverage == null && cldrDataProvider != null) {
+  if (coverage == null && dataProvider != null) {
     // The CLDR data comes from something else, load those notes too
     return (
       <CLDRWarningNotes
-        object={cldrDataProvider}
+        object={dataProvider}
         parentNotes={[parentNotes, CLDR.notes].filter((n) => n != null)}
       />
     );

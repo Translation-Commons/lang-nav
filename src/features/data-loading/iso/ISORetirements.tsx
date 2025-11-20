@@ -97,10 +97,7 @@ export function addISORetirementsToLanguages(
           parentLanguageCode: retirement.changeTo || undefined,
           childLanguages,
         },
-        ISO: {
-          code: retirement.id,
-          childLanguages: [],
-        },
+        ISO: { code: retirement.id },
       };
 
       // Add the language to the all list, but with the retirement warning
@@ -108,7 +105,7 @@ export function addISORetirementsToLanguages(
     }
 
     // Add retirement information
-    lang.retirementReason = retirement.reason;
+    lang.ISO.retirementReason = retirement.reason;
     lang.warnings[LanguageField.isoCode] = retirementExplanation;
     lang.viabilityConfidence ??= 'No';
     lang.viabilityExplanation ??= retirementExplanation;

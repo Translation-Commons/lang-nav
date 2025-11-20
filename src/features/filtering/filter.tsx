@@ -125,7 +125,7 @@ export function buildVitalityFilterFunction(params: {
     // Languages with missing data are excluded when that filter is active
     const isoMatches =
       !vitalityISO.length ||
-      (language.vitalityISO != null && vitalityISO.includes(language.vitalityISO));
+      (language.ISO.status != null && vitalityISO.includes(language.ISO.status));
 
     const eth2013Matches =
       !vitalityEth2013.length ||
