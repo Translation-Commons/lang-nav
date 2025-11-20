@@ -12,6 +12,8 @@ import DetailsSection from '@shared/containers/DetailsSection';
 import { getCurrencyCompactLong } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import TerritoryLocation from './sections/TerritoryLocation';
+
 type Props = {
   territory: TerritoryData;
 };
@@ -93,6 +95,8 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
           <TableOfLanguagesInTerritory territory={territory} />
         </DetailsSection>
       )}
+
+      <TerritoryLocation territory={territory} />
     </div>
   );
 };
