@@ -23,7 +23,7 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
 
       {territory.latitude && territory.longitude ? (
         <>
-          These coordinates show the location of the country, usually the geographic center.
+          These coordinates show the location of the territory, usually the geographic center.
           <ObjectMap objects={[territory]} maxWidth={400} />
         </>
       ) : null}

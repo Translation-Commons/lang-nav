@@ -215,7 +215,12 @@ export function loadCountryCoordinates(
 ): Promise<void> {
   return fetch('data/country-coord.csv')
     .then((res) => res.text())
-    .then((text) => text.split('\n').slice(1))
+    .then((text) =>
+      text
+        .split('\n')
+        .slice(1)
+        .filter((line) => line.trim() !== ''),
+    )
     .then((lines) =>
       lines
         .map((line) => {
@@ -251,5 +256,5 @@ export function loadCountryCoordinates(
         }
       }),
     )
-    .catch((err) => console.error('Error loading TSV:', err));
+    .catch((err) => console.error('Error loading CSV:', err));
 }

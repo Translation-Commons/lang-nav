@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import useHoverCard from '@features/hovercard/useHoverCard';
 import { ObjectType } from '@features/page-params/PageParamTypes';
@@ -13,14 +13,12 @@ import { getRobinsonCoordinates } from './getRobinsonCoordinates';
 
 type Props = {
   objects: ObjectData[];
-  maxWidth?: number; // in pixels
 };
 
 const MapCircles: React.FC<Props> = ({ objects }) => {
   const { colorBy } = usePageParams();
   const { getCurrentObjects } = usePagination<ObjectData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const svgRef = useRef<SVGSVGElement>(null);
   const coloringFunctions = useColors({ objects });
 
   const renderableObjects = useMemo(
@@ -38,7 +36,6 @@ const MapCircles: React.FC<Props> = ({ objects }) => {
 
   return (
     <svg
-      ref={svgRef}
       viewBox={`-180 -90 360 180`}
       preserveAspectRatio="xMidYMid meet"
       style={{
@@ -51,13 +48,13 @@ const MapCircles: React.FC<Props> = ({ objects }) => {
         aspectRatio: 1.979, // Aspect ratio of the map_world.svg
       }}
     >
-      {renderableObjects.map((obj, idx) => {
+      {renderableObjects.map((obj) => {
         return (
           <HoverableCircle
             color={
               colorBy === 'None' ? undefined : (coloringFunctions.getColor(obj) ?? 'transparent')
             }
-            key={idx}
+            key={obj.ID}
             object={obj}
             onMouseEnter={buildOnMouseEnter(obj)}
             onMouseLeave={onMouseLeaveTriggeringElement}

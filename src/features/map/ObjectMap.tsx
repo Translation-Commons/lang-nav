@@ -19,8 +19,9 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
 
   return (
     <div style={{ maxWidth, width: '100%' }}>
-      <div style={{ position: 'relative', width: '100%', aspectRatio: 1.97 }}>
+      <div style={{ position: 'relative', width: '100%', aspectRatio: 1.979 }}>
         <img
+          alt="World map"
           src="./data/wiki/map_world.svg"
           style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
         />
