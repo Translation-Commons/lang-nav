@@ -1,4 +1,4 @@
-{
+ {
   "name": "lang-nav",
   "private": true,
   "version": "0.0.0",
@@ -10,6 +10,7 @@
     "preview": "vite preview",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist",
+    "build:cldr-locales": "ts-node scripts/ingest/build-cldr-locales.ts"
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui",
