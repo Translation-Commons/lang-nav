@@ -2,17 +2,17 @@ import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
+import LimitInput from '@features/pagination/LimitInput';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
+import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
+import SortBySelector from '@features/transforms/sorting/SortBySelector';
+import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
-import LimitInput from '../../features/pagination/LimitInput';
-import TerritoryFilterSelector from '../../features/transforms/filtering/TerritoryFilterSelector';
-import SortBySelector from '../../features/transforms/sorting/SortBySelector';
-import SortDirectionSelector from '../../features/transforms/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
 import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';

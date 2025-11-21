@@ -1,9 +1,10 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
-import { SortBehavior } from '@features/transforms/sorting/SortTypes';
+import Selector from '@widgets/controls/components/Selector';
 
-import Selector from '../../../widgets/controls/components/Selector';
+import usePageParams from '@features/page-params/usePageParams';
+
+import { SortBehavior } from './SortTypes';
 
 const SortDirectionSelector: React.FC = () => {
   const { sortBehavior, updatePageParams } = usePageParams();

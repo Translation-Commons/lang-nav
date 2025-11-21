@@ -1,12 +1,12 @@
 import React from 'react';
 
+import Selector from '@widgets/controls/components/Selector';
 import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplayContext';
 
 import usePageParams from '@features/page-params/usePageParams';
-import { getSortBysApplicableToObjectType } from '@features/transforms/sorting/sort';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import Selector from '../../../widgets/controls/components/Selector';
+import { getSortBysApplicableToObjectType } from './sort';
+import { SortBy } from './SortTypes';
 
 const SortBySelector: React.FC = () => {
   const { sortBy, updatePageParams, objectType } = usePageParams();

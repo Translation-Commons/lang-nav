@@ -9,10 +9,9 @@ import {
 
 import { ObjectType, View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
+import FilterPath from '@features/transforms/filtering/FilterPath';
 
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
-
-import FilterPath from '../../features/transforms/filtering/FilterPath';
 
 import ObjectPath from './ObjectPath';
 
