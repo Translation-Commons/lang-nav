@@ -4,7 +4,7 @@ import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 // import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { PageParamsOptional } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
-import { SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';

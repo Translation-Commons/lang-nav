@@ -7,7 +7,7 @@ import {
   PageParamsOptional,
   View,
 } from '@features/page-params/PageParamTypes';
-import { SortBy } from '@features/sorting/SortTypes';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 const CommonObjectives: React.FC = () => {
   return (

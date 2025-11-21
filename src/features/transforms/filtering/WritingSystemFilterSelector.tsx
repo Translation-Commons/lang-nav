@@ -11,8 +11,8 @@ import TextInput, { Suggestion } from '@widgets/controls/components/TextInput';
 import { useDataContext } from '@features/data-loading/context/useDataContext';
 import { PageParamKey, SearchableField } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
-import { getSortFunctionParameterized } from '@features/sorting/sort';
-import { SortBy } from '@features/sorting/SortTypes';
+import { getSortFunctionParameterized } from '@features/transforms/sorting/sort';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 

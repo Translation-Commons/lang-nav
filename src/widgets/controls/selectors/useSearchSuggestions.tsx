@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getScopeFilter, getSubstringFilterOnQuery } from '@features/filtering/filter';
+import { getScopeFilter, getSubstringFilterOnQuery } from '@features/transforms/filtering/filter';
 import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 

@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { TableIDToBinarizedColumnVisibility } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
-import { SortBy } from '@features/sorting/SortTypes';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

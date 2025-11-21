@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Selector from '@widgets/controls/components/Selector';
 import {
   SelectorDisplay,
   useSelectorDisplay,
@@ -7,10 +8,10 @@ import {
 
 import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
-import { getSortBysApplicableToObjectType } from '@features/sorting/sort';
-import { ColorBy, SortBy } from '@features/sorting/SortTypes';
+import { getSortBysApplicableToObjectType } from '@features/transforms/sorting/sort';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import Selector from '../../widgets/controls/components/Selector';
+import { ColorBy } from './ColorTypes';
 
 const ColorBySelector: React.FC = () => {
   const { colorBy, updatePageParams, objectType, view } = usePageParams();

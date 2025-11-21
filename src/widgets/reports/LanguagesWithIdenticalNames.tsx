@@ -3,12 +3,12 @@ import React, { useMemo } from 'react';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getFilterBySubstring } from '@features/filtering/filter';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getSortFunction } from '@features/sorting/sort';
+import { getFilterBySubstring } from '@features/transforms/filtering/filter';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';

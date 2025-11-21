@@ -1,5 +1,5 @@
-import { ColorBy } from '@features/sorting/SortTypes';
 import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
+import { ColorBy } from '@features/transforms/coloring/ColorTypes';
 
 import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';

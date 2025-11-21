@@ -1,6 +1,6 @@
-import { SortBy } from '@features/sorting/SortTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageVitalityCell from '@entities/language/vitality/LanguageVitalityCell';

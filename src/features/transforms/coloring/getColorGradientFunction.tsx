@@ -1,4 +1,4 @@
-import { ColorGradient } from './SortTypes';
+import { ColorGradient } from './ColorTypes';
 
 /**
  * Return a function that maps a normalized value (0 to 1) to a color string, based on the selected color gradient.

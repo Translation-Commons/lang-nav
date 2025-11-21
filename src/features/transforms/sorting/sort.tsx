@@ -1,9 +1,9 @@
+import { ObjectType } from '@features/page-params/PageParamTypes';
+import usePageParams from '@features/page-params/usePageParams';
 import {
   getTerritoriesRelevantToObject,
   getWritingSystemsRelevantToObject,
-} from '@features/filtering/filterByConnections';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+} from '@features/transforms/filtering/filterByConnections';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';

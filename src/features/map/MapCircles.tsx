@@ -4,7 +4,7 @@ import useHoverCard from '@features/hovercard/useHoverCard';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
 import usePagination from '@features/pagination/usePagination';
-import useColors from '@features/sorting/useColors';
+import useColors from '@features/transforms/coloring/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';

@@ -2,7 +2,7 @@ import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
 import usePageParams from '@features/page-params/usePageParams';
-import { SortBy, SortBehavior } from '@features/sorting/SortTypes';
+import { SortBy, SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

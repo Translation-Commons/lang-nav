@@ -8,9 +8,11 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
+import { getSortField } from '../sorting/sort';
+import { SortBy } from '../sorting/SortTypes';
+
+import { ColorBy } from './ColorTypes';
 import { getColorGradientFunction } from './getColorGradientFunction';
-import { getSortField } from './sort';
-import { ColorBy, SortBy } from './SortTypes';
 
 type Props = { objects: ObjectData[]; colorBy?: ColorBy };
 

@@ -1,18 +1,18 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
-import LanguageFilterSelector from '@features/filtering/LanguageFilterSelector';
-import WritingSystemFilterSelector from '@features/filtering/WritingSystemFilterSelector';
 import HoverableButton from '@features/hovercard/HoverableButton';
-import ColorBySelector from '@features/sorting/ColorBySelector';
-import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
+import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
+import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
+import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
-import TerritoryFilterSelector from '../../features/filtering/TerritoryFilterSelector';
 import LimitInput from '../../features/pagination/LimitInput';
-import SortBySelector from '../../features/sorting/SortBySelector';
-import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
+import TerritoryFilterSelector from '../../features/transforms/filtering/TerritoryFilterSelector';
+import SortBySelector from '../../features/transforms/sorting/SortBySelector';
+import SortDirectionSelector from '../../features/transforms/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
 import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';

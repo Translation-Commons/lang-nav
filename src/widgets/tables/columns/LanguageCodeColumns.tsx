@@ -3,8 +3,8 @@ import { ReactNode } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 import { SearchableField } from '@features/page-params/PageParamTypes';
-import { SortBy } from '@features/sorting/SortTypes';
 import TableColumn from '@features/table/TableColumn';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';

@@ -1,5 +1,5 @@
+import { ColorGradient } from './ColorTypes';
 import { getColorGradientFunction } from './getColorGradientFunction';
-import { ColorGradient } from './SortTypes';
 
 function BaseColorBar({ colorGradient }: { colorGradient: ColorGradient }) {
   const colorFunc = getColorGradientFunction(colorGradient);

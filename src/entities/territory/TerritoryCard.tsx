@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { getScopeFilter } from '@features/filtering/filter';
+import { getScopeFilter } from '@features/transforms/filtering/filter';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import usePageParams from '@features/page-params/usePageParams';
 

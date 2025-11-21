@@ -16,8 +16,9 @@ import {
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
+import { SortBy } from '../sorting/SortTypes';
+
 import BaseColorBar from './BaseColorBar';
-import { SortBy } from './SortTypes';
 import { ColoringFunctions } from './useColors';
 
 type Props = {

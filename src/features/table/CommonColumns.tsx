@@ -1,6 +1,6 @@
 import HoverableObject from '@features/hovercard/HoverableObject';
 import { SearchableField } from '@features/page-params/PageParamTypes';
-import { SortBy } from '@features/sorting/SortTypes';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';

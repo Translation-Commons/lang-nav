@@ -7,11 +7,11 @@ import {
 
 import { View } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
-import { ColorGradient } from '@features/sorting/SortTypes';
+import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
 
-import Selector from '../../widgets/controls/components/Selector';
+import Selector from '../../../widgets/controls/components/Selector';
 
 import BaseColorBar from './BaseColorBar';
 

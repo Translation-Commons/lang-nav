@@ -1,5 +1,6 @@
-import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
 import { parseColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
+import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {

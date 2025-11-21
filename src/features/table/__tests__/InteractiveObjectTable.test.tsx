@@ -1,12 +1,12 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
-import * as FilterModule from '@features/filtering/filter';
-import * as ConnectionFilters from '@features/filtering/filterByConnections';
 import { ObjectType } from '@features/page-params/PageParamTypes';
 import usePageParams from '@features/page-params/usePageParams';
-import * as SortModule from '@features/sorting/sort';
-import { SortBy } from '@features/sorting/SortTypes';
+import * as FilterModule from '@features/transforms/filtering/filter';
+import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
+import * as SortModule from '@features/transforms/sorting/sort';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
@@ -17,20 +17,20 @@ import TableColumn from '../TableColumn';
 import TableID from '../TableID';
 import TableValueType from '../TableValueType';
 
-vi.mock('@features/filtering/filter', () => ({
+vi.mock('@features/transforms/filtering/filter', () => ({
   getFilterBySubstring: vi.fn(),
   getFilterByVitality: vi.fn(),
   getScopeFilter: vi.fn(),
 }));
 
-vi.mock('@features/filtering/filterByConnections', () => ({
+vi.mock('@features/transforms/filtering/filterByConnections', () => ({
   getFilterByConnections: vi.fn(),
   getFilterByTerritory: vi.fn().mockReturnValue(() => true),
   getFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
   getFilterByLanguage: vi.fn().mockReturnValue(() => true),
 }));
 
-vi.mock('@features/sorting/sort', () => ({
+vi.mock('@features/transforms/sorting/sort', () => ({
   getSortFunction: vi.fn(),
   getNormalSortDirection: vi.fn().mockReturnValue(1),
 }));

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SortBy } from '@features/sorting/SortTypes';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import TableValueType from './TableValueType';
 

@@ -1,4 +1,5 @@
-import { ColorBy, ColorGradient, SortBehavior, SortBy } from '@features/sorting/SortTypes';
+import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import {

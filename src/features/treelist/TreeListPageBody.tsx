@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { getFilterBySubstring, getFilterByVitality } from '@features/filtering/filter';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import Hoverable from '@features/hovercard/Hoverable';
 import usePageParams from '@features/page-params/usePageParams';
 import LimitSelector from '@features/pagination/LimitSelector';
+import { getFilterBySubstring, getFilterByVitality } from '@features/transforms/filtering/filter';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
