@@ -268,7 +268,7 @@ export function loadLandArea(
       text
         .split('\n')
         .slice(1) // Remove the header row
-        .filter((line) => line.trim() !== ''),
+        .filter((line) => line.trim() !== '' && !line.startsWith('#')),
     )
     .then((lines) =>
       lines

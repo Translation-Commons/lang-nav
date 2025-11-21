@@ -9,7 +9,11 @@ import { TerritoryData } from '@entities/types/DataTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import { getCurrencyCompactLong } from '@shared/lib/numberUtils';
+import {
+  getCurrencyCompactLong,
+  numberToFixedUnlessSmall,
+  numberToSigFigs,
+} from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import TerritoryLocation from './sections/TerritoryLocation';
@@ -30,6 +34,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
     population,
     containsTerritories,
     sovereign,
+    landArea,
   } = territory;
 
   return (
@@ -44,6 +49,16 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         )}
         {gdp && !Number.isNaN(gdp) && (
           <DetailsField title="Gross Domestic Product:">{getCurrencyCompactLong(gdp)}</DetailsField>
+        )}
+        {landArea && (
+          <DetailsField title="Land Area:">
+            {numberToSigFigs(landArea, 3)?.toLocaleString()} km²
+          </DetailsField>
+        )}
+        {landArea && population && (
+          <DetailsField title="Density:">
+            {numberToFixedUnlessSmall(population / landArea, 3)} people/km²
+          </DetailsField>
         )}
       </DetailsSection>
 
