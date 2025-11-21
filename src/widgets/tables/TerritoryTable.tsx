@@ -13,6 +13,7 @@ import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
 
+import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -132,6 +133,14 @@ const TerritoryTable: React.FC = () => {
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Longitude,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Land Area (km²)',
+          render: (object) =>
+            object.landArea ? numberToSigFigs(object.landArea, 3)?.toLocaleString() : undefined,
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
           columnGroup: 'Location',
         },
         {

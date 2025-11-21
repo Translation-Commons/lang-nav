@@ -5,6 +5,7 @@ import { computeLocaleWritingPopulation } from './population/computeLocaleWritin
 import {
   computeContainedTerritoryStats,
   loadCountryCoordinates,
+  loadLandArea,
   loadTerritoryGDPLiteracy,
 } from './TerritoryData';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
@@ -18,12 +19,14 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     return; // won't load anything while data is empty
   }
 
-  // TODO - this should be done in parallel so we cannot pass in things we are mutating
+  // Load multiple supplemental data sources in parallel, these changes will modify objects
+  // but they should not modify the same fields.
   await Promise.all([
     loadCLDRCoverage(dataContext.getCLDRLanguage),
     loadTerritoryGDPLiteracy(dataContext.getTerritory),
     loadCountryCoordinates(dataContext.getTerritory),
     loadAndApplyWikipediaData(dataContext),
+    loadLandArea(dataContext.getTerritory),
   ]);
 
   const censusImports = await loadCensusData();

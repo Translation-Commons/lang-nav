@@ -258,3 +258,49 @@ export function loadCountryCoordinates(
     )
     .catch((err) => console.error('Error loading CSV:', err));
 }
+
+export function loadLandArea(
+  getTerritory: (id: string) => TerritoryData | undefined,
+): Promise<void> {
+  return fetch('data/wiki/country_land_area.tsv')
+    .then((res) => res.text())
+    .then((text) =>
+      text
+        .split('\n')
+        .slice(1) // Remove the header row
+        .filter((line) => line.trim() !== ''),
+    )
+    .then((lines) =>
+      lines
+        .map((line) => {
+          const parts = line.split('\t');
+          const code = parts[0] as TerritoryCode;
+          const landArea = parseFloat(parts[2].replace(/,/g, ''));
+          if (!isNaN(landArea)) return { territoryCode: code, landArea };
+          return undefined;
+        })
+        .filter((entry) => !!entry),
+    )
+    .then((areas) =>
+      areas.forEach((a) => {
+        const terr = getTerritory(a.territoryCode);
+        if (terr != null) terr.landArea = a.landArea;
+      }),
+    )
+    .then(() => {
+      // Start at the root and compute all region land areas
+      computeRegionLandArea(getTerritory('001')!);
+      return;
+    })
+    .catch((err) => console.error('Error loading TSV:', err));
+}
+
+function computeRegionLandArea(territory: TerritoryData): number | undefined {
+  if (!isTerritoryGroup(territory.scope)) {
+    return territory.landArea;
+  }
+  const containsTerritories = territory.containsTerritories ?? [];
+  const totalLandArea = sumBy(containsTerritories, (t) => computeRegionLandArea(t) ?? 0);
+  territory.landArea = totalLandArea;
+  return totalLandArea;
+}

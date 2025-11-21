@@ -70,6 +70,7 @@ export interface TerritoryData extends ObjectBase {
   gdp?: number;
   latitude?: number;
   longitude?: number;
+  landArea?: number; // in square kilometers
 
   // References to other objects, filled in after loading the TSV
   parentUNRegion?: TerritoryData;
