@@ -286,5 +286,5 @@ GS	South Georgia & South Sandwich Islands	Dependency	20	005	GB
 BV	Bouvet Island	Dependency	6	005	NO
 HM	Heard & McDonald Islands	Dependency	1	053	AU
 CP	Clipperton Island	Dependency	1	013	FR
-QO	Outlying Oceania	Continent	300	001	
-AQ	Antarctica	Country	300	QO	
+010	Antarctica	Continent	300	001	
+AQ	Antarctica	Country	300	010	

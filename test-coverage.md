@@ -2,11 +2,11 @@
 
 | Path                                     |   Lines | Branches |   Funcs |   Stmts |
 | ---------------------------------------- | ------: | ------: | ------: | ------: |
-| `src`                                    |    35.5 |    79.0 |    53.7 |    35.5 |
+| `src`                                    |    35.5 |    78.8 |    53.7 |    35.5 |
 | `  app`                                  |     0   |     0   |     0   |     0   |
 | `    App.tsx`                            |     0   |     0   |     0   |     0   |
 | `    PageRoutes.tsx`                     |     0   |     0   |     0   |     0   |
-| `  entities`                             |    40.0 |    82.7 |    45.6 |    40.0 |
+| `  entities`                             |    40.0 |    82.6 |    45.6 |    40.0 |
 | `    census`                             |    42.9 |    40.0 |    50.0 |    42.9 |
 | `      CensusCard.tsx`                   |    19.2 |   100.0 |     0   |    19.2 |
 | `      CensusTypes.tsx`                  |    81.3 |    40.0 |   100.0 |    81.3 |
@@ -53,13 +53,13 @@
 | `      PotentialLocaleThreshold.tsx`     |     0   |     0   |     0   |     0   |
 | `    territory`                          |    87.2 |    75.0 |    50.0 |    87.2 |
 | `      TerritoryCard.tsx`                |    87.2 |    75.0 |    50.0 |    87.2 |
-| `    ui`                                 |    47.5 |    59.5 |    33.3 |    47.5 |
+| `    ui`                                 |    47.5 |    58.5 |    33.3 |    47.5 |
 | `      CLDRCoverageInfo.tsx`             |    15.8 |   100.0 |     0   |    15.8 |
 | `      CLDRCoverageLevels.tsx`           |     7.9 |   100.0 |     0   |     7.9 |
 | `      CLDRWarningNotes.tsx`             |    20.0 |   100.0 |     0   |    20.0 |
 | `      ICUSupportStatus.tsx`             |    25.0 |   100.0 |     0   |    25.0 |
 | `      ObjectCard.tsx`                   |    79.2 |    16.7 |   100.0 |    79.2 |
-| `      ObjectField.tsx`                  |    89.6 |    68.4 |   100.0 |    89.6 |
+| `      ObjectField.tsx`                  |    89.6 |    66.7 |   100.0 |    89.6 |
 | `      ObjectSuggestions.tsx`            |    88.9 |    55.5 |   100.0 |    88.9 |
 | `      ObjectTitle.tsx`                  |    86.0 |    75.0 |   100.0 |    86.0 |
 | `      ObjectWikipediaInfo.tsx`          |    17.2 |   100.0 |     0   |    17.2 |
@@ -67,10 +67,10 @@
 | `      VariantTagCard.tsx`               |    20.0 |   100.0 |     0   |    20.0 |
 | `    writingsystem`                      |    12.3 |   100.0 |     0   |    12.3 |
 | `      WritingSystemCard.tsx`            |    12.3 |   100.0 |     0   |    12.3 |
-| `  features`                             |    49.8 |    79.7 |    60.4 |    49.8 |
+| `  features`                             |    49.9 |    79.5 |    60.4 |    49.9 |
 | `    __tests__`                          |    89.7 |    92.3 |    75.0 |    89.7 |
 | `      MockObjects.tsx`                  |    89.7 |    92.3 |    75.0 |    89.7 |
-| `    data-loading`                       |    32.7 |    71.9 |    58.7 |    32.7 |
+| `    data-loading`                       |    32.7 |    71.4 |    58.7 |    32.7 |
 | `      CensusData.tsx`                   |    22.1 |    90.9 |    50.0 |    22.1 |
 | `      context`                          |    14.0 |     0   |     0   |    14.0 |
 | `        DataProvider.tsx`               |     0   |     0   |     0   |     0   |
@@ -84,13 +84,13 @@
 | `        ISORetirements.tsx`             |     0   |     0   |     0   |     0   |
 | `      ISOData.tsx`                      |     0   |     0   |     0   |     0   |
 | `      loadObjectsFromFile.ts`           |   100.0 |   100.0 |   100.0 |   100.0 |
-| `      population`                       |    99.4 |    68.0 |   100.0 |    99.4 |
-| `        computeLocalePopulationFromCensuses.ts` |    97.7 |    85.0 |   100.0 |    97.7 |
+| `      population`                       |    99.4 |    67.6 |   100.0 |    99.4 |
+| `        computeLocalePopulationFromCensuses.ts` |    97.7 |    84.2 |   100.0 |    97.7 |
 | `        computeLocaleWritingPopulation.ts` |   100.0 |    58.3 |   100.0 |   100.0 |
 | `        computeRegionalLocalePopulation.ts` |   100.0 |    57.1 |   100.0 |   100.0 |
 | `        updateObjectCodesNameAndPopulation.ts` |   100.0 |    73.3 |   100.0 |   100.0 |
 | `      SupplementalData.tsx`             |     0   |     0   |     0   |     0   |
-| `      TerritoryData.tsx`                |    56.0 |    64.9 |    66.7 |    56.0 |
+| `      TerritoryData.tsx`                |    56.2 |    63.3 |    66.7 |    56.2 |
 | `      UnicodeData.tsx`                  |     0   |     0   |     0   |     0   |
 | `      WikipediaData.tsx`                |     0   |   100.0 |   100.0 |     0   |
 | `    filtering`                          |    77.2 |    82.9 |    74.4 |    77.2 |

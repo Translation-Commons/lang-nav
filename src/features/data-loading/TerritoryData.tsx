@@ -1,5 +1,3 @@
-import { I } from 'node_modules/msw/lib/core/HttpResponse-B4YmE-GJ.d.mts';
-
 import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 
 import { getLocaleCode } from '@entities/locale/LocaleStrings';
@@ -300,7 +298,7 @@ export function loadLandArea(
 /**
  * Compute the coordinates for a region based on the coordinates of the contained territories.
  *
- * Coordinates are weighted by the log-size of the land area
+ * Coordinates are weighted by the fourth root of the land area
  */
 function computeRegionCoordinates(terr: TerritoryData): void {
   if (terr.ID === '001') {

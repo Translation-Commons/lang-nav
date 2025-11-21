@@ -1,3 +1,4 @@
+Territory Code	Territory Name	Land Area (km²)
 001	Earth	148940000
 RU	Russia	16376870
 AQ	Antarctica	14200000
@@ -214,7 +215,6 @@ MT	Malta	315
 MV	Maldives	300
 BQ	Bonaire (Netherlands)	288
 KY	Cayman Islands	264
-	Akrotiri and Dhekelia (UK)	#VALUE!
 KN	St. Kitts & Nevis	261
 NU	Niue	260
 CK	Cook Islands	236
