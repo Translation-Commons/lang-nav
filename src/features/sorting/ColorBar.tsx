@@ -129,6 +129,9 @@ function getTicks(
     case SortBy.Longitude:
       suffix = '°';
       break;
+    case SortBy.Area:
+      suffix = ' km²';
+      break;
     default:
       break;
   }

@@ -118,7 +118,7 @@ export function getDefaultParams(
   } else if (params.view === View.Table) {
     params.limit = 200; // Show more results in table view
   } else if (params.view === View.Map) {
-    params.limit = 100; // Show more results in map view
+    params.limit = 200; // Show more results in map view
   }
 
   // Get default gradient for colorBys
@@ -159,6 +159,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
     case SortBy.Date:
+    case SortBy.Area:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
     case SortBy.VitalityMetascore:

@@ -25,7 +25,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
           src="./data/wiki/map_world.svg"
           style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
         />
-        <MapCircles objects={objects} />
+        <MapCircles objects={objects} scalar={800 / maxWidth} />
       </div>
 
       {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}

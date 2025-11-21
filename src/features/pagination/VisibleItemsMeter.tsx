@@ -100,7 +100,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
 };
 
 const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
-  const { limit, view, updatePageParams } = usePageParams();
+  const { view, updatePageParams } = usePageParams();
   const threshold = getLimitThreshold(view);
 
   if (nShown <= threshold) return null;
@@ -108,8 +108,8 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
   return (
     <div>
       <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} />
-      There are <strong>{limit}</strong> items visible, this may impact page performance. Consider
-      reducing it to{' '}
+      There are <strong>{nShown.toLocaleString()}</strong> items visible, this may impact page
+      performance. Consider reducing the limit to{' '}
       <HoverableButton
         onClick={() => updatePageParams({ limit: threshold })}
         style={{ padding: '0 0.25em' }}

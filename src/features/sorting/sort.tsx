@@ -69,6 +69,8 @@ export function getSortField(
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.longitude
         : undefined;
+    case SortBy.Area:
+      return object.type === ObjectType.Territory ? object.landArea : undefined;
 
     // Population
     case SortBy.Population:
@@ -142,6 +144,7 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.ISOStatus:
     case SortBy.VitalityEthnologue2013:
     case SortBy.VitalityEthnologue2025:
+    case SortBy.Area:
       return SortDirection.Descending; // High to Low
   }
 }
@@ -172,6 +175,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.CountOfTerritories,
         SortBy.Latitude,
         SortBy.Longitude,
+        SortBy.Area,
       ];
     case ObjectType.Language:
       return [

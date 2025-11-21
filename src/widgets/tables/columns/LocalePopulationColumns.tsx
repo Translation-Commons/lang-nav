@@ -7,6 +7,7 @@ import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjus
 import { LocaleData } from '@entities/types/DataTypes';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
+import AlignedFraction from '@shared/ui/AlignedFraction';
 
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
@@ -34,14 +35,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   },
   {
     key: '% in Territory',
-    render: (object) =>
-      object.populationSpeakingPercent && (
-        <>
-          {numberToFixedUnlessSmall(object.populationSpeakingPercent)}
-          {/* If the number is greater than 10%, add an invisible 0 for alignment */}
-          {object.populationSpeakingPercent > 10 && <span style={{ visibility: 'hidden' }}>0</span>}
-        </>
-      ),
+    render: (object) => <AlignedFraction value={object.populationSpeakingPercent} />,
     valueType: TableValueType.Numeric,
     sortParam: SortBy.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',

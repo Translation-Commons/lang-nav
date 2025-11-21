@@ -13,7 +13,9 @@ import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
 
+import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';
+import AlignedFraction from '@shared/ui/AlignedFraction';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const TerritoryTable: React.FC = () => {
@@ -33,7 +35,7 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'ISO Numeric Code',
-          render: (object) => object.codeNumeric || null,
+          render: (object) => object.codeNumeric || object.ID.match(/\d{3}/)?.[0] || null,
           isInitiallyVisible: false,
           columnGroup: 'Codes',
         },
@@ -132,6 +134,31 @@ const TerritoryTable: React.FC = () => {
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Longitude,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Land Area (km²)',
+          description:
+            'Surprisingly, sources report different numbers for the land area for some areas.',
+          render: (object) =>
+            object.landArea ? numberToSigFigs(object.landArea, 3)?.toLocaleString() : undefined,
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Area,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Density',
+          description: 'People per square kilometer',
+          render: (object) => (
+            <AlignedFraction
+              value={
+                object.landArea && object.population ? object.population / object.landArea : null
+              }
+            />
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
           columnGroup: 'Location',
         },
         {
