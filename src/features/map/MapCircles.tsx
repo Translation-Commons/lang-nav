@@ -13,9 +13,10 @@ import { getRobinsonCoordinates } from './getRobinsonCoordinates';
 
 type Props = {
   objects: ObjectData[];
+  scalar: number;
 };
 
-const MapCircles: React.FC<Props> = ({ objects }) => {
+const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
   const { colorBy } = usePageParams();
   const { getCurrentObjects } = usePagination<ObjectData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
@@ -51,11 +52,12 @@ const MapCircles: React.FC<Props> = ({ objects }) => {
       {renderableObjects.map((obj) => {
         return (
           <HoverableCircle
+            key={obj.ID}
             color={
               colorBy === 'None' ? undefined : (coloringFunctions.getColor(obj) ?? 'transparent')
             }
-            key={obj.ID}
             object={obj}
+            scalar={scalar}
             onMouseEnter={buildOnMouseEnter(obj)}
             onMouseLeave={onMouseLeaveTriggeringElement}
           />
@@ -68,9 +70,10 @@ const MapCircles: React.FC<Props> = ({ objects }) => {
 const HoverableCircle: React.FC<{
   color?: string;
   object: ObjectData;
+  scalar: number;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
-}> = ({ object, color, onMouseEnter, onMouseLeave }) => {
+}> = ({ object, color, scalar, onMouseEnter, onMouseLeave }) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) {
     return null;
@@ -85,12 +88,12 @@ const HoverableCircle: React.FC<{
     <circle
       cx={x * 180 - 10} // The map is 10 degrees rotated to preserve land borders
       cy={-y * 90}
-      r={2}
+      r={2 * scalar}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
       style={{ transition: 'fill 0.25s, stroke 0.25s' }}
       className="object-map-circle"
-      strokeWidth={1}
+      strokeWidth={1 * scalar}
       onMouseEnter={(e: React.MouseEvent) => {
         onMouseEnter(e);
         setIsActive(true);
