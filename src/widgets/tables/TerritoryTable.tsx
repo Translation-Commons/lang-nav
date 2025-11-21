@@ -141,6 +141,7 @@ const TerritoryTable: React.FC = () => {
             object.landArea ? numberToSigFigs(object.landArea, 3)?.toLocaleString() : undefined,
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
+          sortParam: SortBy.Area,
           columnGroup: 'Location',
         },
         {

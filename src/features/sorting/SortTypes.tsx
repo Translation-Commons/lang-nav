@@ -14,6 +14,7 @@ export enum SortBy {
   Latitude = 'Latitude',
   Longitude = 'Longitude',
   Date = 'Date',
+  Area = 'Area',
   CountOfLanguages = 'Count of Languages',
   CountOfTerritories = 'Count of Territories',
   Language = 'Language',

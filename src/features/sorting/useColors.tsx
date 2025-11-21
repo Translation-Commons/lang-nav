@@ -116,6 +116,7 @@ function getMinimumValue(colorBy: ColorBy): number {
     case SortBy.VitalityEthnologue2025:
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
+    case SortBy.Area:
       return 0;
     case 'None':
       return 0;
@@ -156,6 +157,7 @@ function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
     case SortBy.PopulationAttested:
     case SortBy.PopulationOfDescendents:
     case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.Area:
       return Math.max(
         objects.reduce((acc, obj) => Math.max(acc, (getSortField(obj, colorBy) as number) || 0), 0),
       );

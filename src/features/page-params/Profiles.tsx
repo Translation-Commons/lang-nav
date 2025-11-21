@@ -159,6 +159,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
     case SortBy.Date:
+    case SortBy.Area:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
     case SortBy.VitalityMetascore:
