@@ -1,3 +1,5 @@
+import { I } from 'node_modules/msw/lib/core/HttpResponse-B4YmE-GJ.d.mts';
+
 import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
 
 import { getLocaleCode } from '@entities/locale/LocaleStrings';
@@ -190,21 +192,26 @@ export function computeContainedTerritoryStats(terr: TerritoryData | undefined):
   if (!terr) return;
 
   // Make sure that territories within are computed
-  const { containsTerritories } = terr;
-  containsTerritories?.forEach(computeContainedTerritoryStats);
+  const containsTerritories = terr.containsTerritories ?? [];
+  containsTerritories.forEach(computeContainedTerritoryStats);
 
-  // Recompute the population for territory groups, in case it was updated from other data
+  // Compute region data that is added up from data within it.
   if (isTerritoryGroup(terr.scope)) {
-    const newPopulation = sumBy(containsTerritories ?? [], (t) => t.population ?? 0);
+    const newPopulation = sumBy(containsTerritories, (t) => t.population ?? 0);
     if (newPopulation) terr.population = newPopulation;
+
+    const landArea = sumBy(containsTerritories, (t) => t.landArea ?? 0);
+    if (landArea) terr.landArea = landArea;
+
+    computeRegionCoordinates(terr);
   }
 
   // GDP is easy, just add it up
-  terr.gdp ??= containsTerritories?.reduce((sum, t) => sum + (t.gdp ?? 0), 0);
+  terr.gdp ??= containsTerritories.reduce((sum, t) => sum + (t.gdp ?? 0), 0);
 
   // For literacy we will combine proportional to the population
   terr.literacyPercent ??=
-    (containsTerritories?.reduce(
+    (containsTerritories.reduce(
       (sum, t) => sum + (t.literacyPercent ?? 0) * (t.population ?? 0),
       0,
     ) ?? 0) / terr.population;
@@ -287,20 +294,33 @@ export function loadLandArea(
         if (terr != null) terr.landArea = a.landArea;
       }),
     )
-    .then(() => {
-      // Start at the root and compute all region land areas
-      computeRegionLandArea(getTerritory('001')!);
-      return;
-    })
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
-function computeRegionLandArea(territory: TerritoryData): number | undefined {
-  if (!isTerritoryGroup(territory.scope)) {
-    return territory.landArea;
+/**
+ * Compute the coordinates for a region based on the coordinates of the contained territories.
+ *
+ * Coordinates are weighted by the log-size of the land area
+ */
+function computeRegionCoordinates(terr: TerritoryData): void {
+  if (terr.ID === '001') {
+    // Special case for the world, just set to 0,0
+    terr.latitude = 0;
+    terr.longitude = 0;
+    return;
   }
-  const containsTerritories = territory.containsTerritories ?? [];
-  const totalLandArea = sumBy(containsTerritories, (t) => computeRegionLandArea(t) ?? 0);
-  territory.landArea = totalLandArea;
-  return totalLandArea;
+
+  const containsTerritories = terr.containsTerritories ?? [];
+
+  const denominator = sumBy(containsTerritories, (t) => (t.landArea ?? 1) ** 0.25);
+  const latitude = sumBy(containsTerritories, (t) => (t.latitude ?? 0) * (t.landArea ?? 1) ** 0.25);
+  const longitude = sumBy(containsTerritories, (t) => {
+    // Handle wrap-around at the international date line
+    if (t.longitude != null && t.longitude < -120)
+      return (t.longitude + 360) * (t.landArea ?? 1) ** 0.25;
+
+    return (t.longitude ?? 0) * (t.landArea ?? 1) ** 0.25;
+  });
+  terr.latitude = latitude / denominator;
+  terr.longitude = (longitude > 180 ? -360 + longitude : longitude) / denominator;
 }
