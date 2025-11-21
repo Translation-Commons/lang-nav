@@ -9,13 +9,9 @@ import { TerritoryData } from '@entities/types/DataTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import {
-  getCurrencyCompactLong,
-  numberToFixedUnlessSmall,
-  numberToSigFigs,
-} from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import TerritoryAttributes from './sections/TerritoryAttributes';
 import TerritoryLocation from './sections/TerritoryLocation';
 
 type Props = {
@@ -24,43 +20,17 @@ type Props = {
 
 const TerritoryDetails: React.FC<Props> = ({ territory }) => {
   const {
-    ID,
     censuses,
     dependentTerritories,
-    gdp,
-    literacyPercent,
     locales,
     parentUNRegion,
-    population,
     containsTerritories,
     sovereign,
-    landArea,
   } = territory;
 
   return (
     <div className="Details">
-      <DetailsSection title="Attributes">
-        <DetailsField title="Territory ID:">{ID}</DetailsField>
-        {!Number.isNaN(population) && (
-          <DetailsField title="Population:">{population.toLocaleString()}</DetailsField>
-        )}
-        {literacyPercent && !Number.isNaN(literacyPercent) && (
-          <DetailsField title="Literacy:">{literacyPercent.toFixed(1)}%</DetailsField>
-        )}
-        {gdp && !Number.isNaN(gdp) && (
-          <DetailsField title="Gross Domestic Product:">{getCurrencyCompactLong(gdp)}</DetailsField>
-        )}
-        {landArea && (
-          <DetailsField title="Land Area:">
-            {numberToSigFigs(landArea, 3)?.toLocaleString()} km²
-          </DetailsField>
-        )}
-        {landArea && population && (
-          <DetailsField title="Density:">
-            {numberToFixedUnlessSmall(population / landArea, 3)} people/km²
-          </DetailsField>
-        )}
-      </DetailsSection>
+      <TerritoryAttributes territory={territory} />
 
       <DetailsSection title="Connections">
         {parentUNRegion != null && (

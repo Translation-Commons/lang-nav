@@ -81,12 +81,13 @@ const HoverableCircle: React.FC<{
 
   const { x, y } = getRobinsonCoordinates(
     object.latitude,
-    object.longitude < -170 ? object.longitude + 360 : object.longitude,
+    // The map is 12 degrees rotated to preserve land borders
+    (object.longitude < -168 ? object.longitude + 360 : object.longitude) - 12,
   );
   const [isActive, setIsActive] = useState(false);
   return (
     <circle
-      cx={x * 180 - 10} // The map is 10 degrees rotated to preserve land borders
+      cx={x * 180}
       cy={-y * 90}
       r={2 * scalar}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}

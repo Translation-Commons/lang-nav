@@ -180,6 +180,7 @@ function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
     case SortBy.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
+    case SortBy.Area:
       return true;
     default:
       return false;

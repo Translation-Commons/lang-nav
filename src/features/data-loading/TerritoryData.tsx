@@ -219,7 +219,7 @@ export function loadCountryCoordinates(
       text
         .split('\n')
         .slice(1)
-        .filter((line) => line.trim() !== ''),
+        .filter((line) => line.trim() !== '' && !line.startsWith('#')),
     )
     .then((lines) =>
       lines

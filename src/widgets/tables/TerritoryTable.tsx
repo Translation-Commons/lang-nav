@@ -35,7 +35,7 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'ISO Numeric Code',
-          render: (object) => object.codeNumeric || null,
+          render: (object) => object.codeNumeric || object.ID.match(/\d{3}/)?.[0] || null,
           isInitiallyVisible: false,
           columnGroup: 'Codes',
         },
