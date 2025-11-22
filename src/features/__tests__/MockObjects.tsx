@@ -1,22 +1,22 @@
-import { addCensusData } from '@features/data-loading/CensusData';
-import { DataContextType } from '@features/data-loading/context/useDataContext';
-import { CoreDataArrays } from '@features/data-loading/CoreData';
+import { addCensusData } from '@features/data/CensusData';
+import { DataContextType } from '@features/data/context/useDataContext';
+import { CoreDataArrays } from '@features/data/CoreData';
 import {
   computeOtherPopulationStatistics,
   connectLanguagesToParent,
   connectLocales,
   connectWritingSystems,
-} from '@features/data-loading/DataAssociations';
-import { connectVariantTags } from '@features/data-loading/IANAData';
-import { computeLocalePopulationFromCensuses } from '@features/data-loading/population/computeLocalePopulationFromCensuses';
-import { computeLocaleWritingPopulation } from '@features/data-loading/population/computeLocaleWritingPopulation';
-import { updateObjectCodesNameAndPopulation } from '@features/data-loading/population/updateObjectCodesNameAndPopulation';
+} from '@features/data/DataAssociations';
+import { connectVariantTags } from '@features/data/IANAData';
+import { computeLocalePopulationFromCensuses } from '@features/data/population/computeLocalePopulationFromCensuses';
+import { computeLocaleWritingPopulation } from '@features/data/population/computeLocaleWritingPopulation';
+import { updateObjectCodesNameAndPopulation } from '@features/data/population/updateObjectCodesNameAndPopulation';
 import {
   computeContainedTerritoryStats,
   connectTerritoriesToParent,
   createRegionalLocales,
-} from '@features/data-loading/TerritoryData';
-import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+} from '@features/data/TerritoryData';
+import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {

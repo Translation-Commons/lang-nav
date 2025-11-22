@@ -3,7 +3,7 @@ import React from 'react';
 import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerritory';
 
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { getSortFunction } from '@features/sorting/sort';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { TerritoryData } from '@entities/types/DataTypes';
 

@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getTerritoriesRelevantToObject } from '@features/filtering/filterByConnections';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { getTerritoriesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
 

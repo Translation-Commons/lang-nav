@@ -1,34 +1,37 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
-import LanguageFilterSelector from '@features/filtering/LanguageFilterSelector';
-import WritingSystemFilterSelector from '@features/filtering/WritingSystemFilterSelector';
 import HoverableButton from '@features/hovercard/HoverableButton';
-import ColorBySelector from '@features/sorting/ColorBySelector';
-import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
+import LimitInput from '@features/pagination/LimitInput';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
+import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
+import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
+import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
+import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
+import TerritoryScopeSelector from '@features/transforms/filtering/TerritoryScopeSelector';
+import {
+  VitalityEth2013Selector,
+  VitalityEth2025Selector,
+  LanguageISOStatusSelector,
+} from '@features/transforms/filtering/VitalitySelector';
+import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
+import SortBySelector from '@features/transforms/sorting/SortBySelector';
+import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 
-import TerritoryFilterSelector from '../../features/filtering/TerritoryFilterSelector';
-import LimitInput from '../../features/pagination/LimitInput';
-import SortBySelector from '../../features/sorting/SortBySelector';
-import SortDirectionSelector from '../../features/sorting/SortDirectionSelector';
 import { ObjectiveList } from '../CommonObjectives';
 
-import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';
-import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
-import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
-import {
-  VitalityEth2013Selector,
-  VitalityEth2025Selector,
-  LanguageISOStatusSelector,
-} from './selectors/VitalitySelector';
 
 import './controls.css';
 

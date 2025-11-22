@@ -1,6 +1,6 @@
-import { SortBy } from '@features/sorting/SortTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';

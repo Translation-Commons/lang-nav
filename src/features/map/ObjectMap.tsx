@@ -1,8 +1,8 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
-import ColorBar from '@features/sorting/ColorBar';
-import useColors from '@features/sorting/useColors';
+import usePageParams from '@features/params/usePageParams';
+import ColorBar from '@features/transforms/coloring/ColorBar';
+import useColors from '@features/transforms/coloring/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

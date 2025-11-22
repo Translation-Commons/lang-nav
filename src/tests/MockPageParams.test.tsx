@@ -1,9 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 
-import { PageParamsContextState } from '@features/page-params/PageParamsContext';
-import { ObjectType, PageParamsOptional, View } from '@features/page-params/PageParamTypes';
-import { getDefaultParams } from '@features/page-params/Profiles';
-import { SortBy } from '@features/sorting/SortTypes';
+import { PageParamsContextState } from '@features/params/PageParamsContext';
+import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
+import { getDefaultParams } from '@features/params/Profiles';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 const mockUpdatePageParams = vi.fn();
 

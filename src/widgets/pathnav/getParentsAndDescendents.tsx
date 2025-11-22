@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';

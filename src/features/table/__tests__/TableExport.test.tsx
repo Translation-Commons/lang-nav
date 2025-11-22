@@ -9,7 +9,7 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import { CodeColumn, NameColumn } from '../CommonColumns';
 import TableExport from '../TableExport';
 
-vi.mock('@features/page-params/usePageParams', () => ({
+vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams()),
 }));
 vi.mock('@features/hovercard/useHoverCard', () => ({

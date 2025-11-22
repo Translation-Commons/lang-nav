@@ -1,16 +1,16 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getScopeFilter } from '@features/filtering/filter';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-import { getSortFunction } from '@features/sorting/sort';
-import { SortBy } from '@features/sorting/SortTypes';
+import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { getSortFunction } from '@features/transforms/sorting/sort';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';

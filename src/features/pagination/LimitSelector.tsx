@@ -1,9 +1,8 @@
 import React, { useMemo } from 'react';
 
-import Selector from '@widgets/controls/components/Selector';
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplayContext';
-
-import usePageParams from '@features/page-params/usePageParams';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 
 const LIMIT_OPTIONS: { [key: string]: number | undefined } = {
   '1': 1,

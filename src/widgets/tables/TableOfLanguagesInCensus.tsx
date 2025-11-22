@@ -1,16 +1,16 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObject from '@features/hovercard/HoverableObject';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-import { SortBy } from '@features/sorting/SortTypes';
+import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData } from '@entities/types/DataTypes';

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-
-import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplayContext';
+import { View } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 
 const ViewSelector: React.FC = () => {
   const { view, updatePageParams } = usePageParams();

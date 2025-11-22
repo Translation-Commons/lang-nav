@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 

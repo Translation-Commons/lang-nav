@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { getScopeFilter } from '@features/filtering/filter';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import usePageParams from '@features/page-params/usePageParams';
-import { getSortFunction } from '@features/sorting/sort';
+import usePageParams from '@features/params/usePageParams';
+import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';

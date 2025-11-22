@@ -1,15 +1,14 @@
 import { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getScopeFilter, getSubstringFilterOnQuery } from '@features/filtering/filter';
-import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { useDataContext } from '@features/data/context/useDataContext';
+import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import { Suggestion } from '@features/params/ui/TextInput';
+import usePageParams from '@features/params/usePageParams';
+import { getScopeFilter, getSubstringFilterOnQuery } from '@features/transforms/filtering/filter';
 
 import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
 
 import { uniqueBy } from '@shared/lib/setUtils';
-
-import { Suggestion } from '../components/TextInput';
 
 const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this seems to prevent render lag.
 

@@ -2,9 +2,9 @@ import { render } from '@testing-library/react';
 import { describe, expect, it, beforeEach, afterEach, vi, Mock } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
-import useFilteredObjects from '@features/filtering/useFilteredObjects';
-import { ObjectType, PageParamsOptional } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -12,10 +12,10 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import CardList from '../CardList';
 
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
-vi.mock('@features/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
-vi.mock('@features/sorting/useColors', () => ({
+vi.mock('@features/transforms/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
+vi.mock('@features/transforms/coloring/useColors', () => ({
   default: vi.fn().mockReturnValue({ getColor: () => 'inherit' }),
 }));
 

@@ -3,8 +3,8 @@ import React from 'react';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableButton from '@features/hovercard/HoverableButton';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { ObjectType, SearchableField, View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 

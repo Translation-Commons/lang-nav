@@ -1,18 +1,15 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import {
-  getRetirementReasonLabel,
-  RetirementReason,
-} from '@features/data-loading/iso/ISORetirements';
+import { useDataContext } from '@features/data/context/useDataContext';
+import { getRetirementReasonLabel, RetirementReason } from '@features/data/iso/ISORetirements';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { SortBy } from '@features/sorting/SortTypes';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';

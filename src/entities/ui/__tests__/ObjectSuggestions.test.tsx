@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { vi, describe, it, expect, Mock } from 'vitest';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
@@ -13,7 +13,7 @@ import ObjectSuggestions from '../ObjectSuggestions';
 vi.mock('../../lib/getObjectFromID', () => ({
   default: vi.fn((id: string) => getBaseLanguageData(id, `OBJ:${id}`)),
 }));
-vi.mock('@features/page-params/usePageParams', () => ({
+vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams({})),
 }));
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));

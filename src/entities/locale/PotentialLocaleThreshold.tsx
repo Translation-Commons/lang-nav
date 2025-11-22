@@ -3,9 +3,9 @@ import React, { ReactNode } from 'react';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
-} from '@widgets/controls/components/SelectorDisplayContext';
-import SelectorLabel from '@widgets/controls/components/SelectorLabel';
-import TextInput from '@widgets/controls/components/TextInput';
+} from '@features/params/ui/SelectorDisplayContext';
+import SelectorLabel from '@features/params/ui/SelectorLabel';
+import TextInput from '@features/params/ui/TextInput';
 
 export function usePotentialLocaleThreshold(): {
   percentThreshold: number;
