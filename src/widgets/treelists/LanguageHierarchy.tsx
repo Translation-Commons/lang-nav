@@ -2,7 +2,7 @@ import React from 'react';
 
 import LanguageSourceSelector from '@widgets/controls/selectors/LanguageSourceSelector';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';

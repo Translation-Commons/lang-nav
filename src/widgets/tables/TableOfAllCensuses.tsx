@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';

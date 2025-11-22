@@ -1,4 +1,4 @@
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';

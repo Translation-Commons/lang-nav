@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-import { RetirementReason } from '@features/data-loading/iso/ISORetirements';
+import { RetirementReason } from '@features/data/iso/ISORetirements';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CLDRCoverageData } from '../types/CLDRTypes';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';

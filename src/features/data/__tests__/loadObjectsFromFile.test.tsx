@@ -5,7 +5,7 @@ import {
   loadLocales,
   loadTerritories,
   loadWritingSystems,
-} from '@features/data-loading/loadObjectsFromFile';
+} from '@features/data/loadObjectsFromFile';
 
 describe('loadLocales', () => {
   it('loads locales without error', async () => {

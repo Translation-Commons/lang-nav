@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType, PageParamKey, SearchableField } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,

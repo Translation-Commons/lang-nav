@@ -5,7 +5,7 @@ import {
   getDisconnectedMockedObjects,
   getMockedCoreData,
 } from '@features/__tests__/MockObjects';
-import { CoreData } from '@features/data-loading/CoreData';
+import { CoreData } from '@features/data/CoreData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';

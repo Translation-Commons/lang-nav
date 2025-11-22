@@ -1,7 +1,7 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';

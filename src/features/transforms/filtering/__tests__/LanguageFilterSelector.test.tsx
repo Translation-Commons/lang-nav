@@ -19,7 +19,7 @@ vi.mock('@features/hovercard/useHoverCard', () => ({
 }));
 
 // mock useDataContext to return languages
-vi.mock('@features/data-loading/context/useDataContext', () => ({
+vi.mock('@features/data/context/useDataContext', () => ({
   // [ine, gem, eng, spa, fra, deu, ita, rus, nav, zho]
   useDataContext: vi.fn(() => ({
     languagesInSelectedSource: getMockLanguages(),

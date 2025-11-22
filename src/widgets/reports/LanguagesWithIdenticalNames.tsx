@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';

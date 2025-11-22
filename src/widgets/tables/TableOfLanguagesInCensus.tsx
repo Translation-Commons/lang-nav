@@ -1,7 +1,7 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObject from '@features/hovercard/HoverableObject';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import { ObjectType, SearchableField } from '@features/params/PageParamTypes';

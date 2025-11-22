@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';

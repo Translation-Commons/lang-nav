@@ -6,22 +6,19 @@ import {
   connectLocales,
   connectWritingSystems,
   groupLanguagesBySource,
-} from '@features/data-loading/DataAssociations';
+} from '@features/data/DataAssociations';
 import {
   loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
-} from '@features/data-loading/IANAData';
+} from '@features/data/IANAData';
 import {
   loadLanguages,
   loadLocales,
   loadTerritories,
   loadWritingSystems,
-} from '@features/data-loading/loadObjectsFromFile';
-import {
-  connectTerritoriesToParent,
-  createRegionalLocales,
-} from '@features/data-loading/TerritoryData';
+} from '@features/data/loadObjectsFromFile';
+import { connectTerritoriesToParent, createRegionalLocales } from '@features/data/TerritoryData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusID, CensusData } from '@entities/census/CensusTypes';

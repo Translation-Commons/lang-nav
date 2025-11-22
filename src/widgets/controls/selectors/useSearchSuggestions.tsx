@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
 import { Suggestion } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';

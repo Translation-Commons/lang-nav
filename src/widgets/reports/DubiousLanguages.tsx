@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';

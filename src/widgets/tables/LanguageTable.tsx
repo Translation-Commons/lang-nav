@@ -1,10 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import {
-  getRetirementReasonLabel,
-  RetirementReason,
-} from '@features/data-loading/iso/ISORetirements';
+import { useDataContext } from '@features/data/context/useDataContext';
+import { getRetirementReasonLabel, RetirementReason } from '@features/data/iso/ISORetirements';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
