@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';

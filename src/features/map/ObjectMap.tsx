@@ -1,6 +1,6 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 

@@ -16,7 +16,7 @@ vi.mock('@features/hovercard/useHoverCard', () => ({
     onMouseLeaveTriggeringElement: vi.fn(),
   }),
 }));
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn().mockReturnValue({}) }));
 
 describe('HoverableObject', () => {
   it('an undefined object will just render the child elements', () => {

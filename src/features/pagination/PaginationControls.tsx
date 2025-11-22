@@ -8,7 +8,7 @@ import {
 import React from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 type Props = {
   itemCount: number;

@@ -22,7 +22,7 @@ import {
   connectTerritoriesToParent,
   createRegionalLocales,
 } from '@features/data-loading/TerritoryData';
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusID, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';

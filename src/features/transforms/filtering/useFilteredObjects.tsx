@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';

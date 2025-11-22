@@ -3,10 +3,21 @@ import React from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
 import LimitInput from '@features/pagination/LimitInput';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
+import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
 import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
+import TerritoryScopeSelector from '@features/transforms/filtering/TerritoryScopeSelector';
+import {
+  VitalityEth2013Selector,
+  VitalityEth2025Selector,
+  LanguageISOStatusSelector,
+} from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
@@ -15,20 +26,12 @@ import { useClickOutside } from '@shared/hooks/useClickOutside';
 
 import { ObjectiveList } from '../CommonObjectives';
 
-import { SelectorDisplay, SelectorDisplayProvider } from './components/SelectorDisplayContext';
-import LanguageScopeSelector from './selectors/LanguageScopeSelector';
 import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
-import TerritoryScopeSelector from './selectors/TerritoryScopeSelector';
 import ViewSelector from './selectors/ViewSelector';
-import {
-  VitalityEth2013Selector,
-  VitalityEth2025Selector,
-  LanguageISOStatusSelector,
-} from './selectors/VitalitySelector';
 
 import './controls.css';
 

@@ -1,9 +1,8 @@
 import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
-import Selector from '@widgets/controls/components/Selector';
-
-import usePageParams from '@features/page-params/usePageParams';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';

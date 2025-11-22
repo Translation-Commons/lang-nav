@@ -1,8 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import { vi, describe, it, expect, beforeEach, Mock } from 'vitest';
 
-import { PageParamsOptional } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
 
@@ -12,7 +12,7 @@ import FilterBreakdown from '../FilterBreakdown';
 
 import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));

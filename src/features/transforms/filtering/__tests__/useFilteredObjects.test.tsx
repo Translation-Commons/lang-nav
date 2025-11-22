@@ -2,8 +2,8 @@ import { renderHook } from '@testing-library/react';
 import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
 
 // import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { PageParamsOptional } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
@@ -16,7 +16,7 @@ import useFilteredObjects from '../useFilteredObjects';
 import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
 // Mock hooks
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
 vi.mock('@features/data-loading/context/useDataContext', () => ({
   // Languages: [ine, eng, spa, fra, deu, ita, zho]

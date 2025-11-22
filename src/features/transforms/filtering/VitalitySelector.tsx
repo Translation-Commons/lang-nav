@@ -1,6 +1,7 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 
 import {
   getVitalityEthnologueCoarseLabel,
@@ -12,8 +13,6 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-
-import Selector from '../components/Selector';
 
 export const LanguageISOStatusSelector: React.FC = () => {
   const { isoStatus, updatePageParams } = usePageParams();

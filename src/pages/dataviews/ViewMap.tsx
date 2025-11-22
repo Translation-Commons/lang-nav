@@ -1,16 +1,15 @@
 import { ReactNode } from 'react';
 
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import ObjectMap from '@features/map/ObjectMap';
+import usePagination from '@features/pagination/usePagination';
+import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
+import { ObjectType } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
-} from '@widgets/controls/components/SelectorDisplayContext';
-
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import ObjectMap from '@features/map/ObjectMap';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-import usePagination from '@features/pagination/usePagination';
-import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
+} from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';

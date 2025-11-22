@@ -1,8 +1,8 @@
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import * as FilterModule from '@features/transforms/filtering/filter';
 import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
 import * as SortModule from '@features/transforms/sorting/sort';
@@ -36,7 +36,7 @@ vi.mock('@features/transforms/sorting/sort', () => ({
 }));
 
 vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
 describe('InteractiveObjectTable', () => {
   const mockObjects: ObjectData[] = [

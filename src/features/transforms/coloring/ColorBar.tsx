@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 import {
   getLanguageISOStatusLabel,

@@ -2,7 +2,7 @@ import { TriangleAlertIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
-import { SearchableField } from '@features/page-params/PageParamTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 

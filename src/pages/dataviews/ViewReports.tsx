@@ -6,8 +6,8 @@ import LanguagesWithIdenticalNames from '@widgets/reports/LanguagesWithIdentical
 import PotentialLocales from '@widgets/reports/PotentialLocales';
 import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithCensuses';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.

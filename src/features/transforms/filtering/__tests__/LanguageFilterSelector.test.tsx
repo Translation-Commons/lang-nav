@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { vi, describe, it, expect, beforeEach, Mock } from 'vitest';
 
-import { PageParamsOptional } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -13,7 +13,7 @@ import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
 const mockUpdatePageParams = vi.fn();
 
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));

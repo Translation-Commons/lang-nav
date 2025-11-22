@@ -5,7 +5,7 @@ import {
   getDisconnectedMockedObjects,
   getMockedObjectDictionaries,
 } from '@features/__tests__/MockObjects';
-import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';

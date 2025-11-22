@@ -10,7 +10,7 @@
 import React from 'react';
 
 import { RetirementReason } from '@features/data-loading/iso/ISORetirements';
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CLDRCoverageData } from '../types/CLDRTypes';
 import {

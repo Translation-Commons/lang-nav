@@ -2,7 +2,7 @@ import { XIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';

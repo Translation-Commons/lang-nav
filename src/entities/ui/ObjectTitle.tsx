@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { getObjectSubtitle } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';

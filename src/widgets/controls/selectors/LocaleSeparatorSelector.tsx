@@ -1,9 +1,8 @@
 import React from 'react';
 
-import { LocaleSeparator } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-
-import Selector from '../components/Selector';
+import { LocaleSeparator } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 
 const LocaleSeparatorSelector: React.FC = () => {
   const { localeSeparator, updatePageParams } = usePageParams();

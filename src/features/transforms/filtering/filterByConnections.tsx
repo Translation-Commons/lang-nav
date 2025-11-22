@@ -2,8 +2,8 @@ import { useCallback } from 'react';
 
 import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendents';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import {

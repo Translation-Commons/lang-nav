@@ -1,8 +1,8 @@
 import React from 'react';
 
 import HoverableObject from '@features/hovercard/HoverableObject';
-import { SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/types/DataTypes';
 

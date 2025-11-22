@@ -1,12 +1,11 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
-
-import Selector from '../components/Selector';
 
 const LanguageScopeSelector: React.FC = () => {
   const { languageScopes, updatePageParams } = usePageParams();

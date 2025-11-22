@@ -2,8 +2,8 @@ import { screen, fireEvent, render } from '@testing-library/react';
 import React from 'react';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
-import { View, SearchableField, PageParamsOptional } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { View, SearchableField, PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import {
   LanguageISOStatus,
@@ -16,7 +16,7 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import FilterPath from '../FilterPath';
 
 // Mock hooks and components
-vi.mock('@features/page-params/usePageParams', () => ({
+vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
 

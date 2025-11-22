@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
-import { ObjectType, SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope, LanguageData } from '@entities/language/LanguageTypes';
 import {

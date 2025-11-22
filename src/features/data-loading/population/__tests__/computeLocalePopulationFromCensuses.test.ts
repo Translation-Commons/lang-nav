@@ -6,7 +6,7 @@ import {
   getMockedCoreData,
 } from '@features/__tests__/MockObjects';
 import { CoreData } from '@features/data-loading/CoreData';
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, LocaleSource, ObjectDictionary } from '@entities/types/DataTypes';

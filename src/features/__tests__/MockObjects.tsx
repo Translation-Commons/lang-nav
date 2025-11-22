@@ -16,7 +16,7 @@ import {
   connectTerritoriesToParent,
   createRegionalLocales,
 } from '@features/data-loading/TerritoryData';
-import { LocaleSeparator, ObjectType } from '@features/page-params/PageParamTypes';
+import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import {

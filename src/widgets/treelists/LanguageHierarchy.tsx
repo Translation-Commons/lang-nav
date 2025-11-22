@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { SelectorDisplay } from '@widgets/controls/components/SelectorDisplayContext';
 import LanguageSourceSelector from '@widgets/controls/selectors/LanguageSourceSelector';
 
 import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';

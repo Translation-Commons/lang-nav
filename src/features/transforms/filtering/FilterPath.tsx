@@ -1,12 +1,11 @@
 import { SlashIcon, XIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
-import Selector from '@widgets/controls/components/Selector';
-
 import HoverableButton from '@features/hovercard/HoverableButton';
-import { SearchableField, View } from '@features/page-params/PageParamTypes';
-import { getDefaultParams } from '@features/page-params/Profiles';
-import usePageParams from '@features/page-params/usePageParams';
+import { SearchableField, View } from '@features/params/PageParamTypes';
+import { getDefaultParams } from '@features/params/Profiles';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {

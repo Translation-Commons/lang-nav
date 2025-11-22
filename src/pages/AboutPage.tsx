@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 import CreativeCommonsLicense from '@widgets/CreativeCommonsLicense';
 
-import { getNewURL } from '@features/page-params/getNewURL';
-import { PageParamsOptional } from '@features/page-params/PageParamTypes';
+import { getNewURL } from '@features/params/getNewURL';
+import { PageParamsOptional } from '@features/params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 

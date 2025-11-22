@@ -1,16 +1,15 @@
 import React, { useCallback } from 'react';
 
-import { ObjectType, View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType, View } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
-
-import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplayContext';
 
 const ObjectTypeSelector: React.FC = () => {
   const { objectType, updatePageParams, view } = usePageParams();

@@ -3,7 +3,7 @@ import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableObject from '@features/hovercard/HoverableObject';
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 import { getFilterByTerritory } from '@features/transforms/filtering/filterByConnections';
 
 import Deemphasized from '@shared/ui/Deemphasized';

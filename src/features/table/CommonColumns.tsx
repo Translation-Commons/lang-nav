@@ -1,5 +1,5 @@
 import HoverableObject from '@features/hovercard/HoverableObject';
-import { SearchableField } from '@features/page-params/PageParamTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';

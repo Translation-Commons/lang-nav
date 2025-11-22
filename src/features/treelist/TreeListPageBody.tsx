@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
-import usePageParams from '@features/page-params/usePageParams';
 import LimitSelector from '@features/pagination/LimitSelector';
+import usePageParams from '@features/params/usePageParams';
 import { getFilterBySubstring, getFilterByVitality } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 

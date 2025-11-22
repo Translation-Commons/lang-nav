@@ -2,8 +2,8 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, beforeEach, afterEach, vi, Mock } from 'vitest';
 
-import { PageParamsOptional } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import {
   getLanguageISOStatusLabel,
@@ -24,8 +24,8 @@ import {
   VitalityEth2025Selector,
 } from '../VitalitySelector';
 
-vi.mock('@features/page-params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@widgets/controls/components/SelectorDisplayContext', () => ({
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
   useSelectorDisplay: vi.fn().mockReturnValue({ display: 'buttonList' }),
   SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,

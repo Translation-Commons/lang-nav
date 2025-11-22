@@ -1,14 +1,13 @@
 import { SlashIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import Selector from '@widgets/controls/components/Selector';
+import { ObjectType, View } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
-} from '@widgets/controls/components/SelectorDisplayContext';
-
-import { ObjectType, View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+} from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 import FilterPath from '@features/transforms/filtering/FilterPath';
 
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';

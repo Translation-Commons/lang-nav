@@ -1,9 +1,9 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
 import useHoverCard from '@features/hovercard/useHoverCard';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
 import usePagination from '@features/pagination/usePagination';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import useColors from '@features/transforms/coloring/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';

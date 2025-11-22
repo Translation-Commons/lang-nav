@@ -1,16 +1,15 @@
 import React, { useCallback } from 'react';
 
+import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { PageParamKey, SearchableField } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
   useSelectorDisplay,
-} from '@widgets/controls/components/SelectorDisplayContext';
-import SelectorLabel from '@widgets/controls/components/SelectorLabel';
-import TextInput, { Suggestion } from '@widgets/controls/components/TextInput';
-
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { PageParamKey, SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+} from '@features/params/ui/SelectorDisplayContext';
+import SelectorLabel from '@features/params/ui/SelectorLabel';
+import TextInput, { Suggestion } from '@features/params/ui/TextInput';
+import usePageParams from '@features/params/usePageParams';
 import { getSortFunctionParameterized } from '@features/transforms/sorting/sort';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
