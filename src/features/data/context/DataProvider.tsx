@@ -12,10 +12,10 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
-import { useCoreData } from '../CoreData';
 import { updateObjectCodesNameAndPopulation } from '../population/updateObjectCodesNameAndPopulation';
-import { loadSupplementalData } from '../SupplementalData';
 
+import { useCoreData } from '../load/CoreData';
+import { loadSupplementalData } from '../load/SupplementalData';
 import { DataContext, DataContextType } from './useDataContext';
 
 enum LoadingStage {

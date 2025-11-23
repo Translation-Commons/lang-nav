@@ -1,21 +1,19 @@
-import { addCensusData } from '@features/data/CensusData';
+import { addCensusData } from '@features/data/connect/connectCensuses';
+import { connectLanguagesToParent } from '@features/data/connect/connectLanguagestoParent';
+import connectLocales from '@features/data/connect/connectLocales';
+import { connectWritingSystems } from '@features/data/connect/connectWritingSystems';
 import { DataContextType } from '@features/data/context/useDataContext';
-import { CoreDataArrays } from '@features/data/CoreData';
-import {
-  computeOtherPopulationStatistics,
-  connectLanguagesToParent,
-  connectLocales,
-  connectWritingSystems,
-} from '@features/data/DataAssociations';
-import { connectVariantTags } from '@features/data/IANAData';
-import { computeLocalePopulationFromCensuses } from '@features/data/population/computeLocalePopulationFromCensuses';
-import { computeLocaleWritingPopulation } from '@features/data/population/computeLocaleWritingPopulation';
-import { updateObjectCodesNameAndPopulation } from '@features/data/population/updateObjectCodesNameAndPopulation';
+import { createRegionalLocales } from '@features/data/generate/createRegionalLocales';
+import { CoreDataArrays } from '@features/data/load/CoreData';
+import { connectVariantTags } from '@features/data/load/IANAData';
 import {
   computeContainedTerritoryStats,
   connectTerritoriesToParent,
-  createRegionalLocales,
-} from '@features/data/TerritoryData';
+} from '@features/data/load/TerritoryData';
+import { computeDescendentPopulation } from '@features/data/population/computeDescedentPopulation';
+import { computeLocalePopulationFromCensuses } from '@features/data/population/computeLocalePopulationFromCensuses';
+import { computeLocaleWritingPopulation } from '@features/data/population/computeLocaleWritingPopulation';
+import { updateObjectCodesNameAndPopulation } from '@features/data/population/updateObjectCodesNameAndPopulation';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
@@ -391,7 +389,7 @@ export function getFullyInstantiatedMockedObjects(
   // Initial connections and algorithms
   connectMockedObjects(objects);
   const { languagesBySource, writingSystems, locales } = getMockedObjectDictionaries(objects);
-  computeOtherPopulationStatistics(languagesBySource, writingSystems);
+  computeDescendentPopulation(languagesBySource, writingSystems);
 
   // From DataContext
   const world = objects['001'] as TerritoryData;

@@ -9,7 +9,7 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
-import { CoreDataArrays } from '../CoreData';
+import { CoreDataArrays } from '../load/CoreData';
 
 type DataGetters = {
   getObject(id: string): ObjectData | undefined;

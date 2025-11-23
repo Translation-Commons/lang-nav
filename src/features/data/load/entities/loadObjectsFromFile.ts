@@ -2,7 +2,6 @@
  * This file provides asynchronous functions to load in data
  */
 
-import { LanguageData, LanguageDictionary } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
   ObjectData,
@@ -12,12 +11,8 @@ import {
 
 import { toDictionary } from '@shared/lib/setUtils';
 
-import { parseLanguageLine, parseLocaleLine, parseWritingSystem } from './DataParsing';
-import { parseTerritoryLine } from './TerritoryData';
-
-export async function loadLanguages(): Promise<LanguageDictionary | void> {
-  return await loadObjectsFromFile<LanguageData>('data/languages.tsv', parseLanguageLine);
-}
+import { parseLocaleLine, parseWritingSystem } from '../DataParsing';
+import { parseTerritoryLine } from '../TerritoryData';
 
 export async function loadLocales(): Promise<Record<string, LocaleData> | void> {
   return await loadObjectsFromFile<LocaleData>('data/locales.tsv', parseLocaleLine);
@@ -34,7 +29,7 @@ export async function loadTerritories(): Promise<Record<string, TerritoryData> |
   return await loadObjectsFromFile<TerritoryData>('data/territories.tsv', parseTerritoryLine);
 }
 
-async function loadObjectsFromFile<T extends ObjectData>(
+export async function loadObjectsFromFile<T extends ObjectData>(
   filePath: string,
   parseLine: (line: string) => T | undefined,
 ): Promise<Record<string, T> | void> {

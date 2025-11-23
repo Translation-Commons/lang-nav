@@ -13,7 +13,7 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
@@ -159,11 +159,13 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           },
           {
-            key: 'Primary Territory',
+            key: 'Primary Country',
             render: (loc) => {
-              const territory = loc.language?.locales.sort(
-                (a, b) => (b.populationSpeaking ?? -1) - (a.populationSpeaking ?? -1),
-              )[0]?.territory;
+              const territory = loc.language?.locales
+                .filter((l) => l.territory?.scope === TerritoryScope.Country)
+                .sort(
+                  (a, b) => (b.populationSpeaking ?? -1) - (a.populationSpeaking ?? -1),
+                )[0]?.territory;
               return territory ? <HoverableObjectName object={territory} /> : null;
             },
             isInitiallyVisible: true,

@@ -1,24 +1,16 @@
 import { useState } from 'react';
 
 import {
-  computeOtherPopulationStatistics,
-  connectLanguagesToParent,
-  connectLocales,
-  connectWritingSystems,
-  groupLanguagesBySource,
-} from '@features/data/DataAssociations';
+  loadLocales,
+  loadTerritories,
+  loadWritingSystems,
+} from '@features/data/load/entities/loadObjectsFromFile';
 import {
   loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
-} from '@features/data/IANAData';
-import {
-  loadLanguages,
-  loadLocales,
-  loadTerritories,
-  loadWritingSystems,
-} from '@features/data/loadObjectsFromFile';
-import { connectTerritoriesToParent, createRegionalLocales } from '@features/data/TerritoryData';
+} from '@features/data/load/IANAData';
+import { connectTerritoriesToParent } from '@features/data/load/TerritoryData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusID, CensusData } from '@entities/census/CensusTypes';
@@ -31,12 +23,20 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
+import { groupLanguagesBySource } from '../connect/connectLanguages';
+import { connectLanguagesToParent } from '../connect/connectLanguagestoParent';
+import connectLocales from '../connect/connectLocales';
+import { connectWritingSystems } from '../connect/connectWritingSystems';
+import { createRegionalLocales } from '../generate/createRegionalLocales';
+import { computeDescendentPopulation } from '../population/computeDescedentPopulation';
+
+import { loadLanguages } from './entities/loadLanguages';
+import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
 import {
   addGlottologLanguages,
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
 } from './GlottologData';
-import { addISORetirementsToLanguages, loadISORetirements } from './iso/ISORetirements';
 import {
   addISODataToLanguages,
   addISOLanguageFamilyData,
@@ -139,7 +139,7 @@ export function useCoreData(): {
     connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
-    computeOtherPopulationStatistics(languagesBySource, writingSystems);
+    computeDescendentPopulation(languagesBySource, writingSystems);
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));
