@@ -18,8 +18,8 @@ import {
 } from '@entities/types/DataTypes';
 
 import { computeDescendantPopulation } from '../compute/computeDescedantPopulation';
-import { connectLanguagesToParent } from '../connect/cconnectLanguagesToParent';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
+import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
 import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '../connect/connectWritingSystems';
