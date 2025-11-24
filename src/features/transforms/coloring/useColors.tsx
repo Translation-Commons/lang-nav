@@ -108,8 +108,8 @@ function getMinimumValue(colorBy: ColorBy): number {
       return -1;
     case SortBy.Population:
     case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendents:
-    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.PopulationOfDescendants:
+    case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.Literacy:
@@ -157,8 +157,8 @@ function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
     case SortBy.CountOfTerritories:
     case SortBy.Population:
     case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendents:
-    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.PopulationOfDescendants:
+    case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.Area:
       return Math.max(
         objects.reduce((acc, obj) => Math.max(acc, (getSortField(obj, colorBy) as number) || 0), 0),
@@ -177,8 +177,8 @@ function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
   switch (colorBy) {
     case SortBy.Population:
     case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendents:
-    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.PopulationOfDescendants:
+    case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
     case SortBy.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out

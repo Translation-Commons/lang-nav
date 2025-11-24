@@ -1,24 +1,10 @@
 import { useState } from 'react';
 
 import {
-  computeOtherPopulationStatistics,
-  connectLanguagesToParent,
-  connectLocales,
-  connectWritingSystems,
-  groupLanguagesBySource,
-} from '@features/data/DataAssociations';
-import {
   loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
-} from '@features/data/IANAData';
-import {
-  loadLanguages,
-  loadLocales,
-  loadTerritories,
-  loadWritingSystems,
-} from '@features/data/loadObjectsFromFile';
-import { connectTerritoriesToParent, createRegionalLocales } from '@features/data/TerritoryData';
+} from '@features/data/load/extra_entities/IANAData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusID, CensusData } from '@entities/census/CensusTypes';
@@ -31,12 +17,23 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
+import { computeDescendantPopulation } from '../compute/computeDescedantPopulation';
+import { groupLanguagesBySource } from '../connect/connectLanguages';
+import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
+import connectLocales from '../connect/connectLocales';
+import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
+import { connectWritingSystems } from '../connect/connectWritingSystems';
+import { createRegionalLocales } from '../connect/createRegionalLocales';
+
+import { loadLanguages } from './entities/loadLanguages';
+import { loadLocales } from './entities/loadLocales';
+import { loadTerritories } from './entities/loadTerritories';
+import { loadWritingSystems } from './entities/loadWritingSystems';
 import {
   addGlottologLanguages,
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
-} from './GlottologData';
-import { addISORetirementsToLanguages, loadISORetirements } from './iso/ISORetirements';
+} from './extra_entities/GlottologData';
 import {
   addISODataToLanguages,
   addISOLanguageFamilyData,
@@ -45,8 +42,9 @@ import {
   loadISOLanguageFamilies,
   loadISOLanguages,
   loadISOMacrolanguages,
-} from './ISOData';
-import { addCLDRLanguageDetails } from './UnicodeData';
+} from './extra_entities/ISOData';
+import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
+import { addCLDRLanguageDetails } from './supplemental/UnicodeData';
 
 export type CoreDataArrays = {
   allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets
@@ -139,7 +137,7 @@ export function useCoreData(): {
     connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
-    computeOtherPopulationStatistics(languagesBySource, writingSystems);
+    computeDescendantPopulation(languagesBySource, writingSystems);
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));

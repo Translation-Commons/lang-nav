@@ -1,15 +1,15 @@
-import { addCensusData, loadCensusData } from './CensusData';
-import { DataContextType } from './context/useDataContext';
-import { computeLocalePopulationFromCensuses } from './population/computeLocalePopulationFromCensuses';
-import { computeLocaleWritingPopulation } from './population/computeLocaleWritingPopulation';
-import {
-  computeContainedTerritoryStats,
-  loadCountryCoordinates,
-  loadLandArea,
-  loadTerritoryGDPLiteracy,
-} from './TerritoryData';
-import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './UnicodeData';
-import { loadAndApplyWikipediaData } from './WikipediaData';
+import { computeLocalePopulationFromCensuses } from '../compute/computeLocalePopulationFromCensuses';
+import { computeLocaleWritingPopulation } from '../compute/computeLocaleWritingPopulation';
+import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
+import { addCensusData } from '../connect/connectCensuses';
+import { DataContextType } from '../context/useDataContext';
+
+import { loadCensusData } from './extra_entities/loadCensusData';
+import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
+import { loadLandArea } from './supplemental/loadLandArea';
+import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
+import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './supplemental/UnicodeData';
+import { loadAndApplyWikipediaData } from './supplemental/WikipediaData';
 
 /**
  * Get more data that is not necessary for the initial page load

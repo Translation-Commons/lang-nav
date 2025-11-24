@@ -8,7 +8,7 @@ import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/langua
 import { CLDRCoverageLevel, CLDRCoverageImport } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
 
-import { DataContextType } from './context/useDataContext';
+import { DataContextType } from '../../context/useDataContext';
 
 const DEBUG = false;
 

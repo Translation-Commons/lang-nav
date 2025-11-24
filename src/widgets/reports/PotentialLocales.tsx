@@ -30,7 +30,7 @@ import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 
 type PartitionedLocales = {
   largest: LocaleData[];
-  largestButDescendentExists: LocaleData[];
+  largestButDescendantExists: LocaleData[];
   significant: LocaleData[];
   significantButMaybeRedundant: LocaleData[];
 };
@@ -70,7 +70,7 @@ const PotentialLocales: React.FC = () => {
       </SubReport>
       <SubReport
         title="Largest ** with caveats"
-        locales={potentialLocales.largestButDescendentExists}
+        locales={potentialLocales.largestButDescendantExists}
       >
         The locales represent the largest population of a language in a territory, but a language or
         dialect of that locale is already present for that locale, so it may not be necessary or it
@@ -183,10 +183,10 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Related Locale',
           render: (object) => {
-            const descendentLocale = object.containedLocales ? object.containedLocales[0] : null;
+            const descendantLocale = object.containedLocales ? object.containedLocales[0] : null;
             return (
-              descendentLocale && (
-                <HoverableObjectName object={descendentLocale} labelSource="code" />
+              descendantLocale && (
+                <HoverableObjectName object={descendantLocale} labelSource="code" />
               )
             );
           },
@@ -296,7 +296,7 @@ function getPotentialLocales(
 
   return Object.values(allLocalesByLanguage).reduce<PartitionedLocales>(partitionPotentialLocales, {
     largest: [],
-    largestButDescendentExists: [],
+    largestButDescendantExists: [],
     significant: [],
     significantButMaybeRedundant: [],
   });
@@ -317,7 +317,7 @@ function partitionPotentialLocales(
   // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
   if (largestLocale.localeSource === 'census') {
     // Some censuses include language families -- that's nice complementary data but its usually not a priority
-    const descendentLocaleInTerritory = largestLocale.language
+    const descendantLocaleInTerritory = largestLocale.language
       ? findExtantLocaleInTerritoryDescendingFromLanguage(
           // start with the language of the locale to find alt codes eg. nan -> nan_Hant
           // Then it will search child languages and dialects
@@ -325,12 +325,12 @@ function partitionPotentialLocales(
           largestLocale.territoryCode,
         )
       : null;
-    if (!descendentLocaleInTerritory) {
+    if (!descendantLocaleInTerritory) {
       largestLocale.containedLocales = [localesSorted[1]];
       partitionedLocales.largest.push(largestLocale);
     } else {
-      largestLocale.containedLocales = [descendentLocaleInTerritory];
-      partitionedLocales.largestButDescendentExists.push(largestLocale);
+      largestLocale.containedLocales = [descendantLocaleInTerritory];
+      partitionedLocales.largestButDescendantExists.push(largestLocale);
     }
   }
 
@@ -338,7 +338,7 @@ function partitionPotentialLocales(
   localesOfTheSameLanguage
     .filter((locale) => locale !== largestLocale && locale.localeSource === 'census')
     .forEach((locale) => {
-      const descendentLocaleInTerritory = locale.language
+      const descendantLocaleInTerritory = locale.language
         ? findExtantLocaleInTerritoryDescendingFromLanguage(
             // start with the language of the locale to find alt codes eg. nan -> nan_Hant
             // Then it will search child languages and dialects
@@ -346,11 +346,11 @@ function partitionPotentialLocales(
             locale.territoryCode,
           )
         : null;
-      if (!descendentLocaleInTerritory) {
+      if (!descendantLocaleInTerritory) {
         locale.containedLocales = [localesSorted[0]];
         partitionedLocales.significant.push(locale);
       } else {
-        locale.containedLocales = [descendentLocaleInTerritory];
+        locale.containedLocales = [descendantLocaleInTerritory];
         partitionedLocales.significantButMaybeRedundant.push(locale);
       }
     });
@@ -362,14 +362,14 @@ function findExtantLocaleInTerritoryDescendingFromLanguage(
   languages?: LanguageData[],
   territoryCode?: TerritoryCode,
 ): LocaleData | null {
-  const directDescendent = findLocaleWithSameTerritory(languages, territoryCode);
-  const recursiveDescendents =
+  const directDescendant = findLocaleWithSameTerritory(languages, territoryCode);
+  const recursiveDescendants =
     languages?.map((lang) =>
       findExtantLocaleInTerritoryDescendingFromLanguage(lang.childLanguages, territoryCode),
     ) ?? [];
   return (
     // Sort to pick the most populous locale
-    [directDescendent, ...recursiveDescendents].filter(Boolean).sort((a, b) => {
+    [directDescendant, ...recursiveDescendants].filter(Boolean).sort((a, b) => {
       return (b?.populationSpeaking ?? 0) - (a?.populationSpeaking ?? 0);
     })[0] ?? null
   );

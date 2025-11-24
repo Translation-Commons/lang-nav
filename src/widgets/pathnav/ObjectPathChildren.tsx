@@ -7,7 +7,7 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getDescendantsName, getObjectChildren } from './getParentsAndDescendents';
+import { getDescendantsName, getObjectChildren } from './getParentsAndDescendants';
 
 /*
  * Displays the children of an object in the path navigation.

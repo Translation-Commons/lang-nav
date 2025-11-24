@@ -44,7 +44,7 @@ ul.TreeListBranch::before {
 }
 
 .TreeListExpandBranch,
-.TreeListSeeAllDescendents {
+.TreeListSeeAllDescendants {
   display: inline-block;
   margin: 0;
   margin-right: 4px;

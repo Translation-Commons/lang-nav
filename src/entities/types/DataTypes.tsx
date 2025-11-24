@@ -113,7 +113,7 @@ export interface WritingSystemData extends ObjectBase {
 
   // Derived when combining data
   populationUpperBound?: number;
-  populationOfDescendents?: number;
+  populationOfDescendants?: number;
 
   // References to other objects, filled in after loading the TSV
   primaryLanguage?: LanguageData;

@@ -17,7 +17,7 @@ export type TreeNodeData = {
   object: ObjectData;
   type: ObjectType;
   labelStyle?: React.CSSProperties;
-  descendentsPassFilter?: boolean;
+  descendantsPassFilter?: boolean;
 };
 
 type Props = {
@@ -26,9 +26,9 @@ type Props = {
 };
 
 const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }) => {
-  const { children, object, labelStyle, descendentsPassFilter } = nodeData;
+  const { children, object, labelStyle, descendantsPassFilter } = nodeData;
   const { view, searchBy, searchString } = usePageParams();
-  const [expanded, setExpanded] = useState(isExpandedInitially || descendentsPassFilter);
+  const [expanded, setExpanded] = useState(isExpandedInitially || descendantsPassFilter);
   const [seeAllChildren, setSeeAllChildren] = useState(false);
   const { limit } = usePageParams();
   const {
@@ -48,8 +48,8 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
 
   // Update the initial opening if a user is typing things in the search box
   useEffect(
-    () => setExpanded(isExpandedInitially || descendentsPassFilter || allExpanded),
-    [descendentsPassFilter, allExpanded],
+    () => setExpanded(isExpandedInitially || descendantsPassFilter || allExpanded),
+    [descendantsPassFilter, allExpanded],
   );
   const population = getObjectPopulation(object);
 
@@ -97,10 +97,10 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
           {limit > 0 && children.length > limit && !seeAllChildren && !allExpanded && (
             <li>
               <button
-                className="TreeListSeeAllDescendents"
+                className="TreeListSeeAllDescendants"
                 onClick={() => setSeeAllChildren((prev) => !prev)}
               >
-                See {children.length - limit} more descendents
+                See {children.length - limit} more descendants
               </button>
             </li>
           )}

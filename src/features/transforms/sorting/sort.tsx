@@ -17,8 +17,8 @@ import {
 import {
   getObjectPopulation,
   getObjectPopulationAttested,
-  getObjectPopulationOfDescendents,
-  getObjectPopulationPercentInBiggestDescendentLanguage,
+  getObjectPopulationOfDescendants,
+  getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
   getObjectPercentOfTerritoryPopulation,
 } from '@entities/lib/getObjectPopulation';
@@ -77,10 +77,10 @@ export function getSortField(
       return getObjectPopulation(object);
     case SortBy.PopulationAttested:
       return getObjectPopulationAttested(object);
-    case SortBy.PopulationOfDescendents:
-      return getObjectPopulationOfDescendents(object, effectiveLanguageSource);
-    case SortBy.PopulationPercentInBiggestDescendentLanguage:
-      return getObjectPopulationPercentInBiggestDescendentLanguage(object);
+    case SortBy.PopulationOfDescendants:
+      return getObjectPopulationOfDescendants(object, effectiveLanguageSource);
+    case SortBy.PopulationPercentInBiggestDescendantLanguage:
+      return getObjectPopulationPercentInBiggestDescendantLanguage(object);
     case SortBy.PercentOfTerritoryPopulation:
       return getObjectPercentOfTerritoryPopulation(object);
     case SortBy.PercentOfOverallLanguageSpeakers:
@@ -133,8 +133,8 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.Date:
     case SortBy.Population:
     case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendents:
-    case SortBy.PopulationPercentInBiggestDescendentLanguage:
+    case SortBy.PopulationOfDescendants:
+    case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.Literacy:
@@ -214,7 +214,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         // SortBy.Literacy, Data not available yet
         SortBy.Language,
         SortBy.CountOfLanguages,
-        SortBy.PopulationOfDescendents,
+        SortBy.PopulationOfDescendants,
       ];
     case ObjectType.VariantTag:
       return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
