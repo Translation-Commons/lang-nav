@@ -47,18 +47,18 @@ export function getObjectPopulationAttested(object: ObjectData): number | undefi
   }
 }
 
-// SortBy.PopulationOfDescendents
-export function getObjectPopulationOfDescendents(
+// SortBy.PopulationOfDescendants
+export function getObjectPopulationOfDescendants(
   object: ObjectData,
   languageSource?: LanguageSource,
 ): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
       return languageSource
-        ? object[languageSource].populationOfDescendents
-        : object.populationOfDescendents;
+        ? object[languageSource].populationOfDescendants
+        : object.populationOfDescendants;
     case ObjectType.WritingSystem:
-      return object.populationOfDescendents;
+      return object.populationOfDescendants;
     case ObjectType.Territory:
       return object.dependentTerritories && object.dependentTerritories.length > 0
         ? sumBy(object.dependentTerritories, (t) => t.population ?? 0)
@@ -70,8 +70,8 @@ export function getObjectPopulationOfDescendents(
   }
 }
 
-// SortBy.PopulationPercentInBiggestDescendentLanguage
-export function getObjectPopulationPercentInBiggestDescendentLanguage(
+// SortBy.PopulationPercentInBiggestDescendantLanguage
+export function getObjectPopulationPercentInBiggestDescendantLanguage(
   object: ObjectData,
 ): number | undefined {
   switch (object.type) {

@@ -213,7 +213,7 @@ describe('getSortByParameterized', () => {
   it('sortBy: PopulationAttested', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
-      SortBy.PopulationOfDescendents,
+      SortBy.PopulationOfDescendants,
       LanguageSource.Combined,
       SortBehavior.Normal,
     );
@@ -308,10 +308,10 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: PopulationPercentInBiggestDescendentLanguage', () => {
+  it('sortBy: PopulationPercentInBiggestDescendantLanguage', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
-      SortBy.PopulationPercentInBiggestDescendentLanguage,
+      SortBy.PopulationPercentInBiggestDescendantLanguage,
       LanguageSource.Combined,
       SortBehavior.Normal,
     );

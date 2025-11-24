@@ -6,7 +6,7 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
-import LanguagePopulationFromDescendents from '@entities/language/LanguagePopulationFromDescendents';
+import LanguagePopulationFromDescendants from '@entities/language/LanguagePopulationFromDescendants';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import LanguagePopulationInSelectedTerritory from '@entities/language/LanguagePopulationInSelectedTerritory';
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -63,10 +63,10 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     key: 'Population (from Dialects)',
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
-    render: (lang) => <LanguagePopulationFromDescendents lang={lang} />,
+    render: (lang) => <LanguagePopulationFromDescendants lang={lang} />,
     valueType: TableValueType.Numeric,
     isInitiallyVisible: false,
-    sortParam: SortBy.PopulationOfDescendents,
+    sortParam: SortBy.PopulationOfDescendants,
     columnGroup: 'Population',
   },
   {

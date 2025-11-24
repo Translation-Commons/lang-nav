@@ -7,8 +7,8 @@ import {
   getObjectPercentOfTerritoryPopulation,
   getObjectPopulation,
   getObjectPopulationAttested,
-  getObjectPopulationOfDescendents,
-  getObjectPopulationPercentInBiggestDescendentLanguage,
+  getObjectPopulationOfDescendants,
+  getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
 } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -84,12 +84,12 @@ describe('getObjectPopulationAttested', () => {
   });
 });
 
-describe('getObjectPopulationOfDescendents', () => {
-  it('returns population of descendents for objects', () => {
+describe('getObjectPopulationOfDescendants', () => {
+  it('returns population of descendants for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationOfDescendents(obj as ObjectData, LanguageSource.Combined),
+        getObjectPopulationOfDescendants(obj as ObjectData, LanguageSource.Combined),
       ]),
     );
     expect(results).toEqual({
@@ -151,12 +151,12 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
   });
 });
 
-describe('getObjectPopulationPercentInBiggestDescendentLanguage', () => {
-  it('returns population percent in biggest descendent language for objects', () => {
+describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
+  it('returns population percent in biggest descendant language for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationPercentInBiggestDescendentLanguage(obj as ObjectData)?.toFixed(1),
+        getObjectPopulationPercentInBiggestDescendantLanguage(obj as ObjectData)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({

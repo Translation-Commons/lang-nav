@@ -1,7 +1,7 @@
 import { computeLocalePopulationFromCensuses } from '../compute/computeLocalePopulationFromCensuses';
 import { computeLocaleWritingPopulation } from '../compute/computeLocaleWritingPopulation';
 import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
-import { addCensusData } from '../connect/connectCensuses';
+import { addCensusData } from '../connect/connectCensusess';
 import { DataContextType } from '../context/useDataContext';
 
 import { loadCensusData } from './extra_entities/loadCensusData';

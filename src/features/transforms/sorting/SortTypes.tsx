@@ -23,10 +23,10 @@ export enum SortBy {
 
   // Extra population metrics
   PopulationAttested = 'Population Attested',
-  PopulationOfDescendents = 'Population of Descendents',
+  PopulationOfDescendants = 'Population of Descendants',
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
-  PopulationPercentInBiggestDescendentLanguage = 'Biggest Descendent Relative Population',
+  PopulationPercentInBiggestDescendantLanguage = 'Biggest Descendant Relative Population',
 }
 
 // Human-friendly display direction for sorting

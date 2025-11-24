@@ -83,7 +83,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langRaw?.populationCited, 'populationCited').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
-    expect(langRaw?.populationOfDescendents, 'populationOfDescendents').toBe(undefined);
+    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langRaw?.populationAdjusted, 'populationAdjusted').toBe(undefined);
 
     // Finally check if the sjn language was updated
@@ -91,7 +91,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langUpdated?.populationCited, 'populationCited').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(undefined); // Not updated
-    expect(langUpdated?.populationOfDescendents, 'populationOfDescendents').toBe(undefined);
+    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langUpdated?.populationAdjusted, 'populationAdjusted').toBe(undefined);
   });
 
@@ -129,7 +129,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langRaw?.populationCited, 'populationCited').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
-    expect(langRaw?.populationOfDescendents, 'populationOfDescendents').toBe(undefined);
+    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langRaw?.populationAdjusted, 'populationAdjusted').toBe(undefined);
 
     // Finally check if the sjn language was updated
@@ -137,7 +137,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langUpdated?.populationCited, 'populationCited').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(11220); // <-- UPDATED VALUE
-    expect(langUpdated?.populationOfDescendents, 'populationOfDescendents').toBe(undefined);
+    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langUpdated?.populationAdjusted, 'populationAdjusted').toBe(undefined);
   });
 

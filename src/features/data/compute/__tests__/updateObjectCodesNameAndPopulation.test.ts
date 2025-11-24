@@ -18,7 +18,7 @@ describe('updateObjectCodesNameAndPopulation', () => {
     connectMockedObjects(mockedObjects); // Connect but do not compute population yet
     const mockedDictionaries = getMockedObjectDictionaries(mockedObjects);
 
-    // Before update, populationEstimate should be based on cited or descendents only
+    // Before update, populationEstimate should be based on cited or descendants only
     const sjn = mockedDictionaries.languages.sjn;
     const dori0123 = mockedDictionaries.languages.dori0123;
     const sjn_001 = mockedDictionaries.locales.sjn_001;
@@ -80,8 +80,8 @@ describe('updateObjectCodesNameAndPopulation', () => {
     );
 
     expect(sjn.populationEstimate).toBe(24000); // unchanged
-    // TODO computeLanguageDescendentPopulation needs to be revamped
-    expect(sjn.populationOfDescendents).toBe(undefined); // this should be computed from dori0123
+    // TODO computeLanguageDescendantPopulation needs to be revamped
+    expect(sjn.populationOfDescendants).toBe(undefined); // this should be computed from dori0123
     expect(dori0123.populationEstimate).toBe(101800); // updated to include new locale
     expect(sjn_001.populationSpeaking).toBe(11220); // unchanged
   });

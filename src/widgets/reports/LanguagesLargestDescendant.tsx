@@ -10,7 +10,7 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { getObjectPopulationPercentInBiggestDescendentLanguage } from '@entities/lib/getObjectPopulation';
+import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getObjectPopulation';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
@@ -82,10 +82,10 @@ const LanguagesLargestDescendant: React.FC = () => {
             sortParam: SortBy.Population,
           },
           {
-            key: 'Estimated Population of Descendents',
-            render: (lang: LanguageData) => lang.populationOfDescendents,
+            key: 'Estimated Population of Descendants',
+            render: (lang: LanguageData) => lang.populationOfDescendants,
             valueType: TableValueType.Numeric,
-            sortParam: SortBy.PopulationOfDescendents,
+            sortParam: SortBy.PopulationOfDescendants,
           },
           {
             key: 'Largest Descendant',
@@ -98,20 +98,20 @@ const LanguagesLargestDescendant: React.FC = () => {
               ),
           },
           {
-            key: 'Descendent Population',
+            key: 'Descendant Population',
             render: (lang: LanguageData) => lang.largestDescendant?.populationEstimate || null,
             valueType: TableValueType.Numeric,
           },
 
           {
-            key: '% Descendent',
+            key: '% Descendant',
             render: (lang: LanguageData) => {
               const relativePopulation =
-                getObjectPopulationPercentInBiggestDescendentLanguage(lang);
+                getObjectPopulationPercentInBiggestDescendantLanguage(lang);
               return relativePopulation ? numberToFixedUnlessSmall(relativePopulation) : null;
             },
             valueType: TableValueType.Numeric,
-            sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
+            sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}
         objects={filteredLanguages}
