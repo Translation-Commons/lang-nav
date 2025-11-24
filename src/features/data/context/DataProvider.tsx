@@ -13,9 +13,9 @@ import {
 } from '@entities/types/DataTypes';
 
 import { updateObjectCodesNameAndPopulation } from '../compute/updateObjectCodesNameAndPopulation';
-
 import { useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
+
 import { DataContext, DataContextType } from './useDataContext';
 
 enum LoadingStage {
