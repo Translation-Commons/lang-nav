@@ -141,7 +141,7 @@ describe('FilterPath', () => {
   it('displays and clears search string with field', () => {
     setupMockParams({
       searchString: 'TestSearch',
-      searchBy: SearchableField.AllNames,
+      searchBy: SearchableField.NameAny,
     });
     render(<FilterPath />);
     expect(screen.getByText(/contains/)).toBeInTheDocument();

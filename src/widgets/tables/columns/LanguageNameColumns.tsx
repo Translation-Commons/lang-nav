@@ -1,7 +1,10 @@
+import { SearchableField } from '@features/params/PageParamTypes';
 import { EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 
+import LanguageOtherNames from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
@@ -13,7 +16,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
     key: 'ISO Name',
     render: (lang) =>
       lang.nameDisplay !== lang.ISO.name ? (
-        lang.ISO.name
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
       ) : (
         <Deemphasized>{lang.ISO.name}</Deemphasized>
       ),
@@ -31,7 +34,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
     key: 'CLDR Name',
     render: (lang) =>
       lang.nameDisplay !== lang.CLDR.name ? (
-        lang.CLDR.name
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
       ) : (
         <Deemphasized>{lang.CLDR.name}</Deemphasized>
       ),
@@ -42,7 +45,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
     key: 'Glottolog Name',
     render: (lang) =>
       lang.nameDisplay !== lang.Glottolog.name ? (
-        lang.Glottolog.name
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
       ) : (
         <Deemphasized>{lang.Glottolog.name}</Deemphasized>
       ),
@@ -51,14 +54,7 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Other Names',
-    render: (lang) => {
-      const { Glottolog, ISO, CLDR } = lang;
-      const otherNames = lang.names.filter(
-        (name) =>
-          ![lang.nameDisplay, lang.nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),
-      );
-      return otherNames.length > 0 && otherNames.join(', ');
-    },
+    render: (lang) => <LanguageOtherNames lang={lang} />,
     isInitiallyVisible: false,
     columnGroup: 'Names',
   },

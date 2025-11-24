@@ -47,7 +47,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   objectType: ObjectType.Language,
   page: 1,
   profile: ProfileType.LanguageEthusiast,
-  searchBy: SearchableField.AllNames,
+  searchBy: SearchableField.NameAny,
   searchString: '',
   sortBehavior: SortBehavior.Normal,
   sortBy: SortBy.Population,

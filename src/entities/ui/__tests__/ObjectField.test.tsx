@@ -15,7 +15,7 @@ describe('HighlightedObjectField', () => {
     render(
       <HighlightedObjectField
         object={mockedLanguage}
-        field={SearchableField.EngName}
+        field={SearchableField.NameDisplay}
         query="Eng"
       />,
     );
@@ -29,7 +29,7 @@ describe('HighlightedObjectField', () => {
     render(
       <HighlightedObjectField
         object={mockedLanguage}
-        field={SearchableField.AllNames}
+        field={SearchableField.NameAny}
         query="Ingle"
       />,
     );
@@ -42,11 +42,11 @@ describe('HighlightedObjectField', () => {
 
 describe('getSearchableField', () => {
   it('returns first matching name for AllNames', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingl')).toBe('Inglés');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameAny, 'Ingl')).toBe('Inglés');
   });
 
   it('Searches on accent marks as well', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingle')).toBe('Inglés');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameAny, 'Ingle')).toBe('Inglés');
   });
 
   it('returns codeDisplay for Code', () => {
@@ -54,11 +54,11 @@ describe('getSearchableField', () => {
   });
 
   it('returns nameEndonym for Endonym', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.Endonym)).toBe('ENGLISH');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameEndonym)).toBe('ENGLISH');
   });
 
   it('returns nameDisplay for EngName', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.EngName)).toBe('English');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameDisplay)).toBe('English');
   });
 
   it('returns nameDisplay and codeDisplay for NameOrCode', () => {

@@ -1,22 +1,17 @@
 import React from 'react';
 
-import usePageParams from '@features/params/usePageParams';
+import { SearchableField } from '@features/params/PageParamTypes';
 
 import LanguageCanonicalName from '@entities/language/LanguageCanonicalName';
+import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import Highlightable from '@shared/ui/Highlightable';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { searchString } = usePageParams();
   const { nameDisplay, nameEndonym, Glottolog, ISO, CLDR } = lang;
-
-  // nameDisplay and nameEndonym should already be shown in the title for this
-  const otherNames = lang.names.filter(
-    (name) => ![nameDisplay, nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),
-  );
 
   return (
     <DetailsSection title="Names">
@@ -25,32 +20,27 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       </DetailsField>
       {nameEndonym && nameDisplay !== nameEndonym && (
         <DetailsField title="Endonym:">
-          <Highlightable text={nameEndonym} searchPattern={searchString} />
+          <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEndonym} />
         </DetailsField>
       )}
       {Glottolog.name && nameDisplay !== Glottolog.name && (
         <DetailsField title="Glottolog Name:">
-          <Highlightable text={Glottolog.name} searchPattern={searchString} />
+          <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
         </DetailsField>
       )}
       {ISO.name && nameDisplay !== ISO.name && (
         <DetailsField title="ISO Name:">
-          <Highlightable text={ISO.name} searchPattern={searchString} />
+          <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
         </DetailsField>
       )}
       {CLDR.name && nameDisplay !== CLDR.name && (
         <DetailsField title="CLDR Name:">
-          <Highlightable text={CLDR.name} searchPattern={searchString} />
+          <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
         </DetailsField>
       )}
-      {otherNames.length > 0 && (
+      {getLanguageOtherNames(lang).length > 0 && (
         <DetailsField title="Other names:">
-          {otherNames.map((name, idx) => (
-            <>
-              {idx > 0 && ', '}
-              <Highlightable key={name} text={name} searchPattern={searchString} />
-            </>
-          ))}
+          <LanguageOtherNames lang={lang} />
         </DetailsField>
       )}
     </DetailsSection>

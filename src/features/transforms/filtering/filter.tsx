@@ -31,11 +31,14 @@ export function getSubstringFilterOnQuery(
   // Case and accent normalization is handled in anyWordStartsWith
   switch (searchBy) {
     case SearchableField.Code:
-    case SearchableField.Endonym:
-    case SearchableField.EngName:
+    case SearchableField.NameEndonym:
+    case SearchableField.NameDisplay:
+    case SearchableField.NameISO:
+    case SearchableField.NameCLDR:
+    case SearchableField.NameGlottolog:
     case SearchableField.NameOrCode:
       return (a: ObjectData) => anyWordStartsWith(getSearchableField(a, searchBy), query);
-    case SearchableField.AllNames:
+    case SearchableField.NameAny:
       return (a: ObjectData) =>
         a.names
           .map((name) => anyWordStartsWith(name, query))

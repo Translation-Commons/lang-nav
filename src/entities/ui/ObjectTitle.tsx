@@ -32,7 +32,7 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = false }
 
   // Add to the subtitle are if we are searching by all names and we have to find the value by searching a new name
   let searchNamesSubtitle = null;
-  if (searchBy === SearchableField.AllNames) {
+  if (searchBy === SearchableField.NameAny) {
     const lowercaseSearchString = searchString.toLowerCase();
     if (
       !object.nameDisplay.toLowerCase().includes(lowercaseSearchString) &&
@@ -40,8 +40,7 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = false }
     ) {
       searchNamesSubtitle = (
         <>
-          aka{' '}
-          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.AllNames} />
+          aka <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameAny} />
         </>
       );
     }
@@ -51,12 +50,12 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = false }
   return (
     <>
       <strong>
-        <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.EngName} />
+        <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
       </strong>{' '}
       {nameDisplay != nameEndonym && (
         <div style={{ display: 'inline-block' }}>
           {/* placed in its own div to prevent right-to-left names from breaking */}
-          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Endonym} />
+          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameEndonym} />
         </div>
       )}{' '}
       [

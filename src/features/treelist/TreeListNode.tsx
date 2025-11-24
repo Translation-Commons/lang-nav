@@ -70,7 +70,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
       )}
       <>
         <span style={labelStyle}>
-          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.EngName} />
+          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
         </span>
         {showObjectIDs && (
           <>
