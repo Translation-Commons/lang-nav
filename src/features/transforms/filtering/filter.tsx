@@ -21,28 +21,27 @@ export type FilterFunctionType = (a: ObjectData) => boolean;
 export function getFilterBySubstring(): FilterFunctionType {
   const { searchBy, searchString } = usePageParams();
   if (searchString == '') return () => true;
-  return getSubstringFilterOnQuery(searchString.toLowerCase(), searchBy);
+  return getSubstringFilterOnQuery(searchString, searchBy);
 }
 
 export function getSubstringFilterOnQuery(
   query: string,
   searchBy: SearchableField,
 ): FilterFunctionType {
-  // Convert query to lowercase and remove accents for accent-insensitive matching
-  const queryLowerCase = query
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '')
-    .toLowerCase();
+  // Case and accent normalization is handled in anyWordStartsWith
   switch (searchBy) {
     case SearchableField.Code:
-    case SearchableField.Endonym:
-    case SearchableField.EngName:
+    case SearchableField.NameEndonym:
+    case SearchableField.NameDisplay:
+    case SearchableField.NameISO:
+    case SearchableField.NameCLDR:
+    case SearchableField.NameGlottolog:
     case SearchableField.NameOrCode:
-      return (a: ObjectData) => anyWordStartsWith(getSearchableField(a, searchBy), queryLowerCase);
-    case SearchableField.AllNames:
+      return (a: ObjectData) => anyWordStartsWith(getSearchableField(a, searchBy), query);
+    case SearchableField.NameAny:
       return (a: ObjectData) =>
         a.names
-          .map((name) => anyWordStartsWith(name, queryLowerCase))
+          .map((name) => anyWordStartsWith(name, query))
           .reduce((anyPasses, thisPasses) => anyPasses || thisPasses, false);
   }
 }

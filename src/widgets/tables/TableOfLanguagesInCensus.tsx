@@ -96,7 +96,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               <HoverableObject object={object.language}>
                 <ObjectFieldHighlightedByPageSearch
                   object={object}
-                  field={SearchableField.EngName}
+                  field={SearchableField.NameDisplay}
                 />
               </HoverableObject>
             ),

@@ -43,9 +43,13 @@ export enum View {
 export enum SearchableField {
   Code = 'ID',
   NameOrCode = 'English Name or ID',
-  EngName = 'English Name',
-  Endonym = 'Endonym',
-  AllNames = 'All Names',
+  NameAny = 'All Names',
+  NameEndonym = 'Endonym',
+
+  NameDisplay = 'English Name', // Current name
+  NameISO = 'ISO Name',
+  NameCLDR = 'CLDR Name',
+  NameGlottolog = 'Glottolog Name',
 }
 
 export enum LocaleSeparator {

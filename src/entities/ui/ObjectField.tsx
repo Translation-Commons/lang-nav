@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SearchableField } from '@features/params/PageParamTypes';
+import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -19,25 +19,30 @@ interface Props {
  */
 export const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ object, field }) => {
   const { searchBy: pageSearchBy, searchString } = usePageParams();
-  const lowercaseSearchString = searchString.toLowerCase();
 
   if (pageSearchBy === field) {
     return <HighlightedObjectField object={object} query={searchString} field={field} />;
   } else if (
-    pageSearchBy === SearchableField.AllNames &&
-    [SearchableField.EngName, SearchableField.Endonym].includes(field)
+    pageSearchBy === SearchableField.NameAny &&
+    [
+      SearchableField.NameCLDR,
+      SearchableField.NameDisplay,
+      SearchableField.NameEndonym,
+      SearchableField.NameGlottolog,
+      SearchableField.NameISO,
+    ].includes(field)
   ) {
     // If searching on all names, also highlight fields for English Name or Endonym
     return <HighlightedObjectField object={object} query={searchString} field={field} />;
   } else if (
     pageSearchBy === SearchableField.NameOrCode &&
-    [SearchableField.EngName, SearchableField.Code].includes(field)
+    [SearchableField.NameDisplay, SearchableField.Code].includes(field)
   ) {
     // If searching on name or code, also highlight fields for English Name or Code
     return <HighlightedObjectField object={object} query={searchString} field={field} />;
   }
   // Otherwise don't highlight, just return the field value
-  return getSearchableField(object, field, lowercaseSearchString);
+  return getSearchableField(object, field, searchString);
 };
 
 interface HighlightedObjectFieldProps {
@@ -51,27 +56,28 @@ export const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
   field,
   query,
 }) => {
-  return (
-    <Highlightable
-      text={getSearchableField(object, field, query)}
-      searchPattern={query.toLowerCase()}
-    />
-  );
+  return <Highlightable text={getSearchableField(object, field, query)} searchPattern={query} />;
 };
 
 export function getSearchableField(object: ObjectData, field: SearchableField, query?: string) {
   switch (field) {
-    case SearchableField.AllNames:
-      return (
-        object.names.filter((name) => anyWordStartsWith(name, query?.toLowerCase() ?? ''))[0] ?? ''
-      );
+    case SearchableField.NameAny:
+      return object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? '';
     case SearchableField.Code:
       return object.codeDisplay;
-    case SearchableField.Endonym:
+    case SearchableField.NameEndonym:
       return object.nameEndonym ?? '';
-    case SearchableField.EngName:
+    case SearchableField.NameDisplay:
       return object.nameDisplay;
     case SearchableField.NameOrCode:
       return object.nameDisplay + ' [' + object.codeDisplay + ']';
+    case SearchableField.NameISO:
+      return object.type === ObjectType.Language ? (object.ISO?.name ?? '') : '';
+    case SearchableField.NameCLDR:
+      return object.type === ObjectType.Language ? (object.CLDR?.name ?? '') : '';
+    case SearchableField.NameGlottolog:
+      return object.type === ObjectType.Language ? (object.Glottolog?.name ?? '') : '';
+    default:
+      return '';
   }
 }

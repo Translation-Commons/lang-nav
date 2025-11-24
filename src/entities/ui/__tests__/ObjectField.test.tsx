@@ -15,7 +15,7 @@ describe('HighlightedObjectField', () => {
     render(
       <HighlightedObjectField
         object={mockedLanguage}
-        field={SearchableField.EngName}
+        field={SearchableField.NameDisplay}
         query="Eng"
       />,
     );
@@ -24,15 +24,29 @@ describe('HighlightedObjectField', () => {
     expect(screen.getByText('Eng')).toBeInTheDocument();
     expect(screen.getByText('lish')).toBeInTheDocument();
   });
+
+  it('renders highlighted that contained accent marks', () => {
+    render(
+      <HighlightedObjectField
+        object={mockedLanguage}
+        field={SearchableField.NameAny}
+        query="Ingle"
+      />,
+    );
+    // There is no component with "Inglés" because it is split into two spans
+    expect(screen.queryByText('Inglés')).not.toBeInTheDocument();
+    expect(screen.getByText('Inglé')).toBeInTheDocument(); // Accent mark is perserved
+    expect(screen.getByText('s')).toBeInTheDocument();
+  });
 });
 
 describe('getSearchableField', () => {
   it('returns first matching name for AllNames', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingl')).toBe('Inglés');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameAny, 'Ingl')).toBe('Inglés');
   });
 
-  it('does not yet search on accent marks, instead going to the next one', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.AllNames, 'Ingle')).toBe('Inglese');
+  it('Searches on accent marks as well', () => {
+    expect(getSearchableField(mockedLanguage, SearchableField.NameAny, 'Ingle')).toBe('Inglés');
   });
 
   it('returns codeDisplay for Code', () => {
@@ -40,11 +54,11 @@ describe('getSearchableField', () => {
   });
 
   it('returns nameEndonym for Endonym', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.Endonym)).toBe('ENGLISH');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameEndonym)).toBe('ENGLISH');
   });
 
   it('returns nameDisplay for EngName', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.EngName)).toBe('English');
+    expect(getSearchableField(mockedLanguage, SearchableField.NameDisplay)).toBe('English');
   });
 
   it('returns nameDisplay and codeDisplay for NameOrCode', () => {
