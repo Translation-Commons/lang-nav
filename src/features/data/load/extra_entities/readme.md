@@ -1,1 +1,1 @@
-Files in this folder add new data that should be loaded with the first batch of data but are not the core files with lists of entities. However, they add extra entities (like retired languages) so it should be loaded before the data is initialized.
+Files in this folder add new data that should be loaded with the first batch of data but are not the core files with lists of entities. However, they add extra entities (like retired languages) so they should be loaded before the data is initialized.

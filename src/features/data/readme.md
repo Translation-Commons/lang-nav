@@ -31,7 +31,7 @@ From this, we can see the steps involved in loading the data:
    2. Load extra entities: ISO data, IANA data, ISO retirements.
    3. Connect entities: link languages to parents, connect locales, connect territories to parents, connect writing systems.
    4. Create regional locales.
-   5. Compute descendent populations for languages.
+   5. Compute descendant populations for languages.
 2. Provide
    1. Package the loaded data into a `DataContext` for use in the application.
 3. Supplemental Data

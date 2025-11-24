@@ -88,7 +88,7 @@ const TerritoryTable: React.FC = () => {
             object.locales ? object.locales[0].populationSpeakingPercent?.toFixed(1) + '%' : null,
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
-          sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
+          sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
           columnGroup: 'Language',
         },
         {
@@ -115,7 +115,7 @@ const TerritoryTable: React.FC = () => {
               : null,
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
-          sortParam: SortBy.PopulationOfDescendents,
+          sortParam: SortBy.PopulationOfDescendants,
           columnGroup: 'Relations',
         },
         {

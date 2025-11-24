@@ -1,10 +1,10 @@
-import { computeDescendentPopulation } from '@features/data/compute/computeDescedentPopulation';
+import { computeDescendantPopulation } from '@features/data/compute/computeDescedantPopulation';
 import { computeLocalePopulationFromCensuses } from '@features/data/compute/computeLocalePopulationFromCensuses';
 import { computeLocaleWritingPopulation } from '@features/data/compute/computeLocaleWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
 import { addCensusData } from '@features/data/connect/connectCensuses';
-import { connectLanguagesToParent } from '@features/data/connect/connectLanguagestoParent';
+import { connectLanguagesToParent } from '@features/data/connect/connectLanguagesToParent';
 import connectLocales from '@features/data/connect/connectLocales';
 import { connectTerritoriesToParent } from '@features/data/connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '@features/data/connect/connectWritingSystems';
@@ -387,7 +387,7 @@ export function getFullyInstantiatedMockedObjects(
   // Initial connections and algorithms
   connectMockedObjects(objects);
   const { languagesBySource, writingSystems, locales } = getMockedObjectDictionaries(objects);
-  computeDescendentPopulation(languagesBySource, writingSystems);
+  computeDescendantPopulation(languagesBySource, writingSystems);
 
   // From DataContext
   const world = objects['001'] as TerritoryData;

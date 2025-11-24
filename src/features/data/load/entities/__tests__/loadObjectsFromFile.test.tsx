@@ -1,12 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import {
-  loadLocales,
-  loadTerritories,
-  loadWritingSystems,
-} from '@features/data/load/entities/loadObjectsFromFile';
-
 import { loadLanguages } from '../loadLanguages';
+import { loadLocales } from '../loadLocales';
+import { loadTerritories } from '../loadTerritories';
+import { loadWritingSystems } from '../loadWritingSystems';
 
 describe('loadLocales', () => {
   it('loads locales without error', async () => {

@@ -98,7 +98,7 @@ export interface LanguageData extends ObjectBase {
   populationAdjusted?: number;
   populationEstimate?: number;
   populationCited?: number; // from languages.tsv
-  populationOfDescendents?: number; // computed from child languages
+  populationOfDescendants?: number; // computed from child languages
   populationFromLocales?: number; // aggregated from locale data
 
   modality?: LanguageModality;
@@ -165,7 +165,7 @@ type LanguageDataInSource = {
   code?: LanguageCode;
   name?: string;
   scope?: LanguageScope;
-  populationOfDescendents?: number;
+  populationOfDescendants?: number;
   parentLanguageCode?: LanguageCode;
   parentLanguage?: LanguageData;
   childLanguages?: LanguageData[];

@@ -16,13 +16,13 @@ const LanguagePopulationFromLocales: React.FC<{ lang: LanguageData }> = ({ lang 
   if (!lang.populationFromLocales) return null;
 
   return (
-    <Hoverable hoverContent={<Descendents lang={lang} />}>
+    <Hoverable hoverContent={<Descendants lang={lang} />}>
       {lang.populationFromLocales.toLocaleString()}
     </Hoverable>
   );
 };
 
-const Descendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+const Descendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { updatePageParams } = usePageParams();
 
   const localesFromUniqueTerritories = Object.values(

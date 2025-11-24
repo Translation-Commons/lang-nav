@@ -6,11 +6,11 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 
 import { LanguageData } from './LanguageTypes';
 
-const LanguagePopulationFromDescendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  if (!lang.populationOfDescendents) return null;
+const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  if (!lang.populationOfDescendants) return null;
   return (
     <>
-      {lang.populationOfDescendents > (lang.populationEstimate ?? 0) ? (
+      {lang.populationOfDescendants > (lang.populationEstimate ?? 0) ? (
         <Hoverable hoverContent="Computed population of descendants exceeds population estimate.">
           <TriangleAlertIcon
             style={{ color: 'var(--color-text-yellow)', marginRight: '0.25em' }}
@@ -18,7 +18,7 @@ const LanguagePopulationFromDescendents: React.FC<{ lang: LanguageData }> = ({ l
           />
         </Hoverable>
       ) : null}
-      {lang.populationOfDescendents < (lang.populationEstimate ?? 0) * 0.5 ? (
+      {lang.populationOfDescendants < (lang.populationEstimate ?? 0) * 0.5 ? (
         <Hoverable hoverContent="The population of descendants is significantly lower than the estimate -- probably because most data is collected for this entry as a whole.">
           <TriangleAlertIcon
             style={{ color: 'var(--color-text-secondary)', marginRight: '0.25em' }}
@@ -26,15 +26,15 @@ const LanguagePopulationFromDescendents: React.FC<{ lang: LanguageData }> = ({ l
           />
         </Hoverable>
       ) : null}
-      <Hoverable hoverContent={<PopulationOfDescendentsBreakdown lang={lang} />}>
-        {lang.populationOfDescendents.toLocaleString()}
+      <Hoverable hoverContent={<PopulationOfDescendantsBreakdown lang={lang} />}>
+        {lang.populationOfDescendants.toLocaleString()}
       </Hoverable>
     </>
   );
 };
 
-const PopulationOfDescendentsBreakdown: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  if (!lang.populationOfDescendents) return null;
+const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  if (!lang.populationOfDescendants) return null;
 
   return (
     <>
@@ -44,13 +44,13 @@ const PopulationOfDescendentsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
           {lang.childLanguages
             .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
             .slice(0, 10) // limit to first 10
-            .map((descendent) => (
-              <tr key={descendent.ID}>
+            .map((descendant) => (
+              <tr key={descendant.ID}>
                 <td>
-                  <HoverableObjectName object={descendent} />
+                  <HoverableObjectName object={descendant} />
                 </td>
                 <td style={{ textAlign: 'right' }}>
-                  {descendent.populationEstimate?.toLocaleString()}
+                  {descendant.populationEstimate?.toLocaleString()}
                 </td>
               </tr>
             ))}
@@ -60,7 +60,7 @@ const PopulationOfDescendentsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
               <td style={{ textAlign: 'right' }}>
                 {lang.childLanguages
                   .slice(10)
-                  .reduce((sum, descendent) => sum + (descendent.populationEstimate || 0), 0)
+                  .reduce((sum, descendant) => sum + (descendant.populationEstimate || 0), 0)
                   .toLocaleString()}
               </td>
             </tr>
@@ -71,4 +71,4 @@ const PopulationOfDescendentsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
   );
 };
 
-export default LanguagePopulationFromDescendents;
+export default LanguagePopulationFromDescendants;
