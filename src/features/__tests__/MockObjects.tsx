@@ -1,19 +1,17 @@
+import { computeDescendentPopulation } from '@features/data/compute/computeDescedentPopulation';
+import { computeLocalePopulationFromCensuses } from '@features/data/compute/computeLocalePopulationFromCensuses';
+import { computeLocaleWritingPopulation } from '@features/data/compute/computeLocaleWritingPopulation';
+import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
+import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
 import { addCensusData } from '@features/data/connect/connectCensuses';
 import { connectLanguagesToParent } from '@features/data/connect/connectLanguagestoParent';
 import connectLocales from '@features/data/connect/connectLocales';
+import { connectTerritoriesToParent } from '@features/data/connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '@features/data/connect/connectWritingSystems';
+import { createRegionalLocales } from '@features/data/connect/createRegionalLocales';
 import { DataContextType } from '@features/data/context/useDataContext';
-import { createRegionalLocales } from '@features/data/generate/createRegionalLocales';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { connectVariantTags } from '@features/data/load/IANAData';
-import {
-  computeContainedTerritoryStats,
-  connectTerritoriesToParent,
-} from '@features/data/load/TerritoryData';
-import { computeDescendentPopulation } from '@features/data/population/computeDescedentPopulation';
-import { computeLocalePopulationFromCensuses } from '@features/data/population/computeLocalePopulationFromCensuses';
-import { computeLocaleWritingPopulation } from '@features/data/population/computeLocaleWritingPopulation';
-import { updateObjectCodesNameAndPopulation } from '@features/data/population/updateObjectCodesNameAndPopulation';
+import { connectVariantTags } from '@features/data/load/extra_entities/IANAData';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';

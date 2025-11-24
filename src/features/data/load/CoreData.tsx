@@ -1,16 +1,10 @@
 import { useState } from 'react';
 
 import {
-  loadLocales,
-  loadTerritories,
-  loadWritingSystems,
-} from '@features/data/load/entities/loadObjectsFromFile';
-import {
   loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
-} from '@features/data/load/IANAData';
-import { connectTerritoriesToParent } from '@features/data/load/TerritoryData';
+} from '@features/data/load/extra_entities/IANAData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusID, CensusData } from '@entities/census/CensusTypes';
@@ -23,20 +17,23 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
+import { computeDescendentPopulation } from '../compute/computeDescedentPopulation';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 import { connectLanguagesToParent } from '../connect/connectLanguagestoParent';
 import connectLocales from '../connect/connectLocales';
+import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '../connect/connectWritingSystems';
-import { createRegionalLocales } from '../generate/createRegionalLocales';
-import { computeDescendentPopulation } from '../population/computeDescedentPopulation';
+import { createRegionalLocales } from '../connect/createRegionalLocales';
 
 import { loadLanguages } from './entities/loadLanguages';
-import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
+import { loadLocales } from './entities/loadLocales';
+import { loadTerritories } from './entities/loadTerritories';
+import { loadWritingSystems } from './entities/loadWritingSystems';
 import {
   addGlottologLanguages,
   loadGlottologLanguages,
   loadManualGlottocodeToISO,
-} from './GlottologData';
+} from './extra_entities/GlottologData';
 import {
   addISODataToLanguages,
   addISOLanguageFamilyData,
@@ -45,8 +42,9 @@ import {
   loadISOLanguageFamilies,
   loadISOLanguages,
   loadISOMacrolanguages,
-} from './ISOData';
-import { addCLDRLanguageDetails } from './UnicodeData';
+} from './extra_entities/ISOData';
+import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
+import { addCLDRLanguageDetails } from './supplemental/UnicodeData';
 
 export type CoreDataArrays = {
   allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets

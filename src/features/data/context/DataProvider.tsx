@@ -12,7 +12,7 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
-import { updateObjectCodesNameAndPopulation } from '../population/updateObjectCodesNameAndPopulation';
+import { updateObjectCodesNameAndPopulation } from '../compute/updateObjectCodesNameAndPopulation';
 
 import { useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
