@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { convertAlphaToNumber } from '../stringUtils';
+import { anyWordStartsWith, convertAlphaToNumber } from '../stringUtils';
 
 describe('convertAlphaToNumber', () => {
   it('An empty string is 0', () => {
@@ -33,5 +33,46 @@ describe('convertAlphaToNumber', () => {
     expect(convertAlphaToNumber('Русский (Russian)'), 'Русский (Russian)').toBe(
       convertAlphaToNumber('         Russian '),
     );
+  });
+});
+
+describe('normalizeAccents', () => {
+  it('removes accent marks from letters', () => {
+    expect(convertAlphaToNumber('café'), 'café').toBe(convertAlphaToNumber('cafe'));
+    expect(convertAlphaToNumber('naïve'), 'naïve').toBe(convertAlphaToNumber('naive'));
+    expect(convertAlphaToNumber('résumé'), 'résumé').toBe(convertAlphaToNumber('resume'));
+  });
+});
+
+describe('anyWordStartsWith', () => {
+  it('matches words that start with the query', () => {
+    expect(anyWordStartsWith('Hello World', 'Wor')).toBe(true);
+    expect(anyWordStartsWith('Hello World', 'Hello')).toBe(true);
+    expect(anyWordStartsWith('Hello World', 'lo Wo')).toBe(false);
+  });
+
+  it('is case-insensitive', () => {
+    expect(anyWordStartsWith('Hello World', 'hello')).toBe(true);
+    expect(anyWordStartsWith('Hello World', 'WORLD')).toBe(true);
+  });
+
+  it('is accent-insensitive', () => {
+    expect(anyWordStartsWith('café au lait', 'Cafe')).toBe(true);
+    expect(anyWordStartsWith('naïve approach', 'naive')).toBe(true);
+  });
+
+  it('matches the start of the string as well', () => {
+    expect(anyWordStartsWith('SingleWord', 'Sing')).toBe(true);
+    expect(anyWordStartsWith('SingleWord', 'Word')).toBe(false);
+  });
+
+  it('returns false when there is no match', () => {
+    expect(anyWordStartsWith('Hello World', 'Test')).toBe(false);
+    expect(anyWordStartsWith('café au lait', 'tea')).toBe(false);
+  });
+
+  it('handles characters in parentheses and punctuation', () => {
+    expect(anyWordStartsWith('Русский (Russian)', 'Russian')).toBe(true);
+    expect(anyWordStartsWith('Hello, world!', 'world')).toBe(true);
   });
 });

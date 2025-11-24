@@ -45,10 +45,8 @@ export function normalizeAccents(str: string): string {
  * Both the string and query are normalized to be accent-insensitive and case-insensitive.
  */
 export function anyWordStartsWith(str: string, query: string) {
-  const strLowercase = str.toLowerCase();
-  const queryLowercase = query.toLowerCase();
-  const normalizedStr = normalizeAccents(strLowercase);
-  const normalizedQuery = normalizeAccents(queryLowercase);
+  const normalizedStr = normalizeAccents(str.toLowerCase());
+  const normalizedQuery = normalizeAccents(query.toLowerCase());
   return (
     normalizedStr.split(/[^\p{L}\p{N}]/u).some((s) => s.startsWith(normalizedQuery)) ||
     normalizedStr.startsWith(normalizedQuery)

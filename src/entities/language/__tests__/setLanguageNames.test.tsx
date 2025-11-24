@@ -40,13 +40,19 @@ describe('setLanguageNames', () => {
     ]);
   });
 
-  it('it should remove language family and macrolanguage parentheticals', () => {
+  it('it should keep language family and macrolanguage parentheticals', () => {
     const lang = getBaseLanguageData('zho', 'Chinese');
     lang.ISO.name = 'Chinese (macrolanguage)';
     lang.Glottolog.name = 'Classical-Middle-Modern Sinitic';
     lang.nameEndonym = '中文';
     lang.names = ['Chinese (family)', 'Chinese'];
     setLanguageNames(lang);
-    expect(lang.names).toEqual(['Chinese', '中文', 'Classical-Middle-Modern Sinitic']);
+    expect(lang.names).toEqual([
+      'Chinese',
+      '中文',
+      'Chinese (macrolanguage)',
+      'Classical-Middle-Modern Sinitic',
+      'Chinese (family)',
+    ]);
   });
 });
