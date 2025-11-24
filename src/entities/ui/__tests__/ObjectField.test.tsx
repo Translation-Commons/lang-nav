@@ -24,6 +24,20 @@ describe('HighlightedObjectField', () => {
     expect(screen.getByText('Eng')).toBeInTheDocument();
     expect(screen.getByText('lish')).toBeInTheDocument();
   });
+
+  it('renders highlighted that contained accent marks', () => {
+    render(
+      <HighlightedObjectField
+        object={mockedLanguage}
+        field={SearchableField.AllNames}
+        query="Ingle"
+      />,
+    );
+    // There is no component with "Inglés" because it is split into two spans
+    expect(screen.queryByText('Inglés')).not.toBeInTheDocument();
+    expect(screen.getByText('Inglé')).toBeInTheDocument(); // Accent mark is perserved
+    expect(screen.getByText('s')).toBeInTheDocument();
+  });
 });
 
 describe('getSearchableField', () => {

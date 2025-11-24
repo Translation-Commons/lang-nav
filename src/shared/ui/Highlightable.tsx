@@ -32,6 +32,7 @@ const Highlightable: React.FC<Props> = ({ text, searchPattern }) => {
   }
 
   const parts: React.ReactNode[] = [];
+  // Text position tracker so we can reconstruct original text with correct casing and accents
   let textPos = 0;
 
   for (let i = 1; i < searchResult.length; i++) {
@@ -54,7 +55,7 @@ const Highlightable: React.FC<Props> = ({ text, searchPattern }) => {
     textPos += originalLength;
   }
 
-  return <>{parts}</>;
+  return <span>{parts}</span>;
 };
 
 export default Highlightable;
