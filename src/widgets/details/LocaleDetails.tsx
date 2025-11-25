@@ -4,6 +4,7 @@ import Hoverable from '@features/hovercard/Hoverable';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
+import LocaleCLDRSupportSection from '@entities/locale/LocaleDetailsCLDR';
 import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
@@ -17,9 +18,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 import Pill from '@shared/ui/Pill';
 
-type Props = {
-  locale: LocaleData;
-};
+type Props = { locale: LocaleData };
 
 const LocaleDetails: React.FC<Props> = ({ locale }) => {
   return (
@@ -27,6 +26,7 @@ const LocaleDetails: React.FC<Props> = ({ locale }) => {
       <LocaleDefinitionSection locale={locale} />
       <LocalePopulationSection locale={locale} />
       <LocaleOtherSection locale={locale} />
+      <LocaleCLDRSupportSection locale={locale} />
     </div>
   );
 };
