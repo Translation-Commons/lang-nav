@@ -9,7 +9,10 @@ import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { getLanguageRoot, getMacrolanguage } from '@entities/language/LanguageFamilyUtils';
+import {
+  getLanguageRootLanguageFamily,
+  getLanguageRootMacrolanguage,
+} from '@entities/language/LanguageFamilyUtils';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/types/DataTypes';
@@ -130,14 +133,18 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Macrolanguage',
           render: (loc) =>
-            loc.language && <HoverableObjectName object={getMacrolanguage(loc.language)} />,
+            loc.language && (
+              <HoverableObjectName object={getLanguageRootMacrolanguage(loc.language)} />
+            ),
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
         },
         {
           key: 'Language Family',
           render: (loc) =>
-            loc.language && <HoverableObjectName object={getLanguageRoot(loc.language)} />,
+            loc.language && (
+              <HoverableObjectName object={getLanguageRootLanguageFamily(loc.language)} />
+            ),
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
         },
