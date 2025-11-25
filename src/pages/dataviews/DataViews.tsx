@@ -1,7 +1,7 @@
 import CardList from '@widgets/cardlists/CardList';
 
-import { View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import ViewDetails from './ViewDetails';
 import ViewFamilyTree from './ViewFamilyTree';

@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-
-import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplayContext';
+import { SearchableField } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 
 const SearchBySelector: React.FC = () => {
   const { updatePageParams, searchBy } = usePageParams();

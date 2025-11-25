@@ -1,14 +1,13 @@
 import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
-import Selector from '@widgets/controls/components/Selector';
-
-import usePageParams from '@features/page-params/usePageParams';
-import { getSortFunction } from '@features/sorting/sort';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getDescendantsName, getObjectChildren } from './getParentsAndDescendents';
+import { getDescendantsName, getObjectChildren } from './getParentsAndDescendants';
 
 /*
  * Displays the children of an object in the path navigation.

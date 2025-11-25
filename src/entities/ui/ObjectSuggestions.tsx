@@ -1,7 +1,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import getObjectFromID from '../lib/getObjectFromID';
 

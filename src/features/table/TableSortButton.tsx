@@ -9,10 +9,10 @@ import {
 import React, { useCallback } from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
-import usePageParams from '@features/page-params/usePageParams';
-import { SortBy, SortBehavior, SortDirection } from '@features/sorting/SortTypes';
+import usePageParams from '@features/params/usePageParams';
+import { SortBy, SortBehavior, SortDirection } from '@features/transforms/sorting/SortTypes';
 
-import { getNormalSortDirection } from '../sorting/sort';
+import { getNormalSortDirection } from '../transforms/sorting/sort';
 
 import TableValueType from './TableValueType';
 

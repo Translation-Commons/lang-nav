@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { getScopeFilter } from '@features/filtering/filter';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import usePageParams from '@features/page-params/usePageParams';
-import { getSortFunction } from '@features/sorting/sort';
+import usePageParams from '@features/params/usePageParams';
+import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
-import LanguagePopulationOfDescendents from '@entities/language/LanguagePopulationFromDescendents';
+import LanguagePopulationOfDescendants from '@entities/language/LanguagePopulationFromDescendants';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
@@ -50,7 +50,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     primaryWritingSystem,
     writingSystems,
     populationFromLocales,
-    populationOfDescendents,
+    populationOfDescendants,
   } = lang;
 
   return (
@@ -60,9 +60,9 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <LanguagePopulationEstimate lang={lang} />
         </DetailsField>
       )}
-      {populationOfDescendents && (
-        <DetailsField title="Population of Descendents:">
-          <LanguagePopulationOfDescendents lang={lang} />
+      {populationOfDescendants && (
+        <DetailsField title="Population of Descendants:">
+          <LanguagePopulationOfDescendants lang={lang} />
         </DetailsField>
       )}
       {populationFromLocales && (
@@ -103,11 +103,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
-  const {
-    childLanguages,
-    sourceSpecific: { ISO, Glottolog },
-    variantTags,
-  } = lang;
+  const { childLanguages, ISO, Glottolog, variantTags } = lang;
 
   return (
     <DetailsSection title="Connections">
@@ -131,7 +127,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         </DetailsField>
       )}
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <DetailsField title="Descendent Languages:">
+        <DetailsField title="Descendant Languages:">
           {childLanguages.length > 0 ? (
             <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSource, sortFunction)} />
           ) : (

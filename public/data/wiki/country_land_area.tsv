@@ -1,0 +1,264 @@
+Territory Code	Territory Name	Land Area (km²)
+001	Earth	148940000
+RU	Russia	16376870
+AQ	Antarctica	14200000
+CN	China	9326410
+US	United States	9147593
+CA	Canada	9093507
+BR	Brazil	8460415
+AU	Australia	7682300
+IN	India	2973190
+AR	Argentina	2736690
+KZ	Kazakhstan	2699700
+DZ	Algeria	2381741
+CD	Democratic Republic of the Congo	2267048
+GL	Greenland	2166086
+SA	Saudi Arabia	2149690
+MX	Mexico	1943950
+ID	Indonesia	1811569
+LY	Libya	1759540
+SD	Sudan	1731671
+MN	Mongolia	1557507
+IR	Iran	1531595
+PE	Peru	1279996
+NE	Niger	1266700
+TD	Chad	1259200
+AO	Angola	1246700
+ML	Mali	1220190
+ZA	South Africa	1214470
+ET	Ethiopia	1096570
+BO	Bolivia	1083300
+CO	Colombia	1038700
+MR	Mauritania	1030700
+EG	Egypt	995450
+NG	Nigeria	910770
+TZ	Tanzania	885800
+VE	Venezuela	882050
+PK	Pakistan	857143
+NA	Namibia	823290
+MZ	Mozambique	786380
+TR	Turkey	769632
+CL	Chile	743812
+ZM	Zambia	743390
+MM	Myanmar	653508
+AF	Afghanistan	652230
+SS	South Sudan	644329
+FR	France	640427
+SO	Somalia	627340
+CF	Central African Republic	622984
+MG	Madagascar	581540
+UA	Ukraine	579330
+KE	Kenya	569140
+BW	Botswana	566730
+FR	France (metropolitan)	549970
+TH	Thailand	510890
+ES	Spain	498980
+CM	Cameroon	472710
+TM	Turkmenistan	469930
+YE	Yemen	455503
+PG	Papua New Guinea	452860
+MA	Morocco	446300
+IQ	Iraq	437367
+UZ	Uzbekistan	425400
+SE	Sweden	407284
+PY	Paraguay	397300
+ZW	Zimbabwe	386850
+NO	Norway	366704
+JP	Japan	364485
+DE	Germany	349390
+CG	Republic of the Congo	341500
+MY	Malaysia	329432
+CI	Ivory Coast	318000
+VN	Vietnam	313429
+OM	Oman	309500
+NO	Norway (mainland)	304282
+PL	Poland	304255
+FI	Finland	303815
+PH	Philippines	298170
+IT	Italy	295717
+EC	Ecuador	276841
+BF	Burkina Faso	273800
+EH	Western Sahara (disputed)	266000
+NZ	New Zealand	264537
+GA	Gabon	257670
+GN	Guinea	245717
+GB	United Kingdom	242741
+LA	Laos	230800
+RO	Romania	230080
+GH	Ghana	227533
+BY	Belarus	202900
+UG	Uganda	200520
+GY	Guyana	196850
+SN	Senegal	192530
+KG	Kyrgyzstan	191800
+SY	Syria	183630
+KH	Cambodia	176520
+UY	Uruguay	175015
+SR	Suriname	156000
+TN	Tunisia	155360
+NP	Nepal	143350
+TJ	Tajikistan	141510
+BD	Bangladesh	130170
+GR	Greece	128900
+KP	North Korea	120410
+NI	Nicaragua	120340
+BJ	Benin	112760
+HN	Honduras	111890
+CU	Cuba	109884
+BG	Bulgaria	108489
+GT	Guatemala	107160
+ER	Eritrea	101000
+IS	Iceland	100830
+KR	South Korea	97600
+LR	Liberia	96320
+MW	Malawi	94080
+PT	Portugal	91606
+HU	Hungary	91260
+JO	Jordan	88794
+RS	Serbia	88499
+AE	United Arab Emirates	82880
+AZ	Azerbaijan	82650
+AT	Austria	82520
+CZ	Czechia	77187
+PA	Panama	74180
+SL	Sierra Leone	72180
+GE	Georgia	69490
+IE	Ireland	68883
+LT	Lithuania	62610
+LV	Latvia	62230
+SJ	Svalbard (Norway)	62045
+LK	Sri Lanka	61860
+HR	Croatia	55974
+TG	Togo	54390
+BA	Bosnia and Herzegovina	51200
+CR	Costa Rica	51140
+DO	Dominican Republic	48320
+SK	Slovakia	48080
+DK	Denmark	42434
+EE	Estonia	42388
+CH	Switzerland	39510
+BT	Bhutan	38140
+NL	Netherlands	33893
+MD	Moldova	32970
+TW	Taiwan	32260
+LS	Lesotho	30355
+BE	Belgium	30280
+AM	Armenia	28470
+GW	Guinea-Bissau	28120
+GQ	Equatorial Guinea	28051
+SB	Solomon Islands	27990
+HT	Haiti	27560
+AL	Albania	27400
+BI	Burundi	25680
+MK	North Macedonia	25220
+RW	Rwanda	24670
+DJ	Djibouti	23180
+BZ	Belize	22810
+IL	Israel	21497
+SV	El Salvador	20720
+SI	Slovenia	20151
+NC	New Caledonia	18275
+FJ	Fiji	18272
+KW	Kuwait	17818
+SZ	Eswatini	17200
+TL	East Timor	14874
+ME	Montenegro	13452
+VU	Vanuatu	12189
+FK	Falkland Islands	12173
+QA	Qatar	11586
+XK	Kosovo	10887
+JM	Jamaica	10830
+LB	Lebanon	10230
+GM	Gambia	10120
+BS	Bahamas	10010
+CY	Cyprus	9241
+PR	Puerto Rico	8868
+TF	French Southern Territories	7668
+PS	Palestine	6025
+BN	Brunei	5270
+TT	Trinidad and Tobago	5127
+CV	Cape Verde	4033
+GS	South Georgia and the South Sandwich Islands	3903
+PF	French Polynesia	3827
+WS	Samoa	2780
+LU	Luxembourg	2574
+MU	Mauritius	2086
+KM	Comoros	1861
+AX	Åland	1553
+FO	Faroe Islands	1393
+HK	Hong Kong	1050
+ST	São Tomé and Príncipe	964
+TC	Turks & Caicos Islands	948
+KI	Kiribati	811
+BH	Bahrain	778
+DM	Dominica	750
+SG	Singapore	730
+TO	Tonga	720
+FM	Micronesia	700
+LC	Saint Lucia	610
+IM	Isle of Man	570
+GU	Guam	540
+AD	Andorra	468
+PW	Palau	459
+MP	Northern Mariana Islands	457
+SC	Seychelles	457
+CW	Curaçao	444
+AG	Antigua & Barbuda	442
+BB	Barbados	431
+HM	Heard Island & McDonald Islands	412
+SH	Saint Helena, Ascension and Tristan da Cunha (UK)	394
+VC	Saint Vincent and the Grenadines	389
+SJ	Jan Mayen (Norway)	377
+VI	U.S. Virgin Islands (US)	347
+GD	Grenada	340
+MT	Malta	315
+MV	Maldives	300
+BQ	Bonaire (Netherlands)	288
+KY	Cayman Islands	264
+KN	St. Kitts & Nevis	261
+NU	Niue	260
+CK	Cook Islands	236
+PM	Saint Pierre and Miquelon (France)	230
+AS	American Samoa (US)	199
+AW	Aruba (Netherlands)	180
+MH	Marshall Islands	180
+CL	Easter Island (Chile)	163
+LI	Liechtenstein	160
+VG	British Virgin Islands (UK)	151
+WF	Wallis and Futuna (France)	142
+CX	Christmas Island (Australia)	135
+JE	Jersey (UK)	116
+MS	Montserrat (UK)	100
+AI	Anguilla (UK)	91
+GG	Guernsey (UK)	78
+SM	San Marino	61
+BM	Bermuda (UK)	54
+MF	Saint Martin (France)	53
+BV	Bouvet Island (Norway)	49
+PN	Pitcairn Islands (UK)	47
+NF	Norfolk Island (Australia)	36
+SX	Sint Maarten (Netherlands)	34
+UM	U.S. Minor Outlying Islands (US)	34
+MO	Macau (China)	33
+TV	Tuvalu	25
+BL	Saint Barthélemy (France)	20
+NR	Nauru	20
+CC	Cocos (Keeling) Islands (Australia)	14
+TK	Tokelau (New Zealand)	12
+GI	Gibraltar (UK)	6.8
+CP	Clipperton Island (France)	2
+MC	Monaco	2
+VA	Vatican City	0.49
+# Not in original list, added later
+GF	French Guiana	83,534
+IC	Canary Islands	2874
+RE	Réunion	2511
+GP	Guadeloupe	1628
+MQ	Martinique	1128
+YT	Mayotte	374
+TA	Tristan da Cunha	207
+AC	Ascension Island	88
+IO	British Indian Ocean Territory	60
+EA	Ceuta & Melilla	30.8
+DG	Diego Garcia	30
+CQ	Sark	5.45

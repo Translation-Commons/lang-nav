@@ -6,7 +6,7 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getObjectParents } from './getParentsAndDescendents';
+import { getObjectParents } from './getParentsAndDescendants';
 
 const ObjectPathParents: React.FC<{ object?: ObjectData }> = ({ object }) => {
   if (!object) return null;

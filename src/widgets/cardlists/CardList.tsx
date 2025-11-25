@@ -2,10 +2,10 @@ import React, { useMemo } from 'react';
 
 import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
-import useFilteredObjects from '@features/filtering/useFilteredObjects';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
-import useColors from '@features/sorting/useColors';
+import useColors from '@features/transforms/coloring/useColors';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';

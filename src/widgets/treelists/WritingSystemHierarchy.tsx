@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import { getSortFunction } from '@features/sorting/sort';
+import { useDataContext } from '@features/data/context/useDataContext';
+import { ObjectType } from '@features/params/PageParamTypes';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
@@ -59,7 +59,7 @@ function getWritingSystemTreeNode(
       ? getWritingSystemTreeNodes(writingSystem.childWritingSystems, sortFunction, filterFunction)
       : [],
     labelStyle: {
-      fontWeight: (writingSystem?.populationOfDescendents ?? 0) > 100 ? 'bold' : 'normal',
+      fontWeight: (writingSystem?.populationOfDescendants ?? 0) > 100 ? 'bold' : 'normal',
       fontStyle: (writingSystem?.populationUpperBound ?? 0) <= 100 ? 'italic' : 'normal',
     },
   };

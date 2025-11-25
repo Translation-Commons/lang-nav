@@ -3,8 +3,8 @@ import React from 'react';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableButton from '@features/hovercard/HoverableButton';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { ObjectType, SearchableField, View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -16,13 +16,13 @@ const LanguagePopulationFromLocales: React.FC<{ lang: LanguageData }> = ({ lang 
   if (!lang.populationFromLocales) return null;
 
   return (
-    <Hoverable hoverContent={<Descendents lang={lang} />}>
+    <Hoverable hoverContent={<Descendants lang={lang} />}>
       {lang.populationFromLocales.toLocaleString()}
     </Hoverable>
   );
 };
 
-const Descendents: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+const Descendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { updatePageParams } = usePageParams();
 
   const localesFromUniqueTerritories = Object.values(

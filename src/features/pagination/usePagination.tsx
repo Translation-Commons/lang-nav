@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 /**
  * This gets a function that trims the visible data based on the page parameters

@@ -1,10 +1,10 @@
 import React, { useCallback, useMemo } from 'react';
 
-import { getFilterBySubstring, getFilterByVitality } from '@features/filtering/filter';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import Hoverable from '@features/hovercard/Hoverable';
-import usePageParams from '@features/page-params/usePageParams';
 import LimitSelector from '@features/pagination/LimitSelector';
+import usePageParams from '@features/params/usePageParams';
+import { getFilterBySubstring, getFilterByVitality } from '@features/transforms/filtering/filter';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -29,7 +29,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
     languageFilter,
     vitalityEth2013,
     vitalityEth2025,
-    vitalityISO,
+    isoStatus,
   } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
@@ -42,7 +42,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       languageFilter ||
       vitalityEth2013 ||
       vitalityEth2025 ||
-      vitalityISO,
+      isoStatus,
     [
       searchString,
       territoryFilter,
@@ -50,7 +50,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       languageFilter,
       vitalityEth2013,
       vitalityEth2025,
-      vitalityISO,
+      isoStatus,
     ],
   );
   const filterFunction = useCallback(

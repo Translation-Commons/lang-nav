@@ -4,16 +4,20 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
 import ObjectDetails from '@widgets/details/ObjectDetails';
 
-import FilterBreakdown from '@features/filtering/FilterBreakdown';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import usePagination from '@features/pagination/usePagination';
+import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
-import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from '../filtering/filter';
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
-import { getSortFunction } from '../sorting/sort';
+import {
+  getFilterBySubstring,
+  getFilterByVitality,
+  getScopeFilter,
+} from '../transforms/filtering/filter';
+import { getSortFunction } from '../transforms/sorting/sort';
 
 import BaseObjectTable from './BaseObjectTable';
 import TableColumn from './TableColumn';
@@ -98,7 +102,7 @@ function InteractiveObjectTable<T extends ObjectData>({
       )}
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
-      {currentObjects.length > 1 && (
+      {currentObjects.length > 10 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
           <VisibleItemsMeter
             objects={objects}

@@ -2,9 +2,9 @@ import { TriangleAlertIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
-import { SearchableField } from '@features/page-params/PageParamTypes';
-import { SortBy } from '@features/sorting/SortTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
@@ -36,7 +36,7 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'ISO 639-1',
-    render: (lang) => (lang.codeISO6391 ? lang.codeISO6391 : <Deemphasized>—</Deemphasized>),
+    render: (lang) => (lang.ISO.code6391 ? lang.ISO.code6391 : <Deemphasized>—</Deemphasized>),
   },
   {
     key: 'ISO 639-3/5',
@@ -49,7 +49,7 @@ const columns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        {lang.sourceSpecific.ISO.code}
+        {lang.ISO.code}
         {<MaybeISOWarning lang={lang} />}
       </div>
     ),
@@ -63,10 +63,10 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) =>
-      lang.sourceSpecific.BCP.code !== lang.sourceSpecific.ISO.code ? (
-        lang.sourceSpecific.BCP.code
+      lang.BCP.code !== lang.ISO.code ? (
+        lang.BCP.code
       ) : (
-        <Deemphasized>{lang.sourceSpecific.BCP.code}</Deemphasized>
+        <Deemphasized>{lang.BCP.code}</Deemphasized>
       ),
   },
   {
@@ -84,18 +84,18 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) =>
-      lang.sourceSpecific.CLDR.code !== lang.sourceSpecific.ISO.code ? (
+      lang.CLDR.code !== lang.ISO.code ? (
         <>
-          {lang.sourceSpecific.CLDR.code}
+          {lang.CLDR.code}
           <CLDRWarningNotes object={lang} />
         </>
       ) : (
-        <Deemphasized>{lang.sourceSpecific.CLDR.code}</Deemphasized>
+        <Deemphasized>{lang.CLDR.code}</Deemphasized>
       ),
   },
   {
     key: 'Glottocode',
-    render: (lang) => lang.sourceSpecific.Glottolog.code,
+    render: (lang) => lang.Glottolog.code,
   },
 ];
 

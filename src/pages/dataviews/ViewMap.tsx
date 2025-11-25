@@ -1,17 +1,18 @@
+import { ReactNode } from 'react';
+
+import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import ObjectMap from '@features/map/ObjectMap';
+import usePagination from '@features/pagination/usePagination';
+import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
+import { ObjectType } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
-} from '@widgets/controls/components/SelectorDisplayContext';
-
-import useFilteredObjects from '@features/filtering/useFilteredObjects';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import ObjectMap from '@features/map/ObjectMap';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-import usePagination from '@features/pagination/usePagination';
-import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
-import ColorBySelector from '@features/sorting/ColorBySelector';
-import ColorGradientSelector from '@features/sorting/ColorGradientSelector';
+} from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
+import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
+import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -20,22 +21,23 @@ import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import './styles.css';
-
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});
   const { getCurrentObjects } = usePagination<ObjectData>();
 
-  if (objectType !== ObjectType.Language) {
+  if (objectType !== ObjectType.Language && objectType !== ObjectType.Territory) {
     return (
       <div>
-        Map view is in Beta <em>β</em> mode and is only available for Languages.
+        Map view is in Beta <em>β</em> mode and is only available for Languages and Territories.
       </div>
     );
   }
 
   const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) =>
-    obj.type === ObjectType.Language ? obj.latitude == null || obj.longitude == null : true,
+    obj.type === ObjectType.Language || obj.type === ObjectType.Territory
+      ? obj.latitude == null || obj.longitude == null
+      : true,
   );
 
   return (
@@ -49,14 +51,9 @@ function ViewMap() {
       }}
     >
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
-      <div>
-        These coordinates show the &quot;primary&quot; location of the languages, as defined by
-        Glottolog. This could be the centroid of the area where the language is spoken, or a
-        significant location such as a major city where the language has a presence. It does not
-        represent all the locations where the language is spoken.
-      </div>
+      <div>{getMapDescription(objectType)}</div>
       <VisibleItemsMeter objects={filteredObjects} />
-      <ObjectMap objects={filteredObjects} borders={'no_borders'} />
+      <ObjectMap objects={filteredObjects} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>
@@ -81,6 +78,24 @@ function ViewMap() {
       )}
     </div>
   );
+}
+
+function getMapDescription(objectType: ObjectType): ReactNode {
+  switch (objectType) {
+    case ObjectType.Language:
+      return (
+        <>
+          These coordinates show the &quot;primary&quot; location of the languages, as defined by
+          Glottolog. This could be the centroid of the area where the language is spoken, or a
+          significant location such as a major city where the language has a presence. It does not
+          represent all the locations where the language is spoken.
+        </>
+      );
+    case ObjectType.Territory:
+      return 'These coordinates represent the geographical center of the territory.';
+    default:
+      return '';
+  }
 }
 
 export default ViewMap;

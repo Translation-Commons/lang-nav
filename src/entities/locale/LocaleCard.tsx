@@ -1,6 +1,6 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';

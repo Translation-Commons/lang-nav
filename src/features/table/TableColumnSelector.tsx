@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableButton from '@features/hovercard/HoverableButton';
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

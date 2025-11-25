@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 
-import { getNewURL } from '@features/page-params/getNewURL';
+import { getNewURL } from '@features/params/getNewURL';
 import {
   ObjectType,
   PageParamKey,
   PageParamsOptional,
   View,
-} from '@features/page-params/PageParamTypes';
-import { SortBy } from '@features/sorting/SortTypes';
+} from '@features/params/PageParamTypes';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 const CommonObjectives: React.FC = () => {
   return (

@@ -1,8 +1,8 @@
 import React, { useCallback } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
-import { PageParamsOptional, View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { PageParamsOptional, View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';

@@ -2,7 +2,7 @@
  * This file provides types for the data used in the application.
  */
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusData } from '../census/CensusTypes';
 import { LanguageCode, LanguageData } from '../language/LanguageTypes';
@@ -55,6 +55,9 @@ export interface TerritoryData extends ObjectBase {
   type: ObjectType.Territory;
   ID: TerritoryCode;
   codeDisplay: TerritoryCode;
+  codeAlpha3?: string; // ISO 3166-1 alpha-3 code, eg. USA, CAN, etc.
+  codeNumeric?: string; // ISO 3166-1 numeric code, eg. 840, 124, etc.
+
   nameDisplay: string;
   scope: TerritoryScope;
   population: number; // May be reduced when re-computing with dependent territories
@@ -65,6 +68,9 @@ export interface TerritoryData extends ObjectBase {
   sovereignCode?: ISO3166Code;
   literacyPercent?: number;
   gdp?: number;
+  latitude?: number;
+  longitude?: number;
+  landArea?: number; // in square kilometers
 
   // References to other objects, filled in after loading the TSV
   parentUNRegion?: TerritoryData;
@@ -107,7 +113,7 @@ export interface WritingSystemData extends ObjectBase {
 
   // Derived when combining data
   populationUpperBound?: number;
-  populationOfDescendents?: number;
+  populationOfDescendants?: number;
 
   // References to other objects, filled in after loading the TSV
   primaryLanguage?: LanguageData;

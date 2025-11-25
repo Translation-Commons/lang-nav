@@ -1,17 +1,17 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
+import AlignedFraction from '@shared/ui/AlignedFraction';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = {
@@ -65,17 +65,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
         },
         {
           key: 'Percent Within Territory',
-          render: (loc) =>
-            loc.populationSpeakingPercent != null ? (
-              <>
-                {numberToFixedUnlessSmall(loc.populationSpeakingPercent)}
-                {loc.populationSpeakingPercent > 10 && (
-                  <span style={{ visibility: 'hidden' }}>0</span>
-                )}
-              </>
-            ) : (
-              'N/A'
-            ),
+          render: (loc) => <AlignedFraction value={loc.populationSpeakingPercent} />,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.PercentOfTerritoryPopulation,
         },

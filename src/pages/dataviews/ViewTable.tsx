@@ -5,8 +5,8 @@ import TerritoryTable from '@widgets/tables/TerritoryTable';
 import VariantTagTable from '@widgets/tables/VariantTagTable';
 import WritingSystemTable from '@widgets/tables/WritingSystemTable';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import './styles.css';
 

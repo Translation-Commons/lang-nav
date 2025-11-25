@@ -12,8 +12,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
 const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { codeISO6391, sourceSpecific } = lang;
-  const { Glottolog, ISO, CLDR } = sourceSpecific;
+  const { Glottolog, ISO, CLDR } = lang;
 
   return (
     <DetailsSection title="Codes">
@@ -39,7 +38,7 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         {ISO.code ? (
           <>
             {ISO.code}
-            {codeISO6391 ? ` | ${codeISO6391}` : ''}
+            {ISO.code6391 ? ` | ${ISO.code6391}` : ''}
             {lang.warnings && lang.warnings[LanguageField.isoCode] && (
               <Hoverable
                 hoverContent={<LanguageRetirementReason lang={lang} />}

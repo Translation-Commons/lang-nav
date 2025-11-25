@@ -5,8 +5,8 @@ import { TerritoryHierarchy } from '@widgets/treelists/TerritoryHierarchy';
 import { VariantTagHierarchy } from '@widgets/treelists/VariantTagHierarchy';
 import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarchy';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import './styles.css';
 

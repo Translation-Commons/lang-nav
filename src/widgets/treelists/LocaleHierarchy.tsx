@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getScopeFilter } from '@features/filtering/filter';
-import { ObjectType } from '@features/page-params/PageParamTypes';
-import { getSortFunction } from '@features/sorting/sort';
+import { useDataContext } from '@features/data/context/useDataContext';
+import { ObjectType } from '@features/params/PageParamTypes';
+import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 

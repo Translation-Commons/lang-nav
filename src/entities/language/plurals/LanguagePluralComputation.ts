@@ -25,8 +25,8 @@ export function findLanguagePluralRules(lang: LanguageData): PluralRuleFromCLDR[
     string,
     Record<string, string>
   >;
-  const lookupID = lang.codeISO6391 ?? lang.ID;
-  const lookupIDAlt = lang.sourceSpecific.CLDR?.code;
+  const lookupID = lang.ISO.code6391 ?? lang.ID;
+  const lookupIDAlt = lang.CLDR?.code;
 
   // Get plural rules
   const pluralRules = pluralRulesUntyped[lookupID] || pluralRulesUntyped[lookupIDAlt ?? ''];

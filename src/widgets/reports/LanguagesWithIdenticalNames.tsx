@@ -2,13 +2,13 @@ import React, { useMemo } from 'react';
 
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getFilterBySubstring } from '@features/filtering/filter';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
+import { useDataContext } from '@features/data/context/useDataContext';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getSortFunction } from '@features/sorting/sort';
+import { getFilterBySubstring } from '@features/transforms/filtering/filter';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
@@ -90,7 +90,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
           <div className="CardList">
             <ResponsiveGrid>
               {langs.map((lang) => {
-                const { ISO, Glottolog } = lang.sourceSpecific;
+                const { ISO, Glottolog } = lang;
                 const otherNames = lang.names.filter(
                   (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
                 );
@@ -99,7 +99,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
                     <div>
                       <label>ID(s):</label>{' '}
                       {unique(
-                        [lang.ID, ISO.code, lang.codeISO6391, Glottolog.code].filter(
+                        [lang.ID, ISO.code, ISO.code6391, Glottolog.code].filter(
                           (id) => id != null,
                         ),
                       ).join(', ')}

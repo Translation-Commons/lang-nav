@@ -7,25 +7,25 @@ export function filterBranch(
   filterFunction?: (a: ObjectData) => boolean,
 ): TreeNodeData | undefined {
   if (!filterFunction) {
-    // If there is no filter function, don't change the node or filter descendents
-    node.descendentsPassFilter = undefined;
+    // If there is no filter function, don't change the node or filter descendants
+    node.descendantsPassFilter = undefined;
     return node;
   }
 
-  // Filter the children to see if descendent nodes pass
+  // Filter the children to see if descendant nodes pass
   const filteredChildren = node.children
     .map((child) => filterBranch(child, filterFunction))
     .filter((node) => node != null);
 
   // If it has children that also pass the filter, then open this code
   if (filteredChildren.length > 0) {
-    node.descendentsPassFilter = true;
+    node.descendantsPassFilter = true;
   } else {
-    node.descendentsPassFilter = false;
+    node.descendantsPassFilter = false;
   }
 
   if (!filterFunction(node.object)) {
-    // If it does not pass the filter, we may drop this branch from the tree if there are no descendents that pass the filter
+    // If it does not pass the filter, we may drop this branch from the tree if there are no descendants that pass the filter
     if (filteredChildren.length === 0) {
       return undefined;
     }

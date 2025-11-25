@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
-import { getFilterBySubstring } from '@features/filtering/filter';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getSortFunction } from '@features/sorting/sort';
+import { getFilterBySubstring } from '@features/transforms/filtering/filter';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 

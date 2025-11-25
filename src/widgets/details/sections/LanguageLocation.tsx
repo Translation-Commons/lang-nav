@@ -28,7 +28,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           Glottolog. This could be the centroid of the area where the language is spoken, or a
           significant location such as a major city where the language has a presence. It does not
           represent all the locations where the language is spoken.
-          <ObjectMap objects={[lang]} borders="no_borders" maxWidth={400} />
+          <ObjectMap objects={[lang]} maxWidth={400} />
         </>
       ) : null}
     </DetailsSection>

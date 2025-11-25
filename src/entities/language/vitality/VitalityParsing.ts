@@ -1,4 +1,8 @@
-import { VitalityEthnologueCoarse, VitalityEthnologueFine, VitalityISO } from './VitalityTypes';
+import {
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+  LanguageISOStatus,
+} from './VitalityTypes';
 
 /**
  * Maps Ethnologue 2013 vitality levels to 0-9 scale
@@ -62,27 +66,27 @@ export function parseVitalityEthnologue2025(
 /**
  * Maps ISO vitality levels to 0-9 scale
  */
-export function parseVitalityISO(vitality: string): VitalityISO | undefined {
+export function parseLanguageISOStatus(vitality: string): LanguageISOStatus | undefined {
   if (!vitality) return undefined;
 
   switch (vitality.toLowerCase()) {
     case 'living':
     case 'l':
-      return VitalityISO.Living;
+      return LanguageISOStatus.Living;
     case 'constructed':
     case 'c':
-      return VitalityISO.Constructed;
+      return LanguageISOStatus.Constructed;
     case 'historical':
     case 'historic':
     case 'h':
-      return VitalityISO.Historical;
+      return LanguageISOStatus.Historical;
     case 'extinct':
     case 'e':
-      return VitalityISO.Extinct;
+      return LanguageISOStatus.Extinct;
     case 'special code':
     case 'specialcode':
     case 's':
-      return VitalityISO.SpecialCode;
+      return LanguageISOStatus.SpecialCode;
     default:
       return undefined;
   }

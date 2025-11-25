@@ -1,11 +1,10 @@
 import React from 'react';
 
-import usePageParams from '@features/page-params/usePageParams';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-
-import Selector from '../components/Selector';
-import { SelectorDisplay } from '../components/SelectorDisplayContext';
 
 type Props = { display: SelectorDisplay };
 
@@ -42,7 +41,7 @@ const LanguageSourceDescription: React.FC<{ languageSource: LanguageSource }> = 
   languageSource,
 }) => {
   switch (languageSource) {
-    case LanguageSource.All:
+    case LanguageSource.Combined:
       return (
         <>
           <label>All:</label>Show all languages and dialects, regardless of where it was defined.

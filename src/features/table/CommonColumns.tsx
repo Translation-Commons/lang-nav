@@ -1,6 +1,6 @@
 import HoverableObject from '@features/hovercard/HoverableObject';
-import { SearchableField } from '@features/page-params/PageParamTypes';
-import { SortBy } from '@features/sorting/SortTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
@@ -22,7 +22,7 @@ export const NameColumn: TableColumn<ObjectData> = {
   key: 'Name',
   render: (object) => (
     <HoverableObject object={object} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
-      <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.EngName} />
+      <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
     </HoverableObject>
   ),
   sortParam: SortBy.Name,
@@ -32,7 +32,7 @@ export const NameColumn: TableColumn<ObjectData> = {
 export const EndonymColumn: TableColumn<ObjectData> = {
   key: 'Endonym',
   render: (object) => (
-    <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Endonym} />
+    <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameEndonym} />
   ),
   sortParam: SortBy.Endonym,
   isInitiallyVisible: false,

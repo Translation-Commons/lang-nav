@@ -3,7 +3,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import usePageParams from '@features/page-params/usePageParams';
+import usePageParams from '@features/params/usePageParams';
 
 import { VariantTagData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';

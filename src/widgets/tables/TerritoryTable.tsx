@@ -1,19 +1,22 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
 
+import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';
+import AlignedFraction from '@shared/ui/AlignedFraction';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();
@@ -24,6 +27,18 @@ const TerritoryTable: React.FC = () => {
       objects={territories}
       columns={[
         CodeColumn,
+        {
+          key: 'ISO Alpha-3 Code',
+          render: (object) => object.codeAlpha3 || null,
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
+        {
+          key: 'ISO Numeric Code',
+          render: (object) => object.codeNumeric || object.ID.match(/\d{3}/)?.[0] || null,
+          isInitiallyVisible: false,
+          columnGroup: 'Codes',
+        },
         NameColumn,
         {
           key: 'Population',
@@ -73,7 +88,7 @@ const TerritoryTable: React.FC = () => {
             object.locales ? object.locales[0].populationSpeakingPercent?.toFixed(1) + '%' : null,
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
-          sortParam: SortBy.PopulationPercentInBiggestDescendentLanguage,
+          sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
           columnGroup: 'Language',
         },
         {
@@ -100,8 +115,51 @@ const TerritoryTable: React.FC = () => {
               : null,
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
-          sortParam: SortBy.PopulationOfDescendents,
+          sortParam: SortBy.PopulationOfDescendants,
           columnGroup: 'Relations',
+        },
+        {
+          key: 'Latitude',
+          render: (obj) => obj.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
+          exportValue: (obj) => obj.latitude?.toFixed(4) ?? '',
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Latitude,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Longitude',
+          render: (obj) => obj.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
+          exportValue: (obj) => obj.longitude?.toFixed(4) ?? '',
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Longitude,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Land Area (km²)',
+          description:
+            'Surprisingly, sources report different numbers for the land area for some areas.',
+          render: (object) =>
+            object.landArea ? numberToSigFigs(object.landArea, 3)?.toLocaleString() : undefined,
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          sortParam: SortBy.Area,
+          columnGroup: 'Location',
+        },
+        {
+          key: 'Density',
+          description: 'People per square kilometer',
+          render: (object) => (
+            <AlignedFraction
+              value={
+                object.landArea && object.population ? object.population / object.landArea : null
+              }
+            />
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Numeric,
+          columnGroup: 'Location',
         },
         {
           key: 'Type',

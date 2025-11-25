@@ -1,19 +1,21 @@
 import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
+import usePageParams from '@features/params/usePageParams';
 
+import Highlightable from '@shared/ui/Highlightable';
 import LinkButton from '@shared/ui/LinkButton';
 import Pill from '@shared/ui/Pill';
 
 import { LanguageData } from './LanguageTypes';
 
 const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { codeDisplay, codeISO6391, nameCanonical, sourceSpecific } = lang;
-  const { Glottolog, ISO, CLDR } = sourceSpecific;
+  const { searchString } = usePageParams();
+  const { codeDisplay, nameCanonical, Glottolog, ISO, CLDR } = lang;
 
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
-      {nameCanonical}
+      <Highlightable text={nameCanonical} searchPattern={searchString}></Highlightable>
       {Glottolog.name === nameCanonical && (
         <Hoverable
           hoverContent={
@@ -50,7 +52,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <>
               <div>Same name as is in the CLDR data</div>
               <LinkButton
-                href={`https://www.unicode.org/cldr/charts/48/summary/${codeISO6391 ?? ISO.code ?? codeDisplay}.html`}
+                href={`https://www.unicode.org/cldr/charts/48/summary/${ISO.code6391 ?? ISO.code ?? codeDisplay}.html`}
               >
                 View CLDR Entry
               </LinkButton>

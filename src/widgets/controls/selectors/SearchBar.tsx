@@ -1,11 +1,13 @@
 import { SearchIcon } from 'lucide-react';
 import React from 'react';
 
-import { PageParamKey } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-
-import { SelectorDisplay, SelectorDisplayProvider } from '../components/SelectorDisplayContext';
-import TextInput from '../components/TextInput';
+import { PageParamKey } from '@features/params/PageParamTypes';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
+import TextInput from '@features/params/ui/TextInput';
+import usePageParams from '@features/params/usePageParams';
 
 import SearchBySelector from './SearchBySelector';
 import { useSearchSuggestions } from './useSearchSuggestions';

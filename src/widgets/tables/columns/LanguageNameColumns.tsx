@@ -1,7 +1,10 @@
+import { SearchableField } from '@features/params/PageParamTypes';
 import { EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 
+import LanguageOtherNames from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
@@ -12,10 +15,10 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'ISO Name',
     render: (lang) =>
-      lang.nameDisplay !== lang.sourceSpecific.ISO.name ? (
-        lang.sourceSpecific.ISO.name
+      lang.nameDisplay !== lang.ISO.name ? (
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
       ) : (
-        <Deemphasized>{lang.sourceSpecific.ISO.name}</Deemphasized>
+        <Deemphasized>{lang.ISO.name}</Deemphasized>
       ),
     description: (
       <>
@@ -30,10 +33,10 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'CLDR Name',
     render: (lang) =>
-      lang.nameDisplay !== lang.sourceSpecific.CLDR.name ? (
-        lang.sourceSpecific.CLDR.name
+      lang.nameDisplay !== lang.CLDR.name ? (
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
       ) : (
-        <Deemphasized>{lang.sourceSpecific.CLDR.name}</Deemphasized>
+        <Deemphasized>{lang.CLDR.name}</Deemphasized>
       ),
     isInitiallyVisible: false,
     columnGroup: 'Names',
@@ -41,24 +44,17 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Glottolog Name',
     render: (lang) =>
-      lang.nameDisplay !== lang.sourceSpecific.Glottolog.name ? (
-        lang.sourceSpecific.Glottolog.name
+      lang.nameDisplay !== lang.Glottolog.name ? (
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
       ) : (
-        <Deemphasized>{lang.sourceSpecific.Glottolog.name}</Deemphasized>
+        <Deemphasized>{lang.Glottolog.name}</Deemphasized>
       ),
     isInitiallyVisible: false,
     columnGroup: 'Names',
   },
   {
     key: 'Other Names',
-    render: (lang) => {
-      const { Glottolog, ISO, CLDR } = lang.sourceSpecific;
-      const otherNames = lang.names.filter(
-        (name) =>
-          ![lang.nameDisplay, lang.nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),
-      );
-      return otherNames.length > 0 && otherNames.join(', ');
-    },
+    render: (lang) => <LanguageOtherNames lang={lang} />,
     isInitiallyVisible: false,
     columnGroup: 'Names',
   },

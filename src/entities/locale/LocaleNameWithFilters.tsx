@@ -1,8 +1,8 @@
 import React from 'react';
 
 import HoverableObject from '@features/hovercard/HoverableObject';
-import { SearchableField } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/types/DataTypes';
 
@@ -15,12 +15,7 @@ const LocaleNameWithFilters: React.FC<{ locale: LocaleData }> = ({ locale }) => 
 
   const name = getLocaleName(locale, !territoryFilter);
 
-  const searchPattern =
-    searchBy === SearchableField.AllNames ||
-    searchBy === SearchableField.EngName ||
-    searchBy === SearchableField.NameOrCode
-      ? searchString
-      : '';
+  const searchPattern = searchBy !== SearchableField.Code ? searchString : '';
 
   return (
     <HoverableObject object={locale}>

@@ -1,12 +1,12 @@
 import { unique } from '@shared/lib/setUtils';
 
-import { LanguageData } from './LanguageTypes';
+import { LanguageData, LanguageSource } from './LanguageTypes';
 
 export function setLanguageNames(lang: LanguageData, additionalNames: string[] = []): void {
   const names = [
     lang.nameCanonical,
     lang.nameEndonym,
-    ...Object.values(lang.sourceSpecific).map((l) => l.name),
+    ...Object.values(LanguageSource).map((src) => lang[src].name),
     ...lang.names,
     ...additionalNames,
   ].filter((s) => s != null);
@@ -17,11 +17,7 @@ export function setLanguageNames(lang: LanguageData, additionalNames: string[] =
   const namesRemovingParentheticalDuplicates = unique(
     names.map((name) => {
       const [preParens, inParens] = name.split(/\(|\)/);
-      if (
-        inParens &&
-        (names.includes(inParens.trim()) || inParens === 'macrolanguage' || inParens === 'family')
-      )
-        return preParens.trim();
+      if (inParens && names.includes(inParens.trim())) return preParens.trim();
       return name;
     }),
   );

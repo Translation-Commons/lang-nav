@@ -1,14 +1,14 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { SortBy } from '@features/sorting/SortTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { VariantTagData } from '@entities/types/DataTypes';

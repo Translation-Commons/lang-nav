@@ -1,13 +1,13 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import usePageParams from '@features/page-params/usePageParams';
-import { SortBy } from '@features/sorting/SortTypes';
+import usePageParams from '@features/params/usePageParams';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
@@ -28,9 +28,7 @@ const LocaleTable: React.FC = () => {
   return (
     <InteractiveObjectTable<LocaleData>
       tableID={TableID.Locales}
-      objects={locales.filter(
-        (locale) => locale.language?.sourceSpecific[languageSource].code != null,
-      )}
+      objects={locales.filter((locale) => locale.language?.[languageSource].code != null)}
       columns={[
         CodeColumn,
         {

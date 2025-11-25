@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';

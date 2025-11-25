@@ -3,7 +3,7 @@ import React from 'react';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { getSortFunction } from '@features/sorting/sort';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { WritingSystemData } from '@entities/types/DataTypes';
 

@@ -1,18 +1,18 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data-loading/context/useDataContext';
+import { useDataContext } from '@features/data/context/useDataContext';
 import {
   getRetirementReasonLabel,
   RetirementReason,
-} from '@features/data-loading/iso/ISORetirements';
+} from '@features/data/load/extra_entities/ISORetirements';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
-import { SortBy } from '@features/sorting/SortTypes';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -49,8 +49,8 @@ const LanguageTable: React.FC = () => {
       {
         key: 'ISO Retirement',
         render: (lang) => {
-          let retirementReason = lang.retirementReason ?? undefined;
-          if (!retirementReason && lang.sourceSpecific.ISO.code == null) {
+          let retirementReason = lang.ISO.retirementReason ?? undefined;
+          if (!retirementReason && lang.ISO.code == null) {
             retirementReason = RetirementReason.NeverISO;
           }
           return retirementReason ? (

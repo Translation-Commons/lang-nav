@@ -1,18 +1,22 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import FilterBreakdown from '@features/filtering/FilterBreakdown';
-import { getFilterByConnections } from '@features/filtering/filterByConnections';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableButton from '@features/hovercard/HoverableButton';
-import { View } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
+import { View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from '../filtering/filter';
+import {
+  getFilterBySubstring,
+  getFilterByVitality,
+  getScopeFilter,
+} from '../transforms/filtering/filter';
 
 import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';
@@ -52,7 +56,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
 
   return (
     <div>
-      <HighLimitWarning />
+      <HighLimitWarning nShown={nShown} />
       <div
         style={{
           display: 'flex',
@@ -99,17 +103,17 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   );
 };
 
-const HighLimitWarning: React.FC = () => {
-  const { limit, view, updatePageParams } = usePageParams();
+const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
+  const { view, updatePageParams } = usePageParams();
   const threshold = getLimitThreshold(view);
 
-  if (limit <= threshold) return null;
+  if (nShown <= threshold) return null;
 
   return (
     <div>
       <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} />
-      There are <strong>{limit}</strong> items visible, this may impact page performance. Consider
-      reducing it to{' '}
+      There are <strong>{nShown.toLocaleString()}</strong> items visible, this may impact page
+      performance. Consider reducing the limit to{' '}
       <HoverableButton
         onClick={() => updatePageParams({ limit: threshold })}
         style={{ padding: '0 0.25em' }}

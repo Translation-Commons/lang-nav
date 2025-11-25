@@ -33,7 +33,7 @@ export enum VitalityEthnologueFine {
   Extinct = 0,
 }
 
-export enum VitalityISO {
+export enum LanguageISOStatus {
   Living = 9, // L
   Constructed = 3, // C
   Historical = 1, // H

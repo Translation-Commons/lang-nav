@@ -1,15 +1,13 @@
 import React from 'react';
 
+import { PageParamKey } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
-} from '@widgets/controls/components/SelectorDisplayContext';
-
-import { PageParamKey } from '@features/page-params/PageParamTypes';
-import usePageParams from '@features/page-params/usePageParams';
-
-import SelectorLabel from '../../widgets/controls/components/SelectorLabel';
-import TextInput from '../../widgets/controls/components/TextInput';
+} from '@features/params/ui/SelectorDisplayContext';
+import SelectorLabel from '@features/params/ui/SelectorLabel';
+import TextInput from '@features/params/ui/TextInput';
+import usePageParams from '@features/params/usePageParams';
 
 const LimitInput: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();

@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/page-params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -26,15 +26,11 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
 }
 
 function getLanguageSubtitle(lang: LanguageData): string | undefined {
-  let nameSubtitle: string | undefined = lang.nameSubtitle;
   let scope = lang.scope;
-  if (nameSubtitle === 'macrolanguage') {
-    nameSubtitle = undefined; // Already covered by the scope argument
-  }
   if (scope == LanguageScope.Language) {
     scope = undefined; // Not particularly interesting
   }
-  const composite = [scope, nameSubtitle].filter(Boolean).join(', ');
+  const composite = [scope, lang.nameSubtitle].filter(Boolean).join(', ');
   return composite !== '' ? composite : undefined;
 }
 

@@ -1,11 +1,10 @@
 import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
 
-import Selector from '@widgets/controls/components/Selector';
-
 import EmptyHoverCardProvider from '@features/hovercard/EmptyHoverCardProvider';
-import { PageParamsContext } from '@features/page-params/PageParamsContext';
-import usePageParams from '@features/page-params/usePageParams';
+import { PageParamsContext } from '@features/params/PageParamsContext';
+import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
