@@ -14,6 +14,7 @@ import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
+import { getLanguageRoot, getMacrolanguage } from '@entities/language/LanguageFamilyUtils';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
@@ -77,6 +78,18 @@ const LanguageTable: React.FC = () => {
         key: 'Parent Language',
         render: (lang) =>
           lang.parentLanguage && <HoverableObjectName object={lang.parentLanguage} />,
+        isInitiallyVisible: false,
+        columnGroup: 'Relations',
+      },
+      {
+        key: 'Macrolanguage',
+        render: (lang) => <HoverableObjectName object={getMacrolanguage(lang)} />,
+        isInitiallyVisible: false,
+        columnGroup: 'Relations',
+      },
+      {
+        key: 'Language Family',
+        render: (lang) => <HoverableObjectName object={getLanguageRoot(lang)} />,
         isInitiallyVisible: false,
         columnGroup: 'Relations',
       },

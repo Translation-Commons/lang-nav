@@ -13,6 +13,7 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
+import { getLanguageRoot, getMacrolanguage } from '@entities/language/LanguageFamilyUtils';
 import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
@@ -157,6 +158,18 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             valueType: TableValueType.Numeric,
             isInitiallyVisible: false,
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+          },
+          {
+            key: 'Macrolanguage',
+            render: (loc) =>
+              loc.language && <HoverableObjectName object={getMacrolanguage(loc.language)} />,
+            isInitiallyVisible: false,
+          },
+          {
+            key: 'Language Family',
+            render: (loc) =>
+              loc.language && <HoverableObjectName object={getLanguageRoot(loc.language)} />,
+            isInitiallyVisible: false,
           },
           {
             key: 'Primary Country',

@@ -101,8 +101,10 @@ More is better, but also if you don't have a value, leave it empty. For instance
   - `sampleRate`: The sample rate of the data (e.g., "0.25" the data is interpolated from 25% of the population, "1" for the the data is not interpolated)
   - `respondingPopulation`: The total number of people who responded to the question about language (eligiblePopulation - the number of people who did not respond to the question)
     - This is useful to compute the expected percentage of how many people speak the language in the country.
+  - `populationSource`: An explanation for where the population estimate comes from if its not from the census itself (e.g., "United Nations World Population Prospects 2022") 
 - **Source / Citation**
   - `collectorName`: The name of the individual or group that collected the data (e.g., "Statistics Canada")
+  - `author`: The individual actors that published the data (eg. "John Smith, Jane Doe")
   - `url`: The URL of the census table (e.g., "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810000201")
   - `tableName`: The name of the original data table (e.g., "Knowledge of languages by age and gender"
   - `columnName`: The name of the column in the table the data is from (e.g., "Total - Single and multiple responses of knowledge of languages")
@@ -178,7 +180,7 @@ Note that this example shows a rare but possible case where the language row sho
 
 ## Step 5: Plug it in
 
-Add the new filename to the `censusList.txt` file in this directory. Test out that the new data is loaded by running the project locally (instructions in the [README](/README.md)).
+Put the new `.tsv` file in the appropriate directory (official, unofficial, or another subfolder to group common sources). Add the new file's filename to the `censusList.txt` file in its directory. Test out that the new data is loaded by running the project locally (instructions in the [README](/README.md)).
 
 Check the census table view at your local domain eg. `https://localhost:5173/lang-nav/data?objectType=Census&view=Table` to make sure your new censuses appear and there are roughly as many languages as you expected. Noting that `mis`/`und`/`mul` languages have already been filtered out.
 

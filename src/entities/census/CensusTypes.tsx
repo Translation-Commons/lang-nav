@@ -9,7 +9,9 @@ export type CensusID = string; // eg. 'ca2021.2', 'us2013.1'
 // Ranked by priority
 export enum CensusCollectorType {
   Government = 'Government',
-  Study = 'Study',
+  Study = 'Study', // Academic study
+  NGO = 'NGO', // Non-governmental organization eg. Endangered Languages Project, Joshua Project
+  Media = 'Media', // News article, blog, or other media sources
   CLDR = 'CLDR',
 }
 
@@ -50,7 +52,8 @@ export interface CensusData extends ObjectBase {
   datePublished?: Date;
   dateAccessed?: Date;
   url?: string;
-  collectorName?: string; // Name of the organization or person who collected the data
+  collectorName?: string; // Name of the organization or journal presenting the data
+  author?: string; // Name of the individual author(s) if applicable
 
   // Some fields derived as the data is imported
   languageCount: number; // Number of languages in this collection
@@ -65,10 +68,14 @@ export const getCensusCollectorTypeRank = (collectorType: CensusCollectorType): 
     case CensusCollectorType.Government:
       return 1; // Highest priority
     case CensusCollectorType.Study:
-      return 2; // Medium priority
+      return 2;
+    case CensusCollectorType.NGO:
+      return 3;
+    case CensusCollectorType.Media:
+      return 4;
     case CensusCollectorType.CLDR:
-      return 3; // Lowest priority
+      return 5; // Low priority
     default:
-      return 4; // Unknown or unranked
+      return 6; // Unknown or unranked
   }
 };

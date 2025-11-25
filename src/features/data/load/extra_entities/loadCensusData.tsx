@@ -16,11 +16,14 @@ export async function getCensusFilepaths(directory: string): Promise<string[]> {
 
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
   // Load census filenames from the text file
-  const CENSUS_FILEPATHS = await getCensusFilepaths('data/census');
-  const UN_CENSUS_FILEPATHS = await getCensusFilepaths('data/census/data.un.org');
+  const FILEPATHS = await Promise.all([
+    getCensusFilepaths('data/census/official'),
+    getCensusFilepaths('data/census/data.un.org'),
+    getCensusFilepaths('data/census/unofficial'),
+  ]).then((arrays) => arrays.flat());
 
   return await Promise.all(
-    [...CENSUS_FILEPATHS, ...UN_CENSUS_FILEPATHS].map(
+    FILEPATHS.map(
       async (filePath) =>
         await fetch(filePath)
           .then((res) => res.text())
