@@ -5,6 +5,7 @@ import usePagination from '@features/pagination/usePagination';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useColors from '@features/transforms/coloring/useColors';
+import useScale from '@features/transforms/scales/useScale';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
@@ -17,10 +18,11 @@ type Props = {
 };
 
 const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
-  const { colorBy } = usePageParams();
+  const { colorBy, scaleBy } = usePageParams();
   const { getCurrentObjects } = usePagination<ObjectData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const coloringFunctions = useColors({ objects });
+  const scalingFunctions = useScale({ objects, scaleBy });
 
   const renderableObjects = useMemo(
     // Reverse so the "first" objects are drawn on top.
@@ -58,6 +60,7 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
             }
             object={obj}
             scalar={scalar}
+            getScale={scalingFunctions.getScale}
             onMouseEnter={buildOnMouseEnter(obj)}
             onMouseLeave={onMouseLeaveTriggeringElement}
           />
@@ -71,9 +74,10 @@ const HoverableCircle: React.FC<{
   color?: string;
   object: ObjectData;
   scalar: number;
+  getScale?: (object: ObjectData) => number;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
-}> = ({ object, color, scalar, onMouseEnter, onMouseLeave }) => {
+}> = ({ object, color, scalar, getScale, onMouseEnter, onMouseLeave }) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) {
     return null;
@@ -85,11 +89,14 @@ const HoverableCircle: React.FC<{
     (object.longitude < -168 ? object.longitude + 360 : object.longitude) - 12,
   );
   const [isActive, setIsActive] = useState(false);
+  const computedRadiusMultiplier = getScale ? getScale(object) : 2;
+  if (computedRadiusMultiplier <= 0) return null;
+
   return (
     <circle
       cx={x * 180}
       cy={-y * 90}
-      r={2 * scalar}
+      r={computedRadiusMultiplier * scalar}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
       style={{ transition: 'fill 0.25s, stroke 0.25s' }}
