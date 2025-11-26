@@ -101,7 +101,7 @@ More is better, but also if you don't have a value, leave it empty. For instance
   - `sampleRate`: The sample rate of the data (e.g., "0.25" the data is interpolated from 25% of the population, "1" for the the data is not interpolated)
   - `respondingPopulation`: The total number of people who responded to the question about language (eligiblePopulation - the number of people who did not respond to the question)
     - This is useful to compute the expected percentage of how many people speak the language in the country.
-  - `populationSource`: An explanation for where the population estimate comes from if its not from the census itself (e.g., "United Nations World Population Prospects 2022") 
+  - `populationSource`: An explanation for where the population estimate comes from if its not from the census itself (e.g., "United Nations World Population Prospects 2022")
 - **Source / Citation**
   - `collectorName`: The name of the individual or group that collected the data (e.g., "Statistics Canada")
   - `author`: The individual actors that published the data (eg. "John Smith, Jane Doe")
