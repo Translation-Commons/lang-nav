@@ -4,6 +4,7 @@ import React from 'react';
 import Hoverable from '@features/hovercard/Hoverable';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
+import LanguageScopeDisplay from '@entities/language/LanguageScopeDisplay';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
@@ -16,6 +17,9 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
   return (
     <DetailsSection title="Codes">
+      <DetailsField title="Scope:">
+        <LanguageScopeDisplay lang={lang} />
+      </DetailsField>
       <DetailsField title="Language Code:">{lang.ID}</DetailsField>
       <DetailsField
         title="Glottocode:"
