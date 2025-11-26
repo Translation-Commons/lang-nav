@@ -93,7 +93,7 @@ describe('getLanguageRootLanguageFamily', () => {
     const result2 = getLanguageRootLanguageFamily(languages.moro1295);
     expect(result2.nameDisplay, 'Moroccan-Andalusian Arabic root').toBe('Afro-Asiatic Languages');
     const result3 = getLanguageRootLanguageFamily(languages.marr1264);
-    expect(result3.nameDisplay, 'Marrakesh Arabic root').toBe('Afro-Asiatic Languages');
+    expect(result3.nameDisplay, 'Marrakech Arabic root').toBe('Afro-Asiatic Languages');
   });
 });
 
@@ -133,6 +133,6 @@ describe('getLanguageRootMacrolanguage', () => {
 
   it('dialects can return their macrolanguage via their parent language', () => {
     const result = getLanguageRootMacrolanguage(languages.marr1264);
-    expect(result?.nameDisplay, 'Marrakesh Arabic macrolanguage').toBe('Arabic');
+    expect(result?.nameDisplay, 'Marrakech Arabic macrolanguage').toBe('Arabic');
   });
 });
