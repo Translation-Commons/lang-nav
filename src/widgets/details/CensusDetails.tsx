@@ -6,6 +6,7 @@ import { CensusData } from '@entities/census/CensusTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
+import { toTitleCase } from '@shared/lib/stringUtils';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
 
@@ -58,6 +59,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
     respondingPopulation,
     responsesPerIndividual,
     sampleRate,
+    quantity,
   } = census;
 
   return (
@@ -73,17 +75,16 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
       {sampleRate && (
         <DetailsField title="Sample rate:">{(sampleRate * 100).toLocaleString()}%</DetailsField>
       )}
-      {languagesIncluded != null && (
+      {languagesIncluded && (
         <DetailsField title="Languages Included:">{languagesIncluded}</DetailsField>
       )}
-      {geographicScope != null && (
-        <DetailsField title="Geographic Scope:">{geographicScope}</DetailsField>
-      )}
-      {age != null && <DetailsField title="Age:">{age}</DetailsField>}
-      {responsesPerIndividual != null && (
+      {geographicScope && <DetailsField title="Geographic Scope:">{geographicScope}</DetailsField>}
+      {age && <DetailsField title="Age:">{age}</DetailsField>}
+      {responsesPerIndividual && (
         <DetailsField title="Responses per Individual:">{responsesPerIndividual}</DetailsField>
       )}
-      {notes != null && <DetailsField title="Notes:">{notes}</DetailsField>}
+      {quantity && <DetailsField title="Quantity Provided:">{toTitleCase(quantity)}</DetailsField>}
+      {notes && <DetailsField title="Notes:">{notes}</DetailsField>}
     </DetailsSection>
   );
 }

@@ -15,8 +15,9 @@ import { TerritoryData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';
-import AlignedFraction from '@shared/ui/AlignedFraction';
 import Deemphasized from '@shared/ui/Deemphasized';
+import PopulationNumber from '@shared/ui/PopulationNumber';
+import TablePercentNumber from '@shared/ui/TablePercentNumber';
 
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();
@@ -42,15 +43,14 @@ const TerritoryTable: React.FC = () => {
         NameColumn,
         {
           key: 'Population',
-          render: (object) => object.population,
+          render: (object) => <PopulationNumber population={object.population} />,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,
           columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
-          render: (object) =>
-            object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
+          render: (object) => <TablePercentNumber percent={object.literacyPercent} />,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Literacy,
           columnGroup: 'Demographics',
@@ -84,8 +84,11 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Biggest Language %',
-          render: (object) =>
-            object.locales ? object.locales[0].populationSpeakingPercent?.toFixed(1) + '%' : null,
+          render: (object) => (
+            <TablePercentNumber
+              percent={object.locales && object.locales[0].populationSpeakingPercent}
+            />
+          ),
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
@@ -109,10 +112,19 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Population of Dependencies',
-          render: (object) =>
+          render: (object) => (
+            <PopulationNumber
+              population={
+                object.dependentTerritories &&
+                object.dependentTerritories.length > 0 &&
+                sumBy(object.dependentTerritories, (t) => t.population ?? 0)
+              }
+            />
+          ),
+          exportValue: (object) =>
             object.dependentTerritories && object.dependentTerritories.length > 0
-              ? sumBy(object.dependentTerritories, (t) => t.population ?? 0)
-              : null,
+              ? sumBy(object.dependentTerritories, (t) => t.population ?? 0).toString()
+              : '',
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.PopulationOfDescendants,
@@ -151,10 +163,8 @@ const TerritoryTable: React.FC = () => {
           key: 'Density',
           description: 'People per square kilometer',
           render: (object) => (
-            <AlignedFraction
-              value={
-                object.landArea && object.population ? object.population / object.landArea : null
-              }
+            <TablePercentNumber
+              percent={object.landArea && object.population && object.population / object.landArea}
             />
           ),
           isInitiallyVisible: false,

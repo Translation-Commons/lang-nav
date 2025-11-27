@@ -14,6 +14,7 @@ import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { VariantTagData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import PopulationNumber from '@shared/ui/PopulationNumber';
 
 const VariantTagTable: React.FC = () => {
   const { variantTags } = useDataContext();
@@ -66,7 +67,7 @@ const VariantTagTable: React.FC = () => {
               manuscripts.
             </>
           ),
-          render: (object) => getObjectPopulation(object),
+          render: (object) => <PopulationNumber population={getObjectPopulation(object)} />,
           isInitiallyVisible: false,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,

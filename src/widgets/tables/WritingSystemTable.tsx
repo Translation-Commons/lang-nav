@@ -13,6 +13,7 @@ import { SortBy } from '@features/transforms/sorting/SortTypes';
 import { WritingSystemData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import PopulationNumber from '@shared/ui/PopulationNumber';
 
 const WritingSystemTable: React.FC = () => {
   const { writingSystems } = useDataContext();
@@ -34,7 +35,7 @@ const WritingSystemTable: React.FC = () => {
               by adding up the population for all of the languages that use the writing system.
             </>
           ),
-          render: (object) => object.populationUpperBound,
+          render: (object) => <PopulationNumber population={object.populationUpperBound} />,
           valueType: TableValueType.Numeric,
           sortParam: SortBy.Population,
         },

@@ -20,15 +20,23 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
   return (
     <table
       style={{
-        width: 'fit-content',
+        // width: 'fit-content',
         textAlign: 'start',
-        borderSpacing: '12px 0px',
+        // borderSpacing: '12px 0px',
+        // borderColor: 'transparent',
+        borderCollapse: 'collapse',
+        overflowX: 'scroll',
+        tableLayout: 'fixed',
+        // wordBreak: 'break-word',
       }}
     >
       <thead style={{ position: 'sticky', top: 0, backgroundColor: 'white', zIndex: 1 }}>
         <tr>
           {visibleColumns.map((column) => (
-            <th key={column.key} style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH }}>
+            <th
+              key={column.key}
+              style={{ textAlign: 'start', maxWidth: MAX_COLUMN_WIDTH, padding: '0.25em 0.5em' }}
+            >
               {column.label ?? column.key}
               {column.description && (
                 <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
@@ -53,7 +61,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                 <td
                   key={column.key}
                   className={column.valueType}
-                  style={{ maxWidth: MAX_COLUMN_WIDTH }}
+                  style={{ maxWidth: MAX_COLUMN_WIDTH, padding: '0.25em 0.5em' }}
                 >
                   {content}
                 </td>

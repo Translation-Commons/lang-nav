@@ -20,9 +20,10 @@ import {
 import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
+import PopulationNumber from '@shared/ui/PopulationNumber';
+import TablePercentNumber from '@shared/ui/TablePercentNumber';
 
 type Props = {
   census: CensusData;
@@ -108,16 +109,13 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Population',
-            render: (loc) => loc.populationSpeaking,
+            render: (loc) => <PopulationNumber population={loc.populationSpeaking} />,
             valueType: TableValueType.Numeric,
             sortParam: SortBy.Population,
           },
           {
             key: 'Percent Within Territory',
-            render: (loc) =>
-              loc.populationSpeakingPercent != null
-                ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
-                : 'N/A',
+            render: (loc) => <TablePercentNumber percent={loc.populationSpeakingPercent} />,
             valueType: TableValueType.Numeric,
             sortParam: SortBy.PercentOfTerritoryPopulation,
           },
@@ -154,10 +152,13 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Percent of Worldwide in Language',
             render: (object) =>
-              object.populationSpeaking &&
-              numberToFixedUnlessSmall(
-                (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
-              ) + '%',
+              object.populationSpeaking && (
+                <TablePercentNumber
+                  percent={
+                    (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1)
+                  }
+                />
+              ),
             valueType: TableValueType.Numeric,
             isInitiallyVisible: false,
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,

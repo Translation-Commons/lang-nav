@@ -39,7 +39,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;
@@ -63,5 +63,9 @@ div h3:first-child {
 .hoverableText:hover,
 .selector .hoverableText:hover {
   color: var(--color-button-primary);
+  background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
+}
+
+tbody tr:hover {
   background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
 }
