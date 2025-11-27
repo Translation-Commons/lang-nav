@@ -48,7 +48,7 @@ describe('TableColumnSelector', () => {
     expect(screen.getByText(/2\/3 columns visible/i)).toBeTruthy();
   });
 
-  it('checkboxes reflect columnVisibility and sortBy overrides', () => {
+  it('checkboxes reflect columnVisibility override but not sortBy', () => {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
 
     const columns = [
@@ -72,8 +72,8 @@ describe('TableColumnSelector', () => {
 
     // 'Population' visible via columnVisibility
     expect(populationCheckbox.checked).toBe(true);
-    // 'Name' should be considered checked because sortBy === column.sortParam
-    expect(nameCheckbox.checked).toBe(true);
+    // 'Name' used to be considered checked because sortBy === column.sortParam -- but now its not automatid
+    expect(nameCheckbox.checked).toBe(false);
   });
 
   it('group header toggle calls toggleColumn for each column in the group and individual checkbox toggles call toggleColumn with only the key', () => {

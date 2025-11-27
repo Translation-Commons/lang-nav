@@ -9,6 +9,7 @@ import usePageParams from '@features/params/usePageParams';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { groupBy, sumBy } from '@shared/lib/setUtils';
+import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import { LanguageData } from './LanguageTypes';
 
@@ -17,7 +18,7 @@ const LanguagePopulationFromLocales: React.FC<{ lang: LanguageData }> = ({ lang 
 
   return (
     <Hoverable hoverContent={<Descendants lang={lang} />}>
-      {lang.populationFromLocales.toLocaleString()}
+      <CountOfPeople count={lang.populationFromLocales} />
     </Hoverable>
   );
 };
@@ -48,7 +49,7 @@ const Descendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
                   <HoverableObjectName object={locale} labelSource="territory" />
                 </td>
                 <td style={{ textAlign: 'right' }}>
-                  {locale.populationAdjusted?.toLocaleString()}
+                  <CountOfPeople count={locale.populationAdjusted} />
                 </td>
               </tr>
             ))}
@@ -56,10 +57,12 @@ const Descendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <tr>
               <td>+{localesFromUniqueTerritories.length - 10} more</td>
               <td style={{ textAlign: 'right' }}>
-                {sumBy(
-                  localesFromUniqueTerritories.slice(10),
-                  (locale) => locale.populationAdjusted || 0,
-                ).toLocaleString()}
+                <CountOfPeople
+                  count={sumBy(
+                    localesFromUniqueTerritories.slice(10),
+                    (locale) => locale.populationAdjusted || 0,
+                  )}
+                />
               </td>
             </tr>
           )}

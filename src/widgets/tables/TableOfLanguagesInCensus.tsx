@@ -22,8 +22,6 @@ import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
-import PopulationNumber from '@shared/ui/PopulationNumber';
-import TablePercentNumber from '@shared/ui/TablePercentNumber';
 
 type Props = {
   census: CensusData;
@@ -109,14 +107,14 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Population',
-            render: (loc) => <PopulationNumber population={loc.populationSpeaking} />,
-            valueType: TableValueType.Numeric,
+            render: (loc) => loc.populationSpeaking,
+            valueType: TableValueType.Population,
             sortParam: SortBy.Population,
           },
           {
             key: 'Percent Within Territory',
-            render: (loc) => <TablePercentNumber percent={loc.populationSpeakingPercent} />,
-            valueType: TableValueType.Numeric,
+            render: (loc) => loc.populationSpeakingPercent,
+            valueType: TableValueType.Decimal,
             sortParam: SortBy.PercentOfTerritoryPopulation,
           },
           {
@@ -147,19 +145,14 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               </>
             ),
             render: getPopulationDifference,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Decimal,
           },
           {
             key: 'Percent of Worldwide in Language',
             render: (object) =>
-              object.populationSpeaking && (
-                <TablePercentNumber
-                  percent={
-                    (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1)
-                  }
-                />
-              ),
-            valueType: TableValueType.Numeric,
+              object.populationSpeaking &&
+              (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
+            valueType: TableValueType.Decimal,
             isInitiallyVisible: false,
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,
           },
