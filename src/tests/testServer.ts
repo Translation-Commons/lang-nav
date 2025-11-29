@@ -14,7 +14,10 @@ function readFile(filePath: string) {
 
 export async function getServer(): Promise<SetupServer> {
   if (server) return server;
-  const [{ http, HttpResponse }, { setupServer }] = await Promise.all([import('msw'), import('msw/node')]);
+  const [{ http, HttpResponse }, { setupServer }] = await Promise.all([
+    import('msw'),
+    import('msw/node'),
+  ]);
 
   const makeFileAvailable = (filePath: string) =>
     http.get(
