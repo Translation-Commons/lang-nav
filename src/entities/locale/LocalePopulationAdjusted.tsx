@@ -87,50 +87,52 @@ const CountryLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ lo
 
   return (
     <table>
-      <tr>
-        <LabelCell>Language Population Recorded ({yearCollected}):</LabelCell>
-        <td>
-          <CountOfPeople count={populationSpeaking} />
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>% of Territory:</LabelCell>
-        <td>{numberToFixedUnlessSmall(populationSpeakingPercent)}</td>
-      </tr>
-      <tr>
-        <LabelCell>Source:</LabelCell>
-        <td>
-          {populationCensus ? (
-            <HoverableObjectName object={populationCensus} />
-          ) : (
-            <Deemphasized>No citation</Deemphasized>
-          )}
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>Territory Population (when data collected):</LabelCell>
-        <td>
-          <CountOfPeople count={(populationSpeaking! / populationSpeakingPercent!) * 100} />
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>Territory Population (2025):</LabelCell>
-        <td>
-          <CountOfPeople count={territory.population} />
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={2}>
-          Assuming linear population growth, <CountOfPeople count={territory!.population} /> *{' '}
-          {numberToFixedUnlessSmall(populationSpeakingPercent!)}% =
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>Population Adjusted to 2025:</LabelCell>
-        <td>
-          <CountOfPeople count={populationAdjusted} />
-        </td>
-      </tr>
+      <tbody>
+        <tr>
+          <LabelCell>Language Population Recorded ({yearCollected}):</LabelCell>
+          <td>
+            <CountOfPeople count={populationSpeaking} />
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>% of Territory:</LabelCell>
+          <td>{numberToFixedUnlessSmall(populationSpeakingPercent)}</td>
+        </tr>
+        <tr>
+          <LabelCell>Source:</LabelCell>
+          <td>
+            {populationCensus ? (
+              <HoverableObjectName object={populationCensus} />
+            ) : (
+              <Deemphasized>No citation</Deemphasized>
+            )}
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Territory Population (when data collected):</LabelCell>
+          <td>
+            <CountOfPeople count={(populationSpeaking! / populationSpeakingPercent!) * 100} />
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Territory Population (2025):</LabelCell>
+          <td>
+            <CountOfPeople count={territory.population} />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={2}>
+            Assuming linear population growth, <CountOfPeople count={territory!.population} /> *{' '}
+            {numberToFixedUnlessSmall(populationSpeakingPercent!)}% =
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Population Adjusted to 2025:</LabelCell>
+          <td>
+            <CountOfPeople count={populationAdjusted} />
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 };

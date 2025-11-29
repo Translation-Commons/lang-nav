@@ -54,6 +54,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         territoryCode: census.isoRegionCode,
 
         populationSource: census.nameDisplay,
+        populationAdjusted: populationSpeaking,
         populationSpeaking,
         populationSpeakingPercent:
           (populationSpeaking * 100) / (census.respondingPopulation || census.eligiblePopulation),
