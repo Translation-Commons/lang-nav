@@ -29,21 +29,19 @@ const VariantTagTable: React.FC = () => {
           key: 'Date Added',
           render: (object) => object.dateAdded?.toLocaleDateString(),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Date,
           sortParam: SortBy.Date,
         },
         {
           key: 'Languages',
           render: (object) => (
-            <>
-              <CommaSeparated limit={1} limitText="short">
-                {object.languages.map((lang) => (
-                  <HoverableObjectName object={lang} key={lang.ID} />
-                ))}
-              </CommaSeparated>
-            </>
+            <CommaSeparated limit={1} limitText="short">
+              {object.languages.map((lang) => (
+                <HoverableObjectName object={lang} key={lang.ID} />
+              ))}
+            </CommaSeparated>
           ),
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.Language,
         },
         {
@@ -51,7 +49,7 @@ const VariantTagTable: React.FC = () => {
           render: (object) => (
             <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
           ),
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.CountOfLanguages,
           isInitiallyVisible: false,
         },
@@ -68,7 +66,7 @@ const VariantTagTable: React.FC = () => {
           ),
           render: (object) => getObjectPopulation(object),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Population,
           sortParam: SortBy.Population,
         },
       ]}

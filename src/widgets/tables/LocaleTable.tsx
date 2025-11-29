@@ -18,7 +18,6 @@ import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -45,12 +44,9 @@ const LocaleTable: React.FC = () => {
         ...LocalePopulationColumns,
         {
           key: 'Literacy',
-          render: (object) =>
-            object.literacyPercent != null
-              ? numberToFixedUnlessSmall(object.literacyPercent)
-              : null,
+          render: (object) => object.literacyPercent,
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.Literacy,
           columnGroup: 'Writing',
         },
@@ -126,7 +122,7 @@ const LocaleTable: React.FC = () => {
             </CommaSeparated>
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Linked Data',
         },

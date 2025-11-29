@@ -3,7 +3,6 @@ import React, { useCallback } from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableButton from '@features/hovercard/HoverableButton';
-import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -20,7 +19,7 @@ function TableColumnSelector<T extends ObjectData>({
   columns: TableColumn<T>[];
   visibilityModule: ColumnVisibilityModule<T>;
 }): React.ReactNode {
-  const { columnVisibility, resetColumnVisibility } = visibilityModule;
+  const { columnVisibility } = visibilityModule;
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
@@ -47,13 +46,7 @@ function TableColumnSelector<T extends ObjectData>({
             visibilityModule={visibilityModule}
           />
         ))}
-        <HoverableButton
-          onClick={resetColumnVisibility}
-          style={{ height: 'fit-content', justifySelf: 'end', alignSelf: 'end' }}
-          hoverContent="Reset to default column visibility"
-        >
-          Reset
-        </HoverableButton>
+        <GlobalControls visibilityModule={visibilityModule} columns={columns} />
       </div>
     </details>
   );
@@ -135,14 +128,9 @@ function ColumnCheckbox<T extends ObjectData>({
   isChecked: boolean;
   toggleColumn: (key: string) => void;
 }): React.ReactNode {
-  const { sortBy } = usePageParams();
   return (
     <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
-      <input
-        type="checkbox"
-        checked={isChecked || sortBy === column.sortParam}
-        onChange={() => toggleColumn(column.key)}
-      />
+      <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
       {column.label ?? column.key}
       {column.description && (
         <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
@@ -153,6 +141,62 @@ function ColumnCheckbox<T extends ObjectData>({
         <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
       )}
     </label>
+  );
+}
+
+function GlobalControls<T extends ObjectData>({
+  columns,
+  visibilityModule: { setColumns, resetColumnVisibility },
+}: {
+  columns: TableColumn<T>[];
+  visibilityModule: ColumnVisibilityModule<T>;
+}): React.ReactNode {
+  const selectAll = useCallback(() => {
+    setColumns(
+      columns.map((col) => col.key),
+      true,
+    );
+  }, [columns, setColumns]);
+  const deselectAll = useCallback(() => {
+    setColumns(
+      columns.map((col) => col.key),
+      false,
+    );
+  }, [columns, setColumns]);
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        justifySelf: 'end',
+        alignSelf: 'end',
+        height: 'fit-content',
+        alignItems: 'end',
+      }}
+    >
+      <HoverableButton
+        onClick={resetColumnVisibility}
+        style={{ padding: '0.25em' }}
+        hoverContent="Reset to default column visibility"
+      >
+        Reset
+      </HoverableButton>
+      <HoverableButton
+        onClick={selectAll}
+        style={{ padding: '0.25em' }}
+        hoverContent="Show all columns"
+      >
+        Show all
+      </HoverableButton>
+      <HoverableButton
+        onClick={deselectAll}
+        style={{ padding: '0.25em' }}
+        hoverContent="Hide all columns"
+      >
+        Hide all
+      </HoverableButton>
+    </div>
   );
 }
 

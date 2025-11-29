@@ -33,26 +33,21 @@ const TableOfAllCensuses: React.FC = () => {
               )}
             />
           ),
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.CountOfLanguages,
         },
         {
           key: 'Eligible Population',
-          render: (census) =>
-            census.eligiblePopulation != null
-              ? census.eligiblePopulation.toLocaleString()
-              : 'Unknown',
-          valueType: TableValueType.Numeric,
+          render: (census) => census.eligiblePopulation,
+          valueType: TableValueType.Population,
           sortParam: SortBy.Population,
           columnGroup: 'Population',
         },
         {
-          key: 'Percent of Current Population',
+          key: '% of Current Population',
           render: (census) =>
-            census.territory && census.eligiblePopulation != null
-              ? getObjectPercentOfTerritoryPopulation(census)?.toFixed(1)
-              : 'Unknown',
-          valueType: TableValueType.Numeric,
+            census.eligiblePopulation && getObjectPercentOfTerritoryPopulation(census),
+          valueType: TableValueType.Decimal,
           isInitiallyVisible: false,
           sortParam: SortBy.PercentOfTerritoryPopulation,
           columnGroup: 'Population',
@@ -120,7 +115,7 @@ const TableOfAllCensuses: React.FC = () => {
               <Deemphasized>multiple</Deemphasized>
             ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Date,
           sortParam: SortBy.Date,
           columnGroup: 'Time',
         },
@@ -128,14 +123,14 @@ const TableOfAllCensuses: React.FC = () => {
           key: 'Date Published',
           render: (census) => census.datePublished?.toLocaleDateString(),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Date,
           columnGroup: 'Time',
         },
         {
           key: 'Date Accessed',
           render: (census) => census.dateAccessed?.toLocaleDateString(),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Date,
           columnGroup: 'Time',
         },
       ]}

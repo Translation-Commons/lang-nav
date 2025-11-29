@@ -2,7 +2,6 @@ import { useCallback, useMemo } from 'react';
 
 import { TableIDToBinarizedColumnVisibility } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -21,13 +20,13 @@ function useColumnVisibility<T extends ObjectData>(
   columns: TableColumn<T>[],
   tableID: TableID,
 ): ColumnVisibilityModule<T> {
-  const { sortBy, updatePageParams, columns: columnsVisibleForAllTables } = usePageParams();
+  const { updatePageParams, columns: columnsVisibleForAllTables } = usePageParams();
 
   const columnVisibilityBinarized = useMemo(() => {
     const tableBinary = columnsVisibleForAllTables?.[tableID];
     if (tableBinary != null) return tableBinary;
-    return getDefaultColumnsBinary(columns, sortBy);
-  }, [columnsVisibleForAllTables, tableID, columns, sortBy]);
+    return getDefaultColumnsBinary(columns);
+  }, [columnsVisibleForAllTables, tableID, columns]);
 
   // columnVisibility maps column keys to whether they are visible
   const columnVisibility = useMemo(
@@ -103,13 +102,9 @@ function getBinaryForColumnVisibility<T extends ObjectData>(
   );
 }
 
-function getDefaultColumnsBinary<T extends ObjectData>(
-  columns: TableColumn<T>[],
-  sortBy: SortBy,
-): bigint {
+function getDefaultColumnsBinary<T extends ObjectData>(columns: TableColumn<T>[]): bigint {
   return columns.reduce(
-    (bin, col, i) =>
-      col.isInitiallyVisible !== false || col.sortParam === sortBy ? bin + (1n << BigInt(i)) : bin,
+    (bin, col, i) => (col.isInitiallyVisible !== false ? bin + (1n << BigInt(i)) : bin),
     0n,
   );
 }

@@ -11,10 +11,10 @@ const LanguageOtherNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const otherNames = getLanguageOtherNames(lang);
 
   return otherNames.map((name, idx) => (
-    <>
+    <React.Fragment key={idx}>
       {idx > 0 && ', '}
-      <Highlightable key={name} text={name} searchPattern={searchString} />
-    </>
+      <Highlightable text={name} searchPattern={searchString} />
+    </React.Fragment>
   ));
 };
 

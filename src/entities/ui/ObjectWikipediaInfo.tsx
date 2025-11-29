@@ -5,6 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 
+import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
@@ -61,7 +62,7 @@ export const WikipediaActiveUsers: React.FC<{ object?: ObjectData }> = ({ object
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
   if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
 
-  return object.wikipedia.activeUsers.toLocaleString();
+  return <CountOfPeople count={object.wikipedia.activeUsers} />;
 };
 
 export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }> = ({

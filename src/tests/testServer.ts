@@ -1,29 +1,42 @@
+import './polyfills/storage';
+
 import fs from 'node:fs';
 import path from 'node:path';
 
-import { http, HttpHandler, HttpResponse } from 'msw';
-import { setupServer } from 'msw/node';
+import type { SetupServer } from 'msw/node';
 
-function makeFileAvailable(filePath: string): HttpHandler {
+let server: SetupServer | null = null;
+
+function readFile(filePath: string) {
   const absolutePath = path.resolve(__dirname, '../../public', filePath);
-  const fileText = fs.readFileSync(absolutePath, 'utf8');
-  return http.get(
-    `*/${filePath}`,
-    () =>
-      new HttpResponse(fileText, {
-        status: 200,
-        headers: { 'Content-Type': 'text/tab-separated-values; charset=utf-8' },
-      }),
-  );
+  return fs.readFileSync(absolutePath, 'utf8');
 }
 
-// Add/adjust handlers as your API layers evolve
-export const handlers = [
-  http.get('/api/health', () => HttpResponse.json({ ok: true })),
-  makeFileAvailable('data/languages.tsv'),
-  makeFileAvailable('data/locales.tsv'),
-  makeFileAvailable('data/writingSystems.tsv'),
-  makeFileAvailable('data/territories.tsv'),
-];
+export async function getServer(): Promise<SetupServer> {
+  if (server) return server;
+  const [{ http, HttpResponse }, { setupServer }] = await Promise.all([
+    import('msw'),
+    import('msw/node'),
+  ]);
 
-export const server = setupServer(...handlers);
+  const makeFileAvailable = (filePath: string) =>
+    http.get(
+      `*/${filePath}`,
+      () =>
+        new HttpResponse(readFile(filePath), {
+          status: 200,
+          headers: { 'Content-Type': 'text/tab-separated-values; charset=utf-8' },
+        }),
+    );
+
+  const handlers = [
+    http.get('/api/health', () => HttpResponse.json({ ok: true })),
+    makeFileAvailable('data/languages.tsv'),
+    makeFileAvailable('data/locales.tsv'),
+    makeFileAvailable('data/writingSystems.tsv'),
+    makeFileAvailable('data/territories.tsv'),
+  ];
+
+  server = setupServer(...handlers);
+  return server;
+}

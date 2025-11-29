@@ -55,7 +55,7 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) => <ObjectCLDRLocaleCount object={lang} />,
-    valueType: TableValueType.Numeric,
+    valueType: TableValueType.Count,
     exportValue: (lang) => lang.CLDR.coverage?.countOfCLDRLocales,
   },
   {

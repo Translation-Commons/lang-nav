@@ -95,12 +95,13 @@ describe('getObjectPopulationOfDescendants', () => {
     expect(results).toEqual({
       '001': undefined,
       '123': undefined,
+      AM: undefined,
       BE: undefined,
       be0590: undefined,
       dori0123_001: undefined,
       dori0123_123: undefined,
       dori0123_ER: undefined,
-      dori0123: 1, // 1 from being a leaf node
+      dori0123: 0.01, // 0.01 from being a leaf node
       ER: undefined,
       HA: undefined,
       sjn_001: undefined,
@@ -110,7 +111,7 @@ describe('getObjectPopulationOfDescendants', () => {
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
-      sjn: 2502, // From dori0123 + 2 for each node
+      sjn: 2500.0200000000004, // From dori0123 + 0.02 for each leaf node (others because of JS precision)
       Teng: undefined, // all from sjn_Teng_BE
       tolkorth: undefined,
     });

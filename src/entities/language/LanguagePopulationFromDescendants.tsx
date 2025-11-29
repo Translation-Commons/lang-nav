@@ -4,6 +4,8 @@ import React from 'react';
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 
+import CountOfPeople from '@shared/ui/CountOfPeople';
+
 import { LanguageData } from './LanguageTypes';
 
 const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
@@ -27,7 +29,7 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
         </Hoverable>
       ) : null}
       <Hoverable hoverContent={<PopulationOfDescendantsBreakdown lang={lang} />}>
-        {lang.populationOfDescendants.toLocaleString()}
+        <CountOfPeople count={lang.populationOfDescendants} />
       </Hoverable>
     </>
   );
@@ -50,7 +52,7 @@ const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
                   <HoverableObjectName object={descendant} />
                 </td>
                 <td style={{ textAlign: 'right' }}>
-                  {descendant.populationEstimate?.toLocaleString()}
+                  <CountOfPeople count={descendant.populationEstimate} />
                 </td>
               </tr>
             ))}
@@ -58,10 +60,11 @@ const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
             <tr>
               <td>+{lang.childLanguages.length - 10} more</td>
               <td style={{ textAlign: 'right' }}>
-                {lang.childLanguages
-                  .slice(10)
-                  .reduce((sum, descendant) => sum + (descendant.populationEstimate || 0), 0)
-                  .toLocaleString()}
+                <CountOfPeople
+                  count={lang.childLanguages
+                    .slice(10)
+                    .reduce((sum, descendant) => sum + (descendant.populationEstimate || 0), 0)}
+                />
               </td>
             </tr>
           )}

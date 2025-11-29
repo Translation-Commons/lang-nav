@@ -105,7 +105,7 @@ const LanguageTable: React.FC = () => {
               .map((lang) => lang.nameDisplay)}
           />
         ),
-        valueType: TableValueType.Numeric,
+        valueType: TableValueType.Count,
         isInitiallyVisible: false,
         sortParam: SortBy.CountOfLanguages,
         columnGroup: 'Relations',
@@ -130,26 +130,24 @@ const LanguageTable: React.FC = () => {
           />
         ),
         isInitiallyVisible: false,
-        valueType: TableValueType.Numeric,
+        valueType: TableValueType.Count,
         sortParam: SortBy.CountOfTerritories,
         columnGroup: 'Location',
       },
       {
         key: 'Latitude',
-        render: (lang) => lang.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
-        exportValue: (lang) => lang.latitude?.toFixed(4) ?? '',
+        render: (lang) => lang.latitude?.toFixed(2),
         isInitiallyVisible: false,
         sortParam: SortBy.Latitude,
-        valueType: TableValueType.Numeric,
+        valueType: TableValueType.Decimal,
         columnGroup: 'Location',
       },
       {
         key: 'Longitude',
-        render: (lang) => lang.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
-        exportValue: (lang) => lang.longitude?.toFixed(4) ?? '',
+        render: (lang) => lang.longitude?.toFixed(2),
         isInitiallyVisible: false,
         sortParam: SortBy.Longitude,
-        valueType: TableValueType.Numeric,
+        valueType: TableValueType.Decimal,
         columnGroup: 'Location',
       },
       {
@@ -168,15 +166,10 @@ const LanguageTable: React.FC = () => {
       },
       {
         key: 'Literacy',
-        render: (lang) => {
-          const literacy = getObjectLiteracy(lang);
-          if (literacy == null) return <Deemphasized>—</Deemphasized>;
-          return literacy.toFixed(1);
-        },
-        exportValue: (lang) => getObjectLiteracy(lang)?.toFixed(1),
+        render: (lang) => getObjectLiteracy(lang),
         isInitiallyVisible: false,
         sortParam: SortBy.Literacy,
-        valueType: TableValueType.Numeric,
+        valueType: TableValueType.Decimal,
         columnGroup: 'Writing',
       },
       {

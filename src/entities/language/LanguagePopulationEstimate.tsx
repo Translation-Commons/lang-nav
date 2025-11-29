@@ -2,6 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 
+import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import LanguagePopulationOfDescendants from './LanguagePopulationFromDescendants';
@@ -22,7 +23,7 @@ export const LanguagePopulationEstimate: React.FC<{ lang: LanguageData }> = ({ l
   }
   return (
     <Hoverable hoverContent="From internet databases, citation needed">
-      {populationEstimate?.toLocaleString()}
+      <CountOfPeople count={populationEstimate} />
     </Hoverable>
   );
 };

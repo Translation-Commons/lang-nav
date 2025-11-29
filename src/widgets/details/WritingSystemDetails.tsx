@@ -10,6 +10,7 @@ import { WritingSystemData } from '@entities/types/DataTypes';
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import CountOfPeople from '@shared/ui/CountOfPeople';
 
 type Props = {
   writingSystem: WritingSystemData;
@@ -59,7 +60,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
               </>
             }
           >
-            {populationUpperBound?.toLocaleString()}
+            <CountOfPeople count={populationUpperBound} />
           </DetailsField>
         )}
       </DetailsSection>

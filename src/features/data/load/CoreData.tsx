@@ -17,7 +17,7 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
-import { computeDescendantPopulation } from '../compute/computeDescedantPopulation';
+import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';

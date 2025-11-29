@@ -35,7 +35,7 @@ const WritingSystemTable: React.FC = () => {
             </>
           ),
           render: (object) => object.populationUpperBound,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Population,
           sortParam: SortBy.Population,
         },
         {
@@ -60,7 +60,7 @@ const WritingSystemTable: React.FC = () => {
                 items={Object.values(object.languages).map((l) => l.nameDisplay)}
               />
             ),
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.CountOfLanguages,
           isInitiallyVisible: false,
         },

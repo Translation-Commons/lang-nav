@@ -119,7 +119,9 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Numeric} />);
+    render(
+      <TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Population} />,
+    );
 
     // Check for ArrowDown01 icon (numeric ascending)
     const svg = screen.getByRole('button').querySelector('svg');
@@ -137,7 +139,9 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Numeric} />);
+    render(
+      <TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Population} />,
+    );
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();

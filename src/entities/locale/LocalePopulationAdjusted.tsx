@@ -7,6 +7,7 @@ import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { isTerritoryGroup, LocaleData } from '@entities/types/DataTypes';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
+import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 export const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
@@ -14,7 +15,7 @@ export const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ loc
 
   return (
     <Hoverable hoverContent={<LocalePopulationBreakdown locale={locale} />}>
-      {locale.populationAdjusted.toLocaleString()}
+      <CountOfPeople count={locale.populationAdjusted} />
     </Hoverable>
   );
 };
@@ -35,11 +36,15 @@ const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ l
     <table>
       <tr>
         <LabelCell>Population Unadjusted:</LabelCell>
-        <td>{populationSpeaking!.toLocaleString()}</td>
+        <td>
+          <CountOfPeople count={populationSpeaking!} />
+        </td>
       </tr>
       <tr>
         <LabelCell>Population Adjusted to 2025:</LabelCell>
-        <td>{populationAdjusted!.toLocaleString()}</td>
+        <td>
+          <CountOfPeople count={populationAdjusted!} />
+        </td>
       </tr>
       <tr>
         <td colSpan={2}>
@@ -55,7 +60,9 @@ const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ l
             <td style={{ paddingLeft: '1em' }}>
               <HoverableObjectName object={childLocale} labelSource="territory" />
             </td>
-            <td>{childLocale.populationAdjusted?.toLocaleString()}</td>
+            <td>
+              <CountOfPeople count={childLocale.populationAdjusted} />
+            </td>
           </tr>
         ))}
     </table>
@@ -80,42 +87,52 @@ const CountryLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ lo
 
   return (
     <table>
-      <tr>
-        <LabelCell>Language Population Recorded ({yearCollected}):</LabelCell>
-        <td>{populationSpeaking.toLocaleString()}</td>
-      </tr>
-      <tr>
-        <LabelCell>% of Territory:</LabelCell>
-        <td>{numberToFixedUnlessSmall(populationSpeakingPercent)}</td>
-      </tr>
-      <tr>
-        <LabelCell>Source:</LabelCell>
-        <td>
-          {populationCensus ? (
-            <HoverableObjectName object={populationCensus} />
-          ) : (
-            <Deemphasized>No citation</Deemphasized>
-          )}
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>Territory Population (when data collected):</LabelCell>
-        <td>{((populationSpeaking! / populationSpeakingPercent!) * 100).toLocaleString()}</td>
-      </tr>
-      <tr>
-        <LabelCell>Territory Population (2025):</LabelCell>
-        <td>{territory!.population.toLocaleString()}</td>
-      </tr>
-      <tr>
-        <td colSpan={2}>
-          Assuming linear population growth, {territory!.population.toLocaleString()} *{' '}
-          {numberToFixedUnlessSmall(populationSpeakingPercent!)}% =
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>Population Adjusted to 2025:</LabelCell>
-        <td>{populationAdjusted!.toLocaleString()}</td>
-      </tr>
+      <tbody>
+        <tr>
+          <LabelCell>Language Population Recorded ({yearCollected}):</LabelCell>
+          <td>
+            <CountOfPeople count={populationSpeaking} />
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>% of Territory:</LabelCell>
+          <td>{numberToFixedUnlessSmall(populationSpeakingPercent)}</td>
+        </tr>
+        <tr>
+          <LabelCell>Source:</LabelCell>
+          <td>
+            {populationCensus ? (
+              <HoverableObjectName object={populationCensus} />
+            ) : (
+              <Deemphasized>No citation</Deemphasized>
+            )}
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Territory Population (when data collected):</LabelCell>
+          <td>
+            <CountOfPeople count={(populationSpeaking! / populationSpeakingPercent!) * 100} />
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Territory Population (2025):</LabelCell>
+          <td>
+            <CountOfPeople count={territory.population} />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={2}>
+            Assuming linear population growth, <CountOfPeople count={territory!.population} /> *{' '}
+            {numberToFixedUnlessSmall(populationSpeakingPercent!)}% =
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Population Adjusted to 2025:</LabelCell>
+          <td>
+            <CountOfPeople count={populationAdjusted} />
+          </td>
+        </tr>
+      </tbody>
     </table>
   );
 };

@@ -78,7 +78,7 @@ describe('InteractiveObjectTable', () => {
         return '';
       },
       sortParam: SortBy.Population,
-      valueType: TableValueType.Numeric,
+      valueType: TableValueType.Population,
     },
   ];
 

@@ -6,6 +6,7 @@ type HoverableProps = {
   buttonType?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
   className?: string;
+  disabled?: boolean;
   hoverContent?: React.ReactNode;
   onClick?: () => void;
   style?: React.CSSProperties;
@@ -15,6 +16,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
   buttonType = 'button',
   children,
   className,
+  disabled,
   hoverContent,
   onClick,
   style,
@@ -25,6 +27,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
     return (
       <button
         className={className}
+        disabled={disabled}
         onClick={onClick}
         style={{
           cursor: onClick ? 'pointer' : 'auto',
@@ -48,6 +51,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
   return (
     <button
       className={className}
+      disabled={disabled}
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={hideHoverCard}

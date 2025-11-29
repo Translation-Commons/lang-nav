@@ -4,12 +4,15 @@ thead {
   background-color: var(--color-background);
 }
 
-.numeric {
+.population,
+.count,
+.decimal {
   /* align right for both LTR and RTL views */
   text-align: right;
 
   /* equalize the character width */
   font-family: Avenir, 'Courier New', monospace;
+  font-variant-numeric: tabular-nums;
 }
 
 summary {

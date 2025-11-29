@@ -10,6 +10,7 @@ import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import CountOfPeople from '@shared/ui/CountOfPeople';
 
 interface Props {
   writingSystem: WritingSystemData;
@@ -64,7 +65,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
             <PopulationWarning />
             {'):'}
           </label>
-          {populationUpperBound?.toLocaleString()}
+          <CountOfPeople count={populationUpperBound} />
         </div>
       )}
       {scope === WritingSystemScope.Variation && parentWritingSystem && (

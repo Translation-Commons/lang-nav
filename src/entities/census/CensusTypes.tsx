@@ -43,17 +43,18 @@ export interface CensusData extends ObjectBase {
   sampleRate?: number; // eg. .1, .25, 1 (for 10%, 25%, 100%)
   respondingPopulation?: number; // The number of individuals who gave a response about their language
   responsesPerIndividual?: string; // eg. 1, 1+, 2+
+  quantity?: 'count' | 'percent'; // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
   notes?: string; // Any additional notes about the census
 
   // Source
-  citation?: string;
-  tableName?: string;
-  columnName?: string;
+  url?: string; // Most important to have, so people can find the original data
   datePublished?: Date;
   dateAccessed?: Date;
-  url?: string;
   collectorName?: string; // Name of the organization or journal presenting the data
   author?: string; // Name of the individual author(s) if applicable
+  tableName?: string;
+  columnName?: string;
+  citation?: string; // The full citation, may be redundant if other fields are filled in
 
   // Some fields derived as the data is imported
   languageCount: number; // Number of languages in this collection

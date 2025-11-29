@@ -6,9 +6,6 @@ import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/types/DataTypes';
 
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
-import AlignedFraction from '@shared/ui/AlignedFraction';
-
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
     key: 'Population (Adjusted)',
@@ -20,7 +17,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
       </>
     ),
     render: (object) => <LocalePopulationAdjusted locale={object} />,
-    valueType: TableValueType.Numeric,
+    valueType: TableValueType.Population,
     sortParam: SortBy.Population,
     columnGroup: 'Demographics',
   },
@@ -28,15 +25,15 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: 'Population (Direct)',
     description: 'This is the original population number cited from sourced data.',
     render: (object) => object.populationSpeaking,
-    valueType: TableValueType.Numeric,
+    valueType: TableValueType.Population,
     sortParam: SortBy.PopulationAttested,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
   },
   {
     key: '% in Territory',
-    render: (object) => <AlignedFraction value={object.populationSpeakingPercent} />,
-    valueType: TableValueType.Numeric,
+    render: (object) => object.populationSpeakingPercent,
+    valueType: TableValueType.Decimal,
     sortParam: SortBy.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
   },
@@ -44,10 +41,8 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: '% of Global Language Speakers',
     render: (object) =>
       object.populationSpeaking &&
-      numberToFixedUnlessSmall(
-        (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
-      ),
-    valueType: TableValueType.Numeric,
+      (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+    valueType: TableValueType.Decimal,
     isInitiallyVisible: false,
     sortParam: SortBy.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',

@@ -37,8 +37,8 @@ function computeLanguageDescendantPopulation(lang: LanguageData, source: Languag
   const childLanguages = lang[source].childLanguages ?? [];
   const descendantPopulation = childLanguages.reduce(
     (total, childLang) => total + computeLanguageDescendantPopulation(childLang, source),
-    1,
+    0.01,
   );
   lang[source].populationOfDescendants = descendantPopulation;
-  return Math.max(lang.populationCited || 0, descendantPopulation) + 1; // Tiebreaker = number of child nodes
+  return Math.max(lang.populationCited || 0, descendantPopulation) + 0.01; // Tiebreaker = number of child nodes
 }

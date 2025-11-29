@@ -11,8 +11,10 @@ import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import { numberToFixedUnlessSmall, numberToSigFigs } from '@shared/lib/numberUtils';
+import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import CountOfPeople from '@shared/ui/CountOfPeople';
+import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 import Pill from '@shared/ui/Pill';
@@ -135,7 +137,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
       {populationSpeaking != null && (
         <DetailsField title="Speakers:">
-          {populationSpeaking.toLocaleString()}
+          <CountOfPeople count={populationSpeaking} />
           {' ['}
           <LocaleCensusCitation locale={locale} />
           {']'}
@@ -154,7 +156,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       )}
       {populationWriting != null && territory && (
         <DetailsField title="Writers:">
-          ~{numberToSigFigs(populationWriting, 3).toLocaleString()}
+          ~<CountOfPeople count={populationWriting} />
           {' [previous estimate * literacy'}
           {territory.literacyPercent != null && ` (${territory.literacyPercent.toFixed(1)}%)`}
           {']'}
@@ -189,10 +191,10 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 .map((censusEstimate) => (
                   <tr key={censusEstimate.census.ID}>
                     <td style={{ textAlign: 'right' }}>
-                      {censusEstimate.populationEstimate.toLocaleString()}
+                      <CountOfPeople count={censusEstimate.populationEstimate} />
                     </td>
                     <td style={{ textAlign: 'right' }}>
-                      {numberToFixedUnlessSmall(censusEstimate.populationPercent)}%
+                      <DecimalNumber num={censusEstimate.populationPercent} />%
                     </td>
                     <td>
                       <HoverableObjectName object={censusEstimate.census} />

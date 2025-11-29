@@ -350,7 +350,7 @@ nde	nort2795	North Ndebele	Sindebele		Latn	Wider Communication	Institutional	Asc
 dnj	nucl1770	Dan			Latn	Developing	Stable	Ascending	0	1,679,972		dann1241	Yes	
 mkd	mace1250	Macedonian	македонски	Spoken & Written	Cyrl	National	Institutional	Vital	0	1,662,087		mace1252	Yes	
 eus	basq1248	Basque	Euskara	Spoken & Written	Latn	Provincial	Institutional	Vital	0	1,658,104			Yes	
-bum	bulu1251	Bulu (Cameroon)			Latn	Wider Communication	Institutional	Ascending	0	1,658,000	btb	yaun1239	Yes	
+bum	bulu1251	Bulu (Cameroon)			Latn	Wider Communication	Institutional	Ascending	0	1,658,000		yaun1239	Yes	
 srr	sere1260	Serer	Seereer		Latn	Developing	Stable	Ascending	0	1,652,304		peul1234	Yes	
 bin	bini1246	Edo	Ẹ̀dó		Latn	Educational	Institutional	Ascending	0	1,644,949		cent2259	Yes	
 tem	timn1235	Timne	KʌThemnɛ		Latn	Wider Communication	Institutional	Ascending	0	1,641,175		temn1245	Yes	
@@ -624,7 +624,7 @@ ida	idak1243	Luidakho-Luisukha-Lutirichi			Latn	Developing	Stable	Still	0	598,00
 nqo	nkoa1234	N'Ko	‫ߒߞߏ‬	Spoken & Written	Nkoo	Wider Communication	Endangered	Ascending	0	592,771		arti1236	Yes	
 bez	bena1262	Bena (Tanzania)	Hibena		Latn	Developing	Stable	Ascending	0	592,000		bena1273	Yes	
 eza	ezaa1238	Ezaa			Latn	Developing	Stable	Emerging	0	590,000		izie1238	Yes	
-ewo	ewon1239	Ewondo	ewondo		Latn	Wider Communication	Institutional	Ascending	0	578,000	btb	ewon1241	Yes	
+ewo	ewon1239	Ewondo	ewondo		Latn	Wider Communication	Institutional	Ascending	0	578,000		ewon1241	Yes	
 hnj	hmon1264	Mong Njua	𞄀𞄄𞄰𞄩𞄍𞄜𞄰		Laoo	Vigorous	Stable	Ascending	0	577,201	hmn	huam1250	Yes	Well established variant of the macrolanguage
 unx	mund1321	Munda			Nagm	Vigorous	Stable	Emerging	0	575,099		book1242	Yes	
 nus	nuer1246	Nuer	Thok Nath		Latn	Educational	Institutional	Ascending	0	572,947		nuer1245	Yes	
@@ -916,7 +916,7 @@ the	chit1274	Chitwania Tharu			Deva	Developing	Stable	Ascending	0	250,001		east2
 ann	obol1243	Obolo	Obolo		Latn	Developing	Stable	Ascending	0	250,000		obol1242	Yes	
 bde	bade1248	Bade			Latn	Vigorous	Endangered	Emerging	0	250,000		shir1274	Yes	
 bwr	bura1292	Bura-Pabir			Latn	Vigorous	Endangered	Ascending	0	250,000		bura1297	Yes	
-eto	eton1253	Eton (Cameroon)			Latn	Vigorous	Stable	Emerging	0	250,000	btb	yaun1239	Yes	
+eto	eton1253	Eton (Cameroon)			Latn	Vigorous	Stable	Emerging	0	250,000		yaun1239	Yes	
 fuc	pula1263	Pulaar	Pulaar		Latn	Educational	Stable	Ascending	0	250,000	ful	fula1264	Possibly	But probably want to use macrolanguage
 ige	iged1239	Igede			Latn	Vigorous	Stable	Ascending	0	250,000		etul1244	Yes	
 lpo	lipo1242	Lipo			Plrd	Threatened	Stable	Ascending	0	250,000		lipo1244	Yes	
@@ -2421,7 +2421,7 @@ smd	sama1300	Sama				Vigorous			0	24,200	kmb	kimb1241	No	ISO merged this into km
 kfi	kann1253	Kannada Kurumba			Taml	Developing	Stable	Emerging	0	24,189		book1242	Yes	
 akw	akwa1248	Akwa			Latn	Threatened	Endangered	Emerging	0	24,100		koyo1244	Yes	
 ghe	sout2715	Southern Ghale			Deva	Vigorous	Stable	Emerging	0	24,012		nucl1818	Yes	
-beb	bebe1248	Bebele			Latn	Vigorous	Endangered	Emerging	0	24,000	btb	ewon1241	Yes	
+beb	bebe1248	Bebele			Latn	Vigorous	Endangered	Emerging	0	24,000		ewon1241	Yes	
 bwy	cwib1235	Cwi Bwamu			Latn	Vigorous	Stable	Emerging	0	24,000		nucl1742	Yes	
 dbq	nucl1683	Daba			Latn	Developing	Stable	Ascending	0	24,000		daba1262	Yes	
 fui	bagi1244	Bagirmi Fulfulde			Latn	Vigorous	Stable	Emerging	0	24,000	ful	adam1260	Possibly	But probably want to use macrolanguage
@@ -2591,7 +2591,7 @@ llg	lole1239	Lole	bahasa Lole		Latn	Vigorous	Stable	Emerging	0	20,000		east2858	
 lrk	loar1234	Loarki			Arab	Vigorous	Stable	Still	0	20,000		book1242	Yes	
 lrt	lara1260	Larantuka Malay			Latn	Threatened	Endangered	Emerging	0	20,000		east2743	Yes	
 mcr	meny1245	Menya			Latn	Developing	Endangered	Emerging	0	20,000		kapa1251	Yes	
-mct	meng1263	Mengisa			Latn	Threatened	Endangered	Emerging	0	20,000	btb	eton1253	Yes	
+mct	meng1263	Mengisa			Latn	Threatened	Endangered	Emerging	0	20,000		eton1253	Yes	
 mfg	mixi1241	Mogofin			Latn	Vigorous	Stable	Emerging	0	20,000		mixi1243	Yes	
 mio	pino1237	Pinotepa Nacional Mixtec			Latn	Vigorous	Stable	Ascending	0	20,000		west2832	Yes	
 mky	east2440	East Makian	bahasa Taba		Latn	Threatened	Endangered	Still	0	20,000		east2439	Yes	
@@ -3762,7 +3762,7 @@ ahl	igoo1238	Igo			Latn	Developing	Stable	Emerging	0	6,000		kpos1239	Yes
 awo	awak1250	Awak			Latn	Vigorous	Stable	Emerging	0	6,000		awak1249	Yes	
 bbg	bara1362	Barama			Latn	Vigorous	Endangered	Still	0	6,000		sira1270	Yes	
 bsj	bang1348	Bangwinji			Latn	Developing	Stable	Emerging	0	6,000		nucl1371	Yes	
-bxp	bebi1242	Bebil			Latn	Vigorous	Stable	Emerging	0	6,000	btb	ewon1241	Yes	
+bxp	bebi1242	Bebil			Latn	Vigorous	Stable	Emerging	0	6,000		ewon1241	Yes	
 bxw	bank1258	Bankagooma			Latn	Vigorous	Stable	Still	0	6,000		duun1245	Yes	
 cey	ekai1234	Chin, Ekai			Latn		Stable	Emerging	0	6,000		pend1244	Yes	
 cli	chak1271	Chakali			Latn	Threatened	Endangered	Still	0	6,000		chak1274	Yes	
@@ -4159,7 +4159,7 @@ bys	bura1271	Burak			Latn	Vigorous	Stable	Emerging	0	4,000		bura1270	Yes
 ckh	chak1270	Chak				Threatened	Stable	Still	0	4,000		sakk1239	Yes	
 cpc	ajyi1238	Ajyíninka Apurucayali			Latn	Threatened	Endangered	Emerging	0	4,000		ashe1271	Yes	
 das	daho1238	Daho-Doo			Latn	Vigorous	Endangered	Still	0	4,000		guer1244	Yes	
-fak	fang1248	Fang (Cameroon)			Latn	Threatened	Endangered	Emerging	0	4,000	btb	yemn1234	Yes	
+fak	fang1248	Fang (Cameroon)			Latn	Threatened	Endangered	Emerging	0	4,000		yemn1234	Yes	
 gam	kand1303	Kandawo			Latn	Developing	Stable	Emerging	0	4,000		kand1306	Yes	
 geg	geng1243	Gengle			Latn	Vigorous	Stable	Still	0	4,000		book1242	Yes	
 guu	yano1261	Yanomamö	Yanomamɨ		Latn	Developing	Stable	Emerging	0	4,000		yano1267	Yes	
@@ -7546,7 +7546,7 @@ braz1246	braz1246	Brazilian Portuguese										port1283
 brk	birk1242	Birked			Arab	Extinct	Extinct	Still	0			cent2232	No	Extinct language
 bsl	basa1280	Basa-Gumna			Latn	Extinct	Extinct	Still	0			gumn1234	No	Extinct language
 bsv	baga1274	Baga Sobané			Latn	Extinct	Extinct	Still	0			book1242	No	Extinct language
-btb	beti1250	Beti (Cameroon)										book1242	Probably not	It's a retired language code, split into different mutually unintelligible languages
+btb	beti1250	Beti (Cameroon)										book1242	Probably not	 This language was determined to be a duplicate of `beb`
 bte	gamo1241	Gamo-Ningi			Latn	Dormant	Endangered	Still	0			ning1277	Yes, with caveat	Some sources report this as extinct, some as active
 btk	toba1265	Batak languages										suma1277	Probably not	Language family -- there mare many other languages that are part of this
 bue	beot1247	Beothuk			Latn		Extinct	Still	0				No	Extinct language
