@@ -72,7 +72,7 @@ describe('TableColumnSelector', () => {
 
     // 'Population' visible via columnVisibility
     expect(populationCheckbox.checked).toBe(true);
-    // 'Name' used to be considered checked because sortBy === column.sortParam -- but now its not automatid
+    // 'Name' used to be considered checked because sortBy === column.sortParam -- but it does separately
     expect(nameCheckbox.checked).toBe(false);
   });
 

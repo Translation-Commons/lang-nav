@@ -94,9 +94,9 @@ const FormattedContent: React.FC<{ content: ReactNode; valueType?: TableValueTyp
       }
       return content;
     case TableValueType.Count:
-      if (typeof content === 'number' || typeof content === 'boolean' || content == null) {
-        return content?.toLocaleString() ?? <Deemphasized>—</Deemphasized>;
-      }
+      if (typeof content === 'boolean') return content;
+      if (content == null) return <Deemphasized>—</Deemphasized>;
+      if (typeof content === 'number') return content.toLocaleString();
       return content;
     case TableValueType.Decimal:
       if (typeof content === 'number' || typeof content === 'boolean' || content == null) {

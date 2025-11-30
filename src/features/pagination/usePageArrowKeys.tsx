@@ -7,7 +7,7 @@ const usePageArrowKeys = () => {
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
-      // If the event target is an input , do not navigate pages
+      // If the event target is an input, do not navigate pages
       const target = event.target;
       if (target !== null && target instanceof HTMLElement) {
         if (

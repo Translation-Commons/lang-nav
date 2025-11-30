@@ -208,7 +208,7 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       if (part.trim() === '') {
         return; // Skip empty parts
       }
-      let popEstimate = Number.parseFloat(part.replace(/,%/g, ''));
+      let popEstimate = Number.parseFloat(part.replace(/[,%]/g, ''));
       if (popEstimate > 0 && censuses[i].quantity === 'percent') {
         // If the quantity is percent, convert the percentage to an estimate based on the eligible population
         popEstimate = Math.round((popEstimate / 100) * censuses[i].eligiblePopulation);
