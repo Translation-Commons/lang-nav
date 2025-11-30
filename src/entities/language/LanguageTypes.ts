@@ -89,6 +89,7 @@ export interface LanguageData extends ObjectBase {
   nameSubtitle?: string;
   nameEndonym?: string;
 
+  vitalityMetascore?: number; // 0-9 based on other vitality scores
   vitalityEth2013?: VitalityEthnologueFine;
   vitalityEth2025?: VitalityEthnologueCoarse;
   digitalSupport?: string;

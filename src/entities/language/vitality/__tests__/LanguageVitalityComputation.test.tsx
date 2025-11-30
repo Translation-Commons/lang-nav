@@ -2,17 +2,17 @@ import { describe, it, expect } from 'vitest';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
-import { getVitalityMetascore } from './LanguageVitalityComputation';
+import { getVitalityMetascore } from '../LanguageVitalityComputation';
 import {
   parseVitalityEthnologue2013,
   parseVitalityEthnologue2025,
   parseLanguageISOStatus,
-} from './VitalityParsing';
+} from '../VitalityParsing';
 import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
   LanguageISOStatus,
-} from './VitalityTypes';
+} from '../VitalityTypes';
 
 describe('parseLanguageISOStatus', () => {
   it('returns 9 for Living', () => {

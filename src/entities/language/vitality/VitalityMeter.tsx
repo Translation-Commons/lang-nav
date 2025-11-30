@@ -2,11 +2,10 @@ import React from 'react';
 
 import Hoverable from '@features/hovercard/Hoverable';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData } from '@entities/language/LanguageTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { getFamilyVitalityScores } from './LanguageFamilyVitalityComputation';
 import { getAllVitalityScores } from './LanguageVitalityComputation';
 import { VitalitySource } from './VitalityTypes';
 
@@ -16,12 +15,7 @@ interface Props {
 }
 
 const LanguageVitalityMeter: React.FC<Props> = ({ lang, type }) => {
-  let scores;
-  if (lang.scope === LanguageScope.Family) {
-    scores = getFamilyVitalityScores(lang);
-  } else {
-    scores = getAllVitalityScores(lang);
-  }
+  const scores = getAllVitalityScores(lang);
   const { score: value, explanation: hoverText } = scores[type];
 
   if (value === null) {

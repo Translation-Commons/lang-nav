@@ -56,3 +56,12 @@ export function areArraysIdentical<T>(a: T[], b: T[]): boolean {
   const setB = new Set(b);
   return a.every((item) => setB.has(item));
 }
+
+export function maxBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K | undefined {
+  return items.reduce<K | undefined>((max, child) => {
+    const current = valueFn(child);
+    if (current == null) return max;
+    if (max == null) return current;
+    return max > current ? max : current;
+  }, undefined);
+}

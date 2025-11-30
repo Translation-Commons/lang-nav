@@ -2,6 +2,7 @@ import React from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
+import { maxBy } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
@@ -46,7 +47,7 @@ export function getVitalityScore(source: VitalitySource, lang: LanguageData): nu
     case VitalitySource.Eth2025:
       return lang.vitalityEth2025;
     case VitalitySource.Metascore:
-      return getVitalityMetascore(lang);
+      return lang.vitalityMetascore;
   }
 }
 
@@ -206,4 +207,25 @@ export function getAllVitalityScores(lang: LanguageData): AllVitalityInfo {
     acc[source] = getVitalityInfo(source, lang);
     return acc;
   }, {} as AllVitalityInfo);
+}
+
+export function computeLanguageFamilyVitality(lang: LanguageData): void {
+  // First check that its descendants all have vitality data
+  const descendants = lang.childLanguages || [];
+
+  // If there are no descendants, nothing to compute
+  if (descendants.length === 0) return;
+  // Recursively compute vitality for all descendants first
+  descendants.forEach((child) => computeLanguageFamilyVitality(child));
+
+  // Now compute family vitality for this language
+  const maxISOStatus = maxBy(descendants, (child) => child.ISO.status);
+  if (maxISOStatus != null) lang.ISO.status = maxISOStatus;
+  const maxEth2013 = maxBy(descendants, (child) => child.vitalityEth2013);
+  if (maxEth2013 != null) lang.vitalityEth2013 = maxEth2013;
+  const maxEth2025 = maxBy(descendants, (child) => child.vitalityEth2025);
+  if (maxEth2025 != null) lang.vitalityEth2025 = maxEth2025;
+
+  // Finally compute metascore
+  lang.vitalityMetascore = getVitalityMetascore(lang);
 }

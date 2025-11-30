@@ -1,7 +1,7 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
-import { clearFamilyVitalityCache } from '@entities/language/vitality/LanguageFamilyVitalityComputation';
+import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
@@ -35,6 +35,7 @@ export function updateObjectCodesNameAndPopulation(
   updatePopulations(locales, world);
   updateParentsAndDescendants(languages, languageSource);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
+  updateLanguageVitality(languages);
 }
 
 function updatePopulations(locales: LocaleData[], world: TerritoryData): void {
@@ -52,10 +53,6 @@ function updateParentsAndDescendants(
   languages: LanguageData[],
   languageSource: LanguageSource,
 ): void {
-  // Clear vitality cache before updating relationships since childLanguages will change
-  // This ensures family vitality scores are recomputed with the new relationships
-  clearFamilyVitalityCache();
-
   languages.forEach((lang) => {
     const specific = lang[languageSource];
     lang.populationOfDescendants = specific.populationOfDescendants ?? undefined;
@@ -91,5 +88,17 @@ function updateObjectNamesAndCodes(
 
     // Add it to the names array so it can be used in search
     if (!loc.names.includes(localeName)) loc.names.push(localeName);
+  });
+}
+
+/**
+ * Language vitality depends on the family relationships between languages.
+ * When those relationships change, we need to clear the cached vitality values
+ * so they can be recomputed.
+ */
+function updateLanguageVitality(languages: LanguageData[]): void {
+  languages.forEach((lang) => {
+    // Force recomputation of family vitality by clearing cached value
+    lang.vitalityMetascore = getVitalityMetascore(lang);
   });
 }
