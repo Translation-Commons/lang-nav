@@ -73,7 +73,9 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
         </DetailsField>
       )}
       {sampleRate && (
-        <DetailsField title="Sample rate:">{(sampleRate * 100).toLocaleString()}%</DetailsField>
+        <DetailsField title="Sample rate:">
+          {typeof sampleRate === 'number' ? (sampleRate * 100).toLocaleString() + '%' : sampleRate}
+        </DetailsField>
       )}
       {languagesIncluded && (
         <DetailsField title="Languages Included:">{languagesIncluded}</DetailsField>

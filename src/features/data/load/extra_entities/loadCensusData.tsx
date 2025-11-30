@@ -108,13 +108,13 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
         ) {
           censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
         } else if (key === 'sampleRate') {
-          censuses[index][key] = Number.parseFloat(value);
+          censuses[index][key] = Number.parseFloat(value) || value;
         } else if (key === 'collectorType') {
           censuses[index][key] = value as CensusCollectorType;
         } else if (key === 'modality') {
           censuses[index][key] = value as LanguageModality;
         } else if (key === 'quantity') {
-          censuses[index][key] = value.startsWith('percent') ? 'percent' : 'count';
+          censuses[index][key] = value.toLowerCase().startsWith('percent') ? 'percent' : 'count';
         } else if (
           key === 'languageCount' ||
           key === 'languageEstimates' ||

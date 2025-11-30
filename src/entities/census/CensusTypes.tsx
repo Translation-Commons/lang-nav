@@ -40,7 +40,7 @@ export interface CensusData extends ObjectBase {
   gender?: string; // Any, Male, Female
   nationality?: string; // eg. Citizens, Residents, Visitors
   residentLocation?: string; // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
-  sampleRate?: number; // eg. .1, .25, 1 (for 10%, 25%, 100%)
+  sampleRate?: number | string; // eg. .1, .25, 1 (for 10%, 25%, 100%)
   respondingPopulation?: number; // The number of individuals who gave a response about their language
   responsesPerIndividual?: string; // eg. 1, 1+, 2+
   quantity?: 'count' | 'percent'; // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
