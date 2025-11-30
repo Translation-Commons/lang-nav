@@ -13,7 +13,6 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getObjectPopulation';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 
 const LanguagesLargestDescendant: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
@@ -78,13 +77,13 @@ const LanguagesLargestDescendant: React.FC = () => {
           {
             key: 'Population',
             render: (lang: LanguageData) => lang.populationEstimate,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Population,
             sortParam: SortBy.Population,
           },
           {
             key: 'Estimated Population of Descendants',
             render: (lang: LanguageData) => lang.populationOfDescendants,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Population,
             sortParam: SortBy.PopulationOfDescendants,
           },
           {
@@ -100,17 +99,14 @@ const LanguagesLargestDescendant: React.FC = () => {
           {
             key: 'Descendant Population',
             render: (lang: LanguageData) => lang.largestDescendant?.populationEstimate || null,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Population,
           },
 
           {
             key: '% Descendant',
-            render: (lang: LanguageData) => {
-              const relativePopulation =
-                getObjectPopulationPercentInBiggestDescendantLanguage(lang);
-              return relativePopulation ? numberToFixedUnlessSmall(relativePopulation) : null;
-            },
-            valueType: TableValueType.Numeric,
+            render: (lang: LanguageData) =>
+              getObjectPopulationPercentInBiggestDescendantLanguage(lang),
+            valueType: TableValueType.Decimal,
             sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}

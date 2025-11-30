@@ -69,7 +69,10 @@ type SortButtonIconProps = {
 
 function SortButtonIcon({ valueType, sortDirection }: SortButtonIconProps) {
   switch (valueType) {
-    case TableValueType.Numeric:
+    case TableValueType.Population:
+    case TableValueType.Count:
+    case TableValueType.Decimal:
+    case TableValueType.Date:
       return sortDirection === SortDirection.Ascending ? (
         <ArrowDown01 size="1em" display="block" />
       ) : (

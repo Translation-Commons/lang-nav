@@ -26,7 +26,6 @@ import {
 } from '@entities/types/DataTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 
 type PartitionedLocales = {
   largest: LocaleData[];
@@ -155,25 +154,21 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Population',
           render: (object) => object.populationSpeaking,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Population,
           sortParam: SortBy.Population,
         },
         {
           key: '% in Territory',
-          render: (object) =>
-            object.populationSpeakingPercent &&
-            numberToFixedUnlessSmall(object.populationSpeakingPercent),
-          valueType: TableValueType.Numeric,
+          render: (object) => object.populationSpeakingPercent,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
           render: (object) =>
             object.populationSpeaking &&
-            numberToFixedUnlessSmall(
-              (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
-            ),
-          valueType: TableValueType.Numeric,
+            (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.PercentOfOverallLanguageSpeakers,
         },
         {

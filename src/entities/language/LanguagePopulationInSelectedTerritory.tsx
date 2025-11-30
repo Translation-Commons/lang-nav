@@ -6,6 +6,7 @@ import HoverableObject from '@features/hovercard/HoverableObject';
 import usePageParams from '@features/params/usePageParams';
 import { getFilterByTerritory } from '@features/transforms/filtering/filterByConnections';
 
+import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LanguageData } from './LanguageTypes';
@@ -35,7 +36,7 @@ const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = 
 
   return (
     <HoverableObject object={biggestLocale}>
-      {Math.max(...locales.map((locale) => locale.populationAdjusted ?? 0)).toLocaleString()}
+      <CountOfPeople count={Math.max(...locales.map((locale) => locale.populationAdjusted ?? 0))} />
     </HoverableObject>
   );
 };

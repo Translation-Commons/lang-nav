@@ -51,13 +51,20 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
         >
           <SkipBackIcon size="1em" style={{ display: 'block' }} />
         </button>
-        <button
-          onClick={() => updatePageParams({ page: Math.max(1, currentPage - 1) })}
+        <HoverableButton
           disabled={currentPage === 1}
+          hoverContent={
+            <>
+              Go to Previous Page.
+              <br />
+              Shortcut: Left Arrow Key ←
+            </>
+          }
+          onClick={() => updatePageParams({ page: Math.max(1, currentPage - 1) })}
           style={compactStyle}
         >
           <StepBackIcon size="1em" style={{ display: 'block' }} />
-        </button>
+        </HoverableButton>
 
         <input
           className={currentPage === 1 ? 'empty' : ''}
@@ -78,13 +85,20 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
           </HoverableButton>
         )}
 
-        <button
-          onClick={() => updatePageParams({ page: Math.min(totalPages, currentPage + 1) })}
+        <HoverableButton
           disabled={currentPage >= totalPages}
+          hoverContent={
+            <>
+              Go to Next Page.
+              <br />
+              Shortcut: Right Arrow Key →
+            </>
+          }
+          onClick={() => updatePageParams({ page: Math.min(totalPages, currentPage + 1) })}
           style={compactStyle}
         >
           <StepForwardIcon size="1em" style={{ display: 'block' }} />
-        </button>
+        </HoverableButton>
         <button
           onClick={() => updatePageParams({ page: totalPages })}
           disabled={currentPage === totalPages}

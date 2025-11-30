@@ -10,6 +10,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import './treelist.css';
+import CountOfPeople from '@shared/ui/CountOfPeople';
+
 import { useTreeListOptionsContext } from './TreeListOptions';
 
 export type TreeNodeData = {
@@ -84,7 +86,9 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
           </HoverableObject>
         )}
         {showPopulation && population && (
-          <div className="TreeListPopulation">{population.toLocaleString()}</div>
+          <div className="TreeListPopulation">
+            <CountOfPeople count={population} />
+          </div>
         )}
       </>
       {expanded && children.length > 0 && (

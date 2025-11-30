@@ -8,6 +8,7 @@ import { TerritoryData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import CountOfPeople from '@shared/ui/CountOfPeople';
 
 interface Props {
   territory: TerritoryData;
@@ -27,7 +28,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
       </h3>
       <div>
         <h4>Population</h4>
-        {population.toLocaleString()}
+        <CountOfPeople count={population} />
       </div>
 
       {locales && locales.length > 0 && (

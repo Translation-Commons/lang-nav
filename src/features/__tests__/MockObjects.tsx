@@ -1,4 +1,4 @@
-import { computeDescendantPopulation } from '@features/data/compute/computeDescedantPopulation';
+import { computeDescendantPopulation } from '@features/data/compute/computeDescendantPopulation';
 import { computeLocalePopulationFromCensuses } from '@features/data/compute/computeLocalePopulationFromCensuses';
 import { computeLocaleWritingPopulation } from '@features/data/compute/computeLocaleWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';

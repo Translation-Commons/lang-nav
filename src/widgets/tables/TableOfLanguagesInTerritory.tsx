@@ -11,7 +11,6 @@ import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
-import AlignedFraction from '@shared/ui/AlignedFraction';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = {
@@ -53,20 +52,20 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
         },
         {
           key: 'Population',
-          render: (loc) => loc.populationSpeaking?.toLocaleString() ?? '—',
-          valueType: TableValueType.Numeric,
+          render: (loc) => loc.populationSpeaking,
+          valueType: TableValueType.Population,
           sortParam: SortBy.Population,
         },
         {
           key: 'Population Source',
           render: (loc) => <LocaleCensusCitation locale={loc} size="short" />,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Population,
           isInitiallyVisible: false,
         },
         {
           key: 'Percent Within Territory',
-          render: (loc) => <AlignedFraction value={loc.populationSpeakingPercent} />,
-          valueType: TableValueType.Numeric,
+          render: (loc) => loc.populationSpeakingPercent,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.PercentOfTerritoryPopulation,
         },
       ]}
