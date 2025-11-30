@@ -15,7 +15,6 @@ import { TerritoryData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';
-import AlignedFraction from '@shared/ui/AlignedFraction';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const TerritoryTable: React.FC = () => {
@@ -43,15 +42,14 @@ const TerritoryTable: React.FC = () => {
         {
           key: 'Population',
           render: (object) => object.population,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Population,
           sortParam: SortBy.Population,
           columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
-          render: (object) =>
-            object.literacyPercent != null ? object.literacyPercent.toFixed(1) + '%' : null,
-          valueType: TableValueType.Numeric,
+          render: (object) => object.literacyPercent,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.Literacy,
           columnGroup: 'Demographics',
         },
@@ -63,7 +61,7 @@ const TerritoryTable: React.FC = () => {
                 items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
               />
             ),
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.CountOfLanguages,
           columnGroup: 'Language',
         },
@@ -84,10 +82,9 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Biggest Language %',
-          render: (object) =>
-            object.locales ? object.locales[0].populationSpeakingPercent?.toFixed(1) + '%' : null,
+          render: (object) => object.locales?.[0].populationSpeakingPercent,
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
           columnGroup: 'Language',
         },
@@ -103,18 +100,18 @@ const TerritoryTable: React.FC = () => {
             <HoverableEnumeration items={getTerritoryChildren(object).map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Count,
           sortParam: SortBy.CountOfTerritories,
           columnGroup: 'Relations',
         },
         {
           key: 'Population of Dependencies',
           render: (object) =>
-            object.dependentTerritories && object.dependentTerritories.length > 0
-              ? sumBy(object.dependentTerritories, (t) => t.population ?? 0)
-              : null,
+            object.dependentTerritories &&
+            object.dependentTerritories.length > 0 &&
+            sumBy(object.dependentTerritories, (t) => t.population ?? 0),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Population,
           sortParam: SortBy.PopulationOfDescendants,
           columnGroup: 'Relations',
         },
@@ -123,7 +120,7 @@ const TerritoryTable: React.FC = () => {
           render: (obj) => obj.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
           exportValue: (obj) => obj.latitude?.toFixed(4) ?? '',
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.Latitude,
           columnGroup: 'Location',
         },
@@ -132,7 +129,7 @@ const TerritoryTable: React.FC = () => {
           render: (obj) => obj.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
           exportValue: (obj) => obj.longitude?.toFixed(4) ?? '',
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.Longitude,
           columnGroup: 'Location',
         },
@@ -141,24 +138,19 @@ const TerritoryTable: React.FC = () => {
           description:
             'Surprisingly, sources report different numbers for the land area for some areas.',
           render: (object) =>
-            object.landArea ? numberToSigFigs(object.landArea, 3)?.toLocaleString() : undefined,
+            object.landArea && numberToSigFigs(object.landArea, 3)?.toLocaleString(),
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Decimal,
           sortParam: SortBy.Area,
           columnGroup: 'Location',
         },
         {
           key: 'Density',
           description: 'People per square kilometer',
-          render: (object) => (
-            <AlignedFraction
-              value={
-                object.landArea && object.population ? object.population / object.landArea : null
-              }
-            />
-          ),
+          render: (object) =>
+            object.landArea && object.population && object.population / object.landArea,
           isInitiallyVisible: false,
-          valueType: TableValueType.Numeric,
+          valueType: TableValueType.Decimal,
           columnGroup: 'Location',
         },
         {

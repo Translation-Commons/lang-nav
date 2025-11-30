@@ -3,6 +3,7 @@ import React from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
 import LimitInput from '@features/pagination/LimitInput';
+import usePageArrowKeys from '@features/pagination/usePageArrowKeys';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
@@ -42,7 +43,8 @@ const SidePanel: React.FC = () => {
 
   // maybe collapse the panel if we click outside -- do UX testing first
   // const panelRef = useClickOutside(() => setIsOpen(false));
-  const panelRef = useClickOutside(() => { });
+  const panelRef = useClickOutside(() => {});
+  usePageArrowKeys();
 
   return (
     <LeftAlignedPanel

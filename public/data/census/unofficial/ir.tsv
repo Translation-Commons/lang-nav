@@ -1,0 +1,35 @@
+#nameDisplay		Iran Population Data
+#isoRegionCode		IR 
+#yearCollected		2025
+#datePublished		May 2025
+#eligiblePopulation		92,000,000
+#populationSource		Other
+#acquisitionOrder		Any
+#modality		Spoken
+#url		https://en.wikipedia.org/wiki/Languages_of_Iran#cite_note-:4-16
+#dateAccessed		2025-11-26
+#collectorType		NGO
+#collectorName		Ethnologue
+Language Code	Language Name	No. of Speakers in Iran
+fas/pes	Iranian Persian	78,700,000
+aze/azb	Azeri	10,100,000
+kur	Kurdish	5,110,000
+luri1252	Luri	3,860,000
+glk	Gilaki	1,610,000
+bal	Balochi	1,450,000
+mzn	Mazandarani	1,350,000
+bqi	Bakhtiari	1,270,000
+pus/pbt	Southern Pashto	1,270,000
+fas/prs	Dari	1,200,000
+qxq	Qashqai	1,020,000
+kmz	Khorasani Turkish	960,000
+lki	Laki	680,000
+ara/acm	Mesopotamian Arabic	571,000
+tuk	Turkmen	359,000
+hye	Armenian	340,000
+haz	Hazaragi	337,000
+hac	Hawrami	180,000
+syr/aii	Assyrian Neo-Aramaic	117,000
+fay	Southwestern Fars	113,000
+ara/afb	Gulf Arabic	110,000
+mis	Other languages	2,048,000

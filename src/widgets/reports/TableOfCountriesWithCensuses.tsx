@@ -28,7 +28,7 @@ const TableOfCountriesWithCensuses: React.FC = () => {
           {
             key: 'Censuses',
             render: (territory) => territory.censuses?.length,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Count,
           },
           ...Object.values(CensusCollectorType).map((collectorType) => ({
             key: collectorType,
@@ -49,13 +49,13 @@ const TableOfCountriesWithCensuses: React.FC = () => {
           {
             key: 'Population',
             render: (territory) => territory.population,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Population,
             sortParam: SortBy.Population,
           },
           {
             key: 'Languages',
             render: (territory) => territory.locales?.length,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Count,
             sortParam: SortBy.CountOfLanguages,
           },
         ]}

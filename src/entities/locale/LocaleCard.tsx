@@ -5,7 +5,8 @@ import usePageParams from '@features/params/usePageParams';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
+import CountOfPeople from '@shared/ui/CountOfPeople';
+import DecimalNumber from '@shared/ui/DecimalNumber';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import { getOfficialLabel } from './LocaleStrings';
@@ -27,13 +28,13 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       {populationSpeaking != null && (
         <div>
           <h4>Speakers</h4>
-          {populationSpeaking.toLocaleString()}
+          <CountOfPeople count={populationSpeaking} />
           {' ['}
           <LocaleCensusCitation locale={locale} size="short" />
           {']'}
           {populationSpeakingPercent != null && (
             <div>
-              {numberToFixedUnlessSmall(populationSpeakingPercent)}% of{' '}
+              {<DecimalNumber num={populationSpeakingPercent} alignFraction={false} />}% of{' '}
               {territory?.scope ?? 'territory'}
             </div>
           )}

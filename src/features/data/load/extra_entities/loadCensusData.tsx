@@ -16,11 +16,14 @@ export async function getCensusFilepaths(directory: string): Promise<string[]> {
 
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
   // Load census filenames from the text file
-  const CENSUS_FILEPATHS = await getCensusFilepaths('data/census');
-  const UN_CENSUS_FILEPATHS = await getCensusFilepaths('data/census/data.un.org');
+  const FILEPATHS = await Promise.all([
+    getCensusFilepaths('data/census/official'),
+    getCensusFilepaths('data/census/data.un.org'),
+    getCensusFilepaths('data/census/unofficial'),
+  ]).then((arrays) => arrays.flat());
 
   return await Promise.all(
-    [...CENSUS_FILEPATHS, ...UN_CENSUS_FILEPATHS].map(
+    FILEPATHS.map(
       async (filePath) =>
         await fetch(filePath)
           .then((res) => res.text())
@@ -110,6 +113,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
           censuses[index][key] = value as CensusCollectorType;
         } else if (key === 'modality') {
           censuses[index][key] = value as LanguageModality;
+        } else if (key === 'quantity') {
+          censuses[index][key] = value.startsWith('percent') ? 'percent' : 'count';
         } else if (
           key === 'languageCount' ||
           key === 'languageEstimates' ||
@@ -203,12 +208,19 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       if (part.trim() === '') {
         return; // Skip empty parts
       }
-      let popEstimate = Number.parseInt(part.replace(/,/g, ''));
+      let popEstimate = Number.parseFloat(part.replace(/[,%]/g, ''));
+      if (popEstimate > 0 && censuses[i].quantity === 'percent') {
+        // If the quantity is percent, convert the percentage to an estimate based on the eligible population
+        popEstimate = Math.round((popEstimate / 100) * censuses[i].eligiblePopulation);
+      }
       if (isNaN(popEstimate)) {
         // If the population estimate is not a number, set it to 1.
         // We set it to 1, not 0, because we want to show that there is a population registered and usually
         // non-numbers are values like "too small to disclose the exact amount" but still non-zero.
         popEstimate = 1;
+      }
+      if (popEstimate <= 0) {
+        popEstimate = 1; // Treat non-positive estimates as 1 for the same reason
       }
 
       // Add the population estimate to the indicated language codes

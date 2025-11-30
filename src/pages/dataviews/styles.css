@@ -65,3 +65,7 @@ div h3:first-child {
   color: var(--color-button-primary);
   background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
 }
+
+tbody tr:hover {
+  background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
+}

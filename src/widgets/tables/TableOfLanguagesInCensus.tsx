@@ -13,10 +13,13 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
+import {
+  getLanguageRootLanguageFamily,
+  getLanguageRootMacrolanguage,
+} from '@entities/language/LanguageFamilyUtils';
 import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 
@@ -51,6 +54,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         territoryCode: census.isoRegionCode,
 
         populationSource: census.nameDisplay,
+        populationAdjusted: populationSpeaking,
         populationSpeaking,
         populationSpeakingPercent:
           (populationSpeaking * 100) / (census.respondingPopulation || census.eligiblePopulation),
@@ -105,16 +109,13 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Population',
             render: (loc) => loc.populationSpeaking,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Population,
             sortParam: SortBy.Population,
           },
           {
             key: 'Percent Within Territory',
-            render: (loc) =>
-              loc.populationSpeakingPercent != null
-                ? numberToFixedUnlessSmall(loc.populationSpeakingPercent) + '%'
-                : 'N/A',
-            valueType: TableValueType.Numeric,
+            render: (loc) => loc.populationSpeakingPercent,
+            valueType: TableValueType.Decimal,
             sortParam: SortBy.PercentOfTerritoryPopulation,
           },
           {
@@ -145,18 +146,32 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               </>
             ),
             render: getPopulationDifference,
-            valueType: TableValueType.Numeric,
+            valueType: TableValueType.Decimal,
           },
           {
             key: 'Percent of Worldwide in Language',
             render: (object) =>
               object.populationSpeaking &&
-              numberToFixedUnlessSmall(
-                (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
-              ) + '%',
-            valueType: TableValueType.Numeric,
+              (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
+            valueType: TableValueType.Decimal,
             isInitiallyVisible: false,
             sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+          },
+          {
+            key: 'Macrolanguage',
+            render: (loc) =>
+              loc.language && (
+                <HoverableObjectName object={getLanguageRootMacrolanguage(loc.language)} />
+              ),
+            isInitiallyVisible: false,
+          },
+          {
+            key: 'Language Family',
+            render: (loc) =>
+              loc.language && (
+                <HoverableObjectName object={getLanguageRootLanguageFamily(loc.language)} />
+              ),
+            isInitiallyVisible: false,
           },
           {
             key: 'Primary Country',
