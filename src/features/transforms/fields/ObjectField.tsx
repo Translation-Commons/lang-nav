@@ -76,7 +76,7 @@ function VitalityField({
   if (field === SortBy.VitalityEthnologue2013) src = VitalitySource.Eth2013;
   else if (field === SortBy.VitalityEthnologue2025) src = VitalitySource.Eth2025;
   else if (field === SortBy.ISOStatus) src = VitalitySource.ISO;
-  return <LanguageVitalityMeter lang={obj} type={src} />;
+  return <LanguageVitalityMeter lang={obj} src={src} />;
 }
 
 export default ObjectField;

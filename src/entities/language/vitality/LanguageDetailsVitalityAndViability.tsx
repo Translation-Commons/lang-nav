@@ -21,23 +21,23 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
   return (
     <DetailsSection title="Vitality & Viability">
       <DetailsField title="Vitality Metascore:">
-        <LanguageVitalityMeter lang={lang} type={VitalitySource.Metascore} />
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
       </DetailsField>
 
       <DetailsField title="ISO Status:">
-        <LanguageVitalityMeter lang={lang} type={VitalitySource.ISO} />{' '}
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.ISO} />{' '}
         {vitality.iso != null &&
           (lang.ISO.status != null ? <Pill>ISO</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
       <DetailsField title="Ethnologue (2013):">
-        <LanguageVitalityMeter lang={lang} type={VitalitySource.Eth2013} />{' '}
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2013} />{' '}
         {vitality.ethFine != null &&
           (vitality.ethnologue2013 != null ? <Pill>Ethnologue 2013</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
       <DetailsField title="Ethnologue (2025):">
-        <LanguageVitalityMeter lang={lang} type={VitalitySource.Eth2025} />{' '}
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2025} />{' '}
         {vitality.ethCoarse != null &&
           (vitality.ethnologue2025 != null ? <Pill>Ethnologue 2025</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>

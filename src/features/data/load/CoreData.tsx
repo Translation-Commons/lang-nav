@@ -18,7 +18,6 @@ import {
 } from '@entities/types/DataTypes';
 
 import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
-import { computeLanguageVitality } from '../compute/computeLanguageVitality';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
@@ -139,7 +138,6 @@ export function useCoreData(): {
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     computeDescendantPopulation(languagesBySource, writingSystems);
-    computeLanguageVitality(Object.values(languagesBySource.Combined));
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));

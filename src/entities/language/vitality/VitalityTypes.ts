@@ -41,10 +41,5 @@ export enum LanguageISOStatus {
   SpecialCode = -1, // S
 }
 
-export type VitalityInfo = {
-  score: number | undefined;
-  label: string | undefined;
-  explanation: React.ReactNode;
-};
-
+export type VitalityInfo = number | undefined;
 export type AllVitalityInfo = Record<VitalitySource, VitalityInfo>;
