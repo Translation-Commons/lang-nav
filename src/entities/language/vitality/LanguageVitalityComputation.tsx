@@ -20,20 +20,20 @@ import { AllVitalityInfo, VitalityInfo, VitalitySource } from './VitalityTypes';
  * 3. If neither Ethnologue value exists, use ISO scale
  */
 export function getVitalityMetascore(lang: LanguageData): number | undefined {
-  const { vitalityEth2013, vitalityEth2025, ISO } = lang;
+  const { ethFine, ethCoarse, iso } = lang.vitality || {};
 
-  if (vitalityEth2013 != null && vitalityEth2025 != null) {
+  if (ethFine != null && ethCoarse != null) {
     // Both Ethnologue values exist - return average
-    return (vitalityEth2013 + vitalityEth2025) / 2;
-  } else if (vitalityEth2013 != null) {
+    return (ethFine + ethCoarse) / 2;
+  } else if (ethFine != null) {
     // Only Ethnologue 2013 exists
-    return vitalityEth2013;
-  } else if (vitalityEth2025 != null) {
+    return ethFine;
+  } else if (ethCoarse != null) {
     // Only Ethnologue 2025 exists
-    return vitalityEth2025;
-  } else if (ISO.status != null) {
+    return ethCoarse;
+  } else if (iso != null) {
     // Use ISO as fallback
-    return ISO.status;
+    return iso;
   }
   return undefined;
 }
@@ -41,13 +41,13 @@ export function getVitalityMetascore(lang: LanguageData): number | undefined {
 export function getVitalityScore(source: VitalitySource, lang: LanguageData): number | undefined {
   switch (source) {
     case VitalitySource.ISO:
-      return lang.ISO.status;
+      return lang.vitality?.iso;
     case VitalitySource.Eth2013:
-      return lang.vitalityEth2013;
+      return lang.vitality?.ethFine;
     case VitalitySource.Eth2025:
-      return lang.vitalityEth2025;
+      return lang.vitality?.ethCoarse;
     case VitalitySource.Metascore:
-      return lang.vitalityMetascore;
+      return lang.vitality?.meta;
   }
 }
 
@@ -58,60 +58,57 @@ export function getVitalityExplanation(
   source: VitalitySource,
   lang: LanguageData,
 ): React.ReactNode {
-  const { ISO, vitalityEth2013, vitalityEth2025 } = lang;
+  const { iso, ethFine, ethCoarse, meta } = lang.vitality ?? {};
 
   switch (source) {
     case VitalitySource.ISO:
-      if (ISO.status == null) return <Deemphasized>No ISO status available</Deemphasized>;
+      if (iso == null) return <Deemphasized>No ISO status available</Deemphasized>;
       return (
         <div>
-          <div>ISO Status: {getLanguageISOStatusLabel(ISO.status)}</div>
-          <div>Normalized to a score of {ISO.status} out of 9.</div>
+          <div>ISO Status: {getLanguageISOStatusLabel(iso)}</div>
+          <div>Normalized to a score of {iso} out of 9.</div>
         </div>
       );
 
     case VitalitySource.Eth2013:
-      if (vitalityEth2013 == null) return <Deemphasized>No vitality data available</Deemphasized>;
+      if (ethFine == null) return <Deemphasized>No vitality data available</Deemphasized>;
       return (
         <div>
           <div>
-            Ethnologue 2013 Vitality: {getVitalityEthnologueFineLabel(vitalityEth2013)}
+            Ethnologue 2013 Vitality: {getVitalityEthnologueFineLabel(ethFine)}
             <LinkButton href="https://www.ethnologue.com/methodology/#language-status">
               methodology
             </LinkButton>
           </div>
-          <div>Normalized to a score of {vitalityEth2013} out of 9.</div>
+          <div>Normalized to a score of {ethFine} out of 9.</div>
         </div>
       );
 
     case VitalitySource.Eth2025:
-      if (vitalityEth2025 == null) return <Deemphasized>No vitality data available</Deemphasized>;
+      if (ethCoarse == null) return <Deemphasized>No vitality data available</Deemphasized>;
       return (
         <div>
-          <div>Ethnologue 2025 Vitality: {getVitalityEthnologueCoarseLabel(vitalityEth2025)}</div>
-          <div>Normalized to a score of {vitalityEth2025} out of 9.</div>
+          <div>Ethnologue 2025 Vitality: {getVitalityEthnologueCoarseLabel(ethCoarse)}</div>
+          <div>Normalized to a score of {ethCoarse} out of 9.</div>
         </div>
       );
 
     case VitalitySource.Metascore: {
-      if (vitalityEth2013 != null && vitalityEth2025 != null) {
-        // Both Ethnologue values exist - return average
-        const average = (vitalityEth2013 * 1 + vitalityEth2025 * 1) / 2;
+      if (ethFine != null && ethCoarse != null && meta != null) {
         return (
           <div>
             <div>
               Ethnologue changed the methodology of its vitality scores. So we convert them to a
-              normalized score and averaged the data from 2013 and 2025. Average:{' '}
-              {average.toFixed(1)}.
+              normalized score and averaged the data from 2013 and 2025. Average: {meta.toFixed(1)}.
             </div>
             <div style={{ marginLeft: '2em' }}>
-              2013: {getVitalityEthnologueFineLabel(vitalityEth2013)} ({vitalityEth2013}){' '}
+              2013: {getVitalityEthnologueFineLabel(ethFine)} ({ethFine}){' '}
               <LinkButton href="https://www.ethnologue.com/methodology/#language-status">
                 methodology
               </LinkButton>
             </div>
             <div style={{ marginLeft: '2em' }}>
-              2025: {getVitalityEthnologueCoarseLabel(vitalityEth2025)} ({vitalityEth2025})
+              2025: {getVitalityEthnologueCoarseLabel(ethCoarse)} ({ethCoarse})
             </div>
           </div>
         );
@@ -124,18 +121,18 @@ export function getVitalityExplanation(
 }
 
 export function computeVitalityMetascoreInfo(lang: LanguageData): VitalityInfo {
-  const { vitalityEth2013, vitalityEth2025, ISO } = lang;
+  const { ethFine, ethCoarse, iso } = lang.vitality || {};
 
-  if (vitalityEth2013 != null && vitalityEth2025 != null) {
+  if (ethFine != null && ethCoarse != null) {
     // Both Ethnologue values exist - return average
     return {
-      score: (vitalityEth2013 + vitalityEth2025) / 2,
-      label: ((vitalityEth2013 + vitalityEth2025) / 2).toFixed(1),
+      score: (ethFine + ethCoarse) / 2,
+      label: ((ethFine + ethCoarse) / 2).toFixed(1),
       explanation: getVitalityExplanation(VitalitySource.Metascore, lang),
     };
-  } else if (vitalityEth2013 != null || vitalityEth2025 != null) {
+  } else if (ethFine != null || ethCoarse != null) {
     const info =
-      vitalityEth2013 != null
+      ethFine != null
         ? getVitalityInfo(VitalitySource.Eth2013, lang)
         : getVitalityInfo(VitalitySource.Eth2025, lang);
     return {
@@ -149,7 +146,7 @@ export function computeVitalityMetascoreInfo(lang: LanguageData): VitalityInfo {
         </>
       ),
     };
-  } else if (ISO.status != null) {
+  } else if (iso != null) {
     const info = getVitalityInfo(VitalitySource.ISO, lang);
     return {
       score: info.score,
@@ -178,20 +175,20 @@ export function getVitalityInfo(source: VitalitySource, lang: LanguageData): Vit
   switch (source) {
     case VitalitySource.ISO:
       return {
-        score: lang.ISO.status,
+        score: lang.vitality?.iso,
         label: getLanguageISOStatusLabel(lang.ISO.status!),
         explanation: getVitalityExplanation(VitalitySource.ISO, lang),
       };
     case VitalitySource.Eth2013:
       return {
-        score: lang.vitalityEth2013,
-        label: getVitalityEthnologueFineLabel(lang.vitalityEth2013!),
+        score: lang.vitality?.ethFine,
+        label: getVitalityEthnologueFineLabel(lang.vitality?.ethFine),
         explanation: getVitalityExplanation(VitalitySource.Eth2013, lang),
       };
     case VitalitySource.Eth2025:
       return {
-        score: lang.vitalityEth2025,
-        label: getVitalityEthnologueCoarseLabel(lang.vitalityEth2025!),
+        score: lang.vitality?.ethCoarse,
+        label: getVitalityEthnologueCoarseLabel(lang.vitality?.ethCoarse),
         explanation: getVitalityExplanation(VitalitySource.Eth2025, lang),
       };
     case VitalitySource.Metascore:
@@ -209,23 +206,49 @@ export function getAllVitalityScores(lang: LanguageData): AllVitalityInfo {
   }, {} as AllVitalityInfo);
 }
 
-export function computeLanguageFamilyVitality(lang: LanguageData): void {
+export function computeLanguageVitality(languages: LanguageData[]): void {
+  // For all language roots, recompute vitality scores
+  languages
+    .filter((lang) => lang.parentLanguage == null)
+    .forEach((rootLang) => {
+      // Force recomputation of vitality by clearing cached value
+      computeLanguageFamilyVitality(rootLang);
+    });
+}
+
+function computeLanguageFamilyVitality(lang: LanguageData): void {
   // First check that its descendants all have vitality data
   const descendants = lang.childLanguages || [];
-
-  // If there are no descendants, nothing to compute
-  if (descendants.length === 0) return;
   // Recursively compute vitality for all descendants first
   descendants.forEach((child) => computeLanguageFamilyVitality(child));
 
-  // Now compute family vitality for this language
-  const maxISOStatus = maxBy(descendants, (child) => child.ISO.status);
-  if (maxISOStatus != null) lang.ISO.status = maxISOStatus;
-  const maxEth2013 = maxBy(descendants, (child) => child.vitalityEth2013);
-  if (maxEth2013 != null) lang.vitalityEth2013 = maxEth2013;
-  const maxEth2025 = maxBy(descendants, (child) => child.vitalityEth2025);
-  if (maxEth2025 != null) lang.vitalityEth2025 = maxEth2025;
+  // Now compute vitality for this language
+  const vitality = lang.vitality || {};
+  const { ethnologue2013, ethnologue2025 } = vitality;
 
-  // Finally compute metascore
-  lang.vitalityMetascore = getVitalityMetascore(lang);
+  // If it's declared by a source use that, otherwise use its children's max vitality
+  if (lang.ISO.status != null) {
+    vitality.iso = lang.ISO.status;
+  } else {
+    vitality.iso = maxBy(descendants, (child) => child.vitality?.iso);
+  }
+  if (ethnologue2013 != null) {
+    vitality.ethFine = ethnologue2013;
+  } else {
+    vitality.ethFine = maxBy(descendants, (child) => child.vitality?.ethFine);
+  }
+  if (ethnologue2025 != null) {
+    vitality.ethCoarse = ethnologue2025;
+  } else {
+    vitality.ethCoarse = maxBy(descendants, (child) => child.vitality?.ethCoarse);
+  }
+
+  // Compute the meta score and return
+  vitality.meta = getVitalityMetascore(lang);
+
+  if (['ine', 'gem', 'gmw', 'eng', 'deu'].includes(lang.ID))
+    console.log(
+      `Computed vitality for ${lang.ID}: ISO=${vitality.iso}, Eth2013=${vitality.ethFine}/${vitality.ethnologue2013}, Eth2025=${vitality.ethCoarse}/${vitality.ethnologue2025}, Descendants: ${descendants.map((d) => d.ID).join(', ')}`,
+    );
+  lang.vitality = vitality;
 }

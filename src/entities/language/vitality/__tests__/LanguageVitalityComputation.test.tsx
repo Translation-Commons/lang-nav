@@ -76,22 +76,25 @@ describe('parseVitalityEthnologue2025', () => {
 describe('computeVitalityMetascore', () => {
   it('returns average when both Ethnologue values exist', () => {
     const lang = getBaseLanguageData('en', 'English');
-    lang.vitalityEth2013 = VitalityEthnologueFine.National; // 9
-    lang.vitalityEth2025 = VitalityEthnologueCoarse.Stable; // 6
+    lang.vitality = lang.vitality || {};
+    lang.vitality.ethnologue2013 = VitalityEthnologueFine.National; // 9
+    lang.vitality.ethnologue2025 = VitalityEthnologueCoarse.Stable; // 6
     const result = getVitalityMetascore(lang);
     expect(result).toBe(7.5); // (9 + 6) / 2
   });
 
   it('uses Ethnologue 2013 when only it exists', () => {
     const lang = getBaseLanguageData('en', 'English');
-    lang.vitalityEth2013 = VitalityEthnologueFine.Threatened; // 4
+    lang.vitality = lang.vitality || {};
+    lang.vitality.ethnologue2013 = VitalityEthnologueFine.Threatened; // 4
     const result = getVitalityMetascore(lang);
     expect(result).toBe(4);
   });
 
   it('uses Ethnologue 2025 when only it exists', () => {
     const lang = getBaseLanguageData('en', 'English');
-    lang.vitalityEth2025 = VitalityEthnologueCoarse.Endangered; // 3
+    lang.vitality = lang.vitality || {};
+    lang.vitality.ethnologue2025 = VitalityEthnologueCoarse.Endangered; // 3
     const result = getVitalityMetascore(lang);
     expect(result).toBe(3);
   });

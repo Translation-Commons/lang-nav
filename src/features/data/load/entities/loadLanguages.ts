@@ -43,8 +43,10 @@ function parseLanguageLine(line: string): LanguageData {
     nameEndonym,
     names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
-    vitalityEth2013: parseVitalityEthnologue2013(parts[6]),
-    vitalityEth2025: parseVitalityEthnologue2025(parts[7]),
+    vitality: {
+      ethnologue2013: parseVitalityEthnologue2013(parts[6]),
+      ethnologue2025: parseVitalityEthnologue2025(parts[7]),
+    },
     digitalSupport: parts[8] || undefined,
     viabilityConfidence: parts[13] || undefined,
     viabilityExplanation: parts[14] || undefined,

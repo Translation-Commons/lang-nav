@@ -80,20 +80,20 @@ export function getSortField(
 
     // Vitality
     case SortBy.VitalityMetascore:
-      if (object.type === ObjectType.Language) return object.vitalityMetascore;
-      if (object.type === ObjectType.Locale) return object.language?.vitalityMetascore;
+      if (object.type === ObjectType.Language) return object.vitality?.meta;
+      if (object.type === ObjectType.Locale) return object.language?.vitality?.meta;
       return undefined;
     case SortBy.ISOStatus:
-      if (object.type === ObjectType.Language) return object.ISO.status;
-      if (object.type === ObjectType.Locale) return object.language?.ISO.status;
+      if (object.type === ObjectType.Language) return object.vitality?.iso;
+      if (object.type === ObjectType.Locale) return object.language?.vitality?.iso;
       return undefined;
     case SortBy.VitalityEthnologue2013:
-      if (object.type === ObjectType.Locale) return object.language?.vitalityEth2013;
-      if (object.type === ObjectType.Language) return object.vitalityEth2013;
+      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethFine;
+      if (object.type === ObjectType.Language) return object.vitality?.ethFine;
       return undefined;
     case SortBy.VitalityEthnologue2025:
-      if (object.type === ObjectType.Locale) return object.language?.vitalityEth2025;
-      if (object.type === ObjectType.Language) return object.vitalityEth2025;
+      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
+      if (object.type === ObjectType.Language) return object.vitality?.ethCoarse;
       return undefined;
   }
 }

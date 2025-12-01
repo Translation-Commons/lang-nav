@@ -29,9 +29,10 @@ function createLanguageWithVitality(
   }>,
 ): LanguageData {
   const lang = getBaseLanguageData(code, name);
-  if (vitality.iso) lang.ISO.status = vitality.iso;
-  if (vitality.eth2013) lang.vitalityEth2013 = vitality.eth2013;
-  if (vitality.eth2025) lang.vitalityEth2025 = vitality.eth2025;
+  lang.vitality = {};
+  if (vitality.iso) lang.vitality.iso = vitality.iso;
+  if (vitality.eth2013) lang.vitality.ethFine = vitality.eth2013;
+  if (vitality.eth2025) lang.vitality.ethCoarse = vitality.eth2025;
   return lang;
 }
 
