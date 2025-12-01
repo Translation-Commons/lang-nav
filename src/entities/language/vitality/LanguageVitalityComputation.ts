@@ -2,7 +2,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 import { maxBy } from '@shared/lib/setUtils';
 
-import { AllVitalityInfo, VitalitySource } from './VitalityTypes';
+import { VitalitySource } from './VitalityTypes';
 
 /**
  * Computes the vitality metascore for a language using the algorithm:
@@ -43,17 +43,7 @@ export function getVitalityScore(source: VitalitySource, lang: LanguageData): nu
 }
 
 /**
- * Gets all available vitality scores for a language
- */
-export function getAllVitalityScores(lang: LanguageData): AllVitalityInfo {
-  return Object.values(VitalitySource).reduce<AllVitalityInfo>((acc, source) => {
-    acc[source] = getVitalityScore(source, lang);
-    return acc;
-  }, {} as AllVitalityInfo);
-}
-
-/**
- * Compute derived vitality data for all languages, filling in gaps when it doesn't from
+ * Compute derived vitality data for all languages, filling in gaps when it doesn't come
  * directly from a source. For example, Ethnologue doesn't provide vitality for language families
  * or macrolanguages.
  *
@@ -62,18 +52,12 @@ export function getAllVitalityScores(lang: LanguageData): AllVitalityInfo {
  */
 export function precomputeLanguageVitality(languages: LanguageData[]): void {
   // For all language roots, recompute vitality scores
-  languages
-    .filter((lang) => lang.parentLanguage == null)
-    .forEach((rootLang) => {
-      // Force recomputation of vitality by clearing cached value
-      computeLanguageFamilyVitality(rootLang);
-    });
+  languages.filter((lang) => lang.parentLanguage == null).forEach(computeLanguageFamilyVitality);
 }
 
 function computeLanguageFamilyVitality(lang: LanguageData): void {
-  // First check that its descendants all have vitality data
-  const descendants = lang.childLanguages || [];
   // Recursively compute vitality for all descendants first
+  const descendants = lang.childLanguages || [];
   descendants.forEach((child) => computeLanguageFamilyVitality(child));
 
   // Now compute vitality for this language

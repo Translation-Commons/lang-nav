@@ -19,7 +19,7 @@ type Props = {
   field: ColorBy;
 };
 
-const ObjectField: React.FC<Props> = ({ object, field }) => {
+const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
   const { languageSource } = usePageParams();
   const fieldValue = getSortField(object, field, languageSource);
   switch (field) {
@@ -79,4 +79,4 @@ function VitalityField({
   return <LanguageVitalityMeter lang={obj} src={src} />;
 }
 
-export default ObjectField;
+export default ObjectFieldDisplay;

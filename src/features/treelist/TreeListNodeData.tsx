@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ColorBy } from '@features/transforms/coloring/ColorTypes';
-import ObjectField from '@features/transforms/fields/ObjectField';
+import ObjectFieldDisplay from '@features/transforms/fields/ObjectFieldDisplay';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -15,7 +15,7 @@ const TreeListNodeData: React.FC<Props> = ({ object, field }) => {
 
   return (
     <div style={{ display: 'inline-block', position: 'absolute', right: 0 }}>
-      <ObjectField object={object} field={field} />
+      <ObjectFieldDisplay object={object} field={field} />
     </div>
   );
 };

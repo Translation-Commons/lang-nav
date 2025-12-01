@@ -40,6 +40,3 @@ export enum LanguageISOStatus {
   Extinct = 0, // E
   SpecialCode = -1, // S
 }
-
-export type VitalityInfo = number | undefined;
-export type AllVitalityInfo = Record<VitalitySource, VitalityInfo>;

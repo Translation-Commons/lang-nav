@@ -110,13 +110,12 @@ const ShowDataSelector: React.FC<{
   setShowData: (value: ColorBy) => void;
 }> = ({ showData, setShowData }) => {
   const { objectType } = usePageParams();
-  const applicableSortBys: ColorBy[] = getSortBysApplicableToObjectType(objectType);
-  applicableSortBys.unshift('None'); // Add "none" option to the front
+  const applicableSortBys: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
 
   return (
     <Selector<ColorBy>
       selectorLabel="Show Data"
-      selectorDescription="Choose data to show on the right side nodes."
+      selectorDescription="Choose data to show to the right side of the items."
       options={applicableSortBys}
       onChange={(sortBy) => setShowData(sortBy)}
       selected={showData}
