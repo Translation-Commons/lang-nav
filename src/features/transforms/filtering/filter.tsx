@@ -101,12 +101,11 @@ function doesLocaleMatchScope(
  * Non-language objects pass through. Languages must match all active filters,
  * and those with missing data are excluded when that filter is active.
  */
-export function buildVitalityFilterFunction(params: {
-  isoStatus: LanguageISOStatus[];
-  vitalityEth2013: VitalityEthnologueFine[];
-  vitalityEth2025: VitalityEthnologueCoarse[];
-}): FilterFunctionType {
-  const { isoStatus, vitalityEth2013, vitalityEth2025 } = params;
+export function buildVitalityFilterFunction(
+  isoFilter: LanguageISOStatus[],
+  ethFineFilter: VitalityEthnologueFine[],
+  ethCoarseFilter: VitalityEthnologueCoarse[],
+): FilterFunctionType {
   const filterByVitality = (object: ObjectData | undefined): boolean => {
     // Only filter language objects
     if (object?.type === ObjectType.Locale) return filterByVitality(object.language);
@@ -115,25 +114,20 @@ export function buildVitalityFilterFunction(params: {
     const language = object as LanguageData;
 
     // No filters active = pass all
-    if (!isoStatus.length && !vitalityEth2013.length && !vitalityEth2025.length) {
+    if (!isoFilter.length && !ethFineFilter.length && !ethCoarseFilter.length) {
       return true;
     }
 
     // For each active filter, check if language matches
-    // Languages with missing data are excluded when that filter is active
-    const isoMatches =
-      !isoStatus.length || (language.ISO.status != null && isoStatus.includes(language.ISO.status));
-
-    const eth2013Matches =
-      !vitalityEth2013.length ||
-      (language.vitalityEth2013 != null && vitalityEth2013.includes(language.vitalityEth2013));
-
-    const eth2025Matches =
-      !vitalityEth2025.length ||
-      (language.vitalityEth2025 != null && vitalityEth2025.includes(language.vitalityEth2025));
+    const { iso, ethFine, ethCoarse } = language.vitality || {};
+    const isoMatches = !isoFilter.length || (iso != null && isoFilter.includes(iso));
+    const ethFineMatches =
+      !ethFineFilter.length || (ethFine != null && ethFineFilter.includes(ethFine));
+    const ethCoarseMatches =
+      !ethCoarseFilter.length || (ethCoarse != null && ethCoarseFilter.includes(ethCoarse));
 
     // Must match all active filters
-    return isoMatches && eth2013Matches && eth2025Matches;
+    return isoMatches && ethFineMatches && ethCoarseMatches;
   };
 
   return filterByVitality;
@@ -146,7 +140,7 @@ export function buildVitalityFilterFunction(params: {
 export function getFilterByVitality(): FilterFunctionType {
   const { isoStatus, vitalityEth2013, vitalityEth2025 } = usePageParams();
 
-  return useCallback(buildVitalityFilterFunction({ isoStatus, vitalityEth2013, vitalityEth2025 }), [
+  return useCallback(buildVitalityFilterFunction(isoStatus, vitalityEth2013, vitalityEth2025), [
     isoStatus,
     vitalityEth2013,
     vitalityEth2025,

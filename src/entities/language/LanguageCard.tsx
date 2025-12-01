@@ -56,7 +56,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       )}
       <div>
         <h4>Vitality</h4>
-        <LanguageVitalityMeter lang={lang} type={VitalitySource.Metascore} />
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
       </div>
 
       {countryLocales.length > 0 && (

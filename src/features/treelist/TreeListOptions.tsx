@@ -1,40 +1,46 @@
 import React from 'react';
 
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
+import { ColorBy } from '@features/transforms/coloring/ColorTypes';
+import { getSortBysApplicableToObjectType } from '@features/transforms/sorting/sort';
+
 interface TreeListOptions {
   allExpanded: boolean;
   showInfoButton: boolean;
-  showPopulation: boolean;
+  showData: ColorBy;
   showObjectIDs: boolean;
   setAllExpanded: (value: boolean) => void;
   setShowInfoButton: (value: boolean) => void;
-  setShowPopulation: (value: boolean) => void;
+  setShowData: (value: ColorBy) => void;
   setShowObjectIDs: (value: boolean) => void;
 }
 const TreeListOptionsContext = React.createContext<TreeListOptions>({
   allExpanded: false,
   showInfoButton: true,
-  showPopulation: false,
+  showData: 'None',
   showObjectIDs: false,
   setAllExpanded: () => {},
   setShowInfoButton: () => {},
-  setShowPopulation: () => {},
+  setShowData: () => {},
   setShowObjectIDs: () => {},
 });
 
 export const TreeListOptionsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [allExpanded, setAllExpanded] = React.useState(false);
   const [showInfoButton, setShowInfoButton] = React.useState(true);
-  const [showPopulation, setShowPopulation] = React.useState(false);
+  const [showData, setShowData] = React.useState<ColorBy>('None');
   const [showObjectIDs, setShowObjectIDs] = React.useState(false);
 
   const value = {
     allExpanded,
     showInfoButton,
-    showPopulation,
+    showData,
     showObjectIDs,
     setAllExpanded,
     setShowInfoButton,
-    setShowPopulation,
+    setShowData,
     setShowObjectIDs,
   };
 
@@ -52,16 +58,23 @@ export function TreeListOptionsSelectors() {
   const {
     allExpanded,
     showInfoButton,
-    showPopulation,
+    showData,
     showObjectIDs,
     setAllExpanded,
     setShowInfoButton,
-    setShowPopulation,
+    setShowData,
     setShowObjectIDs,
   } = useTreeListOptionsContext();
 
   return (
-    <div className="TreeListOptions">
+    <div
+      style={{
+        marginTop: '1em',
+        display: 'flex',
+        gap: '0.5em',
+        flexWrap: 'wrap',
+      }}
+    >
       <label>
         <input
           type="checkbox"
@@ -81,19 +94,32 @@ export function TreeListOptionsSelectors() {
       <label>
         <input
           type="checkbox"
-          checked={showPopulation}
-          onChange={(e) => setShowPopulation(e.target.checked)}
-        />
-        Show Population
-      </label>
-      <label>
-        <input
-          type="checkbox"
           checked={showObjectIDs}
           onChange={(e) => setShowObjectIDs(e.target.checked)}
         />
         Show Object IDs
       </label>
+
+      <ShowDataSelector showData={showData} setShowData={setShowData} />
     </div>
   );
 }
+
+const ShowDataSelector: React.FC<{
+  showData: ColorBy;
+  setShowData: (value: ColorBy) => void;
+}> = ({ showData, setShowData }) => {
+  const { objectType } = usePageParams();
+  const applicableSortBys: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
+
+  return (
+    <Selector<ColorBy>
+      selectorLabel="Show Data"
+      selectorDescription="Choose data to show to the right side of the items."
+      options={applicableSortBys}
+      onChange={(sortBy) => setShowData(sortBy)}
+      selected={showData}
+      display={SelectorDisplay.InlineDropdown}
+    />
+  );
+};

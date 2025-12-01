@@ -1,28 +1,10 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import {
-  getTerritoriesRelevantToObject,
-  getWritingSystemsRelevantToObject,
-} from '@features/transforms/filtering/filterByConnections';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
-import {
-  getCountOfLanguages,
-  getCountOfTerritories,
-  getObjectDateAsNumber,
-  getObjectLiteracy,
-  getObjectMostImportantLanguageName,
-} from '@entities/lib/getObjectMiscFields';
-import {
-  getObjectPopulation,
-  getObjectPopulationAttested,
-  getObjectPopulationOfDescendants,
-  getObjectPopulationPercentInBiggestDescendantLanguage,
-  getObjectPopulationRelativeToOverallLanguageSpeakers,
-  getObjectPercentOfTerritoryPopulation,
-} from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
+
+import { getSortField } from '../fields/getField';
 
 import { SortBehavior, SortBy, SortDirection } from './SortTypes';
 
@@ -33,73 +15,6 @@ export function getSortFunction(languageSource?: LanguageSource): SortByFunction
   const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
 
   return getSortFunctionParameterized(sortBy, effectiveLanguageSource, sortBehavior);
-}
-
-export function getSortField(
-  object: ObjectData,
-  sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource = LanguageSource.Combined,
-): string | number | undefined {
-  switch (sortBy) {
-    case SortBy.Code:
-      return object.codeDisplay;
-    case SortBy.Name:
-      return object.nameDisplay;
-    case SortBy.Endonym:
-      return object.nameEndonym;
-    case SortBy.CountOfTerritories:
-      return getCountOfTerritories(object);
-    case SortBy.CountOfLanguages:
-      return getCountOfLanguages(object);
-    case SortBy.Literacy:
-      return getObjectLiteracy(object);
-    case SortBy.Date:
-      return getObjectDateAsNumber(object);
-    case SortBy.Language:
-      return getObjectMostImportantLanguageName(object);
-    case SortBy.WritingSystem:
-      return getWritingSystemsRelevantToObject(object)?.[0]?.nameDisplay;
-    case SortBy.Territory:
-      return getTerritoriesRelevantToObject(object)?.[0]?.nameDisplay;
-    case SortBy.Latitude:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? object.latitude
-        : undefined;
-    case SortBy.Longitude:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? object.longitude
-        : undefined;
-    case SortBy.Area:
-      return object.type === ObjectType.Territory ? object.landArea : undefined;
-
-    // Population
-    case SortBy.Population:
-      return getObjectPopulation(object);
-    case SortBy.PopulationAttested:
-      return getObjectPopulationAttested(object);
-    case SortBy.PopulationOfDescendants:
-      return getObjectPopulationOfDescendants(object, effectiveLanguageSource);
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-      return getObjectPopulationPercentInBiggestDescendantLanguage(object);
-    case SortBy.PercentOfTerritoryPopulation:
-      return getObjectPercentOfTerritoryPopulation(object);
-    case SortBy.PercentOfOverallLanguageSpeakers:
-      return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
-
-    // Vitality
-    case SortBy.VitalityMetascore:
-      if (object.type !== ObjectType.Language) return undefined;
-      return getVitalityMetascore(object);
-    case SortBy.ISOStatus:
-      if (object.type !== ObjectType.Language) return undefined;
-      return object.ISO.status;
-    case SortBy.VitalityEthnologue2013:
-      if (object.type !== ObjectType.Language) return undefined;
-      return object.vitalityEth2013;
-    case SortBy.VitalityEthnologue2025:
-      if (object.type !== ObjectType.Language) return undefined;
-      return object.vitalityEth2025;
-  }
 }
 
 export function getSortFunctionParameterized(

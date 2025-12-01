@@ -5,13 +5,12 @@ import HoverableObject from '@features/hovercard/HoverableObject';
 import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
 import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import './treelist.css';
-import CountOfPeople from '@shared/ui/CountOfPeople';
 
+import TreeListNodeData from './TreeListNodeData';
 import { useTreeListOptionsContext } from './TreeListOptions';
 
 export type TreeNodeData = {
@@ -37,7 +36,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
     allExpanded,
     showInfoButton,
     showObjectIDs: showObjectIDsSetting,
-    showPopulation,
+    showData,
   } = useTreeListOptionsContext();
   let showObjectIDs = showObjectIDsSetting;
   if (
@@ -53,7 +52,6 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
     () => setExpanded(isExpandedInitially || descendantsPassFilter || allExpanded),
     [descendantsPassFilter, allExpanded],
   );
-  const population = getObjectPopulation(object);
 
   return (
     <li>
@@ -85,11 +83,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
             <InfoIcon size="1em" />
           </HoverableObject>
         )}
-        {showPopulation && population && (
-          <div className="TreeListPopulation">
-            <CountOfPeople count={population} />
-          </div>
-        )}
+        {showData !== 'None' && <TreeListNodeData object={object} field={showData} />}
       </>
       {expanded && children.length > 0 && (
         <ul className="TreeListBranch">

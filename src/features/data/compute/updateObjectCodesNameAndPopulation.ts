@@ -1,6 +1,7 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
@@ -34,6 +35,7 @@ export function updateObjectCodesNameAndPopulation(
   updatePopulations(locales, world);
   updateParentsAndDescendants(languages, languageSource);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
+  precomputeLanguageVitality(languages);
 }
 
 function updatePopulations(locales: LocaleData[], world: TerritoryData): void {
