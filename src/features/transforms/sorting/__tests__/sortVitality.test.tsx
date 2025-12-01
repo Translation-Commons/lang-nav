@@ -8,12 +8,13 @@ import {
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
+import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
 
 import { getSortFunctionParameterized } from '../sort';
 import { SortBy, SortBehavior } from '../SortTypes';
@@ -31,8 +32,8 @@ function createLanguageWithVitality(
   const lang = getBaseLanguageData(code, name);
   lang.vitality = {};
   if (vitality.iso) lang.vitality.iso = vitality.iso;
-  if (vitality.eth2013) lang.vitality.ethFine = vitality.eth2013;
-  if (vitality.eth2025) lang.vitality.ethCoarse = vitality.eth2025;
+  if (vitality.eth2013) lang.vitality.ethnologue2013 = vitality.eth2013;
+  if (vitality.eth2025) lang.vitality.ethnologue2025 = vitality.eth2025;
   return lang;
 }
 
@@ -47,6 +48,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('fr', 'French', { eth2013: VitalityEthnologueFine.Threatened }), // 4
         createLanguageWithVitality('es', 'Spanish', { eth2013: VitalityEthnologueFine.Shifting }), // 3
       ];
+      precomputeLanguageVitality(langs);
 
       const sortFn = getSortFunctionParameterized(
         SortBy.VitalityMetascore,
@@ -65,6 +67,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('en', 'English', {}), // no data = -1
         createLanguageWithVitality('fr', 'French', { eth2013: VitalityEthnologueFine.Threatened }), // 4
       ];
+      precomputeLanguageVitality(langs);
 
       const sortFn = getSortFunctionParameterized(
         SortBy.VitalityMetascore,
@@ -87,10 +90,11 @@ describe('Vitality Sorting', () => {
         codeDisplay: 'US',
         nameDisplay: 'United States',
         names: ['United States'],
-        scope: 'Country' as TerritoryData['scope'],
+        scope: TerritoryScope.Country,
         population: 0,
         populationFromUN: 0,
       };
+      precomputeLanguageVitality([lang]);
 
       const sortFn = getSortFunctionParameterized(
         SortBy.VitalityMetascore,

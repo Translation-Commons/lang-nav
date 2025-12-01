@@ -88,12 +88,12 @@ export function getSortField(
       if (object.type === ObjectType.Locale) return object.language?.vitality?.iso;
       return undefined;
     case SortBy.VitalityEthnologue2013:
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethFine;
       if (object.type === ObjectType.Language) return object.vitality?.ethFine;
+      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethFine;
       return undefined;
     case SortBy.VitalityEthnologue2025:
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
       if (object.type === ObjectType.Language) return object.vitality?.ethCoarse;
+      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
       return undefined;
   }
 }

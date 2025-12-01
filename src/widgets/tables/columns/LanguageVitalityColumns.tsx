@@ -9,14 +9,14 @@ import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 export const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Vitality: Metascore',
-    render: (lang) => <LanguageVitalityCell lang={lang} type={VitalitySource.Metascore} />,
+    render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Metascore} />,
     sortParam: SortBy.VitalityMetascore,
     valueType: TableValueType.Enum,
     columnGroup: 'Vitality',
   },
   {
     key: 'ISO Status',
-    render: (lang) => <LanguageVitalityCell lang={lang} type={VitalitySource.ISO} />,
+    render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.ISO} />,
     sortParam: SortBy.ISOStatus,
     isInitiallyVisible: false,
     valueType: TableValueType.Enum,
@@ -24,7 +24,7 @@ export const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Vitality: Ethnologue 2013',
-    render: (lang) => <LanguageVitalityCell lang={lang} type={VitalitySource.Eth2013} />,
+    render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Eth2013} />,
     sortParam: SortBy.VitalityEthnologue2013,
     valueType: TableValueType.Enum,
     isInitiallyVisible: false,
@@ -32,7 +32,7 @@ export const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Vitality: Ethnologue 2025',
-    render: (lang) => <LanguageVitalityCell lang={lang} type={VitalitySource.Eth2025} />,
+    render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Eth2025} />,
     sortParam: SortBy.VitalityEthnologue2025,
     valueType: TableValueType.Enum,
     isInitiallyVisible: false,
