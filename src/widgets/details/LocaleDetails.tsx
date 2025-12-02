@@ -1,7 +1,20 @@
 import React from 'react';
 
+<<<<<<< HEAD:src/views/locale/LocaleDetails.tsx
+import { getCldrLocale } from '../../data/cldrLocales';
+import CommaSeparated from '../../generic/CommaSeparated';
+import Deemphasized from '../../generic/Deemphasized';
+import { numberToFixedUnlessSmall, numberToSigFigs } from '../../generic/numberUtils';
+import { PercentageDifference } from '../../generic/PercentageDifference';
+import { LocaleData, LocaleSource } from '../../types/DataTypes';
+import DetailsField from '../common/details/DetailsField';
+import DetailsSection from '../common/details/DetailsSection';
+import HoverableObjectName from '../common/HoverableObjectName';
+import ObjectWikipediaInfo from '../common/ObjectWikipediaInfo';
+=======
 import Hoverable from '@features/hovercard/Hoverable';
 import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+>>>>>>> origin/master:src/widgets/details/LocaleDetails.tsx
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
@@ -19,9 +32,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 import Pill from '@shared/ui/Pill';
 
-type Props = {
-  locale: LocaleData;
-};
+type Props = { locale: LocaleData };
 
 const LocaleDetails: React.FC<Props> = ({ locale }) => {
   return (
@@ -215,6 +226,43 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
   );
 };
 
+/** CLDR Support section */
+const LocaleCLDRSupportSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
+  const cldr = getCldrLocale(locale.ID);
+  if (!cldr) {
+    return (
+      <DetailsSection title="CLDR Support">
+        <Deemphasized>Not supported by CLDR.</Deemphasized>
+      </DetailsSection>
+    );
+  }
+  return (
+    <DetailsSection title="CLDR Support">
+      <DetailsField title="Tier:">{cldr.tier}</DetailsField>
+      <DetailsField title="Present in CLDR:">
+        {cldr.presentInCLDRDatabase ? 'Yes' : 'No'}
+      </DetailsField>
+      <DetailsField title="Default Locale:">
+        {cldr.localeIsDefaultForLanguage ? 'Yes' : 'No'}
+      </DetailsField>
+      <DetailsField title="Target / Computed Level:">
+        {cldr.targetLevel ?? '—'} / {cldr.computedLevel ?? '—'}
+      </DetailsField>
+      {cldr.confirmedPct != null && (
+        <DetailsField title="Confirmed %:">{cldr.confirmedPct.toFixed(1)}%</DetailsField>
+      )}
+      {cldr.icuIncluded != null && (
+        <DetailsField title="ICU:">{cldr.icuIncluded ? 'Yes' : 'No'}</DetailsField>
+      )}
+      {cldr.missingCounts && (
+        <DetailsField title="Missing Counts:">
+          {cldr.missingCounts.found} found / {cldr.missingCounts.unconfirmed} unconfirmed /{' '}
+          {cldr.missingCounts.missing} missing
+        </DetailsField>
+      )}
+      {cldr.notes && cldr.notes.length > 0 && (
+        <DetailsField title="Missing Features:">{cldr.notes.join(', ')}</DetailsField>
+      )}
 const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   const { officialStatus, wikipedia, localeSource, containedLocales } = locale;
   return (
