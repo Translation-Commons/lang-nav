@@ -4,7 +4,7 @@ eng	stan1293	English	English	Spoken & Written	Latn	National	Institutional	Thrivi
 cmn	mand1415	Mandarin Chinese	普通话	Mostly Spoken (but also written)	Hans	National	Institutional	Thriving	0	951,666,932	zho	mand1471	Yes, with caveat	Established variant of a macrolanguage -- many systems may label this as `zh` but it is much clearer to show both, even though there is overlap
 hin	hind1269	Hindi	हिन्दी	Spoken & Written	Deva	National	Institutional	Thriving	0	694,325,639		hind1270	Yes	
 spa	stan1288	Spanish	español	Spoken & Written	Latn	National	Institutional	Thriving	0	495,294,882		cast1243	Yes	
-ara	arab1395	Arabic	العربية	Written	Arab	National			0	345,771,433		arab1394	Yes, with caveat	Member languages are also good to include because of significant dialectal variations
+ara	arab1395	Arabic	العربية	Spoken & Written	Arab	National			0	345,771,433		arab1394	Yes, with caveat	Member languages are also good to include because of significant dialectal variations
 fra	stan1290	French	français	Spoken & Written	Latn	National	Institutional	Thriving	0	314,723,138		glob1239	Yes	
 ben	beng1280	Bengali	বাংলা	Spoken & Written	Beng	National	Institutional	Vital	0	269,324,750		gaud1238	Yes	
 por	port1283	Portuguese	português	Spoken & Written	Latn	National	Institutional	Thriving	0	237,766,546		braz1247	Yes	
@@ -212,7 +212,7 @@ ssw	swat1243	Swati	siSwati	Spoken & Written	Latn	National	Institutional	Vital	0	
 bik	biko1240	Bikol	Bicol		Latn				0	4,260,675		cent2246	Yes	
 min	mina1268	Minangkabau	Baso Minangkabau	Spoken & Written	Latn	Developing	Endangered	Ascending	0	4,240,015	msa	mina1280	Possibly	But probably want to use macrolanguage
 mtr	mewa1249	Mewari			Deva	Developing	Stable	Ascending	0	4,212,262	mwr	mewa1253	Possibly	But probably want to use macrolanguage
-ins	indi1237	Indian Sign Language			Zxxx	Vigorous	Stable	Ascending	0	4,100,000		indo1332	Yes	
+ins	indi1237	Indian Sign Language		Sign	Zxxx	Vigorous	Stable	Ascending	0	4,100,000		indo1332	Yes	
 bug	bugi1244	Buginese	basa Ogi	Spoken & Written	Latn	Developing	Institutional	Ascending	0	4,027,800		bugi1245	Yes	
 tiv	tivv1240	Tiv			Latn	Wider Communication	Institutional	Ascending	0	4,000,000		tivi1234	Yes	
 gax	bora1271	Borana-Arsi-Guji Oromo			Latn	Developing	Stable	Ascending	0	3,949,400	orm	cent2303	Possibly	But probably want to use macrolanguage
@@ -373,7 +373,7 @@ hoc	hooo1248	Ho	𑢹𑣉𑣉 𑣎𑣋𑣜		Deva	Developing	Stable	Ascending	0	1,
 lub	luba1250	Luba-Katanga	Tshiluba		Latn	Developing	Endangered	Ascending	0	1,512,695		kaon1242	Yes	
 ach	acol1236	Acoli			Latn	Developing	Institutional	Ascending	0	1,512,165		sout2831	Yes	
 mdh	magu1243	Maguindanaon			Latn	Wider Communication	Endangered	Ascending	0	1,503,182		dana1253	Yes	
-dse	dutc1253	Dutch Sign Language			Zxxx	Developing	Stable	Emerging	0	1,500,000		dutc1259	Yes	
+dse	dutc1253	Dutch Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	1,500,000		dutc1259	Yes	
 quz	cusc1236	Cusco Quechua			Latn	Wider Communication	Institutional	Vital	0	1,500,000	que	cusc1235	Possibly	But probably want to use macrolanguage
 rgn	roma1328	Romagnol	Rumagnòl	Spoken & Written	Latn	Dormant	Endangered	Ascending	0	1,500,000		emil1243	Yes, with caveat	Emilian and Romagnol are part of a dialect continuum -- from one side of the province to the other the languages are mutually unintelligible but between neighboring towns it is comprehensible
 zgb	guib1245	Guibei Zhuang			Hani	Vigorous	Stable	Still	0	1,500,000	zha	nort3189	Possibly	But probably want to use macrolanguage
@@ -483,7 +483,7 @@ dik	sout2832	Southwestern Dinka			Latn	Educational	Stable	Ascending	0	1,000,000	
 diq	diml1238	Common Dimli		Spoken & Written	Latn	Educational	Endangered	Emerging	0	1,000,000	zza	zaza1246	Possibly	But probably want to use macrolanguage
 dks	sout2834	Southeastern Dinka			Latn	Educational	Stable	Emerging	0	1,000,000	din	dink1262	Possibly	But probably want to use macrolanguage
 ekk	esto1258	Standard Estonian		Spoken & Written	Latn	National	Institutional	Vital	0	1,000,000	est	cent2329	Possibly	But probably want to use macrolanguage
-eth	ethi1238	Ethiopian Sign Language			Zxxx	Educational	Stable	Emerging	0	1,000,000		asli1244	Yes	
+eth	ethi1238	Ethiopian Sign Language		Sign	Zxxx	Educational	Stable	Emerging	0	1,000,000		asli1244	Yes	
 fuh	west2454	Western Niger Fulfulde			Latn	Educational	Stable	Ascending	0	1,000,000	ful	fula1264	Possibly	But probably want to use macrolanguage
 gor	goro1259	Gorontalo	bahasa Gorontalo	Spoken & Written	Latn	Threatened	Endangered	Ascending	0	1,000,000		goro1273	Yes	
 guw	gunn1250	Gun	Gungbe	Spoken & Written	Latn	Developing	Stable	Ascending	0	1,000,000		fong1244	Yes	
@@ -507,7 +507,7 @@ nyf	giry1241	Kigiryama			Latn	Vigorous	Institutional	Ascending	0	1,000,000		nort
 nyk	nyan1305	Nyaneka			Latn	Developing	Stable	Ascending	0	1,000,000		nyan1320	Yes	
 nyo	nyor1246	Nyoro	Orunyoro		Latn	Developing	Institutional	Ascending	0	1,000,000		nyor1247	Yes	
 pga	suda1237	Sudanese Creole Arabic			Latn	Wider Communication	Institutional	Emerging	0	1,000,000	ara	east2897	Yes, with caveat	To distinguish spoken dialect
-pks	paki1242	Pakistan Sign Language	اشارہ		Zxxx	Developing	Stable	Still	0	1,000,000		indo1332	Yes	
+pks	paki1242	Pakistan Sign Language	اشارہ	Sign	Zxxx	Developing	Stable	Still	0	1,000,000		indo1332	Yes	
 sgw	seba1251	Sebat Bet Gurage			Ethi	Developing	Stable	Ascending	0	1,000,000		ttgr1237	Yes	
 skg	saka1291	Sakalava Malagasy			Latn	Vigorous	Stable	Emerging	0	1,000,000	mlg	saka1299	Possibly	But probably want to use macrolanguage
 sop	song1303	Songe			Latn	Vigorous	Stable	Ascending	0	1,000,000		luba1254	Yes	
@@ -676,7 +676,7 @@ kro		Kru			Latn				0	480,977			Possibly	Language family
 grb	greb1256	Grebo			Latn				0	476,167		greb1257	Yes	
 wci	waci1239	Waci Gbe			Latn	Vigorous	Stable	Emerging	0	476,000		kpes1239	Yes	
 mdr	mand1442	Mandar			Latn	Developing	Institutional	Ascending	0	475,000		nort2894	Yes	
-esl	egyp1238	Egypt Sign Language			Zxxx	Vigorous	Stable	Still	0	474,000		arab1398	Yes	
+esl	egyp1238	Egypt Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	474,000		arab1398	Yes	
 kge	kome1238	Komering	Basa Kumoring	Spoken & Written	Latn	Threatened	Endangered	Ascending	0	470,000		pesi1234	Yes	
 sgd	suri1273	Surigaonon			Latn	Vigorous	Endangered	Ascending	0	468,062		suri1274	Yes	
 szl	sile1253	Silesian	ślōnski	Spoken & Written	Latn	Vigorous	Stable	Vital	0	467,145		poli1262	Yes	
@@ -768,7 +768,7 @@ dar	darg1241	Dargwa	дарган		Cyrl	Educational	Stable	Ascending	0	362,156		d
 old	moch1256	Mochi			Latn	Vigorous	Stable	Emerging	0	362,000		cent2286	Yes	
 suw	sumb1240	Sumbwa			Latn	Vigorous	Stable	Emerging	0	361,000		suku1274	Yes	
 adh	adho1243	Adhola			Latn	Developing	Stable	Ascending	0	360,000		adho1242	Yes	
-hsh	hung1263	Hungarian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	360,000		nucl1839	Yes	
+hsh	hung1263	Hungarian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	360,000		nucl1839	Yes	
 acf	sain1246	Saint Lucian Creole French	kwéyòl		Latn	Developing	Stable	Ascending	0	359,450		less1242	Yes	
 bap	bant1281	Bantawa			Deva	Threatened	Endangered	Ascending	0	358,737		bant1280	Yes	
 zmz	mban1263	Mbandja			Latn	Developing	Stable	Emerging	0	352,000		nucl1797	Yes	
@@ -786,7 +786,7 @@ xmf	ming1252	Mingrelian	მარგალური	Spoken & Written	Geor	Vigoro
 nuj	nyol1238	Nyole			Latn	Developing	Stable	Ascending	0	341,000		saam1286	Yes	
 mfb	bang1365	Bangka	bahasa Bangka		Latn	Vigorous	Endangered	Emerging	0	340,000	msa	bang1370	Possibly	But probably want to use macrolanguage
 rob	taee1237	Tae'	bahasa Tae'		Latn		Stable	Emerging	0	340,000		tora1260	Yes	
-xki	keny1241	Kenyan Sign Language			Zxxx	Developing	Stable	Emerging	0	340,000		deaf1237	Yes	
+xki	keny1241	Kenyan Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	340,000		deaf1237	Yes	
 rom	roma1329	Romany	Romani chib		Latn				0	338,917		indo1322	Yes	
 kki	kagu1239	Kagulu			Latn	Developing	Stable	Emerging	0	337,000		ruvu1235	Yes	
 pko	poko1263	Pökoot			Latn	Developing	Stable	Ascending	0	336,000	kln	nort3239	Possibly	But probably want to use macrolanguage
@@ -808,7 +808,7 @@ sbk	safw1238	Safwa			Latn	Vigorous	Stable	Ascending	0	322,000		mbey1234	Yes
 knx	kend1254	Salako			Latn	Wider Communication	Institutional	Ascending	0	321,000		west2821	Yes	
 dip	nort2815	Northeastern Dinka			Latn	Educational	Stable	Emerging	0	320,000	din	dink1262	Possibly	But probably want to use macrolanguage
 kvx	park1237	Parkari Koli			Arab	Developing	Stable	Ascending	0	319,000		indu1243	Yes	
-jsl	japa1238	Japanese Sign Language	日本手話		Zxxx	Vigorous	Stable	Emerging	0	317,000		jsli1234	Yes	
+jsl	japa1238	Japanese Sign Language	日本手話	Sign	Zxxx	Vigorous	Stable	Emerging	0	317,000		jsli1234	Yes	
 maw	mamp1244	Mampruli			Latn	Provincial	Stable	Ascending	0	316,000		mamp1246	Yes	
 gru	kist1241	Kistane			Ethi	Vigorous	Stable	Emerging	0	315,538		ngro1237	Yes	
 eyo	keiy1238	Keiyo			Latn	Developing	Stable	Emerging	0	314,000	kln	west3004	Possibly	But probably want to use macrolanguage
@@ -867,7 +867,7 @@ twh	taid1250	Tai Dón			Latn	Vigorous	Stable	Emerging	0	295,000		whit1265	Yes
 kne	kank1243	Kankanaey			Latn	Developing	Endangered	Ascending	0	294,349		kank1245	Yes	
 zaj	zara1247	Zaramo			Latn	Moribund	Endangered	Emerging	0	293,000		kutu1267	Yes	
 lez	lezg1247	Lezghian	Лезги чIал	Spoken & Written	Cyrl	Educational	Stable	Ascending	0	287,878		aghu1259	Yes	
-ase	amer1248	American Sign Language			Sgnw	Developing	Stable	Ascending	0	287,622		amer1258	Yes	
+ase	amer1248	American Sign Language		Sign	Sgnw	Developing	Stable	Ascending	0	287,622		amer1258	Yes	
 cja	west2650	Western Cham	ꨌꩌ		Arab	Vigorous	Stable	Emerging	0	285,050		cham1328	Yes	
 taq	tama1365	Tamasheq	tmahq		Latn	Educational	Stable	Ascending	0	281,200	tmh	sout3263	Possibly	But probably want to use macrolanguage
 naq	nama1264	Nama (Namibia)	Khoekhoegowab		Latn	Educational	Institutional	Ascending	0	280,671		nort3245	Yes	
@@ -876,7 +876,7 @@ tcz	thad1238	Thado Chin			Latn	Educational	Stable	Ascending	0	280,069		thad1239	
 ior	inor1238	Inor			Ethi	Vigorous	Stable	Emerging	0	280,000		inor1239	Yes	
 kzn	koko1267	Kokola			Latn	Vigorous	Stable	Emerging	0	280,000		lolo1269	Yes	
 wni	ndzw1235	Ndzwani Comorian			Arab	Vigorous	Stable	Emerging	0	279,196		shin1269	Yes	
-tza	tanz1238	Tanzanian Sign Language			Zxxx	Developing	Stable	Ascending	0	278,000		deaf1237	Yes	
+tza	tanz1238	Tanzanian Sign Language		Sign	Zxxx	Developing	Stable	Ascending	0	278,000		deaf1237	Yes	
 nih	nyih1240	Nyiha (Tanzania)			Latn	Developing	Stable	Ascending	0	276,000		mboz1234	Yes	
 sml	cent2092	Central Sama			Latn	Educational	Stable	Ascending	0	275,804		inne1244	Yes	
 krc	kara1465	Karachay-Balkar	Къарачай-Малкъар	Spoken & Written	Cyrl	Educational	Stable	Ascending	0	274,458		kauk1241	Yes	
@@ -947,19 +947,19 @@ spy	saba1262	Sabaot			Latn	Developing	Institutional	Ascending	0	241,000	kln	elgo
 pdc	penn1240	Pennsylvania German	Pennsylvanisch Deitsch	Spoken & Written	Latn	Developing	Stable	Ascending	0	240,506		pala1355	Yes	
 lns	lamn1239	Lamnso'			Latn	Developing	Institutional	Ascending	0	240,000		ring1243	Yes	
 xbr	kamb1299	Kambera	bahasa Kambera		Latn	Developing	Stable	Ascending	0	240,000		kamb1320	Yes	
-rsl	russ1255	Russian Sign Language			Zxxx	Developing	Stable	Emerging	0	239,930		cent2419	Yes	
+rsl	russ1255	Russian Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	239,930		cent2419	Yes	
 wob	weno1238	Wè Northern			Latn	Developing	Stable	Ascending	0	239,000		weea1234	Yes	
 kmj	kuma1274	Kumarbhag Paharia			Deva	Vigorous	Stable	Emerging	0	238,076		malt1248	Yes	
 xal	kalm1243	Kalmyk	хальмг	Spoken & Written	Cyrl	Threatened	Endangered	Ascending	0	237,742		mong1331	Yes	
 sip	sikk1242	Sikkimese	འབྲས་ལྗོངས་སྐད་		Tibt	Educational	Endangered	Ascending	0	237,674		dzon1238	Yes	
-sfs	sout1404	South African Sign Language	Suid-Afrikaanse Gebaretaal		Zxxx	Vigorous	Stable	Emerging	0	235,000		sout3228	Yes	
+sfs	sout1404	South African Sign Language	Suid-Afrikaanse Gebaretaal	Sign	Zxxx	Vigorous	Stable	Emerging	0	235,000		sout3228	Yes	
 tzo	tzot1259	Tzotzil			Latn	Threatened	Endangered	Ascending	0	235,000		tzel1253	Yes	
 jbn	nafu1238	Nafusi			Arab	Threatened	Stable	Ascending	0	234,000		berb1260	Yes	
 bkm	komc1235	Kom (Cameroon)			Latn	Educational	Institutional	Ascending	0	233,000		komk1239	Yes	
 pll	shwe1236	Shwe Palaung			Mymr	Vigorous	Stable	Emerging	0	233,000		pala1336	Yes	
 zea	zeeu1238	Zeeuws	Zeêuws	Spoken & Written	Latn	Developing	Endangered	Ascending	0	232,000		zeeu1239	Yes	
 ilp	phil1247	Iranun			Latn		Stable	Emerging	0	231,120		iran1262	Yes	
-ecs	ecua1243	Ecuadorian Sign Language			Zxxx	Developing	Stable	Emerging	0	231,000		west2886	Yes	
+ecs	ecua1243	Ecuadorian Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	231,000		west2886	Yes	
 her	here1253	Herero	Otsiherero		Latn	Developing	Institutional	Ascending	0	230,523		here1252	Yes	
 enq	enga1252	Enga			Latn	Developing	Stable	Ascending	0	230,000		enga1251	Yes	
 kno	kono1268	Kono (Sierra Leone)			Latn	Developing	Stable	Emerging	0	230,000		vaik1238	Yes	
@@ -982,7 +982,7 @@ klu	klao1243	Klao			Latn	Developing	Stable	Emerging	0	222,620		klao1242	Yes
 ctu	chol1282	Chol			Latn	Developing	Stable	Ascending	0	222,000		chol1281	Yes	
 mfu	mbwe1238	Mbwela			Latn	Developing	Stable	Still	0	222,000		mbwe1239	Yes	
 saq	samb1315	Samburu	Kisampur		Latn	Vigorous	Stable	Ascending	0	222,000		nucl1431	Yes	
-asp	alge1235	Algerian Sign Language			Zxxx	Vigorous	Stable	Still	0	220,000		lsfi1234	Yes	
+asp	alge1235	Algerian Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	220,000		lsfi1234	Yes	
 gso	sout2785	Southwest Gbaya			Latn	Developing	Stable	Emerging	0	220,000	gba	gbay1284	Possibly	But probably want to use macrolanguage
 mzv	manz1243	Manza			Latn	Vigorous	Stable	Emerging	0	220,000		manz1242	Yes	
 nxd	ngan1302	Ngando (DRC)			Latn	Vigorous	Stable	Emerging	0	220,000		lomo1242	Yes	
@@ -1017,7 +1017,7 @@ bre	bret1244	Breton	Brezhoneg	Spoken & Written	Latn	Moribund	Endangered	Vital	0	
 dtm	tomo1243	Tomo Kan Dogon			Latn	Vigorous	Stable	Emerging	0	206,000		west2508	Yes	
 kft	kanj1259	Kanjari				Vigorous	Stable	Still	0	206,000		mewa1253	Yes	
 stb	nort2885	Northern Subanen			Latn	Developing	Stable	Ascending	0	205,494		east2769	Yes	
-sqk	alba1271	Albanian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	205,000		deaf1237	Yes	
+sqk	alba1271	Albanian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	205,000		deaf1237	Yes	
 zin	zinz1238	Zinza			Latn	Threatened	Endangered	Ascending	0	205,000		west2841	Yes	
 kxv	kuvi1243	Jatapu	kuvi		Latn	Developing	Stable	Ascending	0	203,205		kuik1244	Yes	
 cyo	cuyo1237	Cuyonon	Koyonon		Latn	Developing	Stable	Ascending	0	202,117		kuya1251	Yes	
@@ -1027,7 +1027,7 @@ lam	lamb1271	Lamba			Latn	Developing	Stable	Emerging	0	200,285		bisa1262	Yes
 ogo	khan1278	Khana			Latn	Vigorous	Stable	Emerging	0	200,001		taik1252	Yes	
 ank	goem1240	Goemai			Latn	Threatened	Endangered	Emerging	0	200,000		anga1311	Yes	
 bww	bwaa1238	Bwa			Latn	Vigorous	Stable	Emerging	0	200,000		paga1238	Yes	
-bzs	braz1236	Brazilian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	200,000		lsfi1234	Yes	
+bzs	braz1236	Brazilian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	200,000		lsfi1234	Yes	
 ckl	ciba1236	Cibak			Latn	Vigorous	Stable	Ascending	0	200,000		bura1297	Yes	
 daq	dand1238	Dandami Maria			Deva	Vigorous	Stable	Emerging	0	200,000		hill1257	Yes	
 eke	ekit1246	Ekit			Latn	Vigorous	Stable	Still	0	200,000		ekit1245	Yes	
@@ -1101,7 +1101,7 @@ hac	gura1251	Gurani			Arab	Shifting	Endangered	Ascending	0	180,000		gora1267	Yes
 kel	kela1254	Kela (DRC)			Latn	Vigorous	Stable	Still	0	180,000		yela1238	Yes	
 kez	kuke1242	Kukele			Latn	Developing	Stable	Emerging	0	180,000		kuke1241	Yes	
 ktp	kadu1253	Kaduo			Plrd	Vigorous	Stable	Still	0	180,000		bika1252	Yes	
-mzc	mada1271	Madagascar Sign Language			Zxxx	Vigorous	Stable	Emerging	0	180,000		norw1261	Yes	
+mzc	mada1271	Madagascar Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	180,000		norw1261	Yes	
 psi	sout2672	Southeast Pashayi			Arab	Vigorous	Stable	Emerging	0	180,000		east2322	Yes	
 slp	lama1277	Lamaholot	bahasa Lamaholot		Latn	Wider Communication	Institutional	Emerging	0	180,000		flor1242	Yes	
 las	lama1275	Lama (Togo)			Latn	Developing	Stable	Ascending	0	177,000		kabi1265	Yes	
@@ -1192,7 +1192,7 @@ sur	mwag1236	Mwaghavul			Latn	Wider Communication	Stable	Ascending	0	150,000		we
 tbt	temb1270	Tembo (Kitembo)			Latn	Developing	Stable	Emerging	0	150,000		fore1272	Yes	
 tnt	tont1239	Tontemboan			Latn	Threatened	Endangered	Emerging	0	150,000		nort2886	Yes	
 ukw	ukwu1241	Ukwuani-Aboh-Ndoni			Latn	Vigorous	Stable	Emerging	0	150,000		cent2417	Yes	
-ysm	yang1309	Myanmar Sign Language			Zxxx		Stable	Emerging	0	150,000		myan1234	Yes	
+ysm	yang1309	Myanmar Sign Language		Sign	Zxxx		Stable	Emerging	0	150,000		myan1234	Yes	
 ywu	wume1235	Wumeng Nasu			Plrd	Threatened	Endangered	Still	0	150,000		nesu1235	Yes	
 kfa	koda1255	Kodava	ಕೊಡವ		Knda	Developing	Stable	Ascending	0	149,199		tami1297	Yes	
 xsm	kase1253	Kasem			Latn	Developing	Institutional	Ascending	0	149,000		nuna1234	Yes	
@@ -1261,7 +1261,7 @@ kcg	tyap1238	Tyap	Katab	Spoken & Written	Latn	Vigorous	Stable	Ascending	0	130,00
 lee	lyel1241	Lyélé			Latn	Developing	Endangered	Ascending	0	130,000		nort2782	Yes	
 lmp	limb1268	Limbum			Latn	Developing	Stable	Ascending	0	130,000		nkam1238	Yes	
 med	melp1238	Melpa			Latn	Developing	Stable	Emerging	0	130,000		melp1239	Yes	
-mfs	mexi1237	Mexican Sign Language			Zxxx	Developing	Stable	Emerging	0	130,000		lsfi1234	Yes	
+mfs	mexi1237	Mexican Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	130,000		lsfi1234	Yes	
 tui	tupu1244	Tupuri			Latn	Developing	Stable	Ascending	0	130,000		tupu1245	Yes	
 tvd	tsuv1239	Tsuvadi			Latn	Vigorous	Stable	Emerging	0	130,000		east2739	Yes	
 mri	maor1246	Māori	te reo Māori	Spoken & Written	Latn	Threatened	Endangered	Vital	0	129,483		maor1247	Yes	
@@ -1360,7 +1360,7 @@ bpd	band1343	Banda-Banda			Latn	Vigorous	Stable	Emerging	0	102,000		cent2022	Yes
 gud	yoco1235	Yocoboué Dida			Latn	Developing	Stable	Emerging	0	102,000		dida1245	Yes	
 lai	lamb1272	Lambya			Latn	Vigorous	Stable	Emerging	0	102,000		nyik1250	Yes	
 mkz	maka1316	Makasae			Latn	Vigorous	Stable	Emerging	0	102,000		east2520	Yes	
-ssp	span1263	Spanish Sign Language	lengua de signos española		Zxxx	Developing	Endangered	Emerging	0	102,000		nucl1840	Yes	
+ssp	span1263	Spanish Sign Language	lengua de signos española	Sign	Zxxx	Developing	Endangered	Emerging	0	102,000		nucl1840	Yes	
 trw	torw1241	Torwali	توروالی		Arab	Vigorous	Endangered	Ascending	0	102,000		dirs1236	Yes	
 dsq	tada1238	Tadaksahak			Latn	Educational	Stable	Emerging	0	101,800		nort2823	Yes	
 beh	bial1238	Biali			Latn	Developing	Stable	Ascending	0	101,500		otiv1240	Yes	
@@ -1393,7 +1393,7 @@ duh	dung1251	Dungra Bhil			Deva	Developing	Stable	Still	0	100,000		bhil1254	Yes
 ekg	ekar1243	Ekari	bahasa Ekari		Latn	Developing	Stable	Emerging	0	100,000		meew1234	Yes	
 ema	emai1241	Emai-Iuleha-Ora			Latn	Educational	Stable	Emerging	0	100,000		emai1243	Yes	
 fay	sout2645	Southwestern Fars			Arab	Shifting	Endangered	Still	0	100,000		mode1259	Yes	
-fsl	fren1243	French Sign Language	langue des signes française		Zxxx	Vigorous	Stable	Emerging	0	100,000		lsfi1234	Yes	
+fsl	fren1243	French Sign Language	langue des signes française	Sign	Zxxx	Vigorous	Stable	Emerging	0	100,000		lsfi1234	Yes	
 gas	adiw1235	Adiwasi Garasia			Gujr	Developing	Stable	Emerging	0	100,000		gara1268	Yes	
 gbo	nort2810	Northern Grebo			Latn	Developing	Stable	Ascending	0	100,000	grb	nort3193	Possibly	But probably want to use macrolanguage
 ggn	east2345	Eastern Gurung				Threatened			0	100,000	gvr	guru1261	No	ISO merged this into gvr
@@ -1425,7 +1425,7 @@ nto	ntom1248	Ntomba			Latn	Vigorous	Stable	Still	0	100,000		boli1263	Yes
 oog	ongg1239	Ong				Shifting	Endangered	Still	0	100,000		ongt1234	Yes	
 pli	pali1273	Pali	पालि	Mostly Written (also Spoken)	Sinh	Dormant	Extinct	Ascending	0	100,000		biha1245	Possibly	Actively used by few people, may be hard to disambiguate between liturgial use and active use
 psh	sout2671	Southwest Pashayi			Arab	Vigorous	Stable	Emerging	0	100,000		west2387	Yes	
-psp	phil1239	Philippine Sign Language			Zxxx	Developing	Stable	Emerging	0	100,000		asli1244	Yes	
+psp	phil1239	Philippine Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	100,000		asli1244	Yes	
 qul	nort2976	North Bolivian Quechua	Apulu qhichwa simi		Latn	Provincial	Institutional	Ascending	0	100,000	que	boli1262	Possibly	But probably want to use macrolanguage
 qxr	cana1262	Cañar Highland Quichua			Latn	Threatened	Endangered	Emerging	0	100,000	colo1257	ecua1249	Possibly	But probably want to use macrolanguage
 ruk	chee1238	Che			Latn	Vigorous	Endangered	Still	0	100,000		ruku1240	Yes	
@@ -1617,7 +1617,7 @@ akp	siwu1238	Siwu			Latn	Developing	Stable	Emerging	0	71,900		lele1263	Yes
 bfx	bant1293	Bantayanon			Latn	Vigorous	Endangered	Emerging	0	71,600		peri1261	Yes	
 btw	butu1244	Butuanon			Latn	Shifting	Endangered	Emerging	0	71,500		butu1243	Yes	
 xwl	west2456	Western Xwla Gbe			Latn	Vigorous	Stable	Still	0	71,000		west2934	Yes	
-csr	cost1249	Costa Rican Sign Language			Zxxx	Vigorous	Stable	Emerging	0	70,701		asli1244	Yes	
+csr	cost1249	Costa Rican Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	70,701		asli1244	Yes	
 fao	faro1244	Faroese	føroyskt	Spoken & Written	Latn	Provincial	Institutional	Vital	0	70,401		icel1246	Yes	
 kfc	kond1295	Porja			Telu	Developing	Stable	Ascending	0	70,087		kond1294	Yes	
 slr	sala1264	Salar	撒拉语		Latn	Threatened	Endangered	Ascending	0	70,001		oghu1243	Yes	
@@ -1685,7 +1685,7 @@ sqt	soqo1240	Soqotri			Arab	Moribund	Endangered	Emerging	0	64,000		east2766	Yes
 alt	sout2694	Altay	Алтай	Spoken & Written	Cyrl	Provincial	Institutional	Ascending	0	63,818		east2791	Yes	
 cov	caom1238	Cao Miao				Vigorous	Stable	Still	0	63,600		nort2734	Yes	
 dop	lukp1238	Lukpa			Latn	Developing	Stable	Ascending	0	63,600		kabi1265	Yes	
-xms	moro1242	Moroccan Sign Language			Zxxx	Vigorous	Stable	Still	0	63,400		asli1244	Yes	
+xms	moro1242	Moroccan Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	63,400		asli1244	Yes	
 kbq	kama1370	Kamano			Latn	Developing	Endangered	Emerging	0	63,200		kama1374	Yes	
 cme	cerm1238	Cerma			Latn	Developing	Stable	Ascending	0	63,100		kirm1250	Yes	
 dau	dars1235	Dar Sila Daju			Latn	Vigorous	Endangered	Emerging	0	63,100		west2501	Yes	
@@ -1758,7 +1758,7 @@ nnp	wanc1238	Wancho Naga			Wcho	Developing	Stable	Ascending	0	59,670		wanc1241	Y
 cdm	chep1245	Chepang			Deva	Threatened	Endangered	Emerging	0	59,225		chep1244	Yes	
 bvu	buki1247	Bukit Malay			Latn	Vigorous	Endangered	Still	0	59,000	msa	banj1241	Possibly	But probably want to use macrolanguage
 ria	rian1262	Riang (India)			Latn	Developing	Stable	Emerging	0	59,000		tipp1238	Yes	
-xml	mala1412	Malaysian Sign Language			Zxxx	Developing	Stable	Ascending	0	58,700		mala1548	Yes	
+xml	mala1412	Malaysian Sign Language		Sign	Zxxx	Developing	Stable	Ascending	0	58,700		mala1548	Yes	
 bgi	gian1241	Giangan			Latn	Shifting	Endangered	Emerging	0	58,500		bili1253	Yes	
 bfr	bazi1237	Bazigar				Shifting	Endangered	Still	0	58,200		uncl1493	Yes	
 yeu	yeru1240	Yerukula			Telu		Stable	Emerging	0	58,065		yeru1242	Yes	
@@ -1796,7 +1796,7 @@ toj	tojo1241	Tojolabal			Latn	Developing	Stable	Ascending	0	54,200		chuj1249	Yes
 blr	blan1242	Blang			Latn	Vigorous	Stable	Ascending	0	54,000		bula1260	Yes	
 byd	beny1237	Benyadu'			Latn	Vigorous	Stable	Emerging	0	54,000		beny1238	Yes	
 gid	gida1247	Gidar			Latn	Developing	Stable	Emerging	0	54,000		nort3156	Yes	
-ukl	ukra1235	Ukrainian Sign Language	українська жестова мова		Zxxx	Vigorous	Stable	Still	0	54,000		cent2419	Yes	
+ukl	ukra1235	Ukrainian Sign Language	українська жестова мова	Sign	Zxxx	Vigorous	Stable	Still	0	54,000		cent2419	Yes	
 yiz	azhe1235	Azhe					Stable	Still	0	54,000		sani1275	Yes	
 mdy	male1284	Male (Ethiopia)			Ethi	Developing	Stable	Ascending	0	53,800		nort3161	Yes	
 agr	agua1253	Aguaruna	awajun		Latn	Educational	Institutional	Ascending	0	53,400		jiva1245	Yes	
@@ -1825,7 +1825,7 @@ kcz	kono1265	Konongo			Latn	Vigorous	Endangered	Emerging	0	51,000		nyam1286	Yes
 klj	turk1303	Turkic Khalaj	Qalayce		Arab	Vigorous	Endangered	Emerging	0	51,000		comm1245	Yes	
 mkb	malp1246	Mal Paharia			Deva	Threatened	Endangered	Still	0	51,000		gaud1238	Yes	
 pmx	poum1235	Poumei Naga			Latn	Developing	Stable	Emerging	0	51,000		poum1236	Yes	
-tsq	thai1240	Thai Sign Language			Zxxx	Developing	Stable	Emerging	0	51,000		asli1244	Yes	
+tsq	thai1240	Thai Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	51,000		asli1244	Yes	
 bni	bang1354	Bangi			Latn	Vigorous	Stable	Emerging	0	50,900		boba1250	Yes	
 zmq	mitu1240	Mituku			Latn	Vigorous	Stable	Emerging	0	50,900		mitu1242	Yes	
 dhw	koch1253	Dhanwar (Nepal)			Deva	Shifting	Endangered	Emerging	0	50,837		kusw1234	Yes	
@@ -1840,14 +1840,14 @@ bkh	bako1249	Bakoko			Latn	Vigorous	Stable	Ascending	0	50,000		basa1289	Yes
 bux	bogh1241	Boghom			Latn	Developing	Stable	Emerging	0	50,000		bogh1240	Yes	
 bxr	russ1264	Russia Buriat		Spoken & Written		Developing	Endangered	Ascending	0	50,000	bua	buri1258	Probably not	It's just a country variant of the macrolanguage
 cen	cenn1238	Cen			Latn	Vigorous	Stable	Emerging	0	50,000		izer1242	Yes	
-csn	colo1249	Colombian Sign Language			Zxxx	Developing	Stable	Ascending	0	50,000		west2886	Yes	
+csn	colo1249	Colombian Sign Language		Sign	Zxxx	Developing	Stable	Ascending	0	50,000		west2886	Yes	
 cuu	taiy1242	Tai Ya			Lana	Vigorous	Stable	Emerging	0	50,000		wudi1241	Yes	
 dnt	midg1235	Mid Grand Valley Dani			Latn	Developing	Stable	Emerging	0	50,000		gran1246	Yes	
 dts	toro1252	Toro So Dogon			Latn	Educational	Institutional	Ascending	0	50,000		esca1235	Yes	
 dur	diii1241	Dii			Latn	Developing	Stable	Ascending	0	50,000		diic1235	Yes	
 ekr	yace1238	Yace			Latn	Developing	Stable	Still	0	50,000		yaty1238	Yes	
 frd	ford1242	Fordata	bahasa Fordata		Latn	Threatened	Endangered	Emerging	0	50,000		keif1237	Yes	
-gsg	germ1281	German Sign Language			Zxxx	Developing	Stable	Emerging	0	50,000		dgsi1234	Yes	
+gsg	germ1281	German Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	50,000		dgsi1234	Yes	
 hrm	horn1235	Horned Miao			Latn	Vigorous	Stable	Still	0	50,000	hmn	firs1234	Possibly	But probably want to use macrolanguage
 ijj	edei1245	Ede Ije			Latn	Vigorous	Stable	Emerging	0	50,000		sout3186	Yes	
 ikl	ikul1238	Ikulu			Latn	Vigorous	Stable	Still	0	50,000		nucl1832	Yes	
@@ -1926,7 +1926,7 @@ ccl	cutc1238	Cutchi-Swahili			Latn	Vigorous	Endangered	Emerging	0	45,000		momb12
 cdr	cind1241	Cinda-Regi-Tiyal			Latn	Vigorous	Stable	Emerging	0	45,000		kamu1262	Yes	
 ero	horp1239	Horpa				Vigorous	Endangered	Emerging	0	45,000		horp1240	Yes	
 hmt	hamt1247	Hamtai			Latn	Developing	Endangered	Emerging	0	45,000		kapa1251	Yes	
-hos	hoch1237	Ho Chi Minh City Sign Language			Zxxx	Vigorous	Stable	Still	0	45,000		viet1253	Yes	
+hos	hoch1237	Ho Chi Minh City Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	45,000		viet1253	Yes	
 kew	west2599	West Kewa			Latn	Developing	Stable	Emerging	0	45,000		kewa1250	Yes	
 kjs	east2516	East Kewa			Latn	Developing	Endangered	Emerging	0	45,000		sout3252	Yes	
 mbo	mboc1235	Mbo (Cameroon)			Latn	Threatened	Endangered	Emerging	0	45,000		mane1268	Yes	
@@ -1975,7 +1975,7 @@ mzw	degg1238	Deg			Latn	Developing	Stable	Ascending	0	42,900		chak1272	Yes
 amf	hame1242	Hamer-Banna			Latn	Vigorous	Stable	Ascending	0	42,800		hame1241	Yes	
 nkh	khez1235	Khezha Naga			Latn	Developing	Stable	Still	0	42,794		anga1244	Yes	
 nwb	nyab1255	Nyabwa			Latn	Developing	Stable	Ascending	0	42,700		weea1234	Yes	
-gss	gree1271	Greek Sign Language			Zxxx	Vigorous	Stable	Emerging	0	42,600		lsfi1234	Yes	
+gss	gree1271	Greek Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	42,600		lsfi1234	Yes	
 bqk	band1342	Banda-Mbrès			Latn	Vigorous	Stable	Emerging	0	42,500		cent2022	Yes	
 imo	imbo1238	Imbongu			Latn	Developing	Stable	Emerging	0	42,500		auag1234	Yes	
 mgb	mara1396	Mararit			Latn	Vigorous	Stable	Emerging	0	42,400		tama1329	Yes	
@@ -2010,13 +2010,13 @@ bau	bada1258	Bada (Nigeria)			Latn	Vigorous	Stable	Still	0	40,000		jara1275	Yes
 bbu	kulu1255	Kulung (Nigeria)			Latn	Vigorous	Stable	Emerging	0	40,000		nige1254	Yes	
 beq	beem1239	Beembe			Latn	Developing	Stable	Emerging	0	40,000		kiko1234	Yes	
 bfc	nort2724	Northern Bai			Latn	Vigorous	Endangered	Still	0	40,000		baic1239	Yes	
-bfi	brit1235	British Sign Language	British Sign Language		Zxxx	Developing	Stable	Ascending	0	40,000		banz1243	Yes	
+bfi	brit1235	British Sign Language	British Sign Language	Sign	Zxxx	Developing	Stable	Ascending	0	40,000		banz1243	Yes	
 bip	bila1255	Bila			Latn	Vigorous	Stable	Emerging	0	40,000		bila1259	Yes	
 bkc	baka1272	Baka (Cameroon)			Latn	Vigorous	Stable	Emerging	0	40,000		baka1278	Yes	
 czt	zotu1235	Zotung Chin			Latn	Developing	Stable	Ascending	0	40,000		mara1381	Yes	
 etx	eten1239	Eten			Latn	Vigorous	Stable	Emerging	0	40,000		iten1244	Yes	
 geh	hutt1235	Hutterite German	Hutterisch		Latn	Vigorous	Stable	Emerging	0	40,000		glob1242	Yes	
-hds	hond1239	Honduras Sign Language			Zxxx	Developing	Stable	Emerging	0	40,000		cost1251	Yes	
+hds	hond1239	Honduras Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	40,000		cost1251	Yes	
 hed	herd1236	Herdé			Latn	Developing	Stable	Emerging	0	40,000		hede1234	Yes	
 hia	lama1288	Lamang			Latn	Vigorous	Endangered	Emerging	0	40,000		lama1287	Yes	
 hlt	ngal1291	Matu Chin			Latn	Developing	Stable	Ascending	0	40,000		choi1241	Yes	
@@ -2054,7 +2054,7 @@ swj	sira1266	Sira			Latn	Vigorous	Stable	Emerging	0	39,400		sira1270	Yes
 bmw	bomw1238	Bomwali			Latn	Vigorous	Stable	Emerging	0	39,300		maka1323	Yes	
 oks	okoe1238	Oko-Eni-Osayen			Latn	Vigorous	Stable	Emerging	0	39,300		benu1247	Yes	
 bbk	baba1266	Babanki			Latn	Developing	Stable	Ascending	0	39,000		cent2275	Yes	
-hab	hano1243	Hanoi Sign Language			Zxxx	Vigorous	Stable	Emerging	0	39,000		viet1253	Yes	
+hab	hano1243	Hanoi Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	39,000		viet1253	Yes	
 meu	motu1246	Motu			Latn	Developing	Stable	Ascending	0	39,000		west2850	Yes	
 wgi	nucl1620	Wahgi			Latn	Developing	Stable	Emerging	0	39,000		wahg1249	Yes	
 kkw	teke1280	Teke-Kukuya			Latn	Vigorous	Stable	Emerging	0	38,800		inte1264	Yes	
@@ -2065,7 +2065,7 @@ bil	bile1244	Bile			Latn	Threatened	Endangered	Still	0	38,000		numa1256	Yes
 bnn	bunu1267	Bunun	Bunun		Latn	Developing	Stable	Emerging	0	38,000		aust1307	Yes	
 dec	dagi1241	Dagik			Latn	Vigorous	Stable	Emerging	0	38,000		ngil1241	Yes	
 jle	ngil1242	Ngile			Latn	Vigorous	Endangered	Still	0	38,000		ngil1241	Yes	
-lbs	liby1235	Libyan Sign Language			Zxxx	Vigorous	Stable	Still	0	38,000		arab1398	Yes	
+lbs	liby1235	Libyan Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	38,000		arab1398	Yes	
 lno	lang1322	Lango (Sudan)				Vigorous			0	38,000		lotu1249	Probably not	Split into separate language codes
 sep	sici1249	Sìcìté Sénoufo			Latn	Developing	Stable	Still	0	38,000		supy1238	Yes	
 sym	maya1281	Maya Samo			Latn	Vigorous	Stable	Emerging	0	38,000		mand1437	Yes	
@@ -2086,7 +2086,7 @@ ngj	ngie1242	Ngie			Latn	Vigorous	Stable	Emerging	0	37,000		ngie1243	Yes
 ott	temo1245	Temoaya Otomi			Latn	Shifting	Endangered	Emerging	0	37,000	oto	sout3168	Yes	
 sbx	sebe1242	Seberuang			Latn	Vigorous	Stable	Still	0	37,000		iban1270	Yes	
 tuz	turk1306	Turka			Latn	Vigorous	Stable	Emerging	0	37,000		kirm1250	Yes	
-wbs	kolk1234	West Bengal Sign Language			Zxxx		Stable	Still	0	37,000		indi1237	Yes	
+wbs	kolk1234	West Bengal Sign Language		Sign	Zxxx		Stable	Still	0	37,000		indi1237	Yes	
 ges	gese1240	Geser-Gorom			Latn	Vigorous	Endangered	Still	0	36,500		gese1241	Yes	
 krn	sapo1251	Sapo			Latn	Developing	Stable	Emerging	0	36,400		guer1244	Yes	
 snf	noon1242	Noon			Latn	Developing	Stable	Ascending	0	36,300		noon1244	Yes	
@@ -2233,7 +2233,7 @@ npb	nupb1238	Nupbikha			Tibt	Vigorous	Stable	Still	0	30,000		book1242	Yes
 opa	okpa1238	Okpamheri			Latn	Vigorous	Endangered	Still	0	30,000		sout3171	Yes	
 pbi	park1239	Parkwa			Latn	Developing	Stable	Ascending	0	30,000		podo1243	Yes	
 pel	peka1242	Pekal	bahasa Pekal		Latn	Vigorous	Endangered	Still	0	30,000	msa	mina1280	Possibly	But probably want to use macrolanguage
-pgz	papu1255	Papua New Guinean Sign Language			Zxxx		Stable	Emerging	0	30,000		aust1310	Yes	
+pgz	papu1255	Papua New Guinean Sign Language		Sign	Zxxx		Stable	Emerging	0	30,000		aust1310	Yes	
 png	pong1250	Pongu			Latn	Vigorous	Endangered	Emerging	0	30,000		shir1275	Yes	
 qvc	caja1238	Cajamarca Quechua	Kashamarkapa qichwashimi		Latn	Developing	Endangered	Ascending	0	30,000	que	caja1240	Possibly	But probably want to use macrolanguage
 set	nucl1632	Sentani			Latn	Developing	Stable	Emerging	0	30,000		sent1262	Yes	
@@ -2242,7 +2242,7 @@ sjo	xibe1242	Xibe	ᠰᡞᠪᡝ ᡤᡞᠰᡠᠨ			Threatened	Endangered	Ascending
 smr	sime1241	Simeulue	bahasa Simeulue		Latn	Vigorous	Endangered	Still	0	30,000		suma1277	Yes	
 soz	temi1247	Temi			Latn	Vigorous	Stable	Emerging	0	30,000		giku1234	Yes	
 ssl	west2465	Western Sisaala			Latn	Developing	Stable	Emerging	0	30,000		nort3229	Yes	
-swl	swed1236	Swedish Sign Language	svenskt teckenspråk		Zxxx	Educational	Institutional	Emerging	0	30,000		swed1257	Yes	
+swl	swed1236	Swedish Sign Language	svenskt teckenspråk	Sign	Zxxx	Educational	Institutional	Emerging	0	30,000		swed1257	Yes	
 tmn	tama1335	Taman (Indonesia)			Latn	Vigorous	Endangered	Still	0	30,000		tama1334	Yes	
 tng	toba1280	Tobanga			Latn	Developing	Stable	Emerging	0	30,000		east2722	Yes	
 tul	tula1252	Tula			Latn	Vigorous	Stable	Emerging	0	30,000		nucl1371	Yes	
@@ -2254,7 +2254,7 @@ wun	bung1265	Bungu			Latn	Vigorous	Stable	Emerging	0	30,000		mwik1240	Yes
 yik	dong1286	Dongshanba Lalo					Endangered	Still	0	30,000		core1258	Yes	
 yip	phol1235	Pholo					Endangered	Still	0	30,000		lolo1267	Yes	
 yiq	miqi1235	Miqie					Endangered	Still	0	30,000		lipo1244	Yes	
-ysl	yugo1238	Yugoslavian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	30,000		yugo1239	Yes	
+ysl	yugo1238	Yugoslavian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	30,000		yugo1239	Yes	
 zkd	kadu1254	Kadu			Latn	Threatened	Endangered	Still	0	30,000		kado1242	Yes	
 mbt	mati1250	Matigsalug Manobo			Latn	Developing	Stable	Ascending	0	29,970		cent2088	Yes	
 bjg	bidy1244	Bidyogo			Latn	Vigorous	Stable	Still	0	29,900		bijo1239	Yes	
@@ -2287,7 +2287,7 @@ hol	holu1245	Holu			Latn	Vigorous	Stable	Still	0	28,200		holu1246	Yes
 lbo	lave1248	Laven			Laoo	Vigorous	Stable	Still	0	28,100		love1237	Yes	
 wba	wara1303	Warao			Latn	Vigorous	Stable	Ascending	0	28,100			Yes	
 bds	buru1320	Burunge			Latn	Vigorous	Stable	Emerging	0	28,000		west2720	Yes	
-gsm	guat1249	Guatemalan Sign Language			Zxxx	Vigorous	Stable	Emerging	0	28,000		deaf1237	Yes	
+gsm	guat1249	Guatemalan Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	28,000		deaf1237	Yes	
 hmy	sout1555	Southern Guiyang Miao			Latn	Vigorous	Stable	Still	0	28,000	hmn	guiy1235	Possibly	But probably want to use macrolanguage
 lkr	pari1256	Päri			Latn	Developing	Stable	Still	0	28,000		nort2814	Yes	
 pae	pagi1243	Pagibete			Latn	Vigorous	Stable	Emerging	0	28,000		paga1238	Yes	
@@ -2501,12 +2501,12 @@ caa	chor1273	Chortí	čorti'		Latn	Developing	Endangered	Ascending	0	21,556		cho
 rou	rung1258	Runga			Latn	Vigorous	Stable	Emerging	0	21,500		rung1257	Yes	
 ukp	ukpe1247	Ukpe-Bayobiri			Latn	Vigorous	Stable	Still	0	21,500		bukp1239	Yes	
 bmv	bumm1238	Bum			Latn	Developing	Stable	Emerging	0	21,400		mmen1239	Yes	
-tse	tuni1249	Tunisian Sign Language			Zxxx	Vigorous	Stable	Still	0	21,200		ital1288	Yes	
+tse	tuni1249	Tunisian Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	21,200		ital1288	Yes	
 ygr	yaga1260	Yagaria			Latn		Stable	Emerging	0	21,100		kama1374	Yes	
 avi	avik1243	Avikam			Latn	Developing	Stable	Still	0	21,000		avik1242	Yes	
 bfn	buna1278	Bunak	bahasa Bunak		Latn	Vigorous	Stable	Ascending	0	21,000		timo1261	Yes	
 bkp	boko1263	Boko (DRC)			Latn	Vigorous	Stable	Still	0	21,000		loba1240	Yes	
-csg	chil1264	Chilean Sign Language			Zxxx	Developing	Stable	Emerging	0	21,000		deaf1237	Yes	
+csg	chil1264	Chilean Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	21,000		deaf1237	Yes	
 cwb	main1272	Maindo			Latn	Vigorous	Endangered	Emerging	0	21,000		chuw1240	Yes	
 dgd	daga1272	Dagaari Dioula			Latn	Vigorous	Stable	Emerging	0	21,000		sout3209	Yes	
 gti	gbat1238	Gbati-ri				Moribund			0	21,000	nyc	book1242	No	ISO merged this into nyc
@@ -2608,7 +2608,7 @@ ots	esta1236	Estado de México Otomi			Latn	Developing	Stable	Emerging	0	20,000	
 oua	taga1278	Tagargrent				Threatened	Endangered	Emerging	0	20,000		ouar1239	Yes	
 pea	pera1256	Peranakan Indonesian			Latn	Shifting	Endangered	Emerging	0	20,000		beta1260	Yes	
 ppk	umaa1242	Uma			Latn	Developing	Endangered	Ascending	0	20,000		umas1234	Yes	
-psl	puer1237	Puerto Rican Sign Language			Zxxx	Threatened	Stable	Still	0	20,000		asli1244	Yes	
+psl	puer1237	Puerto Rican Sign Language		Sign	Zxxx	Threatened	Stable	Still	0	20,000		asli1244	Yes	
 pye	pyek1235	Pye Krumen			Latn	Vigorous	Stable	Still	0	20,000		ivor1240	Yes	
 quf	lamb1276	Lambayeque Quechua	Inkawasi-Kañaris qichwashimi		Latn	Developing	Stable	Ascending	0	20,000	que	caja1240	Possibly	But probably want to use macrolanguage
 quw	tena1240	Tena Lowland Quichua			Latn	Vigorous	Endangered	Emerging	0	20,000	colo1257	orie1242	Possibly	But probably want to use macrolanguage
@@ -2625,7 +2625,7 @@ tmm	tait1248	Tai Thanh			Latn	Vigorous	Stable	Still	0	20,000		whit1265	Yes
 tnw	tons1239	Tonsawang	bahasa Tonsawang		Latn	Shifting	Endangered	Emerging	0	20,000		mina1272	Yes	
 trv	taro1264	Taroko	Kari Seediq	Spoken & Written	Latn	Educational	Endangered	Ascending	0	20,000		atay1246	Yes	
 tsc	tswa1255	Tswa			Latn	Developing	Stable	Ascending	0	20,000		tswa1254	Yes	
-tss	taiw1241	Taiwan Sign Language	台灣手語		Zxxx	Educational	Endangered	Emerging	0	20,000		jsli1234	Yes	
+tss	taiw1241	Taiwan Sign Language	台灣手語	Sign	Zxxx	Educational	Endangered	Emerging	0	20,000		jsli1234	Yes	
 twy	tawo1243	Tawoyan	bahasa Taboyan		Latn	Developing	Endangered	Emerging	0	20,000		nort2888	Yes	
 txq	tiii1241	Tii	bahasa Tii		Latn	Vigorous	Stable	Ascending	0	20,000		east2858	Yes	
 umm	umon1238	Umon			Latn	Developing	Stable	Still	0	20,000		kohu1243	Yes	
@@ -2689,7 +2689,7 @@ yaq	yaqu1251	Yaqui			Latn	Developing	Endangered	Ascending	0	18,240		cahi1243	Yes
 hrk	haru1244	Haruku			Latn	Moribund	Endangered	Still	0	18,200		hatu1247	Yes	
 ani	andi1255	Andi			Cyrl	Threatened	Endangered	Emerging	0	18,133		andi1254	Yes	
 bdi	buru1301	Burun			Latn	Educational	Stable	Still	0	18,000		buru1328	Yes	
-csc	cata1241	Llengua de Signes Catalana	llengua de signes catalana		Zxxx	Vigorous	Endangered	Still	0	18,000		nucl1840	Yes	
+csc	cata1241	Llengua de Signes Catalana	llengua de signes catalana	Sign	Zxxx	Vigorous	Endangered	Still	0	18,000		nucl1840	Yes	
 itt	maen1235	Maeng Itneg			Latn	Vigorous	Stable	Still	0	18,000		maen1236	Yes	
 jwi	jwir1241	Jwira-Pepesa			Latn	Vigorous	Stable	Still	0	18,000		jwir1243	Yes	
 kcf	ukaa1243	Ukaan			Latn	Vigorous	Stable	Still	0	18,000		benu1247	Yes	
@@ -2837,7 +2837,7 @@ nlx	naha1261	Nahali			Deva	Vigorous	Endangered	Emerging	0	15,000		paur1240	Yes
 nsv	sout3128	Southwestern Nisu			Yiii	Threatened	Endangered	Still	0	15,000		book1242	Yes	
 oyd	oyda1235	Oyda			Latn	Vigorous	Stable	Still	0	15,000		cent2046	Yes	
 prf	para1306	Paranan			Latn	Educational	Stable	Ascending	0	15,000		para1320	Yes	
-pys	para1318	Paraguayan Sign Language			Zxxx	Vigorous	Stable	Emerging	0	15,000		deaf1237	Yes	
+pys	para1318	Paraguayan Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	15,000		deaf1237	Yes	
 qvs	sanm1289	San Martín Quechua	llakwash runasimi		Latn	Threatened	Endangered	Ascending	0	15,000	que	sanm1306	Possibly	But probably want to use macrolanguage
 rro	waim1251	Waima			Latn	Developing	Stable	Emerging	0	15,000		nucl1506	Yes	
 sdb	shab1251	Shabak			Arab	Shifting	Endangered	Emerging	0	15,000		shab1250	Yes	
@@ -2957,7 +2957,7 @@ ngt	ngeq1245	Ngeq			Laoo	Vigorous	Stable	Emerging	0	12,900		taoi1247	Yes
 nou	ewag1241	Ewage-Notu			Latn	Developing	Stable	Emerging	0	12,900		coas1297	Yes	
 hsb	uppe1395	Upper Sorbian	Hornjoserbšćina	Spoken & Written	Latn	Educational	Endangered	Vital	0	12,889	wen	sorb1249	Yes	
 blh	kuwa1247	Kuwaa			Latn	Developing	Stable	Emerging	0	12,800		grea1300	Yes	
-sqs	sril1237	Sri Lankan Sign Language			Zxxx	Vigorous	Stable	Emerging	0	12,800		bsli1234	Yes	
+sqs	sril1237	Sri Lankan Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	12,800		bsli1234	Yes	
 nra	ngom1270	Ngom			Latn	Vigorous	Stable	Still	0	12,770		akel1234	Yes	
 dry	dara1250	Darai			Deva	Threatened	Endangered	Emerging	0	12,747		kusw1234	Yes	
 pbp	bady1239	Badyara			Latn	Vigorous	Stable	Emerging	0	12,730		jaad1234	Yes	
@@ -2998,7 +2998,7 @@ bqt	bamu1254	Bamukumbit			Latn	Vigorous	Stable	Emerging	0	12,000		nunm1234	Yes
 buk	buga1250	Bugawac			Latn	Educational	Stable	Emerging	0	12,000		nort2858	Yes	
 cek	east2779	Eastern Khumi Chin			Latn	Vigorous	Stable	Ascending	0	12,000		khom1240	Yes	
 cjo	ashe1273	Ashéninka Pajonal			Latn	Threatened	Stable	Ascending	0	12,000		ashe1274	Yes	
-cse	czec1253	Czech Sign Language			Zxxx	Developing	Stable	Emerging	0	12,000		nucl1839	Yes	
+cse	czec1253	Czech Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	12,000		nucl1839	Yes	
 cua	cuaa1241	Cua			Latn	Threatened	Endangered	Emerging	0	12,000		bahn1264	Yes	
 doa	domm1246	Dom			Latn	Developing	Stable	Still	0	12,000		kuma1279	Yes	
 epi	epie1238	Epie			Latn	Vigorous	Stable	Still	0	12,000		delt1252	Yes	
@@ -3138,8 +3138,8 @@ kyf	kouy1238	Kouya			Latn	Developing	Stable	Ascending	0	10,100		east2416	Yes
 ncb	cent1990	Central Nicobarese			Latn	Developing	Stable	Emerging	0	10,100		cent2305	Yes	
 aax	mand1444	Mandobo Atas			Latn	Vigorous	Endangered	Still	0	10,000		mand1473	Yes	
 adb	adab1235	Adabe	Adabe		Latn	Vigorous	Stable	Still	0	10,000		book1242	Yes	
-aed	arge1236	Argentine Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
-aen	arme1259	Armenian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		auxi1235	Yes	
+aed	arge1236	Argentine Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
+aen	arme1259	Armenian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		auxi1235	Yes	
 aia	aros1241	Arosi			Latn	Developing	Institutional	Ascending	0	10,000		sanc1243	Yes	
 alk	alak1253	Alak			Laoo	Vigorous	Stable	Still	0	10,000		west2399	Yes	
 aot	aton1241	A'tong			Beng	Shifting	Endangered	Still	0	10,000		koch1249	Yes	
@@ -3155,15 +3155,15 @@ bhs	buwa1243	Buwal			Latn	Vigorous	Stable	Ascending	0	10,000		buwa1244	Yes
 bkk	brok1247	Brokskat			Tibt	Vigorous	Endangered	Still	0	10,000		shin1270	Yes	
 bma	lame1257	Lame			Latn	Vigorous	Stable	Still	0	10,000		nige1254	Yes	
 bmu	buru1306	Somba-Siawari			Latn	Educational	Stable	Emerging	0	10,000		koso1246	Yes	
-bog	bama1249	Bamako Sign Language			Zxxx	Developing	Stable	Still	0	10,000		deaf1237	Yes	
+bog	bama1249	Bamako Sign Language		Sign	Zxxx	Developing	Stable	Still	0	10,000		deaf1237	Yes	
 bpx	paly1238	Palya Bareli			Deva	Vigorous	Stable	Emerging	0	10,000		rath1244	Yes	
 bqh	baim1244	Baima				Threatened	Endangered	Still	0	10,000		east2771	Yes	
-bqn	bulg1240	Bulgarian Sign Language	Български жестомимичен език		Zxxx	Vigorous	Stable	Emerging	0	10,000		cent2306	Yes	
+bqn	bulg1240	Bulgarian Sign Language	Български жестомимичен език	Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		cent2306	Yes	
 brr	bira1254	Birao			Latn	Vigorous	Stable	Still	0	10,000		sout2854	Yes	
 bui	bong1284	Bongili			Latn	Developing	Stable	Still	0	10,000		moki1244	Yes	
 bvc	bael1237	Baelelea			Latn	Vigorous	Stable	Still	0	10,000		nort3284	Yes	
 bvd	baeg1237	Baeggu			Latn	Vigorous	Stable	Emerging	0	10,000		nort3284	Yes	
-bvl	boli1236	Bolivian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		west2886	Yes	
+bvl	boli1236	Bolivian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		west2886	Yes	
 bvw	boga1251	Boga			Latn	Vigorous	Stable	Still	0	10,000		east2649	Yes	
 bvy	bayb1234	Baybayanon			Latn	Vigorous	Stable	Emerging	0	10,000		sama1315	Yes	
 bwz	bwis1242	Bwisi			Latn	Vigorous	Stable	Emerging	0	10,000		lumb1252	Yes	
@@ -3174,7 +3174,7 @@ ckm	chak1265	Chakavian			Latn		Endangered	Still	0	10,000		sout1528	Yes
 ckq	kaja1254	Kajakse			Latn	Vigorous	Stable	Emerging	0	10,000		mubi1247	Yes	
 cmi	embe1262	Emberá-Chamí			Latn	Developing	Stable	Ascending	0	10,000		uppe1440	Yes	
 cnr	mont1282	Montenegrin	crnogorski				Institutional	Ascending	0	10,000	hbs	east2821	Yes, with caveat	Some countries only group this as "Serbo-Croatian" and the member languages are largely intelligible but for political reasons they are separated. Try to categorize these separately if possible
-csf	cuba1235	Cuba Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
+csf	cuba1235	Cuba Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
 dbj	idaa1241	Ida'an			Latn	Vigorous	Endangered	Emerging	0	10,000		nort3172	Yes	
 deg	dege1246	Degema			Latn	Vigorous	Stable	Still	0	10,000		dege1249	Yes	
 deq	dend1242	Dendi (Central African Republic)			Latn	Vigorous	Stable	Still	0	10,000		nucl1737	Yes	
@@ -3183,7 +3183,7 @@ dgu	dega1238	Degaru				Vigorous			0	10,000		book1242	Probably not	Declared Non-e
 dkg	vagh1248	Kadung			Latn		Stable	Still	0	10,000		vagh1250	Yes	
 dma	duma1253	Duma			Latn	Vigorous	Stable	Still	0	10,000		ndja1235	Yes	
 dmx	dema1235	Dema			Latn	Vigorous	Endangered	Still	0	10,000		unun9914	Yes	
-doq	domi1236	Dominican Sign Language			Zxxx	Developing	Stable	Still	0	10,000		amer1258	Yes	
+doq	domi1236	Dominican Sign Language		Sign	Zxxx	Developing	Stable	Still	0	10,000		amer1258	Yes	
 drt	dren1238	Drents			Latn	Developing	Stable	Emerging	0	10,000		west2356	Yes	
 dwk	dawi1234	Dawik Kui			Orya		Stable	Emerging	0	10,000		pend1244	Yes	
 dwz	dhan1265	Dewas Rai			Deva		Endangered	Still	0	10,000		kusw1234	Yes	
@@ -3201,14 +3201,14 @@ gha	ghad1239	Ghadamès			Arab	Threatened	Endangered	Emerging	0	10,000		berb1260	
 gho	ghom1257	Ghomara			Tfng	Vigorous	Endangered	Emerging	0	10,000		nort3248	Yes	
 ghr	gher1238	Ghera			Arab	Vigorous	Stable	Still	0	10,000		gher1240	Yes	
 gii	giri1245	Girirra					Endangered	Still	0	10,000		east2653	Yes	
-gus	guin1250	Guinean Sign Language			Zxxx	Developing	Stable	Still	0	10,000		asli1244	Yes	
+gus	guin1250	Guinean Sign Language		Sign	Zxxx	Developing	Stable	Still	0	10,000		asli1244	Yes	
 hbn	heib1243	Heiban			Latn	Shifting	Endangered	Emerging	0	10,000		eban1242	Yes	
 hca	anda1280	Andaman Creole Hindi				Vigorous	Stable	Emerging	0	10,000		hind1270	Yes	
 hkh	khah1234	Khah			Arab		Stable	Still	0	10,000		kash1285	Yes	
 hma	sout1556	Southern Mashan Miao			Latn	Vigorous	Endangered	Emerging	0	10,000	hmn	mash1238	Possibly	But probably want to use macrolanguage
 hng	hung1280	Hungu			Latn		Endangered	Still	0	10,000		sout3354	Yes	
-hps	hawa1235	Hawai'i Pidgin Sign Language	Hoailona ʻŌlelo o Hawaiʻi		Zxxx	Nearly Extinct	Endangered	Still	0	10,000		deaf1237	Yes	
-hsl	haus1246	Hausa Sign Language	Maganar hannu		Zxxx	Vigorous	Stable	Still	0	10,000		deaf1237	Yes	
+hps	hawa1235	Hawai'i Pidgin Sign Language	Hoailona ʻŌlelo o Hawaiʻi	Sign	Zxxx	Nearly Extinct	Endangered	Still	0	10,000		deaf1237	Yes	
+hsl	haus1246	Hausa Sign Language	Maganar hannu	Sign	Zxxx	Vigorous	Stable	Still	0	10,000		deaf1237	Yes	
 ibe	akpe1248	Akpes			Latn	Vigorous	Stable	Still	0	10,000		akpe1249	Yes	
 ibn	ibin1241	Ibino			Latn	Vigorous	Stable	Still	0	10,000		ibin1242	Yes	
 ifm	teke1274	Teke-Fuumu			Latn	Vigorous	Endangered	Still	0	10,000		inte1264	Yes	
@@ -3217,16 +3217,16 @@ imt	imot1234	Imotong			Latn		Stable	Still	0	10,000		lang1322	Yes
 ino	inok1238	Inoke-Yate			Latn	Developing	Stable	Emerging	0	10,000		kama1374	Yes	
 irr	irrr1240	Ir				Vigorous	Stable	Still	0	10,000		book1242	Yes	
 iry	iray1237	Iraya			Latn	Developing	Stable	Emerging	0	10,000		nort2873	Yes	
-ise	ital1275	Italian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		ital1288	Yes	
-isg	iris1235	Irish Sign Language	Teanga Chomharthaíochta na hÉireann		Zxxx	Vigorous	Stable	Emerging	0	10,000		lsfi1234	Yes	
-isr	isra1236	Israeli Sign Language			Zxxx	Developing	Stable	Emerging	0	10,000		dgsi1234	Yes	
+ise	ital1275	Italian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		ital1288	Yes	
+isg	iris1235	Irish Sign Language	Teanga Chomharthaíochta na hÉireann	Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		lsfi1234	Yes	
+isr	isra1236	Israeli Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	10,000		dgsi1234	Yes	
 iyx	yaka1274	Yaka (Congo)			Latn	Vigorous	Stable	Emerging	0	10,000		laal1244	Yes	
 jaq	yaqa1246	Yaqay			Latn	Threatened	Endangered	Still	0	10,000		yaqa1245	Yes	
 jbm	biji1246	Bijim			Latn		Stable	Still	0	10,000		vagh1250	Yes	
 jim	jimi1254	Jimi (Cameroon)			Latn	Developing	Stable	Emerging	0	10,000		gude1248	Yes	
 jiu	youl1235	Youle Jinuo			Latn	Threatened	Endangered	Still	0	10,000		jino1236	Yes	
 job	joba1238	Joba			Latn	Vigorous	Endangered	Emerging	0	10,000		fuli1242	Yes	
-jos	jord1238	Jordanian Sign Language	لغة الإشارة الأردنية		Zxxx	Developing	Stable	Still	0	10,000		leva1240	Yes	
+jos	jord1238	Jordanian Sign Language	لغة الإشارة الأردنية	Sign	Zxxx	Developing	Stable	Still	0	10,000		leva1240	Yes	
 kbx	apma1241	Ap Ma			Latn	Developing	Stable	Emerging	0	10,000		east2864	Yes	
 kci	kama1358	Kamantan			Latn	Vigorous	Stable	Still	0	10,000		gyon1234	Yes	
 kem	kema1243	Kemak	bahasa Kemak		Latn	Vigorous	Stable	Emerging	0	10,000		west2547	Yes	
@@ -3239,7 +3239,7 @@ kpw	kobo1249	Kobon			Latn	Educational	Stable	Emerging	0	10,000		kala1404	Yes
 ksq	kwaa1269	Kwaami			Latn	Vigorous	Stable	Still	0	10,000		kwam1256	Yes	
 kth	kara1484	Karanga			Latn	Threatened	Endangered	Emerging	0	10,000		nucl1441	Yes	
 kvb	kubu1239	Kubu	bahasa Kubu		Latn	Threatened	Endangered	Still	0	10,000	msa	cent2391	Possibly	But probably want to use macrolanguage
-kvk	kore1273	Korean Sign Language	한국 수화 언어		Zxxx	Educational	Institutional	Emerging	0	10,000		jsli1234	Yes	
+kvk	kore1273	Korean Sign Language	한국 수화 언어	Sign	Zxxx	Educational	Institutional	Emerging	0	10,000		jsli1234	Yes	
 kwj	kwan1278	Kwanga			Latn	Developing	Stable	Emerging	0	10,000		kwan1286	Yes	
 kwu	kwak1266	Kwakum			Latn	Vigorous	Stable	Emerging	0	10,000		maka1327	Yes	
 kxf	manu1255	Manumanaw Karen			Mymr	Vigorous	Stable	Ascending	0	10,000		kaya1316	Yes	
@@ -3260,12 +3260,12 @@ lmk	lamk1238	Lamkang			Latn	Developing	Stable	Ascending	0	10,000		anal1240	Yes
 loo	lomb1260	Lombo			Latn	Vigorous	Stable	Emerging	0	10,000		kele1265	Yes	
 lou	loui1240	Louisiana Creole French	Kouri-Vini		Latn	Shifting	Endangered	Ascending	0	10,000		circ1240	Yes	
 lqr	logi1239	Logir			Latn		Stable	Still	0	10,000		lang1322	Yes	
-lsb	buru1325	Burundian Sign Language			Zxxx		Stable	Emerging	0	10,000		amer1248	Yes	
-lso	laos1235	Laos Sign Language			Zxxx	Vigorous	Stable	Still	0	10,000		book1242	Yes	
+lsb	buru1325	Burundian Sign Language		Sign	Zxxx		Stable	Emerging	0	10,000		amer1248	Yes	
+lso	laos1235	Laos Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	10,000		book1242	Yes	
 lth	labw1238	Thur			Latn		Stable	Still	0	10,000		acol1236	Yes	
 lur	laur1249	Laura	bahasa Laura		Latn	Vigorous	Stable	Still	0	10,000		weje1237	Yes	
 lvl	lwel1234	Lwel			Latn		Stable	Still	0	10,000		lwer1234	Yes	
-lws	mala1549	Malawian Sign Language			Zxxx		Stable	Emerging	0	10,000		deaf1237	Yes	
+lws	mala1549	Malawian Sign Language		Sign	Zxxx		Stable	Emerging	0	10,000		deaf1237	Yes	
 mbf	baba1267	Baba Malay			Latn	Shifting	Endangered	Emerging	0	10,000		vehi1234	Yes	
 mcq	esee1247	Ese			Latn	Developing	Stable	Emerging	0	10,000		bara1376	Yes	
 meq	mere1246	Merey			Latn	Developing	Stable	Ascending	0	10,000		dugw1240	Yes	
@@ -3276,11 +3276,11 @@ mjb	makl1245	Makalero			Latn		Stable	Emerging	0	10,000		maka1316	Yes
 mlw	molo1266	Moloko			Latn	Developing	Stable	Ascending	0	10,000		toko1243	Yes	
 mps	dadi1250	Dadibi			Latn	Developing	Stable	Emerging	0	10,000		tebe1251	Yes	
 mqu	mand1425	Mandari			Latn	Developing	Stable	Emerging	0	10,000		bari1283	Yes	
-msr	mong1264	Mongolian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		nucl1824	Yes	
+msr	mong1264	Mongolian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		nucl1824	Yes	
 mvd	mamb1305	Mamboru	bahasa Mamboru		Latn	Vigorous	Stable	Still	0	10,000		kamb1320	Yes	
 mvm		Muya				Threatened			0	10,000			Probably not	Split into separate language codes
 mvo	maro1244	Marovo			Latn	Wider Communication	Stable	Emerging	0	10,000		maro1247	Yes	
-mzy	moza1235	Mozambican Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
+mzy	moza1235	Mozambican Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
 ncq	nort3270	Northern Katang			Laoo		Stable	Emerging	0	10,000		kata1264	Yes	
 ndx	ndug1245	Nduga			Latn	Developing	Endangered	Emerging	0	10,000		ngal1299	Yes	
 ngw	ngwa1251	Ngwaba			Latn	Moribund	Endangered	Still	0	10,000		bium1271	Yes	
@@ -3289,7 +3289,7 @@ nkv	nyik1246	Nyika (Malawi and Zambia)			Latn	Vigorous	Stable	Still	0	10,000		ce
 nml	ndem1249	Ndemli			Latn	Vigorous	Stable	Emerging	0	10,000		narr1282	Yes	
 nnn	nget1241	Ngete			Latn	Vigorous	Stable	Emerging	0	10,000		hede1234	Yes	
 nnz	ndan1241	Nda'nda'			Latn	Developing	Stable	Emerging	0	10,000		east2862	Yes	
-nsi	nige1240	Nigerian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		amer1258	Yes	
+nsi	nige1240	Nigerian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		amer1258	Yes	
 nyr	nyih1239	Nyiha (Malawi)			Latn	Vigorous	Endangered	Still	0	10,000		mboz1234	Yes	
 ofu	efut1242	Efutop			Latn	Vigorous	Stable	Emerging	0	10,000		ndee1247	Yes	
 ogg	ogbo1242	Ogbogolo			Latn	Vigorous	Stable	Still	0	10,000		uncl1542	Yes	
@@ -3310,30 +3310,30 @@ phl	phal1254	Phalura	پالُولہ		Arab	Vigorous	Stable	Ascending	0	10,000		pa
 phm	phim1238	Phimbi			Latn	Vigorous	Endangered	Emerging	0	10,000		sena1270	Yes	
 ple	palu1252	Palu'e	bahasa Palue		Latn	Vigorous	Endangered	Emerging	0	10,000		ngad1265	Yes	
 pnd	mpin1234	Mpinda			Latn		Endangered	Still	0	10,000		mbun1247	Yes	
-prl	peru1235	Peruvian Sign Language			Zxxx	Developing	Stable	Emerging	0	10,000		peru1236	Yes	
-psc	pers1244	Persian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
+prl	peru1235	Peruvian Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	10,000		peru1236	Yes	
+psc	pers1244	Persian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
 pze	polc1243	Pesse			Latn		Stable	Still	0	10,000		polc1245	Yes	
 qvo	napo1242	Napo Lowland Quechua			Latn	Developing	Stable	Ascending	0	10,000	colo1257	orie1242	Possibly	But probably want to use macrolanguage
 qvz	nort2973	Northern Pastaza Quichua			Latn	Threatened	Endangered	Ascending	0	10,000	colo1257	past1249	Possibly	But probably want to use macrolanguage
 qxa	chiq1249	Chiquián Ancash Quechua			Latn	Shifting	Endangered	Emerging	0	10,000	que	apam1237	Possibly	But probably want to use macrolanguage
 qxt	sant1433	Santa Ana de Tusi Pasco Quechua			Latn	Vigorous	Endangered	Emerging	0	10,000	que	yana1272	Possibly	But probably want to use macrolanguage
-rms	roma1324	Romanian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		cent2306	Yes	
+rms	roma1324	Romanian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		cent2306	Yes	
 rsk	pann1240	Ruthenian	Руски	Spoken & Written	Cyrl		Institutional	Emerging	0	10,000		rusy1239	Yes	
-rsn	rwan1246	Rwandan Sign Language			Zxxx		Stable	Emerging	0	10,000		unun9986	Yes	
+rsn	rwan1246	Rwandan Sign Language		Sign	Zxxx		Stable	Emerging	0	10,000		unun9986	Yes	
 ryn	nort2935	Northern Amami-Oshima				Shifting	Endangered	Emerging	0	10,000		oshi1235	Yes	
 sct	sout3251	Southern Katang			Laoo		Stable	Emerging	0	10,000		kata1264	Yes	
-sdl	saud1238	Saudi Arabian Sign Language			Zxxx	Vigorous	Stable	Ascending	0	10,000		arab1398	Yes	
+sdl	saud1238	Saudi Arabian Sign Language		Sign	Zxxx	Vigorous	Stable	Ascending	0	10,000		arab1398	Yes	
 sdq	nucl1557	Semandang	bahasa Kualan-Semandang		Latn		Stable	Still	0	10,000		sema1269	Yes	
 sea	sema1266	Semai			Latn	Developing	Institutional	Ascending	0	10,000		seno1278	Yes	
 sgi	suga1248	Suga			Latn	Vigorous	Endangered	Emerging	0	10,000		niza1234	Yes	
 sgs	samo1265	Samogitian	Žemaitiu ruoda	Spoken & Written	Latn		Stable	Ascending	0	10,000		lith1251	Yes	
-sgx	sier1246	Sierra Leone Sign Language			Zxxx	Vigorous	Stable	Still	0	10,000		asli1244	Yes	
+sgx	sier1246	Sierra Leone Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	10,000		asli1244	Yes	
 smv	samv1238	Samvedi				Vigorous	Stable	Still	0	10,000		mode1268	Yes	
 soy	miyo1238	Miyobe			Latn	Developing	Endangered	Ascending	0	10,000		uncl1526	Yes	
 sqo	sork1239	Sorkhei			Arab	Vigorous	Stable	Still	0	10,000		komi1276	Yes	
 ssq	cent2074	So'a	bahasa So'a		Latn	Vigorous	Stable	Still	0	10,000		ngad1261	Yes	
 sty	sibe1250	Siberian Tatar			Cyrl		Stable	Ascending	0	10,000		nort2696	Yes	
-svk	slov1263	Slovakian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		nucl1839	Yes	
+svk	slov1263	Slovakian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		nucl1839	Yes	
 szb	ngal1298	Ngalum	bahasa Ngalum		Latn	Developing	Stable	Emerging	0	10,000		okkk1242	Yes	
 tal	tall1250	Tal			Latn	Vigorous	Stable	Emerging	0	10,000		tali1264	Yes	
 tbk	cala1258	Calamian Tagbanwa			Tagb	Developing	Stable	Ascending	0	10,000		kala1389	Yes	
@@ -3342,14 +3342,14 @@ thc	taih1245	Tai Hang Tong				Vigorous			0	10,000	tpo	book1242	No	ISO merged thi
 tja	taju1238	Tajuasohn			Latn	Vigorous	Stable	Emerging	0	10,000		klao1242	Yes	
 tpo	taip1250	Tai Pao				Vigorous	Stable	Still	0	10,000		taim1254	Yes	
 tsl	tsun1242	Ts'ün-Lao			Latn	Vigorous	Stable	Still	0	10,000		wenm1239	Yes	
-tsm	turk1288	Turkish Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
+tsm	turk1288	Turkish Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
 tsr	akei1237	Akei			Latn	Vigorous	Stable	Still	0	10,000		west2845	Yes	
 ttb	gaaa1245	Gaa			Latn	Vigorous	Stable	Still	0	10,000		tiba1234	Yes	
 twd	twen1241	Twents			Latn	Developing	Stable	Emerging	0	10,000		west2356	Yes	
 txa	tomb1244	Tombonuo			Latn	Threatened	Endangered	Emerging	0	10,000		pait1248	Yes	
 txx	tata1257	Tatana			Latn	Threatened	Endangered	Still	0	10,000		grea1294	Yes	
 uda	udaa1238	Uda			Latn	Vigorous	Stable	Still	0	10,000		enwa1244	Yes	
-ugn	ugan1238	Ugandan Sign Language			Zxxx	Developing	Stable	Emerging	0	10,000		asli1244	Yes	
+ugn	ugan1238	Ugandan Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	10,000		asli1244	Yes	
 ukv	kuku1285	Kuku			Latn		Endangered	Still	0	10,000		nucl1796	Yes	
 ulb	uluk1257	Ulukwumi			Latn	Vigorous	Stable	Still	0	10,000		nucl1747	Yes	
 usk	usag1244	Usaghade			Latn	Threatened	Endangered	Emerging	0	10,000		nucl1838	Yes	
@@ -3357,7 +3357,7 @@ utr	etul1245	Etulo			Latn	Vigorous	Stable	Emerging	0	10,000		etul1246	Yes
 vem	vemg1240	Vemgo-Mabas			Latn	Vigorous	Stable	Emerging	0	10,000		lama1287	Yes	
 vin	vinz1238	Vinza			Latn	Vigorous			0	10,000		rwan1241	Yes	
 vkz	koro1324	Koro Zuba			Latn		Stable	Still	0	10,000		nupo1239	Yes	
-vsl	vene1237	Venezuelan Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		span1269	Yes	
+vsl	vene1237	Venezuelan Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		span1269	Yes	
 wkb	kumb1267	Kumbaran				Threatened	Endangered	Still	0	10,000		book1242	Yes	
 wle	wola1253	Wolane			Ethi	Vigorous	Stable	Emerging	0	10,000		silt1239	Yes	
 wmg	west2417	Western Minyag					Endangered	Still	0	10,000		muya1239	Yes	
@@ -3379,12 +3379,12 @@ ypn	anip1235	Ani Phowa					Stable	Still	0	10,000		anil1235	Yes
 yva	nucl1454	Yawa	bahasa Yawa		Latn	Developing	Stable	Emerging	0	10,000		yawa1259	Yes	
 zcd	lasd1234	Las Delicias Zapotec					Stable	Still	0	10,000	zap	rinc1236	Possibly	Will be hard to find specific data, may be better to use macrolanguage
 zhi	zhir1238	Zhire			Latn	Vigorous	Stable	Still	0	10,000		zhir1241	Yes	
-zib	zimb1247	Zimbabwe Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
+zib	zimb1247	Zimbabwe Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10,000		deaf1237	Yes	
 zla	zula1235	Zula			Latn		Stable	Still	0	10,000		luba1254	Yes	
 zmx	bomi1238	Bomitaba			Latn	Threatened	Endangered	Still	0	10,000		impf1234	Yes	
 zoc	copa1236	Copainalá Zoque			Latn	Vigorous	Stable	Emerging	0	10,000		chia1265	Yes	
 zpo	amat1238	Amatlán Zapotec			Latn	Developing	Stable	Ascending	0	10,000	zap	amat1239	Possibly	Will be hard to find specific data, may be better to use macrolanguage
-zsl	zamb1239	Zambian Sign Language			Zxxx	Educational	Stable	Emerging	0	10,000		deaf1237	Yes	
+zsl	zamb1239	Zambian Sign Language		Sign	Zxxx	Educational	Stable	Emerging	0	10,000		deaf1237	Yes	
 xte	kete1254	Ketengban	bahasa Ketengban		Latn	Developing	Stable	Emerging	0	9,970		east2504	Yes	
 quv	saca1238	Sacapulteco			Latn	Shifting	Endangered	Emerging	0	9,949		core1251	Yes	
 kxb	krob1245	Krobu			Latn	Vigorous	Stable	Still	0	9,920		tano1248	Yes	
@@ -3410,7 +3410,7 @@ nye	nyen1257	Nyengo			Latn	Vigorous	Stable	Still	0	9,380		sima1262	Yes
 bku	buhi1245	Buhid			Latn	Developing	Stable	Ascending	0	9,370		buhi1244	Yes	
 aws	sout2941	South Awyu	bahasa Awyu selatan		Latn	Threatened	Endangered	Still	0	9,340		awyu1264	Yes	
 vaa	vaag1238	Vaagri Booli			Taml	Vigorous	Endangered	Emerging	0	9,300		bhil1254	Yes	
-pso	poli1259	Polish Sign Language			Zxxx	Developing	Stable	Emerging	0	9,267		cent2306	Yes	
+pso	poli1259	Polish Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	9,267		cent2306	Yes	
 kvu	yinb1236	Yinbaw Karen				Vigorous	Stable	Emerging	0	9,240		nort2703	Yes	
 kca	khan1273	Khanty	ханты		Cyrl	Threatened	Endangered	Ascending	0	9,230		nort3264	Yes	
 keb	kele1257	Kélé			Latn	Vigorous	Endangered	Still	0	9,230		akel1234	Yes	
@@ -3433,7 +3433,7 @@ dgz	daga1275	Daga			Latn	Developing	Stable	Emerging	0	9,000		sout3381	Yes
 dir	diri1253	Dirim			Latn	Vigorous	Endangered	Still	0	9,000		diri1260	Yes	
 gdi	gund1247	Gundi			Latn	Vigorous	Stable	Still	0	9,000		baka1271	Yes	
 gmx	mago1246	Magoma			Latn	Threatened	Stable	Emerging	0	9,000		king1258	Yes	
-hks	hong1241	Hong Kong Sign Language			Zxxx	Vigorous	Stable	Emerging	0	9,000		nucl1761	Yes	
+hks	hong1241	Hong Kong Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	9,000		nucl1761	Yes	
 iti	inla1260	Inlaod Itneg			Latn	Threatened	Endangered	Still	0	9,000		itne1252	Yes	
 lbc	lakk1238	Lakkia				Vigorous	Stable	Emerging	0	9,000		lakk1237	Yes	
 nmg	kwas1243	Kwasio	Kwasio		Latn	Developing	Stable	Ascending	0	9,000		kwas1245	Yes	
@@ -3521,7 +3521,7 @@ gbj	bodo1267	Bodo Gadaba			Orya	Threatened	Endangered	Emerging	0	8,000		guto1244
 gbz	zoro1242	Zoroastrian Dari	دَرِي		Arab	Shifting	Endangered	Still	0	8,000		yazd1241	Yes	
 gmm	gbay1281	Gbaya-Mbodomo			Latn	Vigorous	Stable	Ascending	0	8,000	gba	mbod1237	Possibly	But probably want to use macrolanguage
 ify	kele1259	Keley-I Kallahan			Latn	Educational	Stable	Ascending	0	8,000		kall1244	Yes	
-inl	indo1291	Indonesian Sign Language	Bahasa Isyarat Indonesia		Zxxx	Vigorous	Stable	Emerging	0	8,000		indo1333	Yes	
+inl	indo1291	Indonesian Sign Language	Bahasa Isyarat Indonesia	Sign	Zxxx	Vigorous	Stable	Emerging	0	8,000		indo1333	Yes	
 kcp	kang1288	Kanga			Latn	Vigorous	Endangered	Emerging	0	8,000		katc1251	Yes	
 kgq	kamo1255	Kamoro	bahasa Kamoro		Latn	Vigorous	Endangered	Still	0	8,000		asma1256	Yes	
 kkf	kala1376	Kalaktang Monpa			Tibt	Vigorous	Stable	Still	0	8,000		tsha1247	Yes	
@@ -3546,7 +3546,7 @@ opm	oksa1245	Oksapmin	nuxule meŋ		Latn	Developing	Stable	Emerging	0	8,000		okok
 plr	pala1342	Palaka Senoufo			Latn	Vigorous	Stable	Still	0	8,000		sout3153	Yes	
 pqa	paaa1242	Pa'a			Latn	Vigorous	Endangered	Still	0	8,000		west2998	Yes	
 prn	pras1239	Prasuni				Vigorous	Stable	Still	0	8,000		nuri1243	Yes	
-psr	port1277	Portuguese Sign Language	língua gestual portuguesa		Zxxx	Vigorous	Stable	Emerging	0	8,000		swed1257	Yes	
+psr	port1277	Portuguese Sign Language	língua gestual portuguesa	Sign	Zxxx	Vigorous	Stable	Emerging	0	8,000		swed1257	Yes	
 rnl	rang1267	Ranglong			Latn	Developing	Endangered	Emerging	0	8,000		oldk1252	Yes	
 sak	sake1247	Sake			Latn	Moribund	Endangered	Still	0	8,000		sake1249	Yes	
 slu	sela1259	Selaru			Latn	Threatened	Endangered	Ascending	0	8,000		sout2890	Yes	
@@ -3583,12 +3583,12 @@ awu	cent2118	Central Awyu			Latn	Developing	Endangered	Still	0	7,500		mapp1234	Y
 bqg	bago1245	Bago-Kusuntu			Latn	Vigorous	Stable	Emerging	0	7,500		bago1247	Yes	
 cae	leha1242	Lehar			Latn	Vigorous	Stable	Emerging	0	7,500		noon1244	Yes	
 enl	nort2971	Enlhet Norte			Latn		Stable	Still	0	7,500		leng1262	Yes	
-esn	salv1237	Salvadoran Sign Language			Zxxx	Educational	Institutional	Emerging	0	7,500		deaf1237	Yes	
+esn	salv1237	Salvadoran Sign Language		Sign	Zxxx	Educational	Institutional	Emerging	0	7,500		deaf1237	Yes	
 fap	palo1243	Palor			Latn	Threatened	Stable	Emerging	0	7,500		palo1244	Yes	
 faz	nort2640	Northwestern Fars			Arab	Shifting			0	7,500		book1242	Yes	
 itb	bino1237	Binongan Itneg			Latn	Vigorous	Endangered	Emerging	0	7,500		itne1252	Yes	
 jje	jeju1234	Jejueo	제주말		Hang		Endangered	Emerging	0	7,500		kore1284	Yes	
-jls	jama1263	Jamaican Sign Language			Zxxx	Developing	Stable	Emerging	0	7,500		amer1258	Yes	
+jls	jama1263	Jamaican Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	7,500		amer1258	Yes	
 kgf	kube1244	Kube			Latn	Developing	Stable	Emerging	0	7,500		pind1245	Yes	
 kif	east2354	Eastern Parbate Kham			Deva	Threatened	Endangered	Emerging	0	7,500		parb1234	Yes	
 lgq	logb1245	Logba			Latn	Vigorous	Stable	Emerging	0	7,500		nato1234	Yes	
@@ -3621,7 +3621,7 @@ dwa	diri1259	Diri			Latn	Vigorous	Endangered	Still	0	7,200		west2712	Yes
 tmp	taim1250	Tai Mène				Vigorous			0	7,200	tyj	taid1248	No	ISO merged this into tyj
 wos	hang1263	Hanga Hundi			Latn	Educational	Stable	Emerging	0	7,200		ambu1246	Yes	
 noz	nayi1243	Nayi				Shifting	Endangered	Still	0	7,188		dizo1235	Yes	
-asf	aust1271	Australian Sign Language			Zxxx	Developing	Stable	Emerging	0	7,150		aust1310	Yes	
+asf	aust1271	Australian Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	7,150		aust1310	Yes	
 kxj	kulf1238	Kulfa			Latn	Vigorous	Stable	Emerging	0	7,110		koul1239	Yes	
 ciw	chip1241	Chippewa	Anishinaabemowin		Latn	Shifting	Endangered	Ascending	0	7,035	oji	cent2252	Possibly	But probably want to use macrolanguage
 bsg	bash1263	Bashkardi				Shifting	Endangered	Still	0	7,030		mode1259	Yes	
@@ -3671,7 +3671,7 @@ skj	seke1240	Seke (Nepal)			Deva	Vigorous	Stable	Emerging	0	7,000		tama1367	Yes
 spl	sele1250	Selepet			Latn	Developing	Stable	Emerging	0	7,000		sele1251	Yes	
 tex	tenn1246	Tennet			Latn	Educational	Stable	Ascending	0	7,000		didi1256	Yes	
 ttd	taua1242	Tauade			Latn	Developing	Stable	Emerging	0	7,000			Yes	
-ugy	urug1238	Uruguayan Sign Language			Zxxx	Developing	Stable	Emerging	0	7,000		deaf1237	Yes	
+ugy	urug1238	Uruguayan Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	7,000		deaf1237	Yes	
 wha	manu1258	Manusela			Latn	Vigorous	Endangered	Still	0	7,000		manu1263	Yes	
 zpm	mixt1426	Mixtepec Zapotec			Latn	Developing	Stable	Emerging	0	7,000	zap	mixt1428	Possibly	Will be hard to find specific data, may be better to use macrolanguage
 nda	ndas1238	Ndasa			Latn	Vigorous	Stable	Still	0	6,990		ndas1240	Yes	
@@ -3742,7 +3742,7 @@ mav	sate1243	Sateré-Mawé			Latn	Educational	Stable	Ascending	0	6,220		mawe1252
 nac	nara1264	Narak			Latn	Developing	Stable	Emerging	0	6,220		kand1306	Yes	
 cwt	kuwa1246	Kuwaataay			Latn	Developing	Stable	Ascending	0	6,210		kwat1245	Yes	
 ntp	nort2959	Northern Tepehuan			Latn	Developing	Stable	Ascending	0	6,200		tepe1281	Yes	
-fcs	queb1245	Quebec Sign Language	langue des signes québécoise		Zxxx	Vigorous	Stable	Emerging	0	6,195		asli1244	Yes	
+fcs	queb1245	Quebec Sign Language	langue des signes québécoise	Sign	Zxxx	Vigorous	Stable	Emerging	0	6,195		asli1244	Yes	
 ebk	east2881	Eastern Bontok			Latn	Developing	Stable	Emerging	0	6,170	bnc	fina1242	Possibly	But probably want to use macrolanguage
 mie	ocot1243	Ocotepec Mixtec			Latn	Vigorous	Stable	Emerging	0	6,170		west2824	Yes	
 nxr	ning1274	Ninggerum	bahasa Kasiwa		Latn	Developing	Stable	Emerging	0	6,150		lowl1259	Yes	
@@ -3775,7 +3775,7 @@ gdg	gada1258	Ga'dang			Latn	Developing	Stable	Emerging	0	6,000		caga1242	Yes
 gji		Geji				Vigorous			0	6,000			Probably not	Split into separate language codes
 gna	kaan1246	Kaansa			Latn	Developing	Stable	Ascending	0	6,000		gand1254	Yes	
 gqi	guiq1238	Guiqiong				Threatened	Endangered	Still	0	6,000		naqi1236	Yes	
-gse	ghan1235	Ghanaian Sign Language			Zxxx	Developing	Stable	Emerging	0	6,000		amer1258	Yes	
+gse	ghan1235	Ghanaian Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	6,000		amer1258	Yes	
 gun	mbya1239	Mbyá Guaraní			Latn	Educational	Stable	Ascending	0	6,000	grn	tupi1282	Possibly	But probably want to use macrolanguage
 hyw	homs1234	Armenian, Western	արեւմտահայերէն		Armn		Stable	Ascending	0	6,000		east2768	Yes	
 kdf	mamu1254	Mamusi			Latn	Vigorous	Stable	Still	0	6,000		mamu1256	Yes	
@@ -3802,7 +3802,7 @@ put	puto1237	Putoh			Latn	Threatened	Endangered	Still	0	6,000		book1242	Yes
 qxc	chin1483	Chincha Quechua			Latn	Shifting	Endangered	Emerging	0	6,000	que	huan1255	Possibly	But probably want to use macrolanguage
 rao	raoo1244	Rao			Latn	Developing	Stable	Emerging	0	6,000		ramu1234	Yes	
 rjg	rajo1237	Rajong			Latn	Vigorous	Stable	Still	0	6,000		waer1238	Yes	
-sgg	swis1240	Swiss-German Sign Language	Deutschschweizer Gebärdensprache		Zxxx	Developing	Stable	Still	0	6,000		dgsi1234	Yes	
+sgg	swis1240	Swiss-German Sign Language	Deutschschweizer Gebärdensprache	Sign	Zxxx	Developing	Stable	Still	0	6,000		dgsi1234	Yes	
 sie	sima1258	Simaa			Latn	Vigorous	Stable	Emerging	0	6,000		sima1262	Yes	
 sjb	saja1241	Sajau Basap			Latn	Vigorous	Endangered	Still	0	6,000		puna1281	Yes	
 skq	sini1242	Sininkere			Latn	Threatened	Stable	Still	0	6,000		soni1258	Yes	
@@ -3813,7 +3813,7 @@ tgc	tiga1245	Tigak			Latn	Developing	Endangered	Emerging	0	6,000		tung1294	Yes
 tjo	tema1243	Temacine Tamazight			Arab	Shifting	Endangered	Emerging	0	6,000		ouar1239	Yes	
 tkz	taku1254	Takua			Latn	Vigorous	Stable	Still	0	6,000		nort3150	Yes	
 twq	tasa1240	Tasawaq	Tasawaq senni		Latn	Vigorous	Stable	Emerging	0	6,000		nort2823	Yes	
-vgt	vlaa1235	Vlaamse Gebarentaal	Vlaamse Gebarentaal		Zxxx	Developing	Stable	Emerging	0	6,000		belg1242	Yes	
+vgt	vlaa1235	Vlaamse Gebarentaal	Vlaamse Gebarentaal	Sign	Zxxx	Developing	Stable	Emerging	0	6,000		belg1242	Yes	
 viv	idun1242	Iduna			Latn	Developing	Stable	Emerging	0	6,000		bwai1244	Yes	
 wca	yano1262	Yanomámi	Yąnomamɨ		Latn	Threatened	Stable	Still	0	6,000		yano1267	Yes	
 weo	nort2864	Wemale			Latn	Vigorous	Endangered	Still	0	6,000		thre1238	Yes	
@@ -3934,13 +3934,13 @@ dim	dime1235	Dime				Threatened	Stable	Emerging	0	5,000		sout2845	Yes
 dme	dugw1239	Dugwor			Latn	Vigorous	Stable	Emerging	0	5,000		dugw1240	Yes	
 doh	dong1293	Dong	leec Gaeml		Latn	Vigorous	Stable	Still	0	5,000		tiba1234	Yes	
 dre	dolp1239	Dolpo			Tibt	Developing	Stable	Emerging	0	5,000		dolp1238	Yes	
-dsl	dani1246	Danish Sign Language			Zxxx	Developing	Stable	Emerging	0	5,000		dani1289	Yes	
+dsl	dani1246	Danish Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	5,000		dani1289	Yes	
 duw	dusu1267	Dusun Witu	bahasa Dusun Witu		Latn	Threatened	Endangered	Still	0	5,000		sout2919	Yes	
 ebg	ebug1241	Ebughu			Latn	Vigorous	Stable	Still	0	5,000		ebug1242	Yes	
 eki	ekii1241	Eki			Latn	Vigorous	Stable	Still	0	5,000		uncl1543	Yes	
 era	erav1242	Eravallan			Taml	Vigorous	Endangered	Still	0	5,000		mala1550	Yes	
 eze	uzek1238	Uzekwe			Latn	Vigorous	Stable	Still	0	5,000		kuke1241	Yes	
-fse	finn1310	Finnish Sign Language			Zxxx	Developing	Stable	Emerging	0	5,000		finn1319	Yes	
+fse	finn1310	Finnish Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	5,000		finn1319	Yes	
 gaw	nobo1238	Nobonob			Latn	Educational	Stable	Ascending	0	5,000		garu1247	Yes	
 gdu	gudu1250	Gudu			Latn	Vigorous	Stable	Still	0	5,000		bium1271	Yes	
 gwg	mooo1239	Moo			Latn	Vigorous	Stable	Still	0	5,000		bamb1263	Yes	
@@ -4016,7 +4016,7 @@ wul	sili1249	Silimo	bahasa Silimo		Latn	Developing	Stable	Emerging	0	5,000		ngal
 xug	kuni1268	Kunigami	山原言葉			Shifting	Endangered	Emerging	0	5,000		okin1244	Yes	
 yac	pass1247	Pass Valley Yali			Latn	Developing	Endangered	Emerging	0	5,000		yali1257	Yes	
 yad	yagu1244	Yagua	Nijyamïï Nikyejaada		Latn	Threatened	Endangered	Ascending	0	5,000		peba1241	Yes	
-ygs	yoln1234	Yolŋu Sign Language			Zxxx		Endangered	Emerging	0	5,000		deaf1237	Yes	
+ygs	yoln1234	Yolŋu Sign Language		Sign	Zxxx		Endangered	Emerging	0	5,000		deaf1237	Yes	
 ykn	kuan1249	Kua-nsi					Stable	Still	0	5,000		kuan1252	Yes	
 ykt	kath1251	Kathu					Endangered	Still	0	5,000		mond1269	Yes	
 zad	cajo1238	Cajonos Zapotec			Latn	Developing	Stable	Emerging	0	5,000	zap	cajo1239	Possibly	Will be hard to find specific data, may be better to use macrolanguage
@@ -4073,7 +4073,7 @@ bbp	west2458	West Central Banda			Latn	Vigorous	Stable	Emerging	0	4,500		nucl179
 bdo	moro1281	Morom			Latn	Vigorous	Stable	Emerging	0	4,500		bayo1261	Yes	
 bty	bobo1254	Bobot			Latn	Threatened	Endangered	Still	0	4,500		east2748	Yes	
 duq	dusu1269	Dusun Malang			Latn	Threatened	Endangered	Emerging	0	4,500		grea1283	Yes	
-eso	esto1238	Estonian Sign Language			Zxxx	Developing	Stable	Emerging	0	4,500		russ1270	Yes	
+eso	esto1238	Estonian Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	4,500		russ1270	Yes	
 fai	faiw1243	Faiwol			Latn	Developing	Stable	Emerging	0	4,500		faiw1245	Yes	
 ign	igna1246	Ignaciano			Latn	Developing	Endangered	Ascending	0	4,500		moxo1234	Yes	
 klc	kolb1240	Kolbila			Latn	Developing	Stable	Emerging	0	4,500		leko1246	Yes	
@@ -4183,7 +4183,7 @@ mgj	abur1244	Abureni			Latn	Vigorous	Stable	Emerging	0	4,000		uncl1542	Yes
 mqt	mokk1243	Mok				Nearly Extinct	Stable	Still	0	4,000		sout3232	Yes	
 mwt	moke1242	Moken			Mymr	Threatened	Endangered	Still	0	4,000		moke1241	Yes	
 nrm	naro1251	Narom		Spoken & Written	Latn	Threatened	Endangered	Emerging	0	4,000		cent2273	Yes	
-nsl	norw1255	Norwegian Sign Language	norsk tegnspråk		Zxxx	Developing	Stable	Emerging	0	4,000		norw1261	Yes	
+nsl	norw1255	Norwegian Sign Language	norsk tegnspråk	Sign	Zxxx	Developing	Stable	Emerging	0	4,000		norw1261	Yes	
 nti	nati1243	Natioro			Latn	Threatened	Stable	Still	0	4,000		samu1243	Yes	
 ntx	burm1267	Tangkhul Naga (Myanmar)			Latn	Vigorous	Stable	Emerging	0	4,000		pend1244	Yes	
 pai	peee1238	Pe			Latn	Vigorous	Endangered	Emerging	0	4,000		taro1266	Yes	
@@ -4435,7 +4435,7 @@ mko	ming1254	Mingang Doso			Latn	Vigorous	Endangered	Still	0	3,000		doso1240	Yes
 mmx	mada1285	Madak			Latn	Educational	Endangered	Emerging	0	3,000		mada1284	Yes	
 nbp	nnam1238	Nnam			Latn	Vigorous	Stable	Still	0	3,000		nnam1239	Yes	
 ncl	mich1245	Michoacán Nahuatl			Latn	Threatened	Endangered	Ascending	0	3,000		west2825	Yes	
-ncs	nica1238	Nicaraguan Sign Language	Idioma de Señas de Nicaragua		Zxxx	Developing	Stable	Emerging	0	3,000		deaf1237	Yes	
+ncs	nica1238	Nicaraguan Sign Language	Idioma de Señas de Nicaragua	Sign	Zxxx	Developing	Stable	Emerging	0	3,000		deaf1237	Yes	
 ndn	ngun1270	Ngundi			Latn	Vigorous	Endangered	Still	0	3,000		bwam1249	Yes	
 nkd	koir1240	Koireng			Latn	Vigorous	Stable	Still	0	3,000		kolh1241	Yes	
 npu	puim1234	Puimei Naga			Latn	Vigorous	Stable	Still	0	3,000		book1242	Yes	
@@ -4456,7 +4456,7 @@ sbw	simb1254	Simba			Latn	Vigorous	Endangered	Still	0	3,000		himb1234	Yes
 scw	shaa1247	Sha			Latn	Vigorous	Endangered	Still	0	3,000		roni1235	Yes	
 sde	suru1258	Surubu			Latn	Vigorous	Stable	Still	0	3,000		vori1234	Yes	
 sgz	surs1246	Sursurunga			Latn	Educational	Stable	Emerging	0	3,000		stge1234	Yes	
-sls	sing1237	Singapore Sign Language			Zxxx	Vigorous	Stable	Emerging	0	3,000		book1242	Yes	
+sls	sing1237	Singapore Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	3,000		book1242	Yes	
 smz	sime1242	Simeku			Latn	Vigorous	Stable	Still	0	3,000		sime1243	Yes	
 ste	lian1255	Liana-Seti			Latn	Threatened	Endangered	Still	0	3,000		seti1249	Yes	
 swt	sawi1256	Sawila	bahasa Sawila		Latn	Vigorous	Endangered	Emerging	0	3,000		sawi1258	Yes	
@@ -4514,7 +4514,7 @@ cbs	cash1254	Cashinahua			Latn	Developing	Stable	Ascending	0	2,820		head1239	Yes
 rkh	raka1237	Rakahanga-Manihiki			Latn	Shifting	Endangered	Emerging	0	2,820		sout3383	Yes	
 din	dink1262	Dinka	Thuɔŋjäŋ	Spoken & Written	Latn				0	4,200,000		dink1261	Yes	
 bmk	ghay1237	Ghayavi			Latn	Developing	Stable	Emerging	0	2,810		boan1246	Yes	
-cds	chad1238	Chadian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	2,800		amer1258	Yes	
+cds	chad1238	Chadian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	2,800		amer1258	Yes	
 dmr	east2472	East Damar			Latn	Vigorous	Stable	Still	0	2,800		sout3382	Yes	
 foi	foii1241	Foi			Latn	Developing	Endangered	Still	0	2,800		east2499	Yes	
 kfg	kudi1237	Kudiya			Knda	Vigorous	Endangered	Still	0	2,800		tulu1263	Yes	
@@ -4553,7 +4553,7 @@ aim	aimo1244	Aimol			Latn	Developing	Endangered	Emerging	0	2,640		cent2411	Yes
 kpy	kory1246	Koryak	нымылг'эн йилыйыл, чав'чывэн йилыйил		Cyrl	Shifting	Endangered	Emerging	0	2,633		jkor1234	Yes	
 pni	aohe1237	Aoheng	bahasa Aoheng		Latn	Vigorous	Endangered	Still	0	2,630		mull1247	Yes	
 gar	gale1257	Galeya			Latn	Vigorous	Stable	Still	0	2,620		bose1238	Yes	
-nsp	nepa1250	Nepalese Sign Language			Zxxx	Developing	Stable	Emerging	0	2,612		indo1331	Yes	
+nsp	nepa1250	Nepalese Sign Language		Sign	Zxxx	Developing	Stable	Emerging	0	2,612		indo1331	Yes	
 mbq	mais1250	Maisin			Latn	Developing	Stable	Emerging	0	2,610		aret1241	Yes	
 ckt	chuk1273	Chukot	Ԓыгъоравэтԓьэн йиԓыйиԓ		Cyrl	Threatened	Endangered	Ascending	0	2,607		rkor1234	Yes	
 add	dzod1238	Dzodinka			Latn	Vigorous	Stable	Emerging	0	2,600		nkam1238	Yes	
@@ -4807,7 +4807,7 @@ lau	laba1241	Laba			Latn	Vigorous	Endangered	Still	0	2,000		book1242	Yes
 let	lesi1239	Lesing-Gelimi			Latn	Vigorous	Stable	Still	0	2,000		east2763	Yes	
 ley	lemo1243	Lemolang			Latn	Moribund	Endangered	Still	0	2,000		bada1265	Yes	
 liu	logo1261	Logorik			Latn	Shifting	Endangered	Still	0	2,000		east2428	Yes	
-lst	trin1277	Trinidad and Tobago Sign Language			Zxxx	Vigorous	Stable	Emerging	0	2,000		amer1258	Yes	
+lst	trin1277	Trinidad and Tobago Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	2,000		amer1258	Yes	
 mae	boru1244	Bo-Rukul			Latn	Vigorous	Stable	Still	0	2,000		sout2800	Yes	
 mpm	yoso1239	Yosondúa Mixtec			Latn	Threatened	Endangered	Emerging	0	2,000		chal1278	Yes	
 mqf	momu1241	Momuna	bahasa Momuna		Latn	Threatened	Endangered	Still	0	2,000		soma1242	Yes	
@@ -4911,7 +4911,7 @@ ceg	cham1315	Chamacoco	Ishír		Latn	Threatened	Stable	Emerging	0	1,800		zamu1243
 cly	east2558	Eastern Highland Chatino			Latn	Threatened	Stable	Still	0	1,800		east2736	Yes	
 don	tour1243	Toura (Papua New Guinea)			Latn	Developing	Endangered	Still	0	1,800		nucl1506	Yes	
 grm	kota1279	Kota Marudu Talantang			Latn	Threatened	Endangered	Still	0	1,800		dusu1277	Yes	
-haf	haip1238	Haiphong Sign Language			Zxxx	Vigorous	Stable	Still	0	1,800		viet1253	Yes	
+haf	haip1238	Haiphong Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	1,800		viet1253	Yes	
 low	tamp1254	Tampias Lobu			Latn	Threatened	Endangered	Still	0	1,800		uppe1426	Yes	
 njj	njen1238	Njen			Latn	Vigorous	Stable	Emerging	0	1,800		mund1338	Yes	
 nlu	nchu1238	Nchumbulu			Latn	Vigorous	Endangered	Still	0	1,800		nchu1239	Yes	
@@ -4951,7 +4951,7 @@ mvr	mara1397	Marau	bahasa Marau		Latn	Vigorous	Endangered	Still	0	1,700		ansu123
 nis	nimi1240	Nimi			Latn	Vigorous	Stable	Still	0	1,700		sauk1253	Yes	
 ptp	pate1247	Patep			Latn	Shifting	Endangered	Emerging	0	1,700		zena1251	Yes	
 rmm	roma1332	Roma			Latn	Vigorous	Endangered	Still	0	1,700		kisa1265	Yes	
-ssr	swis1241	Swiss-French Sign Language			Zxxx	Developing	Stable	Still	0	1,700		lsfi1234	Yes	
+ssr	swis1241	Swiss-French Sign Language		Sign	Zxxx	Developing	Stable	Still	0	1,700		lsfi1234	Yes	
 glv	manx1243	Manx	Gaelg	Spoken & Written	Latn	Nearly Extinct	Endangered	Vital	0	1,690		east2734	Yes	
 piu	pint1250	Pintupi-Luritja			Latn	Developing	Stable	Ascending	0	1,680		nucl1724	Yes	
 etr	edol1239	Edolo			Latn	Developing	Stable	Emerging	0	1,670		etor1234	Yes	
@@ -5011,7 +5011,7 @@ bgb	bobo1255	Bobongko	bahasa Bobongko		Latn	Vigorous	Stable	Still	0	1,500		salu1
 bvz	bauz1241	Bauzi			Latn	Developing	Stable	Still	0	1,500		geel1240	Yes	
 bzp	kemb1235	Kemberano			Latn	Vigorous	Endangered	Still	0	1,500		kemb1251	Yes	
 cbo	izor1238	Izora			Latn	Moribund	Endangered	Still	0	1,500		chok1248	Yes	
-csx	camb1244	Cambodian Sign Language			Zxxx		Stable	Emerging	0	1,500		deaf1237	Yes	
+csx	camb1244	Cambodian Sign Language		Sign	Zxxx		Stable	Emerging	0	1,500		deaf1237	Yes	
 dbf	edop1238	Edopi	bahasa Dosobou		Latn	Developing	Endangered	Still	0	1,500		cent2110	Yes	
 dkk	dakk1238	Dakka	bahasa Dakka		Latn	Shifting	Endangered	Emerging	0	1,500		pitu1237	Yes	
 dox	buss1239	Bussa			Ethi	Vigorous	Endangered	Still	0	1,500		gido1236	Yes	
@@ -5043,7 +5043,7 @@ nec	nede1245	Nedebang	bahasa Nedebang		Latn	Vigorous	Endangered	Still	0	1,500		p
 nxl	sout2895	South Nuaulu			Latn	Vigorous	Endangered	Ascending	0	1,500		nuau1240	Yes	
 ojg	east2542	Eastern Ojibwa	Nishnaabemwin (Jibwemwin)			Threatened	Endangered	Ascending	0	1,500	oji	cent2252	Possibly	But probably want to use macrolanguage
 pla	mian1254	Miani			Latn	Developing	Endangered	Emerging	0	1,500		kauk1240	Yes	
-prz	prov1243	Providencia Sign Language			Zxxx	Nearly Extinct	Stable	Still	0	1,500		prov1248	Yes	
+prz	prov1243	Providencia Sign Language		Sign	Zxxx	Nearly Extinct	Stable	Still	0	1,500		prov1248	Yes	
 pzn	para1302	Para Naga			Latn	Vigorous	Stable	Still	0	1,500		yimc1239	Yes	
 sgk	sang1320	Sangkong				Threatened	Endangered	Still	0	1,500		biso1241	Yes	
 skc	sauk1252	Ma Manda			Latn	Vigorous	Stable	Emerging	0	1,500		sauk1253	Yes	
@@ -5301,7 +5301,7 @@ see	sene1264	Seneca	Onõtowáka		Latn	Shifting	Endangered	Ascending	0	1,015		nor
 phd	phud1238	Phudagi			Deva	Vigorous	Endangered	Still	0	1,010		west2963	Yes	
 sru	suru1262	Suruí			Latn	Developing	Stable	Still	0	1,010		mond1266	Yes	
 abo	abon1238	Abon			Latn	Vigorous	Endangered	Still	0	1,000		nort3192	Yes	
-afg	afgh1239	Afghan Sign Language			Zxxx	Developing	Stable	Still	0	1,000		deaf1237	Yes	
+afg	afgh1239	Afghan Sign Language		Sign	Zxxx	Developing	Stable	Still	0	1,000		deaf1237	Yes	
 ago	tain1253	Tainae			Latn	Vigorous	Stable	Emerging	0	1,000		tain1255	Yes	
 agy	sout2905	Southern Alta			Latn	Developing	Endangered	Emerging	0	1,000		meso1254	Yes	
 air	airo1242	Airoran	bahasa Adora		Latn	Vigorous	Endangered	Still	0	1,000		west1486	Yes	
@@ -5409,7 +5409,7 @@ nxa	naue1237	Nauete			Latn	Vigorous	Stable	Emerging	0	1,000		kawa1289	Yes
 onp	sart1249	Sartang			Latn	Vigorous	Stable	Still	0	1,000		sher1256	Yes	
 oue	oung1239	Oune			Latn	Vigorous	Stable	Still	0	1,000		cent2394	Yes	
 pnx	phon1246	Phong-Kniang				Vigorous	Stable	Still	0	1,000		pram1235	Yes	
-psg	pena1248	Penang Sign Language			Zxxx	Moribund	Endangered	Still	0	1,000		deaf1237	Yes	
+psg	pena1248	Penang Sign Language		Sign	Zxxx	Moribund	Endangered	Still	0	1,000		deaf1237	Yes	
 pty	path1235	Pathiya				Vigorous	Endangered	Still	0	1,000		kala1406	Yes	
 pyu	puyu1239	Puyuma	Pinuyumayan		Latn	Shifting	Endangered	Emerging	0	1,000		aust1307	Yes	
 rys	yaey1239	Yaeyama				Shifting	Endangered	Emerging	978	1,000		macr1267	Yes	
@@ -5543,7 +5543,7 @@ tyu	kuaa1238	Kua			Latn	Vigorous	Endangered	Still	0	820		tshw1239	Yes
 asx	mura1271	Muratayak			Latn	Vigorous	Stable	Still	0	810		nucl1777	Yes	
 hob	mari1429	Mari (Madang Province)			Latn	Vigorous	Stable	Still	0	810		moun1250	Yes	
 kxr	bowa1234	Koro (Papua New Guinea)			Latn	Vigorous	Endangered	Still	0	810		koro1314	Yes	
-rnb	brun1247	Brunca Sign Language			Zxxx		Endangered	Still	0	808		deaf1237	Yes	
+rnb	brun1247	Brunca Sign Language		Sign	Zxxx		Endangered	Still	0	808		deaf1237	Yes	
 tok	toki1239	Toki Pona	toki pona		Latn				0	806		arti1236	Possibly	Constructed language
 nez	nezp1238	Nez Perce			Latn	Moribund	Endangered	Emerging	0	805		saha1239	Yes	
 anz	anem1249	Anem			Latn	Educational	Stable	Still	0	800			Yes	
@@ -5819,7 +5819,7 @@ mxz	cent2072	Central Masela			Latn	Moribund	Endangered	Still	0	510		mase1249	Yes
 sry	sera1260	Sera			Latn	Shifting	Endangered	Still	0	510		sera1271	Yes	
 thp	thom1243	Thompson	Nłeʼkepmxcin		Latn	Shifting	Endangered	Ascending	0	510		thom1244	Yes	
 wtf	dump1243	Watiwa			Latn	Vigorous	Endangered	Still	0	510		evap1240	Yes	
-uks	urub1243	Urubú-Kaapor Sign Language			Zxxx	Vigorous	Stable	Still	0	507		deaf1237	Yes	
+uks	urub1243	Urubú-Kaapor Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	507		deaf1237	Yes	
 ulc	ulch1241	Ulch	Нāн'и хэсэни		Cyrl	Moribund	Endangered	Emerging	0	506		ulch1242	Yes	
 tsi	nucl1649	Tsimshian	Sm’algyax̣		Latn	Shifting	Endangered	Emerging	0	505		tsim1258	Yes	
 pih	pitc1234	Pitcairn-Norfolk	Pitkern		Latn	Vigorous	Stable	Ascending	0	502		macr1271	Yes	
@@ -5845,7 +5845,7 @@ jku	labi1245	Labir			Latn	Shifting	Endangered	Still	0	500		jaku1245	Yes
 jrt	jort1240	Jorto			Latn	Vigorous	Endangered	Still	0	500		kofy1244	Yes	
 kag	kaja1250	Kajaman			Latn	Threatened	Endangered	Still	0	500		kaja1256	Yes	
 kch	vono1238	Vono			Latn	Vigorous	Endangered	Still	0	500		atla1280	Yes	
-kgi	sela1253	Selangor Sign Language			Zxxx	Moribund	Endangered	Still	0	500		mala1548	Yes	
+kgi	sela1253	Selangor Sign Language		Sign	Zxxx	Moribund	Endangered	Still	0	500		mala1548	Yes	
 kkd	kinu1239	Kinuku			Latn	Vigorous	Stable	Emerging	0	500		kaur1268	Yes	
 kll	kaga1255	Kagan Kalagan			Latn	Developing	Endangered	Emerging	0	500		kaga1259	Yes	
 kly	kala1394	Kalao	bahasa Kalao		Latn	Shifting	Endangered	Still	0	500		kala1393	Yes	
@@ -5880,7 +5880,7 @@ tax	tamk1242	Tamki			Latn	Shifting	Endangered	Emerging	0	500		saba1281	Yes
 tcm	tana1288	Tanahmerah			Latn	Threatened	Endangered	Still	0	500			Yes	
 tlc	yecu1235	Yecuatla Totonac			Latn	Shifting	Endangered	Emerging	0	500		toto1252	Yes	
 trt	tung1293	Tunggare			Latn	Threatened	Endangered	Still	0	500		bura1294	Yes	
-tsy	tebu1240	Tebul Sign Language			Zxxx	Vigorous	Stable	Still	0	500		deaf1237	Yes	
+tsy	tebu1240	Tebul Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	500		deaf1237	Yes	
 vnm	vinm1237	Vinmavis			Latn	Threatened	Endangered	Emerging	0	500		cent2316	Yes	
 whu	waha1239	Wahau Kayan			Latn	Threatened	Endangered	Still	0	500		book1242	Yes	
 wtw	wotu1240	Wotu	bahasa Wotu		Latn	Threatened	Endangered	Still	0	500		wotu1239	Yes	
@@ -5959,7 +5959,7 @@ mez	meno1252	Menominee	Omāēqnomenew		Latn	Moribund	Endangered	Emerging	0	405		
 afd	anda1283	Andai			Latn	Vigorous	Stable	Still	0	400		araf1243	Yes	
 aww	awun1245	Awun			Latn	Vigorous	Endangered	Still	0	400		yell1247	Yes	
 azd	east2695	Eastern Durango Nahuatl			Latn	Threatened	Endangered	Emerging	0	400		dura1246	Yes	
-bfk	bank1251	Ban Khor Sign Language			Zxxx	Vigorous	Stable	Still	0	400		deaf1237	Yes	
+bfk	bank1251	Ban Khor Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	400		deaf1237	Yes	
 brb	lave1249	Lave			Khmr	Developing	Stable	Ascending	0	400		nucl1299	Yes	
 bvk	buka1261	Bukat			Latn	Vigorous	Endangered	Still	0	400		buka1263	Yes	
 bxd	pela1242	Pela				Shifting	Endangered	Still	0	400		maru1254	Yes	
@@ -5982,13 +5982,13 @@ lpa	lele1267	Lelepa			Latn	Vigorous	Stable	Still	0	400		nort3222	Yes
 mmq	musa1266	Musak			Latn	Vigorous	Endangered	Still	0	400		aisi1234	Yes	
 mmw	emae1237	Emae			Latn	Threatened	Endangered	Emerging	0	400		vanu1245	Yes	
 mnl	tial1239	Tiale			Latn	Threatened	Endangered	Still	0	400		tial1241	Yes	
-msd	yuca1236	Yucatec Maya Sign Language			Zxxx	Vigorous	Stable	Emerging	0	400		meem1234	Yes	
+msd	yuca1236	Yucatec Maya Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	400		meem1234	Yes	
 myj	mang1387	Mangayat			Latn	Nearly Extinct	Endangered	Still	0	400		fero1243	Yes	
 noh	nomu1240	Nomu			Latn	Vigorous	Endangered	Still	0	400		dall1240	Yes	
 opk	kopk1238	Kopkaka	bahasa Kopka		Latn	Vigorous	Endangered	Still	0	400		kwer1266	Yes	
 ost	osat1238	Osatu			Latn	Threatened	Endangered	Emerging	0	400		sout3181	Yes	
 pas	papa1269	Papasena	bahasa Papasena		Latn	Vigorous	Endangered	Still	0	400		dout1239	Yes	
-rib	brib1244	Bribri Sign Language			Zxxx		Endangered	Still	0	400		deaf1237	Yes	
+rib	brib1244	Bribri Sign Language		Sign	Zxxx		Endangered	Still	0	400		deaf1237	Yes	
 sac	mesk1242	Meskwaki			Latn	Shifting	Endangered	Emerging	0	400		foxx1245	Yes	
 sii	shom1245	Shom Peng			Latn	Vigorous	Stable	Emerging	0	400			Yes	
 siq	soni1260	Sonia			Latn	Moribund	Endangered	Still	0	400		kalu1249	Yes	
@@ -6144,7 +6144,7 @@ pay	pech1241	Pech			Latn	Moribund	Endangered	Still	0	300		chib1249	Yes
 prq	ashe1272	Ashéninka Perené			Latn	Threatened	Endangered	Emerging	0	300		ashe1271	Yes	
 ruo	istr1245	Istro Romanian	istroromånă		Latn	Shifting	Endangered	Emerging	0	300		nort3361	Yes	
 sjd	kild1236	Kildin Sami	кӣллт са̄мь кӣлл		Cyrl	Nearly Extinct	Endangered	Ascending	0	300	smi	peni1240	Yes	
-slf	swis1235	Swiss-Italian Sign Language			Zxxx	Developing	Stable	Still	0	300		ital1288	Yes	
+slf	swis1235	Swiss-Italian Sign Language		Sign	Zxxx	Developing	Stable	Still	0	300		ital1288	Yes	
 sma	sout2674	Southern Sami	åarjelsaemien gïele		Latn		Endangered	Ascending	0	300	smi	sout3150	Yes	
 smn	inar1241	Inari Sami	anarâškielâ	Spoken & Written	Latn	Provincial	Endangered	Ascending	0	300	smi	main1280	Yes	
 sso	siss1243	Sissano			Latn	Developing	Endangered	Still	0	300		siss1245	Yes	
@@ -6395,7 +6395,7 @@ bki	baki1244	Baki			Latn	Shifting	Endangered	Emerging	0	150		baki1243	Yes
 cby	cara1245	Carabayo			Latn	Threatened	Endangered	Still	0	150		uncl1493	Yes	
 cub	cube1242	Cubeo	pãmié		Latn	Educational	Institutional	Ascending	0	150		cube1243	Yes	
 drc	mind1263	Minderico			Latn	Nearly Extinct	Endangered	Still	0	150		gali1263	Yes	
-fss	finl1235	suomenruotsalainen viittomakieli			Zxxx	Moribund	Endangered	Still	0	150		finn1319	Yes	
+fss	finl1235	suomenruotsalainen viittomakieli		Sign	Zxxx	Moribund	Endangered	Still	0	150		finn1319	Yes	
 gbb	kayt1238	Kaytetye			Latn	Threatened	Endangered	Still	0	150		aran1267	Yes	
 gob	play1240	Playero			Latn	Threatened	Endangered	Still	0	150		guah1254	Yes	
 kbb	kaxu1237	Kaxuiâna			Latn	Dormant	Endangered	Still	0	150		paru1239	Yes, with caveat	Some sources report this as extinct, some as active
@@ -6406,7 +6406,7 @@ myh	maka1318	Makah			Latn	Moribund	Endangered	Emerging	0	150		maka1326	Yes
 nby	ning1275	Ningera			Latn	Threatened	Endangered	Still	0	150		bewa1242	Yes	
 okk	kwam1254	Kwamtim One			Latn	Threatened	Endangered	Still	0	150		onee1245	Yes	
 onj	onjo1240	Onjob			Latn	Nearly Extinct	Endangered	Still	0	150		daga1274	Yes	
-syy	alsa1242	Al-Sayyid Bedouin Sign Language			Zxxx	Vigorous	Stable	Still	0	150		deaf1237	Yes	
+syy	alsa1242	Al-Sayyid Bedouin Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	150		deaf1237	Yes	
 tba	aika1237	Aikanã			Latn	Threatened	Endangered	Still	0	150			Yes	
 tpr	tupa1250	Tuparí			Latn	Moribund	Endangered	Still	0	150		wayo1240	Yes	
 vis	vish1243	Vishavan				Threatened	Endangered	Still	0	150		mala1541	Yes	
@@ -6481,7 +6481,7 @@ djn	djau1244	Djauan			Latn	Nearly Extinct	Endangered	Still	0	100		west2432	Yes
 dyr	dyar1234	Dyarim			Latn		Stable	Still	0	100		zaks1240	Yes	
 gnr	gure1255	Gureng Gureng			Latn	Dormant	Endangered	Still	0	100		east2717	Yes, with caveat	Some sources report this as extinct, some as active
 hoh	hoby1242	Hobyót			Arab	Moribund	Endangered	Still	0	100		hoby1243	Yes	
-jhs	jhan1234	Jhankot Sign Language			Zxxx	Vigorous	Stable	Still	0	100		deaf1237	Yes	
+jhs	jhan1234	Jhankot Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	100		deaf1237	Yes	
 jie	jilb1238	Jilbe			Latn	Nearly Extinct	Endangered	Still	0	100		unun9878	Yes	
 kaq	capa1241	Capanahua			Latn	Shifting	Endangered	Emerging	0	100		ship1253	Yes	
 kbs	kand1300	Kande			Latn	Moribund	Endangered	Still	0	100		nort3213	Yes	
@@ -6495,7 +6495,7 @@ kwr	kwer1265	Kwer	bahasa Kwer		Latn	Threatened	Endangered	Still	0	100		kwer1267	
 mcj	mvan1238	Mvanip			Latn	Threatened	Stable	Still	0	100		mvan1239	Yes	
 mnq	minr1238	Minriq			Latn	Threatened	Endangered	Emerging	0	100		menr1235	Yes	
 nmi	nyam1285	Nyam			Latn	Threatened	Endangered	Still	0	100		unun9876	Yes	
-nsr	mari1381	Maritime Sign Language			Zxxx	Nearly Extinct	Endangered	Still	0	100		bsli1234	Yes	
+nsr	mari1381	Maritime Sign Language		Sign	Zxxx	Nearly Extinct	Endangered	Still	0	100		bsli1234	Yes	
 ocu	atzi1235	Atzingo Matlatzinca			Latn	Moribund	Endangered	Emerging	0	100		matl1258	Yes	
 pin	piam1243	Piame			Latn	Moribund	Stable	Still	0	100		hewa1240	Yes	
 pix	piuu1237	Piu			Latn	Shifting	Endangered	Still	0	100		buan1245	Yes	
@@ -6571,7 +6571,7 @@ lix	liab1237	Liabuku	bahasa Liabuku		Latn	Moribund	Endangered	Still	0	75		west28
 lui	luis1253	Luiseno			Latn	Nearly Extinct	Endangered	Emerging	0	75		cupa1239	Yes, with caveat	Some sources report this as extinct, some as active
 mhm	makh1265	Makhuwa-Moniga			Latn	Vigorous	Stable	Still	0	75		maku1279	Yes	
 ono	onon1246	Onondaga	Onǫta’kéka’		Latn	Moribund	Endangered	Emerging	0	75		nort2947	Yes	
-psd	plai1235	Plains Indian Sign Language			Zxxx	Moribund	Endangered	Still	0	75		auxi1235	Yes	
+psd	plai1235	Plains Indian Sign Language		Sign	Zxxx	Moribund	Endangered	Still	0	75		auxi1235	Yes	
 rga	rori1237	Roria			Latn	Threatened	Stable	Still	0	75		sout3339	Yes	
 awr	awer1241	Awera	bahasa Awera		Latn	Shifting	Endangered	Still	0	70		farw1236	Yes	
 bdx	budo1241	Budong-Budong	bahasa Budong-Budong		Latn	Moribund	Endangered	Still	0	70		pana1302	Yes	
@@ -6597,7 +6597,7 @@ cbc	cara1272	Carapana			Latn	Developing	Stable	Emerging	0	63		pisa1247	Yes
 ciy	chai1253	Chaima			Latn	Nearly Extinct	Endangered	Still	0	63		coas1302	Yes	
 xrw	kara1495	Karawa			Latn	Nearly Extinct	Endangered	Still	0	63		pouy1239	Yes	
 aok	arho1237	Arhö			Latn	Nearly Extinct	Endangered	Still	0	62		houa1234	Yes	
-lsv	sivi1235	Sivia Sign Language			Zxxx		Endangered	Still	0	62		deaf1237	Yes	
+lsv	sivi1235	Sivia Sign Language		Sign	Zxxx		Endangered	Still	0	62		deaf1237	Yes	
 ket	kett1243	Ket			Cyrl	Moribund	Endangered	Emerging	0	61		nort2746	Yes	
 awm	araw1272	Arawum			Latn	Threatened	Stable	Still	0	60		kabe1245	Yes	
 gge	gura1252	Guragone			Latn	Threatened	Endangered	Still	0	60		bure1238	Yes	
@@ -6689,19 +6689,19 @@ jig	djin1251	Djingili			Latn	Moribund	Endangered	Emerging	0	43		mirn1241	Yes
 oac	oroc1248	Oroch			Cyrl	Nearly Extinct	Endangered	Emerging	0	43		oroc1249	Yes	
 atx	arut1244	Arutani			Latn	Nearly Extinct	Endangered	Still	0	42			Yes	
 kov	kudu1241	Kudu-Camo			Latn	Nearly Extinct	Endangered	Still	0	42		ning1277	Yes	
-ads	adam1238	Adamorobe Sign Language			Zxxx	Threatened	Stable	Still	0	41		deaf1237	Yes	
+ads	adam1238	Adamorobe Sign Language		Sign	Zxxx	Threatened	Stable	Still	0	41		deaf1237	Yes	
 aip	buru1307	Burumakok	bahasa Burumakok		Latn	Nearly Extinct	Endangered	Still	0	40		kwer1267	Yes	
 bck	buna1275	Bunaba			Latn	Moribund	Endangered	Still	0	40		buna1274	Yes	
 bpl	broo1238	Broome Pearling Lugger Pidgin			Latn	Dormant	Endangered	Emerging	0	40		mala1547	Yes	
 bso	buso1242	Buso			Latn	Nearly Extinct	Endangered	Emerging	0	40		book1242	Yes	
 ccd	cafu1238	Cafundo Creole			Latn	Nearly Extinct	Endangered	Still	0	40		braz1247	Yes	
 cto	embe1260	Emberá-Catío			Latn	Vigorous	Stable	Ascending	0	40		atra1235	Yes	
-dsz	mard1245	Mardin Sign Language			Zxxx		Endangered	Still	0	40		deaf1237	Yes	
+dsz	mard1245	Mardin Sign Language		Sign	Zxxx		Endangered	Still	0	40		deaf1237	Yes	
 hir	hima1247	Himarimã			Latn	Threatened	Stable	Still	0	40		araw1289	Yes	
 huc	hoaa1235	Amkoe			Latn	Shifting	Endangered	Emerging	0	40		kxaa1236	Yes	
-iks	inui1247	Inuit Sign Language			Zxxx		Endangered	Still	0	40		deaf1237	Yes	
+iks	inui1247	Inuit Sign Language		Sign	Zxxx		Endangered	Still	0	40		deaf1237	Yes	
 jbt	djeo1235	Jabutí			Latn	Nearly Extinct	Endangered	Still	0	40		jabu1249	Yes	
-jcs	jama1256	Jamaican Country Sign Language			Zxxx	Shifting	Endangered	Emerging	0	40		deaf1237	Yes	
+jcs	jama1256	Jamaican Country Sign Language		Sign	Zxxx	Shifting	Endangered	Emerging	0	40		deaf1237	Yes	
 kuu	uppe1438	Upper Kuskokwim			Latn	Moribund	Endangered	Emerging	0	40		tana1298	Yes	
 rkb	rikb1245	Rikbaktsa			Latn	Moribund	Endangered	Emerging	0	40		nucl1710	Yes	
 uwa	kuku1280	Kuku-Uwanh			Latn	Moribund	Extinct	Still	0	40		pama1253	Yes, with caveat	Some sources report this as extinct, some as active
@@ -6798,7 +6798,7 @@ bvh	bure1242	Bure			Latn	Moribund	Endangered	Still	0	20		unun9876	Yes
 bym	bidy1243	Bidyara			Latn	Extinct	Extinct	Still	0	20		bidy1245	Yes, with caveat	Some sources report this as extinct, some as active
 cup	cupe1243	Cupeño	Kuupangaxwichem		Latn	Dormant	Endangered	Still	0	20		cahu1263	Yes, with caveat	Some sources report this as extinct, some as active
 gae	guar1293	Guarequena			Latn	Moribund	Endangered	Still	0	20		pare1275	Yes	
-gds	ghan1245	Ghandruk Sign Language			Zxxx	Nearly Extinct	Endangered	Still	0	20		deaf1237	Yes	
+gds	ghan1245	Ghandruk Sign Language		Sign	Zxxx	Nearly Extinct	Endangered	Still	0	20		deaf1237	Yes	
 gih	cond1242	Githabul			Latn	Nearly Extinct	Endangered	Emerging	0	20		inla1268	Yes	
 kkp	gugu1254	Gugubera			Latn	Threatened	Endangered	Still	0	20		dhaw1234	Yes	
 lec	leco1242	Leco			Latn	Moribund	Endangered	Still	0	20			Yes	
@@ -6816,7 +6816,7 @@ xkw	kemb1250	Kembra	bahasa Kembra		Latn	Nearly Extinct	Endangered	Still	0	20		le
 xmh	kuku1283	Kuku-Muminh			Latn	Moribund	Endangered	Still	0	20		pama1253	Yes	
 zmj	mari1421	Maridjabin			Latn	Nearly Extinct	Endangered	Still	0	20		mari1420	Yes	
 zmy	mari1423	Mariyedi			Latn	Nearly Extinct	Endangered	Still	0	20		mari1420	Yes	
-csd	chia1237	Chiangmai Sign Language			Zxxx	Shifting	Endangered	Still	0	19		oldc1250	Yes	
+csd	chia1237	Chiangmai Sign Language		Sign	Zxxx	Shifting	Endangered	Still	0	19		oldc1250	Yes	
 lby	lamu1254	Lamu-Lamu			Latn	Nearly Extinct	Extinct	Still	0	19		coas1321	No	Extinct language
 wlg	kunb1251	Kunbarlang			Latn	Nearly Extinct	Endangered	Still	0	19		gunw1250	Yes	
 hbo	anci1244	Ancient Hebrew	עִבְרִית מִקְרָאִית		Hebr	Dormant	Extinct	Emerging	0	18		hebr1246	Probably not	Historical langauge
@@ -6870,7 +6870,7 @@ ako	akur1238	Akurio			Latn	Nearly Extinct	Endangered	Emerging	0	10		tiri1260	Yes
 akq	akkk1240	Ak			Latn	Shifting	Endangered	Still	0	10		yell1247	Yes	
 alc	qawa1238	Qawasqar	alacalufe		Latn	Nearly Extinct	Endangered	Emerging	0	10		nort1506	Yes	
 aqk	anin1242	Aninka			Latn		Stable	Still	0	10		ninz1247	Yes	
-asq	aust1252	Austrian Sign Language	Österreichische Gebärdensprache		Zxxx	Vigorous	Stable	Still	0	10		nucl1839	Yes	
+asq	aust1252	Austrian Sign Language	Österreichische Gebärdensprache	Sign	Zxxx	Vigorous	Stable	Still	0	10		nucl1839	Yes	
 aua	asum1237	Asumboa			Latn	Nearly Extinct	Endangered	Still	0	10		utup1238	Yes	
 ayk	akuk1235	Akuku			Latn	Vigorous	Stable	Still	0	10		okpe1251	Yes	
 bpc	mbuk1244	Mbuk			Latn		Stable	Still	0	10		cung1239	Yes	
@@ -6881,13 +6881,13 @@ cbd	cari1279	Carijona	tsahá		Latn	Nearly Extinct	Endangered	Emerging	0	10		tara
 cnq	cung1238	Chung			Latn		Stable	Ascending	0	10		cung1239	Yes	
 cob	chic1271	Chicomuceltec			Latn	Dormant	Endangered	Emerging	0	10		huas1241	Yes, with caveat	Some sources report this as extinct, some as active
 cpg	capp1239	Cappadocian Greek			Grek	Dormant	Endangered	Emerging	0	10		pont1257	Yes, with caveat	Some sources report this as extinct, some as active
-csq	croa1242	Croatia Sign Language	hrvatski znakovni jezik		Zxxx	Vigorous	Stable	Emerging	0	10		yugo1239	Yes	
+csq	croa1242	Croatia Sign Language	hrvatski znakovni jezik	Sign	Zxxx	Vigorous	Stable	Emerging	0	10		yugo1239	Yes	
 cty	maun1243	Moundadan Chetty			Taml		Stable	Still	0	10		kann1259	Yes	
 dda	dadi1251	Dadi Dadi			Latn	Nearly Extinct	Endangered	Still	0	10		lowe1403	Yes, with caveat	Some sources report this as extinct, some as active
 dif	dier1241	Dieri			Latn	Dormant	Endangered	Emerging	0	10		dier1240	Yes, with caveat	Some sources report this as extinct, some as active
 dzd	daza1244	Daza			Latn	Vigorous	Endangered	Still	0	10		giiw1237	Yes, with caveat	Reinstated now, but at one point was retired
 ebc	begi1237	Beginci	bahasa Beginci		Latn		Stable	Still	0	10		mala1480	Yes	
-ehs	miya1268	Miyakubo Sign Language	宮窪手話		Zxxx		Stable	Still	0	10		deaf1237	Yes	
+ehs	miya1268	Miyakubo Sign Language	宮窪手話	Sign	Zxxx		Stable	Still	0	10		deaf1237	Yes	
 faj	fait1240	Faita			Latn	Shifting	Endangered	Still	0	10		east2767	Yes	
 fnb	orko1234	Fanbak			Latn		Endangered	Still	0	10		port1292	Yes	
 fng	fana1235	Fanagalo			Latn	Wider Communication	Endangered	Emerging	0	10		zulu1250	Yes	
@@ -6899,14 +6899,14 @@ hax	sout2956	Southern Haida			Latn	Moribund	Endangered	Ascending	0	10	hai	haid12
 hti	hoti1237	Hoti	bahasa Hoti		Latn	Extinct	Extinct	Still	0	10		seti1249	No	Extinct language
 huk	hulu1246	Hulung			Latn	Extinct	Extinct	Still	0	10		nort3221	No	Extinct language
 ibh	biha1246	Bih			Latn		Endangered	Still	0	10		rade1241	Yes	
-icl	icel1236	Icelandic Sign Language	íslenskt táknmál		Zxxx	Developing	Stable	Still	0	10		dani1289	Yes	
+icl	icel1236	Icelandic Sign Language	íslenskt táknmál	Sign	Zxxx	Developing	Stable	Still	0	10		dani1289	Yes	
 ikh	ikhi1234	Ikhin-Arokho			Latn		Stable	Still	0	10		emai1243	Yes	
 ism	masi1265	Masimasi	bahasa Masimasi		Latn	Nearly Extinct	Endangered	Still	0	10		sobe1239	Yes	
 izm	kiza1239	Kizamani			Latn		Stable	Still	0	10		kaur1268	Yes	
 jaj	zaza1245	Zazao			Latn	Nearly Extinct	Endangered	Still	0	10		zaza1247	Yes	
 jas	newc1244	New Caledonian Javanese			Latn	Shifting	Endangered	Still	0	10		glob1245	Yes	
 jng	yang1288	Yangman			Latn	Dormant	Endangered	Still	0	10		yang1287	Yes, with caveat	Some sources report this as extinct, some as active
-jus	juml1239	Jumla Sign Language			Zxxx	Threatened	Endangered	Still	0	10		deaf1237	Yes	
+jus	juml1239	Jumla Sign Language		Sign	Zxxx	Threatened	Endangered	Still	0	10		deaf1237	Yes	
 keh	keak1239	Keak			Latn	Vigorous	Endangered	Still	0	10		sawo1234	Yes	
 kgl	kung1258	Kunggari			Latn	Extinct	Endangered	Still	0	10		sout2765	Yes, with caveat	Some sources report this as extinct, some as active
 khd	badi1247	Bädi Kanum			Latn	Nearly Extinct	Endangered	Still	0	10		ngka1236	Yes	
@@ -6917,23 +6917,23 @@ kuq	kari1317	Karipuna			Latn	Moribund	Endangered	Still	0	10		cent2421	Yes
 kvs	kung1262	Kunggara				Nearly Extinct			0	10	gdj	book1242	No	ISO considers this a duplicate of gdj
 kzx	kama1362	Kamarian	bahasa Kamarian		Latn	Dormant	Endangered	Still	0	10		ulia1238	Yes, with caveat	Some sources report this as extinct, some as active
 leo	leti1245	Leti (Cameroon)			Latn	Dormant	Endangered	Emerging	0	10		sana1278	Yes	
-lgs	guin1260	Guinea-Bissau Sign Language			Zxxx		Stable	Still	0	10		deaf1237	Yes	
+lgs	guin1260	Guinea-Bissau Sign Language		Sign	Zxxx		Stable	Still	0	10		deaf1237	Yes	
 llf	herm1237	Hermit			Latn	Extinct	Extinct	Still	0	10		west2848	No	Extinct language
 llj	ladj1234	Ladji Ladji			Latn	Extinct	Endangered	Still	0	10		west2443	Yes, with caveat	Some sources report this as extinct, some as active
-lls	lith1236	Lithuanian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10		nucl1824	Yes	
-lsc	alba1273	Albarradas Sign Language			Zxxx		Stable	Still	0	10		deaf1237	Yes	
-lsl	latv1245	Latvian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10		deaf1237	Yes	
-lsn	tibe1277	Tibetan Sign Language			Zxxx		Endangered	Still	0	10		deaf1237	Yes	
-lsp	pana1308	Panamanian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10		cost1251	Yes	
-lsw	seyc1234	Seychelles Sign Language			Zxxx		Stable	Still	0	10		deaf1237	Yes	
-lsy	maur1240	Mauritian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10		deaf1237	Yes	
+lls	lith1236	Lithuanian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10		nucl1824	Yes	
+lsc	alba1273	Albarradas Sign Language		Sign	Zxxx		Stable	Still	0	10		deaf1237	Yes	
+lsl	latv1245	Latvian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10		deaf1237	Yes	
+lsn	tibe1277	Tibetan Sign Language		Sign	Zxxx		Endangered	Still	0	10		deaf1237	Yes	
+lsp	pana1308	Panamanian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10		cost1251	Yes	
+lsw	seyc1234	Seychelles Sign Language		Sign	Zxxx		Stable	Still	0	10		deaf1237	Yes	
+lsy	maur1240	Mauritian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10		deaf1237	Yes	
 ltn	latu1238	Latundê			Latn	Moribund	Endangered	Still	0	10		roos1235	Yes	
 mdg	mass1262	Massalat			Latn	Nearly Extinct	Endangered	Emerging	0	10		masa1301	Yes	
-mdl	malt1238	Maltese Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10		deaf1237	Yes	
+mdl	malt1238	Maltese Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10		deaf1237	Yes	
 mhq	mand1446	Mandan	Rų́ʼeta:re		Latn	Nearly Extinct	Endangered	Emerging	0	10		core1249	Yes	
 mpw	mapi1252	Mapidian			Latn	Nearly Extinct	Endangered	Still	0	10		mapi1253	Yes	
 msz	moma1243	Momare			Latn	Dormant	Endangered	Still	0	10		moma1244	Yes	
-nbs	nami1249	Namibian Sign Language			Zxxx	Vigorous	Stable	Emerging	0	10		sout3228	Yes	
+nbs	nami1249	Namibian Sign Language		Sign	Zxxx	Vigorous	Stable	Emerging	0	10		sout3228	Yes	
 nhf	nhuw1239	Nhuwala			Latn	Nearly Extinct	Endangered	Still	0	10		ngay1241	Yes	
 nju	ngad1258	Ngadjunmaya			Latn	Nearly Extinct	Endangered	Still	0	10		mirn1243	Yes	
 nql	ngen1257	Ngendelengo			Latn		Stable	Still	0	10		cimb1239	Yes	
@@ -6943,7 +6943,7 @@ nxo	ndam1254	Ndambomo			Latn		Endangered	Still	0	10		sake1249	Yes
 nxu	nara1265	Narau	bahasa Narau						0	10	bpp	book1242	No	ISO merged this into bpp
 nyp	nyan1313	Nyang'i			Latn	Nearly Extinct	Endangered	Still	0	10		ngan1305	Yes, with caveat	Some sources report this as extinct, some as active
 nzr	lund1276	Dir-Nyamzak-Mbarimi			Latn		Endangered	Still	0	10		zuli1234	Yes	
-nzs	newz1236	New Zealand Sign Language	New Zealand Sign Language		Zxxx	Developing	Endangered	Emerging	0	10		banz1243	Yes	
+nzs	newz1236	New Zealand Sign Language	New Zealand Sign Language	Sign	Zxxx	Developing	Endangered	Emerging	0	10		banz1243	Yes	
 olm	olom1241	Oloma			Latn	Vigorous	Endangered	Still	0	10		sout3171	Yes	
 ovd	elfd1234	Elfdalian			Latn		Endangered	Emerging	0	10		ovan1234	Yes	
 pey	petj1238	Petjo			Latn	Nearly Extinct	Endangered	Emerging	0	10		glob1241	Yes	
@@ -6954,15 +6954,15 @@ rmg	trav1236	Traveller Norwegian			Latn	Vigorous	Endangered	Still	0	10	rom	scan1
 rsw	rish1234	Rishiwa			Latn		Stable	Still	0	10		vori1234	Yes	
 rwl	ruwi1234	Ruwila			Latn		Stable	Still	0	10		kono1265	Yes	
 sej	sene1263	Sene			Latn	Extinct	Extinct	Still	0	10		huon1247	Yes, with caveat	Some sources report this as extinct, some as active
-sfb	lang1248	Langue des signes de Belgique Francophone	langue des signes de Belgique francophone			Developing	Stable	Emerging	0	10		belg1242	Yes	
+sfb	lang1248	Langue des signes de Belgique Francophone	langue des signes de Belgique francophone	Sign		Developing	Stable	Emerging	0	10		belg1242	Yes	
 sis	sius1254	Siuslaw			Latn	Dormant	Endangered	Emerging	0	10			Yes, with caveat	Some sources report this as extinct, some as active
 sno	snoh1241	Snohomish			Latn	Nearly Extinct	Endangered	Still	0	10		lush1252	Yes	
-sqx	kafr1234	Kufr Qassem Sign Language			Zxxx		Stable	Still	0	10		deaf1237	Yes	
+sqx	kafr1234	Kufr Qassem Sign Language		Sign	Zxxx		Stable	Still	0	10		deaf1237	Yes	
 ssu	susu1251	Susuami			Latn	Nearly Extinct	Endangered	Still	0	10		kama1359	Yes	
 stl	stel1238	Stellingwerfs			Latn	Developing	Stable	Emerging	0	10		west2356	Yes	
 sxr	saar1237	Saaroa			Latn	Nearly Extinct	Endangered	Emerging	0	10		kana1292	Yes	
 syx	osam1235	Samay			Latn		Endangered	Still	0	10		ndas1239	Yes	
-szs	solo1262	Solomon Islands Sign Language			Zxxx		Stable	Still	0	10		aust1310	Yes	
+szs	solo1262	Solomon Islands Sign Language		Sign	Zxxx		Stable	Still	0	10		aust1310	Yes	
 szy	saki1247	Sakizaya	Sakizaya	Spoken & Written	Latn		Endangered	Emerging	0	10		cent2103	Yes	
 tjj	yang1305	Tjungundji			Latn		Endangered	Still	0	10		angu1244	Yes	
 tjp	pini1245	Tjupany			Latn		Endangered	Still	0	10		unun9966	Yes	
@@ -6976,8 +6976,8 @@ urc	urni1239	Urningangg			Latn	Extinct	Extinct	Still	0	10		urni1238	No	Extinct l
 uun		Kulon-Pazeh				Extinct			0	10			Probably not	Split into separate language codes
 vkn	koro1323	Koro Nulu			Latn		Stable	Still	0	10		uncl1532	Yes	
 vku	kurr1243	Kurrama			Latn	Nearly Extinct	Endangered	Still	0	10		yind1249	Yes	
-vsi	mold1243	Moldova Sign Language			Zxxx	Vigorous	Stable	Still	0	10		cent2419	Yes	
-vsv	vale1251	Valencian Sign Language			Zxxx	Vigorous	Endangered	Still	0	10		nucl1840	Yes	
+vsi	mold1243	Moldova Sign Language		Sign	Zxxx	Vigorous	Stable	Still	0	10		cent2419	Yes	
+vsv	vale1251	Valencian Sign Language		Sign	Zxxx	Vigorous	Endangered	Still	0	10		nucl1840	Yes	
 wga	waga1260	Wagaya			Latn	Extinct	Extinct	Still	0	10		ngar1291	No	Extinct language
 wlh	wela1235	Welaun			Latn		Stable	Still	0	10		west2945	Yes	
 wny	wany1247	Wanyi			Latn	Nearly Extinct	Endangered	Still	0	10		garr1260	Yes	
@@ -6986,7 +6986,7 @@ xat	kata1270	Katawixi			Latn	Nearly Extinct	Endangered	Still	0	10		katu1274	Yes
 xdo	kwan1289	Kwandu			Latn		Stable	Still	0	10		cimb1239	Yes	
 xjb	twee1234	Minjungbal			Latn	Extinct	Endangered	Emerging	0	10		coas1320	Yes, with caveat	Some sources report this as extinct, some as active
 xny	nija1241	Nyiyaparli			Latn	Nearly Extinct	Endangered	Still	0	10		cent2248	Yes	
-yhs		Yan-nhaŋu Sign Language			Zxxx		Endangered	Still	0	10			Yes	
+yhs		Yan-nhaŋu Sign Language		Sign	Zxxx		Endangered	Still	0	10			Yes	
 yii	yidi1250	Yidiny			Latn		Endangered	Still	0	10		yidi1249	Yes	
 ykh	kham1281	Khamnigan Mongol			Cyrl		Stable	Still	0	10		oira1260	Yes	
 yol	east2834	Yola			Latn		Endangered	Emerging	0	10		merc1242	Yes, with caveat	Some sources report this as extinct, some as active
@@ -7125,7 +7125,7 @@ kyr	kuru1309	Kuruáya			Latn	Nearly Extinct	Endangered	Still	0	3		mund1329	Yes
 lgb	lagh1246	Laghu			Latn	Nearly Extinct	Extinct	Still	0	3		west2523	Yes, with caveat	Some sources report this as extinct, some as active
 myr	muni1258	Muniche			Latn	Nearly Extinct	Endangered	Emerging	0	3			Yes	
 nji	ngar1283	Gudanji			Latn	Nearly Extinct	Extinct	Still	0	3		guda1245	Yes, with caveat	Some sources report this as extinct, some as active
-rsm	miri1273	Miriwoong Sign Language			Zxxx		Endangered	Still	0	3		deaf1237	Yes	
+rsm	miri1273	Miriwoong Sign Language		Sign	Zxxx		Endangered	Still	0	3		deaf1237	Yes	
 scf	sanm1305	San Miguel Creole French			Latn	Nearly Extinct	Extinct	Emerging	0	3		sain1246	Yes, with caveat	Some sources report this as extinct, some as active
 wao	wapp1239	Wappo				Nearly Extinct	Endangered	Still	0	3		yuki1242	Yes, with caveat	Some sources report this as extinct, some as active
 wgy	warr1255	Warrgamay			Latn	Nearly Extinct	Endangered	Still	0	3		pama1250	Yes	
@@ -7253,7 +7253,7 @@ ile	inte1260	Occidental	Interlingue	Spoken & Written	Latn				0	1		arti1236	Possi
 jan	jand1248	Jandai			Latn	Extinct	Extinct	Still	0	1		yaga1256	No	Extinct language
 jbi	badj1244	Badjiri			Latn	Extinct	Extinct	Still	0	1		badj1246	No	Extinct language
 jbw	yawi1239	Yawijibaya			Latn	Dormant	Endangered	Still	0	1		worr1237	Yes, with caveat	Some sources report this as extinct, some as active
-jks	amam1247	Amami Koniya Sign Language			Zxxx		Endangered	Still	0	1		deaf1237	Yes	
+jks	amam1247	Amami Koniya Sign Language		Sign	Zxxx		Endangered	Still	0	1		deaf1237	Yes	
 juc	jurc1239	Jurchen				Extinct	Extinct	Emerging	0	1		manc1250	Probably not	Historical langauge
 jut	juti1236	Jutish	Jysk		Latn	Vigorous			0	1		sout3248	Possibly	Some sources consider it a dialect of Danish, some say its an historical language
 jvd	javi1237	Javindo			Latn	Dormant	Endangered	Emerging	0	1		glob1241	Yes	
@@ -7286,7 +7286,7 @@ mhj	mogh1245	Mogholi			Arab	Dormant	Endangered	Emerging	0	1		mong1329	Yes
 mjq	mala1466	Malaryan			Mlym	Dormant	Endangered	Still	0	1		mala1541	Yes, with caveat	Some sources report this as extinct, some as active
 mmv	miri1270	Miriti			Latn	Dormant	Endangered	Still	0	1		arap1281	Yes, with caveat	Some sources report this as extinct, some as active
 mpy	mapi1250	Mapia	bahasa Mapia		Latn	Extinct	Extinct	Still	0	1		nucl1749	Possibly	Different sources consider this living or extinct
-mre	mart1251	Martha's Vineyard Sign Language			Zxxx		Extinct	Still	0	1		oksl1234	No	Extinct language
+mre	mart1251	Martha's Vineyard Sign Language		Sign	Zxxx		Extinct	Still	0	1		oksl1234	No	Extinct language
 msp	mari1442	Maritsauá			Latn	Extinct	Extinct	Still	0	1		unun9935	No	Extinct language
 mys	mesm1243	Mesmes				Extinct	Endangered	Still	0	1		inor1239	Yes, with caveat	Some sources report this as extinct, some as active
 myz	clas1253	Classical Mandaic			Mand	Extinct	Extinct	Still	0	1		mand1468	Probably not	Historical langauge
@@ -7512,7 +7512,7 @@ aaq	east2544	Eastern Abnaki			Latn	Dormant	Endangered	Emerging	0			aben1250	Yes,
 aben1250	aben1250	Abenaki										nort3414		
 adp	adap1234	Adap				Vigorous			0		dzo	book1242	No	ISO merged this into dz
 aes	alse1251	Alsea					Extinct	Emerging	0				No	Extinct language
-ajs	ghar1240	Algerian Jewish Sign Language			Zxxx		Endangered	Still	0			deaf1237	Yes	
+ajs	ghar1240	Algerian Jewish Sign Language		Sign	Zxxx		Endangered	Still	0			deaf1237	Yes	
 ajw	ajaw1236	Ajawa			Latn	Extinct	Extinct	Still	0			west2998	No	Extinct language
 akk	akka1240	Akkadian	𒀝 𒅗 𒁺 𒌑		Xsux				0			east2678	Probably not	Historical langauge
 ana	anda1286	Andaqui			Latn	Dormant	Endangered	Emerging	0				Yes, with caveat	Some sources report this as extinct, some as active
@@ -7524,7 +7524,7 @@ apv	alap1235	Alapmunte			Latn		Extinct	Still	0			namb1301	No	Extinct language
 aqp	atak1252	Atakapa					Extinct	Still	0				No	Extinct language
 arc	impe1235	Imperial Aramaic	ܐܪܡܝܐ	Spoken & Written	Armi				0			impe1236	Probably not	Historical langauge
 aru	arua1263	Aruá (Amazonas State)			Latn		Extinct	Still	0			araw1282	No	Extinct language
-asw	aust1253	Australian Aborigines Sign Language			Zxxx	Vigorous	Endangered	Still	0			auxi1235	Yes	
+asw	aust1253	Australian Aborigines Sign Language		Sign	Zxxx	Vigorous	Endangered	Still	0			auxi1235	Yes	
 atc	atsa1242	Atsahuaca			Latn		Extinct	Still	0			madr1238	No	Extinct language
 auo	auyo1240	Auyokawa			Latn		Extinct	Still	0			shir1276	No	Extinct language
 auv	auve1240	Occitan - Auvergnat	Auvernhat								oci	book1242	Probably not	Deprecated ISO code, merged with Occitan
@@ -7658,7 +7658,7 @@ iff	ifoo1237	Ifo			Latn	Extinct	Extinct	Still	0			erro1239	No	Extinct language
 igs	inte1261	Interglossa			Latn				0			arti1236	Possibly	Constructed language
 ihw	gana1268	Bidhawal			Latn		Extinct	Still	0			gana1279	No	Extinct language
 ijo		Ijaw												
-ils	inte1259	International Sign			Zxxx	Vigorous	Endangered	Emerging	0			pidg1253	Yes	
+ils	inte1259	International Sign		Sign	Zxxx	Vigorous	Endangered	Emerging	0			pidg1253	Yes	
 iml	milu1241	Miluk			Latn		Extinct	Emerging	0			coos1248	No	Extinct language
 ims		Marsian			Latn				0				Probably not	Historical langauge
 imy	mily1238	Milyan			Lyci				0			mily1239	Probably not	Historical langauge
@@ -7737,7 +7737,7 @@ mvl	mbar1254	Mbara (Australia)			Latn	Extinct	Extinct	Still	0			pama1251	No	Exti
 mwu	mitt1253	Mittu			Latn	Extinct	Extinct	Still	0			gber1234	No	Extinct language
 mwy	mosi1247	Mosiro				Extinct			0			okie1247	No	Declared non-existent by ISO
 mxi	moza1249	Mozarabic	مُزَرَب		Latn				0			unsh1234	Probably not	Historical langauge
-mzg	mona1241	Monastic Sign Language			Zxxx				0			auxi1235	Possibly	This is more of a generalized grouping of many individual sign languages thoroughout Europe than a single language. It's probably also not active.
+mzg	mona1241	Monastic Sign Language		Sign	Zxxx				0			auxi1235	Possibly	This is more of a generalized grouping of many individual sign languages thoroughout Europe than a single language. It's probably also not active.
 nah		Nahuatl	Náhuatl	Spoken & Written									Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
 nap-tara	pugl1238	Tarantino										neap1235	Possibly	It's arguably a dialect of a dialect -- but it does have its own Wikipedia, which is unusual
 nci	clas1250	Classical Nahuatl	Nāhuatlahtōlli	Mostly Written (also Spoken)	Latn				0			cent2258	Possibly	Nahuatl has many spoken variations but it appears that most written content (eg. the Nahuatl Wikipedia) is written in Classical Nahuatl since it's the common denominator between the nahua communities.
@@ -7786,7 +7786,7 @@ oge	oldg1234	Old Georgian							0			geor1253	Probably not	Historical langauge
 oht		Old Hittite			Xsux				0				Probably not	Historical langauge
 ohu	oldh1242	Old Hungarian			Latn				0			hung1287	Probably not	Historical langauge
 ojp	oldj1239	Old Japanese							0			japa1256	Probably not	Historical langauge
-okl	oldk1238	Old Kentish Sign Language			Zxxx		Extinct	Still	0			oksl1234	No	Extinct language
+okl	oldk1238	Old Kentish Sign Language		Sign	Zxxx		Extinct	Still	0			oksl1234	No	Extinct language
 okm		Middle Korean (10th-16th cent.)	중세 한국어		Hang				0				Probably not	Historical langauge
 oko		Old Korean (3rd-9th cent.)	고대 한국어		Hani				0				Probably not	Historical langauge
 okz		Old Khmer			Khmr				0				Probably not	Historical langauge

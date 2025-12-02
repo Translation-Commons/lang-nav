@@ -71,6 +71,7 @@ const LanguageTable: React.FC = () => {
       {
         key: 'Modality',
         render: (lang) => lang.modality ?? <Deemphasized>—</Deemphasized>,
+        exportValue: (lang) => lang.modality, // Avoid exporting escaped html like &amp;
         isInitiallyVisible: false,
         columnGroup: 'Context',
       },
