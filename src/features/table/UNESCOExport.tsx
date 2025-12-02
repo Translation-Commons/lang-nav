@@ -1,8 +1,11 @@
+import { CopyIcon } from 'lucide-react';
+import React, { useCallback } from 'react';
+
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
-import { LanguageData, LanguageModality } from '@entities/language/LanguageTypes';
-import { ObjectData, OfficialStatus } from '@entities/types/DataTypes';
+import { LanguageModality } from '@entities/language/LanguageTypes';
+import { LocaleData, ObjectData, OfficialStatus, TerritoryData } from '@entities/types/DataTypes';
 
 // Customized for UNESCO use
 export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilter: string): string {
@@ -11,37 +14,37 @@ export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilte
   ).toUpperCase();
 
   return objects
-    .filter((obj) => obj.type === ObjectType.Language)
-    .map((lang) => getLanguageUNESCOData(lang, territoryCode))
-    .sort((a, b) => {
-      const aPop = (a[0] as number) || 0;
-      const bPop = (b[0] as number) || 0;
-      return bPop - aPop;
-    }) // Sort by number of users descending
-    .map((row) => row.slice(1).join('\t'))
+    .map((obj) => {
+      if (obj.type === ObjectType.Locale) return obj as LocaleData;
+      if (obj.type === ObjectType.Language)
+        return obj.locales.find((l) => l.territoryCode === territoryCode);
+      return undefined;
+    })
+    .filter((obj) => obj != null)
+    .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0)) // Sort by number of users descending
+    .map(getLocaleUNESCOData)
+    .map((row) => row.join('\t'))
     .join('\n');
 }
 
-function getLanguageUNESCOData(
-  lang: LanguageData,
-  territoryCode: string,
-): (number | string | boolean | undefined)[] {
-  const locale = lang.locales.find((l) => l.territoryCode === territoryCode);
-  const pops = locale?.censusRecords?.map((record) => record.populationEstimate) ?? [];
+function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | undefined)[] {
+  const lang = locale.language;
+  if (!lang) return [];
+  const pops = locale.censusRecords?.map((record) => record.populationEstimate) ?? [];
   const popRange =
     pops.length > 1
       ? Math.min(...pops).toLocaleString() + ' - ' + Math.max(...pops).toLocaleString()
       : '';
-  let popYear = locale?.populationCensus?.yearCollected.toString();
-  if (locale?.populationCensus?.collectorType === CensusCollectorType.CLDR) popYear = '';
+  let popYear = locale.populationCensus?.yearCollected.toString();
+  if (locale.populationCensus?.collectorType === CensusCollectorType.CLDR) popYear = '';
   const hasWritingSystem = lang.primaryWritingSystem && lang.primaryWritingSystem.ID !== 'Zxxx';
-  let popSource = locale?.populationCensus?.collectorName ?? locale?.populationSource ?? '';
-  if (locale?.populationCensus?.url) popSource += ' ' + locale?.populationCensus?.url;
+  let popSource = locale.populationCensus?.collectorName ?? locale.populationSource ?? '';
+  if (locale.populationCensus?.url) popSource += ' ' + locale.populationCensus?.url;
 
   return [
-    locale?.populationSpeaking, // Used for sorting only
+    locale.populationSpeaking, // Used for sorting only
     'WAL-' + lang.ID,
-    territoryCode,
+    locale.territoryCode,
 
     //// Language Information - STEP 1
     // 1. language_names
@@ -60,16 +63,16 @@ function getLanguageUNESCOData(
     lang.modality === LanguageModality.Written ? 'Written Only' : '',
 
     // 4. recognition_status_of_the_language
-    locale?.officialStatus &&
+    locale.officialStatus &&
       [OfficialStatus.DeFactoOfficial, OfficialStatus.Official, OfficialStatus.Recognized].includes(
-        locale?.officialStatus,
+        locale.officialStatus,
       ),
-    (locale?.officialStatus &&
+    (locale.officialStatus &&
       [OfficialStatus.RecognizedRegionally, OfficialStatus.OfficialRegionally].includes(
-        locale?.officialStatus,
+        locale.officialStatus,
       )) ||
       '',
-    locale?.officialStatus == null, // no_official_status
+    locale.officialStatus == null, // no_official_status
 
     // 5. Indigeneity
     '', // indigenous_language
@@ -101,7 +104,7 @@ function getLanguageUNESCOData(
 
     //// Language Users - STEP 3
     // 1. Number: Please provide information about the approximate number of users
-    locale?.populationSpeaking?.toLocaleString() ?? '', // Number_of_users
+    locale.populationSpeaking?.toLocaleString() ?? '', // Number_of_users
     popRange, // Number_of_users_cited
     popYear ?? '', // Year
     popSource ?? '', // Source
@@ -134,3 +137,27 @@ function getLanguageUNESCOData(
     '', // No_information
   ];
 }
+
+export const ExportTerritoryLanguageDataButton: React.FC<{ territory: TerritoryData }> = ({
+  territory,
+}) => {
+  const handleExport = useCallback(() => {
+    const locales = territory.locales ?? [];
+    const data = locales
+      .map(getLocaleUNESCOData)
+      .map((row) => row.join('\t'))
+      .join('\n');
+    navigator.clipboard.writeText(data);
+    alert('Language data copied to clipboard');
+  }, [territory]);
+
+  return (
+    <button
+      onClick={handleExport}
+      title="Export language data for this territory in UNESCO format"
+      style={{ padding: '.25em' }}
+    >
+      <CopyIcon size="1em" display="block" />
+    </button>
+  );
+};

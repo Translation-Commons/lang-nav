@@ -90,6 +90,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
     async (exportType: CopyExportType) => {
       const data = prepareDataForExport(exportType);
       navigator.clipboard.writeText(data);
+      alert('Data copied to clipboard');
     },
     [prepareDataForExport],
   );
@@ -120,7 +121,10 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
     [handleClipboardExport, handleExportFile, objectsFilteredAndSorted.length],
   );
   let validExportTypes = Object.values(ExportType).filter((et) => et !== ExportType.Unchosen);
-  if (pageParams.objectType !== ObjectType.Language) {
+  if (
+    pageParams.objectType !== ObjectType.Language &&
+    pageParams.objectType !== ObjectType.Locale
+  ) {
     validExportTypes = validExportTypes.filter(
       (et) => et !== ExportType.DownloadUNESCO && et !== ExportType.CopyUNESCO,
     );
