@@ -18,7 +18,14 @@
 
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
+
+const CLDR_RELEASE = '43.0.0';
+const CLDR_CORE_BASE = `https://cdn.jsdelivr.net/npm/cldr-core@${CLDR_RELEASE}`;
+const CHARTS_TSV_BASE = `https://raw.githubusercontent.com/unicode-org/cldr-staging/main/docs/charts/${CLDR_RELEASE.replace(
+  /\.0\.0$/,
+  '',
+)}/tsv`;
+const CLDR_REPO_RAW_BASE = 'https://raw.githubusercontent.com/unicode-org/cldr/main/common/main';
 
 const OUTPUT_FILE = path.join(process.cwd(), 'public/data/unicode/cldrLocales.json');
 
@@ -71,10 +78,17 @@ interface RawMissingCountsRow {
 }
 
 interface AvailableLocales {
-  core: string[];
-  modern: string[];
-  full: string[];
-  defaultContent: string[];
+  /**
+   * Locales in the “core” coverage tier.  Not all releases publish a core
+   * list, so this property is optional.
+   */
+  core?: string[];
+  /** Locales in the “modern” coverage tier. */
+  modern?: string[];
+  /** Locales in the “full” coverage tier. */
+  full?: string[];
+  /** List of default content locales, from defaultContent.json. */
+  defaultContent?: string[];
 }
 
 /** Main routine */
@@ -91,6 +105,9 @@ async function buildCldrLocales(): Promise<void> {
     missingCountsTsvPromise,
   ]);
 
+  // Cast to our interface.  Some keys (e.g. core) may be missing from
+  // availableLocales.json depending on the CLDR release, so we treat
+  // absent properties as empty arrays below.
   const available: AvailableLocales = availableLocales as AvailableLocales;
   const coverageRows = parseTsv(coverageTsv) as unknown as RawCoverageRow[];
   const missingRows = parseTsv(missingTsv) as unknown as RawMissingCountsRow[];
@@ -106,7 +123,12 @@ async function buildCldrLocales(): Promise<void> {
     if (id && id.includes('_')) missingMap[id] = row;
   }
 
-  const localeList = new Set<string>([...available.core, ...available.modern, ...available.full]);
+  // Normalise the lists.  If a tier list is undefined in this release we
+  // substitute an empty array so that spread operations don’t blow up.
+  const coreList: string[] = Array.isArray(available.core) ? available.core : [];
+  const modernList: string[] = Array.isArray(available.modern) ? available.modern : [];
+  const fullList: string[] = Array.isArray(available.full) ? available.full : [];
+  const localeList = new Set<string>([...coreList, ...modernList, ...fullList]);
   const output: any[] = [];
 
   const pct = (value: string): number | undefined => {
@@ -116,27 +138,68 @@ async function buildCldrLocales(): Promise<void> {
   };
 
   for (const loc of localeList) {
-    const tier = available.core.includes(loc)
-      ? 'core'
-      : available.modern.includes(loc)
-        ? 'modern'
-        : 'full';
-    const isDefault = available.defaultContent?.includes(loc) ?? false;
+    // Lookup coverage and missing-count rows using the raw locale ID
+    // (which uses hyphens).
     const coverage = coverageMap[loc];
     const missing = missingMap[loc];
 
-    // Queue XML existence check; we’ll resolve after building objects
+    // Determine tier based on the target coverage level reported in the
+    // locale-coverage.tsv file.  Coverage levels use the same naming as
+    // our tier type (core, basic, moderate, modern).  Some rows prefix
+    // the level with an asterisk to indicate a computed value; strip any
+    // leading non‑letters before comparison.  If no coverage information
+    // exists for this locale, fall back to the modern tier.  We do not
+    // expose a separate “full” tier; locales in the full list will be
+    // classified according to their coverage level.
+    let tier: 'core' | 'basic' | 'moderate' | 'modern' = 'modern';
+    if (coverage && coverage['Target Level']) {
+      const rawLevel = coverage['Target Level'].replace(/^[^A-Za-z]*/, '').toLowerCase();
+      if (rawLevel === 'core' || rawLevel === 'basic' || rawLevel === 'moderate' || rawLevel === 'modern') {
+        tier = rawLevel as typeof tier;
+      }
+    }
+
+    // Flag default-content locales.  If the defaultContent list is absent,
+    // treat all locales as non-default.
+    const isDefault = Array.isArray(available.defaultContent)
+      ? available.defaultContent.includes(loc)
+      : false;
+
+    // Queue XML existence check; resolve after building objects
     const xmlPromise = xmlExists(loc);
 
+    // Prepare a normalised version of the locale for downstream lookup.  The
+    // UI expects underscores as separators.
+    const subtags = loc.split('-');
+    const normalizedLocale = subtags.join('_');
+    const language = subtags[0];
+    let script: string | undefined;
+    let region: string | undefined;
+    if (subtags.length === 2) {
+      const second = subtags[1];
+      if (/^[A-Z][a-z]{3}$/.test(second)) {
+        script = second;
+      } else {
+        region = second;
+      }
+    } else if (subtags.length >= 3) {
+      const second = subtags[1];
+      const third = subtags[2];
+      if (/^[A-Z][a-z]{3}$/.test(second)) {
+        script = second;
+        region = third;
+      } else {
+        region = second;
+      }
+    }
+
     output.push({
-      locale: loc,
-      language: loc.split(/[_-]/)[0],
-      region: loc.split(/[_-]/)[1] ?? undefined,
-      script: loc.split(/[_-]/)[2] ?? undefined,
+      locale: normalizedLocale,
+      language,
+      region,
+      script,
       tier,
-      // use new property name expected by UI
       localeIsDefaultForLanguage: isDefault,
-      // Coverage fields
       targetLevel: coverage?.['Target Level'] || undefined,
       computedLevel: coverage?.['Computed Level'] || undefined,
       confirmedPct: pct(coverage?.['%'] || ''),
@@ -147,7 +210,9 @@ async function buildCldrLocales(): Promise<void> {
       icuIncluded: coverage?.ICU?.toLowerCase().includes('icu') ?? false,
       defaultRegion: coverage?.['Default Region'] || undefined,
       notes:
-        coverage && coverage['Missing Features'] ? coverage['Missing Features'].split(/,\s*/) : [],
+        coverage && coverage['Missing Features']
+          ? coverage['Missing Features'].split(/,\s*/)
+          : [],
       missingCounts: missing
         ? {
             found: Number.parseInt(missing.Found || '0', 10),

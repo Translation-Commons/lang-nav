@@ -13,7 +13,15 @@ export interface CLDRLocaleSupport {
   /** Script code, e.g. "Latn" (optional) */
   script?: string;
 
-  /** Tier of locale support: core, basic, moderate or modern */
+  /**
+   * Tier of locale support.  The Unicode CLDR defines four coverage levels
+   * for locales: core, basic, moderate and modern.  These indicate the
+   * amount of locale data available and correspond to increasing levels of
+   * completeness in CLDR.  We intentionally do not expose the “full” list
+   * from availableLocales.json as an explicit tier; instead, locales in
+   * that list are classified using their target coverage level from the
+   * CLDR charts (or default to modern if no chart data is present).
+   */
   tier: 'core' | 'basic' | 'moderate' | 'modern';
 
   /**
