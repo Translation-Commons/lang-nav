@@ -185,7 +185,7 @@ function getExportDescription(exportType: ExportType) {
     case ExportType.CopyUNESCO:
       return 'Copy data prepared for UNESCO in TSV format to clipboard.';
     case ExportType.Unchosen:
-      return 'Export data: selected columns and filtered rows) to CSV or TSV';
+      return 'Export data: selected columns and filtered rows to CSV or TSV';
   }
 }
 

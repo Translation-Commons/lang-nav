@@ -9,7 +9,6 @@ export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilte
   const territoryCode = (
     territoryFilter.split('[')[1]?.slice(0, 2) || territoryFilter
   ).toUpperCase();
-  console.log(territoryCode);
 
   return objects
     .filter((obj) => obj.type === ObjectType.Language)
@@ -77,7 +76,7 @@ function getLanguageUNESCOData(
     '', // not_an_indigenous_language
     '', // unclear
 
-    // 6. Graphisation (refers to development and availability of scripts and orthographic conventions for a language)
+    // 6. Graphisation (refers to development and availability of scripts and orthographic conventions for a language)
     hasWritingSystem ? 'TRUE' : '', // has_writing_system
     hasWritingSystem ? 'FALSE' : '', // no_writing_system
 
