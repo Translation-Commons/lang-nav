@@ -57,16 +57,14 @@ const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }
           label="Written in"
           description="Filter results by ones written in this script."
         />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <TextInput
-            inputStyle={{ minWidth: '8em' }}
-            getSuggestions={getSuggestions}
-            onChange={(writingSystemFilter: string) => updatePageParams({ writingSystemFilter })}
-            pageParameter={PageParamKey.writingSystemFilter}
-            placeholder="Name or code"
-            value={writingSystemFilter}
-          />
-        </div>
+        <TextInput
+          inputStyle={{ minWidth: '8em' }}
+          getSuggestions={getSuggestions}
+          onSubmit={(writingSystemFilter: string) => updatePageParams({ writingSystemFilter })}
+          pageParameter={PageParamKey.writingSystemFilter}
+          placeholder="Name or code"
+          value={writingSystemFilter}
+        />
       </div>
     </SelectorDisplayProvider>
   );

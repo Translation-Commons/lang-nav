@@ -61,7 +61,7 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
           <TextInput
             inputStyle={{ minWidth: '8em' }}
             getSuggestions={getSuggestions}
-            onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}
+            onSubmit={(territoryFilter: string) => updatePageParams({ territoryFilter })}
             pageParameter={PageParamKey.territoryFilter}
             placeholder="Name or code"
             value={territoryFilter}

@@ -1,5 +1,5 @@
 import { XIcon } from 'lucide-react';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
 import { PageParamKey, View } from '@features/params/PageParamTypes';
@@ -21,7 +21,8 @@ export type Suggestion = {
 type Props = {
   getSuggestions?: (query: string) => Promise<Suggestion[]>;
   inputStyle?: React.CSSProperties;
-  onChange: (value: string) => void;
+  label?: React.ReactNode;
+  onSubmit: (value: string) => void;
   pageParameter?: PageParamKey;
   placeholder?: string;
   value: string;
@@ -35,73 +36,96 @@ type Props = {
 const TextInput: React.FC<Props> = ({
   getSuggestions = () => [],
   inputStyle,
-  onChange,
+  label,
+  onSubmit,
   pageParameter,
   placeholder,
   value,
 }) => {
   const { CalculateWidthFromHere, width } = useAutoAdjustedWidth(value);
-  const { display } = useSelectorDisplay();
 
-  // Using a new variable immediateValue to allow users to edit the input box without causing computational
+  // Using a new variable currentValue to allow users to edit the input box without causing computational
   // changes that could slow down rendering and cause a bad UX.
-  const [immediateValue, setImmediateValue] = useState(value);
+  const [currentValue, setCurrentValue] = useState(value);
   useEffect(() => {
-    // If the passed-in value of the text input changes (eg. on page nav) then update the immediate value
-    // TODO: This does not always work
-    setImmediateValue(value);
-  }, [value, setImmediateValue]);
-
-  // When the immediate value changes, it starts a timeout and after enough time it triggers onChange
-  useEffect(() => {
-    const timer = setTimeout(() => onChange(immediateValue), 300 /* ms */);
-    return () => clearTimeout(timer);
-  }, [immediateValue]);
+    // If the passed-in value of the text input changes (eg. on page nav) then update the current value
+    setCurrentValue(value);
+  }, [value, setCurrentValue]);
 
   // Handle suggestions
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [showSuggestions, setShowSuggestions] = useState(false);
+  const [isActive, setIsActive] = useState(false);
   useEffect(() => {
     let active = true;
     (async () => {
-      const result = await getSuggestions(immediateValue);
+      const result = await getSuggestions(currentValue);
       if (active) setSuggestions(result.slice(0, 10));
     })();
     return () => {
       active = false;
     };
-  }, [getSuggestions, immediateValue]);
+  }, [getSuggestions, currentValue]);
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      if (event.key === 'Enter') {
+        event.preventDefault();
+        onSubmit(currentValue);
+        setIsActive(false);
+      }
+    },
+    [onSubmit, currentValue],
+  );
+  const onClear = useCallback(() => {
+    onSubmit('');
+    setIsActive(false);
+  }, [onSubmit]);
 
   return (
-    <>
-      {showSuggestions && suggestions.length > 0 && (
+    <div
+      // onSubmit={onEnterKey}
+      style={{
+        display: 'flex',
+        alignItems: 'center',
+        borderRadius: '.75em',
+        border: '0.125em solid var(--color-button-primary)',
+      }}
+    >
+      {label}
+      {isActive && suggestions.length > 0 && (
         <SelectorDropdown>
           {suggestions.map((s, i) => (
             <SuggestionRow
               key={i}
               pageParameter={pageParameter}
               position={getPositionInGroup(i, suggestions.length)}
-              setImmediateValue={setImmediateValue}
+              onSubmit={onSubmit}
               suggestion={s}
             />
           ))}
         </SelectorDropdown>
       )}
       <input
+        onSubmit={() => onSubmit(currentValue)}
+        onKeyDown={onKeyDown}
         type="text"
         id={pageParameter}
-        className={immediateValue === '' ? 'empty' : ''}
-        value={immediateValue}
+        className={currentValue === '' ? 'empty' : ''}
+        value={currentValue}
         autoComplete="off" // It's already handled
         onChange={(ev) => {
-          setImmediateValue(ev.target.value);
-          setShowSuggestions(true);
+          setCurrentValue(ev.target.value);
+          setIsActive(true);
         }}
-        onBlur={() => setTimeout(() => setShowSuggestions(false), 500)}
-        onFocus={() => setShowSuggestions(true)}
+        onBlur={() => {
+          // Wait. If we do it immediately, the onClick of the suggestion won't register
+          const timer = setTimeout(() => setIsActive(false), 100);
+          return () => clearTimeout(timer);
+        }}
+        onFocus={() => setIsActive(true)}
         placeholder={placeholder}
         style={{
-          borderRadius: display === SelectorDisplay.ButtonList ? '0.5em' : undefined,
+          borderRadius: '0.75em',
+          borderWidth: 0,
           padding: '0.5em',
           lineHeight: '1.5em',
           ...inputStyle,
@@ -109,27 +133,22 @@ const TextInput: React.FC<Props> = ({
         }}
       />
       {CalculateWidthFromHere}
-      <ClearButton
-        onClick={() => {
-          setImmediateValue('');
-          setShowSuggestions(false);
-        }}
-      />
-    </>
+      <ClearButton onClear={onClear} />
+    </div>
   );
 };
 
 type SuggestionRowProps = {
   pageParameter?: PageParamKey;
   position?: PositionInGroup;
-  setImmediateValue: (value: string) => void;
+  onSubmit: (value: string) => void;
   suggestion: Suggestion;
 };
 
 const SuggestionRow: React.FC<SuggestionRowProps> = ({
   pageParameter,
   position = PositionInGroup.Standalone,
-  setImmediateValue,
+  onSubmit,
   suggestion,
 }) => {
   const { view } = usePageParams();
@@ -142,12 +161,12 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     return <SuggestionRowDetails suggestion={suggestion} style={style} />;
   }
 
-  const setFilter = () => {
-    setImmediateValue(suggestion.searchString);
-  };
+  const onClick = useCallback(() => {
+    onSubmit(suggestion.searchString);
+  }, [onSubmit, suggestion.searchString]);
 
   return (
-    <button onClick={setFilter} style={style} role="option" type="button">
+    <button onClick={onClick} style={style} role="option" type="button">
       {suggestion.label}
     </button>
   );
@@ -176,18 +195,19 @@ const SuggestionRowDetails: React.FC<{
 };
 
 const ClearButton: React.FC<{
-  onClick: () => void;
-}> = ({ onClick }) => {
+  onClear: () => void;
+}> = ({ onClear }) => {
   const { display } = useSelectorDisplay();
   return (
     <HoverableButton
-      buttonType="reset"
+      buttonType="button"
       hoverContent="Clear the input"
-      onClick={onClick}
+      onClick={onClear}
       style={{
         ...(display === SelectorDisplay.ButtonList
           ? { borderRadius: '0.5em', border: 'none' }
           : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }),
+        marginLeft: '0em',
         padding: '0.5em',
       }}
     >

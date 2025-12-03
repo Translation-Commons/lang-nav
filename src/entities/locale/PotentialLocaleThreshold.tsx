@@ -36,7 +36,7 @@ export function usePotentialLocaleThreshold(): {
             { searchString: '5', label: '5%' },
             { searchString: '10', label: '10%' },
           ]}
-          onChange={(percent: string) => setPercentThreshold(Number(percent))}
+          onSubmit={(percent: string) => setPercentThreshold(Number(percent))}
           placeholder=""
           value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}
         />
