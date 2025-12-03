@@ -9,6 +9,7 @@ type HoverableProps = {
   disabled?: boolean;
   hoverContent?: React.ReactNode;
   onClick?: () => void;
+  role?: string;
   style?: React.CSSProperties;
 };
 
@@ -19,6 +20,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
   disabled,
   hoverContent,
   onClick,
+  role,
   style,
 }) => {
   const { showHoverCard, hideHoverCard } = useHoverCard();
@@ -29,6 +31,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
         className={className}
         disabled={disabled}
         onClick={onClick}
+        role={role}
         style={{
           cursor: onClick ? 'pointer' : 'auto',
           ...style,

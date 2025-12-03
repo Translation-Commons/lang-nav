@@ -12,7 +12,7 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
     <div style={{ position: 'relative' }} ref={containerRef}>
       <div
         className="dropdown"
-        data-testid="dropdown"
+        role="listbox"
         style={{
           alignItems: 'start',
           position: 'absolute',

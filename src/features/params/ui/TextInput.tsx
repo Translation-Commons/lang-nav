@@ -1,5 +1,5 @@
 import { XIcon } from 'lucide-react';
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import HoverableButton from '@features/hovercard/HoverableButton';
 import { PageParamKey, View } from '@features/params/PageParamTypes';
@@ -28,11 +28,12 @@ type Props = {
   value: string;
 };
 
-/*
- * Known issues: This component uses useEffect to debounce inputs and to update the field
- * if it is updated in another place -- but there still seems to be an issue and it may
- * cause the history to be reset. Adding 2 TextInputs on the same page may freeze the page.
- */
+const enum SubmissionSource {
+  InputBox,
+  ClearButton,
+  Suggestion,
+}
+
 const TextInput: React.FC<Props> = ({
   getSuggestions = () => [],
   inputStyle,
@@ -51,12 +52,32 @@ const TextInput: React.FC<Props> = ({
     // If the passed-in value of the text input changes (eg. on page nav) then update the current value
     setCurrentValue(value);
   }, [value, setCurrentValue]);
+  const isUpdatingFromSuggestions = useRef(false);
 
   // Handle suggestions
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
-  const [isActive, setIsActive] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(false);
+
+  const submit = useCallback(
+    (value: string, source: SubmissionSource) => {
+      if (source !== SubmissionSource.Suggestion && isUpdatingFromSuggestions.current) return;
+      onSubmit(value);
+
+      // Hide suggestions after submission, with a slight delay to allow click events to register
+      const timer = setTimeout(() => {
+        {
+          setShowSuggestions(false);
+          isUpdatingFromSuggestions.current = false;
+        }
+      }, 100);
+      return () => clearTimeout(timer);
+    },
+    [onSubmit, setShowSuggestions],
+  );
+
   useEffect(() => {
     let active = true;
+    // Only keep the latest request for suggestions
     (async () => {
       const result = await getSuggestions(currentValue);
       if (active) setSuggestions(result.slice(0, 10));
@@ -67,22 +88,30 @@ const TextInput: React.FC<Props> = ({
   }, [getSuggestions, currentValue]);
   const onKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLInputElement>) => {
+      isUpdatingFromSuggestions.current = false;
+      setShowSuggestions(true);
       if (event.key === 'Enter') {
+        // Prevent the page from reloading, and do a regular submit
         event.preventDefault();
-        onSubmit(currentValue);
-        setIsActive(false);
+        submit(currentValue, SubmissionSource.InputBox);
+      } else if (event.key === 'Escape') {
+        // Undoes the edits
+        setCurrentValue(value);
+        setShowSuggestions(false);
       }
     },
-    [onSubmit, currentValue],
+    [submit, currentValue, setShowSuggestions],
   );
-  const onClear = useCallback(() => {
-    onSubmit('');
-    setIsActive(false);
-  }, [onSubmit]);
+  const onClickSuggestion = useCallback(
+    (suggestion: Suggestion) => {
+      isUpdatingFromSuggestions.current = true;
+      submit(suggestion.searchString, SubmissionSource.Suggestion);
+    },
+    [submit],
+  );
 
   return (
     <div
-      // onSubmit={onEnterKey}
       style={{
         display: 'flex',
         alignItems: 'center',
@@ -91,37 +120,30 @@ const TextInput: React.FC<Props> = ({
       }}
     >
       {label}
-      {isActive && suggestions.length > 0 && (
+      {showSuggestions && suggestions.length > 0 && (
         <SelectorDropdown>
           {suggestions.map((s, i) => (
             <SuggestionRow
               key={i}
               pageParameter={pageParameter}
               position={getPositionInGroup(i, suggestions.length)}
-              onSubmit={onSubmit}
+              onClick={onClickSuggestion}
+              onKeyDown={() => (isUpdatingFromSuggestions.current = true)}
               suggestion={s}
             />
           ))}
         </SelectorDropdown>
       )}
       <input
-        onSubmit={() => onSubmit(currentValue)}
-        onKeyDown={onKeyDown}
         type="text"
         id={pageParameter}
         className={currentValue === '' ? 'empty' : ''}
         value={currentValue}
         autoComplete="off" // It's already handled
-        onChange={(ev) => {
-          setCurrentValue(ev.target.value);
-          setIsActive(true);
-        }}
-        onBlur={() => {
-          // Wait. If we do it immediately, the onClick of the suggestion won't register
-          const timer = setTimeout(() => setIsActive(false), 100);
-          return () => clearTimeout(timer);
-        }}
-        onFocus={() => setIsActive(true)}
+        onChange={(ev) => setCurrentValue(ev.target.value)}
+        onBlur={() => submit(currentValue, SubmissionSource.InputBox)}
+        onFocus={() => setShowSuggestions(true)}
+        onKeyDown={onKeyDown} // If enter key, submit
         placeholder={placeholder}
         style={{
           borderRadius: '0.75em',
@@ -133,7 +155,7 @@ const TextInput: React.FC<Props> = ({
         }}
       />
       {CalculateWidthFromHere}
-      <ClearButton onClear={onClear} />
+      <ClearButton onClear={() => submit('', SubmissionSource.ClearButton)} />
     </div>
   );
 };
@@ -141,14 +163,16 @@ const TextInput: React.FC<Props> = ({
 type SuggestionRowProps = {
   pageParameter?: PageParamKey;
   position?: PositionInGroup;
-  onSubmit: (value: string) => void;
+  onClick: (value: Suggestion) => void;
+  onKeyDown: () => void;
   suggestion: Suggestion;
 };
 
 const SuggestionRow: React.FC<SuggestionRowProps> = ({
   pageParameter,
   position = PositionInGroup.Standalone,
-  onSubmit,
+  onClick,
+  onKeyDown,
   suggestion,
 }) => {
   const { view } = usePageParams();
@@ -158,15 +182,18 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     position,
   );
   if (view == View.Details && pageParameter === PageParamKey.searchString) {
+    // Does not need to update suggestions
     return <SuggestionRowDetails suggestion={suggestion} style={style} />;
   }
 
-  const onClick = useCallback(() => {
-    onSubmit(suggestion.searchString);
-  }, [onSubmit, suggestion.searchString]);
-
   return (
-    <button onClick={onClick} style={style} role="option" type="button">
+    <button
+      onMouseDown={onKeyDown}
+      onClick={() => onClick(suggestion)}
+      style={style}
+      role="option"
+      type="button"
+    >
       {suggestion.label}
     </button>
   );

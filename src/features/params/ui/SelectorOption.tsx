@@ -43,6 +43,7 @@ function SelectorOption<T extends React.Key>({
         )
       }
       onClick={() => onClick(Array.isArray(option) ? option[0] : option)}
+      role="option"
       style={getOptionStyle(display, isSelected, position)}
     >
       <OptionLabel<T>
