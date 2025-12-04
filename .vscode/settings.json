@@ -5,17 +5,12 @@
   "editor.codeActionsOnSave": {
     "source.organizeImports": "explicit",
     "source.fixAll": "always", // run all fixers (includes prettier if wired)
-    "source.fixAll.eslint": "always", // run eslint --fix
+    "source.fixAll.eslint": "always" // run eslint --fix
   },
   // --- ESLint integration ---
   "eslint.enable": true,
   "eslint.run": "onType",
   "eslint.format.enable": true,
   "eslint.useFlatConfig": true,
-  "eslint.validate": [
-    "typescript",
-    "typescriptreact",
-    "javascript",
-    "javascriptreact"
-  ],
+  "eslint.validate": ["typescript", "typescriptreact", "javascript", "javascriptreact"]
 }
