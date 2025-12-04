@@ -70,7 +70,7 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
           <TextInput
             inputStyle={{ minWidth: '8em' }}
             getSuggestions={getSuggestions}
-            onChange={(languageFilter: string) => updatePageParams({ languageFilter })}
+            onSubmit={(languageFilter: string) => updatePageParams({ languageFilter })}
             pageParameter={PageParamKey.languageFilter}
             placeholder="Name or code"
             value={languageFilter}

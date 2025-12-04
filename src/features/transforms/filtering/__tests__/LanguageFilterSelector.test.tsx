@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { vi, describe, it, expect, beforeEach, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -51,12 +51,12 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     render(<LanguageFilterSelector />);
 
-    const btn = screen.getByPlaceholderText('Name or code');
+    const input = screen.getByPlaceholderText('Name or code');
     // click to trigger getSuggestions('') and await
-    await user.click(btn);
+    await user.click(input);
 
     // After click the mocked TextInput will render suggestion items
-    const items = screen.getByTestId('dropdown').children;
+    const items = screen.getByRole('listbox').children;
     // Expect all 10 languages to be suggested and that the languages come first
     expect(items.length).toBe(10);
     expect(items[0]).toHaveTextContent('English [eng]');
@@ -71,12 +71,11 @@ describe('LanguageFilterSelector', () => {
     expect(items[9]).toHaveTextContent('Germanic [gem]');
 
     // User types in German, suggestions should filter to German and Germanic
-    await user.type(btn, 'German');
+    await user.type(input, 'German');
     expect(items.length).toBe(2);
     expect(items[0]).toHaveTextContent('German [deu]');
     expect(items[1]).toHaveTextContent('Germanic [gem]');
-    await new Promise((r) => setTimeout(r, 400)); // wait for debounce
-    expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'German' });
+    expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
 
     // User clicks on German, the button text should update and updatePageParams called
     await user.click(items[0]);
@@ -94,7 +93,7 @@ describe('LanguageFilterSelector', () => {
     await user.click(btn);
 
     // After click the mocked TextInput will render suggestion items
-    const items = screen.getByTestId('dropdown').children;
+    const items = screen.getByRole('listbox').children;
     // Expect all 10 languages to be suggested and that the languages come first
     expect(items.length).toBe(10);
     expect(items[0]).toHaveTextContent('Indo-European languages [ine]');
