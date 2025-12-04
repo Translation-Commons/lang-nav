@@ -33,7 +33,7 @@ describe('TextInput component', () => {
     const result = render(<TextInput onSubmit={onSubmit} value="" />);
 
     // Write to input component
-    const input = result.getByRole('textbox') as HTMLInputElement;
+    const input = result.getByRole('combobox') as HTMLInputElement;
     expect(input.value).toBe('');
     await user.click(input);
     await user.type(input, 'test input');
@@ -63,7 +63,7 @@ describe('TextInput component', () => {
     expect(result.queryByRole('listbox')).toBeNull();
 
     // Focus input to trigger suggestions
-    const input = result.getByRole('textbox') as HTMLInputElement;
+    const input = result.getByRole('combobox') as HTMLInputElement;
     await user.click(input);
 
     // Wait for suggestions to appear
@@ -86,7 +86,7 @@ describe('TextInput component', () => {
     await waitFor(() => expect(result.queryByRole('listbox')).toBeNull());
   });
 
-  it('test keydown events', async () => {
+  it('handles keydown events', async () => {
     const user = createUser();
     const onSubmit = vi.fn();
     const getSuggestions = async (query: string) =>
@@ -95,7 +95,7 @@ describe('TextInput component', () => {
     const result = render(
       <TextInput onSubmit={onSubmit} getSuggestions={getSuggestions} value="" />,
     );
-    const input = result.getByRole('textbox') as HTMLInputElement;
+    const input = result.getByRole('combobox') as HTMLInputElement;
 
     // Test typing in input
     await user.click(input);
@@ -104,7 +104,7 @@ describe('TextInput component', () => {
     const suggestionList = await result.findByRole('listbox');
     expect(suggestionList).toBeTruthy();
 
-    // Test Escape key clears input
+    // Test Escape key reverts input and hides suggestions
     await user.keyboard('{Escape}');
     expect(input.value).toBe('');
     await waitFor(() => expect(result.queryByRole('listbox')).toBeNull());
@@ -128,7 +128,7 @@ describe('TextInput component', () => {
         <button type="button">Outside Button</button>
       </div>,
     );
-    const input = result.getByRole('textbox') as HTMLInputElement;
+    const input = result.getByRole('combobox') as HTMLInputElement;
 
     // Type to get suggestions
     await user.click(input);
@@ -151,7 +151,7 @@ describe('TextInput component', () => {
     const onSubmit = vi.fn();
 
     const result = render(<TextInput onSubmit={onSubmit} value="original" />);
-    const input = result.getByRole('textbox') as HTMLInputElement;
+    const input = result.getByRole('combobox') as HTMLInputElement;
     expect(input.value).toBe('original');
 
     // Modify the input value
@@ -180,7 +180,7 @@ describe('TextInput component', () => {
 
     // Render the controlled wrapper so value updates flow into the component
     const result = render(<MutableTextInput />);
-    const input = result.getByRole('textbox') as HTMLInputElement;
+    const input = result.getByRole('combobox') as HTMLInputElement;
     expect(input.value).toBe('app');
     expect(result.queryByRole('listbox')).toBeNull(); // no suggestions
 

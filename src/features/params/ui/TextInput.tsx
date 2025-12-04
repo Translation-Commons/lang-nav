@@ -35,7 +35,7 @@ const enum SubmissionSource {
 }
 
 const TextInput: React.FC<Props> = ({
-  getSuggestions = () => [],
+  getSuggestions = async () => [],
   inputStyle,
   label,
   onSubmit,
@@ -100,7 +100,7 @@ const TextInput: React.FC<Props> = ({
         setShowSuggestions(false);
       }
     },
-    [submit, currentValue, setShowSuggestions],
+    [submit, currentValue, setShowSuggestions, value],
   );
   const onClickSuggestion = useCallback(
     (suggestion: Suggestion) => {
@@ -136,15 +136,17 @@ const TextInput: React.FC<Props> = ({
       )}
       <input
         type="text"
-        id={pageParameter}
-        className={currentValue === '' ? 'empty' : ''}
-        value={currentValue}
+        aria-expanded={showSuggestions}
+        aria-controls="suggestion-list"
         autoComplete="off" // It's already handled
+        className={currentValue === '' ? 'empty' : ''}
+        id={pageParameter}
         onChange={(ev) => setCurrentValue(ev.target.value)}
         onBlur={() => submit(currentValue, SubmissionSource.InputBox)}
         onFocus={() => setShowSuggestions(true)}
         onKeyDown={onKeyDown} // If enter key, submit
         placeholder={placeholder}
+        role="combobox"
         style={{
           borderRadius: '0.75em',
           borderWidth: 0,
@@ -153,6 +155,7 @@ const TextInput: React.FC<Props> = ({
           ...inputStyle,
           width: width + 5,
         }}
+        value={currentValue}
       />
       {CalculateWidthFromHere}
       <ClearButton onClear={() => submit('', SubmissionSource.ClearButton)} />

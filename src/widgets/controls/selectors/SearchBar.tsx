@@ -15,11 +15,7 @@ import { useSearchSuggestions } from './useSearchSuggestions';
 const SearchBar: React.FC = () => {
   const { searchString, updatePageParams } = usePageParams();
   const getSearchSuggestions = useSearchSuggestions();
-  const setSearchString = (value: string) => {
-    console.log('setSearchString', value);
-    updatePageParams({ searchString: value });
-  };
-
+  const setSearchString = (value: string) => updatePageParams({ searchString: value });
   return (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
       <form
