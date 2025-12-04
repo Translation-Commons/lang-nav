@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import {
-  loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
+  loadIANAVariants,
 } from '@features/data/load/extra_entities/IANAData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { CensusID, CensusData } from '@entities/census/CensusTypes';
+import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
@@ -23,6 +23,7 @@ import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
 import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '../connect/connectWritingSystems';
+import { createFamilyLocales } from '../connect/createFamilyLocales';
 import { createRegionalLocales } from '../connect/createRegionalLocales';
 
 import { loadLanguages } from './entities/loadLanguages';
@@ -136,6 +137,7 @@ export function useCoreData(): {
     connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
     connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
+    createFamilyLocales(languagesBySource.Combined, locales); // create after getting the list of regular locales
     createRegionalLocales(territories, locales); // create them after connecting them
     computeDescendantPopulation(languagesBySource, writingSystems);
 

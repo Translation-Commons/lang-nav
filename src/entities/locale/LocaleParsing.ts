@@ -1,20 +1,6 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
-import { ISO3166Code, LocaleData, OfficialStatus } from '@entities/types/DataTypes';
-
-export function getLocaleName(locale: LocaleData, includeTerritory: boolean = true): string {
-  const languageName = locale.language?.nameDisplay ?? locale.languageCode;
-  const territoryName = includeTerritory
-    ? (locale.territory?.nameDisplay ?? locale.territoryCode)
-    : null;
-  const scriptName = locale.writingSystem?.nameDisplay ?? locale.scriptCode;
-  const variantNames =
-    locale.variantTags?.map((tag) => tag.nameDisplay).join(', ') ??
-    locale.variantTagCodes?.join(', ');
-  const extraBits = [territoryName, scriptName, variantNames].filter(Boolean).join(', ');
-
-  return extraBits ? languageName + ' (' + extraBits + ')' : languageName;
-}
+import { ISO3166Code, LocaleData } from '@entities/types/DataTypes';
 
 export function getLocaleCode(
   locale: LocaleData,
@@ -77,21 +63,4 @@ export function parseLocaleCode(localeCode: string): LocaleTags {
     territoryCode: parts[3],
     variantTagCodes: parts[4] ? parts[4].toLowerCase().split(/[-_]/) : [],
   };
-}
-
-export function getOfficialLabel(officialStatus: OfficialStatus): string {
-  switch (officialStatus) {
-    case OfficialStatus.Official:
-      return 'Official';
-    case OfficialStatus.DeFactoOfficial:
-      return 'Official (de facto)';
-    case OfficialStatus.Recognized:
-      return 'Recognized';
-    case OfficialStatus.OfficialRegionally:
-      return 'Official in a Region';
-    case OfficialStatus.RecognizedRegionally:
-      return 'Recognized in a Region';
-    default:
-      return 'None';
-  }
 }

@@ -159,6 +159,7 @@ export enum LocaleSource {
   IANA = 'IANA', // created when importing IANA variant tags
   Census = 'census', // created when importing census data
   CreateRegionalLocales = 'createRegionalLocales', // created when generating aggregated regional locales
+  CreateFamilyLocales = 'createFamilyLocales', // created when generating language family locales
 }
 
 export interface LocaleData extends ObjectBase {
@@ -185,6 +186,7 @@ export interface LocaleData extends ObjectBase {
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
   containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
+  familyLocales?: LocaleData[]; // Locales for languages that are part of the language family
   variantTags?: VariantTagData[];
 
   // Data computed from other references, particularly territories.tsv and censuses
