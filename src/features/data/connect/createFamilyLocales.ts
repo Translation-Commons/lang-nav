@@ -1,7 +1,16 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { LanguageData, LanguageDictionary } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageDictionary, LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource, PopulationSourceCategory } from '@entities/types/DataTypes';
+
+// SOURCE is a constant to pick what source to use when creating family locales.
+// Ideally we'd do this for all sources or the Combined source -- but because it can create so
+// many locales (also compounded with regional locales), we limit it for now to just ISO
+// Comparison          Locales   Heap Memory
+// No family locales    32,415        98 MB
+// ISO:                 36,149      ~103 MB
+// Combined:            69,250      ~125 MB
+const SOURCE = LanguageSource.ISO;
 
 export function createFamilyLocales(
   languages: LanguageDictionary,
@@ -9,14 +18,12 @@ export function createFamilyLocales(
 ): void {
   Object.values(languages).forEach((language) => {
     // Only start recursively creating family locales for top-level languages
-    if (language.Combined.parentLanguage != null || language.Combined.childLanguages?.length === 0)
+    if (language[SOURCE].parentLanguage != null || language[SOURCE].childLanguages?.length === 0)
       return;
-
     // Create locales for all the territories the language is used in
     createLocalesForLanguageFamily(language, locales);
   });
-
-  // createFamilyLocales2(locales);
+  createFamilyLocales2(locales);
 }
 
 function createLocalesForLanguageFamily(
@@ -25,7 +32,7 @@ function createLocalesForLanguageFamily(
 ): LocaleData[] {
   // Find the child locales for this language
   const childLocales =
-    language.Combined.childLanguages?.flatMap((childLang) =>
+    language[SOURCE].childLanguages?.flatMap((childLang) =>
       createLocalesForLanguageFamily(childLang, allLocales),
     ) || [];
 
@@ -136,7 +143,6 @@ export function createFamilyLocales2(locales: Record<string, LocaleData>): void 
     // Create a new locale or update an existing family
     const newLocaleCode = `${parentLanguage.ID}_${loc.territoryCode}`;
     let newLocale = locales[newLocaleCode];
-    console.log('Processing family locale for', newLocaleCode, newLocale);
     if (newLocale == null) {
       // It isn't found yet, create it
       newLocale = {

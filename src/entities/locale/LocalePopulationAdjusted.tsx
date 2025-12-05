@@ -4,11 +4,13 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
-import { isTerritoryGroup, LocaleData } from '@entities/types/DataTypes';
+import { isTerritoryGroup, LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
 
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import LocaleCensusCitation from './LocaleCensusCitation';
 
 export const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   if (locale.populationAdjusted == null) return null;
@@ -22,11 +24,14 @@ export const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ loc
 
 const LocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   if (!locale.territory || !locale.populationAdjusted) return null;
-  return isTerritoryGroup(locale.territory.scope) ? (
-    <RegionalLocalePopulationBreakdown locale={locale} />
-  ) : (
-    <CountryLocalePopulationBreakdown locale={locale} />
-  );
+
+  if (
+    isTerritoryGroup(locale.territory.scope) ||
+    locale.populationSource === PopulationSourceCategory.Aggregated
+  ) {
+    return <RegionalLocalePopulationBreakdown locale={locale} />;
+  }
+  return <CountryLocalePopulationBreakdown locale={locale} />;
 };
 
 const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ locale }) => {
@@ -34,37 +39,47 @@ const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ l
 
   return (
     <table>
-      <tr>
-        <LabelCell>Population Unadjusted:</LabelCell>
-        <td>
-          <CountOfPeople count={populationSpeaking!} />
-        </td>
-      </tr>
-      <tr>
-        <LabelCell>Population Adjusted to 2025:</LabelCell>
-        <td>
-          <CountOfPeople count={populationAdjusted!} />
-        </td>
-      </tr>
-      <tr>
-        <td colSpan={2}>
-          Since the territory for this locale is a regional grouping, the data is added up from the
-          populations of all constituent territories:
-        </td>
-      </tr>
-      {locale.containedLocales
-        ?.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
-        .slice(0, 5)
-        .map((childLocale) => (
-          <tr key={childLocale.ID}>
-            <td style={{ paddingLeft: '1em' }}>
-              <HoverableObjectName object={childLocale} labelSource="territory" />
-            </td>
-            <td>
-              <CountOfPeople count={childLocale.populationAdjusted} />
-            </td>
-          </tr>
-        ))}
+      <tbody>
+        <tr>
+          <LabelCell>Population Unadjusted:</LabelCell>
+          <td className="count">
+            <CountOfPeople count={populationSpeaking!} />
+          </td>
+        </tr>
+        <tr>
+          <LabelCell>Population Adjusted to 2025:</LabelCell>
+          <td className="count">
+            <CountOfPeople count={populationAdjusted!} />
+          </td>
+        </tr>
+        <tr>
+          <td colSpan={3}>
+            Since the territory for this locale is a regional grouping, the data is added up from
+            the populations of all constituent territories:
+          </td>
+        </tr>
+        {[...(locale.containedLocales || []), ...(locale.familyLocales || [])]
+          ?.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
+          .slice(0, 5)
+          .map((childLocale) => (
+            <tr key={childLocale.ID}>
+              <td style={{ paddingLeft: '1em' }}>
+                <HoverableObjectName
+                  object={childLocale}
+                  labelSource={
+                    locale.languageCode === childLocale.languageCode ? 'territory' : 'language'
+                  }
+                />
+              </td>
+              <td className="count">
+                <CountOfPeople count={childLocale.populationAdjusted} />
+              </td>
+              <td>
+                [<LocaleCensusCitation locale={childLocale} size="short" />]
+              </td>
+            </tr>
+          ))}
+      </tbody>
     </table>
   );
 };

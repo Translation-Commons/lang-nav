@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
@@ -7,13 +8,19 @@ import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes'
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import LocalePopulationFromDescendents from './LocalePopulationFromDescendents';
+
 type Props = {
   locale: LocaleData;
   size?: 'short' | 'full';
 };
 
 const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
-  const { populationCensus } = locale;
+  const { populationCensus, populationSource } = locale;
+  if (populationSource == PopulationSourceCategory.Aggregated) {
+    return <LocaleAggregatedCitation locale={locale} />;
+  }
+
   if (populationCensus != null) {
     const { yearCollected, collectorName, collectorType } = populationCensus;
     if (collectorType === CensusCollectorType.CLDR) {
@@ -41,7 +48,7 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
     );
   }
   if (size === 'short') {
-    switch (locale.populationSource) {
+    switch (populationSource) {
       case PopulationSourceCategory.Official:
       case PopulationSourceCategory.UnverifiedOfficial:
       case PopulationSourceCategory.Study:
@@ -54,12 +61,10 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
       case PopulationSourceCategory.NoSource:
       case PopulationSourceCategory.Other:
         return <Deemphasized>no citation</Deemphasized>;
-      case PopulationSourceCategory.Aggregated:
-        return <Deemphasized>rough estimate</Deemphasized>;
     }
   }
 
-  switch (locale.populationSource) {
+  switch (populationSource) {
     case PopulationSourceCategory.Official:
     case PopulationSourceCategory.UnverifiedOfficial:
       return (locale.territory?.nameDisplay ?? locale.territoryCode) + ' census'; // TODO add year
@@ -75,9 +80,15 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
       return 'citation needed';
     case PopulationSourceCategory.NoSource:
       return 'no source';
-    case PopulationSourceCategory.Aggregated:
-      return 'aggregated from other sources';
   }
+};
+
+const LocaleAggregatedCitation: React.FC<{ locale: LocaleData }> = ({ locale }) => {
+  return (
+    <Hoverable hoverContent={<LocalePopulationFromDescendents locale={locale} />}>
+      aggregated
+    </Hoverable>
+  );
 };
 
 export default LocaleCensusCitation;
