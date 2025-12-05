@@ -1,5 +1,6 @@
 import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import {
@@ -62,6 +63,7 @@ export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
 export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
+  scaleBy = 'scaleBy',
   columns = 'columns',
   languageFilter = 'languageFilter',
   languageSource = 'languageSource',
@@ -87,6 +89,7 @@ export enum PageParamKey {
 
 export type PageParams = {
   colorBy: ColorBy;
+  scaleBy: ScaleBy;
   colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
   isoStatus: LanguageISOStatus[];
@@ -113,6 +116,7 @@ export type PageParams = {
 
 export type PageParamsOptional = {
   colorBy?: ColorBy;
+  scaleBy?: ScaleBy;
   colorGradient?: ColorGradient;
   columns?: TableIDToBinarizedColumnVisibility;
   isoStatus?: LanguageISOStatus[];

@@ -1,5 +1,6 @@
 import { parseColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
@@ -104,6 +105,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         break;
       case PageParamKey.colorGradient:
         params.colorGradient = parseInt(value) as ColorGradient;
+        break;
+      case PageParamKey.scaleBy:
+        params.scaleBy = value as ScaleBy;
         break;
 
       // Freeform strings

@@ -10,6 +10,7 @@ import {
 } from '@features/params/ui/SelectorDisplayContext';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
 import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
 import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
@@ -85,6 +86,7 @@ const SidePanel: React.FC = () => {
           <SortBySelector />
           <SortDirectionSelector />
           <ColorBySelector />
+          <ScaleBySelector />
           <ColorGradientSelector />
           <LocaleSeparatorSelector />
           <PageBrightnessSelector />
