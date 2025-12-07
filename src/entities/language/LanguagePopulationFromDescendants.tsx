@@ -2,7 +2,10 @@ import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import { ObjectType, View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
@@ -36,6 +39,7 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
 };
 
 const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { updatePageParams } = usePageParams();
   if (!lang.populationOfDescendants) return null;
 
   return (
@@ -70,6 +74,18 @@ const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
           )}
         </tbody>
       </table>
+      <HoverableButton
+        onClick={() =>
+          updatePageParams({
+            languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
+            view: View.Table,
+            objectType: ObjectType.Language,
+          })
+        }
+        style={{ display: 'block' }}
+      >
+        See all descendants in the language table
+      </HoverableButton>
     </>
   );
 };

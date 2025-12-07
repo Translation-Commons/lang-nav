@@ -26,7 +26,7 @@ export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
     .filter((l) => isTerritoryGroup(l.territory?.scope))
     .forEach((locale) => {
       locale.populationWriting = sumBy(
-        uniqueBy(locale.containedLocales ?? [], (loc) => loc.territoryCode || ''),
+        uniqueBy(locale.localesWithinThisTerritory ?? [], (loc) => loc.territoryCode || ''),
         (locale) => locale.populationWriting ?? 0,
       );
       if (locale.populationSpeaking && locale.populationWriting) {

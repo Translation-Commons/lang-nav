@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { LocaleData } from '@entities/types/DataTypes';
 
@@ -10,9 +10,10 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import LocaleCensusCitation from './LocaleCensusCitation';
 
 const LocalePopulationFromDescendents: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const childLocales = [...(locale.familyLocales || []), ...(locale.containedLocales || [])].sort(
-    (a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0),
-  );
+  const childLocales = [
+    ...(locale.localesWithinThisLanguage || []),
+    ...(locale.localesWithinThisTerritory || []),
+  ].sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0));
   if (!locale.populationSpeaking || childLocales.length === 0) return null;
 
   return (

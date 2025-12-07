@@ -113,17 +113,29 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Linked Data',
         },
         {
-          key: 'Contains Locales',
+          key: 'Sublocales in Territory',
           render: (loc) => (
             <CommaSeparated limit={2}>
-              {loc.containedLocales?.map((child) => (
+              {loc.localesWithinThisTerritory?.map((child) => (
                 <HoverableObjectName object={child} key={child.ID} />
               ))}
             </CommaSeparated>
           ),
           isInitiallyVisible: false,
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfLanguages,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Sublocales in Language Family',
+          render: (loc) => (
+            <CommaSeparated limit={2}>
+              {loc.localesWithinThisLanguage?.map((child) => (
+                <HoverableObjectName object={child} key={child.ID} />
+              ))}
+            </CommaSeparated>
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Count,
           columnGroup: 'Linked Data',
         },
         {

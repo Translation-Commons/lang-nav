@@ -34,7 +34,10 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
     case ObjectType.Language:
       return object.childLanguages;
     case ObjectType.Locale:
-      return object.containedLocales ?? [];
+      return [
+        ...(object.localesWithinThisTerritory ?? []),
+        ...(object.localesWithinThisLanguage ?? []),
+      ];
     case ObjectType.Territory:
       return [...(object.containsTerritories ?? []), ...(object.dependentTerritories ?? [])];
     case ObjectType.WritingSystem:
@@ -42,6 +45,13 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
     case ObjectType.VariantTag:
       return object.locales;
   }
+}
+
+export function getObjectFullDescendants(object: ObjectData): ObjectData[] {
+  return getObjectChildren(object).reduce<ObjectData[]>(
+    (all, child) => (child ? all.concat([child], getObjectFullDescendants(child)) : all),
+    [],
+  );
 }
 
 export function getDescendantsName(object: ObjectData, count: number): string {

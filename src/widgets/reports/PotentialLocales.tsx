@@ -178,7 +178,9 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Related Locale',
           render: (object) => {
-            const descendantLocale = object.containedLocales ? object.containedLocales[0] : null;
+            const descendantLocale = object.localesWithinThisTerritory
+              ? object.localesWithinThisTerritory[0]
+              : null;
             return (
               descendantLocale && (
                 <HoverableObjectName object={descendantLocale} labelSource="code" />
@@ -321,10 +323,10 @@ function partitionPotentialLocales(
         )
       : null;
     if (!descendantLocaleInTerritory) {
-      largestLocale.containedLocales = [localesSorted[1]];
+      largestLocale.localesWithinThisTerritory = [localesSorted[1]];
       partitionedLocales.largest.push(largestLocale);
     } else {
-      largestLocale.containedLocales = [descendantLocaleInTerritory];
+      largestLocale.localesWithinThisTerritory = [descendantLocaleInTerritory];
       partitionedLocales.largestButDescendantExists.push(largestLocale);
     }
   }
@@ -342,10 +344,10 @@ function partitionPotentialLocales(
           )
         : null;
       if (!descendantLocaleInTerritory) {
-        locale.containedLocales = [localesSorted[0]];
+        locale.localesWithinThisTerritory = [localesSorted[0]];
         partitionedLocales.significant.push(locale);
       } else {
-        locale.containedLocales = [descendantLocaleInTerritory];
+        locale.localesWithinThisTerritory = [descendantLocaleInTerritory];
         partitionedLocales.significantButMaybeRedundant.push(locale);
       }
     });

@@ -3,7 +3,7 @@
  * to test various edge cases.
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
@@ -117,22 +117,23 @@ describe('getCountOfLanguages', () => {
       '001': 2, // sjn, dori0123
       '123': 2, // sjn, dori0123
       Teng: 2, // sjn, dori0123
+      AM: undefined,
+      BE: 1, // sjn
       ER: 2, // sjn, dori0123
       HA: undefined,
-      BE: 1, // sjn
       dori0123: 0,
       dori0123_001: 1, // dori0123_123
       dori0123_123: 1, // dori0123_ER
-      dori0123_ER: undefined,
+      dori0123_ER: 0,
       be0590: 1, // sjn
       sjn: 1, // dori0123
       sjn_001: 1, // sjn_123
       sjn_123: 2, // sjn_ER, sjn_BE
       sjn_Teng_001: 1, // sjn_Teng_123
       sjn_Teng_123: 1, // sjn_Teng_BE
-      sjn_Teng_BE: undefined,
-      sjn_ER: undefined,
-      sjn_BE: undefined,
+      sjn_Teng_BE: 0,
+      sjn_ER: 0,
+      sjn_BE: 0,
       tolkorth: 2, // eng, spa
     });
   });

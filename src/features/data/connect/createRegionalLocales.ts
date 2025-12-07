@@ -39,12 +39,12 @@ function createRegionalLocalesForTerritory(
 
   const territoryLocales = containsTerritories?.reduce<Record<BCP47LocaleCode, LocaleData>>(
     (locs, childTerritory) => {
-      childTerritory.locales?.forEach((loc) => {
-        const newLocaleCode = getLocaleCode(loc, LocaleSeparator.Underscore, territory.ID);
-        const newLocale = locs[newLocaleCode];
+      childTerritory.locales?.forEach((childLocale) => {
+        const newLocaleCode = getLocaleCode(childLocale, LocaleSeparator.Underscore, territory.ID);
+        let newLocale = locs[newLocaleCode];
         if (newLocale == null) {
           // It isn't found yet, create it
-          locs[newLocaleCode] = {
+          newLocale = {
             // Set a new locale code and territory code
             type: ObjectType.Locale,
             ID: newLocaleCode,
@@ -56,35 +56,43 @@ function createRegionalLocalesForTerritory(
             territory,
 
             // Add other parts of the locale code
-            languageCode: loc.languageCode,
-            language: loc.language,
-            scriptCode: loc.scriptCode,
-            writingSystem: loc.writingSystem,
-            variantTagCodes: loc.variantTagCodes != null ? [...loc.variantTagCodes] : [], // dereference the array
-            variantTags: loc.variantTags != null ? [...loc.variantTags] : [], // dereference the array
+            languageCode: childLocale.languageCode,
+            language: childLocale.language,
+            scriptCode: childLocale.scriptCode,
+            writingSystem: childLocale.writingSystem,
+            variantTagCodes:
+              childLocale.variantTagCodes != null ? [...childLocale.variantTagCodes] : [], // dereference the array
+            variantTags: childLocale.variantTags != null ? [...childLocale.variantTags] : [], // dereference the array
 
             // Update the population
-            populationSpeaking: loc.populationSpeaking,
+            populationSpeaking: childLocale.populationSpeaking,
             populationSpeakingPercent:
-              loc.populationSpeaking != null
-                ? (loc.populationSpeaking * 100) / territory.population
+              childLocale.populationSpeaking != null
+                ? (childLocale.populationSpeaking * 100) / territory.population
                 : undefined,
-            populationSource: PopulationSourceCategory.Aggregated,
+            populationSource: PopulationSourceCategory.AggregatedFromTerritories,
 
             // Add stubs for required fields
             names: [],
             nameDisplay: newLocaleCode, // Will be computed later
-            containedLocales: [loc], // Keep track of the original locales that were aggregated
+            localesWithinThisTerritory: [childLocale], // Keep track of the original locales that were aggregated
           };
+
+          // Add edges
+          locs[newLocaleCode] = newLocale;
         } else {
-          if (loc.populationSpeaking != null) {
+          if (childLocale.populationSpeaking != null) {
             if (newLocale.populationSpeaking == null) newLocale.populationSpeaking = 0;
-            newLocale.populationSpeaking += loc.populationSpeaking || 0;
+            newLocale.populationSpeaking += childLocale.populationSpeaking || 0;
             newLocale.populationSpeakingPercent =
               (newLocale.populationSpeaking * 100) / territory.population;
-            newLocale.containedLocales = [...(newLocale.containedLocales || []), loc];
+            newLocale.localesWithinThisTerritory = [
+              ...(newLocale.localesWithinThisTerritory || []),
+              childLocale,
+            ];
           }
         }
+        childLocale.localeForParentTerritory = newLocale;
       });
       return locs;
     },

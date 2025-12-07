@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
@@ -26,12 +26,13 @@ describe('getObjectPopulation', () => {
       AM: 20000,
       BE: 12000,
       be0590: 12000,
+      dori0123: 1800,
       dori0123_001: 1800,
       dori0123_123: 1800,
       dori0123_ER: 1800,
-      dori0123: 2500,
       ER: 2400,
       HA: 15600,
+      sjn: 11220,
       sjn_001: 11220,
       sjn_123: 11220,
       sjn_BE: 9300, // Increased by the be0590 census
@@ -39,9 +40,8 @@ describe('getObjectPopulation', () => {
       sjn_Teng_001: 9000,
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
-      sjn: 24000,
       Teng: 26500, // some from sjn_Teng_BE, but also from the primary script for sjn & dori0123
-      tolkorth: 24000, // Estimated from sjn
+      tolkorth: 11220, // Estimated from sjn
     });
   });
 });
@@ -200,19 +200,19 @@ describe('getObjectPopulationRelativeToOverallLanguageSpeakers', () => {
       AM: undefined,
       BE: undefined,
       be0590: undefined,
-      dori0123_001: '72.0',
-      dori0123_123: '72.0',
-      dori0123_ER: '72.0',
-      dori0123: '10.4',
+      dori0123: '16.0',
+      dori0123_001: '100.0',
+      dori0123_123: '100.0',
+      dori0123_ER: '100.0',
       ER: undefined,
       HA: undefined,
-      sjn_001: '46.8',
-      sjn_123: '46.8',
-      sjn_BE: '38.8',
-      sjn_ER: '8.0',
-      sjn_Teng_001: '37.5',
-      sjn_Teng_123: '37.5',
-      sjn_Teng_BE: '37.5',
+      sjn_001: '100.0',
+      sjn_123: '100.0',
+      sjn_BE: '82.9',
+      sjn_ER: '17.1',
+      sjn_Teng_001: '80.2',
+      sjn_Teng_123: '80.2',
+      sjn_Teng_BE: '80.2',
       sjn: undefined,
       Teng: undefined,
       tolkorth: undefined,

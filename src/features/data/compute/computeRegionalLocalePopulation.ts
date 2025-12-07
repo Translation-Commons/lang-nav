@@ -20,7 +20,7 @@ export function computeRegionalLocalePopulation(territory: TerritoryData | undef
     // For these locales, sometimes there are multiple contained locales with the same territory code like zh_Hans_SG and zh_Hant_SG
     // so get only unique locales
     const uniqueContainedLocales = uniqueBy(
-      (locale.containedLocales ?? []).sort(
+      (locale.localesWithinThisTerritory ?? []).sort(
         (a, b) => (b.populationAdjusted || 0) - (a.populationAdjusted || 0),
       ),
       (loc) => loc.territoryCode || '',

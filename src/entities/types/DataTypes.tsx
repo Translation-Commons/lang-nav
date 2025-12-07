@@ -129,6 +129,7 @@ export interface WritingSystemData extends ObjectBase {
 export type BCP47LocaleCode = string; // BCP-47 formatted locale, eg. en_US, fr_CA, etc.
 
 export enum PopulationSourceCategory {
+  // From inputted data
   Official = 'Official', // Has a cited source
   UnverifiedOfficial = 'Unverified Official', // Source lost in merge but allegedly official
   Study = 'Study',
@@ -137,7 +138,11 @@ export enum PopulationSourceCategory {
   CLDR = 'CLDR', // Unicode's Common Locale Data Repository
   Other = 'Other',
   NoSource = '',
-  Aggregated = 'Aggregated',
+
+  // Algorithmically derived
+  Algorithmic = 'Algorithmic',
+  AggregatedFromTerritories = 'Aggregated from Territories',
+  AggregatedFromLanguages = 'Aggregated from Languages',
 }
 
 export enum OfficialStatus {
@@ -185,9 +190,13 @@ export interface LocaleData extends ObjectBase {
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
-  containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
-  familyLocales?: LocaleData[]; // Locales for languages that are part of the language family
   variantTags?: VariantTagData[];
+
+  // References to other locales
+  localeForParentTerritory?: LocaleData; // The locale for the region that contains this locale's territory
+  localeForParentLanguage?: LocaleData; // The locale for the language family that contains this locale's language
+  localesWithinThisTerritory?: LocaleData[]; // The locales that represent parts of the territory field
+  localesWithinThisLanguage?: LocaleData[]; // The locales that represent child languages of the language field
 
   // Data computed from other references, particularly territories.tsv and censuses
   populationAdjusted?: number; // Speaking population adjusted to latest territory population

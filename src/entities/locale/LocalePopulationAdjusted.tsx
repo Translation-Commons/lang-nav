@@ -27,7 +27,8 @@ const LocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ locale })
 
   if (
     isTerritoryGroup(locale.territory.scope) ||
-    locale.populationSource === PopulationSourceCategory.Aggregated
+    locale.populationSource === PopulationSourceCategory.AggregatedFromLanguages ||
+    locale.populationSource === PopulationSourceCategory.AggregatedFromTerritories
   ) {
     return <RegionalLocalePopulationBreakdown locale={locale} />;
   }
@@ -40,12 +41,14 @@ const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ l
   return (
     <table>
       <tbody>
-        <tr>
-          <LabelCell>Population Unadjusted:</LabelCell>
-          <td className="count">
-            <CountOfPeople count={populationSpeaking!} />
-          </td>
-        </tr>
+        {populationSpeaking !== populationAdjusted && (
+          <tr>
+            <LabelCell>Population Unadjusted:</LabelCell>
+            <td className="count">
+              <CountOfPeople count={populationSpeaking!} />
+            </td>
+          </tr>
+        )}
         <tr>
           <LabelCell>Population Adjusted to 2025:</LabelCell>
           <td className="count">
@@ -58,7 +61,7 @@ const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ l
             the populations of all constituent territories:
           </td>
         </tr>
-        {[...(locale.containedLocales || []), ...(locale.familyLocales || [])]
+        {[...(locale.localesWithinThisLanguage || []), ...(locale.localesWithinThisTerritory || [])]
           ?.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
           .slice(0, 5)
           .map((childLocale) => (

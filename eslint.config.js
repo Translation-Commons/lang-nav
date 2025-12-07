@@ -1,13 +1,12 @@
 import js from '@eslint/js';
 import typescript from '@typescript-eslint/eslint-plugin';
 import parser from '@typescript-eslint/parser';
-import { defineConfig } from 'eslint/config';
 import prettierConfig from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
-import react from 'eslint-plugin-react';
 import pluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
@@ -26,8 +25,7 @@ export default defineConfig([
       },
     },
     files: ['**/*.ts', '**/*.tsx'],
-    plugins: {
-      react,
+    plugins: { 
       'react-hooks': reactHooks,
       '@typescript-eslint': typescript,
       prettier: prettierPlugin,

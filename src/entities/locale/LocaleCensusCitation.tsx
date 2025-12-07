@@ -17,7 +17,10 @@ type Props = {
 
 const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
   const { populationCensus, populationSource } = locale;
-  if (populationSource == PopulationSourceCategory.Aggregated) {
+  if (
+    populationSource === PopulationSourceCategory.AggregatedFromLanguages ||
+    populationSource === PopulationSourceCategory.AggregatedFromTerritories
+  ) {
     return <LocaleAggregatedCitation locale={locale} />;
   }
 

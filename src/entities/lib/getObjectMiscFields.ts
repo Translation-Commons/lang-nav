@@ -70,7 +70,10 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
     case ObjectType.Language:
       return object.childLanguages.length;
     case ObjectType.Locale:
-      return object.containedLocales?.length; // Actually count of locales, not languages
+      return (
+        (object.localesWithinThisTerritory?.length ?? 0) +
+        (object.localesWithinThisLanguage?.length ?? 0)
+      ); // Actually count of locales, not languages
     case ObjectType.Census:
       return object.languageCount;
     case ObjectType.WritingSystem:

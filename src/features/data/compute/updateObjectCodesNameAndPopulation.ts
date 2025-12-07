@@ -4,7 +4,7 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
-import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
+import { LocaleData, PopulationSourceCategory, TerritoryData } from '@entities/types/DataTypes';
 
 import { computeLocalePopulationFromCensuses } from './computeLocalePopulationFromCensuses';
 import { computeRegionalLocalePopulation } from './computeRegionalLocalePopulation';
@@ -57,13 +57,34 @@ function updateParentsAndDescendants(
   languages.forEach((lang) => {
     const specific = lang[languageSource];
     lang.populationOfDescendants = specific.populationOfDescendants ?? undefined;
-    lang.populationEstimate =
-      Math.max(
-        lang.populationCited ?? specific.populationOfDescendants ?? 0,
-        lang.populationFromLocales ?? 0,
-      ) || undefined;
+    if (lang.populationFromLocales != null) {
+      lang.populationEstimate = lang.populationFromLocales;
+      lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
+    } else if (lang.populationCited != null) {
+      lang.populationEstimate = lang.populationCited;
+      lang.populationEstimateSource = PopulationSourceCategory.Other;
+    } else if (lang.populationOfDescendants != null) {
+      lang.populationEstimate = lang.populationOfDescendants;
+      lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromLanguages;
+    } else {
+      lang.populationEstimate = undefined;
+      lang.populationEstimateSource = undefined;
+    }
     lang.parentLanguage = specific.parentLanguage ?? undefined;
     lang.childLanguages = specific.childLanguages ?? [];
+  });
+
+  // Do a second pass, discounting populations if the population is greater than or same of its parent
+  languages.forEach((lang) => {
+    const parent = lang.parentLanguage;
+    if (parent && lang.populationEstimate != null && parent.populationEstimate != null) {
+      if (lang.populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
+        return; // Do not adjust if from locales
+      if (lang.populationEstimate >= parent.populationEstimate) {
+        lang.populationEstimate = parent.populationEstimate - 0.01;
+        lang.populationEstimateSource = PopulationSourceCategory.Algorithmic;
+      }
+    }
   });
 }
 

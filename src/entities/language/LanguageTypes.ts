@@ -16,6 +16,7 @@ import { CLDRCoverageData } from '../types/CLDRTypes';
 import {
   LocaleData,
   ObjectBase,
+  PopulationSourceCategory,
   ScriptCode,
   VariantTagData,
   WikipediaData,
@@ -23,9 +24,9 @@ import {
 } from '../types/DataTypes';
 
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -108,6 +109,7 @@ export interface LanguageData extends ObjectBase {
   populationCited?: number; // from languages.tsv
   populationOfDescendants?: number; // computed from child languages
   populationFromLocales?: number; // aggregated from locale data
+  populationEstimateSource?: PopulationSourceCategory; // The source of the estimate
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
