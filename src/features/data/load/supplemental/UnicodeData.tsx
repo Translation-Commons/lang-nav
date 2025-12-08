@@ -1,4 +1,5 @@
 import aliases from 'cldr-core/supplemental/aliases.json';
+import availableLocales from 'cldr-core/availableLocales.json';
 import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
 import { ObjectType } from '@features/params/PageParamTypes';
@@ -11,6 +12,7 @@ import { LocaleData } from '@entities/types/DataTypes';
 import { DataContextType } from '../../context/useDataContext';
 
 const DEBUG = false;
+
 
 export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): void {
   // Start with the initialized
@@ -151,6 +153,30 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
     });
 
   languagesBySource.CLDR = cldrLanguages;
+}
+
+export function addCLDRLocaleDetails(locales: Record<string, LocaleData>): void {
+  // CLDR lists from cldr-core
+  const cldrModernLocales = new Set(availableLocales.availableLocales.modern);
+  const cldrLocaleList = new Set(availableLocales.availableLocales.full);
+
+  // Walk all existing LocaleData objects
+  Object.values(locales).forEach((locale) => {
+    // You may need to adjust this depending on your type:
+    // use whatever field holds "en-US", "es-MX", etc.
+    const bcp47 = locale.bcp47 ?? locale.codeDisplay ?? locale.ID;
+
+    const presentInCLDR = cldrLocaleList.has(bcp47);
+    const inModernCoverage = cldrModernLocales.has(bcp47);
+
+    // Attach a CLDR sub-object to the locale.
+    // If LocaleData doesn't have CLDR yet, add it to the type as optional.
+    locale.CLDR = {
+      ...(locale.CLDR ?? {}),
+      presentInCLDR,
+      inModernCoverage,
+    };
+  });
 }
 
 export async function loadCLDRCoverage(
