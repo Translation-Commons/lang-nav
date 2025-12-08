@@ -16,7 +16,10 @@ interface Props {
 
 const VariantTagCard: React.FC<Props> = ({ data }) => {
   const { updatePageParams } = usePageParams();
+  // destructure additional population fields if present on the variant tag
   const { ID, nameDisplay, languages } = data;
+  const populationCited = (data as any).populationCited;
+  const populationUpperBound = (data as any).populationUpperBound;
 
   return (
     <div>
@@ -30,6 +33,20 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
         <label>Name:</label>
         {nameDisplay}
       </div>
+
+      {/* Show cited and potential populations when available and non-zero */}
+      {typeof populationCited === 'number' && populationCited > 0 && (
+        <div>
+          <label>Cited Population:</label>
+          {populationCited.toLocaleString()}
+        </div>
+      )}
+      {typeof populationUpperBound === 'number' && populationUpperBound > 0 && (
+        <div>
+          <label>Potential Population:</label>
+          {populationUpperBound.toLocaleString()}
+        </div>
+      )}
 
       {languages && Object.values(languages).length > 0 && (
         <div>
