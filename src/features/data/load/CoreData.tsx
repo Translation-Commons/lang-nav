@@ -44,7 +44,7 @@ import {
   loadISOMacrolanguages,
 } from './extra_entities/ISOData';
 import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
-import { addCLDRLanguageDetails } from './supplemental/UnicodeData';
+import { addCLDRLanguageDetails, addCLDRLocaleDetails } from './supplemental/UnicodeData';
 
 export type CoreDataArrays = {
   allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets
@@ -129,6 +129,7 @@ export function useCoreData(): {
     addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageDetails(languagesBySource);
+    addCLDRLocaleDetails(locales);
     addIANAVariantLocales(languagesBySource.BCP, locales, variantTags);
 
     connectLanguagesToParent(languagesBySource);
