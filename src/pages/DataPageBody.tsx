@@ -1,7 +1,8 @@
 import React from 'react';
 
-import SearchBar from '@widgets/controls/selectors/SearchBar';
 import PathNav from '@widgets/pathnav/PathNav';
+
+import SearchBar from '@features/transforms/search/SearchBar';
 
 import DataViews from './dataviews/DataViews';
 

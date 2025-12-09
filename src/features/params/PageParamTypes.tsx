@@ -1,7 +1,7 @@
 import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
@@ -41,8 +41,9 @@ export enum View {
 }
 
 export enum SearchableField {
-  Code = 'ID',
+  All = 'default',
   NameOrCode = 'English Name or ID',
+  Code = 'ID',
   NameAny = 'All Names',
   NameEndonym = 'Endonym',
 

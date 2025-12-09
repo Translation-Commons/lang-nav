@@ -1,50 +1,17 @@
 import { useCallback } from 'react';
 
-import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageScope, LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, ObjectData, TerritoryScope } from '@entities/types/DataTypes';
-import { getSearchableField } from '@entities/ui/ObjectField';
-
-import { anyWordStartsWith } from '@shared/lib/stringUtils';
 
 export type FilterFunctionType = (a: ObjectData) => boolean;
-/**
- * Provide a function that returns true for items that match filters based on substrings of their code or name.
- */
-export function getFilterBySubstring(): FilterFunctionType {
-  const { searchBy, searchString } = usePageParams();
-  if (searchString == '') return () => true;
-  return getSubstringFilterOnQuery(searchString, searchBy);
-}
-
-export function getSubstringFilterOnQuery(
-  query: string,
-  searchBy: SearchableField,
-): FilterFunctionType {
-  // Case and accent normalization is handled in anyWordStartsWith
-  switch (searchBy) {
-    case SearchableField.Code:
-    case SearchableField.NameEndonym:
-    case SearchableField.NameDisplay:
-    case SearchableField.NameISO:
-    case SearchableField.NameCLDR:
-    case SearchableField.NameGlottolog:
-    case SearchableField.NameOrCode:
-      return (a: ObjectData) => anyWordStartsWith(getSearchableField(a, searchBy), query);
-    case SearchableField.NameAny:
-      return (a: ObjectData) =>
-        a.names
-          .map((name) => anyWordStartsWith(name, query))
-          .reduce((anyPasses, thisPasses) => anyPasses || thisPasses, false);
-  }
-}
 
 /**
  * Provides a function that filters on the scope of an object

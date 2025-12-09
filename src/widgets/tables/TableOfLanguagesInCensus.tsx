@@ -10,6 +10,7 @@ import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
@@ -18,7 +19,6 @@ import {
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
 import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';

@@ -11,7 +11,8 @@ import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput, { Suggestion } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import getSearchableField from '../search/getSearchableField';
+import HighlightedObjectField from '../search/HighlightedObjectField';
 
 import { getScopeFilter } from './filter';
 

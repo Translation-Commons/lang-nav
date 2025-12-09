@@ -5,8 +5,8 @@ import HoverableObjectName from '@features/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getFilterBySubstring } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';

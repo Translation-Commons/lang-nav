@@ -4,14 +4,14 @@ import React, { useEffect, useState } from 'react';
 import HoverableObject from '@features/hovercard/HoverableObject';
 import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { ObjectData } from '@entities/types/DataTypes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
-
-import './treelist.css';
 
 import TreeListNodeData from './TreeListNodeData';
 import { useTreeListOptionsContext } from './TreeListOptions';
+
+import './treelist.css';
 
 export type TreeNodeData = {
   children: TreeNodeData[];

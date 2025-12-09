@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { SearchableField } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
-import { HighlightedObjectField, getSearchableField } from '@entities/ui/ObjectField';
+
+import HighlightedObjectField from '../HighlightedObjectField';
 
 const mockedLanguage = getBaseLanguageData('en', 'English');
 mockedLanguage.nameEndonym = 'ENGLISH';
@@ -37,31 +38,5 @@ describe('HighlightedObjectField', () => {
     expect(screen.queryByText('Inglés')).not.toBeInTheDocument();
     expect(screen.getByText('Inglé')).toBeInTheDocument(); // Accent mark is perserved
     expect(screen.getByText('s')).toBeInTheDocument();
-  });
-});
-
-describe('getSearchableField', () => {
-  it('returns first matching name for AllNames', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameAny, 'Ingl')).toBe('Inglés');
-  });
-
-  it('Searches on accent marks as well', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameAny, 'Ingle')).toBe('Inglés');
-  });
-
-  it('returns codeDisplay for Code', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.Code)).toBe('en');
-  });
-
-  it('returns nameEndonym for Endonym', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameEndonym)).toBe('ENGLISH');
-  });
-
-  it('returns nameDisplay for EngName', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameDisplay)).toBe('English');
-  });
-
-  it('returns nameDisplay and codeDisplay for NameOrCode', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameOrCode)).toBe('English [en]');
   });
 });

@@ -7,7 +7,9 @@ import usePageParams from '@features/params/usePageParams';
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
+import getFilterBySubstring from '../search/getFilterBySubstring';
+
+import { getFilterByVitality, getScopeFilter } from './filter';
 import {
   getFilterByLanguage,
   getFilterByTerritory,
@@ -78,16 +80,16 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const formattedLanguageFilter = languageFilter.split('[')[0].trim();
 
   return (
-    <table>
+    <table style={{ textAlign: 'left' }}>
       <tbody>
         <tr>
           <td>All {getObjectTypeLabelPlural(objects[0].type)}</td>
-          <td className="numeric">{nOverall.toLocaleString()}</td>
+          <td className="count">{nOverall.toLocaleString()}</td>
         </tr>
         {nFilteredByScope > 0 && (
           <tr>
             <td>Out of scope:</td>
-            <td className="numeric">{(nFilteredByScope * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredByScope * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -103,7 +105,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         {nFilteredByTerritory > 0 && (
           <tr>
             <td>Not in territory &quot;{formattedTerritoryFilter}&quot;:</td>
-            <td className="numeric">{(nFilteredByTerritory * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredByTerritory * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -119,7 +121,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         {nFilteredByWritingSystem > 0 && (
           <tr>
             <td>Not written in &quot;{formattedWritingFilter}&quot;:</td>
-            <td className="numeric">{(nFilteredByWritingSystem * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredByWritingSystem * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -135,7 +137,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         {nFilteredByLanguage > 0 && (
           <tr>
             <td>Not related to language &quot;{formattedLanguageFilter}&quot;:</td>
-            <td className="numeric">{(nFilteredByLanguage * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredByLanguage * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -151,7 +153,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         {nFilteredByVitality > 0 && (
           <tr>
             <td>Not passing vitality filter:</td>
-            <td className="numeric">{(nFilteredByVitality * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredByVitality * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -169,7 +171,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         {nFilteredBySubstring > 0 && (
           <tr>
             <td>Not matching substring ({searchString}):</td>
-            <td className="numeric">{(nFilteredBySubstring * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredBySubstring * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -186,7 +188,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
           <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
             Results
           </td>
-          <td className="numeric" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
+          <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
             {nMatchingSubstring.toLocaleString()}
           </td>
         </tr>

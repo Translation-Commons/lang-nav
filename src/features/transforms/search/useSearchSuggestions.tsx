@@ -1,18 +1,20 @@
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 import { Suggestion } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter, getSubstringFilterOnQuery } from '@features/transforms/filtering/filter';
-
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
+import getSearchableField from './getSearchableField';
+import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
+import HighlightedObjectField from './HighlightedObjectField';
+
 const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this seems to prevent render lag.
 
-export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
+export default function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy, objectType } = usePageParams();
   const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
     useDataContext();
@@ -44,30 +46,31 @@ export function useSearchSuggestions(): (query: string) => Promise<Suggestion[]>
     searchBy,
   ]);
 
-  const getSuggestions = useMemo(() => {
-    return async (query: string) => {
+  const getSuggestions = useCallback(
+    async (query: string) => {
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
       return uniqueBy(
         (objects || [])
-          .filter(scopeFilter)
           .filter(substringFilter)
+          .sort((a, b) => (scopeFilter(a) ? -1 : 1) - (scopeFilter(b) ? -1 : 1))
           .slice(0, SEARCH_RESULTS_LIMIT)
           .map((object) => {
-            let label = <HighlightedObjectField object={object} field={searchBy} query={query} />;
+            const label = (
+              <HighlightedObjectField
+                object={object}
+                field={searchBy}
+                query={query}
+                showOriginalName={true}
+              />
+            );
             const searchString = getSearchableField(object, searchBy);
-            if (searchBy === SearchableField.Code) {
-              label = (
-                <>
-                  {object.nameDisplay} [{label}]
-                </>
-              );
-            }
             return { objectID: object.ID, searchString, label };
           }),
         (item) => item.objectID,
       );
-    };
-  }, [objects, scopeFilter, searchBy]);
+    },
+    [objects, scopeFilter, searchBy],
+  );
 
   return getSuggestions;
 }

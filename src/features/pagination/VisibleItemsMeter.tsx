@@ -7,16 +7,13 @@ import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import {
-  getFilterBySubstring,
-  getFilterByVitality,
-  getScopeFilter,
-} from '../transforms/filtering/filter';
+import { getFilterByVitality, getScopeFilter } from '../transforms/filtering/filter';
 
 import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';

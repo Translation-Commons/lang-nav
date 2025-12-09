@@ -13,7 +13,8 @@ import usePageParams from '@features/params/usePageParams';
 import { getSortFunctionParameterized } from '@features/transforms/sorting/sort';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import getSearchableField from '../search/getSearchableField';
+import HighlightedObjectField from '../search/HighlightedObjectField';
 
 type Props = { display?: SelectorDisplay };
 
