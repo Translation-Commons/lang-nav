@@ -6,7 +6,7 @@ import { PageParamKey, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
-import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
+import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 import { SelectorDropdown } from './SelectorDropdown';
@@ -16,6 +16,7 @@ export type Suggestion = {
   objectID?: string;
   searchString: string;
   label: React.ReactNode;
+  secondaryGroup?: string; // Used to label suggestions into groups, particularly when the primary search fails
 };
 
 type Props = {
@@ -67,6 +68,7 @@ const TextInput: React.FC<Props> = ({
       const timer = setTimeout(() => {
         {
           setShowSuggestions(false);
+          setCurrentValue(value);
           isUpdatingFromSuggestions.current = false;
         }
       }, 100);
@@ -122,11 +124,24 @@ const TextInput: React.FC<Props> = ({
       {label}
       {showSuggestions && suggestions.length > 0 && (
         <SelectorDropdown>
+          <button
+            style={{
+              ...getOptionStyle(SelectorDisplay.Dropdown, false, PositionInGroup.First),
+              lineHeight: '0.5em',
+            }}
+          >
+            <div style={{ fontSize: '0.75em', color: 'var(--color-text-secondary)' }}>
+              Pick a suggestion
+              {currentValue !== ''
+                ? ` or press [enter] to filter by "${currentValue}"`
+                : ' or type to filter'}
+            </div>
+          </button>
           {suggestions.map((s, i) => (
             <SuggestionRow
               key={i}
               pageParameter={pageParameter}
-              position={getPositionInGroup(i, suggestions.length)}
+              position={i < suggestions.length - 1 ? PositionInGroup.Middle : PositionInGroup.Last}
               onClick={onClickSuggestion}
               onKeyDown={() => (isUpdatingFromSuggestions.current = true)}
               suggestion={s}

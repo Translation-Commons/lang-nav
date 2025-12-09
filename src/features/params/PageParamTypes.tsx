@@ -41,8 +41,7 @@ export enum View {
 }
 
 export enum SearchableField {
-  All = 'default',
-  NameOrCode = 'English Name or ID',
+  CodeOrNameAny = 'Code & All Names',
   Code = 'ID',
   NameAny = 'All Names',
   NameEndonym = 'Endonym',

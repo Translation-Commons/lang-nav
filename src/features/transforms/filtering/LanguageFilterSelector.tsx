@@ -12,10 +12,11 @@ import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput, { Suggestion } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import getSearchableField from '../search/getSearchableField';
+import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 import HighlightedObjectField from '../search/HighlightedObjectField';
 
 import { getScopeFilter } from './filter';
+import { getFilterByConnections } from './filterByConnections';
 
 type Props = { display?: SelectorDisplay };
 
@@ -23,34 +24,33 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
   const { languageFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterByScope = getScopeFilter();
+  const filterByConnections = getFilterByConnections();
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 
   const getSuggestions = useCallback(
     async (query: string): Promise<Suggestion[]> => {
-      const lowerCaseQuery = query.toLowerCase();
+      const filterFunction = getSubstringFilterOnQuery(query, SearchableField.CodeOrNameAny);
       const filteredLanguages = languages
-        .filter((language) =>
-          getSearchableField(language, SearchableField.NameOrCode)
-            .toLowerCase()
-            .split(/\W/g)
-            .some((word) => word.startsWith(lowerCaseQuery)),
-        )
+        .filter(filterFunction)
         // Prioritize languages that are in scope, eg. show "German" before "Germanic"
-        .sort((a, b) => (filterByScope(a) ? -1 : 1) - (filterByScope(b) ? -1 : 1));
+        .sort((a, b) => (filterByScope(a) ? -1 : 1) - (filterByScope(b) ? -1 : 1))
+        // Priortize connected languages, eg. for "b", show Bengali and Balochi in Pakistan (territory filter) before Burmese even though Burmese has more speakers
+        .sort((a, b) => (filterByConnections(a) ? -1 : 1) - (filterByConnections(b) ? -1 : 1));
       return filteredLanguages.map((object) => {
         const label = (
           <HighlightedObjectField
             object={object}
-            field={SearchableField.NameOrCode}
+            field={SearchableField.CodeOrNameAny}
             query={query}
+            showOriginalName={true}
           />
         );
-        const searchString = getSearchableField(object, SearchableField.NameOrCode);
+        const searchString = object.nameDisplay + ' [' + object.ID + ']';
         return { objectID: object.ID, searchString, label };
       });
     },
-    [languages, filterByScope],
+    [languages, filterByScope, filterByConnections],
   );
 
   return (

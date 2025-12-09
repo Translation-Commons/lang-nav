@@ -51,8 +51,9 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
       return uniqueBy(
         (objects || [])
+          .filter(scopeFilter)
           .filter(substringFilter)
-          .sort((a, b) => (scopeFilter(a) ? -1 : 1) - (scopeFilter(b) ? -1 : 1))
+          // .sort((a, b) => (scopeFilter(a) ? -1 : 1) - (scopeFilter(b) ? -1 : 1))
           .slice(0, SEARCH_RESULTS_LIMIT)
           .map((object) => {
             const label = (

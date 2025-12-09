@@ -10,7 +10,7 @@ export default function getSearchableField(
   query?: string,
 ): string {
   switch (field) {
-    case SearchableField.All:
+    case SearchableField.CodeOrNameAny:
       return (
         object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? object.codeDisplay
       );
@@ -22,11 +22,6 @@ export default function getSearchableField(
       return object.nameEndonym ?? '';
     case SearchableField.NameDisplay:
       return object.nameDisplay;
-    case SearchableField.NameOrCode:
-      return anyWordStartsWith(object.nameDisplay, query ?? '')
-        ? object.nameDisplay
-        : object.codeDisplay;
-    // return object.nameDisplay + ' [' + object.codeDisplay + ']';
     case SearchableField.NameISO:
       return object.type === ObjectType.Language ? (object.ISO?.name ?? '') : '';
     case SearchableField.NameCLDR:

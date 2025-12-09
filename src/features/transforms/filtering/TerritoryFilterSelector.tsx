@@ -11,7 +11,7 @@ import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput, { Suggestion } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import getSearchableField from '../search/getSearchableField';
+import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 import HighlightedObjectField from '../search/HighlightedObjectField';
 
 import { getScopeFilter } from './filter';
@@ -27,24 +27,20 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
 
   const getSuggestions = useCallback(
     async (query: string): Promise<Suggestion[]> => {
-      const lowerCaseQuery = query.toLowerCase();
+      const filterFunction = getSubstringFilterOnQuery(query, SearchableField.CodeOrNameAny);
       const filteredTerritories = territories
-        .filter((territory) =>
-          getSearchableField(territory, SearchableField.NameOrCode)
-            .toLowerCase()
-            .split(/\W/g)
-            .some((word) => word.startsWith(lowerCaseQuery)),
-        )
+        .filter(filterFunction)
         .sort((a, b) => (filterByScope(a) ? -1 : 1) - (filterByScope(b) ? -1 : 1));
       return filteredTerritories.map((object) => {
         const label = (
           <HighlightedObjectField
             object={object}
-            field={SearchableField.NameOrCode}
+            field={SearchableField.CodeOrNameAny}
             query={query}
+            showOriginalName={true}
           />
         );
-        const searchString = getSearchableField(object, SearchableField.NameOrCode);
+        const searchString = object.nameDisplay + ' [' + object.ID + ']';
         return { objectID: object.ID, searchString, label };
       });
     },

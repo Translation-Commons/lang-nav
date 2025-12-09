@@ -13,7 +13,7 @@ import usePageParams from '@features/params/usePageParams';
 import { getSortFunctionParameterized } from '@features/transforms/sorting/sort';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import getSearchableField from '../search/getSearchableField';
+import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 import HighlightedObjectField from '../search/HighlightedObjectField';
 
 type Props = { display?: SelectorDisplay };
@@ -27,24 +27,18 @@ const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }
 
   const getSuggestions = useCallback(
     async (query: string): Promise<Suggestion[]> => {
-      const lowerCaseQuery = query.toLowerCase();
-      const filteredScripts = writingSystems
-        .filter((ws) =>
-          getSearchableField(ws, SearchableField.NameOrCode)
-            .toLowerCase()
-            .split(/\W/g)
-            .some((word) => word.startsWith(lowerCaseQuery)),
-        )
-        .sort(sortFunction);
+      const filterFunction = getSubstringFilterOnQuery(query, SearchableField.CodeOrNameAny);
+      const filteredScripts = writingSystems.filter(filterFunction).sort(sortFunction);
       return filteredScripts.map((object) => {
         const label = (
           <HighlightedObjectField
             object={object}
-            field={SearchableField.NameOrCode}
+            field={SearchableField.CodeOrNameAny}
             query={query}
+            showOriginalName={true}
           />
         );
-        const searchString = getSearchableField(object, SearchableField.NameOrCode);
+        const searchString = object.nameDisplay + ' [' + object.ID + ']';
         return { objectID: object.ID, searchString, label };
       });
     },

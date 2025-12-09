@@ -24,7 +24,7 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
           marginTop: '1em', // relative to the middle of the selector
           backgroundColor: 'var(--color-background)',
           borderRadius: '1em',
-          maxHeight: '20em',
+          maxHeight: '21em',
           overflowY: 'auto',
         }}
       >

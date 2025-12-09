@@ -31,15 +31,11 @@ describe('getSearchableField', () => {
     expect(getSearchableField(mockedLanguage, SearchableField.NameDisplay)).toBe('English');
   });
 
-  it('returns nameDisplay and codeDisplay for NameOrCode', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameOrCode)).toBe('English [en]');
+  it('returns the first match for CodeOrName', () => {
+    expect(getSearchableField(mockedLanguage, SearchableField.CodeOrNameAny)).toBe('English');
   });
 
-  it('returns ??? for All', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.All)).toBe('English [en]');
-  });
-
-  it('returns ??? for NameISO', () => {
-    expect(getSearchableField(mockedLanguage, SearchableField.NameISO)).toBe('English [en]');
+  it('returns blank for NameISO since there is no ISO information', () => {
+    expect(getSearchableField(mockedLanguage, SearchableField.NameISO)).toBe('');
   });
 });
