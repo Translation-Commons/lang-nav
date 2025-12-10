@@ -1,7 +1,7 @@
 import { SlashIcon, XIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { SearchableField, View } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import Selector from '@features/params/ui/Selector';
@@ -10,8 +10,8 @@ import usePageParams from '@features/params/usePageParams';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
-  getVitalityEthnologueFineLabel,
   getVitalityEthnologueCoarseLabel,
+  getVitalityEthnologueFineLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import { TerritoryScope } from '@entities/types/DataTypes';
 

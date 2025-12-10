@@ -2,8 +2,8 @@ import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObject from '@features/hovercard/HoverableObject';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';

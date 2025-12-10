@@ -14,7 +14,7 @@ import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 const mockUpdatePageParams = vi.fn();
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));
 

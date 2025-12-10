@@ -1,7 +1,7 @@
 import { XIcon } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { PageParamKey, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 

@@ -35,7 +35,9 @@ vi.mock('@features/transforms/sorting/sort', () => ({
   getNormalSortDirection: vi.fn().mockReturnValue(1),
 }));
 
-vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
+  default: vi.fn().mockReturnValue({}),
+}));
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
 

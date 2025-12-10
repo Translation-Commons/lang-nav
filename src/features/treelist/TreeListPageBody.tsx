@@ -1,6 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import LimitSelector from '@features/pagination/LimitSelector';
 import usePageParams from '@features/params/usePageParams';
 import { getFilterByVitality } from '@features/transforms/filtering/filter';

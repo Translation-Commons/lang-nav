@@ -10,7 +10,7 @@ import TextInput from '../TextInput';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams({})),
 }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
 }));
 vi.mock('lucide-react', () => ({ XIcon: () => 'X' }));

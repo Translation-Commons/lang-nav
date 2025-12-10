@@ -1,5 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { vi, describe, it, expect, Mock } from 'vitest';
+import { describe, expect, it, Mock, vi } from 'vitest';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
@@ -16,7 +16,7 @@ vi.mock('../../lib/getObjectFromID', () => ({
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams({})),
 }));
-vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
 
 describe('ObjectSuggestions', () => {
   it('renders suggestion buttons for ObjectType.Language and calls getObjectFromID for each id', () => {

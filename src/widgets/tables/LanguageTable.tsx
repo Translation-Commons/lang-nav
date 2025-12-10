@@ -5,9 +5,9 @@ import {
   getRetirementReasonLabel,
   RetirementReason,
 } from '@features/data/load/extra_entities/ISORetirements';
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';

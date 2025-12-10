@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import { PositionInGroup } from '@shared/lib/PositionInGroup';
 

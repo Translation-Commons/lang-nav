@@ -12,7 +12,7 @@ import TableExport from '../TableExport';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams()),
 }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
 }));
 vi.mock('@shared/hooks/useClickOutside', () => ({ useClickOutside: () => React.createRef() }));

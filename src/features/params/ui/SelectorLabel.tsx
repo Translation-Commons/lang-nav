@@ -1,7 +1,7 @@
 import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 

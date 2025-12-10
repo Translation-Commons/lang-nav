@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import { SearchableField } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';

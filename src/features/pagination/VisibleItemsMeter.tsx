@@ -1,8 +1,8 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableButton from '@features/hovercard/HoverableButton';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';

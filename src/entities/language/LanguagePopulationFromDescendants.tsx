@@ -1,8 +1,8 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 

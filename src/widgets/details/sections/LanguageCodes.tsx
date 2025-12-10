@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import LanguageScopeDisplay from '@entities/language/LanguageScopeDisplay';

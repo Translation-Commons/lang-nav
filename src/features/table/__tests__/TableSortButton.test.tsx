@@ -1,8 +1,8 @@
-import { render, screen, fireEvent, cleanup } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
+import { cleanup, fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import usePageParams from '@features/params/usePageParams';
-import { SortBy, SortBehavior } from '@features/transforms/sorting/SortTypes';
+import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -12,7 +12,7 @@ import TableValueType from '../TableValueType';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
 }));
 
