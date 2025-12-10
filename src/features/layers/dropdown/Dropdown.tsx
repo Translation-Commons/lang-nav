@@ -11,6 +11,7 @@ type Props = React.PropsWithChildren<
     containerRef?: React.RefObject<HTMLDivElement | null>;
     isOpen: boolean;
     offset?: number;
+    style?: React.CSSProperties;
   }
 >;
 

@@ -2,7 +2,9 @@ import React from 'react';
 
 import { DropdownAnchorContext } from './DropdownAnchorContext';
 
-type Props = React.PropsWithChildren<React.HTMLAttributes<HTMLDivElement>>;
+type Props = React.PropsWithChildren<
+  React.HTMLAttributes<HTMLDivElement> & { style?: React.CSSProperties }
+>;
 
 const DropdownAnchor: React.FC<Props> = ({ children, style, ...rest }) => {
   const anchorRef = React.useRef<HTMLDivElement | null>(null);

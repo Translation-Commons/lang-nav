@@ -27,7 +27,8 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
 
   const getSuggestions = useCallback(
     async (query: string): Promise<Suggestion[]> => {
-      const filterFunction = getSubstringFilterOnQuery(query, SearchableField.CodeOrNameAny);
+      const trimmedQuery = query.split('[')[0].trim();
+      const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
       const filteredTerritories = territories
         .filter(filterFunction)
         .sort((a, b) => (filterByScope(a) ? -1 : 1) - (filterByScope(b) ? -1 : 1));
@@ -36,7 +37,7 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
           <HighlightedObjectField
             object={object}
             field={SearchableField.CodeOrNameAny}
-            query={query}
+            query={trimmedQuery}
             showOriginalName={true}
           />
         );

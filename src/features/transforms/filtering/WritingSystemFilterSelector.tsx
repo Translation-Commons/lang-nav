@@ -27,14 +27,15 @@ const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }
 
   const getSuggestions = useCallback(
     async (query: string): Promise<Suggestion[]> => {
-      const filterFunction = getSubstringFilterOnQuery(query, SearchableField.CodeOrNameAny);
+      const trimmedQuery = query.split('[')[0].trim();
+      const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
       const filteredScripts = writingSystems.filter(filterFunction).sort(sortFunction);
       return filteredScripts.map((object) => {
         const label = (
           <HighlightedObjectField
             object={object}
             field={SearchableField.CodeOrNameAny}
-            query={query}
+            query={trimmedQuery}
             showOriginalName={true}
           />
         );

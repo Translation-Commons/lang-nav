@@ -30,7 +30,8 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
 
   const getSuggestions = useCallback(
     async (query: string): Promise<Suggestion[]> => {
-      const filterFunction = getSubstringFilterOnQuery(query, SearchableField.CodeOrNameAny);
+      const trimmedQuery = query.split('[')[0].trim();
+      const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
       const filteredLanguages = languages
         .filter(filterFunction)
         // Prioritize languages that are in scope, eg. show "German" before "Germanic"
@@ -42,7 +43,7 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
           <HighlightedObjectField
             object={object}
             field={SearchableField.CodeOrNameAny}
-            query={query}
+            query={trimmedQuery}
             showOriginalName={true}
           />
         );

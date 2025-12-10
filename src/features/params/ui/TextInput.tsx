@@ -11,6 +11,7 @@ import { PositionInGroup } from '@shared/lib/PositionInGroup';
 import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 import { SelectorDropdown } from './SelectorDropdown';
 import { getOptionStyle } from './SelectorOption';
+import SelectorSecondaryOption from './SelectorSecondaryOption';
 
 export type Suggestion = {
   objectID?: string;
@@ -122,33 +123,24 @@ const TextInput: React.FC<Props> = ({
       }}
     >
       {label}
-      {showSuggestions && suggestions.length > 0 && (
-        <SelectorDropdown>
-          <button
-            style={{
-              ...getOptionStyle(SelectorDisplay.Dropdown, false, PositionInGroup.First),
-              lineHeight: '0.5em',
-            }}
-          >
-            <div style={{ fontSize: '0.75em', color: 'var(--color-text-secondary)' }}>
-              Pick a suggestion
-              {currentValue !== ''
-                ? ` or press [enter] to filter by "${currentValue}"`
-                : ' or type to filter'}
-            </div>
-          </button>
-          {suggestions.map((s, i) => (
-            <SuggestionRow
-              key={i}
-              pageParameter={pageParameter}
-              position={i < suggestions.length - 1 ? PositionInGroup.Middle : PositionInGroup.Last}
-              onClick={onClickSuggestion}
-              onKeyDown={() => (isUpdatingFromSuggestions.current = true)}
-              suggestion={s}
-            />
-          ))}
-        </SelectorDropdown>
-      )}
+      <SelectorDropdown isOpen={showSuggestions && suggestions.length > 0}>
+        <SelectorSecondaryOption position={PositionInGroup.First}>
+          Pick a suggestion
+          {currentValue !== ''
+            ? ` or press [enter] to filter by "${currentValue}"`
+            : ' or type to filter'}
+        </SelectorSecondaryOption>
+        {suggestions.map((s, i) => (
+          <SuggestionRow
+            key={i}
+            pageParameter={pageParameter}
+            position={i < suggestions.length - 1 ? PositionInGroup.Middle : PositionInGroup.Last}
+            onClick={onClickSuggestion}
+            onKeyDown={() => (isUpdatingFromSuggestions.current = true)}
+            suggestion={s}
+          />
+        ))}
+      </SelectorDropdown>
       <input
         type="text"
         aria-expanded={showSuggestions}
