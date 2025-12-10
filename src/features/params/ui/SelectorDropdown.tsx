@@ -1,5 +1,8 @@
 import React from 'react';
 
+import Dropdown from '@features/layers/dropdown/Dropdown';
+import DropdownAnchor from '@features/layers/dropdown/DropdownAnchor';
+
 type Props = {
   containerRef?: React.RefObject<HTMLDivElement | null>;
 };
@@ -9,19 +12,28 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
   containerRef,
 }) => {
   return (
-    <div style={{ position: 'relative' }} ref={containerRef}>
-      <div
+    <DropdownAnchor
+      style={{
+        width: 0,
+        height: 0,
+        margin: 0,
+        padding: 0,
+        flex: '0 0 auto',
+        display: 'inline-block',
+      }}
+    >
+      <Dropdown
+        aria-label="selector options"
         className="dropdown"
+        containerRef={containerRef}
+        isOpen={true}
+        offset={12}
         role="listbox"
         style={{
           alignItems: 'start',
-          position: 'absolute',
           display: 'flex',
-          left: '0px',
           flexDirection: 'column',
           width: 'fit-content',
-          zIndex: 100,
-          marginTop: '1em', // relative to the middle of the selector
           backgroundColor: 'var(--color-background)',
           borderRadius: '1em',
           maxHeight: '21em',
@@ -29,7 +41,7 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
         }}
       >
         {children}
-      </div>
-    </div>
+      </Dropdown>
+    </DropdownAnchor>
   );
 };
