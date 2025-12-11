@@ -13,7 +13,9 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import CardList from '../CardList';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
+  default: vi.fn().mockReturnValue({}),
+}));
 vi.mock('@features/transforms/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/coloring/useColors', () => ({
   default: vi.fn().mockReturnValue({ getColor: () => 'inherit' }),
