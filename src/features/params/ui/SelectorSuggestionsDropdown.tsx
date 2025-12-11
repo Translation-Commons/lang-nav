@@ -40,14 +40,20 @@ const SelectorSuggestionsDropdown: React.FC<Props> = ({
     <SelectorDropdown isOpen={showSuggestions && suggestions.length > 0}>
       {topLabel}
       {suggestions.map((s, i) => (
-        <SuggestionRow
-          key={i}
-          pageParameter={pageParameter}
-          position={getPosition(i)}
-          onClick={onClickSuggestion}
-          onKeyDown={onKeyDownSuggestion}
-          suggestion={s}
-        />
+        <React.Fragment key={i}>
+          {i > 0 && suggestions[i - 1].group !== s.group && (
+            <SelectorDropdownLabel disabled={true} position={PositionInGroup.Middle}>
+              {s.group}
+            </SelectorDropdownLabel>
+          )}
+          <SuggestionRow
+            pageParameter={pageParameter}
+            position={getPosition(i)}
+            onClick={onClickSuggestion}
+            onKeyDown={onKeyDownSuggestion}
+            suggestion={s}
+          />
+        </React.Fragment>
       ))}
     </SelectorDropdown>
   );

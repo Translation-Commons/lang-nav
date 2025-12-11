@@ -202,3 +202,25 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
       return object.languages ?? [];
   }
 }
+
+export function getConnectionsFilterLabels(): {
+  territoryFilterLabel: string;
+  writingSystemFilterLabel: string;
+  languageFilterLabel: string;
+} {
+  const { territoryFilter, writingSystemFilter, languageFilter } = usePageParams();
+  const territoryFilterLabel = territoryFilter
+    ? `in ${territoryFilter.split('[')[0].trim()}`
+    : 'in any territory';
+  const writingSystemFilterLabel = writingSystemFilter
+    ? `using ${writingSystemFilter.split('[')[0].trim()} script`
+    : 'using any script';
+  const languageFilterLabel = languageFilter
+    ? `related to ${languageFilter.split('[')[0].trim()}`
+    : 'related to any language';
+  return {
+    territoryFilterLabel,
+    writingSystemFilterLabel,
+    languageFilterLabel,
+  };
+}

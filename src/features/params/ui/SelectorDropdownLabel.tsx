@@ -6,11 +6,13 @@ import { useSelectorDisplay } from './SelectorDisplayContext';
 import { getOptionStyle } from './SelectorOption';
 
 type Props = {
+  disabled?: boolean;
   position?: PositionInGroup;
 };
 
 const SelectorDropdownLabel: React.FC<React.PropsWithChildren<Props>> = ({
   children,
+  disabled = false,
   position = PositionInGroup.Middle,
 }) => {
   const { display } = useSelectorDisplay();
@@ -18,6 +20,7 @@ const SelectorDropdownLabel: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <button
       className="secondaryHoverableText" // grey unless hovered over
+      disabled={disabled}
       style={{
         ...getOptionStyle(display, false, position),
         lineHeight: '0.5em',

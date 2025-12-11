@@ -9,7 +9,7 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-import { LocaleData, ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 export type FilterFunctionType = (a: ObjectData) => boolean;
 
@@ -17,47 +17,48 @@ export type FilterFunctionType = (a: ObjectData) => boolean;
  * Provides a function that filters on the scope of an object
  */
 export function getScopeFilter(): FilterFunctionType {
-  const { languageScopes, territoryScopes } = usePageParams();
+  const filterByLanguageScope = getFilterByLanguageScope();
+  const filterByTerritoryScope = getFilterByTerritoryScope();
 
   const filterByScope = useCallback(
-    (object: ObjectData): boolean => {
-      switch (object.type) {
-        case ObjectType.Language:
-          return (
-            languageScopes.length === 0 ||
-            languageScopes.includes(object.scope ?? LanguageScope.SpecialCode)
-          );
-        case ObjectType.Territory:
-          return territoryScopes.length === 0 || territoryScopes.includes(object.scope);
-        case ObjectType.Locale:
-          return doesLocaleMatchScope(object, languageScopes, territoryScopes);
-        case ObjectType.Census:
-        case ObjectType.WritingSystem:
-        case ObjectType.VariantTag:
-          return true;
-      }
-    },
-    [languageScopes, territoryScopes],
+    (object: ObjectData): boolean =>
+      filterByLanguageScope(object) && filterByTerritoryScope(object),
+    [filterByLanguageScope, filterByTerritoryScope],
   );
 
   return filterByScope;
 }
 
-function doesLocaleMatchScope(
-  locale: LocaleData,
-  languageScopes: LanguageScope[],
-  territoryScopes: TerritoryScope[],
-): boolean {
-  const languageMatches = languageScopes.includes(
-    locale.language?.scope ?? LanguageScope.SpecialCode,
+export function getFilterByLanguageScope(): FilterFunctionType {
+  const { languageScopes } = usePageParams();
+
+  const filterByLanguageScope = useCallback(
+    (object: ObjectData | undefined): boolean => {
+      if (languageScopes.length === 0) return true;
+      if (object?.type === ObjectType.Locale) return filterByLanguageScope(object.language);
+      if (object?.type !== ObjectType.Language) return true;
+      return languageScopes.includes(object.scope ?? LanguageScope.SpecialCode);
+    },
+    [languageScopes],
   );
-  const territoryMatches = territoryScopes.includes(
-    locale.territory?.scope ?? TerritoryScope.Country,
+
+  return filterByLanguageScope;
+}
+
+export function getFilterByTerritoryScope(): FilterFunctionType {
+  const { territoryScopes } = usePageParams();
+
+  const filterByTerritoryScope = useCallback(
+    (object: ObjectData | undefined): boolean => {
+      if (territoryScopes.length === 0) return true;
+      if (object?.type === ObjectType.Locale) return filterByTerritoryScope(object.territory);
+      if (object?.type !== ObjectType.Territory) return true;
+      return territoryScopes.includes(object.scope);
+    },
+    [territoryScopes],
   );
-  return (
-    (languageScopes.length == 0 || languageMatches) &&
-    (territoryScopes.length == 0 || territoryMatches)
-  );
+
+  return filterByTerritoryScope;
 }
 
 /**

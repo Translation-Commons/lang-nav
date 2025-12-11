@@ -1,21 +1,22 @@
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { PageParamKey, SearchableField } from '@features/params/PageParamTypes';
+import { PageParamKey } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
   useSelectorDisplay,
 } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
 import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
-import { getSortFunctionParameterized } from '@features/transforms/sorting/sort';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
-import HighlightedObjectField from '../search/HighlightedObjectField';
+import { WritingSystemScope } from '@entities/types/DataTypes';
+
+import { getSortFunctionParameterized } from '../sorting/sort';
+import { SortBy } from '../sorting/SortTypes';
+
+import { getSuggestionsFunction } from './getSuggestionsFunction';
 
 type Props = { display?: SelectorDisplay };
 
@@ -26,26 +27,13 @@ const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 
-  const getSuggestions = useCallback(
-    async (query: string): Promise<Suggestion[]> => {
-      const trimmedQuery = query.split('[')[0].trim();
-      const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
-      const filteredScripts = writingSystems.filter(filterFunction).sort(sortFunction);
-      return filteredScripts.map((object) => {
-        const label = (
-          <HighlightedObjectField
-            object={object}
-            field={SearchableField.CodeOrNameAny}
-            query={trimmedQuery}
-            showOriginalName={true}
-          />
-        );
-        const searchString = object.nameDisplay + ' [' + object.ID + ']';
-        return { objectID: object.ID, searchString, label };
-      });
-    },
-    [writingSystems, sortFunction],
-  );
+  const getSuggestions = useMemo(() => {
+    return getSuggestionsFunction(
+      writingSystems.sort(sortFunction),
+      (ws) => (ws.scope === WritingSystemScope.IndividualScript ? 0 : 1),
+      (ws) => (ws.scope === WritingSystemScope.IndividualScript ? '' : 'other types of scripts'),
+    );
+  }, [writingSystems, sortFunction]);
 
   return (
     <SelectorDisplayProvider display={display}>

@@ -2,23 +2,36 @@ import { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import {
+  getFilterByLanguageScope,
+  getFilterByTerritoryScope,
+} from '@features/transforms/filtering/filter';
 
-import { uniqueBy } from '@shared/lib/setUtils';
+import { ObjectData } from '@entities/types/DataTypes';
+
+import {
+  getFilterByLanguage,
+  getFilterByTerritory,
+  getFilterByWritingSystem,
+} from '../filtering/filterByConnections';
+import { getFilterLabels } from '../filtering/FilterLabels';
 
 import getSearchableField from './getSearchableField';
 import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
 import HighlightedObjectField from './HighlightedObjectField';
 
-const SEARCH_RESULTS_LIMIT = 10; // even though it is filtered again later, this seems to prevent render lag.
-
 export default function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy, objectType } = usePageParams();
   const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
     useDataContext();
-  const scopeFilter = getScopeFilter();
+  const filterByLanguageScope = getFilterByLanguageScope();
+  const filterByTerritoryScope = getFilterByTerritoryScope();
+  const filterByWritingSystem = getFilterByWritingSystem();
+  const filterByLanguage = getFilterByLanguage();
+  const filterByTerritory = getFilterByTerritory();
+  const filterLabels = getFilterLabels();
 
   const objects = useMemo(() => {
     switch (objectType) {
@@ -46,31 +59,55 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
     searchBy,
   ]);
 
+  const [getMatchDistance, getMatchGroup] = useMemo(() => {
+    const getMatchDistance = (object: ObjectData): number => {
+      let dist = 0;
+      if (!filterByLanguage(object)) dist += 1;
+      if (!filterByWritingSystem(object)) dist += 2;
+      if (!filterByTerritory(object)) dist += 4;
+      if (!filterByTerritoryScope(object)) dist += 8;
+      if (!filterByLanguageScope(object)) dist += 16;
+      return dist;
+    };
+    const getMatchGroup = (object: ObjectData): string => {
+      if (!filterByLanguage(object)) return 'not ' + filterLabels.languageFilter;
+      if (!filterByWritingSystem(object)) return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterByTerritory(object)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterByTerritoryScope(object)) return 'not ' + filterLabels.territoryScope;
+      if (!filterByLanguageScope(object)) return 'not ' + filterLabels.languageScope;
+      return 'matched';
+    };
+    return [getMatchDistance, getMatchGroup];
+  }, [
+    filterByLanguage,
+    filterByWritingSystem,
+    filterByTerritory,
+    filterByTerritoryScope,
+    filterByLanguageScope,
+    filterLabels,
+  ]);
+
   const getSuggestions = useCallback(
     async (query: string) => {
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
-      return uniqueBy(
-        (objects || [])
-          .filter(scopeFilter)
-          .filter(substringFilter)
-          // .sort((a, b) => (scopeFilter(a) ? -1 : 1) - (scopeFilter(b) ? -1 : 1))
-          .slice(0, SEARCH_RESULTS_LIMIT)
-          .map((object) => {
-            const label = (
-              <HighlightedObjectField
-                object={object}
-                field={searchBy}
-                query={query}
-                showOriginalName={true}
-              />
-            );
-            const searchString = getSearchableField(object, searchBy);
-            return { objectID: object.ID, searchString, label };
-          }),
-        (item) => item.objectID,
-      );
+      return (objects || [])
+        .filter(substringFilter)
+        .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
+        .slice(0, SUGGESTION_LIMIT)
+        .map((object) => {
+          const label = (
+            <HighlightedObjectField
+              object={object}
+              field={searchBy}
+              query={query}
+              showOriginalName={true}
+            />
+          );
+          const searchString = getSearchableField(object, searchBy);
+          return { objectID: object.ID, searchString, label, group: getMatchGroup(object) };
+        });
     },
-    [objects, scopeFilter, searchBy],
+    [objects, searchBy, getMatchDistance, getMatchGroup],
   );
 
   return getSuggestions;
