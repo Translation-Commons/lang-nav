@@ -9,7 +9,8 @@ import {
   useSelectorDisplay,
 } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput, { Suggestion } from '@features/params/ui/TextInput';
+import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
@@ -48,7 +49,16 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
           />
         );
         const searchString = object.nameDisplay + ' [' + object.ID + ']';
-        return { objectID: object.ID, searchString, label };
+        return {
+          objectID: object.ID,
+          searchString,
+          label,
+          group: filterByConnections(object)
+            ? filterByScope(object)
+              ? 'In Scope'
+              : 'Out of Scope'
+            : 'Not Connected',
+        };
       });
     },
     [languages, filterByScope, filterByConnections],

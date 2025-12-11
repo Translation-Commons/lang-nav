@@ -8,7 +8,8 @@ import {
   useSelectorDisplay,
 } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput, { Suggestion } from '@features/params/ui/TextInput';
+import { Suggestion } from '@features/params/ui/SelectorSuggestions';
+import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunctionParameterized } from '@features/transforms/sorting/sort';
 import { SortBy } from '@features/transforms/sorting/SortTypes';

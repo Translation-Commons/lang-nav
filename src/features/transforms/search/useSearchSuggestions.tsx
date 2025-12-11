@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
-import { Suggestion } from '@features/params/ui/TextInput';
+import { Suggestion } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 

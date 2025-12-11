@@ -2,23 +2,15 @@ import { XIcon } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { PageParamKey, View } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
+import { PageParamKey } from '@features/params/PageParamTypes';
 
 import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
 import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
-import { SelectorDropdown } from './SelectorDropdown';
-import { getOptionStyle } from './SelectorOption';
-import SelectorSecondaryOption from './SelectorSecondaryOption';
-
-export type Suggestion = {
-  objectID?: string;
-  searchString: string;
-  label: React.ReactNode;
-  secondaryGroup?: string; // Used to label suggestions into groups, particularly when the primary search fails
-};
+import SelectorDropdownLabel from './SelectorDropdownLabel';
+import { Suggestion, SUGGESTION_LIMIT } from './SelectorSuggestions';
+import SuggestionsDropdown from './SelectorSuggestionsDropdown';
 
 type Props = {
   getSuggestions?: (query: string) => Promise<Suggestion[]>;
@@ -82,8 +74,8 @@ const TextInput: React.FC<Props> = ({
     let active = true;
     // Only keep the latest request for suggestions
     (async () => {
-      const result = await getSuggestions(currentValue);
-      if (active) setSuggestions(result.slice(0, 10));
+      const suggestions = await getSuggestions(currentValue);
+      if (active) setSuggestions(suggestions.slice(0, SUGGESTION_LIMIT));
     })();
     return () => {
       active = false;
@@ -123,24 +115,21 @@ const TextInput: React.FC<Props> = ({
       }}
     >
       {label}
-      <SelectorDropdown isOpen={showSuggestions && suggestions.length > 0}>
-        <SelectorSecondaryOption position={PositionInGroup.First}>
-          Pick a suggestion
-          {currentValue !== ''
-            ? ` or press [enter] to filter by "${currentValue}"`
-            : ' or type to filter'}
-        </SelectorSecondaryOption>
-        {suggestions.map((s, i) => (
-          <SuggestionRow
-            key={i}
-            pageParameter={pageParameter}
-            position={i < suggestions.length - 1 ? PositionInGroup.Middle : PositionInGroup.Last}
-            onClick={onClickSuggestion}
-            onKeyDown={() => (isUpdatingFromSuggestions.current = true)}
-            suggestion={s}
-          />
-        ))}
-      </SelectorDropdown>
+      <SuggestionsDropdown
+        pageParameter={pageParameter}
+        showSuggestions={showSuggestions}
+        suggestions={suggestions}
+        onClickSuggestion={onClickSuggestion}
+        onKeyDownSuggestion={() => (isUpdatingFromSuggestions.current = true)}
+        topLabel={
+          <SelectorDropdownLabel position={PositionInGroup.First}>
+            Pick a suggestion
+            {currentValue !== ''
+              ? ` or press [enter] to filter by "${currentValue}"`
+              : ' or type to filter'}
+          </SelectorDropdownLabel>
+        }
+      />
       <input
         type="text"
         aria-expanded={showSuggestions}
@@ -167,67 +156,6 @@ const TextInput: React.FC<Props> = ({
       {CalculateWidthFromHere}
       <ClearButton onClear={() => submit('', SubmissionSource.ClearButton)} />
     </div>
-  );
-};
-
-type SuggestionRowProps = {
-  pageParameter?: PageParamKey;
-  position?: PositionInGroup;
-  onClick: (value: Suggestion) => void;
-  onKeyDown: () => void;
-  suggestion: Suggestion;
-};
-
-const SuggestionRow: React.FC<SuggestionRowProps> = ({
-  pageParameter,
-  position = PositionInGroup.Standalone,
-  onClick,
-  onKeyDown,
-  suggestion,
-}) => {
-  const { view } = usePageParams();
-  const style = getOptionStyle(
-    SelectorDisplay.Dropdown,
-    false, // isSelected is always false here
-    position,
-  );
-  if (view == View.Details && pageParameter === PageParamKey.searchString) {
-    // Does not need to update suggestions
-    return <SuggestionRowDetails suggestion={suggestion} style={style} />;
-  }
-
-  return (
-    <button
-      onMouseDown={onKeyDown}
-      onClick={() => onClick(suggestion)}
-      style={style}
-      role="option"
-      type="button"
-    >
-      {suggestion.label}
-    </button>
-  );
-};
-
-const SuggestionRowDetails: React.FC<{
-  suggestion: Suggestion;
-  style?: React.CSSProperties;
-}> = ({ style, suggestion }) => {
-  const { objectID, searchString, label } = suggestion;
-  const { updatePageParams } = usePageParams();
-
-  const goToDetails = () => {
-    updatePageParams({ objectID, view: View.Details, searchString });
-  };
-
-  return (
-    <HoverableButton
-      hoverContent={<>Go to the details page for {searchString}</>}
-      onClick={goToDetails}
-      style={style}
-    >
-      {label}
-    </HoverableButton>
   );
 };
 

@@ -9,7 +9,7 @@ type Props = {
   position?: PositionInGroup;
 };
 
-const SelectorSecondaryOption: React.FC<React.PropsWithChildren<Props>> = ({
+const SelectorDropdownLabel: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   position = PositionInGroup.Middle,
 }) => {
@@ -29,4 +29,4 @@ const SelectorSecondaryOption: React.FC<React.PropsWithChildren<Props>> = ({
   );
 };
 
-export default SelectorSecondaryOption;
+export default SelectorDropdownLabel;
