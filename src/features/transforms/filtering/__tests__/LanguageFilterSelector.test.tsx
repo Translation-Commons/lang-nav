@@ -58,22 +58,26 @@ describe('LanguageFilterSelector', () => {
     // After click the mocked TextInput will render suggestion items
     const items = screen.getByRole('listbox').children;
     // Expect all 10 languages to be suggested and that the languages come first
-    expect(items.length).toBe(10);
-    expect(items[0]).toHaveTextContent('English');
-    expect(items[1]).toHaveTextContent('Spanish');
-    expect(items[2]).toHaveTextContent('French');
-    expect(items[3]).toHaveTextContent('German');
-    expect(items[4]).toHaveTextContent('Italian');
-    expect(items[5]).toHaveTextContent('Russian');
-    expect(items[6]).toHaveTextContent('Navajo');
-    expect(items[7]).toHaveTextContent('Chinese');
-    expect(items[8]).toHaveTextContent('Indo-European languages');
-    expect(items[9]).toHaveTextContent('Germanic');
+    expect(items.length).toBe(12);
+    expect(items[0]).toHaveTextContent('Pick a suggestion or type to filter');
+    expect(items[1]).toHaveTextContent('English');
+    expect(items[2]).toHaveTextContent('Spanish');
+    expect(items[3]).toHaveTextContent('French');
+    expect(items[4]).toHaveTextContent('German');
+    expect(items[5]).toHaveTextContent('Italian');
+    expect(items[6]).toHaveTextContent('Russian');
+    expect(items[7]).toHaveTextContent('Navajo');
+    expect(items[8]).toHaveTextContent('Chinese');
+    expect(items[9]).toHaveTextContent('not macrolanguage or language');
+    expect(items[10]).toHaveTextContent('Indo-European languages');
+    expect(items[11]).toHaveTextContent('Germanic');
     // User types in German, suggestions should filter to German and Germanic
     await user.type(input, 'German');
-    expect(items.length).toBe(2);
-    expect(items[0]).toHaveTextContent('German');
-    expect(items[1]).toHaveTextContent('Germanic');
+    expect(items.length).toBe(4);
+    expect(items[0]).toHaveTextContent('Pick a suggestion or press [enter] to filter by "German"');
+    expect(items[1]).toHaveTextContent('German');
+    expect(items[2]).toHaveTextContent('not macrolanguage or language');
+    expect(items[3]).toHaveTextContent('Germanic');
     expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
 
     // User clicks on German, the button text should update and updatePageParams called
@@ -94,16 +98,17 @@ describe('LanguageFilterSelector', () => {
     // After click the mocked TextInput will render suggestion items
     const items = screen.getByRole('listbox').children;
     // Expect all 10 languages to be suggested and that the languages come first
-    expect(items.length).toBe(10);
-    expect(items[0]).toHaveTextContent('Indo-European languages');
-    expect(items[1]).toHaveTextContent('Germanic');
-    expect(items[2]).toHaveTextContent('English');
-    expect(items[3]).toHaveTextContent('Spanish');
-    expect(items[4]).toHaveTextContent('French');
-    expect(items[5]).toHaveTextContent('German');
-    expect(items[6]).toHaveTextContent('Italian');
-    expect(items[7]).toHaveTextContent('Russian');
-    expect(items[8]).toHaveTextContent('Navajo');
-    expect(items[9]).toHaveTextContent('Chinese');
+    expect(items.length).toBe(11);
+    expect(items[0]).toHaveTextContent('Pick a suggestion or type to filter');
+    expect(items[1]).toHaveTextContent('Indo-European languages');
+    expect(items[2]).toHaveTextContent('Germanic');
+    expect(items[3]).toHaveTextContent('English');
+    expect(items[4]).toHaveTextContent('Spanish');
+    expect(items[5]).toHaveTextContent('French');
+    expect(items[6]).toHaveTextContent('German');
+    expect(items[7]).toHaveTextContent('Italian');
+    expect(items[8]).toHaveTextContent('Russian');
+    expect(items[9]).toHaveTextContent('Navajo');
+    expect(items[10]).toHaveTextContent('Chinese');
   });
 });
