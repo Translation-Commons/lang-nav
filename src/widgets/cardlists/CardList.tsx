@@ -5,6 +5,7 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import useColors from '@features/transforms/coloring/useColors';
+import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -50,6 +51,9 @@ const CardList: React.FC = () => {
 
       {/* Display another visible item meter at the bottom for convenience. */}
       {currentObjects.length > 1 && <VisibleItemsMeter objects={allObjectsInType} />}
+      {currentObjects.length === 0 && (
+        <FilterBreakdown objects={allObjectsInType} shouldFilterUsingSearchBar={true} />
+      )}
     </div>
   );
 };

@@ -1,56 +1,64 @@
 import { TriangleAlertIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType, PageParamKey, SearchableField } from '@features/params/PageParamTypes';
+import { ObjectType, PageParamKey } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
   useSelectorDisplay,
 } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput, { Suggestion } from '@features/params/ui/TextInput';
+import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import { LanguageData } from '@entities/language/LanguageTypes';
+
+import { getSortFunctionParameterized } from '../sorting/sort';
+import { SortBy } from '../sorting/SortTypes';
 
 import { getScopeFilter } from './filter';
+import { getFilterByTerritory, getFilterByWritingSystem } from './filterByConnections';
+import { getFilterLabels } from './FilterLabels';
+import { getSuggestionsFunction } from './getSuggestionsFunction';
 
 type Props = { display?: SelectorDisplay };
 
 const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
   const { languageFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
+  const sortFunction = getSortFunctionParameterized(SortBy.Population);
   const filterByScope = getScopeFilter();
+  const filterByTerritory = getFilterByTerritory();
+  const filterByWritingSystem = getFilterByWritingSystem();
+  const filterLabels = getFilterLabels();
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 
-  const getSuggestions = useCallback(
-    async (query: string): Promise<Suggestion[]> => {
-      const lowerCaseQuery = query.toLowerCase();
-      const filteredLanguages = languages
-        .filter((language) =>
-          getSearchableField(language, SearchableField.NameOrCode)
-            .toLowerCase()
-            .split(/\W/g)
-            .some((word) => word.startsWith(lowerCaseQuery)),
-        )
-        // Prioritize languages that are in scope, eg. show "German" before "Germanic"
-        .sort((a, b) => (filterByScope(a) ? -1 : 1) - (filterByScope(b) ? -1 : 1));
-      return filteredLanguages.map((object) => {
-        const label = (
-          <HighlightedObjectField
-            object={object}
-            field={SearchableField.NameOrCode}
-            query={query}
-          />
-        );
-        const searchString = getSearchableField(object, SearchableField.NameOrCode);
-        return { objectID: object.ID, searchString, label };
-      });
-    },
-    [languages, filterByScope],
-  );
+  const getSuggestions = useMemo(() => {
+    const getMatchDistance = (language: LanguageData): number => {
+      let dist = 0;
+      if (!filterByWritingSystem(language)) dist += 1;
+      if (!filterByTerritory(language)) dist += 2;
+      if (!filterByScope(language)) dist += 4;
+      return dist;
+    };
+    const getMatchGroup = (language: LanguageData): string => {
+      if (!filterByWritingSystem(language)) return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterByScope(language)) return 'not ' + filterLabels.languageScope;
+      return 'matched';
+    };
+
+    return getSuggestionsFunction(languages.sort(sortFunction), getMatchDistance, getMatchGroup);
+  }, [
+    languages,
+    filterByScope,
+    filterByTerritory,
+    filterByWritingSystem,
+    filterLabels,
+    sortFunction,
+  ]);
 
   return (
     <SelectorDisplayProvider display={display}>

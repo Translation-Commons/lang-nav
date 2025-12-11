@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 

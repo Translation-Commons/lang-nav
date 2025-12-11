@@ -30,7 +30,7 @@ vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
   SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
 }));
 

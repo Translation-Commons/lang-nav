@@ -1,17 +1,17 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-import HoverableObject from '@features/hovercard/HoverableObject';
+import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { ObjectData } from '@entities/types/DataTypes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
-
-import './treelist.css';
 
 import TreeListNodeData from './TreeListNodeData';
 import { useTreeListOptionsContext } from './TreeListOptions';
+
+import './treelist.css';
 
 export type TreeNodeData = {
   children: TreeNodeData[];
@@ -42,7 +42,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
   if (
     searchString != '' &&
     view === View.Hierarchy &&
-    [SearchableField.Code, SearchableField.NameOrCode].includes(searchBy)
+    [SearchableField.Code, SearchableField.CodeOrNameAny].includes(searchBy)
   ) {
     showObjectIDs = true;
   }

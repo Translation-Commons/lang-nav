@@ -7,7 +7,9 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
+import getFilterBySubstring from '../search/getFilterBySubstring';
+
+import { getFilterByVitality, getScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 
 type UseFilteredObjectsParams = {

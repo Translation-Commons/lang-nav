@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import usePageParams from '@features/params/usePageParams';
 
 import Highlightable from '@shared/ui/Highlightable';

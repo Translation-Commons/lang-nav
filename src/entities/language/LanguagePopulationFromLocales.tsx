@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableButton from '@features/hovercard/HoverableButton';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 

@@ -1,11 +1,11 @@
 import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import LanguageCanonicalName from '@entities/language/LanguageCanonicalName';
 import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';

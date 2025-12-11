@@ -5,7 +5,7 @@ import ObjectDetails from '@widgets/details/ObjectDetails';
 import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 

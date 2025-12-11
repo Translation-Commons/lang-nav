@@ -1,15 +1,15 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import { SearchableField } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';

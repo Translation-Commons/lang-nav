@@ -10,7 +10,7 @@ import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
 import SearchBySelector from './SearchBySelector';
-import { useSearchSuggestions } from './useSearchSuggestions';
+import useSearchSuggestions from './useSearchSuggestions';
 
 const SearchBar: React.FC = () => {
   const { searchString, updatePageParams } = usePageParams();

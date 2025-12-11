@@ -11,7 +11,7 @@ import { ReactNode } from 'react';
 import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import {
@@ -47,7 +47,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   objectType: ObjectType.Language,
   page: 1,
   profile: ProfileType.LanguageEthusiast,
-  searchBy: SearchableField.NameAny,
+  searchBy: SearchableField.CodeOrNameAny,
   searchString: '',
   sortBehavior: SortBehavior.Normal,
   sortBy: SortBy.Population,

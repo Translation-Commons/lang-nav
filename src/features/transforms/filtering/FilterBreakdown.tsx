@@ -1,18 +1,21 @@
 import { XIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getFilterBySubstring, getFilterByVitality, getScopeFilter } from './filter';
+import getFilterBySubstring from '../search/getFilterBySubstring';
+
+import { getFilterByLanguageScope, getFilterByTerritoryScope, getFilterByVitality } from './filter';
 import {
   getFilterByLanguage,
   getFilterByTerritory,
   getFilterByWritingSystem,
 } from './filterByConnections';
+import { getFilterLabels } from './FilterLabels';
 
 type FilterExplanationProps = {
   objects: ObjectData[];
@@ -23,44 +26,56 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   objects,
   shouldFilterUsingSearchBar = true,
 }) => {
-  const { territoryFilter, writingSystemFilter, languageFilter, updatePageParams, searchString } =
-    usePageParams();
+  const { updatePageParams, searchString } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByTerritory = getFilterByTerritory();
   const filterByWritingSystem = getFilterByWritingSystem();
   const filterByLanguage = getFilterByLanguage();
-  const filterByScope = getScopeFilter();
+  const filterByLanguageScope = getFilterByLanguageScope();
+  const filterByTerritoryScope = getFilterByTerritoryScope();
   const filterByVitality = getFilterByVitality();
+  const filterLabels = getFilterLabels();
 
-  const [nInScope, nInTerritory, nWrittenIn, nWithLanguage, nInVitality, nMatchingSubstring] =
-    useMemo(() => {
-      const filteredByScope = objects.filter(filterByScope);
-      const filteredByTerritory = filteredByScope.filter(filterByTerritory);
-      const filteredByWritingSystem = filteredByTerritory.filter(filterByWritingSystem);
-      const filteredByLanguage = filteredByWritingSystem.filter(filterByLanguage);
-      const filteredByVitality = filteredByLanguage.filter(filterByVitality);
-      const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
-      return [
-        filteredByScope.length,
-        filteredByTerritory.length,
-        filteredByWritingSystem.length,
-        filteredByLanguage.length,
-        filteredByVitality.length,
-        filteredBySubstring.length,
-      ];
-    }, [
-      objects,
-      filterByScope,
-      filterByTerritory,
-      filterByWritingSystem,
-      filterByLanguage,
-      filterByVitality,
-      filterBySubstring,
-    ]);
+  const [
+    nInLanguageScope,
+    nInTerritoryScope,
+    nInTerritory,
+    nWrittenIn,
+    nWithLanguage,
+    nInVitality,
+    nMatchingSubstring,
+  ] = useMemo(() => {
+    const filteredByLanguageScope = objects.filter(filterByLanguageScope);
+    const filteredByTerritoryScope = filteredByLanguageScope.filter(filterByTerritoryScope);
+    const filteredByTerritory = filteredByTerritoryScope.filter(filterByTerritory);
+    const filteredByWritingSystem = filteredByTerritory.filter(filterByWritingSystem);
+    const filteredByLanguage = filteredByWritingSystem.filter(filterByLanguage);
+    const filteredByVitality = filteredByLanguage.filter(filterByVitality);
+    const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
+    return [
+      filteredByLanguageScope.length,
+      filteredByTerritoryScope.length,
+      filteredByTerritory.length,
+      filteredByWritingSystem.length,
+      filteredByLanguage.length,
+      filteredByVitality.length,
+      filteredBySubstring.length,
+    ];
+  }, [
+    objects,
+    filterByLanguageScope,
+    filterByTerritoryScope,
+    filterByTerritory,
+    filterByWritingSystem,
+    filterByLanguage,
+    filterByVitality,
+    filterBySubstring,
+  ]);
 
   const nOverall = objects.length;
-  const nFilteredByScope = nOverall - nInScope;
-  const nFilteredByTerritory = nInScope - nInTerritory;
+  const nFilteredByLanguageScope = nOverall - nInLanguageScope;
+  const nFilteredByTerritoryScope = nInLanguageScope - nInTerritoryScope;
+  const nFilteredByTerritory = nInTerritoryScope - nInTerritory;
   const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
   const nFilteredByLanguage = nWrittenIn - nWithLanguage;
   const nFilteredByVitality = nWithLanguage - nInVitality;
@@ -72,27 +87,38 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   // Return an empty component if nothing was filtered
   if (nOverall === nMatchingSubstring) return null;
 
-  // Cut out the codes if the filter is a combination of name + code, eg. "India [IN]"
-  const formattedTerritoryFilter = territoryFilter.split('[')[0].trim();
-  const formattedWritingFilter = writingSystemFilter.split('[')[0].trim(); // cuts out the territory code if its included
-  const formattedLanguageFilter = languageFilter.split('[')[0].trim();
-
   return (
-    <table>
+    <table style={{ textAlign: 'left' }}>
       <tbody>
         <tr>
           <td>All {getObjectTypeLabelPlural(objects[0].type)}</td>
-          <td className="numeric">{nOverall.toLocaleString()}</td>
+          <td className="count">{nOverall.toLocaleString()}</td>
         </tr>
-        {nFilteredByScope > 0 && (
+        {nFilteredByLanguageScope > 0 && (
           <tr>
-            <td>Out of scope:</td>
-            <td className="numeric">{(nFilteredByScope * -1).toLocaleString()}</td>
+            <td>Not {filterLabels.languageScope}:</td>
+            <td className="count">{(nFilteredByLanguageScope * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
-                hoverContent="Clear the scope filters"
-                onClick={() => updatePageParams({ languageScopes: [], territoryScopes: [] })}
+                hoverContent="Clear the language scope filter"
+                onClick={() => updatePageParams({ languageScopes: [] })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredByTerritoryScope > 0 && (
+          <tr>
+            <td>Not {filterLabels.territoryScope}:</td>
+            <td className="count">{(nFilteredByTerritoryScope * -1).toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the territory scope filter"
+                onClick={() => updatePageParams({ territoryScopes: [] })}
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >
                 <XIcon size="1em" display="block" />
@@ -102,8 +128,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
         {nFilteredByTerritory > 0 && (
           <tr>
-            <td>Not in territory &quot;{formattedTerritoryFilter}&quot;:</td>
-            <td className="numeric">{(nFilteredByTerritory * -1).toLocaleString()}</td>
+            <td>Not {filterLabels.territoryFilter}:</td>
+            <td className="count">{(nFilteredByTerritory * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -118,8 +144,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
         {nFilteredByWritingSystem > 0 && (
           <tr>
-            <td>Not written in &quot;{formattedWritingFilter}&quot;:</td>
-            <td className="numeric">{(nFilteredByWritingSystem * -1).toLocaleString()}</td>
+            <td>Not {filterLabels.writingSystemFilter}:</td>
+            <td className="count">{(nFilteredByWritingSystem * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -134,8 +160,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
         {nFilteredByLanguage > 0 && (
           <tr>
-            <td>Not related to language &quot;{formattedLanguageFilter}&quot;:</td>
-            <td className="numeric">{(nFilteredByLanguage * -1).toLocaleString()}</td>
+            <td>Not {filterLabels.languageFilter}:</td>
+            <td className="count">{(nFilteredByLanguage * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -151,7 +177,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         {nFilteredByVitality > 0 && (
           <tr>
             <td>Not passing vitality filter:</td>
-            <td className="numeric">{(nFilteredByVitality * -1).toLocaleString()}</td>
+            <td className="count">{(nFilteredByVitality * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -168,8 +194,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
         )}
         {nFilteredBySubstring > 0 && (
           <tr>
-            <td>Not matching substring ({searchString}):</td>
-            <td className="numeric">{(nFilteredBySubstring * -1).toLocaleString()}</td>
+            <td>Not matching substring &quot;{searchString}&quot;:</td>
+            <td className="count">{(nFilteredBySubstring * -1).toLocaleString()}</td>
             <td>
               <HoverableButton
                 buttonType="reset"
@@ -186,7 +212,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
           <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
             Results
           </td>
-          <td className="numeric" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
+          <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
             {nMatchingSubstring.toLocaleString()}
           </td>
         </tr>

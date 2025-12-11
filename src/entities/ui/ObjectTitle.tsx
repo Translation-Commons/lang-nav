@@ -2,13 +2,12 @@ import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { getObjectSubtitle } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
-
-import { ObjectFieldHighlightedByPageSearch } from './ObjectField';
 
 type Props = {
   object: ObjectData;

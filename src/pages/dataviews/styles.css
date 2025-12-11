@@ -60,6 +60,10 @@ div h3:first-child {
   margin: 0 -0.25em;
 }
 
+.selector .secondaryHoverableText {
+  color: var(--color-text-secondary);
+}
+
 .hoverableText:hover,
 .selector .hoverableText:hover {
   color: var(--color-button-primary);

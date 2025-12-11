@@ -1,8 +1,8 @@
 import { EllipsisIcon, SlashIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

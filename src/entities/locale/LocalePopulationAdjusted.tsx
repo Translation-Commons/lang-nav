@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { isTerritoryGroup, LocaleData } from '@entities/types/DataTypes';

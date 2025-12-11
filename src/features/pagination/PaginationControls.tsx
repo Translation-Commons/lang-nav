@@ -7,7 +7,7 @@ import {
 } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
 type Props = {

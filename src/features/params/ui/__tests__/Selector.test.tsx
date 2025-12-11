@@ -6,7 +6,7 @@ import Selector from '../Selector';
 import { SelectorDisplay, SelectorDisplayProvider } from '../SelectorDisplayContext';
 
 vi.mock('@shared/hooks/useClickOutside', () => ({ useClickOutside: () => React.createRef() }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));
 

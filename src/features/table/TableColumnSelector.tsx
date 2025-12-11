@@ -1,8 +1,8 @@
 import { InfoIcon, SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableButton from '@features/hovercard/HoverableButton';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

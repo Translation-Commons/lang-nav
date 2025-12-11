@@ -113,7 +113,7 @@ const SelectorContainer: React.FC<
 type OptionsContainerProps = {
   containerRef: React.RefObject<HTMLDivElement | null>;
   hasSelectorLabel: boolean;
-  isExpanded?: boolean;
+  isExpanded: boolean;
 };
 
 const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>> = ({
@@ -143,10 +143,11 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
       return <>{children}</>;
     case SelectorDisplay.Dropdown:
     case SelectorDisplay.InlineDropdown:
-      if (isExpanded) {
-        return <SelectorDropdown containerRef={containerRef}>{children}</SelectorDropdown>;
-      }
-      return null;
+      return (
+        <SelectorDropdown isOpen={isExpanded || false} containerRef={containerRef}>
+          {children}
+        </SelectorDropdown>
+      );
   }
 };
 

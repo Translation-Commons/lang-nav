@@ -1,7 +1,7 @@
 import { SlashIcon, XIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { SearchableField, View } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import Selector from '@features/params/ui/Selector';
@@ -10,13 +10,15 @@ import usePageParams from '@features/params/usePageParams';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
-  getVitalityEthnologueFineLabel,
   getVitalityEthnologueCoarseLabel,
+  getVitalityEthnologueFineLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { getFilterLabels } from './FilterLabels';
 
 /**
  * Shows the current active filters as a path-like breadcrumb.
@@ -39,6 +41,7 @@ const FilterPath: React.FC = () => {
     writingSystemFilter,
   } = usePageParams();
   const defaultParams = getDefaultParams();
+  const filterLabels = getFilterLabels();
 
   const filters = [
     // Vitality ISO Filter
@@ -114,7 +117,7 @@ const FilterPath: React.FC = () => {
     ),
     territoryFilter !== '' && (
       <>
-        In &quot;{territoryFilter}&quot;
+        {filterLabels.territoryFilter}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ territoryFilter: '' })}
@@ -127,7 +130,7 @@ const FilterPath: React.FC = () => {
     ),
     writingSystemFilter !== '' && (
       <>
-        In &quot;{writingSystemFilter}&quot;
+        {filterLabels.writingSystemFilter}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ writingSystemFilter: '' })}
@@ -140,7 +143,7 @@ const FilterPath: React.FC = () => {
     ),
     languageFilter !== '' && (
       <>
-        Language &quot;{languageFilter}&quot;
+        {filterLabels.languageFilter}
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ languageFilter: '' })}
