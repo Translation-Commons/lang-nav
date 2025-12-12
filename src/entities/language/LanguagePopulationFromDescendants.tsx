@@ -16,7 +16,16 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
   return (
     <>
       {lang.populationOfDescendants > (lang.populationEstimate ?? 0) ? (
-        <Hoverable hoverContent="Computed population of descendants exceeds population estimate.">
+        <Hoverable
+          hoverContent={
+            <>
+              The sum of people that use this languoid&apos;s descendants is higher than the
+              population estimate for this {lang.scope?.toLowerCase() ?? 'language'} -- probably
+              because of multilingualism. For example, a simple sum for Arabic would double count
+              people that understand both Standard Arabic and Vernacular Arabic.
+            </>
+          }
+        >
           <TriangleAlertIcon
             style={{ color: 'var(--color-text-yellow)', marginRight: '0.25em' }}
             size="1em"

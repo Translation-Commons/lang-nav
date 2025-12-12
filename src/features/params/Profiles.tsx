@@ -152,7 +152,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
 
   switch (colorBy) {
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfOverallLanguageSpeakers:

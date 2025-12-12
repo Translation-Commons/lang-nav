@@ -1,0 +1,18 @@
+#codeDisplay		#id	id2020summary
+#nameDisplay			Indonesia 2020 Summary
+#isoRegionCode	ID		
+#yearCollected			2020
+#modality			Uses
+#acquisitionOrder			Any
+#eligiblePopulation			270,200,000
+#populationSource			https://setkab.go.id/en/statistics-indonesia-releases-2020-census-results/
+#quantity			percent
+#collectorType			Government
+#collectorName			Statistics Indonesia (BPS)
+#url			https://www.bps.go.id/en/publication/2023/01/27/ffb5939b4393e5b1146a9b91/the-result-of-long-form-population-census-2020.html
+#datePublished			2023-01
+#tableName	Indonesian Language Proficiency and the Use of Regional Languages	Kemampuan Berbahasa Indonesia dan Penggunaan Bahasa Daerah	
+Language Code	Language		Population
+msa/ind	Proficent in Indonesian Language	Kemampuan Berbahasa Indonesia	97.24
+mul	Use of Local Language in the Family	Penggunaan Bahasa Daerah di Keluarga	73.87
+mul	Use of Local Language among Neighbors/Relatives	Penggunaan Bahasa Daerah di Tetangga/Kerabat	71.93

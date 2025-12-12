@@ -38,7 +38,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'sɪndarɪn', // using IPA because Tengwar letters aren't usually supported
     names: ['Sindarin', 'sɪndarɪn', '', 'Elvish', 'Elven Tongue', 'Edhellen'],
     populationEstimate: 14400,
-    populationCited: 24000,
+    populationRough: 24000,
     primaryScriptCode: 'Teng',
   };
   const dori0123: LanguageData = {
@@ -46,7 +46,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'dorjaθɪn', // using IPA because Tengwar letters aren't usually supported
     names: ['Central Sindarin', 'Doriathrin', '', 'dorjaθɪn'],
     populationEstimate: 2500,
-    populationCited: 2500,
+    populationRough: 2500,
     primaryScriptCode: 'Teng',
     Combined: { parentLanguageCode: 'sjn' },
   };
@@ -386,8 +386,8 @@ export function getFullyInstantiatedMockedObjects(
 
   // Initial connections and algorithms
   connectMockedObjects(objects);
-  const { languagesBySource, writingSystems, locales } = getMockedObjectDictionaries(objects);
-  computeDescendantPopulation(languagesBySource, writingSystems);
+  const { writingSystems, locales } = getMockedObjectDictionaries(objects);
+  computeDescendantPopulation(writingSystems);
 
   // From DataContext
   const world = objects['001'] as TerritoryData;

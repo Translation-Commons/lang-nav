@@ -139,7 +139,7 @@ export function useCoreData(): {
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createFamilyLocales(languagesBySource.Combined, locales); // create after getting the list of regular locales
     createRegionalLocales(territories, locales); // create them after connecting them
-    computeDescendantPopulation(languagesBySource, writingSystems);
+    computeDescendantPopulation(writingSystems);
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));

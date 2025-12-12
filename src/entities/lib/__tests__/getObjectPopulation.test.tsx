@@ -2,11 +2,10 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getObjectPercentOfTerritoryPopulation,
   getObjectPopulation,
-  getObjectPopulationAttested,
+  getObjectPopulationDirectlySourced,
   getObjectPopulationOfDescendants,
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
@@ -46,12 +45,12 @@ describe('getObjectPopulation', () => {
   });
 });
 
-describe('getObjectPopulationAttested', () => {
-  it('returns attested population for objects', () => {
+describe('getObjectPopulationDirectlySourced', () => {
+  it('returns directly sourced population for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationAttested(obj as ObjectData),
+        getObjectPopulationDirectlySourced(obj as ObjectData),
       ]),
     );
     expect(results).toEqual({
@@ -89,7 +88,7 @@ describe('getObjectPopulationOfDescendants', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationOfDescendants(obj as ObjectData, LanguageSource.Combined),
+        getObjectPopulationOfDescendants(obj as ObjectData),
       ]),
     );
     expect(results).toEqual({
@@ -101,7 +100,7 @@ describe('getObjectPopulationOfDescendants', () => {
       dori0123_001: undefined,
       dori0123_123: undefined,
       dori0123_ER: undefined,
-      dori0123: 0.01, // 0.01 from being a leaf node
+      dori0123: undefined,
       ER: undefined,
       HA: undefined,
       sjn_001: undefined,
@@ -111,8 +110,8 @@ describe('getObjectPopulationOfDescendants', () => {
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
-      sjn: 2500.0200000000004, // From dori0123 + 0.02 for each leaf node (others because of JS precision)
-      Teng: undefined, // all from sjn_Teng_BE
+      sjn: 1800, // From dori0123
+      Teng: undefined,
       tolkorth: undefined,
     });
   });

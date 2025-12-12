@@ -52,11 +52,11 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Population (Direct)',
-    description: 'This comes from other language databases (citations still needed).',
-    render: (lang) => lang.populationCited,
+    description: 'This comes from other language databases (citations unavailable).',
+    render: (lang) => lang.populationRough,
     valueType: TableValueType.Population,
     isInitiallyVisible: false,
-    sortParam: SortBy.PopulationAttested,
+    sortParam: SortBy.PopulationDirectlySourced,
     columnGroup: 'Population',
   },
   {

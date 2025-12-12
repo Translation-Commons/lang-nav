@@ -125,17 +125,17 @@ function getLargestDescendant(language: LanguageData): LanguageData | undefined 
     return undefined;
   }
 
-  // We are using populationCited because we want to only use descendants that have a cited population
-  // numbers (aka no language families). Dialects rarely but sometimes have cited population numbers
+  // We are using populationRough because we want to only use descendants that have directly sourced population
+  // numbers (aka no language families). Dialects rarely but sometimes have a directly sourced population estimate
   return language.childLanguages.reduce<LanguageData | undefined>((largest, child) => {
     const childsLargest = getLargestDescendant(child);
     const candidateLargest =
-      (childsLargest?.populationCited || 0) > (child.populationCited || 0) ? childsLargest : child;
+      (childsLargest?.populationRough || 0) > (child.populationRough || 0) ? childsLargest : child;
     if (
       candidateLargest != null &&
-      candidateLargest.populationCited != null &&
-      candidateLargest.populationCited > 0 &&
-      (largest == null || candidateLargest.populationCited > (largest?.populationCited || 0))
+      candidateLargest.populationRough != null &&
+      candidateLargest.populationRough > 0 &&
+      (largest == null || candidateLargest.populationRough > (largest?.populationRough || 0))
     ) {
       return candidateLargest;
     }

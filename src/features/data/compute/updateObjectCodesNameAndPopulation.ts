@@ -6,6 +6,8 @@ import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, PopulationSourceCategory, TerritoryData } from '@entities/types/DataTypes';
 
+import { sumBy } from '@shared/lib/setUtils';
+
 import { computeLocalePopulationFromCensuses } from './computeLocalePopulationFromCensuses';
 import { computeRegionalLocalePopulation } from './computeRegionalLocalePopulation';
 
@@ -33,53 +35,94 @@ export function updateObjectCodesNameAndPopulation(
   languageSource: LanguageSource,
   localeSeparator: LocaleSeparator,
 ): void {
-  updatePopulations(locales, world);
   updateParentsAndDescendants(languages, languageSource);
+  updatePopulations(languages, locales, world);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
   precomputeLanguageVitality(languages);
 }
 
-function updatePopulations(locales: LocaleData[], world: TerritoryData): void {
-  // Update locale populations based on census data
-  computeLocalePopulationFromCensuses(locales);
-
-  // Start with the world territory (001) and then go down to groups
-  // This will update regional locales AND the languages themselves
-  computeRegionalLocalePopulation(world);
-}
-
-// Update parent/child relationships and the population of descendants
-// TODO too many things have changed from the above steps, the population of descendants should be recomputed
+// Update parent/child relationships
 function updateParentsAndDescendants(
   languages: LanguageData[],
   languageSource: LanguageSource,
 ): void {
   languages.forEach((lang) => {
     const specific = lang[languageSource];
-    lang.populationOfDescendants = specific.populationOfDescendants ?? undefined;
-    if (lang.populationFromLocales != null) {
-      lang.populationEstimate = lang.populationFromLocales;
-      lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
-    } else if (lang.populationCited != null) {
-      lang.populationEstimate = lang.populationCited;
-      lang.populationEstimateSource = PopulationSourceCategory.Other;
-    } else if (lang.populationOfDescendants != null) {
-      lang.populationEstimate = lang.populationOfDescendants;
-      lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromLanguages;
-    } else {
-      lang.populationEstimate = undefined;
-      lang.populationEstimateSource = undefined;
-    }
     lang.parentLanguage = specific.parentLanguage ?? undefined;
     lang.childLanguages = specific.childLanguages ?? [];
   });
+}
 
-  // Do a second pass, discounting populations if the population is greater than or same of its parent
+function updatePopulations(
+  languages: LanguageData[],
+  locales: LocaleData[],
+  world: TerritoryData,
+): void {
+  computeLocalePopulationFromCensuses(locales);
+
+  // Start with the world territory (001) and then go down to groups
+  // This will update regional locales AND the languages themselves
+  computeRegionalLocalePopulation(world);
+
+  // Update languages with either descendant or locale populations (or cited pops if that data is trusted better)
+  computeLanguagePopulations(languages);
+}
+
+function computeLanguagePopulations(languages: LanguageData[]): void {
+  // For all root languages
+  languages
+    .filter((lang) => !lang.parentLanguage)
+    .forEach((rootLang) => {
+      getLanguagePopulationFollowingDescendents(rootLang);
+    });
+
+  discountPopulationEstimatesIfSimilarToParent(languages);
+}
+
+function getLanguagePopulationFollowingDescendents(lang: LanguageData): number {
+  // Recompute the population of descendants first
+  const descendantPopulation = sumBy(
+    lang.childLanguages,
+    (childLang) => getLanguagePopulationFollowingDescendents(childLang) || 0.01, // Using 0.01 as a tiebreaker
+  );
+  lang.populationOfDescendants = descendantPopulation > 0 ? descendantPopulation : undefined;
+
+  // Then follow the algorithm to find the best population estimate, which may come from descendants,
+  // but also from locales or cited data
+  computeLanguagePopulationEstimates(lang);
+
+  return lang.populationEstimate ?? 0;
+}
+
+function computeLanguagePopulationEstimates(lang: LanguageData): void {
+  // The best source would come from the censuses
+  // Locale data usually comes from censuses, or language family locales are bounded by country size
+  if (lang.populationFromLocales != null) {
+    lang.populationEstimate = lang.populationFromLocales;
+    lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
+  } else if (lang.populationRough /* if its defined and not zero */) {
+    // Otherwise, use the population from the languages.tsv file
+    // They are often rough estimates, from a mixture of sources (and are missing citations)
+    lang.populationEstimate = lang.populationRough;
+    lang.populationEstimateSource = PopulationSourceCategory.Other;
+  } else if (lang.populationOfDescendants != null) {
+    // Lastly, check the population from descendants. This is useful for language families
+    // that are missing locale data.
+    lang.populationEstimate = lang.populationOfDescendants;
+    lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromLanguages;
+  } else {
+    lang.populationEstimate = undefined;
+    lang.populationEstimateSource = undefined;
+  }
+}
+
+function discountPopulationEstimatesIfSimilarToParent(languages: LanguageData[]): void {
+  // Discount populations if the population is greater than or same of its parent
   languages.forEach((lang) => {
     const parent = lang.parentLanguage;
     if (parent && lang.populationEstimate != null && parent.populationEstimate != null) {
       if (lang.populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
-        return; // Do not adjust if from locales
+        return; // Do not adjust if from locale data
       if (lang.populationEstimate >= parent.populationEstimate) {
         lang.populationEstimate = parent.populationEstimate - 0.01;
         lang.populationEstimateSource = PopulationSourceCategory.Algorithmic;
@@ -87,6 +130,39 @@ function updateParentsAndDescendants(
     }
   });
 }
+
+// // Formally update the population estimate, including annotating the source of the estimate
+// function computeLanguagePopulationEstimate(languages: LanguageData[]): void {
+//   // First, set the population based on the best available source
+//   languages.forEach((lang) => {
+//     if (lang.populationFromLocales != null) {
+//       lang.populationEstimate = lang.populationFromLocales;
+//       lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
+//     } else if (lang.populationRough != null) {
+//       lang.populationEstimate = lang.populationRough;
+//       lang.populationEstimateSource = PopulationSourceCategory.Other;
+//     } else if (lang.populationOfDescendants != null) {
+//       lang.populationEstimate = lang.populationOfDescendants;
+//       lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromLanguages;
+//     } else {
+//       lang.populationEstimate = undefined;
+//       lang.populationEstimateSource = undefined;
+//     }
+//   });
+
+//   // Do a second pass, discounting populations if the population is greater than or same of its parent
+//   languages.forEach((lang) => {
+//     const parent = lang.parentLanguage;
+//     if (parent && lang.populationEstimate != null && parent.populationEstimate != null) {
+//       if (lang.populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
+//         return; // Do not adjust if from locales
+//       if (lang.populationEstimate >= parent.populationEstimate) {
+//         lang.populationEstimate = parent.populationEstimate - 0.01;
+//         lang.populationEstimateSource = PopulationSourceCategory.Algorithmic;
+//       }
+//     }
+//   });
+// }
 
 function updateObjectNamesAndCodes(
   languages: LanguageData[],

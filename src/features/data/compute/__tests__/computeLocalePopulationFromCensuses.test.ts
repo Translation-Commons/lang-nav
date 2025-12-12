@@ -81,7 +81,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     // Finally check if the sjn language was updated
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langRaw?.populationCited, 'populationCited').toBe(24000);
+    expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
     expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langRaw?.populationAdjusted, 'populationAdjusted').toBe(undefined);
@@ -89,7 +89,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langUpdated?.populationCited, 'populationCited').toBe(24000);
+    expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(undefined); // Not updated
     expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langUpdated?.populationAdjusted, 'populationAdjusted').toBe(undefined);
@@ -127,7 +127,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     // Finally check if the sjn language was updated
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langRaw?.populationCited, 'populationCited').toBe(24000);
+    expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
     expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langRaw?.populationAdjusted, 'populationAdjusted').toBe(undefined);
@@ -135,7 +135,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langUpdated?.populationCited, 'populationCited').toBe(24000);
+    expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(11220); // <-- UPDATED VALUE
     expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
     expect(langUpdated?.populationAdjusted, 'populationAdjusted').toBe(undefined);
@@ -180,12 +180,12 @@ describe('computeLocalePopulationFromCensuses', () => {
     // Check the Language sjn
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langRaw?.populationCited, 'populationCited').toBe(24000);
+    expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
 
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langUpdated?.populationCited, 'populationCited').toBe(24000);
+    expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(13920); // <-- UPDATED VALUE
   });
 
@@ -246,11 +246,11 @@ describe('computeLocalePopulationFromCensuses', () => {
     const langOnlyLocale = mockOnlyLocale.allLanguoids.find((l) => l.ID === 'sjn');
     const langBothNewEntities = mockBothNewEntities.allLanguoids.find((l) => l.ID === 'sjn');
 
-    // Population Cited will all stay to the original entry
-    expect(langOriginal?.populationCited, 'langOriginal?.populationCited').toBe(24000);
-    expect(langOnlyCensus?.populationCited, 'langOnlyCensus?.populationCited').toBe(24000);
-    expect(langOnlyLocale?.populationCited, 'langOnlyLocale?.populationCited').toBe(24000);
-    expect(langBothNewEntities?.populationCited, 'langBothNewEntities?.populationCited').toBe(
+    // Rough Population will all stay to the original entry
+    expect(langOriginal?.populationRough, 'langOriginal?.populationRough').toBe(24000);
+    expect(langOnlyCensus?.populationRough, 'langOnlyCensus?.populationRough').toBe(24000);
+    expect(langOnlyLocale?.populationRough, 'langOnlyLocale?.populationRough').toBe(24000);
+    expect(langBothNewEntities?.populationRough, 'langBothNewEntities?.populationRough').toBe(
       24000,
     );
 

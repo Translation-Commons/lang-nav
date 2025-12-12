@@ -81,7 +81,7 @@ describe('updateObjectCodesNameAndPopulation', () => {
 
     expect(sjn.populationEstimate).toBe(11220); // unchanged
     // TODO computeLanguageDescendantPopulation needs to be revamped
-    expect(sjn.populationOfDescendants).toBe(undefined); // this should be computed from dori0123
+    expect(sjn.populationOfDescendants).toBe(203600); // this should be computed from dori0123
     expect(dori0123.populationEstimate).toBe(101800); // updated to include new locale
     expect(sjn_001.populationSpeaking).toBe(11220); // unchanged
   });
