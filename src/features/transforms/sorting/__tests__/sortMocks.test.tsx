@@ -210,7 +210,7 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: PopulationAttested', () => {
+  it('sortBy: PopulationDirectlySourced', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
       SortBy.PopulationOfDescendants,

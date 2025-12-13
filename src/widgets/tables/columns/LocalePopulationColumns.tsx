@@ -26,7 +26,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     description: 'This is the original population number cited from sourced data.',
     render: (object) => object.populationSpeaking,
     valueType: TableValueType.Population,
-    sortParam: SortBy.PopulationAttested,
+    sortParam: SortBy.PopulationDirectlySourced,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
   },

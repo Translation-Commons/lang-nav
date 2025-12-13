@@ -23,9 +23,9 @@ import {
 } from '../types/DataTypes';
 
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -105,7 +105,7 @@ export interface LanguageData extends ObjectBase {
 
   populationAdjusted?: number;
   populationEstimate?: number;
-  populationCited?: number; // from languages.tsv
+  populationRough?: number; // from languages.tsv
   populationOfDescendants?: number; // computed from child languages
   populationFromLocales?: number; // aggregated from locale data
 

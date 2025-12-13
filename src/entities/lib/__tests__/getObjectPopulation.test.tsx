@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
@@ -6,7 +6,7 @@ import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getObjectPercentOfTerritoryPopulation,
   getObjectPopulation,
-  getObjectPopulationAttested,
+  getObjectPopulationDirectlySourced,
   getObjectPopulationOfDescendants,
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
@@ -46,12 +46,12 @@ describe('getObjectPopulation', () => {
   });
 });
 
-describe('getObjectPopulationAttested', () => {
+describe('getObjectPopulationDirectlySourced', () => {
   it('returns attested population for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationAttested(obj as ObjectData),
+        getObjectPopulationDirectlySourced(obj as ObjectData),
       ]),
     );
     expect(results).toEqual({

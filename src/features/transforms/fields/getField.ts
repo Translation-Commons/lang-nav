@@ -11,7 +11,7 @@ import {
 import {
   getObjectPercentOfTerritoryPopulation,
   getObjectPopulation,
-  getObjectPopulationAttested,
+  getObjectPopulationDirectlySourced,
   getObjectPopulationOfDescendants,
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
@@ -67,8 +67,8 @@ export function getSortField(
     // Population
     case SortBy.Population:
       return getObjectPopulation(object);
-    case SortBy.PopulationAttested:
-      return getObjectPopulationAttested(object);
+    case SortBy.PopulationDirectlySourced:
+      return getObjectPopulationDirectlySourced(object);
     case SortBy.PopulationOfDescendants:
       return getObjectPopulationOfDescendants(object, effectiveLanguageSource);
     case SortBy.PopulationPercentInBiggestDescendantLanguage:

@@ -1,4 +1,3 @@
-import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
@@ -47,7 +46,7 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
       return SortDirection.Ascending; // A to Z
     case SortBy.Date:
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfTerritoryPopulation:
@@ -61,77 +60,5 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.VitalityEthnologue2025:
     case SortBy.Area:
       return SortDirection.Descending; // High to Low
-  }
-}
-
-/** Not necessarily exhaustive, just the ones that will appear in the sidebar */
-export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy[] {
-  switch (objectType) {
-    case ObjectType.Locale:
-      return [
-        SortBy.Code,
-        SortBy.Name,
-        SortBy.Endonym,
-        SortBy.Population,
-        SortBy.Literacy,
-        SortBy.PercentOfOverallLanguageSpeakers,
-        SortBy.CountOfLanguages,
-        SortBy.Language,
-        SortBy.WritingSystem,
-        SortBy.Territory,
-      ];
-    case ObjectType.Territory:
-      return [
-        SortBy.Code,
-        SortBy.Name,
-        SortBy.Population,
-        SortBy.Literacy,
-        SortBy.CountOfLanguages,
-        SortBy.CountOfTerritories,
-        SortBy.Latitude,
-        SortBy.Longitude,
-        SortBy.Area,
-      ];
-    case ObjectType.Language:
-      return [
-        SortBy.Code,
-        SortBy.Name,
-        SortBy.Endonym,
-        SortBy.Population,
-        SortBy.Literacy,
-        SortBy.CountOfTerritories,
-        SortBy.CountOfLanguages,
-        SortBy.WritingSystem,
-        SortBy.Territory,
-        SortBy.PopulationAttested,
-        SortBy.VitalityMetascore,
-        SortBy.ISOStatus,
-        SortBy.VitalityEthnologue2013,
-        SortBy.VitalityEthnologue2025,
-        SortBy.Latitude,
-        SortBy.Longitude,
-      ];
-    case ObjectType.Census:
-      return [
-        SortBy.Date,
-        SortBy.Code,
-        SortBy.Name,
-        SortBy.Population,
-        SortBy.Territory,
-        SortBy.CountOfLanguages,
-      ];
-    case ObjectType.WritingSystem:
-      return [
-        SortBy.Code,
-        SortBy.Name,
-        SortBy.Endonym,
-        SortBy.Population,
-        // SortBy.Literacy, Data not available yet
-        SortBy.Language,
-        SortBy.CountOfLanguages,
-        SortBy.PopulationOfDescendants,
-      ];
-    case ObjectType.VariantTag:
-      return [SortBy.Date, SortBy.Code, SortBy.Name, SortBy.Population, SortBy.CountOfLanguages];
   }
 }

@@ -107,7 +107,7 @@ function getMinimumValue(colorBy: ColorBy): number {
     case SortBy.ISOStatus:
       return -1;
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfOverallLanguageSpeakers:
@@ -156,7 +156,7 @@ function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
     case SortBy.CountOfLanguages:
     case SortBy.CountOfTerritories:
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.Area:
@@ -176,7 +176,7 @@ function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
 function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
   switch (colorBy) {
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.CountOfLanguages:
