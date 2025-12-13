@@ -51,6 +51,8 @@ export function getSortField(
       return getCountOfTerritories(object);
     case SortBy.CountOfLanguages:
       return getCountOfLanguages(object);
+    case SortBy.CountOfDialects:
+      return getCountOfLanguages(object); // For languages, this returns the dialect count
     case SortBy.Literacy:
       return getObjectLiteracy(object);
     case SortBy.Date:
@@ -139,6 +141,7 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.Literacy:
     case SortBy.CountOfLanguages:
+    case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
     case SortBy.VitalityMetascore:
     case SortBy.ISOStatus:
@@ -185,7 +188,7 @@ export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy
         SortBy.Population,
         SortBy.Literacy,
         SortBy.CountOfTerritories,
-        SortBy.CountOfLanguages,
+        SortBy.CountOfDialects,
         SortBy.WritingSystem,
         SortBy.Territory,
         SortBy.PopulationAttested,

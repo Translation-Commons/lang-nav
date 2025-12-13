@@ -9,8 +9,8 @@ import {
 import { ReactNode } from 'react';
 
 import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
+import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
@@ -162,6 +162,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.CountOfLanguages:
+    case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
     case SortBy.Date:
     case SortBy.Area:

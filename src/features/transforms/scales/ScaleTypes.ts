@@ -16,21 +16,22 @@ export function getScaleBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.PopulationAttested,
     SortBy.Area,
     SortBy.CountOfLanguages,
+    SortBy.CountOfDialects,
     SortBy.CountOfTerritories,
   ];
 
   let filteredScaleBys = [...allowedScaleBys];
 
-  // Exclude count-of-languages and area when mapping Languages
+  // Exclude area and count-of-languages when mapping Languages (use CountOfDialects instead)
   if (objectType === ObjectType.Language) {
     filteredScaleBys = filteredScaleBys.filter(
       (s) => s !== SortBy.CountOfLanguages && s !== SortBy.Area,
     );
   }
 
-  // Exclude count-of-territories when mapping Territories
+  // Exclude count-of-dialects when mapping Territories (use CountOfLanguages instead)
   if (objectType === ObjectType.Territory) {
-    filteredScaleBys = filteredScaleBys.filter((s) => s !== SortBy.CountOfTerritories);
+    filteredScaleBys = filteredScaleBys.filter((s) => s !== SortBy.CountOfDialects);
   }
 
   return filteredScaleBys;
