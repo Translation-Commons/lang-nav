@@ -16,6 +16,7 @@ import { CLDRCoverageData } from '../types/CLDRTypes';
 import {
   LocaleData,
   ObjectBase,
+  PopulationSourceCategory,
   ScriptCode,
   VariantTagData,
   WikipediaData,
@@ -103,8 +104,8 @@ export interface LanguageData extends ObjectBase {
   viabilityConfidence?: string;
   viabilityExplanation?: string;
 
-  populationAdjusted?: number;
   populationEstimate?: number;
+  populationEstimateSource?: PopulationSourceCategory;
   populationRough?: number; // from languages.tsv
   populationOfDescendants?: number; // computed from child languages
   populationFromLocales?: number; // aggregated from locale data
@@ -173,7 +174,6 @@ type LanguageDataInSource = {
   code?: LanguageCode;
   name?: string;
   scope?: LanguageScope;
-  populationOfDescendants?: number;
   parentLanguageCode?: LanguageCode;
   parentLanguage?: LanguageData;
   childLanguages?: LanguageData[];

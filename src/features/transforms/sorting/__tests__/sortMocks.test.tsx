@@ -2,7 +2,6 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { getSortFunctionParameterized } from '../sort';
@@ -13,11 +12,7 @@ const mockedObjects = getFullyInstantiatedMockedObjects();
 describe('getSortByParameterized', () => {
   it('sortBy: Code', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Code,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Code, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '001',
       '123',
@@ -45,11 +40,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Name', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Name,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Name, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'AM', // Aman
       '001', // Arda
@@ -77,11 +68,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Endonym', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Endonym,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Endonym, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'AM', // aman
       '001', // arda
@@ -110,11 +97,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Endonym. Also, reversed', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Endonym,
-      LanguageSource.Combined,
-      SortBehavior.Reverse,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Endonym, SortBehavior.Reverse);
     // Not exactly the reverse of the above test because
     //   1) undefined values stay at the end
     //   2) sort is stable to the input order
@@ -146,30 +129,26 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Population', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Population,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Population, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '001',
       '123',
       'Teng',
-      'sjn',
-      'tolkorth', // Potential population same as sjn
       'AM',
       'HA',
       'BE',
       'be0590',
+      'sjn',
+      'tolkorth', // Potential population same as sjn
       'sjn_123',
       'sjn_001',
       'sjn_BE',
       'sjn_Teng_BE',
       'sjn_Teng_123',
       'sjn_Teng_001',
-      'dori0123',
       'ER',
       'sjn_ER',
+      'dori0123',
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
@@ -178,32 +157,28 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Population. Also, reversed', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Population,
-      LanguageSource.Combined,
-      SortBehavior.Reverse,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Population, SortBehavior.Reverse);
     // Not exactly the reverse of the above test because
     //   2) sort is stable to the input order
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'dori0123',
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
       'sjn_ER',
       'ER',
-      'dori0123',
       'sjn_Teng_BE', // lower than sjn_BE because not updated by census
       'sjn_Teng_123',
       'sjn_Teng_001',
       'sjn_BE', // increased because of the be0590 locale
+      'sjn',
+      'tolkorth',
       'sjn_123',
       'sjn_001',
       'BE',
       'be0590',
       'HA',
       'AM',
-      'sjn',
-      'tolkorth',
       'Teng',
       '123',
       '001',
@@ -214,7 +189,6 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
       SortBy.PopulationDirectlySourced,
-      LanguageSource.Combined,
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
@@ -247,15 +221,44 @@ describe('getSortByParameterized', () => {
   it('sortBy: PopulationOfDescendants', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
-      SortBy.PopulationOfDescendants,
-      LanguageSource.Combined,
+      SortBy.PopulationDirectlySourced,
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'sjn',
+      // These entities were created with a rough population estimate, before it was computed by algorithms
+      '001',
+      '123',
+      'sjn', // sjn was created with a high estimate
+      'AM', // Most countries have a high value
+      'HA',
+      'BE',
+      'be0590',
+      'sjn_123', // sjn locales were created with lower estimates
+      'sjn_001',
+      'sjn_BE',
+      'sjn_Teng_BE',
+      'sjn_Teng_123',
+      'sjn_Teng_001',
+      'dori0123',
+      'ER',
+      'sjn_ER',
+      'dori0123_ER',
+      'dori0123_123',
+      'dori0123_001',
+      // All undefined after this, stable to input order
+      'Teng',
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: PopulationOfDescendants', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(SortBy.PopulationOfDescendants, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'sjn', // 1800 from dori0123
+      '123',
       'dori0123',
       // All undefined after this, stable to input order
-      '123',
       'BE',
       'ER',
       'HA',
@@ -281,7 +284,6 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
       SortBy.PercentOfTerritoryPopulation,
-      LanguageSource.Combined,
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
@@ -313,21 +315,20 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
       SortBy.PercentOfOverallLanguageSpeakers,
-      LanguageSource.Combined,
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'dori0123_ER', // 72.0
+      'dori0123_ER', // 10.0
+      'sjn_123',
       'dori0123_123',
-      'dori0123_001',
-      'sjn_123', // 45.5
       'sjn_001',
-      'sjn_BE', // 37.5
-      'sjn_Teng_BE',
+      'dori0123_001',
+      'sjn_BE', // 82.9
+      'sjn_Teng_BE', // 80.2
       'sjn_Teng_123',
       'sjn_Teng_001',
-      'dori0123', // 10.4
-      'sjn_ER', // 8.0
+      'sjn_ER', // 17.1
+      'dori0123', // 16.0
       // All below undefined, stable to input order
       '123',
       'sjn',
@@ -346,7 +347,6 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(
       SortBy.PopulationPercentInBiggestDescendantLanguage,
-      LanguageSource.Combined,
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
@@ -377,11 +377,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Language', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Language,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Language, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'dori0123', // Doriathrin
       'dori0123_ER',
@@ -410,11 +406,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Writing System', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.WritingSystem,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.WritingSystem, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'sjn', // Tengwar
       'dori0123',
@@ -443,11 +435,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Territory', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Territory,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Territory, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'AM', // Aman
       '001', // Arda
@@ -476,11 +464,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Date', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Date,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Date, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'tolkorth', // 2020-01-01
       'be0590', // 2000-01-02
@@ -509,11 +493,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: CountOfLanguages', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.CountOfLanguages,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.CountOfLanguages, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '123', // 2 languages: sjn, dori0123
       'ER', // 2 languages: sjn, dori0123
@@ -530,9 +510,9 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_001', // 1 locale: sjn_Teng_123
       'dori0123_001', // 1 locale: dori0123_123
       'dori0123', // 0 dialects
-      'HA', // undefined
+      'HA', // 0 languages
       'AM',
-      'sjn_BE',
+      'sjn_BE', // undefined
       'sjn_ER',
       'dori0123_ER',
       'sjn_Teng_BE',
@@ -541,11 +521,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: CountOfTerritories', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.CountOfTerritories,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.CountOfTerritories, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       '123', // 3 territories: ER, BE, HA
       'sjn', // 2 territories: ER, BE
@@ -574,11 +550,7 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Literacy', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.Literacy,
-      LanguageSource.Combined,
-      SortBehavior.Normal,
-    );
+    const sort = getSortFunctionParameterized(SortBy.Literacy, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'HA', // 99.0
       'AM', // 98.0

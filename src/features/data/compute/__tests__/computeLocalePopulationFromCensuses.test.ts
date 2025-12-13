@@ -84,7 +84,6 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
     expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
-    expect(langRaw?.populationAdjusted, 'populationAdjusted').toBe(undefined);
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
@@ -92,7 +91,6 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(undefined); // Not updated
     expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
-    expect(langUpdated?.populationAdjusted, 'populationAdjusted').toBe(undefined);
   });
 
   it('Computing regional locale data is necessary to propagate the new data', () => {
@@ -130,7 +128,6 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
     expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
-    expect(langRaw?.populationAdjusted, 'populationAdjusted').toBe(undefined);
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
@@ -138,7 +135,6 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(11220); // <-- UPDATED VALUE
     expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
-    expect(langUpdated?.populationAdjusted, 'populationAdjusted').toBe(undefined);
   });
 
   it('If we have a census with a crazy estimate it changes some values but is capped', () => {

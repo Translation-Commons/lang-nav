@@ -2,7 +2,10 @@ import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import { ObjectType, View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
@@ -13,7 +16,16 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
   return (
     <>
       {lang.populationOfDescendants > (lang.populationEstimate ?? 0) ? (
-        <Hoverable hoverContent="Computed population of descendants exceeds population estimate.">
+        <Hoverable
+          hoverContent={
+            <>
+              The sum of people that use this languoid&apos;s descendants is higher than the
+              population estimate for this {lang.scope?.toLowerCase() ?? 'language'} -- probably
+              because of multilingualism. For example, a simple sum for Arabic would double count
+              people that understand both Standard Arabic and Vernacular Arabic.
+            </>
+          }
+        >
           <TriangleAlertIcon
             style={{ color: 'var(--color-text-yellow)', marginRight: '0.25em' }}
             size="1em"
@@ -36,6 +48,7 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
 };
 
 const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { updatePageParams } = usePageParams();
   if (!lang.populationOfDescendants) return null;
 
   return (
@@ -70,6 +83,18 @@ const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
           )}
         </tbody>
       </table>
+      <HoverableButton
+        onClick={() =>
+          updatePageParams({
+            languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
+            view: View.Table,
+            objectType: ObjectType.Language,
+          })
+        }
+        style={{ display: 'block' }}
+      >
+        See all descendants in the language table
+      </HoverableButton>
     </>
   );
 };

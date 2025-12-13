@@ -140,7 +140,11 @@ export enum PopulationSourceCategory {
   CLDR = 'CLDR', // Unicode's Common Locale Data Repository
   Other = 'Other',
   NoSource = '',
-  Aggregated = 'Aggregated',
+
+  // Aggregated
+  AggregatedFromTerritories = 'Aggregated from Territories',
+  AggregatedFromLanguages = 'Aggregated from Languages',
+  Algorithmic = 'Algorithmic', // not further specified
 }
 
 export enum OfficialStatus {

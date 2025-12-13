@@ -1,7 +1,6 @@
 import React from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
 import { getSortField } from '@features/transforms/fields/getField';
 
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
@@ -20,8 +19,7 @@ type Props = {
 };
 
 const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
-  const { languageSource } = usePageParams();
-  const fieldValue = getSortField(object, field, languageSource);
+  const fieldValue = getSortField(object, field);
   switch (field) {
     case SortBy.Population:
     case SortBy.PopulationDirectlySourced:

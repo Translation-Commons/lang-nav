@@ -1,6 +1,5 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
@@ -48,15 +47,10 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
 }
 
 // SortBy.PopulationOfDescendants
-export function getObjectPopulationOfDescendants(
-  object: ObjectData,
-  languageSource?: LanguageSource,
-): number | undefined {
+export function getObjectPopulationOfDescendants(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return languageSource
-        ? object[languageSource].populationOfDescendants
-        : object.populationOfDescendants;
+      return object.populationOfDescendants;
     case ObjectType.WritingSystem:
       return object.populationOfDescendants;
     case ObjectType.Territory:

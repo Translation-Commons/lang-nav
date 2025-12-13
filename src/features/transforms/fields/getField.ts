@@ -1,6 +1,5 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getCountOfLanguages,
   getCountOfTerritories,
@@ -25,11 +24,7 @@ import {
 } from '../filtering/filterByConnections';
 import { SortBy } from '../sorting/SortTypes';
 
-export function getSortField(
-  object: ObjectData,
-  sortBy: ColorBy,
-  effectiveLanguageSource: LanguageSource = LanguageSource.Combined,
-): string | number | undefined {
+export function getSortField(object: ObjectData, sortBy: ColorBy): string | number | undefined {
   if (sortBy === 'None') return undefined;
 
   switch (sortBy) {
@@ -70,7 +65,7 @@ export function getSortField(
     case SortBy.PopulationDirectlySourced:
       return getObjectPopulationDirectlySourced(object);
     case SortBy.PopulationOfDescendants:
-      return getObjectPopulationOfDescendants(object, effectiveLanguageSource);
+      return getObjectPopulationOfDescendants(object);
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
       return getObjectPopulationPercentInBiggestDescendantLanguage(object);
     case SortBy.PercentOfTerritoryPopulation:

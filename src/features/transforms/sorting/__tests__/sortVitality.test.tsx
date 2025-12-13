@@ -1,13 +1,8 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import {
-  getBaseLanguageData,
-  LanguageCode,
-  LanguageData,
-  LanguageSource,
-} from '@entities/language/LanguageTypes';
+import { getBaseLanguageData, LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
 import {
   LanguageISOStatus,
@@ -17,7 +12,7 @@ import {
 import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
 
 import { getSortFunctionParameterized } from '../sort';
-import { SortBy, SortBehavior } from '../SortTypes';
+import { SortBehavior, SortBy } from '../SortTypes';
 
 // Helper to create a language with vitality data
 function createLanguageWithVitality(
@@ -50,11 +45,7 @@ describe('Vitality Sorting', () => {
       ];
       precomputeLanguageVitality(langs);
 
-      const sortFn = getSortFunctionParameterized(
-        SortBy.VitalityMetascore,
-        LanguageSource.ISO,
-        SortBehavior.Normal,
-      );
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, SortBehavior.Normal);
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('en'); // highest score
@@ -69,11 +60,7 @@ describe('Vitality Sorting', () => {
       ];
       precomputeLanguageVitality(langs);
 
-      const sortFn = getSortFunctionParameterized(
-        SortBy.VitalityMetascore,
-        LanguageSource.ISO,
-        SortBehavior.Normal,
-      );
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, SortBehavior.Normal);
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('fr'); // has data
@@ -96,11 +83,7 @@ describe('Vitality Sorting', () => {
       };
       precomputeLanguageVitality([lang]);
 
-      const sortFn = getSortFunctionParameterized(
-        SortBy.VitalityMetascore,
-        LanguageSource.ISO,
-        SortBehavior.Normal,
-      );
+      const sortFn = getSortFunctionParameterized(SortBy.VitalityMetascore, SortBehavior.Normal);
       const sorted = [territory, lang].sort(sortFn);
 
       expect(sorted[0].type).toBe(ObjectType.Language); // language first
@@ -116,11 +99,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('la', 'Latin', { iso: LanguageISOStatus.Extinct }), // 0
       ];
 
-      const sortFn = getSortFunctionParameterized(
-        SortBy.ISOStatus,
-        LanguageSource.ISO,
-        SortBehavior.Normal,
-      );
+      const sortFn = getSortFunctionParameterized(SortBy.ISOStatus, SortBehavior.Normal);
       const sorted = [...langs].sort(sortFn);
 
       expect(sorted[0].codeDisplay).toBe('en');
@@ -141,7 +120,6 @@ describe('Vitality Sorting', () => {
 
       const sortFn = getSortFunctionParameterized(
         SortBy.VitalityEthnologue2013,
-        LanguageSource.ISO,
         SortBehavior.Normal,
       );
       const sorted = [...langs].sort(sortFn);
@@ -166,7 +144,6 @@ describe('Vitality Sorting', () => {
 
       const sortFn = getSortFunctionParameterized(
         SortBy.VitalityEthnologue2025,
-        LanguageSource.ISO,
         SortBehavior.Normal,
       );
       const sorted = [...langs].sort(sortFn);
