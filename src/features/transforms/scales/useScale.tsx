@@ -21,20 +21,12 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
   const minValue = getMinimumValue(scaleBy);
   const maxValue = useMemo(() => getMaximumValue(objects, scaleBy), [objects, scaleBy]);
 
-  const shouldUseLogScale = shouldUseLogarithmicScale(scaleBy);
-
-  const needsSqrtTransform =
-    scaleBy === SortBy.Area ||
-    scaleBy === SortBy.Population ||
-    scaleBy === SortBy.PopulationAttested ||
-    scaleBy === SortBy.PopulationOfDescendants;
-
-  const transformValue = (v: number) => (needsSqrtTransform ? Math.pow(v, 0.5) : v);
+  const transformValue = (v: number) => Math.pow(v, 0.5);
 
   const tMin = transformValue(minValue);
   const tMax = transformValue(maxValue);
 
-  const range = shouldUseLogScale ? Math.log10(Math.max(1, tMax - tMin)) : tMax - tMin;
+  const range = tMax - tMin;
 
   const getNormalizedValue = useCallback(
     (value: number | string): number => {
@@ -49,10 +41,9 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
 
       numericValue -= tMin;
       if (numericValue <= 0) return 0;
-      if (shouldUseLogScale) return Math.log10(numericValue) / range;
       return numericValue / range;
     },
-    [scaleBy, tMin, tMax, range, shouldUseLogScale],
+    [scaleBy, tMin, tMax, range],
   );
 
   const getScale = useCallback(
@@ -153,21 +144,5 @@ function getMaximumValue(objects: ObjectData[], scaleBy?: ScaleBy): number {
       return 1;
     default:
       return 1;
-  }
-}
-
-function shouldUseLogarithmicScale(scaleBy?: ScaleBy): boolean {
-  switch (scaleBy) {
-    case SortBy.Population:
-    case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
-    case SortBy.ISOStatus:
-    case SortBy.Area:
-      return true;
-    default:
-      return false;
   }
 }
