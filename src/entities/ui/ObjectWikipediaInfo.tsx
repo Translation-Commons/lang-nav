@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';

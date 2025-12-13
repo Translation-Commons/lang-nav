@@ -7,16 +7,13 @@ import ObjectDetails from '@widgets/details/ObjectDetails';
 import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
-import {
-  getFilterBySubstring,
-  getFilterByVitality,
-  getScopeFilter,
-} from '../transforms/filtering/filter';
+import { getFilterByVitality, getScopeFilter } from '../transforms/filtering/filter';
 import { getSortFunction } from '../transforms/sorting/sort';
 
 import BaseObjectTable from './BaseObjectTable';

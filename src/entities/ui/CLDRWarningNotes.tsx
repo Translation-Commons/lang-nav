@@ -1,7 +1,7 @@
 import { AlertTriangleIcon, InfoIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';

@@ -101,7 +101,7 @@ export default useColors;
 function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
   switch (colorBy) {
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.CountOfLanguages:

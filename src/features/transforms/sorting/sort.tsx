@@ -1,28 +1,9 @@
-import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import {
-  getTerritoriesRelevantToObject,
-  getWritingSystemsRelevantToObject,
-} from '@features/transforms/filtering/filterByConnections';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
-import {
-  getCountOfLanguages,
-  getCountOfTerritories,
-  getObjectDateAsNumber,
-  getObjectLiteracy,
-  getObjectMostImportantLanguageName,
-} from '@entities/lib/getObjectMiscFields';
-import {
-  getObjectPopulation,
-  getObjectPopulationAttested,
-  getObjectPopulationOfDescendants,
-  getObjectPopulationPercentInBiggestDescendantLanguage,
-  getObjectPopulationRelativeToOverallLanguageSpeakers,
-  getObjectPercentOfTerritoryPopulation,
-} from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
+
+import { getSortField } from '../fields/getField';
 
 import { SortBehavior, SortBy, SortDirection } from './SortTypes';
 
@@ -134,7 +115,7 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
       return SortDirection.Ascending; // A to Z
     case SortBy.Date:
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfTerritoryPopulation:

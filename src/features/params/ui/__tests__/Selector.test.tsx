@@ -1,12 +1,12 @@
-import { render, fireEvent, screen, within } from '@testing-library/react';
+import { fireEvent, render, screen, within } from '@testing-library/react';
 import React from 'react';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Selector from '../Selector';
 import { SelectorDisplay, SelectorDisplayProvider } from '../SelectorDisplayContext';
 
 vi.mock('@shared/hooks/useClickOutside', () => ({ useClickOutside: () => React.createRef() }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));
 
@@ -65,7 +65,7 @@ describe('Selector component', () => {
 
     // Open dropdown
     fireEvent.click(standalone);
-    const dropdown = screen.queryByTestId('dropdown');
+    const dropdown = screen.queryByRole('listbox');
     expect(dropdown).toBeTruthy();
 
     // Within the dropdown, option-two should be present
@@ -75,7 +75,7 @@ describe('Selector component', () => {
     // onChange should have been called with 'two' and dropdown should close
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith('two');
-    expect(screen.queryByTestId('dropdown')).toBeNull();
+    expect(screen.queryByRole('listbox')).toBeNull();
   });
 
   it('supports multiple selection state (selected as array) and marks appropriate options', () => {

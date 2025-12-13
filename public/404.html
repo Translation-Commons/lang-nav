@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <meta http-equiv="refresh" content="0; url=/lang-nav/" />
+    <script type="text/javascript">
+      (function () {
+        var pathSegmentsToKeep = 1; // keep /lang-nav
+        var l = window.location;
+        var origin = l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '');
+        var basePath = l.pathname
+          .split('/')
+          .slice(0, 1 + pathSegmentsToKeep)
+          .join('/');
+        var path = l.pathname
+          .split('/')
+          .slice(1 + pathSegmentsToKeep)
+          .join('/');
+        var search = l.search ? '&' + l.search.slice(1).replace(/&/g, '~and~') : '';
+        l.replace(origin + basePath + '/?/' + path.replace(/&/g, '~and~') + search + l.hash);
+      })();
+    </script>
+  </head>
+
+  <body>
+    Redirecting…
+  </body>
+</html>

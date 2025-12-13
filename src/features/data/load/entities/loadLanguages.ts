@@ -25,7 +25,7 @@ function parseLanguageLine(line: string): LanguageData {
 
   const populationAdjusted =
     parts[9] !== '' ? Number.parseInt(parts[9].replace(/,/g, '')) : undefined;
-  const populationCited =
+  const populationRough =
     parts[10] !== '' ? Number.parseInt(parts[10].replace(/,/g, '')) : undefined;
   const code = parts[0];
   const parentLanguageCode = parts[11] !== '' ? parts[11] : undefined;
@@ -43,14 +43,16 @@ function parseLanguageLine(line: string): LanguageData {
     nameEndonym,
     names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
-    vitalityEth2013: parseVitalityEthnologue2013(parts[6]),
-    vitalityEth2025: parseVitalityEthnologue2025(parts[7]),
+    vitality: {
+      ethnologue2013: parseVitalityEthnologue2013(parts[6]),
+      ethnologue2025: parseVitalityEthnologue2025(parts[7]),
+    },
     digitalSupport: parts[8] || undefined,
     viabilityConfidence: parts[13] || undefined,
     viabilityExplanation: parts[14] || undefined,
 
     populationAdjusted,
-    populationCited,
+    populationRough,
 
     modality: (parts[4] || undefined) as LanguageModality | undefined,
     primaryScriptCode: parts[5] || undefined,

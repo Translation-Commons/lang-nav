@@ -1,10 +1,10 @@
 import { SearchableField } from '@features/params/PageParamTypes';
 import { EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import LanguageOtherNames from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';

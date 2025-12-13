@@ -15,9 +15,11 @@ import { buildVitalityFilterFunction } from '../filter';
 describe('buildVitalityFilterFunction', () => {
   const mockLanguage = {
     ...getBaseLanguageData('test-lang', 'Test Language'),
-    ISO: { status: LanguageISOStatus.Living },
-    vitalityEth2013: VitalityEthnologueFine.National,
-    vitalityEth2025: VitalityEthnologueCoarse.Institutional,
+    vitality: {
+      iso: LanguageISOStatus.Living,
+      ethFine: VitalityEthnologueFine.National,
+      ethCoarse: VitalityEthnologueCoarse.Institutional,
+    },
   };
 
   const mockNonLanguage: TerritoryData = {
@@ -32,84 +34,60 @@ describe('buildVitalityFilterFunction', () => {
   };
 
   it('returns true for non-language objects', () => {
-    const filter = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filter = buildVitalityFilterFunction([], [], []);
     expect(filter(mockNonLanguage)).toBe(true);
   });
 
   it('returns true when no vitality filters are active', () => {
-    const filter = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filter = buildVitalityFilterFunction([], [], []);
     expect(filter(mockLanguage)).toBe(true);
   });
 
   it('filters by ISO vitality', () => {
-    const filterMatch = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filterMatch = buildVitalityFilterFunction([LanguageISOStatus.Living], [], []);
     expect(filterMatch(mockLanguage)).toBe(true);
 
-    const filterNoMatch = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Extinct],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filterNoMatch = buildVitalityFilterFunction([LanguageISOStatus.Extinct], [], []);
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
   it('filters by Ethnologue 2013', () => {
-    const filterMatch = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [VitalityEthnologueFine.National],
-      vitalityEth2025: [],
-    });
+    const filterMatch = buildVitalityFilterFunction([], [VitalityEthnologueFine.National], []);
     expect(filterMatch(mockLanguage)).toBe(true);
 
-    const filterNoMatch = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [VitalityEthnologueFine.Threatened],
-      vitalityEth2025: [],
-    });
+    const filterNoMatch = buildVitalityFilterFunction([], [VitalityEthnologueFine.Threatened], []);
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
   it('filters by Ethnologue 2025', () => {
-    const filterMatch = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [],
-      vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
-    });
+    const filterMatch = buildVitalityFilterFunction(
+      [],
+      [],
+      [VitalityEthnologueCoarse.Institutional],
+    );
     expect(filterMatch(mockLanguage)).toBe(true);
 
-    const filterNoMatch = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [],
-      vitalityEth2025: [VitalityEthnologueCoarse.Endangered],
-    });
+    const filterNoMatch = buildVitalityFilterFunction(
+      [],
+      [],
+      [VitalityEthnologueCoarse.Endangered],
+    );
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
   it('handles multiple vitality filters', () => {
-    const filterAllMatch = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living],
-      vitalityEth2013: [VitalityEthnologueFine.National],
-      vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
-    });
+    const filterAllMatch = buildVitalityFilterFunction(
+      [LanguageISOStatus.Living],
+      [VitalityEthnologueFine.National],
+      [VitalityEthnologueCoarse.Institutional],
+    );
     expect(filterAllMatch(mockLanguage)).toBe(true);
 
-    const filterPartialMatch = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living],
-      vitalityEth2013: [VitalityEthnologueFine.Threatened],
-      vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
-    });
+    const filterPartialMatch = buildVitalityFilterFunction(
+      [LanguageISOStatus.Living],
+      [VitalityEthnologueFine.Threatened],
+      [VitalityEthnologueCoarse.Institutional],
+    );
     expect(filterPartialMatch(mockLanguage)).toBe(false);
   });
 
@@ -120,45 +98,41 @@ describe('buildVitalityFilterFunction', () => {
       // Missing Ethnologue data
     };
 
-    const filter = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [VitalityEthnologueFine.National],
-      vitalityEth2025: [],
-    });
+    const filter = buildVitalityFilterFunction([], [VitalityEthnologueFine.National], []);
     expect(filter(mockIncompleteLanguage)).toBe(false);
   });
 
   it('handles multiple values for same vitality type', () => {
-    const filter = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filter = buildVitalityFilterFunction(
+      [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
+      [],
+      [],
+    );
     expect(filter(mockLanguage)).toBe(true);
 
-    const filterNoMatch = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Extinct, LanguageISOStatus.Constructed],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filterNoMatch = buildVitalityFilterFunction(
+      [LanguageISOStatus.Extinct, LanguageISOStatus.Constructed],
+      [],
+      [],
+    );
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
   it('handles complex combinations of vitality filters', () => {
     // Test with multiple values in each category
-    const complexFilter = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
-      vitalityEth2013: [VitalityEthnologueFine.National, VitalityEthnologueFine.Regional],
-      vitalityEth2025: [VitalityEthnologueCoarse.Institutional, VitalityEthnologueCoarse.Stable],
-    });
+    const complexFilter = buildVitalityFilterFunction(
+      [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
+      [VitalityEthnologueFine.National, VitalityEthnologueFine.Regional],
+      [VitalityEthnologueCoarse.Institutional, VitalityEthnologueCoarse.Stable],
+    );
     expect(complexFilter(mockLanguage)).toBe(true);
 
     // Test with non-matching combinations
-    const nonMatchingFilter = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living],
-      vitalityEth2013: [VitalityEthnologueFine.Regional], // Doesn't match National
-      vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
-    });
+    const nonMatchingFilter = buildVitalityFilterFunction(
+      [LanguageISOStatus.Living],
+      [VitalityEthnologueFine.Regional], // Doesn't match National
+      [VitalityEthnologueCoarse.Institutional],
+    );
     expect(nonMatchingFilter(mockLanguage)).toBe(false);
   });
 
@@ -168,19 +142,11 @@ describe('buildVitalityFilterFunction', () => {
       // No vitality values set
     };
 
-    const filter = buildVitalityFilterFunction({
-      isoStatus: [LanguageISOStatus.Living],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const filter = buildVitalityFilterFunction([LanguageISOStatus.Living], [], []);
     expect(filter(mockUndefinedLanguage)).toBe(false);
 
     // Should pass when no filters are active
-    const noFilterActive = buildVitalityFilterFunction({
-      isoStatus: [],
-      vitalityEth2013: [],
-      vitalityEth2025: [],
-    });
+    const noFilterActive = buildVitalityFilterFunction([], [], []);
     expect(noFilterActive(mockUndefinedLanguage)).toBe(true);
   });
 });

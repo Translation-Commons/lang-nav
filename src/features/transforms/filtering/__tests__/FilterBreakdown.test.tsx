@@ -1,5 +1,5 @@
-import { render, screen, fireEvent } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach, Mock } from 'vitest';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -13,7 +13,7 @@ import FilterBreakdown from '../FilterBreakdown';
 import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn() }),
 }));
 
@@ -68,15 +68,15 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown objects={objects} />);
 
     // Expected all of the filters to be shown
-    expect(screen.getByText(/Out of scope:/i)).toBeTruthy();
-    expect(screen.getByText(/Not in territory "US":/i)).toBeTruthy();
-    expect(screen.getByText(/Not written in "Latn":/i)).toBeTruthy();
-    expect(screen.getByText(/Not related to language "ine":/i)).toBeTruthy();
+    expect(screen.getByText(/Not macrolanguage or language:/i)).toBeTruthy();
+    expect(screen.getByText(/Not found in territory with code "US":/i)).toBeTruthy();
+    expect(screen.getByText(/Not written in script with code "Latn":/i)).toBeTruthy();
+    expect(screen.getByText(/Not related to language with code "ine":/i)).toBeTruthy();
     expect(screen.getByText(/Not passing vitality filter:/i)).toBeTruthy();
-    expect(screen.getByText(/Not matching substring \(spa\):/i)).toBeTruthy();
+    expect(screen.getByText(/Not matching substring "spa":/i)).toBeTruthy();
 
     // Check the cells showing the missing counts
-    const numericCells = container.getElementsByClassName('numeric');
+    const numericCells = container.getElementsByClassName('count');
     expect(numericCells.length).toBe(8);
     expect(numericCells[0].textContent).toBe('10'); // start out with 8 languages
     expect(numericCells[1].textContent).toBe('-2'); // ine, gem is out of scope: Language or Macrolanguage
@@ -87,16 +87,13 @@ describe('FilterBreakdown', () => {
     expect(numericCells[6].textContent).toBe('-1'); // eng fails substring "spa"
     expect(numericCells[7].textContent).toBe('1'); // spa is the only language left
 
-    // There should be four clear buttons (one per message)
+    // There should be six clear buttons (one per message)
     const buttons = screen.getAllByRole('button');
     expect(buttons.length).toBe(6);
 
     // Click each button and ensure updatePageParams is called with expected payload
     fireEvent.click(buttons[0]);
-    expect(updatePageParams).toHaveBeenCalledWith({
-      territoryScopes: [],
-      languageScopes: [],
-    });
+    expect(updatePageParams).toHaveBeenCalledWith({ languageScopes: [] });
 
     fireEvent.click(buttons[1]);
     fireEvent.click(buttons[2]);
@@ -125,7 +122,7 @@ describe('FilterBreakdown', () => {
     // Only scope/territory/vitality clears may exist depending on counts; ensure updatePageParams callable
     if (buttons.length > 0) {
       fireEvent.click(buttons[0]);
-      expect(updatePageParams).toHaveBeenCalledWith({ territoryScopes: [], languageScopes: [] });
+      expect(updatePageParams).toHaveBeenCalledWith({ languageScopes: [] });
     }
   });
 
@@ -135,18 +132,49 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown objects={objects} />);
 
     // No filters are applied, so no breakdown should be shown
-    expect(screen.queryByText(/Out of scope:/i)).toBeTruthy(); // ine
-    expect(screen.queryByText(/Not in territory/i)).toBeNull(); // not active
+    expect(screen.queryByText(/Not macrolanguage or language:/i)).toBeTruthy(); // ine
+    expect(screen.queryByText(/Not found in territory/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not written in/i)).toBeNull(); // not active
-    expect(screen.queryByText(/Not related to language/i)).toBeNull(); // not active
+    expect(screen.queryByText(/Not related to/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not passing vitality filter/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not matching substring/i)).toBeNull(); // not active
 
     // Check the cells showing the missing counts
-    const numericCells = container.getElementsByClassName('numeric');
+    const numericCells = container.getElementsByClassName('count');
     expect(numericCells.length).toBe(3);
     expect(numericCells[0].textContent).toBe('10'); // total languages
     expect(numericCells[1].textContent).toBe('-2'); // ine, gem is out of scope: Language or Macrolanguage
     expect(numericCells[2].textContent).toBe('8'); // resulting languages
+  });
+
+  it('when filters are written out, renders the readable names and not the codes', () => {
+    const objects = getMockLanguages();
+    setupMockParams({
+      territoryFilter: 'United States [US]',
+      writingSystemFilter: 'Latin [Latn]',
+      languageFilter: 'Indo-European [ine]',
+    });
+
+    const { container } = render(<FilterBreakdown objects={objects} />);
+
+    // Expected all of the filters to be shown
+    expect(screen.getByText(/Not macrolanguage or language:/i)).toBeTruthy();
+    expect(screen.getByText(/Not found in United States:/i)).toBeTruthy();
+    expect(screen.getByText(/Not written in Latin:/i)).toBeTruthy();
+    expect(screen.getByText(/Not related to Indo-European:/i)).toBeTruthy();
+
+    // Check the cells showing the missing counts
+    const numericCells = container.getElementsByClassName('count');
+    expect(numericCells.length).toBe(6);
+    expect(numericCells[0].textContent).toBe('10'); // start out with 8 languages
+    expect(numericCells[1].textContent).toBe('-2'); // ine, gem is out of scope: Language or Macrolanguage
+    expect(numericCells[2].textContent).toBe('-3'); // deu, ita, zho are not in US in the test data
+    expect(numericCells[3].textContent).toBe('-1'); // rus is not written in the Latin script
+    expect(numericCells[4].textContent).toBe('-1'); // nav is not in the Indo-European language family
+    expect(numericCells[5].textContent).toBe('3'); // fra, eng, and spa are left
+
+    // There should be four clear buttons (one per message)
+    const buttons = screen.getAllByRole('button');
+    expect(buttons.length).toBe(4);
   });
 });

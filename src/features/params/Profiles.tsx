@@ -12,7 +12,7 @@ import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes
 import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
 import {
@@ -49,7 +49,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   objectType: ObjectType.Language,
   page: 1,
   profile: ProfileType.LanguageEthusiast,
-  searchBy: SearchableField.NameAny,
+  searchBy: SearchableField.CodeOrNameAny,
   searchString: '',
   sortBehavior: SortBehavior.Normal,
   sortBy: SortBy.Population,
@@ -156,7 +156,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
 
   switch (colorBy) {
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfOverallLanguageSpeakers:

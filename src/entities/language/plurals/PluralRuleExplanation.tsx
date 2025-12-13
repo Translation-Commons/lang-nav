@@ -1,8 +1,8 @@
 import { CopyIcon } from 'lucide-react';
 import React, { Fragment, ReactNode } from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableButton from '@features/hovercard/HoverableButton';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';
 import LinkButton from '@shared/ui/LinkButton';

@@ -27,7 +27,7 @@ const LimitInput: React.FC = () => {
             { searchString: '-1', label: '∞' },
             { searchString: '', label: 'default' },
           ]}
-          onChange={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
+          onSubmit={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
           pageParameter={PageParamKey.limit}
           placeholder="∞"
           value={limit.toString()}

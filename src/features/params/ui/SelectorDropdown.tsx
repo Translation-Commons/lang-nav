@@ -1,35 +1,48 @@
 import React from 'react';
 
+import Dropdown from '@features/layers/dropdown/Dropdown';
+import DropdownAnchor from '@features/layers/dropdown/DropdownAnchor';
+
+import { SelectorDisplay, SelectorDisplayProvider } from './SelectorDisplayContext';
+
 type Props = {
   containerRef?: React.RefObject<HTMLDivElement | null>;
+  isOpen: boolean;
 };
 
 export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   containerRef,
+  isOpen,
 }) => {
   return (
-    <div style={{ position: 'relative' }} ref={containerRef}>
-      <div
-        className="dropdown"
-        data-testid="dropdown"
+    <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
+      <DropdownAnchor
         style={{
-          alignItems: 'start',
-          position: 'absolute',
-          display: 'flex',
-          left: '0px',
-          flexDirection: 'column',
-          width: 'fit-content',
-          zIndex: 100,
-          marginTop: '1em', // relative to the middle of the selector
-          backgroundColor: 'var(--color-background)',
-          borderRadius: '1em',
-          maxHeight: '20em',
-          overflowY: 'auto',
+          width: 0,
+          height: 0,
+          margin: 0,
+          padding: 0,
+          flex: '0 0 auto',
+          display: 'inline-block',
         }}
       >
-        {children}
-      </div>
-    </div>
+        <Dropdown
+          aria-label="selector options"
+          className="dropdown selector"
+          containerRef={containerRef}
+          isOpen={isOpen}
+          offset={12}
+          role="listbox"
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            width: 'fit-content',
+          }}
+        >
+          {children}
+        </Dropdown>
+      </DropdownAnchor>
+    </SelectorDisplayProvider>
   );
 };

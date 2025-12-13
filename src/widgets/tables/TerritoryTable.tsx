@@ -1,16 +1,16 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
-import { getTerritoryBiggestLocale } from '@entities/lib/getObjectMiscFields';
+import { getTerritoryBiggestLocale, getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
@@ -157,6 +157,13 @@ const TerritoryTable: React.FC = () => {
           key: 'Type',
           render: (object) => object.scope,
           valueType: TableValueType.Enum,
+        },
+        {
+          key: 'Export Language Data',
+          description:
+            "Export language data for this territory in a format for the World's Atlas of Languages",
+          render: (object) => <ExportTerritoryLanguageDataButton territory={object} />,
+          isInitiallyVisible: false,
         },
       ]}
     />

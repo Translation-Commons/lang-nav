@@ -1,7 +1,7 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import LimitInput from '@features/pagination/LimitInput';
 import usePageArrowKeys from '@features/pagination/usePageArrowKeys';
 import {
@@ -16,9 +16,9 @@ import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeS
 import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
 import TerritoryScopeSelector from '@features/transforms/filtering/TerritoryScopeSelector';
 import {
+  LanguageISOStatusSelector,
   VitalityEth2013Selector,
   VitalityEth2025Selector,
-  LanguageISOStatusSelector,
 } from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';

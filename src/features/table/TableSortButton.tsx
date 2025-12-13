@@ -8,9 +8,9 @@ import {
 } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
-import { SortBy, SortBehavior, SortDirection } from '@features/transforms/sorting/SortTypes';
+import { SortBehavior, SortBy, SortDirection } from '@features/transforms/sorting/SortTypes';
 
 import { getNormalSortDirection } from '../transforms/sorting/sort';
 

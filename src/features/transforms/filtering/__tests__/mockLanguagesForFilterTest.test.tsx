@@ -67,18 +67,18 @@ export function getMockLanguages() {
   eng.locales = [mul_US];
   eng.writingSystems = { Latn };
   eng.primaryWritingSystem = Latn;
-  eng.vitalityEth2013 = VitalityEthnologueFine.National;
+  eng.vitality = { ethFine: VitalityEthnologueFine.National };
   eng.parentLanguage = gem;
   const spa = getBaseLanguageData('spa', 'Spanish');
   spa.scope = LanguageScope.Language;
   spa.locales = [mul_US];
-  spa.vitalityEth2013 = VitalityEthnologueFine.National;
+  spa.vitality = { ethFine: VitalityEthnologueFine.National };
   spa.writingSystems = { Latn };
   spa.parentLanguage = ine;
   const fra = getBaseLanguageData('fra', 'French');
   fra.scope = LanguageScope.Language;
   fra.locales = [mul_US];
-  fra.vitalityEth2013 = VitalityEthnologueFine.Regional;
+  fra.vitality = { ethFine: VitalityEthnologueFine.Regional };
   fra.writingSystems = { Latn };
   fra.parentLanguage = ine;
   const deu = getBaseLanguageData('deu', 'German');
@@ -100,7 +100,7 @@ export function getMockLanguages() {
   nav.scope = LanguageScope.Language;
   nav.writingSystems = { Latn };
   nav.locales = [mul_US];
-  nav.vitalityEth2013 = VitalityEthnologueFine.Threatened;
+  nav.vitality = { ethFine: VitalityEthnologueFine.Threatened };
   const zho = getBaseLanguageData('zho', 'Chinese');
   zho.scope = LanguageScope.Macrolanguage;
 

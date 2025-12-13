@@ -3,8 +3,9 @@
   "editor.formatOnSave": true,
   // --- Let ESLint run code actions on save ---
   "editor.codeActionsOnSave": {
+    "source.organizeImports": "explicit",
     "source.fixAll": "always", // run all fixers (includes prettier if wired)
-    "source.fixAll.eslint": "always" // explicitly run eslint --fix
+    "source.fixAll.eslint": "always" // run eslint --fix
   },
   // --- ESLint integration ---
   "eslint.enable": true,

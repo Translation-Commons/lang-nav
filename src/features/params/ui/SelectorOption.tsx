@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
@@ -43,6 +43,7 @@ function SelectorOption<T extends React.Key>({
         )
       }
       onClick={() => onClick(Array.isArray(option) ? option[0] : option)}
+      role="option"
       style={getOptionStyle(display, isSelected, position)}
     >
       <OptionLabel<T>

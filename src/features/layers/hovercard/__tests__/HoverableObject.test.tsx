@@ -9,7 +9,7 @@ import HoverableObjectName from '../HoverableObjectName';
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
 const showHoverCard = vi.fn();
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({
     showHoverCard,
     hideHoverCard: vi.fn(),

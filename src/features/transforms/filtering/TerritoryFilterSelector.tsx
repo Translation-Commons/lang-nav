@@ -1,19 +1,24 @@
-import React, { useCallback } from 'react';
+import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { PageParamKey, SearchableField } from '@features/params/PageParamTypes';
+import { PageParamKey } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
   useSelectorDisplay,
 } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput, { Suggestion } from '@features/params/ui/TextInput';
+import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import { getSearchableField, HighlightedObjectField } from '@entities/ui/ObjectField';
+import { TerritoryData } from '@entities/types/DataTypes';
+
+import { getSortFunctionParameterized } from '../sorting/sort';
+import { SortBy } from '../sorting/SortTypes';
 
 import { getScopeFilter } from './filter';
+import { getFilterLabels } from './FilterLabels';
+import { getSuggestionsFunction } from './getSuggestionsFunction';
 
 type Props = { display?: SelectorDisplay };
 
@@ -21,34 +26,21 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
   const { territoryFilter, updatePageParams } = usePageParams();
   const { territories } = useDataContext();
   const filterByScope = getScopeFilter();
+  const filterLabels = getFilterLabels();
+  const sortFunction = getSortFunctionParameterized(SortBy.Population);
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 
-  const getSuggestions = useCallback(
-    async (query: string): Promise<Suggestion[]> => {
-      const lowerCaseQuery = query.toLowerCase();
-      const filteredTerritories = territories
-        .filter((territory) =>
-          getSearchableField(territory, SearchableField.NameOrCode)
-            .toLowerCase()
-            .split(/\W/g)
-            .some((word) => word.startsWith(lowerCaseQuery)),
-        )
-        .sort((a, b) => (filterByScope(a) ? -1 : 1) - (filterByScope(b) ? -1 : 1));
-      return filteredTerritories.map((object) => {
-        const label = (
-          <HighlightedObjectField
-            object={object}
-            field={SearchableField.NameOrCode}
-            query={query}
-          />
-        );
-        const searchString = getSearchableField(object, SearchableField.NameOrCode);
-        return { objectID: object.ID, searchString, label };
-      });
-    },
-    [territories, filterByScope],
-  );
+  const getSuggestions = useMemo(() => {
+    const getMatchDistance = (territory: TerritoryData): number =>
+      filterByScope(territory) ? 0 : 1;
+    const getMatchGroup = (territory: TerritoryData): string => {
+      if (!filterByScope(territory)) return 'not ' + filterLabels.territoryScope;
+      return 'matched';
+    };
+
+    return getSuggestionsFunction(territories.sort(sortFunction), getMatchDistance, getMatchGroup);
+  }, [territories, filterByScope, filterLabels, sortFunction]);
 
   return (
     <SelectorDisplayProvider display={display}>
@@ -61,7 +53,7 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
           <TextInput
             inputStyle={{ minWidth: '8em' }}
             getSuggestions={getSuggestions}
-            onChange={(territoryFilter: string) => updatePageParams({ territoryFilter })}
+            onSubmit={(territoryFilter: string) => updatePageParams({ territoryFilter })}
             pageParameter={PageParamKey.territoryFilter}
             placeholder="Name or code"
             value={territoryFilter}

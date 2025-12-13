@@ -1,14 +1,14 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, expect, it, beforeEach, afterEach, vi, Mock } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import {
   getLanguageISOStatusLabel,
-  getVitalityEthnologueFineLabel,
   getVitalityEthnologueCoarseLabel,
+  getVitalityEthnologueFineLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import {
   LanguageISOStatus,
@@ -30,7 +30,7 @@ vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
   SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
-vi.mock('@features/hovercard/useHoverCard', () => ({
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
 }));
 
@@ -84,7 +84,7 @@ describe('VitalitySelector', () => {
       const { rerender } = render(<LanguageISOStatusSelector />);
 
       // Test selection
-      const livingButton = screen.getByRole('button', { name: 'Living' });
+      const livingButton = screen.getByRole('option', { name: 'Living' });
       expect(livingButton).toHaveClass('selectorOption unselected');
       await user.click(livingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [LanguageISOStatus.Living] });
@@ -95,7 +95,7 @@ describe('VitalitySelector', () => {
       rerender(<LanguageISOStatusSelector />);
 
       // Test deselection
-      const selectedLivingButton = screen.getByRole('button', { name: 'Living' });
+      const selectedLivingButton = screen.getByRole('option', { name: 'Living' });
       expect(selectedLivingButton).toHaveClass('selectorOption selected');
       await user.click(selectedLivingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
@@ -121,7 +121,7 @@ describe('VitalitySelector', () => {
       const { rerender } = render(<VitalityEth2013Selector />);
 
       // Test selection
-      const nationalButton = screen.getByRole('button', { name: 'National' });
+      const nationalButton = screen.getByRole('option', { name: 'National' });
       expect(nationalButton).toHaveClass('selectorOption unselected');
       await user.click(nationalButton);
       expect(updatePageParams).toHaveBeenCalledWith({
@@ -134,7 +134,7 @@ describe('VitalitySelector', () => {
       rerender(<VitalityEth2013Selector />);
 
       // Test deselection
-      const selectedNational = screen.getByRole('button', { name: 'National' });
+      const selectedNational = screen.getByRole('option', { name: 'National' });
       expect(selectedNational).toHaveClass('selectorOption selected');
 
       // Click to deselect
@@ -166,7 +166,7 @@ describe('VitalitySelector', () => {
       const { rerender } = render(<VitalityEth2025Selector />);
 
       // Test selection
-      const institutionalButton = screen.getByRole('button', { name: 'Institutional' });
+      const institutionalButton = screen.getByRole('option', { name: 'Institutional' });
       expect(institutionalButton).toHaveClass('selectorOption unselected');
       await user.click(institutionalButton);
       expect(updatePageParams).toHaveBeenCalledWith({
@@ -181,7 +181,7 @@ describe('VitalitySelector', () => {
       rerender(<VitalityEth2025Selector />);
 
       // Test deselection
-      const selectedInstitutional = screen.getByRole('button', { name: 'Institutional' });
+      const selectedInstitutional = screen.getByRole('option', { name: 'Institutional' });
       expect(selectedInstitutional).toHaveClass('selectorOption selected');
 
       // Click to deselect

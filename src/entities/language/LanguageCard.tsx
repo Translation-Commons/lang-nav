@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
@@ -56,7 +56,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       )}
       <div>
         <h4>Vitality</h4>
-        <LanguageVitalityMeter lang={lang} type={VitalitySource.Metascore} />
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
       </div>
 
       {countryLocales.length > 0 && (

@@ -23,7 +23,7 @@ export enum SortBy {
   Territory = 'Territory',
 
   // Extra population metrics
-  PopulationAttested = 'Population Attested',
+  PopulationDirectlySourced = 'Population Directly Sourced',
   PopulationOfDescendants = 'Population of Descendants',
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',

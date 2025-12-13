@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 
 import ObjectTitle from '@entities/ui/ObjectTitle';

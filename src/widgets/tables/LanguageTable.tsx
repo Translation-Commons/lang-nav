@@ -5,9 +5,9 @@ import {
   getRetirementReasonLabel,
   RetirementReason,
 } from '@features/data/load/extra_entities/ISORetirements';
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableEnumeration from '@features/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/hovercard/HoverableObjectName';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
+import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
@@ -71,6 +71,7 @@ const LanguageTable: React.FC = () => {
       {
         key: 'Modality',
         render: (lang) => lang.modality ?? <Deemphasized>—</Deemphasized>,
+        exportValue: (lang) => lang.modality, // Avoid exporting escaped html like &amp;
         isInitiallyVisible: false,
         columnGroup: 'Context',
       },
@@ -101,7 +102,7 @@ const LanguageTable: React.FC = () => {
         render: (lang) => (
           <HoverableEnumeration
             items={lang.childLanguages
-              .sort((a, b) => (b.populationCited ?? 0) - (a.populationCited ?? 0))
+              .sort((a, b) => (b.populationRough ?? 0) - (a.populationRough ?? 0))
               .map((lang) => lang.nameDisplay)}
           />
         ),

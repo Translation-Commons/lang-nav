@@ -1,10 +1,11 @@
-import { render, screen, fireEvent, act } from '@testing-library/react';
-import { describe, expect, it, beforeEach, afterEach, vi } from 'vitest';
+import { act, fireEvent, render, screen } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import * as FilterModule from '@features/transforms/filtering/filter';
 import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
+import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import * as SortModule from '@features/transforms/sorting/sort';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
@@ -18,9 +19,10 @@ import TableID from '../TableID';
 import TableValueType from '../TableValueType';
 
 vi.mock('@features/transforms/filtering/filter', () => ({
-  getFilterBySubstring: vi.fn(),
   getFilterByVitality: vi.fn(),
   getScopeFilter: vi.fn(),
+  getFilterByLanguageScope: vi.fn(),
+  getFilterByTerritoryScope: vi.fn(),
 }));
 
 vi.mock('@features/transforms/filtering/filterByConnections', () => ({
@@ -35,8 +37,11 @@ vi.mock('@features/transforms/sorting/sort', () => ({
   getNormalSortDirection: vi.fn().mockReturnValue(1),
 }));
 
-vi.mock('@features/hovercard/useHoverCard', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/layers/hovercard/useHoverCard', () => ({
+  default: vi.fn().mockReturnValue({}),
+}));
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
+vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
 
 describe('InteractiveObjectTable', () => {
   const mockObjects: ObjectData[] = [
@@ -84,9 +89,11 @@ describe('InteractiveObjectTable', () => {
 
   beforeEach(() => {
     // Set up default mock implementations
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => true);
+    vi.mocked(getFilterBySubstring).mockReturnValue(() => true);
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getFilterByLanguageScope).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getFilterByTerritoryScope).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
@@ -148,7 +155,7 @@ describe('InteractiveObjectTable', () => {
     const mockVitalityFilter = vi.fn(() => true);
     const mockScopeFilter = vi.fn(() => true);
 
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
+    vi.mocked(getFilterBySubstring).mockReturnValue(mockSubstringFilter);
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(mockConnectionsFilter);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
@@ -171,7 +178,7 @@ describe('InteractiveObjectTable', () => {
   });
 
   it('handles filtering that excludes all objects', () => {
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(() => false);
+    vi.mocked(getFilterBySubstring).mockReturnValue(() => false);
 
     renderObjectTable();
 
@@ -182,7 +189,7 @@ describe('InteractiveObjectTable', () => {
 
   it('shows details view when exactly one object is visible', () => {
     // Make filter return true only for the first object
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue((obj) => obj.ID === '1');
+    vi.mocked(getFilterBySubstring).mockReturnValue((obj) => obj.ID === '1');
 
     renderObjectTable();
 
@@ -213,7 +220,7 @@ describe('InteractiveObjectTable', () => {
 
   it('disables search bar filter when shouldFilterUsingSearchBar is false', () => {
     const mockSubstringFilter = vi.fn();
-    vi.mocked(FilterModule.getFilterBySubstring).mockReturnValue(mockSubstringFilter);
+    vi.mocked(getFilterBySubstring).mockReturnValue(mockSubstringFilter);
 
     renderObjectTable({ shouldFilterUsingSearchBar: false });
 

@@ -1,16 +1,18 @@
-import { WifiIcon, WifiHighIcon, WifiLowIcon, WifiZeroIcon } from 'lucide-react';
+import { WifiHighIcon, WifiIcon, WifiLowIcon, WifiZeroIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import { LanguageData } from '../LanguageTypes';
 
-import { getAllVitalityScores } from './LanguageVitalityComputation';
+import { getVitalityScore } from './LanguageVitalityComputation';
+import VitalityExplanation from './VitalityExplanation';
+import { getVitalityLabel } from './VitalityStrings';
 import { VitalitySource } from './VitalityTypes';
 
 export interface LanguageVitalityCellProps {
   lang: LanguageData;
-  type: VitalitySource;
+  src: VitalitySource;
 }
 
 export enum VitalityBucket {
@@ -60,12 +62,11 @@ function bucketColor(bucket: VitalityBucket): string {
   }
 }
 
-const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type }) => {
-  const { score: vitalityScore, explanation: hover, label } = getAllVitalityScores(lang)[type];
-  const bucket = getScoreBucket(vitalityScore);
+const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, src }) => {
+  const bucket = getScoreBucket(getVitalityScore(src, lang));
 
   return (
-    <Hoverable hoverContent={hover}>
+    <Hoverable hoverContent={<VitalityExplanation source={src} lang={lang} />}>
       <div
         style={{
           display: 'flex',
@@ -75,9 +76,7 @@ const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, type 
         }}
       >
         <BucketIcon bucket={bucket} />
-        <span>
-          {type === VitalitySource.Metascore ? (vitalityScore?.toFixed(1) ?? '—') : (label ?? '—')}
-        </span>
+        <span>{getVitalityLabel(lang, src) ?? '—'}</span>
       </div>
     </Hoverable>
   );

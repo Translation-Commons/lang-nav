@@ -1,18 +1,17 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-import HoverableObject from '@features/hovercard/HoverableObject';
+import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
-import { ObjectFieldHighlightedByPageSearch } from '@entities/ui/ObjectField';
+
+import TreeListNodeData from './TreeListNodeData';
+import { useTreeListOptionsContext } from './TreeListOptions';
 
 import './treelist.css';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-
-import { useTreeListOptionsContext } from './TreeListOptions';
 
 export type TreeNodeData = {
   children: TreeNodeData[];
@@ -37,13 +36,13 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
     allExpanded,
     showInfoButton,
     showObjectIDs: showObjectIDsSetting,
-    showPopulation,
+    showData,
   } = useTreeListOptionsContext();
   let showObjectIDs = showObjectIDsSetting;
   if (
     searchString != '' &&
     view === View.Hierarchy &&
-    [SearchableField.Code, SearchableField.NameOrCode].includes(searchBy)
+    [SearchableField.Code, SearchableField.CodeOrNameAny].includes(searchBy)
   ) {
     showObjectIDs = true;
   }
@@ -53,7 +52,6 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
     () => setExpanded(isExpandedInitially || descendantsPassFilter || allExpanded),
     [descendantsPassFilter, allExpanded],
   );
-  const population = getObjectPopulation(object);
 
   return (
     <li>
@@ -85,11 +83,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
             <InfoIcon size="1em" />
           </HoverableObject>
         )}
-        {showPopulation && population && (
-          <div className="TreeListPopulation">
-            <CountOfPeople count={population} />
-          </div>
-        )}
+        {showData !== 'None' && <TreeListNodeData object={object} field={showData} />}
       </>
       {expanded && children.length > 0 && (
         <ul className="TreeListBranch">

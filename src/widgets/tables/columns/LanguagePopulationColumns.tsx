@@ -1,4 +1,4 @@
-import HoverableButton from '@features/hovercard/HoverableButton';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
@@ -51,12 +51,13 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     columnGroup: 'Population',
   },
   {
-    key: 'Population (Direct)',
-    description: 'This comes from other language databases (citations still needed).',
-    render: (lang) => lang.populationCited,
+    key: 'Population (Rough)',
+    description:
+      'This is a rough estimate from variable internet databases (citations not available).',
+    render: (lang) => lang.populationRough,
     valueType: TableValueType.Population,
     isInitiallyVisible: false,
-    sortParam: SortBy.PopulationAttested,
+    sortParam: SortBy.PopulationDirectlySourced,
     columnGroup: 'Population',
   },
   {

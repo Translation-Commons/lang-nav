@@ -23,9 +23,9 @@ import {
 } from '../types/DataTypes';
 
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
@@ -76,6 +76,15 @@ export enum LanguageField {
   isoCode = 'ISO Code',
 }
 
+export type LanguageVitality = {
+  meta?: number; // 0-9 based on other vitality scores
+  iso?: LanguageISOStatus; // Derived
+  ethFine?: VitalityEthnologueFine; // Computed from other factors
+  ethCoarse?: VitalityEthnologueCoarse; // Computed from other factors
+  ethnologue2013?: VitalityEthnologueFine; // cited from Ethnologue 2013
+  ethnologue2025?: VitalityEthnologueCoarse; // cited from Ethnologue 2025
+};
+
 export interface LanguageData extends ObjectBase {
   type: ObjectType.Language;
 
@@ -89,15 +98,14 @@ export interface LanguageData extends ObjectBase {
   nameSubtitle?: string;
   nameEndonym?: string;
 
-  vitalityEth2013?: VitalityEthnologueFine;
-  vitalityEth2025?: VitalityEthnologueCoarse;
+  vitality?: LanguageVitality;
   digitalSupport?: string;
   viabilityConfidence?: string;
   viabilityExplanation?: string;
 
   populationAdjusted?: number;
   populationEstimate?: number;
-  populationCited?: number; // from languages.tsv
+  populationRough?: number; // from languages.tsv
   populationOfDescendants?: number; // computed from child languages
   populationFromLocales?: number; // aggregated from locale data
 

@@ -1,8 +1,8 @@
 import { CircleAlertIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
-import HoverableObject from '@features/hovercard/HoverableObject';
+import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import usePageParams from '@features/params/usePageParams';
 import { getFilterByTerritory } from '@features/transforms/filtering/filterByConnections';
 

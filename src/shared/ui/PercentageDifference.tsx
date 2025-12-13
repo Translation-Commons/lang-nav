@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Hoverable from '@features/hovercard/Hoverable';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
