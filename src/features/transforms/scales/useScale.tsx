@@ -2,8 +2,8 @@ import { useCallback, useMemo } from 'react';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { getMaximumValue, getMinimumValue } from '../rangeUtils';
 import { getSortField } from '../sorting/sort';
-import { SortBy } from '../sorting/SortTypes';
 
 import { ScaleBy } from './ScaleTypes';
 
@@ -64,85 +64,3 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
 };
 
 export default useScale;
-
-function getMinimumValue(scaleBy?: ScaleBy): number {
-  switch (scaleBy) {
-    case SortBy.Longitude:
-      return -180;
-    case SortBy.Latitude:
-      return -90;
-    case SortBy.ISOStatus:
-      return -1;
-    case SortBy.Population:
-    case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.Literacy:
-    case SortBy.VitalityMetascore:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
-    case SortBy.Area:
-      return 0;
-    case 'None':
-      return 0;
-    case SortBy.Date:
-      return new Date(0).getTime();
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
-      return 0;
-    default:
-      return 0;
-  }
-}
-
-function getMaximumValue(objects: ObjectData[], scaleBy?: ScaleBy): number {
-  switch (scaleBy) {
-    case 'None':
-      return 0;
-    case SortBy.VitalityMetascore:
-    case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
-      return 9;
-    case SortBy.Latitude:
-      return 90;
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.Literacy:
-      return 100;
-    case SortBy.Longitude:
-      return 180;
-    case SortBy.Date:
-      return new Date().getTime();
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
-    case SortBy.Population:
-    case SortBy.PopulationAttested:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.Area:
-      return Math.max(
-        objects.reduce(
-          (acc, obj) => Math.max(acc, (getSortField(obj, scaleBy as SortBy) as number) || 0),
-          0,
-        ),
-      );
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
-      return 1;
-    default:
-      return 1;
-  }
-}
