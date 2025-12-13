@@ -29,7 +29,7 @@ export default defineConfig([
       },
     },
     files: ['**/*.ts', '**/*.tsx'],
-    plugins: { 
+    plugins: {
       'react-hooks': reactHooks,
       '@typescript-eslint': typescript,
       prettier: prettierPlugin,
