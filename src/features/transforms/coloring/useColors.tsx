@@ -7,8 +7,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
+import { getSortField } from '../fields/getField';
 import { getMaximumValue, getMinimumValue } from '../rangeUtils';
-import { getSortField } from '../sorting/sort';
 import { SortBy } from '../sorting/SortTypes';
 
 import { ColorBy } from './ColorTypes';

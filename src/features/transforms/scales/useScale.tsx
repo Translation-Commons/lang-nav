@@ -2,8 +2,8 @@ import { useCallback, useMemo } from 'react';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { getSortField } from '../fields/getField';
 import { getMaximumValue, getMinimumValue } from '../rangeUtils';
-import { getSortField } from '../sorting/sort';
 
 import { ScaleBy } from './ScaleTypes';
 

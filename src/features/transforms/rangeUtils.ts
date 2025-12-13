@@ -4,8 +4,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import { ColorBy } from './coloring/ColorTypes';
+import { getSortField } from './fields/getField';
 import { ScaleBy } from './scales/ScaleTypes';
-import { getSortField } from './sorting/sort';
 import { SortBy } from './sorting/SortTypes';
 
 export function getMinimumValue(field?: ColorBy | ScaleBy): number {
@@ -17,7 +17,7 @@ export function getMinimumValue(field?: ColorBy | ScaleBy): number {
     case SortBy.ISOStatus:
       return -1;
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.PercentOfOverallLanguageSpeakers:
@@ -70,7 +70,7 @@ export function getMaximumValue(objects: ObjectData[], field?: ColorBy | ScaleBy
     case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.Area:

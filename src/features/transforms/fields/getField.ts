@@ -43,6 +43,8 @@ export function getSortField(
       return getCountOfTerritories(object);
     case SortBy.CountOfLanguages:
       return getCountOfLanguages(object);
+    case SortBy.CountOfDialects:
+      return getCountOfLanguages(object);
     case SortBy.Literacy:
       return getObjectLiteracy(object);
     case SortBy.Date:

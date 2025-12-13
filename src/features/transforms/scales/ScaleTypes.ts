@@ -13,7 +13,7 @@ export function getScaleBysApplicableToObjectType(objectType: ObjectType): SortB
   // Base allowed scale-by fields (all support scaling)
   const allowedScaleBys: SortBy[] = [
     SortBy.Population,
-    SortBy.PopulationAttested,
+    SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
     SortBy.CountOfDialects,

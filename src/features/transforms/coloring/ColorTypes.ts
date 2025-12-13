@@ -12,7 +12,7 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): SortB
   // Base allowed color-by fields (fields that make sense for color gradients)
   const allowedColorBys: SortBy[] = [
     SortBy.Population,
-    SortBy.PopulationAttested,
+    SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
     SortBy.CountOfDialects,
