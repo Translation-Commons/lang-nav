@@ -51,8 +51,9 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     columnGroup: 'Population',
   },
   {
-    key: 'Population (Direct)',
-    description: 'This comes from other language databases (citations still needed).',
+    key: 'Population (Rough)',
+    description:
+      'This is a rough estimate from variable internet databases (citations not available).',
     render: (lang) => lang.populationRough,
     valueType: TableValueType.Population,
     isInitiallyVisible: false,
