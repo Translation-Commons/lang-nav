@@ -54,8 +54,8 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
       if (val == null) return 0; // not renderable
 
       const normalized = getNormalizedValue(val as number);
-      // Map normalized 0..1 to radius multiplier 2..10
-      return 2 + normalized * 8;
+      // Map normalized 0..1 to radius multiplier 1..10
+      return 1 + normalized * 9;
     },
     [scaleBy, getNormalizedValue],
   );
