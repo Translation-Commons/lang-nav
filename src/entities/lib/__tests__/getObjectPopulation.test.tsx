@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
@@ -6,7 +6,7 @@ import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   getObjectPercentOfTerritoryPopulation,
   getObjectPopulation,
-  getObjectPopulationAttested,
+  getObjectPopulationDirectlySourced,
   getObjectPopulationOfDescendants,
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
@@ -46,12 +46,12 @@ describe('getObjectPopulation', () => {
   });
 });
 
-describe('getObjectPopulationAttested', () => {
-  it('returns attested population for objects', () => {
+describe('getObjectPopulationDirectlySourced', () => {
+  it('returns the directly sourced population for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
-        getObjectPopulationAttested(obj as ObjectData),
+        getObjectPopulationDirectlySourced(obj as ObjectData),
       ]),
     );
     expect(results).toEqual({
@@ -61,7 +61,7 @@ describe('getObjectPopulationAttested', () => {
       BE: 12000,
       ER: 2400,
       HA: 15600,
-      Teng: undefined, // not attested, derived from sjn_Teng_BE
+      Teng: undefined, // not directly sourced, derived from sjn_Teng_BE
       dori0123: 2500,
       be0590: 12000,
       sjn: 24000,

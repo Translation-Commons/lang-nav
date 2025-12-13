@@ -4,7 +4,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
-import { getSortBysApplicableToObjectType } from './sort';
+import getSortBysApplicableToObjectType from './getSortBysApplicableToObjectType';
 import { SortBy } from './SortTypes';
 
 const SortBySelector: React.FC = () => {

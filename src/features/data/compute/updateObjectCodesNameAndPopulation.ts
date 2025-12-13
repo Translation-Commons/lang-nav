@@ -58,7 +58,7 @@ function updateParentsAndDescendants(
     lang.populationOfDescendants = specific.populationOfDescendants ?? undefined;
     lang.populationEstimate =
       Math.max(
-        lang.populationCited ?? specific.populationOfDescendants ?? 0,
+        lang.populationRough ?? specific.populationOfDescendants ?? 0,
         lang.populationFromLocales ?? 0,
       ) || undefined;
     lang.parentLanguage = specific.parentLanguage ?? undefined;

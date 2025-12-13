@@ -4,8 +4,9 @@ import { View } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import { getSortBysApplicableToObjectType } from '@features/transforms/sorting/sort';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
+
+import getSortBysApplicableToObjectType from '../sorting/getSortBysApplicableToObjectType';
 
 import { ColorBy } from './ColorTypes';
 

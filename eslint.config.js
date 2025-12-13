@@ -1,19 +1,22 @@
 import js from '@eslint/js';
 import typescript from '@typescript-eslint/eslint-plugin';
 import parser from '@typescript-eslint/parser';
-import { defineConfig } from 'eslint/config';
 import prettierConfig from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
-import react from 'eslint-plugin-react';
 import pluginReact from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
+import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
 export default defineConfig([
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], plugins: { js }, extends: ['js/recommended'] },
-  { files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'], languageOptions: { globals: globals.browser } },
+  {
+    files: ['**/*.{js,mjs,cjs,ts,jsx,tsx}'],
+    plugins: { js },
+    extends: [js.configs.recommended],
+    languageOptions: { globals: globals.browser },
+  },
   tseslint.configs.recommended,
   pluginReact.configs.flat.recommended,
   {
@@ -27,7 +30,7 @@ export default defineConfig([
     },
     files: ['**/*.ts', '**/*.tsx'],
     plugins: {
-      react,
+      react: pluginReact,
       'react-hooks': reactHooks,
       '@typescript-eslint': typescript,
       prettier: prettierPlugin,
@@ -43,6 +46,7 @@ export default defineConfig([
     },
   },
   {
+    files: ['**/*.{ts,tsx}'],
     plugins: {
       import: importPlugin,
     },

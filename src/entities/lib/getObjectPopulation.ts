@@ -28,11 +28,11 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
   }
 }
 
-// SortBy.PopulationAttested
-export function getObjectPopulationAttested(object: ObjectData): number | undefined {
+// SortBy.PopulationDirectlySourced
+export function getObjectPopulationDirectlySourced(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return object.populationCited;
+      return object.populationRough;
     case ObjectType.Locale:
       return object.populationSpeaking;
     case ObjectType.Territory:

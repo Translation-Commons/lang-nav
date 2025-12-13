@@ -102,7 +102,7 @@ const LanguageTable: React.FC = () => {
         render: (lang) => (
           <HoverableEnumeration
             items={lang.childLanguages
-              .sort((a, b) => (b.populationCited ?? 0) - (a.populationCited ?? 0))
+              .sort((a, b) => (b.populationRough ?? 0) - (a.populationRough ?? 0))
               .map((lang) => lang.nameDisplay)}
           />
         ),

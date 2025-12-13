@@ -4,7 +4,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { ColorBy } from '@features/transforms/coloring/ColorTypes';
-import { getSortBysApplicableToObjectType } from '@features/transforms/sorting/sort';
+import getSortBysApplicableToObjectType from '@features/transforms/sorting/getSortBysApplicableToObjectType';
 
 interface TreeListOptions {
   allExpanded: boolean;

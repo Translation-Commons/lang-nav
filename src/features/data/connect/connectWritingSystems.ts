@@ -56,7 +56,7 @@ export function connectWritingSystems(
         primaryWritingSystem.languages[language.ID] = language;
         if (!primaryWritingSystem.populationUpperBound)
           primaryWritingSystem.populationUpperBound = 0;
-        primaryWritingSystem.populationUpperBound += language.populationCited || 0;
+        primaryWritingSystem.populationUpperBound += language.populationRough || 0;
         language.primaryWritingSystem = primaryWritingSystem;
         language.writingSystems[primaryWritingSystem.ID] = primaryWritingSystem;
       }

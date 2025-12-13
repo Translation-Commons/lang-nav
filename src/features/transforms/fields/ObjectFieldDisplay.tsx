@@ -24,7 +24,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
   const fieldValue = getSortField(object, field, languageSource);
   switch (field) {
     case SortBy.Population:
-    case SortBy.PopulationAttested:
+    case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
       if (typeof fieldValue === 'number') return <CountOfPeople count={fieldValue as number} />;
