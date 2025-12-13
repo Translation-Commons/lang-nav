@@ -1,8 +1,10 @@
 import { useCallback, useMemo } from 'react';
 
 import { ObjectData } from '@entities/types/DataTypes';
+
 import { getSortField } from '../sorting/sort';
 import { SortBy } from '../sorting/SortTypes';
+
 import { ScaleBy } from './ScaleTypes';
 
 type Props = { objects: ObjectData[]; scaleBy?: ScaleBy };
