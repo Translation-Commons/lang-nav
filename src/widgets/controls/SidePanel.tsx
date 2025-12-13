@@ -10,7 +10,6 @@ import {
 } from '@features/params/ui/SelectorDisplayContext';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
-import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
 import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
 import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
@@ -21,6 +20,7 @@ import {
   VitalityEth2025Selector,
 } from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
+import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
