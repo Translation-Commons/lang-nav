@@ -3,7 +3,7 @@ import React from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
+import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
@@ -15,6 +15,7 @@ import { TerritoryData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const TerritoryTable: React.FC = () => {
@@ -39,6 +40,19 @@ const TerritoryTable: React.FC = () => {
           columnGroup: 'Codes',
         },
         NameColumn,
+        EndonymColumn,
+        {
+          key: 'Other names',
+          render: (object) => (
+            <CommaSeparated limit={1} limitText="short">
+              {[...(object.nameOtherEndonyms || []), ...(object.nameOtherExonyms || [])].filter(
+                (n) => n !== object.nameDisplay,
+              )}
+            </CommaSeparated>
+          ),
+          isInitiallyVisible: false,
+          columnGroup: 'Names',
+        },
         {
           key: 'Population',
           render: (object) => object.population,

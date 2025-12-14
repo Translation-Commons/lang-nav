@@ -92,6 +92,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         tableID={TableID.LanguagesInCensus}
         objects={languagesInCensus}
         shouldFilterUsingSearchBar={false}
+        shouldShowDetailsForSingleItem={false}
         columns={[
           CodeColumn,
           {

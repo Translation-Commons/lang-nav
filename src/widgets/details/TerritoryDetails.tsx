@@ -12,6 +12,7 @@ import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import TerritoryAttributes from './sections/TerritoryAttributes';
+import TerritoryIdentification from './sections/TerritoryIdentification';
 import TerritoryLocation from './sections/TerritoryLocation';
 
 type Props = {
@@ -30,6 +31,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
 
   return (
     <div className="Details">
+      <TerritoryIdentification territory={territory} />
       <TerritoryAttributes territory={territory} />
 
       <DetailsSection title="Connections">
