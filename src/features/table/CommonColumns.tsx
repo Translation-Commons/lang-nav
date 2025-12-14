@@ -25,6 +25,7 @@ export const NameColumn: TableColumn<ObjectData> = {
       <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
     </HoverableObject>
   ),
+  exportValue: (object) => object.nameDisplay, // avoid html escapes like &amp;
   sortParam: SortBy.Name,
   columnGroup: 'Names',
 };

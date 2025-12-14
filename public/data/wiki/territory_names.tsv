@@ -82,7 +82,7 @@ FM	Micronesia	Federated States of Micronesia	[1]
 FO	Faroe Islands	Føroyar	[1]	Færøerne	
 FR	France	France	[1]		
 GA	Gabon	Gabon	[1]		
-GB	United Kingdom	United Kingdom	[1]	Britain; Y Deyrnas Unedig; Unitit Kinrick; Rìoghachd Aonaichte; Ríocht Aontaithe; An Rywvaneth Unys	Great Britian; UK; GB
+GB	United Kingdom	United Kingdom	[1]	Britain; Y Deyrnas Unedig; Unitit Kinrick; Rìoghachd Aonaichte; Ríocht Aontaithe; An Rywvaneth Unys	Great Britain & Northern Ireland; UK
 GD	Grenada	Grenada	[1]		
 GE	Georgia	საქართველო	[1]	Sak'art'velo	
 GF	French Guiana	Guyane	[1]		
@@ -127,8 +127,8 @@ KH	Cambodia	កម្ពុជា	[1]	Kămpŭchéa
 KI	Kiribati	Kiribati	[1]		
 KM	Comoros	جزر القمر	[1]	Komori; Juzur al-Qumur; Comores	
 KN	St. Kitts & Nevis	Saint Kitts and Nevis	[1]		
-KP	North Korea	조선	[1]	Chosŏn; 朝鮮; Bukchosŏn; 북조선	
-KR	South Korea	한국	https://en.wikipedia.org/wiki/South_Korea	Hanguk; 대한민국; 韓國; Namhan; 남한	
+KP	North Korea	조선	[1]	Chosŏn; 朝鮮; Bukchosŏn; 북조선	Democratic People’s Republic of Korea; DPRK
+KR	South Korea	한국	https://en.wikipedia.org/wiki/South_Korea	Hanguk; 대한민국; 韓國; Namhan; 남한	Republic of Korea; ROK
 KW	Kuwait	دولة الكويت	[1]	Dawlat ul-Kuwayt; il-ikwet; الكويت	
 KY	Cayman Islands	Cayman Islands	[1]		
 KZ	Kazakhstan	Қазақстан	[1]	Qazaqstan; Kazakhstán; Казахстан	
@@ -172,7 +172,7 @@ NE	Niger	Nijar	[1]	Niger
 NF	Norfolk Island	Norfolk Island	[1]	Norf'k Ailen	
 NG	Nigeria	Nigeria	[1]	Nijeriya; Naìjíríyà; Nàìjíríà	
 NI	Nicaragua	Nicaragua	[1]		
-NL	Netherlands	Nederland	[1]	Nederlân	
+NL	Netherlands	Nederland	[1]	Nederlân	Holland; The Netherlands
 NO	Norway	Norge	[1]	Noreg; Norga; Vuodna; Nöörje	
 NP	Nepal	नेपाल	[1]	Nepāl	
 NR	Nauru	Nauru	[1]	Naoero	
@@ -197,7 +197,7 @@ QA	Qatar	قطر	[1]	Qaṭar
 RE	Réunion	La Réunion	[1]		
 RO	Romania	România	[1]		
 RS	Serbia	Србија	[1]	Srbija	
-RU	Russia	Россия	[1]	Rossiya; Rossiâ	
+RU	Russia	Россия	[1]	Rossiya; Rossiâ	Russian Federation
 RW	Rwanda	Rwanda	[1]		
 SA	Saudi Arabia	المملكة العربية السعودية	[1]	Al-Mamlaka Al-‘Arabiyyah as Sa‘ūdiyyah	
 SB	Solomon Islands	Solomon Islands	[1]	Solomon Aelan	
@@ -236,14 +236,14 @@ TR	Turkey	Türkiye	[1]
 TT	Trinidad & Tobago	Trinidad and Tobago	[1]		
 TV	Tuvalu	Tuvalu	[1]		
 TW	Taiwan	中華民國	[1]	Zhōnghuá Mínguó; Táiwān; 臺灣; 台灣	Republic of China
-TZ	Tanzania	Tanzania	[1]		
+TZ	Tanzania	Tanzania	[1]		United Republic of Tanzania
 UA	Ukraine	Україна	[1]	Ukrajina	
 UG	Uganda	Uganda	[1]		
 UM	U.S. Outlying Islands				
-US	United States	United States	[1]	Estados Unidos; États-Unis; ‘Amelika Hui Pū ‘ia	United States of America
+US	United States	United States	[1]	Estados Unidos; États-Unis; ‘Amelika Hui Pū ‘ia	United States of America; USA; U.S.
 UY	Uruguay	Uruguay	[1]		
 UZ	Uzbekistan	O‘zbekiston	[1]	Ўзбекистон	
-VA	Vatican City	Civitas Vaticana	[1]	Città del Vaticano	
+VA	Vatican City	Civitas Vaticana	[1]	Città del Vaticano	Holy See
 VC	St. Vincent & Grenadines	Saint Vincent and the Grenadines	[1]		
 VE	Venezuela	Venezuela	[1]		
 VG	British Virgin Islands	British Virgin Islands	[1]		
