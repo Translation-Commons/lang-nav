@@ -46,7 +46,7 @@ const TerritoryTable: React.FC = () => {
           render: (object) => (
             <CommaSeparated limit={1} limitText="short">
               {[...(object.nameOtherEndonyms || []), ...(object.nameOtherExonyms || [])].filter(
-                (n) => n !== object.nameDisplay,
+                (n) => n !== object.nameDisplay && n !== object.nameEndonym,
               )}
             </CommaSeparated>
           ),
