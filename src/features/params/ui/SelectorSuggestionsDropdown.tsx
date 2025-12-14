@@ -33,7 +33,7 @@ const SelectorSuggestionsDropdown: React.FC<Props> = ({
   function getPosition(index: number) {
     const pos = getPositionInGroup(index, suggestions.length);
     if (topLabel) {
-      if (pos === PositionInGroup.Standalone) return PositionInGroup.Last;
+      if (pos === PositionInGroup.Only) return PositionInGroup.Last;
       if (pos === PositionInGroup.Last) return PositionInGroup.Last;
       return PositionInGroup.Middle;
     }
