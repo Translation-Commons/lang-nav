@@ -51,7 +51,7 @@ TZ	Tanzania	Country	61,741,120	014
 IT	Italy	Country	58,966,101	039	
 CO	Colombia	Country	52,695,952	005	
 KE	Kenya	Country	52,428,290	014	
-MM	Myanmar (Burma)	Country	51,316,756	035	
+MM	Myanmar	Country	51,316,756	035	
 KR	South Korea	Country	51,207,874	030	
 SD	Sudan	Country	50,448,963	015	
 ES	Spain	Country	49,077,984	039	
@@ -72,7 +72,7 @@ PE	Peru	Country	34,038,457	005
 MZ	Mozambique	Country	33,244,414	014	
 GH	Ghana	Country	33,007,618	011	
 UA	Ukraine	Country	32,962,000	151	
-053	Australia and New Zealand	Sub-continent	32,670,569	009	
+053	Australasia	Sub-continent	32,670,569	009	
 YE	Yemen	Country	32,305,264	145	
 SA	Saudi Arabia	Country	32,175,224	145	
 MG	Madagascar	Country	30,811,969	014	
@@ -131,7 +131,7 @@ CH	Switzerland	Country	9,027,859	155
 SL	Sierra Leone	Country	8,884,032	011	
 TG	Togo	Country	8,095,498	011	
 LA	Laos	Country	7,546,000	035	
-HK	Hong Kong SAR China	Dependency	7,534,200	030	CN
+HK	Hong Kong	Dependency	7,534,200	030	CN
 LY	Libya	Country	7,381,023	015	
 KG	Kyrgyzstan	Country	7,161,900	143	
 TM	Turkmenistan	Country	7,057,841	143	
@@ -147,7 +147,7 @@ DK	Denmark	Country	5,992,734	154
 FI	Finland	Country	5,639,600	154	
 NO	Norway	Country	5,594,340	154	
 LB	Lebanon	Country	5,490,000	145	
-PS	Palestinian Territories	Country	5,483,450	145	
+PS	Palestine	Country	5,483,450	145	
 SK	Slovakia	Country	5,419,451	151	
 IE	Ireland	Country	5,380,300	154	
 NZ	New Zealand	Country	5,356,700	053	
@@ -196,7 +196,7 @@ RE	Réunion	Dependency	787,584	014	FR
 BT	Bhutan	Country	777,224	034	
 GY	Guyana	Country	772,975	005	
 SB	Solomon Islands	Country	750,325	054	
-MO	Macao SAR China	Dependency	688,300	030	CN
+MO	Macao	Dependency	688,300	030	CN
 061	Polynesia	Sub-continent	676,038	009	
 LU	Luxembourg	Country	672,050	155	
 ME	Montenegro	Country	623,633	039	
@@ -275,7 +275,7 @@ NU	Niue	Dependency	1,681	061	NZ
 TK	Tokelau	Dependency	1,647	061	NZ
 AC	Ascension Island	Dependency	940	011	GB
 VA	Vatican City	Country	882	039	
-CC	Cocos (Keeling) Islands	Dependency	593	053	AU
+CC	Cocos Islands	Dependency	593	053	AU
 DG	Diego Garcia	Dependency	500	014	GB
 CQ	Sark	Dependency	492	154	GB
 UM	U.S. Outlying Islands	Dependency	316	057	US

@@ -25,7 +25,7 @@ export function loadCountryCoordinates(
           }
           const code = parts[1] as TerritoryCode;
           const codeAlpha3 = parts[2];
-          const codeNumeric = parts[3];
+          const codeNumeric = parts[3] ? parts[3].padStart(3, '0') : undefined;
           const latitude = parseFloat(parts[4]);
           const longitude = parseFloat(parts[5]);
           if (!isNaN(latitude) && !isNaN(longitude)) {

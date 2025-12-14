@@ -64,6 +64,9 @@ export interface TerritoryData extends ObjectBase {
   populationFromUN: number; // Imported by the TSV
 
   // Supplemental data
+  nameEndonym?: string;
+  nameOtherEndonyms?: string[];
+  nameOtherExonyms?: string[];
   containedUNRegionCode?: UNM49Code;
   sovereignCode?: ISO3166Code;
   literacyPercent?: number;

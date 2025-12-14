@@ -29,6 +29,7 @@ interface Props<T> {
   objects: T[];
   columns: TableColumn<T>[];
   shouldFilterUsingSearchBar?: boolean;
+  shouldShowDetailsForSingleItem?: boolean;
   tableID: TableID;
 }
 
@@ -36,6 +37,7 @@ function InteractiveObjectTable<T extends ObjectData>({
   objects,
   columns,
   shouldFilterUsingSearchBar = true,
+  shouldShowDetailsForSingleItem = true,
   tableID,
 }: Props<T>) {
   const sortFunction = getSortFunction();
@@ -86,7 +88,7 @@ function InteractiveObjectTable<T extends ObjectData>({
         tableID={tableID}
       />
 
-      {currentObjects.length === 1 && (
+      {shouldShowDetailsForSingleItem && currentObjects.length === 1 && (
         <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
           <ObjectDetails object={currentObjects[0]} />
         </DetailsContainer>
