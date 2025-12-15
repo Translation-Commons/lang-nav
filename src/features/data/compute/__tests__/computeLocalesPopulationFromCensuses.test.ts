@@ -11,8 +11,9 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, LocaleSource, ObjectDictionary } from '@entities/types/DataTypes';
 
-import { computeLocalePopulationFromCensuses } from '../computeLocalePopulationFromCensuses';
-import { computeRegionalLocalePopulation } from '../computeRegionalLocalePopulation';
+import { computeLocalesPopulationFromCensuses } from '../computeLocalesPopulationFromCensuses';
+import { computeRegionalLocalesPopulation } from '../computeRegionalLocalesPopulation';
+import { updateLanguagesPopulationFromLocale, updatePopulations } from '../updatePopulations';
 
 describe('computeLocalePopulationFromCensuses', () => {
   // Gets a small test of objects to test on. We can run this function multiple time to get multiple batches of objects
@@ -35,7 +36,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     const mockUpdated = getMockedData(); // Will perform computations on this one
 
     // Update populations from census data
-    computeLocalePopulationFromCensuses(mockUpdated.locales);
+    computeLocalesPopulationFromCensuses(mockUpdated.locales);
 
     // The population adjusted will be new in the updated data
     mockUpdated.locales.forEach((localeUpdated) => {
@@ -56,7 +57,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     const mockUpdated = getMockedData(); // Will perform computations on this one
 
     // Update populations from census data
-    computeLocalePopulationFromCensuses(mockUpdated.locales);
+    computeLocalesPopulationFromCensuses(mockUpdated.locales);
 
     // The update will affect the populationSpeaking for locales when we got new data from censuses
     mockUpdated.locales.forEach((localeUpdated) => {
@@ -97,10 +98,12 @@ describe('computeLocalePopulationFromCensuses', () => {
     // The 2 mocks are identical in data but separate instances so we can compare the values
     const mockRaw = getMockedData();
     const mockUpdated = getMockedData(); // Will perform computations on this one
+    const world = mockUpdated.territories.find((t) => t.ID === '001')!;
 
     // Update populations from census data AND re-compute regional populations
-    computeLocalePopulationFromCensuses(mockUpdated.locales);
-    computeRegionalLocalePopulation(mockUpdated.territories.find((t) => t.ID === '001'));
+    computeLocalesPopulationFromCensuses(mockUpdated.locales);
+    computeRegionalLocalesPopulation(world);
+    updateLanguagesPopulationFromLocale(world);
 
     // The update will affect the populationSpeaking for locales when we got new data from censuses
     mockUpdated.locales.forEach((localeUpdated) => {
@@ -159,8 +162,9 @@ describe('computeLocalePopulationFromCensuses', () => {
     const mockUpdated = getMockedData({ be9999: getHighPopulationCensus() }); // Will perform computations on this one
 
     // Update populations from census data AND re-compute regional populations
-    computeLocalePopulationFromCensuses(mockUpdated.locales);
-    computeRegionalLocalePopulation(mockUpdated.territories.find((t) => t.ID === '001'));
+    computeLocalesPopulationFromCensuses(mockUpdated.locales);
+    computeRegionalLocalesPopulation(mockUpdated.territories.find((t) => t.ID === '001'));
+    updateLanguagesPopulationFromLocale(mockUpdated.territories.find((t) => t.ID === '001')!);
 
     // Check the Locale sjn_BE
     const localeRaw = mockRaw.locales.find((l) => l.ID === 'sjn_BE');
@@ -217,30 +221,25 @@ describe('computeLocalePopulationFromCensuses', () => {
       };
     }
 
-    // The 2 mocks are identical in data but separate instances so we can compare the values
-    const mockOriginal = getMockedData();
-    const mockOnlyCensus = getMockedData({ am0590: getAMCensus() });
-    const mockOnlyLocale = getMockedData({ sjn_AM: getSindarinInAMLocale() });
-    const mockBothNewEntities = getMockedData({
+    function generateLanguage(extraObjects: ObjectDictionary = {}) {
+      const mockedObjects = getMockedData(extraObjects);
+      const world = mockedObjects.territories.find((t) => t.ID === '001')!;
+      // Update both population, noting one has a different census
+      computeLocalesPopulationFromCensuses(mockedObjects.locales);
+      computeRegionalLocalesPopulation(world);
+      updatePopulations(mockedObjects.allLanguoids, mockedObjects.locales, world);
+
+      return mockedObjects.allLanguoids.find((l) => l.ID === 'sjn');
+    }
+
+    // Check the Language sjn
+    const langOriginal = generateLanguage({});
+    const langOnlyCensus = generateLanguage({ am0590: getAMCensus() });
+    const langOnlyLocale = generateLanguage({ sjn_AM: getSindarinInAMLocale() });
+    const langBothNewEntities = generateLanguage({
       am0590: getAMCensus(),
       sjn_AM: getSindarinInAMLocale(),
     });
-
-    // Update both population, noting one has a different census
-    computeLocalePopulationFromCensuses(mockOriginal.locales);
-    computeRegionalLocalePopulation(mockOriginal.territories.find((t) => t.ID === '001'));
-    computeLocalePopulationFromCensuses(mockOnlyCensus.locales);
-    computeRegionalLocalePopulation(mockOnlyCensus.territories.find((t) => t.ID === '001'));
-    computeLocalePopulationFromCensuses(mockOnlyLocale.locales);
-    computeRegionalLocalePopulation(mockOnlyLocale.territories.find((t) => t.ID === '001'));
-    computeLocalePopulationFromCensuses(mockBothNewEntities.locales);
-    computeRegionalLocalePopulation(mockBothNewEntities.territories.find((t) => t.ID === '001'));
-
-    // Check the Language sjn
-    const langOriginal = mockOriginal.allLanguoids.find((l) => l.ID === 'sjn');
-    const langOnlyCensus = mockOnlyCensus.allLanguoids.find((l) => l.ID === 'sjn');
-    const langOnlyLocale = mockOnlyLocale.allLanguoids.find((l) => l.ID === 'sjn');
-    const langBothNewEntities = mockBothNewEntities.allLanguoids.find((l) => l.ID === 'sjn');
 
     // Population Cited will all stay to the original entry
     expect(langOriginal?.populationRough, 'langOriginal?.populationRough').toBe(24000);
@@ -268,22 +267,22 @@ describe('computeLocalePopulationFromCensuses', () => {
       'langBothNewEntities?.populationFromLocales, New locale added so AM counted and adjusted',
     ).toBe(29220); // <-- UPDATED VALUE
 
-    // The ultimate population estimate remains the same for all except the last because we have a higher value
+    // The ultimate population estimate will always be upcated because there is census data now
     expect(
       langOriginal?.populationEstimate,
-      'langOriginal?.populationEstimate, prior value, the original citation',
-    ).toBe(14400);
+      'langOriginal?.populationEstimate, updated value from locales',
+    ).toBe(11220);
     expect(
       langOnlyCensus?.populationEstimate,
-      'langOnlyCensus?.populationEstimate, prior value, the original citation',
-    ).toBe(14400);
+      'langOnlyCensus?.populationEstimate, updated value from locales',
+    ).toBe(11220);
     expect(
       langOnlyLocale?.populationEstimate,
-      'langOnlyLocale?.populationEstimate, prior value, the original citation',
-    ).toBe(14400);
+      'langOnlyLocale?.populationEstimate, updated value from locales',
+    ).toBe(13220);
     expect(
       langBothNewEntities?.populationEstimate,
       'langBothNewEntities?.populationEstimate, updated value from locales',
-    ).toBe(29220); // <-- UPDATED VALUE
+    ).toBe(29220);
   });
 });

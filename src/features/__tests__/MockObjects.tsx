@@ -1,6 +1,6 @@
 import { computeDescendantPopulation } from '@features/data/compute/computeDescendantPopulation';
-import { computeLocalePopulationFromCensuses } from '@features/data/compute/computeLocalePopulationFromCensuses';
-import { computeLocaleWritingPopulation } from '@features/data/compute/computeLocaleWritingPopulation';
+import { computeLocalesPopulationFromCensuses } from '@features/data/compute/computeLocalesPopulationFromCensuses';
+import { computeLocalesWritingPopulation } from '@features/data/compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
 import { addCensusData } from '@features/data/connect/connectCensuses';
@@ -404,8 +404,8 @@ export function getFullyInstantiatedMockedObjects(
 
   // Add computed territory locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
-  computeLocaleWritingPopulation(Object.values(locales));
-  computeLocalePopulationFromCensuses(Object.values(locales));
+  computeLocalesWritingPopulation(Object.values(locales));
+  computeLocalesPopulationFromCensuses(Object.values(locales));
   return objects;
 }
 

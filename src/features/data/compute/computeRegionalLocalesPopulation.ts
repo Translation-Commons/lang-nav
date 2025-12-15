@@ -7,13 +7,13 @@ import { sumBy, uniqueBy } from '@shared/lib/setUtils';
  * This function should be called starting from the world territory (ID '001') and will recursively
  * compute populations for all contained territories and their locales.
  */
-export function computeRegionalLocalePopulation(territory: TerritoryData | undefined): void {
+export function computeRegionalLocalesPopulation(territory: TerritoryData | undefined): void {
   if (territory == null || !isTerritoryGroup(territory.scope)) {
     return; // Only recompute for regional locales
   }
   // Re-compute the estimate for the contained territories first.
   territory.containsTerritories?.forEach((childTerritory) => {
-    computeRegionalLocalePopulation(childTerritory);
+    computeRegionalLocalesPopulation(childTerritory);
   });
   // Now go through the locales and re-compute their population
   territory.locales?.forEach((locale) => {
@@ -45,24 +45,4 @@ export function computeRegionalLocalePopulation(territory: TerritoryData | undef
         (locale.populationAdjusted / (territory.population || 1)) * 100;
     }
   });
-
-  // As a last step, if this is the World territory, update the language populations
-  // This is safe because after recursion we should have computed everything else already.
-  if (territory.ID === '001') {
-    updateLanguagePopulations(territory);
-  }
-}
-
-// Take the value for the world languages (eg. eng_001) and if higher than the current estimate,
-//  update the language population estimates.
-function updateLanguagePopulations(territory: TerritoryData): void {
-  territory.locales
-    ?.filter((l) => l.scriptCode == null && (l.variantTagCodes || []).length === 0)
-    .forEach((locale) => {
-      const language = locale.language;
-      if (language == null || locale.populationAdjusted == null) return;
-      language.populationFromLocales = locale.populationAdjusted;
-      language.populationEstimate =
-        Math.max(language.populationEstimate ?? 0, locale.populationAdjusted) || undefined;
-    });
 }

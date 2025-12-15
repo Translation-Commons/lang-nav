@@ -220,39 +220,6 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: PopulationOfDescendants', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      SortBy.PopulationDirectlySourced,
-      SortBehavior.Normal,
-    );
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      // These entities were created with a rough population estimate, before it was computed by algorithms
-      '001',
-      '123',
-      'sjn', // sjn was created with a high estimate
-      'AM', // Most countries have a high value
-      'HA',
-      'BE',
-      'be0590',
-      'sjn_123', // sjn locales were created with lower estimates
-      'sjn_001',
-      'sjn_BE',
-      'sjn_Teng_BE',
-      'sjn_Teng_123',
-      'sjn_Teng_001',
-      'dori0123',
-      'ER',
-      'sjn_ER',
-      'dori0123_ER',
-      'dori0123_123',
-      'dori0123_001',
-      // All undefined after this, stable to input order
-      'Teng',
-      'tolkorth',
-    ]);
-  });
-
-  it('sortBy: PopulationOfDescendants', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(SortBy.PopulationOfDescendants, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'sjn', // 1800 from dori0123

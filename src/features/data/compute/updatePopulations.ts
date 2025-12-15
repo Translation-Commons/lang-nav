@@ -1,0 +1,98 @@
+import { LanguageData } from '@entities/language/LanguageTypes';
+import { LocaleData, PopulationSourceCategory, TerritoryData } from '@entities/types/DataTypes';
+
+import { sumBy } from '@shared/lib/setUtils';
+
+import { computeLocalesPopulationFromCensuses } from './computeLocalesPopulationFromCensuses';
+import { computeRegionalLocalesPopulation } from './computeRegionalLocalesPopulation';
+
+export function updatePopulations(
+  languages: LanguageData[],
+  locales: LocaleData[],
+  world: TerritoryData,
+): void {
+  computeLocalesPopulationFromCensuses(locales);
+
+  // Start with the world territory (001) and then go down to groups
+  // This will update regional locales AND the languages themselves
+  computeRegionalLocalesPopulation(world);
+
+  updateLanguagesPopulationFromLocale(world);
+
+  computeLanguagesPopulations(languages);
+
+  discountPopulationEstimatesIfSimilarToParent(languages);
+}
+
+function computeLanguagesPopulations(languages: LanguageData[]): void {
+  // Recurse to children, starting from root languages
+  languages
+    .filter((lang) => !lang.parentLanguage)
+    .forEach((rootLang) => {
+      getLanguagePopulationFollowingDescendants(rootLang);
+    });
+}
+
+function getLanguagePopulationFollowingDescendants(lang: LanguageData): number {
+  // Recompute the population of descendants first
+  const descendantPopulation = sumBy(
+    lang.childLanguages,
+    (childLang) => getLanguagePopulationFollowingDescendants(childLang) || 0.01, // Using 0.01 as a tiebreaker
+  );
+  lang.populationOfDescendants = descendantPopulation > 0 ? descendantPopulation : undefined;
+
+  // Then follow the algorithm to find the best population estimate, which may come from descendants,
+  // but also from locales or cited data
+  computeLanguagePopulationEstimate(lang);
+
+  return lang.populationEstimate ?? 0;
+}
+
+function computeLanguagePopulationEstimate(lang: LanguageData): void {
+  // The best source would come from the censuses
+  // Locale data usually comes from censuses, or language family locales are bounded by country size
+  if (lang.populationFromLocales != null) {
+    lang.populationEstimate = lang.populationFromLocales;
+    lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
+  } else if (lang.populationRough /* if its defined and not zero */) {
+    // Otherwise, use the population from the languages.tsv file
+    // They are often rough estimates, from a mixture of sources (and are missing citations)
+    lang.populationEstimate = lang.populationRough;
+    lang.populationEstimateSource = PopulationSourceCategory.Other;
+  } else if (lang.populationOfDescendants != null) {
+    // Lastly, check the population from descendants. This is useful for language families
+    // that are missing locale data.
+    lang.populationEstimate = lang.populationOfDescendants;
+    lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromLanguages;
+  } else {
+    lang.populationEstimate = undefined;
+    lang.populationEstimateSource = undefined;
+  }
+}
+
+function discountPopulationEstimatesIfSimilarToParent(languages: LanguageData[]): void {
+  // Discount populations if the population is greater than or same of its parent
+  languages.forEach((lang) => {
+    const parent = lang.parentLanguage;
+    if (parent && lang.populationEstimate != null && parent.populationEstimate != null) {
+      if (lang.populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
+        return; // Do not adjust if from locale data
+      if (lang.populationEstimate >= parent.populationEstimate) {
+        lang.populationEstimate = parent.populationEstimate - 0.01;
+        lang.populationEstimateSource = PopulationSourceCategory.Algorithmic;
+      }
+    }
+  });
+}
+
+// Take the value for the world languages (eg. eng_001) and if higher than the current estimate,
+//  update the language population estimates.
+export function updateLanguagesPopulationFromLocale(territory: TerritoryData): void {
+  territory?.locales
+    ?.filter((l) => l.scriptCode == null && (l.variantTagCodes || []).length === 0)
+    .forEach((locale) => {
+      const language = locale.language;
+      if (language == null || locale.populationAdjusted == null) return;
+      language.populationFromLocales = locale.populationAdjusted;
+    });
+}
