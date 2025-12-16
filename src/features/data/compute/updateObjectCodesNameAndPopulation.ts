@@ -5,8 +5,7 @@ import { precomputeLanguageVitality } from '@entities/language/vitality/Language
 import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
-import { computeLocalePopulationFromCensuses } from './computeLocalePopulationFromCensuses';
-import { computeRegionalLocalePopulation } from './computeRegionalLocalePopulation';
+import { updatePopulations } from './updatePopulations';
 
 /**
  * Languages and Locales contain values that stay put but also values that depend on
@@ -32,35 +31,19 @@ export function updateObjectCodesNameAndPopulation(
   languageSource: LanguageSource,
   localeSeparator: LocaleSeparator,
 ): void {
-  updatePopulations(locales, world);
   updateParentsAndDescendants(languages, languageSource);
+  updatePopulations(languages, locales, world);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
   precomputeLanguageVitality(languages);
 }
 
-function updatePopulations(locales: LocaleData[], world: TerritoryData): void {
-  // Update locale populations based on census data
-  computeLocalePopulationFromCensuses(locales);
-
-  // Start with the world territory (001) and then go down to groups
-  // This will update regional locales AND the languages themselves
-  computeRegionalLocalePopulation(world);
-}
-
-// Update parent/child relationships and the population of descendants
-// TODO too many things have changed from the above steps, the population of descendants should be recomputed
+// Update parent/child relationships
 function updateParentsAndDescendants(
   languages: LanguageData[],
   languageSource: LanguageSource,
 ): void {
   languages.forEach((lang) => {
     const specific = lang[languageSource];
-    lang.populationOfDescendants = specific.populationOfDescendants ?? undefined;
-    lang.populationEstimate =
-      Math.max(
-        lang.populationRough ?? specific.populationOfDescendants ?? 0,
-        lang.populationFromLocales ?? 0,
-      ) || undefined;
     lang.parentLanguage = specific.parentLanguage ?? undefined;
     lang.childLanguages = specific.childLanguages ?? [];
   });

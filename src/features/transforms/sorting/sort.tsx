@@ -1,6 +1,5 @@
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { getSortField } from '../fields/getField';
@@ -9,22 +8,20 @@ import { SortBehavior, SortBy, SortDirection } from './SortTypes';
 
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
-export function getSortFunction(languageSource?: LanguageSource): SortByFunctionType {
-  const { sortBy, languageSource: languageSourcePageParam, sortBehavior } = usePageParams();
-  const effectiveLanguageSource = languageSource ?? languageSourcePageParam;
+export function getSortFunction(): SortByFunctionType {
+  const { sortBy, sortBehavior } = usePageParams();
 
-  return getSortFunctionParameterized(sortBy, effectiveLanguageSource, sortBehavior);
+  return getSortFunctionParameterized(sortBy, sortBehavior);
 }
 
 export function getSortFunctionParameterized(
   sortBy: SortBy,
-  effectiveLanguageSource: LanguageSource = LanguageSource.Combined,
   sortDirection: SortBehavior = SortBehavior.Normal,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;
   return (a: ObjectData, b: ObjectData) => {
-    const aField = getSortField(a, sortBy, effectiveLanguageSource);
-    const bField = getSortField(b, sortBy, effectiveLanguageSource);
+    const aField = getSortField(a, sortBy);
+    const bField = getSortField(b, sortBy);
     if (aField == null) return bField == null ? 0 : 1;
     if (bField == null) return -1; // puts last regardless of ascending/descending
     if (aField > bField) return direction;

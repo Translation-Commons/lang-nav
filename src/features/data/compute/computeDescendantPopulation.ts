@@ -1,4 +1,4 @@
-import { LanguageData, LanguagesBySource, LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import { ScriptCode, WritingSystemData } from '@entities/types/DataTypes';
 
 export function computeDescendantPopulation(
@@ -15,11 +15,9 @@ export function computeDescendantPopulation(
 
   // Need to compute the language descendant populations 3 times because nodes will be organized
   // differently in the different language sources
-  Object.values(LanguageSource).forEach((source) => {
-    Object.values(languagesBySource[source])
-      .filter((lang) => lang[source].parentLanguage == null) // start at roots
-      .forEach((lang) => computeLanguageDescendantPopulation(lang, source));
-  });
+  Object.values(languagesBySource.Combined).forEach((lang) =>
+    computeLanguageDescendantPopulation(lang),
+  );
 }
 
 function computeWritingSystemDescendantPopulation(writingSystem: WritingSystemData): number {
@@ -33,12 +31,12 @@ function computeWritingSystemDescendantPopulation(writingSystem: WritingSystemDa
   return descendantPopulation + (writingSystem.populationUpperBound ?? 0);
 }
 
-function computeLanguageDescendantPopulation(lang: LanguageData, source: LanguageSource): number {
-  const childLanguages = lang[source].childLanguages ?? [];
+function computeLanguageDescendantPopulation(lang: LanguageData): number {
+  const childLanguages = lang.childLanguages ?? [];
   const descendantPopulation = childLanguages.reduce(
-    (total, childLang) => total + computeLanguageDescendantPopulation(childLang, source),
+    (total, childLang) => total + computeLanguageDescendantPopulation(childLang),
     0.01,
   );
-  lang[source].populationOfDescendants = descendantPopulation;
+  lang.populationOfDescendants = descendantPopulation;
   return Math.max(lang.populationRough || 0, descendantPopulation) + 0.01; // Tiebreaker = number of child nodes
 }

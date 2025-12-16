@@ -54,8 +54,10 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
       case PopulationSourceCategory.NoSource:
       case PopulationSourceCategory.Other:
         return <Deemphasized>no citation</Deemphasized>;
-      case PopulationSourceCategory.Aggregated:
-        return <Deemphasized>rough estimate</Deemphasized>;
+      case PopulationSourceCategory.AggregatedFromTerritories:
+      case PopulationSourceCategory.AggregatedFromLanguages:
+      case PopulationSourceCategory.Algorithmic:
+        return <Deemphasized>aggregate</Deemphasized>;
     }
   }
 
@@ -75,7 +77,9 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
       return 'citation needed';
     case PopulationSourceCategory.NoSource:
       return 'no source';
-    case PopulationSourceCategory.Aggregated:
+    case PopulationSourceCategory.AggregatedFromLanguages:
+    case PopulationSourceCategory.AggregatedFromTerritories:
+    case PopulationSourceCategory.Algorithmic:
       return 'aggregated from other sources';
   }
 };

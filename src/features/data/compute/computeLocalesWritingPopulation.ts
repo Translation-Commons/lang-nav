@@ -2,7 +2,7 @@ import { isTerritoryGroup, LocaleData } from '@entities/types/DataTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
-export function computeLocaleWritingPopulation(locales: LocaleData[]): void {
+export function computeLocalesWritingPopulation(locales: LocaleData[]): void {
   // Country & Dependencies have literacy values from the UN
   locales
     .filter(

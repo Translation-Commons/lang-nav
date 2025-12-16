@@ -3,7 +3,7 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
+import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
@@ -71,8 +71,7 @@ const Descendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <HoverableButton
         onClick={() =>
           updatePageParams({
-            searchString: lang.ID + '_',
-            searchBy: SearchableField.Code,
+            languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
             view: View.Table,
             objectType: ObjectType.Locale,
           })

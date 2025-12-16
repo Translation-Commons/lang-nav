@@ -69,7 +69,7 @@ function createRegionalLocalesForTerritory(
               loc.populationSpeaking != null
                 ? (loc.populationSpeaking * 100) / territory.population
                 : undefined,
-            populationSource: PopulationSourceCategory.Aggregated,
+            populationSource: PopulationSourceCategory.AggregatedFromTerritories,
 
             // Add stubs for required fields
             names: [],

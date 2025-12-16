@@ -1,5 +1,5 @@
-import { computeLocalePopulationFromCensuses } from '../compute/computeLocalePopulationFromCensuses';
-import { computeLocaleWritingPopulation } from '../compute/computeLocaleWritingPopulation';
+import { computeLocalesPopulationFromCensuses } from '../compute/computeLocalesPopulationFromCensuses';
+import { computeLocalesWritingPopulation } from '../compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
 import { addCensusData } from '../connect/connectCensuses';
 import { DataContextType } from '../context/useDataContext';
@@ -57,6 +57,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
 
   // 001 is the UN code for the World
   computeContainedTerritoryStats(dataContext.getTerritory('001'));
-  computeLocalePopulationFromCensuses(dataContext.locales);
-  computeLocaleWritingPopulation(dataContext.locales);
+  computeLocalesPopulationFromCensuses(dataContext.locales);
+  computeLocalesWritingPopulation(dataContext.locales);
 }

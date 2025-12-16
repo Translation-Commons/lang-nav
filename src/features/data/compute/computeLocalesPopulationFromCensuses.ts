@@ -25,7 +25,7 @@ const POPULATION_ESTIMATE_RULES: CensusCmp[] = [
   (a, b) => b.populationPercent - a.populationPercent,
 ];
 
-export function computeLocalePopulationFromCensuses(locales: LocaleData[]): void {
+export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): void {
   // Find the best population estimate for each locale based on its census records
   locales.forEach((locale) => {
     if (!locale.censusRecords || locale.censusRecords.length === 0) return; // No census records, nothing to compute
