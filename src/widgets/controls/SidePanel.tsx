@@ -20,6 +20,7 @@ import {
   VitalityEth2025Selector,
 } from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
+import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
@@ -85,6 +86,7 @@ const SidePanel: React.FC = () => {
           <SortBySelector />
           <SortDirectionSelector />
           <ColorBySelector />
+          <ScaleBySelector />
           <ColorGradientSelector />
           <LocaleSeparatorSelector />
           <PageBrightnessSelector />

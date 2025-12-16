@@ -9,6 +9,7 @@ import {
 import { ReactNode } from 'react';
 
 import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
@@ -35,6 +36,7 @@ export enum ProfileType {
 
 const GLOBAL_DEFAULTS: PageParams = {
   colorBy: 'None',
+  scaleBy: 'None',
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
   isoStatus: [],
@@ -94,6 +96,7 @@ export function getDefaultParams(
   view?: View | undefined,
   profile?: ProfileType | undefined,
   colorBy?: ColorBy | undefined,
+  scaleBy?: ScaleBy | undefined,
 ): PageParams {
   let params = GLOBAL_DEFAULTS;
 
@@ -110,6 +113,7 @@ export function getDefaultParams(
   if (view != null) params.view = view;
   if (objectType != null) params.objectType = objectType;
   if (colorBy != null) params.colorBy = colorBy;
+  if (scaleBy != null) params.scaleBy = scaleBy;
 
   // Apply a few view-specific overrides
   if (params.view === View.Hierarchy) {
@@ -158,6 +162,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.CountOfLanguages:
+    case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
     case SortBy.Date:
     case SortBy.Area:

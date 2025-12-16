@@ -2,13 +2,13 @@ import { useCallback, useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import { getSortField } from '../fields/getField';
+import { getMaximumValue, getMinimumValue } from '../rangeUtils';
 import { SortBy } from '../sorting/SortTypes';
 
 import { ColorBy } from './ColorTypes';
@@ -98,81 +98,6 @@ const useColors = ({ objects, colorBy }: Props): ColoringFunctions => {
 
 export default useColors;
 
-function getMinimumValue(colorBy: ColorBy): number {
-  switch (colorBy) {
-    case SortBy.Longitude:
-      return -180;
-    case SortBy.Latitude:
-      return -90;
-    case SortBy.ISOStatus:
-      return -1;
-    case SortBy.Population:
-    case SortBy.PopulationDirectlySourced:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.Literacy:
-    case SortBy.VitalityMetascore:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
-    case SortBy.Area:
-      return 0;
-    case 'None':
-      return 0;
-    case SortBy.Date:
-      return new Date(0).getTime();
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
-      return convertAlphaToNumber(''); // 0
-  }
-}
-
-function getMaximumValue(objects: ObjectData[], colorBy: ColorBy): number {
-  switch (colorBy) {
-    case 'None':
-      return 0;
-    case SortBy.VitalityMetascore:
-    case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
-      return VitalityEthnologueCoarse.Institutional; // 9;
-    case SortBy.Latitude:
-      return 90;
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.Literacy:
-      return 100;
-    case SortBy.Longitude:
-      return 180;
-    case SortBy.Date:
-      return new Date().getTime(); // Today
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
-    case SortBy.Population:
-    case SortBy.PopulationDirectlySourced:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.Area:
-      return Math.max(
-        objects.reduce((acc, obj) => Math.max(acc, (getSortField(obj, colorBy) as number) || 0), 0),
-      );
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
-      return convertAlphaToNumber('ZZZZZZZZZZ');
-  }
-}
-
 function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
   switch (colorBy) {
     case SortBy.Population:
@@ -180,6 +105,7 @@ function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.CountOfLanguages:
+    case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
     case SortBy.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
     case SortBy.Area:

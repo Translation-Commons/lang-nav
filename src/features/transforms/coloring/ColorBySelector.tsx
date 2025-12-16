@@ -6,15 +6,13 @@ import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/Selecto
 import usePageParams from '@features/params/usePageParams';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import getSortBysApplicableToObjectType from '../sorting/getSortBysApplicableToObjectType';
-
-import { ColorBy } from './ColorTypes';
+import { ColorBy, getColorBysApplicableToObjectType } from './ColorTypes';
 
 const ColorBySelector: React.FC = () => {
   const { colorBy, updatePageParams, objectType, view } = usePageParams();
   const { display } = useSelectorDisplay();
 
-  const applicableColorBys = getSortBysApplicableToObjectType(objectType);
+  const applicableColorBys = getColorBysApplicableToObjectType(objectType);
   const colorByOptions: ColorBy[] = [
     'None',
     ...Object.values(SortBy).filter((cb) => applicableColorBys.includes(cb)),

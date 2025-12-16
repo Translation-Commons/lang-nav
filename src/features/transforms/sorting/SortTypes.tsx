@@ -16,6 +16,7 @@ export enum SortBy {
   Date = 'Date',
   Area = 'Area',
   CountOfLanguages = 'Count of Languages',
+  CountOfDialects = 'Count of Dialects',
   CountOfTerritories = 'Count of Territories',
   Language = 'Language',
   WritingSystem = 'Writing System',
