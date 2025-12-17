@@ -1,0 +1,57 @@
+#codeDisplay		de2024
+#nameDisplay		Germany 2024
+#isoRegionCode	DE	DE
+#yearCollected		2024
+#modality		Spoken
+#domain		Home
+#eligiblePopulation		82,769,000
+#geographicScope		whole country
+#age		0+
+#nationality		residents
+#residentLocation		de jure
+#quantity		count
+#responsesPerIndividual		1
+#collectorType		Government
+#collectorName		Statistisches Bundesamt
+#url		https://www.statistischebibliothek.de/mir/receive/DEHeft_mods_00164832
+#datePublished		22.05.2025
+#tableName		12211-47: Bevölkerung insgesamt im Jahr 2024 nach Migrationsstatus und zu Hause vorwiegend gesprochener Sprache                                                                                                                                                                                                                                                                                                                                                                                                                          
+#columnName		Nach Migrationsstatus insgesamt
+#citation		Statistisches Bundesamt. Mikrozensus - Bevölkerung nach Migrationshintergrund Erstergebnisse 2024
+#notes		English: "Total population in 2024 by migration status and predominant language spoken at home" (we take the first row, ignoring migration status)
+Language Code	Language	Population
+deu	#only German	63,554,000
+deu	#predominantly German	3,776,000
+sqi	Albanian	601,000
+ara	Arabic	1,407,000
+hbs/bos	Bosnian	246,000
+bul	Bulgarian	227,000
+zho	Chinese	159,000
+dan	Danish	22,000
+eng	English	1,047,000
+fra	French	194,000
+ell	Greek	308,000
+hin	Hindi	87,000
+ita	Italian	481,000
+hbs/hrv	Croatian	377,000
+kur	Kurdish	575,000
+mkd	Macedonian	90,000
+nld	Dutch	90,000
+pus	Pashtu	58,000
+fas	Persian	428,000
+pol	Polish	983,000
+ron	Romanian	182,000
+rus	Russian	1,877,000
+hbs/srp	Serbian	262,000
+spa	Spanish	354,000
+tur	Turkish	2,162,000
+ukr	Ukranian	711,000
+hun	Hungarian	199,000
+urd	Urdu	104,000
+vie	Vietnamese	159,000
+mul	Other European language	243,000
+mul	Other African language	260,000
+mul	Other Asian language	442,000
+mul	Other language	352,000		
+mul	German and at least another language	10,520,000
+mul	No German, only other languages	4,919,000
