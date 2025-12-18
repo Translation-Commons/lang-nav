@@ -58,9 +58,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       return tsvColumnNumber + 2; // +2 to account for the skipped columns
     })
     .filter((col) => col !== null);
-  if (tsvColumnsWithData.length <= 0) {
-    throw new Error('No census data found in the file.');
-  }
+  if (tsvColumnsWithData.length <= 0) throw new Error('No census data found in the file.');
+
   const censuses: CensusData[] = tsvColumnsWithData.map((_tsvColumnNumber, index) => ({
     type: ObjectType.Census,
     ID: filename + '.' + (index + 1),
@@ -97,9 +96,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       }
       values.forEach((maybeValue, index) => {
         const value = maybeValue != '' ? maybeValue : defaultValue; // Use the default value if the cell is empty
-        if (value == '') {
-          return; // Skip empty values
-        }
+        if (value == '') return; // Skip empty values
+
         if (key === 'datePublished' || key === 'dateAccessed') {
           censuses[index][key] = new Date(value);
         } else if (
@@ -143,42 +141,26 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
     census.names = [census.nameDisplay, census.tableName, census.columnName].filter(
       (n) => n != null,
     );
-    if (census.isoRegionCode === '') {
-      console.error('Census data is missing isoRegionCode:', census);
-    }
-    if (census.yearCollected === 0) {
-      console.error('Census data is missing yearCollected:', census);
-    }
-    if (census.populationEligible === 0) {
+    if (census.isoRegionCode === '') console.error('Census data is missing isoRegionCode:', census);
+    if (census.yearCollected === 0) console.error('Census data is missing yearCollected:', census);
+    if (census.populationEligible === 0)
       console.error('Census data is missing populationEligible:', census);
-    }
-    if (census.nameDisplay === '') {
-      console.error('Census data is missing nameDisplay:', census);
-    }
+    if (census.nameDisplay === '') console.error('Census data is missing nameDisplay:', census);
+    if (census.url === '') console.error('Census data is missing url:', census);
   });
 
   // Process the remaining lines as language data
   const languageNames: Record<LanguageCode, string> = {};
   for (const line of lines.splice(lineNumber)) {
     const parts = line.split('\t');
-    if (parts.length < 3) {
-      continue; // Skip lines that do not have enough data
-    }
+    if (parts.length < 3) continue; // Skip lines that do not have enough data
 
     // Most rows specific a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
-    const languageCodes = parts[0].split('/').map((code) => code.trim());
-    if (
-      languageCodes.length === 0 ||
-      languageCodes[0] === '' ||
-      ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(languageCodes[0]) ||
-      languageCodes[0].startsWith('#')
-    ) {
-      // Skip header and special language codes
-      // 'Language Code' is the header, 'mul' is for multiple languages, 'mis' is for missing languages,
-      // 'und' is for undefined languages, and 'zxx' is for no linguistic content
-      // '#' is for languages that are technically listed but the data shouldn't be used due to a quality issue
-      continue;
-    }
+    const languageCodes = parts[0]
+      .split('/')
+      .map((code) => code.trim())
+      .filter((code) => !isIgnoredLanguageCode(code));
+    if (languageCodes.length === 0) continue;
 
     // The language name is in the second column
     let languageName = parts[1].trim();
@@ -207,9 +189,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
     // Add population estimates to censuses when its non-empty
     tsvColumnsWithData.forEach((tsvColumnNumber, i) => {
       const part = parts[tsvColumnNumber];
-      if (part.trim() === '') {
-        return; // Skip empty parts
-      }
+      if (part.trim() === '') return; // Skip empty parts
+
       let popEstimate = Number.parseFloat(part.replace(/[,%]/g, ''));
       if (popEstimate > 0 && censuses[i].quantity === 'percent') {
         // If the quantity is percent, convert the percentage to an estimate based on the eligible population
@@ -243,4 +224,12 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
     censuses,
     languageNames,
   };
+}
+
+// Skip header and special language codes
+// 'Language Code' is the header, 'mul' is for multiple languages, 'mis' is for missing languages,
+// 'und' is for undefined languages, and 'zxx' is for no linguistic content
+// '#' is for languages that are technically listed but the data shouldn't be used due to a quality issue
+function isIgnoredLanguageCode(code: string): boolean {
+  return code.startsWith('#') || ['Language Code', 'mul', 'mis', 'und', 'zxx', ''].includes(code);
 }
