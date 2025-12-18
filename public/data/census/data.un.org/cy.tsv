@@ -3,8 +3,8 @@
 #isoRegionCode	CY			
 #yearCollected		2001	2011	2021
 #datePublished		2002	2013	2024
-#eligiblePopulation		689,565	840,407	923,381
-#respondingPopulation		688,705	835,113	912,270
+#populationEligible		689,565	840,407	923,381
+#populationWithPositiveResponses		688,705	835,113	912,270
 #notes		Data refer to government controlled areas. Residents. Census - de jure - complete tabulation	Data refer to government controlled areas. Census - de jure - complete tabulation	Data refer to government controlled areas. Census - de jure - complete tabulation
 #responsesPerIndividual		1		1
 #acquisitionOrder	L1			

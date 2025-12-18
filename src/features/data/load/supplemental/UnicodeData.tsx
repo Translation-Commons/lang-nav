@@ -5,7 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
-import { CLDRCoverageLevel, CLDRCoverageImport } from '@entities/types/CLDRTypes';
+import { CLDRCoverageImport, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 import { LocaleData } from '@entities/types/DataTypes';
 
 import { DataContextType } from '../../context/useDataContext';
@@ -256,7 +256,7 @@ export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusD
         nameDisplay: 'CLDR ' + (territory?.nameDisplay ?? territoryCode),
         names: ['CLDR ' + (territory?.nameDisplay ?? territoryCode)],
 
-        eligiblePopulation: territoryPopulation,
+        populationEligible: territoryPopulation,
         isoRegionCode: territoryCode,
         yearCollected: new Date().getFullYear(), // This is the year it was collected from CLDR not the actual year of the input data
         collectorType: CensusCollectorType.CLDR,

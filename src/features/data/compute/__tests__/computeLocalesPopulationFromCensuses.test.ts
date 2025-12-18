@@ -148,7 +148,7 @@ describe('computeLocalePopulationFromCensuses', () => {
         ID: 'be9999',
         codeDisplay: 'be9999',
         isoRegionCode: 'BE',
-        eligiblePopulation: 50000, // BE's recorded population is 12000 but this census claims 50000 people
+        populationEligible: 50000, // BE's recorded population is 12000 but this census claims 50000 people
         nameDisplay: 'Census BE 9999',
         names: [],
         yearCollected: 9999,
@@ -198,7 +198,7 @@ describe('computeLocalePopulationFromCensuses', () => {
         ID: 'am0590',
         codeDisplay: 'am0590',
         isoRegionCode: 'AM',
-        eligiblePopulation: 20000,
+        populationEligible: 20000,
         nameDisplay: 'The Undying Lands 0590 Census',
         names: [],
         yearCollected: 1990,

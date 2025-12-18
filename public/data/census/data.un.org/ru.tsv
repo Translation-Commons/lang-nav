@@ -2,8 +2,8 @@
 #nameDisplay		Russia 2020 Spoken	Russia 2020 Uses	Russia 2010
 #isoRegionCode	RU			
 #yearCollected		2020	2020	2010
-#eligiblePopulation		147,182,123	147,182,123	142,856,536
-#respondingPopulation		135,125,671	134,623,178	
+#populationEligible		147,182,123	147,182,123	142,856,536
+#populationWithPositiveResponses		135,125,671	134,623,178	
 #url		https://web.archive.org/web/20230213225905/http://rosstat.gov.ru/vpn_popul	https://web.archive.org/web/20230213225905/http://rosstat.gov.ru/vpn_popul	https://data.un.org/Data.aspx?d=POP&f=tableCode:27
 #tableName		Table 4. Language proficiency and use of languages ​​by the population	Table 4. Language proficiency and use of languages ​​by the population	
 #columnName		Number of people who speak the relevant language	of them use it in everyday life	

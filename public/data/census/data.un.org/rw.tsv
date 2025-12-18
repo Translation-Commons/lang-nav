@@ -3,8 +3,8 @@
 #isoRegionCode		RW
 #yearCollected		2002
 #datePublished		2011
-#eligiblePopulation		7,963,809
-#respondingPopulation		7,938,863
+#populationEligible		7,963,809
+#populationWithPositiveResponses		7,938,863
 #notes		Residents. Census - de jure - complete tabulation
 #modality		Spoken
 #responsesPerIndividual		1

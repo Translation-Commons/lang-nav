@@ -38,7 +38,7 @@ const TableOfAllCensuses: React.FC = () => {
         },
         {
           key: 'Eligible Population',
-          render: (census) => census.eligiblePopulation,
+          render: (census) => census.populationEligible,
           valueType: TableValueType.Population,
           sortParam: SortBy.Population,
           columnGroup: 'Population',
@@ -46,7 +46,7 @@ const TableOfAllCensuses: React.FC = () => {
         {
           key: '% of Current Population',
           render: (census) =>
-            census.eligiblePopulation && getObjectPercentOfTerritoryPopulation(census),
+            census.populationEligible && getObjectPercentOfTerritoryPopulation(census),
           valueType: TableValueType.Decimal,
           isInitiallyVisible: false,
           sortParam: SortBy.PercentOfTerritoryPopulation,

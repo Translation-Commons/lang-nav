@@ -72,7 +72,7 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
     isoRegionCode: '',
     languageCount: 0,
     yearCollected: 0,
-    eligiblePopulation: 0,
+    populationEligible: 0,
     languageEstimates: {},
     collectorType: CensusCollectorType.Government,
   }));
@@ -102,9 +102,9 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
         if (key === 'datePublished' || key === 'dateAccessed') {
           censuses[index][key] = new Date(value);
         } else if (
-          key === 'eligiblePopulation' ||
+          key === 'populationEligible' ||
           key === 'yearCollected' ||
-          key === 'respondingPopulation'
+          key === 'populationWithPositiveResponses'
         ) {
           censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
         } else if (key === 'sampleRate') {
@@ -147,8 +147,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
     if (census.yearCollected === 0) {
       console.error('Census data is missing yearCollected:', census);
     }
-    if (census.eligiblePopulation === 0) {
-      console.error('Census data is missing eligiblePopulation:', census);
+    if (census.populationEligible === 0) {
+      console.error('Census data is missing populationEligible:', census);
     }
     if (census.nameDisplay === '') {
       console.error('Census data is missing nameDisplay:', census);
@@ -211,7 +211,7 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       let popEstimate = Number.parseFloat(part.replace(/[,%]/g, ''));
       if (popEstimate > 0 && censuses[i].quantity === 'percent') {
         // If the quantity is percent, convert the percentage to an estimate based on the eligible population
-        popEstimate = Math.round((popEstimate / 100) * censuses[i].eligiblePopulation);
+        popEstimate = Math.round((popEstimate / 100) * censuses[i].populationEligible);
       }
       if (isNaN(popEstimate)) {
         // If the population estimate is not a number, set it to 1.

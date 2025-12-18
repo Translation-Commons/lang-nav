@@ -18,7 +18,7 @@
 #domain		Any	Home	Home	Home
 #sampleRate		0.25	0.25	0.25	1
 #responsesPerIndividual	1+				
-#eligiblePopulation	Total - Knowledge of languages	36,328,480	36,328,475	36,328,475	36,620,955
+#populationEligible	Total - Knowledge of languages	36,328,480	36,328,475	36,328,475	36,620,955
 #languagesIncluded		All	Indigenous	Indigenous	All
 #notes		English and French are not counted in their language families.	English and French are not counted in their language families.	English and French are not counted in their language families.	English and French are not counted in their language families.
 Language Code	Language Name from Source	Canada 2021	Canada 2021 @Home	Canada 2021 L1 Sampled	Canada 2021 L1

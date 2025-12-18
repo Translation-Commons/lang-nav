@@ -224,7 +224,7 @@ function getPotentialLocales(
           if (getLocale(localeID) || lang == null) {
             return; // Locale already exists or language is missing, skip
           }
-          const populationPercent = (populationEstimate * 100) / census.eligiblePopulation;
+          const populationPercent = (populationEstimate * 100) / census.populationEligible;
           if (populationPercent < percentThreshold) {
             return; // Skip if the population percentage is below the threshold
           }

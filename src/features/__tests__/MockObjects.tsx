@@ -141,7 +141,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     collectorName: 'National Institute of Statistics',
     url: 'https://en.wikipedia.org/wiki/Beleriand#Languages', // not a real part of the article
     isoRegionCode: 'BE',
-    eligiblePopulation: BE.population,
+    populationEligible: BE.population,
     languageEstimates: {
       sjn: 9300, // 77.5%, increased to test out the population recomputation
     },

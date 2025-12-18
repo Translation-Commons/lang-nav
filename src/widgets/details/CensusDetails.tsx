@@ -52,11 +52,11 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
 function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
   const {
     age,
-    eligiblePopulation,
+    populationEligible,
     geographicScope,
     languagesIncluded,
     notes,
-    respondingPopulation,
+    populationWithPositiveResponses,
     responsesPerIndividual,
     sampleRate,
     quantity,
@@ -65,11 +65,11 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
   return (
     <DetailsSection title="Population Characteristics">
       <DetailsField title="Eligible Population:">
-        {eligiblePopulation.toLocaleString()}
+        {populationEligible.toLocaleString()}
       </DetailsField>
-      {respondingPopulation && (
+      {populationWithPositiveResponses && (
         <DetailsField title="Responding Population:">
-          {respondingPopulation.toLocaleString()}
+          {populationWithPositiveResponses.toLocaleString()}
         </DetailsField>
       )}
       {sampleRate && (
