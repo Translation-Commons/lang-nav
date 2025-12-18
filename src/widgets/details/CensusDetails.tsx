@@ -52,14 +52,15 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
 function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
   const {
     age,
-    populationEligible,
     geographicScope,
     languagesIncluded,
     notes,
+    populationEligible,
+    populationSurveyed,
     populationWithPositiveResponses,
+    quantity,
     responsesPerIndividual,
     sampleRate,
-    quantity,
   } = census;
 
   return (
@@ -72,11 +73,20 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
           {populationWithPositiveResponses.toLocaleString()}
         </DetailsField>
       )}
-      {sampleRate && (
+      {populationSurveyed && (
+        <DetailsField title="Surveyed Population:">
+          {populationSurveyed.toLocaleString()}
+        </DetailsField>
+      )}
+      {sampleRate ? (
         <DetailsField title="Sample rate:">
           {typeof sampleRate === 'number' ? (sampleRate * 100).toLocaleString() + '%' : sampleRate}
         </DetailsField>
-      )}
+      ) : populationSurveyed ? (
+        <DetailsField title="Sample rate:">
+          {((populationSurveyed / populationEligible) * 100).toLocaleString()}%
+        </DetailsField>
+      ) : null}
       {languagesIncluded && (
         <DetailsField title="Languages Included:">{languagesIncluded}</DetailsField>
       )}

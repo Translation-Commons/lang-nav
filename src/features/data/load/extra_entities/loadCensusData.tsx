@@ -75,6 +75,7 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
     populationEligible: 0,
     languageEstimates: {},
     collectorType: CensusCollectorType.Government,
+    url: '',
   }));
 
   // Iterate through the rest of the lines to collect metadata until we hit the break line
@@ -104,7 +105,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
         } else if (
           key === 'populationEligible' ||
           key === 'yearCollected' ||
-          key === 'populationWithPositiveResponses'
+          key === 'populationWithPositiveResponses' ||
+          key === 'populationSurveyed'
         ) {
           censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
         } else if (key === 'sampleRate') {
