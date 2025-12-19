@@ -100,7 +100,7 @@ More is better, but also if you don't have a value, leave it empty. For instance
     - If the number of responses is 1 then we can add up the data without worrying about double counting.
   - `sampleRate`: The sample rate of the data (e.g., "0.25" the data is interpolated from 25% of the population, "1" for the the data is not interpolated)
   - `populationSurveyed`: The total number of people surveyed for the census, it may be much lower than the populationEligible if the data is sampled.
-    - It should be equivalent to populationEligible * sampleRate
+    - It should be equivalent to populationEligible \* sampleRate
   - `populationWithPositiveResponses`: The total number of people who responded to the question about language (population - the number of people who did not respond to the question)
     - This is useful to compute the expected percentage of how many people speak the language in the country.
   - `populationSource`: An explanation for where the populationEligible estimate comes from if its not from the census itself (e.g., "United Nations World Population Prospects 2022")
