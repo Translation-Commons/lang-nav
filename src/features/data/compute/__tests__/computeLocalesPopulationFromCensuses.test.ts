@@ -155,6 +155,7 @@ describe('computeLocalePopulationFromCensuses', () => {
         collectorType: CensusCollectorType.Government,
         languageCount: 1,
         languageEstimates: { sjn: 50000 }, // Crazy high value
+        url: 'pretend this is a real URL',
       };
     }
     // The 2 mocks are identical in data but separate instances so we can compare the values
@@ -205,6 +206,7 @@ describe('computeLocalePopulationFromCensuses', () => {
         collectorType: CensusCollectorType.Government,
         languageCount: 1,
         languageEstimates: { sjn: 18000 },
+        url: 'pretend this is a real URL',
       };
     }
     function getSindarinInAMLocale(): LocaleData {
