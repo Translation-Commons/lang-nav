@@ -1,0 +1,34 @@
+#codeDisplay	en	#it	it2015foreign	it2006foreign	it2015mothertongue	it2015family	it2006family	it2000family	it1995family	it1988family	it2015strangers	it2006strangers	it2000strangers	it1995strangers	it1988strangers
+#nameDisplay			Italy 2015 Foreign Languages	Italy 2006 Foreign Languages	Italy 2015 Italian as Mothertongue	Italy 2015 with Family	Italy 2006 with Family	Italy 2000 with Family	Italy 1995 with Family	Italy 1988 with Family	Italy 2015 with Strangers	Italy 2006 with Strangers	Italy 2000 with Strangers	Italy 1995 with Strangers	Italy 1988 with Strangers
+#isoRegionCode	IT														
+#yearCollected			2015	2006	2015	2015	2006	2000	1995	1988	2015	2006	2000	1995	1988
+#datePublished	2017														
+#tableName	PROSPETTO 1. PERSONE DI 6 ANNI E PIÙ SECONDO IL LINGUAGGIO ABITUALMENTE USATO IN DIVERSI CONTESTI RELAZIONALI. 		PROSPETTO 4. PERSONE DI 6 ANNI E PIÙ PER LINGUA MADRE CONOSCIUTA, CONOSCENZA DI LINGUA STRANIERA, TIPO DI LINGUA CONOSCIUTA, SESSO E CLASSE D'ETÀ. 	PROSPETTO 5. PERSONE DI 6 ANNI E PIÙ PER LINGUA MADRE CONOSCIUTA, CONOSCENZA DI LINGUA STRANIERA, TIPO DI LINGUA CONOSCIUTA, SESSO E CLASSE D'ETÀ.	PROSPETTO 4. PERSONE DI 6 ANNI E PIÙ PER LINGUA MADRE CONOSCIUTA, CONOSCENZA DI LINGUA STRANIERA, TIPO DI LINGUA CONOSCIUTA, SESSO E CLASSE D'ETÀ. 										
+#columnName			Lingue straniere conosciute diverse da lingua madre		Lingua madre(a)										
+#url	https://www.istat.it/wp-content/uploads/2017/12/Report_Uso-italiano_dialetti_altrelingue_2015.pdf														
+#collectorName	ISTAT														
+#collectorType	Government														
+#dateAccessed	2025-11-29														
+#age	6+														
+#gender	Any														
+#modality			Understands	Understands	Understands	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses
+#acquisitionOrder			Any	Any	L1	Any	Any	Any	Any	Any	Any	Any	Any	Any	Any
+#domain						Family	Family	Family	Family	Family	Strangers	Strangers	Strangers	Strangers	Strangers
+#sampleRate	Sampled														
+#quantity	Percent														
+#responsesPerIndividual															
+#populationEligible			60795612	58064000	60795612	60795612	58064000	56924000	56844000	56609000	60795612	58064000	56924000	56844000	56609000											
+#populationSource	https://seriestoriche.istat.it/fileadmin/documenti/Tavola_2.1.xls																									
+#languagesIncluded			Foreign Languages	Foreign Languages	Italian or Other	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects
+Language Code		Language Name													
+ita	Italian	italiano	90.4		90.4										
+ita	#Primarily Italian as opposed to dialects	Solo o prevalentemente italiano	 			45.9	45.5	44.1	44.4	41.5	79.5	72.8	72.7	71.4	64.1
+ita/mul	#Italian and other Italian dialects	Sia italiano che dialetto				14.1	16.0	19.1	23.8	32.0	4.2	5.4	6.8	6.9	13.9
+mul	#Italian dialects	Solo o prevalentemente dialetto				32.2	32.5	32.9	28.3	24.9	12.9	19	18.6	18.5	20.3
+mul	Foreign Languages	lingua straniera	60.1	56.9		6.9	5.1	3.0	1.5	0.6	2.2	1.5	0.8	0.8	0.4
+eng	English	Inglese	48.1	43.6											
+fra	French	Francese	29.5	29.1											
+spa	Spanish	Spagnolo	11.1	6.5											
+deu	German	Tedesco	8.4	5.9											
+mul	Other languages		3.9	4.0											
+mul	Other mothertongue	Altro Lingua madre(a) 			9.1										

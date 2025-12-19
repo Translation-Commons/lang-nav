@@ -3,8 +3,8 @@
 #isoRegionCode	SK			
 #yearCollected		2001	2011	2021
 #datePublished		2009	2013	2023
-#eligiblePopulation		5,379,455	5,397,036	5,449,270
-#respondingPopulation		5,313,399	4,991,775	5,136,906
+#populationEligible		5,379,455	5,397,036	5,449,270
+#populationWithPositiveResponses		5,313,399	4,991,775	5,136,906
 #notes	Census - de jure - complete tabulation			
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			

@@ -3,8 +3,8 @@
 #isoRegionCode		UA
 #yearCollected		2001
 #datePublished		2003
-#eligiblePopulation		48,240,902
-#respondingPopulation		48,039,465
+#populationEligible		48,240,902
+#populationWithPositiveResponses		48,039,465
 #notes		Census - de facto - complete tabulation
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	

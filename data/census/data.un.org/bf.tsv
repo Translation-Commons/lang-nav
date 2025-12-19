@@ -3,8 +3,8 @@
 #isoRegionCode		BF
 #yearCollected		2006
 #datePublished		2009
-#eligiblePopulation		14,017,262
-#respondingPopulation		12,606,887
+#populationEligible		14,017,262
+#populationWithPositiveResponses		12,606,887
 #notes		Census - de jure - complete tabulation
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	

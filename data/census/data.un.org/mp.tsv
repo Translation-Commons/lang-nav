@@ -3,8 +3,8 @@
 #isoRegionCode		MP
 #yearCollected		2000
 #datePublished		2005
-#eligiblePopulation		63,429
-#respondingPopulation		63,429
+#populationEligible		63,429
+#populationWithPositiveResponses		63,429
 #notes		Census - de facto - complete tabulation
 #age		5+
 #responsesPerIndividual		1

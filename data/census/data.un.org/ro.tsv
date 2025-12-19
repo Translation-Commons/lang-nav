@@ -3,8 +3,8 @@
 #isoRegionCode	RO			
 #yearCollected		2002	2011	2021
 #datePublished		2003	2014	2023
-#eligiblePopulation		21,680,974	20,121,641	19,053,815
-#respondingPopulation		21,678,844	18,891,613	16,551,437
+#populationEligible		21,680,974	20,121,641	19,053,815
+#populationWithPositiveResponses		21,678,844	18,891,613	16,551,437
 #notes		Census - de jure - complete tabulation	Data refer to usual resident population. Census - de facto - complete tabulation	Census - de jure - complete tabulation
 #modality		Spoken		
 #domain		Home		

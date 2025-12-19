@@ -1,0 +1,55 @@
+#codeDisplay		ci2024
+#nameDisplay		Côte d’Ivoire Afrobarometer 2024
+#isoRegionCode		CI
+#yearCollected		2024
+#modality		Spoken
+#domain		Home
+#populationEligible		29,389,150
+#populationSource		https://rp2021.anstat.ci/publication/
+#populationSurveyed		1,200
+#geographicScope		whole country
+#age		18+
+#nationality		citizens
+#quantity		percent
+#responsesPerIndividual		1+
+#collectorType		NGO
+#collectorName		Afrobarometer
+#url		https://www.afrobarometer.org/survey-resource/cote-divoire-round-10-data-2024/
+#datePublished		2025-03-28
+#columnName		Q2
+#notes		Survey question: Which language do you speak at home?
+Language Code	Language	Population
+fra	French	33.67
+aba	#Abbey	0.58
+abi	Abidji	0.83
+adj	Adjoukrou	0.42
+abr	Abron	0.75
+any	Agny	3.17
+	Andoh	0.17
+nzi	Appolo	0.08
+ati	Attie	2.08
+bjw	Bakwe	0.17
+bam	Bambara	0.50
+bci	Baoule	15.33
+bete1265	Bete	1.33
+dida1245	Dida	0.67
+dyu	Dioula	10.92
+dyi/diam1238	Djamala	0.33
+dyi	Djimini	0.83
+ebr	Ebrie	0.17
+goa	Gouro	2.00
+guer1240	Guere	18.00
+hau	Haoussa	0.08
+kga	Koyaka	0.83
+kula1277	Koulango	2.17
+lob	Lobi	1.58
+mxx	Mahouka/Mahou	0.17
+mani1303	Malinke/Maninka	7.67
+nfr	Nafana	0.17
+	N'gokala	0.08
+	Ngokala	0.08
+jod	Odienneka	0.08
+senu1239	Seneoufo	6.92
+tgw	Tagbana	0.42
+wob	Wobe	0.58
+dnj	Yacouba	3.33
