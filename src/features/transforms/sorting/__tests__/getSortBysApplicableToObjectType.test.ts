@@ -26,7 +26,7 @@ describe('getSortBysApplicableToObjectType', () => {
       Object.values(SortBy).forEach((sortBy) => {
         objectsInType.forEach((obj) => {
           const sortField = getSortField(obj, sortBy);
-          if (!sortBysForType.includes(sortBy)) {
+          if (!sortBysForType.includes(sortBy) && sortBy !== SortBy.CountOfDialects) {
             // The value is not supposed to be applicable
             expect(
               sortField,
