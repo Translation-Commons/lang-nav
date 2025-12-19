@@ -16,7 +16,7 @@
 #acquisitionOrder	L1							
 #domain	Home							
 #responsesPerIndividual	1+							
-#eligiblePopulation		262,375,152	280,564,877	291,484,482	310,300,000	310,300,000	310,300,000	310,300,000
+#populationEligible		262,375,152	280,564,877	291,484,482	310,300,000	310,300,000	310,300,000	310,300,000
 #notes								
 Language Code	Language Name from Source		US ASC 2008	US ASC 2013	US ASC 2021	US ASC 2021 Margin of error	US ASC 2021 Speaks English less than "Very well"	US ASC 2021 Speaks English less than "Very well" margin of error
 mul	Population 5 years and over	262,375,152	280,564,877	291,484,482	310,300,000	4,330	25,540,000	112,900

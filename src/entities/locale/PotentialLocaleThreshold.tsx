@@ -15,16 +15,12 @@ export function usePotentialLocaleThreshold(): {
 
   const percentThresholdSelector = (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonGroup}>
-      <div
-        className="selector"
-        style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}
-      >
+      <div style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}>
         <SelectorLabel
           label="Percent Threshold:"
-          description={`Limit results by the minimum percent population in a territory that uses the language.`}
+          description="Limit results by the minimum percent population in a territory that uses the language."
         />
         <TextInput
-          inputStyle={{ width: '3em', borderRadius: '1em 0 0 1em' }}
           getSuggestions={async () => [
             { searchString: '0.001', label: '0.001%' },
             { searchString: '0.005', label: '0.005%' },

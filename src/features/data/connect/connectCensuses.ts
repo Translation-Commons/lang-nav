@@ -80,7 +80,8 @@ function addCensusRecordsToLocales(
         census,
         populationEstimate,
         populationPercent:
-          (populationEstimate * 100.0) / (census.respondingPopulation || census.eligiblePopulation),
+          (populationEstimate * 100.0) /
+          (census.populationWithPositiveResponses || census.populationEligible),
       });
     } else {
       // TODO: show warning in the "Reports" tool

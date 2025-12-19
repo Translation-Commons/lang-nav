@@ -19,13 +19,9 @@ export interface CensusData extends ObjectBase {
   type: ObjectType.Census;
   ID: CensusID;
   codeDisplay: CensusID;
-
-  // Required metadata
-  eligiblePopulation: number; // The total number of qualified individuals
   nameDisplay: string;
   isoRegionCode: TerritoryCode;
   yearCollected: number; // eg. 2021, 2013
-  collectorType: CensusCollectorType; // Type of organization (e.g., Government, CLDR)
 
   // Kind of language data collected
   modality?: LanguageModality; // eg. Spoken, Written, Sign
@@ -33,25 +29,32 @@ export interface CensusData extends ObjectBase {
   acquisitionOrder?: string; // eg. Any, L1, L2, L3
   domain?: string; // eg. Any, Home, School, Work, Community, Unspecified
 
-  // Data limitations
+  // Population
+  populationEligible: number; // The total number of qualified individuals
+  populationSurveyed?: number; // The number of individuals surveyed (if different from eligible)
+  populationWithPositiveResponses?: number; // The number of individuals who gave a response about their language
+  sampleRate?: number | string; // eg. .1, .25, 1 (for 10%, 25%, 100%)
+  responsesPerIndividual?: string; // eg. 1, 1+, 2+
+
+  // Data constraints
   languagesIncluded?: string; // eg. All, Indigenous, Official
   geographicScope?: string; // eg. Whole Country, Mainland, Territories
   age?: string; // eg. 0+, 4+,
   gender?: string; // Any, Male, Female
   nationality?: string; // eg. Citizens, Residents, Visitors
   residentLocation?: string; // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
-  sampleRate?: number; // eg. .1, .25, 1 (for 10%, 25%, 100%)
-  respondingPopulation?: number; // The number of individuals who gave a response about their language
-  responsesPerIndividual?: string; // eg. 1, 1+, 2+
   quantity?: 'count' | 'percent'; // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
   notes?: string; // Any additional notes about the census
 
-  // Source
-  url?: string; // Most important to have, so people can find the original data
-  datePublished?: Date;
-  dateAccessed?: Date;
+  // Author
+  collectorType: CensusCollectorType; // Type of organization (e.g., Government, CLDR)
   collectorName?: string; // Name of the organization or journal presenting the data
   author?: string; // Name of the individual author(s) if applicable
+
+  // Source
+  url: string; // Most important to have, so people can find the original data
+  datePublished?: Date;
+  dateAccessed?: Date;
   tableName?: string;
   columnName?: string;
   citation?: string; // The full citation, may be redundant if other fields are filled in

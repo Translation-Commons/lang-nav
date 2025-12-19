@@ -52,29 +52,41 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
 function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
   const {
     age,
-    eligiblePopulation,
     geographicScope,
     languagesIncluded,
     notes,
-    respondingPopulation,
+    populationEligible,
+    populationSurveyed,
+    populationWithPositiveResponses,
+    quantity,
     responsesPerIndividual,
     sampleRate,
-    quantity,
   } = census;
 
   return (
     <DetailsSection title="Population Characteristics">
       <DetailsField title="Eligible Population:">
-        {eligiblePopulation.toLocaleString()}
+        {populationEligible.toLocaleString()}
       </DetailsField>
-      {respondingPopulation && (
+      {populationWithPositiveResponses && (
         <DetailsField title="Responding Population:">
-          {respondingPopulation.toLocaleString()}
+          {populationWithPositiveResponses.toLocaleString()}
         </DetailsField>
       )}
-      {sampleRate && (
-        <DetailsField title="Sample rate:">{(sampleRate * 100).toLocaleString()}%</DetailsField>
+      {populationSurveyed && (
+        <DetailsField title="Surveyed Population:">
+          {populationSurveyed.toLocaleString()}
+        </DetailsField>
       )}
+      {sampleRate ? (
+        <DetailsField title="Sample rate:">
+          {typeof sampleRate === 'number' ? (sampleRate * 100).toLocaleString() + '%' : sampleRate}
+        </DetailsField>
+      ) : populationSurveyed ? (
+        <DetailsField title="Sample rate:">
+          {((populationSurveyed / populationEligible) * 100).toLocaleString()}%
+        </DetailsField>
+      ) : null}
       {languagesIncluded && (
         <DetailsField title="Languages Included:">{languagesIncluded}</DetailsField>
       )}

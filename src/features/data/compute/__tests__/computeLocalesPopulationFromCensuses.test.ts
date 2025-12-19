@@ -148,13 +148,14 @@ describe('computeLocalePopulationFromCensuses', () => {
         ID: 'be9999',
         codeDisplay: 'be9999',
         isoRegionCode: 'BE',
-        eligiblePopulation: 50000, // BE's recorded population is 12000 but this census claims 50000 people
+        populationEligible: 50000, // BE's recorded population is 12000 but this census claims 50000 people
         nameDisplay: 'Census BE 9999',
         names: [],
         yearCollected: 9999,
         collectorType: CensusCollectorType.Government,
         languageCount: 1,
         languageEstimates: { sjn: 50000 }, // Crazy high value
+        url: 'pretend this is a real URL',
       };
     }
     // The 2 mocks are identical in data but separate instances so we can compare the values
@@ -198,13 +199,14 @@ describe('computeLocalePopulationFromCensuses', () => {
         ID: 'am0590',
         codeDisplay: 'am0590',
         isoRegionCode: 'AM',
-        eligiblePopulation: 20000,
+        populationEligible: 20000,
         nameDisplay: 'The Undying Lands 0590 Census',
         names: [],
         yearCollected: 1990,
         collectorType: CensusCollectorType.Government,
         languageCount: 1,
         languageEstimates: { sjn: 18000 },
+        url: 'pretend this is a real URL',
       };
     }
     function getSindarinInAMLocale(): LocaleData {
