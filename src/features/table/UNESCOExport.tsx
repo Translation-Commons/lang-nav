@@ -42,14 +42,13 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
   if (locale.populationCensus?.url) popSource += ' ' + locale.populationCensus?.url;
 
   return [
-    locale.populationSpeaking, // Used for sorting only
     'WAL-' + lang.ID,
     locale.territoryCode,
 
     //// Language Information - STEP 1
     // 1. language_names
-    lang.nameEndonym ?? lang.nameDisplay,
     lang.nameDisplay,
+    lang.nameEndonym ?? lang.nameDisplay,
     '' /* alt names */,
 
     // 2. language_codes
