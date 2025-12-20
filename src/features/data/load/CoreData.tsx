@@ -1,13 +1,12 @@
 import { useState } from 'react';
 
 import {
-  loadIANAVariants,
   addIANAVariantLocales,
-  connectVariantTags,
+  loadIANAVariants,
 } from '@features/data/load/extra_entities/IANAData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { CensusID, CensusData } from '@entities/census/CensusTypes';
+import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
@@ -17,13 +16,8 @@ import {
   WritingSystemData,
 } from '@entities/types/DataTypes';
 
-import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
+import { connectObjectsAndCreateDerivedData } from '../compute/connectObjects';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
-import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
-import connectLocales from '../connect/connectLocales';
-import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
-import { connectWritingSystems } from '../connect/connectWritingSystems';
-import { createRegionalLocales } from '../connect/createRegionalLocales';
 
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
@@ -131,13 +125,13 @@ export function useCoreData(): {
     addCLDRLanguageDetails(languagesBySource);
     addIANAVariantLocales(languagesBySource.BCP, locales, variantTags);
 
-    connectLanguagesToParent(languagesBySource);
-    connectTerritoriesToParent(territories);
-    connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
-    connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
-    connectVariantTags(variantTags, languagesBySource.BCP, locales);
-    createRegionalLocales(territories, locales); // create them after connecting them
-    computeDescendantPopulation(languagesBySource, writingSystems);
+    connectObjectsAndCreateDerivedData(
+      languagesBySource,
+      territories,
+      writingSystems,
+      locales,
+      variantTags,
+    );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));

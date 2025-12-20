@@ -23,6 +23,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
+import LocaleRelatedLocalesColumns from './columns/LocaleRelatedLocalesColumns';
 
 const LocaleTable: React.FC = () => {
   const { locales } = useDataContext();
@@ -112,20 +113,7 @@ const LocaleTable: React.FC = () => {
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
         },
-        {
-          key: 'Contains Locales',
-          render: (loc) => (
-            <CommaSeparated limit={2}>
-              {loc.containedLocales?.map((child) => (
-                <HoverableObjectName object={child} key={child.ID} />
-              ))}
-            </CommaSeparated>
-          ),
-          isInitiallyVisible: false,
-          valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfLanguages,
-          columnGroup: 'Linked Data',
-        },
+        ...LocaleRelatedLocalesColumns,
         {
           key: 'Macrolanguage',
           render: (loc) =>

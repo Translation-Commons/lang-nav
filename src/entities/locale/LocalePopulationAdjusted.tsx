@@ -52,7 +52,7 @@ const RegionalLocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ l
           populations of all constituent territories:
         </td>
       </tr>
-      {locale.containedLocales
+      {locale.relatedLocales?.childTerritories
         ?.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
         .slice(0, 5)
         .map((childLocale) => (
