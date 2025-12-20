@@ -105,10 +105,12 @@ function CensusSourceSection({ census }: { census: CensusData }) {
   const {
     citation,
     collectorName,
+    collectorNameShort,
     collectorType,
     columnName,
     dateAccessed,
     datePublished,
+    documentName,
     tableName,
     url,
   } = census;
@@ -117,7 +119,9 @@ function CensusSourceSection({ census }: { census: CensusData }) {
     <DetailsSection title="Source">
       <DetailsField title="Collected by:">
         {collectorName == null ? collectorType : `${collectorName} (${collectorType})`}
+        {collectorNameShort && ` aka ${collectorNameShort}`}
       </DetailsField>
+      {documentName && <DetailsField title="Document Name:">{documentName}</DetailsField>}
       {tableName && <DetailsField title="Table Name:">{tableName}</DetailsField>}
       {columnName && <DetailsField title="Column Name:">{columnName}</DetailsField>}
       {citation && <DetailsField title="Citation:">{citation}</DetailsField>}

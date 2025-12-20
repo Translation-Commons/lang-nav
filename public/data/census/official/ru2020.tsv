@@ -1,0 +1,395 @@
+#codeDisplay		#lang:ru	ru2020speaks	ru2020uses	ru2020native
+#nameDisplay			Russia 2020 Spoken	Russia 2020 Uses	Russia 2020 Native Language
+#isoRegionCode	RU				
+#yearCollected	2020				
+#modality			Spoken	Uses	
+#acquisitionOrder			Any	Any	L1
+#populationEligible	147,182,123				
+#populationWithPositiveResponses			135,125,671	134,623,178	130,543,591
+#collectorType	Government				
+#collectorName	Federal State Statistics Service	Федеральная служба государственной статистики			
+#collectorNameShort	Rosstat	Росстат			
+#url	https://web.archive.org/web/20230213225905/http://rosstat.gov.ru/vpn_popul				
+#dateAccessed	2023-02-13				
+#documentName	Volume 5. National composition and language proficiency	Том 5. Национальный состав и владение языками 			
+#tableName			Таблица 5. Владение языками населением наиболее многочисленных национальностей Table 5. Language proficiency by the population of the most numerous nationalities	Table 4. Language proficiency and use of languages ​​by the population	Таблица 6. Население по родному языку Table 6. Population by native language
+#columnName			Все население The entire population	of them use it in everyday life	Городское и сельское население: Urban and Rural population
+Language Code	Language		Russia 2020 Spoken	Russia 2020 Uses	Russia 2020 Native Language
+mul	Language Proficiency Reported	Указавшие владение языком	135125671		
+mul	Languages ​​of Proficiency Reported by Population	Указанные населением языки владения	156681236		
+abq	Abaza	Абазинский	30194	28,576	40,154
+abk	Abkhazian	Абхазский	4255	2,567	5,506
+ava	Avar	Аварский	654363	620,943	907,966
+ave	Avestan	Авестийский	4	3	
+#map	Austronesian	Австронезийский	3	1	
+agx	Agul	Агульский	20563	19,513	33,182
+ady	Adyghe	Адыгейский	81294	75,793	114,425
+kbd	Kabardian	Адыгский	4857	4,311	6,923
+aze/azj	Azerbaijani	Азербайджанский	291484	227,307	393,446
+mul	Asian	Азиатский	55	20	
+aym	Aymara	Аймара	1	1	
+ain	Ainu	Айнский	168	130	
+aka	Akan	Акан	5	3	
+sia	Akkala	Аккала	1	0	
+nog/alab1256	Alabugat-Tatar	Алабугатско-татарский	2	1	
+sqi	Albanian	Албанский	380	197	147
+ale	Aleut	Алеутский	123	99	136
+alt	Altai	Алтайский	62572	58,426	68,700
+alr	Alyutor	Алюторский	172	162	168
+amh	Amharic	Амхарский	161	90	145
+anp	Angika	Ангика	4	2	
+eng	English	Английский	5066515	1,600,971	7,829
+kmb	Angolan	Ангольский	80	34	
+ani	Andi	Андийский	18133	17,286	21,150
+ara	Arabic	Арабский	46028	17,098	15,257
+hye	Armenian	Армянский	508127	397,440	675,048
+aqc	Archi	Арчинский	1435	1,423	1,712
+asm	Assamese	Ассамский	8	6	
+syr/aii	Assyrian	Ассирийский	1922	1,397	2,395
+afr	Afrikaans	Африкаанс	121	81	
+akv	Akhvakh	Ахвахский	5019	4,730	7,521
+aka/twi/asan1239	Ashanti	Ашанти	1	0	
+kva	Bagvalal	Багвалинский	2527	2,420	2,297
+bca	Bai	Бай	3	0	
+ban	Balinese	Балийский	3	1	
+mul	Balkan	Балканский	22	14	
+bam	Bamana	Бамана	12	6	
+#bnt	Bantu	Банту	17	7	
+eus	Basque	Баскский	8	7	
+bci	Baoulé	Бауле	4	1	
+bak	Bashkir	Башкирский	1086423	941,377	1,319,650
+kap	Bezhta	Бежтинский	6497	5,978	8,138
+bel	Belarusian	Белорусский	60824	20,567	45,153
+bal	Baluchi	Белуджский	6	1	
+vls	Belgian	Бельгийский	73	37	
+bem	Bemba	Бемба	23	15	
+ben	Bengali	Бенгали	282	158	260
+fon	Benin	Бенинский	5	5	
+ber	Berber	Берберский	20	13	
+byf	Bete	Бете	1	1	
+mya	Burmese	Бирманский	29	12	10
+bis	Bislama	Бислама	2	1	
+bul	Bulgarian	Болгарский	8842	3,582	4,282
+mul	Bolivian	Боливийский	11	6	
+bph	Botlikh	Ботлихский	5244	5,115	5,073
+bre	Breton	Бретонский	4	3	
+bdk	Budukh	Будухский	2	0	
+xbo	Bolgarian	Булгарский	97	77	157
+mos	Burkinabe	Буркинабский	4	2	
+bua	Buryat	Бурятский	306857	285,778	392,979
+bho	Bhojpuri	Бходжпури	2	1	
+che	Vainakh	Вайнахский	32	26	
+cym	Welsh	Валлийский	41	12	
+wbl	Wakhan	Ваханский	18	13	
+hun	Hungarian	Венгерский	2469	872	803
+vep	Veps	Вепсский	2173	1,444	1,276
+vot	Vodsky / Votic	Водский	39	31	21
+wol	Wolof	Волоф	5	2	
+vie	Vietnamese	Вьетнамский	5561	4,671	7,316
+fan	Gabonese	Габонский			2
+haw	Hawaiian	Гавайский	18	11	
+gag	Gagauz	Гагаузский	3885	2,205	4,966
+hat	Haitian	Гаитянский	23	18	
+hns	Guyanese Creole	Гайанский креольский	2	1	
+mnk	Gambian	Гамбийский	1	1	
+aka	Ghanaian	Ганский	2	2	
+myn	Guatemalan	Гватемальский	4	1	
+mul	Guinean	Гвинейский	9	7	
+mul	Himalayan	Гималайский	1	1	
+gin	Hinukh	Гинухский	638	617	635
+gdo	Ghodoberi	Годоберинский	2731	2,662	3,021
+mrj	Hill Mari	Горномарийский	15352	14882	18,332
+ell	Greek	Греческий	17655	10,918	15,386
+kat	Georgian	Грузинский	81009	47,595	76,116
+guj	Gujarati	Гуджаратский	15	9	
+huz	Hunzib	Гунзибский	3046	2,975	3,466
+mul	Dagestan	Дагестанский	19235		34,244
+dar	Dargin	Даргинский	362156	346,337	587,391
+prs	Dari	Дари	501	261	364
+dan	Danish	Датский	559	166	65
+dta	Daurian	Даурский	3	1	
+dyu	Dioula	Диула	4	2	
+dlg	Dolgan	Долганский	4836	3,757	5,346
+luo	Doluo	Долуо	1	1	
+#gem	Proto-Germanic	Древнегерманский	124	45	
+grc	Ancient Greek	Древнегреческий	328	74	
+hbo	Ancient Hebrew	Древнееврейский	18	3	
+egy	Ancient Egyptian	Древнеегипетский	16	7	
+#ira	Proto-Iranian	Древнеиранский	5	4	
+orv	Old Russian	Древнерусский	154	36	
+non	Old Norse	Древнескандинавский	2	2	
+dng	Dungan	Дунганский	2300	2,002	2,651
+heb	Jewish	Еврейский	2177	1,452	3,675
+mul	European	Европейский	14	7	
+zul	Zulu	Зулу	20	11	
+ibb	Ibibio	Ибибио	3	0	
+ibo	Igbo	Ибо	8	5	
+heb	Hebrew	Иврит	10569	4,608	3,829
+yid	Yiddish	Идиш	1146	621	540
+ido	Ido	Идо	1	1	
+izh	Izhora / Ingrian	Ижорский	70	46	76
+inh	Ingush	Ингушский	333151	326,635	507,087
+mul	Indian	Индейский	34	18	
+msa/ind	Indonesian	Индонезийский	321	124	102
+ina	Interlingua	Интерлингва	3	3	
+iku	Inuit	Инуитский	3	3	
+gle	Irish	Ирландский	91	31	25
+isl	Icelandic	Исландский	75	20	6
+spa	Spanish	Испанский	76010	19,688	2,820
+ita	Italian	Итальянский	37135	10,893	1,105
+itl	Itelmen	Ительменский	532	395	808
+yor	Yoruba	Йоруба	23	9	
+kbd	Kabardino-Circassian	Кабардино-черкесский	450276	435,901	609,383
+kea	Kabuverdianu	Кабовердийский	2	2	
+kaz	Kazakh	Казахский	265703	188,479	400,665
+xal	Kalmyk	Калмыцкий	107742	100,826	166,726
+wes	Cameroonian	Камерунский	14	11	
+mul	Canadian	Канадский	18	11	
+kan	Kannada	Каннада	55	45	
+yue	Cantonese	Кантонский	15	6	
+kau	Kanuri	Канури	1	0	
+kdr	Karaim	Караимский	45	30	37
+kaa	Kara-Kalpak	Каракалпакский	366	180	405
+kpt	Karata	Каратинский	10303	9,945	9,549
+krc	Karachay-Balkar	Карачаево-балкарский	274038	256,075	343,372
+krl	Karelian	Карельский	13872	8,688	8,753
+car	Carib	Карибский	2	2	
+kas	Kashmiri	Кашмири	12	7	
+#cel	Celtic	Кельтский	13	6	
+krk	Kerek	Керекский	4	0	4
+ket	Ket	Кетский	61	33	153
+que	Quechua	Кечуа	8	3	
+kik	Kikuyu	Кикуйю	1	0	
+kir	Kyrgyz	Киргизский	85655	65,406	115,781
+che	Kistin	Кистинский	50	45	
+zho	Chinese	Китайский	59249	24,711	17,556
+ktu	Kituba	Китуба	2	1	
+quc	Kiche	Киче	1	0	
+kom	Komi	Коми	108958	91,595	99,609
+koi	Komi-Permyak	Коми-пермяцкий	41447	35,715	40,293
+swc	Congolese	Конголезский	19	13	
+kok	Konkani	Конкани	5	3	
+cop	Coptic	Коптский	3	2	
+kor	Korean	Корейский	26662	12,673	17,631
+kpy	Koryak	Корякский	2633	2,101	4,164
+kpe	Kpelle	Кпелле	1	1	
+#crp	Creole	Креоль	9		
+#crp	Creole	Креольский	24	14	
+rop	Kriol	Криольский	6	5	
+kry	Kryts	Крызский	1	1	
+crh	Crimean Tatar	Крымскотатарский	149827	133,952	207,771
+jct	Krymchak	Крымчакский	5	3	
+atv	Kumandin	Кумандинский	476	330	654
+kum	Kumyk	Кумыкский	400746	385,229	523,734
+kur	Kurdish	Курдский	31703	27,157	43,142
+ogo	Khana	Кхана	1	0	
+khm	Khmer	Кхмерский	216	141	
+#kipc1239	Kypchak	Кыпчакский	3	1	
+lzz	Laz	Лазский	10	9	
+lbe	Lak	Лакский	87957	84,301	144,532
+mul	Sri Lankan	Ланкийский	8		
+lao	Laotian	Лаосский	416	362	
+lat	Latin	Латинский	17888	5,424	159
+lav	Latvian	Латышский	8565	2,648	3,210
+lez	Lezgin	Лезгинский	287878	272,996	413,044
+liv	Liv	Ливский	4	0	
+lin	Lingala	Лингала	51	35	
+lit	Lithuanian	Литовский	10733	3,843	5,056
+mul	Liturgical	Литургический	9	5	
+jbo	Lojban	Ложбан	3	0	
+loz	Lozi	Лози	1	0	
+lug	Luganda	Луганда	7	5	
+mhr	Meadow-Eastern Mari	Лугово-восточный марийский	229	147	225
+lun	Lunda	Лунда	1	1	
+ltz	Luxembourgish	Люксембургский	9	5	
+myn/yua	Maya	Майя	16	10	
+mkd	Macedonian	Македонский	260	112	138
+mlg	Malagasy	Малагасийский	15	9	
+msa/zlm/zsm	Malay	Малайский	101	46	36
+mal	Malayalam	Малаялам	158	133	
+gcc	Mali	Малийский	30	19	
+mnk	Malinke	Малинке	4	3	
+div	Dhivehi	Мальдивский	5	2	
+mlt	Maltese	Мальтийский	20	10	
+mni	Manipuri	Манипури	2	2	
+mns	Mansi	Мансийский	1346	1,008	2,229
+mnc	Manchu	Маньчжурский	4	1	
+mri	Maori	Маори	23	9	
+mar	Marathi	Маратхи	89	71	
+chm	Mari	Марийский	258722	228,678	318,495
+mas	Masai	Масаи	1	0	
+mfe	Mascarene	Маскаренский	3	2	
+kmb	Kimbundu	Мбунду	2	1	
+xmf	Mingrelian	Мегрельский	584	330	314
+mul	Mozambican	Мозамбикский	3	3	
+mord1256/mdf	Moksha-Mordvin	Мокша-мордовский	19911	18,047	23,178
+ron/mol	Moldavian	Молдавский	46500	21,742	45,233
+mon	Mongolian	Монгольский	4502	1,820	1,039
+lij	Monegasque	Монегаскский	1	1	
+mos	Moore	Мооре	2	2	
+mord1256	Mordvin	Мордовский	220090	182,458	274,876
+kuki1245	Naga	Нага	2	0	
+naq	Khoekhoe	Нама	16	14	
+gld	Nanai	Нанайский	3180	2,543	6,648
+mul	Northern Peoples	Народов Севера	2	2	
+nio	Nganasan	Нганасанский	300	264	416
+nde	Ndebele	Ндебеле	5	2	
+neg	Negidal	Негидальский	22	14	29
+deu	German	Немецкий	1063037	218,166	25,514
+yrk	Nenets	Ненецкий	24487	22,714	38,405
+nep	Nepali	Непали	64	28	
+nia	Nias	Ниасский	7	7	
+niv	Nivkh	Нивхский	708	263	1,277
+mul	Nigerian	Нигерийский	39	20	
+nld	Dutch	Нидерландский	1246	481	109
+nog	Nogai	Ногайский	85640	78,173	104,258
+nog/kara1509	Nogai-Karagash	Ногайско-карагашский	146	100	159
+nor	Norwegian	Норвежский	2063	567	67
+nya	Nyanja	Ньянджа	9	6	
+orm	Oromo	Оромо	3	1	
+oac	Orochi	Орочский	43	28	119
+oss	Ossetian	Осетинский	344907	332,068	456,564
+ota	Ottoman	Османский	6	3	
+mul	Pakistani	Пакистанский	106	66	
+sgh	Pamir	Памирский	432	292	
+lah/pan	Punjabi	Панджаби	45	23	
+fas	Persian	Персидский	6011	2,685	3,399
+#poz	Polynesian	Полинезийский	5	4	
+qwm	Polovtsian	Половецкий	8	6	
+pol	Polish	Польский	22557	5,592	3,224
+por	Portuguese	Португальский	5197	1,756	804
+#bat	Baltic	Прибалтийский	16	8	
+sgn	Other sign languages	Прочие жестовые языки	33	18	
+pus	Pashto	Пушту	2328	1,417	2,212
+raj	Rajasthani	Раджастхани	3	3	
+roh	Rhaeto-Romance	Ретороманский	3	2	
+#roa	Romance	Романский	2	1	
+kin	Kinyarwanda	Руанда	42	31	
+ron	Romanian	Румынский	7901	2,587	4,108
+rue	Rusyn	Русинский	227	127	826
+rus	Russian	Русский	134319233	132,317,159	111,546,569
+sgn/rsl	Russian Sign Language deaf	Русский жестовый язык глухих	239930	157354	1,403
+rut	Rutul	Рутульский	13591	12,366	33,104
+sgh/rush1239	Rushan	Рушанский	23	13	
+sme	Sami	Саамский	259	168	341
+slr	Salar	Саларский	1	1	
+smo	Samoan	Самоанский	3	2	
+sag	Sango	Санго	11	11	
+san	Sanskrit	Санскрит	147	68	
+sva	Svan	Сванский	32	15	
+ssw	Swati	Свати	26	20	
+sel	Selkup	Селькупский	975	770	1,589
+wol	Senegalese	Сенегальский	13	10	
+hbs/srp	Serbo-Croatian	Сербскохорватский	5708	2,399	1,896
+sot	Sesotho	Сесото	3	1	
+tsn	Setswana	Сетсвана	9	5	
+lad	Sephardic	Сефардский	3	3	
+sin	Sinhalese	Сингальский	162	110	
+mul	Singaporean	Сингапурский	4	3	
+snd	Sindhi	Синдхи	1	0	
+ysr	Sirenik	Сиреникский	2	1	
+mul	Scandinavian	Скандинавский	15	6	
+slk	Slovak	Словацкий	652	208	108
+slv	Slovenian	Словенский	443	216	331
+art/art-slovio	Slovio	Словио	1	0	
+mul	Mixed	Смешанный	658	318	
+mul	Soviet	Советский	17	16	
+som	Somali	Сомали	40	30	
+mul	Central Asian	Среднеазиатский	13	5	
+chu	Old Church Slavonic	Старославянский	1352	659	71
+mul	CIS countries	Стран СНГ	13	4	
+swa	Swahili	Суахили	499	269	265
+sus	Susu	Сусу	8	6	
+kri	Sierra Leonean	Сьерра-леонский	1	0	
+tab	Tabasaran	Табасаранский	87214	82,069	143,578
+tgl	Tagalog	Тагальский	89	54	
+tgk	Tajik	Таджикский	216450	171,720	302,622
+tha	Thai	Тайский	594	230	159
+mul_Brai	Tactile letter	Тактильное письмо	108	68	
+tly	Talysh	Талышский	2888	2,048	2,644
+tam	Tamil	Тамильский	128	87	154
+tat	Tatar	Татарский	3261155	2,917,685	4,073,253
+ttt	Tat	Татский	3215	2,950	720
+alt/tele1257	Teleut	Телеутский	1246	1,113	1,570
+tel	Telugu	Телугу	37	25	
+tat/tept1239	Teptyar	Тептярский	44	39	
+bod	Tibetan	Тибетский	232	91	34
+tig	Tigre	Тигре	1	1	
+tir	Tigrinya	Тигринья	3	2	
+tin	Tindi	Тиндальский	4730	4,677	4,457
+ewe	Togolese	Тоголезский	5	1	
+tok	Toki Pona	Токипона	6	2	
+tpi	Tok Pisin	Токписин	10	5	
+kim	Tofalar / Karagas	Тофаларский	8	1	67
+atv/tuba1280	Tubalar	Тубаларский	527	344	930
+tyv	Tuvan	Тувинский	252953	247,875	294,020
+tur	Turkish	Турецкий	132147	96,272	115,838
+tuk	Turkmen	Туркменский	27037	20,967	35,584
+tou	Tho	Тхо	1	0	
+#trk	Turks	Тюрки	14	7	
+#trk	Turkic	Тюркский	1513	759	946
+udi	Udin	Удинский	1320	1,002	1,860
+udm	Udmurt	Удмуртский	255877	222,786	271,882
+ude	Udege	Удэгейский	193	138	674
+uzb	Uzbek	Узбекский	228962	156,146	269,303
+uig	Uyghur	Уйгурский	468	251	727
+oaa	Uilta / Orok	Уйльта	89	74	116
+ukr	Ukrainian	Украинский	627106	208,854	294,952
+ulc	Ulch	Ульчский	506	320	835
+urd	Urdu	Урду	321	156	154
+fat	Fanti	Фанти	4	1	
+fao	Faroese	Фарерский	4	1	
+#fiu	Finno-Ugric	Финно-угорский	48	28	
+fin	Finnish	Финский	14075	4,675	1,050
+fon	Fon	Фон	2	2	
+fra	French	Французский	235199	47,348	3,591
+fry	Frisian	Фризский	3	1	
+ful	Fulah	Фула	9	3	
+kjh	Khakas	Хакасский	29010	24,971	46,726
+hni	Hani	Хани	1	0	
+kca	Khanty	Хантыйский	9230	7,659	13,900
+hau	Hausa	Хауса	25	13	
+khv	Khvarshi	Хваршинский	2216	2,195	3,296
+hit	Hittite	Хеттский	2	1	
+kjj	Khinalugh	Хиналугский	8	4	
+hin	Hindi	Хинди	5298	3,784	5,325
+tkr	Tsahkur	Цахурский	6340	5,929	11,412
+ddo	Tsez / Dido	Цезский	14249	13740	17,574
+rom	Chamalin / Gypsy	Цыганский	108425	95,412	141,785
+cji	Chamalal	Чамалинский	4926	4,417	5,171
+atv/chel1242	Chelkan	Челканский	506	445	648
+che	Chechen	Чеченский	1493748	1,461,100	1,644,313
+ces	Czech	Чешский	7234	1,976	418
+chv	Chuvash	Чувашский	700222	619,902	800,100
+ckt	Chukchi	Чукотский	2607	1,670	8,526
+clw	Chulym	Чулымско-тюркский	32	15	38
+swe	Swedish	Шведский	2821	794	106
+gsw	Swiss	Швейцарский	57	26	
+sna	Shona	Шона	52	33	
+cjs	Shor	Шорский	2927	2,205	5,530
+sco	Scots	Шотландский	22	7	
+sgh	Shughni	Шугнанский	79	52	
+sux	Sumerian	Шумерский	53	32	
+ewe	Ewe	Эве	1	0	
+evn	Evenki	Эвенкийский	5831	3,445	8,724
+eve	Even	Эвенский	5304	3,943	7,208
+bin	Edo / Bini	Эдо	4	4	
+enet1250/enf	Enets	Энецкий	97	86	69
+mord1256/myv	Erzya-Mordvin	Эрзя-мордовский	40045	36,776	46,241
+ess	Central Siberian Yupik	Эскимосский	172	92	816
+epo	Esperanto	Эсперанто	753	289	
+est	Estonian	Эстонский	6724	2,457	2,816
+ett	Etruscan	Этрусский	1	0	
+yug	Yug	Югский	7	5	3
+mul	South African	Южноафриканский	1	0	
+ess	Yupik	Юитский	2	0	1
+ykg	Yukaghir	Юкагирский	359	243	516
+nog/yurt1234	Yurt-Tatar	Юртовско-татарский	39	33	18
+yai	Yagnobi	Ягнобский	6	4	
+yah	Yazgulyam	Язгулямский	1	1	
+sah	Yakut	Якутский	377722	363,096	479,484
+jpn	Japanese	Японский	16543	4,304	523
+mis	Programming language	Язык программирования	742		
+mul	Those who gave other answers	Указавшие другие ответы			34,340
+mul	Those who indicated other languages (not listed above)	Указавшие другие языки (не перечисленные выше)	66888	53,117	
+mis	Persons whose language proficiency is not indicated in the census forms.	Лица, в переписных листах которых владение языками не указано	12,056,452		

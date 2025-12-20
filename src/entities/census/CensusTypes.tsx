@@ -49,12 +49,14 @@ export interface CensusData extends ObjectBase {
   // Author
   collectorType: CensusCollectorType; // Type of organization (e.g., Government, CLDR)
   collectorName?: string; // Name of the organization or journal presenting the data
+  collectorNameShort?: string; // A shorter name of the organization for compact displays, eg. Federal State Statistics Service -> Rosstat
   author?: string; // Name of the individual author(s) if applicable
 
   // Source
   url: string; // Most important to have, so people can find the original data
   datePublished?: Date;
   dateAccessed?: Date;
+  documentName?: string;
   tableName?: string;
   columnName?: string;
   citation?: string; // The full citation, may be redundant if other fields are filled in
