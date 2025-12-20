@@ -216,7 +216,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 };
 
 const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { officialStatus, wikipedia, localeSource, containedLocales } = locale;
+  const { officialStatus, wikipedia, localeSource, relatedLocales } = locale;
   return (
     <DetailsSection title="Other">
       {officialStatus && (
@@ -227,18 +227,55 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
           <ObjectWikipediaInfo object={locale} />
         </DetailsField>
       )}
-      {containedLocales && containedLocales.length > 0 && (
-        <DetailsField title="Contains Locales:">
+      <DetailsField title="Locale Source:">
+        <LocaleSourceLabel localeSource={localeSource} />
+      </DetailsField>
+      {relatedLocales?.lessSpecific && relatedLocales.lessSpecific.length > 0 && (
+        <DetailsField title="Less Specific Locales:">
           <CommaSeparated>
-            {containedLocales.map((loc) => (
-              <HoverableObjectName key={loc.ID} object={loc} labelSource="code" />
+            {relatedLocales.lessSpecific.map((locale) => (
+              <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
             ))}
           </CommaSeparated>
         </DetailsField>
       )}
-      <DetailsField title="Locale Source:">
-        <LocaleSourceLabel localeSource={localeSource} />
-      </DetailsField>
+      {relatedLocales?.moreSpecific && relatedLocales.moreSpecific.length > 0 && (
+        <DetailsField title="More Specific Locales:">
+          <CommaSeparated>
+            {relatedLocales.moreSpecific.map((locale) => (
+              <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      {relatedLocales?.parentTerritory && (
+        <DetailsField title="Encapsulating Territory Locale:">
+          <HoverableObjectName object={relatedLocales.parentTerritory} labelSource="code" />
+        </DetailsField>
+      )}
+      {relatedLocales?.parentLanguage && (
+        <DetailsField title="Parent Language Locale:">
+          <HoverableObjectName object={relatedLocales.parentLanguage} labelSource="code" />
+        </DetailsField>
+      )}
+      {relatedLocales?.childLanguages && relatedLocales.childLanguages.length > 0 && (
+        <DetailsField title="Child Language Locales:">
+          <CommaSeparated>
+            {relatedLocales.childLanguages.map((locale) => (
+              <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      {relatedLocales?.childTerritories && relatedLocales.childTerritories.length > 0 && (
+        <DetailsField title="Contained Territory Locales:">
+          <CommaSeparated>
+            {relatedLocales.childTerritories.map((locale) => (
+              <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
     </DetailsSection>
   );
 };
