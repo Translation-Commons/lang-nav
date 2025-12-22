@@ -1,13 +1,13 @@
 import { useState } from 'react';
 
 import {
-  loadIANAVariants,
   addIANAVariantLocales,
   connectVariantTags,
+  loadIANAVariants,
 } from '@features/data/load/extra_entities/IANAData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { CensusID, CensusData } from '@entities/census/CensusTypes';
+import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import {
   LocaleData,
@@ -18,6 +18,7 @@ import {
 } from '@entities/types/DataTypes';
 
 import { computeDescendantPopulation } from '../compute/computeDescendantPopulation';
+import { computeLargestDescendants } from '../compute/computeLargestDescendants';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
@@ -138,6 +139,7 @@ export function useCoreData(): {
     connectVariantTags(variantTags, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     computeDescendantPopulation(languagesBySource, writingSystems);
+    computeLargestDescendants(languagesBySource);
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));
