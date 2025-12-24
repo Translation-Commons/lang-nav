@@ -11,7 +11,7 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { nameDisplay, nameEndonym, Glottolog, ISO, CLDR } = lang;
+  const { nameDisplay, nameEndonym, nameFrench, Glottolog, ISO, CLDR } = lang;
 
   return (
     <DetailsSection title="Names">
@@ -22,6 +22,9 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         <DetailsField title="Endonym:">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEndonym} />
         </DetailsField>
+      )}
+      {nameFrench && nameDisplay !== nameFrench && (
+        <DetailsField title="French Name:">{nameFrench}</DetailsField>
       )}
       {Glottolog.name && nameDisplay !== Glottolog.name && (
         <DetailsField title="Glottolog Name:">

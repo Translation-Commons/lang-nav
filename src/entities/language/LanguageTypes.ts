@@ -98,6 +98,7 @@ export interface LanguageData extends ObjectBase {
   nameDisplay: string; // May update if a language source has a different name
   nameSubtitle?: string;
   nameEndonym?: string;
+  nameFrench?: string;
 
   vitality?: LanguageVitality;
   digitalSupport?: string;

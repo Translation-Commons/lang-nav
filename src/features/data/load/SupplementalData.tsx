@@ -7,6 +7,7 @@ import { DataContextType } from '../context/useDataContext';
 import { loadCensusData } from './extra_entities/loadCensusData';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadLandArea } from './supplemental/loadLandArea';
+import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './supplemental/UnicodeData';
@@ -29,6 +30,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadAndApplyWikipediaData(dataContext),
     loadLandArea(dataContext.getTerritory),
     loadTerritoryNames(dataContext.getTerritory),
+    loadLanguageNamesFrench(dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();
