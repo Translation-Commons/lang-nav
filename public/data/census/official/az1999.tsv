@@ -1,0 +1,35 @@
+#codeDisplay	az1999	
+#nameDisplay	Azerbaijan 1999	
+#isoRegionCode	AZ	
+#yearCollected	1999	
+#modality	Spoken	
+#proficiency	Fluent	
+#acquisitionOrder	L1	
+#domain	Home	
+#populationEligible	7,873,826	
+#quantity	count	
+#responsesPerIndividual	1	
+#collectorType	Government	
+#collectorName	State Statistics Committee	
+#url	http://web2.anl.az:81/read/page.php?bibid=14519&pno=8	
+#dateAccessed	2025-12-20	
+#tableName	Table 2: Nationality and native language of the population	
+#citation	Population Census of the Republic of Azerbaijan: Part IV. Table 2. 1999 State Statistical Committee of the Republic of Azerbaijan, Population Census Department.	
+#notes		
+Language Code	Language	Population
+aze	Azerbaijani	7,171,436
+ukr	Ukrainian	9,314
+rus	Russian	140,660
+tur	Turkish	41,100
+tat	Tatar	26,005
+tly	Talysh	68,857
+lez	Lezghian	171,027
+heb	Hebrew	7,764
+kur	Kurdish	6,388
+hye	Armenian	120,606
+ava	Avar	49,963
+kat	Georgian	14,577
+udi	Udin	4,104
+tkr	Tsakhur	15,772
+ttt	Tat	9,069
+mul	Other	7,184
