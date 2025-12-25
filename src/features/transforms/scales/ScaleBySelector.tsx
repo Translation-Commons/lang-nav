@@ -3,14 +3,18 @@ import React from 'react';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
+import {
+  getFieldsForScaling,
+  intersectAllowedWithObjectType,
+} from '@features/transforms/fields/FieldApplicability';
 
-import { getScaleBysApplicableToObjectType, ScaleBy } from './ScaleTypes';
+import { ScaleBy } from './ScaleTypes';
 
 const ScaleBySelector: React.FC = () => {
   const { scaleBy, updatePageParams, objectType } = usePageParams();
   const { display } = useSelectorDisplay();
 
-  const applicableScaleBys = getScaleBysApplicableToObjectType(objectType);
+  const applicableScaleBys = intersectAllowedWithObjectType(getFieldsForScaling(), objectType);
   const scaleByOptions: ScaleBy[] = ['None', ...applicableScaleBys];
 
   return (

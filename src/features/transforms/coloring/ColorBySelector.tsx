@@ -4,15 +4,19 @@ import { View } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
+import {
+  getFieldsForColoring,
+  intersectAllowedWithObjectType,
+} from '@features/transforms/fields/FieldApplicability';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { ColorBy, getColorBysApplicableToObjectType } from './ColorTypes';
+import { ColorBy } from './ColorTypes';
 
 const ColorBySelector: React.FC = () => {
   const { colorBy, updatePageParams, objectType, view } = usePageParams();
   const { display } = useSelectorDisplay();
 
-  const applicableColorBys = getColorBysApplicableToObjectType(objectType);
+  const applicableColorBys = intersectAllowedWithObjectType(getFieldsForColoring(), objectType);
   const colorByOptions: ColorBy[] = [
     'None',
     ...Object.values(SortBy).filter((cb) => applicableColorBys.includes(cb)),
