@@ -40,7 +40,7 @@ export type LocaleTags = {
 
 export function getLocaleCodeFromTags(
   localeTags: LocaleTags,
-  localeSeparator: LocaleSeparator,
+  localeSeparator: LocaleSeparator = LocaleSeparator.Underscore,
   territoryOverride?: ISO3166Code,
 ): string {
   return [

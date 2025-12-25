@@ -243,7 +243,7 @@ describe('computeLocalePopulationFromCensuses', () => {
       sjn_AM: getSindarinInAMLocale(),
     });
 
-    // Population Cited will all stay to the original entry
+    // Rough Population will all stay to the original entry
     expect(langOriginal?.populationRough, 'langOriginal?.populationRough').toBe(24000);
     expect(langOnlyCensus?.populationRough, 'langOnlyCensus?.populationRough').toBe(24000);
     expect(langOnlyLocale?.populationRough, 'langOnlyLocale?.populationRough').toBe(24000);

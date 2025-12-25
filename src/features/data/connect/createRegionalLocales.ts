@@ -74,7 +74,6 @@ function createRegionalLocalesForTerritory(
             // Add stubs for required fields
             names: [],
             nameDisplay: newLocaleCode, // Will be computed later
-            containedLocales: [loc], // Keep track of the original locales that were aggregated
           };
         } else {
           if (loc.populationSpeaking != null) {
@@ -82,7 +81,6 @@ function createRegionalLocalesForTerritory(
             newLocale.populationSpeaking += loc.populationSpeaking || 0;
             newLocale.populationSpeakingPercent =
               (newLocale.populationSpeaking * 100) / territory.population;
-            newLocale.containedLocales = [...(newLocale.containedLocales || []), loc];
           }
         }
       });
