@@ -46,12 +46,12 @@ export function searchLocalesForMissingLinks(locales: Record<BCP47LocaleCode, Lo
     }
 
     // Try different combinations of the partial subtags
-    getLessSpecificLocaleTags(localeTags).forEach((lessSpecificLocaleCode) => {
-      if (lessSpecificLocaleCode === getLocaleCodeFromTags(localeTags)) return; // skip self
-      const foundLocale = locales[lessSpecificLocaleCode];
+    getLessSpecificLocaleTags(localeTags).forEach((moreGeneralLocaleCode) => {
+      if (moreGeneralLocaleCode === getLocaleCodeFromTags(localeTags)) return; // skip self
+      const foundLocale = locales[moreGeneralLocaleCode];
       if (foundLocale) {
-        if (!relatedLocales.lessSpecific) relatedLocales.lessSpecific = [];
-        relatedLocales.lessSpecific.push(foundLocale);
+        if (!relatedLocales.moreGeneral) relatedLocales.moreGeneral = [];
+        relatedLocales.moreGeneral.push(foundLocale);
         if (!foundLocale.relatedLocales) foundLocale.relatedLocales = {};
         if (!foundLocale.relatedLocales.moreSpecific) foundLocale.relatedLocales.moreSpecific = [];
         foundLocale.relatedLocales.moreSpecific.push(locale);

@@ -196,7 +196,7 @@ export interface LocaleData extends ObjectBase {
 
   // References to other locales
   relatedLocales?: {
-    lessSpecific?: LocaleData[]; // Locales that are less specific forms of this locale (eg. zh_Hant_SG -> zh_Hant or zh_SG)
+    moreGeneral?: LocaleData[]; // Locales that are less specific forms of this locale (eg. zh_Hant_SG -> zh_Hant or zh_SG)
     parentTerritory?: LocaleData; // The locale for the parent territory containing this locale's territory
     parentLanguage?: LocaleData; // The locale for the parent language family containing this locale's language
     moreSpecific?: LocaleData[]; // Locales that are more specific forms of this locale (eg. zh_SG -> zh_Hant_SG, zh_Hans_SG)
@@ -206,8 +206,6 @@ export interface LocaleData extends ObjectBase {
 
   // Data computed from other references, particularly territories.tsv and censuses
   populationAdjusted?: number; // Speaking population adjusted to latest territory population
-  populationOfLocalesWithinThisTerritory?: number;
-  populationOfLocalesWithinThisLanguage?: number;
   populationSpeakingPercent?: number;
   literacyPercent?: number;
   populationWriting?: number;

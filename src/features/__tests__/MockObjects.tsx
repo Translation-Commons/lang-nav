@@ -347,12 +347,6 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     censuses,
   } = getMockedObjectDictionaries(inputObjects);
 
-  // connectLanguagesToParent(languagesBySource);
-  // connectTerritoriesToParent(territories);
-  // connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
-  // connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
-  // connectVariantTags(variantTags, languagesBySource.BCP, locales);
-  // createRegionalLocales(territories, locales);
   connectObjectsAndCreateDerivedData(
     languagesBySource,
     territories,

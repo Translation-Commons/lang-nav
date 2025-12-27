@@ -463,7 +463,7 @@ describe('getSortByParameterized', () => {
     const sort = getSortFunctionParameterized(SortBy.CountOfLanguages, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'sjn_123', // 4 locales: sjn_ER, sjn_BE, sjn_Teng_123, dori0123_123
-      'sjn_001', // 2 locales: sjn_123, sjn_Teng_001, dori0123_001
+      'sjn_001', // 3 locales: sjn_123, sjn_Teng_001, dori0123_001
       '123', // 2 languages: sjn, dori0123
       'ER', // 2 languages: sjn, dori0123
       '001', // 2 languages: sjn, dori0123

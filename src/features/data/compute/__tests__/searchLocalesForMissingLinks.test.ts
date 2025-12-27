@@ -50,10 +50,10 @@ describe('searchLocalesForMissingLinks', () => {
     expect(locales['dori0123_123'].relatedLocales?.childTerritories?.[0].ID).toBe('dori0123_ER');
     expect(locales['dori0123_123'].relatedLocales?.parentLanguage?.ID).toBe('sjn_123');
     expect(locales['dori0123_123'].relatedLocales?.childLanguages?.[0].ID).toBeUndefined();
-    expect(locales['dori0123_123'].relatedLocales?.lessSpecific?.[0].ID).toBeUndefined();
+    expect(locales['dori0123_123'].relatedLocales?.moreGeneral?.[0].ID).toBeUndefined();
     expect(locales['dori0123_123'].relatedLocales?.moreSpecific?.[0].ID).toBeUndefined();
 
     expect(locales['sjn_Teng_001'].relatedLocales?.childTerritories?.[0].ID).toBe('sjn_Teng_123');
-    expect(locales['sjn_Teng_001'].relatedLocales?.lessSpecific?.[0].ID).toBe('sjn_001');
+    expect(locales['sjn_Teng_001'].relatedLocales?.moreGeneral?.[0].ID).toBe('sjn_001');
   });
 });

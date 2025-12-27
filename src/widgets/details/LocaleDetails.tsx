@@ -230,10 +230,10 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
       <DetailsField title="Locale Source:">
         <LocaleSourceLabel localeSource={localeSource} />
       </DetailsField>
-      {relatedLocales?.lessSpecific && relatedLocales.lessSpecific.length > 0 && (
-        <DetailsField title="Less Specific Locales:">
+      {relatedLocales?.moreGeneral && relatedLocales.moreGeneral.length > 0 && (
+        <DetailsField title="More General Locales:">
           <CommaSeparated>
-            {relatedLocales.lessSpecific.map((locale) => (
+            {relatedLocales.moreGeneral.map((locale) => (
               <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
             ))}
           </CommaSeparated>
@@ -248,11 +248,6 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
           </CommaSeparated>
         </DetailsField>
       )}
-      {relatedLocales?.parentTerritory && (
-        <DetailsField title="Encapsulating Territory Locale:">
-          <HoverableObjectName object={relatedLocales.parentTerritory} labelSource="code" />
-        </DetailsField>
-      )}
       {relatedLocales?.parentLanguage && (
         <DetailsField title="Parent Language Locale:">
           <HoverableObjectName object={relatedLocales.parentLanguage} labelSource="code" />
@@ -265,6 +260,11 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
               <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
             ))}
           </CommaSeparated>
+        </DetailsField>
+      )}
+      {relatedLocales?.parentTerritory && (
+        <DetailsField title="Encapsulating Territory Locale:">
+          <HoverableObjectName object={relatedLocales.parentTerritory} labelSource="code" />
         </DetailsField>
       )}
       {relatedLocales?.childTerritories && relatedLocales.childTerritories.length > 0 && (

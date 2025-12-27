@@ -7,10 +7,10 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 
 const columns: TableColumn<LocaleData>[] = [
   {
-    key: 'Less Specific Locales',
+    key: 'More General Locales',
     render: (object) => (
       <CommaSeparated limit={1} limitText="short">
-        {object.relatedLocales?.lessSpecific?.map((locale) => (
+        {object.relatedLocales?.moreGeneral?.map((locale) => (
           <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
         ))}
       </CommaSeparated>
