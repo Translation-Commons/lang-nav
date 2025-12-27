@@ -84,14 +84,14 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
-    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
+    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(undefined); // Not updated
-    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
+    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
   });
 
   it('Computing regional locale data is necessary to propagate the new data', () => {
@@ -130,14 +130,14 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langRaw?.populationRough, 'populationRough').toBe(24000);
     expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
-    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
+    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
     expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
     expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(11220); // <-- UPDATED VALUE
-    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(undefined);
+    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
   });
 
   it('If we have a census with a crazy estimate it changes some values but is capped', () => {

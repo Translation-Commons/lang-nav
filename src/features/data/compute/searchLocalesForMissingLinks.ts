@@ -1,6 +1,8 @@
 import { getLocaleCodeFromTags, LocaleTags } from '@entities/locale/LocaleStrings';
 import { BCP47LocaleCode, LocaleData } from '@entities/types/DataTypes';
 
+import { unique } from '@shared/lib/setUtils';
+
 export function searchLocalesForMissingLinks(locales: Record<BCP47LocaleCode, LocaleData>): void {
   Object.values(locales).forEach((locale) => {
     if (!locale.relatedLocales) locale.relatedLocales = {};
@@ -83,10 +85,12 @@ function getLessSpecificLocaleTags(localeTags: LocaleTags): string[] {
       })
     : [];
 
-  return [
-    ...lessVariantTags,
-    ...withoutScript,
-    ...withoutTerritory,
-    getLocaleCodeFromTags(localeTags),
-  ].filter(Boolean);
+  return unique(
+    [
+      ...lessVariantTags,
+      ...withoutScript,
+      ...withoutTerritory,
+      getLocaleCodeFromTags(localeTags),
+    ].filter(Boolean),
+  );
 }

@@ -2,16 +2,11 @@ import { computeDescendantPopulation } from '@features/data/compute/computeDesce
 import { computeLocalesPopulationFromCensuses } from '@features/data/compute/computeLocalesPopulationFromCensuses';
 import { computeLocalesWritingPopulation } from '@features/data/compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
+import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
 import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
 import { addCensusData } from '@features/data/connect/connectCensuses';
-import { connectLanguagesToParent } from '@features/data/connect/connectLanguagesToParent';
-import connectLocales from '@features/data/connect/connectLocales';
-import { connectTerritoriesToParent } from '@features/data/connect/connectTerritoriesToParent';
-import { connectWritingSystems } from '@features/data/connect/connectWritingSystems';
-import { createRegionalLocales } from '@features/data/connect/createRegionalLocales';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { connectVariantTags } from '@features/data/load/extra_entities/IANAData';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
@@ -49,6 +44,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     populationRough: 2500,
     primaryScriptCode: 'Teng',
     Combined: { parentLanguageCode: 'sjn' },
+    ISO: { parentLanguageCode: 'sjn' },
   };
 
   // Territories
@@ -351,12 +347,19 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     censuses,
   } = getMockedObjectDictionaries(inputObjects);
 
-  connectLanguagesToParent(languagesBySource);
-  connectTerritoriesToParent(territories);
-  connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
-  connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
-  connectVariantTags(variantTags, languagesBySource.BCP, locales);
-  createRegionalLocales(territories, locales);
+  // connectLanguagesToParent(languagesBySource);
+  // connectTerritoriesToParent(territories);
+  // connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
+  // connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
+  // connectVariantTags(variantTags, languagesBySource.BCP, locales);
+  // createRegionalLocales(territories, locales);
+  connectObjectsAndCreateDerivedData(
+    languagesBySource,
+    territories,
+    writingSystems,
+    locales,
+    variantTags,
+  );
 
   // Update the objects dictionary with the regional locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));

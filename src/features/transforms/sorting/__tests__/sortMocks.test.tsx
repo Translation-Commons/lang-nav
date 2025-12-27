@@ -462,27 +462,27 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(SortBy.CountOfLanguages, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'sjn_123', // 4 locales: sjn_ER, sjn_BE, sjn_Teng_123, dori0123_123
+      'sjn_001', // 2 locales: sjn_123, sjn_Teng_001, dori0123_001
       '123', // 2 languages: sjn, dori0123
       'ER', // 2 languages: sjn, dori0123
       '001', // 2 languages: sjn, dori0123
       'Teng', // 2 languages: sjn, dori0123
       'tolkorth', // 2 languages: eng, spa
-      'sjn_123', // 2 locales: sjn_ER, sjn_BE
       'sjn', // 1 dialect: dori0123
       'BE', // 1 locale: sjn_BE
       'be0590', // 1 language: sjn
+      'sjn_BE', // 1 locale: sjn_Teng_BE
+      'sjn_ER', // 1 locale: dori0123_ER
       'sjn_Teng_123', // 1 locale: sjn_Teng_BE
       'dori0123_123', // 1 locale: dori0123_ER
-      'sjn_001', // 1 locale: sjn_123
-      'sjn_Teng_001', // 1 locale: sjn_Teng_123
+      'sjn_Teng_001', // 1 locale: sjn_Teng_123,
       'dori0123_001', // 1 locale: dori0123_123
       'dori0123', // 0 dialects
-      'HA', // 0 languages
-      'AM',
-      'sjn_BE', // undefined
-      'sjn_ER',
       'dori0123_ER',
       'sjn_Teng_BE',
+      'HA', // undefined
+      'AM',
     ]);
   });
 
