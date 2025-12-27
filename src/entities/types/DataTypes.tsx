@@ -132,6 +132,7 @@ export interface WritingSystemData extends ObjectBase {
 export type BCP47LocaleCode = string; // BCP-47 formatted locale, eg. en_US, fr_CA, etc.
 
 export enum PopulationSourceCategory {
+  // From inputted data
   Official = 'Official', // Has a cited source
   UnverifiedOfficial = 'Unverified Official', // Source lost in merge but allegedly official
   Study = 'Study',
@@ -141,7 +142,7 @@ export enum PopulationSourceCategory {
   Other = 'Other',
   NoSource = '',
 
-  // Aggregated
+  // Algorithmically derived
   AggregatedFromTerritories = 'Aggregated from Territories',
   AggregatedFromLanguages = 'Aggregated from Languages',
   Algorithmic = 'Algorithmic', // not further specified
@@ -191,8 +192,17 @@ export interface LocaleData extends ObjectBase {
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
-  containedLocales?: LocaleData[]; // Particularly for aggregated regional locales eg. es_419
   variantTags?: VariantTagData[];
+
+  // References to other locales
+  relatedLocales?: {
+    moreGeneral?: LocaleData[]; // Locales that are less specific forms of this locale (eg. zh_Hant_SG -> zh_Hant or zh_SG)
+    parentTerritory?: LocaleData; // The locale for the parent territory containing this locale's territory
+    parentLanguage?: LocaleData; // The locale for the parent language family containing this locale's language
+    moreSpecific?: LocaleData[]; // Locales that are more specific forms of this locale (eg. zh_SG -> zh_Hant_SG, zh_Hans_SG)
+    childTerritories?: LocaleData[]; // Locales that represent subdivisions of this locale's territory
+    childLanguages?: LocaleData[]; // Locales that represent child/descendant languages of this locale's language
+  };
 
   // Data computed from other references, particularly territories.tsv and censuses
   populationAdjusted?: number; // Speaking population adjusted to latest territory population

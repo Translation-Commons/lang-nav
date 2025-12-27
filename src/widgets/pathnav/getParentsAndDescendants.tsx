@@ -34,7 +34,12 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
     case ObjectType.Language:
       return object.childLanguages;
     case ObjectType.Locale:
-      return object.containedLocales ?? [];
+      if (!object.relatedLocales) return [];
+      return [
+        ...(object.relatedLocales.moreSpecific ?? []),
+        ...(object.relatedLocales.childLanguages ?? []),
+        ...(object.relatedLocales.childTerritories ?? []),
+      ];
     case ObjectType.Territory:
       return [...(object.containsTerritories ?? []), ...(object.dependentTerritories ?? [])];
     case ObjectType.WritingSystem:

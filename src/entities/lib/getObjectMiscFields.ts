@@ -1,3 +1,5 @@
+import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
+
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -70,7 +72,7 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
     case ObjectType.Language:
       return object.childLanguages.length;
     case ObjectType.Locale:
-      return object.containedLocales?.length; // Actually count of locales, not languages
+      return getObjectChildren(object).length;
     case ObjectType.Census:
       return object.languageCount;
     case ObjectType.WritingSystem:
