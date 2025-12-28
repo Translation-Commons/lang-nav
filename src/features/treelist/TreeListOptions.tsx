@@ -122,7 +122,7 @@ const ShowDataSelector: React.FC<{
     <Selector<ColorBy>
       selectorLabel="Show Data"
       selectorDescription="Choose data to show to the right side of the items."
-      options={applicableSortBys}
+      options={applicableFields}
       onChange={(sortBy) => setShowData(sortBy)}
       selected={showData}
       display={SelectorDisplay.InlineDropdown}
