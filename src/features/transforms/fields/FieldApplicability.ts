@@ -83,8 +83,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
  */
 export function getFieldsForObjectType(objectType: ObjectType): SortBy[] {
   const specific = getSpecificFieldsForObjectType(objectType);
-  const deduped = new Set<SortBy>([...COMMON_FIELDS, ...specific]);
-  return [...deduped];
+  return unique([...COMMON_FIELDS, ...specific]);
 }
 
 /** Fields that make sense as sorting inputs */
