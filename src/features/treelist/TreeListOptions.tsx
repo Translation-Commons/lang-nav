@@ -110,7 +110,7 @@ const ShowDataSelector: React.FC<{
   setShowData: (value: ColorBy) => void;
 }> = ({ showData, setShowData }) => {
   const { objectType } = usePageParams();
-  const applicableSortBys: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
+  const applicableFields: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
 
   return (
     <Selector<ColorBy>
