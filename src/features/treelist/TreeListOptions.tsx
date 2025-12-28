@@ -4,7 +4,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { ColorBy } from '@features/transforms/coloring/ColorTypes';
-import getSortBysApplicableToObjectType from '@features/transforms/sorting/getSortBysApplicableToObjectType';
+import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 
 interface TreeListOptions {
   allExpanded: boolean;
@@ -110,13 +110,13 @@ const ShowDataSelector: React.FC<{
   setShowData: (value: ColorBy) => void;
 }> = ({ showData, setShowData }) => {
   const { objectType } = usePageParams();
-  const applicableSortBys: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
+  const applicableFields: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
 
   return (
     <Selector<ColorBy>
       selectorLabel="Show Data"
       selectorDescription="Choose data to show to the right side of the items."
-      options={applicableSortBys}
+      options={applicableFields}
       onChange={(sortBy) => setShowData(sortBy)}
       selected={showData}
       display={SelectorDisplay.InlineDropdown}

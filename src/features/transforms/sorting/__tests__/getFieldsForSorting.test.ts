@@ -2,12 +2,12 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import { ObjectType } from '@features/params/PageParamTypes';
+import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 import { getSortField } from '@features/transforms/fields/getField';
 
-import getSortBysApplicableToObjectType from '../getSortBysApplicableToObjectType';
 import { SortBy } from '../SortTypes';
 
-describe('getSortBysApplicableToObjectType', () => {
+describe('getFieldsForSorting', () => {
   it('should not return duplicate SortBy values for any ObjectType', () => {
     Object.values(ObjectType).forEach((objectType) => {
       const sortBys = getSortBysApplicableToObjectType(objectType);
@@ -16,7 +16,7 @@ describe('getSortBysApplicableToObjectType', () => {
     });
   });
 
-  it('Check that all possible SortBys are returned for each object type. Literally, if a sortBy is not returned by getSortBysApplicableToObjectType, then getSortField should not return a truthy value for it.', () => {
+  it('Check that all possible SortBys are returned for each object type. Literally, if a sortBy is not returned by getFieldsForSorting intersected with object type, then getSortField should not return a truthy value for it.', () => {
     const mockedObjects = getFullyInstantiatedMockedObjects();
 
     Object.values(ObjectType).forEach((objectType) => {

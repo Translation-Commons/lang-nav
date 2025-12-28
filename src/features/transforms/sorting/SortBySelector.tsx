@@ -3,8 +3,8 @@ import React from 'react';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
+import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 
-import getSortBysApplicableToObjectType from './getSortBysApplicableToObjectType';
 import { SortBy } from './SortTypes';
 
 const SortBySelector: React.FC = () => {
