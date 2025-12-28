@@ -37,11 +37,6 @@ export function normalizeAccents(str: string): string {
   return str.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 }
 
-// Base normalization for accent/case-insensitive comparisons
-export function normalizeBase(value?: string): string {
-  return value ? normalizeAccents(value).trim().toLowerCase() : '';
-}
-
 /**
  * Split the input string on non-alphanumeric characters and see if any word matches the inputted query.
  * Splits on characters that are neither letters (\p{L}) nor numbers (\p{N}), so alphanumeric codes

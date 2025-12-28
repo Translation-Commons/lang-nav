@@ -9,7 +9,6 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import { normalizeBase, toTitleCase } from '@shared/lib/stringUtils';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { nameDisplay, nameEndonym, nameFrench, Glottolog, ISO, CLDR } = lang;
@@ -24,7 +23,7 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEndonym} />
         </DetailsField>
       )}
-      {nameFrench && normalizeBase(toTitleCase(nameFrench)) !== normalizeBase(nameDisplay) && (
+      {nameFrench && nameFrench !== nameDisplay.toLowerCase() && (
         <DetailsField title="French Name:">{nameFrench}</DetailsField>
       )}
       {Glottolog.name && nameDisplay !== Glottolog.name && (
