@@ -1,6 +1,8 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
+import { unique } from '@shared/lib/setUtils';
+
 // Common fields available across most object types
 const COMMON_FIELDS: SortBy[] = [SortBy.Code, SortBy.Name, SortBy.Population];
 
