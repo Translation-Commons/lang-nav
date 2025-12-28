@@ -2,10 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import { ObjectType } from '@features/params/PageParamTypes';
-import {
-  getFieldsForSorting,
-  intersectAllowedWithObjectType,
-} from '@features/transforms/fields/FieldApplicability';
+import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 import { getSortField } from '@features/transforms/fields/getField';
 
 import { SortBy } from '../SortTypes';
@@ -13,7 +10,7 @@ import { SortBy } from '../SortTypes';
 describe('getFieldsForSorting', () => {
   it('should not return duplicate SortBy values for any ObjectType', () => {
     Object.values(ObjectType).forEach((objectType) => {
-      const sortBys = intersectAllowedWithObjectType(getFieldsForSorting(), objectType);
+      const sortBys = getSortBysApplicableToObjectType(objectType);
       const uniqueSortBys = new Set(sortBys);
       expect(uniqueSortBys.size).toBe(sortBys.length);
     });
@@ -24,7 +21,7 @@ describe('getFieldsForSorting', () => {
 
     Object.values(ObjectType).forEach((objectType) => {
       const objectsInType = Object.values(mockedObjects).filter((obj) => obj.type === objectType);
-      const sortBysForType = intersectAllowedWithObjectType(getFieldsForSorting(), objectType);
+      const sortBysForType = getSortBysApplicableToObjectType(objectType);
 
       Object.values(SortBy).forEach((sortBy) => {
         objectsInType.forEach((obj) => {

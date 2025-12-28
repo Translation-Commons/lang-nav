@@ -3,16 +3,13 @@ import React from 'react';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import {
-  getFieldsForSorting,
-  intersectAllowedWithObjectType,
-} from '@features/transforms/fields/FieldApplicability';
+import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 
 import { SortBy } from './SortTypes';
 
 const SortBySelector: React.FC = () => {
   const { sortBy, updatePageParams, objectType } = usePageParams();
-  const applicableSortBys = intersectAllowedWithObjectType(getFieldsForSorting(), objectType);
+  const applicableSortBys = getSortBysApplicableToObjectType(objectType);
 
   return (
     <Selector

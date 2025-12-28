@@ -88,16 +88,25 @@ export function getFieldsForObjectType(objectType: ObjectType): SortBy[] {
   return unique([...COMMON_FIELDS, ...specific]);
 }
 
-/** Fields that make sense as sorting inputs */
-export function getFieldsForSorting(): SortBy[] {
-  // Currently all SortBy fields are sortable; can be restricted in future
-  return Object.values(SortBy);
+/**
+ * Helper to intersect an allowed list with fields that exist for an object type.
+ * Preserves the order from the allowed list.
+ */
+function getApplicableFields(allowed: SortBy[], objectType: ObjectType): SortBy[] {
+  const objectFields = new Set(getFieldsForObjectType(objectType));
+  return allowed.filter((f) => objectFields.has(f));
 }
 
-/** Fields that make sense as color inputs, ordered by preferred UI grouping */
-export function getFieldsForColoring(): SortBy[] {
-  return [
-    // Quantitative first
+/** Returns sorting fields applicable to the given object type */
+export function getSortBysApplicableToObjectType(objectType: ObjectType): SortBy[] {
+  // Currently all SortBy fields are sortable; can be restricted in future
+  return getApplicableFields(Object.values(SortBy), objectType);
+}
+
+/** Returns coloring fields applicable to the given object type */
+export function getColorBysApplicableToObjectType(objectType: ObjectType): SortBy[] {
+  // Ordered by preferred UI grouping: quantitative first, then text fields
+  const coloringFields = [
     SortBy.Population,
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
@@ -116,16 +125,16 @@ export function getFieldsForColoring(): SortBy[] {
     SortBy.PopulationOfDescendants,
     SortBy.PopulationPercentInBiggestDescendantLanguage,
     SortBy.Date,
-    // Text fields for alphabetical coloring
     SortBy.Name,
     SortBy.Endonym,
     SortBy.Code,
   ];
+  return getApplicableFields(coloringFields, objectType);
 }
 
-/** Fields that make sense as scale inputs */
-export function getFieldsForScaling(): SortBy[] {
-  return [
+/** Returns scaling fields applicable to the given object type */
+export function getScaleBysApplicableToObjectType(objectType: ObjectType): SortBy[] {
+  const scalingFields = [
     SortBy.Population,
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
@@ -133,16 +142,5 @@ export function getFieldsForScaling(): SortBy[] {
     SortBy.CountOfDialects,
     SortBy.CountOfTerritories,
   ];
-}
-
-/**
- * Intersect an ordered allowed list with fields that exist for an object type.
- * Preserves the order from the allowed list.
- */
-export function intersectAllowedWithObjectType(
-  allowed: SortBy[],
-  objectType: ObjectType,
-): SortBy[] {
-  const objectFields = new Set(getFieldsForObjectType(objectType));
-  return allowed.filter((f) => objectFields.has(f));
+  return getApplicableFields(scalingFields, objectType);
 }

@@ -4,10 +4,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { ColorBy } from '@features/transforms/coloring/ColorTypes';
-import {
-  getFieldsForSorting,
-  intersectAllowedWithObjectType,
-} from '@features/transforms/fields/FieldApplicability';
+import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 
 interface TreeListOptions {
   allExpanded: boolean;
@@ -113,10 +110,7 @@ const ShowDataSelector: React.FC<{
   setShowData: (value: ColorBy) => void;
 }> = ({ showData, setShowData }) => {
   const { objectType } = usePageParams();
-  const applicableSortBys: ColorBy[] = [
-    'None',
-    ...intersectAllowedWithObjectType(getFieldsForSorting(), objectType),
-  ];
+  const applicableSortBys: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
 
   return (
     <Selector<ColorBy>
