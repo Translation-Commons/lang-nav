@@ -18,7 +18,7 @@ export function loadLanguageNamesFrench(
         const language = getLanguage(parts[0]);
         if (!language) return;
 
-        language.nameFrench = parts[2] ? parts[2].trim() : undefined;
+        language.nameFrench = parts[1] ? parts[1].trim() : undefined;
       }),
     )
     .catch((err) => console.error('Error loading French language names:', err));
