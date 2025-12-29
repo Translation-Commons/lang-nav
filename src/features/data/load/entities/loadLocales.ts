@@ -1,6 +1,6 @@
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
-import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleStrings';
+import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import {
   LocaleData,
   LocaleSource,

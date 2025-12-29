@@ -1,6 +1,6 @@
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
-import { getLocaleCode } from '@entities/locale/LocaleStrings';
+import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import {
   BCP47LocaleCode,
   isTerritoryGroup,
