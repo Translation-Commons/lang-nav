@@ -41,5 +41,5 @@ export function connectObjectsAndCreateDerivedData(
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
   connectKeyboards(keyboards, languagesBySource.Combined, territories, writingSystems, variantTags);
-  computeLargestDescendant(Object.values(languagesBySource.Combined));
+  computeLargestDescendant(languagesBySource);
 }
