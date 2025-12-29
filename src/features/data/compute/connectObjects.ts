@@ -14,6 +14,7 @@ import { createRegionalLocales } from '../connect/createRegionalLocales';
 import { connectVariantTags } from '../load/extra_entities/IANAData';
 
 import { computeDescendantPopulation } from './computeDescendantPopulation';
+import { computeLargestDescendant } from './computeLargestDescendant';
 import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
 
 /**
@@ -36,4 +37,5 @@ export function connectObjectsAndCreateDerivedData(
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
+  computeLargestDescendant(Object.values(languagesBySource.Combined));
 }
