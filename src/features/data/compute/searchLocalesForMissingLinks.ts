@@ -1,4 +1,4 @@
-import { getLocaleCodeFromTags, LocaleTags } from '@entities/locale/LocaleStrings';
+import { getLocaleCodeFromTags, LocaleTags } from '@entities/locale/LocaleParsing';
 import { BCP47LocaleCode, LocaleData } from '@entities/types/DataTypes';
 
 import { unique } from '@shared/lib/setUtils';

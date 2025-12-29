@@ -2,7 +2,8 @@ import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
-import { getLocaleCode, getLocaleName } from '@entities/locale/LocaleStrings';
+import { getLocaleCode } from '@entities/locale/LocaleParsing';
+import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
 import { updatePopulations } from './updatePopulations';
