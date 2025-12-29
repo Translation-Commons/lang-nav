@@ -15,6 +15,7 @@ import { createRegionalLocales } from '../connect/createRegionalLocales';
 import { connectVariantTags } from '../load/extra_entities/IANAData';
 
 import { computeDescendantPopulation } from './computeDescendantPopulation';
+import { computeLargestDescendant } from './computeLargestDescendant';
 import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
 
 /**
@@ -40,4 +41,5 @@ export function connectObjectsAndCreateDerivedData(
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
   connectKeyboards(keyboards, languagesBySource.Combined, territories, writingSystems, variantTags);
+  computeLargestDescendant(Object.values(languagesBySource.Combined));
 }
