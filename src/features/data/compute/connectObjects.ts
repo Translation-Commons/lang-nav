@@ -37,5 +37,5 @@ export function connectObjectsAndCreateDerivedData(
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
-  computeLargestDescendant(Object.values(languagesBySource.Combined));
+  computeLargestDescendant(languagesBySource);
 }

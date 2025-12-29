@@ -1,6 +1,8 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 
-export function computeLargestDescendant(languages: LanguageData[]): void {
+export function computeLargestDescendant(languagesBySource: LanguagesBySource): void {
+  const languages = Object.values(languagesBySource.Combined);
+
   // Clear the largest descendants first since it may change a lot if the schema changes.
   languages.forEach((lang) => {
     lang.largestDescendant = undefined;
