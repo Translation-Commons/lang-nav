@@ -19,14 +19,15 @@ function getLargestDescendant(language: LanguageData): LanguageData | undefined 
   if (language.largestDescendant !== undefined) {
     return language.largestDescendant;
   }
-  if (language.childLanguages.length === 0) {
+  const children = language.Combined.childLanguages ?? [];
+  if (children.length === 0) {
     return undefined;
   }
 
   // We are using populationRough because we want to only use descendants that have a directly
   // sourced population (aka no language families). Dialects rarely but sometimes have directly
   // sourced populations.
-  return language.childLanguages.reduce<LanguageData | undefined>((largest, child) => {
+  return children.reduce<LanguageData | undefined>((largest, child) => {
     const childsLargest = getLargestDescendant(child);
     const candidateLargest =
       (childsLargest?.populationRough || 0) > (child.populationRough || 0) ? childsLargest : child;
