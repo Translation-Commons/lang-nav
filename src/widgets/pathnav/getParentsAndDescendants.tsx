@@ -49,6 +49,13 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
   }
 }
 
+export function getObjectFullDescendants(object: ObjectData): ObjectData[] {
+  return getObjectChildren(object).reduce<ObjectData[]>(
+    (all, child) => (child ? all.concat([child], getObjectFullDescendants(child)) : all),
+    [],
+  );
+}
+
 export function getDescendantsName(object: ObjectData, count: number): string {
   switch (object.type) {
     case ObjectType.Census:

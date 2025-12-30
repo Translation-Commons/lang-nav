@@ -1,4 +1,9 @@
-import { isTerritoryGroup, TerritoryData } from '@entities/types/DataTypes';
+import {
+  isTerritoryGroup,
+  LocaleData,
+  LocaleSource,
+  TerritoryData,
+} from '@entities/types/DataTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
@@ -19,6 +24,8 @@ export function computeRegionalLocalesPopulation(territory: TerritoryData | unde
   territory.locales?.forEach((locale) => {
     // For these locales, sometimes there are multiple contained locales with the same territory code like zh_Hans_SG and zh_Hant_SG
     // so get only unique locales
+    const relatedLocales = locale.relatedLocales;
+    if (!relatedLocales) return;
     const uniqueContainedLocales = uniqueBy(
       (locale.relatedLocales?.childTerritories ?? []).sort(
         (a, b) => (b.populationAdjusted || 0) - (a.populationAdjusted || 0),
@@ -26,16 +33,13 @@ export function computeRegionalLocalesPopulation(territory: TerritoryData | unde
       (loc) => loc.territoryCode || '',
     ).filter((loc) => loc.territoryCode !== '');
 
-    // Adjusted population comes from the sum of the contained locales
-    locale.populationAdjusted =
-      sumBy(
-        uniqueContainedLocales,
-        // Each absolute number may come from a different year, so instead of adding up censuses from
-        // potentially different years, we use the population percent of the contained locales
-        // and compute the current population based on the latest population of the territory.
-        (loc) => loc.populationAdjusted,
-      ) || undefined;
-    // Since this is regional locales, we set the speaking population and percent accordingly
+    // Add up the adjusted population of unique contained locales (eg don't double count
+    // zh_Hans_SG and zh_Hant_SG). The adjust population is corrected to the current year
+    // to smooth out population growth between data collected in different years.
+    relatedLocales.sumOfPopulationFromChildTerritories =
+      sumBy(uniqueContainedLocales, (loc) => loc.populationAdjusted) || undefined;
+    locale.populationAdjusted = relatedLocales.sumOfPopulationFromChildTerritories;
+    // Set population speaking to be the sum of the unadjusted population
     locale.populationSpeaking =
       sumBy(uniqueContainedLocales, (loc) => loc.populationSpeaking || 0) || undefined;
 
@@ -45,4 +49,38 @@ export function computeRegionalLocalesPopulation(territory: TerritoryData | unde
         (locale.populationAdjusted / (territory.population || 1)) * 100;
     }
   });
+}
+
+export function computeLanguageFamilyLocalePopulations(locales: LocaleData[]): void {
+  // For all root locales
+  locales
+    .filter((loc) => !loc.relatedLocales?.parentLanguage)
+    .forEach((rootLocale) => getLanguageFamilyLocalePopulation(rootLocale));
+}
+
+function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
+  // Re-compute the estimate for the contained territories first.
+  const relatedLocales = locale.relatedLocales || {};
+  if (!relatedLocales.childLanguages) return;
+  const { childLanguages } = relatedLocales;
+  childLanguages?.forEach((locale) => getLanguageFamilyLocalePopulation(locale));
+
+  // Get the child locales, unique by language code to avoid double counting (eg. zh-Hans-SG and zh-Hant-SG)
+  const uniqueChildLocales = uniqueBy(
+    (childLanguages || []).sort(
+      (a, b) => (b.populationAdjusted || 0) - (a.populationAdjusted || 0),
+    ),
+    (loc) => loc.languageCode,
+  );
+  relatedLocales.sumOfPopulationFromChildLanguages =
+    sumBy(uniqueChildLocales, (childLocale) => childLocale.populationAdjusted) || undefined;
+
+  // Recompute the population of family locales first
+  if (locale.localeSource === LocaleSource.CreateFamilyLocales) {
+    locale.populationAdjusted = relatedLocales.sumOfPopulationFromChildLanguages;
+    locale.populationSpeaking =
+      sumBy(uniqueChildLocales, (childLocale) => childLocale.populationSpeaking) || undefined;
+    if (locale.populationAdjusted && locale.territory?.population)
+      locale.populationSpeakingPercent = locale.populationAdjusted / locale.territory.population;
+  }
 }

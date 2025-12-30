@@ -10,6 +10,7 @@ import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
 import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '../connect/connectWritingSystems';
+import { createFamilyLocales } from '../connect/createFamilyLocales';
 import { createRegionalLocales } from '../connect/createRegionalLocales';
 import { connectVariantTags } from '../load/extra_entities/IANAData';
 
@@ -33,6 +34,7 @@ export function connectObjectsAndCreateDerivedData(
   connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
   connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
   connectVariantTags(variantTags, languagesBySource.BCP, locales);
+  createFamilyLocales(languagesBySource.Combined, locales); // create them before regional locales
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
