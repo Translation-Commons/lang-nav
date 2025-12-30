@@ -97,6 +97,8 @@ function createLocalesForLanguageFamily(
         childLocale.populationSpeaking != null &&
         newLocale.localeSource === LocaleSource.CreateFamilyLocales
       ) {
+        // Most of this will be re-done in computeLanguageFamilyLocalePopulations after census data is added
+
         if (newLocale.populationSpeaking == null) newLocale.populationSpeaking = 0;
         // Note this may double count populations when people speak multiple languages in the family
         newLocale.populationSpeaking += childLocale.populationSpeaking || 0;

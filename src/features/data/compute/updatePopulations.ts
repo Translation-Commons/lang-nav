@@ -3,11 +3,11 @@ import { LocaleData, PopulationSourceCategory, TerritoryData } from '@entities/t
 
 import { sumBy } from '@shared/lib/setUtils';
 
-import { computeLocalesPopulationFromCensuses } from './computeLocalesPopulationFromCensuses';
 import {
   computeLanguageFamilyLocalePopulations,
   computeRegionalLocalesPopulation,
-} from './computeRegionalLocalesPopulation';
+} from './computeAggregatedLocalesPopulation';
+import { computeLocalesPopulationFromCensuses } from './computeLocalesPopulationFromCensuses';
 
 export function updatePopulations(
   languages: LanguageData[],
@@ -19,6 +19,7 @@ export function updatePopulations(
   // Start with the world territory (001) and then go down to groups
   // This will update regional locales AND the languages themselves
   computeRegionalLocalesPopulation(world);
+
   computeLanguageFamilyLocalePopulations(locales);
 
   updateLanguagesPopulationFromLocale(world);

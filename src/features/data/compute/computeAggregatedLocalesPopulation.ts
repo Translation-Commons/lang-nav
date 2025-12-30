@@ -75,12 +75,20 @@ function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
   relatedLocales.sumOfPopulationFromChildLanguages =
     sumBy(uniqueChildLocales, (childLocale) => childLocale.populationAdjusted) || undefined;
 
-  // Recompute the population of family locales first
-  if (locale.localeSource === LocaleSource.CreateFamilyLocales) {
-    locale.populationAdjusted = relatedLocales.sumOfPopulationFromChildLanguages;
-    locale.populationSpeaking =
-      sumBy(uniqueChildLocales, (childLocale) => childLocale.populationSpeaking) || undefined;
-    if (locale.populationAdjusted && locale.territory?.population)
-      locale.populationSpeakingPercent = locale.populationAdjusted / locale.territory.population;
+  // If the locale is for a language family, set its population to the sum of its children's populations
+  if (
+    locale.localeSource === LocaleSource.CreateFamilyLocales &&
+    relatedLocales.sumOfPopulationFromChildLanguages
+  ) {
+    const percentOfTerritory =
+      (relatedLocales.sumOfPopulationFromChildLanguages * 100) /
+      (locale.territory?.population || 1);
+    if (percentOfTerritory > 100) {
+      locale.populationAdjusted = locale.territory?.population;
+      locale.populationSpeakingPercent = 100;
+    } else {
+      locale.populationAdjusted = relatedLocales.sumOfPopulationFromChildLanguages;
+      locale.populationSpeakingPercent = percentOfTerritory;
+    }
   }
 }

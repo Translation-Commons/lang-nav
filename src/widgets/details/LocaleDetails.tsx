@@ -2,10 +2,12 @@ import React from 'react';
 
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
+import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
@@ -125,6 +127,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
     populationWritingPercent,
     territory,
   } = locale;
+  const [showPopulationBreakdown, setShowPopulationBreakdown] = React.useState(false);
 
   return (
     <DetailsSection title="Population">
@@ -133,11 +136,22 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {populationAdjusted && (
         <DetailsField title={`Population Adjusted to ${TerritoryDataYear}:`}>
           <LocalePopulationAdjusted locale={locale} />
+          <HoverableButton
+            style={{ marginLeft: '0.5em', padding: '0.25em', fontWeight: 'normal' }}
+            onClick={() => setShowPopulationBreakdown(!showPopulationBreakdown)}
+          >
+            {showPopulationBreakdown ? 'hide' : 'show'} breakdown
+          </HoverableButton>
+          {showPopulationBreakdown && (
+            <div style={{ margin: '0em 1em 1em 1em' }}>
+              <LocalePopulationBreakdown locale={locale} />
+            </div>
+          )}
         </DetailsField>
       )}
 
       {populationSpeaking != null && (
-        <DetailsField title="Speakers:">
+        <DetailsField title="Speakers (from best cited source(s)):">
           <CountOfPeople count={populationSpeaking} />
           {' ['}
           <LocaleCensusCitation locale={locale} />
