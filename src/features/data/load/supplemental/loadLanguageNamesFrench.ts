@@ -13,7 +13,7 @@ export function loadLanguageNamesFrench(
     )
     .then((lines) =>
       lines.forEach((line) => {
-        // Code	Display Name French
+        // Code	nom_français
         const parts = line.split('\t');
         const language = getLanguage(parts[0]);
         if (!language) return;
