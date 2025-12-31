@@ -1,3 +1,34 @@
+Fixes #ISSUE_NUMBER
+
+Summary:
+
+### Changes
+
+* User experience
+   * ...
+* Logical changes
+   * ...
+* Data
+   * ...
+* Refactors
+   * ...
+
+Out of scopes/Future work: 
+
+### Test Plan and Screenshots
+
+
+
+| Page/View with link | Description of Changes | Screenshot Before | Screenshot After |
+| ------------------- | ---------------------- | ----------------- | ---------------- |
+|                     |                        |                   |                  |
+|                     |                        |                   |                  |
+
+
+# Checklist 
+
+Feel free to check off or just delete items in this section as you have completed them.
+
 ## Summary
 
 - [ ] Clear description of what and why
@@ -9,31 +40,28 @@
 ## Testing
 
 - [ ] `npm run lint`
+- [ ] `npm run build`
 - [ ] `npm run test`
   - [ ] Tests added or updated for changed logic
-- [ ] `npm run build`
-- [ ] Write comments on manual testing how you tested in this PR
-- [ ] Include screenshots in the changes section below
+- [ ] `npm run dev` -- tried out the website directly
+  - [ ] Include screenshots as noted below
+  - [ ] Write comments on manual testing
 
 ## Changes
 
 ### Visual changes
 
-- [ ] Add before and after screenshots in the table below.
+- [ ] Add screenshots to the table template at the top of this file. You can include images inside the table
   - [ ] Drag and drop images in the GitHub PR comment box to upload screenshots
 - [ ] Purely new views can just include the "after" screenshot.
 - [ ] Since more views can be reproduced by just sharing the URL -- add links (eg. [link](https://translation-commons.github.io/lang-nav/data)) to the relevant page and/or conditions to reproduce the view.
 
-| Page/View | Changes | Before | After |
-| --------- | ------- | ------ | ----- |
-|           |         |        |       |
-|           |         |        |       |
 
 ### Data changes
 
 - [ ] TSV, SVG, etc. edits in `public/data/`
 - [ ] Corresponding readmes updated in `public/data/`
-- [ ] Load/connect/compute updates in `src/features/data/`
+- [ ] Load/connect/compute updates in `src/features/data/` including how we aggregate data or compute derived values
 
 ### Internal changes
 
@@ -43,4 +71,5 @@
 
 ## Docs
 
+- [ ] Code is self-documenting, or if not, comments are added where needed.
 - [ ] Updated markdown readme files documenting how the code behaves or how to develop in case there are any relevant changes to make.

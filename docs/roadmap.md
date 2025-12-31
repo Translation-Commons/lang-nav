@@ -1,0 +1,82 @@
+## Major Versions
+
+- 2026-Q2: v1.0 release with user feedback, database backend, UX revamp, keyboards.
+- 2025-11-08: Beta release with censuses, IANA variant tags, maps, filters and advanced search.
+- 2025-Summer: Alpha release with core functionality for exploring languages, territories, locales, and writing systems.
+
+## Functionality
+
+Here's a list of planned functionality. Completed functions are checked off.
+
+- [x] Language-adjacent objects
+  - [x] Languages
+    - [x] Core attributes
+    - [x] ISO parent/child connections
+    - [x] Language families
+    - [x] Glottolog
+    - [x] Digital Support details
+    - [x] Vitality details
+    - [ ] Keyboard availability details
+  - [x] Territories
+    - [x] Countries & Dependencies
+    - [x] Continents & other regions
+  - [x] Locales (languages + territories + potentially other specificity)
+    - [x] Basic data
+    - [x] Computed regional locales
+    - [x] Population estimate sources
+  - [x] Writing Systems
+    - [x] Basic data
+    - [x] Relationship w/ other writing systems (containment, lineage)
+  - [x] Language Variants / IANA tags
+  - [x] Censuses
+    - [x] Regular censuses
+    - [x] Include citation information
+    - [x] Continue importing new censuses
+    - [ ] Convert other imported datasets into census-like objects
+- [x] Views
+  - [x] Cards
+  - [x] Details
+  - [x] Hierarchy
+  - [x] Table
+  - [x] Map
+    - [ ] Extend for more data layers
+  - [ ] Graphs
+  - [x] Reports
+    - [x] Language name overlap
+    - [ ] Invalid languages
+    - [x] Locales that should be added
+    - [ ] Metrics on the data we have
+- [x] Interactivity
+  - [x] Search
+    - [x] By Code
+    - [x] By Name, Endonym
+    - [x] Highlight search
+    - [x] For Hierarchy
+    - [x] Using typeahead
+    - [ ] When few results are shown, suggest alternatives
+  - [x] Filter
+    - [x] By Scope
+    - [x] By Country
+    - [x] Integrate in search bar
+  - [x] Hovercard & Tooltips
+    - [x] Related objects
+    - [x] Field explanations
+  - [x] Sort By: Population, Name, Code
+  - [x] Limit
+    - [x] Pagination
+  - [x] Visual options
+    - [x] Change locale separator (\_ or -)
+  - [ ] Selection
+  - [x] Export
+- [ ] Manage data sources
+  - [x] Show results based on different definitions of what a language is
+    - [x] ISO, Glottolog, CLDR, All
+    - [x] Highlight language codes in each
+  - [ ] Add a better guide for different kinds of users
+- [x] About Page
+  - [x] Introduction, how to use
+  - [x] Acknowledgements
+- [ ] Future ideas
+  - [ ] Database-powered backend
+  - [ ] Feedback mechanisms
+  - [ ] Metrics
