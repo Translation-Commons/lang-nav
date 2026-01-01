@@ -3,7 +3,7 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
+import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/types/DataTypes';
 
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [

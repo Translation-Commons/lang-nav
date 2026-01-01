@@ -7,6 +7,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import CellPopulation from '@shared/containers/CellPopulation';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import { LanguageData } from './LanguageTypes';
@@ -64,21 +65,17 @@ const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ la
                 <td>
                   <HoverableObjectName object={descendant} />
                 </td>
-                <td style={{ textAlign: 'right' }}>
-                  <CountOfPeople count={descendant.populationEstimate} />
-                </td>
+                <CellPopulation population={descendant.populationEstimate} />
               </tr>
             ))}
           {lang.childLanguages.length > 10 && (
             <tr>
               <td>+{lang.childLanguages.length - 10} more</td>
-              <td style={{ textAlign: 'right' }}>
-                <CountOfPeople
-                  count={lang.childLanguages
-                    .slice(10)
-                    .reduce((sum, descendant) => sum + (descendant.populationEstimate || 0), 0)}
-                />
-              </td>
+              <CellPopulation
+                population={lang.childLanguages
+                  .slice(10)
+                  .reduce((sum, descendant) => sum + (descendant.populationEstimate || 0), 0)}
+              />
             </tr>
           )}
         </tbody>

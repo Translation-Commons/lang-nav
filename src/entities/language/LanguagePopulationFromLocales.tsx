@@ -8,6 +8,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 
+import CellPopulation from '@shared/containers/CellPopulation';
 import { groupBy, sumBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
@@ -48,22 +49,18 @@ const Descendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
                 <td>
                   <HoverableObjectName object={locale} labelSource="territory" />
                 </td>
-                <td style={{ textAlign: 'right' }}>
-                  <CountOfPeople count={locale.populationAdjusted} />
-                </td>
+                <CellPopulation population={locale.populationAdjusted} />
               </tr>
             ))}
           {localesFromUniqueTerritories.length > 10 && (
             <tr>
               <td>+{localesFromUniqueTerritories.length - 10} more</td>
-              <td style={{ textAlign: 'right' }}>
-                <CountOfPeople
-                  count={sumBy(
-                    localesFromUniqueTerritories.slice(10),
-                    (locale) => locale.populationAdjusted || 0,
-                  )}
-                />
-              </td>
+              <CellPopulation
+                population={sumBy(
+                  localesFromUniqueTerritories.slice(10),
+                  (locale) => locale.populationAdjusted || 0,
+                )}
+              />
             </tr>
           )}
         </tbody>

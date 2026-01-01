@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
+import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
