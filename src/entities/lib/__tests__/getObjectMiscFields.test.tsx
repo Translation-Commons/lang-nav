@@ -118,9 +118,9 @@ describe('getCountOfLanguages', () => {
       '123': 2, // sjn, dori0123
       Teng: 2, // sjn, dori0123
       AM: undefined,
+      BE: 1, // sjn
       ER: 2, // sjn, dori0123
       HA: undefined,
-      BE: 1, // sjn
       dori0123: 0,
       dori0123_001: 1, // dori0123_123
       dori0123_123: 1, // dori0123_ER

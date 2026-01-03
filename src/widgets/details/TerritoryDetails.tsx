@@ -28,6 +28,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
     containsTerritories,
     sovereign,
   } = territory;
+  const sortFunction = getSortFunction();
 
   return (
     <div className="Details">
@@ -43,7 +44,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         {containsTerritories && containsTerritories.length > 0 && (
           <DetailsField title="Contains:">
             <CommaSeparated>
-              {containsTerritories.sort(getSortFunction()).map((territory) => (
+              {containsTerritories.sort(sortFunction).map((territory) => (
                 <HoverableObjectName key={territory.ID} object={territory} />
               ))}
             </CommaSeparated>
@@ -58,7 +59,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         {dependentTerritories && dependentTerritories.length > 0 && (
           <DetailsField title="Administers:">
             <CommaSeparated>
-              {dependentTerritories.sort(getSortFunction()).map((territory) => (
+              {dependentTerritories.sort(sortFunction).map((territory) => (
                 <HoverableObjectName key={territory.ID} object={territory} />
               ))}
             </CommaSeparated>
@@ -68,7 +69,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         {censuses && censuses.length > 0 && (
           <DetailsField title="Census Tables:">
             <CommaSeparated>
-              {censuses.sort(getSortFunction()).map((census) => (
+              {censuses.sort(sortFunction).map((census) => (
                 <HoverableObjectName key={census.ID} object={census} />
               ))}
             </CommaSeparated>

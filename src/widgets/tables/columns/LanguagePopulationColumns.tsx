@@ -1,3 +1,4 @@
+import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -75,7 +76,7 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     description: (
       <>
         This data comes from adding up the populations of all locales for this language. The
-        population from locales have been adjusted to 2025 estimates.
+        population from locales have been adjusted to {TerritoryDataYear} estimates.
       </>
     ),
     render: (lang) => <LanguagePopulationFromLocales lang={lang} />,

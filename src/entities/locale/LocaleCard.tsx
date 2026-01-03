@@ -5,17 +5,17 @@ import usePageParams from '@features/params/usePageParams';
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
+import LocalePopulationAdjusted from './LocalePopulationAdjusted';
 import { getOfficialLabel } from './LocaleStrings';
 
 interface Props {
   locale: LocaleData;
 }
 const LocaleCard: React.FC<Props> = ({ locale }) => {
-  const { ID, populationSpeaking, officialStatus, populationSpeakingPercent, territory } = locale;
+  const { ID, populationAdjusted, officialStatus, populationSpeakingPercent, territory } = locale;
   const { updatePageParams } = usePageParams();
 
   return (
@@ -25,10 +25,10 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
           <ObjectTitle object={locale} highlightSearchMatches={true} />
         </a>
       </h3>
-      {populationSpeaking != null && (
+      {populationAdjusted != null && (
         <div>
-          <h4>Speakers</h4>
-          <CountOfPeople count={populationSpeaking} />
+          <h4>Population</h4>
+          <LocalePopulationAdjusted locale={locale} />
           {' ['}
           <LocaleCensusCitation locale={locale} size="short" />
           {']'}

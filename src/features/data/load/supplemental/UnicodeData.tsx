@@ -258,7 +258,7 @@ export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusD
 
         populationEligible: territoryPopulation,
         isoRegionCode: territoryCode,
-        yearCollected: new Date().getFullYear(), // This is the year it was collected from CLDR not the actual year of the input data
+        yearCollected: 2025, // This is the year it was collected from CLDR not the actual year of the input data
         collectorType: CensusCollectorType.CLDR,
         collectorName: 'Unicode Consortium',
         url: 'https://github.com/unicode-org/cldr-json/blob/main/cldr-json/cldr-core/supplemental/territoryInfo.json',

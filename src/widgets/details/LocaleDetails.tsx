@@ -1,10 +1,11 @@
 import React from 'react';
 
+import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import { LocalePopulationAdjusted } from '@entities/locale/LocalePopulationAdjusted';
+import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
@@ -130,7 +131,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
 
       {populationAdjusted && (
-        <DetailsField title="Population Adjusted to 2025:">
+        <DetailsField title={`Population Adjusted to ${TerritoryDataYear}:`}>
           <LocalePopulationAdjusted locale={locale} />
         </DetailsField>
       )}
