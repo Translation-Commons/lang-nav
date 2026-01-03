@@ -12,12 +12,7 @@
   "eslint.run": "onType",
   "eslint.format.enable": true,
   "eslint.useFlatConfig": true,
-  "eslint.validate": [
-    "typescript",
-    "typescriptreact",
-    "javascript",
-    "javascriptreact"
-  ],
+  "eslint.validate": ["typescript", "typescriptreact", "javascript", "javascriptreact"],
   // Markdown automatic format disabled because it messes tables
   "[markdown]": {
     "editor.formatOnSave": false
