@@ -22,7 +22,9 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
         (a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0),
       );
   const totalPercent =
-    sumBy(constituents, (loc) => loc.populationSpeakingPercent) / constituents.length;
+    (sumBy(constituents, (loc) => loc.populationAdjusted) /
+      sumBy(constituents, (loc) => loc.territory?.population || 0)) *
+    100;
 
   return (
     <table>

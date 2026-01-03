@@ -15,9 +15,8 @@ export const LanguagePopulationEstimate: React.FC<{ lang: LanguageData }> = ({ l
   const { populationEstimate, populationEstimateSource } = lang;
 
   if (!populationEstimate) return <Deemphasized>no data</Deemphasized>;
-  if (!populationEstimateSource) return;
 
-  switch (populationEstimateSource) {
+  switch (populationEstimateSource ?? PopulationSourceCategory.Other) {
     case PopulationSourceCategory.AggregatedFromTerritories:
       return <LanguagePopulationFromLocales lang={lang} />;
     case PopulationSourceCategory.AggregatedFromLanguages:

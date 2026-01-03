@@ -54,7 +54,6 @@ const PopulationSource: React.FC<{
 }> = ({ populationSource, size }) => {
   const description = getPopulationSourceDescription(populationSource);
   const label = getPopulationSourceLabel(populationSource, size);
-  // const isMinor =
 
   switch (populationSource) {
     case PopulationSourceCategory.NoSource:
@@ -104,7 +103,7 @@ function getPopulationSourceDescription(source: PopulationSourceCategory): strin
     case PopulationSourceCategory.Official:
       return 'The population figure is taken from an official census or government source.';
     case PopulationSourceCategory.UnverifiedOfficial:
-      return 'The population figure is reported to be from an official census or government source, but from a secondary source';
+      return 'The population figure is reported to be from an official census or government source, but from a secondary source.';
     case PopulationSourceCategory.Study:
       return 'The population figure is taken from a linguistic or demographic study.';
     case PopulationSourceCategory.Ethnologue:

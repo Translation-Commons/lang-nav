@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
@@ -72,7 +73,7 @@ const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ l
         {/* Always show the population of the territory in the latest territory data */}
         <tr>
           <td>{territoryName} population</td>
-          <td>2025</td>
+          <td>{TerritoryDataYear}</td>
           <CellPopulation population={territory.population} />
         </tr>
         {isAdjusted && (
@@ -85,7 +86,7 @@ const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ l
             </tr>
             <tr>
               <td>Language population, adjusted</td>
-              <td>2025</td>
+              <td>{TerritoryDataYear}</td>
               <CellPopulation population={populationAdjusted} />
             </tr>
           </>

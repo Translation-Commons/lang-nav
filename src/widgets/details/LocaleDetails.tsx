@@ -1,5 +1,6 @@
 import React from 'react';
 
+import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
@@ -130,7 +131,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
 
       {populationAdjusted && (
-        <DetailsField title="Population Adjusted to 2025:">
+        <DetailsField title={`Population Adjusted to ${TerritoryDataYear}:`}>
           <LocalePopulationAdjusted locale={locale} />
         </DetailsField>
       )}
