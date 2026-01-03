@@ -5,8 +5,8 @@ This repository contain a dataset about the world's languages and language-like 
 ![Preview of the website](/public/preview.png)
 
 There are multiple ways to visualize the data
-| Card List | Details | Hierarchy | Table | Reports | Map |
-| --------- | ------- | --------- | ----- | ------- | --- |
+| Card List                                                                   | Details                                                                  | Hierarchy                                                                    | Table                                                                | Reports                                                                  | Map                                                              |
+| --------------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------- | -------------------------------------------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------- |
 | <img src="public/cardlist.png" alt="Card List" style="max-width: 200px;" /> | <img src="public/details.png" alt="Details" style="max-width: 200px;" /> | <img src="public/hierarchy.png" alt="Hierarchy" style="max-width: 200px;" /> | <img src="public/table.png" alt="Table" style="max-width: 200px;" /> | <img src="public/reports.png" alt="Reports" style="max-width: 200px;" /> | <img src="public/map.png" alt="Map" style="max-width: 200px;" /> |
 
 ## Project Overview
