@@ -1,7 +1,11 @@
 import React from 'react';
 
-const LabelTableCell: React.FC<React.PropsWithChildren> = ({ children }) => (
-  <th style={{ fontWeight: 'bold', textAlign: 'left' }}>{children}</th>
+type Props = React.PropsWithChildren<{
+  align?: 'left' | 'center' | 'right';
+}>;
+
+const LabelTableCell: React.FC<Props> = ({ children, align = 'left' }) => (
+  <th style={{ fontWeight: 'bold', textAlign: align }}>{children}</th>
 );
 
 export default LabelTableCell;

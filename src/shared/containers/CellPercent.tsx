@@ -2,10 +2,24 @@ import React from 'react';
 
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
-const CellPercent: React.FC<{ num?: number }> = ({ num }) => {
+type Props = {
+  alignFraction?: boolean;
+  leftContent?: React.ReactNode;
+  percent?: number;
+  showPercentSign?: boolean;
+};
+
+const CellPercent: React.FC<Props> = ({
+  alignFraction = true,
+  leftContent,
+  percent,
+  showPercentSign = false,
+}) => {
   return (
     <td className="decimal">
-      <DecimalNumber num={num} />
+      {leftContent}
+      <DecimalNumber num={percent} alignFraction={alignFraction} />
+      {showPercentSign && '%'}
     </td>
   );
 };
