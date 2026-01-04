@@ -41,20 +41,23 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
           />
         </Hoverable>
       ) : null}
-      <Hoverable hoverContent={<PopulationOfDescendantsBreakdown lang={lang} />}>
+      <Hoverable hoverContent={<LanguagePopulationBreakdownFromDescendants lang={lang} />}>
         <CountOfPeople count={lang.populationOfDescendants} />
       </Hoverable>
     </>
   );
 };
 
-const PopulationOfDescendantsBreakdown: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: LanguageData }> = ({
+  lang,
+}) => {
   const { updatePageParams } = usePageParams();
   if (!lang.populationOfDescendants) return null;
 
   return (
     <>
-      Computed by adding up constituent languages/dialects.
+      Computed by adding up constituent languages/dialects. This algorithm is still a work in
+      progress so numbers may not satisfyingly add up.
       <table>
         <tbody>
           {lang.childLanguages

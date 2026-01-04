@@ -6,6 +6,7 @@ import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
+import LanguagePopulationBreakdownButton from '@entities/language/LanguagePopulationBreakdownButton';
 import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
 import LanguagePopulationOfDescendants from '@entities/language/LanguagePopulationFromDescendants';
 import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
@@ -46,6 +47,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
 const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const {
     populationEstimate,
+    populationEstimateSource,
     modality,
     primaryWritingSystem,
     writingSystems,
@@ -58,7 +60,11 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       {populationEstimate && (
         <DetailsField title="Population Estimate:">
           <LanguagePopulationEstimate lang={lang} />
+          <LanguagePopulationBreakdownButton lang={lang} />
         </DetailsField>
+      )}
+      {populationEstimateSource && (
+        <DetailsField title="Population Estimate Source:">{populationEstimateSource}</DetailsField>
       )}
       {populationOfDescendants && (
         <DetailsField title="Population of Descendants:">
