@@ -15,7 +15,6 @@ import { createRegionalLocales } from '../connect/createRegionalLocales';
 import { connectVariantTags } from '../load/extra_entities/IANAData';
 
 import { computeDescendantPopulation } from './computeDescendantPopulation';
-import { computeLargestDescendant } from './computeLargestDescendant';
 import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
 
 /**
