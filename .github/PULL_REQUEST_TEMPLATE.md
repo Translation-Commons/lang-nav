@@ -10,7 +10,7 @@
 
 - [ ] `npm run lint`
 - [ ] `npm run test`
-   - [ ] Tests added or updated for changed logic
+  - [ ] Tests added or updated for changed logic
 - [ ] `npm run build`
 - [ ] Write comments on manual testing how you tested in this PR
 - [ ] Include screenshots in the changes section below
