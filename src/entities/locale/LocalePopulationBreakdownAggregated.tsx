@@ -1,5 +1,7 @@
+import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
@@ -14,17 +16,14 @@ import { getLocaleName } from './LocaleStrings';
 const MAX_CONSTITUENTS_DISPLAYED = 5;
 
 const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { populationAdjusted, populationSource } = locale;
+  const { populationAdjusted, populationSource, populationSpeakingPercent } = locale;
   const fromTerritories = populationSource === PopulationSourceCategory.AggregatedFromTerritories;
   const constituents = fromTerritories
     ? uniqueBy(locale.relatedLocales?.childTerritories || [], (l) => l.territoryCode || '')
     : uniqueBy(locale.relatedLocales?.childLanguages || [], (l) => l.languageCode).sort(
         (a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0),
       );
-  const totalPercent =
-    (sumBy(constituents, (loc) => loc.populationAdjusted) /
-      sumBy(constituents, (loc) => loc.territory?.population || 0)) *
-    100;
+  const [showAllConstituents, setShowAllConstituents] = React.useState(false);
 
   return (
     <table>
@@ -48,19 +47,39 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           <LabelTableCell align="right">{getLocaleName(locale, false)} Population</LabelTableCell>
           <LabelTableCell align="right">% of territory</LabelTableCell>
         </tr>
-        {constituents.slice(0, MAX_CONSTITUENTS_DISPLAYED).map((childLocale) => (
-          <tr key={childLocale.ID}>
-            <td style={{ paddingLeft: '1em' }}>
-              <HoverableObjectName
-                object={childLocale}
-                labelSource={fromTerritories ? 'territory' : 'language'}
-              />
-            </td>
-            <CellPopulation population={childLocale.populationAdjusted} />
-            <CellPercent percent={childLocale.populationSpeakingPercent} />
-          </tr>
-        ))}
-        <RowOfRemainingConstituents locales={constituents.slice(MAX_CONSTITUENTS_DISPLAYED)} />
+        {constituents
+          .slice(0, showAllConstituents ? constituents.length : MAX_CONSTITUENTS_DISPLAYED)
+          .map((childLocale) => (
+            <tr key={childLocale.ID}>
+              <td style={{ paddingLeft: '1em' }}>
+                <HoverableObjectName
+                  object={childLocale}
+                  labelSource={fromTerritories ? 'territory' : 'language'}
+                />
+              </td>
+              <CellPopulation population={childLocale.populationAdjusted} />
+              <CellPercent percent={childLocale.populationSpeakingPercent} />
+            </tr>
+          ))}
+        {showAllConstituents ? (
+          constituents.length > MAX_CONSTITUENTS_DISPLAYED && (
+            <tr>
+              <td colSpan={3}>
+                <HoverableButton
+                  style={{ padding: '0.25em', marginLeft: '1em' }}
+                  onClick={() => setShowAllConstituents(false)}
+                >
+                  Show less
+                </HoverableButton>
+              </td>
+            </tr>
+          )
+        ) : (
+          <RowOfRemainingConstituents
+            locales={constituents.slice(MAX_CONSTITUENTS_DISPLAYED)}
+            setShowAllConstituents={setShowAllConstituents}
+          />
+        )}
         <tr>
           <LabelTableCell>
             <HoverableObjectName
@@ -69,8 +88,26 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
             />
           </LabelTableCell>
           <CellPopulation population={populationAdjusted} />
-          <CellPercent percent={totalPercent > 100 ? 100 : totalPercent} />
+          <CellPercent
+            leftContent={
+              (populationSpeakingPercent ?? 0) >= 99.9 && (
+                <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} />
+              )
+            }
+            percent={populationSpeakingPercent}
+          />
         </tr>
+        {(populationSpeakingPercent ?? 0) >= 99.9 && (
+          <tr>
+            <td colSpan={3}>
+              The population of this locale{' '}
+              {(populationSpeakingPercent ?? 0) > 100 ? 'exceeds' : 'is'} 100% of the territory
+              population, which is likely not an accurate reflection of the people in the area.
+              Rather, constituents may be double-counted but without specific data this is the best
+              aggregate.
+            </td>
+          </tr>
+        )}
       </tbody>
     </table>
   );
@@ -78,7 +115,8 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
 
 const RowOfRemainingConstituents: React.FC<{
   locales: LocaleData[];
-}> = ({ locales }) => {
+  setShowAllConstituents: (show: boolean) => void;
+}> = ({ locales, setShowAllConstituents }) => {
   if (locales.length === 0) return null;
   const totalInRemainder = sumBy(locales, (locale) => locale.populationAdjusted ?? 0);
   const percentInRemainder =
@@ -87,7 +125,12 @@ const RowOfRemainingConstituents: React.FC<{
   return (
     <tr>
       <td style={{ paddingLeft: '1em' }}>
-        +{locales.length} other{locales.length > 1 && 's'}
+        <HoverableButton
+          style={{ padding: '0.25em', fontWeight: 'normal' }}
+          onClick={() => setShowAllConstituents(true)}
+        >
+          +{locales.length} other{locales.length > 1 && 's'}
+        </HoverableButton>
       </td>
       <CellPopulation population={totalInRemainder} />
       <CellPercent percent={percentInRemainder} />

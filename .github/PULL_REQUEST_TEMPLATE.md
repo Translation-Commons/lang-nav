@@ -1,30 +1,33 @@
 ## Summary
 
-- [ ] Clear description of what and why (link issues)
+- [ ] Clear description of what and why
 - [ ] Scope kept focused; note follow-ups if any
 - [ ] Set yourself as assignee
-- [ ] Mention the issue https://github.com/Translation-Commons/lang-nav/issues (usually by writing "Fixes #ISSUE_NUMBER" or "Closes #ISSUE_NUMBER")
+- [ ] Mention the issue (usually by writing "Fixes #ISSUE_NUMBER" or "Closes #ISSUE_NUMBER")
+  - [ ] If there is no issue, create one in [the repository issues page](https://github.com/Translation-Commons/lang-nav/issues) and link it here.
 
 ## Testing
 
 - [ ] `npm run lint`
 - [ ] `npm run test`
+  - [ ] Tests added or updated for changed logic
 - [ ] `npm run build`
-- [ ] Write comments on how you tested in this PR
-- [ ] Include screenshots
+- [ ] Write comments on manual testing how you tested in this PR
+- [ ] Include screenshots in the changes section below
 
 ## Changes
 
 ### Visual changes
 
 - [ ] Add before and after screenshots in the table below.
+  - [ ] Drag and drop images in the GitHub PR comment box to upload screenshots
 - [ ] Purely new views can just include the "after" screenshot.
-- [ ] Since more views can be reproduced by just sharing the URL -- add links to the relevant page and/or conditions to reproduce the view.
+- [ ] Since more views can be reproduced by just sharing the URL -- add links (eg. [link](https://translation-commons.github.io/lang-nav/data)) to the relevant page and/or conditions to reproduce the view.
 
-| What                                                                              | Before                                                                  | After                          |
-| --------------------------------------------------------------------------------- | ----------------------------------------------------------------------- | ------------------------------ |
-| [the page and/or conditions](https://translation-commons.github.io/lang-nav/data) | Drag and drop images in the GitHub PR comment box to upload screenshots | Include an after image as well |
-| Add more screenshots as needed                                                    |                                                                         |                                |
+| Page/View | Changes | Before | After |
+| --------- | ------- | ------ | ----- |
+|           |         |        |       |
+|           |         |        |       |
 
 ### Data changes
 

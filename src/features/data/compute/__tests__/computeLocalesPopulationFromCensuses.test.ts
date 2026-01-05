@@ -11,8 +11,8 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, LocaleSource, ObjectDictionary } from '@entities/types/DataTypes';
 
+import { computeRegionalLocalesPopulation } from '../computeAggregatedLocalesPopulation';
 import { computeLocalesPopulationFromCensuses } from '../computeLocalesPopulationFromCensuses';
-import { computeRegionalLocalesPopulation } from '../computeRegionalLocalesPopulation';
 import { updateLanguagesPopulationFromLocale, updatePopulations } from '../updatePopulations';
 
 describe('computeLocalePopulationFromCensuses', () => {

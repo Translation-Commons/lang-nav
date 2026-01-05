@@ -26,6 +26,8 @@ import {
   WritingSystemScope,
 } from '@entities/types/DataTypes';
 
+import { toDictionary } from '@shared/lib/setUtils';
+
 export function getDisconnectedMockedObjects(): ObjectDictionary {
   // Languages
   const sjn: LanguageData = {
@@ -35,6 +37,8 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     populationEstimate: 14400,
     populationRough: 24000,
     primaryScriptCode: 'Teng',
+    Combined: { parentLanguageCode: 'elv' },
+    ISO: { parentLanguageCode: 'elv' },
   };
   const dori0123: LanguageData = {
     ...getBaseLanguageData('dori0123', 'Doriathrin'), // dori0123
@@ -280,10 +284,10 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
   const objects = inputObjects ?? getDisconnectedMockedObjects();
   const objectsArray = Object.values(objects);
   const languagesBySource: Record<LanguageSource, Record<string, LanguageData>> = {
-    Combined: {
-      sjn: objects.sjn as LanguageData,
-      dori0123: objects.dori0123 as LanguageData,
-    },
+    Combined: toDictionary(
+      objectsArray.filter((obj) => obj.type === ObjectType.Language),
+      (obj) => obj.ID,
+    ),
     BCP: {
       sjn: objects.sjn as LanguageData,
     },
@@ -335,7 +339,7 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
 }
 
 // Makes all of the symbolic connections between the various objects
-// Also creates the regional locales, eg. sjn_BE -> sjn_123 & -> sjn_001
+// Also creates the aggregated locales, eg. sjn_BE -> sjn_123 & -> sjn_001
 export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDictionary {
   const {
     objects,
@@ -355,8 +359,9 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     variantTags,
   );
 
-  // Update the objects dictionary with the regional locales
+  // Update the objects dictionary with the aggregated locales
   Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
+  // console.log('Locales after connection:', Object.keys(locales));
 
   // Usually does in the supplemental data load step, we will add censuses connections here
   addCensusData(
@@ -389,7 +394,7 @@ export function getFullyInstantiatedMockedObjects(
   // From DataContext
   const world = objects['001'] as TerritoryData;
   updateObjectCodesNameAndPopulation(
-    [objects.sjn, objects.dori0123] as LanguageData[],
+    Object.values(languagesBySource.Combined) as LanguageData[],
     Object.values(locales),
     world,
     LanguageSource.Combined,
@@ -398,9 +403,6 @@ export function getFullyInstantiatedMockedObjects(
 
   // From SupplementalData
   computeContainedTerritoryStats(world);
-
-  // Add computed territory locales
-  Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
   computeLocalesWritingPopulation(Object.values(locales));
   computeLocalesPopulationFromCensuses(Object.values(locales));
   return objects;

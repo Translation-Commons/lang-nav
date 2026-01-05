@@ -167,6 +167,7 @@ export enum LocaleSource {
   IANA = 'IANA', // created when importing IANA variant tags
   Census = 'census', // created when importing census data
   CreateRegionalLocales = 'createRegionalLocales', // created when generating aggregated regional locales
+  CreateFamilyLocales = 'createFamilyLocales', // created when generating locales for language families
 }
 
 export interface LocaleData extends ObjectBase {
@@ -202,6 +203,9 @@ export interface LocaleData extends ObjectBase {
     moreSpecific?: LocaleData[]; // Locales that are more specific forms of this locale (eg. zh_SG -> zh_Hant_SG, zh_Hans_SG)
     childTerritories?: LocaleData[]; // Locales that represent subdivisions of this locale's territory
     childLanguages?: LocaleData[]; // Locales that represent child/descendant languages of this locale's language
+
+    sumOfPopulationFromChildTerritories?: number;
+    sumOfPopulationFromChildLanguages?: number;
   };
 
   // Data computed from other references, particularly territories.tsv and censuses
