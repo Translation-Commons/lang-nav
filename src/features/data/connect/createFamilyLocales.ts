@@ -44,7 +44,7 @@ function createLocalesForLanguageFamily(
 
   // For each childLocale, make a new locale for the language family or add the data to that language family
   childLocales.forEach((childLocale) => {
-    // Filter our exceptional locales, we don't want to worry about those right now
+    // Filter out exceptional locales, we don't want to worry about those right now
     if (childLocale.variantTagCodes && childLocale.variantTagCodes.length > 0) return; // Skip variant locales
     if (childLocale.scriptCode) return; // Skip script-specific locales
 

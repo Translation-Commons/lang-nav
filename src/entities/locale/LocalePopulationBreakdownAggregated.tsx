@@ -63,12 +63,16 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           ))}
         {showAllConstituents ? (
           constituents.length > MAX_CONSTITUENTS_DISPLAYED && (
-            <HoverableButton
-              style={{ padding: '0.25em', marginLeft: '1em' }}
-              onClick={() => setShowAllConstituents(false)}
-            >
-              Show less
-            </HoverableButton>
+            <tr>
+              <td colSpan={3}>
+                <HoverableButton
+                  style={{ padding: '0.25em', marginLeft: '1em' }}
+                  onClick={() => setShowAllConstituents(false)}
+                >
+                  Show less
+                </HoverableButton>
+              </td>
+            </tr>
           )
         ) : (
           <RowOfRemainingConstituents

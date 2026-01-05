@@ -34,7 +34,7 @@ export function computeRegionalLocalesPopulation(territory: TerritoryData | unde
     ).filter((loc) => loc.territoryCode !== '');
 
     // Add up the adjusted population of unique contained locales (eg don't double count
-    // zh_Hans_SG and zh_Hant_SG). The adjust population is corrected to the current year
+    // zh_Hans_SG and zh_Hant_SG). The adjusted population is corrected to the current year
     // to smooth out population growth between data collected in different years.
     relatedLocales.sumOfPopulationFromChildTerritories =
       sumBy(uniqueContainedLocales, (loc) => loc.populationAdjusted) || undefined;
@@ -59,7 +59,7 @@ export function computeLanguageFamilyLocalePopulations(locales: LocaleData[]): v
 }
 
 function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
-  // Re-compute the estimate for the contained territories first.
+  // Re-compute the estimate for the child languages first.
   const relatedLocales = locale.relatedLocales || {};
   if (!relatedLocales.childLanguages) return;
   const { childLanguages } = relatedLocales;
