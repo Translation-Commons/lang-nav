@@ -1,4 +1,3 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   isTerritoryGroup,
   LocaleData,
@@ -93,5 +92,3 @@ function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
     }
   }
 }
-
-export function computeIntermediateLanguageFamilyPopulations(languages: LanguageData[]): void {}

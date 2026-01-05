@@ -16,13 +16,20 @@ export function createFamilyLocales(
   languages: LanguageDictionary,
   locales: Record<string, LocaleData>,
 ): void {
+  console.log('Creating family locales:', Object.keys(locales));
   Object.values(languages).forEach((language) => {
+    console.log(
+      language.ID,
+      language[SOURCE]?.parentLanguage?.ID,
+      language[SOURCE]?.childLanguages?.map((cl) => cl.ID),
+    );
     // Only start recursively creating family locales for top-level languages
     if (language[SOURCE].parentLanguage != null || language[SOURCE].childLanguages?.length === 0)
       return;
     // Create locales for all the territories the language is used in
     createLocalesForLanguageFamily(language, locales);
   });
+  console.log('Created family locales:', Object.keys(locales));
 }
 
 function createLocalesForLanguageFamily(

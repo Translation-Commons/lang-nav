@@ -38,7 +38,7 @@ export function toDictionary<T, K extends string | number>(
   return items.reduce(
     (dict, item) => {
       const key = keyFn(item);
-      dict[key] = item;
+      if (!dict[key]) dict[key] = item;
       return dict;
     },
     {} as Record<K, T>,
