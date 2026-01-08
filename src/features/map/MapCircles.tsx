@@ -24,11 +24,17 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
   const coloringFunctions = useColors({ objects });
   const scalingFunctions = useScale({ objects, scaleBy });
 
-  const renderableObjects = useMemo(
+  const renderableObjects = useMemo(() => {
+    const currentObjects = getCurrentObjects(objects);
+    const filteredObjects = currentObjects.filter(
+      (obj) =>
+        obj.type === ObjectType.Language ||
+        (obj.type === ObjectType.Territory && (obj.landArea ?? 0) < 20000),
+    );
+
     // Reverse so the "first" objects are drawn on top.
-    () => getCurrentObjects(objects).reverse(),
-    [objects, getCurrentObjects],
-  );
+    return filteredObjects.reverse();
+  }, [objects, getCurrentObjects]);
 
   const buildOnMouseEnter = useCallback(
     (obj: ObjectData) => (e: React.MouseEvent) => {
@@ -52,21 +58,19 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
         pointerEvents: 'none', // So that the svg doesn't block mouse events to the underlying map
       }}
     >
-      {renderableObjects.map((obj) => {
-        return (
-          <HoverableCircle
-            key={obj.ID}
-            color={
-              colorBy === 'None' ? undefined : (coloringFunctions.getColor(obj) ?? 'transparent')
-            }
-            object={obj}
-            scalar={scalar}
-            getScale={scalingFunctions.getScale}
-            onMouseEnter={buildOnMouseEnter(obj)}
-            onMouseLeave={onMouseLeaveTriggeringElement}
-          />
-        );
-      })}
+      {renderableObjects.map((obj) => (
+        <HoverableCircle
+          key={obj.ID}
+          color={
+            colorBy === 'None' ? undefined : (coloringFunctions.getColor(obj) ?? 'transparent')
+          }
+          object={obj}
+          scalar={scalar}
+          getScale={scalingFunctions.getScale}
+          onMouseEnter={buildOnMouseEnter(obj)}
+          onMouseLeave={onMouseLeaveTriggeringElement}
+        />
+      ))}
     </svg>
   );
 };
@@ -79,6 +83,8 @@ const HoverableCircle: React.FC<{
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
 }> = ({ object, color, scalar, getScale, onMouseEnter, onMouseLeave }) => {
+  const { updatePageParams } = usePageParams();
+  const [isActive, setIsActive] = useState(false);
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) {
     return null;
@@ -89,7 +95,6 @@ const HoverableCircle: React.FC<{
     // The map is 12 degrees rotated to preserve land borders
     (object.longitude < -168 ? object.longitude + 360 : object.longitude) - 12,
   );
-  const [isActive, setIsActive] = useState(false);
   const computedRadiusMultiplier = getScale ? getScale(object) : 2;
   if (computedRadiusMultiplier <= 0) return null;
 
@@ -100,9 +105,10 @@ const HoverableCircle: React.FC<{
       r={computedRadiusMultiplier * scalar}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
-      style={{ transition: 'fill 0.25s, stroke 0.25s', pointerEvents: 'fill' }}
+      style={{ transition: 'fill 0.25s, stroke 0.25s', pointerEvents: 'fill', cursor: 'pointer' }}
       className="object-map-circle"
       strokeWidth={1 * scalar}
+      onClick={() => updatePageParams({ objectID: object.ID })}
       onMouseEnter={(e: React.MouseEvent) => {
         onMouseEnter(e);
         setIsActive(true);

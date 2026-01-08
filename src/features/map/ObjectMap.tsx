@@ -7,15 +7,15 @@ import useColors from '@features/transforms/coloring/useColors';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import CountryMap from './CountryMap';
 import MapCircles from './MapCircles';
+import MapCountry from './MapCountry';
 
 type Props = {
   objects: ObjectData[];
   maxWidth?: number; // in pixels
 };
 
-const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
+const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   const { colorBy, objectType } = usePageParams();
   const coloringFunctions = useColors({ objects });
 
@@ -27,8 +27,8 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 800 }) => {
           src="./data/wiki/map_world.svg"
           style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
         />
-        {objectType === ObjectType.Territory && <CountryMap objects={objects} />}
-        <MapCircles objects={objects} scalar={800 / maxWidth} />
+        {objectType === ObjectType.Territory && <MapCountry objects={objects} />}
+        <MapCircles objects={objects} scalar={2000 / maxWidth} />
       </div>
 
       {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}

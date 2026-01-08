@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import SVG from 'react-inlinesvg';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import useHoverCard from '@features/hovercard/useHoverCard';
+import useHoverCard from '@features/layers/hovercard/useHoverCard';
+import usePageParams from '@features/params/usePageParams';
 import useColors from '@features/transforms/coloring/useColors';
 
-import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
 type Props = {
@@ -14,22 +15,10 @@ type Props = {
 
 const CountryMap: React.FC<Props> = ({ objects }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
+  const { updatePageParams } = usePageParams();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { getTerritory, territories } = useDataContext();
   const { getColor, colorBy } = useColors({ objects });
-
-  const isFilteringCountries = useMemo(() => {
-    const countryIDs = territories
-      .filter(
-        (t) =>
-          t.scope === TerritoryScope.Country ||
-          t.scope === TerritoryScope.Dependency ||
-          t.ID === 'AQ',
-      )
-      .map((t) => t.ID);
-    const objectIDs = new Set(objects.map((t) => t.ID));
-    return countryIDs.some((id) => !objectIDs.has(id));
-  }, [objects, territories]);
 
   const isTerritoryInList = useCallback(
     (iso: string) => {
@@ -53,6 +42,12 @@ const CountryMap: React.FC<Props> = ({ objects }) => {
     },
     [onMouseLeaveTriggeringElement],
   );
+  const buildOnClick = useCallback(
+    (iso: string) => () => {
+      updatePageParams({ objectID: iso });
+    },
+    [updatePageParams],
+  );
 
   // Color countries
   useEffect(() => {
@@ -62,6 +57,7 @@ const CountryMap: React.FC<Props> = ({ objects }) => {
     territories.forEach((territory) => {
       if (territory.ID.length !== 2) return;
 
+      // Note: not always a group (g), could be a path or other element
       const g = svg.querySelector(`#${territory.ID.toLowerCase()}`);
       if (!g || !(g instanceof SVGElement)) return;
 
@@ -70,17 +66,14 @@ const CountryMap: React.FC<Props> = ({ objects }) => {
           const color = getColor(territory);
           g.style.fill = color || 'var(--color-button-secondary)';
         } else {
-          if (isFilteringCountries) {
-            g.style.fill = 'var(--color-button-primary)';
-          } else {
-            g.style.fill = 'var(--color-button-secondary)';
-          }
+          g.style.fill = 'var(--color-button-primary)';
         }
       } else {
         g.style.fill = '#bcbcbc';
       }
+      g.style.cursor = 'pointer';
     });
-  }, [territories, getColor, isFilteringCountries, isTerritoryInList, colorBy]);
+  }, [territories, getColor, isTerritoryInList, colorBy]);
 
   return (
     <div
@@ -89,11 +82,6 @@ const CountryMap: React.FC<Props> = ({ objects }) => {
     >
       <SVG
         src="./data/wiki/map_countries.svg"
-        // width="100%"
-        // height="100%"
-        // height="fit-container"
-        // viewBox="-180 -90 360 180"
-        // style={{ width: '91.5%', transform: 'translate(-0.12%, -1.35%)', height: '99.5%' }}
         preserveAspectRatio="none"
         onLoad={() => {
           const svg = svgContainerRef.current?.querySelector('svg');
@@ -107,6 +95,7 @@ const CountryMap: React.FC<Props> = ({ objects }) => {
             const g = svg.querySelector(`#${territory.ID.toLowerCase()}`);
             if (!g || !(g instanceof SVGElement)) return;
 
+            g.addEventListener('click', buildOnClick(territory.ID));
             g.addEventListener('mouseenter', buildOnMouseEnter(territory.ID, g));
             g.addEventListener('mouseleave', buildOnMouseLeave(g));
           });

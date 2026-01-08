@@ -3,8 +3,6 @@ import React from 'react';
 import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerritory';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import MapContainer from '@features/map/MapContainer';
-import ObjectMap from '@features/map/ObjectMap';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { TerritoryData } from '@entities/types/DataTypes';
@@ -31,11 +29,6 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
     sovereign,
   } = territory;
   const sortFunction = getSortFunction();
-
-  function getTerritoryDescendents(territory: TerritoryData): TerritoryData[] {
-    const children = territory.containsTerritories ?? [];
-    return [...children, ...children.flatMap((t) => getTerritoryDescendents(t))];
-  }
 
   return (
     <div className="Details">
@@ -92,11 +85,6 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       )}
 
       <TerritoryLocation territory={territory} />
-      <DetailsSection title="Map">
-        <MapContainer>
-          <ObjectMap objects={[territory, ...getTerritoryDescendents(territory)]} />
-        </MapContainer>
-      </DetailsSection>
     </div>
   );
 };
