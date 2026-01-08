@@ -8,7 +8,7 @@ import useColors from '@features/transforms/coloring/useColors';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import MapCircles from './MapCircles';
-import MapCountry from './MapCountry';
+import MapTerritories from './MapTerritories';
 
 type Props = {
   objects: ObjectData[];
@@ -27,7 +27,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
           src="./data/wiki/map_world.svg"
           style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
         />
-        {objectType === ObjectType.Territory && <MapCountry objects={objects} />}
+        {objectType === ObjectType.Territory && <MapTerritories objects={objects} />}
         <MapCircles objects={objects} scalar={2000 / maxWidth} />
       </div>
 
