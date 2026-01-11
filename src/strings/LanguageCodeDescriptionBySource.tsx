@@ -10,7 +10,7 @@ function LanguageCodeDescriptionBySource({ languageSource }: { languageSource: L
           The canonical language code used throughout this application. Generally if there is an ISO
           639-3 or ISO 639-5 code assigned to the language, that is used. Most other language
           families and dialects without an ISO code have a Glottocode. Some entries may have a
-          custom code from other source, but the entry may not be recognized by most sources.
+          custom code from another source, but the entry may not be recognized by most sources.
         </>
       );
     case LanguageSource.ISO:
@@ -37,7 +37,7 @@ function LanguageCodeDescriptionBySource({ languageSource }: { languageSource: L
     case LanguageSource.BCP:
       return (
         <>
-          The best common practices (BCP) BCP-47 language tag as used in IETF standards. Usually
+          The Best Current Practices (BCP) BCP-47 language tag as used in IETF standards. Usually
           this is the same as the ISO 639-3 code (eg. <code>cmn</code> for Mandarin) but if there is
           a 2-letter code defined in ISO 639-1, that is used instead (eg. <code>zh</code> for
           Chinese instead of <code>zho</code>).

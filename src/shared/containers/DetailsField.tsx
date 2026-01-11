@@ -17,7 +17,7 @@ const DetailsField: React.FC<Props> = ({ children, title, description, endConten
           {title}
           {description && (
             <Hoverable hoverContent={description}>
-              <InfoIcon size="1em" display="block" />
+              <InfoIcon size="1em" display="block" aria-label="More information" />
             </Hoverable>
           )}
           {/* Most usages are manually adding a colon after the title, before that is phased out we are
