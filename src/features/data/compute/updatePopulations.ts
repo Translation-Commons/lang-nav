@@ -38,11 +38,13 @@ function computeLanguagesPopulations(languages: LanguageData[]): void {
     });
 }
 
-function getLanguagePopulationFollowingDescendants(lang: LanguageData): number {
+function getLanguagePopulationFollowingDescendants(lang: LanguageData, depth = 0): number {
+  if (depth > 40) console.debug('Potential infinite recursion for: ', lang.ID, 'depth: ', depth);
+  if (depth > 50) return 0;
   // Recompute the population of descendants first
   const descendantPopulation = sumBy(
     lang.childLanguages,
-    (childLang) => getLanguagePopulationFollowingDescendants(childLang) || 0.01, // Using 0.01 as a tiebreaker
+    (childLang) => getLanguagePopulationFollowingDescendants(childLang, depth + 1) || 0.01, // Using 0.01 as a tiebreaker
   );
   lang.populationOfDescendants = descendantPopulation > 0 ? descendantPopulation : undefined;
 

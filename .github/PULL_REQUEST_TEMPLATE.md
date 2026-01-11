@@ -31,7 +31,8 @@
 
 ### Data changes
 
-- [ ] TSV edits in `public/data/`
+- [ ] TSV, SVG, etc. edits in `public/data/`
+- [ ] Corresponding readmes updated in `public/data/`
 - [ ] Load/connect/compute updates in `src/features/data/`
 
 ### Internal changes
