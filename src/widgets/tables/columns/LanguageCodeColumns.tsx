@@ -3,29 +3,24 @@ import { ReactNode } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import { SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
-import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+
+import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 
 const columns: TableColumn<LanguageData>[] = [
   {
-    key: 'ID',
+    key: 'Code',
     sortParam: SortBy.Code,
-    description: (
-      <>
-        The canonical language code used throughout this application. Generally if there is an ISO
-        639-3 or ISO 639-5 code assigned to the language, that is used. Most other language families
-        and dialects without an ISO code have a Glottocode. Some entries may have a custom code from
-        other source, but the entry may be contentious.
-      </>
-    ),
+    description: <CodeDisplayDescription />,
     render: (lang: LanguageData): ReactNode => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.Code} />
@@ -35,18 +30,18 @@ const columns: TableColumn<LanguageData>[] = [
     isInitiallyVisible: true,
   },
   {
+    key: 'Canonical ID',
+    description: <LanguageCodeDescriptionBySource languageSource={LanguageSource.Combined} />,
+    render: (lang: LanguageData): ReactNode => lang.ID,
+  },
+  {
     key: 'ISO 639-1',
+    description: 'The two-letter ISO 639-1 code, if one is assigned.',
     render: (lang) => (lang.ISO.code6391 ? lang.ISO.code6391 : <Deemphasized>—</Deemphasized>),
   },
   {
     key: 'ISO 639-3/5',
-    description: (
-      <>
-        The primary 3-letter code used by most systems.
-        <LinkButton href="https://iso639-3.sil.org/">ISO 639-3 standard</LinkButton>
-        <LinkButton href="https://www.loc.gov/standards/iso639-5/">ISO 639-5 standard</LinkButton>
-      </>
-    ),
+    description: <LanguageCodeDescriptionBySource languageSource={LanguageSource.ISO} />,
     render: (lang) => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
         {lang.ISO.code}
@@ -56,12 +51,7 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'BCP Code',
-    description: (
-      <>
-        BCP 47 language tag as used in IETF standards. Usually this is the same as the ISO 639-3
-        code but if there is a 2-letter code defined in ISO 639-1, that is used instead.
-      </>
-    ),
+    description: <LanguageCodeDescriptionBySource languageSource={LanguageSource.BCP} />,
     render: (lang) =>
       lang.BCP.code !== lang.ISO.code ? (
         lang.BCP.code
@@ -71,18 +61,7 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'CLDR Code',
-    description: (
-      <>
-        The CLDR language code as used in the Unicode Common Locale Data Repository (CLDR). This is
-        usually the BCP code, but macrolanguages are handled differently. The primary language
-        within a macrolanguage is assigned the code instead. So Chinese <code>zh</code> is used for
-        Mandarin <code>cmn</code> and Malayic <code>ms</code> is used for Standard Malay{' '}
-        <code>zsm</code>.
-        <LinkButton href="https://www.unicode.org/cldr/charts/latest/supplemental/locale_coverage.html">
-          CLDR project page
-        </LinkButton>
-      </>
-    ),
+    description: <LanguageCodeDescriptionBySource languageSource={LanguageSource.CLDR} />,
     render: (lang) =>
       lang.CLDR.code !== lang.ISO.code ? (
         <>
@@ -95,6 +74,7 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Glottocode',
+    description: <LanguageCodeDescriptionBySource languageSource={LanguageSource.Glottolog} />,
     render: (lang) => lang.Glottolog.code,
   },
 ];
@@ -116,4 +96,16 @@ function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | nu
       <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
     </Hoverable>
   ) : null;
+}
+
+function CodeDisplayDescription() {
+  const { languageSource } = usePageParams();
+  return (
+    <>
+      The short combination of alphabetic or alphanumeric characters to identify the language or
+      languoid -- according to the {languageSource} language source:
+      <div style={{ height: '0.5em' }} />
+      <LanguageCodeDescriptionBySource languageSource={languageSource} />
+    </>
+  );
 }
