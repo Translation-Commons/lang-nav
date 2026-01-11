@@ -5,24 +5,32 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import LanguageScopeDisplay from '@entities/language/LanguageScopeDisplay';
-import { LanguageData, LanguageField } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
+import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
+
 const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { Glottolog, ISO, CLDR } = lang;
 
   return (
-    <DetailsSection title="Codes">
+    <DetailsSection title="Language Codes">
       <DetailsField title="Scope:">
         <LanguageScopeDisplay lang={lang} />
       </DetailsField>
-      <DetailsField title="Language Code:">{lang.ID}</DetailsField>
       <DetailsField
-        title="Glottocode:"
+        title="Canonical Language ID"
+        description={<LanguageCodeDescriptionBySource languageSource={LanguageSource.Combined} />}
+      >
+        {lang.ID}
+      </DetailsField>
+      <DetailsField
+        title="Glottocode"
+        description={<LanguageCodeDescriptionBySource languageSource={LanguageSource.Glottolog} />}
         endContent={
           Glottolog.code && (
             <LinkButton href={`https://glottolog.org/resource/languoid/id/${Glottolog.code}`}>
@@ -34,7 +42,17 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         {Glottolog.code ? <>{Glottolog.code}</> : <Deemphasized>Not in Glottolog</Deemphasized>}
       </DetailsField>
       <DetailsField
-        title="ISO Code:"
+        title="ISO Code"
+        description={
+          <>
+            <LanguageCodeDescriptionBySource languageSource={LanguageSource.ISO} />
+            {ISO.code6391 && (
+              <div style={{ marginTop: '0.5em' }}>
+                There also is a 2-letter ISO 639-1 code for this language.
+              </div>
+            )}
+          </>
+        }
         endContent={
           <LinkButton href={`https://iso639-3.sil.org/code/${ISO.code}`}>ISO Catalog</LinkButton>
         }
@@ -57,7 +75,8 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         )}
       </DetailsField>
       <DetailsField
-        title="CLDR Code:"
+        title="CLDR Code"
+        description={<LanguageCodeDescriptionBySource languageSource={LanguageSource.CLDR} />}
         endContent={
           CLDR.code && (
             <LinkButton
