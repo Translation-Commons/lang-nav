@@ -1,6 +1,7 @@
 import React from 'react';
 
 import DubiousLanguages from '@widgets/reports/DubiousLanguages';
+import LanguagePathsReport from '@widgets/reports/LanguagePathsReport';
 import LanguagesLargestDescendant from '@widgets/reports/LanguagesLargestDescendant';
 import LanguagesWithIdenticalNames from '@widgets/reports/LanguagesWithIdenticalNames';
 import PotentialLocales from '@widgets/reports/PotentialLocales';
@@ -41,6 +42,7 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
           <DubiousLanguages />
           <LanguagesWithIdenticalNames />
           <LanguagesLargestDescendant />
+          <LanguagePathsReport />
         </>
       );
     case ObjectType.Census:

@@ -3,10 +3,6 @@
  * It includes types for language codes, glottocodes, and language data.
  */
 
-// LanguageCode is ideally an ISO-639 code, or a BCP047 formatted complex language tag
-// should be formatted like ab or abc. But there are some languoids with different
-// kinds of language codes here as well. This is the main index key for languages and languoids
-
 import React from 'react';
 
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
@@ -41,12 +37,15 @@ export enum LanguageSource {
   CLDR = 'CLDR', // ISO but with some CLDR-specific aliasing
 }
 
+// LanguageCode is ideally an ISO-639 code, or a BCP047 formatted complex language tag
+// should be formatted like ab or abc. But there are some languoids with different
+// kinds of language codes here as well. This is the main index key for languages and languoids
 // TODO Replace generic strings with some form of validation
-export type ISO6391LanguageCode = string; // eg. en, es
-export type ISO6393LanguageCode = string; // eg. eng, spa
+export type ISO6391LanguageCode = string; // eg. en, es, zh
+export type ISO6393LanguageCode = string; // eg. eng, spa, zho, cmn
 export type ISO6395LanguageCode = string; // eg. ine (Indo-European)
-export type ISO6392LanguageCode = ISO6393LanguageCode | ISO6395LanguageCode; // eg. eng, spa, ine
-export type Glottocode = string; // eg. abcd1234
+export type ISO6392LanguageCode = ISO6393LanguageCode | ISO6395LanguageCode; // eg. eng, spa, zho, cmn, ine
+export type Glottocode = string; // eg. stan1293, stan1288, clas1255, mand1415, indo1319
 export type LanguageCode = ISO6391LanguageCode | ISO6392LanguageCode | Glottocode | string;
 
 export enum LanguageModality {
@@ -172,10 +171,10 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
 
 // Since languages can be categorized by ISO, Glottolog, or other source, these values will vary based on the language source
 type LanguageDataInSource = {
-  code?: LanguageCode;
+  code?: LanguageCode; // May be specific language source, eg. `spa` vs `es` or `stan1288`
   name?: string;
   scope?: LanguageScope;
-  parentLanguageCode?: LanguageCode;
+  parentLanguageCode?: LanguageCode; // May be the source-specific one (eg. `es` or the canonical id eg. `spa`)
   parentLanguage?: LanguageData;
   childLanguages?: LanguageData[];
   notes?: React.ReactNode;

@@ -46,6 +46,7 @@ function updateParentsAndDescendants(
   languages.forEach((lang) => {
     const specific = lang[languageSource];
     lang.parentLanguage = specific.parentLanguage ?? undefined;
+    // TODO maybe recompute childLanguages from parentLanguage to prevent bad mutations of childLanguages from creating cycles
     lang.childLanguages = specific.childLanguages ?? [];
   });
 }
