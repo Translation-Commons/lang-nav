@@ -4,14 +4,11 @@ import { ColorBy } from '@features/transforms/coloring/ColorTypes';
 import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
-/**
- * This is used to make the next version of the page parameters in the URL.
- */
-export function getNewURLSearchParams(
+function buildNextURLSearchParams(
   newParams: PageParamsOptional,
-  prev?: URLSearchParams,
+  next: URLSearchParams,
 ): URLSearchParams {
-  const next = new URLSearchParams(prev);
+  // Convert newParams to array for iterate
   Object.entries(newParams).forEach(([key, value]) => {
     if (key === PageParamKey.limit) {
       // Handle as number
@@ -52,14 +49,17 @@ export function getNewURLSearchParams(
       next.set(key, value.toString());
     }
   });
+  return next;
+}
 
-  // Clear the parameters that match the default
+function clearDefaultParams(next: URLSearchParams): URLSearchParams {
   const defaults = getDefaultParams(
     next.get('objectType') as ObjectType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
     next.get('colorBy') as ColorBy,
   );
+
   Array.from(next.entries()).forEach(([key, value]) => {
     const defaultValue = defaults[key as PageParamKey];
 
@@ -79,5 +79,50 @@ export function getNewURLSearchParams(
     }
   });
 
+  return next;
+}
+
+function clearContextDependentParams(
+  newParams: PageParamsOptional,
+  next: URLSearchParams,
+  prev?: URLSearchParams,
+): URLSearchParams {
+
+  const prevView = prev?.get('view');
+  const prevObjectType = prev?.get('objectType');
+
+  if (newParams.view !== undefined && newParams.view !== prevView) {
+    if (newParams.limit === undefined) {
+      next.delete('limit');
+    }
+    if (newParams.page === undefined) {
+      next.delete('page');
+    }
+    if (newParams.colorBy === undefined) {
+      next.delete('colorBy');
+    }
+  }
+
+  if (newParams.objectType !== undefined && newParams.objectType !== prevObjectType) {
+    if (newParams.page === undefined) {
+      next.delete('page');
+    }
+  }
+
+  if (prevView === View.Details && newParams.view === undefined) {
+    next.delete('view');
+  }
+
+  return next;
+}
+
+export function getNewURLSearchParams(
+  newParams: PageParamsOptional,
+  prev?: URLSearchParams,
+): URLSearchParams {
+  let next = new URLSearchParams(prev);
+  next = buildNextURLSearchParams(newParams, next);
+  next = clearContextDependentParams(newParams, next, prev);
+  next = clearDefaultParams(next);
   return next;
 }
