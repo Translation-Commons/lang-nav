@@ -87,7 +87,6 @@ function clearContextDependentParams(
   next: URLSearchParams,
   prev?: URLSearchParams,
 ): URLSearchParams {
-
   const prevView = prev?.get('view');
   const prevObjectType = prev?.get('objectType');
 
