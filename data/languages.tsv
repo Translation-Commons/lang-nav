@@ -8103,14 +8103,11 @@ xxo-art-theban		Theban							0
 xxo-bag		Bagatha							0					
 xxo-ex-cypriot		Cypriot							0					
 xxt	tamb1257	Tambora			Latn		Extinct	Still	0				No	Extinct language
-xxx-abt-x-maprik		Ambulas Maprik							0					
-xxx-abt-x-wosera		Ambulas Wosera Kamu							0					
 xxx-am-Latn		Amharic (Latin)							0					
 xxx-ar-Latn-x-chat		Arabic (Chat Alphabet)							0					
 xxx-azj-Cyrl		North Azerbaijani							0					
 xxx-bal-Latn		Balochi (Latin)							0					
 xxx-be-Latn		Belarusan (Latin)							0					
-xxx-be-tarask		Belarusan (Taraškievica)							0					
 xxx-bg-Latn		Bulgarian (Latin)							0					
 xxx-bn-Latn		Bengali (Latin)							0					
 xxx-bo-Latn		Tibetan (Latin)							0					
@@ -8119,36 +8116,11 @@ xxx-chr-Latn		Cherokee (Latin)							0
 xxx-cmn-Latn		Mandarin Chinese (Pinyin)							0					
 xxx-cr-Latn		Cree (Latin)							0					
 xxx-crk-Latn		Plains Cree (Latin)							0					
-xxx-crn-x-presidio		Presidio de los Reyes							0					
 xxx-csw-Latn		Swampy Cree (Latin)							0					
-xxx-de-AT		German (Austria)							0					
-xxx-de-CH		German (Switzerland)							0					
-xxx-de-DE		German (Germany)							0					
 xxx-el-Latn		Greek (Latin)							0					
 xxx-el-Latn-x-chat		Greek (Latin - chat)							0					
-xxx-en-AU		English (Australia)							0					
-xxx-en-BW		English (Botswana)							0					
-xxx-en-CA		English (Canada)							0					
-xxx-en-GB		English (Great Britain)							0					
-xxx-en-HK		English (Hong Kong)							0					
-xxx-en-IE		English (Ireland)							0					
-xxx-en-IN		English (India)							0					
-xxx-en-JM		English (Jamaica)							0					
-xxx-en-KE		English (Kenya)							0					
-xxx-en-NG		English (Nigeria)							0					
-xxx-en-NZ		English (New Zealand)							0					
-xxx-en-PH		English (Philippines)							0					
-xxx-en-SG		English (Singapore)							0					
 xxx-en-simp		Simple English							0					
-xxx-en-TT		English (Trinidad and Tobago)							0					
-xxx-en-US		English (United States)							0					
-xxx-en-ZA		English (South Africa)							0					
-xxx-fr-CA		French (Canada)							0					
-xxx-fr-FR		French (France)							0					
-xxx-fr-x-jer		Jèrriais							0					
 xxx-fr-x-nor		Norman							0					
-xxx-frr-x-fer		Northern Frisian (Öömrang)							0					
-xxx-frr-x-moo		Northern Frisian (Frasch)							0					
 xxx-ga-x-slais		Irish (slashes)							0					
 xxx-ga-x-uncial		Irish (Uncial)							0					
 xxx-he-Latn		Hebrew (Latin)							0					
@@ -8163,21 +8135,11 @@ xxx-jv-x-bms		Banyumasan							0
 xxx-ka-Latn		Georgian (Latin)							0					
 xxx-kaa-Cyrl		Karakalpak (Cyrillic)							0					
 xxx-kk-Latn		Kazakh (Latin)							0					
-xxx-knv-x-ara		Tabo (Aramia River)							0					
-xxx-knv-x-fly		Tabo (Fly River)							0					
-xxx-kw-kkcor		Common Cornish							0					
-xxx-kw-uccor		Unified Cornish							0					
 xxx-ky-Latn		Kirghiz (Latin)							0					
 xxx-lif-Limb		Limbu							0					
-xxx-lil-x-fou		Lillooet (Fountain)							0					
-xxx-lil-x-mou		Lillooet (Mount Currie)							0					
-xxx-lld-x-bad		Ladin Badiot							0					
-xxx-lld-x-fas		Ladin Fascian							0					
-xxx-lld-x-gar		Ladin Gherdeina							0					
 xxx-map-bms		Banyumasan							0					
 xxx-mk-Latn		Macedonian (Latin)							0					
 xxx-mn-Latn		Mongolian (Latin)							0					
-xxx-nds-NL		Dutch Low Saxon							0					
 xxx-ne-Latn		Nepali (Latin)							0					
 xxx-noo-x-barkley		Nuu-chah-nulth (Barkley)							0					
 xxx-noo-x-eha-nuc		Nuu-chah-nulth (Ehattesaht Nuchatlaht)							0					
@@ -8185,25 +8147,13 @@ xxx-noo-x-nitinaht		Nitinaht							0
 xxx-noo-x-she		Nuu-chah-nulth (Tseshaht)							0					
 xxx-oj-Cans		Ojibwe (Syllabics)							0					
 xxx-os-x-dig		Digor							0					
-xxx-pap-CW		Papiamento (Curaçao)							0					
 xxx-pes-Latn		Western Farsi (Latin)							0					
 xxx-pi-Latn		Pali (Latin)							0					
-xxx-pt-AO		Portuguese (Angola)							0					
-xxx-pt-CV		Portuguese (Cape Verde)							0					
-xxx-pt-GW		Portuguese (Guinea Bissau)							0					
-xxx-pt-MZ		Portuguese (Mozambique)							0					
-xxx-pt-PT		Portuguese (Portugal)							0					
-xxx-pt-ST		Portuguese (São Tomé and Príncipe)							0					
-xxx-pt-TL		Portuguese (Timor-Leste)							0					
 xxx-ru-Latn		Russian (Latin)							0					
-xxx-scn-x-tara		Tarantino							0					
-xxx-sco-ulster		Ulster Scots							0					
 xxx-sco-x-scotland		Scots (Scotland)							0					
 xxx-scs-Cans		North Slavey (Syllabics)							0					
 xxx-sr-Latn		Serbian (Latin)							0					
 xxx-ti-Latn		Tigrigna (Latin)							0					
-xxx-tuo-BR		Tucano (Brazil)							0					
-xxx-tuo-CO		Tucano (Colombia)							0					
 xxx-tzj-x-eastern		Eastern Tz’utujil							0					
 xxx-tzm-Tfng		Central Atlas Tamazight							0					
 xxx-uk-Latn		Ukrainian (Latin)							0					
