@@ -27,19 +27,26 @@ function ViewMap() {
   const { filteredObjects } = useFilteredObjects({});
   const { getCurrentObjects } = usePagination<ObjectData>();
 
-  if (objectType !== ObjectType.Language && objectType !== ObjectType.Territory) {
+  const isDrawingTerritories =
+    objectType === ObjectType.Territory || objectType === ObjectType.Census;
+
+  if (objectType !== ObjectType.Language && !isDrawingTerritories) {
     return (
       <div>
-        Map view is in Beta <em>β</em> mode and is only available for Languages and Territories.
+        Map view is in Beta <em>β</em> mode and is only available for Languages, Territories, and
+        Censuses.
       </div>
     );
   }
 
-  const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) =>
-    obj.type === ObjectType.Language || obj.type === ObjectType.Territory
-      ? obj.latitude == null || obj.longitude == null
-      : true,
-  );
+  const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) => {
+    if (obj.type === ObjectType.Language || obj.type === ObjectType.Territory) {
+      return obj.latitude == null || obj.longitude == null;
+    } else if (obj.type === ObjectType.Census) {
+      return obj.territory?.latitude == null || obj.territory?.longitude == null;
+    }
+    return false;
+  });
 
   return (
     <MapContainer>
@@ -51,10 +58,10 @@ function ViewMap() {
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>
             {colorBy === 'None'
-              ? 'You can color the circles using this selector:'
+              ? `You can color the ${isDrawingTerritories ? 'territories' : 'circles'} by:`
               : `Circles are colored by `}
           </div>
-          <ColorBySelector />
+          <ColorBySelector objectType={isDrawingTerritories ? ObjectType.Territory : objectType} />
           <div>{colorBy !== 'None' && 'using the color gradient'}</div>
           <ColorGradientSelector />
         </div>
@@ -85,7 +92,20 @@ function getMapDescription(objectType: ObjectType): ReactNode {
         </>
       );
     case ObjectType.Territory:
-      return 'These coordinates represent the geographical center of the territory.';
+      return (
+        <>
+          Large territories are polygons, smaller territories are represented by circles at their
+          centroid coordinates. Mouse over a territory to see more information about it and click it
+          to see the territory details.
+        </>
+      );
+    case ObjectType.Census:
+      return (
+        <>
+          While we do not yet have census tables for each country, you can see here the countries
+          that have censuses available and hover over to see more details.
+        </>
+      );
     default:
       return '';
   }

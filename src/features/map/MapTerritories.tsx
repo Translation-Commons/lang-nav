@@ -4,28 +4,31 @@ import SVG from 'react-inlinesvg';
 import { useDataContext } from '@features/data/context/useDataContext';
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePageParams from '@features/params/usePageParams';
-import useColors from '@features/transforms/coloring/useColors';
+import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 
 import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
-import ObjectCard from '@entities/ui/ObjectCard';
 
 type Props = {
+  applicableTerritories: TerritoryData[];
+  coloringFunctions: ColoringFunctions;
+  getHoverContent: (obj: ObjectData) => React.ReactNode;
   objects: ObjectData[];
 };
 
-const MapTerritories: React.FC<Props> = ({ objects }) => {
+const MapTerritories: React.FC<Props> = ({
+  applicableTerritories,
+  coloringFunctions: { colorBy, getColor },
+  getHoverContent,
+}) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
   const { updatePageParams } = usePageParams();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { getTerritory, territories } = useDataContext();
-  const { getColor, colorBy } = useColors({ objects });
 
   const isTerritoryInList = useCallback(
-    (iso: string) => {
-      return objects.some((obj) => obj.type === 'Territory' && obj.ID === iso);
-    },
-    [objects],
+    (iso: string) => applicableTerritories.some((obj) => obj.ID === iso),
+    [applicableTerritories],
   );
 
   // Iterates over all of the elements in the SVG corresponding to countries
@@ -65,11 +68,11 @@ const MapTerritories: React.FC<Props> = ({ objects }) => {
   // Add hover and click handlers to country elements
   const buildOnMouseEnter = useCallback(
     (iso: string, element: SVGElement) => (ev: MouseEvent) => {
-      const obj = getTerritory(iso);
-      if (obj) showHoverCard(<ObjectCard object={obj} />, ev.clientX, ev.clientY);
+      const territory = getTerritory(iso);
+      if (territory) showHoverCard(getHoverContent(territory), ev.clientX, ev.clientY);
       element.style.opacity = '0.7';
     },
-    [showHoverCard, getTerritory],
+    [showHoverCard, getTerritory, getHoverContent],
   );
   const buildOnMouseLeave = useCallback(
     (element: SVGElement) => () => {

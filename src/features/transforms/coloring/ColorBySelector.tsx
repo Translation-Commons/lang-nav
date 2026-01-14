@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View } from '@features/params/PageParamTypes';
+import { ObjectType, View } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
@@ -9,11 +9,15 @@ import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ColorBy } from './ColorTypes';
 
-const ColorBySelector: React.FC = () => {
-  const { colorBy, updatePageParams, objectType, view } = usePageParams();
+type Props = {
+  objectType?: ObjectType;
+};
+
+const ColorBySelector: React.FC<Props> = ({ objectType }) => {
+  const { colorBy, updatePageParams, view, objectType: pageObjectType } = usePageParams();
   const { display } = useSelectorDisplay();
 
-  const applicableColorBys = getColorBysApplicableToObjectType(objectType);
+  const applicableColorBys = getColorBysApplicableToObjectType(objectType ?? pageObjectType);
   const colorByOptions: ColorBy[] = [
     'None',
     ...Object.values(SortBy).filter((cb) => applicableColorBys.includes(cb)),
