@@ -8,6 +8,7 @@ import { describe, expect, it } from 'vitest';
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
 import {
+  getCountOfCensuses,
   getCountOfLanguages,
   getCountOfTerritories,
   getObjectDate,
@@ -163,6 +164,40 @@ describe('getCountOfTerritories', () => {
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
+      sjn_BE: undefined,
+      sjn_ER: undefined,
+      tolkorth: undefined,
+    });
+  });
+});
+
+describe('getCountOfCensuses', () => {
+  it('returns count of censuses for objects', () => {
+    const results = Object.fromEntries(
+      Object.values(mockedObjects).map((obj) => [obj.ID, getCountOfCensuses(obj)]),
+    );
+    expect(results).toEqual({
+      '001': 0, // no censuses for this territory
+      '123': 0, // no censuses for this territory
+      Teng: undefined,
+      AM: 0, // no censuses for this territory
+      ER: 0,
+      HA: 0,
+      BE: 1, // territory for be0590
+      dori0123: undefined, // not defined for languages
+      dori0123_001: 0, // not in any censuses
+      dori0123_123: 0,
+      dori0123_ER: 0,
+      be0590: 1, // be0590 is a census
+      sjn: undefined, // not defined for languages
+      sjn_001: 0, // not in any censuses
+      sjn_123: 0,
+      sjn_Teng_001: 0,
+      sjn_Teng_123: 0,
+      sjn_Teng_BE: 0,
+      sjn_BE: 1, // in be0590
+      sjn_ER: 0, // not in any censuses
+      tolkorth: undefined,
     });
   });
 });

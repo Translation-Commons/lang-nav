@@ -136,3 +136,19 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
     ) / totalLocalePopulation;
   return computedLiteracy || undefined;
 }
+
+// SortBy.CountOfCensuses
+export function getCountOfCensuses(object: ObjectData): number | undefined {
+  switch (object.type) {
+    case ObjectType.Territory:
+      return object.censuses?.length ?? 0;
+    case ObjectType.Locale:
+      return object.censusRecords?.length ?? 0;
+    case ObjectType.Census:
+      return 1;
+    case ObjectType.Language:
+    case ObjectType.WritingSystem:
+    case ObjectType.VariantTag:
+      return undefined;
+  }
+}

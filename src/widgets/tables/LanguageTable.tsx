@@ -108,7 +108,7 @@ const LanguageTable: React.FC = () => {
         ),
         valueType: TableValueType.Count,
         isInitiallyVisible: false,
-        sortParam: SortBy.CountOfDialects,
+        sortParam: SortBy.CountOfLanguages,
         columnGroup: 'Relations',
       },
       {

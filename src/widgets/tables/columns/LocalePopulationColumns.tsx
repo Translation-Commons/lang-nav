@@ -2,6 +2,7 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
+import CensusCountForLocale from '@entities/census/CensusCountForLocale';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/types/DataTypes';
@@ -51,5 +52,13 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: 'Population Source',
     render: (object) => <LocaleCensusCitation locale={object} size="short" />,
     columnGroup: 'Demographics',
+  },
+  {
+    key: 'Population Records',
+    render: (object) => <CensusCountForLocale locale={object} />,
+    columnGroup: 'Demographics',
+    valueType: TableValueType.Count,
+    sortParam: SortBy.CountOfCensuses,
+    isInitiallyVisible: false,
   },
 ];

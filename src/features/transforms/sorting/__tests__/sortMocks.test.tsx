@@ -515,6 +515,35 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
+  it('sortBy: CountOfCensuses', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(SortBy.CountOfCensuses, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'BE', // 1, has be0590
+      'be0590', // 1, it is a census
+      'sjn_BE', // 1, featured in be0590
+      '123', // 0 (could have censuses but there are none in the data)
+      'ER',
+      'HA',
+      'AM',
+      '001',
+      'sjn_ER',
+      'dori0123_ER',
+      'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      // undefined
+      'sjn',
+      'dori0123',
+      'Teng',
+      'tolkorth',
+    ]);
+  });
+
   it('sortBy: Literacy', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(SortBy.Literacy, SortBehavior.Normal);

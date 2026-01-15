@@ -7,6 +7,10 @@ import { getSortField } from '@features/transforms/fields/getField';
 
 import { SortBy } from '../SortTypes';
 
+const IGNORED_COMBINATIONS: Partial<Record<ObjectType, SortBy[]>> = {
+  [ObjectType.Census]: [SortBy.CountOfCensuses], // It's always 1 for censuses
+};
+
 describe('getFieldsForSorting', () => {
   it('should not return duplicate SortBy values for any ObjectType', () => {
     Object.values(ObjectType).forEach((objectType) => {
@@ -26,7 +30,10 @@ describe('getFieldsForSorting', () => {
       Object.values(SortBy).forEach((sortBy) => {
         objectsInType.forEach((obj) => {
           const sortField = getSortField(obj, sortBy);
-          if (!sortBysForType.includes(sortBy) && sortBy !== SortBy.CountOfDialects) {
+          if (
+            !sortBysForType.includes(sortBy) &&
+            !IGNORED_COMBINATIONS[objectType]?.includes(sortBy)
+          ) {
             // The value is not supposed to be applicable
             expect(
               sortField,
