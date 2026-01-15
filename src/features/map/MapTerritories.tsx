@@ -3,32 +3,34 @@ import SVG from 'react-inlinesvg';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
+import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/types/DataTypes';
+
+import DrawableData from './DrawableData';
 
 type Props = {
-  applicableTerritories: TerritoryData[];
+  drawableObjects: DrawableData[];
   coloringFunctions: ColoringFunctions;
-  getHoverContent: (obj: ObjectData) => React.ReactNode;
-  objects: ObjectData[];
+  getHoverContent: (obj: DrawableData) => React.ReactNode;
 };
 
 const MapTerritories: React.FC<Props> = ({
-  applicableTerritories,
+  drawableObjects,
   coloringFunctions: { colorBy, getColor },
   getHoverContent,
 }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
-  const { updatePageParams } = usePageParams();
+  const { updatePageParams, objectType } = usePageParams();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { getTerritory, territories } = useDataContext();
 
   const isTerritoryInList = useCallback(
-    (iso: string) => applicableTerritories.some((obj) => obj.ID === iso),
-    [applicableTerritories],
+    (iso: string) => drawableObjects.some((obj) => obj.ID === iso),
+    [drawableObjects],
   );
 
   // Iterates over all of the elements in the SVG corresponding to countries
@@ -82,7 +84,13 @@ const MapTerritories: React.FC<Props> = ({
     [onMouseLeaveTriggeringElement],
   );
   const buildOnClick = useCallback(
-    (iso: string) => () => updatePageParams({ objectID: iso }),
+    (iso: string) => () => {
+      if (objectType === ObjectType.Census) {
+        updatePageParams({ territoryFilter: iso, view: View.Table });
+      } else {
+        updatePageParams({ objectID: iso });
+      }
+    },
     [updatePageParams],
   );
   // Add hover and click handlers with cleanup

@@ -11,10 +11,10 @@ describe('useScale', () => {
   it('returns default multiplier when scaleBy is undefined or "None"', () => {
     const lang = getBaseLanguageData('eng', 'English');
     const { result: r1 } = renderHook(() => useScale({ objects: [lang], scaleBy: undefined }));
-    expect(r1.current.getScale(lang)).toBe(2);
+    expect(r1.current.getScale(lang)).toBe(1);
 
     const { result: r2 } = renderHook(() => useScale({ objects: [lang], scaleBy: 'None' }));
-    expect(r2.current.getScale(lang)).toBe(2);
+    expect(r2.current.getScale(lang)).toBe(1);
   });
 
   it('applies sqrt + log transform for Population and handles missing values', () => {

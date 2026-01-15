@@ -31,7 +31,7 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
         <>
           Click to{' '}
           {view === View.Details
-            ? 'change page to see the details for:'
+            ? 'change the page to see the details for:'
             : 'open modal with more information for:'}
           <div>
             <strong>{object.type}</strong>

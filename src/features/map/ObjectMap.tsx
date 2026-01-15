@@ -5,11 +5,12 @@ import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 
+import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
-import ObjectCard from '@entities/ui/ObjectCard';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
+import DrawableData from './DrawableData';
 import MapCircles from './MapCircles';
 import MapHoverContent from './MapHoverContent';
 import MapTerritories from './MapTerritories';
@@ -21,35 +22,26 @@ type Props = {
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   const { colorBy, objectType } = usePageParams();
-  const applicableTerritories = useMemo(
-    () =>
-      uniqueBy(
-        objects
-          .map((obj) => {
-            if (obj.type === ObjectType.Territory) return obj;
-            if (obj.type === ObjectType.Locale) return obj.territory;
-            if (obj.type === ObjectType.Census) return obj.territory;
-            return undefined;
-          })
-          .filter((t): t is TerritoryData => t !== undefined),
-        (t) => t.ID,
-      ),
-    [objects],
-  );
-  const coloringFunctions = useColors({
-    objects: objectType === ObjectType.Language ? objects : applicableTerritories,
-  });
+  const drawableObjects = useMemo(() => {
+    if (objectType === ObjectType.Language) {
+      return objects.filter((obj) => obj.type === ObjectType.Language) as LanguageData[];
+    }
+
+    return uniqueBy(
+      objects
+        .map((obj) => {
+          if (obj.type === ObjectType.Territory) return obj;
+          if (obj.type === ObjectType.Locale) return obj.territory;
+          if (obj.type === ObjectType.Census) return obj.territory;
+          return undefined;
+        })
+        .filter((t): t is TerritoryData => t !== undefined),
+      (t) => t.ID,
+    ) as TerritoryData[];
+  }, [objectType, objects]);
+  const coloringFunctions = useColors({ objects: drawableObjects });
   const getHoverContent = useCallback(
-    (obj: ObjectData) => {
-      if (obj.type === ObjectType.Language) return <ObjectCard object={obj} />;
-      return (
-        <MapHoverContent
-          territory={obj as TerritoryData}
-          objects={objects}
-          objectType={objectType}
-        />
-      );
-    },
+    (obj: DrawableData) => <MapHoverContent drawnObject={obj} objectType={objectType} />,
     [objects, objectType],
   );
 
@@ -63,14 +55,13 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
         />
         {(objectType === ObjectType.Territory || objectType === ObjectType.Census) && (
           <MapTerritories
-            objects={objects}
-            applicableTerritories={applicableTerritories}
+            drawableObjects={drawableObjects}
             getHoverContent={getHoverContent}
             coloringFunctions={coloringFunctions}
           />
         )}
         <MapCircles
-          objects={objectType === ObjectType.Language ? objects : applicableTerritories}
+          drawableObjects={drawableObjects}
           getHoverContent={getHoverContent}
           scalar={1200 / maxWidth}
           coloringFunctions={coloringFunctions}

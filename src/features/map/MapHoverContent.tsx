@@ -1,33 +1,31 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { ObjectType, View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import CensusesInTerritory from '@entities/census/CensusesInTerritory';
 import ObjectCard from '@entities/ui/ObjectCard';
 
+import DrawableData from './DrawableData';
+
 const MapHoverContent: React.FC<{
-  territory: TerritoryData;
-  objects: ObjectData[];
+  drawnObject: DrawableData;
   objectType: ObjectType;
-}> = ({ territory, objects, objectType }) => {
-  if (objectType === ObjectType.Census) {
-    const censusesInTerritory = objects.filter(
-      (obj) => obj.type === ObjectType.Census && obj.territory?.ID === territory.ID,
-    );
-    return (
-      <div>
-        <div style={{ fontWeight: 'bold' }}>{territory.nameDisplay}</div>
-        There are {censusesInTerritory.length} census tables in this territory:
-        {censusesInTerritory.map((census) => (
-          <div key={census.ID}>
-            <HoverableObjectName object={census} />
-          </div>
-        ))}
-      </div>
-    );
+}> = ({ drawnObject, objectType }) => {
+  const { view } = usePageParams();
+
+  if (objectType === ObjectType.Census && drawnObject.type === ObjectType.Territory) {
+    return <CensusesInTerritory territory={drawnObject} />;
   }
-  return <ObjectCard object={territory} />;
+  return (
+    <div>
+      Click to{' '}
+      {view === View.Details
+        ? 'change the page to see the details for:'
+        : 'open modal with more information for:'}
+      <ObjectCard object={drawnObject} />
+    </div>
+  );
 };
 
 export default MapHoverContent;

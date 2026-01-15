@@ -7,30 +7,31 @@ import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import useScale from '@features/transforms/scales/useScale';
 
-import { ObjectData } from '@entities/types/DataTypes';
-
+import DrawableData from './DrawableData';
 import { getRobinsonCoordinates } from './getRobinsonCoordinates';
 
 type Props = {
-  objects: ObjectData[];
-  getHoverContent: (obj: ObjectData) => React.ReactNode;
+  drawableObjects: DrawableData[];
+  getHoverContent: (obj: DrawableData) => React.ReactNode;
   scalar: number;
   coloringFunctions: ColoringFunctions;
 };
 
 const MapCircles: React.FC<Props> = ({
-  objects,
+  drawableObjects,
   getHoverContent,
   scalar,
   coloringFunctions: { getColor, colorBy },
 }) => {
-  const { scaleBy } = usePageParams();
-  const { getCurrentObjects } = usePagination<ObjectData>();
+  const { scaleBy, objectType } = usePageParams();
+  const { getCurrentObjects } = usePagination<DrawableData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const { getScale } = useScale({ objects, scaleBy });
+  const { getScale } = useScale({ objects: drawableObjects, scaleBy });
 
   const renderableObjects = useMemo(() => {
-    const currentObjects = getCurrentObjects(objects);
+    // Pagination only applies for languages because there can be thousands, other types have few enough
+    const currentObjects =
+      objectType === ObjectType.Language ? getCurrentObjects(drawableObjects) : drawableObjects;
     const filteredObjects = currentObjects.filter(
       (obj) =>
         obj.type === ObjectType.Language ||
@@ -39,10 +40,10 @@ const MapCircles: React.FC<Props> = ({
 
     // Reverse so the "first" objects are drawn on top.
     return filteredObjects.reverse();
-  }, [objects, getCurrentObjects]);
+  }, [drawableObjects, getCurrentObjects]);
 
   const buildOnMouseEnter = useCallback(
-    (obj: ObjectData) => (e: React.MouseEvent) => {
+    (obj: DrawableData) => (e: React.MouseEvent) => {
       showHoverCard(getHoverContent(obj), e.clientX, e.clientY);
     },
     [showHoverCard, getHoverContent],
@@ -79,7 +80,7 @@ const MapCircles: React.FC<Props> = ({
 
 const HoverableCircle: React.FC<{
   color?: string;
-  object: ObjectData;
+  object: DrawableData;
   scale: number;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;

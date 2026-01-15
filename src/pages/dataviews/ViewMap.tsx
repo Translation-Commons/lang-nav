@@ -39,27 +39,25 @@ function ViewMap() {
     );
   }
 
-  const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) => {
-    if (obj.type === ObjectType.Language || obj.type === ObjectType.Territory) {
-      return obj.latitude == null || obj.longitude == null;
-    } else if (obj.type === ObjectType.Census) {
-      return obj.territory?.latitude == null || obj.territory?.longitude == null;
-    }
-    return false;
-  });
+  const objectsWithoutCoordinates =
+    objectType == ObjectType.Language
+      ? getCurrentObjects(filteredObjects).filter((obj) => {
+          return (
+            obj.type === ObjectType.Language && (obj.latitude == null || obj.longitude == null)
+          );
+        })
+      : [];
 
   return (
     <MapContainer>
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
-      <VisibleItemsMeter objects={filteredObjects} />
+      {objectType == ObjectType.Language && <VisibleItemsMeter objects={filteredObjects} />}
       <ObjectMap objects={filteredObjects} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>
-            {colorBy === 'None'
-              ? `You can color the ${isDrawingTerritories ? 'territories' : 'circles'} by:`
-              : `Circles are colored by `}
+            {colorBy === 'None' ? `You can color the shapes by:` : `Shapes are colored by `}
           </div>
           <ColorBySelector objectType={isDrawingTerritories ? ObjectType.Territory : objectType} />
           <div>{colorBy !== 'None' && 'using the color gradient'}</div>
@@ -102,8 +100,9 @@ function getMapDescription(objectType: ObjectType): ReactNode {
     case ObjectType.Census:
       return (
         <>
-          While we do not yet have census tables for each country, you can see here the countries
-          that have censuses available and hover over to see more details.
+          While we do not yet have official censuses tables for every country, you can see here the
+          countries that have population data available and hover over to see more details. Most
+          countries have CLDR data.
         </>
       );
     default:
