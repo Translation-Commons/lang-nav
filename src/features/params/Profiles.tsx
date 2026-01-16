@@ -126,8 +126,10 @@ export function getDefaultParams(
   } else if (params.view === View.Map) {
     params.limit = 200; // Show more results in map view
 
-    if (params.colorBy === 'None' && params.objectType === ObjectType.Census) {
-      params.colorBy = SortBy.CountOfCensuses;
+    if (params.colorBy === 'None') {
+      // Add default colorBys since we're showing X in territories
+      if (params.objectType === ObjectType.Census) params.colorBy = SortBy.CountOfCensuses;
+      if (params.objectType === ObjectType.Locale) params.colorBy = SortBy.CountOfLanguages;
     }
   }
 

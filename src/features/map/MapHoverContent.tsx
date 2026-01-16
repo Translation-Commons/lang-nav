@@ -4,6 +4,7 @@ import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import CensusesInTerritory from '@entities/census/CensusesInTerritory';
+import LocalesInTerritoryCard from '@entities/locale/LocalesInTerritoryCard';
 import ObjectCard from '@entities/ui/ObjectCard';
 
 import DrawableData from './DrawableData';
@@ -14,9 +15,11 @@ const MapHoverContent: React.FC<{
 }> = ({ drawnObject, objectType }) => {
   const { view } = usePageParams();
 
-  if (objectType === ObjectType.Census && drawnObject.type === ObjectType.Territory) {
+  if (objectType === ObjectType.Census && drawnObject.type === ObjectType.Territory)
     return <CensusesInTerritory territory={drawnObject} />;
-  }
+  if (objectType === ObjectType.Locale && drawnObject.type === ObjectType.Territory)
+    return <LocalesInTerritoryCard territory={drawnObject} />;
+
   return (
     <div>
       Click to{' '}

@@ -28,24 +28,25 @@ function ViewMap() {
   const { getCurrentObjects } = usePagination<ObjectData>();
 
   const isDrawingTerritories =
-    objectType === ObjectType.Territory || objectType === ObjectType.Census;
+    objectType === ObjectType.Territory ||
+    objectType === ObjectType.Census ||
+    objectType === ObjectType.Locale;
 
   if (objectType !== ObjectType.Language && !isDrawingTerritories) {
     return (
       <div>
-        Map view is in Beta <em>β</em> mode and is only available for Languages, Territories, and
-        Censuses.
+        Map view is in Beta <em>β</em> mode and is only available for Languages, Locales,
+        Territories, and Censuses.
       </div>
     );
   }
 
   const objectsWithoutCoordinates =
     objectType == ObjectType.Language
-      ? getCurrentObjects(filteredObjects).filter((obj) => {
-          return (
-            obj.type === ObjectType.Language && (obj.latitude == null || obj.longitude == null)
-          );
-        })
+      ? getCurrentObjects(filteredObjects).filter(
+          (obj) =>
+            obj.type === ObjectType.Language && (obj.latitude == null || obj.longitude == null),
+        )
       : [];
 
   return (
@@ -103,6 +104,13 @@ function getMapDescription(objectType: ObjectType): ReactNode {
           While we do not yet have official censuses tables for every country, you can see here the
           countries that have population data available and hover over to see more details. Most
           countries have CLDR data.
+        </>
+      );
+    case ObjectType.Locale:
+      return (
+        <>
+          The current view shows the territories of the world with how many languages or locales we
+          have associated with them. Hover over the countries to see the list.
         </>
       );
     default:
