@@ -4,28 +4,34 @@ import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePagination from '@features/pagination/usePagination';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import useColors from '@features/transforms/coloring/useColors';
+import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import useScale from '@features/transforms/scales/useScale';
 
-import { ObjectData } from '@entities/types/DataTypes';
-import ObjectCard from '@entities/ui/ObjectCard';
-
+import DrawableData from './DrawableData';
 import { getRobinsonCoordinates } from './getRobinsonCoordinates';
 
 type Props = {
-  objects: ObjectData[];
+  drawableObjects: DrawableData[];
+  getHoverContent: (obj: DrawableData) => React.ReactNode;
   scalar: number;
+  coloringFunctions: ColoringFunctions;
 };
 
-const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
-  const { colorBy, scaleBy } = usePageParams();
-  const { getCurrentObjects } = usePagination<ObjectData>();
+const MapCircles: React.FC<Props> = ({
+  drawableObjects,
+  getHoverContent,
+  scalar,
+  coloringFunctions: { getColor, colorBy },
+}) => {
+  const { scaleBy, objectType } = usePageParams();
+  const { getCurrentObjects } = usePagination<DrawableData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const coloringFunctions = useColors({ objects });
-  const scalingFunctions = useScale({ objects, scaleBy });
+  const { getScale } = useScale({ objects: drawableObjects, scaleBy });
 
   const renderableObjects = useMemo(() => {
-    const currentObjects = getCurrentObjects(objects);
+    // Pagination only applies for languages because there can be thousands, other types have few enough
+    const currentObjects =
+      objectType === ObjectType.Language ? getCurrentObjects(drawableObjects) : drawableObjects;
     const filteredObjects = currentObjects.filter(
       (obj) =>
         obj.type === ObjectType.Language ||
@@ -34,13 +40,13 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
 
     // Reverse so the "first" objects are drawn on top.
     return filteredObjects.reverse();
-  }, [objects, getCurrentObjects]);
+  }, [drawableObjects, getCurrentObjects]);
 
   const buildOnMouseEnter = useCallback(
-    (obj: ObjectData) => (e: React.MouseEvent) => {
-      showHoverCard(<ObjectCard object={obj} />, e.clientX, e.clientY);
+    (obj: DrawableData) => (e: React.MouseEvent) => {
+      showHoverCard(getHoverContent(obj), e.clientX, e.clientY);
     },
-    [showHoverCard],
+    [showHoverCard, getHoverContent],
   );
 
   return (
@@ -61,12 +67,9 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
       {renderableObjects.map((obj) => (
         <HoverableCircle
           key={obj.ID}
-          color={
-            colorBy === 'None' ? undefined : (coloringFunctions.getColor(obj) ?? 'transparent')
-          }
+          color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
           object={obj}
-          scalar={scalar}
-          getScale={scalingFunctions.getScale}
+          scale={scalar * getScale(obj)}
           onMouseEnter={buildOnMouseEnter(obj)}
           onMouseLeave={onMouseLeaveTriggeringElement}
         />
@@ -77,12 +80,11 @@ const MapCircles: React.FC<Props> = ({ objects, scalar }) => {
 
 const HoverableCircle: React.FC<{
   color?: string;
-  object: ObjectData;
-  scalar: number;
-  getScale?: (object: ObjectData) => number;
+  object: DrawableData;
+  scale: number;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
-}> = ({ object, color, scalar, getScale, onMouseEnter, onMouseLeave }) => {
+}> = ({ object, color, scale, onMouseEnter, onMouseLeave }) => {
   const { updatePageParams } = usePageParams();
   const [isActive, setIsActive] = useState(false);
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
@@ -95,19 +97,17 @@ const HoverableCircle: React.FC<{
     // The map is 12 degrees rotated to preserve land borders
     (object.longitude < -168 ? object.longitude + 360 : object.longitude) - 12,
   );
-  const computedRadiusMultiplier = getScale ? getScale(object) : 2;
-  if (computedRadiusMultiplier <= 0) return null;
 
   return (
     <circle
       cx={x * 180}
       cy={-y * 90}
-      r={computedRadiusMultiplier * scalar}
+      r={scale * 2}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
       style={{ transition: 'fill 0.25s, stroke 0.25s', pointerEvents: 'fill', cursor: 'pointer' }}
       className="object-map-circle"
-      strokeWidth={1 * scalar}
+      strokeWidth={scale}
       onClick={() => updatePageParams({ objectID: object.ID })}
       onMouseEnter={(e: React.MouseEvent) => {
         onMouseEnter(e);

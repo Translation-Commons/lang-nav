@@ -3,29 +3,34 @@ import SVG from 'react-inlinesvg';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
+import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import useColors from '@features/transforms/coloring/useColors';
+import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
-import ObjectCard from '@entities/ui/ObjectCard';
+import { TerritoryData } from '@entities/types/DataTypes';
+
+import DrawableData from './DrawableData';
 
 type Props = {
-  objects: ObjectData[];
+  drawableObjects: DrawableData[];
+  coloringFunctions: ColoringFunctions;
+  getHoverContent: (obj: DrawableData) => React.ReactNode;
 };
 
-const MapTerritories: React.FC<Props> = ({ objects }) => {
+const MapTerritories: React.FC<Props> = ({
+  drawableObjects,
+  coloringFunctions: { colorBy, getColor },
+  getHoverContent,
+}) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
-  const { updatePageParams } = usePageParams();
+  const { updatePageParams, objectType } = usePageParams();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { getTerritory, territories } = useDataContext();
-  const { getColor, colorBy } = useColors({ objects });
 
   const isTerritoryInList = useCallback(
-    (iso: string) => {
-      return objects.some((obj) => obj.type === 'Territory' && obj.ID === iso);
-    },
-    [objects],
+    (iso: string) => drawableObjects.some((obj) => obj.ID === iso),
+    [drawableObjects],
   );
 
   // Iterates over all of the elements in the SVG corresponding to countries
@@ -65,11 +70,11 @@ const MapTerritories: React.FC<Props> = ({ objects }) => {
   // Add hover and click handlers to country elements
   const buildOnMouseEnter = useCallback(
     (iso: string, element: SVGElement) => (ev: MouseEvent) => {
-      const obj = getTerritory(iso);
-      if (obj) showHoverCard(<ObjectCard object={obj} />, ev.clientX, ev.clientY);
+      const territory = getTerritory(iso);
+      if (territory) showHoverCard(getHoverContent(territory), ev.clientX, ev.clientY);
       element.style.opacity = '0.7';
     },
-    [showHoverCard, getTerritory],
+    [showHoverCard, getTerritory, getHoverContent],
   );
   const buildOnMouseLeave = useCallback(
     (element: SVGElement) => () => {
@@ -79,7 +84,13 @@ const MapTerritories: React.FC<Props> = ({ objects }) => {
     [onMouseLeaveTriggeringElement],
   );
   const buildOnClick = useCallback(
-    (iso: string) => () => updatePageParams({ objectID: iso }),
+    (iso: string) => () => {
+      if (objectType === ObjectType.Census) {
+        updatePageParams({ territoryFilter: iso, view: View.Table });
+      } else {
+        updatePageParams({ objectID: iso });
+      }
+    },
     [updatePageParams],
   );
   // Add hover and click handlers with cleanup

@@ -125,6 +125,10 @@ export function getDefaultParams(
     params.limit = 200; // Show more results in table view
   } else if (params.view === View.Map) {
     params.limit = 200; // Show more results in map view
+
+    if (params.colorBy === 'None' && params.objectType === ObjectType.Census) {
+      params.colorBy = SortBy.CountOfCensuses;
+    }
   }
 
   // Get default gradient for colorBys

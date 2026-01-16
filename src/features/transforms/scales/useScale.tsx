@@ -48,7 +48,7 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
 
   const getScale = useCallback(
     (object: ObjectData) => {
-      if (!scaleBy || scaleBy === 'None') return 2; // default radius multiplier
+      if (!scaleBy || scaleBy === 'None') return 1; // default radius multiplier
 
       const val = getSortField(object, scaleBy);
       if (val == null) return 0; // not renderable

@@ -27,34 +27,39 @@ function ViewMap() {
   const { filteredObjects } = useFilteredObjects({});
   const { getCurrentObjects } = usePagination<ObjectData>();
 
-  if (objectType !== ObjectType.Language && objectType !== ObjectType.Territory) {
+  const isDrawingTerritories =
+    objectType === ObjectType.Territory || objectType === ObjectType.Census;
+
+  if (objectType !== ObjectType.Language && !isDrawingTerritories) {
     return (
       <div>
-        Map view is in Beta <em>β</em> mode and is only available for Languages and Territories.
+        Map view is in Beta <em>β</em> mode and is only available for Languages, Territories, and
+        Censuses.
       </div>
     );
   }
 
-  const objectsWithoutCoordinates = getCurrentObjects(filteredObjects).filter((obj) =>
-    obj.type === ObjectType.Language || obj.type === ObjectType.Territory
-      ? obj.latitude == null || obj.longitude == null
-      : true,
-  );
+  const objectsWithoutCoordinates =
+    objectType == ObjectType.Language
+      ? getCurrentObjects(filteredObjects).filter((obj) => {
+          return (
+            obj.type === ObjectType.Language && (obj.latitude == null || obj.longitude == null)
+          );
+        })
+      : [];
 
   return (
     <MapContainer>
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
-      <VisibleItemsMeter objects={filteredObjects} />
+      {objectType == ObjectType.Language && <VisibleItemsMeter objects={filteredObjects} />}
       <ObjectMap objects={filteredObjects} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>
-            {colorBy === 'None'
-              ? 'You can color the circles using this selector:'
-              : `Circles are colored by `}
+            {colorBy === 'None' ? `You can color the shapes by:` : `Shapes are colored by `}
           </div>
-          <ColorBySelector />
+          <ColorBySelector objectType={isDrawingTerritories ? ObjectType.Territory : objectType} />
           <div>{colorBy !== 'None' && 'using the color gradient'}</div>
           <ColorGradientSelector />
         </div>
@@ -85,7 +90,21 @@ function getMapDescription(objectType: ObjectType): ReactNode {
         </>
       );
     case ObjectType.Territory:
-      return 'These coordinates represent the geographical center of the territory.';
+      return (
+        <>
+          Large territories are polygons, smaller territories are represented by circles at their
+          centroid coordinates. Mouse over a territory to see more information about it and click it
+          to see the territory details.
+        </>
+      );
+    case ObjectType.Census:
+      return (
+        <>
+          While we do not yet have official censuses tables for every country, you can see here the
+          countries that have population data available and hover over to see more details. Most
+          countries have CLDR data.
+        </>
+      );
     default:
       return '';
   }
