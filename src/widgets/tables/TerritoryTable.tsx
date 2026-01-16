@@ -10,6 +10,7 @@ import TableValueType from '@features/table/TableValueType';
 import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
+import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
 import { getTerritoryBiggestLocale, getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/types/DataTypes';
 
@@ -66,6 +67,14 @@ const TerritoryTable: React.FC = () => {
           valueType: TableValueType.Decimal,
           sortParam: SortBy.Literacy,
           columnGroup: 'Demographics',
+        },
+        {
+          key: 'Census Tables',
+          render: (object) => <CensusCountForTerritory territory={object} />,
+          columnGroup: 'Demographics',
+          valueType: TableValueType.Count,
+          sortParam: SortBy.CountOfCensuses,
+          isInitiallyVisible: false,
         },
         {
           key: 'Languages',

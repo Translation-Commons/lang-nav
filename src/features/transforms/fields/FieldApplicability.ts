@@ -17,6 +17,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.PercentOfTerritoryPopulation,
         SortBy.CountOfLanguages,
+        SortBy.CountOfCensuses,
         SortBy.Language,
         SortBy.WritingSystem,
         SortBy.Territory,
@@ -27,6 +28,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.Literacy,
         SortBy.CountOfLanguages,
         SortBy.CountOfTerritories,
+        SortBy.CountOfCensuses,
         SortBy.Latitude,
         SortBy.Longitude,
         SortBy.Area,
@@ -111,8 +113,8 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
-    SortBy.CountOfDialects,
     SortBy.CountOfTerritories,
+    SortBy.CountOfCensuses,
     SortBy.Literacy,
     SortBy.VitalityMetascore,
     SortBy.VitalityEthnologue2013,
@@ -139,8 +141,8 @@ export function getScaleBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
-    SortBy.CountOfDialects,
     SortBy.CountOfTerritories,
+    SortBy.CountOfCensuses,
   ];
   return getApplicableFields(scalingFields, objectType);
 }

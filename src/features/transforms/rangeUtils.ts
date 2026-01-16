@@ -27,8 +27,8 @@ export function getMinimumValue(field?: ColorBy | ScaleBy): number {
     case SortBy.VitalityEthnologue2013:
     case SortBy.VitalityEthnologue2025:
     case SortBy.CountOfLanguages:
-    case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
+    case SortBy.CountOfCensuses:
     case SortBy.Area:
       return 0;
     case 'None':
@@ -67,8 +67,8 @@ export function getMaximumValue(objects: ObjectData[], field?: ColorBy | ScaleBy
     case SortBy.Date:
       return new Date().getTime(); // Today
     case SortBy.CountOfLanguages:
-    case SortBy.CountOfDialects:
     case SortBy.CountOfTerritories:
+    case SortBy.CountOfCensuses:
     case SortBy.Population:
     case SortBy.PopulationDirectlySourced:
     case SortBy.PopulationOfDescendants:

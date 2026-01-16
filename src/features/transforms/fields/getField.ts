@@ -1,6 +1,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import {
+  getCountOfCensuses,
   getCountOfLanguages,
   getCountOfTerritories,
   getObjectDateAsNumber,
@@ -38,8 +39,8 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
       return getCountOfTerritories(object);
     case SortBy.CountOfLanguages:
       return getCountOfLanguages(object);
-    case SortBy.CountOfDialects:
-      return getCountOfLanguages(object);
+    case SortBy.CountOfCensuses:
+      return getCountOfCensuses(object);
     case SortBy.Literacy:
       return getObjectLiteracy(object);
     case SortBy.Date:

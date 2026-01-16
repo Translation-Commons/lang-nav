@@ -26,14 +26,15 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
         return `hsl(${240 - value * 240}, 80%, 60%)`;
       };
     case ColorGradient.SequentialBlue:
-      // hsl(240, 80%, 90%) -> hsl(240, 80%, 55%) -> hsl(240, 80%, 20%)
+      // Same blue as the primary button color
+      // hsl(211, 80%, 100%) -> hsl(211, 80%, 75%) -> hsl(211, 80%, 50%)
       return (value: number) => {
-        return `hsl(240, 80%, ${90 - value * 70}%)`;
+        return `hsl(211, 80%, ${100 - value * 50}%)`;
       };
     case ColorGradient.SequentialOrange:
-      // hsl(30, 80%, 90%) -> hsl(30, 80%, 55%) -> hsl(30, 80%, 20%)
+      // hsl(30, 80%, 100%) -> hsl(30, 80%, 75%) -> hsl(30, 80%, 50%)
       return (value: number) => {
-        return `hsl(30, 80%, ${90 - value * 70}%)`;
+        return `hsl(30, 80%, ${100 - value * 50}%)`;
       };
 
     // Inverses
