@@ -20,7 +20,8 @@ const CensusRecordsForLocale: React.FC<Props> = ({ locale }) => {
         <HoverableObjectName object={locale} /> Population Records
       </h3>
       <div>
-        {censusRecords.length == 0 && 'No population records for this locale available in LangNav.'}
+        {censusRecords.length === 0 &&
+          'No population records for this locale available in LangNav.'}
         {censusRecords.length === 1 &&
           'There is 1 population record for this locale available in LangNav:'}
         {censusRecords.length > 1 &&

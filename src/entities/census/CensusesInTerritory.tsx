@@ -25,8 +25,8 @@ const CensusesInTerritory: React.FC<Props> = ({ territory }) => {
         <HoverableObjectName object={territory} /> Census Tables
       </h3>
       <>
-        Click to see a table with all censuses tables for this territory available in LangNav.{' '}
-        {censuses.length == 0 && 'No census tables in this territory.'}
+        Click to see a table with all census tables for this territory available in LangNav.{' '}
+        {censuses.length === 0 && 'No census tables in this territory.'}
         {censuses.length === 1 && 'There is 1 census table in this territory:'}
         {censuses.length > 1 && `There are ${censuses.length} census tables in this territory:`}
       </>
