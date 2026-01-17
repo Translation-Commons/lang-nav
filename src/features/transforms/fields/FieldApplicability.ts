@@ -50,6 +50,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.Territory,
         SortBy.PopulationDirectlySourced,
         SortBy.PopulationOfDescendants,
+        SortBy.PopulationPercentInBiggestDescendantLanguage,
         SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.VitalityMetascore,
         SortBy.ISOStatus,
