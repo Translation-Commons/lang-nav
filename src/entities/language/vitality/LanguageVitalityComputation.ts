@@ -52,13 +52,18 @@ export function getVitalityScore(source: VitalitySource, lang: LanguageData): nu
  */
 export function precomputeLanguageVitality(languages: LanguageData[]): void {
   // For all language roots, recompute vitality scores
-  languages.filter((lang) => lang.parentLanguage == null).forEach(computeLanguageFamilyVitality);
+  languages
+    .filter((lang) => lang.parentLanguage == null)
+    .forEach((lang) => computeLanguageFamilyVitality(lang));
 }
 
-function computeLanguageFamilyVitality(lang: LanguageData): void {
+function computeLanguageFamilyVitality(lang: LanguageData, depth = 0): void {
+  if (depth > 40) console.debug('Potential infinite recursion for: ', lang.ID, 'depth: ', depth);
+  if (depth > 50) return;
+
   // Recursively compute vitality for all descendants first
   const descendants = lang.childLanguages || [];
-  descendants.forEach((child) => computeLanguageFamilyVitality(child));
+  descendants.forEach((child) => computeLanguageFamilyVitality(child, depth + 1));
 
   // Now compute vitality for this language
   const vitality = lang.vitality || {};
