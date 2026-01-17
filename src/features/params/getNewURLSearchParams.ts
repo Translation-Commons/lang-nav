@@ -4,6 +4,10 @@ import { ColorBy } from '@features/transforms/coloring/ColorTypes';
 import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
+/**
+ * This is used to make the next version of the page parameters in the URL.
+ */
+
 function buildNextURLSearchParams(
   newParams: PageParamsOptional,
   next: URLSearchParams,
@@ -87,29 +91,21 @@ function clearContextDependentParams(
   next: URLSearchParams,
   prev?: URLSearchParams,
 ): URLSearchParams {
-  const prevView = prev?.get('view');
-  const prevObjectType = prev?.get('objectType');
+  const prevOrDefault = getDefaultParams(
+    prev?.get('objectType') as ObjectType,
+    prev?.get('view') as View,
+    prev?.get('profile') as ProfileType,
+    prev?.get('colorBy') as ColorBy,
+  );
 
-  if (newParams.view !== undefined && newParams.view !== prevView) {
-    if (newParams.limit === undefined) {
-      next.delete('limit');
-    }
-    if (newParams.page === undefined) {
-      next.delete('page');
-    }
-    if (newParams.colorBy === undefined) {
-      next.delete('colorBy');
-    }
+  if (newParams.view !== undefined && newParams.view !== prevOrDefault.view) {
+    if (newParams.limit == null) next.delete('limit');
+    if (newParams.page == null) next.delete('page');
+    if (newParams.colorBy == null) next.delete('colorBy');
   }
 
-  if (newParams.objectType !== undefined && newParams.objectType !== prevObjectType) {
-    if (newParams.page === undefined) {
-      next.delete('page');
-    }
-  }
-
-  if (prevView === View.Details && newParams.view === undefined) {
-    next.delete('view');
+  if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
+    if (newParams.page == null) next.delete('page');
   }
 
   return next;
