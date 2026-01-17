@@ -105,6 +105,7 @@ function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
     case SortBy.PopulationOfDescendants:
     case SortBy.PopulationPercentInBiggestDescendantLanguage:
     case SortBy.CountOfLanguages:
+    case SortBy.CountOfWritingSystems:
     case SortBy.CountOfCountries:
     case SortBy.CountOfChildTerritories:
     case SortBy.CountOfCensuses:

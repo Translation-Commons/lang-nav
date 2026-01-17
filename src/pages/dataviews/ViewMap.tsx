@@ -27,16 +27,12 @@ function ViewMap() {
   const { filteredObjects } = useFilteredObjects({});
   const { getCurrentObjects } = usePagination<ObjectData>();
 
-  const isDrawingTerritories =
-    objectType === ObjectType.Territory ||
-    objectType === ObjectType.Census ||
-    objectType === ObjectType.Locale;
+  const isDrawingTerritories = objectType !== ObjectType.Language;
 
-  if (objectType !== ObjectType.Language && !isDrawingTerritories) {
+  if (objectType === ObjectType.VariantTag) {
     return (
       <div>
-        Map view is in Beta <em>β</em> mode and is only available for Languages, Locales,
-        Territories, and Censuses.
+        Map view is not well-defined for Variant Tags. Please select a different object type.
       </div>
     );
   }
@@ -53,7 +49,7 @@ function ViewMap() {
     <MapContainer>
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
-      {objectType == ObjectType.Language && <VisibleItemsMeter objects={filteredObjects} />}
+      {!isDrawingTerritories && <VisibleItemsMeter objects={filteredObjects} />}
       <ObjectMap objects={filteredObjects} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
@@ -111,6 +107,13 @@ function getMapDescription(objectType: ObjectType): ReactNode {
         <>
           The current view shows the territories of the world with how many languages or locales we
           have associated with them. Hover over the countries to see the list.
+        </>
+      );
+    case ObjectType.WritingSystem:
+      return (
+        <>
+          The current view shows the territories of the world with how many writing systems are
+          associated with them. Hover over the countries to see the list.
         </>
       );
     default:

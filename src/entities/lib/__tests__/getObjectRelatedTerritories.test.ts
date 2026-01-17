@@ -32,7 +32,7 @@ describe('getContainingTerritories', () => {
       BE: 'Beleriand, Arda, Middle Earth',
       ER: 'Eriador, Arda, Middle Earth',
       HA: 'Harad, Arda, Middle Earth',
-      Teng: '',
+      Teng: 'Beleriand, Eriador',
       be0590: 'Beleriand',
       dori0123: 'Eriador, Middle Earth, Arda',
       dori0123_001: 'Arda',

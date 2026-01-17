@@ -130,6 +130,8 @@ export function getDefaultParams(
       // Add default colorBys since we're showing X in territories
       if (params.objectType === ObjectType.Census) params.colorBy = SortBy.CountOfCensuses;
       if (params.objectType === ObjectType.Locale) params.colorBy = SortBy.CountOfLanguages;
+      if (params.objectType === ObjectType.WritingSystem)
+        params.colorBy = SortBy.CountOfWritingSystems;
     }
   }
 

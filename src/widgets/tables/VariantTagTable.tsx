@@ -10,6 +10,7 @@ import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
+import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import { VariantTagData } from '@entities/types/DataTypes';
@@ -56,10 +57,25 @@ const VariantTagTable: React.FC = () => {
           columnGroup: 'Related Objects',
         },
         {
+          key: 'Writing Systems',
+          render: (object) => (
+            <CommaSeparated limit={1} limitText="short">
+              {getWritingSystemsInObject(object)?.map((ws) => (
+                <HoverableObjectName object={ws} key={ws.ID} />
+              ))}
+            </CommaSeparated>
+          ),
+          isInitiallyVisible: false,
+          columnGroup: 'Related Objects',
+          sortParam: SortBy.WritingSystem,
+        },
+        {
           key: 'Specific to Territories',
           render: (object) => (
             <CommaSeparated limit={1} limitText="short">
-              {getChildTerritoriesInObject(object)?.map((t) => t.nameDisplay)}
+              {getChildTerritoriesInObject(object)?.map((territory) => (
+                <HoverableObjectName object={territory} key={territory.ID} />
+              ))}
             </CommaSeparated>
           ),
           isInitiallyVisible: false,

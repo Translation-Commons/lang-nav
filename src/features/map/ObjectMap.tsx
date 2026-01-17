@@ -6,6 +6,7 @@ import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
@@ -29,10 +30,12 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
 
     return uniqueBy(
       objects
-        .map((obj) => {
+        .flatMap((obj) => {
           if (obj.type === ObjectType.Territory) return obj;
           if (obj.type === ObjectType.Locale) return obj.territory;
           if (obj.type === ObjectType.Census) return obj.territory;
+          if (obj.type === ObjectType.WritingSystem)
+            return getObjectLocales(obj).map((l) => l.territory);
           return undefined;
         })
         .filter((t): t is TerritoryData => t !== undefined),

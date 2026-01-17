@@ -87,11 +87,13 @@ const MapTerritories: React.FC<Props> = ({
     (iso: string) => () => {
       if (objectType === ObjectType.Census) {
         updatePageParams({ territoryFilter: iso, view: View.Table });
+      } else if (objectType === ObjectType.WritingSystem) {
+        updatePageParams({ territoryFilter: iso, view: View.Table });
       } else {
         updatePageParams({ objectID: iso });
       }
     },
-    [updatePageParams],
+    [updatePageParams, objectType],
   );
   // Add hover and click handlers with cleanup
   useEffect(() => {
