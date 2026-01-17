@@ -69,6 +69,16 @@ describe('HoverableObjectName', () => {
     expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
   });
 
+  it('locales can show just the language name if specified', () => {
+    render(
+      <HoverableObjectName
+        object={mockedObjects.sjn_Teng_123}
+        labelSource="locale without territory"
+      />,
+    );
+    expect(screen.getByText(/Sindarin \(Tengwar\)/)).toBeInTheDocument();
+  });
+
   it('locales can show just the territory name if specified', () => {
     render(<HoverableObjectName object={mockedObjects.sjn_BE} labelSource="territory" />);
     expect(screen.getByText(/Beleriand/)).toBeInTheDocument();

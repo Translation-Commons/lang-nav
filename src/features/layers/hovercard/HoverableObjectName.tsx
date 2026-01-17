@@ -2,13 +2,14 @@ import React from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import HoverableObject from './HoverableObject';
 
 type Props = {
   object?: ObjectData;
-  labelSource?: 'name' | 'code' | 'territory' | 'language';
+  labelSource?: 'name' | 'code' | 'territory' | 'language' | 'locale without territory';
   format?: 'text' | 'button';
   style?: React.CSSProperties;
 };
@@ -27,6 +28,8 @@ const HoverableObjectName: React.FC<Props> = ({
       label = object.language?.nameDisplay ?? object.languageCode;
     } else if (labelSource == 'territory') {
       label = object.territory?.nameDisplay ?? object.territoryCode ?? '[no territory]';
+    } else if (labelSource == 'locale without territory') {
+      label = getLocaleName(object, false /* withTerritory */);
     }
   }
 
