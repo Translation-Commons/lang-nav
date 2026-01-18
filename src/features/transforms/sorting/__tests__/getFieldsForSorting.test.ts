@@ -8,7 +8,11 @@ import { getSortField } from '@features/transforms/fields/getField';
 import { SortBy } from '../SortTypes';
 
 const IGNORED_COMBINATIONS: Partial<Record<ObjectType, SortBy[]>> = {
-  [ObjectType.Census]: [SortBy.CountOfCensuses], // It's always 1 for censuses
+  [ObjectType.Census]: [
+    SortBy.CountOfCensuses,
+    SortBy.CountOfChildTerritories,
+    SortBy.CountOfCountries,
+  ], // It's always 1 for censuses
 };
 
 describe('getFieldsForSorting', () => {

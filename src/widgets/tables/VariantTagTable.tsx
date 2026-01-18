@@ -11,6 +11,7 @@ import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
+import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import { VariantTagData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -41,8 +42,8 @@ const VariantTagTable: React.FC = () => {
               ))}
             </CommaSeparated>
           ),
-          valueType: TableValueType.Count,
           sortParam: SortBy.Language,
+          columnGroup: 'Related Objects',
         },
         {
           key: 'Language Count',
@@ -52,6 +53,18 @@ const VariantTagTable: React.FC = () => {
           valueType: TableValueType.Count,
           sortParam: SortBy.CountOfLanguages,
           isInitiallyVisible: false,
+          columnGroup: 'Related Objects',
+        },
+        {
+          key: 'Specific to Territories',
+          render: (object) => (
+            <CommaSeparated limit={1} limitText="short">
+              {getChildTerritoriesInObject(object)?.map((t) => t.nameDisplay)}
+            </CommaSeparated>
+          ),
+          isInitiallyVisible: false,
+          sortParam: SortBy.Territory,
+          columnGroup: 'Related Objects',
         },
         {
           key: 'Potential Population',

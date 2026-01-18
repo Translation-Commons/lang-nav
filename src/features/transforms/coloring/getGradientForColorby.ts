@@ -35,7 +35,8 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
       return ColorGradient.HueRainbowBlueToRed;
 
     case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
+    case SortBy.CountOfCountries:
+    case SortBy.CountOfChildTerritories:
     case SortBy.CountOfCensuses:
       return ColorGradient.SequentialBlue;
   }

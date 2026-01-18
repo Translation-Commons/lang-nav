@@ -11,7 +11,11 @@ import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport'
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
-import { getTerritoryBiggestLocale, getTerritoryChildren } from '@entities/lib/getObjectMiscFields';
+import {
+  getTerritoryBiggestLocale,
+  getTerritoryChildren,
+  getTerritoryCountries,
+} from '@entities/lib/getObjectRelatedTerritories';
 import { TerritoryData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
@@ -118,13 +122,23 @@ const TerritoryTable: React.FC = () => {
           columnGroup: 'Relations',
         },
         {
-          key: 'Territories and/or Dependencies',
+          key: 'Child Territories',
           render: (object) => (
             <HoverableEnumeration items={getTerritoryChildren(object).map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfTerritories,
+          sortParam: SortBy.CountOfChildTerritories,
+          columnGroup: 'Relations',
+        },
+        {
+          key: 'Contained Countries',
+          render: (object) => (
+            <HoverableEnumeration items={getTerritoryCountries(object).map((t) => t.nameDisplay)} />
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Count,
+          sortParam: SortBy.CountOfCountries,
           columnGroup: 'Relations',
         },
         {

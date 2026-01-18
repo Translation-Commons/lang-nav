@@ -10,7 +10,6 @@ import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjec
 import {
   getCountOfCensuses,
   getCountOfLanguages,
-  getCountOfTerritories,
   getObjectDate,
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
@@ -136,37 +135,6 @@ describe('getCountOfLanguages', () => {
       sjn_BE: 1, // sjn_Teng_BE is more specific
       sjn_ER: 1, // dori0123_ER
       tolkorth: 2, // eng, spa
-    });
-  });
-});
-
-describe('getCountOfTerritories', () => {
-  it('returns count of territories for objects', () => {
-    const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getCountOfTerritories(obj)]),
-    );
-    expect(results).toEqual({
-      '001': 2, // 123, AM
-      '123': 3, // ER, BE, HA
-      Teng: undefined,
-      AM: 0, // no territories contained
-      ER: 0,
-      HA: 0,
-      BE: 0,
-      dori0123: 1, // ER
-      dori0123_001: undefined, // not defined for locales
-      dori0123_123: undefined,
-      dori0123_ER: undefined,
-      be0590: undefined,
-      sjn: 2, // ER, BE
-      sjn_001: undefined, // not defined for locales
-      sjn_123: undefined,
-      sjn_Teng_001: undefined,
-      sjn_Teng_123: undefined,
-      sjn_Teng_BE: undefined,
-      sjn_BE: undefined,
-      sjn_ER: undefined,
-      tolkorth: undefined,
     });
   });
 });

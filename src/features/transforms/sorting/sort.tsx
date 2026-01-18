@@ -50,7 +50,8 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.PercentOfOverallLanguageSpeakers:
     case SortBy.Literacy:
     case SortBy.CountOfLanguages:
-    case SortBy.CountOfTerritories:
+    case SortBy.CountOfCountries:
+    case SortBy.CountOfChildTerritories:
     case SortBy.CountOfCensuses:
     case SortBy.VitalityMetascore:
     case SortBy.ISOStatus:

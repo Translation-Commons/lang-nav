@@ -486,32 +486,61 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
-  it('sortBy: CountOfTerritories', () => {
+  it('sortBy: CountOfCountries', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(SortBy.CountOfTerritories, SortBehavior.Normal);
+    const sort = getSortFunctionParameterized(SortBy.CountOfCountries, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      '123', // 3 territories: ER, BE, HA
-      'sjn', // 2 territories: ER, BE
-      '001', // 2 territories: 123, AM
-      'dori0123', // 1 territory: ER
-      'BE', // 0 contained territories (eg. dependencies)
+      '001', // 4 countries: AM, BE, ER, HA
+      '123', // 3 countries: ER, BE, HA
+      'sjn', // 2 countries: ER, BE
+      'Teng',
+      'sjn_123',
+      'sjn_001', // could be up to 4 countries but the language is only declared in 2
+      'dori0123', // 1 country: ER
+      'BE', // 1 it is its own country
       'ER',
       'HA',
       'AM',
+      'be0590', // 1 its for BE
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER', // 1 country: ER
+      'sjn_Teng_BE',
+      'sjn_Teng_123', // potentially more countries but only 1 declared from sjn_Teng_BE
+      'dori0123_123',
+      'sjn_Teng_001',
+      'dori0123_001',
       // undefined
-      'be0590', // undefined for censuses
-      'sjn_BE', // undefined for locales
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: CountOfChildTerritories', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(SortBy.CountOfChildTerritories, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      '123', // 3 territories: ER, BE, HA
+      '001', // 2 territories: 123, AM
+      'be0590', // 1 territory: BE
+      'sjn_BE', // locales with territory codes all have 1 territory
       'sjn_ER',
       'dori0123_ER',
-      'Teng', // undefined for writing systems
       'sjn_Teng_BE',
-      'tolkorth', // undefined for variant tags
-      'sjn_123', // undefined for regional locales
+      'sjn_123',
       'sjn_Teng_123',
       'dori0123_123',
       'sjn_001',
       'sjn_Teng_001',
       'dori0123_001',
+      'BE', // 0 contained territories (eg. dependencies)
+      'ER',
+      'HA',
+      'AM',
+      'tolkorth', // 0 declared territories
+      // undefined
+      'sjn',
+      'dori0123',
+      'Teng',
     ]);
   });
 

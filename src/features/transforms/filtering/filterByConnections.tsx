@@ -6,12 +6,8 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import {
-  ObjectData,
-  TerritoryData,
-  TerritoryScope,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { getContainingTerritories } from '@entities/lib/getObjectRelatedTerritories';
+import { ObjectData, WritingSystemData } from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
@@ -52,53 +48,12 @@ export function getFilterByTerritory(): FilterFunctionType {
   return useCallback(
     (object: ObjectData) => {
       if (!territoryFilter) return true;
-      const territories = getTerritoriesRelevantToObject(object);
+      const territories = getContainingTerritories(object);
       if (codeMatch !== '') return territories.some((t) => t.codeDisplay === codeMatch);
       return territories.some((t) => t.nameDisplay.toLowerCase().startsWith(nameMatch));
     },
     [territoryFilter, codeMatch, nameMatch],
   );
-}
-
-/**
- * The first should be the best default territory for the object.
- *
- * Sorting matters. The first territory should be the most relevant one.
- * Languages: The first are the biggest countries, then the regions or dependencies
- * Territories: The first is the territory itself, then the regions that contain it
- */
-export function getTerritoriesRelevantToObject(object: ObjectData): TerritoryData[] {
-  switch (object.type) {
-    case ObjectType.Territory:
-      return [
-        object,
-        ...getObjectParents(object).filter(
-          (t): t is TerritoryData => t?.type === ObjectType.Territory,
-        ),
-        object.sovereign,
-      ].filter((t) => t != null);
-    case ObjectType.Locale:
-      return [object.territory].filter((t) => t != null);
-    case ObjectType.Census:
-      return [object.territory].filter((t) => t != null);
-    case ObjectType.Language:
-      return uniqueBy(
-        object.locales
-          .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0))
-          .map((l) => l.territory)
-          .filter((t) => t != null)
-          .sort(
-            (a, b) =>
-              (a.scope === TerritoryScope.Country ? -1 : 1) -
-              (b.scope === TerritoryScope.Country ? -1 : 1),
-          ),
-        (t) => t.ID,
-      );
-    case ObjectType.WritingSystem:
-      return [object.territoryOfOrigin].filter((t) => t != null);
-    case ObjectType.VariantTag:
-      return [];
-  }
 }
 
 export function getFilterByWritingSystem(): FilterFunctionType {

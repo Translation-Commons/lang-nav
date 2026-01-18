@@ -4,7 +4,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
 
-import { getTerritoryBiggestLocale } from './getObjectMiscFields';
+import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
 
 // TODO make better upperbound/lowerbound population estimates when we don't have exact numbers
 // SortBy.Population

@@ -3,7 +3,6 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import {
   getCountOfCensuses,
   getCountOfLanguages,
-  getCountOfTerritories,
   getObjectDateAsNumber,
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
@@ -16,13 +15,15 @@ import {
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
 } from '@entities/lib/getObjectPopulation';
+import {
+  getContainingTerritories,
+  getCountOfChildTerritories,
+  getCountOfCountries,
+} from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { ColorBy } from '../coloring/ColorTypes';
-import {
-  getTerritoriesRelevantToObject,
-  getWritingSystemsRelevantToObject,
-} from '../filtering/filterByConnections';
+import { getWritingSystemsRelevantToObject } from '../filtering/filterByConnections';
 import { SortBy } from '../sorting/SortTypes';
 
 export function getSortField(object: ObjectData, sortBy: ColorBy): string | number | undefined {
@@ -35,8 +36,10 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
       return object.nameDisplay;
     case SortBy.Endonym:
       return object.nameEndonym;
-    case SortBy.CountOfTerritories:
-      return getCountOfTerritories(object);
+    case SortBy.CountOfCountries:
+      return getCountOfCountries(object);
+    case SortBy.CountOfChildTerritories:
+      return getCountOfChildTerritories(object);
     case SortBy.CountOfLanguages:
       return getCountOfLanguages(object);
     case SortBy.CountOfCensuses:
@@ -50,7 +53,7 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
     case SortBy.WritingSystem:
       return getWritingSystemsRelevantToObject(object)?.[0]?.nameDisplay;
     case SortBy.Territory:
-      return getTerritoriesRelevantToObject(object)?.[0]?.nameDisplay;
+      return getContainingTerritories(object)?.[0]?.nameDisplay;
     case SortBy.Latitude:
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.latitude
