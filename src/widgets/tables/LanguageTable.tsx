@@ -23,10 +23,8 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
-import {
-  getObjectLiteracy,
-  getUniqueCountriesForLanguage,
-} from '@entities/lib/getObjectMiscFields';
+import { getObjectLiteracy } from '@entities/lib/getObjectMiscFields';
+import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -115,7 +113,7 @@ const LanguageTable: React.FC = () => {
         key: 'Countries',
         render: (lang) => (
           <CommaSeparated limit={1} limitText="short">
-            {getUniqueCountriesForLanguage(lang).map((territory) => (
+            {getCountriesInObject(lang)?.map((territory) => (
               <HoverableObjectName object={territory} key={territory.ID} />
             ))}
           </CommaSeparated>
@@ -127,12 +125,12 @@ const LanguageTable: React.FC = () => {
         key: 'Country Count',
         render: (lang) => (
           <HoverableEnumeration
-            items={getUniqueCountriesForLanguage(lang).map((territory) => territory.nameDisplay)}
+            items={getCountriesInObject(lang)?.map((territory) => territory.nameDisplay)}
           />
         ),
         isInitiallyVisible: false,
         valueType: TableValueType.Count,
-        sortParam: SortBy.CountOfTerritories,
+        sortParam: SortBy.CountOfCountries,
         columnGroup: 'Location',
       },
       {

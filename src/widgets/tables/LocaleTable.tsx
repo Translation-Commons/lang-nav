@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
@@ -13,6 +14,7 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
+import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/types/DataTypes';
@@ -98,6 +100,16 @@ const LocaleTable: React.FC = () => {
           render: (object) => <HoverableObjectName object={object.territory} />,
           isInitiallyVisible: false,
           sortParam: SortBy.Territory,
+          columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Countries',
+          render: (object) => (
+            <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
+          ),
+          isInitiallyVisible: false,
+          valueType: TableValueType.Count,
+          sortParam: SortBy.CountOfCountries,
           columnGroup: 'Linked Data',
         },
         {

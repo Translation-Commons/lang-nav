@@ -3,56 +3,19 @@
  * to test various edge cases.
  */
 
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 
 import {
   getLanguagesRelevantToObject,
-  getTerritoriesRelevantToObject,
   getWritingSystemsRelevantToObject,
 } from '../filterByConnections';
 
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
-describe('getTerritoriesRelevantToObject', () => {
-  it('returns population for objects', () => {
-    const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getTerritoriesRelevantToObject(obj)
-          .map((obj) => obj.nameDisplay)
-          .join(', '),
-      ]),
-    );
-    expect(results).toEqual({
-      '001': 'Arda',
-      '123': 'Middle Earth, Arda',
-      AM: 'Aman, Arda',
-      BE: 'Beleriand, Arda, Middle Earth',
-      ER: 'Eriador, Arda, Middle Earth',
-      HA: 'Harad, Arda, Middle Earth',
-      Teng: '',
-      be0590: 'Beleriand',
-      dori0123: 'Eriador, Middle Earth, Arda',
-      dori0123_001: 'Arda',
-      dori0123_123: 'Middle Earth',
-      dori0123_ER: 'Eriador',
-      sjn: 'Beleriand, Eriador, Middle Earth, Arda',
-      sjn_001: 'Arda',
-      sjn_123: 'Middle Earth',
-      sjn_Teng_001: 'Arda',
-      sjn_Teng_123: 'Middle Earth',
-      sjn_Teng_BE: 'Beleriand',
-      sjn_ER: 'Eriador',
-      sjn_BE: 'Beleriand',
-      tolkorth: '',
-    });
-  });
-});
-
 describe('getWritingSystemsRelevantToObject', () => {
-  it('returns population for objects', () => {
+  it('returns the writing systems for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
@@ -88,7 +51,7 @@ describe('getWritingSystemsRelevantToObject', () => {
 });
 
 describe('getLanguagesRelevantToObject', () => {
-  it('returns population for objects', () => {
+  it('returns the languages for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,

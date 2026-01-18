@@ -17,6 +17,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.PercentOfTerritoryPopulation,
         SortBy.CountOfLanguages,
+        SortBy.CountOfCountries,
+        SortBy.CountOfChildTerritories,
         SortBy.CountOfCensuses,
         SortBy.Language,
         SortBy.WritingSystem,
@@ -27,7 +29,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.Endonym,
         SortBy.Literacy,
         SortBy.CountOfLanguages,
-        SortBy.CountOfTerritories,
+        SortBy.CountOfCountries,
+        SortBy.CountOfChildTerritories,
         SortBy.CountOfCensuses,
         SortBy.Latitude,
         SortBy.Longitude,
@@ -43,7 +46,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
       return [
         SortBy.Endonym,
         SortBy.Literacy,
-        SortBy.CountOfTerritories,
+        SortBy.CountOfCountries,
         SortBy.CountOfLanguages,
         SortBy.Language, // Equivalent to DisplayName for languages
         SortBy.WritingSystem,
@@ -72,12 +75,18 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         // SortBy.Literacy, Data not available yet
         SortBy.Language,
         SortBy.CountOfLanguages,
+        SortBy.CountOfCountries,
         SortBy.PopulationOfDescendants,
         SortBy.Territory,
         SortBy.WritingSystem, // Equivalent to DisplayName for writing systems
       ];
     case ObjectType.VariantTag:
-      return [SortBy.Date, SortBy.CountOfLanguages, SortBy.Language];
+      return [
+        SortBy.Date,
+        SortBy.CountOfLanguages,
+        SortBy.CountOfChildTerritories,
+        SortBy.Language,
+      ];
   }
 }
 
@@ -113,7 +122,8 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
-    SortBy.CountOfTerritories,
+    SortBy.CountOfCountries,
+    SortBy.CountOfChildTerritories,
     SortBy.CountOfCensuses,
     SortBy.Literacy,
     SortBy.VitalityMetascore,
@@ -141,7 +151,8 @@ export function getScaleBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
-    SortBy.CountOfTerritories,
+    SortBy.CountOfCountries,
+    SortBy.CountOfChildTerritories,
     SortBy.CountOfCensuses,
   ];
   return getApplicableFields(scalingFields, objectType);
