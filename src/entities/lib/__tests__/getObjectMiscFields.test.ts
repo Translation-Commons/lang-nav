@@ -18,7 +18,7 @@ import {
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getObjectLiteracy', () => {
-  it('returns population for objects', () => {
+  it('returns literacy for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [obj.ID, getObjectLiteracy(obj)?.toFixed(1)]),
     );

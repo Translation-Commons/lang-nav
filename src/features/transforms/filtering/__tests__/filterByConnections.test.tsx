@@ -15,7 +15,7 @@ import {
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getWritingSystemsRelevantToObject', () => {
-  it('returns population for objects', () => {
+  it('returns the writing systems for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
@@ -51,7 +51,7 @@ describe('getWritingSystemsRelevantToObject', () => {
 });
 
 describe('getLanguagesRelevantToObject', () => {
-  it('returns population for objects', () => {
+  it('returns the languages for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,

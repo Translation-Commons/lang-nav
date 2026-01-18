@@ -16,7 +16,7 @@ import {
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getContainingTerritories', () => {
-  it('returns population for objects', () => {
+  it('returns the containing territories for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
@@ -52,7 +52,7 @@ describe('getContainingTerritories', () => {
 });
 
 describe('getChildTerritoriesInObject', () => {
-  it('returns population for objects', () => {
+  it('returns the child territories for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
@@ -88,7 +88,7 @@ describe('getChildTerritoriesInObject', () => {
 });
 
 describe('getCountriesInObject', () => {
-  it('returns population for objects', () => {
+  it('returns the countries for objects', () => {
     const results = Object.fromEntries(
       Object.values(mockedObjects).map((obj) => [
         obj.ID,
