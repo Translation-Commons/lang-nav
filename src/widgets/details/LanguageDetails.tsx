@@ -58,32 +58,32 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Attributes">
       {populationEstimate && (
-        <DetailsField title="Population Estimate:">
+        <DetailsField title="Population Estimate">
           <LanguagePopulationEstimate lang={lang} />
           <LanguagePopulationBreakdownButton lang={lang} />
         </DetailsField>
       )}
       {populationEstimateSource && (
-        <DetailsField title="Population Estimate Source:">{populationEstimateSource}</DetailsField>
+        <DetailsField title="Population Estimate Source">{populationEstimateSource}</DetailsField>
       )}
       {populationOfDescendants && (
-        <DetailsField title="Population of Descendants:">
+        <DetailsField title="Population of Descendants">
           <LanguagePopulationOfDescendants lang={lang} />
         </DetailsField>
       )}
       {populationFromLocales && (
-        <DetailsField title="Population from Locales:">
+        <DetailsField title="Population from Locales">
           <LanguagePopulationFromLocales lang={lang} />
         </DetailsField>
       )}
-      {modality && <DetailsField title="Modality:">{modality}</DetailsField>}
+      {modality && <DetailsField title="Modality">{modality}</DetailsField>}
       {primaryWritingSystem && (
-        <DetailsField title="Primary Writing System:">
+        <DetailsField title="Primary Writing System">
           <HoverableObjectName object={primaryWritingSystem} />
         </DetailsField>
       )}
       {Object.values(writingSystems).length > 0 && (
-        <DetailsField title="Writing Systems:">
+        <DetailsField title="Writing Systems">
           <CommaSeparated>
             {Object.values(writingSystems)
               .sort(getSortFunction())
@@ -93,7 +93,7 @@ const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
-      <DetailsField title="Plural Categories:">
+      <DetailsField title="Plural Categories">
         <div
           style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}
         >
@@ -114,17 +114,17 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Connections">
       {ISO.parentLanguage && (
-        <DetailsField title="ISO group:">
+        <DetailsField title="ISO group">
           <HoverableObjectName object={ISO.parentLanguage} />
         </DetailsField>
       )}
       {Glottolog.parentLanguage && (
-        <DetailsField title="Glottolog group:">
+        <DetailsField title="Glottolog group">
           <HoverableObjectName object={Glottolog.parentLanguage} />
         </DetailsField>
       )}
       {variantTags && variantTags.length > 0 && (
-        <DetailsField title="Variant Tags:">
+        <DetailsField title="Variant Tags">
           <CommaSeparated>
             {variantTags.map((tag) => (
               <HoverableObjectName key={tag.ID} object={tag} />
@@ -133,7 +133,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         </DetailsField>
       )}
       <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <DetailsField title="Descendant Languages:">
+        <DetailsField title="Descendant Languages">
           {childLanguages.length > 0 ? (
             <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSource, sortFunction)} />
           ) : (
@@ -142,7 +142,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             </div>
           )}
         </DetailsField>
-        <DetailsField title="Locales:">
+        <DetailsField title="Locales">
           {lang.locales.length > 0 ? (
             <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction, filterByScope)} />
           ) : (

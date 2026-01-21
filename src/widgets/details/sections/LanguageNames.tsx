@@ -15,34 +15,34 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
   return (
     <DetailsSection title="Names">
-      <DetailsField title="Canonical Name:">
+      <DetailsField title="Canonical Name">
         <LanguageCanonicalName lang={lang} />
       </DetailsField>
       {nameEndonym && nameDisplay !== nameEndonym && (
-        <DetailsField title="Endonym:">
+        <DetailsField title="Endonym">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEndonym} />
         </DetailsField>
       )}
       {nameFrench && nameFrench !== nameDisplay.toLowerCase() && (
-        <DetailsField title="French Name:">{nameFrench}</DetailsField>
+        <DetailsField title="French Name">{nameFrench}</DetailsField>
       )}
       {Glottolog.name && nameDisplay !== Glottolog.name && (
-        <DetailsField title="Glottolog Name:">
+        <DetailsField title="Glottolog Name">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
         </DetailsField>
       )}
       {ISO.name && nameDisplay !== ISO.name && (
-        <DetailsField title="ISO Name:">
+        <DetailsField title="ISO Name">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
         </DetailsField>
       )}
       {CLDR.name && nameDisplay !== CLDR.name && (
-        <DetailsField title="CLDR Name:">
+        <DetailsField title="CLDR Name">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
         </DetailsField>
       )}
       {getLanguageOtherNames(lang).length > 0 && (
-        <DetailsField title="Other names:">
+        <DetailsField title="Other names">
           <LanguageOtherNames lang={lang} />
         </DetailsField>
       )}

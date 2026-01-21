@@ -17,23 +17,23 @@ const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory
   return (
     <DetailsSection title="Attributes">
       {!Number.isNaN(population) && (
-        <DetailsField title="Population:">
+        <DetailsField title="Population">
           <CountOfPeople count={population} />
         </DetailsField>
       )}
       {literacyPercent && !Number.isNaN(literacyPercent) && (
-        <DetailsField title="Literacy:">{literacyPercent.toFixed(1)}%</DetailsField>
+        <DetailsField title="Literacy">{literacyPercent.toFixed(1)}%</DetailsField>
       )}
       {gdp && !Number.isNaN(gdp) && (
-        <DetailsField title="Gross Domestic Product:">{getCurrencyCompactLong(gdp)}</DetailsField>
+        <DetailsField title="Gross Domestic Product">{getCurrencyCompactLong(gdp)}</DetailsField>
       )}
       {landArea && (
-        <DetailsField title="Land Area:">
+        <DetailsField title="Land Area">
           {numberToSigFigs(landArea, 3)?.toLocaleString()} km²
         </DetailsField>
       )}
       {landArea && population && (
-        <DetailsField title="Density:">
+        <DetailsField title="Density">
           {numberToFixedUnlessSmall(population / landArea, 3)} people/km²
         </DetailsField>
       )}

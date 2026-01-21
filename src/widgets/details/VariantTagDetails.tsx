@@ -18,20 +18,20 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
   return (
     <div className="Details">
       <DetailsSection title="Attributes">
-        <DetailsField title="IANA Code:">{ID}</DetailsField>
-        <DetailsField title="Name:">{nameDisplay}</DetailsField>
-        {description && <DetailsField title="Description:">{description}</DetailsField>}
-        {dateAdded && <DetailsField title="Added:">{dateAdded.toLocaleDateString()}</DetailsField>}
+        <DetailsField title="IANA Code">{ID}</DetailsField>
+        <DetailsField title="Name">{nameDisplay}</DetailsField>
+        {description && <DetailsField title="Description">{description}</DetailsField>}
+        {dateAdded && <DetailsField title="Added">{dateAdded.toLocaleDateString()}</DetailsField>}
       </DetailsSection>
 
       <DetailsSection title="Connections">
         {prefixes.length > 0 && (
-          <DetailsField title="Declared Prefixes:">
+          <DetailsField title="Declared Prefixes">
             <CommaSeparated>{prefixes}</CommaSeparated>
           </DetailsField>
         )}
         {languages.length > 0 && (
-          <DetailsField title="Languages:">
+          <DetailsField title="Languages">
             <CommaSeparated>
               {Object.values(languages).map((lang) => (
                 <HoverableObjectName key={lang.ID} object={lang} />
@@ -40,7 +40,7 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
           </DetailsField>
         )}
         {locales.length > 0 && (
-          <DetailsField title="Locales:">
+          <DetailsField title="Locales">
             <CommaSeparated>
               {Object.values(locales).map((locale) => (
                 <HoverableObjectName key={locale.ID} object={locale} />

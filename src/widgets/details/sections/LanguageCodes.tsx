@@ -19,7 +19,7 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
   return (
     <DetailsSection title="Language Codes">
-      <DetailsField title="Scope:">
+      <DetailsField title="Scope">
         <LanguageScopeDisplay lang={lang} />
       </DetailsField>
       <DetailsField
@@ -90,7 +90,7 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         {CLDR.code ? <>{CLDR.code}</> : <Deemphasized>Not in CLDR</Deemphasized>}
       </DetailsField>
       {ISO.code && (
-        <DetailsField title="Other external links:">
+        <DetailsField title="Other external links">
           <LinkButton href={`https://www.ethnologue.com/language/${ISO.code}`}>
             Ethnologue
           </LinkButton>

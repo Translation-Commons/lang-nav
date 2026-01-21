@@ -20,32 +20,32 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
 
   return (
     <DetailsSection title="Vitality & Viability">
-      <DetailsField title="Vitality Metascore:">
+      <DetailsField title="Vitality Metascore">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
       </DetailsField>
 
-      <DetailsField title="ISO Status:">
+      <DetailsField title="ISO Status">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.ISO} />{' '}
         {vitality.iso != null &&
           (lang.ISO.status != null ? <Pill>ISO</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
-      <DetailsField title="Ethnologue (2013):">
+      <DetailsField title="Ethnologue (2013)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2013} />{' '}
         {vitality.ethFine != null &&
           (vitality.ethnologue2013 != null ? <Pill>Ethnologue 2013</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
-      <DetailsField title="Ethnologue (2025):">
+      <DetailsField title="Ethnologue (2025)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2025} />{' '}
         {vitality.ethCoarse != null &&
           (vitality.ethnologue2025 != null ? <Pill>Ethnologue 2025</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
-      <DetailsField title="Should use in World Atlas:">
+      <DetailsField title="Should use in World Atlas">
         {viabilityConfidence} ... {viabilityExplanation}
       </DetailsField>
       <DetailsField
-        title="Digital Support (Ethnologue):"
+        title="Digital Support (Ethnologue)"
         endContent={
           <LinkButton href="https://www.ethnologue.com/insights/digital-language-divide/">
             Ethnologue
@@ -54,18 +54,18 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
       >
         {digitalSupport}
       </DetailsField>
-      <DetailsField title="CLDR Coverage:">
+      <DetailsField title="CLDR Coverage">
         <div style={{ display: 'inline-flex', flexDirection: 'row', gap: '0.5em' }}>
           <CLDRWarningNotes object={lang} />
           <ObjectCLDRCoverageLevel object={lang} />
           <ObjectCLDRLocaleCount object={lang} verbose={true} />
         </div>
       </DetailsField>
-      <DetailsField title="ICU Support:">
+      <DetailsField title="ICU Support">
         <ICUSupportStatus object={lang} />
       </DetailsField>
       <DetailsField
-        title="Wikipedia:"
+        title="Wikipedia"
         endContent={
           lang.wikipedia && <LinkButton href={lang.wikipedia.url}>{lang.wikipedia.url}</LinkButton>
         }
