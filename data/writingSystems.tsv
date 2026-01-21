@@ -28,7 +28,7 @@ Cham	Cham	Cham	ꨀꨇꩉ ꨌꩌ	5.1	ꨀ	no	cjm	VN	Brah		Individual script
 Gran	Grantha	Grantha	𑌗𑍍𑌰𑌨𑍍𑌥	7	𑌕	no	san	IN	Brah		Individual script
 Diak	Dives Akuru	Dives Akuru	𑤙𑤱𑤩𑤵𑤭𑤱 𑤀𑤌𑤳𑤧𑤳	13	𑤌	no	div	MV	Gran		Individual script
 Mlym	Malayalam	Malayalam	മലയാളമെഴുത്ത്	1.1	ക	no	mal	IN	Gran		Individual script
-Saur	Saurashtra	Saurashtra	ꢱꣃꢬꢵꢰ꣄ꢜ꣄ꢬ	5.1	ꢂ	no	saz	IN	Gran		Individual script
+Saur	Sourashtra	Sourashtra	ꢱꣃꢬꢵꢰ꣄ꢜ꣄ꢬ	5.1	ꢂ	no	saz	IN	Gran		Individual script
 Sinh	Sinhala	Sinhala	සිංහල අක්ෂර මාලාව	3	අ	no	sin	LK	Gran		Individual script
 Tutg	Tulu-Tigalari	Tulu-Tigalari		16	𑎒	no	san	IN	Gran		Individual script
 Kawi	Kawi	Kawi	𑼄𑼒𑽂𑼰𑼬𑼒𑼮𑼶	15	𑼛	no	kaw	ID	Brah		Individual script
@@ -104,7 +104,7 @@ Palm	Palmyrene	Palmyrene		7	𐡳	Yes	arc	SY	Armi		Individual script
 Prti	Inscriptional Parthian	Inscriptional Parthian		5.2	𐭀	Yes	xpr	IR	Armi		Individual script
 Phli	Inscriptional Pahlavi	Inscriptional Pahlavi		5.2	𐭠	Yes	pal	IR	Prti		Individual script
 Phlp	Psalter Pahlavi	Psalter Pahlavi		7	𐮏	Yes	pal	CN	Phli		Individual script
-Phlv	Book Pahlavi	Book Pahlavi							Phli		Individual script
+Phlv	Book Pahlavi	Book Pahlavi					pal	IR	Phli		Individual script
 Avst	Avestan	Avestan	𐬛𐬍𐬥 𐬛𐬀𐬠𐬌𐬭𐬫𐬵	5.2	𐬀	Yes	ave	IR	Phlv		Individual script
 Syre	Estrangelo Syriac	Syriac (Estrangelo variant)		3		Yes	syc	SY	Armi		Individual script
 Syrc	Syriac	Syriac		3	ܐ	Yes	syr	SY	Syre	Syre, Syrj, Syrn	Individual script
@@ -146,22 +146,22 @@ Hanb	Han with Bopomofo	Han with Bopomofo (alias for Han + Bopomofo)		1.1				CN	H
 Hans	Simplified Han	Han (Simplified variant)	简化字	1.1		no	zho	CN	Hani		Individual script
 Hant	Traditional Han	Han (Traditional variant)	正體字	1.1		no	zho	CN	Hani		Individual script
 Hira	Hiragana	Hiragana	ひらがな	1.1	か	no	jpn	JP	Hani		Individual script
-Hrkt	Hiragana + Katakana	Japanese syllabaries (alias for Hiragana + Katakana)		1.1				JP	Hani	Hira, Kana	Group
-Jpan	Kanji + Hiragana + Katakana	Japanese (alias for Han + Hiragana + Katakana)		1.1				JP	Hani	Hani, Hira, Kana	Group
+Hrkt	Japanese syllabaries	Japanese syllabaries (alias for Hiragana + Katakana)		1.1				JP	Hani	Hira, Kana	Group
+Jpan	Japanese scripts	Japanese (alias for Han + Hiragana + Katakana)		1.1				JP	Hani	Hani, Hira, Kana	Group
 Kana	Katakana	Katakana	カタカナ	1.1	カ	no	jpn	JP	Hani		Individual script
 Kits	Khitan small script	Khitan small script		13	𘱥	no	zkt	CN	Hani		Individual script
 Jurc	Jurchen	Jurchen					juc	CN	Kits		Individual script
 Kitl	Khitan large script	Khitan large script					zkt	CN	Kits		Variation
-Kore	Hangul + Hanja	Korean (alias for Hangul + Han)		1.1					Hani	Hani, Hang	Group
-Nshu	Nüshu	Nüshu	𛆁𛈬	10	𛇄	no		CN	Hani		Individual script
+Kore	Korean scripts	Korean (alias for Hangul + Han)		1.1			kor	KR	Hani	Hani, Hang	Group
+Nshu	Nüshu	Nüshu	𛆁𛈬	10	𛇄	no	mis	CN	Hani		Individual script
 Yiii	Yi	Yi	ꆈꌠꁱꂷ	3	ꊈ	no	iii	CN	Hani		Individual script
 Adlm	Adlam	Adlam	𞤀𞤣𞤤𞤢𞤥 𞤆𞤵𞤤𞤢𞤪	9	𞤉	Yes	ful	GN	Invented		Individual script
 Afak	Afaka	Afaka					djk	SR	Invented		Individual script
 Bamu	Bamum	Bamum		5.2	ꚠ	no	bax	CM	Invented		Individual script
 Bass	Bassa Vah	Bassa Vah	𖫔𖫧𖫱𖫒𖫨𖫴 𖫣𖫧𖫱	7	𖫦	no	bsq	LR	Invented		Individual script
 Berf	Beria Erfe	Beria Erfe					zag	TD	Invented		Individual script
-Blis	Blissymbols	Blissymbols					zbl		Invented		Individual script
-Brai	Braille	Braille		3	⠎	n/a		FR	Invented		Individual script
+Blis	Blissymbols	Blissymbols					zbl	CN	Invented		Individual script
+Brai	Braille	Braille		3	⠎	n/a	fra	FR	Invented		Individual script
 Cans	Unified Canadian Aboriginal Syllabics	Unified Canadian Aboriginal Syllabics		3	ᓀ	no	cre	CA	Invented		Individual script
 Plrd	Miao	Miao (Pollard)	𖽃𖽔𖾐 𖽑𖼄𖽻𖾐	6.1	𖼀	no	hmd	CN	Cans		Individual script
 Cher	Cherokee	Cherokee	ᏣᎳᎩ	3	Ꮔ	no	chr	US	Invented		Individual script
@@ -199,14 +199,14 @@ Todr	Todhri	Todhri	𐗢𐗚𐗈𐗝𐗒	16	𐗂	no	sqi	AL	Invented		Individual s
 Tols	Tolong Siki	Tolong Siki		17	𑷆	no	kru	IN	Invented		Individual script
 Toto	Toto	Toto	𞊒𞊪𞊒𞊪	14	𞊐	no	txo	IN	Invented		Individual script
 Vaii	Vai	Vai	ꕙꔤ	5.1	ꕉ	no	vai	LR	Invented		Individual script
-Visp	Visible Speech	Visible Speech							Invented		Individual script
+Visp	Visible Speech	Visible Speech					en	GB	Invented		Individual script
 Vith	Vithkuqi	Vithkuqi	𐕲𐖻𐖶𐖨𐖷𐖰𐖥	14	𐖂	no	sqi	AL	Invented		Individual script
 Wara	Warang Citi	Warang Citi (Varang Kshiti)	𑢹𑣗𑣁𑣜𑣊 𑢯𑣂𑣕𑣂	7	𑢴	no	hoc	IN	Invented		Individual script
 Wcho	Wancho	Wancho	𞋒𞋀𞋉𞋃𞋕‎	12	𞋡	no	nnp	IN	Invented		Individual script
 Xsux	Cuneiform	Cuneiform, Sumero-Akkadian		5	𒀀	no	akk	IQ	Pcun		Individual script
 Xpeo	Old Persian	Old Persian		4.1	𐎠	no	peo	IR	Xsux		Individual script
 Mong	Mongolian	Mongolian	ᠮᠣᠩᠭᠣᠯ ᠪᠢᠴᠢᠭ	3	ᠦ	no	mon	MN	Ougr		Individual script
-Geok	Khutsuri	Khutsuri (Asomtavruli and Nuskhuri)		1.1				GE	Unknown		Individual script
+Geok	Khutsuri	Khutsuri (Asomtavruli and Nuskhuri)		1.1			kat	GE	Unknown		Individual script
 Geor	Mkhedruli	Georgian (Mkhedruli and Mtavruli)	მხედრული	1.1	დ	no	kat	GE	Geok		Individual script
 Hluw	Anatolian Hieroglyphs	Anatolian Hieroglyphs (Luwian Hieroglyphs, Hittite Hieroglyphs)		8	𔐀	no	hlu	TR	Unknown		Individual script
 Inds	Harappan	Indus (Harappan)					xiv	PK	Unknown		Individual script
