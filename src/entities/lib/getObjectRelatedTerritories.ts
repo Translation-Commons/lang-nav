@@ -67,7 +67,6 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
           .filter((t): t is TerritoryData => t != null),
         (t) => t.ID,
       );
-    // return [object.territoryOfOrigin].filter((t) => t != null);
     case ObjectType.VariantTag:
       return getChildTerritoriesInObject(object) ?? [];
   }

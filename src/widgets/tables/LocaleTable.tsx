@@ -67,7 +67,6 @@ const LocaleTable: React.FC = () => {
           render: (object) => <HoverableObjectName object={object.writingSystem} />,
           isInitiallyVisible: false,
           columnGroup: 'Writing',
-          sortParam: SortBy.CountOfWritingSystems, // Not a perfect match, rather this just sorts if there is a writing system or not
         },
         {
           key: 'Writing System (inferred)',

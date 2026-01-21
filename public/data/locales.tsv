@@ -10405,8 +10405,6 @@ wrd_AF	Warduji (Afghanistan)			5000
 pbp_SN	Badyara (Senegal)			6243	
 cnr_RS	Montenegrin (Serbia)			2519	
 kjb_US	Q'anjob'al (United States)			2253	
-kor_Hani_KR	Korean (Hanja script, South Korea)				
-kor_Hang_KR	Korean (Hangul script, South Korea)				
 xag_Aghb_AZ	Aghwan (Azerbaijan, Caucasian Albanian)				
 aho_Ahom_IN	Ahom (India, Tai Ahom)				
 akk_Xsux_IQ	Akkadian (Iraq, Cuneiform)				
@@ -10498,7 +10496,7 @@ khm_Khmr_KH	Khmer (Cambodia, Khmer)				official
 zkt_Kitl_CN	Kitan (China, Khitan large script)				
 zkt_Kits_CN	Kitan (China, Khitan small script)				
 kom_Perm_RU	Komi (Russia, Old Permic)				
-kor_Hani_KR	Korean (South Korea, Han characters)				
+kor_Hani_KR	Korean (South Korea, Hanja)				
 kor_Hang_KR	Korean (South Korea, Hangul)				
 kor_Jamo_KR	Korean (South Korea, Jamo)				
 kor_Kore_KR	Korean (South Korea, Korean scripts)				official
