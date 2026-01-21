@@ -3,7 +3,7 @@ import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { ObjectData, TerritoryScope, WritingSystemData } from '@entities/types/DataTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
@@ -101,6 +101,55 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
         (locale.populationSpeaking ?? 0),
     ) / totalLocalePopulation;
   return computedLiteracy || undefined;
+}
+
+// SortBy.CountOfWritingSystems
+export function getCountOfWritingSystems(object: ObjectData): number | undefined {
+  return getWritingSystemsInObject(object)?.length;
+}
+
+export function getWritingSystemsInObject(object: ObjectData): WritingSystemData[] | undefined {
+  switch (object.type) {
+    case ObjectType.Language:
+      // Putting the primary writing system first
+      return uniqueBy(
+        [object.primaryWritingSystem, ...Object.values(object.writingSystems ?? {})].filter(
+          (ws) => !!ws,
+        ),
+        (ws) => ws.ID,
+      );
+    case ObjectType.Territory:
+      return uniqueBy(
+        object.locales
+          ?.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
+          .map((locale) => locale.writingSystem ?? locale.language?.primaryWritingSystem)
+          .filter((ws) => !!ws) ?? [],
+        (ws) => ws.ID,
+      );
+    case ObjectType.Locale:
+      if (object.writingSystem) return [object.writingSystem];
+      // Not certain if we should include the fallback writing system here
+      // For instance, for `pan_PK` it's probably `Arab`, but for pan its `Guru` but we don't have
+      // those inferences in the system right now
+      if (object.language?.primaryWritingSystem) return [object.language.primaryWritingSystem];
+      return undefined;
+    case ObjectType.WritingSystem:
+      // returns the number of contained writing systems + 1 for itself
+      return [
+        object,
+        ...(object.childWritingSystems ?? []),
+        ...(object.containsWritingSystems ?? []),
+      ];
+    case ObjectType.VariantTag:
+      return uniqueBy(
+        object.locales
+          ?.map((locale) => locale.writingSystem)
+          .filter((ws): ws is WritingSystemData => ws != null) ?? undefined,
+        (ws) => ws.ID,
+      );
+    case ObjectType.Census:
+      return undefined; // Potentially derivable, but computationally expensive
+  }
 }
 
 // SortBy.CountOfCensuses

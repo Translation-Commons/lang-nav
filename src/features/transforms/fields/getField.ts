@@ -3,9 +3,11 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import {
   getCountOfCensuses,
   getCountOfLanguages,
+  getCountOfWritingSystems,
   getObjectDateAsNumber,
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
+  getWritingSystemsInObject,
 } from '@entities/lib/getObjectMiscFields';
 import {
   getObjectPercentOfTerritoryPopulation,
@@ -23,7 +25,6 @@ import {
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { ColorBy } from '../coloring/ColorTypes';
-import { getWritingSystemsRelevantToObject } from '../filtering/filterByConnections';
 import { SortBy } from '../sorting/SortTypes';
 
 export function getSortField(object: ObjectData, sortBy: ColorBy): string | number | undefined {
@@ -36,12 +37,14 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
       return object.nameDisplay;
     case SortBy.Endonym:
       return object.nameEndonym;
+    case SortBy.CountOfLanguages:
+      return getCountOfLanguages(object);
     case SortBy.CountOfCountries:
       return getCountOfCountries(object);
     case SortBy.CountOfChildTerritories:
       return getCountOfChildTerritories(object);
-    case SortBy.CountOfLanguages:
-      return getCountOfLanguages(object);
+    case SortBy.CountOfWritingSystems:
+      return getCountOfWritingSystems(object);
     case SortBy.CountOfCensuses:
       return getCountOfCensuses(object);
     case SortBy.Literacy:
@@ -51,7 +54,7 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
     case SortBy.Language:
       return getObjectMostImportantLanguageName(object);
     case SortBy.WritingSystem:
-      return getWritingSystemsRelevantToObject(object)?.[0]?.nameDisplay;
+      return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
     case SortBy.Territory:
       return getContainingTerritories(object)?.[0]?.nameDisplay;
     case SortBy.Latitude:

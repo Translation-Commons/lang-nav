@@ -17,6 +17,7 @@ type UseFilteredObjectsParams = {
   useSubstring?: boolean;
   useConnections?: boolean;
   useVitality?: boolean;
+  inputObjects?: ObjectData[];
 };
 
 const useFilteredObjects = ({
@@ -24,6 +25,7 @@ const useFilteredObjects = ({
   useSubstring = true,
   useConnections = true,
   useVitality = true,
+  inputObjects,
 }: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const { objectType } = usePageParams();
@@ -36,6 +38,7 @@ const useFilteredObjects = ({
   const sortFunction = getSortFunction();
 
   const objects = useMemo(() => {
+    if (inputObjects) return inputObjects;
     switch (objectType) {
       case ObjectType.Census:
         return Object.values(censuses);

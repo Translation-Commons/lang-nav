@@ -11,6 +11,7 @@ import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport'
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
+import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import {
   getTerritoryBiggestLocale,
   getTerritoryChildren,
@@ -113,6 +114,17 @@ const TerritoryTable: React.FC = () => {
           isInitiallyVisible: false,
           valueType: TableValueType.Decimal,
           sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
+          columnGroup: 'Language',
+        },
+        {
+          key: 'Writing Systems',
+          render: (object) => (
+            <HoverableEnumeration
+              items={getWritingSystemsInObject(object)?.map((ws) => ws.nameDisplay) ?? []}
+            />
+          ),
+          valueType: TableValueType.Count,
+          sortParam: SortBy.CountOfWritingSystems,
           columnGroup: 'Language',
         },
         {

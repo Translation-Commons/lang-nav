@@ -36,6 +36,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return <>{fieldValue}</>;
 
     case SortBy.CountOfLanguages:
+    case SortBy.CountOfWritingSystems:
     case SortBy.CountOfCountries:
     case SortBy.CountOfChildTerritories:
     case SortBy.CountOfCensuses:

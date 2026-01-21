@@ -375,10 +375,13 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(SortBy.WritingSystem, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'sjn', // Tengwar
+      // Tengwar
+      '123',
+      'sjn',
       'dori0123',
       'BE',
       'ER',
+      '001',
       'sjn_BE',
       'sjn_ER',
       'dori0123_ER',
@@ -391,10 +394,8 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_001',
       'dori0123_001',
       // All below have no associated writing system, stable to input order
-      '123',
       'HA',
       'AM',
-      '001',
       'be0590',
       'tolkorth',
     ]);
@@ -413,6 +414,7 @@ describe('getSortByParameterized', () => {
       'BE',
       'be0590',
       'sjn_BE',
+      'Teng',
       'sjn_Teng_BE',
       'dori0123',
       'ER', // Eriador
@@ -424,7 +426,6 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_123',
       'dori0123_123',
       // All below have no associated territory, stable to input order
-      'Teng',
       'tolkorth',
     ]);
   });
@@ -483,6 +484,36 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_BE',
       'HA', // undefined
       'AM',
+    ]);
+  });
+
+  it('sortBy: CountOfWritingSystems', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(SortBy.CountOfWritingSystems, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      // 1 writing system: Tengwar
+      '123',
+      'sjn',
+      'dori0123',
+      'BE',
+      'ER',
+      '001',
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER',
+      'Teng',
+      'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+      // 0 directly linked writing systems
+      'HA',
+      'AM',
+      'tolkorth',
+      'be0590',
     ]);
   });
 

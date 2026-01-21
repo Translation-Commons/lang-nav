@@ -17,6 +17,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.PercentOfTerritoryPopulation,
         SortBy.CountOfLanguages,
+        SortBy.CountOfWritingSystems,
         SortBy.CountOfCountries,
         SortBy.CountOfChildTerritories,
         SortBy.CountOfCensuses,
@@ -29,6 +30,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.Endonym,
         SortBy.Literacy,
         SortBy.CountOfLanguages,
+        SortBy.CountOfWritingSystems,
         SortBy.CountOfCountries,
         SortBy.CountOfChildTerritories,
         SortBy.CountOfCensuses,
@@ -46,8 +48,9 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
       return [
         SortBy.Endonym,
         SortBy.Literacy,
-        SortBy.CountOfCountries,
         SortBy.CountOfLanguages,
+        SortBy.CountOfWritingSystems,
+        SortBy.CountOfCountries,
         SortBy.Language, // Equivalent to DisplayName for languages
         SortBy.WritingSystem,
         SortBy.Territory,
@@ -76,6 +79,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.Language,
         SortBy.CountOfLanguages,
         SortBy.CountOfCountries,
+        SortBy.CountOfWritingSystems,
         SortBy.PopulationOfDescendants,
         SortBy.Territory,
         SortBy.WritingSystem, // Equivalent to DisplayName for writing systems
@@ -122,6 +126,7 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.PopulationDirectlySourced,
     SortBy.Area,
     SortBy.CountOfLanguages,
+    SortBy.CountOfWritingSystems,
     SortBy.CountOfCountries,
     SortBy.CountOfChildTerritories,
     SortBy.CountOfCensuses,

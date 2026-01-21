@@ -6,6 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 import CensusesInTerritory from '@entities/census/CensusesInTerritory';
 import LocalesInTerritoryCard from '@entities/locale/LocalesInTerritoryCard';
 import ObjectCard from '@entities/ui/ObjectCard';
+import WritingSystemsInTerritoryCard from '@entities/writingsystem/WritingSystemsInTerritoryCard';
 
 import DrawableData from './DrawableData';
 
@@ -19,6 +20,8 @@ const MapHoverContent: React.FC<{
     return <CensusesInTerritory territory={drawnObject} />;
   if (objectType === ObjectType.Locale && drawnObject.type === ObjectType.Territory)
     return <LocalesInTerritoryCard territory={drawnObject} />;
+  if (objectType === ObjectType.WritingSystem && drawnObject.type === ObjectType.Territory)
+    return <WritingSystemsInTerritoryCard territory={drawnObject} />;
 
   return (
     <div>

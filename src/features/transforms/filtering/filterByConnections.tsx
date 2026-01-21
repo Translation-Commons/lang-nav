@@ -6,6 +6,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getContainingTerritories } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData, WritingSystemData } from '@entities/types/DataTypes';
 
@@ -17,10 +18,14 @@ import { FilterFunctionType } from './filter';
 /**
  * Returns a combined function that will filter objects by other objects they are connected to.
  */
-export function getFilterByConnections(): FilterFunctionType {
-  const filterByTerritory = getFilterByTerritory();
-  const filterByWritingSystem = getFilterByWritingSystem();
-  const filterByLanguage = getFilterByLanguage();
+export function getFilterByConnections({
+  lang = true,
+  territory = true,
+  writing = true,
+}: { lang?: boolean; territory?: boolean; writing?: boolean } = {}): FilterFunctionType {
+  const filterByTerritory = territory ? getFilterByTerritory() : () => true;
+  const filterByWritingSystem = writing ? getFilterByWritingSystem() : () => true;
+  const filterByLanguage = lang ? getFilterByLanguage() : () => true;
   return useCallback(
     (object: ObjectData) =>
       filterByTerritory(object) && filterByWritingSystem(object) && filterByLanguage(object),
@@ -80,6 +85,7 @@ export function getFilterByWritingSystem(): FilterFunctionType {
   );
 }
 
+// Similar to getObjectMiscFields's getWritingSystemsInObject, but includes parents not children
 export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSystemData[] {
   switch (object.type) {
     case ObjectType.Territory:
@@ -92,20 +98,15 @@ export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSy
       );
     case ObjectType.Locale:
       return [object.writingSystem ?? object.language?.primaryWritingSystem].filter((ws) => !!ws);
-    case ObjectType.Census:
-      return []; // Not easy to get
-    case ObjectType.Language:
-      return uniqueBy(
-        [object.primaryWritingSystem, ...Object.values(object.writingSystems ?? {})].filter(
-          (ws) => !!ws,
-        ),
-        (ws) => ws.ID,
-      );
     case ObjectType.WritingSystem:
       return [object, object.parentWritingSystem, ...(object.childWritingSystems ?? [])].filter(
         (ws) => !!ws,
       );
+    case ObjectType.Language:
     case ObjectType.VariantTag:
+      // Same functionality
+      return getWritingSystemsInObject(object) ?? [];
+    case ObjectType.Census:
       return []; // Not easy to get
   }
 }

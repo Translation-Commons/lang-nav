@@ -15,10 +15,11 @@ export enum SortBy {
   Longitude = 'Longitude',
   Date = 'Date',
   Area = 'Area',
-  CountOfLanguages = 'Count of Languages',
+  CountOfLanguages = '# of Languages',
+  CountOfWritingSystems = '# of Writing Systems',
   CountOfChildTerritories = '# of Territories', // immediate children only
   CountOfCountries = '# of Countries', // recursive, only counting countries
-  CountOfCensuses = 'Count of Censuses',
+  CountOfCensuses = '# of Censuses',
   Language = 'Language',
   WritingSystem = 'Writing System',
   Territory = 'Territory',

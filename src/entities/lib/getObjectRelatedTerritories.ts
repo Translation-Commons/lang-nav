@@ -61,7 +61,12 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
         (t) => t.ID,
       );
     case ObjectType.WritingSystem:
-      return [object.territoryOfOrigin].filter((t) => t != null);
+      return uniqueBy(
+        getWritingSystemLocales(object)
+          .map((l) => l.territory)
+          .filter((t): t is TerritoryData => t != null),
+        (t) => t.ID,
+      );
     case ObjectType.VariantTag:
       return getChildTerritoriesInObject(object) ?? [];
   }
@@ -164,7 +169,7 @@ export function getChildTerritoriesInObject(object: ObjectData): TerritoryData[]
   }
 }
 
-function getObjectLocales(object: ObjectData): LocaleData[] {
+export function getObjectLocales(object: ObjectData): LocaleData[] {
   switch (object.type) {
     case ObjectType.Territory:
       return object.locales ?? [];
