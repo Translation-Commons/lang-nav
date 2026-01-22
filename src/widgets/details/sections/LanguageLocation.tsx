@@ -26,7 +26,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
   return (
     <DetailsSection title="Location">
-      <DetailsField title="Coordinates:">
+      <DetailsField title="Coordinates">
         {lang.latitude && lang.longitude ? (
           <>
             {lang.latitude.toFixed(4)}°, {lang.longitude.toFixed(4)}° <Pill>Glottolog</Pill>

@@ -31,20 +31,20 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
   const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, modality } = census;
   return (
     <DetailsSection title="Primary Information">
-      <DetailsField title="Territory:">
+      <DetailsField title="Territory">
         {territory != null ? (
           <HoverableObjectName object={territory} />
         ) : (
           <span>{isoRegionCode}</span>
         )}
       </DetailsField>
-      <DetailsField title="Year:">{census.yearCollected}</DetailsField>
-      {modality != null && <DetailsField title="Modality:">{modality}</DetailsField>}
-      {proficiency != null && <DetailsField title="Proficiency:">{proficiency}</DetailsField>}
+      <DetailsField title="Year">{census.yearCollected}</DetailsField>
+      {modality != null && <DetailsField title="Modality">{modality}</DetailsField>}
+      {proficiency != null && <DetailsField title="Proficiency">{proficiency}</DetailsField>}
       {acquisitionOrder != null && (
-        <DetailsField title="Acquisition Order:">{acquisitionOrder}</DetailsField>
+        <DetailsField title="Acquisition Order">{acquisitionOrder}</DetailsField>
       )}
-      {domain != null && <DetailsField title="Where language used:">{domain}</DetailsField>}
+      {domain != null && <DetailsField title="Where language used">{domain}</DetailsField>}
     </DetailsSection>
   );
 }
@@ -65,38 +65,36 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Population Characteristics">
-      <DetailsField title="Eligible Population:">
-        {populationEligible.toLocaleString()}
-      </DetailsField>
+      <DetailsField title="Eligible Population">{populationEligible.toLocaleString()}</DetailsField>
       {populationWithPositiveResponses && (
-        <DetailsField title="Responding Population:">
+        <DetailsField title="Responding Population">
           {populationWithPositiveResponses.toLocaleString()}
         </DetailsField>
       )}
       {populationSurveyed && (
-        <DetailsField title="Surveyed Population:">
+        <DetailsField title="Surveyed Population">
           {populationSurveyed.toLocaleString()}
         </DetailsField>
       )}
       {sampleRate ? (
-        <DetailsField title="Sample rate:">
+        <DetailsField title="Sample rate">
           {typeof sampleRate === 'number' ? (sampleRate * 100).toLocaleString() + '%' : sampleRate}
         </DetailsField>
       ) : populationSurveyed ? (
-        <DetailsField title="Sample rate:">
+        <DetailsField title="Sample rate">
           {((populationSurveyed / populationEligible) * 100).toLocaleString()}%
         </DetailsField>
       ) : null}
       {languagesIncluded && (
-        <DetailsField title="Languages Included:">{languagesIncluded}</DetailsField>
+        <DetailsField title="Languages Included">{languagesIncluded}</DetailsField>
       )}
-      {geographicScope && <DetailsField title="Geographic Scope:">{geographicScope}</DetailsField>}
-      {age && <DetailsField title="Age:">{age}</DetailsField>}
+      {geographicScope && <DetailsField title="Geographic Scope">{geographicScope}</DetailsField>}
+      {age && <DetailsField title="Age">{age}</DetailsField>}
       {responsesPerIndividual && (
-        <DetailsField title="Responses per Individual:">{responsesPerIndividual}</DetailsField>
+        <DetailsField title="Responses per Individual">{responsesPerIndividual}</DetailsField>
       )}
-      {quantity && <DetailsField title="Quantity Provided:">{toTitleCase(quantity)}</DetailsField>}
-      {notes && <DetailsField title="Notes:">{notes}</DetailsField>}
+      {quantity && <DetailsField title="Quantity Provided">{toTitleCase(quantity)}</DetailsField>}
+      {notes && <DetailsField title="Notes">{notes}</DetailsField>}
     </DetailsSection>
   );
 }
@@ -117,28 +115,28 @@ function CensusSourceSection({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Source">
-      <DetailsField title="Collected by:">
+      <DetailsField title="Collected by">
         {collectorName == null ? collectorType : `${collectorName} (${collectorType})`}
         {collectorNameShort && ` aka ${collectorNameShort}`}
       </DetailsField>
-      {documentName && <DetailsField title="Document Name:">{documentName}</DetailsField>}
-      {tableName && <DetailsField title="Table Name:">{tableName}</DetailsField>}
-      {columnName && <DetailsField title="Column Name:">{columnName}</DetailsField>}
-      {citation && <DetailsField title="Citation:">{citation}</DetailsField>}
+      {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
+      {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
+      {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
+      {citation && <DetailsField title="Citation">{citation}</DetailsField>}
       {url && (
-        <DetailsField title="URL:">
+        <DetailsField title="URL">
           <a href={url} target="_blank" rel="noopener noreferrer">
             {url}
           </a>
         </DetailsField>
       )}
       {datePublished && (
-        <DetailsField title="Date Published:">
+        <DetailsField title="Date Published">
           {new Date(datePublished).toLocaleDateString()}
         </DetailsField>
       )}
       {dateAccessed && (
-        <DetailsField title="Date Accessed:">
+        <DetailsField title="Date Accessed">
           {new Date(dateAccessed).toLocaleDateString()}
         </DetailsField>
       )}

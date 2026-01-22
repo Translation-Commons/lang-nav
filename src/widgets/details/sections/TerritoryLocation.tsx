@@ -13,7 +13,7 @@ import LinkButton from '@shared/ui/LinkButton';
 const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   return (
     <DetailsSection title="Location">
-      <DetailsField title="Center:">
+      <DetailsField title="Center">
         {territory.latitude && territory.longitude ? (
           <>
             {territory.latitude.toFixed(4)}°, {territory.longitude.toFixed(4)}°
@@ -23,7 +23,7 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
         )}
       </DetailsField>
 
-      <DetailsField title="Map:">Showing {getMapLabel(territory)}</DetailsField>
+      <DetailsField title="Map">Showing {getMapLabel(territory)}</DetailsField>
       <MapContainer>
         <ObjectMap
           objects={[

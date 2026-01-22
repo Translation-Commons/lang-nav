@@ -36,14 +36,14 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
   return (
     <div className="Details">
       <DetailsSection title="Attributes">
-        <DetailsField title="Scope:">{scope}</DetailsField>
+        <DetailsField title="Scope">{scope}</DetailsField>
         {rightToLeft != null && (
           <DetailsField title="Direction">
             {rightToLeft ? 'Right to Left' : 'Left to Right'}
           </DetailsField>
         )}
         {sample && <DetailsField title="Sample">{sample}</DetailsField>}
-        <DetailsField title="Unicode Support:">
+        <DetailsField title="Unicode Support">
           {unicodeVersion != null ? (
             `since version ${unicodeVersion}`
           ) : (
@@ -55,8 +55,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             title={
               <>
                 Population (Upper Bound
-                <PopulationWarning />
-                ):
+                <PopulationWarning />)
               </>
             }
           >
@@ -67,7 +66,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
 
       <DetailsSection title="Connections">
         {primaryLanguageCode != null && (
-          <DetailsField title="Primary language:">
+          <DetailsField title="Primary language">
             {primaryLanguage != null ? (
               <HoverableObjectName object={primaryLanguage} />
             ) : (
@@ -76,7 +75,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           </DetailsField>
         )}
         {languages && Object.values(languages).length > 0 && (
-          <DetailsField title="Languages:">
+          <DetailsField title="Languages">
             <CommaSeparated>
               {Object.values(languages)
                 .sort(getSortFunction())
@@ -88,13 +87,13 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         )}
 
         {territoryOfOrigin && (
-          <DetailsField title="Territory of Origin:">
+          <DetailsField title="Territory of Origin">
             <HoverableObjectName object={territoryOfOrigin} />
           </DetailsField>
         )}
 
         {localesWhereExplicit && localesWhereExplicit.length > 0 && (
-          <DetailsField title="Locales (where writing system is explicit):">
+          <DetailsField title="Locales (where writing system is explicit)">
             <CommaSeparated>
               {localesWhereExplicit.sort(getSortFunction()).map((locale) => (
                 <HoverableObjectName key={locale.ID} object={locale} />
@@ -104,12 +103,12 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         )}
 
         {parentWritingSystem && (
-          <DetailsField title="Originated from:">
+          <DetailsField title="Originated from">
             <HoverableObjectName object={parentWritingSystem} />
           </DetailsField>
         )}
         {childWritingSystems && childWritingSystems.length > 0 && (
-          <DetailsField title="Inspired:">
+          <DetailsField title="Inspired">
             <CommaSeparated>
               {childWritingSystems.sort(getSortFunction()).map((writingSystem) => (
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
@@ -118,7 +117,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           </DetailsField>
         )}
         {containsWritingSystems && containsWritingSystems.length > 0 && (
-          <DetailsField title="Contains:">
+          <DetailsField title="Contains">
             <CommaSeparated>
               {containsWritingSystems.sort(getSortFunction()).map((writingSystem) => (
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />

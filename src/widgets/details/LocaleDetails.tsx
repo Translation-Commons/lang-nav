@@ -50,7 +50,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
   return (
     <DetailsSection title="Definition">
-      <DetailsField title="Language:">
+      <DetailsField title="Language">
         {language ? (
           <HoverableObjectName object={language} />
         ) : (
@@ -60,7 +60,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         )}
       </DetailsField>
       {(territory || territoryCode) && (
-        <DetailsField title="Territory:">
+        <DetailsField title="Territory">
           {territory ? (
             <HoverableObjectName object={territory} />
           ) : (
@@ -71,7 +71,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </DetailsField>
       )}
       {scriptCode && (
-        <DetailsField title="Writing System:">
+        <DetailsField title="Writing System">
           {writingSystem ? (
             <HoverableObjectName object={writingSystem} />
           ) : (
@@ -82,7 +82,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </DetailsField>
       )}
       {!scriptCode && language?.primaryWritingSystem && (
-        <DetailsField title="Writing System:">
+        <DetailsField title="Writing System">
           <HoverableObjectName object={language?.primaryWritingSystem} />{' '}
           <Hoverable
             hoverContent={
@@ -99,7 +99,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </DetailsField>
       )}
       {variantTagCodes && variantTagCodes.length > 0 && (
-        <DetailsField title={`Variant Tag${variantTagCodes.length > 1 ? 's' : ''}:`}>
+        <DetailsField title={`Variant Tag${variantTagCodes.length > 1 ? 's' : ''}`}>
           {variantTags ? (
             <CommaSeparated>
               {variantTags.map((tag) => (
@@ -134,7 +134,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
 
       {populationAdjusted && (
-        <DetailsField title={`Population Adjusted to ${TerritoryDataYear}:`}>
+        <DetailsField title={`Population Adjusted to ${TerritoryDataYear}`}>
           <LocalePopulationAdjusted locale={locale} />
           <HoverableButton
             style={{ marginLeft: '0.5em', padding: '0.25em', fontWeight: 'normal' }}
@@ -151,7 +151,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       )}
 
       {populationSpeaking != null && (
-        <DetailsField title="Speakers (from best cited source(s)):">
+        <DetailsField title="Speakers (from best cited source(s))">
           <CountOfPeople count={populationSpeaking} />
           {' ['}
           <LocaleCensusCitation locale={locale} />
@@ -162,7 +162,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <DetailsField
           title={
             <span style={{ marginLeft: '2em' }}>
-              % in {territory?.scope.toLowerCase() ?? 'territory'}:
+              % in {territory?.scope.toLowerCase() ?? 'territory'}
             </span>
           }
         >
@@ -170,7 +170,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </DetailsField>
       )}
       {populationWriting != null && territory && (
-        <DetailsField title="Writers:">
+        <DetailsField title="Writers">
           ~<CountOfPeople count={populationWriting} />
           {' [previous estimate * literacy'}
           {territory.literacyPercent != null && ` (${territory.literacyPercent.toFixed(1)}%)`}
@@ -181,7 +181,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <DetailsField
           title={
             <span style={{ marginLeft: '2em' }}>
-              % in {territory?.scope.toLowerCase() ?? 'territory'}:
+              % in {territory?.scope.toLowerCase() ?? 'territory'}
             </span>
           }
         >
@@ -190,7 +190,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       )}
 
       {censusRecords && censusRecords.length > 0 && (
-        <DetailsField title="Other Censuses:">
+        <DetailsField title="Other Censuses">
           <table style={{ marginLeft: '2em', borderSpacing: '1em 0' }}>
             <thead>
               <tr>
@@ -235,18 +235,18 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
   return (
     <DetailsSection title="Other">
       {officialStatus && (
-        <DetailsField title="Government Status:">{getOfficialLabel(officialStatus)}</DetailsField>
+        <DetailsField title="Government Status">{getOfficialLabel(officialStatus)}</DetailsField>
       )}
       {wikipedia && (
-        <DetailsField title="Wikipedia:">
+        <DetailsField title="Wikipedia">
           <ObjectWikipediaInfo object={locale} />
         </DetailsField>
       )}
-      <DetailsField title="Locale Source:">
+      <DetailsField title="Locale Source">
         <LocaleSourceLabel localeSource={localeSource} />
       </DetailsField>
       {relatedLocales?.moreGeneral && relatedLocales.moreGeneral.length > 0 && (
-        <DetailsField title="More General Locales:">
+        <DetailsField title="More General Locales">
           <CommaSeparated>
             {relatedLocales.moreGeneral.map((locale) => (
               <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
@@ -255,7 +255,7 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
         </DetailsField>
       )}
       {relatedLocales?.moreSpecific && relatedLocales.moreSpecific.length > 0 && (
-        <DetailsField title="More Specific Locales:">
+        <DetailsField title="More Specific Locales">
           <CommaSeparated>
             {relatedLocales.moreSpecific.map((locale) => (
               <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
@@ -264,12 +264,12 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
         </DetailsField>
       )}
       {relatedLocales?.parentLanguage && (
-        <DetailsField title="Parent Language Locale:">
+        <DetailsField title="Parent Language Locale">
           <HoverableObjectName object={relatedLocales.parentLanguage} labelSource="code" />
         </DetailsField>
       )}
       {relatedLocales?.childLanguages && relatedLocales.childLanguages.length > 0 && (
-        <DetailsField title="Child Language Locales:">
+        <DetailsField title="Child Language Locales">
           <CommaSeparated>
             {relatedLocales.childLanguages.map((locale) => (
               <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
@@ -278,12 +278,12 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
         </DetailsField>
       )}
       {relatedLocales?.parentTerritory && (
-        <DetailsField title="Encapsulating Territory Locale:">
+        <DetailsField title="Encapsulating Territory Locale">
           <HoverableObjectName object={relatedLocales.parentTerritory} labelSource="code" />
         </DetailsField>
       )}
       {relatedLocales?.childTerritories && relatedLocales.childTerritories.length > 0 && (
-        <DetailsField title="Contained Territory Locales:">
+        <DetailsField title="Contained Territory Locales">
           <CommaSeparated>
             {relatedLocales.childTerritories.map((locale) => (
               <HoverableObjectName key={locale.ID} object={locale} labelSource="code" />
