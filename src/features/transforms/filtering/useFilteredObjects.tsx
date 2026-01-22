@@ -1,88 +1,24 @@
-import { useMemo } from 'react';
+import useObjects, { ObjectDataByType } from '@features/data/context/useObjects';
 
-import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import useFilters, { FilterOptions } from './useFilters';
 
-import { ObjectData } from '@entities/types/DataTypes';
+function useFilteredObjects<K extends keyof ObjectDataByType>(
+  type: K,
+  { scope = true, substring = true, connections = true, vitality = true }: FilterOptions,
+): {
+  filteredObjects: ObjectDataByType[K][];
+  allObjectsInType: ObjectDataByType[K][];
+} {
+  const objects = useObjects(type);
 
-import getFilterBySubstring from '../search/getFilterBySubstring';
-
-import { getFilterByVitality, getScopeFilter } from './filter';
-import { getFilterByConnections } from './filterByConnections';
-
-type UseFilteredObjectsParams = {
-  useScope?: boolean;
-  useSubstring?: boolean;
-  useConnections?: boolean;
-  useVitality?: boolean;
-  inputObjects?: ObjectData[];
-};
-
-const useFilteredObjects = ({
-  useScope = true,
-  useSubstring = true,
-  useConnections = true,
-  useVitality = true,
-  inputObjects,
-}: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
-  // Implementation of filtering logic goes here
-  const { objectType } = usePageParams();
-  const { languagesInSelectedSource, locales, territories, writingSystems, variantTags, censuses } =
-    useDataContext();
-  const filterByScope = useScope ? getScopeFilter() : () => true;
-  const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
-  const filterByConnections = useConnections ? getFilterByConnections() : () => true;
-  const filterByVitality = useVitality ? getFilterByVitality() : () => true;
-  const sortFunction = getSortFunction();
-
-  const objects = useMemo(() => {
-    if (inputObjects) return inputObjects;
-    switch (objectType) {
-      case ObjectType.Census:
-        return Object.values(censuses);
-      case ObjectType.Language:
-        return languagesInSelectedSource;
-      case ObjectType.Locale:
-        return locales;
-      case ObjectType.Territory:
-        return territories;
-      case ObjectType.WritingSystem:
-        return writingSystems;
-      case ObjectType.VariantTag:
-        return variantTags;
-    }
-  }, [
-    objectType,
-    censuses,
-    languagesInSelectedSource,
-    locales,
-    territories,
-    writingSystems,
-    variantTags,
-  ]);
-
-  const filteredObjects = useMemo(() => {
-    return objects
-      .filter(
-        (obj) =>
-          filterByScope(obj) &&
-          filterBySubstring(obj) &&
-          filterByConnections(obj) &&
-          filterByVitality(obj),
-      )
-      .sort(sortFunction);
-  }, [
-    objects,
-    filterByScope,
-    filterBySubstring,
-    filterByConnections,
-    filterByVitality,
-    sortFunction,
-  ]);
+  const filteredObjects = useFilters(objects, {
+    scope,
+    substring,
+    connections,
+    vitality,
+  });
 
   return { filteredObjects, allObjectsInType: objects };
-};
+}
 
 export default useFilteredObjects;

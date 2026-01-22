@@ -4,6 +4,7 @@ import { DetailsContainer } from '@pages/dataviews/ViewDetails';
 
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
+import usePageParams from '@features/params/usePageParams';
 import useColors from '@features/transforms/coloring/useColors';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
@@ -20,7 +21,8 @@ import ObjectDetails from '../details/ObjectDetails';
 import ResponsiveGrid from './ResponsiveGrid';
 
 const CardList: React.FC = () => {
-  const { filteredObjects, allObjectsInType } = useFilteredObjects({});
+  const { objectType } = usePageParams();
+  const { filteredObjects, allObjectsInType } = useFilteredObjects(objectType, {});
   const { getCurrentObjects } = usePagination<ObjectData>();
   const currentObjects = useMemo(
     () => getCurrentObjects(filteredObjects),

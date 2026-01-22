@@ -5,8 +5,8 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import { ObjectType } from '@features/params/PageParamTypes';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -16,19 +16,13 @@ import ViewCard from '@shared/containers/ViewCard';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const DubiousLanguages: React.FC = () => {
-  const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
-    useDataContext();
-  const filterBySubstring = getFilterBySubstring();
-  const filterByConnections = getFilterByConnections();
+  const { getLanguage, getTerritory, getWritingSystem } = useDataContext();
+  const { filteredObjects: languages } = useFilteredObjects(ObjectType.Language, {});
   const sortFunction = getSortFunction();
   const { getCurrentObjects } = usePagination<LanguageData>();
   const languagesFiltered = useMemo(
-    () =>
-      languagesInSelectedSource
-        .filter(filterBySubstring)
-        .filter(filterByConnections)
-        .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
-    [languagesInSelectedSource, filterBySubstring, filterByConnections],
+    () => languages.filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
+    [languages],
   );
 
   return (

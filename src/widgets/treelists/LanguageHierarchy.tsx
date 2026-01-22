@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import LanguageSourceSelector from '@widgets/controls/selectors/LanguageSourceSelector';
 
@@ -7,11 +7,12 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { LanguageData, LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 export const LanguageHierarchy: React.FC = () => {
@@ -19,14 +20,19 @@ export const LanguageHierarchy: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
+  const filterByConnections = getFilterByConnections();
+  const filterInnerNodes = useCallback((a: ObjectData) => {
+    // Always show inner nodes (families) even if they don't pass the connections filter
+    return filterByScope(a) || filterByConnections(a);
+  }, []);
 
   const rootNodes = getLanguageTreeNodes(
     languagesInSelectedSource.filter(
-      (lang) => lang.parentLanguage == null || !filterByScope(lang.parentLanguage),
+      (lang) => lang.parentLanguage == null || !filterInnerNodes(lang.parentLanguage),
     ),
     languageSource,
     sortFunction,
-    filterByScope,
+    filterInnerNodes,
     0,
   );
 

@@ -24,7 +24,7 @@ import './styles.css';
 
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
-  const { filteredObjects } = useFilteredObjects({});
+  const { filteredObjects } = useFilteredObjects(objectType, {});
   const { getCurrentObjects } = usePagination<ObjectData>();
 
   const isDrawingTerritories = objectType !== ObjectType.Language;

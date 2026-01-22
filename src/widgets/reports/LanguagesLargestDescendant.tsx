@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import { ObjectType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -15,18 +16,18 @@ import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
 const LanguagesLargestDescendant: React.FC = () => {
-  const { languagesInSelectedSource } = useDataContext();
+  const { filteredObjects: languages } = useFilteredObjects(ObjectType.Language, {});
 
   // TODO move this algorithm earlier in the data processing pipeline so it doesn't need to be
   // recomputed every time the component renders.
 
   // Clear the largest descendants first since it may change a lot if the schema changes.
-  languagesInSelectedSource.forEach((lang) => {
+  languages.forEach((lang) => {
     lang.largestDescendant = undefined;
   });
 
   // Compute the largest descendants for each language
-  languagesInSelectedSource.forEach((lang) => {
+  languages.forEach((lang) => {
     lang.largestDescendant = getLargestDescendant(lang);
   });
 
@@ -35,7 +36,7 @@ const LanguagesLargestDescendant: React.FC = () => {
 
   const filteredLanguages = useMemo(
     () =>
-      languagesInSelectedSource.filter((lang) => {
+      languages.filter((lang) => {
         if (
           lang.largestDescendant == null ||
           lang.populationEstimate == null ||
@@ -48,7 +49,7 @@ const LanguagesLargestDescendant: React.FC = () => {
           100;
         return percent >= minimumPercentThreshold && percent <= maximumPercentThreshold;
       }),
-    [languagesInSelectedSource, minimumPercentThreshold, maximumPercentThreshold],
+    [languages, minimumPercentThreshold, maximumPercentThreshold],
   );
 
   return (

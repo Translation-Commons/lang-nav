@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import useObjects from '@features/data/context/useObjects';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 import {
@@ -24,8 +23,6 @@ import HighlightedObjectField from './HighlightedObjectField';
 
 export default function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy, objectType } = usePageParams();
-  const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
-    useDataContext();
   const filterByLanguageScope = getFilterByLanguageScope();
   const filterByTerritoryScope = getFilterByTerritoryScope();
   const filterByWritingSystem = getFilterByWritingSystem();
@@ -33,31 +30,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const filterByTerritory = getFilterByTerritory();
   const filterLabels = getFilterLabels();
 
-  const objects = useMemo(() => {
-    switch (objectType) {
-      case ObjectType.Language:
-        return languagesInSelectedSource;
-      case ObjectType.Locale:
-        return locales;
-      case ObjectType.Territory:
-        return territories;
-      case ObjectType.WritingSystem:
-        return writingSystems;
-      case ObjectType.Census:
-        return Object.values(censuses);
-      case ObjectType.VariantTag:
-        return variantTags;
-    }
-  }, [
-    censuses,
-    languagesInSelectedSource,
-    locales,
-    territories,
-    variantTags,
-    writingSystems,
-    objectType,
-    searchBy,
-  ]);
+  const objects = useObjects(objectType);
 
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
     const getMatchDistance = (object: ObjectData): number => {

@@ -1,16 +1,14 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { ObjectType } from '@features/params/PageParamTypes';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
 const LocaleCitationCounts: React.FC = () => {
-  const { locales } = useDataContext();
-  const filterByScope = getScopeFilter();
-  const filteredLocales = locales.filter(filterByScope);
+  const { filteredObjects: filteredLocales } = useFilteredObjects(ObjectType.Locale, {});
 
   // Count locales with populationCensus
   const withCensusLocales = filteredLocales.filter((loc) => loc.populationCensus != null);
