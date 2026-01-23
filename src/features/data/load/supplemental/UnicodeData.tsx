@@ -105,7 +105,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
         macroLang.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
         macroLang.CLDR.scope = LanguageScope.Macrolanguage;
         macroLang.CLDR.notes = notes;
-        macroLang.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
+        macroLang.CLDR.name = macroLang.nameCanonical + ' (macrolanguage)';
         // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
         cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with the alternative code to distinguish it

@@ -12,6 +12,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import LanguagePath from './LanguagePathSimple';
+import LanguagePathsReportMultipleRoutes from './LanguagePathsReportsMultipleRoutes';
 
 const LanguagePathsReport: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
@@ -24,25 +25,6 @@ const LanguagePathsReport: React.FC = () => {
     .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
     .slice(0, limit);
 
-  // A known issue for multipleRoutes is when languages have been deprecated from ISO -- they may not be matched with glottolog entries.
-  // Therefore, we should split up the multipleRoutes into 2 parts, one that includes deprecated ISO languages
-  const [validMultipleRoutes, deprecatedMultipleRoutes] = Object.entries(multipleRoutes).reduce<
-    [Record<LanguageCode, LanguageCode[][]>, Record<LanguageCode, LanguageCode[][]>]
-  >(
-    (acc, [langId, paths]) => {
-      const hasDeprecatedPathParent = paths.some(
-        (path) => getLanguage(path[0])?.ISO.retirementReason != null,
-      );
-      if (hasDeprecatedPathParent) {
-        acc[1][langId] = paths;
-      } else {
-        acc[0][langId] = paths;
-      }
-      return acc;
-    },
-    [{}, {}],
-  );
-
   return (
     <CollapsibleReport title="Unusual Language Paths">
       This report looks at the parent/child relationships among languages to identify unusual
@@ -50,8 +32,16 @@ const LanguagePathsReport: React.FC = () => {
       <button onClick={() => updatePageParams({ view: View.Hierarchy })}>
         Language Family Tree
       </button>{' '}
-      view
-      <div style={{ marginLeft: '1em', display: 'flex', flexDirection: 'column', gap: '1.5em' }}>
+      view.
+      <div
+        style={{
+          marginTop: '1em',
+          marginLeft: '1em',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5em',
+        }}
+      >
         <CollapsibleReport title={`Languages with circular relationships (${cycles.length})`}>
           This shows the detected cycles in parent-child relationships among languages. Such cycles
           are usually the result of data errors, and can cause problems in tree visualizations and
@@ -76,7 +66,7 @@ const LanguagePathsReport: React.FC = () => {
             ))}
           </ul>
           {orphans.length > limit && (
-            <div>The list it limited to the page limit. There are {orphans.length} total.</div>
+            <div>The list is limited to the page limit. There are {orphans.length} total.</div>
           )}
         </CollapsibleReport>
         <CollapsibleReport
@@ -92,53 +82,7 @@ const LanguagePathsReport: React.FC = () => {
             ))}
           </ol>
         </CollapsibleReport>
-        <CollapsibleReport title="Languages with multiple parent paths">
-          These languages can be reached by more than one distinct path from root languages. This
-          usually indicates data issues, as languages should ideally have a single lineage. The
-          detected multiple paths are:
-          {Object.entries(multipleRoutes).length == 0 && (
-            <div>No multiple parent paths detected.</div>
-          )}
-          <ul>
-            {Object.entries(validMultipleRoutes)
-              .slice(0, limit)
-              .map(([langId, paths], i) => (
-                <li key={i}>
-                  <strong>
-                    <HoverableObjectName object={getLanguage(langId)} />
-                  </strong>
-                  <ul>
-                    {paths.map((path, j) => (
-                      <li key={j} style={{ marginLeft: '0.5em' }}>
-                        <LanguagePath path={path} getLanguage={getLanguage} />
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-          </ul>
-          {Object.entries(validMultipleRoutes).length == 0 && (
-            <div>No multiple parent paths detected.</div>
-          )}
-          <ul>
-            {Object.entries(deprecatedMultipleRoutes)
-              .slice(0, limit)
-              .map(([langId, paths], i) => (
-                <li key={i}>
-                  <strong>
-                    <HoverableObjectName object={getLanguage(langId)} />
-                  </strong>
-                  <ul>
-                    {paths.map((path, j) => (
-                      <li key={j} style={{ marginLeft: '0.5em' }}>
-                        <LanguagePath path={path} getLanguage={getLanguage} />
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              ))}
-          </ul>
-        </CollapsibleReport>
+        <LanguagePathsReportMultipleRoutes multipleRoutes={multipleRoutes} />
       </div>
     </CollapsibleReport>
   );
