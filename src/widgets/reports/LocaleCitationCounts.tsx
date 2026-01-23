@@ -10,7 +10,7 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
 const LocaleCitationCounts: React.FC = () => {
-  const { filteredObjects: filteredLocales } = useFilteredObjects({});
+  const { filteredObjects: filteredLocales } = useFilteredObjects(ObjectType.Locale, {});
 
   // Count locales with populationCensus
   const locales = filteredLocales.filter((obj) => obj.type === ObjectType.Locale);

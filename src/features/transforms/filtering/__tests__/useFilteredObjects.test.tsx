@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { PageParamsOptional } from '@features/params/PageParamTypes';
+import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
@@ -25,13 +25,13 @@ vi.mock('@features/data/context/useDataContext', () => ({
 // Helper to get hook result
 function getHookResult(
   params: {
-    useScope?: boolean;
-    useSubstring?: boolean;
-    useTerritory?: boolean;
-    useVitality?: boolean;
+    scope?: boolean;
+    substring?: boolean;
+    connections?: boolean;
+    vitality?: boolean;
   } = {},
 ) {
-  const res = renderHook(() => useFilteredObjects(params));
+  const res = renderHook(() => useFilteredObjects(ObjectType.Language, params));
   return res.result.current;
 }
 
@@ -95,7 +95,7 @@ describe('useFilteredObjects', () => {
   });
 
   it("if we don't want to filter by scope, it will allow the language family (ine) even though the page param wouldn't normally allow it", () => {
-    const { filteredObjects } = getHookResult({ useScope: false });
+    const { filteredObjects } = getHookResult({ scope: false });
     expect(filteredObjects.map((obj) => obj.ID)).toEqual([
       'ine', // usually filtered out as family
       'gem',
