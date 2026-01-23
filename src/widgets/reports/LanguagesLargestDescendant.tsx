@@ -116,7 +116,11 @@ const LanguagesLargestDescendant: React.FC = () => {
   );
 };
 
-function getLargestDescendant(language: LanguageData): LanguageData | undefined {
+function getLargestDescendant(language: LanguageData, depth = 0): LanguageData | undefined {
+  if (depth > 40)
+    console.debug('Potential infinite recursion for: ', language.ID, 'depth: ', depth);
+  if (depth > 50) return undefined;
+
   // If it has already been computed, return it.
   if (language.largestDescendant !== undefined) {
     return language.largestDescendant;
@@ -129,7 +133,7 @@ function getLargestDescendant(language: LanguageData): LanguageData | undefined 
   // sourced population (aka no language families). Dialects rarely but sometimes have directly
   // sourced populations.
   return language.childLanguages.reduce<LanguageData | undefined>((largest, child) => {
-    const childsLargest = getLargestDescendant(child);
+    const childsLargest = getLargestDescendant(child, depth + 1);
     const candidateLargest =
       (childsLargest?.populationRough || 0) > (child.populationRough || 0) ? childsLargest : child;
     if (

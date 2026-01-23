@@ -78,7 +78,14 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       // Get the constituent language and the macrolanguage that will be replaced by it
       const constituentLangCode = alias.original; // eg. `cmn`
       const macroLangCode = alias.replacement; // eg. `zh`
-      const macroLangAltCode = macroLangCode + '**';
+      let macroLangAltCode = macroLangCode + '*';
+      if (cldrLanguages[macroLangAltCode] != null) {
+        // If the alternative code already exists (known problem with Mandingo but potentially could happen again)
+        macroLangAltCode = macroLangCode + '**';
+        if (cldrLanguages[macroLangAltCode] != null) {
+          console.warn('Too many macrolanguage alternatives for ', macroLangCode);
+        }
+      }
       const constituentLang = cldrLanguages[alias.original]; // eg. Mandarin Chinese `cmn` in ISO but effective `zh` in CLDR
       const macroLang = cldrLanguages[alias.replacement]; // eg. Chinese (macrolanguage) `zho`/`zh` in ISO
       const notes = (
@@ -97,12 +104,13 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
         macroLang.CLDR.dataProvider = constituentLang;
         macroLang.CLDR.code = macroLangAltCode; // Distinguish the macrolanguage from the constituent language
         macroLang.CLDR.scope = LanguageScope.Macrolanguage;
-        macroLang.CLDR.childLanguages = [constituentLang];
         macroLang.CLDR.notes = notes;
-        macroLang.CLDR.name = macroLang?.nameCanonical + ' (macrolanguage)';
+        macroLang.CLDR.name = macroLang.nameCanonical + ' (macrolanguage)';
         // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
-        cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with ** to distinguish it
+        cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with the alternative code to distinguish it
+
+        // Note: Don't add references to child languages here -- the parent reference below is sufficient
       }
 
       // Now set the replacement (cmn) as the canonical language for its macrolanguage (zh)

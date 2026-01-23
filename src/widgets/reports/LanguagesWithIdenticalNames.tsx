@@ -41,7 +41,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
         return languagesByName;
       }, {});
   }, [languagesInSelectedSource, filterBySubstring, filterByConnections]);
-  console.log(Object.entries(languagesByName).slice(0, 5));
+
   const langsWithDupNames = Object.entries(languagesByName).reduce<Record<string, LanguageData[]>>(
     (duplicatedNames, [name, langs]) => {
       if (langs.length > 1) {
