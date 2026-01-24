@@ -7,11 +7,12 @@ import { getDefaultParams, ProfileType } from './Profiles';
 /**
  * This is used to make the next version of the page parameters in the URL.
  */
-export function getNewURLSearchParams(
+
+function buildNextURLSearchParams(
   newParams: PageParamsOptional,
-  prev?: URLSearchParams,
+  next: URLSearchParams,
 ): URLSearchParams {
-  const next = new URLSearchParams(prev);
+  // Convert newParams to array for iterate
   Object.entries(newParams).forEach(([key, value]) => {
     if (key === PageParamKey.limit) {
       // Handle as number
@@ -52,14 +53,17 @@ export function getNewURLSearchParams(
       next.set(key, value.toString());
     }
   });
+  return next;
+}
 
-  // Clear the parameters that match the default
+function clearDefaultParams(next: URLSearchParams): URLSearchParams {
   const defaults = getDefaultParams(
     next.get('objectType') as ObjectType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
     next.get('colorBy') as ColorBy,
   );
+
   Array.from(next.entries()).forEach(([key, value]) => {
     const defaultValue = defaults[key as PageParamKey];
 
@@ -79,5 +83,41 @@ export function getNewURLSearchParams(
     }
   });
 
+  return next;
+}
+
+function clearContextDependentParams(
+  newParams: PageParamsOptional,
+  next: URLSearchParams,
+  prev?: URLSearchParams,
+): URLSearchParams {
+  const prevOrDefault = getDefaultParams(
+    prev?.get('objectType') as ObjectType,
+    prev?.get('view') as View,
+    prev?.get('profile') as ProfileType,
+    prev?.get('colorBy') as ColorBy,
+  );
+
+  if (newParams.view !== undefined && newParams.view !== prevOrDefault.view) {
+    if (newParams.limit == null) next.delete('limit');
+    if (newParams.page == null) next.delete('page');
+    if (newParams.colorBy == null) next.delete('colorBy');
+  }
+
+  if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
+    if (newParams.page == null) next.delete('page');
+  }
+
+  return next;
+}
+
+export function getNewURLSearchParams(
+  newParams: PageParamsOptional,
+  prev?: URLSearchParams,
+): URLSearchParams {
+  let next = new URLSearchParams(prev);
+  next = buildNextURLSearchParams(newParams, next);
+  next = clearContextDependentParams(newParams, next, prev);
+  next = clearDefaultParams(next);
   return next;
 }
