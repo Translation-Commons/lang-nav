@@ -98,14 +98,26 @@ function clearContextDependentParams(
     prev?.get('colorBy') as ColorBy,
   );
 
-  if (newParams.view !== undefined && newParams.view !== prevOrDefault.view) {
-    if (newParams.limit == null) next.delete('limit');
-    if (newParams.page == null) next.delete('page');
-    if (newParams.colorBy == null) next.delete('colorBy');
-  }
-
   if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
     if (newParams.page == null) next.delete('page');
+    const oldSearchString = prev?.get('searchString');
+    const oldObjectID = prev?.get('objectID');
+    const contextValue = oldObjectID || oldSearchString;
+    if (newParams.searchString === undefined) {
+      next.delete('searchString');
+    }
+    if (newParams.objectID === undefined) {
+      next.delete('objectID');
+    }
+    if (contextValue) {
+      if (newParams.objectType === ObjectType.Territory) {
+        next.set('languageFilter', contextValue);
+      } else if (newParams.objectType === ObjectType.Language) {
+        next.set('territoryFilter', contextValue);
+      } else if (newParams.objectType === ObjectType.WritingSystem) {
+        next.set('languageFilter', contextValue);
+      }
+    }
   }
 
   return next;
