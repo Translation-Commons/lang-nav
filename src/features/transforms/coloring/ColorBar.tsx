@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
+import { LanguageModality } from '@entities/language/LanguageModality';
+import { getModalityFromLabel, getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import {
   getLanguageISOStatusLabel,
   getVitalityEthnologueCoarseLabel,
@@ -91,6 +93,21 @@ function getTicks(
       ).map((letter) => ({
         position: getNormalizedValue(convertAlphaToNumber(letter)),
         label: letter,
+      }));
+    case SortBy.Modality:
+      return pickDistributedTicksFromRange(
+        [
+          LanguageModality.Written,
+          LanguageModality.MostlyWritten,
+          LanguageModality.SpokenAndWritten,
+          LanguageModality.MostlySpoken,
+          LanguageModality.Spoken,
+          // For a continuum, we don't include 'Sign' here but we should come back to this and find a better way to show it
+        ].map((v) => getModalityLabel(v)!),
+        numberOfTicks,
+      ).map((label) => ({
+        position: getNormalizedValue(getModalityFromLabel(label) ?? 0),
+        label,
       }));
     case SortBy.ISOStatus:
       return pickDistributedTicksFromRange(

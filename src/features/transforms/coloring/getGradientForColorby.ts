@@ -14,6 +14,7 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.Date:
     case SortBy.Area:
+    case SortBy.Modality:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
     case SortBy.VitalityMetascore:

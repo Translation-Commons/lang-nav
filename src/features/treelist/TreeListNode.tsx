@@ -27,9 +27,8 @@ type Props = {
 };
 
 const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }) => {
-  const { children, object, labelStyle, descendantsPassFilter } = nodeData;
+  const { children, object, labelStyle } = nodeData;
   const { view, searchBy, searchString } = usePageParams();
-  const [expanded, setExpanded] = useState(isExpandedInitially || descendantsPassFilter);
   const [seeAllChildren, setSeeAllChildren] = useState(false);
   const { limit } = usePageParams();
   const {
@@ -38,6 +37,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
     showObjectIDs: showObjectIDsSetting,
     showData,
   } = useTreeListOptionsContext();
+  const [expanded, setExpanded] = useState(isExpandedInitially || allExpanded);
   let showObjectIDs = showObjectIDsSetting;
   if (
     searchString != '' &&
@@ -49,8 +49,8 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
 
   // Update the initial opening if a user is typing things in the search box
   useEffect(
-    () => setExpanded(isExpandedInitially || descendantsPassFilter || allExpanded),
-    [descendantsPassFilter, allExpanded],
+    () => setExpanded(isExpandedInitially || allExpanded),
+    [allExpanded, isExpandedInitially],
   );
 
   return (

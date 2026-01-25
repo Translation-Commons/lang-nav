@@ -18,6 +18,7 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
+import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
@@ -68,10 +69,12 @@ const LanguageTable: React.FC = () => {
       },
       {
         key: 'Modality',
-        render: (lang) => lang.modality ?? <Deemphasized>—</Deemphasized>,
-        exportValue: (lang) => lang.modality, // Avoid exporting escaped html like &amp;
+        render: (lang) => getModalityLabel(lang.modality) ?? <Deemphasized>—</Deemphasized>,
+        exportValue: (lang) => getModalityLabel(lang.modality), // Avoid exporting escaped html like &amp;
         isInitiallyVisible: false,
+        valueType: TableValueType.Enum,
         columnGroup: 'Context',
+        sortParam: SortBy.Modality,
       },
       ...LanguagePopulationColumns,
       ...LanguageVitalityColumns,

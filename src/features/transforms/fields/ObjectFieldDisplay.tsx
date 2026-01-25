@@ -3,6 +3,8 @@ import React from 'react';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { getSortField } from '@features/transforms/fields/getField';
 
+import { LanguageModality } from '@entities/language/LanguageModality';
+import { LanguageModalityIcon } from '@entities/language/LanguageModalityDisplay';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -57,6 +59,9 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case SortBy.VitalityEthnologue2013:
     case SortBy.VitalityEthnologue2025:
       return <VitalityField obj={object} field={field} />;
+
+    case SortBy.Modality:
+      return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
   }
   return <>{fieldValue}</>;
 };

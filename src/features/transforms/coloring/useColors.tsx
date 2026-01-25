@@ -8,7 +8,7 @@ import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import { getSortField } from '../fields/getField';
-import { getMaximumValue, getMinimumValue } from '../rangeUtils';
+import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
 import { SortBy } from '../sorting/SortTypes';
 
 import { ColorBy } from './ColorTypes';

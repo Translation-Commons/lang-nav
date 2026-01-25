@@ -6,18 +6,13 @@ import TreeListNode, { TreeNodeData } from './TreeListNode';
 
 type Props = {
   rootNodes: TreeNodeData[];
-  suppressExpansion?: boolean;
 };
 
-const TreeListRoot: React.FC<Props> = ({ rootNodes, suppressExpansion }) => {
+const TreeListRoot: React.FC<Props> = ({ rootNodes }) => {
   return (
     <ul className="TreeListRoot">
       {rootNodes.map((node, i) => (
-        <TreeListNode
-          key={node.object.ID}
-          nodeData={node}
-          isExpandedInitially={!suppressExpansion && i === 0}
-        />
+        <TreeListNode key={node.object.ID} nodeData={node} isExpandedInitially={i === 0} />
       ))}
     </ul>
   );

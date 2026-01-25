@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { getSortField } from '../fields/getField';
-import { getMaximumValue, getMinimumValue } from '../rangeUtils';
+import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
 
 import { ScaleBy } from './ScaleTypes';
 

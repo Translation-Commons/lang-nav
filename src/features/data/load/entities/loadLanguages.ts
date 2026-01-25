@@ -1,8 +1,8 @@
+import { getModalityFromLabel } from '@entities/language/LanguageModalityDisplay';
 import {
   getBaseLanguageData,
   LanguageData,
   LanguageDictionary,
-  LanguageModality,
 } from '@entities/language/LanguageTypes';
 import {
   parseVitalityEthnologue2013,
@@ -31,6 +31,8 @@ function parseLanguageLine(line: string): LanguageData {
   const parentLanguageCode = parts[11] !== '' ? parts[11] : undefined;
   const parentISOCode = parts[11] !== '' && parts[11].length <= 3 ? parts[11] : undefined;
   const parentGlottocode = parts[12] !== '' ? parts[12] : undefined;
+  // Convert strings to the numeric enum
+  const modality = getModalityFromLabel(parts[4]);
 
   const language = {
     ...getBaseLanguageData(code, nameDisplay),
@@ -54,7 +56,7 @@ function parseLanguageLine(line: string): LanguageData {
     populationAdjusted,
     populationRough,
 
-    modality: (parts[4] || undefined) as LanguageModality | undefined,
+    modality,
     primaryScriptCode: parts[5] || undefined,
     Combined: { code, name: nameDisplay, parentLanguageCode },
     Glottolog: {

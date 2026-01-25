@@ -65,3 +65,29 @@ export function maxBy<T, K>(items: T[], valueFn: (item: T) => K | undefined): K 
     return max > current ? max : current;
   }, undefined);
 }
+
+export function countOccurrencesBy<T>(
+  items: T[],
+  bucketFn: (item: T) => string | number,
+): Record<string | number, number> {
+  return items.reduce(
+    (hist, item) => {
+      const bucket = bucketFn(item);
+      if (!hist[bucket]) hist[bucket] = 0;
+      hist[bucket]++;
+      return hist;
+    },
+    {} as Record<string | number, number>,
+  );
+}
+
+export function countOccurrences<T extends string | number>(items: T[]): Record<string, number> {
+  return items.reduce(
+    (hist, item) => {
+      if (!hist[item]) hist[item] = 0;
+      hist[item]++;
+      return hist;
+    },
+    {} as Record<T, number>,
+  );
+}
