@@ -6,7 +6,7 @@
 #populationEligible		7,963,809
 #populationWithPositiveResponses		7,938,863
 #notes		Residents. Census - de jure - complete tabulation
-#modality		Spoken
+#mode		Speaks
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	

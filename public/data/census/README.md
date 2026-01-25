@@ -21,7 +21,8 @@ There will be a lot of potential census data. To find data specific to languages
 
 We also want to understand the precise demographic characteristcs of the people. Try to find as much possible of the following characteristics:
 
-- The modality the language is used in ("spoken", "written", "spoken or written", "understands", "ethnicity") -- ethnicity is not recommended but sometimes it is useful data
+- The mode the language is used in ("speaks", "writes", "understands", "reads", "uses", "ethnicity")
+  - Ethnicity is not recommended but sometimes it is useful data
 - The time learned ("mothertongue", "first language", "second language")
 - The level of proficiency ("basic", "intermediate", "fluent")
 - The geographic scope of the data (e.g., "whole country", "mainland -- without dependencies")
@@ -83,10 +84,10 @@ The header should include the following rows:
 - `collectorType`: The type of individual or group that collected the data (e.g., "Government", "NGO", "Academic")
 
 **Recommended Rows**
-More is better, but also if you don't have a value, leave it empty. For instance, if a census does not specifically indicate its about spoken language, don't set the modality. Nonetheless the more data you can provide the more the data can be trusted and used.
+More is better, but also if you don't have a value, leave it empty. For instance, if a census does not specifically indicate its about spoken language, don't set the mode. Nonetheless the more data you can provide the more the data can be trusted and used.
 
 - **Language criteria**, why would a person be counted for a language
-  - `modality`: The modality of the language (e.g., "spoken", "written", "spoken or written", "understands")
+  - `mode`: The mode the language is used in (e.g., "speaks" (implicitly "speaks or signs"), "writes", "understands", "reads", "uses", "ethnicity")
   - `proficiency`: The level of proficiency in the language (e.g., "basic", "intermediate", "fluent")
   - `acquisitionOrder`: The order in which the language was acquired (e.g., "L1" for first language, "L2" for second language, "Any" for any order)
   - `domain`: The domain in which the language is used (e.g., "Home", "Work", "Education", "Any" for any domain)

@@ -65,10 +65,15 @@ const TableOfAllCensuses: React.FC = () => {
           columnGroup: 'Characteristics',
         },
         {
-          key: 'Modality',
-          description:
-            'How the language is conveyed -- in spoken word, written word. Alternatively some censuses just report ethnicity.',
-          render: (census) => census.modality,
+          key: 'Mode',
+          description: (
+            <>
+              Censuses usually frame language usage like &quot;How many people{' '}
+              <strong>speak</strong> the language?&quot;. This column shows what people do with the
+              language to be counted for it. Alternatively some censuses just report ethnicity.
+            </>
+          ),
+          render: (census) => census.mode,
           isInitiallyVisible: false,
           columnGroup: 'Characteristics',
         },

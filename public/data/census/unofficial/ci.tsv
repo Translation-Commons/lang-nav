@@ -2,7 +2,7 @@
 #nameDisplay		Côte d’Ivoire Afrobarometer 2024
 #isoRegionCode		CI
 #yearCollected		2024
-#modality		Spoken
+#mode		Speaks
 #domain		Home
 #populationEligible		29,389,150
 #populationSource		https://rp2021.anstat.ci/publication/

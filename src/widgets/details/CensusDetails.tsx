@@ -28,7 +28,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
 };
 
 function CensusPrimarySection({ census }: { census: CensusData }) {
-  const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, modality } = census;
+  const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, mode } = census;
   return (
     <DetailsSection title="Primary Information">
       <DetailsField title="Territory">
@@ -39,7 +39,7 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
         )}
       </DetailsField>
       <DetailsField title="Year">{census.yearCollected}</DetailsField>
-      {modality != null && <DetailsField title="Modality">{modality}</DetailsField>}
+      {mode != null && <DetailsField title="Mode">{mode}</DetailsField>}
       {proficiency != null && <DetailsField title="Proficiency">{proficiency}</DetailsField>}
       {acquisitionOrder != null && (
         <DetailsField title="Acquisition Order">{acquisitionOrder}</DetailsField>
