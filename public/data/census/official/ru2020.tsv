@@ -1,8 +1,8 @@
 #codeDisplay		#lang:ru	ru2020speaks	ru2020uses	ru2020native
-#nameDisplay			Russia 2020 Spoken	Russia 2020 Uses	Russia 2020 Native Language
+#nameDisplay			Russia 2020 Speaks	Russia 2020 Uses	Russia 2020 Native Language
 #isoRegionCode	RU				
 #yearCollected	2020				
-#modality			Spoken	Uses	
+#mode			Speaks	Uses	
 #acquisitionOrder			Any	Any	L1
 #populationEligible	147,182,123				
 #populationWithPositiveResponses			135,125,671	134,623,178	130,543,591

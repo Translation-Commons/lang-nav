@@ -13,7 +13,7 @@
 #geographicScope	Country and dependencies														Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds	Strict ISO 3166 bounds
 #age	2+																									
 #gender	Any																									
-#modality		Understands	Written	Spoken	Reading	Understands	Written	Spoken	Reading	Uses	Uses	Uses	Uses	Uses	Understands	Written	Spoken	Reading	Understands	Written	Spoken	Reading	Understands	Written	Spoken	Reading
+#mode		Understands	Writes	Speaks	Reads	Understands	Writes	Speaks	Reads	Uses	Uses	Uses	Uses	Uses	Understands	Writes	Speaks	Reads	Understands	Writes	Speaks	Reads	Understands	Writes	Speaks	Reads
 #proficiency		Good	Good	Good	Good	Good	Good	Good	Good	Always or Frequently	Always or Frequently	Always or Frequently			Good	Good	Good	Good	Good	Good	Good	Good	Good	Good	Good	Good
 #domain										Friends	Work	Family														
 #acquisitionOrder	Any												L1	L1												

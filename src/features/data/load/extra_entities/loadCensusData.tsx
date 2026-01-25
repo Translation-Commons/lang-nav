@@ -1,7 +1,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { LanguageCode, LanguageModality } from '@entities/language/LanguageTypes';
+import { CensusCollectorType, CensusData, CensusLanguageMode } from '@entities/census/CensusTypes';
+import { LanguageCode } from '@entities/language/LanguageTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 
@@ -111,8 +111,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
           censuses[index][key] = Number.parseFloat(value) || value;
         } else if (key === 'collectorType') {
           censuses[index][key] = value as CensusCollectorType;
-        } else if (key === 'modality') {
-          censuses[index][key] = value as LanguageModality;
+        } else if (key === 'mode') {
+          censuses[index][key] = value as CensusLanguageMode;
         } else if (key === 'quantity') {
           censuses[index][key] = value.toLowerCase().startsWith('percent') ? 'percent' : 'count';
         } else if (

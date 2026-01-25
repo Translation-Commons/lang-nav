@@ -1,6 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { LanguageCode, LanguageModality } from '../language/LanguageTypes';
+import { LanguageCode } from '../language/LanguageTypes';
 import { ObjectBase, TerritoryCode, TerritoryData } from '../types/DataTypes';
 
 // Unique identifier for the census or other source of population data
@@ -15,6 +15,15 @@ export enum CensusCollectorType {
   CLDR = 'CLDR',
 }
 
+export enum CensusLanguageMode {
+  Understands = 'Understands',
+  Speaks = 'Speaks', // Implicitly often "speaks or signs"
+  Writes = 'Writes',
+  Reads = 'Reads',
+  Uses = 'Uses',
+  Ethnicity = 'Ethnicity',
+}
+
 export interface CensusData extends ObjectBase {
   type: ObjectType.Census;
   ID: CensusID;
@@ -24,7 +33,7 @@ export interface CensusData extends ObjectBase {
   yearCollected: number; // eg. 2021, 2013
 
   // Kind of language data collected
-  modality?: LanguageModality; // eg. Spoken, Written, Sign
+  mode?: CensusLanguageMode; // eg. Speaks, Writes, Understands
   proficiency?: string; // eg. Conversant or Learning, Fluent, Non-Fluent
   acquisitionOrder?: string; // eg. Any, L1, L2, L3
   domain?: string; // eg. Any, Home, School, Work, Community, Unspecified
