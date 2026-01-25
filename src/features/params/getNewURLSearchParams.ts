@@ -98,6 +98,12 @@ function clearContextDependentParams(
     prev?.get('colorBy') as ColorBy,
   );
 
+  if (newParams.view !== undefined && newParams.view !== prevOrDefault.view) {
+    if (newParams.limit == null) next.delete('limit');
+    if (newParams.page == null) next.delete('page');
+    if (newParams.colorBy == null) next.delete('colorBy');
+  }
+
   if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
     if (newParams.page == null) next.delete('page');
     const oldSearchString = prev?.get('searchString');
