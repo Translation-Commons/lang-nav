@@ -69,8 +69,8 @@ const TableOfAllCensuses: React.FC = () => {
           description: (
             <>
               Censuses usually frame language usage like &quot;How many people{' '}
-              <strong>speak</strong> the language?&quot;. This column shows with what people do with
-              the language. Alternatively some censuses just report ethnicity.
+              <strong>speak</strong> the language?&quot;. This column shows what people do with the
+              language to be counted for it. Alternatively some censuses just report ethnicity.
             </>
           ),
           render: (census) => census.mode,
