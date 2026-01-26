@@ -1,4 +1,4 @@
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 
 export function computeLargestDescendant(
   languages: LanguageData[],
@@ -33,9 +33,10 @@ function getLargestDescendant(
     const childsLargest = getLargestDescendant(child, languageSource);
 
     // Skip language families and only consider languages with population
-    const isChildValid = child.scope !== 'Family' && (child.populationEstimate || 0) > 0;
+    const isChildValid =
+      child.scope !== LanguageScope.Family && (child.populationEstimate || 0) > 0;
     const isChildsLargestValid =
-      childsLargest?.scope !== 'Family' && (childsLargest?.populationEstimate || 0) > 0;
+      childsLargest?.scope !== LanguageScope.Family && (childsLargest?.populationEstimate || 0) > 0;
 
     // Pick the better candidate: prefer the one with larger population
     let candidateLargest: LanguageData | undefined;
