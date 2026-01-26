@@ -5,7 +5,7 @@ import {
   getFullyInstantiatedMockedObjects,
   getMockedDataContext,
 } from '@features/__tests__/MockObjects';
-import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
+import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import {
@@ -71,7 +71,7 @@ describe('LanguagePathsReport', () => {
 
     Object.values(LanguageSource).forEach((languageSource) => {
       // This shouldn't throw an error even in the presence of cycles
-      updateObjectCodesNameAndPopulation(
+      updateObjectsBasedOnDataParams(
         allLanguoids,
         locales,
         getTerritory('001')!,
