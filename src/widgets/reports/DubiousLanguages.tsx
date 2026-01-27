@@ -1,5 +1,7 @@
 import React, { useMemo } from 'react';
 
+import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
+
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
@@ -51,54 +53,58 @@ const DubiousLanguages: React.FC = () => {
           writing system alternatives so we cannot add that data yet.
         </li>
       </ol>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
         <LimitInput />
-        <PaginationControls itemCount={languagesFiltered.length} />
+        <div>
+          <PaginationControls itemCount={languagesFiltered.length} />
+        </div>
       </div>
-      <div className="CardList" style={{ marginBottom: '1em' }}>
-        {getCurrentObjects(languagesFiltered.sort(sortFunction)).map((lang) => {
-          const codePieces = lang.codeDisplay.split(/-|_/);
-          const relatedObjects = codePieces
-            .map(
-              (partialCode) =>
-                getLanguage(partialCode) ??
-                getTerritory(partialCode) ??
-                getWritingSystem(partialCode),
-            )
-            .filter((object) => object != null);
-          // TODO if its a language + territory, check if the locale exists
-          // TODO check if there is an IANA variant tag.
-          return (
-            <ViewCard key={lang.ID}>
-              <div>
-                <label>Names:</label>
-                {lang.nameDisplay}
-              </div>
-              <div>
-                <label>Language Code:</label>
-                {lang.codeDisplay}
-              </div>
-              <div>
-                <label>Population:</label>
-                {lang.populationEstimate || <Deemphasized>no population</Deemphasized>}
-              </div>
-              <div>
-                <label>Potentially related objects:</label>
-                <ul style={{ margin: 0 }}>
-                  {relatedObjects.length > 0 ? (
-                    relatedObjects.map((obj) => (
-                      <li key={obj.ID}>
-                        <HoverableObjectName object={obj} labelSource="code" />
-                      </li>
-                    ))
-                  ) : (
-                    <Deemphasized>none</Deemphasized>
-                  )}
-                </ul>
-              </div>
-            </ViewCard>
-          );
-        })}
+      <div style={{ marginTop: '1em', marginBottom: '1em' }}>
+        <ResponsiveGrid>
+          {getCurrentObjects(languagesFiltered.sort(sortFunction)).map((lang) => {
+            const codePieces = lang.codeDisplay.split(/-|_/);
+            const relatedObjects = codePieces
+              .map(
+                (partialCode) =>
+                  getLanguage(partialCode) ??
+                  getTerritory(partialCode) ??
+                  getWritingSystem(partialCode),
+              )
+              .filter((object) => object != null);
+            // TODO if its a language + territory, check if the locale exists
+            // TODO check if there is an IANA variant tag.
+            return (
+              <ViewCard key={lang.ID}>
+                <div>
+                  <label>Names:</label>
+                  {lang.nameDisplay}
+                </div>
+                <div>
+                  <label>Language Code:</label>
+                  {lang.codeDisplay}
+                </div>
+                <div>
+                  <label>Population:</label>
+                  {lang.populationEstimate || <Deemphasized>no population</Deemphasized>}
+                </div>
+                <div>
+                  <label>Potentially related objects:</label>
+                  <ul style={{ margin: 0 }}>
+                    {relatedObjects.length > 0 ? (
+                      relatedObjects.map((obj) => (
+                        <li key={obj.ID}>
+                          <HoverableObjectName object={obj} labelSource="code" />
+                        </li>
+                      ))
+                    ) : (
+                      <Deemphasized>none</Deemphasized>
+                    )}
+                  </ul>
+                </div>
+              </ViewCard>
+            );
+          })}
+        </ResponsiveGrid>
       </div>
     </CollapsibleReport>
   );
