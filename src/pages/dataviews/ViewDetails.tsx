@@ -6,6 +6,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectSuggestions from '@entities/ui/ObjectSuggestions';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -41,7 +42,14 @@ const ViewDetails: React.FC = () => {
   }
 
   return (
-    <DetailsContainer title={<ObjectTitle object={object} />}>
+    <DetailsContainer
+      title={
+        <>
+          <ObjectTitle object={object} />
+          <ObjectSubtitle object={object} />
+        </>
+      }
+    >
       <ObjectDetails object={object} />
     </DetailsContainer>
   );

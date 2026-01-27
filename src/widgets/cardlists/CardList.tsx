@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { DetailsContainer } from '@pages/dataviews/ViewDetails';
-
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import useColors from '@features/transforms/coloring/useColors';
@@ -10,12 +8,9 @@ import useFilteredObjects from '@features/transforms/filtering/useFilteredObject
 
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
-import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import ViewCard from '@shared/containers/ViewCard';
 import Deemphasized from '@shared/ui/Deemphasized';
-
-import ObjectDetails from '../details/ObjectDetails';
 
 import ResponsiveGrid from './ResponsiveGrid';
 
@@ -32,11 +27,6 @@ const CardList: React.FC = () => {
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
       <VisibleItemsMeter objects={allObjectsInType} />
       {currentObjects.length === 0 && <Deemphasized>No objects found.</Deemphasized>}
-      {currentObjects.length === 1 && (
-        <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
-          <ObjectDetails object={currentObjects[0]} />
-        </DetailsContainer>
-      )}
 
       {/* Main grid */}
       {currentObjects.length > 1 && (

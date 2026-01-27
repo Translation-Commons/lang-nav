@@ -7,6 +7,7 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import { uniqueBy } from '@shared/lib/setUtils';
@@ -33,8 +34,9 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={lang} highlightSearchMatches={true} />
+          <ObjectTitle object={lang} />
         </a>
+        <ObjectSubtitle object={lang} />
       </h3>
       {view === View.Map && lang.longitude != null && lang.latitude != null && (
         <div>

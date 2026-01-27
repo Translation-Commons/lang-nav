@@ -10,7 +10,7 @@ type Props = {
   highlightSearchMatches?: boolean;
 };
 
-const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true }) => {
+const ObjectNameEndonymCode: React.FC<Props> = ({ object, highlightSearchMatches = false }) => {
   const { codeDisplay, nameDisplay, nameEndonym } = object;
 
   if (!highlightSearchMatches) {
@@ -21,7 +21,6 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true })
       </>
     );
   }
-
   return (
     <>
       <strong>
@@ -39,4 +38,4 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true })
   );
 };
 
-export default ObjectTitle;
+export default ObjectNameEndonymCode;

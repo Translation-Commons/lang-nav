@@ -6,6 +6,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import usePageParams from '@features/params/usePageParams';
 
 import { VariantTagData } from '@entities/types/DataTypes';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -22,8 +23,9 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })} role="link">
-          <ObjectTitle object={data} highlightSearchMatches={true} />
+          <ObjectTitle object={data} />
         </a>
+        <ObjectSubtitle object={data} />
       </h3>
 
       <div>

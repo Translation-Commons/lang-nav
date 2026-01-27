@@ -12,8 +12,6 @@ import FilterPath from '@features/transforms/filtering/FilterPath';
 
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 
-import ObjectPath from './ObjectPath';
-
 const PathNav: React.FC = () => {
   return (
     <PathContainer>
@@ -21,7 +19,6 @@ const PathNav: React.FC = () => {
       <SlashIcon size="1em" />
       <ViewSelector />
       <FilterPath />
-      <ObjectPath />
     </PathContainer>
   );
 };

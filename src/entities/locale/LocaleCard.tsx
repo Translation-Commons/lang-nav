@@ -3,6 +3,7 @@ import React from 'react';
 import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/types/DataTypes';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import DecimalNumber from '@shared/ui/DecimalNumber';
@@ -22,8 +23,9 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={locale} highlightSearchMatches={true} />
+          <ObjectTitle object={locale} />
         </a>
+        <ObjectSubtitle object={locale} />
       </h3>
       {populationAdjusted != null && (
         <div>

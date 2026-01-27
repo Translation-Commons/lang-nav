@@ -3,6 +3,7 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import { CensusData } from './CensusTypes';
@@ -18,8 +19,9 @@ const CensusCard: React.FC<Props> = ({ census }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })} role="link">
-          <ObjectTitle object={census} highlightSearchMatches={true} />
+          <ObjectTitle object={census} />
         </a>
+        <ObjectSubtitle object={census} />
       </h3>
       <div>
         <h4>Languages</h4>

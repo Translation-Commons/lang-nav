@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 
+import DetailsPanel from '@widgets/details/DetailsPanel';
 import Loading from '@widgets/Loading';
 
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
@@ -21,6 +22,7 @@ const DataPage: React.FC = () => {
             <div style={{ display: 'flex', height: '100vh' }}>
               <SidePanel />
               <DataPageBody />
+              <DetailsPanel />
             </div>
             <ViewModal />
           </DataProvider>
