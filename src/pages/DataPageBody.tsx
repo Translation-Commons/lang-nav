@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
+import Loading from '@widgets/Loading';
 import PathNav from '@widgets/pathnav/PathNav';
 
 import SearchBar from '@features/transforms/search/SearchBar';
 
-import DataViews from './dataviews/DataViews';
+const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
   return (
@@ -21,7 +22,9 @@ const DataPageBody: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <DataViews />
+        <Suspense fallback={<Loading />}>
+          <DataViews />
+        </Suspense>
       </div>
     </main>
   );

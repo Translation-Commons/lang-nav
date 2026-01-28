@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import ResizablePanel from '@widgets/controls/ResizablePanel';
+import Loading from '@widgets/Loading';
 import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
@@ -10,7 +11,7 @@ import getObjectFromID from '@entities/lib/getObjectFromID';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
-import ObjectDetails from './ObjectDetails';
+const ObjectDetails = React.lazy(() => import('./ObjectDetails'));
 
 const DetailsPanel: React.FC = () => {
   const { objectID, objectType } = usePageParams();
@@ -35,7 +36,7 @@ const DetailsPanel: React.FC = () => {
         <PathContainer style={{ marginTop: '0.5em' }}>
           <ObjectPath />
         </PathContainer>
-        {object && <ObjectDetails object={object} />}
+        <Suspense fallback={<Loading />}>{object && <ObjectDetails object={object} />}</Suspense>
         {!object && (
           <>
             In the comparison view, select a {objectType.toLowerCase()} by clicking on its name to

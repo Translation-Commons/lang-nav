@@ -24,18 +24,12 @@ const PathNav: React.FC = () => {
 };
 
 const ObjectTypeSelector: React.FC = () => {
-  const { objectType, updatePageParams, view } = usePageParams();
+  const { objectType, updatePageParams } = usePageParams();
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
-      updatePageParams({
-        objectID: undefined,
-        objectType,
-        view,
-        searchString: undefined,
-        page: 1,
-      });
+      updatePageParams({ objectType, searchString: undefined, page: 1 });
     },
-    [updatePageParams, view],
+    [updatePageParams],
   );
 
   return (
@@ -54,7 +48,7 @@ const ViewSelector: React.FC = () => {
   return (
     <Selector
       options={Object.values(View)}
-      onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
+      onChange={(view: View) => updatePageParams({ view })}
       selected={view}
       getOptionLabel={(view) =>
         [View.Map, View.Reports].includes(view) ? (

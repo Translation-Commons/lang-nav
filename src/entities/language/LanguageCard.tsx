@@ -13,6 +13,7 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import { getModalityLabel } from './LanguageModalityDisplay';
 import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 import LanguageVitalityMeter from './vitality/VitalityMeter';
 import { VitalitySource } from './vitality/VitalityTypes';
@@ -53,7 +54,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {modality != null && (
         <div>
           <h4>Modality</h4>
-          {modality}
+          {getModalityLabel(modality)}
         </div>
       )}
       <div>
