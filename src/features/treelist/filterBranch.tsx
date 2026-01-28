@@ -17,7 +17,7 @@ export function filterBranch(
     .map((child) => filterBranch(child, filterFunction))
     .filter((node) => node != null);
 
-  // If it has children that also pass the filter, then open this code
+  // If it has children that also pass the filter, then open this node
   if (filteredChildren.length > 0) {
     node.descendantsPassFilter = true;
   } else {

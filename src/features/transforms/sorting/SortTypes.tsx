@@ -4,6 +4,7 @@ export enum SortBy {
   Name = 'Name',
   Endonym = 'Endonym',
   Literacy = 'Literacy',
+  Modality = 'Modality',
 
   // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',

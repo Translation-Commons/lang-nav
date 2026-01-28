@@ -4,7 +4,7 @@ import React, { useCallback } from 'react';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
-import { LanguageModality } from '@entities/language/LanguageTypes';
+import { LanguageModality } from '@entities/language/LanguageModality';
 import { LocaleData, ObjectData, OfficialStatus, TerritoryData } from '@entities/types/DataTypes';
 
 // Customized for UNESCO use
@@ -57,8 +57,10 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
     '' /* no_code */,
 
     // 3. modality
-    lang.modality?.includes('Spoken'),
-    lang.modality?.includes('Sign'),
+    lang.modality === LanguageModality.Spoken ||
+      lang.modality === LanguageModality.MostlySpoken ||
+      lang.modality === LanguageModality.SpokenAndWritten,
+    lang.modality === LanguageModality.Sign,
     lang.modality === LanguageModality.Written ? 'Written Only' : '',
 
     // 4. recognition_status_of_the_language

@@ -23,6 +23,7 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
   return (
     <span
       data-testid="hoverable"
+      aria-label={typeof hoverContent === 'string' ? hoverContent : undefined} // For screen readers
       className="hoverableText"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={onMouseLeaveTriggeringElement}

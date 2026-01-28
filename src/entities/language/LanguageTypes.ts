@@ -19,6 +19,7 @@ import {
   WritingSystemData,
 } from '../types/DataTypes';
 
+import { LanguageModality } from './LanguageModality';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
@@ -47,15 +48,6 @@ export type ISO6395LanguageCode = string; // eg. ine (Indo-European)
 export type ISO6392LanguageCode = ISO6393LanguageCode | ISO6395LanguageCode; // eg. eng, spa, zho, cmn, ine
 export type Glottocode = string; // eg. stan1293, stan1288, clas1255, mand1415, indo1319
 export type LanguageCode = ISO6391LanguageCode | ISO6392LanguageCode | Glottocode | string;
-
-export enum LanguageModality {
-  Written = 'Written',
-  MostlyWritten = 'Mostly Written (also Spoken)',
-  SpokenAndWritten = 'Spoken & Written',
-  MostlySpoken = 'Mostly Spoken (but also written)',
-  Spoken = 'Spoken',
-  Sign = 'Sign',
-}
 
 export enum LanguageScope {
   Family = 'Family',

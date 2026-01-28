@@ -10,6 +10,7 @@ import { CoreDataArrays } from '@features/data/load/CoreData';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import { LanguageModality } from '@entities/language/LanguageModality';
 import {
   getBaseLanguageData,
   LanguageData,
@@ -37,6 +38,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     populationEstimate: 14400,
     populationRough: 24000,
     primaryScriptCode: 'Teng',
+    modality: LanguageModality.SpokenAndWritten,
     Combined: { parentLanguageCode: 'elv' },
     ISO: { parentLanguageCode: 'elv' },
   };
@@ -47,6 +49,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     populationEstimate: 2500,
     populationRough: 2500,
     primaryScriptCode: 'Teng',
+    modality: LanguageModality.MostlySpoken,
     Combined: { parentLanguageCode: 'sjn' },
     ISO: { parentLanguageCode: 'sjn' },
   };

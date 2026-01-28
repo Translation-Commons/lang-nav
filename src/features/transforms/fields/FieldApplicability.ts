@@ -14,6 +14,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.Endonym,
         SortBy.PopulationDirectlySourced,
         SortBy.Literacy,
+        SortBy.Modality,
         SortBy.PercentOfOverallLanguageSpeakers,
         SortBy.PercentOfTerritoryPopulation,
         SortBy.CountOfLanguages,
@@ -51,6 +52,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): SortBy[] {
         SortBy.CountOfLanguages,
         SortBy.CountOfWritingSystems,
         SortBy.CountOfCountries,
+        SortBy.Modality,
         SortBy.Language, // Equivalent to DisplayName for languages
         SortBy.WritingSystem,
         SortBy.Territory,
@@ -131,6 +133,7 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): SortB
     SortBy.CountOfChildTerritories,
     SortBy.CountOfCensuses,
     SortBy.Literacy,
+    SortBy.Modality,
     SortBy.VitalityMetascore,
     SortBy.VitalityEthnologue2013,
     SortBy.VitalityEthnologue2025,

@@ -40,6 +40,7 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.Territory:
     case SortBy.Longitude:
     case SortBy.Latitude:
+    case SortBy.Modality:
       return SortDirection.Ascending; // A to Z
     case SortBy.Date:
     case SortBy.Population:

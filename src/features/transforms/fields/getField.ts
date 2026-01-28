@@ -99,5 +99,9 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
       if (object.type === ObjectType.Language) return object.vitality?.ethCoarse;
       if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
       return undefined;
+    case SortBy.Modality:
+      if (object.type === ObjectType.Language) return object.modality;
+      if (object.type === ObjectType.Locale) return object.language?.modality;
+      return undefined;
   }
 }
