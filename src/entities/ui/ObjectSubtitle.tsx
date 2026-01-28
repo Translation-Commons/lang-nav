@@ -15,7 +15,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = false, style }) => {
+const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = true, style }) => {
   const { searchBy, searchString } = usePageParams();
   const objectSubtitle = getObjectSubtitle(object);
 

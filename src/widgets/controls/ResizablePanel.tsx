@@ -1,40 +1,41 @@
-import React, { useCallback, useEffect } from 'react';
+import React, { ReactNode, useCallback, useEffect } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
 import SidePanelToggleButton from './SidePanelToggleButton';
 
 type Props = {
-  panelSide: 'left' | 'right';
+  purpose: 'filters' | 'details'; // filters on left, details on right
   defaultWidth: number;
-  isOpenedWithObject: boolean;
+  title: ReactNode;
 };
 
 const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   defaultWidth,
-  panelSide,
-  isOpenedWithObject,
+  purpose,
+  title,
 }) => {
   const { objectID } = usePageParams();
-  const [isOpen, setIsOpen] = React.useState(!isOpenedWithObject);
+  const [isOpen, setIsOpen] = React.useState(purpose === 'filters');
   const [panelWidth, setPanelWidth] = React.useState(defaultWidth); // but will change to pixels on resize
+  const panelSide = purpose === 'filters' ? 'left' : 'right';
+  const [shouldEaseTransition, setShouldEaseTransition] = React.useState(false);
 
   useEffect(() => {
     // When an object is set, close the side panel
-    if (objectID) setIsOpen(isOpenedWithObject);
-  }, [objectID, isOpenedWithObject]);
+    if (objectID) setIsOpen(purpose === 'details');
+  }, [objectID, purpose]);
 
   return (
     <aside
       style={{
         width: panelWidth,
         maxWidth: isOpen ? panelWidth : '0',
-        overflowY: 'scroll',
-        overflowX: 'hidden',
         borderRight: panelSide === 'left' ? '2px solid var(--color-button-primary)' : undefined,
         borderLeft: panelSide === 'right' ? '2px solid var(--color-button-primary)' : undefined,
-        transition: 'max-width 0.3s ease-in-out',
+        transition: shouldEaseTransition ? 'max-width 0.3s ease-in-out' : undefined,
+        overflowX: 'hidden',
         position: 'relative',
       }}
     >
@@ -43,24 +44,37 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
           panelWidth={panelWidth}
           onResize={setPanelWidth}
           panelSide={panelSide}
+          setShouldEaseTransition={setShouldEaseTransition}
         />
       )}
       <div
         style={{
-          // maxWidth: isOpen ? panelWidth : '0',
-          // transition: 'max-width 0.3s ease-in-out',
+          display: 'flex',
+          flexDirection: 'column',
+          alignContent: panelSide === 'left' ? 'flex-start' : 'flex-end',
           right: panelSide === 'right' ? 0 : undefined,
-          width: panelWidth, // keeps the inner content from shrinking when collapsing
+          // keeps the inner content from shrinking when collapsing
+          width: panelWidth,
         }}
       >
-        {children}
+        <div style={{ textAlign: 'center', fontSize: '2em', padding: '0.25em' }}> {title}</div>
+        <div
+          style={{
+            overflowY: 'scroll',
+            overflowX: 'hidden',
+            height: '90vh',
+            width: panelWidth,
+          }}
+        >
+          {children}
+        </div>
       </div>
 
       <SidePanelToggleButton
         isOpen={isOpen}
         onClick={() => setIsOpen((open) => !open)}
         panelWidth={panelWidth}
-        panelSide={panelSide}
+        purpose={purpose}
       />
     </aside>
   );
@@ -70,9 +84,11 @@ const DraggableResizeBorder: React.FC<{
   panelWidth: number;
   onResize: (width: number) => void;
   panelSide: 'left' | 'right';
-}> = ({ panelWidth, onResize, panelSide }) => {
+  setShouldEaseTransition: (value: boolean) => void;
+}> = ({ panelWidth, onResize, panelSide, setShouldEaseTransition }) => {
   const onMouseDown = useCallback(
     (e: React.MouseEvent) => {
+      setShouldEaseTransition(false);
       e.preventDefault();
       const startX = e.clientX;
       const startWidth = panelWidth;
@@ -86,13 +102,14 @@ const DraggableResizeBorder: React.FC<{
         }
       };
       const onMouseUp = () => {
+        setShouldEaseTransition(true);
         window.removeEventListener('mousemove', onMouseMove);
         window.removeEventListener('mouseup', onMouseUp);
       };
       window.addEventListener('mousemove', onMouseMove);
       window.addEventListener('mouseup', onMouseUp);
     },
-    [panelWidth, onResize, panelSide],
+    [panelWidth, onResize, panelSide, setShouldEaseTransition],
   );
 
   return (

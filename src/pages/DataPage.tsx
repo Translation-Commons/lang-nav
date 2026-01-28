@@ -8,7 +8,7 @@ import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 const PageParamsProvider = React.lazy(() => import('@features/params/PageParamsProvider'));
 const DataProvider = React.lazy(() => import('@features/data/context/DataProvider'));
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
-const SidePanel = React.lazy(() => import('@widgets/controls/SidePanel'));
+const OptionsPanel = React.lazy(() => import('@widgets/controls/OptionsPanel'));
 const ViewModal = React.lazy(() => import('@features/layers/modal/ViewModal'));
 
 const DataPage: React.FC = () => {
@@ -20,7 +20,7 @@ const DataPage: React.FC = () => {
           {/* HoverCardProvider is re-declared so it has access to page parameters, there may be a better way to organize it */}
           <DataProvider>
             <div style={{ display: 'flex', height: '100vh' }}>
-              <SidePanel />
+              <OptionsPanel />
               <DataPageBody />
               <DetailsPanel />
             </div>

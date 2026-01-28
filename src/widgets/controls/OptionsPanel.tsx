@@ -35,24 +35,24 @@ import ViewSelector from './selectors/ViewSelector';
 
 import './controls.css';
 
-const SidePanel: React.FC = () => {
+const OptionsPanel: React.FC = () => {
   usePageArrowKeys();
 
   return (
-    <ResizablePanel defaultWidth={300} panelSide="left" isOpenedWithObject={false}>
+    <ResizablePanel defaultWidth={300} purpose="filters" title="Options">
       <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
-        <SidePanelSection title="Common Actions" optionsName="common actions">
+        <OptionsPanelSection title="Common Actions" optionsName="common actions">
           <div>{/* intentionally blank */}</div>
           <ObjectiveList />
-        </SidePanelSection>
+        </OptionsPanelSection>
 
-        <SidePanelSection title="Data" optionsName="data options">
+        <OptionsPanelSection title="Data" optionsName="data options">
           <ObjectTypeSelector />
           <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
           <ProfileSelector />
-        </SidePanelSection>
+        </OptionsPanelSection>
 
-        <SidePanelSection title="Filter" optionsName="filters">
+        <OptionsPanelSection title="Filter" optionsName="filters">
           <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />
           <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
@@ -61,9 +61,9 @@ const SidePanel: React.FC = () => {
           <LanguageISOStatusSelector />
           <VitalityEth2013Selector />
           <VitalityEth2025Selector />
-        </SidePanelSection>
+        </OptionsPanelSection>
 
-        <SidePanelSection title="View" optionsName="view options">
+        <OptionsPanelSection title="View" optionsName="view options">
           <ViewSelector />
           <LimitInput />
           <SortBySelector />
@@ -73,13 +73,13 @@ const SidePanel: React.FC = () => {
           <ColorGradientSelector />
           <LocaleSeparatorSelector />
           <PageBrightnessSelector />
-        </SidePanelSection>
+        </OptionsPanelSection>
       </SelectorDisplayProvider>
     </ResizablePanel>
   );
 };
 
-const SidePanelSection: React.FC<
+const OptionsPanelSection: React.FC<
   React.PropsWithChildren<{
     title: string;
     optionsName: string;
@@ -132,4 +132,4 @@ const SidePanelSection: React.FC<
   );
 };
 
-export default SidePanel;
+export default OptionsPanel;

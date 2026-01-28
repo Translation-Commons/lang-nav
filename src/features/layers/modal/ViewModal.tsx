@@ -1,23 +1,25 @@
+import { XIcon } from 'lucide-react';
 import React, { useEffect } from 'react';
 
-import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import getObjectFromID from '@entities/lib/getObjectFromID';
+import { useClickOutside } from '@shared/hooks/useClickOutside';
+
+import HoverableButton from '../hovercard/HoverableButton';
 
 import './modal.css';
 
+// This modal is not used right now but the code and functionality is left in to be re-adapted for other purposes.
 const ViewModal: React.FC = () => {
-  const { objectID, view, updatePageParams } = usePageParams();
+  const { objectID, updatePageParams } = usePageParams();
   const onClose = () => updatePageParams({ objectID: undefined });
-  const object = getObjectFromID(objectID);
 
-  // const modalRef = useClickOutside(onClose);
+  const modalRef = useClickOutside(onClose);
 
   useEffect(() => {
     // TODO there is a problem with this changing the page parameters beyond the modal object
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape' && view != View.Details) {
+      if (event.key === 'Escape') {
         onClose();
       }
     };
@@ -27,45 +29,23 @@ const ViewModal: React.FC = () => {
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
     };
-  }, [onClose, view]);
+  }, [onClose]);
 
-  if (object == null || view === View.Details) return <></>;
+  if (objectID !== 'modal_test') return null;
 
-  // return (
-  //   <div className="ModalOverlay">
-  //     <div className="Modal" aria-modal="true" role="dialog" ref={modalRef}>
-  //       <div className="ModalHeader">
-  //         <div className="ModalTitle">
-  //           <ObjectTitle object={object} />
-  //         </div>
-  //         <div style={{ display: 'flex', gap: '.5em' }}>
-  //           <HoverableButton
-  //             buttonType="submit"
-  //             hoverContent="Expand modal to page"
-  //             onClick={() =>
-  //               updatePageParams({
-  //                 view: View.Details,
-  //                 objectType: object.type,
-  //               })
-  //             }
-  //           >
-  //             <ExpandIcon size="1.5em" display="block" />
-  //           </HoverableButton>
-  //           <HoverableButton buttonType="reset" hoverContent="Close modal" onClick={onClose}>
-  //             <XIcon size="1.5em" display="block" />
-  //           </HoverableButton>
-  //         </div>
-  //       </div>
-  //       <div className="ModalBody">
-  //         <PathContainer style={{ marginTop: '0.5em' }}>
-  //           <ObjectPath />
-  //         </PathContainer>
-  //         <ObjectDetails object={object} />
-  //       </div>
-  //     </div>
-  //   </div>
-  // );
-  return <></>;
+  return (
+    <div className="ModalOverlay">
+      <div className="Modal" aria-modal="true" role="dialog" ref={modalRef}>
+        <div className="ModalHeader">
+          <div className="ModalTitle">Modal test active</div>
+          <HoverableButton buttonType="reset" hoverContent="Close modal" onClick={onClose}>
+            <XIcon size="1.5em" display="block" />
+          </HoverableButton>
+        </div>
+        <div className="ModalBody">content</div>
+      </div>
+    </div>
+  );
 };
 
 export default ViewModal;

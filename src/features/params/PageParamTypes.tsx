@@ -36,7 +36,6 @@ export enum View {
   CardList = 'Cards',
   Table = 'Table',
   Hierarchy = 'Hierarchy',
-  Details = 'Details',
   Map = 'Map',
   Reports = 'Reports',
 }
