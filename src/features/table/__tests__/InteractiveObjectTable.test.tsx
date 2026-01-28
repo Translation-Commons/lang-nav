@@ -187,17 +187,6 @@ describe('InteractiveObjectTable', () => {
     });
   });
 
-  it('shows details view when exactly one object is visible', () => {
-    // Make filter return true only for the first object
-    vi.mocked(getFilterBySubstring).mockReturnValue((obj) => obj.ID === '1');
-
-    renderObjectTable();
-
-    // Should show details for the first object
-    expect(screen.getByText('Test Territory 1', { selector: 'strong' })).toBeInTheDocument();
-    expect(screen.queryByText('Test Territory 2')).not.toBeInTheDocument();
-  });
-
   it('applies pagination to filtered results', () => {
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ limit: 1, page: 2 }));
 

@@ -1,16 +1,11 @@
 import { useMemo } from 'react';
 
-import { DetailsContainer } from '@pages/dataviews/ViewDetails';
-
-import ObjectDetails from '@widgets/details/ObjectDetails';
-
 import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { ObjectData } from '@entities/types/DataTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 import { getFilterByVitality, getScopeFilter } from '../transforms/filtering/filter';
@@ -29,7 +24,6 @@ interface Props<T> {
   objects: T[];
   columns: TableColumn<T>[];
   shouldFilterUsingSearchBar?: boolean;
-  shouldShowDetailsForSingleItem?: boolean;
   tableID: TableID;
 }
 
@@ -37,7 +31,6 @@ function InteractiveObjectTable<T extends ObjectData>({
   objects,
   columns,
   shouldFilterUsingSearchBar = true,
-  shouldShowDetailsForSingleItem = true,
   tableID,
 }: Props<T>) {
   const sortFunction = getSortFunction();
@@ -88,11 +81,6 @@ function InteractiveObjectTable<T extends ObjectData>({
         tableID={tableID}
       />
 
-      {shouldShowDetailsForSingleItem && currentObjects.length === 1 && (
-        <DetailsContainer title={<ObjectTitle object={currentObjects[0]} />}>
-          <ObjectDetails object={currentObjects[0]} />
-        </DetailsContainer>
-      )}
       {currentObjects.length === 0 && (
         <div>
           All results are filtered out.

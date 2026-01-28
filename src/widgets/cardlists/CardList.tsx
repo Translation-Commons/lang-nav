@@ -29,7 +29,7 @@ const CardList: React.FC = () => {
       {currentObjects.length === 0 && <Deemphasized>No objects found.</Deemphasized>}
 
       {/* Main grid */}
-      {currentObjects.length > 1 && (
+      {currentObjects.length >= 1 && (
         <ResponsiveGrid>
           {currentObjects.map((object) => (
             <ViewCard key={object.ID} style={{ backgroundColor: getColor(object) ?? 'inherit' }}>
@@ -40,7 +40,7 @@ const CardList: React.FC = () => {
       )}
 
       {/* Display another visible item meter at the bottom for convenience. */}
-      {currentObjects.length > 1 && <VisibleItemsMeter objects={allObjectsInType} />}
+      {currentObjects.length > 3 && <VisibleItemsMeter objects={allObjectsInType} />}
       {currentObjects.length === 0 && (
         <FilterBreakdown objects={allObjectsInType} shouldFilterUsingSearchBar={true} />
       )}

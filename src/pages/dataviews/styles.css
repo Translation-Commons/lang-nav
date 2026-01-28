@@ -3,14 +3,6 @@
   margin-top: 0px;
 }
 
-.Details {
-  text-align: left;
-}
-
-.Details h3 {
-  margin-bottom: 4px;
-}
-
 .subtitle {
   font-size: 0.6em;
   color: var(--color-text-secondary);
@@ -39,7 +31,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;

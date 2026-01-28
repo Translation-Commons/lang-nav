@@ -33,8 +33,6 @@ function getImageSrc(view: View): string {
   switch (view) {
     case View.CardList:
       return '/lang-nav/cardlist.png';
-    case View.Details:
-      return '/lang-nav/details.png';
     case View.Hierarchy:
       return '/lang-nav/hierarchy.png';
     case View.Map:

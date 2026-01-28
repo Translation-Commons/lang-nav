@@ -126,7 +126,6 @@ function getLimitThreshold(view: View): number {
   switch (view) {
     case View.Map:
       return 1000;
-    case View.Details:
     case View.Table:
       return 200;
     case View.CardList:
