@@ -47,10 +47,7 @@ export function getModalityFromLabel(label: string | undefined): LanguageModalit
   return undefined;
 }
 
-function getLanguageModalityDescription(
-  modality: LanguageModality | undefined,
-): string | undefined {
-  if (modality == null) return undefined;
+function getLanguageModalityDescription(modality: LanguageModality): string {
   switch (modality) {
     case LanguageModality.Written:
       return 'This language exists in a written form in modern times.';
@@ -71,7 +68,7 @@ function getLanguageModalityDescription(
 const LanguageModalityIcon: React.FC<{ modality: LanguageModality | undefined }> = ({
   modality,
 }) => {
-  if (modality == null) return undefined;
+  if (modality == null) return null;
   return (
     <span title={getLanguageModalityDescription(modality)}>
       <LanguageModalityBaseIcon modality={modality} />

@@ -57,7 +57,9 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
     '' /* no_code */,
 
     // 3. modality
-    lang.modality === LanguageModality.Spoken || lang.modality === LanguageModality.MostlySpoken,
+    lang.modality === LanguageModality.Spoken ||
+      lang.modality === LanguageModality.MostlySpoken ||
+      lang.modality === LanguageModality.SpokenAndWritten,
     lang.modality === LanguageModality.Sign,
     lang.modality === LanguageModality.Written ? 'Written Only' : '',
 

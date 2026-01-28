@@ -55,6 +55,7 @@ function determineCombinedModality(langs: LanguageData[]): LanguageModality | un
     return (lang.modality ?? 0) * (pop / totalPop);
   });
 
+  // Then convert the score back to a modality
   if (score >= 2.5) return LanguageModality.Sign;
   if (score >= 1.5) return LanguageModality.Spoken;
   if (score >= 0.5) return LanguageModality.MostlySpoken;

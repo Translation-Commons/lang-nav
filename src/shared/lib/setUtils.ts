@@ -81,7 +81,7 @@ export function countOccurrencesBy<T>(
   );
 }
 
-export function countOccurrences<T extends string | number>(items: T[]): Record<string, number> {
+export function countOccurrences<T extends string | number>(items: T[]): Record<T, number> {
   return items.reduce(
     (hist, item) => {
       if (!hist[item]) hist[item] = 0;
