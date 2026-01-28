@@ -2,8 +2,8 @@ name: Check Style
 description: Check code style using ESLint and Prettier on pull requests to ensure code quality and consistency.
 
 on:
-  pull_request:
-    branches: ['master']
+  push:
+  workflow_dispatch:
 
 jobs:
   lint-format:
