@@ -7,11 +7,13 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import { getModalityLabel } from './LanguageModalityDisplay';
 import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 import LanguageVitalityMeter from './vitality/VitalityMeter';
 import { VitalitySource } from './vitality/VitalityTypes';
@@ -33,8 +35,9 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={lang} highlightSearchMatches={true} />
+          <ObjectTitle object={lang} />
         </a>
+        <ObjectSubtitle object={lang} />
       </h3>
       {view === View.Map && lang.longitude != null && lang.latitude != null && (
         <div>
@@ -51,7 +54,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {modality != null && (
         <div>
           <h4>Modality</h4>
-          {modality}
+          {getModalityLabel(modality)}
         </div>
       )}
       <div>

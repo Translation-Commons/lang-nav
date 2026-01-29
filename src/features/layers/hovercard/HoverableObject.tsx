@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { PageParamsOptional, View } from '@features/params/PageParamTypes';
+import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -21,7 +21,6 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
 
   const onClick = useCallback(() => {
     const params: PageParamsOptional = { objectID: object.ID };
-    if (view === View.Details) params.objectType = object.type;
     updatePageParams(params);
   }, [object, updatePageParams, view]);
 
@@ -29,10 +28,7 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
     <Hoverable
       hoverContent={
         <>
-          Click to{' '}
-          {view === View.Details
-            ? 'change the page to see the details for:'
-            : 'open modal with more information for:'}
+          Click to see more information in the details panel.
           <div>
             <strong>{object.type}</strong>
           </div>

@@ -2,7 +2,7 @@ import { SlashIcon, XIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { SearchableField, View } from '@features/params/PageParamTypes';
+import { SearchableField } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
@@ -35,7 +35,6 @@ const FilterPath: React.FC = () => {
     territoryFilter,
     territoryScopes,
     updatePageParams,
-    view,
     vitalityEth2013,
     vitalityEth2025,
     writingSystemFilter,
@@ -174,9 +173,6 @@ const FilterPath: React.FC = () => {
     ),
   ];
 
-  if (view === View.Details) {
-    return <></>;
-  }
   if (filters.filter((f) => f).length === 0) {
     return (
       <>

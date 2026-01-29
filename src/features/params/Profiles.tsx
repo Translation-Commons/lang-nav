@@ -67,7 +67,6 @@ export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
     // Nothing, default profile is based on this
   },
   [ProfileType.CommunityMember]: {
-    view: View.Details,
     languageScopes: [], // Shorthand for all languoids
     searchString: '', // Default to empty search but included here since its an important filter
   },

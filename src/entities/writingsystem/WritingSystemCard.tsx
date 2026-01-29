@@ -7,6 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -35,8 +36,9 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={writingSystem} highlightSearchMatches={true} />
+          <ObjectTitle object={writingSystem} />
         </a>
+        <ObjectSubtitle object={writingSystem} />
       </h3>
       {rightToLeft === true && <div>Right to Left</div>}
       {unicodeVersion === null && <div>Not supported by Unicode</div>}

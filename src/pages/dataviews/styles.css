@@ -3,14 +3,6 @@
   margin-top: 0px;
 }
 
-.Details {
-  text-align: left;
-}
-
-.Details h3 {
-  margin-bottom: 4px;
-}
-
 .subtitle {
   font-size: 0.6em;
   color: var(--color-text-secondary);

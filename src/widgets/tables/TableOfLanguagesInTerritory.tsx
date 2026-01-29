@@ -33,7 +33,6 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
       tableID={TableID.LanguagesInTerritory}
       objects={locales}
       shouldFilterUsingSearchBar={false}
-      shouldShowDetailsForSingleItem={false}
       columns={[
         CodeColumn,
         EndonymColumn,

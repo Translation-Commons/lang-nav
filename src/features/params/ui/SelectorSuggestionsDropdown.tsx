@@ -4,7 +4,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
 
-import { PageParamKey, View } from '../PageParamTypes';
+import { PageParamKey } from '../PageParamTypes';
 import usePageParams from '../usePageParams';
 
 import { SelectorDisplay } from './SelectorDisplayContext';
@@ -78,13 +78,12 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
   onKeyDown,
   suggestion,
 }) => {
-  const { view } = usePageParams();
   const style = getOptionStyle(
     SelectorDisplay.Dropdown,
     false, // isSelected is always false here
     position,
   );
-  if (view === View.Details && pageParameter === PageParamKey.searchString) {
+  if (pageParameter === PageParamKey.searchString) {
     // Does not need to update suggestions
     return <SuggestionRowDetails suggestion={suggestion} style={style} />;
   }
@@ -110,12 +109,12 @@ const SuggestionRowDetails: React.FC<{
   const { updatePageParams } = usePageParams();
 
   const goToDetails = () => {
-    updatePageParams({ objectID, view: View.Details, searchString });
+    updatePageParams({ objectID, searchString });
   };
 
   return (
     <HoverableButton
-      hoverContent={<>Go to the details page for {searchString}</>}
+      hoverContent={<>Open the details pane for {searchString}</>}
       onClick={goToDetails}
       style={style}
     >

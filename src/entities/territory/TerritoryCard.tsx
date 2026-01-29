@@ -5,6 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { TerritoryData } from '@entities/types/DataTypes';
+import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -23,8 +24,9 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
     <div>
       <h3>
         <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={territory} highlightSearchMatches={true} />
+          <ObjectTitle object={territory} />
         </a>
+        <ObjectSubtitle object={territory} />
       </h3>
       <div>
         <h4>Population</h4>

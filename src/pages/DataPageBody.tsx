@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
+import Loading from '@widgets/Loading';
 import PathNav from '@widgets/pathnav/PathNav';
 
 import SearchBar from '@features/transforms/search/SearchBar';
 
-import DataViews from './dataviews/DataViews';
+const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
   return (
     <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
-      <SearchBar />
-      <PathNav />
+      <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
+        <SearchBar />
+        <PathNav />
+      </div>
       <div
         style={{
           maxWidth: '1280px',
@@ -19,7 +22,9 @@ const DataPageBody: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <DataViews />
+        <Suspense fallback={<Loading />}>
+          <DataViews />
+        </Suspense>
       </div>
     </main>
   );

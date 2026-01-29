@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { PageParamsOptional, SearchableField, View } from '@features/params/PageParamTypes';
+import { PageParamsOptional, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import {
@@ -125,7 +125,7 @@ describe('FilterPath', () => {
   });
 
   it('does not display vitality filters in details view', () => {
-    setupMockParams({ view: View.Details, isoStatus: [LanguageISOStatus.Living] });
+    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
     render(<FilterPath />);
     expect(screen.queryByText(/ISO Vitality:/)).not.toBeInTheDocument();
   });

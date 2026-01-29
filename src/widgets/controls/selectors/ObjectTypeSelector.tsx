@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import { ObjectType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
@@ -15,13 +15,7 @@ const ObjectTypeSelector: React.FC = () => {
   const { objectType, updatePageParams, view } = usePageParams();
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
-      updatePageParams({
-        objectID: undefined,
-        objectType,
-        view: view === View.Details ? View.CardList : view,
-        searchString: undefined,
-        page: 1,
-      });
+      updatePageParams({ objectType, searchString: undefined, page: 1 });
     },
     [updatePageParams, view],
   );

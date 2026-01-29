@@ -63,20 +63,6 @@ describe('CardList', () => {
     expect(cards[5]).toHaveTextContent('Eriador');
   });
 
-  it('shows details view when exactly one object is visible', () => {
-    // Make filter return true only for the first object
-    setupMockParams({ limit: 1 });
-    const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('ViewCard');
-
-    // It should not render any card elements
-    expect(cards.length).toBe(0);
-
-    // Rather it will show the details view
-    expect(container).toHaveTextContent('Arda arda');
-    expect(container).toHaveTextContent('Contains:Middle Earth');
-  });
-
   it('applies pagination to filtered results', () => {
     setupMockParams({ limit: 2, page: 2 });
 

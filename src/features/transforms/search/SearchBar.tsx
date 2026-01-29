@@ -20,7 +20,11 @@ const SearchBar: React.FC = () => {
     <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
       <form
         className="selector"
-        style={{ display: 'inline-flex', alignItems: 'center', marginBottom: '0.5em' }}
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          marginBottom: '0.5em',
+        }}
       >
         <TextInput
           label={<SearchIcon size="1em" display="block" style={{ padding: '0.5em' }} />}
