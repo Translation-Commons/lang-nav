@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
 import DubiousLanguages from '@widgets/reports/DubiousLanguages';
 import LanguagePathsReport from '@widgets/reports/LanguagePathsReport';
 import LanguagesLargestDescendant from '@widgets/reports/LanguagesLargestDescendant';
@@ -9,6 +7,9 @@ import LanguagesMissingWritingSystems from '@widgets/reports/LanguagesMissingWri
 import LanguagesWithIdenticalNames from '@widgets/reports/LanguagesWithIdenticalNames';
 import PotentialLocales from '@widgets/reports/PotentialLocales';
 import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithCensuses';
+
+import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import LocaleCitationCounts from '@entities/locale/LocaleCitationCounts';
 
