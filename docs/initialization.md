@@ -1,10 +1,9 @@
-
 ## Initialization
 
 This is how we created the project originally -- you should not need to run these, but its for background.
 
 1. Initalize the project using vite `npm create vite@latest`
-   1. Choose `lang-nav` as project name. 
+   1. Choose `lang-nav` as project name.
    2. Then React + TypeScript
 2. Change into the `lang-nav` directory and run `npm install`
 3. Setup the linter
@@ -14,7 +13,7 @@ This is how we created the project originally -- you should not need to run thes
 4. More magic to get it to run... I had to install ESLint on my IDE (VSCode)
 5. Some plugins were added after the this library was started like `eslint-plugin-import`
 6. Import other libraries
-    1. `npm install react-router-dom`
+   1. `npm install react-router-dom`
 7. Start `npm run dev`
 
 ## Deployment

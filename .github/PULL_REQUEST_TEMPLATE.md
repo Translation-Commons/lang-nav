@@ -4,28 +4,25 @@ Summary:
 
 ### Changes
 
-* User experience
-   * ...
-* Logical changes
-   * ...
-* Data
-   * ...
-* Refactors
-   * ...
+- User experience
+  - ...
+- Logical changes
+  - ...
+- Data
+  - ...
+- Refactors
+  - ...
 
-Out of scopes/Future work: 
+Out of scopes/Future work:
 
 ### Test Plan and Screenshots
-
-
 
 | Page/View with link | Description of Changes | Screenshot Before | Screenshot After |
 | ------------------- | ---------------------- | ----------------- | ---------------- |
 |                     |                        |                   |                  |
 |                     |                        |                   |                  |
 
-
-# Checklist 
+# Checklist
 
 Feel free to check off or just delete items in this section as you have completed them.
 
@@ -55,7 +52,6 @@ Feel free to check off or just delete items in this section as you have complete
   - [ ] Drag and drop images in the GitHub PR comment box to upload screenshots
 - [ ] Purely new views can just include the "after" screenshot.
 - [ ] Since more views can be reproduced by just sharing the URL -- add links (eg. [link](https://translation-commons.github.io/lang-nav/data)) to the relevant page and/or conditions to reproduce the view.
-
 
 ### Data changes
 
