@@ -14,10 +14,10 @@ Thanks for your interest in contributing to Language Navigator! We welcome contr
 2. Clone the repo.
 3. `npm install`
 4. `npm run dev` and open the printed localhost URL (defaults to `5173`).
-5. Run checks before sending a PR:
-   - `npm run lint`
+5. Run checks while you are developing and before sending a PR:
+   - `npm run build` (type-checks and builds)
+   - `npm run lint:fix` (auto-fixes any formatting issues)
    - `npm run test`
-   - `npm run build` (type-checks via `tsc -b` and builds)
 
 ## Workflow
 

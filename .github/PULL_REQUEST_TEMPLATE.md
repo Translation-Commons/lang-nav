@@ -1,6 +1,6 @@
 Fixes #ISSUE_NUMBER
 
-Summary:
+Summary: ...
 
 ### Changes
 
@@ -13,9 +13,11 @@ Summary:
 - Refactors
   - ...
 
-Out of scopes/Future work:
+Out of scopes/Future work: ...
 
 ### Test Plan and Screenshots
+
+How to test the changes in this PR: ...
 
 | Page/View with link | Description of Changes | Screenshot Before | Screenshot After |
 | ------------------- | ---------------------- | ----------------- | ---------------- |

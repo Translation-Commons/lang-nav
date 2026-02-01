@@ -1,6 +1,6 @@
 ## Major Versions
 
-- 2026-Q2: v1.0 release with user feedback, database backend, UX revamp, keyboards.
+- 2026-Q2: v1.0 release with user feedback, database backend, UX revamp, keyboard data.
 - 2025-11-08: Beta release with censuses, IANA variant tags, maps, filters and advanced search.
 - 2025-Summer: Alpha release with core functionality for exploring languages, territories, locales, and writing systems.
 

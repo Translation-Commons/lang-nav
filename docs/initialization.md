@@ -1,8 +1,8 @@
 ## Initialization
 
-This is how we created the project originally -- you should not need to run these, but its for background.
+This is how we created the project originally -- you should not need to run these, but the steps are provided for background.
 
-1. Initalize the project using vite `npm create vite@latest`
+1. Initialize the project using vite `npm create vite@latest`
    1. Choose `lang-nav` as project name.
    2. Then React + TypeScript
 2. Change into the `lang-nav` directory and run `npm install`

@@ -1,4 +1,4 @@
-## Sources
+## Primary Sources
 
 ### Internally Curated
 
@@ -15,3 +15,7 @@ These datasets are aggregated and curated by the LangNav team. In some places th
 - iana_variants.txt
   - https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
   - accessed 2025-11-19
+
+## Census Data Sources
+
+See [public/data/census/readme.md](/public/data/census/readme.md) for details on census data sources and how to contribute new datasets.

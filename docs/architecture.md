@@ -14,15 +14,14 @@ Lang Navigator is a React + TypeScript single-page app powered by Vite, organize
 
 ## Data pipeline
 
-Core data files live in `public/data/` and are usually stored as Tab-separated value (`tsv`) files.
+Core data files live in `public/data/` and are usually stored as Tab-separated value (`tsv`) files. See [public/data/readme.md](/public/data/readme.md) for details on each dataset and its sources.
 
-The data layer lives in `src/features/data/` and follows the flow documented in `src/features/data/readme.md`:
+The data layer lives in `src/features/data/` and follows the flow documented in [src/features/data/readme.md](/src/features/data/readme.md):
 
 1. **Load** TSV/CSV/JSON sources in `load/` (main entities plus supplemental data such as ISO retirements).
 2. **Connect** relationships in `connect/` (link parents/children, generate regional locales, wire writing systems).
 3. **Compute** derived values in `compute/` (population rollups, contained territory stats, locale computations).
 4. **Context**: expose loaded/connected/computed data through providers/hooks in `context/` for UI consumption.
-   Core data files live in `public/data/`; UI surfaces pull from the context rather than reading files directly.
 
 ## UI composition
 

@@ -13,9 +13,10 @@ This is a short, practical path to get productive in Lang Navigator.
 
 - Dev server: `npm run dev`
 - Lint: `npm run lint`
+  - Automatic fixes: `npm run lint:fix`
 - Build: `npm run build`
 - Tests: `npm run test`
-  - Compute test coverage `npm run test:coverage`
+  - Compute test coverage: `npm run test:coverage`
 
 ## Repository map (feature-sliced)
 
@@ -37,7 +38,7 @@ This is a short, practical path to get productive in Lang Navigator.
 
 ## First contribution ideas
 
-- Scan through [the github issues](https://github.com/Translation-Commons/lang-nav/issues) and find one labeled "[good first issue](https://github.com/Translation-Commons/lang-nav/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22)"
+- Scan through [the Github issues](https://github.com/Translation-Commons/lang-nav/issues) and find one labeled "[good first issue](https://github.com/Translation-Commons/lang-nav/issues?q=is%3Aissue%20state%3Aopen%20label%3A%22good%20first%20issue%22)"
 - Create your own issue for a bug or improvement you'd like to see. Some ideas are:
   - Fix a UI detail (copy, spacing, hover text) in `src/widgets/` or `src/entities/`.
   - Add a small TSV correction in `public/data/`.
