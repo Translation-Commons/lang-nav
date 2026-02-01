@@ -51,6 +51,7 @@ export enum SearchableField {
   NameISO = 'ISO Name',
   NameCLDR = 'CLDR Name',
   NameGlottolog = 'Glottolog Name',
+  NameEthnologue = 'Ethnologue Name',
 }
 
 export enum LocaleSeparator {

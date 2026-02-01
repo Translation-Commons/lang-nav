@@ -39,6 +39,7 @@ export function getLanguageISOStatusLabel(vitality: LanguageISOStatus | undefine
   }
 }
 
+// Extended Graded Intergenerational Disruption Scale
 export function getVitalityEthnologueFineLabel(
   vitality: VitalityEthnologueFine | undefined,
 ): string {

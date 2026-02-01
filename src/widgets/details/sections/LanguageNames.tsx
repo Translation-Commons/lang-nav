@@ -11,7 +11,8 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { nameDisplay, nameEndonym, nameFrench, Glottolog, ISO, CLDR } = lang;
+  const { nameDisplay, nameCanonical, nameEndonym, nameFrench, Glottolog, ISO, CLDR, Ethnologue } =
+    lang;
 
   return (
     <DetailsSection title="Names">
@@ -23,22 +24,30 @@ const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEndonym} />
         </DetailsField>
       )}
-      {nameFrench && nameFrench !== nameDisplay.toLowerCase() && (
+      {nameFrench && nameFrench !== nameCanonical.toLowerCase() && (
         <DetailsField title="French Name">{nameFrench}</DetailsField>
       )}
-      {Glottolog.name && nameDisplay !== Glottolog.name && (
+      {Glottolog.name && nameCanonical !== Glottolog.name && (
         <DetailsField title="Glottolog Name">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
         </DetailsField>
       )}
-      {ISO.name && nameDisplay !== ISO.name && (
+      {ISO.name && nameCanonical !== ISO.name && (
         <DetailsField title="ISO Name">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
         </DetailsField>
       )}
-      {CLDR.name && nameDisplay !== CLDR.name && (
+      {CLDR.name && nameCanonical !== CLDR.name && (
         <DetailsField title="CLDR Name">
           <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
+        </DetailsField>
+      )}
+      {Ethnologue.name && nameCanonical !== Ethnologue.name && (
+        <DetailsField title="Ethnologue Name">
+          <ObjectFieldHighlightedByPageSearch
+            object={lang}
+            field={SearchableField.NameEthnologue}
+          />
         </DetailsField>
       )}
       {getLanguageOtherNames(lang).length > 0 && (

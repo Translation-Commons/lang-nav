@@ -11,7 +11,7 @@ import { LanguageData } from './LanguageTypes';
 
 const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { searchString } = usePageParams();
-  const { codeDisplay, nameCanonical, Glottolog, ISO, CLDR } = lang;
+  const { codeDisplay, nameCanonical, Glottolog, ISO, CLDR, Ethnologue } = lang;
 
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
@@ -61,6 +61,21 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           style={{ backgroundColor: 'transparent' }}
         >
           <Pill>CLDR</Pill>
+        </Hoverable>
+      )}
+      {Ethnologue.name === nameCanonical && (
+        <Hoverable
+          hoverContent={
+            <>
+              <div>Same name as is in the Ethnologue data</div>
+              <LinkButton href={`https://www.ethnologue.com/language/${Ethnologue.code}`}>
+                View Ethnologue Entry
+              </LinkButton>
+            </>
+          }
+          style={{ backgroundColor: 'transparent' }}
+        >
+          <Pill>Ethnologue</Pill>
         </Hoverable>
       )}
     </div>

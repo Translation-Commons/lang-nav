@@ -20,15 +20,21 @@ export enum VitalityEthnologueCoarse {
   Extinct = 0,
 }
 
+// Expanded Graded Intergenerational Disruption Scale
+// Converted to a 0-9 scale for easier comparison with other vitality scores
 export enum VitalityEthnologueFine {
+  // International (merged with National)
   National = 9,
   Regional = 8,
+  // Wider Communication (merged with Trade)
   Trade = 7,
   Educational = 6,
   Developing = 5,
+  // Vigorous (merged with Threatened)
   Threatened = 4,
   Shifting = 3,
   Moribund = 2,
+  // Nearly Extinct (merged with Moribund)
   Dormant = 1,
   Extinct = 0,
 }

@@ -28,5 +28,7 @@ export default function getSearchableField(
       return object.type === ObjectType.Language ? (object.CLDR?.name ?? '') : '';
     case SearchableField.NameGlottolog:
       return object.type === ObjectType.Language ? (object.Glottolog?.name ?? '') : '';
+    case SearchableField.NameEthnologue:
+      return object.type === ObjectType.Language ? (object.Ethnologue?.name ?? '') : '';
   }
 }

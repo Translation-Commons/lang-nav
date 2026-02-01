@@ -30,6 +30,7 @@ const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ object, field }) 
       SearchableField.NameEndonym,
       SearchableField.NameGlottolog,
       SearchableField.NameISO,
+      SearchableField.NameEthnologue,
     ].includes(field)
   ) {
     // If searching on all names, also highlight fields for English Name or Endonym

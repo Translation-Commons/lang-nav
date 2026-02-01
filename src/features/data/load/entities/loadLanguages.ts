@@ -4,10 +4,6 @@ import {
   LanguageData,
   LanguageDictionary,
 } from '@entities/language/LanguageTypes';
-import {
-  parseVitalityEthnologue2012,
-  parseVitalityEthnologue2025,
-} from '@entities/language/vitality/VitalityParsing';
 
 import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
 
@@ -23,14 +19,11 @@ function parseLanguageLine(line: string): LanguageData {
   const [nameDisplay, nameSubtitle] = separateTitleAndSubtitle(nameFull);
   const nameEndonym = parts[3] !== '' ? parts[3] : undefined;
 
-  const populationAdjusted =
-    parts[9] !== '' ? Number.parseInt(parts[9].replace(/,/g, '')) : undefined;
-  const populationRough =
-    parts[10] !== '' ? Number.parseInt(parts[10].replace(/,/g, '')) : undefined;
+  const populationRough = parts[6] !== '' ? Number.parseInt(parts[6].replace(/,/g, '')) : undefined;
   const code = parts[0];
-  const parentLanguageCode = parts[11] !== '' ? parts[11] : undefined;
-  const parentISOCode = parts[11] !== '' && parts[11].length <= 3 ? parts[11] : undefined;
-  const parentGlottocode = parts[12] !== '' ? parts[12] : undefined;
+  const parentLanguageCode = parts[7] !== '' ? parts[7] : undefined;
+  const parentISOCode = parts[7] !== '' && parts[7].length <= 3 ? parts[7] : undefined;
+  const parentGlottocode = parts[8] !== '' ? parts[8] : undefined;
   // Convert strings to the numeric enum
   const modality = getModalityFromLabel(parts[4]);
 
@@ -45,15 +38,10 @@ function parseLanguageLine(line: string): LanguageData {
     nameEndonym,
     names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
-    vitality: {
-      ethnologue2012: parseVitalityEthnologue2012(parts[6]),
-      ethnologue2025: parseVitalityEthnologue2025(parts[7]),
-    },
-    digitalSupport: parts[8] || undefined,
+    vitality: {}, // Filled in later
     viabilityConfidence: parts[13] || undefined,
     viabilityExplanation: parts[14] || undefined,
 
-    populationAdjusted,
     populationRough,
 
     modality,

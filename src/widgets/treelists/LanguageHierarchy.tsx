@@ -11,7 +11,7 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { LanguageData, LanguageSource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 export const LanguageHierarchy: React.FC = () => {
@@ -36,7 +36,8 @@ export const LanguageHierarchy: React.FC = () => {
       description={
         <>
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
-          different sources disagree on what is a language/dialect/etc. Change source:{' '}
+          different sources disagree on what is a language/dialect/etc. The parent/child
+          relationships come from the selected language source (
           <div
             style={{
               display: 'inline-block',
@@ -47,7 +48,7 @@ export const LanguageHierarchy: React.FC = () => {
           >
             <LanguageSourceSelector display={SelectorDisplay.InlineDropdown} />
           </div>
-          .
+          ). <SourceWarning languageSource={languageSource} />
         </>
       }
     />
@@ -101,3 +102,32 @@ function getLanguageTreeNode(
     },
   };
 }
+
+const SourceWarning: React.FC<{ languageSource: LanguageSource }> = ({ languageSource }) => {
+  switch (languageSource) {
+    case LanguageSource.Combined:
+      return (
+        <>Data comes from combining Glottolog and ISO sources, there may be some discrepancies.</>
+      );
+    case LanguageSource.CLDR:
+      return (
+        <>
+          CLDR does not contain language family details so we cannot show a language hierarchy.
+          However constituent languages are organized under their macrolanguages.
+        </>
+      );
+    case LanguageSource.Ethnologue:
+      return <>We have not extracted language family data from Ethnologue yet.</>;
+    case LanguageSource.UNESCO:
+      return (
+        <>
+          This display is not that useful because {languageSource} does have published language
+          family data, you may want to try a different language source.
+        </>
+      );
+    case LanguageSource.Glottolog:
+    case LanguageSource.ISO:
+    case LanguageSource.BCP:
+      return null; // These all have comprehensive parent/child data, continue
+  }
+};

@@ -5,6 +5,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import { LanguageSource } from '@entities/language/LanguageTypes';
 import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -12,9 +13,24 @@ import ObjectPathChildren from './ObjectPathChildren';
 import ObjectPathParents from './ObjectPathParents';
 
 const ObjectPath: React.FC = () => {
-  const { objectID } = usePageParams();
+  const { objectID, languageSource } = usePageParams();
   const object = getObjectFromID(objectID);
   if (!object) return null;
+  if (object.type === ObjectType.Language) {
+    // Not all language sources have parent/child data
+    switch (languageSource) {
+      case LanguageSource.Combined:
+      case LanguageSource.Glottolog:
+      case LanguageSource.ISO:
+        break; // These all have parent/child data, continue
+      case LanguageSource.CLDR:
+      case LanguageSource.Ethnologue:
+      case LanguageSource.UNESCO:
+      case LanguageSource.BCP:
+        // These sources do not support language families
+        return null;
+    }
+  }
 
   return (
     <>

@@ -16,7 +16,13 @@ import LanguageVitalityMeter from './VitalityMeter';
 import { VitalitySource } from './VitalityTypes';
 
 const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { viabilityConfidence, viabilityExplanation, digitalSupport, vitality = {} } = lang;
+  const {
+    viabilityConfidence,
+    viabilityExplanation,
+    digitalSupport,
+    vitality = {},
+    Ethnologue,
+  } = lang;
 
   return (
     <DetailsSection title="Vitality & Viability">
@@ -33,13 +39,13 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
       <DetailsField title="Ethnologue (2012)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2012} />{' '}
         {vitality.ethFine != null &&
-          (vitality.ethnologue2012 != null ? <Pill>Ethnologue 2012</Pill> : <Pill>Derived</Pill>)}
+          (Ethnologue.vitality2012 != null ? <Pill>Ethnologue 2012</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
       <DetailsField title="Ethnologue (2025)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2025} />{' '}
         {vitality.ethCoarse != null &&
-          (vitality.ethnologue2025 != null ? <Pill>Ethnologue 2025</Pill> : <Pill>Derived</Pill>)}
+          (Ethnologue.vitality2025 != null ? <Pill>Ethnologue 2025</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
       <DetailsField title="Should use in World Atlas">
         {viabilityConfidence} ... {viabilityExplanation}

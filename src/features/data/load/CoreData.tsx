@@ -38,6 +38,7 @@ import {
   loadISOMacrolanguages,
 } from './extra_entities/ISOData';
 import { addISORetirementsToLanguages, loadISORetirements } from './extra_entities/ISORetirements';
+import { addEthnologueDataToLanguages, loadEthnologueLanguages } from './extra_entities/SILData';
 import { addCLDRLanguageDetails } from './supplemental/UnicodeData';
 
 export type CoreDataArrays = {
@@ -60,6 +61,7 @@ export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
   Glottolog: {},
   UNESCO: {},
   CLDR: {},
+  Ethnologue: {},
 };
 
 /**
@@ -84,6 +86,7 @@ export function useCoreData(): {
       langFamilies,
       isoLangsToFamilies,
       isoRetirements,
+      ethnologueLangs,
       glottologImport,
       manualGlottocodeToISO,
       territories,
@@ -97,6 +100,7 @@ export function useCoreData(): {
       loadISOLanguageFamilies(),
       loadISOFamiliesToLanguages(),
       loadISORetirements(),
+      loadEthnologueLanguages(),
       loadGlottologLanguages(),
       loadManualGlottocodeToISO(),
       loadTerritories(),
@@ -117,6 +121,7 @@ export function useCoreData(): {
     }
 
     addISODataToLanguages(initialLangs, isoLangs || []);
+    addEthnologueDataToLanguages(initialLangs, ethnologueLangs || []);
     const languagesBySource = groupLanguagesBySource(initialLangs);
     addISOLanguageFamilyData(languagesBySource, langFamilies || [], isoLangsToFamilies || {});
     addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
