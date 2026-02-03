@@ -61,7 +61,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       <CardField
         title="Vitality"
         icon={ActivityIcon}
-        description="Vitality: an estimate of how active the language is in national and community spaces."
+        description="An estimate of how active the language is in national and community spaces."
       >
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
       </CardField>
@@ -70,7 +70,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         <CardField
           title="Modality"
           icon={MessageCircleIcon}
-          description="Modality: The ways in which people use the language."
+          description="The ways in which people use the language."
         >
           {getModalityLabel(modality)}
         </CardField>
@@ -78,9 +78,9 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
 
       {countryLocales.length > 0 && (
         <CardField
-          title="Countries"
+          title="Territories"
           icon={MapPinnedIcon}
-          description="Territories: locations that the language can be found in, sorted by population."
+          description="Locations that the language can be found in, sorted by population."
         >
           <CommaSeparated>
             {countryLocales.map((locale) => (
@@ -94,7 +94,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         <CardField
           title="Coordinates"
           icon={MapPinIcon}
-          description="Coordinates: The latitude and longitude for the modern and/or historic center of the language."
+          description="The latitude and longitude for the modern and/or historic center of the language."
         >
           {lang.latitude.toFixed(2)}°, {lang.longitude.toFixed(2)}°
         </CardField>
