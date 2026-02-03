@@ -1,13 +1,22 @@
 import usePageParams from '@features/params/usePageParams';
 
+import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
+
 export function getFilterLabels() {
   return {
     languageScope: getLanguageScopeLabel(),
+    modalityFilter: getModalityFilterLabel(),
     territoryScope: getTerritoryScopeLabel(),
     territoryFilter: getTerritoryFilterLabel(),
     writingSystemFilter: getWritingSystemFilterLabel(),
     languageFilter: getLanguageFilterLabel(),
   };
+}
+
+function getModalityFilterLabel(): string {
+  const { modalityFilter } = usePageParams();
+  if (modalityFilter.length === 0) return 'any modality';
+  return modalityFilter.map((m) => getModalityLabel(m) ?? 'modality').join(' or ');
 }
 
 function getLanguageScopeLabel(): string {

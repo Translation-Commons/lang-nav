@@ -2,6 +2,7 @@ import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes
 import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
+import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
   LanguageISOStatus,
@@ -67,6 +68,7 @@ export enum PageParamKey {
   languageFilter = 'languageFilter',
   languageSource = 'languageSource',
   languageScopes = 'languageScopes',
+  modalityFilter = 'modalityFilter',
   limit = 'limit',
   localeSeparator = 'localeSeparator',
   objectID = 'objectID',
@@ -94,6 +96,7 @@ export type PageParams = {
   isoStatus: LanguageISOStatus[];
   languageFilter: string;
   languageScopes: LanguageScope[];
+  modalityFilter: LanguageModality[];
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
@@ -121,6 +124,7 @@ export type PageParamsOptional = {
   isoStatus?: LanguageISOStatus[];
   languageFilter?: string;
   languageScopes?: LanguageScope[];
+  modalityFilter?: LanguageModality[];
   languageSource?: LanguageSource;
   limit?: number;
   localeSeparator?: LocaleSeparator;

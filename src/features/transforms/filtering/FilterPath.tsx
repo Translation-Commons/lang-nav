@@ -7,6 +7,8 @@ import { getDefaultParams } from '@features/params/Profiles';
 import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
+import { LanguageModality } from '@entities/language/LanguageModality';
+import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
@@ -30,6 +32,7 @@ const FilterPath: React.FC = () => {
     isoStatus,
     languageFilter,
     languageScopes,
+    modalityFilter,
     searchBy,
     searchString,
     territoryFilter,
@@ -99,6 +102,24 @@ const FilterPath: React.FC = () => {
             : updatePageParams({ languageScopes: [...languageScopes, scope] })
         }
         selected={languageScopes}
+      />
+    ),
+    modalityFilter.length > 0 && (
+      <Selector
+        selectorStyle={{ marginLeft: '0' }}
+        options={Object.values(LanguageModality).filter(
+          (v): v is LanguageModality => typeof v === 'number',
+        )}
+        labelWhenEmpty="Any Modality"
+        getOptionLabel={(v) => getModalityLabel(v) ?? String(v)}
+        onChange={(modality: LanguageModality) =>
+          modalityFilter.includes(modality)
+            ? updatePageParams({
+                modalityFilter: modalityFilter.filter((m) => m !== modality),
+              })
+            : updatePageParams({ modalityFilter: [...modalityFilter, modality] })
+        }
+        selected={modalityFilter}
       />
     ),
     !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
