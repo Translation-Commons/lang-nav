@@ -1,3 +1,10 @@
+import {
+  ActivityIcon,
+  MapPinIcon,
+  MapPinnedIcon,
+  MessageCircleIcon,
+  UsersIcon,
+} from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -10,6 +17,7 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
+import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
@@ -39,38 +47,57 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         </a>
         <ObjectSubtitle object={lang} />
       </h3>
-      {view === View.Map && lang.longitude != null && lang.latitude != null && (
-        <div>
-          <h4>Coordinates</h4>
-          {lang.latitude!.toFixed(2)}°, {lang.longitude.toFixed(2)}°
-        </div>
-      )}
+
       {populationEstimate != null && (
-        <div>
-          <h4>Population</h4>
+        <CardField
+          title="Population"
+          icon={UsersIcon}
+          description="Population: How many people know the language across the world."
+        >
           <LanguagePopulationEstimate lang={lang} />
-        </div>
+        </CardField>
       )}
-      {modality != null && (
-        <div>
-          <h4>Modality</h4>
-          {getModalityLabel(modality)}
-        </div>
-      )}
-      <div>
-        <h4>Vitality</h4>
+
+      <CardField
+        title="Vitality"
+        icon={ActivityIcon}
+        description="Vitality: an estimate of how active the language is in national and community spaces."
+      >
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
-      </div>
+      </CardField>
+
+      {modality != null && (
+        <CardField
+          title="Modality"
+          icon={MessageCircleIcon}
+          description="Modality: The ways in which people use the language."
+        >
+          {getModalityLabel(modality)}
+        </CardField>
+      )}
 
       {countryLocales.length > 0 && (
-        <div>
-          <h4>Countries:</h4>
+        <CardField
+          title="Countries"
+          icon={MapPinnedIcon}
+          description="Territories: locations that the language can be found in, sorted by population."
+        >
           <CommaSeparated>
             {countryLocales.map((locale) => (
               <HoverableObjectName key={locale.ID} labelSource="territory" object={locale} />
             ))}
           </CommaSeparated>
-        </div>
+        </CardField>
+      )}
+
+      {view === View.Map && lang.longitude != null && lang.latitude != null && (
+        <CardField
+          title="Coordinates"
+          icon={MapPinIcon}
+          description="Coordinates: The latitude and longitude for the modern and/or historic center of the language."
+        >
+          {lang.latitude.toFixed(2)}°, {lang.longitude.toFixed(2)}°
+        </CardField>
       )}
     </div>
   );
