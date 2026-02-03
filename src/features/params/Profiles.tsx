@@ -43,6 +43,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   isoStatus: [],
   languageFilter: '',
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
+  modalityFilter: [],
   languageSource: LanguageSource.Combined,
   limit: 12,
   localeSeparator: LocaleSeparator.Underscore,

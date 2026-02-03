@@ -6,6 +6,7 @@ import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSugges
 import usePageParams from '@features/params/usePageParams';
 import {
   getFilterByLanguageScope,
+  getFilterByModality,
   getFilterByTerritoryScope,
 } from '@features/transforms/filtering/filter';
 
@@ -27,6 +28,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
     useDataContext();
   const filterByLanguageScope = getFilterByLanguageScope();
+  const filterByModality = getFilterByModality();
   const filterByTerritoryScope = getFilterByTerritoryScope();
   const filterByWritingSystem = getFilterByWritingSystem();
   const filterByLanguage = getFilterByLanguage();
@@ -66,7 +68,8 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       if (!filterByWritingSystem(object)) dist += 2;
       if (!filterByTerritory(object)) dist += 4;
       if (!filterByTerritoryScope(object)) dist += 8;
-      if (!filterByLanguageScope(object)) dist += 16;
+      if (!filterByModality(object)) dist += 16;
+      if (!filterByLanguageScope(object)) dist += 32;
       return dist;
     };
     const getMatchGroup = (object: ObjectData): string => {
@@ -74,6 +77,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       if (!filterByWritingSystem(object)) return 'not ' + filterLabels.writingSystemFilter;
       if (!filterByTerritory(object)) return 'not ' + filterLabels.territoryFilter;
       if (!filterByTerritoryScope(object)) return 'not ' + filterLabels.territoryScope;
+      if (!filterByModality(object)) return 'not ' + filterLabels.modalityFilter;
       if (!filterByLanguageScope(object)) return 'not ' + filterLabels.languageScope;
       return 'matched';
     };
@@ -83,6 +87,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
     filterByWritingSystem,
     filterByTerritory,
     filterByTerritoryScope,
+    filterByModality,
     filterByLanguageScope,
     filterLabels,
   ]);

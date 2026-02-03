@@ -9,7 +9,12 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
-import { getFilterByLanguageScope, getFilterByTerritoryScope, getFilterByVitality } from './filter';
+import {
+  getFilterByLanguageScope,
+  getFilterByModality,
+  getFilterByTerritoryScope,
+  getFilterByVitality,
+} from './filter';
 import {
   getFilterByLanguage,
   getFilterByTerritory,
@@ -32,12 +37,14 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const filterByWritingSystem = getFilterByWritingSystem();
   const filterByLanguage = getFilterByLanguage();
   const filterByLanguageScope = getFilterByLanguageScope();
+  const filterByModality = getFilterByModality();
   const filterByTerritoryScope = getFilterByTerritoryScope();
   const filterByVitality = getFilterByVitality();
   const filterLabels = getFilterLabels();
 
   const [
     nInLanguageScope,
+    nInModality,
     nInTerritoryScope,
     nInTerritory,
     nWrittenIn,
@@ -46,7 +53,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nMatchingSubstring,
   ] = useMemo(() => {
     const filteredByLanguageScope = objects.filter(filterByLanguageScope);
-    const filteredByTerritoryScope = filteredByLanguageScope.filter(filterByTerritoryScope);
+    const filteredByModality = filteredByLanguageScope.filter(filterByModality);
+    const filteredByTerritoryScope = filteredByModality.filter(filterByTerritoryScope);
     const filteredByTerritory = filteredByTerritoryScope.filter(filterByTerritory);
     const filteredByWritingSystem = filteredByTerritory.filter(filterByWritingSystem);
     const filteredByLanguage = filteredByWritingSystem.filter(filterByLanguage);
@@ -54,6 +62,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
     return [
       filteredByLanguageScope.length,
+      filteredByModality.length,
       filteredByTerritoryScope.length,
       filteredByTerritory.length,
       filteredByWritingSystem.length,
@@ -64,6 +73,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   }, [
     objects,
     filterByLanguageScope,
+    filterByModality,
     filterByTerritoryScope,
     filterByTerritory,
     filterByWritingSystem,
@@ -74,7 +84,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
 
   const nOverall = objects.length;
   const nFilteredByLanguageScope = nOverall - nInLanguageScope;
-  const nFilteredByTerritoryScope = nInLanguageScope - nInTerritoryScope;
+  const nFilteredByModality = nInLanguageScope - nInModality;
+  const nFilteredByTerritoryScope = nInModality - nInTerritoryScope;
   const nFilteredByTerritory = nInTerritoryScope - nInTerritory;
   const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
   const nFilteredByLanguage = nWrittenIn - nWithLanguage;
@@ -103,6 +114,22 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the language scope filter"
                 onClick={() => updatePageParams({ languageScopes: [] })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredByModality > 0 && (
+          <tr>
+            <td>Not {filterLabels.modalityFilter}:</td>
+            <td className="count">{(nFilteredByModality * -1).toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the modality filter"
+                onClick={() => updatePageParams({ modalityFilter: [] })}
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >
                 <XIcon size="1em" display="block" />

@@ -3,6 +3,7 @@ import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes
 import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
 import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 
+import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
   VitalityEthnologueCoarse,
@@ -55,6 +56,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.languageScopes:
         if (value === '[]') params.languageScopes = [];
         else params.languageScopes = value.split(',').filter(Boolean) as LanguageScope[];
+        break;
+      case PageParamKey.modalityFilter:
+        params.modalityFilter = parseNumericEnumArray(value, LanguageModality);
         break;
       case PageParamKey.territoryScopes:
         if (value === '[]') params[key] = [];

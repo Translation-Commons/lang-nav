@@ -10,6 +10,7 @@ import {
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
+import LanguageModalitySelector from '@features/transforms/filtering/LanguageModalitySelector';
 import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
 import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
 import TerritoryScopeSelector from '@features/transforms/filtering/TerritoryScopeSelector';
@@ -57,6 +58,7 @@ const OptionsPanel: React.FC = () => {
           <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageScopeSelector />
+          <LanguageModalitySelector />
           <TerritoryScopeSelector />
           <LanguageISOStatusSelector />
           <VitalityEth2013Selector />

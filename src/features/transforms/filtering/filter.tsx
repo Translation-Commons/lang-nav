@@ -18,12 +18,13 @@ export type FilterFunctionType = (a: ObjectData) => boolean;
  */
 export function getScopeFilter(): FilterFunctionType {
   const filterByLanguageScope = getFilterByLanguageScope();
+  const filterByModality = getFilterByModality();
   const filterByTerritoryScope = getFilterByTerritoryScope();
 
   const filterByScope = useCallback(
     (object: ObjectData): boolean =>
-      filterByLanguageScope(object) && filterByTerritoryScope(object),
-    [filterByLanguageScope, filterByTerritoryScope],
+      filterByLanguageScope(object) && filterByModality(object) && filterByTerritoryScope(object),
+    [filterByLanguageScope, filterByModality, filterByTerritoryScope],
   );
 
   return filterByScope;
@@ -43,6 +44,23 @@ export function getFilterByLanguageScope(): FilterFunctionType {
   );
 
   return filterByLanguageScope;
+}
+
+export function getFilterByModality(): FilterFunctionType {
+  const { modalityFilter } = usePageParams();
+
+  const filterByModality = useCallback(
+    (object: ObjectData | undefined): boolean => {
+      if (modalityFilter.length === 0) return true;
+      if (object?.type === ObjectType.Locale) return filterByModality(object.language);
+      if (object?.type !== ObjectType.Language) return true;
+      const language = object as LanguageData;
+      return language.modality != null && modalityFilter.includes(language.modality);
+    },
+    [modalityFilter],
+  );
+
+  return filterByModality;
 }
 
 export function getFilterByTerritoryScope(): FilterFunctionType {
