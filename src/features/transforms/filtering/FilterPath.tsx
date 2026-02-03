@@ -38,8 +38,8 @@ const FilterPath: React.FC = () => {
     territoryFilter,
     territoryScopes,
     updatePageParams,
-    vitalityEth2013,
-    vitalityEth2025,
+    vitalityEthFine,
+    vitalityEthCoarse,
     writingSystemFilter,
   } = usePageParams();
   const defaultParams = getDefaultParams();
@@ -61,14 +61,14 @@ const FilterPath: React.FC = () => {
       </>
     ),
 
-    // Ethnologue 2013 Filter
-    vitalityEth2013.length > 0 && (
+    // Ethnologue Fine Filter
+    vitalityEthFine.length > 0 && (
       <>
-        Ethnologue 2013: {vitalityEth2013.map(getVitalityEthnologueFineLabel).join(', ')}
+        Ethnologue Fine: {vitalityEthFine.map(getVitalityEthnologueFineLabel).join(', ')}
         <HoverableButton
           buttonType="reset"
-          hoverContent="Clear the vitality filter based on Ethnologue 2013"
-          onClick={() => updatePageParams({ vitalityEth2013: [] })}
+          hoverContent="Clear the vitality filter based on Ethnologue Fine"
+          onClick={() => updatePageParams({ vitalityEthFine: [] })}
           style={{ padding: '0.25em' }}
         >
           <XIcon size="1em" display="block" />
@@ -76,14 +76,14 @@ const FilterPath: React.FC = () => {
       </>
     ),
 
-    // Ethnologue 2025 Filter
-    vitalityEth2025.length > 0 && (
+    // Ethnologue Coarse Filter
+    vitalityEthCoarse.length > 0 && (
       <>
-        Ethnologue 2025: {vitalityEth2025.map(getVitalityEthnologueCoarseLabel).join(', ')}
+        Ethnologue Coarse: {vitalityEthCoarse.map(getVitalityEthnologueCoarseLabel).join(', ')}
         <HoverableButton
           buttonType="reset"
-          hoverContent="Clear the vitality filter based on Ethnologue 2025"
-          onClick={() => updatePageParams({ vitalityEth2025: [] })}
+          hoverContent="Clear the vitality filter based on Ethnologue Coarse"
+          onClick={() => updatePageParams({ vitalityEthCoarse: [] })}
           style={{ padding: '0.25em' }}
         >
           <XIcon size="1em" display="block" />

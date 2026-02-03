@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import {
   getBaseLanguageData,
@@ -8,14 +8,14 @@ import {
 
 import { getVitalityMetascore, precomputeLanguageVitality } from '../LanguageVitalityComputation';
 import {
-  parseVitalityEthnologue2013,
-  parseVitalityEthnologue2025,
   parseLanguageISOStatus,
+  parseVitalityEthnologue2012,
+  parseVitalityEthnologue2025,
 } from '../VitalityParsing';
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from '../VitalityTypes';
 
 describe('parseLanguageISOStatus', () => {
@@ -43,23 +43,23 @@ describe('parseLanguageISOStatus', () => {
   });
 });
 
-describe('parseVitalityEthnologue2013', () => {
+describe('parseVitalityEthnologue2012', () => {
   it('returns correct scores for all levels', () => {
-    expect(parseVitalityEthnologue2013('National')).toBe(9);
-    expect(parseVitalityEthnologue2013('Regional')).toBe(8);
-    expect(parseVitalityEthnologue2013('Trade')).toBe(7);
-    expect(parseVitalityEthnologue2013('Educational')).toBe(6);
-    expect(parseVitalityEthnologue2013('Written')).toBe(5);
-    expect(parseVitalityEthnologue2013('Vigorous')).toBe(4);
-    expect(parseVitalityEthnologue2013('Shifting')).toBe(3);
-    expect(parseVitalityEthnologue2013('Moribund')).toBe(2);
-    expect(parseVitalityEthnologue2013('Dormant')).toBe(1);
-    expect(parseVitalityEthnologue2013('Extinct')).toBe(0);
+    expect(parseVitalityEthnologue2012('National')).toBe(9);
+    expect(parseVitalityEthnologue2012('Regional')).toBe(8);
+    expect(parseVitalityEthnologue2012('Trade')).toBe(7);
+    expect(parseVitalityEthnologue2012('Educational')).toBe(6);
+    expect(parseVitalityEthnologue2012('Written')).toBe(5);
+    expect(parseVitalityEthnologue2012('Vigorous')).toBe(4);
+    expect(parseVitalityEthnologue2012('Shifting')).toBe(3);
+    expect(parseVitalityEthnologue2012('Moribund')).toBe(2);
+    expect(parseVitalityEthnologue2012('Dormant')).toBe(1);
+    expect(parseVitalityEthnologue2012('Extinct')).toBe(0);
   });
 
   it('returns undefined for unknown values', () => {
-    expect(parseVitalityEthnologue2013('')).toBeUndefined();
-    expect(parseVitalityEthnologue2013('unknown')).toBeUndefined();
+    expect(parseVitalityEthnologue2012('')).toBeUndefined();
+    expect(parseVitalityEthnologue2012('unknown')).toBeUndefined();
   });
 });
 
@@ -93,7 +93,7 @@ describe('computeVitalityMetascore', () => {
     expect(result).toBe(7.5); // (9 + 6) / 2
   });
 
-  it('uses Ethnologue 2013 when only it exists', () => {
+  it('uses fine Ethnologue vitality estimates when only it exists', () => {
     const lang = generateLanguage({
       ethFine: VitalityEthnologueFine.Threatened, // 4
     });
@@ -123,7 +123,7 @@ describe('computeVitalityMetascore', () => {
 
   it('needs to be precomputed to have a metascore', () => {
     const lang = generateLanguage({
-      ethnologue2013: VitalityEthnologueFine.Developing, // 5
+      ethnologue2012: VitalityEthnologueFine.Developing, // 5
       ethnologue2025: VitalityEthnologueCoarse.Stable, // 6
     });
     const metascoreBefore = getVitalityMetascore(lang);

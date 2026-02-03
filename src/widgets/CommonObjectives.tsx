@@ -36,7 +36,7 @@ export const ObjectiveList: React.FC = () => {
       <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
       <Objective
         label="View a map of endangered languages."
-        urlParams={{ view: View.Map, limit: -1, colorBy: SortBy.VitalityEthnologue2013 }}
+        urlParams={{ view: View.Map, limit: -1, colorBy: SortBy.VitalityEthnologueFine }}
       />
     </div>
   );

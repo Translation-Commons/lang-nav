@@ -69,7 +69,7 @@ export type LanguageVitality = {
   iso?: LanguageISOStatus; // Derived
   ethFine?: VitalityEthnologueFine; // Computed from other factors
   ethCoarse?: VitalityEthnologueCoarse; // Computed from other factors
-  ethnologue2013?: VitalityEthnologueFine; // cited from Ethnologue 2013
+  ethnologue2012?: VitalityEthnologueFine; // cited from Ethnologue 2012
   ethnologue2025?: VitalityEthnologueCoarse; // cited from Ethnologue 2025
 };
 

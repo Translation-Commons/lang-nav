@@ -20,8 +20,8 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import {
   LanguageISOStatusSelector,
-  VitalityEth2013Selector,
-  VitalityEth2025Selector,
+  VitalityEthCoarseSelector,
+  VitalityEthFineSelector,
 } from '../VitalitySelector';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
@@ -56,14 +56,14 @@ describe('VitalitySelector', () => {
     render(
       <>
         <LanguageISOStatusSelector />
-        <VitalityEth2013Selector />
-        <VitalityEth2025Selector />
+        <VitalityEthFineSelector />
+        <VitalityEthCoarseSelector />
       </>,
     );
 
     expect(screen.getByText('ISO Language Status')).toBeInTheDocument();
-    expect(screen.getByText('Vitality Eth 2013')).toBeInTheDocument();
-    expect(screen.getByText('Vitality Eth 2025')).toBeInTheDocument();
+    expect(screen.getByText('Vitality Eth (Fine)')).toBeInTheDocument();
+    expect(screen.getByText('Vitality Eth (Coarse)')).toBeInTheDocument();
   });
 
   describe('LanguageISOStatusSelector', () => {
@@ -102,9 +102,9 @@ describe('VitalitySelector', () => {
     });
   });
 
-  describe('VitalityEth2013Selector', () => {
-    it('displays all Ethnologue 2013 vitality options', () => {
-      render(<VitalityEth2013Selector />);
+  describe('VitalityEthFineSelector', () => {
+    it('displays all Ethnologue fine vitality options', () => {
+      render(<VitalityEthFineSelector />);
 
       const expected = Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number');
 
@@ -118,23 +118,23 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(<VitalityEth2013Selector />);
+      const { rerender } = render(<VitalityEthFineSelector />);
 
       // Test selection
-      const nationalButton = screen.getByRole('option', { name: 'National' });
+      const nationalButton = screen.getByText('National');
       expect(nationalButton).toHaveClass('selectorOption unselected');
       await user.click(nationalButton);
       expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEth2013: [VitalityEthnologueFine.National],
+        vitalityEthFine: [VitalityEthnologueFine.National],
       });
 
       // Update mock to simulate selected state and rerender
-      setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
+      setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
 
-      rerender(<VitalityEth2013Selector />);
+      rerender(<VitalityEthFineSelector />);
 
       // Test deselection
-      const selectedNational = screen.getByRole('option', { name: 'National' });
+      const selectedNational = screen.getByText('National');
       expect(selectedNational).toHaveClass('selectorOption selected');
 
       // Click to deselect
@@ -142,14 +142,14 @@ describe('VitalitySelector', () => {
 
       // Verify the expected state after deselection
       expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEth2013: [],
+        vitalityEthFine: [],
       });
     });
   });
 
-  describe('VitalityEth2025Selector', () => {
+  describe('VitalityEthCoarseSelector', () => {
     it('displays all Ethnologue 2025 vitality options', () => {
-      render(<VitalityEth2025Selector />);
+      render(<VitalityEthCoarseSelector />);
 
       const expected = Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number');
 
@@ -163,25 +163,25 @@ describe('VitalitySelector', () => {
       const user = userEvent.setup();
 
       // Initial render with empty selection
-      const { rerender } = render(<VitalityEth2025Selector />);
+      const { rerender } = render(<VitalityEthCoarseSelector />);
 
       // Test selection
-      const institutionalButton = screen.getByRole('option', { name: 'Institutional' });
+      const institutionalButton = screen.getByText('Institutional');
       expect(institutionalButton).toHaveClass('selectorOption unselected');
       await user.click(institutionalButton);
       expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEth2025: [VitalityEthnologueCoarse.Institutional],
+        vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional],
       });
 
       // Update mock to simulate selected state and rerender
       vi.mocked(usePageParams).mockReturnValue(
-        createMockUsePageParams({ vitalityEth2025: [VitalityEthnologueCoarse.Institutional] }),
+        createMockUsePageParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional] }),
       );
 
-      rerender(<VitalityEth2025Selector />);
+      rerender(<VitalityEthCoarseSelector />);
 
       // Test deselection
-      const selectedInstitutional = screen.getByRole('option', { name: 'Institutional' });
+      const selectedInstitutional = screen.getByText('Institutional');
       expect(selectedInstitutional).toHaveClass('selectorOption selected');
 
       // Click to deselect
@@ -189,7 +189,7 @@ describe('VitalitySelector', () => {
 
       // The mock should be called with empty array for deselection
       expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEth2025: [],
+        vitalityEthCoarse: [],
       });
     });
   });

@@ -56,8 +56,8 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
 
     case SortBy.VitalityMetascore:
     case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueFine:
+    case SortBy.VitalityEthnologueCoarse:
       return <VitalityField obj={object} field={field} />;
 
     case SortBy.Modality:
@@ -73,14 +73,14 @@ function VitalityField({
   obj: ObjectData;
   field:
     | SortBy.VitalityMetascore
-    | SortBy.VitalityEthnologue2013
-    | SortBy.VitalityEthnologue2025
+    | SortBy.VitalityEthnologueFine
+    | SortBy.VitalityEthnologueCoarse
     | SortBy.ISOStatus;
 }) {
   if (obj.type !== ObjectType.Language) return null;
   let src = VitalitySource.Metascore;
-  if (field === SortBy.VitalityEthnologue2013) src = VitalitySource.Eth2013;
-  else if (field === SortBy.VitalityEthnologue2025) src = VitalitySource.Eth2025;
+  if (field === SortBy.VitalityEthnologueFine) src = VitalitySource.Eth2012;
+  else if (field === SortBy.VitalityEthnologueCoarse) src = VitalitySource.Eth2025;
   else if (field === SortBy.ISOStatus) src = VitalitySource.ISO;
   return <LanguageVitalityMeter lang={obj} src={src} />;
 }

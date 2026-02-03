@@ -81,7 +81,7 @@ export function getFilterByTerritoryScope(): FilterFunctionType {
 
 /**
  * Creates a filter function for language vitality based on ISO and Ethnologue status.
- * @param params Vitality parameters from ISO and Ethnologue (2013/2025)
+ * @param params Vitality parameters from ISO and Ethnologue (Fine and Coarse)
  * @returns Filter function that matches objects against the vitality criteria
  *
  * Non-language objects pass through. Languages must match all active filters,
@@ -124,11 +124,11 @@ export function buildVitalityFilterFunction(
  * Provides a memoized function that filters languages based on their vitality status.
  */
 export function getFilterByVitality(): FilterFunctionType {
-  const { isoStatus, vitalityEth2013, vitalityEth2025 } = usePageParams();
+  const { isoStatus, vitalityEthFine, vitalityEthCoarse } = usePageParams();
 
-  return useCallback(buildVitalityFilterFunction(isoStatus, vitalityEth2013, vitalityEth2025), [
+  return useCallback(buildVitalityFilterFunction(isoStatus, vitalityEthFine, vitalityEthCoarse), [
     isoStatus,
-    vitalityEth2013,
-    vitalityEth2025,
+    vitalityEthFine,
+    vitalityEthCoarse,
   ]);
 }

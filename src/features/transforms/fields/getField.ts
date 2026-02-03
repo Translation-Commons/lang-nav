@@ -91,11 +91,11 @@ export function getSortField(object: ObjectData, sortBy: ColorBy): string | numb
       if (object.type === ObjectType.Language) return object.vitality?.iso;
       if (object.type === ObjectType.Locale) return object.language?.vitality?.iso;
       return undefined;
-    case SortBy.VitalityEthnologue2013:
+    case SortBy.VitalityEthnologueFine:
       if (object.type === ObjectType.Language) return object.vitality?.ethFine;
       if (object.type === ObjectType.Locale) return object.language?.vitality?.ethFine;
       return undefined;
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueCoarse:
       if (object.type === ObjectType.Language) return object.vitality?.ethCoarse;
       if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
       return undefined;

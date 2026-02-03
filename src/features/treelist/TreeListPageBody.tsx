@@ -28,8 +28,8 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
     territoryFilter,
     writingSystemFilter,
     languageFilter,
-    vitalityEth2013,
-    vitalityEth2025,
+    vitalityEthFine,
+    vitalityEthCoarse,
     isoStatus,
   } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
@@ -41,16 +41,16 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
       territoryFilter ||
       writingSystemFilter ||
       languageFilter ||
-      vitalityEth2013 ||
-      vitalityEth2025 ||
+      vitalityEthFine ||
+      vitalityEthCoarse ||
       isoStatus,
     [
       searchString,
       territoryFilter,
       writingSystemFilter,
       languageFilter,
-      vitalityEth2013,
-      vitalityEth2025,
+      vitalityEthFine,
+      vitalityEthCoarse,
       isoStatus,
     ],
   );

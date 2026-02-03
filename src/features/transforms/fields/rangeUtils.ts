@@ -28,8 +28,8 @@ export function getMinimumValue(field?: ColorBy | ScaleBy): number {
     case SortBy.PercentOfTerritoryPopulation:
     case SortBy.Literacy:
     case SortBy.VitalityMetascore:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueFine:
+    case SortBy.VitalityEthnologueCoarse:
     case SortBy.CountOfLanguages:
     case SortBy.CountOfWritingSystems:
     case SortBy.CountOfCountries:
@@ -61,8 +61,8 @@ export function getMaximumValue(objects: ObjectData[], field?: ColorBy | ScaleBy
       return LanguageModality.Spoken;
     case SortBy.VitalityMetascore:
     case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueFine:
+    case SortBy.VitalityEthnologueCoarse:
       return VitalityEthnologueCoarse.Institutional; // 9;
     case SortBy.Latitude:
       return 90;

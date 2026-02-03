@@ -9,8 +9,8 @@ export enum SortBy {
   // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',
   ISOStatus = 'ISO Status',
-  VitalityEthnologue2013 = 'Vitality: Ethnologue 2013',
-  VitalityEthnologue2025 = 'Vitality: Ethnologue 2025',
+  VitalityEthnologueFine = 'Vitality: Ethnologue Fine',
+  VitalityEthnologueCoarse = 'Vitality: Ethnologue Coarse',
 
   Latitude = 'Latitude',
   Longitude = 'Longitude',

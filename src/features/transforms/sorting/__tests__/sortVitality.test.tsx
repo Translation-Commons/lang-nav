@@ -20,14 +20,14 @@ function createLanguageWithVitality(
   name: string,
   vitality: Partial<{
     iso: LanguageISOStatus;
-    eth2013: VitalityEthnologueFine;
+    eth2012: VitalityEthnologueFine;
     eth2025: VitalityEthnologueCoarse;
   }>,
 ): LanguageData {
   const lang = getBaseLanguageData(code, name);
   lang.vitality = {};
   if (vitality.iso) lang.vitality.iso = vitality.iso;
-  if (vitality.eth2013) lang.vitality.ethnologue2013 = vitality.eth2013;
+  if (vitality.eth2012) lang.vitality.ethnologue2012 = vitality.eth2012;
   if (vitality.eth2025) lang.vitality.ethnologue2025 = vitality.eth2025;
   return lang;
 }
@@ -37,11 +37,11 @@ describe('Vitality Sorting', () => {
     it('sorts languages by metascore high to low', () => {
       const langs = [
         createLanguageWithVitality('en', 'English', {
-          eth2013: VitalityEthnologueFine.National,
+          eth2012: VitalityEthnologueFine.National,
           eth2025: VitalityEthnologueCoarse.Institutional,
         }), // 9
-        createLanguageWithVitality('fr', 'French', { eth2013: VitalityEthnologueFine.Threatened }), // 4
-        createLanguageWithVitality('es', 'Spanish', { eth2013: VitalityEthnologueFine.Shifting }), // 3
+        createLanguageWithVitality('fr', 'French', { eth2012: VitalityEthnologueFine.Threatened }), // 4
+        createLanguageWithVitality('es', 'Spanish', { eth2012: VitalityEthnologueFine.Shifting }), // 3
       ];
       precomputeLanguageVitality(langs);
 
@@ -56,7 +56,7 @@ describe('Vitality Sorting', () => {
     it('sorts languages without vitality data to the end', () => {
       const langs = [
         createLanguageWithVitality('en', 'English', {}), // no data = -1
-        createLanguageWithVitality('fr', 'French', { eth2013: VitalityEthnologueFine.Threatened }), // 4
+        createLanguageWithVitality('fr', 'French', { eth2012: VitalityEthnologueFine.Threatened }), // 4
       ];
       precomputeLanguageVitality(langs);
 
@@ -69,7 +69,7 @@ describe('Vitality Sorting', () => {
 
     it('sorts non-language objects to the end', () => {
       const lang = createLanguageWithVitality('en', 'English', {
-        eth2013: VitalityEthnologueFine.National,
+        eth2012: VitalityEthnologueFine.National,
       });
       const territory: TerritoryData = {
         type: ObjectType.Territory,
@@ -108,18 +108,18 @@ describe('Vitality Sorting', () => {
     });
   });
 
-  describe('VitalityEthnologue2013', () => {
-    it('sorts by Ethnologue 2013 scores', () => {
+  describe('VitalityEthnologueFine', () => {
+    it('sorts by Ethnologue 2012 scores', () => {
       const langs = [
-        createLanguageWithVitality('en', 'English', { eth2013: VitalityEthnologueFine.National }), // 9
-        createLanguageWithVitality('fr', 'French', { eth2013: VitalityEthnologueFine.Threatened }), // 4
+        createLanguageWithVitality('en', 'English', { eth2012: VitalityEthnologueFine.National }), // 9
+        createLanguageWithVitality('fr', 'French', { eth2012: VitalityEthnologueFine.Threatened }), // 4
         createLanguageWithVitality('gd', 'Scottish Gaelic', {
-          eth2013: VitalityEthnologueFine.Shifting,
+          eth2012: VitalityEthnologueFine.Shifting,
         }), // 3
       ];
 
       const sortFn = getSortFunctionParameterized(
-        SortBy.VitalityEthnologue2013,
+        SortBy.VitalityEthnologueFine,
         SortBehavior.Normal,
       );
       const sorted = [...langs].sort(sortFn);
@@ -130,7 +130,7 @@ describe('Vitality Sorting', () => {
     });
   });
 
-  describe('VitalityEthnologue2025', () => {
+  describe('VitalityEthnologueCoarse', () => {
     it('sorts by Ethnologue 2025 scores', () => {
       const langs = [
         createLanguageWithVitality('en', 'English', {
@@ -143,7 +143,7 @@ describe('Vitality Sorting', () => {
       ];
 
       const sortFn = getSortFunctionParameterized(
-        SortBy.VitalityEthnologue2025,
+        SortBy.VitalityEthnologueCoarse,
         SortBehavior.Normal,
       );
       const sorted = [...langs].sort(sortFn);

@@ -6,7 +6,7 @@ import { VitalitySource } from './VitalityTypes';
 
 /**
  * Computes the vitality metascore for a language using the algorithm:
- * 1. If both Ethnologue 2013 & 2025 values exist, return the average
+ * 1. If both Ethnologue Fine & Coarse values exist, return the average
  * 2. If only one Ethnologue value exists, return that
  * 3. If neither Ethnologue value exists, use ISO scale
  */
@@ -17,10 +17,10 @@ export function getVitalityMetascore(lang: LanguageData): number | undefined {
     // Both Ethnologue values exist - return average
     return (ethFine + ethCoarse) / 2;
   } else if (ethFine != null) {
-    // Only Ethnologue 2013 exists
+    // Only Ethnologue Fine exists
     return ethFine;
   } else if (ethCoarse != null) {
-    // Only Ethnologue 2025 exists
+    // Only Ethnologue Coarse exists
     return ethCoarse;
   } else if (iso != null) {
     // Use ISO as fallback
@@ -33,7 +33,7 @@ export function getVitalityScore(source: VitalitySource, lang: LanguageData): nu
   switch (source) {
     case VitalitySource.ISO:
       return lang.vitality?.iso;
-    case VitalitySource.Eth2013:
+    case VitalitySource.Eth2012:
       return lang.vitality?.ethFine;
     case VitalitySource.Eth2025:
       return lang.vitality?.ethCoarse;
@@ -67,7 +67,7 @@ function computeLanguageFamilyVitality(lang: LanguageData, depth = 0): void {
 
   // Now compute vitality for this language
   const vitality = lang.vitality || {};
-  const { ethnologue2013, ethnologue2025 } = vitality;
+  const { ethnologue2012, ethnologue2025 } = vitality;
 
   // If it's declared by a source use that, otherwise use its children's max vitality
   if (lang.ISO.status != null) {
@@ -75,8 +75,8 @@ function computeLanguageFamilyVitality(lang: LanguageData, depth = 0): void {
   } else {
     vitality.iso = maxBy(descendants, (child) => child.vitality?.iso);
   }
-  if (ethnologue2013 != null) {
-    vitality.ethFine = ethnologue2013;
+  if (ethnologue2012 != null) {
+    vitality.ethFine = ethnologue2012;
   } else {
     vitality.ethFine = maxBy(descendants, (child) => child.vitality?.ethFine);
   }

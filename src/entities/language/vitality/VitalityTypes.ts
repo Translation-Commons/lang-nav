@@ -9,7 +9,7 @@ export enum VitalityBucket {
 export enum VitalitySource {
   Metascore = 'Metascore',
   ISO = 'ISO',
-  Eth2013 = 'Eth2013',
+  Eth2012 = 'Eth2012',
   Eth2025 = 'Eth2025',
 }
 

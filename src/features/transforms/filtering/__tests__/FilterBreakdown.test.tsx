@@ -48,7 +48,7 @@ describe('FilterBreakdown', () => {
       territoryFilter: '',
       writingSystemFilter: '',
       languageFilter: '',
-      vitalityEth2013: [],
+      vitalityEthFine: [],
       searchString: '',
     });
     const { container } = render(<FilterBreakdown objects={objects} />);
@@ -61,7 +61,7 @@ describe('FilterBreakdown', () => {
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
       languageFilter: 'ine', // Indo-European family
-      vitalityEth2013: [VitalityEthnologueFine.National],
+      vitalityEthFine: [VitalityEthnologueFine.National],
       searchString: 'spa',
     });
 
@@ -108,7 +108,7 @@ describe('FilterBreakdown', () => {
     const objects = getMockLanguages();
     setupMockParams({
       territoryFilter: 'US',
-      vitalityEth2013: [VitalityEthnologueFine.National],
+      vitalityEthFine: [VitalityEthnologueFine.National],
       searchString: 'spa',
     });
 

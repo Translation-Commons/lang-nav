@@ -1,13 +1,13 @@
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from './VitalityTypes';
 
 /**
- * Maps Ethnologue 2013 vitality levels to 0-9 scale
+ * Maps Ethnologue 2012 vitality levels to 0-9 scale
  */
-export function parseVitalityEthnologue2013(vitality: string): VitalityEthnologueFine | undefined {
+export function parseVitalityEthnologue2012(vitality: string): VitalityEthnologueFine | undefined {
   if (!vitality) return undefined;
 
   switch (vitality.toLowerCase()) {

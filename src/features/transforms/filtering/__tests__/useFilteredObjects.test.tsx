@@ -1,5 +1,5 @@
 import { renderHook } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach, Mock } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -70,8 +70,8 @@ describe('useFilteredObjects', () => {
     expect(filteredObjects.map((obj) => obj.ID)).toEqual(['ine', 'ita']);
   });
 
-  it('filters by Ethnologue 2013 vitality value', () => {
-    setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
+  it('filters by Ethnologue fine vitality value', () => {
+    setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
     const { filteredObjects } = getHookResult({});
     expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
   });
@@ -83,7 +83,7 @@ describe('useFilteredObjects', () => {
   });
 
   it('allows composite filters (territory + vitality)', () => {
-    setupMockParams({ territoryFilter: 'US', vitalityEth2013: [VitalityEthnologueFine.National] });
+    setupMockParams({ territoryFilter: 'US', vitalityEthFine: [VitalityEthnologueFine.National] });
     const { filteredObjects } = getHookResult({});
     expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
   });

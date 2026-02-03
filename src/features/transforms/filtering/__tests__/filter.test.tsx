@@ -51,7 +51,7 @@ describe('buildVitalityFilterFunction', () => {
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
-  it('filters by Ethnologue 2013', () => {
+  it('filters by Ethnologue Fine Vitality', () => {
     const filterMatch = buildVitalityFilterFunction([], [VitalityEthnologueFine.National], []);
     expect(filterMatch(mockLanguage)).toBe(true);
 
@@ -59,7 +59,7 @@ describe('buildVitalityFilterFunction', () => {
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
-  it('filters by Ethnologue 2025', () => {
+  it('filters by Ethnologue Coarse Vitality', () => {
     const filterMatch = buildVitalityFilterFunction(
       [],
       [],
