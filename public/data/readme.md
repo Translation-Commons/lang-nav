@@ -20,9 +20,9 @@ Additionally, there are folders containing multiple datasets, grouped by the ori
 
 - Censuses ([readme.md](/public/data/census/readme.md))
 - International Standards Organization (ISO) ([readme.md](/public/data/iso/readme.md))
-- Summer Language Institute (SIL) ([readme.md](/public/data/sil/readme.md)) 
-- Unicode Consortium & Common Locale Data Repository (CLDR) ([readme.md](/public/data/unicode/readme.md)) 
-- Wikipedia, Wikidata (Wiki) ([readme.md](/public/data/wiki/readme.md)) 
+- Summer Language Institute (SIL) ([readme.md](/public/data/sil/readme.md))
+- Unicode Consortium & Common Locale Data Repository (CLDR) ([readme.md](/public/data/unicode/readme.md))
+- Wikipedia, Wikidata (Wiki) ([readme.md](/public/data/wiki/readme.md))
 
 ## Census Data Sources
 
