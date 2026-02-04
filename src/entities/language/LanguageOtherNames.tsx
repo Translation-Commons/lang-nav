@@ -19,9 +19,12 @@ const LanguageOtherNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 };
 
 export function getLanguageOtherNames(lang: LanguageData): string[] {
-  const { nameDisplay, nameEndonym, Glottolog, ISO, CLDR } = lang;
+  const { nameCanonical, nameEndonym, Glottolog, ISO, CLDR, Ethnologue } = lang;
   return lang.names.filter(
-    (name) => ![nameDisplay, nameEndonym, Glottolog.name, ISO.name, CLDR.name].includes(name),
+    (name) =>
+      ![nameCanonical, nameEndonym, Glottolog.name, ISO.name, CLDR.name, Ethnologue.name].includes(
+        name,
+      ),
   );
 }
 

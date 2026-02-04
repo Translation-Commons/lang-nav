@@ -1,6 +1,7 @@
 // export function loadEthnologue2025Data(): LanguageDataLoader {
 
 import {
+  EthnologueDigitalSupport,
   EthnologueLanguageData,
   LanguageCode,
   LanguageData,
@@ -29,8 +30,8 @@ export async function loadEthnologueLanguages(): Promise<EthnologueLanguageData[
           name: parts[1],
           population: parsePopulationSize(parts[2]),
           vitality2012: undefined, // it comes from a different file
-          vitality2025: parts[3] !== '' ? parseVitalityEthnologue2025(parts[3]) : undefined,
-          digitalSupport: parts[4] !== '' ? Number.parseInt(parts[4]) : undefined,
+          vitality2025: parseVitalityEthnologue2025(parts[3]),
+          digitalSupport: parseDigitalSupport(parts[4]),
         };
       }),
     );
@@ -53,6 +54,26 @@ function parsePopulationSize(sizeStr: string): number | undefined {
   }
   console.debug(`Unknown population size string: ${sizeStr}`);
   return undefined;
+}
+
+function parseDigitalSupport(digitalSupport: string): EthnologueDigitalSupport | undefined {
+  if (!digitalSupport) return undefined;
+
+  switch (digitalSupport.trim().toLowerCase()) {
+    case 'thriving':
+      return EthnologueDigitalSupport.Thriving;
+    case 'vital':
+      return EthnologueDigitalSupport.Vital;
+    case 'ascending':
+      return EthnologueDigitalSupport.Ascending;
+    case 'emerging':
+      return EthnologueDigitalSupport.Emerging;
+    case 'still':
+      return EthnologueDigitalSupport.Still;
+    default:
+      console.debug(`Unknown digital support string: ${digitalSupport}`);
+      return undefined;
+  }
 }
 
 export function addEthnologueDataToLanguages(

@@ -1,7 +1,6 @@
-import { WifiHighIcon, WifiIcon, WifiLowIcon, WifiZeroIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
+import ActivityLevelDisplay, { ActivityLevel } from '@shared/ui/ActivityLevelDisplay';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -14,72 +13,22 @@ export interface LanguageVitalityCellProps {
   lang: LanguageData;
   src: VitalitySource;
 }
-
-export enum VitalityBucket {
-  Strong = 'Strong',
-  Medium = 'Medium',
-  Low = 'Low',
-  Extinct = 'Extinct',
-  Unknown = 'Unknown',
-}
-
-function getScoreBucket(score: number | undefined): VitalityBucket {
-  if (score == null) return VitalityBucket.Unknown;
-  if (score >= 7) return VitalityBucket.Strong;
-  if (score >= 4) return VitalityBucket.Medium;
-  if (score >= 1) return VitalityBucket.Low;
-  return VitalityBucket.Extinct;
-}
-
-const BucketIcon: React.FC<{ bucket: VitalityBucket }> = ({ bucket }) => {
-  switch (bucket) {
-    case VitalityBucket.Strong:
-      return <WifiIcon size="1em" />;
-    case VitalityBucket.Medium:
-      return <WifiHighIcon size="1em" />;
-    case VitalityBucket.Low:
-      return <WifiLowIcon size="1em" />;
-    case VitalityBucket.Extinct:
-      return <WifiZeroIcon size="1em" />;
-    case VitalityBucket.Unknown:
-    default:
-      return null;
-  }
-};
-
-function bucketColor(bucket: VitalityBucket): string {
-  switch (bucket) {
-    case VitalityBucket.Strong:
-      return 'var(--color-text-green)';
-    case VitalityBucket.Medium:
-      return 'var(--color-text-yellow)';
-    case VitalityBucket.Low:
-      return 'var(--color-text-orange)';
-    case VitalityBucket.Extinct:
-      return 'var(--color-text-red)';
-    case VitalityBucket.Unknown:
-      return 'var(--color-text-secondary)';
-  }
-}
-
 const LanguageVitalityCell: React.FC<LanguageVitalityCellProps> = ({ lang, src }) => {
-  const bucket = getScoreBucket(getVitalityScore(src, lang));
-
   return (
-    <Hoverable hoverContent={<VitalityExplanation source={src} lang={lang} />}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.25em',
-          color: bucketColor(bucket),
-        }}
-      >
-        <BucketIcon bucket={bucket} />
-        <span>{getVitalityLabel(lang, src) ?? '—'}</span>
-      </div>
-    </Hoverable>
+    <ActivityLevelDisplay
+      level={getActivityLevel(getVitalityScore(src, lang))}
+      label={getVitalityLabel(lang, src) ?? '—'}
+      description={<VitalityExplanation source={src} lang={lang} />}
+    />
   );
 };
+
+function getActivityLevel(score: number | undefined): ActivityLevel {
+  if (score == null) return ActivityLevel.Unknown;
+  if (score >= 7) return ActivityLevel.High;
+  if (score >= 4) return ActivityLevel.Medium;
+  if (score >= 1) return ActivityLevel.Low;
+  return ActivityLevel.Zero;
+}
 
 export default LanguageVitalityCell;

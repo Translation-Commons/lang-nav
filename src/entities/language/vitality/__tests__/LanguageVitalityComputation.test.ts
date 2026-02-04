@@ -122,10 +122,12 @@ describe('computeVitalityMetascore', () => {
   });
 
   it('needs to be precomputed to have a metascore', () => {
-    const lang = generateLanguage({
-      ethFine: VitalityEthnologueFine.Developing, // 5
-      ethCoarse: VitalityEthnologueCoarse.Stable, // 6
-    });
+    const lang = generateLanguage({}); // Computed vitality empty
+    lang.Ethnologue = {
+      // but have input data
+      vitality2012: VitalityEthnologueFine.Developing, // 5
+      vitality2025: VitalityEthnologueCoarse.Stable, // 6
+    };
     const metascoreBefore = getVitalityMetascore(lang);
     expect(lang.vitality?.meta).toBeUndefined();
     expect(metascoreBefore).toBeUndefined();

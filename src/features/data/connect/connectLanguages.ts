@@ -44,5 +44,10 @@ export function groupLanguagesBySource(languages: LanguageDictionary): Languages
         cldrLangs[code] = lang;
       return cldrLangs;
     }, {}),
+    Ethnologue: Object.values(languages).reduce<LanguageDictionary>((ethnoLangs, lang) => {
+      const code = lang.Ethnologue.code;
+      if (code != null) ethnoLangs[code] = lang;
+      return ethnoLangs;
+    }, {}),
   };
 }

@@ -72,10 +72,19 @@ export type LanguageVitality = {
   ethCoarse?: VitalityEthnologueCoarse; // Computed from other factors
 };
 
+export enum EthnologueDigitalSupport {
+  Thriving = 5,
+  Vital = 4,
+  Ascending = 3,
+  Emerging = 2,
+  Still = 1,
+}
+
 export type EthnologueLanguageData = LanguageDataInSource & {
   population?: number;
   vitality2012?: VitalityEthnologueFine;
   vitality2025?: VitalityEthnologueCoarse;
+  digitalSupport?: EthnologueDigitalSupport;
 };
 
 export interface LanguageData extends ObjectBase {
@@ -93,7 +102,6 @@ export interface LanguageData extends ObjectBase {
   nameFrench?: string;
 
   vitality?: LanguageVitality;
-  digitalSupport?: string;
   viabilityConfidence?: string;
   viabilityExplanation?: string;
 

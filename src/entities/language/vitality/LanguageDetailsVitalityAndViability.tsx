@@ -10,19 +10,14 @@ import Pill from '@shared/ui/Pill';
 
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
 import ObjectWikipediaInfo from '../../ui/ObjectWikipediaInfo';
+import LanguageDigitalSupportCell from '../LanguageDigitalSupportCell';
 import { LanguageData } from '../LanguageTypes';
 
 import LanguageVitalityMeter from './VitalityMeter';
 import { VitalitySource } from './VitalityTypes';
 
 const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const {
-    viabilityConfidence,
-    viabilityExplanation,
-    digitalSupport,
-    vitality = {},
-    Ethnologue,
-  } = lang;
+  const { viabilityConfidence, viabilityExplanation, vitality = {}, Ethnologue } = lang;
 
   return (
     <DetailsSection title="Vitality & Viability">
@@ -58,7 +53,7 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
           </LinkButton>
         }
       >
-        {digitalSupport}
+        <LanguageDigitalSupportCell lang={lang} />
       </DetailsField>
       <DetailsField title="CLDR Coverage">
         <div style={{ display: 'inline-flex', flexDirection: 'row', gap: '0.5em' }}>
