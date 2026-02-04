@@ -112,6 +112,7 @@ describe('LanguagePathsReport', () => {
           break;
         case LanguageSource.UNESCO: // No connections from these sources, all languages are orphans
         case LanguageSource.BCP:
+        case LanguageSource.Ethnologue:
           expect(orphans.join(' ')).toEqual('sjn dori0123 qya elv');
           expect(longestPaths).toEqual([]);
           expect(cycles).toEqual([]); // there are no cycles

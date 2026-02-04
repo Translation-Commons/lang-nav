@@ -27,8 +27,8 @@ function createLanguageWithVitality(
   const lang = getBaseLanguageData(code, name);
   lang.vitality = {};
   if (vitality.iso) lang.vitality.iso = vitality.iso;
-  if (vitality.eth2012) lang.vitality.ethnologue2012 = vitality.eth2012;
-  if (vitality.eth2025) lang.vitality.ethnologue2025 = vitality.eth2025;
+  if (vitality.eth2012) lang.Ethnologue.vitality2012 = vitality.eth2012;
+  if (vitality.eth2025) lang.Ethnologue.vitality2025 = vitality.eth2025;
   return lang;
 }
 
@@ -136,7 +136,9 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('en', 'English', {
           eth2025: VitalityEthnologueCoarse.Institutional,
         }), // 9
-        createLanguageWithVitality('fr', 'French', { eth2025: VitalityEthnologueCoarse.Stable }), // 6
+        createLanguageWithVitality('fr', 'French', {
+          eth2025: VitalityEthnologueCoarse.Stable,
+        }), // 6
         createLanguageWithVitality('gd', 'Scottish Gaelic', {
           eth2025: VitalityEthnologueCoarse.Endangered,
         }), // 3

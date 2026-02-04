@@ -298,6 +298,7 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
     UNESCO: {},
     Glottolog: {},
     CLDR: {},
+    Ethnologue: {},
   };
   const territories: Record<string, TerritoryData> = objectsArray
     .filter((obj) => obj.type === ObjectType.Territory)

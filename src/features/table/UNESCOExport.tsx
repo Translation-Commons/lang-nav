@@ -5,6 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageModality } from '@entities/language/LanguageModality';
+import { EthnologueDigitalSupport } from '@entities/language/LanguageTypes';
 import { LocaleData, ObjectData, OfficialStatus, TerritoryData } from '@entities/types/DataTypes';
 
 // Customized for UNESCO use
@@ -98,9 +99,11 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
     '', // digital_spaces
 
     // Universal Acceptance: Is this language (and its script, if applicable) supported and correctly displayed in digital systems such as websites, domain names, URLs, email addresses, and online applications?
-    lang.digitalSupport === 'Thriving' || lang.digitalSupport === 'Vital', // yes
-    lang.digitalSupport === 'Ascending' || lang.digitalSupport === 'Emerging', // partially
-    lang.digitalSupport === 'Still', // no
+    lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Thriving ||
+      lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Vital, // yes
+    lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Ascending ||
+      lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Emerging, // partially
+    lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Still, // no
     '', // not_sure
 
     //// Language Users - STEP 3

@@ -1,4 +1,18 @@
-# Census Guide
+# Censuses
+
+We have various census and population survey data from around the world. This folder contains the data files as well as this guide to help you add new census data.
+
+## Organization
+
+- `official/`: Official government census data from various countries.
+- `unofficial/`: Unofficial or third-party census data that may not be from a government source.
+- `data.un.org/`: Census data sourced from the United Nations data repository at <https://data.un.org/>.
+
+Each folder has a `censusList.txt` file that lists the census data files to be imported.
+
+Additionally there is a file `misc_pop_records.tsv` to capture individual records that don't have the same level of data as a full census but are still useful to have.
+
+# Adding new census data
 
 This is a guide to add language data from a census.
 

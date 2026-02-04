@@ -67,7 +67,7 @@ function computeLanguageFamilyVitality(lang: LanguageData, depth = 0): void {
 
   // Now compute vitality for this language
   const vitality = lang.vitality || {};
-  const { ethnologue2012, ethnologue2025 } = vitality;
+  const Ethnologue = lang.Ethnologue;
 
   // If it's declared by a source use that, otherwise use its children's max vitality
   if (lang.ISO.status != null) {
@@ -75,13 +75,13 @@ function computeLanguageFamilyVitality(lang: LanguageData, depth = 0): void {
   } else {
     vitality.iso = maxBy(descendants, (child) => child.vitality?.iso);
   }
-  if (ethnologue2012 != null) {
-    vitality.ethFine = ethnologue2012;
+  if (Ethnologue.vitality2012 != null) {
+    vitality.ethFine = Ethnologue.vitality2012;
   } else {
     vitality.ethFine = maxBy(descendants, (child) => child.vitality?.ethFine);
   }
-  if (ethnologue2025 != null) {
-    vitality.ethCoarse = ethnologue2025;
+  if (Ethnologue.vitality2025 != null) {
+    vitality.ethCoarse = Ethnologue.vitality2025;
   } else {
     vitality.ethCoarse = maxBy(descendants, (child) => child.vitality?.ethCoarse);
   }

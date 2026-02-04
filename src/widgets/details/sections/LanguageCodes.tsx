@@ -15,7 +15,7 @@ import LinkButton from '@shared/ui/LinkButton';
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 
 const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { Glottolog, ISO, CLDR } = lang;
+  const { Glottolog, ISO, CLDR, Ethnologue } = lang;
 
   return (
     <DetailsSection title="Language Codes">
@@ -91,9 +91,11 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       </DetailsField>
       {ISO.code && (
         <DetailsField title="Other external links">
-          <LinkButton href={`https://www.ethnologue.com/language/${ISO.code}`}>
-            Ethnologue
-          </LinkButton>
+          {Ethnologue.code && ( // subset of ISO code
+            <LinkButton href={`https://www.ethnologue.com/language/${Ethnologue.code}`}>
+              Ethnologue
+            </LinkButton>
+          )}
           <LinkButton href={`https://en.wikipedia.org/wiki/ISO_639:${ISO.code}`}>
             Wikipedia
           </LinkButton>

@@ -53,7 +53,7 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
             </LinkButton>
           </div>
 
-          {lang.vitality?.ethnologue2012 == null ? (
+          {lang.Ethnologue.vitality2012 == null ? (
             <div>
               The value is derived from languages contained by this one, not directly from
               Ethnologue.
@@ -77,7 +77,7 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
             Scale. To make it comparable to other vitality scores, it has been normalized to a score
             of {ethCoarse} out of 9.
           </div>
-          {lang.vitality?.ethnologue2025 == null ? (
+          {lang.Ethnologue.vitality2025 == null ? (
             <div>
               The value is derived from languages contained by this one, not directly from
               Ethnologue.
@@ -116,7 +116,7 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
                 methodology
               </LinkButton>
             </div>
-            {lang.vitality?.ethnologue2012 == null && (
+            {lang.Ethnologue.vitality2012 == null && (
               <div>
                 The value is derived wholly or partially from languages contained by this one, not
                 directly from Ethnologue.
