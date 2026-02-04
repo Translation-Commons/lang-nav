@@ -57,8 +57,8 @@ export function getNormalSortDirection(sortBy: SortBy): SortDirection {
     case SortBy.CountOfCensuses:
     case SortBy.VitalityMetascore:
     case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueFine:
+    case SortBy.VitalityEthnologueCoarse:
     case SortBy.Area:
       return SortDirection.Descending; // High to Low
   }

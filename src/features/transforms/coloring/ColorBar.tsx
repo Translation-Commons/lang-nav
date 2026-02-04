@@ -122,7 +122,7 @@ function getTicks(
         position: getNormalizedValue(value),
         label: getLanguageISOStatusLabel(value),
       }));
-    case SortBy.VitalityEthnologue2013:
+    case SortBy.VitalityEthnologueFine:
       return pickDistributedTicksFromRange(
         Object.values(VitalityEthnologueFine).filter((value) => typeof value === 'number'),
         numberOfTicks,
@@ -130,7 +130,7 @@ function getTicks(
         position: getNormalizedValue(value),
         label: getVitalityEthnologueFineLabel(value),
       }));
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueCoarse:
       return pickDistributedTicksFromRange(
         Object.values(VitalityEthnologueCoarse).filter((value) => typeof value === 'number'),
         numberOfTicks,

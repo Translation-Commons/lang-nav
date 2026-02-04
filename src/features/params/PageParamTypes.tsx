@@ -84,8 +84,8 @@ export enum PageParamKey {
   writingSystemFilter = 'writingSystemFilter',
   view = 'view',
   isoStatus = 'isoStatus',
-  vitalityEth2013 = 'vitalityEth2013',
-  vitalityEth2025 = 'vitalityEth2025',
+  vitalityEthFine = 'vitalityEthFine',
+  vitalityEthCoarse = 'vitalityEthCoarse',
 }
 
 export type PageParams = {
@@ -111,8 +111,8 @@ export type PageParams = {
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
-  vitalityEth2013: VitalityEthnologueFine[];
-  vitalityEth2025: VitalityEthnologueCoarse[];
+  vitalityEthFine: VitalityEthnologueFine[];
+  vitalityEthCoarse: VitalityEthnologueCoarse[];
   writingSystemFilter: string;
 };
 
@@ -139,7 +139,7 @@ export type PageParamsOptional = {
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;
-  vitalityEth2013?: VitalityEthnologueFine[];
-  vitalityEth2025?: VitalityEthnologueCoarse[];
+  vitalityEthFine?: VitalityEthnologueFine[];
+  vitalityEthCoarse?: VitalityEthnologueCoarse[];
   writingSystemFilter?: string;
 };

@@ -6,9 +6,9 @@ import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
+  LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
-  LanguageISOStatus,
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -67,11 +67,11 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.isoStatus:
         params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);
         break;
-      case PageParamKey.vitalityEth2013:
-        params.vitalityEth2013 = parseNumericEnumArray(value, VitalityEthnologueFine);
+      case PageParamKey.vitalityEthFine:
+        params.vitalityEthFine = parseNumericEnumArray(value, VitalityEthnologueFine);
         break;
-      case PageParamKey.vitalityEth2025:
-        params.vitalityEth2025 = parseNumericEnumArray(value, VitalityEthnologueCoarse);
+      case PageParamKey.vitalityEthCoarse:
+        params.vitalityEthCoarse = parseNumericEnumArray(value, VitalityEthnologueCoarse);
         break;
 
       // Object mapping (columns)

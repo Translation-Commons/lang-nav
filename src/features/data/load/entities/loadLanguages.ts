@@ -5,7 +5,7 @@ import {
   LanguageDictionary,
 } from '@entities/language/LanguageTypes';
 import {
-  parseVitalityEthnologue2013,
+  parseVitalityEthnologue2012,
   parseVitalityEthnologue2025,
 } from '@entities/language/vitality/VitalityParsing';
 
@@ -46,7 +46,7 @@ function parseLanguageLine(line: string): LanguageData {
     names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
     vitality: {
-      ethnologue2013: parseVitalityEthnologue2013(parts[6]),
+      ethnologue2012: parseVitalityEthnologue2012(parts[6]),
       ethnologue2025: parseVitalityEthnologue2025(parts[7]),
     },
     digitalSupport: parts[8] || undefined,

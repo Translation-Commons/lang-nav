@@ -19,8 +19,8 @@ function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
       return ColorGradient.DivergingBlueToOrange;
     case SortBy.VitalityMetascore:
     case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologue2013:
-    case SortBy.VitalityEthnologue2025:
+    case SortBy.VitalityEthnologueFine:
+    case SortBy.VitalityEthnologueCoarse:
     case SortBy.Literacy:
       // "Bad" values are red, "Good" values are green
       return ColorGradient.StopLightRedToGreen;

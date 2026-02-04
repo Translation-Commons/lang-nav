@@ -210,7 +210,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the vitality filters"
                 onClick={() =>
-                  updatePageParams({ vitalityEth2025: [], isoStatus: [], vitalityEth2013: [] })
+                  updatePageParams({ vitalityEthCoarse: [], isoStatus: [], vitalityEthFine: [] })
                 }
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >

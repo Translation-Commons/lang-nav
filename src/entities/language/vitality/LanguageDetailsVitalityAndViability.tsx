@@ -30,10 +30,10 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
           (lang.ISO.status != null ? <Pill>ISO</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
-      <DetailsField title="Ethnologue (2013)">
-        <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2013} />{' '}
+      <DetailsField title="Ethnologue (2012)">
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2012} />{' '}
         {vitality.ethFine != null &&
-          (vitality.ethnologue2013 != null ? <Pill>Ethnologue 2013</Pill> : <Pill>Derived</Pill>)}
+          (vitality.ethnologue2012 != null ? <Pill>Ethnologue 2012</Pill> : <Pill>Derived</Pill>)}
       </DetailsField>
 
       <DetailsField title="Ethnologue (2025)">

@@ -16,8 +16,8 @@ import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFil
 import TerritoryScopeSelector from '@features/transforms/filtering/TerritoryScopeSelector';
 import {
   LanguageISOStatusSelector,
-  VitalityEth2013Selector,
-  VitalityEth2025Selector,
+  VitalityEthCoarseSelector,
+  VitalityEthFineSelector,
 } from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
 import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
@@ -61,8 +61,8 @@ const OptionsPanel: React.FC = () => {
           <LanguageModalitySelector />
           <TerritoryScopeSelector />
           <LanguageISOStatusSelector />
-          <VitalityEth2013Selector />
-          <VitalityEth2025Selector />
+          <VitalityEthFineSelector />
+          <VitalityEthCoarseSelector />
         </OptionsPanelSection>
 
         <OptionsPanelSection title="View" optionsName="view options">

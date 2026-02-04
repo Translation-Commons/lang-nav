@@ -58,8 +58,8 @@ const GLOBAL_DEFAULTS: PageParams = {
   territoryFilter: '',
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   view: View.CardList,
-  vitalityEth2013: [],
-  vitalityEth2025: [],
+  vitalityEthFine: [],
+  vitalityEthCoarse: [],
   writingSystemFilter: '',
 };
 

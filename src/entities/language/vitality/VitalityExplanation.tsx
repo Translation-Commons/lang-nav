@@ -7,7 +7,9 @@ import { LanguageData } from '../LanguageTypes';
 
 import {
   getLanguageISOStatusLabel,
+  getVitalityEthnologueCoarseDescription,
   getVitalityEthnologueCoarseLabel,
+  getVitalityEthnologueFineDescription,
   getVitalityEthnologueFineLabel,
 } from './VitalityStrings';
 import { VitalitySource } from './VitalityTypes';
@@ -34,23 +36,30 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
         </div>
       );
 
-    case VitalitySource.Eth2013:
+    case VitalitySource.Eth2012:
       if (ethFine == null) return <Deemphasized>No vitality data available</Deemphasized>;
       return (
         <div>
           <div>
-            Ethnologue 2013 Vitality: {getVitalityEthnologueFineLabel(ethFine)}
+            <strong>{getVitalityEthnologueFineLabel(ethFine)}</strong>{' '}
+            {getVitalityEthnologueFineDescription(ethFine)}
+          </div>
+          <div>
+            This value is based on the EGIDS (Extended Graded Intergenerational Disruption Scale).
+            To make it comparable to other vitality scores, it has been normalized to a score of{' '}
+            {ethFine} out of 9.
             <LinkButton href="https://www.ethnologue.com/methodology/#language-status">
-              methodology
+              ethnologue methodology
             </LinkButton>
           </div>
-          <div>Normalized to a score of {ethFine} out of 9.</div>
 
-          {lang.vitality?.ethnologue2013 == null && (
+          {lang.vitality?.ethnologue2012 == null ? (
             <div>
               The value is derived from languages contained by this one, not directly from
               Ethnologue.
             </div>
+          ) : (
+            <div>The value comes directly from Ethnologue, downloaded in 2012.</div>
           )}
         </div>
       );
@@ -59,13 +68,22 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
       if (ethCoarse == null) return <Deemphasized>No vitality data available</Deemphasized>;
       return (
         <div>
-          <div>Ethnologue 2025 Vitality: {getVitalityEthnologueCoarseLabel(ethCoarse)}</div>
-          <div>Normalized to a score of {ethCoarse} out of 9.</div>
-          {lang.vitality?.ethnologue2025 == null && (
+          <div>
+            <strong>{getVitalityEthnologueCoarseLabel(ethCoarse)}</strong>{' '}
+            {getVitalityEthnologueCoarseDescription(ethCoarse)}
+          </div>
+          <div>
+            This value is based on a simplified version of the Graded Intergenerational Disruption
+            Scale. To make it comparable to other vitality scores, it has been normalized to a score
+            of {ethCoarse} out of 9.
+          </div>
+          {lang.vitality?.ethnologue2025 == null ? (
             <div>
               The value is derived from languages contained by this one, not directly from
               Ethnologue.
             </div>
+          ) : (
+            <div>The value comes directly from Ethnologue, downloaded in 2025.</div>
           )}
         </div>
       );
@@ -78,19 +96,27 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
         return (
           <div>
             <div>
-              Ethnologue changed the methodology of its vitality scores. So we convert them to a
-              normalized score and averaged the data from 2013 and 2025. Average: {meta.toFixed(1)}.
+              Average of 2 Ethnologue vitality estimates to score: {meta.toFixed(1)}/9.
+              <div style={{ marginLeft: '2em' }}>
+                <strong>{getVitalityEthnologueFineLabel(ethFine)}</strong> ({ethFine}){' '}
+                {getVitalityEthnologueFineDescription(ethFine)}
+              </div>
+              <div style={{ marginLeft: '2em' }}>
+                <strong>{getVitalityEthnologueCoarseLabel(ethCoarse)}</strong> ({ethCoarse}){' '}
+                {getVitalityEthnologueCoarseDescription(ethCoarse)}
+              </div>
             </div>
-            <div style={{ marginLeft: '2em' }}>
-              2013: {getVitalityEthnologueFineLabel(ethFine)} ({ethFine}){' '}
+            <div>
+              In 2012 Ethnologue provided data on a 9-point EGIDS (Extended Graded Intergenerational
+              Disruption Scale) scale, but by 2025 the publicly available data was limited to 4
+              levels. Since the language coverage between years is also not consistent, we instead
+              combined both estimates by converting them to a normalized score and averaged the data
+              from 2012 and 2025.
               <LinkButton href="https://www.ethnologue.com/methodology/#language-status">
                 methodology
               </LinkButton>
             </div>
-            <div style={{ marginLeft: '2em' }}>
-              2025: {getVitalityEthnologueCoarseLabel(ethCoarse)} ({ethCoarse})
-            </div>
-            {lang.vitality?.ethnologue2013 == null && (
+            {lang.vitality?.ethnologue2012 == null && (
               <div>
                 The value is derived wholly or partially from languages contained by this one, not
                 directly from Ethnologue.
@@ -102,15 +128,15 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
       if (ethFine != null) {
         return (
           <div>
-            <div>There is no 2025 value from Ethnologue but there is a value from 2013:</div>
-            <VitalityExplanation source={VitalitySource.Eth2013} lang={lang} />
+            <div>There is no 2025 value from Ethnologue but there is a value from 2012:</div>
+            <VitalityExplanation source={VitalitySource.Eth2012} lang={lang} />
           </div>
         );
       }
       if (ethCoarse != null) {
         return (
           <div>
-            <div>There is no 2013 value from Ethnologue but there is a value from 2025:</div>
+            <div>There is no 2012 value from Ethnologue but there is a value from 2025:</div>
             <VitalityExplanation source={VitalitySource.Eth2025} lang={lang} />
           </div>
         );

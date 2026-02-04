@@ -4,9 +4,11 @@ import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
 import {
-  getVitalityEthnologueCoarseLabel,
-  getVitalityEthnologueFineLabel,
   getLanguageISOStatusLabel,
+  getVitalityEthnologueCoarseDescription,
+  getVitalityEthnologueCoarseLabel,
+  getVitalityEthnologueFineDescription,
+  getVitalityEthnologueFineLabel,
 } from '@entities/language/vitality/VitalityStrings';
 import {
   LanguageISOStatus,
@@ -34,42 +36,44 @@ export const LanguageISOStatusSelector: React.FC = () => {
   );
 };
 
-export const VitalityEth2013Selector: React.FC = () => {
-  const { vitalityEth2013, updatePageParams } = usePageParams();
+export const VitalityEthFineSelector: React.FC = () => {
+  const { vitalityEthFine, updatePageParams } = usePageParams();
 
   return (
     <Selector
-      selectorLabel="Vitality Eth 2013"
-      selectorDescription="Filter languages by their Ethnologue 2013 vitality classification"
+      selectorLabel="Vitality Eth (Fine)"
+      selectorDescription="Filter languages by their Extended Graded Intergenerational Disruption Scale (EGIDS) vitality classification sourced from Ethnologue in 2012"
       labelWhenEmpty="Any"
       options={Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityEthnologueFine) =>
-        vitalityEth2013.includes(value)
-          ? updatePageParams({ vitalityEth2013: vitalityEth2013.filter((v) => v !== value) })
-          : updatePageParams({ vitalityEth2013: [...vitalityEth2013, value] })
+        vitalityEthFine.includes(value)
+          ? updatePageParams({ vitalityEthFine: vitalityEthFine.filter((v) => v !== value) })
+          : updatePageParams({ vitalityEthFine: [...vitalityEthFine, value] })
       }
-      selected={vitalityEth2013}
+      selected={vitalityEthFine}
       getOptionLabel={getVitalityEthnologueFineLabel}
+      getOptionDescription={getVitalityEthnologueFineDescription}
     />
   );
 };
 
-export const VitalityEth2025Selector: React.FC = () => {
-  const { vitalityEth2025, updatePageParams } = usePageParams();
+export const VitalityEthCoarseSelector: React.FC = () => {
+  const { vitalityEthCoarse, updatePageParams } = usePageParams();
 
   return (
     <Selector
-      selectorLabel="Vitality Eth 2025"
-      selectorDescription="Filter languages by their Ethnologue 2025 vitality classification"
+      selectorLabel="Vitality Eth (Coarse)"
+      selectorDescription="Filter languages by their Ethnologue 2025 vitality classification, a coarser scale than the 2012 EGIDS"
       labelWhenEmpty="Any"
       options={Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number')}
       onChange={(value: VitalityEthnologueCoarse) =>
-        vitalityEth2025.includes(value)
-          ? updatePageParams({ vitalityEth2025: vitalityEth2025.filter((v) => v !== value) })
-          : updatePageParams({ vitalityEth2025: [...vitalityEth2025, value] })
+        vitalityEthCoarse.includes(value)
+          ? updatePageParams({ vitalityEthCoarse: vitalityEthCoarse.filter((v) => v !== value) })
+          : updatePageParams({ vitalityEthCoarse: [...vitalityEthCoarse, value] })
       }
-      selected={vitalityEth2025}
+      selected={vitalityEthCoarse}
       getOptionLabel={getVitalityEthnologueCoarseLabel}
+      getOptionDescription={getVitalityEthnologueCoarseDescription}
     />
   );
 };

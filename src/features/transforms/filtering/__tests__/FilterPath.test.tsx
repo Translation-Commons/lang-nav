@@ -68,17 +68,17 @@ describe('FilterPath', () => {
     expect(screen.getByText(/Living/)).toBeInTheDocument();
   });
 
-  it('displays Ethnologue 2013 filter when selected', () => {
-    setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
+  it('displays Ethnologue fine vitality filter when selected', () => {
+    setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
     render(<FilterPath />);
-    expect(screen.getByText(/Ethnologue 2013:/)).toBeInTheDocument();
+    expect(screen.getByText(/Ethnologue Fine:/)).toBeInTheDocument();
     expect(screen.getByText(/National/)).toBeInTheDocument();
   });
 
-  it('displays Ethnologue 2025 filter when selected', () => {
-    setupMockParams({ vitalityEth2025: [VitalityEthnologueCoarse.Stable] });
+  it('displays Ethnologue coarse filter when selected', () => {
+    setupMockParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Stable] });
     render(<FilterPath />);
-    expect(screen.getByText(/Ethnologue 2025:/)).toBeInTheDocument();
+    expect(screen.getByText(/Ethnologue Coarse:/)).toBeInTheDocument();
     expect(screen.getByText(/Stable/)).toBeInTheDocument();
   });
 
@@ -89,32 +89,32 @@ describe('FilterPath', () => {
     expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
   });
 
-  it('clears Ethnologue 2013 filter when X button is clicked', () => {
-    setupMockParams({ vitalityEth2013: [VitalityEthnologueFine.National] });
+  it('clears Ethnologue fine vitality filter when X button is clicked', () => {
+    setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
     render(<FilterPath />);
     clickClearButton();
-    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEth2013: [] });
+    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEthFine: [] });
   });
 
-  it('clears Ethnologue 2025 filter when X button is clicked', () => {
-    setupMockParams({ vitalityEth2025: [VitalityEthnologueCoarse.Stable] });
+  it('clears Ethnologue coarse filter when X button is clicked', () => {
+    setupMockParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Stable] });
     render(<FilterPath />);
     clickClearButton();
-    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEth2025: [] });
+    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEthCoarse: [] });
   });
 
   it('displays multiple vitality filters correctly', () => {
     setupMockParams({
       isoStatus: [LanguageISOStatus.Living],
-      vitalityEth2013: [VitalityEthnologueFine.National],
-      vitalityEth2025: [VitalityEthnologueCoarse.Stable],
+      vitalityEthFine: [VitalityEthnologueFine.National],
+      vitalityEthCoarse: [VitalityEthnologueCoarse.Stable],
     });
     render(<FilterPath />);
     expect(screen.getByText(/ISO Status:/)).toBeInTheDocument();
     expect(screen.getByText(/Living/)).toBeInTheDocument();
-    expect(screen.getByText(/Ethnologue 2013:/)).toBeInTheDocument();
+    expect(screen.getByText(/Ethnologue Fine:/)).toBeInTheDocument();
     expect(screen.getByText(/National/)).toBeInTheDocument();
-    expect(screen.getByText(/Ethnologue 2025:/)).toBeInTheDocument();
+    expect(screen.getByText(/Ethnologue Coarse:/)).toBeInTheDocument();
     expect(screen.getByText(/Stable/)).toBeInTheDocument();
   });
 
@@ -122,12 +122,6 @@ describe('FilterPath', () => {
     setupMockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
     render(<FilterPath />);
     expect(screen.getByText(/Living, Constructed/)).toBeInTheDocument();
-  });
-
-  it('does not display vitality filters in details view', () => {
-    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
-    render(<FilterPath />);
-    expect(screen.queryByText(/ISO Vitality:/)).not.toBeInTheDocument();
   });
 
   it('displays and clears territory filter', () => {
