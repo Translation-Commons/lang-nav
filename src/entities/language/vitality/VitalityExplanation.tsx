@@ -73,9 +73,9 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
             {getVitalityEthnologueCoarseDescription(ethCoarse)}
           </div>
           <div>
-            This value is based on a simplified of the Graded Intergenerational Disruption Scale. To
-            make it comparable to other vitality scores, it has been normalized to a score of{' '}
-            {ethCoarse} out of 9.
+            This value is based on a simplified version of the Graded Intergenerational Disruption
+            Scale. To make it comparable to other vitality scores, it has been normalized to a score
+            of {ethCoarse} out of 9.
           </div>
           {lang.vitality?.ethnologue2025 == null ? (
             <div>

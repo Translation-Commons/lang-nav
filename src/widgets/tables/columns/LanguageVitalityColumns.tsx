@@ -25,7 +25,7 @@ export const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Vitality: Ethnologue Fine',
     description:
-      'Vitality as score don the Extended Graded Intergenerational Disruption Scale directly from or derived from Ethnologue in 2012',
+      'Vitality as scored on the Extended Graded Intergenerational Disruption Scale directly from or derived from Ethnologue in 2012',
     render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Eth2012} />,
     sortParam: SortBy.VitalityEthnologueFine,
     valueType: TableValueType.Enum,
@@ -35,7 +35,7 @@ export const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
   {
     key: 'Vitality: Ethnologue Coarse',
     description:
-      'Vitality as score on the Extended Graded Intergenerational Disruption Scale, grouped into coarse categories directly from or derived from Ethnologue in 2025',
+      'Vitality as scored on the Extended Graded Intergenerational Disruption Scale, grouped into coarse categories directly from or derived from Ethnologue in 2025',
     render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Eth2025} />,
     sortParam: SortBy.VitalityEthnologueCoarse,
     valueType: TableValueType.Enum,
