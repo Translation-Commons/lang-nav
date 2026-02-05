@@ -114,7 +114,7 @@ function clearContextDependentParams(
       } else if (prevOrDefault.objectType === ObjectType.Territory) {
         next.set('territoryFilter', oldSearchString);
       } else if (prevOrDefault.objectType === ObjectType.WritingSystem) {
-        next.set('writingSystem', oldSearchString);
+        next.set('writingSystemFilter', oldSearchString);
       }
     }
   }
