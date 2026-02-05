@@ -12,7 +12,7 @@ import CellPopulation from '@shared/containers/CellPopulation';
 import { groupBy, sumBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
-import { LanguageData } from '../LanguageTypes';
+import { LanguageData } from './LanguageTypes';
 
 const LanguagePopulationFromLocales: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   if (!lang.populationFromLocales) return null;

@@ -32,9 +32,9 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LanguageCodeColumns } from './columns/LanguageCodeColumns';
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
-import LanguageNameColumns from './columns/LanguageNameColumns';
-import LanguagePopulationColumns from './columns/LanguagePopulationColumns';
-import LanguageVitalityColumns from './columns/LanguageVitalityColumns';
+import { LanguageNameColumns } from './columns/LanguageNameColumns';
+import { LanguagePopulationColumns } from './columns/LanguagePopulationColumns';
+import { LanguageVitalityColumns } from './columns/LanguageVitalityColumns';
 
 const LanguageTable: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
@@ -103,7 +103,7 @@ const LanguageTable: React.FC = () => {
         render: (lang) => (
           <HoverableEnumeration
             items={lang.childLanguages
-              .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+              .sort((a, b) => (b.populationRough ?? 0) - (a.populationRough ?? 0))
               .map((lang) => lang.nameDisplay)}
           />
         ),

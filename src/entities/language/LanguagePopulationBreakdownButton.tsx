@@ -4,10 +4,9 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import { PopulationSourceCategory } from '@entities/types/DataTypes';
 
-import { LanguageData } from '../LanguageTypes';
-
 import { LanguagePopulationBreakdownFromDescendants } from './LanguagePopulationFromDescendants';
 import { LanguagePopulationBreakdownFromLocales } from './LanguagePopulationFromLocales';
+import { LanguageData } from './LanguageTypes';
 
 const LanguagePopulationBreakdownButton: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { populationEstimate, populationEstimateSource } = lang;

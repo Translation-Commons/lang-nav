@@ -13,12 +13,6 @@ interface TableColumn<T> {
   readonly description?: React.ReactNode;
   /** The group this column belongs to, used to organize columns in the UI */
   readonly columnGroup?: string;
-  /**
-   * When shown in a column group its redundant to show the full label sometimes, for example,
-   * if the column group is "Population" and the column is "Population (in Country)", the label
-   * in the column group can just be "In Country" to avoid repetition.
-   */
-  readonly labelInColumnGroup?: React.ReactNode;
 
   /** Function that renders rich React content for a cell */
   readonly render: (object: T) => React.ReactNode;

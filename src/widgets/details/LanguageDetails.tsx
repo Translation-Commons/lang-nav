@@ -6,7 +6,13 @@ import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
+import LanguagePopulationBreakdownButton from '@entities/language/LanguagePopulationBreakdownButton';
+import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
+import LanguagePopulationOfDescendants from '@entities/language/LanguagePopulationFromDescendants';
+import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
+import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 
 import DetailsField from '@shared/containers/DetailsField';
@@ -17,11 +23,9 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
 
-import LanguageAttributes from './sections/LanguageAttributes';
 import LanguageCodes from './sections/LanguageCodes';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
-import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
 
 type Props = {
   lang: LanguageData;
@@ -32,12 +36,72 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
     <div className="Details">
       <LanguageNames lang={lang} />
       <LanguageCodes lang={lang} />
-      <LanguagePopulationDetails lang={lang} />
       <LanguageAttributes lang={lang} />
       <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
       <LanguageLocation lang={lang} />
     </div>
+  );
+};
+
+const LanguageAttributes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const {
+    populationEstimate,
+    populationEstimateSource,
+    modality,
+    primaryWritingSystem,
+    writingSystems,
+    populationFromLocales,
+    populationOfDescendants,
+  } = lang;
+
+  return (
+    <DetailsSection title="Attributes">
+      {populationEstimate && (
+        <DetailsField title="Population Estimate">
+          <LanguagePopulationEstimate lang={lang} />
+          <LanguagePopulationBreakdownButton lang={lang} />
+        </DetailsField>
+      )}
+      {populationEstimateSource && (
+        <DetailsField title="Population Estimate Source">{populationEstimateSource}</DetailsField>
+      )}
+      {populationOfDescendants && (
+        <DetailsField title="Population of Descendants">
+          <LanguagePopulationOfDescendants lang={lang} />
+        </DetailsField>
+      )}
+      {populationFromLocales && (
+        <DetailsField title="Population from Locales">
+          <LanguagePopulationFromLocales lang={lang} />
+        </DetailsField>
+      )}
+      {modality && <DetailsField title="Modality">{modality}</DetailsField>}
+      {primaryWritingSystem && (
+        <DetailsField title="Primary Writing System">
+          <HoverableObjectName object={primaryWritingSystem} />
+        </DetailsField>
+      )}
+      {Object.values(writingSystems).length > 0 && (
+        <DetailsField title="Writing Systems">
+          <CommaSeparated>
+            {Object.values(writingSystems)
+              .sort(getSortFunction())
+              .map((writingSystem) => (
+                <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
+              ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      <DetailsField title="Plural Categories">
+        <div
+          style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}
+        >
+          <LanguagePluralCategories lang={lang} />
+          <LanguagePluralGridButton lang={lang} />
+        </div>
+      </DetailsField>
+    </DetailsSection>
   );
 };
 

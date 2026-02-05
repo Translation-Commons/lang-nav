@@ -9,7 +9,7 @@ import { getFilterByTerritory } from '@features/transforms/filtering/filterByCon
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from '../LanguageTypes';
+import { LanguageData } from './LanguageTypes';
 
 const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { territoryFilter } = usePageParams();
