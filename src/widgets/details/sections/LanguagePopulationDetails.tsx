@@ -7,6 +7,7 @@ import LanguagePopulationOfDescendants from '@entities/language/population/Langu
 import LanguagePopulationFromEthnologue from '@entities/language/population/LanguagePopulationFromEthnologue';
 import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
 import { PopulationSourceCategory } from '@entities/types/DataTypes';
+import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
@@ -32,7 +33,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
       )}
       {populationEstimateSource && (
         <DetailsField title="Source" indent={1}>
-          {populationEstimateSource}
+          <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
         </DetailsField>
       )}
       {!populationEstimateSource && (
@@ -53,7 +54,9 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
         )}
       {Ethnologue.population != null &&
         populationEstimateSource !== PopulationSourceCategory.Ethnologue && (
-          <LanguagePopulationFromEthnologue lang={lang} />
+          <DetailsField title="... from Ethnologue">
+            <LanguagePopulationFromEthnologue lang={lang} />
+          </DetailsField>
         )}
     </DetailsSection>
   );
