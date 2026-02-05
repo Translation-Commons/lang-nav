@@ -7,14 +7,17 @@ import { PopulationSourceCategory } from '@entities/types/DataTypes';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { LanguageData } from '../LanguageTypes';
+
 import LanguagePopulationOfDescendants from './LanguagePopulationFromDescendants';
+import LanguagePopulationFromEthnologue from './LanguagePopulationFromEthnologue';
 import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';
-import { LanguageData } from './LanguageTypes';
 
 export const LanguagePopulationEstimate: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { populationEstimate, populationEstimateSource } = lang;
 
-  if (!populationEstimate) return <Deemphasized>no data</Deemphasized>;
+  if (!populationEstimate && populationEstimateSource !== PopulationSourceCategory.Ethnologue)
+    return <Deemphasized>no data</Deemphasized>;
 
   switch (populationEstimateSource ?? PopulationSourceCategory.Other) {
     case PopulationSourceCategory.AggregatedFromTerritories:
@@ -27,6 +30,8 @@ export const LanguagePopulationEstimate: React.FC<{ lang: LanguageData }> = ({ l
           <CountOfPeople count={populationEstimate} />
         </Hoverable>
       );
+    case PopulationSourceCategory.Ethnologue:
+      return <LanguagePopulationFromEthnologue lang={lang} />;
     case PopulationSourceCategory.Other:
       return (
         <Hoverable hoverContent="From various internet databases, working to get more citations">
