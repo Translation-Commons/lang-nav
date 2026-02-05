@@ -9,11 +9,12 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
-export const LanguageNameColumns: TableColumn<LanguageData>[] = [
+const LanguageNameColumns: TableColumn<LanguageData>[] = [
   NameColumn,
   { ...EndonymColumn, isInitiallyVisible: true },
   {
     key: 'ISO Name',
+    labelInColumnGroup: 'in ISO',
     render: (lang) =>
       lang.nameDisplay !== lang.ISO.name ? (
         <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
@@ -27,35 +28,45 @@ export const LanguageNameColumns: TableColumn<LanguageData>[] = [
         <LinkButton href="https://iso639-3.sil.org/code_tables/639/data">More info</LinkButton>
       </>
     ),
-    isInitiallyVisible: false,
-    columnGroup: 'Names',
   },
   {
     key: 'CLDR Name',
+    labelInColumnGroup: 'in CLDR',
     render: (lang) =>
       lang.nameDisplay !== lang.CLDR.name ? (
         <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
       ) : (
         <Deemphasized>{lang.CLDR.name}</Deemphasized>
       ),
-    isInitiallyVisible: false,
-    columnGroup: 'Names',
   },
   {
     key: 'Glottolog Name',
+    labelInColumnGroup: 'in Glottolog',
     render: (lang) =>
       lang.nameDisplay !== lang.Glottolog.name ? (
         <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
       ) : (
         <Deemphasized>{lang.Glottolog.name}</Deemphasized>
       ),
-    isInitiallyVisible: false,
-    columnGroup: 'Names',
+  },
+  {
+    key: 'Ethnologue Name',
+    labelInColumnGroup: 'in Ethnologue',
+    render: (lang) =>
+      lang.nameDisplay !== lang.Ethnologue.name ? (
+        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEthnologue} />
+      ) : (
+        <Deemphasized>{lang.Ethnologue.name}</Deemphasized>
+      ),
   },
   {
     key: 'Other Names',
     render: (lang) => <LanguageOtherNames lang={lang} />,
-    isInitiallyVisible: false,
-    columnGroup: 'Names',
   },
 ];
+
+export default LanguageNameColumns.map((col) => ({
+  ...col,
+  isInitiallyVisible: col.isInitiallyVisible ?? false,
+  columnGroup: 'Names',
+}));

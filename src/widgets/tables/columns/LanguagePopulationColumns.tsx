@@ -1,3 +1,5 @@
+import React from 'react';
+
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
@@ -6,18 +8,23 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { LanguagePopulationEstimate } from '@entities/language/LanguagePopulationEstimate';
-import LanguagePopulationFromDescendants from '@entities/language/LanguagePopulationFromDescendants';
-import LanguagePopulationFromLocales from '@entities/language/LanguagePopulationFromLocales';
-import LanguagePopulationInSelectedTerritory from '@entities/language/LanguagePopulationInSelectedTerritory';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
+import LanguagePopulationFromDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
+import LanguagePopulationFromEthnologue from '@entities/language/population/LanguagePopulationFromEthnologue';
+import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
+import LanguagePopulationInSelectedTerritory from '@entities/language/population/LanguagePopulationInSelectedTerritory';
+import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
-const PopulationInTerritoryLabel: React.FC = () => {
+const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({
+  isShortened = false,
+}) => {
   const { territoryFilter } = usePageParams();
-  if (!territoryFilter) return 'Population (in Territory, unselected)';
+  if (!territoryFilter)
+    return isShortened ? '... in selected Territory' : 'Population (in Territory, unselected)';
 
   const formattedTerritory = territoryFilter.split('[')[0].trim(); // cuts out the territory code if its included
-  return <>Population (in {formattedTerritory})</>;
+  return isShortened ? <>... in {formattedTerritory}</> : <>Population (in {formattedTerritory})</>;
 };
 
 const PopulationInTerritoryDescription: React.FC = () => {
@@ -36,9 +43,10 @@ const PopulationInTerritoryDescription: React.FC = () => {
   );
 };
 
-export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
+const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
   {
-    key: 'Population',
+    key: 'Best Population Estimate',
+    labelInColumnGroup: 'Best Estimate',
     description: (
       <>
         The number of people that use this language (probably speak). This is estimated from one of
@@ -49,30 +57,36 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     render: (lang) => <LanguagePopulationEstimate lang={lang} />,
     valueType: TableValueType.Population,
     sortParam: SortBy.Population,
-    columnGroup: 'Population',
+    isInitiallyVisible: true,
+  },
+  {
+    key: 'Best Estimate Source',
+    description: 'The source category for the population estimate value.',
+    render: (lang) => (
+      <PopulationSourceCategoryDisplay sourceCategory={lang.populationEstimateSource} />
+    ),
   },
   {
     key: 'Population (Rough)',
+    labelInColumnGroup: '... rough estimate',
     description:
       'This is a rough estimate from variable internet databases (citations not available).',
     render: (lang) => lang.populationRough,
     valueType: TableValueType.Population,
-    isInitiallyVisible: false,
     sortParam: SortBy.PopulationDirectlySourced,
-    columnGroup: 'Population',
   },
   {
     key: 'Population (from Dialects)',
+    labelInColumnGroup: '... from Dialects',
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
     render: (lang) => <LanguagePopulationFromDescendants lang={lang} />,
     valueType: TableValueType.Population,
-    isInitiallyVisible: false,
     sortParam: SortBy.PopulationOfDescendants,
-    columnGroup: 'Population',
   },
   {
     key: 'Population (from Locales)',
+    labelInColumnGroup: '... from Locales',
     description: (
       <>
         This data comes from adding up the populations of all locales for this language. The
@@ -81,16 +95,27 @@ export const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => <LanguagePopulationFromLocales lang={lang} />,
     valueType: TableValueType.Population,
-    isInitiallyVisible: false,
-    columnGroup: 'Population',
+  },
+  {
+    key: 'Population (Ethnologue)',
+    labelInColumnGroup: '... from Ethnologue',
+    description:
+      'This is a lower bound estimate from Ethnologue, data from 2025. It may vastly underestimate the actual population.',
+    render: (lang) => <LanguagePopulationFromEthnologue lang={lang} />,
+    valueType: TableValueType.Population,
   },
   {
     key: 'Population (in Territory)',
     label: <PopulationInTerritoryLabel />,
+    labelInColumnGroup: <PopulationInTerritoryLabel isShortened={true} />,
     description: <PopulationInTerritoryDescription />,
     render: (lang) => <LanguagePopulationInSelectedTerritory lang={lang} />,
     valueType: TableValueType.Population,
-    isInitiallyVisible: false,
-    columnGroup: 'Population',
   },
 ];
+
+export default LanguagePopulationColumns.map((col) => ({
+  ...col,
+  isInitiallyVisible: col.isInitiallyVisible ?? false,
+  columnGroup: 'Population',
+}));

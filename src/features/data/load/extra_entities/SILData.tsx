@@ -11,6 +11,7 @@ import {
   parseVitalityEthnologue2012,
   parseVitalityEthnologue2025,
 } from '@entities/language/vitality/VitalityParsing';
+import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
 
 export async function loadEthnologueLanguages(): Promise<EthnologueLanguageData[] | void> {
   return await fetch('data/sil/ethnologue2025.tsv')
@@ -25,22 +26,28 @@ export async function loadEthnologueLanguages(): Promise<EthnologueLanguageData[
       lines.map((line: string) => {
         const parts = line.split('\t');
         // Columns: ISO Code	Language Name	Population Size	Vitality	Digital Support
+        const vitality = parseVitalityEthnologue2025(parts[3]);
         return {
           code: parts[0],
           name: parts[1],
-          population: parsePopulationSize(parts[2]),
+          population: parsePopulationSize(parts[2], vitality),
           vitality2012: undefined, // it comes from a different file
-          vitality2025: parseVitalityEthnologue2025(parts[3]),
+          vitality2025: vitality,
           digitalSupport: parseDigitalSupport(parts[4]),
         };
       }),
     );
 }
 
-function parsePopulationSize(sizeStr: string): number | undefined {
+function parsePopulationSize(
+  sizeStr: string,
+  vitality?: VitalityEthnologueCoarse,
+): number | undefined {
   switch (sizeStr.trim()) {
     case 'None':
-      return 0;
+      // Some non-extinct languages have a population of "None" which looks like a data error so those
+      // are dropped
+      return vitality === VitalityEthnologueCoarse.Extinct ? 0 : undefined;
     case 'Less than 10K':
       return 1;
     case '10K to 1M':

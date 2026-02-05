@@ -10,7 +10,7 @@ import usePageParams from '@features/params/usePageParams';
 import CellPopulation from '@shared/containers/CellPopulation';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
-import { LanguageData } from './LanguageTypes';
+import { LanguageData } from '../LanguageTypes';
 
 const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   if (!lang.populationOfDescendants) return null;
