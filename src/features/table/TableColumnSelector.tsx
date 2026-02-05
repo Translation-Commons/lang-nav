@@ -131,7 +131,7 @@ function ColumnCheckbox<T extends ObjectData>({
   return (
     <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
       <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
-      {column.label ?? column.key}
+      {column.labelInColumnGroup ?? column.label ?? column.key}
       {column.description && (
         <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
           <InfoIcon size="1em" display="block" />

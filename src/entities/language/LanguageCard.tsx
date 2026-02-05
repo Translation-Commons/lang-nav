@@ -22,7 +22,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { getModalityLabel } from './LanguageModalityDisplay';
-import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
+import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
 import LanguageVitalityMeter from './vitality/VitalityMeter';
 import { VitalitySource } from './vitality/VitalityTypes';
 

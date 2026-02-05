@@ -58,9 +58,18 @@ function getLanguagePopulationFollowingDescendants(lang: LanguageData, depth = 0
 function computeLanguagePopulationEstimate(lang: LanguageData): void {
   // The best source would come from the censuses
   // Locale data usually comes from censuses, or language family locales are bounded by country size
-  if (lang.populationFromLocales != null) {
+  if (
+    lang.populationFromLocales != null &&
+    // If the population from locales is very small but Ethnologue is much bigger, then it is
+    // better to use the Ethnologue number until we have better locale census data.
+    !(lang.populationFromLocales < 10 && (lang.Ethnologue.population ?? 0) > 1000)
+  ) {
     lang.populationEstimate = lang.populationFromLocales;
     lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
+  } else if (lang.Ethnologue.population != null) {
+    // Next we will take the rounded population from Ethnologue
+    lang.populationEstimate = lang.Ethnologue.population;
+    lang.populationEstimateSource = PopulationSourceCategory.Ethnologue;
   } else if (lang.populationRough /* if its defined and not zero */) {
     // Otherwise, use the population from the languages.tsv file
     // They are often rough estimates, from a mixture of sources (and are missing citations)
