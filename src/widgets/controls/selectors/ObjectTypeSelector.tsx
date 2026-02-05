@@ -12,12 +12,12 @@ import { toTitleCase } from '@shared/lib/stringUtils';
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 
 const ObjectTypeSelector: React.FC = () => {
-  const { objectType, updatePageParams, view } = usePageParams();
+  const { objectType, updatePageParams } = usePageParams();
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
-      updatePageParams({ objectType, searchString: undefined, page: 1 });
+      updatePageParams({ objectType });
     },
-    [updatePageParams, view],
+    [updatePageParams],
   );
 
   return (
