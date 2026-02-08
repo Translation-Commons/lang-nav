@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { LangNavPageName } from '@app/PageRoutes';
+
 import { getNewURL } from '@features/params/getNewURL';
 import {
   ObjectType,
@@ -25,7 +27,7 @@ export const ObjectiveList: React.FC = () => {
         label="Find information about a language."
         inputPlaceholder="Enter a language name"
         inputParam={PageParamKey.searchString}
-        urlPath="lucky"
+        urlPath={LangNavPageName.Lucky}
       />
       <Objective
         label="See the languages in a country."
@@ -47,7 +49,7 @@ type ObjectiveProps = {
   inputPlaceholder?: string;
   inputParam?: keyof PageParamsOptional;
   urlParams?: PageParamsOptional;
-  urlPath?: string;
+  urlPath?: LangNavPageName;
 };
 
 const Objective: React.FC<ObjectiveProps> = ({
@@ -55,7 +57,7 @@ const Objective: React.FC<ObjectiveProps> = ({
   inputParam,
   label,
   urlParams = {},
-  urlPath = 'data',
+  urlPath = LangNavPageName.Data,
 }) => {
   const [inputText, setInputText] = useState('');
   let params: PageParamsOptional = { ...urlParams };
@@ -85,7 +87,7 @@ const Objective: React.FC<ObjectiveProps> = ({
   );
 };
 
-const GoButton: React.FC<{ params: PageParamsOptional; urlPath: string }> = ({
+const GoButton: React.FC<{ params: PageParamsOptional; urlPath: LangNavPageName }> = ({
   params,
   urlPath,
 }) => {

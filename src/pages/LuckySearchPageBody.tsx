@@ -6,6 +6,26 @@ import usePageParams from '@features/params/usePageParams';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 import SearchBar from '@features/transforms/search/SearchBar';
 
+const SearchContainer: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({
+  children,
+  style,
+}) => {
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        flexDirection: 'column',
+        ...style,
+      }}
+    >
+      {children}
+    </div>
+  );
+};
+
 const LuckySearchPageBody: React.FC = () => {
   const navigate = useNavigate();
   const { searchString } = usePageParams();
@@ -39,32 +59,15 @@ const LuckySearchPageBody: React.FC = () => {
 
   if (isSearching) {
     return (
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          height: '100vh',
-          flexDirection: 'column',
-        }}
-      >
+      <SearchContainer>
         <div style={{ fontSize: '1.5em', marginBottom: '1em' }}>Searching...</div>
-      </div>
+      </SearchContainer>
     );
   }
 
   // Display SearchBar and message if no results found
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        flexDirection: 'column',
-        padding: '2em',
-      }}
-    >
+    <SearchContainer style={{ padding: '2em' }}>
       <div style={{ fontSize: '1.5em', marginBottom: '1em' }}>No results found</div>
       <div style={{ marginBottom: '1em' }}>
         Sorry, we couldn&apos;t find any languages matching &quot;{searchString}&quot;.
@@ -76,7 +79,7 @@ const LuckySearchPageBody: React.FC = () => {
           <button style={{ padding: '0.5em 1em' }}>Back to Home</button>
         </a>
       </div>
-    </div>
+    </SearchContainer>
   );
 };
 
