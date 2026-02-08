@@ -137,9 +137,7 @@ function ColumnCheckbox<T extends ObjectData>({
           <InfoIcon size="1em" display="block" />
         </Hoverable>
       )}
-      {column.sortParam && (
-        <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
-      )}
+      {column.field && <TableSortButton columnSortBy={column.field} valueType={column.valueType} />}
     </label>
   );
 }

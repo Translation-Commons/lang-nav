@@ -8,7 +8,7 @@ import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
@@ -32,7 +32,7 @@ const VariantTagTable: React.FC = () => {
           render: (object) => object.dateAdded?.toLocaleDateString(),
           isInitiallyVisible: false,
           valueType: TableValueType.Date,
-          sortParam: SortBy.Date,
+          field: Field.Date,
         },
         {
           key: 'Languages',
@@ -43,7 +43,7 @@ const VariantTagTable: React.FC = () => {
               ))}
             </CommaSeparated>
           ),
-          sortParam: SortBy.Language,
+          field: Field.Language,
           columnGroup: 'Related Objects',
         },
         {
@@ -52,7 +52,7 @@ const VariantTagTable: React.FC = () => {
             <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
           ),
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfLanguages,
+          field: Field.CountOfLanguages,
           isInitiallyVisible: false,
           columnGroup: 'Related Objects',
         },
@@ -67,7 +67,7 @@ const VariantTagTable: React.FC = () => {
           ),
           isInitiallyVisible: false,
           columnGroup: 'Related Objects',
-          sortParam: SortBy.WritingSystem,
+          field: Field.WritingSystem,
         },
         {
           key: 'Specific to Territories',
@@ -79,7 +79,7 @@ const VariantTagTable: React.FC = () => {
             </CommaSeparated>
           ),
           isInitiallyVisible: false,
-          sortParam: SortBy.Territory,
+          field: Field.Territory,
           columnGroup: 'Related Objects',
         },
         {
@@ -96,7 +96,7 @@ const VariantTagTable: React.FC = () => {
           render: (object) => getObjectPopulation(object),
           isInitiallyVisible: false,
           valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.Population,
         },
       ]}
     />

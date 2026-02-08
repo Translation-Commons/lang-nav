@@ -8,10 +8,10 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import getGradientForColorBy from '@features/transforms/coloring/getGradientForColorby';
-import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/types/DataTypes';
@@ -36,8 +36,8 @@ export enum ProfileType {
 }
 
 const GLOBAL_DEFAULTS: PageParams = {
-  colorBy: 'None',
-  scaleBy: 'None',
+  colorBy: Field.None,
+  scaleBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
   isoStatus: [],
@@ -54,7 +54,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   searchBy: SearchableField.CodeOrNameAny,
   searchString: '',
   sortBehavior: SortBehavior.Normal,
-  sortBy: SortBy.Population,
+  sortBy: Field.Population,
   territoryFilter: '',
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   view: View.CardList,
@@ -96,8 +96,7 @@ export function getDefaultParams(
   objectType?: ObjectType,
   view?: View | undefined,
   profile?: ProfileType | undefined,
-  colorBy?: ColorBy | undefined,
-  scaleBy?: ScaleBy | undefined,
+  colorBy?: Field,
 ): PageParams {
   let params = GLOBAL_DEFAULTS;
 
@@ -114,7 +113,6 @@ export function getDefaultParams(
   if (view != null) params.view = view;
   if (objectType != null) params.objectType = objectType;
   if (colorBy != null) params.colorBy = colorBy;
-  if (scaleBy != null) params.scaleBy = scaleBy;
 
   // Apply a few view-specific overrides
   if (params.view === View.Hierarchy) {
@@ -126,17 +124,17 @@ export function getDefaultParams(
   } else if (params.view === View.Map) {
     params.limit = 200; // Show more results in map view
 
-    if (params.colorBy === 'None') {
+    if (params.colorBy === Field.None) {
       // Add default colorBys since we're showing X in territories
-      if (params.objectType === ObjectType.Census) params.colorBy = SortBy.CountOfCensuses;
-      if (params.objectType === ObjectType.Locale) params.colorBy = SortBy.CountOfLanguages;
+      if (params.objectType === ObjectType.Census) params.colorBy = Field.CountOfCensuses;
+      if (params.objectType === ObjectType.Locale) params.colorBy = Field.CountOfLanguages;
       if (params.objectType === ObjectType.WritingSystem)
-        params.colorBy = SortBy.CountOfWritingSystems;
+        params.colorBy = Field.CountOfWritingSystems;
     }
   }
 
   // Get default gradient for colorBys
-  if (params.colorBy !== 'None') {
+  if (params.colorBy !== Field.None) {
     params.colorGradient = getGradientForColorBy(params.colorBy);
   }
 

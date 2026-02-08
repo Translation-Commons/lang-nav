@@ -2,7 +2,8 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import usePageParams from '@features/params/usePageParams';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -33,7 +34,7 @@ describe('TableSortButton', () => {
   });
 
   it('renders sort button when columnSortBy is provided', () => {
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const button = screen.getByRole('button');
     expect(button).toBeInTheDocument();
@@ -43,43 +44,43 @@ describe('TableSortButton', () => {
   });
 
   it('applies primary class when sortBy matches columnSortBy', () => {
-    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
 
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const button = screen.getByRole('button');
     expect(button).toHaveClass('primary');
   });
 
   it('does not apply primary class when sortBy does not match columnSortBy', () => {
-    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Population }));
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: Field.Population }));
 
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const button = screen.getByRole('button');
     expect(button).not.toHaveClass('primary');
   });
 
   it('calls updatePageParams with new sortBy when clicking different column', () => {
-    const mockUsePageParams = createMockUsePageParams({ sortBy: SortBy.Population });
+    const mockUsePageParams = createMockUsePageParams({ sortBy: Field.Population });
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
 
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);
 
     expect(mockUsePageParams.updatePageParams).toHaveBeenCalledWith({
-      sortBy: SortBy.Name,
+      sortBy: Field.Name,
       sortBehavior: SortBehavior.Normal,
     });
   });
 
   it('toggles sortBehavior when clicking same column', () => {
-    const mockUsePageParams = createMockUsePageParams({ sortBy: SortBy.Name });
+    const mockUsePageParams = createMockUsePageParams({ sortBy: Field.Name });
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
 
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);
@@ -91,12 +92,12 @@ describe('TableSortButton', () => {
 
   it('toggles sortBehavior from Reverse to Normal when clicking same column', () => {
     const mockUsePageParams = createMockUsePageParams({
-      sortBy: SortBy.Name,
+      sortBy: Field.Name,
       sortBehavior: SortBehavior.Reverse,
     });
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
 
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const button = screen.getByRole('button');
     fireEvent.click(button);
@@ -114,13 +115,13 @@ describe('SortButtonIcon', () => {
   it('renders ArrowDown01 for Numeric ascending', () => {
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
-        sortBy: SortBy.Population, // Numeric field
+        sortBy: Field.Population, // Numeric field
         sortBehavior: SortBehavior.Normal, // This should result in ascending
       }),
     );
 
     render(
-      <TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Population} />,
+      <TableSortButton columnSortBy={Field.Population} valueType={TableValueType.Population} />,
     );
 
     // Check for ArrowDown01 icon (numeric ascending)
@@ -134,13 +135,13 @@ describe('SortButtonIcon', () => {
   it('renders ArrowDown10 for Numeric descending', () => {
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
-        sortBy: SortBy.Population, // Numeric field
+        sortBy: Field.Population, // Numeric field
         sortBehavior: SortBehavior.Reverse, // This should result in descending
       }),
     );
 
     render(
-      <TableSortButton columnSortBy={SortBy.Population} valueType={TableValueType.Population} />,
+      <TableSortButton columnSortBy={Field.Population} valueType={TableValueType.Population} />,
     );
 
     const svg = screen.getByRole('button').querySelector('svg');
@@ -152,12 +153,12 @@ describe('SortButtonIcon', () => {
   it('renders ArrowDownNarrowWide for Enum ascending', () => {
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
-        sortBy: SortBy.Name, // String field, but we'll test with Enum valueType
+        sortBy: Field.Name, // String field, but we'll test with Enum valueType
         sortBehavior: SortBehavior.Normal,
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.Enum} />);
+    render(<TableSortButton columnSortBy={Field.Name} valueType={TableValueType.Enum} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -167,10 +168,10 @@ describe('SortButtonIcon', () => {
 
   it('renders ArrowDownWideNarrow for Enum descending', () => {
     (usePageParams as Mock).mockReturnValue(
-      createMockUsePageParams({ sortBy: SortBy.Name, sortBehavior: SortBehavior.Reverse }),
+      createMockUsePageParams({ sortBy: Field.Name, sortBehavior: SortBehavior.Reverse }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.Enum} />);
+    render(<TableSortButton columnSortBy={Field.Name} valueType={TableValueType.Enum} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -181,12 +182,12 @@ describe('SortButtonIcon', () => {
   it('renders ArrowDownAZ for String ascending (default)', () => {
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
-        sortBy: SortBy.Name, // String field
+        sortBy: Field.Name, // String field
         sortBehavior: SortBehavior.Normal,
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.String} />);
+    render(<TableSortButton columnSortBy={Field.Name} valueType={TableValueType.String} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -197,12 +198,12 @@ describe('SortButtonIcon', () => {
   it('renders ArrowDownZA for String descending', () => {
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
-        sortBy: SortBy.Name,
+        sortBy: Field.Name,
         sortBehavior: SortBehavior.Reverse,
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.String} />);
+    render(<TableSortButton columnSortBy={Field.Name} valueType={TableValueType.String} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -213,12 +214,12 @@ describe('SortButtonIcon', () => {
   it('defaults to String valueType when not provided', () => {
     (usePageParams as Mock).mockReturnValue(
       createMockUsePageParams({
-        sortBy: SortBy.Name,
+        sortBy: Field.Name,
         sortBehavior: SortBehavior.Normal,
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} />);
+    render(<TableSortButton columnSortBy={Field.Name} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();
@@ -234,7 +235,7 @@ describe('SortButtonIcon', () => {
       }),
     );
 
-    render(<TableSortButton columnSortBy={SortBy.Name} valueType={TableValueType.String} />);
+    render(<TableSortButton columnSortBy={Field.Name} valueType={TableValueType.String} />);
 
     const svg = screen.getByRole('button').querySelector('svg');
     expect(svg).toBeInTheDocument();

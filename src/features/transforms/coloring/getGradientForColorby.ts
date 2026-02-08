@@ -1,46 +1,50 @@
-import { SortBy } from '../sorting/SortTypes';
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-import { ColorBy, ColorGradient } from './ColorTypes';
+import Field from '../fields/Field';
 
-function getGradientForColorBy(colorBy: ColorBy): ColorGradient {
-  if (colorBy === 'None') return ColorGradient.DivergingBlueToOrange;
+import { ColorGradient } from './ColorTypes';
 
+function getGradientForColorBy(colorBy: Field): ColorGradient {
   switch (colorBy) {
-    case SortBy.Population:
-    case SortBy.PopulationDirectlySourced:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.Date:
-    case SortBy.Area:
-    case SortBy.Modality:
+    case Field.None:
+    case Field.Population:
+    case Field.PopulationDirectlySourced:
+    case Field.PopulationOfDescendants:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
+    case Field.PercentOfOverallLanguageSpeakers:
+    case Field.PercentOfTerritoryPopulation:
+    case Field.Date:
+    case Field.Area:
+    case Field.Modality:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
-    case SortBy.VitalityMetascore:
-    case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologueFine:
-    case SortBy.VitalityEthnologueCoarse:
-    case SortBy.Literacy:
+    case Field.VitalityMetascore:
+    case Field.ISOStatus:
+    case Field.VitalityEthnologueFine:
+    case Field.VitalityEthnologueCoarse:
+    case Field.Literacy:
       // "Bad" values are red, "Good" values are green
       return ColorGradient.StopLightRedToGreen;
-    case SortBy.Longitude:
-    case SortBy.Latitude:
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
+    case Field.Longitude:
+    case Field.Latitude:
+    case Field.Name:
+    case Field.Endonym:
+    case Field.Code:
+    case Field.Language:
+    case Field.WritingSystem:
+    case Field.Territory:
       // More of a spectrum rather than directional
       return ColorGradient.HueRainbowBlueToRed;
 
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfWritingSystems:
-    case SortBy.CountOfCountries:
-    case SortBy.CountOfChildTerritories:
-    case SortBy.CountOfCensuses:
+    case Field.CountOfLanguages:
+    case Field.CountOfWritingSystems:
+    case Field.CountOfCountries:
+    case Field.CountOfChildTerritories:
+    case Field.CountOfCensuses:
       return ColorGradient.SequentialBlue;
+
+    default:
+      enforceExhaustiveSwitch(colorBy);
   }
 }
 

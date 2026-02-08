@@ -10,28 +10,28 @@ import React, { useCallback } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
-import { SortBehavior, SortBy, SortDirection } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior, SortDirection } from '@features/transforms/sorting/SortTypes';
 
 import { getNormalSortDirection } from '../transforms/sorting/sort';
 
 import TableValueType from './TableValueType';
 
 type Props = {
-  columnSortBy?: SortBy;
+  columnSortBy?: Field;
   valueType?: TableValueType;
 };
 
 const TableSortButton: React.FC<Props> = ({ columnSortBy, valueType = TableValueType.String }) => {
   const { sortBy, updatePageParams, sortBehavior } = usePageParams();
 
-  if (!columnSortBy) {
-    return <></>;
-  }
+  if (columnSortBy == null) return <></>;
+
   const currentSortDirection = getNormalSortDirection(sortBy) * sortBehavior;
   const normalSortDirection = getNormalSortDirection(columnSortBy);
 
   const onSortButtonClick = useCallback(
-    (newSortBy: SortBy): void => {
+    (newSortBy: Field): void => {
       if (sortBy != newSortBy) {
         updatePageParams({ sortBy: newSortBy, sortBehavior: SortBehavior.Normal });
       } else {

@@ -113,7 +113,7 @@ function getLocaleCountries(locale: LocaleData): TerritoryData[] {
   );
 }
 
-// SortBy.CountOfCountries
+// Field.CountOfCountries
 export function getCountOfCountries(object: ObjectData): number | undefined {
   return getCountriesInObject(object)?.length;
 }
@@ -141,7 +141,7 @@ export function getCountriesInObject(object: ObjectData): TerritoryData[] | unde
   }
 }
 
-// SortBy.CountOfChildTerritories
+// Field.CountOfChildTerritories
 export function getCountOfChildTerritories(object: ObjectData): number | undefined {
   return getChildTerritoriesInObject(object)?.length;
 }

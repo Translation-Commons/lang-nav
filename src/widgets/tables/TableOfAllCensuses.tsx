@@ -7,7 +7,7 @@ import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
@@ -34,13 +34,13 @@ const TableOfAllCensuses: React.FC = () => {
             />
           ),
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfLanguages,
+          field: Field.CountOfLanguages,
         },
         {
           key: 'Eligible Population',
           render: (census) => census.populationEligible,
           valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.Population,
           columnGroup: 'Population',
         },
         {
@@ -49,7 +49,7 @@ const TableOfAllCensuses: React.FC = () => {
             census.populationEligible && getObjectPercentOfTerritoryPopulation(census),
           valueType: TableValueType.Decimal,
           isInitiallyVisible: false,
-          sortParam: SortBy.PercentOfTerritoryPopulation,
+          field: Field.PercentOfTerritoryPopulation,
           columnGroup: 'Population',
         },
         {
@@ -94,7 +94,7 @@ const TableOfAllCensuses: React.FC = () => {
           key: 'Territory',
           render: (census) => <HoverableObjectName object={census.territory} />,
           isInitiallyVisible: false,
-          sortParam: SortBy.Territory,
+          field: Field.Territory,
           columnGroup: 'Location',
         },
         {
@@ -121,7 +121,7 @@ const TableOfAllCensuses: React.FC = () => {
             ),
           isInitiallyVisible: false,
           valueType: TableValueType.Date,
-          sortParam: SortBy.Date,
+          field: Field.Date,
           columnGroup: 'Time',
         },
         {

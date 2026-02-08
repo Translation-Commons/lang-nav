@@ -10,8 +10,8 @@ import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import {
@@ -105,19 +105,19 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
                 />
               </HoverableObject>
             ),
-            sortParam: SortBy.Name,
+            field: Field.Name,
           },
           {
             key: 'Population',
             render: (loc) => loc.populationSpeaking,
             valueType: TableValueType.Population,
-            sortParam: SortBy.Population,
+            field: Field.Population,
           },
           {
             key: 'Percent Within Territory',
             render: (loc) => loc.populationSpeakingPercent,
             valueType: TableValueType.Decimal,
-            sortParam: SortBy.PercentOfTerritoryPopulation,
+            field: Field.PercentOfTerritoryPopulation,
           },
           {
             key: 'Scope',
@@ -156,7 +156,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
             valueType: TableValueType.Decimal,
             isInitiallyVisible: false,
-            sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+            field: Field.PercentOfOverallLanguageSpeakers,
           },
           {
             key: 'Macrolanguage',

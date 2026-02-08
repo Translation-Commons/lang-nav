@@ -3,11 +3,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import * as FilterModule from '@features/transforms/filtering/filter';
 import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import * as SortModule from '@features/transforms/sorting/sort';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
@@ -72,7 +72,7 @@ describe('InteractiveObjectTable', () => {
     {
       key: 'Name',
       render: (obj) => obj.nameDisplay,
-      sortParam: SortBy.Name,
+      field: Field.Name,
       valueType: TableValueType.String,
     },
     {
@@ -83,7 +83,7 @@ describe('InteractiveObjectTable', () => {
         }
         return '';
       },
-      sortParam: SortBy.Population,
+      field: Field.Population,
       valueType: TableValueType.Population,
     },
   ];
@@ -98,7 +98,7 @@ describe('InteractiveObjectTable', () => {
     vi.mocked(FilterModule.getFilterByTerritoryScope).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
-    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
+    vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
   });
 
   afterEach(() => {
@@ -239,7 +239,7 @@ describe('InteractiveObjectTable', () => {
     });
     // manually changing the columns
     vi.mocked(usePageParams).mockReturnValue(
-      createMockUsePageParams({ sortBy: SortBy.Name, columns: { [TableID.Territories]: 1n } }),
+      createMockUsePageParams({ sortBy: Field.Name, columns: { [TableID.Territories]: 1n } }),
     );
 
     // Force rerender to ensure state updates are applied
@@ -256,7 +256,7 @@ describe('InteractiveObjectTable', () => {
       fireEvent.click(populationCheckbox);
     });
     vi.mocked(usePageParams).mockReturnValue(
-      createMockUsePageParams({ sortBy: SortBy.Name, columns: { [TableID.Territories]: 3n } }),
+      createMockUsePageParams({ sortBy: Field.Name, columns: { [TableID.Territories]: 3n } }),
     );
 
     // Force rerender to ensure state updates are applied

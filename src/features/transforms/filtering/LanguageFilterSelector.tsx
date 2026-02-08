@@ -14,8 +14,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
+import Field from '../fields/Field';
 import { getSortFunctionParameterized } from '../sorting/sort';
-import { SortBy } from '../sorting/SortTypes';
 
 import { getScopeFilter } from './filter';
 import { getFilterByTerritory, getFilterByWritingSystem } from './filterByConnections';
@@ -27,7 +27,7 @@ type Props = { display?: SelectorDisplay };
 const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
   const { languageFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
-  const sortFunction = getSortFunctionParameterized(SortBy.Population);
+  const sortFunction = getSortFunctionParameterized(Field.Population);
   const filterByScope = getScopeFilter();
   const filterByTerritory = getFilterByTerritory();
   const filterByWritingSystem = getFilterByWritingSystem();

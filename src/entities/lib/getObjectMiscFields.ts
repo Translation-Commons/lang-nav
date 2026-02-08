@@ -9,7 +9,7 @@ import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
 
-// SortBy.Language
+// Field.Language
 export function getObjectMostImportantLanguageName(object: ObjectData): string | undefined {
   switch (object.type) {
     case ObjectType.Territory:
@@ -31,7 +31,7 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
   }
 }
 
-// SortBy.Date
+// Field.Date
 export function getObjectDateAsNumber(object: ObjectData): number | undefined {
   const date = getObjectDate(object);
   return date ? date.getTime() : undefined;
@@ -51,7 +51,7 @@ export function getObjectDate(object: ObjectData): Date | undefined {
   }
 }
 
-// SortBy.CountOfLanguages
+// Field.CountOfLanguages
 export function getCountOfLanguages(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
@@ -71,7 +71,7 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
   }
 }
 
-// SortBy.Literacy
+// Field.Literacy
 export function getObjectLiteracy(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Census:
@@ -103,7 +103,7 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
   return computedLiteracy || undefined;
 }
 
-// SortBy.CountOfWritingSystems
+// Field.CountOfWritingSystems
 export function getCountOfWritingSystems(object: ObjectData): number | undefined {
   return getWritingSystemsInObject(object)?.length;
 }
@@ -152,7 +152,7 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
   }
 }
 
-// SortBy.CountOfCensuses
+// Field.CountOfCensuses
 export function getCountOfCensuses(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Territory:

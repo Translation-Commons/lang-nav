@@ -8,7 +8,7 @@ import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
@@ -63,14 +63,14 @@ const TerritoryTable: React.FC = () => {
           key: 'Population',
           render: (object) => object.population,
           valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.Population,
           columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
           render: (object) => object.literacyPercent,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.Literacy,
+          field: Field.Literacy,
           columnGroup: 'Demographics',
         },
         {
@@ -78,7 +78,7 @@ const TerritoryTable: React.FC = () => {
           render: (object) => <CensusCountForTerritory territory={object} />,
           columnGroup: 'Demographics',
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfCensuses,
+          field: Field.CountOfCensuses,
           isInitiallyVisible: false,
         },
         {
@@ -90,7 +90,7 @@ const TerritoryTable: React.FC = () => {
               />
             ),
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfLanguages,
+          field: Field.CountOfLanguages,
           columnGroup: 'Language',
         },
         {
@@ -105,7 +105,7 @@ const TerritoryTable: React.FC = () => {
               />
             ),
           isInitiallyVisible: false,
-          sortParam: SortBy.Language,
+          field: Field.Language,
           columnGroup: 'Language',
         },
         {
@@ -113,7 +113,7 @@ const TerritoryTable: React.FC = () => {
           render: (object) => object.locales?.[0].populationSpeakingPercent,
           isInitiallyVisible: false,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
+          field: Field.PopulationPercentInBiggestDescendantLanguage,
           columnGroup: 'Language',
         },
         {
@@ -124,7 +124,7 @@ const TerritoryTable: React.FC = () => {
             />
           ),
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfWritingSystems,
+          field: Field.CountOfWritingSystems,
           columnGroup: 'Language',
         },
         {
@@ -140,7 +140,7 @@ const TerritoryTable: React.FC = () => {
           ),
           isInitiallyVisible: false,
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfChildTerritories,
+          field: Field.CountOfChildTerritories,
           columnGroup: 'Relations',
         },
         {
@@ -150,7 +150,7 @@ const TerritoryTable: React.FC = () => {
           ),
           isInitiallyVisible: false,
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfCountries,
+          field: Field.CountOfCountries,
           columnGroup: 'Relations',
         },
         {
@@ -161,7 +161,7 @@ const TerritoryTable: React.FC = () => {
             sumBy(object.dependentTerritories, (t) => t.population ?? 0),
           isInitiallyVisible: false,
           valueType: TableValueType.Population,
-          sortParam: SortBy.PopulationOfDescendants,
+          field: Field.PopulationOfDescendants,
           columnGroup: 'Relations',
         },
         {
@@ -170,7 +170,7 @@ const TerritoryTable: React.FC = () => {
           exportValue: (obj) => obj.latitude?.toFixed(4) ?? '',
           isInitiallyVisible: false,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.Latitude,
+          field: Field.Latitude,
           columnGroup: 'Location',
         },
         {
@@ -179,7 +179,7 @@ const TerritoryTable: React.FC = () => {
           exportValue: (obj) => obj.longitude?.toFixed(4) ?? '',
           isInitiallyVisible: false,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.Longitude,
+          field: Field.Longitude,
           columnGroup: 'Location',
         },
         {
@@ -190,7 +190,7 @@ const TerritoryTable: React.FC = () => {
             object.landArea && numberToSigFigs(object.landArea, 3)?.toLocaleString(),
           isInitiallyVisible: false,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.Area,
+          field: Field.Area,
           columnGroup: 'Location',
         },
         {

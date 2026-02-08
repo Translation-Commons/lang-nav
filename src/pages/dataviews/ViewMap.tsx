@@ -13,6 +13,7 @@ import {
 import usePageParams from '@features/params/usePageParams';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import Field from '@features/transforms/fields/Field';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
@@ -20,6 +21,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
 import './styles.css';
 
 function ViewMap() {
@@ -54,10 +56,10 @@ function ViewMap() {
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>
-            {colorBy === 'None' ? `You can color the shapes by:` : `Shapes are colored by `}
+            {colorBy === Field.None ? `You can color the shapes by:` : `Shapes are colored by `}
           </div>
           <ColorBySelector objectType={isDrawingTerritories ? ObjectType.Territory : objectType} />
-          <div>{colorBy !== 'None' && 'using the color gradient'}</div>
+          <div>{colorBy !== Field.None && 'using the color gradient'}</div>
           <ColorGradientSelector />
         </div>
       </SelectorDisplayProvider>
