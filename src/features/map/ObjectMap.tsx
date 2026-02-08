@@ -53,19 +53,10 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   return (
     <div style={{ maxWidth, width: '100%', position: 'relative' }}>
       <div style={{ border: '1px solid #ccc' }}>
-        <TransformWrapper
-          initialScale={1}
-          minScale={1}
-          maxScale={8}
-          wheel={{ step: 0.1 }}
-        >
+        <TransformWrapper initialScale={1} minScale={1} maxScale={8} wheel={{ step: 0.1 }}>
           {({ zoomIn, zoomOut, resetTransform }) => (
             <>
-              <ZoomControls
-                zoomIn={zoomIn}
-                zoomOut={zoomOut}
-                resetTransform={resetTransform}
-              />
+              <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
               <TransformComponent
                 wrapperStyle={{ width: '100%', cursor: 'grab' }}
                 contentStyle={{ width: '100%' }}
