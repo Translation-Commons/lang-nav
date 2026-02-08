@@ -106,6 +106,17 @@ function clearContextDependentParams(
 
   if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
     if (newParams.page == null) next.delete('page');
+    const oldSearchString = prev?.get('searchString');
+    if (oldSearchString) {
+      next.delete('searchString');
+      if (prevOrDefault.objectType === ObjectType.Language) {
+        next.set('languageFilter', oldSearchString);
+      } else if (prevOrDefault.objectType === ObjectType.Territory) {
+        next.set('territoryFilter', oldSearchString);
+      } else if (prevOrDefault.objectType === ObjectType.WritingSystem) {
+        next.set('writingSystemFilter', oldSearchString);
+      }
+    }
   }
 
   return next;

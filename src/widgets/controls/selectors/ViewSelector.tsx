@@ -13,7 +13,7 @@ const ViewSelector: React.FC = () => {
       selectorLabel="Display"
       getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
       options={Object.values(View)}
-      onChange={(view: View) => updatePageParams({ view, objectID: undefined })}
+      onChange={(view: View) => updatePageParams({ view })}
       display={SelectorDisplay.ButtonList}
       getOptionLabel={(view) =>
         [View.Map, View.Reports].includes(view) ? (
