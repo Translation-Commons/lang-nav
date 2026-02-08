@@ -1,4 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
+import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -10,11 +11,11 @@ import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
-
 import DrawableData from './DrawableData';
 import MapCircles from './MapCircles';
 import MapHoverContent from './MapHoverContent';
 import MapTerritories from './MapTerritories';
+import ZoomControls from './ZoomControls';
 
 type Props = {
   objects: ObjectData[];
@@ -49,26 +50,49 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   );
 
   return (
-    <div style={{ maxWidth, width: '100%' }}>
-      <div style={{ position: 'relative', width: '100%', aspectRatio: 1.979 }}>
-        <img
-          alt="World map"
-          src="./data/wiki/map_world.svg"
-          style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
-        />
-        {objectType !== ObjectType.Language && (
-          <MapTerritories
-            drawableObjects={drawableObjects}
-            getHoverContent={getHoverContent}
-            coloringFunctions={coloringFunctions}
-          />
-        )}
-        <MapCircles
-          drawableObjects={drawableObjects}
-          getHoverContent={getHoverContent}
-          scalar={1200 / maxWidth}
-          coloringFunctions={coloringFunctions}
-        />
+    <div style={{ maxWidth, width: '100%', position: 'relative' }}>
+      <div style={{ border: '1px solid #ccc' }}>
+        <TransformWrapper
+          initialScale={1}
+          minScale={1}
+          maxScale={8}
+          wheel={{ step: 0.1 }}
+        >
+          {({ zoomIn, zoomOut, resetTransform }) => (
+            <>
+              <ZoomControls
+                zoomIn={zoomIn}
+                zoomOut={zoomOut}
+                resetTransform={resetTransform}
+              />
+              <TransformComponent
+                wrapperStyle={{ width: '100%', cursor: 'grab' }}
+                contentStyle={{ width: '100%' }}
+              >
+                <div style={{ position: 'relative', width: '100%', aspectRatio: 1.979 }}>
+                  <img
+                    alt="World map"
+                    src="./data/wiki/map_world.svg"
+                    style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
+                  />
+                  {objectType !== ObjectType.Language && (
+                    <MapTerritories
+                      drawableObjects={drawableObjects}
+                      getHoverContent={getHoverContent}
+                      coloringFunctions={coloringFunctions}
+                    />
+                  )}
+                  <MapCircles
+                    drawableObjects={drawableObjects}
+                    getHoverContent={getHoverContent}
+                    scalar={1200 / maxWidth}
+                    coloringFunctions={coloringFunctions}
+                  />
+                </div>
+              </TransformComponent>
+            </>
+          )}
+        </TransformWrapper>
       </div>
 
       {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}

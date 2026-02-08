@@ -54,7 +54,7 @@ const MapCircles: React.FC<Props> = ({
       viewBox={`-180 -90 360 180`}
       preserveAspectRatio="xMidYMid meet"
       style={{
-        border: '1px solid #ccc',
+        //border: '1px solid #ccc',
         display: 'block',
         top: 0,
         left: 0,
