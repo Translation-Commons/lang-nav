@@ -3,7 +3,8 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
@@ -128,7 +129,7 @@ describe('useFilteredObjects', () => {
   });
 
   it('returns sorted items', () => {
-    setupMockParams({ sortBy: SortBy.Name, sortBehavior: SortBehavior.Reverse });
+    setupMockParams({ sortBy: Field.Name, sortBehavior: SortBehavior.Reverse });
     const { filteredObjects } = getHookResult({});
     expect(filteredObjects.map((obj) => obj.ID)).toEqual([
       'spa', // Spanish

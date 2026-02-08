@@ -7,7 +7,7 @@ import { sumBy } from '@shared/lib/setUtils';
 import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
 
 // TODO make better upperbound/lowerbound population estimates when we don't have exact numbers
-// SortBy.Population
+// Field.Population
 export function getObjectPopulation(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
@@ -27,7 +27,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
   }
 }
 
-// SortBy.PopulationDirectlySourced
+// Field.PopulationDirectlySourced
 export function getObjectPopulationDirectlySourced(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
@@ -46,7 +46,7 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
   }
 }
 
-// SortBy.PopulationOfDescendants
+// Field.PopulationOfDescendants
 export function getObjectPopulationOfDescendants(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
@@ -64,7 +64,7 @@ export function getObjectPopulationOfDescendants(object: ObjectData): number | u
   }
 }
 
-// SortBy.PopulationPercentInBiggestDescendantLanguage
+// Field.PopulationPercentInBiggestDescendantLanguage
 export function getObjectPopulationPercentInBiggestDescendantLanguage(
   object: ObjectData,
 ): number | undefined {
@@ -83,7 +83,7 @@ export function getObjectPopulationPercentInBiggestDescendantLanguage(
   }
 }
 
-// SortBy.PercentOfOverallLanguageSpeakers
+// Field.PercentOfOverallLanguageSpeakers
 export function getObjectPopulationRelativeToOverallLanguageSpeakers(
   object: ObjectData,
 ): number | undefined {
@@ -104,7 +104,7 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
   }
 }
 
-// SortBy.PercentOfTerritoryPopulation
+// Field.PercentOfTerritoryPopulation
 export function getObjectPercentOfTerritoryPopulation(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Census:

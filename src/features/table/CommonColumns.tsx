@@ -1,7 +1,7 @@
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { SearchableField } from '@features/params/PageParamTypes';
+import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -14,7 +14,7 @@ export const CodeColumn: TableColumn<ObjectData> = {
   render: (object) => (
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />
   ),
-  sortParam: SortBy.Code,
+  field: Field.Code,
   columnGroup: 'Codes',
 };
 
@@ -26,7 +26,7 @@ export const NameColumn: TableColumn<ObjectData> = {
     </HoverableObject>
   ),
   exportValue: (object) => object.nameDisplay, // avoid html escapes like &amp;
-  sortParam: SortBy.Name,
+  field: Field.Name,
   columnGroup: 'Names',
 };
 
@@ -35,7 +35,7 @@ export const EndonymColumn: TableColumn<ObjectData> = {
   render: (object) => (
     <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameEndonym} />
   ),
-  sortParam: SortBy.Endonym,
+  field: Field.Endonym,
   isInitiallyVisible: false,
   columnGroup: 'Names',
 };

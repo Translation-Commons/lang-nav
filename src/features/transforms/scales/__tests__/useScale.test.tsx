@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
@@ -13,7 +13,7 @@ describe('useScale', () => {
     const { result: r1 } = renderHook(() => useScale({ objects: [lang], scaleBy: undefined }));
     expect(r1.current.getScale(lang)).toBe(1);
 
-    const { result: r2 } = renderHook(() => useScale({ objects: [lang], scaleBy: 'None' }));
+    const { result: r2 } = renderHook(() => useScale({ objects: [lang], scaleBy: Field.None }));
     expect(r2.current.getScale(lang)).toBe(1);
   });
 
@@ -28,7 +28,7 @@ describe('useScale', () => {
     // no populationEstimate -> should be treated as not renderable -> getScale returns 0
 
     const { result } = renderHook(() =>
-      useScale({ objects: [small, big, missing], scaleBy: SortBy.Population }),
+      useScale({ objects: [small, big, missing], scaleBy: Field.Population }),
     );
 
     const scaleSmall = result.current.getScale(small);

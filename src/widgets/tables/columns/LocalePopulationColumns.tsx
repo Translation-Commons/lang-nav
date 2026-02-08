@@ -1,6 +1,6 @@
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import CensusCountForLocale from '@entities/census/CensusCountForLocale';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
@@ -19,7 +19,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     ),
     render: (object) => <LocalePopulationAdjusted locale={object} />,
     valueType: TableValueType.Population,
-    sortParam: SortBy.Population,
+    field: Field.Population,
     columnGroup: 'Demographics',
   },
   {
@@ -27,7 +27,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     description: 'This is the original population number cited from sourced data.',
     render: (object) => object.populationSpeaking,
     valueType: TableValueType.Population,
-    sortParam: SortBy.PopulationDirectlySourced,
+    field: Field.PopulationDirectlySourced,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
   },
@@ -35,7 +35,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: '% in Territory',
     render: (object) => object.populationSpeakingPercent,
     valueType: TableValueType.Decimal,
-    sortParam: SortBy.PercentOfTerritoryPopulation,
+    field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
   },
   {
@@ -45,7 +45,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
       (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
     valueType: TableValueType.Decimal,
     isInitiallyVisible: false,
-    sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+    field: Field.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',
   },
   {
@@ -58,7 +58,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     render: (object) => <CensusCountForLocale locale={object} />,
     columnGroup: 'Demographics',
     valueType: TableValueType.Count,
-    sortParam: SortBy.CountOfCensuses,
+    field: Field.CountOfCensuses,
     isInitiallyVisible: false,
   },
 ];

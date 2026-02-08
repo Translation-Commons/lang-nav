@@ -13,8 +13,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryData } from '@entities/types/DataTypes';
 
+import Field from '../fields/Field';
 import { getSortFunctionParameterized } from '../sorting/sort';
-import { SortBy } from '../sorting/SortTypes';
 
 import { getScopeFilter } from './filter';
 import { getFilterLabels } from './FilterLabels';
@@ -27,7 +27,7 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
   const { territories } = useDataContext();
   const filterByScope = getScopeFilter();
   const filterLabels = getFilterLabels();
-  const sortFunction = getSortFunctionParameterized(SortBy.Population);
+  const sortFunction = getSortFunctionParameterized(Field.Population);
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 

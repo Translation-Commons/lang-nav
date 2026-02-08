@@ -3,23 +3,23 @@ import React from 'react';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import { ColorBy } from '@features/transforms/coloring/ColorTypes';
-import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
+import Field from '@features/transforms/fields/Field';
+import { getFieldsForObjectType } from '@features/transforms/fields/FieldApplicability';
 
 interface TreeListOptions {
   allExpanded: boolean;
   showInfoButton: boolean;
-  showData: ColorBy;
+  showData: Field;
   showObjectIDs: boolean;
   setAllExpanded: (value: boolean) => void;
   setShowInfoButton: (value: boolean) => void;
-  setShowData: (value: ColorBy) => void;
+  setShowData: (value: Field) => void;
   setShowObjectIDs: (value: boolean) => void;
 }
 const TreeListOptionsContext = React.createContext<TreeListOptions>({
   allExpanded: false,
   showInfoButton: true,
-  showData: 'None',
+  showData: Field.None,
   showObjectIDs: false,
   setAllExpanded: () => {},
   setShowInfoButton: () => {},
@@ -30,7 +30,7 @@ const TreeListOptionsContext = React.createContext<TreeListOptions>({
 export const TreeListOptionsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [allExpanded, setAllExpanded] = React.useState(false);
   const [showInfoButton, setShowInfoButton] = React.useState(true);
-  const [showData, setShowData] = React.useState<ColorBy>('None');
+  const [showData, setShowData] = React.useState<Field>(Field.None);
   const [showObjectIDs, setShowObjectIDs] = React.useState(false);
 
   const value = {
@@ -106,14 +106,13 @@ export function TreeListOptionsSelectors() {
 }
 
 const ShowDataSelector: React.FC<{
-  showData: ColorBy;
-  setShowData: (value: ColorBy) => void;
+  showData: Field;
+  setShowData: (value: Field) => void;
 }> = ({ showData, setShowData }) => {
   const { objectType } = usePageParams();
-  const applicableFields: ColorBy[] = ['None', ...getSortBysApplicableToObjectType(objectType)];
-
+  const applicableFields: Field[] = getFieldsForObjectType(objectType);
   return (
-    <Selector<ColorBy>
+    <Selector<Field>
       selectorLabel="Show Data"
       selectorDescription="Choose data to show to the right side of the items."
       options={applicableFields}

@@ -6,6 +6,7 @@ import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
+import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData } from '@entities/types/DataTypes';
 
@@ -54,7 +55,7 @@ const MapTerritories: React.FC<Props> = ({
 
     forEachTerritory((territory, element) => {
       if (isTerritoryInList(territory.ID)) {
-        if (colorBy !== 'None') {
+        if (colorBy !== Field.None) {
           const color = getColor(territory);
           element.style.fill = color || 'var(--color-button-secondary)';
         } else {

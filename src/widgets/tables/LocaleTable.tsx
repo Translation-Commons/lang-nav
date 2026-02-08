@@ -8,7 +8,7 @@ import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import {
   getLanguageRootLanguageFamily,
@@ -40,7 +40,7 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Name',
           render: (object) => <LocaleNameWithFilters locale={object} />,
-          sortParam: SortBy.Name,
+          field: Field.Name,
           columnGroup: 'Names',
         },
         EndonymColumn,
@@ -50,7 +50,7 @@ const LocaleTable: React.FC = () => {
           render: (object) => object.literacyPercent,
           isInitiallyVisible: false,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.Literacy,
+          field: Field.Literacy,
           columnGroup: 'Writing',
         },
         {
@@ -85,7 +85,7 @@ const LocaleTable: React.FC = () => {
             />
           ),
           isInitiallyVisible: false,
-          sortParam: SortBy.WritingSystem,
+          field: Field.WritingSystem,
           columnGroup: 'Writing',
         },
         {
@@ -93,13 +93,13 @@ const LocaleTable: React.FC = () => {
           render: (object) => <HoverableObjectName object={object.language} />,
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
-          sortParam: SortBy.Language,
+          field: Field.Language,
         },
         {
           key: 'Territory',
           render: (object) => <HoverableObjectName object={object.territory} />,
           isInitiallyVisible: false,
-          sortParam: SortBy.Territory,
+          field: Field.Territory,
           columnGroup: 'Linked Data',
         },
         {
@@ -109,7 +109,7 @@ const LocaleTable: React.FC = () => {
           ),
           isInitiallyVisible: false,
           valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfCountries,
+          field: Field.CountOfCountries,
           columnGroup: 'Linked Data',
         },
         {

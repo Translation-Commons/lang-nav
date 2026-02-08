@@ -3,7 +3,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { PageParamsContextState } from '@features/params/PageParamsContext';
 import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 const mockUpdatePageParams = vi.fn();
 
@@ -21,20 +21,20 @@ describe('createMockUsePageParams', () => {
   it('creates a mock PageParamsContextState with default values', () => {
     const mockParams = createMockUsePageParams();
 
-    expect(mockParams.sortBy).toBe(SortBy.Population);
+    expect(mockParams.sortBy).toBe(Field.Population);
     expect(mockParams.objectType).toBe(ObjectType.Language);
     expect(mockParams.view).toBe(View.CardList);
   });
 
   it('overrides default values when provided', () => {
     const overrides: PageParamsOptional = {
-      sortBy: SortBy.Name,
+      sortBy: Field.Name,
       objectType: ObjectType.Locale,
       limit: 25,
     };
     const mockParams = createMockUsePageParams(overrides);
 
-    expect(mockParams.sortBy).toBe(SortBy.Name);
+    expect(mockParams.sortBy).toBe(Field.Name);
     expect(mockParams.objectType).toBe(ObjectType.Locale);
     expect(mockParams.limit).toBe(25);
   });

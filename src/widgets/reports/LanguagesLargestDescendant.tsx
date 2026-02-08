@@ -7,7 +7,7 @@ import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getObjectPopulation';
@@ -78,13 +78,13 @@ const LanguagesLargestDescendant: React.FC = () => {
             key: 'Population',
             render: (lang: LanguageData) => lang.populationEstimate,
             valueType: TableValueType.Population,
-            sortParam: SortBy.Population,
+            field: Field.Population,
           },
           {
             key: 'Estimated Population of Descendants',
             render: (lang: LanguageData) => lang.populationOfDescendants,
             valueType: TableValueType.Population,
-            sortParam: SortBy.PopulationOfDescendants,
+            field: Field.PopulationOfDescendants,
           },
           {
             key: 'Largest Descendant',
@@ -107,7 +107,7 @@ const LanguagesLargestDescendant: React.FC = () => {
             render: (lang: LanguageData) =>
               getObjectPopulationPercentInBiggestDescendantLanguage(lang),
             valueType: TableValueType.Decimal,
-            sortParam: SortBy.PopulationPercentInBiggestDescendantLanguage,
+            field: Field.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}
         objects={filteredLanguages}

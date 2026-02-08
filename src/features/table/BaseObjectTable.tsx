@@ -51,7 +51,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                     <InfoIcon size="1em" display="block" />
                   </Hoverable>
                 )}
-                <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
+                <TableSortButton columnSortBy={column.field} valueType={column.valueType} />
               </th>
             ))}
           </tr>

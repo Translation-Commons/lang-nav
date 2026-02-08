@@ -7,7 +7,7 @@ import {
   PageParamsOptional,
   View,
 } from '@features/params/PageParamTypes';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 const CommonObjectives: React.FC = () => {
   return (
@@ -36,7 +36,7 @@ export const ObjectiveList: React.FC = () => {
       <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
       <Objective
         label="View a map of endangered languages."
-        urlParams={{ view: View.Map, limit: -1, colorBy: SortBy.VitalityEthnologueFine }}
+        urlParams={{ view: View.Map, limit: -1, colorBy: Field.VitalityEthnologueFine }}
       />
     </div>
   );

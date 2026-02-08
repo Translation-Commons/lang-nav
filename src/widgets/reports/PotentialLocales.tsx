@@ -8,9 +8,9 @@ import usePageParams from '@features/params/usePageParams';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -139,7 +139,7 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Potential Locale',
           render: (object) => <HoverableObjectName object={object} labelSource="code" />,
-          sortParam: SortBy.Code,
+          field: Field.Code,
         },
         {
           key: 'Language',
@@ -149,19 +149,19 @@ const PotentialLocalesTable: React.FC<{
             ) : (
               object.languageCode
             ),
-          sortParam: SortBy.Name,
+          field: Field.Name,
         },
         {
           key: 'Population',
           render: (object) => object.populationSpeaking,
           valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.Population,
         },
         {
           key: '% in Territory',
           render: (object) => object.populationSpeakingPercent,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.PercentOfTerritoryPopulation,
+          field: Field.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
@@ -169,7 +169,7 @@ const PotentialLocalesTable: React.FC<{
             object.populationSpeaking &&
             (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+          field: Field.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',

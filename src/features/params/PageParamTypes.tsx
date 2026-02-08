@@ -1,6 +1,6 @@
-import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
-import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
@@ -90,8 +90,8 @@ export enum PageParamKey {
 }
 
 export type PageParams = {
-  colorBy: ColorBy;
-  scaleBy: ScaleBy;
+  colorBy: Field;
+  scaleBy: Field;
   colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
   isoStatus: LanguageISOStatus[];
@@ -108,7 +108,7 @@ export type PageParams = {
   searchBy: SearchableField;
   searchString: string;
   sortBehavior: SortBehavior;
-  sortBy: SortBy;
+  sortBy: Field;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
@@ -118,8 +118,8 @@ export type PageParams = {
 };
 
 export type PageParamsOptional = {
-  colorBy?: ColorBy;
-  scaleBy?: ScaleBy;
+  colorBy?: Field;
+  scaleBy?: Field;
   colorGradient?: ColorGradient;
   columns?: TableIDToBinarizedColumnVisibility;
   isoStatus?: LanguageISOStatus[];
@@ -136,7 +136,7 @@ export type PageParamsOptional = {
   searchBy?: SearchableField;
   searchString?: string;
   sortBehavior?: SortBehavior;
-  sortBy?: SortBy;
+  sortBy?: Field;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;

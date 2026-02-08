@@ -12,7 +12,7 @@ import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import {
   getLanguageRootLanguageFamily,
@@ -74,7 +74,7 @@ const LanguageTable: React.FC = () => {
         isInitiallyVisible: false,
         valueType: TableValueType.Enum,
         columnGroup: 'Context',
-        sortParam: SortBy.Modality,
+        field: Field.Modality,
       },
       ...LanguagePopulationColumns,
       ...LanguageVitalityColumns,
@@ -109,7 +109,7 @@ const LanguageTable: React.FC = () => {
         ),
         valueType: TableValueType.Count,
         isInitiallyVisible: false,
-        sortParam: SortBy.CountOfLanguages,
+        field: Field.CountOfLanguages,
         columnGroup: 'Relations',
       },
       {
@@ -121,7 +121,7 @@ const LanguageTable: React.FC = () => {
             ))}
           </CommaSeparated>
         ),
-        sortParam: SortBy.Territory,
+        field: Field.Territory,
         columnGroup: 'Location',
       },
       {
@@ -133,14 +133,14 @@ const LanguageTable: React.FC = () => {
         ),
         isInitiallyVisible: false,
         valueType: TableValueType.Count,
-        sortParam: SortBy.CountOfCountries,
+        field: Field.CountOfCountries,
         columnGroup: 'Location',
       },
       {
         key: 'Latitude',
         render: (lang) => lang.latitude?.toFixed(2),
         isInitiallyVisible: false,
-        sortParam: SortBy.Latitude,
+        field: Field.Latitude,
         valueType: TableValueType.Decimal,
         columnGroup: 'Location',
       },
@@ -148,7 +148,7 @@ const LanguageTable: React.FC = () => {
         key: 'Longitude',
         render: (lang) => lang.longitude?.toFixed(2),
         isInitiallyVisible: false,
-        sortParam: SortBy.Longitude,
+        field: Field.Longitude,
         valueType: TableValueType.Decimal,
         columnGroup: 'Location',
       },
@@ -163,14 +163,14 @@ const LanguageTable: React.FC = () => {
         ),
         render: (lang) => <LanguageWritingSystems lang={lang} />,
         isInitiallyVisible: false,
-        sortParam: SortBy.WritingSystem,
+        field: Field.WritingSystem,
         columnGroup: 'Writing',
       },
       {
         key: 'Literacy',
         render: (lang) => getObjectLiteracy(lang),
         isInitiallyVisible: false,
-        sortParam: SortBy.Literacy,
+        field: Field.Literacy,
         valueType: TableValueType.Decimal,
         columnGroup: 'Writing',
       },
