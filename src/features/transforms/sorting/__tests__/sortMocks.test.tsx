@@ -11,6 +11,35 @@ import { SortBehavior } from '../SortTypes';
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
 describe('getSortByParameterized', () => {
+  it('sortBy: None', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(Field.None, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      // Original input order
+      '123',
+      'sjn',
+      'dori0123',
+      'BE',
+      'ER',
+      'HA',
+      'AM',
+      '001',
+      'be0590',
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER',
+      'Teng',
+      'sjn_Teng_BE',
+      'tolkorth',
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+    ]);
+  });
+
   it('sortBy: Code', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(Field.Code, SortBehavior.Normal);
@@ -627,6 +656,41 @@ describe('getSortByParameterized', () => {
       // All below undefined, stable to input order
       'be0590',
       'Teng',
+      'tolkorth',
+    ]);
+  });
+
+  it('sortBy: Depth', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(Field.Depth, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      // Depth 0 (root nodes)
+      'sjn',
+      '001',
+      'Teng',
+
+      // Depth 1
+      '123',
+      'dori0123',
+      'AM',
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER',
+      'sjn_123',
+      'dori0123_123',
+      'sjn_001',
+      'dori0123_001',
+      'BE',
+      'ER',
+      'HA',
+
+      // Depth 2
+      'sjn_Teng_BE',
+      'sjn_Teng_123',
+      'sjn_Teng_001',
+
+      // Undefined depth, stable to input order
+      'be0590',
       'tolkorth',
     ]);
   });

@@ -4,6 +4,7 @@ import {
   getCountOfCensuses,
   getCountOfLanguages,
   getCountOfWritingSystems,
+  getDepth,
   getObjectDateAsNumber,
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
@@ -38,7 +39,6 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return object.nameDisplay;
     case Field.Endonym:
       return object.nameEndonym;
-
     // Counts of Related Objects
     case Field.CountOfLanguages:
       return getCountOfLanguages(object);
@@ -51,6 +51,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.CountOfCensuses:
       return getCountOfCensuses(object);
 
+    case Field.Depth:
+      return getDepth(object);
     case Field.Literacy:
       return getObjectLiteracy(object);
     case Field.Date:

@@ -3,6 +3,7 @@ import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTy
 import { ObjectData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { maxBy } from '@shared/lib/setUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
 import Field from './Field';
@@ -35,6 +36,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
     case Field.Area:
+    case Field.Depth:
       return 0;
     case Field.None:
       return 0;
@@ -84,9 +86,8 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.Area:
-      return Math.max(
-        objects.reduce((acc, obj) => Math.max(acc, (getField(obj, field) as number) || 0), 0),
-      );
+    case Field.Depth:
+      return maxBy(objects, (obj) => (getField(obj, field) as number) || 0) || 0;
     case Field.Name:
     case Field.Endonym:
     case Field.Code:

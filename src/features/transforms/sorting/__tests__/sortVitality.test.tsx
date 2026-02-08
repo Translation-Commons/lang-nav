@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
+import computeRecursiveLanguageData from '@features/data/compute/computeRecursiveLanguageData';
 import { ObjectType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 import { getBaseLanguageData, LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
-import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
@@ -44,7 +44,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('fr', 'French', { eth2012: VitalityEthnologueFine.Threatened }), // 4
         createLanguageWithVitality('es', 'Spanish', { eth2012: VitalityEthnologueFine.Shifting }), // 3
       ];
-      precomputeLanguageVitality(langs);
+      computeRecursiveLanguageData(langs);
 
       const sortFn = getSortFunctionParameterized(Field.VitalityMetascore, SortBehavior.Normal);
       const sorted = [...langs].sort(sortFn);
@@ -59,7 +59,7 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('en', 'English', {}), // no data = -1
         createLanguageWithVitality('fr', 'French', { eth2012: VitalityEthnologueFine.Threatened }), // 4
       ];
-      precomputeLanguageVitality(langs);
+      computeRecursiveLanguageData(langs);
 
       const sortFn = getSortFunctionParameterized(Field.VitalityMetascore, SortBehavior.Normal);
       const sorted = [...langs].sort(sortFn);
@@ -77,7 +77,7 @@ describe('Vitality Sorting', () => {
       langs[0].populationEstimate = 100;
       langs[1].populationEstimate = 300;
       langs[2].populationEstimate = 200;
-      precomputeLanguageVitality(langs);
+      computeRecursiveLanguageData(langs);
 
       const sortFn = getSortFunctionParameterized(
         Field.VitalityMetascore,
@@ -106,7 +106,7 @@ describe('Vitality Sorting', () => {
         population: 0,
         populationFromUN: 0,
       };
-      precomputeLanguageVitality([lang]);
+      computeRecursiveLanguageData([lang]);
 
       const sortFn = getSortFunctionParameterized(Field.VitalityMetascore, SortBehavior.Normal);
       const sorted = [territory, lang].sort(sortFn);

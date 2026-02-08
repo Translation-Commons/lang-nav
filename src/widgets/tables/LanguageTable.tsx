@@ -13,6 +13,7 @@ import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import ObjectFieldDisplay from '@features/transforms/fields/ObjectFieldDisplay';
 
 import {
   getLanguageRootLanguageFamily,
@@ -96,6 +97,16 @@ const LanguageTable: React.FC = () => {
         key: 'Language Family',
         render: (lang) => <HoverableObjectName object={getLanguageRootLanguageFamily(lang)} />,
         isInitiallyVisible: false,
+        columnGroup: 'Relations',
+      },
+      {
+        key: 'Depth',
+        description: 'How deep in a language family tree this language is.',
+        render: (lang) => <ObjectFieldDisplay object={lang} field={Field.Depth} />,
+        exportValue: (lang) => lang.depth ?? '', // Export as blank instead of "—"
+        isInitiallyVisible: false,
+        valueType: TableValueType.Count,
+        field: Field.Depth,
         columnGroup: 'Relations',
       },
       {
