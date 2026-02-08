@@ -11,6 +11,7 @@ import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
+
 import DrawableData from './DrawableData';
 import MapCircles from './MapCircles';
 import MapHoverContent from './MapHoverContent';
