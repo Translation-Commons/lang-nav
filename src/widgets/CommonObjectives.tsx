@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { LangNavPageName } from '@app/PageRoutes';
+
 import { getNewURL } from '@features/params/getNewURL';
 import {
   ObjectType,
@@ -25,7 +27,7 @@ export const ObjectiveList: React.FC = () => {
         label="Find information about a language."
         inputPlaceholder="Enter a language name"
         inputParam={PageParamKey.searchString}
-        urlParams={{ limit: 1 }}
+        urlPath={LangNavPageName.Lucky}
       />
       <Objective
         label="See the languages in a country."
@@ -46,14 +48,16 @@ type ObjectiveProps = {
   label: string;
   inputPlaceholder?: string;
   inputParam?: keyof PageParamsOptional;
-  urlParams: PageParamsOptional;
+  urlParams?: PageParamsOptional;
+  urlPath?: LangNavPageName;
 };
 
 const Objective: React.FC<ObjectiveProps> = ({
   inputPlaceholder,
   inputParam,
   label,
-  urlParams,
+  urlParams = {},
+  urlPath = LangNavPageName.Data,
 }) => {
   const [inputText, setInputText] = useState('');
   let params: PageParamsOptional = { ...urlParams };
@@ -66,7 +70,7 @@ const Objective: React.FC<ObjectiveProps> = ({
         style={{ display: 'inline-flex' }}
         onSubmit={(e) => {
           e.preventDefault();
-          window.location.href = `data${getNewURL(params)}`;
+          window.location.href = `${urlPath}${getNewURL(params)}`;
         }}
       >
         {inputParam && (
@@ -77,15 +81,18 @@ const Objective: React.FC<ObjectiveProps> = ({
             onChange={(e) => setInputText(e.target.value)}
           />
         )}
-        <GoButton params={params} />
+        <GoButton params={params} urlPath={urlPath} />
       </form>
     </div>
   );
 };
 
-const GoButton: React.FC<{ params: PageParamsOptional }> = ({ params }) => {
+const GoButton: React.FC<{ params: PageParamsOptional; urlPath: LangNavPageName }> = ({
+  params,
+  urlPath,
+}) => {
   return (
-    <a href={`data${getNewURL(params)}`} style={{ marginLeft: '0.5em' }}>
+    <a href={`${urlPath}${getNewURL(params)}`} style={{ marginLeft: '0.5em' }}>
       <button style={{ padding: '0.25em 0.5em' }} type="submit">
         GO
       </button>
