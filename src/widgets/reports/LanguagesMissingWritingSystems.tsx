@@ -2,9 +2,6 @@ import React, { useMemo } from 'react';
 
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
-import { getLanguageRootLanguageFamily } from '@entities/language/LanguageFamilyUtils';
-import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
-import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
@@ -14,6 +11,11 @@ import { getFilterByVitality, getScopeFilter } from '@features/transforms/filter
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import { getSortFunction } from '@features/transforms/sorting/sort';
+
+import { getLanguageRootLanguageFamily } from '@entities/language/LanguageFamilyUtils';
+import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
+import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
+
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import ViewCard from '@shared/containers/ViewCard';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -76,7 +78,9 @@ const LanguagesMissingWritingSystems: React.FC = () => {
                 </div>
                 <div>
                   <label>ISO Status:</label>
-                  {getLanguageISOStatusLabel(lang.ISO.status) || <Deemphasized>Unknown</Deemphasized>}
+                  {getLanguageISOStatusLabel(lang.ISO.status) || (
+                    <Deemphasized>Unknown</Deemphasized>
+                  )}
                 </div>
                 <div>
                   <label>Modality:</label>
