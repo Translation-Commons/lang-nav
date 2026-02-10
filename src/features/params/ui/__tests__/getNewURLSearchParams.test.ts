@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { ObjectType, View } from '@features/params/PageParamTypes';
+import Field from '@features/transforms/fields/Field';
 
 describe('getNewURLSearchParams', () => {
   it('migrates searchString to languageFilter when switching from Language', () => {
@@ -78,5 +79,27 @@ describe('getNewURLSearchParams', () => {
 
     expect(result.get('searchString')).toBeNull();
     expect(result.get('languageFilter')).toBeNull();
+  });
+
+  it('promotes previous sortBy to secondarySortBy when user changes primary sortBy', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.VitalityMetascore }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
+    expect(result.get('secondarySortBy')).toBe(Field.Population);
+  });
+
+  it('does not set secondarySortBy when sortBy is unchanged', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.Population }, prev);
+
+    // sortBy may be removed when it equals default (Population); we only assert we did not promote to secondary
+    expect(result.get('secondarySortBy')).toBeNull();
   });
 });

@@ -119,6 +119,15 @@ function clearContextDependentParams(
     }
   }
 
+  // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker)
+  if (
+    newParams.sortBy !== undefined &&
+    prev?.get(PageParamKey.sortBy) &&
+    newParams.sortBy !== prev.get(PageParamKey.sortBy)
+  ) {
+    next.set(PageParamKey.secondarySortBy, prev.get(PageParamKey.sortBy)!);
+  }
+
   return next;
 }
 

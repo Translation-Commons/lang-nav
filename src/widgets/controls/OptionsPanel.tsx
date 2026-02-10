@@ -21,6 +21,7 @@ import {
 } from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
 import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
+import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
@@ -69,6 +70,7 @@ const OptionsPanel: React.FC = () => {
           <ViewSelector />
           <LimitInput />
           <SortBySelector />
+          <SecondarySortBySelector />
           <SortDirectionSelector />
           <ColorBySelector />
           <ScaleBySelector />
