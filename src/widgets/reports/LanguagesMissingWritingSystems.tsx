@@ -1,7 +1,5 @@
 import React, { useMemo } from 'react';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
-import { LanguageData } from '@entities/language/LanguageTypes';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { getLanguageRootLanguageFamily } from '@entities/language/LanguageFamilyUtils';
