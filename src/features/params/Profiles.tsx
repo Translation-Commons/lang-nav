@@ -53,6 +53,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   profile: ProfileType.LanguageEthusiast,
   searchBy: SearchableField.CodeOrNameAny,
   searchString: '',
+  secondarySortBy: Field.None,
   sortBehavior: SortBehavior.Normal,
   sortBy: Field.Population,
   territoryFilter: '',

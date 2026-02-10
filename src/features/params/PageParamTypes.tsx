@@ -78,6 +78,7 @@ export enum PageParamKey {
   profile = 'profile',
   searchBy = 'searchBy',
   searchString = 'searchString',
+  secondarySortBy = 'secondarySortBy',
   sortBehavior = 'sortBehavior',
   sortBy = 'sortBy',
   territoryFilter = 'territoryFilter',
@@ -107,6 +108,7 @@ export type PageParams = {
   profile: ProfileType;
   searchBy: SearchableField;
   searchString: string;
+  secondarySortBy: Field;
   sortBehavior: SortBehavior;
   sortBy: Field;
   territoryFilter: string;
@@ -135,6 +137,7 @@ export type PageParamsOptional = {
   profile?: ProfileType;
   searchBy?: SearchableField;
   searchString?: string;
+  secondarySortBy?: Field;
   sortBehavior?: SortBehavior;
   sortBy?: Field;
   territoryFilter?: string;

@@ -68,6 +68,30 @@ describe('Vitality Sorting', () => {
       expect(sorted[1].codeDisplay).toBe('en'); // no data
     });
 
+    it('uses secondarySortBy (e.g. Population) as tie-breaker when primary ties', () => {
+      const langs = [
+        createLanguageWithVitality('a', 'A', { eth2012: VitalityEthnologueFine.Threatened }),
+        createLanguageWithVitality('b', 'B', { eth2012: VitalityEthnologueFine.Threatened }),
+        createLanguageWithVitality('c', 'C', { eth2012: VitalityEthnologueFine.Threatened }),
+      ];
+      langs[0].populationEstimate = 100;
+      langs[1].populationEstimate = 300;
+      langs[2].populationEstimate = 200;
+      precomputeLanguageVitality(langs);
+
+      const sortFn = getSortFunctionParameterized(
+        Field.VitalityMetascore,
+        SortBehavior.Normal,
+        Field.Population,
+      );
+      const sorted = [...langs].sort(sortFn);
+
+      // Same vitality → order by population descending: b (300), c (200), a (100)
+      expect(sorted[0].codeDisplay).toBe('b');
+      expect(sorted[1].codeDisplay).toBe('c');
+      expect(sorted[2].codeDisplay).toBe('a');
+    });
+
     it('sorts non-language objects to the end', () => {
       const lang = createLanguageWithVitality('en', 'English', {
         eth2012: VitalityEthnologueFine.National,

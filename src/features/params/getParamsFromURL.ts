@@ -109,6 +109,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.sortBy:
         params.sortBy = value as Field;
         break;
+      case PageParamKey.secondarySortBy:
+        params.secondarySortBy = value as Field;
+        break;
       case PageParamKey.colorBy:
         params.colorBy = value as Field;
         break;

@@ -12,24 +12,54 @@ import { SortBehavior, SortDirection } from './SortTypes';
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
 export function getSortFunction(): SortByFunctionType {
-  const { sortBy, sortBehavior } = usePageParams();
+  const { sortBy, secondarySortBy, sortBehavior } = usePageParams();
 
-  return getSortFunctionParameterized(sortBy, sortBehavior);
+  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy);
 }
 
 export function getSortFunctionParameterized(
   sortBy: Field,
   sortDirection: SortBehavior = SortBehavior.Normal,
+  secondarySortBy?: Field,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;
+  const secondaryDirection =
+    secondarySortBy != null && secondarySortBy !== Field.None
+      ? getNormalSortDirection(secondarySortBy) * sortDirection
+      : null;
+
+  const effectiveSecondary: Field | null =
+    secondarySortBy != null && secondarySortBy !== Field.None && secondarySortBy !== sortBy
+      ? secondarySortBy
+      : null;
+
   return (a: ObjectData, b: ObjectData) => {
+    const compareSecondary = (): number => {
+      if (secondaryDirection == null || effectiveSecondary == null) return 0;
+      const aSecondary = getField(a, effectiveSecondary);
+      const bSecondary = getField(b, effectiveSecondary);
+      if (aSecondary == null) return bSecondary == null ? 0 : 1;
+      if (bSecondary == null) return -1;
+      if (aSecondary > bSecondary) return secondaryDirection;
+      if (bSecondary > aSecondary) return -secondaryDirection;
+      return 0;
+    };
+
     const aField = getField(a, sortBy);
     const bField = getField(b, sortBy);
-    if (aField == null) return bField == null ? 0 : 1;
+    // If both primary fields are missing, fall back to the secondary sort if available
+    if (aField == null && bField == null) {
+      return compareSecondary();
+    }
+
+    // If only one primary field is missing, keep the previous behavior: nulls last
+    if (aField == null) return 1;
     if (bField == null) return -1; // puts last regardless of ascending/descending
+
     if (aField > bField) return direction;
     if (bField > aField) return -direction;
-    return 0;
+    // Tie on primary: break by secondary sort if configured and different from primary
+    return compareSecondary();
   };
 }
 
