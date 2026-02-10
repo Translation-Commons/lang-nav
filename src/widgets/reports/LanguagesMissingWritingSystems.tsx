@@ -1,9 +1,7 @@
-import React, { useMemo } from 'react';
-
-import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
-
 import { getLanguageRootLanguageFamily } from '@entities/language/LanguageFamilyUtils';
+import { LanguageModality } from '@entities/language/LanguageModality';
 import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -18,6 +16,8 @@ import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import ViewCard from '@shared/containers/ViewCard';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
+import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
+import React, { useMemo } from 'react';
 
 const LanguagesMissingWritingSystems: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
