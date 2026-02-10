@@ -119,13 +119,16 @@ function clearContextDependentParams(
     }
   }
 
-  // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker)
+  // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker).
+  // Do not overwrite if user explicitly set secondarySortBy in this update (e.g. to None).
+  const prevSortBy = prev?.get(PageParamKey.sortBy);
   if (
     newParams.sortBy !== undefined &&
-    prev?.get(PageParamKey.sortBy) &&
-    newParams.sortBy !== prev.get(PageParamKey.sortBy)
+    prevSortBy &&
+    newParams.sortBy !== prevSortBy &&
+    newParams.secondarySortBy === undefined
   ) {
-    next.set(PageParamKey.secondarySortBy, prev.get(PageParamKey.sortBy)!);
+    next.set(PageParamKey.secondarySortBy, prevSortBy);
   }
 
   return next;

@@ -92,6 +92,18 @@ describe('getNewURLSearchParams', () => {
     expect(result.get('secondarySortBy')).toBe(Field.Population);
   });
 
+  it('when new primary was the old secondary (A then B → user picks B), result is B then A', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population, // A
+      secondarySortBy: Field.VitalityMetascore, // B
+    });
+
+    const result = getNewURLSearchParams({ sortBy: Field.VitalityMetascore }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore); // B
+    expect(result.get('secondarySortBy')).toBe(Field.Population); // A (old primary), not B
+  });
+
   it('does not set secondarySortBy when sortBy is unchanged', () => {
     const prev = new URLSearchParams({
       sortBy: Field.Population,
@@ -100,6 +112,35 @@ describe('getNewURLSearchParams', () => {
     const result = getNewURLSearchParams({ sortBy: Field.Population }, prev);
 
     // sortBy may be removed when it equals default (Population); we only assert we did not promote to secondary
+    expect(result.get('secondarySortBy')).toBeNull();
+  });
+
+  it('when user sets secondarySortBy to None only, URL has no secondarySortBy', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Name, // non-default so it stays in URL
+      secondarySortBy: Field.VitalityMetascore,
+    });
+
+    const result = getNewURLSearchParams({ secondarySortBy: Field.None }, prev);
+
+    expect(result.get('sortBy')).toBe(Field.Name);
+    // None is default so it is removed from URL
+    expect(result.get('secondarySortBy')).toBeNull();
+  });
+
+  it('when user changes primary and sets secondary to None in same update, secondary stays None', () => {
+    const prev = new URLSearchParams({
+      sortBy: Field.Population,
+      secondarySortBy: Field.VitalityMetascore,
+    });
+
+    const result = getNewURLSearchParams(
+      { sortBy: Field.VitalityMetascore, secondarySortBy: Field.None },
+      prev,
+    );
+
+    expect(result.get('sortBy')).toBe(Field.VitalityMetascore);
+    // User explicitly chose None; must not be overwritten by old primary
     expect(result.get('secondarySortBy')).toBeNull();
   });
 });

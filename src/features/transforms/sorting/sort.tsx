@@ -34,22 +34,32 @@ export function getSortFunctionParameterized(
       : null;
 
   return (a: ObjectData, b: ObjectData) => {
-    const aField = getField(a, sortBy);
-    const bField = getField(b, sortBy);
-    if (aField == null) return bField == null ? 0 : 1;
-    if (bField == null) return -1; // puts last regardless of ascending/descending
-    if (aField > bField) return direction;
-    if (bField > aField) return -direction;
-    // Tie on primary: break by secondary sort if configured and different from primary
-    if (secondaryDirection != null && effectiveSecondary != null) {
+    const compareSecondary = (): number => {
+      if (secondaryDirection == null || effectiveSecondary == null) return 0;
       const aSecondary = getField(a, effectiveSecondary);
       const bSecondary = getField(b, effectiveSecondary);
       if (aSecondary == null) return bSecondary == null ? 0 : 1;
       if (bSecondary == null) return -1;
       if (aSecondary > bSecondary) return secondaryDirection;
       if (bSecondary > aSecondary) return -secondaryDirection;
+      return 0;
+    };
+
+    const aField = getField(a, sortBy);
+    const bField = getField(b, sortBy);
+    // If both primary fields are missing, fall back to the secondary sort if available
+    if (aField == null && bField == null) {
+      return compareSecondary();
     }
-    return 0;
+
+    // If only one primary field is missing, keep the previous behavior: nulls last
+    if (aField == null) return 1;
+    if (bField == null) return -1; // puts last regardless of ascending/descending
+
+    if (aField > bField) return direction;
+    if (bField > aField) return -direction;
+    // Tie on primary: break by secondary sort if configured and different from primary
+    return compareSecondary();
   };
 }
 
