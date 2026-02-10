@@ -5,16 +5,17 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { getLanguageRootLanguageFamily } from '@entities/language/LanguageFamilyUtils';
+import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
+import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { getFilterByVitality, getScopeFilter } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import { getSortFunction } from '@features/transforms/sorting/sort';
-
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import ViewCard from '@shared/containers/ViewCard';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -25,6 +26,7 @@ const LanguagesMissingWritingSystems: React.FC = () => {
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const filterByScope = getScopeFilter();
+  const filterByVitality = getFilterByVitality();
   const sortFunction = getSortFunction();
   const { getCurrentObjects } = usePagination<LanguageData>();
 
@@ -34,6 +36,7 @@ const LanguagesMissingWritingSystems: React.FC = () => {
         .filter(filterBySubstring)
         .filter(filterByConnections)
         .filter(filterByScope)
+        .filter(filterByVitality)
         .filter((lang) => !lang.writingSystems || Object.keys(lang.writingSystems).length === 0)
         .filter((lang) => lang.modality !== LanguageModality.Sign),
     [languagesInSelectedSource, filterBySubstring, filterByConnections, filterByScope],
@@ -75,11 +78,11 @@ const LanguagesMissingWritingSystems: React.FC = () => {
                 </div>
                 <div>
                   <label>ISO Status:</label>
-                  {lang.ISO.status || <Deemphasized>Unknown</Deemphasized>}
+                  {getLanguageISOStatusLabel(lang.ISO.status) || <Deemphasized>Unknown</Deemphasized>}
                 </div>
                 <div>
                   <label>Modality:</label>
-                  {lang.modality || <Deemphasized>Unknown</Deemphasized>}
+                  {getModalityLabel(lang.modality) || <Deemphasized>Unknown</Deemphasized>}
                 </div>
                 <div>
                   <label>Population:</label>
