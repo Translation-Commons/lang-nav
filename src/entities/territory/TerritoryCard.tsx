@@ -1,3 +1,4 @@
+import { GlobeIcon, LandmarkIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -8,8 +9,10 @@ import { TerritoryData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
+import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 interface Props {
   territory: TerritoryData;
@@ -28,14 +31,23 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         </a>
         <ObjectSubtitle object={territory} />
       </h3>
-      <div>
-        <h4>Population</h4>
-        <CountOfPeople count={population} />
-      </div>
-
-      {locales && locales.length > 0 && (
-        <div>
-          <h4>Languages:</h4>
+      <CardField
+        title="Population"
+        icon={UsersIcon}
+        description="Population: How many people live in this territory."
+      >
+        {population != null ? (
+          <CountOfPeople count={population} />
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
+      <CardField
+        title="Languages"
+        icon={GlobeIcon}
+        description="Languages: Languages spoken in this territory."
+      >
+        {locales && locales.length > 0 ? (
           <CommaSeparated>
             {Object.values(locales)
               .filter(filterByScope)
@@ -43,15 +55,22 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
                 <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
               ))}
           </CommaSeparated>
-        </div>
-      )}
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
 
-      {sovereign != null && (
-        <div>
-          <h4>Part of:</h4>
+      <CardField
+        title="Part of"
+        icon={LandmarkIcon}
+        description="Sovereignty: The larger entity this territory belongs to."
+      >
+        {sovereign ? (
           <HoverableObjectName object={sovereign} />
-        </div>
-      )}
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
     </div>
   );
 };
