@@ -77,6 +77,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Longitude:
     case Field.Latitude:
     case Field.Modality:
+    case Field.Depth:
       return SortDirection.Ascending; // A to Z
     case Field.Date:
     case Field.Population:

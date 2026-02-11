@@ -1,12 +1,14 @@
 import { describe, expect, it } from 'vitest';
 
+import computeRecursiveLanguageData from '@features/data/compute/computeRecursiveLanguageData';
+
 import {
   getBaseLanguageData,
   LanguageData,
   LanguageVitality,
 } from '@entities/language/LanguageTypes';
 
-import { getVitalityMetascore, precomputeLanguageVitality } from '../LanguageVitalityComputation';
+import { getVitalityMetascore } from '../LanguageVitalityComputation';
 import {
   parseLanguageISOStatus,
   parseVitalityEthnologue2012,
@@ -133,7 +135,7 @@ describe('computeVitalityMetascore', () => {
     expect(metascoreBefore).toBeUndefined();
 
     // Simulate precomputation
-    precomputeLanguageVitality([lang]);
+    computeRecursiveLanguageData([lang]);
     const metascoreAfter = getVitalityMetascore(lang);
     expect(metascoreAfter).toBe(5.5); // (5 + 6) / 2
     expect(lang.vitality?.meta).toBe(5.5);

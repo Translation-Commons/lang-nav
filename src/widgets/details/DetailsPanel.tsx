@@ -34,7 +34,7 @@ const DetailsPanel: React.FC = () => {
     >
       <DetailsBody>
         <PathContainer style={{ marginTop: '0.5em' }}>
-          <ObjectPath />
+          <ObjectPath object={object} />
         </PathContainer>
         <Suspense fallback={<Loading />}>{object && <ObjectDetails object={object} />}</Suspense>
         {!object && (

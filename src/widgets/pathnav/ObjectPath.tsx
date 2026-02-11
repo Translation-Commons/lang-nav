@@ -6,15 +6,16 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import ObjectPathChildren from './ObjectPathChildren';
 import ObjectPathParents from './ObjectPathParents';
 
-const ObjectPath: React.FC = () => {
-  const { objectID, languageSource } = usePageParams();
-  const object = getObjectFromID(objectID);
+const ObjectPath: React.FC<{ object: ObjectData | undefined; showChildren?: boolean }> = ({
+  object,
+  showChildren = true,
+}) => {
+  const { languageSource } = usePageParams();
   if (!object) return null;
   if (object.type === ObjectType.Language) {
     // Not all language sources have parent/child data
@@ -36,7 +37,7 @@ const ObjectPath: React.FC = () => {
     <>
       <ObjectPathParents object={object} />
       <ObjectName object={object} />
-      <ObjectPathChildren object={object} />
+      {showChildren && <ObjectPathChildren object={object} />}
     </>
   );
 };

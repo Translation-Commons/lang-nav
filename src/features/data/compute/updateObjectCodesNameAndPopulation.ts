@@ -1,11 +1,11 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
-import { precomputeLanguageVitality } from '@entities/language/vitality/LanguageVitalityComputation';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
 
+import computeRecursiveLanguageData from './computeRecursiveLanguageData';
 import { updatePopulations } from './updatePopulations';
 
 /**
@@ -35,7 +35,7 @@ export function updateObjectCodesNameAndPopulation(
   updateParentsAndDescendants(languages, languageSource);
   updatePopulations(languages, locales, world);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
-  precomputeLanguageVitality(languages);
+  computeRecursiveLanguageData(languages);
 }
 
 // Update parent/child relationships

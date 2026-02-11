@@ -26,6 +26,7 @@ import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralC
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import { getObjectLiteracy } from '@entities/lib/getObjectMiscFields';
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
+import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -110,6 +111,16 @@ const LanguageTable: React.FC = () => {
         valueType: TableValueType.Count,
         isInitiallyVisible: false,
         field: Field.CountOfLanguages,
+        columnGroup: 'Relations',
+      },
+      {
+        key: 'Depth',
+        description: 'How deep in a language family tree this language is.',
+        render: (lang) => <ObjectDepthDisplay object={lang} />,
+        exportValue: (lang) => lang.depth ?? '', // Export as blank instead of "—"
+        isInitiallyVisible: false,
+        valueType: TableValueType.Count,
+        field: Field.Depth,
         columnGroup: 'Relations',
       },
       {

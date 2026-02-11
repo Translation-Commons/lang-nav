@@ -12,6 +12,7 @@ enum Field {
   Longitude = 'Longitude',
   Date = 'Date',
   Area = 'Area',
+  Depth = 'Depth',
 
   // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',

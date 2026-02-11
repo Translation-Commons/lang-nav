@@ -41,6 +41,7 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.Depth:
       return ColorGradient.SequentialBlue;
 
     default:

@@ -5,6 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectData, TerritoryScope, WritingSystemData } from '@entities/types/DataTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
@@ -109,7 +110,8 @@ export function getCountOfWritingSystems(object: ObjectData): number | undefined
 }
 
 export function getWritingSystemsInObject(object: ObjectData): WritingSystemData[] | undefined {
-  switch (object.type) {
+  const { type } = object;
+  switch (type) {
     case ObjectType.Language:
       // Putting the primary writing system first
       return uniqueBy(
@@ -149,12 +151,15 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
       );
     case ObjectType.Census:
       return undefined; // Potentially derivable, but computationally expensive
+    default:
+      enforceExhaustiveSwitch(type);
   }
 }
 
 // Field.CountOfCensuses
 export function getCountOfCensuses(object: ObjectData): number | undefined {
-  switch (object.type) {
+  const { type } = object;
+  switch (type) {
     case ObjectType.Territory:
       return object.censuses?.length ?? 0;
     case ObjectType.Locale:
@@ -165,5 +170,29 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
     case ObjectType.WritingSystem:
     case ObjectType.VariantTag:
       return undefined;
+    default:
+      enforceExhaustiveSwitch(type);
+  }
+}
+
+// Field.Depth
+export function getDepth(object: ObjectData): number | undefined {
+  const { type } = object;
+  switch (type) {
+    case ObjectType.Language:
+      return object.depth;
+    case ObjectType.Locale:
+      // Locales are named like language_territory_variant, so depth is number of underscores
+      return object.ID.split('_').length - 1;
+    case ObjectType.Territory:
+      // Root territories with no parent region have depth 0, otherwise depth is parent's depth + 1
+      return object.parentUNRegion != null ? getDepth(object.parentUNRegion)! + 1 : 0;
+    case ObjectType.WritingSystem:
+      return object.parentWritingSystem ? getDepth(object.parentWritingSystem)! + 1 : 0;
+    case ObjectType.Census:
+    case ObjectType.VariantTag:
+      return undefined;
+    default:
+      enforceExhaustiveSwitch(type);
   }
 }

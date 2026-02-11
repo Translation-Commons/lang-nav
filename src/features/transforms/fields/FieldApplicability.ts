@@ -13,6 +13,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.Locale:
       return [
         Field.Endonym,
+        Field.Depth,
         Field.PopulationDirectlySourced,
         Field.Literacy,
         Field.Modality,
@@ -30,6 +31,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.Territory:
       return [
         Field.Endonym,
+        Field.Depth,
         Field.Literacy,
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
@@ -49,6 +51,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.Language:
       return [
         Field.Endonym,
+        Field.Depth,
         Field.Literacy,
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
@@ -78,6 +81,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.WritingSystem:
       return [
         Field.Endonym,
+        Field.Depth,
         // Field.Literacy, Data not available yet
         Field.Language,
         Field.CountOfLanguages,
@@ -126,6 +130,7 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): Field
     Field.Population,
     Field.PopulationDirectlySourced,
     Field.Area,
+    Field.Depth,
     Field.CountOfLanguages,
     Field.CountOfWritingSystems,
     Field.CountOfCountries,
@@ -158,6 +163,7 @@ export function getScaleBysApplicableToObjectType(objectType: ObjectType): Field
     Field.Population,
     Field.PopulationDirectlySourced,
     Field.Area,
+    Field.Depth,
     Field.CountOfLanguages,
     Field.CountOfCountries,
     Field.CountOfChildTerritories,
