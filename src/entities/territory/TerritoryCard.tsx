@@ -68,7 +68,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         {sovereign ? (
           <HoverableObjectName object={sovereign} />
         ) : (
-          <Deemphasized>Unknown</Deemphasized>
+          <Deemphasized>Independent</Deemphasized>
         )}
       </CardField>
     </div>
