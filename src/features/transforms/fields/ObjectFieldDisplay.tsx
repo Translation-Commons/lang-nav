@@ -7,11 +7,11 @@ import { LanguageModalityIcon } from '@entities/language/LanguageModalityDisplay
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
-import Deemphasized from '@shared/ui/Deemphasized';
 
 import Field from './Field';
 import getField from './getField';
@@ -76,10 +76,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return fieldValue ? new Date(fieldValue).toLocaleDateString() : '';
 
     case Field.Depth:
-      if (typeof fieldValue !== 'number' || fieldValue < 0)
-        return <Deemphasized>Unknown</Deemphasized>;
-      if (fieldValue === 0) return 'Root';
-      return fieldValue.toLocaleString();
+      return <ObjectDepthDisplay object={object} />;
 
     default:
       enforceExhaustiveSwitch(field);
