@@ -1,7 +1,4 @@
-import CardField from '@shared/containers/CardField';
-import Deemphasized from '@shared/ui/Deemphasized';
 import { ActivityIcon, UsersIcon } from 'lucide-react';
-
 import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
@@ -10,7 +7,9 @@ import { LocaleData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
+import CardField from '@shared/containers/CardField';
 import DecimalNumber from '@shared/ui/DecimalNumber';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
