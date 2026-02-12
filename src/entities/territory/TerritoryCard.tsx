@@ -1,4 +1,4 @@
-import { GlobeIcon, LandmarkIcon, UsersIcon } from 'lucide-react';
+import { GlobeIcon, FlagIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -34,7 +34,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
       <CardField
         title="Population"
         icon={UsersIcon}
-        description="Population: How many people live in this territory."
+        description="How many people live in this territory."
       >
         {population != null ? (
           <CountOfPeople count={population} />
@@ -46,7 +46,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
       <CardField
         title="Languages"
         icon={GlobeIcon}
-        description="Languages: Languages spoken in this territory."
+        description="Languages spoken in this territory."
       >
         {locales && locales.length > 0 ? (
           <CommaSeparated>
@@ -63,8 +63,8 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
       <CardField
         title="Part of"
-        icon={LandmarkIcon}
-        description="Sovereignty: The larger entity this territory belongs to."
+        icon={FlagIcon}
+        description="The larger entity this territory belongs to."
       >
         {sovereign ? (
           <HoverableObjectName object={sovereign} />
