@@ -1,4 +1,4 @@
-import { BlocksIcon, EarthIcon, FlagIcon, LanguagesIcon, UsersIcon } from 'lucide-react';
+import { BlocksIcon, EarthIcon, LanguagesIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
