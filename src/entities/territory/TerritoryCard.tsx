@@ -1,4 +1,4 @@
-import { GlobeIcon, FlagIcon, UsersIcon } from 'lucide-react';
+import { BlocksIcon, FlagIcon, GlobeIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { population, ID, sovereign, locales } = territory;
+  const { population, ID, sovereign, locales, scope, parentUNRegion } = territory;
   const { updatePageParams } = usePageParams();
   const filterByScope = getScopeFilter();
 
@@ -31,6 +31,14 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         </a>
         <ObjectSubtitle object={territory} />
       </h3>
+      <CardField
+        title="Territory Scope"
+        icon={BlocksIcon}
+        description="The scope classification for this territory."
+      >
+        {scope != null ? scope : <Deemphasized>Unknown</Deemphasized>}
+      </CardField>
+
       <CardField
         title="Population"
         icon={UsersIcon}
@@ -68,6 +76,8 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
       >
         {sovereign ? (
           <HoverableObjectName object={sovereign} />
+        ) : parentUNRegion ? (
+          <HoverableObjectName object={parentUNRegion} />
         ) : (
           <Deemphasized>Independent</Deemphasized>
         )}
