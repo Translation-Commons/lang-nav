@@ -1,4 +1,4 @@
-import { ActivityIcon, UsersIcon } from 'lucide-react';
+import { LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
@@ -30,32 +30,35 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         </a>
         <ObjectSubtitle object={locale} />
       </h3>
-      <CardField
-        title="Population"
-        icon={UsersIcon}
-        description="Population: How many people live in this locale (with citation)."
-      >
-        {populationAdjusted != null ? (
-          <div>
-            <LocalePopulationAdjusted locale={locale} />
-            {' ['}
-            <LocaleCensusCitation locale={locale} size="short" />
-            {' ]'}
-            {populationSpeakingPercent != null && (
-              <div>
-                <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
-                {territory?.scope ?? 'territory'}
-              </div>
-            )}
-          </div>
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
-      </CardField>
+
+      {populationAdjusted != null && (
+        <CardField
+          title="Population"
+          icon={UsersIcon}
+          description="How many people live in this locale (with citation)."
+        >
+          <LocalePopulationAdjusted locale={locale} />
+          {' ['}
+          <LocaleCensusCitation locale={locale} size="short" />
+          {' ]'}
+        </CardField>
+      )}
+
+      {populationSpeakingPercent != null && (
+        <CardField
+          title="Population speaking"
+          icon={PercentIcon}
+          description="Percent of the Territory population speaking this locale."
+        >
+          <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
+          {territory?.scope ?? 'territory'}
+        </CardField>
+      )}
+
       <CardField
         title="Government status"
-        icon={ActivityIcon}
-        description="Government status: Whether the locale has official recognition."
+        icon={LandmarkIcon}
+        description="Whether the locale has official recognition."
       >
         {officialStatus != null ? (
           getOfficialLabel(officialStatus)
