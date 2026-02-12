@@ -22,7 +22,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
   const { population, ID, sovereign, locales, scope, parentUNRegion } = territory;
   const { updatePageParams } = usePageParams();
   const filterByScope = getScopeFilter();
-  const localeList = locales ? Object.values(locales) : [];
+  const localeList = locales ?? [];
   const isDependency = scope === TerritoryScope.Dependency;
   const isWorld = scope === TerritoryScope.World;
 
@@ -80,10 +80,14 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
       >
         {localeList.length > 0 ? (
           <CommaSeparated>
-            {uniqueBy(localeList, (loc: any) => loc.languageCode)
+            {uniqueBy(localeList, (loc) => loc.languageCode ?? loc.ID)
               .filter(filterByScope)
               .map((locale) => (
-                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
+                <HoverableObjectName
+                  key={locale.ID}
+                  labelSource="language"
+                  object={locale}
+                />
               ))}
           </CommaSeparated>
         ) : (
