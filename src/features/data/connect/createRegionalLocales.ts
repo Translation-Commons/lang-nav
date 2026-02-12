@@ -1,4 +1,5 @@
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import {
@@ -92,7 +93,7 @@ function createRegionalLocalesForTerritory(
   // Save it to the territory
   territory.locales = Object.values(territoryLocales ?? {})
     .filter((loc) => (loc.populationSpeaking ?? 0) > 10) // Avoid creating too many locale objects
-    .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0));
+    .sort(sortByPopulation);
 
   // Connect locale edges
   territory.locales.forEach((loc) => {

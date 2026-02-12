@@ -4,6 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 
@@ -22,7 +23,7 @@ const LanguagePathsReport: React.FC = () => {
   const orphanedLanguages = orphans
     .map((langId) => getLanguage(langId))
     .filter((lang) => lang != null)
-    .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+    .sort(sortByPopulation)
     .slice(0, limit);
 
   return (

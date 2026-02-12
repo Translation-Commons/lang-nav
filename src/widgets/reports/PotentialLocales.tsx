@@ -9,7 +9,7 @@ import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { getSortFunction, sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -297,9 +297,7 @@ function partitionPotentialLocales(
 ): PartitionedLocales {
   // Iterate through the languages, finding the locale with the largest population.
   // These are probably but not necessarily indigenous.
-  const localesSorted = localesOfTheSameLanguage.sort((a, b) => {
-    return (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0);
-  });
+  const localesSorted = localesOfTheSameLanguage.sort(sortByPopulation);
   const largestLocale = localesSorted.reduce((max, locale) => {
     return (locale.populationSpeaking ?? 0) > (max.populationSpeaking ?? 0) ? locale : max;
   }, localesSorted[0]);
@@ -358,9 +356,9 @@ function findExtantLocaleInTerritoryDescendingFromLanguage(
     ) ?? [];
   return (
     // Sort to pick the most populous locale
-    [directDescendant, ...recursiveDescendants].filter(Boolean).sort((a, b) => {
-      return (b?.populationSpeaking ?? 0) - (a?.populationSpeaking ?? 0);
-    })[0] ?? null
+    [directDescendant, ...recursiveDescendants]
+      .filter((a) => a != null)
+      .sort(sortByPopulation)[0] ?? null
   );
 }
 

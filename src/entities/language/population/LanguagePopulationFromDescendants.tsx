@@ -6,6 +6,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import CellPopulation from '@shared/containers/CellPopulation';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -63,7 +64,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: Langua
       <table>
         <tbody>
           {lang.childLanguages
-            .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+            .sort(sortByPopulation)
             .slice(0, 10) // limit to first 10
             .map((descendant) => (
               <tr key={descendant.ID}>

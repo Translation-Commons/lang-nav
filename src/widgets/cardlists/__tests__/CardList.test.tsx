@@ -5,6 +5,7 @@ import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjec
 import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -25,7 +26,7 @@ describe('CardList', () => {
   const mockedObjects = getFullyInstantiatedMockedObjects();
   const territories = Object.values(mockedObjects)
     .filter((obj) => obj.type === ObjectType.Territory)
-    .sort((a, b) => b.population - a.population);
+    .sort(sortByPopulation);
 
   // Helper function to eliminate mock setup duplication
   function setupMockParams(overrides: PageParamsOptional = {}) {

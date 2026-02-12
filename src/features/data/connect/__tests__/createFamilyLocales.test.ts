@@ -35,7 +35,7 @@ describe('createFamilyLocales', () => {
     // Now check that the family locales were created along with the regional locales
     expect(objects['elv_001'].nameDisplay).toBe('Elvish (Arda)');
     expect(getLocaleIDs(inputObjects)).toBe(
-      'sjn_BE sjn_ER dori0123_ER sjn_Teng_BE elv_BE elv_ER sjn_123 elv_123 sjn_Teng_123 dori0123_123 sjn_001 elv_001 sjn_Teng_001 dori0123_001',
+      'sjn_BE sjn_ER dori0123_ER sjn_Teng_BE elv_BE elv_ER sjn_123 sjn_Teng_123 elv_123 dori0123_123 sjn_001 sjn_Teng_001 elv_001 dori0123_001',
     );
   });
 });
