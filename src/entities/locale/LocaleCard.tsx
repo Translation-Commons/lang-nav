@@ -1,3 +1,4 @@
+import { ActivityIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
@@ -8,6 +9,8 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
+import CardField from '@shared/containers/CardField';
+import Deemphasized from '@shared/ui/Deemphasized';
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
 import { getOfficialLabel } from './LocaleStrings';
@@ -27,27 +30,39 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         </a>
         <ObjectSubtitle object={locale} />
       </h3>
-      {populationAdjusted != null && (
-        <div>
-          <h4>Population</h4>
-          <LocalePopulationAdjusted locale={locale} />
-          {' ['}
-          <LocaleCensusCitation locale={locale} size="short" />
-          {']'}
-          {populationSpeakingPercent != null && (
-            <div>
-              {<DecimalNumber num={populationSpeakingPercent} alignFraction={false} />}% of{' '}
-              {territory?.scope ?? 'territory'}
-            </div>
-          )}
-        </div>
-      )}
-      {officialStatus && (
-        <div>
-          <h4>Government status</h4>
-          {getOfficialLabel(officialStatus)}
-        </div>
-      )}
+      <CardField
+        title="Population"
+        icon={UsersIcon}
+        description="Population: How many people live in this locale (with citation)."
+      >
+        {populationAdjusted != null ? (
+          <div>
+            <LocalePopulationAdjusted locale={locale} />
+            {' ['}
+            <LocaleCensusCitation locale={locale} size="short" />
+            {' ]'}
+            {populationSpeakingPercent != null && (
+              <div>
+                <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
+                {territory?.scope ?? 'territory'}
+              </div>
+            )}
+          </div>
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
+      <CardField
+        title="Government status"
+        icon={ActivityIcon}
+        description="Government status: Whether the locale has official recognition."
+      >
+        {officialStatus != null ? (
+          getOfficialLabel(officialStatus)
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
     </div>
   );
 };
