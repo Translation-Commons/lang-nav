@@ -83,11 +83,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
             {uniqueBy(localeList, (loc) => loc.languageCode ?? loc.ID)
               .filter(filterByScope)
               .map((locale) => (
-                <HoverableObjectName
-                  key={locale.ID}
-                  labelSource="language"
-                  object={locale}
-                />
+                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
               ))}
           </CommaSeparated>
         ) : (
