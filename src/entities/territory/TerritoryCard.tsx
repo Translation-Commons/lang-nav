@@ -39,6 +39,12 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         description="The kind of territory this is (e.g., country, dependency, region, continent)."
       >
         {scope != null ? scope : <Deemphasized>Unknown</Deemphasized>}
+        {isDependency && sovereign ? (
+          <>
+            {' '}
+            of <HoverableObjectName object={sovereign} />
+          </>
+        ) : null}
       </CardField>
 
       <CardField
@@ -84,20 +90,6 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
           <Deemphasized>Unknown</Deemphasized>
         )}
       </CardField>
-
-      {isDependency ? (
-        <CardField
-          title="Part of"
-          icon={FlagIcon}
-          description="The sovereign entity this dependency belongs to."
-        >
-          {sovereign ? (
-            <HoverableObjectName object={sovereign} />
-          ) : (
-            <Deemphasized>Independent</Deemphasized>
-          )}
-        </CardField>
-      ) : null}
     </div>
   );
 };
