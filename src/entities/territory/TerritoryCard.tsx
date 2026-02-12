@@ -1,15 +1,15 @@
-import { BlocksIcon, FlagIcon, GlobeIcon, UsersIcon } from 'lucide-react';
+import { BlocksIcon, EarthIcon, FlagIcon, LanguagesIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
-import { TerritoryData } from '@entities/types/DataTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
+import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
+import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -22,6 +22,9 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
   const { population, ID, sovereign, locales, scope, parentUNRegion } = territory;
   const { updatePageParams } = usePageParams();
   const filterByScope = getScopeFilter();
+  const localeList = locales ? Object.values(locales) : [];
+  const isDependency = scope === TerritoryScope.Dependency;
+  const isWorld = scope === TerritoryScope.World;
 
   return (
     <div>
@@ -29,14 +32,27 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         <a onClick={() => updatePageParams({ objectID: ID })}>
           <ObjectTitle object={territory} />
         </a>
-        <ObjectSubtitle object={territory} />
       </h3>
       <CardField
-        title="Territory Scope"
+        title="Territory Type"
         icon={BlocksIcon}
-        description="The scope classification for this territory."
+        description="The kind of territory this is (e.g., country, dependency, region, continent)."
       >
         {scope != null ? scope : <Deemphasized>Unknown</Deemphasized>}
+      </CardField>
+
+      <CardField
+        title="UN Region"
+        icon={EarthIcon}
+        description="The United Nations regional grouping this territory belongs to."
+      >
+        {parentUNRegion ? (
+          <HoverableObjectName object={parentUNRegion} />
+        ) : isWorld ? (
+          <Deemphasized>Global</Deemphasized>
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
       </CardField>
 
       <CardField
@@ -53,12 +69,12 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
       <CardField
         title="Languages"
-        icon={GlobeIcon}
+        icon={LanguagesIcon}
         description="Languages spoken in this territory."
       >
-        {locales && locales.length > 0 ? (
+        {localeList.length > 0 ? (
           <CommaSeparated>
-            {Object.values(locales)
+            {uniqueBy(localeList, (loc: any) => loc.languageCode)
               .filter(filterByScope)
               .map((locale) => (
                 <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
@@ -69,19 +85,19 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         )}
       </CardField>
 
-      <CardField
-        title="Part of"
-        icon={FlagIcon}
-        description="The larger entity this territory belongs to."
-      >
-        {sovereign ? (
-          <HoverableObjectName object={sovereign} />
-        ) : parentUNRegion ? (
-          <HoverableObjectName object={parentUNRegion} />
-        ) : (
-          <Deemphasized>Independent</Deemphasized>
-        )}
-      </CardField>
+      {isDependency ? (
+        <CardField
+          title="Part of"
+          icon={FlagIcon}
+          description="The sovereign entity this dependency belongs to."
+        >
+          {sovereign ? (
+            <HoverableObjectName object={sovereign} />
+          ) : (
+            <Deemphasized>Independent</Deemphasized>
+          )}
+        </CardField>
+      ) : null}
     </div>
   );
 };
