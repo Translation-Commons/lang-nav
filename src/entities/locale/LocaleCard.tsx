@@ -46,7 +46,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
       {populationSpeakingPercent != null && (
         <CardField
-          title="Population speaking"
+          title="% speaking"
           icon={PercentIcon}
           description="Percent of the Territory population speaking this locale."
         >
