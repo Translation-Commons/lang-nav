@@ -35,7 +35,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         <CardField
           title="Population"
           icon={UsersIcon}
-          description="How many people live in this locale (with citation)."
+          description="How many people in this territory that use this language. Adjusted to 2025 population and including citation."
         >
           <LocalePopulationAdjusted locale={locale} />
           {' ['}
