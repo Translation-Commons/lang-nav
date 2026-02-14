@@ -90,11 +90,7 @@ const LanguagesMissingWritingSystems: React.FC = () => {
                 </div>
                 <div>
                   <label>Population:</label>
-                  {lang.populationEstimate ? (
-                    <CountOfPeople count={lang.populationEstimate} />
-                  ) : (
-                    <Deemphasized>no population</Deemphasized>
-                  )}
+                  <CountOfPeople count={lang.populationEstimate} />
                 </div>
               </ViewCard>
             );
