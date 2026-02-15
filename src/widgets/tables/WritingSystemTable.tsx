@@ -6,7 +6,6 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
@@ -35,7 +34,6 @@ const WritingSystemTable: React.FC = () => {
             </>
           ),
           render: (object) => object.populationUpperBound,
-          valueType: TableValueType.Population,
           field: Field.Population,
         },
         {
@@ -61,7 +59,6 @@ const WritingSystemTable: React.FC = () => {
                 items={Object.values(object.languages).map((l) => l.nameDisplay)}
               />
             ),
-          valueType: TableValueType.Count,
           field: Field.CountOfLanguages,
           isInitiallyVisible: false,
           columnGroup: 'Related Objects',
@@ -79,7 +76,6 @@ const WritingSystemTable: React.FC = () => {
             <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Count,
           field: Field.CountOfCountries,
           columnGroup: 'Related Objects',
         },

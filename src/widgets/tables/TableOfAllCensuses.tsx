@@ -33,13 +33,11 @@ const TableOfAllCensuses: React.FC = () => {
               )}
             />
           ),
-          valueType: TableValueType.Count,
           field: Field.CountOfLanguages,
         },
         {
           key: 'Eligible Population',
           render: (census) => census.populationEligible,
-          valueType: TableValueType.Population,
           field: Field.Population,
           columnGroup: 'Population',
         },
@@ -47,7 +45,6 @@ const TableOfAllCensuses: React.FC = () => {
           key: '% of Current Population',
           render: (census) =>
             census.populationEligible && getObjectPercentOfTerritoryPopulation(census),
-          valueType: TableValueType.Decimal,
           isInitiallyVisible: false,
           field: Field.PercentOfTerritoryPopulation,
           columnGroup: 'Population',
@@ -120,7 +117,6 @@ const TableOfAllCensuses: React.FC = () => {
               <Deemphasized>multiple</Deemphasized>
             ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Date,
           field: Field.Date,
           columnGroup: 'Time',
         },

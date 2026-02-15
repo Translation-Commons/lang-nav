@@ -77,13 +77,11 @@ const LanguagesLargestDescendant: React.FC = () => {
           {
             key: 'Population',
             render: (lang: LanguageData) => lang.populationEstimate,
-            valueType: TableValueType.Population,
             field: Field.Population,
           },
           {
             key: 'Estimated Population of Descendants',
             render: (lang: LanguageData) => lang.populationOfDescendants,
-            valueType: TableValueType.Population,
             field: Field.PopulationOfDescendants,
           },
           {
@@ -106,7 +104,6 @@ const LanguagesLargestDescendant: React.FC = () => {
             key: '% Descendant',
             render: (lang: LanguageData) =>
               getObjectPopulationPercentInBiggestDescendantLanguage(lang),
-            valueType: TableValueType.Decimal,
             field: Field.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}

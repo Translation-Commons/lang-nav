@@ -7,7 +7,6 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
@@ -31,7 +30,6 @@ const VariantTagTable: React.FC = () => {
           key: 'Date Added',
           render: (object) => object.dateAdded?.toLocaleDateString(),
           isInitiallyVisible: false,
-          valueType: TableValueType.Date,
           field: Field.Date,
         },
         {
@@ -51,7 +49,6 @@ const VariantTagTable: React.FC = () => {
           render: (object) => (
             <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
           ),
-          valueType: TableValueType.Count,
           field: Field.CountOfLanguages,
           isInitiallyVisible: false,
           columnGroup: 'Related Objects',
@@ -95,7 +92,6 @@ const VariantTagTable: React.FC = () => {
           ),
           render: (object) => getObjectPopulation(object),
           isInitiallyVisible: false,
-          valueType: TableValueType.Population,
           field: Field.Population,
         },
       ]}

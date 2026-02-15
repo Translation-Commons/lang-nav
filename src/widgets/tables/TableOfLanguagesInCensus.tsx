@@ -110,13 +110,11 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Population',
             render: (loc) => loc.populationSpeaking,
-            valueType: TableValueType.Population,
             field: Field.Population,
           },
           {
             key: 'Percent Within Territory',
             render: (loc) => loc.populationSpeakingPercent,
-            valueType: TableValueType.Decimal,
             field: Field.PercentOfTerritoryPopulation,
           },
           {
@@ -154,7 +152,6 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             render: (object) =>
               object.populationSpeaking &&
               (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
-            valueType: TableValueType.Decimal,
             isInitiallyVisible: false,
             field: Field.PercentOfOverallLanguageSpeakers,
           },

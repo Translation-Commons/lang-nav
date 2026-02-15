@@ -16,7 +16,6 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import ObjectTable from '../InteractiveObjectTable';
 import TableColumn from '../TableColumn';
 import TableID from '../TableID';
-import TableValueType from '../TableValueType';
 
 vi.mock('@features/transforms/filtering/filter', () => ({
   getFilterByVitality: vi.fn(),
@@ -73,7 +72,6 @@ describe('InteractiveObjectTable', () => {
       key: 'Name',
       render: (obj) => obj.nameDisplay,
       field: Field.Name,
-      valueType: TableValueType.String,
     },
     {
       key: 'Population',
@@ -84,7 +82,6 @@ describe('InteractiveObjectTable', () => {
         return '';
       },
       field: Field.Population,
-      valueType: TableValueType.Population,
     },
   ];
 

@@ -7,7 +7,6 @@ import usePageParams from '@features/params/usePageParams';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import {
@@ -49,7 +48,6 @@ const LocaleTable: React.FC = () => {
           key: 'Literacy',
           render: (object) => object.literacyPercent,
           isInitiallyVisible: false,
-          valueType: TableValueType.Decimal,
           field: Field.Literacy,
           columnGroup: 'Writing',
         },
@@ -108,7 +106,6 @@ const LocaleTable: React.FC = () => {
             <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Count,
           field: Field.CountOfCountries,
           columnGroup: 'Linked Data',
         },
