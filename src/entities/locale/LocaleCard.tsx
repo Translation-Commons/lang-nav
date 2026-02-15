@@ -1,3 +1,4 @@
+import { LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
@@ -6,7 +7,9 @@ import { LocaleData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
+import CardField from '@shared/containers/CardField';
 import DecimalNumber from '@shared/ui/DecimalNumber';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
@@ -27,27 +30,42 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         </a>
         <ObjectSubtitle object={locale} />
       </h3>
+
       {populationAdjusted != null && (
-        <div>
-          <h4>Population</h4>
+        <CardField
+          title="Population"
+          icon={UsersIcon}
+          description="How many people in this territory that use this language. Adjusted to 2025 population and including citation."
+        >
           <LocalePopulationAdjusted locale={locale} />
           {' ['}
           <LocaleCensusCitation locale={locale} size="short" />
-          {']'}
-          {populationSpeakingPercent != null && (
-            <div>
-              {<DecimalNumber num={populationSpeakingPercent} alignFraction={false} />}% of{' '}
-              {territory?.scope ?? 'territory'}
-            </div>
-          )}
-        </div>
+          {' ]'}
+        </CardField>
       )}
-      {officialStatus && (
-        <div>
-          <h4>Government status</h4>
-          {getOfficialLabel(officialStatus)}
-        </div>
+
+      {populationSpeakingPercent != null && (
+        <CardField
+          title="% speaking"
+          icon={PercentIcon}
+          description="Percent of the Territory population speaking this locale."
+        >
+          <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
+          {territory?.scope ?? 'territory'}
+        </CardField>
       )}
+
+      <CardField
+        title="Government status"
+        icon={LandmarkIcon}
+        description="Whether the locale has official recognition."
+      >
+        {officialStatus != null ? (
+          getOfficialLabel(officialStatus)
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
     </div>
   );
 };
