@@ -2,6 +2,8 @@ import React from 'react';
 
 import Pill from '@shared/ui/Pill';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 import { LanguageData, LanguageScope, LanguageSource } from './LanguageTypes';
 
 const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
@@ -9,23 +11,27 @@ const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
   return (
     <div style={{ display: 'inline-flex', gap: '0.5em', flexWrap: 'wrap' }}>
-      {Object.entries(scopesBySource).map(([scope, sources]) => (
-        <div key={scope} style={{ display: 'flex', gap: '0.25em' }}>
-          {scope}
-          {sources.includes(LanguageSource.ISO) && <Pill>ISO</Pill>}
-          {sources.includes(LanguageSource.CLDR) && <Pill>CLDR</Pill>}
-          {sources.includes(LanguageSource.Glottolog) && <Pill>Glottolog</Pill>}
-        </div>
-      ))}
+      {Object.values(LanguageScope)
+        .filter((s) => typeof s === 'number')
+        .map((scope) => (
+          <div key={scope} style={{ display: 'flex', gap: '0.25em' }}>
+            {scopesBySource[scope]?.length > 0 && getLanguageScopeLabel(scope)}
+            {scopesBySource[scope]?.includes(LanguageSource.ISO) && <Pill>ISO</Pill>}
+            {scopesBySource[scope]?.includes(LanguageSource.CLDR) && <Pill>CLDR</Pill>}
+            {scopesBySource[scope]?.includes(LanguageSource.Glottolog) && <Pill>Glottolog</Pill>}
+          </div>
+        ))}
     </div>
   );
 };
 
 export default LanguageScopeDisplay;
 
-function getScopeBySource(lang: LanguageData): Partial<Record<LanguageScope, LanguageSource[]>> {
+function getScopeBySource(lang: LanguageData): LanguageSource[][] {
   const { scope, ISO, CLDR, Glottolog } = lang;
-  const scopes: Partial<Record<LanguageScope, LanguageSource[]>> = {};
+  const scopes: LanguageSource[][] = Array(6)
+    .fill(null)
+    .map(() => []); // index by LanguageScope value
   if (scope) scopes[scope] = [LanguageSource.Combined];
   if (ISO.scope) {
     if (!scopes[ISO.scope]) scopes[ISO.scope] = [];

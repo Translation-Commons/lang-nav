@@ -24,6 +24,8 @@ import { sumBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 const TerritoryTable: React.FC = () => {
   const { territories } = useDataContext();
 
@@ -192,8 +194,8 @@ const TerritoryTable: React.FC = () => {
         },
         {
           key: 'Type',
-          render: (object) => object.scope,
-          valueType: TableValueType.Enum,
+          render: (object) => getTerritoryScopeLabel(object?.scope),
+          field: Field.TerritoryScope,
         },
         {
           key: 'Export Language Data',

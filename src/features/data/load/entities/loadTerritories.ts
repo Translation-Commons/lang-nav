@@ -1,6 +1,8 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/types/DataTypes';
+
+import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 
@@ -19,7 +21,7 @@ export function parseTerritoryLine(line: string): TerritoryData {
     codeDisplay: parts[0],
     nameDisplay: parts[1],
     names: [parts[1]],
-    scope: parts[2] as TerritoryScope,
+    scope: parseTerritoryScope(parts[2])!, // Throw if its not a valid scope, since this is a required field
     population, // This may be recomputed later
     populationFromUN: population,
     containedUNRegionCode: parts[4] || undefined,

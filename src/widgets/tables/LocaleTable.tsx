@@ -23,6 +23,9 @@ import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 import LocaleRelatedLocalesColumns from './columns/LocaleRelatedLocalesColumns';
 
@@ -94,11 +97,25 @@ const LocaleTable: React.FC = () => {
           field: Field.Language,
         },
         {
+          key: 'Language Scope',
+          render: (object) => getLanguageScopeLabel(object.language?.scope),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          field: Field.LanguageScope,
+        },
+        {
           key: 'Territory',
           render: (object) => <HoverableObjectName object={object.territory} />,
           isInitiallyVisible: false,
           field: Field.Territory,
           columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Territory Scope',
+          render: (object) => getTerritoryScopeLabel(object.territory?.scope),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          field: Field.TerritoryScope,
         },
         {
           key: 'Countries',

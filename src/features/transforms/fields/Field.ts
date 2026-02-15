@@ -13,6 +13,8 @@ enum Field {
   Date = 'Date',
   Area = 'Area',
   Depth = 'Depth',
+  LanguageScope = 'Language Scope',
+  TerritoryScope = 'Territory Scope',
 
   // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',

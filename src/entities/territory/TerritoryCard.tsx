@@ -14,6 +14,8 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 interface Props {
   territory: TerritoryData;
 }
@@ -38,7 +40,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         icon={BlocksIcon}
         description="The kind of territory this is (e.g., country, dependency, region, continent)."
       >
-        {scope != null ? scope : <Deemphasized>Unknown</Deemphasized>}
+        {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
         {isDependency && sovereign ? (
           <>
             {' '}

@@ -10,6 +10,8 @@ import usePageParams from '@features/params/usePageParams';
 import CellPopulation from '@shared/containers/CellPopulation';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 import { LanguageData } from '../LanguageTypes';
 
 const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
@@ -21,9 +23,9 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
           hoverContent={
             <>
               The sum of people that use this languoid&apos;s descendants is higher than the
-              population estimate for this {lang.scope?.toLowerCase() ?? 'language'} -- probably
-              because of multilingualism. For example, a simple sum for Arabic would double count
-              people that understand both Standard Arabic and Vernacular Arabic.
+              population estimate for this {getLanguageScopeLabel(lang.scope).toLowerCase()} --
+              probably because of multilingualism. For example, a simple sum for Arabic would double
+              count people that understand both Standard Arabic and Vernacular Arabic.
             </>
           }
         >

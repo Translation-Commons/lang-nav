@@ -31,6 +31,8 @@ import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 import { LanguageCodeColumns } from './columns/LanguageCodeColumns';
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
 import LanguageNameColumns from './columns/LanguageNameColumns';
@@ -46,8 +48,9 @@ const LanguageTable: React.FC = () => {
       ...LanguageNameColumns,
       {
         key: 'Scope',
-        render: (lang) => lang.scope,
+        render: (lang) => getLanguageScopeLabel(lang.scope),
         isInitiallyVisible: false,
+        field: Field.LanguageScope,
         columnGroup: 'Context',
       },
       {

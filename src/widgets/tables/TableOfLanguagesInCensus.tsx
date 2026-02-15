@@ -121,7 +121,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             key: 'Scope',
             render: (loc) => loc.language?.scope,
             isInitiallyVisible: false,
-            valueType: TableValueType.Enum,
+            field: Field.LanguageScope,
           },
           {
             key: 'Locale Entry',

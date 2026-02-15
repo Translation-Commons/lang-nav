@@ -10,6 +10,8 @@ import DetailsSection from '@shared/containers/DetailsSection';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   return (
     <DetailsSection title="Location">
@@ -50,7 +52,8 @@ function getMapLabel(territory: TerritoryData): React.ReactNode {
     case TerritoryScope.Subcontinent:
       return (
         <>
-          all of the territories in this {territory.scope.toLowerCase()} (according to
+          all of the territories in this {getTerritoryScopeLabel(territory.scope).toLowerCase()}{' '}
+          (according to
           <LinkButton href="https://unstats.un.org/unsd/methodology/m49/">
             the UN methodology
           </LinkButton>

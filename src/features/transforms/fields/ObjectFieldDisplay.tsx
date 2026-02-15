@@ -13,6 +13,8 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 import Field from './Field';
 import getField from './getField';
 
@@ -77,6 +79,11 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
 
     case Field.Depth:
       return <ObjectDepthDisplay object={object} />;
+
+    case Field.LanguageScope:
+      return typeof fieldValue === 'number' && getLanguageScopeLabel(fieldValue);
+    case Field.TerritoryScope:
+      return fieldValue ? fieldValue.toString() : '';
 
     default:
       enforceExhaustiveSwitch(field);

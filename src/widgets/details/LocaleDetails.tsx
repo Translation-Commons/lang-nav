@@ -22,6 +22,8 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 import Pill from '@shared/ui/Pill';
 
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 type Props = {
   locale: LocaleData;
 };
@@ -162,7 +164,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <DetailsField
           title={
             <span style={{ marginLeft: '2em' }}>
-              % in {territory?.scope.toLowerCase() ?? 'territory'}
+              % in {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
             </span>
           }
         >
@@ -181,7 +183,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <DetailsField
           title={
             <span style={{ marginLeft: '2em' }}>
-              % in {territory?.scope.toLowerCase() ?? 'territory'}
+              % in {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
             </span>
           }
         >

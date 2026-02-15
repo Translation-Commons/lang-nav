@@ -15,10 +15,10 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.Literacy:
     case Field.PercentOfOverallLanguageSpeakers:
     case Field.PercentOfTerritoryPopulation:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.Longitude:
     case Field.Latitude:
     case Field.Area:
-    case Field.PopulationPercentInBiggestDescendantLanguage:
       return TableValueType.Decimal;
     case Field.Date:
       return TableValueType.Date;
@@ -42,6 +42,8 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
     case Field.Modality:
+    case Field.LanguageScope:
+    case Field.TerritoryScope:
       return TableValueType.Enum;
     default:
       enforceExhaustiveSwitch(field);

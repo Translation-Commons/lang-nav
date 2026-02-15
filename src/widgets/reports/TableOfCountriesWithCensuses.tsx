@@ -44,6 +44,7 @@ const TableOfCountriesWithCensuses: React.FC = () => {
                 </div>
               );
             },
+            columnGroup: 'Collector Type',
           })),
           {
             key: 'Population',

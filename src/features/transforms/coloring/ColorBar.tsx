@@ -4,6 +4,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { getModalityFromLabel, getModalityLabel } from '@entities/language/LanguageModalityDisplay';
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
   getVitalityEthnologueCoarseLabel,
@@ -14,9 +15,13 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import Field from '../fields/Field';
 
@@ -136,6 +141,24 @@ function getTicks(
       ).map((value) => ({
         position: getNormalizedValue(value),
         label: getVitalityEthnologueCoarseLabel(value),
+      }));
+    case Field.LanguageScope:
+      return pickDistributedTicksFromRange(
+        Object.values(LanguageScope).filter((value) => typeof value === 'number'),
+        numberOfTicks,
+      ).map((value) => ({
+        position: getNormalizedValue(value),
+        label: getLanguageScopeLabel(value) ?? '',
+      }));
+    case Field.TerritoryScope:
+      return pickDistributedTicksFromRange(
+        Object.values(TerritoryScope)
+          .filter((v) => typeof v === 'number')
+          .filter((v) => v <= maxValue),
+        numberOfTicks,
+      ).map((value) => ({
+        position: getNormalizedValue(value),
+        label: getTerritoryScopeLabel(value) ?? '',
       }));
     default:
       break;

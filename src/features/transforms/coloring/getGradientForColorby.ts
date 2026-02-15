@@ -42,6 +42,10 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
     case Field.Depth:
+    case Field.LanguageScope:
+    case Field.TerritoryScope:
+      // Preferred color schema for ordinals
+      // Low values are light blue, high values are dark blue
       return ColorGradient.SequentialBlue;
 
     default:

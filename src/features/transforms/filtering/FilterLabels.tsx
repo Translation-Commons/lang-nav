@@ -2,11 +2,14 @@ import usePageParams from '@features/params/usePageParams';
 
 import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 export function getFilterLabels() {
   return {
-    languageScope: getLanguageScopeLabel(),
+    languageScope: getLanguageScopesLabel(),
     modalityFilter: getModalityFilterLabel(),
-    territoryScope: getTerritoryScopeLabel(),
+    territoryScope: getTerritoryScopesLabel(),
     territoryFilter: getTerritoryFilterLabel(),
     writingSystemFilter: getWritingSystemFilterLabel(),
     languageFilter: getLanguageFilterLabel(),
@@ -19,22 +22,16 @@ function getModalityFilterLabel(): string {
   return modalityFilter.map((m) => getModalityLabel(m) ?? 'modality').join(' or ');
 }
 
-function getLanguageScopeLabel(): string {
+function getLanguageScopesLabel(): string {
   const { languageScopes } = usePageParams();
   if (languageScopes.length === 0) return 'any languoid';
-  return languageScopes
-    .map((scope) => scope.toString())
-    .join(' or ')
-    .toLowerCase();
+  return languageScopes.map(getLanguageScopeLabel).join(' or ').toLowerCase();
 }
 
-function getTerritoryScopeLabel(): string {
+function getTerritoryScopesLabel(): string {
   const { territoryScopes } = usePageParams();
   if (territoryScopes.length === 0) return 'any territory';
-  return territoryScopes
-    .map((scope) => scope.toString())
-    .join(' or ')
-    .toLowerCase();
+  return territoryScopes.map(getTerritoryScopeLabel).join(' or ').toLowerCase();
 }
 
 function getTerritoryFilterLabel(): string {

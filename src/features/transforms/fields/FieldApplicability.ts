@@ -27,6 +27,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Language,
         Field.WritingSystem,
         Field.Territory,
+        Field.LanguageScope,
+        Field.TerritoryScope,
       ];
     case ObjectType.Territory:
       return [
@@ -47,6 +49,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.PopulationDirectlySourced,
         Field.PercentOfTerritoryPopulation,
         Field.PopulationPercentInBiggestDescendantLanguage,
+        Field.TerritoryScope,
       ];
     case ObjectType.Language:
       return [
@@ -69,6 +72,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.VitalityEthnologueCoarse,
         Field.Latitude,
         Field.Longitude,
+        Field.LanguageScope,
       ];
     case ObjectType.Census:
       return [
@@ -76,6 +80,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.PopulationDirectlySourced,
         Field.PercentOfTerritoryPopulation,
         Field.Territory,
+        Field.TerritoryScope,
         Field.CountOfLanguages,
       ];
     case ObjectType.WritingSystem:
@@ -152,6 +157,8 @@ export function getColorBysApplicableToObjectType(objectType: ObjectType): Field
     Field.Name,
     Field.Endonym,
     Field.Code,
+    Field.LanguageScope,
+    Field.TerritoryScope,
   ];
   return getApplicableFields(coloringFields, objectType);
 }

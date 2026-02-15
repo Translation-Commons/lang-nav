@@ -1,7 +1,9 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 export function getObjectSubtitle(object: ObjectData): string | undefined {
   switch (object.type) {
@@ -16,21 +18,18 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
         .join(', ');
     case ObjectType.Language:
       return getLanguageSubtitle(object);
-    case ObjectType.Locale:
-      return undefined;
-    case ObjectType.Territory:
-      return object.scope;
     case ObjectType.WritingSystem:
       return object.nameDisplay != object.nameFull ? object.nameFull : undefined;
+    case ObjectType.Locale:
+    case ObjectType.Territory:
+      return undefined;
   }
 }
 
 function getLanguageSubtitle(lang: LanguageData): string | undefined {
-  let scope = lang.scope;
-  if (scope == LanguageScope.Language) {
-    scope = undefined; // Not particularly interesting
-  }
-  const composite = [scope, lang.nameSubtitle].filter(Boolean).join(', ');
+  const composite = [getLanguageScopeLabel(lang.scope), lang.nameSubtitle]
+    .filter(Boolean)
+    .join(', ');
   return composite !== '' ? composite : undefined;
 }
 

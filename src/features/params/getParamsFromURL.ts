@@ -4,13 +4,15 @@ import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
+
+import { parseLanguageScope } from '@strings/LanguageScopeStrings';
+import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
 import {
   LocaleSeparator,
@@ -55,14 +57,22 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       // Arrays
       case PageParamKey.languageScopes:
         if (value === '[]') params.languageScopes = [];
-        else params.languageScopes = value.split(',').filter(Boolean) as LanguageScope[];
+        else
+          params.languageScopes = value
+            .split(',')
+            .map((s) => parseLanguageScope(s))
+            .filter((s) => s != null);
         break;
       case PageParamKey.modalityFilter:
         params.modalityFilter = parseNumericEnumArray(value, LanguageModality);
         break;
       case PageParamKey.territoryScopes:
         if (value === '[]') params[key] = [];
-        else params[key] = value.split(',').filter(Boolean) as TerritoryScope[];
+        else
+          params[key] = value
+            .split(',')
+            .map((s) => parseTerritoryScope(s))
+            .filter((s) => s != null);
         break;
       case PageParamKey.isoStatus:
         params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);

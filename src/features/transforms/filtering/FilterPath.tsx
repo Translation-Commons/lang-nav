@@ -20,6 +20,9 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 import { getFilterLabels } from './FilterLabels';
 
 /**
@@ -94,7 +97,7 @@ const FilterPath: React.FC = () => {
     !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
       <Selector
         selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(LanguageScope)}
+        options={Object.values(LanguageScope).filter((s) => typeof s === 'number')}
         labelWhenEmpty="Any Languoid"
         onChange={(scope: LanguageScope) =>
           languageScopes.includes(scope)
@@ -102,16 +105,15 @@ const FilterPath: React.FC = () => {
             : updatePageParams({ languageScopes: [...languageScopes, scope] })
         }
         selected={languageScopes}
+        getOptionLabel={getLanguageScopeLabel}
       />
     ),
     modalityFilter.length > 0 && (
       <Selector
         selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(LanguageModality).filter(
-          (v): v is LanguageModality => typeof v === 'number',
-        )}
+        options={Object.values(LanguageModality).filter((v) => typeof v === 'number')}
         labelWhenEmpty="Any Modality"
-        getOptionLabel={(v) => getModalityLabel(v) ?? String(v)}
+        getOptionLabel={getModalityLabel}
         onChange={(modality: LanguageModality) =>
           modalityFilter.includes(modality)
             ? updatePageParams({
@@ -125,8 +127,9 @@ const FilterPath: React.FC = () => {
     !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
       <Selector
         selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(TerritoryScope)}
+        options={Object.values(TerritoryScope).filter((s) => typeof s === 'number')}
         labelWhenEmpty="Any Geography"
+        getOptionLabel={getTerritoryScopeLabel}
         onChange={(scope: TerritoryScope) =>
           territoryScopes.includes(scope)
             ? updatePageParams({ territoryScopes: territoryScopes.filter((s) => s != scope) })
