@@ -10,7 +10,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
 const LanguageNameColumns: TableColumn<LanguageData>[] = [
-  NameColumn,
+  { ...NameColumn, isInitiallyVisible: true },
   { ...EndonymColumn, isInitiallyVisible: true },
   {
     key: 'ISO Name',

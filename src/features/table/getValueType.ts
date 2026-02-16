@@ -11,15 +11,14 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.Population:
     case Field.PopulationDirectlySourced:
     case Field.PopulationOfDescendants:
-    case Field.PopulationPercentInBiggestDescendantLanguage:
       return TableValueType.Population;
     case Field.Literacy:
     case Field.PercentOfOverallLanguageSpeakers:
     case Field.PercentOfTerritoryPopulation:
     case Field.Longitude:
     case Field.Latitude:
-    case Field.Depth:
     case Field.Area:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
       return TableValueType.Decimal;
     case Field.Date:
       return TableValueType.Date;
@@ -28,6 +27,7 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.Depth: // # of nodes
       return TableValueType.Count;
     case Field.Name:
     case Field.Endonym:
