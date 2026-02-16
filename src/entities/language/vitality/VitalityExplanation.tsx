@@ -144,9 +144,9 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
       if (iso != null) {
         return (
           <div>
-            <div>
-              There is no data from Ethnologue, so we&apos;re just using the status from ISO:
-            </div>
+            {/* <div>
+              There is no data from Ethnologue, so we&apos;re just using the status from ISO: 
+            </div> */}
             <VitalityExplanation source={VitalitySource.ISO} lang={lang} />
           </div>
         );

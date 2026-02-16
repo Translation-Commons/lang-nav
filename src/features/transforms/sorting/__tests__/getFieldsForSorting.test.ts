@@ -12,6 +12,8 @@ const IGNORED_COMBINATIONS: Partial<Record<ObjectType, Field[]>> = {
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
   ], // It's always 1 for censuses
+  [ObjectType.Language]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
+  [ObjectType.Locale]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
 };
 
 describe('getFieldsForSorting', () => {
