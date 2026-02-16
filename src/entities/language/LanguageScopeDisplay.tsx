@@ -13,6 +13,7 @@ const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     <div style={{ display: 'inline-flex', gap: '0.5em', flexWrap: 'wrap' }}>
       {Object.values(LanguageScope)
         .filter((s) => typeof s === 'number')
+        .filter((scope) => scopesBySource[scope]?.length > 0)
         .map((scope) => (
           <div key={scope} style={{ display: 'flex', gap: '0.25em' }}>
             {scopesBySource[scope]?.length > 0 && getLanguageScopeLabel(scope)}
@@ -29,7 +30,7 @@ export default LanguageScopeDisplay;
 
 function getScopeBySource(lang: LanguageData): LanguageSource[][] {
   const { scope, ISO, CLDR, Glottolog } = lang;
-  const scopes: LanguageSource[][] = Array(6)
+  const scopes: LanguageSource[][] = Array(LanguageScope.Family + 1)
     .fill(null)
     .map(() => []); // index by LanguageScope value
   if (scope) scopes[scope] = [LanguageSource.Combined];

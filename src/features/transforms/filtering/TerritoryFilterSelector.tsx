@@ -35,7 +35,7 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
     const getMatchDistance = (territory: TerritoryData): number =>
       filterByScope(territory) ? 0 : 1;
     const getMatchGroup = (territory: TerritoryData): string => {
-      if (!filterByScope(territory)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterByScope(territory)) return 'not ' + filterLabels.territoryScope;
       return 'matched';
     };
 

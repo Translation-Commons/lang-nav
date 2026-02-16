@@ -42,14 +42,14 @@ describe('LanguageFilterSelector', () => {
     mockUpdatePageParams.mockReset();
   });
 
-  it('basically renders', () => {
-    waitFor(() => render(<LanguageFilterSelector />));
+  it('basically renders', async () => {
+    await waitFor(async () => render(<LanguageFilterSelector />));
     expect(screen.getByText(/Language/)).toBeTruthy();
   });
 
   it('suggests all languages when no search string is provided', async () => {
     const user = userEvent.setup();
-    waitFor(() => render(<LanguageFilterSelector />));
+    await waitFor(async () => render(<LanguageFilterSelector />));
 
     const input = screen.getByPlaceholderText('Name or code');
     // Click to trigger getSuggestions('') and await
@@ -82,14 +82,13 @@ describe('LanguageFilterSelector', () => {
 
     // User clicks on German, the button text should update and updatePageParams called
     await waitFor(async () => await user.click(items[0]));
-    await new Promise((r) => setTimeout(r, 400)); // wait for debounce
     expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'German' });
   });
 
   it('without scope filter, language families appear in original order', async () => {
     setupMockParams({ languageScopes: [] });
     const user = userEvent.setup();
-    waitFor(() => render(<LanguageFilterSelector />));
+    await waitFor(async () => render(<LanguageFilterSelector />));
 
     const btn = screen.getByPlaceholderText('Name or code');
     // Click to trigger getSuggestions('') and await
