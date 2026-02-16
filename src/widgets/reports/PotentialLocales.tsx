@@ -7,7 +7,6 @@ import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
@@ -154,13 +153,11 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Population',
           render: (object) => object.populationSpeaking,
-          valueType: TableValueType.Population,
           field: Field.Population,
         },
         {
           key: '% in Territory',
           render: (object) => object.populationSpeakingPercent,
-          valueType: TableValueType.Decimal,
           field: Field.PercentOfTerritoryPopulation,
         },
         {
@@ -168,7 +165,6 @@ const PotentialLocalesTable: React.FC<{
           render: (object) =>
             object.populationSpeaking &&
             (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
-          valueType: TableValueType.Decimal,
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {

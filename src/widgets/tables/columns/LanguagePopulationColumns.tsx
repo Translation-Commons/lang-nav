@@ -55,7 +55,6 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) => <LanguagePopulationEstimate lang={lang} />,
-    valueType: TableValueType.Population,
     field: Field.Population,
     isInitiallyVisible: true,
   },
@@ -72,7 +71,6 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     description:
       'This is a rough estimate from variable internet databases (citations not available).',
     render: (lang) => lang.populationRough,
-    valueType: TableValueType.Population,
     field: Field.PopulationDirectlySourced,
   },
   {
@@ -81,7 +79,6 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
     render: (lang) => <LanguagePopulationFromDescendants lang={lang} />,
-    valueType: TableValueType.Population,
     field: Field.PopulationOfDescendants,
   },
   {

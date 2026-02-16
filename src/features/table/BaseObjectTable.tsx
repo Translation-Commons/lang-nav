@@ -9,6 +9,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
 import TableID from './TableID';
 import TableSortButton from './TableSortButton';
@@ -51,7 +52,10 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                     <InfoIcon size="1em" display="block" />
                   </Hoverable>
                 )}
-                <TableSortButton columnSortBy={column.field} valueType={column.valueType} />
+                <TableSortButton
+                  columnSortBy={column.field}
+                  valueType={getValueTypeForColumn(column)}
+                />
               </th>
             ))}
           </tr>
@@ -62,7 +66,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
               {visibleColumns.map((column, idx) => (
                 <td
                   key={column.key}
-                  className={column.valueType}
+                  className={getValueTypeForColumn(column)}
                   style={{
                     maxWidth: MAX_COLUMN_WIDTH,
                     padding: '0.25em 0.5em',
@@ -72,7 +76,10 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                     zIndex: idx === 0 ? 1 : 'auto',
                   }}
                 >
-                  <FormattedContent content={column.render(object)} valueType={column.valueType} />
+                  <FormattedContent
+                    content={column.render(object)}
+                    valueType={getValueTypeForColumn(column)}
+                  />
                 </td>
               ))}
             </tr>

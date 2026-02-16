@@ -1,5 +1,4 @@
 import TableColumn from '@features/table/TableColumn';
-import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import CensusCountForLocale from '@entities/census/CensusCountForLocale';
@@ -18,7 +17,6 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
       </>
     ),
     render: (object) => <LocalePopulationAdjusted locale={object} />,
-    valueType: TableValueType.Population,
     field: Field.Population,
     columnGroup: 'Demographics',
   },
@@ -26,7 +24,6 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: 'Population (Direct)',
     description: 'This is the original population number cited from sourced data.',
     render: (object) => object.populationSpeaking,
-    valueType: TableValueType.Population,
     field: Field.PopulationDirectlySourced,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
@@ -34,7 +31,6 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
     key: '% in Territory',
     render: (object) => object.populationSpeakingPercent,
-    valueType: TableValueType.Decimal,
     field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
   },
@@ -43,7 +39,6 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     render: (object) =>
       object.populationSpeaking &&
       (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
-    valueType: TableValueType.Decimal,
     isInitiallyVisible: false,
     field: Field.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',
@@ -57,7 +52,6 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: 'Population Records',
     render: (object) => <CensusCountForLocale locale={object} />,
     columnGroup: 'Demographics',
-    valueType: TableValueType.Count,
     field: Field.CountOfCensuses,
     isInitiallyVisible: false,
   },

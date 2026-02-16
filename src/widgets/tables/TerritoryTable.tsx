@@ -62,14 +62,12 @@ const TerritoryTable: React.FC = () => {
         {
           key: 'Population',
           render: (object) => object.population,
-          valueType: TableValueType.Population,
           field: Field.Population,
           columnGroup: 'Demographics',
         },
         {
           key: 'Literacy',
           render: (object) => object.literacyPercent,
-          valueType: TableValueType.Decimal,
           field: Field.Literacy,
           columnGroup: 'Demographics',
         },
@@ -77,7 +75,6 @@ const TerritoryTable: React.FC = () => {
           key: 'Census Tables',
           render: (object) => <CensusCountForTerritory territory={object} />,
           columnGroup: 'Demographics',
-          valueType: TableValueType.Count,
           field: Field.CountOfCensuses,
           isInitiallyVisible: false,
         },
@@ -89,7 +86,6 @@ const TerritoryTable: React.FC = () => {
                 items={object.locales.map((l) => l.language?.nameDisplay ?? l.nameDisplay)}
               />
             ),
-          valueType: TableValueType.Count,
           field: Field.CountOfLanguages,
           columnGroup: 'Language',
         },
@@ -112,7 +108,6 @@ const TerritoryTable: React.FC = () => {
           key: 'Biggest Language %',
           render: (object) => object.locales?.[0].populationSpeakingPercent,
           isInitiallyVisible: false,
-          valueType: TableValueType.Decimal,
           field: Field.PopulationPercentInBiggestDescendantLanguage,
           columnGroup: 'Language',
         },
@@ -123,7 +118,6 @@ const TerritoryTable: React.FC = () => {
               items={getWritingSystemsInObject(object)?.map((ws) => ws.nameDisplay) ?? []}
             />
           ),
-          valueType: TableValueType.Count,
           field: Field.CountOfWritingSystems,
           columnGroup: 'Language',
         },
@@ -139,7 +133,6 @@ const TerritoryTable: React.FC = () => {
             <HoverableEnumeration items={getTerritoryChildren(object).map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Count,
           field: Field.CountOfChildTerritories,
           columnGroup: 'Relations',
         },
@@ -149,7 +142,6 @@ const TerritoryTable: React.FC = () => {
             <HoverableEnumeration items={getTerritoryCountries(object).map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Count,
           field: Field.CountOfCountries,
           columnGroup: 'Relations',
         },
@@ -160,7 +152,6 @@ const TerritoryTable: React.FC = () => {
             object.dependentTerritories.length > 0 &&
             sumBy(object.dependentTerritories, (t) => t.population ?? 0),
           isInitiallyVisible: false,
-          valueType: TableValueType.Population,
           field: Field.PopulationOfDescendants,
           columnGroup: 'Relations',
         },
@@ -169,7 +160,6 @@ const TerritoryTable: React.FC = () => {
           render: (obj) => obj.latitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
           exportValue: (obj) => obj.latitude?.toFixed(4) ?? '',
           isInitiallyVisible: false,
-          valueType: TableValueType.Decimal,
           field: Field.Latitude,
           columnGroup: 'Location',
         },
@@ -178,7 +168,6 @@ const TerritoryTable: React.FC = () => {
           render: (obj) => obj.longitude?.toFixed(2) ?? <Deemphasized>—</Deemphasized>,
           exportValue: (obj) => obj.longitude?.toFixed(4) ?? '',
           isInitiallyVisible: false,
-          valueType: TableValueType.Decimal,
           field: Field.Longitude,
           columnGroup: 'Location',
         },
@@ -189,7 +178,6 @@ const TerritoryTable: React.FC = () => {
           render: (object) =>
             object.landArea && numberToSigFigs(object.landArea, 3)?.toLocaleString(),
           isInitiallyVisible: false,
-          valueType: TableValueType.Decimal,
           field: Field.Area,
           columnGroup: 'Location',
         },

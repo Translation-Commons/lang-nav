@@ -77,10 +77,12 @@ const columns: TableColumn<LanguageData>[] = [
   {
     key: 'Wikipedia Articles',
     render: (object) => <WikipediaArticles object={object} />,
+    valueType: TableValueType.Count,
   },
   {
     key: 'Wikipedia Active Users',
     render: (object) => <WikipediaActiveUsers object={object} />,
+    valueType: TableValueType.Population,
   },
 ];
 
