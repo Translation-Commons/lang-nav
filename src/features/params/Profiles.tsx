@@ -119,7 +119,7 @@ export function getDefaultParams(
   if (params.view === View.Hierarchy) {
     if (params.objectType === ObjectType.Language) params.languageScopes.push(LanguageScope.Family);
     if (params.objectType === ObjectType.Territory)
-      params.territoryScopes = Object.values(TerritoryScope);
+      params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
   } else if (params.view === View.Table) {
     params.limit = 200; // Show more results in table view
   } else if (params.view === View.Map) {

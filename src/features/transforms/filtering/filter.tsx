@@ -1,15 +1,16 @@
 import { useCallback } from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+
+import { getLanguageForEntity, getTerritoryForEntity } from '../fields/getField';
 
 export type FilterFunctionType = (a: ObjectData) => boolean;
 
@@ -35,10 +36,10 @@ export function getFilterByLanguageScope(): FilterFunctionType {
 
   const filterByLanguageScope = useCallback(
     (object: ObjectData | undefined): boolean => {
-      if (languageScopes.length === 0) return true;
-      if (object?.type === ObjectType.Locale) return filterByLanguageScope(object.language);
-      if (object?.type !== ObjectType.Language) return true;
-      return languageScopes.includes(object.scope ?? LanguageScope.SpecialCode);
+      if (languageScopes.length === 0 || !object) return true;
+      const lang = getLanguageForEntity(object);
+      if (!lang) return true; // If languages don't apply, don't filter out
+      return languageScopes.includes(lang.scope ?? LanguageScope.SpecialCode);
     },
     [languageScopes],
   );
@@ -51,11 +52,10 @@ export function getFilterByModality(): FilterFunctionType {
 
   const filterByModality = useCallback(
     (object: ObjectData | undefined): boolean => {
-      if (modalityFilter.length === 0) return true;
-      if (object?.type === ObjectType.Locale) return filterByModality(object.language);
-      if (object?.type !== ObjectType.Language) return true;
-      const language = object as LanguageData;
-      return language.modality != null && modalityFilter.includes(language.modality);
+      if (modalityFilter.length === 0 || !object) return true;
+      const lang = getLanguageForEntity(object);
+      if (!lang) return true; // If languages don't apply, don't filter out
+      return lang.modality != null && modalityFilter.includes(lang.modality);
     },
     [modalityFilter],
   );
@@ -68,10 +68,10 @@ export function getFilterByTerritoryScope(): FilterFunctionType {
 
   const filterByTerritoryScope = useCallback(
     (object: ObjectData | undefined): boolean => {
-      if (territoryScopes.length === 0) return true;
-      if (object?.type === ObjectType.Locale) return filterByTerritoryScope(object.territory);
-      if (object?.type !== ObjectType.Territory) return true;
-      return territoryScopes.includes(object.scope);
+      if (territoryScopes.length === 0 || !object) return true;
+      const terr = getTerritoryForEntity(object);
+      if (!terr) return true; // If territories don't apply, don't filter out
+      return territoryScopes.includes(terr.scope);
     },
     [territoryScopes],
   );
@@ -94,10 +94,9 @@ export function buildVitalityFilterFunction(
 ): FilterFunctionType {
   const filterByVitality = (object: ObjectData | undefined): boolean => {
     // Only filter language objects
-    if (object?.type === ObjectType.Locale) return filterByVitality(object.language);
-    if (object?.type !== ObjectType.Language) return true;
-
-    const language = object as LanguageData;
+    if (!object) return true;
+    const lang = getLanguageForEntity(object);
+    if (!lang) return true; // If languages don't apply, don't filter out
 
     // No filters active = pass all
     if (!isoFilter.length && !ethFineFilter.length && !ethCoarseFilter.length) {
@@ -105,7 +104,7 @@ export function buildVitalityFilterFunction(
     }
 
     // For each active filter, check if language matches
-    const { iso, ethFine, ethCoarse } = language.vitality || {};
+    const { iso, ethFine, ethCoarse } = lang.vitality || {};
     const isoMatches = !isoFilter.length || (iso != null && isoFilter.includes(iso));
     const ethFineMatches =
       !ethFineFilter.length || (ethFine != null && ethFineFilter.includes(ethFine));

@@ -1,6 +1,7 @@
 import { LanguageModality } from '@entities/language/LanguageModality';
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { maxBy } from '@shared/lib/setUtils';
@@ -40,6 +41,10 @@ export function getMinimumValue(field?: Field): number {
       return 0;
     case Field.None:
       return 0;
+    case Field.LanguageScope:
+      return LanguageScope.SpecialCode;
+    case Field.TerritoryScope:
+      return TerritoryScope.Dependency;
     case Field.Date:
       return new Date(0).getTime();
     case Field.Name:
@@ -66,6 +71,8 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
       return VitalityEthnologueCoarse.Institutional; // 9;
+    case Field.LanguageScope:
+      return LanguageScope.Family; // Larger value = broader scope
     case Field.Latitude:
       return 90;
     case Field.PercentOfOverallLanguageSpeakers:
@@ -76,6 +83,9 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
       return 180;
     case Field.Date:
       return new Date().getTime(); // Today
+    case Field.TerritoryScope:
+      // return Not doing "World" as max since its not always shown and can throw off the color scaling
+      return maxBy(objects, (obj) => (getField(obj, field) as number) || 0) || 0;
     case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:

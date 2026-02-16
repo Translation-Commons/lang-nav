@@ -1,5 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   getCountOfCensuses,
   getCountOfLanguages,
@@ -23,12 +24,14 @@ import {
   getCountOfChildTerritories,
   getCountOfCountries,
 } from '@entities/lib/getObjectRelatedTerritories';
-import { ObjectData } from '@entities/types/DataTypes';
+import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import Field from './Field';
 
+// Get's a primitive value for a given object and field, used for sorting and filtering.
+// Returns undefined if the field is not applicable to the object type or if the value is missing.
 function getField(object: ObjectData, field: Field): string | number | undefined {
   switch (field) {
     case Field.None:
@@ -39,6 +42,37 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return object.nameDisplay;
     case Field.Endonym:
       return object.nameEndonym;
+
+    case Field.Depth:
+      return getDepth(object);
+    case Field.Literacy:
+      return getObjectLiteracy(object);
+    case Field.Date:
+      return getObjectDateAsNumber(object);
+    case Field.Latitude:
+      return object.type === ObjectType.Language || object.type === ObjectType.Territory
+        ? object.latitude
+        : undefined;
+    case Field.Longitude:
+      return object.type === ObjectType.Language || object.type === ObjectType.Territory
+        ? object.longitude
+        : undefined;
+    case Field.Area:
+      return object.type === ObjectType.Territory ? object.landArea : undefined;
+
+    case Field.LanguageScope:
+      return getLanguageForEntity(object)?.scope;
+    case Field.TerritoryScope:
+      return getTerritoryForEntity(object)?.scope;
+
+    // Related objects
+    case Field.Language:
+      return getObjectMostImportantLanguageName(object);
+    case Field.WritingSystem:
+      return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
+    case Field.Territory:
+      return getContainingTerritories(object)?.[0]?.nameDisplay;
+
     // Counts of Related Objects
     case Field.CountOfLanguages:
       return getCountOfLanguages(object);
@@ -50,29 +84,6 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getCountOfWritingSystems(object);
     case Field.CountOfCensuses:
       return getCountOfCensuses(object);
-
-    case Field.Depth:
-      return getDepth(object);
-    case Field.Literacy:
-      return getObjectLiteracy(object);
-    case Field.Date:
-      return getObjectDateAsNumber(object);
-    case Field.Language:
-      return getObjectMostImportantLanguageName(object);
-    case Field.WritingSystem:
-      return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
-    case Field.Territory:
-      return getContainingTerritories(object)?.[0]?.nameDisplay;
-    case Field.Latitude:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? object.latitude
-        : undefined;
-    case Field.Longitude:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? object.longitude
-        : undefined;
-    case Field.Area:
-      return object.type === ObjectType.Territory ? object.landArea : undefined;
 
     // Population
     case Field.Population:
@@ -90,29 +101,32 @@ function getField(object: ObjectData, field: Field): string | number | undefined
 
     // Vitality
     case Field.VitalityMetascore:
-      if (object.type === ObjectType.Language) return object.vitality?.meta;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.meta;
-      return undefined;
+      return getLanguageForEntity(object)?.vitality?.meta;
     case Field.ISOStatus:
-      if (object.type === ObjectType.Language) return object.vitality?.iso;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.iso;
-      return undefined;
+      return getLanguageForEntity(object)?.vitality?.iso;
     case Field.VitalityEthnologueFine:
-      if (object.type === ObjectType.Language) return object.vitality?.ethFine;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethFine;
-      return undefined;
+      return getLanguageForEntity(object)?.vitality?.ethFine;
     case Field.VitalityEthnologueCoarse:
-      if (object.type === ObjectType.Language) return object.vitality?.ethCoarse;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
-      return undefined;
+      return getLanguageForEntity(object)?.vitality?.ethCoarse;
     case Field.Modality:
-      if (object.type === ObjectType.Language) return object.modality;
-      if (object.type === ObjectType.Locale) return object.language?.modality;
-      return undefined;
+      return getLanguageForEntity(object)?.modality;
 
     default:
       enforceExhaustiveSwitch(field);
   }
+}
+
+export function getLanguageForEntity(object: ObjectData): LanguageData | undefined {
+  if (object.type === ObjectType.Language) return object;
+  if (object.type === ObjectType.Locale) return object.language;
+  return undefined;
+}
+
+export function getTerritoryForEntity(object: ObjectData): TerritoryData | undefined {
+  if (object.type === ObjectType.Territory) return object;
+  if (object.type === ObjectType.Locale) return object.territory;
+  if (object.type === ObjectType.Census) return object.territory;
+  return undefined;
 }
 
 export default getField;

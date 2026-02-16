@@ -97,6 +97,8 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
     case Field.Area:
+    case Field.LanguageScope:
+    case Field.TerritoryScope:
       return SortDirection.Descending; // High to Low
     default:
       enforceExhaustiveSwitch(sortBy);

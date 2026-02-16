@@ -23,6 +23,8 @@ import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 type Props = {
   census: CensusData;
 };
@@ -119,9 +121,9 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Scope',
-            render: (loc) => loc.language?.scope,
+            render: (loc) => getLanguageScopeLabel(loc.language?.scope),
             isInitiallyVisible: false,
-            valueType: TableValueType.Enum,
+            field: Field.LanguageScope,
           },
           {
             key: 'Locale Entry',

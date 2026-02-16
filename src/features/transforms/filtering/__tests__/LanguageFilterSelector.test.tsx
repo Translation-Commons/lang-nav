@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
@@ -42,18 +42,18 @@ describe('LanguageFilterSelector', () => {
     mockUpdatePageParams.mockReset();
   });
 
-  it('basically renders', () => {
-    render(<LanguageFilterSelector />);
+  it('basically renders', async () => {
+    await waitFor(async () => render(<LanguageFilterSelector />));
     expect(screen.getByText(/Language/)).toBeTruthy();
   });
 
   it('suggests all languages when no search string is provided', async () => {
     const user = userEvent.setup();
-    render(<LanguageFilterSelector />);
+    await waitFor(async () => render(<LanguageFilterSelector />));
 
     const input = screen.getByPlaceholderText('Name or code');
-    // click to trigger getSuggestions('') and await
-    await user.click(input);
+    // Click to trigger getSuggestions('') and await
+    await waitFor(async () => await user.click(input));
 
     // After click the mocked TextInput will render suggestion items
     const items = screen.getByRole('listbox').children;
@@ -72,7 +72,7 @@ describe('LanguageFilterSelector', () => {
     expect(items[10]).toHaveTextContent('Indo-European languages');
     expect(items[11]).toHaveTextContent('Germanic');
     // User types in German, suggestions should filter to German and Germanic
-    await user.type(input, 'German');
+    await waitFor(async () => await user.type(input, 'German'));
     expect(items.length).toBe(4);
     expect(items[0]).toHaveTextContent('Pick a suggestion or press [enter] to filter by "German"');
     expect(items[1]).toHaveTextContent('German');
@@ -81,19 +81,18 @@ describe('LanguageFilterSelector', () => {
     expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
 
     // User clicks on German, the button text should update and updatePageParams called
-    await user.click(items[0]);
-    await new Promise((r) => setTimeout(r, 400)); // wait for debounce
+    await waitFor(async () => await user.click(items[0]));
     expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'German' });
   });
 
   it('without scope filter, language families appear in original order', async () => {
     setupMockParams({ languageScopes: [] });
     const user = userEvent.setup();
-    render(<LanguageFilterSelector />);
+    await waitFor(async () => render(<LanguageFilterSelector />));
 
     const btn = screen.getByPlaceholderText('Name or code');
-    // click to trigger getSuggestions('') and await
-    await user.click(btn);
+    // Click to trigger getSuggestions('') and await
+    await waitFor(async () => await user.click(btn));
 
     // After click the mocked TextInput will render suggestion items
     const items = screen.getByRole('listbox').children;
