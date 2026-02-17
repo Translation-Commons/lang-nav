@@ -3,7 +3,6 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import usePageParams from '@features/params/usePageParams';
 
 import { VariantTagData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
@@ -16,15 +15,12 @@ interface Props {
 }
 
 const VariantTagCard: React.FC<Props> = ({ data }) => {
-  const { updatePageParams } = usePageParams();
-  const { ID, nameDisplay, languages } = data;
+  const { nameDisplay, languages } = data;
 
   return (
     <div>
       <h3>
-        <a onClick={() => updatePageParams({ objectID: ID })} role="link">
-          <ObjectTitle object={data} />
-        </a>
+        <ObjectTitle object={data} />
         <ObjectSubtitle object={data} />
       </h3>
 

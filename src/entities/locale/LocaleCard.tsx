@@ -1,7 +1,5 @@
-import { LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
+import { BracketsIcon, LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
-
-import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
@@ -11,6 +9,8 @@ import CardField from '@shared/containers/CardField';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 import LocaleCensusCitation from './LocaleCensusCitation';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
 import { getOfficialLabel } from './LocaleStrings';
@@ -19,15 +19,12 @@ interface Props {
   locale: LocaleData;
 }
 const LocaleCard: React.FC<Props> = ({ locale }) => {
-  const { ID, populationAdjusted, officialStatus, populationSpeakingPercent, territory } = locale;
-  const { updatePageParams } = usePageParams();
+  const { populationAdjusted, officialStatus, populationSpeakingPercent, territory } = locale;
 
   return (
     <div>
       <h3>
-        <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={locale} />
-        </a>
+        <ObjectTitle object={locale} />
         <ObjectSubtitle object={locale} />
       </h3>
 
@@ -38,20 +35,26 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
           description="How many people in this territory that use this language. Adjusted to 2025 population and including citation."
         >
           <LocalePopulationAdjusted locale={locale} />
-          {' ['}
+        </CardField>
+      )}
+      {populationAdjusted != null && (
+        <CardField
+          title="Source"
+          icon={BracketsIcon}
+          description="The source of the population data."
+        >
           <LocaleCensusCitation locale={locale} size="short" />
-          {' ]'}
         </CardField>
       )}
 
       {populationSpeakingPercent != null && (
         <CardField
-          title="% speaking"
+          title="Percent population"
           icon={PercentIcon}
-          description="Percent of the Territory population speaking this locale."
+          description="Percent of the Territory population that use this locale."
         >
           <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
-          {territory?.scope ?? 'territory'}
+          {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
         </CardField>
       )}
 

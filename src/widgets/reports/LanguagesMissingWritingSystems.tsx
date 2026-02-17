@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
@@ -19,7 +20,6 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
-import ViewCard from '@shared/containers/ViewCard';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -61,7 +61,7 @@ const LanguagesMissingWritingSystems: React.FC = () => {
           {getCurrentObjects(languagesFiltered.sort(sortFunction)).map((lang) => {
             const family = getLanguageRootLanguageFamily(lang);
             return (
-              <ViewCard key={lang.ID}>
+              <CardInCardList key={lang.ID} object={lang}>
                 <div>
                   <label>Language ID:</label>
                   {lang.ID}
@@ -92,7 +92,7 @@ const LanguagesMissingWritingSystems: React.FC = () => {
                   <label>Population:</label>
                   <CountOfPeople count={lang.populationEstimate} />
                 </div>
-              </ViewCard>
+              </CardInCardList>
             );
           })}
         </ResponsiveGrid>
