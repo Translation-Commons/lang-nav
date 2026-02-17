@@ -14,7 +14,6 @@ import {
   WikipediaStatusDisplay,
 } from '@entities/ui/ObjectWikipediaInfo';
 
-
 const columns: TableColumn<LanguageData>[] = [
   // {
   //   key: 'Digital Support (Ethnologue)',
