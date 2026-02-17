@@ -5,13 +5,12 @@ import LanguagePathsReport from '@widgets/reports/LanguagePathsReport';
 import LanguagesLargestDescendant from '@widgets/reports/LanguagesLargestDescendant';
 import LanguagesMissingWritingSystems from '@widgets/reports/LanguagesMissingWritingSystems';
 import LanguagesWithIdenticalNames from '@widgets/reports/LanguagesWithIdenticalNames';
+import LocaleCitationCounts from '@widgets/reports/LocaleCitationCounts';
 import PotentialLocales from '@widgets/reports/PotentialLocales';
 import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithCensuses';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-
-import LocaleCitationCounts from '@entities/locale/LocaleCitationCounts';
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.
