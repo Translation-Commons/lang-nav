@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import { usePageBrightness } from '@shared/hooks/usePageBrightness';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageBrightness();
+  const [feedbackOpen, setFeedbackOpen] = useState(false);
+
   return (
     <NavBarContainer>
       <NavBarTitle>
@@ -21,6 +24,15 @@ const PageNavBar: React.FC = () => {
       <NavBarLink path="/data">Data</NavBarLink>
       {/* <NavBarLink path="/details">Details</NavBarLink> */}
       <NavBarLink path="/about">About</NavBarLink>
+      <button
+        className="primary"
+        type="button"
+        style={{ marginLeft: 'auto', padding: '0.5em .5em', marginRight: '0.5em' }}
+        onClick={() => setFeedbackOpen(true)}
+      >
+        Feedback
+      </button>
+      {feedbackOpen && <FeedbackForm onClose={() => setFeedbackOpen(false)} />}
     </NavBarContainer>
   );
 };
