@@ -1,5 +1,4 @@
 import React, { useCallback, useMemo } from 'react';
-import { TransformComponent, TransformWrapper } from 'react-zoom-pan-pinch';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -16,14 +15,21 @@ import DrawableData from './DrawableData';
 import MapCircles from './MapCircles';
 import MapHoverContent from './MapHoverContent';
 import MapTerritories from './MapTerritories';
+import useMapZoom from './UseMapZoom';
 import ZoomControls from './ZoomControls';
 
 type Props = {
   objects: ObjectData[];
-  maxWidth?: number; // in pixels
+  maxWidth?: number;
 };
+const MAP_WIDTH = 1000;
+const MAP_HEIGHT = MAP_WIDTH / 1.979;
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
+  const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
+    mapWidth: MAP_WIDTH,
+    mapHeight: MAP_HEIGHT,
+  });
   const { colorBy, objectType } = usePageParams();
   const drawableObjects = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -52,42 +58,53 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
 
   return (
     <div style={{ maxWidth, width: '100%', position: 'relative' }}>
-      <div style={{ border: '1px solid #ccc' }}>
-        <TransformWrapper initialScale={1} minScale={1} maxScale={8} wheel={{ step: 0.1 }}>
-          {({ zoomIn, zoomOut, resetTransform }) => (
-            <>
-              <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
-              <TransformComponent
-                wrapperStyle={{ width: '100%', cursor: 'grab' }}
-                contentStyle={{ width: '100%' }}
-              >
-                <div style={{ position: 'relative', width: '100%', aspectRatio: 1.979 }}>
-                  <img
-                    alt="World map"
-                    src="./data/wiki/map_world.svg"
-                    style={{ position: 'absolute', width: '100%', height: 'auto', top: 0, left: 0 }}
-                  />
-                  {objectType !== ObjectType.Language && (
-                    <MapTerritories
-                      drawableObjects={drawableObjects}
-                      getHoverContent={getHoverContent}
-                      coloringFunctions={coloringFunctions}
-                    />
-                  )}
-                  <MapCircles
-                    drawableObjects={drawableObjects}
-                    getHoverContent={getHoverContent}
-                    scalar={1200 / maxWidth}
-                    coloringFunctions={coloringFunctions}
-                  />
-                </div>
-              </TransformComponent>
-            </>
+      <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+      <div
+        ref={containerRef}
+        style={{
+          border: '1px solid #ccc',
+          width: '100%',
+          aspectRatio: 1.979,
+          overflow: 'hidden',
+          cursor: 'grab',
+          position: 'relative',
+        }}
+      >
+        <div
+          ref={contentRef}
+          style={{
+            width: MAP_WIDTH,
+            height: MAP_HEIGHT,
+            position: 'relative',
+          }}
+        >
+          <img
+            alt="World map"
+            src="./data/wiki/map_world.svg"
+            style={{
+              position: 'absolute',
+              width: '100%',
+              height: '100%',
+              top: 0,
+              left: 0,
+            }}
+          />
+          {objectType !== ObjectType.Language && (
+            <MapTerritories
+              drawableObjects={drawableObjects}
+              getHoverContent={getHoverContent}
+              coloringFunctions={coloringFunctions}
+            />
           )}
-        </TransformWrapper>
+          <MapCircles
+            drawableObjects={drawableObjects}
+            getHoverContent={getHoverContent}
+            scalar={1200 / maxWidth}
+            coloringFunctions={coloringFunctions}
+          />
+        </div>
       </div>
-
-      {colorBy != 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
+      {colorBy !== 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
     </div>
   );
 };
