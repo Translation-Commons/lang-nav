@@ -2,9 +2,6 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 
-import LanguageDigitalSupportCell, {
-  LanguageDigitalSupportDescription,
-} from '@entities/language/LanguageDigitalSupportCell';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
@@ -17,15 +14,13 @@ import {
   WikipediaStatusDisplay,
 } from '@entities/ui/ObjectWikipediaInfo';
 
-import { getDigitalSupportLabel } from '@strings/DigitalSupportStrings';
-
 const columns: TableColumn<LanguageData>[] = [
-  {
-    key: 'Digital Support (Ethnologue)',
-    description: <LanguageDigitalSupportDescription />,
-    render: (lang) => <LanguageDigitalSupportCell lang={lang} />,
-    exportValue: (lang) => getDigitalSupportLabel(lang.Ethnologue.digitalSupport),
-  },
+  // {
+  //   key: 'Digital Support (Ethnologue)',
+  //   description: <LanguageDigitalSupportDescription />,
+  //   render: (lang) => <LanguageDigitalSupportCell lang={lang} />,
+  //   exportValue: (lang) => getDigitalSupportLabel(lang.Ethnologue.digitalSupport),
+  // },
   {
     key: 'CLDR Coverage Level',
     description: (

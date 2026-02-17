@@ -16,6 +16,8 @@ import {
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 
+const ETH_DISABLED = true;
+
 export const LanguageISOStatusSelector: React.FC = () => {
   const { isoStatus, updatePageParams } = usePageParams();
 
@@ -38,6 +40,7 @@ export const LanguageISOStatusSelector: React.FC = () => {
 
 export const VitalityEthFineSelector: React.FC = () => {
   const { vitalityEthFine, updatePageParams } = usePageParams();
+  if (ETH_DISABLED) return null;
 
   return (
     <Selector
@@ -59,6 +62,7 @@ export const VitalityEthFineSelector: React.FC = () => {
 
 export const VitalityEthCoarseSelector: React.FC = () => {
   const { vitalityEthCoarse, updatePageParams } = usePageParams();
+  if (ETH_DISABLED) return null;
 
   return (
     <Selector
