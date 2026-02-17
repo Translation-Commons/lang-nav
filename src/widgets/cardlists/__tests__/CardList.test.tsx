@@ -1,4 +1,4 @@
-import { render } from '@testing-library/react';
+import { fireEvent, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
@@ -94,5 +94,49 @@ describe('CardList', () => {
     expect(cards[1]).toHaveTextContent('Harad');
     expect(cards[2]).toHaveTextContent('Beleriand');
     expect(cards[3]).toHaveTextContent('Eriador');
+  });
+
+  it('Cards can be opened by clicking on them', () => {
+    const { container } = render(<CardList />);
+    const cards = container.getElementsByClassName('CardInCardList');
+
+    // Click the first card (Arda)
+    if (cards[0] instanceof HTMLElement) cards[0].click();
+
+    // Expect the page params to have been updated with Arda's ID
+    expect(usePageParams().updatePageParams).toHaveBeenCalledWith({ objectID: '001' });
+  });
+
+  it('Clicking on interactive elements inside the card does not open the card', () => {
+    const { container } = render(<CardList />);
+    const cards = container.getElementsByClassName('CardInCardList');
+
+    // Add a button inside the first card for testing
+    if (cards[0] instanceof HTMLElement) {
+      const button = document.createElement('button');
+      button.textContent = 'Click me';
+      cards[0].appendChild(button);
+
+      // Click the button
+      button.click();
+
+      // Expect the page params NOT to have been updated with Arda's ID
+      expect(usePageParams().updatePageParams).not.toHaveBeenCalledWith({ objectID: '001' });
+    }
+  });
+
+  it('Cards can be accessed using keyboard navigation', () => {
+    const { container } = render(<CardList />);
+    const cards = container.getElementsByClassName('CardInCardList');
+
+    // Focus the first card (Arda)
+    if (cards[0] instanceof HTMLElement) {
+      cards[0].focus();
+      expect(document.activeElement).toBe(cards[0]);
+    }
+
+    // Press enter to open the card
+    fireEvent.keyDown(cards[0], { key: 'Enter', code: 'Enter' });
+    expect(usePageParams().updatePageParams).toHaveBeenCalledWith({ objectID: '001' });
   });
 });
