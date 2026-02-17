@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
+
 import { usePageBrightness } from '@shared/hooks/usePageBrightness';
 
 const PageNavBar: React.FC = () => {
