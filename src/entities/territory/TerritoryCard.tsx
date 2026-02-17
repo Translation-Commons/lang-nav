@@ -2,7 +2,6 @@ import { BlocksIcon, EarthIcon, LanguagesIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
@@ -21,8 +20,7 @@ interface Props {
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { population, ID, sovereign, locales, scope, parentUNRegion } = territory;
-  const { updatePageParams } = usePageParams();
+  const { population, sovereign, locales, scope, parentUNRegion } = territory;
   const filterByScope = getScopeFilter();
   const localeList = locales ?? [];
   const isDependency = scope === TerritoryScope.Dependency;
@@ -31,9 +29,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <h3>
-        <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={territory} />
-        </a>
+        <ObjectTitle object={territory} />
       </h3>
       <CardField
         title="Territory Type"

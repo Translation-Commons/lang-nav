@@ -1,4 +1,4 @@
-.ViewCard h3 {
+.CardInCardList h3 {
   /* It's at the top of the card already */
   margin-top: 0px;
 }
@@ -31,7 +31,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;

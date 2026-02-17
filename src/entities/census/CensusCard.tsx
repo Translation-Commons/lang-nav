@@ -1,7 +1,6 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import usePageParams from '@features/params/usePageParams';
 
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
@@ -12,15 +11,12 @@ interface Props {
   census: CensusData;
 }
 const CensusCard: React.FC<Props> = ({ census }) => {
-  const { ID, isoRegionCode, languageCount, territory } = census;
-  const { updatePageParams } = usePageParams();
+  const { isoRegionCode, languageCount, territory } = census;
 
   return (
     <div>
       <h3>
-        <a onClick={() => updatePageParams({ objectID: ID })} role="link">
-          <ObjectTitle object={census} />
-        </a>
+        <ObjectTitle object={census} />
         <ObjectSubtitle object={census} />
       </h3>
       <div>

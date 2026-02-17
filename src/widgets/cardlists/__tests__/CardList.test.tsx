@@ -52,7 +52,7 @@ describe('CardList', () => {
 
   it('renders a list of cards', () => {
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('ViewCard');
+    const cards = container.getElementsByClassName('CardInCardList');
 
     // These are the territories from the mocked data, sorted by population descending
     expect(cards[0]).toHaveTextContent('Arda');
@@ -67,7 +67,7 @@ describe('CardList', () => {
     setupMockParams({ limit: 2, page: 2 });
 
     const { container } = render(<CardList />);
-    const cards = container.getElementsByClassName('ViewCard');
+    const cards = container.getElementsByClassName('CardInCardList');
     expect(cards.length).toBe(2);
 
     expect(cards[0]).toHaveTextContent('Aman');
@@ -88,7 +88,7 @@ describe('CardList', () => {
     expect(meters.length).toBe(2); // One at top and one at bottom
 
     // Only the countries are shown
-    const cards = container.getElementsByClassName('ViewCard');
+    const cards = container.getElementsByClassName('CardInCardList');
     expect(cards.length).toBe(4);
     expect(cards[0]).toHaveTextContent('Aman');
     expect(cards[1]).toHaveTextContent('Harad');

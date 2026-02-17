@@ -31,9 +31,9 @@ interface Props {
 }
 
 const LanguageCard: React.FC<Props> = ({ lang }) => {
-  const { updatePageParams, view } = usePageParams();
+  const { view } = usePageParams();
   const sortFunction = getSortFunction();
-  const { ID, locales, modality, populationEstimate } = lang;
+  const { locales, modality, populationEstimate } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode ?? '',
@@ -42,9 +42,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
   return (
     <div>
       <h3>
-        <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={lang} />
-        </a>
+        <ObjectTitle object={lang} />
         <ObjectSubtitle object={lang} />
       </h3>
 

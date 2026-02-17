@@ -27,11 +27,16 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
       className="hoverableText"
       onMouseEnter={handleMouseEnter}
       onMouseLeave={onMouseLeaveTriggeringElement}
-      onClick={() => {
+      onClick={(e) => {
+        e.stopPropagation(); // Prevent triggering parent click handlers
         hideHoverCard();
         if (onClick != null) onClick();
       }}
-      style={{ display: 'inline-block', cursor: onClick ? 'pointer' : 'help', ...style }}
+      style={{
+        display: 'inline-block',
+        cursor: onClick ? 'pointer' : 'help',
+        ...style,
+      }}
     >
       {children}
     </span>

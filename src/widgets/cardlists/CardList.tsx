@@ -9,9 +9,9 @@ import useFilteredObjects from '@features/transforms/filtering/useFilteredObject
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
-import ViewCard from '@shared/containers/ViewCard';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import CardInCardList from './CardInCardList';
 import ResponsiveGrid from './ResponsiveGrid';
 
 const CardList: React.FC = () => {
@@ -32,9 +32,9 @@ const CardList: React.FC = () => {
       {currentObjects.length >= 1 && (
         <ResponsiveGrid>
           {currentObjects.map((object) => (
-            <ViewCard key={object.ID} style={{ backgroundColor: getColor(object) ?? 'inherit' }}>
+            <CardInCardList key={object.ID} getBackgroundColor={getColor} object={object}>
               <ObjectCard object={object} />
-            </ViewCard>
+            </CardInCardList>
           ))}
         </ResponsiveGrid>
       )}

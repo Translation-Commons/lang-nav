@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
@@ -14,7 +15,6 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
-import ViewCard from '@shared/containers/ViewCard';
 import { unique } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -95,7 +95,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
                   (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
                 );
                 return (
-                  <ViewCard key={lang.ID}>
+                  <CardInCardList key={lang.ID} object={lang}>
                     <div>
                       <label>ID(s):</label>{' '}
                       {unique(
@@ -134,7 +134,7 @@ const LanguagesWithIdenticalNames: React.FC = () => {
                         />
                       </div>
                     )}
-                  </ViewCard>
+                  </CardInCardList>
                 );
               })}
             </ResponsiveGrid>
