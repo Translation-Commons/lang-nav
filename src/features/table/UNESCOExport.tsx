@@ -2,6 +2,7 @@ import { CopyIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageModality } from '@entities/language/LanguageModality';
@@ -22,7 +23,7 @@ export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilte
       return undefined;
     })
     .filter((obj) => obj != null)
-    .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0)) // Sort by number of users descending
+    .sort(sortByPopulation) // Sort by number of users descending
     .map(getLocaleUNESCOData)
     .map((row) => row.join('\t'))
     .join('\n');

@@ -13,6 +13,7 @@ import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import {
   getLanguageRootLanguageFamily,
@@ -106,9 +107,7 @@ const LanguageTable: React.FC = () => {
         key: 'Dialects',
         render: (lang) => (
           <HoverableEnumeration
-            items={lang.childLanguages
-              .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
-              .map((lang) => lang.nameDisplay)}
+            items={lang.childLanguages.sort(sortByPopulation).map((lang) => lang.nameDisplay)}
           />
         ),
         valueType: TableValueType.Count,

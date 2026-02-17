@@ -3,6 +3,7 @@ import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
 
@@ -21,7 +22,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
   const constituents = fromTerritories
     ? uniqueBy(locale.relatedLocales?.childTerritories || [], (l) => l.territoryCode || '')
     : uniqueBy(locale.relatedLocales?.childLanguages || [], (l) => l.languageCode).sort(
-        (a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0),
+        sortByPopulation,
       );
   const [showAllConstituents, setShowAllConstituents] = React.useState(false);
 

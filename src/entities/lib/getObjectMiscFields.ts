@@ -1,6 +1,7 @@
 import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { ObjectType } from '@features/params/PageParamTypes';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectData, TerritoryScope, WritingSystemData } from '@entities/types/DataTypes';
@@ -23,9 +24,7 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
       return object.languages?.[0]?.nameDisplay;
     case ObjectType.WritingSystem:
       return object.languages
-        ? Object.values(object.languages).sort(
-            (a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0),
-          )[0].nameDisplay
+        ? Object.values(object.languages).sort(sortByPopulation)[0].nameDisplay
         : undefined;
     case ObjectType.Census:
       return undefined;
@@ -123,7 +122,7 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
     case ObjectType.Territory:
       return uniqueBy(
         object.locales
-          ?.sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
+          ?.sort(sortByPopulation)
           .map((locale) => locale.writingSystem ?? locale.language?.primaryWritingSystem)
           .filter((ws) => !!ws) ?? [],
         (ws) => ws.ID,

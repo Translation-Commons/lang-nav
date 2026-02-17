@@ -12,6 +12,7 @@ import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import {
@@ -178,9 +179,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             render: (loc) => {
               const territory = loc.language?.locales
                 .filter((l) => l.territory?.scope === TerritoryScope.Country)
-                .sort(
-                  (a, b) => (b.populationSpeaking ?? -1) - (a.populationSpeaking ?? -1),
-                )[0]?.territory;
+                .sort(sortByPopulation)[0]?.territory;
               return territory ? <HoverableObjectName object={territory} /> : null;
             },
             isInitiallyVisible: true,

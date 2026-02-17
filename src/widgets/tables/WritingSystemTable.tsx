@@ -7,6 +7,7 @@ import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonCol
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import { WritingSystemData } from '@entities/types/DataTypes';
@@ -42,7 +43,7 @@ const WritingSystemTable: React.FC = () => {
             object.languages && (
               <CommaSeparated limit={1} limitText="short">
                 {Object.values(object.languages)
-                  .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+                  .sort(sortByPopulation)
                   .map((l) => (
                     <HoverableObjectName object={l} key={l.ID} />
                   ))}

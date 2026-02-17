@@ -9,6 +9,9 @@ import { TerritoryScope } from '@entities/types/DataTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 const LocaleCitationCounts: React.FC = () => {
   const { filteredObjects: filteredLocales } = useFilteredObjects({});
 
@@ -88,7 +91,8 @@ const LocaleCitationCounts: React.FC = () => {
               counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
             return (
               <li key={scope}>
-                {scope}: {percent}% ({counts.withCensus}/{counts.total})
+                {getLanguageScopeLabel(parseInt(scope))}: {percent}% ({counts.withCensus}/
+                {counts.total})
               </li>
             );
           })}
@@ -105,7 +109,8 @@ const LocaleCitationCounts: React.FC = () => {
               counts.total > 0 ? ((counts.withCensus / counts.total) * 100).toFixed(1) : '0';
             return (
               <li key={scope}>
-                {scope}: {percent}% ({counts.withCensus}/{counts.total})
+                {getTerritoryScopeLabel(parseInt(scope))}: {percent}% ({counts.withCensus}/
+                {counts.total})
               </li>
             );
           })}
