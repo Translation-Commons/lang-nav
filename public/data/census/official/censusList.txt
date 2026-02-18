@@ -1,5 +1,6 @@
 az1999
 ca2021
+cn-cmn2020
 de
 es2021
 id

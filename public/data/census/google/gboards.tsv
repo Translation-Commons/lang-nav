@@ -1,0 +1,920 @@
+# from https://support.google.com/gboard/answer/6380730#zippy=%2Cchoose-languages-layouts%2Cfind-supported-languages
+# accessed 2026-02-19
+# only keyboard names were provided so we had to manually map them to language tags
+ID	Name	Lang code	Country Code	Input Script ISO	Output Script ISO	Variant Tag
+gboard_aar_Latn	Afar	aar		Latn	Latn	
+gboard_abk_Cyrl	Abkhaz	abk		Cyrl	Cyrl	
+gboard_abr_Latn	Abron	abr		Latn	Latn	
+gboard_abs_Latn	Ambonese Malay	abs		Latn	Latn	
+gboard_abv_Arab_BH	Arabic (Bahrain)	abv	BH	Arab	Arab	
+gboard_ace_Latn	Acehnese	ace		Latn	Latn	
+gboard_acf_Latn	Saint Lucian Creole French	acf		Latn	Latn	
+gboard_ach_Latn	Acholi	ach		Latn	Latn	
+gboard_ada_Latn	Dangme	ada		Latn	Latn	
+gboard_adx_Latn	Amdo Tibetan	adx		Latn	Latn	
+gboard_ady_Cyrl	Adyghe	ady		Cyrl	Cyrl	
+gboard_afb_Arab	Arabic (Gulf)	afb		Arab	Arab	
+gboard_afr_Latn	Afrikaans	afr		Latn	Latn	
+gboard_ahr_Deva	Ahirani	ahr		Deva	Deva	
+gboard_ahr_Deva_t_k0_Latn	Ahirani, Transliteration	ahr		Latn	Deva	
+gboard_aii_Syrc_IQ	Assyrian (Iraq)	aii	IQ	Syrc	Syrc	
+gboard_aii_Syrc_SY	Assyrian (Syria)	aii	SY	Syrc	Syrc	
+gboard_ajg_Latn	Ajagbe	ajg		Latn	Latn	
+gboard_aka_Latn	Akan	aka		Latn	Latn	
+gboard_aln_Latn	Albanian, Gheg	aln		Latn	Latn	
+gboard_als_Latn	Albanian, Tosk	als		Latn	Latn	
+gboard_alz_Latn	Alur	alz		Latn	Latn	
+gboard_amh_Ethi	Amharic	amh		Ethi	Ethi	
+gboard_ami_Latn	Amis	ami		Latn	Latn	
+gboard_anp_Deva	Angika	anp		Deva	Deva	
+gboard_anw_Latn	Anaang	anw		Latn	Latn	
+gboard_apc_Arab	Arabic (Levant)	apc		Arab	Arab	
+gboard_apd_Arab_SD	Arabic (Sudan)	apd	SD	Arab	Arab	
+gboard_ara_Arab_IQ	Arabic (Iraq)	ara	IQ	Arab	Arab	
+gboard_ara_Arab_LY	Arabic (Libya)	ara	LY	Arab	Arab	
+gboard_ara_Arab_OM	Arabic (Oman)	ara	OM	Arab	Arab	
+gboard_ara_Arab_SA	Arabic (Saudi Arabia)	ara	SA	Arab	Arab	
+gboard_ara_Arab_TN	Arabic (Tunisia)	ara	TN	Arab	Arab	
+gboard_ara_Arab_YE	Arabic (Yemen)	ara	YE	Arab	Arab	
+gboard_arg_Latn	Aragonese	arg		Latn	Latn	
+gboard_arq_Arab_DZ	Arabic (Algeria)	arq	DZ	Arab	Arab	
+gboard_ary_Arab_MA	Arabic (Morocco)	ary	MA	Arab	Arab	
+gboard_arz_Arab_EG	Arabic (Egypt)	arz	EG	Arab	Arab	
+gboard_asm_Beng	Assamese, Assamese	asm		Beng	Beng	
+gboard_asm_Beng_t_k0_Latn	Assamese, Transliteration	asm		Latn	Beng	
+gboard_asm_Latn	Assamese, Latin	asm		Latn	Latn	
+gboard_ast_Latn	Asturian	ast		Latn	Latn	
+gboard_ava_Cyrl	Avar	ava		Cyrl	Cyrl	
+gboard_awa_Deva	Awadhi	awa		Deva	Deva	
+gboard_awa_Deva_t_k0_Latn	Awadhi, Transliteration	awa		Latn	Deva	
+gboard_aym_Latn_PE	Aymara (Peru)	aym	PE	Latn	Latn	
+gboard_ayr_Latn_BO	Aymara (Bolivia)	ayr	BO	Latn	Latn	
+gboard_aze_Arab_IR	Azerbaijani (Iran)	aze	IR	Arab	Arab	
+gboard_aze_Cyrl_RU	Azerbaijani (Russia)	aze	RU	Cyrl	Cyrl	
+gboard_aze_Latn_AZ	Azerbaijani (Azerbaijan)	aze	AZ	Latn	Latn	
+gboard_bah_Latn	Bahamian Creole	bah		Latn	Latn	
+gboard_bak_Cyrl	Bashkir	bak		Cyrl	Cyrl	
+gboard_bal_Arab	Balochi	bal		Arab	Arab	
+gboard_bam_Latn	Bambara, Latin	bam		Latn	Latn	
+gboard_bam_Nkoo	Bambara, N'Ko	bam		Nkoo	Nkoo	
+gboard_ban_Bali	Balinese, Aksara Bali	ban		Bali	Bali	
+gboard_ban_Latn	Balinese, Latin	ban		Latn	Latn	
+gboard_bany1247_Latn	Javanese, Banyumasan	bany1247		Latn	Latn	
+gboard_bar_Latn	Austro-Bavarian	bar		Latn	Latn	
+gboard_bas_Latn	Basaa	bas		Latn	Latn	
+gboard_bax_Bamu	Bamum	bax		Bamu	Bamu	
+gboard_bbc_Latn	Batak Toba	bbc		Latn	Latn	
+gboard_bbj_Latn	Ghomala	bbj		Latn	Latn	
+gboard_bcc_Arab	Southern Balochi	bcc		Arab	Arab	
+gboard_bcc_Arab_t_k0_Latn	Southern Balochi, Transliteration	bcc		Latn	Arab	
+gboard_bci_Latn	Baoulé	bci		Latn	Latn	
+gboard_bcl_Latn	Central Bikol	bcl		Latn	Latn	
+gboard_bcq_Ethi	Bench, Ge'ez	bcq		Ethi	Ethi	
+gboard_bcq_Latn	Bench, Latin	bcq		Latn	Latn	
+gboard_bel_Cyrl	Belarusian	bel		Cyrl	Cyrl	
+gboard_bem_Latn	Bemba	bem		Latn	Latn	
+gboard_ben_Beng_BD	Bangla (Bangladesh)	ben	BD	Beng	Beng	
+gboard_ben_Beng_IN	Bangla (India), Bengali	ben	IN	Beng	Beng	
+gboard_ben_Beng_IN_t_k0_Latn	Bangla (India), Transliteration	ben	IN	Latn	Beng	
+gboard_ben_Latn_IN	Bangla (India), Latin	ben	IN	Latn	Latn	
+gboard_ber_Latn	Tamazight, Latin	ber		Latn	Latn	
+gboard_ber_Tfng	Tamazight, Tifinagh	ber		Tfng	Tfng	
+gboard_bew_Latn	Betawi	bew		Latn	Latn	
+gboard_bft_Arab	Balti	bft		Arab	Arab	
+gboard_bft_Arab_t_k0_Latn	Balti, Transliteration	bft		Latn	Arab	
+gboard_bfy_Deva	Bagheli	bfy		Deva	Deva	
+gboard_bfy_Deva_t_k0_Latn	Bagheli, Transliteration	bfy		Latn	Deva	
+gboard_bfz_Deva	Mahasu Pahari	bfz		Deva	Deva	
+gboard_bgc_Deva	Haryanvi	bgc		Deva	Deva	
+gboard_bgc_Deva_t_k0_Latn	Haryanvi, Transliteration	bgc		Latn	Deva	
+gboard_bgn_Arab	Western Balochi	bgn		Arab	Arab	
+gboard_bgp_Arab	Eastern Balochi	bgp		Arab	Arab	
+gboard_bgq_Arab_PK	Bagri (Pakistan)	bgq	PK	Arab	Arab	
+gboard_bgq_Arab_PK_t_k0_Latn	Bagri (Pakistan), Transliteration	bgq	PK	Latn	Arab	
+gboard_bgq_Deva_IN	Bagri (India)	bgq	IN	Deva	Deva	
+gboard_bgq_Deva_IN_t_k0_Latn	Bagri (India), Transliteration	bgq	IN	Latn	Deva	
+gboard_bgx_Grek	Balkan Gagauz Turkish	bgx		Grek	Grek	
+gboard_bgz_Latn	Banggai	bgz		Latn	Latn	
+gboard_bhb_Deva	Bhili, Devanagari	bhb		Deva	Deva	
+gboard_bhb_Deva_t_k0_Latn	Bhili, Devanagari, Transliteration	bhb		Latn	Deva	
+gboard_bhb_Gujr	Bhili, Gujarati	bhb		Gujr	Gujr	
+gboard_bhb_Gujr_t_k0_Latn	Bhili, Gujarati, Transliteration	bhb		Latn	Gujr	
+gboard_bho_Deva	Bhojpuri	bho		Deva	Deva	
+gboard_bho_Deva_t_k0_Latn	Bhojpuri, Transliteration	bho		Latn	Deva	
+gboard_bin_Latn	Edo	bin		Latn	Latn	
+gboard_bis_Latn	Bislama	bis		Latn	Latn	
+gboard_bjj_Deva	Kannauji	bjj		Deva	Deva	
+gboard_bjj_Deva_t_k0_Latn	Kannauji,Transliteration	bjj		Latn	Deva	
+gboard_bjn_Latn	Banjar	bjn		Latn	Latn	
+gboard_bku_Buhd	Buhid	bku		Buhd	Buhd	
+gboard_blk_Mymr	Pa'O Karen	blk		Mymr	Mymr	
+gboard_blt_Latn	Tai Dam, Latin	blt		Latn	Latn	
+gboard_blt_Tavt	Tai Dam, Tai Viet	blt		Tavt	Tavt	
+gboard_bmm_Latn	Northern Betsimisaraka Malagasy	bmm		Latn	Latn	
+gboard_bns_Deva	Bundeli	bns		Deva	Deva	
+gboard_bns_Deva_t_k0_Latn	Bundeli, Transliteration	bns		Latn	Deva	
+gboard_bod_Tibt	Tibetan	bod		Tibt	Tibt	
+gboard_bom_Latn	Berom	bom		Latn	Latn	
+gboard_bos_Cyrl	Bosnian, Cyrillic	bos		Cyrl	Cyrl	
+gboard_bos_Latn	Bosnian, Latin	bos		Latn	Latn	
+gboard_boy_Beng	Bodo, Bengali	boy		Beng	Beng	
+gboard_boy_Beng_t_k0_Latn	Bodo, Bengali, Transliteration	boy		Latn	Beng	
+gboard_boy_Deva	Bodo, Devanagari	boy		Deva	Deva	
+gboard_boy_Deva_t_k0_Latn	Bodo, Devanagari, Transliteration	boy		Latn	Deva	
+gboard_boy_Latn	Bodo, Latin	boy		Latn	Latn	
+gboard_bpr_Latn	Koronadal Blaan	bpr		Latn	Latn	
+gboard_bpy_Beng	Bishnupriya	bpy		Beng	Beng	
+gboard_bpy_Beng_t_k0_Latn	Bishnupriya, Transliteration	bpy		Latn	Beng	
+gboard_bqi_Arab	Bakhtiari	bqi		Arab	Arab	
+gboard_bre_Latn	Breton	bre		Latn	Latn	
+gboard_brh_Arab	Brahui, Arabic	brh		Arab	Arab	
+gboard_brh_Arab_t_k0_Latn	Brahui, Transliteration	brh		Latn	Arab	
+gboard_brh_Latn	Brahui, Latin	brh		Latn	Latn	
+gboard_bss_Latn	Akoose	bss		Latn	Latn	
+gboard_btm_Batk	Batak Mandailing, Surat Batak	btm		Batk	Batk	
+gboard_btm_Latn	Batak Mandailing, Latin	btm		Latn	Latn	
+gboard_bto_Latn	Rinconada Bikol	bto		Latn	Latn	
+gboard_bts_Batk	Batak Simalungun, Surat Batak	bts		Batk	Batk	
+gboard_bts_Latn	Batak Simalungun, Latin	bts		Latn	Latn	
+gboard_btz_Latn	Alas	btz		Latn	Latn	
+gboard_bua_Cyrl_RU	Buryat (Russia)	bua	RU	Cyrl	Cyrl	
+gboard_bua_Mong_MN	Buryat (Mongolia)	bua	MN	Mong	Mong	
+gboard_bud_Latn	Ntcham	bud		Latn	Latn	
+gboard_bug_Bugi	Buginese, Lontara	bug		Bugi	Bugi	
+gboard_bug_Latn	Buginese, Latin	bug		Latn	Latn	
+gboard_bul_Cyrl	Bulgarian	bul		Cyrl	Cyrl	
+gboard_bum_Latn	Bulu-Bene	bum		Latn	Latn	
+gboard_bxg_Latn	Bangala	bxg		Latn	Latn	
+gboard_bxk_Latn	Bukusu	bxk		Latn	Latn	
+gboard_bzc_Latn	Southern Betsimisaraka Malagasy	bzc		Latn	Latn	
+gboard_cat_Latn	Catalan	cat		Latn	Latn	
+gboard_cat_Latn_valencia	Valencian	cat		Latn	Latn	valencia
+gboard_cbk_Latn	Chavacano	cbk		Latn	Latn	
+gboard_cce_Latn	Chopi	cce		Latn	Latn	
+gboard_ccp_Cakm	Chakma	ccp		Cakm	Cakm	
+gboard_cdo_Hant	Eastern Min	cdo		Hant	Hant	
+gboard_ceb_Latn	Cebuano	ceb		Latn	Latn	
+gboard_ces_Latn	Czech	ces		Latn	Latn	
+gboard_cgg_Latn	Kiga	cgg		Latn	Latn	
+gboard_cha_Latn	Chamorro	cha		Latn	Latn	
+gboard_che_Cyrl	Chechen	che		Cyrl	Cyrl	
+gboard_cho_Latn	Choctaw	cho		Latn	Latn	
+gboard_chr_Cher	Cherokee, Uppercase and Lowercase	chr		Cher	Cher	
+gboard_chr_Cher_x-upper	Cherokee, Uppercase only	chr		Cher	Cher	x-upper
+gboard_chu_Cyrl	Church Slavonic	chu		Cyrl	Cyrl	
+gboard_chv_Cyrl	Chuvash	chv		Cyrl	Cyrl	
+gboard_chw_Latn	Chuwabu	chw		Latn	Latn	
+gboard_cja_Cham	Western Cham, Cham	cja		Cham	Cham	
+gboard_cja_Latn	Western Cham, Latin	cja		Latn	Latn	
+gboard_cjk_Latn_AO	Chokwe (Angola)	cjk	AO	Latn	Latn	
+gboard_cjk_Latn_CD	Chokwe (DRC)	cjk	CD	Latn	Latn	
+gboard_cjm_Cham	Eastern Cham, Cham	cjm		Cham	Cham	
+gboard_cjm_Latn	Eastern Cham, Latin	cjm		Latn	Latn	
+gboard_cld_Syrc	Chaldean Neo-Aramaic	cld		Syrc	Syrc	
+gboard_cmn_Hans	Chinese, Mandarin, Simplified	cmn		Hans	Hans	
+gboard_cmn_Hant	Chinese, Mandarin, Traditional	cmn		Hant	Hant	
+gboard_cnh_Latn	Hakha Chin	cnh		Latn	Latn	
+gboard_cnr_Cyrl	Montenegrin, Cyrillic	cnr		Cyrl	Cyrl	
+gboard_cnr_Latn	Montenegrin, Latin	cnr		Latn	Latn	
+gboard_cog_Latn	Xong	cog		Latn	Latn	
+gboard_cop_Copt	Coptic	cop		Copt	Copt	
+gboard_cor_Latn	Cornish	cor		Latn	Latn	
+gboard_cos_Latn	Corsican	cos		Latn	Latn	
+gboard_cps_Latn	Capiznon	cps		Latn	Latn	
+gboard_cre_Cans	Cree, Syllabics	cre		Cans	Cans	
+gboard_cre_Latn	Cree, Latin	cre		Latn	Latn	
+gboard_crh_Cyrl	Crimean Tatar, Cyrillic	crh		Cyrl	Cyrl	
+gboard_crh_Latn	Crimean Tatar, Latin	crh		Latn	Latn	
+gboard_crs_Latn	Seychellois Creole	crs		Latn	Latn	
+gboard_csb_Latn	Kashubian	csb		Latn	Latn	
+gboard_ctg_Beng	Chittagonian	ctg		Beng	Beng	
+gboard_ctg_Beng_t_k0_Latn	Chittagonian, Transliteration	ctg		Latn	Beng	
+gboard_cym_Latn	Welsh	cym		Latn	Latn	
+gboard_cyo_Latn	Cuyonon	cyo		Latn	Latn	
+gboard_dag_Latn	Dagbani	dag		Latn	Latn	
+gboard_dan_Latn	Danish	dan		Latn	Latn	
+gboard_dar_Cyrl	Dargwa	dar		Cyrl	Cyrl	
+gboard_dcc_Arab	Dakhini	dcc		Arab	Arab	
+gboard_dga_Latn	Dagaare	dga		Latn	Latn	
+gboard_dhd_Deva	Dhundhari	dhd		Deva	Deva	
+gboard_dhd_Deva_t_k0_Latn	Dhundhari, Transliteration	dhd		Latn	Deva	
+gboard_din_Latn	Dinka	din		Latn	Latn	
+gboard_div_Thaa	Dhivehi	div		Thaa	Thaa	
+gboard_dje_Latn	Zarma	dje		Latn	Latn	
+gboard_dng_Cyrl	Dungan	dng		Cyrl	Cyrl	
+gboard_dnj_Latn	Dan	dnj		Latn	Latn	
+gboard_doi_Arab	Dogri, Arabic	doi		Arab	Arab	
+gboard_doi_Arab_t_k0_Latn	Dogri, Arabic, Transliteration	doi		Latn	Arab	
+gboard_doi_Deva	Dogri, Devanagari	doi		Deva	Deva	
+gboard_doi_Deva_t_k0_Latn	Dogri, Devanagari, Transliteration	doi		Latn	Deva	
+gboard_doi_Latn	Dogri, Latin	doi		Latn	Latn	
+gboard_drs_Latn	Gedeo	drs		Latn	Latn	
+gboard_dsb_Latn	Lower Sorbian	dsb		Latn	Latn	
+gboard_dtp_Latn	Kadazandusun	dtp		Latn	Latn	
+gboard_dty_Deva	Dotyali	dty		Deva	Deva	
+gboard_dyu_Latn	Jula, Latin	dyu		Latn	Latn	
+gboard_dyu_Nkoo	Jula, N'Ko	dyu		Nkoo	Nkoo	
+gboard_dzg_Latn	Dazaga	dzg		Latn	Latn	
+gboard_dzo_Tibt	Dzongkha	dzo		Tibt	Tibt	
+gboard_efi_Latn	Efik	efi		Latn	Latn	
+gboard_egl_Latn	Emilian	egl		Latn	Latn	
+gboard_ell_Grek_CY	Greek (Cyprus)	ell	CY	Grek	Grek	
+gboard_ell_Grek_GR	Greek (Greece)	ell	GR	Grek	Grek	
+gboard_ell_Grek_GR_t_k0_Latn	Greek (Greece), Transliteration	ell	GR	Latn	Grek	
+gboard_eng_Latn_AU	English (Australia)	eng	AU	Latn	Latn	
+gboard_eng_Latn_CA	English (Canada)	eng	CA	Latn	Latn	
+gboard_eng_Latn_GB	English (UK)	eng	GB	Latn	Latn	
+gboard_eng_Latn_IN	English (India)	eng	IN	Latn	Latn	
+gboard_eng_Latn_KE	English (Kenya)	eng	KE	Latn	Latn	
+gboard_eng_Latn_NG	English (Nigeria)	eng	NG	Latn	Latn	
+gboard_eng_Latn_PH	English (Philippines)	eng	PH	Latn	Latn	
+gboard_eng_Latn_US	English (US)	eng	US	Latn	Latn	
+gboard_eng_Latn_ZA	English (South Africa)	eng	ZA	Latn	Latn	
+gboard_epo_Latn	Esperanto	epo		Latn	Latn	
+gboard_est_Latn	Estonian	est		Latn	Latn	
+gboard_eus_Latn	Basque	eus		Latn	Latn	
+gboard_ewe_Latn	Ewe	ewe		Latn	Latn	
+gboard_ewo_Latn	Ewondo	ewo		Latn	Latn	
+gboard_ext_Latn	Extremaduran	ext		Latn	Latn	
+gboard_fan_Latn	Fang	fan		Latn	Latn	
+gboard_fao_Latn	Faroese	fao		Latn	Latn	
+gboard_fas_Arab	Persian	fas		Arab	Arab	
+gboard_fas_Arab_t_k0_Latn	Persian, Transliteration	fas		Latn	Arab	
+gboard_fat_Latn	Fantse	fat		Latn	Latn	
+gboard_fij_Latn	Fijian	fij		Latn	Latn	
+gboard_fil_Latn	Filipino, Latin	fil		Latn	Latn	
+gboard_fil_Tglg	Filipino, Baybayin	fil		Tglg	Tglg	
+gboard_fin_Latn	Finnish	fin		Latn	Latn	
+gboard_fon_Latn	Fon	fon		Latn	Latn	
+gboard_fra_Latn_002	French (Africa)	fra	002	Latn	Latn	
+gboard_fra_Latn_BE	French (Belgium)	fra	BE	Latn	Latn	
+gboard_fra_Latn_CA	French (Canada)	fra	CA	Latn	Latn	
+gboard_fra_Latn_CH	French (Switzerland)	fra	CH	Latn	Latn	
+gboard_fra_Latn_FR	French (France)	fra	FR	Latn	Latn	
+gboard_fry_Latn	Western Frisian	fry		Latn	Latn	
+gboard_fub_Latn	Adamawa Fulfulde	fub		Latn	Latn	
+gboard_fuc_Latn	Pulaar	fuc		Latn	Latn	
+gboard_ful_Adlm	Fula, Adlam	ful		Adlm	Adlm	
+gboard_ful_Latn	Fula, Latin	ful		Latn	Latn	
+gboard_fur_Latn	Friulian	fur		Latn	Latn	
+gboard_fuv_Latn_NE	Fulfulde (Niger)	fuv	NE	Latn	Latn	
+gboard_fuv_Latn_NG	Fulfulde (Nigeria)	fuv	NG	Latn	Latn	
+gboard_gag_Cyrl	Gagauz, Cyrillic	gag		Cyrl	Cyrl	
+gboard_gag_Latn	Gagauz, Latin	gag		Latn	Latn	
+gboard_gax_Latn	Southern Oromo	gax		Latn	Latn	
+gboard_gay_Latn	Gayo	gay		Latn	Latn	
+gboard_gbm_Deva	Garhwali	gbm		Deva	Deva	
+gboard_gbm_Deva_t_k0_Latn	Garhwali, Transliteration	gbm		Latn	Deva	
+gboard_gbo_Latn	Northern Grebo	gbo		Latn	Latn	
+gboard_gcf_Latn	Guadeloupean Creole	gcf		Latn	Latn	
+gboard_gcr_Latn	Guianan Creole	gcr		Latn	Latn	
+gboard_gdq_Arab	Mehri	gdq		Arab	Arab	
+gboard_gdx_Deva	Godwari	gdx		Deva	Deva	
+gboard_gdx_Deva_t_k0_Latn	Godwari, Transliteration	gdx		Latn	Deva	
+gboard_gem_Latn_AT	German (Austria)	gem	AT	Latn	Latn	
+gboard_gem_Latn_BE	German (Belgium)	gem	BE	Latn	Latn	
+gboard_gem_Latn_CH	German (Switzerland)	gem	CH	Latn	Latn	
+gboard_gem_Latn_DU	German (Germany)	gem	DU	Latn	Latn	
+gboard_gem_Latn_LU	German (Luxembourg)	gem	LU	Latn	Latn	
+gboard_gez_Ethi	Ge'ez	gez		Ethi	Ethi	
+gboard_gil_Latn	Kiribati	gil		Latn	Latn	
+gboard_gjk_Arab	Kachi Koli	gjk		Arab	Arab	
+gboard_gju_Arab_PK	Gujari (Pakistan)	gju	PK	Arab	Arab	
+gboard_gju_Arab_PK_t_k0_Latn	Gujari (Pakistan), Transliteration	gju	PK	Latn	Arab	
+gboard_gju_Deva_IN	Gujari (India)	gju	IN	Deva	Deva	
+gboard_gju_Deva_IN_t_k0_Latn	Gujari (India), Transliteration	gju	IN	Latn	Deva	
+gboard_gla_Latn	Scottish Gaelic	gla		Latn	Latn	
+gboard_gle_Latn	Irish	gle		Latn	Latn	
+gboard_glg_Latn	Galician	glg		Latn	Latn	
+gboard_glk_Arab	Gilaki	glk		Arab	Arab	
+gboard_glv_Latn	Manx	glv		Latn	Latn	
+gboard_gmv_Latn	Gamo	gmv		Latn	Latn	
+gboard_gog_Latn	Gogo	gog		Latn	Latn	
+gboard_gon_Deva	Gondi, Devanagari	gon		Deva	Deva	
+gboard_gon_Deva_t_k0_Latn	Gondi, Devanagari, Transliteration	gon		Latn	Deva	
+gboard_gon_Telu	Gondi, Telugu	gon		Telu	Telu	
+gboard_gon_Telu_t_k0_Latn	Gondi, Telugu, Transliteration	gon		Latn	Telu	
+gboard_gor_Latn	Gorontalo	gor		Latn	Latn	
+gboard_gpe_Latn	Ghanaian Pidgin	gpe		Latn	Latn	
+gboard_gqr_Latn	Gor	gqr		Latn	Latn	
+gboard_grn_Latn	Guarani	grn		Latn	Latn	
+gboard_grt_Beng	Garo, Bengali	grt		Beng	Beng	
+gboard_grt_Beng_t_k0_Latn	Garo, Transliteration	grt		Latn	Beng	
+gboard_grt_Latn	Garo, Latin	grt		Latn	Latn	
+gboard_gsw_Latn_CH	Swiss German	gsw	CH	Latn	Latn	
+gboard_gsw_Latn_FR	Alsatian	gsw	FR	Latn	Latn	
+gboard_guc_Latn	Wayuu	guc		Latn	Latn	
+gboard_guj_Gujr	Gujarati, Gujarati	guj		Gujr	Gujr	
+gboard_guj_Gujr_t_k0_Latn	Gujarati, Transliteration	guj		Latn	Gujr	
+gboard_guj_Latn	Gujarati, Latin	guj		Latn	Latn	
+gboard_gur_Latn	Farefare	gur		Latn	Latn	
+gboard_gux_Latn	Gourmanché	gux		Latn	Latn	
+gboard_guz_Latn	Gusii	guz		Latn	Latn	
+gboard_gvl_Latn	Gulay	gvl		Latn	Latn	
+gboard_gwc_Arab	Kalam Kohistani	gwc		Arab	Arab	
+gboard_gyn_Latn	Guyanese Creole	gyn		Latn	Latn	
+gboard_hac_Arab	Gorani	hac		Arab	Arab	
+gboard_hae_Latn	Eastern Oromo	hae		Latn	Latn	
+gboard_hak_Hant	Hakka	hak		Hant	Hant	
+gboard_haq_Latn	Ha	haq		Latn	Latn	
+gboard_hat_Latn	Haitian Creole	hat		Latn	Latn	
+gboard_hau_Latn_GH	Hausa (Ghana)	hau	GH	Latn	Latn	
+gboard_hau_Latn_NG	Hausa (Nigeria)	hau	NG	Latn	Latn	
+gboard_haw_Latn	Hawaiian	haw		Latn	Latn	
+gboard_hay_Latn	Haya	hay		Latn	Latn	
+gboard_haz_Arab	Hazaragi	haz		Arab	Arab	
+gboard_hdy_Ethi	Hadiyya, Ge’ez	hdy		Ethi	Ethi	
+gboard_hdy_Latn	Hadiyya, Latin	hdy		Latn	Latn	
+gboard_heb_Hebr	Hebrew	heb		Hebr	Hebr	
+gboard_heh_Latn	Hehe	heh		Latn	Latn	
+gboard_hif_Deva	Fiji Hindi, Devanagari	hif		Deva	Deva	
+gboard_hif_Latn	Fiji Hindi, Latin	hif		Latn	Latn	
+gboard_hil_Latn	Hiligaynon	hil		Latn	Latn	
+gboard_hin_Deva	Hindi, Devanagari	hin		Deva	Deva	
+gboard_hin_Deva_t_k0_Latn	Hindi, Transliteration	hin		Latn	Deva	
+gboard_hin_Latn	Hindi, Latin / Hinglish	hin		Latn	Latn	
+gboard_hlb_Deva	Halbi, Devanagari	hlb		Deva	Deva	
+gboard_hlb_Deva_t_k0_Latn	Halbi, Devanagari, Transliteration	hlb		Latn	Deva	
+gboard_hlb_Orya	Halbi, Odia	hlb		Orya	Orya	
+gboard_hlb_Orya_t_k0_Latn	Halbi, Odia, Transliteration	hlb		Latn	Orya	
+gboard_hmn_Latn	Hmong	hmn		Latn	Latn	
+gboard_hmo_Latn	Hiri Motu	hmo		Latn	Latn	
+gboard_hmq_Latn	Hmu	hmq		Latn	Latn	
+gboard_hnd_Arab	Southern Hindko	hnd		Arab	Arab	
+gboard_hnd_Arab_t_k0_Latn	Southern Hindko, Transliteration	hnd		Latn	Arab	
+gboard_hne_Deva	Chhattisgarhi	hne		Deva	Deva	
+gboard_hne_Deva_t_k0_Latn	Chhattisgarhi, Transliteration	hne		Latn	Deva	
+gboard_hni_Hant	Hani	hni		Hant	Hant	
+gboard_hnn_Hano	Hanunuo	hnn		Hano	Hano	
+gboard_hno_Arab	Northern Hindko	hno		Arab	Arab	
+gboard_hno_Arab_t_k0_Latn	Northern Hindko, Transliteration	hno		Latn	Arab	
+gboard_hoj_Deva	Harauti	hoj		Deva	Deva	
+gboard_hoj_Deva_t_k0_Latn	Harauti, Transliteration	hoj		Latn	Deva	
+gboard_hrv_Latn	Croatian	hrv		Latn	Latn	
+gboard_hrx_Latn	Hunsrik	hrx		Latn	Latn	
+gboard_hsb_Latn	Upper Sorbian	hsb		Latn	Latn	
+gboard_hun_Latn	Hungarian	hun		Latn	Latn	
+gboard_hvn_Latn	Hawu	hvn		Latn	Latn	
+gboard_hwc_Latn	Hawaiian Pidgin	hwc		Latn	Latn	
+gboard_hye_Armn	Armenian	hye		Armn	Armn	
+gboard_hyx_Armn_t_k0_Latn	Armenian, Transliteration	hyx		Latn	Armn	
+gboard_iba_Latn	Iban	iba		Latn	Latn	
+gboard_ibb_Latn	Ibibio	ibb		Latn	Latn	
+gboard_ibo_Latn	Igbo	ibo		Latn	Latn	
+gboard_igb_Latn	Ebira	igb		Latn	Latn	
+gboard_igl_Latn	Igala	igl		Latn	Latn	
+gboard_iii_Latn	Nuosu, Latin	iii		Latn	Latn	
+gboard_iii_Yiii	Nuosu, Yi	iii		Yiii	Yiii	
+gboard_ijc_Latn	Izon	ijc		Latn	Latn	
+gboard_iku_Cans	Inuktitut, Syllabics	iku		Cans	Cans	
+gboard_iku_Latn	Inuktitut, Latin	iku		Latn	Latn	
+gboard_ilo_Latn	Iloko	ilo		Latn	Latn	
+gboard_ina_Latn	Interlingua	ina		Latn	Latn	
+gboard_ind_Latn	Indonesian	ind		Latn	Latn	
+gboard_inh_Cyrl	Ingush	inh		Cyrl	Cyrl	
+gboard_isl_Latn	Icelandic	isl		Latn	Latn	
+gboard_iso_Latn	Isoko	iso		Latn	Latn	
+gboard_ita_Latn_CH	Italian (Switzerland)	ita	CH	Latn	Latn	
+gboard_ita_Latn_IT	Italian (Italy)	ita	IT	Latn	Latn	
+gboard_itv_Latn	Itawit	itv		Latn	Latn	
+gboard_ium_Latn	Iu Mien	ium		Latn	Latn	
+gboard_jam_Latn	Jamaican Patois	jam		Latn	Latn	
+gboard_jav_Java	Javanese, Aksara Jawa	jav		Java	Java	
+gboard_jav_Latn	Javanese, Latin	jav		Latn	Latn	
+gboard_jax_Latn	Jambi Malay	jax		Latn	Latn	
+gboard_jbo_Latn	Lojban	jbo		Latn	Latn	
+gboard_jpn_Jpan	Japanese	jpn		Jpan	Jpan	
+gboard_kaa_Cyrl	Karakalpak, Cyrillic	kaa		Cyrl	Cyrl	
+gboard_kaa_Latn	Karakalpak, Latin	kaa		Latn	Latn	
+gboard_kac_Latn	Jingpho	kac		Latn	Latn	
+gboard_kal_Latn	Kalaallisut	kal		Latn	Latn	
+gboard_kam_Latn	Kamba	kam		Latn	Latn	
+gboard_kan_Knda	Kannada, Kannada	kan		Knda	Knda	
+gboard_kan_Knda_t_k0_Latn	Kannada, Transliteration	kan		Latn	Knda	
+gboard_kan_Latn	Kannada, Latin	kan		Latn	Latn	
+gboard_kao_Latn	Xaasongaxango	kao		Latn	Latn	
+gboard_kas_Arab	Kashmiri, Arabic	kas		Arab	Arab	
+gboard_kas_Arab_t_k0_Latn	Kashmiri, Arabic, Transliteration	kas		Latn	Arab	
+gboard_kas_Deva	Kashmiri, Devanagari	kas		Deva	Deva	
+gboard_kas_Deva_t_k0_Latn	Kashmiri, Devanagari, Transliteration	kas		Latn	Deva	
+gboard_kas_Latn	Kashmiri, Latin	kas		Latn	Latn	
+gboard_kat_Geok	Georgian, Khutsuri	kat		Geok	Geok	
+gboard_kat_Geor	Georgian, Mkhedruli	kat		Geor	Geor	
+gboard_kau_Latn	Kanuri	kau		Latn	Latn	
+gboard_kaz_Cyrl	Kazakh, Cyrillic	kaz		Cyrl	Cyrl	
+gboard_kbd_Cyrl	Kabardian	kbd		Cyrl	Cyrl	
+gboard_kbp_Latn	Kabiye	kbp		Latn	Latn	
+gboard_kbr_Ethi	Kafa	kbr		Ethi	Ethi	
+gboard_kde_Latn	Makonde	kde		Latn	Latn	
+gboard_kea_Latn	Cape Verdean Creole	kea		Latn	Latn	
+gboard_kek_Latn	Kekchi	kek		Latn	Latn	
+gboard_kfm_Arab	Kuhmareyi	kfm		Arab	Arab	
+gboard_kfq_Deva	Korku	kfq		Deva	Deva	
+gboard_kfq_Deva_t_k0_Latn	Korku, Transliteration	kfq		Latn	Deva	
+gboard_kfr_Arab	Kutchi	kfr		Arab	Arab	
+gboard_kfy_Deva	Kumaoni	kfy		Deva	Deva	
+gboard_kfy_Deva_t_k0_Latn	Kumaoni, Transliteration	kfy		Latn	Deva	
+gboard_kge_Latn	Komering	kge		Latn	Latn	
+gboard_kha_Latn	Khasi	kha		Latn	Latn	
+gboard_khb_Talu	Tai Lue	khb		Talu	Talu	
+gboard_khg_Tibt	Khams Tibetan	khg		Tibt	Tibt	
+gboard_khm_Khmr	Khmer	khm		Khmr	Khmr	
+gboard_khw_Arab	Khowar	khw		Arab	Arab	
+gboard_kik_Latn	Kikuyu	kik		Latn	Latn	
+gboard_kin_Latn	Kinyarwanda	kin		Latn	Latn	
+gboard_kir_Cyrl	Kyrgyz	kir		Cyrl	Cyrl	
+gboard_kiu_Latn	Kirmanjki	kiu		Latn	Latn	
+gboard_kjg_Latn	Khmu	kjg		Latn	Latn	
+gboard_kjp_Mymr	Eastern Pwo	kjp		Mymr	Mymr	
+gboard_kmb_Latn	Kimbundu	kmb		Latn	Latn	
+gboard_kmz_Arab	Khorasani Turkic, Arabic	kmz		Arab	Arab	
+gboard_kmz_Latn	Khorasani Turkic, Latin	kmz		Latn	Latn	
+gboard_kne_Latn	Kankanaey	kne		Latn	Latn	
+gboard_kng_Latn	Koongo	kng		Latn	Latn	
+gboard_knn_Deva	Maharashtrian Konkani	knn		Deva	Deva	
+gboard_koi_Cyrl	Komi-Permyak	koi		Cyrl	Cyrl	
+gboard_kok_Deva	Konkani, Devanagari	kok		Deva	Deva	
+gboard_kok_Deva_t_k0_Latn	Konkani, Devanagari, Transliteration	kok		Latn	Deva	
+gboard_kok_Knda	Konkani, Kannada	kok		Knda	Knda	
+gboard_kok_Knda_t_k0_Latn	Konkani, Kannada, Transliteration	kok		Latn	Knda	
+gboard_kok_Latn	Konkani, Latin	kok		Latn	Latn	
+gboard_kon_Latn	Kongo	kon		Latn	Latn	
+gboard_koo_Latn	Konzo	koo		Latn	Latn	
+gboard_koon1247_Latn	Kikongo-Kituba	koon1247		Latn	Latn	
+gboard_kor_Hang	Korean	kor		Hang	Hang	
+gboard_kpv_Cyrl	Komi-Zyrian	kpv		Cyrl	Cyrl	
+gboard_krc_Cyrl	Karachay-Balkar	krc		Cyrl	Cyrl	
+gboard_kri_Latn	Krio	kri		Latn	Latn	
+gboard_krj_Latn	Karay-a	krj		Latn	Latn	
+gboard_krl_Latn	Karelian	krl		Latn	Latn	
+gboard_kru_Deva	Kurukh, Devanagari	kru		Deva	Deva	
+gboard_kru_Deva_t_k0_Latn	Kurukh, Devanagari, Transliteration	kru		Latn	Deva	
+gboard_kru_Mlym	Kurukh, Malayalam	kru		Mlym	Mlym	
+gboard_ksh_Latn	Kölsch	ksh		Latn	Latn	
+gboard_ksw_Mymr	Sgaw Karen	ksw		Mymr	Mymr	
+gboard_ktb_Ethi	Kambaata, Ge'ez	ktb		Ethi	Ethi	
+gboard_ktb_Latn	Kambaata, Latin	ktb		Latn	Latn	
+gboard_ktu_Latn	Kituba	ktu		Latn	Latn	
+gboard_kua_Latn	Kwanyama	kua		Latn	Latn	
+gboard_kum_Cyrl	Kumyk	kum		Cyrl	Cyrl	
+gboard_kur_Arab_IQ	Kurdish (Iraq), Arabic	kur	IQ	Arab	Arab	
+gboard_kur_Arab_IR	Kurdish (Iran), Arabic	kur	IR	Arab	Arab	
+gboard_kur_Latn	Kurdish, Latin	kur		Latn	Latn	
+gboard_kvx_Arab	Parkari Koli	kvx		Arab	Arab	
+gboard_kxd_Arab_BN	Malay (Brunei), Arabic	kxd	BN	Arab	Arab	
+gboard_kxd_Latn_BN	Malay (Brunei), Latin	kxd	BN	Latn	Latn	
+gboard_kxh_Latn	Karo	kxh		Latn	Latn	
+gboard_kxm_Khmr	Khmer Surin	kxm		Khmr	Khmr	
+gboard_kyu_Kali	Western Kayah, Kayah Li	kyu		Kali	Kali	
+gboard_lad_Hebr_IL	Ladino (Israel)	lad	IL	Hebr	Hebr	
+gboard_lad_Latn	Ladino	lad		Latn	Latn	
+gboard_laj_Latn	Lango	laj		Latn	Latn	
+gboard_lao_Laoo	Lao	lao		Laoo	Laoo	
+gboard_lao_Laoo_t_k0_Latn	Lao, Transliteration	lao		Latn	Laoo	
+gboard_las_Latn	Lama	las		Latn	Latn	
+gboard_lat_Latn	Latin	lat		Latn	Latn	
+gboard_lav_Latn	Latvian	lav		Latn	Latn	
+gboard_lbe_Cyrl	Lak	lbe		Cyrl	Cyrl	
+gboard_led_Latn	Lendu	led		Latn	Latn	
+gboard_lep_Lepc	Lepcha, Lepcha	lep		Lepc	Lepc	
+gboard_lep_Tibt	Lepcha, Tibetan	lep		Tibt	Tibt	
+gboard_lew_Arab	Ledo Kaili	lew		Arab	Arab	
+gboard_lez_Cyrl_AZ	Lezgian (Azerbaijan)	lez	AZ	Cyrl	Cyrl	
+gboard_lez_Cyrl_RU	Lezgian (Russia)	lez	RU	Cyrl	Cyrl	
+gboard_lgg_Latn	Lugbara	lgg		Latn	Latn	
+gboard_lhu_Latn	Lahu	lhu		Latn	Latn	
+gboard_lif_Deva	Limbu, Devanagari	lif		Deva	Deva	
+gboard_lif_Limb	Limbu, Limbu	lif		Limb	Limb	
+gboard_lij_Latn	Ligurian	lij		Latn	Latn	
+gboard_lim_Latn	Limburgish	lim		Latn	Latn	
+gboard_lin_Latn_AO	Lingala (Angola)	lin	AO	Latn	Latn	
+gboard_lin_Latn_CD	Lingala (DRC)	lin	CD	Latn	Latn	
+gboard_lis_Lisu	Lisu	lis		Lisu	Lisu	
+gboard_lit_Latn	Lithuanian	lit		Latn	Latn	
+gboard_liv_Latn	Livonian	liv		Latn	Latn	
+gboard_ljp_Latn	Lampung Api	ljp		Latn	Latn	
+gboard_lki_Latn	Laki	lki		Latn	Latn	
+gboard_lkt_Latn	Lakota	lkt		Latn	Latn	
+gboard_lld_Latn	Ladin	lld		Latn	Latn	
+gboard_lmn_Deva	Lambadi, Devanagari	lmn		Deva	Deva	
+gboard_lmn_Deva_t_k0_Latn	Lambadi, Devanagari, Transliteration	lmn		Latn	Deva	
+gboard_lmn_Knda	Lambadi, Kannada	lmn		Knda	Knda	
+gboard_lmn_Telu	Lambadi, Telugu	lmn		Telu	Telu	
+gboard_lmn_Telu_t_k0_Latn	Lambadi, Telugu, Transliteration	lmn		Latn	Telu	
+gboard_lmo_Latn	Lombard	lmo		Latn	Latn	
+gboard_lon_Latn	Elhomwe	lon		Latn	Latn	
+gboard_lrc_Arab	Northern Luri	lrc		Arab	Arab	
+gboard_lrl_Arab	Achomi	lrl		Arab	Arab	
+gboard_ltg_Latn	Latgalian	ltg		Latn	Latn	
+gboard_ltz_Latn	Luxembourgish	ltz		Latn	Latn	
+gboard_lua_Latn	Luba-Kasai	lua		Latn	Latn	
+gboard_lub_Latn	Luba-Katanga	lub		Latn	Latn	
+gboard_lug_Latn	Luganda	lug		Latn	Latn	
+gboard_lus_Latn	Mizo	lus		Latn	Latn	
+gboard_luw_Latn	Luo	luw		Latn	Latn	
+gboard_luz_Arab	Southern Luri	luz		Arab	Arab	
+gboard_mad_Latn	Madurese	mad		Latn	Latn	
+gboard_mag_Deva_IN	Magahi (India)	mag	IN	Deva	Deva	
+gboard_mag_Deva_IN_t_k0_Latn	Magahi (India), Transliteration	mag	IN	Latn	Deva	
+gboard_mag_Deva_NP	Magahi (Nepal)	mag	NP	Deva	Deva	
+gboard_mai_Deva	Maithili, Devanagari	mai		Deva	Deva	
+gboard_mai_Deva_t_k0_Latn	Maithili, Transliteration	mai		Latn	Deva	
+gboard_mai_Latn	Maithili, Latin	mai		Latn	Latn	
+gboard_mak_Bugi	Makassarese, Lontara	mak		Bugi	Bugi	
+gboard_mak_Latn	Makassarese, Latin	mak		Latn	Latn	
+gboard_mal_Latn	Malayalam, Latin	mal		Latn	Latn	
+gboard_mal_Mlym	Malayalam, Malayalam	mal		Mlym	Mlym	
+gboard_mal_Mlym_t_k0_Latn	Malayalam, Transliteration	mal		Latn	Mlym	
+gboard_mar_Deva	Marathi, Devanagari	mar		Deva	Deva	
+gboard_mar_Latn	Marathi, Latin	mar		Latn	Latn	
+gboard_mas_Latn	Maasai	mas		Latn	Latn	
+gboard_max_Latn	North Moluccan Malay	max		Latn	Latn	
+gboard_may_Deva_t_k0_Latn	Marathi, Transliteration	may		Latn	Deva	
+gboard_mcn_Latn	Massa	mcn		Latn	Latn	
+gboard_mde_Arab	Maba, Arabic	mde		Arab	Arab	
+gboard_mde_Latn	Maba, Latin	mde		Latn	Latn	
+gboard_mdf_Cyrl	Moksha	mdf		Cyrl	Cyrl	
+gboard_mdh_Latn	Maguindanao	mdh		Latn	Latn	
+gboard_mdr_Latn	Mandar	mdr		Latn	Latn	
+gboard_mel_Latn	Melanau	mel		Latn	Latn	
+gboard_men_Latn	Mende	men		Latn	Latn	
+gboard_meo_Latn	Kedah Malay	meo		Latn	Latn	
+gboard_mer_Latn	Meru	mer		Latn	Latn	
+gboard_mey_Arab_MR	Arabic (Mauritania)	mey	MR	Arab	Arab	
+gboard_mfa_Latn	Kelantan-Pattani Malay	mfa		Latn	Latn	
+gboard_mfb_Latn	Bangka Malay	mfb		Latn	Latn	
+gboard_mfp_Latn	Makassar Malay	mfp		Latn	Latn	
+gboard_mfq_Latn	Moba	mfq		Latn	Latn	
+gboard_mgh_Latn	Makhuwa-Meetto	mgh		Latn	Latn	
+gboard_mhr_Cyrl	Meadow Mari	mhr		Cyrl	Cyrl	
+gboard_mhy_Latn	Ma'anyan	mhy		Latn	Latn	
+gboard_min_Latn	Minangkabau	min		Latn	Latn	
+gboard_mjl_Deva	Mandeali	mjl		Deva	Deva	
+gboard_mjl_Deva_t_k0_Latn	Mandeali, Transliteration	mjl		Latn	Deva	
+gboard_mkd_Cyrl	Macedonian	mkd		Cyrl	Cyrl	
+gboard_mki_Arab	Dhatki	mki		Arab	Arab	
+gboard_mlg_Latn	Malagasy	mlg		Latn	Latn	
+gboard_mlt_Latn	Maltese	mlt		Latn	Latn	
+gboard_mnb_Latn	Muna	mnb		Latn	Latn	
+gboard_mni_Beng	Manipuri, Bengali	mni		Beng	Beng	
+gboard_mni_Beng_t_k0_Latn	Manipuri, Bengali, Transliteration	mni		Latn	Beng	
+gboard_mni_Latn	Manipuri, Latin	mni		Latn	Latn	
+gboard_mni_Mtei	Manipuri, Meitei	mni		Mtei	Mtei	
+gboard_mni_Mtei_t_k0_Latn	Manipuri, Meitei, Transliteration	mni		Latn	Mtei	
+gboard_mnk_Latn	Mandinka	mnk		Latn	Latn	
+gboard_mnp_Hani	Northern Min	mnp		Hani	Hani	
+gboard_mnw_Mymr	Mon	mnw		Mymr	Mymr	
+gboard_mog_Latn	Mongondow	mog		Latn	Latn	
+gboard_mon_Cyrl	Mongolian	mon		Cyrl	Cyrl	
+gboard_mon_Cyrl_t_k0_Latn	Mongolian, Transliteration	mon		Latn	Cyrl	
+gboard_mos_Latn	Mossi	mos		Latn	Latn	
+gboard_mpg_Latn	Marba	mpg		Latn	Latn	
+gboard_mqj_Latn	Mamasa	mqj		Latn	Latn	
+gboard_mqy_Latn	Manggarai	mqy		Latn	Latn	
+gboard_mri_Latn	Maori	mri		Latn	Latn	
+gboard_mrj_Cyrl	Hill Mari	mrj		Cyrl	Cyrl	
+gboard_mrw_Latn	Maranao	mrw		Latn	Latn	
+gboard_msi_Latn	Sabah Malay	msi		Latn	Latn	
+gboard_mtq_Latn	Muong	mtq		Latn	Latn	
+gboard_mtr_Deva	Mewari	mtr		Deva	Deva	
+gboard_mtr_Deva_t_k0_Latn	Mewari, Transliteration	mtr		Latn	Deva	
+gboard_mua_Latn	Mundang	mua		Latn	Latn	
+gboard_mui_Latn	Musi	mui		Latn	Latn	
+gboard_mul_Zsym_fonipa	International Phonetic Alphabet	mul		Zsym	Zsym	fonipa
+gboard_mup_Deva	Malvi	mup		Deva	Deva	
+gboard_mup_Deva_t_k0_Latn	Malvi, Transliteration	mup		Latn	Deva	
+gboard_mvp_Latn	Duri	mvp		Latn	Latn	
+gboard_mvy_Arab	Indus Kohistani	mvy		Arab	Arab	
+gboard_mwm_Latn	Sar	mwm		Latn	Latn	
+gboard_mwr_Arab_PK	Marwari (Pakistan)	mwr	PK	Arab	Arab	
+gboard_mwr_Arab_PK_t_k0_Latn	Marwari (Pakistan), Transliteration	mwr	PK	Latn	Arab	
+gboard_mwr_Deva_IN	Marwari (India)	mwr	IN	Deva	Deva	
+gboard_mwr_Deva_IN_t_k0_Latn	Marwari (India), Transliteration	mwr	IN	Latn	Deva	
+gboard_mww_Latn	Hmong Daw	mww		Latn	Latn	
+gboard_mya_Mymr	Burmese	mya		Mymr	Mymr	
+gboard_myv_Cyrl	Erzya	myv		Cyrl	Cyrl	
+gboard_myx_Latn	Masaba	myx		Latn	Latn	
+gboard_mzn_Arab	Mazandarani	mzn		Arab	Arab	
+gboard_nan_Latn_pehoeji	Southern Min, POJ	nan		Latn	Latn	pehoeji
+gboard_nan_Latn_tailo	Southern Min, TL	nan		Latn	Latn	tailo
+gboard_nap_Latn	Neapolitan	nap		Latn	Latn	
+gboard_nau_Latn	Nauruan	nau		Latn	Latn	
+gboard_nav_Latn	Navajo	nav		Latn	Latn	
+gboard_nbl_Latn	Southern Ndebele	nbl		Latn	Latn	
+gboard_ndc_Latn	Ndau	ndc		Latn	Latn	
+gboard_nde_Latn	Northern Ndebele	nde		Latn	Latn	
+gboard_ndo_Latn	Ndonga	ndo		Latn	Latn	
+gboard_nds_Latn	Low Saxon	nds		Latn	Latn	
+gboard_nep_Deva_IN	Nepali (India), Devanagari	nep	IN	Deva	Deva	
+gboard_nep_Deva_IN_t_k0_Latn	Nepali (India), Transliteration	nep	IN	Latn	Deva	
+gboard_nep_Deva_NP	Nepali (Nepal), Devanagari	nep	NP	Deva	Deva	
+gboard_nep_Latn_IN	Nepali (India), Latin	nep	IN	Latn	Latn	
+gboard_new_Deva	Newari	new		Deva	Deva	
+gboard_nga_Latn	Ngbaka Gbaya	nga		Latn	Latn	
+gboard_ngl_Latn	Lomwe	ngl		Latn	Latn	
+gboard_nhw_Latn	Nahuatl	nhw		Latn	Latn	
+gboard_nia_Latn	Nias	nia		Latn	Latn	
+gboard_nij_Latn	Ngaju	nij		Latn	Latn	
+gboard_niq_Latn	Nandi	niq		Latn	Latn	
+gboard_niu_Latn	Niuean	niu		Latn	Latn	
+gboard_nld_Latn_BE	Dutch (Belgium)	nld	BE	Latn	Latn	
+gboard_nld_Latn_NL	Dutch (Netherlands)	nld	NL	Latn	Latn	
+gboard_nnb_Latn	Nande	nnb		Latn	Latn	
+gboard_nno_Latn	Norwegian Nynorsk	nno		Latn	Latn	
+gboard_nob_Latn	Norwegian Bokmål	nob		Latn	Latn	
+gboard_nod_Thai	Northern Thai	nod		Thai	Thai	
+gboard_noe_Deva	Nimadi	noe		Deva	Deva	
+gboard_noe_Deva_t_k0_Latn	Nimadi, Transliteration	noe		Latn	Deva	
+gboard_nso_Latn	Northern Sotho	nso		Latn	Latn	
+gboard_nup_Latn	Nupe	nup		Latn	Latn	
+gboard_nut_Latn	Nung	nut		Latn	Latn	
+gboard_nya_Latn	Nyanja	nya		Latn	Latn	
+gboard_nyf_Latn	Giryama	nyf		Latn	Latn	
+gboard_nym_Latn	Nyamwezi	nym		Latn	Latn	
+gboard_nyn_Latn	Nkore	nyn		Latn	Latn	
+gboard_nyo_Latn	Nyoro	nyo		Latn	Latn	
+gboard_nyy_Latn	Nyakyusa	nyy		Latn	Latn	
+gboard_oci_Latn	Occitan	oci		Latn	Latn	
+gboard_oji_Cans	Ojibwe, Syllabics	oji		Cans	Cans	
+gboard_oji_Latn	Ojibwe, Latin	oji		Latn	Latn	
+gboard_olo_Latn	Livvi-Karelian	olo		Latn	Latn	
+gboard_orm_Latn	Oromo	orm		Latn	Latn	
+gboard_ory_Latn	Odia, Latin	ory		Latn	Latn	
+gboard_ory_Orya	Odia, Odia	ory		Orya	Orya	
+gboard_ory_Orya_t_k0_Latn	Odia, Transliteration	ory		Latn	Orya	
+gboard_osa_Osge	Osage	osa		Osge	Osge	
+gboard_oss_Cyrl	Ossetian	oss		Cyrl	Cyrl	
+gboard_pag_Latn	Pangasinan	pag		Latn	Latn	
+gboard_pam_Latn	Kapampangan	pam		Latn	Latn	
+gboard_pan_Arab	Punjabi, Arabic	pan		Arab	Arab	
+gboard_pan_Arab_t_k0_Latn	Punjabi, Arabic, Transliteration	pan		Latn	Arab	
+gboard_pan_Guru	Punjabi, Gurmukhi	pan		Guru	Guru	
+gboard_pan_Guru_t_k0_Latn	Punjabi, Gurmukhi, Transliteration	pan		Latn	Guru	
+gboard_pan_Latn	Punjabi, Latin	pan		Latn	Latn	
+gboard_pap_Latn_AW	Papiamento (Aruba)	pap	AW	Latn	Latn	
+gboard_pap_Latn_BQ	Papiamentu (Bonaire and Curaçao)	pap	BQ	Latn	Latn	
+gboard_pcc_Latn	Bouyei	pcc		Latn	Latn	
+gboard_pcd_Latn	Picard	pcd		Latn	Latn	
+gboard_pcm_Latn	Nigerian Pidgin	pcm		Latn	Latn	
+gboard_pdc_Latn	Palantine German	pdc		Latn	Latn	
+gboard_phr_Arab	Pahari-Pothwari	phr		Arab	Arab	
+gboard_phr_Arab_t_k0_Latn	Pahari-Potwari, Transliteration	phr		Latn	Arab	
+gboard_pko_Latn	Pokot	pko		Latn	Latn	
+gboard_plk_Arab	Kohistani Shina	plk		Arab	Arab	
+gboard_plt_Latn	Plateau Malagasy	plt		Latn	Latn	
+gboard_pmf_Latn	Pamona	pmf		Latn	Latn	
+gboard_pms_Latn	Piedmontese	pms		Latn	Latn	
+gboard_pmy_Latn	Papuan Malay	pmy		Latn	Latn	
+gboard_pnt_Grek	Pontic Greek	pnt		Grek	Grek	
+gboard_pol_Latn	Polish	pol		Latn	Latn	
+gboard_por_Latn_002	Portuguese (Africa)	por	002	Latn	Latn	
+gboard_por_Latn_AO	Portuguese (Angola)	por	AO	Latn	Latn	
+gboard_por_Latn_BR	Portuguese (Brazil)	por	BR	Latn	Latn	
+gboard_por_Latn_MO	Portuguese (Macau)	por	MO	Latn	Latn	
+gboard_por_Latn_PT	Portuguese (Portugal)	por	PT	Latn	Latn	
+gboard_pov_Latn	Guinea-Bissau Creole	pov		Latn	Latn	
+gboard_prk_Latn	Parauk Wa	prk		Latn	Latn	
+gboard_prs_Arab	Dari	prs		Arab	Arab	
+gboard_pse_Latn	Central Malay	pse		Latn	Latn	
+gboard_psh_Arab	Southwestern Pashayi	psh		Arab	Arab	
+gboard_psi_Arab	Southeastern Pashayi	psi		Arab	Arab	
+gboard_pus_Arab	Pashto	pus		Arab	Arab	
+gboard_pus_Arab_t_k0_Latn	Pashto, Transliteration	pus		Latn	Arab	
+gboard_quc_Latn	K'iche'	quc		Latn	Latn	
+gboard_que_Latn	Quechua	que		Latn	Latn	
+gboard_qug_Latn	Chimborazo Highland Kichwa	qug		Latn	Latn	
+gboard_quh_Latn	South Bolivian Quechua	quh		Latn	Latn	
+gboard_quy_Latn	Ayacucho Quechua	quy		Latn	Latn	
+gboard_quz_Latn	Cusco Quechua	quz		Latn	Latn	
+gboard_qxq_Arab	Qashqai	qxq		Arab	Arab	
+gboard_rcf_Latn	Réunion Creole	rcf		Latn	Latn	
+gboard_rej_Rjng	Rejang	rej		Rjng	Rjng	
+gboard_rhg_Arab	Rohingya	rhg		Arab	Arab	
+gboard_rim_Latn	Nyaturu	rim		Latn	Latn	
+gboard_rki_Mymr	Arakanese	rki		Mymr	Mymr	
+gboard_rkt_Beng	Rangpuri, Bengali	rkt		Beng	Beng	
+gboard_rkt_Deva	Rangpuri, Devanagari	rkt		Deva	Deva	
+gboard_rkt_Deva_t_k0_Latn	Rangpuri, Devanagari, Transliteration	rkt		Latn	Deva	
+gboard_rmn_Latn_BG	Balkan Romani (Bulgaria)	rmn	BG	Latn	Latn	
+gboard_rmn_Latn_MK	Balkan Romani (Macedonia)	rmn	MK	Latn	Latn	
+gboard_rmy_Latn_AL	Vlax Romani (Albania)	rmy	AL	Latn	Latn	
+gboard_rmy_Latn_RO	Vlax Romani (Romania)	rmy	RO	Latn	Latn	
+gboard_roh_Latn	Romansh	roh		Latn	Latn	
+gboard_ron_Latn_MD	Romanian (Moldova)	ron	MD	Latn	Latn	
+gboard_ron_Latn_RO	Romanian (Romania)	ron	RO	Latn	Latn	
+gboard_rue_Cyrl	Rusyn	rue		Cyrl	Cyrl	
+gboard_run_Latn	Rundi	run		Latn	Latn	
+gboard_rus_Cyrl_BY	Russian (Belarus)	rus	BY	Cyrl	Cyrl	
+gboard_rus_Cyrl_KG	Russian (Kyrgyzstan)	rus	KG	Cyrl	Cyrl	
+gboard_rus_Cyrl_RU	Russian (Russia)	rus	RU	Cyrl	Cyrl	
+gboard_sag_Latn	Sango	sag		Latn	Latn	
+gboard_sah_Cyrl	Sakha	sah		Cyrl	Cyrl	
+gboard_san_Deva	Sanskrit, Devanagari	san		Deva	Deva	
+gboard_san_Deva_t_k0_Latn	Sanskrit, Transliteration	san		Latn	Deva	
+gboard_san_Latn	Sanskrit, Latin	san		Latn	Latn	
+gboard_sas_Bali	Sasak, Aksara Bali	sas		Bali	Bali	
+gboard_sas_Latn	Sasak, Latin	sas		Latn	Latn	
+gboard_sat_Beng	Santali, Bengali	sat		Beng	Beng	
+gboard_sat_Beng_t_k0_Latn	Santali, Bengali, Transliteration	sat		Latn	Beng	
+gboard_sat_Deva	Santali, Devanagari	sat		Deva	Deva	
+gboard_sat_Latn	Santali, Latin	sat		Latn	Latn	
+gboard_sat_Olck	Santali, Ol Chiki	sat		Olck	Olck	
+gboard_sat_Olck_t_k0_Latn	Santali, Ol Chiki, Transliteration	sat		Latn	Olck	
+gboard_saz_Deva	Saurashtra	saz		Deva	Deva	
+gboard_sba_Latn	Ngambay	sba		Latn	Latn	
+gboard_sck_Deva	Sadri	sck		Deva	Deva	
+gboard_scl_Arab	Shina	scl		Arab	Arab	
+gboard_scl_Arab_t_k0_Latn	Shina, Transliteration	scl		Latn	Arab	
+gboard_scn_Latn	Sicilian	scn		Latn	Latn	
+gboard_sco_Latn	Scots	sco		Latn	Latn	
+gboard_sda_Latn	Toraja-Sa'dan	sda		Latn	Latn	
+gboard_sdc_Latn	Sassarese	sdc		Latn	Latn	
+gboard_sdh_Arab	Southern Kurdish	sdh		Arab	Arab	
+gboard_sef_Latn	Cebaara Senoufo	sef		Latn	Latn	
+gboard_seh_Latn	Sena	seh		Latn	Latn	
+gboard_sgc_Latn	Kipsigis	sgc		Latn	Latn	
+gboard_sgj_Deva	Surgujia	sgj		Deva	Deva	
+gboard_sgs_Latn	Samogitian	sgs		Latn	Latn	
+gboard_sgw_Ethi	Sebat Bet Gurage	sgw		Ethi	Ethi	
+gboard_shn_Mymr	Shan	shn		Mymr	Mymr	
+gboard_shu_Arab_TD	Arabic (Chad)	shu	TD	Arab	Arab	
+gboard_sid_Latn	Sidamo	sid		Latn	Latn	
+gboard_sin_Sinh	Sinhala	sin		Sinh	Sinh	
+gboard_sin_Sinh_t_k0_Latn	Sinhala, Transliteration	sin		Latn	Sinh	
+gboard_sjp_Deva	Surjapuri	sjp		Deva	Deva	
+gboard_sjp_Deva_t_k0_Latn	Surjapuri, Transliteration	sjp		Latn	Deva	
+gboard_skg_Latn	Sakalava Malagasy	skg		Latn	Latn	
+gboard_skr_Arab	Saraiki, Urdu Arabic	skr		Arab	Arab	
+gboard_skr_Arab_t_k0_Latn	Saraiki, Urdu Arabic, Transliteration	skr		Latn	Arab	
+gboard_skr_Arab_t_k0_Latn_x-snd	Saraiki, Sindhi Arabic, Transliteration	skr		Latn	Arab	x-snd
+gboard_skr_Arab_x-snd	Saraiki, Sindhi Arabic	skr		Arab	Arab	x-snd
+gboard_slk_Latn	Slovak	slk		Latn	Latn	
+gboard_slv_Latn	Slovenian	slv		Latn	Latn	
+gboard_sme_Latn	Northern Sami	sme		Latn	Latn	
+gboard_smo_Latn	Samoan	smo		Latn	Latn	
+gboard_sna_Latn	Shona	sna		Latn	Latn	
+gboard_snd_Arab	Sindhi, Arabic	snd		Arab	Arab	
+gboard_snd_Arab_t_k0_Latn	Sindhi, Arabic, Transliteration	snd		Latn	Arab	
+gboard_snd_Deva	Sindhi, Devanagari	snd		Deva	Deva	
+gboard_snd_Deva_t_k0_Latn	Sindhi, Devanagari, Transliteration	snd		Latn	Deva	
+gboard_snd_Latn	Sindhi, Latin	snd		Latn	Latn	
+gboard_snk_Latn	Soninke	snk		Latn	Latn	
+gboard_som_Latn	Somali	som		Latn	Latn	
+gboard_sop_Latn	Songe	sop		Latn	Latn	
+gboard_sot_Latn_LS	Sesotho (Lesotho)	sot	LS	Latn	Latn	
+gboard_sot_Latn_ZA	Sesotho (South Africa)	sot	ZA	Latn	Latn	
+gboard_sou_Thai	Southern Thai	sou		Thai	Thai	
+gboard_spa_Latn_419	Spanish (Latin America)	spa	419	Latn	Latn	
+gboard_spa_Latn_AR	Spanish (Argentina)	spa	AR	Latn	Latn	
+gboard_spa_Latn_ES	Spanish (Spain)	spa	ES	Latn	Latn	
+gboard_spa_Latn_MX	Spanish (Mexico)	spa	MX	Latn	Latn	
+gboard_spa_Latn_US	Spanish (US)	spa	US	Latn	Latn	
+gboard_spp_Latn	Supyire	spp		Latn	Latn	
+gboard_sqi_Latn	Albanian, Standard	sqi		Latn	Latn	
+gboard_srd_Latn	Sardinian	srd		Latn	Latn	
+gboard_srn_Latn	Sranan	srn		Latn	Latn	
+gboard_srp_Cyrl	Serbian, Cyrillic	srp		Cyrl	Cyrl	
+gboard_srp_Latn	Serbian, Latin	srp		Latn	Latn	
+gboard_srr_Latn	Serer	srr		Latn	Latn	
+gboard_ssw_Latn_SZ	Swazi (Swaziland)	ssw	SZ	Latn	Latn	
+gboard_ssw_Latn_ZA	Swazi (South Africa)	ssw	ZA	Latn	Latn	
+gboard_stv_Ethi	Silt'e, Ge’ez	stv		Ethi	Ethi	
+gboard_stv_Latn	Silt'e, Latin	stv		Latn	Latn	
+gboard_sty_Cyrl	Siberian Tatar	sty		Cyrl	Cyrl	
+gboard_suk_Latn	Sukuma	suk		Latn	Latn	
+gboard_sun_Arab	Sundanese, Arabic	sun		Arab	Arab	
+gboard_sun_Latn	Sundanese, Latin	sun		Latn	Latn	
+gboard_sun_Sund	Sundanese, Sundanese	sun		Sund	Sund	
+gboard_swa_Latn	Swahili	swa		Latn	Latn	
+gboard_swe_Latn_FI	Swedish (Finland)	swe	FI	Latn	Latn	
+gboard_swe_Latn_SE	Swedish (Sweden)	swe	SE	Latn	Latn	
+gboard_swv_Deva	Shekhawati	swv		Deva	Deva	
+gboard_swv_Deva_t_k0_Latn	Shekhawati, Transliteration	swv		Latn	Deva	
+gboard_sxu_Latn	Upper Saxon	sxu		Latn	Latn	
+gboard_syc_Syrc	Classical Syriac	syc		Syrc	Syrc	
+gboard_syl_Beng	Sylheti, Bengali	syl		Beng	Beng	
+gboard_syl_Latn	Sylheti, Latin	syl		Latn	Latn	
+gboard_syl_Sylo	Sylheti, Syloti Nagri	syl		Sylo	Sylo	
+gboard_szl_Latn	Silesian	szl		Latn	Latn	
+gboard_tab_Cyrl	Tabasaran	tab		Cyrl	Cyrl	
+gboard_tah_Latn	Tahitian	tah		Latn	Latn	
+gboard_taj_Deva	Eastern Tamang	taj		Deva	Deva	
+gboard_tam_Latn_IN	Tamil (India), Latin	tam	IN	Latn	Latn	
+gboard_tam_Taml_IN	Tamil (India), Tamil	tam	IN	Taml	Taml	
+gboard_tam_Taml_IN_t_k0_Latn	Tamil (India), Transliteration	tam	IN	Latn	Taml	
+gboard_tam_Taml_LK	Tamil (Sri Lanka)	tam	LK	Taml	Taml	
+gboard_tam_Taml_SG	Tamil (Singapore)	tam	SG	Taml	Taml	
+gboard_tat_Cyrl	Tatar	tat		Cyrl	Cyrl	
+gboard_tbw_Latn	Aborlan	tbw		Latn	Latn	
+gboard_tcy_Knda	Tulu	tcy		Knda	Knda	
+gboard_tcy_Knda_t_k0_Latn	Tulu, Transliteration	tcy		Latn	Knda	
+gboard_tdd_Tale	Tai Nuea	tdd		Tale	Tale	
+gboard_tdx_Latn	Tandroy-Mahafaly Malagasy	tdx		Latn	Latn	
+gboard_tel_Latn	Telugu, Latin	tel		Latn	Latn	
+gboard_tel_Telu	Telugu, Telugu	tel		Telu	Telu	
+gboard_tel_Telu_t_k0_Latn	Telugu, Transliteration	tel		Latn	Telu	
+gboard_tem_Latn	Temne	tem		Latn	Latn	
+gboard_teo_Latn	Teso	teo		Latn	Latn	
+gboard_tet_Latn	Tetum	tet		Latn	Latn	
+gboard_tgk_Cyrl	Tajik	tgk		Cyrl	Cyrl	
+gboard_tha_Thai	Thai	tha		Thai	Thai	
+gboard_tir_Ethi_ER	Tigrinya (Eritrea)	tir	ER	Ethi	Ethi	
+gboard_tir_Ethi_ET	Tigrinya (Ethiopia)	tir	ET	Ethi	Ethi	
+gboard_tiv_Latn	Tiv	tiv		Latn	Latn	
+gboard_tkl_Latn	Tokelauan	tkl		Latn	Latn	
+gboard_tll_Latn	Tetela	tll		Latn	Latn	
+gboard_tly_Arab_IR	Talysh (Iran)	tly	IR	Arab	Arab	
+gboard_tly_Cyrl_RU	Talysh (Russia)	tly	RU	Cyrl	Cyrl	
+gboard_tly_Latn_AZ	Talysh (Azerbaijan)	tly	AZ	Latn	Latn	
+gboard_ton_Latn	Tongan	ton		Latn	Latn	
+gboard_tpi_Latn	Tok Pisin	tpi		Latn	Latn	
+gboard_trf_Latn	Trinidadian Creole English	trf		Latn	Latn	
+gboard_trp_Beng	Kok Borok, Bengali	trp		Beng	Beng	
+gboard_trp_Beng_t_k0_Latn	Kok Borok, Bengali, Transliteration	trp		Latn	Beng	
+gboard_trp_Latn	Kok Borok, Latin	trp		Latn	Latn	
+gboard_trw_Arab	Torwali	trw		Arab	Arab	
+gboard_tsc_Latn	Tswa	tsc		Latn	Latn	
+gboard_tsg_Latn	Tausug	tsg		Latn	Latn	
+gboard_tsn_Latn_BW	Tswana (Botswana)	tsn	BW	Latn	Latn	
+gboard_tsn_Latn_ZA	Tswana (South Africa)	tsn	ZA	Latn	Latn	
+gboard_tso_Latn	Tsonga	tso		Latn	Latn	
+gboard_ttj_Latn	Tooro	ttj		Latn	Latn	
+gboard_ttt_Arab	Tati	ttt		Arab	Arab	
+gboard_tuk_Latn	Turkmen	tuk		Latn	Latn	
+gboard_tum_Latn	Tumbuka	tum		Latn	Latn	
+gboard_tur_Latn_CY	Turkish (Cyprus)	tur	CY	Latn	Latn	
+gboard_tur_Latn_TR	Turkish (Turkey)	tur	TR	Latn	Latn	
+gboard_tuv_Latn	Turkana	tuv		Latn	Latn	
+gboard_tvl_Latn	Tuvaluan	tvl		Latn	Latn	
+gboard_tyv_Cyrl	Tuvan	tyv		Cyrl	Cyrl	
+gboard_tyz_Latn	Tay	tyz		Latn	Latn	
+gboard_udm_Cyrl	Udmurt	udm		Cyrl	Cyrl	
+gboard_uig_Arab	Uyghur	uig		Arab	Arab	
+gboard_uki_Orya	Kui	uki		Orya	Orya	
+gboard_ukr_Cyrl	Ukrainian	ukr		Cyrl	Cyrl	
+gboard_umb_Latn	Umbundu	umb		Latn	Latn	
+gboard_unr_Beng	Mundari, Bengali	unr		Beng	Beng	
+gboard_unr_Deva	Mundari, Devanagari	unr		Deva	Deva	
+gboard_unr_Latn	Mundari, Latin	unr		Latn	Latn	
+gboard_unr_Orya	Mundari, Odia	unr		Orya	Orya	
+gboard_urd_Arab_IN	Urdu (India)	urd	IN	Arab	Arab	
+gboard_urd_Arab_IN_t_k0_Latn	Urdu (India), Transliteration	urd	IN	Latn	Arab	
+gboard_urd_Arab_PK	Urdu (Pakistan)	urd	PK	Arab	Arab	
+gboard_urd_Latn_IN	Urdu (India), Latin	urd	IN	Latn	Latn	
+gboard_uum_Cyrl	Urum	uum		Cyrl	Cyrl	
+gboard_uzb_Cyrl	Uzbek, Cyrillic	uzb		Cyrl	Cyrl	
+gboard_uzb_Latn	Uzbek, Latin	uzb		Latn	Latn	
+gboard_vah_Deva	Varhadi	vah		Deva	Deva	
+gboard_vah_Deva_t_k0_Latn	Varhadi, Transliteration	vah		Latn	Deva	
+gboard_vai_Vaii	Vai	vai		Vaii	Vaii	
+gboard_vas_Deva	Vasavi, Devanagari	vas		Deva	Deva	
+gboard_vas_Gujr	Vasavi, Gujarati	vas		Gujr	Gujr	
+gboard_vec_Latn	Venetian	vec		Latn	Latn	
+gboard_vel_Latn	Veluws	vel		Latn	Latn	
+gboard_ven_Latn	Venda	ven		Latn	Latn	
+gboard_vep_Latn	Veps	vep		Latn	Latn	
+gboard_vie_Latn	Vietnamese	vie		Latn	Latn	
+gboard_vkt_Latn	Kutai Malay	vkt		Latn	Latn	
+gboard_vls_Latn	West Flemish	vls		Latn	Latn	
+gboard_vmf_Latn	East Franconian	vmf		Latn	Latn	
+gboard_vmw_Latn	Central Makhuwa	vmw		Latn	Latn	
+gboard_vro_Latn	Võro	vro		Latn	Latn	
+gboard_wal_Latn	Wolaytta	wal		Latn	Latn	
+gboard_war_Latn	Waray	war		Latn	Latn	
+gboard_wbr_Deva	Wagdi	wbr		Deva	Deva	
+gboard_wbr_Deva_t_k0_Latn	Wagdi, Transliteration	wbr		Latn	Deva	
+gboard_wes_Latn	Cameroon Pidgin	wes		Latn	Latn	
+gboard_wln_Latn	Walloon	wln		Latn	Latn	
+gboard_wne_Grek	Wanetsi	wne		Grek	Grek	
+gboard_wol_Latn	Wolof	wol		Latn	Latn	
+gboard_wry_Deva	Merwari	wry		Deva	Deva	
+gboard_wry_Deva_t_k0_Latn	Merwari, Transliteration	wry		Latn	Deva	
+gboard_xal_Cyrl	Kalmyk Oirat	xal		Cyrl	Cyrl	
+gboard_xho_Latn	Xhosa	xho		Latn	Latn	
+gboard_xmf_Geor	Mingrelian	xmf		Geor	Geor	
+gboard_xmm_Latn	Manado Malay	xmm		Latn	Latn	
+gboard_xnr_Deva	Kangri	xnr		Deva	Deva	
+gboard_xog_Latn	Soga	xog		Latn	Latn	
+gboard_xon_Latn	Konkomba	xon		Latn	Latn	
+gboard_xsr_Deva	Sherpa	xsr		Deva	Deva	
+gboard_yaf_Latn	Yaka	yaf		Latn	Latn	
+gboard_yao_Latn	Yao	yao		Latn	Latn	
+gboard_yid_Hebr_IL	Yiddish (Israel)	yid	IL	Hebr	Hebr	
+gboard_yid_Hebr_US	Yiddish (US)	yid	US	Hebr	Hebr	
+gboard_yid_Hebr_US_t_k0_Latn	Yiddish (US), Transliteration	yid	US	Latn	Hebr	
+gboard_ymm_Latn	Maay Maay	ymm		Latn	Latn	
+gboard_yor_Latn	Yoruba	yor		Latn	Latn	
+gboard_yrk_Cyrl	Nenets	yrk		Cyrl	Cyrl	
+gboard_yua_Latn	Yucatec Maya	yua		Latn	Latn	
+gboard_yut_Hant	Chinese, Cantonese, Traditional	yut		Hant	Hant	
+gboard_yut_Latn	Isan	yut		Latn	Latn	
+gboard_zea_Latn	Zeelandic	zea		Latn	Latn	
+gboard_zha_Latn	Zhuang	zha		Latn	Latn	
+gboard_zne_Latn	Zande	zne		Latn	Latn	
+gboard_zsm_Arab_MY	Malay (Malaysia), Arabic	zsm	MY	Arab	Arab	
+gboard_zsm_Latn_MY	Malay (Malaysia), Latin	zsm	MY	Latn	Latn	
+gboard_zsm_Latn_SG	Malay, Singapore, Latin	zsm	SG	Latn	Latn	
+gboard_zul_Latn	Zulu	zul		Latn	Latn	
+gboard_zyb_Latn	Yongbei Zhuang	zyb		Latn	Latn	
+gboard_zyj_Latn	Youjiang Zhuang	zyj		Latn	Latn	
+gboard_zza_Latn	Zaza	zza		Latn	Latn	

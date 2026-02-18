@@ -58,7 +58,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       return tsvColumnNumber + 2; // +2 to account for the skipped columns
     })
     .filter((col) => col !== null);
-  if (tsvColumnsWithData.length <= 0) throw new Error('No census data found in the file.');
+  if (tsvColumnsWithData.length <= 0)
+    throw new Error(`No census data found in the file ${filename}.`);
 
   const censuses: CensusData[] = tsvColumnsWithData.map((_tsvColumnNumber, index) => ({
     type: ObjectType.Census,
