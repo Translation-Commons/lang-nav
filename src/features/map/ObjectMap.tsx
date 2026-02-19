@@ -6,7 +6,6 @@ import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
-
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
