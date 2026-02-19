@@ -1,6 +1,6 @@
-import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
-import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
@@ -78,6 +78,7 @@ export enum PageParamKey {
   profile = 'profile',
   searchBy = 'searchBy',
   searchString = 'searchString',
+  secondarySortBy = 'secondarySortBy',
   sortBehavior = 'sortBehavior',
   sortBy = 'sortBy',
   territoryFilter = 'territoryFilter',
@@ -90,8 +91,8 @@ export enum PageParamKey {
 }
 
 export type PageParams = {
-  colorBy: ColorBy;
-  scaleBy: ScaleBy;
+  colorBy: Field;
+  scaleBy: Field;
   colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
   isoStatus: LanguageISOStatus[];
@@ -107,8 +108,9 @@ export type PageParams = {
   profile: ProfileType;
   searchBy: SearchableField;
   searchString: string;
+  secondarySortBy: Field;
   sortBehavior: SortBehavior;
-  sortBy: SortBy;
+  sortBy: Field;
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
@@ -118,8 +120,8 @@ export type PageParams = {
 };
 
 export type PageParamsOptional = {
-  colorBy?: ColorBy;
-  scaleBy?: ScaleBy;
+  colorBy?: Field;
+  scaleBy?: Field;
   colorGradient?: ColorGradient;
   columns?: TableIDToBinarizedColumnVisibility;
   isoStatus?: LanguageISOStatus[];
@@ -135,8 +137,9 @@ export type PageParamsOptional = {
   profile?: ProfileType;
   searchBy?: SearchableField;
   searchString?: string;
+  secondarySortBy?: Field;
   sortBehavior?: SortBehavior;
-  sortBy?: SortBy;
+  sortBy?: Field;
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;

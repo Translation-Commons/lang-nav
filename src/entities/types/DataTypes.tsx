@@ -31,12 +31,13 @@ export type ISO3166Code = string; // ISO 3166-1 alpha-2 code, eg. US, CA, etc.
 export type UNM49Code = string; // UN M49 code, eg. 001, 150, 419, etc.
 
 export enum TerritoryScope {
-  World = 'World',
-  Continent = 'Continent',
-  Region = 'Region',
-  Subcontinent = 'Sub-continent',
-  Country = 'Country',
-  Dependency = 'Dependency',
+  World = 6, // larger value = broader scope
+  Continent = 5,
+  Region = 4, // eg, Latin America, Middle East, etc.
+  Subcontinent = 3,
+  Country = 2,
+  Dependency = 1,
+  // 0 is intentionally not included to avoid problems using truthy comparisons
 }
 
 export const isTerritoryGroup = (scope?: TerritoryScope): boolean => {

@@ -1,7 +1,3 @@
-import { SortBy } from '../sorting/SortTypes';
-
-export type ColorBy = SortBy | 'None';
-
 // Force it not to use 0 because that will be treated as falsy and removed
 export enum ColorGradient {
   DivergingBlueToOrange = 1, // Blue - White - Orange

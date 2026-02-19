@@ -1,16 +1,18 @@
 import { parseColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
-import { ColorBy, ColorGradient } from '@features/transforms/coloring/ColorTypes';
-import { ScaleBy } from '@features/transforms/scales/ScaleTypes';
-import { SortBehavior, SortBy } from '@features/transforms/sorting/SortTypes';
+import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageSource } from '@entities/language/LanguageTypes';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
+
+import { parseLanguageScope } from '@strings/LanguageScopeStrings';
+import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
 import {
   LocaleSeparator,
@@ -55,14 +57,22 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       // Arrays
       case PageParamKey.languageScopes:
         if (value === '[]') params.languageScopes = [];
-        else params.languageScopes = value.split(',').filter(Boolean) as LanguageScope[];
+        else
+          params.languageScopes = value
+            .split(',')
+            .map((s) => parseLanguageScope(s))
+            .filter((s) => s != null);
         break;
       case PageParamKey.modalityFilter:
         params.modalityFilter = parseNumericEnumArray(value, LanguageModality);
         break;
       case PageParamKey.territoryScopes:
         if (value === '[]') params[key] = [];
-        else params[key] = value.split(',').filter(Boolean) as TerritoryScope[];
+        else
+          params[key] = value
+            .split(',')
+            .map((s) => parseTerritoryScope(s))
+            .filter((s) => s != null);
         break;
       case PageParamKey.isoStatus:
         params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);
@@ -89,12 +99,6 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.profile:
         params.profile = value as ProfileType;
         break;
-      case PageParamKey.searchBy:
-        params.searchBy = value as SearchableField;
-        break;
-      case PageParamKey.sortBy:
-        params.sortBy = value as SortBy;
-        break;
       case PageParamKey.localeSeparator:
         params.localeSeparator = value as LocaleSeparator;
         break;
@@ -104,14 +108,25 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.sortBehavior:
         params.sortBehavior = value === '-1' ? SortBehavior.Reverse : SortBehavior.Normal;
         break;
-      case PageParamKey.colorBy:
-        params.colorBy = value as ColorBy;
-        break;
       case PageParamKey.colorGradient:
         params.colorGradient = parseInt(value) as ColorGradient;
         break;
+
+      // Fields
+      case PageParamKey.searchBy:
+        params.searchBy = value as SearchableField;
+        break;
+      case PageParamKey.sortBy:
+        params.sortBy = value as Field;
+        break;
+      case PageParamKey.secondarySortBy:
+        params.secondarySortBy = value as Field;
+        break;
+      case PageParamKey.colorBy:
+        params.colorBy = value as Field;
+        break;
       case PageParamKey.scaleBy:
-        params.scaleBy = value as ScaleBy;
+        params.scaleBy = value as Field;
         break;
 
       // Freeform strings

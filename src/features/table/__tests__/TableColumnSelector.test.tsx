@@ -2,7 +2,7 @@ import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import usePageParams from '@features/params/usePageParams';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -25,9 +25,9 @@ describe('TableColumnSelector', () => {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: undefined }));
 
     const columns = [
-      { key: 'Population', sortParam: SortBy.Population, render: () => null },
-      { key: 'Name', sortParam: SortBy.Name, render: () => null },
-      { key: 'ID', sortParam: SortBy.Code, render: () => null },
+      { key: 'Population', field: Field.Population, render: () => null },
+      { key: 'Name', field: Field.Name, render: () => null },
+      { key: 'ID', field: Field.Code, render: () => null },
     ];
     const columnVisibility: { [key: string]: boolean } = {
       Population: true,
@@ -49,11 +49,11 @@ describe('TableColumnSelector', () => {
   });
 
   it('checkboxes reflect columnVisibility override but not sortBy', () => {
-    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: SortBy.Name }));
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
 
     const columns = [
-      { key: 'Population', sortParam: SortBy.Population, render: () => null },
-      { key: 'Name', sortParam: SortBy.Name, render: () => null },
+      { key: 'Population', field: Field.Population, render: () => null },
+      { key: 'Name', field: Field.Name, render: () => null },
     ];
     const columnVisibility: { [key: string]: boolean } = { Population: true, Name: false };
     const toggleMock = vi.fn();

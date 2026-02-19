@@ -7,10 +7,9 @@ import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
-import { getSortFunction } from '@features/transforms/sorting/sort';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import { getSortFunction, sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -139,7 +138,7 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Potential Locale',
           render: (object) => <HoverableObjectName object={object} labelSource="code" />,
-          sortParam: SortBy.Code,
+          field: Field.Code,
         },
         {
           key: 'Language',
@@ -149,27 +148,29 @@ const PotentialLocalesTable: React.FC<{
             ) : (
               object.languageCode
             ),
-          sortParam: SortBy.Name,
+          field: Field.Name,
         },
         {
-          key: 'Population',
+          key: 'Population (Adjusted)',
+          render: (object) => object.populationAdjusted,
+          field: Field.Population,
+        },
+        {
+          key: 'Population (in Census)',
           render: (object) => object.populationSpeaking,
-          valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.PopulationDirectlySourced,
         },
         {
           key: '% in Territory',
           render: (object) => object.populationSpeakingPercent,
-          valueType: TableValueType.Decimal,
-          sortParam: SortBy.PercentOfTerritoryPopulation,
+          field: Field.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
           render: (object) =>
-            object.populationSpeaking &&
-            (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
-          valueType: TableValueType.Decimal,
-          sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+            object.populationAdjusted &&
+            (object.populationAdjusted * 100) / (object.language?.populationEstimate ?? 1),
+          field: Field.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',
@@ -226,6 +227,9 @@ function getPotentialLocales(
           if (populationPercent < percentThreshold) {
             return; // Skip if the population percentage is below the threshold
           }
+          const populationAdjusted = Math.round(
+            (populationPercent / 100.0) * (census.territory?.population || 1),
+          );
 
           if (missing[localeID] == null) {
             missing[localeID] = {
@@ -242,17 +246,18 @@ function getPotentialLocales(
               territoryCode: census.isoRegionCode,
 
               populationSource: PopulationSourceCategory.Official,
-              populationAdjusted: populationEstimate,
+              populationAdjusted: populationAdjusted,
               populationSpeaking: populationEstimate,
               populationSpeakingPercent: populationPercent,
               populationCensus: census,
               censusRecords: [{ census, populationEstimate, populationPercent }],
             };
           } else {
-            if ((missing[localeID].populationSpeaking ?? 0) < populationEstimate) {
+            if ((missing[localeID].populationAdjusted ?? 0) < populationAdjusted) {
               // If we already have a locale but the population estimate is higher, update it
               missing[localeID].populationSpeaking = populationEstimate;
               missing[localeID].populationSpeakingPercent = populationPercent;
+              missing[localeID].populationAdjusted = populationAdjusted;
               missing[localeID].populationCensus = census;
             }
             if (missing[localeID].censusRecords == null) missing[localeID].censusRecords = [];
@@ -301,12 +306,12 @@ function partitionPotentialLocales(
 ): PartitionedLocales {
   // Iterate through the languages, finding the locale with the largest population.
   // These are probably but not necessarily indigenous.
-  const localesSorted = localesOfTheSameLanguage.sort((a, b) => {
-    return (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0);
-  });
-  const largestLocale = localesSorted.reduce((max, locale) => {
-    return (locale.populationSpeaking ?? 0) > (max.populationSpeaking ?? 0) ? locale : max;
-  }, localesSorted[0]);
+  const localesSorted = localesOfTheSameLanguage.sort(sortByPopulation);
+  const largestLocale = localesSorted.reduce(
+    (max, locale) =>
+      (locale.populationAdjusted ?? 0) > (max.populationAdjusted ?? 0) ? locale : max,
+    localesSorted[0],
+  );
   // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
   if (largestLocale.localeSource === 'census') {
     // Some censuses include language families -- that's nice complementary data but its usually not a priority
@@ -362,9 +367,9 @@ function findExtantLocaleInTerritoryDescendingFromLanguage(
     ) ?? [];
   return (
     // Sort to pick the most populous locale
-    [directDescendant, ...recursiveDescendants].filter(Boolean).sort((a, b) => {
-      return (b?.populationSpeaking ?? 0) - (a?.populationSpeaking ?? 0);
-    })[0] ?? null
+    [directDescendant, ...recursiveDescendants]
+      .filter((a) => a != null)
+      .sort(sortByPopulation)[0] ?? null
   );
 }
 

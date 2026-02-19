@@ -27,7 +27,7 @@ const ObjectTypeSelector: React.FC = () => {
   const { objectType, updatePageParams } = usePageParams();
   const goToObjectType = useCallback(
     (objectType: ObjectType) => {
-      updatePageParams({ objectType, searchString: undefined, page: 1 });
+      updatePageParams({ objectType });
     },
     [updatePageParams],
   );

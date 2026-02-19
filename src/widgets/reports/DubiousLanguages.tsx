@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 
+import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
@@ -14,7 +15,6 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
-import ViewCard from '@shared/containers/ViewCard';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const DubiousLanguages: React.FC = () => {
@@ -74,7 +74,7 @@ const DubiousLanguages: React.FC = () => {
             // TODO if its a language + territory, check if the locale exists
             // TODO check if there is an IANA variant tag.
             return (
-              <ViewCard key={lang.ID}>
+              <CardInCardList key={lang.ID} object={lang}>
                 <div>
                   <label>Names:</label>
                   {lang.nameDisplay}
@@ -101,7 +101,7 @@ const DubiousLanguages: React.FC = () => {
                     )}
                   </ul>
                 </div>
-              </ViewCard>
+              </CardInCardList>
             );
           })}
         </ResponsiveGrid>

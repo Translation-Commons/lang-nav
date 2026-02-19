@@ -1,5 +1,5 @@
 import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
-import { ColorBy } from '@features/transforms/coloring/ColorTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
@@ -61,7 +61,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     next.get('objectType') as ObjectType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
-    next.get('colorBy') as ColorBy,
+    next.get('colorBy') as Field,
   );
 
   Array.from(next.entries()).forEach(([key, value]) => {
@@ -71,7 +71,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     if (key === 'objectType' && value !== ObjectType.Language) return;
     if (key === 'view') return;
     if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
-    if (key === 'colorBy' && value !== 'None') return;
+    if (key === 'colorBy' && value !== Field.None) return;
 
     // If the default is the empty array you can remove it
     if (value === '[]' && Array.isArray(defaultValue) && defaultValue.length === 0) {
@@ -95,7 +95,7 @@ function clearContextDependentParams(
     prev?.get('objectType') as ObjectType,
     prev?.get('view') as View,
     prev?.get('profile') as ProfileType,
-    prev?.get('colorBy') as ColorBy,
+    prev?.get('colorBy') as Field,
   );
 
   if (newParams.view !== undefined && newParams.view !== prevOrDefault.view) {
@@ -106,6 +106,29 @@ function clearContextDependentParams(
 
   if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
     if (newParams.page == null) next.delete('page');
+    const oldSearchString = prev?.get('searchString');
+    if (oldSearchString) {
+      next.delete('searchString');
+      if (prevOrDefault.objectType === ObjectType.Language) {
+        next.set('languageFilter', oldSearchString);
+      } else if (prevOrDefault.objectType === ObjectType.Territory) {
+        next.set('territoryFilter', oldSearchString);
+      } else if (prevOrDefault.objectType === ObjectType.WritingSystem) {
+        next.set('writingSystemFilter', oldSearchString);
+      }
+    }
+  }
+
+  // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker).
+  // Do not overwrite if user explicitly set secondarySortBy in this update (e.g. to None).
+  const prevSortBy = prev?.get(PageParamKey.sortBy);
+  if (
+    newParams.sortBy !== undefined &&
+    prevSortBy &&
+    newParams.sortBy !== prevSortBy &&
+    newParams.secondarySortBy === undefined
+  ) {
+    next.set(PageParamKey.secondarySortBy, prevSortBy);
   }
 
   return next;

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import TableValueType from './TableValueType';
 
@@ -36,11 +36,10 @@ interface TableColumn<T> {
   readonly valueType?: TableValueType;
 
   /**
-   * The sorting page parameter relevant to this column, adding this will
-   * add a sorting icon next to the column header that can be clicked to enable
-   * sorting by the data in this column as defined by `sort.tsx`.
+   * Most columns should have a corresponding common object Field that can use
+   * a common function to access the relevant data for sorting and other purposes.
    */
-  readonly sortParam?: SortBy;
+  readonly field?: Field;
 
   /** Whether the column is visible by default in the UI */
   readonly isInitiallyVisible?: boolean;

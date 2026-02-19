@@ -7,8 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import {
   getLanguageRootLanguageFamily,
@@ -23,6 +22,9 @@ import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 import LocaleRelatedLocalesColumns from './columns/LocaleRelatedLocalesColumns';
@@ -40,7 +42,7 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Name',
           render: (object) => <LocaleNameWithFilters locale={object} />,
-          sortParam: SortBy.Name,
+          field: Field.Name,
           columnGroup: 'Names',
         },
         EndonymColumn,
@@ -49,8 +51,7 @@ const LocaleTable: React.FC = () => {
           key: 'Literacy',
           render: (object) => object.literacyPercent,
           isInitiallyVisible: false,
-          valueType: TableValueType.Decimal,
-          sortParam: SortBy.Literacy,
+          field: Field.Literacy,
           columnGroup: 'Writing',
         },
         {
@@ -85,7 +86,7 @@ const LocaleTable: React.FC = () => {
             />
           ),
           isInitiallyVisible: false,
-          sortParam: SortBy.WritingSystem,
+          field: Field.WritingSystem,
           columnGroup: 'Writing',
         },
         {
@@ -93,14 +94,28 @@ const LocaleTable: React.FC = () => {
           render: (object) => <HoverableObjectName object={object.language} />,
           isInitiallyVisible: false,
           columnGroup: 'Linked Data',
-          sortParam: SortBy.Language,
+          field: Field.Language,
+        },
+        {
+          key: 'Language Scope',
+          render: (object) => getLanguageScopeLabel(object.language?.scope),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          field: Field.LanguageScope,
         },
         {
           key: 'Territory',
           render: (object) => <HoverableObjectName object={object.territory} />,
           isInitiallyVisible: false,
-          sortParam: SortBy.Territory,
+          field: Field.Territory,
           columnGroup: 'Linked Data',
+        },
+        {
+          key: 'Territory Scope',
+          render: (object) => getTerritoryScopeLabel(object.territory?.scope),
+          isInitiallyVisible: false,
+          columnGroup: 'Linked Data',
+          field: Field.TerritoryScope,
         },
         {
           key: 'Countries',
@@ -108,8 +123,7 @@ const LocaleTable: React.FC = () => {
             <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfCountries,
+          field: Field.CountOfCountries,
           columnGroup: 'Linked Data',
         },
         {

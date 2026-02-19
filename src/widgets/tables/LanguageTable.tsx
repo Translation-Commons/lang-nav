@@ -12,7 +12,8 @@ import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import {
   getLanguageRootLanguageFamily,
@@ -26,9 +27,12 @@ import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralC
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import { getObjectLiteracy } from '@entities/lib/getObjectMiscFields';
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
+import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { LanguageCodeColumns } from './columns/LanguageCodeColumns';
 import { LanguageDigitalSupportColumns } from './columns/LanguageDigitalSupportColumns';
@@ -45,8 +49,9 @@ const LanguageTable: React.FC = () => {
       ...LanguageNameColumns,
       {
         key: 'Scope',
-        render: (lang) => lang.scope,
+        render: (lang) => getLanguageScopeLabel(lang.scope),
         isInitiallyVisible: false,
+        field: Field.LanguageScope,
         columnGroup: 'Context',
       },
       {
@@ -74,7 +79,7 @@ const LanguageTable: React.FC = () => {
         isInitiallyVisible: false,
         valueType: TableValueType.Enum,
         columnGroup: 'Context',
-        sortParam: SortBy.Modality,
+        field: Field.Modality,
       },
       ...LanguagePopulationColumns,
       ...LanguageVitalityColumns,
@@ -102,14 +107,22 @@ const LanguageTable: React.FC = () => {
         key: 'Dialects',
         render: (lang) => (
           <HoverableEnumeration
-            items={lang.childLanguages
-              .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
-              .map((lang) => lang.nameDisplay)}
+            items={lang.childLanguages.sort(sortByPopulation).map((lang) => lang.nameDisplay)}
           />
         ),
         valueType: TableValueType.Count,
         isInitiallyVisible: false,
-        sortParam: SortBy.CountOfLanguages,
+        field: Field.CountOfLanguages,
+        columnGroup: 'Relations',
+      },
+      {
+        key: 'Depth',
+        description: 'How deep in a language family tree this language is.',
+        render: (lang) => <ObjectDepthDisplay object={lang} />,
+        exportValue: (lang) => lang.depth ?? '', // Export as blank instead of "—"
+        isInitiallyVisible: false,
+        valueType: TableValueType.Count,
+        field: Field.Depth,
         columnGroup: 'Relations',
       },
       {
@@ -121,7 +134,7 @@ const LanguageTable: React.FC = () => {
             ))}
           </CommaSeparated>
         ),
-        sortParam: SortBy.Territory,
+        field: Field.Territory,
         columnGroup: 'Location',
       },
       {
@@ -133,14 +146,14 @@ const LanguageTable: React.FC = () => {
         ),
         isInitiallyVisible: false,
         valueType: TableValueType.Count,
-        sortParam: SortBy.CountOfCountries,
+        field: Field.CountOfCountries,
         columnGroup: 'Location',
       },
       {
         key: 'Latitude',
         render: (lang) => lang.latitude?.toFixed(2),
         isInitiallyVisible: false,
-        sortParam: SortBy.Latitude,
+        field: Field.Latitude,
         valueType: TableValueType.Decimal,
         columnGroup: 'Location',
       },
@@ -148,7 +161,7 @@ const LanguageTable: React.FC = () => {
         key: 'Longitude',
         render: (lang) => lang.longitude?.toFixed(2),
         isInitiallyVisible: false,
-        sortParam: SortBy.Longitude,
+        field: Field.Longitude,
         valueType: TableValueType.Decimal,
         columnGroup: 'Location',
       },
@@ -163,14 +176,14 @@ const LanguageTable: React.FC = () => {
         ),
         render: (lang) => <LanguageWritingSystems lang={lang} />,
         isInitiallyVisible: false,
-        sortParam: SortBy.WritingSystem,
+        field: Field.WritingSystem,
         columnGroup: 'Writing',
       },
       {
         key: 'Literacy',
         render: (lang) => getObjectLiteracy(lang),
         isInitiallyVisible: false,
-        sortParam: SortBy.Literacy,
+        field: Field.Literacy,
         valueType: TableValueType.Decimal,
         columnGroup: 'Writing',
       },

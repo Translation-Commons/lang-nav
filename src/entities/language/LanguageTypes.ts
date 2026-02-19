@@ -51,11 +51,12 @@ export type Glottocode = string; // eg. stan1293, stan1288, clas1255, mand1415, 
 export type LanguageCode = ISO6391LanguageCode | ISO6392LanguageCode | Glottocode | string;
 
 export enum LanguageScope {
-  Family = 'Family',
-  Macrolanguage = 'Macrolanguage',
-  Language = 'Language',
-  Dialect = 'Dialect',
-  SpecialCode = 'Special',
+  Family = 5, // larger value = broader scope
+  Macrolanguage = 4,
+  Language = 3,
+  Dialect = 2,
+  SpecialCode = 1,
+  // 0 is intentionally not included to avoid problems using truthy comparisons
 }
 
 // This field enumerates fields about the language that could have additional context.
@@ -119,6 +120,7 @@ export interface LanguageData extends ObjectBase {
 
   latitude?: number;
   longitude?: number;
+  depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
   // References to other objects, filled in after loading the TSV
   locales: LocaleData[];

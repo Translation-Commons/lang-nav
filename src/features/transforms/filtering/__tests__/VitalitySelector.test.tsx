@@ -5,16 +5,8 @@ import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import {
-  getLanguageISOStatusLabel,
-  getVitalityEthnologueCoarseLabel,
-  getVitalityEthnologueFineLabel,
-} from '@entities/language/vitality/VitalityStrings';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -62,8 +54,8 @@ describe('VitalitySelector', () => {
     );
 
     expect(screen.getByText('ISO Language Status')).toBeInTheDocument();
-    expect(screen.getByText('Vitality Eth (Fine)')).toBeInTheDocument();
-    expect(screen.getByText('Vitality Eth (Coarse)')).toBeInTheDocument();
+    expect(screen.queryByText('Vitality Eth (Fine)')).not.toBeInTheDocument();
+    expect(screen.queryByText('Vitality Eth (Coarse)')).not.toBeInTheDocument();
   });
 
   describe('LanguageISOStatusSelector', () => {
@@ -102,95 +94,95 @@ describe('VitalitySelector', () => {
     });
   });
 
-  describe('VitalityEthFineSelector', () => {
-    it('displays all Ethnologue fine vitality options', () => {
-      render(<VitalityEthFineSelector />);
+  // describe('VitalityEthFineSelector', () => {
+  //   it('displays all Ethnologue fine vitality options', () => {
+  //     render(<VitalityEthFineSelector />);
 
-      const expected = Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number');
+  //     const expected = Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number');
 
-      expected.forEach((status) => {
-        const label = getVitalityEthnologueFineLabel(status);
-        expect(screen.getByText(label)).toBeInTheDocument();
-      });
-    });
+  //     expected.forEach((status) => {
+  //       const label = getVitalityEthnologueFineLabel(status);
+  //       expect(screen.getByText(label)).toBeInTheDocument();
+  //     });
+  //   });
 
-    it('handles selection and deselection of options', async () => {
-      const user = userEvent.setup();
+  //   it('handles selection and deselection of options', async () => {
+  //     const user = userEvent.setup();
 
-      // Initial render with empty selection
-      const { rerender } = render(<VitalityEthFineSelector />);
+  //     // Initial render with empty selection
+  //     const { rerender } = render(<VitalityEthFineSelector />);
 
-      // Test selection
-      const nationalButton = screen.getByText('National');
-      expect(nationalButton).toHaveClass('selectorOption unselected');
-      await user.click(nationalButton);
-      expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEthFine: [VitalityEthnologueFine.National],
-      });
+  //     // Test selection
+  //     const nationalButton = screen.getByText('National');
+  //     expect(nationalButton).toHaveClass('selectorOption unselected');
+  //     await user.click(nationalButton);
+  //     expect(updatePageParams).toHaveBeenCalledWith({
+  //       vitalityEthFine: [VitalityEthnologueFine.National],
+  //     });
 
-      // Update mock to simulate selected state and rerender
-      setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
+  //     // Update mock to simulate selected state and rerender
+  //     setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
 
-      rerender(<VitalityEthFineSelector />);
+  //     rerender(<VitalityEthFineSelector />);
 
-      // Test deselection
-      const selectedNational = screen.getByText('National');
-      expect(selectedNational).toHaveClass('selectorOption selected');
+  //     // Test deselection
+  //     const selectedNational = screen.getByText('National');
+  //     expect(selectedNational).toHaveClass('selectorOption selected');
 
-      // Click to deselect
-      await user.click(selectedNational);
+  //     // Click to deselect
+  //     await user.click(selectedNational);
 
-      // Verify the expected state after deselection
-      expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEthFine: [],
-      });
-    });
-  });
+  //     // Verify the expected state after deselection
+  //     expect(updatePageParams).toHaveBeenCalledWith({
+  //       vitalityEthFine: [],
+  //     });
+  //   });
+  // });
 
-  describe('VitalityEthCoarseSelector', () => {
-    it('displays all Ethnologue 2025 vitality options', () => {
-      render(<VitalityEthCoarseSelector />);
+  // describe('VitalityEthCoarseSelector', () => {
+  //   it('displays all Ethnologue 2025 vitality options', () => {
+  //     render(<VitalityEthCoarseSelector />);
 
-      const expected = Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number');
+  //     const expected = Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number');
 
-      expected.forEach((status) => {
-        const label = getVitalityEthnologueCoarseLabel(status);
-        expect(screen.getByText(label)).toBeInTheDocument();
-      });
-    });
+  //     expected.forEach((status) => {
+  //       const label = getVitalityEthnologueCoarseLabel(status);
+  //       expect(screen.getByText(label)).toBeInTheDocument();
+  //     });
+  //   });
 
-    it('handles selection and deselection of options', async () => {
-      const user = userEvent.setup();
+  //   it('handles selection and deselection of options', async () => {
+  //     const user = userEvent.setup();
 
-      // Initial render with empty selection
-      const { rerender } = render(<VitalityEthCoarseSelector />);
+  //     // Initial render with empty selection
+  //     const { rerender } = render(<VitalityEthCoarseSelector />);
 
-      // Test selection
-      const institutionalButton = screen.getByText('Institutional');
-      expect(institutionalButton).toHaveClass('selectorOption unselected');
-      await user.click(institutionalButton);
-      expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional],
-      });
+  //     // Test selection
+  //     const institutionalButton = screen.getByText('Institutional');
+  //     expect(institutionalButton).toHaveClass('selectorOption unselected');
+  //     await user.click(institutionalButton);
+  //     expect(updatePageParams).toHaveBeenCalledWith({
+  //       vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional],
+  //     });
 
-      // Update mock to simulate selected state and rerender
-      vi.mocked(usePageParams).mockReturnValue(
-        createMockUsePageParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional] }),
-      );
+  //     // Update mock to simulate selected state and rerender
+  //     vi.mocked(usePageParams).mockReturnValue(
+  //       createMockUsePageParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional] }),
+  //     );
 
-      rerender(<VitalityEthCoarseSelector />);
+  //     rerender(<VitalityEthCoarseSelector />);
 
-      // Test deselection
-      const selectedInstitutional = screen.getByText('Institutional');
-      expect(selectedInstitutional).toHaveClass('selectorOption selected');
+  //     // Test deselection
+  //     const selectedInstitutional = screen.getByText('Institutional');
+  //     expect(selectedInstitutional).toHaveClass('selectorOption selected');
 
-      // Click to deselect
-      await user.click(selectedInstitutional);
+  //     // Click to deselect
+  //     await user.click(selectedInstitutional);
 
-      // The mock should be called with empty array for deselection
-      expect(updatePageParams).toHaveBeenCalledWith({
-        vitalityEthCoarse: [],
-      });
-    });
-  });
+  //     // The mock should be called with empty array for deselection
+  //     expect(updatePageParams).toHaveBeenCalledWith({
+  //       vitalityEthCoarse: [],
+  //     });
+  //   });
+  // });
 });

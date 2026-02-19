@@ -1,65 +1,117 @@
 import usePageParams from '@features/params/usePageParams';
 
+import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getSortField } from '../fields/getField';
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-import { SortBehavior, SortBy, SortDirection } from './SortTypes';
+import Field from '../fields/Field';
+import getField from '../fields/getField';
+
+import { SortBehavior, SortDirection } from './SortTypes';
 
 export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
 
 export function getSortFunction(): SortByFunctionType {
-  const { sortBy, sortBehavior } = usePageParams();
+  const { sortBy, secondarySortBy, sortBehavior } = usePageParams();
 
-  return getSortFunctionParameterized(sortBy, sortBehavior);
+  return getSortFunctionParameterized(sortBy, sortBehavior, secondarySortBy);
 }
 
 export function getSortFunctionParameterized(
-  sortBy: SortBy,
+  sortBy: Field,
   sortDirection: SortBehavior = SortBehavior.Normal,
+  secondarySortBy?: Field,
 ): SortByFunctionType {
   const direction = getNormalSortDirection(sortBy) * sortDirection;
+  const secondaryDirection =
+    secondarySortBy != null && secondarySortBy !== Field.None
+      ? getNormalSortDirection(secondarySortBy) * sortDirection
+      : null;
+
+  const effectiveSecondary: Field | null =
+    secondarySortBy != null && secondarySortBy !== Field.None && secondarySortBy !== sortBy
+      ? secondarySortBy
+      : null;
+
   return (a: ObjectData, b: ObjectData) => {
-    const aField = getSortField(a, sortBy);
-    const bField = getSortField(b, sortBy);
-    if (aField == null) return bField == null ? 0 : 1;
+    const compareSecondary = (): number => {
+      if (secondaryDirection == null || effectiveSecondary == null) return 0;
+      const aSecondary = getField(a, effectiveSecondary);
+      const bSecondary = getField(b, effectiveSecondary);
+      if (aSecondary == null) return bSecondary == null ? 0 : 1;
+      if (bSecondary == null) return -1;
+      if (aSecondary > bSecondary) return secondaryDirection;
+      if (bSecondary > aSecondary) return -secondaryDirection;
+      return 0;
+    };
+
+    const aField = getField(a, sortBy);
+    const bField = getField(b, sortBy);
+    // If both primary fields are missing, fall back to the secondary sort if available
+    if (aField == null && bField == null) {
+      return compareSecondary();
+    }
+
+    // If only one primary field is missing, keep the previous behavior: nulls last
+    if (aField == null) return 1;
     if (bField == null) return -1; // puts last regardless of ascending/descending
+
     if (aField > bField) return direction;
     if (bField > aField) return -direction;
-    return 0;
+    // Tie on primary: break by secondary sort if configured and different from primary
+    return compareSecondary();
   };
 }
 
-export function getNormalSortDirection(sortBy: SortBy): SortDirection {
+export function getNormalSortDirection(sortBy: Field): SortDirection {
+  if (sortBy == null) return SortDirection.Ascending; // default to ascending if no sortBy
+
   switch (sortBy) {
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
-    case SortBy.Longitude:
-    case SortBy.Latitude:
-    case SortBy.Modality:
+    case Field.None:
+    case Field.Name:
+    case Field.Endonym:
+    case Field.Code:
+    case Field.Language:
+    case Field.WritingSystem:
+    case Field.Territory:
+    case Field.Longitude:
+    case Field.Latitude:
+    case Field.Modality:
+    case Field.Depth:
       return SortDirection.Ascending; // A to Z
-    case SortBy.Date:
-    case SortBy.Population:
-    case SortBy.PopulationDirectlySourced:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.Literacy:
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfWritingSystems:
-    case SortBy.CountOfCountries:
-    case SortBy.CountOfChildTerritories:
-    case SortBy.CountOfCensuses:
-    case SortBy.VitalityMetascore:
-    case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologueFine:
-    case SortBy.VitalityEthnologueCoarse:
-    case SortBy.Area:
+    case Field.Date:
+    case Field.Population:
+    case Field.PopulationDirectlySourced:
+    case Field.PopulationOfDescendants:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
+    case Field.PercentOfTerritoryPopulation:
+    case Field.PercentOfOverallLanguageSpeakers:
+    case Field.Literacy:
+    case Field.CountOfLanguages:
+    case Field.CountOfWritingSystems:
+    case Field.CountOfCountries:
+    case Field.CountOfChildTerritories:
+    case Field.CountOfCensuses:
+    case Field.VitalityMetascore:
+    case Field.ISOStatus:
+    case Field.VitalityEthnologueFine:
+    case Field.VitalityEthnologueCoarse:
+    case Field.Area:
+    case Field.LanguageScope:
+    case Field.TerritoryScope:
       return SortDirection.Descending; // High to Low
+    default:
+      enforceExhaustiveSwitch(sortBy);
   }
+}
+
+export function sortByPopulation(a: ObjectData, b: ObjectData): number {
+  const aPopulation = getObjectPopulation(a);
+  const bPopulation = getObjectPopulation(b);
+  if (aPopulation == null) return bPopulation == null ? 0 : 1;
+  if (bPopulation == null) return -1;
+  if (aPopulation > bPopulation) return -1;
+  if (bPopulation > aPopulation) return 1;
+  return 0;
 }

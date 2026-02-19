@@ -91,8 +91,10 @@ function createRegionalLocalesForTerritory(
 
   // Save it to the territory
   territory.locales = Object.values(territoryLocales ?? {})
-    .filter((loc) => (loc.populationSpeaking ?? 0) > 10) // Avoid creating too many locale objects
-    .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0));
+    // Avoid creating too many locale objects
+    .filter((loc) => (loc.populationSpeaking ?? 0) > 10)
+    // Don't use sortByPopulation because that uses the adjusted pop
+    .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0));
 
   // Connect locale edges
   territory.locales.forEach((loc) => {

@@ -2,15 +2,14 @@ import { useCallback, useMemo } from 'react';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getSortField } from '../fields/getField';
+import Field from '../fields/Field';
+import getField from '../fields/getField';
 import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
 
-import { ScaleBy } from './ScaleTypes';
-
-type Props = { objects: ObjectData[]; scaleBy?: ScaleBy };
+type Props = { objects: ObjectData[]; scaleBy?: Field };
 
 export type ScalingFunctions = {
-  scaleBy: ScaleBy | undefined;
+  scaleBy: Field | undefined;
   getScale: (object: ObjectData) => number; // returns radius multiplier (to be multiplied by scalar)
   maxValue: number;
   minValue: number;
@@ -48,9 +47,9 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
 
   const getScale = useCallback(
     (object: ObjectData) => {
-      if (!scaleBy || scaleBy === 'None') return 1; // default radius multiplier
+      if (!scaleBy || scaleBy === Field.None) return 1; // default radius multiplier
 
-      const val = getSortField(object, scaleBy);
+      const val = getField(object, scaleBy);
       if (val == null) return 0; // not renderable
 
       const normalized = getNormalizedValue(val as number);

@@ -6,7 +6,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
@@ -55,8 +55,7 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
       </>
     ),
     render: (lang) => <LanguagePopulationEstimate lang={lang} />,
-    valueType: TableValueType.Population,
-    sortParam: SortBy.Population,
+    field: Field.Population,
     isInitiallyVisible: true,
   },
   {
@@ -72,8 +71,7 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     description:
       'This is a rough estimate from variable internet databases (citations not available).',
     render: (lang) => lang.populationRough,
-    valueType: TableValueType.Population,
-    sortParam: SortBy.PopulationDirectlySourced,
+    field: Field.PopulationDirectlySourced,
   },
   {
     key: 'Population (from Dialects)',
@@ -81,8 +79,7 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
     render: (lang) => <LanguagePopulationFromDescendants lang={lang} />,
-    valueType: TableValueType.Population,
-    sortParam: SortBy.PopulationOfDescendants,
+    field: Field.PopulationOfDescendants,
   },
   {
     key: 'Population (from Locales)',

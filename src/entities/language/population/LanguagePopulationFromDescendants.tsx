@@ -6,9 +6,12 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import CellPopulation from '@shared/containers/CellPopulation';
 import CountOfPeople from '@shared/ui/CountOfPeople';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -21,9 +24,9 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
           hoverContent={
             <>
               The sum of people that use this languoid&apos;s descendants is higher than the
-              population estimate for this {lang.scope?.toLowerCase() ?? 'language'} -- probably
-              because of multilingualism. For example, a simple sum for Arabic would double count
-              people that understand both Standard Arabic and Vernacular Arabic.
+              population estimate for this {getLanguageScopeLabel(lang.scope).toLowerCase()} --
+              probably because of multilingualism. For example, a simple sum for Arabic would double
+              count people that understand both Standard Arabic and Vernacular Arabic.
             </>
           }
         >
@@ -61,7 +64,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: Langua
       <table>
         <tbody>
           {lang.childLanguages
-            .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+            .sort(sortByPopulation)
             .slice(0, 10) // limit to first 10
             .map((descendant) => (
               <tr key={descendant.ID}>

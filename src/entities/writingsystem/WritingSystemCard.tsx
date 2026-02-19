@@ -1,17 +1,24 @@
+import {
+  BlocksIcon,
+  CodeIcon,
+  LanguagesIcon,
+  PencilLineIcon,
+  PilcrowLeftIcon,
+  UsersIcon,
+} from 'lucide-react';
 import React from 'react';
 
-import PopulationWarning from '@widgets/PopulationWarning';
-
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
+import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 interface Props {
   writingSystem: WritingSystemData;
@@ -29,8 +36,9 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     scope,
     unicodeVersion,
   } = writingSystem;
-  const filterByScope = getScopeFilter();
   const { updatePageParams } = usePageParams();
+  const population =
+    populationUpperBound != null && populationUpperBound >= 100 ? populationUpperBound : null;
 
   return (
     <div>
@@ -38,56 +46,98 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         <a onClick={() => updatePageParams({ objectID: ID })}>
           <ObjectTitle object={writingSystem} />
         </a>
-        <ObjectSubtitle object={writingSystem} />
       </h3>
-      {rightToLeft === true && <div>Right to Left</div>}
-      {unicodeVersion === null && <div>Not supported by Unicode</div>}
-      {sample != null && (
-        <div>
-          <h4>Sample</h4>
-          {sample}
-        </div>
-      )}
-      {languages && Object.values(languages).length > 0 && (
-        <div>
-          <label>Languages:</label>
-          <CommaSeparated>
-            {Object.values(languages)
-              .filter(filterByScope)
-              .map((lang) => (
-                <HoverableObjectName key={lang.ID} object={lang} />
-              ))}
-          </CommaSeparated>
-        </div>
-      )}
-      {(populationUpperBound ?? 0) > 100 && ( // Values less than 100 are suspcious and probably spurious
-        <div>
-          <label>
-            Population (Upper bound
-            <PopulationWarning />
-            {'):'}
-          </label>
-          <CountOfPeople count={populationUpperBound} />
-        </div>
-      )}
-      {scope === WritingSystemScope.Variation && parentWritingSystem && (
-        <div>
-          <label>Variant of:</label>
-          <HoverableObjectName object={parentWritingSystem} />
-        </div>
-      )}
-      {scope == WritingSystemScope.Group &&
-        containsWritingSystems &&
-        containsWritingSystems.length > 0 && (
+
+      <CardField
+        title="Sample"
+        icon={PencilLineIcon}
+        description="A single character from this writing system."
+      >
+        {sample?.trim() ? <span>{sample}</span> : <Deemphasized>Not available</Deemphasized>}
+      </CardField>
+
+      <CardField
+        title="Scope"
+        icon={BlocksIcon}
+        description="How this writing system is categorized (e.g. a standalone system, a group of systems, or a variation of another system)."
+      >
+        {scope != null ? (
           <div>
-            <label>Contains:</label>
-            <CommaSeparated>
-              {containsWritingSystems.map((w) => (
-                <HoverableObjectName key={w.ID} object={w} />
-              ))}
-            </CommaSeparated>
+            {scope}
+
+            {scope === WritingSystemScope.Variation && (
+              <div>
+                <Deemphasized>Variant of: </Deemphasized>
+                {parentWritingSystem ? (
+                  <HoverableObjectName object={parentWritingSystem} />
+                ) : (
+                  <Deemphasized>Unknown</Deemphasized>
+                )}
+              </div>
+            )}
+
+            {scope === WritingSystemScope.Group && containsWritingSystems?.length && (
+              <>
+                {' '}
+                containing{' '}
+                <CommaSeparated>
+                  {containsWritingSystems.map((w) => (
+                    <HoverableObjectName key={w.ID} object={w} />
+                  ))}
+                </CommaSeparated>
+              </>
+            )}
           </div>
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
         )}
+      </CardField>
+
+      <CardField
+        title="Population"
+        icon={UsersIcon}
+        description="This is a very rough estimate based on adding the populations that use the languages for this writing system, it's likely 50% to 400% off of the actual population."
+      >
+        <CountOfPeople count={population} />
+      </CardField>
+
+      <CardField
+        title="Languages"
+        icon={LanguagesIcon}
+        description="Languages that use this writing system."
+      >
+        {languages && Object.values(languages).length > 0 ? (
+          <CommaSeparated>
+            {Object.values(languages).map((lang) => (
+              <HoverableObjectName key={lang.ID} object={lang} />
+            ))}
+          </CommaSeparated>
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+      </CardField>
+
+      <CardField
+        title="Unicode support"
+        icon={CodeIcon}
+        description="Whether this writing system is encoded in Unicode, which affects support across fonts, operating systems, and software."
+      >
+        {unicodeVersion === null ? (
+          <span>Not supported by Unicode</span>
+        ) : unicodeVersion != null ? (
+          <>Unicode {unicodeVersion}</>
+        ) : (
+          <Deemphasized>Unknown</Deemphasized>
+        )}
+        {rightToLeft === true && (
+          <>
+            {' '}
+            <Hoverable hoverContent="This writing system is written right to left; interfaces must handle this or risk disruptive display bugs for text in this writing system.">
+              <PilcrowLeftIcon color="var(--color-text-yellow)" size="1em" />
+            </Hoverable>
+          </>
+        )}
+      </CardField>
     </div>
   );
 };

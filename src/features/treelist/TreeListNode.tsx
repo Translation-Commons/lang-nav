@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -83,7 +84,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
             <InfoIcon size="1em" />
           </HoverableObject>
         )}
-        {showData !== 'None' && <TreeListNodeData object={object} field={showData} />}
+        {showData !== Field.None && <TreeListNodeData object={object} field={showData} />}
       </>
       {expanded && children.length > 0 && (
         <ul className="TreeListBranch">

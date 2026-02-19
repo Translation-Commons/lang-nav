@@ -1,3 +1,5 @@
+import { sortByPopulation } from '@features/transforms/sorting/sort';
+
 import {
   isTerritoryGroup,
   LocaleData,
@@ -27,9 +29,7 @@ export function computeRegionalLocalesPopulation(territory: TerritoryData | unde
     const relatedLocales = locale.relatedLocales;
     if (!relatedLocales) return;
     const uniqueContainedLocales = uniqueBy(
-      (locale.relatedLocales?.childTerritories ?? []).sort(
-        (a, b) => (b.populationAdjusted || 0) - (a.populationAdjusted || 0),
-      ),
+      (locale.relatedLocales?.childTerritories ?? []).sort(sortByPopulation),
       (loc) => loc.territoryCode || '',
     ).filter((loc) => loc.territoryCode !== '');
 
@@ -67,9 +67,7 @@ function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
 
   // Get the child locales, unique by language code to avoid double counting (eg. zh-Hans-SG and zh-Hant-SG)
   const uniqueChildLocales = uniqueBy(
-    (childLanguages || []).sort(
-      (a, b) => (b.populationAdjusted || 0) - (a.populationAdjusted || 0),
-    ),
+    (childLanguages || []).sort(sortByPopulation),
     (loc) => loc.languageCode,
   );
   relatedLocales.sumOfPopulationFromChildLanguages =

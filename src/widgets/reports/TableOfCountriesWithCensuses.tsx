@@ -5,8 +5,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/types/DataTypes';
@@ -28,7 +27,7 @@ const TableOfCountriesWithCensuses: React.FC = () => {
           {
             key: 'Censuses',
             render: (territory) => territory.censuses?.length,
-            valueType: TableValueType.Count,
+            field: Field.CountOfCensuses,
           },
           ...Object.values(CensusCollectorType).map((collectorType) => ({
             key: collectorType,
@@ -45,18 +44,17 @@ const TableOfCountriesWithCensuses: React.FC = () => {
                 </div>
               );
             },
+            columnGroup: 'Collector Type',
           })),
           {
             key: 'Population',
             render: (territory) => territory.population,
-            valueType: TableValueType.Population,
-            sortParam: SortBy.Population,
+            field: Field.Population,
           },
           {
             key: 'Languages',
             render: (territory) => territory.locales?.length,
-            valueType: TableValueType.Count,
-            sortParam: SortBy.CountOfLanguages,
+            field: Field.CountOfLanguages,
           },
         ]}
       />

@@ -7,17 +7,16 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
-import { getSortField } from '../fields/getField';
+import Field from '../fields/Field';
+import getField from '../fields/getField';
 import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
-import { SortBy } from '../sorting/SortTypes';
 
-import { ColorBy } from './ColorTypes';
 import { getColorGradientFunction } from './getColorGradientFunction';
 
-type Props = { objects: ObjectData[]; colorBy?: ColorBy };
+type Props = { objects: ObjectData[]; colorBy?: Field };
 
 export type ColoringFunctions = {
-  colorBy: ColorBy;
+  colorBy: Field;
   getColor: (object: ObjectData) => string | undefined;
   getNormalizedValue: (value: number) => number;
   getDenormalizedValue: (normalized: number) => number;
@@ -25,9 +24,9 @@ export type ColoringFunctions = {
   minValue: number;
 };
 
-const useColors = ({ objects, colorBy }: Props): ColoringFunctions => {
+const useColors = ({ objects, colorBy: colorByInput }: Props): ColoringFunctions => {
   const { colorBy: colorByParam, colorGradient } = usePageParams();
-  colorBy = colorBy ?? colorByParam;
+  const colorBy = colorByInput ?? colorByParam ?? Field.None;
 
   const minValue = getMinimumValue(colorBy);
   const maxValue = useMemo(() => getMaximumValue(objects, colorBy), [objects, colorBy]);
@@ -74,16 +73,14 @@ const useColors = ({ objects, colorBy }: Props): ColoringFunctions => {
 
   const getColor = useCallback(
     (object: ObjectData): string | undefined => {
-      if (colorBy === 'None') return undefined;
-
-      const value = getSortField(object, colorBy);
+      const value = getField(object, colorBy);
       if (value == null) return undefined; // Will be off the color scale, usually gray
 
       const num = getNormalizedValue(value);
       if (num == null) return undefined; // have customers handle undefined, eg. gray or transparent
       return applyColorGradient(num);
     },
-    [getNormalizedValue, applyColorGradient],
+    [getNormalizedValue, applyColorGradient, colorBy],
   );
 
   return {
@@ -98,19 +95,19 @@ const useColors = ({ objects, colorBy }: Props): ColoringFunctions => {
 
 export default useColors;
 
-function shouldUseLogarithmicScale(colorBy: ColorBy): boolean {
+function shouldUseLogarithmicScale(colorBy: Field): boolean {
   switch (colorBy) {
-    case SortBy.Population:
-    case SortBy.PopulationDirectlySourced:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfWritingSystems:
-    case SortBy.CountOfCountries:
-    case SortBy.CountOfChildTerritories:
-    case SortBy.CountOfCensuses:
-    case SortBy.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
-    case SortBy.Area:
+    case Field.Population:
+    case Field.PopulationDirectlySourced:
+    case Field.PopulationOfDescendants:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
+    case Field.CountOfLanguages:
+    case Field.CountOfWritingSystems:
+    case Field.CountOfCountries:
+    case Field.CountOfChildTerritories:
+    case Field.CountOfCensuses:
+    case Field.ISOStatus: // Because it's values are actually 0, 1, 3, 9. Note that there is also a -1 value for "special codes" -- that's just left out
+    case Field.Area:
       return true;
     default:
       return false;

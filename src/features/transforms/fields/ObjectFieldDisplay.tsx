@@ -1,69 +1,94 @@
 import React from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
-import { getSortField } from '@features/transforms/fields/getField';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageModalityIcon } from '@entities/language/LanguageModalityDisplay';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
-import { ColorBy } from '../coloring/ColorTypes';
-import { SortBy } from '../sorting/SortTypes';
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import Field from './Field';
+import getField from './getField';
 
 type Props = {
   object: ObjectData;
-  field: ColorBy;
+  field: Field;
 };
 
 const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
-  const fieldValue = getSortField(object, field);
+  const fieldValue = getField(object, field);
   switch (field) {
-    case SortBy.Population:
-    case SortBy.PopulationDirectlySourced:
-    case SortBy.PopulationOfDescendants:
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
+    case Field.Population:
+    case Field.PopulationDirectlySourced:
+    case Field.PopulationOfDescendants:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
       if (typeof fieldValue === 'number') return <CountOfPeople count={fieldValue as number} />;
       return <>{fieldValue}</>;
-    case SortBy.Literacy:
-    case SortBy.PercentOfOverallLanguageSpeakers:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.Longitude:
-    case SortBy.Latitude:
+
+    case Field.Literacy:
+    case Field.PercentOfOverallLanguageSpeakers:
+    case Field.PercentOfTerritoryPopulation:
+    case Field.Longitude:
+    case Field.Latitude:
       if (typeof fieldValue === 'number') return <DecimalNumber num={fieldValue} />;
       return <>{fieldValue}</>;
 
-    case SortBy.CountOfLanguages:
-    case SortBy.CountOfWritingSystems:
-    case SortBy.CountOfCountries:
-    case SortBy.CountOfChildTerritories:
-    case SortBy.CountOfCensuses:
-    case SortBy.Area:
+    case Field.CountOfLanguages:
+    case Field.CountOfWritingSystems:
+    case Field.CountOfCountries:
+    case Field.CountOfChildTerritories:
+    case Field.CountOfCensuses:
+    case Field.Area:
       if (typeof fieldValue === 'number') return fieldValue.toLocaleString();
       return <>{fieldValue}</>;
 
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
+    case Field.Name:
+    case Field.Endonym:
+    case Field.Code:
+    case Field.Language:
+    case Field.WritingSystem:
+    case Field.Territory:
       return <>{fieldValue}</>;
 
-    case SortBy.VitalityMetascore:
-    case SortBy.ISOStatus:
-    case SortBy.VitalityEthnologueFine:
-    case SortBy.VitalityEthnologueCoarse:
+    case Field.VitalityMetascore:
+    case Field.ISOStatus:
+    case Field.VitalityEthnologueFine:
+    case Field.VitalityEthnologueCoarse:
       return <VitalityField obj={object} field={field} />;
 
-    case SortBy.Modality:
+    case Field.Modality:
       return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
+
+    case Field.None:
+      return undefined;
+
+    case Field.Date:
+      if (object.type === ObjectType.Census)
+        return fieldValue
+          ? new Date(fieldValue).toLocaleDateString(undefined, { year: 'numeric' })
+          : '';
+      return fieldValue ? new Date(fieldValue).toLocaleDateString() : '';
+
+    case Field.Depth:
+      return <ObjectDepthDisplay object={object} />;
+
+    case Field.LanguageScope:
+      return typeof fieldValue === 'number' && getLanguageScopeLabel(fieldValue);
+    case Field.TerritoryScope:
+      return typeof fieldValue === 'number' && getTerritoryScopeLabel(fieldValue);
+
+    default:
+      enforceExhaustiveSwitch(field);
   }
-  return <>{fieldValue}</>;
 };
 
 function VitalityField({
@@ -72,16 +97,16 @@ function VitalityField({
 }: {
   obj: ObjectData;
   field:
-    | SortBy.VitalityMetascore
-    | SortBy.VitalityEthnologueFine
-    | SortBy.VitalityEthnologueCoarse
-    | SortBy.ISOStatus;
+    | Field.VitalityMetascore
+    | Field.VitalityEthnologueFine
+    | Field.VitalityEthnologueCoarse
+    | Field.ISOStatus;
 }) {
   if (obj.type !== ObjectType.Language) return null;
   let src = VitalitySource.Metascore;
-  if (field === SortBy.VitalityEthnologueFine) src = VitalitySource.Eth2012;
-  else if (field === SortBy.VitalityEthnologueCoarse) src = VitalitySource.Eth2025;
-  else if (field === SortBy.ISOStatus) src = VitalitySource.ISO;
+  if (field === Field.VitalityEthnologueFine) src = VitalitySource.Eth2012;
+  else if (field === Field.VitalityEthnologueCoarse) src = VitalitySource.Eth2025;
+  else if (field === Field.ISOStatus) src = VitalitySource.ISO;
   return <LanguageVitalityMeter lang={obj} src={src} />;
 }
 

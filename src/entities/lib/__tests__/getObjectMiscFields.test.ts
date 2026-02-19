@@ -11,6 +11,7 @@ import {
   getCountOfCensuses,
   getCountOfLanguages,
   getCountOfWritingSystems,
+  getDepth,
   getObjectDate,
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
@@ -199,6 +200,37 @@ describe('getCountOfCensuses', () => {
       sjn_Teng_BE: 0,
       sjn_BE: 1, // in be0590
       sjn_ER: 0, // not in any censuses
+      tolkorth: undefined,
+    });
+  });
+});
+
+describe('getDepth', () => {
+  it('returns depth for objects', () => {
+    const results = Object.fromEntries(
+      Object.values(mockedObjects).map((obj) => [obj.ID, getDepth(obj)]),
+    );
+    expect(results).toEqual({
+      '001': 0, // top-level territory
+      '123': 1, // child of 001
+      AM: 1, // child of 001
+      BE: 2, // child of 123
+      ER: 2, // child of 123
+      HA: 2, // child of 123
+      Teng: 0, // top-level writing system
+      be0590: undefined,
+      dori0123: 1, // child of sjn
+      dori0123_001: 1, // locale with territory
+      dori0123_123: 1,
+      dori0123_ER: 1,
+      sjn: 0, // top-level language
+      sjn_001: 1, // locale with territory
+      sjn_123: 1,
+      sjn_Teng_001: 2, // locale with territory and explicit writing system
+      sjn_Teng_123: 2,
+      sjn_Teng_BE: 2,
+      sjn_ER: 1, // locale with territory
+      sjn_BE: 1,
       tolkorth: undefined,
     });
   });

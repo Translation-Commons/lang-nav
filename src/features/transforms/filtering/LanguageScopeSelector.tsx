@@ -5,14 +5,11 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
-import { toSentenceCase } from '@shared/lib/stringUtils';
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 const LanguageScopeSelector: React.FC = () => {
   const { languageScopes, updatePageParams } = usePageParams();
 
-  function getOptionLabel(scope: LanguageScope): string {
-    return toSentenceCase(getLanguageScopePlural(scope));
-  }
   const selectorDescription =
     'Filter what level of language-type objects are shown, such as families, macrolanguages, languages, dialects, and special codes.';
 
@@ -21,31 +18,16 @@ const LanguageScopeSelector: React.FC = () => {
       selectorLabel="Languoid Type"
       labelWhenEmpty="Any"
       selectorDescription={selectorDescription}
-      options={Object.values(LanguageScope)}
+      options={Object.values(LanguageScope).filter((s) => typeof s === 'number') as LanguageScope[]}
       onChange={(scope: LanguageScope) =>
         languageScopes.includes(scope)
           ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
           : updatePageParams({ languageScopes: [...languageScopes, scope] })
       }
       selected={languageScopes}
-      getOptionLabel={getOptionLabel}
+      getOptionLabel={getLanguageScopeLabel}
     />
   );
 };
-
-export function getLanguageScopePlural(scope: LanguageScope): string {
-  switch (scope) {
-    case LanguageScope.Family:
-      return 'language families';
-    case LanguageScope.Macrolanguage:
-      return 'macrolanguages';
-    case LanguageScope.Language:
-      return 'languages';
-    case LanguageScope.Dialect:
-      return 'dialects';
-    case LanguageScope.SpecialCode:
-      return 'special codes';
-  }
-}
 
 export default LanguageScopeSelector;

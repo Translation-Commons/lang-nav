@@ -5,8 +5,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
+import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
@@ -19,7 +19,7 @@ import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionByS
 const columns: TableColumn<LanguageData>[] = [
   {
     key: 'Code',
-    sortParam: SortBy.Code,
+    field: Field.Code,
     description: <CodeDisplayDescription />,
     render: (lang: LanguageData): ReactNode => (
       <div style={{ display: 'flex', alignItems: 'center' }}>

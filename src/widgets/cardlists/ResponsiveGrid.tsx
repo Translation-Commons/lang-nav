@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 
-const CARD_MIN_WIDTH = 300;
+const CARD_MIN_WIDTH = 240;
 
 const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
   const containerRef = useRef<HTMLDivElement>(null);

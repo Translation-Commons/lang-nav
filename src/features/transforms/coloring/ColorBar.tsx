@@ -4,6 +4,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { getModalityFromLabel, getModalityLabel } from '@entities/language/LanguageModalityDisplay';
+import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
   getVitalityEthnologueCoarseLabel,
@@ -14,11 +15,15 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
+import { TerritoryScope } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
-import { SortBy } from '../sorting/SortTypes';
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import Field from '../fields/Field';
 
 import BaseColorBar from './BaseColorBar';
 import { ColoringFunctions } from './useColors';
@@ -76,17 +81,16 @@ function getTicks(
 ): { position: number; label: string }[] {
   const { colorBy, minValue, maxValue, getDenormalizedValue, getNormalizedValue } =
     coloringFunctions;
-  if (colorBy === 'None') return [];
+  if (colorBy === Field.None) return [];
 
-  let suffix = '';
-
+  // Some early exit cases for categorical fields with predefined labels
   switch (colorBy) {
-    case SortBy.Name:
-    case SortBy.Endonym:
-    case SortBy.Code:
-    case SortBy.Language:
-    case SortBy.WritingSystem:
-    case SortBy.Territory:
+    case Field.Name:
+    case Field.Endonym:
+    case Field.Code:
+    case Field.Language:
+    case Field.WritingSystem:
+    case Field.Territory:
       return pickDistributedTicksFromRange(
         'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split(''),
         numberOfTicks,
@@ -94,7 +98,7 @@ function getTicks(
         position: getNormalizedValue(convertAlphaToNumber(letter)),
         label: letter,
       }));
-    case SortBy.Modality:
+    case Field.Modality:
       return pickDistributedTicksFromRange(
         [
           LanguageModality.Written,
@@ -109,7 +113,7 @@ function getTicks(
         position: getNormalizedValue(getModalityFromLabel(label) ?? 0),
         label,
       }));
-    case SortBy.ISOStatus:
+    case Field.ISOStatus:
       return pickDistributedTicksFromRange(
         [
           LanguageISOStatus.Extinct,
@@ -122,7 +126,7 @@ function getTicks(
         position: getNormalizedValue(value),
         label: getLanguageISOStatusLabel(value),
       }));
-    case SortBy.VitalityEthnologueFine:
+    case Field.VitalityEthnologueFine:
       return pickDistributedTicksFromRange(
         Object.values(VitalityEthnologueFine).filter((value) => typeof value === 'number'),
         numberOfTicks,
@@ -130,7 +134,7 @@ function getTicks(
         position: getNormalizedValue(value),
         label: getVitalityEthnologueFineLabel(value),
       }));
-    case SortBy.VitalityEthnologueCoarse:
+    case Field.VitalityEthnologueCoarse:
       return pickDistributedTicksFromRange(
         Object.values(VitalityEthnologueCoarse).filter((value) => typeof value === 'number'),
         numberOfTicks,
@@ -138,18 +142,24 @@ function getTicks(
         position: getNormalizedValue(value),
         label: getVitalityEthnologueCoarseLabel(value),
       }));
-    case SortBy.Literacy:
-    case SortBy.PercentOfTerritoryPopulation:
-    case SortBy.PercentOfOverallLanguageSpeakers:
-      suffix = '%';
-      break;
-    case SortBy.Latitude:
-    case SortBy.Longitude:
-      suffix = '°';
-      break;
-    case SortBy.Area:
-      suffix = ' km²';
-      break;
+    case Field.LanguageScope:
+      return pickDistributedTicksFromRange(
+        Object.values(LanguageScope).filter((value) => typeof value === 'number'),
+        numberOfTicks,
+      ).map((value) => ({
+        position: getNormalizedValue(value),
+        label: getLanguageScopeLabel(value) ?? '',
+      }));
+    case Field.TerritoryScope:
+      return pickDistributedTicksFromRange(
+        Object.values(TerritoryScope)
+          .filter((v) => typeof v === 'number')
+          .filter((v) => v <= maxValue),
+        numberOfTicks,
+      ).map((value) => ({
+        position: getNormalizedValue(value),
+        label: getTerritoryScopeLabel(value) ?? '',
+      }));
     default:
       break;
   }
@@ -159,6 +169,8 @@ function getTicks(
     compactDisplay: 'long', // or 'long' for “thousand”, “million”
     maximumFractionDigits: 1,
   });
+
+  const suffix = getSuffixForField(colorBy);
 
   return Array.from({ length: numberOfTicks }, (_, index) => {
     if (index === 0) return { position: 0, label: formatter.format(minValue) + suffix };
@@ -170,6 +182,24 @@ function getTicks(
       label: formatter.format(numberToSigFigs(getDenormalizedValue(position), 2)) + suffix,
     };
   });
+}
+
+// By default, we don't show suffixes / units when showing numbers because they often repeat.
+// However in the colorbar we should show the units.
+function getSuffixForField(field: Field): string {
+  switch (field) {
+    case Field.Literacy:
+    case Field.PercentOfTerritoryPopulation:
+    case Field.PercentOfOverallLanguageSpeakers:
+      return '%';
+    case Field.Latitude:
+    case Field.Longitude:
+      return '°';
+    case Field.Area:
+      return ' km²';
+    default:
+      return '';
+  }
 }
 
 function pickDistributedTicksFromRange<T>(range: T[], count: number): T[] {

@@ -5,9 +5,8 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { getColorBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
 
-import { ColorBy } from './ColorTypes';
+import Field from '../fields/Field';
 
 type Props = {
   objectType?: ObjectType;
@@ -18,19 +17,15 @@ const ColorBySelector: React.FC<Props> = ({ objectType }) => {
   const { display } = useSelectorDisplay();
 
   const applicableColorBys = getColorBysApplicableToObjectType(objectType ?? pageObjectType);
-  const colorByOptions: ColorBy[] = [
-    'None',
-    ...Object.values(SortBy).filter((cb) => applicableColorBys.includes(cb)),
-  ];
 
   // Only applicable to the card list and map views
   if (view !== View.Map && view !== View.CardList) return null;
 
   return (
-    <Selector<ColorBy>
+    <Selector<Field>
       selectorLabel={display === SelectorDisplay.Dropdown ? 'Color By' : undefined}
       selectorDescription="Choose the color coding for items in the view."
-      options={colorByOptions}
+      options={applicableColorBys}
       onChange={(colorBy) => updatePageParams({ colorBy })}
       selected={colorBy}
     />

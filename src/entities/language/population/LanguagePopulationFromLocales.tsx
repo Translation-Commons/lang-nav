@@ -5,6 +5,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/types/DataTypes';
 
@@ -33,7 +34,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<{ lang: LanguageDa
     groupBy(
       lang.locales
         .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
-        .sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0)),
+        .sort(sortByPopulation),
       (locale) => locale.territoryCode || '',
     ),
   ).map((locales) => locales[0]);

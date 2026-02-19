@@ -8,6 +8,8 @@ import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
 
+import Field from '../fields/Field';
+
 import BaseColorBar from './BaseColorBar';
 
 const ColorGradientSelector: React.FC = () => {
@@ -15,7 +17,7 @@ const ColorGradientSelector: React.FC = () => {
   const { display } = useSelectorDisplay();
 
   // Only showing if coloring is enabled
-  if (colorBy == 'None') return null;
+  if (colorBy == Field.None) return null;
 
   // Only applicable to the card list and map views
   if (view !== View.Map && view !== View.CardList) return null;

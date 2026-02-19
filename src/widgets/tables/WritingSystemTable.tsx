@@ -6,8 +6,8 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
-import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import { WritingSystemData } from '@entities/types/DataTypes';
@@ -35,8 +35,7 @@ const WritingSystemTable: React.FC = () => {
             </>
           ),
           render: (object) => object.populationUpperBound,
-          valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.Population,
         },
         {
           key: 'Languages',
@@ -44,13 +43,13 @@ const WritingSystemTable: React.FC = () => {
             object.languages && (
               <CommaSeparated limit={1} limitText="short">
                 {Object.values(object.languages)
-                  .sort((a, b) => (b.populationEstimate ?? 0) - (a.populationEstimate ?? 0))
+                  .sort(sortByPopulation)
                   .map((l) => (
                     <HoverableObjectName object={l} key={l.ID} />
                   ))}
               </CommaSeparated>
             ),
-          sortParam: SortBy.Language,
+          field: Field.Language,
           columnGroup: 'Related Objects',
         },
         {
@@ -61,15 +60,14 @@ const WritingSystemTable: React.FC = () => {
                 items={Object.values(object.languages).map((l) => l.nameDisplay)}
               />
             ),
-          valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfLanguages,
+          field: Field.CountOfLanguages,
           isInitiallyVisible: false,
           columnGroup: 'Related Objects',
         },
         {
           key: 'Area of Origin',
           render: (object) => <HoverableObjectName object={object.territoryOfOrigin} />,
-          sortParam: SortBy.Territory,
+          field: Field.Territory,
           isInitiallyVisible: false,
           columnGroup: 'Related Objects',
         },
@@ -79,8 +77,7 @@ const WritingSystemTable: React.FC = () => {
             <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
           ),
           isInitiallyVisible: false,
-          valueType: TableValueType.Count,
-          sortParam: SortBy.CountOfCountries,
+          field: Field.CountOfCountries,
           columnGroup: 'Related Objects',
         },
       ]}

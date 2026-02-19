@@ -13,8 +13,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { WritingSystemScope } from '@entities/types/DataTypes';
 
+import Field from '../fields/Field';
 import { getSortFunctionParameterized } from '../sorting/sort';
-import { SortBy } from '../sorting/SortTypes';
 
 import { getSuggestionsFunction } from './getSuggestionsFunction';
 
@@ -23,7 +23,7 @@ type Props = { display?: SelectorDisplay };
 const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
   const { writingSystemFilter, updatePageParams } = usePageParams();
   const { writingSystems } = useDataContext();
-  const sortFunction = getSortFunctionParameterized(SortBy.Population);
+  const sortFunction = getSortFunctionParameterized(Field.Population);
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 

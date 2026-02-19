@@ -1,9 +1,11 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   getCountOfCensuses,
   getCountOfLanguages,
   getCountOfWritingSystems,
+  getDepth,
   getObjectDateAsNumber,
   getObjectLiteracy,
   getObjectMostImportantLanguageName,
@@ -22,86 +24,109 @@ import {
   getCountOfChildTerritories,
   getCountOfCountries,
 } from '@entities/lib/getObjectRelatedTerritories';
-import { ObjectData } from '@entities/types/DataTypes';
+import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
 
-import { ColorBy } from '../coloring/ColorTypes';
-import { SortBy } from '../sorting/SortTypes';
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-export function getSortField(object: ObjectData, sortBy: ColorBy): string | number | undefined {
-  if (sortBy === 'None') return undefined;
+import Field from './Field';
 
-  switch (sortBy) {
-    case SortBy.Code:
+// Get's a primitive value for a given object and field, used for sorting and filtering.
+// Returns undefined if the field is not applicable to the object type or if the value is missing.
+function getField(object: ObjectData, field: Field): string | number | undefined {
+  switch (field) {
+    case Field.None:
+      return undefined;
+    case Field.Code:
       return object.codeDisplay;
-    case SortBy.Name:
+    case Field.Name:
       return object.nameDisplay;
-    case SortBy.Endonym:
+    case Field.Endonym:
       return object.nameEndonym;
-    case SortBy.CountOfLanguages:
-      return getCountOfLanguages(object);
-    case SortBy.CountOfCountries:
-      return getCountOfCountries(object);
-    case SortBy.CountOfChildTerritories:
-      return getCountOfChildTerritories(object);
-    case SortBy.CountOfWritingSystems:
-      return getCountOfWritingSystems(object);
-    case SortBy.CountOfCensuses:
-      return getCountOfCensuses(object);
-    case SortBy.Literacy:
+
+    case Field.Depth:
+      return getDepth(object);
+    case Field.Literacy:
       return getObjectLiteracy(object);
-    case SortBy.Date:
+    case Field.Date:
       return getObjectDateAsNumber(object);
-    case SortBy.Language:
-      return getObjectMostImportantLanguageName(object);
-    case SortBy.WritingSystem:
-      return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
-    case SortBy.Territory:
-      return getContainingTerritories(object)?.[0]?.nameDisplay;
-    case SortBy.Latitude:
+    case Field.Latitude:
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.latitude
         : undefined;
-    case SortBy.Longitude:
+    case Field.Longitude:
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.longitude
         : undefined;
-    case SortBy.Area:
+    case Field.Area:
       return object.type === ObjectType.Territory ? object.landArea : undefined;
 
+    case Field.LanguageScope:
+      return getLanguageForEntity(object)?.scope;
+    case Field.TerritoryScope:
+      return getTerritoryForEntity(object)?.scope;
+
+    // Related objects
+    case Field.Language:
+      return getObjectMostImportantLanguageName(object);
+    case Field.WritingSystem:
+      return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
+    case Field.Territory:
+      return getContainingTerritories(object)?.[0]?.nameDisplay;
+
+    // Counts of Related Objects
+    case Field.CountOfLanguages:
+      return getCountOfLanguages(object);
+    case Field.CountOfCountries:
+      return getCountOfCountries(object);
+    case Field.CountOfChildTerritories:
+      return getCountOfChildTerritories(object);
+    case Field.CountOfWritingSystems:
+      return getCountOfWritingSystems(object);
+    case Field.CountOfCensuses:
+      return getCountOfCensuses(object);
+
     // Population
-    case SortBy.Population:
+    case Field.Population:
       return getObjectPopulation(object);
-    case SortBy.PopulationDirectlySourced:
+    case Field.PopulationDirectlySourced:
       return getObjectPopulationDirectlySourced(object);
-    case SortBy.PopulationOfDescendants:
+    case Field.PopulationOfDescendants:
       return getObjectPopulationOfDescendants(object);
-    case SortBy.PopulationPercentInBiggestDescendantLanguage:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
       return getObjectPopulationPercentInBiggestDescendantLanguage(object);
-    case SortBy.PercentOfTerritoryPopulation:
+    case Field.PercentOfTerritoryPopulation:
       return getObjectPercentOfTerritoryPopulation(object);
-    case SortBy.PercentOfOverallLanguageSpeakers:
+    case Field.PercentOfOverallLanguageSpeakers:
       return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
 
     // Vitality
-    case SortBy.VitalityMetascore:
-      if (object.type === ObjectType.Language) return object.vitality?.meta;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.meta;
-      return undefined;
-    case SortBy.ISOStatus:
-      if (object.type === ObjectType.Language) return object.vitality?.iso;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.iso;
-      return undefined;
-    case SortBy.VitalityEthnologueFine:
-      if (object.type === ObjectType.Language) return object.vitality?.ethFine;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethFine;
-      return undefined;
-    case SortBy.VitalityEthnologueCoarse:
-      if (object.type === ObjectType.Language) return object.vitality?.ethCoarse;
-      if (object.type === ObjectType.Locale) return object.language?.vitality?.ethCoarse;
-      return undefined;
-    case SortBy.Modality:
-      if (object.type === ObjectType.Language) return object.modality;
-      if (object.type === ObjectType.Locale) return object.language?.modality;
-      return undefined;
+    case Field.VitalityMetascore:
+      return getLanguageForEntity(object)?.vitality?.meta;
+    case Field.ISOStatus:
+      return getLanguageForEntity(object)?.vitality?.iso;
+    case Field.VitalityEthnologueFine:
+      return getLanguageForEntity(object)?.vitality?.ethFine;
+    case Field.VitalityEthnologueCoarse:
+      return getLanguageForEntity(object)?.vitality?.ethCoarse;
+    case Field.Modality:
+      return getLanguageForEntity(object)?.modality;
+
+    default:
+      enforceExhaustiveSwitch(field);
   }
 }
+
+export function getLanguageForEntity(object: ObjectData): LanguageData | undefined {
+  if (object.type === ObjectType.Language) return object;
+  if (object.type === ObjectType.Locale) return object.language;
+  return undefined;
+}
+
+export function getTerritoryForEntity(object: ObjectData): TerritoryData | undefined {
+  if (object.type === ObjectType.Territory) return object;
+  if (object.type === ObjectType.Locale) return object.territory;
+  if (object.type === ObjectType.Census) return object.territory;
+  return undefined;
+}
+
+export default getField;

@@ -2,17 +2,18 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import { ObjectType } from '@features/params/PageParamTypes';
+import Field from '@features/transforms/fields/Field';
 import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
-import { getSortField } from '@features/transforms/fields/getField';
+import getField from '@features/transforms/fields/getField';
 
-import { SortBy } from '../SortTypes';
-
-const IGNORED_COMBINATIONS: Partial<Record<ObjectType, SortBy[]>> = {
+const IGNORED_COMBINATIONS: Partial<Record<ObjectType, Field[]>> = {
   [ObjectType.Census]: [
-    SortBy.CountOfCensuses,
-    SortBy.CountOfChildTerritories,
-    SortBy.CountOfCountries,
+    Field.CountOfCensuses,
+    Field.CountOfChildTerritories,
+    Field.CountOfCountries,
   ], // It's always 1 for censuses
+  [ObjectType.Language]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
+  [ObjectType.Locale]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
 };
 
 describe('getFieldsForSorting', () => {
@@ -31,9 +32,9 @@ describe('getFieldsForSorting', () => {
       const objectsInType = Object.values(mockedObjects).filter((obj) => obj.type === objectType);
       const sortBysForType = getSortBysApplicableToObjectType(objectType);
 
-      Object.values(SortBy).forEach((sortBy) => {
+      Object.values(Field).forEach((sortBy) => {
         objectsInType.forEach((obj) => {
-          const sortField = getSortField(obj, sortBy);
+          const sortField = getField(obj, sortBy);
           if (
             !sortBysForType.includes(sortBy) &&
             !IGNORED_COMBINATIONS[objectType]?.includes(sortBy)

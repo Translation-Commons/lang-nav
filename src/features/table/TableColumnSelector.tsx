@@ -8,6 +8,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
 
+import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
 import TableSortButton from './TableSortButton';
 import { ColumnVisibilityModule } from './useColumnVisibility';
@@ -137,8 +138,8 @@ function ColumnCheckbox<T extends ObjectData>({
           <InfoIcon size="1em" display="block" />
         </Hoverable>
       )}
-      {column.sortParam && (
-        <TableSortButton columnSortBy={column.sortParam} valueType={column.valueType} />
+      {column.field && (
+        <TableSortButton columnSortBy={column.field} valueType={getValueTypeForColumn(column)} />
       )}
     </label>
   );

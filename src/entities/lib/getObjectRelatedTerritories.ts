@@ -12,6 +12,7 @@
 import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { ObjectType } from '@features/params/PageParamTypes';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import {
@@ -50,7 +51,7 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
     case ObjectType.Language:
       return uniqueBy(
         object.locales
-          .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0))
+          .sort(sortByPopulation)
           .map((l) => l.territory)
           .filter((t) => t != null)
           .sort(
@@ -73,9 +74,7 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
 }
 
 export function getTerritoryBiggestLocale(territory: TerritoryData): LocaleData | undefined {
-  return (territory?.locales || []).sort(
-    (a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0),
-  )[0];
+  return (territory?.locales || []).sort(sortByPopulation)[0];
 }
 
 export function getTerritoryChildren(territory: TerritoryData): TerritoryData[] {
@@ -100,7 +99,7 @@ function getLocaleCountryLocales(locale: LocaleData): LocaleData[] {
   return locale.territory && locale.territory.scope === TerritoryScope.Country
     ? [locale]
     : (locale.relatedLocales?.childTerritories?.flatMap(getLocaleCountryLocales) ?? []).sort(
-        (a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0),
+        sortByPopulation,
       );
 }
 
@@ -113,7 +112,7 @@ function getLocaleCountries(locale: LocaleData): TerritoryData[] {
   );
 }
 
-// SortBy.CountOfCountries
+// Field.CountOfCountries
 export function getCountOfCountries(object: ObjectData): number | undefined {
   return getCountriesInObject(object)?.length;
 }
@@ -133,7 +132,7 @@ export function getCountriesInObject(object: ObjectData): TerritoryData[] | unde
       return uniqueBy(
         getObjectLocales(object)
           .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
-          .sort((a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0))
+          .sort(sortByPopulation)
           .map((loc) => loc.territory)
           .filter((t): t is TerritoryData => !!t),
         (t) => t.ID,
@@ -141,7 +140,7 @@ export function getCountriesInObject(object: ObjectData): TerritoryData[] | unde
   }
 }
 
-// SortBy.CountOfChildTerritories
+// Field.CountOfChildTerritories
 export function getCountOfChildTerritories(object: ObjectData): number | undefined {
   return getChildTerritoriesInObject(object)?.length;
 }
@@ -190,7 +189,7 @@ export function getUniqueCountriesForLanguage(lang: LanguageData): TerritoryData
   return uniqueBy(
     lang.locales
       .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
-      .sort((a, b) => (b.populationSpeaking ?? 0) - (a.populationSpeaking ?? 0)),
+      .sort(sortByPopulation),
     (loc) => loc.territoryCode ?? '',
   )
     .map((loc) => loc.territory)
@@ -204,7 +203,5 @@ function getWritingSystemLocales(object: WritingSystemData): LocaleData[] {
     .filter((lang) => lang.primaryWritingSystem?.ID === object.ID)
     .flatMap((lang) => lang.locales)
     .filter((loc) => loc.writingSystem == null && !isTerritoryGroup(loc.territory?.scope));
-  return [...locales, ...localesWithThisWSInferred].sort(
-    (a, b) => (b.populationAdjusted ?? 0) - (a.populationAdjusted ?? 0),
-  );
+  return [...locales, ...localesWithThisWSInferred].sort(sortByPopulation);
 }

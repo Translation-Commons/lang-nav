@@ -8,6 +8,14 @@ import { LanguageSource } from '@entities/language/LanguageTypes';
 
 type Props = { display: SelectorDisplay };
 
+const values = [
+  LanguageSource.Combined,
+  LanguageSource.Glottolog,
+  LanguageSource.ISO,
+  LanguageSource.BCP,
+  LanguageSource.CLDR,
+];
+
 const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
   const { languageSource, updatePageParams } = usePageParams();
   const selectorDescription = (
@@ -26,7 +34,7 @@ const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
         display !== SelectorDisplay.InlineDropdown ? 'Source of the List of Languages' : undefined
       }
       selectorDescription={selectorDescription}
-      options={Object.values(LanguageSource)}
+      options={values}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}
       selected={languageSource}
       display={display}

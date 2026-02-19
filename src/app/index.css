@@ -149,7 +149,7 @@ button:hover .highlighted {
     --color-button-secondary: #444;
     --color-button-hover: #0061c3;
 
-    --color-shadow: rgba(255, 255, 255, 0.5);
+    --color-shadow: rgba(255, 255, 255, 0.1);
 
     --color-text-red: #ff6e6e;
     --color-text-orange: #ffb74d;
@@ -171,7 +171,7 @@ button:hover .highlighted {
   --color-button-secondary: #444;
   --color-button-hover: #0061c3;
 
-  --color-shadow: rgba(255, 255, 255, 0.5);
+  --color-shadow: rgba(255, 255, 255, 0.1);
 
   --color-text-red: #ff6e6e;
   --color-text-orange: #ffb74d;

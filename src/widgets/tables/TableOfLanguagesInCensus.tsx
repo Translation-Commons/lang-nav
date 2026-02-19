@@ -10,8 +10,9 @@ import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import {
@@ -22,6 +23,8 @@ import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 type Props = {
   census: CensusData;
@@ -105,25 +108,23 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
                 />
               </HoverableObject>
             ),
-            sortParam: SortBy.Name,
+            field: Field.Name,
           },
           {
             key: 'Population',
             render: (loc) => loc.populationSpeaking,
-            valueType: TableValueType.Population,
-            sortParam: SortBy.Population,
+            field: Field.Population,
           },
           {
             key: 'Percent Within Territory',
             render: (loc) => loc.populationSpeakingPercent,
-            valueType: TableValueType.Decimal,
-            sortParam: SortBy.PercentOfTerritoryPopulation,
+            field: Field.PercentOfTerritoryPopulation,
           },
           {
             key: 'Scope',
-            render: (loc) => loc.language?.scope,
+            render: (loc) => getLanguageScopeLabel(loc.language?.scope),
             isInitiallyVisible: false,
-            valueType: TableValueType.Enum,
+            field: Field.LanguageScope,
           },
           {
             key: 'Locale Entry',
@@ -154,9 +155,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             render: (object) =>
               object.populationSpeaking &&
               (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
-            valueType: TableValueType.Decimal,
             isInitiallyVisible: false,
-            sortParam: SortBy.PercentOfOverallLanguageSpeakers,
+            field: Field.PercentOfOverallLanguageSpeakers,
           },
           {
             key: 'Macrolanguage',
@@ -179,9 +179,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             render: (loc) => {
               const territory = loc.language?.locales
                 .filter((l) => l.territory?.scope === TerritoryScope.Country)
-                .sort(
-                  (a, b) => (b.populationSpeaking ?? -1) - (a.populationSpeaking ?? -1),
-                )[0]?.territory;
+                .sort(sortByPopulation)[0]?.territory;
               return territory ? <HoverableObjectName object={territory} /> : null;
             },
             isInitiallyVisible: true,

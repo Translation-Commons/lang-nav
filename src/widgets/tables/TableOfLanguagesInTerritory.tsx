@@ -5,7 +5,7 @@ import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
-import { SortBy } from '@features/transforms/sorting/SortTypes';
+import Field from '@features/transforms/fields/Field';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
@@ -39,7 +39,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
         {
           key: 'Language',
           render: (loc) => <HoverableObjectName object={loc} labelSource="language" />,
-          sortParam: SortBy.Name,
+          field: Field.Name,
         },
         {
           key: 'Official Status',
@@ -54,7 +54,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           key: 'Population',
           render: (loc) => loc.populationSpeaking,
           valueType: TableValueType.Population,
-          sortParam: SortBy.Population,
+          field: Field.Population,
         },
         {
           key: 'Population Source',
@@ -66,7 +66,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           key: 'Percent Within Territory',
           render: (loc) => loc.populationSpeakingPercent,
           valueType: TableValueType.Decimal,
-          sortParam: SortBy.PercentOfTerritoryPopulation,
+          field: Field.PercentOfTerritoryPopulation,
         },
       ]}
     />
