@@ -4,6 +4,8 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
+import Field from '@features/transforms/fields/Field';
+
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
@@ -75,11 +77,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
       >
         <div
           ref={contentRef}
-          style={{
-            width: MAP_WIDTH,
-            height: MAP_HEIGHT,
-            position: 'relative',
-          }}
+          style={{ width: MAP_WIDTH, height: MAP_HEIGHT, position: 'relative' }}
         >
           <img
             alt="World map"
@@ -107,7 +105,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
           />
         </div>
       </div>
-      {colorBy !== 'None' && <ColorBar coloringFunctions={coloringFunctions} />}
+      {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
     </div>
   );
 };
