@@ -20,10 +20,13 @@ import ZoomControls from './ZoomControls';
 
 type Props = {
   objects: ObjectData[];
-  maxWidth?: number;
+  maxWidth?: number; // in pixels
 };
-const MAP_WIDTH = 1000;
-const MAP_HEIGHT = MAP_WIDTH / 1.979;
+
+// Aspect ratio (width/height) of the Robinson projection used in map_world.svg
+export const MAP_ASPECT_RATIO = 1.979;
+const MAP_WIDTH = 360;
+const MAP_HEIGHT = MAP_WIDTH / MAP_ASPECT_RATIO;
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
@@ -64,7 +67,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
         style={{
           border: '1px solid #ccc',
           width: '100%',
-          aspectRatio: 1.979,
+          aspectRatio: MAP_ASPECT_RATIO,
           overflow: 'hidden',
           cursor: 'grab',
           position: 'relative',
