@@ -143,8 +143,8 @@ Ethi	Geʻez	Ethiopic (Geʻez)	ግዕዝ	3	አ	no	amh	ET	Sarb		Individual script
 Ugar	Ugaritic	Ugaritic		4	𐎀	no	uga	SY	Psin		Individual script
 Bopo	Bopomofo	Bopomofo	ㄓㄨˋ ㄧㄣ ㄈㄨˊ ㄏㄠˋ	1.1	ㄅ	no	zho	CN	Hani		Individual script
 Hanb	Han with Bopomofo	Han with Bopomofo (alias for Han + Bopomofo)		1.1				CN	Hani	Hani, Bopo	Group
-Hans	Simplified Han	Han (Simplified variant)	简化字	1.1		no	zho	CN	Hani		Individual script
-Hant	Traditional Han	Han (Traditional variant)	正體字	1.1		no	zho	CN	Hani		Individual script
+Hans	Simplified Han	Han (Simplified variant)	简化字	1.1	汉	no	zho	CN	Hani		Variation
+Hant	Traditional Han	Han (Traditional variant)	正體字	1.1	漢	no	zho	CN	Hani		Variation
 Hira	Hiragana	Hiragana	ひらがな	1.1	か	no	jpn	JP	Hani		Individual script
 Hrkt	Japanese syllabaries	Japanese syllabaries (alias for Hiragana + Katakana)		1.1				JP	Hani	Hira, Kana	Group
 Jpan	Japanese scripts	Japanese (alias for Han + Hiragana + Katakana)		1.1				JP	Hani	Hani, Hira, Kana	Group
