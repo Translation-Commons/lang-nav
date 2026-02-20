@@ -1,0 +1,19 @@
+#codeDisplay		#Original text	cn-cmn-2020
+#nameDisplay			China Mandarin Survey 2020
+#isoRegionCode	CN		
+#yearCollected			2020
+#modality			Spoken
+#acquisitionOrder			Any
+#populationEligible			1,443,497,378
+#populationSource			https://data.stats.gov.cn/english/easyquery.htm?cn=C01
+#populationSurveyed			5,278,900
+#geographicScope			whole country
+#nationality			residents
+#quantity			percent
+#collectorType			Government
+#collectorName		中华人民共和国教育部	Ministry of Education of People's Republic of China
+#url			http://www.moe.gov.cn/s78/A19/A19_ztzl/ztzl_yywzfw/shenghuoxz/202106/t20210602_534959.html
+#datePublished			2021-06-02
+#dateAccessed			2026-02-17
+Language Code	Language		
+cmn	Mandarin	普通话	80.27
