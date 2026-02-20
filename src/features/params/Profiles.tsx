@@ -37,20 +37,21 @@ export enum ProfileType {
 
 const GLOBAL_DEFAULTS: PageParams = {
   colorBy: Field.None,
-  scaleBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},
+  fieldFocus: Field.None,
   isoStatus: [],
   languageFilter: '',
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
-  modalityFilter: [],
   languageSource: LanguageSource.Combined,
   limit: 12,
   localeSeparator: LocaleSeparator.Underscore,
+  modalityFilter: [],
   objectID: undefined,
   objectType: ObjectType.Language,
   page: 1,
   profile: ProfileType.LanguageEthusiast,
+  scaleBy: Field.None,
   searchBy: SearchableField.CodeOrNameAny,
   searchString: '',
   secondarySortBy: Field.None,
@@ -59,8 +60,8 @@ const GLOBAL_DEFAULTS: PageParams = {
   territoryFilter: '',
   territoryScopes: [TerritoryScope.Country, TerritoryScope.Dependency],
   view: View.CardList,
-  vitalityEthFine: [],
   vitalityEthCoarse: [],
+  vitalityEthFine: [],
   writingSystemFilter: '',
 };
 

@@ -11,6 +11,8 @@ import {
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+
 import { parseLanguageScope } from '@strings/LanguageScopeStrings';
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
@@ -128,6 +130,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.scaleBy:
         params.scaleBy = value as Field;
         break;
+      case PageParamKey.fieldFocus:
+        params.fieldFocus = value as Field;
+        break;
 
       // Freeform strings
       case PageParamKey.objectID:
@@ -137,6 +142,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.writingSystemFilter:
         params[key] = value; // Default to undefined if empty
         break;
+      default:
+        enforceExhaustiveSwitch(key);
     }
   });
   return params;

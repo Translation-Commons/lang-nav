@@ -9,6 +9,7 @@ import {
 } from '@features/params/ui/SelectorDisplayContext';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
 import LanguageModalitySelector from '@features/transforms/filtering/LanguageModalitySelector';
 import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
@@ -73,8 +74,9 @@ const OptionsPanel: React.FC = () => {
           <SecondarySortBySelector />
           <SortDirectionSelector />
           <ColorBySelector />
-          <ScaleBySelector />
           <ColorGradientSelector />
+          <ScaleBySelector />
+          <FieldFocusSelector />
           <LocaleSeparatorSelector />
           <PageBrightnessSelector />
         </OptionsPanelSection>
