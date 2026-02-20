@@ -3,7 +3,6 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
@@ -33,7 +32,6 @@ const CensusCard: React.FC<Props> = ({ census }) => {
     <div>
       <h3>
         <ObjectTitle object={census} />
-        <ObjectSubtitle object={census} />
       </h3>
       <CardField title="Territory" icon={EarthIcon} description="Where this census was conducted.">
         {territory != null ? (
