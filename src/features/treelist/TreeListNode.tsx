@@ -29,14 +29,13 @@ type Props = {
 
 const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }) => {
   const { children, object, labelStyle } = nodeData;
-  const { view, searchBy, searchString } = usePageParams();
+  const { view, searchBy, searchString, fieldFocus } = usePageParams();
   const [seeAllChildren, setSeeAllChildren] = useState(false);
   const { limit } = usePageParams();
   const {
     allExpanded,
     showInfoButton,
     showObjectIDs: showObjectIDsSetting,
-    showData,
   } = useTreeListOptionsContext();
   const [expanded, setExpanded] = useState(isExpandedInitially || allExpanded);
   let showObjectIDs = showObjectIDsSetting;
@@ -84,7 +83,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
             <InfoIcon size="1em" />
           </HoverableObject>
         )}
-        {showData !== Field.None && <TreeListNodeData object={object} field={showData} />}
+        {fieldFocus !== Field.None && <TreeListNodeData object={object} field={fieldFocus} />}
       </>
       {expanded && children.length > 0 && (
         <ul className="TreeListBranch">

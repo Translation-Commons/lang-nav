@@ -64,18 +64,20 @@ export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
 export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
-  scaleBy = 'scaleBy',
   columns = 'columns',
+  isoStatus = 'isoStatus',
+  fieldFocus = 'fieldFocus',
   languageFilter = 'languageFilter',
-  languageSource = 'languageSource',
   languageScopes = 'languageScopes',
-  modalityFilter = 'modalityFilter',
+  languageSource = 'languageSource',
   limit = 'limit',
   localeSeparator = 'localeSeparator',
+  modalityFilter = 'modalityFilter',
   objectID = 'objectID',
   objectType = 'objectType',
   page = 'page',
   profile = 'profile',
+  scaleBy = 'scaleBy',
   searchBy = 'searchBy',
   searchString = 'searchString',
   secondarySortBy = 'secondarySortBy',
@@ -83,11 +85,10 @@ export enum PageParamKey {
   sortBy = 'sortBy',
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
-  writingSystemFilter = 'writingSystemFilter',
   view = 'view',
-  isoStatus = 'isoStatus',
-  vitalityEthFine = 'vitalityEthFine',
   vitalityEthCoarse = 'vitalityEthCoarse',
+  vitalityEthFine = 'vitalityEthFine',
+  writingSystemFilter = 'writingSystemFilter',
 }
 
 export type PageParams = {
@@ -96,6 +97,7 @@ export type PageParams = {
   colorGradient: ColorGradient;
   columns: TableIDToBinarizedColumnVisibility;
   isoStatus: LanguageISOStatus[];
+  fieldFocus: Field; // To see data but not necessarily sort or color by it
   languageFilter: string;
   languageScopes: LanguageScope[];
   modalityFilter: LanguageModality[];
@@ -121,20 +123,21 @@ export type PageParams = {
 
 export type PageParamsOptional = {
   colorBy?: Field;
-  scaleBy?: Field;
   colorGradient?: ColorGradient;
   columns?: TableIDToBinarizedColumnVisibility;
   isoStatus?: LanguageISOStatus[];
+  fieldFocus?: Field;
   languageFilter?: string;
   languageScopes?: LanguageScope[];
-  modalityFilter?: LanguageModality[];
   languageSource?: LanguageSource;
   limit?: number;
   localeSeparator?: LocaleSeparator;
+  modalityFilter?: LanguageModality[];
   objectID?: string;
   objectType?: ObjectType;
   page?: number;
   profile?: ProfileType;
+  scaleBy?: Field;
   searchBy?: SearchableField;
   searchString?: string;
   secondarySortBy?: Field;
@@ -143,7 +146,7 @@ export type PageParamsOptional = {
   territoryFilter?: string;
   territoryScopes?: TerritoryScope[];
   view?: View;
-  vitalityEthFine?: VitalityEthnologueFine[];
   vitalityEthCoarse?: VitalityEthnologueCoarse[];
+  vitalityEthFine?: VitalityEthnologueFine[];
   writingSystemFilter?: string;
 };
