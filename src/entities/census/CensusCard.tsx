@@ -34,11 +34,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       <CardField title="Territory" icon={EarthIcon} description="Where this census was conducted.">
         {territory != null ? (
           <HoverableObjectName object={territory} />
-        ) : isoRegionCode ? (
-          <span>{isoRegionCode}</span>
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
+        ) : isoRegionCode}
       </CardField>
 
       <CardField
