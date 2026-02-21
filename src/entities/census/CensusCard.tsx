@@ -46,11 +46,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         icon={BlocksIcon}
         description="The type of organization that collected this census"
       >
-        {collectorType != null ? (
-          <span>{collectorType}</span>
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
+        {collectorType}
       </CardField>
 
       <CardField
