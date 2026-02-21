@@ -43,7 +43,7 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
             ))}
           </CommaSeparated>
         ) : (
-          <Deemphasized>Unknown</Deemphasized>
+          <Deemphasized>No languages specified</Deemphasized>
         )}
       </CardField>
     </div>
