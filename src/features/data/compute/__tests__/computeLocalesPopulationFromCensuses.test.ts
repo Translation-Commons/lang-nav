@@ -9,7 +9,8 @@ import { CoreData } from '@features/data/load/CoreData';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { LocaleData, LocaleSource, ObjectDictionary } from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import { ObjectDictionary } from '@entities/types/DataTypes';
 
 import { computeRegionalLocalesPopulation } from '../computeAggregatedLocalesPopulation';
 import { computeLocalesPopulationFromCensuses } from '../computeLocalesPopulationFromCensuses';

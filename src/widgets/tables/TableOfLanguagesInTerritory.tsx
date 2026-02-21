@@ -9,7 +9,8 @@ import Field from '@features/transforms/fields/Field';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

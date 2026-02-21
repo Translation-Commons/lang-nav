@@ -1,7 +1,7 @@
 import { BracketsIcon, LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 

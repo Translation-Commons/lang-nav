@@ -1,11 +1,7 @@
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import {
-  isTerritoryGroup,
-  LocaleData,
-  LocaleSource,
-  TerritoryData,
-} from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import { isTerritoryGroup, TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 

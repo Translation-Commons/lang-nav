@@ -4,11 +4,12 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { VariantTagData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { VariantTagData } from './VariantTagTypes';
 
 interface Props {
   data: VariantTagData;

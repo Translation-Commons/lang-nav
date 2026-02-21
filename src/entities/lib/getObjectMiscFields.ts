@@ -4,7 +4,9 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { ObjectData, TerritoryScope, WritingSystemData } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';

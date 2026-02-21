@@ -7,7 +7,7 @@ import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import CellPopulation from '@shared/containers/CellPopulation';
 import { groupBy, sumBy } from '@shared/lib/setUtils';

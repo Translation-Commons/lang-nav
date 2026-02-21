@@ -1,4 +1,4 @@
-import { isTerritoryGroup, TerritoryData } from '@entities/types/DataTypes';
+import { isTerritoryGroup, TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
 

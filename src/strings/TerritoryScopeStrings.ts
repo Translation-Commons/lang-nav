@@ -1,4 +1,4 @@
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 export function getTerritoryScopeLabel(scope?: TerritoryScope): string {
   if (scope == null) return 'Territory';

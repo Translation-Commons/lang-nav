@@ -1,4 +1,5 @@
-import { isTerritoryGroup, LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { isTerritoryGroup } from '@entities/territory/TerritoryTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 

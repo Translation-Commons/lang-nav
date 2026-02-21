@@ -11,7 +11,7 @@ import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import Field from '../fields/Field';
 import { getSortFunctionParameterized } from '../sorting/sort';

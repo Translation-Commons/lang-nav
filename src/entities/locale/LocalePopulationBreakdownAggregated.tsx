@@ -5,7 +5,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
+import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import LabelTableCell from '@shared/containers/CellLabel';
 import CellPercent from '@shared/containers/CellPercent';

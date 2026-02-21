@@ -15,7 +15,7 @@ import {
   getVitalityEthnologueCoarseLabel,
   getVitalityEthnologueFineLabel,
 } from '@entities/language/vitality/VitalityStrings';
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';

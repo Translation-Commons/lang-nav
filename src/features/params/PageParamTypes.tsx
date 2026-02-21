@@ -9,7 +9,7 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { ProfileType } from './Profiles';
 

@@ -15,14 +15,14 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import {
   isTerritoryGroup,
-  LocaleData,
-  ObjectData,
   TerritoryData,
   TerritoryScope,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+} from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 

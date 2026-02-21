@@ -5,7 +5,7 @@ import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerri
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';

@@ -7,7 +7,8 @@ import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
-import { ObjectData, VariantTagData } from '@entities/types/DataTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 
 export const VariantTagHierarchy: React.FC = () => {
   const { variantTags } = useDataContext();

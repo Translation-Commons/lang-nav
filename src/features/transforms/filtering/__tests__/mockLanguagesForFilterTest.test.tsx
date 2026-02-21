@@ -4,14 +4,9 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
-import {
-  LocaleData,
-  LocaleSource,
-  TerritoryData,
-  TerritoryScope,
-  WritingSystemData,
-  WritingSystemScope,
-} from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 export function getMockLanguages() {
   const US: TerritoryData = {

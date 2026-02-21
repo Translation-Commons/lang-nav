@@ -7,7 +7,8 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { ObjectData, TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 export const TerritoryHierarchy: React.FC = () => {
   const { territories } = useDataContext();

@@ -1,10 +1,8 @@
 import { LanguagesBySource } from '@entities/language/LanguageTypes';
-import {
-  LocaleData,
-  TerritoryData,
-  VariantTagData,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';

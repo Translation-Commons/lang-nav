@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { VariantTagData } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';

@@ -7,7 +7,9 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { EthnologueDigitalSupport } from '@entities/language/LanguageTypes';
-import { LocaleData, ObjectData, OfficialStatus, TerritoryData } from '@entities/types/DataTypes';
+import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 // Customized for UNESCO use
 export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilter: string): string {

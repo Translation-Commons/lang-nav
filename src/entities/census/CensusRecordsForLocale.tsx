@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 

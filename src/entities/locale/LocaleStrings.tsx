@@ -1,4 +1,4 @@
-import { LocaleData, OfficialStatus } from '@entities/types/DataTypes';
+import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
 
 export function getLocaleName(locale: LocaleData, includeTerritory: boolean = true): string {
   const languageName = locale.language?.nameDisplay ?? locale.languageCode;

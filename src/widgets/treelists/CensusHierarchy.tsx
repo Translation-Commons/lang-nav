@@ -8,7 +8,8 @@ import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { CensusData } from '@entities/census/CensusTypes';
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 export const CensusHierarchy: React.FC = () => {
   const { territories } = useDataContext();

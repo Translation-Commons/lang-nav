@@ -3,15 +3,11 @@ import { describe, expect, it } from 'vitest';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
-import {
-  LocaleData,
-  LocaleSource,
-  PopulationSourceCategory,
-  TerritoryScope,
-  WritingSystemScope,
-} from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { getLocaleName } from '../LocaleStrings';
+import { LocaleData, LocaleSource, PopulationSourceCategory } from '../LocaleTypes';
 
 describe('getLocaleName', () => {
   it('Language with tags but no linked objects', () => {

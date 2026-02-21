@@ -16,16 +16,11 @@ import {
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
-import {
-  LocaleData,
-  LocaleSource,
-  ObjectDictionary,
-  TerritoryData,
-  TerritoryScope,
-  VariantTagData,
-  WritingSystemData,
-  WritingSystemScope,
-} from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { ObjectDictionary } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';
 
