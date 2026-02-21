@@ -15,6 +15,7 @@ enum Field {
   Depth = 'Depth',
   LanguageScope = 'Language Scope',
   TerritoryScope = 'Territory Scope',
+  Indigeneity = 'Indigeneity',
 
   // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',

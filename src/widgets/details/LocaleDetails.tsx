@@ -6,6 +6,9 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
+import LocaleIndigeneityDisplay, {
+  getIndigeneityDescription,
+} from '@entities/locale/LocaleIndigeneityDisplay';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
@@ -239,6 +242,9 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
       {officialStatus && (
         <DetailsField title="Government Status">{getOfficialLabel(officialStatus)}</DetailsField>
       )}
+      <DetailsField title="Indigeneity" description={getIndigeneityDescription()}>
+        <LocaleIndigeneityDisplay loc={locale} />
+      </DetailsField>
       {wikipedia && (
         <DetailsField title="Wikipedia">
           <ObjectWikipediaInfo object={locale} />

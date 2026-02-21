@@ -86,6 +86,9 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.TerritoryScope:
       return typeof fieldValue === 'number' && getTerritoryScopeLabel(fieldValue);
 
+    case Field.Indigeneity:
+      return <LocaleIndigeneityDisplay object={object} />;
+
     default:
       enforceExhaustiveSwitch(field);
   }

@@ -1,4 +1,4 @@
-import { BracketsIcon, LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
+import { BracketsIcon, LandmarkIcon, MapPinHouseIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -12,6 +12,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
+import LocaleIndigeneityDisplay, { getIndigeneityDescription } from './LocaleIndigeneityDisplay';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
 import { getOfficialLabel } from './LocaleStrings';
 
@@ -59,7 +60,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       )}
 
       <CardField
-        title="Government status"
+        title="Government Status"
         icon={LandmarkIcon}
         description="Whether the locale has official recognition."
       >
@@ -68,6 +69,14 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         ) : (
           <Deemphasized>Unknown</Deemphasized>
         )}
+      </CardField>
+
+      <CardField
+        title="Indigeneity"
+        icon={MapPinHouseIcon}
+        description={getIndigeneityDescription()}
+      >
+        <LocaleIndigeneityDisplay loc={locale} />
       </CardField>
     </div>
   );
