@@ -82,7 +82,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       <CardField
         title="Numbers of Languages"
         icon={HashIcon}
-        description="How many languages are coverd by this census."
+        description="How many languages are covered by this census."
       >
         {languageCount != null ? (
           <span>{languageCount.toLocaleString()}</span>
