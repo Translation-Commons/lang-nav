@@ -24,9 +24,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
     domain,
     languageCount,
   } = census;
-  const languageUseParts = [mode, acquisitionOrder, domain]
-    .map((v) => (v == null ? null : String(v).trim()))
-    .filter((v): v is string => Boolean(v));
+  const languageUseParts = [mode, acquisitionOrder, domain].filter(Boolean)
 
   return (
     <div>
