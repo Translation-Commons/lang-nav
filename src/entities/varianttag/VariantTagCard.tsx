@@ -1,4 +1,4 @@
-import { LanguagesIcon, TagIcon } from 'lucide-react';
+import { LanguagesIcon, TextIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -15,7 +15,9 @@ interface Props {
 }
 
 const VariantTagCard: React.FC<Props> = ({ data }) => {
-  const { nameDisplay, languages } = data;
+  const { description, languages } = data;
+  const shortDescription =
+    description && description.length > 100 ? description.slice(0, 100) + '...' : description;
 
   return (
     <div>
@@ -23,12 +25,8 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
         <ObjectTitle object={data} />
       </h3>
 
-      <CardField
-        title="Name"
-        icon={TagIcon}
-        description="The name used to identify this variant tag."
-      >
-        {nameDisplay ?? <Deemphasized>Unknown</Deemphasized>}
+      <CardField title="Description" icon={TextIcon} description="Description of this variant tag.">
+        {description ? shortDescription : <Deemphasized>No description</Deemphasized>}
       </CardField>
 
       <CardField
