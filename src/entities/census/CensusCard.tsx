@@ -60,11 +60,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         icon={CalendarIcon}
         description="The year this census was collected."
       >
-        {yearCollected != null ? (
-          <span>{yearCollected}</span>
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
+        {yearCollected}
       </CardField>
 
       <CardField
