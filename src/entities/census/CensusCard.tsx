@@ -70,7 +70,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       <CardField
         title="Language Use"
         icon={LanguagesIcon}
-        description='Combined from Mode, Acquisition Order, and Domain (e.g. "Speaks, L1, Home").'
+        description='The way people use the language if provided by the census source. The Mode, Acquisition Order, and/or Domain (e.g. "Speaks, L1, Home")
       >
         {languageUseParts.length > 0 ? (
           <span>{languageUseParts.join(', ')} </span>
