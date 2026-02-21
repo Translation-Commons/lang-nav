@@ -67,7 +67,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         description='The way people use the language if provided by the census source. The Mode, Acquisition Order, and/or Domain (e.g. "Speaks, L1, Home")
       >
         {languageUseParts.length > 0 ? (
-          <span>{languageUseParts.join(', ')} </span>
+          languageUseParts.join(', ')
         ) : (
           <Deemphasized>Unknown</Deemphasized>
         )}
