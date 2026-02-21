@@ -1,4 +1,4 @@
-import { BlocksIcon, Calendar, EarthIcon, HashIcon, LanguagesIcon } from 'lucide-react';
+import { BlocksIcon, CalendarIcon, EarthIcon, HashIcon, LanguagesIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -24,7 +24,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
     domain,
     languageCount,
   } = census;
-  const languageUseParts = [mode, acquisitionOrder, domain].filter(Boolean)
+  const languageUseParts = [mode, acquisitionOrder, domain].filter(Boolean);
 
   return (
     <div>
@@ -32,9 +32,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         <ObjectTitle object={census} />
       </h3>
       <CardField title="Territory" icon={EarthIcon} description="Where this census was conducted.">
-        {territory != null ? (
-          <HoverableObjectName object={territory} />
-        ) : isoRegionCode}
+        {territory != null ? <HoverableObjectName object={territory} /> : isoRegionCode}
       </CardField>
 
       <CardField
@@ -56,7 +54,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       <CardField
         title="Language Use"
         icon={LanguagesIcon}
-        description='The way people use the language if provided by the census source. The Mode, Acquisition Order, and/or Domain (e.g. "Speaks, L1, Home")
+        description='The way people use the language if provided by the census source. The Mode, Acquisition Order, and/or Domain (e.g. "Speaks, L1, Home").'
       >
         {languageUseParts.length > 0 ? (
           languageUseParts.join(', ')
@@ -66,7 +64,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       </CardField>
 
       <CardField
-        title="Numbers of Languages"
+        title="Number of Languages"
         icon={HashIcon}
         description="How many languages are covered by this census."
       >
