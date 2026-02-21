@@ -22,8 +22,8 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
   const constituents = fromTerritories
     ? uniqueBy(locale.relatedLocales?.childTerritories || [], (l) => l.territoryCode || '')
     : uniqueBy(locale.relatedLocales?.childLanguages || [], (l) => l.languageCode).sort(
-        sortByPopulation,
-      );
+      sortByPopulation,
+    );
   const [showAllConstituents, setShowAllConstituents] = React.useState(false);
 
   return (
