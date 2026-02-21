@@ -12,7 +12,7 @@ import Field from '@features/transforms/fields/Field';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
-import { VariantTagData } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

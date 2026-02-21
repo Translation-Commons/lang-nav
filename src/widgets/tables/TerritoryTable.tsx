@@ -17,7 +17,7 @@ import {
   getTerritoryChildren,
   getTerritoryCountries,
 } from '@entities/lib/getObjectRelatedTerritories';
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { sumBy } from '@shared/lib/setUtils';

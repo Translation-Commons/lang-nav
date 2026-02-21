@@ -1,7 +1,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageDictionary, LanguageSource } from '@entities/language/LanguageTypes';
-import { LocaleData, LocaleSource, PopulationSourceCategory } from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 // SOURCE is a constant to pick what source to use when creating family locales.
 // Ideally we'd do this for all sources or the Combined source -- but because it can create so

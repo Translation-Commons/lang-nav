@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
+import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

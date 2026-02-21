@@ -4,7 +4,7 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
-import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';

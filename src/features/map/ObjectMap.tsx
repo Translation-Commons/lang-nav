@@ -7,7 +7,8 @@ import useColors from '@features/transforms/coloring/useColors';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 

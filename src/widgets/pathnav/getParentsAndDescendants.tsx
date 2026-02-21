@@ -1,7 +1,8 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[] {
   if (object == null) return [];
@@ -81,13 +82,13 @@ export function getDescendantsName(object: ObjectData, count: number): string {
         case TerritoryScope.Continent:
         case TerritoryScope.Region:
           return 'region' + (count > 1 ? 's' : '');
-        case TerritoryScope.Subcontinent:
-          return 'territor' + (count > 1 ? 'ies' : 'y');
         case TerritoryScope.Country:
         case TerritoryScope.Dependency:
           return 'subdivision' + (count > 1 ? 's' : '');
+        case TerritoryScope.Subcontinent:
+        default:
+          return 'territor' + (count > 1 ? 'ies' : 'y');
       }
-    // eslint-disable-next-line no-fallthrough
     case ObjectType.WritingSystem:
       return 'child writing system' + (count > 1 ? 's' : '');
     case ObjectType.VariantTag:

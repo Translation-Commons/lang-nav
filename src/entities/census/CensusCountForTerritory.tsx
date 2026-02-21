@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

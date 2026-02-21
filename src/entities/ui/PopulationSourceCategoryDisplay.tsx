@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { PopulationSourceCategory } from '@entities/types/DataTypes';
+import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 

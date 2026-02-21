@@ -1,6 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
+import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 

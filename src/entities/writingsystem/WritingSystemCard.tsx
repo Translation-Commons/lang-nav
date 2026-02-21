@@ -12,8 +12,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 
-import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
+import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';

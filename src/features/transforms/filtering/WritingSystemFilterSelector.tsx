@@ -11,7 +11,7 @@ import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import { WritingSystemScope } from '@entities/types/DataTypes';
+import { WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import Field from '../fields/Field';
 import { getSortFunctionParameterized } from '../sorting/sort';

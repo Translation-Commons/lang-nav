@@ -4,7 +4,7 @@ import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
-import { LocaleData, PopulationSourceCategory } from '@entities/types/DataTypes';
+import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import CellLabel from '@shared/containers/CellLabel';
 import CellPercent from '@shared/containers/CellPercent';

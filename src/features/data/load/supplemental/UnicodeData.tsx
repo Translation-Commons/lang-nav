@@ -5,8 +5,8 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { CLDRCoverageImport, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
-import { LocaleData } from '@entities/types/DataTypes';
 
 import { DataContextType } from '../../context/useDataContext';
 

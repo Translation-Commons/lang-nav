@@ -8,7 +8,7 @@ import {
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 
 import { updateObjectCodesNameAndPopulation } from '../updateObjectCodesNameAndPopulation';
 

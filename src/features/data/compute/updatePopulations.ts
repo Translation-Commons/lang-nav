@@ -1,5 +1,6 @@
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData, PopulationSourceCategory, TerritoryData } from '@entities/types/DataTypes';
+import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
 

@@ -1,7 +1,8 @@
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
-import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { maxBy } from '@shared/lib/setUtils';

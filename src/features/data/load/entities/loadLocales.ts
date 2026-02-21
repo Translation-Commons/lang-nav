@@ -6,7 +6,7 @@ import {
   LocaleSource,
   OfficialStatus,
   PopulationSourceCategory,
-} from '@entities/types/DataTypes';
+} from '@entities/locale/LocaleTypes';
 
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 

@@ -2,14 +2,12 @@ import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import {
-  BCP47LocaleCode,
-  isTerritoryGroup,
   LocaleData,
   LocaleSource,
   PopulationSourceCategory,
-  TerritoryCode,
-  TerritoryData,
-} from '@entities/types/DataTypes';
+  StandardLocaleCode,
+} from '@entities/locale/LocaleTypes';
+import { isTerritoryGroup, TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 
 /**
  * Locale input data is contained to countries and dependencies -- this adds up data from
@@ -17,7 +15,7 @@ import {
  */
 export function createRegionalLocales(
   territories: Record<TerritoryCode, TerritoryData>,
-  locales: Record<BCP47LocaleCode, LocaleData>,
+  locales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   // Start with the world and recursively create locales for all territory groups
   createRegionalLocalesForTerritory(territories['001'], locales);
@@ -25,7 +23,7 @@ export function createRegionalLocales(
 
 function createRegionalLocalesForTerritory(
   territory: TerritoryData,
-  allLocales: Record<BCP47LocaleCode, LocaleData>,
+  allLocales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   if (!territory) return;
 
@@ -37,7 +35,7 @@ function createRegionalLocalesForTerritory(
     return; // Only going this for regions/continents
   }
 
-  const territoryLocales = containsTerritories?.reduce<Record<BCP47LocaleCode, LocaleData>>(
+  const territoryLocales = containsTerritories?.reduce<Record<StandardLocaleCode, LocaleData>>(
     (locs, childTerritory) => {
       childTerritory.locales?.forEach((loc) => {
         const newLocaleCode = getLocaleCode(loc, LocaleSeparator.Underscore, territory.ID);
