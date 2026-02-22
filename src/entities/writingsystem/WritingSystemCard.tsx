@@ -43,9 +43,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={writingSystem} />
-        </a>
+        <ObjectTitle object={writingSystem} />
       </div>
 
       <CardField
