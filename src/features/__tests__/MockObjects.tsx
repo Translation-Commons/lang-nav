@@ -266,6 +266,7 @@ export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArra
     writingSystems: objectArray.filter((obj) => obj.type === ObjectType.WritingSystem),
     variantTags: objectArray.filter((obj) => obj.type === ObjectType.VariantTag),
     censuses: { be0590: objects.be0590 as CensusData },
+    keyboards: objectArray.filter((obj) => obj.type === ObjectType.Keyboard),
   };
 }
 
@@ -356,6 +357,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     writingSystems,
     locales,
     variantTags,
+    {},
   );
 
   // Update the objects dictionary with the aggregated locales
@@ -425,6 +427,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
   const dataContext: DataContextType = {
     allLanguoids: languages,
     censuses,
+    keyboards: [],
     languagesInSelectedSource: languages,
     locales,
     territories,

@@ -24,6 +24,8 @@ export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[
       return [object.parentWritingSystem];
     case ObjectType.VariantTag:
       return [object.languages[0]];
+    case ObjectType.Keyboard:
+      return [object.language, object.territory].filter(Boolean);
   }
 }
 
@@ -47,6 +49,8 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
       return object.childWritingSystems ?? [];
     case ObjectType.VariantTag:
       return object.locales;
+    case ObjectType.Keyboard:
+      return [];
   }
 }
 
@@ -93,5 +97,7 @@ export function getDescendantsName(object: ObjectData, count: number): string {
       return 'child writing system' + (count > 1 ? 's' : '');
     case ObjectType.VariantTag:
       return 'locale' + (count > 1 ? 's' : '');
+    case ObjectType.Keyboard:
+      return 'keyboard' + (count > 1 ? 's' : '');
   }
 }

@@ -98,6 +98,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
       ];
     case ObjectType.VariantTag:
       return [Field.Date, Field.CountOfLanguages, Field.CountOfChildTerritories, Field.Language];
+    case ObjectType.Keyboard:
+      return [Field.Language, Field.WritingSystem, Field.Territory];
   }
 }
 
