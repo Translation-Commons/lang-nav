@@ -14,21 +14,45 @@ const LocaleIndigeneityDisplay = ({ loc }: { loc: LocaleData }) => {
 
   return (
     <CommaSeparated>
-      <Hoverable
-        hoverContent={getLangFormedHereDescription(langFormedHere)}
-        style={{
-          color: !langFormedHere ? 'var(--color-text)' : undefined,
-        }}
-      >
-        {langFormedHere ? 'Formed here' : 'From abroad'}
-      </Hoverable>
-      <Hoverable
-        hoverContent={getLangHereBefore1500Description(langHereBefore1500)}
-        style={{ color: !langHereBefore1500 ? 'var(--color-text)' : undefined }}
-      >
-        {langHereBefore1500 ? 'Historic' : 'after 1500 CE'}
-      </Hoverable>
+      <LocaleFormedHereDisplay loc={loc} />
+      <LocaleHistoricPresenceDisplay loc={loc} />
     </CommaSeparated>
+  );
+};
+
+export const LocaleFormedHereDisplay = ({ loc }: { loc: LocaleData }) => {
+  const { langFormedHere } = loc;
+
+  if (langFormedHere == null) {
+    return <Deemphasized>No data</Deemphasized>;
+  }
+
+  return (
+    <Hoverable
+      hoverContent={getLangFormedHereDescription(langFormedHere)}
+      style={{
+        color: !langFormedHere ? 'var(--color-text)' : undefined,
+      }}
+    >
+      {langFormedHere ? 'Formed here' : 'From abroad'}
+    </Hoverable>
+  );
+};
+
+export const LocaleHistoricPresenceDisplay = ({ loc }: { loc: LocaleData }) => {
+  const { langHereBefore1500 } = loc;
+
+  if (langHereBefore1500 == null) {
+    return <Deemphasized>No data</Deemphasized>;
+  }
+
+  return (
+    <Hoverable
+      hoverContent={getLangHereBefore1500Description(langHereBefore1500)}
+      style={{ color: !langHereBefore1500 ? 'var(--color-text)' : undefined }}
+    >
+      {langHereBefore1500 ? 'Historic' : 'after 1500 CE'}
+    </Hoverable>
   );
 };
 

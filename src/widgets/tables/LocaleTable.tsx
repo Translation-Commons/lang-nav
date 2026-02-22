@@ -14,6 +14,10 @@ import {
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
+import {
+  LocaleFormedHereDisplay,
+  LocaleHistoricPresenceDisplay,
+} from '@entities/locale/LocaleIndigeneityDisplay';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -166,6 +170,17 @@ const LocaleTable: React.FC = () => {
             ) : (
               <Deemphasized>None</Deemphasized>
             ),
+          columnGroup: 'Local Status',
+        },
+        {
+          key: 'Formation',
+          render: (loc) => <LocaleFormedHereDisplay loc={loc} />,
+          columnGroup: 'Local Status',
+        },
+        {
+          key: 'Historic Presence',
+          render: (loc) => <LocaleHistoricPresenceDisplay loc={loc} />,
+          columnGroup: 'Local Status',
         },
         {
           key: 'Wikipedia',
