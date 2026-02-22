@@ -29,8 +29,15 @@ const useFilteredObjects = ({
 }: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const { objectType } = usePageParams();
-  const { languagesInSelectedSource, locales, territories, writingSystems, variantTags, censuses, keyboards } =
-    useDataContext();
+  const {
+    languagesInSelectedSource,
+    locales,
+    territories,
+    writingSystems,
+    variantTags,
+    censuses,
+    keyboards,
+  } = useDataContext();
   const filterByScope = useScope ? getScopeFilter() : () => true;
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
   const filterByConnections = useConnections ? getFilterByConnections() : () => true;
