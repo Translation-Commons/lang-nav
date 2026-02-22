@@ -23,6 +23,8 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
     case ObjectType.Locale:
     case ObjectType.Territory:
       return undefined;
+    case ObjectType.Keyboard:
+      return undefined;
   }
 }
 
@@ -47,5 +49,7 @@ export function getObjectTypeLabelPlural(objectType: ObjectType) {
       return 'writing systems';
     case ObjectType.VariantTag:
       return 'variant tags';
+    case ObjectType.Keyboard:
+      return 'keyboards';
   }
 }
