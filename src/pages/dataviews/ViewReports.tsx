@@ -7,6 +7,7 @@ import LanguagesMissingWritingSystems from '@widgets/reports/LanguagesMissingWri
 import LanguagesWithIdenticalNames from '@widgets/reports/LanguagesWithIdenticalNames';
 import LocaleCitationCounts from '@widgets/reports/LocaleCitationCounts';
 import PotentialLocales from '@widgets/reports/PotentialLocales';
+import ReportEntityUnknownFields from '@widgets/reports/ReportEntityUnknownFields';
 import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithCensuses';
 
 import { ObjectType } from '@features/params/PageParamTypes';
@@ -20,7 +21,8 @@ const ViewReports: React.FC = () => {
   const { objectType } = usePageParams();
 
   return (
-    <div style={{ textAlign: 'start' }}>
+    <div style={{ textAlign: 'start', display: 'flex', flexDirection: 'column', gap: '1em' }}>
+      <ReportEntityUnknownFields />
       <ReportsForObjectType objectType={objectType} />
     </div>
   );
@@ -54,9 +56,8 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
     case ObjectType.Census:
       return <TableOfCountriesWithCensuses />;
     case ObjectType.Territory:
-      return <div>There are no reports for this object type.</div>;
     case ObjectType.VariantTag:
-      return <div>There are no reports for this object type.</div>;
+      return <></>;
   }
 };
 
