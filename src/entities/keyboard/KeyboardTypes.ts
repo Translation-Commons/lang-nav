@@ -6,6 +6,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectBase } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export enum KeyboardPlatform {
@@ -35,4 +36,5 @@ export interface KeyboardData extends ObjectBase {
   territory?: TerritoryData;
   inputWritingSystem?: WritingSystemData;
   outputWritingSystem?: WritingSystemData;
+  variantTag?: VariantTagData;
 }
