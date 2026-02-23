@@ -5,7 +5,7 @@ import useFilteredObjects from '@features/transforms/filtering/useFilteredObject
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 

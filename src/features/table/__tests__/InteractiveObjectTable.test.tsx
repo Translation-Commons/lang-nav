@@ -9,7 +9,8 @@ import * as ConnectionFilters from '@features/transforms/filtering/filterByConne
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import * as SortModule from '@features/transforms/sorting/sort';
 
-import { ObjectData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

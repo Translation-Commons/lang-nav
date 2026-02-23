@@ -3,7 +3,8 @@ import { LocaleSeparator } from '@features/params/PageParamTypes';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
-import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import computeRecursiveLanguageData from './computeRecursiveLanguageData';
 import { updatePopulations } from './updatePopulations';

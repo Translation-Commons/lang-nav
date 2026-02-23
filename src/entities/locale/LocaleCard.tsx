@@ -1,7 +1,7 @@
 import { BracketsIcon, LandmarkIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -23,10 +23,10 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={locale} />
         <ObjectSubtitle object={locale} />
-      </h3>
+      </div>
 
       {populationAdjusted != null && (
         <CardField

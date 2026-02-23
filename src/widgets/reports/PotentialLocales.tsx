@@ -14,15 +14,14 @@ import { getSortFunction, sortByPopulation } from '@features/transforms/sorting/
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import { usePotentialLocaleThreshold } from '@entities/locale/PotentialLocaleThreshold';
 import {
-  BCP47LocaleCode,
-  isTerritoryGroup,
   LocaleData,
   LocaleSource,
   PopulationSourceCategory,
-  TerritoryCode,
-} from '@entities/types/DataTypes';
+  StandardLocaleCode,
+} from '@entities/locale/LocaleTypes';
+import { usePotentialLocaleThreshold } from '@entities/locale/PotentialLocaleThreshold';
+import { isTerritoryGroup, TerritoryCode } from '@entities/territory/TerritoryTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
@@ -216,7 +215,7 @@ function getPotentialLocales(
   // Iterate through all censuses and find locales that are not listed
   const allMissingLocales = useMemo(
     () =>
-      censuses.reduce<Record<BCP47LocaleCode, LocaleData>>((missing, census) => {
+      censuses.reduce<Record<StandardLocaleCode, LocaleData>>((missing, census) => {
         Object.entries(census.languageEstimates ?? {})?.forEach(([langID, populationEstimate]) => {
           const localeID = langID + '_' + census.isoRegionCode;
           const lang = getLanguage(langID);

@@ -2,7 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import { PopulationSourceCategory } from '@entities/types/DataTypes';
+import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';

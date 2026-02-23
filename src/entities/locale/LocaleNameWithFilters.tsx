@@ -4,7 +4,7 @@ import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 
 import Highlightable from '@shared/ui/Highlightable';
 

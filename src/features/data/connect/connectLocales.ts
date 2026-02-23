@@ -1,13 +1,8 @@
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
-import {
-  BCP47LocaleCode,
-  LocaleData,
-  ScriptCode,
-  TerritoryCode,
-  TerritoryData,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 /**
  * Connects locales to their languages and territories
@@ -21,7 +16,7 @@ export default function connectLocales(
   languages: LanguageDictionary,
   territories: Record<TerritoryCode, TerritoryData>,
   writingSystems: Record<ScriptCode, WritingSystemData>,
-  locales: Record<BCP47LocaleCode, LocaleData>,
+  locales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   Object.values(locales).forEach((locale) => {
     const territory = locale.territoryCode ? territories[locale.territoryCode] : undefined;

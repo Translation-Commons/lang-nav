@@ -16,7 +16,7 @@ import {
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';

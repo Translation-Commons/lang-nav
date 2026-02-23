@@ -5,7 +5,7 @@ import PopulationWarning from '@widgets/PopulationWarning';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { WritingSystemData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
@@ -32,6 +32,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
     territoryOfOrigin,
     unicodeVersion,
   } = writingSystem;
+  const sortFunction = getSortFunction();
 
   return (
     <div className="Details">
@@ -78,7 +79,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           <DetailsField title="Languages">
             <CommaSeparated>
               {Object.values(languages)
-                .sort(getSortFunction())
+                .sort(sortFunction)
                 .map((lang) => (
                   <HoverableObjectName key={lang.ID} object={lang} />
                 ))}
@@ -95,7 +96,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         {localesWhereExplicit && localesWhereExplicit.length > 0 && (
           <DetailsField title="Locales (where writing system is explicit)">
             <CommaSeparated>
-              {localesWhereExplicit.sort(getSortFunction()).map((locale) => (
+              {localesWhereExplicit.sort(sortFunction).map((locale) => (
                 <HoverableObjectName key={locale.ID} object={locale} />
               ))}
             </CommaSeparated>
@@ -110,7 +111,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         {childWritingSystems && childWritingSystems.length > 0 && (
           <DetailsField title="Inspired">
             <CommaSeparated>
-              {childWritingSystems.sort(getSortFunction()).map((writingSystem) => (
+              {childWritingSystems.sort(sortFunction).map((writingSystem) => (
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
               ))}
             </CommaSeparated>
@@ -119,7 +120,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         {containsWritingSystems && containsWritingSystems.length > 0 && (
           <DetailsField title="Contains">
             <CommaSeparated>
-              {containsWritingSystems.sort(getSortFunction()).map((writingSystem) => (
+              {containsWritingSystems.sort(sortFunction).map((writingSystem) => (
                 <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
               ))}
             </CommaSeparated>

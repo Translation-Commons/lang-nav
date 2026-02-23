@@ -8,7 +8,8 @@ import usePageParams from '@features/params/usePageParams';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getContainingTerritories } from '@entities/lib/getObjectRelatedTerritories';
-import { ObjectData, WritingSystemData } from '@entities/types/DataTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';

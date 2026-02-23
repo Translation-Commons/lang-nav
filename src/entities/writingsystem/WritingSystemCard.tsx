@@ -10,10 +10,9 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import usePageParams from '@features/params/usePageParams';
 
-import { WritingSystemData, WritingSystemScope } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
+import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -27,7 +26,6 @@ interface Props {
 const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
   const {
     containsWritingSystems,
-    ID,
     languages,
     parentWritingSystem,
     populationUpperBound,
@@ -36,17 +34,14 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     scope,
     unicodeVersion,
   } = writingSystem;
-  const { updatePageParams } = usePageParams();
   const population =
     populationUpperBound != null && populationUpperBound >= 100 ? populationUpperBound : null;
 
   return (
     <div>
-      <h3>
-        <a onClick={() => updatePageParams({ objectID: ID })}>
-          <ObjectTitle object={writingSystem} />
-        </a>
-      </h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
+        <ObjectTitle object={writingSystem} />
+      </div>
 
       <CardField
         title="Sample"

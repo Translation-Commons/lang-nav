@@ -1,11 +1,7 @@
 import { LanguageData } from '@entities/language/LanguageTypes';
-import {
-  BCP47LocaleCode,
-  LocaleData,
-  ScriptCode,
-  WikipediaData,
-  WikipediaStatus,
-} from '@entities/types/DataTypes';
+import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
+import { ScriptCode } from '@entities/writingsystem/WritingSystemTypes';
 
 import { DataContextType } from '../../context/useDataContext';
 
@@ -33,7 +29,7 @@ function parseWikipediaData(line: string): WikipediaData {
     languageName: parts[3],
     scriptCodes: parts[4] ? (parts[4].split('/') as ScriptCode[]) : [],
     wikipediaSubdomain: parts[5],
-    localeCode: parts[6] as BCP47LocaleCode,
+    localeCode: parts[6] as StandardLocaleCode,
     articles: parseInt(parts[7].replace(/,/g, '')),
     activeUsers: parseInt(parts[8].replace(/,/g, '')),
     url: parts[9],
@@ -66,7 +62,7 @@ export function applyWikipediaData(
     // And some can support multiple scripts eg. zh_Hans and zh_Hant
     if (wiki.scriptCodes.length > 0) {
       wiki.scriptCodes.forEach((script) => {
-        const scriptLocaleCode = `${wiki.localeCode}_${script}` as BCP47LocaleCode;
+        const scriptLocaleCode = `${wiki.localeCode}_${script}` as StandardLocaleCode;
         const scriptLocale = getLocale(scriptLocaleCode);
         if (scriptLocale) {
           scriptLocale.wikipedia = wiki;

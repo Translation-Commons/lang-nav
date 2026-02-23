@@ -1,4 +1,4 @@
-import { TerritoryCode, TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 
 export function loadLandArea(
   getTerritory: (id: string) => TerritoryData | undefined,

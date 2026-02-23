@@ -1,7 +1,7 @@
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import TableColumn from '@features/table/TableColumn';
 
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 

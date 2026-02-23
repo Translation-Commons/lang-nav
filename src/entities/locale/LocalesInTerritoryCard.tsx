@@ -4,7 +4,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { getFilterByLanguageScope } from '@features/transforms/filtering/filter';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 type Props = {
   territory: TerritoryData;

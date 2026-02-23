@@ -1,5 +1,5 @@
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
-import { ScriptCode, WritingSystemData } from '@entities/types/DataTypes';
+import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export function computeDescendantPopulation(
   languagesBySource: LanguagesBySource,

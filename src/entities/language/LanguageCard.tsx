@@ -13,7 +13,7 @@ import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -41,10 +41,10 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={lang} />
         <ObjectSubtitle object={lang} />
-      </h3>
+      </div>
 
       {populationEstimate != null && (
         <CardField

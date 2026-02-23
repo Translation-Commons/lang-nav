@@ -4,11 +4,12 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { VariantTagData } from '@entities/types/DataTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { VariantTagData } from './VariantTagTypes';
 
 interface Props {
   data: VariantTagData;
@@ -19,10 +20,10 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={data} />
         <ObjectSubtitle object={data} />
-      </h3>
+      </div>
 
       <div>
         <label>Name:</label>

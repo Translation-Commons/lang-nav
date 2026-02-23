@@ -8,16 +8,12 @@ import React from 'react';
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+
 import { CLDRCoverageData } from '../types/CLDRTypes';
-import {
-  LocaleData,
-  ObjectBase,
-  PopulationSourceCategory,
-  ScriptCode,
-  VariantTagData,
-  WikipediaData,
-  WritingSystemData,
-} from '../types/DataTypes';
+import { ObjectBase, WikipediaData } from '../types/DataTypes';
 
 import { LanguageModality } from './LanguageModality';
 import {

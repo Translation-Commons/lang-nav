@@ -1,5 +1,5 @@
 import { getCensusCollectorTypeRank } from '@entities/census/CensusTypes';
-import { LocaleData, LocaleInCensus } from '@entities/types/DataTypes';
+import { LocaleData, LocaleInCensus } from '@entities/locale/LocaleTypes';
 
 type CensusCmp = (a: LocaleInCensus, b: LocaleInCensus) => number;
 

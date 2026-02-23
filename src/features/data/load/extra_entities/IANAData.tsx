@@ -2,18 +2,10 @@ import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
-import {
-  BCP47LocaleCode,
-  LocaleData,
-  LocaleSource,
-  VariantTagData,
-} from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { VariantTagData, VariantTagDictionary } from '@entities/varianttag/VariantTagTypes';
 
 import { toDictionary, unique } from '@shared/lib/setUtils';
-
-export type VariantIANATag = string; // IANA tag, eg. valencia (for cat-ES-valencia)
-
-export type VariantTagDictionary = Record<VariantIANATag, VariantTagData>;
 
 export async function loadIANAVariants(): Promise<VariantTagDictionary | void> {
   return await fetch(`data/iana_variants.txt`)
@@ -118,7 +110,7 @@ export function parseIANAVariant(input: string): VariantTagData | null {
 // TODO support complex variants like zh-Latn-pinyin or oc-lengadoc-grclass
 export function addIANAVariantLocales(
   languagesBCP: LanguageDictionary,
-  locales: Record<BCP47LocaleCode, LocaleData>,
+  locales: Record<StandardLocaleCode, LocaleData>,
   variants: VariantTagDictionary | void,
 ): void {
   if (!variants) return;
@@ -144,7 +136,7 @@ export function addIANAVariantLocales(
 
 function addVariantLocale(
   localeTags: LocaleTags,
-  locales: Record<BCP47LocaleCode, LocaleData>,
+  locales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   const localeCode = getLocaleCodeFromTags(localeTags, LocaleSeparator.Underscore);
   if (!localeCode.includes('_')) return; // Don't add language-only locales
@@ -166,7 +158,7 @@ function addVariantLocale(
 export function connectVariantTags(
   variantTags: VariantTagDictionary,
   languages: LanguageDictionary,
-  locales: Record<BCP47LocaleCode, LocaleData>,
+  locales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   // Link variants to languages and link languages back to variants
   Object.values(variantTags).forEach((variant) => {

@@ -1,11 +1,13 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
-import { ISO3166Code, LocaleData } from '@entities/types/DataTypes';
+import { TerritoryCode } from '@entities/territory/TerritoryTypes';
+
+import { LocaleData } from './LocaleTypes';
 
 export function getLocaleCode(
   locale: LocaleData,
   localeSeparator: LocaleSeparator,
-  territoryOverride?: ISO3166Code,
+  territoryOverride?: TerritoryCode,
 ): string {
   return [
     locale.language?.codeDisplay ?? locale.languageCode,
@@ -27,7 +29,7 @@ export type LocaleTags = {
 export function getLocaleCodeFromTags(
   localeTags: LocaleTags,
   localeSeparator: LocaleSeparator = LocaleSeparator.Underscore,
-  territoryOverride?: ISO3166Code,
+  territoryOverride?: TerritoryCode,
 ): string {
   return [
     localeTags.languageCode,
