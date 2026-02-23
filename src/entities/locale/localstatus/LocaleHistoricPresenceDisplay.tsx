@@ -1,5 +1,7 @@
 import Hoverable from '@features/layers/hovercard/Hoverable';
+
 import Deemphasized from '@shared/ui/Deemphasized';
+
 import { LocaleData } from '../LocaleTypes';
 
 const LocaleHistoricPresenceDisplay = ({ loc }: { loc: LocaleData }) => {

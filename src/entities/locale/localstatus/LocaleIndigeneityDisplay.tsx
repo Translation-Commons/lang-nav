@@ -2,6 +2,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LocaleData } from '../LocaleTypes';
+
 import LocaleFormedHereDisplay, { LangFormedHereFieldDescription } from './LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay, {
   HistoricPresenceFieldDescription,
@@ -28,13 +29,13 @@ export function getIndigeneityDescription() {
       <p>
         Approximating if a language is indigenous to the region for this locale by measuring if it
         formed in the region and when it (or its antecedents) were established in the area. The
-        notion of indigeneity is complex and involves subjective political judgments. Thereby we have
-        2 objective criteria:
+        notion of indigeneity is complex and involves subjective political judgments. Thereby we
+        have 2 objective criteria:
       </p>
-      <p> 
+      <p>
         <LangFormedHereFieldDescription />
       </p>
-      <p> 
+      <p>
         <HistoricPresenceFieldDescription />
       </p>
     </>

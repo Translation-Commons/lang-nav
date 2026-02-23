@@ -17,6 +17,8 @@ import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories'
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
@@ -26,8 +28,6 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
-import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
-import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 import LocaleRelatedLocalesColumns from './columns/LocaleRelatedLocalesColumns';
 

@@ -6,6 +6,8 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageModalityIcon } from '@entities/language/LanguageModalityDisplay';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
+import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
@@ -16,8 +18,6 @@ import DecimalNumber from '@shared/ui/DecimalNumber';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
-import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
-import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import Field from './Field';
 import getField from './getField';
 
