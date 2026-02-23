@@ -10,7 +10,6 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import usePageParams from '@features/params/usePageParams';
 
 import ObjectTitle from '@entities/ui/ObjectTitle';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
@@ -27,7 +26,6 @@ interface Props {
 const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
   const {
     containsWritingSystems,
-    ID,
     languages,
     parentWritingSystem,
     populationUpperBound,
@@ -36,7 +34,6 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
     scope,
     unicodeVersion,
   } = writingSystem;
-  const { updatePageParams } = usePageParams();
   const population =
     populationUpperBound != null && populationUpperBound >= 100 ? populationUpperBound : null;
 
