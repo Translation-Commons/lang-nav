@@ -15,7 +15,6 @@ const CollapsibleReport: React.FC<{
           cursor: 'pointer',
           textAlign: 'left',
           fontSize: '1.2em',
-          marginBottom: '1em',
         }}
       >
         {title}
