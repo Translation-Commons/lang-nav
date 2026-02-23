@@ -4,7 +4,7 @@ import Field from '@features/transforms/fields/Field';
 import CensusCountForLocale from '@entities/census/CensusCountForLocale';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
-import { LocaleData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {

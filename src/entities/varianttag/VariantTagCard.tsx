@@ -3,12 +3,13 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { VariantTagData } from '@entities/types/DataTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { VariantTagData } from './VariantTagTypes';
 
 interface Props {
   data: VariantTagData;
@@ -21,9 +22,9 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={data} />
-      </h3>
+      </div>
 
       <CardField title="Description" icon={TextIcon} description="Description of this variant tag.">
         {description ? shortDescription : <Deemphasized>No description</Deemphasized>}

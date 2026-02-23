@@ -3,7 +3,7 @@ import React from 'react';
 import MapContainer from '@features/map/MapContainer';
 import ObjectMap from '@features/map/ObjectMap';
 
-import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';

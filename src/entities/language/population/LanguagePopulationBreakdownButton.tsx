@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
-import { PopulationSourceCategory } from '@entities/types/DataTypes';
+import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import { LanguageData } from '../LanguageTypes';
 

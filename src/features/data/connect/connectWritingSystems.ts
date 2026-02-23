@@ -1,10 +1,6 @@
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
-import {
-  ScriptCode,
-  TerritoryCode,
-  TerritoryData,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export function connectWritingSystems(
   languages: LanguageDictionary,

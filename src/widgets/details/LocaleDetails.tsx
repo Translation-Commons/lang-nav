@@ -9,7 +9,7 @@ import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData, LocaleSource } from '@entities/types/DataTypes';
+import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsField from '@shared/containers/DetailsField';

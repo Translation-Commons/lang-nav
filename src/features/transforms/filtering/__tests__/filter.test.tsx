@@ -8,7 +8,7 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
-import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { buildVitalityFilterFunction } from '../filter';
 

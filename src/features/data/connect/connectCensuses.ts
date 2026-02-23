@@ -3,7 +3,8 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { setLanguageNames } from '@entities/language/setLanguageNames';
-import { LocaleData, TerritoryData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { CensusImport } from '../load/extra_entities/loadCensusData';
 

@@ -8,7 +8,7 @@ import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
-import { TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import CommaSeparated from '@shared/ui/CommaSeparated';

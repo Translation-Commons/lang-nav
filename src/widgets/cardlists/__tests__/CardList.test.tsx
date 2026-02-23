@@ -7,7 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 

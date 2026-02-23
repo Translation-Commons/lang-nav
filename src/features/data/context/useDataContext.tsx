@@ -1,13 +1,11 @@
 import { createContext, useContext } from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import {
-  LocaleData,
-  ObjectData,
-  TerritoryData,
-  VariantTagData,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CoreDataArrays } from '../load/CoreData';
 

@@ -8,7 +8,9 @@ import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData, ObjectData, WritingSystemData } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export const LocaleHierarchy: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();

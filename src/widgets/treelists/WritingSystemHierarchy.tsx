@@ -6,7 +6,8 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { ObjectData, WritingSystemData } from '@entities/types/DataTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export const WritingSystemHierarchy: React.FC = () => {
   const { writingSystems } = useDataContext();

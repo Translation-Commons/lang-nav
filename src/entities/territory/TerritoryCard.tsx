@@ -4,7 +4,7 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
-import { TerritoryData, TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
@@ -28,9 +28,9 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={territory} />
-      </h3>
+      </div>
       <CardField
         title="Territory Type"
         icon={BlocksIcon}

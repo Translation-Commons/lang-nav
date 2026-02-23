@@ -24,7 +24,8 @@ import {
   getCountOfChildTerritories,
   getCountOfCountries,
 } from '@entities/lib/getObjectRelatedTerritories';
-import { ObjectData, TerritoryData } from '@entities/types/DataTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

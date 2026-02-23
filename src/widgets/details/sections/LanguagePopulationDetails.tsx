@@ -6,7 +6,7 @@ import { LanguagePopulationEstimate } from '@entities/language/population/Langua
 import LanguagePopulationOfDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
 import LanguagePopulationFromEthnologue from '@entities/language/population/LanguagePopulationFromEthnologue';
 import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
-import { PopulationSourceCategory } from '@entities/types/DataTypes';
+import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
 import DetailsField from '@shared/containers/DetailsField';

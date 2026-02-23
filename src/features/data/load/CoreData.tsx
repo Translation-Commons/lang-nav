@@ -8,13 +8,11 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
-import {
-  LocaleData,
-  ObjectData,
-  TerritoryData,
-  VariantTagData,
-  WritingSystemData,
-} from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { ObjectData } from '@entities/types/DataTypes';
+import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { connectObjectsAndCreateDerivedData } from '../compute/connectObjects';
 import { groupLanguagesBySource } from '../connect/connectLanguages';

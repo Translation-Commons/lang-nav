@@ -1,9 +1,11 @@
 import { getLocaleCodeFromTags, LocaleTags } from '@entities/locale/LocaleParsing';
-import { BCP47LocaleCode, LocaleData } from '@entities/types/DataTypes';
+import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 
 import { unique } from '@shared/lib/setUtils';
 
-export function searchLocalesForMissingLinks(locales: Record<BCP47LocaleCode, LocaleData>): void {
+export function searchLocalesForMissingLinks(
+  locales: Record<StandardLocaleCode, LocaleData>,
+): void {
   Object.values(locales).forEach((locale) => {
     if (!locale.relatedLocales) locale.relatedLocales = {};
     const relatedLocales = locale.relatedLocales ?? {};

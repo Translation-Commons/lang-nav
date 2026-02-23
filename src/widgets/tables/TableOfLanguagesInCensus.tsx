@@ -19,7 +19,8 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
-import { LocaleData, TerritoryScope } from '@entities/types/DataTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';

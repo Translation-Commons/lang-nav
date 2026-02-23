@@ -4,7 +4,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
-import { TerritoryScope } from '@entities/types/DataTypes';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
