@@ -31,6 +31,7 @@ export enum ObjectType {
   Territory = 'Territory',
   WritingSystem = 'Writing System',
   VariantTag = 'Variant Tag',
+  Keyboard = 'Keyboard',
 }
 
 export enum View {

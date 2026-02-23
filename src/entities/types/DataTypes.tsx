@@ -4,6 +4,7 @@
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
@@ -27,7 +28,8 @@ export type ObjectData =
   | LocaleData
   | TerritoryData
   | WritingSystemData
-  | VariantTagData;
+  | VariantTagData
+  | KeyboardData;
 export type ObjectDictionary = Record<string, ObjectData>;
 
 export enum WikipediaStatus {

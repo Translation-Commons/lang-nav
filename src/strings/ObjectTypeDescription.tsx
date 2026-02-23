@@ -55,6 +55,13 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           These are typically used to specify a particular orthography or dialect.
         </>
       );
+    case ObjectType.Keyboard:
+      return (
+        <>
+          <label>Keyboard:</label>A keyboard layout for inputting text in a given language.
+          Currently showing GBoard layouts, which may support transliteration between scripts.
+        </>
+      );
   }
 };
 

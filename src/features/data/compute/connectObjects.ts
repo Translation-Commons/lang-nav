@@ -1,9 +1,11 @@
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguagesBySource } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
+import { connectKeyboards } from '../connect/connectKeyboards';
 import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
 import connectLocales from '../connect/connectLocales';
 import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
@@ -26,6 +28,7 @@ export function connectObjectsAndCreateDerivedData(
   writingSystems: Record<string, WritingSystemData>,
   locales: Record<string, LocaleData>,
   variantTags: Record<string, VariantTagData>,
+  keyboards: Record<string, KeyboardData>,
 ): void {
   connectLanguagesToParent(languagesBySource);
   connectTerritoriesToParent(territories);
@@ -36,4 +39,5 @@ export function connectObjectsAndCreateDerivedData(
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
+  connectKeyboards(keyboards, languagesBySource.Combined, territories, writingSystems, variantTags);
 }

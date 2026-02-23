@@ -7,6 +7,7 @@ import {
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusData, CensusID } from '@entities/census/CensusTypes';
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -17,6 +18,7 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { connectObjectsAndCreateDerivedData } from '../compute/connectObjects';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
+import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
 import { loadTerritories } from './entities/loadTerritories';
@@ -45,6 +47,7 @@ export type CoreDataArrays = {
   territories: TerritoryData[];
   variantTags: VariantTagData[];
   writingSystems: WritingSystemData[];
+  keyboards: KeyboardData[];
   censuses: Record<CensusID, CensusData>;
 };
 
@@ -91,6 +94,7 @@ export function useCoreData(): {
       locales,
       writingSystems,
       variantTags,
+      keyboards,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -105,6 +109,7 @@ export function useCoreData(): {
       loadLocales(),
       loadWritingSystems(),
       loadIANAVariants(),
+      loadKeyboardsGBoard(),
     ]);
 
     if (
@@ -112,7 +117,8 @@ export function useCoreData(): {
       territories == null ||
       locales == null ||
       writingSystems == null ||
-      variantTags == null
+      variantTags == null ||
+      keyboards == null
     ) {
       alert('Error loading data. Please check the console for more details.');
       return;
@@ -134,6 +140,7 @@ export function useCoreData(): {
       writingSystems,
       locales,
       variantTags,
+      keyboards,
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
@@ -148,6 +155,7 @@ export function useCoreData(): {
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa
       ...variantTags, // These may be arbitrary, but usually 6-8 alphabetic
+      ...keyboards,
     });
   }
 
@@ -164,6 +172,9 @@ export function useCoreData(): {
       ),
       writingSystems: Object.values(objects).filter(
         (o): o is WritingSystemData => o.type === ObjectType.WritingSystem,
+      ),
+      keyboards: Object.values(objects).filter(
+        (o): o is KeyboardData => o.type === ObjectType.Keyboard,
       ),
       censuses,
       objects,
