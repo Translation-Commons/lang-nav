@@ -1,7 +1,5 @@
-import { describe } from 'node:test';
-
 import plurals from 'cldr-core/supplemental/plurals.json';
-import { expect, it } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { getBaseLanguageData } from '../../LanguageTypes';
 import {
