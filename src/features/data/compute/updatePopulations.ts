@@ -2,8 +2,9 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import { sumBy } from '@shared/lib/setUtils';
+import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 import {
   computeLanguageFamilyLocalePopulations,
   computeRegionalLocalesPopulation,
@@ -63,7 +64,7 @@ function computeLanguagePopulationEstimate(lang: LanguageData): void {
     lang.populationFromLocales != null &&
     // If the population from locales is very small but Ethnologue is much bigger, then it is
     // better to use the Ethnologue number until we have better locale census data.
-    !(lang.populationFromLocales < 10 && (lang.Ethnologue.population ?? 0) > 1000)
+    !(lang.populationFromLocales < 10)
   ) {
     lang.populationEstimate = lang.populationFromLocales;
     lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
@@ -105,11 +106,11 @@ function discountPopulationEstimatesIfSimilarToParent(languages: LanguageData[])
 // Take the value for the world languages (eg. eng_001) and if higher than the current estimate,
 //  update the language population estimates.
 export function updateLanguagesPopulationFromLocale(territory: TerritoryData): void {
-  territory?.locales
-    ?.filter((l) => l.scriptCode == null && (l.variantTagCodes || []).length === 0)
-    .forEach((locale) => {
+  uniqueBy(territory?.locales?.sort(sortByPopulation) ?? [], (l) => l.languageCode).forEach(
+    (locale) => {
       const language = locale.language;
       if (language == null || locale.populationAdjusted == null) return;
       language.populationFromLocales = locale.populationAdjusted;
-    });
+    },
+  );
 }
