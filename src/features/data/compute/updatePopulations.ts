@@ -1,8 +1,10 @@
+import { sortByPopulation } from '@features/transforms/sorting/sort';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import { sumBy } from '@shared/lib/setUtils';
+import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
 import {
   computeLanguageFamilyLocalePopulations,
@@ -59,18 +61,9 @@ function getLanguagePopulationFollowingDescendants(lang: LanguageData, depth = 0
 function computeLanguagePopulationEstimate(lang: LanguageData): void {
   // The best source would come from the censuses
   // Locale data usually comes from censuses, or language family locales are bounded by country size
-  if (
-    lang.populationFromLocales != null &&
-    // If the population from locales is very small but Ethnologue is much bigger, then it is
-    // better to use the Ethnologue number until we have better locale census data.
-    !(lang.populationFromLocales < 10 && (lang.Ethnologue.population ?? 0) > 1000)
-  ) {
+  if (lang.populationFromLocales != null && lang.populationFromLocales > 0) {
     lang.populationEstimate = lang.populationFromLocales;
     lang.populationEstimateSource = PopulationSourceCategory.AggregatedFromTerritories;
-  } else if (lang.Ethnologue.population != null) {
-    // Next we will take the rounded population from Ethnologue
-    lang.populationEstimate = lang.Ethnologue.population;
-    lang.populationEstimateSource = PopulationSourceCategory.Ethnologue;
   } else if (lang.populationRough /* if its defined and not zero */) {
     // Otherwise, use the population from the languages.tsv file
     // They are often rough estimates, from a mixture of sources (and are missing citations)
@@ -105,11 +98,11 @@ function discountPopulationEstimatesIfSimilarToParent(languages: LanguageData[])
 // Take the value for the world languages (eg. eng_001) and if higher than the current estimate,
 //  update the language population estimates.
 export function updateLanguagesPopulationFromLocale(territory: TerritoryData): void {
-  territory?.locales
-    ?.filter((l) => l.scriptCode == null && (l.variantTagCodes || []).length === 0)
-    .forEach((locale) => {
+  uniqueBy([...(territory?.locales ?? [])].sort(sortByPopulation), (l) => l.languageCode).forEach(
+    (locale) => {
       const language = locale.language;
       if (language == null || locale.populationAdjusted == null) return;
       language.populationFromLocales = locale.populationAdjusted;
-    });
+    },
+  );
 }
