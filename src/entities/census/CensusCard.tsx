@@ -28,9 +28,9 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={census} />
-      </h3>
+      </div>
       <CardField title="Territory" icon={EarthIcon} description="Where this census was conducted.">
         {territory != null ? <HoverableObjectName object={territory} /> : isoRegionCode}
       </CardField>
