@@ -9094,7 +9094,6 @@ djm_ML	Jamsay Dogon (Mali)
 dka_BT	Dakpakha (Bhutan)				
 dkg_NG	Kadung (Nigeria)				
 dks_SS	Southeastern Dinka (South Sudan)				
-dlc_SE	Dalecarlian (Sweden)	#N/A			
 dlm_HR	Dalmatian (Croatia)				
 dma_GA	Duma (Gabon)				
 dmf_NG	Medefaidrin (Nigeria)				
@@ -9129,7 +9128,7 @@ eaa_AU	Karenggapa (Australia)
 ebc_ID	Beginci (Indonesia)	bahasa Beginci			
 ebo_CG	Teke-Ebo (Congo - Brazzaville)				
 ecr_GR	Eteocretan (Greece)				
-eft_US	Efik (United States)	#N/A			
+efi_US	Efik (United States)		2,521		
 egm_TZ	Benamanga (Tanzania)				
 egy_EG	Egyptian (Ancient) (Egypt)	𓂋𓏤𓈖𓆎𓅓𓏏𓊖			
 ehs_JP	Miyakubo Sign Language (Japan)	宮窪手話			
@@ -9836,8 +9835,6 @@ pys_PY	Paraguayan Sign Language (Paraguay)
 pyx_MM	Pyu (Myanmar) (Myanmar)				
 pze_NG	Pesse (Nigeria)				
 pzh_TW	Pazeh (Taiwan)	Pazeh			
-qda_GT	Guazacapán Xinka (Guatemala)	#N/A			
-qhq_GT	Jumaytepeque Xinka (Guatemala)	#N/A			
 qud_EC	Calderón Highland Quichua (Ecuador)				
 quh_BO	South Bolivian Quechua (Bolivia)	Qullasuyu qhichwa simi			
 quq_ES	Quinqui (Spain)				
@@ -10627,3 +10624,4 @@ ido_NL	Ido (Netherlands)
 ido_FR	Ido (France)				
 ina_US	Interlingua (United States)				
 tok_CA	Toki Pona (Canada)				
+myi_IN	Mina (India)				
