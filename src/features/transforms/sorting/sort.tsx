@@ -100,6 +100,8 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Area:
     case Field.LanguageScope:
     case Field.TerritoryScope:
+    case Field.LanguageFormedHere:
+    case Field.HistoricPresence:
       return SortDirection.Descending; // High to Low
     default:
       enforceExhaustiveSwitch(sortBy);

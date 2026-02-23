@@ -10,6 +10,9 @@ import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted'
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import LocaleIndigeneityDisplay, {
+  getIndigeneityDescription,
+} from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsField from '@shared/containers/DetailsField';
@@ -239,6 +242,9 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
       {officialStatus && (
         <DetailsField title="Government Status">{getOfficialLabel(officialStatus)}</DetailsField>
       )}
+      <DetailsField title="Indigeneity" description={getIndigeneityDescription()}>
+        <LocaleIndigeneityDisplay loc={locale} />
+      </DetailsField>
       {wikipedia && (
         <DetailsField title="Wikipedia">
           <ObjectWikipediaInfo object={locale} />

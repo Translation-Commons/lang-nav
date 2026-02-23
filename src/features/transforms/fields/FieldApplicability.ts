@@ -29,6 +29,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Territory,
         Field.LanguageScope,
         Field.TerritoryScope,
+        Field.LanguageFormedHere,
+        Field.HistoricPresence,
       ];
     case ObjectType.Territory:
       return [

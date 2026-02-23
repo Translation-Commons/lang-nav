@@ -44,6 +44,8 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.Modality:
     case Field.LanguageScope:
     case Field.TerritoryScope:
+    case Field.HistoricPresence:
+    case Field.LanguageFormedHere:
       return TableValueType.Enum;
     default:
       enforceExhaustiveSwitch(field);

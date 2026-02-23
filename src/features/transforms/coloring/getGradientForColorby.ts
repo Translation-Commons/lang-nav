@@ -16,6 +16,8 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.Date:
     case Field.Area:
     case Field.Modality:
+    case Field.LanguageFormedHere:
+    case Field.HistoricPresence:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
     case Field.VitalityMetascore:

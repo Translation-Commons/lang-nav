@@ -6,6 +6,8 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageModalityIcon } from '@entities/language/LanguageModalityDisplay';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
+import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
@@ -85,6 +87,11 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return typeof fieldValue === 'number' && getLanguageScopeLabel(fieldValue);
     case Field.TerritoryScope:
       return typeof fieldValue === 'number' && getTerritoryScopeLabel(fieldValue);
+
+    case Field.LanguageFormedHere:
+      return object.type === ObjectType.Locale && <LocaleFormedHereDisplay loc={object} />;
+    case Field.HistoricPresence:
+      return object.type === ObjectType.Locale && <LocaleHistoricPresenceDisplay loc={object} />;
 
     default:
       enforceExhaustiveSwitch(field);
