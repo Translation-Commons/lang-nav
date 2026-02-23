@@ -23,10 +23,10 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={locale} />
         <ObjectSubtitle object={locale} />
-      </h3>
+      </div>
 
       {populationAdjusted != null && (
         <CardField
