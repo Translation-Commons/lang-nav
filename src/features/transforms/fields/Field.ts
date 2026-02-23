@@ -16,6 +16,10 @@ enum Field {
   LanguageScope = 'Language Scope',
   TerritoryScope = 'Territory Scope',
 
+  // Language in Territory Status (locale specific)
+  LanguageFormedHere = 'Language Formed Here',
+  HistoricPresence = 'Historic Presence',
+
   // Vitality metrics
   VitalityMetascore = 'Vitality: Metascore',
   ISOStatus = 'ISO Status',
