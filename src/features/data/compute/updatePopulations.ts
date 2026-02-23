@@ -1,10 +1,11 @@
+import { sortByPopulation } from '@features/transforms/sorting/sort';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
-import { sortByPopulation } from '@features/transforms/sorting/sort';
 import {
   computeLanguageFamilyLocalePopulations,
   computeRegionalLocalesPopulation,
