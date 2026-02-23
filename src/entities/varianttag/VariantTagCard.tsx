@@ -20,10 +20,10 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={data} />
         <ObjectSubtitle object={data} />
-      </h3>
+      </div>
 
       <div>
         <label>Name:</label>

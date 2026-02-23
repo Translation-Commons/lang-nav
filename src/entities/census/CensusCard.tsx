@@ -15,10 +15,10 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={census} />
         <ObjectSubtitle object={census} />
-      </h3>
+      </div>
       <div>
         <h4>Languages</h4>
         {languageCount.toLocaleString()}

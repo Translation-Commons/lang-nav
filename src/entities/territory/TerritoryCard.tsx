@@ -28,9 +28,9 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
   return (
     <div>
-      <h3>
+      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={territory} />
-      </h3>
+      </div>
       <CardField
         title="Territory Type"
         icon={BlocksIcon}
