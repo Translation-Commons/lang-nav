@@ -14,10 +14,6 @@ import {
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
-import {
-  LocaleFormedHereDisplay,
-  LocaleHistoricPresenceDisplay,
-} from '@entities/locale/LocaleIndigeneityDisplay';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -30,6 +26,8 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
+import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import { LocalePopulationColumns } from './columns/LocalePopulationColumns';
 import LocaleRelatedLocalesColumns from './columns/LocaleRelatedLocalesColumns';
 
@@ -175,11 +173,15 @@ const LocaleTable: React.FC = () => {
         {
           key: 'Formation',
           render: (loc) => <LocaleFormedHereDisplay loc={loc} />,
+          field: Field.LanguageFormedHere,
+          isInitiallyVisible: false,
           columnGroup: 'Local Status',
         },
         {
           key: 'Historic Presence',
           render: (loc) => <LocaleHistoricPresenceDisplay loc={loc} />,
+          field: Field.HistoricPresence,
+          isInitiallyVisible: false,
           columnGroup: 'Local Status',
         },
         {

@@ -6,13 +6,13 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import LocaleIndigeneityDisplay, {
-  getIndigeneityDescription,
-} from '@entities/locale/LocaleIndigeneityDisplay';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
+import LocaleIndigeneityDisplay, {
+  getIndigeneityDescription,
+} from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsField from '@shared/containers/DetailsField';

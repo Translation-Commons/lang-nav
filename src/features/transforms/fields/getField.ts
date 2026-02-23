@@ -65,6 +65,22 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getLanguageForEntity(object)?.scope;
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
+    case Field.LanguageFormedHere:
+      return object.type === ObjectType.Locale
+        ? object.langFormedHere == null
+          ? -1
+          : object.langFormedHere
+            ? 1
+            : 0
+        : undefined;
+    case Field.HistoricPresence:
+      return object.type === ObjectType.Locale
+        ? object.historicPresence == null
+          ? -1
+          : object.historicPresence
+            ? 1
+            : 0
+        : undefined;
 
     // Related objects
     case Field.Language:

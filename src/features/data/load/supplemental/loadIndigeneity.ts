@@ -18,7 +18,7 @@ export async function loadIndigeneity(
         // Language ID	Territory ID	LanguageFormedInThisRegion	TimeLanguageAntecedentsEstablishedBefore1500
         const parts = line.split('\t');
         const language = getLanguage(parts[0]);
-        if (!language) return;
+        if (!language || parts.length < 4) return;
 
         const locales = language.locales.filter((l) => l.territory?.ID === parts[1]);
         if (locales.length === 0) return;
@@ -28,7 +28,7 @@ export async function loadIndigeneity(
           parts[3] === '1' ? true : parts[3] === '0' ? false : undefined;
         locales.forEach((locale) => {
           locale.langFormedHere = formedInThisRegion;
-          locale.langHereBefore1500 = antecedentsBefore1500;
+          locale.historicPresence = antecedentsBefore1500;
         });
       }),
     )

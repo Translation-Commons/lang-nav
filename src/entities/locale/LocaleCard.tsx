@@ -12,9 +12,11 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import LocaleCensusCitation from './LocaleCensusCitation';
-import LocaleIndigeneityDisplay, { getIndigeneityDescription } from './LocaleIndigeneityDisplay';
 import LocalePopulationAdjusted from './LocalePopulationAdjusted';
 import { getOfficialLabel } from './LocaleStrings';
+import LocaleIndigeneityDisplay, {
+  getIndigeneityDescription,
+} from './localstatus/LocaleIndigeneityDisplay';
 
 interface Props {
   locale: LocaleData;

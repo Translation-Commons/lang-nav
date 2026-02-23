@@ -16,6 +16,8 @@ import DecimalNumber from '@shared/ui/DecimalNumber';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
+import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import Field from './Field';
 import getField from './getField';
 
@@ -86,8 +88,10 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.TerritoryScope:
       return typeof fieldValue === 'number' && getTerritoryScopeLabel(fieldValue);
 
-    case Field.Indigeneity:
-      return <LocaleIndigeneityDisplay object={object} />;
+    case Field.LanguageFormedHere:
+      return object.type === ObjectType.Locale && <LocaleFormedHereDisplay loc={object} />;
+    case Field.HistoricPresence:
+      return object.type === ObjectType.Locale && <LocaleHistoricPresenceDisplay loc={object} />;
 
     default:
       enforceExhaustiveSwitch(field);
