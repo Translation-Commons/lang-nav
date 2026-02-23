@@ -1,39 +1,43 @@
-Language ISO	Territory ISO	LanguageFormedInThisRegion	TimeLanguageAntecedentsEstablishedBefore1500
+Language ISO	Territory ISO	LanguageFormedInThisRegion	HistoricPresense
 eng	AC	0	0
 cat	AD	1	1
 fra	AD	0	1
 spa	AD	0	1
 ara	AE	1	1
-bal	AE		
+ssh	AE	1	1
+mal	AE	0	0
+bal	AE	0	0
 eng	AE	0	0
 fas	AE	0	1
 fra	AE	0	1
-mal	AE		
-pus	AE		
-ssh	AE	1	1
+pus	AE	0	0
 abh	AF	1	1
-aee	AF		
-afg	AF		
-aiq	AF		
 ara	AF	0	1
+kaa	AF	0	1
+kaz	AF	0	1
+kir	AF	0	1
+tuk	AF	1	1
+uig	AF	0	1
+uzb	AF	1	1
+uzs	AF	1	1
+prd	AF		
+wrd	AF		
+brh	AF		
+aee	AF		
+aiq	AF		
 ask	AF		
 bal	AF		
 bgn	AF		
-brh	AF		
 bsh	AF		
 eng	AF	0	0
 fas	AF	0	1
 gju	AF		
 glh	AF		
 gwt	AF		
-haz	AF		
+haz	AF	1	1
 isk	AF		
 jat	AF		
-kaa	AF	0	1
-kaz	AF	0	1
-kir	AF	0	1
 lah	AF		
-mhj	AF		
 mnj	AF		
 nli	AF		
 oru	AF		
@@ -42,7 +46,6 @@ pbt	AF
 pbu	AF		
 phv	AF		
 prc	AF		
-prd	AF		
 prn	AF		
 prs	AF	1	1
 psh	AF		
@@ -55,17 +58,14 @@ sgy	AF
 sts	AF		
 tra	AF		
 trm	AF		
-tuk	AF	1	1
-uig	AF	0	1
 urd	AF		
-uzb	AF	1	1
-uzs	AF	1	1
 wbk	AF		
 wbl	AF		
-wrd	AF		
 wsv	AF		
 xbc	AF		
 xvi	AF		
+mhj	AF		
+afg	AF	1	0
 aig	AG		
 eng	AG	0	0
 por	AG		
@@ -77,12 +77,14 @@ fra	AL	0	0
 mkd	AL		
 rom	AL	0	1
 rup	AL		
-sqi	AL		
-sqk	AL		
-aen	AM		
+sqi	AL	1	1
+sqk	AL	1	1
 aii	AM	0	1
-axm	AM		
+syr	AM	0	1
 aze	AM	1	1
+tur	AM	0	1
+kat	AM		
+axm	AM		
 bel	AM		
 deu	AM		
 ell	AM		
@@ -90,31 +92,31 @@ eng	AM	0	0
 fas	AM	0	1
 fra	AM	0	0
 hin	AM		
-hye	AM		
+hye	AM	1	1
 hyw	AM		
-kat	AM		
 kmr	AM		
 kur	AM		
 pol	AM		
-rmi	AM		
 rom	AM	0	1
 rus	AM		
 spa	AM	0	0
-syr	AM	0	1
-tur	AM	0	1
 ukr	AM		
 xcl	AM		
+aen	AM	1	1
+rmi	AM		
+yax	AO		
+por	AO	0	0
+kwz	AO		
+knw	AO		
 blv	AO		
 cjk	AO		
 dhm	AO		
 hng	AO		
 hol	AO		
 khu	AO		
-kmb	AO		
-knw	AO		
+kmb	AO	1	1
 kon	AO		
 kwy	AO		
-kwz	AO		
 lch	AO		
 lin	AO		
 lum	AO		
@@ -131,46 +133,43 @@ nye	AO
 nyk	AO		
 olu	AO		
 pnd	AO		
-por	AO	0	0
 umb	AO	1	1
 xdo	AO		
-yax	AO		
-aed	AR		
 arn	AR	1	1
+ona	AR		
+teh	AR		
 axb	AR		
-calc1235	AR		
-crq	AR		
-crt	AR		
+moc	AR		
+plg	AR		
+tob	AR		
 cym	AR		
 eng	AR	0	0
-grn	AR		
-moc	AR		
+spa	AR	0	0
+ule	AR		
+crq	AR		
+crt	AR		
 mzh	AR		
-ona	AR		
-plg	AR		
+wlv	AR		
 pue	AR		
+aed	AR		
+grn	AR		
 que	AR		
 quh	AR		
 qus	AR		
-spa	AR	0	0
-teh	AR		
-tob	AR		
-ule	AR		
+calc1235	AR		
 vil	AR		
-wlv	AR		
-eng	AS	0	0
 smo	AS		
 ton	AS		
-asq	AT		
-bar	AT		
+eng	AS	0	0
+tur	AT	0	0
+bar	AT	1	1
 bos	AT		
 ckm	AT		
-deu	AT		
+deu	AT	0	1
 eng	AT	0	0
 fra	AT	0	0
 hbs	AT		
 hrv	AT		
-hun	AT		
 ita	AT		
 nrc	AT		
 pol	AT		
@@ -178,59 +177,192 @@ rom	AT	0	1
 slv	AT		
 sqi	AT		
 srp	AT		
-tur	AT	0	0
+asq	AT	1	0
+hun	AT		
+ara	AU	0	0
+cld	AU	0	0
+mlt	AU	0	0
+syr	AU	0	0
+tur	AU	0	0
+dja	AU	1	1
+dth	AU	1	1
+eaa	AU	1	1
+gbu	AU	1	1
+gdt	AU	1	1
+lnw	AU	1	1
+ntg	AU	1	1
+nwg	AU	1	1
+wdj	AU	1	1
+wdy	AU	1	1
+wky	AU	1	1
+xbb	AU	1	1
+xgi	AU	1	1
+xnk	AU	1	1
+xnu	AU	1	1
+xrg	AU	1	1
+ygi	AU	1	1
+yty	AU	1	1
+khm	AU	0	0
+vie	AU	0	0
+coa	AU	1	1
+fij	AU	0	0
+fil	AU	0	0
+ind	AU		
+mri	AU		
+msa	AU		
+nau	AU		
+niu	AU		
+rar	AU		
+rtm	AU	0	0
+smo	AU		
+tgl	AU		
+tkl	AU		
+ton	AU		
+tvl	AU		
+xbd	AU		
+gtu	AU		
+kvs	AU		
+nad	AU		
+okg	AU		
+olk	AU		
+rkw	AU		
+urf	AU		
+xmq	AU		
+bck	AU		
+gni	AU		
+bpl	AU		
+mal	AU		
+tam	AU		
+tel	AU		
+xmu	AU		
+zml	AU		
+ulk	AU		
+wny	AU		
+wrk	AU		
+err	AU		
+urc	AU		
+zme	AU		
+aoi	AU		
+djn	AU		
+gup	AU		
+ngk	AU		
+nid	AU		
+nig	AU		
+nuy	AU		
+rmb	AU		
+wlg	AU		
+wrz	AU		
+hmn	AU		
+hnj	AU		
+afr	AU	0	0
+ben	AU		
+deu	AU		
+ell	AU		
+eng	AU	0	0
+fas	AU	0	0
+fra	AU	0	0
+guj	AU		
+haz	AU		
+hbs	AU		
+hif	AU		
+hin	AU		
+hrv	AU		
+ita	AU		
+lah	AU		
+mkd	AU		
+nep	AU		
+nld	AU		
+pan	AU		
+pes	AU		
+pol	AU		
+por	AU		
+rop	AU		
+rus	AU		
+sin	AU		
+spa	AU	0	0
+srp	AU		
+tcs	AU		
+urd	AU		
+amg	AU		
+ibd	AU		
+ilg	AU		
+mph	AU		
+jpn	AU		
+gdh	AU		
+gia	AU		
+mep	AU		
+kor	AU		
+ggk	AU		
+lrg	AU		
+lmc	AU		
+wux	AU		
+alh	AU		
+mec	AU		
+mpc	AU		
+wnd	AU		
+bvr	AU		
+djj	AU		
+gge	AU		
+nck	AU		
+mhg	AU		
+wur	AU		
+yxa	AU		
+xxm	AU		
+djd	AU		
+jig	AU		
+nji	AU		
+nug	AU		
+wmb	AU		
+gjr	AU		
+din	AU		
+xpb	AU		
+xph	AU		
+mpb	AU		
+woa	AU		
+xpv	AU		
+bcj	AU		
+djw	AU		
+dyb	AU		
+dyd	AU		
+nmp	AU		
+nyh	AU		
+nyv	AU		
+wwr	AU		
+xnm	AU		
+ywr	AU		
+xpd	AU		
 adg	AU		
 adt	AU		
 aea	AU		
 aer	AU		
-afr	AU	0	0
 aid	AU		
-ajn	AU	1	1
-alh	AU		
 aly	AU		
-amg	AU		
 amx	AU		
-amy	AU		
 amz	AU		
 ant	AU		
-aoi	AU		
-ara	AU	0	0
 ard	AU	1	1
 are	AU	1	1
-asf	AU	1	1
-asw	AU		
 avm	AU		
 awg	AU		
 awk	AU		
 axe	AU		
 axl	AU		
 ayd	AU		
-bcj	AU		
-bck	AU		
 bdy	AU		
-ben	AU		
 bia	AU		
 bjb	AU		
 bjy	AU		
-bpl	AU		
 bpt	AU		
-bvr	AU		
 bxi	AU		
 bxj	AU		
 bxn	AU		
 bym	AU		
 bzr	AU		
-cld	AU	0	0
-cmn	AU		
-cnh	AU		
-coa	AU	1	1
 dax	AU		
 dbl	AU		
 dda	AU		
 ddj	AU		
 ddr	AU		
-deu	AU		
-dgn	AU		
 dgt	AU		
 dgw	AU		
 dhg	AU		
@@ -239,99 +371,50 @@ dhr	AU
 dhu	AU		
 dhx	AU		
 dif	AU		
-din	AU		
-dja	AU	1	1
 djb	AU		
-djd	AU		
 djf	AU		
 dji	AU		
-djj	AU		
-djn	AU		
 djr	AU		
-djw	AU		
 dmd	AU		
 dmw	AU		
 drl	AU		
-dth	AU	1	1
 dwu	AU		
 dwy	AU		
-dyb	AU		
-dyd	AU		
 dyn	AU		
 dyy	AU		
 dze	AU		
-eaa	AU	1	1
-ell	AU		
-eng	AU	0	0
-err	AU		
-fas	AU	0	0
-fij	AU	0	0
-fil	AU	0	0
 fln	AU		
-fra	AU	0	0
 gbb	AU		
 gbd	AU		
-gbu	AU	1	1
 gbw	AU		
-gcd	AU		
 gdc	AU		
-gdh	AU		
 gdj	AU		
-gdt	AU	1	1
 ggd	AU		
-gge	AU		
-ggk	AU		
-gia	AU		
 gih	AU		
-giy	AU		
 gjm	AU		
-gjr	AU		
 gko	AU		
 gll	AU		
-gma	AU		
 gmr	AU		
-gni	AU		
 gnl	AU		
 gnn	AU		
 gnr	AU		
-grg	AU		
-gtu	AU		
 gudj1237	AU		
 gue	AU		
 guf	AU		
-guj	AU		
-gup	AU		
 gvn	AU		
 gvy	AU		
 gwm	AU		
 gwu	AU		
-gww	AU		
-gyd	AU		
 gyf	AU		
 gyy	AU		
-haz	AU		
-hbs	AU		
-hif	AU		
-hin	AU		
-hmn	AU		
-hnj	AU		
 hrp	AU		
-hrv	AU		
-ibd	AU		
 ihw	AU		
 iin	AU		
 ikr	AU		
-ilg	AU		
-ind	AU		
-ita	AU		
 jan	AU		
 jao	AU		
 jay	AU		
 jbi	AU		
-jbw	AU		
-jig	AU		
-jng	AU		
-jpn	AU		
 jui	AU		
 kba	AU		
 kbe	AU		
@@ -339,90 +422,45 @@ kda	AU
 kdd	AU		
 kgl	AU		
 kgs	AU		
-khm	AU	0	0
 kjn	AU		
 kkp	AU		
 kky	AU		
 kld	AU		
-kor	AU		
 ktd	AU		
 ktg	AU		
 kux	AU		
 kuy	AU		
-kvs	AU		
-lah	AU		
 lby	AU		
-lbz	AU		
 lja	AU		
 ljw	AU		
 ljx	AU		
 lkm	AU		
 lku	AU		
 llj	AU		
-lmc	AU		
 lnj	AU		
-lnw	AU	1	1
-lrg	AU		
-mal	AU		
-mec	AU		
 mem	AU		
-mep	AU		
-mfr	AU		
-mhg	AU		
-mkd	AU		
-mlt	AU	0	0
-mpb	AU		
-mpc	AU		
-mph	AU		
 mpj	AU		
-mri	AU		
-msa	AU		
 mvl	AU		
-mwf	AU		
 mwp	AU		
-nad	AU		
-nam	AU		
-nau	AU		
 nay	AU		
 nbj	AU		
-nck	AU		
-nep	AU		
-ngk	AU		
 nha	AU		
 nhf	AU		
-nid	AU		
-nig	AU		
-niu	AU		
-nji	AU		
 nju	AU		
-nld	AU		
 nlw	AU		
 nly	AU		
-nmp	AU		
 nmv	AU		
 nna	AU		
 nnr	AU		
 nnv	AU		
-nny	AU		
 nrk	AU		
 nrl	AU		
-nrx	AU		
-ntg	AU	1	1
 ntj	AU		
-nug	AU		
-nuy	AU		
-nwg	AU	1	1
 nwo	AU		
 nxn	AU		
-nyh	AU		
 nys	AU		
 nyt	AU		
-nyv	AU		
 nyx	AU		
-okg	AU		
-olk	AU		
-pan	AU		
-pes	AU		
 pit	AU		
 piu	AU		
 pjt	AU		
@@ -431,123 +469,69 @@ pmd	AU
 pnj	AU		
 pnv	AU		
 pnw	AU		
-pol	AU		
-por	AU		
 pti	AU		
-rar	AU		
 rbp	AU		
 rit	AU		
-rkw	AU		
-rmb	AU		
 rnr	AU		
-rop	AU		
 rrt	AU		
-rsm	AU		
-rtm	AU	0	0
-rus	AU		
 rxd	AU		
 rxw	AU		
-sin	AU		
-smo	AU		
-spa	AU	0	0
-srp	AU		
-syr	AU	0	0
-tam	AU		
 tbh	AU		
-tcs	AU		
-tel	AU		
-tgl	AU		
 tgz	AU		
-tha	AU		
 thd	AU		
-tiw	AU		
 tjj	AU		
 tjp	AU		
 tju	AU		
 tjw	AU		
-tkl	AU		
-ton	AU		
-tur	AU	0	0
-tvl	AU		
 typ	AU		
 ugb	AU		
 uky	AU		
-ulk	AU		
 umd	AU		
 umg	AU		
 ump	AU		
-umr	AU		
-ung	AU		
 unn	AU		
-urc	AU		
-urd	AU		
-urf	AU		
 uwa	AU		
-vie	AU	0	0
 vka	AU		
 vku	AU		
 vma	AU		
 vmb	AU		
-vmi	AU		
 vml	AU		
 vmu	AU		
-waq	AU		
 wbp	AU		
 wbt	AU		
 wbv	AU		
-wdj	AU	1	1
 wdk	AU		
 wdu	AU		
-wdy	AU	1	1
 weg	AU		
 wga	AU		
 wgg	AU		
 wgu	AU		
 wgy	AU		
 wie	AU		
-wif	AU		
 wig	AU		
 wih	AU		
 wij	AU		
 wik	AU		
-wil	AU		
 wim	AU		
 wkr	AU		
 wkw	AU		
-wky	AU	1	1
-wlg	AU		
 wlu	AU		
-wmb	AU		
 wmi	AU		
 wmt	AU		
-wnd	AU		
 wnm	AU		
 wnn	AU		
-wny	AU		
-woa	AU		
 wrb	AU		
 wrg	AU		
 wrh	AU		
 wri	AU		
-wrk	AU		
 wrl	AU		
 wrm	AU		
-wro	AU		
-wrr	AU		
 wrw	AU		
-wrz	AU		
 wth	AU		
 wua	AU		
-wub	AU		
-wur	AU		
-wux	AU		
-wwb	AU		
-wwr	AU		
 wxw	AU		
 wyb	AU		
 wyi	AU		
-xbb	AU	1	1
-xbd	AU		
 xbe	AU		
 xbg	AU		
 xbj	AU		
@@ -557,49 +541,28 @@ xda	AU
 xdk	AU		
 xgd	AU		
 xgg	AU		
-xgi	AU	1	1
 xgm	AU		
-xgu	AU		
 xgw	AU		
 xjb	AU		
 xjt	AU		
 xmh	AU		
 xmp	AU		
-xmq	AU		
-xmu	AU		
 xmy	AU		
 xni	AU		
-xnk	AU	1	1
-xnm	AU		
-xnu	AU	1	1
 xny	AU		
 xpa	AU		
-xpb	AU		
-xpd	AU		
-xpf	AU		
-xph	AU		
 xpj	AU		
-xpl	AU		
 xpt	AU		
-xpv	AU		
-xpw	AU		
-xpx	AU		
-xpz	AU		
 xrd	AU		
-xrg	AU	1	1
-xru	AU		
 xth	AU		
 xtv	AU		
-xud	AU		
 xul	AU		
-xun	AU		
 xut	AU		
 xwd	AU		
 xwj	AU		
 xwk	AU		
 xwt	AU		
 xww	AU		
-xxm	AU		
 xya	AU		
 xyb	AU		
 xyj	AU		
@@ -608,10 +571,6 @@ xyt	AU
 xyy	AU		
 yda	AU		
 yga	AU		
-ygi	AU	1	1
-ygs	AU		
-ygu	AU		
-yhs	AU		
 yia	AU		
 yii	AU		
 yij	AU		
@@ -620,61 +579,102 @@ ylr	AU
 ynd	AU		
 yrm	AU		
 yry	AU		
-yty	AU	1	1
 yub	AU		
-yue	AU		
 yulp1239	AU		
 ywg	AU		
-ywr	AU		
 yww	AU		
-yxa	AU		
 yxg	AU		
 yxl	AU		
 yxm	AU		
 yxu	AU		
 yxy	AU		
 yyr	AU		
-zho	AU	0	0
 zku	AU		
-zma	AU		
 zmc	AU		
+zmk	AU		
+zmu	AU		
+zmv	AU		
+grg	AU		
+asf	AU	1	1
+asw	AU		
+rsm	AU		
+ygs	AU	1	1
+yhs	AU		
+cmn	AU		
+cnh	AU		
+yue	AU		
+zho	AU	0	0
+xpf	AU		
+xpz	AU		
+mwf	AU		
+nam	AU		
+tha	AU		
+gcd	AU		
+gyd	AU		
+lbz	AU		
+nny	AU		
+tiw	AU		
+umr	AU		
+giy	AU		
+nrx	AU		
+wif	AU		
+ygu	AU		
+znk	AU		
+wwb	AU		
+waq	AU		
+amy	AU		
+mfr	AU		
+xru	AU		
+zma	AU		
 zmd	AU		
-zme	AU		
 zmg	AU		
 zmj	AU		
-zmk	AU		
-zml	AU		
 zmm	AU		
 zmr	AU		
 zmt	AU		
-zmu	AU		
-zmv	AU		
 zmy	AU		
-znk	AU		
+xpl	AU		
+xpw	AU		
+xpx	AU		
+ajn	AU	1	1
+gma	AU		
+gww	AU		
+jbw	AU		
+ung	AU		
+vmi	AU		
+wil	AU		
+wro	AU		
+wub	AU		
+xgu	AU		
+xud	AU		
+xun	AU		
+dgn	AU	1	1
+jng	AU	1	1
+wrr	AU	1	1
 eng	AW	0	0
 fra	AW	0	0
 nld	AW		
 pap	AW		
 spa	AW	0	0
-fin	AX		
 swe	AX		
-ava	AZ		
+fin	AX		
 aze	AZ	1	1
 azj	AZ	1	1
-bdk	AZ		
+tur	AZ	0	1
 hye	AZ		
-kjj	AZ		
 kmr	AZ		
-kry	AZ		
 kur	AZ		
 rus	AZ		
-tkr	AZ		
 tly	AZ		
 ttt	AZ		
-tur	AZ	0	1
+ava	AZ		
+bdk	AZ		
+kjj	AZ		
+kry	AZ		
+tkr	AZ		
 udi	AZ		
 xag	AZ		
-bos	BA		
+bos	BA	1	1
 eng	BA	0	0
 fra	BA	0	0
 hbs	BA		
@@ -683,57 +683,60 @@ srp	BA
 bjs	BB		
 eng	BB	0	0
 aml	BD	1	1
-aot	BD		
+cdz	BD	1	1
+ekl	BD	1	1
+kha	BD	1	1
+lyg	BD	1	1
+mef	BD	1	1
+mjx	BD	1	1
+pbv	BD	1	1
+sat	BD	0	1
+unr	BD	1	1
+kru	BD		
+mjt	BD		
+xtr	BD		
 ben	BD	1	1
-bgr	BD		
 bpy	BD		
 ccp	BD		
-cdz	BD	1	1
+ctg	BD		
+eng	BD	0	0
+haj	BD		
+rhg	BD		
+rkt	BD	1	1
+sdr	BD		
+syl	BD	1	1
+tnv	BD		
+urd	BD		
+ins	BD	0	0
+aot	BD		
+bgr	BD		
 ckh	BD		
 cnk	BD		
 csh	BD		
-ctg	BD		
-ekl	BD	1	1
-eng	BD	0	0
 grt	BD		
-haj	BD		
-ins	BD		
 kdq	BD		
-kha	BD	1	1
-kru	BD		
 lus	BD		
-lyg	BD	1	1
-mef	BD	1	1
-mjt	BD		
-mjx	BD	1	1
 mni	BD		
 mro	BD		
 mya	BD		
-pbv	BD	1	1
 pkh	BD		
-rhg	BD		
 ria	BD		
 rki	BD		
-rkt	BD	1	1
 rmz	BD		
-sat	BD	0	1
-sdr	BD		
-syl	BD		
-tnv	BD		
 tpe	BD		
 trp	BD		
-unr	BD	1	1
-urd	BD		
 usi	BD		
-xtr	BD		
-deu	BE		
+deu	BE	0	1
 eng	BE	0	1
 fra	BE	0	1
-nld	BE		
-sfb	BE		
-vgt	BE		
+nld	BE	1	1
 vls	BE		
 wln	BE		
+sfb	BE		
+vgt	BE		
+taq	BF	1	1
+tmh	BF	1	1
+fra	BF	0	0
 bbo	BF		
 bfo	BF		
 bib	BF		
@@ -748,12 +751,10 @@ cpo	BF
 dgd	BF		
 dgi	BF		
 dgs	BF		
-dje	BF		
 dnn	BF		
 dos	BF		
 dya	BF		
-dyu	BF		
-fra	BF	0	0
+dyu	BF	1	1
 ful	BF		
 gna	BF		
 gux	BF		
@@ -777,15 +778,12 @@ sbd	BF
 sen	BF		
 sep	BF		
 seq	BF		
-sif	BF		
 skq	BF		
 sld	BF		
 sos	BF		
 stj	BF		
 sym	BF		
-taq	BF	1	1
 tiq	BF		
-tmh	BF	1	1
 tsp	BF		
 tuz	BF		
 vig	BF		
@@ -793,8 +791,10 @@ wbf	BF
 wib	BF		
 xrb	BF		
 xsm	BF		
-bqn	BG		
-bul	BG		
+dje	BF		
+sif	BF		
+tur	BG	0	1
+bul	BG	1	1
 chu	BG		
 deu	BG		
 eng	BG	0	0
@@ -802,15 +802,16 @@ fra	BG	0	0
 rmn	BG		
 rom	BG	0	1
 rus	BG		
-tur	BG	0	1
 txh	BG		
+bqn	BG		
 abv	BH	1	1
 ara	BH	1	1
 mal	BH		
 eng	BI	0	0
 fra	BI	0	0
-run	BI		
+run	BI	1	1
 swa	BI	0	0
+fra	BJ	0	0
 ajg	BJ		
 aug	BJ		
 ayb	BJ		
@@ -822,11 +823,9 @@ bqa	BJ
 bqc	BJ		
 cbj	BJ		
 cib	BJ		
-ddn	BJ		
 dop	BJ		
 fod	BJ		
-fon	BJ		
-fra	BJ	0	0
+fon	BJ	1	1
 fue	BJ		
 ful	BJ		
 gbh	BJ		
@@ -854,315 +853,318 @@ xkb	BJ
 xwe	BJ		
 xwl	BJ		
 yor	BJ		
+ddn	BJ		
 fra	BL	0	0
 eng	BM	0	0
 beg	BN	1	1
 bsb	BN	1	1
-eng	BN	0	0
 kxd	BN		
 msa	BN		
 ttg	BN		
+eng	BN	0	0
 zho	BN	0	0
-aro	BO	1	1
-aym	BO		
+aym	BO	1	1
 ayr	BO		
-brg	BO		
-bvl	BO		
-caj	BO		
-cao	BO		
-cap	BO		
-cas	BO		
-cav	BO		
-caw	BO		
-cax	BO		
 caz	BO		
 cyb	BO		
+ite	BO		
+cax	BO		
+spa	BO	0	0
+ito	BO		
+lec	BO		
+mtp	BO		
+mzp	BO		
+aro	BO	1	1
+cao	BO		
+cav	BO		
 ese	BO		
+mcd	BO		
+pcp	BO		
+rey	BO		
+tna	BO		
+tno	BO		
+puq	BO		
+bvl	BO	1	0
+brg	BO		
+caj	BO		
 gnw	BO		
 grn	BO		
 gui	BO		
 gyr	BO		
 ign	BO		
-ite	BO		
-ito	BO		
 jor	BO		
-lec	BO		
-mcd	BO		
-mtp	BO		
-mzp	BO		
-pcp	BO		
 pnk	BO		
 psm	BO		
-puq	BO		
-que	BO		
+que	BO	1	1
 quh	BO		
 qul	BO		
-rey	BO		
 sar	BO	1	1
-spa	BO	0	0
 srq	BO		
-tna	BO		
-tno	BO		
 trn	BO		
-ure	BO		
 yuq	BO		
-yuz	BO		
+caw	BO		
+cas	BO		
+cap	BO		
+ure	BO		
+yuz	BO	1	1
 nld	BQ		
 pap	BQ		
-aan	BR	1	1
+tba	BR	1	1
+atx	BR	1	1
+kav	BR		
+sik	BR		
+slj	BR		
+tgv	BR		
+boa	BR		
+bor	BR		
+otu	BR		
+umo	BR		
 aap	BR	1	1
+ake	BR	1	1
+aoc	BR		
+apy	BR		
+atr	BR		
+bkq	BR		
+car	BR		
+hix	BR		
+kbb	BR		
+kui	BR		
+mbc	BR		
+mch	BR		
+mzo	BR		
+pbc	BR		
+tri	BR		
+txi	BR		
+waw	BR		
+way	BR		
+ite	BR		
+orw	BR		
+pav	BR		
+trz	BR		
+cax	BR		
+fun	BR		
+kbc	BR		
+gta	BR		
+ccd	BR		
+deu	BR		
+eng	BR	0	0
+hrx	BR		
+ita	BR		
+kmv	BR		
+nds	BR		
+pdt	BR		
+por	BR	0	0
+rmq	BR		
+spa	BR	0	0
+ukr	BR		
+vec	BR		
+irn	BR		
+jpn	BR		
+vkm	BR		
+kxo	BR		
+knm	BR		
+xat	BR		
+kor	BR		
+xwa	BR		
+xak	BR		
+axg	BR		
+jup	BR		
+kwa	BR		
+mbj	BR		
+yab	BR		
+lkd	BR		
+ltn	BR		
+nab	BR		
+sae	BR		
+wmd	BR		
+xtw	BR		
 acs	BR		
+apn	BR		
+ark	BR	1	1
+gvp	BR		
+jbt	BR		
+kgp	BR		
+kpj	BR		
+kqq	BR		
+kre	BR		
+mbl	BR		
+opy	BR		
+pth	BR		
+ram	BR		
+rkb	BR		
+suy	BR		
+txu	BR		
+xav	BR		
+xer	BR		
+xkr	BR		
+xok	BR		
+xra	BR		
+xre	BR		
+xri	BR		
+xxr	BR		
+zkp	BR		
+oti	BR		
+paz	BR		
+amc	BR		
+cbs	BR		
+knt	BR		
+ktx	BR		
+mcd	BR		
+mcf	BR		
+mpq	BR		
+mzr	BR		
+nuc	BR		
+pyn	BR		
+swo	BR		
+tux	BR		
+xor	BR		
+xpk	BR		
+yaa	BR		
+ywn	BR		
+myp	BR		
+prr	BR		
+bzs	BR		
+lsb	BR		
+uks	BR		
+aan	BR	1	1
 adw	BR		
 ait	BR		
-ake	BR	1	1
 ama	BR		
-amc	BR		
-aoc	BR		
 aox	BR		
 api	BR		
-apn	BR		
 apu	BR		
-apv	BR		
-apy	BR		
 aqz	BR		
-arj	BR	1	1
-ark	BR	1	1
 arr	BR	1	1
 aru	BR	1	1
 arx	BR	1	1
 asn	BR		
 asu	BR		
-atr	BR		
-atx	BR	1	1
 aux	BR		
-avo	BR		
 avv	BR		
 awe	BR		
 awt	BR		
-axg	BR		
 bae	BR		
-bao	BR		
-bkq	BR		
-boa	BR		
-bor	BR		
 bwi	BR		
-bzs	BR		
-car	BR		
-cax	BR		
-cbc	BR		
-cbs	BR		
-ccd	BR		
 cin	BR		
 cod	BR		
 cpb	BR		
-cub	BR		
 cul	BR		
-des	BR		
-deu	BR		
 dny	BR		
-eng	BR	0	0
-fun	BR		
 gae	BR		
 gqn	BR		
 grn	BR		
-gta	BR		
 gub	BR		
 gun	BR		
-guu	BR		
-gvc	BR		
 gvj	BR		
 gvo	BR		
-gvp	BR		
-hir	BR		
-hix	BR		
-hrx	BR		
-irn	BR		
-ita	BR		
-ite	BR		
 jaa	BR		
-jbt	BR		
-jpn	BR		
 jua	BR		
-jup	BR		
 jur	BR		
-kav	BR		
 kay	BR		
-kbb	BR		
-kbc	BR		
 kgk	BR		
-kgp	BR		
-kmv	BR		
-knm	BR		
-knt	BR		
-kor	BR		
 kpc	BR		
-kpj	BR		
 kpn	BR		
-kqq	BR		
-kre	BR		
 ktn	BR		
-ktx	BR		
-kui	BR		
 kuq	BR		
-kwa	BR		
-kxo	BR		
 kyr	BR		
 kyz	BR		
-kzw	BR		
-lkd	BR		
-lsb	BR		
-ltn	BR		
 mav	BR		
-mbc	BR		
-mbj	BR		
-mbl	BR		
-mcd	BR		
-mcf	BR		
-mch	BR		
 mdz	BR		
 mmh	BR		
-mmv	BR		
 mnd	BR		
 mpd	BR		
-mpq	BR		
 mpu	BR		
 mpw	BR		
 msp	BR		
-myp	BR		
 myu	BR		
-myy	BR		
-mzo	BR		
-mzr	BR		
-nab	BR		
-nds	BR		
 nhd	BR		
-nuc	BR		
 omg	BR		
-opy	BR		
-orw	BR		
-oti	BR		
-otu	BR		
 oym	BR		
 pab	BR		
 pad	BR		
 paf	BR		
 pah	BR		
 pak	BR		
-pav	BR		
-pax	BR		
-paz	BR		
-pbc	BR		
-pdt	BR		
-pir	BR		
 plu	BR		
 pog	BR		
-pok	BR		
-por	BR	0	0
-prr	BR		
-pth	BR		
 pto	BR		
 pur	BR		
-pyn	BR		
-ram	BR		
-rkb	BR		
-rmq	BR		
-sae	BR		
-shb	BR		
-sik	BR		
 skf	BR		
-slj	BR		
-spa	BR	0	0
-sri	BR		
 sru	BR		
-suy	BR		
-swo	BR		
 swx	BR		
 tae	BR		
 taf	BR		
-tba	BR	1	1
-tca	BR		
 ter	BR		
-tgv	BR		
-tka	BR		
-tkf	BR		
-tme	BR		
 tpk	BR		
 tpn	BR		
 tpr	BR		
-tpy	BR		
 tqb	BR		
-tri	BR		
-trz	BR		
-tud	BR		
-tue	BR		
-tuo	BR		
-tux	BR		
 twt	BR		
-txi	BR		
-txu	BR		
-uam	BR		
-ukr	BR		
-uks	BR		
-umo	BR		
 unk	BR		
 urb	BR		
-urp	BR		
 uru	BR		
 urz	BR		
-vec	BR		
-vkm	BR		
-waf	BR		
 wap	BR		
 wau	BR		
-waw	BR		
-way	BR		
-wca	BR		
 wir	BR		
-wmd	BR		
-wsu	BR		
 wyr	BR		
-xai	BR		
 xaj	BR		
-xak	BR		
-xat	BR		
-xav	BR		
-xbw	BR		
-xer	BR		
 xet	BR		
 xir	BR		
 xiy	BR		
-xkr	BR		
-xmo	BR		
-xok	BR		
-xoo	BR		
-xor	BR		
-xpk	BR		
-xpn	BR		
-xra	BR		
-xre	BR		
-xri	BR		
-xsu	BR		
-xtw	BR		
-xwa	BR		
-xxr	BR		
-xyl	BR		
-yaa	BR		
-yab	BR		
 yaw	BR		
 ybn	BR		
 yrl	BR		
-yro	BR		
+tca	BR		
+tpy	BR		
+arj	BR	1	1
+bao	BR		
+cbc	BR		
+cub	BR		
+des	BR		
+gvc	BR		
+mmv	BR		
+myy	BR		
+pir	BR		
+pok	BR		
+sri	BR		
+tue	BR		
+tuo	BR		
 yui	BR		
-ywn	BR		
-zkp	BR		
+tud	BR		
+apv	BR		
+avo	BR		
+hir	BR		
+pax	BR		
+tka	BR		
+tkf	BR		
+tme	BR		
+waf	BR		
+wsu	BR		
+xmo	BR		
+xyl	BR		
+kzw	BR		
+uam	BR		
+urp	BR		
+xai	BR		
+xbw	BR		
+xpn	BR		
+xoo	BR	1	1
+guu	BR	1	1
+shb	BR	1	1
+wca	BR	1	1
+xsu	BR	1	1
+yro	BR	1	1
 bah	BS		
 eng	BS	0	0
+npb	BT		
+eng	BT	0	0
+nep	BT		
 bro	BT		
 cgk	BT		
 dka	BT		
 dzl	BT		
 dzo	BT		
-eng	BT	0	0
 goe	BT		
 kjz	BT		
 lep	BT		
@@ -1171,8 +1173,6 @@ lkh	BT
 luk	BT		
 lya	BT		
 neh	BT		
-nep	BT		
-npb	BT		
 ole	BT		
 sgt	BT		
 tgf	BT		
@@ -1181,79 +1181,205 @@ xkf	BT
 xkz	BT		
 nor	BV		
 afr	BW	1	0
-brl	BW		
 eng	BW	0	0
 gnk	BW		
 gwj	BW		
-her	BW		
 hio	BW		
 hnh	BW		
+nhr	BW		
+shg	BW		
+tyu	BW		
 huc	BW		
+brl	BW		
+her	BW		
 kck	BW		
 mhw	BW		
 nde	BW		
-nhr	BW		
-nmn	BW		
 sbs	BW		
-shg	BW		
 sna	BW		
 tsn	BW		
 two	BW		
-tyu	BW		
 xkv	BW		
 yey	BW		
+nmn	BW		
 bel	BY	1	1
-rus	BY		
-bzj	BZ		
-cab	BZ		
-deu	BZ		
-eng	BZ	0	0
+rus	BY	0	1
 kek	BZ		
 mop	BZ		
+yua	BZ		
+bzj	BZ		
+deu	BZ		
+eng	BZ	0	0
 pdt	BZ		
 spa	BZ	0	0
-yua	BZ		
 zho	BZ	0	0
-abe	CA		
-afr	CA	0	0
+cab	BZ		
 aii	CA	0	0
-aka	CA	0	0
-alq	CA		
 amh	CA	0	0
 ara	CA	0	0
-asb	CA	1	1
-ase	CA	1	0
-asm	CA		
-atj	CA		
+byn	CA	1	1
+cld	CA	0	0
+cop	CA	0	0
+har	CA	0	0
+hau	CA	0	0
+heb	CA	0	0
+kab	CA	0	0
+mlt	CA	0	0
+orm	CA	0	0
+som	CA	0	0
+syr	CA	0	0
+tir	CA	0	0
 aze	CA	0	0
+kaz	CA	0	0
+tur	CA	0	0
+uig	CA	0	0
+uzb	CA	0	0
+khm	CA	0	0
+vie	CA	0	0
+bik	CA	0	0
+ceb	CA	0	0
+fij	CA	0	0
+fil	CA	0	0
+hil	CA	0	0
+ilo	CA		
+ind	CA		
+kne	CA		
+krj	CA		
+mlg	CA		
+msa	CA		
+pag	CA		
+pam	CA		
+tgl	CA		
+war	CA		
+bue	CA		
+prd	CA		
+kat	CA		
+kan	CA		
+mal	CA		
+tam	CA		
+tcy	CA		
+tel	CA		
+ike	CA		
+ikt	CA		
+iku	CA		
+hai	CA		
+hax	CA		
+hdn	CA		
+hmn	CA		
+afr	CA	0	0
+asm	CA		
 bal	CA		
-bcr	CA		
-bea	CA		
 bel	CA		
 ben	CA		
-bik	CA	0	0
+bos	CA		
+bul	CA		
+cat	CA		
+ces	CA		
+cym	CA		
+dan	CA		
+deu	CA		
+ell	CA		
+eng	CA	0	0
+fas	CA	0	0
+fra	CA	0	0
+fry	CA		
+geh	CA		
+gla	CA		
+gle	CA		
+gsw	CA		
+guj	CA		
+hat	CA		
+hbs	CA		
+hin	CA		
+hrv	CA		
+hye	CA		
+isl	CA		
+ita	CA		
+jam	CA		
+kas	CA		
+kfr	CA		
+kok	CA		
+kri	CA		
+kur	CA		
+lah	CA		
+lav	CA		
+lit	CA		
+mar	CA		
+mfe	CA		
+mkd	CA		
+nds	CA		
+nep	CA		
+nld	CA		
+nor	CA		
+ori	CA		
+pan	CA		
+pdc	CA		
+pdt	CA		
+pes	CA		
+pol	CA		
+por	CA		
+prs	CA		
+pus	CA		
+rhg	CA		
+ron	CA	0	0
+rue	CA		
+rus	CA		
+sin	CA		
+slk	CA		
+slv	CA		
+snd	CA		
+spa	CA	0	0
+sqi	CA		
+srp	CA		
+swe	CA		
+ukr	CA		
+urd	CA		
+vls	CA		
+yid	CA		
+jpn	CA		
+kor	CA		
+kut	CA		
+mon	CA		
+aka	CA	0	0
 bin	CA		
+byf	CA		
+ewe	CA		
+ful	CA		
+gaa	CA		
+gej	CA		
+ibo	CA		
+jod	CA		
+kik	CA		
+kin	CA		
+lin	CA		
+lub	CA		
+lug	CA		
+mos	CA		
+nde	CA		
+run	CA		
+sag	CA		
+sna	CA		
+snk	CA		
+swa	CA	0	0
+wmw	CA		
+wol	CA		
+yor	CA		
+din	CA		
+nus	CA		
+abe	CA		
+alq	CA		
+asb	CA	1	1
+atj	CA		
+bcr	CA		
+bea	CA		
 bla	CA		
 blc	CA		
-bod	CA		
-bos	CA		
-bue	CA		
-bul	CA		
-byf	CA		
-byn	CA	1	1
 caf	CA		
-cat	CA		
 cay	CA		
-cdo	CA		
-ceb	CA	0	0
-ces	CA		
 chp	CA		
 ciw	CA		
 clc	CA		
-cld	CA	0	0
-cmn	CA		
 coo	CA		
-cop	CA	0	0
 cre	CA		
 crg	CA		
 crj	CA		
@@ -1263,119 +1389,24 @@ crm	CA
 crx	CA		
 csw	CA		
 cwd	CA		
-cym	CA		
 dak	CA		
-dan	CA		
 del	CA		
 den	CA		
-deu	CA		
 dgr	CA		
-din	CA		
 dtd	CA		
-ell	CA		
-eng	CA	0	0
-est	CA		
-ewe	CA		
-fas	CA	0	0
-fcs	CA		
-fij	CA	0	0
-fil	CA	0	0
-fin	CA		
-fra	CA	0	0
-fry	CA		
-ful	CA		
-gaa	CA		
-geh	CA		
-gej	CA		
-git	CA		
-gla	CA		
-gle	CA		
-gsw	CA		
-guj	CA		
 gwi	CA		
-hai	CA		
-hak	CA		
-har	CA	0	0
 has	CA		
-hat	CA		
-hau	CA	0	0
-hax	CA		
-hbs	CA		
-hdn	CA		
-heb	CA	0	0
 hei	CA		
-hil	CA	0	0
-hin	CA		
-hmn	CA		
-hrv	CA		
-hun	CA		
 hur	CA		
-hye	CA		
-ibo	CA		
-ike	CA		
-iks	CA		
-ikt	CA		
-iku	CA		
-ilo	CA		
-ind	CA		
-isl	CA		
-ita	CA		
-jam	CA		
-jod	CA		
-jpn	CA		
-kab	CA	0	0
-kan	CA		
-kas	CA		
-kat	CA		
-kaz	CA	0	0
-kfr	CA		
-khm	CA	0	0
-kik	CA		
-kin	CA		
 kkz	CA		
-kne	CA		
-kok	CA		
-kor	CA		
-kri	CA		
-krj	CA		
-ksw	CA		
-kur	CA		
-kut	CA		
 kwk	CA		
-lah	CA		
-lao	CA		
-lav	CA		
 lil	CA		
-lin	CA		
-lit	CA		
 lre	CA		
-lub	CA		
-lug	CA		
-lus	CA		
-mal	CA		
-mar	CA		
-mfe	CA		
 mic	CA		
-mkd	CA		
-mlg	CA		
-mlt	CA	0	0
 moe	CA		
 moh	CA		
-mon	CA		
-mos	CA		
-msa	CA		
-mya	CA		
-nan	CA		
-ncg	CA		
-nde	CA		
-nds	CA		
-nep	CA		
-nld	CA		
-nor	CA		
 nsk	CA		
-nsr	CA		
 nuk	CA		
-nus	CA		
 ojb	CA		
 ojc	CA		
 ojg	CA		
@@ -1385,92 +1416,61 @@ ojw	CA
 oka	CA		
 one	CA		
 ono	CA		
-ori	CA		
-orm	CA	0	0
 otw	CA		
-pag	CA		
-pam	CA		
-pan	CA		
-pdc	CA		
-pdt	CA		
-pes	CA		
-pol	CA		
-por	CA		
 pqm	CA		
-prd	CA		
-prs	CA		
 ptw	CA		
-pus	CA		
-rhg	CA		
-ron	CA	0	0
-rue	CA		
-run	CA		
-rus	CA		
-sag	CA		
 scs	CA		
 sec	CA		
 sek	CA		
 shs	CA		
-sin	CA		
-slk	CA		
-slv	CA		
-sna	CA		
-snd	CA		
-snk	CA		
-som	CA	0	0
-spa	CA	0	0
-sqi	CA		
 squ	CA		
-srp	CA		
 srs	CA		
 sto	CA		
 str	CA		
-swa	CA	0	0
-swe	CA		
-syr	CA	0	0
-tam	CA		
 tce	CA		
-tcy	CA		
-tel	CA		
-tgl	CA		
 tgx	CA		
-tha	CA		
 thp	CA		
 tht	CA		
-tir	CA	0	0
 tli	CA		
-tok	CA	1	0
-tsi	CA		
 ttm	CA		
-tur	CA	0	0
 tus	CA		
 txc	CA		
-uig	CA	0	0
-ukr	CA		
 umu	CA		
-urd	CA		
-uzb	CA	0	0
-vie	CA	0	0
-vls	CA		
-war	CA		
 wdt	CA		
-wmw	CA		
-wol	CA		
-wuu	CA		
 xsl	CA		
-yid	CA		
-yor	CA		
+ase	CA	1	0
+fcs	CA	1	0
+iks	CA	1	1
+nsr	CA	1	0
+bod	CA		
+cdo	CA		
+cmn	CA		
+hak	CA		
+ksw	CA		
+lus	CA		
+mya	CA		
+nan	CA		
+wuu	CA		
 yue	CA		
 zho	CA	0	0
-eng	CC	0	0
+lao	CA		
+tha	CA		
+git	CA		
+ncg	CA		
+tsi	CA		
+est	CA		
+fin	CA		
+hun	CA		
+tok	CA	1	0
 msa	CC		
+eng	CC	0	0
+fom	CD		
+ymg	CD		
+fra	CD	0	0
 agh	CD		
-alz	CD		
-asv	CD		
 bbe	CD		
 bbm	CD		
 bcp	CD		
-bct	CD		
 bem	CD		
 bhy	CD		
 bip	CD		
@@ -1502,14 +1502,9 @@ bzo	CD
 cjk	CD		
 dez	CD		
 diz	CD		
-dno	CD		
 doo	CD		
 dzn	CD		
-efe	CD		
 flr	CD		
-fom	CD		
-fra	CD	0	0
-fuu	CD		
 gey	CD		
 gix	CD		
 gox	CD		
@@ -1544,32 +1539,24 @@ kwy	CD
 kzy	CD		
 lal	CD		
 lea	CD		
-led	CD		
 lej	CD		
 lel	CD		
-les	CD		
-lgg	CD		
 lgm	CD		
 lgz	CD		
 lie	CD		
 lik	CD		
-lin	CD		
+lin	CD	1	1
 liz	CD		
-lmi	CD		
 lnz	CD		
-log	CD		
 lol	CD		
 loo	CD		
 loq	CD		
 lse	CD		
 lua	CD	1	1
-lub	CD		
+lub	CD	1	1
 luj	CD		
 lvl	CD		
 lwa	CD		
-mdi	CD		
-mdj	CD		
-mdk	CD		
 mdm	CD		
 mdp	CD		
 mdq	CD		
@@ -1578,20 +1565,17 @@ mmz	CD
 mnh	CD		
 msj	CD		
 mwz	CD		
-mxh	CD		
 myc	CD		
 nbd	CD		
 nbw	CD		
 ndk	CD		
 ndl	CD		
-ndp	CD		
 ndt	CD		
 ndw	CD		
 nga	CD		
 ngb	CD		
 ngc	CD		
 nix	CD		
-niy	CD		
 nkw	CD		
 nlj	CD		
 nlo	CD		
@@ -1606,7 +1590,6 @@ nyg	CD
 nyj	CD		
 nzd	CD		
 okc	CD		
-omi	CD		
 oml	CD		
 pae	CD		
 pem	CD		
@@ -1642,7 +1625,6 @@ vau	CD
 won	CD		
 yaf	CD		
 yel	CD		
-ymg	CD		
 yng	CD		
 yns	CD		
 yom	CD		
@@ -1655,27 +1637,45 @@ zms	CD
 zmw	CD		
 zmz	CD		
 zne	CD		
-aiy	CF		
+asv	CD		
+bct	CD		
+dno	CD		
+efe	CD		
+fuu	CD		
+led	CD		
+les	CD		
+lgg	CD		
+lmi	CD		
+log	CD		
+mdi	CD		
+mdj	CD		
+mdk	CD		
+mxh	CD		
+ndp	CD		
+niy	CD		
+omi	CD		
+alz	CD		
+bkg	CF		
+kym	CF		
+nmj	CF		
+fra	CF	0	0
 aja	CF		
+rou	CF		
+aiy	CF		
 axk	CF		
 bbp	CF		
 bdt	CF		
 bff	CF		
 bfl	CF		
 bjo	CF		
-bkg	CF		
 bkj	CF		
 bme	CF		
 boy	CF		
 bpd	CF		
 bqk	CF		
-bvq	CF		
 deq	CF		
-dgk	CF		
-fra	CF	0	0
 fui	CF		
 ful	CF		
-fuu	CF		
 gba	CF		
 gbg	CF		
 gbp	CF		
@@ -1687,14 +1687,9 @@ gnz	CF
 gso	CF		
 gya	CF		
 gyg	CF		
-kah	CF		
 kbn	CF		
-kcm	CF		
 kkj	CF		
-ksp	CF		
 kuw	CF		
-kwv	CF		
-kym	CF		
 lin	CF		
 liy	CF		
 lna	CF		
@@ -1703,28 +1698,34 @@ mcx	CF
 mdd	CF		
 mdn	CF		
 mgn	CF		
-myb	CF		
 mzv	CF		
 nbm	CF		
-ndy	CF		
 ngd	CF		
 ngg	CF		
-nmc	CF		
-nmj	CF		
 nzk	CF		
 pnz	CF		
-rou	CF		
-sag	CF		
-sbz	CF		
+sag	CF	1	1
 snj	CF		
 sqm	CF		
 tor	CF		
 ukh	CF		
-vae	CF		
 yaj	CF		
 yky	CF		
-yul	CF		
 zne	CF		
+bvq	CF		
+dgk	CF		
+fuu	CF		
+kah	CF		
+kcm	CF		
+ksp	CF		
+kwv	CF		
+myb	CF		
+ndy	CF		
+nmc	CF		
+sbz	CF		
+vae	CF		
+yul	CF		
+fra	CG	0	0
 akw	CG		
 beq	CG		
 bkw	CG		
@@ -1735,7 +1736,6 @@ bvx	CG
 bwz	CG		
 dde	CG		
 ebo	CG		
-fra	CG	0	0
 ifm	CG		
 iyx	CG		
 kkw	CG		
@@ -1766,10 +1766,11 @@ vif	CG
 xku	CG		
 zmx	CG		
 ara	CH	0	0
-deu	CH		
+tur	CH	0	0
+deu	CH	0	1
 eng	CH	0	0
 fra	CH	0	1
-gsw	CH		
+gsw	CH	1	1
 hbs	CH		
 ita	CH		
 lmo	CH		
@@ -1777,13 +1778,14 @@ por	CH
 rmo	CH		
 roh	CH		
 rom	CH	0	1
-sgg	CH		
-slf	CH		
 spa	CH	0	0
 sqi	CH		
-ssr	CH		
-tur	CH	0	0
 wae	CH		
+sgg	CH	1	0
+slf	CH	1	0
+ssr	CH	1	0
+hau	CI	0	1
+fra	CI	0	0
 aba	CI		
 abi	CI		
 abr	CI		
@@ -1797,7 +1799,7 @@ any	CI
 ati	CI		
 avi	CI		
 bam	CI		
-bci	CI		
+bci	CI	1	1
 bet	CI		
 bev	CI		
 bjw	CI		
@@ -1807,12 +1809,10 @@ das	CI
 dic	CI		
 dnj	CI		
 dyi	CI		
-dyu	CI		
+dyu	CI	1	1
 ebr	CI		
 ega	CI		
 eot	CI		
-esm	CI		
-fra	CI	0	0
 ggu	CI		
 gie	CI		
 gnj	CI		
@@ -1822,7 +1822,6 @@ gov	CI
 gud	CI		
 gwa	CI		
 gxx	CI		
-hau	CI	0	1
 hwa	CI		
 jek	CI		
 jod	CI		
@@ -1863,24 +1862,79 @@ wec	CI
 wob	CI		
 xgb	CI		
 yre	CI		
-eng	CK	0	0
+esm	CI		
 fij	CK	0	0
 fil	CK	0	0
-fra	CK	0	0
 pkp	CK		
 pnh	CK		
 rar	CK		
 rkh	CK		
-alc	CL		
+eng	CK	0	0
+fra	CK	0	0
 arn	CL	1	1
-csg	CL		
-eng	CL	0	0
 huh	CL	1	1
-kuz	CL		
 rap	CL		
+eng	CL	0	0
 spa	CL	0	0
-yag	CL		
+kuz	CL		
+csg	CL	1	1
+alc	CL		
+yag	CL	1	1
 aal	CM	1	1
+ara	CM	0	0
+bcw	CM	1	1
+bdn	CM	1	1
+bhs	CM	1	1
+cuv	CM	1	1
+dbq	CM	1	1
+dkx	CM	1	1
+dme	CM	1	1
+gde	CM	1	1
+gid	CM	1	1
+gis	CM	1	1
+giz	CM	1	1
+gnd	CM	1	1
+gou	CM	1	1
+hau	CM	0	1
+hna	CM	1	1
+hya	CM	1	1
+jia	CM	1	1
+jim	CM	1	1
+kot	CM	1	1
+kqx	CM	1	1
+kvj	CM	1	1
+maf	CM	1	1
+mcn	CM	1	1
+meq	CM	1	1
+mfh	CM	1	1
+mfi	CM	1	1
+mfj	CM	1	1
+mfk	CM	1	1
+mif	CM	1	1
+mlr	CM	1	1
+mlw	CM	1	1
+mpi	CM	1	1
+mqb	CM	1	1
+mse	CM	1	1
+msv	CM	1	1
+mug	CM	1	1
+muy	CM	1	1
+mxf	CM	1	1
+mxu	CM	1	1
+pbi	CM	1	1
+shu	CM	1	1
+swq	CM	1	1
+tsh	CM	1	1
+udl	CM	1	1
+xed	CM	1	1
+xmd	CM	1	1
+xmj	CM	1	1
+zuy	CM	1	1
+bbx	CM		
+nnx	CM		
+eng	CM	0	0
+fra	CM	0	0
+wes	CM		
 abb	CM		
 add	CM		
 ael	CM		
@@ -1888,7 +1942,6 @@ agq	CM
 ags	CM		
 aku	CM		
 anv	CM		
-ara	CM	0	0
 asj	CM		
 ass	CM		
 ato	CM		
@@ -1904,11 +1957,8 @@ bbj	CM
 bbk	CM		
 bbq	CM		
 bbw	CM		
-bbx	CM		
 bby	CM		
 bce	CM		
-bcw	CM	1	1
-bdn	CM	1	1
 bdu	CM		
 beb	CM		
 bec	CM		
@@ -1918,7 +1968,6 @@ bfm	CM
 bfp	CM		
 bgf	CM		
 bgj	CM		
-bhs	CM	1	1
 biw	CM		
 bju	CM		
 bkc	CM		
@@ -1952,13 +2001,8 @@ byv	CM
 bzv	CM		
 ckx	CM		
 cnq	CM		
-cuv	CM	1	1
 dae	CM		
-dbq	CM	1	1
-dek	CM		
 dii	CM		
-dkx	CM	1	1
-dme	CM	1	1
 dmm	CM		
 dmo	CM		
 dow	CM		
@@ -1968,7 +2012,6 @@ duz	CM
 ekm	CM		
 emn	CM		
 emz	CM		
-eng	CM	0	0
 eto	CM		
 etu	CM		
 ewo	CM		
@@ -1977,33 +2020,20 @@ fal	CM
 fan	CM		
 fll	CM		
 fmp	CM		
-fra	CM	0	0
 fub	CM		
 ful	CM		
 fuv	CM		
 gba	CM		
-gde	CM	1	1
-gid	CM	1	1
-gis	CM	1	1
-giz	CM	1	1
 gke	CM		
 gmm	CM		
 gmn	CM		
-gnd	CM	1	1
-gou	CM	1	1
 gya	CM		
 gyi	CM		
-hau	CM	0	1
 hij	CM		
-hna	CM	1	1
-hya	CM	1	1
 isu	CM		
 iyo	CM		
 jbu	CM		
 jgo	CM		
-jia	CM	1	1
-jim	CM	1	1
-kau	CM		
 kdz	CM		
 ken	CM		
 kfl	CM		
@@ -2013,16 +2043,11 @@ kkj	CM
 klc	CM		
 kme	CM		
 kmp	CM		
-knc	CM		
 knp	CM		
-kot	CM	1	1
-kqx	CM	1	1
 ksf	CM		
-kvj	CM	1	1
 kvm	CM		
 kwu	CM		
 kzr	CM		
-lbi	CM		
 lem	CM		
 leo	CM		
 lfa	CM		
@@ -2030,46 +2055,28 @@ lmp	CM
 lmx	CM		
 lns	CM		
 luw	CM		
-maf	CM	1	1
 mbo	CM		
-mcn	CM	1	1
 mcp	CM		
 mcs	CM		
 mct	CM		
 mcu	CM		
 mdd	CM		
 mea	CM		
-meq	CM	1	1
 mfd	CM		
 mff	CM		
-mfh	CM	1	1
-mfi	CM	1	1
-mfj	CM	1	1
-mfk	CM	1	1
 mgg	CM		
 mgo	CM		
 mhk	CM		
-mif	CM	1	1
 mij	CM		
 mkk	CM		
 mlb	CM		
-mlr	CM	1	1
-mlw	CM	1	1
 mmu	CM		
 mnf	CM		
-mpi	CM	1	1
-mqb	CM	1	1
 mru	CM		
-mse	CM	1	1
-msv	CM	1	1
 mtk	CM		
 mua	CM		
 muc	CM		
-mug	CM	1	1
 muo	CM		
-muy	CM	1	1
-mxf	CM	1	1
-mxu	CM	1	1
 myg	CM		
 mzd	CM		
 nbv	CM		
@@ -2091,7 +2098,6 @@ nmg	CM
 nml	CM		
 nmr	CM		
 nnh	CM		
-nnx	CM		
 nnz	CM		
 nsh	CM		
 nvo	CM		
@@ -2101,38 +2107,28 @@ obl	CM
 oku	CM		
 ost	CM		
 ozm	CM		
-pbi	CM	1	1
 pfe	CM		
 pmm	CM		
 pmn	CM		
 pny	CM		
-sba	CM		
 sgi	CM		
-shu	CM	1	1
 sox	CM		
 sqm	CM		
-swq	CM	1	1
 szv	CM		
 tik	CM		
 toz	CM		
-tsh	CM	1	1
 ttf	CM		
 tui	CM		
 tvu	CM		
 twn	CM		
-udl	CM	1	1
 uiv	CM		
 usk	CM		
 vut	CM		
 weh	CM		
-wes	CM		
 wok	CM		
 www	CM		
-xed	CM	1	1
 xmb	CM		
-xmd	CM	1	1
 xmg	CM		
-xmj	CM	1	1
 xuo	CM		
 yam	CM		
 yas	CM		
@@ -2142,80 +2138,70 @@ ybb	CM
 yei	CM		
 yko	CM		
 zhw	CM		
-zuy	CM	1	1
-acn	CN		
-adi	CN		
-adx	CN		
-aeu	CN		
-ahk	CN		
+sba	CM		
+kau	CM		
+knc	CM		
+lbi	CM		
+dek	CM		
 aib	CN	1	1
-aih	CN		
-aou	CN		
-atb	CN		
-aub	CN		
-aza	CN		
+evn	CN	1	1
+gld	CN	1	1
+ili	CN	1	1
+juc	CN	1	1
+kaz	CN	0	1
+kir	CN	1	1
+kjh	CN	1	1
+mnc	CN	1	1
+orh	CN	1	1
+oui	CN	1	1
+sjo	CN	1	1
+slr	CN	1	1
+tat	CN	0	1
+tyv	CN	0	1
+uig	CN	1	1
+uzb	CN	0	1
+uzn	CN	0	1
+ybe	CN	1	1
+zbl	CN	1	0
 bbh	CN	1	1
-bca	CN		
-bfc	CN		
-bfs	CN		
 bgk	CN	1	1
-bje	CN		
 blr	CN	1	1
-blt	CN		
-bmt	CN		
-bod	CN		
-bpn	CN		
-bqh	CN		
-bua	CN		
-buh	CN		
+huo	CN	1	1
+khf	CN	1	1
+kjg	CN	1	1
+lcp	CN	0	0
+mml	CN	1	1
+pce	CN	1	1
+pll	CN	1	1
+ply	CN	1	1
+prk	CN	1	1
+rbb	CN	1	1
+ril	CN	1	1
+stu	CN	1	1
+uuu	CN	1	1
+vie	CN	0	1
+vwa	CN	1	1
+wbm	CN	1	1
+zng	CN	1	1
+huq	CN		
 bvp	CN		
+kfj	CN		
+kkn	CN		
+kyp	CN		
+lay	CN		
+lov	CN		
+nsv	CN		
+twm	CN		
+xnh	CN		
+yne	CN		
+bje	CN		
+bmt	CN		
+bpn	CN		
+buh	CN		
 bwn	CN		
 bwx	CN		
-bxd	CN		
-bxu	CN		
-byk	CN		
-byo	CN		
-bzi	CN		
-cda	CN		
-cdo	CN		
-cdy	CN		
-cjy	CN		
-clk	CN		
-cmn	CN	1	1
-cng	CN		
-cnp	CN		
-cov	CN		
-cpx	CN		
 cqd	CN		
-csl	CN		
-csp	CN		
-cuq	CN		
-cuu	CN		
-czh	CN		
-czo	CN		
-doc	CN		
-dta	CN		
-duu	CN		
-eee	CN		
-emq	CN		
-eng	CN	0	0
-enu	CN		
-ero	CN		
-ers	CN		
-evn	CN	1	1
-gan	CN	1	1
-giq	CN		
-gir	CN		
-giu	CN		
-giw	CN		
-gld	CN	1	1
-gqi	CN		
-gqu	CN		
-gro	CN		
-hak	CN	1	1
 hea	CN		
-hks	CN		
-hle	CN		
 hma	CN		
 hmc	CN		
 hmd	CN		
@@ -2233,166 +2219,150 @@ hms	CN
 hmw	CN		
 hmy	CN		
 hmz	CN		
-hni	CN		
 hnj	CN		
-how	CN		
 hrm	CN		
-hsn	CN	1	1
 huj	CN		
-huo	CN	1	1
-huq	CN		
-iii	CN		
-ili	CN	1	1
 ium	CN		
+mji	CN		
+mmr	CN		
+muq	CN		
+mww	CN		
+pha	CN		
+pnu	CN		
+sfm	CN		
+shx	CN		
+eng	CN	0	0
+mzs	CN		
+pal	CN		
+rus	CN		
+srh	CN		
+txb	CN		
+wbl	CN		
+xmn	CN		
+xto	CN		
+kor	CN		
+bua	CN		
+bxu	CN		
+dta	CN		
+kxs	CN		
+mjg	CN		
+mon	CN	1	1
+mvf	CN		
+peh	CN		
+sce	CN		
+xal	CN		
+yuy	CN		
+zkt	CN		
+otb	CN		
+xpy	CN		
+csl	CN	1	1
+hks	CN		
+lsn	CN	1	1
+acn	CN		
+adi	CN		
+adx	CN		
+aeu	CN		
+ahk	CN		
+atb	CN		
+aub	CN		
+aza	CN		
+bca	CN		
+bfc	CN		
+bfs	CN		
+bod	CN	1	1
+bqh	CN		
+bxd	CN		
+byo	CN		
+bzi	CN		
+cda	CN		
+cdo	CN		
+cjy	CN		
+clk	CN		
+cmn	CN	1	1
+cng	CN		
+cnp	CN		
+cpx	CN		
+csp	CN		
+czh	CN		
+czo	CN		
+duu	CN		
+emq	CN		
+enu	CN		
+ero	CN		
+ers	CN		
+gan	CN	1	1
+gqi	CN		
+gro	CN		
+hak	CN	1	1
+hle	CN		
+hni	CN		
+how	CN		
+hsn	CN	1	1
+iii	CN	1	1
 jih	CN		
-jio	CN		
 jiq	CN		
 jiu	CN		
 jiy	CN		
-juc	CN	1	1
 jya	CN		
 kac	CN		
 kaf	CN		
-kaz	CN	0	1
-kfj	CN		
 kgy	CN		
-khb	CN		
-khf	CN	1	1
 khg	CN		
-kir	CN	1	1
-kjg	CN	1	1
-kjh	CN	1	1
-kkn	CN		
-kmc	CN		
-kor	CN		
 ktp	CN		
-kxs	CN		
-kyp	CN		
-laq	CN		
-lay	CN		
-lbc	CN		
 lbf	CN		
 lbj	CN		
-lbt	CN		
-lcp	CN	0	0
 lhi	CN		
 lhm	CN		
 lhu	CN		
-lic	CN		
 lis	CN		
 lkc	CN		
 llh	CN		
-lov	CN		
 lpo	CN		
 lsi	CN		
-lsn	CN		
 ltc	CN		
 lwm	CN		
 lwu	CN		
 lzh	CN		
 mhu	CN		
 mhx	CN		
-mjg	CN		
-mji	CN		
-mkg	CN		
-mlm	CN		
-mmd	CN		
-mml	CN	1	1
-mmr	CN		
-mnc	CN	1	1
 mnp	CN		
-mon	CN		
-muq	CN		
-mvf	CN		
-mww	CN		
 mxj	CN		
-mzs	CN		
 nan	CN	1	1
 nmy	CN		
 nos	CN		
 nru	CN		
 nsd	CN		
 nsf	CN		
-nsv	CN		
 nuf	CN		
 nun	CN		
 nxq	CN		
 och	CN		
-onb	CN		
-orh	CN	1	1
-otb	CN		
-oui	CN	1	1
-pal	CN		
-pcc	CN		
-pce	CN	1	1
-pdi	CN		
-peh	CN		
-pha	CN		
 phh	CN		
 phq	CN		
-pll	CN	1	1
-ply	CN	1	1
 pmi	CN		
 pmj	CN		
-pnu	CN		
-prk	CN	1	1
 qvy	CN		
 qxs	CN		
-rbb	CN	1	1
-ril	CN	1	1
-rus	CN		
-sce	CN		
-sfm	CN		
 sgk	CN		
-shn	CN		
-shx	CN		
-sjo	CN	1	1
-slr	CN	1	1
 smh	CN		
-srh	CN		
-stu	CN	1	1
-swi	CN		
 sxg	CN		
-tat	CN	0	1
-tct	CN		
-tdd	CN		
 thf	CN		
-tiz	CN		
 tji	CN		
 tjs	CN		
 tsj	CN		
 tsk	CN		
-twh	CN		
-twm	CN		
-txb	CN		
 txg	CN		
-tyv	CN	0	1
-uig	CN	1	1
-uuu	CN	1	1
-uzb	CN	0	1
-uzn	CN	0	1
-vie	CN	0	1
-vwa	CN	1	1
-wbl	CN		
-wbm	CN	1	1
 wmg	CN		
 wuh	CN		
 wuu	CN	1	1
 wxa	CN		
-xal	CN		
 xct	CN		
-xmn	CN		
-xnh	CN		
-xpy	CN		
 xsr	CN		
-xto	CN		
 xzh	CN		
-ybe	CN	1	1
 ybk	CN		
 ych	CN		
 ycl	CN		
 ygp	CN		
-yha	CN		
 yhl	CN		
 yif	CN		
 yig	CN		
@@ -2409,7 +2379,6 @@ ykn	CN
 ykt	CN		
 yku	CN		
 ylm	CN		
-yln	CN		
 ylo	CN		
 ymc	CN		
 ymd	CN		
@@ -2419,7 +2388,6 @@ ymq	CN
 ymx	CN		
 ymz	CN		
 yna	CN		
-yne	CN		
 ypa	CN		
 ypb	CN		
 ypg	CN		
@@ -2429,7 +2397,6 @@ ypn	CN
 ypo	CN		
 ypp	CN		
 ypz	CN		
-yrn	CN		
 ysd	CN		
 ysg	CN		
 ysn	CN		
@@ -2440,132 +2407,165 @@ yta	CN
 ytl	CN		
 ytp	CN		
 yue	CN	1	1
-yuy	CN		
 ywl	CN		
 ywq	CN		
 ywt	CN		
 ywu	CN		
 yyz	CN		
-yzg	CN		
 yzk	CN		
 zal	CN		
-zbl	CN	1	0
+zhb	CN		
+zho	CN	1	1
+aih	CN		
+aou	CN		
+blt	CN		
+byk	CN		
+cdy	CN		
+cov	CN		
+cuq	CN		
+cuu	CN		
+doc	CN		
+eee	CN		
+giq	CN		
+gir	CN		
+giu	CN		
+giw	CN		
+gqu	CN		
+jio	CN		
+khb	CN		
+kmc	CN		
+laq	CN		
+lbc	CN		
+lbt	CN		
+lic	CN		
+mkg	CN		
+mlm	CN		
+mmd	CN		
+onb	CN		
+pcc	CN		
+pdi	CN		
+shn	CN		
+swi	CN		
+tct	CN		
+tdd	CN		
+tiz	CN		
+twh	CN		
+yha	CN		
+yln	CN		
+yrn	CN		
+yzg	CN		
 zch	CN		
 zeh	CN		
 zgb	CN		
 zgm	CN		
 zgn	CN		
-zha	CN		
-zhb	CN		
+zha	CN	1	1
 zhd	CN		
 zhn	CN		
-zho	CN	1	1
-zkt	CN		
 zlj	CN		
 zln	CN		
 zlq	CN		
-zng	CN	1	1
 zqe	CN		
 zyb	CN		
 zyg	CN		
 zyj	CN		
 zyn	CN		
 zzj	CN		
-aca	CO		
 ana	CO	1	1
 ano	CO	1	1
-ans	CO		
-arh	CO	1	1
-bao	CO		
-bdc	CO		
+gum	CO		
+kwi	CO		
+ttk	CO		
 bmr	CO		
 boa	CO		
-bsn	CO		
-cbb	CO		
-cbc	CO		
+kbh	CO		
 cbd	CO		
-cbg	CO		
-cbv	CO		
-cby	CO		
-chb	CO		
+yup	CO		
+ans	CO		
+bdc	CO		
 cmi	CO		
-coe	CO		
 crf	CO		
-csn	CO		
 cto	CO		
-cub	CO		
+noa	CO		
+sja	CO		
+tdc	CO		
 cui	CO		
-fra	CO	0	0
 gob	CO		
-guc	CO		
 guh	CO		
-gum	CO		
 guo	CO		
+mbn	CO		
 hto	CO		
+noj	CO		
+fra	CO	0	0
 icr	CO		
+pln	CO		
+spa	CO	0	0
+cbv	CO		
+mbr	CO		
+pbb	CO		
+pui	CO		
+slc	CO		
+csn	CO		
+prz	CO		
+aca	CO		
+arh	CO	1	1
+cbb	CO		
+cbg	CO		
+chb	CO		
+guc	CO		
 inb	CO		
 inj	CO		
-kbh	CO		
 kog	CO		
 kpc	CO		
 kvn	CO		
-kwi	CO		
-mbn	CO		
 mbp	CO		
-mbr	CO		
-mcl	CO		
 mot	CO		
-myy	CO		
-noa	CO		
-noj	CO		
-pbb	CO		
-pij	CO		
 pio	CO		
-pln	CO		
-prz	CO		
-pui	CO		
-sja	CO		
-slc	CO		
+tbn	CO		
+tnb	CO		
+tnd	CO		
+tuf	CO		
+ycn	CO		
+yrl	CO		
+tit	CO		
+bao	CO		
+bsn	CO		
+cbc	CO		
+coe	CO		
+cub	CO		
+mcl	CO		
+myy	CO		
 snn	CO		
-spa	CO	0	0
 sri	CO		
 tav	CO		
-tbn	CO		
-tdc	CO		
 ten	CO		
-tit	CO		
-tnb	CO		
 tnc	CO		
-tnd	CO		
-ttk	CO		
 tue	CO		
-tuf	CO		
 tuo	CO		
-ycn	CO		
 ynu	CO		
-yrl	CO		
 yui	CO		
-yup	CO		
+cby	CO		
+pij	CO		
 eng	CQ	0	1
+fra	CR	0	0
+jam	CR		
+pdt	CR		
+spa	CR	0	0
+ydd	CR		
+yid	CR		
+csr	CR	1	0
+rib	CR	1	1
+rnb	CR	1	1
 brn	CR		
 bzd	CR		
 cjp	CR		
-csr	CR		
-fra	CR	0	0
 gut	CR		
 gym	CR		
-jam	CR		
-pdt	CR		
-rib	CR		
-rnb	CR		
-spa	CR	0	0
 tfr	CR		
-ydd	CR		
-yid	CR		
-csf	CU		
 fra	CU	0	0
-luq	CU		
 spa	CU	0	0
+luq	CU		
+csf	CU	1	0
 fra	CV	0	0
 kea	CV		
 por	CV		
@@ -2575,20 +2575,19 @@ spa	CW	0	0
 eng	CX	0	0
 acy	CY	1	1
 ara	CY	0	1
+tur	CY	0	1
+fil	CY	0	0
 bul	CY		
-ecy	CY		
 ell	CY		
 eng	CY	0	0
-fil	CY	0	0
 fra	CY	0	1
 hin	CY		
 hye	CY		
 ron	CY	0	0
 rus	CY		
 sin	CY		
-tur	CY	0	1
+ecy	CY		
 ces	CZ	1	1
-cse	CZ		
 czk	CZ		
 deu	CZ		
 eng	CZ	0	0
@@ -2598,7 +2597,9 @@ rom	CZ	0	1
 rus	CZ		
 slk	CZ		
 ukr	CZ		
+cse	CZ	1	0
 ara	DE	0	0
+tur	DE	0	0
 bar	DE	1	1
 bos	DE	0	0
 bul	DE	0	0
@@ -2615,73 +2616,65 @@ frs	DE
 gmh	DE		
 gml	DE		
 goh	DE		
-gsg	DE	1	1
 gsw	DE		
 hbs	DE		
 hrv	DE		
 hsb	DE		
-hun	DE	0	0
-ita	DE		
+ita	DE	0	1
 ksh	DE		
 kur	DE		
 mkd	DE		
 nds	DE	1	1
-nld	DE		
+nld	DE	0	1
 osx	DE		
 pfl	DE		
 pol	DE		
 pox	DE		
-rus	DE		
+rus	DE	0	0
 spa	DE	0	0
 sqi	DE		
 srp	DE		
 stq	DE		
 swg	DE		
 sxu	DE		
-tur	DE	0	0
 ukr	DE		
-vmf	DE		
+vmf	DE	1	1
 wep	DE		
 yec	DE		
+gsg	DE	1	1
+hun	DE	0	0
 eng	DG	0	0
 aar	DJ	1	1
 ara	DJ	0	1
-fra	DJ	0	0
 som	DJ	1	1
+fra	DJ	0	0
+kal	DK	1	1
 dan	DK	1	1
 deu	DK	0	1
-dsl	DK	1	1
 eng	DK	0	0
 fao	DK	0	1
 fra	DK	0	0
 jut	DK	1	1
-kal	DK	1	1
-rmd	DK	1	1
 rom	DK	0	1
 swe	DK	0	1
+dsl	DK	1	1
+rmd	DK	1	1
 eng	DM	0	0
 fra	DM	0	0
-doq	DO	1	0
 eng	DO	0	0
 fra	DO	0	0
 hat	DO	0	0
 spa	DO	0	0
+doq	DO	1	0
 aao	DZ	1	1
-ajs	DZ	1	1
 ara	DZ	0	1
 arb	DZ	0	1
 arq	DZ	1	1
-asp	DZ		
-blv	DZ		
 cnu	DZ	1	1
-eng	DZ	0	0
-fra	DZ	0	0
 grr	DZ	1	1
 kab	DZ	1	1
-kcy	DZ		
 mey	DZ	1	1
 mzb	DZ	1	1
-nxm	DZ		
 oua	DZ	1	1
 rif	DZ	1	1
 shi	DZ	1	1
@@ -2690,23 +2683,31 @@ thv	DZ	1	1
 tia	DZ	1	1
 tjo	DZ	1	1
 tmh	DZ	1	1
+eng	DZ	0	0
+fra	DZ	0	0
+blv	DZ		
+kcy	DZ		
+ajs	DZ	1	1
+asp	DZ	1	0
+nxm	DZ		
 ara	EA	0	1
+rif	EA	1	1
 eng	EA	0	0
 fra	EA	0	0
-rif	EA	1	1
 spa	EA	0	0
-acu	EC		
-anb	EC		
-auc	EC		
 cbi	EC		
 cof	EC		
-con	EC		
-ecs	EC		
-jiv	EC		
 kwi	EC		
+teb	EC		
+acu	EC		
+jiv	EC		
+sja	EC		
+con	EC		
+spa	EC	0	0
 mue	EC		
+ecs	EC		
 qud	EC		
-que	EC		
+que	EC	1	1
 qug	EC		
 quw	EC		
 qvi	EC		
@@ -2715,19 +2716,18 @@ qvz	EC
 qxl	EC		
 qxr	EC		
 sey	EC		
-sja	EC		
-spa	EC	0	0
-teb	EC		
-zro	EC		
-ekk	EE		
-eng	EE	0	0
-eso	EE		
-est	EE		
-fin	EE		
-fra	EE	0	0
+auc	EC		
+anb	EC	1	1
+zro	EC	1	1
 ile	EE	1	1
+eng	EE	0	0
+fra	EE	0	0
 rus	EE		
 ukr	EE		
+eso	EE	1	0
+ekk	EE		
+est	EE		
+fin	EE		
 vro	EE		
 aec	EG	1	1
 afb	EG	1	1
@@ -2741,16 +2741,16 @@ ayl	EG	1	1
 bej	EG	0	1
 cop	EG	1	1
 egy	EG	1	1
+hbo	EG	1	1
+siz	EG	1	1
 ell	EG		
 eng	EG	0	0
-esl	EG		
-fia	EG		
 fra	EG	0	0
-hbo	EG	1	1
 hyw	EG		
+fia	EG		
 onw	EG		
-siz	EG	1	1
 xnz	EG		
+esl	EG	1	1
 ara	EH	0	1
 arb	EH	0	1
 ary	EH	1	1
@@ -2760,27 +2760,29 @@ ara	ER	0	1
 bej	ER	0	1
 byn	ER	1	1
 dlk	ER	1	1
-eng	ER	0	0
-kun	ER		
-nrb	ER		
 ssy	ER	1	1
 tig	ER	1	1
 tir	ER	1	0
+eng	ER	0	0
+kun	ER		
+nrb	ER		
 ara	ES	0	1
+gnc	ES	1	1
+rif	ES	0	1
+xaa	ES	1	1
+xaq	ES	1	1
+eus	ES		
+xib	ES		
 arg	ES	1	1
 ast	ES		
 bul	ES		
 cat	ES	1	1
-csc	ES		
 deu	ES		
 eng	ES	0	0
-eus	ES		
 ext	ES	1	1
 fax	ES	1	1
 fra	ES	0	1
-glg	ES		
-gnc	ES	1	1
-grn	ES		
+glg	ES	1	1
 ita	ES		
 mxi	ES		
 nld	ES		
@@ -2788,153 +2790,149 @@ oci	ES
 osp	ES		
 pol	ES		
 por	ES		
-quq	ES		
-rif	ES	0	1
 rmq	ES		
 ron	ES	0	0
 rus	ES		
 spa	ES	0	0
-ssp	ES		
 sxo	ES		
-txr	ES		
 ukr	ES		
 urd	ES		
-vsv	ES		
-wol	ES		
-xaa	ES	1	1
-xaq	ES	1	1
 xce	ES		
-xib	ES		
 xls	ES		
 xvn	ES		
+wol	ES		
+csc	ES		
+ssp	ES	1	0
+vsv	ES		
 zho	ES	0	0
+grn	ES		
+quq	ES		
+txr	ES		
 aar	ET	1	1
 agj	ET	1	1
 ahg	ET	1	1
-aiw	ET		
 alw	ET	1	1
-amf	ET		
 amh	ET	1	1
-anu	ET		
 arv	ET	1	1
 awn	ET	1	1
-bcq	ET		
 bji	ET	1	1
-bst	ET		
 bsw	ET	1	1
-bwo	ET		
 bxe	ET	1	1
-cra	ET		
-dim	ET		
 dox	ET	1	1
-doz	ET		
 drs	ET	1	1
 dsh	ET	1	1
-dtn	ET		
-dwr	ET		
-eng	ET	0	0
-eth	ET		
 gax	ET	1	1
 gaz	ET	1	1
 gdl	ET	1	1
 gez	ET	1	1
 gft	ET	1	1
 gii	ET	1	1
-gmv	ET		
-gof	ET		
 gru	ET	1	1
-guk	ET		
 gwd	ET	1	1
-gyl	ET		
-gza	ET		
 hae	ET	1	1
 har	ET	1	1
 hdy	ET	1	1
-hoz	ET		
 ior	ET	1	1
-jnj	ET		
-kbr	ET		
-kcx	ET		
-kmq	ET		
-kmw	ET		
-kqy	ET		
 ktb	ET	1	1
-kun	ET		
 kxc	ET	1	1
-kxh	ET		
-lgn	ET		
 liq	ET	1	1
-mdx	ET		
-mdy	ET		
-mfx	ET		
-moy	ET		
-mpe	ET		
-muz	ET		
 mvz	ET	1	1
-myf	ET		
-mym	ET		
-myo	ET		
 mys	ET	1	1
-nnj	ET		
-noz	ET		
-nus	ET		
 orm	ET	1	1
-oyd	ET		
-rer	ET		
-sbf	ET		
 sgw	ET	1	1
-she	ET		
 sid	ET	1	1
 som	ET	1	1
 stv	ET	1	1
-suq	ET		
-sze	ET		
 tir	ET	1	0
 tsb	ET	1	1
-wal	ET		
 wle	ET	1	1
-woy	ET		
-wti	ET		
 xan	ET	1	1
-xwg	ET		
-zay	ET		
 zwa	ET	1	1
+gza	ET		
+hoz	ET		
+myf	ET		
+sze	ET		
+mdx	ET		
+noz	ET		
+she	ET		
+dtn	ET		
+guk	ET		
+eng	ET	0	0
+kmq	ET		
+lgn	ET		
+kun	ET		
+kmw	ET		
+wti	ET		
+anu	ET		
+nnj	ET		
+nus	ET		
+sbf	ET		
+eth	ET		
+aiw	ET		
+amf	ET		
+dim	ET		
+gyl	ET		
+kxh	ET		
+mpe	ET		
+muz	ET		
+mym	ET		
+suq	ET		
+xwg	ET		
+bcq	ET		
+bst	ET		
+bwo	ET		
+cra	ET		
+doz	ET		
+dwr	ET		
+gmv	ET		
+gof	ET		
+jnj	ET		
+kbr	ET		
+kcx	ET		
+kqy	ET		
+mdy	ET		
+mfx	ET		
+moy	ET		
+myo	ET		
+oyd	ET		
+wal	ET	1	1
+zay	ET		
+rer	ET		
+woy	ET		
 ara	FI	0	0
+som	FI	0	0
 deu	FI		
 eng	FI	0	0
-est	FI		
-fin	FI		
 fra	FI	0	0
-fse	FI		
-fss	FI		
 rmf	FI		
 rom	FI	0	0
 rus	FI		
+swe	FI	0	1
+fse	FI	1	0
+fss	FI		
+est	FI		
+fin	FI	1	1
 sjk	FI		
 sme	FI		
 smn	FI		
 sms	FI		
-som	FI	0	0
-swe	FI		
 bwb	FJ	1	1
-eng	FJ	0	0
 fij	FJ	1	1
 goo	FJ	1	1
-hif	FJ	1	0
-hin	FJ	0	0
 llx	FJ	1	1
 lmv	FJ	1	1
 rtm	FJ	1	1
 wyy	FJ	1	1
+eng	FJ	0	0
+hif	FJ	1	0
+hin	FJ	0	0
 eng	FK	0	0
 spa	FK	0	0
 chk	FM	1	1
-eng	FM	0	0
 kos	FM		
 kpg	FM		
 mkj	FM		
 mrl	FM		
-ngm	FM		
 nkr	FM		
 nmt	FM		
 nuw	FM		
@@ -2946,24 +2944,26 @@ stw	FM
 uli	FM		
 woe	FM		
 yap	FM		
+eng	FM	0	0
+ngm	FM		
 fao	FO	1	1
+xaq	FR	1	1
+ina	FR	0	1
+eus	FR		
+sdt	FR		
+zrp	FR		
+hmn	FR		
+hnj	FR		
 bre	FR		
 cat	FR		
 cos	FR		
-deu	FR		
-emx	FR		
+deu	FR	0	1
 eng	FR	0	1
-eus	FR		
 fra	FR	1	1
 frm	FR		
 fro	FR		
 frp	FR		
-fsl	FR		
 gsw	FR		
-hmn	FR		
-hnj	FR		
-ido	FR	1	1
-ina	FR	0	1
 ita	FR		
 nld	FR		
 obt	FR		
@@ -2972,16 +2972,16 @@ pcd	FR
 por	FR		
 pro	FR		
 rom	FR	0	1
-sdt	FR		
 spa	FR	0	0
-xaq	FR	1	1
 xbm	FR		
 xtg	FR		
-zrp	FR		
+fsl	FR	1	1
+emx	FR		
+ido	FR	1	1
+fra	GA	0	0
 bbg	GA		
 buw	GA		
 dma	GA		
-fra	GA	0	0
 gev	GA		
 kbs	GA		
 keb	GA		
@@ -3010,14 +3010,18 @@ vum	GA
 wdd	GA		
 wum	GA		
 zmn	GA		
-ang	GB		
 ara	GB	0	0
+som	GB	0	0
+tur	GB	0	0
+qya	GB	1	0
+sjn	GB	1	1
+tam	GB	0	0
+ang	GB		
 ben	GB		
-bfi	GB		
 cnx	GB		
 cor	GB		
 cym	GB		
-deu	GB		
+deu	GB	0	0
 eng	GB	1	1
 enm	GB	1	1
 fra	GB	0	1
@@ -3031,63 +3035,62 @@ lit	GB
 nrf	GB		
 nrn	GB		
 oco	GB		
-okl	GB		
 owl	GB		
-pan	GB		
-pld	GB		
-pol	GB		
+pan	GB	0	0
+pol	GB	0	0
 por	GB		
-qya	GB	1	0
 rme	GB		
 rmw	GB		
 rom	GB	0	0
 ron	GB	0	0
 sco	GB		
-sjn	GB	1	1
-som	GB	0	0
 spa	GB	0	0
-tam	GB		
-trl	GB		
-tur	GB	0	0
-urd	GB		
+urd	GB	0	0
 wlm	GB		
 xcb	GB		
 xno	GB		
-xpi	GB		
+bfi	GB	1	1
+okl	GB	1	1
 zho	GB	0	0
+pld	GB		
+trl	GB		
+xpi	GB		
 eng	GD	0	0
 gcl	GD		
-abk	GE	1	1
-aze	GE	1	1
-bbl	GE		
 bhn	GE	1	1
+aze	GE	1	1
+uum	GE	0	1
+abk	GE	1	1
+kat	GE	1	1
+lzz	GE		
+oge	GE		
+sva	GE		
+xmf	GE		
 fra	GE	0	0
 hye	GE		
-kat	GE		
 kmr	GE		
 kur	GE		
-lzz	GE		
-oav	GE		
-oge	GE		
 oss	GE		
 rus	GE		
-sva	GE		
-uum	GE	0	1
-xmf	GE		
-eme	GF		
-fra	GF	0	0
-gcr	GF		
+bbl	GE		
+oav	GE		
 hmn	GF		
 hnj	GF		
+fra	GF	0	0
+gcr	GF		
 zho	GF	0	0
+eme	GF		
 eng	GG	0	1
+hau	GH	0	1
+afh	GH	1	1
+eng	GH	0	0
+fra	GH	0	0
+gpe	GH		
 abr	GH		
 acd	GH		
 ada	GH		
 ade	GH		
 adq	GH		
-ads	GH		
-afh	GH	1	1
 afu	GH		
 aha	GH		
 aka	GH	1	1
@@ -3108,19 +3111,14 @@ cpn	GH
 dag	GH		
 dga	GH		
 doy	GH		
-eng	GH	0	0
-ewe	GH		
-fat	GH		
-fra	GH	0	0
+ewe	GH	1	1
+fat	GH	1	1
 ful	GH		
 gaa	GH		
 gjn	GH		
-gpe	GH		
-gse	GH		
 gur	GH		
 gwx	GH		
 hag	GH		
-hau	GH	0	1
 jmr	GH		
 jwi	GH		
 kdh	GH		
@@ -3156,7 +3154,7 @@ snw	GH
 ssl	GH		
 tcd	GH		
 tpm	GH		
-twi	GH		
+twi	GH	1	1
 vag	GH		
 wlx	GH		
 wss	GH		
@@ -3164,28 +3162,30 @@ xkt	GH
 xon	GH		
 xsm	GH		
 xxb	GH		
+ads	GH	1	1
+gse	GH	1	0
 eng	GI	0	0
 spa	GI	0	1
-dan	GL		
 kal	GL		
-emk	GM		
+dan	GL		
 eng	GM	0	0
 fra	GM	0	0
+emk	GM		
 ful	GM		
 man	GM		
 wof	GM		
+nqo	GN	1	1
+bqf	GN		
+bsv	GN		
+fra	GN	0	0
 bcg	GN		
 bgo	GN		
 bmd	GN		
-bqf	GN		
 bsp	GN		
-bsv	GN		
 emk	GN		
-fra	GN	0	0
 fuf	GN		
-ful	GN		
+ful	GN	1	1
 gkp	GN		
-gus	GN		
 jad	GN		
 kke	GN		
 knu	GN		
@@ -3194,68 +3194,65 @@ kqs	GN
 ldm	GN		
 llc	GN		
 lma	GN		
-man	GN		
+man	GN	1	1
 mbv	GN		
 mfg	GN		
 mku	GN		
 mnk	GN		
 msc	GN		
 naj	GN		
-nqo	GN	1	1
 pbp	GN		
 sus	GN		
 tod	GN		
 yal	GN		
 zil	GN		
+gus	GN	1	0
 fra	GP	0	0
 gcf	GP		
+fab	GQ		
+fpe	GQ	1	0
+fra	GQ	0	0
+por	GQ		
+spa	GQ	0	0
 bng	GQ		
 bnm	GQ		
 bvb	GQ		
 bxc	GQ		
-fab	GQ		
 fan	GQ		
-fpe	GQ	1	0
-fra	GQ	0	0
 nui	GQ		
-por	GQ		
-spa	GQ	0	0
+tur	GR	0	1
 aat	GR		
 bul	GR		
 cpg	GR		
 deu	GR		
-ecr	GR		
 ell	GR	1	1
 eng	GR	0	0
 fra	GR	0	0
 gmy	GR		
 grc	GR		
-gss	GR		
-lab	GR		
 mkd	GR		
-omn	GR		
 pnt	GR		
 rge	GR		
 rom	GR	0	1
 ruq	GR		
 sqi	GR		
 tsd	GR		
-tur	GR	0	1
-xle	GR		
 xmk	GR		
 yej	GR		
+lab	GR		
+gss	GR	1	0
+ecr	GR		
+omn	GR		
+xle	GR		
 eng	GS	0	0
 acr	GT		
 agu	GT		
 caa	GT		
-cab	GT		
 cac	GT		
 cak	GT		
 ckz	GT		
 cob	GT		
 emy	GT		
-eng	GT	0	0
-gsm	GT		
 itz	GT		
 ixl	GT		
 jac	GT		
@@ -3269,61 +3266,63 @@ poh	GT
 quc	GT		
 qum	GT		
 quv	GT		
-spa	GT	0	0
 ttc	GT		
 tzj	GT		
 usp	GT		
-xin	GT		
+eng	GT	0	0
+spa	GT	0	0
+gsm	GT		
+cab	GT		
+xin	GT	1	1
 cha	GU	1	1
-eng	GU	0	0
 fil	GU	0	0
+eng	GU	0	0
+eng	GW	0	0
+fra	GW	0	0
+por	GW		
+pov	GW		
 bab	GW		
 bif	GW		
 bjg	GW		
 ble	GW		
 ccj	GW		
 eja	GW		
-eng	GW	0	0
-fra	GW	0	0
 ful	GW		
 kcj	GW		
 knf	GW		
-lgs	GW		
 msw	GW		
 pbo	GW		
-por	GW		
-pov	GW		
+lgs	GW	1	0
+mzx	GY		
 ake	GY	1	1
-aox	GY		
-arw	GY	1	1
+pbc	GY		
 brc	GY		
 eng	GY	0	0
 gyn	GY		
-mzx	GY		
-pbc	GY		
 skw	GY		
-tdm	GY		
+aox	GY		
+arw	GY	1	1
 wap	GY		
-cmn	HK		
+tdm	GY		
 eng	HK	0	0
-yue	HK		
+cmn	HK		
+yue	HK	1	1
 zho	HK	1	1
-cab	HN		
 eng	HN	0	0
-hds	HN		
+spa	HN	0	0
 jic	HN		
 len	HN		
 miq	HN		
+hds	HN	1	0
+cab	HN		
 pay	HN		
-spa	HN	0	0
 bos	HR		
 ckm	HR		
-csq	HR		
 dlm	HR		
 eng	HR	0	0
 fra	HR	0	0
-hbs	HR		
-hrv	HR		
+hbs	HR	1	1
+hrv	HR	1	1
 ist	HR		
 ita	HR		
 kjv	HR		
@@ -3334,47 +3333,46 @@ sqi	HR
 srp	HR		
 vec	HR		
 xli	HR		
-ysl	HR		
-ase	HT	0	0
+csq	HR	1	9
+ysl	HR	1	0
 fra	HT	0	0
 hat	HT	1	0
+ase	HT	0	0
 hvc	HT		
+xhc	HU	1	1
 deu	HU		
 eng	HU	0	0
 fra	HU	0	0
 hbs	HU		
 hrv	HU		
-hsh	HU		
-hun	HU	1	1
 lng	HU		
-ohu	HU		
 rom	HU	0	1
 ron	HU	0	1
 slk	HU		
 slv	HU		
 srp	HU		
-xhc	HU	1	1
 ysc	HU		
+hsh	HU		
+hun	HU	1	1
+ohu	HU		
 deu	IC		
 eng	IC	0	0
 fra	IC	0	0
 ita	IC	0	0
 spa	IC	0	1
-aax	ID		
+bsa	ID	1	1
+kgr	ID	1	1
+bgv	ID	1	1
+bpv	ID	1	1
+jaq	ID	1	1
+mrz	ID	1	1
 aaz	ID	1	1
 abl	ID	1	1
 abs	ID	1	1
-abz	ID		
 ace	ID	1	1
-adn	ID		
 adr	ID	1	1
-afz	ID		
 agf	ID	1	1
-ahh	ID		
-aip	ID		
-air	ID		
 akb	ID	1	1
-akc	ID	1	1
 akg	ID	1	1
 alo	ID	1	1
 alp	ID	1	1
@@ -3383,27 +3381,13 @@ amq	ID	1	1
 amv	ID	1	1
 and	ID	1	1
 aol	ID	1	1
-aos	ID		
 aoz	ID	1	1
 apg	ID	1	1
 apx	ID	1	1
-aqm	ID		
-asc	ID	1	1
-asi	ID		
 asl	ID	1	1
-asy	ID		
 asz	ID	1	1
 atq	ID	1	1
 auq	ID	1	1
-auu	ID		
-auw	ID		
-awh	ID		
-awr	ID		
-aws	ID		
-awu	ID		
-awv	ID		
-awy	ID		
-ayz	ID		
 bac	ID	1	1
 baj	ID	1	1
 ban	ID	1	1
@@ -3412,18 +3396,13 @@ bbc	ID	1	1
 bcd	ID	1	1
 bdb	ID	1	1
 bdl	ID	1	1
-bdw	ID		
 bdx	ID	1	1
 bed	ID	1	1
 bei	ID	1	1
 bep	ID	1	1
-beu	ID		
 bew	ID	1	1
-bfe	ID		
 bfg	ID	1	1
-bfn	ID		
 bgb	ID	1	1
-bgv	ID	1	1
 bgy	ID	1	1
 bgz	ID	1	1
 bhc	ID	1	1
@@ -3433,7 +3412,6 @@ bhv	ID	1	1
 bhw	ID	1	1
 bhz	ID	1	1
 bjn	ID	1	1
-bkl	ID		
 bkn	ID	1	1
 bkr	ID	1	1
 bkz	ID	1	1
@@ -3448,25 +3426,15 @@ bne	ID	1	1
 bnf	ID	1	1
 bnq	ID	1	1
 bnu	ID	1	1
-bnv	ID		
 bpg	ID	1	1
-bpo	ID		
-bpp	ID		
 bpq	ID	1	1
-bpv	ID	1	1
 bpz	ID	1	1
-bqb	ID		
-bqq	ID		
 bqr	ID	1	1
-bqy	ID		
-brp	ID		
 brs	ID	1	1
-bsa	ID	1	1
 bsm	ID	1	1
 bsu	ID	1	1
 btd	ID	1	1
 bth	ID	1	1
-bti	ID		
 btj	ID	1	1
 btm	ID	1	1
 bts	ID	1	1
@@ -3479,82 +3447,46 @@ bve	ID	1	1
 bvk	ID	1	1
 bvt	ID	1	1
 bvu	ID	1	1
-bvz	ID		
-bwp	ID		
 byd	ID	1	1
-byl	ID		
 bzb	ID	1	1
 bzl	ID	1	1
 bzn	ID	1	1
-bzp	ID		
 bzq	ID	1	1
-bzu	ID		
-cdo	ID		
 cia	ID	1	1
 cml	ID	1	1
-cmn	ID	0	1
-cns	ID		
-daz	ID		
-dbe	ID		
-dbf	ID		
-dbn	ID		
 ddw	ID	1	1
-dei	ID		
-dem	ID		
 dij	ID	1	1
-diy	ID		
 djo	ID	1	1
 dkk	ID	1	1
 dmr	ID	1	1
 dms	ID	1	1
-dmu	ID		
-dmy	ID		
-dna	ID		
-dni	ID		
 dnk	ID	1	1
-dnt	ID		
-dnw	ID		
 dok	ID	1	1
 drn	ID	1	1
 dsn	ID	1	1
 dun	ID	1	1
 dup	ID	1	1
 duq	ID	1	1
-duv	ID		
 duw	ID	1	1
 ebc	ID	1	1
-eip	ID		
-ekg	ID		
 emb	ID	1	1
 emw	ID	1	1
 end	ID	1	1
 eno	ID	1	1
-enr	ID		
-ert	ID		
 erw	ID	1	1
-etz	ID		
-fau	ID		
-flh	ID		
 frd	ID	1	1
-gak	ID		
 gal	ID	1	1
 gay	ID	1	1
-gbi	ID		
 gef	ID	1	1
 gei	ID	1	1
 ges	ID	1	1
 gop	ID	1	1
 goq	ID	1	1
 gor	ID	1	1
-grs	ID		
 gzn	ID	1	1
-had	ID		
-hak	ID		
-hap	ID		
 heg	ID	1	1
 hik	ID	1	1
 hji	ID		
-hmu	ID		
 hov	ID		
 hrk	ID		
 hti	ID		
@@ -3564,119 +3496,60 @@ huk	ID
 huw	ID		
 hvn	ID		
 iba	ID		
-ibu	ID		
-ihb	ID		
-ihp	ID		
 ila	ID		
 ilu	ID		
 imr	ID		
 ind	ID	1	1
-inl	ID		
 ire	ID		
 irh	ID		
-irx	ID		
 ism	ID		
 itd	ID		
-itx	ID		
-iwo	ID		
 jal	ID		
-jaq	ID	1	1
 jau	ID		
 jav	ID	1	1
 jax	ID		
-jbj	ID		
-jbr	ID		
-jei	ID		
-jel	ID		
-jet	ID		
-jka	ID		
 jmd	ID		
-jvd	ID		
 kaw	ID		
-kax	ID		
 kbi	ID		
-kbv	ID		
-kcd	ID		
-kdw	ID		
-kdy	ID		
 kei	ID		
 kem	ID		
 kgb	ID		
 kge	ID		
-kgq	ID		
-kgr	ID	1	1
-kgv	ID		
-kgw	ID		
 kgx	ID		
 khc	ID		
-khd	ID		
-khe	ID		
-khh	ID		
-khp	ID		
-kig	ID		
-kiq	ID		
-kiy	ID		
-kja	ID		
 kjc	ID		
 kje	ID		
 kjk	ID		
 kjr	ID		
-kkb	ID		
-kkl	ID		
 kkv	ID		
 kkx	ID		
 kli	ID		
 klw	ID		
 kly	ID		
-klz	ID		
-kmt	ID		
-knd	ID		
 knl	ID		
 knx	ID		
 kod	ID		
 kpd	ID		
-kpi	ID		
-kpq	ID		
-kps	ID		
-kpu	ID		
 kqv	ID		
-krz	ID		
 ksx	ID		
-kti	ID		
-kts	ID		
-ktt	ID		
-kuc	ID		
 kuk	ID		
 kuv	ID		
 kvb	ID		
-kvd	ID		
 kvh	ID		
 kvo	ID		
 kvp	ID		
 kvr	ID		
 kvv	ID		
-kvw	ID		
-kvz	ID		
-kwe	ID		
 kwh	ID		
-kwr	ID		
-kwt	ID		
-kxq	ID		
 kyd	ID		
-kyo	ID		
-kyt	ID		
 kzb	ID		
 kzd	ID		
 kzf	ID		
 kzi	ID		
 kzl	ID		
-kzm	ID		
 kzp	ID		
 kzu	ID		
-kzv	ID		
 kzx	ID		
-kzz	ID		
-lau	ID		
 law	ID		
 lbw	ID		
 lbx	ID		
@@ -3687,7 +3560,6 @@ lcf	ID
 lcl	ID		
 lcq	ID		
 lcs	ID		
-lev	ID		
 lew	ID		
 lex	ID		
 ley	ID		
@@ -3709,10 +3581,8 @@ lmq	ID
 lmr	ID		
 lmy	ID		
 lnd	ID		
-loa	ID		
 loe	ID		
 lox	ID		
-lpe	ID		
 lra	ID		
 lrn	ID		
 lrt	ID		
@@ -3726,115 +3596,68 @@ mad	ID	1	1
 mak	ID		
 max	ID		
 mdr	ID		
-mej	ID		
 mfb	ID		
 mfp	ID		
-mgf	ID		
-mgk	ID		
 mhp	ID		
 mhs	ID		
 mhy	ID		
 mhz	ID		
-min	ID		
+min	ID	1	1
 mkn	ID		
 mky	ID		
 mli	ID		
-mmb	ID		
 mnb	ID		
-mnu	ID		
-mnx	ID		
-mnz	ID		
 mog	ID		
-mok	ID		
-moq	ID		
 mpy	ID		
 mqa	ID		
 mqc	ID		
-mqf	ID		
 mqg	ID		
 mqi	ID		
 mqj	ID		
 mqn	ID		
-mqo	ID		
 mqp	ID		
-mqr	ID		
-mqs	ID		
 mqx	ID		
 mqy	ID		
-mrf	ID		
-mrx	ID		
-mrz	ID	1	1
 msa	ID	1	1
-msf	ID		
-msg	ID		
-msl	ID		
-mso	ID		
 mss	ID		
 mtd	ID		
-mtg	ID		
 mth	ID		
-mtj	ID		
 mui	ID		
 mvd	ID		
 mvp	ID		
 mvr	ID		
-mvs	ID		
 mvv	ID		
 mvx	ID		
 mwv	ID		
 mxd	ID		
-mxn	ID		
 mxz	ID		
 myl	ID		
 mzq	ID		
-naa	ID		
 nae	ID		
-nan	ID		
 nbn	ID		
-nbq	ID		
-ndx	ID		
 nea	ID		
-nec	ID		
-ner	ID		
 nfa	ID		
 nia	ID		
 nij	ID		
 nil	ID		
-nir	ID		
-njs	ID		
-nkj	ID		
-nks	ID		
-nlc	ID		
-nlk	ID		
 nni	ID		
-nps	ID		
 npy	ID		
-nqm	ID		
 nsy	ID		
 nul	ID		
 nxe	ID		
 nxg	ID		
 nxl	ID		
-nxr	ID		
-nxu	ID		
-nxx	ID		
-oia	ID		
 omy	ID		
 oni	ID		
-onx	ID		
-opk	ID		
 orz	ID		
 osi	ID		
 osn	ID		
 otd	ID		
-pas	ID		
 pdn	ID		
 pdo	ID		
 pea	ID		
 pee	ID		
 pel	ID		
-pey	ID		
-pgu	ID		
 pku	ID		
 ple	ID		
 plh	ID		
@@ -3847,50 +3670,36 @@ pnp	ID
 pns	ID		
 ppk	ID		
 ppm	ID		
-pru	ID		
-psa	ID		
 pse	ID		
 psn	ID		
 ptn	ID		
 ptt	ID		
 ptu	ID		
-puc	ID		
 pud	ID		
 puf	ID		
 puj	ID		
-put	ID		
-rac	ID		
-ran	ID		
 raz	ID		
 reb	ID		
 rej	ID		
-ret	ID		
 rgu	ID		
 rir	ID		
 riu	ID		
 rjg	ID		
-rmh	ID		
 rmm	ID		
 rnn	ID		
 rob	ID		
 ror	ID		
 row	ID		
 rth	ID		
-saj	ID		
-sao	ID	1	1
 sas	ID	1	1
 sau	ID		
-saw	ID		
-sbg	ID		
 sbr	ID		
-sbt	ID		
 sbx	ID		
 scg	ID		
 sda	ID		
 sdo	ID		
 sdq	ID		
 sdu	ID		
-set	ID		
 seu	ID		
 sge	ID		
 sgu	ID		
@@ -3898,7 +3707,6 @@ sjb	ID
 skh	ID		
 ski	ID		
 sko	ID		
-skv	ID		
 skx	ID		
 skz	ID		
 slg	ID		
@@ -3908,85 +3716,50 @@ sly	ID
 slz	ID		
 smr	ID		
 smw	ID		
-snu	ID		
 snv	ID		
 sob	ID		
-sow	ID		
 spb	ID		
-spi	ID		
 spr	ID		
 sre	ID		
-srl	ID		
-srt	ID		
 srw	ID		
 ssq	ID		
 ste	ID		
 sun	ID	1	1
 sve	ID		
-swr	ID		
 sws	ID		
-swt	ID		
 swu	ID		
 sxn	ID		
 sya	ID		
-szb	ID		
 szn	ID		
-szp	ID		
 szw	ID		
-tad	ID		
-tbp	ID		
-tby	ID		
-tcg	ID		
-tcm	ID		
-tcq	ID		
 tdi	ID		
 tdj	ID		
 tdn	ID		
-tds	ID		
 tdt	ID		
 tes	ID		
 tet	ID		
 tev	ID		
-tfo	ID		
-tft	ID		
-tip	ID		
 tjg	ID		
-tkx	ID		
-tlb	ID		
 tld	ID		
-tlg	ID		
 tlk	ID		
 tln	ID		
 tlt	ID		
 tlu	ID		
 tlv	ID		
-tmg	ID		
-tmj	ID		
-tml	ID		
 tmn	ID		
-tmu	ID		
 tni	ID		
-tnm	ID		
 tnt	ID		
 tnw	ID		
 tom	ID		
 toy	ID		
 tpf	ID		
-tpg	ID		
 tre	ID		
-trt	ID		
 tsg	ID		
 tti	ID		
-ttn	ID		
 ttp	ID		
-tty	ID		
-tuj	ID		
 tve	ID		
 tvm	ID		
-tvo	ID		
 tvw	ID		
-twe	ID		
-twg	ID		
 twu	ID		
 twy	ID		
 txe	ID		
@@ -3994,65 +3767,42 @@ txm	ID
 txn	ID		
 txq	ID		
 txs	ID		
-txt	ID		
-tyn	ID		
 tzn	ID		
 udj	ID		
 ues	ID		
-uhn	ID		
-uka	ID		
-ulf	ID		
 ulm	ID		
 ulu	ID		
 ums	ID		
 unz	ID		
 urn	ID		
-ury	ID		
 vbb	ID		
 vkk	ID		
 vkl	ID		
 vko	ID		
 vkt	ID		
 vme	ID		
-vms	ID		
-vto	ID		
 wad	ID		
 wah	ID		
-wai	ID		
 wbb	ID		
-wbe	ID		
 wbw	ID		
 weo	ID		
 wet	ID		
 wew	ID		
-wfg	ID		
 wgo	ID		
 wha	ID		
 whk	ID		
-whu	ID		
 wkd	ID		
-wli	ID		
 wlo	ID		
-wlw	ID		
 wmm	ID		
-wms	ID		
-wng	ID		
 wnk	ID		
-wno	ID		
-wod	ID		
-woi	ID		
 woo	ID		
-wor	ID		
 wow	ID		
 wrp	ID		
-wrs	ID		
 wru	ID		
 wrx	ID		
 wsa	ID		
 wtw	ID		
-wul	ID		
 wuy	ID		
-xau	ID		
 xay	ID		
 xbr	ID		
 xdy	ID		
@@ -4063,260 +3813,401 @@ xkl	ID
 xkn	ID		
 xkq	ID		
 xks	ID		
-xkw	ID		
 xky	ID		
 xmm	ID		
 xmt	ID		
 xmx	ID		
 xmz	ID		
-xod	ID		
-xse	ID		
-xte	ID		
-xwr	ID		
 xxk	ID		
-xxt	ID		
-yac	ID		
-yet	ID		
-yir	ID		
 yki	ID		
-yli	ID		
 ymn	ID		
-yrs	ID		
-yue	ID		
-yva	ID		
 zbt	ID		
-zho	ID	0	0
 zka	ID		
 zlm	ID		
+awh	ID		
+byl	ID		
+bpo	ID		
+lau	ID		
+nxu	ID		
+puc	ID		
+put	ID		
+whu	ID		
+yrs	ID		
+aos	ID		
+auw	ID		
+jet	ID		
+snu	ID		
+sow	ID		
+wrs	ID		
+jel	ID		
+mgf	ID		
+bzu	ID		
+ihb	ID		
+onx	ID		
+dem	ID		
+mej	ID		
+mnx	ID		
+mtj	ID		
+mrf	ID		
+brp	ID		
+bti	ID		
+bvz	ID		
+dei	ID		
+kpi	ID		
+njs	ID		
+srt	ID		
+tfo	ID		
+trt	ID		
+wor	ID		
+air	ID		
+bqb	ID		
+kwe	ID		
+srl	ID		
+tip	ID		
+tmj	ID		
+xau	ID		
+xwr	ID		
+had	ID		
+dbn	ID		
+szp	ID		
+jvd	ID		
+pey	ID		
+tmg	ID		
+khp	ID		
+bpp	ID		
+kiq	ID		
+aqm	ID		
+kyt	ID		
+tcg	ID		
+khh	ID		
+sbt	ID		
+kig	ID		
+nqm	ID		
+ran	ID		
+knd	ID		
+ner	ID		
+afz	ID		
+awr	ID		
+bqq	ID		
+dbf	ID		
+duv	ID		
+ert	ID		
+fau	ID		
+flh	ID		
+kiy	ID		
+kkb	ID		
+pas	ID		
+rac	ID		
+spi	ID		
+tad	ID		
+tbp	ID		
+tcq	ID		
+tds	ID		
+tmu	ID		
+tty	ID		
+wbe	ID		
+lpe	ID		
+rmh	ID		
+xkw	ID		
+etz	ID		
+mnu	ID		
 zrs	ID		
+mvs	ID		
+mgk	ID		
+ayz	ID		
+kgw	ID		
+kdw	ID		
+mso	ID		
+moq	ID		
+akc	ID	1	1
+naa	ID		
+tlg	ID		
+grs	ID		
+kja	ID		
+kmt	ID		
+msf	ID		
+nir	ID		
+gak	ID		
+gbi	ID		
+ibu	ID		
+kax	ID		
+loa	ID		
+mqo	ID		
+mqs	ID		
+pgu	ID		
+saj	ID		
+tby	ID		
+tft	ID		
+tlb	ID		
+tuj	ID		
+tvo	ID		
+wli	ID		
+aax	ID		
+ahh	ID		
+aip	ID		
+asc	ID	1	1
+asi	ID		
+asy	ID		
+auu	ID		
+aws	ID		
+awu	ID		
+awv	ID		
+awy	ID		
+bwp	ID		
+cns	ID		
+daz	ID		
+diy	ID		
+dna	ID		
+dni	ID		
+dnt	ID		
+dnw	ID		
+eip	ID		
+ekg	ID		
+hap	ID		
+irx	ID		
+iwo	ID		
+kgq	ID		
+khe	ID		
+kkl	ID		
+kpq	ID		
+kti	ID		
+kts	ID		
+ktt	ID		
+kvz	ID		
+kwr	ID		
+kzv	ID		
+mnz	ID		
+mok	ID		
+mtg	ID		
+nbq	ID		
+ndx	ID		
+nkj	ID		
+nks	ID		
+nlc	ID		
+nlk	ID		
+nps	ID		
+nxr	ID		
+opk	ID		
+psa	ID		
+saw	ID		
+szb	ID		
+tkx	ID		
+tml	ID		
+txt	ID		
+tyn	ID		
+uhn	ID		
+wlw	ID		
+wms	ID		
+wng	ID		
+wno	ID		
+wod	ID		
+wul	ID		
+xse	ID		
+xte	ID		
+xxt	ID		
+yac	ID		
+yir	ID		
+yli	ID		
+dmu	ID		
+enr	ID		
+ttn	ID		
+wfg	ID		
+msl	ID		
+sao	ID	1	1
+kbv	ID		
+dmy	ID		
+nxx	ID		
+set	ID		
+tnm	ID		
+bqy	ID	1	1
+inl	ID		
+cdo	ID		
+cmn	ID	0	1
+hak	ID		
+nan	ID		
+yue	ID		
+zho	ID	0	0
+skv	ID		
+mmb	ID		
+mqf	ID		
+bzp	ID		
+jbj	ID		
+kzm	ID		
+pru	ID		
+uka	ID		
+xod	ID		
+tcm	ID		
+abz	ID		
+adn	ID		
+beu	ID		
+bfn	ID		
+hmu	ID		
+jka	ID		
+klz	ID		
+kpu	ID		
+kvd	ID		
+kvw	ID		
+kyo	ID		
+lev	ID		
+nec	ID		
+oia	ID		
+ret	ID		
+swt	ID		
+tpg	ID		
+twe	ID		
+twg	ID		
+woi	ID		
+bfe	ID		
+bkl	ID		
+bnv	ID		
+dbe	ID		
+itx	ID		
+jbr	ID		
+kdy	ID		
+kuc	ID		
+kwt	ID		
+mqr	ID		
+mrx	ID		
+ury	ID		
+vto	ID		
+vms	ID		
+wai	ID		
+ulf	ID		
+kps	ID		
+kzz	ID		
+msg	ID		
+mxn	ID		
+sbg	ID		
+bdw	ID		
+ihp	ID		
+kgv	ID		
+jei	ID	1	1
+kcd	ID	1	1
+khd	ID	1	1
+krz	ID	1	1
+kxq	ID	1	1
+swr	ID	1	1
+yva	ID	1	1
+yet	ID	1	1
 eng	IE	0	1
 fra	IE	0	0
 gle	IE		
-isg	IE		
 mga	IE		
 pgl	IE		
 sga	IE		
-sth	IE		
 yol	IE		
+isg	IE	1	0
+sth	IE		
 aij	IL	0	1
 aju	IL	0	1
 amh	IL	0	0
 apc	IL	1	1
 ara	IL	0	1
-bhh	IL		
 bjf	IL	0	1
-eng	IL	0	0
-fra	IL	0	0
 hbo	IL	1	1
 heb	IL	1	1
-hun	IL		
 huy	IL	0	1
-isr	IL		
-jbe	IL		
-jdt	IL		
-jge	IL		
-jpr	IL		
 jrb	IL	1	1
 jye	IL	0	1
-lad	IL		
 lsd	IL	0	1
-mal	IL		
-pol	IL		
-ron	IL	0	0
-rus	IL		
 smp	IL	1	1
-sqx	IL		
-syy	IL		
 tir	IL	0	0
 trg	IL	1	1
 xdm	IL	1	1
+yhd	IL	0	1
+yud	IL	1	1
+jbe	IL		
+jge	IL		
+mal	IL		
+bhh	IL		
+eng	IL	0	0
+fra	IL	0	0
+jdt	IL		
+jpr	IL		
+lad	IL		
+pol	IL		
+ron	IL	0	0
+rus	IL		
 ydd	IL		
 yej	IL		
-yhd	IL	0	1
 yid	IL		
 yih	IL		
-yud	IL	1	1
+isr	IL	1	0
+sqx	IL		
+syy	IL	1	1
+hun	IL		
 eng	IM	0	1
 glv	IM		
-aaf	IN		
-abj	IN		
-aci	IN		
-ack	IN		
-acl	IN		
-adi	IN		
-adl	IN		
-agi	IN		
-aho	IN		
-ahr	IN		
-aim	IN		
-aio	IN		
-ajz	IN	1	1
-akj	IN	1	1
-akm	IN		
-akx	IN		
-aky	IN		
-all	IN		
-aml	IN	1	1
-anm	IN		
-anp	IN		
-anq	IN		
-anr	IN		
-aot	IN		
-apq	IN		
-apt	IN		
 ara	IN	0	1
-asm	IN	1	1
+pka	IN	1	1
+aml	IN	1	1
 asr	IN	1	1
-awa	IN	1	1
-bal	IN		
-bap	IN		
-bdv	IN		
-bee	IN		
-ben	IN	1	1
-bfb	IN		
-bfq	IN		
-bfr	IN		
-bft	IN		
-bfu	IN		
 bfw	IN	1	1
-bfy	IN		
-bfz	IN		
-bgc	IN	1	1
-bgd	IN		
-bge	IN		
-bgg	IN		
-bgp	IN		
-bgq	IN		
-bgr	IN		
-bgw	IN		
-bha	IN		
-bhb	IN	1	1
-bhd	IN		
-bhi	IN		
-bho	IN	1	1
-bht	IN		
-bhu	IN		
-bhx	IN		
-biu	IN		
 bix	IN	1	1
 biy	IN	1	1
-bjj	IN		
-bkk	IN		
-bns	IN		
-bod	IN		
-bpx	IN		
-bpy	IN		
-bra	IN		
-brw	IN		
-brx	IN		
-btv	IN		
 caq	IN	1	1
-ccp	IN		
-cde	IN		
-cdf	IN		
-cdh	IN		
-cdi	IN		
-cdj	IN		
-cdn	IN		
 cdz	IN	1	1
-cfm	IN		
-cih	IN		
-cik	IN		
-clk	IN		
-cls	IN		
-cna	IN		
-cnh	IN		
-cnk	IN		
 crv	IN	1	1
-ctd	IN		
+gaq	IN	1	1
+gbj	IN	1	1
+hoc	IN	1	1
+jun	IN	1	1
+juy	IN	1	1
+kfp	IN	1	1
+kfq	IN	1	1
+kha	IN	1	1
+khr	IN	1	1
+ksz	IN	1	1
+lyg	IN	1	1
+mjx	IN	1	1
+mmj	IN	1	1
+ncb	IN	1	1
+nik	IN	1	1
+pbv	IN	1	1
+pcj	IN	1	1
+sat	IN	1	1
+srb	IN	1	1
+tef	IN	1	1
+trd	IN	1	1
+unr	IN	1	1
+ahr	IN		
+bhx	IN		
+dso	IN		
+dwk	IN		
+goj	IN		
+gok	IN		
+kex	IN		
+kfi	IN		
+npu	IN		
+nrr	IN		
+twm	IN		
+unx	IN		
+wkb	IN		
+zrg	IN		
+nef	IN		
+aaf	IN		
+all	IN		
+bfq	IN		
+brw	IN		
+cde	IN		
 ctt	IN		
 cty	IN		
-cvg	IN		
 daq	IN		
-dcc	IN	1	1
-der	IN		
-dgo	IN		
-dhd	IN		
-dhi	IN		
-dhn	IN		
-dho	IN		
-dis	IN		
-div	IN		
-dln	IN		
-doi	IN		
-drd	IN		
-dso	IN		
-dty	IN		
-dub	IN		
-duh	IN		
-dwk	IN		
-dzo	IN		
 emu	IN		
-eng	IN	0	0
 era	IN		
 esg	IN		
 fmu	IN		
-fra	IN	0	0
-gac	IN		
-gaq	IN	1	1
-gas	IN		
 gau	IN		
-gbj	IN	1	1
-gbk	IN		
-gbl	IN		
-gbm	IN		
-gda	IN		
 gdb	IN		
-gdx	IN		
-gjk	IN		
-gju	IN		
-gnb	IN		
 gno	IN		
-goj	IN		
-gok	IN		
-gom	IN		
-gon	IN		
-gra	IN		
-gro	IN		
-grt	IN		
-guj	IN	1	1
-gvr	IN		
-haj	IN		
-hca	IN		
-hii	IN		
-hin	IN	1	1
-hkh	IN		
-hlb	IN		
-hlt	IN		
-hmr	IN		
-hne	IN	1	1
-hoc	IN	1	1
-hoj	IN		
+gon	IN	1	1
 hoy	IN		
-hra	IN		
-hru	IN		
-idb	IN		
 ima	IN		
-ins	IN		
 iru	IN		
-jda	IN		
-jkr	IN		
-jmn	IN		
-jna	IN		
-jnl	IN		
-jns	IN		
-jun	IN	1	1
-juy	IN	1	1
 kan	IN	1	1
-kas	IN		
-kbg	IN		
-kdq	IN		
 kej	IN		
 kep	IN		
-keq	IN		
 kev	IN		
-kex	IN		
-key	IN		
 kfa	IN		
 kfb	IN		
 kfc	IN		
@@ -4325,66 +4216,14 @@ kfe	IN
 kff	IN		
 kfg	IN		
 kfh	IN		
-kfi	IN		
-kfk	IN		
-kfp	IN	1	1
-kfq	IN	1	1
-kfr	IN		
-kfs	IN		
-kft	IN		
-kfu	IN		
-kfv	IN		
-kfw	IN		
-kfx	IN		
-kfy	IN		
-kha	IN	1	1
-khn	IN		
-khr	IN	1	1
-kht	IN		
-khw	IN		
-kix	IN		
-kjo	IN		
-kkf	IN		
-kle	IN		
-klr	IN		
 kmj	IN		
-kmm	IN		
-knn	IN		
-kok	IN		
 kpb	IN		
-kru	IN		
-ksu	IN		
-ksy	IN		
-ksz	IN	1	1
+kru	IN	1	1
 kwx	IN		
-kxp	IN		
 kxu	IN		
 kxv	IN		
-kyw	IN		
-lae	IN		
-lah	IN	1	1
-lax	IN		
-lbf	IN		
-lbj	IN		
-lbm	IN		
-lep	IN		
-lhl	IN		
-lhm	IN		
-lif	IN		
-lis	IN		
-lmk	IN		
-lmn	IN		
-lsh	IN		
-lus	IN		
-lyg	IN	1	1
-mag	IN	1	1
-mai	IN	1	1
 mal	IN	1	1
-mar	IN	1	1
-mgp	IN		
 mha	IN		
-mhu	IN		
-mjl	IN		
 mjo	IN		
 mjp	IN		
 mjq	IN		
@@ -4392,42 +4231,309 @@ mjr	IN
 mjt	IN		
 mju	IN		
 mjv	IN		
-mjw	IN		
-mjx	IN	1	1
+mmk	IN		
+mrr	IN		
+mut	IN		
+muv	IN		
+nit	IN		
+oty	IN		
+pcf	IN		
+pcg	IN		
+pci	IN		
+peg	IN		
+pkr	IN		
+ptq	IN		
+pty	IN		
+sle	IN		
+tam	IN	1	1
+tcx	IN		
+tcy	IN	1	1
+tel	IN	1	1
+thn	IN		
+udg	IN		
+uki	IN		
+ull	IN		
+url	IN		
+vis	IN		
+vmd	IN		
+wbq	IN	1	1
+wkl	IN		
+wku	IN		
+wsg	IN		
+xis	IN		
+xua	IN		
+xub	IN		
+xuj	IN		
+yea	IN		
+yeu	IN		
+ymr	IN		
+xtr	IN		
+abj	IN		
+aci	IN		
+ack	IN		
+acl	IN		
+akj	IN	1	1
+akm	IN		
+akx	IN		
+aky	IN		
+apq	IN		
+gac	IN		
+okj	IN		
+hru	IN		
+anp	IN		
+anr	IN		
+asm	IN	1	1
+awa	IN	1	1
+bal	IN		
+bdv	IN		
+ben	IN	1	1
+bfb	IN		
+bfy	IN	1	1
+bfz	IN		
+bgc	IN	1	1
+bgd	IN		
+bge	IN		
+bgp	IN		
+bgq	IN		
+bgw	IN		
+bha	IN		
+bhb	IN	1	1
+bhd	IN		
+bhi	IN		
+bho	IN	1	1
+bht	IN		
+bhu	IN		
+bjj	IN	1	1
+bkk	IN		
+bns	IN	1	1
+bpx	IN		
+bpy	IN		
+bra	IN		
+btv	IN		
+ccp	IN		
+cdh	IN		
+cdi	IN		
+cdj	IN		
+cih	IN		
+cls	IN		
+dcc	IN	1	1
+dgo	IN		
+dhd	IN		
+dhn	IN		
+dho	IN		
+div	IN		
+doi	IN	1	1
+dty	IN		
+dub	IN		
+duh	IN		
+eng	IN	0	0
+fra	IN	0	0
+gas	IN		
+gbk	IN		
+gbl	IN		
+gbm	IN	1	1
+gda	IN		
+gdx	IN		
+gjk	IN		
+gju	IN		
+gom	IN		
+gra	IN		
+guj	IN	1	1
+haj	IN		
+hca	IN		
+hii	IN		
+hin	IN	1	1
+hkh	IN		
+hlb	IN		
+hne	IN	1	1
+hoj	IN	1	1
+idb	IN		
+jns	IN		
+kas	IN	1	1
+keq	IN		
+key	IN		
+kfr	IN		
+kfs	IN		
+kft	IN		
+kfu	IN		
+kfv	IN		
+kfx	IN		
+kfy	IN	1	1
+khn	IN	1	1
+khw	IN		
+kjo	IN		
+knn	IN	1	1
+kok	IN	1	1
+ksy	IN		
+kxp	IN		
+kyw	IN		
+lah	IN	1	1
+lbm	IN		
+lhl	IN		
+lmn	IN	1	1
+mag	IN	1	1
+mai	IN	1	1
+mar	IN	1	1
+mjl	IN		
 mjz	IN		
 mkb	IN		
 mke	IN		
 mki	IN		
-mmj	IN	1	1
-mmk	IN		
-mni	IN		
+mtr	IN	1	1
+mup	IN	1	1
+mwr	IN	1	1
+nag	IN		
+nep	IN	1	1
+nhh	IN		
+nlx	IN		
+noe	IN	1	1
+noi	IN		
+npi	IN		
+odk	IN		
+omr	IN		
+ori	IN	1	1
+ort	IN		
+ory	IN	1	1
+pan	IN	1	1
+pbu	IN		
+pcl	IN		
+pgg	IN		
+phd	IN		
+phr	IN		
+pli	IN		
+pmh	IN		
+pnb	IN		
+por	IN		
+psu	IN		
+pus	IN		
+pwr	IN		
+raj	IN	1	1
+rei	IN		
+rjs	IN		
+rkt	IN	1	1
+rtw	IN		
+rwr	IN		
+san	IN	1	1
+saz	IN		
+sck	IN	1	1
+scl	IN		
+sgj	IN		
+sjp	IN	1	1
+skr	IN		
+smv	IN		
+snd	IN	1	1
+spv	IN	1	1
+srx	IN		
+ssi	IN		
+swv	IN	1	1
+syl	IN		
+tdb	IN		
+the	IN		
+thl	IN		
+thq	IN		
+thr	IN		
+tkb	IN		
+tkt	IN		
+urd	IN	1	1
+vaa	IN		
+vah	IN		
+vas	IN		
+vav	IN		
+vjk	IN		
+vkp	IN		
+vsn	IN		
+wbr	IN	1	1
+wry	IN		
+wtm	IN	1	1
+xnr	IN	1	1
+anq	IN		
+oon	IN		
+nll	IN		
+omp	IN		
+sii	IN		
+ins	IN	1	0
+wbs	IN		
+adi	IN		
+adl	IN		
+aim	IN		
+ajz	IN	1	1
+anm	IN		
+aot	IN		
+apt	IN		
+bap	IN		
+bee	IN		
+bft	IN		
+bfu	IN		
+bgg	IN		
+bgr	IN		
+biu	IN		
+bod	IN		
+brx	IN		
+cdf	IN		
+cdn	IN		
+cfm	IN		
+cik	IN		
+clk	IN		
+cna	IN		
+cnh	IN		
+cnk	IN		
+ctd	IN		
+cvg	IN		
+der	IN		
+dhi	IN		
+dis	IN		
+dln	IN		
+drd	IN		
+dzo	IN		
+gnb	IN		
+gro	IN		
+grt	IN		
+gvr	IN		
+hlt	IN		
+hmr	IN		
+hra	IN		
+jda	IN		
+jkr	IN		
+jmn	IN		
+jna	IN		
+jnl	IN		
+kbg	IN		
+kdq	IN		
+kfk	IN		
+kfw	IN		
+kix	IN		
+kkf	IN		
+kle	IN		
+klr	IN		
+kmm	IN		
+lae	IN		
+lax	IN		
+lbf	IN		
+lbj	IN		
+lep	IN		
+lhm	IN		
+lif	IN		
+lis	IN		
+lmk	IN		
+lsh	IN		
+lus	IN		
+mgp	IN		
+mhu	IN		
+mjw	IN		
+mni	IN	1	1
 mrg	IN		
 mrh	IN		
 mro	IN		
-mrr	IN		
-mtr	IN		
 muk	IN		
-mup	IN		
-mut	IN		
-muv	IN		
-mwr	IN	1	1
 mxj	IN		
-nag	IN		
 nbc	IN		
 nbe	IN		
-nbg	IN		
 nbi	IN		
 nbt	IN		
 nbu	IN		
-ncb	IN	1	1
 nct	IN		
-nef	IN		
-nep	IN		
 nes	IN		
 new	IN		
-nhh	IN		
-nik	IN	1	1
-nit	IN		
 njb	IN		
 njh	IN		
 njm	IN		
@@ -4439,8 +4545,6 @@ nkd	IN
 nkf	IN		
 nkh	IN		
 nki	IN		
-nll	IN		
-nlx	IN		
 nma	IN		
 nme	IN		
 nmf	IN		
@@ -4449,266 +4553,166 @@ nmo	IN
 nng	IN		
 nnl	IN		
 nnp	IN		
-noe	IN		
-noi	IN		
 nph	IN		
-npi	IN		
 npo	IN		
-npu	IN		
 nre	IN		
 nri	IN		
-nrr	IN		
 nsa	IN		
 nsm	IN		
 nst	IN		
 nzm	IN		
-odk	IN		
-okj	IN		
 ola	IN		
-omp	IN		
-omr	IN		
 onp	IN		
-oon	IN		
-ori	IN	1	1
-ort	IN		
-ory	IN	1	1
-oty	IN		
-pan	IN	1	1
-pbu	IN		
-pbv	IN	1	1
-pcf	IN		
-pcg	IN		
-pch	IN		
-pci	IN		
-pcj	IN	1	1
 pck	IN		
-pcl	IN		
-peg	IN		
-pgg	IN		
-phd	IN		
-phj	IN		
-phk	IN		
-phr	IN		
-pka	IN	1	1
+phj	IN	1	1
 pkh	IN		
-pkr	IN		
-pli	IN		
-pmh	IN		
 pmx	IN		
-pnb	IN		
-por	IN		
 prx	IN		
-psu	IN		
-ptq	IN		
-pty	IN		
 pub	IN		
-pus	IN		
-pwr	IN		
 rab	IN		
 rah	IN		
-raj	IN	1	1
 ral	IN		
 raw	IN		
-rei	IN		
 rgk	IN		
 ria	IN		
-rjs	IN		
 rki	IN		
-rkt	IN		
 rmz	IN		
 rnl	IN		
 rnp	IN		
-rtw	IN		
 ruh	IN		
-rwr	IN		
-san	IN		
-sat	IN	1	1
-saz	IN		
 sbu	IN		
 sch	IN		
-sck	IN		
-scl	IN		
 scu	IN		
 sdp	IN		
-sgj	IN		
 sgp	IN		
 shl	IN		
-sii	IN		
 sip	IN		
 sjl	IN		
-sjp	IN		
-skr	IN		
-sle	IN		
 smt	IN		
-smv	IN		
-snd	IN		
 spt	IN		
-spv	IN		
-srb	IN	1	1
-srx	IN		
-ssi	IN		
 ssk	IN		
-std	IN		
 suv	IN		
 suz	IN		
-swv	IN		
-syl	IN		
 taj	IN		
-tam	IN	1	1
-tcx	IN		
-tcy	IN		
 tcz	IN		
-tdb	IN		
 tdh	IN		
-tef	IN	1	1
-tel	IN	1	1
 tgj	IN		
-the	IN		
 thf	IN		
-thl	IN		
-thn	IN		
-thq	IN		
-thr	IN		
-tkb	IN		
-tkt	IN		
 tpe	IN		
 tpq	IN		
-trd	IN	1	1
 tro	IN		
 trp	IN		
-try	IN		
 tsj	IN		
 tvt	IN		
-twm	IN		
 txo	IN		
-udg	IN		
-uki	IN		
-ull	IN		
-unr	IN	1	1
-unx	IN		
-urd	IN	1	1
-url	IN		
-vaa	IN		
-vah	IN		
 vap	IN		
-vas	IN		
-vav	IN		
-vis	IN		
-vjk	IN		
-vkp	IN		
-vmd	IN		
-vsn	IN		
-wbq	IN		
-wbr	IN		
-wbs	IN		
-wkb	IN		
-wkl	IN		
-wku	IN		
-wry	IN		
-wsg	IN		
-wtm	IN		
 xac	IN		
-xis	IN		
-xnr	IN		
 xns	IN		
 xsr	IN		
-xtr	IN		
-xua	IN		
-xub	IN		
-xuj	IN		
 ybh	IN		
-yea	IN		
-yeu	IN		
 yim	IN		
-ymr	IN		
 zau	IN		
 zkr	IN		
 zom	IN		
-zrg	IN		
 zyp	IN		
+aho	IN		
+aio	IN		
+kht	IN		
+ksu	IN		
+phk	IN		
+try	IN		
+agi	IN		
+nbg	IN		
+pch	IN		
+std	IN		
+bfr	IN		
 eng	IO	0	0
 acm	IQ	1	1
 aii	IQ	1	1
-aij	IQ	1	1
 akk	IQ	1	1
 ara	IQ	0	1
 arc	IQ	1	1
 ayp	IQ	1	1
-aze	IQ	1	1
-bjf	IQ	1	1
-bjm	IQ		
-ckb	IQ		
 cld	IQ	1	1
-eng	IQ	0	0
-fas	IQ	0	1
-huy	IQ	1	1
 kqd	IQ	1	1
-kur	IQ		
-lrc	IQ		
-lsd	IQ	1	1
-sdb	IQ		
-sdf	IQ		
-sux	IQ		
 syr	IQ	1	1
 tmr	IQ	1	1
+aze	IQ	1	1
+bjm	IQ		
+ckb	IQ	1	1
+eng	IQ	0	0
+fas	IQ	0	1
+kur	IQ	1	1
+lrc	IQ		
+sdb	IQ		
+sdf	IQ		
 xlu	IQ		
+sux	IQ		
+aij	IQ	1	1
+bjf	IQ	1	1
+huy	IQ	1	1
+lsd	IQ	1	1
 yhd	IQ	1	1
 acm	IR	1	1
 afb	IR	1	1
 aii	IR	1	1
-aij	IR	1	1
-aiq	IR		
 ara	IR	0	1
 arb	IR	0	1
 arc	IR	0	1
+huy	IR	1	1
+mid	IR	1	1
+myz	IR	1	1
+syn	IR	1	1
+syr	IR	0	1
+azb	IR	1	1
+aze	IR	1	1
+kaa	IR	0	1
+kaz	IR	0	1
+klj	IR	1	1
+kmz	IR	1	1
+qxq	IR	1	1
+tuk	IR	1	1
+faz	IR		
+prd	IR		
+kat	IR		
+brh	IR		
+elx	IR		
+aiq	IR		
 atn	IR		
 avd	IR		
 ave	IR		
-azb	IR	1	1
-aze	IR	1	1
 bal	IR		
 bcc	IR		
 bgn	IR		
 bqi	IR		
-brh	IR		
 bsg	IR		
-ckb	IR		
+ckb	IR	1	1
 def	IR		
-elx	IR		
 esh	IR	1	1
 fas	IR	1	1
 fay	IR	1	1
-faz	IR		
 gbz	IR		
-glk	IR		
+glk	IR	1	1
 goz	IR		
 gzi	IR		
 hac	IR		
 haz	IR		
 hrz	IR		
-huy	IR	1	1
 hye	IR		
 jdg	IR		
 jpr	IR		
-kaa	IR	0	1
-kat	IR		
-kaz	IR	0	1
 kfm	IR		
 kgn	IR		
 kho	IR		
-klj	IR	1	1
 kmr	IR		
-kmz	IR	1	1
 ktl	IR		
-kur	IR		
+kur	IR	1	1
 lki	IR		
 lrc	IR		
 lrl	IR		
 lsa	IR		
 luz	IR		
-mid	IR	1	1
-myz	IR	1	1
-mzn	IR		
+mzn	IR	1	1
 ntz	IR		
 nyq	IR		
 okh	IR		
@@ -4716,17 +4720,14 @@ pal	IR
 pbt	IR		
 peo	IR		
 pes	IR	1	1
-prd	IR		
 prs	IR		
-psc	IR		
 pus	IR		
-qxq	IR	1	1
 rat	IR		
 rdb	IR		
 rmn	IR		
 rmt	IR		
 rom	IR	0	1
-sdh	IR		
+sdh	IR	1	1
 sgr	IR		
 shm	IR		
 siy	IR		
@@ -4734,105 +4735,100 @@ smy	IR
 soj	IR		
 sqo	IR		
 srz	IR		
-syn	IR	1	1
-syr	IR	0	1
 tks	IR		
 tly	IR		
 tov	IR		
 ttt	IR		
-tuk	IR	1	1
 vaf	IR		
 vmh	IR		
 xkc	IR		
 xkj	IR		
 xkp	IR		
-xly	IR		
 xme	IR		
 xmn	IR		
 xpr	IR		
 xtq	IR		
 zum	IR		
+psc	IR	1	1
+xly	IR		
+aij	IR	1	1
 dan	IS		
-icl	IS		
 isl	IS		
+icl	IS		
+sqr	IT	1	1
+ett	IT		
 aae	IT		
 cat	IT		
 cim	IT		
 cms	IT		
-deu	IT		
+deu	IT	0	0
 egl	IT		
 ell	IT		
 eng	IT	0	0
-ett	IT		
 fra	IT	0	1
 frp	IT		
 fur	IT		
 hbs	IT		
 hrv	IT		
 ims	IT		
-ise	IT		
 ita	IT	1	1
 itk	IT		
 lij	IT		
 lld	IT		
-lmo	IT		
+lmo	IT	1	1
 mhn	IT		
 nap	IT		
-nrp	IT		
 osc	IT		
 pgn	IT		
 pms	IT		
 rgn	IT		
 sbv	IT		
 scn	IT		
-scx	IT		
 sdc	IT		
 sdn	IT		
 slv	IT		
 spa	IT	0	0
 spx	IT		
 sqi	IT		
-sqr	IT	1	1
 src	IT		
 srd	IT		
 sro	IT		
 svm	IT		
-sxc	IT		
 umc	IT		
 vec	IT		
 xae	IT		
-xcc	IT		
 xcg	IT		
 xfa	IT		
 xhr	IT		
-xlg	IT		
 xlp	IT		
-xrr	IT		
 xum	IT		
 xve	IT		
 xvo	IT		
 xvs	IT		
+ise	IT	1	0
+nrp	IT		
+scx	IT		
+sxc	IT		
+xcc	IT		
+xlg	IT		
+xrr	IT		
 eng	JE	0	1
 nrf	JE		
 eng	JM	0	0
-jam	JM		
-jcs	JM		
-jls	JM		
+jam	JM	1	1
+jcs	JM	1	1
+jls	JM	1	0
 apc	JO	1	1
 ara	JO	1	1
 arc	JO	1	1
 avl	JO	1	1
-eng	JO	0	0
-jos	JO		
 obm	JO	1	1
 xdm	JO	1	1
+eng	JO	0	0
+jos	JO		
 ain	JP	1	1
 ams	JP		
-ehs	JP		
-jks	JP		
 jpn	JP	1	1
-jsl	JP		
-kor	JP		
 kzg	JP		
 mvi	JP		
 ojp	JP		
@@ -4844,28 +4840,36 @@ tkn	JP
 xug	JP		
 yoi	JP		
 yox	JP		
+kor	JP		
+ehs	JP	1	1
+jks	JP	1	1
+jsl	JP	1	1
 ara	KE	0	1
 bob	KE	1	1
+dal	KE	1	1
+dsh	KE	1	1
+elo	KE	1	1
+muu	KE	1	1
+orc	KE	1	1
+orm	KE	1	1
+rel	KE	1	1
+som	KE	1	1
+ssn	KE	1	1
+eng	KE	0	0
+guj	KE		
+lah	KE		
+pan	KE		
 bxk	KE		
 coh	KE		
 cuh	KE		
-dal	KE	1	1
 dav	KE		
 dig	KE		
-dsh	KE	1	1
 dug	KE		
 ebu	KE		
-elo	KE	1	1
-enb	KE		
-eng	KE	0	0
-eyo	KE		
-guj	KE		
-guz	KE		
+guz	KE	1	1
 ida	KE		
-kam	KE		
-kik	KE		
-kln	KE		
-lah	KE		
+kam	KE	1	1
+kik	KE	1	1
 lkb	KE		
 lko	KE		
 lks	KE		
@@ -4873,60 +4877,52 @@ lri	KE
 lrm	KE		
 lto	KE		
 lts	KE		
-luo	KE		
-luy	KE		
+luy	KE	1	1
 lwg	KE		
-mas	KE		
 mer	KE		
 mlk	KE		
-muu	KE	1	1
 mws	KE		
-niq	KE		
 nle	KE		
 nyd	KE		
 nyf	KE		
-oki	KE		
-omt	KE		
-orc	KE	1	1
-orm	KE	1	1
-pan	KE		
 pkb	KE		
-pko	KE		
 rag	KE		
-rel	KE	1	1
-saq	KE	1	1
-sgc	KE		
 sgm	KE		
-som	KE	1	1
-spy	KE		
-ssn	KE	1	1
 swa	KE	1	1
 sxb	KE		
-tec	KE		
-teo	KE		
 tga	KE		
 thk	KE		
+tvs	KE		
+enb	KE		
+eyo	KE		
+kln	KE	1	1
+luo	KE	1	1
+mas	KE		
+niq	KE		
+oki	KE		
+omt	KE		
+pko	KE		
+saq	KE	1	1
+sgc	KE		
+spy	KE		
+tec	KE		
+teo	KE		
 tuv	KE		
 tuy	KE		
-tvs	KE		
-xki	KE		
-dng	KG		
+xki	KE	1	0
 kaa	KG	0	1
 kaz	KG	1	1
 kir	KG	1	1
-rus	KG		
 tat	KG	0	1
-tgk	KG		
 uig	KG	0	1
 uzb	KG	1	1
 xqa	KG	1	1
+rus	KG	0	0
+tgk	KG		
+dng	KG		
 zho	KG	0	1
 brb	KH	1	1
-cja	KH	1	1
-csx	KH		
-fra	KH	0	0
 hkn	KH	1	1
-jra	KH		
 kdt	KH	1	1
 khm	KH	1	1
 krr	KH	1	1
@@ -4936,99 +4932,104 @@ pcb	KH	1	1
 rka	KH	1	1
 scq	KH	1	1
 smu	KH	1	1
-sxm	KH		
 syo	KH	1	1
 tpu	KH	1	1
 vie	KH	1	1
 xhm	KH	1	1
 xkk	KH	1	1
+cja	KH	1	1
+jra	KH		
+sxm	KH		
+fra	KH	0	0
+csx	KH		
 zho	KH	0	0
-eng	KI	0	0
 gil	KI	1	1
+eng	KI	0	0
 ara	KM	0	1
 fra	KM	0	0
 wlc	KM		
 wni	KM		
 zdj	KM		
 eng	KN	0	0
-hmk	KP		
 kor	KP	1	1
+hmk	KP		
 zkg	KP		
-hmk	KR		
+zra	KR		
 jje	KR		
 kor	KR	1	1
-kvk	KR		
+hmk	KR		
 okm	KR		
 oko	KR		
-pkc	KR		
 xpp	KR		
-zra	KR		
+kvk	KR	1	0
+pkc	KR		
 afb	KW	1	1
 ara	KW	0	1
-eng	KY	0	0
 fil	KY	0	0
+eng	KY	0	0
 spa	KY	0	0
-deu	KZ		
-eng	KZ	0	0
 kaa	KZ	0	1
 kaz	KZ	1	1
-rus	KZ	0	0
 uig	KZ	1	1
+deu	KZ		
+eng	KZ	0	0
+rus	KZ	0	0
 aem	LA	1	1
 alk	LA	1	1
 bgl	LA	1	1
 brv	LA	1	1
-cno	LA		
-fra	LA	0	0
-hmn	LA		
-hnj	LA		
 hnu	LA	1	1
-irr	LA		
 kdt	LA	1	1
 khf	LA	1	1
 kjg	LA	1	1
 kuf	LA	1	1
-lao	LA		
-lbg	LA		
 lbn	LA	1	1
 lbo	LA	1	1
-lso	LA		
 lvi	LA	1	1
 mlf	LA	1	1
-mww	LA		
 ncq	LA	1	1
 nev	LA	1	1
 ngt	LA	1	1
 oog	LA	1	1
 oyb	LA	1	1
-pho	LA		
-phq	LA		
 pnx	LA	1	1
 sct	LA	1	1
 spu	LA	1	1
 sqq	LA	1	1
 sss	LA	1	1
-tdd	LA		
 tdf	LA	1	1
-tgr	LA		
-thi	LA		
 thm	LA	1	1
-tnu	LA		
 tth	LA	1	1
 tto	LA	1	1
-uan	LA		
+cno	LA		
+irr	LA		
+lbg	LA		
+lso	LA	1	0
+tgr	LA		
 xko	LA		
+hmn	LA		
+hnj	LA		
+mww	LA		
+fra	LA	0	0
+pho	LA		
+phq	LA		
 ycp	LA		
+lao	LA	1	1
+tdd	LA		
+thi	LA		
+tnu	LA		
+uan	LA		
 apc	LB	1	1
 ara	LB	0	1
+phn	LB	1	1
 eng	LB	0	0
 fra	LB	0	0
 hye	LB		
 kur	LB		
-phn	LB	1	1
 acf	LC		
 eng	LC	0	0
 fra	LC	0	0
+tur	LI	0	0
 deu	LI		
 eng	LI	0	0
 gsw	LI		
@@ -5037,21 +5038,21 @@ ita	LI
 por	LI		
 spa	LI	0	0
 srp	LI		
-tur	LI	0	0
 wae	LI		
+sci	LK		
+tam	LK	1	1
 eng	LK	0	0
 pli	LK		
-sci	LK		
 sin	LK	1	1
-sqs	LK		
-tam	LK		
 ved	LK		
+sqs	LK		
+lir	LR	1	1
+eng	LR	0	0
 blh	LR		
 bsq	LR		
 bza	LR		
 dee	LR		
 dnj	LR		
-eng	LR	0	0
 ful	LR		
 gbo	LR		
 gec	LR		
@@ -5068,7 +5069,6 @@ kqo	LR
 krn	LR		
 krw	LR		
 kss	LR		
-lir	LR		
 lom	LR		
 man	LR		
 men	LR		
@@ -5080,18 +5080,17 @@ tja	LR
 vai	LR		
 xpe	LR		
 eng	LS	0	0
-sot	LS		
+sot	LS	1	1
 ssw	LS		
 xho	LS		
 zul	LS		
+kdr	LT	0	1
 bel	LT		
 deu	LT		
 eng	LT	0	0
 fra	LT	0	0
-kdr	LT	0	1
 lav	LT		
-lit	LT		
-lls	LT		
+lit	LT	1	1
 olt	LT		
 pol	LT		
 rus	LT	0	0
@@ -5100,6 +5099,7 @@ svx	LT
 sxl	LT		
 xcu	LT		
 xzm	LT		
+lls	LT		
 deu	LU		
 eng	LU	0	0
 fra	LU	0	1
@@ -5108,8 +5108,6 @@ por	LU
 eng	LV	0	0
 fra	LV	0	0
 lav	LV		
-liv	LV		
-lsl	LV		
 ltg	LV		
 lvs	LV		
 rom	LV	0	0
@@ -5117,6 +5115,8 @@ rus	LV	0	0
 sxl	LV		
 xcu	LV		
 xzm	LV		
+lsl	LV	1	0
+liv	LV		
 zkv	LV		
 ara	LY	0	1
 arb	LY	0	1
@@ -5124,18 +5124,16 @@ auj	LY	1	1
 ayl	LY	1	1
 gha	LY	1	1
 jbn	LY	1	1
-lbs	LY		
-rmt	LY		
 siz	LY	1	1
 swn	LY	1	1
 thv	LY	1	1
 tmh	LY	1	1
+rmt	LY		
+lbs	LY	1	1
 aju	MA	1	1
 ara	MA	0	1
 arb	MA	0	1
 ary	MA	1	1
-eng	MA	0	0
-fra	MA	0	0
 gho	MA	1	1
 grr	MA	1	1
 jrb	MA	0	1
@@ -5143,19 +5141,21 @@ mey	MA	1	1
 rif	MA	1	1
 shi	MA	1	1
 sjs	MA	1	1
-spa	MA	0	0
 tzm	MA	1	1
-xms	MA		
 zgh	MA	1	1
+eng	MA	0	0
+fra	MA	0	0
+spa	MA	0	0
+xms	MA	1	0
 fra	MC	0	1
+gag	MD	1	1
 bul	MD		
 fra	MD	0	0
-gag	MD	1	1
 rom	MD	0	1
 ron	MD	1	1
 rus	MD	0	0
 ukr	MD		
-vsi	MD		
+vsi	MD	1	0
 bos	ME		
 cnr	ME		
 fra	ME	0	0
@@ -5168,11 +5168,8 @@ fra	MF	0	0
 bhr	MG	1	1
 bmm	MG	1	1
 bzc	MG	1	1
-eng	MG	0	0
-fra	MG	0	0
 mlg	MG	1	1
 msh	MG		
-mzc	MG		
 plt	MG		
 skg	MG		
 tdx	MG		
@@ -5180,8 +5177,12 @@ tkg	MG
 txy	MG		
 xmv	MG		
 xmw	MG		
-eng	MH	0	0
+eng	MG	0	0
+fra	MG	0	0
+mzc	MG		
 mah	MH		
+eng	MH	0	0
+tur	MK	0	0
 bos	MK		
 fra	MK	0	0
 hbs	MK		
@@ -5190,28 +5191,21 @@ rom	MK	0	1
 rup	MK		
 sqi	MK		
 srp	MK		
-tur	MK	0	0
-aqd	ML		
 ara	ML	0	1
-bam	ML	1	1
-bmq	ML		
-bog	ML		
-boo	ML		
-boz	ML		
-bxw	ML		
-bze	ML		
-bzx	ML		
+mey	ML	1	1
+taq	ML	1	1
+tmh	ML	1	1
+ttq	ML	1	1
 dba	ML		
+aqd	ML		
 dbg	ML		
 dbt	ML		
 dbu	ML		
 dbw	ML		
 dds	ML		
 dgb	ML		
-dje	ML		
 djm	ML		
 dmb	ML		
-dsq	ML		
 dti	ML		
 dtk	ML		
 dtm	ML		
@@ -5219,32 +5213,70 @@ dto	ML
 dts	ML		
 dtt	ML		
 dtu	ML		
-dux	ML		
 dym	ML		
-ffm	ML		
+nzz	ML		
+tde	ML		
 fra	ML	0	0
+bam	ML	1	1
+bmq	ML		
+boo	ML		
+boz	ML		
+bxw	ML		
+bze	ML		
+bzx	ML		
+dux	ML		
+ffm	ML		
 ful	ML		
-hmb	ML		
 jow	ML		
 kao	ML		
-khq	ML		
 man	ML		
-mey	ML	1	1
 mwk	ML		
 myk	ML		
-nzz	ML		
 rkm	ML		
-ses	ML		
 shz	ML		
 snk	ML		
 spp	ML		
-taq	ML	1	1
-tde	ML		
-tmh	ML	1	1
-tst	ML		
-tsy	ML		
-ttq	ML	1	1
 xkg	ML		
+dje	ML		
+dsq	ML		
+hmb	ML		
+khq	ML		
+ses	ML		
+tst	ML		
+bog	ML	1	1
+tsy	ML	1	1
+blr	MM	1	1
+dnu	MM	1	1
+mnw	MM	1	1
+mqt	MM	1	1
+omx	MM	1	1
+pce	MM	1	1
+pll	MM	1	1
+prk	MM	1	1
+rbb	MM	1	1
+ril	MM	1	1
+stu	MM	1	1
+tlq	MM	1	1
+ukk	MM	1	1
+wbm	MM	1	1
+yin	MM	1	1
+mwt	MM		
+cey	MM		
+clj	MM		
+csj	MM		
+cth	MM		
+kvt	MM		
+nqy	MM		
+ntx	MM		
+nxk	MM		
+rtc	MM		
+weu	MM		
+hmn	MM		
+hnj	MM		
+ccp	MM		
+pli	MM		
+rhg	MM		
+ysm	MM	1	0
 acn	MM		
 aeu	MM		
 ahk	MM		
@@ -5253,16 +5285,12 @@ anm	MM
 atb	MM		
 bgr	MM		
 blk	MM		
-blr	MM	1	1
 bwe	MM		
 cbl	MM		
-ccp	MM		
 cek	MM		
-cey	MM		
 cfm	MM		
 ckh	MM		
 ckn	MM		
-clj	MM		
 clt	MM		
 cmn	MM	0	1
 cmr	MM		
@@ -5271,37 +5299,28 @@ cnh	MM
 cnk	MM		
 cnw	MM		
 csh	MM		
-csj	MM		
 csv	MM		
 csy	MM		
 ctd	MM		
-cth	MM		
 czt	MM		
 dao	MM		
-dnu	MM	1	1
 dnv	MM		
 duu	MM		
 eky	MM		
 ghk	MM		
 hlt	MM		
-hmn	MM		
-hnj	MM		
 hpo	MM		
 int	MM		
 jkm	MM		
 jkp	MM		
 jmn	MM		
 kac	MM		
-khb	MM		
 khg	MM		
-kht	MM		
 kix	MM		
 kjp	MM		
-kkh	MM		
 ksw	MM		
 kvl	MM		
 kvq	MM		
-kvt	MM		
 kvu	MM		
 kvy	MM		
 kxf	MM		
@@ -5315,128 +5334,108 @@ lsi	MM
 lus	MM		
 lzn	MM		
 mhx	MM		
-mnw	MM	1	1
-mqt	MM	1	1
 mrh	MM		
 mro	MM		
 mwq	MM		
-mwt	MM		
 mya	MM	1	1
 nbe	MM		
 nlq	MM		
 npg	MM		
 nqq	MM		
-nqy	MM		
 nst	MM		
-ntx	MM		
 nuf	MM		
 nun	MM		
-nxk	MM		
 obr	MM		
-omx	MM	1	1
-pce	MM	1	1
 pdu	MM		
-pli	MM		
-pll	MM	1	1
-prk	MM	1	1
 pwo	MM		
 pyx	MM		
 pyy	MM		
 pzn	MM		
 raw	MM		
-rbb	MM	1	1
-rhg	MM		
-ril	MM	1	1
 rki	MM		
 rmz	MM		
-rtc	MM		
 sez	MM		
-shn	MM		
-stu	MM	1	1
 tcl	MM		
 tco	MM		
 tcp	MM		
 tcz	MM		
-tdd	MM		
-tjl	MM		
-tlq	MM	1	1
 tvn	MM		
-ukk	MM	1	1
 umn	MM		
-wbm	MM	1	1
 wea	MM		
-weu	MM		
-yin	MM	1	1
-ysm	MM		
 zho	MM	0	1
 zkd	MM		
 zkn	MM		
 zom	MM		
 zyp	MM		
+khb	MM		
+kht	MM		
+kkh	MM		
+shn	MM	1	1
+tdd	MM		
+tjl	MM		
+kaz	MN	0	1
+uig	MN	0	1
+otk	MN		
+rus	MN	0	0
 bua	MN		
 bxm	MN		
 cmg	MN		
-kaz	MN	0	1
 khk	MN		
-mon	MN		
-msr	MN		
-otk	MN		
-rus	MN	0	0
-uig	MN	0	1
+mon	MN	1	1
 xng	MN		
 ykh	MN		
+msr	MN		
 zho	MN	0	1
-cmn	MO		
-eng	MO	0	0
 fil	MO	0	0
-nan	MO		
-por	MO		
 tgl	MO		
+eng	MO	0	0
+por	MO		
+cmn	MO		
+nan	MO		
 yue	MO		
 zho	MO	1	1
 cal	MP	1	1
 cha	MP	1	1
-eng	MP	0	0
 fil	MP	0	0
 tpv	MP		
+eng	MP	0	0
 zho	MP	0	0
 fra	MQ	0	0
 ara	MR	0	1
 arb	MR	0	1
+mey	MR	1	1
+zen	MR	1	1
 fra	MR	0	0
 fuc	MR		
 ful	MR		
-mey	MR	1	1
 snk	MR		
 wol	MR		
-zen	MR	1	1
 eng	MS	0	0
 ara	MT	0	1
+mlt	MT	1	1
 deu	MT		
 eng	MT	0	0
 fra	MT	0	0
 ita	MT		
-mdl	MT		
-mlt	MT	1	1
+mdl	MT	1	1
+tam	MU		
+tel	MU		
 ben	MU		
 bho	MU		
 eng	MU	0	0
 fra	MU	0	0
 hin	MU		
-lsy	MU		
 mar	MU		
 mfe	MU		
-tam	MU		
-tel	MU		
 urd	MU		
+lsy	MU		
 zho	MU	0	0
 div	MV		
 eng	MV	0	0
 eng	MW	0	0
 kzn	MW		
 lai	MW		
-lon	MW		
-lws	MW		
+lon	MW	1	1
 nkv	MW		
 nya	MW	1	1
 nyr	MW		
@@ -5444,38 +5443,30 @@ nyy	MW
 swk	MW		
 tog	MW		
 tum	MW		
-yao	MW		
+yao	MW	1	1
 zul	MW		
-afs	MX		
-agu	MX		
-amu	MX		
+lws	MW	1	1
 apc	MX	0	0
 ara	MX	0	0
-azd	MX		
+pxm	MX		
+agu	MX		
+amu	MX		
 azg	MX		
 azm	MX		
-azn	MX		
-azz	MX		
 cac	MX		
 cco	MX		
-chd	MX		
 chf	MX		
 chj	MX		
 chq	MX		
 chz	MX		
 cip	MX		
 cle	MX		
-clo	MX		
 cly	MX		
 cnl	MX		
 cnt	MX		
 cob	MX		
-coc	MX		
-coj	MX		
-cok	MX		
 coz	MX		
 cpa	MX		
-crn	MX		
 csa	MX		
 cso	MX		
 cta	MX		
@@ -5487,30 +5478,16 @@ ctz	MX
 cuc	MX		
 cut	MX		
 cux	MX		
-cuy	MX		
 cvn	MX		
 cya	MX		
 czn	MX		
-dih	MX		
-emm	MX		
 emy	MX		
-eng	MX	0	0
-eud	MX		
-fra	MX	0	0
-hch	MX		
-hue	MX		
 hus	MX		
-huv	MX		
-hve	MX		
-hvv	MX		
 ixc	MX		
 jac	MX		
 jmx	MX		
-kic	MX		
-klb	MX		
 knj	MX		
 lac	MX		
-lsc	MX		
 maa	MX		
 mab	MX		
 maj	MX		
@@ -5521,11 +5498,8 @@ mau	MX
 maz	MX		
 mbz	MX		
 mce	MX		
-mco	MX		
 mdv	MX		
 meh	MX		
-mfs	MX		
-mfy	MX		
 mhc	MX		
 mib	MX		
 mie	MX		
@@ -5536,7 +5510,6 @@ mil	MX
 mim	MX		
 mio	MX		
 mip	MX		
-mir	MX		
 mit	MX		
 miu	MX		
 mix	MX		
@@ -5547,53 +5520,18 @@ mks	MX
 mmc	MX		
 mpm	MX		
 mqh	MX		
-msd	MX		
-mto	MX		
 mtu	MX		
 mtx	MX		
 mvg	MX		
 mxa	MX		
 mxb	MX		
-mxp	MX		
-mxq	MX		
 mxs	MX		
 mxt	MX		
 mxv	MX		
 mxy	MX		
 mza	MX		
 mzi	MX		
-mzl	MX		
-naz	MX		
-nch	MX		
-nci	MX		
-ncj	MX		
-ncl	MX		
-ncx	MX		
-neq	MX		
-ngu	MX		
-nhc	MX		
-nhe	MX		
-nhg	MX		
-nhi	MX		
-nhk	MX		
-nhm	MX		
-nhn	MX		
-nhp	MX		
-nhq	MX		
-nht	MX		
-nhv	MX		
-nhw	MX		
-nhx	MX		
-nhy	MX		
-nhz	MX		
-nlv	MX		
-npl	MX		
-nsu	MX		
-ntp	MX		
-nuz	MX		
 ocu	MX		
-ood	MX		
-opt	MX		
 ote	MX		
 otl	MX		
 otm	MX		
@@ -5608,61 +5546,24 @@ pbf	MX
 pbm	MX		
 pbs	MX		
 pca	MX		
-pdt	MX		
 pei	MX		
-pia	MX		
-plo	MX		
 pls	MX		
 pmq	MX		
 pmz	MX		
 poe	MX		
-poi	MX		
-poq	MX		
-pos	MX		
 pow	MX		
-ppi	MX		
 pps	MX		
-pua	MX		
-pxm	MX		
-rmy	MX		
-rom	MX	0	0
-sei	MX		
-spa	MX	0	0
-stp	MX		
-tac	MX		
-tar	MX		
-tbu	MX		
 tcf	MX		
-tcu	MX		
-tcw	MX		
-tee	MX		
-tep	MX		
-thh	MX		
-tku	MX		
-tla	MX		
-tlc	MX		
-tlp	MX		
-toc	MX		
 toj	MX		
-too	MX		
-top	MX		
-tos	MX		
 tpc	MX		
 tpl	MX		
-tpp	MX		
-tpt	MX		
 tpx	MX		
-tqt	MX		
 trc	MX		
 trq	MX		
 trs	MX		
-tsz	MX		
 ttc	MX		
-twr	MX		
 tzh	MX		
 tzo	MX		
-var	MX		
-vec	MX		
 vmc	MX		
 vmj	MX		
 vmm	MX		
@@ -5671,13 +5572,6 @@ vmq	MX
 vmx	MX		
 vmy	MX		
 vmz	MX		
-xcm	MX		
-xcn	MX		
-xcw	MX		
-xep	MX		
-xgr	MX		
-xpo	MX		
-xso	MX		
 xta	MX		
 xtb	MX		
 xtd	MX		
@@ -5692,7 +5586,6 @@ xtt	MX
 xtu	MX		
 xty	MX		
 xzp	MX		
-yaq	MX		
 yua	MX		
 zaa	MX		
 zab	MX		
@@ -5713,12 +5606,7 @@ zaw	MX
 zax	MX		
 zca	MX		
 zcd	MX		
-zoc	MX		
-zoh	MX		
 zoo	MX		
-zoq	MX		
-zor	MX		
-zos	MX		
 zpa	MX		
 zpb	MX		
 zpc	MX		
@@ -5758,21 +5646,146 @@ ztt	MX
 ztu	MX		
 ztx	MX		
 zty	MX		
+xcw	MX		
+coc	MX		
+coj	MX		
+dih	MX		
+klb	MX		
+ppi	MX		
+emm	MX		
+xcm	MX		
+xgr	MX		
+xcn	MX		
+cuy	MX		
+xep	MX		
+hue	MX		
+huv	MX		
+hve	MX		
+hvv	MX		
+afs	MX		
+eng	MX	0	0
+fra	MX	0	0
+pdt	MX		
+rmy	MX		
+rom	MX	0	0
+spa	MX	0	0
+vec	MX		
+mco	MX		
+mir	MX		
+mto	MX		
+mxp	MX		
+mxq	MX		
+mzl	MX		
+neq	MX		
+plo	MX		
+poi	MX		
+poq	MX		
+pos	MX		
+zoc	MX		
+zoh	MX		
+zoq	MX		
+zor	MX		
+zos	MX		
+azd	MX		
+azn	MX		
+azz	MX		
+cok	MX		
+crn	MX		
+eud	MX		
+hch	MX		
+kic	MX		
+mfy	MX		
+naz	MX		
+nch	MX		
+nci	MX		
+ncj	MX		
+ncl	MX		
+ncx	MX		
+ngu	MX		
+nhc	MX		
+nhe	MX		
+nhg	MX		
+nhi	MX		
+nhk	MX		
+nhm	MX		
+nhn	MX		
+nhp	MX		
+nhq	MX		
+nht	MX		
+nhv	MX		
+nhw	MX		
+nhx	MX		
+nhy	MX		
+nhz	MX		
+nlv	MX		
+npl	MX		
+nsu	MX		
+ntp	MX		
+nuz	MX		
+ood	MX		
+opt	MX		
+pia	MX		
+sei	MX		
+stp	MX		
+tac	MX		
+tar	MX		
+tbu	MX		
+tcu	MX		
+tep	MX		
+thh	MX		
+tla	MX		
+twr	MX		
+var	MX		
+xpo	MX		
+yaq	MX		
+lsc	MX		
+mfs	MX	1	0
+msd	MX	1	1
+pua	MX		
+tsz	MX		
+chd	MX		
+clo	MX		
+tcw	MX		
+tee	MX		
+tku	MX		
+tlc	MX		
+tlp	MX		
+toc	MX		
+too	MX		
+top	MX		
+tos	MX		
+tpp	MX		
+tpt	MX		
+tqt	MX		
+xso	MX		
+btq	MY	1	1
+cwg	MY	1	1
+jah	MY	1	1
+jhi	MY	1	1
+knq	MY	1	1
+kns	MY	1	1
+lnh	MY	1	1
+mhe	MY	1	1
+mnq	MY	1	1
+mzt	MY	1	1
+sbo	MY	1	1
+sea	MY	1	1
+ssm	MY	1	1
+sza	MY	1	1
+szc	MY	1	1
+tea	MY	1	1
+tmo	MY	1	1
+tnz	MY	1	1
 abf	MY	1	1
 bdg	MY	1	1
 bdr	MY	1	1
 bjn	MY	0	0
-blg	MY		
 bnb	MY	1	1
 bny	MY	1	1
 bsy	MY	1	1
 bth	MY	1	1
-btq	MY	1	1
 bug	MY	0	0
 ccm	MY	1	1
-cdo	MY		
-cmn	MY	0	1
-cwg	MY	1	1
 dbj	MY	1	1
 dkr	MY	1	1
 dmg	MY	1	1
@@ -5784,20 +5797,13 @@ dtb	MY	1	1
 dtp	MY	1	1
 dtr	MY	1	1
 dup	MY	1	1
-eng	MY	0	0
 gnq	MY	1	1
 grm	MY	1	1
-hak	MY		
 iba	MY		
 ilm	MY		
-jah	MY	1	1
 jak	MY		
 jav	MY		
-jhi	MY	1	1
 kag	MY		
-kgi	MY		
-knq	MY	1	1
-kns	MY	1	1
 kqr	MY		
 kqt	MY		
 kve	MY		
@@ -5812,23 +5818,16 @@ lhn	MY
 lkj	MY		
 llk	MY		
 lnd	MY		
-lnh	MY	1	1
 low	MY		
 lra	MY		
-mal	MY		
-mcm	MY		
 mel	MY		
 meo	MY		
 mfa	MY		
-mhe	MY	1	1
-mnq	MY	1	1
 mqq	MY		
 msa	MY	1	1
 msi	MY		
 mvv	MY		
 mxr	MY		
-mzt	MY	1	1
-nan	MY		
 nrm	MY		
 ntd	MY		
 orn	MY		
@@ -5838,13 +5837,10 @@ plz	MY
 pna	MY		
 pne	MY		
 pnm	MY		
-psg	MY		
 ree	MY		
 ruu	MY		
-sbo	MY	1	1
 sdo	MY		
 sdx	MY		
-sea	MY	1	1
 sib	MY		
 skp	MY		
 sne	MY		
@@ -5852,67 +5848,70 @@ snv	MY
 spg	MY		
 srk	MY		
 ssb	MY		
-ssm	MY	1	1
-sza	MY	1	1
-szc	MY	1	1
-szd	MY		
-tam	MY		
-tea	MY	1	1
 tgb	MY		
 tgq	MY		
 tih	MY		
-tmo	MY	1	1
 tmw	MY		
-tnz	MY	1	1
 trx	MY		
 tsg	MY		
 ttw	MY		
 txa	MY		
 txx	MY		
 umi	MY		
-xbn	MY		
 xkl	MY		
 xky	MY		
-xml	MY		
-yue	MY		
 zbc	MY		
 zbe	MY		
 zbw	MY		
-zho	MY	0	1
 zlm	MY		
 zmi	MY		
 zsm	MY		
+blg	MY		
+szd	MY		
+mal	MY		
+tam	MY		
+eng	MY	0	0
+mcm	MY		
+xbn	MY		
+kgi	MY		
+psg	MY	1	1
+xml	MY		
+cdo	MY		
+cmn	MY	0	1
+hak	MY		
+nan	MY		
+yue	MY		
+zho	MY	0	1
+fra	MZ	0	0
+por	MZ	0	0
 bwg	MZ		
 cce	MZ		
 chw	MZ		
 cwb	MZ		
 dmx	MZ		
 eko	MZ		
-fra	MZ	0	0
 llb	MZ		
 mgh	MZ		
 mhm	MZ		
 mny	MZ		
-mzy	MZ		
-ndc	MZ		
-ngl	MZ		
+ndc	MZ	1	1
+ngl	MZ	1	1
 nte	MZ		
-nya	MZ		
+nya	MZ	1	1
 nyu	MZ		
 phm	MZ		
-por	MZ	0	0
 rng	MZ		
-seh	MZ		
+seh	MZ	1	1
 swa	MZ	1	1
 tke	MZ		
 toh	MZ		
 tsc	MZ		
-tso	MZ		
+tso	MZ	1	1
 twl	MZ		
 twx	MZ		
 vmk	MZ		
 vmr	MZ		
-vmw	MZ		
+vmw	MZ	1	1
 wmw	MZ		
 xmc	MZ		
 xnq	MZ		
@@ -5920,25 +5919,26 @@ xsq	MZ
 yao	MZ		
 ymk	MZ		
 zul	MZ		
+mzy	MZ		
 afr	NA	1	0
 deu	NA		
-diu	NA		
 eng	NA	0	0
+hgm	NA		
+naq	NA		
+xuu	NA		
+ktz	NA		
+vaj	NA		
+diu	NA		
 fwe	NA		
 her	NA		
-hgm	NA		
-ktz	NA		
 kua	NA		
 kwm	NA		
 kwn	NA		
 lnb	NA		
-naq	NA		
-nbs	NA		
 ndo	NA		
 sbs	NA		
 tsn	NA		
-vaj	NA		
-xuu	NA		
+nbs	NA	1	0
 aek	NC	1	1
 aji	NC	1	1
 ane	NC	1	1
@@ -5949,10 +5949,8 @@ bpk	NC	1	1
 bwa	NC	1	1
 cam	NC	1	1
 cir	NC	1	1
-cks	NC		
 dhv	NC	1	1
 duf	NC	1	1
-fra	NC	0	0
 fwa	NC	1	1
 hvk	NC		
 iai	NC		
@@ -5975,59 +5973,195 @@ sih	NC
 uve	NC		
 wmn	NC		
 yly	NC		
+cks	NC		
+fra	NC	0	0
 ara	NE	0	1
-bms	NE		
-dje	NE		
-fra	NE	0	0
-fuh	NE		
-ful	NE		
-fuq	NE		
 hau	NE	1	1
-kau	NE		
-kby	NE		
-krt	NE		
-tda	NE		
 tez	NE	1	1
 thz	NE	1	1
 tmh	NE	1	1
 ttq	NE	1	1
+fra	NE	0	0
+fuh	NE		
+ful	NE		
+fuq	NE		
+dje	NE	1	1
+tda	NE		
 twq	NE		
+bms	NE		
+kau	NE		
+kby	NE		
+krt	NE		
 eng	NF	0	0
 pih	NF		
+ajw	NG	1	1
+anc	NG	1	1
+ank	NG	1	1
+ara	NG	0	1
+auo	NG	1	1
+bbt	NG	1	1
+bcy	NG	1	1
+bde	NG	1	1
+bol	NG	1	1
+bta	NG	1	1
+bux	NG	1	1
+bvh	NG	1	1
+bvw	NG	1	1
+bwr	NG	1	1
+bxq	NG	1	1
+cie	NG	1	1
+ckl	NG	1	1
+cky	NG	1	1
+cla	NG	1	1
+cxh	NG	1	1
+dbb	NG	1	1
+dbp	NG	1	1
+dgh	NG	1	1
+dot	NG	1	1
+dsk	NG	1	1
+dwa	NG	1	1
+dyr	NG	1	1
+dzd	NG	1	1
+fie	NG	1	1
+fkk	NG	1	1
+fli	NG	1	1
+gde	NG	1	1
+gdf	NG	1	1
+gdu	NG	1	1
+gea	NG	1	1
+gek	NG	1	1
+gew	NG	1	1
+glb	NG	1	1
+glo	NG	1	1
+glw	NG	1	1
+gqa	NG	1	1
+grd	NG	1	1
+gwn	NG	1	1
+gyz	NG	1	1
+hau	NG	1	1
+hbb	NG	1	1
+hia	NG	1	1
+hig	NG	1	1
+hod	NG	1	1
+hwo	NG	1	1
+jaf	NG	1	1
+jie	NG	1	1
+jmb	NG	1	1
+jmi	NG	1	1
+jrt	NG	1	1
+juu	NG	1	1
+kai	NG	1	1
+kbz	NG	1	1
+kcs	NG	1	1
+kil	NG	1	1
+kkr	NG	1	1
+kks	NG	1	1
+kna	NG	1	1
+kof	NG	1	1
+kpa	NG	1	1
+ksq	NG	1	1
+ktc	NG	1	1
+kuh	NG	1	1
+kul	NG	1	1
+kwl	NG	1	1
+ldd	NG	1	1
+mew	NG	1	1
+mfl	NG	1	1
+mfm	NG	1	1
+mjs	NG	1	1
+mkf	NG	1	1
+mmf	NG	1	1
+mrt	NG	1	1
+mtl	NG	1	1
+nbh	NG	1	1
+ngi	NG	1	1
+ngs	NG	1	1
+ngw	NG	1	1
+ngx	NG	1	1
+nja	NG	1	1
+nmi	NG	1	1
+nqt	NG	1	1
+nzr	NG	1	1
+pcw	NG	1	1
+pip	NG	1	1
+piy	NG	1	1
+pqa	NG	1	1
+pze	NG	1	1
+say	NG	1	1
+scw	NG	1	1
+shu	NG	1	1
+sir	NG	1	1
+sur	NG	1	1
+syk	NG	1	1
+tak	NG	1	1
+tal	NG	1	1
+tan	NG	1	1
+tdk	NG	1	1
+tgd	NG	1	1
+ttr	NG	1	1
+tvi	NG	1	1
+twc	NG	1	1
+uly	NG	1	1
+vem	NG	1	1
+wji	NG	1	1
+zah	NG	1	1
+zaz	NG	1	1
+zbu	NG	1	1
+zem	NG	1	1
+ziz	NG	1	1
+zlu	NG	1	1
+zns	NG	1	1
+acb	NG		
+adu	NG		
+fum	NG		
+geg	NG		
+ids	NG		
+ihi	NG		
+kso	NG		
+ned	NG		
+oda	NG		
+vki	NG		
+cet	NG		
+bxo	NG		
+gib	NG		
+afn	NG		
+iby	NG		
+ijc	NG		
+ije	NG		
+ijn	NG		
+ijs	NG		
+nkx	NG		
+okd	NG		
+okr	NG		
+orr	NG		
+eng	NG	0	0
+pcm	NG	1	1
 aaa	NG		
 aab	NG		
 abm	NG		
 abn	NG		
 abo	NG		
-acb	NG		
 acp	NG		
-adu	NG		
 afe	NG		
-afn	NG		
 afo	NG		
 agb	NG		
 agc	NG		
 ahn	NG		
 ahs	NG		
 aik	NG		
-ajw	NG	1	1
 akd	NG	1	1
 akf	NG	1	1
 ala	NG		
 alf	NG		
 amb	NG		
 amo	NG		
-anc	NG	1	1
-ank	NG	1	1
 ann	NG		
 anw	NG		
 aqg	NG		
 aqk	NG		
-ara	NG	0	1
 asg	NG		
 atg	NG		
 aum	NG		
-auo	NG	1	1
 awc	NG		
 awo	NG		
 aye	NG		
@@ -6037,13 +6171,10 @@ ayu	NG
 bau	NG		
 bba	NG		
 bbs	NG		
-bbt	NG	1	1
 bbu	NG		
 bcn	NG		
 bcs	NG		
 bcv	NG		
-bcy	NG	1	1
-bde	NG	1	1
 bga	NG		
 bgu	NG		
 bil	NG		
@@ -6052,7 +6183,6 @@ bka	NG
 bkv	NG		
 bky	NG		
 bma	NG		
-bol	NG	1	1
 bom	NG		
 bqp	NG		
 bqv	NG		
@@ -6064,20 +6194,13 @@ bsj	NG
 bsl	NG		
 bsr	NG		
 bsx	NG		
-bta	NG	1	1
 bte	NG		
 btt	NG		
 btu	NG		
 buj	NG		
 bus	NG		
-bux	NG	1	1
 buz	NG		
-bvh	NG	1	1
 bvj	NG		
-bvw	NG	1	1
-bwr	NG	1	1
-bxo	NG		
-bxq	NG	1	1
 byc	NG		
 byf	NG		
 byj	NG		
@@ -6092,41 +6215,25 @@ ccg	NG
 cch	NG		
 cdr	NG		
 cen	NG		
-cet	NG		
 cfa	NG		
 cfd	NG		
 cfg	NG		
-cie	NG	1	1
-ckl	NG	1	1
-cky	NG	1	1
-cla	NG	1	1
 cry	NG		
-cxh	NG	1	1
 dam	NG		
-dbb	NG	1	1
 dbd	NG		
 dbi	NG		
 dbm	NG		
 dbo	NG		
-dbp	NG	1	1
-dbv	NG		
 deg	NG		
-dgh	NG	1	1
 dio	NG		
 dir	NG		
 dkg	NG		
-dmf	NG		
 doh	NG		
-dot	NG	1	1
 dri	NG		
-dsk	NG	1	1
-dwa	NG	1	1
-dyr	NG	1	1
 dza	NG		
-dzd	NG	1	1
 ebg	NG		
 efa	NG		
-efi	NG		
+efi	NG	1	1
 ego	NG		
 ehu	NG		
 eka	NG		
@@ -6136,7 +6243,6 @@ ekp	NG
 ekr	NG		
 elm	NG		
 ema	NG		
-eng	NG	0	0
 enn	NG		
 env	NG		
 enw	NG		
@@ -6151,75 +6257,42 @@ eza	NG
 eze	NG		
 fah	NG		
 fam	NG		
-fie	NG	1	1
 fir	NG		
-fkk	NG	1	1
-fli	NG	1	1
 fub	NG		
 ful	NG		
-fum	NG		
 fuv	NG	1	1
 gbr	NG		
 gby	NG		
-gde	NG	1	1
-gdf	NG	1	1
-gdu	NG	1	1
-gea	NG	1	1
 ged	NG		
-geg	NG		
-gek	NG	1	1
 gel	NG		
-gew	NG	1	1
-gib	NG		
 gkn	NG		
-glb	NG	1	1
-glo	NG	1	1
-glw	NG	1	1
 gmd	NG		
 gmz	NG		
 gne	NG		
 gnh	NG		
 gpa	NG		
-gqa	NG	1	1
-grd	NG	1	1
 grh	NG		
 gua	NG		
 guw	NG		
 gvm	NG		
 gwb	NG		
 gwg	NG		
-gwn	NG	1	1
 gye	NG		
-gyz	NG	1	1
-hau	NG	1	1
-hbb	NG	1	1
-hia	NG	1	1
-hig	NG	1	1
-hod	NG	1	1
 hoe	NG		
-hsl	NG		
-hwo	NG	1	1
-ibb	NG		
+ibb	NG	1	1
 ibe	NG		
 ibm	NG		
 ibn	NG		
 ibo	NG	1	1
 ibr	NG		
-iby	NG		
 ich	NG		
 idc	NG		
 ide	NG		
-ids	NG		
 idu	NG		
 igb	NG		
 ige	NG		
 igl	NG		
 igw	NG		
-ihi	NG		
-ijc	NG		
-ije	NG		
-ijn	NG		
-ijs	NG		
 ikh	NG		
 iki	NG		
 ikk	NG		
@@ -6242,42 +6315,29 @@ izm	NG
 izr	NG		
 izz	NG		
 jab	NG		
-jaf	NG	1	1
 jbm	NG		
 jen	NG		
 jer	NG		
 jgk	NG		
 jib	NG		
 jid	NG		
-jie	NG	1	1
 jjr	NG		
 jku	NG		
-jmb	NG	1	1
-jmi	NG	1	1
 jms	NG		
 jni	NG		
 jrr	NG		
-jrt	NG	1	1
 jub	NG		
 juh	NG		
 juk	NG		
 juo	NG		
-juu	NG	1	1
 juw	NG		
 kad	NG		
-kai	NG	1	1
 kaj	NG		
-kau	NG		
-kby	NG		
-kbz	NG	1	1
 kcc	NG		
-kce	NG		
 kcf	NG		
 kcg	NG		
-kch	NG		
 kci	NG		
 kcq	NG		
-kcs	NG	1	1
 kdl	NG		
 kdm	NG		
 kdp	NG		
@@ -6286,43 +6346,26 @@ kes	NG
 kez	NG		
 kgt	NG		
 khj	NG		
-kil	NG	1	1
 kka	NG		
 kkd	NG		
 kkm	NG		
-kkr	NG	1	1
-kks	NG	1	1
-kku	NG		
 klk	NG		
 klo	NG		
 kmi	NG		
 kmy	NG		
-kna	NG	1	1
-knc	NG		
 kni	NG		
 koc	NG		
-kof	NG	1	1
 kov	NG		
 kow	NG		
-kpa	NG	1	1
 kpk	NG		
 krh	NG		
 krp	NG		
-ksa	NG		
 ksm	NG		
-kso	NG		
-ksp	NG		
-ksq	NG	1	1
-ktc	NG	1	1
 kub	NG		
 kug	NG		
-kuh	NG	1	1
-kul	NG	1	1
 kwb	NG		
-kwl	NG	1	1
 lan	NG		
 ldb	NG		
-ldd	NG	1	1
 ldg	NG		
 ldh	NG		
 ldj	NG		
@@ -6338,53 +6381,31 @@ mae	NG
 mbu	NG		
 mcj	NG		
 mda	NG		
-mew	NG	1	1
-mfl	NG	1	1
-mfm	NG	1	1
 mfn	NG		
 mfo	NG		
 mgi	NG		
 mgj	NG		
-mjs	NG	1	1
-mkf	NG	1	1
 mko	NG		
 mma	NG		
-mmf	NG	1	1
 moi	NG		
-mrt	NG	1	1
-mtl	NG	1	1
 mzk	NG		
 mzm	NG		
 nar	NG		
 nat	NG		
 nbb	NG		
-nbh	NG	1	1
 nbo	NG		
 nbp	NG		
 nbr	NG		
 ndd	NG		
 ndi	NG		
 ndr	NG		
-ned	NG		
 nfd	NG		
-ngi	NG	1	1
-ngs	NG	1	1
-ngw	NG	1	1
-ngx	NG	1	1
 nin	NG		
-nja	NG	1	1
 njr	NG		
-nkx	NG		
 nkz	NG		
-nmi	NG	1	1
-nqt	NG	1	1
-nsc	NG		
-nsi	NG		
 nuh	NG		
 nup	NG		
-nzr	NG	1	1
 obu	NG		
-oda	NG		
 odu	NG		
 ofu	NG		
 ogb	NG		
@@ -6393,72 +6414,46 @@ ogg	NG
 ogo	NG		
 ogu	NG		
 okb	NG		
-okd	NG		
 oke	NG		
-okr	NG		
 oks	NG		
 okx	NG		
 olm	NG		
 opa	NG		
 org	NG		
-orr	NG		
 orx	NG		
 oso	NG		
 pai	NG		
 pbl	NG		
 pbn	NG		
-pcm	NG	1	1
 pcn	NG		
-pcw	NG	1	1
 pgs	NG		
-pip	NG	1	1
-piy	NG	1	1
 png	NG		
-pqa	NG	1	1
 pwb	NG		
 pym	NG		
-pze	NG	1	1
 rax	NG		
 res	NG		
 rin	NG		
 rod	NG		
 rsw	NG		
 ruk	NG		
-ruy	NG		
-ruz	NG		
-say	NG	1	1
 scv	NG		
-scw	NG	1	1
 sde	NG		
 sha	NG		
 sho	NG		
-shu	NG	1	1
-sir	NG	1	1
 sqa	NG		
 sqh	NG		
-sur	NG	1	1
 sxs	NG		
-syk	NG	1	1
-tak	NG	1	1
-tal	NG	1	1
-tan	NG	1	1
-tdk	NG	1	1
 tdl	NG		
 tdo	NG		
 tdq	NG		
 tdv	NG		
-tgd	NG	1	1
 thy	NG		
-tiv	NG		
+tiv	NG	1	1
 tkq	NG		
 tsw	NG		
 ttb	NG		
-ttr	NG	1	1
 tul	NG		
 tvd	NG		
-tvi	NG	1	1
-twc	NG	1	1
-txj	NG		
 tye	NG		
 tyy	NG		
 uba	NG		
@@ -6471,7 +6466,6 @@ uku	NG
 ukw	NG		
 ula	NG		
 ulb	NG		
-uly	NG	1	1
 umm	NG		
 une	NG		
 urh	NG		
@@ -6480,17 +6474,13 @@ uta	NG
 uth	NG		
 utr	NG		
 uya	NG		
-vem	NG	1	1
 ver	NG		
 vit	NG		
-vki	NG		
 vkn	NG		
 vkz	NG		
 vor	NG		
 wav	NG		
 wja	NG		
-wji	NG	1	1
-wma	NG		
 wom	NG		
 xab	NG		
 xoc	NG		
@@ -6507,69 +6497,127 @@ ynq	NG
 yor	NG	1	1
 yot	NG		
 yun	NG		
-zah	NG	1	1
-zaz	NG	1	1
-zbu	NG	1	1
-zem	NG	1	1
 zhi	NG		
-ziz	NG	1	1
-zlu	NG	1	1
-zns	NG	1	1
-bzk	NI		
-miq	NI		
+ksp	NG		
+kau	NG		
+kby	NG		
+knc	NG		
+txj	NG		
+hsl	NG	1	1
+nsi	NG	1	0
+dmf	NG		
+dbv	NG		
+kce	NG		
+kch	NG		
+kku	NG		
+ksa	NG		
+nsc	NG		
+ruy	NG		
+ruz	NG		
+wma	NG		
 mom	NI		
-mtn	NI		
-ncs	NI		
-rma	NI		
-spa	NI	0	0
 sut	NI		
+bzk	NI		
+spa	NI	0	0
+miq	NI		
+mtn	NI		
 ulw	NI		
 yan	NI		
+ncs	NI		
+rma	NI		
+rif	NL	0	0
+tur	NL	0	0
+ind	NL		
+msa	NL		
 act	NL		
 deu	NL	1	1
 drt	NL		
-dse	NL		
 dum	NL		
 eng	NL	0	1
 fra	NL	0	0
 fry	NL		
 gos	NL		
-ido	NL	0	1
-ind	NL		
 lim	NL		
-msa	NL		
 nds	NL		
 nld	NL	1	1
 odt	NL		
 ofs	NL		
-rif	NL	0	0
 sdz	NL		
 stl	NL		
-tur	NL	0	0
 twd	NL		
 vel	NL		
 vls	NL		
 zea	NL		
-fkv	NO		
+dse	NL	1	0
+ido	NL	0	1
 fra	NO		
 nno	NO		
-nob	NO		
-nor	NO		
+nob	NO	1	1
+nor	NO	1	1
+rom	NO	0	0
 nsl	NO		
 rmg	NO		
-rom	NO	0	0
+fkv	NO		
 sme	NO		
+khr	NP	1	1
+sat	NP	0	0
+unr	NP	0	0
+kyv	NP		
+lmh	NP		
+luu	NP		
+phw	NP		
+tsf	NP		
+unx	NP		
+kru	NP		
+xis	NP		
 anp	NP		
-aph	NP		
 awa	NP		
-bap	NP		
-bee	NP		
 ben	NP		
 bfy	NP		
 bgc	NP		
-bhj	NP		
-bho	NP		
+bho	NP	1	1
 bmj	NP		
+dhw	NP		
+dry	NP		
+dty	NP		
+dwz	NP		
+eng	NP	0	0
+hin	NP		
+jml	NP		
+kra	NP		
+kyw	NP		
+lah	NP		
+mag	NP		
+mai	NP	1	1
+mjz	NP		
+mwr	NP		
+nep	NP	1	1
+npi	NP	1	1
+pan	NP		
+rjs	NP		
+san	NP		
+sck	NP		
+smm	NP		
+snd	NP		
+soi	NP		
+the	NP		
+thl	NP		
+thq	NP		
+thr	NP		
+tkb	NP		
+tkt	NP		
+urd	NP		
+vjk	NP		
+kgg	NP		
+nwx	NP		
+gds	NP		
+jhs	NP	1	1
+jus	NP	1	1
+nsp	NP		
+aph	NP		
+bap	NP		
+bee	NP		
+bhj	NP		
 bod	NP		
 brd	NP		
 brx	NP		
@@ -6581,75 +6629,46 @@ ctn	NP
 cur	NP		
 cuw	NP		
 dhi	NP		
-dhw	NP		
 dre	NP		
 drq	NP		
-dry	NP		
-dty	NP		
 dus	NP		
-dwz	NP		
 emg	NP		
-eng	NP	0	0
-gds	NP		
 ghe	NP		
 ghh	NP		
 ght	NP		
 gvr	NP		
 gyo	NP		
-hin	NP		
 hut	NP		
 jee	NP		
-jhs	NP		
-jml	NP		
 jul	NP		
-jus	NP		
 kdq	NP		
-kgg	NP		
 kgj	NP		
 kgy	NP		
-khr	NP	1	1
 kif	NP		
 kip	NP		
 kjl	NP		
 kkt	NP		
 kle	NP		
 klr	NP		
-kra	NP		
-kru	NP		
 kte	NP		
-kyv	NP		
-kyw	NP		
 kzq	NP		
-lah	NP		
 lbr	NP		
 lep	NP		
 lhm	NP		
 lif	NP		
-lmh	NP		
 loy	NP		
 lrr	NP		
-luu	NP		
-mag	NP		
-mai	NP		
 mgp	NP		
-mjz	NP		
 mrd	NP		
 muk	NP		
-mwr	NP		
 nao	NP		
 ncd	NP		
-nep	NP	1	1
 new	NP		
 nmm	NP		
 npa	NP		
-npi	NP	1	1
-nsp	NP		
 nwc	NP		
-nwx	NP		
 ola	NP		
-pan	NP		
 phj	NP		
-phw	NP		
 pum	NP		
 raa	NP		
 rab	NP		
@@ -6658,15 +6677,8 @@ raq	NP
 rau	NP		
 rav	NP		
 rji	NP		
-rjs	NP		
-san	NP		
-sat	NP	0	0
-sck	NP		
 scp	NP		
 skj	NP		
-smm	NP		
-snd	NP		
-soi	NP		
 suz	NP		
 syw	NP		
 taj	NP		
@@ -6674,88 +6686,99 @@ tcn	NP
 tdg	NP		
 tdh	NP		
 tge	NP		
-the	NP		
 thf	NP		
-thl	NP		
-thq	NP		
-thr	NP		
 ths	NP		
 tij	NP		
-tkb	NP		
-tkt	NP		
-tsf	NP		
 ttz	NP		
-unr	NP	0	0
-unx	NP		
-urd	NP		
 vay	NP		
-vjk	NP		
 wly	NP		
 wme	NP		
-xis	NP		
 xsr	NP		
 ybh	NP		
 ybi	NP		
+nau	NR		
 cpi	NR		
 eng	NR	0	0
-nau	NR		
-eng	NU	0	0
 niu	NU		
-eng	NZ	0	0
+eng	NU	0	0
 mri	NZ		
-nzs	NZ		
 rrm	NZ		
+eng	NZ	0	0
+nzs	NZ	1	0
 acx	OM	1	1
 adf	OM	1	1
 ara	OM	1	1
-bal	OM		
 bhm	OM	1	1
-fas	OM	0	1
 hoh	OM	1	1
 hss	OM	1	1
-luv	OM		
 shv	OM	1	1
+bal	OM		
+fas	OM	0	1
+luv	OM		
 zum	OM		
 cto	PA		
-cuk	PA		
 emp	PA		
-eng	PA	0	0
-gym	PA		
-hak	PA		
-jam	PA		
-kvn	PA		
-lsp	PA		
 noa	PA		
-sab	PA		
-scf	PA		
 sja	PA		
+eng	PA	0	0
+jam	PA		
+scf	PA		
 spa	PA	0	0
-tfr	PA		
 ydd	PA		
 yid	PA		
+lsp	PA		
+hak	PA		
 zho	PA	0	0
-acu	PE		
-aga	PE		
-agr	PE		
-amc	PE		
-ame	PE		
-amr	PE		
-anb	PE		
-arl	PE	1	1
+cuk	PA		
+gym	PA		
+kvn	PA		
+sab	PA		
+tfr	PA		
 ash	PE	1	1
-atc	PE		
-avs	PE		
 ayc	PE		
 aym	PE		
 ayr	PE		
+jqr	PE		
 boa	PE		
-cah	PE		
+cbt	PE		
+jeb	PE		
+cbu	PE		
+acu	PE		
+agr	PE		
+hub	PE		
+amr	PE		
+hug	PE		
+cht	PE		
+hib	PE		
+huu	PE		
+hux	PE		
+oca	PE		
+fra	PE		
+spa	PE	0	0
+spq	PE	1	1
+omc	PE		
+myr	PE		
+omu	PE		
+amc	PE		
+atc	PE		
 cbr	PE		
 cbs	PE		
-cbt	PE		
-cbu	PE		
+isc	PE		
+kaq	PE		
+mcd	PE		
+mcf	PE		
+mts	PE		
+pno	PE		
+rem	PE		
+shp	PE		
+sni	PE		
+yaa	PE		
+yad	PE		
+yme	PE		
+lsv	PE	1	1
+prl	PE		
+ame	PE		
 ccc	PE		
-cht	PE		
 cjo	PE		
 cni	PE		
 cod	PE		
@@ -6766,37 +6789,14 @@ cpc	PE
 cpu	PE		
 cpy	PE		
 cuj	PE		
-fra	PE		
-hib	PE		
-hub	PE		
-hug	PE		
-huu	PE		
-hux	PE		
 inp	PE		
-iqu	PE		
-isc	PE		
-jeb	PE		
-jqr	PE		
-kaq	PE		
-lsv	PE		
 mcb	PE		
-mcd	PE		
-mcf	PE		
-mts	PE		
-myr	PE		
 not	PE		
-oca	PE		
-omc	PE		
 omg	PE		
-omu	PE		
-ore	PE		
 pib	PE		
-pig	PE		
-pno	PE		
-prl	PE		
 prq	PE		
 qub	PE		
-que	PE		
+que	PE	1	1
 quf	PE		
 quk	PE		
 qup	PE		
@@ -6828,881 +6828,882 @@ qxp	PE
 qxt	PE		
 qxu	PE		
 qxw	PE		
-rem	PE		
 rgr	PE		
-shp	PE		
-sni	PE		
-spa	PE	0	0
-spq	PE	1	1
 trr	PE		
+ore	PE		
+aga	PE		
+pig	PE		
 ura	PE		
-yaa	PE		
-yad	PE		
-yme	PE		
+anb	PE	1	1
+arl	PE	1	1
+avs	PE	1	1
+cah	PE	1	1
+iqu	PE	1	1
 aut	PF	1	1
-fra	PF		
 mqm	PF		
 mrq	PF		
 mrv	PF		
 pmt	PF		
 ray	PF		
 tah	PF		
+fra	PF		
 zho	PF	0	0
-aac	PG		
-aad	PG		
-aag	PG	1	1
-aah	PG	1	1
-aai	PG	1	1
+amt	PG	1	1
+mmp	PG	1	1
 aak	PG	1	1
-aau	PG		
-aaw	PG	1	1
-abg	PG		
-abt	PG		
-abw	PG		
-aby	PG		
-ado	PG		
-adz	PG	1	1
-aew	PG		
-aey	PG		
-aez	PG		
-afd	PG	1	1
-afi	PG		
-afk	PG	1	1
-afp	PG	1	1
-agd	PG		
-age	PG		
-agg	PG		
-agl	PG		
 agm	PG	1	1
 ago	PG	1	1
-aic	PG		
-aie	PG	1	1
-aif	PG		
-ail	PG		
-aix	PG	1	1
-akh	PG	1	1
-aki	PG	1	1
-akq	PG		
-akt	PG	1	1
-ali	PG		
-alx	PG		
-amm	PG		
-amn	PG		
-amp	PG		
-amt	PG	1	1
-anh	PG		
-anj	PG		
-anx	PG	1	1
-anz	PG		
+apz	PG	1	1
+byr	PG	1	1
+hmt	PG	1	1
+kcb	PG	1	1
+klp	PG	1	1
+mcr	PG	1	1
+miw	PG	1	1
+smb	PG	1	1
+ssu	PG	1	1
+ygw	PG	1	1
 aob	PG	1	1
-aod	PG		
-aoe	PG		
-aof	PG		
-aog	PG		
-aoj	PG		
-aom	PG		
-aon	PG		
-ape	PG		
+aup	PG	1	1
+bmz	PG	1	1
+hhi	PG	1	1
+hhy	PG	1	1
+ipo	PG	1	1
+kvg	PG	1	1
+mcc	PG	1	1
+mcv	PG	1	1
+tsx	PG	1	1
+wei	PG	1	1
+zik	PG	1	1
+afd	PG	1	1
+afk	PG	1	1
+afp	PG	1	1
+aai	PG	1	1
+aaw	PG	1	1
+adz	PG	1	1
+aie	PG	1	1
+aix	PG	1	1
+akt	PG	1	1
+anx	PG	1	1
 apo	PG	1	1
 apr	PG	1	1
 aps	PG	1	1
-apz	PG	1	1
-aso	PG		
-asx	PG		
-ata	PG		
-ate	PG		
 aui	PG	1	1
-auk	PG		
-aun	PG		
-aup	PG	1	1
-aur	PG		
-auy	PG		
 avb	PG	1	1
-avt	PG		
-awb	PG		
-awi	PG		
-awm	PG		
-aww	PG		
-awx	PG		
-aya	PG		
-ayq	PG		
-bbb	PG		
-bbd	PG		
-bbf	PG		
 bbn	PG	1	1
-bbr	PG		
 bbv	PG	1	1
-bcf	PG		
 bch	PG	1	1
 bcm	PG	1	1
-bco	PG		
 bcu	PG	1	1
 bdd	PG	1	1
-bdf	PG		
-bef	PG		
 bek	PG	1	1
-beo	PG		
-bey	PG		
-bfh	PG		
-bhf	PG		
-bhg	PG		
-bhl	PG		
-bic	PG		
-bie	PG		
-big	PG		
-bio	PG		
 biq	PG	1	1
-bir	PG		
-bit	PG		
-bjc	PG		
-bjh	PG		
 bjk	PG	1	1
 bjl	PG	1	1
 bjp	PG	1	1
-bjr	PG		
-bjz	PG		
-blb	PG		
 blq	PG	1	1
 bmc	PG	1	1
-bmh	PG		
 bmk	PG	1	1
 bmn	PG	1	1
-bmp	PG		
-bmu	PG		
-bmx	PG		
-bmz	PG	1	1
 bnp	PG	1	1
-bnw	PG		
-boj	PG		
-bon	PG		
-bop	PG		
-boq	PG		
-bow	PG		
-bpe	PG		
-bpi	PG		
-bpm	PG		
-bpu	PG		
-bpw	PG		
-bql	PG		
-bqs	PG		
-brq	PG		
-bry	PG		
 brz	PG	1	1
 btp	PG	1	1
 buk	PG	1	1
-buo	PG		
-buq	PG		
-but	PG		
-buv	PG		
-bvn	PG		
 bwd	PG	1	1
 bwf	PG	1	1
-bwk	PG		
-bwm	PG		
 bxf	PG	1	1
 bxh	PG	1	1
-bxz	PG		
-bye	PG		
-byr	PG	1	1
-byx	PG		
-byz	PG		
-bzf	PG		
 bzh	PG	1	1
-can	PG		
-cga	PG		
-cjn	PG		
-cjv	PG		
-ckr	PG		
 dac	PG	1	1
 dad	PG	1	1
-dah	PG		
-dby	PG		
 ddi	PG	1	1
-ded	PG		
-dev	PG		
-dge	PG		
 dgg	PG	1	1
-dgx	PG		
-dgz	PG		
-dia	PG		
-dju	PG		
-dmc	PG		
-dnd	PG		
-dnr	PG		
-doa	PG		
 dob	PG	1	1
-dof	PG		
-dol	PG		
 don	PG	1	1
-duc	PG		
-dui	PG		
-duk	PG		
 dva	PG	1	1
 dww	PG	1	1
-eit	PG		
-eiv	PG		
-ele	PG		
-elk	PG		
 elu	PG	1	1
 emi	PG	1	1
-ena	PG		
-eng	PG	0	0
-enq	PG		
-eri	PG		
-etr	PG		
-faa	PG		
-fad	PG		
-fag	PG		
-fai	PG		
-faj	PG		
-ffi	PG		
-fiw	PG		
-foi	PG		
-for	PG		
-fqs	PG		
-frq	PG		
-fuy	PG		
-gaf	PG		
-gah	PG		
-gai	PG		
-gaj	PG		
-gam	PG		
-gao	PG		
-gap	PG		
 gar	PG	1	1
-gat	PG		
-gaw	PG		
-gbe	PG		
-gbf	PG		
-gcc	PG		
-gcn	PG		
 gdd	PG	1	1
-gdn	PG		
-gdr	PG		
-geb	PG		
 gfk	PG	1	1
-ggl	PG		
 ggt	PG	1	1
-ggw	PG		
-ghs	PG		
-gim	PG		
 gip	PG	1	1
-gka	PG		
-gkd	PG		
-gmg	PG		
-gmu	PG		
-gnm	PG		
-gnt	PG		
-gnu	PG		
 goc	PG	1	1
-goi	PG		
-gpn	PG		
-grg	PG		
-grq	PG		
 grw	PG	1	1
-grx	PG		
 grz	PG	1	1
-gsn	PG		
-gsp	PG		
 gve	PG	1	1
-gvf	PG		
 gvs	PG	1	1
-gyb	PG		
 hah	PG	1	1
-ham	PG		
 hao	PG	1	1
 hgw	PG	1	1
-hhi	PG	1	1
-hhy	PG	1	1
-hih	PG		
-hkk	PG		
 hla	PG		
-hmo	PG		
-hmt	PG	1	1
 hob	PG		
 hot	PG		
 hrc	PG		
 hrw	PG		
-huf	PG		
-hui	PG		
 hul	PG		
-ian	PG		
-iar	PG		
-idi	PG		
-igg	PG		
-igm	PG		
-igo	PG		
-imi	PG		
-imn	PG		
-imo	PG		
-ino	PG		
-iou	PG		
-ipi	PG		
-ipo	PG	1	1
-isa	PG		
-itr	PG		
-iwm	PG		
-iws	PG		
 jae	PG		
-jbk	PG		
-jet	PG		
-jil	PG		
-jko	PG		
-jma	PG		
-jmw	PG		
-kbk	PG		
 kbm	PG		
-kbq	PG		
 kbt	PG		
 kbw	PG		
-kbx	PG		
-kcb	PG	1	1
 kcl	PG		
-kco	PG		
-kct	PG		
 kdf	PG		
-keh	PG		
-kew	PG		
-kgf	PG		
-kgu	PG		
 khl	PG		
-khs	PG		
 khz	PG		
-kih	PG		
 kij	PG		
 kis	PG		
-kit	PG		
-kiw	PG		
-kjd	PG		
-kjs	PG		
-kjx	PG		
-kjy	PG		
-kkc	PG		
-klh	PG		
-klm	PG		
-klp	PG	1	1
-klq	PG		
-klt	PG		
 klx	PG		
-kmf	PG		
-kmg	PG		
-kmh	PG		
-kmn	PG		
-kmo	PG		
-kms	PG		
-kmu	PG		
-kmx	PG		
-knr	PG		
-knv	PG		
 koa	PG		
-kol	PG		
-kop	PG		
-koz	PG		
-kpf	PG		
-kpr	PG		
-kpw	PG		
-kpx	PG		
-kqa	PG		
-kqb	PG		
-kqc	PG		
 kqf	PG		
-kqi	PG		
-kqj	PG		
-kql	PG		
 kqw	PG		
 ksd	PG		
 kse	PG		
-ksi	PG		
-ksj	PG		
 ksl	PG		
-ksr	PG		
 ktk	PG		
 ktm	PG		
-kto	PG		
 kud	PG		
-kue	PG		
-kuo	PG		
-kup	PG		
 kvc	PG		
-kvg	PG	1	1
-kwj	PG		
-kwo	PG		
 kxa	PG		
 kxr	PG		
-kxt	PG		
-kxw	PG		
-kxz	PG		
-kyc	PG		
-kyg	PG		
-kyx	PG		
-kyy	PG		
-kze	PG		
 laz	PG		
 lbb	PG		
 lbq	PG		
 lbu	PG		
 lbv	PG		
 lcm	PG		
-lei	PG		
 lek	PG		
-leq	PG		
 ler	PG		
 let	PG		
 leu	PG		
-lgt	PG		
 lib	PG		
 lid	PG		
 lih	PG		
-lkl	PG		
 lle	PG		
 llf	PG		
-lll	PG		
 lmg	PG		
-lni	PG		
-lnm	PG		
 loj	PG		
 los	PG		
-lsr	PG		
-luf	PG		
 lxm	PG		
 mbh	PG		
 mbk	PG		
 mbq	PG		
-mbw	PG		
-mbx	PG		
-mcc	PG	1	1
-mci	PG		
-mcq	PG		
-mcr	PG	1	1
-mcv	PG	1	1
 mcy	PG		
-mcz	PG		
-mdb	PG		
-mdc	PG		
-mds	PG		
-meb	PG		
-med	PG		
 mee	PG		
 mek	PG		
 met	PG		
 meu	PG		
 mft	PG		
-mfw	PG		
 mgl	PG		
-mgt	PG		
-mgu	PG		
-mhf	PG		
-mhl	PG		
-miw	PG	1	1
-mjj	PG		
 mjk	PG		
 mjm	PG		
-mjn	PG		
-mkc	PG		
-mkp	PG		
-mkr	PG		
-mle	PG		
-mlh	PG		
-mlp	PG		
-mmi	PG		
 mmo	PG		
-mmp	PG	1	1
-mmq	PG		
 mmt	PG		
 mmx	PG		
 mna	PG		
-mnm	PG		
 mox	PG		
 mpl	PG		
 mpn	PG		
 mpo	PG		
-mpp	PG		
-mps	PG		
-mpt	PG		
-mpv	PG		
 mpx	PG		
-mqe	PG		
-mqv	PG		
-mqw	PG		
 mqz	PG		
 msu	PG		
-msx	PG		
-msy	PG		
-msz	PG		
-mtc	PG		
-mtf	PG		
-mti	PG		
-mtv	PG		
-mty	PG		
 mum	PG		
-mux	PG		
 mva	PG		
-mvk	PG		
 mvn	PG		
-mvq	PG		
 mwa	PG		
-mwb	PG		
 mwc	PG		
 mwg	PG		
 mwh	PG		
-mxk	PG		
 mxm	PG		
-mxw	PG		
-myd	PG		
 myw	PG		
-mze	PG		
-mzu	PG		
 mzz	PG		
-nac	PG		
-naf	PG		
 nak	PG		
 nal	PG		
-nas	PG		
-nax	PG		
-nbk	PG		
-nby	PG		
-nca	PG		
 ncc	PG		
-nce	PG		
 ncf	PG		
-ncm	PG		
 ncn	PG		
-nco	PG		
+nho	PG		
+nmw	PG		
+npn	PG		
+nrz	PG		
+nsn	PG		
+nss	PG		
+nuq	PG		
+nur	PG		
+oum	PG		
+oyy	PG		
+pek	PG		
+pex	PG		
+pix	PG		
+pkg	PG		
+ppn	PG		
+pss	PG		
+ptp	PG		
+pwg	PG		
+rai	PG		
+rak	PG		
+roe	PG		
+rro	PG		
+sbc	PG		
+sbe	PG		
+sbh	PG		
+sew	PG		
+sgz	PG		
+sij	PG		
+sjr	PG		
+snc	PG		
+sol	PG		
+spe	PG		
+sps	PG		
+srf	PG		
+sry	PG		
+ssg	PG		
+sso	PG		
+ssz	PG		
+svb	PG		
+swp	PG		
+tbc	PG		
+tbf	PG		
+tbj	PG		
+tbo	PG		
+tbx	PG		
+tgc	PG		
+tgi	PG		
+tgo	PG		
+tio	PG		
+tkv	PG		
+tlx	PG		
+tmq	PG		
+tmy	PG		
+tns	PG		
+tpa	PG		
+tpz	PG		
+tqp	PG		
+trb	PG		
+tte	PG		
+ttu	PG		
+ttv	PG		
+tuc	PG		
+twp	PG		
+ubr	PG		
+una	PG		
+unu	PG		
+urv	PG		
+uvl	PG		
+val	PG		
+viv	PG		
+vmg	PG		
+wab	PG		
+wag	PG		
+wat	PG		
+waz	PG		
+wed	PG		
+wgb	PG		
+wiv	PG		
+woc	PG		
+wuv	PG		
+xkx	PG		
+xsi	PG		
+ykk	PG		
+ykm	PG		
+ylb	PG		
+ylu	PG		
+yml	PG		
+ymp	PG		
+yob	PG		
+zeg	PG		
+zgr	PG		
+zsa	PG		
+zsu	PG		
+bbf	PG		
+fqs	PG		
+byx	PG		
+ckr	PG		
+gcc	PG		
+smg	PG		
+uro	PG		
+zmh	PG		
+blb	PG		
+lll	PG		
+mxk	PG		
+bic	PG		
+ffi	PG		
+kze	PG		
+myd	PG		
+ont	PG		
+aic	PG		
+amn	PG		
+dnd	PG		
+imn	PG		
+jet	PG		
+kih	PG		
+nby	PG		
+pgi	PG		
+smf	PG		
+sow	PG		
+upi	PG		
+wrs	PG		
+ail	PG		
+bco	PG		
+beo	PG		
+etr	PG		
+khs	PG		
+onn	PG		
+siq	PG		
+hmo	PG		
+dgz	PG		
+gdn	PG		
+gnm	PG		
+jma	PG		
+mnm	PG		
+mti	PG		
+onj	PG		
+soq	PG		
+trh	PG		
+dby	PG		
+dol	PG		
+tqm	PG		
+duc	PG		
+fiw	PG		
+foi	PG		
+agl	PG		
+goi	PG		
+jko	PG		
+kkc	PG		
+kxw	PG		
+smq	PG		
+bon	PG		
+gdr	PG		
+tof	PG		
+opo	PG		
+oro	PG		
+tqo	PG		
+uar	PG		
+xeu	PG		
+faa	PG		
+fuy	PG		
+grx	PG		
+eng	PG	0	0
+tpi	PG	1	1
+uln	PG		
+tbd	PG		
+awi	PG		
+ppt	PG		
+xla	PG		
+xar	PG		
+aew	PG		
+kbx	PG		
+lnm	PG		
+mgt	PG		
+yla	PG		
+prm	PG		
+bcf	PG		
+kiw	PG		
+kjd	PG		
+kmx	PG		
+kxz	PG		
+mdb	PG		
+aom	PG		
+bbb	PG		
+bdf	PG		
+kbk	PG		
+kpx	PG		
+kqi	PG		
+mcq	PG		
+nvm	PG		
+kol	PG		
+big	PG		
+kup	PG		
+wer	PG		
+kto	PG		
+huf	PG		
+ksj	PG		
+mfw	PG		
+bio	PG		
+kwo	PG		
+amm	PG		
+bpw	PG		
+itr	PG		
+nax	PG		
+niw	PG		
+owi	PG		
+aog	PG		
+can	PG		
+mtf	PG		
+tzx	PG		
+xop	PG		
+yee	PG		
+bwk	PG		
+bxz	PG		
+dof	PG		
+luf	PG		
+mgu	PG		
+mze	PG		
+kqc	PG		
+mds	PG		
+abt	PG		
+bry	PG		
+bzf	PG		
+gbf	PG		
+ian	PG		
+keh	PG		
+kxt	PG		
+mle	PG		
+nud	PG		
+sdk	PG		
+spk	PG		
+wos	PG		
+ylg	PG		
+eiv	PG		
+kjx	PG		
+kyx	PG		
+roo	PG	1	1
+aag	PG	1	1
+aah	PG	1	1
+aif	PG		
+alx	PG		
+aof	PG		
+aoj	PG		
+aon	PG		
+ape	PG		
+auk	PG		
+aun	PG		
+aur	PG		
+avt	PG		
+bey	PG		
+but	PG		
+bvn	PG		
+dia	PG		
+eit	PG		
+ele	PG		
+elk	PG		
+gnu	PG		
+kms	PG		
+lkl	PG		
+lsr	PG		
+mkc	PG		
+mty	PG		
+mwb	PG		
+niz	PG		
+oin	PG		
+okk	PG		
+ong	PG		
+onk	PG		
+onr	PG		
+osu	PG		
+rhp	PG		
+sbi	PG		
+siu	PG		
+stf	PG		
+tei	PG		
+tua	PG		
+uri	PG		
+urt	PG		
+urx	PG		
+van	PG		
+wii	PG		
+wmo	PG		
+wnp	PG		
+xbi	PG		
+yde	PG		
+yev	PG		
+ygl	PG		
+yis	PG		
+yll	PG		
+ymb	PG		
+ymo	PG		
+yyu	PG		
+bhf	PG		
+idi	PG		
+kit	PG		
+ppe	PG		
+abg	PG		
+abw	PG		
+aey	PG		
+aez	PG		
+agd	PG		
+age	PG		
+akh	PG	1	1
+ali	PG		
+anh	PG		
+anz	PG		
+aoe	PG		
+aso	PG		
+asx	PG		
+ate	PG		
+auy	PG		
+awb	PG		
+awm	PG		
+awx	PG		
+bbd	PG		
+bbr	PG		
+bef	PG		
+bhg	PG		
+bhl	PG		
+bie	PG		
+bir	PG		
+bjr	PG		
+bjz	PG		
+bmh	PG		
+bmp	PG		
+bmu	PG		
+bmx	PG		
+boj	PG		
+bop	PG		
+boq	PG		
+bpi	PG		
+bpm	PG		
+bpu	PG		
+bql	PG		
+buq	PG		
+cjv	PG		
+dah	PG		
+ded	PG		
+dev	PG		
+dge	PG		
+dgx	PG		
+dmc	PG		
+dnr	PG		
+doa	PG		
+dui	PG		
+duk	PG		
+ena	PG		
+enq	PG		
+eri	PG		
+fad	PG		
+fag	PG		
+fai	PG		
+faj	PG		
+for	PG		
+frq	PG		
+gaf	PG		
+gah	PG		
+gaj	PG		
+gam	PG		
+gao	PG		
+gap	PG		
+gat	PG		
+gaw	PG		
+gcn	PG		
+ggl	PG		
+ghs	PG		
+gim	PG		
+gka	PG		
+gkd	PG		
+gmg	PG		
+gmu	PG		
+grg	PG		
+gsn	PG		
+gsp	PG		
+gvf	PG		
+gyb	PG		
+hih	PG		
+hkk	PG		
+hui	PG		
+igo	PG		
+imi	PG		
+imo	PG		
+ino	PG		
+iou	PG		
+ipi	PG		
+isa	PG		
+jil	PG		
+kbq	PG		
+kco	PG		
+kew	PG		
+kgf	PG		
+kgu	PG		
+kjs	PG		
+kjy	PG		
+klh	PG		
+klm	PG		
+klt	PG		
+kmf	PG		
+kmg	PG		
+kmh	PG		
+kmu	PG		
+kop	PG		
+koz	PG		
+kpf	PG		
+kpr	PG		
+kpw	PG		
+kqa	PG		
+kqb	PG		
+ksr	PG		
+kue	PG		
+kuo	PG		
+kyc	PG		
+kyg	PG		
+kyy	PG		
+lei	PG		
+leq	PG		
+mbw	PG		
+mci	PG		
+mcz	PG		
+mdc	PG		
+med	PG		
+mhf	PG		
+mhl	PG		
+mjj	PG		
+mjn	PG		
+mkr	PG		
+mlh	PG		
+mlp	PG		
+mmi	PG		
+mmq	PG		
+mpp	PG		
+mpt	PG		
+mpv	PG		
+mqe	PG		
+mqv	PG		
+mqw	PG		
+msx	PG		
+msz	PG		
+mtc	PG		
+mtv	PG		
+mux	PG		
+mvq	PG		
+nac	PG		
+naf	PG		
+nbk	PG		
+nca	PG		
 nej	PG		
 net	PG		
-nex	PG		
-nho	PG		
 nib	PG		
 nif	PG		
 nii	PG		
 nis	PG		
-niw	PG		
-niz	PG		
 nkg	PG		
-nkm	PG		
-nmw	PG		
-nmx	PG		
 nnf	PG		
 nnk	PG		
-nnm	PG		
 noc	PG		
 nof	PG		
 noh	PG		
 nop	PG		
 nou	PG		
-npn	PG		
-nqn	PG		
-nrz	PG		
-nsn	PG		
-nss	PG		
-nud	PG		
-nuq	PG		
-nur	PG		
-nux	PG		
-nvm	PG		
-nwr	PG		
 nxr	PG		
-oin	PG		
-okk	PG		
 okv	PG		
 omo	PG		
 omw	PG		
-ong	PG		
-onj	PG		
-onk	PG		
-onn	PG		
-onr	PG		
 ons	PG		
-ont	PG		
 opm	PG		
-opo	PG		
-oro	PG		
-osu	PG		
-oue	PG		
-oum	PG		
-owi	PG		
-oyy	PG		
-pby	PG		
 pda	PG		
 ped	PG		
-pek	PG		
-pep	PG		
-pex	PG		
-pgi	PG		
-pgz	PG		
-pin	PG		
-pix	PG		
-pkg	PG		
 pla	PG		
 pmr	PG		
-pnn	PG		
 pnr	PG		
-ppe	PG		
-ppn	PG		
-ppo	PG		
-ppq	PG		
-ppt	PG		
-prm	PG		
 prw	PG		
-psq	PG		
-pss	PG		
-ptp	PG		
 pup	PG		
-pux	PG		
-pwa	PG		
-pwg	PG		
-rai	PG		
-rak	PG		
-rao	PG		
 rea	PG		
-rhp	PG		
-rmk	PG		
 rmp	PG		
-roe	PG		
-roo	PG	1	1
 rpt	PG		
-rro	PG		
-rwa	PG		
 rwo	PG		
-sbc	PG		
-sbe	PG		
-sbh	PG		
-sbi	PG		
 sbq	PG		
-sdk	PG		
 sej	PG		
-seo	PG		
-sew	PG		
-sgz	PG		
-sij	PG		
-sim	PG		
-siq	PG		
-siu	PG		
-siv	PG		
-siw	PG		
 six	PG		
-sjr	PG		
 skc	PG		
 skm	PG		
 sks	PG		
 sll	PG		
 slw	PG		
-smb	PG	1	1
 smc	PG		
-smf	PG		
-smg	PG		
-smq	PG		
-smz	PG		
-snc	PG		
 snp	PG		
 snr	PG		
 snx	PG		
-sny	PG		
 snz	PG		
-sol	PG		
-soq	PG		
-sow	PG		
 spd	PG		
-spe	PG		
-spk	PG		
 spl	PG		
-spm	PG		
-sps	PG		
 sra	PG		
-srf	PG		
-sry	PG		
 ssd	PG		
-ssg	PG		
 ssj	PG		
-sso	PG		
 sst	PG		
-ssu	PG	1	1
 ssx	PG		
-ssz	PG		
-stf	PG		
-stk	PG		
 stm	PG		
-sua	PG		
 sue	PG		
 sug	PG		
-sui	PG		
-suo	PG		
-svb	PG		
 swm	PG		
-swp	PG		
 szb	PG		
 taw	PG		
-tbc	PG		
-tbd	PG		
-tbf	PG		
 tbg	PG		
-tbj	PG		
-tbo	PG		
-tbs	PG		
 tbv	PG		
-tbx	PG		
-tci	PG		
-tei	PG		
-tgc	PG		
-tgi	PG		
-tgo	PG		
-tgu	PG		
 tif	PG		
 tim	PG		
-tio	PG		
-tkv	PG		
 tlf	PG		
-tlx	PG		
-tmd	PG		
-tmq	PG		
-tmy	PG		
 tnh	PG		
-tns	PG		
-tof	PG		
-tpa	PG		
-tpi	PG		
-tpz	PG		
-tqm	PG		
-tqo	PG		
-tqp	PG		
-tqu	PG		
-trb	PG		
-trh	PG		
-tsx	PG	1	1
-ttd	PG		
-tte	PG		
-ttu	PG		
-ttv	PG		
-tua	PG		
-tuc	PG		
-tuh	PG		
-twp	PG		
-tww	PG		
 tya	PG		
-tzx	PG		
-uar	PG		
-ubr	PG		
 ubu	PG		
 ufi	PG		
-uis	PG		
 ukg	PG		
-uln	PG		
-una	PG		
-uni	PG		
-unu	PG		
-upi	PG		
 urg	PG		
-uri	PG		
 urm	PG		
-uro	PG		
-urt	PG		
-urv	PG		
 urw	PG		
-urx	PG		
 usa	PG		
 usu	PG		
 utu	PG		
 uvh	PG		
-uvl	PG		
-val	PG		
-vam	PG		
-van	PG		
-viv	PG		
-vmg	PG		
-wab	PG		
-wag	PG		
 waj	PG		
-wat	PG		
-wax	PG		
-waz	PG		
 wdg	PG		
-wed	PG		
-wei	PG	1	1
-wer	PG		
-wgb	PG		
 wgi	PG		
 whg	PG		
-wii	PG		
-wiu	PG		
-wiv	PG		
-wla	PG		
 wmc	PG		
-wmo	PG		
-wmx	PG		
 wnb	PG		
 wnc	PG		
-wnp	PG		
 wnu	PG		
-woc	PG		
-wog	PG		
-wos	PG		
-wrs	PG		
-wrv	PG		
 wsk	PG		
 wsr	PG		
 wtf	PG		
-wtk	PG		
-wut	PG		
-wuv	PG		
-xar	PG		
-xbi	PG		
 xes	PG		
-xeu	PG		
-xkx	PG		
-xla	PG		
-xoi	PG		
-xop	PG		
 xow	PG		
-xrw	PG		
-xsi	PG		
 xsp	PG		
 ybm	PG		
 ybo	PG		
-ybx	PG		
 yby	PG		
-yde	PG		
 ydk	PG		
-yee	PG		
-yev	PG		
-ygl	PG		
 ygm	PG		
 ygr	PG		
-ygw	PG	1	1
-yis	PG		
-ykk	PG		
-ykm	PG		
 ykr	PG		
-yla	PG		
-ylb	PG		
-yle	PG		
-ylg	PG		
-yll	PG		
-ylu	PG		
-ymb	PG		
-yml	PG		
-ymo	PG		
-ymp	PG		
 ynl	PG		
-yob	PG		
 yon	PG		
-yra	PG		
-yrb	PG		
 yrw	PG		
-yss	PG		
 ytw	PG		
-yuj	PG		
 yut	PG		
 yuw	PG		
-ywa	PG		
-yyu	PG		
-zeg	PG		
-zgr	PG		
 zia	PG		
-zik	PG	1	1
-zmh	PG		
-zsa	PG		
-zsu	PG		
 zuh	PG		
+yuj	PG		
+pwa	PG		
+ata	PG		
+pnn	PG		
+tmd	PG		
+iar	PG		
+pby	PG		
+ado	PG		
+afi	PG		
+aki	PG	1	1
+anj	PG		
+aod	PG		
+aya	PG		
+bqs	PG		
+brq	PG		
+byz	PG		
+gai	PG		
+geb	PG		
+grq	PG		
+igg	PG		
+igm	PG		
+kct	PG		
+msy	PG		
+mzu	PG		
+rao	PG		
+rmk	PG		
+spm	PG		
+tbs	PG		
+tgu	PG		
+wax	PG		
+xoi	PG		
+agg	PG		
+aad	PG		
+aau	PG		
+akq	PG		
+amp	PG		
+aww	PG		
+ayq	PG		
+bit	PG		
+bjh	PG		
+bnw	PG		
+bye	PG		
+cjn	PG		
+dju	PG		
+gbe	PG		
+ham	PG		
+iwm	PG		
+iws	PG		
+kmn	PG		
+kmo	PG		
+knr	PG		
+kwj	PG		
+lgt	PG		
+mbx	PG		
+nnm	PG		
+nux	PG		
+pin	PG		
+psq	PG		
+sim	PG		
+siv	PG		
+sny	PG		
+wog	PG		
+wtk	PG		
+xrw	PG		
+yss	PG		
+ywa	PG		
+pgz	PG		
+bpe	PG		
+ksi	PG		
+pux	PG		
+rwa	PG		
+suo	PG		
+uni	PG		
+vam	PG		
+wmx	PG		
+wut	PG		
+buo	PG		
+kqj	PG		
+lni	PG		
+nas	PG		
+nco	PG		
+oue	PG		
+siw	PG		
+smz	PG		
+uis	PG		
+seo	PG		
+aac	PG		
+ggw	PG		
+sui	PG		
+wrv	PG		
+sua	PG		
+knv	PG		
+gpn	PG		
+ttd	PG		
+tuh	PG		
+mps	PG		
+ppo	PG		
+tqu	PG		
+jbk	PG		
+jmw	PG		
+klq	PG		
+meb	PG		
+ppq	PG		
+tww	PG		
+wla	PG		
+ybx	PG		
+wiu	PG		
+nce	PG	1	1
+bfh	PG	1	1
+bow	PG	1	1
+gnt	PG	1	1
+mxw	PG	1	1
+ncm	PG	1	1
+nex	PG	1	1
+nkm	PG	1	1
+nmx	PG	1	1
+nqn	PG	1	1
+pep	PG	1	1
+stk	PG	1	1
+tci	PG	1	1
+aby	PG	1	1
+bjc	PG	1	1
+mkp	PG	1	1
+nwr	PG	1	1
+yrb	PG	1	1
+yle	PG	1	1
+yra	PG	1	1
+buv	PG	1	1
+bwm	PG	1	1
+cga	PG	1	1
+kql	PG	1	1
+mvk	PG	1	1
+esy	PH	1	1
 abc	PH	1	1
 abd	PH	1	1
 abp	PH	1	1
@@ -7724,9 +7725,7 @@ atm	PH	1	1
 atp	PH	1	1
 att	PH	1	1
 atz	PH	1	1
-ays	PH		
 ayt	PH	1	1
-ayy	PH		
 azt	PH	1	1
 bcl	PH	1	1
 bfx	PH	1	1
@@ -7750,7 +7749,6 @@ bto	PH	1	1
 btw	PH	1	1
 bvy	PH	1	1
 bya	PH	1	1
-cbk	PH		
 cbw	PH	1	1
 ceb	PH	1	1
 cgc	PH	1	1
@@ -7764,10 +7762,7 @@ due	PH	1	1
 dul	PH	1	1
 duo	PH	1	1
 duy	PH	1	1
-dyg	PH		
 ebk	PH	1	1
-eng	PH	0	0
-esy	PH	1	1
 fbl	PH	1	1
 fil	PH	1	1
 gad	PH	1	1
@@ -7804,12 +7799,10 @@ kmk	PH
 kml	PH		
 knb	PH		
 kne	PH		
-kor	PH		
 kqe	PH		
 krj	PH		
 ksc	PH		
 ksn	PH		
-ktq	PH		
 kyb	PH		
 kyj	PH		
 kyk	PH		
@@ -7836,18 +7829,15 @@ msk	PH
 msm	PH		
 mta	PH		
 mtw	PH		
-nan	PH		
 obk	PH		
 obo	PH		
-onn	PH		
 pag	PH		
-pam	PH		
+pam	PH	1	1
 plc	PH		
 plv	PH		
 plw	PH		
 prf	PH		
 prh	PH		
-psp	PH		
 pwm	PH		
 rbk	PH		
 rbl	PH		
@@ -7862,7 +7852,6 @@ slm	PH
 smk	PH		
 sml	PH		
 snl	PH		
-spa	PH	0	0
 srg	PH		
 srv	PH		
 ssb	PH		
@@ -7885,26 +7874,37 @@ tsg	PH
 twb	PH		
 ubl	PH		
 vbk	PH		
-war	PH		
+war	PH	1	1
 xnn	PH		
 xsb	PH		
 yka	PH		
 yog	PH		
+onn	PH		
+cbk	PH		
+eng	PH	0	0
+spa	PH	0	0
+kor	PH		
+psp	PH		
+nan	PH		
 zho	PH	0	0
+ays	PH		
+ayy	PH		
+dyg	PH		
+ktq	PH		
+jog	PK		
+lrk	PK		
+bsk	PK		
+brh	PK	1	1
 aeq	PK		
-bal	PK		
+bal	PK	1	1
 bcc	PK		
-bdz	PK		
 ben	PK		
-bft	PK		
 bgn	PK		
 bgp	PK		
 bgq	PK		
 bhd	PK		
 bhe	PK		
-brh	PK		
 bsh	PK		
-bsk	PK		
 btv	PK		
 clh	PK		
 deh	PK		
@@ -7924,11 +7924,9 @@ gwf	PK
 gwt	PK		
 haz	PK		
 hnd	PK		
-hno	PK		
-jda	PK		
+hno	PK	1	1
 jdg	PK		
 jnd	PK		
-jog	PK		
 kas	PK		
 kbu	PK		
 kfr	PK		
@@ -7937,7 +7935,6 @@ kls	PK
 kvx	PK		
 kxp	PK		
 lah	PK	1	1
-lrk	PK		
 lss	PK		
 mby	PK		
 mki	PK		
@@ -7952,12 +7949,10 @@ pbt	PK
 pbu	PK		
 pgd	PK		
 phl	PK		
-phr	PK		
-pks	PK		
+phr	PK	1	1
 plk	PK		
 pnb	PK		
 prs	PK		
-prx	PK		
 pst	PK		
 pus	PK	1	1
 raj	PK		
@@ -7968,7 +7963,6 @@ sdg	PK
 shd	PK		
 skr	PK	1	1
 snd	PK	1	1
-spt	PK		
 ssi	PK		
 tgk	PK		
 trw	PK		
@@ -7980,50 +7974,50 @@ wbl	PK
 wne	PK		
 wtm	PK		
 xhe	PK		
-xiv	PK		
 xka	PK		
 xvi	PK		
 ydg	PK		
+pks	PK		
+bft	PK		
+jda	PK		
+prx	PK		
+spt	PK		
 zau	PK		
+bdz	PK		
+xiv	PK		
 aar	PL	0	0
-abk	PL	0	0
-ach	PL	0	0
-ady	PL		
 ara	PL	0	0
+heb	PL	0	1
+tur	PL	0	0
+vie	PL	0	0
+abk	PL	0	0
+ady	PL		
+kat	PL		
 bel	PL		
 bul	PL		
 cat	PL		
 ces	PL		
-che	PL	0	0
 csb	PL		
 dan	PL		
-deu	PL		
+deu	PL	1	1
 ell	PL		
 eng	PL	0	0
-fin	PL	0	0
 fra	PL		
 gle	PL		
 hbs	PL		
-heb	PL	0	1
 hin	PL		
 hrv	PL		
-hun	PL	0	0
 hye	PL		
 isl	PL		
 ita	PL		
-jpn	PL	0	0
-kat	PL		
-kor	PL	0	0
 lit	PL		
 mkd	PL		
-mon	PL	0	0
 nds	PL		
 nld	PL		
 nor	PL		
 pol	PL	1	1
 por	PL		
 prg	PL		
-pso	PL	1	0
 rml	PL		
 rom	PL	0	1
 ron	PL	0	0
@@ -8035,25 +8029,31 @@ slk	PL
 spa	PL	0	0
 sqi	PL		
 srp	PL		
-swa	PL	0	0
 swe	PL		
 szl	PL		
-tur	PL	0	0
 ukr	PL		
-vie	PL	0	0
 vls	PL		
 wym	PL		
 xgl	PL		
 xsv	PL		
 yid	PL	1	1
+jpn	PL	0	0
+kor	PL	0	0
+mon	PL	0	0
+che	PL	0	0
+swa	PL	0	0
+ach	PL	0	0
+pso	PL	1	0
 zho	PL	0	0
+fin	PL	0	0
+hun	PL	0	0
 eng	PM	0	0
 fra	PM	0	0
 eng	PN	0	0
 eng	PR	0	0
 fra	PR	0	0
-psl	PR	1	0
 spa	PR	0	0
+psl	PR	1	0
 tnq	PR	1	1
 apc	PS	1	1
 ara	PS	0	1
@@ -8065,59 +8065,59 @@ fra	PT
 glg	PT		
 mwl	PT		
 por	PT	1	1
-psr	PT		
 spa	PT	0	0
+psr	PT	1	0
 txr	PT		
 cal	PW	1	1
-eng	PW	0	0
 fil	PW	0	0
-jpn	PW		
 pau	PW		
 sov	PW		
 tox	PW		
+eng	PW	0	0
+jpn	PW		
 zho	PW	0	0
-aqt	PY		
-ayo	PY		
-cag	PY		
-ceg	PY		
 deu	PY		
+fra	PY		
+spa	PY	0	0
+aqt	PY		
 enl	PY		
 enx	PY		
-fra	PY		
-grn	PY		
-gug	PY		
-guq	PY		
 gva	PY		
-mca	PY		
-nhd	PY		
-pta	PY		
-pys	PY		
-spa	PY	0	0
 spn	PY		
 tmf	PY		
+cag	PY		
+mca	PY		
+pys	PY	1	0
+grn	PY	1	1
+gug	PY		
+guq	PY		
+nhd	PY		
+pta	PY		
 tpj	PY		
+ayo	PY	1	1
+ceg	PY	1	1
 afb	QA	1	1
 ara	QA	1	1
+mal	QA		
 fas	QA	0	1
 fra	QA		
-mal	QA		
+tam	RE		
 fra	RE		
 rcf	RE		
-tam	RE		
+tat	RO	0	1
+tur	RO	0	1
 bul	RO		
 ces	RO		
 deu	RO		
 ell	RO		
 eng	RO	0	0
-fra	RO		
+fra	RO	0	0
 hbs	RO		
 hrv	RO		
-hun	RO		
 hye	RO		
 ita	RO		
 mkd	RO		
 pol	RO		
-rms	RO		
 rmy	RO		
 rom	RO	0	1
 ron	RO	1	1
@@ -8128,17 +8128,16 @@ slk	RO
 spa	RO	0	0
 sqi	RO		
 srp	RO		
-tat	RO	0	1
-tur	RO	0	1
 ukr	RO		
 xdc	RO		
 yid	RO		
+rms	RO	1	0
+hun	RO		
 bos	RS		
 cnr	RS		
 fra	RS		
-hbs	RS		
+hbs	RS	1	1
 hrv	RS		
-hun	RS		
 rmn	RS		
 rom	RS	0	1
 ron	RS	0	1
@@ -8148,362 +8147,364 @@ rue	RS
 rup	RS		
 slk	RS		
 sqi	RS		
-srp	RS		
+srp	RS	1	1
 ukr	RS		
-abk	RU	1	1
-abq	RU		
-ady	RU		
-afr	RU	0	0
-agx	RU		
+hun	RS		
 aii	RU	0	0
-ain	RU	1	1
-aka	RU	0	0
-akv	RU		
-ale	RU		
-alr	RU		
-alt	RU	1	1
 amh	RU	0	0
-ani	RU		
-anp	RU		
-aqc	RU		
 ara	RU	0	1
-asm	RU		
+cop	RU	0	0
+egy	RU	0	0
+hau	RU	0	0
+hbo	RU	0	0
+heb	RU	0	1
+mlt	RU	0	0
+orm	RU	0	0
+som	RU	0	0
+syr	RU	0	1
+tig	RU	0	0
+tir	RU	0	0
+zgh	RU	0	0
+ain	RU	1	1
+alt	RU	1	1
 atv	RU	1	1
-ava	RU		
-ave	RU		
-aym	RU		
 aze	RU	1	1
 azj	RU	1	1
 bak	RU	1	1
-bal	RU		
-bam	RU		
-ban	RU	0	0
-bca	RU		
-bci	RU		
-bdk	RU		
-bel	RU		
-bem	RU		
-ben	RU		
-bho	RU		
-bin	RU		
-bis	RU		
-bod	RU		
-bph	RU		
-bre	RU		
-bua	RU		
-bul	RU	0	0
-bxr	RU		
-byf	RU		
-car	RU		
-ces	RU	0	0
-che	RU		
-chm	RU		
-chu	RU	0	1
 chv	RU	1	1
-cji	RU		
 cjs	RU	1	1
-ckt	RU		
 clw	RU	1	1
-cop	RU	0	0
 crh	RU	1	1
-cym	RU	0	0
-dan	RU	0	0
-dar	RU		
-ddo	RU		
-deu	RU	0	0
-div	RU	0	0
 dlg	RU	1	1
-dng	RU		
-dta	RU		
-dyu	RU		
-egy	RU	0	0
-ell	RU	0	0
-enf	RU		
-eng	RU	0	0
-enh	RU		
-epo	RU	1	1
-ess	RU		
-est	RU		
-ett	RU		
-eus	RU		
 eve	RU	1	1
 evn	RU	1	1
-ewe	RU		
+gag	RU	0	0
+gld	RU	1	1
+jct	RU	0	0
+kaa	RU	0	1
+kaz	RU	1	1
+kdr	RU	1	1
+kim	RU	1	1
+kir	RU	0	1
+kjh	RU	1	1
+krc	RU	1	1
+kum	RU	1	1
+mnc	RU	1	1
+neg	RU	1	1
+nog	RU	1	1
+oaa	RU	1	1
+oac	RU	1	1
+ota	RU	0	1
+qwm	RU	1	1
+sah	RU	1	1
+slr	RU	0	1
+sty	RU	1	1
+tat	RU	1	1
+tuk	RU	0	0
+tur	RU	0	0
+tyv	RU	1	1
+ude	RU	1	1
+uig	RU	0	1
+ulc	RU	1	1
+uzb	RU	0	0
+xbo	RU	1	1
+zkh	RU	1	1
+zkz	RU	1	1
+xrm	RU	1	1
+epo	RU	1	1
+ido	RU	0	1
+ina	RU	0	1
+jbo	RU	0	1
+tok	RU	0	0
+khm	RU	0	0
+tou	RU	1	1
+vie	RU	0	0
+ban	RU	0	0
+haw	RU	0	0
+ind	RU		
+mlg	RU		
+mri	RU		
+msa	RU		
+nia	RU		
+rog	RU		
+smo	RU		
+tgl	RU		
+aym	RU		
+gcc	RU		
+eus	RU		
+yuu	RU		
+car	RU		
+abk	RU	1	1
+abq	RU		
+ady	RU		
+kat	RU		
+kbd	RU		
+lzz	RU		
+sva	RU		
+xmf	RU		
+quc	RU		
+yua	RU		
+alr	RU		
+ckt	RU		
+itl	RU		
+kpy	RU		
+krk	RU		
+kan	RU		
+mal	RU		
+tam	RU		
+tel	RU		
+ale	RU		
+ess	RU		
+ipk	RU		
+mud	RU		
+ynk	RU		
+ysr	RU		
+ett	RU		
+afr	RU	0	0
+anp	RU		
+asm	RU		
+ave	RU		
+bal	RU		
+bel	RU		
+ben	RU		
+bho	RU		
+bis	RU		
+bre	RU		
+bul	RU	0	0
+ces	RU	0	0
+chu	RU	0	1
+cym	RU	0	0
+dan	RU	0	0
+deu	RU	0	0
+div	RU	0	0
+ell	RU	0	0
+eng	RU	0	0
 fao	RU	0	0
 fas	RU	0	0
-fat	RU		
-fin	RU		
-fon	RU		
 fra	RU	0	0
 fry	RU	0	0
-ful	RU		
-gag	RU	0	0
-gcc	RU		
-gdo	RU		
-gin	RU		
-gld	RU	1	1
 gle	RU	0	0
 grc	RU	0	0
 gsw	RU	0	0
 guj	RU	0	0
 hat	RU	0	0
-hau	RU	0	0
-haw	RU	0	0
-hbo	RU	0	0
 hbs	RU	0	0
-heb	RU	0	1
 hin	RU	0	0
 hit	RU	0	0
-hni	RU		
 hns	RU	0	0
-hun	RU		
-huz	RU		
 hye	RU		
-ibb	RU		
-ibo	RU		
-ido	RU	0	1
-ina	RU	0	1
-ind	RU		
-inh	RU		
-ipk	RU		
 isl	RU		
 ita	RU		
-itl	RU		
-izh	RU		
-jbo	RU	0	1
-jct	RU	0	0
-jpn	RU		
-kaa	RU	0	1
-kan	RU		
-kap	RU		
 kas	RU		
-kat	RU		
-kau	RU		
-kaz	RU	1	1
-kbd	RU		
-kca	RU		
-kdr	RU	1	1
 kea	RU		
-ket	RU		
-khm	RU	0	0
-khv	RU		
-kik	RU		
-kim	RU	1	1
-kin	RU		
-kir	RU	0	1
-kjh	RU	1	1
-kjj	RU		
-kmb	RU		
-koi	RU		
 kok	RU		
-kom	RU		
-kor	RU		
-kpe	RU		
-kpt	RU		
-kpv	RU		
-kpy	RU		
-krc	RU	1	1
 kri	RU		
-krk	RU		
-krl	RU		
-kry	RU		
-ktu	RU		
-kum	RU	1	1
 kur	RU		
-kva	RU		
 lad	RU		
 lah	RU		
-lao	RU		
 lat	RU		
 lav	RU		
-lbe	RU		
-lez	RU		
 lij	RU		
-lin	RU		
 lit	RU		
-liv	RU		
-loz	RU		
 ltz	RU		
-lud	RU		
-lug	RU		
-lun	RU		
-luo	RU		
-lzz	RU		
-mal	RU		
-man	RU		
 mar	RU		
-mas	RU		
-mdf	RU		
 mfe	RU		
-mhr	RU		
 mkd	RU		
-mlg	RU		
-mlq	RU		
-mlt	RU	0	0
-mnc	RU	1	1
-mni	RU		
-mns	RU		
-mon	RU		
-mos	RU		
-mri	RU		
-mrj	RU		
-msa	RU		
-mtm	RU		
-mud	RU		
-mya	RU		
-myv	RU		
-naq	RU		
-ndf	RU		
-neg	RU	1	1
 nep	RU		
-nia	RU		
-nio	RU		
-niv	RU		
-njo	RU		
 nld	RU		
-nog	RU	1	1
 non	RU		
 nor	RU		
-nya	RU		
-oaa	RU	1	1
-oac	RU	1	1
-ogo	RU		
-olo	RU		
-omk	RU		
 oos	RU		
-orm	RU	0	0
 orv	RU		
 oss	RU		
-ota	RU	0	1
 pan	RU		
 pnt	RU		
 pol	RU		
 por	RU		
 prs	RU		
 pus	RU		
-quc	RU		
-que	RU		
-qwm	RU	1	1
 raj	RU		
-rog	RU		
 rom	RU	0	1
 ron	RU	0	0
 rop	RU		
-rsl	RU		
-rts	RU		
 rue	RU		
 rus	RU	1	1
-rut	RU		
-sag	RU		
-sah	RU	1	1
 san	RU	0	0
 sco	RU		
-sel	RU		
 sgh	RU		
-sia	RU		
 sin	RU		
-sjd	RU		
-sjt	RU		
 slk	RU		
-slr	RU	0	1
 slv	RU		
-sme	RU		
-smo	RU		
-sna	RU		
 snd	RU		
-som	RU	0	0
-sot	RU		
 spa	RU	0	0
 sqi	RU		
 srp	RU		
-ssw	RU		
-sty	RU	1	1
-sus	RU		
-sux	RU		
-sva	RU		
-swa	RU	0	0
-swc	RU	0	0
 swe	RU		
-syr	RU	0	1
-tab	RU		
-tam	RU		
-tat	RU	1	1
-tel	RU		
 tgk	RU		
-tgl	RU		
-tha	RU		
-tig	RU	0	0
-tin	RU		
-tir	RU	0	0
-tkr	RU		
 tly	RU		
-tok	RU	0	0
-tou	RU	1	1
 tpi	RU		
-tsn	RU		
 ttt	RU		
-tuk	RU	0	0
-tur	RU	0	0
-tyv	RU	1	1
-ude	RU	1	1
-udi	RU		
-udm	RU		
-ugh	RU		
-uig	RU	0	1
 ukr	RU		
-ulc	RU	1	1
 urd	RU		
-uzb	RU	0	0
-vep	RU		
-vie	RU	0	0
 vls	RU		
-vot	RU		
 wbl	RU		
 wes	RU		
-wol	RU		
-xal	RU		
-xas	RU		
-xbo	RU	1	1
-xcv	RU		
-xdq	RU		
 xln	RU		
-xmf	RU		
-xpm	RU		
-xrm	RU	1	1
-xrn	RU		
 xsc	RU		
-xwo	RU		
 yah	RU		
 yai	RU		
 yid	RU		
-ykg	RU		
-ynk	RU		
+jpn	RU		
+naq	RU		
+kor	RU		
+bua	RU		
+bxr	RU		
+dta	RU		
+mon	RU		
+xal	RU		
+ndf	RU		
+agx	RU		
+akv	RU		
+ani	RU		
+aqc	RU		
+ava	RU		
+bdk	RU		
+bph	RU		
+che	RU		
+cji	RU		
+dar	RU		
+ddo	RU		
+gdo	RU		
+gin	RU		
+huz	RU		
+inh	RU		
+kap	RU		
+khv	RU		
+kjj	RU		
+kpt	RU		
+kry	RU		
+kva	RU		
+lbe	RU		
+lez	RU		
+rut	RU		
+tab	RU		
+tin	RU		
+tkr	RU		
+udi	RU		
+ugh	RU		
+xdq	RU		
+aka	RU	0	0
+bam	RU		
+bci	RU		
+bem	RU		
+bin	RU		
+byf	RU		
+dyu	RU		
+ewe	RU		
+fat	RU		
+fon	RU		
+ful	RU		
+ibb	RU		
+ibo	RU		
+kik	RU		
+kin	RU		
+kmb	RU		
+kpe	RU		
+ktu	RU		
+lin	RU		
+loz	RU		
+lug	RU		
+lun	RU		
+man	RU		
+mlq	RU		
+mos	RU		
+nya	RU		
+ogo	RU		
+sag	RU		
+sna	RU		
+sot	RU		
+ssw	RU		
+sus	RU		
+swa	RU	0	0
+swc	RU	0	0
+tsn	RU		
+wol	RU		
 yor	RU		
-yrk	RU		
-ysr	RU		
-yua	RU		
-yue	RU		
-yug	RU		
-yuu	RU		
-yux	RU		
-zgh	RU	0	0
-zho	RU	0	1
-zkh	RU	1	1
-zko	RU		
-zkz	RU	1	1
 zul	RU		
+luo	RU		
+mas	RU		
+niv	RU		
+kau	RU		
+rsl	RU	1	0
+bca	RU		
+bod	RU		
+dng	RU		
+hni	RU		
+mni	RU		
+mya	RU		
+njo	RU		
+yue	RU		
+zho	RU	0	1
+que	RU		
+sux	RU		
+lao	RU		
+tha	RU		
+chm	RU		
+enf	RU		
+enh	RU		
+est	RU		
+fin	RU		
+hun	RU		
+izh	RU		
+kca	RU		
+koi	RU		
+kom	RU		
+kpv	RU		
+krl	RU		
+liv	RU		
+lud	RU		
+mdf	RU		
+mhr	RU		
+mns	RU		
+mrj	RU		
+mtm	RU		
+myv	RU		
+nio	RU		
+olo	RU		
+rts	RU		
+sel	RU		
+sia	RU		
+sjd	RU		
+sjt	RU		
+sme	RU		
+udm	RU		
+vep	RU		
+vot	RU		
+xas	RU		
+yrk	RU		
+xwo	RU		
+ket	RU	1	1
+xpm	RU	1	1
+xrn	RU	1	1
+yug	RU	1	1
+zko	RU	1	1
+omk	RU	1	1
+xcv	RU	1	1
+ykg	RU	1	1
+yux	RU	1	1
 eng	RW	0	0
 fra	RW		
 kin	RW	1	1
-rsn	RW		
 swa	RW	0	0
+rsn	RW	1	0
 acw	SA	1	1
 ara	SA	1	1
 arb	SA	1	1
 ars	SA	1	1
 fif	SA	1	1
-sdl	SA		
 xna	SA	1	1
+sdl	SA	1	1
+rsi	SB	1	0
 agw	SB	1	1
 aia	SB	1	1
 alu	SB	1	1
@@ -8512,14 +8513,12 @@ aua	SB	1	1
 aud	SB	1	1
 baa	SB	1	1
 bgt	SB	1	1
-blb	SB		
 blp	SB	1	1
 brr	SB	1	1
 bvc	SB	1	1
 bvd	SB	1	1
 bxa	SB	1	1
 dor	SB	1	1
-eng	SB	0	0
 faf	SB	1	1
 far	SB	1	1
 gga	SB	1	1
@@ -8540,7 +8539,6 @@ lgl	SB
 lgr	SB		
 lgu	SB		
 llu	SB		
-lvk	SB		
 mln	SB		
 mlu	SB		
 mnv	SB		
@@ -8557,127 +8555,129 @@ npx	SB
 ntu	SB		
 ojv	SB		
 ora	SB		
-pis	SB		
 piv	SB		
 rri	SB		
-rsi	SB	1	1
 rug	SB		
 sbb	SB		
 sky	SB		
 stn	SB		
-svs	SB		
-szs	SB		
 tbe	SB		
 tkp	SB		
 tkw	SB		
 tlr	SB		
 tnx	SB		
-tqu	SB		
 tva	SB		
 uge	SB		
 utp	SB		
 vnk	SB		
 vrs	SB		
+blb	SB		
+eng	SB	0	0
+pis	SB		
+lvk	SB		
+svs	SB		
+szs	SB	1	0
+tqu	SB		
 crs	SC		
 eng	SC	0	0
 fra	SC		
-lsw	SC		
-acz	SD		
-aft	SD		
-aja	SD		
+lsw	SC	1	0
 apd	SD	1	1
 ara	SD	0	1
-atu	SD		
-bdi	SD		
 bej	SD	1	1
+hau	SD	0	1
+gza	SD		
+byg	SD		
+daj	SD		
+liu	SD		
+shj	SD		
+soh	SD		
+tbi	SD		
+zmo	SD		
+fvr	SD		
+fuj	SD		
+hbn	SD		
+kib	SD		
+lof	SD		
+lro	SD		
+mor	SD		
+otr	SD		
+shw	SD		
+tic	SD		
+wrn	SD		
+eng	SD	0	0
+kcp	SD		
+kec	SD		
+kgo	SD		
+tbr	SD		
+tey	SD		
+xtc	SD		
+kcr	SD		
+tms	SD		
+udu	SD		
+xom	SD		
+aja	SD		
+mls	SD		
+acz	SD		
+dec	SD		
+eli	SD		
+jle	SD		
+lmd	SD		
+taz	SD		
+tlo	SD		
+tqr	SD		
+laf	SD		
 bot	SD		
 brk	SD		
-byg	SD		
-byt	SD		
-daj	SD		
-dec	SD		
 dgl	SD		
 dil	SD		
 drb	SD		
 elh	SD		
-eli	SD		
-eng	SD	0	0
 fia	SD		
-fuj	SD		
-fvr	SD		
 ghl	SD		
 gly	SD		
-gza	SD		
-hau	SD	0	1
-hbn	SD		
-jle	SD		
-jum	SD		
-kcp	SD		
-kcr	SD		
 kdu	SD		
-kec	SD		
-keg	SD		
-kgo	SD		
-kib	SD		
 kko	SD		
-laf	SD		
-liu	SD		
-lmd	SD		
-lof	SD		
-lro	SD		
 mei	SD		
-mls	SD		
-mor	SD		
-nyi	SD		
 onw	SD		
-otr	SD		
-ras	SD		
-shj	SD		
-shw	SD		
-soh	SD		
-tag	SD		
-taz	SD		
-tbi	SD		
-tbr	SD		
-teq	SD		
-tey	SD		
-tic	SD		
-tlo	SD		
-tms	SD		
-tqr	SD		
-udu	SD		
 wll	SD		
-wrn	SD		
 xmr	SD		
-xom	SD		
-xtc	SD		
+atu	SD		
+bdi	SD		
+jum	SD		
+aft	SD		
+nyi	SD		
+ras	SD		
+tag	SD		
+byt	SD		
 zag	SD		
-zmo	SD		
-eng	SE	0	0
-fin	SE		
-fit	SE		
-fra	SE		
+keg	SD		
+teq	SD		
 ina	SE	0	1
+eng	SE	0	0
+fra	SE		
 non	SE		
 ovd	SE		
-rmu	SE		
 rom	SE	0	0
+swe	SE	1	1
+yid	SE	0	0
+swl	SE	1	1
+rmu	SE		
+fin	SE		
+fit	SE		
 sje	SE		
 sju	SE		
 sma	SE		
 sme	SE		
 smj	SE		
-swe	SE	1	1
-swl	SE		
-yid	SE		
-eng	SG	0	0
-lah	SG	0	0
-mal	SG	0	0
 mbf	SG	0	0
 msa	SG	1	1
-pan	SG	0	0
 sls	SG	1	0
+mal	SG	0	0
 tam	SG	0	0
+eng	SG	0	0
+lah	SG	0	0
+pan	SG	0	0
 zho	SG	0	0
 eng	SH	0	0
 bos	SI		
@@ -8687,7 +8687,6 @@ fra	SI
 fur	SI		
 hbs	SI		
 hrv	SI		
-hun	SI		
 ita	SI		
 nrc	SI		
 rom	SI	0	1
@@ -8695,41 +8694,44 @@ slv	SI
 sqi	SI		
 srp	SI		
 vec	SI		
+hun	SI		
 nob	SJ		
 nor	SJ		
 rus	SJ	0	0
-ces	SK		
+ces	SK	0	1
 deu	SK		
 eng	SK	0	0
 fra	SK		
-hun	SK		
 pol	SK		
 rmc	SK		
 rom	SK	0	1
 rsk	SK		
 rue	SK		
-slk	SK		
-svk	SK		
+slk	SK	1	1
 ukr	SK		
+svk	SK		
+hun	SK		
+eng	SL	0	0
+kri	SL	1	1
 bmf	SL		
 bun	SL		
 buy	SL		
-eng	SL	0	0
 ful	SL		
 knk	SL		
 kno	SL		
-kri	SL		
 lia	SL		
 lok	SL		
-men	SL		
-sgx	SL		
-tem	SL		
+men	SL	1	1
+tem	SL	1	1
+sgx	SL	1	0
 epo	SM	0	0
 ita	SM		
 ara	SN	0	1
+mey	SN	1	1
+bcb	SN		
+fra	SN	0	0
 bab	SN		
 bam	SN		
-bcb	SN		
 bcz	SN		
 bda	SN		
 bjt	SN		
@@ -8741,9 +8743,8 @@ csk	SN
 cwt	SN		
 dyo	SN		
 fap	SN		
-fra	SN		
-fuc	SN		
-ful	SN		
+fuc	SN	1	1
+ful	SN	1	1
 gsl	SN		
 hhr	SN		
 jad	SN		
@@ -8751,7 +8752,6 @@ knf	SN
 krx	SN		
 lebu1234	SN		
 man	SN		
-mey	SN	1	1
 mfv	SN		
 mlo	SN		
 mlq	SN		
@@ -8772,99 +8772,99 @@ gex	SO	1	1
 jii	SO	1	1
 orm	SO	1	1
 som	SO	1	1
-swa	SO	0	1
 tqq	SO	1	1
-xma	SO		
 ymm	SO	1	1
-ako	SR		
-arw	SR	1	1
-djk	SR		
-fra	SR		
-hmn	SR		
-hnj	SR		
-hns	SR		
+swa	SO	0	1
+xma	SO		
 jvn	SR		
-kww	SR		
-njt	SR		
-nld	SR		
 sik	SR		
-srm	SR		
-srn	SR		
+ako	SR		
 tri	SR		
 way	SR		
+njt	SR		
+hmn	SR		
+hnj	SR		
+djk	SR		
+fra	SR		
+hns	SR		
+kww	SR		
+nld	SR		
+srm	SR		
+srn	SR		
 zho	SR	0	0
-ach	SS		
-aja	SS		
+arw	SR	1	1
 ara	SS	0	0
-atu	SS		
+pga	SS	1	1
+njl	SS		
+xel	SS		
+eng	SS	0	0
+aja	SS		
+krs	SS		
+bdj	SS		
+bvi	SS		
+fer	SS		
+hom	SS		
+idr	SS		
+muh	SS		
+myj	SS		
+ndz	SS		
+tgy	SS		
 avu	SS		
 bdh	SS		
-bdj	SS		
 bex	SS		
-bfa	SS		
 blm	SS		
 bot	SS		
-bvi	SS		
+gbn	SS		
+kbo	SS		
+lul	SS		
+mgc	SS		
+mgd	SS		
+mwu	SS		
+nwm	SS		
+ach	SS		
+atu	SS		
+bfa	SS		
 bxb	SS		
 ddd	SS		
 dib	SS		
-did	SS		
 dik	SS		
 din	SS		
 dip	SS		
 diw	SS		
 dks	SS		
-eng	SS	0	0
-fer	SS		
-gbn	SS		
-hom	SS		
-idr	SS		
 imt	SS		
-kbo	SS		
-koe	SS		
-krs	SS		
 lgo	SS		
 lkr	SS		
 lky	SS		
-loh	SS		
 lot	SS		
 lpx	SS		
 lqr	SS		
-lul	SS		
 lwo	SS		
 mfz	SS		
-mgc	SS		
-mgd	SS		
 mqu	SS		
-muh	SS		
-mur	SS		
-mwu	SS		
-myj	SS		
-ndz	SS		
-njl	SS		
 nus	SS		
-nwm	SS		
 oie	SS		
-pga	SS	1	1
 shk	SS		
-tex	SS		
-tgy	SS		
 thu	SS		
 toq	SS		
 ukv	SS		
-xel	SS		
+did	SS		
+koe	SS		
+loh	SS		
+mur	SS		
+tex	SS		
 aoa	ST		
 cri	ST		
 fra	ST		
 por	ST		
 pre	ST		
-ase	SV	0	0
-ccr	SV		
-csr	SV		
-esn	SV		
-len	SV		
-ppl	SV		
 spa	SV	0	0
+len	SV		
+ccr	SV		
+ppl	SV		
+ase	SV	0	0
+csr	SV	0	0
+esn	SV	1	0
 eng	SX	0	0
 nld	SX		
 spa	SX	0	0
@@ -8874,10 +8874,6 @@ apc	SY	1	1
 ara	SY	0	1
 arc	SY	1	1
 ayp	SY	1	1
-fra	SY		
-hye	SY		
-kmr	SY		
-kur	SY		
 lhs	SY	1	1
 oar	SY	1	1
 syc	SY	1	1
@@ -8886,6 +8882,10 @@ tru	SY	1	1
 uga	SY	1	1
 xeb	SY	1	1
 xhu	SY		
+fra	SY		
+hye	SY		
+kmr	SY		
+kur	SY		
 eng	SZ	0	0
 ssw	SZ		
 tso	SZ		
@@ -8893,130 +8893,131 @@ zul	SZ
 eng	TA	0	0
 eng	TC	0	0
 tch	TC		
-amj	TD		
 ara	TD	0	1
 arb	TD	0	1
-bbz	TD		
 bdm	TD	1	1
-bdo	TD		
-bes	TD		
 bid	TD	1	1
-bjv	TD		
-bmi	TD		
-bso	TD		
 btf	TD	1	1
-bub	TD		
 bva	TD	1	1
 bvf	TD	1	1
-bvo	TD		
-bxv	TD		
-cds	TD		
 ckq	TD	1	1
 daa	TD	1	1
-dai	TD		
-dau	TD		
-djc	TD		
-dsi	TD		
-dzg	TD		
-fgr	TD		
-fni	TD		
-fra	TD		
-fub	TD		
-fui	TD		
-ful	TD		
 gab	TD	1	1
 gdk	TD	1	1
-gdm	TD		
 gid	TD	1	1
-glc	TD		
-glj	TD		
-glu	TD		
-goy	TD		
-gqr	TD		
-gvl	TD		
 hau	TD	0	1
 hed	TD	1	1
-hor	TD		
 jeu	TD	1	1
-jyy	TD		
-kau	TD		
-kbl	TD		
 ker	TD	1	1
-kia	TD		
-kie	TD		
-klf	TD		
-knc	TD		
-kou	TD		
 kqp	TD	1	1
-ksp	TD		
-kth	TD		
 kvf	TD	1	1
 kvi	TD	1	1
-kwg	TD		
-kwv	TD		
-kxj	TD		
-kyq	TD		
-lap	TD		
 lln	TD	1	1
 lme	TD	1	1
 mcn	TD	1	1
 mcw	TD	1	1
-mde	TD		
-mdg	TD		
 mes	TD	1	1
-mgb	TD		
-mge	TD		
 mje	TD	1	1
 mlj	TD	1	1
-mls	TD		
 mmy	TD	1	1
-mne	TD		
 mou	TD	1	1
 moz	TD	1	1
 mpg	TD	1	1
 mpk	TD	1	1
 mse	TD	1	1
-mua	TD		
 mub	TD	1	1
 mug	TD	1	1
 muj	TD	1	1
 mvh	TD	1	1
-mvu	TD		
-mwm	TD		
-myb	TD		
 ndm	TD	1	1
-nie	TD		
-nmc	TD		
 nnc	TD	1	1
 nnn	TD	1	1
-noy	TD		
-nzy	TD		
-rou	TD		
 saa	TD	1	1
-sba	TD		
-sbj	TD		
 shu	TD	1	1
-sjg	TD		
 sok	TD	1	1
 sor	TD	1	1
 swy	TD	1	1
-sys	TD		
 tax	TD	1	1
-tma	TD		
 tmc	TD	1	1
 tng	TD	1	1
 trj	TD	1	1
+ubi	TD	1	1
+zim	TD	1	1
+zrn	TD	1	1
+bbz	TD		
+bso	TD		
+dau	TD		
+djc	TD		
+amj	TD		
+fra	TD	0	0
+vkj	TD		
+gdm	TD		
+kie	TD		
+klf	TD		
+kth	TD		
+mde	TD		
+mdg	TD		
+mls	TD		
+mvu	TD		
+rou	TD		
+sbj	TD		
+bes	TD		
+bub	TD		
+bvo	TD		
+dai	TD		
+fni	TD		
+fub	TD		
+fui	TD		
+ful	TD		
+glc	TD		
+glj	TD		
+goy	TD		
+kia	TD		
+kou	TD		
+mua	TD		
+nie	TD		
+noy	TD		
+nzy	TD		
 tug	TD		
 tui	TD		
-tuq	TD		
-ubi	TD	1	1
-vkj	TD		
 xuo	TD		
-zag	TD		
-zim	TD	1	1
 zna	TD		
-zrn	TD	1	1
+bdo	TD		
+bjv	TD		
+bmi	TD		
+bxv	TD		
+dsi	TD		
+fgr	TD		
+glu	TD		
+gqr	TD		
+gvl	TD		
+hor	TD		
+jyy	TD		
+ksp	TD		
+kwg	TD		
+kwv	TD		
+kxj	TD		
+kyq	TD		
+lap	TD		
+mge	TD		
+mne	TD		
+mwm	TD		
+myb	TD		
+nmc	TD		
+sba	TD		
+sys	TD		
+dzg	TD		
+kau	TD		
+kbl	TD		
+knc	TD		
+tuq	TD		
+zag	TD		
+cds	TD	1	0
+mgb	TD		
+sjg	TD		
+tma	TD		
 fra	TF		
+fra	TG	1	1
 ade	TG		
 adq	TG		
 ahl	TG		
@@ -9026,7 +9027,6 @@ blo	TG
 bqg	TG		
 bud	TG		
 ewe	TG		
-fra	TG		
 gej	TG		
 gng	TG		
 ife	TG		
@@ -9040,83 +9040,80 @@ mfq	TG
 nmz	TG		
 wci	TG		
 wud	TG		
-ahk	TH		
-bfk	TH		
+shy	TH	0	0
 brv	TH	1	1
-bzi	TH		
 cbn	TH	1	1
 cog	TH	1	1
-csd	TH		
-eng	TH	0	0
-fra	TH		
-hmn	TH		
-hnj	TH		
-jpn	TH		
 kdt	TH	1	1
 kjg	TH	0	1
+kxm	TH	1	1
+lcp	TH	1	1
+lwl	TH	1	1
+mnw	TH	1	1
+mra	TH	1	1
+nyl	TH	1	1
+prt	TH	1	1
+scq	TH	1	1
+thm	TH	1	1
+tnz	TH	1	1
+meo	TH		
+mfa	TH	1	1
+mkm	TH		
+msa	TH		
+urk	TH		
+zlm	TH		
+hmn	TH		
+hnj	TH		
+eng	TH	0	0
+fra	TH		
+pli	TH		
+jpn	TH		
+yao	TH		
+bfk	TH	1	1
+csd	TH		
+tsq	TH	1	0
+ahk	TH		
+bzi	TH		
 kjt	TH		
 ksw	TH		
-kxm	TH	1	1
-lao	TH		
-lcp	TH	1	1
 lhu	TH		
 lis	TH		
-lwl	TH	1	1
-meo	TH		
-mfa	TH		
-mkm	TH		
-mnw	TH	1	1
 mpz	TH		
-mra	TH	1	1
-msa	TH		
 mya	TH		
-nod	TH		
-nyl	TH	1	1
+pww	TH		
+ugo	TH		
+zho	TH	0	0
+lao	TH		
+nod	TH	1	1
 nyw	TH		
 pht	TH		
 phu	TH		
-pli	TH		
-prt	TH	1	1
-pww	TH		
-scq	TH	1	1
 shn	TH		
-shy	TH	0	0
 skb	TH		
 soa	TH		
-sou	TH		
+sou	TH	1	1
 tha	TH	1	1
-thm	TH	1	1
-tnz	TH	1	1
-tsq	TH		
 tts	TH	1	1
-ugo	TH		
-urk	TH		
-yao	TH		
 yno	TH		
 yoy	TH		
-zho	TH	0	0
-zlm	TH		
 abh	TJ	1	1
 ara	TJ	0	1
-fas	TJ	0	1
 kir	TJ	1	1
+uzb	TJ	1	1
+fas	TJ	0	1
 paq	TJ		
 rus	TJ	0	0
 sgh	TJ		
 tgk	TJ	1	1
-uzb	TJ	1	1
 yah	TJ		
 yai	TJ		
-eng	TK	0	0
 gil	TK	0	0
 smo	TK		
 tkl	TK		
 tvl	TK		
-adb	TL		
+eng	TK	0	0
 aoz	TL	1	1
-bfn	TL		
 bkx	TL	1	1
-ddg	TL		
 gal	TL	1	1
 hbu	TL	1	1
 idt	TL		
@@ -9127,109 +9124,109 @@ lka	TL
 llg	TL		
 lva	TL		
 mgm	TL		
-mjb	TL		
-mkz	TL		
 nil	TL		
 nxa	TL		
-por	TL		
 tdt	TL		
 tet	TL		
 tkd	TL		
-tvy	TL		
 wlh	TL		
 wmh	TL		
+adb	TL		
+por	TL		
+tvy	TL		
+bfn	TL		
+ddg	TL		
+mjb	TL		
+mkz	TL		
 chg	TM	1	1
 kaa	TM	1	1
-kur	TM		
-rus	TM	0	0
 tuk	TM	1	1
 uzb	TM	1	1
+kur	TM		
+rus	TM	0	0
 aeb	TN	1	1
 ara	TN	0	1
 arb	TN	0	1
-fra	TN		
 jbn	TN	1	1
-nxm	TN		
-pml	TN		
 sds	TN	1	1
 shy	TN	1	1
-tse	TN		
 xpu	TN	1	1
-eng	TO	0	0
+pml	TN		
+fra	TN	0	0
+tse	TN	1	0
+nxm	TN		
 nkp	TO		
 num	TO		
 ton	TO		
-abk	TR	0	0
-ady	TR		
+eng	TO	0	0
 apc	TR	1	1
 ara	TR	0	1
 ayp	TR	1	1
-aze	TR	1	1
-bgx	TR	1	1
-bul	TR		
-diq	TR		
-dsz	TR		
-ell	TR		
-eng	TR	0	0
-hit	TR		
-hlu	TR		
 hrt	TR	1	1
-htx	TR		
-hye	TR		
-imy	TR		
-kaa	TR	0	1
-kat	TR		
-kaz	TR	0	1
-kbd	TR		
-kir	TR	0	1
-kiu	TR		
-kmr	TR		
-kur	TR		
-lzz	TR		
-nei	TR		
-oht	TR		
-ota	TR	1	1
-plq	TR		
-pnt	TR		
-sqi	TR		
-srp	TR		
 syc	TR	1	1
 tru	TR	1	1
-tsm	TR		
+aze	TR	1	1
+bgx	TR	1	1
+kaa	TR	0	1
+kaz	TR	0	1
+kir	TR	0	1
+ota	TR	1	1
 tur	TR	1	1
-txh	TR		
-uby	TR		
 uzb	TR	0	0
-xcr	TR		
-xga	TR		
-xht	TR		
-xlc	TR		
-xld	TR		
-xpg	TR		
-xps	TR		
-xsd	TR		
-xur	TR		
-yms	TR		
-zsk	TR		
-zza	TR		
+abk	TR	0	0
+ady	TR	0	0
+kat	TR	1	1
+kbd	TR	0	0
+lzz	TR	1	1
+uby	TR	0	0
+xht	TR	1	1
+xur	TR	1	1
+bul	TR	1	1
+diq	TR	1	1
+ell	TR	1	1
+eng	TR	0	0
+hit	TR	1	1
+hlu	TR	1	1
+htx	TR	1	1
+hye	TR	1	1
+imy	TR	1	1
+kiu	TR	1	1
+kmr	TR	1	1
+kur	TR	1	1
+nei	TR	1	1
+oht	TR	1	1
+plq	TR	1	1
+pnt	TR	1	1
+sqi	TR	0	0
+srp	TR	0	0
+txh	TR	1	1
+xcr	TR	1	1
+xga	TR	1	1
+xlc	TR	1	1
+xld	TR	1	1
+xpg	TR	1	1
+xps	TR	1	1
+xsd	TR	1	1
+yms	TR	1	1
+zza	TR	1	1
+zsk	TR	1	1
+dsz	TR	1	1
+tsm	TR	1	1
 eng	TT	0	0
-lst	TT		
 spa	TT	0	0
-tgh	TT		
-trf	TT		
+tgh	TT	1	0
+trf	TT	1	0
+lst	TT	1	0
+tvl	TV	1	1
 eng	TV	0	0
-tvl	TV		
 ami	TW	1	1
 bnn	TW	1	1
 byq	TW	1	1
 bzg	TW	1	1
 ckv	TW	1	1
-cmn	TW	0	0
 dru	TW	1	1
 fos	TW	1	1
-hak	TW		
 kae	TW		
-nan	TW	0	0
 ppu	TW		
 pwn	TW		
 pyu	TW		
@@ -9240,18 +9237,32 @@ szy	TW
 tao	TW		
 tay	TW		
 trv	TW		
-tss	TW		
 tsu	TW		
 tvx	TW		
 uon	TW		
 xnb	TW		
 xsy	TW		
 ycr	TW		
+tss	TW	1	0
+cmn	TW	0	0
+hak	TW	0	0
+nan	TW	0	0
 zho	TW	0	0
 aas	TZ	1	1
+bds	TZ	1	1
+gow	TZ	1	1
+irk	TZ	1	1
+wbj	TZ	1	1
+wka	TZ	1	1
+kqh	TZ		
+njd	TZ		
+rui	TZ		
+eng	TZ	0	0
+guj	TZ		
+hts	TZ		
+sad	TZ		
 asa	TZ	1	1
 bdp	TZ		
-bds	TZ	1	1
 bez	TZ		
 bou	TZ		
 ccl	TZ	1	1
@@ -9262,21 +9273,16 @@ dig	TZ
 dne	TZ		
 doe	TZ		
 egm	TZ		
-eng	TZ	0	0
 fip	TZ		
 gmx	TZ		
 gog	TZ		
-gow	TZ	1	1
-guj	TZ		
 gwe	TZ		
 han	TZ		
 haq	TZ		
 hay	TZ		
 heh	TZ		
 hka	TZ		
-hts	TZ		
 ikz	TZ		
-irk	TZ	1	1
 isn	TZ		
 jit	TZ		
 jmc	TZ		
@@ -9288,13 +9294,10 @@ ked	TZ
 kiv	TZ		
 kiz	TZ		
 kki	TZ		
-kqh	TZ		
 ksb	TZ		
 kuj	TZ		
 kya	TZ		
 lag	TZ		
-luo	TZ		
-mas	TZ		
 mgh	TZ		
 mgq	TZ		
 mgs	TZ		
@@ -9315,11 +9318,9 @@ ngp	TZ
 ngq	TZ		
 nih	TZ		
 nim	TZ		
-njd	TZ		
 nkt	TZ		
 nnq	TZ		
 now	TZ		
-nsg	TZ		
 ntk	TZ		
 nww	TZ		
 nxi	TZ		
@@ -9334,10 +9335,8 @@ rim	TZ
 rnw	TZ		
 rof	TZ		
 ruf	TZ		
-rui	TZ		
 rwk	TZ		
 rwl	TZ		
-sad	TZ		
 sbk	TZ		
 sbm	TZ		
 sbp	TZ		
@@ -9345,20 +9344,16 @@ seg	TZ
 soz	TZ		
 ssc	TZ		
 suj	TZ		
-suk	TZ		
+suk	TZ	1	1
 suw	TZ		
 swa	TZ	1	1
 swh	TZ	1	1
-tcc	TZ		
 tny	TZ		
-tza	TZ		
 vid	TZ		
 vin	TZ		
 vun	TZ		
 wbh	TZ		
 wbi	TZ		
-wbj	TZ	1	1
-wka	TZ	1	1
 wtb	TZ		
 wun	TZ		
 xnj	TZ		
@@ -9370,150 +9365,369 @@ zak	TZ
 zga	TZ		
 zin	TZ		
 ziw	TZ		
-bel	UA		
-bul	UA		
-crh	UA	1	1
-deu	UA		
-ell	UA		
-fra	UA		
-gag	UA	1	1
-got	UA		
+luo	TZ		
+mas	TZ		
+nsg	TZ		
+tcc	TZ		
+tza	TZ		
 heb	UA	0	1
-hun	UA		
-hye	UA		
+crh	UA	1	1
+gag	UA	1	1
 jct	UA	1	1
 kdr	UA	1	1
-pol	UA		
-rom	UA	0	1
-ron	UA	0	1
-rue	UA		
-rus	UA	0	1
-slk	UA		
 tat	UA	0	1
 tur	UA	0	1
-ukl	UA		
-ukr	UA	1	1
 uum	UA	1	1
 xpc	UA	1	1
-ydd	UA		
-yid	UA		
-ach	UG		
-adh	UG		
-cgg	UG		
-eng	UG	0	0
-gwr	UG		
-hin	UG		
-ikx	UG		
+bel	UA	0	1
+bul	UA	0	1
+deu	UA	0	0
+ell	UA	0	1
+fra	UA	0	0
+got	UA		
+hye	UA	0	0
+pol	UA	1	1
+rom	UA	0	1
+ron	UA	0	1
+rue	UA	1	1
+rus	UA	0	1
+slk	UA	0	1
+ukr	UA	1	1
+ydd	UA	1	1
+yid	UA	1	1
+ukl	UA	1	0
+hun	UA	0	1
 kcn	UG	1	1
-kdi	UG		
-kdj	UG		
-keo	UG		
+eng	UG	0	0
+hin	UG	0	0
+ikx	UG		
+nyp	UG		
+teu	UG		
+cgg	UG	1	1
+gwr	UG		
 kin	UG		
-kln	UG		
 koo	UG		
-kpz	UG		
-laj	UG		
-lgg	UG		
 lke	UG		
 lsm	UG		
-lth	UG		
-luc	UG		
-lug	UG		
+lug	UG	1	1
 luy	UG		
-mhi	UG		
 myx	UG		
-ndp	UG		
 nuj	UG		
-nyn	UG		
+nyn	UG	1	1
 nyo	UG		
-nyp	UG		
 rub	UG		
 ruc	UG		
 rwm	UG		
-snm	UG		
-spy	UG		
 swa	UG	0	0
-teo	UG		
-teu	UG		
 tlj	UG		
 ttj	UG		
-ugn	UG		
-xog	UG		
+xog	UG	1	1
+lgg	UG		
+luc	UG		
+mhi	UG		
+ndp	UG		
+snm	UG		
+ach	UG		
+adh	UG		
+kdi	UG		
+kdj	UG		
+keo	UG		
+kln	UG		
+kpz	UG		
+laj	UG		
+lth	UG		
+spy	UG		
+teo	UG		
+ugn	UG	1	1
 eng	UM	0	0
+xad	US	1	1
+aii	US	0	0
+amh	US	0	0
+ara	US	0	0
+cld	US	0	0
+hau	US	0	0
+heb	US	0	0
+orm	US	0	0
+som	US	0	0
+syr	US	0	0
+tir	US	0	0
+zgh	US	0	0
+aes	US	1	1
+aze	US	0	0
+kaa	US	0	0
+kaz	US	0	0
+kir	US	0	0
+krc	US	0	0
+tuk	US	0	0
+tur	US	0	0
+uig	US	0	0
+arn	US	0	0
+epo	US	0	0
+ido	US	0	0
+jbo	US	1	1
+tlh	US	1	0
+aqp	US	1	1
+khm	US	0	0
+vie	US	0	0
+ace	US	0	0
+ban	US	0	0
+bik	US	0	0
+cal	US	0	0
+ceb	US	0	0
+cha	US	0	0
+chk	US	0	0
+cja	US	0	0
+fij	US	0	0
+fil	US	0	0
+gil	US	0	0
+haw	US	1	1
+ilo	US	0	0
+ind	US	0	0
+jav	US	0	0
+kos	US	0	0
+mah	US	0	0
+min	US	0	0
+mkj	US	0	0
+mlg	US	0	0
+mmm	US	0	0
+mri	US	0	0
+mrl	US	0	0
+mrq	US	0	0
+msa	US	0	0
+nau	US	0	0
+niu	US	0	0
+nkr	US	0	0
+pag	US	0	0
+pam	US	0	0
+pau	US	0	0
+pif	US	0	0
+pon	US	0	0
+rar	US	0	0
+smo	US	0	0
+sun	US	0	0
+tgl	US	0	0
+tkl	US	0	0
+ton	US	0	0
+uli	US	0	0
+woe	US	0	0
+yap	US	0	0
+aym	US		
+eus	US		
+ctc	US		
+unx	US		
+bsk	US		
+xcy	US		
+kjb	US		
+zap	US	0	0
+qui	US		
+xch	US		
+chh	US		
+chn	US		
+wac	US		
+ctm	US		
+boi	US		
+crz	US		
+inz	US		
+obi	US		
+puy	US		
+veo	US		
+xcw	US		
+coc	US		
+dih	US		
+mov	US		
+mrc	US		
+yuf	US		
+yum	US		
+xgr	US		
+csz	US		
+iml	US		
+xcn	US		
+dep	US		
+mod	US		
+gon	US	0	0
+kan	US	0	0
+mal	US	0	0
+tam	US	0	0
+tel	US	0	0
+ale	US		
+ems	US		
+esi	US		
+esk	US		
+ess	US		
+esu	US		
+ipk	US		
+hai	US		
+hmn	US	0	0
+hnj	US	0	0
+ium	US	0	0
+mww	US	0	0
+afr	US	0	0
+ask	US	0	0
+asm	US	0	0
+bal	US	0	0
+bel	US	0	0
+ben	US	0	0
+bho	US	0	0
+bos	US	0	0
+bre	US	0	0
+bul	US	0	0
+cat	US	0	0
+ces	US	0	0
+cym	US	0	0
+dan	US	0	0
+deu	US	0	0
+ell	US	0	0
+eng	US	0	0
+fao	US	0	0
+fas	US	0	0
+fra	US	0	0
+frc	US	0	0
+fry	US	0	0
+gla	US	0	0
+gle	US	0	0
+gsw	US	0	0
+guj	US	0	0
+gul	US	0	0
+hat	US	0	0
+hbs	US	0	0
+hin	US	0	0
+hrv	US	0	0
+hsb	US	0	0
+hwc	US	0	0
+hye	US	0	0
+hyw	US	0	0
+isl	US	0	0
+ita	US	0	0
+jam	US	0	0
+kas	US	0	0
+kea	US	0	0
+kok	US	0	0
+kri	US	0	0
+kur	US	0	0
+lad	US	0	0
+lah	US	0	0
+lav	US	0	0
+lit	US	0	0
+lou	US	0	0
+ltz	US	0	0
+mar	US	0	0
+mkd	US	0	0
+nep	US	0	0
+nld	US	0	0
+nor	US	0	0
+ori	US	0	0
+oss	US	0	0
+pan	US	0	0
+pap	US	0	0
+pdc	US	0	0
+pes	US	0	0
+pol	US	0	0
+por	US	0	0
+prs	US	0	0
+pus	US	0	0
+raj	US	0	0
+roh	US	0	0
+rom	US	0	0
+ron	US	0	0
+rus	US	0	0
+sin	US	0	0
+slk	US	0	0
+slv	US	0	0
+snd	US	0	0
+spa	US	0	0
+sqi	US	0	0
+srm	US	0	0
+srp	US	0	0
+swe	US	0	0
+tgk	US	0	0
+ukr	US	0	0
+urd	US	0	0
+ydd	US	0	0
+yid	US	0	0
+yih	US	0	0
+jpn	US	0	0
+kyl	US		
+nrt	US		
+sxk	US		
+zkk	US		
+kee	US		
+kjq	US		
+kio	US		
+pie	US		
+tew	US		
+tix	US		
+tow	US		
+twf	US		
+kla	US		
+kor	US	0	0
+kut	US		
+mjd	US		
+nmu	US		
+nsz	US		
+vmv	US		
+miq	US		
+csi	US		
+csm	US		
+css	US		
+cst	US		
+krb	US		
+lmw	US		
+mkq	US		
+nsq	US		
+pmw	US		
+skd	US		
+mbe	US		
+mon	US		
+akz	US		
+cho	US		
+cic	US		
+cku	US		
+mik	US		
+mus	US		
+xap	US		
+ncz	US		
+aka	US	0	0
+bam	US		
+ful	US		
+gaa	US		
+gej	US		
+gur	US		
+ibo	US		
+lug	US		
+mdd	US		
+mhm	US		
+sna	US		
+swa	US	0	0
+twi	US		
+wol	US		
+yor	US		
+mfz	US		
 aaq	US	1	1
 abe	US		
-ace	US	0	0
-acv	US		
-aes	US	1	1
-afr	US	0	0
 aht	US		
-aii	US	0	0
-aka	US	0	0
-akz	US		
-ale	US		
 alq	US		
-amh	US	0	0
 apj	US		
 apk	US		
 apl	US		
 apm	US		
 apw	US		
-aqp	US	1	1
-ara	US	0	0
 ari	US	1	1
-arn	US	0	0
 arp	US	1	1
-arw	US	0	0
-ase	US	1	0
-ask	US		
-asm	US		
 ats	US		
-atw	US		
-aym	US		
-aze	US	0	0
-bal	US		
-bam	US		
-ban	US	0	0
-bel	US		
-ben	US		
-bho	US		
-bik	US	0	0
 bla	US		
 bll	US		
-bod	US		
-boi	US		
-bos	US		
-bre	US		
-bsk	US		
-bul	US		
 cad	US		
-cal	US	0	0
-cat	US		
 cay	US		
 cea	US		
-ceb	US	0	0
-ces	US		
-cha	US	0	0
-chb	US		
 chc	US		
-chh	US		
-chk	US	0	0
 chl	US		
-chn	US		
-cho	US		
 chr	US		
 chy	US		
-cic	US		
 cid	US		
 ciw	US		
-cja	US	0	0
 cjh	US		
-cku	US		
-cld	US	0	0
 clm	US		
 cmm	US		
-cmn	US		
-coc	US		
 col	US		
 com	US		
 coq	US		
@@ -9523,204 +9737,48 @@ cre	US
 crg	US		
 cro	US		
 crr	US		
-crz	US		
-csi	US		
-csm	US		
-css	US		
-cst	US		
-csz	US		
-ctc	US		
-ctm	US		
 cup	US		
-cym	US		
 dak	US		
-dan	US		
 del	US		
-dep	US		
-deu	US		
-dih	US		
-ell	US		
-ems	US		
-eng	US	0	0
-epo	US	0	0
-esi	US		
-esk	US		
 esq	US		
-ess	US		
-est	US		
-esu	US		
 etc	US		
-eus	US		
 eya	US		
-fao	US		
-fas	US	0	0
-fij	US	0	0
-fil	US	0	0
-fin	US		
 fla	US		
-fra	US		
-frc	US		
-fry	US		
-ful	US		
-gaa	US		
 gce	US		
-gej	US		
-gil	US	0	0
-gla	US		
-gle	US		
-gon	US		
-grn	US		
-gsw	US		
-guj	US		
-gul	US		
-gur	US		
 gwi	US		
 haa	US		
-hai	US		
-hak	US		
-hat	US		
-hau	US	0	0
-haw	US	1	1
-hbs	US		
-heb	US	0	0
 hid	US		
-hin	US		
-hmn	US		
-hnj	US		
 hoi	US		
 hop	US		
-hps	US		
-hrv	US		
-hsb	US		
-hsn	US		
-hun	US		
 hup	US		
-hwc	US		
-hye	US		
-hyw	US		
-ibo	US		
-ido	US	0	0
-ilo	US		
-iml	US		
-ina	US	1	1
-ind	US		
 ing	US		
-inz	US		
 iow	US		
-ipk	US		
-isl	US		
-ita	US		
-ium	US		
-jam	US		
-jav	US		
-jbo	US	1	1
-jpn	US		
-kaa	US	0	0
-kac	US		
-kan	US		
-kas	US		
-kau	US		
-kaz	US	0	0
-kea	US		
-kee	US		
-khm	US	0	0
 kic	US		
 kii	US		
-kio	US		
-kir	US	0	0
-kjb	US		
-kjq	US		
-kju	US		
-kla	US		
-kok	US		
-kor	US		
-kos	US		
 koy	US		
-krb	US		
-krc	US	0	0
-kri	US		
 ksk	US		
-ksw	US		
 ktw	US		
-kur	US		
-kut	US		
 kuu	US		
 kwk	US		
 kyh	US		
-kyl	US		
-lad	US		
-lah	US		
-lao	US		
-lav	US		
-lit	US		
 lkt	US		
-lmw	US		
-lmz	US		
-lou	US		
-ltz	US		
-lug	US		
 lui	US		
-lus	US		
 lut	US		
-mah	US		
-mal	US		
-mar	US		
-mbe	US		
-mdd	US		
 mez	US		
-mfz	US		
-mhm	US		
 mhq	US		
 mia	US		
 mic	US		
-mik	US		
-min	US		
-miq	US		
-mjd	US		
 mjy	US		
-mkd	US		
-mkj	US		
-mkq	US		
-mlg	US		
-mmm	US		
 mnr	US		
-mod	US		
 moh	US		
-mon	US		
-mov	US		
-mrc	US		
-mre	US		
-mri	US		
-mrl	US		
-mrq	US		
-msa	US		
-mus	US		
 mvb	US		
-mww	US		
-mya	US		
 myh	US		
-nan	US		
-nau	US		
 nav	US		
-ncz	US		
-nep	US		
-nez	US		
-niu	US		
-nkr	US		
-nld	US		
-nmu	US		
 nnt	US		
 nok	US		
-nol	US		
-nor	US		
-nrt	US		
-nsq	US		
-nsz	US		
 ntw	US		
 nuk	US		
 nwa	US		
-nwy	US		
-obi	US		
 ofo	US		
 oji	US		
 oka	US		
@@ -9728,284 +9786,196 @@ oma	US
 one	US		
 ono	US		
 ood	US		
-ori	US		
-orm	US	0	0
 osa	US		
-oss	US		
 otw	US		
-pag	US		
-pam	US		
-pan	US		
 pao	US		
-pap	US		
 par	US		
-pau	US		
 paw	US		
-pdc	US		
-peb	US		
-pef	US		
-pej	US		
-peq	US		
-pes	US		
 pia	US		
-pie	US		
-pif	US		
 pim	US		
-pmw	US		
-pol	US		
-pom	US		
-pon	US		
-poo	US		
-por	US		
 pot	US		
 pqm	US		
-prs	US		
-psd	US		
 psy	US		
-pus	US		
-puy	US		
-pwi	US		
 qua	US		
-que	US		
-qui	US		
 qun	US		
 qwt	US		
 qyp	US		
-raj	US		
-rar	US		
-roh	US		
-rom	US	0	0
-ron	US	0	0
-rus	US	0	0
 sac	US		
 see	US		
 ser	US		
 shh	US		
 shs	US		
-sht	US		
-sin	US		
-sis	US		
 sjw	US		
 ska	US		
-skd	US		
 slh	US		
-slk	US		
 sln	US		
-slv	US		
-sme	US		
-smo	US		
-sna	US		
-snd	US		
 sno	US		
-som	US	0	0
-spa	US	0	0
 spo	US		
-sqi	US		
 sqn	US		
-srm	US		
-srp	US		
-sun	US		
-swa	US	0	0
-swe	US		
-sxk	US		
-syr	US	0	0
 taa	US		
-tam	US		
 tau	US		
 tcb	US		
-tel	US		
-tew	US		
 tfn	US		
-tgk	US		
-tgl	US		
-tha	US		
 til	US		
-tir	US	0	0
-tix	US		
-tjm	US		
-tkl	US		
-tkm	US		
-tlh	US	1	0
 tli	US		
 tol	US		
-ton	US		
-tow	US		
-tqn	US		
-tqw	US		
-tsi	US		
-tsz	US		
 tta	US		
 tub	US		
-tuk	US	0	0
-tun	US		
-tur	US	0	0
 tus	US		
 tuu	US		
 twa	US		
-twf	US		
-twi	US		
 txc	US		
-uig	US	0	0
-ukr	US		
-uli	US		
-uma	US		
 unm	US		
-unx	US		
-urd	US		
 ute	US		
-veo	US		
-vie	US	0	0
-vmv	US		
-waa	US		
-wac	US		
 wam	US		
-wao	US		
 was	US		
 wic	US		
 win	US		
 wiy	US		
 wlk	US		
-wnw	US		
-woe	US		
-wol	US		
-wuu	US		
 wya	US		
 wyn	US		
-xad	US	1	1
-xap	US		
 xaw	US		
-xch	US		
-xcn	US		
-xcw	US		
-xcy	US		
 xgf	US		
-xgr	US		
 xlb	US		
 xlo	US		
 xnt	US		
 xpq	US		
-xrt	US		
 xup	US		
 xwc	US		
-yak	US		
-yap	US		
 yaq	US		
-ydd	US		
-yid	US		
-yih	US		
 ynn	US		
-yok	US		
-yor	US		
-yuc	US		
-yue	US		
-yuf	US		
-yuk	US		
-yum	US		
 yur	US		
-zap	US		
-zgh	US	0	0
+nwy	US		
+acv	US		
+atw	US		
+kju	US		
+peb	US		
+pef	US		
+pej	US		
+peq	US		
+pom	US		
+poo	US		
+nez	US		
+tqn	US		
+uma	US		
+waa	US		
+yak	US		
+kau	US		
+sht	US		
+ase	US	1	0
+hps	US		
+mre	US	1	0
+psd	US	1	1
+bod	US	0	0
+cmn	US	0	0
+hak	US	0	0
+hsn	US	0	0
+kac	US	0	0
+ksw	US	0	0
+lus	US	0	0
+mya	US	0	0
+nan	US	0	0
+wuu	US	0	0
+yue	US	0	0
 zho	US	0	0
-zkk	US		
-zun	US		
-fra	UY		
+sis	US		
+arw	US	0	0
+chb	US	0	0
+grn	US	0	0
+que	US	0	0
+lao	US	0	0
+tha	US	0	0
+tkm	US		
+tsz	US		
+tjm	US		
+tqw	US		
+tsi	US		
+tun	US		
+lmz	US		
+xrt	US		
+est	US	0	0
+fin	US	0	0
+hun	US	0	0
+sme	US	0	0
+nol	US		
+pwi	US		
+wnw	US		
+yok	US	1	1
+yuc	US	1	1
+wao	US	1	1
+yuk	US	1	1
+zun	US	1	1
+ina	US	1	1
+fra	UY	0	0
 spa	UY	0	0
 ugy	UY		
 ara	UZ	0	1
 auz	UZ	1	1
-bhh	UZ		
 kaa	UZ	1	1
-paq	UZ		
-rus	UZ	0	0
-sog	UZ		
 tur	UZ	0	0
 uzb	UZ	1	1
 uzn	UZ	1	1
-xco	UZ		
-ita	VA		
-lat	VA		
-crb	VC		
+bhh	UZ	1	1
+paq	UZ	1	1
+rus	UZ	0	0
+sog	UZ	1	1
+xco	UZ	1	1
+ita	VA	0	1
+lat	VA	1	1
 eng	VC	0	0
-svc	VC		
+svc	VC	1	0
+crb	VC	1	0
 aoc	VE		
-bae	VE		
-bvv	VE		
-bwi	VE		
 car	VE		
 ciy	VE		
 cuo	VE		
-gae	VE		
-gct	VE		
-guu	VE		
 jru	VE		
 mcg	VE		
 mch	VE		
-mht	VE		
-pbg	VE		
 pbh	VE		
 pev	VE		
-pid	VE		
-spa	VE	0	0
-spc	VE		
 tmz	VE		
-vsl	VE		
-wba	VE		
-wpc	VE		
-xak	VE		
-xsu	VE		
-yae	VE		
 yar	VE		
-yau	VE		
+gct	VE		
+spa	VE	0	0
+xak	VE		
+yae	VE		
+pid	VE		
+wpc	VE		
+spc	VE		
+vsl	VE	1	0
+bae	VE		
+bvv	VE		
+bwi	VE		
+gae	VE		
+mht	VE		
+pbg	VE		
 yrl	VE		
 yvt	VE		
-dcr	VG		
+wba	VE	1	1
+guu	VE	1	1
+xsu	VE	1	1
+yau	VE	1	1
+dcr	VG	1	0
 eng	VG	0	0
-vic	VG		
-dcr	VI		
+vic	VG	0	0
+dcr	VI	1	0
 eng	VI	0	0
-fra	VI		
+fra	VI	0	0
 aem	VN	1	1
-ahk	VN		
 bdq	VN	1	1
-blt	VN		
 brb	VN	1	1
 bru	VN	1	1
-cja	VN	1	1
-cje	VN	1	1
-cjm	VN	1	1
 cma	VN	1	1
 cmo	VN	1	1
-cnc	VN		
-cnp	VN		
 crw	VN	1	1
-csp	VN		
 cua	VN	1	1
-enc	VN		
-fra	VN		
-gio	VN		
-giq	VN		
-gir	VN		
-giw	VN		
-hab	VN		
-haf	VN		
-hak	VN		
 hal	VN	1	1
 hld	VN	1	1
-hmf	VN		
-hmn	VN		
-hmv	VN		
-hmz	VN		
-hni	VN		
-hnj	VN		
 hnu	VN	1	1
-hos	VN		
 hre	VN	1	1
-hro	VN		
-ibh	VN		
-iii	VN		
-ium	VN		
 jeh	VN	1	1
-jra	VN		
-khb	VN		
 khm	VN	1	1
 kjg	VN	0	1
 kjm	VN	1	1
@@ -10013,76 +9983,106 @@ kpm	VN	1	1
 kta	VN	1	1
 ktv	VN	1	1
 kxy	VN	1	1
-lao	VN		
-laq	VN		
-lbt	VN		
-lgh	VN		
-lha	VN		
-lhu	VN		
-lkc	VN		
-lwh	VN		
-mji	VN		
-mlc	VN		
 mng	VN	1	1
 mnn	VN	1	1
 moo	VN	1	1
 mtq	VN	1	1
-mww	VN		
-nan	VN		
-neo	VN		
-nty	VN		
 nuo	VN	1	1
-nut	VN		
-ocm	VN		
 oog	VN	1	1
 pac	VN	1	1
-pcc	VN		
-pdi	VN		
-pha	VN		
 phg	VN	1	1
-phh	VN		
-pho	VN		
-pht	VN		
 pkt	VN	1	1
 puo	VN	1	1
-rad	VN		
 ren	VN	1	1
-rgs	VN		
 rmx	VN	1	1
-roc	VN		
-rog	VN		
 scb	VN	1	1
 sed	VN	1	1
-slt	VN		
 stg	VN	1	1
 sti	VN	1	1
 stt	VN	1	1
-swi	VN		
-tas	VN		
-tdd	VN		
 tdr	VN	1	1
 tkz	VN	1	1
-tmm	VN		
 tou	VN	1	1
+tth	VN	1	1
+tyh	VN	1	1
+vie	VN	1	1
+zng	VN	1	1
+cja	VN	1	1
+cje	VN	1	1
+cjm	VN	1	1
+hro	VN		
+ibh	VN		
+jra	VN		
+ocm	VN		
+rad	VN		
+rgs	VN		
+roc	VN		
+rog	VN		
+gio	VN		
+tyl	VN		
+xao	VN		
+xhv	VN		
+tas	VN		
+hmf	VN		
+hmn	VN		
+hmv	VN		
+hmz	VN		
+hnj	VN		
+ium	VN		
+mji	VN		
+mww	VN		
+neo	VN		
+pha	VN		
+fra	VN	0	0
+hab	VN	1	0
+haf	VN	1	0
+hos	VN	1	0
+ahk	VN		
+cnc	VN		
+cnp	VN		
+csp	VN		
+hak	VN		
+hni	VN		
+iii	VN		
+lgh	VN		
+lhu	VN		
+lkc	VN		
+nan	VN		
+nty	VN		
+phh	VN		
+pho	VN		
+slt	VN		
+yue	VN		
+zho	VN	0	1
+blt	VN		
+enc	VN		
+giq	VN		
+gir	VN		
+giw	VN		
+khb	VN		
+lao	VN		
+laq	VN		
+lbt	VN		
+lha	VN		
+lwh	VN		
+mlc	VN		
+nut	VN		
+pcc	VN		
+pdi	VN		
+pht	VN		
+swi	VN		
+tdd	VN		
+tmm	VN		
 tpo	VN		
 tsl	VN		
-tth	VN	1	1
 twh	VN		
-tyh	VN	1	1
 tyj	VN		
-tyl	VN		
 tyr	VN		
 tys	VN		
 tyt	VN		
 tyz	VN		
-vie	VN	1	1
-xao	VN		
-xhv	VN		
-yue	VN		
 zha	VN		
 zhd	VN		
-zho	VN	0	1
-zng	VN	1	1
 zyg	VN		
 zyn	VN		
 zzj	VN		
@@ -10093,7 +10093,6 @@ aor	VU	1	1
 app	VU	1	1
 aty	VU	1	1
 aul	VU	1	1
-bis	VU		
 bki	VU	1	1
 bnk	VU	1	1
 bnr	VU	1	1
@@ -10102,179 +10101,181 @@ brj	VU	1	1
 btr	VU	1	1
 crc	VU	1	1
 dix	VU	1	1
-eng	VU	0	0
 erg	VU	1	1
 erk	VU	1	1
 etn	VU	1	1
 fnb	VU	1	1
-fra	VU		
 frt	VU	1	1
 fut	VU	1	1
 hiw	VU	1	1
-iff	VU		
-klv	VU		
-kol	VU		
-krf	VU		
-lgk	VU		
-lht	VU		
-lkn	VU		
-llp	VU		
-lmb	VU		
-lml	VU		
-lmu	VU		
-lnn	VU		
-lpa	VU		
-lrv	VU		
-lrz	VU		
-lww	VU		
-lzl	VU		
-mkv	VU		
-mla	VU		
-mll	VU		
-mlv	VU		
-mlx	VU		
-mme	VU		
-mmg	VU		
-mmm	VU		
-mmw	VU		
-mnl	VU		
-mrb	VU		
-mrm	VU		
-mrp	VU		
-mrs	VU		
-msn	VU		
-mtt	VU		
-mvt	VU		
-mwi	VU		
-mwo	VU		
-mxe	VU		
-nkk	VU		
-nmb	VU		
-nmk	VU		
-nms	VU		
-nnd	VU		
-nrg	VU		
-nsw	VU		
-nvh	VU		
-nwi	VU		
-olr	VU		
-omb	VU		
-onu	VU		
-pgk	VU		
-plb	VU		
-pma	VU		
-psw	VU		
-ptr	VU		
-ptv	VU		
-rga	VU		
-rpn	VU		
-sax	VU		
-ske	VU		
-sku	VU		
-sns	VU		
-ssv	VU		
-sww	VU		
-tgp	VU		
-tgs	VU		
-tlm	VU		
-tls	VU		
-tmb	VU		
-tmi	VU		
-tmt	VU		
-tnk	VU		
-tnl	VU		
-tnn	VU		
-tnp	VU		
-tql	VU		
-tsr	VU		
-tvk	VU		
-upv	VU		
-urr	VU		
-uur	VU		
-vao	VU		
-vlp	VU		
-vnm	VU		
-vnp	VU		
-vra	VU		
-vrt	VU		
-wlr	VU		
-wsi	VU		
-wwo	VU		
-fra	WF		
+iff	VU	1	1
+klv	VU	1	1
+krf	VU	1	1
+lgk	VU	1	1
+lht	VU	1	1
+lkn	VU	1	1
+llp	VU	1	1
+lmb	VU	1	1
+lml	VU	1	1
+lmu	VU	1	1
+lnn	VU	1	1
+lpa	VU	1	1
+lrv	VU	1	1
+lrz	VU	1	1
+lww	VU	1	1
+lzl	VU	1	1
+mkv	VU	1	1
+mla	VU	1	1
+mll	VU	1	1
+mlv	VU	1	1
+mlx	VU	1	1
+mme	VU	1	1
+mmg	VU	1	1
+mmm	VU	1	1
+mmw	VU	1	1
+mnl	VU	1	1
+mrb	VU	1	1
+mrm	VU	1	1
+mrp	VU	1	1
+mrs	VU	1	1
+msn	VU	1	1
+mtt	VU	1	1
+mvt	VU	1	1
+mwi	VU	1	1
+mwo	VU	1	1
+mxe	VU	1	1
+nkk	VU	1	1
+nmb	VU	1	1
+nmk	VU	1	1
+nms	VU	1	1
+nnd	VU	1	1
+nrg	VU	1	1
+nsw	VU	1	1
+nvh	VU	1	1
+nwi	VU	1	1
+olr	VU	1	1
+omb	VU	1	1
+onu	VU	1	1
+pgk	VU	1	1
+plb	VU	1	1
+pma	VU	1	1
+psw	VU	1	1
+ptr	VU	1	1
+ptv	VU	1	1
+rga	VU	1	1
+rpn	VU	1	1
+sax	VU	1	1
+ske	VU	1	1
+sku	VU	1	1
+sns	VU	1	1
+ssv	VU	1	1
+sww	VU	1	1
+tgp	VU	1	1
+tgs	VU	1	1
+tlm	VU	1	1
+tls	VU	1	1
+tmb	VU	1	1
+tmi	VU	1	1
+tmt	VU	1	1
+tnk	VU	1	1
+tnl	VU	1	1
+tnn	VU	1	1
+tnp	VU	1	1
+tql	VU	1	1
+tsr	VU	1	1
+tvk	VU	1	1
+upv	VU	1	1
+urr	VU	1	1
+uur	VU	1	1
+vao	VU	1	1
+vlp	VU	1	1
+vnm	VU	1	1
+vnp	VU	1	1
+vra	VU	1	1
+vrt	VU	1	1
+wlr	VU	1	1
+wsi	VU	1	1
+wwo	VU	1	1
+bis	VU	1	0
+eng	VU	0	0
+fra	VU	0	0
+kol	VU	1	1
 fud	WF	1	1
-wls	WF		
+wls	WF	1	1
+fra	WF	0	0
+smo	WS	1	1
 eng	WS	0	0
-smo	WS		
-aln	XK		
-fra	XK		
-hbs	XK		
-sqi	XK		
-srp	XK		
+aln	XK	1	1
+fra	XK	0	0
+hbs	XK	0	1
+sqi	XK	1	1
+srp	XK	0	1
 acq	YE	1	1
 ara	YE	1	1
 ayh	YE	1	1
 ayn	YE	1	1
-eng	YE	0	0
 gdq	YE	1	1
 inm	YE	1	1
-jye	YE	1	1
 rzh	YE	1	1
 sqt	YE	1	1
 xha	YE	1	1
 xhd	YE	1	1
 xqt	YE	1	1
 xsa	YE	1	1
+eng	YE	0	0
+jye	YE	1	1
 ara	YT	0	1
 buc	YT	1	1
-fra	YT		
-mlg	YT		
+mlg	YT	0	1
+fra	YT	0	0
 swa	YT	1	1
-swb	YT		
-wlc	YT		
-wni	YT		
-zdj	YT		
+swb	YT	1	1
+wlc	YT	1	1
+wni	YT	1	1
+zdj	YT	1	1
+fng	ZA	1	1
+tam	ZA	0	0
 afr	ZA	1	0
-brl	ZA		
-cmt	ZA		
 eng	ZA	0	0
-fly	ZA		
-fng	ZA		
-gic	ZA		
-gku	ZA		
-hin	ZA		
-knw	ZA		
-kqu	ZA		
-kqz	ZA		
-naq	ZA		
-nbl	ZA		
-ngh	ZA		
-nsb	ZA		
-nso	ZA		
-oor	ZA		
-por	ZA		
-rng	ZA		
-sfs	ZA		
-sot	ZA		
-ssw	ZA		
+hin	ZA	0	0
+oor	ZA	1	1
+por	ZA	0	0
+urd	ZA	0	0
+ydd	ZA	0	0
+yid	ZA	0	0
+kqz	ZA	1	1
+naq	ZA	1	1
+xii	ZA	1	1
+knw	ZA	1	1
+brl	ZA	1	1
+nbl	ZA	1	1
+nso	ZA	1	1
+rng	ZA	1	1
+sot	ZA	1	1
+ssw	ZA	1	1
 swa	ZA	0	0
-tam	ZA		
-tsc	ZA		
-tsn	ZA		
-tso	ZA		
-urd	ZA		
-ven	ZA		
-xam	ZA		
-xeg	ZA		
+tsc	ZA	1	1
+tsn	ZA	1	1
+tso	ZA	1	1
+ven	ZA	1	1
 xho	ZA	1	1
-xii	ZA		
-ydd	ZA		
-yid	ZA		
 zul	ZA	1	1
-auh	ZM		
-bem	ZM		
+sfs	ZA	1	0
+cmt	ZA	1	1
+fly	ZA	1	1
+gku	ZA	1	1
+kqu	ZA	1	1
+ngh	ZA	1	1
+nsb	ZA	1	1
+xam	ZA	1	1
+xeg	ZA	1	1
+gic	ZA	1	1
+sta	ZM	1	1
+eng	ZM	0	0
+auh	ZM	1	1
+bem	ZM	1	1
 bwc	ZM		
 dov	ZM		
-eng	ZM	0	0
 ilb	ZM		
 kqn	ZM		
 lam	ZM		
@@ -10291,18 +10292,17 @@ mwn	ZM
 mxo	ZM		
 nka	ZM		
 nse	ZM		
-nya	ZM		
+nya	ZM	1	1
 sby	ZM		
 shq	ZM		
 sie	ZM		
-sta	ZM		
 toi	ZM		
 ttl	ZM		
 tum	ZM		
 xnj	ZM		
-zsl	ZM		
-dov	ZW		
+zsl	ZM	1	1
 eng	ZW	0	0
+dov	ZW		
 kck	ZW		
 kdn	ZW		
 mxc	ZW		

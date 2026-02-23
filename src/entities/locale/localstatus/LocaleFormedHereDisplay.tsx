@@ -25,7 +25,7 @@ const LocaleFormedHereDisplay = ({ loc }: { loc: LocaleData }) => {
 
 function getLangFormedHereDescription(langFormedHere: boolean | undefined) {
   if (langFormedHere === true) {
-    return 'This language was formed by people in this region. It may have been formed in a distributed area but this is one of many key territories.';
+    return 'This language was formed by people in this region.';
   } else if (langFormedHere === false) {
     return 'This language came to this region after it was formed or standardized.';
   } else {

@@ -66,21 +66,17 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
     case Field.LanguageFormedHere:
-      return object.type === ObjectType.Locale
-        ? object.langFormedHere == null
-          ? -1
-          : object.langFormedHere
-            ? 1
-            : 0
-        : undefined;
+      return object.type !== ObjectType.Locale || object.langFormedHere == null
+        ? undefined
+        : object.langFormedHere
+          ? 1
+          : 0;
     case Field.HistoricPresence:
-      return object.type === ObjectType.Locale
-        ? object.historicPresence == null
-          ? -1
-          : object.historicPresence
-            ? 1
-            : 0
-        : undefined;
+      return object.type !== ObjectType.Locale || object.historicPresence == null
+        ? undefined
+        : object.historicPresence
+          ? 1
+          : 0;
 
     // Related objects
     case Field.Language:
