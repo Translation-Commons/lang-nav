@@ -9,7 +9,7 @@ import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinates } from './getRobinsonCoordinates';
-import { MAP_ASPECT_RATIO } from './ObjectMap';
+import { MAP_ASPECT_RATIO } from './MapConsts';
 
 type Props = {
   drawableObjects: DrawableData[];
