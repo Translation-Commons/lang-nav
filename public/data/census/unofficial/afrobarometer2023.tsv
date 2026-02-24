@@ -1,0 +1,472 @@
+#codeDisplay		ao.afrobaro.r9	bj.afrobaro.r9	bw.afrobaro.r9	bf.afrobaro.r9	cv.afrobaro.r9	cm.afrobaro.r9	cg.afrobaro.r9	ci.afrobaro.r9	et.afrobaro.r9	sz.afrobaro.r9	ga.afrobaro.r9	gm.afrobaro.r9	gh.afrobaro.r9	gn.afrobaro.r9	ke.afrobaro.r9	ls.afrobaro.r9	lr.afrobaro.r9	mg.afrobaro.r9	mw.afrobaro.r9	ml.afrobaro.r9	mr.afrobaro.r9	mu.afrobaro.r9	ma.afrobaro.r9	mz.afrobaro.r9	na.afrobaro.r9	ne.afrobaro.r9	ng.afrobaro.r9	st.afrobaro.r9	sn.afrobaro.r9	sc.afrobaro.r9	sl.afrobaro.r9	za.afrobaro.r9	sd.afrobaro.r9	tz.afrobaro.r9	tg.afrobaro.r9	tn.afrobaro.r9	ug.afrobaro.r9	zm.afrobaro.r9	zw.afrobaro.r9
+#nameDisplay		Angola Afrobarometer Round 9 (2021/2023)	Benin Afrobarometer Round 9 (2021/2023)	Botswana Afrobarometer Round 9 (2021/2023)	Burkina Faso Afrobarometer Round 9 (2021/2023)	Cabo Verde Afrobarometer Round 9 (2021/2023)	Cameroon Afrobarometer Round 9 (2021/2023)	Congo Afrobarometer Round 9 (2021/2023)	Côte d´Ivoire Afrobarometer Round 9 (2021/2023)	Ethiopia Afrobarometer Round 9 (2021/2023)	Eswatini Afrobarometer Round 9 (2021/2023)	Gabon Afrobarometer Round 9 (2021/2023)	Gambia Afrobarometer Round 9 (2021/2023)	Ghana Afrobarometer Round 9 (2021/2023)	Guinea Afrobarometer Round 9 (2021/2023)	Kenya Afrobarometer Round 9 (2021/2023)	Lesotho Afrobarometer Round 9 (2021/2023)	Liberia Afrobarometer Round 9 (2021/2023)	Madagascar Afrobarometer Round 9 (2021/2023)	Malawi Afrobarometer Round 9 (2021/2023)	Mali Afrobarometer Round 9 (2021/2023)	Mauritania Afrobarometer Round 9 (2021/2023)	Mauritius Afrobarometer Round 9 (2021/2023)	Morocco Afrobarometer Round 9 (2021/2023)	Mozambique Afrobarometer Round 9 (2021/2023)	Namibia Afrobarometer Round 9 (2021/2023)	Niger Afrobarometer Round 9 (2021/2023)	Nigeria Afrobarometer Round 9 (2021/2023)	Sao Tome and Principe Afrobarometer Round 9 (2021/2023)	Senegal Afrobarometer Round 9 (2021/2023)	Seychelles Afrobarometer Round 9 (2021/2023)	Sierra Leone Afrobarometer Round 9 (2021/2023)	South Africa Afrobarometer Round 9 (2021/2023)	Sudan Afrobarometer Round 9 (2021/2023)	Tanzania Afrobarometer Round 9 (2021/2023)	Togo Afrobarometer Round 9 (2021/2023)	Tunisia Afrobarometer Round 9 (2021/2023)	Uganda Afrobarometer Round 9 (2021/2023)	Zambia Afrobarometer Round 9 (2021/2023)	Zimbabwe Afrobarometer Round 9 (2021/2023)
+#isoRegionCode		AO	BJ	BW	BF	CV	CM	CG	CI	ET	SZ	GA	GM	GH	GN	KE	LS	LR	MG	MW	ML	MR	MU	MA	MZ	NA	NE	NG	ST	SN	SC	SL	ZA	SD	TZ	TG	TN	UG	ZM	ZW
+#yearCollected	2023																																							
+#mode	Speaks																																							
+#domain	Home																																							
+#populationEligible		36128000	13531000	2653000	22960000	596000	28277000	6038000	28511000	124937000	1206000	2413000	2739000	33797000	14024000	54555000	2317000	5360000	29963000	20664000	22939000	4799000	1300000	37651000	33421000	2585000	26696000	221154000	230000	17536000	107000	8698000	60141000	47487000	66456000	8951000	12404000	47915000	20290000	16488000
+#populationSource	https://web.archive.org/web/20231205201116/https://population.un.org/wpp/Download/Standard/MostUsed/																																							
+#populationSurveyed		1,200	1,200	1,200	1,200	1,199	1,200	1,200	1,200	2,400	1,200	1,200	1,200	2,369	1,200	2,400	1,200	1,200	1,200	1,200	1,200	1,200	1,200	1,200	1,120	1,200	1,200	1,600	1,200	1,200	1,176	1,200	1,580	1,200	2,400	1,200	1,200	3,393	1,200	1,200
+#nationality	citizens																																							
+#quantity	percent																																							
+#responsesPerIndividual	1																																							
+#collectorType	NGO																																							
+#collectorName	Afrobarometer																																							
+#url	https://www.afrobarometer.org/online-data-analysis/																																							
+#dateAccessed	2026-02-23																																							
+#documentName	Afrobarometer (R9 2021/2023)																																							
+#tableName	What is the primary language you speak in your home?																																							
+#notes	From a compliation of other reports, years 2021 and 2023																																							
+Language Code	Language Name	Angola	Benin	Botswana	Burkina Faso	Cabo Verde	Cameroon	Congo	Côte d´Ivoire	Ethiopia	Eswatini	Gabon	Gambia	Ghana	Guinea	Kenya	Lesotho	Liberia	Madagascar	Malawi	Mali	Mauritania	Mauritius	Morocco	Mozambique	Namibia	Niger	Nigeria	Sao Tome and Principe	Senegal	Seychelles	Sierra Leone	South Africa	Sudan	Tanzania	Togo	Tunisia	Uganda	Zambia	Zimbabwe
+fra	French		4.6		5.8		49.2	50.9	39.3			73.0			2.4						0.4	0.2	1.7	0.9			1.2			2.3	0.5					5.8	0.2			
+por	Portuguese	81.5				0.3																			34.3	0.6			99.4											0.0
+eng	English			2.3			16.4			0.0	8.4	0.1	2.9	3.0		3.4	0.1	13.7		0.5			0.3			10.0		7.2			6.1	0.6	22.0	0.6				2.6	3.5	0.9
+kea	Creole					99.7																																		
+sot	Sesotho																99.5																							
+ara/apd	Sudanese Arabic																																	98.0						
+mfe	Créole																						98.0																	
+swa/swh	Swahili															27.1									0.1										70.4			0.3		
+ara/aeb	Tunisian Arabic																																				93.3			
+crs	Creole																														93.3									
+ara/mey	Arabe / Hassaniya																					92.2																		
+ssw	Hhohho										91.3																													
+tsn	Setswana			82.3																																				
+ara/ary	Moroccan Arabic																							81.7																
+nya/chew1246	Chichewa																			72.4																				
+sna	Shona																																							66.1
+hau	Haoussa																										65.6													
+bam	Bambara																				60.3																			
+wolo1247/wol	Wolof / Lebou																													57.0										
+mos	Mooré				54.8																																			
+aka	Akan													54.3																										
+mlg	#Malagasy avec spécificité régionale																		53.7																					
+mul	Other	0.1	0.4		2.9			1.6	4.6	2.3			1.3	3.4		0.6			0.2	0.1	0.0		0.1	0.2	3.1	2.7		13.1		1.7	0.1		0.1	0.4	4.9	3.3		1.5	0.9	
+ndon1253	Oshiwambo (Oshindonga/Oshikwanyama)																									47.0														
+mlg	#Malagasy officiel																		46.2																					
+fon	Fongbé		43.4																																					
+mnk	Mandinka												40.1																											
+amh	Amharic									37.9																														
+bem	Bemba																																						36.9	
+ewe	Ewé																																			36.9				
+lir	Liberian English																	35.1																						
+kri	Krio																															33.5								
+ful	Poular														33.3																									
+hau	Hausa																											31.5												
+orm	Afan Oromo									29.1																														
+men	Mende																															28.2								
+lug	Luganda																																					25.2		
+man	Maninka														24.3																									
+zul	Zulu																																22.2							
+mkw	Kituba							21.9																																
+lin	Lingala							21.7																																
+sus	Soussou														21.6																									
+vmw	Makua																								21.1															
+wol	Wolof												20.6																											
+temn1245	Themne																															20.2								
+ful	Fula												18.6																											
+ful/fuc	Pulaar/Toucouleur																													18.5										
+yor	Yoruba																											17.2												
+nya/nucl1395	Nyanja																																						16.4	
+dje	Zarma/Songhay																										16.2													
+ber/tzm	Amazigh																							14.6																
+nde	Ndebele																																							14.6
+bci	Baoulé								13.4																															
+kik	Kikuyu															13.3																								
+naq	Nama/Damara																									13.2														
+kbp	Kabyè																																			13.0				
+ibo	Igbo																											12.9												
+kpe	Kpelle																	12.6																						
+dyu	Malinké / Dioula								12.5																															
+ajg	Ajagbé		12.3																																					
+xog	Lusoga																																					12.3		
+suk	Kisukuma																																		11.9					
+toi	Tonga																																						11.9	
+ful	Fufuldé						11.6																																	
+ewe	Ewe/Anlo													11.3																										
+taq	Tamasheq																										11.1													
+xho	Xhosa																																10.4							
+yor	Yoruba		10.3																																					
+afr	Afrikaans																																10.1							
+srr	Serer																													10.1										
+tum	Chitumbuka																			10.1																				
+nyn	Runyankore																																					10.0		
+luy	Luhya															9.5																								
+bba	Baatonum		9.1																																					
+jola1264	Jola												9.1																											
+kln	Kalenjin															8.7																								
+fan	Fang											8.4																												
+teo	Ateso																																					8.3		
+tsn	Tswana																																8.3							
+nso	Pedi																																7.9							
+luo	Luo															7.8																								
+sot	Sotho																																7.8							
+ddn	Dendi		7.6																																					
+her	Otjiherero																									7.6														
+kam	Kamba															7.5																								
+mxc	Manyika																																							7.4
+tso	Changana																								7.4															
+yao	Chiyao																			7.4																				
+gada1257	Ga/Dangbe													7.0																										
+kdh	Tem; Kotokoli																																			7.0				
+mfq	Ben; Moba																																			7.0				
+ful/fuc	Pular																					6.8																		
+afr	Afrikaans																									6.5														
+ful	Fulfuldé		6.4																																					
+snk	Soninké / Sarakollé																				6.4																			
+son	Sonrhaï																				6.4																			
+lag	Langi																																					6.3		
+seh	Sena																								6.3															
+ara	Arabic																				0.1																6.1			
+tir	Tigirigna									6.2																														
+gux	Gulmacema				6.1																																			
+kro/grb	Grebo																	6.1																						
+nya/chew1246	Chichewa																								6.1															
+dogo1299	Dogon																				6.0																			
+senu1239	Sénoufo								6.0																															
+dnj	Gio																	5.6																						
+umb	Umbundu	5.6																																						
+som	Somaligna									5.5																														
+cjk	Chokwe	5.4																																						
+dag	Dagbani													5.4																										
+kro/bsq	Bassa																	5.4																						
+man	Malinké																				5.4																			
+ngl	Lomue																								5.4															
+nyo	Runyoro																																					5.3		
+puu	Punu/Mériè											5.3																												
+kqs	Kissié														5.2																									
+senu1239/myk	Minianka																				5.1																			
+snk	Serahule												5.1																											
+cgg	Rukiga																																					5.0		
+kpe	Kpèlè														5.0																									
+kck	Ikalanga/Sekalaka			4.9																																				
+tbz	Ditamari		4.9																																					
+mer	Meru/Embu															4.7																								
+dnj	Yacouba								4.6																															
+dga	Dagaare/Waale													4.5																										
+loz	Lozi																																						4.4	
+ach	Acholi																																					4.2		
+ful	Fulfuldé																										4.2													
+lgg	Lugbara																																					4.2		
+man/bam	Mandinka/Bambara																													4.2										
+gej	Mina; Guen																																			4.1				
+dyu	Dioula				4.0																																			
+grus1239	Gourounsi				4.0																																			
+maf	Mafa						4.0																																	
+ndc	Ndau																								4.0															
+sid	Sidamigna									4.0																														
+guz	Kisii															3.9																								
+kwn	Rukwangali																									3.9														
+ndc	Ndau																																							3.9
+rkm	Marka				3.9																																			
+man	#Konianké														3.8																									
+mdt	Mbédè											3.8																												
+nya/chew1246	Chewa																																						3.8	
+som	Somali															3.8																								
+tso	Shangaan/Tsonga																																3.8							
+nzb	Nzébi/Métié											3.7																												
+kno	Kono																															3.6								
+sna/kara1480	Karanga																																							3.6
+gol	Gola																	3.4																						
+bobo1253	Bobo				3.3																																			
+man/dyu	Diola																													3.3										
+bib	Bissa				3.2																																			
+ttj	Rutooro																																					3.2		
+lom	Lorma																	3.1																						
+mev	Mano																	3.1																						
+wal	Welayitigna									3.1																														
+xkv	Sekgalagadi			3.1																																				
+ajg	Adja																																			3.0				
+lun	Lunda																																						3.0	
+ful/ffm	Peulh / Fulfude																				2.9																			
+loz	Silozi																									2.9														
+tum	Tumbuka																																						2.9	
+any	Agny								2.8																															
+kpo	Ikposso; Akposso																																			2.8				
+kro/weea1234	Krahn																	2.8																						
+limb1267	Limba																															2.8								
+ssw	Swazi																																2.8							
+swk	Chisena																			2.8																				
+kss	Kissi																															2.7								
+ven	Venda																																2.7							
+ara/mey	Hassania arabic																							2.6																
+dgi	Dagari				2.6																																			
+las	Lama; Lamba																																			2.6				
+miji1238	MijiKenda															2.6																								
+myx	Lumasaaba																																					2.6		
+nse	Nsenga																																						2.6	
+senu1239/kara1479	Karaboro				2.6																																			
+tui	Toupouri						2.6																																	
+ful	Fulfudé				2.5																																			
+vai	Vai																	2.5																						
+xon	Konkomba																																			2.5				
+alz	Alur																																					2.4		
+bete1265	Bété								2.4																															
+goa	Gouro								2.4																															
+guer1240	Guéré								2.4																															
+koq	Kota											2.4																												
+knk	Koranko																															2.3								
+senu1239	Senufo																				2.3																			
+sus	Susu																															2.3								
+tog	Chitonga																			2.3																				
+bun	Sherbro																															2.2								
+her	Seherero			2.2																																				
+kwil1238	Teke							2.2																																
+bai	Bamileke						2.1																																	
+bud	N’Tcha; Bassar																																			2.1				
+gur	Frafra													2.1																										
+mwn	Namwanga																																						2.1	
+tuv	Turkana															2.1																								
+diu	Rugririku/Rumanyo																									2.0														
+kdj	Ngakarimojong																																					2.0		
+kon	Kikongo	2.0																																						
+kus	Kusaal													2.0																										
+nyu	Cinyungwe																								2.0															
+yao	Ciyao																								2.0															
+bas	Bassa						1.9																																	
+bza	Gbandi																	1.9																						
+hdy	Hadiyagna									1.9																														
+mhw	Sembukushu			1.9																																				
+tsc	Xitswa																								1.9															
+box	Bwamu				1.8																																			
+gog	Kigogo																																		1.8					
+ibb	Ibibio																											1.8												
+ife	Ifè; Ana																																			1.8				
+nbl	Ndebele																																1.8							
+kau	Béri béri (Kanouri)																										1.7													
+srr	Serer												1.7																											
+taq	Tamasheq																				1.7																			
+bobo1253	Bobo																				1.6																			
+efi	Efik																											1.6												
+hio	Sesarwa			1.6																																				
+koo	Lukhonzo																																					1.6		
+kss	Kissi																	1.6																						
+lch	Nganguela	1.6																																						
+kon/ldi	Lari							1.6																																
+pcm	Pidgin English																											1.6												
+xon	Likpakpaln													1.6																										
+mas	Masai/Samburu															1.5																								
+mhw	Thimbukushu																									1.5														
+leb/lala1265	Lala																																						1.5	
+snk	Soninke																													1.5										
+tsv	Tsogho											1.5																												
+urh	Urhobo																											1.5												
+chw	Chuabo																								1.4															
+ful	Fulani																											1.4												
+leh	Lenje																																						1.4	
+lob	Lobi								1.4																															
+man	Mandingo																	1.4																						
+nyk	Nhaneca	1.4																																						
+wci	Ouatchi																																			1.4				
+xon	Konkonba													1.4																										
+bax	Bamoun						1.3																																	
+gba	Gbaya						1.3																																	
+keu	Akébou																																			1.3				
+lom	Loma														1.3																									
+mye	Myénè											1.3																												
+ndon1253	Oshiwambo/Oshikwanhama	1.3																																						
+rim	Kinyaturu																																		1.3					
+sbs	Masubia																									1.3														
+sgw	Guragigna									1.3																														
+toh	Bitonga																								1.3															
+aar	Afarigna									1.2																														
+ewo	Ewondo						1.2																																	
+gux	Gourma																																			1.2				
+hau	Hausa													1.2																										
+hau	Haoussa						1.2																																	
+igl	Igala																											1.2												
+irk	Kiiraq																																		1.2					
+kbr	Kafficho									1.2																														
+kro	Kru																	1.2																						
+kula1277	Koulango								1.2																															
+mxx	Mahouka								1.2																															
+nmz	Nawdem; Losso																																			1.2				
+orm/gax	Borana															1.2																								
+sna/zezu1238	Zezuru																																							1.2
+adh	Japadhola																																					1.1		
+bud	Tchamba																																			1.1				
+bwr	Bura																											1.1												
+drs	Gedogna									1.1																														
+gmv	Gamogna									1.1																														
+god	Godié								1.1																															
+stv	Silte									1.1																														
+bzw	Bassa																											1.0												
+bum	Bula						1.0																																	
+cce	Chope																								1.0															
+mhi	Madi																																					1.0		
+ijo	Ijaw																											1.0												
+luo	Kijaruo																																		1.0					
+mgr/mamb1297	Mambwe																																						1.0	
+nup	Nupe																											1.0												
+toi	Tonga																																							1.0
+toi	Tokaleya																																						1.0	
+brl	Sebirwa			0.9																																				
+dida1245	Dida								0.9																															
+dop	Lokpa		0.9																																					
+lue	Luvale																																						0.9	
+pko	Pokot															0.9																								
+tum/seng1277	Senga																																						0.9	
+bde	Bade																											0.8												
+bej	Beja language																																	0.8						
+gizi1243	Guiziga						0.8																																	
+gjn	Gonja													0.8																										
+hay	Kihaya																																		0.8					
+idu	Idoma																											0.8												
+kno	Kono														0.8																									
+lon	Chilomwe																			0.8																				
+mas	Kimasai																																		0.8					
+maw	Mampruli													0.8																										
+mua	Moudan						0.8																																	
+nya/nucl1395	Chinyanja																			0.8																				
+sna/kore1281	Korekore																																							0.8
+wob	Wobé								0.8																															
+ati	Attié								0.7																															
+eto	Eton						0.7																																	
+fon	Fon																																			0.7				
+kga	Koyaka								0.7																															
+ksb	Kisambaa																																		0.7					
+kuj	Kikurya																																		0.7					
+lob	Lobi				0.7																																			
+man/kao	Khassonké																				0.7																			
+mck	Mbunda																																						0.7	
+mfv	Manjack																													0.7										
+mfv	Manjago												0.7																											
+senu1239	Sénoufo				0.7																																			
+mand1437	Samo				0.7																																			
+snk	Soninké																					0.7																		
+tik	Tikari						0.7																																	
+abr	Abron								0.6																															
+amf	Hamerigna									0.6																														
+bin	Edo																											0.6												
+dwr	Dawurogna									0.6																														
+ful	Fullah																															0.6								
+ish	Esan																											0.6												
+jit	Kijita																																		0.6					
+kon/kng/mis	Fiote/Ibinda	0.6																																						
+lam	Lamba																																						0.6	
+man/jad	Diakanké														0.6																									
+mev	Mano														0.6																									
+ngl	Lomue																								0.6															
+nya/ngon1270	Chingoni																			0.6																				
+nyy/nkon1246	Kinyakyusa																																		0.6					
+nyy/nkon1246	Chinkhonde																			0.6																				
+orc	Orma															0.6																								
+orx	Oron																											0.6												
+temn1245	Baga														0.6																									
+tum/seng1277	Chisenga																			0.6																				
+xnj	Ngoni																																						0.6	
+aoa	Angolar																												0.5											
+bain1264	Bainouk																													0.5										
+bum/bene1244	Bene						0.5																																	
+chag1250	Kichaga																																		0.5					
+cko	Tchokossi; Anoufom																																			0.5				
+deu	German																									0.5														
+fip	Kifipa																																		0.5					
+haq	Kiha																																		0.5					
+keb	Kélé											0.5																												
+kuj	Kuria															0.5																								
+leb/bisa1264	Bisa																																						0.5	
+man	Madingo																															0.5								
+mis	Don't know				0.0															0.1					0.3											0.1				
+nka	Nkoya																																						0.5	
+nla	Mbouda						0.5																																	
+nya/mang1391	Chimang’anja																			0.5																				
+nya/nucl1395	Nyanja																								0.5															
+nym	Kinyamwezi																																		0.5					
+ven	Venda																																							0.5
+wti	Bertagan									0.5																														
+yer	Tarok																											0.5												
+aba	Abbey								0.4																															
+anu	Agnwakigna									0.4																														
+ber	Berber language																																				0.4			
+biri1257	Birifor				0.4																																			
+gdl	Derashigna									0.4																														
+ikw	Ikwere																											0.4												
+ilb	IIa																																						0.4	
+kin/rufu1238	Rufumbira																																					0.4		
+kmb	Kimbundu	0.4																																						
+kqn	Kaonde																																						0.4	
+kro/dee	Dei																	0.4																						
+ktb	Kembatigna									0.4																														
+mcp	Maka						0.4																																	
+mgr/rung1256	Lungu																																						0.4	
+mis	Refused													0.1						0.0	0.2									0.1			0.0							
+ruf	Kiluguru																																		0.4					
+sna	Shona																								0.4															
+yal	Dialounké														0.4																									
+blh	Belle																	0.3																						
+byv	Bagangte						0.3																																	
+dav	Taita															0.3																								
+gur/nank1248	Nankani													0.3																										
+gur/taln1239	Taln													0.3																										
+hau	Haoussa																																			0.3				
+heh	Kihehe																																		0.3					
+kdn	Kunda																																						0.3	
+ksf	Bafia						0.3																																	
+lok	Loko																															0.3								
+ndh	Chindali																			0.3																				
+nim	Kinyiramba																																		0.3					
+sbs	Sesubia			0.3																																				
+ssw	Manzini										0.3																													
+tiv	Tiv																											0.3												
+tsn	Setswana																									0.3														
+wes	Pidgin						0.3																																	
+yao	Ajaua																								0.3															
+adj	Adjoukrou								0.2																															
+afr	Afrikaans/Seburu			0.2																																				
+ara/mey	Maure																				0.2																			
+asa	Kipare																																		0.2					
+bai/ybb	Dschang						0.2																																	
+bam	Bambara								0.2																															
+bozo1252	Bozo																				0.2																			
+bwc	Bwile																																						0.2	
+fmp	Bafang						0.2																																	
+grus1239	Grusi													0.2																										
+ivor1240	Kroumen								0.2																															
+kau	Kanuri																											0.2												
+kde	Kimakonde																																		0.2					
+kde	Makonde																								0.2															
+kdi	Kumam																																					0.2		
+khu	Muhumbi	0.2																																						
+luy/lsm	Lusamia																																					0.2		
+man	Manian														0.2																									
+mcn	Massa						0.2																																	
+mis	Goin				0.2																																			
+nub	Nubian language																																	0.2						
+phut1246	Sephuthi																0.2																							
+rng	Xironga																								0.2															
+xho	Sethepu																0.2																							
+xkv/ngol1245	Sengologa			0.2																																				
+yal	Yalunka																															0.2								
+anw	Anang																											0.1												
+auh	Ushi																																						0.1	
+avi	Avikam								0.1																															
+bai/bbj	Bandjoun						0.1																																	
+bem/ngum1254	Ngumbo																																						0.1	
+bsc	Bassari																													0.1										
+cjk	Chokwe																																						0.1	
+cri	Creolo																												0.1											
+dua	Douala						0.1																																	
+gng	Ngam-Gam																																			0.1				
+grus1239	Gruni													0.1																										
+gwr	Lugwere																																					0.1		
+igb	Ebira																											0.1												
+iso	Isoko																											0.1												
+kpz	Kupsabinyi																																					0.1		
+kvj	Kapsiki						0.1																																	
+lns	Banso						0.1																																	
+nabi1240	Nabt													0.1																										
+nuj	Lunyole																																					0.1		
+ogon1240	Ogoni																											0.1												
+samo1309	Samogo																				0.1																			
+taq	Bella																				0.1																			
+wmw	Kimwani																								0.1															
+wol	Wolof																					0.1																		
+xsm	Kassem													0.1																										
+yey	Seyeyi			0.1																																				
+bwo	Shinashigna									0.0																														
+cri	Forro																												0.0											
+cwe	Kikwere																																		0.0					
+har	Adergigna orHarari									0.0																														
+lai	Chilambya																			0.0																				
+mis	Fulse				0.0																																			
+mym	Mejengegna									0.0																														

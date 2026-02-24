@@ -1,23 +1,23 @@
 #codeDisplay		ke.2019.home	ke.2019.ethnicity
 #nameDisplay		Kenya Afrobarometer 2019 Primary @ Home	Kenya Afrobarometer 2019 Ethnicity
 #isoRegionCode	KE		
-#yearCollected		2019	2019
+#yearCollected	2019		
 #mode		Speaks	Ethnicity
 #domain		Home	
-#populationEligible		26,200,000	26,200,000
-#populationSurveyed		2400	2400
-#age		18+	18+
-#nationality		citizens	citizens
-#quantity		percent	percent
-#responsesPerIndividual		1	1
-#collectorType		NGO	NGO
-#collectorName		Afrobarometer	Afrobarometer
-#author		Prof. Winnie Mitullah, Abel Oyuke	Prof. Winnie Mitullah, Abel Oyuke
-#url		https://www.afrobarometer.org/wp-content/uploads/2022/02/afrobarometer_sor_ken_r8_en_2019.pdf	https://www.afrobarometer.org/wp-content/uploads/2022/02/afrobarometer_sor_ken_r8_en_2019.pdf
-#dateAccessed		2025-02-19	2025-02-19
-#documentName		Summary of results: Afrobarometer Round 8	
+#populationEligible	26,200,000		
+#populationSurveyed	2400		
+#age	18+		
+#nationality	citizens		
+#quantity	percent		
+#responsesPerIndividual	1		
+#collectorType	NGO		
+#collectorName	Afrobarometer		
+#author	Prof. Winnie Mitullah, Abel Oyuke		
+#url	https://www.afrobarometer.org/wp-content/uploads/2022/02/afrobarometer_sor_ken_r8_en_2019.pdf		
+#dateAccessed	2025-02-19		
+#documentName	Summary of results: Afrobarometer Round 8		
 #tableName		Q2. What is the primary language you speak in your home now?	Q81. What is your ethnic community, cultural group, or tribe?
-#notes		In partnership with the Institute for Development Studies University of Nairobi	In partnership with the Institute for Development Studies University of Nairobi
+#notes	In partnership with the Institute for Development Studies University of Nairobi		
 Language Code	Language Name	Speaks at Home	Ethnicity
 eng	English	4.6	
 swa/swh	Swahili	27.7	0.7

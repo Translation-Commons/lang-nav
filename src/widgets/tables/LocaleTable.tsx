@@ -48,6 +48,13 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Names',
         },
         EndonymColumn,
+        {
+          key: 'Language Names',
+          render: (object) => (
+            <CommaSeparated>{object.language?.names.map((n) => n)}</CommaSeparated>
+          ),
+          columnGroup: 'Names',
+        },
         ...LocalePopulationColumns,
         {
           key: 'Literacy',
