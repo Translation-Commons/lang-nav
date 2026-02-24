@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-const FEEDBACK_EMAIL = 'your@email.com';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
+
+import { getFeedbackEmailBody } from './getFeedbackEmailBody';
+
+const FEEDBACK_EMAIL = 'langnav-outreach@translationcommons.org';
 
 interface Props {
   onClose: () => void;
@@ -12,18 +16,7 @@ export function FeedbackForm({ onClose }: Props) {
 
   const handleSubmit = () => {
     const subject = `[LangNav Feedback] ${type}`;
-    const body = `
-Feedback type: ${type}
-
-Message:
-${message}
-
----
-Context:
-URL: ${window.location.href}
-User agent: ${navigator.userAgent}
-Time: ${new Date().toISOString()}
-`;
+    const body = getFeedbackEmailBody({ type, message });
 
     const mailtoUrl =
       `mailto:${FEEDBACK_EMAIL}` +
@@ -41,13 +34,12 @@ Time: ${new Date().toISOString()}
         right: 12,
         zIndex: 9999,
         width: 320,
-        background: '#fff',
-        border: '1px solid #ddd',
+        background: 'var(--color-background)',
         borderRadius: 8,
-        boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+        boxShadow: '0 4px 12px var(--color-shadow)',
         fontFamily: 'sans-serif',
         fontSize: 14,
-        color: '#222',
+        color: 'var(--color-text)',
       }}
     >
       {/* Header */}
@@ -57,39 +49,38 @@ Time: ${new Date().toISOString()}
           justifyContent: 'space-between',
           alignItems: 'center',
           padding: '12px 16px',
-          borderBottom: '1px solid #eee',
+          borderBottom: '1px solid var(--color-shadow)',
         }}
       >
         <span style={{ fontWeight: 600, fontSize: 15 }}>Send feedback</span>
-        <button
+        <HoverableButton
           onClick={onClose}
           style={{
             background: 'none',
             border: 'none',
             fontSize: 18,
-            color: '#888',
-            cursor: 'pointer',
+            color: 'var(--color-text-secondary)',
             lineHeight: 1,
             padding: '0 2px',
           }}
         >
           ×
-        </button>
+        </HoverableButton>
       </div>
 
       {/* Body */}
       <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <label style={{ fontWeight: 500, color: '#555' }}>Type</label>
+          <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Type</label>
           <select
             value={type}
             onChange={(e) => setType(e.target.value)}
             style={{
               padding: '6px 8px',
-              border: '1px solid #ccc',
+              border: '1px solid var(--color-shadow)',
               borderRadius: 4,
               fontSize: 14,
-              background: '#fff',
+              background: 'var(--color-background)',
             }}
           >
             <option>Bug</option>
@@ -100,7 +91,7 @@ Time: ${new Date().toISOString()}
         </div>
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <label style={{ fontWeight: 500, color: '#555' }}>Message</label>
+          <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Message</label>
           <textarea
             rows={5}
             value={message}
@@ -108,7 +99,7 @@ Time: ${new Date().toISOString()}
             placeholder="What did you notice or suggest?"
             style={{
               padding: '6px 8px',
-              border: '1px solid #ccc',
+              border: '1px solid var(--color-shadow)',
               borderRadius: 4,
               fontSize: 14,
               resize: 'vertical',
@@ -125,37 +116,36 @@ Time: ${new Date().toISOString()}
           justifyContent: 'flex-end',
           gap: 8,
           padding: '10px 16px',
-          borderTop: '1px solid #eee',
+          borderTop: '1px solid var(--color-shadow)',
         }}
       >
-        <button
+        <HoverableButton
           onClick={onClose}
           style={{
             padding: '6px 14px',
-            border: '1px solid #ccc',
             borderRadius: 4,
-            background: '#fff',
-            cursor: 'pointer',
+            background: 'var(--color-button-secondary)',
             fontSize: 13,
           }}
         >
           Cancel
-        </button>
-        <button
+        </HoverableButton>
+        <HoverableButton
           onClick={handleSubmit}
           disabled={!message.trim()}
           style={{
             padding: '6px 14px',
-            border: '1px solid #aaa',
             borderRadius: 4,
-            background: message.trim() ? '#1a73e8' : '#e0e0e0',
-            color: message.trim() ? '#fff' : '#aaa',
-            cursor: message.trim() ? 'pointer' : 'not-allowed',
+            background: message.trim()
+              ? 'var(--color-button-primary)'
+              : 'var(--color-button-secondary)',
+            color: message.trim() ? '#fff' : 'var(--color-text-secondary)',
+            cursor: !message.trim() ? 'not-allowed' : undefined,
             fontSize: 13,
           }}
         >
           Open email
-        </button>
+        </HoverableButton>
       </div>
     </div>
   );
