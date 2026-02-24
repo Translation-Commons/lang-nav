@@ -11,6 +11,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import DecimalNumber from '@shared/ui/DecimalNumber';
 
 const ReportEntityUnknownFields: React.FC = () => {
   const { objectType } = usePageParams();
@@ -35,8 +36,8 @@ const ReportEntityUnknownFields: React.FC = () => {
         <thead>
           <tr>
             <th>Field</th>
-            <th>Known Count</th>
-            <th>Missing Count</th>
+            <th>Known Count (of {countTotal.toLocaleString()})</th>
+            <th>Missing Percent</th>
             <th>Examples Missing</th>
           </tr>
         </thead>
@@ -47,33 +48,23 @@ const ReportEntityUnknownFields: React.FC = () => {
               <tr key={field}>
                 <td>{field}</td>
                 <td style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      zIndex: -1,
-                      top: 0,
-                      left: 0,
-                      height: '100%',
-                      width: `${(resultsByField[field].knownCount / countTotal) * 100}%`,
-                      backgroundColor: 'var(--color-button-secondary)',
-                    }}
+                  <BackgroundProgressBar
+                    percentage={(resultsByField[field].knownCount / countTotal) * 100}
                   />
                   {resultsByField[field].knownCount.toLocaleString()}
                 </td>
 
                 <td style={{ position: 'relative' }}>
-                  <div
-                    style={{
-                      position: 'absolute',
-                      zIndex: -1,
-                      top: 0,
-                      left: 0,
-                      height: '100%',
-                      width: `${(resultsByField[field].missingCount / countTotal) * 100}%`,
-                      backgroundColor: 'var(--color-button-secondary)',
-                    }}
+                  <BackgroundProgressBar
+                    percentage={(resultsByField[field].missingCount / countTotal) * 100}
                   />
-                  {resultsByField[field].missingCount.toLocaleString()}
+                  {
+                    <DecimalNumber
+                      num={(resultsByField[field].missingCount * 100) / countTotal}
+                      alignFraction={false}
+                    />
+                  }
+                  %
                 </td>
                 <td>
                   <CommaSeparated>
@@ -87,6 +78,22 @@ const ReportEntityUnknownFields: React.FC = () => {
         </tbody>
       </table>
     </CollapsibleReport>
+  );
+};
+
+const BackgroundProgressBar: React.FC<{ percentage: number }> = ({ percentage }) => {
+  return (
+    <div
+      style={{
+        position: 'absolute',
+        zIndex: -1,
+        top: 0,
+        left: 0,
+        height: '100%',
+        width: `${percentage}%`,
+        backgroundColor: 'var(--color-button-secondary)',
+      }}
+    />
   );
 };
 

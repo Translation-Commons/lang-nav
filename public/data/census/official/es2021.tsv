@@ -24,22 +24,22 @@
 #residentLocation	De jure																									
 #notes						Summed up from separate reports by autonomous communities, not all communities reported all languages	Summed up from separate reports by autonomous communities, not all communities reported all languages	Summed up from separate reports by autonomous communities, not all communities reported all languages	Summed up from separate reports by autonomous communities, not all communities reported all languages				There are 3 rows that list Spanish plus another language. The individual row for Spanish is Spanish (only) and the number can be added to the rows with combined data	Aggregated by wikipedia	Summed up from the separate reports for the different autonomous communities, not counting Canarias (IC) or Ceuta & Melilla (EA)	Summed up from the separate reports for the different autonomous communities, not counting Canarias (IC) or Ceuta & Melilla (EA)	Summed up from the separate reports for the different autonomous communities, not counting Canarias (IC) or Ceuta & Melilla (EA)	Summed up from the separate reports for the different autonomous communities, not counting Canarias (IC) or Ceuta & Melilla (EA)								
 Language Code	Language Name	Spain 2021 Understands	Spain 2021 Writes	Spain 2021 Speaks	Spain 2021 Reads	Spain 2021 Understands (from C.A.)	Spain 2021 Writes (from C.A.)	Spain 2021 Speaks (from C.A.)	Spain 2021 Reads (from C.A.)	Spain 2021 Uses with Friends	Spain 2021 Uses at Work	Spain 2021 Uses with Family	Spain 2021 L1	Spain 2021 L1 v2	Spain 2021 Understands (ISO Country)	Spain 2021 Writes (ISO Country)	Spain 2021 Speaks (ISO Country)	Spain 2021 Reads (ISO Country)	Ceuta & Melilla 2021 Understands	Ceuta & Melilla 2021 Writes	Ceuta & Melilla 2021 Speaks	Ceuta & Melilla 2021 Reads	Canary Islands 2021 Understands	Canary Islands 2021 Writes	Canary Islands 2021 Speaks	Canary Islands 2021 Reads
-deu	Alemán					188,109	148,447	174,486	173,147				137,105	205,289	110,039	84,042	101,572	100727					78070	64405	72914	72420
-ara	Árabe	779,813	573,338	753,635	597,265	697,822	510,450	675,802	531,719	456,012	191,729	672,261	781,611	1,001,792	670,183	496,828	649,317	517287	27639	13622	26485	14432				
+deu	#Alemán					188,109	148,447	174,486	173,147				137,105	205,289	110,039	84,042	101,572	100727					78070	64405	72914	72420
+ara	#Árabe	779,813	573,338	753,635	597,265	697,822	510,450	675,802	531,719	456,012	191,729	672,261	781,611	1,001,792	670,183	496,828	649,317	517287	27639	13622	26485	14432				
 ast	Asturiano					33,547	21,365	27,931	29,035					26,584	33,547	21,365	27,931	29035								
 spa	Castellano	44,917,121	41,896,526	44,330,689	42,752,478	44,917,120	41,896,524	44,330,691	42,752,477	40,045,225	39,280,989	39,549,712	34,477,775	37,650,425	42,643,478	39,760,627	42,076,127	40580244	155231	142363	152761	143567	2118411	1993534	2101803	2028666
 cat	Catalán	6,789,149	4,978,097	5,821,954	6,118,297	6,528,698	4,841,514	5,640,195	5,893,373	4,121,088	4,563,375	3,784,621	2,436,227	4,846,933	6,528,698	4,841,514	5,640,195	5893373								
-cat/bale1256	Catalán (mallorquín, menorquín, ibicenco o formenterense)	894,445	594,610	713,736	773,810	887,059	591,139	708,310	767,686	484,390	525,280	465,854			887,059	591,139	708,310	767686								
-rif	Chelja, tarifit o rifeño					1,109	433	1,028	518										1109	433	1028	518				
+cat/bale1256	#Catalán (mallorquín, menorquín, ibicenco o formenterense)	894,445	594,610	713,736	773,810	887,059	591,139	708,310	767,686	484,390	525,280	465,854			887,059	591,139	708,310	767686								
+rif	#Chelja, tarifit o rifeño					1,109	433	1,028	518										1109	433	1028	518				
 eus	Euskera	1,222,832	998,873	1,077,052	1,120,645	1,180,618	964,064	1,044,349	1,079,864	643,390	790,299	634,529		658,030	1,180,618	964,064	1,044,349	1079864								
-fra	Francés	2,058,695	1,581,891	1,698,525	2,172,612	2,058,695	1,581,892	1,698,527	2,172,613	266,978	519,389	177,138	207,865	432,209	1,975,049	1,516,202	1,626,655	2088153	5538	4797	4475	5893	78108	60893	67397	78567
+fra	#Francés	2,058,695	1,581,891	1,698,525	2,172,612	2,058,695	1,581,892	1,698,527	2,172,613	266,978	519,389	177,138	207,865	432,209	1,975,049	1,516,202	1,626,655	2088153	5538	4797	4475	5893	78108	60893	67397	78567
 glg	Gallego	2,701,703	2,070,859	2,383,258	2,423,219	2,464,191	1,944,301	2,205,960	2,222,305	1,496,272	1,392,533	1,583,190	1,099,969	1,742,974	2,464,191	1,944,301	2,205,960	2222305								
-eng	Inglés	7,863,966	7,232,965	6,775,432	8,292,034	7,863,967	7,232,966	6,775,433	8,292,036	1,085,058	3,359,177	886,936	394,459	730,251	7,409,155	6,823,159	6,374,293	7826347	13801	13370	12010	14975	441011	396437	389130	450714
-ita	Italiano	571,483	365,706	464,559	516,153	321,062	212,354	266,267	285,845	113,148	99,370	163,175	125,870	188,651	254,846	159,848	206,234	226225					66216	52506	60033	59620
-por	Portugués					198,189	119,759	149,596	177,373					251,497	198,189	119,759	149,596	177373								
-ron	Rumano	509,179	454,271	486,222	469,176	316,825	278,516	301,441	289,189	168,602	107,504	274,144	585,908	664,407	316,825	278,516	301,441	289189								
+eng	#Inglés	7,863,966	7,232,965	6,775,432	8,292,034	7,863,967	7,232,966	6,775,433	8,292,036	1,085,058	3,359,177	886,936	394,459	730,251	7,409,155	6,823,159	6,374,293	7826347	13801	13370	12010	14975	441011	396437	389130	450714
+ita	#Italiano	571,483	365,706	464,559	516,153	321,062	212,354	266,267	285,845	113,148	99,370	163,175	125,870	188,651	254,846	159,848	206,234	226225					66216	52506	60033	59620
+por	#Portugués					198,189	119,759	149,596	177,373					251,497	198,189	119,759	149,596	177373								
+ron	#Rumano	509,179	454,271	486,222	469,176	316,825	278,516	301,441	289,189	168,602	107,504	274,144	585,908	664,407	316,825	278,516	301,441	289189								
 ber/rif	Tamazight					4,837	1,348	4,373	1,620					59,797					4837	1348	4373	1620				
-cat/vale1252	Valenciano	3,554,471	2,086,277	2,601,812	2,912,386	3,471,814	2,048,728	2,550,884	2,846,078	1,412,010	936,662	1,424,152	799,619		3,471,814	2,048,728	2,550,884	2846078								
+cat/vale1252	#Valenciano	3,554,471	2,086,277	2,601,812	2,912,386	3,471,814	2,048,728	2,550,884	2,846,078	1,412,010	936,662	1,424,152	799,619		3,471,814	2,048,728	2,550,884	2846078								
 und	Otra												3,435,571	347,363												
 spa/ara	#Castellano y árabe												144,977													
 spa/cat	#Castellano y catalán												943,590													
