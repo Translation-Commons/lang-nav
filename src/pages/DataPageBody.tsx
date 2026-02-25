@@ -4,6 +4,7 @@ import Loading from '@widgets/Loading';
 import PathNav from '@widgets/pathnav/PathNav';
 
 import SearchBar from '@features/transforms/search/SearchBar';
+
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 
 const DataViews = React.lazy(() => import('./dataviews/DataViews'));
