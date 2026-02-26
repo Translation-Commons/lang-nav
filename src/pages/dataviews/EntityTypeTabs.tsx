@@ -26,22 +26,18 @@ const EntityTypeTabs: React.FC = () => {
       {ENTITY_TYPES.map((type) => {
         const isActive = objectType === type;
         return (
-          <button
+          <HoverableButton
+            className="tab"
+            hoverContent={/*... see the old ObjectTypeSelector code ...*/}
             key={type}
             onClick={() => updatePageParams({ objectType: type })}
             style={{
               padding: '0.5em 1em',
-              background: 'none',
-              border: 'none',
-              borderRadius: '0',
-              outline: 'none',
-              boxShadow: 'none',
-              borderBottom: isActive
-                ? '2px solid var(--color-button-primary)'
-                : '2px solid transparent',
-              cursor: 'pointer',
-              fontWeight: isActive ? 'bold' : 'normal',
-              color: isActive ? 'var(--color-button-primary)' : 'var(--color-text-secondary)',
+              color: isActive ? 'var(--color-button-primary)' : 'var(--color-text)',
+              borderWidth: '2px',
+              borderRadius: '0.5em 0.5em 0 0',
+              borderBottomStyle: 'solid',
+              borderBottomColor: isActive ? 'var(--color-button-primary)' : 'auto',
             }}
           >
             {type}
