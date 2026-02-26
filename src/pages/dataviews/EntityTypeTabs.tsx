@@ -3,6 +3,7 @@ import React from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
 import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 
 const EntityTypeTabs: React.FC = () => {
