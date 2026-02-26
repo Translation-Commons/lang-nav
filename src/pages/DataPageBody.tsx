@@ -14,9 +14,9 @@ const DataPageBody: React.FC = () => {
     <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <SearchBar />
+        <EntityTypeTabs />
         <PathNav />
       </div>
-      <EntityTypeTabs />
       <div
         style={{
           maxWidth: '1280px',

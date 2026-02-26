@@ -1,34 +1,28 @@
 import React from 'react';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-
-const ENTITY_TYPES = [
-  ObjectType.Language,
-  ObjectType.Locale,
-  ObjectType.Census,
-  ObjectType.Territory,
-  ObjectType.WritingSystem,
-  ObjectType.VariantTag,
-];
+import ObjectTypeDescription from '@strings/ObjectTypeDescription';
 
 const EntityTypeTabs: React.FC = () => {
   const { objectType, updatePageParams } = usePageParams();
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        marginBottom: '0.5em',
-        width: '100%',
-      }}
-    >
-      {ENTITY_TYPES.map((type) => {
+    <div style={{ display: 'flex', marginBottom: '0.5em', width: '100%' }}>
+      {Object.values(ObjectType).map((type) => {
         const isActive = objectType === type;
         return (
           <HoverableButton
             className="tab"
-            hoverContent={/*... see the old ObjectTypeSelector code ...*/}
+            hoverContent={
+              <>
+                <div style={{ marginBottom: 8 }}>
+                  Click here to change the kind of entity viewed.
+                </div>{' '}
+                <ObjectTypeDescription objectType={type} />
+              </>
+            }
             key={type}
             onClick={() => updatePageParams({ objectType: type })}
             style={{
@@ -41,7 +35,7 @@ const EntityTypeTabs: React.FC = () => {
             }}
           >
             {type}
-          </button>
+          </HoverableButton>
         );
       })}
     </div>
