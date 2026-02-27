@@ -38,7 +38,6 @@ export function updateObjectsBasedOnDataParams(
   updatePopulations(languages, locales, world);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
   computeRecursiveLanguageData(languages);
-  precomputeLanguageVitality(languages);
   computeLargestDescendant(languages, languageSource);
 }
 
