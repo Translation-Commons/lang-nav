@@ -67,6 +67,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Territory,
         Field.PopulationDirectlySourced,
         Field.PopulationOfDescendants,
+        Field.PopulationPercentInBiggestDescendantLanguage,
         Field.PercentOfOverallLanguageSpeakers,
         Field.VitalityMetascore,
         Field.ISOStatus,
