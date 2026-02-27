@@ -1,5 +1,7 @@
 import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 
+const RECURSION_LIMIT = 30;
+
 export function computeLargestDescendant(
   languages: LanguageData[],
   languageSource: LanguageSource,
@@ -11,23 +13,22 @@ export function computeLargestDescendant(
 
   // Compute the largest descendants for each language
   languages.forEach((lang) => {
-    const visiting = new Set<string>();
-    lang.largestDescendant = getLargestDescendant(lang, languageSource, visiting);
+    lang.largestDescendant = getLargestDescendant(lang, languageSource, 0);
   });
 }
 
 function getLargestDescendant(
   language: LanguageData,
   languageSource: LanguageSource,
-  visiting: Set<string>,
+  depth: number,
 ): LanguageData | undefined {
   // If it has already been computed, return it.
   if (language.largestDescendant !== undefined) {
     return language.largestDescendant;
   }
 
-  // Detect cycles: if we're already visiting this language in the current path, return undefined
-  if (visiting.has(language.ID)) {
+  // Stop if recursion limit is reached
+  if (depth >= RECURSION_LIMIT) {
     return undefined;
   }
 
@@ -36,12 +37,9 @@ function getLargestDescendant(
     return undefined;
   }
 
-  // Add current language to visiting set
-  visiting.add(language.ID);
-
   // Skip language families and use populationEstimate
   const result = children.reduce<LanguageData | undefined>((largest, child) => {
-    const childsLargest = getLargestDescendant(child, languageSource, visiting);
+    const childsLargest = getLargestDescendant(child, languageSource, depth + 1);
 
     // Skip language families and only consider languages with population
     const isChildValid =
@@ -72,9 +70,6 @@ function getLargestDescendant(
     }
     return largest;
   }, undefined);
-
-  // Remove current language from visiting set before returning
-  visiting.delete(language.ID);
 
   return result;
 }
