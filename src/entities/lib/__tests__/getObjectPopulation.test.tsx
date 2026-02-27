@@ -178,7 +178,7 @@ describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
-      sjn: undefined,
+      sjn: '16.0', // dori0123 (1800) is 16% of sjn speakers (11220)
       Teng: undefined,
       tolkorth: undefined,
     });
