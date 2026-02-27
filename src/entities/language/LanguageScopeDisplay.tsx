@@ -1,8 +1,10 @@
 import React from 'react';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
+
 import Pill from '@shared/ui/Pill';
 
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { LanguageData, LanguageScope, LanguageSource } from './LanguageTypes';
 
@@ -16,7 +18,11 @@ const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         .filter((scope) => scopesBySource[scope]?.length > 0)
         .map((scope) => (
           <div key={scope} style={{ display: 'flex', gap: '0.25em' }}>
-            {scopesBySource[scope]?.length > 0 && getLanguageScopeLabel(scope)}
+            {scopesBySource[scope]?.length > 0 && (
+              <Hoverable hoverContent={getLanguageScopeDescription(scope)}>
+                {getLanguageScopeLabel(scope)}
+              </Hoverable>
+            )}
             {scopesBySource[scope]?.includes(LanguageSource.ISO) && <Pill>ISO</Pill>}
             {scopesBySource[scope]?.includes(LanguageSource.CLDR) && <Pill>CLDR</Pill>}
             {scopesBySource[scope]?.includes(LanguageSource.Glottolog) && <Pill>Glottolog</Pill>}
