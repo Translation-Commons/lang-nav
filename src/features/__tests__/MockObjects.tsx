@@ -3,7 +3,7 @@ import { computeLocalesPopulationFromCensuses } from '@features/data/compute/com
 import { computeLocalesWritingPopulation } from '@features/data/compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
-import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
+import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
 import { addCensusData } from '@features/data/connect/connectCensuses';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
@@ -394,7 +394,7 @@ export function getFullyInstantiatedMockedObjects(
 
   // From DataContext
   const world = objects['001'] as TerritoryData;
-  updateObjectCodesNameAndPopulation(
+  updateObjectsBasedOnDataParams(
     Object.values(languagesBySource.Combined) as LanguageData[],
     Object.values(locales),
     world,

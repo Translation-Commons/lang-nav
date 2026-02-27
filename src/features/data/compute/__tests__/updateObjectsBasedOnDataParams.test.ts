@@ -10,9 +10,9 @@ import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 
-import { updateObjectCodesNameAndPopulation } from '../updateObjectCodesNameAndPopulation';
+import { updateObjectsBasedOnDataParams } from '../updateObjectsBasedOnDataParams';
 
-describe('updateObjectCodesNameAndPopulation', () => {
+describe('updateObjectsBasedOnDataParams', () => {
   it('updates language population estimates based on locales', () => {
     const mockedObjects = getDisconnectedMockedObjects();
     connectMockedObjects(mockedObjects); // Connect but do not compute population yet
@@ -35,7 +35,7 @@ describe('updateObjectCodesNameAndPopulation', () => {
     expect(sjn_001.nameDisplay).toBe('sjn_001'); // A readable name has not been computed yet
 
     // Perform the update
-    updateObjectCodesNameAndPopulation(
+    updateObjectsBasedOnDataParams(
       [sjn, dori0123],
       Object.values(mockedDictionaries.locales),
       mockedDictionaries.territories['001'],
@@ -71,7 +71,7 @@ describe('updateObjectCodesNameAndPopulation', () => {
     mockedObjects[newLocale.ID] = newLocale;
     connectMockedObjects(mockedObjects); // Re-connect objects
 
-    updateObjectCodesNameAndPopulation(
+    updateObjectsBasedOnDataParams(
       [sjn, dori0123],
       [...Object.values(mockedDictionaries.locales), newLocale], // Include the new locale
       mockedDictionaries.territories['001'],

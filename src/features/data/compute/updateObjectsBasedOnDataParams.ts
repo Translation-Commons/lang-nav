@@ -6,6 +6,7 @@ import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
+import { computeLargestDescendant } from './computeLargestDescendant';
 import computeRecursiveLanguageData from './computeRecursiveLanguageData';
 import { updatePopulations } from './updatePopulations';
 
@@ -26,7 +27,7 @@ import { updatePopulations } from './updatePopulations';
  *
  * This function recomputes those dependent values based on the current source selections.
  */
-export function updateObjectCodesNameAndPopulation(
+export function updateObjectsBasedOnDataParams(
   languages: LanguageData[],
   locales: LocaleData[],
   world: TerritoryData,
@@ -37,6 +38,7 @@ export function updateObjectCodesNameAndPopulation(
   updatePopulations(languages, locales, world);
   updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
   computeRecursiveLanguageData(languages);
+  computeLargestDescendant(languages, languageSource);
 }
 
 // Update parent/child relationships

@@ -17,19 +17,6 @@ import CollapsibleReport from '@shared/containers/CollapsibleReport';
 const LanguagesLargestDescendant: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
 
-  // TODO move this algorithm earlier in the data processing pipeline so it doesn't need to be
-  // recomputed every time the component renders.
-
-  // Clear the largest descendants first since it may change a lot if the schema changes.
-  languagesInSelectedSource.forEach((lang) => {
-    lang.largestDescendant = undefined;
-  });
-
-  // Compute the largest descendants for each language
-  languagesInSelectedSource.forEach((lang) => {
-    lang.largestDescendant = getLargestDescendant(lang);
-  });
-
   const [minimumPercentThreshold, setMinimumPercentThreshold] = React.useState(0);
   const [maximumPercentThreshold, setMaximumPercentThreshold] = React.useState(100);
 
@@ -112,37 +99,5 @@ const LanguagesLargestDescendant: React.FC = () => {
     </CollapsibleReport>
   );
 };
-
-function getLargestDescendant(language: LanguageData, depth = 0): LanguageData | undefined {
-  if (depth > 40)
-    console.debug('Potential infinite recursion for: ', language.ID, 'depth: ', depth);
-  if (depth > 50) return undefined;
-
-  // If it has already been computed, return it.
-  if (language.largestDescendant !== undefined) {
-    return language.largestDescendant;
-  }
-  if (language.childLanguages.length === 0) {
-    return undefined;
-  }
-
-  // We are using populationRough because we want to only use descendants that have a directly
-  // sourced population (aka no language families). Dialects rarely but sometimes have directly
-  // sourced populations.
-  return language.childLanguages.reduce<LanguageData | undefined>((largest, child) => {
-    const childsLargest = getLargestDescendant(child, depth + 1);
-    const candidateLargest =
-      (childsLargest?.populationRough || 0) > (child.populationRough || 0) ? childsLargest : child;
-    if (
-      candidateLargest != null &&
-      candidateLargest.populationRough != null &&
-      candidateLargest.populationRough > 0 &&
-      (largest == null || candidateLargest.populationRough > (largest?.populationRough || 0))
-    ) {
-      return candidateLargest;
-    }
-    return largest;
-  }, undefined);
-}
 
 export default LanguagesLargestDescendant;
