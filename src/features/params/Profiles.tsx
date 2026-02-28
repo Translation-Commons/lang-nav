@@ -117,22 +117,34 @@ export function getDefaultParams(
   if (colorBy != null) params.colorBy = colorBy;
 
   // Apply a few view-specific overrides
-  if (params.view === View.Hierarchy) {
-    if (params.objectType === ObjectType.Language) params.languageScopes.push(LanguageScope.Family);
-    if (params.objectType === ObjectType.Territory)
-      params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
-  } else if (params.view === View.Table) {
-    params.limit = 200; // Show more results in table view
-  } else if (params.view === View.Map) {
-    params.limit = 200; // Show more results in map view
+  switch (params.view) {
+    case View.Hierarchy:
+      // Show parents in the hierarchy that we usually do not show
+      if (params.objectType === ObjectType.Language)
+        params.languageScopes.push(LanguageScope.Family);
+      if (params.objectType === ObjectType.Territory)
+        params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
+      break;
+    case View.Table:
+      // Show more results in table view since it's easier to scan
+      params.limit = 200;
+      break;
+    case View.Map:
+      // Show more results in map view since it's easier to view
+      params.limit = 200;
 
-    if (params.colorBy === Field.None) {
       // Add default colorBys since we're showing X in territories
-      if (params.objectType === ObjectType.Census) params.colorBy = Field.CountOfCensuses;
-      if (params.objectType === ObjectType.Locale) params.colorBy = Field.CountOfLanguages;
-      if (params.objectType === ObjectType.WritingSystem)
-        params.colorBy = Field.CountOfWritingSystems;
-    }
+      if (params.colorBy === Field.None) {
+        if (params.objectType === ObjectType.Census) params.colorBy = Field.CountOfCensuses;
+        if (params.objectType === ObjectType.Locale) params.colorBy = Field.CountOfLanguages;
+        if (params.objectType === ObjectType.WritingSystem)
+          params.colorBy = Field.CountOfWritingSystems;
+      }
+      break;
+    case View.Reports:
+      // Reports easily become too dense, so we limit them more aggressively by default
+      params.limit = 10;
+      break;
   }
 
   // Get default gradient for colorBys

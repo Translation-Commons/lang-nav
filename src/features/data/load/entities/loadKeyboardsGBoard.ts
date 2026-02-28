@@ -19,7 +19,6 @@ export function parseKeyboardGBoardLine(line: string): KeyboardData | undefined 
   if (line.startsWith('#') || line.startsWith('ID') || line.trim() === '') return undefined;
 
   const parts = line.split('\t');
-  console.log('parts:', parts);
   const id = parts[0];
   const nameDisplay = parts[1];
   const languageCode = parts[2];
