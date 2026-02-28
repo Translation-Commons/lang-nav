@@ -31,7 +31,6 @@ import { ObjectiveList } from '../CommonObjectives';
 import ResizablePanel from './ResizablePanel';
 import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
-import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 import ViewSelector from './selectors/ViewSelector';
@@ -50,7 +49,6 @@ const OptionsPanel: React.FC = () => {
         </OptionsPanelSection>
 
         <OptionsPanelSection title="Data" optionsName="data options">
-          <ObjectTypeSelector />
           <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
           <ProfileSelector />
         </OptionsPanelSection>
