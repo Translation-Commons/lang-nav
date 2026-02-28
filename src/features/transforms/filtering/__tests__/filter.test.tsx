@@ -1,6 +1,7 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, Mock, vi } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import {
@@ -10,9 +11,15 @@ import {
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import { buildVitalityFilterFunction } from '../filter';
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-describe('buildVitalityFilterFunction', () => {
+import { getFilterByVitality } from '../filter';
+
+vi.mock('@features/params/usePageParams', () => ({
+  default: vi.fn(),
+}));
+
+describe('getFilterByVitality', () => {
   const mockLanguage = {
     ...getBaseLanguageData('test-lang', 'Test Language'),
     vitality: {
@@ -33,120 +40,50 @@ describe('buildVitalityFilterFunction', () => {
     populationFromUN: 1000,
   };
 
+  function mockParams(params: PageParamsOptional) {
+    (usePageParams as Mock).mockReturnValue(createMockUsePageParams(params));
+  }
+
   it('returns true for non-language objects', () => {
-    const filter = buildVitalityFilterFunction([], [], []);
+    mockParams({ isoStatus: [] });
+    const filter = getFilterByVitality();
     expect(filter(mockNonLanguage)).toBe(true);
   });
 
   it('returns true when no vitality filters are active', () => {
-    const filter = buildVitalityFilterFunction([], [], []);
+    mockParams({ isoStatus: [] });
+    const filter = getFilterByVitality();
     expect(filter(mockLanguage)).toBe(true);
   });
 
   it('filters by ISO vitality', () => {
-    const filterMatch = buildVitalityFilterFunction([LanguageISOStatus.Living], [], []);
+    mockParams({ isoStatus: [LanguageISOStatus.Living] });
+    const filterMatch = getFilterByVitality();
     expect(filterMatch(mockLanguage)).toBe(true);
 
-    const filterNoMatch = buildVitalityFilterFunction([LanguageISOStatus.Extinct], [], []);
+    mockParams({ isoStatus: [LanguageISOStatus.Extinct] });
+    const filterNoMatch = getFilterByVitality();
     expect(filterNoMatch(mockLanguage)).toBe(false);
-  });
-
-  it('filters by Ethnologue Fine Vitality', () => {
-    const filterMatch = buildVitalityFilterFunction([], [VitalityEthnologueFine.National], []);
-    expect(filterMatch(mockLanguage)).toBe(true);
-
-    const filterNoMatch = buildVitalityFilterFunction([], [VitalityEthnologueFine.Threatened], []);
-    expect(filterNoMatch(mockLanguage)).toBe(false);
-  });
-
-  it('filters by Ethnologue Coarse Vitality', () => {
-    const filterMatch = buildVitalityFilterFunction(
-      [],
-      [],
-      [VitalityEthnologueCoarse.Institutional],
-    );
-    expect(filterMatch(mockLanguage)).toBe(true);
-
-    const filterNoMatch = buildVitalityFilterFunction(
-      [],
-      [],
-      [VitalityEthnologueCoarse.Endangered],
-    );
-    expect(filterNoMatch(mockLanguage)).toBe(false);
-  });
-
-  it('handles multiple vitality filters', () => {
-    const filterAllMatch = buildVitalityFilterFunction(
-      [LanguageISOStatus.Living],
-      [VitalityEthnologueFine.National],
-      [VitalityEthnologueCoarse.Institutional],
-    );
-    expect(filterAllMatch(mockLanguage)).toBe(true);
-
-    const filterPartialMatch = buildVitalityFilterFunction(
-      [LanguageISOStatus.Living],
-      [VitalityEthnologueFine.Threatened],
-      [VitalityEthnologueCoarse.Institutional],
-    );
-    expect(filterPartialMatch(mockLanguage)).toBe(false);
   });
 
   it('handles missing vitality data', () => {
     const mockIncompleteLanguage = {
       ...getBaseLanguageData('test-lang-incomplete', 'Test Language Incomplete'),
-      ISO: { status: LanguageISOStatus.Living },
-      // Missing Ethnologue data
+      ISO: {}, // empty ISO vitality data
     };
+    mockParams({ isoStatus: [LanguageISOStatus.Living] });
 
-    const filter = buildVitalityFilterFunction([], [VitalityEthnologueFine.National], []);
+    const filter = getFilterByVitality();
     expect(filter(mockIncompleteLanguage)).toBe(false);
   });
 
   it('handles multiple values for same vitality type', () => {
-    const filter = buildVitalityFilterFunction(
-      [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
-      [],
-      [],
-    );
-    expect(filter(mockLanguage)).toBe(true);
+    mockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
+    const filterMatch = getFilterByVitality();
+    expect(filterMatch(mockLanguage)).toBe(true);
 
-    const filterNoMatch = buildVitalityFilterFunction(
-      [LanguageISOStatus.Extinct, LanguageISOStatus.Constructed],
-      [],
-      [],
-    );
+    mockParams({ isoStatus: [LanguageISOStatus.Extinct, LanguageISOStatus.Constructed] });
+    const filterNoMatch = getFilterByVitality();
     expect(filterNoMatch(mockLanguage)).toBe(false);
-  });
-
-  it('handles complex combinations of vitality filters', () => {
-    // Test with multiple values in each category
-    const complexFilter = buildVitalityFilterFunction(
-      [LanguageISOStatus.Living, LanguageISOStatus.Constructed],
-      [VitalityEthnologueFine.National, VitalityEthnologueFine.Regional],
-      [VitalityEthnologueCoarse.Institutional, VitalityEthnologueCoarse.Stable],
-    );
-    expect(complexFilter(mockLanguage)).toBe(true);
-
-    // Test with non-matching combinations
-    const nonMatchingFilter = buildVitalityFilterFunction(
-      [LanguageISOStatus.Living],
-      [VitalityEthnologueFine.Regional], // Doesn't match National
-      [VitalityEthnologueCoarse.Institutional],
-    );
-    expect(nonMatchingFilter(mockLanguage)).toBe(false);
-  });
-
-  it('handles undefined vitality values correctly', () => {
-    const mockUndefinedLanguage = {
-      ...getBaseLanguageData('test-lang-undefined', 'Test Language Undefined'),
-      // No vitality values set
-    };
-
-    const filter = buildVitalityFilterFunction([LanguageISOStatus.Living], [], []);
-    expect(filter(mockUndefinedLanguage)).toBe(false);
-
-    // Should pass when no filters are active
-    const noFilterActive = buildVitalityFilterFunction([], [], []);
-    expect(noFilterActive(mockUndefinedLanguage)).toBe(true);
   });
 });

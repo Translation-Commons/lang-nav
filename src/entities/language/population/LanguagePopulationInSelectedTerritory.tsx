@@ -4,7 +4,7 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import usePageParams from '@features/params/usePageParams';
-import { getFilterByTerritory } from '@features/transforms/filtering/filterByConnections';
+import useFilters from '@features/transforms/filtering/useFilters';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -22,7 +22,7 @@ const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = 
   }
 
   // Get the locales associated with the language
-  const filterByTerritory = getFilterByTerritory();
+  const filterByTerritory = useFilters()['Territory'];
   const locales = lang.locales.filter(filterByTerritory);
   if (locales.length === 0) return <Deemphasized>—</Deemphasized>;
 

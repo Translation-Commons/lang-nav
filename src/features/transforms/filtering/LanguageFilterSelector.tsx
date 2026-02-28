@@ -17,10 +17,9 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import Field from '../fields/Field';
 import { getSortFunctionParameterized } from '../sorting/sort';
 
-import { getScopeFilter } from './filter';
-import { getFilterByTerritory, getFilterByWritingSystem } from './filterByConnections';
 import { getFilterLabels } from './FilterLabels';
 import { getSuggestionsFunction } from './getSuggestionsFunction';
+import useFilters from './useFilters';
 
 type Props = { display?: SelectorDisplay };
 
@@ -28,9 +27,10 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
   const { languageFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
   const sortFunction = getSortFunctionParameterized(Field.Population);
-  const filterByScope = getScopeFilter();
-  const filterByTerritory = getFilterByTerritory();
-  const filterByWritingSystem = getFilterByWritingSystem();
+  const filterBy = useFilters();
+  const filterByScope = filterBy[Field.LanguageScope];
+  const filterByTerritory = filterBy[Field.Territory];
+  const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterLabels = getFilterLabels();
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;

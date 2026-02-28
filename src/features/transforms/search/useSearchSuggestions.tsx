@@ -4,20 +4,11 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
-import {
-  getFilterByLanguageScope,
-  getFilterByModality,
-  getFilterByTerritoryScope,
-} from '@features/transforms/filtering/filter';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import {
-  getFilterByLanguage,
-  getFilterByTerritory,
-  getFilterByWritingSystem,
-} from '../filtering/filterByConnections';
 import { getFilterLabels } from '../filtering/FilterLabels';
+import useFilters from '../filtering/useFilters';
 
 import getSearchableField from './getSearchableField';
 import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
@@ -27,12 +18,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const { searchBy, objectType } = usePageParams();
   const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
     useDataContext();
-  const filterByLanguageScope = getFilterByLanguageScope();
-  const filterByModality = getFilterByModality();
-  const filterByTerritoryScope = getFilterByTerritoryScope();
-  const filterByWritingSystem = getFilterByWritingSystem();
-  const filterByLanguage = getFilterByLanguage();
-  const filterByTerritory = getFilterByTerritory();
+  const filterBy = useFilters();
   const filterLabels = getFilterLabels();
 
   const objects = useMemo(() => {
@@ -64,31 +50,31 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
     const getMatchDistance = (object: ObjectData): number => {
       let dist = 0;
-      if (!filterByLanguage(object)) dist += 1;
-      if (!filterByWritingSystem(object)) dist += 2;
-      if (!filterByTerritory(object)) dist += 4;
-      if (!filterByTerritoryScope(object)) dist += 8;
-      if (!filterByModality(object)) dist += 16;
-      if (!filterByLanguageScope(object)) dist += 32;
+      if (!filterBy.Language?.(object)) dist += 1;
+      if (!filterBy['Writing System']?.(object)) dist += 2;
+      if (!filterBy.Territory?.(object)) dist += 4;
+      if (!filterBy['Territory Scope']?.(object)) dist += 8;
+      if (!filterBy.Modality?.(object)) dist += 16;
+      if (!filterBy['Language Scope']?.(object)) dist += 32;
       return dist;
     };
     const getMatchGroup = (object: ObjectData): string => {
-      if (!filterByLanguage(object)) return 'not ' + filterLabels.languageFilter;
-      if (!filterByWritingSystem(object)) return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterByTerritory(object)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterByTerritoryScope(object)) return 'not ' + filterLabels.territoryScope;
-      if (!filterByModality(object)) return 'not ' + filterLabels.modalityFilter;
-      if (!filterByLanguageScope(object)) return 'not ' + filterLabels.languageScope;
+      if (!filterBy.Language?.(object)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy['Writing System']?.(object)) return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterBy.Territory?.(object)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterBy['Territory Scope']?.(object)) return 'not ' + filterLabels.territoryScope;
+      if (!filterBy.Modality?.(object)) return 'not ' + filterLabels.modalityFilter;
+      if (!filterBy['Language Scope']?.(object)) return 'not ' + filterLabels.languageScope;
       return 'matched';
     };
     return [getMatchDistance, getMatchGroup];
   }, [
-    filterByLanguage,
-    filterByWritingSystem,
-    filterByTerritory,
-    filterByTerritoryScope,
-    filterByModality,
-    filterByLanguageScope,
+    filterBy.Language,
+    filterBy['Writing System'],
+    filterBy.Territory,
+    filterBy['Territory Scope'],
+    filterBy.Modality,
+    filterBy['Language Scope'],
     filterLabels,
   ]);
 
