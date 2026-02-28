@@ -5,6 +5,8 @@ import PathNav from '@widgets/pathnav/PathNav';
 
 import SearchBar from '@features/transforms/search/SearchBar';
 
+import EntityTypeTabs from './dataviews/EntityTypeTabs';
+
 const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
@@ -12,6 +14,7 @@ const DataPageBody: React.FC = () => {
     <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <SearchBar />
+        <EntityTypeTabs />
         <PathNav />
       </div>
       <div

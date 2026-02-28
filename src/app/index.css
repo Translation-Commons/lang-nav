@@ -114,6 +114,19 @@ button:focus {
   background: var(--color-button-hover);
 }
 
+button.tab {
+  background: none;
+}
+
+button.tab:hover,
+button.tab:focus {
+  background: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
+}
+
+button.tab:focus {
+  border-color: var(--color-button-primary);
+}
+
 footer {
   align-items: center;
   background-color: var(--color-button-secondary);
