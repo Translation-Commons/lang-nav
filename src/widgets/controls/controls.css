@@ -4,9 +4,15 @@
   border: 0.125em solid var(--color-button-primary);
 }
 
+.selector input:focus {
+  outline: none;
+  color: var(--color-button-primary);
+  background: var(--color-background);
+}
+
 .selector input {
-  color: var(--color-background);
-  background: var(--color-button-primary);
+  color: var(--color-button-primary);
+  background: var(--color-background);
 }
 
 .selector button {
@@ -24,6 +30,16 @@
   background: var(--color-background);
 }
 
+.selector input.empty:focus {
+  color: var(--color-button-primary);
+  background: var(--color-background);
+  border-color: var(--color-button-hover);
+}
+
+.selector input.empty:focus::placeholder {
+  color: var(--color-button-primary);
+}
+
 .selector button:hover {
   color: var(--color-background);
   background: var(--color-button-hover);
@@ -31,7 +47,6 @@
 
 .selector :focus {
   border-color: var(--color-button-hover);
-  background: var(--color-button-hover);
 }
 
 .selector .selected {
