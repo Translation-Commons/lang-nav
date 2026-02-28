@@ -14,6 +14,7 @@ enum TableID {
   LanguagesInTerritory,
   CountriesWithCensuses,
   PotentialLocales,
+  LocaleIndigeneity,
 }
 
 export default TableID;

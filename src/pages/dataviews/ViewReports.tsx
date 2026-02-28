@@ -13,6 +13,8 @@ import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithC
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import LocaleIndigeneityReport from '@entities/locale/localstatus/LocaleIndigeneityReport';
+
 /**
  * A page that shows tips about problems in the data that may need to be addressed.
  * It may also show metrics about the data we have too.
@@ -36,6 +38,7 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
         <>
           <LocaleCitationCounts />
           <PotentialLocales />
+          <LocaleIndigeneityReport />
         </>
       );
     case ObjectType.Language:
