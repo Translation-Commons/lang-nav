@@ -18,7 +18,7 @@ const EntityTypeTabs: React.FC = () => {
             className="tab"
             hoverContent={
               <>
-                <div style={{ marginBottom: "0.5em" }}>
+                <div style={{ marginBottom: '0.5em' }}>
                   Click here to change the kind of entity viewed.
                 </div>{' '}
                 <ObjectTypeDescription objectType={type} />
