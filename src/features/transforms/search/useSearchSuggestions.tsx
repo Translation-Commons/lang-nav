@@ -4,20 +4,12 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
-import {
-  getFilterByLanguageScope,
-  getFilterByModality,
-  getFilterByTerritoryScope,
-} from '@features/transforms/filtering/filter';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import {
-  getFilterByLanguage,
-  getFilterByTerritory,
-  getFilterByWritingSystem,
-} from '../filtering/filterByConnections';
+import Field from '../fields/Field';
 import { getFilterLabels } from '../filtering/FilterLabels';
+import useFilters from '../filtering/useFilters';
 
 import getSearchableField from './getSearchableField';
 import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
@@ -27,12 +19,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const { searchBy, objectType } = usePageParams();
   const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
     useDataContext();
-  const filterByLanguageScope = getFilterByLanguageScope();
-  const filterByModality = getFilterByModality();
-  const filterByTerritoryScope = getFilterByTerritoryScope();
-  const filterByWritingSystem = getFilterByWritingSystem();
-  const filterByLanguage = getFilterByLanguage();
-  const filterByTerritory = getFilterByTerritory();
+  const filterBy = useFilters();
   const filterLabels = getFilterLabels();
 
   const objects = useMemo(() => {
@@ -64,31 +51,32 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
     const getMatchDistance = (object: ObjectData): number => {
       let dist = 0;
-      if (!filterByLanguage(object)) dist += 1;
-      if (!filterByWritingSystem(object)) dist += 2;
-      if (!filterByTerritory(object)) dist += 4;
-      if (!filterByTerritoryScope(object)) dist += 8;
-      if (!filterByModality(object)) dist += 16;
-      if (!filterByLanguageScope(object)) dist += 32;
+      if (!filterBy[Field.Language]?.(object)) dist += 1;
+      if (!filterBy[Field.WritingSystem]?.(object)) dist += 2;
+      if (!filterBy[Field.Territory]?.(object)) dist += 4;
+      if (!filterBy[Field.TerritoryScope]?.(object)) dist += 8;
+      if (!filterBy[Field.Modality]?.(object)) dist += 16;
+      if (!filterBy[Field.LanguageScope]?.(object)) dist += 32;
       return dist;
     };
     const getMatchGroup = (object: ObjectData): string => {
-      if (!filterByLanguage(object)) return 'not ' + filterLabels.languageFilter;
-      if (!filterByWritingSystem(object)) return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterByTerritory(object)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterByTerritoryScope(object)) return 'not ' + filterLabels.territoryScope;
-      if (!filterByModality(object)) return 'not ' + filterLabels.modalityFilter;
-      if (!filterByLanguageScope(object)) return 'not ' + filterLabels.languageScope;
+      if (!filterBy[Field.Language]?.(object)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy[Field.WritingSystem]?.(object))
+        return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterBy[Field.Territory]?.(object)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterBy[Field.TerritoryScope]?.(object)) return 'not ' + filterLabels.territoryScope;
+      if (!filterBy[Field.Modality]?.(object)) return 'not ' + filterLabels.modalityFilter;
+      if (!filterBy[Field.LanguageScope]?.(object)) return 'not ' + filterLabels.languageScope;
       return 'matched';
     };
     return [getMatchDistance, getMatchGroup];
   }, [
-    filterByLanguage,
-    filterByWritingSystem,
-    filterByTerritory,
-    filterByTerritoryScope,
-    filterByModality,
-    filterByLanguageScope,
+    filterBy[Field.Language],
+    filterBy[Field.WritingSystem],
+    filterBy[Field.Territory],
+    filterBy[Field.TerritoryScope],
+    filterBy[Field.Modality],
+    filterBy[Field.LanguageScope],
     filterLabels,
   ]);
 

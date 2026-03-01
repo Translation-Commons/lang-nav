@@ -28,9 +28,9 @@ vi.mock('@features/transforms/filtering/filter', () => ({
 
 vi.mock('@features/transforms/filtering/filterByConnections', () => ({
   getFilterByConnections: vi.fn(),
-  getFilterByTerritory: vi.fn().mockReturnValue(() => true),
-  getFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
-  getFilterByLanguage: vi.fn().mockReturnValue(() => true),
+  buildFilterByLanguage: vi.fn().mockReturnValue(() => true),
+  buildFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
+  buildFilterByTerritory: vi.fn().mockReturnValue(() => true),
 }));
 
 vi.mock('@features/transforms/sorting/sort', () => ({
@@ -91,9 +91,6 @@ describe('InteractiveObjectTable', () => {
     vi.mocked(getFilterBySubstring).mockReturnValue(() => true);
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByLanguageScope).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByModality).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByTerritoryScope).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));

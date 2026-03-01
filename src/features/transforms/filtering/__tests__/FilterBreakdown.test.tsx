@@ -61,7 +61,7 @@ describe('FilterBreakdown', () => {
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
       languageFilter: 'ine', // Indo-European family
-      vitalityEthFine: [VitalityEthnologueFine.National],
+      vitalityEthFine: [VitalityEthnologueFine.National], // filters out fra
       searchString: 'spa',
     });
 

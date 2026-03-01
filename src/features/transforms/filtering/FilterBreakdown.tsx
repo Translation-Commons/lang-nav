@@ -1,5 +1,5 @@
 import { XIcon } from 'lucide-react';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
@@ -7,20 +7,12 @@ import usePageParams from '@features/params/usePageParams';
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
+import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
-import {
-  getFilterByLanguageScope,
-  getFilterByModality,
-  getFilterByTerritoryScope,
-  getFilterByVitality,
-} from './filter';
-import {
-  getFilterByLanguage,
-  getFilterByTerritory,
-  getFilterByWritingSystem,
-} from './filterByConnections';
+import { getFilterByVitality } from './filter';
 import { getFilterLabels } from './FilterLabels';
+import useFilters from './useFilters';
 
 type FilterExplanationProps = {
   objects: ObjectData[];
@@ -32,13 +24,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   shouldFilterUsingSearchBar = true,
 }) => {
   const { updatePageParams, searchString } = usePageParams();
+  const filterBy = useFilters();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByTerritory = getFilterByTerritory();
-  const filterByWritingSystem = getFilterByWritingSystem();
-  const filterByLanguage = getFilterByLanguage();
-  const filterByLanguageScope = getFilterByLanguageScope();
-  const filterByModality = getFilterByModality();
-  const filterByTerritoryScope = getFilterByTerritoryScope();
   const filterByVitality = getFilterByVitality();
   const filterLabels = getFilterLabels();
 
@@ -51,13 +38,13 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nWithLanguage,
     nInVitality,
     nMatchingSubstring,
-  ] = useMemo(() => {
-    const filteredByLanguageScope = objects.filter(filterByLanguageScope);
-    const filteredByModality = filteredByLanguageScope.filter(filterByModality);
-    const filteredByTerritoryScope = filteredByModality.filter(filterByTerritoryScope);
-    const filteredByTerritory = filteredByTerritoryScope.filter(filterByTerritory);
-    const filteredByWritingSystem = filteredByTerritory.filter(filterByWritingSystem);
-    const filteredByLanguage = filteredByWritingSystem.filter(filterByLanguage);
+  ] = (() => {
+    const filteredByLanguageScope = objects.filter(filterBy[Field.LanguageScope]);
+    const filteredByModality = filteredByLanguageScope.filter(filterBy[Field.Modality]);
+    const filteredByTerritoryScope = filteredByModality.filter(filterBy[Field.TerritoryScope]);
+    const filteredByTerritory = filteredByTerritoryScope.filter(filterBy[Field.Territory]);
+    const filteredByWritingSystem = filteredByTerritory.filter(filterBy[Field.WritingSystem]);
+    const filteredByLanguage = filteredByWritingSystem.filter(filterBy[Field.Language]);
     const filteredByVitality = filteredByLanguage.filter(filterByVitality);
     const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
     return [
@@ -70,17 +57,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       filteredByVitality.length,
       filteredBySubstring.length,
     ];
-  }, [
-    objects,
-    filterByLanguageScope,
-    filterByModality,
-    filterByTerritoryScope,
-    filterByTerritory,
-    filterByWritingSystem,
-    filterByLanguage,
-    filterByVitality,
-    filterBySubstring,
-  ]);
+  })();
 
   const nOverall = objects.length;
   const nFilteredByLanguageScope = nOverall - nInLanguageScope;
