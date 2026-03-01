@@ -129,16 +129,20 @@ function getField(object: ObjectData, field: Field): string | number | undefined
   }
 }
 
-export function getLanguageForEntity(object: ObjectData): LanguageData | undefined {
+export function getLanguageForEntity(object: ObjectData | undefined): LanguageData | undefined {
+  if (!object) return undefined;
   if (object.type === ObjectType.Language) return object;
   if (object.type === ObjectType.Locale) return object.language;
+  if (object.type === ObjectType.Keyboard) return object.language;
   return undefined;
 }
 
-export function getTerritoryForEntity(object: ObjectData): TerritoryData | undefined {
+export function getTerritoryForEntity(object: ObjectData | undefined): TerritoryData | undefined {
+  if (!object) return undefined;
   if (object.type === ObjectType.Territory) return object;
   if (object.type === ObjectType.Locale) return object.territory;
   if (object.type === ObjectType.Census) return object.territory;
+  if (object.type === ObjectType.Keyboard) return object.territory;
   return undefined;
 }
 

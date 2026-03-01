@@ -5,6 +5,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import { getFilterByVitality, getScopeFilter } from '@features/transforms/filtering/filter';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
@@ -12,8 +13,6 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-
-import { getFilterByVitality, getScopeFilter } from '../transforms/filtering/filter';
 
 import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';
