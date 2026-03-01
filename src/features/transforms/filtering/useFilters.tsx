@@ -19,7 +19,10 @@ import {
 } from './filterByEnum';
 
 /**
- * Common hook to get filter functions based on page params. This memoizes all implementations
+ * Common hook to get filter functions based on page params.
+ *
+ * Note this does not explicitly memoize the functions but react should be
+ * automatically handle that. Explicit memoization caused callstack issues.
  */
 function useFilters(): Record<Field, FilterFunctionType> {
   const {

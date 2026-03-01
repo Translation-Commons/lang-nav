@@ -4,6 +4,7 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -13,6 +14,8 @@ import { LanguageData } from '../LanguageTypes';
 
 const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { territoryFilter } = usePageParams();
+  const filterByTerritory = useFilters()[Field.Territory];
+
   if (!territoryFilter) {
     return (
       <Hoverable hoverContent="Select a territory in the filters in the sidebar">
@@ -22,7 +25,6 @@ const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = 
   }
 
   // Get the locales associated with the language
-  const filterByTerritory = useFilters()['Territory'];
   const locales = lang.locales.filter(filterByTerritory);
   if (locales.length === 0) return <Deemphasized>—</Deemphasized>;
 

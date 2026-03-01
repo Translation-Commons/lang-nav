@@ -13,6 +13,8 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
 
+import Field from '../fields/Field';
+
 import { FilterFunctionType } from './filter';
 import useFilters from './useFilters';
 
@@ -26,9 +28,9 @@ export function getFilterByConnections({
 }: { lang?: boolean; territory?: boolean; writing?: boolean } = {}): FilterFunctionType {
   const filterBy = useFilters();
 
-  const filterByTerritory = territory ? filterBy['Territory'] : () => true;
-  const filterByWritingSystem = writing ? filterBy['Writing System'] : () => true;
-  const filterByLanguage = lang ? filterBy['Language'] : () => true;
+  const filterByTerritory = territory ? filterBy[Field.Territory] : () => true;
+  const filterByWritingSystem = writing ? filterBy[Field.WritingSystem] : () => true;
+  const filterByLanguage = lang ? filterBy[Field.Language] : () => true;
   return useCallback(
     (object: ObjectData) =>
       filterByTerritory(object) && filterByWritingSystem(object) && filterByLanguage(object),

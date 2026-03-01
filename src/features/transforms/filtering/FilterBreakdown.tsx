@@ -7,6 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
+import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
 import { getFilterByVitality } from './filter';
@@ -25,12 +26,6 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const { updatePageParams, searchString } = usePageParams();
   const filterBy = useFilters();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByTerritory = filterBy.Territory;
-  const filterByWritingSystem = filterBy['Writing System'];
-  const filterByLanguage = filterBy.Language;
-  const filterByLanguageScope = filterBy['Language Scope'];
-  const filterByModality = filterBy.Modality;
-  const filterByTerritoryScope = filterBy['Territory Scope'];
   const filterByVitality = getFilterByVitality();
   const filterLabels = getFilterLabels();
 
@@ -44,12 +39,12 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nInVitality,
     nMatchingSubstring,
   ] = (() => {
-    const filteredByLanguageScope = objects.filter(filterByLanguageScope);
-    const filteredByModality = filteredByLanguageScope.filter(filterByModality);
-    const filteredByTerritoryScope = filteredByModality.filter(filterByTerritoryScope);
-    const filteredByTerritory = filteredByTerritoryScope.filter(filterByTerritory);
-    const filteredByWritingSystem = filteredByTerritory.filter(filterByWritingSystem);
-    const filteredByLanguage = filteredByWritingSystem.filter(filterByLanguage);
+    const filteredByLanguageScope = objects.filter(filterBy[Field.LanguageScope]);
+    const filteredByModality = filteredByLanguageScope.filter(filterBy[Field.Modality]);
+    const filteredByTerritoryScope = filteredByModality.filter(filterBy[Field.TerritoryScope]);
+    const filteredByTerritory = filteredByTerritoryScope.filter(filterBy[Field.Territory]);
+    const filteredByWritingSystem = filteredByTerritory.filter(filterBy[Field.WritingSystem]);
+    const filteredByLanguage = filteredByWritingSystem.filter(filterBy[Field.Language]);
     const filteredByVitality = filteredByLanguage.filter(filterByVitality);
     const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
     return [

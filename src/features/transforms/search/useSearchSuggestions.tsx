@@ -7,6 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import Field from '../fields/Field';
 import { getFilterLabels } from '../filtering/FilterLabels';
 import useFilters from '../filtering/useFilters';
 
@@ -50,31 +51,32 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
     const getMatchDistance = (object: ObjectData): number => {
       let dist = 0;
-      if (!filterBy.Language?.(object)) dist += 1;
-      if (!filterBy['Writing System']?.(object)) dist += 2;
-      if (!filterBy.Territory?.(object)) dist += 4;
-      if (!filterBy['Territory Scope']?.(object)) dist += 8;
-      if (!filterBy.Modality?.(object)) dist += 16;
-      if (!filterBy['Language Scope']?.(object)) dist += 32;
+      if (!filterBy[Field.Language]?.(object)) dist += 1;
+      if (!filterBy[Field.WritingSystem]?.(object)) dist += 2;
+      if (!filterBy[Field.Territory]?.(object)) dist += 4;
+      if (!filterBy[Field.TerritoryScope]?.(object)) dist += 8;
+      if (!filterBy[Field.Modality]?.(object)) dist += 16;
+      if (!filterBy[Field.LanguageScope]?.(object)) dist += 32;
       return dist;
     };
     const getMatchGroup = (object: ObjectData): string => {
-      if (!filterBy.Language?.(object)) return 'not ' + filterLabels.languageFilter;
-      if (!filterBy['Writing System']?.(object)) return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterBy.Territory?.(object)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterBy['Territory Scope']?.(object)) return 'not ' + filterLabels.territoryScope;
-      if (!filterBy.Modality?.(object)) return 'not ' + filterLabels.modalityFilter;
-      if (!filterBy['Language Scope']?.(object)) return 'not ' + filterLabels.languageScope;
+      if (!filterBy[Field.Language]?.(object)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy[Field.WritingSystem]?.(object))
+        return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterBy[Field.Territory]?.(object)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterBy[Field.TerritoryScope]?.(object)) return 'not ' + filterLabels.territoryScope;
+      if (!filterBy[Field.Modality]?.(object)) return 'not ' + filterLabels.modalityFilter;
+      if (!filterBy[Field.LanguageScope]?.(object)) return 'not ' + filterLabels.languageScope;
       return 'matched';
     };
     return [getMatchDistance, getMatchGroup];
   }, [
-    filterBy.Language,
-    filterBy['Writing System'],
-    filterBy.Territory,
-    filterBy['Territory Scope'],
-    filterBy.Modality,
-    filterBy['Language Scope'],
+    filterBy[Field.Language],
+    filterBy[Field.WritingSystem],
+    filterBy[Field.Territory],
+    filterBy[Field.TerritoryScope],
+    filterBy[Field.Modality],
+    filterBy[Field.LanguageScope],
     filterLabels,
   ]);
 

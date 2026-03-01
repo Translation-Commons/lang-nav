@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
@@ -12,7 +13,7 @@ type Props = {
 
 const LocalesInTerritoryCard: React.FC<Props> = ({ territory }) => {
   const [showAll, setShowAll] = React.useState(false);
-  const filterByLanguageScope = useFilters()['Language Scope'];
+  const filterByLanguageScope = useFilters()[Field.LanguageScope];
 
   const locales = (territory.locales ?? []).filter(filterByLanguageScope).sort(sortByPopulation);
   return (
