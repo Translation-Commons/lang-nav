@@ -42,6 +42,12 @@ enum Field {
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
   PopulationPercentInBiggestDescendantLanguage = 'Biggest Descendant Relative Population',
+
+  // Keyboard fields
+  Platform = 'Platform',
+  InputScript = 'Input Script',
+  OutputScript = 'Output Script',
+  VariantTag = 'Variant Tag',
 }
 
 export default Field;

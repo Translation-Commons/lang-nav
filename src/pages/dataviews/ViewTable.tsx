@@ -1,3 +1,4 @@
+import KeyboardTable from '@widgets/tables/KeyboardTable';
 import LanguageTable from '@widgets/tables/LanguageTable';
 import LocaleTable from '@widgets/tables/LocaleTable';
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
@@ -26,6 +27,8 @@ function ViewTable() {
       return <WritingSystemTable />;
     case ObjectType.VariantTag:
       return <VariantTagTable />;
+    case ObjectType.Keyboard:
+      return <KeyboardTable />;
   }
 }
 

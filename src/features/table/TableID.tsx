@@ -7,6 +7,7 @@ enum TableID {
   Territories,
   VariantTags,
   WritingSystems,
+  Keyboards,
 
   // Specialized tables
   LanguagesInCensus,
