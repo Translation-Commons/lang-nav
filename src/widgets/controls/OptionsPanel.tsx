@@ -1,15 +1,11 @@
 import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import LimitInput from '@features/pagination/LimitInput';
 import usePageArrowKeys from '@features/pagination/usePageArrowKeys';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
-import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
-import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
-import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
 import LanguageModalitySelector from '@features/transforms/filtering/LanguageModalitySelector';
 import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
@@ -21,19 +17,8 @@ import {
   VitalityEthFineSelector,
 } from '@features/transforms/filtering/VitalitySelector';
 import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
-import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
-import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortBySelector';
-import SortBySelector from '@features/transforms/sorting/SortBySelector';
-import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
-
-import { ObjectiveList } from '../CommonObjectives';
 
 import ResizablePanel from './ResizablePanel';
-import LanguageSourceSelector from './selectors/LanguageSourceSelector';
-import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
-import PageBrightnessSelector from './selectors/PageBrightnessSelector';
-import ProfileSelector from './selectors/ProfileSelector';
-import ViewSelector from './selectors/ViewSelector';
 
 import './controls.css';
 
@@ -41,19 +26,9 @@ const OptionsPanel: React.FC = () => {
   usePageArrowKeys();
 
   return (
-    <ResizablePanel defaultWidth={300} purpose="filters" title="Options">
+    <ResizablePanel defaultWidth={300} purpose="filters" title="Filters">
       <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
-        <OptionsPanelSection title="Common Actions" optionsName="common actions">
-          <div>{/* intentionally blank */}</div>
-          <ObjectiveList />
-        </OptionsPanelSection>
-
-        <OptionsPanelSection title="Data" optionsName="data options">
-          <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
-          <ProfileSelector />
-        </OptionsPanelSection>
-
-        <OptionsPanelSection title="Filter" optionsName="filters">
+        <OptionsPanelSection optionsName="filters">
           <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />
           <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
           <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
@@ -64,20 +39,6 @@ const OptionsPanel: React.FC = () => {
           <VitalityEthFineSelector />
           <VitalityEthCoarseSelector />
         </OptionsPanelSection>
-
-        <OptionsPanelSection title="View" optionsName="view options">
-          <ViewSelector />
-          <LimitInput />
-          <SortBySelector />
-          <SecondarySortBySelector />
-          <SortDirectionSelector />
-          <ColorBySelector />
-          <ColorGradientSelector />
-          <ScaleBySelector />
-          <FieldFocusSelector />
-          <LocaleSeparatorSelector />
-          <PageBrightnessSelector />
-        </OptionsPanelSection>
       </SelectorDisplayProvider>
     </ResizablePanel>
   );
@@ -85,10 +46,9 @@ const OptionsPanel: React.FC = () => {
 
 const OptionsPanelSection: React.FC<
   React.PropsWithChildren<{
-    title: string;
     optionsName: string;
   }>
-> = ({ children, title, optionsName }) => {
+> = ({ children, optionsName }) => {
   const [isExpanded, setIsExpanded] = React.useState(false);
   const childArray = React.Children.toArray(children);
 
@@ -100,19 +60,6 @@ const OptionsPanelSection: React.FC<
         marginBottom: '0.5em',
       }}
     >
-      <div
-        style={{
-          fontSize: '1.2em',
-          fontWeight: 'lighter',
-          borderRadius: '0',
-          width: '100%',
-          textAlign: 'left',
-          backgroundColor: 'var(--color-button-secondary)',
-          padding: '0.5em',
-        }}
-      >
-        {title}
-      </div>
       <div
         style={{
           display: 'flex',
