@@ -77,6 +77,7 @@ export interface LocaleData extends ObjectBase {
   officialStatus?: OfficialStatus;
   langFormedHere?: boolean; // Whether the language was formed in this territory, as opposed to being imported through state expansion, migration, etc.
   historicPresence?: boolean; // Whether the language or its antecedents were established in this territory before 1500 CE, as a rough proxy for indigeneity
+  ecrmlProtection?: string; // Level of protection under the European Charter for Regional or Minority Languages
   wikipedia?: WikipediaData;
 
   // References to other objects, filled in after loading the TSV
