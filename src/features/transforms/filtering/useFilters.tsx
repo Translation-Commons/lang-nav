@@ -97,7 +97,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.LanguageFormedHere]: alwaysTrue,
 
     [Field.Platform]: alwaysTrue,
-    [Field.InputScript]: alwaysTrue,
     [Field.OutputScript]: alwaysTrue,
     [Field.VariantTag]: alwaysTrue,
   };

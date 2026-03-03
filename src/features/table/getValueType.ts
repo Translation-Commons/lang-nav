@@ -37,7 +37,6 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.Territory:
     case Field.None:
     case Field.Platform:
-    case Field.InputScript:
     case Field.OutputScript:
     case Field.VariantTag:
       return TableValueType.String;

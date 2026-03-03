@@ -57,7 +57,6 @@ export function getMinimumValue(field?: Field): number {
     case Field.WritingSystem:
     case Field.Territory:
     case Field.Platform:
-    case Field.InputScript:
     case Field.OutputScript:
     case Field.VariantTag:
       return convertAlphaToNumber(''); // 0
@@ -114,7 +113,6 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.WritingSystem:
     case Field.Territory:
     case Field.Platform:
-    case Field.InputScript:
     case Field.OutputScript:
     case Field.VariantTag:
       return convertAlphaToNumber('ZZZZZZZZZZ');
