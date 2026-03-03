@@ -52,6 +52,13 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
             ),
         },
         {
+          key: 'Protection under ECRML',
+          description:
+            'Whether the language is covered by the European Charter for Regional or Minority Languages in this territory.',
+          render: (loc) => (loc.ecrmlProtection ? 'Yes' : <Deemphasized>None</Deemphasized>),
+          isInitiallyVisible: false,
+        },
+        {
           key: 'Population',
           render: (loc) => loc.populationSpeaking,
           valueType: TableValueType.Population,
