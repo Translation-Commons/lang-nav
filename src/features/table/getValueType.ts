@@ -36,6 +36,10 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.WritingSystem:
     case Field.Territory:
     case Field.None:
+    case Field.Platform:
+    case Field.InputScript:
+    case Field.OutputScript:
+    case Field.VariantTag:
       return TableValueType.String;
     case Field.VitalityMetascore:
     case Field.ISOStatus:
