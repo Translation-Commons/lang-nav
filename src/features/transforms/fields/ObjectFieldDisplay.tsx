@@ -59,6 +59,10 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Language:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.Platform:
+    case Field.InputScript:
+    case Field.OutputScript:
+    case Field.VariantTag:
       return <>{fieldValue}</>;
 
     case Field.VitalityMetascore:

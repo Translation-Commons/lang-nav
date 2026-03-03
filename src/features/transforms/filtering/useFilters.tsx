@@ -95,6 +95,11 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.PopulationPercentInBiggestDescendantLanguage]: alwaysTrue,
     [Field.HistoricPresence]: alwaysTrue,
     [Field.LanguageFormedHere]: alwaysTrue,
+
+    [Field.Platform]: alwaysTrue,
+    [Field.InputScript]: alwaysTrue,
+    [Field.OutputScript]: alwaysTrue,
+    [Field.VariantTag]: alwaysTrue,
   };
 }
 
