@@ -80,7 +80,6 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Modality:
     case Field.Depth:
     case Field.Platform:
-    case Field.InputScript:
     case Field.OutputScript:
     case Field.VariantTag:
       return SortDirection.Ascending; // A to Z

@@ -35,6 +35,7 @@ enum Field {
   Language = 'Language',
   WritingSystem = 'Writing System',
   Territory = 'Territory',
+  VariantTag = 'VariantTag',
 
   // Extra population metrics
   PopulationDirectlySourced = 'Population Directly Sourced',
@@ -45,9 +46,7 @@ enum Field {
 
   // Keyboard fields
   Platform = 'Platform',
-  InputScript = 'Input Script',
   OutputScript = 'Output Script',
-  VariantTag = 'Variant Tag',
 }
 
 export default Field;

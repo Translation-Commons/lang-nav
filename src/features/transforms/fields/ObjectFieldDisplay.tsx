@@ -60,7 +60,6 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.WritingSystem:
     case Field.Territory:
     case Field.Platform:
-    case Field.InputScript:
     case Field.OutputScript:
     case Field.VariantTag:
       return <>{fieldValue}</>;

@@ -128,8 +128,6 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     // Keyboard fields
     case Field.Platform:
       return getKeyboardForEntity(object)?.platform;
-    case Field.InputScript:
-      return getKeyboardForEntity(object)?.inputWritingSystem?.nameDisplay;
     case Field.OutputScript:
       return getKeyboardForEntity(object)?.outputWritingSystem?.nameDisplay;
     case Field.VariantTag:

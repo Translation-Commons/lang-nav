@@ -32,13 +32,31 @@ const KeyboardTable: React.FC = () => {
         },
         {
           key: 'Input Script',
-          render: (object) => <HoverableObjectName object={object.inputWritingSystem} />,
-          field: Field.InputScript,
+          render: (object) => (
+            <HoverableObjectName
+              object={object.inputWritingSystem}
+              style={
+                object.inputScriptCode === object.outputScriptCode
+                  ? { color: 'var(--color-text)' }
+                  : undefined
+              }
+            />
+          ),
+          field: Field.WritingSystem,
           columnGroup: 'Related Objects',
         },
         {
           key: 'Output Script',
-          render: (object) => <HoverableObjectName object={object.outputWritingSystem} />,
+          render: (object) => (
+            <HoverableObjectName
+              object={object.outputWritingSystem}
+              style={
+                object.inputScriptCode === object.outputScriptCode
+                  ? { color: 'var(--color-text)' }
+                  : undefined
+              }
+            />
+          ),
           field: Field.OutputScript,
           columnGroup: 'Related Objects',
         },
