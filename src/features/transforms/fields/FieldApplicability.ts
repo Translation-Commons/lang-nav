@@ -196,7 +196,7 @@ export function getFilterBysApplicableToObjectType(objectType: ObjectType): Fiel
     Field.LanguageScope,
     Field.TerritoryScope,
     Field.ISOStatus,
-    // Field.VitalityEthnologueFine,
+    // Field.VitalityEthnologueFine, Disabled until clarity on data usage
     // Field.VitalityEthnologueCoarse,
     Field.Name, // Technically filters name and code right now, depending on SearchBy
   ];

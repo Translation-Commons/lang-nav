@@ -46,7 +46,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
   const { objectType } = usePageParams();
-  const filterBys = getFilterBysApplicableToObjectType(objectType).filter((f) => f !== Field.None); // This shouldn't return the search bar
+  const filterBys = getFilterBysApplicableToObjectType(objectType).filter((f) => f !== Field.Name); // This shouldn't return the search bar
 
   return filterBys.map((filterBy) => <FilterSelector field={filterBy} key={filterBy} />);
 };
