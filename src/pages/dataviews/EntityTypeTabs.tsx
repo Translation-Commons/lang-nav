@@ -32,7 +32,7 @@ const EntityTypeTabs: React.FC = () => {
               borderWidth: '2px',
               borderRadius: '0.5em 0.5em 0 0',
               borderBottomStyle: 'solid',
-              borderBottomColor: isActive ? 'var(--color-button-primary)' : 'auto',
+              borderBottomColor: isActive ? 'var(--color-button-primary)' : 'transparent',
             }}
           >
             {type}
