@@ -7,9 +7,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
+import { getMockLanguages } from '../../__tests__/mockLanguagesForFilterTest.test';
 import LanguageFilterSelector from '../LanguageFilterSelector';
-
-import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
 const mockUpdatePageParams = vi.fn();
 

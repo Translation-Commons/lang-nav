@@ -31,6 +31,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.TerritoryScope,
         Field.LanguageFormedHere,
         Field.HistoricPresence,
+        Field.ISOStatus,
       ];
     case ObjectType.Territory:
       return [
@@ -182,4 +183,22 @@ export function getScaleBysApplicableToObjectType(objectType: ObjectType): Field
     Field.CountOfCensuses,
   ];
   return getApplicableFields(scalingFields, objectType);
+}
+
+export function getFilterBysApplicableToObjectType(objectType: ObjectType): Field[] {
+  // Ordered by preferred UI grouping: connections first, then vitality, then text fields
+  // This also affects which filters happen first
+  const filterFields = [
+    Field.Territory,
+    Field.WritingSystem,
+    Field.Language,
+    Field.Modality,
+    Field.LanguageScope,
+    Field.TerritoryScope,
+    Field.ISOStatus,
+    // Field.VitalityEthnologueFine, Disabled until clarity on data usage
+    // Field.VitalityEthnologueCoarse,
+    Field.Name, // Technically filters name and code right now, depending on SearchBy
+  ];
+  return getApplicableFields(filterFields, objectType);
 }

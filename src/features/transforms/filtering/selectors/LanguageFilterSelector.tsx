@@ -14,19 +14,17 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import Field from '../fields/Field';
-import { getSortFunctionParameterized } from '../sorting/sort';
-
-import { getFilterLabels } from './FilterLabels';
-import { getSuggestionsFunction } from './getSuggestionsFunction';
-import useFilters from './useFilters';
+import Field from '../../fields/Field';
+import { sortByPopulation } from '../../sorting/sort';
+import { getFilterLabels } from '../FilterLabels';
+import { getSuggestionsFunction } from '../getSuggestionsFunction';
+import useFilters from '../useFilters';
 
 type Props = { display?: SelectorDisplay };
 
 const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
   const { languageFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
-  const sortFunction = getSortFunctionParameterized(Field.Population);
   const filterBy = useFilters();
   const filterByScope = filterBy[Field.LanguageScope];
   const filterByTerritory = filterBy[Field.Territory];
@@ -50,15 +48,12 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
       return 'matched';
     };
 
-    return getSuggestionsFunction(languages.sort(sortFunction), getMatchDistance, getMatchGroup);
-  }, [
-    languages,
-    filterByScope,
-    filterByTerritory,
-    filterByWritingSystem,
-    filterLabels,
-    sortFunction,
-  ]);
+    return getSuggestionsFunction(
+      languages.sort(sortByPopulation),
+      getMatchDistance,
+      getMatchGroup,
+    );
+  }, [languages, filterByScope, filterByTerritory, filterByWritingSystem, filterLabels]);
 
   return (
     <SelectorDisplayProvider display={display}>
