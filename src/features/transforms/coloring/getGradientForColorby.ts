@@ -35,6 +35,9 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.Language:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.Platform:
+    case Field.OutputScript:
+    case Field.VariantTag:
       // More of a spectrum rather than directional
       return ColorGradient.HueRainbowBlueToRed;
 

@@ -35,6 +35,7 @@ enum Field {
   Language = 'Language',
   WritingSystem = 'Writing System',
   Territory = 'Territory',
+  VariantTag = 'VariantTag',
 
   // Extra population metrics
   PopulationDirectlySourced = 'Population Directly Sourced',
@@ -42,6 +43,10 @@ enum Field {
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
   PopulationPercentInBiggestDescendantLanguage = 'Biggest Descendant Relative Population',
+
+  // Keyboard fields
+  Platform = 'Platform',
+  OutputScript = 'Output Script',
 }
 
 export default Field;
