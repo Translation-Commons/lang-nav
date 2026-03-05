@@ -1,9 +1,12 @@
 import { CopyIcon } from 'lucide-react';
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import SelectorLabel from '@features/params/ui/SelectorLabel';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
@@ -35,14 +38,44 @@ type PartitionedLocales = {
 const PotentialLocales: React.FC = () => {
   const { censuses, getLanguage, getLocale, locales } = useDataContext();
   const { localeSeparator } = usePageParams();
-  const { percentThreshold, percentThresholdSelector } = usePotentialLocaleThreshold();
+  const { percentThreshold: minInCountry, percentThresholdSelector: minInCountrySelector } =
+    usePotentialLocaleThreshold(
+      <SelectorLabel
+        label="% in Country:"
+        description="Limit results by the minimum percent population in a territory that uses the language."
+      />,
+    );
+  const [requireBothPercents, setRequireBothPercents] = React.useState(true);
+  const {
+    percentThreshold: minOfLangWorldWide,
+    percentThresholdSelector: minOfLangWorldWideSelector,
+  } = usePotentialLocaleThreshold(
+    <SelectorLabel
+      label="% of Lang Worldwide:"
+      description="Limit results by the minimum percent population of the language compared worldwide."
+    />,
+  );
+  const isPercentEnough = useCallback(
+    (percInCountry: number | undefined, percOfLangWorldWide: number | undefined) => {
+      if (requireBothPercents) {
+        return (
+          (percInCountry ?? 0) >= minInCountry && (percOfLangWorldWide ?? 0) >= minOfLangWorldWide
+        );
+      } else {
+        return (
+          (percInCountry ?? 0) >= minInCountry || (percOfLangWorldWide ?? 0) >= minOfLangWorldWide
+        );
+      }
+    },
+    [minInCountry, minOfLangWorldWide, requireBothPercents],
+  );
   const potentialLocales = getPotentialLocales(
     Object.values(censuses),
     getLanguage,
     getLocale,
     locales,
     localeSeparator,
-    percentThreshold,
+    isPercentEnough,
   );
 
   return (
@@ -54,9 +87,18 @@ const PotentialLocales: React.FC = () => {
         number of actualized locales is smaller than the possible ones. However ones that appear
         here may be worth considering.
       </p>
-
-      {percentThresholdSelector}
-
+      Filter by minimum:
+      <div style={{ display: 'flex', gap: '1em', flexWrap: 'wrap', alignItems: 'start' }}>
+        {minInCountrySelector}
+        <Selector<number>
+          options={[0, 1]}
+          onChange={(value) => setRequireBothPercents(value === 1)}
+          display={SelectorDisplay.ButtonGroup}
+          selected={requireBothPercents ? 1 : 0}
+          getOptionLabel={(v) => (v ? 'and' : 'or')}
+        />
+        {minOfLangWorldWideSelector}
+      </div>
       <SubReport title="Largest Populations" locales={potentialLocales.largest}>
         Of all of the census records collected so far, these locales have more people speaking it
         than the other instantiated locales. This likely means the world population is indigenous to
@@ -158,6 +200,7 @@ const PotentialLocalesTable: React.FC<{
           key: 'Population (in Census)',
           render: (object) => object.populationSpeaking,
           field: Field.PopulationDirectlySourced,
+          isInitiallyVisible: false,
         },
         {
           key: '% in Territory',
@@ -210,7 +253,10 @@ function getPotentialLocales(
   getLocale: (code: string) => LocaleData | undefined,
   locales: LocaleData[],
   localeSeparator: LocaleSeparator,
-  percentThreshold: number,
+  isPercentEnough: (
+    percInCountry: number | undefined,
+    percOfLangWorldWide: number | undefined,
+  ) => boolean,
 ): PartitionedLocales {
   // Iterate through all censuses and find locales that are not listed
   const allMissingLocales = useMemo(
@@ -222,12 +268,14 @@ function getPotentialLocales(
           if (getLocale(localeID) || lang == null) {
             return; // Locale already exists or language is missing, skip
           }
-          const populationPercent = (populationEstimate * 100) / census.populationEligible;
-          if (populationPercent < percentThreshold) {
+          const populationPercentInCountry = (populationEstimate * 100) / census.populationEligible;
+          const populationPercentOfLanguageWorldwide =
+            (populationEstimate * 100) / (lang.populationEstimate ?? 1);
+          if (!isPercentEnough(populationPercentInCountry, populationPercentOfLanguageWorldwide)) {
             return; // Skip if the population percentage is below the threshold
           }
           const populationAdjusted = Math.round(
-            (populationPercent / 100.0) * (census.territory?.population || 1),
+            (populationPercentInCountry / 100.0) * (census.territory?.population || 1),
           );
 
           if (missing[localeID] == null) {
@@ -247,15 +295,17 @@ function getPotentialLocales(
               populationSource: PopulationSourceCategory.Official,
               populationAdjusted: populationAdjusted,
               populationSpeaking: populationEstimate,
-              populationSpeakingPercent: populationPercent,
+              populationSpeakingPercent: populationPercentInCountry,
               populationCensus: census,
-              censusRecords: [{ census, populationEstimate, populationPercent }],
+              censusRecords: [
+                { census, populationEstimate, populationPercent: populationPercentInCountry },
+              ],
             };
           } else {
             if ((missing[localeID].populationAdjusted ?? 0) < populationAdjusted) {
               // If we already have a locale but the population estimate is higher, update it
               missing[localeID].populationSpeaking = populationEstimate;
-              missing[localeID].populationSpeakingPercent = populationPercent;
+              missing[localeID].populationSpeakingPercent = populationPercentInCountry;
               missing[localeID].populationAdjusted = populationAdjusted;
               missing[localeID].populationCensus = census;
             }
@@ -263,13 +313,13 @@ function getPotentialLocales(
             missing[localeID].censusRecords.push({
               census,
               populationEstimate,
-              populationPercent,
+              populationPercent: populationPercentInCountry,
             });
           }
         });
         return missing;
       }, {}),
-    [censuses, localeSeparator, percentThreshold, getLanguage, getLocale],
+    [censuses, localeSeparator, isPercentEnough, getLanguage, getLocale],
   );
 
   // Group all locales (actual & missing) by language
