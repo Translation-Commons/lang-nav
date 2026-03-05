@@ -11,13 +11,12 @@ type Props = {
 };
 
 const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true }) => {
-  const { codeDisplay, nameDisplay, nameEndonym } = object;
+  const { codeDisplay, nameDisplay } = object;
 
   if (!highlightSearchMatches) {
     return (
       <>
-        <strong>{nameDisplay}</strong>
-        {nameEndonym && nameDisplay != nameEndonym && ' ' + nameEndonym} [{codeDisplay}]
+        <strong>{nameDisplay}</strong> [{codeDisplay}]
       </>
     );
   }
@@ -27,12 +26,6 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true })
       <strong>
         <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
       </strong>{' '}
-      {nameDisplay != nameEndonym && (
-        <div style={{ display: 'inline-block' }}>
-          {/* placed in its own div to prevent right-to-left names from breaking */}
-          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameEndonym} />
-        </div>
-      )}{' '}
       [
       <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />]
     </>
