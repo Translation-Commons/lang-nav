@@ -5,7 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 const LanguageScopeSelector: React.FC = () => {
   const { languageScopes, updatePageParams } = usePageParams();
@@ -26,6 +26,7 @@ const LanguageScopeSelector: React.FC = () => {
       }
       selected={languageScopes}
       getOptionLabel={getLanguageScopeLabel}
+      getOptionDescription={getLanguageScopeDescription}
     />
   );
 };
