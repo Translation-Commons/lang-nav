@@ -19,8 +19,8 @@
 #notes	From a compilation of other reports, years 2021 and 2023																																							
 Language Code	Language Name	Angola	Benin	Botswana	Burkina Faso	Cabo Verde	Cameroon	Congo	Côte d´Ivoire	Ethiopia	Eswatini	Gabon	Gambia	Ghana	Guinea	Kenya	Lesotho	Liberia	Madagascar	Malawi	Mali	Mauritania	Mauritius	Morocco	Mozambique	Namibia	Niger	Nigeria	Sao Tome and Principe	Senegal	Seychelles	Sierra Leone	South Africa	Sudan	Tanzania	Togo	Tunisia	Uganda	Zambia	Zimbabwe
 fra	French		4.6		5.8		49.2	50.9	39.3			73.0			2.4						0.4	0.2	1.7	0.9			1.2			2.3	0.5					5.8	0.2			
-por	Portuguese	81.5				0.3																			34.3	0.6			99.4											0.0
-eng	English			2.3			16.4			0.0	8.4	0.1	2.9	3.0		3.4	0.1	13.7		0.5			0.3			10.0		7.2			6.1	0.6	22.0	0.6				2.6	3.5	0.9
+por	Portuguese	81.5				0.3																			34.3	0.6			99.4											>0.0
+eng	English			2.3			16.4			>0.0	8.4	0.1	2.9	3.0		3.4	0.1	13.7		0.5			0.3			10.0		7.2			6.1	0.6	22.0	0.6				2.6	3.5	0.9
 kea	Creole					99.7																																		
 sot	Sesotho																99.5																							
 ara/apd	Sudanese Arabic																																	98.0						
@@ -40,7 +40,7 @@ wolo1247/wol	Wolof / Lebou																													57.0
 mos	Mooré				54.8																																			
 aka	Akan													54.3																										
 mlg	#Malagasy avec spécificité régionale																		53.7																					
-mul	Other	0.1	0.4		2.9			1.6	4.6	2.3			1.3	3.4		0.6			0.2	0.1	0.0		0.1	0.2	3.1	2.7		13.1		1.7	0.1		0.1	0.4	4.9	3.3		1.5	0.9	
+mul	Other	0.1	0.4		2.9			1.6	4.6	2.3			1.3	3.4		0.6			0.2	0.1	>0.0		0.1	0.2	3.1	2.7		13.1		1.7	0.1		0.1	0.4	4.9	3.3		1.5	0.9	
 ndon1253	Oshiwambo (Oshindonga/Oshikwanyama)																									47.0														
 mlg	#Malagasy officiel																		46.2																					
 fon	Fongbé		43.4																																					
@@ -50,7 +50,7 @@ bem	Bemba																																						36.9
 ewe	Ewé																																			36.9				
 lir	Liberian English																	35.1																						
 kri	Krio																															33.5								
-ful	Poular														33.3																									
+ful/fuf	Poular														33.3																									
 hau	Hausa																											31.5												
 orm	Afan Oromo									29.1																														
 men	Mende																															28.2								
@@ -63,7 +63,7 @@ sus	Soussou														21.6
 vmw	Makua																								21.1															
 wol	Wolof												20.6																											
 temn1245	Themne																															20.2								
-ful	Fula												18.6																											
+ful/fuc	Fula												18.6																											
 ful/fuc	Pulaar/Toucouleur																													18.5										
 yor	Yoruba																											17.2												
 nya/nucl1395	Nyanja																																						16.4	
@@ -81,7 +81,7 @@ ajg	Ajagbé		12.3
 xog	Lusoga																																					12.3		
 suk	Kisukuma																																		11.9					
 toi	Tonga																																						11.9	
-ful	Fufuldé						11.6																																	
+ful/fub	Fufuldé						11.6																																	
 ewe	Ewe/Anlo													11.3																										
 taq	Tamasheq																										11.1													
 xho	Xhosa																																10.4							
@@ -111,7 +111,7 @@ kdh	Tem; Kotokoli																																			7.0
 mfq	Ben; Moba																																			7.0				
 ful/fuc	Pular																					6.8																		
 afr	Afrikaans																									6.5														
-ful	Fulfuldé		6.4																																					
+ful/fue	Fulfuldé		6.4																																					
 snk	Soninké / Sarakollé																				6.4																			
 son	Sonrhaï																				6.4																			
 lag	Langi																																					6.3		
@@ -140,12 +140,12 @@ cgg	Rukiga																																					5.0
 kpe	Kpèlè														5.0																									
 kck	Ikalanga/Sekalaka			4.9																																				
 tbz	Ditamari		4.9																																					
-mer	Meru/Embu															4.7																								
+cent2274/mer	#Meru/Embu															4.7																								
 dnj	Yacouba								4.6																															
 dga	Dagaare/Waale													4.5																										
 loz	Lozi																																						4.4	
 ach	Acholi																																					4.2		
-ful	Fulfuldé																										4.2													
+ful/fuq	Fulfuldé																										4.2													
 lgg	Lugbara																																					4.2		
 man/bam	Mandinka/Bambara																													4.2										
 gej	Mina; Guen																																			4.1				
@@ -196,7 +196,7 @@ myx	Lumasaaba																																					2.6
 nse	Nsenga																																						2.6	
 senu1239/kara1479	Karaboro				2.6																																			
 tui	Toupouri						2.6																																	
-ful	Fulfudé				2.5																																			
+ful/fuh/lipt1238	Fulfudé				2.5																																			
 vai	Vai																	2.5																						
 xon	Konkomba																																			2.5				
 alz	Alur																																					2.4		
@@ -244,14 +244,14 @@ lch	Nganguela	1.6
 kon/ldi	Lari							1.6																																
 pcm	Pidgin English																											1.6												
 xon	Likpakpaln													1.6																										
-mas	Masai/Samburu															1.5																								
+nucl1431/mas	#Masai/Samburu															1.5																								
 mhw	Thimbukushu																									1.5														
 leb/lala1265	Lala																																						1.5	
 snk	Soninke																													1.5										
 tsv	Tsogho											1.5																												
 urh	Urhobo																											1.5												
 chw	Chuabo																								1.4															
-ful	Fulani																											1.4												
+ful/fuv	Fulani																											1.4												
 leh	Lenje																																						1.4	
 lob	Lobi								1.4																															
 man	Mandingo																	1.4																						
@@ -338,7 +338,7 @@ abr	Abron								0.6
 amf	Hamerigna									0.6																														
 bin	Edo																											0.6												
 dwr	Dawurogna									0.6																														
-ful	Fullah																															0.6								
+ful/fuf	Fullah																															0.6								
 ish	Esan																											0.6												
 jit	Kijita																																		0.6					
 kon/kng/mis	Fiote/Ibinda	0.6																																						
@@ -366,7 +366,7 @@ keb	Kélé											0.5
 kuj	Kuria															0.5																								
 leb/bisa1264	Bisa																																						0.5	
 man	Madingo																															0.5								
-mis	Don't know				0.0															0.1					0.3											0.1				
+mis	Don't know				>0.0															0.1					0.3											0.1				
 nka	Nkoya																																						0.5	
 nla	Mbouda						0.5																																	
 nya/mang1391	Chimang’anja																			0.5																				
@@ -389,7 +389,7 @@ kro/dee	Dei																	0.4
 ktb	Kembatigna									0.4																														
 mcp	Maka						0.4																																	
 mgr/rung1256	Lungu																																						0.4	
-mis	Refused													0.1						0.0	0.2									0.1			0.0							
+mis	Refused													0.1						>0.0	0.2									0.1			>0.0							
 ruf	Kiluguru																																		0.4					
 sna	Shona																								0.4															
 yal	Dialounké														0.4																									
@@ -463,10 +463,10 @@ wmw	Kimwani																								0.1
 wol	Wolof																					0.1																		
 xsm	Kassem													0.1																										
 yey	Seyeyi			0.1																																				
-bwo	Shinashigna									0.0																														
-cri	Forro																												0.0											
-cwe	Kikwere																																		0.0					
-har	Adergigna orHarari									0.0																														
-lai	Chilambya																			0.0																				
-mis	Fulse				0.0																																			
-mym	Mejengegna									0.0																														
+bwo	Shinashigna									>0.0																														
+cri	Forro																												>0.0											
+cwe	Kikwere																																		>0.0					
+har	Adergigna orHarari									>0.0																														
+lai	Chilambya																			>0.0																				
+mis	Fulse				>0.0																																			
+mym	Mejengegna									>0.0																														

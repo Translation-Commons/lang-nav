@@ -158,7 +158,8 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
 
     // Most rows specific a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
     const languageCodes = parts[0]
-      .split('/')
+      // split if it is not contained in parentheses
+      .split(/\/(?![^(]*\))/)
       .map((code) => code.trim())
       .filter((code) => !isIgnoredLanguageCode(code));
     if (languageCodes.length === 0) continue;

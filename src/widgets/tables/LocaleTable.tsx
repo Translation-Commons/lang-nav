@@ -52,6 +52,7 @@ const LocaleTable: React.FC = () => {
           key: 'Language Names',
           render: (object) => <CommaSeparated>{object.language?.names}</CommaSeparated>,
           columnGroup: 'Names',
+          isInitiallyVisible: false,
         },
         ...LocalePopulationColumns,
         {

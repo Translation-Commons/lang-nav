@@ -1,49 +1,57 @@
 import { CopyIcon } from 'lucide-react';
-import React, { useMemo } from 'react';
+import React, { useCallback } from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import SelectorLabel from '@features/params/ui/SelectorLabel';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
-import { getSortFunction, sortByPopulation } from '@features/transforms/sorting/sort';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { CensusData } from '@entities/census/CensusTypes';
-import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import {
-  LocaleData,
-  LocaleSource,
-  PopulationSourceCategory,
-  StandardLocaleCode,
-} from '@entities/locale/LocaleTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { usePotentialLocaleThreshold } from '@entities/locale/PotentialLocaleThreshold';
-import { isTerritoryGroup, TerritoryCode } from '@entities/territory/TerritoryTypes';
+import usePotentialLocales from '@entities/locale/usePotentialLocales';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
-type PartitionedLocales = {
-  largest: LocaleData[];
-  largestButDescendantExists: LocaleData[];
-  significant: LocaleData[];
-  significantButMaybeRedundant: LocaleData[];
-};
-
 const PotentialLocales: React.FC = () => {
-  const { censuses, getLanguage, getLocale, locales } = useDataContext();
-  const { localeSeparator } = usePageParams();
-  const { percentThreshold, percentThresholdSelector } = usePotentialLocaleThreshold();
-  const potentialLocales = getPotentialLocales(
-    Object.values(censuses),
-    getLanguage,
-    getLocale,
-    locales,
-    localeSeparator,
-    percentThreshold,
+  const { percentThreshold: minInCountry, percentThresholdSelector: minInCountrySelector } =
+    usePotentialLocaleThreshold(
+      <SelectorLabel
+        label="% in Country:"
+        description="Limit results by the minimum percent population in a territory that uses the language."
+      />,
+    );
+  const [requireBothPercents, setRequireBothPercents] = React.useState(true);
+  const {
+    percentThreshold: minOfLangWorldWide,
+    percentThresholdSelector: minOfLangWorldWideSelector,
+  } = usePotentialLocaleThreshold(
+    <SelectorLabel
+      label="% of Lang Worldwide:"
+      description="Limit results by the minimum percent population of the language compared worldwide."
+    />,
   );
+  const isPercentEnough = useCallback(
+    (percInCountry: number | undefined, percOfLangWorldWide: number | undefined) => {
+      if (requireBothPercents) {
+        return (
+          (percInCountry ?? 0) >= minInCountry && (percOfLangWorldWide ?? 0) >= minOfLangWorldWide
+        );
+      } else {
+        return (
+          (percInCountry ?? 0) >= minInCountry || (percOfLangWorldWide ?? 0) >= minOfLangWorldWide
+        );
+      }
+    },
+    [minInCountry, minOfLangWorldWide, requireBothPercents],
+  );
+  const potentialLocales = usePotentialLocales(isPercentEnough);
 
   return (
     <div>
@@ -54,9 +62,18 @@ const PotentialLocales: React.FC = () => {
         number of actualized locales is smaller than the possible ones. However ones that appear
         here may be worth considering.
       </p>
-
-      {percentThresholdSelector}
-
+      Filter by minimum:
+      <div style={{ display: 'flex', gap: '1em', flexWrap: 'wrap', alignItems: 'start' }}>
+        {minInCountrySelector}
+        <Selector<number>
+          options={[0, 1]}
+          onChange={(value) => setRequireBothPercents(value === 1)}
+          display={SelectorDisplay.ButtonGroup}
+          selected={requireBothPercents ? 1 : 0}
+          getOptionLabel={(v) => (v ? 'and' : 'or')}
+        />
+        {minOfLangWorldWideSelector}
+      </div>
       <SubReport title="Largest Populations" locales={potentialLocales.largest}>
         Of all of the census records collected so far, these locales have more people speaking it
         than the other instantiated locales. This likely means the world population is indigenous to
@@ -158,6 +175,7 @@ const PotentialLocalesTable: React.FC<{
           key: 'Population (in Census)',
           render: (object) => object.populationSpeaking,
           field: Field.PopulationDirectlySourced,
+          isInitiallyVisible: false,
         },
         {
           key: '% in Territory',
@@ -202,185 +220,6 @@ const PotentialLocalesTable: React.FC<{
 
 function getLocaleExportString(locale: LocaleData): string {
   return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${locale.officialStatus ?? ''}\t${locale.populationSpeaking}\t\n`;
-}
-
-function getPotentialLocales(
-  censuses: CensusData[],
-  getLanguage: (code: string) => LanguageData | undefined,
-  getLocale: (code: string) => LocaleData | undefined,
-  locales: LocaleData[],
-  localeSeparator: LocaleSeparator,
-  percentThreshold: number,
-): PartitionedLocales {
-  // Iterate through all censuses and find locales that are not listed
-  const allMissingLocales = useMemo(
-    () =>
-      censuses.reduce<Record<StandardLocaleCode, LocaleData>>((missing, census) => {
-        Object.entries(census.languageEstimates ?? {})?.forEach(([langID, populationEstimate]) => {
-          const localeID = langID + '_' + census.isoRegionCode;
-          const lang = getLanguage(langID);
-          if (getLocale(localeID) || lang == null) {
-            return; // Locale already exists or language is missing, skip
-          }
-          const populationPercent = (populationEstimate * 100) / census.populationEligible;
-          if (populationPercent < percentThreshold) {
-            return; // Skip if the population percentage is below the threshold
-          }
-          const populationAdjusted = Math.round(
-            (populationPercent / 100.0) * (census.territory?.population || 1),
-          );
-
-          if (missing[localeID] == null) {
-            missing[localeID] = {
-              localeSource: LocaleSource.Census,
-              type: ObjectType.Locale,
-              ID: langID + '_' + census.isoRegionCode,
-              codeDisplay: lang.codeDisplay + localeSeparator + census.isoRegionCode,
-              languageCode: langID,
-              language: lang,
-              nameDisplay: lang.nameDisplay,
-              names: lang.names,
-
-              territory: census.territory,
-              territoryCode: census.isoRegionCode,
-
-              populationSource: PopulationSourceCategory.Official,
-              populationAdjusted: populationAdjusted,
-              populationSpeaking: populationEstimate,
-              populationSpeakingPercent: populationPercent,
-              populationCensus: census,
-              censusRecords: [{ census, populationEstimate, populationPercent }],
-            };
-          } else {
-            if ((missing[localeID].populationAdjusted ?? 0) < populationAdjusted) {
-              // If we already have a locale but the population estimate is higher, update it
-              missing[localeID].populationSpeaking = populationEstimate;
-              missing[localeID].populationSpeakingPercent = populationPercent;
-              missing[localeID].populationAdjusted = populationAdjusted;
-              missing[localeID].populationCensus = census;
-            }
-            if (missing[localeID].censusRecords == null) missing[localeID].censusRecords = [];
-            missing[localeID].censusRecords.push({
-              census,
-              populationEstimate,
-              populationPercent,
-            });
-          }
-        });
-        return missing;
-      }, {}),
-    [censuses, localeSeparator, percentThreshold, getLanguage, getLocale],
-  );
-
-  // Group all locales (actual & missing) by language
-  const allLocalesByLanguage = useMemo(() => {
-    return [...locales, ...Object.values(allMissingLocales)].reduce<
-      Record<LanguageCode, LocaleData[]>
-    >((byLanguage, locale) => {
-      const territoryScope = locale.territory?.scope;
-      if (isTerritoryGroup(territoryScope)) {
-        return byLanguage; // Skip regional locales, censuses are not at the regional level
-      }
-
-      const langCode = locale.languageCode;
-      if (!byLanguage[langCode]) {
-        byLanguage[langCode] = [];
-      }
-      byLanguage[langCode].push(locale);
-      return byLanguage;
-    }, {});
-  }, [allMissingLocales]);
-
-  return Object.values(allLocalesByLanguage).reduce<PartitionedLocales>(partitionPotentialLocales, {
-    largest: [],
-    largestButDescendantExists: [],
-    significant: [],
-    significantButMaybeRedundant: [],
-  });
-}
-
-function partitionPotentialLocales(
-  partitionedLocales: PartitionedLocales,
-  localesOfTheSameLanguage: LocaleData[],
-): PartitionedLocales {
-  // Iterate through the languages, finding the locale with the largest population.
-  // These are probably but not necessarily indigenous.
-  const localesSorted = localesOfTheSameLanguage.sort(sortByPopulation);
-  const largestLocale = localesSorted.reduce(
-    (max, locale) =>
-      (locale.populationAdjusted ?? 0) > (max.populationAdjusted ?? 0) ? locale : max,
-    localesSorted[0],
-  );
-  // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
-  if (largestLocale.localeSource === 'census') {
-    // Some censuses include language families -- that's nice complementary data but its usually not a priority
-    const descendantLocaleInTerritory = largestLocale.language
-      ? findExtantLocaleInTerritoryDescendingFromLanguage(
-          // start with the language of the locale to find alt codes eg. nan -> nan_Hant
-          // Then it will search child languages and dialects
-          [largestLocale.language],
-          largestLocale.territoryCode,
-        )
-      : null;
-    if (!descendantLocaleInTerritory) {
-      largestLocale.relatedLocales = { childLanguages: [localesSorted[1]] };
-      partitionedLocales.largest.push(largestLocale);
-    } else {
-      largestLocale.relatedLocales = { childLanguages: [descendantLocaleInTerritory] };
-      partitionedLocales.largestButDescendantExists.push(largestLocale);
-    }
-  }
-
-  // Go through the other locales that are not the largest but come from census sources and add them to the other category.
-  localesOfTheSameLanguage
-    .filter((locale) => locale !== largestLocale && locale.localeSource === 'census')
-    .forEach((locale) => {
-      const descendantLocaleInTerritory = locale.language
-        ? findExtantLocaleInTerritoryDescendingFromLanguage(
-            // start with the language of the locale to find alt codes eg. nan -> nan_Hant
-            // Then it will search child languages and dialects
-            [locale.language],
-            locale.territoryCode,
-          )
-        : null;
-      if (!descendantLocaleInTerritory) {
-        locale.relatedLocales = { childLanguages: [localesSorted[0]] };
-        partitionedLocales.significant.push(locale);
-      } else {
-        locale.relatedLocales = { childLanguages: [descendantLocaleInTerritory] };
-        partitionedLocales.significantButMaybeRedundant.push(locale);
-      }
-    });
-
-  return partitionedLocales;
-}
-
-function findExtantLocaleInTerritoryDescendingFromLanguage(
-  languages?: LanguageData[],
-  territoryCode?: TerritoryCode,
-): LocaleData | null {
-  const directDescendant = findLocaleWithSameTerritory(languages, territoryCode);
-  const recursiveDescendants =
-    languages?.map((lang) =>
-      findExtantLocaleInTerritoryDescendingFromLanguage(lang.childLanguages, territoryCode),
-    ) ?? [];
-  return (
-    // Sort to pick the most populous locale
-    [directDescendant, ...recursiveDescendants]
-      .filter((a) => a != null)
-      .sort(sortByPopulation)[0] ?? null
-  );
-}
-
-function findLocaleWithSameTerritory(
-  languages?: LanguageData[],
-  territoryCode?: TerritoryCode,
-): LocaleData | null {
-  return (
-    languages
-      ?.map((lang) => lang.locales.filter((loc) => loc.territoryCode === territoryCode)[0] ?? null)
-      .filter(Boolean)[0] ?? null
-  );
 }
 
 export default PotentialLocales;
