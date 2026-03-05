@@ -9,7 +9,7 @@ export function getLanguageScopeLabel(scope?: LanguageScope): string {
     case LanguageScope.Macrolanguage:
       return 'Macrolanguage';
     case LanguageScope.Language:
-      return 'Language';
+      return 'Individual Language';
     case LanguageScope.Dialect:
       return 'Dialect';
     case LanguageScope.SpecialCode:
