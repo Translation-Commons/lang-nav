@@ -35,7 +35,7 @@ const DeferredDataProviders: React.FC<{ children: React.ReactNode }> = ({ childr
     );
     import('@features/data/context/DataProvider').then((m) => setDataProvider(() => m.default));
   }, []);
-  if (!PageParamsProvider || !DataProvider) return null;
+  if (!PageParamsProvider || !DataProvider) return children;
 
   return (
     <PageParamsProvider>
