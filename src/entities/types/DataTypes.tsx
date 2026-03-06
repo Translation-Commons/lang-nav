@@ -22,7 +22,7 @@ export interface ObjectBase {
   names: string[];
 }
 
-export type ObjectData =
+export type EntityData =
   | CensusData
   | LanguageData
   | LocaleData
@@ -30,6 +30,7 @@ export type ObjectData =
   | WritingSystemData
   | VariantTagData
   | KeyboardData;
+export type ObjectData = EntityData; // For now, all objects are entities
 export type ObjectDictionary = Record<string, ObjectData>;
 
 export enum WikipediaStatus {
