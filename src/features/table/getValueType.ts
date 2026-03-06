@@ -5,7 +5,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import TableColumn from './TableColumn';
 import TableValueType from './TableValueType';
 
-function getFieldValueType(field?: Field): TableValueType {
+export function getFieldValueType(field?: Field): TableValueType {
   if (field == null) return TableValueType.String; // default to string if no field specified
   switch (field) {
     case Field.Population:

@@ -20,6 +20,7 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.HistoricPresence:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
+
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:
@@ -27,6 +28,7 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.Literacy:
       // "Bad" values are red, "Good" values are green
       return ColorGradient.StopLightRedToGreen;
+
     case Field.Longitude:
     case Field.Latitude:
     case Field.Name:
@@ -39,7 +41,9 @@ function getGradientForColorBy(colorBy: Field): ColorGradient {
     case Field.OutputScript:
     case Field.VariantTag:
       // More of a spectrum rather than directional
-      return ColorGradient.HueRainbowBlueToRed;
+      // Some of these may be better with a Scattered color scheme, but for now we'll use a
+      // rainbow gradient which keeps strings colored alphabetically.
+      return ColorGradient.OklabRainbowBlueToRed;
 
     case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
