@@ -3,10 +3,12 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
+import { getFieldsForObjectType } from '@features/transforms/fields/FieldApplicability';
+import FieldCoverageTable from '@features/transforms/fields/FieldCoverageTable';
 import getField from '@features/transforms/fields/getField';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
+import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
@@ -17,7 +19,7 @@ const ReportEntityUnknownFields: React.FC = () => {
   const { objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});
 
-  const fields = getSortBysApplicableToObjectType(objectType);
+  const fields = getFieldsForObjectType(objectType).filter((f) => f !== Field.None);
 
   const countTotal = filteredObjects.length;
   const resultsByField = fields.reduce(
@@ -30,8 +32,13 @@ const ReportEntityUnknownFields: React.FC = () => {
     {} as Record<Field, { knownCount: number; missingCount: number; examples: ObjectData[] }>,
   );
 
+  const [showFullSummary, setShowFullSummary] = React.useState(false);
+
   return (
     <CollapsibleReport title="Unknown Fields">
+      This report shows which fields have the most missing data for the currently filtered{' '}
+      {getObjectTypeLabelPlural(objectType)}. This can help identify gaps in the data and potential
+      areas for improvement.
       <table>
         <thead>
           <tr>
@@ -77,6 +84,10 @@ const ReportEntityUnknownFields: React.FC = () => {
             ))}
         </tbody>
       </table>
+      <button onClick={() => setShowFullSummary(!showFullSummary)} style={{ marginTop: '0.5em' }}>
+        {showFullSummary ? 'Hide' : 'Show'} full field coverage table
+      </button>
+      {showFullSummary && <FieldCoverageTable />}
     </CollapsibleReport>
   );
 };

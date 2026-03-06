@@ -3,7 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
-import { getFilterBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
+import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
+import Transform from '@features/transforms/TransformEnum';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -37,7 +38,7 @@ describe('FilterSelector', () => {
   });
 
   it('All supported filters have selectors', () => {
-    const filterBys = getFilterBysApplicableToObjectType(ObjectType.Locale);
+    const filterBys = getApplicableFields(Transform.Filter, ObjectType.Locale);
 
     filterBys.forEach((field) => {
       const { container } = render(<FilterSelector field={field} />);

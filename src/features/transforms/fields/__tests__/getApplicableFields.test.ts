@@ -3,7 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import { ObjectType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
-import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
+import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 import getField from '@features/transforms/fields/getField';
 
 const IGNORED_COMBINATIONS: Partial<Record<ObjectType, Field[]>> = {
@@ -16,33 +16,33 @@ const IGNORED_COMBINATIONS: Partial<Record<ObjectType, Field[]>> = {
   [ObjectType.Locale]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
 };
 
-describe('getFieldsForSorting', () => {
-  it('should not return duplicate SortBy values for any ObjectType', () => {
+describe('getApplicableFields', () => {
+  it('should not return duplicate Fields values for any ObjectType', () => {
     Object.values(ObjectType).forEach((objectType) => {
-      const sortBys = getSortBysApplicableToObjectType(objectType);
-      const uniqueSortBys = new Set(sortBys);
-      expect(uniqueSortBys.size).toBe(sortBys.length);
+      const fields = getApplicableFields(undefined, objectType);
+      const uniqueFields = new Set(fields);
+      expect(uniqueFields.size).toBe(fields.length);
     });
   });
 
-  it('Check that all possible SortBys are returned for each object type. Literally, if a sortBy is not returned by getFieldsForSorting intersected with object type, then getSortField should not return a truthy value for it.', () => {
+  it('Check that all possible Fields are returned for each object type. Literally, if a field is not returned by getFieldsForSorting intersected with object type, then getField should not return a truthy value for it.', () => {
     const mockedObjects = getFullyInstantiatedMockedObjects();
 
     Object.values(ObjectType).forEach((objectType) => {
       const objectsInType = Object.values(mockedObjects).filter((obj) => obj.type === objectType);
-      const sortBysForType = getSortBysApplicableToObjectType(objectType);
+      const fieldsForType = getApplicableFields(undefined, objectType);
 
-      Object.values(Field).forEach((sortBy) => {
+      Object.values(Field).forEach((field) => {
         objectsInType.forEach((obj) => {
-          const sortField = getField(obj, sortBy);
+          const sortField = getField(obj, field);
           if (
-            !sortBysForType.includes(sortBy) &&
-            !IGNORED_COMBINATIONS[objectType]?.includes(sortBy)
+            !fieldsForType.includes(field) &&
+            !IGNORED_COMBINATIONS[objectType]?.includes(field)
           ) {
             // The value is not supposed to be applicable
             expect(
               sortField,
-              `ObjectType (${objectType}) shouldn't be sorted by ${sortBy} but it has a getSortField value so it should be sortable. Failed on object: ${obj.nameDisplay} [${obj.ID}]`,
+              `ObjectType (${objectType}) shouldn't be sorted by ${field} but it has a getField value so it should be applicable. Failed on object: ${obj.nameDisplay} [${obj.ID}]`,
             ).toBeFalsy();
           }
         });

@@ -4,9 +4,10 @@ import { ObjectType, View } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import { getColorBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
 
 import Field from '../fields/Field';
+import { getApplicableFields } from '../fields/FieldApplicability';
+import TransformEnum from '../TransformEnum';
 
 type Props = {
   objectType?: ObjectType;
@@ -16,8 +17,6 @@ const ColorBySelector: React.FC<Props> = ({ objectType }) => {
   const { colorBy, updatePageParams, view, objectType: pageObjectType } = usePageParams();
   const { display } = useSelectorDisplay();
 
-  const applicableColorBys = getColorBysApplicableToObjectType(objectType ?? pageObjectType);
-
   // Only applicable to the card list and map views
   if (view !== View.Map && view !== View.CardList) return null;
 
@@ -25,7 +24,7 @@ const ColorBySelector: React.FC<Props> = ({ objectType }) => {
     <Selector<Field>
       selectorLabel={display === SelectorDisplay.Dropdown ? 'Color By' : undefined}
       selectorDescription="Choose the color coding for items in the view."
-      options={applicableColorBys}
+      options={getApplicableFields(TransformEnum.Color, objectType ?? pageObjectType)}
       onChange={(colorBy) => updatePageParams({ colorBy })}
       selected={colorBy}
     />
