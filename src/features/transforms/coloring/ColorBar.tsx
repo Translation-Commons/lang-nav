@@ -50,18 +50,6 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
         )
     : undefined;
 
-  // ? useCallback(
-  //   (value: number) => {
-  //     if (isFieldWholeNumbersOnly(coloringFunctions.colorBy)) {
-  //       return coloringFunctions.getNormalizedValue(
-  //         Math.round(coloringFunctions.getDenormalizedValue(value)),
-  //       );
-  //     }
-  //     return coloringFunctions.getNormalizedValue(coloringFunctions.getDenormalizedValue(value));
-  //   },
-  //   [coloringFunctions],
-  // );
-
   return (
     <div style={{ width: '100%' }}>
       <div style={{ height: '1em', width: '100%' }}>

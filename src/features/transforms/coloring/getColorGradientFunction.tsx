@@ -80,12 +80,12 @@ export function getColorGradientFunction(colorGradient: ColorGradient): (value: 
       };
     case ColorGradient.ScatteredRGB:
       return (value: number) => {
-        // Multiple the normalized value by a prime number and take the fractional part to
+        // Multiply the normalized value by a prime number and take the fractional part to
         // get a pseudo-random but deterministic value. Slightly modified to make it brighter.
 
-        const red = ((value * 31) % 1 ** 0.5) + 0.2;
-        const green = ((value * 37) % 1 ** 0.5) + 0.2;
-        const blue = ((value * 41) % 1 ** 0.5) + 0.2;
+        const red = ((value * 31) % 1 ** 0.5) * 0.8 + 0.2;
+        const green = ((value * 37) % 1 ** 0.5) * 0.8 + 0.2;
+        const blue = ((value * 41) % 1 ** 0.5) * 0.8 + 0.2;
         return `rgb(${red * 255}, ${green * 255}, ${blue * 255})`;
       };
     default:
