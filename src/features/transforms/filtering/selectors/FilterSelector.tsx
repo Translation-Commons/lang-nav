@@ -3,8 +3,9 @@ import React from 'react';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import { getFilterBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
+import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 import SearchBar from '@features/transforms/search/SearchBar';
+import TransformEnum from '@features/transforms/TransformEnum';
 
 import LanguageFilterSelector from './LanguageFilterSelector';
 import LanguageModalitySelector from './LanguageModalitySelector';
@@ -46,7 +47,9 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
   const { objectType } = usePageParams();
-  const filterBys = getFilterBysApplicableToObjectType(objectType).filter((f) => f !== Field.Name); // This shouldn't return the search bar
+  const filterBys = getApplicableFields(TransformEnum.Filter, objectType).filter(
+    (f) => f !== Field.Name,
+  ); // This shouldn't return the search bar
 
   return filterBys.map((filterBy) => <FilterSelector field={filterBy} key={filterBy} />);
 };
