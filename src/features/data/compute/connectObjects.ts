@@ -39,5 +39,12 @@ export function connectObjectsAndCreateDerivedData(
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
   computeDescendantPopulation(languagesBySource, writingSystems);
-  connectKeyboards(keyboards, languagesBySource.Combined, territories, writingSystems, variantTags);
+  connectKeyboards(
+    keyboards,
+    languagesBySource.Combined,
+    territories,
+    writingSystems,
+    variantTags,
+    locales,
+  );
 }

@@ -4,6 +4,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectBase } from '@entities/types/DataTypes';
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
@@ -37,4 +38,5 @@ export interface KeyboardData extends ObjectBase {
   inputWritingSystem?: WritingSystemData;
   outputWritingSystem?: WritingSystemData;
   variantTag?: VariantTagData;
+  locale?: LocaleData;
 }
