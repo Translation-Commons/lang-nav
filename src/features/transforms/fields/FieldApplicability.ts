@@ -1,5 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { unique } from '@shared/lib/setUtils';
 
 import Transform from '../TransformEnum';
@@ -106,6 +107,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
       return [Field.Date, Field.CountOfLanguages, Field.CountOfChildTerritories, Field.Language];
     case ObjectType.Keyboard:
       return [Field.Language, Field.WritingSystem, Field.Territory];
+    default:
+      return enforceExhaustiveSwitch(objectType);
   }
 }
 
@@ -179,6 +182,8 @@ function getFieldsForTransform(transform: Transform): Field[] {
         // Field.VitalityEthnologueCoarse,
         Field.Name, // Technically filters name and code right now, depending on SearchBy
       ];
+    default:
+      return enforceExhaustiveSwitch(transform);
   }
 }
 

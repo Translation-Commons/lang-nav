@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
@@ -22,14 +22,20 @@ const ReportEntityUnknownFields: React.FC = () => {
   const fields = getFieldsForObjectType(objectType).filter((f) => f !== Field.None);
 
   const countTotal = filteredObjects.length;
-  const resultsByField = fields.reduce(
-    (acc, field) => {
-      const knownCount = filteredObjects.filter((obj) => getField(obj, field) != null).length;
-      const examples = filteredObjects.filter((obj) => getField(obj, field) == null).slice(0, 4);
-      acc[field] = { knownCount, missingCount: countTotal - knownCount, examples };
-      return acc;
-    },
-    {} as Record<Field, { knownCount: number; missingCount: number; examples: ObjectData[] }>,
+  const resultsByField = useMemo(
+    () =>
+      fields.reduce(
+        (acc, field) => {
+          const knownCount = filteredObjects.filter((obj) => getField(obj, field) != null).length;
+          const examples = filteredObjects
+            .filter((obj) => getField(obj, field) == null)
+            .slice(0, 4);
+          acc[field] = { knownCount, missingCount: countTotal - knownCount, examples };
+          return acc;
+        },
+        {} as Record<Field, { knownCount: number; missingCount: number; examples: ObjectData[] }>,
+      ),
+    [fields, filteredObjects, countTotal],
   );
 
   const [showFullSummary, setShowFullSummary] = React.useState(false);
@@ -84,7 +90,7 @@ const ReportEntityUnknownFields: React.FC = () => {
             ))}
         </tbody>
       </table>
-      <button onClick={() => setShowFullSummary(!showFullSummary)} style={{ marginTop: '0.5em' }}>
+      <button onClick={() => setShowFullSummary((prev) => !prev)} style={{ marginTop: '0.5em' }}>
         {showFullSummary ? 'Hide' : 'Show'} full field coverage table
       </button>
       {showFullSummary && <FieldCoverageTable />}

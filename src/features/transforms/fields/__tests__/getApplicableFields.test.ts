@@ -25,7 +25,7 @@ describe('getApplicableFields', () => {
     });
   });
 
-  it('Check that all possible Fields are returned for each object type. Literally, if a field is not returned by getFieldsForSorting intersected with object type, then getField should not return a truthy value for it.', () => {
+  it('Check that all possible Fields are returned for each object type. Literally, if a field is not returned by getApplicableFields intersected with object type, then getField should not return a truthy value for it.', () => {
     const mockedObjects = getFullyInstantiatedMockedObjects();
 
     Object.values(ObjectType).forEach((objectType) => {
@@ -34,15 +34,15 @@ describe('getApplicableFields', () => {
 
       Object.values(Field).forEach((field) => {
         objectsInType.forEach((obj) => {
-          const sortField = getField(obj, field);
+          const fieldValue = getField(obj, field);
           if (
             !fieldsForType.includes(field) &&
             !IGNORED_COMBINATIONS[objectType]?.includes(field)
           ) {
             // The value is not supposed to be applicable
             expect(
-              sortField,
-              `ObjectType (${objectType}) shouldn't be sorted by ${field} but it has a getField value so it should be applicable. Failed on object: ${obj.nameDisplay} [${obj.ID}]`,
+              fieldValue,
+              `ObjectType (${objectType}) should not return a value for ${field} but it has a getField value so it should be applicable. Failed on object: ${obj.nameDisplay} [${obj.ID}]`,
             ).toBeFalsy();
           }
         });

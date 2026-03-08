@@ -8,7 +8,12 @@ import { connectWritingSystems } from '@features/data/connect/connectWritingSyst
 import { createRegionalLocales } from '@features/data/connect/createRegionalLocales';
 import { connectVariantTags } from '@features/data/load/extra_entities/IANAData';
 
-import { searchLocalesForMissingLinks } from '../searchLocalesForMissingLinks';
+import { LocaleTags } from '@entities/locale/LocaleParsing';
+
+import {
+  getLessSpecificLocaleTags,
+  searchLocalesForMissingLinks,
+} from '../searchLocalesForMissingLinks';
 
 describe('searchLocalesForMissingLinks', () => {
   it('should connect locales that are missing links based on language and territory codes', () => {
@@ -55,5 +60,45 @@ describe('searchLocalesForMissingLinks', () => {
 
     expect(locales['sjn_Teng_001'].relatedLocales?.childTerritories?.[0].ID).toBe('sjn_Teng_123');
     expect(locales['sjn_Teng_001'].relatedLocales?.moreGeneral?.[0].ID).toBe('sjn_001');
+  });
+});
+
+describe('getLessSpecificLocaleTags', () => {
+  it('standard case, looking at a locale with language, script, and territory', () => {
+    const localeTags: LocaleTags = {
+      languageCode: 'zho',
+      scriptCode: 'Hans',
+      territoryCode: 'CN',
+    };
+    const lessSpecificTags = getLessSpecificLocaleTags(localeTags);
+    expect(lessSpecificTags).toEqual(['zho', 'zho_CN', 'zho_Hans', 'zho_Hans_CN']);
+  });
+
+  it('handles multiple variant tags', () => {
+    const localeTags: LocaleTags = {
+      languageCode: 'slv',
+      scriptCode: 'Latn',
+      territoryCode: 'SI',
+      variantTagCodes: ['rozaj', '1994'],
+    };
+    const lessSpecificTags = getLessSpecificLocaleTags(localeTags);
+    expect(lessSpecificTags).toEqual([
+      'slv',
+      'slv_SI',
+      'slv_Latn',
+      'slv_Latn_SI',
+      'slv_1994',
+      'slv_SI_1994',
+      'slv_Latn_1994',
+      'slv_Latn_SI_1994',
+      'slv_rozaj',
+      'slv_SI_rozaj',
+      'slv_Latn_rozaj',
+      'slv_Latn_SI_rozaj',
+      'slv_rozaj_1994',
+      'slv_SI_rozaj_1994',
+      'slv_Latn_rozaj_1994',
+      'slv_Latn_SI_rozaj_1994',
+    ]);
   });
 });
