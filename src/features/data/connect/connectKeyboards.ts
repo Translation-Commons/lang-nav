@@ -5,6 +5,8 @@ import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
+import { getLessSpecificLocaleTags } from '../compute/searchLocalesForMissingLinks';
+
 export function connectKeyboards(
   keyboards: Record<string, KeyboardData>,
   languages: LanguageDictionary,
@@ -22,15 +24,19 @@ export function connectKeyboards(
     const inputWritingSystem = writingSystems[inputScriptCode] ?? null;
     const outputWritingSystem = writingSystems[outputScriptCode] ?? null;
     const variantTag = variantTagCode != null ? (variantTags[variantTagCode] ?? null) : null;
-    const localeKeysToTry: StandardLocaleCode[] = [
-      [languageCode, outputScriptCode, territoryCode, variantTagCode],
-      [languageCode, outputScriptCode, territoryCode],
-      [languageCode, territoryCode],
-      [languageCode, outputScriptCode],
-      [languageCode],
-    ].map((parts) => parts.filter(Boolean).join('_'));
+    const localeTags = {
+      languageCode,
+      scriptCode: outputScriptCode,
+      territoryCode,
+      variantTagCodes: variantTagCode ? [variantTagCode] : [],
+    };
 
-    const locale = localeKeysToTry.map((key) => locales[key]).find((l) => l != null) ?? null;
+    const localeTagsToTry = getLessSpecificLocaleTags(localeTags);
+    const locale =
+      localeTagsToTry
+        .reverse() // most specific first
+        .map((tag: string) => locales[tag])
+        .find((l: LocaleData | undefined) => l != null) ?? null;
 
     if (language != null) keyboard.language = language;
     if (territory != null) keyboard.territory = territory;

@@ -62,7 +62,7 @@ export function searchLocalesForMissingLinks(
   });
 }
 
-function getLessSpecificLocaleTags(localeTags: LocaleTags): string[] {
+export function getLessSpecificLocaleTags(localeTags: LocaleTags): string[] {
   const lessVariantTags =
     localeTags.variantTagCodes?.flatMap((variantTagCode) =>
       getLessSpecificLocaleTags({
