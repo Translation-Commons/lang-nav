@@ -6,6 +6,7 @@ import getObjectFromID from '@entities/lib/getObjectFromID';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import CensusDetails from './CensusDetails';
+import KeyboardDetails from './KeyboardDetails';
 import LanguageDetails from './LanguageDetails';
 import LocaleDetails from './LocaleDetails';
 import TerritoryDetails from './TerritoryDetails';
@@ -36,6 +37,8 @@ const ObjectDetails: React.FC<Props> = ({ object, objectID }) => {
       return <WritingSystemDetails writingSystem={object} />;
     case ObjectType.VariantTag:
       return <VariantTagDetails variantTag={object} />;
+    case ObjectType.Keyboard:
+      return <KeyboardDetails keyboard={object} />;
   }
 };
 
