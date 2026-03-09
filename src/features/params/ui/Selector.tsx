@@ -133,7 +133,7 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
             display: 'flex',
             flexWrap: 'wrap',
             gap: '0.25em',
-            marginLeft: hasSelectorLabel ? '1em' : 'none',
+            marginLeft: 0,
           }}
         >
           {children}
