@@ -11,7 +11,6 @@ const ViewSelector: React.FC = () => {
   return (
     <Selector
       selectorLabel="Display"
-      selectorStyle={{ flexDirection: 'row', alignItems: 'center', gap: '0.25em' }}
       getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
       options={Object.values(View)}
       onChange={(view: View) => updatePageParams({ view })}
