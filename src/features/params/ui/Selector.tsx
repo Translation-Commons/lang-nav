@@ -119,6 +119,7 @@ type OptionsContainerProps = {
 const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>> = ({
   children,
   containerRef,
+  hasSelectorLabel,
   isExpanded,
 }) => {
   const { display } = useSelectorDisplay();
