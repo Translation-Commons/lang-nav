@@ -4,6 +4,7 @@
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -51,4 +52,5 @@ export interface WritingSystemData extends ObjectBase {
   parentWritingSystem?: WritingSystemData;
   childWritingSystems?: WritingSystemData[];
   containsWritingSystems?: WritingSystemData[];
+  outputKeyboards?: KeyboardData[];
 }

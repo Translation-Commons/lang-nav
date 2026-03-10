@@ -8,6 +8,7 @@ import React from 'react';
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
@@ -126,6 +127,7 @@ export interface LanguageData extends ObjectBase {
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
   variantTags?: VariantTagData[]; // links to IANA variant tags
+  keyboards?: KeyboardData[];
 
   // Fields that change based on the language source
   Combined: LanguageDataInSource;

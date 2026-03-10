@@ -6,6 +6,7 @@ import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
+import { KeyboardPlatform } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 
@@ -13,6 +14,7 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
+import GroupedExpanderList from '@shared/ui/GroupedExpanderList';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
@@ -88,6 +90,19 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           )}
         </DetailsField>
       </div>
+      {lang.keyboards && lang.keyboards.length > 0 && (
+        <DetailsField title="Keyboards">
+          <GroupedExpanderList
+            groups={Object.values(KeyboardPlatform)
+              .map((platform) => ({
+                label: platform,
+                items: lang.keyboards!.filter((k) => k.platform === platform),
+              }))
+              .filter((g) => g.items.length > 0)}
+            renderItem={(keyboard) => <HoverableObjectName object={keyboard} />}
+          />
+        </DetailsField>
+      )}
     </DetailsSection>
   );
 };
