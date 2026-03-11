@@ -1,9 +1,14 @@
+import { Transform } from 'stream';
+
 import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import { ObjectType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
-import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
+import {
+  getApplicableFields,
+  isFieldApplicable,
+} from '@features/transforms/fields/FieldApplicability';
 import getField from '@features/transforms/fields/getField';
 
 const IGNORED_COMBINATIONS: Partial<Record<ObjectType, Field[]>> = {
@@ -44,6 +49,23 @@ describe('getApplicableFields', () => {
               fieldValue,
               `ObjectType (${objectType}) should not return a value for ${field} but it has a getField value so it should be applicable. Failed on object: ${obj.nameDisplay} [${obj.ID}]`,
             ).toBeFalsy();
+          }
+        });
+      });
+    });
+  });
+
+  it('getApplicableFields matches isFieldApplicable', () => {
+    Object.values(ObjectType).forEach((objectType) => {
+      Object.values(Transform).forEach((transform) => {
+        const applicableFields = getApplicableFields(transform, objectType);
+
+        Object.values(Field).forEach((field) => {
+          const isApplicable = applicableFields.includes(field);
+          if (isApplicable) {
+            expect(isFieldApplicable(field, transform, objectType)).toBe(true);
+          } else {
+            expect(isFieldApplicable(field, transform, objectType)).toBe(false);
           }
         });
       });

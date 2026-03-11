@@ -1,6 +1,5 @@
 import {
   ActivityIcon,
-  AxeIcon,
   BabyIcon,
   BookOpenCheckIcon,
   CalendarIcon,
@@ -23,9 +22,11 @@ import {
   SpeechIcon,
   UserCheckIcon,
   UsersIcon,
-  WholeWordIcon,
+  WholeWordIcon
 } from 'lucide-react';
 import React from 'react';
+
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import Field from './Field';
 
@@ -103,7 +104,7 @@ export function getFieldIcon(field: Field): LucideIcon {
       return CircleDashedIcon;
 
     default:
-      return AxeIcon;
+      enforceExhaustiveSwitch(field);
   }
 }
 

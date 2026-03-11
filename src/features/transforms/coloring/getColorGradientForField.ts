@@ -45,7 +45,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.Latitude:
     case Field.Name:
     case Field.Endonym:
-      // Continous spectrum
+      // Continuous spectrum
       return ColorGradient.OklabRainbowBlueToRed;
 
     case Field.Code:
