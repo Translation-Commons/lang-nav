@@ -14,6 +14,7 @@ type OptionProps<T> = {
   labelWhenEmpty?: string; // for multi-select options
   onClick: (value: T) => void;
   option: T | T[];
+  optionStyle?: React.CSSProperties;
   position?: PositionInGroup; // used for styling
 };
 
@@ -25,6 +26,7 @@ function SelectorOption<T extends React.Key>({
   labelWhenEmpty,
   onClick,
   option,
+  optionStyle,
   position = PositionInGroup.Standalone,
 }: OptionProps<T>) {
   let className = 'selectorOption';
@@ -44,7 +46,7 @@ function SelectorOption<T extends React.Key>({
       }
       onClick={() => onClick(Array.isArray(option) ? option[0] : option)}
       role="option"
-      style={getOptionStyle(display, isSelected, position)}
+      style={{ ...getOptionStyle(display, isSelected, position), ...optionStyle }}
     >
       <OptionLabel<T>
         option={option}

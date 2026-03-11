@@ -1,5 +1,6 @@
 import React, { Suspense } from 'react';
 
+import ViewSelector from '@widgets/controls/selectors/ViewSelector';
 import Loading from '@widgets/Loading';
 import PathNav from '@widgets/pathnav/PathNav';
 
@@ -15,7 +16,12 @@ const DataPageBody: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <SearchBar />
         <EntityTypeTabs />
+      </div>
+      <div
+        style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem', gap: '0.5rem' }}
+      >
         <PathNav />
+        <ViewSelector />
       </div>
       <div
         style={{

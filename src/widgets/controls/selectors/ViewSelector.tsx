@@ -1,3 +1,4 @@
+import { ChartColumnBigIcon, GitBranchIcon, Grid2x2Icon, MapIcon, Table2Icon } from 'lucide-react';
 import React from 'react';
 
 import { View } from '@features/params/PageParamTypes';
@@ -10,37 +11,50 @@ const ViewSelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel="Display"
-      getOptionDescription={(option) => <img src={getImageSrc(option)} width={180} />}
       options={Object.values(View)}
-      onChange={(view: View) => updatePageParams({ view })}
-      display={SelectorDisplay.ButtonList}
-      getOptionLabel={(view) =>
-        [View.Map, View.Reports].includes(view) ? (
-          <>
-            {view} <em>β</em>
-          </>
-        ) : (
-          view
-        )
-      }
       selected={view}
+      onChange={(nextView: View) => updatePageParams({ view: nextView })}
+      getOptionLabel={(option) => getViewIcon(option)}
+      getOptionDescription={(option) => getViewLabel(option)}
+      display={SelectorDisplay.ButtonGroup}
+      optionStyle={{
+        width: '2rem',
+        height: '2rem',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        marginLeft: 0,
+        marginRight: '0.5rem',
+        borderRadius: 0,
+        padding: '0.125rem',
+      }}
+      selectorStyle={{ gap: '0.35rem' }}
     />
   );
 };
 
-function getImageSrc(view: View): string {
+function getViewLabel(view: View): React.ReactNode {
+  return [View.Map, View.Reports].includes(view) ? (
+    <>
+      {view} <em>β</em>
+    </>
+  ) : (
+    view
+  );
+}
+
+function getViewIcon(view: View): React.ReactNode {
   switch (view) {
     case View.CardList:
-      return '/lang-nav/cardlist.png';
+      return <Grid2x2Icon size={18} />;
     case View.Hierarchy:
-      return '/lang-nav/hierarchy.png';
+      return <GitBranchIcon size={18} />;
     case View.Map:
-      return '/lang-nav/map.png';
+      return <MapIcon size={18} />;
     case View.Table:
-      return '/lang-nav/table.png';
+      return <Table2Icon size={18} />;
     case View.Reports:
-      return '/lang-nav/reports.png';
+      return <ChartColumnBigIcon size={18} />;
   }
 }
 
