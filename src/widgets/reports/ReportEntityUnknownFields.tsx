@@ -12,6 +12,7 @@ import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
+import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
@@ -60,24 +61,24 @@ const ReportEntityUnknownFields: React.FC = () => {
             .map((field) => (
               <tr key={field}>
                 <td>{field}</td>
-                <td style={{ position: 'relative' }}>
+                <td>
                   <BackgroundProgressBar
                     percentage={(resultsByField[field].knownCount / countTotal) * 100}
-                  />
-                  {resultsByField[field].knownCount.toLocaleString()}
+                  >
+                    {resultsByField[field].knownCount.toLocaleString()}
+                  </BackgroundProgressBar>
                 </td>
 
-                <td style={{ position: 'relative' }}>
+                <td>
                   <BackgroundProgressBar
                     percentage={(resultsByField[field].missingCount / countTotal) * 100}
-                  />
-                  {
+                  >
                     <DecimalNumber
                       num={(resultsByField[field].missingCount * 100) / countTotal}
                       alignFraction={false}
                     />
-                  }
-                  %
+                    %
+                  </BackgroundProgressBar>
                 </td>
                 <td>
                   <CommaSeparated>
@@ -95,22 +96,6 @@ const ReportEntityUnknownFields: React.FC = () => {
       </button>
       {showFullSummary && <FieldCoverageTable />}
     </CollapsibleReport>
-  );
-};
-
-const BackgroundProgressBar: React.FC<{ percentage: number }> = ({ percentage }) => {
-  return (
-    <div
-      style={{
-        position: 'absolute',
-        zIndex: -1,
-        top: 0,
-        left: 0,
-        height: '100%',
-        width: `${percentage}%`,
-        backgroundColor: 'var(--color-button-secondary)',
-      }}
-    />
   );
 };
 

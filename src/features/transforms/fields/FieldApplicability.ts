@@ -16,79 +16,105 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.Locale:
       return [
         Field.Endonym,
-        Field.Depth,
+        Field.LanguageScope,
+        Field.TerritoryScope,
+
+        Field.Modality,
+        Field.LanguageFormedHere,
+        Field.HistoricPresence,
+        Field.VitalityMetascore, // not particularly useful
+        Field.ISOStatus,
+        // Field.VitalityEthnologueCoarse, // Investigating new datasource
+        // Field.VitalityEthnologueFine,
+
         Field.PopulationDirectlySourced,
         Field.Literacy,
-        Field.Modality,
         Field.PercentOfOverallLanguageSpeakers,
         Field.PercentOfTerritoryPopulation,
+
+        Field.Language,
+        Field.WritingSystem,
+        Field.Territory,
+        // Field.VariantTag, // Data not available yet
+
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
-        Field.Language,
-        Field.WritingSystem,
-        Field.Territory,
-        Field.LanguageScope,
-        Field.TerritoryScope,
-        Field.LanguageFormedHere,
-        Field.HistoricPresence,
-        Field.ISOStatus,
+
+        Field.Depth,
       ];
     case ObjectType.Territory:
       return [
         Field.Endonym,
-        Field.Depth,
-        Field.Literacy,
+        Field.TerritoryScope,
+
+        Field.Language,
+        Field.WritingSystem,
+        Field.Territory, // Equivalent to DisplayName for territories
+
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+
+        Field.Depth,
+        Field.Literacy,
         Field.Latitude,
         Field.Longitude,
         Field.Area,
-        Field.Language,
-        Field.WritingSystem,
-        Field.Territory, // Equivalent to DisplayName for territories
+
         Field.PopulationDirectlySourced,
+        Field.PopulationOfDescendants,
         Field.PercentOfTerritoryPopulation,
         Field.PopulationPercentInBiggestDescendantLanguage,
-        Field.TerritoryScope,
       ];
     case ObjectType.Language:
       return [
         Field.Endonym,
-        Field.Depth,
-        Field.Literacy,
-        Field.CountOfLanguages,
-        Field.CountOfWritingSystems,
-        Field.CountOfCountries,
+
         Field.Modality,
-        Field.Language, // Equivalent to DisplayName for languages
-        Field.WritingSystem,
-        Field.Territory,
-        Field.PopulationDirectlySourced,
-        Field.PopulationOfDescendants,
-        Field.PopulationPercentInBiggestDescendantLanguage,
-        Field.PercentOfOverallLanguageSpeakers,
         Field.VitalityMetascore,
         Field.ISOStatus,
         // Field.VitalityEthnologueFine,
         // Field.VitalityEthnologueCoarse,
+
+        Field.Language, // Equivalent to DisplayName for languages
+        Field.WritingSystem,
+        Field.Territory,
+
+        Field.CountOfLanguages,
+        Field.CountOfWritingSystems,
+        Field.CountOfCountries,
+
+        Field.Depth,
+        Field.Literacy,
         Field.Latitude,
         Field.Longitude,
         Field.LanguageScope,
+
+        Field.PopulationDirectlySourced,
+        Field.PopulationOfDescendants,
+        Field.PopulationPercentInBiggestDescendantLanguage,
+        Field.PercentOfOverallLanguageSpeakers,
       ];
     case ObjectType.Census:
       return [
-        Field.Date,
+        Field.TerritoryScope,
+
+        Field.Territory,
+
+        Field.CountOfLanguages,
+        Field.CountOfChildTerritories, // 0 or 1
+        Field.CountOfCountries, // 0 or 1
+        Field.CountOfCensuses, // always 1 for census objects, but useful for transforms that look at related objects
+
         Field.PopulationDirectlySourced,
         Field.PercentOfTerritoryPopulation,
-        Field.Territory,
-        Field.TerritoryScope,
-        Field.CountOfLanguages,
+
+        Field.Date,
       ];
     case ObjectType.WritingSystem:
       return [
@@ -104,9 +130,39 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.WritingSystem, // Equivalent to DisplayName for writing systems
       ];
     case ObjectType.VariantTag:
-      return [Field.Date, Field.CountOfLanguages, Field.CountOfChildTerritories, Field.Language];
+      return [
+        Field.Language,
+        Field.WritingSystem,
+        Field.Territory,
+        // Field.VariantTag, // Equivalent to DisplayName for variant tags
+        // Field.Keyboard,
+
+        Field.CountOfLanguages,
+        Field.CountOfWritingSystems, // May be poorly defined
+        Field.CountOfChildTerritories,
+        Field.CountOfCountries, // 0 or 1
+
+        Field.Date,
+      ];
     case ObjectType.Keyboard:
-      return [Field.Language, Field.WritingSystem, Field.Territory];
+      return [
+        Field.LanguageScope,
+        Field.TerritoryScope,
+
+        Field.Modality, // the Language's modality
+        Field.VitalityMetascore,
+        Field.ISOStatus,
+
+        Field.Language,
+        Field.WritingSystem,
+        Field.Territory,
+        Field.Platform,
+        Field.OutputScript,
+        Field.VariantTag,
+
+        Field.CountOfWritingSystems, // May be poorly defined
+        Field.CountOfCountries, // 0 or 1
+      ];
     default:
       return enforceExhaustiveSwitch(objectType);
   }
@@ -125,27 +181,34 @@ function getFieldsForTransform(transform: Transform): Field[] {
       return [
         Field.None,
         Field.Population,
-        Field.PopulationDirectlySourced,
+
         Field.Area,
         Field.Depth,
+
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+
         Field.Literacy,
+
         Field.Modality,
         Field.VitalityMetascore,
         // Field.VitalityEthnologueFine,
         // Field.VitalityEthnologueCoarse,
         Field.ISOStatus,
+
         Field.Latitude,
         Field.Longitude,
+
+        Field.PopulationDirectlySourced,
         Field.PercentOfOverallLanguageSpeakers,
         Field.PercentOfTerritoryPopulation,
         Field.PopulationOfDescendants,
         Field.PopulationPercentInBiggestDescendantLanguage,
         Field.Date,
+
         Field.Name,
         Field.Endonym,
         Field.Code,
@@ -156,13 +219,20 @@ function getFieldsForTransform(transform: Transform): Field[] {
       return [
         Field.None,
         Field.Population,
-        Field.PopulationDirectlySourced,
         Field.Area,
         Field.Depth,
+
+        Field.LanguageScope,
+        Field.TerritoryScope,
+
         Field.CountOfLanguages,
+        Field.CountOfWritingSystems,
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+
+        Field.PopulationDirectlySourced,
+        Field.PercentOfOverallLanguageSpeakers,
       ];
     case Transform.Search:
       // TODO integrate search better with field types and/or merge with searching
