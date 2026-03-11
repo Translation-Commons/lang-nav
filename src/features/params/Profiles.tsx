@@ -9,7 +9,7 @@ import {
 import { ReactNode } from 'react';
 
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
-import getGradientForColorBy from '@features/transforms/coloring/getGradientForColorby';
+import getColorGradientForField from '@features/transforms/coloring/getColorGradientForField';
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
@@ -149,7 +149,7 @@ export function getDefaultParams(
 
   // Get default gradient for colorBys
   if (params.colorBy !== Field.None) {
-    params.colorGradient = getGradientForColorBy(params.colorBy);
+    params.colorGradient = getColorGradientForField(params.colorBy);
   }
 
   return params;

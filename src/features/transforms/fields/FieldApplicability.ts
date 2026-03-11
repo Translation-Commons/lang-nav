@@ -198,6 +198,8 @@ function getFieldsForTransform(transform: Transform): Field[] {
         // Field.VitalityEthnologueFine,
         // Field.VitalityEthnologueCoarse,
         Field.ISOStatus,
+        Field.LanguageFormedHere,
+        Field.HistoricPresence,
 
         Field.Latitude,
         Field.Longitude,
@@ -274,4 +276,15 @@ export function getApplicableFields(transform?: Transform, objectType?: ObjectTy
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
   const objectFields = objectType ? getFieldsForObjectType(objectType) : Object.values(Field);
   return transformFields.filter((f) => objectFields.includes(f));
+}
+
+export function isFieldApplicable(
+  field: Field,
+  transform?: Transform,
+  objectType?: ObjectType,
+): boolean {
+  return (
+    (transform ? getFieldsForTransform(transform).includes(field) : true) &&
+    (objectType ? getFieldsForObjectType(objectType).includes(field) : true)
+  );
 }
