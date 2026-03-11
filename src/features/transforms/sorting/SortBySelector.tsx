@@ -7,14 +7,14 @@ import { getApplicableFields } from '@features/transforms/fields/FieldApplicabil
 
 import TransformEnum from '../TransformEnum';
 
-const SortBySelector: React.FC = () => {
+const SortBySelector: React.FC<{ showLabel?: boolean }> = ({ showLabel = true }) => {
   const { sortBy, updatePageParams, objectType } = usePageParams();
   const applicableSortBys = getApplicableFields(TransformEnum.Sort, objectType);
 
   return (
     <Selector
-      selectorLabel="Sort By"
-      selectorDescription="Choose the order of items in the view."
+      selectorLabel={showLabel ? 'Sort By' : undefined}
+      selectorDescription={showLabel ? 'Choose the order of items in the view.' : undefined}
       options={applicableSortBys}
       onChange={(sortBy) => updatePageParams({ sortBy })}
       selected={sortBy}

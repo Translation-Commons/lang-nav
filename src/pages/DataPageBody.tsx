@@ -5,6 +5,7 @@ import Loading from '@widgets/Loading';
 import PathNav from '@widgets/pathnav/PathNav';
 
 import SearchBar from '@features/transforms/search/SearchBar';
+import SortBySelector from '@features/transforms/sorting/SortBySelector';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 
@@ -21,6 +22,7 @@ const DataPageBody: React.FC = () => {
         style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '1rem', gap: '0.5rem' }}
       >
         <PathNav />
+        <SortBySelector showLabel={false} />
         <ViewSelector />
       </div>
       <div

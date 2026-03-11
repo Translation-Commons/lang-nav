@@ -18,15 +18,11 @@ const ViewSelector: React.FC = () => {
       getOptionDescription={(option) => getViewLabel(option)}
       display={SelectorDisplay.ButtonGroup}
       optionStyle={{
-        width: '2rem',
-        height: '2rem',
+        width: 'fit-content',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        marginLeft: 0,
-        marginRight: '0.5rem',
-        borderRadius: 0,
-        padding: '0.125rem',
+        padding: '0.5rem',
       }}
       selectorStyle={{ gap: '0.35rem' }}
     />
