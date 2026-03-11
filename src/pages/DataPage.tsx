@@ -5,6 +5,7 @@ import Loading from '@widgets/Loading';
 
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 
+const FilterPanelProvider = React.lazy(() => import('@widgets/controls/FilterPanelProvider'));
 const PageParamsProvider = React.lazy(() => import('@features/params/PageParamsProvider'));
 const DataProvider = React.lazy(() => import('@features/data/context/DataProvider'));
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
@@ -19,11 +20,13 @@ const DataPage: React.FC = () => {
         <HoverCardProvider>
           {/* HoverCardProvider is re-declared so it has access to page parameters, there may be a better way to organize it */}
           <DataProvider>
-            <div style={{ display: 'flex', height: '100vh' }}>
-              <OptionsPanel />
-              <DataPageBody />
-              <DetailsPanel />
-            </div>
+            <FilterPanelProvider>
+              <div style={{ display: 'flex', height: '100vh' }}>
+                <OptionsPanel />
+                <DataPageBody />
+                <DetailsPanel />
+              </div>
+            </FilterPanelProvider>
             <ViewModal />
           </DataProvider>
         </HoverCardProvider>

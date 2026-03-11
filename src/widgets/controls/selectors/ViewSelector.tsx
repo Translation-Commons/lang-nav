@@ -24,7 +24,7 @@ const ViewSelector: React.FC = () => {
         justifyContent: 'center',
         padding: '0.5rem',
       }}
-      selectorStyle={{ gap: '0.35rem' }}
+      selectorStyle={{ gap: '0.25rem' }}
     />
   );
 };
@@ -42,15 +42,15 @@ function getViewLabel(view: View): React.ReactNode {
 function getViewIcon(view: View): React.ReactNode {
   switch (view) {
     case View.CardList:
-      return <Grid2x2Icon size={18} />;
+      return <Grid2x2Icon size="1.2em" />;
     case View.Hierarchy:
-      return <GitBranchIcon size={18} />;
+      return <GitBranchIcon size="1.2em" />;
     case View.Map:
-      return <MapIcon size={18} />;
+      return <MapIcon size="1.2em" />;
     case View.Table:
-      return <Table2Icon size={18} />;
+      return <Table2Icon size="1.2em" />;
     case View.Reports:
-      return <ChartColumnBigIcon size={18} />;
+      return <ChartColumnBigIcon size="1.2em" />;
   }
 }
 
