@@ -22,7 +22,7 @@ import {
   SpeechIcon,
   UserCheckIcon,
   UsersIcon,
-  WholeWordIcon
+  WholeWordIcon,
 } from 'lucide-react';
 import React from 'react';
 
