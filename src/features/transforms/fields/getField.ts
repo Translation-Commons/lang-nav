@@ -1,5 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { CensusData } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import {
@@ -27,6 +28,7 @@ import {
 } from '@entities/lib/getObjectRelatedTerritories';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -49,8 +51,11 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getDepth(object);
     case Field.Literacy:
       return getObjectLiteracy(object);
-    case Field.Date:
-      return getObjectDateAsNumber(object);
+
+    case Field.Coordinates:
+      return object.type === ObjectType.Language || object.type === ObjectType.Territory
+        ? (((object.latitude || 0) * 2) ** 2 + (object.longitude || 0) ** 2) ** 0.5 || undefined
+        : undefined;
     case Field.Latitude:
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.latitude
@@ -64,8 +69,24 @@ function getField(object: ObjectData, field: Field): string | number | undefined
 
     case Field.LanguageScope:
       return getLanguageForEntity(object)?.scope;
+    case Field.WritingSystemScope:
+      return getWritingSystemForEntity(object)?.scope;
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
+    case Field.SourceType:
+      return getCensusForEntity(object)?.collectorType;
+
+    case Field.DigitalSupport:
+      return undefined; // Not yet defined
+    case Field.UnicodeVersion:
+      return object.type === ObjectType.WritingSystem ? object.unicodeVersion : undefined;
+    case Field.CLDRCoverage:
+      return object.type === ObjectType.Language
+        ? object.CLDR.coverage?.actualCoverageLevel
+        : undefined; // Not yet defined
+
+    case Field.Indigeneity:
+      return undefined; // Not yet defined
     case Field.LanguageFormedHere:
       return object.type !== ObjectType.Locale || object.langFormedHere == null
         ? undefined
@@ -78,14 +99,28 @@ function getField(object: ObjectData, field: Field): string | number | undefined
         : object.historicPresence
           ? 1
           : 0;
+    case Field.GovernmentStatus:
+      return object.type === ObjectType.Locale ? object.officialStatus : undefined; // Not yet defined
 
     // Related objects
     case Field.Language:
       return getObjectMostImportantLanguageName(object);
+    case Field.LanguageFamily:
+      return undefined; // Not yet defined
     case Field.WritingSystem:
       return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
+    case Field.OutputScript:
+      return getKeyboardForEntity(object)?.outputWritingSystem?.nameDisplay;
+    case Field.Region:
+      return getTerritoryForEntity(object)?.parentUNRegion?.nameDisplay;
     case Field.Territory:
       return getContainingTerritories(object)?.[0]?.nameDisplay;
+    case Field.Platform:
+      return getKeyboardForEntity(object)?.platform;
+    case Field.VariantTag:
+      return getKeyboardForEntity(object)?.variantTagCode;
+    case Field.Source:
+      return getCensusForEntity(object)?.collectorName;
 
     // Counts of Related Objects
     case Field.CountOfLanguages:
@@ -98,6 +133,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getCountOfWritingSystems(object);
     case Field.CountOfCensuses:
       return getCountOfCensuses(object);
+    case Field.CountOfVariantTags:
+      return undefined; // Not yet defined
 
     // Population
     case Field.Population:
@@ -125,13 +162,13 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Modality:
       return getLanguageForEntity(object)?.modality;
 
-    // Keyboard fields
-    case Field.Platform:
-      return getKeyboardForEntity(object)?.platform;
-    case Field.OutputScript:
-      return getKeyboardForEntity(object)?.outputWritingSystem?.nameDisplay;
-    case Field.VariantTag:
-      return getKeyboardForEntity(object)?.variantTagCode;
+    case Field.Date:
+      return getObjectDateAsNumber(object);
+
+    case Field.Description:
+      return object.type === ObjectType.VariantTag ? object.description : undefined;
+    case Field.Example:
+      return object.type === ObjectType.WritingSystem ? object.sample : undefined;
 
     default:
       enforceExhaustiveSwitch(field);
@@ -146,12 +183,29 @@ export function getLanguageForEntity(object: ObjectData | undefined): LanguageDa
   return undefined;
 }
 
+export function getWritingSystemForEntity(
+  object: ObjectData | undefined,
+): WritingSystemData | undefined {
+  if (!object) return undefined;
+  if (object.type === ObjectType.WritingSystem) return object;
+  if (object.type === ObjectType.Locale) return object.writingSystem;
+  if (object.type === ObjectType.Keyboard) return object.inputWritingSystem;
+  return undefined;
+}
+
 export function getTerritoryForEntity(object: ObjectData | undefined): TerritoryData | undefined {
   if (!object) return undefined;
   if (object.type === ObjectType.Territory) return object;
   if (object.type === ObjectType.Locale) return object.territory;
   if (object.type === ObjectType.Census) return object.territory;
   if (object.type === ObjectType.Keyboard) return object.territory;
+  return undefined;
+}
+
+export function getCensusForEntity(object: ObjectData | undefined): CensusData | undefined {
+  if (!object) return undefined;
+  if (object.type === ObjectType.Census) return object;
+  if (object.type === ObjectType.Locale) return object.populationCensus;
   return undefined;
 }
 

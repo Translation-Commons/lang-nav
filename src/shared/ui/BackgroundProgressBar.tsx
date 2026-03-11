@@ -8,7 +8,7 @@ const BackgroundProgressBar: React.FC<
       <div
         style={{
           position: 'absolute',
-          zIndex: -1,
+          zIndex: 0,
           top: 0,
           left: 0,
           height: '100%',
@@ -16,7 +16,7 @@ const BackgroundProgressBar: React.FC<
           backgroundColor,
         }}
       />
-      {children}
+      <div style={{ zIndex: 1, position: 'relative' }}>{children}</div>
     </div>
   );
 };

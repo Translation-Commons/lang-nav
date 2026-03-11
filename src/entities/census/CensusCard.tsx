@@ -1,7 +1,7 @@
-import { BlocksIcon, CalendarIcon, EarthIcon, HashIcon, LanguagesIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import Field from '@features/transforms/fields/Field';
 
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -31,13 +31,17 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={census} />
       </div>
-      <CardField title="Territory" icon={EarthIcon} description="Where this census was conducted.">
+      <CardField
+        title="Territory"
+        field={Field.Territory}
+        description="Where this census was conducted."
+      >
         {territory != null ? <HoverableObjectName object={territory} /> : isoRegionCode}
       </CardField>
 
       <CardField
         title="Collector Type"
-        icon={BlocksIcon}
+        field={Field.SourceType}
         description="The type of organization that collected this census"
       >
         {collectorType}
@@ -45,7 +49,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
       <CardField
         title="Collection Year"
-        icon={CalendarIcon}
+        field={Field.Date}
         description="The year this census was collected."
       >
         {yearCollected}
@@ -53,7 +57,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
       <CardField
         title="Language Use"
-        icon={LanguagesIcon}
+        field={Field.Modality}
         description='The way people use the language if provided by the census source. The Mode, Acquisition Order, and/or Domain (e.g. "Speaks, L1, Home").'
       >
         {languageUseParts.length > 0 ? (
@@ -65,7 +69,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
       <CardField
         title="Number of Languages"
-        icon={HashIcon}
+        field={Field.CountOfLanguages}
         description="How many languages are covered by this census."
       >
         {languageCount.toLocaleString()}

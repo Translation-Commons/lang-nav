@@ -1,25 +1,36 @@
 import {
   ActivityIcon,
   BabyIcon,
+  BlocksIcon,
   BookOpenCheckIcon,
+  BracketsIcon,
+  BuildingIcon,
   CalendarIcon,
   CaseSensitiveIcon,
   CircleDashedIcon,
   ClockIcon,
+  EarthIcon,
+  FileCodeIcon,
+  FileDigitIcon,
   HashIcon,
+  LandmarkIcon,
   LanguagesIcon,
   LocateFixedIcon,
   LucideIcon,
   MapPinHouseIcon,
+  MapPinIcon,
   MapPinnedIcon,
+  MessageCircleIcon,
+  MonitorCheckIcon,
   MonitorSmartphoneIcon,
   NetworkIcon,
   NotebookPenIcon,
-  PenLineIcon,
+  NotebookTextIcon,
+  PencilLineIcon,
   PercentIcon,
   RulerDimensionLineIcon,
   RulerIcon,
-  SpeechIcon,
+  TextIcon,
   UserCheckIcon,
   UsersIcon,
   WholeWordIcon,
@@ -39,17 +50,36 @@ export function getFieldIcon(field: Field): LucideIcon {
       return CaseSensitiveIcon;
     case Field.Endonym:
       return LanguagesIcon;
+    case Field.Description:
+      return TextIcon;
+
     case Field.LanguageScope:
-    case Field.TerritoryScope:
       return NetworkIcon;
+    case Field.WritingSystemScope:
+    case Field.TerritoryScope:
+      return BlocksIcon;
+    case Field.SourceType:
+      return BuildingIcon;
 
     // Status
     case Field.Modality:
-      return SpeechIcon;
+      return MessageCircleIcon;
+
+    case Field.DigitalSupport:
+      return MonitorCheckIcon;
+    case Field.CLDRCoverage:
+      return FileCodeIcon;
+    case Field.UnicodeVersion:
+      return FileDigitIcon;
+
+    case Field.Indigeneity:
     case Field.LanguageFormedHere:
       return MapPinHouseIcon;
     case Field.HistoricPresence:
       return ClockIcon;
+    case Field.GovernmentStatus:
+      return LandmarkIcon;
+
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:
@@ -59,28 +89,36 @@ export function getFieldIcon(field: Field): LucideIcon {
     // Relation
     case Field.Language:
       return LanguagesIcon;
+    case Field.LanguageFamily:
+      return NetworkIcon;
     case Field.WritingSystem:
-    case Field.OutputScript:
       return NotebookPenIcon;
+    case Field.OutputScript:
+      return NotebookTextIcon;
+    case Field.Region:
+      return EarthIcon;
     case Field.Territory:
       return MapPinnedIcon;
     case Field.Platform:
       return MonitorSmartphoneIcon;
     case Field.VariantTag:
-      return PenLineIcon;
+      return MapPinIcon;
+    case Field.Source:
+      return BracketsIcon;
+
     case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
       return HashIcon;
 
     // Quantity
+    case Field.Coordinates:
     case Field.Latitude:
     case Field.Longitude:
       return LocateFixedIcon;
-    case Field.Date:
-      return CalendarIcon;
     case Field.Area:
       return RulerDimensionLineIcon;
     case Field.Depth:
@@ -100,6 +138,11 @@ export function getFieldIcon(field: Field): LucideIcon {
     case Field.PopulationPercentInBiggestDescendantLanguage:
       return PercentIcon;
 
+    // Other
+    case Field.Date:
+      return CalendarIcon;
+    case Field.Example:
+      return PencilLineIcon;
     case Field.None:
       return CircleDashedIcon;
 

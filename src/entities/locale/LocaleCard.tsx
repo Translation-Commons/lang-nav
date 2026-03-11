@@ -1,5 +1,6 @@
-import { BracketsIcon, LandmarkIcon, MapPinHouseIcon, PercentIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
+
+import Field from '@features/transforms/fields/Field';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
@@ -34,7 +35,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       {populationAdjusted != null && (
         <CardField
           title="Population"
-          icon={UsersIcon}
+          field={Field.Population}
           description="How many people in this territory that use this language. Adjusted to 2025 population and including citation."
         >
           <LocalePopulationAdjusted locale={locale} />
@@ -43,7 +44,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       {populationAdjusted != null && (
         <CardField
           title="Source"
-          icon={BracketsIcon}
+          field={Field.Source}
           description="The source of the population data."
         >
           <LocaleCensusCitation locale={locale} size="short" />
@@ -53,7 +54,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       {populationSpeakingPercent != null && (
         <CardField
           title="Percent population"
-          icon={PercentIcon}
+          field={Field.PercentOfTerritoryPopulation}
           description="Percent of the Territory population that use this locale."
         >
           <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
@@ -63,7 +64,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
       <CardField
         title="Government Status"
-        icon={LandmarkIcon}
+        field={Field.GovernmentStatus}
         description="Whether the locale has official recognition."
       >
         {officialStatus != null ? (
@@ -75,7 +76,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
       <CardField
         title="Indigeneity"
-        icon={MapPinHouseIcon}
+        field={Field.Indigeneity}
         description={getIndigeneityDescription()}
       >
         <LocaleIndigeneityDisplay loc={locale} />

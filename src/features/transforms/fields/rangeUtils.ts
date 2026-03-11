@@ -39,11 +39,15 @@ export function getMinimumValue(field?: Field): number {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
     case Field.Area:
     case Field.Depth:
+    case Field.Coordinates:
       return 0;
     case Field.None:
       return 0;
+    case Field.UnicodeVersion:
+      return 1.1;
     case Field.LanguageScope:
       return LanguageScope.SpecialCode;
     case Field.TerritoryScope:
@@ -54,12 +58,26 @@ export function getMinimumValue(field?: Field): number {
     case Field.Endonym:
     case Field.Code:
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.Region:
     case Field.Platform:
     case Field.OutputScript:
     case Field.VariantTag:
+    case Field.Source:
+    case Field.Description:
+    case Field.Example:
       return convertAlphaToNumber(''); // 0
+
+    // Not yet defined on a continuous scale
+    case Field.WritingSystemScope:
+    case Field.Indigeneity:
+    case Field.DigitalSupport:
+    case Field.GovernmentStatus:
+    case Field.SourceType:
+    case Field.CLDRCoverage:
+      return 0;
     default:
       enforceExhaustiveSwitch(field);
   }
@@ -89,6 +107,8 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
       return 100;
     case Field.Longitude:
       return 180;
+    case Field.Coordinates:
+      return 180; // 180E + 90N
     case Field.Date:
       return new Date().getTime(); // Today
     case Field.TerritoryScope:
@@ -99,23 +119,39 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
     case Field.Population:
     case Field.PopulationDirectlySourced:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.Area:
     case Field.Depth:
+    case Field.UnicodeVersion:
       return maxBy(objects, (obj) => (getField(obj, field) as number) || 0) || 0;
     case Field.Name:
     case Field.Endonym:
     case Field.Code:
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.Region:
     case Field.Platform:
     case Field.OutputScript:
     case Field.VariantTag:
+    case Field.Source:
+    case Field.Description:
+    case Field.Example:
       return convertAlphaToNumber('ZZZZZZZZZZ');
+
+    // Not yet defined on a continuous scale
+    case Field.WritingSystemScope:
+    case Field.Indigeneity:
+    case Field.DigitalSupport:
+    case Field.GovernmentStatus:
+    case Field.SourceType:
+    case Field.CLDRCoverage:
+      return 0;
     default:
       enforceExhaustiveSwitch(field);
   }

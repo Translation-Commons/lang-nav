@@ -10,6 +10,20 @@ import Field from './Field';
 // Common fields available across most object types
 const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Population];
 
+// Fields that are in development and not yet available for use in transforms but there may be placeholder values
+export const FIELDS_IN_DEVELOPMENT: Field[] = [
+  Field.VitalityEthnologueCoarse,
+  Field.VitalityEthnologueFine,
+  Field.CountOfVariantTags,
+  Field.SourceType,
+  Field.Indigeneity,
+  Field.CLDRCoverage,
+  Field.DigitalSupport,
+  Field.LanguageFamily,
+  Field.CountOfVariantTags,
+  Field.WritingSystemScope,
+];
+
 // Specific fields available per object type
 function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
   switch (objectType) {
@@ -17,15 +31,24 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
       return [
         Field.Endonym,
         Field.LanguageScope,
+        Field.WritingSystemScope,
         Field.TerritoryScope,
+        Field.SourceType,
 
         Field.Modality,
+
+        Field.DigitalSupport,
+        Field.CLDRCoverage,
+
+        Field.Indigeneity,
         Field.LanguageFormedHere,
         Field.HistoricPresence,
+        Field.GovernmentStatus,
+
         Field.VitalityMetascore, // not particularly useful
         Field.ISOStatus,
-        // Field.VitalityEthnologueCoarse, // Investigating new datasource
-        // Field.VitalityEthnologueFine,
+        Field.VitalityEthnologueCoarse,
+        Field.VitalityEthnologueFine,
 
         Field.PopulationDirectlySourced,
         Field.Literacy,
@@ -33,9 +56,12 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.PercentOfTerritoryPopulation,
 
         Field.Language,
+        Field.LanguageFamily,
         Field.WritingSystem,
         Field.Territory,
+        Field.Region,
         // Field.VariantTag, // Data not available yet
+        Field.Source,
 
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
@@ -53,6 +79,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Language,
         Field.WritingSystem,
         Field.Territory, // Equivalent to DisplayName for territories
+        Field.Region,
 
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
@@ -62,9 +89,11 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.Depth,
         Field.Literacy,
+        Field.Area,
+
+        Field.Coordinates,
         Field.Latitude,
         Field.Longitude,
-        Field.Area,
 
         Field.PopulationDirectlySourced,
         Field.PopulationOfDescendants,
@@ -74,26 +103,34 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.Language:
       return [
         Field.Endonym,
+        Field.LanguageScope,
 
         Field.Modality,
+
+        Field.DigitalSupport,
+        Field.CLDRCoverage,
+
         Field.VitalityMetascore,
         Field.ISOStatus,
-        // Field.VitalityEthnologueFine,
-        // Field.VitalityEthnologueCoarse,
+        Field.VitalityEthnologueFine,
+        Field.VitalityEthnologueCoarse,
 
         Field.Language, // Equivalent to DisplayName for languages
         Field.WritingSystem,
         Field.Territory,
+        // Field.Region, // TODO
 
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
+        // Field.CountOfVariantTags, // TODO
 
         Field.Depth,
         Field.Literacy,
+
+        Field.Coordinates,
         Field.Latitude,
         Field.Longitude,
-        Field.LanguageScope,
 
         Field.PopulationDirectlySourced,
         Field.PopulationOfDescendants,
@@ -103,8 +140,11 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.Census:
       return [
         Field.TerritoryScope,
+        Field.SourceType,
 
         Field.Territory,
+        Field.Region,
+        Field.Source,
 
         Field.CountOfLanguages,
         Field.CountOfChildTerritories, // 0 or 1
@@ -119,15 +159,22 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
     case ObjectType.WritingSystem:
       return [
         Field.Endonym,
-        Field.Depth,
-        // Field.Literacy, Data not available yet
+        Field.WritingSystemScope,
+
         Field.Language,
+        Field.WritingSystem, // Equivalent to DisplayName for writing systems
+        Field.Territory,
+
         Field.CountOfLanguages,
         Field.CountOfCountries,
         Field.CountOfWritingSystems,
+
         Field.PopulationOfDescendants,
-        Field.Territory,
-        Field.WritingSystem, // Equivalent to DisplayName for writing systems
+
+        Field.Depth,
+        Field.UnicodeVersion,
+        Field.Example,
+        // Field.Literacy, Data not available yet
       ];
     case ObjectType.VariantTag:
       return [
@@ -143,10 +190,12 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfCountries, // 0 or 1
 
         Field.Date,
+        Field.Description,
       ];
     case ObjectType.Keyboard:
       return [
         Field.LanguageScope,
+        Field.WritingSystemScope, // Technically possible but uninteresting
         Field.TerritoryScope,
 
         Field.Modality, // the Language's modality
@@ -156,6 +205,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Language,
         Field.WritingSystem,
         Field.Territory,
+        Field.Region,
         Field.Platform,
         Field.OutputScript,
         Field.VariantTag,
@@ -172,10 +222,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
   switch (transform) {
     case Transform.Sort:
       // Easier to list fields that aren't sortable than to list all that are, since most are
-      return Object.values(Field).filter(
-        (f) =>
-          ![Field.None, Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine].includes(f),
-      );
+      return Object.values(Field).filter((f) => ![Field.None].includes(f));
     case Transform.Color:
       // Ordered by preferred UI grouping: quantitative first, then text fields
       return [
@@ -190,17 +237,27 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+        Field.CountOfVariantTags,
 
         Field.Literacy,
 
         Field.Modality,
+
+        Field.DigitalSupport,
+        Field.CLDRCoverage,
+        Field.UnicodeVersion,
+
         Field.VitalityMetascore,
-        // Field.VitalityEthnologueFine,
-        // Field.VitalityEthnologueCoarse,
         Field.ISOStatus,
+        Field.VitalityEthnologueFine,
+        Field.VitalityEthnologueCoarse,
+
+        Field.Indigeneity,
         Field.LanguageFormedHere,
         Field.HistoricPresence,
+        Field.GovernmentStatus,
 
+        // Field.Coordinates, we don't support 2D color scales right now
         Field.Latitude,
         Field.Longitude,
 
@@ -215,6 +272,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.Endonym,
         Field.Code,
         Field.LanguageScope,
+        Field.WritingSystemScope,
         Field.TerritoryScope,
       ];
     case Transform.Scale:
@@ -250,8 +308,8 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.LanguageScope,
         Field.TerritoryScope,
         Field.ISOStatus,
-        // Field.VitalityEthnologueFine, Disabled until clarity on data usage
-        // Field.VitalityEthnologueCoarse,
+        Field.VitalityEthnologueFine,
+        Field.VitalityEthnologueCoarse,
         Field.Name, // Technically filters name and code right now, depending on SearchBy
       ];
     default:
@@ -263,7 +321,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
  * Returns all fields available for a given object type.
  * This is the authoritative list that other UIs (sorting, coloring, scaling) intersect with.
  */
-export function getFieldsForObjectType(objectType: ObjectType): Field[] {
+function getFieldsForObjectType(objectType: ObjectType): Field[] {
   const specific = getSpecificFieldsForObjectType(objectType);
   return unique([...COMMON_FIELDS, ...specific]);
 }
@@ -275,7 +333,9 @@ export function getFieldsForObjectType(objectType: ObjectType): Field[] {
 export function getApplicableFields(transform?: Transform, objectType?: ObjectType): Field[] {
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
   const objectFields = objectType ? getFieldsForObjectType(objectType) : Object.values(Field);
-  return transformFields.filter((f) => objectFields.includes(f));
+  return transformFields.filter(
+    (f) => objectFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f),
+  );
 }
 
 export function isFieldApplicable(
@@ -285,6 +345,7 @@ export function isFieldApplicable(
 ): boolean {
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&
-    (objectType ? getFieldsForObjectType(objectType).includes(field) : true)
+    (objectType ? getFieldsForObjectType(objectType).includes(field) : true) &&
+    !FIELDS_IN_DEVELOPMENT.includes(field)
   );
 }
