@@ -36,6 +36,7 @@ const useEntities = (entityType?: ObjectType): EntityData[] => {
     }
   }, [
     entityType,
+    pageEntityType,
     censuses,
     languagesInSelectedSource,
     locales,

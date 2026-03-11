@@ -1,9 +1,9 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useEntities from '@features/data/context/useEntities';
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
@@ -33,40 +33,7 @@ const FieldCoverageTable: React.FC = () => {
     },
     {} as Record<ObjectType, Field[]>,
   );
-
-  const entitiesByType: Record<ObjectType, ObjectData[]> = {
-    // Note: hooks shouldn't be called in loops so they are listed out manually here
-    [ObjectType.Language]: useEntities(ObjectType.Language),
-    [ObjectType.Locale]: useEntities(ObjectType.Locale),
-    [ObjectType.Territory]: useEntities(ObjectType.Territory),
-    [ObjectType.WritingSystem]: useEntities(ObjectType.WritingSystem),
-    [ObjectType.Census]: useEntities(ObjectType.Census),
-    [ObjectType.VariantTag]: useEntities(ObjectType.VariantTag),
-    [ObjectType.Keyboard]: useEntities(ObjectType.Keyboard),
-  };
-  const dataCompletenessByFieldByEntityType: Record<Field, Record<ObjectType, number>> = useMemo(
-    () =>
-      Object.values(Field).reduce(
-        (acc, field) => {
-          acc[field] = Object.values(ObjectType).reduce(
-            (entityAcc, entityType) => {
-              const entities = entitiesByType[entityType] as ObjectData[];
-              const totalEntities = entities.length;
-              const entitiesWithField = entities.filter(
-                (entity) => getField(entity, field) !== undefined,
-              ).length;
-              entityAcc[entityType] =
-                totalEntities > 0 ? (entitiesWithField / totalEntities) * 100 : 0;
-              return entityAcc;
-            },
-            {} as Record<ObjectType, number>,
-          );
-          return acc;
-        },
-        {} as Record<Field, Record<ObjectType, number>>,
-      ),
-    [entitiesByType],
-  );
+  const dataCompletenessByFieldByEntityType = useDataCompletenessByFieldByEntityType();
 
   return (
     <table style={{ borderCollapse: 'collapse' }}>
@@ -98,7 +65,7 @@ const FieldCoverageTable: React.FC = () => {
         {getFieldGroups().map((fieldGroup) => {
           const fields = getFieldsInGroup(fieldGroup);
           return (
-            <>
+            <React.Fragment key={fieldGroup}>
               {fields.map((field, fieldIndex) => (
                 <tr
                   key={field}
@@ -138,12 +105,43 @@ const FieldCoverageTable: React.FC = () => {
                   })}
                 </tr>
               ))}
-            </>
+            </React.Fragment>
           );
         })}
       </tbody>
     </table>
   );
 };
+
+function useDataCompletenessByFieldByEntityType(): Record<Field, Record<ObjectType, number>> {
+  const entitiesByType: Record<ObjectType, EntityData[]> = {
+    // Note: hooks shouldn't be called in loops so they are listed out manually here
+    [ObjectType.Language]: useEntities(ObjectType.Language),
+    [ObjectType.Locale]: useEntities(ObjectType.Locale),
+    [ObjectType.Territory]: useEntities(ObjectType.Territory),
+    [ObjectType.WritingSystem]: useEntities(ObjectType.WritingSystem),
+    [ObjectType.Census]: useEntities(ObjectType.Census),
+    [ObjectType.VariantTag]: useEntities(ObjectType.VariantTag),
+    [ObjectType.Keyboard]: useEntities(ObjectType.Keyboard),
+  };
+  return Object.values(Field).reduce(
+    (acc, field) => {
+      acc[field] = Object.values(ObjectType).reduce(
+        (entityAcc, entityType) => {
+          const entities = entitiesByType[entityType];
+          const totalEntities = entities.length;
+          const entitiesWithField = entities.filter(
+            (entity) => getField(entity, field) !== undefined,
+          ).length;
+          entityAcc[entityType] = totalEntities > 0 ? (entitiesWithField / totalEntities) * 100 : 0;
+          return entityAcc;
+        },
+        {} as Record<ObjectType, number>,
+      );
+      return acc;
+    },
+    {} as Record<Field, Record<ObjectType, number>>,
+  );
+}
 
 export default FieldCoverageTable;

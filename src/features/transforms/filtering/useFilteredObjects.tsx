@@ -11,7 +11,7 @@ import { getFilterByVitality, getScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 
 type UseFilteredObjectsParams = {
-  // TODO use Fields to specific which filters should be used, not these generalized booleans
+  // TODO use Fields to specify which filters should be used, not these generalized booleans
   useScope?: boolean;
   useSubstring?: boolean;
   useConnections?: boolean;
