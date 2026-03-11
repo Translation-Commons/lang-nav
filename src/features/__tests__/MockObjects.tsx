@@ -3,7 +3,7 @@ import { computeLocalesPopulationFromCensuses } from '@features/data/compute/com
 import { computeLocalesWritingPopulation } from '@features/data/compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
-import { updateObjectCodesNameAndPopulation } from '@features/data/compute/updateObjectCodesNameAndPopulation';
+import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
 import { addCensusData } from '@features/data/connect/connectCensuses';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
@@ -266,6 +266,7 @@ export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArra
     writingSystems: objectArray.filter((obj) => obj.type === ObjectType.WritingSystem),
     variantTags: objectArray.filter((obj) => obj.type === ObjectType.VariantTag),
     censuses: { be0590: objects.be0590 as CensusData },
+    keyboards: objectArray.filter((obj) => obj.type === ObjectType.Keyboard),
   };
 }
 
@@ -356,6 +357,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     writingSystems,
     locales,
     variantTags,
+    {},
   );
 
   // Update the objects dictionary with the aggregated locales
@@ -392,7 +394,7 @@ export function getFullyInstantiatedMockedObjects(
 
   // From DataContext
   const world = objects['001'] as TerritoryData;
-  updateObjectCodesNameAndPopulation(
+  updateObjectsBasedOnDataParams(
     Object.values(languagesBySource.Combined) as LanguageData[],
     Object.values(locales),
     world,
@@ -425,6 +427,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
   const dataContext: DataContextType = {
     allLanguoids: languages,
     censuses,
+    keyboards: [],
     languagesInSelectedSource: languages,
     locales,
     territories,

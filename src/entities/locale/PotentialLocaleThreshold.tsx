@@ -4,10 +4,9 @@ import {
   SelectorDisplay,
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput from '@features/params/ui/TextInput';
 
-export function usePotentialLocaleThreshold(): {
+export function usePotentialLocaleThreshold(label: ReactNode): {
   percentThreshold: number;
   percentThresholdSelector: ReactNode;
 } {
@@ -16,10 +15,7 @@ export function usePotentialLocaleThreshold(): {
   const percentThresholdSelector = (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonGroup}>
       <div style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}>
-        <SelectorLabel
-          label="Percent Threshold:"
-          description="Limit results by the minimum percent population in a territory that uses the language."
-        />
+        {label}
         <TextInput
           getSuggestions={async () => [
             { searchString: '0.001', label: '0.001%' },

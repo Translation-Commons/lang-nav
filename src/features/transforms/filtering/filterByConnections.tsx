@@ -3,7 +3,6 @@ import { useCallback } from 'react';
 import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { ObjectType } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
@@ -14,7 +13,10 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
 
+import Field from '../fields/Field';
+
 import { FilterFunctionType } from './filter';
+import useFilters from './useFilters';
 
 /**
  * Returns a combined function that will filter objects by other objects they are connected to.
@@ -24,9 +26,11 @@ export function getFilterByConnections({
   territory = true,
   writing = true,
 }: { lang?: boolean; territory?: boolean; writing?: boolean } = {}): FilterFunctionType {
-  const filterByTerritory = territory ? getFilterByTerritory() : () => true;
-  const filterByWritingSystem = writing ? getFilterByWritingSystem() : () => true;
-  const filterByLanguage = lang ? getFilterByLanguage() : () => true;
+  const filterBy = useFilters();
+
+  const filterByTerritory = territory ? filterBy[Field.Territory] : () => true;
+  const filterByWritingSystem = writing ? filterBy[Field.WritingSystem] : () => true;
+  const filterByLanguage = lang ? filterBy[Field.Language] : () => true;
   return useCallback(
     (object: ObjectData) =>
       filterByTerritory(object) && filterByWritingSystem(object) && filterByLanguage(object),
@@ -37,8 +41,7 @@ export function getFilterByConnections({
 /**
  * Provide a function that returns true for items that are relevant to a territory.
  */
-export function getFilterByTerritory(): FilterFunctionType {
-  const { territoryFilter } = usePageParams();
+export function buildFilterByTerritory(territoryFilter: string): FilterFunctionType {
   // Split up strings like "United States [US]" into "US" and "United States"
   const splitFilter = territoryFilter.split('[');
   const nameMatch = splitFilter[0]?.toLowerCase().trim();
@@ -51,19 +54,15 @@ export function getFilterByTerritory(): FilterFunctionType {
     codeMatch = splitFilter[1].split(']')[0]?.toUpperCase();
   }
 
-  return useCallback(
-    (object: ObjectData) => {
-      if (!territoryFilter) return true;
-      const territories = getContainingTerritories(object);
-      if (codeMatch !== '') return territories.some((t) => t.codeDisplay === codeMatch);
-      return territories.some((t) => t.nameDisplay.toLowerCase().startsWith(nameMatch));
-    },
-    [territoryFilter, codeMatch, nameMatch],
-  );
+  return (object: ObjectData) => {
+    if (!territoryFilter) return true;
+    const territories = getContainingTerritories(object);
+    if (codeMatch !== '') return territories.some((t) => t.codeDisplay === codeMatch);
+    return territories.some((t) => t.nameDisplay.toLowerCase().startsWith(nameMatch));
+  };
 }
 
-export function getFilterByWritingSystem(): FilterFunctionType {
-  const { writingSystemFilter } = usePageParams();
+export function buildFilterByWritingSystem(writingSystemFilter: string): FilterFunctionType {
   // Split up strings like "Traditional Han [Hant]" into "Hant" and "Traditional Han"
   const splitFilter = writingSystemFilter.split('[');
   const nameMatch = splitFilter[0]?.toLowerCase().trim();
@@ -75,15 +74,12 @@ export function getFilterByWritingSystem(): FilterFunctionType {
     if (codeSection) codeMatch = toTitleCase(codeSection);
   }
 
-  return useCallback(
-    (object: ObjectData) => {
-      if (!writingSystemFilter) return true;
-      const scripts = getWritingSystemsRelevantToObject(object);
-      if (codeMatch !== '') return scripts.some((ws) => ws.codeDisplay === codeMatch);
-      return scripts.some((ws) => ws.nameDisplay.toLowerCase().startsWith(nameMatch));
-    },
-    [writingSystemFilter, codeMatch, nameMatch],
-  );
+  return (object: ObjectData) => {
+    if (!writingSystemFilter) return true;
+    const scripts = getWritingSystemsRelevantToObject(object);
+    if (codeMatch !== '') return scripts.some((ws) => ws.codeDisplay === codeMatch);
+    return scripts.some((ws) => ws.nameDisplay.toLowerCase().startsWith(nameMatch));
+  };
 }
 
 // Similar to getObjectMiscFields's getWritingSystemsInObject, but includes parents not children
@@ -109,11 +105,15 @@ export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSy
       return getWritingSystemsInObject(object) ?? [];
     case ObjectType.Census:
       return []; // Not easy to get
+    case ObjectType.Keyboard:
+      return uniqueBy(
+        [object.inputWritingSystem, object.outputWritingSystem].filter((ws) => !!ws),
+        (ws) => ws.ID,
+      );
   }
 }
 
-export function getFilterByLanguage(): FilterFunctionType {
-  const { languageFilter } = usePageParams();
+export function buildFilterByLanguage(languageFilter: string): FilterFunctionType {
   // Split up strings like "German [deu]" into "deu" and "German"
   const splitFilter = languageFilter.split('[');
   const nameMatch = splitFilter[0]?.toLowerCase().trim();
@@ -125,15 +125,12 @@ export function getFilterByLanguage(): FilterFunctionType {
     if (codeSection) codeMatch = codeSection.toLowerCase();
   }
 
-  return useCallback(
-    (object: ObjectData) => {
-      if (!languageFilter) return true;
-      const langs = getLanguagesRelevantToObject(object);
-      if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
-      return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
-    },
-    [languageFilter, codeMatch, nameMatch],
-  );
+  return (object: ObjectData) => {
+    if (!languageFilter) return true;
+    const langs = getLanguagesRelevantToObject(object);
+    if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
+    return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
+  };
 }
 
 export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[] {
@@ -157,5 +154,7 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
       return Object.values(object.languages ?? {});
     case ObjectType.VariantTag:
       return object.languages ?? [];
+    case ObjectType.Keyboard:
+      return object.language ? [object.language] : [];
   }
 }

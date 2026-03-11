@@ -9,6 +9,7 @@ import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinates } from './getRobinsonCoordinates';
+import { MAP_ASPECT_RATIO } from './MapConsts';
 
 type Props = {
   drawableObjects: DrawableData[];
@@ -59,7 +60,7 @@ const MapCircles: React.FC<Props> = ({
         left: 0,
         position: 'absolute',
         width: '100%',
-        aspectRatio: 1.979, // Aspect ratio of the map_world.svg
+        aspectRatio: MAP_ASPECT_RATIO, // Aspect ratio of the map_world.svg
         pointerEvents: 'none', // So that the svg doesn't block mouse events to the underlying map
       }}
     >

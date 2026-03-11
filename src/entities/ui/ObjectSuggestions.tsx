@@ -38,6 +38,13 @@ function getObjectIDs(objectType: ObjectType): string[] {
       return ['valencia', 'grclass', 'rumgr', 'pinyin'];
     case ObjectType.WritingSystem:
       return ['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'];
+    case ObjectType.Keyboard:
+      return [
+        'gboard_eng_Latn_US',
+        'gboard_spa_Latn_ES',
+        'gboard_fra_Latn_FR',
+        'gboard_ara_Arab_SA',
+      ];
   }
 }
 

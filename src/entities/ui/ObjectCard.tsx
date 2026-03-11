@@ -3,6 +3,7 @@ import React from 'react';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import CensusCard from '@entities/census/CensusCard';
+import KeyboardCard from '@entities/keyboard/KeyboardCard';
 import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
 import TerritoryCard from '@entities/territory/TerritoryCard';
@@ -24,6 +25,8 @@ const ObjectCard: React.FC<{ object: ObjectData }> = ({ object }) => {
       return <VariantTagCard data={object} />;
     case ObjectType.WritingSystem:
       return <WritingSystemCard writingSystem={object} />;
+    case ObjectType.Keyboard:
+      return <KeyboardCard keyboard={object} />;
   }
 };
 

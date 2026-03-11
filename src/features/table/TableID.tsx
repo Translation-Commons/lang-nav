@@ -7,6 +7,7 @@ enum TableID {
   Territories,
   VariantTags,
   WritingSystems,
+  Keyboards,
 
   // Specialized tables
   LanguagesInCensus,
@@ -14,6 +15,7 @@ enum TableID {
   LanguagesInTerritory,
   CountriesWithCensuses,
   PotentialLocales,
+  LocaleIndigeneity,
 }
 
 export default TableID;

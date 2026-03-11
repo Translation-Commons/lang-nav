@@ -3,13 +3,14 @@ import React from 'react';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import { getSortBysApplicableToObjectType } from '@features/transforms/fields/FieldApplicability';
+import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 
 import Field from '../fields/Field';
+import TransformEnum from '../TransformEnum';
 
 const SecondarySortBySelector: React.FC = () => {
   const { secondarySortBy, updatePageParams, objectType } = usePageParams();
-  const applicableSortBys = getSortBysApplicableToObjectType(objectType);
+  const applicableSortBys = getApplicableFields(TransformEnum.Sort, objectType);
   const options = [Field.None, ...applicableSortBys];
 
   return (

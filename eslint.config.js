@@ -1,6 +1,4 @@
 import js from '@eslint/js';
-import typescript from '@typescript-eslint/eslint-plugin';
-import parser from '@typescript-eslint/parser';
 import prettierConfig from 'eslint-config-prettier';
 import importPlugin from 'eslint-plugin-import';
 import prettierPlugin from 'eslint-plugin-prettier';
@@ -21,7 +19,6 @@ export default defineConfig([
   pluginReact.configs.flat.recommended,
   {
     languageOptions: {
-      parser,
       parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
@@ -32,7 +29,6 @@ export default defineConfig([
     plugins: {
       react: pluginReact,
       'react-hooks': reactHooks,
-      '@typescript-eslint': typescript,
       prettier: prettierPlugin,
     },
     rules: {
@@ -46,7 +42,7 @@ export default defineConfig([
     },
   },
   {
-    files: ['**/*.{ts,tsx}'],
+    files: ['**/*.{js,mjs,cjs,ts,tsx}'],
     plugins: {
       import: importPlugin,
     },
@@ -54,16 +50,7 @@ export default defineConfig([
       'import/order': [
         'warn',
         {
-          groups: [
-            'builtin', // fs, path, url, etc.
-            'external', // react, lodash, etc.
-            'internal', // @shared, @features, ...
-            'parent', // ../
-            'sibling', // ./
-            'index', // ./ (index)
-            'object', // import('pkg').prop
-            'type', // import type { X } ...
-          ],
+          groups: ['builtin', 'external', 'internal', 'parent', 'sibling', 'index'],
           pathGroups: [
             { pattern: '@app/**', group: 'internal', position: 'after' },
             { pattern: '@pages/**', group: 'internal', position: 'after' },
@@ -77,6 +64,7 @@ export default defineConfig([
           pathGroupsExcludedImportTypes: ['builtin'],
           'newlines-between': 'always',
           alphabetize: { order: 'asc', caseInsensitive: true },
+          warnOnUnassignedImports: false,
         },
       ],
     },

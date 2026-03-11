@@ -15,6 +15,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
 import MapCircles from './MapCircles';
+import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
 import MapHoverContent from './MapHoverContent';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
@@ -26,14 +27,11 @@ type Props = {
 };
 
 // Aspect ratio (width/height) of the Robinson projection used in map_world.svg
-export const MAP_ASPECT_RATIO = 1.979;
-const MAP_WIDTH = 360;
-const MAP_HEIGHT = MAP_WIDTH / MAP_ASPECT_RATIO;
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
-    mapWidth: MAP_WIDTH,
-    mapHeight: MAP_HEIGHT,
+    mapWidth: MAP_INTERNAL_WIDTH,
+    mapHeight: MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO,
   });
   const { colorBy, objectType } = usePageParams();
   const drawableObjects = useMemo(() => {
@@ -77,7 +75,11 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
       >
         <div
           ref={contentRef}
-          style={{ width: MAP_WIDTH, height: MAP_HEIGHT, position: 'relative' }}
+          style={{
+            width: MAP_INTERNAL_WIDTH,
+            height: MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO,
+            position: 'relative',
+          }}
         >
           <img
             alt="World map"

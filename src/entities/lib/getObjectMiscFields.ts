@@ -30,6 +30,8 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
         : undefined;
     case ObjectType.Census:
       return undefined;
+    case ObjectType.Keyboard:
+      return object.language?.nameDisplay;
   }
 }
 
@@ -49,6 +51,7 @@ export function getObjectDate(object: ObjectData): Date | undefined {
     case ObjectType.Locale:
     case ObjectType.WritingSystem:
     case ObjectType.Territory:
+    case ObjectType.Keyboard:
       return undefined;
   }
 }
@@ -70,6 +73,8 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
         : undefined;
     case ObjectType.VariantTag:
       return object.languageCodes?.length;
+    case ObjectType.Keyboard:
+      return undefined;
   }
 }
 
@@ -87,6 +92,8 @@ export function getObjectLiteracy(object: ObjectData): number | undefined {
       return object.literacyPercent;
     case ObjectType.Territory:
       return object.literacyPercent;
+    case ObjectType.Keyboard:
+      return undefined;
   }
 }
 
@@ -152,6 +159,15 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
       );
     case ObjectType.Census:
       return undefined; // Potentially derivable, but computationally expensive
+    case ObjectType.Keyboard:
+      if (
+        object.inputWritingSystem &&
+        object.outputWritingSystem &&
+        object.inputScriptCode !== object.outputScriptCode
+      ) {
+        return [object.inputWritingSystem, object.outputWritingSystem];
+      }
+      return object.inputWritingSystem ? [object.inputWritingSystem] : undefined;
     default:
       enforceExhaustiveSwitch(type);
   }
@@ -170,6 +186,8 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
     case ObjectType.Language:
     case ObjectType.WritingSystem:
     case ObjectType.VariantTag:
+      return undefined;
+    case ObjectType.Keyboard:
       return undefined;
     default:
       enforceExhaustiveSwitch(type);
@@ -192,6 +210,8 @@ export function getDepth(object: ObjectData): number | undefined {
       return object.parentWritingSystem ? getDepth(object.parentWritingSystem)! + 1 : 0;
     case ObjectType.Census:
     case ObjectType.VariantTag:
+      return undefined;
+    case ObjectType.Keyboard:
       return undefined;
     default:
       enforceExhaustiveSwitch(type);

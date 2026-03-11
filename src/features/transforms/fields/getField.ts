@@ -1,5 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   getCountOfCensuses,
@@ -65,6 +66,18 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getLanguageForEntity(object)?.scope;
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
+    case Field.LanguageFormedHere:
+      return object.type !== ObjectType.Locale || object.langFormedHere == null
+        ? undefined
+        : object.langFormedHere
+          ? 1
+          : 0;
+    case Field.HistoricPresence:
+      return object.type !== ObjectType.Locale || object.historicPresence == null
+        ? undefined
+        : object.historicPresence
+          ? 1
+          : 0;
 
     // Related objects
     case Field.Language:
@@ -112,21 +125,39 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Modality:
       return getLanguageForEntity(object)?.modality;
 
+    // Keyboard fields
+    case Field.Platform:
+      return getKeyboardForEntity(object)?.platform;
+    case Field.OutputScript:
+      return getKeyboardForEntity(object)?.outputWritingSystem?.nameDisplay;
+    case Field.VariantTag:
+      return getKeyboardForEntity(object)?.variantTagCode;
+
     default:
       enforceExhaustiveSwitch(field);
   }
 }
 
-export function getLanguageForEntity(object: ObjectData): LanguageData | undefined {
+export function getLanguageForEntity(object: ObjectData | undefined): LanguageData | undefined {
+  if (!object) return undefined;
   if (object.type === ObjectType.Language) return object;
   if (object.type === ObjectType.Locale) return object.language;
+  if (object.type === ObjectType.Keyboard) return object.language;
   return undefined;
 }
 
-export function getTerritoryForEntity(object: ObjectData): TerritoryData | undefined {
+export function getTerritoryForEntity(object: ObjectData | undefined): TerritoryData | undefined {
+  if (!object) return undefined;
   if (object.type === ObjectType.Territory) return object;
   if (object.type === ObjectType.Locale) return object.territory;
   if (object.type === ObjectType.Census) return object.territory;
+  if (object.type === ObjectType.Keyboard) return object.territory;
+  return undefined;
+}
+
+export function getKeyboardForEntity(object: ObjectData | undefined): KeyboardData | undefined {
+  if (!object) return undefined;
+  if (object.type === ObjectType.Keyboard) return object;
   return undefined;
 }
 

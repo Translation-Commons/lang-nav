@@ -3,6 +3,7 @@ import React, { ReactNode, useCallback, useEffect } from 'react';
 import usePageParams from '@features/params/usePageParams';
 
 import SidePanelToggleButton from './SidePanelToggleButton';
+import useFilterPanel from './useFilterPanel';
 
 type Props = {
   purpose: 'filters' | 'details'; // filters on left, details on right
@@ -17,14 +18,20 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   title,
 }) => {
   const { objectID } = usePageParams();
-  const [isOpen, setIsOpen] = React.useState(purpose === 'filters');
-  const [panelWidth, setPanelWidth] = React.useState(defaultWidth); // but will change to pixels on resize
+  const filterPanel = useFilterPanel();
+
+  // For filters, use shared context state; for details, use local state
+  const [localIsOpen, setLocalIsOpen] = React.useState(false);
+  const isOpen = purpose === 'filters' ? filterPanel.isOpen : localIsOpen;
+  const setIsOpen = purpose === 'filters' ? filterPanel.setIsOpen : setLocalIsOpen;
+
+  const [panelWidth, setPanelWidth] = React.useState(defaultWidth);
   const panelSide = purpose === 'filters' ? 'left' : 'right';
   const [shouldEaseTransition, setShouldEaseTransition] = React.useState(false);
 
   useEffect(() => {
-    // When an object is set, close the side panel
-    if (objectID) setIsOpen(purpose === 'details');
+    // When an object is set, open the details panel
+    if (objectID && purpose === 'details') setLocalIsOpen(true);
   }, [objectID, purpose]);
 
   return (
@@ -70,12 +77,15 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         </div>
       </div>
 
-      <SidePanelToggleButton
-        isOpen={isOpen}
-        onClick={() => setIsOpen((open) => !open)}
-        panelWidth={panelWidth}
-        purpose={purpose}
-      />
+      {/* Only show the floating toggle button for the details panel */}
+      {purpose === 'details' && (
+        <SidePanelToggleButton
+          isOpen={isOpen}
+          onClick={() => setIsOpen((open) => !open)}
+          panelWidth={panelWidth}
+          purpose={purpose}
+        />
+      )}
     </aside>
   );
 };

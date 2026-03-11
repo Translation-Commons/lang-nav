@@ -3173,7 +3173,7 @@ cbn	nyah1250	Nyahkur			Thai	10,000		moni1258	Yes
 ckm	chak1265	Chakavian			Latn	10,000		sout1528	Yes	
 ckq	kaja1254	Kajakse			Latn	10,000		mubi1247	Yes	
 cmi	embe1262	Emberá-Chamí			Latn	10,000		uppe1440	Yes	
-cnr	mont1282	Montenegrin	crnogorski			10,000	hbs	east2821	Yes, with caveat	Some countries only group this as "Serbo-Croatian" and the member languages are largely intelligible but for political reasons they are separated. Try to categorize these separately if possible
+cnr	mont1282	Montenegrin	crnogorski		Latn	10,000	hbs	east2821	Yes, with caveat	Some countries only group this as "Serbo-Croatian" and the member languages are largely intelligible but for political reasons they are separated. Try to categorize these separately if possible
 csf	cuba1235	Cuba Sign Language		Sign	Zxxx	10,000		deaf1237	Yes	
 dbj	idaa1241	Ida'an			Latn	10,000		nort3172	Yes	
 deg	dege1246	Degema			Latn	10,000		dege1249	Yes	

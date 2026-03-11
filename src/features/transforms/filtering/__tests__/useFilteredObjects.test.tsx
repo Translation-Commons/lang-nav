@@ -71,7 +71,7 @@ describe('useFilteredObjects', () => {
     expect(filteredObjects.map((obj) => obj.ID)).toEqual(['ine', 'ita']);
   });
 
-  it('filters by Ethnologue fine vitality value', () => {
+  it('filters by vitality value', () => {
     setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
     const { filteredObjects } = getHookResult({});
     expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa']);

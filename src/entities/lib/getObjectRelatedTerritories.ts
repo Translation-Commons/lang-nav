@@ -70,6 +70,8 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
       );
     case ObjectType.VariantTag:
       return getChildTerritoriesInObject(object) ?? [];
+    case ObjectType.Keyboard:
+      return object.territory ? [object.territory] : [];
   }
 }
 
@@ -128,6 +130,7 @@ export function getCountriesInObject(object: ObjectData): TerritoryData[] | unde
     case ObjectType.Language:
     case ObjectType.WritingSystem:
     case ObjectType.VariantTag:
+    case ObjectType.Keyboard:
       // Computationally a bit expensive, be careful using this application
       return uniqueBy(
         getObjectLocales(object)
@@ -163,6 +166,7 @@ export function getChildTerritoriesInObject(object: ObjectData): TerritoryData[]
       );
     case ObjectType.Language:
     case ObjectType.WritingSystem:
+    case ObjectType.Keyboard:
       // child territories are not well defined for this, you probably want getCountriesInObject instead
       return undefined;
   }
@@ -182,6 +186,8 @@ export function getObjectLocales(object: ObjectData): LocaleData[] {
       return getWritingSystemLocales(object);
     case ObjectType.VariantTag:
       return object.locales;
+    case ObjectType.Keyboard:
+      return [];
   }
 }
 

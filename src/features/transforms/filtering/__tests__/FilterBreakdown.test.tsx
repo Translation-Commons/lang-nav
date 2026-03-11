@@ -61,14 +61,14 @@ describe('FilterBreakdown', () => {
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
       languageFilter: 'ine', // Indo-European family
-      vitalityEthFine: [VitalityEthnologueFine.National],
+      vitalityEthFine: [VitalityEthnologueFine.National], // filters out fra
       searchString: 'spa',
     });
 
     const { container } = render(<FilterBreakdown objects={objects} />);
 
     // Expected all of the filters to be shown
-    expect(screen.getByText(/Not macrolanguage or language:/i)).toBeTruthy();
+    expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();
     expect(screen.getByText(/Not found in territory with code "US":/i)).toBeTruthy();
     expect(screen.getByText(/Not written in script with code "Latn":/i)).toBeTruthy();
     expect(screen.getByText(/Not related to language with code "ine":/i)).toBeTruthy();
@@ -132,7 +132,7 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown objects={objects} />);
 
     // No filters are applied, so no breakdown should be shown
-    expect(screen.queryByText(/Not macrolanguage or language:/i)).toBeTruthy(); // ine
+    expect(screen.queryByText(/Not macrolanguage or individual language:/i)).toBeTruthy(); // ine
     expect(screen.queryByText(/Not found in territory/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not written in/i)).toBeNull(); // not active
     expect(screen.queryByText(/Not related to/i)).toBeNull(); // not active
@@ -158,7 +158,7 @@ describe('FilterBreakdown', () => {
     const { container } = render(<FilterBreakdown objects={objects} />);
 
     // Expected all of the filters to be shown
-    expect(screen.getByText(/Not macrolanguage or language:/i)).toBeTruthy();
+    expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();
     expect(screen.getByText(/Not found in United States:/i)).toBeTruthy();
     expect(screen.getByText(/Not written in Latin:/i)).toBeTruthy();
     expect(screen.getByText(/Not related to Indo-European:/i)).toBeTruthy();

@@ -32,6 +32,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   territories: [],
   variantTags: [],
   writingSystems: [],
+  keyboards: [],
   getCLDRLanguage: () => undefined,
   getObject: () => undefined,
   getLanguage: () => undefined,

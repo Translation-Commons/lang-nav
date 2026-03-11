@@ -21,7 +21,9 @@ export function getMinimumValue(field?: Field): number {
     case Field.Modality:
       return LanguageModality.Written;
     case Field.ISOStatus:
-      return -1;
+    case Field.LanguageFormedHere:
+    case Field.HistoricPresence:
+      return -1; // -1 is undefined
     case Field.Population:
     case Field.PopulationDirectlySourced:
     case Field.PopulationOfDescendants:
@@ -54,6 +56,9 @@ export function getMinimumValue(field?: Field): number {
     case Field.Language:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.Platform:
+    case Field.OutputScript:
+    case Field.VariantTag:
       return convertAlphaToNumber(''); // 0
     default:
       enforceExhaustiveSwitch(field);
@@ -64,6 +69,8 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
   if (field == null) return 1; // default max for when no field is selected
   switch (field) {
     case Field.None:
+    case Field.LanguageFormedHere:
+    case Field.HistoricPresence:
       return 1;
     case Field.Modality:
       return LanguageModality.Spoken;
@@ -105,6 +112,9 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.Language:
     case Field.WritingSystem:
     case Field.Territory:
+    case Field.Platform:
+    case Field.OutputScript:
+    case Field.VariantTag:
       return convertAlphaToNumber('ZZZZZZZZZZ');
     default:
       enforceExhaustiveSwitch(field);

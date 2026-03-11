@@ -13,12 +13,10 @@ import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import Field from '../fields/Field';
-import { getSortFunctionParameterized } from '../sorting/sort';
-
-import { getScopeFilter } from './filter';
-import { getFilterLabels } from './FilterLabels';
-import { getSuggestionsFunction } from './getSuggestionsFunction';
+import { sortByPopulation } from '../../sorting/sort';
+import { getScopeFilter } from '../filter';
+import { getFilterLabels } from '../FilterLabels';
+import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
 type Props = { display?: SelectorDisplay };
 
@@ -27,7 +25,6 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
   const { territories } = useDataContext();
   const filterByScope = getScopeFilter();
   const filterLabels = getFilterLabels();
-  const sortFunction = getSortFunctionParameterized(Field.Population);
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 
@@ -39,8 +36,12 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
       return 'matched';
     };
 
-    return getSuggestionsFunction(territories.sort(sortFunction), getMatchDistance, getMatchGroup);
-  }, [territories, filterByScope, filterLabels, sortFunction]);
+    return getSuggestionsFunction(
+      territories.sort(sortByPopulation),
+      getMatchDistance,
+      getMatchGroup,
+    );
+  }, [territories, filterByScope, filterLabels]);
 
   return (
     <SelectorDisplayProvider display={display}>

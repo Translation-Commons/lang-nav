@@ -41,7 +41,7 @@ const ColorGradientSelector: React.FC = () => {
 
 function getGradientLabel(colorGradient: ColorGradient): string {
   const key = Object.entries(ColorGradient).find(([, value]) => value === colorGradient)?.[0] || '';
-  return toSentenceCase(key);
+  return toSentenceCase(key).toLowerCase();
 }
 
 export default ColorGradientSelector;

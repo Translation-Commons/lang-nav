@@ -1,6 +1,8 @@
 import React, { useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
+import { getFieldValueType } from '@features/table/getValueType';
+import TableValueType from '@features/table/TableValueType';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { getModalityFromLabel, getModalityLabel } from '@entities/language/LanguageModalityDisplay';
@@ -41,11 +43,17 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   }
 
   const ticks = useMemo(() => getTicks(coloringFunctions), [coloringFunctions]);
+  const renormalize = isFieldWholeNumbersOnly(coloringFunctions.colorBy)
+    ? (value: number) =>
+        coloringFunctions.getNormalizedValue(
+          Math.round(coloringFunctions.getDenormalizedValue(value)),
+        )
+    : undefined;
 
   return (
     <div style={{ width: '100%' }}>
       <div style={{ height: '1em', width: '100%' }}>
-        <BaseColorBar colorGradient={colorGradient} />
+        <BaseColorBar colorGradient={colorGradient} renormalize={renormalize} />
       </div>
       <div style={{ position: 'relative', height: '2.5em', width: '100%' }}>
         {ticks.map(({ position, label }, index) => (
@@ -75,13 +83,11 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
  *
  * @returns An array of tuples where each tuple contains a normalized position (0 to 1) and its corresponding label.
  */
-function getTicks(
-  coloringFunctions: ColoringFunctions,
-  numberOfTicks: number = 5,
-): { position: number; label: string }[] {
+function getTicks(coloringFunctions: ColoringFunctions): { position: number; label: string }[] {
   const { colorBy, minValue, maxValue, getDenormalizedValue, getNormalizedValue } =
     coloringFunctions;
   if (colorBy === Field.None) return [];
+  const numberOfTicks = getIdealNumberOfTicks(colorBy);
 
   // Some early exit cases for categorical fields with predefined labels
   switch (colorBy) {
@@ -171,17 +177,26 @@ function getTicks(
   });
 
   const suffix = getSuffixForField(colorBy);
+  const wholeNumbersOnly = isFieldWholeNumbersOnly(colorBy);
+  let lastPosition = 0;
 
   return Array.from({ length: numberOfTicks }, (_, index) => {
     if (index === 0) return { position: 0, label: formatter.format(minValue) + suffix };
     if (index === numberOfTicks - 1)
       return { position: 1, label: formatter.format(maxValue) + suffix };
-    const position = index / (numberOfTicks - 1);
+    const normalizedValue = index / (numberOfTicks - 1); // on a scale from 0 to 1
+    const value = wholeNumbersOnly
+      ? Math.round(getDenormalizedValue(normalizedValue))
+      : getDenormalizedValue(normalizedValue);
+    const position = wholeNumbersOnly ? getNormalizedValue(value) : normalizedValue;
+    if (position <= lastPosition) return null; // skip ticks that would be in the same position as the previous tick
+    lastPosition = position;
+
     return {
-      position,
-      label: formatter.format(numberToSigFigs(getDenormalizedValue(position), 2)) + suffix,
+      position: position,
+      label: formatter.format(numberToSigFigs(value, 2)) + suffix,
     };
-  });
+  }).filter((t) => t != null);
 }
 
 // By default, we don't show suffixes / units when showing numbers because they often repeat.
@@ -191,6 +206,7 @@ function getSuffixForField(field: Field): string {
     case Field.Literacy:
     case Field.PercentOfTerritoryPopulation:
     case Field.PercentOfOverallLanguageSpeakers:
+    case Field.PopulationPercentInBiggestDescendantLanguage:
       return '%';
     case Field.Latitude:
     case Field.Longitude:
@@ -199,6 +215,23 @@ function getSuffixForField(field: Field): string {
       return ' km²';
     default:
       return '';
+  }
+}
+
+function isFieldWholeNumbersOnly(field: Field): boolean {
+  switch (field) {
+    case Field.CountOfLanguages:
+    case Field.CountOfWritingSystems:
+    case Field.CountOfCountries:
+    case Field.CountOfChildTerritories:
+    case Field.CountOfCensuses:
+    case Field.Depth:
+    case Field.Population:
+    case Field.PopulationDirectlySourced:
+    case Field.PopulationOfDescendants:
+      return true;
+    default:
+      return false;
   }
 }
 
@@ -213,6 +246,24 @@ function pickDistributedTicksFromRange<T>(range: T[], count: number): T[] {
     ticks.push(range[index]);
   }
   return ticks;
+}
+
+function getIdealNumberOfTicks(field: Field): number {
+  switch (getFieldValueType(field)) {
+    case TableValueType.String:
+      return 26; // All letters since they are small
+    case TableValueType.Enum:
+      return 10; // This should render every enum category.
+    case TableValueType.Count:
+      // Usually small numbers like 0 and 1
+      return 12;
+    case TableValueType.Decimal:
+      return 11; // Particularly for percentages
+    case TableValueType.Date:
+      return 10;
+    case TableValueType.Population:
+      return 8;
+  }
 }
 
 export default ColorBar;

@@ -4,6 +4,7 @@
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
@@ -21,13 +22,15 @@ export interface ObjectBase {
   names: string[];
 }
 
-export type ObjectData =
+export type EntityData =
   | CensusData
   | LanguageData
   | LocaleData
   | TerritoryData
   | WritingSystemData
-  | VariantTagData;
+  | VariantTagData
+  | KeyboardData;
+export type ObjectData = EntityData; // For now, all objects are entities
 export type ObjectDictionary = Record<string, ObjectData>;
 
 export enum WikipediaStatus {

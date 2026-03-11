@@ -6,7 +6,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 type Props = PropsWithChildren<{
   title: string;
   icon: LucideIcon;
-  description: string;
+  description: React.ReactNode;
 }>;
 
 const CardField: React.FC<Props> = ({ children, title, icon: Icon, description }) => {

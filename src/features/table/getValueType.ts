@@ -5,7 +5,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import TableColumn from './TableColumn';
 import TableValueType from './TableValueType';
 
-function getFieldValueType(field?: Field): TableValueType {
+export function getFieldValueType(field?: Field): TableValueType {
   if (field == null) return TableValueType.String; // default to string if no field specified
   switch (field) {
     case Field.Population:
@@ -36,6 +36,9 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.WritingSystem:
     case Field.Territory:
     case Field.None:
+    case Field.Platform:
+    case Field.OutputScript:
+    case Field.VariantTag:
       return TableValueType.String;
     case Field.VitalityMetascore:
     case Field.ISOStatus:
@@ -44,6 +47,8 @@ function getFieldValueType(field?: Field): TableValueType {
     case Field.Modality:
     case Field.LanguageScope:
     case Field.TerritoryScope:
+    case Field.HistoricPresence:
+    case Field.LanguageFormedHere:
       return TableValueType.Enum;
     default:
       enforceExhaustiveSwitch(field);

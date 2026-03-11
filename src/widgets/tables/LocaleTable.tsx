@@ -17,6 +17,8 @@ import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories'
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
+import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
@@ -46,6 +48,12 @@ const LocaleTable: React.FC = () => {
           columnGroup: 'Names',
         },
         EndonymColumn,
+        {
+          key: 'Language Names',
+          render: (object) => <CommaSeparated>{object.language?.names}</CommaSeparated>,
+          columnGroup: 'Names',
+          isInitiallyVisible: false,
+        },
         ...LocalePopulationColumns,
         {
           key: 'Literacy',
@@ -166,6 +174,21 @@ const LocaleTable: React.FC = () => {
             ) : (
               <Deemphasized>None</Deemphasized>
             ),
+          columnGroup: 'Local Status',
+        },
+        {
+          key: 'Formation',
+          render: (loc) => <LocaleFormedHereDisplay loc={loc} />,
+          field: Field.LanguageFormedHere,
+          isInitiallyVisible: false,
+          columnGroup: 'Local Status',
+        },
+        {
+          key: 'Historic Presence',
+          render: (loc) => <LocaleHistoricPresenceDisplay loc={loc} />,
+          field: Field.HistoricPresence,
+          isInitiallyVisible: false,
+          columnGroup: 'Local Status',
         },
         {
           key: 'Wikipedia',

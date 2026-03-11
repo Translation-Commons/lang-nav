@@ -3,6 +3,7 @@ import {
   MapPinIcon,
   MapPinnedIcon,
   MessageCircleIcon,
+  NetworkIcon,
   UsersIcon,
 } from 'lucide-react';
 import React from 'react';
@@ -20,6 +21,8 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { getModalityLabel } from './LanguageModalityDisplay';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
@@ -45,6 +48,14 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         <ObjectTitle object={lang} />
         <ObjectSubtitle object={lang} />
       </div>
+
+      <CardField
+        title="Language Type"
+        icon={NetworkIcon}
+        description="Whether this is a Language Family, Macrolanguage, Individual Language, or Dialect."
+      >
+        {getLanguageScopeLabel(lang.scope)}
+      </CardField>
 
       {populationEstimate != null && (
         <CardField

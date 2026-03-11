@@ -10,7 +10,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { updateObjectCodesNameAndPopulation } from '../compute/updateObjectCodesNameAndPopulation';
+import { updateObjectsBasedOnDataParams } from '../compute/updateObjectsBasedOnDataParams';
 import { useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
 
@@ -86,7 +86,7 @@ const DataProvider: React.FC<{
   );
   const languagesInSelectedSource = useMemo(() => {
     // Update dependent fields whenever language source or locale separator changes
-    updateObjectCodesNameAndPopulation(
+    updateObjectsBasedOnDataParams(
       coreData.allLanguoids,
       coreData.locales,
       coreData.objects['001'] as TerritoryData, // The world territory

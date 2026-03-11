@@ -7,9 +7,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
+import { getMockLanguages } from '../../__tests__/mockLanguagesForFilterTest.test';
 import LanguageFilterSelector from '../LanguageFilterSelector';
-
-import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
 const mockUpdatePageParams = vi.fn();
 
@@ -68,7 +67,7 @@ describe('LanguageFilterSelector', () => {
     expect(items[6]).toHaveTextContent('Russian');
     expect(items[7]).toHaveTextContent('Navajo');
     expect(items[8]).toHaveTextContent('Chinese');
-    expect(items[9]).toHaveTextContent('not macrolanguage or language');
+    expect(items[9]).toHaveTextContent('not macrolanguage or individual language');
     expect(items[10]).toHaveTextContent('Indo-European languages');
     expect(items[11]).toHaveTextContent('Germanic');
     // User types in German, suggestions should filter to German and Germanic
@@ -76,7 +75,7 @@ describe('LanguageFilterSelector', () => {
     expect(items.length).toBe(4);
     expect(items[0]).toHaveTextContent('Pick a suggestion or press [enter] to filter by "German"');
     expect(items[1]).toHaveTextContent('German');
-    expect(items[2]).toHaveTextContent('not macrolanguage or language');
+    expect(items[2]).toHaveTextContent('not macrolanguage or individual language');
     expect(items[3]).toHaveTextContent('Germanic');
     expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
 

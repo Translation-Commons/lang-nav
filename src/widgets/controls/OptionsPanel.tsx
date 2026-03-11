@@ -10,17 +10,7 @@ import {
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
-import LanguageFilterSelector from '@features/transforms/filtering/LanguageFilterSelector';
-import LanguageModalitySelector from '@features/transforms/filtering/LanguageModalitySelector';
-import LanguageScopeSelector from '@features/transforms/filtering/LanguageScopeSelector';
-import TerritoryFilterSelector from '@features/transforms/filtering/TerritoryFilterSelector';
-import TerritoryScopeSelector from '@features/transforms/filtering/TerritoryScopeSelector';
-import {
-  LanguageISOStatusSelector,
-  VitalityEthCoarseSelector,
-  VitalityEthFineSelector,
-} from '@features/transforms/filtering/VitalitySelector';
-import WritingSystemFilterSelector from '@features/transforms/filtering/WritingSystemFilterSelector';
+import { AllApplicableFilterSelectors } from '@features/transforms/filtering/selectors/FilterSelector';
 import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
@@ -31,7 +21,6 @@ import { ObjectiveList } from '../CommonObjectives';
 import ResizablePanel from './ResizablePanel';
 import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
-import ObjectTypeSelector from './selectors/ObjectTypeSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 import ViewSelector from './selectors/ViewSelector';
@@ -50,21 +39,12 @@ const OptionsPanel: React.FC = () => {
         </OptionsPanelSection>
 
         <OptionsPanelSection title="Data" optionsName="data options">
-          <ObjectTypeSelector />
           <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
           <ProfileSelector />
         </OptionsPanelSection>
 
         <OptionsPanelSection title="Filter" optionsName="filters">
-          <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />
-          <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />
-          <LanguageFilterSelector display={SelectorDisplay.ButtonList} />
-          <LanguageScopeSelector />
-          <LanguageModalitySelector />
-          <TerritoryScopeSelector />
-          <LanguageISOStatusSelector />
-          <VitalityEthFineSelector />
-          <VitalityEthCoarseSelector />
+          <AllApplicableFilterSelectors />
         </OptionsPanelSection>
 
         <OptionsPanelSection title="View" optionsName="view options">
@@ -125,14 +105,14 @@ const OptionsPanelSection: React.FC<
       >
         {childArray[0]}
         {isExpanded && childArray.slice(1)}
-        {
+        {childArray.length > 1 && (
           <HoverableButton
             style={{ padding: '0em 0.25em' }}
             onClick={() => setIsExpanded((prev) => !prev)}
           >
             {isExpanded ? `close extra ${optionsName} ▲` : `see all ${optionsName} ▶`}
           </HoverableButton>
-        }
+        )}
       </div>
     </div>
   );
