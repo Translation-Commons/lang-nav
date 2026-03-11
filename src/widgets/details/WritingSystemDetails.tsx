@@ -5,14 +5,12 @@ import PopulationWarning from '@widgets/PopulationWarning';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { KeyboardPlatform } from '@entities/keyboard/KeyboardTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
-import GroupedExpanderList from '@shared/ui/GroupedExpanderList';
 
 type Props = {
   writingSystem: WritingSystemData;
@@ -130,15 +128,11 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         )}
         {writingSystem.outputKeyboards && writingSystem.outputKeyboards.length > 0 && (
           <DetailsField title="Keyboards">
-            <GroupedExpanderList
-              groups={Object.values(KeyboardPlatform)
-                .map((platform) => ({
-                  label: platform,
-                  items: writingSystem.outputKeyboards!.filter((k) => k.platform === platform),
-                }))
-                .filter((g) => g.items.length > 0)}
-              renderItem={(keyboard) => <HoverableObjectName object={keyboard} />}
-            />
+            <CommaSeparated>
+              {writingSystem.outputKeyboards.map((keyboard) => (
+                <HoverableObjectName key={keyboard.ID} object={keyboard} />
+              ))}
+            </CommaSeparated>
           </DetailsField>
         )}
       </DetailsSection>

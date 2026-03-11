@@ -11,10 +11,8 @@ import LanguageDetailsVitalityAndViability from '@entities/language/vitality/Lan
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import { groupBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import GroupedExpanderList from '@shared/ui/GroupedExpanderList';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
@@ -92,15 +90,13 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       </div>
       {lang.keyboards && lang.keyboards.length > 0 && (
         <DetailsField title="Keyboards">
-          <GroupedExpanderList
-            groups={Object.entries(groupBy(lang.keyboards!, (k) => k.platform)).map(
-              ([platform, items]) => ({
-                label: platform,
-                items,
-              }),
-            )}
-            renderItem={(keyboard) => <HoverableObjectName object={keyboard} />}
-          />
+          {lang.keyboards && lang.keyboards.length > 0 && (
+            <CommaSeparated>
+              {lang.keyboards.map((keyboard) => (
+                <HoverableObjectName key={keyboard.ID} object={keyboard} />
+              ))}
+            </CommaSeparated>
+          )}
         </DetailsField>
       )}
     </DetailsSection>
