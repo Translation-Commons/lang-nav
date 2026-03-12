@@ -1,0 +1,1 @@
+import{r as s,u as o,j as n,F as u}from"./index-CrYBZzoQ.js";const l=({children:r})=>{const[a,e]=s.useState(!0),{objectID:t}=o();return s.useEffect(()=>{t&&e(!1)},[t]),n.jsx(u.Provider,{value:{isOpen:a,setIsOpen:e},children:r})};export{l as default};
