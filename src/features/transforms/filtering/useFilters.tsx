@@ -86,14 +86,12 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.None]: alwaysTrue,
     [Field.Code]: alwaysTrue,
     [Field.Endonym]: alwaysTrue,
-<<<<<<< population-range-filter
     [Field.Latitude]: alwaysTrue,
     [Field.Longitude]: alwaysTrue,
     [Field.Area]: alwaysTrue,
     [Field.Date]: alwaysTrue,
     [Field.Depth]: alwaysTrue,
     [Field.Literacy]: alwaysTrue,
-=======
     [Field.Description]: alwaysTrue,
     [Field.Example]: alwaysTrue,
     [Field.UnicodeVersion]: alwaysTrue,
@@ -101,7 +99,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.DigitalSupport]: alwaysTrue,
     [Field.SourceType]: alwaysTrue,
     [Field.WritingSystemScope]: alwaysTrue,
->>>>>>> master
     [Field.VitalityMetascore]: alwaysTrue,
     [Field.HistoricPresence]: alwaysTrue,
     [Field.LanguageFormedHere]: alwaysTrue,
@@ -115,7 +112,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.CountOfCensuses]: alwaysTrue,
     [Field.CountOfVariantTags]: alwaysTrue,
 
-    [Field.Population]: alwaysTrue,
     [Field.PopulationDirectlySourced]: alwaysTrue,
     [Field.PopulationOfDescendants]: alwaysTrue,
     [Field.PercentOfTerritoryPopulation]: alwaysTrue,
@@ -123,12 +119,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.PopulationPercentInBiggestDescendantLanguage]: alwaysTrue,
 
     [Field.Coordinates]: alwaysTrue,
-    [Field.Latitude]: alwaysTrue,
-    [Field.Longitude]: alwaysTrue,
-    [Field.Area]: alwaysTrue,
-    [Field.Date]: alwaysTrue,
-    [Field.Depth]: alwaysTrue,
-    [Field.Literacy]: alwaysTrue,
   };
 }
 
