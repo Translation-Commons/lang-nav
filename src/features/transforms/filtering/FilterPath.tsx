@@ -200,7 +200,6 @@ const FilterPath: React.FC = () => {
   if (filters.filter((f) => f).length === 0) {
     return (
       <>
-        <SlashIcon size="1em" />
         <Deemphasized>No filters applied</Deemphasized>
       </>
     );
@@ -208,7 +207,6 @@ const FilterPath: React.FC = () => {
 
   return (
     <>
-      <SlashIcon size="1em" />
       {filters
         .filter((f) => f)
         .map((filter, i) => (

@@ -4,15 +4,6 @@ import {
   SelectorDisplay,
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
-import FilterPath from '@features/transforms/filtering/FilterPath';
-
-const PathNav: React.FC = () => {
-  return (
-    <PathContainer>
-      <FilterPath />
-    </PathContainer>
-  );
-};
 
 export const PathContainer: React.FC<{
   children: React.ReactNode;
@@ -28,5 +19,3 @@ export const PathContainer: React.FC<{
     </div>
   );
 };
-
-export default PathNav;

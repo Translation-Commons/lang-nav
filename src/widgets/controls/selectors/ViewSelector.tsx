@@ -1,4 +1,4 @@
-import { ChartColumnBigIcon, GitBranchIcon, Grid2x2Icon, MapIcon, Table2Icon } from 'lucide-react';
+import { ChartColumnBigIcon, Grid2x2Icon, ListTreeIcon, MapIcon, Table2Icon } from 'lucide-react';
 import React from 'react';
 
 import { View } from '@features/params/PageParamTypes';
@@ -30,13 +30,30 @@ const ViewSelector: React.FC = () => {
 };
 
 function getViewLabel(view: View): React.ReactNode {
-  return [View.Map, View.Reports].includes(view) ? (
-    <>
-      {view} <em>β</em>
-    </>
-  ) : (
-    view
+  const isBeta = [View.Map, View.Reports].includes(view);
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
+      <span style={{ display: 'flex', gap: '0.125rem' }}>
+        {view} {isBeta && <em>β</em>}
+      </span>
+      <img src={getImageSrc(view)} width={180} />
+    </div>
   );
+}
+
+function getImageSrc(view: View): string {
+  switch (view) {
+    case View.CardList:
+      return '/lang-nav/cardlist.png';
+    case View.Hierarchy:
+      return '/lang-nav/hierarchy.png';
+    case View.Map:
+      return '/lang-nav/map.png';
+    case View.Table:
+      return '/lang-nav/table.png';
+    case View.Reports:
+      return '/lang-nav/reports.png';
+  }
 }
 
 function getViewIcon(view: View): React.ReactNode {
@@ -44,7 +61,7 @@ function getViewIcon(view: View): React.ReactNode {
     case View.CardList:
       return <Grid2x2Icon size="1.2em" />;
     case View.Hierarchy:
-      return <GitBranchIcon size="1.2em" />;
+      return <ListTreeIcon size="1.2em" />;
     case View.Map:
       return <MapIcon size="1.2em" />;
     case View.Table:

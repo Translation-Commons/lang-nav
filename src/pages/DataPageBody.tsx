@@ -3,9 +3,10 @@ import React, { Suspense } from 'react';
 import FilterPanelToggle from '@widgets/controls/FilterPanelToggle';
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
 import Loading from '@widgets/Loading';
-import PathNav from '@widgets/pathnav/PathNav';
+import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import ResultCount from '@features/pagination/ResultCount';
+import FilterPath from '@features/transforms/filtering/FilterPath';
 import SearchBar from '@features/transforms/search/SearchBar';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 
@@ -27,21 +28,24 @@ const DataPageBody: React.FC = () => {
           alignItems: 'center',
           justifyContent: 'space-between',
           width: '100%',
+          marginBottom: '1rem',
         }}
       >
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
           <FilterPanelToggle />
           <ResultCount />
+          <PathContainer>
+            <FilterPath />
+          </PathContainer>
         </div>
         <div
           style={{
             display: 'flex',
+            alignItems: 'center',
             justifyContent: 'flex-end',
-            marginBottom: '1rem',
             gap: '0.5rem',
           }}
         >
-          <PathNav />
           <SortBySelector showLabel={false} />
           <ViewSelector />
         </div>

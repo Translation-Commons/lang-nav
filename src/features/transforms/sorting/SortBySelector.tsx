@@ -1,3 +1,4 @@
+import { ArrowDownUpIcon } from 'lucide-react';
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
@@ -13,7 +14,7 @@ const SortBySelector: React.FC<{ showLabel?: boolean }> = ({ showLabel = true })
 
   return (
     <Selector
-      selectorLabel={showLabel ? 'Sort By' : undefined}
+      selectorLabel={showLabel ? 'Sort By' : <ArrowDownUpIcon size="1.2em" />}
       selectorDescription={showLabel ? 'Choose the order of items in the view.' : undefined}
       options={applicableSortBys}
       onChange={(sortBy) => updatePageParams({ sortBy })}
