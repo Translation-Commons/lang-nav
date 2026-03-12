@@ -90,6 +90,8 @@ export enum PageParamKey {
   vitalityEthCoarse = 'vitalityEthCoarse',
   vitalityEthFine = 'vitalityEthFine',
   writingSystemFilter = 'writingSystemFilter',
+  populationLowerLimit = 'populationLowerLimit',
+  populationUpperLimit = 'populationUpperLimit',
 }
 
 export type PageParams = {
@@ -120,6 +122,8 @@ export type PageParams = {
   vitalityEthFine: VitalityEthnologueFine[];
   vitalityEthCoarse: VitalityEthnologueCoarse[];
   writingSystemFilter: string;
+  populationLowerLimit: number;
+  populationUpperLimit: number;
 };
 
 export type PageParamsOptional = {
@@ -150,4 +154,6 @@ export type PageParamsOptional = {
   vitalityEthCoarse?: VitalityEthnologueCoarse[];
   vitalityEthFine?: VitalityEthnologueFine[];
   writingSystemFilter?: string;
+  populationLowerLimit?: number;
+  populationUpperLimit?: number;
 };

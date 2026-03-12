@@ -7,7 +7,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
-import { getFilterByVitality, getScopeFilter } from './filter';
+import { getFilterByPopulation, getFilterByVitality, getScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 
 type UseFilteredObjectsParams = {
@@ -16,6 +16,7 @@ type UseFilteredObjectsParams = {
   useSubstring?: boolean;
   useConnections?: boolean;
   useVitality?: boolean;
+  usePopulation?: boolean;
   inputObjects?: ObjectData[];
 };
 
@@ -24,6 +25,7 @@ const useFilteredObjects = ({
   useSubstring = true,
   useConnections = true,
   useVitality = true,
+  usePopulation = true,
   inputObjects,
 }: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
@@ -33,6 +35,7 @@ const useFilteredObjects = ({
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
   const filterByConnections = useConnections ? getFilterByConnections() : () => true;
   const filterByVitality = useVitality ? getFilterByVitality() : () => true;
+  const filterByPopulation = usePopulation ? getFilterByPopulation() : () => true;
   const sortFunction = getSortFunction();
   const allObjectsInType = inputObjects ?? pageObjects;
 
@@ -43,7 +46,8 @@ const useFilteredObjects = ({
           filterByScope(obj) &&
           filterBySubstring(obj) &&
           filterByConnections(obj) &&
-          filterByVitality(obj),
+          filterByVitality(obj) &&
+          filterByPopulation(obj),
       )
       .sort(sortFunction);
   }, [
@@ -52,6 +56,7 @@ const useFilteredObjects = ({
     filterBySubstring,
     filterByConnections,
     filterByVitality,
+    filterByPopulation,
     sortFunction,
   ]);
 

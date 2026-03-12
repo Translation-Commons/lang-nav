@@ -24,6 +24,7 @@ vi.mock('@features/transforms/filtering/filter', () => ({
   getFilterByLanguageScope: vi.fn(),
   getFilterByModality: vi.fn(),
   getFilterByTerritoryScope: vi.fn(),
+  getFilterByPopulation: vi.fn(),
 }));
 
 vi.mock('@features/transforms/filtering/filterByConnections', () => ({
@@ -92,6 +93,7 @@ describe('InteractiveObjectTable', () => {
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
+    vi.mocked(FilterModule.getFilterByPopulation).mockReturnValue(() => true);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
   });
