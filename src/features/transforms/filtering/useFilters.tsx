@@ -2,6 +2,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import Field from '../fields/Field';
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
+
 import { FilterFunctionType } from './filter';
 import {
   buildFilterByLanguage,
