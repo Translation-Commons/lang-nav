@@ -210,7 +210,10 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the population filter"
                 onClick={() =>
-                  updatePageParams({ populationLowerLimit: undefined, populationUpperLimit: undefined })
+                  updatePageParams({
+                    populationLowerLimit: undefined,
+                    populationUpperLimit: undefined,
+                  })
                 }
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >

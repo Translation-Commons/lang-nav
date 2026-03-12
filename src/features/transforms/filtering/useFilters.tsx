@@ -11,9 +11,11 @@ import {
 import {
   buildFilterByISOStatus,
   buildFilterByLanguageScope,
-  buildFilterByModality, buildFilterByPopulation, buildFilterByTerritoryScope,
+  buildFilterByModality,
+  buildFilterByPopulation,
+  buildFilterByTerritoryScope,
   buildFilterByVitalityEthnologueCoarse,
-  buildFilterByVitalityEthnologueFine
+  buildFilterByVitalityEthnologueFine,
 } from './filterByEnum';
 
 /**

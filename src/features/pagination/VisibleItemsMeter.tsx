@@ -5,7 +5,11 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { getFilterByVitality, getScopeFilter, getFilterByPopulation } from '@features/transforms/filtering/filter';
+import {
+  getFilterByVitality,
+  getScopeFilter,
+  getFilterByPopulation,
+} from '@features/transforms/filtering/filter';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
@@ -39,7 +43,14 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
       .filter(filterByVitality)
       .filter(filterByPopulation)
       .filter(filterBySubstring).length;
-  }, [objects, filterByScope, filterByConnections, filterByVitality, filterByPopulation, filterBySubstring]);
+  }, [
+    objects,
+    filterByScope,
+    filterByConnections,
+    filterByVitality,
+    filterByPopulation,
+    filterBySubstring,
+  ]);
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);

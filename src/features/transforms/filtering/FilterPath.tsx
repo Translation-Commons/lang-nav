@@ -52,17 +52,26 @@ const FilterPath: React.FC = () => {
 
   const filters = [
     // Population Filter
-    (populationLowerLimit !== defaultParams.populationLowerLimit || populationUpperLimit !== defaultParams.populationUpperLimit) && (
+    (populationLowerLimit !== defaultParams.populationLowerLimit ||
+      populationUpperLimit !== defaultParams.populationUpperLimit) && (
       <>
         Population:{' '}
         {[
-          populationLowerLimit !== undefined ? `>= ${populationLowerLimit >= 1000000 ? `${populationLowerLimit / 1000000}M` : `${populationLowerLimit / 1000}K`}` : null,
-          (populationUpperLimit !== undefined && populationUpperLimit !== Number.MAX_SAFE_INTEGER) ? `<= ${populationUpperLimit >= 1000000 ? `${populationUpperLimit / 1000000}M` : `${populationUpperLimit / 1000}K`}` : null
-        ].filter(Boolean).join(' and ')}
+          populationLowerLimit !== undefined
+            ? `>= ${populationLowerLimit >= 1000000 ? `${populationLowerLimit / 1000000}M` : `${populationLowerLimit / 1000}K`}`
+            : null,
+          populationUpperLimit !== undefined && populationUpperLimit !== Number.MAX_SAFE_INTEGER
+            ? `<= ${populationUpperLimit >= 1000000 ? `${populationUpperLimit / 1000000}M` : `${populationUpperLimit / 1000}K`}`
+            : null,
+        ]
+          .filter(Boolean)
+          .join(' and ')}
         <HoverableButton
           buttonType="reset"
           hoverContent="Clear population filters"
-          onClick={() => updatePageParams({ populationLowerLimit: undefined, populationUpperLimit: undefined })}
+          onClick={() =>
+            updatePageParams({ populationLowerLimit: undefined, populationUpperLimit: undefined })
+          }
           style={{ padding: '0.25em' }}
         >
           <XIcon size="1em" display="block" />
