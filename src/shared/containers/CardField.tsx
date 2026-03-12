@@ -1,15 +1,16 @@
-import { LucideIcon } from 'lucide-react';
 import React, { PropsWithChildren } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import Field from '@features/transforms/fields/Field';
+import FieldIcon from '@features/transforms/fields/FieldIcon';
 
 type Props = PropsWithChildren<{
   title: string;
-  icon: LucideIcon;
+  field: Field;
   description: React.ReactNode;
 }>;
 
-const CardField: React.FC<Props> = ({ children, title, icon: Icon, description }) => {
+const CardField: React.FC<Props> = ({ children, title, field, description }) => {
   return (
     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em', gap: '0.5em' }}>
       <span
@@ -23,7 +24,7 @@ const CardField: React.FC<Props> = ({ children, title, icon: Icon, description }
             </>
           }
         >
-          <Icon size="1em" style={{ display: 'block' }} />
+          <FieldIcon field={field} />
         </Hoverable>
       </span>
       {children}

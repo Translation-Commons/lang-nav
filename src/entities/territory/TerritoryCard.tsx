@@ -1,7 +1,7 @@
-import { BlocksIcon, EarthIcon, LanguagesIcon, UsersIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -33,7 +33,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
       </div>
       <CardField
         title="Territory Type"
-        icon={BlocksIcon}
+        field={Field.TerritoryScope}
         description="The kind of territory this is (e.g., country, dependency, region, continent)."
       >
         {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
@@ -47,7 +47,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
       <CardField
         title="UN Region"
-        icon={EarthIcon}
+        field={Field.Region}
         description="The United Nations regional grouping this territory belongs to."
       >
         {parentUNRegion ? (
@@ -61,7 +61,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
       <CardField
         title="Population"
-        icon={UsersIcon}
+        field={Field.Population}
         description="How many people live in this territory."
       >
         {population != null ? (
@@ -73,7 +73,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
       <CardField
         title="Languages"
-        icon={LanguagesIcon}
+        field={Field.Language}
         description="Languages spoken in this territory."
       >
         {localeList.length > 0 ? (

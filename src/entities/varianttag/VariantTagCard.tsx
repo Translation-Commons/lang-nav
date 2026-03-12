@@ -1,7 +1,7 @@
-import { LanguagesIcon, TextIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import Field from '@features/transforms/fields/Field';
 
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -26,13 +26,17 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
         <ObjectTitle object={data} />
       </div>
 
-      <CardField title="Description" icon={TextIcon} description="Description of this variant tag.">
+      <CardField
+        title="Description"
+        field={Field.Description}
+        description="Description of this variant tag."
+      >
         {description ? shortDescription : <Deemphasized>No description</Deemphasized>}
       </CardField>
 
       <CardField
         title="Languages"
-        icon={LanguagesIcon}
+        field={Field.Language}
         description="Languages that use this variant tag."
       >
         {languages && Object.values(languages).length > 0 ? (

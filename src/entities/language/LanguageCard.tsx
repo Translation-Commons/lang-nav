@@ -1,16 +1,9 @@
-import {
-  ActivityIcon,
-  MapPinIcon,
-  MapPinnedIcon,
-  MessageCircleIcon,
-  NetworkIcon,
-  UsersIcon,
-} from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -51,7 +44,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
 
       <CardField
         title="Language Type"
-        icon={NetworkIcon}
+        field={Field.LanguageScope}
         description="Whether this is a Language Family, Macrolanguage, Individual Language, or Dialect."
       >
         {getLanguageScopeLabel(lang.scope)}
@@ -60,7 +53,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {populationEstimate != null && (
         <CardField
           title="Population"
-          icon={UsersIcon}
+          field={Field.Population}
           description="Population: How many people know the language across the world."
         >
           <LanguagePopulationEstimate lang={lang} />
@@ -69,7 +62,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
 
       <CardField
         title="Vitality"
-        icon={ActivityIcon}
+        field={Field.VitalityMetascore}
         description="An estimate of how active the language is in national and community spaces."
       >
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
@@ -78,7 +71,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {modality != null && (
         <CardField
           title="Modality"
-          icon={MessageCircleIcon}
+          field={Field.Modality}
           description="The ways in which people use the language."
         >
           {getModalityLabel(modality)}
@@ -88,7 +81,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {countryLocales.length > 0 && (
         <CardField
           title="Territories"
-          icon={MapPinnedIcon}
+          field={Field.Territory}
           description="Locations that the language can be found in, sorted by population."
         >
           <CommaSeparated>
@@ -102,7 +95,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {view === View.Map && lang.longitude != null && lang.latitude != null && (
         <CardField
           title="Coordinates"
-          icon={MapPinIcon}
+          field={Field.Coordinates}
           description="The latitude and longitude for the modern and/or historic center of the language."
         >
           {lang.latitude.toFixed(2)}°, {lang.longitude.toFixed(2)}°

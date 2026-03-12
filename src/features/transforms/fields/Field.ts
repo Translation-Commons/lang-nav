@@ -8,10 +8,18 @@ enum Field {
   // Identity
   Endonym = 'Endonym',
   LanguageScope = 'Language Scope',
+  WritingSystemScope = 'Writing System Scope',
   TerritoryScope = 'Territory Scope',
+  SourceType = 'Source Type',
 
   // Status
   Modality = 'Modality',
+  DigitalSupport = 'Digital Support',
+  CLDRCoverage = 'CLDR Coverage',
+  UnicodeVersion = 'Unicode Version',
+
+  Indigeneity = 'Indigeneity',
+  GovernmentStatus = 'Government Status',
   LanguageFormedHere = 'Language Formed Here',
   HistoricPresence = 'Historic Presence',
 
@@ -23,11 +31,14 @@ enum Field {
 
   // Relation - Objects
   Language = 'Language',
+  LanguageFamily = 'Language Family',
   WritingSystem = 'Writing System',
+  OutputScript = 'Output Script',
+  Region = 'Region', // primary region or parent territory
   Territory = 'Territory',
   VariantTag = 'Variant Tag',
   Platform = 'Platform',
-  OutputScript = 'Output Script',
+  Source = 'Source',
 
   // Relation - Counts
   CountOfLanguages = '# of Languages',
@@ -35,23 +46,29 @@ enum Field {
   CountOfChildTerritories = '# of Territories', // immediate children only
   CountOfCountries = '# of Countries', // recursive, only counting countries
   CountOfCensuses = '# of Censuses',
+  CountOfVariantTags = '# of Variant Tags',
 
   // Quantity
+  Coordinates = 'Coordinates', // Lat + Long
   Latitude = 'Latitude',
   Longitude = 'Longitude',
-  Date = 'Date',
   Area = 'Area',
   Depth = 'Depth',
   Literacy = 'Literacy',
 
   // Quantity - Population
-
-  // Quantity - Population Percent
   PopulationDirectlySourced = 'Population Directly Sourced',
   PopulationOfDescendants = 'Population of Descendants',
+
+  // Quantity - Population Percent
   PercentOfTerritoryPopulation = '% of Territory Population',
   PercentOfOverallLanguageSpeakers = '% of Overall Language Speakers',
   PopulationPercentInBiggestDescendantLanguage = 'Biggest Descendant Relative Population',
+
+  // Other
+  Date = 'Date',
+  Description = 'Description',
+  Example = 'Example',
 }
 
 export default Field;

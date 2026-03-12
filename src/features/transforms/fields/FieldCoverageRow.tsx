@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
@@ -10,7 +11,7 @@ import getColorGradientForField from '../coloring/getColorGradientForField';
 import TransformEnum from '../TransformEnum';
 
 import Field from './Field';
-import { isFieldApplicable } from './FieldApplicability';
+import { FIELDS_IN_DEVELOPMENT, isFieldApplicable } from './FieldApplicability';
 import FieldIcon from './FieldIcon';
 
 const FieldCoverageRow: React.FC<{
@@ -19,7 +20,13 @@ const FieldCoverageRow: React.FC<{
 }> = ({ field, dataCompleteness }) => {
   return (
     <>
-      <td>{field}</td>
+      <td>
+        {FIELDS_IN_DEVELOPMENT.includes(field) ? (
+          <Hoverable hoverContent="This field is still in development.">{field}</Hoverable>
+        ) : (
+          field
+        )}
+      </td>
       <td>
         <FieldIcon field={field} />
       </td>

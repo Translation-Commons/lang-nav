@@ -8,6 +8,7 @@ import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
+import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
@@ -49,6 +50,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
     case Field.Area:
       if (typeof fieldValue === 'number') return fieldValue.toLocaleString();
       return <>{fieldValue}</>;
@@ -56,13 +58,16 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Name:
     case Field.Endonym:
     case Field.Code:
+      return <>{fieldValue}</>; // Show the string value directly
+
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.Territory:
     case Field.Platform:
     case Field.OutputScript:
     case Field.VariantTag:
-      return <>{fieldValue}</>;
+      return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
     case Field.VitalityMetascore:
     case Field.ISOStatus:
@@ -72,9 +77,6 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
 
     case Field.Modality:
       return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
-
-    case Field.None:
-      return undefined;
 
     case Field.Date:
       if (object.type === ObjectType.Census)
@@ -91,10 +93,26 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.TerritoryScope:
       return typeof fieldValue === 'number' && getTerritoryScopeLabel(fieldValue);
 
+    case Field.Indigeneity:
+      return object.type === ObjectType.Locale && <LocaleIndigeneityDisplay loc={object} />;
     case Field.LanguageFormedHere:
       return object.type === ObjectType.Locale && <LocaleFormedHereDisplay loc={object} />;
     case Field.HistoricPresence:
       return object.type === ObjectType.Locale && <LocaleHistoricPresenceDisplay loc={object} />;
+
+    case Field.Description:
+    case Field.Example:
+    case Field.UnicodeVersion:
+    case Field.CLDRCoverage:
+    case Field.DigitalSupport:
+    case Field.SourceType:
+    case Field.WritingSystemScope:
+    case Field.Coordinates:
+    case Field.GovernmentStatus:
+    case Field.Region:
+    case Field.Source:
+    case Field.None:
+      return undefined;
 
     default:
       enforceExhaustiveSwitch(field);
