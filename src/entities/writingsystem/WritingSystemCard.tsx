@@ -1,15 +1,9 @@
-import {
-  BlocksIcon,
-  CodeIcon,
-  LanguagesIcon,
-  PencilLineIcon,
-  PilcrowLeftIcon,
-  UsersIcon,
-} from 'lucide-react';
+import { PilcrowLeftIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import Field from '@features/transforms/fields/Field';
 
 import ObjectTitle from '@entities/ui/ObjectTitle';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
@@ -45,7 +39,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
       <CardField
         title="Sample"
-        icon={PencilLineIcon}
+        field={Field.Example}
         description="A single character from this writing system."
       >
         {sample?.trim() ? <span>{sample}</span> : <Deemphasized>Not available</Deemphasized>}
@@ -53,7 +47,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
       <CardField
         title="Scope"
-        icon={BlocksIcon}
+        field={Field.WritingSystemScope}
         description="How this writing system is categorized (e.g. a standalone system, a group of systems, or a variation of another system)."
       >
         {scope != null ? (
@@ -90,7 +84,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
       <CardField
         title="Population"
-        icon={UsersIcon}
+        field={Field.Population}
         description="This is a very rough estimate based on adding the populations that use the languages for this writing system, it's likely 50% to 400% off of the actual population."
       >
         <CountOfPeople count={population} />
@@ -98,7 +92,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
       <CardField
         title="Languages"
-        icon={LanguagesIcon}
+        field={Field.Language}
         description="Languages that use this writing system."
       >
         {languages && Object.values(languages).length > 0 ? (
@@ -114,7 +108,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
       <CardField
         title="Unicode support"
-        icon={CodeIcon}
+        field={Field.UnicodeVersion}
         description="Whether this writing system is encoded in Unicode, which affects support across fonts, operating systems, and software."
       >
         {unicodeVersion === null ? (

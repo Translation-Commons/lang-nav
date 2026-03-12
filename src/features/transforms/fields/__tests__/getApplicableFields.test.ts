@@ -6,6 +6,7 @@ import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjec
 import { ObjectType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 import {
+  FIELDS_IN_DEVELOPMENT,
   getApplicableFields,
   isFieldApplicable,
 } from '@features/transforms/fields/FieldApplicability';
@@ -17,8 +18,6 @@ const IGNORED_COMBINATIONS: Partial<Record<ObjectType, Field[]>> = {
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
   ], // It's always 1 for censuses
-  [ObjectType.Language]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
-  [ObjectType.Locale]: [Field.VitalityEthnologueCoarse, Field.VitalityEthnologueFine],
 };
 
 describe('getApplicableFields', () => {
@@ -42,7 +41,8 @@ describe('getApplicableFields', () => {
           const fieldValue = getField(obj, field);
           if (
             !fieldsForType.includes(field) &&
-            !IGNORED_COMBINATIONS[objectType]?.includes(field)
+            !IGNORED_COMBINATIONS[objectType]?.includes(field) &&
+            !FIELDS_IN_DEVELOPMENT.includes(field)
           ) {
             // The value is not supposed to be applicable
             expect(

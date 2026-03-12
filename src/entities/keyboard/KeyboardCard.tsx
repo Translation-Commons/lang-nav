@@ -1,7 +1,7 @@
-import { KeyboardIcon, LanguagesIcon, MapPinIcon, PencilLineIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import Field from '@features/transforms/fields/Field';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
@@ -30,7 +30,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>{nameDisplay}</div>
       <CardField
         title="Platform"
-        icon={KeyboardIcon}
+        field={Field.Platform}
         description="The keyboard platform this layout belongs to."
       >
         {platform}
@@ -39,7 +39,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
       {language != null && (
         <CardField
           title="Language"
-          icon={LanguagesIcon}
+          field={Field.Language}
           description="The language this keyboard is designed for."
         >
           <HoverableObjectName object={language} />
@@ -49,7 +49,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
       {inputWritingSystem != null && (
         <CardField
           title="Writing System"
-          icon={PencilLineIcon}
+          field={Field.WritingSystem}
           description={
             sameScript
               ? 'The writing system used by this keyboard.'
@@ -71,7 +71,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
       {(territory != null || variantTag != null) && (
         <CardField
           title="Variation"
-          icon={MapPinIcon}
+          field={Field.VariantTag}
           description="Territory or variant tag that further specifies this keyboard layout."
         >
           <CommaSeparated>

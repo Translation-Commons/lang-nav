@@ -5,7 +5,7 @@ import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
 import Field from './Field';
-import { getFieldsForObjectType } from './FieldApplicability';
+import { getApplicableFields } from './FieldApplicability';
 
 const FieldFocusSelector: React.FC = () => {
   const { fieldFocus, updatePageParams, view, objectType } = usePageParams();
@@ -17,7 +17,7 @@ const FieldFocusSelector: React.FC = () => {
     <Selector<Field>
       selectorLabel="Show Data"
       selectorDescription="Choose data to show to the right side of the tree list nodes."
-      options={getFieldsForObjectType(objectType)}
+      options={getApplicableFields(undefined, objectType)}
       onChange={(field) => updatePageParams({ fieldFocus: field })}
       selected={fieldFocus}
     />

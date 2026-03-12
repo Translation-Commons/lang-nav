@@ -18,32 +18,49 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.Endonym:
       return FieldGroup.Identity; // Name
     case Field.LanguageScope:
+    case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.SourceType:
       return FieldGroup.Identity; // Scope
+
     case Field.Modality: // Status
+      return FieldGroup.Status; // Status
+    case Field.Indigeneity:
     case Field.HistoricPresence:
     case Field.LanguageFormedHere:
-      return FieldGroup.Status;
+    case Field.GovernmentStatus:
+      return FieldGroup.Status; // Status - Indigeneity
+    case Field.DigitalSupport:
+    case Field.CLDRCoverage:
+    case Field.UnicodeVersion:
+      return FieldGroup.Status; // Status - Digital Support
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
       return FieldGroup.Status; // Vitality
+
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.OutputScript:
     case Field.Territory:
+    case Field.Region:
     case Field.VariantTag:
     case Field.Platform:
+    case Field.Source:
       return FieldGroup.Relation;
     case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
     case Field.CountOfChildTerritories:
     case Field.CountOfCountries:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
       return FieldGroup.Relation; // Count
+
     case Field.Area:
     case Field.Depth:
+    case Field.Coordinates:
     case Field.Latitude:
     case Field.Longitude:
     case Field.Literacy:
@@ -56,8 +73,11 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.PercentOfOverallLanguageSpeakers:
     case Field.PopulationPercentInBiggestDescendantLanguage:
       return FieldGroup.Quantity; // Population Percent
+
     case Field.Date:
     case Field.None:
+    case Field.Description:
+    case Field.Example:
       return FieldGroup.Other;
     default:
       enforceExhaustiveSwitch(field);
