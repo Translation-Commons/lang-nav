@@ -20,7 +20,6 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.CLDRCoverage,
   Field.DigitalSupport,
   Field.LanguageFamily,
-  Field.CountOfVariantTags,
   Field.WritingSystemScope,
 ];
 

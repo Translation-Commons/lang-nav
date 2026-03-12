@@ -95,7 +95,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       {view === View.Map && lang.longitude != null && lang.latitude != null && (
         <CardField
           title="Coordinates"
-          field={Field.Longitude}
+          field={Field.Coordinates}
           description="The latitude and longitude for the modern and/or historic center of the language."
         >
           {lang.latitude.toFixed(2)}°, {lang.longitude.toFixed(2)}°

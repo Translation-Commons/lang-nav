@@ -53,9 +53,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getObjectLiteracy(object);
 
     case Field.Coordinates:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? (((object.latitude || 0) * 2) ** 2 + (object.longitude || 0) ** 2) ** 0.5 || undefined
-        : undefined;
+      return undefined; // Poorly defined as a single value since its a 2D value
     case Field.Latitude:
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.latitude

@@ -42,8 +42,6 @@ export function getMinimumValue(field?: Field): number {
     case Field.CountOfVariantTags:
     case Field.Area:
     case Field.Depth:
-    case Field.Coordinates:
-      return 0;
     case Field.None:
       return 0;
     case Field.UnicodeVersion:
@@ -77,6 +75,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.GovernmentStatus:
     case Field.SourceType:
     case Field.CLDRCoverage:
+    case Field.Coordinates:
       return 0;
     default:
       enforceExhaustiveSwitch(field);
@@ -107,8 +106,6 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
       return 100;
     case Field.Longitude:
       return 180;
-    case Field.Coordinates:
-      return 180; // 180E + 90N
     case Field.Date:
       return new Date().getTime(); // Today
     case Field.TerritoryScope:
@@ -151,6 +148,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.GovernmentStatus:
     case Field.SourceType:
     case Field.CLDRCoverage:
+    case Field.Coordinates:
       return 0;
     default:
       enforceExhaustiveSwitch(field);
