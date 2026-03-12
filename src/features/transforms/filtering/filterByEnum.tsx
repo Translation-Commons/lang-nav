@@ -5,6 +5,7 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
+import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -77,5 +78,17 @@ export function buildFilterByVitalityEthnologueCoarse(
       language.vitality?.ethCoarse != null &&
       ethnologueCoarseStatuses.includes(language.vitality.ethCoarse)
     );
+  };
+}
+
+export function buildFilterByPopulation(
+  populationLowerLimit: number | undefined,
+  populationUpperLimit: number | undefined,
+): FilterFunctionType {
+  return (object: ObjectData): boolean => {
+    const population = getObjectPopulation(object) ?? 0;
+    const lower = populationLowerLimit ?? 0;
+    const upper = populationUpperLimit ?? Number.MAX_SAFE_INTEGER;
+    return population >= lower && population <= upper;
   };
 }

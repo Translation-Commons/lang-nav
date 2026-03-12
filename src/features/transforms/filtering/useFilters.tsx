@@ -2,7 +2,6 @@ import usePageParams from '@features/params/usePageParams';
 
 import Field from '../fields/Field';
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
-
 import { FilterFunctionType } from './filter';
 import {
   buildFilterByLanguage,
@@ -12,10 +11,9 @@ import {
 import {
   buildFilterByISOStatus,
   buildFilterByLanguageScope,
-  buildFilterByModality,
-  buildFilterByTerritoryScope,
+  buildFilterByModality, buildFilterByPopulation, buildFilterByTerritoryScope,
   buildFilterByVitalityEthnologueCoarse,
-  buildFilterByVitalityEthnologueFine,
+  buildFilterByVitalityEthnologueFine
 } from './filterByEnum';
 
 /**
@@ -37,6 +35,8 @@ function useFilters(): Record<Field, FilterFunctionType> {
     vitalityEthCoarse,
     vitalityEthFine,
     writingSystemFilter,
+    populationLowerLimit,
+    populationUpperLimit,
   } = usePageParams();
 
   const filterByName = getSubstringFilterOnQuery(searchString, searchBy);
@@ -46,6 +46,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByTerritory = buildFilterByTerritory(territoryFilter);
   const filterByLanguage = buildFilterByLanguage(languageFilter);
   const filterByWritingSystem = buildFilterByWritingSystem(writingSystemFilter);
+  const filterByPopulation = buildFilterByPopulation(populationLowerLimit, populationUpperLimit);
 
   // Vitality
   const filterByISOStatus = buildFilterByISOStatus(isoStatus);
@@ -60,6 +61,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.LanguageScope]: filterByLanguageScope,
     [Field.TerritoryScope]: filterByTerritoryScope,
     [Field.Modality]: filterByModality,
+    [Field.Population]: filterByPopulation,
 
     // Vitality
     [Field.ISOStatus]: filterByISOStatus,
@@ -75,7 +77,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.None]: alwaysTrue,
     [Field.Code]: alwaysTrue,
     [Field.Endonym]: alwaysTrue,
-    [Field.Population]: alwaysTrue,
     [Field.Latitude]: alwaysTrue,
     [Field.Longitude]: alwaysTrue,
     [Field.Area]: alwaysTrue,
