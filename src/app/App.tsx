@@ -4,10 +4,10 @@ import PageFooter from '@widgets/PageFooter';
 import PageNavBar from '@widgets/PageNavBar';
 
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
+import PageParamsProvider from '@features/params/PageParamsProvider';
 
 import PageRoutes from './PageRoutes';
 
-import PageParamsProvider from '@features/params/PageParamsProvider';
 import './index.css';
 
 function App() {
@@ -25,7 +25,9 @@ function App() {
 }
 
 const DeferredDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [DataProvider, setDataProvider] = React.useState<React.ComponentType<{ children: React.ReactNode }> | undefined>(undefined);
+  const [DataProvider, setDataProvider] = React.useState<
+    React.ComponentType<{ children: React.ReactNode }> | undefined
+  >(undefined);
 
   React.useEffect(() => {
     import('@features/data/context/DataProvider').then((m) => setDataProvider(() => m.default));
