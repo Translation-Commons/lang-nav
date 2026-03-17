@@ -1,8 +1,11 @@
-import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
-import PageParamsProvider from '@features/params/PageParamsProvider';
+import React from 'react';
+
 import PageFooter from '@widgets/PageFooter';
 import PageNavBar from '@widgets/PageNavBar';
-import React from 'react';
+
+import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
+import PageParamsProvider from '@features/params/PageParamsProvider';
+
 import PageRoutes from './PageRoutes';
 import './index.css';
 
