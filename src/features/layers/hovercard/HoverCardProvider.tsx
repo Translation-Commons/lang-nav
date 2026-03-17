@@ -1,5 +1,7 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
+import ZIndex from '../ZIndex';
+
 import EmptyHoverCardProvider from './EmptyHoverCardProvider';
 import HoverCardContext from './HoverCardContext';
 
@@ -10,7 +12,10 @@ type HoverCardData = {
   visible: boolean;
 };
 
-const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }> = ({
+  children,
+  zIndex = ZIndex.HoverCard,
+}) => {
   const [hoverCard, setHoverCard] = useState<HoverCardData>({
     content: null,
     x: 0,
@@ -97,12 +102,13 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode }> = ({ children }
             position: 'fixed',
             border: '1px solid var(--color-button-secondary)',
             boxShadow: '0 4px 12px var(--color-shadow)',
-            zIndex: 9999,
+            zIndex,
             maxWidth: '30%',
             textAlign: 'start',
             transition: 'opacity 0.6s, top 0.3s, left 0.3s',
             opacity: hoverCard.visible ? 1 : 0,
             pointerEvents: hoverCard.visible ? 'auto' : 'none',
+            color: 'var(--color-text)',
             top: hoverCard.y + 5,
             left: hoverCard.x + 5,
           }}

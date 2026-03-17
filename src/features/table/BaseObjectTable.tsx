@@ -1,7 +1,6 @@
-import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
+import ZIndex from '@features/layers/ZIndex';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -11,8 +10,8 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
+import TableColumnName from './TableColumnName';
 import TableID from './TableID';
-import TableSortButton from './TableSortButton';
 import TableValueType from './TableValueType';
 
 type Props<T> = {
@@ -32,7 +31,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
             position: 'sticky',
             top: 0,
             backgroundColor: 'var(--color-background)',
-            zIndex: 2,
+            zIndex: ZIndex.TableStickyRow,
           }}
         >
           <tr>
@@ -46,16 +45,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                   minHeight: '2em',
                 }}
               >
-                {column.label ?? column.key}
-                {column.description && (
-                  <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
-                    <InfoIcon size="1em" display="block" />
-                  </Hoverable>
-                )}
-                <TableSortButton
-                  columnSortBy={column.field}
-                  valueType={getValueTypeForColumn(column)}
-                />
+                <TableColumnName column={column} />
               </th>
             ))}
           </tr>
@@ -73,7 +63,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                     position: idx === 0 ? 'sticky' : 'static',
                     left: idx === 0 ? 0 : 'auto',
                     backgroundColor: idx === 0 ? 'var(--color-background)' : 'inherit',
-                    zIndex: idx === 0 ? 1 : 'auto',
+                    zIndex: idx === 0 ? ZIndex.TableStickyColumn : 'auto',
                   }}
                 >
                   <FormattedContent
