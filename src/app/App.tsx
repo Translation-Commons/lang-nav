@@ -1,13 +1,9 @@
-import React from 'react';
-
-import PageFooter from '@widgets/PageFooter';
-import PageNavBar from '@widgets/PageNavBar';
-
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 import PageParamsProvider from '@features/params/PageParamsProvider';
-
+import PageFooter from '@widgets/PageFooter';
+import PageNavBar from '@widgets/PageNavBar';
+import React from 'react';
 import PageRoutes from './PageRoutes';
-
 import './index.css';
 
 function App() {
