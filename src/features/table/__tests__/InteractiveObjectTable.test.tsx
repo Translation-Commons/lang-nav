@@ -6,8 +6,8 @@ import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import * as FilterModule from '@features/transforms/filtering/filter';
 import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import useFilters from '@features/transforms/filtering/useFilters';
+import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import * as SortModule from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';

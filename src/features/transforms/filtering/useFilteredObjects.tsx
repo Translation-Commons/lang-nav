@@ -6,7 +6,6 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
-
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
 import { getFilterByVitality, getScopeFilter } from './filter';
