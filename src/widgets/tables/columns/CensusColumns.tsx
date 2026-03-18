@@ -40,8 +40,8 @@ function getCensusColumns(): TableColumn<CensusData>[] {
       key: 'Acquisition Order',
       description: (
         <>
-          If the data for the language specifically refers to a persons <code>L1</code> first
-          language (or mothertongue) or <code>L2</code> second language, ....
+          If the data for the language specifically refers to a person&apos;s <code>L1</code> first
+          language (or mother tongue) or <code>L2</code> second language, etc.
         </>
       ),
       render: (census) => census.acquisitionOrder,

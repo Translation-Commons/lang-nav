@@ -76,8 +76,8 @@ function getVariantColumns(): TableColumn<VariantTagData>[] {
         <>
           <TriangleAlertIcon size="1em" /> This is not the actual population of this variant tag,
           but an estimate based on the language(s) it applies to. If its an orthographic variant
-          maybe it applies to the full modern population, but if its a dialect or historic variation
-          it may only be a small group of people or only found in manuscripts.
+          maybe it applies to the full modern population, but if it is a dialect or historic
+          variation it may only be a small group of people or only found in manuscripts.
         </>
       ),
       render: (object) => getObjectPopulation(object),

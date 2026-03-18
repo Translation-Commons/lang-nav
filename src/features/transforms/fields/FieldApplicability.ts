@@ -43,8 +43,8 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
     Field.PopulationOfDescendants,
   ],
   [ObjectType.VariantTag]: [Field.VariantTag],
-  [ObjectType.Locale]: [Field.None],
-  [ObjectType.Keyboard]: [Field.None],
+  [ObjectType.Locale]: [],
+  [ObjectType.Keyboard]: [],
   [ObjectType.Census]: [
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,

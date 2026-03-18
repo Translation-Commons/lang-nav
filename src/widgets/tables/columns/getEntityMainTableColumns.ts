@@ -3,6 +3,8 @@ import TableColumn from '@features/table/TableColumn';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+
 import getCensusColumns from './CensusColumns';
 import getKeyboardColumns from './KeyboardColumns';
 import getLanguageColumns from './LanguageColumns';
@@ -28,7 +30,7 @@ function getEntityMainTableColumns(entityType: ObjectType): TableColumn<ObjectDa
     case ObjectType.Census:
       return getCensusColumns() as TableColumn<ObjectData>[];
     default:
-      return [];
+      enforceExhaustiveSwitch(entityType);
   }
 }
 

@@ -68,19 +68,23 @@ const FieldEntityCoverageCell: React.FC<{
 }> = ({ field, entityType, dataCompleteness, hasColumn }) => {
   const isApplicable = isFieldApplicable(field, undefined, entityType);
   const hasData = dataCompleteness > 0;
+
   const shouldBeApplicable = hasData && !isApplicable;
   const isUninteresting = UNINTERESTING_FIELD_COMBINATIONS[entityType]?.includes(field);
   const missingColumn = (isApplicable || hasData) && !hasColumn;
-  const showWarning = shouldBeApplicable || missingColumn;
   return (
     <td key={entityType} style={{ textAlign: 'center' }}>
       <BackgroundProgressBar
         percentage={dataCompleteness}
-        backgroundColor={showWarning && !isUninteresting ? 'var(--color-text-yellow)' : undefined}
+        backgroundColor={
+          (shouldBeApplicable || missingColumn) && !isUninteresting
+            ? 'var(--color-text-yellow)'
+            : undefined
+        }
       >
         <Hoverable
           hoverContent={
-            shouldBeApplicable || !hasColumn || isUninteresting ? (
+            shouldBeApplicable || missingColumn || isUninteresting ? (
               <>
                 Issues for {field} on {entityType} entities
                 {shouldBeApplicable && (
@@ -89,7 +93,7 @@ const FieldEntityCoverageCell: React.FC<{
                     but it is not considered applicable.
                   </div>
                 )}
-                {!hasColumn && (
+                {missingColumn && (
                   <div>
                     <strong>c</strong>: <code>{entityType}Table</code> does not supply a column for
                     this field.
@@ -107,12 +111,8 @@ const FieldEntityCoverageCell: React.FC<{
           }
         >
           {hasData ? numberToSigFigs(dataCompleteness, 2) + '%' : ''}
-          {showWarning && (
-            <sup>
-              {!isApplicable && hasData && !isUninteresting && 'a'}
-              {missingColumn && !isUninteresting && 'c'}
-            </sup>
-          )}
+          {hasData && !isApplicable && !isUninteresting && <sup>a</sup>}
+          {missingColumn && !isUninteresting && <sup>c</sup>}
           {(hasData || hasColumn) && isUninteresting && <sup>u</sup>}
         </Hoverable>
       </BackgroundProgressBar>
