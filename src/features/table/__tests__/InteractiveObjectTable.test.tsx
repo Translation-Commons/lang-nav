@@ -94,7 +94,9 @@ describe('InteractiveObjectTable', () => {
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
-    vi.mocked(useFilters).mockReturnValue(new Proxy({}, { get: () => () => true }) as any);
+    vi.mocked(useFilters).mockReturnValue(
+      new Proxy({}, { get: () => () => true }) as unknown as ReturnType<typeof useFilters>,
+    );
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
   });

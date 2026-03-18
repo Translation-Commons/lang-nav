@@ -5,10 +5,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import {
-  getFilterByVitality,
-  getScopeFilter,
-} from '@features/transforms/filtering/filter';
+import { getFilterByVitality, getScopeFilter } from '@features/transforms/filtering/filter';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import useFilters from '@features/transforms/filtering/useFilters';
