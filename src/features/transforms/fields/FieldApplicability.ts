@@ -21,7 +21,36 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.DigitalSupport,
   Field.LanguageFamily,
   Field.WritingSystemScope,
+  Field.Coordinates,
 ];
+
+/**
+ * These fields are technically available for entities but are redundant with others so
+ * they can be used but are hidden from selectors.
+ *
+ * For example a Language.language is just the Language.name again
+ * or Variant.CountOfVariantTags is 1 (itself)
+ *
+ * Sometimes though we re-interpret the field meaning, eg. Language.CountOfLanguages is
+ * the number of child language nodes.
+ */
+export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
+  [ObjectType.Language]: [Field.Language],
+  [ObjectType.Territory]: [Field.Territory, Field.PopulationDirectlySourced],
+  [ObjectType.WritingSystem]: [
+    Field.WritingSystem,
+    Field.CountOfWritingSystems,
+    Field.PopulationOfDescendants,
+  ],
+  [ObjectType.VariantTag]: [Field.VariantTag],
+  [ObjectType.Locale]: [Field.None],
+  [ObjectType.Keyboard]: [Field.None],
+  [ObjectType.Census]: [
+    Field.CountOfCensuses,
+    Field.CountOfChildTerritories,
+    Field.CountOfCountries,
+  ],
+};
 
 // Specific fields available per object type
 function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
@@ -322,7 +351,9 @@ function getFieldsForTransform(transform: Transform): Field[] {
  */
 function getFieldsForObjectType(objectType: ObjectType): Field[] {
   const specific = getSpecificFieldsForObjectType(objectType);
-  return unique([...COMMON_FIELDS, ...specific]);
+  return unique([...COMMON_FIELDS, ...specific]).filter(
+    (f) => !UNINTERESTING_FIELD_COMBINATIONS[objectType].includes(f),
+  );
 }
 
 /**
@@ -345,6 +376,7 @@ export function isFieldApplicable(
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&
     (objectType ? getFieldsForObjectType(objectType).includes(field) : true) &&
-    !FIELDS_IN_DEVELOPMENT.includes(field)
+    !FIELDS_IN_DEVELOPMENT.includes(field) &&
+    (objectType ? !UNINTERESTING_FIELD_COMBINATIONS[objectType].includes(field) : true)
   );
 }
