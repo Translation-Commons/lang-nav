@@ -4,6 +4,7 @@ import PageFooter from '@widgets/PageFooter';
 import PageNavBar from '@widgets/PageNavBar';
 
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
+import PageParamsProvider from '@features/params/PageParamsProvider';
 
 import PageRoutes from './PageRoutes';
 
@@ -11,37 +12,30 @@ import './index.css';
 
 function App() {
   return (
-    <DeferredDataProviders>
-      <HoverCardProvider>
-        <PageNavBar />
-        <PageRoutes />
-        <PageFooter />
-      </HoverCardProvider>
-    </DeferredDataProviders>
+    <PageParamsProvider>
+      <DeferredDataProvider>
+        <HoverCardProvider>
+          <PageNavBar />
+          <PageRoutes />
+          <PageFooter />
+        </HoverCardProvider>
+      </DeferredDataProvider>
+    </PageParamsProvider>
   );
 }
 
-const DeferredDataProviders: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [PageParamsProvider, setPageParamsProvider] = React.useState<
-    React.ComponentType<{ children: React.ReactNode }> | undefined
-  >(undefined);
+const DeferredDataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [DataProvider, setDataProvider] = React.useState<
     React.ComponentType<{ children: React.ReactNode }> | undefined
   >(undefined);
 
   React.useEffect(() => {
-    import('@features/params/PageParamsProvider').then((m) =>
-      setPageParamsProvider(() => m.default),
-    );
     import('@features/data/context/DataProvider').then((m) => setDataProvider(() => m.default));
   }, []);
-  if (!PageParamsProvider || !DataProvider) return children;
 
-  return (
-    <PageParamsProvider>
-      <DataProvider>{children}</DataProvider>
-    </PageParamsProvider>
-  );
+  if (!DataProvider) return <>{children}</>;
+
+  return <DataProvider>{children}</DataProvider>;
 };
 
 export default App;
