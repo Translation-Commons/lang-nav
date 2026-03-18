@@ -8,11 +8,12 @@ import usePageParams from '@features/params/usePageParams';
 import {
   getFilterByVitality,
   getScopeFilter,
-  getFilterByPopulation,
 } from '@features/transforms/filtering/filter';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import Field from '@features/transforms/fields/Field';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -32,7 +33,8 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   const filterByConnections = getFilterByConnections();
   const filterByScope = getScopeFilter();
   const filterByVitality = getFilterByVitality();
-  const filterByPopulation = getFilterByPopulation();
+  const filterBy = useFilters();
+  const filterByPopulation = filterBy[Field.Population];
 
   // Compute the number of filtered items
   const nOverall = objects.length;

@@ -122,8 +122,8 @@ export type PageParams = {
   vitalityEthFine: VitalityEthnologueFine[];
   vitalityEthCoarse: VitalityEthnologueCoarse[];
   writingSystemFilter: string;
-  populationLowerLimit: number;
-  populationUpperLimit: number;
+  populationLowerLimit?: number;
+  populationUpperLimit?: number;
 };
 
 export type PageParamsOptional = {
