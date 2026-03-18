@@ -86,9 +86,12 @@ export function buildFilterByPopulation(
   populationUpperLimit: number | undefined,
 ): FilterFunctionType {
   return (object: ObjectData): boolean => {
-    const population = getObjectPopulation(object) ?? 0;
+    const population = getObjectPopulation(object);
     const lower = populationLowerLimit ?? 0;
-    const upper = populationUpperLimit ?? Number.MAX_SAFE_INTEGER;
+    const upper = populationUpperLimit ?? 10e9;
+    if (population === undefined) {
+      return populationLowerLimit === undefined && populationUpperLimit === undefined;
+    }
     return population >= lower && population <= upper;
   };
 }

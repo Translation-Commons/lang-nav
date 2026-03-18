@@ -25,8 +25,3 @@ export function getFilterByVitality(): FilterFunctionType {
     filterBy[Field.VitalityEthnologueCoarse](object) &&
     filterBy[Field.VitalityEthnologueFine](object);
 }
-
-export function getFilterByPopulation(): FilterFunctionType {
-  const filterBy = useFilters();
-  return (object: ObjectData) => filterBy[Field.Population](object);
-}

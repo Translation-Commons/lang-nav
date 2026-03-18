@@ -57,11 +57,10 @@ const FilterPath: React.FC = () => {
       <>
         Population:{' '}
         {[
-          populationLowerLimit !== undefined
-            ? `>= ${populationLowerLimit >= 1000000 ? `${populationLowerLimit / 1000000}M` : `${populationLowerLimit / 1000}K`}`
-            : null,
-          populationUpperLimit !== undefined && populationUpperLimit !== Number.MAX_SAFE_INTEGER
-            ? `<= ${populationUpperLimit >= 1000000 ? `${populationUpperLimit / 1000000}M` : `${populationUpperLimit / 1000}K`}`
+          populationLowerLimit !== undefined ? `>= ${populationLowerLimit.toLocaleString()}` : null,
+
+          populationUpperLimit !== undefined && populationUpperLimit !== 10e9
+            ? `<= ${populationUpperLimit.toLocaleString()}`
             : null,
         ]
           .filter(Boolean)
