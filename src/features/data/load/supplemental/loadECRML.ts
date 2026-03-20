@@ -25,8 +25,8 @@ export async function loadECRML(
         }
 
         const languageCodes = parts[0]; // May contain slashes like "ber/rif" or "hbs/bos"
-        const territoryCode = parts[3]?.trim().toLowerCase(); // ISO region code (e.g., "ba", "me")
-        const protectionLevel = parts[5]?.trim(); // Level of protection
+        const territoryCode = parts[3]?.trim(); // ISO region code (e.g., "BA", "ME")
+        const protectionLevel = parts[6]?.trim(); // Level of protection
 
         if (!languageCodes || !territoryCode || !protectionLevel) {
           return;
@@ -44,9 +44,7 @@ export async function loadECRML(
           if (!language) continue;
 
           // Find locales that match this language + territory combination
-          const locales = language.locales.filter(
-            (l) => l.territoryCode?.toLowerCase() === territoryCode,
-          );
+          const locales = language.locales.filter((l) => l.territoryCode === territoryCode);
 
           if (locales.length > 0) {
             locales.forEach((locale) => {
