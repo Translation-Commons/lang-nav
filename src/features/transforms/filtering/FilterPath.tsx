@@ -202,13 +202,13 @@ const FilterPath: React.FC = () => {
   }
 
   return filters
-        .filter((f) => f)
-        .map((filter, i) => (
-          <Fragment key={i}>
-            {i !== 0 && <SlashIcon size="1em" />}
-            {filter}
-          </Fragment>
-        ));
+    .filter((f) => f)
+    .map((filter, i) => (
+      <Fragment key={i}>
+        {i !== 0 && <SlashIcon size="1em" />}
+        {filter}
+      </Fragment>
+    ));
 };
 
 export default FilterPath;
