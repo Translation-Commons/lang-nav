@@ -13,6 +13,7 @@ import {
   buildFilterByISOStatus,
   buildFilterByLanguageScope,
   buildFilterByModality,
+  buildFilterByPopulation,
   buildFilterByTerritoryScope,
   buildFilterByVitalityEthnologueCoarse,
   buildFilterByVitalityEthnologueFine,
@@ -37,6 +38,8 @@ function useFilters(): Record<Field, FilterFunctionType> {
     vitalityEthCoarse,
     vitalityEthFine,
     writingSystemFilter,
+    populationLowerLimit,
+    populationUpperLimit,
   } = usePageParams();
 
   const filterByName = getSubstringFilterOnQuery(searchString, searchBy);
@@ -46,6 +49,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByTerritory = buildFilterByTerritory(territoryFilter);
   const filterByLanguage = buildFilterByLanguage(languageFilter);
   const filterByWritingSystem = buildFilterByWritingSystem(writingSystemFilter);
+  const filterByPopulation = buildFilterByPopulation(populationLowerLimit, populationUpperLimit);
 
   // Vitality
   const filterByISOStatus = buildFilterByISOStatus(isoStatus);
@@ -60,6 +64,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.LanguageScope]: filterByLanguageScope,
     [Field.TerritoryScope]: filterByTerritoryScope,
     [Field.Modality]: filterByModality,
+    [Field.Population]: filterByPopulation,
 
     // Vitality
     [Field.ISOStatus]: filterByISOStatus,
@@ -82,6 +87,12 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.None]: alwaysTrue,
     [Field.Code]: alwaysTrue,
     [Field.Endonym]: alwaysTrue,
+    [Field.Latitude]: alwaysTrue,
+    [Field.Longitude]: alwaysTrue,
+    [Field.Area]: alwaysTrue,
+    [Field.Date]: alwaysTrue,
+    [Field.Depth]: alwaysTrue,
+    [Field.Literacy]: alwaysTrue,
     [Field.Description]: alwaysTrue,
     [Field.Example]: alwaysTrue,
     [Field.UnicodeVersion]: alwaysTrue,
@@ -102,7 +113,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.CountOfCensuses]: alwaysTrue,
     [Field.CountOfVariantTags]: alwaysTrue,
 
-    [Field.Population]: alwaysTrue,
     [Field.PopulationDirectlySourced]: alwaysTrue,
     [Field.PopulationOfDescendants]: alwaysTrue,
     [Field.PercentOfTerritoryPopulation]: alwaysTrue,
@@ -110,12 +120,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.PopulationPercentInBiggestDescendantLanguage]: alwaysTrue,
 
     [Field.Coordinates]: alwaysTrue,
-    [Field.Latitude]: alwaysTrue,
-    [Field.Longitude]: alwaysTrue,
-    [Field.Area]: alwaysTrue,
-    [Field.Date]: alwaysTrue,
-    [Field.Depth]: alwaysTrue,
-    [Field.Literacy]: alwaysTrue,
   };
 }
 

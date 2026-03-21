@@ -27,6 +27,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const filterBy = useFilters();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByVitality = getFilterByVitality();
+  const filterByPopulation = filterBy[Field.Population];
   const filterLabels = getFilterLabels();
 
   const [
@@ -37,6 +38,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nWrittenIn,
     nWithLanguage,
     nInVitality,
+    nMatchingPopulation,
     nMatchingSubstring,
   ] = (() => {
     const filteredByLanguageScope = objects.filter(filterBy[Field.LanguageScope]);
@@ -46,7 +48,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     const filteredByWritingSystem = filteredByTerritory.filter(filterBy[Field.WritingSystem]);
     const filteredByLanguage = filteredByWritingSystem.filter(filterBy[Field.Language]);
     const filteredByVitality = filteredByLanguage.filter(filterByVitality);
-    const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
+    const filteredByPopulation = filteredByVitality.filter(filterByPopulation);
+    const filteredBySubstring = filteredByPopulation.filter(filterBySubstring);
     return [
       filteredByLanguageScope.length,
       filteredByModality.length,
@@ -55,6 +58,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       filteredByWritingSystem.length,
       filteredByLanguage.length,
       filteredByVitality.length,
+      filteredByPopulation.length,
       filteredBySubstring.length,
     ];
   })();
@@ -67,7 +71,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
   const nFilteredByLanguage = nWrittenIn - nWithLanguage;
   const nFilteredByVitality = nWithLanguage - nInVitality;
-  const nFilteredBySubstring = nInVitality - nMatchingSubstring;
+  const nFilteredByPopulation = nInVitality - nMatchingPopulation;
+  const nFilteredBySubstring = nMatchingPopulation - nMatchingSubstring;
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
@@ -188,6 +193,27 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 hoverContent="Clear the vitality filters"
                 onClick={() =>
                   updatePageParams({ vitalityEthCoarse: [], isoStatus: [], vitalityEthFine: [] })
+                }
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredByPopulation > 0 && (
+          <tr>
+            <td>Not passing population filter:</td>
+            <td className="count">{(nFilteredByPopulation * -1).toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the population filter"
+                onClick={() =>
+                  updatePageParams({
+                    populationLowerLimit: undefined,
+                    populationUpperLimit: undefined,
+                  })
                 }
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >

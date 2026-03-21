@@ -6,6 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import * as FilterModule from '@features/transforms/filtering/filter';
 import * as ConnectionFilters from '@features/transforms/filtering/filterByConnections';
+import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import * as SortModule from '@features/transforms/sorting/sort';
 
@@ -43,6 +44,7 @@ vi.mock('@features/layers/hovercard/useHoverCard', () => ({
 }));
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
+vi.mock('@features/transforms/filtering/useFilters', () => ({ default: vi.fn() }));
 
 describe('InteractiveObjectTable', () => {
   const mockObjects: ObjectData[] = [
@@ -92,6 +94,9 @@ describe('InteractiveObjectTable', () => {
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
+    vi.mocked(useFilters).mockReturnValue(
+      new Proxy({}, { get: () => () => true }) as unknown as ReturnType<typeof useFilters>,
+    );
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
   });

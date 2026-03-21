@@ -63,6 +63,8 @@ const GLOBAL_DEFAULTS: PageParams = {
   vitalityEthCoarse: [],
   vitalityEthFine: [],
   writingSystemFilter: '',
+  populationLowerLimit: undefined,
+  populationUpperLimit: undefined,
 };
 
 export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
