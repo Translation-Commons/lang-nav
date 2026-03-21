@@ -1,47 +1,53 @@
-import { SlidersHorizontalIcon } from 'lucide-react';
 import React, { Suspense } from 'react';
 
-import useFilterPanel from '@widgets/controls/useFilterPanel';
+import FilterPanelToggle from '@widgets/controls/FilterPanelToggle';
+import ViewSelector from '@widgets/controls/selectors/ViewSelector';
 import Loading from '@widgets/Loading';
-import PathNav from '@widgets/pathnav/PathNav';
+import { PathContainer } from '@widgets/pathnav/PathNav';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import ResultCount from '@features/pagination/ResultCount';
+import FilterPath from '@features/transforms/filtering/FilterPath';
 import SearchBar from '@features/transforms/search/SearchBar';
+import SortBySelector from '@features/transforms/sorting/SortBySelector';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 
 const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
-  const { isOpen, setIsOpen } = useFilterPanel();
-
   return (
     <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
       <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
         <SearchBar />
         <EntityTypeTabs />
+      </div>
+
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          width: '100%',
+          marginBottom: '1rem',
+        }}
+      >
+        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+          <FilterPanelToggle />
+          <ResultCount />
+          <PathContainer>
+            <FilterPath />
+          </PathContainer>
+        </div>
         <div
           style={{
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'space-between',
-            width: '100%',
+            justifyContent: 'flex-end',
+            gap: '0.5rem',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-            <HoverableButton
-              className={isOpen ? 'selected primary' : 'primary'}
-              hoverContent={isOpen ? 'Close filters panel' : 'Open filters panel'}
-              onClick={() => setIsOpen((open) => !open)}
-              style={{ padding: '0.4em', borderRadius: '0.5em', display: 'flex' }}
-              aria-label={isOpen ? 'Close filters panel' : 'Open filters panel'}
-            >
-              <SlidersHorizontalIcon size="1.2em" />
-            </HoverableButton>
-            <ResultCount />
-          </div>
-          <PathNav />
+          <SortBySelector showLabel={false} />
+          <ViewSelector />
         </div>
       </div>
       <div
