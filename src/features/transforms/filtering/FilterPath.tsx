@@ -198,25 +198,17 @@ const FilterPath: React.FC = () => {
   ];
 
   if (filters.filter((f) => f).length === 0) {
-    return (
-      <>
-        <Deemphasized>No filters applied</Deemphasized>
-      </>
-    );
+    return <Deemphasized>No filters applied</Deemphasized>;
   }
 
-  return (
-    <>
-      {filters
+  return filters
         .filter((f) => f)
         .map((filter, i) => (
           <Fragment key={i}>
             {i !== 0 && <SlashIcon size="1em" />}
             {filter}
           </Fragment>
-        ))}
-    </>
-  );
+        ));
 };
 
 export default FilterPath;
