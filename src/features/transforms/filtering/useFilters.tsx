@@ -70,35 +70,52 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.Language]: filterByLanguage,
     [Field.WritingSystem]: filterByWritingSystem,
     [Field.Territory]: filterByTerritory,
+    [Field.LanguageFamily]: alwaysTrue,
 
-    // Filters not constructed
+    // Filters not yet constructed
+    [Field.Region]: alwaysTrue, // TODO
+    [Field.Platform]: alwaysTrue, // TODO
+    [Field.OutputScript]: alwaysTrue, // TODO
+    [Field.VariantTag]: alwaysTrue, // TODO
+    [Field.Source]: alwaysTrue, // TODO
+
     [Field.None]: alwaysTrue,
     [Field.Code]: alwaysTrue,
     [Field.Endonym]: alwaysTrue,
+    [Field.Description]: alwaysTrue,
+    [Field.Example]: alwaysTrue,
+    [Field.UnicodeVersion]: alwaysTrue,
+    [Field.CLDRCoverage]: alwaysTrue,
+    [Field.DigitalSupport]: alwaysTrue,
+    [Field.SourceType]: alwaysTrue,
+    [Field.WritingSystemScope]: alwaysTrue,
+    [Field.VitalityMetascore]: alwaysTrue,
+    [Field.HistoricPresence]: alwaysTrue,
+    [Field.LanguageFormedHere]: alwaysTrue,
+    [Field.Indigeneity]: alwaysTrue,
+    [Field.GovernmentStatus]: alwaysTrue,
+
+    [Field.CountOfLanguages]: alwaysTrue,
+    [Field.CountOfWritingSystems]: alwaysTrue,
+    [Field.CountOfChildTerritories]: alwaysTrue,
+    [Field.CountOfCountries]: alwaysTrue,
+    [Field.CountOfCensuses]: alwaysTrue,
+    [Field.CountOfVariantTags]: alwaysTrue,
+
     [Field.Population]: alwaysTrue,
+    [Field.PopulationDirectlySourced]: alwaysTrue,
+    [Field.PopulationOfDescendants]: alwaysTrue,
+    [Field.PercentOfTerritoryPopulation]: alwaysTrue,
+    [Field.PercentOfOverallLanguageSpeakers]: alwaysTrue,
+    [Field.PopulationPercentInBiggestDescendantLanguage]: alwaysTrue,
+
+    [Field.Coordinates]: alwaysTrue,
     [Field.Latitude]: alwaysTrue,
     [Field.Longitude]: alwaysTrue,
     [Field.Area]: alwaysTrue,
     [Field.Date]: alwaysTrue,
     [Field.Depth]: alwaysTrue,
     [Field.Literacy]: alwaysTrue,
-    [Field.VitalityMetascore]: alwaysTrue,
-    [Field.CountOfLanguages]: alwaysTrue,
-    [Field.CountOfWritingSystems]: alwaysTrue,
-    [Field.CountOfChildTerritories]: alwaysTrue,
-    [Field.CountOfCountries]: alwaysTrue,
-    [Field.CountOfCensuses]: alwaysTrue,
-    [Field.PopulationDirectlySourced]: alwaysTrue,
-    [Field.PopulationOfDescendants]: alwaysTrue,
-    [Field.PercentOfTerritoryPopulation]: alwaysTrue,
-    [Field.PercentOfOverallLanguageSpeakers]: alwaysTrue,
-    [Field.PopulationPercentInBiggestDescendantLanguage]: alwaysTrue,
-    [Field.HistoricPresence]: alwaysTrue,
-    [Field.LanguageFormedHere]: alwaysTrue,
-
-    [Field.Platform]: alwaysTrue,
-    [Field.OutputScript]: alwaysTrue,
-    [Field.VariantTag]: alwaysTrue,
   };
 }
 

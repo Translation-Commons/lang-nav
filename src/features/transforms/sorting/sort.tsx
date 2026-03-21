@@ -72,17 +72,24 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Name:
     case Field.Endonym:
     case Field.Code:
+    case Field.Description:
+    case Field.Modality:
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
+    case Field.OutputScript:
     case Field.Territory:
+    case Field.Region:
+    case Field.VariantTag:
+    case Field.Platform:
+    case Field.Source:
+    case Field.Coordinates:
     case Field.Longitude:
     case Field.Latitude:
-    case Field.Modality:
     case Field.Depth:
-    case Field.Platform:
-    case Field.OutputScript:
-    case Field.VariantTag:
-      return SortDirection.Ascending; // A to Z
+    case Field.Example:
+    case Field.UnicodeVersion:
+      return SortDirection.Ascending; // A to Z, min to max
     case Field.Date:
     case Field.Population:
     case Field.PopulationDirectlySourced:
@@ -96,16 +103,23 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
     case Field.Area:
     case Field.LanguageScope:
+    case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.SourceType:
+    case Field.DigitalSupport:
+    case Field.CLDRCoverage:
+    case Field.Indigeneity:
+    case Field.GovernmentStatus:
     case Field.LanguageFormedHere:
     case Field.HistoricPresence:
-      return SortDirection.Descending; // High to Low
+      return SortDirection.Descending; // High to Low, most recent to least
     default:
       enforceExhaustiveSwitch(sortBy);
   }

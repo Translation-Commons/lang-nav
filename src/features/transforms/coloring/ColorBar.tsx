@@ -219,20 +219,12 @@ function getSuffixForField(field: Field): string {
 }
 
 function isFieldWholeNumbersOnly(field: Field): boolean {
-  switch (field) {
-    case Field.CountOfLanguages:
-    case Field.CountOfWritingSystems:
-    case Field.CountOfCountries:
-    case Field.CountOfChildTerritories:
-    case Field.CountOfCensuses:
-    case Field.Depth:
-    case Field.Population:
-    case Field.PopulationDirectlySourced:
-    case Field.PopulationOfDescendants:
-      return true;
-    default:
-      return false;
-  }
+  const valueType = getFieldValueType(field);
+  return (
+    valueType === TableValueType.Count ||
+    valueType === TableValueType.Enum ||
+    valueType === TableValueType.Population
+  );
 }
 
 function pickDistributedTicksFromRange<T>(range: T[], count: number): T[] {

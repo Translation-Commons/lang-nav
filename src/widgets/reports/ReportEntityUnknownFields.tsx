@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import { getFieldsForObjectType } from '@features/transforms/fields/FieldApplicability';
+import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 import FieldCoverageTable from '@features/transforms/fields/FieldCoverageTable';
 import getField from '@features/transforms/fields/getField';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
@@ -20,7 +20,7 @@ const ReportEntityUnknownFields: React.FC = () => {
   const { objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});
 
-  const fields = getFieldsForObjectType(objectType).filter((f) => f !== Field.None);
+  const fields = getApplicableFields(undefined, objectType).filter((f) => f !== Field.None);
 
   const countTotal = filteredObjects.length;
   const resultsByField = useMemo(

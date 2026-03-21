@@ -18,6 +18,7 @@ type Props<T> = {
   getOptionLabel?: (value: T) => React.ReactNode;
   labelWhenEmpty?: string; // for multi-select options
   onChange: (value: T) => void;
+  optionStyle?: React.CSSProperties;
   options: readonly T[];
   selected: T | T[];
   selectorDescription?: ReactNode;
@@ -31,6 +32,7 @@ function Selector<T extends React.Key>({
   getOptionLabel = (val) => val as string,
   labelWhenEmpty,
   onChange,
+  optionStyle,
   options,
   selected,
   selectorDescription,
@@ -58,6 +60,7 @@ function Selector<T extends React.Key>({
               setExpanded(false);
               onChange(option);
             }}
+            optionStyle={optionStyle}
             options={options}
             selected={selected}
           />
@@ -155,6 +158,7 @@ type OptionsProps<T> = {
   getOptionDescription?: (value: T) => React.ReactNode;
   getOptionLabel?: (value: T) => React.ReactNode; // optional label renderer
   onClick: (value: T) => void;
+  optionStyle?: React.CSSProperties;
   options: readonly T[];
   selected: T | T[];
 };
@@ -163,6 +167,7 @@ function Options<T extends React.Key>({
   getOptionDescription,
   getOptionLabel,
   onClick,
+  optionStyle,
   options,
   selected,
 }: OptionsProps<T>) {
@@ -173,6 +178,7 @@ function Options<T extends React.Key>({
       getOptionLabel={getOptionLabel}
       onClick={onClick}
       option={option}
+      optionStyle={optionStyle}
       isSelected={Array.isArray(selected) ? selected.includes(option) : selected === option}
       position={getPositionInGroup(i, options.length)}
     />

@@ -1,36 +1,25 @@
 import React, { Suspense } from 'react';
 
+import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
 import DetailsPanel from '@widgets/details/DetailsPanel';
 import Loading from '@widgets/Loading';
 
-import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
-
-const FilterPanelProvider = React.lazy(() => import('@widgets/controls/FilterPanelProvider'));
-const PageParamsProvider = React.lazy(() => import('@features/params/PageParamsProvider'));
-const DataProvider = React.lazy(() => import('@features/data/context/DataProvider'));
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
 const OptionsPanel = React.lazy(() => import('@widgets/controls/OptionsPanel'));
 const ViewModal = React.lazy(() => import('@features/layers/modal/ViewModal'));
 
 const DataPage: React.FC = () => {
-  /* DataProvider and many other data components have more lines of code so they are loaded lazily */
+  /* Many data components have more lines of code so they are loaded lazily */
   return (
     <Suspense fallback={<Loading />}>
-      <PageParamsProvider>
-        <HoverCardProvider>
-          {/* HoverCardProvider is re-declared so it has access to page parameters, there may be a better way to organize it */}
-          <DataProvider>
-            <FilterPanelProvider>
-              <div style={{ display: 'flex', height: '100vh' }}>
-                <OptionsPanel />
-                <DataPageBody />
-                <DetailsPanel />
-              </div>
-            </FilterPanelProvider>
-            <ViewModal />
-          </DataProvider>
-        </HoverCardProvider>
-      </PageParamsProvider>
+      <FilterPanelProvider>
+        <div style={{ display: 'flex', height: '100vh' }}>
+          <OptionsPanel />
+          <DataPageBody />
+          <DetailsPanel />
+        </div>
+      </FilterPanelProvider>
+      <ViewModal />
     </Suspense>
   );
 };

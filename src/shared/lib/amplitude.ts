@@ -9,8 +9,11 @@ export function initAmplitude() {
   if (typeof window === 'undefined' || hasInitializedAmplitude || !AMPLITUDE_API_KEY) return;
 
   amplitude.initAll(AMPLITUDE_API_KEY, {
-    analytics: { autocapture: true },
-    sessionReplay: { sampleRate: 1 },
+    analytics: {
+      autocapture: {
+        pageViews: false,
+      },
+    },
   });
   hasInitializedAmplitude = true;
 }
@@ -22,6 +25,17 @@ export function trackEvent(eventType: string, eventProperties?: Record<string, u
   amplitude.track(eventType, eventProperties);
 }
 
+function parseSearchParams(search: string): Record<string, string> {
+  const params = new URLSearchParams(search);
+  const result: Record<string, string> = {};
+
+  for (const [key, value] of params.entries()) {
+    if (value) result[key] = value;
+  }
+
+  return result;
+}
+
 export function trackPageView(pathname: string, search: string) {
   if (!AMPLITUDE_API_KEY) return;
 
@@ -30,9 +44,10 @@ export function trackPageView(pathname: string, search: string) {
   if (page === lastTrackedPage) return;
 
   lastTrackedPage = page;
+
   trackEvent('page_viewed', {
     page,
     pathname,
-    search: search || undefined,
+    params: parseSearchParams(search),
   });
 }

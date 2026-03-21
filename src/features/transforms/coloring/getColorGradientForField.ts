@@ -16,16 +16,21 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.Date:
     case Field.Area:
     case Field.Modality:
-    case Field.LanguageFormedHere:
-    case Field.HistoricPresence:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
 
+    case Field.DigitalSupport:
+    case Field.CLDRCoverage:
+    case Field.UnicodeVersion:
+    case Field.Literacy:
+    case Field.Indigeneity:
+    case Field.LanguageFormedHere:
+    case Field.HistoricPresence:
+    case Field.GovernmentStatus:
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
-    case Field.Literacy:
       // "Bad" values are red, "Good" values are green
       return ColorGradient.StopLightRedToGreen;
 
@@ -34,17 +39,23 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
+    case Field.CountOfVariantTags:
     case Field.Depth:
     case Field.LanguageScope:
+    case Field.WritingSystemScope:
     case Field.TerritoryScope:
       // Preferred color schema for ordinals
       // Low values are light blue, high values are dark blue
       return ColorGradient.SequentialBlue;
 
+    case Field.Coordinates:
     case Field.Longitude:
     case Field.Latitude:
     case Field.Name:
     case Field.Endonym:
+    case Field.SourceType:
+    case Field.Description:
+    case Field.Example:
       // Continuous spectrum
       return ColorGradient.OklabRainbowBlueToRed;
 
@@ -52,11 +63,14 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
       // Since the Codes are regularly spaced in the alphabet it works to color maps with scattered values
       return ColorGradient.ScatteredOklab;
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
-    case Field.Territory:
-    case Field.Platform:
     case Field.OutputScript:
+    case Field.Region:
+    case Field.Territory:
     case Field.VariantTag:
+    case Field.Platform:
+    case Field.Source:
       // These values are the names of related objects, not ideal for coloring with a gradient, but
       // since they are categorical values with no intrinsic order, a scattered gradient is more
       // appropriate than a sequential or diverging one.
