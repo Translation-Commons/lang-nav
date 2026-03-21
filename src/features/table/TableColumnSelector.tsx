@@ -1,8 +1,9 @@
 import { InfoIcon, SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import ViewModal from '@features/layers/modal/ViewModal';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -23,33 +24,45 @@ function TableColumnSelector<T extends ObjectData>({
   const { columnVisibility } = visibilityModule;
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
+  const [isOpen, setIsOpen] = useState(false);
+  const onClose = useCallback(() => setIsOpen(false), []);
 
   return (
-    <details style={{ margin: '.5em 0 1em 0', gap: '.5em 1em' }}>
-      <summary style={{ cursor: 'pointer' }}>
-        {nVisible}/{columns.length} columns visible, click here to toggle.
-      </summary>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '.5em',
-          backgroundColor: 'var(--color-button-secondary)',
-          padding: '0.5em',
-          borderRadius: '.5em',
-        }}
+    <>
+      <HoverableButton
+        onClick={() => setIsOpen(true)}
+        hoverContent="Select which columns to show or hide"
+        style={{ padding: '0.25em 0.5em' }}
       >
-        {Object.entries(columnsByGroup).map(([group, columns]) => (
-          <ColumnGroup
-            columns={columns}
-            group={group}
-            key={group}
-            visibilityModule={visibilityModule}
-          />
-        ))}
+        {nVisible}/{columns.length} columns visible. Click to configure.
+      </HoverableButton>
+
+      <ViewModal
+        isOpen={isOpen}
+        onClose={onClose}
+        title="Select Columns"
+        bodyStyle={{ width: '90vw', maxWidth: '85em', padding: '1em' }}
+      >
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(12em, 1fr))',
+            gap: '1em',
+            padding: '0.5em',
+          }}
+        >
+          {Object.entries(columnsByGroup).map(([group, columns]) => (
+            <ColumnGroup
+              columns={columns}
+              group={group}
+              key={group}
+              visibilityModule={visibilityModule}
+            />
+          ))}
+        </div>
         <GlobalControls visibilityModule={visibilityModule} columns={columns} />
-      </div>
-    </details>
+      </ViewModal>
+    </>
   );
 }
 
@@ -85,9 +98,7 @@ function ColumnGroup<T extends ObjectData>({
       style={{
         display: 'flex',
         flexDirection: 'column',
-        marginRight: '1em',
         textAlign: 'start',
-        maxWidth: '12em',
       }}
     >
       {columns.length > 1 && (
@@ -169,11 +180,10 @@ function GlobalControls<T extends ObjectData>({
     <div
       style={{
         display: 'flex',
-        flexDirection: 'column',
-        justifySelf: 'end',
-        alignSelf: 'end',
-        height: 'fit-content',
-        alignItems: 'end',
+        flexDirection: 'row',
+        justifyContent: 'end',
+        gap: '0.5em',
+        padding: '0.5em',
       }}
     >
       <HoverableButton

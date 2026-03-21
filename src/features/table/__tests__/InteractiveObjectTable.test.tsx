@@ -39,7 +39,10 @@ vi.mock('@features/transforms/sorting/sort', () => ({
 }));
 
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({}),
+  default: vi.fn().mockReturnValue({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
+}));
+vi.mock('@shared/hooks/useClickOutside', () => ({
+  useClickOutside: vi.fn().mockReturnValue({ current: null }),
 }));
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
@@ -224,7 +227,7 @@ describe('InteractiveObjectTable', () => {
 
     // Open column selector
     act(() => {
-      fireEvent.click(screen.getByText(/2\/2 columns visible, click here to toggle/i));
+      fireEvent.click(screen.getByText(/2\/2 columns visible/i));
     });
 
     // Click checkbox to hide Population column
