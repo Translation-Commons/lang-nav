@@ -38,10 +38,18 @@ export function connectKeyboards(
         .map((tag: string) => locales[tag])
         .find((l: LocaleData | undefined) => l != null) ?? null;
 
-    if (language != null) keyboard.language = language;
+    if (language != null) {
+      keyboard.language = language;
+      if (!language.keyboards) language.keyboards = [];
+      language.keyboards.push(keyboard);
+    }
     if (territory != null) keyboard.territory = territory;
     if (inputWritingSystem != null) keyboard.inputWritingSystem = inputWritingSystem;
-    if (outputWritingSystem != null) keyboard.outputWritingSystem = outputWritingSystem;
+    if (outputWritingSystem != null) {
+      keyboard.outputWritingSystem = outputWritingSystem;
+      if (!outputWritingSystem.outputKeyboards) outputWritingSystem.outputKeyboards = [];
+      outputWritingSystem.outputKeyboards.push(keyboard);
+    }
     if (variantTag != null) keyboard.variantTag = variantTag;
     if (locale != null) keyboard.locale = locale;
   });
