@@ -67,6 +67,9 @@ describe('TableColumnSelector', () => {
 
     render(<TableColumnSelector columns={columns} visibilityModule={visibilityModule} />);
 
+    // Open the modal
+    fireEvent.click(screen.getByText(/columns visible/i));
+
     const populationCheckbox = screen.getByLabelText('Population') as HTMLInputElement;
     const nameCheckbox = screen.getByLabelText('Name') as HTMLInputElement;
 
@@ -100,6 +103,9 @@ describe('TableColumnSelector', () => {
     };
 
     render(<TableColumnSelector columns={columns} visibilityModule={visibilityModule} />);
+
+    // Open the modal
+    fireEvent.click(screen.getByText(/columns visible/i));
 
     // Click the first group Hoverable (mocked as button with data-testid "hoverable")
     const hoverables = screen.getAllByTestId('hoverable');
