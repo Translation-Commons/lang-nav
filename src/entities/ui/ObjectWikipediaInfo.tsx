@@ -75,7 +75,7 @@ export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }>
   return <LinkButton href={object.wikipedia.url}>{showURL && object.wikipedia.url}</LinkButton>;
 };
 
-function getStatusColor(status: WikipediaStatus) {
+export function getStatusColor(status: WikipediaStatus) {
   switch (status) {
     case WikipediaStatus.Active:
       return 'var(--color-green)';
@@ -84,6 +84,6 @@ function getStatusColor(status: WikipediaStatus) {
     case WikipediaStatus.Incubator:
       return 'var(--color-yellow)';
   }
-}
+};
 
 export default ObjectWikipediaInfo;

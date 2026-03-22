@@ -1,63 +1,93 @@
 import React from 'react';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import LanguagePopulationBreakdownButton from '@entities/language/population/LanguagePopulationBreakdownButton';
-import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
-import LanguagePopulationOfDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
-import LanguagePopulationFromEthnologue from '@entities/language/population/LanguagePopulationFromEthnologue';
-import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
-import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import DetailsField from '@shared/containers/DetailsField';
+import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguagePopulationOfDescendants, {
+  LanguagePopulationBreakdownFromDescendants,
+} from '@entities/language/population/LanguagePopulationFromDescendants';
+import { LanguagePopulationBreakdownFromLocales } from '@entities/language/population/LanguagePopulationFromLocales';
+import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+
 import DetailsSection from '@shared/containers/DetailsSection';
+import CountOfPeopleCompact from '@shared/ui/CountOfPeopleCompact';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = { lang: LanguageData };
 
+const LanguagePopulationBreakdownContent: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { populationEstimateSource } = lang;
+  if (populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
+    return <LanguagePopulationBreakdownFromLocales lang={lang} />;
+  if (populationEstimateSource === PopulationSourceCategory.AggregatedFromLanguages)
+    return <LanguagePopulationBreakdownFromDescendants lang={lang} />;
+  return null;
+};
+
+const getSourceLabel = (source?: PopulationSourceCategory): string | null => {
+  switch (source) {
+    case PopulationSourceCategory.AggregatedFromTerritories: return 'aggregated from territories';
+    case PopulationSourceCategory.AggregatedFromLanguages: return 'aggregated from dialects';
+    case PopulationSourceCategory.Ethnologue: return 'from Ethnologue';
+    case PopulationSourceCategory.Algorithmic: return 'algorithmically derived';
+    default: return null;
+  }
+};
+
 const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
-  const {
-    populationEstimate,
-    populationEstimateSource,
-    populationFromLocales,
-    populationOfDescendants,
-    Ethnologue,
-  } = lang;
+  const { populationEstimate, populationEstimateSource, populationOfDescendants } = lang;
+  const sourceLabel = getSourceLabel(populationEstimateSource);
+
+  const title = (
+    <>
+      Population
+      {sourceLabel && (
+        <span style={{ fontSize: '0.75em', fontWeight: 'normal', marginLeft: '0.5em' }}>
+          ({sourceLabel})
+        </span>
+      )}
+    </>
+  );
 
   return (
-    <DetailsSection title="Population">
-      {populationEstimate != null && (
-        <DetailsField title="Best Estimate">
-          <LanguagePopulationEstimate lang={lang} />
-          <LanguagePopulationBreakdownButton lang={lang} />
-        </DetailsField>
+    <DetailsSection title={title}>
+      {populationEstimate == null ? (
+        <Deemphasized>No population data available.</Deemphasized>
+      ) : (
+        <div style={{
+          display: 'flex',
+          gap: '2em',
+          justifyContent: 'center',
+          alignItems: 'flex-end', 
+          marginTop: 'auto',      
+          paddingBottom: '0.5em',
+          flexGrow: 1,
+        }}>
+          {/* Speakers */}
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+            <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
+              <Hoverable hoverContent={<LanguagePopulationBreakdownContent lang={lang} />}>
+                <CountOfPeopleCompact count={populationEstimate} />
+              </Hoverable>
+            </div>
+            <Deemphasized>Speakers</Deemphasized>
+          </div>
+
+          {/* Descendants */}
+          {populationOfDescendants != null &&
+            populationOfDescendants > 10 &&
+            populationEstimateSource !== PopulationSourceCategory.AggregatedFromLanguages && (
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
+                  <Hoverable hoverContent={<LanguagePopulationOfDescendants lang={lang} />}>
+                    <CountOfPeopleCompact count={populationOfDescendants} />
+                  </Hoverable>
+                </div>
+                <Deemphasized>Descendants</Deemphasized>
+              </div>
+            )}
+        </div>
       )}
-      {populationEstimateSource && (
-        <DetailsField title="Source" indent={1}>
-          <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
-        </DetailsField>
-      )}
-      {!populationEstimateSource && (
-        <>This language does not have any available population estimate.</>
-      )}
-      {populationOfDescendants &&
-        populationOfDescendants > 10 &&
-        populationEstimateSource !== PopulationSourceCategory.AggregatedFromLanguages && (
-          <DetailsField title="... of Descendants">
-            <LanguagePopulationOfDescendants lang={lang} />
-          </DetailsField>
-        )}
-      {populationFromLocales &&
-        populationEstimateSource !== PopulationSourceCategory.AggregatedFromTerritories && (
-          <DetailsField title="... from Locales">
-            <LanguagePopulationFromLocales lang={lang} />
-          </DetailsField>
-        )}
-      {Ethnologue.population != null &&
-        populationEstimateSource !== PopulationSourceCategory.Ethnologue && (
-          <DetailsField title="... from Ethnologue">
-            <LanguagePopulationFromEthnologue lang={lang} />
-          </DetailsField>
-        )}
     </DetailsSection>
   );
 };

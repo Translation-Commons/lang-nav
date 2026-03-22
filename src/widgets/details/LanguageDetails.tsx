@@ -8,6 +8,8 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
+import LanguageVitalitySection from '@entities/language/vitality/LanguageVitalitySection';
+import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
@@ -22,6 +24,7 @@ import LanguageCodes from './sections/LanguageCodes';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
+import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
 
 type Props = {
   lang: LanguageData;
@@ -32,9 +35,27 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
     <div className="Details">
       <LanguageNames lang={lang} />
       <LanguageCodes lang={lang} />
-      <LanguagePopulationDetails lang={lang} />
+
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em', alignItems: 'stretch',  marginBottom: '1em'  }}>
+        <div style={{ flex: '1 1 200px' }}>
+          <LanguagePopulationDetails lang={lang} />
+        </div>
+        <div style={{ flex: '1 1 200px' }}>
+          <LanguageWikipediaSection lang={lang} />
+        </div>
+        <div style={{ flex: '1 1 200px' }}>
+          <LanguageVitalitySection lang={lang} />
+        </div> 
+      </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1em', alignItems: 'stretch',  marginBottom: '1em'  }}>
+        <div style={{ flex: '2 1 300px' }}>
+          <LanguageSpeakersByTerritorySection lang={lang} />
+        </div>
+        <div style={{ flex: '1 1 200px' }}>
+          <LanguageDetailsVitalityAndViability lang={lang} />
+        </div>
+      </div>
       <LanguageAttributes lang={lang} />
-      <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
       <LanguageLocation lang={lang} />
     </div>
