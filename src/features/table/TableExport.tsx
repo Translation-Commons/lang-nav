@@ -9,6 +9,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';
 import LoadingIcon from '@shared/ui/LoadingIcon';
 
@@ -99,6 +100,12 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
     (exportType: ExportType) => {
       if (objectsFilteredAndSorted.length === 0) return;
       setIsExporting(true);
+      trackEvent('data_exported', {
+        export_type: exportType,
+        object_type: pageParams.objectType,
+        row_count: objectsFilteredAndSorted.length,
+        column_count: visibleColumns.length,
+      });
       void (async () => {
         try {
           switch (exportType) {
