@@ -59,17 +59,16 @@ function LangNavTitle({ title }: { title?: string }) {
 type DocCardProps = {
   title: string;
   href?: string;
-  external?: boolean;
   isDisabled?: boolean;
 };
 
 export const DocCard: React.FC<PropsWithChildren<DocCardProps>> = ({
   title,
   href,
-  external,
   isDisabled,
   children,
 }) => {
+  const external = href != null && href.startsWith('http');
   const cardStyle: React.CSSProperties = {
     padding: '0.5em 1em',
     display: 'flex',

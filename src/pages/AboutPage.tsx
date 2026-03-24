@@ -78,30 +78,28 @@ const AboutPage: React.FC = () => {
           project:
         </div>
         <DocsCardGrid>
-          <DocCard title="The Unicode Consortium" href="https://home.unicode.org/" external={true}>
+          <DocCard title="The Unicode Consortium" href="https://home.unicode.org/">
             For providing the Unicode standard and the Common Locale Data Repository (CLDR), which
             serves as a foundation for the language data used in this application.
           </DocCard>
           <DocCard
             title="The Human Language Technology group at the bme.hu and mta.hu"
             href="https://hlt.bme.hu/en/projects/lingvit"
-            external={true}
           >
             For their work cataloging language vitality and providing great insights on which data
             to use for this website.
           </DocCard>
-          <DocCard title="Ethnologue" href="https://www.ethnologue.com/" external={true}>
+          <DocCard title="Ethnologue" href="https://www.ethnologue.com/">
             For their comprehensive database of world languages, which serves as a valuable resource
             for this project.
           </DocCard>
-          <DocCard title="Glottolog" href="https://www.glottolog.org/" external={true}>
+          <DocCard title="Glottolog" href="https://www.glottolog.org/">
             For their work in cataloging the world&apos;s languages and providing a reliable
             reference for language classification.
           </DocCard>
           <DocCard
             title="United Nations: UNESCO, UNStats, and UNData"
             href="https://www.unesco.org/"
-            external={true}
           >
             For their efforts in promoting linguistic diversity and providing valuable data on
             language use worldwide.
@@ -192,7 +190,7 @@ const AboutPage: React.FC = () => {
           provides much of the data for the ISO standards{' '}
           <a href="https://iso639-3.sil.org/">ISO 639-3</a>.
         </DocCard>
-        <DocCard title="Glottolog" href="https://glottolog.org/" external={true}>
+        <DocCard title="Glottolog" href="https://glottolog.org/">
           Glottolog is a comprehensive catalog of the world&apos;s languages, dialects, and language
           families. It provides an extensive taxonomy of languages and dialects in language
           families, information about the endangerment and location of languages, and a large
@@ -201,7 +199,7 @@ const AboutPage: React.FC = () => {
           Institute for Evolutionary Anthropology. https://doi.org/10.5281/zenodo.10804357
           (Available online at http://glottolog.org, Accessed on 2024-10-29.)
         </DocCard>
-        <DocCard title="Ethnologue" href="https://www.ethnologue.com/" external={true}>
+        <DocCard title="Ethnologue" href="https://www.ethnologue.com/">
           Ethnologue is a reference work cataloging all of the world&apos;s known living languages.
           It provides information about the number of speakers, language families, and geographical
           distribution of languages. Ethnologue contains much more complete academic citations for

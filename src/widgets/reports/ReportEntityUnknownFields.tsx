@@ -1,10 +1,11 @@
 import React, { useMemo } from 'react';
+import { Link } from 'react-router';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
-import FieldCoverageTable from '@features/transforms/fields/FieldCoverageTable';
 import getField from '@features/transforms/fields/getField';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
@@ -38,8 +39,6 @@ const ReportEntityUnknownFields: React.FC = () => {
       ),
     [fields, filteredObjects, countTotal],
   );
-
-  const [showFullSummary, setShowFullSummary] = React.useState(false);
 
   return (
     <CollapsibleReport title="Unknown Fields">
@@ -91,10 +90,9 @@ const ReportEntityUnknownFields: React.FC = () => {
             ))}
         </tbody>
       </table>
-      <button onClick={() => setShowFullSummary((prev) => !prev)} style={{ marginTop: '0.5em' }}>
-        {showFullSummary ? 'Hide' : 'Show'} full field coverage table
-      </button>
-      {showFullSummary && <FieldCoverageTable />}
+      <HoverableButton style={{ margin: '0.5em' }}>
+        <Link to="/data-coverage">Go to full data coverage report</Link>
+      </HoverableButton>
     </CollapsibleReport>
   );
 };
