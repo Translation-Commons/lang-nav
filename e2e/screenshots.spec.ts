@@ -2,16 +2,21 @@ import { test, expect } from '@playwright/test';
 
 test.describe('screenshot tests', () => {
   test.beforeEach(async ({ page }) => {
-    // Disable CSS animations and transitions for stable screenshots
-    await page.addStyleTag({
-      content: `
+    // Register an init script so animations/transitions are disabled on every
+    // navigation, including the page.goto() call inside each test.
+    // page.addStyleTag() would only apply to the current (blank) document and
+    // would be lost when goto() loads a new page.
+    await page.addInitScript(() => {
+      const style = document.createElement('style');
+      style.textContent = `
         *, *::before, *::after {
           animation-duration: 0s !important;
           animation-delay: 0s !important;
           transition-duration: 0s !important;
           transition-delay: 0s !important;
         }
-      `,
+      `;
+      (document.head ?? document.documentElement).appendChild(style);
     });
   });
 
