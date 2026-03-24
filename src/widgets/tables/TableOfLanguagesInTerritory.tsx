@@ -62,7 +62,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
             }
             const ecrmlInfo = getECRMLInfo(loc.ecrmlProtection);
             if (!ecrmlInfo) {
-              return 'Yes';
+              return <Deemphasized>None</Deemphasized>;
             }
             return (
               <Hoverable
