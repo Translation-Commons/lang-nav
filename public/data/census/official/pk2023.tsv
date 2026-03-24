@@ -8,9 +8,8 @@
 #url		https://www.pbs.gov.pk/wp-content/uploads/census_tables/tables/table_11_national.pdf
 #tableName		Table 11: Population by Mother Tongue, Sex and Rural/Urban, Census-2023
 #columnName		All Localities - All Sexes (National Total)
-#acquisitionOrder		
+#acquisitionOrder		L1
 #modality		spoken
-#domain		
 #responsesPerIndividual		1
 #geographicScope		whole country
 #age		0+
