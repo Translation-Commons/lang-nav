@@ -26,6 +26,7 @@ const PageNavBar: React.FC = () => {
       <NavBarLink path={'/' + LangNavPageName.Intro}>Intro</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.Docs}>Docs</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.Codes}>Codes</NavBarLink>
       <button
         className="primary"
         type="button"

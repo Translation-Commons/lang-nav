@@ -7,6 +7,7 @@ import DocsPage from '@pages/DocsPage';
 import IntroPage from '@pages/IntroPage';
 import LuckySearchPage from '@pages/LuckySearchPage';
 import PrivacyPolicyPage from '@pages/PrivacyPolicyPage';
+import CodeLookupPage from '@pages/code-lookup/CodeLookupPage';
 
 export default function PageRoutes() {
   return (
@@ -23,6 +24,7 @@ export default function PageRoutes() {
         <Route path={LangNavPageName.About} element={<AboutPage />} />
         <Route path={LangNavPageName.PrivacyPolicy} element={<PrivacyPolicyPage />} />
         <Route path={LangNavPageName.DataCoverage} element={<DataCoveragePage />} />
+        <Route path={LangNavPageName.Codes} element={<CodeLookupPage />} />
       </Routes>
     </>
   );
@@ -55,4 +57,5 @@ export enum LangNavPageName {
   About = 'about',
   PrivacyPolicy = 'privacy-policy',
   DataCoverage = 'data-coverage',
+  Codes = 'codes',
 }
