@@ -7,8 +7,8 @@ const PageFooter: React.FC = () => (
     <div>{/* Empty right side for alignment */}</div>
     <p>
       © {new Date().getFullYear()} <a href="https://translationcommons.org">Translation Commons</a>.
-      See <a href={'about#license'}>license</a>, <a href={'about#contact'}>contact info</a>, and
-      more in the <a href={'about'}>about page</a>.
+      Docs: <a href="about">About</a> | <a href="about#license">License</a> |{' '}
+      <a href="privacy">Privacy Policy</a>.
     </p>
     <CreativeCommonsLicense />
   </footer>

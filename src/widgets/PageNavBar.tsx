@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
+import { LangNavPageName } from '@app/PageRoutes';
+
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 
 import { usePageBrightness } from '@shared/hooks/usePageBrightness';
@@ -21,10 +23,9 @@ const PageNavBar: React.FC = () => {
           <strong>Lang</strong>uage <strong>Nav</strong>igator <em>β</em>
         </span>
       </NavBarTitle>
-      <NavBarLink path="/intro">Intro</NavBarLink>
-      <NavBarLink path="/data">Data</NavBarLink>
-      {/* <NavBarLink path="/details">Details</NavBarLink> */}
-      <NavBarLink path="/about">About</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.Intro}>Intro</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.Docs}>Docs</NavBarLink>
       <button
         className="primary"
         type="button"
