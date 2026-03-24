@@ -1,0 +1,73 @@
+.code-lookup-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2em 1.5em;
+}
+
+.code-lookup-container h2 {
+    margin-top: 0;
+}
+
+.code-lookup-textareas {
+    display: flex;
+    gap: 1em;
+    margin-top: 1em;
+}
+
+@media (max-width: 640px) {
+    .code-lookup-textareas {
+        flex-direction: column;
+    }
+}
+
+.code-lookup-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+}
+
+.code-lookup-column label {
+    font-weight: 600;
+}
+
+.code-lookup-textarea {
+    width: 100%;
+    min-height: 220px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    line-height: 1.6;
+    padding: 0.75em;
+    border: 1px solid var(--color-text-secondary);
+    border-radius: 6px;
+    background-color: var(--color-background);
+    color: var(--color-text);
+    resize: vertical;
+    box-sizing: border-box;
+}
+
+.code-lookup-textarea:focus {
+    outline: 2px solid var(--color-button-primary);
+    border-color: var(--color-button-primary);
+}
+
+.code-lookup-textarea[readonly] {
+    background-color: color-mix(in srgb, var(--color-button-secondary), var(--color-background) 50%);
+}
+
+.code-lookup-actions {
+    display: flex;
+    gap: 0.75em;
+    margin-top: 1em;
+    flex-wrap: wrap;
+}
+
+.code-lookup-status {
+    margin-top: 1em;
+    font-size: 0.9em;
+    color: var(--color-text-secondary);
+}
+
+.code-lookup-status .warning {
+    color: var(--color-text-orange);
+}
