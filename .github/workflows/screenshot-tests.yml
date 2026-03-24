@@ -3,14 +3,21 @@ name: Screenshot Tests
 on:
   pull_request:
   workflow_dispatch:
+    inputs:
+      update-baselines:
+        description: 'Update screenshot baselines and commit them'
+        type: boolean
+        default: false
 
 jobs:
   screenshot-tests:
-    if: github.event.pull_request.head.repo.full_name == github.repository
+    if: github.event.pull_request.head.repo.full_name == github.repository || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.head_ref || github.ref }}
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -36,7 +43,21 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
+      - name: Update screenshot baselines
+        if: inputs.update-baselines
+        run: npm run test:screenshots:update
+
+      - name: Commit updated baselines
+        if: inputs.update-baselines
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add e2e/screenshots.spec.ts-snapshots/
+          git diff --cached --quiet || git commit -m "Update screenshot baselines from CI"
+          git push
+
       - name: Run screenshot tests
+        if: ${{ !inputs.update-baselines }}
         run: npm run test:screenshots
 
       - name: Upload HTML report
