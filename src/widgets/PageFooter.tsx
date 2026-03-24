@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 import CreativeCommonsLicense from './CreativeCommonsLicense';
 
@@ -7,8 +8,8 @@ const PageFooter: React.FC = () => (
     <div>{/* Empty right side for alignment */}</div>
     <p>
       © {new Date().getFullYear()} <a href="https://translationcommons.org">Translation Commons</a>.
-      See <a href={'about#license'}>license</a>, <a href={'about#contact'}>contact info</a>, and
-      more in the <a href={'about'}>about page</a>.
+      Docs: <Link to="about">About</Link> | <Link to="about#license">License</Link> |{' '}
+      <Link to="privacy-policy">Privacy Policy</Link>.
     </p>
     <CreativeCommonsLicense />
   </footer>
