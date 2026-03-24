@@ -92,20 +92,24 @@ export const DocCard: React.FC<PropsWithChildren<DocCardProps>> = ({
   if (href == null || isDisabled) {
     return <div style={cardStyle}>{body}</div>;
   }
+  if (external) {
+    return (
+      <a
+        href={href}
+        title={href}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{ ...cardStyle, textDecoration: 'none' }}
+      >
+        {body}
+      </a>
+    );
+  }
 
   return (
-    <a
-      href={href}
-      title={href}
-      target={external ? '_blank' : undefined}
-      rel={external ? 'noreferrer' : undefined}
-      style={{
-        ...cardStyle,
-        textDecoration: 'none',
-      }}
-    >
+    <Link to={href} title={href} style={{ ...cardStyle, textDecoration: 'none' }}>
       {body}
-    </a>
+    </Link>
   );
 };
 

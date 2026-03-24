@@ -5,7 +5,7 @@ import { DocCard, DocsCardGrid, PageContainer, Section } from '@widgets/DocsComp
 const DocsPage: React.FC = () => {
   return (
     <PageContainer title="Documentation Hub">
-      <main style={{ display: 'flex', gap: '1em', flexDirection: 'column' }}>
+      <div style={{ display: 'flex', gap: '1em', flexDirection: 'column' }}>
         This page brings together the main documents and reference materials for LangNav, including
         project information, privacy details, data transparency notes, and open-source resources.
         <Section title="Core Pages">
@@ -81,7 +81,7 @@ const DocsPage: React.FC = () => {
             </DocCard>
           </DocsCardGrid>
         </Section>
-      </main>
+      </div>
     </PageContainer>
   );
 };

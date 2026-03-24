@@ -117,13 +117,13 @@ const AboutPage: React.FC = () => {
         <div>
           If you have any questions, suggestions, or feedback about the Language Navigator, please{' '}
           <a href="https://github.com/Translation-Commons/lang-nav/issues">
-            file an issue on Github
+            file an issue on GitHub
           </a>{' '}
           or send an email to{' '}
           <a href="mailto:langnav-outreach@translationcommons.org">
             langnav-outreach@translationcommons.org
           </a>
-          . . We are always looking for ways to improve the tool and enhance the quality of the
+          . We are always looking for ways to improve the tool and enhance the quality of the
           language data we provide.
         </div>
       </Section>
@@ -158,7 +158,7 @@ const AboutPage: React.FC = () => {
         </div>
         <div>
           The source code is available in a{' '}
-          <a href="https://github.com/Translation-Commons/lang-nav">Github repository</a>. The data
+          <a href="https://github.com/Translation-Commons/lang-nav">GitHub repository</a>. The data
           files are available in the{' '}
           <a href="https://github.com/Translation-Commons/lang-nav/tree/master/public/data">
             public/data directory of the repository
