@@ -1,0 +1,34 @@
+#codeDisplay		pk2023
+#nameDisplay		Pakistan 2023 Mother Tongue
+#isoRegionCode	PK	
+#yearCollected		2023
+#eligiblePopulation		240458089
+#collectorType		Government
+#collectorName		Pakistan Bureau of Statistics
+#url		https://www.pbs.gov.pk/wp-content/uploads/census_tables/tables/table_11_national.pdf
+#tableName		Table 11: Population by Mother Tongue, Sex and Rural/Urban, Census-2023
+#columnName		All Localities - All Sexes (National Total)
+#acquisitionOrder		L1
+#modality		spoken
+#responsesPerIndividual		1
+#geographicScope		whole country
+#age		0+
+#residentLocation		de facto
+#notes		Census-2023. Data covers all localities, all sexes, national total. Each person reports one mother tongue (responses per individual = 1).
+Language Code	Language Name	pk2023
+mul	Total	240458089
+urd	Urdu	22249307
+lah/pan	Punjabi	88915544
+snd	Sindhi	34401564
+pus	Pushto	43633946
+bal	Balochi	8117795
+kas	Kashmiri	274080
+lah/skr	Saraiki	28849579
+lah/hind1271	Hindko	5590559
+brh	Brahui	2778670
+scl	Shina	116951
+bft	Balti	52134
+raj/wtm	Mewati	1094219
+kls	Kalasha	7466
+kohi1251	Kohiostani	1039007
+mul	Others	3337268
