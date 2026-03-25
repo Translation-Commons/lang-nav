@@ -7,6 +7,7 @@ import { CensusData } from '@entities/census/CensusTypes';
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import { toTitleCase } from '@shared/lib/stringUtils';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
 
@@ -125,9 +126,7 @@ function CensusSourceSection({ census }: { census: CensusData }) {
       {citation && <DetailsField title="Citation">{citation}</DetailsField>}
       {url && (
         <DetailsField title="URL">
-          <a href={url} target="_blank" rel="noopener noreferrer">
-            {url}
-          </a>
+          <ExternalLink href={url} />
         </DetailsField>
       )}
       {datePublished && (

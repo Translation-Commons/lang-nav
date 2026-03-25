@@ -15,23 +15,13 @@ label {
   margin-right: 4px;
 }
 
-a {
-  color: inherit;
-  cursor: pointer;
-}
-
-a:hover {
-  color: inherit;
-  text-decoration: underline;
-}
-
 div h1:first-child,
 div h2:first-child,
 div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;

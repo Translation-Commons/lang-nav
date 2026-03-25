@@ -1,10 +1,12 @@
-import { ExternalLinkIcon } from 'lucide-react';
 import React from 'react';
 
 type Props = {
   href: string;
 };
 
+/**
+ * For external links
+ */
 export default function LinkButton({ href, children }: React.PropsWithChildren<Props>) {
   return (
     <a href={href} target="_blank" rel="noopener noreferrer">
@@ -16,16 +18,7 @@ export default function LinkButton({ href, children }: React.PropsWithChildren<P
           padding: children !== '' ? '0.25em' : '0',
         }}
       >
-        {children}
-        <ExternalLinkIcon
-          size="1em"
-          style={{
-            marginLeft: '0.25em',
-            verticalAlign: 'middle',
-            paddingBottom: '0.125em',
-            paddingRight: '0.125em',
-          }}
-        />
+        {children} <span aria-hidden={true}>↗</span>
       </button>
     </a>
   );

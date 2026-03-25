@@ -1,12 +1,13 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
-import AboutPage from '@pages/AboutPage';
-import DataCoveragePage from '@pages/DataCoveragePage';
 import DataPage from '@pages/DataPage';
-import DocsPage from '@pages/DocsPage';
+import AboutPage from '@pages/docs/AboutPage';
+import CodeStylePage from '@pages/docs/CodeStylePage';
+import DataCoveragePage from '@pages/docs/DataCoveragePage';
+import DocsPage from '@pages/docs/DocsPage';
+import PrivacyPolicyPage from '@pages/docs/PrivacyPolicyPage';
 import IntroPage from '@pages/IntroPage';
 import LuckySearchPage from '@pages/LuckySearchPage';
-import PrivacyPolicyPage from '@pages/PrivacyPolicyPage';
 
 export default function PageRoutes() {
   return (
@@ -22,6 +23,7 @@ export default function PageRoutes() {
         <Route path={LangNavPageName.Docs} element={<DocsPage />} />
         <Route path={LangNavPageName.About} element={<AboutPage />} />
         <Route path={LangNavPageName.PrivacyPolicy} element={<PrivacyPolicyPage />} />
+        <Route path={LangNavPageName.CodeStyle} element={<CodeStylePage />} />
         <Route path={LangNavPageName.DataCoverage} element={<DataCoveragePage />} />
       </Routes>
     </>
@@ -54,5 +56,6 @@ export enum LangNavPageName {
   Docs = 'docs',
   About = 'about',
   PrivacyPolicy = 'privacy-policy',
+  CodeStyle = 'code-style',
   DataCoverage = 'data-coverage',
 }
