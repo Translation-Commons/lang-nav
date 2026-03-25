@@ -1,129 +1,70 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import { PageParamKey } from '@features/params/PageParamTypes';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
+import SelectorLabel from '@features/params/ui/SelectorLabel';
+import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
 const PopulationFilterSelector: React.FC = () => {
   const { populationLowerLimit, populationUpperLimit, updatePageParams } = usePageParams();
 
-  // Local state to avoid input jumping or effect loops while typing
-  const [minInput, setMinInput] = useState<string | undefined>(undefined);
-  const [maxInput, setMaxInput] = useState<string | undefined>(undefined);
-
-  const displayMin = minInput !== undefined ? minInput : (populationLowerLimit ?? '');
-  const displayMax = maxInput !== undefined ? maxInput : (populationUpperLimit ?? '');
-
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-      <div>
-        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.25em' }}>
-          Min Population
-        </label>
-        <span
-          style={{
-            fontSize: '0.9em',
-            color: 'var(--color-text-secondary)',
-            display: 'block',
-            marginBottom: '0.5em',
-          }}
-        >
-          Filter results to show only items with population above this threshold
-        </span>
-        <div
-          style={{
-            border: '0.125em solid var(--color-button-primary)',
-            display: 'flex',
-            justifyContent: 'left',
-            width: 'fit-content',
-            borderRadius: '1em',
-            gap: '0.5em',
-            paddingLeft: '0.5em',
-          }}
-        >
-          <input
-            type="number"
-            value={displayMin}
-            onChange={(e) => setMinInput(e.target.value)}
-            style={{
-              width: '6em',
-              border: 'none',
-              lineHeight: '1.5em',
-              background: 'none',
-              marginLeft: '0.25em',
-              color: 'var(--color-button-primary)',
-              outline: 'none',
-            }}
-            placeholder="0"
+    <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+        <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+          <SelectorLabel
+            description="Filter results to show only items with population above this threshold"
+            label="Min Population"
           />
-          <button
-            onClick={() => {
-              const val = parseInt(minInput || '');
+          <TextInput
+            inputStyle={{ minWidth: '6em' }}
+            getSuggestions={async () => [
+              { searchString: '0', label: '0' },
+              { searchString: '1000', label: '1,000' },
+              { searchString: '100000', label: '100,000' },
+              { searchString: '1000000', label: '1,000,000' },
+              { searchString: '', label: 'default' },
+            ]}
+            onSubmit={(limitStr: string) => {
+              const val = parseInt(limitStr);
               updatePageParams({ populationLowerLimit: isNaN(val) ? undefined : val });
-              setMinInput(undefined); // Reset local state so it pulls from pageParams
             }}
-            className={populationLowerLimit !== undefined ? 'primary' : undefined}
-          >
-            Set Min
-          </button>
-        </div>
-      </div>
-
-      <div>
-        <label style={{ display: 'block', fontWeight: 'bold', marginBottom: '0.25em' }}>
-          Max Population
-        </label>
-        <span
-          style={{
-            fontSize: '0.9em',
-            color: 'var(--color-text-secondary)',
-            display: 'block',
-            marginBottom: '0.5em',
-          }}
-        >
-          Filter results to show only items with population below this threshold
-        </span>
-        <div
-          style={{
-            border: '0.125em solid var(--color-button-primary)',
-            display: 'flex',
-            justifyContent: 'left',
-            width: 'fit-content',
-            borderRadius: '1em',
-            gap: '0.5em',
-            paddingLeft: '0.5em',
-          }}
-        >
-          <input
-            type="number"
-            value={displayMax}
-            onChange={(e) => setMaxInput(e.target.value)}
-            style={{
-              width: '6em',
-              border: 'none',
-              lineHeight: '1.5em',
-              background: 'none',
-              marginLeft: '0.25em',
-              color: 'var(--color-button-primary)',
-              outline: 'none',
-            }}
-            placeholder="∞"
+            pageParameter={PageParamKey.populationLowerLimit}
+            placeholder="0"
+            value={populationLowerLimit !== undefined ? populationLowerLimit.toString() : ''}
           />
-          <button
-            onClick={() => {
-              const val = parseInt(maxInput || '');
+        </div>
+
+        <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+          <SelectorLabel
+            description="Filter results to show only items with population below this threshold"
+            label="Max Population"
+          />
+          <TextInput
+            inputStyle={{ minWidth: '6em' }}
+            getSuggestions={async () => [
+              { searchString: '1000', label: '1,000' },
+              { searchString: '100000', label: '100,000' },
+              { searchString: '1000000', label: '1,000,000' },
+              { searchString: '10000000', label: '10,000,000' },
+              { searchString: '100000000', label: '100,000,000' },
+              { searchString: '', label: 'default' },
+            ]}
+            onSubmit={(limitStr: string) => {
+              const val = parseInt(limitStr);
               updatePageParams({ populationUpperLimit: isNaN(val) ? undefined : val });
-              setMaxInput(undefined); // Reset local state so it pulls from pageParams
             }}
-            className={
-              populationUpperLimit !== undefined && populationUpperLimit !== Number.MAX_SAFE_INTEGER
-                ? 'primary'
-                : undefined
-            }
-          >
-            Set Max
-          </button>
+            pageParameter={PageParamKey.populationUpperLimit}
+            placeholder="∞"
+            value={populationUpperLimit !== undefined ? populationUpperLimit.toString() : ''}
+          />
         </div>
       </div>
-    </div>
+    </SelectorDisplayProvider>
   );
 };
 
