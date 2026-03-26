@@ -331,6 +331,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
       return [
         Field.Territory,
         Field.WritingSystem,
+        Field.Population,
         Field.Language,
         Field.Modality,
         Field.LanguageScope,

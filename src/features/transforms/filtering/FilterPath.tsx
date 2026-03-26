@@ -44,11 +44,40 @@ const FilterPath: React.FC = () => {
     vitalityEthFine,
     vitalityEthCoarse,
     writingSystemFilter,
+    populationLowerLimit,
+    populationUpperLimit,
   } = usePageParams();
   const defaultParams = getDefaultParams();
   const filterLabels = getFilterLabels();
 
   const filters = [
+    // Population Filter
+    (populationLowerLimit !== defaultParams.populationLowerLimit ||
+      populationUpperLimit !== defaultParams.populationUpperLimit) && (
+      <>
+        Population:{' '}
+        {[
+          populationLowerLimit !== undefined ? `>= ${populationLowerLimit.toLocaleString()}` : null,
+
+          populationUpperLimit !== undefined && populationUpperLimit !== 10e9
+            ? `<= ${populationUpperLimit.toLocaleString()}`
+            : null,
+        ]
+          .filter(Boolean)
+          .join(' and ')}
+        <HoverableButton
+          buttonType="reset"
+          hoverContent="Clear population filters"
+          onClick={() =>
+            updatePageParams({ populationLowerLimit: undefined, populationUpperLimit: undefined })
+          }
+          style={{ padding: '0.25em' }}
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+
     // Vitality ISO Filter
     isoStatus.length > 0 && (
       <>

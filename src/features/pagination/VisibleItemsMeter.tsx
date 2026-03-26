@@ -5,9 +5,11 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import { getFilterByVitality, getScopeFilter } from '@features/transforms/filtering/filter';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -28,6 +30,8 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   const filterByConnections = getFilterByConnections();
   const filterByScope = getScopeFilter();
   const filterByVitality = getFilterByVitality();
+  const filterBy = useFilters();
+  const filterByPopulation = filterBy[Field.Population];
 
   // Compute the number of filtered items
   const nOverall = objects.length;
@@ -36,8 +40,16 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
       .filter(filterByScope)
       .filter(filterByConnections)
       .filter(filterByVitality)
+      .filter(filterByPopulation)
       .filter(filterBySubstring).length;
-  }, [objects, filterByScope, filterByConnections, filterByVitality, filterBySubstring]);
+  }, [
+    objects,
+    filterByScope,
+    filterByConnections,
+    filterByVitality,
+    filterByPopulation,
+    filterBySubstring,
+  ]);
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
