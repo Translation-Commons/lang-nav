@@ -1,4 +1,5 @@
 import { MailIcon } from 'lucide-react';
+import React from 'react';
 
 const ExternalLink = ({ href, children }: { href: string; children?: React.ReactNode }) => {
   if (children == null) {

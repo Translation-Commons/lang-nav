@@ -17,7 +17,11 @@ const CreativeCommonsLicense: React.FC = () => {
         </span>
       }
     >
-      <a href="https://creativecommons.org/licenses/by-sa/4.0/">
+      <a
+        href="https://creativecommons.org/licenses/by-sa/4.0/"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <img
           alt="Creative Commons License"
           src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png"
