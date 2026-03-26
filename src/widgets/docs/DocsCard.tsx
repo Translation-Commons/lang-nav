@@ -37,7 +37,7 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
         {href != null && isDisabled && <Pill>Coming soon</Pill>}
         {external && !isDisabled ? <span aria-hidden="true">↗</span> : null}
       </div>
-      <p style={{ margin: 0, fontWeight: 'lighter' }}>{children}</p>
+      <div style={{ fontWeight: 'lighter' }}>{children}</div>
     </>
   );
 

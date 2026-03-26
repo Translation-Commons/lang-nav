@@ -27,7 +27,7 @@ const PageNavBar: React.FC = () => {
       </NavBarTitle>
       <NavBarLink path={'/' + LangNavPageName.Intro}>Intro</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
-      <NavBarLink path={'/' + LangNavPageName.Docs}>Docs</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.About}>About</NavBarLink>
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <SearchBar />
       </div>

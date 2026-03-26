@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import React, { ReactNode } from 'react';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
@@ -6,15 +6,18 @@ import InternalLink from '@features/params/InternalLink';
 
 import LargeLangNavLogo from './LargeLangNavLogo';
 
-function DocsPageContainer({ children, title }: { children: ReactNode; title: ReactNode }) {
-  const isCurrentPageDocs = window.location.pathname.includes('/docs');
+type Props = React.PropsWithChildren<{
+  title: ReactNode;
+  showDocsLink?: boolean;
+}>;
 
+function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
   return (
     <main style={{ margin: '2em auto', maxWidth: '800px', textAlign: 'start' }}>
       <div style={{ display: 'flex', gap: '1em', flexDirection: 'column' }}>
         <TitleWithLogo title={title} />
-        {!isCurrentPageDocs && (
-          <InternalLink page={LangNavPageName.Docs}>◀ Documentation Hub</InternalLink>
+        {showDocsLink && (
+          <InternalLink page={LangNavPageName.About}>◀ Documentation Hub</InternalLink>
         )}
         {children}
       </div>
