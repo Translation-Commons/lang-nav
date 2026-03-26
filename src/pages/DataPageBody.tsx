@@ -7,7 +7,7 @@ import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import ResultCount from '@features/pagination/ResultCount';
 import FilterPath from '@features/transforms/filtering/FilterPath';
-import SearchBar from '@features/transforms/search/SearchBar';
+import SearchBySelector from '@features/transforms/search/SearchBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
@@ -17,11 +17,7 @@ const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 const DataPageBody: React.FC = () => {
   return (
     <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
-      <div style={{ display: 'flex', alignItems: 'center', flexDirection: 'column' }}>
-        <SearchBar />
-        <EntityTypeTabs />
-      </div>
-
+      <EntityTypeTabs />
       <div
         style={{
           display: 'flex',
@@ -46,6 +42,7 @@ const DataPageBody: React.FC = () => {
             gap: '0.5rem',
           }}
         >
+          <SearchBySelector />
           <SortBySelector showLabel={false} />
           <ViewSelector />
         </div>

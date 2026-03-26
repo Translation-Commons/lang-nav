@@ -9,7 +9,6 @@ import {
 import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import SearchBySelector from './SearchBySelector';
 import useSearchSuggestions from './useSearchSuggestions';
 
 const SearchBar: React.FC = () => {
@@ -23,19 +22,32 @@ const SearchBar: React.FC = () => {
         style={{
           display: 'inline-flex',
           alignItems: 'center',
-          marginBottom: '0.5em',
+          margin: '0 auto',
+          borderRadius: '1em',
+          backgroundColor: 'var(--color-background)',
         }}
       >
         <TextInput
-          label={<SearchIcon size="1em" display="block" style={{ padding: '0.5em' }} />}
-          inputStyle={{ minWidth: '20em', border: 'none' }}
+          label={
+            <SearchIcon
+              size="1em"
+              display="block"
+              style={{ padding: '0.5em', color: 'var(--color-text)' }}
+            />
+          }
+          inputStyle={{
+            minWidth: '20em',
+            border: 'none',
+            backgroundColor: 'var(--color-background)',
+            color: 'var(--color-text)',
+            outline: 'none',
+          }}
           getSuggestions={getSearchSuggestions}
           onSubmit={setSearchString}
           placeholder="search"
           pageParameter={PageParamKey.searchString}
           value={searchString}
         />
-        <SearchBySelector />
       </form>
     </SelectorDisplayProvider>
   );

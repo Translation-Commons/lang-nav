@@ -4,6 +4,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
+import SearchBar from '@features/transforms/search/SearchBar';
 
 import { usePageBrightness } from '@shared/hooks/usePageBrightness';
 
@@ -26,10 +27,13 @@ const PageNavBar: React.FC = () => {
       <NavBarLink path={'/' + LangNavPageName.Intro}>Intro</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.Docs}>Docs</NavBarLink>
+      <div style={{ display: 'flex', flexGrow: 1 }}>
+        <SearchBar />
+      </div>
       <button
         className="primary"
         type="button"
-        style={{ marginLeft: 'auto', padding: '0.5em .5em', marginRight: '0.5em' }}
+        style={{ padding: '0.5em', whiteSpace: 'nowrap' }}
         onClick={() => setFeedbackOpen(true)}
       >
         Feedback
