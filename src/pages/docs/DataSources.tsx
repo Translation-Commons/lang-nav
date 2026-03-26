@@ -81,7 +81,7 @@ const DataSourcesPage: React.FC = () => {
 
       <DocsSection title="Concepts">
         <DocsCard title="IDs">
-          The various language IDs (eg. ISO 3166 territory codes or language glottcodes) come from
+          The various language IDs (eg. ISO 3166 territory codes or language glottocodes) come from
           their respective original database (ISO, Glottolog, CLDR). When an object has multiple
           identities, it has been manually matched by the Language Navigator team to a single
           entity. For instance, English is represented in CLDR by the ISO 639-1 code{' '}

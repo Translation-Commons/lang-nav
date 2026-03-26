@@ -8,6 +8,7 @@ import DocsCard from '@widgets/docs/DocsCard';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import DocsSection from '@widgets/docs/DocsSection';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
 
 import ExternalLink from '@shared/ui/ExternalLink';
@@ -116,24 +117,20 @@ const TermsOfUsePage: React.FC = () => {
           If you use Language Navigator in your research, publications, or projects, we ask that you
           cite it as follows:
         </div>
-        <div
+        <HoverableButton
+          hoverContent="Click to copy citation"
           style={{
             margin: '1em',
-            backgroundColor: 'var(--color-button-secondary)',
             padding: '1em',
-            borderRadius: '0.5em',
-            cursor: 'pointer',
             display: 'flex',
             alignItems: 'center',
-            gap: '0.5em',
+            textAlign: 'left',
           }}
-          onClick={() => {
-            navigator.clipboard.writeText(citation);
-          }}
+          onClick={() => navigator.clipboard.writeText(citation)}
         >
-          <div> {citation}</div>
+          <div>{citation}</div>
           <CopyIcon />
-        </div>
+        </HoverableButton>
       </DocsSection>
       <DocsSection title="Contact">
         <div>
