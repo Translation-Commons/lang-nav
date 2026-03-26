@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
+import InternalLink from '@features/params/InternalLink';
 import SearchBar from '@features/transforms/search/SearchBar';
 
 import { usePageBrightness } from '@shared/hooks/usePageBrightness';
@@ -95,9 +96,12 @@ const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
         gap: '0.25em',
       }}
     >
-      <Link to="/" style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
+      <InternalLink
+        page={LangNavPageName.Intro}
+        style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}
+      >
         {children}
-      </Link>
+      </InternalLink>
     </h1>
   );
 };

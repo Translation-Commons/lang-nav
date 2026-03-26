@@ -1,8 +1,10 @@
 import React, { useMemo } from 'react';
-import { Link } from 'react-router';
+
+import { LangNavPageName } from '@app/PageRoutes';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
@@ -91,7 +93,9 @@ const ReportEntityUnknownFields: React.FC = () => {
         </tbody>
       </table>
       <HoverableButton style={{ margin: '0.5em' }}>
-        <Link to="/data-coverage">Go to full data coverage report</Link>
+        <InternalLink page={LangNavPageName.DataCoverage}>
+          Go to full data coverage report
+        </InternalLink>
       </HoverableButton>
     </CollapsibleReport>
   );

@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 
 import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
-import { PageContainer } from '@widgets/DocsComponents';
+import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import Loading from '@widgets/Loading';
 
 const FieldCoverageTable = React.lazy(
@@ -9,7 +9,7 @@ const FieldCoverageTable = React.lazy(
 );
 const DataCoveragePage: React.FC = () => {
   return (
-    <PageContainer title="Data Coverage">
+    <DocsPageContainer title="Data Coverage">
       <p>
         This table shows the coverage of different fields across all entities in LangNav. This shows
         both the capabilities for different fields as well as potential gaps in user experience or
@@ -20,7 +20,7 @@ const DataCoveragePage: React.FC = () => {
           <FieldCoverageTable />
         </FilterPanelProvider>
       </Suspense>
-    </PageContainer>
+    </DocsPageContainer>
   );
 };
 

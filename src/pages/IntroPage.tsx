@@ -1,21 +1,14 @@
 import React from 'react';
 
 import CommonObjectives from '@widgets/CommonObjectives';
-
-import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+import LargeLangNavLogo from '@widgets/docs/LargeLangNavLogo';
 
 const IntroPage: React.FC = () => {
-  const { pageBrightness } = usePageBrightness();
-
   return (
     <IntroPageContainer>
-      <img
-        src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
-        width="240px"
-        height="120px"
-        alt="LangNav Logo"
-        style={{ marginTop: '1.5em' }}
-      />
+      <div style={{ marginTop: '1em' }}>
+        <LargeLangNavLogo width={240} />
+      </div>
       <div style={{ margin: '.5em 0', fontSize: '3em' }}>
         Welcome to the <strong>Lang</strong>uage <strong>Nav</strong>igator
       </div>

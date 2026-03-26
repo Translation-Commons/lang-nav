@@ -15,16 +15,6 @@ label {
   margin-right: 4px;
 }
 
-a {
-  color: inherit;
-  cursor: pointer;
-}
-
-a:hover {
-  color: inherit;
-  text-decoration: underline;
-}
-
 div h1:first-child,
 div h2:first-child,
 div h3:first-child {
