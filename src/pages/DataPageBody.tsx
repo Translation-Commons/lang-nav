@@ -7,7 +7,6 @@ import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import ResultCount from '@features/pagination/ResultCount';
 import FilterPath from '@features/transforms/filtering/FilterPath';
-import SearchBySelector from '@features/transforms/search/SearchBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
@@ -42,7 +41,6 @@ const DataPageBody: React.FC = () => {
             gap: '0.5rem',
           }}
         >
-          <SearchBySelector />
           <SortBySelector showLabel={false} />
           <ViewSelector />
         </div>

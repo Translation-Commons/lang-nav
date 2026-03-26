@@ -30,6 +30,7 @@ import {
   PercentIcon,
   RulerDimensionLineIcon,
   RulerIcon,
+  ScrollTextIcon,
   TextIcon,
   UserCheckIcon,
   UsersIcon,
@@ -103,7 +104,9 @@ export function getFieldIcon(field: Field): LucideIcon {
       return MonitorSmartphoneIcon;
     case Field.VariantTag:
       return MapPinIcon;
-    case Field.Source:
+    case Field.SourceForLanguage:
+      return ScrollTextIcon;
+    case Field.SourceForPopulation:
       return BracketsIcon;
 
     case Field.CountOfLanguages:

@@ -32,6 +32,8 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
+import { getLanguageSourcesForEntity } from '../filtering/filterByEnum';
+
 import Field from './Field';
 
 // Get's a primitive value for a given object and field, used for sorting and filtering.
@@ -117,8 +119,10 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getKeyboardForEntity(object)?.platform;
     case Field.VariantTag:
       return getKeyboardForEntity(object)?.variantTagCode;
-    case Field.Source:
+    case Field.SourceForPopulation:
       return getCensusForEntity(object)?.collectorName;
+    case Field.SourceForLanguage:
+      return getLanguageSourcesForEntity(object)?.join(', ') || undefined;
 
     // Counts of Related Objects
     case Field.CountOfLanguages:

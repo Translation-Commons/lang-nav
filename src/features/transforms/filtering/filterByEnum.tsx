@@ -1,5 +1,5 @@
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import {
   LanguageISOStatus,
   VitalityEthnologueCoarse,
@@ -78,4 +78,29 @@ export function buildFilterByVitalityEthnologueCoarse(
       ethnologueCoarseStatuses.includes(language.vitality.ethCoarse)
     );
   };
+}
+
+export function buildFilterByLanguageSource(languageSource: LanguageSource): FilterFunctionType {
+  if (!languageSource || languageSource === LanguageSource.Combined) return () => true;
+
+  return (object: ObjectData): boolean => {
+    const language = getLanguageForEntity(object);
+    if (!language) return true;
+    const sources = getLanguageSourcesForEntity(object);
+    return sources.includes(languageSource);
+  };
+}
+
+export function getLanguageSourcesForEntity(ent: ObjectData): LanguageSource[] {
+  const language = getLanguageForEntity(ent);
+  if (!language) return [];
+  const sources = [];
+  if (language.ISO.code != null && language.ISO.retirementReason == null) {
+    sources.push(LanguageSource.ISO);
+    sources.push(LanguageSource.BCP);
+  }
+  if (language.Glottolog.code != null) sources.push(LanguageSource.Glottolog);
+  if (language.CLDR.code != null && language.CLDR.dataProvider == null)
+    sources.push(LanguageSource.CLDR);
+  return sources;
 }

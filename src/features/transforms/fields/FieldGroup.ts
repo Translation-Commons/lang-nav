@@ -48,7 +48,8 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.Region:
     case Field.VariantTag:
     case Field.Platform:
-    case Field.Source:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
       return FieldGroup.Relation;
     case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
