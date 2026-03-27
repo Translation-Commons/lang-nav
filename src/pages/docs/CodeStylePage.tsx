@@ -1,5 +1,7 @@
 import React from 'react';
 
+import PageBrightnessSelector from '@widgets/controls/selectors/PageBrightnessSelector';
+import ColorSwatch from '@widgets/docs/ColorSwatch';
 import DocsCard from '@widgets/docs/DocsCard';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import DocsSection from '@widgets/docs/DocsSection';
@@ -7,6 +9,10 @@ import DocsSection from '@widgets/docs/DocsSection';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 import LinkButton from '@shared/ui/LinkButton';
@@ -86,8 +92,91 @@ const CodeStylePage: React.FC = () => {
           </table>
         </DocsCard>
       </DocsSection>
+      <DocsSection title="Colors">
+        <div>
+          Use CSS variables for colors to maintain consistency and make it easy to update the color
+          scheme across the site. Colors should be chosen to ensure sufficient contrast for
+          readability and accessibility. Use semantic colors (e.g., red for errors, green for
+          success) to convey meaning through color. These colors adapt to the page brightness
+          setting:
+          <div style={{ display: 'inline-block' }}>
+            <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+              <PageBrightnessSelector />
+            </SelectorDisplayProvider>
+          </div>
+        </div>
+        <DocsCard title="Text">
+          <SwatchsGrid>
+            <ColorSwatch variable="--color-text" />
+            <ColorSwatch variable="--color-text-secondary" />
+            <ColorSwatch variable="--color-text-highlight" />
+          </SwatchsGrid>
+        </DocsCard>
+        <DocsCard title="Buttons">
+          <SwatchsGrid>
+            <ColorSwatch variable="--color-button-primary" />
+            <ColorSwatch variable="--color-button-secondary" />
+            <ColorSwatch variable="--color-button-hover" />
+          </SwatchsGrid>
+        </DocsCard>
+        <DocsCard title="Other">
+          <SwatchsGrid>
+            <ColorSwatch variable="--color-background" />
+            <ColorSwatch variable="--color-shadow" />
+          </SwatchsGrid>
+        </DocsCard>
+        <DocsCard title="Semantic Colors">
+          <SwatchsGrid>
+            <ColorSwatch variable="--color-text-red" />
+            <ColorSwatch variable="--color-text-orange" />
+            <ColorSwatch variable="--color-text-yellow" />
+            <ColorSwatch variable="--color-text-purple" />
+            <ColorSwatch variable="--color-text-blue" />
+            <ColorSwatch variable="--color-text-green" />
+          </SwatchsGrid>
+        </DocsCard>
+      </DocsSection>
     </DocsPageContainer>
   );
 };
+
+const SwatchsGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
+  return (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, minmax(200px, 1fr))',
+        gap: '0.5em',
+      }}
+    >
+      {' '}
+      {children}
+    </div>
+  );
+};
+
+// --color-text: #04355c;
+// /* Primary text color */
+// --color-text-secondary: grey;
+// --color-text-highlight: #ffffa1;
+// --color-background: #ffffff;
+// /* App/page background */
+
+// --color-button-primary: #007bff;
+// /* Bright, clickable primary action */
+// --color-button-secondary: #f0f0f0;
+// /* Inactive selection options, secondary buttons */
+// --color-button-hover: #3399ff;
+// /* selector hovered over or active*/
+
+// --color-shadow: rgba(0, 0, 0, 0.1);
+// /* Subtle shadow for depth */
+
+// --color-text-red: #df7e7c;
+// --color-text-orange: #fb8c00;
+// --color-text-yellow: #fbc02d;
+// --color-text-green: #43a047;
+// --color-text-blue: #1e88e5;
+// --color-text-purple: #8e24aa;
 
 export default CodeStylePage;

@@ -23,8 +23,6 @@ import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 import ViewSelector from './selectors/ViewSelector';
 
-import './controls.css';
-
 const OptionsPanel: React.FC = () => {
   usePageArrowKeys();
 
