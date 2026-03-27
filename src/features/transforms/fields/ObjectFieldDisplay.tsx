@@ -63,10 +63,13 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Language:
     case Field.LanguageFamily:
     case Field.WritingSystem:
+    case Field.Region:
     case Field.Territory:
     case Field.Platform:
     case Field.OutputScript:
     case Field.VariantTag:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
     case Field.VitalityMetascore:
@@ -109,8 +112,6 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.WritingSystemScope:
     case Field.Coordinates:
     case Field.GovernmentStatus:
-    case Field.Region:
-    case Field.Source:
     case Field.None:
       return undefined;
 

@@ -38,7 +38,8 @@ enum Field {
   Territory = 'Territory',
   VariantTag = 'Variant Tag',
   Platform = 'Platform',
-  Source = 'Source',
+  SourceForPopulation = 'Source for Population',
+  SourceForLanguage = 'Source for Language',
 
   // Relation - Counts
   CountOfLanguages = '# of Languages',

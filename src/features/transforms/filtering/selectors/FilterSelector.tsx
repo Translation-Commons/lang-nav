@@ -4,6 +4,7 @@ import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
+import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import SearchBar from '@features/transforms/search/SearchBar';
 import TransformEnum from '@features/transforms/TransformEnum';
 
@@ -35,6 +36,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
       return <LanguageISOStatusSelector />;
     case Field.Name:
       return <SearchBar />; // Technically correct but not recommended usage
+    case Field.SourceForLanguage:
+      return <LanguageSourceSelector display={SelectorDisplay.ButtonList} />;
     default:
       return null;
   }

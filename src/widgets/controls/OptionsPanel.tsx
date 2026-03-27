@@ -12,14 +12,12 @@ import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSe
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import { AllApplicableFilterSelectors } from '@features/transforms/filtering/selectors/FilterSelector';
 import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
+import SearchBySelector from '@features/transforms/search/SearchBySelector';
 import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortBySelector';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
-import { ObjectiveList } from '../CommonObjectives';
-
 import ResizablePanel from './ResizablePanel';
-import LanguageSourceSelector from './selectors/LanguageSourceSelector';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
@@ -33,16 +31,6 @@ const OptionsPanel: React.FC = () => {
   return (
     <ResizablePanel defaultWidth={300} purpose="filters" title="Options">
       <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
-        <OptionsPanelSection title="Common Actions" optionsName="common actions">
-          <div>{/* intentionally blank */}</div>
-          <ObjectiveList />
-        </OptionsPanelSection>
-
-        <OptionsPanelSection title="Data" optionsName="data options">
-          <LanguageSourceSelector display={SelectorDisplay.ButtonList} />
-          <ProfileSelector />
-        </OptionsPanelSection>
-
         <OptionsPanelSection title="Filter" optionsName="filters">
           <AllApplicableFilterSelectors />
         </OptionsPanelSection>
@@ -59,6 +47,8 @@ const OptionsPanel: React.FC = () => {
           <FieldFocusSelector />
           <LocaleSeparatorSelector />
           <PageBrightnessSelector />
+          <SearchBySelector />
+          <ProfileSelector />
         </OptionsPanelSection>
       </SelectorDisplayProvider>
     </ResizablePanel>

@@ -89,7 +89,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Territory,
         Field.Region,
         // Field.VariantTag, // Data not available yet
-        Field.Source,
+        Field.SourceForPopulation,
+        Field.SourceForLanguage,
 
         Field.CountOfLanguages,
         Field.CountOfWritingSystems,
@@ -146,6 +147,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Language, // Equivalent to DisplayName for languages
         Field.WritingSystem,
         Field.Territory,
+        Field.SourceForPopulation,
+        Field.SourceForLanguage,
         // Field.Region, // TODO
 
         Field.CountOfLanguages,
@@ -172,7 +175,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.Territory,
         Field.Region,
-        Field.Source,
+        Field.SourceForPopulation,
 
         Field.CountOfLanguages,
         Field.CountOfChildTerritories, // 0 or 1
@@ -332,6 +335,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.Territory,
         Field.WritingSystem,
         Field.Language,
+        Field.SourceForLanguage,
         Field.Modality,
         Field.LanguageScope,
         Field.TerritoryScope,

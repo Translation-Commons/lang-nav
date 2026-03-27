@@ -47,7 +47,8 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.Platform:
     case Field.OutputScript:
     case Field.VariantTag:
-    case Field.Source:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
     case Field.Description:
     case Field.Example:
     case Field.None:

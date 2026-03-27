@@ -1,4 +1,3 @@
-import { SlidersHorizontalIcon } from 'lucide-react';
 import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
@@ -11,7 +10,7 @@ const SearchBySelector: React.FC = () => {
 
   return (
     <Selector
-      selectorLabel={<SlidersHorizontalIcon size="1em" />}
+      selectorLabel="Search by"
       options={Object.values(SearchableField)}
       onChange={(searchBy) => updatePageParams({ searchBy })}
       selected={searchBy}

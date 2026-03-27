@@ -70,7 +70,8 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.Territory:
     case Field.VariantTag:
     case Field.Platform:
-    case Field.Source:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
       // These values are the names of related objects, not ideal for coloring with a gradient, but
       // since they are categorical values with no intrinsic order, a scattered gradient is more
       // appropriate than a sequential or diverging one.
