@@ -8,7 +8,7 @@ import {
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { getLanguageForEntity, getTerritoryForEntity } from '../fields/getField';
+import { getLanguageForEntity, getTerritoryForEntity } from '../fields/getEntityConnection';
 
 import { FilterFunctionType } from './filter';
 
@@ -94,7 +94,7 @@ export function buildFilterByLanguageSource(languageSource: LanguageSource): Fil
 export function getLanguageSourcesForEntity(ent: ObjectData): LanguageSource[] {
   const language = getLanguageForEntity(ent);
   if (!language) return [];
-  const sources = [];
+  const sources: LanguageSource[] = [];
   if (language.ISO.code != null && language.ISO.retirementReason == null) {
     sources.push(LanguageSource.ISO);
     sources.push(LanguageSource.BCP);

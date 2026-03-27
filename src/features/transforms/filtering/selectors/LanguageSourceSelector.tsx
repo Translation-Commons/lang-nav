@@ -39,7 +39,7 @@ function LanguageSourceSelectorDescription() {
     <>
       This determines which authority we use to determine the list of languages shown. Different
       sources also may have different names, IDs, and classifications for languages. For example,
-      let&apos;s look at Chinese through the lens of difference sources:
+      let&apos;s look at Chinese through the lens of different sources:
       <ul>
         <li>
           <strong>Glottolog</strong> features <code>clas1255</code> as &quot;Classical-Middle-Modern
@@ -49,12 +49,12 @@ function LanguageSourceSelectorDescription() {
         </li>
         <li>
           <strong>ISO</strong> uses the code <code>zho</code>, calls it &quot;Chinese&quot; and
-          considers it a macrolanguage. It has direct descendents like Mandarin [<code>cmn</code>]
+          considers it a macrolanguage. It has direct descendants like Mandarin [<code>cmn</code>]
           and Cantonese [<code>yue</code>].
         </li>
         <li>
-          <strong>BCP-47</strong> closely follows ISO usually but when possible users 2-letter
-          codes, so <code>zh</code> for Chinese.
+          <strong>BCP-47</strong> closely follows ISO usually but when possible uses 2-letter codes,
+          so <code>zh</code> for Chinese.
         </li>
         <li>
           <strong>CLDR</strong> treats the language code slightly differently since it is focused on
