@@ -8,8 +8,6 @@ import PageParamsProvider from '@features/params/PageParamsProvider';
 
 import PageRoutes from './PageRoutes';
 
-import './index.css';
-
 function App() {
   return (
     <PageParamsProvider>

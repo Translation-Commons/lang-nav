@@ -1,7 +1,7 @@
-import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+import usePageParams from '@features/params/usePageParams';
 
 function LargeLangNavLogo({ width = 120 }: { width?: number }) {
-  const { pageBrightness } = usePageBrightness();
+  const { pageBrightness } = usePageParams().brightness;
 
   return (
     <img

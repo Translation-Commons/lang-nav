@@ -8,8 +8,6 @@ import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarch
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import './styles.css';
-
 function ViewFamilyTree() {
   const { objectType } = usePageParams();
 

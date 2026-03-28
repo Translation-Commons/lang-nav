@@ -105,8 +105,8 @@ const LanguageFilterDescription: React.FC = () => {
     case ObjectType.Census:
       return (
         <>
-          <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} /> Censuses
-          are not currently supported by this filter.
+          <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} /> Censuses are not
+          currently supported by this filter.
         </>
       );
   }

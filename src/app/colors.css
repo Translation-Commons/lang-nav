@@ -1,0 +1,97 @@
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Guarantee it always spans the viewport */
+}
+
+:root,
+:root.light {
+  /* Primary text color */
+  --color-text: #04355c;
+  --color-text-secondary: #7f7f7f;
+  --color-text-highlight: #ffffa1;
+  --color-text-on-color: var(--color-background);
+
+  /* Bright, clickable primary action */
+  --color-button-primary: #007bff;
+  /* Inactive selection options, secondary buttons */
+  --color-button-secondary: #f0f0f0;
+  /* selector hovered over or active */
+  --color-button-hover: #3399ff;
+
+  /* App/page background */
+  --color-background: #ffffff;
+  /* Light background effect for hovers where there could be interactive elements */
+  /* --color-button-primary with low opacity */
+  --color-background-hover: #007bff1f;
+  /* Subtle shadow for depth */
+  --color-shadow: #00000017;
+
+  --color-red: #df7e7c;
+  --color-orange: #fb8c00;
+  --color-yellow: #fbc02d;
+  --color-green: #43a047;
+  --color-blue: #1e88e5;
+  --color-purple: #8e24aa;
+}
+
+:root {
+  font-family: Avenir, system-ui, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: var(--color-text);
+  background-color: var(--color-background);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-text: #f1f1f1;
+    --color-text-secondary: #aaaaaa;
+    --color-text-highlight: #575741;
+
+    --color-button-primary: #3399ff;
+    --color-button-secondary: #444;
+    --color-button-hover: #0061c3;
+
+    --color-background: #121212;
+    --color-background-hover: #3399ff1f;
+    --color-shadow: #ffffff17;
+
+    --color-red: #ff6e6e;
+    --color-orange: #ffb74d;
+    --color-yellow: #ffeb3b;
+    --color-green: #66bb6a;
+    --color-blue: #42a5f5;
+    --color-purple: #ce93d8;
+  }
+}
+
+/* Keep this in sync with the above @media query */
+:root.dark {
+  --color-text: #f1f1f1;
+  --color-text-secondary: #aaaaaa;
+  --color-text-highlight: #575741;
+
+  --color-button-primary: #3399ff;
+  --color-button-secondary: #444;
+  --color-button-hover: #0061c3;
+
+  --color-background: #121212;
+  --color-background-hover: #3399ff1f;
+  --color-shadow: #ffffff17;
+
+  --color-red: #ff6e6e;
+  --color-orange: #ffb74d;
+  --color-yellow: #ffeb3b;
+  --color-green: #66bb6a;
+  --color-blue: #42a5f5;
+  --color-purple: #ce93d8;
+}

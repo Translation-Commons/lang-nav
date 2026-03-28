@@ -5,12 +5,11 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import InternalLink from '@features/params/InternalLink';
+import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
 
-import { usePageBrightness } from '@shared/hooks/usePageBrightness';
-
 const PageNavBar: React.FC = () => {
-  const { pageBrightness } = usePageBrightness();
+  const { pageBrightness } = usePageParams().brightness;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   return (
@@ -73,7 +72,7 @@ const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
         borderBottom: '0.125em solid var(--color-button-primary)',
         width: '100%',
         rowGap: '0.5em',
-        color: 'var(--color-background)',
+        color: 'var(--color-text-on-color)',
         backgroundColor: 'var(--color-button-primary)',
       }}
     >

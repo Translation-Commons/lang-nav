@@ -13,6 +13,7 @@ export const createMockUsePageParams = (
   return {
     ...getDefaultParams(),
     updatePageParams: mockUpdatePageParams,
+    brightness: { preference: 'light', setPreference: () => {}, pageBrightness: 'light' },
     ...overrides,
   };
 };

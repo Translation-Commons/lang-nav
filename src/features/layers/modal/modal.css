@@ -4,7 +4,8 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.4); /* dim background */
+  background: rgba(0, 0, 0, 0.4);
+  /* dim background */
 
   display: flex;
   align-items: center;
@@ -31,7 +32,7 @@
 }
 
 .ModalTitle {
-  color: var(--color-background);
+  color: var(--color-text-on-color);
   margin-left: 20px;
   margin-right: 8px;
   font-size: 1.75em;
@@ -49,6 +50,7 @@
   min-height: 0;
   max-width: 600px;
 }
+
 .ModalBody .Details {
   margin-top: 1em;
 }

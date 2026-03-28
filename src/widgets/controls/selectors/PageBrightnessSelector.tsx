@@ -1,12 +1,13 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
+import usePageParams from '@features/params/usePageParams';
 
-import { PageBrightnessPreference, usePageBrightness } from '@shared/hooks/usePageBrightness';
+import { PageBrightnessPreference } from '@shared/hooks/usePageBrightness';
 import { toSentenceCase } from '@shared/lib/stringUtils';
 
 const PageBrightnessSelector: React.FC = () => {
-  const { preference, setPreference } = usePageBrightness();
+  const { preference, setPreference } = usePageParams().brightness;
 
   return (
     <Selector<PageBrightnessPreference>

@@ -22,8 +22,6 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-import './styles.css';
-
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import ColorStyles from '@widgets/docs/ColorStyles';
 import DocsCard from '@widgets/docs/DocsCard';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import DocsSection from '@widgets/docs/DocsSection';
@@ -86,6 +87,7 @@ const CodeStylePage: React.FC = () => {
           </table>
         </DocsCard>
       </DocsSection>
+      <ColorStyles />
     </DocsPageContainer>
   );
 };

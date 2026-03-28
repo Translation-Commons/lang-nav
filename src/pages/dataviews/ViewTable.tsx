@@ -9,8 +9,6 @@ import WritingSystemTable from '@widgets/tables/WritingSystemTable';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import './styles.css';
-
 function ViewTable() {
   const { objectType } = usePageParams();
 
