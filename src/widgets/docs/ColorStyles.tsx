@@ -45,7 +45,7 @@ const ColorStyles: React.FC = () => {
         <SwatchesGrid>
           <ColorSwatch
             variable="--color-button-primary"
-            description="Bright, clickable call to actions. Also used to active state or some headers"
+            description="Bright, clickable call to actions. Also used to show selected values or some headers"
           />
           <ColorSwatch
             variable="--color-button-hover"
@@ -59,7 +59,7 @@ const ColorStyles: React.FC = () => {
           <ColorSwatch variable="--color-background" description="Most component backgrounds" />
           <ColorSwatch
             variable="--color-background-hover"
-            description="Light background effect for hovers where there could be interactive elements so you do not want it as deep as button-primary"
+            description="Minor background effect for hovers where there could be interactive elements so you do not want it as deep as button-primary"
           />
           <ColorSwatch variable="--color-shadow" description="Shadow around a component" />
         </SwatchesGrid>

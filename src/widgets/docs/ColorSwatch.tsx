@@ -9,15 +9,15 @@ type Props = {
 
 const ColorSwatch: React.FC<Props> = ({ variable, description }) => {
   const { pageBrightness } = usePageParams().brightness;
-  const swatch = useRef<HTMLDivElement>(null);
+  const colorBoxRef = useRef<HTMLDivElement>(null);
 
   // get the color hex code from the color swatch
   const [colorHex, setColorHex] = React.useState<string>('');
   useEffect(() => {
     // wait a tick to ensure styles are applied
     const timeout = setTimeout(() => {
-      if (swatch.current) {
-        const computedStyle = getComputedStyle(swatch.current);
+      if (colorBoxRef.current) {
+        const computedStyle = getComputedStyle(colorBoxRef.current);
         const resolvedColorHex = computedStyle.getPropertyValue(variable).trim();
         setColorHex(resolvedColorHex);
       }
@@ -28,7 +28,7 @@ const ColorSwatch: React.FC<Props> = ({ variable, description }) => {
   return (
     <div>
       <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.25em' }}>
-        <ColorBox variable={variable} ref={swatch} />
+        <ColorBox variable={variable} colorBoxRef={colorBoxRef} />
         <div>
           <div style={{ fontWeight: 'bold' }}>{variable}</div>
           <div>{colorHex}</div>
@@ -39,10 +39,16 @@ const ColorSwatch: React.FC<Props> = ({ variable, description }) => {
   );
 };
 
-const ColorBox = ({ variable, ref }: { variable: string; ref: React.Ref<HTMLDivElement> }) => {
+const ColorBox = ({
+  variable,
+  colorBoxRef,
+}: {
+  variable: string;
+  colorBoxRef: React.Ref<HTMLDivElement>;
+}) => {
   return (
     <div
-      ref={ref}
+      ref={colorBoxRef}
       style={{
         flexShrink: 0,
         width: '5em',
