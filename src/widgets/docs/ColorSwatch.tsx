@@ -1,44 +1,58 @@
 import React, { useEffect, useRef } from 'react';
 
-import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+import usePageParams from '@features/params/usePageParams';
 
 type Props = {
+  description?: string;
   variable: string;
 };
 
-const ColorSwatch: React.FC<Props> = ({ variable }) => {
-  // get the color code from the color swatch
-  const { preference } = usePageBrightness();
+const ColorSwatch: React.FC<Props> = ({ variable, description }) => {
+  const { pageBrightness } = usePageParams().brightness;
   const swatch = useRef<HTMLDivElement>(null);
-  const [colorValue, setColorValue] = React.useState<string>('');
+
+  // get the color hex code from the color swatch
+  const [colorHex, setColorHex] = React.useState<string>('');
   useEffect(() => {
-    if (swatch.current) {
-      const computedStyle = getComputedStyle(swatch.current);
-      const colorValue = computedStyle.getPropertyValue(variable).trim();
-      setColorValue(colorValue);
-      console.log(`Color value for ${variable}: ${colorValue}`);
-    }
-  }, [variable, preference]);
+    // wait a tick to ensure styles are applied
+    const timeout = setTimeout(() => {
+      if (swatch.current) {
+        const computedStyle = getComputedStyle(swatch.current);
+        const resolvedColorHex = computedStyle.getPropertyValue(variable).trim();
+        setColorHex(resolvedColorHex);
+      }
+    }, 200);
+    return () => clearTimeout(timeout);
+  }, [variable, pageBrightness]);
 
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '1em' }}>
-      <div
-        ref={swatch}
-        style={{
-          flexShrink: 0,
-          width: '5em',
-          height: '5em',
-          borderRadius: '0.5em',
-          border: '1px solid var(--color-text-secondary)',
-          backgroundColor: `var(${variable})`,
-          marginRight: '1em',
-        }}
-      />
-      <div>
-        <div style={{ fontWeight: 'bold' }}>{variable}</div>
-        <div>{colorValue}</div>
+    <div>
+      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.25em' }}>
+        <ColorBox variable={variable} ref={swatch} />
+        <div>
+          <div style={{ fontWeight: 'bold' }}>{variable}</div>
+          <div>{colorHex}</div>
+        </div>
       </div>
+      {description && <div>{description}</div>}
     </div>
+  );
+};
+
+const ColorBox = ({ variable, ref }: { variable: string; ref: React.Ref<HTMLDivElement> }) => {
+  return (
+    <div
+      ref={ref}
+      style={{
+        flexShrink: 0,
+        width: '5em',
+        height: '5em',
+        borderRadius: '0.5em',
+        border: '1px solid var(--color-text-secondary)',
+        backgroundColor: `var(${variable})`,
+        marginRight: '1em',
+      }}
+    />
   );
 };
 

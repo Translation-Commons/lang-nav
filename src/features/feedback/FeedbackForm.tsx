@@ -1,3 +1,4 @@
+import { MailIcon, XIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
@@ -30,15 +31,13 @@ export function FeedbackForm({ onClose }: Props) {
     <div
       style={{
         position: 'fixed',
-        top: 12,
-        right: 12,
+        top: '0.75em',
+        right: '0.75em',
         zIndex: 9999,
-        width: 320,
-        background: 'var(--color-background)',
-        borderRadius: 8,
+        width: '20em', // 320px
+        backgroundColor: 'var(--color-background)',
+        borderRadius: '0.5em',
         boxShadow: '0 4px 12px var(--color-shadow)',
-        fontFamily: 'sans-serif',
-        fontSize: 14,
         color: 'var(--color-text)',
       }}
     >
@@ -48,23 +47,13 @@ export function FeedbackForm({ onClose }: Props) {
           display: 'flex',
           justifyContent: 'space-between',
           alignItems: 'center',
-          padding: '12px 16px',
+          padding: '0.5em 1em',
           borderBottom: '1px solid var(--color-shadow)',
         }}
       >
-        <span style={{ fontWeight: 600, fontSize: 15 }}>Send feedback</span>
-        <HoverableButton
-          onClick={onClose}
-          style={{
-            background: 'none',
-            border: 'none',
-            fontSize: 18,
-            color: 'var(--color-text-secondary)',
-            lineHeight: 1,
-            padding: '0 2px',
-          }}
-        >
-          ×
+        <span style={{ fontWeight: 600 }}>Send feedback</span>
+        <HoverableButton onClick={onClose} style={{ padding: '0.5em' }}>
+          <XIcon size="1em" display="block" />
         </HoverableButton>
       </div>
 
@@ -76,11 +65,11 @@ export function FeedbackForm({ onClose }: Props) {
             value={type}
             onChange={(e) => setType(e.target.value)}
             style={{
-              padding: '6px 8px',
+              padding: '0.5em',
               border: '1px solid var(--color-shadow)',
-              borderRadius: 4,
-              fontSize: 14,
-              background: 'var(--color-background)',
+              borderRadius: '0.5em',
+              color: 'var(--color-text)',
+              backgroundColor: 'var(--color-background)',
             }}
           >
             <option>Bug</option>
@@ -98,12 +87,12 @@ export function FeedbackForm({ onClose }: Props) {
             onChange={(e) => setMessage(e.target.value)}
             placeholder="What did you notice or suggest?"
             style={{
-              padding: '6px 8px',
+              padding: '0.5em',
+              color: 'var(--color-text)',
+              backgroundColor: 'var(--color-background)',
               border: '1px solid var(--color-shadow)',
-              borderRadius: 4,
-              fontSize: 14,
+              borderRadius: '0.5em',
               resize: 'vertical',
-              fontFamily: 'sans-serif',
             }}
           />
         </div>
@@ -114,19 +103,14 @@ export function FeedbackForm({ onClose }: Props) {
         style={{
           display: 'flex',
           justifyContent: 'flex-end',
-          gap: 8,
-          padding: '10px 16px',
+          gap: '0.5em',
+          padding: '.5em 1em',
           borderTop: '1px solid var(--color-shadow)',
         }}
       >
         <HoverableButton
           onClick={onClose}
-          style={{
-            padding: '6px 14px',
-            borderRadius: 4,
-            background: 'var(--color-button-secondary)',
-            fontSize: 13,
-          }}
+          style={{ backgroundColor: 'var(--color-button-secondary)' }}
         >
           Cancel
         </HoverableButton>
@@ -134,17 +118,18 @@ export function FeedbackForm({ onClose }: Props) {
           onClick={handleSubmit}
           disabled={!message.trim()}
           style={{
-            padding: '6px 14px',
-            borderRadius: 4,
-            background: message.trim()
+            backgroundColor: message.trim()
               ? 'var(--color-button-primary)'
               : 'var(--color-button-secondary)',
-            color: message.trim() ? '#fff' : 'var(--color-text-secondary)',
+            color: message.trim() ? 'var(--color-text-on-color)' : 'var(--color-text-secondary)',
             cursor: !message.trim() ? 'not-allowed' : undefined,
-            fontSize: 13,
+            display: 'flex',
+            alignItems: 'center',
+            gap: '0.5em',
           }}
         >
           Open email
+          <MailIcon display="block" size="1em" />
         </HoverableButton>
       </div>
     </div>

@@ -53,8 +53,8 @@ ul.TreeListBranch::before {
 }
 
 .TreeListExpandBranch {
+  color: var(--color-text-on-color);
   background-color: var(--color-button-primary);
-  color: var(--color-background);
 }
 
 .TreeListExpandBranch.empty {

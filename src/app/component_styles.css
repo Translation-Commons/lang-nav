@@ -51,12 +51,12 @@ button {
 }
 
 button.primary {
-  color: var(--color-background);
+  color: var(--color-text-on-color);
   background-color: var(--color-button-primary);
 }
 
 button:hover {
-  color: var(--color-background);
+  color: var(--color-text-on-color);
   background: var(--color-button-hover);
 }
 
@@ -71,7 +71,7 @@ button.tab {
 
 button.tab:hover,
 button.tab:focus {
-  background: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
+  background: var(--color-background-hover);
 }
 
 button.tab:focus {
@@ -153,9 +153,9 @@ div h3:first-child {
 .hoverableText:hover,
 .selector .hoverableText:hover {
   color: var(--color-button-primary);
-  background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
+  background-color: var(--color-background-hover);
 }
 
 tbody tr:hover {
-  background-color: color-mix(in srgb, var(--color-button-primary), var(--color-background) 90%);
+  background-color: var(--color-background-hover);
 }

@@ -7,22 +7,26 @@
 
 :root,
 :root.light {
-  --color-text: #04355c;
   /* Primary text color */
+  --color-text: #04355c;
   --color-text-secondary: #7f7f7f;
   --color-text-highlight: #ffffa1;
+  --color-text-on-color: var(--color-background);
 
-  --color-button-primary: #007bff;
   /* Bright, clickable primary action */
-  --color-button-secondary: #f0f0f0;
+  --color-button-primary: #007bff;
   /* Inactive selection options, secondary buttons */
+  --color-button-secondary: #f0f0f0;
+  /* selector hovered over or active */
   --color-button-hover: #3399ff;
-  /* selector hovered over or active*/
 
-  --color-background: #ffffff;
   /* App/page background */
-  --color-shadow: #00000017;
+  --color-background: #ffffff;
+  /* Light background effect for hovers where there could be interactive elements */
+  /* --color-button-primary with low opacity */
+  --color-background-hover: #007bff1f;
   /* Subtle shadow for depth */
+  --color-shadow: #00000017;
 
   --color-text-red: #df7e7c;
   --color-text-orange: #fb8c00;
@@ -51,13 +55,14 @@
   :root {
     --color-text: #f1f1f1;
     --color-text-secondary: #aaaaaa;
-    --color-background: #121212;
     --color-text-highlight: #575741;
 
     --color-button-primary: #3399ff;
     --color-button-secondary: #444;
     --color-button-hover: #0061c3;
 
+    --color-background: #121212;
+    --color-background-hover: #3399ff1f;
     --color-shadow: #ffffff17;
 
     --color-text-red: #ff6e6e;
@@ -73,13 +78,14 @@
 :root.dark {
   --color-text: #f1f1f1;
   --color-text-secondary: #aaaaaa;
-  --color-background: #121212;
   --color-text-highlight: #575741;
 
   --color-button-primary: #3399ff;
   --color-button-secondary: #444;
   --color-button-hover: #0061c3;
 
+  --color-background: #121212;
+  --color-background-hover: #3399ff1f;
   --color-shadow: #ffffff17;
 
   --color-text-red: #ff6e6e;

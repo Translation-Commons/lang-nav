@@ -3,7 +3,13 @@ import { useEffect, useState } from 'react';
 export type PageBrightnessPreference = 'light' | 'dark' | 'follow device';
 export type PageBrightness = 'light' | 'dark';
 
-export function usePageBrightness() {
+export type PageBrightnessParams = {
+  preference: PageBrightnessPreference;
+  pageBrightness: PageBrightness;
+  setPreference: (newPref: PageBrightnessPreference) => void;
+};
+
+export function usePageBrightness(): PageBrightnessParams {
   const getSystemPageBrightness = (): PageBrightness =>
     window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
 
