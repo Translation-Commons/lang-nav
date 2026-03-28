@@ -31,7 +31,7 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
           }
         >
           <TriangleAlertIcon
-            style={{ color: 'var(--color-text-yellow)', marginRight: '0.25em' }}
+            style={{ color: 'var(--color-yellow)', marginRight: '0.25em' }}
             size="1em"
           />
         </Hoverable>

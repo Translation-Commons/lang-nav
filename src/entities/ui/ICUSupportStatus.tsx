@@ -21,11 +21,11 @@ const ICUSupportStatus: React.FC<{ object: ObjectData }> = ({ object }) => {
 
   return coverage.inICU ? (
     <CheckCircle2Icon
-      style={{ color: 'var(--color-text-green)', verticalAlign: 'middle' }}
+      style={{ color: 'var(--color-green)', verticalAlign: 'middle' }}
       size={'1em'}
     />
   ) : (
-    <XCircleIcon style={{ color: 'var(--color-text-red)', verticalAlign: 'middle' }} size={'1em'} />
+    <XCircleIcon style={{ color: 'var(--color-red)', verticalAlign: 'middle' }} size={'1em'} />
   );
 };
 

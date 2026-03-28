@@ -170,9 +170,7 @@ function SymbolToFormat({ symbol }: { symbol: string }): ReactNode {
     case 'e': // a deprecated synonym for ‘c’. Note: it may be redefined in the future.
       return <Hoverable hoverContent={<SymbolToLabel symbol="e" />}>e</Hoverable>;
     default:
-      return (
-        <div style={{ display: 'inline-block', color: 'var(--color-text-red)' }}>{symbol}</div>
-      );
+      return <div style={{ display: 'inline-block', color: 'var(--color-red)' }}>{symbol}</div>;
   }
 }
 

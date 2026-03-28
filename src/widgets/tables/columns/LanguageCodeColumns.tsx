@@ -93,7 +93,7 @@ function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | nu
       hoverContent={<LanguageRetirementReason lang={lang} />}
       style={{ marginLeft: '0.125em' }}
     >
-      <TriangleAlertIcon size="1em" display="block" color="var(--color-text-yellow)" />
+      <TriangleAlertIcon size="1em" display="block" color="var(--color-yellow)" />
     </Hoverable>
   ) : null;
 }

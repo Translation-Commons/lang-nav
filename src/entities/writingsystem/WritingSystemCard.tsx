@@ -122,7 +122,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
           <>
             {' '}
             <Hoverable hoverContent="This writing system is written right to left; interfaces must handle this or risk disruptive display bugs for text in this writing system.">
-              <PilcrowLeftIcon color="var(--color-text-yellow)" size="1em" />
+              <PilcrowLeftIcon color="var(--color-yellow)" size="1em" />
             </Hoverable>
           </>
         )}

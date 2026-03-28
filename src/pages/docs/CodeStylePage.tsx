@@ -1,7 +1,6 @@
 import React from 'react';
 
-import PageBrightnessSelector from '@widgets/controls/selectors/PageBrightnessSelector';
-import ColorSwatch from '@widgets/docs/ColorSwatch';
+import ColorStyles from '@widgets/docs/ColorStyles';
 import DocsCard from '@widgets/docs/DocsCard';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import DocsSection from '@widgets/docs/DocsSection';
@@ -9,10 +8,6 @@ import DocsSection from '@widgets/docs/DocsSection';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 import LinkButton from '@shared/ui/LinkButton';
@@ -92,85 +87,8 @@ const CodeStylePage: React.FC = () => {
           </table>
         </DocsCard>
       </DocsSection>
-      <DocsSection title="Colors">
-        <div>
-          Use CSS variables for colors to maintain consistency and make it easy to update the color
-          scheme across the site. Colors should be chosen to ensure sufficient contrast for
-          readability and accessibility. These colors adapt to the page brightness setting:
-          <div style={{ display: 'inline-block' }}>
-            <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-              <PageBrightnessSelector />
-            </SelectorDisplayProvider>
-          </div>
-        </div>
-        <DocsCard title="Text">
-          <SwatchesGrid>
-            <ColorSwatch variable="--color-text" description="For most text and primary content" />
-            <ColorSwatch
-              variable="--color-text-secondary"
-              description="For less important content, for instance to de-emphasize certain text so that the main text stands out more"
-            />
-            <ColorSwatch
-              variable="--color-text-highlight"
-              description="To highlight the background of text like when searching"
-            />
-            <ColorSwatch
-              variable="--color-text-on-color"
-              description="For text shown on colored backgrounds, such as buttons or colored hoverables"
-            />
-          </SwatchesGrid>
-        </DocsCard>
-        <DocsCard title="Buttons">
-          <SwatchesGrid>
-            <ColorSwatch
-              variable="--color-button-primary"
-              description="Bright, clickable primary action"
-            />
-            <ColorSwatch variable="--color-button-secondary" description="Less important buttons" />
-            <ColorSwatch
-              variable="--color-button-hover"
-              description="All buttons, when hovered over or active"
-            />
-          </SwatchesGrid>
-        </DocsCard>
-        <DocsCard title="Other">
-          <SwatchesGrid>
-            <ColorSwatch variable="--color-background" description="Most component backgrounds" />
-            <ColorSwatch
-              variable="--color-background-hover"
-              description="Light background effect for hovers where there could be interactive elements so you do not want it as deep as button-primary"
-            />
-            <ColorSwatch variable="--color-shadow" description="Shadow around a component" />
-          </SwatchesGrid>
-        </DocsCard>
-        <DocsCard title="Semantic Colors">
-          Use semantic colors (e.g., red for errors, green for success) to convey meaning through
-          color.
-          <SwatchesGrid>
-            <ColorSwatch variable="--color-text-red" />
-            <ColorSwatch variable="--color-text-orange" />
-            <ColorSwatch variable="--color-text-yellow" />
-            <ColorSwatch variable="--color-text-purple" />
-            <ColorSwatch variable="--color-text-blue" />
-            <ColorSwatch variable="--color-text-green" />
-          </SwatchesGrid>
-        </DocsCard>
-      </DocsSection>
+      <ColorStyles />
     </DocsPageContainer>
-  );
-};
-
-const SwatchesGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, minmax(200px, 1fr))',
-        gap: '0.5em',
-      }}
-    >
-      {children}
-    </div>
   );
 };
 

@@ -76,8 +76,7 @@ const ToggleablePrediction: React.FC<{
     <div style={{ display: 'flex', alignItems: 'center', gap: '0.25em' }}>
       <span
         style={{
-          color:
-            (currentValue ?? predictedValue) ? 'var(--color-text-green)' : 'var(--color-text-red)',
+          color: (currentValue ?? predictedValue) ? 'var(--color-green)' : 'var(--color-red)',
           opacity: currentValue == null ? 0.5 : 1,
         }}
       >

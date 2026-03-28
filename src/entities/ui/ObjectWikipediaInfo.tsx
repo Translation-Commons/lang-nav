@@ -78,11 +78,11 @@ export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }>
 function getStatusColor(status: WikipediaStatus) {
   switch (status) {
     case WikipediaStatus.Active:
-      return 'var(--color-text-green)';
+      return 'var(--color-green)';
     case WikipediaStatus.Closed:
-      return 'var(--color-text-red)';
+      return 'var(--color-red)';
     case WikipediaStatus.Incubator:
-      return 'var(--color-text-yellow)';
+      return 'var(--color-yellow)';
   }
 }
 

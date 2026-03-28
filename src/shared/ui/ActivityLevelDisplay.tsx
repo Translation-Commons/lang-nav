@@ -54,13 +54,13 @@ const ActivityIcon: React.FC<{ bucket: ActivityLevel }> = ({ bucket }) => {
 function getColor(level: ActivityLevel): string {
   switch (level) {
     case ActivityLevel.High:
-      return 'var(--color-text-green)';
+      return 'var(--color-green)';
     case ActivityLevel.Medium:
-      return 'var(--color-text-yellow)';
+      return 'var(--color-yellow)';
     case ActivityLevel.Low:
-      return 'var(--color-text-orange)';
+      return 'var(--color-orange)';
     case ActivityLevel.Zero:
-      return 'var(--color-text-red)';
+      return 'var(--color-red)';
     case ActivityLevel.Unknown:
       return 'var(--color-text-secondary)';
   }
