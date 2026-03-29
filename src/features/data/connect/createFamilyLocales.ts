@@ -69,8 +69,7 @@ function createLocalesForLanguageFamily(
         // Other references that are undefined by definition but included in case the code is changed to allow them
         scriptCode: childLocale.scriptCode, // should be undefined
         writingSystem: childLocale.writingSystem, // should be undefined
-        variantCodes:
-          childLocale.variantCodes != null ? [...childLocale.variantCodes] : [], // dereference the array
+        variantCodes: childLocale.variantCodes != null ? [...childLocale.variantCodes] : [], // dereference the array
         variants: childLocale.variants != null ? [...childLocale.variants] : [], // dereference the array
 
         // Initialize the population
