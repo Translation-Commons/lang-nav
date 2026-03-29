@@ -36,7 +36,7 @@ enum Field {
   OutputScript = 'Output Script',
   Region = 'Region', // primary region or parent territory
   Territory = 'Territory',
-  VariantTag = 'Variant Tag',
+  Variant = 'Variant',
   Platform = 'Platform',
   SourceForPopulation = 'Source for Population',
   SourceForLanguage = 'Source for Language',
@@ -47,7 +47,7 @@ enum Field {
   CountOfChildTerritories = '# of Territories', // immediate children only
   CountOfCountries = '# of Countries', // recursive, only counting countries
   CountOfCensuses = '# of Censuses',
-  CountOfVariantTags = '# of Variant Tags',
+  CountOfVariants = '# of Variants',
 
   // Quantity
   Coordinates = 'Coordinates', // Lat + Long

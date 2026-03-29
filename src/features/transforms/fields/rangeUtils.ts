@@ -39,7 +39,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Area:
     case Field.Depth:
     case Field.None:
@@ -62,7 +62,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.Region:
     case Field.Platform:
     case Field.OutputScript:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Description:
@@ -117,7 +117,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Population:
     case Field.PopulationDirectlySourced:
     case Field.PopulationOfDescendants:
@@ -136,7 +136,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.Region:
     case Field.Platform:
     case Field.OutputScript:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
     case Field.Description:

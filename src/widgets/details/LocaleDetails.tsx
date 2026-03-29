@@ -48,8 +48,8 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
     languageCode,
     territory,
     territoryCode,
-    variantTags,
-    variantTagCodes,
+    variants,
+    variantCodes,
     writingSystem,
   } = locale;
 
@@ -103,17 +103,17 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           </Hoverable>
         </DetailsField>
       )}
-      {variantTagCodes && variantTagCodes.length > 0 && (
-        <DetailsField title={`Variant Tag${variantTagCodes.length > 1 ? 's' : ''}`}>
-          {variantTags ? (
+      {variantCodes && variantCodes.length > 0 && (
+        <DetailsField title={`Variant${variantCodes.length > 1 ? 's' : ''}`}>
+          {variants ? (
             <CommaSeparated>
-              {variantTags.map((tag) => (
+              {variants.map((tag) => (
                 <HoverableObjectName key={tag.ID} object={tag} />
               ))}
             </CommaSeparated>
           ) : (
             <span>
-              {variantTagCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
+              {variantCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
             </span>
           )}
         </DetailsField>

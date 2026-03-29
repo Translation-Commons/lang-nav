@@ -24,7 +24,7 @@ describe('getLocaleName', () => {
       languageCode: 'zh',
       territoryCode: 'CN',
       scriptCode: 'Latn',
-      variantTagCodes: ['pinyin'],
+      variantCodes: ['pinyin'],
     };
     expect(getLocaleName(locale)).toBe('zh (CN, Latn, pinyin)');
   });
@@ -43,7 +43,7 @@ describe('getLocaleName', () => {
       languageCode: 'zh',
       territoryCode: 'CN',
       scriptCode: 'Latn',
-      variantTagCodes: ['pinyin'],
+      variantCodes: ['pinyin'],
 
       language: getBaseLanguageData('zh', 'Chinese'),
       territory: {

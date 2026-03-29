@@ -122,7 +122,7 @@ function useDataCompletenessByFieldByEntityType(): Record<Field, Record<ObjectTy
     [ObjectType.Territory]: useEntities(ObjectType.Territory),
     [ObjectType.WritingSystem]: useEntities(ObjectType.WritingSystem),
     [ObjectType.Census]: useEntities(ObjectType.Census),
-    [ObjectType.VariantTag]: useEntities(ObjectType.VariantTag),
+    [ObjectType.Variant]: useEntities(ObjectType.Variant),
     [ObjectType.Keyboard]: useEntities(ObjectType.Keyboard),
   };
   return Object.values(Field).reduce(

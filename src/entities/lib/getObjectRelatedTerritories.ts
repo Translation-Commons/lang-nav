@@ -68,7 +68,7 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
           .filter((t): t is TerritoryData => t != null),
         (t) => t.ID,
       );
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return getChildTerritoriesInObject(object) ?? [];
     case ObjectType.Keyboard:
       return object.territory ? [object.territory] : [];
@@ -129,7 +129,7 @@ export function getCountriesInObject(object: ObjectData): TerritoryData[] | unde
       return object.territory?.scope === TerritoryScope.Country ? [object.territory] : [];
     case ObjectType.Language:
     case ObjectType.WritingSystem:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
     case ObjectType.Keyboard:
       // Computationally a bit expensive, be careful using this application
       return uniqueBy(
@@ -156,8 +156,8 @@ export function getChildTerritoriesInObject(object: ObjectData): TerritoryData[]
       return object.territory ? [object.territory] : undefined;
     case ObjectType.Census:
       return object.territory ? [object.territory] : undefined;
-    case ObjectType.VariantTag:
-      // Most variant tags don't have specified territories but some may
+    case ObjectType.Variant:
+      // Most variants don't have specified territories but some may
       return uniqueBy(
         object.locales
           .map((locale) => locale.territory)
@@ -184,7 +184,7 @@ export function getObjectLocales(object: ObjectData): LocaleData[] {
       return object.locales;
     case ObjectType.WritingSystem:
       return getWritingSystemLocales(object);
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.locales;
     case ObjectType.Keyboard:
       return [];

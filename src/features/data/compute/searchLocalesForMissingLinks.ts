@@ -13,7 +13,7 @@ export function searchLocalesForMissingLinks(
       languageCode: locale.languageCode,
       scriptCode: locale.scriptCode,
       territoryCode: locale.territoryCode,
-      variantTagCodes: locale.variantTagCodes,
+      variantCodes: locale.variantCodes,
     };
 
     // If this locale is missing a link to its parent territory locale, try to find it
@@ -63,33 +63,33 @@ export function searchLocalesForMissingLinks(
 }
 
 export function getLessSpecificLocaleTags(localeTags: LocaleTags): string[] {
-  const lessVariantTags =
-    localeTags.variantTagCodes?.flatMap((variantTagCode) =>
+  const lessVariants =
+    localeTags.variantCodes?.flatMap((variantCode) =>
       getLessSpecificLocaleTags({
         languageCode: localeTags.languageCode,
         scriptCode: localeTags.scriptCode,
         territoryCode: localeTags.territoryCode,
-        variantTagCodes: localeTags.variantTagCodes?.filter((v) => v !== variantTagCode),
+        variantCodes: localeTags.variantCodes?.filter((v) => v !== variantCode),
       }),
     ) || [];
   const withoutScript = localeTags.scriptCode
     ? getLessSpecificLocaleTags({
         languageCode: localeTags.languageCode,
         territoryCode: localeTags.territoryCode,
-        variantTagCodes: localeTags.variantTagCodes,
+        variantCodes: localeTags.variantCodes,
       })
     : [];
   const withoutTerritory = localeTags.territoryCode
     ? getLessSpecificLocaleTags({
         languageCode: localeTags.languageCode,
         scriptCode: localeTags.scriptCode,
-        variantTagCodes: localeTags.variantTagCodes,
+        variantCodes: localeTags.variantCodes,
       })
     : [];
 
   return unique(
     [
-      ...lessVariantTags,
+      ...lessVariants,
       ...withoutScript,
       ...withoutTerritory,
       getLocaleCodeFromTags(localeTags),

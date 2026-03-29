@@ -102,7 +102,7 @@ export function getFieldIcon(field: Field): LucideIcon {
       return MapPinnedIcon;
     case Field.Platform:
       return MonitorSmartphoneIcon;
-    case Field.VariantTag:
+    case Field.Variant:
       return MapPinIcon;
     case Field.SourceForLanguage:
       return ScrollTextIcon;
@@ -114,7 +114,7 @@ export function getFieldIcon(field: Field): LucideIcon {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
       return HashIcon;
 
     // Quantity

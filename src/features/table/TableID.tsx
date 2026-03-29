@@ -5,7 +5,7 @@ enum TableID {
   Languages,
   Locales,
   Territories,
-  VariantTags,
+  Variants,
   WritingSystems,
   Keyboards,
 

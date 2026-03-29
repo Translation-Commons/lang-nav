@@ -3,11 +3,11 @@ import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import { LocaleData, LocaleSource, StandardLocaleCode } from '@entities/locale/LocaleTypes';
-import { VariantTagData, VariantTagDictionary } from '@entities/varianttag/VariantTagTypes';
+import { VariantData, VariantDictionary } from '@entities/variant/VariantTypes';
 
 import { toDictionary, unique } from '@shared/lib/setUtils';
 
-export async function loadIANAVariants(): Promise<VariantTagDictionary | void> {
+export async function loadIANAVariants(): Promise<VariantDictionary | void> {
   return await fetch(`data/iana_variants.txt`)
     .then((res) => res.text())
     .then((text) => text.split('%%'))
@@ -26,7 +26,7 @@ enum IANAVariantKey {
   Comments = 'Comments',
 }
 
-export function parseIANAVariant(input: string): VariantTagData | null {
+export function parseIANAVariant(input: string): VariantData | null {
   ////// Example data:
   // Type: variant
   // Subtag: baku1926
@@ -90,7 +90,7 @@ export function parseIANAVariant(input: string): VariantTagData | null {
 
   if (ianaTag && name) {
     return {
-      type: ObjectType.VariantTag,
+      type: ObjectType.Variant,
       ID: ianaTag,
       codeDisplay: ianaTag,
       nameDisplay: name,
@@ -111,7 +111,7 @@ export function parseIANAVariant(input: string): VariantTagData | null {
 export function addIANAVariantLocales(
   languagesBCP: LanguageDictionary,
   locales: Record<StandardLocaleCode, LocaleData>,
-  variants: VariantTagDictionary | void,
+  variants: VariantDictionary | void,
 ): void {
   if (!variants) return;
 
@@ -127,7 +127,7 @@ export function addIANAVariantLocales(
       // Add both the variant's prefix and the prefix with the variant to the locale list if it isn't yet present
       addVariantLocale(localeParts, locales);
       addVariantLocale(
-        { ...localeParts, variantTagCodes: [...(localeParts.variantTagCodes ?? []), variant.ID] },
+        { ...localeParts, variantCodes: [...(localeParts.variantCodes ?? []), variant.ID] },
         locales,
       );
     });
@@ -146,7 +146,7 @@ function addVariantLocale(
     type: ObjectType.Locale,
     ID: localeCode,
     codeDisplay: localeCode,
-    ...localeTags, // languageCode, scriptCode, territoryCode, variantTagCodes
+    ...localeTags, // languageCode, scriptCode, territoryCode, variantCodes
     localeSource: LocaleSource.IANA,
 
     // Names are withheld but they are added later when all of the locale objects have been linked
@@ -155,21 +155,21 @@ function addVariantLocale(
   };
 }
 
-export function connectVariantTags(
-  variantTags: VariantTagDictionary,
+export function connectVariants(
+  variants: VariantDictionary,
   languages: LanguageDictionary,
   locales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   // Link variants to languages and link languages back to variants
-  Object.values(variantTags).forEach((variant) => {
+  Object.values(variants).forEach((variant) => {
     // Link languages to variants
     variant.languageCodes.forEach((langCode) => {
       const lang = languages[langCode];
       if (lang) {
         if (!variant.languages) variant.languages = [];
         variant.languages.push(lang);
-        if (!lang.variantTags) lang.variantTags = [];
-        lang.variantTags.push(variant);
+        if (!lang.variants) lang.variants = [];
+        lang.variants.push(variant);
       } else {
         // Known missing languages from CLDR
         // tw (variants akuapem, asante)
@@ -181,19 +181,19 @@ export function connectVariantTags(
 
   // Link locales to variants and vice versa
   Object.values(locales).forEach((locale) => {
-    const { variantTagCodes } = locale;
-    if (!variantTagCodes || variantTagCodes.length === 0) return; // Skip if no variant tag ID
+    const { variantCodes } = locale;
+    if (!variantCodes || variantCodes.length === 0) return; // Skip if no variant ID
 
-    variantTagCodes.forEach((variantTagCode) => {
-      const variant = variantTags[variantTagCode];
+    variantCodes.forEach((variantCode) => {
+      const variant = variants[variantCode];
       if (!variant) {
-        console.warn(`Variant tag ${variantTagCode} not found for locale ${locale.ID}`);
+        console.warn(`Variant ${variantCode} not found for locale ${locale.ID}`);
         return;
       }
 
       variant.locales.push(locale);
-      if (!locale.variantTags) locale.variantTags = [];
-      locale.variantTags.push(variant);
+      if (!locale.variants) locale.variants = [];
+      locale.variants.push(variant);
     });
   });
 }

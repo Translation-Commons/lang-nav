@@ -46,10 +46,10 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           may contain other systems.
         </>
       );
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return (
         <>
-          <label>Variant Tag:</label>The Internet Assigned Numbers Authority (IANA) maintains an
+          <label>Variant:</label>The Internet Assigned Numbers Authority (IANA) maintains an
           enumeration of language tags in common usage. The &quot;variant&quot; tags are used in
           composite locales in the form <code>ca_valencia</code> or <code>ca-u-va-valencia</code>.
           These are typically used to specify a particular orthography or dialect.

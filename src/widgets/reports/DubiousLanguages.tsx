@@ -72,7 +72,7 @@ const DubiousLanguages: React.FC = () => {
               )
               .filter((object) => object != null);
             // TODO if its a language + territory, check if the locale exists
-            // TODO check if there is an IANA variant tag.
+            // TODO check if there is an IANA variant.
             return (
               <CardInCardList key={lang.ID} object={lang}>
                 <div>

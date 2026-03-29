@@ -6,10 +6,10 @@ import { ObjectBase } from '@entities/types/DataTypes';
 
 export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valencia
 
-export type VariantTagDictionary = Record<VariantIANATag, VariantTagData>;
+export type VariantDictionary = Record<VariantIANATag, VariantData>;
 
-export interface VariantTagData extends ObjectBase {
-  type: ObjectType.VariantTag;
+export interface VariantData extends ObjectBase {
+  type: ObjectType.Variant;
   ID: VariantIANATag;
   codeDisplay: VariantIANATag;
   nameDisplay: string;

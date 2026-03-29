@@ -12,17 +12,12 @@ export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[
     case ObjectType.Language:
       return [...getObjectParents(object.parentLanguage), object.parentLanguage];
     case ObjectType.Locale:
-      return [
-        object.language,
-        object.writingSystem,
-        object.territory,
-        ...(object.variantTags ?? []),
-      ];
+      return [object.language, object.writingSystem, object.territory, ...(object.variants ?? [])];
     case ObjectType.Territory:
       return [...getObjectParents(object.parentUNRegion), object.parentUNRegion];
     case ObjectType.WritingSystem:
       return [object.parentWritingSystem];
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return [object.languages[0]];
     case ObjectType.Keyboard:
       return [object.language, object.territory].filter(Boolean);
@@ -47,7 +42,7 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
       return [...(object.containsTerritories ?? []), ...(object.dependentTerritories ?? [])];
     case ObjectType.WritingSystem:
       return object.childWritingSystems ?? [];
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.locales;
     case ObjectType.Keyboard:
       return [];
@@ -95,7 +90,7 @@ export function getDescendantsName(object: ObjectData, count: number): string {
       }
     case ObjectType.WritingSystem:
       return 'child writing system' + (count > 1 ? 's' : '');
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return 'locale' + (count > 1 ? 's' : '');
     case ObjectType.Keyboard:
       return 'keyboard' + (count > 1 ? 's' : '');

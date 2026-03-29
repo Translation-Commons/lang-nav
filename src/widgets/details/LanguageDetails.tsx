@@ -45,7 +45,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
-  const { childLanguages, ISO, Glottolog, variantTags } = lang;
+  const { childLanguages, ISO, Glottolog, variants } = lang;
 
   return (
     <DetailsSection title="Connections">
@@ -59,10 +59,10 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <HoverableObjectName object={Glottolog.parentLanguage} />
         </DetailsField>
       )}
-      {variantTags && variantTags.length > 0 && (
-        <DetailsField title="Variant Tags">
+      {variants && variants.length > 0 && (
+        <DetailsField title="Variants">
           <CommaSeparated>
-            {variantTags.map((tag) => (
+            {variants.map((tag) => (
               <HoverableObjectName key={tag.ID} object={tag} />
             ))}
           </CommaSeparated>

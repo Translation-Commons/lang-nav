@@ -12,7 +12,7 @@ import { LanguageData, LanguagesBySource } from '@entities/language/LanguageType
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { connectObjectsAndCreateDerivedData } from '../compute/connectObjects';
@@ -45,7 +45,7 @@ export type CoreDataArrays = {
   allLanguoids: LanguageData[]; // Using the technical term here since some of these are language groups or subsets
   locales: LocaleData[];
   territories: TerritoryData[];
-  variantTags: VariantTagData[];
+  variants: VariantData[];
   writingSystems: WritingSystemData[];
   keyboards: KeyboardData[];
   censuses: Record<CensusID, CensusData>;
@@ -93,7 +93,7 @@ export function useCoreData(): {
       territories,
       locales,
       writingSystems,
-      variantTags,
+      variants,
       keyboards,
     ] = await Promise.all([
       loadLanguages(),
@@ -117,7 +117,7 @@ export function useCoreData(): {
       territories == null ||
       locales == null ||
       writingSystems == null ||
-      variantTags == null ||
+      variants == null ||
       keyboards == null
     ) {
       alert('Error loading data. Please check the console for more details.');
@@ -132,14 +132,14 @@ export function useCoreData(): {
     addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], manualGlottocodeToISO || {});
     addCLDRLanguageDetails(languagesBySource);
-    addIANAVariantLocales(languagesBySource.BCP, locales, variantTags);
+    addIANAVariantLocales(languagesBySource.BCP, locales, variants);
 
     connectObjectsAndCreateDerivedData(
       languagesBySource,
       territories,
       writingSystems,
       locales,
-      variantTags,
+      variants,
       keyboards,
     );
 
@@ -154,7 +154,7 @@ export function useCoreData(): {
       ...territories, // AA | 000
       ...locales, // aa_Aaaa_AA... etc.
       ...writingSystems, // Aaaa
-      ...variantTags, // These may be arbitrary, but usually 6-8 alphabetic
+      ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
     });
   }
@@ -167,8 +167,8 @@ export function useCoreData(): {
       territories: Object.values(objects).filter(
         (o): o is TerritoryData => o.type === ObjectType.Territory,
       ),
-      variantTags: Object.values(objects).filter(
-        (o): o is VariantTagData => o.type === ObjectType.VariantTag,
+      variants: Object.values(objects).filter(
+        (o): o is VariantData => o.type === ObjectType.Variant,
       ),
       writingSystems: Object.values(objects).filter(
         (o): o is WritingSystemData => o.type === ObjectType.WritingSystem,

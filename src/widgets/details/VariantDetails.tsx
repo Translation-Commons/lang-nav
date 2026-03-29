@@ -2,18 +2,18 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 type Props = {
-  variantTag: VariantTagData;
+  variant: VariantData;
 };
 
-const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
-  const { ID, dateAdded, prefixes, nameDisplay, description, languages, locales } = variantTag;
+const VariantDetails: React.FC<Props> = ({ variant }) => {
+  const { ID, dateAdded, prefixes, nameDisplay, description, languages, locales } = variant;
 
   return (
     <div className="Details">
@@ -53,4 +53,4 @@ const VariantTagDetails: React.FC<Props> = ({ variantTag }) => {
   );
 };
 
-export default VariantTagDetails;
+export default VariantDetails;

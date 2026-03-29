@@ -50,7 +50,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Area:
       if (typeof fieldValue === 'number') return fieldValue.toLocaleString();
       return <>{fieldValue}</>;
@@ -67,7 +67,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Territory:
     case Field.Platform:
     case Field.OutputScript:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name

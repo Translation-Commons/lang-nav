@@ -8,7 +8,7 @@ import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
 import TerritoryCard from '@entities/territory/TerritoryCard';
 import { ObjectData } from '@entities/types/DataTypes';
-import VariantTagCard from '@entities/varianttag/VariantTagCard';
+import VariantCard from '@entities/variant/VariantCard';
 import WritingSystemCard from '@entities/writingsystem/WritingSystemCard';
 
 const ObjectCard: React.FC<{ object: ObjectData }> = ({ object }) => {
@@ -21,8 +21,8 @@ const ObjectCard: React.FC<{ object: ObjectData }> = ({ object }) => {
       return <LocaleCard locale={object} />;
     case ObjectType.Territory:
       return <TerritoryCard territory={object} />;
-    case ObjectType.VariantTag:
-      return <VariantTagCard data={object} />;
+    case ObjectType.Variant:
+      return <VariantCard data={object} />;
     case ObjectType.WritingSystem:
       return <WritingSystemCard writingSystem={object} />;
     case ObjectType.Keyboard:
