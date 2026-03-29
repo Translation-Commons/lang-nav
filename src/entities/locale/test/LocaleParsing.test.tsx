@@ -43,7 +43,7 @@ describe('parseLocaleCode', () => {
     });
   });
 
-  it('Handles full language tag with language, script, numeric region, and variant tag: "es_Latn_419_SPANGLIS"', () => {
+  it('Handles full language tag with language, script, numeric region, and variant: "es_Latn_419_SPANGLIS"', () => {
     const result = parseLocaleCode('es_Latn_419_SPANGLIS');
     expect(result).toEqual({
       languageCode: 'es',

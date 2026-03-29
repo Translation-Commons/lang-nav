@@ -74,7 +74,7 @@ describe('getLessSpecificLocaleTags', () => {
     expect(lessSpecificTags).toEqual(['zho', 'zho_CN', 'zho_Hans', 'zho_Hans_CN']);
   });
 
-  it('handles multiple variant tags', () => {
+  it('handles multiple variants', () => {
     const localeTags: LocaleTags = {
       languageCode: 'slv',
       scriptCode: 'Latn',

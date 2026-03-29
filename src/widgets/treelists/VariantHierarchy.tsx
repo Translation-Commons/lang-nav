@@ -22,9 +22,8 @@ export const VariantHierarchy: React.FC = () => {
       rootNodes={rootNodes}
       description={
         <>
-          Variant tags are associated with different &quot;prefixes&quot; (entities in bold) --
-          usually but not always language codes. This view organizes variant tags by the prefixes
-          they apply to.
+          Variants are associated with different &quot;prefixes&quot; (entities in bold) -- usually
+          but not always language codes. This view organizes variants by the prefixes they apply to.
         </>
       }
     />
@@ -42,7 +41,7 @@ export function getNodeHierarchy(variants: VariantData[]): Record<string, Varian
     const prefixes = variant.prefixes;
 
     prefixes.forEach((prefix) => {
-      // Follow the full path of the pieces of the locale code, from prefix to the variant tag ID
+      // Follow the full path of the pieces of the locale code, from prefix to the variant ID
       const parts = [...prefix.split('-'), variant.ID];
 
       parts.reduce<Record<string, VariantBranch>>((parentNode, part, index) => {
@@ -50,7 +49,7 @@ export function getNodeHierarchy(variants: VariantData[]): Record<string, Varian
         const node = parentNode[part] || { key: part, branches: {} };
         if (!parentNode[part]) parentNode[part] = node;
 
-        // Add the variant tag as a leaf if we are at the end
+        // Add the variant as a leaf if we are at the end
         if (index === parts.length - 1) {
           node.variant = variant;
         }

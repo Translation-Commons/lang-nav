@@ -13,7 +13,7 @@ import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSy
  *   Languages prefer 3-letter ISO codes, otherwise Glottocodes
  *   Writing systems always use ISO 15924 codes as usual
  *   Territories ISO 3166-1 alpha-2 codes or UN M49 codes
- *   Variant tags are added at the end, separated by underscores, and can be any IANA-registered tag
+ *   Variants are added at the end, separated by underscores, and can be any IANA-registered tag
  *
  * TODO: Make the type stricter than string
  */
@@ -38,7 +38,7 @@ export enum PopulationSourceCategory {
 
 export enum LocaleSource {
   StableDatabase = 'StableDatabase', // the standard source, kept in locales.tsv
-  IANA = 'IANA', // created when importing IANA variant tags
+  IANA = 'IANA', // created when importing IANA variants
   Census = 'census', // created when importing census data
   CreateRegionalLocales = 'createRegionalLocales', // created when generating aggregated regional locales
   CreateFamilyLocales = 'createFamilyLocales', // created when generating locales for language families

@@ -212,7 +212,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Language,
         Field.WritingSystem,
         Field.Territory,
-        // Field.Variant, // Equivalent to DisplayName for variant tags
+        // Field.Variant, // Equivalent to DisplayName for variants
         // Field.Keyboard,
 
         Field.CountOfLanguages,

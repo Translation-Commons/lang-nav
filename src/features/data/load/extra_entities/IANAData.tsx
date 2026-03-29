@@ -182,12 +182,12 @@ export function connectVariants(
   // Link locales to variants and vice versa
   Object.values(locales).forEach((locale) => {
     const { variantCodes } = locale;
-    if (!variantCodes || variantCodes.length === 0) return; // Skip if no variant tag ID
+    if (!variantCodes || variantCodes.length === 0) return; // Skip if no variant ID
 
     variantCodes.forEach((variantCode) => {
       const variant = variants[variantCode];
       if (!variant) {
-        console.warn(`Variant tag ${variantCode} not found for locale ${locale.ID}`);
+        console.warn(`Variant ${variantCode} not found for locale ${locale.ID}`);
         return;
       }
 

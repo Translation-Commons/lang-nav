@@ -157,7 +157,7 @@ export function getChildTerritoriesInObject(object: ObjectData): TerritoryData[]
     case ObjectType.Census:
       return object.territory ? [object.territory] : undefined;
     case ObjectType.Variant:
-      // Most variant tags don't have specified territories but some may
+      // Most variants don't have specified territories but some may
       return uniqueBy(
         object.locales
           .map((locale) => locale.territory)

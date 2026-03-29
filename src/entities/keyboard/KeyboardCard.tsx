@@ -72,7 +72,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         <CardField
           title="Variation"
           field={Field.Variant}
-          description="Territory or variant tag that further specifies this keyboard layout."
+          description="Territory or variant that further specifies this keyboard layout."
         >
           <CommaSeparated>
             {territory != null && <HoverableObjectName object={territory} />}

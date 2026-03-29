@@ -29,7 +29,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
       <CardField
         title="Description"
         field={Field.Description}
-        description="Description of this variant tag."
+        description="Description of this variant."
       >
         {description ? shortDescription : <Deemphasized>No description</Deemphasized>}
       </CardField>
@@ -37,7 +37,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
       <CardField
         title="Languages"
         field={Field.Language}
-        description="Languages that use this variant tag."
+        description="Languages that use this variant."
       >
         {languages && Object.values(languages).length > 0 ? (
           <CommaSeparated>
