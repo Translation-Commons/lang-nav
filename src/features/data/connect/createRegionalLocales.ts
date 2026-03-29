@@ -58,8 +58,8 @@ function createRegionalLocalesForTerritory(
             language: loc.language,
             scriptCode: loc.scriptCode,
             writingSystem: loc.writingSystem,
-            variantTagCodes: loc.variantTagCodes != null ? [...loc.variantTagCodes] : [], // dereference the array
-            variantTags: loc.variantTags != null ? [...loc.variantTags] : [], // dereference the array
+            variantCodes: loc.variantCodes != null ? [...loc.variantCodes] : [], // dereference the array
+            variants: loc.variants != null ? [...loc.variants] : [], // dereference the array
 
             // Update the population
             populationSpeaking: loc.populationSpeaking,

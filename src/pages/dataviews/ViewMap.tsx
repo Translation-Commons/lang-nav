@@ -29,10 +29,11 @@ function ViewMap() {
 
   const isDrawingTerritories = objectType !== ObjectType.Language;
 
-  if (objectType === ObjectType.VariantTag) {
+  if (objectType === ObjectType.Variant || objectType === ObjectType.Keyboard) {
     return (
       <div>
-        Map view is not well-defined for Variant Tags. Please select a different object type.
+        Map view is not well-defined for {getObjectTypeLabelPlural(objectType)}. Please select a
+        different object type.
       </div>
     );
   }

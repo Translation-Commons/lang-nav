@@ -39,7 +39,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Depth:
     case Field.LanguageScope:
     case Field.WritingSystemScope:
@@ -68,7 +68,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.OutputScript:
     case Field.Region:
     case Field.Territory:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.Platform:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:

@@ -46,7 +46,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.OutputScript:
     case Field.Territory:
     case Field.Region:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.Platform:
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
@@ -56,7 +56,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.CountOfChildTerritories:
     case Field.CountOfCountries:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
       return FieldGroup.Relation; // Count
 
     case Field.Area:

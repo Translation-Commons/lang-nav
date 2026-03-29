@@ -20,7 +20,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
     territory,
     inputWritingSystem,
     outputWritingSystem,
-    variantTag,
+    variant,
   } = keyboard;
 
   const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
@@ -68,15 +68,15 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         </CardField>
       )}
 
-      {(territory != null || variantTag != null) && (
+      {(territory != null || variant != null) && (
         <CardField
           title="Variation"
-          field={Field.VariantTag}
+          field={Field.Variant}
           description="Territory or variant tag that further specifies this keyboard layout."
         >
           <CommaSeparated>
             {territory != null && <HoverableObjectName object={territory} />}
-            {variantTag != null && <HoverableObjectName object={variantTag} />}
+            {variant != null && <HoverableObjectName object={variant} />}
           </CommaSeparated>
         </CardField>
       )}

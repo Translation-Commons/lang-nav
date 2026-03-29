@@ -9,7 +9,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'fr',
       scriptCode: undefined,
       territoryCode: undefined,
-      variantTagCodes: [],
+      variantCodes: [],
     });
   });
 
@@ -19,7 +19,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'en',
       scriptCode: undefined,
       territoryCode: 'US',
-      variantTagCodes: [],
+      variantCodes: [],
     });
   });
 
@@ -29,7 +29,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'sr',
       scriptCode: 'Cyrl',
       territoryCode: 'ME',
-      variantTagCodes: [],
+      variantCodes: [],
     });
   });
 
@@ -39,7 +39,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'ca',
       scriptCode: undefined,
       territoryCode: undefined,
-      variantTagCodes: ['valencia'],
+      variantCodes: ['valencia'],
     });
   });
 
@@ -49,7 +49,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'es',
       scriptCode: 'Latn',
       territoryCode: '419',
-      variantTagCodes: ['spanglis'],
+      variantCodes: ['spanglis'],
     });
   });
 
@@ -59,7 +59,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'slv',
       scriptCode: 'Latn',
       territoryCode: 'SI',
-      variantTagCodes: ['bohoric', 'nedis'],
+      variantCodes: ['bohoric', 'nedis'],
     });
   });
 
@@ -69,7 +69,7 @@ describe('parseLocaleCode', () => {
       languageCode: 'taib1242',
       scriptCode: 'Hant',
       territoryCode: 'TW',
-      variantTagCodes: ['tailo'],
+      variantCodes: ['tailo'],
     });
   });
 

@@ -13,7 +13,7 @@ const useEntities = (entityType?: ObjectType): EntityData[] => {
     locales,
     territories,
     writingSystems,
-    variantTags,
+    variants,
     censuses,
     keyboards,
   } = useDataContext();
@@ -29,8 +29,8 @@ const useEntities = (entityType?: ObjectType): EntityData[] => {
         return territories;
       case ObjectType.WritingSystem:
         return writingSystems;
-      case ObjectType.VariantTag:
-        return variantTags;
+      case ObjectType.Variant:
+        return variants;
       case ObjectType.Keyboard:
         return keyboards;
     }
@@ -42,7 +42,7 @@ const useEntities = (entityType?: ObjectType): EntityData[] => {
     locales,
     territories,
     writingSystems,
-    variantTags,
+    variants,
     keyboards,
   ]);
   return objects;

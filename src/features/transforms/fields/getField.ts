@@ -119,8 +119,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getContainingTerritories(object)?.[0]?.nameDisplay;
     case Field.Platform:
       return getKeyboardForEntity(object)?.platform;
-    case Field.VariantTag:
-      return getKeyboardForEntity(object)?.variantTagCode;
+    case Field.Variant:
+      return getKeyboardForEntity(object)?.variantCode;
     case Field.SourceForPopulation:
       return getCensusForEntity(object)?.collectorName;
     case Field.SourceForLanguage:
@@ -137,7 +137,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getCountOfWritingSystems(object);
     case Field.CountOfCensuses:
       return getCountOfCensuses(object);
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
       return undefined; // Not yet defined
 
     // Population
@@ -170,7 +170,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getObjectDateAsNumber(object);
 
     case Field.Description:
-      return object.type === ObjectType.VariantTag ? object.description : undefined;
+      return object.type === ObjectType.Variant ? object.description : undefined;
     case Field.Example:
       return object.type === ObjectType.WritingSystem ? object.sample : undefined;
 

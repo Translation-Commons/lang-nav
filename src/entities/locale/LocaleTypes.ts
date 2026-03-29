@@ -4,7 +4,7 @@ import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectBase, WikipediaData } from '@entities/types/DataTypes';
-import { VariantIANATag, VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData, VariantIANATag } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 /**
@@ -70,7 +70,7 @@ export interface LocaleData extends ObjectBase {
   languageCode: LanguageCode;
   territoryCode?: TerritoryCode;
   scriptCode?: ScriptCode;
-  variantTagCodes?: VariantIANATag[];
+  variantCodes?: VariantIANATag[];
 
   populationSource?: PopulationSourceCategory;
   populationSpeaking?: number;
@@ -83,7 +83,7 @@ export interface LocaleData extends ObjectBase {
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;
-  variantTags?: VariantTagData[];
+  variants?: VariantData[];
 
   // References to other locales
   relatedLocales?: {

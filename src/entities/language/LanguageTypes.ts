@@ -10,7 +10,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData } from '../types/CLDRTypes';
@@ -126,7 +126,7 @@ export interface LanguageData extends ObjectBase {
   parentLanguage?: LanguageData;
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
-  variantTags?: VariantTagData[]; // links to IANA variant tags
+  variants?: VariantData[]; // links to IANA variant tags
   keyboards?: KeyboardData[];
 
   // Fields that change based on the language source
@@ -155,7 +155,7 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     nameCanonical: name,
     nameDisplay: name,
     names: [name],
-    variantTags: [],
+    variants: [],
     locales: [],
     writingSystems: {},
     childLanguages: [],

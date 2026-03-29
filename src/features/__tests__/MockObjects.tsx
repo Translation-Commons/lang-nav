@@ -19,7 +19,7 @@ import {
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { ObjectDictionary } from '@entities/types/DataTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';
@@ -209,9 +209,9 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     scriptCode: 'Teng',
   };
 
-  // Variant Tags
-  const tolkorth: VariantTagData = {
-    type: ObjectType.VariantTag,
+  // Variants
+  const tolkorth: VariantData = {
+    type: ObjectType.Variant,
     ID: 'tolkorth',
     codeDisplay: 'tolkorth',
     nameDisplay: 'Tolkienian Transcribed Orthography',
@@ -251,7 +251,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     Teng,
     sjn_Teng_BE,
 
-    // Variant Tags
+    // Variants
     tolkorth,
   };
 }
@@ -264,7 +264,7 @@ export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArra
     locales: objectArray.filter((obj) => obj.type === ObjectType.Locale),
     territories: objectArray.filter((obj) => obj.type === ObjectType.Territory),
     writingSystems: objectArray.filter((obj) => obj.type === ObjectType.WritingSystem),
-    variantTags: objectArray.filter((obj) => obj.type === ObjectType.VariantTag),
+    variants: objectArray.filter((obj) => obj.type === ObjectType.Variant),
     censuses: { be0590: objects.be0590 as CensusData },
     keyboards: objectArray.filter((obj) => obj.type === ObjectType.Keyboard),
   };
@@ -278,7 +278,7 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
   locales: Record<string, LocaleData>;
   territories: Record<string, TerritoryData>;
   writingSystems: Record<string, WritingSystemData>;
-  variantTags: Record<string, VariantTagData>;
+  variants: Record<string, VariantData>;
 } {
   const objects = inputObjects ?? getDisconnectedMockedObjects();
   const objectsArray = Object.values(objects);
@@ -314,10 +314,10 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
       acc[locale.ID] = locale;
       return acc;
     }, {});
-  const variantTags: Record<string, VariantTagData> = objectsArray
-    .filter((obj) => obj.type === ObjectType.VariantTag)
-    .reduce<Record<string, VariantTagData>>((acc, variantTag) => {
-      acc[variantTag.ID] = variantTag;
+  const variants: Record<string, VariantData> = objectsArray
+    .filter((obj) => obj.type === ObjectType.Variant)
+    .reduce<Record<string, VariantData>>((acc, variant) => {
+      acc[variant.ID] = variant;
       return acc;
     }, {});
   const censuses: Record<string, CensusData> = objectsArray
@@ -334,29 +334,22 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
     locales,
     territories,
     writingSystems,
-    variantTags,
+    variants,
   };
 }
 
 // Makes all of the symbolic connections between the various objects
 // Also creates the aggregated locales, eg. sjn_BE -> sjn_123 & -> sjn_001
 export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDictionary {
-  const {
-    objects,
-    languagesBySource,
-    territories,
-    writingSystems,
-    locales,
-    variantTags,
-    censuses,
-  } = getMockedObjectDictionaries(inputObjects);
+  const { objects, languagesBySource, territories, writingSystems, locales, variants, censuses } =
+    getMockedObjectDictionaries(inputObjects);
 
   connectObjectsAndCreateDerivedData(
     languagesBySource,
     territories,
     writingSystems,
     locales,
-    variantTags,
+    variants,
     {},
   );
 
@@ -415,7 +408,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
   const locales = objectArray.filter((obj) => obj.type === ObjectType.Locale);
   const territories = objectArray.filter((obj) => obj.type === ObjectType.Territory);
   const writingSystems = objectArray.filter((obj) => obj.type === ObjectType.WritingSystem);
-  const variantTags = objectArray.filter((obj) => obj.type === ObjectType.VariantTag);
+  const variants = objectArray.filter((obj) => obj.type === ObjectType.Variant);
   const censuses = objectArray.reduce(
     (acc, obj) => {
       if (obj.type === ObjectType.Census) acc[obj.ID] = obj;
@@ -432,7 +425,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     locales,
     territories,
     writingSystems,
-    variantTags,
+    variants,
     getObject: (id: string) => objects[id],
     getLanguage: (id: string) =>
       objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
@@ -445,8 +438,8 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
       objects[id]?.type === ObjectType.Territory ? objects[id] : undefined,
     getWritingSystem: (id: string) =>
       objects[id]?.type === ObjectType.WritingSystem ? objects[id] : undefined,
-    getVariantTag: (id: string) =>
-      objects[id]?.type === ObjectType.VariantTag ? objects[id] : undefined,
+    getVariant: (id: string) =>
+      objects[id]?.type === ObjectType.Variant ? objects[id] : undefined,
   };
 
   return dataContext;

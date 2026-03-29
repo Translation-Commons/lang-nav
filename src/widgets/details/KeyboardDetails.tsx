@@ -23,7 +23,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
     outputScriptCode,
     inputWritingSystem,
     outputWritingSystem,
-    variantTagCode,
+    variantCode,
   } = keyboard;
 
   const sameScript = inputScriptCode === outputScriptCode;
@@ -88,7 +88,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
           </>
         )}
 
-        {variantTagCode && <DetailsField title="Variant">{variantTagCode}</DetailsField>}
+        {variantCode && <DetailsField title="Variant">{variantCode}</DetailsField>}
       </DetailsSection>
 
       <DetailsSection title="Connections">

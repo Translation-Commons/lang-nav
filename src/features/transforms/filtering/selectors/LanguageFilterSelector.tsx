@@ -98,7 +98,7 @@ const LanguageFilterDescription: React.FC = () => {
       return <>This will filter territories to ones where the selected language is used.</>;
     case ObjectType.WritingSystem:
       return <>This will filter writing systems to ones used for the selected language.</>;
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return <>This will filter variant tags for ones that are intended for this language.</>;
     case ObjectType.Locale:
       return <>This will filter locales with the selected language.</>;

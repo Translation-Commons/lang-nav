@@ -23,7 +23,7 @@ function getEntityMainTableColumns(entityType: ObjectType): TableColumn<ObjectDa
       return getTerritoryColumns() as TableColumn<ObjectData>[];
     case ObjectType.WritingSystem:
       return getWritingSystemColumns() as TableColumn<ObjectData>[];
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return getVariantColumns() as TableColumn<ObjectData>[];
     case ObjectType.Keyboard:
       return getKeyboardColumns() as TableColumn<ObjectData>[];

@@ -59,7 +59,7 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
     case ObjectType.Census:
       return <TableOfCountriesWithCensuses />;
     case ObjectType.Territory:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return <></>;
   }
 };

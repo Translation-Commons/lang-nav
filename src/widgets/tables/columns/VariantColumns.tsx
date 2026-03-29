@@ -9,11 +9,11 @@ import Field from '@features/transforms/fields/Field';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-function getVariantColumns(): TableColumn<VariantTagData>[] {
+function getVariantColumns(): TableColumn<VariantData>[] {
   return [
     CodeColumn,
     NameColumn,

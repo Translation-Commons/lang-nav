@@ -37,7 +37,7 @@ export function getObjectTypeLabelPlural(objectType: ObjectType) {
       return 'territories';
     case ObjectType.WritingSystem:
       return 'writing systems';
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return 'variant tags';
     case ObjectType.Keyboard:
       return 'keyboards';

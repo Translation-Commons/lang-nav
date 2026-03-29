@@ -13,7 +13,7 @@ export function getLocaleCode(
     locale.language?.codeDisplay ?? locale.languageCode,
     locale.scriptCode,
     territoryOverride ?? locale.territoryCode,
-    ...(locale.variantTagCodes ?? []),
+    ...(locale.variantCodes ?? []),
   ]
     .filter(Boolean)
     .join(localeSeparator);
@@ -23,7 +23,7 @@ export type LocaleTags = {
   languageCode: string;
   scriptCode?: string;
   territoryCode?: string;
-  variantTagCodes?: string[];
+  variantCodes?: string[];
 };
 
 export function getLocaleCodeFromTags(
@@ -35,7 +35,7 @@ export function getLocaleCodeFromTags(
     localeTags.languageCode,
     localeTags.scriptCode,
     territoryOverride ?? localeTags.territoryCode,
-    ...(localeTags.variantTagCodes ?? []),
+    ...(localeTags.variantCodes ?? []),
   ]
     .filter(Boolean)
     .join(localeSeparator);
@@ -63,6 +63,6 @@ export function parseLocaleCode(localeCode: string): LocaleTags {
     languageCode: parts[1],
     scriptCode: parts[2],
     territoryCode: parts[3],
-    variantTagCodes: parts[4] ? parts[4].toLowerCase().split(/[-_]/) : [],
+    variantCodes: parts[4] ? parts[4].toLowerCase().split(/[-_]/) : [],
   };
 }

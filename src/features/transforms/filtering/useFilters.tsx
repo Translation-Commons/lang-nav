@@ -80,7 +80,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.Region]: alwaysTrue, // TODO
     [Field.Platform]: alwaysTrue, // TODO
     [Field.OutputScript]: alwaysTrue, // TODO
-    [Field.VariantTag]: alwaysTrue, // TODO
+    [Field.Variant]: alwaysTrue, // TODO
     [Field.SourceForPopulation]: alwaysTrue, // TODO
 
     [Field.None]: alwaysTrue,
@@ -104,7 +104,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.CountOfChildTerritories]: alwaysTrue,
     [Field.CountOfCountries]: alwaysTrue,
     [Field.CountOfCensuses]: alwaysTrue,
-    [Field.CountOfVariantTags]: alwaysTrue,
+    [Field.CountOfVariants]: alwaysTrue,
 
     [Field.Population]: alwaysTrue,
     [Field.PopulationDirectlySourced]: alwaysTrue,

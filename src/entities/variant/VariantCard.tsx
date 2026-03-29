@@ -9,13 +9,13 @@ import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { VariantTagData } from './VariantTagTypes';
+import { VariantData } from './VariantTypes';
 
 interface Props {
-  data: VariantTagData;
+  data: VariantData;
 }
 
-const VariantTagCard: React.FC<Props> = ({ data }) => {
+const VariantCard: React.FC<Props> = ({ data }) => {
   const { description, languages } = data;
   const shortDescription =
     description && description.length > 100 ? description.slice(0, 100) + '...' : description;
@@ -53,4 +53,4 @@ const VariantTagCard: React.FC<Props> = ({ data }) => {
   );
 };
 
-export default VariantTagCard;
+export default VariantCard;

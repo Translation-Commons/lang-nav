@@ -7,8 +7,8 @@ export function getLocaleName(locale: LocaleData, includeTerritory: boolean = tr
     : null;
   const scriptName = locale.writingSystem?.nameDisplay ?? locale.scriptCode;
   const variantNames =
-    locale.variantTags?.map((tag) => tag.nameDisplay).join(', ') ??
-    locale.variantTagCodes?.join(', ');
+    locale.variants?.map((tag) => tag.nameDisplay).join(', ') ??
+    locale.variantCodes?.join(', ');
   const extraBits = [territoryName, scriptName, variantNames].filter(Boolean).join(', ');
 
   return extraBits ? languageName + ' (' + extraBits + ')' : languageName;

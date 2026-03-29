@@ -122,11 +122,11 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
       columnGroup: 'Linked Data',
     },
     {
-      key: 'Variant Tags',
+      key: 'Variants',
       render: (object) =>
-        object.variantTags && (
+        object.variants && (
           <CommaSeparated limit={1}>
-            {object.variantTags.map((vt) => (
+            {object.variants.map((vt) => (
               <HoverableObjectName object={vt} key={vt.ID} />
             ))}
           </CommaSeparated>
