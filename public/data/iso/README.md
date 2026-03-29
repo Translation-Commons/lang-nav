@@ -12,12 +12,3 @@ From ISO https://iso639-3.sil.org/code_tables/download_tables
 From Library of Congress https://www.loc.gov/standards/iso639-5/id.php
 
 - families639-5.tsv
-
-From CLDR
-
-- familiesToLanguages.tsv
-  - Significant manual edits
-
-Manually added files:
-
-- manualGlottocodeToISO.tsv

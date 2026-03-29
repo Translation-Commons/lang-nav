@@ -10,7 +10,7 @@ import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 
 export async function loadLanguages(): Promise<LanguageDictionary | void> {
-  return await loadObjectsFromFile<LanguageData>('data/languages.tsv', parseLanguageLine);
+  return await loadObjectsFromFile<LanguageData>('data/tc/languages.tsv', parseLanguageLine);
 }
 
 function parseLanguageLine(line: string): LanguageData {

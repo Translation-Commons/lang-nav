@@ -5,7 +5,7 @@ export async function loadIndigeneity(
   getLanguage: (id: string) => LanguageData | undefined,
 ): Promise<void> {
   // Language ID	Territory ID	LanguageFormedInThisRegion	TimeLanguageAntecedentsEstablishedBefore1500
-  await fetch('data/indigeneity.tsv')
+  await fetch('data/tc/indigeneity.tsv')
     .then((res) => res.text())
     .then((text) =>
       text

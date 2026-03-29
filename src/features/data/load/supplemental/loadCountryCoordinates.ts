@@ -3,7 +3,7 @@ import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes
 export function loadCountryCoordinates(
   getTerritory: (id: string) => TerritoryData | undefined,
 ): Promise<void> {
-  return fetch('data/country-coord.csv')
+  return fetch('data/other_sources/country-coord.csv')
     .then((res) => res.text())
     .then((text) =>
       text

@@ -3,7 +3,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 export async function loadLanguageNamesFrench(
   getLanguage: (id: string) => LanguageData | undefined,
 ): Promise<void> {
-  await fetch('data/languageNamesFrench.tsv')
+  await fetch('data/other_sources/languageNamesFrench.tsv')
     .then((res) => res.text())
     .then((text) =>
       text
