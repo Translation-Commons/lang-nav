@@ -8,12 +8,18 @@ export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valenci
 
 export type VariantDictionary = Record<VariantIANATag, VariantData>;
 
+export enum VariantType {
+  Orthographic = 'o',
+  Dialect = 'd',
+}
+
 export interface VariantData extends ObjectBase {
   type: ObjectType.Variant;
   ID: VariantIANATag;
   codeDisplay: VariantIANATag;
   nameDisplay: string;
   description?: string;
+  variantType?: VariantType;
 
   dateAdded?: Date;
   prefixes: string[]; // Usually language codes but sometimes composites like zh-Latn or oc-lengadoc

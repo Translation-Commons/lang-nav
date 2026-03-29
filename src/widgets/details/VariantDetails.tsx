@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -8,17 +9,27 @@ import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
+
 type Props = {
   variant: VariantData;
 };
 
 const VariantDetails: React.FC<Props> = ({ variant }) => {
-  const { ID, dateAdded, prefixes, nameDisplay, description, languages, locales } = variant;
+  const { ID, dateAdded, prefixes, nameDisplay, description, languages, locales, variantType } =
+    variant;
 
   return (
     <div className="Details">
       <DetailsSection title="Attributes">
         <DetailsField title="IANA Code">{ID}</DetailsField>
+        {variantType && (
+          <DetailsField title="Type">
+            <Hoverable hoverContent={getVariantTypeDescription(variantType)}>
+              {getVariantTypeDisplay(variantType)}
+            </Hoverable>
+          </DetailsField>
+        )}
         <DetailsField title="Name">{nameDisplay}</DetailsField>
         {description && <DetailsField title="Description">{description}</DetailsField>}
         {dateAdded && <DetailsField title="Added">{dateAdded.toLocaleDateString()}</DetailsField>}

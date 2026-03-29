@@ -1,9 +1,7 @@
-import { RecycleIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
-
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
 
 import {
   getHistoricPresencePrediction,
@@ -63,28 +61,5 @@ export const HistoricPresencePredictionToggle: React.FC<{
         addToChangedLocales(loc);
       }}
     />
-  );
-};
-
-const ToggleablePrediction: React.FC<{
-  currentValue: boolean | undefined;
-  predictedValue: boolean;
-  predictedText: string;
-  onToggle: () => void;
-}> = ({ currentValue, predictedValue, predictedText, onToggle }) => {
-  return (
-    <div style={{ display: 'flex', alignItems: 'center', gap: '0.25em' }}>
-      <span
-        style={{
-          color: (currentValue ?? predictedValue) ? 'var(--color-green)' : 'var(--color-red)',
-          opacity: currentValue == null ? 0.5 : 1,
-        }}
-      >
-        {predictedText}
-      </span>
-      <HoverableButton onClick={onToggle} style={{ padding: '0.25em' }}>
-        <RecycleIcon size="1em" display="block" />
-      </HoverableButton>
-    </div>
   );
 };
