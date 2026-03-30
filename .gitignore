@@ -25,3 +25,27 @@ dist-ssr
 
 # Test coverage
 coverage
+
+# Sensitive / environment files
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*.p12
+secrets.*
+.secrets
+credentials.json
+service-account*.json
+
+# Claude / MCP config and local MCP servers (may contain API keys or server configs)
+.mcp.json
+.claude.json
+.claude/
+servers/
+
+# Playwright — generated test artifacts (never commit these)
+playwright-report/
+test-results/
+.playwright/
