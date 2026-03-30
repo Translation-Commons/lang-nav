@@ -19,7 +19,7 @@ enum IncludeCriteria {
 const VariantAnnotationReport: React.FC = () => {
   const { variants } = useDataContext();
 
-  const [includeCriteria, setIncludeCriteria] = useState(IncludeCriteria.MissingData);
+  const [includeCriteria, setIncludeCriteria] = useState(IncludeCriteria.Any);
   const viewedVariants = useMemo(
     () =>
       variants.filter((variant) => {

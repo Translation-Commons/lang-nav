@@ -45,14 +45,19 @@ const VariantAttributesSection: React.FC<{ variant: VariantData }> = ({ variant 
 };
 
 const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant }) => {
-  const { languages, locales, languoid } = variant;
+  const { languages, locales, languoid, prefixes } = variant;
 
-  if (languages.length === 0 && locales.length === 0 && !languoid) {
+  if (languages.length === 0 && locales.length === 0 && !languoid && prefixes.length === 0) {
     return null;
   }
 
   return (
     <DetailsSection title="Connections">
+      {prefixes.length > 0 && (
+        <DetailsField title="Declared Prefixes">
+          <CommaSeparated>{prefixes}</CommaSeparated>
+        </DetailsField>
+      )}
       {languages.length > 0 && (
         <DetailsField title="Languages">
           <CommaSeparated>

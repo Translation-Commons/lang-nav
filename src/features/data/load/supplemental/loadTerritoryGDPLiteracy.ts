@@ -5,7 +5,7 @@ const DEBUG = false;
 export async function loadTerritoryGDPLiteracy(
   getTerritory: (id: string) => TerritoryData | undefined,
 ): Promise<void> {
-  return await fetch('data/unicode/territories_gdp_literacy.tsv')
+  return await fetch('data/other_sources/territories_gdp_literacy.tsv')
     .then((res) => res.text())
     .then((text) => {
       const SKIP_HEADER_ROWS = 5;

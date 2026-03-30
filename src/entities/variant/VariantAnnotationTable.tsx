@@ -33,6 +33,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
     async (variant: VariantData): Promise<LanguageData | undefined> => {
       const words = variant.nameDisplay.toLowerCase().split(/\s+/);
       const matchingWord = words[0] === 'the' ? words[1] : words[0];
+      if (!matchingWord) return undefined;
       const match = getSubstringFilterOnQuery(matchingWord, SearchableField.NameAny);
       // Try matching within connected languoids first since those are more likely to be correct than a random match across the whole dataset
       const connectedLanguoids = languagesInSelectedSource.filter(

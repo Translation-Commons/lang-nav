@@ -11,6 +11,7 @@ import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHi
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
+import { VariantType } from '@entities/variant/VariantTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -18,6 +19,7 @@ import DecimalNumber from '@shared/ui/DecimalNumber';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+import { getVariantTypeDisplay } from '@strings/VariantStrings';
 
 import Field from './Field';
 import getField from './getField';
@@ -102,6 +104,10 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return object.type === ObjectType.Locale && <LocaleFormedHereDisplay loc={object} />;
     case Field.HistoricPresence:
       return object.type === ObjectType.Locale && <LocaleHistoricPresenceDisplay loc={object} />;
+    case Field.VariantType:
+      return fieldValue === VariantType.Dialect || fieldValue === VariantType.Orthographic
+        ? getVariantTypeDisplay(fieldValue)
+        : fieldValue;
 
     case Field.Description:
     case Field.Example:
@@ -113,8 +119,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Coordinates:
     case Field.GovernmentStatus:
     case Field.None:
-    case Field.VariantType:
-      return <>{fieldValue}</>;
+      return undefined;
 
     default:
       enforceExhaustiveSwitch(field);

@@ -5,7 +5,6 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { PageParamKey } from '@features/params/PageParamTypes';
 import TextInput from '@features/params/ui/TextInput';
 import { getSuggestionsFunction } from '@features/transforms/filtering/getSuggestionsFunction';
-import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
@@ -78,8 +77,7 @@ const VariantLanguoidToggle: React.FC<{
       predictedText = (
         <LanguageSelector
           submit={(value) => {
-            const id = value.split(/\[|\]/)[1].trim(); // In case they paste in something with extra info like "valencia [cat_valencia]"
-            console.log(value, id);
+            const id = value.split(/\[|\]/)[1]?.trim(); // In case they paste in something with extra info like "valencia [cat_valencia]"
             if (!id) return;
             variant.languoidCode = id;
             addToChangedVariants(variant);
@@ -114,11 +112,7 @@ const LanguageSelector: React.FC<{
     const getMatchDistance = (lang: LanguageData): number => lang.scope ?? 0;
     const getMatchGroup = (lang: LanguageData): string => getLanguageScopeLabel(lang.scope);
 
-    return getSuggestionsFunction(
-      languages.sort(sortByPopulation),
-      getMatchDistance,
-      getMatchGroup,
-    );
+    return getSuggestionsFunction(languages, getMatchDistance, getMatchGroup);
   }, [languages]);
 
   return (
