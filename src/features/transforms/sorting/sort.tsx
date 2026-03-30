@@ -74,6 +74,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Code:
     case Field.Description:
     case Field.Modality:
+    case Field.VariantType:
     case Field.Language:
     case Field.LanguageFamily:
     case Field.WritingSystem:

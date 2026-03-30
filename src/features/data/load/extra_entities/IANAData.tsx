@@ -8,7 +8,7 @@ import { VariantData, VariantDictionary } from '@entities/variant/VariantTypes';
 import { toDictionary, unique } from '@shared/lib/setUtils';
 
 export async function loadIANAVariants(): Promise<VariantDictionary | void> {
-  return await fetch(`data/iana_variants.txt`)
+  return await fetch(`data/iana/variants.txt`)
     .then((res) => res.text())
     .then((text) => text.split('%%'))
     .then((variantBlocks) => variantBlocks.map(parseIANAVariant))

@@ -44,6 +44,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.LanguageScope:
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
       // Preferred color schema for ordinals
       // Low values are light blue, high values are dark blue
       return ColorGradient.SequentialBlue;

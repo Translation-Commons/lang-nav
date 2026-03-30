@@ -13,6 +13,7 @@ import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
+import { loadVariantAnnotations } from './supplemental/loadVariantAnnotations';
 import { getLanguageCountsFromCLDR, loadCLDRCoverage } from './supplemental/UnicodeData';
 import { loadAndApplyWikipediaData } from './supplemental/WikipediaData';
 
@@ -36,6 +37,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadLanguageNamesFrench(dataContext.getLanguage),
     loadEthnologue2012Data(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
+    loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();

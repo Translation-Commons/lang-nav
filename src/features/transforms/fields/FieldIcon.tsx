@@ -58,6 +58,7 @@ export function getFieldIcon(field: Field): LucideIcon {
       return NetworkIcon;
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
       return BlocksIcon;
     case Field.SourceType:
       return BuildingIcon;

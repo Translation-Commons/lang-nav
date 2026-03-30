@@ -77,6 +77,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.SourceType:
     case Field.CLDRCoverage:
     case Field.Coordinates:
+    case Field.VariantType:
       return 0;
     default:
       enforceExhaustiveSwitch(field);
@@ -151,6 +152,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.SourceType:
     case Field.CLDRCoverage:
     case Field.Coordinates:
+    case Field.VariantType:
       return 0;
     default:
       enforceExhaustiveSwitch(field);
