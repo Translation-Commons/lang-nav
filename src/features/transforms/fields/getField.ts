@@ -75,6 +75,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getWritingSystemForEntity(object)?.scope;
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
+    case Field.VariantType:
+      return object.type === ObjectType.Variant ? object.variantType : undefined;
     case Field.SourceType:
       return getCensusForEntity(object)?.collectorType;
 

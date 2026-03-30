@@ -113,7 +113,8 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Coordinates:
     case Field.GovernmentStatus:
     case Field.None:
-      return undefined;
+    case Field.VariantType:
+      return <>{fieldValue}</>;
 
     default:
       enforceExhaustiveSwitch(field);

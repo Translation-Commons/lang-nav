@@ -93,6 +93,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.DigitalSupport]: alwaysTrue,
     [Field.SourceType]: alwaysTrue,
     [Field.WritingSystemScope]: alwaysTrue,
+    [Field.VariantType]: alwaysTrue,
     [Field.VitalityMetascore]: alwaysTrue,
     [Field.HistoricPresence]: alwaysTrue,
     [Field.LanguageFormedHere]: alwaysTrue,

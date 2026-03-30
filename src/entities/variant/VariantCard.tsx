@@ -9,6 +9,8 @@ import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getVariantTypeDisplay } from '@strings/VariantStrings';
+
 import { VariantData } from './VariantTypes';
 
 interface Props {
@@ -25,6 +27,17 @@ const VariantCard: React.FC<Props> = ({ data }) => {
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
         <ObjectTitle object={data} />
       </div>
+      <CardField
+        title="Type"
+        field={Field.VariantType}
+        description="What kind of variant it is, whether it's a dialectal or orthographic variation."
+      >
+        {data.variantType ? (
+          getVariantTypeDisplay(data.variantType)
+        ) : (
+          <Deemphasized>No type specified</Deemphasized>
+        )}
+      </CardField>
 
       <CardField
         title="Description"

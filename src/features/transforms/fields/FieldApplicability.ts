@@ -209,10 +209,11 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
       ];
     case ObjectType.Variant:
       return [
+        Field.VariantType,
+
         Field.Language,
         Field.WritingSystem,
         Field.Territory,
-        // Field.Variant, // Equivalent to DisplayName for variants
         // Field.Keyboard,
 
         Field.CountOfLanguages,

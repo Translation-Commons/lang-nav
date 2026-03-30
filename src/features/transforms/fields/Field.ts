@@ -10,6 +10,7 @@ enum Field {
   LanguageScope = 'Language Scope',
   WritingSystemScope = 'Writing System Scope',
   TerritoryScope = 'Territory Scope',
+  VariantType = 'Variant Type',
   SourceType = 'Source Type',
 
   // Status

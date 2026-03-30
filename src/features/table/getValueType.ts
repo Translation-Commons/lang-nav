@@ -62,6 +62,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.LanguageScope:
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
     case Field.SourceType:
     case Field.Indigeneity:
     case Field.HistoricPresence:

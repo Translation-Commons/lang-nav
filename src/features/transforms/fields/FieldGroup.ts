@@ -20,6 +20,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.LanguageScope:
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
     case Field.SourceType:
       return FieldGroup.Identity; // Scope
 

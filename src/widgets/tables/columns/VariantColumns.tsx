@@ -13,10 +13,17 @@ import { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import { getVariantTypeDisplay } from '@strings/VariantStrings';
+
 function getVariantColumns(): TableColumn<VariantData>[] {
   return [
     CodeColumn,
     NameColumn,
+    {
+      key: 'Type',
+      render: (object) => (object.variantType ? getVariantTypeDisplay(object.variantType) : '—'),
+      field: Field.VariantType,
+    },
     {
       key: 'Date Added',
       render: (object) => object.dateAdded?.toLocaleDateString(),
@@ -33,6 +40,14 @@ function getVariantColumns(): TableColumn<VariantData>[] {
         </CommaSeparated>
       ),
       field: Field.Language,
+      columnGroup: 'Related Objects',
+    },
+    {
+      key: 'Equivalent Languoid',
+      render: (object) => {
+        if (!object.languoid || object.languoid.ID === 'mis') return null;
+        return <HoverableObjectName object={object.languoid} />;
+      },
       columnGroup: 'Related Objects',
     },
     {
