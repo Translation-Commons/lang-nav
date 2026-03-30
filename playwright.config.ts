@@ -8,7 +8,7 @@ export default defineConfig({
   workers: 1,
   reporter: [
     ['html', { open: 'always', outputFolder: 'playwright-report' }],
-    ['list'],   // also prints results to the terminal while running
+    ['list'], // also prints results to the terminal while running
   ],
   use: {
     baseURL: 'https://translation-commons.github.io/lang-nav',
@@ -20,9 +20,9 @@ export default defineConfig({
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
-        headless: false,  // opens a real browser window on your screen
+        headless: false, // opens a real browser window on your screen
         launchOptions: {
-          slowMo: 800,    // slows every action by 800ms so you can watch
+          slowMo: 800, // slows every action by 800ms so you can watch
         },
       },
     },

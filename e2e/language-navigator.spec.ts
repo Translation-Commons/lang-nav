@@ -39,9 +39,7 @@ test.describe('Search', () => {
     await expect(page.locator('text=Results').first()).toBeVisible();
 
     // Top card is the Quechua macrolanguage [que]
-    await expect(
-      page.getByRole('button', { name: /Quechua card/ }).first()
-    ).toBeVisible();
+    await expect(page.getByRole('button', { name: /Quechua card/ }).first()).toBeVisible();
   });
 
   test('result cards show language code in brackets', async ({ page }) => {
@@ -139,9 +137,7 @@ test.describe('Hierarchy View', () => {
     const toggleBtn = page.getByRole('button', { name: '▼' }).first();
     await toggleBtn.click();
     // After collapse the button switches to ▶
-    await expect(
-      page.getByRole('button', { name: '▶' }).first()
-    ).toBeVisible();
+    await expect(page.getByRole('button', { name: '▶' }).first()).toBeVisible();
   });
 });
 
@@ -184,9 +180,7 @@ test.describe('Tables View', () => {
 
   test('export button is present', async ({ page }) => {
     await waitForLoad(page, 'Export');
-    await expect(
-      page.getByRole('button', { name: /Export/ }).first()
-    ).toBeVisible();
+    await expect(page.getByRole('button', { name: /Export/ }).first()).toBeVisible();
   });
 
   test('object-type tabs are available (Language, Locale, Territory…)', async ({ page }) => {
