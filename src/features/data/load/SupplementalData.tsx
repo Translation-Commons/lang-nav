@@ -37,7 +37,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadLanguageNamesFrench(dataContext.getLanguage),
     loadEthnologue2012Data(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
-    loadVariantAnnotations(dataContext.getVariant),
+    loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();

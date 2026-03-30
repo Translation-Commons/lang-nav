@@ -1,4 +1,5 @@
 import { RecycleIcon } from 'lucide-react';
+import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
@@ -10,7 +11,7 @@ const ToggleablePrediction = <T,>({
 }: {
   currentValue: T | undefined;
   predictedValue: T;
-  predictedText: string;
+  predictedText: React.ReactNode;
   onToggle: () => void;
 }) => {
   return (

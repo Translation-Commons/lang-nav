@@ -19,14 +19,18 @@ export interface VariantData extends ObjectBase {
   codeDisplay: VariantIANATag;
   nameDisplay: string;
   description?: string;
-  variantType?: VariantType;
 
   dateAdded?: Date;
   prefixes: string[]; // Usually language codes but sometimes composites like zh-Latn or oc-lengadoc
   languageCodes: LanguageCode[]; // zh, oc, etc.
   localeCodes: StandardLocaleCode[]; // would look like zh-Latn-pinyin or oc-lengadoc-grclass
 
+  // Additional data from Translation Commons
+  variantType?: VariantType;
+  languoidCode?: LanguageCode; // When this variant has a direct match to a languoid, this is the code of that languoid. For example "valencia" can be expressed as a variant (cat_valencia) OR a languoid from glottolog vale1252
+
   // References to other objects
-  languages: LanguageData[];
+  languages: LanguageData[]; // The languages that have this variation
   locales: LocaleData[];
+  languoid?: LanguageData; // The precise languoid that matches this variant
 }

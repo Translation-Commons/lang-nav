@@ -1,70 +1,135 @@
-ID	VariantType
-cornu	d
-unifon	o
-basiceng	d
-emodeng	d
-newfound	d
-oxendict	o
-scotland	d
-scouse	d
-boont	d
-pinyin	o
-spanglis	d
-tongyong	o
-wadegile	o
-1694acad	d
-gallo	d
-ao1990	o
-abl1943	o
-colb1945	o
-luna1918	o
-petr1708	o
-1901	o
-1996	o
-viennese	d
-hepburn	o
-heploc	o
-baku1926	o
-hanoi	d
-huett	d
-saigon	d
-jyutping	o
-kociewie	d
-pehoeji	o
-tailo	o
-blasl	d
-monoton	o
-polyton	o
-valencia	d
-tarask	o
-1959acad	o
-auvern	d
-cisaup	d
-creiss	d
-gascon	d
-grclass	o
-grital	o
-grmistr	o
-lemosin	d
-lengadoc	d
-nicard	d
-provenc	d
-vivaraup	d
-1994	o
-bohoric	o
-dajnko	o
-biske	d
-lipaw	o
-metelko	o
-nedis	d
-njiva	d
-ijekavsk	o
-ekavsk	o
-ivanchov	o
-bornholm	d
-akhmimic	d
-bohairic	d
-fayyumic	d
-asante	d
-akuapem	d
-synnejyl	d
+ID	VariantType	Languoid
+spanglis	d	mis
+unifon	o	
+basiceng	d	mis
+boont	d	mis
+cornu	d	mis
+emodeng	d	mis
+newfound	d	newf1239
+oxendict	o	
+scotland	d	mis
+scouse	d	mis
+pinyin	o	
+tongyong	o	
+wadegile	o	
+1694acad	d	mis
+gallo	d	mis
+ao1990	o	
+abl1943	o	
+colb1945	o	
+luna1918	o	
+petr1708	o	
+1901	o	
+1996	o	
+viennese	d	vien1238
+hepburn	o	
+heploc	o	
+baku1926	o	
+hanoi	d	nort2683
+huett	d	cent1988
+saigon	d	sout2687
+jyutping	o	
+kociewie	d	mis
+pehoeji	o	
+tailo	o	
+blasl	d	mis
+monoton	o	
+polyton	o	
+valencia	d	vale1252
+1959acad	o	
+tarask	o	
+ekavsk	o	
+ijekavsk	o	
+ivanchov	o	
+bornholm	d	born1251
+synnejyl	d	mis
+akuapem	d	akua1239
+asante	d	asan1239
+akhmimic	d	akhm1237
+bohairic	d	boha1242
+fayyumic	d	fayy1237
+lycopol	d	lyco1237
+mesokem	d	oxyr1237
+sahidic	d	sahi1241
+arevela	d	hye
+arevmda	d	hyw
+bauddha	d	budd1234
+itihasa	d	mis
+laukika	d	cls
+vaidika	d	vsn
+aranes	d	aran1260
+auvern	d	auve1239
+cisaup	d	cisa1238
+creiss	d	mis
+gascon	d	gasc1240
+grclass	o	
+grital	o	
+grmistr	o	
+lemosin	d	limo1246
+lengadoc	d	lang1309
+nicard	d	nica1249
+provenc	d	prov1235
+vivaraup	d	viva1235
+1994	o	
+biske	d	mis
+bohoric	o	
+dajnko	o	
+lipaw	o	
+metelko	o	
+nedis	d	mis
+njiva	d	mis
+osojs	d	mis
+rozaj	d	resi1246
+solba	d	mis
+pahawh2	o	
+pahawh3	o	
+pahawh4	o	
+ulster	d	ulst1239
+biscayan	d	bisc1236
+hognorsk	d	mis
+vecdruka	o	
+barla	d	barl1241
+sotav	d	kabu1257
+ltg1929	o	mis
+ltg2007	o	
+jauer	d	mis
+puter	d	uppe1396
+rumgr	d	ruma1247
+surmiran	d	surm1243
+sursilv	d	surs1244
+sutsilv	d	suts1235
+vallader	d	lowe1386
+kleinsch	o	
+tunumiit	d	tunu1234
+balanka	d	bala1303
+peano	d	mis
+aluku	d	aluk1239
+ndyuka	d	mis
+pamaka	d	mis
+anpezo	d	ampe1238
+fascia	d	fass1244
+fodom	d	livi1241
+gherd	d	gard1241
+valbadia	d	badi1244
+arkaika	d	mis
+hsistemo	o	
+xsistemo	o	
+kkcor	o	
+kscor	o	
+uccor	o	
+ucrcor	o	
+nulik	d	mis
+rigik	d	mis
+leidentr	o	
+mdcegyp	o	mis
+mdctrans	o	
+1606nict	d	mis
+bciav	d	mis
+bcizbl	d	mis
+alalc97	o	
+fonipa	o	
+fonkirsh	o	
+fonnapa	o	
+fonupa	o	
+fonxsamp	o	
+simple	d	mul
