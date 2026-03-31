@@ -36,6 +36,15 @@ const useFilteredObjects = ({
   const sortFunction = getSortFunction();
   const allObjectsInType = inputObjects ?? pageObjects;
 
+  // const filteredObjects = allObjectsInType
+  //   .filter(
+  //     (obj) =>
+  //       filterByScope(obj) &&
+  //       filterBySubstring(obj) &&
+  //       filterByConnections(obj) &&
+  //       filterByVitality(obj),
+  //   )
+  //   .sort(sortFunction);
   const filteredObjects = useMemo(() => {
     return allObjectsInType
       .filter(

@@ -16,23 +16,24 @@ const LocalParamsProvider: React.FC<{
   const globalParams = usePageParams();
   const [localParams, setLocalParams] = useState<PageParamsOptional>({});
 
-  const updatePageParams = useCallback(
-    (newParams: PageParamsOptional) => setLocalParams((prev) => ({ ...prev, newParams })),
+  // Instead of mutating the global page's parameters, have mutations in this context just override a local layer
+  const updateLocalParams = useCallback(
+    (newParams: PageParamsOptional) => setLocalParams((prev) => ({ ...prev, ...newParams })),
     [setLocalParams],
   );
 
   const providerValue: PageParamsContextState = useMemo(() => {
-    console.log(overrides, localParams);
     return {
       ...globalParams,
       ...overrides,
       ...localParams,
-      updatePageParams,
+      updatePageParams: updateLocalParams,
     };
-  }, [globalParams, updatePageParams, localParams, overrides]);
+  }, [globalParams, updateLocalParams, localParams, overrides]);
 
   return (
     <PageParamsContext.Provider value={providerValue}>
+      {/* Need to provide a new hovercard that will use the local params */}
       <HoverCardProvider>{children}</HoverCardProvider>
     </PageParamsContext.Provider>
   );
