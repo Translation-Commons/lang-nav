@@ -91,3 +91,7 @@ export function countOccurrences<T extends string | number>(items: T[]): Record<
     {} as Record<T, number>,
   );
 }
+
+export function countBy<T>(items: T[], keyFn: (item: T) => string | number): number {
+  return uniqueBy(items, keyFn).length;
+}
