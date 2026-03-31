@@ -23,15 +23,11 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
 
   if (localesFromUniqueTerritories.length === 0) return null;
 
-  const totalPopulation = lang.populationEstimate ?? lang.populationFromLocales;
-
   const top10 = localesFromUniqueTerritories.slice(0, 10);
   const leftCol = top10.slice(0, 5);
   const rightCol = top10.slice(5, 10);
   const remaining = localesFromUniqueTerritories.length - 10;
 
-  const getPercent = (population?: number) =>
-    totalPopulation && population ? (population / totalPopulation) * 100 : undefined;
 
   return (
     <DetailsSection title="Speakers by Territory">
@@ -44,7 +40,7 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
                 <td><HoverableObjectName object={locale} labelSource="territory" /></td>
                 <CellPopulation
                   population={locale.populationAdjusted}
-                  percent={getPercent(locale.populationAdjusted)}
+                  percent={locale.populationSpeakingPercent}
                 />
               </tr>
             ))}
@@ -58,7 +54,7 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
                 <td><HoverableObjectName object={locale} labelSource="territory" /></td>
                 <CellPopulation
                   population={locale.populationAdjusted}
-                  percent={getPercent(locale.populationAdjusted)}
+                  percent={locale.populationSpeakingPercent}
                 />
               </tr>
             ))}
