@@ -54,7 +54,6 @@ export async function loadECRML(
             // Find locales that match this language + territory combination
             const locales = language.locales.filter((l) => l.territoryCode === territoryCode);
 
-            if (locales.length > 0) {
               locales.forEach((locale) => {
                 if (locale.ecrmlProtection != null) {
                   return;
