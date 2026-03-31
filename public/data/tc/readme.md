@@ -12,6 +12,6 @@ Curated from various sources, these are the core data files that power the main 
 These have been contributed by hand. Often with insights from other datasets but edited significantly so it cannot be originally sourced from any one place but Language Navigator.
 
 - familiesToLanguages.tsv
-- manualGlottocodeToISO.tsv
+- glottocodeToISO.tsv
 - indigeneity.tsv
 - wikipedias.tsv
