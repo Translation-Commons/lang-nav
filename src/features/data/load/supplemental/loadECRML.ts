@@ -54,14 +54,13 @@ export async function loadECRML(
             // Find locales that match this language + territory combination
             const locales = language.locales.filter((l) => l.territoryCode === territoryCode);
 
-              locales.forEach((locale) => {
-                if (locale.ecrmlProtection != null) {
-                  return;
-                }
-                locale.ecrmlProtection = protectionLevel;
-              });
-              break; // Found match, no need to try other language codes
-            }
+            locales.forEach((locale) => {
+              if (locale.ecrmlProtection != null) {
+                return;
+              }
+              locale.ecrmlProtection = protectionLevel;
+            });
+            break; // Found match, no need to try other language codes
           }
         });
     })
