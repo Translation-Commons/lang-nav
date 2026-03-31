@@ -30,9 +30,7 @@ export async function loadECRML(
         .filter((line) => line.trim() !== '' && !line.startsWith('#'))
         .forEach((line) => {
           const parts = line.split('\t');
-          if (parts.length <= protectionColumn) {
-            return;
-          }
+          if (parts.length <= protectionColumn) return;
 
           const languageCodes = parts[languageCodeColumn]?.trim(); // May contain slashes like "ber/rif" or "hbs/bos"
           const territoryCode = parts[regionCodeColumn]?.trim(); // ISO region code (e.g., "BA", "ME")
