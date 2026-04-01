@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { getObjectFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
-
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import ObjectMap from '@features/map/ObjectMap';
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
+import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import Field from '@features/transforms/fields/Field';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
@@ -17,12 +17,10 @@ import Pill from '@shared/ui/Pill';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
+const MAP_CIRCLE_LIMIT = 200;
+
 const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { updatePageParams, limit } = usePageParams();
-  const sortFunction = getSortFunction();
-  const descendants = getObjectFullDescendants(lang)
-    .filter((l) => l.type === ObjectType.Language && l.latitude != null && l.longitude != null)
-    .sort(sortFunction) as LanguageData[];
+  const { updatePageParams } = usePageParams();
 
   return (
     <DetailsSection title="Location">
@@ -38,6 +36,30 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         )}
       </DetailsField>
 
+      {/* Show maps with local params to customize this for the language without interfering with explore surface params */}
+      <LocalParamsProvider
+        overrides={{
+          limit: MAP_CIRCLE_LIMIT,
+          objectType: ObjectType.Language,
+          languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
+          sortBy: Field.Population,
+        }}
+      >
+        <Maps lang={lang} updatePageParams={updatePageParams} />
+      </LocalParamsProvider>
+    </DetailsSection>
+  );
+};
+
+type MapsProps = {
+  lang: LanguageData;
+  // Updating the global page params, not the local params
+  updatePageParams: (newParams: PageParamsOptional) => void;
+};
+function Maps({ lang, updatePageParams }: MapsProps) {
+  const descendants = useFilteredObjects({}).filteredObjects;
+  return (
+    <>
       {lang.latitude && lang.longitude ? (
         <>
           These coordinates show the &quot;primary&quot; location of the language, as defined by
@@ -49,29 +71,31 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       ) : null}
       {descendants.length > 0 && (
         <>
-          These are the locations of descendant languages/dialects.
-          {descendants.length > limit && (
-            <Deemphasized>
-              {' '}
-              Showing first {limit} of {descendants.length}.
-            </Deemphasized>
-          )}
-          <ObjectMap objects={descendants} maxWidth={400} />
-          <HoverableButton
-            onClick={() =>
-              updatePageParams({
-                view: View.Map,
-                languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
-                objectID: undefined,
-              })
-            }
-          >
-            See more in Map view
-          </HoverableButton>
+          <div>
+            These are the locations of descendant languages/dialects.
+            {descendants.length > MAP_CIRCLE_LIMIT && (
+              <Deemphasized>
+                {' '}
+                Showing first {MAP_CIRCLE_LIMIT} of {descendants.length}.
+              </Deemphasized>
+            )}{' '}
+            <HoverableButton
+              style={{ padding: '0.25em' }}
+              onClick={() =>
+                updatePageParams({
+                  view: View.Map,
+                  languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
+                })
+              }
+            >
+              See the full map in explore panel
+            </HoverableButton>
+          </div>
+          <ObjectMap objects={descendants} maxWidth={1000} />
         </>
       )}
-    </DetailsSection>
+    </>
   );
-};
+}
 
 export default LanguageLocation;
