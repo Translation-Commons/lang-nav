@@ -18,7 +18,13 @@ const LocalParamsProvider: React.FC<{
 
   // Instead of mutating the global page's parameters, have mutations in this context just override a local layer
   const updateLocalParams = useCallback(
-    (newParams: PageParamsOptional) => setLocalParams((prev) => ({ ...prev, ...newParams })),
+    (newParams: PageParamsOptional) => {
+      setLocalParams((prev) => ({ ...prev, ...newParams }));
+      if (newParams.objectID) {
+        // Keep the global objectID in sync so that object name links can update the details panel
+        globalParams.updatePageParams({ objectID: newParams.objectID });
+      }
+    },
     [setLocalParams],
   );
 

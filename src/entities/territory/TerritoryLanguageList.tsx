@@ -18,7 +18,7 @@ type Props = {
   territory: TerritoryData;
 };
 
-const TerritoryLocaleList: React.FC<Props> = ({ territory }) => {
+const TerritoryLanguageList: React.FC<Props> = ({ territory }) => {
   return (
     <LocalParamsProvider overrides={{ territoryScopes: [territory.scope], territoryFilter: '' }}>
       <TerritoryLanguageListContents territory={territory} />
@@ -51,4 +51,4 @@ const TerritoryLanguageListContents: React.FC<Props> = ({ territory }) => {
   );
 };
 
-export default TerritoryLocaleList;
+export default TerritoryLanguageList;

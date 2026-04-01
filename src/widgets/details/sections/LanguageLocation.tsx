@@ -57,7 +57,9 @@ type MapsProps = {
   updatePageParams: (newParams: PageParamsOptional) => void;
 };
 function Maps({ lang, updatePageParams }: MapsProps) {
-  const descendants = useFilteredObjects({}).filteredObjects;
+  const descendants = useFilteredObjects({}).filteredObjects.filter(
+    (l) => l.type == ObjectType.Language && l.latitude && l.longitude,
+  );
   return (
     <>
       {lang.latitude && lang.longitude ? (
