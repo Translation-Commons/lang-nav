@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
@@ -10,11 +9,13 @@ import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import { getECRMLInfo, getOfficialLabel } from '@entities/locale/LocaleStrings';
+import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import LocaleEcrmlCoverage from './LocaleEcrmlCoverage';
 
 type Props = {
   territory: TerritoryData;
@@ -58,29 +59,9 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           key: 'Coverage under ECRML',
           description:
             'Whether the language is covered by the European Charter for Regional or Minority Languages in this territory.',
-          render: (loc) => {
-            if (!loc.ecrmlProtection) {
-              return <Deemphasized>None</Deemphasized>;
-            }
-            const ecrmlInfo = getECRMLInfo(loc.ecrmlProtection);
-            if (!ecrmlInfo) {
-              return <Deemphasized>None</Deemphasized>;
-            }
-            return (
-              <Hoverable
-                hoverContent={
-                  <div>
-                    <strong>{ecrmlInfo.title}</strong>
-                    <div style={{ marginTop: '0.5em', maxWidth: '300px' }}>
-                      {ecrmlInfo.description}
-                    </div>
-                  </div>
-                }
-              >
-                {ecrmlInfo.title}
-              </Hoverable>
-            );
-          },
+          render: (loc) => <LocaleEcrmlCoverage locale={loc} />,
+          field: Field.ECRMLProtection,
+          valueType: TableValueType.Enum,
           isInitiallyVisible: false,
         },
           {

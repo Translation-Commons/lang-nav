@@ -1,27 +1,27 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import {
-  getCountOfCensuses,
-  getCountOfLanguages,
-  getCountOfWritingSystems,
-  getDepth,
-  getObjectDateAsNumber,
-  getObjectLiteracy,
-  getObjectMostImportantLanguageName,
-  getWritingSystemsInObject,
+    getCountOfCensuses,
+    getCountOfLanguages,
+    getCountOfWritingSystems,
+    getDepth,
+    getObjectDateAsNumber,
+    getObjectLiteracy,
+    getObjectMostImportantLanguageName,
+    getWritingSystemsInObject,
 } from '@entities/lib/getObjectMiscFields';
 import {
-  getObjectPercentOfTerritoryPopulation,
-  getObjectPopulation,
-  getObjectPopulationDirectlySourced,
-  getObjectPopulationOfDescendants,
-  getObjectPopulationPercentInBiggestDescendantLanguage,
-  getObjectPopulationRelativeToOverallLanguageSpeakers,
+    getObjectPercentOfTerritoryPopulation,
+    getObjectPopulation,
+    getObjectPopulationDirectlySourced,
+    getObjectPopulationOfDescendants,
+    getObjectPopulationPercentInBiggestDescendantLanguage,
+    getObjectPopulationRelativeToOverallLanguageSpeakers,
 } from '@entities/lib/getObjectPopulation';
 import {
-  getContainingTerritories,
-  getCountOfChildTerritories,
-  getCountOfCountries,
+    getContainingTerritories,
+    getCountOfChildTerritories,
+    getCountOfCountries,
 } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -103,6 +103,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
         : object.historicPresence
           ? 1
           : 0;
+    case Field.ECRMLProtection:
+      return object.type === ObjectType.Locale ? object.ecrmlProtection : undefined;
     case Field.GovernmentStatus:
       return object.type === ObjectType.Locale ? object.officialStatus : undefined; // Not yet defined
 

@@ -1,4 +1,5 @@
 import { LanguageData } from '@entities/language/LanguageTypes';
+import { parseECRMLProtectionLevel } from '@entities/locale/LocaleStrings';
 
 /**
  * Load ECRML (European Charter for Regional or Minority Languages) data
@@ -34,9 +35,9 @@ export async function loadECRML(
 
           const languageCodes = parts[languageCodeColumn]?.trim(); // May contain slashes like "ber/rif" or "hbs/bos"
           const territoryCode = parts[regionCodeColumn]?.trim(); // ISO region code (e.g., "BA", "ME")
-          const protectionLevel = parts[protectionColumn]?.trim(); // Level of protection
+          const protectionLevel = parseECRMLProtectionLevel(parts[protectionColumn]?.trim());
 
-          if (!languageCodes || !territoryCode || !protectionLevel) {
+          if (!languageCodes || !territoryCode || protectionLevel == null) {
             return;
           }
 
