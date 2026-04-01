@@ -35,8 +35,8 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  * the number of child language nodes.
  */
 export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
-  [ObjectType.Language]: [Field.Language],
-  [ObjectType.Territory]: [Field.Territory, Field.PopulationDirectlySourced],
+  [ObjectType.Language]: [],
+  [ObjectType.Territory]: [Field.PopulationDirectlySourced],
   [ObjectType.WritingSystem]: [
     Field.WritingSystem,
     Field.CountOfWritingSystems,

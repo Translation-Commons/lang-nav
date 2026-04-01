@@ -2,6 +2,8 @@ import React from 'react';
 
 import MapContainer from '@features/map/MapContainer';
 import ObjectMap from '@features/map/ObjectMap';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
+import { ObjectType } from '@features/params/PageParamTypes';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -26,14 +28,16 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
       </DetailsField>
 
       <DetailsField title="Map">Showing {getMapLabel(territory)}</DetailsField>
-      <MapContainer>
-        <ObjectMap
-          objects={[
-            territory,
-            ...getTerritoryDescendents(territory, territory.scope === TerritoryScope.Country),
-          ]}
-        />
-      </MapContainer>
+      <LocalParamsProvider overrides={{ limit: -1, objectType: ObjectType.Territory }}>
+        <MapContainer>
+          <ObjectMap
+            objects={[
+              territory,
+              ...getTerritoryDescendents(territory, territory.scope === TerritoryScope.Country),
+            ]}
+          />
+        </MapContainer>
+      </LocalParamsProvider>
     </DetailsSection>
   );
 };

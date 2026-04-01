@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
@@ -30,47 +31,49 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
   }
 
   return (
-    <InteractiveObjectTable<LocaleData>
-      tableID={TableID.LanguagesInTerritory}
-      objects={locales}
-      shouldFilterUsingSearchBar={false}
-      columns={[
-        CodeColumn,
-        EndonymColumn,
-        {
-          key: 'Language',
-          render: (loc) => <HoverableObjectName object={loc} labelSource="language" />,
-          field: Field.Name,
-        },
-        {
-          key: 'Official Status',
-          render: (loc) =>
-            loc.officialStatus ? (
-              getOfficialLabel(loc.officialStatus)
-            ) : (
-              <Deemphasized>None</Deemphasized>
-            ),
-        },
-        {
-          key: 'Population',
-          render: (loc) => loc.populationSpeaking,
-          valueType: TableValueType.Population,
-          field: Field.Population,
-        },
-        {
-          key: 'Population Source',
-          render: (loc) => <LocaleCensusCitation locale={loc} size="short" />,
-          valueType: TableValueType.Population,
-          isInitiallyVisible: false,
-        },
-        {
-          key: 'Percent Within Territory',
-          render: (loc) => loc.populationSpeakingPercent,
-          valueType: TableValueType.Decimal,
-          field: Field.PercentOfTerritoryPopulation,
-        },
-      ]}
-    />
+    <LocalParamsProvider overrides={{ territoryScopes: [territory.scope] }}>
+      <InteractiveObjectTable<LocaleData>
+        tableID={TableID.LanguagesInTerritory}
+        objects={locales}
+        shouldFilterUsingSearchBar={false}
+        columns={[
+          CodeColumn,
+          EndonymColumn,
+          {
+            key: 'Language',
+            render: (loc) => <HoverableObjectName object={loc} labelSource="language" />,
+            field: Field.Name,
+          },
+          {
+            key: 'Official Status',
+            render: (loc) =>
+              loc.officialStatus ? (
+                getOfficialLabel(loc.officialStatus)
+              ) : (
+                <Deemphasized>None</Deemphasized>
+              ),
+          },
+          {
+            key: 'Population',
+            render: (loc) => loc.populationSpeaking,
+            valueType: TableValueType.Population,
+            field: Field.Population,
+          },
+          {
+            key: 'Population Source',
+            render: (loc) => <LocaleCensusCitation locale={loc} size="short" />,
+            valueType: TableValueType.Population,
+            isInitiallyVisible: false,
+          },
+          {
+            key: 'Percent Within Territory',
+            render: (loc) => loc.populationSpeakingPercent,
+            valueType: TableValueType.Decimal,
+            field: Field.PercentOfTerritoryPopulation,
+          },
+        ]}
+      />
+    </LocalParamsProvider>
   );
 };
 
