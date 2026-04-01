@@ -28,7 +28,7 @@ const TerritoryLanguageList: React.FC<Props> = ({ territory }) => {
 
 const TerritoryLanguageListContents: React.FC<Props> = ({ territory }) => {
   const locales = territory.locales ?? [];
-  const filteredLocales = useFilteredObjects({ inputObjects: locales })
+  const filteredLocales = useFilteredObjects({ inputObjects: locales, useSubstring: false })
     .filteredObjects as LocaleData[];
 
   if (locales.length === 0) return <Deemphasized>Unknown</Deemphasized>;
