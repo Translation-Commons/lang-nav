@@ -175,9 +175,10 @@ function addCLDRLanguageMatching(cldrLanguages: LanguagesBySource['CLDR']): void
     .languageMatch as CLDRLanguageMatchImport[];
 
   languageMatchEntries.forEach((match) => {
-    const desiredLanguageCode = getPrimaryLanguageSubtag(match._desired);
-    const supportedLanguageCode = getPrimaryLanguageSubtag(match._supported);
+    const desiredLanguageCode = getPureLanguageCode(match._desired);
+    const supportedLanguageCode = getPureLanguageCode(match._supported);
     if (desiredLanguageCode == null || supportedLanguageCode == null) return;
+    if (desiredLanguageCode === supportedLanguageCode) return;
 
     const desiredLanguage = cldrLanguages[desiredLanguageCode];
     const supportedLanguage = cldrLanguages[supportedLanguageCode];
@@ -193,11 +194,11 @@ function addCLDRLanguageMatching(cldrLanguages: LanguagesBySource['CLDR']): void
   });
 }
 
-function getPrimaryLanguageSubtag(languageTag: string): string | undefined {
-  const primarySubtag = languageTag.split(/[_-]/)[0];
-  // Skip wildcard, variable, and malformed tags (eg. *, $enUS, etc.)
-  if (primarySubtag == null || !/^[a-z]{2,3}$/i.test(primarySubtag)) return undefined;
-  return primarySubtag;
+function getPureLanguageCode(languageTag: string): string | undefined {
+  // Keep only language-to-language matches in this PR.
+  // Locale/script/region-variable matches are intentionally deferred.
+  if (!/^[a-z]{2,3}$/i.test(languageTag)) return undefined;
+  return languageTag;
 }
 
 export async function loadCLDRCoverage(

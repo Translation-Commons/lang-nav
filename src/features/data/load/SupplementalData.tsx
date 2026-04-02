@@ -10,7 +10,6 @@ import { loadEthnologue2012Data } from './extra_entities/SILData';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
 import { loadLandArea } from './supplemental/loadLandArea';
-import { loadLanguageMatchAnnotations } from './supplemental/loadLanguageMatchAnnotations';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
@@ -36,7 +35,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadLandArea(dataContext.getTerritory),
     loadTerritoryNames(dataContext.getTerritory),
     loadLanguageNamesFrench(dataContext.getLanguage),
-    loadLanguageMatchAnnotations(dataContext.getCLDRLanguage),
     loadEthnologue2012Data(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),

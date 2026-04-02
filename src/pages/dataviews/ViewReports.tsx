@@ -2,7 +2,6 @@ import React from 'react';
 
 import DubiousLanguages from '@widgets/reports/DubiousLanguages';
 import LanguagePathsReport from '@widgets/reports/LanguagePathsReport';
-import LanguageProximityAnnotationReport from '@widgets/reports/LanguageProximityAnnotationReport';
 import LanguagesLargestDescendant from '@widgets/reports/LanguagesLargestDescendant';
 import LanguagesMissingWritingSystems from '@widgets/reports/LanguagesMissingWritingSystems';
 import LanguagesWithIdenticalNames from '@widgets/reports/LanguagesWithIdenticalNames';
@@ -50,7 +49,6 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
           <LanguagesWithIdenticalNames />
           <LanguagesLargestDescendant />
           <LanguagePathsReport />
-          <LanguageProximityAnnotationReport />
         </>
       );
     case ObjectType.WritingSystem:
