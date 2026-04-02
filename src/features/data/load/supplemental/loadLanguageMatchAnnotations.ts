@@ -38,7 +38,8 @@ export async function loadLanguageMatchAnnotations(
             const reverseMatch = supportedLanguage?.CLDR.languageMatch?.find(
               (match) => getPrimaryLanguageSubtag(match.supported) === entry.desiredCode,
             );
-            if (reverseMatch != null) reverseMatch.mutualIntelligibility = entry.mutualIntelligibility;
+            if (reverseMatch != null)
+              reverseMatch.mutualIntelligibility = entry.mutualIntelligibility;
           }
         }),
     );

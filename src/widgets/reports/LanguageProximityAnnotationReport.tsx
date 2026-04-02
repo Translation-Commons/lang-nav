@@ -124,15 +124,19 @@ const LanguageProximityAnnotationReport: React.FC = () => {
             ))}
           </select>
         </label>
-        <button onClick={copyAnnotations} style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+        <button
+          onClick={copyAnnotations}
+          style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}
+        >
           <CopyIcon size="1em" />
           Copy annotations ({Object.keys(changedRows).length})
         </button>
       </div>
-
       <div style={{ maxHeight: '30em', overflow: 'auto', border: '1px solid var(--color-border)' }}>
         <table style={{ borderCollapse: 'collapse', width: '100%', textAlign: 'left' }}>
-          <thead style={{ position: 'sticky', top: 0, background: 'var(--color-background)', zIndex: 1 }}>
+          <thead
+            style={{ position: 'sticky', top: 0, background: 'var(--color-background)', zIndex: 1 }}
+          >
             <tr>
               <th>Desired</th>
               <th>Supported</th>
@@ -157,7 +161,8 @@ const LanguageProximityAnnotationReport: React.FC = () => {
                     <>
                       {' '}
                       <Deemphasized>
-                        suggested: {getLanguageProximityDisplay(getSuggestedLevel(row.match.distance))}
+                        suggested:{' '}
+                        {getLanguageProximityDisplay(getSuggestedLevel(row.match.distance))}
                       </Deemphasized>
                     </>
                   )}
@@ -170,7 +175,8 @@ const LanguageProximityAnnotationReport: React.FC = () => {
                     <>
                       {' '}
                       <Deemphasized>
-                        suggested: {getLanguageProximityDisplay(getSuggestedLevel(row.match.distance))}
+                        suggested:{' '}
+                        {getLanguageProximityDisplay(getSuggestedLevel(row.match.distance))}
                       </Deemphasized>
                     </>
                   )}
