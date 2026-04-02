@@ -103,6 +103,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
         : object.historicPresence
           ? 1
           : 0;
+    case Field.ECRMLProtection:
+      return object.type === ObjectType.Locale ? object.ecrmlProtection : undefined;
     case Field.GovernmentStatus:
       return object.type === ObjectType.Locale ? object.officialStatus : undefined; // Not yet defined
 
