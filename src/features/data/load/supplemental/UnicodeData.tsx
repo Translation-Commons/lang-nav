@@ -1,4 +1,5 @@
 import aliases from 'cldr-core/supplemental/aliases.json';
+import languageMatching from 'cldr-core/supplemental/languageMatching.json';
 import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
 import { ObjectType } from '@features/params/PageParamTypes';
@@ -11,6 +12,13 @@ import { CLDRCoverageImport, CLDRCoverageLevel } from '@entities/types/CLDRTypes
 import { DataContextType } from '../../context/useDataContext';
 
 const DEBUG = false;
+
+type CLDRLanguageMatchImport = {
+  _desired: string;
+  _supported: string;
+  _distance: number;
+  _oneway?: boolean;
+};
 
 export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): void {
   // Start with the initialized
@@ -158,7 +166,38 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       }
     });
 
+  addCLDRLanguageMatching(cldrLanguages);
   languagesBySource.CLDR = cldrLanguages;
+}
+
+function addCLDRLanguageMatching(cldrLanguages: LanguagesBySource['CLDR']): void {
+  const languageMatchEntries = languageMatching.supplemental.languageMatching['written-new']
+    .languageMatch as CLDRLanguageMatchImport[];
+
+  languageMatchEntries.forEach((match) => {
+    const desiredLanguageCode = getPrimaryLanguageSubtag(match._desired);
+    const supportedLanguageCode = getPrimaryLanguageSubtag(match._supported);
+    if (desiredLanguageCode == null || supportedLanguageCode == null) return;
+
+    const desiredLanguage = cldrLanguages[desiredLanguageCode];
+    const supportedLanguage = cldrLanguages[supportedLanguageCode];
+    if (desiredLanguage == null || supportedLanguage == null) return;
+
+    desiredLanguage.CLDR.languageMatch ??= [];
+    desiredLanguage.CLDR.languageMatch.push({
+      desired: match._desired,
+      supported: match._supported,
+      distance: Number(match._distance),
+      oneway: match._oneway,
+    });
+  });
+}
+
+function getPrimaryLanguageSubtag(languageTag: string): string | undefined {
+  const primarySubtag = languageTag.split(/[_-]/)[0];
+  // Skip wildcard, variable, and malformed tags (eg. *, $enUS, etc.)
+  if (primarySubtag == null || !/^[a-z]{2,3}$/i.test(primarySubtag)) return undefined;
+  return primarySubtag;
 }
 
 export async function loadCLDRCoverage(

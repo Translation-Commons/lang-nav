@@ -35,3 +35,12 @@ export type CLDRCoverageData = {
   actualCoverageLevel: CLDRCoverageLevel;
   inICU: boolean;
 };
+
+// Explicit language proximity hints from CLDR languageMatching data.
+// Keep raw desired/supported tags because they may include script/region or wildcard constraints.
+export type CLDRLanguageMatchData = {
+  desired: string;
+  supported: string;
+  distance: number;
+  oneway?: boolean;
+};
