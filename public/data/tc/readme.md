@@ -14,4 +14,5 @@ These have been contributed by hand. Often with insights from other datasets but
 - familiesToLanguages.tsv
 - glottocodeToISO.tsv
 - indigeneity.tsv
+- language_match_annotations.tsv
 - wikipedias.tsv

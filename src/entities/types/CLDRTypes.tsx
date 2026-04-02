@@ -38,9 +38,17 @@ export type CLDRCoverageData = {
 
 // Explicit language proximity hints from CLDR languageMatching data.
 // Keep raw desired/supported tags because they may include script/region or wildcard constraints.
+export enum LanguageProximityLevel {
+  High = 'high',
+  Medium = 'medium',
+  Low = 'low',
+}
+
 export type CLDRLanguageMatchData = {
   desired: string;
   supported: string;
   distance: number;
   oneway?: boolean;
+  mutualIntelligibility?: LanguageProximityLevel;
+  bilingualism?: LanguageProximityLevel;
 };

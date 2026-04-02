@@ -11,6 +11,7 @@ import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
 import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
+import { loadLanguageMatchAnnotations } from './supplemental/loadLanguageMatchAnnotations';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
 import { loadVariantAnnotations } from './supplemental/loadVariantAnnotations';
@@ -35,6 +36,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadLandArea(dataContext.getTerritory),
     loadTerritoryNames(dataContext.getTerritory),
     loadLanguageNamesFrench(dataContext.getLanguage),
+    loadLanguageMatchAnnotations(dataContext.getCLDRLanguage),
     loadEthnologue2012Data(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
