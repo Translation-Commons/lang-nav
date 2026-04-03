@@ -10,7 +10,7 @@ export function prepareCLDRLocalePopulationForExport(objects: ObjectData[]) {
   // CLDR repository' country_language_population.tsv
   // #CName	CCode	CPopulation	CLiteracy	CGdp	OfficialStatus	Language	LCode	LPopulation	WritingPop	References	Notes
   const exportString = locales
-    .filter((locale) => (locale.populationSpeakingPercent || 0) > 0.01)
+    .filter((locale) => (locale.populationSpeakingPercent || 0) > 0)
     .sort((a, b) => {
       // Sort by Language name
       const aPop = a.language?.nameDisplay ?? '';
