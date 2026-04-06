@@ -48,17 +48,14 @@ function parseGlottolog(line: string): GlottologData {
 }
 
 export async function loadGlottologLanguages(): Promise<GlottologData[] | void> {
-  return await fetch('data/glottolog.tsv')
+  return await fetch('data/glottolog/glottolog.tsv')
     .then((res) => res.text())
     .then((text) => text.split('\n').slice(1).map(parseGlottolog))
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
-export async function loadManualGlottocodeToISO(): Promise<Record<
-  Glottocode,
-  LanguageCode
-> | void> {
-  return await fetch('data/iso/manualGlottocodeToISO.tsv')
+export async function loadGlottocodeToISO(): Promise<Record<Glottocode, LanguageCode> | void> {
+  return await fetch('data/tc/glottocodeToISO.tsv')
     .then((res) => res.text())
     .then((text) => text.split('\n').slice(1))
     .then((lines) => lines.map((line) => line.split('\t')))
@@ -73,10 +70,10 @@ export async function loadManualGlottocodeToISO(): Promise<Record<
 export function addGlottologLanguages(
   languagesBySource: LanguagesBySource,
   glottologImport: GlottologData[],
-  manualGlottocodeToISO: Record<Glottocode, LanguageCode>,
+  glottocodeToISO: Record<Glottocode, LanguageCode>,
 ): void {
-  // Add the entries from the manualGlottocodeToISO to languagesBySource.Glottolog
-  Object.entries(manualGlottocodeToISO).forEach(([glottoCode, isoCode]) => {
+  // Add the entries from the glottocodeToISO to languagesBySource.Glottolog
+  Object.entries(glottocodeToISO).forEach(([glottoCode, isoCode]) => {
     if (glottoCode === '' || glottoCode[0] === '<') {
       return; // Skip empty or invalid glottocodes
     }

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
@@ -13,11 +12,11 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { getModalityLabel } from './LanguageModalityDisplay';
+import LanguageTerritoryList from './LanguageTerritoryList';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
 import LanguageVitalityMeter from './vitality/VitalityMeter';
 import { VitalitySource } from './vitality/VitalityTypes';
@@ -84,11 +83,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
           field={Field.Territory}
           description="Locations that the language can be found in, sorted by population."
         >
-          <CommaSeparated>
-            {countryLocales.map((locale) => (
-              <HoverableObjectName key={locale.ID} labelSource="territory" object={locale} />
-            ))}
-          </CommaSeparated>
+          <LanguageTerritoryList lang={lang} />
         </CardField>
       )}
 

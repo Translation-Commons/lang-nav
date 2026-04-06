@@ -10,7 +10,7 @@ import KeyboardDetails from './KeyboardDetails';
 import LanguageDetails from './LanguageDetails';
 import LocaleDetails from './LocaleDetails';
 import TerritoryDetails from './TerritoryDetails';
-import VariantTagDetails from './VariantTagDetails';
+import VariantDetails from './VariantDetails';
 import WritingSystemDetails from './WritingSystemDetails';
 
 // You can get the details by an object or just its ID
@@ -35,8 +35,8 @@ const ObjectDetails: React.FC<Props> = ({ object, objectID }) => {
       return <TerritoryDetails territory={object} />;
     case ObjectType.WritingSystem:
       return <WritingSystemDetails writingSystem={object} />;
-    case ObjectType.VariantTag:
-      return <VariantTagDetails variantTag={object} />;
+    case ObjectType.Variant:
+      return <VariantDetails variant={object} />;
     case ObjectType.Keyboard:
       return <KeyboardDetails keyboard={object} />;
   }

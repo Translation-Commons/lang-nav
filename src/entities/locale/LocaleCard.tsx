@@ -44,7 +44,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
       {populationAdjusted != null && (
         <CardField
           title="Source"
-          field={Field.Source}
+          field={Field.SourceForPopulation}
           description="The source of the population data."
         >
           <LocaleCensusCitation locale={locale} size="short" />

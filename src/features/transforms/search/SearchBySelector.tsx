@@ -15,7 +15,7 @@ const SearchBySelector: React.FC = () => {
       onChange={(searchBy) => updatePageParams({ searchBy })}
       selected={searchBy}
       display={SelectorDisplay.Dropdown}
-      selectorStyle={{ marginLeft: '1em', marginBottom: '0em' }}
+      selectorStyle={{ marginBottom: '0em' }}
     />
   );
 };

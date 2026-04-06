@@ -4,7 +4,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CoreDataArrays } from '../load/CoreData';
@@ -16,7 +16,7 @@ type DataGetters = {
   getLocale: (id: string) => LocaleData | undefined;
   getTerritory: (id: string) => TerritoryData | undefined;
   getWritingSystem: (id: string) => WritingSystemData | undefined;
-  getVariantTag: (id: string) => VariantTagData | undefined;
+  getVariant: (id: string) => VariantData | undefined;
 };
 
 export type DataContextType = CoreDataArrays &
@@ -30,7 +30,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   languagesInSelectedSource: [],
   locales: [],
   territories: [],
-  variantTags: [],
+  variants: [],
   writingSystems: [],
   keyboards: [],
   getCLDRLanguage: () => undefined,
@@ -39,7 +39,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   getLocale: () => undefined,
   getTerritory: () => undefined,
   getWritingSystem: () => undefined,
-  getVariantTag: () => undefined,
+  getVariant: () => undefined,
 });
 
 export const useDataContext = () => {

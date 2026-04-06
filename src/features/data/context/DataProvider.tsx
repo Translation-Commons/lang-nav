@@ -7,7 +7,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { updateObjectsBasedOnDataParams } from '../compute/updateObjectsBasedOnDataParams';
@@ -77,10 +77,10 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
-  const getVariantTag = useCallback(
-    (id: string): VariantTagData | undefined => {
+  const getVariant = useCallback(
+    (id: string): VariantData | undefined => {
       const obj = coreData.objects[id];
-      return obj?.type === ObjectType.VariantTag ? (obj as VariantTagData) : undefined;
+      return obj?.type === ObjectType.Variant ? (obj as VariantData) : undefined;
     },
     [coreData],
   );
@@ -109,7 +109,7 @@ const DataProvider: React.FC<{
       getLocale,
       getTerritory,
       getWritingSystem,
-      getVariantTag,
+      getVariant,
     }),
     [coreData],
   );

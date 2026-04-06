@@ -20,6 +20,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.LanguageScope:
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
     case Field.SourceType:
       return FieldGroup.Identity; // Scope
 
@@ -46,16 +47,17 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.OutputScript:
     case Field.Territory:
     case Field.Region:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.Platform:
-    case Field.Source:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
       return FieldGroup.Relation;
     case Field.CountOfLanguages:
     case Field.CountOfWritingSystems:
     case Field.CountOfChildTerritories:
     case Field.CountOfCountries:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
       return FieldGroup.Relation; // Count
 
     case Field.Area:

@@ -100,7 +100,7 @@ export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSy
         (ws) => !!ws,
       );
     case ObjectType.Language:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       // Same functionality
       return getWritingSystemsInObject(object) ?? [];
     case ObjectType.Census:
@@ -152,7 +152,7 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
       return [...(getObjectParents(object) as LanguageData[]), object].filter((lang) => !!lang);
     case ObjectType.WritingSystem:
       return Object.values(object.languages ?? {});
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.languages ?? [];
     case ObjectType.Keyboard:
       return object.language ? [object.language] : [];

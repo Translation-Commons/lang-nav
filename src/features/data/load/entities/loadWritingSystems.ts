@@ -6,7 +6,7 @@ import { loadObjectsFromFile } from './loadObjectsFromFile';
 
 export async function loadWritingSystems(): Promise<Record<string, WritingSystemData> | void> {
   return await loadObjectsFromFile<WritingSystemData>(
-    'data/writingSystems.tsv',
+    'data/tc/writingSystems.tsv',
     parseWritingSystem,
   );
 }

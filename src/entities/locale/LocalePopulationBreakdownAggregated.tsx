@@ -92,7 +92,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           <CellPercent
             leftContent={
               (populationSpeakingPercent ?? 0) >= 99.9 && (
-                <TriangleAlertIcon size="1em" style={{ color: 'var(--color-text-yellow)' }} />
+                <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
               )
             }
             percent={populationSpeakingPercent}

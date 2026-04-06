@@ -78,7 +78,7 @@ const FieldEntityCoverageCell: React.FC<{
         percentage={dataCompleteness}
         backgroundColor={
           (shouldBeApplicable || missingColumn) && !isUninteresting
-            ? 'var(--color-text-yellow)'
+            ? 'var(--color-yellow)'
             : undefined
         }
       >

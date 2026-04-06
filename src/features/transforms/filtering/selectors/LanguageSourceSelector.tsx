@@ -18,22 +18,11 @@ const values = [
 
 const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
   const { languageSource, updatePageParams } = usePageParams();
-  const selectorDescription = (
-    <>
-      Languages have fuzzy boundaries and different sources categorize potential languages
-      differently. For example, what&apos;s a dialect versus a language, or if a language is even
-      attested. Use this option to change what languages appear and what they are considered (family
-      / individual / dialect). This may also change the language codes, names, and parent/child
-      relationships.
-    </>
-  );
 
   return (
     <Selector
-      selectorLabel={
-        display !== SelectorDisplay.InlineDropdown ? 'Source of the List of Languages' : undefined
-      }
-      selectorDescription={selectorDescription}
+      selectorLabel={display !== SelectorDisplay.InlineDropdown ? 'Language Authority' : undefined}
+      selectorDescription={<LanguageSourceSelectorDescription />}
       options={values}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}
       selected={languageSource}
@@ -44,6 +33,46 @@ const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
     />
   );
 };
+
+function LanguageSourceSelectorDescription() {
+  return (
+    <>
+      This determines which authority we use to determine the list of languages shown. Different
+      sources also may have different names, IDs, and classifications for languages. For example,
+      let&apos;s look at Chinese through the lens of different sources:
+      <ul>
+        <li>
+          <strong>Glottolog</strong> features <code>clas1255</code> as &quot;Classical-Middle-Modern
+          Sinitic&quot;, a language family since it contains multiple language families
+          (Middle-Modern Sinitic [<code>midd1354</code>], ...) and languages in them (Mandarin [
+          <code>mand1415</code>], Cantonese [<code>yuec1235</code>], ...).
+        </li>
+        <li>
+          <strong>ISO</strong> uses the code <code>zho</code>, calls it &quot;Chinese&quot; and
+          considers it a macrolanguage. It has direct descendants like Mandarin [<code>cmn</code>]
+          and Cantonese [<code>yue</code>].
+        </li>
+        <li>
+          <strong>BCP-47</strong> closely follows ISO usually but when possible uses 2-letter codes,
+          so <code>zh</code> for Chinese.
+        </li>
+        <li>
+          <strong>CLDR</strong> treats the language code slightly differently since it is focused on
+          lists of translations. Since the macrolanguage encompasses multiple languages, CLDR picks
+          the largest representative (in this case Mandarin) to use the code <code>zh</code>.
+          Technically it does not have information for Chinese as a macrolanguage (you may see it
+          noted as <code>zh*</code>).
+        </li>
+        <li>
+          <strong>Combined</strong> is curated by the Language Navigator team to combine language
+          information from all above sources. We prefer the ISO 639-3 3-letter code when possible
+          (in this case <code>zho</code>) and sometimes have a distinct name, in this case
+          &quot;Chinese languages&quot; to reflect the fact that it is a macrolanguage.
+        </li>
+      </ul>
+    </>
+  );
+}
 
 const LanguageSourceDescription: React.FC<{ languageSource: LanguageSource }> = ({
   languageSource,

@@ -25,7 +25,7 @@ export function parseKeyboardGBoardLine(line: string): KeyboardData | undefined 
   const territoryCode = parts[3] !== '' ? parts[3] : undefined;
   const inputScriptCode = parts[4];
   const outputScriptCode = parts[5];
-  const variantTagCode = parts[6] !== '' ? parts[6] : undefined;
+  const variantCode = parts[6] !== '' ? parts[6] : undefined;
 
   return {
     type: ObjectType.Keyboard,
@@ -38,6 +38,6 @@ export function parseKeyboardGBoardLine(line: string): KeyboardData | undefined 
     territoryCode,
     inputScriptCode,
     outputScriptCode,
-    variantTagCode,
+    variantCode,
   };
 }

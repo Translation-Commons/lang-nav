@@ -13,7 +13,7 @@ export async function loadAndApplyWikipediaData(dataContext: DataContextType): P
 }
 
 async function loadWikipediaData(): Promise<WikipediaData[] | void> {
-  return await fetch('data/wikipedias.tsv')
+  return await fetch('data/tc/wikipedias.tsv')
     .then((res) => res.text())
     .then((text) => text.split('\n').slice(1))
     .then((lines) => lines.map(parseWikipediaData))

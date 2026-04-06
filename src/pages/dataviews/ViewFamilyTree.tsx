@@ -2,13 +2,11 @@ import { CensusHierarchy } from '@widgets/treelists/CensusHierarchy';
 import { LanguageHierarchy } from '@widgets/treelists/LanguageHierarchy';
 import { LocaleHierarchy } from '@widgets/treelists/LocaleHierarchy';
 import { TerritoryHierarchy } from '@widgets/treelists/TerritoryHierarchy';
-import { VariantTagHierarchy } from '@widgets/treelists/VariantTagHierarchy';
+import { VariantHierarchy } from '@widgets/treelists/VariantHierarchy';
 import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarchy';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-
-import './styles.css';
 
 function ViewFamilyTree() {
   const { objectType } = usePageParams();
@@ -24,8 +22,8 @@ function ViewFamilyTree() {
       return <TerritoryHierarchy />;
     case ObjectType.WritingSystem:
       return <WritingSystemHierarchy />;
-    case ObjectType.VariantTag:
-      return <VariantTagHierarchy />;
+    case ObjectType.Variant:
+      return <VariantHierarchy />;
   }
 }
 

@@ -13,7 +13,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 const ObjectDepthDisplay: React.FC<{
   object: ObjectData;
 }> = ({ object }) => {
-  if (object.type === ObjectType.Census || object.type === ObjectType.VariantTag)
+  if (object.type === ObjectType.Census || object.type === ObjectType.Variant)
     return <Deemphasized>n/a</Deemphasized>;
 
   const depth = getDepth(object);

@@ -1,7 +1,7 @@
 # from https://support.google.com/gboard/answer/6380730#zippy=%2Cchoose-languages-layouts%2Cfind-supported-languages
 # accessed 2026-02-19
 # only keyboard names were provided so we had to manually map them to language tags
-ID	Name	Lang code	Country Code	Input Script ISO	Output Script ISO	Variant Tag
+ID	Name	Lang code	Country Code	Input Script ISO	Output Script ISO	Variant
 gboard_aar_Latn	Afar	aar		Latn	Latn	
 gboard_abk_Cyrl	Abkhaz	abk		Cyrl	Cyrl	
 gboard_abr_Latn	Abron	abr		Latn	Latn	

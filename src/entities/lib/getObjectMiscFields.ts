@@ -22,7 +22,7 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
       return object.language?.nameDisplay;
     case ObjectType.Language:
       return object.nameDisplay;
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.languages?.[0]?.nameDisplay;
     case ObjectType.WritingSystem:
       return object.languages
@@ -45,7 +45,7 @@ export function getObjectDate(object: ObjectData): Date | undefined {
   switch (object.type) {
     case ObjectType.Census:
       return new Date(object.yearCollected + '-01-02'); // The 2nd so timezone changes don't affect the year
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.dateAdded;
     case ObjectType.Language:
     case ObjectType.Locale:
@@ -71,7 +71,7 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
       return object.locales && object.locales.length > 0
         ? uniqueBy(object.locales, (loc) => loc.languageCode).length
         : undefined;
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.languageCodes?.length;
     case ObjectType.Keyboard:
       return undefined;
@@ -83,7 +83,7 @@ export function getObjectLiteracy(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Census:
     case ObjectType.WritingSystem:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       // No literacy value to sort by
       return undefined;
     case ObjectType.Language:
@@ -150,7 +150,7 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
         ...(object.childWritingSystems ?? []),
         ...(object.containsWritingSystems ?? []),
       ];
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return uniqueBy(
         object.locales
           ?.map((locale) => locale.writingSystem)
@@ -185,7 +185,7 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
       return 1;
     case ObjectType.Language:
     case ObjectType.WritingSystem:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return undefined;
     case ObjectType.Keyboard:
       return undefined;
@@ -209,7 +209,7 @@ export function getDepth(object: ObjectData): number | undefined {
     case ObjectType.WritingSystem:
       return object.parentWritingSystem ? getDepth(object.parentWritingSystem)! + 1 : 0;
     case ObjectType.Census:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return undefined;
     case ObjectType.Keyboard:
       return undefined;

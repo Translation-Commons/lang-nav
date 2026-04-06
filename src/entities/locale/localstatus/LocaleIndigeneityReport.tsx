@@ -21,7 +21,7 @@ enum IncludeCriteria {
 const LocaleIndigeneityReport: React.FC = () => {
   const locales = useFilteredObjects({})
     .filteredObjects.filter((l) => l.type === ObjectType.Locale)
-    .filter((l) => !l.writingSystem && !l.variantTags && l.territory) as LocaleData[];
+    .filter((l) => !l.writingSystem && !l.variants && l.territory) as LocaleData[];
 
   const [includeCriteria, setIncludeCriteria] = React.useState(IncludeCriteria.MissingData);
   const viewedLocales = useMemo(

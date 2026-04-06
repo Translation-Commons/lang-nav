@@ -31,7 +31,7 @@ const LanguagePluralCategories: React.FC<{ lang: LanguageData }> = ({ lang }) =>
           style={{
             backgroundColor: getPluralRuleColor(pluralRuleKey),
             borderRadius: '0.25em',
-            color: pluralRuleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-background)',
+            color: pluralRuleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-text-on-color)',
             padding: '0.25em',
             margin: '0',
           }}

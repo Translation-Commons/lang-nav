@@ -126,6 +126,15 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
             </CommaSeparated>
           </DetailsField>
         )}
+        {writingSystem.outputKeyboards && writingSystem.outputKeyboards.length > 0 && (
+          <DetailsField title="Keyboards">
+            <CommaSeparated>
+              {writingSystem.outputKeyboards.map((keyboard) => (
+                <HoverableObjectName key={keyboard.ID} object={keyboard} />
+              ))}
+            </CommaSeparated>
+          </DetailsField>
+        )}
       </DetailsSection>
     </div>
   );

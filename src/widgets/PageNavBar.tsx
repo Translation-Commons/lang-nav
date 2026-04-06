@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
-
-import { usePageBrightness } from '@shared/hooks/usePageBrightness';
+import InternalLink from '@features/params/InternalLink';
+import usePageParams from '@features/params/usePageParams';
+import SearchBar from '@features/transforms/search/SearchBar';
 
 const PageNavBar: React.FC = () => {
-  const { pageBrightness } = usePageBrightness();
+  const { pageBrightness } = usePageParams().brightness;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   return (
@@ -21,14 +24,16 @@ const PageNavBar: React.FC = () => {
           <strong>Lang</strong>uage <strong>Nav</strong>igator <em>β</em>
         </span>
       </NavBarTitle>
-      <NavBarLink path="/intro">Intro</NavBarLink>
-      <NavBarLink path="/data">Data</NavBarLink>
-      {/* <NavBarLink path="/details">Details</NavBarLink> */}
-      <NavBarLink path="/about">About</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.Intro}>Intro</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
+      <NavBarLink path={'/' + LangNavPageName.About}>About</NavBarLink>
+      <div style={{ display: 'flex', flexGrow: 1 }}>
+        <SearchBar />
+      </div>
       <button
         className="primary"
         type="button"
-        style={{ marginLeft: 'auto', padding: '0.5em .5em', marginRight: '0.5em' }}
+        style={{ padding: '0.5em', whiteSpace: 'nowrap' }}
         onClick={() => setFeedbackOpen(true)}
       >
         Feedback
@@ -67,7 +72,7 @@ const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
         borderBottom: '0.125em solid var(--color-button-primary)',
         width: '100%',
         rowGap: '0.5em',
-        color: 'var(--color-background)',
+        color: 'var(--color-text-on-color)',
         backgroundColor: 'var(--color-button-primary)',
       }}
     >
@@ -90,9 +95,12 @@ const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
         gap: '0.25em',
       }}
     >
-      <Link to="/" style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}>
+      <InternalLink
+        page={LangNavPageName.Intro}
+        style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}
+      >
         {children}
-      </Link>
+      </InternalLink>
     </h1>
   );
 };

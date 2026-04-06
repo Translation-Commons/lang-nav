@@ -33,10 +33,10 @@ export const PercentageDifference: React.FC<{
   if (Math.abs(relativeDifference) > 10) {
     // Great difference, >10% compared to the old value
     if (percentagePointDifference > 0) {
-      color = 'var(--color-text-blue)';
+      color = 'var(--color-blue)';
       renderedAmount = '+' + renderedAmount;
     } else {
-      color = 'var(--color-text-orange)';
+      color = 'var(--color-orange)';
     }
   } else {
     fontSize = '0.8em';

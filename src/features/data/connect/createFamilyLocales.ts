@@ -38,7 +38,7 @@ function createLocalesForLanguageFamily(
   // For each childLocale, make a new locale for the language family or add the data to that language family
   childLocales.forEach((childLocale) => {
     // Filter out exceptional locales, we don't want to worry about those right now
-    if (childLocale.variantTagCodes && childLocale.variantTagCodes.length > 0) return; // Skip variant locales
+    if (childLocale.variantCodes && childLocale.variantCodes.length > 0) return; // Skip variant locales
     if (childLocale.scriptCode) return; // Skip script-specific locales
 
     const { territory, territoryCode } = childLocale;
@@ -69,9 +69,8 @@ function createLocalesForLanguageFamily(
         // Other references that are undefined by definition but included in case the code is changed to allow them
         scriptCode: childLocale.scriptCode, // should be undefined
         writingSystem: childLocale.writingSystem, // should be undefined
-        variantTagCodes:
-          childLocale.variantTagCodes != null ? [...childLocale.variantTagCodes] : [], // dereference the array
-        variantTags: childLocale.variantTags != null ? [...childLocale.variantTags] : [], // dereference the array
+        variantCodes: childLocale.variantCodes != null ? [...childLocale.variantCodes] : [], // dereference the array
+        variants: childLocale.variants != null ? [...childLocale.variants] : [], // dereference the array
 
         // Initialize the population
         populationSpeaking: population,

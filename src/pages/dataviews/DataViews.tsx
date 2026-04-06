@@ -8,8 +8,6 @@ import ViewMap from './ViewMap';
 import ViewReports from './ViewReports';
 import ViewTable from './ViewTable';
 
-import './styles.css';
-
 function DataViews() {
   const { view } = usePageParams();
 

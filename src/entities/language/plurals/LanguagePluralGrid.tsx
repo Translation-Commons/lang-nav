@@ -105,7 +105,7 @@ const ExampleCell: React.FC<{
     <td
       style={{
         ...style,
-        color: ruleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-background)',
+        color: ruleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-text-on-color)',
         backgroundColor: getPluralRuleColor(ruleKey),
         minWidth: '1em',
         textAlign: 'right',
