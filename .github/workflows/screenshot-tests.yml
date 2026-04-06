@@ -57,8 +57,46 @@ jobs:
           git diff --cached --quiet || git commit -m "Update screenshot baselines from CI"
           git push
 
+      - name: Remove update-baselines label
+        if: github.event_name == 'pull_request'
+        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label update-baselines
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  screenshot-tests:
+    if: |
+      !contains(github.event.pull_request.labels.*.name, 'update-baselines') &&
+      (github.event_name != 'workflow_dispatch' || !inputs.update-baselines)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache Playwright browsers
+        id: playwright-cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright Chromium
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
       - name: Run screenshot tests
-        if: ${{ !inputs.update-baselines }}
         run: npm run test:screenshots
 
       - name: Upload HTML report
