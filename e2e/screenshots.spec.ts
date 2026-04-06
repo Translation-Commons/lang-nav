@@ -41,7 +41,7 @@ test.describe('screenshot tests', () => {
 
   test('about page', async ({ page }) => {
     await page.goto('./about');
-    await page.getByText('Motivation').first().waitFor();
+    await page.getByText('Core Pages').first().waitFor();
     await expect(page).toHaveScreenshot('about-page.png');
   });
 });
