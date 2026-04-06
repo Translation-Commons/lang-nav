@@ -61,6 +61,9 @@ jobs:
           git diff --cached --quiet || git commit -m "Update screenshot baselines from CI"
           git push
 
+      - name: Verify updated baselines pass
+        run: npm run test:screenshots
+
       - name: Remove update-baselines label
         if: github.event_name == 'pull_request'
         run: gh pr edit ${{ github.event.pull_request.number }} --remove-label update-baselines
