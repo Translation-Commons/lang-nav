@@ -37,11 +37,13 @@ Download the `screenshot-diffs` artifact to review the visual differences withou
 
 ### Updating baselines
 
-When you make an intentional UI change:
+Baselines must be generated on the same environment as CI (Ubuntu) to avoid font rendering differences across OSes. The recommended way to update baselines is to add the `update-baselines` label to your PR:
 
-1. Run `npm run test:screenshots:update` to regenerate the baseline PNGs.
-2. Review the updated images in `e2e/screenshots.spec.ts-snapshots/` to confirm they look correct.
-3. Commit the updated baselines alongside your code changes.
+1. Add the **`update-baselines`** label to your pull request.
+2. The CI workflow will regenerate the baselines on Ubuntu, commit them to your branch, and remove the label automatically.
+3. Pull the latest changes from your branch after the workflow completes.
+
+You can also update locally with `npm run test:screenshots:update`, but local baselines may not match CI due to font rendering differences between Linux distros, macOS, and Windows.
 
 ### Screenshot resolution
 
