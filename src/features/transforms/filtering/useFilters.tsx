@@ -99,6 +99,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.LanguageFormedHere]: alwaysTrue,
     [Field.Indigeneity]: alwaysTrue,
     [Field.GovernmentStatus]: alwaysTrue,
+    [Field.ECRMLProtection]: alwaysTrue,
 
     [Field.CountOfLanguages]: alwaysTrue,
     [Field.CountOfWritingSystems]: alwaysTrue,

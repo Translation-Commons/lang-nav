@@ -70,6 +70,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.CLDRCoverage:
     case Field.DigitalSupport:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
       return TableValueType.Enum;
 
     default:

@@ -27,6 +27,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.LanguageFormedHere:
     case Field.HistoricPresence:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:

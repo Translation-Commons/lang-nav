@@ -118,6 +118,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.WritingSystemScope:
     case Field.Coordinates:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
     case Field.None:
       return undefined;
 
