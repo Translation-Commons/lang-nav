@@ -19,11 +19,10 @@ import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-const LanguagesMissingWritingSystems: React.FC = () => {
+const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
@@ -45,7 +44,7 @@ const LanguagesMissingWritingSystems: React.FC = () => {
   );
 
   return (
-    <CollapsibleReport title={`Languages missing writing systems (${languagesFiltered.length})`}>
+    <>
       This report identifies languages without associated writing systems. Languages may be missing
       writing system data due to data gaps, incomplete ingestion from upstream sources, or because
       they are primarily oral. Extinct and historical languages often have harder-to-find writing
@@ -97,8 +96,8 @@ const LanguagesMissingWritingSystems: React.FC = () => {
           })}
         </ResponsiveGrid>
       </div>
-    </CollapsibleReport>
+    </>
   );
 };
 
-export default LanguagesMissingWritingSystems;
+export default ReportWritingSystemsLanguagesWithout;

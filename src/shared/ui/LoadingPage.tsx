@@ -2,7 +2,7 @@ import React from 'react';
 
 import LoadingIcon from '@shared/ui/LoadingIcon';
 
-const Loading: React.FC = () => {
+const LoadingPage: React.FC = () => {
   return (
     <div style={{ height: '100vh', textAlign: 'center', paddingTop: '20vh' }}>
       <h2>
@@ -13,4 +13,4 @@ const Loading: React.FC = () => {
   );
 };
 
-export default Loading;
+export default LoadingPage;

@@ -1,8 +1,9 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
-import Loading from '@widgets/Loading';
+
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 const FieldCoverageTable = React.lazy(
   () => import('@features/transforms/fields/FieldCoverageTable'),
@@ -15,11 +16,11 @@ const DataCoveragePage: React.FC = () => {
         both the capabilities for different fields as well as potential gaps in user experience or
         data.
       </p>
-      <Suspense fallback={<Loading />}>
+      <ContainErrorsAndSuspense>
         <FilterPanelProvider>
           <FieldCoverageTable />
         </FilterPanelProvider>
-      </Suspense>
+      </ContainErrorsAndSuspense>
     </DocsPageContainer>
   );
 };

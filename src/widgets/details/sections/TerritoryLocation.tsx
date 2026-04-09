@@ -33,7 +33,7 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
           <ObjectMap
             objects={[
               territory,
-              ...getTerritoryDescendents(territory, territory.scope === TerritoryScope.Country),
+              ...getTerritoryDescendants(territory, territory.scope === TerritoryScope.Country),
             ]}
           />
         </MapContainer>
@@ -71,7 +71,7 @@ function getMapLabel(territory: TerritoryData): React.ReactNode {
   }
 }
 
-function getTerritoryDescendents(
+function getTerritoryDescendants(
   territory: TerritoryData,
   includeDependencies: boolean,
 ): TerritoryData[] {
@@ -80,7 +80,7 @@ function getTerritoryDescendents(
     const dependencies = territory.dependentTerritories ?? [];
     children.push(...dependencies);
   }
-  return [...children, ...children.flatMap((t) => getTerritoryDescendents(t, includeDependencies))];
+  return [...children, ...children.flatMap((t) => getTerritoryDescendants(t, includeDependencies))];
 }
 
 export default TerritoryLocation;

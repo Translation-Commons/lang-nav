@@ -14,12 +14,11 @@ import useFilteredObjects from '@features/transforms/filtering/useFilteredObject
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
-const ReportEntityUnknownFields: React.FC = () => {
+const ReportEntitiesMissingFields: React.FC = () => {
   const { objectType } = usePageParams();
   const { filteredObjects } = useFilteredObjects({});
 
@@ -43,7 +42,7 @@ const ReportEntityUnknownFields: React.FC = () => {
   );
 
   return (
-    <CollapsibleReport title="Unknown Fields">
+    <>
       This report shows which fields have the most missing data for the currently filtered{' '}
       {getObjectTypeLabelPlural(objectType)}. This can help identify gaps in the data and potential
       areas for improvement.
@@ -92,13 +91,13 @@ const ReportEntityUnknownFields: React.FC = () => {
             ))}
         </tbody>
       </table>
-      <HoverableButton style={{ margin: '0.5em' }}>
-        <InternalLink page={LangNavPageName.DataCoverage}>
+      <InternalLink page={LangNavPageName.DataCoverage}>
+        <HoverableButton style={{ margin: '0.5em', width: 'fit-content', cursor: 'pointer' }}>
           Go to full data coverage report
-        </InternalLink>
-      </HoverableButton>
-    </CollapsibleReport>
+        </HoverableButton>
+      </InternalLink>
+    </>
   );
 };
 
-export default ReportEntityUnknownFields;
+export default ReportEntitiesMissingFields;

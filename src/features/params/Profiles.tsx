@@ -8,6 +8,8 @@ import {
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
+import ReportID from '@widgets/reports/ReportID';
+
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import getColorGradientForField from '@features/transforms/coloring/getColorGradientForField';
 import Field from '@features/transforms/fields/Field';
@@ -51,6 +53,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   objectType: ObjectType.Language,
   page: 1,
   profile: ProfileType.LanguageEthusiast,
+  reportID: ReportID.EntitiesMissingFields,
   scaleBy: Field.None,
   searchBy: SearchableField.CodeOrNameAny,
   searchString: '',

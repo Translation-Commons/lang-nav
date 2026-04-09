@@ -1,13 +1,14 @@
-import React, { Suspense } from 'react';
+import React from 'react';
 
 import FilterPanelToggle from '@widgets/controls/FilterPanelToggle';
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
-import Loading from '@widgets/Loading';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import ResultCount from '@features/pagination/ResultCount';
 import FilterPath from '@features/transforms/filtering/FilterPath';
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
+
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 
@@ -53,9 +54,9 @@ const DataPageBody: React.FC = () => {
           textAlign: 'center',
         }}
       >
-        <Suspense fallback={<Loading />}>
+        <ContainErrorsAndSuspense>
           <DataViews />
-        </Suspense>
+        </ContainErrorsAndSuspense>
       </div>
     </main>
   );

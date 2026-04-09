@@ -1,3 +1,5 @@
+import ReportID from '@widgets/reports/ReportID';
+
 import { parseColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
@@ -112,6 +114,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         break;
       case PageParamKey.colorGradient:
         params.colorGradient = parseInt(value) as ColorGradient;
+        break;
+      case PageParamKey.reportID:
+        params.reportID = parseInt(value) as ReportID;
         break;
 
       // Fields

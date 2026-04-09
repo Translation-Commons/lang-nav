@@ -65,16 +65,16 @@ button:focus {
   background: var(--color-button-hover);
 }
 
-button.tab {
+.tab {
   background: none;
 }
 
-button.tab:hover,
-button.tab:focus {
+.tab:hover,
+.tab:focus {
   background: var(--color-background-hover);
 }
 
-button.tab:focus {
+.tab:focus {
   border-color: var(--color-button-primary);
 }
 
