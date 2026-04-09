@@ -1,3 +1,5 @@
+import ReportID from '@widgets/reports/ReportID';
+
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
@@ -78,6 +80,7 @@ export enum PageParamKey {
   objectType = 'objectType',
   page = 'page',
   profile = 'profile',
+  reportID = 'reportID',
   scaleBy = 'scaleBy',
   searchBy = 'searchBy',
   searchString = 'searchString',
@@ -109,6 +112,7 @@ export type PageParams = {
   objectType: ObjectType;
   page: number; // 0 indexed
   profile: ProfileType;
+  reportID: ReportID;
   searchBy: SearchableField;
   searchString: string;
   secondarySortBy: Field;
@@ -138,6 +142,7 @@ export type PageParamsOptional = {
   objectType?: ObjectType;
   page?: number;
   profile?: ProfileType;
+  reportID?: ReportID;
   scaleBy?: Field;
   searchBy?: SearchableField;
   searchString?: string;

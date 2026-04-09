@@ -7,12 +7,10 @@ import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
-
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
-const LocaleCitationCounts: React.FC = () => {
+const ReportLocaleCitationCompleteness: React.FC = () => {
   const { filteredObjects: filteredLocales } = useFilteredObjects({});
 
   // Count locales with populationCensus
@@ -57,7 +55,7 @@ const LocaleCitationCounts: React.FC = () => {
   });
 
   return (
-    <CollapsibleReport title={`Locales with census citations (${withCensusCount})`}>
+    <>
       <p>
         {citationPercent}% ({withCensusCount}/{totalLocales}) of the locales currently in scope have
         population estimates derived from a census record. These locales have a non‑null&nbsp;
@@ -116,8 +114,8 @@ const LocaleCitationCounts: React.FC = () => {
           })}
         </ul>
       </div>
-    </CollapsibleReport>
+    </>
   );
 };
 
-export default LocaleCitationCounts;
+export default ReportLocaleCitationCompleteness;

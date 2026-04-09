@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
@@ -11,6 +11,7 @@ type Props = {
   params?: PageParamsOptional;
   children: React.ReactNode;
   style?: React.CSSProperties;
+  keepOldParams?: boolean;
 };
 
 const InternalLink: React.FC<Props> = ({
@@ -18,8 +19,13 @@ const InternalLink: React.FC<Props> = ({
   params,
   children,
   style,
+  keepOldParams,
 }) => {
-  const to = ['/', page, params && `?${getNewURLSearchParams(params)}`].filter(Boolean).join('');
+  const [oldParams] = useSearchParams({});
+  const paramsStr = params
+    ? '?' + getNewURLSearchParams(params, keepOldParams ? oldParams : undefined)
+    : '';
+  const to = ['/', page, paramsStr].join('');
   return (
     <Link to={to} title={to} style={style}>
       {children}

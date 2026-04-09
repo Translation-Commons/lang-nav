@@ -4,14 +4,14 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 // ID should be entity type (usually plural) followed by specific information, even if its ungrammatical
 enum ReportID {
+  EntitiesMissingFields, // fixed at 0 since it is always there. All others should be alphabetic
   CensusCountries,
-  EntitiesMissingFields,
   LanguagesWithAmbiguousNames,
   LanguagesDubious,
   LanguageDescendents,
   LanguagePaths,
-  LocalesCitationCompleteness,
-  LocalesIndigeneity,
+  LocaleCitationCompleteness,
+  LocaleIndigeneity,
   LocalesPotential,
   VariantsAnnotationTool,
   WritingSystemsLanguagesWithout,
@@ -30,8 +30,8 @@ export function getReportIDsForEntityType(entityType: ObjectType): ReportID[] {
     case ObjectType.Locale:
       return [
         ReportID.LocalesPotential,
-        ReportID.LocalesCitationCompleteness,
-        ReportID.LocalesIndigeneity,
+        ReportID.LocaleCitationCompleteness,
+        ReportID.LocaleIndigeneity,
       ];
     case ObjectType.WritingSystem:
       return [ReportID.WritingSystemsLanguagesWithout];

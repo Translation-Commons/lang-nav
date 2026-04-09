@@ -56,7 +56,6 @@ const ReportLocalesPotential: React.FC = () => {
 
   return (
     <div>
-      <h1>Potential Locales</h1>
       <p>
         This page lists locales from Census data that are not in the list of defined locales. There
         are too many possible combinations of language + territory + variation information, so the

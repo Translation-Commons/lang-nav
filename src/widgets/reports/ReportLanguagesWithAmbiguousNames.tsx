@@ -14,7 +14,6 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import { unique } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -53,9 +52,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
   );
 
   return (
-    <CollapsibleReport
-      title={`Languages with identical names (${Object.keys(langsWithDupNames).length})`}
-    >
+    <>
       The following languages have identical names. This can happen when merging data from multiple
       sources. It gets confusing to find the right language when names overlap. To fix this we
       should change names with these possible options:
@@ -74,7 +71,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
           be removed.
         </li>
       </ol>
-      <div>
+      <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
         <LimitInput />
         <PaginationControls itemCount={Object.keys(langsWithDupNames).length} />
       </div>
@@ -141,7 +138,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
           </div>
         </div>
       ))}
-    </CollapsibleReport>
+    </>
   );
 };
 

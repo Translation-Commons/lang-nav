@@ -12,8 +12,6 @@ import Field from '@features/transforms/fields/Field';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getObjectPopulation';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
-
 const ReportLanguageDescendents: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
 
@@ -39,23 +37,25 @@ const ReportLanguageDescendents: React.FC = () => {
   );
 
   return (
-    <CollapsibleReport title="Largest Descendant">
+    <>
       This report shows, for each language family or group, which of its descendants is the largest
       language by population. This can help identify which languages are the most prominent within a
       family. It may also reveal some problems in the data, especially if the largest descendant has
       more population than is estimated for the language/language family itself.
-      <Selector
-        selectorLabel="Minimum % of population"
-        options={[0, 25, 50, 75, 90, 95, 99]}
-        selected={minimumPercentThreshold}
-        onChange={(value: number) => setMinimumPercentThreshold(value)}
-      />
-      <Selector
-        selectorLabel="Maximum % of population"
-        options={[75, 90, 95, 99, 99.5, 99.9, 99.99, 100, 1e6]}
-        selected={maximumPercentThreshold}
-        onChange={(value: number) => setMaximumPercentThreshold(value)}
-      />
+      <div style={{ display: 'flex' }}>
+        <Selector
+          selectorLabel="Minimum % of population"
+          options={[0, 25, 50, 75, 90, 95, 99]}
+          selected={minimumPercentThreshold}
+          onChange={(value: number) => setMinimumPercentThreshold(value)}
+        />
+        <Selector
+          selectorLabel="Maximum % of population"
+          options={[75, 90, 95, 99, 99.5, 99.9, 99.99, 100, 1e6]}
+          selected={maximumPercentThreshold}
+          onChange={(value: number) => setMaximumPercentThreshold(value)}
+        />
+      </div>
       <InteractiveObjectTable<LanguageData>
         tableID={TableID.LanguagesLargestDescendant}
         columns={[
@@ -96,7 +96,7 @@ const ReportLanguageDescendents: React.FC = () => {
         ]}
         objects={filteredLanguages}
       />
-    </CollapsibleReport>
+    </>
   );
 };
 

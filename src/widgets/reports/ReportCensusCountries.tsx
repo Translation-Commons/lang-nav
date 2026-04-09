@@ -10,55 +10,52 @@ import Field from '@features/transforms/fields/Field';
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 const ReportCensusCountries: React.FC = () => {
   const { territories } = useDataContext();
 
   return (
-    <CollapsibleReport title="Countries with Censuses">
-      <InteractiveObjectTable<TerritoryData>
-        tableID={TableID.CountriesWithCensuses}
-        objects={territories}
-        columns={[
-          CodeColumn,
-          NameColumn,
-          {
-            key: 'Censuses',
-            render: (territory) => territory.censuses?.length,
-            field: Field.CountOfCensuses,
+    <InteractiveObjectTable<TerritoryData>
+      tableID={TableID.CountriesWithCensuses}
+      objects={territories}
+      columns={[
+        CodeColumn,
+        NameColumn,
+        {
+          key: 'Censuses',
+          render: (territory) => territory.censuses?.length,
+          field: Field.CountOfCensuses,
+        },
+        ...Object.values(CensusCollectorType).map((collectorType) => ({
+          key: collectorType,
+          render: (territory: TerritoryData) => {
+            return (
+              <div style={{ maxWidth: '10em' }}>
+                <CommaSeparated limit={1}>
+                  {territory.censuses
+                    ?.filter((census) => census.collectorType === collectorType)
+                    .map((census) => (
+                      <HoverableObjectName key={census.ID} object={census} />
+                    ))}
+                </CommaSeparated>
+              </div>
+            );
           },
-          ...Object.values(CensusCollectorType).map((collectorType) => ({
-            key: collectorType,
-            render: (territory: TerritoryData) => {
-              return (
-                <div style={{ maxWidth: '10em' }}>
-                  <CommaSeparated limit={1}>
-                    {territory.censuses
-                      ?.filter((census) => census.collectorType === collectorType)
-                      .map((census) => (
-                        <HoverableObjectName key={census.ID} object={census} />
-                      ))}
-                  </CommaSeparated>
-                </div>
-              );
-            },
-            columnGroup: 'Collector Type',
-          })),
-          {
-            key: 'Population',
-            render: (territory) => territory.population,
-            field: Field.Population,
-          },
-          {
-            key: 'Languages',
-            render: (territory) => territory.locales?.length,
-            field: Field.CountOfLanguages,
-          },
-        ]}
-      />
-    </CollapsibleReport>
+          columnGroup: 'Collector Type',
+        })),
+        {
+          key: 'Population',
+          render: (territory) => territory.population,
+          field: Field.Population,
+        },
+        {
+          key: 'Languages',
+          render: (territory) => territory.locales?.length,
+          field: Field.CountOfLanguages,
+        },
+      ]}
+    />
   );
 };
 

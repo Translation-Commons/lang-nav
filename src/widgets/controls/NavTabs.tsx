@@ -1,8 +1,7 @@
 import React, { ReactNode, useCallback } from 'react';
-import { Link } from 'react-router-dom';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { getUpdateURL } from '@features/params/getNewURL';
+import InternalLink from '@features/params/InternalLink';
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -13,23 +12,27 @@ export type TabOption = {
 };
 
 type Props = {
+  label?: ReactNode;
   options: TabOption[];
 };
 
-const NavTabs: React.FC<Props> = ({ options }) => {
+const NavTabs: React.FC<Props> = ({ label, options }) => {
   const params = usePageParams();
   const getIsActive = useCallback(
     (option: TabOption) =>
-      Object.entries(option.urlParams).every(([key, value]) => params[key] === value),
+      Object.entries(option.urlParams).every(
+        ([key, value]) => params[key as keyof PageParamsOptional] === value,
+      ),
     [params],
   );
 
   return (
     <div style={{ display: 'flex', marginBottom: '0.5em', width: '100%' }}>
+      {label && <div style={{ padding: '0.5em 1em', border: 'none' }}>{label}</div>}
       {options.map((option) => {
         const isActive = getIsActive(option);
         return (
-          <Link to={getUpdateURL(option.urlParams)} key={option.label}>
+          <InternalLink params={option.urlParams} key={option.label} keepOldParams={true}>
             <HoverableButton
               className="tab"
               hoverContent={option.description}
@@ -45,7 +48,7 @@ const NavTabs: React.FC<Props> = ({ options }) => {
             >
               {option.label}
             </HoverableButton>
-          </Link>
+          </InternalLink>
         );
       })}
     </div>

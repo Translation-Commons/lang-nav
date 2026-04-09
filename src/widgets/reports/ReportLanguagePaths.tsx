@@ -27,13 +27,15 @@ const ReportLanguagesPaths: React.FC = () => {
     .slice(0, limit);
 
   return (
-    <CollapsibleReport title="Unusual Language Paths">
-      This report looks at the parent/child relationships among languages to identify unusual
-      patterns that may indicate data issues. See also the{' '}
-      <button onClick={() => updatePageParams({ view: View.Hierarchy })}>
-        Language Family Tree
-      </button>{' '}
-      view.
+    <>
+      <div>
+        This report looks at the parent/child relationships among languages to identify unusual
+        patterns that may indicate data issues. See also the{' '}
+        <button onClick={() => updatePageParams({ view: View.Hierarchy })}>
+          Language Family Tree
+        </button>{' '}
+        view.
+      </div>
       <div
         style={{
           marginTop: '1em',
@@ -85,7 +87,7 @@ const ReportLanguagesPaths: React.FC = () => {
         </CollapsibleReport>
         <LanguagePathsReportMultipleRoutes multipleRoutes={multipleRoutes} />
       </div>
-    </CollapsibleReport>
+    </>
   );
 };
 
