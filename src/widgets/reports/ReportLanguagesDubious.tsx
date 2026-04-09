@@ -17,7 +17,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-const DubiousLanguages: React.FC = () => {
+const ReportLanguagesDubious: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
     useDataContext();
   const filterBySubstring = getFilterBySubstring();
@@ -110,4 +110,4 @@ const DubiousLanguages: React.FC = () => {
   );
 };
 
-export default DubiousLanguages;
+export default ReportLanguagesDubious;

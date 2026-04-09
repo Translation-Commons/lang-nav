@@ -1,3 +1,5 @@
+import { useSearchParams } from 'react-router-dom';
+
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { PageParamsOptional } from './PageParamTypes';
 
@@ -7,4 +9,12 @@ import { PageParamsOptional } from './PageParamTypes';
  */
 export function getNewURL(params: PageParamsOptional): string {
   return `?${getNewURLSearchParams(params).toString()}`;
+}
+
+/**
+ * Gets a URL that includes the current search params
+ */
+export function getUpdateURL(params: PageParamsOptional): string {
+  const [urlPageParams] = useSearchParams({});
+  return `?${getNewURLSearchParams(params, urlPageParams).toString()}`;
 }

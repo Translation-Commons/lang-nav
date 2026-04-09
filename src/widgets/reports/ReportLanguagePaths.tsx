@@ -15,7 +15,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import LanguagePath from './LanguagePathSimple';
 import LanguagePathsReportMultipleRoutes from './LanguagePathsReportsMultipleRoutes';
 
-const LanguagePathsReport: React.FC = () => {
+const ReportLanguagesPaths: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
   const { getLanguage, languagesInSelectedSource } = useDataContext();
   const { orphans, longestPaths, cycles, multipleRoutes } =
@@ -167,4 +167,4 @@ export function getExtremeLanguagePaths(languages: LanguageData[]): ExtremeLangu
   return { orphans, longestPaths, cycles, multipleRoutes };
 }
 
-export default LanguagePathsReport;
+export default ReportLanguagesPaths;

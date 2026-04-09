@@ -14,7 +14,7 @@ import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
-const LanguagesLargestDescendant: React.FC = () => {
+const ReportLanguageDescendents: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
 
   const [minimumPercentThreshold, setMinimumPercentThreshold] = React.useState(0);
@@ -100,4 +100,4 @@ const LanguagesLargestDescendant: React.FC = () => {
   );
 };
 
-export default LanguagesLargestDescendant;
+export default ReportLanguageDescendents;

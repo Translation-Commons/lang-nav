@@ -13,7 +13,7 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-const TableOfCountriesWithCensuses: React.FC = () => {
+const ReportCensusCountries: React.FC = () => {
   const { territories } = useDataContext();
 
   return (
@@ -62,4 +62,4 @@ const TableOfCountriesWithCensuses: React.FC = () => {
   );
 };
 
-export default TableOfCountriesWithCensuses;
+export default ReportCensusCountries;

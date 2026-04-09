@@ -21,7 +21,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 
-const LanguagesWithIdenticalNames: React.FC = () => {
+const ReportLanguagesWithAmbiguousNames: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
@@ -145,4 +145,4 @@ const LanguagesWithIdenticalNames: React.FC = () => {
   );
 };
 
-export default LanguagesWithIdenticalNames;
+export default ReportLanguagesWithAmbiguousNames;

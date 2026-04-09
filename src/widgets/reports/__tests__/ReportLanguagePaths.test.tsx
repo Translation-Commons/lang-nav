@@ -15,7 +15,7 @@ import {
 } from '@entities/language/LanguageTypes';
 import { ObjectDictionary } from '@entities/types/DataTypes';
 
-import { getExtremeLanguagePaths } from '../LanguagePathsReport';
+import { getExtremeLanguagePaths } from '../ReportLanguagePaths';
 
 describe('LanguagePathsReport', () => {
   function generateObjects(): ObjectDictionary {
