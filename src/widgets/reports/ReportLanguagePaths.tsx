@@ -15,7 +15,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import LanguagePath from './LanguagePathSimple';
 import LanguagePathsReportMultipleRoutes from './LanguagePathsReportsMultipleRoutes';
 
-const LanguagePathsReport: React.FC = () => {
+const ReportLanguagesPaths: React.FC = () => {
   const { limit, updatePageParams } = usePageParams();
   const { getLanguage, languagesInSelectedSource } = useDataContext();
   const { orphans, longestPaths, cycles, multipleRoutes } =
@@ -27,13 +27,15 @@ const LanguagePathsReport: React.FC = () => {
     .slice(0, limit);
 
   return (
-    <CollapsibleReport title="Unusual Language Paths">
-      This report looks at the parent/child relationships among languages to identify unusual
-      patterns that may indicate data issues. See also the{' '}
-      <button onClick={() => updatePageParams({ view: View.Hierarchy })}>
-        Language Family Tree
-      </button>{' '}
-      view.
+    <>
+      <div>
+        This report looks at the parent/child relationships among languages to identify unusual
+        patterns that may indicate data issues. See also the{' '}
+        <button onClick={() => updatePageParams({ view: View.Hierarchy })}>
+          Language Family Tree
+        </button>{' '}
+        view.
+      </div>
       <div
         style={{
           marginTop: '1em',
@@ -85,7 +87,7 @@ const LanguagePathsReport: React.FC = () => {
         </CollapsibleReport>
         <LanguagePathsReportMultipleRoutes multipleRoutes={multipleRoutes} />
       </div>
-    </CollapsibleReport>
+    </>
   );
 };
 
@@ -167,4 +169,4 @@ export function getExtremeLanguagePaths(languages: LanguageData[]): ExtremeLangu
   return { orphans, longestPaths, cycles, multipleRoutes };
 }
 
-export default LanguagePathsReport;
+export default ReportLanguagesPaths;

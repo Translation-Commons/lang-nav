@@ -14,10 +14,9 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-const DubiousLanguages: React.FC = () => {
+const ReportLanguagesDubious: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
     useDataContext();
   const filterBySubstring = getFilterBySubstring();
@@ -34,7 +33,7 @@ const DubiousLanguages: React.FC = () => {
   );
 
   return (
-    <CollapsibleReport title={`Dubious languages (${languagesFiltered.length})`}>
+    <>
       These languages have strange language codes and maybe should be removed from the list of
       languages. Some possibilities are:
       <ol>
@@ -106,8 +105,8 @@ const DubiousLanguages: React.FC = () => {
           })}
         </ResponsiveGrid>
       </div>
-    </CollapsibleReport>
+    </>
   );
 };
 
-export default DubiousLanguages;
+export default ReportLanguagesDubious;

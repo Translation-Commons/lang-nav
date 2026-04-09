@@ -72,7 +72,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
               </div>
             }
           >
-            {nShown.toLocaleString()}
+            {nShown?.toLocaleString()}
           </Hoverable>
           {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
         </div>
@@ -108,7 +108,7 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
   return (
     <div>
       <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
-      There are <strong>{nShown.toLocaleString()}</strong> items visible, this may impact page
+      There are <strong>{nShown?.toLocaleString()}</strong> items visible, this may impact page
       performance. Consider reducing the limit to{' '}
       <HoverableButton
         onClick={() => updatePageParams({ limit: threshold })}
