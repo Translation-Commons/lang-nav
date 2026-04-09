@@ -54,11 +54,11 @@ const NotesIcon: React.FC<{
     <Hoverable hoverContent={formattedNotes} style={{ marginLeft: '0.25em' }}>
       {warningNotes ? (
         <AlertTriangleIcon
-          style={{ color: 'var(--color-text-yellow)', verticalAlign: 'sub' }}
+          style={{ color: 'var(--color-yellow)', verticalAlign: 'sub' }}
           size={'1em'}
         />
       ) : (
-        <InfoIcon style={{ color: 'var(--color-text-blue)', verticalAlign: 'sub' }} size={'1em'} />
+        <InfoIcon style={{ color: 'var(--color-blue)', verticalAlign: 'sub' }} size={'1em'} />
       )}
     </Hoverable>
   );

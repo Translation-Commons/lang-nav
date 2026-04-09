@@ -5,7 +5,7 @@ enum TableID {
   Languages,
   Locales,
   Territories,
-  VariantTags,
+  Variants,
   WritingSystems,
   Keyboards,
 
@@ -16,6 +16,7 @@ enum TableID {
   CountriesWithCensuses,
   PotentialLocales,
   LocaleIndigeneity,
+  VariantAnnotation,
 }
 
 export default TableID;

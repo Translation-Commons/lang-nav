@@ -30,6 +30,7 @@ import {
   PercentIcon,
   RulerDimensionLineIcon,
   RulerIcon,
+  ScrollTextIcon,
   TextIcon,
   UserCheckIcon,
   UsersIcon,
@@ -57,6 +58,7 @@ export function getFieldIcon(field: Field): LucideIcon {
       return NetworkIcon;
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
       return BlocksIcon;
     case Field.SourceType:
       return BuildingIcon;
@@ -101,9 +103,11 @@ export function getFieldIcon(field: Field): LucideIcon {
       return MapPinnedIcon;
     case Field.Platform:
       return MonitorSmartphoneIcon;
-    case Field.VariantTag:
+    case Field.Variant:
       return MapPinIcon;
-    case Field.Source:
+    case Field.SourceForLanguage:
+      return ScrollTextIcon;
+    case Field.SourceForPopulation:
       return BracketsIcon;
 
     case Field.CountOfLanguages:
@@ -111,7 +115,7 @@ export function getFieldIcon(field: Field): LucideIcon {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
       return HashIcon;
 
     // Quantity

@@ -6,7 +6,7 @@ import connectLocales from '@features/data/connect/connectLocales';
 import { connectTerritoriesToParent } from '@features/data/connect/connectTerritoriesToParent';
 import { connectWritingSystems } from '@features/data/connect/connectWritingSystems';
 import { createRegionalLocales } from '@features/data/connect/createRegionalLocales';
-import { connectVariantTags } from '@features/data/load/extra_entities/IANAData';
+import { connectVariants } from '@features/data/load/extra_entities/IANAData';
 
 import { LocaleTags } from '@entities/locale/LocaleParsing';
 
@@ -17,7 +17,7 @@ import {
 
 describe('searchLocalesForMissingLinks', () => {
   it('should connect locales that are missing links based on language and territory codes', () => {
-    const { languagesBySource, territories, writingSystems, locales, variantTags } =
+    const { languagesBySource, territories, writingSystems, locales, variants } =
       getMockedObjectDictionaries();
     expect(
       Object.values(locales).length,
@@ -29,7 +29,7 @@ describe('searchLocalesForMissingLinks', () => {
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
     connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
-    connectVariantTags(variantTags, languagesBySource.BCP, locales);
+    connectVariants(variants, languagesBySource.BCP, locales);
     createRegionalLocales(territories, locales); // create them after connecting them
     expect(
       Object.values(locales).length,
@@ -74,12 +74,12 @@ describe('getLessSpecificLocaleTags', () => {
     expect(lessSpecificTags).toEqual(['zho', 'zho_CN', 'zho_Hans', 'zho_Hans_CN']);
   });
 
-  it('handles multiple variant tags', () => {
+  it('handles multiple variants', () => {
     const localeTags: LocaleTags = {
       languageCode: 'slv',
       scriptCode: 'Latn',
       territoryCode: 'SI',
-      variantTagCodes: ['rozaj', '1994'],
+      variantCodes: ['rozaj', '1994'],
     };
     const lessSpecificTags = getLessSpecificLocaleTags(localeTags);
     expect(lessSpecificTags).toEqual([

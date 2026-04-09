@@ -5,38 +5,38 @@
 }
 
 .selector input {
-  color: var(--color-background);
+  color: var(--color-text-on-color);
   background: var(--color-button-primary);
 }
 
 .selector button {
   color: var(--color-button-primary);
-  background: var(--color-background);
+  background-color: var(--color-background);
 }
 
 .selector input.empty {
   color: var(--color-button-primary);
-  background: var(--color-background);
+  background-color: var(--color-background);
 }
 
 .selector input::placeholder {
   color: var(--color-text-secondary);
-  background: var(--color-background);
+  background-color: var(--color-background);
 }
 
 .selector button:hover {
-  color: var(--color-background);
-  background: var(--color-button-hover);
+  color: var(--color-text-on-color);
+  background-color: var(--color-button-hover);
 }
 
 .selector :focus {
   border-color: var(--color-button-hover);
-  background: var(--color-button-hover);
+  background-color: var(--color-button-hover);
 }
 
 .selector .selected {
-  background: var(--color-button-primary);
-  color: var(--color-background);
+  color: var(--color-text-on-color);
+  background-color: var(--color-button-primary);
 }
 
 .selector button:disabled,

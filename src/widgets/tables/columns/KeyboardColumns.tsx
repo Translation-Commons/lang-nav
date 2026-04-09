@@ -59,8 +59,8 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     },
     {
       key: 'Variant',
-      render: (object) => object.variantTagCode,
-      field: Field.VariantTag,
+      render: (object) => object.variantCode,
+      field: Field.Variant,
       columnGroup: 'Related Objects',
       isInitiallyVisible: false,
     },

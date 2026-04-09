@@ -20,7 +20,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
       return object.populationUpperBound;
     case ObjectType.Territory:
       return object.population;
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return object.languages.length > 0
         ? object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0)
         : undefined;
@@ -39,7 +39,7 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
     case ObjectType.Census:
       return object.populationEligible;
     case ObjectType.WritingSystem:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       // There are no sources for population numbers for these, the population
       // numbers above are derived analytically
       return undefined;
@@ -59,7 +59,7 @@ export function getObjectPopulationOfDescendants(object: ObjectData): number | u
         : undefined;
     case ObjectType.Census:
     case ObjectType.Locale:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return undefined;
   }
 }
@@ -77,7 +77,7 @@ export function getObjectPopulationPercentInBiggestDescendantLanguage(
       return getTerritoryBiggestLocale(object)?.populationSpeakingPercent;
     case ObjectType.Census:
     case ObjectType.Locale:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
     case ObjectType.WritingSystem:
       return undefined;
   }
@@ -98,7 +98,7 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
         : undefined;
     case ObjectType.Census:
     case ObjectType.Territory:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
     case ObjectType.WritingSystem:
       return undefined;
   }
@@ -119,7 +119,7 @@ export function getObjectPercentOfTerritoryPopulation(object: ObjectData): numbe
         : undefined;
     case ObjectType.Language:
     case ObjectType.WritingSystem:
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return undefined;
   }
 }

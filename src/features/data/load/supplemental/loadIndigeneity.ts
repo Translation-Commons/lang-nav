@@ -5,7 +5,7 @@ export async function loadIndigeneity(
   getLanguage: (id: string) => LanguageData | undefined,
 ): Promise<void> {
   // Language ID	Territory ID	LanguageFormedInThisRegion	TimeLanguageAntecedentsEstablishedBefore1500
-  await fetch('data/indigeneity.tsv')
+  await fetch('data/tc/indigeneity.tsv')
     .then((res) => res.text())
     .then((text) =>
       text
@@ -28,9 +28,9 @@ export async function loadIndigeneity(
           return;
         }
         if (locales[0].langFormedHere != null || locales[0].historicPresence != null) {
-          console.debug(
-            `Multiple values for indigeneity data for locale ${locales[0].ID} (line ${lineNumber + 2}) in data/indigeneity.tsv. Please delete the duplicate entry.`,
-          );
+          // console.debug(
+          //   `Multiple values for indigeneity data for locale ${locales[0].ID} (line ${lineNumber + 2}) in data/indigeneity.tsv. Please delete the duplicate entry.`,
+          // );
           return;
         }
         const formedInThisRegion = parts[2] === '1' ? true : parts[2] === '0' ? false : undefined;

@@ -7,7 +7,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CensusData } from '../census/CensusTypes';
@@ -28,7 +28,7 @@ export type EntityData =
   | LocaleData
   | TerritoryData
   | WritingSystemData
-  | VariantTagData
+  | VariantData
   | KeyboardData;
 export type ObjectData = EntityData; // For now, all objects are entities
 export type ObjectDictionary = Record<string, ObjectData>;

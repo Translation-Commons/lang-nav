@@ -11,6 +11,7 @@ import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHi
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
+import { VariantType } from '@entities/variant/VariantTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -18,6 +19,7 @@ import DecimalNumber from '@shared/ui/DecimalNumber';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+import { getVariantTypeDisplay } from '@strings/VariantStrings';
 
 import Field from './Field';
 import getField from './getField';
@@ -50,7 +52,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Area:
       if (typeof fieldValue === 'number') return fieldValue.toLocaleString();
       return <>{fieldValue}</>;
@@ -63,10 +65,13 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Language:
     case Field.LanguageFamily:
     case Field.WritingSystem:
+    case Field.Region:
     case Field.Territory:
     case Field.Platform:
     case Field.OutputScript:
-    case Field.VariantTag:
+    case Field.Variant:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
       return <>{fieldValue}</>; // Objects should be displayed using a readable name
 
     case Field.VitalityMetascore:
@@ -99,6 +104,10 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return object.type === ObjectType.Locale && <LocaleFormedHereDisplay loc={object} />;
     case Field.HistoricPresence:
       return object.type === ObjectType.Locale && <LocaleHistoricPresenceDisplay loc={object} />;
+    case Field.VariantType:
+      return fieldValue === VariantType.Dialect || fieldValue === VariantType.Orthographic
+        ? getVariantTypeDisplay(fieldValue)
+        : fieldValue;
 
     case Field.Description:
     case Field.Example:
@@ -109,8 +118,6 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.WritingSystemScope:
     case Field.Coordinates:
     case Field.GovernmentStatus:
-    case Field.Region:
-    case Field.Source:
     case Field.None:
       return undefined;
 

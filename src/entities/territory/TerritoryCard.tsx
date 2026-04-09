@@ -2,27 +2,24 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
-import { uniqueBy } from '@shared/lib/setUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import TerritoryLanguageList from './TerritoryLanguageList';
 
 interface Props {
   territory: TerritoryData;
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { population, sovereign, locales, scope, parentUNRegion } = territory;
-  const filterByScope = getScopeFilter();
-  const localeList = locales ?? [];
+  const { population, sovereign, scope, parentUNRegion } = territory;
   const isDependency = scope === TerritoryScope.Dependency;
   const isWorld = scope === TerritoryScope.World;
 
@@ -76,17 +73,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         field={Field.Language}
         description="Languages spoken in this territory."
       >
-        {localeList.length > 0 ? (
-          <CommaSeparated>
-            {uniqueBy(localeList, (loc) => loc.languageCode ?? loc.ID)
-              .filter(filterByScope)
-              .map((locale) => (
-                <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
-              ))}
-          </CommaSeparated>
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
+        <TerritoryLanguageList territory={territory} />
       </CardField>
     </div>
   );

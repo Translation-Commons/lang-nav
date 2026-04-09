@@ -66,7 +66,7 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
                 hoverContent={<LanguageRetirementReason lang={lang} />}
                 style={{ marginLeft: '0.125em' }}
               >
-                <TriangleAlertIcon size="1em" color="var(--color-text-yellow)" />
+                <TriangleAlertIcon size="1em" color="var(--color-yellow)" />
               </Hoverable>
             )}
           </>

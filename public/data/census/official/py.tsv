@@ -1,0 +1,53 @@
+#codeDisplay		#es	py.2022	py.2023	py.2024	py.2012.indig	py.2012.indig.L1	py.2012.indig.L2	py.2012.indig.L3
+#nameDisplay			Paraguay 2022	Paraguay 2023	Paraguay 2024	Paraguay 2012 Indigenous	Paraguay 2012 Indigenous L1	Paraguay 2012 Indigenous L2	Paraguay 2012 Indigenous L3
+#isoRegionCode	PY								
+#yearCollected			2022	2023	2024	2012	2012	2012	2012
+#acquisitionOrder			Any	Any	Any	Any	L1	L2	L3
+#domain									
+#populationEligible			5363287.472	5406365.994	5449445.022	5720289	5720289	5720289	5720289
+#populationSource						https://www.ine.gov.py/assets/documento/39/Otros%20temas%20sociales_idioma_py_EPH_1997-98_2022.xls	https://www.ine.gov.py/assets/documento/39/Otros%20temas%20sociales_idioma_py_EPH_1997-98_2022.xls	https://www.ine.gov.py/assets/documento/39/Otros%20temas%20sociales_idioma_py_EPH_1997-98_2022.xls	https://www.ine.gov.py/assets/documento/39/Otros%20temas%20sociales_idioma_py_EPH_1997-98_2022.xls
+#populationSurveyed						96738	96738	96689	51368
+#age	5+								
+#nationality						Indigenous Population	Indigenous Population	Indigenous Population	Indigenous Population
+#quantity			percent	percent	percent	count	count	count	count
+#responsesPerIndividual	1					1+			
+#collectorType	Government								
+#collectorName	Instituto Nacional de Estadística								
+#collectorNameShort	INE Paraguay								
+#url			https://www.ine.gov.py/assets/documento/24/Educaci%C3%B3n_Idioma%20hablado_dpto_EPHC%202022-2024.xlsx	https://www.ine.gov.py/assets/documento/24/Educaci%C3%B3n_Idioma%20hablado_dpto_EPHC%202022-2024.xlsx	https://www.ine.gov.py/assets/documento/24/Educaci%C3%B3n_Idioma%20hablado_dpto_EPHC%202022-2024.xlsx	https://www.ine.gov.py/assets/documento/70d0eCuadro%20P9.%20Poblacion%20de%205%20anos%20y%20mas,%20segun%20idioma%20o%20lengua%20que%20hablan_Departamental_2012.xlsx	https://www.ine.gov.py/assets/documento/70d0eCuadro%20P9.%20Poblacion%20de%205%20anos%20y%20mas,%20segun%20idioma%20o%20lengua%20que%20hablan_Departamental_2012.xlsx	https://www.ine.gov.py/assets/documento/70d0eCuadro%20P9.%20Poblacion%20de%205%20anos%20y%20mas,%20segun%20idioma%20o%20lengua%20que%20hablan_Departamental_2012.xlsx	https://www.ine.gov.py/assets/documento/70d0eCuadro%20P9.%20Poblacion%20de%205%20anos%20y%20mas,%20segun%20idioma%20o%20lengua%20que%20hablan_Departamental_2012.xlsx
+#dateAccessed	2026-04-02								
+#tableName			Población de 5 y más años de edad por año de la encuesta, según departamento e idioma hablado la mayor parte del tiempo en el hogar (%). Años 2022-2024	Población de 5 y más años de edad por año de la encuesta, según departamento e idioma hablado la mayor parte del tiempo en el hogar (%). Años 2022-2024	Población de 5 y más años de edad por año de la encuesta, según departamento e idioma hablado la mayor parte del tiempo en el hogar (%). Años 2022-2024	Paraguay: Población indígena de 5 años y más de edad por  sexo, según departamento e idioma o lengua que hablan las personas, 2012.	Paraguay: Población indígena de 5 años y más de edad por  sexo, según departamento e idioma o lengua que hablan las personas, 2012.	Paraguay: Población indígena de 5 años y más de edad por  sexo, según departamento e idioma o lengua que hablan las personas, 2012.	Paraguay: Población indígena de 5 años y más de edad por  sexo, según departamento e idioma o lengua que hablan las personas, 2012.
+#columnName			2022	2023	2024		1° Idioma o lengua	2° Idioma o lengua	3° Idioma o lengua
+#citation						Fuente: DGEEC. III Censo Nacional de Población y Viviendas para Pueblos Indígenas 2012    	Fuente: DGEEC. III Censo Nacional de Población y Viviendas para Pueblos Indígenas 2012    	Fuente: DGEEC. III Censo Nacional de Población y Viviendas para Pueblos Indígenas 2012    	Fuente: DGEEC. III Censo Nacional de Población y Viviendas para Pueblos Indígenas 2012    
+#notes						added together from other data	count of sampled population	count of sampled population	count of sampled population
+Language Code	Language	Language (Spanish)							
+#added later	#total pop age 0+	#computed				113254	113254	113254	113254
+mul	#	Total	100	99.9988934	100	96738	96738	96689	51368
+grn/gug	#	Guaraní	34.41236867	31.5958452	30.02668022	64765	47268	15026	2471
+grn/gug/spa	#	Guaraní y Castellano	33.6709091	36.58594915	38.64922083				
+spa	#	Castellano	29.18967658	29.04650149	28.53389142	30413	1597	24256	4560
+por	#	Portugués				3372	74	1690	1608
+deu	#	Alemán				275	9	89	177
+guq	Ache	Ache				1460	1238	198	24
+nhd	Ava Guaraní	Ava Guaraní				976	656	234	86
+gun	Mbya Guaraní	Mbya Guaraní				9040	6222	2691	127
+pta	Paĩ Tavyterã	Paĩ Tavyterã				8012	4663	3025	324
+gnw	Western Guarani	Guaraní Occidental				797	647	103	47
+gui	Guaraní Ñandéva	Guaraní Ñandéva				1923	1748	100	75
+enl	Enlhet Norte	Enlhet Norte				7798	7185	439	174
+enx	Enxet Sur	Enxet Sur				4581	3012	1257	312
+spn	Sanapaná	Sanapaná				1538	1017	405	116
+aqt	Angaité	Angaité				1045	239	658	148
+gva	Guaná	Guaná				16	2	11	3
+tmf	Toba Maskoy	Toba Maskoy				1631	1287	252	92
+cag	Nivaclé	Nivaclé				13169	12572	408	189
+mca	Maká	Maká				1643	1533	91	19
+crq/manj1251	Manjui	Manjui				540	457	69	14
+ayo	Ayoreo	Ayoreo				2213	2181	29	3
+ceg/ebit1237	Ybytoso	Ybytoso				1700	1534	105	61
+ceg/cham1316	Tomárãho	Tomárãho				145	127	3	15
+tob	Qom	Qom				1579	1364	162	53
+mul	#	Otro Idioma	2.72704565	2.770597552	2.790207534	50	3	13	34
+und	#	Ningún otro idioma					0	45321	40582
+zxx	#	No Habla				49	49	0	0
+und	#	No reportado	0	0	0	54	54	54	54

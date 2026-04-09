@@ -12,6 +12,7 @@ import {
 import {
   buildFilterByISOStatus,
   buildFilterByLanguageScope,
+  buildFilterByLanguageSource,
   buildFilterByModality,
   buildFilterByTerritoryScope,
   buildFilterByVitalityEthnologueCoarse,
@@ -29,6 +30,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     isoStatus,
     languageFilter,
     languageScopes,
+    languageSource,
     modalityFilter,
     searchBy,
     searchString,
@@ -46,6 +48,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByTerritory = buildFilterByTerritory(territoryFilter);
   const filterByLanguage = buildFilterByLanguage(languageFilter);
   const filterByWritingSystem = buildFilterByWritingSystem(writingSystemFilter);
+  const filterByLanguageSource = buildFilterByLanguageSource(languageSource);
 
   // Vitality
   const filterByISOStatus = buildFilterByISOStatus(isoStatus);
@@ -71,13 +74,14 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.WritingSystem]: filterByWritingSystem,
     [Field.Territory]: filterByTerritory,
     [Field.LanguageFamily]: alwaysTrue,
+    [Field.SourceForLanguage]: filterByLanguageSource,
 
     // Filters not yet constructed
     [Field.Region]: alwaysTrue, // TODO
     [Field.Platform]: alwaysTrue, // TODO
     [Field.OutputScript]: alwaysTrue, // TODO
-    [Field.VariantTag]: alwaysTrue, // TODO
-    [Field.Source]: alwaysTrue, // TODO
+    [Field.Variant]: alwaysTrue, // TODO
+    [Field.SourceForPopulation]: alwaysTrue, // TODO
 
     [Field.None]: alwaysTrue,
     [Field.Code]: alwaysTrue,
@@ -89,6 +93,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.DigitalSupport]: alwaysTrue,
     [Field.SourceType]: alwaysTrue,
     [Field.WritingSystemScope]: alwaysTrue,
+    [Field.VariantType]: alwaysTrue,
     [Field.VitalityMetascore]: alwaysTrue,
     [Field.HistoricPresence]: alwaysTrue,
     [Field.LanguageFormedHere]: alwaysTrue,
@@ -100,7 +105,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.CountOfChildTerritories]: alwaysTrue,
     [Field.CountOfCountries]: alwaysTrue,
     [Field.CountOfCensuses]: alwaysTrue,
-    [Field.CountOfVariantTags]: alwaysTrue,
+    [Field.CountOfVariants]: alwaysTrue,
 
     [Field.Population]: alwaysTrue,
     [Field.PopulationDirectlySourced]: alwaysTrue,

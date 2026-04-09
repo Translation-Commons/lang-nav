@@ -12,8 +12,9 @@ import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
+import { CensusCollectorType } from '@entities/census/CensusTypes';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import { usePotentialLocaleThreshold } from '@entities/locale/PotentialLocaleThreshold';
 import usePotentialLocales from '@entities/locale/usePotentialLocales';
 
@@ -219,7 +220,13 @@ const PotentialLocalesTable: React.FC<{
 };
 
 function getLocaleExportString(locale: LocaleData): string {
-  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${locale.officialStatus ?? ''}\t${locale.populationSpeaking}\t\n`;
+  let populationSource = '';
+  if (locale.populationCensus?.collectorType === CensusCollectorType.Government) {
+    populationSource = PopulationSourceCategory.Official;
+  } else if (locale.populationCensus?.collectorType === CensusCollectorType.Study) {
+    populationSource = PopulationSourceCategory.Study;
+  }
+  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${populationSource}\t${locale.populationSpeaking}\t${locale.officialStatus ?? ''}\n`;
 }
 
 export default PotentialLocales;

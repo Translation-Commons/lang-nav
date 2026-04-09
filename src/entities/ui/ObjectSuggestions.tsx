@@ -34,7 +34,7 @@ function getObjectIDs(objectType: ObjectType): string[] {
       return ['eng_US', 'spa_419', 'fra_FR', 'rus_RU', 'arb_001', 'zho_Hans_CN', 'cmn_CN'];
     case ObjectType.Territory:
       return ['US', 'MX', 'FR', 'RU', 'EG', 'CN'];
-    case ObjectType.VariantTag:
+    case ObjectType.Variant:
       return ['valencia', 'grclass', 'rumgr', 'pinyin'];
     case ObjectType.WritingSystem:
       return ['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'];

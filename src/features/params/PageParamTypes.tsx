@@ -30,7 +30,7 @@ export enum ObjectType {
   Census = 'Census',
   Territory = 'Territory',
   WritingSystem = 'Writing System',
-  VariantTag = 'Variant Tag',
+  Variant = 'Variant',
   Keyboard = 'Keyboard',
 }
 

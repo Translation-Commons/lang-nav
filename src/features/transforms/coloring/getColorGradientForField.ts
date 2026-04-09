@@ -39,11 +39,12 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Depth:
     case Field.LanguageScope:
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
       // Preferred color schema for ordinals
       // Low values are light blue, high values are dark blue
       return ColorGradient.SequentialBlue;
@@ -68,9 +69,10 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.OutputScript:
     case Field.Region:
     case Field.Territory:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.Platform:
-    case Field.Source:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
       // These values are the names of related objects, not ideal for coloring with a gradient, but
       // since they are categorical values with no intrinsic order, a scattered gradient is more
       // appropriate than a sequential or diverging one.

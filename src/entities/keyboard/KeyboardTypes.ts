@@ -7,7 +7,7 @@ import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectBase } from '@entities/types/DataTypes';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export enum KeyboardPlatform {
@@ -30,13 +30,13 @@ export interface KeyboardData extends ObjectBase {
   territoryCode?: TerritoryCode;
   inputScriptCode: ScriptCode;
   outputScriptCode: ScriptCode;
-  variantTagCode?: string;
+  variantCode?: string;
 
   // Computed after loading
   language?: LanguageData;
   territory?: TerritoryData;
   inputWritingSystem?: WritingSystemData;
   outputWritingSystem?: WritingSystemData;
-  variantTag?: VariantTagData;
+  variant?: VariantData;
   locale?: LocaleData;
 }

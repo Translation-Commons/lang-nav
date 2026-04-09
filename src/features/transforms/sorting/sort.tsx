@@ -74,15 +74,17 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Code:
     case Field.Description:
     case Field.Modality:
+    case Field.VariantType:
     case Field.Language:
     case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.OutputScript:
     case Field.Territory:
     case Field.Region:
-    case Field.VariantTag:
+    case Field.Variant:
     case Field.Platform:
-    case Field.Source:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
     case Field.Coordinates:
     case Field.Longitude:
     case Field.Latitude:
@@ -103,7 +105,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:

@@ -9,6 +9,7 @@ import LocaleCitationCounts from '@widgets/reports/LocaleCitationCounts';
 import PotentialLocales from '@widgets/reports/PotentialLocales';
 import ReportEntityUnknownFields from '@widgets/reports/ReportEntityUnknownFields';
 import TableOfCountriesWithCensuses from '@widgets/reports/TableOfCountriesWithCensuses';
+import VariantAnnotationReport from '@widgets/reports/VariantAnnotationReport';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -51,16 +52,13 @@ const ReportsForObjectType: React.FC<{ objectType: ObjectType }> = ({ objectType
         </>
       );
     case ObjectType.WritingSystem:
-      return (
-        <>
-          <LanguagesMissingWritingSystems />
-        </>
-      );
+      return <LanguagesMissingWritingSystems />;
     case ObjectType.Census:
       return <TableOfCountriesWithCensuses />;
     case ObjectType.Territory:
-    case ObjectType.VariantTag:
       return <></>;
+    case ObjectType.Variant:
+      return <VariantAnnotationReport />;
   }
 };
 

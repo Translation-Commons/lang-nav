@@ -32,7 +32,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
     case Field.CountOfCensuses:
-    case Field.CountOfVariantTags:
+    case Field.CountOfVariants:
     case Field.Depth: // # of nodes
       return TableValueType.Count;
 
@@ -46,8 +46,9 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.Region:
     case Field.Platform:
     case Field.OutputScript:
-    case Field.VariantTag:
-    case Field.Source:
+    case Field.Variant:
+    case Field.SourceForLanguage:
+    case Field.SourceForPopulation:
     case Field.Description:
     case Field.Example:
     case Field.None:
@@ -61,6 +62,7 @@ export function getFieldValueType(field?: Field): TableValueType {
     case Field.LanguageScope:
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
+    case Field.VariantType:
     case Field.SourceType:
     case Field.Indigeneity:
     case Field.HistoricPresence:

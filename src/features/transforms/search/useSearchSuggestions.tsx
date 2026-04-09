@@ -17,7 +17,7 @@ import HighlightedObjectField from './HighlightedObjectField';
 
 export default function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy, objectType } = usePageParams();
-  const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variantTags } =
+  const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variants } =
     useDataContext();
   const filterBy = useFilters();
   const filterLabels = getFilterLabels();
@@ -34,15 +34,15 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
         return writingSystems;
       case ObjectType.Census:
         return Object.values(censuses);
-      case ObjectType.VariantTag:
-        return variantTags;
+      case ObjectType.Variant:
+        return variants;
     }
   }, [
     censuses,
     languagesInSelectedSource,
     locales,
     territories,
-    variantTags,
+    variants,
     writingSystems,
     objectType,
     searchBy,

@@ -12,8 +12,6 @@ import { initAmplitude, trackPageView } from '@shared/lib/amplitude';
 
 import PageRoutes from './PageRoutes';
 
-import './index.css';
-
 function AmplitudeTracker() {
   const location = useLocation();
   const lastPageRef = useRef('');

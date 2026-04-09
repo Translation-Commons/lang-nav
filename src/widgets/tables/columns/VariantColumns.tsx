@@ -9,14 +9,21 @@ import Field from '@features/transforms/fields/Field';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
-import { VariantTagData } from '@entities/varianttag/VariantTagTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-function getVariantColumns(): TableColumn<VariantTagData>[] {
+import { getVariantTypeDisplay } from '@strings/VariantStrings';
+
+function getVariantColumns(): TableColumn<VariantData>[] {
   return [
     CodeColumn,
     NameColumn,
+    {
+      key: 'Type',
+      render: (object) => (object.variantType ? getVariantTypeDisplay(object.variantType) : '—'),
+      field: Field.VariantType,
+    },
     {
       key: 'Date Added',
       render: (object) => object.dateAdded?.toLocaleDateString(),
@@ -33,6 +40,14 @@ function getVariantColumns(): TableColumn<VariantTagData>[] {
         </CommaSeparated>
       ),
       field: Field.Language,
+      columnGroup: 'Related Objects',
+    },
+    {
+      key: 'Equivalent Languoid',
+      render: (object) => {
+        if (!object.languoid || object.languoid.ID === 'mis') return null;
+        return <HoverableObjectName object={object.languoid} />;
+      },
       columnGroup: 'Related Objects',
     },
     {
@@ -74,10 +89,10 @@ function getVariantColumns(): TableColumn<VariantTagData>[] {
       key: 'Potential Population',
       description: (
         <>
-          <TriangleAlertIcon size="1em" /> This is not the actual population of this variant tag,
-          but an estimate based on the language(s) it applies to. If its an orthographic variant
-          maybe it applies to the full modern population, but if it is a dialect or historic
-          variation it may only be a small group of people or only found in manuscripts.
+          <TriangleAlertIcon size="1em" /> This is not the actual population of this variant, but an
+          estimate based on the language(s) it applies to. If its an orthographic variant maybe it
+          applies to the full modern population, but if it is a dialect or historic variation it may
+          only be a small group of people or only found in manuscripts.
         </>
       ),
       render: (object) => getObjectPopulation(object),

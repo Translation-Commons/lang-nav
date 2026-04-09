@@ -3,12 +3,15 @@ ca2021
 cn-cmn2020
 de
 es2021
+gn2014
 id
 in2011c16
 in2011c17
 it
 lr
 np2021
+pk2023
+py
 ru2020
 us_asc
 us2023

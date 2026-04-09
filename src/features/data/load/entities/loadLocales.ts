@@ -11,7 +11,7 @@ import {
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 
 export async function loadLocales(): Promise<Record<string, LocaleData> | void> {
-  return await loadObjectsFromFile<LocaleData>('data/locales.tsv', parseLocaleLine);
+  return await loadObjectsFromFile<LocaleData>('data/tc/locales.tsv', parseLocaleLine);
 }
 
 export function parseLocaleLine(line: string): LocaleData | undefined {
@@ -25,7 +25,7 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
   }
   const inputLocaleID = parts[0];
   const localeParts = parseLocaleCode(inputLocaleID);
-  const { languageCode, scriptCode, territoryCode, variantTagCodes } = localeParts;
+  const { languageCode, scriptCode, territoryCode, variantCodes } = localeParts;
   const localeID = getLocaleCodeFromTags(localeParts, LocaleSeparator.Underscore);
   const nameEndonym = parts[2] || undefined;
 
@@ -41,7 +41,7 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
     languageCode,
     territoryCode,
     scriptCode,
-    variantTagCodes,
+    variantCodes,
     populationSource: parts[3] as PopulationSourceCategory,
     populationSpeaking: parts[4] !== '' ? Number.parseInt(parts[4]?.replace(/,/g, '')) : undefined,
     officialStatus: (parts[5] || undefined) as OfficialStatus | undefined,

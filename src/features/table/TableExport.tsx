@@ -7,6 +7,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
+import { prepareCLDRLocalePopulationForExport } from '@entities/locale/localstatus/LocaleCLDRExport';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
@@ -28,6 +29,7 @@ enum ExportType {
   CopyCSV = 'Copy CSV',
   CopyTSV = 'Copy TSV',
   CopyUNESCO = 'Copy UNESCO TSV',
+  CopyCLDR = 'Copy CLDR TSV',
   Unchosen = 'Export',
 }
 
@@ -35,7 +37,11 @@ type DownloadExportType =
   | ExportType.DownloadCSV
   | ExportType.DownloadTSV
   | ExportType.DownloadUNESCO;
-type CopyExportType = ExportType.CopyCSV | ExportType.CopyTSV | ExportType.CopyUNESCO;
+type CopyExportType =
+  | ExportType.CopyCSV
+  | ExportType.CopyTSV
+  | ExportType.CopyUNESCO
+  | ExportType.CopyCLDR;
 
 function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndSorted }: Props<T>) {
   // Track when the user initiates an export; used to disable the button while processing
@@ -48,6 +54,9 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
         exportType === ExportType.DownloadCSV || exportType === ExportType.CopyCSV ? ',' : '\t';
       if (exportType === ExportType.DownloadUNESCO || exportType === ExportType.CopyUNESCO) {
         return prepareUNESCODataForExport(objectsFilteredAndSorted, pageParams.territoryFilter);
+      }
+      if (exportType === ExportType.CopyCLDR) {
+        return prepareCLDRLocalePopulationForExport(objectsFilteredAndSorted);
       }
       const header = visibleColumns.map((c) => csvEscape(c.key)).join(separator);
       const rows = objectsFilteredAndSorted.map((obj) => {
@@ -117,6 +126,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
             case ExportType.CopyCSV:
             case ExportType.CopyTSV:
             case ExportType.CopyUNESCO:
+            case ExportType.CopyCLDR:
               await handleClipboardExport(exportType);
               break;
           }
@@ -133,8 +143,13 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
     pageParams.objectType !== ObjectType.Locale
   ) {
     validExportTypes = validExportTypes.filter(
-      (et) => et !== ExportType.DownloadUNESCO && et !== ExportType.CopyUNESCO,
+      (et) =>
+        et !== ExportType.DownloadUNESCO &&
+        et !== ExportType.CopyUNESCO &&
+        et !== ExportType.CopyCLDR,
     );
+  } else if (pageParams.objectType === ObjectType.Language) {
+    validExportTypes = validExportTypes.filter((et) => et !== ExportType.CopyCLDR);
   }
 
   return (
@@ -166,6 +181,7 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.CopyCSV:
     case ExportType.CopyTSV:
     case ExportType.CopyUNESCO:
+    case ExportType.CopyCLDR:
       return (
         <>
           <CopyIcon className="button-inline-icon" /> {exportType}
@@ -195,6 +211,8 @@ function getExportDescription(exportType: ExportType) {
       return 'Export data prepared for UNESCO in a TSV file format.';
     case ExportType.CopyUNESCO:
       return 'Copy data prepared for UNESCO in TSV format to clipboard.';
+    case ExportType.CopyCLDR:
+      return "Copy data prepared for CLDR's country_language_population.tsv to clipboard.";
     case ExportType.Unchosen:
       return 'Export data: selected columns and filtered rows to CSV or TSV';
   }

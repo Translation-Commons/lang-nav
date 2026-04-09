@@ -31,10 +31,10 @@ export async function getServer(): Promise<SetupServer> {
 
   const handlers = [
     http.get('/api/health', () => HttpResponse.json({ ok: true })),
-    makeFileAvailable('data/languages.tsv'),
-    makeFileAvailable('data/locales.tsv'),
-    makeFileAvailable('data/writingSystems.tsv'),
-    makeFileAvailable('data/territories.tsv'),
+    makeFileAvailable('data/tc/languages.tsv'),
+    makeFileAvailable('data/tc/locales.tsv'),
+    makeFileAvailable('data/tc/writingSystems.tsv'),
+    makeFileAvailable('data/tc/territories.tsv'),
   ];
 
   server = setupServer(...handlers);

@@ -6,8 +6,6 @@ import Loading from '@widgets/Loading';
 
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
 const OptionsPanel = React.lazy(() => import('@widgets/controls/OptionsPanel'));
-const ViewModal = React.lazy(() => import('@features/layers/modal/ViewModal'));
-
 const DataPage: React.FC = () => {
   /* Many data components have more lines of code so they are loaded lazily */
   return (
@@ -19,7 +17,6 @@ const DataPage: React.FC = () => {
           <DetailsPanel />
         </div>
       </FilterPanelProvider>
-      <ViewModal />
     </Suspense>
   );
 };

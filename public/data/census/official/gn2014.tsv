@@ -1,0 +1,46 @@
+#codeDisplay		gn2014
+#nameDisplay		Guinea 2014
+#isoRegionCode	GN	
+#yearCollected		2014
+#modality		Spoken
+#acquisitionOrder		Any
+#domain		Any
+#populationEligible		9439468
+#age		3+
+#quantity		percent
+#responsesPerIndividual		1
+#collectorType		Government
+#collectorName		Institut National de la Statistique
+#collectorNameShort		INS Guinée
+#author		Mamadou Chérif Bah, Mamadouba Alkaly Bangoura
+#url		https://web.archive.org/web/20191124062531/http://www.stat-guinee.org/images/Publications/INS/RGPH3/RGPH3_etat_structure.pdf
+#datePublished		2017-12-01
+#dateAccessed		2019-11-24
+#tableName		Tableau 5.07: Répartition de la population de 3 ans et plus par milieu de résidence et par sexe selon la langue nationale parlée
+#columnName		Langue parlée
+#notes		"main language"
+Language Code	Language	Population
+zxx	Aucune	0.2
+sus	Soussou	17.7
+ful/fuf	Poular	34.6
+man	Maninka	24.9
+man/jad	Diakanka	1.1
+temn1245/bsp	Baga	0.3
+naj	Nalou	0.1
+mfg	Mikiforè	0.2
+ldm	Landouma	0.5
+pbp	Badiaranké	0.1
+bsc	Bassari	0.1
+cou	Koniagui	0.2
+yal	Djalonké	0.9
+snk	Sarakolé/Maraka	0.2
+knk	Kouranko	1.9
+kqs	Kissi	4.1
+lel	Lélé	0.4
+tod	Toma	1.4
+man/mku	Koniaka	4.5
+tod	Tomamania	0.7
+kpe	Kpèlè	4
+mev	Mano	0.7
+kno	Kono	0.8
+mul	Autre langue nationale	0.4

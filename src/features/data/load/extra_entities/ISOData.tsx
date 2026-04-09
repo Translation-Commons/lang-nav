@@ -99,7 +99,7 @@ export async function loadISOFamiliesToLanguages(): Promise<Record<
   ISO6395LanguageCode,
   LanguageCode[]
 > | void> {
-  return await fetch('data/iso/familiesToLanguages.tsv')
+  return await fetch('data/tc/familiesToLanguages.tsv')
     .then((res) => res.text())
     .then((text) => text.split('\n').slice(4)) // First 4 lines are headers and comments
     .then((lines) => lines.map((line) => line.split('\t')))
