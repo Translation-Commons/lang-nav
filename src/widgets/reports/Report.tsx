@@ -3,13 +3,13 @@ import React from 'react';
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-import ReportCensusInputTool from './ReportCensusInputTool';
 import ReportID from './ReportID';
 
 const LocaleIndigeneityReport = React.lazy(
   () => import('@entities/locale/localstatus/LocaleIndigeneityReport'),
 );
 const ReportCensusCountries = React.lazy(() => import('./ReportCensusCountries'));
+const ReportCensusInputTool = React.lazy(() => import('./ReportCensusInputTool'));
 const ReportEntitiesMissingFields = React.lazy(() => import('./ReportEntitiesMissingFields'));
 const ReportLanguageDescendants = React.lazy(() => import('./ReportLanguageDescendants'));
 const ReportLanguagePaths = React.lazy(() => import('./ReportLanguagePaths'));

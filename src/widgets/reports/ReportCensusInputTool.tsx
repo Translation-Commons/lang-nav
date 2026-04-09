@@ -30,7 +30,7 @@ const ReportCensusInputTool: React.FC = () => {
     } catch (e) {
       setErrorMessage((e as Error).message);
     }
-  }, [tsv]);
+  }, [tsv, getTerritory]);
 
   return (
     <div>
