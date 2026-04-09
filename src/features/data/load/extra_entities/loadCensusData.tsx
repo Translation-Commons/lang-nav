@@ -41,7 +41,7 @@ export type CensusImport = {
   languageNames: Record<LanguageCode, string>;
 };
 
-function parseCensusImport(fileInput: string, filePath: string): CensusImport {
+export function parseCensusImport(fileInput: string, filePath: string): CensusImport {
   const lines = fileInput.split('\n');
   const filename = filePath.match(/\/([^/]+)\.tsv$/)?.[1] || 'census';
 
@@ -58,8 +58,9 @@ function parseCensusImport(fileInput: string, filePath: string): CensusImport {
       return tsvColumnNumber + 2; // +2 to account for the skipped columns
     })
     .filter((col) => col !== null);
-  if (tsvColumnsWithData.length <= 0)
-    throw new Error(`No census data found in the file ${filename}.`);
+  if (tsvColumnsWithData.length <= 0) {
+    throw new Error('No census data found' + (filePath ? ` in the file: "${filename}".` : '.'));
+  }
 
   const censuses: CensusData[] = tsvColumnsWithData.map((_tsvColumnNumber, index) => ({
     type: ObjectType.Census,

@@ -3,6 +3,7 @@ import React from 'react';
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
+import ReportCensusInputTool from './ReportCensusInputTool';
 import ReportID from './ReportID';
 
 const LocaleIndigeneityReport = React.lazy(
@@ -35,10 +36,12 @@ const Report: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
 
 const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
   switch (reportID) {
-    case ReportID.EntitiesMissingFields:
-      return <ReportEntitiesMissingFields />;
     case ReportID.CensusCountries:
       return <ReportCensusCountries />;
+    case ReportID.CensusInputTool:
+      return <ReportCensusInputTool />;
+    case ReportID.EntitiesMissingFields:
+      return <ReportEntitiesMissingFields />;
     case ReportID.LanguagePaths:
       return <ReportLanguagePaths />;
     case ReportID.LanguageDescendants:
@@ -49,12 +52,12 @@ const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
       return <ReportLanguagesDubious />;
     case ReportID.LocaleCitationCompleteness:
       return <ReportLocaleCitationCompleteness />;
-    case ReportID.WritingSystemsLanguagesWithout:
-      return <ReportWritingSystemsLanguagesWithout />;
     case ReportID.LocaleIndigeneity:
       return <LocaleIndigeneityReport />;
     case ReportID.LocalesPotential:
       return <ReportLocalesPotential />;
+    case ReportID.WritingSystemsLanguagesWithout:
+      return <ReportWritingSystemsLanguagesWithout />;
     case ReportID.VariantsAnnotationTool:
       return <ReportVariantsAnnotationTool />;
     default:

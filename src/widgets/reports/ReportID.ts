@@ -2,6 +2,7 @@
 enum ReportID {
   EntitiesMissingFields, // fixed at 0 since it is always there. All others should be alphabetic
   CensusCountries,
+  CensusInputTool,
   LanguagesWithAmbiguousNames,
   LanguagesDubious,
   LanguageDescendants,

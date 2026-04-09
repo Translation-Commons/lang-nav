@@ -26,6 +26,52 @@ export enum CensusLanguageMode {
   Ethnicity = 'Ethnicity',
 }
 
+export enum CensusField {
+  codeDisplay = 'codeDisplay',
+  nameDisplay = 'nameDisplay',
+  isoRegionCode = 'isoRegionCode',
+  yearCollected = 'yearCollected',
+
+  // Kind of language data collected
+  mode = 'mode',
+  proficiency = 'proficiency',
+  acquisitionOrder = 'acquisitionOrder',
+  domain = 'domain',
+
+  // Population
+  populationEligible = 'populationEligible',
+  popualtionSource = 'populationSource',
+  populationSurveyed = 'populationSurveyed',
+  populationWithPositiveResponses = 'populationWithPositiveResponses',
+  sampleRate = 'sampleRate',
+  responsesPerIndividual = 'responsesPerIndividual',
+
+  // Data constraints
+  languagesIncluded = 'languagesIncluded',
+  geographicScope = 'geographicScope',
+  age = 'age',
+  gender = 'gender',
+  nationality = 'nationality',
+  residentLocation = 'residentLocation',
+  quantity = 'quantity',
+  notes = 'notes',
+
+  // Author
+  collectorType = 'collectorType',
+  collectorName = 'collectorName',
+  collectorNameShort = 'collectorNameShort',
+  author = 'author',
+
+  // Source
+  url = 'url',
+  datePublished = 'datePublished',
+  dateAccessed = 'dateAccessed',
+  documentName = 'documentName',
+  tableName = 'tableName',
+  columnName = 'columnName',
+  citation = 'citation',
+}
+
 export interface CensusData extends ObjectBase {
   type: ObjectType.Census;
   ID: CensusID;
@@ -42,6 +88,7 @@ export interface CensusData extends ObjectBase {
 
   // Population
   populationEligible: number; // The total number of qualified individuals
+  populationSource?: string; // The URL specifically for the population source
   populationSurveyed?: number; // The number of individuals surveyed (if different from eligible)
   populationWithPositiveResponses?: number; // The number of individuals who gave a response about their language
   sampleRate?: number | string; // eg. .1, .25, 1 (for 10%, 25%, 100%)
