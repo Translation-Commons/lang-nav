@@ -1,12 +1,13 @@
 import React, { useMemo } from 'react';
 
 import NavTabs from '@widgets/controls/NavTabs';
-import Loading from '@widgets/Loading';
 import getReportIDsForEntityType from '@widgets/reports/getReportIDsForEntityType';
 import ReportID from '@widgets/reports/ReportID';
 import ReportLabels from '@widgets/reports/ReportLabels';
 
 import usePageParams from '@features/params/usePageParams';
+
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 const Report = React.lazy(() => import('@widgets/reports/Report'));
 
@@ -30,9 +31,9 @@ const ViewReports: React.FC = () => {
           label: ReportLabels[reportID],
         }))}
       />
-      <React.Suspense fallback={<Loading />}>
+      <ContainErrorsAndSuspense>
         <Report reportID={reportID} />
-      </React.Suspense>
+      </ContainErrorsAndSuspense>
     </div>
   );
 };

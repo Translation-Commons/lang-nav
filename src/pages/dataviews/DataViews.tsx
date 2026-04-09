@@ -1,9 +1,9 @@
 import React from 'react';
 
-import Loading from '@widgets/Loading';
-
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 const CardList = React.lazy(() => import('@widgets/cardlists/CardList'));
 const ViewMap = React.lazy(() => import('./ViewMap'));
@@ -15,9 +15,9 @@ function DataViews() {
   const { view } = usePageParams();
 
   return (
-    <React.Suspense fallback={<Loading />}>
+    <ContainErrorsAndSuspense>
       <SpecificDataView view={view} />
-    </React.Suspense>
+    </ContainErrorsAndSuspense>
   );
 }
 

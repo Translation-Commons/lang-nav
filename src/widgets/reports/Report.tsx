@@ -1,7 +1,6 @@
 import React from 'react';
 
-import Loading from '@widgets/Loading';
-
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import ReportID from './ReportID';
@@ -28,9 +27,9 @@ const ReportVariantsAnnotationTool = React.lazy(() => import('./ReportVariantsAn
 
 const Report: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
   return (
-    <React.Suspense fallback={<Loading />}>
+    <ContainErrorsAndSuspense>
       <SpecificReport reportID={reportID} />
-    </React.Suspense>
+    </ContainErrorsAndSuspense>
   );
 };
 
