@@ -8,7 +8,6 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 import VariantAnnotationTable from '@entities/variant/VariantAnnotationTable';
 import { VariantData, VariantType } from '@entities/variant/VariantTypes';
 
-
 enum IncludeCriteria {
   HasData = 'has data',
   MissingData = 'missing data',
