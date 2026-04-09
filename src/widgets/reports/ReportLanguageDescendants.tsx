@@ -12,7 +12,7 @@ import Field from '@features/transforms/fields/Field';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getObjectPopulation';
 
-const ReportLanguageDescendents: React.FC = () => {
+const ReportLanguageDescendants: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
 
   const [minimumPercentThreshold, setMinimumPercentThreshold] = React.useState(0);
@@ -100,4 +100,4 @@ const ReportLanguageDescendents: React.FC = () => {
   );
 };
 
-export default ReportLanguageDescendents;
+export default ReportLanguageDescendants;

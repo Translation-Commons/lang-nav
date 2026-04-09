@@ -4,7 +4,7 @@ enum ReportID {
   CensusCountries,
   LanguagesWithAmbiguousNames,
   LanguagesDubious,
-  LanguageDescendents,
+  LanguageDescendants,
   LanguagePaths,
   LocaleCitationCompleteness,
   LocaleIndigeneity,

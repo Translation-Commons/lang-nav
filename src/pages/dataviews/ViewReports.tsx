@@ -2,14 +2,11 @@ import React, { useMemo } from 'react';
 
 import NavTabs from '@widgets/controls/NavTabs';
 import getReportIDsForEntityType from '@widgets/reports/getReportIDsForEntityType';
+import Report from '@widgets/reports/Report';
 import ReportID from '@widgets/reports/ReportID';
 import ReportLabels from '@widgets/reports/ReportLabels';
 
 import usePageParams from '@features/params/usePageParams';
-
-import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
-
-const Report = React.lazy(() => import('@widgets/reports/Report'));
 
 /**
  * A page that shows tips about problems in the data that may need to be addressed.
@@ -21,6 +18,10 @@ const ViewReports: React.FC = () => {
     () => [ReportID.EntitiesMissingFields, ...getReportIDsForEntityType(objectType)],
     [objectType],
   );
+  const currentReportID = useMemo(() => {
+    if (reportID && reportIDs.includes(reportID)) return reportID;
+    return reportIDs[0];
+  }, [reportID, reportIDs]);
 
   return (
     <div style={{ textAlign: 'start', display: 'flex', flexDirection: 'column', gap: '1em' }}>
@@ -31,9 +32,7 @@ const ViewReports: React.FC = () => {
           label: ReportLabels[reportID],
         }))}
       />
-      <ContainErrorsAndSuspense>
-        <Report reportID={reportID} />
-      </ContainErrorsAndSuspense>
+      <Report reportID={currentReportID} />
     </div>
   );
 };

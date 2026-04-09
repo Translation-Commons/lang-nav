@@ -12,7 +12,7 @@ function getReportIDsForEntityType(entityType: ObjectType): ReportID[] {
         ReportID.LanguagesDubious,
         ReportID.LanguagesWithAmbiguousNames,
         ReportID.LanguagePaths,
-        ReportID.LanguageDescendents,
+        ReportID.LanguageDescendants,
       ];
     case ObjectType.Locale:
       return [

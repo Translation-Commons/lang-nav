@@ -3,7 +3,7 @@ import ReportID from './ReportID';
 const ReportLabels: Record<ReportID, string> = {
   [ReportID.CensusCountries]: 'Countries',
   [ReportID.EntitiesMissingFields]: 'Missing Fields',
-  [ReportID.LanguageDescendents]: 'Descendents',
+  [ReportID.LanguageDescendants]: 'Descendants',
   [ReportID.LanguagePaths]: 'Paths',
   [ReportID.LanguagesDubious]: 'Dubious Languages',
   [ReportID.LanguagesWithAmbiguousNames]: 'Ambiguous Names',
