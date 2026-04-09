@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 
 import NavTabs from '@widgets/controls/NavTabs';
 import Loading from '@widgets/Loading';
-import ReportID, { getReportIDsForEntityType } from '@widgets/reports/ReportID';
+import getReportIDsForEntityType from '@widgets/reports/getReportIDsForEntityType';
+import ReportID from '@widgets/reports/ReportID';
 import ReportLabels from '@widgets/reports/ReportLabels';
 
 import usePageParams from '@features/params/usePageParams';

@@ -19,7 +19,7 @@ const InternalLink: React.FC<Props> = ({
   params,
   children,
   style,
-  keepOldParams,
+  keepOldParams = false, // Assuming internal link should reset old page parameters by default
 }) => {
   const [oldParams] = useSearchParams({});
   const paramsStr = params

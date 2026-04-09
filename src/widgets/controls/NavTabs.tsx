@@ -1,7 +1,6 @@
 import React, { ReactNode, useCallback } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import InternalLink from '@features/params/InternalLink';
+import HoverableInternalLinkButton from '@features/layers/hovercard/HoverableInternalLinkButton';
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -32,23 +31,24 @@ const NavTabs: React.FC<Props> = ({ label, options }) => {
       {options.map((option) => {
         const isActive = getIsActive(option);
         return (
-          <InternalLink params={option.urlParams} key={option.label} keepOldParams={true}>
-            <HoverableButton
-              className="tab"
-              hoverContent={option.description}
-              style={{
-                padding: '0.5em 1em',
-                color: isActive ? 'var(--color-button-primary)' : 'var(--color-text)',
-                borderWidth: '2px',
-                borderRadius: '0.5em 0.5em 0 0',
-                borderBottomStyle: 'solid',
-                borderBottomColor: isActive ? 'var(--color-button-primary)' : 'transparent',
-                cursor: 'pointer',
-              }}
-            >
-              {option.label}
-            </HoverableButton>
-          </InternalLink>
+          <HoverableInternalLinkButton
+            params={option.urlParams}
+            key={option.label}
+            keepOldParams={true}
+            className="tab"
+            hoverContent={option.description}
+            style={{
+              padding: '0.5em 1em',
+              color: isActive ? 'var(--color-button-primary)' : 'var(--color-text)',
+              borderWidth: '2px',
+              borderRadius: '0.5em 0.5em 0 0',
+              borderBottomStyle: 'solid',
+              borderBottomColor: isActive ? 'var(--color-button-primary)' : 'transparent',
+              cursor: 'pointer',
+            }}
+          >
+            {option.label}
+          </HoverableInternalLinkButton>
         );
       })}
     </div>
