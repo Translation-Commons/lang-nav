@@ -1,0 +1,1 @@
+import{O as n,q as s,W as r,bB as a,aq as h,bC as i}from"./index-Ct3xvAJi.js";const o=({object:e})=>{if(e.type===n.Census||e.type===n.Variant)return s.jsx(r,{children:"n/a"});const t=a(e);return t==null?s.jsx(r,{children:"Unknown"}):s.jsx(h,{hoverContent:s.jsx(i,{object:e,showChildren:!1}),children:t||"Root"})};export{o as O};
