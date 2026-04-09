@@ -57,6 +57,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
     languagesIncluded,
     notes,
     populationEligible,
+    populationSource,
     populationSurveyed,
     populationWithPositiveResponses,
     quantity,
@@ -66,7 +67,14 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Population Characteristics">
-      <DetailsField title="Eligible Population">{populationEligible.toLocaleString()}</DetailsField>
+      <DetailsField title="Overall eligible population">
+        {populationEligible.toLocaleString()}
+      </DetailsField>
+      {populationSource && (
+        <DetailsField title="Source for overall population">
+          <ExternalLink href={populationSource} />
+        </DetailsField>
+      )}
       {populationWithPositiveResponses && (
         <DetailsField title="Responding Population">
           {populationWithPositiveResponses.toLocaleString()}

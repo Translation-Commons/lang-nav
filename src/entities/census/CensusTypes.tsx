@@ -42,6 +42,7 @@ export interface CensusData extends ObjectBase {
 
   // Population
   populationEligible: number; // The total number of qualified individuals
+  populationSource?: string; // The URL specifically for the population source
   populationSurveyed?: number; // The number of individuals surveyed (if different from eligible)
   populationWithPositiveResponses?: number; // The number of individuals who gave a response about their language
   sampleRate?: number | string; // eg. .1, .25, 1 (for 10%, 25%, 100%)

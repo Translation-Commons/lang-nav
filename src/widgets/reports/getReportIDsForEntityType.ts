@@ -23,7 +23,7 @@ function getReportIDsForEntityType(entityType: ObjectType): ReportID[] {
     case ObjectType.WritingSystem:
       return [ReportID.WritingSystemsLanguagesWithout];
     case ObjectType.Census:
-      return [ReportID.CensusCountries];
+      return [ReportID.CensusCountries, ReportID.CensusInputTool];
     case ObjectType.Keyboard:
       return [];
     case ObjectType.Territory:

@@ -9,6 +9,7 @@ const LocaleIndigeneityReport = React.lazy(
   () => import('@entities/locale/localstatus/LocaleIndigeneityReport'),
 );
 const ReportCensusCountries = React.lazy(() => import('./ReportCensusCountries'));
+const ReportCensusInputTool = React.lazy(() => import('./ReportCensusInputTool'));
 const ReportEntitiesMissingFields = React.lazy(() => import('./ReportEntitiesMissingFields'));
 const ReportLanguageDescendants = React.lazy(() => import('./ReportLanguageDescendants'));
 const ReportLanguagePaths = React.lazy(() => import('./ReportLanguagePaths'));
@@ -35,10 +36,12 @@ const Report: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
 
 const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
   switch (reportID) {
-    case ReportID.EntitiesMissingFields:
-      return <ReportEntitiesMissingFields />;
     case ReportID.CensusCountries:
       return <ReportCensusCountries />;
+    case ReportID.CensusInputTool:
+      return <ReportCensusInputTool />;
+    case ReportID.EntitiesMissingFields:
+      return <ReportEntitiesMissingFields />;
     case ReportID.LanguagePaths:
       return <ReportLanguagePaths />;
     case ReportID.LanguageDescendants:
@@ -49,12 +52,12 @@ const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
       return <ReportLanguagesDubious />;
     case ReportID.LocaleCitationCompleteness:
       return <ReportLocaleCitationCompleteness />;
-    case ReportID.WritingSystemsLanguagesWithout:
-      return <ReportWritingSystemsLanguagesWithout />;
     case ReportID.LocaleIndigeneity:
       return <LocaleIndigeneityReport />;
     case ReportID.LocalesPotential:
       return <ReportLocalesPotential />;
+    case ReportID.WritingSystemsLanguagesWithout:
+      return <ReportWritingSystemsLanguagesWithout />;
     case ReportID.VariantsAnnotationTool:
       return <ReportVariantsAnnotationTool />;
     default:

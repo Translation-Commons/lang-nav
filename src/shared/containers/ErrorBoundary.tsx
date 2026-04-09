@@ -1,25 +1,42 @@
 import React from 'react';
 
-const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [errorMessage, setErrorMessage] = React.useState<string | null>(null);
+interface ErrorBoundaryProps {
+  children: React.ReactNode;
+}
 
-  React.useEffect(() => {
-    const handleError = (event: ErrorEvent) => {
-      setErrorMessage(event.message);
+interface ErrorBoundaryState {
+  hasError: boolean;
+  errorMessage: string | null;
+}
+
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundaryState> {
+  constructor(props: ErrorBoundaryProps) {
+    super(props);
+    this.state = {
+      hasError: false,
+      errorMessage: null,
     };
-
-    window.addEventListener('error', handleError);
-    return () => {
-      window.removeEventListener('error', handleError);
-    };
-  }, []);
-
-  if (errorMessage) {
-    return <ErrorFallback message={errorMessage} />;
   }
 
-  return <>{children}</>;
-};
+  static getDerivedStateFromError(error: Error): ErrorBoundaryState {
+    return {
+      hasError: true,
+      errorMessage: error.message,
+    };
+  }
+
+  componentDidCatch(error: Error, errorInfo: React.ErrorInfo) {
+    console.error('Error caught by boundary:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <ErrorFallback message={this.state.errorMessage || 'An unknown error occurred'} />;
+    }
+
+    return this.props.children;
+  }
+}
 
 const ErrorFallback: React.FC<{ message: string }> = ({ message }) => {
   return (
@@ -27,6 +44,9 @@ const ErrorFallback: React.FC<{ message: string }> = ({ message }) => {
       <h2>Something went wrong.</h2>
       <p>Please try refreshing the page or contact support if the issue persists.</p>
       <p>{message}</p>
+      <button onClick={() => window.location.reload()} style={{ padding: '0.5em 1em' }}>
+        Refresh Page
+      </button>
     </div>
   );
 };
