@@ -75,7 +75,7 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
         }}
       >
         {censuses.length > 0 && page <= censuses.length && censuses[page - 1] && (
-          <LocalParamsProvider overrides={{ page: 1, limit: 5 }}>
+          <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
             <ContainErrorsAndSuspense>
               <h2>
                 <ObjectTitle object={censuses[page - 1]} highlightSearchMatches={false} />
