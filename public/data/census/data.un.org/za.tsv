@@ -3,12 +3,13 @@
 #isoRegionCode	ZA			
 #yearCollected		1996	2001	2011
 #datePublished		2005	2005	2013
-#populationEligible		40,583,570	44,819,778	50,961,443
+#population		40,583,570	44,819,778	50,961,443
 #notes		Data have been adjusted for underenumeration, estimated at 10.69 per cent. Census - de facto - complete tabulation	Census - de facto - complete tabulation	Census - de facto - complete tabulation
 #responsesPerIndividual	1			
 #acquisitionOrder	L1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	za1996	za2001	za2011
 mul	Total	40,583,570	44,819,778	50,961,443
 zul	Isizulu	9,200,144	10,677,305	11,587,374

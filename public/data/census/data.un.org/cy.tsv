@@ -3,13 +3,14 @@
 #isoRegionCode	CY			
 #yearCollected		2001	2011	2021
 #datePublished		2002	2013	2024
-#populationEligible		689,565	840,407	923,381
+#population		689,565	840,407	923,381
 #populationWithPositiveResponses		688,705	835,113	912,270
 #notes		Data refer to government controlled areas. Residents. Census - de jure - complete tabulation	Data refer to government controlled areas. Census - de jure - complete tabulation	Data refer to government controlled areas. Census - de jure - complete tabulation
 #responsesPerIndividual		1		1
 #acquisitionOrder	L1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	cy2001	cy2011	cy2021
 mul	Total	689,565	840,407	923,381
 ell	Greek	632,539	679,833	733,732

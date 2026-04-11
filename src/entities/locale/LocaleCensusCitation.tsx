@@ -3,7 +3,7 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 
-import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -26,10 +26,12 @@ const CensusCitation: React.FC<{ census: CensusData; size: 'short' | 'full' }> =
   census,
   size,
 }) => {
-  const { yearCollected, collectorName, collectorType } = census;
-  if (collectorType === CensusCollectorType.CLDR) {
+  const { yearCollected, collectorName, collectorType, presentedBy } = census;
+  if (presentedBy === 'CLDR') {
     // Leave out the date from CLDR, it's not available from the source
-    return <HoverableObject object={census}>{collectorName ?? collectorType}</HoverableObject>;
+    return (
+      <HoverableObject object={census}>{collectorName ?? presentedBy ?? 'Unknown'}</HoverableObject>
+    );
   }
   let name = collectorName;
   if (name == null || name === '' || size === 'short') {

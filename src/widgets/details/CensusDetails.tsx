@@ -29,7 +29,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
 };
 
 function CensusPrimarySection({ census }: { census: CensusData }) {
-  const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, mode } = census;
+  const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, languageUse } = census;
   return (
     <DetailsSection title="Primary Information">
       <DetailsField title="Territory">
@@ -40,7 +40,7 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
         )}
       </DetailsField>
       <DetailsField title="Year">{census.yearCollected}</DetailsField>
-      {mode != null && <DetailsField title="Mode">{mode}</DetailsField>}
+      {languageUse != null && <DetailsField title="Language Use">{languageUse}</DetailsField>}
       {proficiency != null && <DetailsField title="Proficiency">{proficiency}</DetailsField>}
       {acquisitionOrder != null && (
         <DetailsField title="Acquisition Order">{acquisitionOrder}</DetailsField>
@@ -56,7 +56,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
     geographicScope,
     languagesIncluded,
     notes,
-    populationEligible,
+    population,
     populationSource,
     populationSurveyed,
     populationWithPositiveResponses,
@@ -67,11 +67,9 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Population Characteristics">
-      <DetailsField title="Overall eligible population">
-        {populationEligible.toLocaleString()}
-      </DetailsField>
+      <DetailsField title="Overall population in scope">{population.toLocaleString()}</DetailsField>
       {populationSource && (
-        <DetailsField title="Source for overall population">
+        <DetailsField title="Source for overall population in scope">
           <ExternalLink href={populationSource} />
         </DetailsField>
       )}
@@ -91,7 +89,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
         </DetailsField>
       ) : populationSurveyed ? (
         <DetailsField title="Sample rate">
-          {((populationSurveyed / populationEligible) * 100).toLocaleString()}%
+          {((populationSurveyed / population) * 100).toLocaleString()}%
         </DetailsField>
       ) : null}
       {languagesIncluded && (

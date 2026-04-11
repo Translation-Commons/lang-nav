@@ -139,7 +139,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     collectorName: 'National Institute of Statistics',
     url: 'https://en.wikipedia.org/wiki/Beleriand#Languages', // not a real part of the article
     isoRegionCode: 'BE',
-    populationEligible: BE.population,
+    population: BE.population,
     languageEstimates: {
       sjn: 9300, // 77.5%, increased to test out the population recomputation
     },
@@ -363,7 +363,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     (id) => locales[id],
     (id) => territories[id],
     {},
-    { censuses: Object.values(censuses), languageNames: {} },
+    { censuses: Object.values(censuses), languageNames: {}, warnings: [] },
   );
 
   return objects;

@@ -3,11 +3,12 @@
 #isoRegionCode		IE	IE
 #yearCollected		2006	2011
 #datePublished		2009	2012
-#populationEligible		4,239,848	4,588,252
+#population		4,239,848	4,588,252
 #notes		Census - de facto - complete tabulation	Census - de facto - complete tabulation
 #languagesIncluded		Indigenous	Indigenous
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	ie2006	ie2011
 mul	Total	4,239,848	4,588,252
 gle	Irish	1,656,790	1,767,555

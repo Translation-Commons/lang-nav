@@ -3,11 +3,12 @@
 #isoRegionCode		CK
 #yearCollected		2011
 #datePublished		2014
-#populationEligible		14,974
+#population		14,974
 #notes		Census - de jure - complete tabulation
 #acquisitionOrder		Any
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	ck2011
 mul	Total	14,974
 eng	English	12,933

@@ -3,15 +3,16 @@
 #isoRegionCode	RO			
 #yearCollected		2002	2011	2021
 #datePublished		2003	2014	2023
-#populationEligible		21,680,974	20,121,641	19,053,815
+#population		21,680,974	20,121,641	19,053,815
 #populationWithPositiveResponses		21,678,844	18,891,613	16,551,437
 #notes		Census - de jure - complete tabulation	Data refer to usual resident population. Census - de facto - complete tabulation	Census - de jure - complete tabulation
-#mode		Speaks		
+#languageUse		Speaks		
 #domain		Home		
 #acquisitionOrder		L1		
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	ro2002	ro2011	ro2021
 mul	Total	21,680,974	20,121,641	19,053,815
 ron	Romanian	19,736,517	17,176,544	15,153,198

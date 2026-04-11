@@ -3,13 +3,14 @@
 #isoRegionCode	MO				
 #yearCollected		2001	2011	2016	2021
 #datePublished		2002	2012	2017	2023
-#populationEligible		424,203	539,131	632,857	663,782
+#population		424,203	539,131	632,857	663,782
 #notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation	Sample survey - de jure	Census - de jure - complete tabulation
 #age	3+				
 #responsesPerIndividual	1				
 #languagesIncluded					
 #sampleRate				0.1	
-#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27				
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#presentedBy	data.un.org					
 Language Code	Language Name	mo2001	mo2011	mo2016	mo2021
 mul	Total	424,203	539,131	632,857	663,782
 zho/yue	Cantonese		449,274	506,625	537,981

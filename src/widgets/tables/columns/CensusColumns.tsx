@@ -24,14 +24,13 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Eligible Population',
-      render: (census) => census.populationEligible,
+      render: (census) => census.population,
       field: Field.Population,
       columnGroup: 'Population',
     },
     {
       key: '% of Current Population',
-      render: (census) =>
-        census.populationEligible && getObjectPercentOfTerritoryPopulation(census),
+      render: (census) => census.population && getObjectPercentOfTerritoryPopulation(census),
       isInitiallyVisible: false,
       field: Field.PercentOfTerritoryPopulation,
       columnGroup: 'Population',
@@ -49,15 +48,15 @@ function getCensusColumns(): TableColumn<CensusData>[] {
       columnGroup: 'Characteristics',
     },
     {
-      key: 'Mode',
+      key: 'Language Use',
       description: (
         <>
-          Censuses usually frame language usage like &quot;How many people <strong>speak</strong>{' '}
-          the language?&quot;. This column shows what people do with the language to be counted for
-          it. Alternatively some censuses just report ethnicity.
+          How people are using the language. Censuses usually ask questions like &quot;Do you{' '}
+          <strong>speak</strong> the language?&quot;. This column shows what people do with the
+          language to be counted for it. Alternatively some censuses just report ethnicity.
         </>
       ),
-      render: (census) => census.mode,
+      render: (census) => census.languageUse,
       isInitiallyVisible: false,
       columnGroup: 'Characteristics',
     },
@@ -96,7 +95,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     {
       key: 'Year Collected',
       render: (census) =>
-        census.collectorType !== CensusCollectorType.CLDR ? (
+        census.collectorType !== CensusCollectorType.Secondary ? (
           new Date(census.yearCollected + '-07-01').toLocaleDateString(undefined, {
             year: 'numeric',
           })

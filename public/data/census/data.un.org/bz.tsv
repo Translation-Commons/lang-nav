@@ -3,15 +3,16 @@
 #isoRegionCode	BZ		
 #yearCollected		2000	2010
 #datePublished		2005	2014
-#populationEligible		205,123	303,422
+#population		205,123	303,422
 #notes		Data refer to usual language, defined as the language currently spoken, or most often spoken, by the individual in his or her present home., Census - de facto - complete tabulation	Census - de jure - complete tabulation
-#mode		Speaks	
+#languageUse		Speaks	
 #age			4+
 #domain		Home	
 #acquisitionOrder	Any		
 #responsesPerIndividual		1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	bz2000	bz2010
 mul	Total	205,123	
 eng	English	7,946	183,903

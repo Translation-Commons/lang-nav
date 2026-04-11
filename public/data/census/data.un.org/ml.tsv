@@ -3,15 +3,16 @@
 #isoRegionCode	ML		
 #yearCollected		1998	2009
 #datePublished		2007	2014
-#populationEligible		7,620,672	11,109,312
+#population		7,620,672	11,109,312
 #notes		Census - de jure - complete tabulation	Census - de facto - complete tabulation
-#mode		Speaks	
+#languageUse		Speaks	
 #age			6+
 #domain		Home	
 #acquisitionOrder		Any	
 #responsesPerIndividual		1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	ml1998	ml2009
 mul	Total	7,620,672	11,109,312
 bam	Bambara		5,165,830

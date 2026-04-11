@@ -62,7 +62,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         populationSpeaking,
         populationSpeakingPercent:
           (populationSpeaking * 100) /
-          (census.populationWithPositiveResponses || census.populationEligible),
+          (census.populationWithPositiveResponses || census.population),
         populationCensus: census,
       } as LocaleData;
     })

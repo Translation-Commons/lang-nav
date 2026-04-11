@@ -3,11 +3,12 @@
 #isoRegionCode		AS
 #yearCollected		2000
 #datePublished		2001
-#populationEligible		49,471
+#population		49,471
 #notes		Including armed forces stationed in the area. Census - de jure - complete tabulation
 #age		5+
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	as2000
 mul	Total	49,471
 smo	Samoan	44,833

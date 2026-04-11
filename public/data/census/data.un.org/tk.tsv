@@ -3,12 +3,13 @@
 #isoRegionCode	TK			
 #yearCollected		2006	2011	2016
 #datePublished		2008	2013	2020
-#populationEligible		1,065	1,143	1,499
+#population		1,065	1,143	1,499
 #notes		Census - de jure - complete tabulation	Residents. Census - de jure - complete tabulation	Usual resident population. Census - de facto - complete tabulation
-#mode		Speaks	Speaks	
+#languageUse		Speaks	Speaks	
 #acquisitionOrder	Any			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	tk2006	tk2011	tk2016
 mul	Total		1,143	
 tkl	Tokelauan	1,023	1,069	1,055

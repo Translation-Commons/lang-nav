@@ -3,12 +3,13 @@
 #isoRegionCode		AW
 #yearCollected		2000
 #datePublished		2009
-#populationEligible		86,408
+#population		86,408
 #notes		Census - de jure - complete tabulation
 #age		5+
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	aw2000
 mul	Total	86,408
 pap	Papiamento	59,984

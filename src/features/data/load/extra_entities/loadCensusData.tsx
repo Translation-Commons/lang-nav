@@ -1,6 +1,5 @@
-import { ObjectType } from '@features/params/PageParamTypes';
-
-import { CensusCollectorType, CensusData, CensusLanguageMode } from '@entities/census/CensusTypes';
+import { CensusData } from '@entities/census/CensusTypes';
+import { parseCensusMetadata } from '@entities/census/parseCensusMetadata';
 import { LanguageCode } from '@entities/language/LanguageTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
@@ -39,121 +38,21 @@ export type CensusImport = {
 
   // Imported to add additional language names to the language data
   languageNames: Record<LanguageCode, string>;
+
+  // Warnings about potential issues with the data
+  warnings: string[];
 };
 
 export function parseCensusImport(fileInput: string, filePath: string): CensusImport {
   const lines = fileInput.split('\n');
-  const filename = filePath.match(/\/([^/]+)\.tsv$/)?.[1] || 'census';
-
-  // Create an array based on the number of census columns
-  // (number of censusNames, which is columns after the first two)
-  // This will be used to initialize metadatas and other arrays
-  const tsvColumnsWithData = lines[0]
-    .split('\t')
-    .slice(2) // Skip the first 2 columns since they are the metadata field names & the default values
-    .map((col, tsvColumnNumber) => {
-      // Drop columns which have a "#" in the codeDisplay -- that means they are provided for context
-      // but LangNav doesn't have a good way to show it.
-      if (col[0] === '#') return null;
-      return tsvColumnNumber + 2; // +2 to account for the skipped columns
-    })
-    .filter((col) => col !== null);
-  if (tsvColumnsWithData.length <= 0) {
-    throw new Error('No census data found' + (filePath ? ` in the file: "${filename}".` : '.'));
-  }
-
-  const censuses: CensusData[] = tsvColumnsWithData.map((_tsvColumnNumber, index) => ({
-    type: ObjectType.Census,
-    ID: filename + '.' + (index + 1),
-    codeDisplay: filename + '.' + (index + 1), // May be overridden later
-
-    // This will be set later -- its just initialized here because they are strictly required
-    nameDisplay: '',
-    names: [],
-    isoRegionCode: '',
-    languageCount: 0,
-    yearCollected: 0,
-    populationEligible: 0,
-    languageEstimates: {},
-    collectorType: CensusCollectorType.Government,
-    url: '',
-  }));
-
-  // Iterate through the rest of the lines to collect metadata until we hit the break line
-  let lineNumber = 0;
-  for (lineNumber = 0; lineNumber < lines.length; lineNumber++) {
-    const line = lines[lineNumber];
-
-    // If the line starts with a '#', it's metadata about the census
-    if (line.startsWith('#')) {
-      const parts = line.split('\t').map((part) => part.trim());
-      const key = parts[0].slice(1) as keyof CensusData;
-      const defaultValue = parts[1] || ''; // Default value is the second column, or empty if not provided
-      const values = tsvColumnsWithData.map((col) => parts[col]); // Get the values from importable columns (ones without # prefix)
-
-      if (values.length !== censuses.length) {
-        console.error(
-          `Census field ${key} has ${values.length + 1} columns but expected ${censuses.length + 1}. Check the file format for ${filename}.`,
-        );
-      }
-      values.forEach((maybeValue, index) => {
-        const value = maybeValue != '' ? maybeValue : defaultValue; // Use the default value if the cell is empty
-        if (value == '') return; // Skip empty values
-
-        if (key === 'datePublished' || key === 'dateAccessed') {
-          censuses[index][key] = new Date(value);
-        } else if (
-          key === 'populationEligible' ||
-          key === 'yearCollected' ||
-          key === 'populationWithPositiveResponses' ||
-          key === 'populationSurveyed'
-        ) {
-          censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
-        } else if (key === 'sampleRate') {
-          censuses[index][key] = Number.parseFloat(value) || value;
-        } else if (key === 'collectorType') {
-          censuses[index][key] = value as CensusCollectorType;
-        } else if (key === 'mode') {
-          censuses[index][key] = value as CensusLanguageMode;
-        } else if (key === 'quantity') {
-          censuses[index][key] = value.toLowerCase().startsWith('percent') ? 'percent' : 'count';
-        } else if (
-          key === 'languageCount' ||
-          key === 'languageEstimates' ||
-          key === 'type' ||
-          key === 'territory' ||
-          key === 'names'
-        ) {
-          // these keys should not be passed in here
-        } else {
-          // Regular strings, but only save if something is filled in
-          censuses[index][key] = value;
-        }
-      });
-    } else {
-      // If the line does not start with a '#', it is part of the main data section
-      // so end this loop and start processing the main data section
-      break;
-    }
-  }
-
-  // Set other fields required for objects and report an error if an important one is missing
-  censuses.forEach((census) => {
-    // Collect names for the census
-    census.names = [census.nameDisplay, census.tableName, census.columnName].filter(
-      (n) => n != null,
-    );
-    if (census.isoRegionCode === '') console.error('Census data is missing isoRegionCode:', census);
-    if (census.yearCollected === 0) console.error('Census data is missing yearCollected:', census);
-    if (census.populationEligible === 0)
-      console.error('Census data is missing populationEligible:', census);
-    if (census.nameDisplay === '') console.error('Census data is missing nameDisplay:', census);
-    if (census.url === '') console.error('Census data is missing url:', census);
-  });
+  const { censuses, warnings, tsvColumnsWithData, endOfMetadataLine } = parseCensusMetadata(
+    lines,
+    filePath,
+  );
 
   // Process the remaining lines as language data
   const languageNames: Record<LanguageCode, string> = {};
-  for (const line of lines.splice(lineNumber)) {
+  for (const line of lines.splice(endOfMetadataLine)) {
     const parts = line.split('\t');
     if (parts.length < 3) continue; // Skip lines that do not have enough data
 
@@ -197,7 +96,7 @@ export function parseCensusImport(fileInput: string, filePath: string): CensusIm
       let popEstimate = Number.parseFloat(part.replace(/[,%]/g, ''));
       if (popEstimate > 0 && censuses[i].quantity === 'percent') {
         // If the quantity is percent, convert the percentage to an estimate based on the eligible population
-        popEstimate = Math.round((popEstimate / 100) * censuses[i].populationEligible);
+        popEstimate = Math.round((popEstimate / 100) * censuses[i].population);
       }
       if (isNaN(popEstimate)) {
         // If the population estimate is not a number, set it to 1.
@@ -226,6 +125,7 @@ export function parseCensusImport(fileInput: string, filePath: string): CensusIm
   return {
     censuses,
     languageNames,
+    warnings,
   };
 }
 

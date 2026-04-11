@@ -3,11 +3,12 @@
 #isoRegionCode		AT
 #yearCollected		2001
 #datePublished		2003
-#populationEligible		8,032,926
+#population		8,032,926
 #notes		Census - de jure - complete tabulation
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	at2001
 mul	Total	8,032,926
 deu	German	7,115,780

@@ -14,16 +14,21 @@ export enum CensusCollectorType {
   Study = 'Study', // Academic study
   NGO = 'NGO', // Non-governmental organization eg. Endangered Languages Project, Joshua Project
   Media = 'Media', // News article, blog, or other media sources
-  CLDR = 'CLDR',
+  Secondary = 'Secondary', // Data repackaged by secondary sources without a clear source of where it came from, eg. Ethnologue, Wikipedia, CLDR
 }
 
-export enum CensusLanguageMode {
+export enum CensusLanguageUse {
   Understands = 'Understands',
   Speaks = 'Speaks', // Implicitly often "speaks or signs"
   Writes = 'Writes',
   Reads = 'Reads',
   Uses = 'Uses',
   Ethnicity = 'Ethnicity',
+}
+
+export enum CensusQuantity {
+  Count = 'count',
+  Percent = 'percent',
 }
 
 export interface CensusData extends ObjectBase {
@@ -35,15 +40,15 @@ export interface CensusData extends ObjectBase {
   yearCollected: number; // eg. 2021, 2013
 
   // Kind of language data collected
-  mode?: CensusLanguageMode; // eg. Speaks, Writes, Understands
+  languageUse?: CensusLanguageUse; // eg. Speaks, Writes, Understands
   proficiency?: string; // eg. Conversant or Learning, Fluent, Non-Fluent
   acquisitionOrder?: string; // eg. Any, L1, L2, L3
   domain?: string; // eg. Any, Home, School, Work, Community, Unspecified
 
   // Population
-  populationEligible: number; // The total number of qualified individuals
+  population: number; // The total number of qualified individuals
   populationSource?: string; // The URL specifically for the population source
-  populationSurveyed?: number; // The number of individuals surveyed (if different from eligible)
+  populationSurveyed?: number; // The number of individuals surveyed (if different from in scope)
   populationWithPositiveResponses?: number; // The number of individuals who gave a response about their language
   sampleRate?: number | string; // eg. .1, .25, 1 (for 10%, 25%, 100%)
   responsesPerIndividual?: string; // eg. 1, 1+, 2+
@@ -63,6 +68,7 @@ export interface CensusData extends ObjectBase {
   collectorName?: string; // Name of the organization or journal presenting the data
   collectorNameShort?: string; // A shorter name of the organization for compact displays, eg. Federal State Statistics Service -> Rosstat
   author?: string; // Name of the individual author(s) if applicable
+  presentedBy?: string; // Sometimes data is re-packaged by secondary sources, list the intermediate source here
 
   // Source
   url: string; // Most important to have, so people can find the original data
@@ -91,7 +97,7 @@ export const getCensusCollectorTypeRank = (collectorType: CensusCollectorType): 
       return 3;
     case CensusCollectorType.Media:
       return 4;
-    case CensusCollectorType.CLDR:
+    case CensusCollectorType.Secondary:
       return 5; // Low priority
     default:
       return 6; // Unknown or unranked

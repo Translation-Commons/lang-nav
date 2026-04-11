@@ -2,9 +2,9 @@
 #nameDisplay			Indonesia 2020 Summary
 #isoRegionCode	ID		
 #yearCollected			2020
-#mode			Uses
+#languageUse			Uses
 #acquisitionOrder			Any
-#populationEligible			270,200,000
+#population			270,200,000
 #populationSource			https://setkab.go.id/en/statistics-indonesia-releases-2020-census-results/
 #quantity			percent
 #collectorType			Government

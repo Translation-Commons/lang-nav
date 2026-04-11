@@ -41,7 +41,7 @@ function usePotentialLocales(
           if (getLocale(localeID) || lang == null) {
             return; // Locale already exists or language is missing, skip
           }
-          const populationPercentInCountry = (populationEstimate * 100) / census.populationEligible;
+          const populationPercentInCountry = (populationEstimate * 100) / census.population;
           const populationPercentOfLanguageWorldwide =
             (populationEstimate * 100) / (lang.populationEstimate ?? 1);
           if (!isPercentEnough(populationPercentInCountry, populationPercentOfLanguageWorldwide)) {

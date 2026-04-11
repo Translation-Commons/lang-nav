@@ -3,13 +3,14 @@
 #isoRegionCode	TL		
 #yearCollected		2004	2015
 #datePublished		2011	2019
-#populationEligible		741,530	1,179,654
+#population		741,530	1,179,654
 #notes		Census - de facto - complete tabulation	Census - de jure - complete tabulation
 #age		6+	
 #acquisitionOrder			Any
 #responsesPerIndividual		1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org			
 Language Code	Language Name	tl2004	tl2015
 mul	Total	741,530	1,179,654
 tdt	Tetum Prasa	133,102	361,027
