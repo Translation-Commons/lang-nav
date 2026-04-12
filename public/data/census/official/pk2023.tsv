@@ -13,7 +13,7 @@
 #responsesPerIndividual		1
 #geographicScope		whole country
 #age		0+
-#residentLocation		de facto
+#residenceBasis		de facto
 #notes		Census-2023. Data covers all localities, all sexes, national total. Each person reports one mother tongue (responses per individual = 1).
 Language Code	Language Name	pk2023
 mul	Total	240458089

@@ -29,7 +29,7 @@ describe('CensusMetadataField', () => {
 #age	5+		eg. 0+, 4+
 #gender	Any		Any, Male, Female
 #nationality	Citizens		eg. Citizens, Residents, Visitors
-#residentLocation	de jure		eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
+#residenceBasis	de jure		eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
 #quantity	percent		Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
 #notes	Test object		Any additional notes about the census
 ### Creator ###			
@@ -79,7 +79,7 @@ describe('CensusMetadataField', () => {
     age: '5+', // eg. 0+, 4+,
     gender: 'Any', // Any, Male, Female
     nationality: 'Citizens', // eg. Citizens, Residents, Visitors
-    residentLocation: 'de jure', // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
+    residenceBasis: 'de jure', // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
     quantity: 'percent', // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
     notes: 'Test object', // Any additional notes about the census
 

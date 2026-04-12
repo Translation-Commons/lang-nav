@@ -67,9 +67,9 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Population Characteristics">
-      <DetailsField title="Overall population in scope">{population.toLocaleString()}</DetailsField>
+      <DetailsField title="Overall population">{population.toLocaleString()}</DetailsField>
       {populationSource && (
-        <DetailsField title="Source for overall population in scope">
+        <DetailsField title="Source for overall population">
           <ExternalLink href={populationSource} />
         </DetailsField>
       )}
@@ -108,6 +108,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
 function CensusSourceSection({ census }: { census: CensusData }) {
   const {
+    author,
     citation,
     collectorName,
     collectorNameShort,
@@ -116,25 +117,30 @@ function CensusSourceSection({ census }: { census: CensusData }) {
     dateAccessed,
     datePublished,
     documentName,
+    presentedBy,
     tableName,
     url,
   } = census;
 
   return (
     <DetailsSection title="Source">
-      <DetailsField title="Collected by">
-        {collectorName == null ? collectorType : `${collectorName} (${collectorType})`}
-        {collectorNameShort && ` aka ${collectorNameShort}`}
-      </DetailsField>
-      {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
-      {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
-      {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
-      {citation && <DetailsField title="Citation">{citation}</DetailsField>}
+      {(collectorName || collectorNameShort) && (
+        <DetailsField title="Collected by">
+          {collectorName == null ? collectorNameShort : `${collectorName} (${collectorType})`}
+          {collectorNameShort && ` aka ${collectorNameShort}`}
+        </DetailsField>
+      )}
+      {author && <DetailsField title="Author">{author}</DetailsField>}
+      {presentedBy && <DetailsField title="Presented by">{presentedBy}</DetailsField>}
       {url && (
         <DetailsField title="URL">
           <ExternalLink href={url} />
         </DetailsField>
       )}
+      {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
+      {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
+      {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
+      {citation && <DetailsField title="Citation">{citation}</DetailsField>}
       {datePublished && (
         <DetailsField title="Date Published">
           {new Date(datePublished).toLocaleDateString()}

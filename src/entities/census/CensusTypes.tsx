@@ -59,7 +59,7 @@ export interface CensusData extends ObjectBase {
   age?: string; // eg. 0+, 4+,
   gender?: string; // Any, Male, Female
   nationality?: string; // eg. Citizens, Residents, Visitors
-  residentLocation?: string; // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
+  residenceBasis?: string; // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
   quantity?: 'count' | 'percent'; // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
   notes?: string; // Any additional notes about the census
 

@@ -24,7 +24,7 @@ export enum CensusMetadataField {
   age = 'age',
   gender = 'gender',
   nationality = 'nationality',
-  residentLocation = 'residentLocation',
+  residenceBasis = 'residenceBasis',
   quantity = 'quantity',
   notes = 'notes',
 

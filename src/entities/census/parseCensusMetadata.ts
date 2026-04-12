@@ -97,81 +97,12 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
       );
     }
     values.forEach((maybeValue, index) => {
-      const value = maybeValue != '' ? maybeValue : defaultValue; // Use the default value if the cell is empty
-      if (value == '') return; // Skip empty values
+      const value = maybeValue != '' ? maybeValue : defaultValue;
       if (value == null) {
-        addWarning(`Row ended early at column ${index + 1}`, lineNumber);
+        addWarning(`Row ended early at column ${tsvColumnsWithData[index] + 1}`, lineNumber);
         return;
       }
-
-      switch (key) {
-        // Dates
-        case CensusMetadataField.datePublished:
-        case CensusMetadataField.dateAccessed:
-          censuses[index][key] = new Date(value);
-          break;
-
-        // Numbers
-        case CensusMetadataField.population:
-        case CensusMetadataField.populationWithPositiveResponses:
-        case CensusMetadataField.populationSurveyed:
-        case CensusMetadataField.yearCollected:
-          censuses[index][key] = Number.parseInt(value.replace(/,/g, ''));
-          break;
-        case CensusMetadataField.sampleRate:
-          censuses[index][key] = Number.parseFloat(value) || value;
-          break;
-
-        // Enums
-        case CensusMetadataField.collectorType:
-          // If its not a valid collector type, add a warning
-          if (!Object.values(CensusCollectorType).some((v) => v === value))
-            addWarning(`Invalid collectorType: ${value}`, lineNumber);
-          censuses[index][key] = value as CensusCollectorType;
-          break;
-        case CensusMetadataField.languageUse:
-          // If its not a valid language use, add a warning
-          if (!Object.values(CensusLanguageUse).some((v) => v === value))
-            addWarning(`Invalid language use: ${value}`, lineNumber);
-          censuses[index][key] = value as CensusLanguageUse;
-          break;
-        case CensusMetadataField.quantity:
-          if (!Object.values(CensusQuantity).some((v) => v === value.toLowerCase()))
-            addWarning(`Invalid quantity: ${value}`, lineNumber);
-          censuses[index][key] = value.toLowerCase() as CensusQuantity;
-          break;
-
-        // These are string fields that don't require special parsing
-        case CensusMetadataField.codeDisplay:
-        case CensusMetadataField.nameDisplay:
-        case CensusMetadataField.isoRegionCode:
-        case CensusMetadataField.proficiency:
-        case CensusMetadataField.age:
-        case CensusMetadataField.gender:
-        case CensusMetadataField.domain:
-        case CensusMetadataField.acquisitionOrder:
-        case CensusMetadataField.populationSource:
-        case CensusMetadataField.responsesPerIndividual:
-        case CensusMetadataField.languagesIncluded:
-        case CensusMetadataField.geographicScope:
-        case CensusMetadataField.nationality:
-        case CensusMetadataField.residentLocation:
-        case CensusMetadataField.notes:
-        case CensusMetadataField.collectorName:
-        case CensusMetadataField.collectorNameShort:
-        case CensusMetadataField.author:
-        case CensusMetadataField.presentedBy:
-        case CensusMetadataField.url:
-        case CensusMetadataField.documentName:
-        case CensusMetadataField.tableName:
-        case CensusMetadataField.columnName:
-        case CensusMetadataField.citation:
-          // Strings without structured format or validation
-          censuses[index][key] = value.trim();
-          break;
-        default:
-          enforceExhaustiveSwitch(key);
-      }
+      parseValueByKey(censuses[index], key, value, (message) => addWarning(message, lineNumber));
     });
   }
 
@@ -207,4 +138,82 @@ function getColumnIndicesWithData(lines: string[]): number[] {
       return tsvColumnNumber + 2; // +2 to account for the skipped columns
     })
     .filter((col) => col !== null);
+}
+
+function parseValueByKey(
+  census: CensusData,
+  key: CensusMetadataField,
+  value: string,
+  addWarning: (message: string) => void,
+): void {
+  if (value == '') return; // Skip empty values it may be okay since some of the fields are optional
+
+  switch (key) {
+    // Dates
+    case CensusMetadataField.datePublished:
+    case CensusMetadataField.dateAccessed:
+      census[key] = new Date(value);
+      break;
+
+    // Numbers
+    case CensusMetadataField.population:
+    case CensusMetadataField.populationWithPositiveResponses:
+    case CensusMetadataField.populationSurveyed:
+    case CensusMetadataField.yearCollected:
+      census[key] = Number.parseInt(value.replace(/,/g, ''));
+      break;
+    case CensusMetadataField.sampleRate:
+      census[key] = Number.parseFloat(value) || value;
+      break;
+
+    // Enums
+    case CensusMetadataField.collectorType:
+      // If its not a valid collector type, add a warning
+      if (!Object.values(CensusCollectorType).some((v) => v === value))
+        addWarning(`Invalid collectorType: ${value}`);
+      census[key] = value as CensusCollectorType;
+      break;
+    case CensusMetadataField.languageUse:
+      // If its not a valid language use, add a warning
+      if (!Object.values(CensusLanguageUse).some((v) => v === value))
+        addWarning(`Invalid language use: ${value}`);
+      census[key] = value as CensusLanguageUse;
+      break;
+    case CensusMetadataField.quantity:
+      if (!Object.values(CensusQuantity).some((v) => v === value.toLowerCase()))
+        addWarning(`Invalid quantity: ${value}`);
+      census[key] = value.toLowerCase() as CensusQuantity;
+      break;
+
+    // These are string fields that don't require special parsing
+    case CensusMetadataField.codeDisplay:
+    case CensusMetadataField.nameDisplay:
+    case CensusMetadataField.isoRegionCode:
+    case CensusMetadataField.proficiency:
+    case CensusMetadataField.age:
+    case CensusMetadataField.gender:
+    case CensusMetadataField.domain:
+    case CensusMetadataField.acquisitionOrder:
+    case CensusMetadataField.populationSource:
+    case CensusMetadataField.responsesPerIndividual:
+    case CensusMetadataField.languagesIncluded:
+    case CensusMetadataField.geographicScope:
+    case CensusMetadataField.nationality:
+    case CensusMetadataField.residenceBasis:
+    case CensusMetadataField.notes:
+    case CensusMetadataField.collectorName:
+    case CensusMetadataField.collectorNameShort:
+    case CensusMetadataField.author:
+    case CensusMetadataField.presentedBy:
+    case CensusMetadataField.url:
+    case CensusMetadataField.documentName:
+    case CensusMetadataField.tableName:
+    case CensusMetadataField.columnName:
+    case CensusMetadataField.citation:
+      // Strings without structured format or validation
+      census[key] = value.trim();
+      break;
+    default:
+      enforceExhaustiveSwitch(key);
+  }
 }

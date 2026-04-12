@@ -11,7 +11,7 @@
 #responsesPerIndividual		1	1	1	1	1	1+
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27						
 #collectorType	Government						
-#presentedBy	data.un.org					
+#presentedBy	data.un.org						
 Language Code	Language Name						
 mul	Total	16,624,517	18,769,256	19,855,287	21,507,719	23,401,892	
 eng	English	13,498,094	15,013,965	15,581,334	16,509,289	17,020,417	18,303,662

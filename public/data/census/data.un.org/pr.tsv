@@ -10,7 +10,7 @@
 #responsesPerIndividual		1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org	
+#presentedBy	data.un.org		
 mul	Total	3,515,228	3,498,886
 spa	Spanish	3,001,286	3,363,190
 eng	English	506,661	158,887

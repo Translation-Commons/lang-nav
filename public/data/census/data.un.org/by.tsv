@@ -9,8 +9,8 @@
 #domain			Home	Home
 #acquisitionOrder			L1	L1
 #responsesPerIndividual		1		1
-#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
-#presentedBy	data.un.org				
+#url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
+#presentedBy	data.un.org			
 Language Code	Language Name	by1999	by2009	by2019
 mul	Total	10,045,237	9,503,807	9,413,446
 rus	Russian	6,308,031	6,672,964	6,718,557
