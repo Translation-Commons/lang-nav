@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
 import { CensusData } from '@entities/census/CensusTypes';
 
@@ -22,7 +23,9 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       <CensusPopulationCharacteristics census={census} />
       <CensusSourceSection census={census} />
       <DetailsSection title="Languages">
-        <TableOfLanguagesInCensus census={census} />
+        <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
+          <TableOfLanguagesInCensus census={census} />
+        </LocalParamsProvider>
       </DetailsSection>
     </div>
   );
