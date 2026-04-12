@@ -127,7 +127,7 @@ More is better, but also if you don't have a value, leave it empty. For instance
 - **Source Document**
   - `url`: The URL of the census table (e.g., "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810000201")
   - `tableName`: The name of the original data table (e.g., "Knowledge of languages by age and gender"
-  - `columnName`: The name of the column in the table the data is from (e.g., "Total - Single and multiple responses of knowledge of languages")    
+  - `columnName`: The name of the column in the table the data is from (e.g., "Total - Single and multiple responses of knowledge of languages")
   - `datePublished`: The date the data was published (e.g., "2022-02-09")
   - `dateAccessed`: The date the data was accessed (e.g., "2024-10-31")
   - `citation`: The citation for the census data (e.g., "Statistics Canada. Table 98-10-0294-01 Knowledge of Indigenous languages by single and multiple knowledge of languages responses and Indigenous language acquisition: Canada, provinces and territories")
