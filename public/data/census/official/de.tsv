@@ -8,7 +8,7 @@
 #geographicScope		whole country
 #age		0+
 #nationality		residents
-#residentLocation		de jure
+#residenceBasis		de jure
 #quantity		count
 #responsesPerIndividual		1
 #collectorType		Government

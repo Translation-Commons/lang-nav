@@ -107,16 +107,28 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
   }
 
   // Set other fields required for objects and report an error if an important one is missing
-  censuses.forEach((census) => {
+  censuses.forEach((census, index) => {
     // Collect names for the census
     census.names = [census.nameDisplay, census.documentName, census.tableName].filter(
       (n) => n != null,
     );
-    if (census.isoRegionCode === '') addWarning('isoRegionCode is not specified');
-    if (census.yearCollected === 0) addWarning('yearCollected is not specified');
-    if (census.population === 0) addWarning('population is not specified');
-    if (census.nameDisplay === '') addWarning('nameDisplay is not specified');
-    if (census.url === '') addWarning('url is not specified');
+    if (
+      !census.isoRegionCode &&
+      !census.nameDisplay &&
+      !census.url &&
+      !census.population &&
+      !census.yearCollected
+    ) {
+      addWarning(
+        `Column ${index + 3} is missing a lot of data, is it intended to be a census table or just notes? If its just a notes column add a "#" to the header row`,
+      );
+      return;
+    }
+    if (!census.isoRegionCode) addWarning('isoRegionCode is not specified');
+    if (!census.yearCollected) addWarning('yearCollected is not specified');
+    if (!census.population) addWarning('population is not specified');
+    if (!census.nameDisplay) addWarning('nameDisplay is not specified');
+    if (!census.url) addWarning('url is not specified');
   });
 
   return {
@@ -137,7 +149,7 @@ function getColumnIndicesWithData(lines: string[]): number[] {
       if (col[0] === '#') return null;
       return tsvColumnNumber + 2; // +2 to account for the skipped columns
     })
-    .filter((col) => col !== null);
+    .filter((col) => col != null);
 }
 
 function parseValueByKey(

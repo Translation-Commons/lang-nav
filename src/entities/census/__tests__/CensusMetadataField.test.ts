@@ -48,7 +48,7 @@ describe('CensusMetadataField', () => {
 #citation	Example Citation		The full citation, may be redundant if other fields are filled in`;
   const fullMockedCensus: CensusData = {
     type: ObjectType.Census,
-    ID: 'ca1999',
+    ID: 'test.1',
     codeDisplay: 'ca1999',
     nameDisplay: 'Canada 1999',
     names: [

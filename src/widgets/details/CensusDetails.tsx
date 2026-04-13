@@ -64,6 +64,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
     populationSurveyed,
     populationWithPositiveResponses,
     quantity,
+    residenceBasis,
     responsesPerIndividual,
     sampleRate,
   } = census;
@@ -99,6 +100,7 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
         <DetailsField title="Languages Included">{languagesIncluded}</DetailsField>
       )}
       {geographicScope && <DetailsField title="Geographic Scope">{geographicScope}</DetailsField>}
+      {residenceBasis && <DetailsField title="Residence Basis">{residenceBasis}</DetailsField>}
       {age && <DetailsField title="Age">{age}</DetailsField>}
       {responsesPerIndividual && (
         <DetailsField title="Responses per Individual">{responsesPerIndividual}</DetailsField>
@@ -113,10 +115,8 @@ function CensusSourceSection({ census }: { census: CensusData }) {
   const {
     author,
     citation,
-    collectorName,
-    collectorNameShort,
-    collectorType,
     columnName,
+    collectorType,
     dateAccessed,
     datePublished,
     documentName,
@@ -127,12 +127,8 @@ function CensusSourceSection({ census }: { census: CensusData }) {
 
   return (
     <DetailsSection title="Source">
-      {(collectorName || collectorNameShort) && (
-        <DetailsField title="Collected by">
-          {collectorName == null ? collectorNameShort : `${collectorName} (${collectorType})`}
-          {collectorNameShort && ` aka ${collectorNameShort}`}
-        </DetailsField>
-      )}
+      <DetailsField title="Source type">{collectorType}</DetailsField>
+      <CensusCollectorNameDisplay census={census} />
       {author && <DetailsField title="Author">{author}</DetailsField>}
       {presentedBy && <DetailsField title="Presented by">{presentedBy}</DetailsField>}
       {url && (
@@ -157,5 +153,17 @@ function CensusSourceSection({ census }: { census: CensusData }) {
     </DetailsSection>
   );
 }
+
+const CensusCollectorNameDisplay: React.FC<{ census: CensusData }> = ({ census }) => {
+  const { collectorName, collectorNameShort } = census;
+  if (!collectorName && !collectorNameShort) return null;
+
+  return (
+    <DetailsField title="Collected by">
+      {collectorName ? collectorName : collectorNameShort}
+      {collectorName && collectorNameShort && ` aka ${collectorNameShort}`}
+    </DetailsField>
+  );
+};
 
 export default CensusDetails;
