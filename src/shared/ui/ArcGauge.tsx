@@ -49,10 +49,10 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
     ratio == null
       ? 'var(--color-text-secondary)'
       : ratio >= 7 / 9
-      ? 'var(--color-text-green)'
+      ? 'var(--color-green)'
       : ratio >= 3 / 9
-      ? 'var(--color-text-yellow)'
-      : 'var(--color-text-red)';
+      ? 'var(--color-yellow)'
+      : 'var(--color-red)';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: size }}>
