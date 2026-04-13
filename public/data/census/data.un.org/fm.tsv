@@ -3,12 +3,13 @@
 #isoRegionCode		FM
 #yearCollected		2000
 #datePublished		2005
-#populationEligible		92,225
+#population		92,225
 #notes		Census - de jure - complete tabulation
 #age		5+
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	fm2000
 mul	Total	92,225
 chk	Chuukese	48,174

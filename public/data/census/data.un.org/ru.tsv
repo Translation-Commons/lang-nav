@@ -2,16 +2,17 @@
 #nameDisplay		Russia 2010
 #isoRegionCode	RU	
 #yearCollected		2010
-#populationEligible		142,856,536
+#population		142,856,536
 #url		https://data.un.org/Data.aspx?d=POP&f=tableCode:27
 #datePublished		2012
 #collectorType		Government
 #dateAccessed		2025-06-13
-#mode		Speaks
+#languageUse		Speaks
 #acquisitionOrder		Any
 #sampleRate		1
 #responsesPerIndividual		1+
 #notes		Census - de jure - complete tabulation
+#presentedBy	data.un.org	
 Language Code	Language Name	Russia 2010
 mul	Total	142,856,536
 rus	Russian	137,494,893

@@ -3,12 +3,13 @@
 #isoRegionCode	PW			
 #yearCollected		1995	2000	2005
 #datePublished		2005	2005	2008
-#populationEligible		15,463	17,821	18,544
+#population		15,463	17,821	18,544
 #notes	Census - de jure - complete tabulation			
 #age			5+	5+
 #responsesPerIndividual		1	1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	pw1995	pw2000	pw2005
 mul	Total	15,463	17,821	18,544
 pau	Palauan	10,154	11,525	12,354

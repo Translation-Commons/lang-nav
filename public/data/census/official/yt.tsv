@@ -3,9 +3,9 @@
 #isoRegionCode	YT							
 #yearCollected		2007	2002	2002	2006	2006	2006	2006
 #datePublished		2009						
-#populationEligible		108,187	92738	92738	133053	133053	2743	2743
+#population		108,187	92738	92738	133053	133053	2743	2743
 #sampleRate					0.02061584481	0.02061584481		
-#mode		Speaks	Writes	Speaks	Speaks	Speaks	Speaks	Speaks
+#languageUse		Speaks	Writes	Speaks	Speaks	Speaks	Speaks	Speaks
 #acquisitionOrder			Any	Any	L1	Any	L1	Any
 #age		14+	15+	15+	9+	9+	9+	9+
 #responsesPerIndividual		1	1+	1+	1+	1+	1+	1+

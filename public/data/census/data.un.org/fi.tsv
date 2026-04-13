@@ -3,15 +3,16 @@
 #isoRegionCode	FI			
 #yearCollected		2000	2010	2021
 #datePublished		2001	2011	2022
-#populationEligible		5,181,115	5,375,276	5,533,793
+#population		5,181,115	5,375,276	5,533,793
 #notes	Census - de jure - complete tabulation			
-#mode		Speaks		
+#languageUse		Speaks		
 #age				
 #domain		Home		
 #acquisitionOrder		L1		
 #responsesPerIndividual		1	1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	fi2000	fi2010	fi2021
 mul	Total	5,181,115	5,375,276	5,533,793
 fin	Finnish	4,788,497	4,857,903	4,811,067

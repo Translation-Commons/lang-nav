@@ -3,11 +3,12 @@
 #isoRegionCode		SC
 #yearCollected		2002
 #datePublished		2005
-#populationEligible		81,755
+#population		81,755
 #notes		Census - de jure - complete tabulation
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	sc2002
 mul	Total	81,755
 crs	Creole	74,593

@@ -63,6 +63,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     {
       censuses: cldrCensuses,
       languageNames: {},
+      warnings: [],
     },
   );
 

@@ -3,14 +3,15 @@
 #isoRegionCode	PL			
 #yearCollected		2002	2011	2021
 #datePublished		2003	2013	2023
-#populationEligible		38,230,080	38,044,565	37,019,327
+#population		38,230,080	38,044,565	37,019,327
 #notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation
-#mode		Speaks		
+#languageUse		Speaks		
 #domain		Home		Home
 #acquisitionOrder	Any			
 #responsesPerIndividual		1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	pl2002	pl2011	pl2021
 mul	Total	38,230,080	38,044,565	37,019,327
 pol	Polish	37,405,335	37,374,595	36,799,278

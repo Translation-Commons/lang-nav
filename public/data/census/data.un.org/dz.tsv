@@ -3,13 +3,14 @@
 #isoRegionCode		DZ
 #yearCollected		2008
 #datePublished		2015
-#populationEligible		30,650,175
+#population		30,650,175
 #notes		Data refer to population in housing units and collective living quarters only. Census - de jure - complete tabulation
 #age		5+
 #responsesPerIndividual		1
 #acquisitionOrder		Any
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	dz2008
 mul	Total	30,650,175
 ara	Arabic	12,330,798

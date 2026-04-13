@@ -11,13 +11,13 @@
 #dateAccessed	2025-11-29														
 #age	6+														
 #gender	Any														
-#mode			Understands	Understands	Understands	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses
+#languageUse			Understands	Understands	Understands	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses	Uses
 #acquisitionOrder			Any	Any	L1	Any	Any	Any	Any	Any	Any	Any	Any	Any	Any
 #domain						Family	Family	Family	Family	Family	Strangers	Strangers	Strangers	Strangers	Strangers
 #sampleRate	Sampled														
 #quantity	Percent														
 #responsesPerIndividual															
-#populationEligible			60795612	58064000	60795612	60795612	58064000	56924000	56844000	56609000	60795612	58064000	56924000	56844000	56609000											
+#population			60795612	58064000	60795612	60795612	58064000	56924000	56844000	56609000	60795612	58064000	56924000	56844000	56609000											
 #populationSource	https://seriestoriche.istat.it/fileadmin/documenti/Tavola_2.1.xls																									
 #languagesIncluded			Foreign Languages	Foreign Languages	Italian or Other	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects	Italian or Dialects
 Language Code		Language Name													

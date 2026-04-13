@@ -3,13 +3,14 @@
 #isoRegionCode	TH		
 #yearCollected		2000	2010
 #datePublished		2009	2013
-#populationEligible		56,281,538	65,981,659
+#population		56,281,538	65,981,659
 #notes	Census - de jure - complete tabulation		
 #age		5+	
 #responsesPerIndividual	1		
 #sampleRate			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	th2000	th2010
 mul	Total	56,281,538	65,981,659
 tha	Thai	52,325,037	59,866,190

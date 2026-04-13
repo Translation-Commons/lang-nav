@@ -6,7 +6,7 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
   switch (object.type) {
     case ObjectType.Census:
       return [
-        object.mode,
+        object.languageUse,
         object.proficiency,
         object.acquisitionOrder,
         object.domain && object.domain != 'Any' ? '@' + object.domain : null,

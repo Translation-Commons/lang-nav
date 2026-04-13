@@ -3,12 +3,13 @@
 #isoRegionCode		GW
 #yearCollected		2009
 #datePublished		2015
-#populationEligible		1,435,032
+#population		1,435,032
 #notes		Census - de jure - complete tabulation
-#mode		Speaks
+#languageUse		Speaks
 #acquisitionOrder		Any
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	gw2009
 mul	Total	1,435,032
 pov	Creole	1,303,743

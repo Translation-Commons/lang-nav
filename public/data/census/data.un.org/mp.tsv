@@ -3,13 +3,14 @@
 #isoRegionCode		MP
 #yearCollected		2000
 #datePublished		2005
-#populationEligible		63,429
+#population		63,429
 #populationWithPositiveResponses		63,429
 #notes		Census - de facto - complete tabulation
 #age		5+
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	mp2000
 mul	Total	63,429
 fil	Pilipino	15,487

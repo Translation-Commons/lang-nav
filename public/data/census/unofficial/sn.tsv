@@ -2,12 +2,12 @@
 #isoRegionCode		SN
 #yearCollected		2013
 #datePublished		2015
-#populationEligible		13,023,489
-#mode		Speaks
+#population		13,023,489
+#languageUse		Speaks
 #acquisitionOrder		L1
 #url		https://translatorswithoutborders.org/languages-of-senegal-interactive-en/
-#collectorType		NGO
-#collectorName		Translators Without Borders 
+#collectorType		Government
+#presentedBy		Translators Without Borders 
 #notes		Senegal Population & Housing Census 2013 (RGPHAE 2013) by ANSD
 iso code	Language	Speakers
 wol	Wolof	6,550,815

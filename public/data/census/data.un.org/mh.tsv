@@ -3,13 +3,14 @@
 #isoRegionCode		MH
 #yearCollected		1999
 #datePublished		2001
-#populationEligible		43,188
+#population		43,188
 #notes		Census - de facto - complete tabulation
-#mode		Speaks
+#languageUse		Speaks
 #age		5+
 #acquisitionOrder		Any
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	mh1999
 mul	Total	43,188
 mah	Marshallese	42,495

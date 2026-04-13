@@ -2,9 +2,9 @@
 #nameDisplay			China Mandarin Survey 2020
 #isoRegionCode	CN		
 #yearCollected			2020
-#modality			Spoken
+#languageUse			Speaks
 #acquisitionOrder			Any
-#populationEligible			1,443,497,378
+#population			1,443,497,378
 #populationSource			https://data.stats.gov.cn/english/easyquery.htm?cn=C01
 #populationSurveyed			5,278,900
 #geographicScope			whole country

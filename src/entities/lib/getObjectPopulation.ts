@@ -15,7 +15,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
     case ObjectType.Locale:
       return object.populationAdjusted;
     case ObjectType.Census:
-      return object.populationEligible;
+      return object.population;
     case ObjectType.WritingSystem:
       return object.populationUpperBound;
     case ObjectType.Territory:
@@ -37,7 +37,7 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
     case ObjectType.Territory:
       return object.populationFromUN;
     case ObjectType.Census:
-      return object.populationEligible;
+      return object.population;
     case ObjectType.WritingSystem:
     case ObjectType.Variant:
       // There are no sources for population numbers for these, the population
@@ -108,8 +108,8 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
 export function getObjectPercentOfTerritoryPopulation(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Census:
-      return object.territory && object.populationEligible
-        ? (object.populationEligible * 100) / (object.territory.population ?? 1)
+      return object.territory && object.population
+        ? (object.population * 100) / (object.territory.population ?? 1)
         : undefined;
     case ObjectType.Locale:
       return object.populationSpeakingPercent;

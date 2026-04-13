@@ -3,11 +3,12 @@
 #isoRegionCode	MW			
 #yearCollected		1998	2008	
 #datePublished		2000	2009	
-#populationEligible		9,933,868	13,029,498	
+#population		9,933,868	13,029,498	
 #notes	Census - de facto - complete tabulation			
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org		
 Language Code	Language Name	mw1998	mw2008	
 mul	Total	9,933,868	13,029,498	
 nya/chew1246	Chichewa	5,679,482	4,252,204	

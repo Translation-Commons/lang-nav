@@ -17,6 +17,12 @@ export function addCensusData(
   censuses: Record<string, CensusData>,
   censusImport: CensusImport,
 ): void {
+  // Report warnings to the console
+  censusImport.warnings.forEach((warning) => {
+    console.error(warning);
+  });
+
+  // Add new languages names to improve search results
   addNewLanguageNames(getLanguage, censusImport);
 
   // Add the census records to the core data
@@ -82,7 +88,7 @@ function addCensusRecordsToLocales(
         populationEstimate,
         populationPercent:
           (populationEstimate * 100.0) /
-          (census.populationWithPositiveResponses || census.populationEligible),
+          (census.populationWithPositiveResponses || census.population),
       });
     } else {
       // TODO: show warning in the "Reports" tool

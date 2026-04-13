@@ -3,11 +3,12 @@
 #isoRegionCode		AL	AL
 #yearCollected		2011	2023
 #datePublished		2013	2024
-#populationEligible		2,800,138	2,402,113
+#population		2,800,138	2,402,113
 #notes		Census - de jure - complete tabulation	Census - de jure - complete tabulation
 #responsesPerIndividual		1	1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	al2011	al2023
 mul	Total	2,800,138	2,402,113
 sqi	Albanian	2,765,610	2,187,788

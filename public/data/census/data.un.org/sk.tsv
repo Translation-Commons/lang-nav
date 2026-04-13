@@ -3,12 +3,13 @@
 #isoRegionCode	SK			
 #yearCollected		2001	2011	2021
 #datePublished		2009	2013	2023
-#populationEligible		5,379,455	5,397,036	5,449,270
+#population		5,379,455	5,397,036	5,449,270
 #populationWithPositiveResponses		5,313,399	4,991,775	5,136,906
 #notes	Census - de jure - complete tabulation			
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	sk2001	sk2011	sk2021
 mul	Total	5,379,455	5,397,036	5,449,270
 slk	Slovak	4,512,217	4,240,453	4,456,102

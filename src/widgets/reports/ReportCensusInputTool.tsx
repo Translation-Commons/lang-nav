@@ -12,20 +12,28 @@ import { CensusData } from '@entities/census/CensusTypes';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+import { countOccurrences } from '@shared/lib/setUtils';
 
 const ReportCensusInputTool: React.FC = () => {
   const { getTerritory } = useDataContext();
   const [tsv, setTSV] = useState('');
   const [censuses, setCensuses] = useState<CensusData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [warnings, setWarnings] = useState<string[]>([]);
   useEffect(() => {
     try {
-      const { censuses } = parseCensusImport(tsv, '');
+      const { censuses, warnings } = parseCensusImport(tsv, '');
       censuses.forEach((census) => {
         if (!census.nameDisplay) census.nameDisplay = 'MISSING NAME';
         census.territory = getTerritory(census.isoRegionCode) || undefined;
       });
       setCensuses(censuses);
+
+      // Format warnings
+      const warningsCounted = Object.entries(countOccurrences(warnings)).map(([warning, count]) =>
+        count == 1 ? warning : `${warning} (${count})`,
+      );
+      setWarnings(warningsCounted);
       setErrorMessage(null);
     } catch (e) {
       setErrorMessage((e as Error).message);
@@ -45,6 +53,11 @@ const ReportCensusInputTool: React.FC = () => {
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
       {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
+      {warnings.map((warning, index) => (
+        <div key={index} style={{ color: 'var(--color-red)' }}>
+          {warning}
+        </div>
+      ))}
       <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>
         <ContainErrorsAndSuspense>
           <CensusPreview censuses={censuses} />
@@ -75,7 +88,7 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
         }}
       >
         {censuses.length > 0 && page <= censuses.length && censuses[page - 1] && (
-          <LocalParamsProvider overrides={{ page: 1, limit: 5 }}>
+          <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
             <ContainErrorsAndSuspense>
               <h2>
                 <ObjectTitle object={censuses[page - 1]} highlightSearchMatches={false} />

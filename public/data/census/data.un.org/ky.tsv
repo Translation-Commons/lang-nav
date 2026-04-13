@@ -3,11 +3,12 @@
 #isoRegionCode	KY			
 #yearCollected		1999	2010	2021
 #datePublished		2007	2012	2024
-#populationEligible		39,020	55,036	68,811
+#population		39,020	55,036	68,811
 #notes		Census - de jure - complete tabulation	Excluding the institutional population. Census - de jure - complete tabulation	Census - de jure - complete tabulation
 #responsesPerIndividual			1	1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	ky1999	ky2010	ky2021
 mul	Total	39,020	55,036	68,811
 eng	English	37,078	50,019	61,070

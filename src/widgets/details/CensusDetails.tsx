@@ -1,6 +1,7 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
 import { CensusData } from '@entities/census/CensusTypes';
 
@@ -22,14 +23,16 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       <CensusPopulationCharacteristics census={census} />
       <CensusSourceSection census={census} />
       <DetailsSection title="Languages">
-        <TableOfLanguagesInCensus census={census} />
+        <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
+          <TableOfLanguagesInCensus census={census} />
+        </LocalParamsProvider>
       </DetailsSection>
     </div>
   );
 };
 
 function CensusPrimarySection({ census }: { census: CensusData }) {
-  const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, mode } = census;
+  const { territory, isoRegionCode, domain, proficiency, acquisitionOrder, languageUse } = census;
   return (
     <DetailsSection title="Primary Information">
       <DetailsField title="Territory">
@@ -40,7 +43,7 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
         )}
       </DetailsField>
       <DetailsField title="Year">{census.yearCollected}</DetailsField>
-      {mode != null && <DetailsField title="Mode">{mode}</DetailsField>}
+      {languageUse != null && <DetailsField title="Language Use">{languageUse}</DetailsField>}
       {proficiency != null && <DetailsField title="Proficiency">{proficiency}</DetailsField>}
       {acquisitionOrder != null && (
         <DetailsField title="Acquisition Order">{acquisitionOrder}</DetailsField>
@@ -56,20 +59,19 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
     geographicScope,
     languagesIncluded,
     notes,
-    populationEligible,
+    population,
     populationSource,
     populationSurveyed,
     populationWithPositiveResponses,
     quantity,
+    residenceBasis,
     responsesPerIndividual,
     sampleRate,
   } = census;
 
   return (
     <DetailsSection title="Population Characteristics">
-      <DetailsField title="Overall eligible population">
-        {populationEligible.toLocaleString()}
-      </DetailsField>
+      <DetailsField title="Overall population">{population.toLocaleString()}</DetailsField>
       {populationSource && (
         <DetailsField title="Source for overall population">
           <ExternalLink href={populationSource} />
@@ -91,13 +93,14 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
         </DetailsField>
       ) : populationSurveyed ? (
         <DetailsField title="Sample rate">
-          {((populationSurveyed / populationEligible) * 100).toLocaleString()}%
+          {((populationSurveyed / population) * 100).toLocaleString()}%
         </DetailsField>
       ) : null}
       {languagesIncluded && (
         <DetailsField title="Languages Included">{languagesIncluded}</DetailsField>
       )}
       {geographicScope && <DetailsField title="Geographic Scope">{geographicScope}</DetailsField>}
+      {residenceBasis && <DetailsField title="Residence Basis">{residenceBasis}</DetailsField>}
       {age && <DetailsField title="Age">{age}</DetailsField>}
       {responsesPerIndividual && (
         <DetailsField title="Responses per Individual">{responsesPerIndividual}</DetailsField>
@@ -110,33 +113,33 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
 
 function CensusSourceSection({ census }: { census: CensusData }) {
   const {
+    author,
     citation,
-    collectorName,
-    collectorNameShort,
-    collectorType,
     columnName,
+    collectorType,
     dateAccessed,
     datePublished,
     documentName,
+    presentedBy,
     tableName,
     url,
   } = census;
 
   return (
     <DetailsSection title="Source">
-      <DetailsField title="Collected by">
-        {collectorName == null ? collectorType : `${collectorName} (${collectorType})`}
-        {collectorNameShort && ` aka ${collectorNameShort}`}
-      </DetailsField>
-      {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
-      {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
-      {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
-      {citation && <DetailsField title="Citation">{citation}</DetailsField>}
+      <DetailsField title="Source type">{collectorType}</DetailsField>
+      <CensusCollectorNameDisplay census={census} />
+      {author && <DetailsField title="Author">{author}</DetailsField>}
+      {presentedBy && <DetailsField title="Presented by">{presentedBy}</DetailsField>}
       {url && (
         <DetailsField title="URL">
           <ExternalLink href={url} />
         </DetailsField>
       )}
+      {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
+      {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
+      {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
+      {citation && <DetailsField title="Citation">{citation}</DetailsField>}
       {datePublished && (
         <DetailsField title="Date Published">
           {new Date(datePublished).toLocaleDateString()}
@@ -150,5 +153,17 @@ function CensusSourceSection({ census }: { census: CensusData }) {
     </DetailsSection>
   );
 }
+
+const CensusCollectorNameDisplay: React.FC<{ census: CensusData }> = ({ census }) => {
+  const { collectorName, collectorNameShort } = census;
+  if (!collectorName && !collectorNameShort) return null;
+
+  return (
+    <DetailsField title="Collected by">
+      {collectorName ? collectorName : collectorNameShort}
+      {collectorName && collectorNameShort && ` aka ${collectorNameShort}`}
+    </DetailsField>
+  );
+};
 
 export default CensusDetails;
