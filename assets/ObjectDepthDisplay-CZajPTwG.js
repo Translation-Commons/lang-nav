@@ -1,1 +1,0 @@
-import{O as n,q as s,U as r,bC as a,ap as p,bD as h}from"./index-DEhreCV7.js";const o=({object:e})=>{if(e.type===n.Census||e.type===n.Variant)return s.jsx(r,{children:"n/a"});const t=a(e);return t==null?s.jsx(r,{children:"Unknown"}):s.jsx(p,{hoverContent:s.jsx(h,{object:e,showChildren:!1}),children:t||"Root"})};export{o as O};
