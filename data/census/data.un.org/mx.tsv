@@ -3,9 +3,9 @@
 #isoRegionCode	MX			
 #yearCollected		2005	2010	2020
 #datePublished		2008	2011	2021
-#populationEligible		93,077,145	106,178,671	119,976,584
+#population		93,077,145	106,178,671	119,976,584
 #notes		Census - de jure - complete tabulation	Census - de facto - complete tabulation	Census - de jure - complete tabulation
-#mode			Speaks	
+#languageUse			Speaks	
 #age		5+	3+	3+
 #domain				
 #acquisitionOrder	Any			
@@ -14,6 +14,7 @@
 #sampleRate				
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	mx2005	mx2010	mx2020
 mul	Total	93,077,145	106,178,671	119,976,584
 spa	Spanish	83,704,299		112,497,368

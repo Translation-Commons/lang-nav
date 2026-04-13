@@ -3,12 +3,13 @@
 #isoRegionCode	MZ			
 #yearCollected		1997	2007	2017
 #datePublished		2001	2009	2022
-#populationEligible		12,536,778	20,252,223	22,243,373
+#population		12,536,778	20,252,223	22,243,373
 #notes		Census - de jure - complete tabulation	Census - de facto - complete tabulation	Census - de jure - complete tabulation
 #age		5+		
 #responsesPerIndividual		1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	mz1997	mz2007	mz2017
 mul	Total	12,536,778	20,252,223	
 por	Portuguese	809,186	8,246,713	3,709,868

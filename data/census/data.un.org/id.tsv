@@ -3,13 +3,14 @@
 #isoRegionCode		ID
 #yearCollected		2010
 #datePublished		2015
-#populationEligible		214,063,055
+#population		214,063,055
 #notes		Census - de jure - complete tabulation
 #age		5+
 #acquisitionOrder		L1
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	id2010
 mul	Total	214,063,055
 jav	Javanese	68,221,557

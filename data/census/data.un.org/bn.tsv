@@ -3,12 +3,13 @@
 #isoRegionCode		BN
 #yearCollected		2021
 #datePublished		2023
-#populationEligible		400,362
+#population		400,362
 #notes		Census - de jure - complete tabulation
 #age		3+
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	bn2021
 mul	Total	400,362
 eng/msa/kxd	#English and Malay	227,663

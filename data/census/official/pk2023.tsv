@@ -2,18 +2,18 @@
 #nameDisplay		Pakistan 2023 Mother Tongue
 #isoRegionCode	PK	
 #yearCollected		2023
-#populationEligible		240458089
+#population		240458089
 #collectorType		Government
 #collectorName		Pakistan Bureau of Statistics
 #url		https://www.pbs.gov.pk/wp-content/uploads/census_tables/tables/table_11_national.pdf
 #tableName		Table 11: Population by Mother Tongue, Sex and Rural/Urban, Census-2023
 #columnName		All Localities - All Sexes (National Total)
 #acquisitionOrder		L1
-#modality		spoken
+#languageUse		Speaks
 #responsesPerIndividual		1
 #geographicScope		whole country
 #age		0+
-#residentLocation		de facto
+#residenceBasis		de facto
 #notes		Census-2023. Data covers all localities, all sexes, national total. Each person reports one mother tongue (responses per individual = 1).
 Language Code	Language Name	pk2023
 mul	Total	240458089

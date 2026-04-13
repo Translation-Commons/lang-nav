@@ -3,12 +3,13 @@
 #isoRegionCode	HU			
 #yearCollected		2001	2011	2022
 #datePublished		2009	2013	2024
-#populationEligible		10,198,315	9,937,628	9,603,634
+#population		10,198,315	9,937,628	9,603,634
 #notes		Census - de facto - complete tabulation	Census - de facto - complete tabulation	Census - de jure - complete tabulation
-#mode		Speaks		
+#languageUse		Speaks		
 #acquisitionOrder	Any			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	hu2001	hu2011	hu2022
 mul	Total		9,937,628	9,603,634
 hun	Hungarian	10,177,223	8,409,049	9,483,824

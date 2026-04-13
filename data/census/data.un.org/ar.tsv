@@ -3,14 +3,15 @@
 #isoRegionCode		AR
 #yearCollected		2022
 #datePublished		2024
-#populationEligible		46,044,703
+#population		46,044,703
 #notes		Census - de jure - complete tabulation
-#mode		Speaks
+#languageUse		Speaks
 #domain		Home
 #responsesPerIndividual		1
 #languagesIncluded		Indigenous
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	ar2022
 mul	Total	382,697
 mis	#Not stated	82,156

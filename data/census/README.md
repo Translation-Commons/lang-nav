@@ -93,7 +93,7 @@ The header should include the following rows:
 - `nameDisplay`: A short name describing the census / census table (e.g., "Canada 2021 L1")
 - `isoRegionCode`: The ISO 3166-1 alpha-2 code of the country (e.g., "CA" for Canada)
 - `yearCollected`: The year the data was collected (e.g., "2021")
-- `populationEligible`: The total population of the country or region the data is from (e.g., "36,328,480" for Canada in 2021)
+- `population`: The total population of the country or region the data is from (e.g., "36,328,480" for Canada in 2021)
   - If the data is from a subset of the population (eg. only people over 15 years old) then this number should be the total population of that subset, not the whole country.
 - `collectorType`: The type of individual or group that collected the data (e.g., "Government", "NGO", "Academic")
 
@@ -101,7 +101,7 @@ The header should include the following rows:
 More is better, but also if you don't have a value, leave it empty. For instance, if a census does not specifically indicate its about spoken language, don't set the mode. Nonetheless the more data you can provide the more the data can be trusted and used.
 
 - **Language criteria**, why would a person be counted for a language
-  - `mode`: The mode the language is used in (e.g., "speaks" (implicitly "speaks or signs"), "writes", "understands", "reads", "uses", "ethnicity")
+  - `languageUse`: The mode the language is used in (e.g., "speaks" (implicitly "speaks or signs"), "writes", "understands", "reads", "uses", "ethnicity")
   - `proficiency`: The level of proficiency in the language (e.g., "basic", "intermediate", "fluent")
   - `acquisitionOrder`: The order in which the language was acquired (e.g., "L1" for first language, "L2" for second language, "Any" for any order)
   - `domain`: The domain in which the language is used (e.g., "Home", "Work", "Education", "Any" for any domain)
@@ -109,23 +109,27 @@ More is better, but also if you don't have a value, leave it empty. For instance
   - `geographicScope`: The geographic scope of the data (e.g., "whole country", "mainland -- without dependencies")
   - `age`: The age of the people surveyed (e.g., "0+" for "all ages", "15+" for 15 years and older)
   - `nationality`: The nationality of the people surveyed (e.g., "citizens", "residents", "visitors")
-  - `residentLocation`: How people are associated with geographic areas "de jure" (where people are registered) or "de facto" (where people are currently living or visiting at the time of census)
+  - `residenceBasis`: How people are associated with geographic areas "de jure" (where people are registered) or "de facto" (where people are currently living or visiting at the time of census)
   - `notes`: Any additional notes about the data
   - `responsesPerIndividual`: The number of responses per individual (e.g., "1+" for one or more responses, "1" if every individual has exactly one response)
     - If the number of responses is 1 then we can add up the data without worrying about double counting.
   - `sampleRate`: The sample rate of the data (e.g., "0.25" the data is interpolated from 25% of the population, "1" for the the data is not interpolated)
-  - `populationSurveyed`: The total number of people surveyed for the census, it may be much lower than the populationEligible if the data is sampled.
-    - It should be equivalent to populationEligible \* sampleRate
+  - `populationSurveyed`: The total number of people surveyed for the census, it may be much lower than the population if the data is sampled.
+    - It should be equivalent to population \* sampleRate
   - `populationWithPositiveResponses`: The total number of people who responded to the question about language (population - the number of people who did not respond to the question)
     - This is useful to compute the expected percentage of how many people speak the language in the country.
-  - `populationSource`: An explanation for where the populationEligible estimate comes from if its not from the census itself (e.g., "United Nations World Population Prospects 2022")
-- **Source / Citation**
+  - `populationSource`: An explanation for where the population estimate comes from if its not from the census itself (e.g., "United Nations World Population Prospects 2022") -- often just a URL works great here.
+- **Author**
   - `collectorName`: The name of the individual or group that collected the data (e.g., "Statistics Canada")
+  - `collectorNameShort`: A shorter name of the organization for compact displays, (e.g., "StatCan")
   - `author`: The individual actors that published the data (eg. "John Smith, Jane Doe")
+  - `presentedBy`: The secondary source sharing the data, if the listed source document is not from the original collector (e.g. data.un.org, Wikipedia)
+- **Source Document**
   - `url`: The URL of the census table (e.g., "https://www150.statcan.gc.ca/t1/tbl1/en/tv.action?pid=9810000201")
   - `tableName`: The name of the original data table (e.g., "Knowledge of languages by age and gender"
   - `columnName`: The name of the column in the table the data is from (e.g., "Total - Single and multiple responses of knowledge of languages")
   - `datePublished`: The date the data was published (e.g., "2022-02-09")
+  - `dateAccessed`: The date the data was accessed (e.g., "2024-10-31")
   - `citation`: The citation for the census data (e.g., "Statistics Canada. Table 98-10-0294-01 Knowledge of Indigenous languages by single and multiple knowledge of languages responses and Indigenous language acquisition: Canada, provinces and territories")
 
 ### Population Estimates

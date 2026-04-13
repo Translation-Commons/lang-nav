@@ -1,0 +1,36 @@
+#codeDisplay		#original Spanish	cl2024ethnicity	#original Spanish names	cl2024speaking
+#nameDisplay			Chile 2024 Ethnicity		Chile 2024 Speaking
+#isoRegionCode	CL				
+#yearCollected			2024		2024
+#languageUse			Ethnicity		Speaks
+#population			17,609,739		17,609,739
+#populationSource			https://censo2024.ine.gob.cl/resultados/		https://censo2024.ine.gob.cl/resultados/
+#age	5+				
+#nationality			Indigenous		
+#responsesPerIndividual			1		1
+#collectorType			Government		Government
+#collectorName			Instituto Nacional de Estadísticas		Instituto Nacional de Estadísticas
+#collectorNameShort			INE		INE
+#url			https://censo2024.ine.gob.cl/wp-content/uploads/2025/06/P2-Pueblos-indigenas.xlsx		https://censo2024.ine.gob.cl/resultados/
+#datePublished			2025-06-30		2025-06-30
+#dateAccessed	2026-04-11				
+#documentName			P2-Pueblos-indigenas		P3-Lenguas-indigenas
+#tableName			1. Población que es o se considera perteneciente a un pueblo indígena u originario por nombre del pueblo originario, según región.		
+#columnName			País		Total País
+Language Code	Language Name	#original Spanish	Chile 2024 Ethnicity	#original Spanish names	Chile 2024 Speaking
+mul	Population that belongs or is considered to belong to an indigenous or native people.	Población que es o se considera perteneciente a un pueblo indígena u originario	2,105,863		
+arn	Mapuche	Mapuche	1,623,073	Mapuzungun (lengua mapuche)	381,762
+aym	Aymara	Aymara	178,637	Aymara	60,605
+rap	Rapa Nui	Rapa Nui	6,659	Rapa Nui	7,006
+kuz	Atacameño	Atacameño o Lickanantay	36,221	Ckunza	2,616
+que	Quechua	Quechua	46,519	Quechua	39,430
+mul		Colla	21,913		
+calc1235	Diaguita	Diaguita	153,231		
+alc	Kawésqar	Kawésqar	2,153	Kawésqar	656
+yag	Yagán	Yagán	1,244	Yagán	785
+mul		Chango	11,795		
+ona	Selk'nam	Selk'nam	1,392		
+mul	Other	Otro	20,631	Otra lengua indígena de Chile	17,604
+mis		Pueblo no declarado	2,395		
+mul				Manejo de alguna lengua indígena u originaria no declarado	103,050
+spa	#does not speak indigenous language, lower bound of Spanish population			No habla ni entiende ninguna lengua indígena u originaria	16,996,225

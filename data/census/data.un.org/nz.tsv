@@ -3,9 +3,9 @@
 #isoRegionCode	NZ					
 #yearCollected		1996	2001	2006	2013	2018
 #datePublished		2005	2009	2009	2016	2019
-#populationEligible		3,452,937	3,563,796	4,027,947	4,242,048	4,699,755
+#population		3,452,937	3,563,796	4,027,947	4,242,048	4,699,755
 #notes		Census - de jure - complete tabulation. Significant data entry problems -- many languages misnamed	Census - de jure - complete tabulation	Census - de jure - complete tabulation	Census - de jure - complete tabulation	Residents. Census - de jure - complete tabulation
-#mode		Speaks	Speaks	Speaks		
+#languageUse		Speaks	Speaks	Speaks		
 #age						
 #domain						
 #acquisitionOrder	Any					
@@ -14,6 +14,7 @@
 #sampleRate						
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27					
 #collectorType	Government					
+#presentedBy	data.un.org					
 Language Code	Language Name	nz1996	nz2001	nz2006	nz2013	nz2018
 mul	Total	3,452,937	3,563,796	4,027,947	4,242,048	4,699,755
 eng	English	3,290,454	3,425,304	3,673,626	3,819,972	4,482,132

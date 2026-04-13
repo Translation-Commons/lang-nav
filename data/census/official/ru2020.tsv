@@ -2,9 +2,9 @@
 #nameDisplay			Russia 2020 Speaks	Russia 2020 Uses	Russia 2020 Native Language
 #isoRegionCode	RU				
 #yearCollected	2020				
-#mode			Speaks	Uses	
+#languageUse			Speaks	Uses	
 #acquisitionOrder			Any	Any	L1
-#populationEligible	147,182,123				
+#population	147,182,123				
 #populationWithPositiveResponses			135,125,671	134,623,178	130,543,591
 #collectorType	Government				
 #collectorName	Federal State Statistics Service	Федеральная служба государственной статистики			

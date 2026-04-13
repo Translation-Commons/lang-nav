@@ -3,12 +3,13 @@
 #isoRegionCode		BF
 #yearCollected		2006
 #datePublished		2009
-#populationEligible		14,017,262
+#population		14,017,262
 #populationWithPositiveResponses		12,606,887
 #notes		Census - de jure - complete tabulation
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	bf2006
 mul	Total	14,017,262
 mos	Mooré	6,363,975

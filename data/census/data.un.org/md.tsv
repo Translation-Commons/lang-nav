@@ -3,11 +3,12 @@
 #isoRegionCode	MD		
 #yearCollected		2004	2014
 #datePublished		2009	2016
-#populationEligible		3,383,332	2,804,801
+#population		3,383,332	2,804,801
 #notes		Excluding non-residents present in country at time of census. Census - de facto - complete tabulation	Not including Transnistria. Census - de facto - complete tabulation
 #responsesPerIndividual	1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	md2004	md2014
 mul	Total	3,383,332	2,804,801
 ron/mol	Moldavian	2,029,847	1,544,726

@@ -3,14 +3,15 @@
 #isoRegionCode	LV		
 #yearCollected		2000	2011
 #datePublished		2003	2013
-#populationEligible		2,377,383	2,070,371
+#population		2,377,383	2,070,371
 #notes	Census - de jure - complete tabulation		
-#mode	Speaks		
+#languageUse	Speaks		
 #domain	Home		
 #acquisitionOrder	L1		
 #responsesPerIndividual	1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	lv2000	lv2011
 mul	Total	2,377,383	2,070,371
 lav	Latvian	1,473,267	1,164,894

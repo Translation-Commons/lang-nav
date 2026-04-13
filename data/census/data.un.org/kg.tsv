@@ -3,13 +3,14 @@
 #isoRegionCode		KG
 #yearCollected		1999
 #datePublished		2007
-#populationEligible		4,657,496
+#population		4,657,496
 #notes		Data refer to selected nationalities by mother tongue. Census - de jure - complete tabulation
 #domain		Home
 #acquisitionOrder		L1
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	kg1999
 mul	Total	4,657,496
 kir	Kyrgyz	3,118,919

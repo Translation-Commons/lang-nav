@@ -3,7 +3,7 @@
 #isoRegionCode	AU						
 #yearCollected		1996	2001	2006	2011	2016	2021
 #datePublished		2003	2009	2011	2012	2017	2023
-#populationEligible		16,624,517	18,769,256	19,855,287	21,507,719	23,401,892	25,422,788
+#population		16,624,517	18,769,256	19,855,287	21,507,719	23,401,892	25,422,788
 #populationWithPositiveResponses		15,985,167	17,867,823	18,727,528	20,422,229	21,892,063	23,967,365
 #notes		Census - de facto - complete tabulation	Census - de jure - complete tabulation	Including population in off-shore, migratory and shipping. Census - de jure - complete tabulation	Including population in off-shore, migratory and shipping. Census - de jure - complete tabulation	Census - de jure - complete tabulation	No reliance should be placed on small numbers. Census - de jure - complete tabulation
 #age		5+					
@@ -11,6 +11,7 @@
 #responsesPerIndividual		1	1	1	1	1	1+
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27						
 #collectorType	Government						
+#presentedBy	data.un.org						
 Language Code	Language Name						
 mul	Total	16,624,517	18,769,256	19,855,287	21,507,719	23,401,892	
 eng	English	13,498,094	15,013,965	15,581,334	16,509,289	17,020,417	18,303,662

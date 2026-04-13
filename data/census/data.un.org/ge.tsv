@@ -3,11 +3,12 @@
 #isoRegionCode	GE		
 #yearCollected		2002	2014
 #datePublished		2009	2016
-#populationEligible		4,371,535	3,713,804
+#population		4,371,535	3,713,804
 #notes	Census - de jure - complete tabulation		
 #responsesPerIndividual	1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	ge2002	ge2014
 mul	Total	4,371,535	3,713,804
 mul	Native	4,335,202	

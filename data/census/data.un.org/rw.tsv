@@ -3,13 +3,14 @@
 #isoRegionCode		RW
 #yearCollected		2002
 #datePublished		2011
-#populationEligible		7,963,809
+#population		7,963,809
 #populationWithPositiveResponses		7,938,863
 #notes		Residents. Census - de jure - complete tabulation
-#mode		Speaks
+#languageUse		Speaks
 #responsesPerIndividual		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	rw2002
 mul	Total	7,963,809
 kin	Kinyarwanda	7,420,785

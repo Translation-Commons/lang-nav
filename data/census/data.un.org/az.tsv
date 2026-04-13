@@ -3,14 +3,15 @@
 #isoRegionCode	AZ				
 #yearCollected		1999	2009	2019	
 #datePublished		2001	2011	2022	
-#populationEligible		7,873,826	8,922,447	9,814,381	
+#population		7,873,826	8,922,447	9,814,381	
 #notes	Census - de jure - complete tabulation				
-#mode		Speaks			
+#languageUse		Speaks			
 #domain		Home			
 #acquisitionOrder	L1				
 #responsesPerIndividual	1				
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27				
 #collectorType	Government				
+#presentedBy	data.un.org			
 Language Code	Language Name	az1999	az2009	az2019	
 mul	Total	7,873,826	8,922,447	9,814,381	
 aze/azj	Azerbaijani	7,181,436	8,253,196	9,431,757	

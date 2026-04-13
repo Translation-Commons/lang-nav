@@ -3,11 +3,12 @@
 #isoRegionCode	KH			
 #yearCollected		1998	2008	2019
 #datePublished		2009	2009	2024
-#populationEligible		11,437,656	13,395,682	15,552,211
+#population		11,437,656	13,395,682	15,552,211
 #notes	Census - de facto - complete tabulation			
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	kh1998	kh2008	kh2019
 mul	Total	11,437,656	13,395,682	15,552,211
 khm	Khmer	10,942,066	12,901,447	14,890,322
