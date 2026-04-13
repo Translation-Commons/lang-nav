@@ -10,7 +10,7 @@ import { LanguagePopulationBreakdownFromLocales } from '@entities/language/popul
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import DetailsSection from '@shared/containers/DetailsSection';
-import CountOfPeopleCompact from '@shared/ui/CountOfPeopleCompact';
+import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = { lang: LanguageData };
@@ -74,7 +74,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
               <Hoverable hoverContent={<LanguagePopulationBreakdownContent lang={lang} />}>
-                <CountOfPeopleCompact count={populationEstimate} />
+                <CountOfPeople count={populationEstimate} />
               </Hoverable>
             </div>
             <Deemphasized>Speakers</Deemphasized>
@@ -87,7 +87,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
                   <Hoverable hoverContent={<LanguagePopulationOfDescendants lang={lang} />}>
-                    <CountOfPeopleCompact count={populationOfDescendants} />
+                    <CountOfPeople count={populationOfDescendants} />
                   </Hoverable>
                 </div>
                 <Deemphasized>Descendants</Deemphasized>
