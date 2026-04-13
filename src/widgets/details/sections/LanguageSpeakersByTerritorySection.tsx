@@ -28,16 +28,17 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
   const rightCol = top10.slice(5, 10);
   const remaining = localesFromUniqueTerritories.length - 10;
 
-
   return (
     <DetailsSection title="Speakers by Territory">
       <div style={{ display: 'flex', gap: '2em', alignItems: 'flex-start' }}>
         {/* Left column */}
-        <table style={{ flex: 1, borderSpacing: '0.5em 0.25em'}}>
+        <table style={{ flex: 1, borderSpacing: '0.5em 0.25em' }}>
           <tbody>
             {leftCol.map((locale) => (
               <tr key={locale.ID}>
-                <td><HoverableObjectName object={locale} labelSource="territory" /></td>
+                <td>
+                  <HoverableObjectName object={locale} labelSource="territory" />
+                </td>
                 <CellPopulation
                   population={locale.populationAdjusted}
                   percent={locale.populationSpeakingPercent}
@@ -51,7 +52,9 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
           <tbody>
             {rightCol.map((locale) => (
               <tr key={locale.ID}>
-                <td><HoverableObjectName object={locale} labelSource="territory" /></td>
+                <td>
+                  <HoverableObjectName object={locale} labelSource="territory" />
+                </td>
                 <CellPopulation
                   population={locale.populationAdjusted}
                   percent={locale.populationSpeakingPercent}

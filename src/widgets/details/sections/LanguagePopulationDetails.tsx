@@ -26,11 +26,16 @@ const LanguagePopulationBreakdownContent: React.FC<{ lang: LanguageData }> = ({ 
 
 const getSourceLabel = (source?: PopulationSourceCategory): string | null => {
   switch (source) {
-    case PopulationSourceCategory.AggregatedFromTerritories: return 'aggregated from territories';
-    case PopulationSourceCategory.AggregatedFromLanguages: return 'aggregated from dialects';
-    case PopulationSourceCategory.Ethnologue: return 'from Ethnologue';
-    case PopulationSourceCategory.Algorithmic: return 'algorithmically derived';
-    default: return null;
+    case PopulationSourceCategory.AggregatedFromTerritories:
+      return 'aggregated from territories';
+    case PopulationSourceCategory.AggregatedFromLanguages:
+      return 'aggregated from dialects';
+    case PopulationSourceCategory.Ethnologue:
+      return 'from Ethnologue';
+    case PopulationSourceCategory.Algorithmic:
+      return 'algorithmically derived';
+    default:
+      return null;
   }
 };
 
@@ -54,15 +59,17 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
       {populationEstimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
-        <div style={{
-          display: 'flex',
-          gap: '2em',
-          justifyContent: 'center',
-          alignItems: 'flex-end', 
-          marginTop: 'auto',      
-          paddingBottom: '0.5em',
-          flexGrow: 1,
-        }}>
+        <div
+          style={{
+            display: 'flex',
+            gap: '2em',
+            justifyContent: 'center',
+            alignItems: 'flex-end',
+            marginTop: 'auto',
+            paddingBottom: '0.5em',
+            flexGrow: 1,
+          }}
+        >
           {/* Speakers */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>

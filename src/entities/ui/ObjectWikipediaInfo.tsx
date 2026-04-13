@@ -84,6 +84,6 @@ export function getStatusColor(status: WikipediaStatus) {
     case WikipediaStatus.Incubator:
       return 'var(--color-yellow)';
   }
-};
+}
 
 export default ObjectWikipediaInfo;

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import Deemphasized from './Deemphasized';
 
 const formatCompact = (n: number): string => {

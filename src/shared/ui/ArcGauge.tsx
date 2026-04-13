@@ -3,9 +3,9 @@ import React from 'react';
 interface Props {
   value: number | null | undefined;
   max: number;
-  label: string;        // eg. "Institutional", "Living"
-  sublabel?: string;    // eg. "Ethnologue", "ISO"
-  size?: number;        // diameter in px, default 80
+  label: string; // eg. "Institutional", "Living"
+  sublabel?: string; // eg. "Ethnologue", "ISO"
+  size?: number; // diameter in px, default 80
 }
 
 const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) => {
@@ -49,16 +49,20 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
     ratio == null
       ? 'var(--color-text-secondary)'
       : ratio >= 7 / 9
-      ? 'var(--color-green)'
-      : ratio >= 3 / 9
-      ? 'var(--color-yellow)'
-      : 'var(--color-red)';
+        ? 'var(--color-green)'
+        : ratio >= 3 / 9
+          ? 'var(--color-yellow)'
+          : 'var(--color-red)';
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: size }}>
       <div style={{ fontSize: '0.8em', marginBottom: '0.25em' }}>{label}</div>
       <div style={{ position: 'relative', width: size, height: size * 0.65 }}>
-        <svg width={size} height={size} style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible' }}>
+        <svg
+          width={size}
+          height={size}
+          style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible' }}
+        >
           {/* Background arc */}
           <path
             d={bgArc}
@@ -79,24 +83,30 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
           )}
         </svg>
         {/* Score text centered inside arc */}
-        <div style={{
-          position: 'absolute',
-          bottom: 0,
-          left: 0,
-          right: 0,
-          textAlign: 'center',
-          fontWeight: 700,
-          fontSize: size * 0.22,
-          lineHeight: 1,
-        }}>
+        <div
+          style={{
+            position: 'absolute',
+            bottom: 0,
+            left: 0,
+            right: 0,
+            textAlign: 'center',
+            fontWeight: 700,
+            fontSize: size * 0.22,
+            lineHeight: 1,
+          }}
+        >
           {value != null ? value : '—'}
-          <span style={{ fontWeight: 400, fontSize: '0.6em', color: 'var(--color-text-secondary)' }}>
+          <span
+            style={{ fontWeight: 400, fontSize: '0.6em', color: 'var(--color-text-secondary)' }}
+          >
             /{max}
           </span>
         </div>
       </div>
       {sublabel && (
-        <div style={{ fontSize: '0.75em', color: 'var(--color-text-secondary)', marginTop: '0.25em' }}>
+        <div
+          style={{ fontSize: '0.75em', color: 'var(--color-text-secondary)', marginTop: '0.25em' }}
+        >
           {sublabel}
         </div>
       )}
