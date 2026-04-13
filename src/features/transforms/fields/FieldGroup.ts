@@ -30,6 +30,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.HistoricPresence:
     case Field.LanguageFormedHere:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
       return FieldGroup.Status; // Status - Indigeneity
     case Field.DigitalSupport:
     case Field.CLDRCoverage:

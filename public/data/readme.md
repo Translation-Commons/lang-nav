@@ -15,6 +15,9 @@ These datasets are aggregated and curated by the LangNav team. In some places th
 - iana_variants.txt
   - https://www.iana.org/assignments/language-subtag-registry/language-subtag-registry
   - accessed 2025-11-19
+- ECRML (European Charter for Regional or Minority Languages)
+  - https://www.coe.int/en/web/european-charter-regional-or-minority-languages/languages-covered
+  - accessed 2025-11-20
 
 Additionally, there are folders containing multiple datasets, grouped by the originating source:
 

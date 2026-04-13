@@ -2739,6 +2739,7 @@ dan_CA	Danish (Canada)	Dansk	Official	14,700
 bul_CY	Bulgarian (Cyprus)		Official	14,678	
 swe_CA	Swedish (Canada)	Svenska	Official	14,620	
 dus_NP	Dumi (Nepal)		Official	14,508	
+bul_RS	Bulgarian (Serbia)	Български	Official	14,499	
 rus_RO	Russian (Romania)	Русский	Official	14,414	recognized
 pmt_PF	Tuamotuan (French Polynesia)		EDL	14,400	
 acu_EC	Achuar-Shiwiar (Ecuador)		Official	14,398	
@@ -2787,6 +2788,7 @@ heb_RU	Hebrew (Russia)	עברית	Official	12,746
 apw_US	Western Apache (United States)	Ndéé biyáti'	Official	12,730	
 din_AU	Dinka (Australia)		Official	12,701	
 hnj_MM	Hmong Njua (Myanmar)	𞄀𞄄𞄰𞄩𞄍𞄜𞄰	CLDR	12,656	
+mkd_RS	Macedonian (Serbia)	Македонски	Official	12,646	
 nsm_IN	Sümi (India)		Official	12,588	
 kee_US	Eastern Keres (United States)		Official	12,540	
 sna_US	Shona (United States)	Shona	Official	12,493	
@@ -2802,6 +2804,7 @@ iru_IN	Irula (India)		Official	11,870
 kok_US	Konkani (United States)	कोंकणी	Official	11,850	
 abx_PH	Inabaknon (Philippines)		Unverified Official	11,827	
 mri_AU	Māori (Australia)		Official	11,747	
+slk_AT	Slovak (Austria)	Slovenčina	Official	11,719	
 lyg_IN	Lyngngam (India)		Official	11,586	
 bmj_NP	Bote (Nepal)		Official	11,578	
 chp_CA	Chipewyan (Canada)	Dëne Sųłıné Yatıé	Official	11,555	official_regional
@@ -2811,6 +2814,7 @@ srp_MK	Serbian (North Macedonia)		Official	11,252
 emg_NP	Eastern Meohang (Nepal)		Unverified Official	11,097	
 raf_NP	Western Meohang (Nepal)		Unverified Official	11,097	
 pum_NP	Puma (Nepal)		Official	11,034	
+hun_HR	Hungarian (Croatia)	Magyar	Official	11,003	
 rar_CK	Cook Islands Maori (Cook Islands)	Māori Kūki 'Āirani	Official	10,809	
 msa_CA	Malay (Canada)	Bahasa Melayu	Unverified Official	10,770	
 ciw_US	Southwestern Ojibwa (United States)	Anishinaabemowin	Official	10,750	

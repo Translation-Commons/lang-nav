@@ -74,6 +74,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.Indigeneity:
     case Field.DigitalSupport:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
     case Field.SourceType:
     case Field.CLDRCoverage:
     case Field.Coordinates:
@@ -149,6 +150,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.Indigeneity:
     case Field.DigitalSupport:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
     case Field.SourceType:
     case Field.CLDRCoverage:
     case Field.Coordinates:

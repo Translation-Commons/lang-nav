@@ -15,6 +15,8 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import LocaleEcrmlCoverage from './LocaleEcrmlCoverage';
+
 type Props = {
   territory: TerritoryData;
 };
@@ -52,6 +54,15 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
               ) : (
                 <Deemphasized>None</Deemphasized>
               ),
+          },
+          {
+            key: 'Coverage under ECRML',
+            description:
+              'Whether the language is covered by the European Charter for Regional or Minority Languages in this territory.',
+            render: (loc) => <LocaleEcrmlCoverage locale={loc} />,
+            field: Field.ECRMLProtection,
+            valueType: TableValueType.Enum,
+            isInitiallyVisible: false,
           },
           {
             key: 'Population',

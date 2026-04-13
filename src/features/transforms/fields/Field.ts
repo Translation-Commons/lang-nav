@@ -21,6 +21,7 @@ enum Field {
 
   Indigeneity = 'Indigeneity',
   GovernmentStatus = 'Government Status',
+  ECRMLProtection = 'ECRML Protection',
   LanguageFormedHere = 'Language Formed Here',
   HistoricPresence = 'Historic Presence',
 
