@@ -1,54 +1,24 @@
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
-
 import { LanguageData } from '@entities/language/LanguageTypes';
-import LanguagePopulationOfDescendants, {
-  LanguagePopulationBreakdownFromDescendants,
-} from '@entities/language/population/LanguagePopulationFromDescendants';
-import { LanguagePopulationBreakdownFromLocales } from '@entities/language/population/LanguagePopulationFromLocales';
+import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
+import LanguagePopulationOfDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import DetailsSection from '@shared/containers/DetailsSection';
-import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = { lang: LanguageData };
 
-const LanguagePopulationBreakdownContent: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { populationEstimateSource } = lang;
-  if (populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
-    return <LanguagePopulationBreakdownFromLocales lang={lang} />;
-  if (populationEstimateSource === PopulationSourceCategory.AggregatedFromLanguages)
-    return <LanguagePopulationBreakdownFromDescendants lang={lang} />;
-  return null;
-};
-
-const getSourceLabel = (source?: PopulationSourceCategory): string | null => {
-  switch (source) {
-    case PopulationSourceCategory.AggregatedFromTerritories:
-      return 'aggregated from territories';
-    case PopulationSourceCategory.AggregatedFromLanguages:
-      return 'aggregated from dialects';
-    case PopulationSourceCategory.Ethnologue:
-      return 'from Ethnologue';
-    case PopulationSourceCategory.Algorithmic:
-      return 'algorithmically derived';
-    default:
-      return null;
-  }
-};
-
 const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
   const { populationEstimate, populationEstimateSource, populationOfDescendants } = lang;
-  const sourceLabel = getSourceLabel(populationEstimateSource);
 
   const title = (
     <>
       Population
-      {sourceLabel && (
+      {populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories && (
         <span style={{ fontSize: '0.75em', fontWeight: 'normal', marginLeft: '0.5em' }}>
-          ({sourceLabel})
+          (aggregated from territories)
         </span>
       )}
     </>
@@ -73,9 +43,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
           {/* Speakers */}
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
             <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
-              <Hoverable hoverContent={<LanguagePopulationBreakdownContent lang={lang} />}>
-                <CountOfPeople count={populationEstimate} />
-              </Hoverable>
+              <LanguagePopulationEstimate lang={lang} />
             </div>
             <Deemphasized>Speakers</Deemphasized>
           </div>
@@ -86,9 +54,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
             populationEstimateSource !== PopulationSourceCategory.AggregatedFromLanguages && (
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
-                  <Hoverable hoverContent={<LanguagePopulationOfDescendants lang={lang} />}>
-                    <CountOfPeople count={populationOfDescendants} />
-                  </Hoverable>
+                  <LanguagePopulationOfDescendants lang={lang} />
                 </div>
                 <Deemphasized>Descendants</Deemphasized>
               </div>
