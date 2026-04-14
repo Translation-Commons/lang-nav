@@ -10,6 +10,7 @@
 ### Population Surveyed ###									
 #population		3,105,748	3,399,054	2,556,525	2,797,963	3,459,093	3,596,284	3,596,284	3,596,284
 #populationSource					estimated by comparing ratios, not directly from source document				
+#nationality	residents								
 #responsesPerIndividual		1	1	1+	1+	1	1	1	1
 ### Data Constraints ###									
 #age		15+	5+	15+	5+	15+	5+	5+	5+
@@ -21,12 +22,12 @@
 #presentedBy	Internet Archive								
 ### Source Document ###									
 #url	https://web.archive.org/web/20171122005904/https://www.singstat.gov.sg/docs/default-source/default-document-library/publications/publications_and_papers/cop2010/census_2010_release1/cop2010sr1.pdf					https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf	https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf	https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf	https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf
-#datePublished	2011-01								
+#datePublished	2011-01					2021-06	2021-06	2021-06	2021-06
 #dateAccessed	2017-11-22					2022-06-11	2022-06-11	2022-06-11	2022-06-11
 #documentName	Census of Population 2010 Statistical Release 1 Demographic Characteristics, Education, Language and Religion					Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion	Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion	Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion	Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion
-#tableName		Table 39 Resident Population Aged 15 Years and Over by Language Literate In, Age Group, Sex and Ethnic Grou	Table 50 Resident Population Aged 5 Years and Over by Language Most Frequently Spoken at Home, Residential Status and Sex	KEY INDICATORS OF THE RESIDENT POPULATION	KEY INDICATORS OF THE RESIDENT POPULATION	Tabble 33 Resident Population Aged 15 Years and Over by Language Literate In, Age Group, Sex and Ethnic Grou	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group
+#tableName		Table 39 Resident Population Aged 15 Years and Over by Language Literate In, Age Group, Sex and Ethnic Group	Table 50 Resident Population Aged 5 Years and Over by Language Most Frequently Spoken at Home, Residential Status and Sex	KEY INDICATORS OF THE RESIDENT POPULATION	KEY INDICATORS OF THE RESIDENT POPULATION	Table 33 Resident Population Aged 15 Years and Over by Language Literate In, Age Group, Sex and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group
 #columnName		Language Literate In		Total: 2000	Total: 2000	Language Literate In	Language Most / Second Most Frequently Spoken at Home	Language Most Frequently Spoken at Home	Language Second Most Frequently Spoken at Home
-Language Code	Language	Singapore 2010 Literacy	Singapore 2010 Primary Spoken	Singapore 2000 Literacy	Singapore 2000 Primary Spoken	Singapore 2020 Literacy	Spoken at Hom		
+Language Code	Language	Singapore 2010 Literacy	Singapore 2010 Primary Spoken	Singapore 2000 Literacy	Singapore 2000 Primary Spoken	Singapore 2020 Literacy	Singapore 2020 Primary or Secondary Spoken	Singapore 2020 Primary Spoken	Singapore 2020 Secondary Spoken
 mul	Total	3,105,748	3,399,054			3,459,093	3,596,284		
 	Not Literate	128,661				99,212			
 	Literate	2,977,088				3,359,881			
