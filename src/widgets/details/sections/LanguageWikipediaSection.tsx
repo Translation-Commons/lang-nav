@@ -6,7 +6,7 @@ import { WikipediaStatus } from '@entities/types/DataTypes';
 import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsSection from '@shared/containers/DetailsSection';
-import CountOfPeopleCompact from '@shared/ui/CountOfPeopleCompact';
+import CountCompact from '@shared/ui/CountCompact';
 import Deemphasized from '@shared/ui/Deemphasized';
 import Pill from '@shared/ui/Pill';
 
@@ -64,22 +64,14 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
         {/* Articles */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
-            {isActive && wikipedia ? (
-              <CountOfPeopleCompact count={wikipedia.articles} />
-            ) : (
-              <NADisplay />
-            )}
+            {isActive && wikipedia ? <CountCompact count={wikipedia.articles} /> : <NADisplay />}
           </div>
           <Deemphasized>Articles</Deemphasized>
         </div>
         {/* Active Users */}
         <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
           <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
-            {isActive && wikipedia ? (
-              <CountOfPeopleCompact count={wikipedia.activeUsers} />
-            ) : (
-              <NADisplay />
-            )}
+            {isActive && wikipedia ? <CountCompact count={wikipedia.activeUsers} /> : <NADisplay />}
           </div>
           <Deemphasized>Active Users</Deemphasized>
         </div>
