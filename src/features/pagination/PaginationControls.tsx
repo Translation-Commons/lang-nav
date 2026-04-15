@@ -5,7 +5,7 @@ import {
   StepForwardIcon,
   TriangleAlertIcon,
 } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
@@ -15,11 +15,15 @@ type Props = {
 };
 
 const PaginationControls: React.FC<Props> = ({ itemCount }) => {
-  const { page: currentPage, limit, updatePageParams } = usePageParams();
+  const { page: paramPage, limit, updatePageParams } = usePageParams();
   const totalPages = limit < 1 ? 1 : Math.ceil(itemCount / limit);
-  if (totalPages <= 1) {
-    return <></>;
-  }
+  const [currentPage, setCurrentPage] = React.useState(paramPage);
+
+  useEffect(() => {
+    setCurrentPage(paramPage);
+  }, [paramPage]);
+
+  if (totalPages <= 1) return <></>;
 
   const compactStyle: React.CSSProperties = {
     lineHeight: '1.5',
@@ -68,10 +72,13 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
 
         <input
           className={currentPage === 1 ? 'empty' : ''}
-          min={1}
-          max={totalPages}
-          value={currentPage}
-          onChange={(event) => updatePageParams({ page: parseInt(event.target.value) })}
+          value={currentPage || ''}
+          onChange={(event) => setCurrentPage(parseInt(event.target.value))}
+          onBlur={(event) =>
+            updatePageParams({
+              page: Math.min(Math.max(parseInt(event.target.value), 1), totalPages),
+            })
+          }
           style={{ ...compactStyle, width: 50, textAlign: 'center' }}
         />
 
