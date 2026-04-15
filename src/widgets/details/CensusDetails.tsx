@@ -74,7 +74,11 @@ function CensusPopulationCharacteristics({ census }: { census: CensusData }) {
       <DetailsField title="Overall population">{population.toLocaleString()}</DetailsField>
       {populationSource && (
         <DetailsField title="Source for overall population">
-          <ExternalLink href={populationSource} />
+          {populationSource.startsWith('http') ? (
+            <ExternalLink href={populationSource} />
+          ) : (
+            populationSource
+          )}
         </DetailsField>
       )}
       {populationWithPositiveResponses && (
