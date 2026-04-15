@@ -56,7 +56,7 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: size }}>
-      <div style={{ fontSize: '0.8em', marginBottom: '0.25em' }}>{label}</div>
+      <div style={{ fontSize: '0.8em', marginBottom: '0.25em', width: 'max-content' }}>{label}</div>
       <div style={{ position: 'relative', width: size, height: size * 0.65 }}>
         <svg
           width={size}

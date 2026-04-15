@@ -10,7 +10,6 @@ import { getVitalityLabel } from './VitalityStrings';
 import { VitalitySource } from './VitalityTypes';
 
 const LanguageVitalitySection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const eth2025Score = getVitalityScore(VitalitySource.Eth2025, lang);
   const isoScore = getVitalityScore(VitalitySource.ISO, lang);
 
   return (
@@ -24,12 +23,7 @@ const LanguageVitalitySection: React.FC<{ lang: LanguageData }> = ({ lang }) => 
           paddingBottom: '0.5em',
         }}
       >
-        <ArcGauge
-          value={eth2025Score}
-          max={9}
-          label={getVitalityLabel(lang, VitalitySource.Eth2025) ?? '—'}
-          sublabel="Ethnologue"
-        />
+        <ArcGauge value={null} max={9} label={'Digital Support'} sublabel="Coming Soon" />
         <ArcGauge
           value={isoScore}
           max={9}
