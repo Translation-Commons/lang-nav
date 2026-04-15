@@ -5,7 +5,7 @@ import {
   StepForwardIcon,
   TriangleAlertIcon,
 } from 'lucide-react';
-import React from 'react';
+import React, { useCallback, useEffect } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
@@ -15,11 +15,32 @@ type Props = {
 };
 
 const PaginationControls: React.FC<Props> = ({ itemCount }) => {
-  const { page: currentPage, limit, updatePageParams } = usePageParams();
+  const { page: paramPage, limit, updatePageParams } = usePageParams();
   const totalPages = limit < 1 ? 1 : Math.ceil(itemCount / limit);
-  if (totalPages <= 1) {
-    return <></>;
-  }
+  const [currentPage, setCurrentPage] = React.useState<number | undefined>(paramPage);
+
+  useEffect(() => {
+    setCurrentPage(paramPage);
+  }, [paramPage]);
+
+  if (totalPages <= 1) return <></>;
+
+  const setPageToBeginning = useCallback(() => {
+    setCurrentPage(1);
+    updatePageParams({ page: 1 });
+  }, [updatePageParams]);
+  const incrementPage = useCallback(
+    (step: number) => {
+      const page = Math.min(Math.max((currentPage || 1) + step, 1), totalPages);
+      setCurrentPage(page);
+      updatePageParams({ page });
+    },
+    [updatePageParams, currentPage, totalPages],
+  );
+  const setPageToEnd = useCallback(() => {
+    setCurrentPage(totalPages);
+    updatePageParams({ page: totalPages });
+  }, [updatePageParams, totalPages]);
 
   const compactStyle: React.CSSProperties = {
     lineHeight: '1.5',
@@ -45,7 +66,7 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
         }}
       >
         <button
-          onClick={() => updatePageParams({ page: 1 })}
+          onClick={setPageToBeginning}
           disabled={currentPage === 1}
           style={{ ...compactStyle, borderRadius: '1em 0 0 1em' }}
         >
@@ -60,24 +81,31 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
               Shortcut: Left Arrow Key ←
             </>
           }
-          onClick={() => updatePageParams({ page: Math.max(1, currentPage - 1) })}
+          onClick={() => incrementPage(-1)}
           style={compactStyle}
         >
           <StepBackIcon size="1em" style={{ display: 'block' }} />
         </HoverableButton>
 
         <input
-          className={currentPage === 1 ? 'empty' : ''}
-          min={1}
-          max={totalPages}
-          value={currentPage}
-          onChange={(event) => updatePageParams({ page: parseInt(event.target.value) })}
+          className={!currentPage || currentPage === 1 ? 'empty' : ''}
+          value={currentPage || ''}
+          onChange={(event) =>
+            event.target.value
+              ? setCurrentPage(parseInt(event.target.value))
+              : setCurrentPage(undefined)
+          }
+          onBlur={(event) =>
+            updatePageParams({
+              page: Math.min(Math.max(parseInt(event.target.value), 1), totalPages),
+            })
+          }
           style={{ ...compactStyle, width: 50, textAlign: 'center' }}
         />
 
-        {currentPage > totalPages && (
+        {currentPage && currentPage > totalPages && (
           <HoverableButton
-            onClick={() => updatePageParams({ page: totalPages })}
+            onClick={setPageToEnd}
             hoverContent="This page number is out of range. Showing the first page instead. Click to go to the actually last page."
             style={{ margin: 'none', padding: 0, borderRadius: 0 }}
           >
@@ -86,7 +114,7 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
         )}
 
         <HoverableButton
-          disabled={currentPage >= totalPages}
+          disabled={!currentPage || currentPage >= totalPages}
           hoverContent={
             <>
               Go to Next Page.
@@ -94,13 +122,13 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
               Shortcut: Right Arrow Key →
             </>
           }
-          onClick={() => updatePageParams({ page: Math.min(totalPages, currentPage + 1) })}
+          onClick={() => incrementPage(1)}
           style={compactStyle}
         >
           <StepForwardIcon size="1em" style={{ display: 'block' }} />
         </HoverableButton>
         <button
-          onClick={() => updatePageParams({ page: totalPages })}
+          onClick={setPageToEnd}
           disabled={currentPage === totalPages}
           style={{ ...compactStyle, borderRadius: '0 1em 1em 0' }}
         >

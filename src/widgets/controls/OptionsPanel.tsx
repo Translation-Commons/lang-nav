@@ -22,12 +22,20 @@ import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 import ViewSelector from './selectors/ViewSelector';
+import useFilterPanel from './useFilterPanel';
 
 const OptionsPanel: React.FC = () => {
   usePageArrowKeys();
 
+  const filterPanel = useFilterPanel();
+
   return (
-    <ResizablePanel defaultWidth={300} purpose="filters" title="Options">
+    <ResizablePanel
+      defaultWidth={300}
+      purpose="filters"
+      title="Options"
+      isOpen={filterPanel.isOpen}
+    >
       <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
         <OptionsPanelSection title="Filter" optionsName="filters">
           <AllApplicableFilterSelectors />

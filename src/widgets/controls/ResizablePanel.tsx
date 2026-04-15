@@ -1,38 +1,22 @@
-import React, { ReactNode, useCallback, useEffect } from 'react';
-
-import usePageParams from '@features/params/usePageParams';
-
-import SidePanelToggleButton from './SidePanelToggleButton';
-import useFilterPanel from './useFilterPanel';
+import React, { ReactNode, useCallback } from 'react';
 
 type Props = {
   purpose: 'filters' | 'details'; // filters on left, details on right
   defaultWidth: number;
   title: ReactNode;
+  isOpen: boolean;
 };
 
 const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   children,
   defaultWidth,
+  isOpen,
   purpose,
   title,
 }) => {
-  const { objectID } = usePageParams();
-  const filterPanel = useFilterPanel();
-
-  // For filters, use shared context state; for details, use local state
-  const [localIsOpen, setLocalIsOpen] = React.useState(false);
-  const isOpen = purpose === 'filters' ? filterPanel.isOpen : localIsOpen;
-  const setIsOpen = purpose === 'filters' ? filterPanel.setIsOpen : setLocalIsOpen;
-
   const [panelWidth, setPanelWidth] = React.useState(defaultWidth);
   const panelSide = purpose === 'filters' ? 'left' : 'right';
   const [shouldEaseTransition, setShouldEaseTransition] = React.useState(false);
-
-  useEffect(() => {
-    // When an object is set, open the details panel
-    if (objectID && purpose === 'details') setLocalIsOpen(true);
-  }, [objectID, purpose]);
 
   return (
     <aside
@@ -76,16 +60,6 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
           {children}
         </div>
       </div>
-
-      {/* Only show the floating toggle button for the details panel */}
-      {purpose === 'details' && (
-        <SidePanelToggleButton
-          isOpen={isOpen}
-          onClick={() => setIsOpen((open) => !open)}
-          panelWidth={panelWidth}
-          purpose={purpose}
-        />
-      )}
     </aside>
   );
 };
