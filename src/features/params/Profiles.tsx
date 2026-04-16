@@ -54,7 +54,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   page: 1,
   profile: ProfileType.LanguageEthusiast,
   populationMax: 10_000_000_000, // higher than the world population
-  populationMin: 0,
+  populationMin: -1, // allow undefined population as well as definite 0s
   reportID: ReportID.EntitiesMissingFields,
   scaleBy: Field.None,
   searchBy: SearchableField.CodeOrNameAny,

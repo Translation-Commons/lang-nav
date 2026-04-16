@@ -39,7 +39,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nWithLanguage,
     nInVitality,
     nMatchingSubstring,
-    nInPopulation,
+    nInPopulationRange,
   ] = useMemo(() => {
     const filteredByLanguageScope = objects.filter(filterBy[Field.LanguageScope]);
     const filteredByModality = filteredByLanguageScope.filter(filterBy[Field.Modality]);
@@ -72,13 +72,13 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const nFilteredByLanguage = nWrittenIn - nWithLanguage;
   const nFilteredByVitality = nWithLanguage - nInVitality;
   const nFilteredBySubstring = nInVitality - nMatchingSubstring;
-  const nFilteredByPopulation = nMatchingSubstring - nInPopulation;
+  const nFilteredByPopulation = nMatchingSubstring - nInPopulationRange;
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
 
   // Return an empty component if nothing was filtered
-  if (nOverall === nMatchingSubstring) return null;
+  if (nOverall === nInPopulationRange) return null;
 
   return (
     <table style={{ textAlign: 'left' }}>
@@ -243,7 +243,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
             Results
           </td>
           <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
-            {nMatchingSubstring.toLocaleString()}
+            {nInPopulationRange.toLocaleString()}
           </td>
         </tr>
       </tbody>

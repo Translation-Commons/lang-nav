@@ -32,6 +32,22 @@ function buildNextURLSearchParams(
       } else {
         next.set(key, valueAsNumber.toString());
       }
+    } else if (key === PageParamKey.populationMin) {
+      // Handle as number
+      const valueAsNumber = parseInt(value as string);
+      if (isNaN(valueAsNumber) || valueAsNumber < 0) {
+        next.set(key, '-1'); // -1 allows for undefined populationMin
+      } else {
+        next.set(key, valueAsNumber.toString());
+      }
+    } else if (key === PageParamKey.populationMax) {
+      // Handle as number
+      const valueAsNumber = parseInt(value as string);
+      if (isNaN(valueAsNumber) || valueAsNumber < 0) {
+        next.delete(key);
+      } else {
+        next.set(key, valueAsNumber.toString());
+      }
     } else if (key === PageParamKey.columns) {
       const valueTyped = value as Record<number, bigint>;
       if (Object.keys(valueTyped).length === 0) {

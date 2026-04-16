@@ -1,11 +1,17 @@
 import { renderHook } from '@testing-library/react';
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import Field from '@features/transforms/fields/Field';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
+
 import useScale from '../useScale';
+
+vi.mock('@features/params/usePageParams', () => ({
+  default: vi.fn().mockReturnValue(createMockUsePageParams({})),
+}));
 
 describe('useScale', () => {
   it('returns default multiplier when scaleBy is undefined or "None"', () => {

@@ -11,7 +11,7 @@ import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 import Field from './Field';
 import getField from './getField';
 
-export function getMinimumValue(field?: Field): number {
+export function getMinimumValue(field?: Field, populationMin?: number): number {
   if (field == null) return 0; // default min for when no field is selected
   switch (field) {
     case Field.Longitude:
@@ -25,6 +25,7 @@ export function getMinimumValue(field?: Field): number {
     case Field.HistoricPresence:
       return -1; // -1 is undefined
     case Field.Population:
+      return populationMin ?? -1;
     case Field.PopulationDirectlySourced:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:

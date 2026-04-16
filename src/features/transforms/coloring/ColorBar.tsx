@@ -181,7 +181,14 @@ function getTicks(coloringFunctions: ColoringFunctions): { position: number; lab
   let lastPosition = 0;
 
   return Array.from({ length: numberOfTicks }, (_, index) => {
-    if (index === 0) return { position: 0, label: formatter.format(minValue) + suffix };
+    if (index === 0)
+      return {
+        position: 0,
+        label:
+          wholeNumbersOnly && minValue === -1
+            ? 'Unknown or 0'
+            : formatter.format(minValue) + suffix,
+      };
     if (index === numberOfTicks - 1)
       return { position: 1, label: formatter.format(maxValue) + suffix };
     const normalizedValue = index / (numberOfTicks - 1); // on a scale from 0 to 1

@@ -102,12 +102,12 @@ const HoverableCircle: React.FC<{
     <circle
       cx={x * 180}
       cy={-y * 90}
-      r={scale * 2}
+      r={scale + 1}
       fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
       style={{ transition: 'fill 0.25s, stroke 0.25s', pointerEvents: 'fill', cursor: 'pointer' }}
       className="object-map-circle"
-      strokeWidth={scale}
+      strokeWidth="1px"
       onClick={() => updatePageParams({ objectID: object.ID })}
       onMouseEnter={(e: React.MouseEvent) => {
         onMouseEnter(e);

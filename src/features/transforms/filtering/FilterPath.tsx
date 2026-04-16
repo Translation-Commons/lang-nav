@@ -204,8 +204,10 @@ const FilterPath: React.FC = () => {
       <>
         Population:{' '}
         {[
-          populationMin !== undefined ? `≥ ${populationMin.toLocaleString()}` : null,
-          populationMax !== undefined && populationMax !== 10_000_000_000
+          populationMin !== undefined && populationMin !== defaultParams.populationMin
+            ? `≥ ${populationMin.toLocaleString()}`
+            : null,
+          populationMax !== undefined && populationMax !== defaultParams.populationMax
             ? `≤ ${populationMax.toLocaleString()}`
             : null,
         ]

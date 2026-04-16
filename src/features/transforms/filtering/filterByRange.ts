@@ -14,8 +14,7 @@ export function buildFilterByPopulation(
     return () => true;
 
   return (object: ObjectData): boolean => {
-    const population = getObjectPopulation(object);
-    if (population == null) return false;
+    const population = getObjectPopulation(object) ?? -1; // treat undefined population as -1 for optional filtering
     return population >= populationMin && population <= populationMax;
   };
 }
