@@ -118,6 +118,9 @@ export function getOptionStyle(
     lineHeight: '1em',
     padding: '0.5em',
     whiteSpace: 'nowrap',
+    maxWidth: '24em',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
   };
   // Customize based on position and display type
   switch (display) {

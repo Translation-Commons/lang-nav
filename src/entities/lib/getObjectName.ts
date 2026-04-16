@@ -4,22 +4,13 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 export function getObjectSubtitle(object: ObjectData): string | undefined {
   switch (object.type) {
-    case ObjectType.Census:
-      return [
-        object.mode,
-        object.proficiency,
-        object.acquisitionOrder,
-        object.domain && object.domain != 'Any' ? '@' + object.domain : null,
-      ]
-        .filter((c) => c != null && c != 'Any')
-        .join(', ');
     case ObjectType.Language:
       return object.nameEndonym ?? object.nameSubtitle ?? undefined;
     case ObjectType.WritingSystem:
       return object.nameDisplay != object.nameFull ? object.nameFull : undefined;
     case ObjectType.Locale:
+    case ObjectType.Census:
     case ObjectType.Territory:
-      return undefined;
     case ObjectType.Keyboard:
       return undefined;
   }

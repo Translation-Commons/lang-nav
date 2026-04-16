@@ -2,9 +2,9 @@
 #nameDisplay		Kenya Afrobarometer 2019 Primary @ Home	Kenya Afrobarometer 2019 Ethnicity
 #isoRegionCode	KE		
 #yearCollected	2019		
-#mode		Speaks	Ethnicity
+#languageUse		Speaks	Ethnicity
 #domain		Home	
-#populationEligible	26,200,000		
+#population	26,200,000		
 #populationSurveyed	2400		
 #age	18+		
 #nationality	citizens		

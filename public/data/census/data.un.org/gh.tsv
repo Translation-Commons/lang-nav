@@ -3,13 +3,14 @@
 #isoRegionCode		GH	GH
 #yearCollected		2000	2010
 #datePublished		2005	2013
-#populationEligible		17,436,592	23,823,594
+#population		17,436,592	23,823,594
 #notes		Census - de facto - complete tabulation	Data refer only to persons who were Ghanaians by birth and Ghanaians by dual citizenship. Census - de facto - complete tabulation
 #responsesPerIndividual		1	1
 #languagesIncluded			
 #sampleRate			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	gh2000	gh2010
 mul	Total	17,436,592	23,823,594
 aka/twi/asan1239	Asante	2,578,829	3,820,807

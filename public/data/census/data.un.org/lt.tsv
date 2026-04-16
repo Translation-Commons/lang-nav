@@ -3,14 +3,15 @@
 #isoRegionCode	LT			
 #yearCollected		2001	2011	2021
 #datePublished		2003	2014	2022
-#populationEligible		3,483,972	3,026,184	2,810,761
+#population		3,483,972	3,026,184	2,810,761
 #notes	Census - de jure - complete tabulation			
-#mode		Speaks		
+#languageUse		Speaks		
 #domain		Home		
 #acquisitionOrder		L1		
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	lt2001	lt2011	lt2021
 mul	Total	3,483,972	3,026,184	2,810,761
 lit	Lithuanian	2,855,780	2,583,745	2,398,353

@@ -15,9 +15,9 @@ import {
 } from '@entities/language/LanguageTypes';
 import { ObjectDictionary } from '@entities/types/DataTypes';
 
-import { getExtremeLanguagePaths } from '../LanguagePathsReport';
+import { getExtremeLanguagePaths } from '../ReportLanguagePaths';
 
-describe('LanguagePathsReport', () => {
+describe('ReportLanguagePaths', () => {
   function generateObjects(): ObjectDictionary {
     // Get regular data and add a language family so there is more data to process
     // Each source will have a different family structure, some of which have cycles

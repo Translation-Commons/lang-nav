@@ -1,0 +1,84 @@
+#codeDisplay		sg2010writes	sg2010speaks	sg2000writes	sg2000speaks	sg2020writes	sg2020speaks	sg2020speaks1st	sg2020speaks2nd
+#nameDisplay		Singapore 2010 Literacy	Singapore 2010 Primary Spoken	Singapore 2000 Literacy	Singapore 2000 Primary Spoken	Singapore 2020 Literacy	Singapore 2020 Primary or Secondary Spoken	Singapore 2020 Primary Spoken	Singapore 2020 Secondary Spoken
+#isoRegionCode	SG								
+#yearCollected		2010	2010	2000	2000	2020	2020	2020	2020
+### Language Criteria ###									
+#languageUse		Writes	Speaks	Writes	Speaks	Writes	Speaks	Speaks	Speaks
+#proficiency									
+#acquisitionOrder			L1		L1		Any	L1	L2
+#domain			Home		Home		Home	Home	Home
+### Population Surveyed ###									
+#population		3,105,748	3,399,054	2,556,525	2,797,963	3,459,093	3,596,284	3,596,284	3,596,284
+#populationSource					estimated by comparing ratios, not directly from source document				
+#nationality	residents								
+#responsesPerIndividual		1	1	1+	1+	1	1	1	1
+### Data Constraints ###									
+#age		15+	5+	15+	5+	15+	5+	5+	5+
+#quantity		count	count	percent	percent	count	count	count	count
+### Creator ###									
+#collectorType	Government								
+#collectorName	Department of Statistics, Ministry of Trade & Industry, Republic of Singapore								
+#collectorNameShort	SingStat								
+#presentedBy	Internet Archive								
+### Source Document ###									
+#url	https://web.archive.org/web/20171122005904/https://www.singstat.gov.sg/docs/default-source/default-document-library/publications/publications_and_papers/cop2010/census_2010_release1/cop2010sr1.pdf					https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf	https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf	https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf	https://web.archive.org/web/20220611051404/https://www.singstat.gov.sg/-/media/files/publications/cop2020/sr1/cop2020sr1.pdf
+#datePublished	2011-01					2021-06	2021-06	2021-06	2021-06
+#dateAccessed	2017-11-22					2022-06-11	2022-06-11	2022-06-11	2022-06-11
+#documentName	Census of Population 2010 Statistical Release 1 Demographic Characteristics, Education, Language and Religion					Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion	Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion	Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion	Census of Population 2020 Statistical Release 1: Demographic Characteristics, Education, Language and Religion
+#tableName		Table 39 Resident Population Aged 15 Years and Over by Language Literate In, Age Group, Sex and Ethnic Group	Table 50 Resident Population Aged 5 Years and Over by Language Most Frequently Spoken at Home, Residential Status and Sex	KEY INDICATORS OF THE RESIDENT POPULATION	KEY INDICATORS OF THE RESIDENT POPULATION	Table 33 Resident Population Aged 15 Years and Over by Language Literate In, Age Group, Sex and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group	Table 41 Resident Population Aged 5 Years and Over by Language Most / Second Most Frequently Spoken at Home, Age Group and Ethnic Group
+#columnName		Language Literate In		Total: 2000	Total: 2000	Language Literate In	Language Most / Second Most Frequently Spoken at Home	Language Most Frequently Spoken at Home	Language Second Most Frequently Spoken at Home
+Language Code	Language	Singapore 2010 Literacy	Singapore 2010 Primary Spoken	Singapore 2000 Literacy	Singapore 2000 Primary Spoken	Singapore 2020 Literacy	Singapore 2020 Primary or Secondary Spoken	Singapore 2020 Primary Spoken	Singapore 2020 Secondary Spoken
+mul	Total	3,105,748	3,399,054			3,459,093	3,596,284		
+	Not Literate	128,661				99,212			
+	Literate	2,977,088				3,359,881			
+	#One Language Only	878,214				862,098			
+eng	#English Only	329,194				362,469	229,429		
+zho	#Chinese Only	485,511				438,279			
+zho/cmn	#Mandarin Only						239,997		
+zho/nan/taib1242	#Hokkien Only						46,868		
+zho/nan/chao1238	#Teochew Only						18,601		
+zho/yue	#Cantonese Only						21,423		
+msa/zlm	#Malay Only	47,278				45,753	79,278		
+zho/mul	#Other Chinese Dialects Only						17,359		
+tam	#Tamil Only	10,939				9,600	14,582		
+mul	#Non-Official Language Only	5,292				5,998			
+	#Two Languages Only	1,896,268		56		2,259,548			
+eng/zho	#English & Chinese Only	1,305,705				1,584,180			
+eng/zho/cmn	#English & Mandarin						973,515		
+eng/zho/mul	#English & Chinese Dialect						125,507		
+eng/msa/zlm	#English & Malay Only	390,124				465,744	233,779		
+eng/tam	#English & Tamil Only	104,570				123,308	88,059		
+eng/mul	#English & Non-Official Language Only	82,972				78,208			
+eng/mul	#English & Other Indian Language						44,949		
+eng/mul	#English & Other Language						40,004		
+zho/cmn/eng	#Mandarin & English						239,997		
+zho/cmn/mul	Mandarin & Chinese Dialect						301,328		
+zho/nan/taib1242/eng	Hokkien & English						15,511		
+zho/nan/taib1242/cmn	Hokkien & Mandarin						88,928		
+zho/nan/chao1238/eng	Teochew & English						8,069		
+zho/nan/chao1238/cmn	Teochew & Mandarin						29,369		
+zho/yue/eng	Cantonese & English						19,495		
+zho/yue/cmn	Cantonese & Mandarin						35,467		
+zho/mul/cmn	Other Chinese Dialect & Mandarin						9,657		
+msa/zlm/eng	Malay & English						250,223		
+tam/eng	Tamil & English						72,428		
+mul/eng	Other Indian Language & English						18,872		
+mul/eng	Other Language & English						19,945		
+mul	#Other Two Languages Only	12,898				8,107			
+	#Three or More Languages	202,606				238,235			
+eng/zho/msa/zlm	#English, Chinese & Malay Only	96,660				132,424			
+eng/zho/tam	#English, Chinese & Tamil Only	377							
+eng/msa/zlm/tam	#English, Malay & Tamil Only	16,423				15,516			
+mul	#Other Three or More Languages	89,147				90,295			
+eng	English		1,097,443	70.9	23			1,735,242	644,540
+zho/cmn	Mandarin		1,211,505		35			1,075,172	1,136,936
+zho/mul	Chinese Dialects		487,031		23.8			313,258	125,507
+nan/taib1242	Hokkien		238,843					157,259	
+nan/chao1238	Teochew		94,302					59,424	
+yue	Cantonese		121,136					79,216	
+mul	Other Chinese Dialects		32,750					17,359	
+msa/zlm	Malay		414,475		14.1			332,256	233,779
+mul	Indian Languages		151,000					113,764	
+tam	Tamil		110,667		3.2			89,946	88,059
+mul	Other Indian Languages		40,334					23,818	44,949
+mul	Others		37,600		0.9			26,592	40,004

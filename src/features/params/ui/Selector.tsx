@@ -89,22 +89,9 @@ const SelectorContainer: React.FC<
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
 
-  const style: React.CSSProperties = {
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
-    flexWrap: 'wrap',
-  };
-  if (display === SelectorDisplay.ButtonList) {
-    style.flexDirection = 'column';
-    style.alignItems = 'start';
-  } else if (display === SelectorDisplay.ButtonGroup) {
-    style.gap = '-0.125em'; // Overlap the buttons slightly
-  }
-
   // Prepare the container. If there was a manual display, then wrap in a provider.
   const container = (
-    <div className={'selector ' + display} style={{ ...style, ...manualStyle }}>
+    <div className={'selector ' + display} style={{ ...manualStyle }}>
       {children}
     </div>
   );

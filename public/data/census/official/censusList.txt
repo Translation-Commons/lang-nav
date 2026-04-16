@@ -1,5 +1,6 @@
 az1999
 ca2021
+cl2024
 cn-cmn2020
 de
 es2021
@@ -13,6 +14,7 @@ np2021
 pk2023
 py
 ru2020
+sg
 us_asc
 us2023
 yt

@@ -6,29 +6,26 @@ import { useSelectorDisplay } from './SelectorDisplayContext';
 import { getOptionStyle } from './SelectorOption';
 
 type Props = {
-  disabled?: boolean;
   position?: PositionInGroup;
 };
 
 const SelectorDropdownLabel: React.FC<React.PropsWithChildren<Props>> = ({
   children,
-  disabled = false,
   position = PositionInGroup.Middle,
 }) => {
   const { display } = useSelectorDisplay();
 
   return (
-    <button
-      className="secondaryHoverableText" // grey unless hovered over
-      disabled={disabled}
+    <span
+      className={'option secondaryHoverableText ' + position} // grey unless hovered over
       style={{
         ...getOptionStyle(display, false, position),
         lineHeight: '0.5em',
+        cursor: 'default',
       }}
-      type="button"
     >
-      <div style={{ fontSize: '0.75em' }}>{children}</div>
-    </button>
+      <span style={{ fontSize: '0.75em' }}>{children}</span>
+    </span>
   );
 };
 

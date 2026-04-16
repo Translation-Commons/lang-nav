@@ -3,12 +3,13 @@
 #isoRegionCode		EC
 #yearCollected		2010
 #datePublished		2012
-#populationEligible		14,585,458
+#population		14,585,458
 #notes		Census - de facto - complete tabulation
-#mode		Speaks
+#languageUse		Speaks
 #acquisitionOrder		Any
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	ec2010
 mul	Total	14,585,458
 spa	Castellano	13,570,858

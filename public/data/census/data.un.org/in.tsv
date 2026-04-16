@@ -3,12 +3,13 @@
 #isoRegionCode		IN
 #yearCollected		2001
 #datePublished		2007
-#populationEligible		1,028,610,328
+#population		1,028,610,328
 #notes		Census - de facto - complete tabulation
 #languagesIncluded		Official
 #sampleRate		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
+#presentedBy	data.un.org	
 Language Code	Language Name	in2001
 mul	Total	1,028,610,328
 hin	Hindi	422,048,642

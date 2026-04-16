@@ -8,7 +8,7 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { CensusData } from './CensusTypes';
+import { CensusCollectorType, CensusData } from './CensusTypes';
 
 interface Props {
   census: CensusData;
@@ -19,12 +19,16 @@ const CensusCard: React.FC<Props> = ({ census }) => {
     territory,
     collectorType,
     yearCollected,
-    mode,
+    languageUse,
     acquisitionOrder,
     domain,
     languageCount,
   } = census;
-  const languageUseParts = [mode, acquisitionOrder, domain].filter(Boolean);
+  const languageUseParts = [
+    languageUse,
+    acquisitionOrder !== 'Any' && acquisitionOrder,
+    domain && `@${domain}`,
+  ].filter(Boolean);
 
   return (
     <div>
@@ -44,7 +48,11 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         field={Field.SourceType}
         description="The type of organization that collected this census"
       >
-        {collectorType}
+        {collectorType === CensusCollectorType.Secondary ? (
+          <Deemphasized>Secondary source</Deemphasized>
+        ) : (
+          collectorType
+        )}
       </CardField>
 
       <CardField
@@ -63,7 +71,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         {languageUseParts.length > 0 ? (
           languageUseParts.join(', ')
         ) : (
-          <Deemphasized>Unknown</Deemphasized>
+          <Deemphasized>Unspecified</Deemphasized>
         )}
       </CardField>
 

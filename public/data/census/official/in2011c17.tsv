@@ -10,12 +10,12 @@
 #geographicScope	Whole Country				
 #age	Any				
 #gender	Any				
-#mode	Speaks				
+#languageUse	Speaks				
 #acquisitionOrder		L1	L2	L3	Any
 #domain	Home				
 #responsesPerIndividual	1				
 #sampleRate	1				
-#populationEligible	1,210,854,977				
+#population	1,210,854,977				
 #languagesIncluded	122 Major language groups				
 #notes			Added together from appearance in multiple rows	Added together from appearance in multiple rows	Summed up from the other data
 Language Code	Language Name	Population by Mothertongue			

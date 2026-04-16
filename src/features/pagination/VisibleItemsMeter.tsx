@@ -23,7 +23,7 @@ interface Props {
 }
 
 const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBar = true }) => {
-  const { page, limit } = usePageParams();
+  const { page: pageParam, limit } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByConnections = getFilterByConnections();
   const filterByScope = getScopeFilter();
@@ -41,14 +41,15 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
 
   // Compute other counts
   const nPages = limit < 1 ? 1 : Math.ceil(nFiltered / limit);
+  const currentPage = pageParam > nPages || pageParam < 1 ? 1 : pageParam; // Reset to page 1 if the current page is out of bounds
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
 
   // nShown
   let nShown = limit;
-  if (page > nPages || limit < 1) nShown = 0;
-  if (page === nPages /* last page */) nShown = nFiltered - (nPages - 1) * limit;
+  if (limit < 1) nShown = nFiltered;
+  if (currentPage === nPages /* last page */) nShown = nFiltered - (nPages - 1) * limit;
 
   return (
     <div>
@@ -72,7 +73,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
               </div>
             }
           >
-            {nShown.toLocaleString()}
+            {nShown?.toLocaleString()}
           </Hoverable>
           {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
         </div>
@@ -108,7 +109,7 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
   return (
     <div>
       <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
-      There are <strong>{nShown.toLocaleString()}</strong> items visible, this may impact page
+      There are <strong>{nShown?.toLocaleString()}</strong> items visible, this may impact page
       performance. Consider reducing the limit to{' '}
       <HoverableButton
         onClick={() => updatePageParams({ limit: threshold })}

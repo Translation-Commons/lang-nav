@@ -3,12 +3,13 @@
 #isoRegionCode	GU		
 #yearCollected		2000	2010
 #datePublished		2002	2013
-#populationEligible		138,020	145,069
+#population		138,020	145,069
 #notes		Including armed forces stationed in the area. Census - de jure - complete tabulation	Census - de jure - complete tabulation
 #age	5+		
 #responsesPerIndividual			1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	gu2000	gu2010
 mul	Total	138,020	145,069
 eng	English	52,831	63,238

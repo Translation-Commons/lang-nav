@@ -3,7 +3,6 @@ import React from 'react';
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import CellLabel from '@shared/containers/CellLabel';
@@ -29,7 +28,7 @@ const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ l
   const localeNameWithoutTerritory = getLocaleName(locale, false);
   const territoryName = locale.territory?.nameDisplay || 'territory';
   const fromCLDR =
-    populationCensus?.collectorType === CensusCollectorType.CLDR ||
+    populationCensus?.presentedBy === 'CLDR' ||
     locale.populationSource === PopulationSourceCategory.CLDR;
   const isAdjusted = populationAdjusted !== populationSpeaking;
 

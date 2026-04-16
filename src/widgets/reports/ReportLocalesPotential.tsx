@@ -20,7 +20,7 @@ import usePotentialLocales from '@entities/locale/usePotentialLocales';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
-const PotentialLocales: React.FC = () => {
+const ReportLocalesPotential: React.FC = () => {
   const { percentThreshold: minInCountry, percentThresholdSelector: minInCountrySelector } =
     usePotentialLocaleThreshold(
       <SelectorLabel
@@ -56,7 +56,6 @@ const PotentialLocales: React.FC = () => {
 
   return (
     <div>
-      <h1>Potential Locales</h1>
       <p>
         This page lists locales from Census data that are not in the list of defined locales. There
         are too many possible combinations of language + territory + variation information, so the
@@ -229,4 +228,4 @@ function getLocaleExportString(locale: LocaleData): string {
   return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${populationSource}\t${locale.populationSpeaking}\t${locale.officialStatus ?? ''}\n`;
 }
 
-export default PotentialLocales;
+export default ReportLocalesPotential;

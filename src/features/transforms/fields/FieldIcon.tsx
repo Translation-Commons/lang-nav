@@ -80,6 +80,7 @@ export function getFieldIcon(field: Field): LucideIcon {
     case Field.HistoricPresence:
       return ClockIcon;
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
       return LandmarkIcon;
 
     case Field.VitalityMetascore:

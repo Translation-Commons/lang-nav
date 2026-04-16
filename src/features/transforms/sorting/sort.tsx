@@ -119,6 +119,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.CLDRCoverage:
     case Field.Indigeneity:
     case Field.GovernmentStatus:
+    case Field.ECRMLProtection:
     case Field.LanguageFormedHere:
     case Field.HistoricPresence:
       return SortDirection.Descending; // High to Low, most recent to least

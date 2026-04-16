@@ -3,15 +3,16 @@
 #isoRegionCode	CA						
 #yearCollected		1996	2001	2006	2011	2016	2021
 #datePublished		1997	2009	2017	2013	2017	2022
-#populationEligible		28,528,125	27,129,865	31,241,030	32,852,325	34,767,255	36,991,980
+#population		28,528,125	27,129,865	31,241,030	32,852,325	34,767,255	36,991,980
 #notes	Census - de jure - complete tabulation				numbers don't match the trend this year		
-#mode			Speaks	Speaks			
+#languageUse			Speaks	Speaks			
 #domain			Home	Home			
 #acquisitionOrder			L1	L1		Any	Any
 #responsesPerIndividual		1	1		1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27						
 #sampleRate			0.2	0.2			
 #collectorType	Government						
+#presentedBy	data.un.org						
 Language Code	Language Name	ca1996	ca2001	ca2006	ca2011	ca2016	ca2021
 mul	Total	28,528,125	27,129,865	31,241,030	32,852,325	34,767,255	36,991,980
 eng	English	16,890,615	17,352,315	17,882,780	22,254,905	25,897,805	27,434,615

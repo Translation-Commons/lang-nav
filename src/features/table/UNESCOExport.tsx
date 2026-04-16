@@ -4,7 +4,6 @@ import React, { useCallback } from 'react';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { EthnologueDigitalSupport } from '@entities/language/LanguageTypes';
 import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
@@ -42,7 +41,7 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
       ? Math.min(...pops).toLocaleString() + ' - ' + Math.max(...pops).toLocaleString()
       : '';
   let popYear = locale.populationCensus?.yearCollected.toString();
-  if (locale.populationCensus?.collectorType === CensusCollectorType.CLDR) popYear = '';
+  if (locale.populationCensus?.presentedBy === 'CLDR') popYear = '';
   const hasWritingSystem = lang.primaryWritingSystem && lang.primaryWritingSystem.ID !== 'Zxxx';
   let popSource = locale.populationCensus?.collectorName ?? locale.populationSource ?? '';
   if (locale.populationCensus?.url) popSource += ' ' + locale.populationCensus?.url;

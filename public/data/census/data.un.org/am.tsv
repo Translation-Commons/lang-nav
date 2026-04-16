@@ -3,14 +3,15 @@
 #isoRegionCode	AM			
 #yearCollected		2001	2011	2022
 #datePublished		2003	2013	2024
-#populationEligible		3,213,011	3,018,854	2,932,731
+#population		3,213,011	3,018,854	2,932,731
 #notes	Census - de jure - complete tabulation			
-#mode		Speaks		
+#languageUse		Speaks		
 #domain		Home		
 #acquisitionOrder		L1		
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
+#presentedBy	data.un.org			
 Language Code	Language Name	am2001	am2011	am2022
 mul	Total	3,213,011	3,018,854	2,932,731
 hye	Armenian	3,139,152	2,956,615	2,851,158

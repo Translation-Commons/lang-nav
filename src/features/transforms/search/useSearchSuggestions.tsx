@@ -1,7 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import useEntities from '@features/data/context/useEntities';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 
@@ -16,37 +15,10 @@ import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
 import HighlightedObjectField from './HighlightedObjectField';
 
 export default function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
-  const { searchBy, objectType } = usePageParams();
-  const { censuses, territories, languagesInSelectedSource, locales, writingSystems, variants } =
-    useDataContext();
+  const { searchBy } = usePageParams();
+  const pageObjects = useEntities();
   const filterBy = useFilters();
   const filterLabels = getFilterLabels();
-
-  const objects = useMemo(() => {
-    switch (objectType) {
-      case ObjectType.Language:
-        return languagesInSelectedSource;
-      case ObjectType.Locale:
-        return locales;
-      case ObjectType.Territory:
-        return territories;
-      case ObjectType.WritingSystem:
-        return writingSystems;
-      case ObjectType.Census:
-        return Object.values(censuses);
-      case ObjectType.Variant:
-        return variants;
-    }
-  }, [
-    censuses,
-    languagesInSelectedSource,
-    locales,
-    territories,
-    variants,
-    writingSystems,
-    objectType,
-    searchBy,
-  ]);
 
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
     const getMatchDistance = (object: ObjectData): number => {
@@ -83,7 +55,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const getSuggestions = useCallback(
     async (query: string) => {
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
-      return (objects || [])
+      return (pageObjects || [])
         .filter(substringFilter)
         .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
         .slice(0, SUGGESTION_LIMIT)
@@ -100,7 +72,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
           return { objectID: object.ID, searchString, label, group: getMatchGroup(object) };
         });
     },
-    [objects, searchBy, getMatchDistance, getMatchGroup],
+    [pageObjects, searchBy, getMatchDistance, getMatchGroup],
   );
 
   return getSuggestions;

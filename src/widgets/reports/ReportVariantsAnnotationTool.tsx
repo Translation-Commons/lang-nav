@@ -8,15 +8,13 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 import VariantAnnotationTable from '@entities/variant/VariantAnnotationTable';
 import { VariantData, VariantType } from '@entities/variant/VariantTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
-
 enum IncludeCriteria {
   HasData = 'has data',
   MissingData = 'missing data',
   Any = 'any',
 }
 
-const VariantAnnotationReport: React.FC = () => {
+const ReportVariantsAnnotationTool: React.FC = () => {
   const { variants } = useDataContext();
 
   const [includeCriteria, setIncludeCriteria] = useState(IncludeCriteria.Any);
@@ -49,7 +47,7 @@ const VariantAnnotationReport: React.FC = () => {
   }, [variants]);
 
   return (
-    <CollapsibleReport title="Variant Annotations">
+    <>
       This is a tool to help add annotations to variants, such as classifying it as orthographic or
       dialectal. For dialects there is also an option to specify which languoid it corresponds to.
       <Selector<IncludeCriteria>
@@ -69,8 +67,8 @@ const VariantAnnotationReport: React.FC = () => {
         <CopyIcon size="1em" />
         Copy annotated variants ({changedVariants.length})
       </button>
-    </CollapsibleReport>
+    </>
   );
 };
 
-export default VariantAnnotationReport;
+export default ReportVariantsAnnotationTool;

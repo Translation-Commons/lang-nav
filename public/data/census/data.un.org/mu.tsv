@@ -3,14 +3,15 @@
 #isoRegionCode		MU	MU
 #yearCollected		2000	2011
 #datePublished		2003	2012
-#populationEligible		1,178,848	1,236,817
+#population		1,178,848	1,236,817
 #notes		Census - de jure - complete tabulation	Excludes the islands of St. Brandon and Agalega. Census - de jure - complete tabulation
-#mode		Speaks	
+#languageUse		Speaks	
 #domain		Home	
 #acquisitionOrder		Any	
 #responsesPerIndividual		1	1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
+#presentedBy	data.un.org		
 Language Code	Language Name	mu2000	mu2011
 mul	Total	1,178,848	1,236,817
 mfe	Creole	826,152	1,069,874

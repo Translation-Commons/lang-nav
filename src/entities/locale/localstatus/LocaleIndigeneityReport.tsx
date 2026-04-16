@@ -7,7 +7,6 @@ import useFilteredObjects from '@features/transforms/filtering/useFilteredObject
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import LinkButton from '@shared/ui/LinkButton';
 
 import LocaleIndigeneityTable from './LocaleIndigeneityTable';
@@ -56,17 +55,19 @@ const LocaleIndigeneityReport: React.FC = () => {
   }, [changedLocales]);
 
   return (
-    <CollapsibleReport title={`Indigeneity Analysis (${includeCriteria} ${viewedLocales.length})`}>
-      This report predicts if a locale is indigenous based on very coarse factors and compares
-      against the data we have. As we add more complexity to the algorithm it may become more
-      reliable. Predictions are shown in a lighter colored text than user-entered data. You can
-      click the cycle button to accept a prediction, switch to the other state, or switch back to
-      unknown. To save these changes to langnav, use the button at the bottom to copy the changed
-      data and submit a PR to update
-      <LinkButton href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
-        indigeneity.tsv
-      </LinkButton>
-      .
+    <>
+      <div>
+        This report predicts if a locale is indigenous based on very coarse factors and compares
+        against the data we have. As we add more complexity to the algorithm it may become more
+        reliable. Predictions are shown in a lighter colored text than user-entered data. You can
+        click the cycle button to accept a prediction, switch to the other state, or switch back to
+        unknown. To save these changes to langnav, use the button at the bottom to copy the changed
+        data and submit a PR to update
+        <LinkButton href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
+          indigeneity.tsv
+        </LinkButton>
+        .
+      </div>
       <Selector<IncludeCriteria>
         selectorLabel="Include Locales that..."
         selected={includeCriteria}
@@ -81,7 +82,7 @@ const LocaleIndigeneityReport: React.FC = () => {
         <CopyIcon size="1em" />
         Copy changed locales ({changedLocales.length})
       </button>
-    </CollapsibleReport>
+    </>
   );
 };
 

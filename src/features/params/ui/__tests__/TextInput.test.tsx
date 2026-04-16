@@ -19,7 +19,7 @@ describe('TextInput component', () => {
   const createUser = () => userEvent.setup();
   const flushTimers = async () => {
     await act(async () => {
-      await new Promise((resolve) => setTimeout(resolve, 150));
+      await new Promise((resolve) => setTimeout(resolve, 300));
     });
   };
 
