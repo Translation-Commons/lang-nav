@@ -16,6 +16,12 @@ vi.mock('@features/params/usePageParams', () => ({
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
 }));
+vi.mock('react-router-dom', () => ({
+  Navigate: vi.fn(),
+  Route: vi.fn(),
+  Routes: vi.fn(),
+  useLocation: vi.fn(),
+}));
 
 describe('FilterSelector', () => {
   it('renders the correct selector based on the field prop', () => {

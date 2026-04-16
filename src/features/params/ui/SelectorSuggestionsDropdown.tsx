@@ -1,11 +1,10 @@
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import HoverableInternalLinkButton from '@features/layers/hovercard/HoverableInternalLinkButton';
 
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import { PageParamKey } from '../PageParamTypes';
-import usePageParams from '../usePageParams';
 
 import { SelectorDisplay } from './SelectorDisplayContext';
 import { SelectorDropdown } from './SelectorDropdown';
@@ -46,7 +45,7 @@ const SelectorSuggestionsDropdown: React.FC<Props> = ({
       {suggestions.map((s, i) => (
         <React.Fragment key={i}>
           {i > 0 && suggestions[i - 1].group !== s.group && (
-            <SelectorDropdownLabel disabled={true} position={PositionInGroup.Middle}>
+            <SelectorDropdownLabel position={PositionInGroup.Middle}>
               {s.group}
             </SelectorDropdownLabel>
           )}
@@ -84,42 +83,39 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     position,
   );
   if (pageParameter === PageParamKey.searchString) {
-    // Does not need to update suggestions
-    return <SuggestionRowDetails suggestion={suggestion} style={style} />;
+    // Internal links to open the details page
+    return <SuggestionRowOpenDetails suggestion={suggestion} style={style} />;
   }
 
   return (
-    <button
+    <a
+      className="option"
       onMouseDown={onKeyDown}
       onClick={() => onClick(suggestion)}
       style={style}
       role="option"
-      type="button"
     >
       {suggestion.label}
-    </button>
+    </a>
   );
 };
 
-const SuggestionRowDetails: React.FC<{
+const SuggestionRowOpenDetails: React.FC<{
   suggestion: Suggestion;
   style?: React.CSSProperties;
 }> = ({ style, suggestion }) => {
   const { objectID, searchString, label } = suggestion;
-  const { updatePageParams } = usePageParams();
-
-  const goToDetails = () => {
-    updatePageParams({ objectID, searchString });
-  };
 
   return (
-    <HoverableButton
+    <HoverableInternalLinkButton
+      className="option"
       hoverContent={<>Open the details pane for {searchString}</>}
-      onClick={goToDetails}
+      keepOldParams={true}
+      params={{ objectID, searchString }}
       style={style}
     >
       {label}
-    </HoverableButton>
+    </HoverableInternalLinkButton>
   );
 };
 

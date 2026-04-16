@@ -64,7 +64,7 @@ const TextInput: React.FC<Props> = ({
           setCurrentValue(value);
           isUpdatingFromSuggestions.current = false;
         }
-      }, 100);
+      }, 200);
       return () => clearTimeout(timer);
     },
     [onSubmit, setShowSuggestions],

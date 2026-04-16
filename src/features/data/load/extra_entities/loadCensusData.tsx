@@ -77,7 +77,7 @@ export function parseCensusImport(fileInput: string, filePath: string): CensusIm
       if (languageName === languageName.toUpperCase()) {
         languageName = toTitleCase(languageName);
       }
-      if (languageName.match(/official|indigenous|native/i)) {
+      if (languageName.match(/official|indigenous|native/i) && languageCodes[0] !== 'aus') {
         warnings.push(
           `Language name "${languageName}" looks like it contains status information that should be removed.`,
         );

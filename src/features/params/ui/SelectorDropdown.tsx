@@ -38,6 +38,8 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
             display: 'flex',
             flexDirection: 'column',
             width: 'fit-content',
+            borderRadius: '1em',
+            backgroundColor: 'var(--color-background)',
           }}
         >
           {children}
