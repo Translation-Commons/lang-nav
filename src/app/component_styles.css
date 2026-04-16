@@ -44,7 +44,7 @@ button,
   background-color: var(--color-button-secondary);
 }
 
-.option-inline-icon {
+.button-inline-icon {
   padding: 0.125em 0.25em 0.125em 0.125em;
   vertical-align: sub;
   height: 1em;

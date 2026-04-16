@@ -11,6 +11,7 @@ import TransformEnum from '@features/transforms/TransformEnum';
 import LanguageFilterSelector from './LanguageFilterSelector';
 import LanguageModalitySelector from './LanguageModalitySelector';
 import LanguageScopeSelector from './LanguageScopeSelector';
+import PopulationFilterSelector from './PopulationFilterSelector';
 import TerritoryFilterSelector from './TerritoryFilterSelector';
 import TerritoryScopeSelector from './TerritoryScopeSelector';
 import { LanguageISOStatusSelector } from './VitalitySelector';
@@ -38,6 +39,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
       return <SearchBar />; // Technically correct but not recommended usage
     case Field.SourceForLanguage:
       return <LanguageSourceSelector display={SelectorDisplay.ButtonList} />;
+    case Field.Population:
+      return <PopulationFilterSelector />;
     default:
       return null;
   }

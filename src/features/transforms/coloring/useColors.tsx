@@ -25,10 +25,10 @@ export type ColoringFunctions = {
 };
 
 const useColors = ({ objects, colorBy: colorByInput }: Props): ColoringFunctions => {
-  const { colorBy: colorByParam, colorGradient } = usePageParams();
+  const { colorBy: colorByParam, colorGradient, populationMin } = usePageParams();
   const colorBy = colorByInput ?? colorByParam ?? Field.None;
 
-  const minValue = getMinimumValue(colorBy);
+  const minValue = getMinimumValue(colorBy, populationMin);
   const maxValue = useMemo(() => getMaximumValue(objects, colorBy), [objects, colorBy]);
   const shouldUseLogScale = shouldUseLogarithmicScale(colorBy);
   const range = shouldUseLogScale ? Math.log10(maxValue - minValue) : maxValue - minValue;
