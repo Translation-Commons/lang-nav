@@ -21,6 +21,7 @@ const SelectorDropdownLabel: React.FC<React.PropsWithChildren<Props>> = ({
       style={{
         ...getOptionStyle(display, false, position),
         lineHeight: '0.5em',
+        cursor: 'default',
       }}
     >
       <span style={{ fontSize: '0.75em' }}>{children}</span>
