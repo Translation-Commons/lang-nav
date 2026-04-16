@@ -68,7 +68,6 @@
   pointer-events: none;
 }
 
-
 .selector .secondaryHoverableText {
   color: var(--color-text-secondary);
 }
