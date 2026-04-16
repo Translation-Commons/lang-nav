@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "build:cf": "node scripts/build-cf.mjs",
     "lint": "eslint src --ext ts,tsx",
     "lint:fix": "npx prettier --write . & eslint src --ext ts,tsx --fix",
     "preview": "vite preview",
