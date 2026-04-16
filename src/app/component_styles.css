@@ -31,7 +31,7 @@ h4 {
 }
 
 button,
-.button {
+.option {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.5em 0.75em;
@@ -44,26 +44,27 @@ button,
   background-color: var(--color-button-secondary);
 }
 
-.button-inline-icon {
+.option-inline-icon {
   padding: 0.125em 0.25em 0.125em 0.125em;
   vertical-align: sub;
   height: 1em;
   width: 1em;
 }
 
-button.primary {
+button.primary,
+.option.primary {
   color: var(--color-text-on-color);
   background-color: var(--color-button-primary);
 }
 
 button:hover,
-.button:hover {
+.option:hover {
   color: var(--color-text-on-color);
   background: var(--color-button-hover);
 }
 
 button:focus,
-.button:focus {
+.option:focus {
   border-color: var(--color-button-hover);
   background: var(--color-button-hover);
 }
@@ -101,7 +102,8 @@ code {
   background: var(--color-text-highlight);
 }
 
-button:hover .highlighted {
+button:hover .highlighted,
+.option:hover .highlighted {
   color: var(--color-text);
 }
 
@@ -128,7 +130,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;
@@ -147,10 +149,6 @@ div h3:first-child {
   border-radius: 0.5em;
   padding: 0 0.25em;
   margin: 0 -0.25em;
-}
-
-.selector .secondaryHoverableText {
-  color: var(--color-text-secondary);
 }
 
 .hoverableText:hover,

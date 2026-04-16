@@ -1,7 +1,26 @@
+.selector {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.selector.optionList {
+  flex-direction: column;
+  align-items: start;
+}
+
+.selector.optionGroup {
+  gap: -0.125em;
+}
+
 .selector button,
+.selector .option,
 .selector input,
 .selector label {
-  border: 0.125em solid var(--color-button-primary);
+  border-width: 0.125em;
+  border-color: var(--color-button-primary);
+  border-style: solid;
 }
 
 .selector input {
@@ -10,7 +29,7 @@
 }
 
 .selector button,
-.selector .button {
+.selector .option {
   color: var(--color-button-primary);
   background-color: var(--color-background);
 }
@@ -26,7 +45,7 @@
 }
 
 .selector button:hover,
-.selector .button:hover {
+.selector .option:hover {
   color: var(--color-text-on-color);
   background-color: var(--color-button-hover);
 }
@@ -42,7 +61,14 @@
 }
 
 .selector button:disabled,
-.selector button:disabled:hover {
+.selector button:disabled:hover,
+.selector .option:disabled,
+.selector .option:disabled:hover {
   color: var(--color-text-secondary);
   pointer-events: none;
+}
+
+
+.selector .secondaryHoverableText {
+  color: var(--color-text-secondary);
 }

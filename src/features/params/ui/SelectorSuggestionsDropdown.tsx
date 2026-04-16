@@ -45,7 +45,7 @@ const SelectorSuggestionsDropdown: React.FC<Props> = ({
       {suggestions.map((s, i) => (
         <React.Fragment key={i}>
           {i > 0 && suggestions[i - 1].group !== s.group && (
-            <SelectorDropdownLabel disabled={true} position={PositionInGroup.Middle}>
+            <SelectorDropdownLabel position={PositionInGroup.Middle}>
               {s.group}
             </SelectorDropdownLabel>
           )}
@@ -88,15 +88,15 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
   }
 
   return (
-    <button
+    <a
+      className="option"
       onMouseDown={onKeyDown}
       onClick={() => onClick(suggestion)}
       style={style}
       role="option"
-      type="button"
     >
       {suggestion.label}
-    </button>
+    </a>
   );
 };
 
@@ -108,17 +108,11 @@ const SuggestionRowOpenDetails: React.FC<{
 
   return (
     <HoverableInternalLinkButton
-      className="button"
+      className="option"
       hoverContent={<>Open the details pane for {searchString}</>}
       keepOldParams={true}
       params={{ objectID, searchString }}
-      style={{
-        ...style,
-        overflow: 'hidden',
-        textOverflow: 'ellipsis',
-        whiteSpace: 'nowrap',
-        maxWidth: '23em',
-      }}
+      style={style}
     >
       {label}
     </HoverableInternalLinkButton>
