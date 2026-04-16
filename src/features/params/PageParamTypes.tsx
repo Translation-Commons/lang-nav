@@ -79,6 +79,8 @@ export enum PageParamKey {
   objectID = 'objectID',
   objectType = 'objectType',
   page = 'page',
+  populationMax = 'populationMax',
+  populationMin = 'populationMin',
   profile = 'profile',
   reportID = 'reportID',
   scaleBy = 'scaleBy',
@@ -111,6 +113,8 @@ export type PageParams = {
   objectID?: string;
   objectType: ObjectType;
   page: number; // 0 indexed
+  populationMax: number;
+  populationMin: number;
   profile: ProfileType;
   reportID: ReportID;
   searchBy: SearchableField;
@@ -141,6 +145,8 @@ export type PageParamsOptional = {
   objectID?: string;
   objectType?: ObjectType;
   page?: number;
+  populationMax?: number;
+  populationMin?: number;
   profile?: ProfileType;
   reportID?: ReportID;
   scaleBy?: Field;

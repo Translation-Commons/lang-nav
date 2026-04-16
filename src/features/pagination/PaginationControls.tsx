@@ -23,8 +23,6 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
     setCurrentPage(paramPage);
   }, [paramPage]);
 
-  if (totalPages <= 1) return <></>;
-
   const setPageToBeginning = useCallback(() => {
     setCurrentPage(1);
     updatePageParams({ page: 1 });
@@ -41,6 +39,8 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
     setCurrentPage(totalPages);
     updatePageParams({ page: totalPages });
   }, [updatePageParams, totalPages]);
+
+  if (totalPages <= 1) return <></>;
 
   const compactStyle: React.CSSProperties = {
     lineHeight: '1.5',
