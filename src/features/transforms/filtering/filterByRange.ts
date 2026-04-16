@@ -10,11 +10,15 @@ export function buildFilterByPopulation(
   populationMax: number,
 ): FilterFunctionType {
   const defaults = getDefaultParams();
-  if (populationMin === defaults.populationMin && populationMax === defaults.populationMax)
+  const populationUpperBound =
+    populationMax < 0 || populationMax >= defaults.populationMax
+      ? Number.MAX_SAFE_INTEGER
+      : populationMax;
+  if (populationMin === defaults.populationMin && populationMax >= defaults.populationMax)
     return () => true;
 
   return (object: ObjectData): boolean => {
     const population = getObjectPopulation(object) ?? -1; // treat undefined population as -1 for optional filtering
-    return population >= populationMin && population <= populationMax;
+    return population >= populationMin && population <= populationUpperBound;
   };
 }

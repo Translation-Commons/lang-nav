@@ -31,7 +31,7 @@ const useFilteredObjects = ({
 }: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const pageObjects = useEntities();
-  // TODO use useFilters
+  // TODO use useFilters for all of these
   const filters = useFilters();
   const filterByScope = useScope ? getScopeFilter() : () => true;
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
