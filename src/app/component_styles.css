@@ -30,7 +30,8 @@ h4 {
   margin-bottom: 4px;
 }
 
-button {
+button,
+.button {
   border-radius: 8px;
   border: 1px solid transparent;
   padding: 0.5em 0.75em;
@@ -55,12 +56,14 @@ button.primary {
   background-color: var(--color-button-primary);
 }
 
-button:hover {
+button:hover,
+.button:hover {
   color: var(--color-text-on-color);
   background: var(--color-button-hover);
 }
 
-button:focus {
+button:focus,
+.button:focus {
   border-color: var(--color-button-hover);
   background: var(--color-button-hover);
 }

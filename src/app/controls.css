@@ -9,7 +9,8 @@
   background: var(--color-button-primary);
 }
 
-.selector button {
+.selector button,
+.selector .button {
   color: var(--color-button-primary);
   background-color: var(--color-background);
 }
@@ -24,7 +25,8 @@
   background-color: var(--color-background);
 }
 
-.selector button:hover {
+.selector button:hover,
+.selector .button:hover {
   color: var(--color-text-on-color);
   background-color: var(--color-button-hover);
 }

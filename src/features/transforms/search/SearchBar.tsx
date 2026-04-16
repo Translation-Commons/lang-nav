@@ -1,5 +1,6 @@
 import { SearchIcon } from 'lucide-react';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
 import {
@@ -13,8 +14,15 @@ import useSearchSuggestions from './useSearchSuggestions';
 
 const SearchBar: React.FC = () => {
   const { searchString, updatePageParams } = usePageParams();
+  const location = useLocation();
   const getSearchSuggestions = useSearchSuggestions();
-  const setSearchString = (value: string) => updatePageParams({ searchString: value });
+  const setSearchString = useCallback(
+    (value: string) => {
+      // Only update the searchString param if we're already on the data page
+      if (location.pathname === '/data') updatePageParams({ searchString: value });
+    },
+    [updatePageParams],
+  );
   return (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
       <form

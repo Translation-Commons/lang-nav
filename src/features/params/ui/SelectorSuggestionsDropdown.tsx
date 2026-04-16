@@ -1,11 +1,10 @@
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import HoverableInternalLinkButton from '@features/layers/hovercard/HoverableInternalLinkButton';
 
 import { getPositionInGroup, PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import { PageParamKey } from '../PageParamTypes';
-import usePageParams from '../usePageParams';
 
 import { SelectorDisplay } from './SelectorDisplayContext';
 import { SelectorDropdown } from './SelectorDropdown';
@@ -84,8 +83,8 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
     position,
   );
   if (pageParameter === PageParamKey.searchString) {
-    // Does not need to update suggestions
-    return <SuggestionRowDetails suggestion={suggestion} style={style} />;
+    // Internal links to open the details page
+    return <SuggestionRowOpenDetails suggestion={suggestion} style={style} />;
   }
 
   return (
@@ -101,25 +100,28 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
   );
 };
 
-const SuggestionRowDetails: React.FC<{
+const SuggestionRowOpenDetails: React.FC<{
   suggestion: Suggestion;
   style?: React.CSSProperties;
 }> = ({ style, suggestion }) => {
   const { objectID, searchString, label } = suggestion;
-  const { updatePageParams } = usePageParams();
-
-  const goToDetails = () => {
-    updatePageParams({ objectID, searchString });
-  };
 
   return (
-    <HoverableButton
+    <HoverableInternalLinkButton
+      className="button"
       hoverContent={<>Open the details pane for {searchString}</>}
-      onClick={goToDetails}
-      style={style}
+      keepOldParams={true}
+      params={{ objectID, searchString }}
+      style={{
+        ...style,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+        whiteSpace: 'nowrap',
+        maxWidth: '23em',
+      }}
     >
       {label}
-    </HoverableButton>
+    </HoverableInternalLinkButton>
   );
 };
 
