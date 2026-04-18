@@ -36,47 +36,54 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageNames lang={lang} />
       <LanguageCodes lang={lang} />
 
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1em',
-          alignItems: 'stretch',
-          marginBottom: '1em',
-        }}
-      >
-        <div style={{ flex: '1 1 200px' }}>
+      <FlexRow>
+        <FlexItem>
           <LanguagePopulationDetails lang={lang} />
-        </div>
-        <div style={{ flex: '1 1 200px' }}>
+        </FlexItem>
+        <FlexItem>
           <LanguageWikipediaSection lang={lang} />
-        </div>
-        <div style={{ flex: '1 1 200px' }}>
+        </FlexItem>
+        <FlexItem>
           <LanguageVitalitySection lang={lang} />
-        </div>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '1em',
-          alignItems: 'stretch',
-          marginBottom: '1em',
-        }}
-      >
-        <div style={{ flex: '2 1 300px' }}>
+        </FlexItem>
+      </FlexRow>
+
+      <FlexRow>
+        <FlexItem flex="2 1 300px">
           <LanguageSpeakersByTerritorySection lang={lang} />
-        </div>
-        <div style={{ flex: '1 1 200px' }}>
+        </FlexItem>
+        <FlexItem>
           <LanguageDetailsVitalityAndViability lang={lang} />
-        </div>
-      </div>
+        </FlexItem>
+      </FlexRow>
+
       <LanguageAttributes lang={lang} />
       <LanguageConnections lang={lang} />
       <LanguageLocation lang={lang} />
     </div>
   );
 };
+
+export default LanguageDetails;
+
+const FlexRow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div
+    style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '1em',
+      alignItems: 'stretch',
+      marginBottom: '1em',
+    }}
+  >
+    {children}
+  </div>
+);
+
+const FlexItem: React.FC<{ children: React.ReactNode; flex?: string }> = ({
+  children,
+  flex = '1 1 200px',
+}) => <div style={{ flex }}>{children}</div>;
 
 const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
@@ -139,5 +146,3 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     </DetailsSection>
   );
 };
-
-export default LanguageDetails;

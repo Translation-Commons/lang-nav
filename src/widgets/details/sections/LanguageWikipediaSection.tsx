@@ -26,10 +26,18 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
         }}
       >
         <StatBlock label="Articles">
-          {isActive && wikipedia ? <CountCompact count={wikipedia.articles} /> : <NotApplicableDisplay />}
+          {isActive && wikipedia ? (
+            <CountCompact count={wikipedia.articles} />
+          ) : (
+            <NotApplicableDisplay />
+          )}
         </StatBlock>
         <StatBlock label="Active Users">
-          {isActive && wikipedia ? <CountCompact count={wikipedia.activeUsers} /> : <NotApplicableDisplay />}
+          {isActive && wikipedia ? (
+            <CountCompact count={wikipedia.activeUsers} />
+          ) : (
+            <NotApplicableDisplay />
+          )}
         </StatBlock>
       </div>
     </DetailsSection>
