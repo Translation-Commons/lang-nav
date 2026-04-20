@@ -1,2 +1,8 @@
 # Keep Markdown formatting as-is
 test-coverage.md
+
+# External submodule / MCP servers (has its own formatting conventions)
+servers/
+
+# Playwright MCP session artifacts
+.playwright-mcp/

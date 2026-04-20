@@ -44,6 +44,28 @@ However, if you want to add a lot more data or add contested data it may be bett
 
 Always cite your sources and avoid using proprietary data without permission.
 
+## Updating public preview images
+
+The images in `public/` (`preview.png`, `cardlist.png`, `table.png`, `hierarchy.png`, `map.png`, `reports.png`) are Playwright screenshots of the app used in the README and social previews. They need to be refreshed whenever the UI changes visually.
+
+**Locally:**
+
+```bash
+npm run update-screenshots
+```
+
+This builds the app, launches a headless browser at 1920×1080, captures each view, and overwrites the images in `public/` in place.
+
+**Via CI (on a PR):**
+
+Add the `update-preview-images` label to your pull request. The workflow will capture fresh screenshots and commit them directly to your branch, then remove the label.
+
+**Via CI (manual run on any branch):**
+
+Go to **Actions → Update Public Preview Images → Run workflow** and select the target branch.
+
+> Note: this is not a regression test — it always overwrites the images. Run it after any UI change that affects the app's appearance.
+
 ## Pull request checklist
 
 A checklist is provided automatically when you create a pull request with [PULL_REQUEST_TEMPLATE.md](/.github/PULL_REQUEST_TEMPLATE.md).
