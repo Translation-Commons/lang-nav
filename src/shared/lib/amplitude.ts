@@ -1,6 +1,14 @@
 import * as amplitude from '@amplitude/unified';
 
-const AMPLITUDE_API_KEY = import.meta.env.VITE_AMPLITUDE_API_KEY;
+import { getLoggedDefaults, parseSearchParams, remapKeys } from './amplitudeFormat';
+
+// Tracking runs in prod by default. Set VITE_AMPLITUDE_DEV_ENABLED=true to
+// also send events from `npm run dev`.
+const AMPLITUDE_DEV_ENABLED = import.meta.env.VITE_AMPLITUDE_DEV_ENABLED === 'true';
+const AMPLITUDE_API_KEY =
+  import.meta.env.PROD || AMPLITUDE_DEV_ENABLED
+    ? import.meta.env.VITE_AMPLITUDE_API_KEY
+    : undefined;
 
 let hasInitializedAmplitude = false;
 let lastTrackedPage = '';
@@ -22,18 +30,10 @@ export function trackEvent(eventType: string, eventProperties?: Record<string, u
   if (typeof window === 'undefined' || !AMPLITUDE_API_KEY) return;
 
   initAmplitude();
-  amplitude.track(eventType, eventProperties);
-}
-
-function parseSearchParams(search: string): Record<string, string> {
-  const params = new URLSearchParams(search);
-  const result: Record<string, string> = {};
-
-  for (const [key, value] of params.entries()) {
-    if (value) result[key] = value;
-  }
-
-  return result;
+  amplitude.track(
+    eventType,
+    eventProperties ? (remapKeys(eventProperties) as Record<string, unknown>) : undefined,
+  );
 }
 
 export function trackPageView(pathname: string, search: string) {
@@ -46,8 +46,8 @@ export function trackPageView(pathname: string, search: string) {
   lastTrackedPage = page;
 
   trackEvent('page_viewed', {
-    page,
     pathname,
-    params: parseSearchParams(search),
+    ...getLoggedDefaults(),
+    ...parseSearchParams(search),
   });
 }

@@ -4,7 +4,7 @@ Lang Navigator uses [Amplitude](https://amplitude.com) for product analytics to 
 
 ## Setup
 
-The Amplitude SDK (`@amplitude/unified`) is initialized in `src/shared/lib/amplitude.ts`. It requires a `VITE_AMPLITUDE_API_KEY` environment variable: see `.env.example`. When the key is absent, all tracking is silently skipped.
+The Amplitude SDK (`@amplitude/unified`) is initialized in `src/shared/lib/amplitude.ts`. It requires a `VITE_AMPLITUDE_API_KEY` environment variable: see `.env.example`. When the key is absent, all tracking is silently skipped. Tracking is disabled in dev builds (`npm run dev`) by default; only production builds (`npm run build`, `npm run build:cf`) send events. To also send events from `npm run dev` (useful for local verification), set `VITE_AMPLITUDE_DEV_ENABLED=true` in your `.env`.
 
 ## What we track
 
