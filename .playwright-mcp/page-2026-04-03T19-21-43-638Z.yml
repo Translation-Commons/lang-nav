@@ -1,0 +1,372 @@
+- main [ref=e4]:
+  - generic [ref=e5]:
+    - navigation [ref=e7]:
+      - link "All20" [ref=e8] [cursor=pointer]:
+        - /url: "#?"
+      - link "Passed20" [ref=e9] [cursor=pointer]:
+        - /url: "#?q=s%3Apassed"
+        - img [ref=e10]
+        - text: Passed20
+      - link "Failed0" [ref=e12] [cursor=pointer]:
+        - /url: "#?q=s%3Afailed"
+      - link "Flaky0" [ref=e13] [cursor=pointer]:
+        - /url: "#?q=s%3Aflaky"
+      - link "Skipped0" [ref=e14] [cursor=pointer]:
+        - /url: "#?q=s%3Askipped"
+      - link "Speedboard" [ref=e15] [cursor=pointer]:
+        - /url: "#?speedboard"
+        - img [ref=e16]
+      - button "Settings" [ref=e18] [cursor=pointer]:
+        - img [ref=e19]
+    - generic [ref=e21]:
+      - img
+      - textbox "Search tests" [ref=e22]
+  - generic [ref=e24]:
+    - generic [ref=e26]: "Project: chromium"
+    - generic [ref=e28]: 3/29/2026, 2:36:25 PM
+    - generic [ref=e29]: "Total time: 1.0m"
+  - generic [ref=e30]:
+    - button "language-navigator.spec.ts" [expanded] [ref=e31] [cursor=pointer]:
+      - img [ref=e32]
+      - text: language-navigator.spec.ts
+    - region [ref=e34]:
+      - generic [ref=e35]:
+        - generic [ref=e36]:
+          - generic [ref=e37]:
+            - img [ref=e39]
+            - generic [ref=e41]:
+              - link "Search › searching \"Quechua\" returns a non-empty result list" [ref=e42] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-bc35fd6a03a615f33b1c"
+              - generic [ref=e45] [cursor=pointer]: chromium
+          - generic [ref=e46]: 3.0s
+        - generic [ref=e48]:
+          - link "language-navigator.spec.ts:34" [ref=e49] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-bc35fd6a03a615f33b1c"
+            - generic [ref=e50]: language-navigator.spec.ts:34
+          - link "View Trace" [ref=e51] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/b39a3ebe4d8b615ece0c5b8193040b75722a240a.zip
+            - img [ref=e52]
+            - generic [ref=e54]: View Trace
+      - generic [ref=e55]:
+        - generic [ref=e56]:
+          - generic [ref=e57]:
+            - img [ref=e59]
+            - generic [ref=e61]:
+              - link "Search › result cards show language code in brackets" [ref=e62] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-53334dec5ce896483cb5"
+              - generic [ref=e65] [cursor=pointer]: chromium
+          - generic [ref=e66]: 2.5s
+        - generic [ref=e68]:
+          - link "language-navigator.spec.ts:47" [ref=e69] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-53334dec5ce896483cb5"
+            - generic [ref=e70]: language-navigator.spec.ts:47
+          - link "View Trace" [ref=e71] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/bba0d0db4abe02b0242ca407c06849c3d57b2480.zip
+            - img [ref=e72]
+            - generic [ref=e74]: View Trace
+      - generic [ref=e75]:
+        - generic [ref=e76]:
+          - generic [ref=e77]:
+            - img [ref=e79]
+            - generic [ref=e81]:
+              - link "Detail Panel — Quechua › detail panel header shows language name and ISO code" [ref=e82] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-4160c2a12d3653260313"
+              - generic [ref=e85] [cursor=pointer]: chromium
+          - generic [ref=e86]: 3.6s
+        - generic [ref=e88]:
+          - link "language-navigator.spec.ts:67" [ref=e89] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-4160c2a12d3653260313"
+            - generic [ref=e90]: language-navigator.spec.ts:67
+          - link "View Trace" [ref=e91] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/e457f27dd6f7c3660c9d59f1b00208757b2e7e50.zip
+            - img [ref=e92]
+            - generic [ref=e94]: View Trace
+      - generic [ref=e95]:
+        - generic [ref=e96]:
+          - generic [ref=e97]:
+            - img [ref=e99]
+            - generic [ref=e101]:
+              - link "Detail Panel — Quechua › detail panel shows endonym (Qhichwa)" [ref=e102] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-ed37778ed1404834849f"
+              - generic [ref=e105] [cursor=pointer]: chromium
+          - generic [ref=e106]: 2.7s
+        - generic [ref=e108]:
+          - link "language-navigator.spec.ts:74" [ref=e109] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-ed37778ed1404834849f"
+            - generic [ref=e110]: language-navigator.spec.ts:74
+          - link "View Trace" [ref=e111] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/5d5c8a2f1c4b0b3bfb8977fea4414129b72b3e05.zip
+            - img [ref=e112]
+            - generic [ref=e114]: View Trace
+      - generic [ref=e115]:
+        - generic [ref=e116]:
+          - generic [ref=e117]:
+            - img [ref=e119]
+            - generic [ref=e121]:
+              - link "Detail Panel — Quechua › breadcrumb shows correct language family path" [ref=e122] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-9589282c21c61f3d684d"
+              - generic [ref=e125] [cursor=pointer]: chromium
+          - generic [ref=e126]: 2.6s
+        - generic [ref=e128]:
+          - link "language-navigator.spec.ts:78" [ref=e129] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-9589282c21c61f3d684d"
+            - generic [ref=e130]: language-navigator.spec.ts:78
+          - link "View Trace" [ref=e131] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/2f5bd2a704b1cbff76b38c90400d678e6508c15b.zip
+            - img [ref=e132]
+            - generic [ref=e134]: View Trace
+      - generic [ref=e135]:
+        - generic [ref=e136]:
+          - generic [ref=e137]:
+            - img [ref=e139]
+            - generic [ref=e141]:
+              - link "Detail Panel — Quechua › Writing System section is present with value \"Latin\"" [ref=e142] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-3eeee4c044a2cafd0aa3"
+              - generic [ref=e145] [cursor=pointer]: chromium
+          - generic [ref=e146]: 2.7s
+        - generic [ref=e148]:
+          - link "language-navigator.spec.ts:85" [ref=e149] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-3eeee4c044a2cafd0aa3"
+            - generic [ref=e150]: language-navigator.spec.ts:85
+          - link "View Trace" [ref=e151] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/fb18d09834932f7be91c501b801efac14eceb0a5.zip
+            - img [ref=e152]
+            - generic [ref=e154]: View Trace
+      - generic [ref=e155]:
+        - generic [ref=e156]:
+          - generic [ref=e157]:
+            - img [ref=e159]
+            - generic [ref=e161]:
+              - link "Detail Panel — Quechua › population best estimate is shown" [ref=e162] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-7a99f74da84531ed12ef"
+              - generic [ref=e165] [cursor=pointer]: chromium
+          - generic [ref=e166]: 2.6s
+        - generic [ref=e168]:
+          - link "language-navigator.spec.ts:92" [ref=e169] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-7a99f74da84531ed12ef"
+            - generic [ref=e170]: language-navigator.spec.ts:92
+          - link "View Trace" [ref=e171] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/37627a9c51a5d3c660a165443115d01c2d96e258.zip
+            - img [ref=e172]
+            - generic [ref=e174]: View Trace
+      - generic [ref=e175]:
+        - generic [ref=e176]:
+          - generic [ref=e177]:
+            - img [ref=e179]
+            - generic [ref=e181]:
+              - link "Detail Panel — Quechua › language codes section lists ISO and Glottolog codes" [ref=e182] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-7c6c9b647113948dbc5c"
+              - generic [ref=e185] [cursor=pointer]: chromium
+          - generic [ref=e186]: 2.5s
+        - generic [ref=e188]:
+          - link "language-navigator.spec.ts:98" [ref=e189] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-7c6c9b647113948dbc5c"
+            - generic [ref=e190]: language-navigator.spec.ts:98
+          - link "View Trace" [ref=e191] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/160e25212995b8cab0230e5a7aed5577872c448d.zip
+            - img [ref=e192]
+            - generic [ref=e194]: View Trace
+      - generic [ref=e195]:
+        - generic [ref=e196]:
+          - generic [ref=e197]:
+            - img [ref=e199]
+            - generic [ref=e201]:
+              - link "Hierarchy View › page renders the language family tree" [ref=e202] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-a51eb16001a0405f5b91"
+              - generic [ref=e205] [cursor=pointer]: chromium
+          - generic [ref=e206]: 2.5s
+        - generic [ref=e208]:
+          - link "language-navigator.spec.ts:118" [ref=e209] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-a51eb16001a0405f5b91"
+            - generic [ref=e210]: language-navigator.spec.ts:118
+          - link "View Trace" [ref=e211] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/7c84ca02efd73320579013804b56f196adbe2fd4.zip
+            - img [ref=e212]
+            - generic [ref=e214]: View Trace
+      - generic [ref=e215]:
+        - generic [ref=e216]:
+          - generic [ref=e217]:
+            - img [ref=e219]
+            - generic [ref=e221]:
+              - link "Hierarchy View › tree nodes have expand / collapse buttons" [ref=e222] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-69b0a63fadb65a76bc77"
+              - generic [ref=e225] [cursor=pointer]: chromium
+          - generic [ref=e226]: 2.7s
+        - generic [ref=e228]:
+          - link "language-navigator.spec.ts:123" [ref=e229] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-69b0a63fadb65a76bc77"
+            - generic [ref=e230]: language-navigator.spec.ts:123
+          - link "View Trace" [ref=e231] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/1fc9cd42e87bb9cac014f1f6f11322a3b662180b.zip
+            - img [ref=e232]
+            - generic [ref=e234]: View Trace
+      - generic [ref=e235]:
+        - generic [ref=e236]:
+          - generic [ref=e237]:
+            - img [ref=e239]
+            - generic [ref=e241]:
+              - link "Hierarchy View › header shows total result count" [ref=e242] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-66250caaa4d718e5e647"
+              - generic [ref=e245] [cursor=pointer]: chromium
+          - generic [ref=e246]: 2.4s
+        - generic [ref=e248]:
+          - link "language-navigator.spec.ts:128" [ref=e249] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-66250caaa4d718e5e647"
+            - generic [ref=e250]: language-navigator.spec.ts:128
+          - link "View Trace" [ref=e251] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/c66501b765b0648c60f3870d422d95d490c0b80c.zip
+            - img [ref=e252]
+            - generic [ref=e254]: View Trace
+      - generic [ref=e255]:
+        - generic [ref=e256]:
+          - generic [ref=e257]:
+            - img [ref=e259]
+            - generic [ref=e261]:
+              - link "Hierarchy View › footer note shows how many root nodes are displayed" [ref=e262] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-e8719500d7b95ab8f736"
+              - generic [ref=e265] [cursor=pointer]: chromium
+          - generic [ref=e266]: 2.0s
+        - generic [ref=e268]:
+          - link "language-navigator.spec.ts:132" [ref=e269] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-e8719500d7b95ab8f736"
+            - generic [ref=e270]: language-navigator.spec.ts:132
+          - link "View Trace" [ref=e271] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/4d03f89eb009e165ef3b80e47dcbca1af0f070ee.zip
+            - img [ref=e272]
+            - generic [ref=e274]: View Trace
+      - generic [ref=e275]:
+        - generic [ref=e276]:
+          - generic [ref=e277]:
+            - img [ref=e279]
+            - generic [ref=e281]:
+              - link "Hierarchy View › clicking a collapsed node expands its children" [ref=e282] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-8329f56d42b8d66b7468"
+              - generic [ref=e285] [cursor=pointer]: chromium
+          - generic [ref=e286]: 3.4s
+        - generic [ref=e288]:
+          - link "language-navigator.spec.ts:137" [ref=e289] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-8329f56d42b8d66b7468"
+            - generic [ref=e290]: language-navigator.spec.ts:137
+          - link "View Trace" [ref=e291] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/5f69b6e13aaa22d20a9f9974686a83ff42c198a7.zip
+            - img [ref=e292]
+            - generic [ref=e294]: View Trace
+      - generic [ref=e295]:
+        - generic [ref=e296]:
+          - generic [ref=e297]:
+            - img [ref=e299]
+            - generic [ref=e301]:
+              - link "Tables View › table renders required column headers" [ref=e302] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-76acdcddbe202b7b170e"
+              - generic [ref=e305] [cursor=pointer]: chromium
+          - generic [ref=e306]: 2.6s
+        - generic [ref=e308]:
+          - link "language-navigator.spec.ts:158" [ref=e309] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-76acdcddbe202b7b170e"
+            - generic [ref=e310]: language-navigator.spec.ts:158
+          - link "View Trace" [ref=e311] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/977adde82d4be2821ce4b2ed5ba0a90f13f40293.zip
+            - img [ref=e312]
+            - generic [ref=e314]: View Trace
+      - generic [ref=e315]:
+        - generic [ref=e316]:
+          - generic [ref=e317]:
+            - img [ref=e319]
+            - generic [ref=e321]:
+              - link "Tables View › English appears as the top row (highest population)" [ref=e322] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-43a3f83c98da0bcd5e76"
+              - generic [ref=e325] [cursor=pointer]: chromium
+          - generic [ref=e326]: 2.7s
+        - generic [ref=e328]:
+          - link "language-navigator.spec.ts:165" [ref=e329] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-43a3f83c98da0bcd5e76"
+            - generic [ref=e330]: language-navigator.spec.ts:165
+          - link "View Trace" [ref=e331] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/caa05176835d32a5f559ae19feafe95a4df640a5.zip
+            - img [ref=e332]
+            - generic [ref=e334]: View Trace
+      - generic [ref=e335]:
+        - generic [ref=e336]:
+          - generic [ref=e337]:
+            - img [ref=e339]
+            - generic [ref=e341]:
+              - link "Tables View › table shows total result count" [ref=e342] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-39fc9a730aa051853e9c"
+              - generic [ref=e345] [cursor=pointer]: chromium
+          - generic [ref=e346]: 1.9s
+        - generic [ref=e348]:
+          - link "language-navigator.spec.ts:171" [ref=e349] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-39fc9a730aa051853e9c"
+            - generic [ref=e350]: language-navigator.spec.ts:171
+          - link "View Trace" [ref=e351] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/06f89f257d232a2be32f99b99e44a62d7c417f43.zip
+            - img [ref=e352]
+            - generic [ref=e354]: View Trace
+      - generic [ref=e355]:
+        - generic [ref=e356]:
+          - generic [ref=e357]:
+            - img [ref=e359]
+            - generic [ref=e361]:
+              - link "Tables View › pagination controls are present" [ref=e362] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-b38233ea8ecdb2e5b32c"
+              - generic [ref=e365] [cursor=pointer]: chromium
+          - generic [ref=e366]: 2.7s
+        - generic [ref=e368]:
+          - link "language-navigator.spec.ts:175" [ref=e369] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-b38233ea8ecdb2e5b32c"
+            - generic [ref=e370]: language-navigator.spec.ts:175
+          - link "View Trace" [ref=e371] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/4874b23e0b5260db0e696752306401229a873df1.zip
+            - img [ref=e372]
+            - generic [ref=e374]: View Trace
+      - generic [ref=e375]:
+        - generic [ref=e376]:
+          - generic [ref=e377]:
+            - img [ref=e379]
+            - generic [ref=e381]:
+              - link "Tables View › column configuration hint is shown" [ref=e382] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-1576aa7efd9bc256b994"
+              - generic [ref=e385] [cursor=pointer]: chromium
+          - generic [ref=e386]: 2.9s
+        - generic [ref=e388]:
+          - link "language-navigator.spec.ts:180" [ref=e389] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-1576aa7efd9bc256b994"
+            - generic [ref=e390]: language-navigator.spec.ts:180
+          - link "View Trace" [ref=e391] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/73b7caa5345c614ca66d879a7823c3241083f50b.zip
+            - img [ref=e392]
+            - generic [ref=e394]: View Trace
+      - generic [ref=e395]:
+        - generic [ref=e396]:
+          - generic [ref=e397]:
+            - img [ref=e399]
+            - generic [ref=e401]:
+              - link "Tables View › export button is present" [ref=e402] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-6bf345ae296d621e9f6f"
+              - generic [ref=e405] [cursor=pointer]: chromium
+          - generic [ref=e406]: 2.7s
+        - generic [ref=e408]:
+          - link "language-navigator.spec.ts:185" [ref=e409] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-6bf345ae296d621e9f6f"
+            - generic [ref=e410]: language-navigator.spec.ts:185
+          - link "View Trace" [ref=e411] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/0834a583ecc5fecc3c5f069e17327946fe5ac148.zip
+            - img [ref=e412]
+            - generic [ref=e414]: View Trace
+      - generic [ref=e415]:
+        - generic [ref=e416]:
+          - generic [ref=e417]:
+            - img [ref=e419]
+            - generic [ref=e421]:
+              - link "Tables View › object-type tabs are available (Language, Locale, Territory…)" [ref=e422] [cursor=pointer]:
+                - /url: "#?testId=48592ee6b198026d7f1b-5e71c4c90150858f4282"
+              - generic [ref=e425] [cursor=pointer]: chromium
+          - generic [ref=e426]: 2.9s
+        - generic [ref=e428]:
+          - link "language-navigator.spec.ts:192" [ref=e429] [cursor=pointer]:
+            - /url: "#?testId=48592ee6b198026d7f1b-5e71c4c90150858f4282"
+            - generic [ref=e430]: language-navigator.spec.ts:192
+          - link "View Trace" [ref=e431] [cursor=pointer]:
+            - /url: http://localhost:9323/trace/index.html?trace=http://localhost:9323/data/83ecb0f50abb908e4c8f64b0dcdf3ac54bd306b8.zip
+            - img [ref=e432]
+            - generic [ref=e434]: View Trace

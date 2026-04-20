@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(claude mcp add playwright -s user -- npx @playwright/mcp@latest 2>&1)",
+      "Bash(claude mcp list 2>&1)",
+      "mcp__playwright__browser_navigate",
+      "mcp__playwright__browser_click",
+      "mcp__playwright__browser_snapshot",
+      "mcp__playwright__browser_type",
+      "mcp__playwright__browser_wait_for",
+      "mcp__playwright__browser_take_screenshot",
+      "mcp__playwright__browser_evaluate",
+      "Bash(npx playwright test --reporter=list 2>&1)",
+      "Bash(npx playwright test 2>&1 | tail -10)",
+      "Bash(git check-ignore -v .claude/ servers/ playwright-report/ test-results/ .playwright/ .env .mcp.json credentials.json 2>&1)",
+      "Bash(npx playwright test \"Kannada — Tables View\" --reporter=list 2>&1)"
+    ]
+  }
+}
