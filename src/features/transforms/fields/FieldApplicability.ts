@@ -344,6 +344,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.VitalityEthnologueFine,
         Field.VitalityEthnologueCoarse,
         Field.Name, // Technically filters name and code right now, depending on SearchBy
+        Field.Population,
       ];
     default:
       return enforceExhaustiveSwitch(transform);

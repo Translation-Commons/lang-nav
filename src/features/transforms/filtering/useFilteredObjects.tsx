@@ -9,6 +9,7 @@ import getFilterBySubstring from '../search/getFilterBySubstring';
 
 import { getFilterByVitality, getScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
+import useFilters from './useFilters';
 
 type UseFilteredObjectsParams = {
   // TODO use Fields to specify which filters should be used, not these generalized booleans
@@ -16,6 +17,7 @@ type UseFilteredObjectsParams = {
   useSubstring?: boolean;
   useConnections?: boolean;
   useVitality?: boolean;
+  usePopulation?: boolean;
   inputObjects?: ObjectData[];
 };
 
@@ -24,15 +26,18 @@ const useFilteredObjects = ({
   useSubstring = true,
   useConnections = true,
   useVitality = true,
+  usePopulation = true,
   inputObjects,
 }: UseFilteredObjectsParams): { filteredObjects: ObjectData[]; allObjectsInType: ObjectData[] } => {
   // Implementation of filtering logic goes here
   const pageObjects = useEntities();
-  // TODO use useFilters
+  // TODO use useFilters for all of these
+  const filters = useFilters();
   const filterByScope = useScope ? getScopeFilter() : () => true;
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
   const filterByConnections = useConnections ? getFilterByConnections() : () => true;
   const filterByVitality = useVitality ? getFilterByVitality() : () => true;
+  const filterByPopulation = usePopulation ? filters.Population : () => true;
   const sortFunction = getSortFunction();
   const allObjectsInType = inputObjects ?? pageObjects;
 
@@ -43,7 +48,8 @@ const useFilteredObjects = ({
           filterByScope(obj) &&
           filterBySubstring(obj) &&
           filterByConnections(obj) &&
-          filterByVitality(obj),
+          filterByVitality(obj) &&
+          filterByPopulation(obj),
       )
       .sort(sortFunction);
   }, [
@@ -52,6 +58,7 @@ const useFilteredObjects = ({
     filterBySubstring,
     filterByConnections,
     filterByVitality,
+    filterByPopulation,
     sortFunction,
   ]);
 

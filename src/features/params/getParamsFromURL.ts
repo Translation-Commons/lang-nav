@@ -57,6 +57,12 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
       case PageParamKey.limit:
         params.limit = parseInt(value) || 10; // Default to 10 if parsing fails
         break;
+      case PageParamKey.populationMin:
+        params.populationMin = parseInt(value) >= -1 ? parseInt(value) : undefined;
+        break;
+      case PageParamKey.populationMax:
+        params.populationMax = parseInt(value) >= 0 ? parseInt(value) : undefined;
+        break;
 
       // Arrays
       case PageParamKey.languageScopes:

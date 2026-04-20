@@ -18,6 +18,7 @@ import {
   buildFilterByVitalityEthnologueCoarse,
   buildFilterByVitalityEthnologueFine,
 } from './filterByEnum';
+import { buildFilterByPopulation } from './filterByRange';
 
 /**
  * Common hook to get filter functions based on page params.
@@ -32,6 +33,8 @@ function useFilters(): Record<Field, FilterFunctionType> {
     languageScopes,
     languageSource,
     modalityFilter,
+    populationMax,
+    populationMin,
     searchBy,
     searchString,
     territoryFilter,
@@ -55,6 +58,9 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByVitalityEthnologueFine = buildFilterByVitalityEthnologueFine(vitalityEthFine);
   const filterByVitalityEthnologueCoarse = buildFilterByVitalityEthnologueCoarse(vitalityEthCoarse);
 
+  // Population
+  const filterByPopulation = buildFilterByPopulation(populationMin, populationMax);
+
   const alwaysTrue = () => true;
 
   return {
@@ -75,6 +81,9 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.Territory]: filterByTerritory,
     [Field.LanguageFamily]: alwaysTrue,
     [Field.SourceForLanguage]: filterByLanguageSource,
+
+    // Ranges
+    [Field.Population]: filterByPopulation,
 
     // Filters not yet constructed
     [Field.Region]: alwaysTrue, // TODO
@@ -108,7 +117,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.CountOfCensuses]: alwaysTrue,
     [Field.CountOfVariants]: alwaysTrue,
 
-    [Field.Population]: alwaysTrue,
     [Field.PopulationDirectlySourced]: alwaysTrue,
     [Field.PopulationOfDescendants]: alwaysTrue,
     [Field.PercentOfTerritoryPopulation]: alwaysTrue,

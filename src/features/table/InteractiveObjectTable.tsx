@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -34,9 +35,11 @@ function InteractiveObjectTable<T extends ObjectData>({
   tableID,
 }: Props<T>) {
   const sortFunction = getSortFunction();
+  const filters = useFilters();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByConnections = getFilterByConnections();
   const filterByVitality = getFilterByVitality();
+  const filterByPopulation = filters.Population;
   const scopeFilter = getScopeFilter();
   const { getCurrentObjects } = usePagination<T>();
 
@@ -49,14 +52,16 @@ function InteractiveObjectTable<T extends ObjectData>({
       .filter(filterByVitality)
       .filter(filterByConnections)
       .filter(filterBySubstring)
+      .filter(filterByPopulation)
       .sort(sortFunction);
   }, [
-    sortFunction,
-    objects,
-    filterBySubstring,
     filterByConnections,
+    filterByPopulation,
+    filterBySubstring,
     filterByVitality,
+    objects,
     scopeFilter,
+    sortFunction,
   ]);
   const currentObjects = getCurrentObjects(objectsFilteredAndSorted);
 

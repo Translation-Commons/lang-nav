@@ -36,13 +36,15 @@ const FilterPath: React.FC = () => {
     languageFilter,
     languageScopes,
     modalityFilter,
+    populationMax,
+    populationMin,
     searchBy,
     searchString,
     territoryFilter,
     territoryScopes,
     updatePageParams,
-    vitalityEthFine,
     vitalityEthCoarse,
+    vitalityEthFine,
     writingSystemFilter,
   } = usePageParams();
   const defaultParams = getDefaultParams();
@@ -189,6 +191,32 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear the search substring filter"
           onClick={() => updatePageParams({ searchString: '' })}
+          style={{ padding: '0.25em' }}
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+
+    // Population Filter
+    (populationMin !== defaultParams.populationMin ||
+      populationMax !== defaultParams.populationMax) && (
+      <>
+        Population:{' '}
+        {[
+          populationMin !== undefined && populationMin !== defaultParams.populationMin
+            ? `≥ ${populationMin.toLocaleString()}`
+            : null,
+          populationMax !== undefined && populationMax !== defaultParams.populationMax
+            ? `≤ ${populationMax.toLocaleString()}`
+            : null,
+        ]
+          .filter(Boolean)
+          .join(' and ')}
+        <HoverableButton
+          buttonType="reset"
+          hoverContent="Clear population filters"
+          onClick={() => updatePageParams({ populationMin: undefined, populationMax: undefined })}
           style={{ padding: '0.25em' }}
         >
           <XIcon size="1em" display="block" />
