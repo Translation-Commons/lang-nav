@@ -1,5 +1,5 @@
 import { XIcon } from 'lucide-react';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
@@ -28,6 +28,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByVitality = getFilterByVitality();
   const filterLabels = getFilterLabels();
+  const filterByPopulation = filterBy.Population;
 
   const [
     nInLanguageScope,
@@ -38,7 +39,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nWithLanguage,
     nInVitality,
     nMatchingSubstring,
-  ] = (() => {
+    nInPopulationRange,
+  ] = useMemo(() => {
     const filteredByLanguageScope = objects.filter(filterBy[Field.LanguageScope]);
     const filteredByModality = filteredByLanguageScope.filter(filterBy[Field.Modality]);
     const filteredByTerritoryScope = filteredByModality.filter(filterBy[Field.TerritoryScope]);
@@ -47,6 +49,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     const filteredByLanguage = filteredByWritingSystem.filter(filterBy[Field.Language]);
     const filteredByVitality = filteredByLanguage.filter(filterByVitality);
     const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
+    const filteredByPopulation = filteredBySubstring.filter(filterByPopulation);
     return [
       filteredByLanguageScope.length,
       filteredByModality.length,
@@ -56,8 +59,9 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       filteredByLanguage.length,
       filteredByVitality.length,
       filteredBySubstring.length,
+      filteredByPopulation.length,
     ];
-  })();
+  }, [objects, filterBy, filterByVitality, filterBySubstring, filterByPopulation]);
 
   const nOverall = objects.length;
   const nFilteredByLanguageScope = nOverall - nInLanguageScope;
@@ -68,12 +72,13 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const nFilteredByLanguage = nWrittenIn - nWithLanguage;
   const nFilteredByVitality = nWithLanguage - nInVitality;
   const nFilteredBySubstring = nInVitality - nMatchingSubstring;
+  const nFilteredByPopulation = nMatchingSubstring - nInPopulationRange;
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
 
   // Return an empty component if nothing was filtered
-  if (nOverall === nMatchingSubstring) return null;
+  if (nOverall === nInPopulationRange) return null;
 
   return (
     <table style={{ textAlign: 'left' }}>
@@ -212,12 +217,33 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
             </td>
           </tr>
         )}
+        {nFilteredByPopulation > 0 && (
+          <tr>
+            <td>Not passing population filter:</td>
+            <td className="count">{(nFilteredByPopulation * -1).toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the population filters"
+                onClick={() =>
+                  updatePageParams({
+                    populationMin: undefined,
+                    populationMax: undefined,
+                  })
+                }
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
         <tr>
           <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
             Results
           </td>
           <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
-            {nMatchingSubstring.toLocaleString()}
+            {nInPopulationRange.toLocaleString()}
           </td>
         </tr>
       </tbody>

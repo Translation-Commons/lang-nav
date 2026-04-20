@@ -24,7 +24,7 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
-  const { filteredObjects } = useFilteredObjects({});
+  const { filteredObjects, allObjectsInType } = useFilteredObjects({});
   const { getCurrentObjects } = usePagination<ObjectData>();
 
   const isDrawingTerritories = objectType !== ObjectType.Language;
@@ -50,7 +50,7 @@ function ViewMap() {
     <MapContainer>
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
-      {!isDrawingTerritories && <VisibleItemsMeter objects={filteredObjects} />}
+      {!isDrawingTerritories && <VisibleItemsMeter objects={allObjectsInType} />}
       <ObjectMap objects={filteredObjects} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>

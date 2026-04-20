@@ -1,5 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
+import usePageParams from '@features/params/usePageParams';
+
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
@@ -16,11 +18,12 @@ export type ScalingFunctions = {
 };
 
 const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
+  const { populationMin } = usePageParams();
   // If caller didn't pass, they'd use page params via usePageParams normally
-  const minValue = getMinimumValue(scaleBy);
+  const minValue = getMinimumValue(scaleBy, populationMin);
   const maxValue = useMemo(() => getMaximumValue(objects, scaleBy), [objects, scaleBy]);
 
-  const transformValue = (v: number) => Math.pow(v, 0.5);
+  const transformValue = (v: number) => Math.pow(Math.max(v, 0), 0.5);
 
   const tMin = transformValue(minValue);
   const tMax = transformValue(maxValue);

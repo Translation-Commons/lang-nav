@@ -9,6 +9,7 @@ import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
+import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
@@ -19,6 +20,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 const ReportLanguagesDubious: React.FC = () => {
   const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
     useDataContext();
+  const filters = useFilters();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
@@ -28,8 +30,9 @@ const ReportLanguagesDubious: React.FC = () => {
       languagesInSelectedSource
         .filter(filterBySubstring)
         .filter(filterByConnections)
+        .filter(filters.Population)
         .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
-    [languagesInSelectedSource, filterBySubstring, filterByConnections],
+    [languagesInSelectedSource, filterBySubstring, filterByConnections, filters.Population],
   );
 
   return (
