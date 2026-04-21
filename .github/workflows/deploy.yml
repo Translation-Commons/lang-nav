@@ -26,6 +26,8 @@ jobs:
 
       - name: Build project
         run: npm run build
+        env:
+          VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
 
       - name: Copy index.html to 404.html
         run: cp dist/index.html dist/404.html

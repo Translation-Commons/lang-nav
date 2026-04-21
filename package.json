@@ -21,6 +21,7 @@
     "test:screenshots:update": "npx playwright test --update-snapshots"
   },
   "dependencies": {
+    "@amplitude/unified": "^1.0.3",
     "cldr-core": "^47.0.0",
     "d3-selection": "^3.0.0",
     "d3-transition": "^3.0.1",

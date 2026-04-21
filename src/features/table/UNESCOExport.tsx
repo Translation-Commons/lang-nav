@@ -10,6 +10,8 @@ import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { trackEvent } from '@shared/lib/amplitude';
+
 // Customized for UNESCO use
 export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilter: string): string {
   const territoryCode = (
@@ -149,6 +151,12 @@ export const ExportTerritoryLanguageDataButton: React.FC<{ territory: TerritoryD
 }) => {
   const handleExport = useCallback(() => {
     const locales = territory.locales ?? [];
+    trackEvent('data_exported', {
+      export_type: 'Copy UNESCO TSV (Territory)',
+      object_type: ObjectType.Territory,
+      row_count: locales.length,
+      territory_code: territory.ID,
+    });
     const data = locales
       .map(getLocaleUNESCOData)
       .map((row) => row.join('\t'))
