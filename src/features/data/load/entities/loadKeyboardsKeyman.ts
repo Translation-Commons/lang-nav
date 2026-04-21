@@ -9,7 +9,10 @@ import {
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 
 export async function loadKeyboardsKeyman(): Promise<KeyboardDictionary | void> {
-  return await loadObjectsFromFile<KeyboardData>('data/keyman/keyman.tsv', parseKeyboardKeymanLine);
+  return await loadObjectsFromFile<KeyboardData>(
+    'data/keyman/keyboards.tsv',
+    parseKeyboardKeymanLine,
+  );
 }
 
 export function parseKeyboardKeymanLine(line: string): KeyboardData | undefined {

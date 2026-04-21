@@ -20,7 +20,7 @@ export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[
     case ObjectType.Variant:
       return [object.languages[0]];
     case ObjectType.Keyboard:
-      return [...(object.languages ?? []), object.territory].filter(Boolean);
+      return [];
   }
 }
 

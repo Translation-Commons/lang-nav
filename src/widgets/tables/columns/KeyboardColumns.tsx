@@ -17,7 +17,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
       field: Field.Platform,
     },
     {
-      key: 'Language',
+      key: 'Language(s)',
       render: (object) => (
         <CommaSeparated>
           {(object.languages ?? []).map((lang) => (
