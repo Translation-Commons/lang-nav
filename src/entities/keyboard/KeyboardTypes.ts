@@ -21,22 +21,27 @@ export interface KeyboardData extends ObjectBase {
   type: ObjectType.Keyboard;
 
   // From TSV
-  ID: string; // eg. gboard_ahr_Deva_t_k0_Latn
+  ID: string;
   codeDisplay: string;
-  nameDisplay: string; // eg. "Ahirani, Transliteration"
+  nameDisplay: string;
   names: string[];
   platform: KeyboardPlatform;
-  languageCode: LanguageCode;
+  languageCodes: LanguageCode[];     // GBoard: always 1 element, Keyman: 1 or more
   territoryCode?: TerritoryCode;
   inputScriptCode: ScriptCode;
   outputScriptCode: ScriptCode;
   variantCode?: string;
 
+  // Keyman only
+  downloads?: number;
+  totalDownloads?: number;
+  platformSupport?: string[];        // e.g. ["windows", "macos", "ios"]
+
   // Computed after loading
-  language?: LanguageData;
+  languages?: LanguageData[];        // resolved from languageCodes
   territory?: TerritoryData;
   inputWritingSystem?: WritingSystemData;
   outputWritingSystem?: WritingSystemData;
   variant?: VariantData;
-  locale?: LocaleData;
+  locales?: LocaleData[];
 }
