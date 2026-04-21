@@ -6,6 +6,7 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = {
@@ -15,8 +16,8 @@ type Props = {
 const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
   const {
     platform,
-    languageCode,
-    language,
+    languageCodes,
+    languages,
     territoryCode,
     territory,
     inputScriptCode,
@@ -24,6 +25,10 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
     inputWritingSystem,
     outputWritingSystem,
     variantCode,
+    downloads,
+    totalDownloads,
+    platformSupport,
+    locales,
   } = keyboard;
 
   const sameScript = inputScriptCode === outputScriptCode;
@@ -34,11 +39,15 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
         <DetailsField title="Platform">{platform}</DetailsField>
 
         <DetailsField title="Language">
-          {language ? (
-            <HoverableObjectName object={language} />
+          {languages && languages.length > 0 ? (
+            <CommaSeparated>
+              {languages.map((lang) => (
+                <HoverableObjectName key={lang.ID} object={lang} />
+              ))}
+            </CommaSeparated>
           ) : (
             <span>
-              {languageCode} <Deemphasized>[language not in database]</Deemphasized>
+              {languageCodes.join(', ')} <Deemphasized>[language not in database]</Deemphasized>
             </span>
           )}
         </DetailsField>
@@ -89,14 +98,29 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
         )}
 
         {variantCode && <DetailsField title="Variant">{variantCode}</DetailsField>}
+        {platformSupport && platformSupport.length > 0 && (
+          <DetailsField title="Platforms">{platformSupport.join(', ')}</DetailsField>
+        )}
+
+        {downloads != null && (
+          <DetailsField title="Downloads (month)">{downloads.toLocaleString()}</DetailsField>
+        )}
+
+        {totalDownloads != null && (
+          <DetailsField title="Downloads (total)">{totalDownloads.toLocaleString()}</DetailsField>
+        )}
       </DetailsSection>
 
       <DetailsSection title="Connections">
-        {keyboard.locale ? (
+        {locales && locales.length > 0 && (
           <DetailsField title="Locale">
-            <HoverableObjectName object={keyboard.locale} />
+            <CommaSeparated>
+              {locales.map((locale) => (
+                <HoverableObjectName key={locale.ID} object={locale} />
+              ))}
+            </CommaSeparated>
           </DetailsField>
-        ) : null}
+        )}
       </DetailsSection>
     </div>
   );

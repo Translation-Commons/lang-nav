@@ -31,7 +31,7 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
     case ObjectType.Census:
       return undefined;
     case ObjectType.Keyboard:
-      return object.language?.nameDisplay;
+      return object.languages?.[0]?.nameDisplay;
   }
 }
 
@@ -74,7 +74,7 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
     case ObjectType.Variant:
       return object.languageCodes?.length;
     case ObjectType.Keyboard:
-      return undefined;
+      return object.languageCodes?.length;
   }
 }
 

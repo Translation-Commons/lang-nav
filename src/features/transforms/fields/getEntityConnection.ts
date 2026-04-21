@@ -11,7 +11,6 @@ export function getLanguageForEntity(object: ObjectData | undefined): LanguageDa
   if (!object) return undefined;
   if (object.type === ObjectType.Language) return object;
   if (object.type === ObjectType.Locale) return object.language;
-  if (object.type === ObjectType.Keyboard) return object.language;
   return undefined;
 }
 

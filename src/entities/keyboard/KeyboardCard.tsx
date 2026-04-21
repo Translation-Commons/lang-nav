@@ -16,7 +16,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   const {
     nameDisplay,
     platform,
-    language,
+    languages,
     territory,
     inputWritingSystem,
     outputWritingSystem,
@@ -24,6 +24,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   } = keyboard;
 
   const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
+  const hasLanguages = languages != null && languages.length > 0;
 
   return (
     <div>
@@ -36,13 +37,17 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         {platform}
       </CardField>
 
-      {language != null && (
+      {hasLanguages && (
         <CardField
           title="Language"
           field={Field.Language}
-          description="The language this keyboard is designed for."
+          description="The language(s) this keyboard is designed for."
         >
-          <HoverableObjectName object={language} />
+          <CommaSeparated>
+            {languages.map((lang) => (
+              <HoverableObjectName key={lang.ID} object={lang} />
+            ))}
+          </CommaSeparated>
         </CardField>
       )}
 
