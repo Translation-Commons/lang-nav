@@ -26,7 +26,7 @@ export interface KeyboardData extends ObjectBase {
   nameDisplay: string;
   names: string[];
   platform: KeyboardPlatform;
-  languageCodes: LanguageCode[];     // GBoard: always 1 element, Keyman: 1 or more
+  languageCodes: LanguageCode[]; // GBoard: always 1 element, Keyman: 1 or more
   territoryCode?: TerritoryCode;
   inputScriptCode: ScriptCode;
   outputScriptCode: ScriptCode;
@@ -35,10 +35,10 @@ export interface KeyboardData extends ObjectBase {
   // Keyman only
   downloads?: number;
   totalDownloads?: number;
-  platformSupport?: string[];        // e.g. ["windows", "macos", "ios"]
+  platformSupport?: string[]; // e.g. ["windows", "macos", "ios"]
 
   // Computed after loading
-  languages?: LanguageData[];        // resolved from languageCodes
+  languages?: LanguageData[]; // resolved from languageCodes
   territory?: TerritoryData;
   inputWritingSystem?: WritingSystemData;
   outputWritingSystem?: WritingSystemData;

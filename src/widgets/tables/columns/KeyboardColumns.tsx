@@ -5,6 +5,8 @@ import Field from '@features/transforms/fields/Field';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
+import CommaSeparated from '@shared/ui/CommaSeparated';
+
 function getKeyboardColumns(): TableColumn<KeyboardData>[] {
   return [
     { ...CodeColumn, isInitiallyVisible: false },
@@ -16,7 +18,13 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     },
     {
       key: 'Language',
-      render: (object) => <HoverableObjectName object={object.language} />,
+      render: (object) => (
+        <CommaSeparated>
+          {(object.languages ?? []).map((lang) => (
+            <HoverableObjectName key={lang.ID} object={lang} />
+          ))}
+        </CommaSeparated>
+      ),
       field: Field.Language,
       columnGroup: 'Related Objects',
     },

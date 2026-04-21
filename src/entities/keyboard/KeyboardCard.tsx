@@ -29,16 +29,6 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
   const hasLanguages = languages != null && languages.length > 0;
 
-  const PLATFORM_ABBREV: Record<string, string> = {
-    windows: 'Win',
-    macos: 'Mac',
-    linux: 'Linux',
-    ios: 'iOS',
-    android: 'Android',
-    desktopWeb: 'Web',
-    mobileWeb: 'Mobile Web',
-  };
-
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>{nameDisplay}</div>
@@ -105,7 +95,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
           field={Field.DigitalSupport}
           description="The platforms this keyboard supports."
         >
-          {platformSupport.map((p) => PLATFORM_ABBREV[p] ?? p).join(', ')}
+          {platformSupport.join(', ')}
         </CardField>
       )}
 

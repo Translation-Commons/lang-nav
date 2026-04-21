@@ -155,6 +155,6 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
     case ObjectType.Variant:
       return object.languages ?? [];
     case ObjectType.Keyboard:
-      return object.language ? [object.language] : [];
+      return object.languages ?? [];
   }
 }
