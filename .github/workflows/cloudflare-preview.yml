@@ -105,7 +105,7 @@ jobs:
                 }
                 try {
                   core.info(`Deleting older deployment ${id} (attempt ${attempt})`);
-                  await callCF(`${base}/${id}`, { method: 'DELETE' });
+                  await callCF(`${base}/${id}?force=true`, { method: 'DELETE' });
                   deleted++;
                 } catch (err) {
                   core.warning(`Failed to delete ${id}: ${err.message}`);
@@ -222,7 +222,7 @@ jobs:
                 }
                 try {
                   core.info(`Deleting deployment ${id} (attempt ${attempt})`);
-                  await callCF(`${base}/${id}`, { method: 'DELETE' });
+                  await callCF(`${base}/${id}?force=true`, { method: 'DELETE' });
                   deleted++;
                 } catch (err) {
                   core.warning(`Failed to delete ${id}: ${err.message}`);
