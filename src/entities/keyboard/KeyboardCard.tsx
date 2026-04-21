@@ -21,9 +21,6 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
     inputWritingSystem,
     outputWritingSystem,
     variant,
-    downloads,
-    totalDownloads,
-    platformSupport,
   } = keyboard;
 
   const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
@@ -86,36 +83,6 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
             {territory != null && <HoverableObjectName object={territory} />}
             {variant != null && <HoverableObjectName object={variant} />}
           </CommaSeparated>
-        </CardField>
-      )}
-
-      {platformSupport != null && platformSupport.length > 0 && (
-        <CardField
-          title="Platform Support"
-          field={Field.DigitalSupport}
-          description="The platforms this keyboard supports."
-        >
-          {platformSupport.join(', ')}
-        </CardField>
-      )}
-
-      {downloads != null && (
-        <CardField
-          title="Downloads (month)"
-          field={Field.Population}
-          description="Approximate number of downloads in the last month."
-        >
-          {downloads.toLocaleString()}
-        </CardField>
-      )}
-
-      {totalDownloads != null && (
-        <CardField
-          title="Downloads (total)"
-          field={Field.CountOfVariants}
-          description="Approximate total downloads since October 2019."
-        >
-          {totalDownloads.toLocaleString()}
         </CardField>
       )}
     </div>
