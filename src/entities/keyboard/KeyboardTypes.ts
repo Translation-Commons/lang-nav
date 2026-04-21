@@ -21,9 +21,9 @@ export interface KeyboardData extends ObjectBase {
   type: ObjectType.Keyboard;
 
   // From TSV
-  ID: string;
+  ID: string; // eg. gboard_ahr_Deva_t_k0_Latn
   codeDisplay: string;
-  nameDisplay: string;
+  nameDisplay: string; // eg. "Ahirani, Transliteration"
   names: string[];
   platform: KeyboardPlatform;
   languageCodes: LanguageCode[]; // GBoard: always 1 element, Keyman: 1 or more
