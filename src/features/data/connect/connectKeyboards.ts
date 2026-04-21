@@ -16,33 +16,14 @@ export function connectKeyboards(
   locales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   Object.values(keyboards).forEach((keyboard) => {
-    const { languageCode, territoryCode, inputScriptCode, outputScriptCode, variantCode } =
+    const { languageCodes, territoryCode, inputScriptCode, outputScriptCode, variantCode } =
       keyboard;
 
-    const language = languages[languageCode] ?? null;
+    // Connect territory, writing systems, variant tag (same for all platforms)
     const territory = territoryCode != null ? (territoriesByCode[territoryCode] ?? null) : null;
     const inputWritingSystem = writingSystems[inputScriptCode] ?? null;
     const outputWritingSystem = writingSystems[outputScriptCode] ?? null;
     const variant = variantCode != null ? (variants[variantCode] ?? null) : null;
-    const localeTags = {
-      languageCode,
-      scriptCode: outputScriptCode,
-      territoryCode,
-      variantCodes: variantCode ? [variantCode] : [],
-    };
-
-    const localeTagsToTry = getLessSpecificLocaleTags(localeTags);
-    const locale =
-      localeTagsToTry
-        .reverse() // most specific first
-        .map((tag: string) => locales[tag])
-        .find((l: LocaleData | undefined) => l != null) ?? null;
-
-    if (language != null) {
-      keyboard.language = language;
-      if (!language.keyboards) language.keyboards = [];
-      language.keyboards.push(keyboard);
-    }
     if (territory != null) keyboard.territory = territory;
     if (inputWritingSystem != null) keyboard.inputWritingSystem = inputWritingSystem;
     if (outputWritingSystem != null) {
@@ -51,6 +32,33 @@ export function connectKeyboards(
       outputWritingSystem.outputKeyboards.push(keyboard);
     }
     if (variant != null) keyboard.variant = variant;
-    if (locale != null) keyboard.locale = locale;
+    // Connect languages (GBoard: 1 language, Keyman: 1 or more)
+    keyboard.languages = [];
+    for (const langCode of languageCodes) {
+      const language = languages[langCode] ?? null;
+      if (language == null) continue;
+
+      keyboard.languages.push(language);
+      if (!language.keyboards) language.keyboards = [];
+      language.keyboards.push(keyboard);
+    }
+
+    // Locale resolution — one locale per language code
+    keyboard.locales = [];
+    for (const langCode of languageCodes) {
+      const localeTags = {
+        languageCode: langCode,
+        scriptCode: outputScriptCode,
+        territoryCode,
+        variantCodes: variantCode ? [variantCode] : [],
+      };
+      const localeTagsToTry = getLessSpecificLocaleTags(localeTags);
+      const locale =
+        localeTagsToTry
+          .reverse()
+          .map((tag: string) => locales[tag])
+          .find((l: LocaleData | undefined) => l != null) ?? null;
+      if (locale != null) keyboard.locales.push(locale);
+    }
   });
 }

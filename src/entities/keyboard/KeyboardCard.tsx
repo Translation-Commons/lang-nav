@@ -16,14 +16,28 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
   const {
     nameDisplay,
     platform,
-    language,
+    languages,
     territory,
     inputWritingSystem,
     outputWritingSystem,
     variant,
+    downloads,
+    totalDownloads,
+    platformSupport,
   } = keyboard;
 
   const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
+  const hasLanguages = languages != null && languages.length > 0;
+
+  const PLATFORM_ABBREV: Record<string, string> = {
+    windows: 'Win',
+    macos: 'Mac',
+    linux: 'Linux',
+    ios: 'iOS',
+    android: 'Android',
+    desktopWeb: 'Web',
+    mobileWeb: 'Mobile Web',
+  };
 
   return (
     <div>
@@ -36,13 +50,17 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         {platform}
       </CardField>
 
-      {language != null && (
+      {hasLanguages && (
         <CardField
           title="Language"
           field={Field.Language}
-          description="The language this keyboard is designed for."
+          description="The language(s) this keyboard is designed for."
         >
-          <HoverableObjectName object={language} />
+          <CommaSeparated>
+            {languages.map((lang) => (
+              <HoverableObjectName key={lang.ID} object={lang} />
+            ))}
+          </CommaSeparated>
         </CardField>
       )}
 
@@ -78,6 +96,36 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
             {territory != null && <HoverableObjectName object={territory} />}
             {variant != null && <HoverableObjectName object={variant} />}
           </CommaSeparated>
+        </CardField>
+      )}
+
+      {platformSupport != null && platformSupport.length > 0 && (
+        <CardField
+          title="Platform Support"
+          field={Field.DigitalSupport}
+          description="The platforms this keyboard supports."
+        >
+          {platformSupport.map((p) => PLATFORM_ABBREV[p] ?? p).join(', ')}
+        </CardField>
+      )}
+
+      {downloads != null && (
+        <CardField
+          title="Downloads (month)"
+          field={Field.Population}
+          description="Approximate number of downloads in the last month."
+        >
+          {downloads.toLocaleString()}
+        </CardField>
+      )}
+
+      {totalDownloads != null && (
+        <CardField
+          title="Downloads (total)"
+          field={Field.CountOfVariants}
+          description="Approximate total downloads since October 2019."
+        >
+          {totalDownloads.toLocaleString()}
         </CardField>
       )}
     </div>

@@ -19,6 +19,7 @@ import { connectObjectsAndCreateDerivedData } from '../compute/connectObjects';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
+import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
 import { loadTerritories } from './entities/loadTerritories';
@@ -94,7 +95,8 @@ export function useCoreData(): {
       locales,
       writingSystems,
       variants,
-      keyboards,
+      keyboardsGBoard,
+      keyboardsKeyman,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -110,6 +112,7 @@ export function useCoreData(): {
       loadWritingSystems(),
       loadIANAVariants(),
       loadKeyboardsGBoard(),
+      loadKeyboardsKeyman(),
     ]);
 
     if (
@@ -118,11 +121,17 @@ export function useCoreData(): {
       locales == null ||
       writingSystems == null ||
       variants == null ||
-      keyboards == null
+      keyboardsGBoard == null ||
+      keyboardsKeyman == null
     ) {
       alert('Error loading data. Please check the console for more details.');
       return;
     }
+
+    const keyboards = {
+      ...keyboardsGBoard,
+      ...keyboardsKeyman,
+    };
 
     addISODataToLanguages(initialLangs, isoLangs || []);
     addEthnologueDataToLanguages(initialLangs, ethnologueLangs || []);
