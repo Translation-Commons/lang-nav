@@ -1,0 +1,1 @@
+import{q as s}from"./index-DIkiqqJF.js";import{g as a}from"./getColorGradientFunction-BVOTiSnu.js";function c({colorGradient:t,renormalize:r}){const n=a(t);return[...Array(100).keys()].map(o=>s.jsx("div",{style:{backgroundColor:n(r?r(o/99):o/99),width:"1%",height:"100%",display:"inline-block"}},o))}export{c as B};
