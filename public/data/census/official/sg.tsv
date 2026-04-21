@@ -52,18 +52,18 @@ eng/mul	#English & Non-Official Language Only	82,972				78,208
 eng/mul	#English & Other Indian Language						44,949		
 eng/mul	#English & Other Language						40,004		
 zho/cmn/eng	#Mandarin & English						239,997		
-zho/cmn/mul	Mandarin & Chinese Dialect						301,328		
-zho/nan/taib1242/eng	Hokkien & English						15,511		
-zho/nan/taib1242/cmn	Hokkien & Mandarin						88,928		
-zho/nan/chao1238/eng	Teochew & English						8,069		
-zho/nan/chao1238/cmn	Teochew & Mandarin						29,369		
-zho/yue/eng	Cantonese & English						19,495		
-zho/yue/cmn	Cantonese & Mandarin						35,467		
-zho/mul/cmn	Other Chinese Dialect & Mandarin						9,657		
-msa/zlm/eng	Malay & English						250,223		
-tam/eng	Tamil & English						72,428		
-mul/eng	Other Indian Language & English						18,872		
-mul/eng	Other Language & English						19,945		
+zho/cmn/mul	#Mandarin & Chinese Dialect						301,328		
+zho/nan/taib1242/eng	#Hokkien & English						15,511		
+zho/nan/taib1242/cmn	#Hokkien & Mandarin						88,928		
+zho/nan/chao1238/eng	#Teochew & English						8,069		
+zho/nan/chao1238/cmn	#Teochew & Mandarin						29,369		
+zho/yue/eng	#Cantonese & English						19,495		
+zho/yue/cmn	#Cantonese & Mandarin						35,467		
+zho/mul/cmn	#Other Chinese Dialect & Mandarin						9,657		
+msa/zlm/eng	#Malay & English						250,223		
+tam/eng	#Tamil & English						72,428		
+mul/eng	#Other Indian Language & English						18,872		
+mul/eng	#Other Language & English						19,945		
 mul	#Other Two Languages Only	12,898				8,107			
 	#Three or More Languages	202,606				238,235			
 eng/zho/msa/zlm	#English, Chinese & Malay Only	96,660				132,424			

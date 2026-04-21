@@ -4,6 +4,7 @@ afrobarometer_r9
 afrobarometer_r10
 ci
 cm
-ke
 ir
+ke
+leclerc.sg
 sn

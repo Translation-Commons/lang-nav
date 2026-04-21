@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -28,6 +29,7 @@ function usePotentialLocales(
     percOfLangWorldWide: number | undefined,
   ) => boolean,
 ): PartitionedLocales {
+  const filterByConnections = getFilterByConnections();
   const { censuses, getLanguage, getLocale, locales } = useDataContext();
   const { localeSeparator } = usePageParams();
 
@@ -114,12 +116,26 @@ function usePotentialLocales(
     }, {});
   }, [allMissingLocales]);
 
-  return Object.values(allLocalesByLanguage).reduce<PartitionedLocales>(partitionPotentialLocales, {
-    largest: [],
-    largestButDescendantExists: [],
-    significant: [],
-    significantButMaybeRedundant: [],
-  });
+  const partitionedLocales = useMemo(() => {
+    const res = Object.values(allLocalesByLanguage).reduce<PartitionedLocales>(
+      partitionPotentialLocales,
+      {
+        largest: [],
+        largestButDescendantExists: [],
+        significant: [],
+        significantButMaybeRedundant: [],
+      },
+    );
+
+    return {
+      largest: res.largest.filter(filterByConnections),
+      largestButDescendantExists: res.largestButDescendantExists.filter(filterByConnections),
+      significant: res.significant.filter(filterByConnections),
+      significantButMaybeRedundant: res.significantButMaybeRedundant.filter(filterByConnections),
+    };
+  }, [allLocalesByLanguage, filterByConnections]);
+
+  return partitionedLocales;
 }
 
 function partitionPotentialLocales(
