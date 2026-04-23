@@ -106,7 +106,7 @@ swe	Swedish		5,031	5,902	7,330	8,956	9,659
 hbs	Serbo-Croatian			9,317	6,688		
 hak	Hakka		7,451	7,962	8,922	8,989	9,137
 mul	Australian Indigenous Languages, nfd					8,803	4,432
-nan	Hokkien		8,295	7,832			
+nan/taib1242	Hokkien		8,295	7,832			
 amh	Amharic					6,812	8,161
 mul	Southern Asian, nfd		6,558	6,867	8,151		
 ces	Czech		7,295	6,900		7,938	7,884
@@ -118,10 +118,10 @@ mul	Oceanic Pidgins and Creoles		7,165				3,114
 mul	Other Southern Asian Languages					2,398	6,982
 ceb	Bisaya					4,061	6,406
 cnh	Chin Haka					4,806	6,394
-chao1238	Teochew			6,305			
+nan/chao1238	Teochew			6,305			
 tir	Tigrinya					4,583	6,253
 fin	Finnish		6,228	5,875	5,971	5,962	5,530
-hbs	Serbo-Croatian/Yugoslavian, so described					6,061	4,339
+hbs	#Serbo-Croatian/Yugoslavian, so described					6,061	4,339
 dan	Danish		5,228	5,442	5,751	5,777	5,019
 slk	Slovak		4,695	4,579	4,992	5,437	5,532
 mul	Southeast Asian Austronesian Languages, nfd					291	5,438
@@ -182,9 +182,9 @@ aoi	Anindilyakwa					1,484	1,516
 tet	Tetum					1,105	1,486
 mul	Arrernte, nfd					688	1,437
 kin	Kinyarwanda (Rwanda)					880	1,413
-ori	Oriya					721	1,401
+ori/ory	Oriya					721	1,401
 mul	Indo-Aryan, nfd					1,400	786
-	Luritja					955	1,300
+piu	Luritja					955	1,300
 mul	Indo-Aryan, nec					716	1,237
 bvr	Burarra					995	1,229
 hil	Ilonggo (Hiligaynon)					696	1,148
@@ -216,7 +216,7 @@ har	Harari					576	662
 mul	Mon-Khmer, nec					655	66
 mul	Aboriginal					651	
 lug	Luganda					498	649
-mnk	Mandinka					582	646
+man/mnk	Mandinka					582	646
 gue	Gurindji					405	623
 cat	Catalan					443	614
 kdd	Yankunytjatjara					420	598
@@ -272,7 +272,7 @@ wmt	Walmajarri					283	291
 isl	Icelandic					286	290
 nuy	Nunggubuyu					276	283
 bel	Belorussian					187	275
-	Pintupi					147	271
+piu	Pintupi					147	271
 mul	Dhuwal, nfd					266	41
 gia	Kija					169	266
 hau	Hausa					202	263
@@ -337,13 +337,13 @@ nnr	Narungga					25	94
 nji	Gudanji					91	19
 djap1238	Djapu					90	28
 	Kukatha					16	90
-ngal1294	Ngaliwurru					29	90
+djd/ngal1294	Ngaliwurru					29	90
 xby	Batjala					24	89
 	Mann					88	88
 eus	Basque					65	85
 mul	Other Southern European Languages, nec					85	71
 mul	Pacific Austronesian Languages, nfd					85	51
-iba	Iban					62	84
+msa/iba	Iban					62	84
 nrl	Ngarluma					42	83
 dyy	Djabugay					46	81
 jav	Javanese					78	81
@@ -365,7 +365,7 @@ nck	Na-kara					58	55
 wang1293	Wangurri					58	27
 fry	Frisian					55	53
 gana1269	Ganalbingu					54	37
-	Letzeburgish					48	54
+ltz	Letzeburgish					48	54
 rup	Aromunian (Macedo-Romanian)					47	53
 mul	Middle Eastern Semitic Languages, nec					44	52
 yii	Yidiny					19	52
@@ -386,7 +386,7 @@ mul	Celtic, nec					31	42
 nly	Nyamal					25	42
 	Larrakiya					14	41
 jig	Jingulu					23	40
-	Kiwai					40	28
+kjd	Kiwai					40	28
 ywg	Yinhawangka					39	12
 mul	Eastern Asian Languages, nfd					38	3
 kuy	Kuuku-Ya'u					10	38
