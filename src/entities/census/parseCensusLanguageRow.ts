@@ -12,7 +12,7 @@ export function parseCensusLanguageRow(
   const parts = line.split('\t');
   if (parts.length < 3) return; // Skip lines that do not have enough data
 
-  // Most rows specific a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
+  // Most rows specify a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
   const languageCodes = parts[0]
     // split if it is not contained in parentheses
     .split(/\/(?![^(]*\))/)

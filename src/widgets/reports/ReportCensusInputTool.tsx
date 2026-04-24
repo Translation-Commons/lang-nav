@@ -49,13 +49,17 @@ const ReportCensusInputTool: React.FC = () => {
         onBlur={(e) => setTSV(e.target.value)}
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
+      <h3>Analysis</h3>
       {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
-      {warnings.map((warning, index) => (
-        <div key={index} style={{ color: 'var(--color-red)' }}>
-          {warning}
-        </div>
-      ))}
-      <h3>Language Code & Name verification</h3>
+      <h4>Metadata</h4>
+      {warnings
+        ? warnings.map((warning, index) => (
+            <div key={index} style={{ color: 'var(--color-red)' }}>
+              {warning}
+            </div>
+          ))
+        : 'No issues found.'}
+      <h4>Language Codes & Language Names</h4>
       <CensusLanguageCheck fileInput={tsv} />
       <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>
         <ContainErrorsAndSuspense>

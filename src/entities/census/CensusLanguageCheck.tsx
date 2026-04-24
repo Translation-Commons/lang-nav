@@ -153,7 +153,7 @@ function checkName(l: LanguageNotes) {
 
   if (!l.name) {
     l.issues.push(
-      'The name is missing, please list the name from the census, prefixed by a # if its not a proper name.',
+      'The name is missing, please list the name from the census, prefixed by a # if it is not a proper name.',
     );
     return;
   }
@@ -163,7 +163,6 @@ function checkName(l: LanguageNotes) {
 
   if (l.entry.names.some((n) => n === l.name)) return; // If the name matches an alternate name, that's fine
   const simplifiedName = l.name.split(/[(/]/)[0].toLowerCase().trim(); // Try removing extra details
-  console.log({ simplifiedName, names: l.entry.names });
   if (l.entry.names.some((n) => n.toLowerCase() === simplifiedName)) return; // If the name matches an alternate name, that's fine
 
   l.issues.push(
@@ -220,7 +219,7 @@ function checkMacrolanguage(l: LanguageNotes, allSpecificCodes: string[]) {
 
   l.issues.push(
     <>
-      Code maybe should be{' '}
+      Code may be{' '}
       <code>
         {macrolanguage.ID}/{l.codePath}
       </code>
