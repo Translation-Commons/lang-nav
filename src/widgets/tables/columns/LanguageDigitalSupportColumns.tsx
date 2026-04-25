@@ -1,6 +1,8 @@
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import { ObjectType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
@@ -59,6 +61,12 @@ const columns: TableColumn<LanguageData>[] = [
         return lang.CLDR.dataProvider.CLDR.coverage?.inICU;
       return undefined;
     },
+  },
+  {
+    key: 'Keyboards',
+    description: 'Number of keyboard layouts available for this language.',
+    render: (lang) => <HoverableEnumeration items={lang.keyboards?.map((kb) => kb.nameDisplay)} />,
+    field: Field.CountOfKeyboards,
   },
   {
     key: 'Wikipedia Status',
