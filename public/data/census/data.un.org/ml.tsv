@@ -15,7 +15,7 @@
 #presentedBy	data.un.org		
 Language Code	Language Name	ml1998	ml2009
 mul	Total	7,620,672	11,109,312
-bam	Bambara		5,165,830
+man/bam	Bambara		5,165,830
 mani1303	Malinke	4,101,548	622,108
 ful/ffm	Peul/ Foulfoulbé	316,529	1,042,987
 dogo1299	Dogon	541,214	791,435
@@ -30,10 +30,10 @@ ful/ffm	Peul	316,529
 bobo1253	Bobo	195,115	238,497
 bozo1252	Bozo	135,614	205,225
 snk	Sonink	196,738	
-kao	Kassonke	96,820	129,438
+man/kao	Kassonke	96,820	129,438
 mis	Unknown		76,778
 mul	Other Mali Language		61,014
-rkm	Dafing		50,786
+man/rkm	Dafing		50,786
 ara	Arabe		38,218
 senu1239	Senoufo	36,588	
 mul	Other African		34,679

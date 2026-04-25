@@ -25,45 +25,45 @@
 #citation			L’aménagement linguistique dans le monde, Québec, CEFAN, Université Laval
 #notes			
 Language Code	Language Name	Langue maternelle	Population
-zho/cmn		chinois mandarin	1,432,000
-zho/nan/taib1242		chinois min nan	1,202,000
-zho/nan/chao1238		chinois min nan	603,000
-zho/yue		chinois cantonais	439,000
-msa/zlm		malais	391,000
-zho/hak		chinois hakka	250,000
-zho/nan		chinois min nan	191,000
-fil		filipino	155,000
+zho/cmn	Mandarin Chinese	chinois mandarin	1,432,000
+zho/nan/taib1242	Tokkien	chinois min nan	1,202,000
+zho/nan/chao1238	Teochew	chinois min nan	603,000
+zho/yue	Cantonese Chinese	chinois cantonais	439,000
+msa/zlm	Malay	malais	391,000
+zho/hak	Hakka Chinese	chinois hakka	250,000
+zho/nan	Min Nan Chinese	chinois min nan	191,000
+fil	Filipino	filipino	155,000
 msa/ind	Indonesian	indonésien	118,000
 tam	Tamil	tamoul	118,000
 jav	Javanese	javanais	91,000
 ben	Bengali	bengali	76,000
 eng	English	anglais	76,000
-zho/cdo		chinois min dong	56,000
+zho/cdo	Min Dong Chinese	chinois min dong	56,000
 eng	English	anglais	55,000
 eng	English	anglais	54,000
 tha	Thai	thaï	46,000
 jpn	Japanese	japonais	39,000
 mad	Madurese	madourais	28,000
-cpx		chinois puxian	27,000
+zho/cpx	Puxian Chinese	chinois puxian	27,000
 mal	Malayalam	malayalam	27,000
-pan		panjabi	25,000
-mcm		créole portugais de Malacca	24,000
+lah/pan	Panjabi	panjabi	25,000
+mcm	Molaccan Portuguese Creole	créole portugais de Malacca	24,000
 kan	Kannada	kannada	22,000
-msa/zlm		malais	19,000
-zho/mnp		chinois min bei	18,000
-sin		cinghalais	16,000
-msa/zlm		malais	16,000
+msa/zlm	Malay	malais	19,000
+zho/mnp	Min Bei Chinese	chinois min bei	18,000
+sin	Sinhalese	cinghalais	16,000
+msa/zlm	Malay	malais	16,000
 eng	English	anglais	16,000
-zho/cmn		chinois mandarin	16,000
+zho/cmn	Mandarin Chinese	chinois mandarin	16,000
 hin	Hindi	hindi	13,000
-bug		bouguinais	11,000
-mis		malais des bazars	11,000
-ara/arz		arabe égyptien	11,000
+bug	Buginese	bouguinais	11,000
+mis	Bazar Malay	malais des bazars	11,000
+ara/arz	Egyptian Arabic	arabe égyptien	11,000
 kor	Korean	coréen	11,000
-mui/plm		palembang	11,000
+msa/mui/plm	Palembang	palembang	11,000
 eng	English	anglais	8,100
 snd	Sindhi	sindhi	4,300
-guj		gujarati	4,200
+guj	Gujarati	gujarati	4,200
 urd	Urdu	ourdou	3,200
 eng	English	anglais	2,800
 eng	English	anglais	2,700

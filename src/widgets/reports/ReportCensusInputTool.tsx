@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
-import CensusDetails from '@widgets/details/CensusDetails';
-
 import { useDataContext } from '@features/data/context/useDataContext';
 import { parseCensusImport } from '@features/data/load/extra_entities/loadCensusData';
-import PaginationControls from '@features/pagination/PaginationControls';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import usePageParams from '@features/params/usePageParams';
 
+import CensusLanguageCheck from '@entities/census/CensusLanguageCheck';
+import CensusPreview from '@entities/census/CensusPreview';
 import { CensusData } from '@entities/census/CensusTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import { countOccurrences } from '@shared/lib/setUtils';
@@ -52,53 +49,24 @@ const ReportCensusInputTool: React.FC = () => {
         onBlur={(e) => setTSV(e.target.value)}
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
+      <h3>Analysis</h3>
       {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
-      {warnings.map((warning, index) => (
-        <div key={index} style={{ color: 'var(--color-red)' }}>
-          {warning}
-        </div>
-      ))}
+      <h4>Metadata</h4>
+      {warnings
+        ? warnings.map((warning, index) => (
+            <div key={index} style={{ color: 'var(--color-red)' }}>
+              {warning}
+            </div>
+          ))
+        : 'No issues found.'}
+      <h4>Language Codes & Language Names</h4>
+      <CensusLanguageCheck fileInput={tsv} />
       <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>
         <ContainErrorsAndSuspense>
           <CensusPreview censuses={censuses} />
         </ContainErrorsAndSuspense>
       </LocalParamsProvider>
     </div>
-  );
-};
-
-const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
-  const { page } = usePageParams();
-  return (
-    <>
-      <h2>Census Preview</h2>
-      <div>
-        Please check over this data to make sure it makes sense. Check that the metadata makes
-        sense. Check the population numbers, percent in territory, language names, language codes.
-      </div>
-      <div>
-        {censuses.length} census tables found. <PaginationControls itemCount={censuses.length} />
-      </div>
-      <div
-        style={{
-          padding: '1em',
-          margin: '1em 3em',
-          border: '2px solid var(--color-button-primary)',
-          borderRadius: '0.5em',
-        }}
-      >
-        {censuses.length > 0 && page <= censuses.length && censuses[page - 1] && (
-          <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
-            <ContainErrorsAndSuspense>
-              <h2>
-                <ObjectTitle object={censuses[page - 1]} highlightSearchMatches={false} />
-              </h2>
-              <CensusDetails census={censuses[page - 1]} />
-            </ContainErrorsAndSuspense>
-          </LocalParamsProvider>
-        )}
-      </div>
-    </>
   );
 };
 
