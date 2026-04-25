@@ -56,7 +56,7 @@ pol	Polish	61,023	59,056	53,388	50,694	48,083	45,379
 tel	Telugu		3,484	8,278	18,722	34,435	59,406
 jpn	Japanese		28,285	35,110	43,691	55,966	58,757
 srp	Serbian	35,392	49,205	52,529	55,112	53,801	57,297
-asf	Australian sign language		3,292	55,696			
+sgn/asf	Australian sign language		3,292	55,696			
 taga1269/fil	Pilipino				55,402		
 rus	Russian	30,042	34,789	36,503	44,058	50,314	54,883
 afr	Afrikaans			16,808	35,030	43,741	49,375
@@ -85,7 +85,7 @@ mya	Burmese		5,906	7,455	12,337	16,321	18,849
 mis	Inadequately described			9,068		12,847	18,150
 swa	Swahili					11,460	17,568
 bos	Bosnian	9,194	15,908	15,741	16,270	15,832	17,216
-asf	Auslan				8,407	10,112	16,242
+sgn/asf	Auslan				8,407	10,112	16,242
 som	Somali					14,176	15,137
 kan	Kannada			3,251	5,927	9,701	14,717
 rar	Maori (Cook Island)					5,107	14,618
@@ -106,7 +106,7 @@ swe	Swedish		5,031	5,902	7,330	8,956	9,659
 hbs	Serbo-Croatian			9,317	6,688		
 hak	Hakka		7,451	7,962	8,922	8,989	9,137
 mul	Australian Indigenous Languages, nfd					8,803	4,432
-nan	Hokkien		8,295	7,832			
+nan/taib1242	Hokkien		8,295	7,832			
 amh	Amharic					6,812	8,161
 mul	Southern Asian, nfd		6,558	6,867	8,151		
 ces	Czech		7,295	6,900		7,938	7,884
@@ -118,10 +118,10 @@ mul	Oceanic Pidgins and Creoles		7,165				3,114
 mul	Other Southern Asian Languages					2,398	6,982
 ceb	Bisaya					4,061	6,406
 cnh	Chin Haka					4,806	6,394
-chao1238	Teochew			6,305			
+nan/chao1238	Teochew			6,305			
 tir	Tigrinya					4,583	6,253
 fin	Finnish		6,228	5,875	5,971	5,962	5,530
-hbs	Serbo-Croatian/Yugoslavian, so described					6,061	4,339
+hbs	#Serbo-Croatian/Yugoslavian, so described					6,061	4,339
 dan	Danish		5,228	5,442	5,751	5,777	5,019
 slk	Slovak		4,695	4,579	4,992	5,437	5,532
 mul	Southeast Asian Austronesian Languages, nfd					291	5,438
@@ -168,35 +168,35 @@ tiw	Tiwi					2,040	2,103
 mwf	Murrinh Patha					1,973	2,081
 aly	Alyawarr					1,548	1,951
 gle	Irish					1,941	1,875
-pck	Zomi					1,104	1,886
-yuul1239	Yolngu Matha, nfd					724	1,786
+kuki1246	Zomi					1,104	1,886
+yuul1239	#Yolngu Matha, nfd					724	1,786
 cym	Welsh					1,688	1,737
 guma1252	Kunwinjku					1,710	1,494
 nbl	Ndebele					1,363	1,676
 bis	Bislama					266	1,631
 uig	Uyghur					1,025	1,629
-mul	Sign Languages, nfd					1,296	1,550
+sgn	#Sign Languages, nfd					1,296	1,550
 wrh	Wiradjuri					457	1,544
 nys	Nyungar					475	1,536
 aoi	Anindilyakwa					1,484	1,516
 tet	Tetum					1,105	1,486
 mul	Arrernte, nfd					688	1,437
 kin	Kinyarwanda (Rwanda)					880	1,413
-ori	Oriya					721	1,401
+ori/ory	Oriya					721	1,401
 mul	Indo-Aryan, nfd					1,400	786
-	Luritja					955	1,300
+piu	Luritja					955	1,300
 mul	Indo-Aryan, nec					716	1,237
 bvr	Burarra					995	1,229
 hil	Ilonggo (Hiligaynon)					696	1,148
-burm1266	Burmese and Related Languages, nfd					951	1,142
+burm1266	#Burmese and Related Languages, nfd					951	1,142
 ntj	Ngaanyatjarra					1,112	1,051
 ach	Acholi					1,089	1,082
 kld	Gamilaraay					105	1,065
-	Norf'k-Pitcairn					1,035	907
+pih	Norf'k-Pitcairn					1,035	907
 gle	Gaelic (Scotland)					1,006	994
-	Kalaw Kawaw Ya/Kalaw Lagaw Ya					957	888
+mwp	Kalaw Kawaw Ya/Kalaw Lagaw Ya					957	888
 tkl	Tokelauan					953	825
-	Wik Mungkan					450	952
+wim	Wik Mungkan					450	952
 grg	Madi					934	935
 tcy	Tulu					585	907
 are	Western Arrarnta					440	907
@@ -216,7 +216,7 @@ har	Harari					576	662
 mul	Mon-Khmer, nec					655	66
 mul	Aboriginal					651	
 lug	Luganda					498	649
-mnk	Mandinka					582	646
+man/mnk	Mandinka					582	646
 gue	Gurindji					405	623
 cat	Catalan					443	614
 kdd	Yankunytjatjara					420	598
@@ -232,7 +232,7 @@ div	Dhivehi					539	505
 gil	Gilbertese					387	535
 mul	Anmatyerr, nec					531	0
 crs	Seychelles Creole					522	46
-	Key Word Sign Australia					218	518
+sgn/asf	Key Word Sign Australia					218	518
 mul	Torres Strait Island Languages, nfd					335	497
 aer	Eastern Arrernte					385	490
 nay	Ngarrindjeri					312	468
@@ -244,7 +244,7 @@ nya	Nyanja (Chichewa)					416	417
 pis	Solomon Islands Pijin					294	404
 tuk	Turkmen					336	399
 mul	Southeast Asian Austronesian Languages, nec					305	395
-	Kuku Yalanji					323	388
+gvn	Kuku Yalanji					323	388
 anu	Anuak					242	387
 bcj	Bardi					321	384
 kas	Kashmiri					215	383
@@ -253,18 +253,18 @@ yij	Yindjibarndi					377	383
 pam	Pampangan					249	382
 rtm	Rotuman					363	378
 mph	Maung					371	360
-	Ndjebbana (Gunavidji)					177	367
+djj	Ndjebbana (Gunavidji)					177	367
 mul	Other Australian Indigenous Languages, nec					362	0
 bal	Balochi					251	357
-	Wangkatha					225	355
+pti	Wangkatha					225	355
 dwy	Dhuwaya					334	144
 tvl	Tuvaluan					249	333
 mnw	Mon					282	319
 lin	Lingala					301	313
 nbj	Ngarinyman					234	313
 nau	Nauruan					312	296
-	Manyjilyjarra					311	65
-	Gumbaynggir					90	309
+mpj	Manyjilyjarra					311	65
+kgs	Gumbaynggir					90	309
 lbz	Lardil					65	301
 wbv	Wajarri					145	300
 mul	Pacific Austronesian Languages, nec					267	297
@@ -272,11 +272,11 @@ wmt	Walmajarri					283	291
 isl	Icelandic					286	290
 nuy	Nunggubuyu					276	283
 bel	Belorussian					187	275
-	Pintupi					147	271
+piu	Pintupi					147	271
 mul	Dhuwal, nfd					266	41
 gia	Kija					169	266
 hau	Hausa					202	263
-	Adnymathanha					140	262
+adt	Adnymathanha					140	262
 ulk	Meriam Mir					217	259
 gaa	Ga					227	257
 gune1238	Kune					180	257
@@ -287,18 +287,18 @@ ban	Balinese					199	239
 kat	Georgian					198	233
 shk	Shilluk					231	203
 mul	Anmatyerr, nfd					105	230
-	Dan (Gio-Dan)					222	177
+dnj	Dan (Gio-Dan)					222	177
 tig	Tigre					170	209
-	Yugambeh					18	208
+xjb	Yugambeh					18	208
 gni	Gooniyandi					134	205
-	Kuuk Thayorre					205	174
-	Moro (Nuba Moro)					188	103
+thd	Kuuk Thayorre					205	174
+mor	Moro (Nuba Moro)					188	103
 kik	Kikuyu					137	185
 rom	Romany					167	181
 mul	Cape York Peninsula Languages, nfd					19	180
 mul	Oceanian Pidgins and Creoles, nec					55	169
 mep	Miriwoong					156	168
-	Mandaean (Mandaic)					164	89
+dmn	Mandaean (Mandaic)					164	89
 ces	Czechoslovakian, so described					161	125
 xho	Xhosa					159	152
 mul	Dravidian, nec					118	157
@@ -310,16 +310,16 @@ xyy	Yorta Yorta					62	151
 bck	Bunuba					41	149
 wrk	Garrwa					129	147
 guf	Gupapuyngu					146	108
-	Mayali					145	71
+gup/naia1238	Mayali					145	71
 mul	Turkic, nec					80	143
 bik	Bikol					111	141
-	Eastern Anmatyerr					4	137
+amx/east2380	Eastern Anmatyerr					4	137
 pnw	Banyjima					104	136
-	Dhanggatti					34	135
+dyn	Dhanggatti					34	135
 luo	Luo					135	125
 ace	Acehnese					104	133
 mul	Invented Languages					131	116
-	Galpu					89	130
+dhg/gaal1238	Galpu					89	130
 zku	Kaurna					53	130
 mul	Dhuwala, nfd					125	36
 dmw	Mudburra					92	125
@@ -332,18 +332,18 @@ mul	Djinang, nfd					107	111
 drl	Paakantyi					42	111
 tbh	Dharawal					27	103
 mul	Kimberley Area Languages, nec					26	103
-	Ngan'gikurunggurr					26	99
+nam	Ngan'gikurunggurr					26	99
 nnr	Narungga					25	94
 nji	Gudanji					91	19
 djap1238	Djapu					90	28
-	Kukatha					16	90
-ngal1294	Ngaliwurru					29	90
+ktd	Kukatha					16	90
+djd/ngal1294	Ngaliwurru					29	90
 xby	Batjala					24	89
-	Mann					88	88
+mev	Mann					88	88
 eus	Basque					65	85
 mul	Other Southern European Languages, nec					85	71
 mul	Pacific Austronesian Languages, nfd					85	51
-iba	Iban					62	84
+msa/iba	Iban					62	84
 nrl	Ngarluma					42	83
 dyy	Djabugay					46	81
 jav	Javanese					78	81
@@ -351,8 +351,8 @@ bili1250	Bilinarra					46	79
 bsq	Bassa					77	41
 lom	Loma (Lorma)					75	61
 mul	Spanish Creole, nfd					49	70
-	Themne					69	37
-	Krahn					68	61
+tem	Themne					69	37
+kro/weea1234	Krahn					68	61
 mem	Mangala					68	38
 mul	Other Southeast Asian Languages					58	68
 mul	Sign Languages, nec					56	66
@@ -365,49 +365,49 @@ nck	Na-kara					58	55
 wang1293	Wangurri					58	27
 fry	Frisian					55	53
 gana1269	Ganalbingu					54	37
-	Letzeburgish					48	54
+ltz	Letzeburgish					48	54
 rup	Aromunian (Macedo-Romanian)					47	53
 mul	Middle Eastern Semitic Languages, nec					44	52
 yii	Yidiny					19	52
 mul	Iranic, nec					19	51
 liya1241	Liyagalawumirr					51	12
 rmb	Rembarrnga					43	51
-	Girramay					44	50
+dbl/girr1240	Girramay					44	50
 gunn1249	Gun-nartpa					49	50
 gbd	Karajarri					41	50
 wrr	Wardaman					50	16
 mul	Tai, nec					46	48
 jao	Yanyuwa					39	47
-	Gundjeihmi					46	12
+gup/gund1246	Gundjeihmi					46	12
 gge	Gurr-goni					46	40
 mul	Dhangu, nfd					45	10
 gyd	Kayardild					8	43
 mul	Celtic, nec					31	42
 nly	Nyamal					25	42
-	Larrakiya					14	41
+lrg	Larrakiya					14	41
 jig	Jingulu					23	40
-	Kiwai					40	28
+kjd	Kiwai					40	28
 ywg	Yinhawangka					39	12
 mul	Eastern Asian Languages, nfd					38	3
 kuy	Kuuku-Ya'u					10	38
 wrl	Warlmanpa					26	37
 mul	Chinese, nec					34	18
-	Diyari					5	34
+dif	Diyari					5	34
 mec	Marra					8	34
-	Wurlaki					10	33
+dji/wula1244	Wurlaki					10	33
 yulp1239	Yulparija					16	33
 kpe	Kpelle					19	32
 ard	Arabana					15	31
 mul	Iberian Romance, nfd					30	29
-	Kanai					4	30
+unn	Kanai					4	30
 mul	Celtic, nfd					29	24
-	Daatiwuy					29	19
+dwu/dati1238	Daatiwuy					29	19
 vka	Kariyarra					19	29
 mul	Dhuwal, nec					28	18
 gih	Githabul					4	28
 mul	Iberian Romance, nec					24	28
 waq	Wagiman					18	28
-	Waanyi					19	26
+wny	Waanyi					19	26
 gjr	Gurindji Kriol					3	25
 dbl	Dyirbal					8	24
 zmu	Muruwari					12	24
@@ -416,15 +416,15 @@ mul	Other Languages, nfd					9	23
 mul	German and Related Languages, nfd					22	0
 rit	Ritharrngu					22	12
 kart1247	Kartujarra					21	0
-	Warramiri					17	21
+dhg	Warramiri					17	21
 bia	Badimaya					3	20
 mul	Scandinavian, nec					20	19
 mul	Middle Eastern Semitic Languages, nfd					19	3
 mul	Arnhem Land and Daly River Region Languages, nec					18	0
 mul	Dhay'yi, nfd					18	0
-	Koko-Bera					10	18
+kkp	Koko-Bera					10	18
 mul	Oceanian Pidgins and Creoles, nfd					18	5
-	Wagilak					18	9
+rit	Wagilak					18	9
 rirr1238	Rirratjingu					17	9
 mul	Southwest and Central Asian Languages, nfd					17	0
 djn	Jawoyn					16	15
@@ -441,7 +441,7 @@ yap	Yapese					11	14
 mul	Other Eastern European Languages, nec					13	4
 mul	Other Southwest and Central Asian Languages, nec					3	13
 mul	Finnish and Related Languages, nec					12	0
-	Palyku/Nyiyaparli					5	12
+xny	Palyku/Nyiyaparli					5	12
 mul	Finnish and Related Languages, nfd					11	0
 mul	Tai, nfd					11	0
 mpb	Malak Malak					10	7
@@ -466,7 +466,7 @@ gudj1237	Gudjal					3	4
 wkr	Keerray-Woorroong					4	0
 mul	Baltic, nfd					3	0
 lby	Lamalama					3	0
-	Manyjalpingu					3	0
+djb/mand1418	Manyjalpingu					3	0
 rxd	Ngardi					3	0
 mul	Nhangu, nec					3	3
 mul	Southern European Languages, nfd					3	0

@@ -271,8 +271,8 @@ jra	Jarai				1,402	457	907	354
 rad	Rade				1,320	487	809	315
 msa/zlm	Malay	10,670	12,440	14,580	14,840	1,555	4,437	887
 msa/ind	Indonesian	48,140	60,657	67,410	75,360	3,236	28,590	2,035
-max	Moluccan	70						
-min	Minangkabau			15				
+msa/max	Moluccan	70						
+msa/min	Minangkabau			15				
 ace	Achinese		32	small number				
 mul	Other Austronesian languages				825	401	382	242
 phi	Philippine languages				1,889,000	13,700	593,300	6,651

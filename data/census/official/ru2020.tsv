@@ -53,7 +53,7 @@ kva	Bagvalal	Багвалинский	2527	2,420	2,297
 bca	Bai	Бай	3	0	
 ban	Balinese	Балийский	3	1	
 mul	Balkan	Балканский	22	14	
-bam	Bamana	Бамана	12	6	
+man/bam	Bamana	Бамана	12	6	
 #bnt	Bantu	Банту	17	7	
 eus	Basque	Баскский	8	7	
 bci	Baoulé	Бауле	4	1	
@@ -91,7 +91,7 @@ haw	Hawaiian	Гавайский	18	11
 gag	Gagauz	Гагаузский	3885	2,205	4,966
 hat	Haitian	Гаитянский	23	18	
 hns	Guyanese Creole	Гайанский креольский	2	1	
-mnk	Gambian	Гамбийский	1	1	
+man/mnk	Gambian	Гамбийский	1	1	
 aka	Ghanaian	Ганский	2	2	
 myn	Guatemalan	Гватемальский	4	1	
 mul	Guinean	Гвинейский	9	7	
@@ -108,7 +108,7 @@ dar	Dargin	Даргинский	362156	346,337	587,391
 prs	Dari	Дари	501	261	364
 dan	Danish	Датский	559	166	65
 dta	Daurian	Даурский	3	1	
-dyu	Dioula	Диула	4	2	
+man/dyu	Dioula	Диула	4	2	
 dlg	Dolgan	Долганский	4836	3,757	5,346
 luo	Doluo	Долуо	1	1	
 #gem	Proto-Germanic	Древнегерманский	124	45	
@@ -163,7 +163,7 @@ kik	Kikuyu	Кикуйю	1	0
 kir	Kyrgyz	Киргизский	85655	65,406	115,781
 che	Kistin	Кистинский	50	45	
 zho	Chinese	Китайский	59249	24,711	17,556
-ktu	Kituba	Китуба	2	1	
+man/ktu	Kituba	Китуба	2	1	
 quc	Kiche	Киче	1	0	
 kom	Komi	Коми	108958	91,595	99,609
 koi	Komi-Permyak	Коми-пермяцкий	41447	35,715	40,293
@@ -208,7 +208,7 @@ mlg	Malagasy	Малагасийский	15	9
 msa/zlm/zsm	Malay	Малайский	101	46	36
 mal	Malayalam	Малаялам	158	133	
 gcc	Mali	Малийский	30	19	
-mnk	Malinke	Малинке	4	3	
+man/mnk	Malinke	Малинке	4	3	
 div	Dhivehi	Мальдивский	5	2	
 mlt	Maltese	Мальтийский	20	10	
 mni	Manipuri	Манипури	2	2	
