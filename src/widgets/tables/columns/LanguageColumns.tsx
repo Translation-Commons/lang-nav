@@ -92,6 +92,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       key: 'Language Family',
       render: (lang) => <HoverableObjectName object={getLanguageRootLanguageFamily(lang)} />,
       isInitiallyVisible: false,
+      field: Field.LanguageFamily,
       columnGroup: 'Relations',
     },
     {
