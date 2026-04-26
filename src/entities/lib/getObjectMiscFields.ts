@@ -78,6 +78,26 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
   }
 }
 
+// Field.CountOfKeyboards
+export function getCountOfKeyboards(object: ObjectData): number | undefined {
+  const { type } = object;
+  switch (type) {
+    case ObjectType.Language:
+      return object.keyboards?.length ?? 0;
+    case ObjectType.WritingSystem:
+      return object.outputKeyboards?.length ?? 0;
+    case ObjectType.Keyboard:
+      return 1; // A keyboard counts as 1 keyboard
+    case ObjectType.Territory:
+    case ObjectType.Locale:
+    case ObjectType.Variant:
+    case ObjectType.Census:
+      return undefined;
+    default:
+      enforceExhaustiveSwitch(type);
+  }
+}
+
 // Field.Literacy
 export function getObjectLiteracy(object: ObjectData): number | undefined {
   switch (object.type) {
