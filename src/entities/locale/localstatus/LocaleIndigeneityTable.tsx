@@ -135,6 +135,10 @@ const LocaleIndigeneityTable: React.FC<{
               </ExternalLink>
             );
           },
+          exportValue: (locale) => {
+            const isoCode = locale.language?.ISO?.code;
+            return isoCode ? `https://en.wikipedia.org/wiki/ISO_639:${isoCode}` : '';
+          },
           isInitiallyVisible: true,
         },
       ]}
