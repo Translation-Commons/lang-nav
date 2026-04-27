@@ -28,24 +28,11 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
       {populationEstimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
-        <div
-          style={{
-            display: 'flex',
-            gap: '2em',
-            justifyContent: 'center',
-            alignItems: 'flex-end',
-            marginTop: 'auto',
-            paddingBottom: '0.5em',
-            flexGrow: 1,
-          }}
-        >
-          {/* Speakers */}
-          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-            <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
-              <LanguagePopulationEstimate lang={lang} />
-            </div>
-            <Deemphasized>Speakers</Deemphasized>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+          <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
+            <LanguagePopulationEstimate lang={lang} />
           </div>
+          <Deemphasized>Speakers</Deemphasized>
         </div>
       )}
     </DetailsSection>
