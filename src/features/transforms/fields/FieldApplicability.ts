@@ -19,7 +19,6 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.Indigeneity,
   Field.CLDRCoverage,
   Field.DigitalSupport,
-  Field.LanguageFamily,
   Field.WritingSystemScope,
   Field.Coordinates,
 ];
@@ -145,6 +144,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.VitalityEthnologueCoarse,
 
         Field.Language, // Equivalent to DisplayName for languages
+        Field.LanguageFamily,
         Field.WritingSystem,
         Field.Territory,
         Field.SourceForPopulation,
