@@ -81,9 +81,9 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
     locale.officialStatus == null, // no_official_status
 
     // 5. Indigeneity
-    '', // indigenous_language
-    '', // not_an_indigenous_language
-    '', // unclear
+    locale.historicPresence && locale.langFormedHere ? 'TRUE' : '', // indigenous_language
+    locale.historicPresence === false && locale.langFormedHere === false ? 'TRUE' : '', // not_an_indigenous_language
+    locale.langFormedHere !== locale.historicPresence ? 'TRUE' : '', // unclear
 
     // 6. Graphisation (refers to development and availability of scripts and orthographic conventions for a language)
     hasWritingSystem ? 'TRUE' : '', // has_writing_system

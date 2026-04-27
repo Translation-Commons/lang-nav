@@ -30,8 +30,11 @@ const LanguageTerritoryList: React.FC<Props> = ({ lang }) => {
 
 const LanguageTerritoryListContents: React.FC<Props> = ({ lang }) => {
   const locales = lang.locales?.filter((loc) => loc.territoryCode != null) ?? [];
-  const filteredLocales = useFilteredObjects({ inputObjects: locales, useSubstring: false })
-    .filteredObjects as LocaleData[];
+  const filteredLocales = useFilteredObjects({
+    inputObjects: locales,
+    useSubstring: false,
+    useConnections: false,
+  }).filteredObjects as LocaleData[];
 
   if (locales.length === 0) return <Deemphasized>Unknown</Deemphasized>;
   const numberOfTerritories = countBy(locales, (loc) => loc.territoryCode ?? '');

@@ -14,6 +14,8 @@ import {
   WikipediaStatusDisplay,
 } from '@entities/ui/ObjectWikipediaInfo';
 
+import ExternalLink from '@shared/ui/ExternalLink';
+
 const columns: TableColumn<LanguageData>[] = [
   // {
   //   key: 'Digital Support (Ethnologue)',
@@ -78,6 +80,22 @@ const columns: TableColumn<LanguageData>[] = [
     key: 'Wikipedia Active Users',
     render: (object) => <WikipediaActiveUsers object={object} />,
     valueType: TableValueType.Population,
+  },
+  {
+    key: 'Wikipedia Article',
+    render: (language) => {
+      const isoCode = language?.ISO?.code;
+      if (!isoCode) return '';
+      return (
+        <ExternalLink href={`https://en.wikipedia.org/wiki/ISO_639:${isoCode}`}>
+          wikipedia
+        </ExternalLink>
+      );
+    },
+    exportValue: (language) => {
+      const isoCode = language?.ISO?.code;
+      return isoCode ? `https://en.wikipedia.org/wiki/ISO_639:${isoCode}` : '';
+    },
   },
 ];
 
