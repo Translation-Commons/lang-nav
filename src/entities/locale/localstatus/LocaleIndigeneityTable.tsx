@@ -13,6 +13,7 @@ import { LangFormedHereFieldDescription } from '@entities/locale/localstatus/Loc
 import { HistoricPresenceFieldDescription } from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import { getLanguagesBiggestCountryLocale } from './LocaleIndigeneityPredictions';
 import {
@@ -122,6 +123,19 @@ const LocaleIndigeneityTable: React.FC<{
           ),
           field: Field.HistoricPresence,
           columnGroup: 'Status',
+        },
+        {
+          key: 'Wikipedia for Language',
+          render: (locale) => {
+            const isoCode = locale.language?.ISO?.code;
+            if (!isoCode) return '';
+            return (
+              <ExternalLink href={`https://en.wikipedia.org/wiki/ISO_639:${isoCode}`}>
+                wikipedia
+              </ExternalLink>
+            );
+          },
+          isInitiallyVisible: true,
         },
       ]}
     />
