@@ -111,6 +111,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.ECRMLProtection]: alwaysTrue,
 
     [Field.CountOfLanguages]: alwaysTrue,
+    [Field.CountOfKeyboards]: alwaysTrue,
     [Field.CountOfWritingSystems]: alwaysTrue,
     [Field.CountOfChildTerritories]: alwaysTrue,
     [Field.CountOfCountries]: alwaysTrue,

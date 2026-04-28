@@ -54,6 +54,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.SourceForPopulation:
       return FieldGroup.Relation;
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfChildTerritories:
     case Field.CountOfCountries:

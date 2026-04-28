@@ -48,6 +48,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return <>{fieldValue}</>;
 
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:

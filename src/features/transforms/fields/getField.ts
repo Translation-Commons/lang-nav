@@ -3,6 +3,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { getRootLanguageFamilyForEntity } from '@entities/language/LanguageFamilyUtils';
 import {
   getCountOfCensuses,
+  getCountOfKeyboards,
   getCountOfLanguages,
   getCountOfWritingSystems,
   getDepth,
@@ -134,6 +135,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     // Counts of Related Objects
     case Field.CountOfLanguages:
       return getCountOfLanguages(object);
+    case Field.CountOfKeyboards:
+      return getCountOfKeyboards(object);
     case Field.CountOfCountries:
       return getCountOfCountries(object);
     case Field.CountOfChildTerritories:

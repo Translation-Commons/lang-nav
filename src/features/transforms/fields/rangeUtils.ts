@@ -36,6 +36,7 @@ export function getMinimumValue(field?: Field, populationMin?: number): number {
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:
@@ -116,6 +117,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
       // return Not doing "World" as max since its not always shown and can throw off the color scaling
       return maxBy(objects, (obj) => (getField(obj, field) as number) || 0) || 0;
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:

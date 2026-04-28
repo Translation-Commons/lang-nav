@@ -152,6 +152,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         // Field.Region, // TODO
 
         Field.CountOfLanguages,
+        Field.CountOfKeyboards,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
         // Field.CountOfVariants, // TODO
@@ -197,6 +198,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Territory,
 
         Field.CountOfLanguages,
+        Field.CountOfKeyboards,
         Field.CountOfCountries,
         Field.CountOfWritingSystems,
 
@@ -265,6 +267,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.Depth,
 
         Field.CountOfLanguages,
+        Field.CountOfKeyboards,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
@@ -318,6 +321,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.TerritoryScope,
 
         Field.CountOfLanguages,
+        Field.CountOfKeyboards,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
