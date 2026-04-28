@@ -14,6 +14,7 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 import {
   getBaseLanguageData,
   LanguageData,
+  LanguageScope,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
@@ -30,6 +31,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     ...getBaseLanguageData('sjn', 'Sindarin'), // sjn
     nameEndonym: 'sɪndarɪn', // using IPA because Tengwar letters aren't usually supported
     names: ['Sindarin', 'sɪndarɪn', '', 'Elvish', 'Elven Tongue', 'Edhellen'],
+    scope: LanguageScope.Language,
     populationEstimate: 14400,
     populationRough: 24000,
     primaryScriptCode: 'Teng',
@@ -41,6 +43,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     ...getBaseLanguageData('dori0123', 'Doriathrin'), // dori0123
     nameEndonym: 'dorjaθɪn', // using IPA because Tengwar letters aren't usually supported
     names: ['Central Sindarin', 'Doriathrin', '', 'dorjaθɪn'],
+    scope: LanguageScope.Dialect,
     populationEstimate: 2500,
     populationRough: 2500,
     primaryScriptCode: 'Teng',
