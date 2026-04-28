@@ -86,11 +86,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       render: (object) =>
         object.locales &&
         object.locales.length > 0 && (
-          <HoverableObjectName
-            labelSource="language"
-            object={getTerritoryBiggestLocale(object)}
-            style={{ textDecoration: 'none' }}
-          />
+          <HoverableObjectName labelSource="language" object={getTerritoryBiggestLocale(object)} />
         ),
       isInitiallyVisible: false,
       field: Field.Language,
@@ -98,7 +94,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Biggest Language %',
-      render: (object) => object.locales?.[0].populationSpeakingPercent,
+      render: (object) => getTerritoryBiggestLocale(object)?.populationSpeakingPercent,
       isInitiallyVisible: false,
       field: Field.PopulationPercentInBiggestDescendantLanguage,
       columnGroup: 'Language',
@@ -115,7 +111,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Contained UN Region',
-      render: (object) => object.parentUNRegion?.nameDisplay,
+      render: (object) => <HoverableObjectName object={object.parentUNRegion} />,
       isInitiallyVisible: false,
       field: Field.Region,
       columnGroup: 'Relations',
