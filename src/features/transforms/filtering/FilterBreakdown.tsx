@@ -46,7 +46,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     const filteredByTerritoryScope = filteredByModality.filter(filterBy[Field.TerritoryScope]);
     const filteredByTerritory = filteredByTerritoryScope.filter(filterBy[Field.Territory]);
     const filteredByWritingSystem = filteredByTerritory.filter(filterBy[Field.WritingSystem]);
-    const filteredByLanguage = filteredByWritingSystem.filter(filterBy[Field.Language]);
+    const filteredByLanguageFamily = filteredByWritingSystem.filter(filterBy[Field.LanguageFamily]);
+    const filteredByLanguage = filteredByLanguageFamily.filter(filterBy[Field.Language]);
     const filteredByVitality = filteredByLanguage.filter(filterByVitality);
     const filteredBySubstring = filteredByVitality.filter(filterBySubstring);
     const filteredByPopulation = filteredBySubstring.filter(filterByPopulation);
@@ -56,6 +57,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       filteredByTerritoryScope.length,
       filteredByTerritory.length,
       filteredByWritingSystem.length,
+      filteredByLanguageFamily.length,
       filteredByLanguage.length,
       filteredByVitality.length,
       filteredBySubstring.length,
@@ -69,10 +71,11 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const nFilteredByTerritoryScope = nInModality - nInTerritoryScope;
   const nFilteredByTerritory = nInTerritoryScope - nInTerritory;
   const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
-  const nFilteredByLanguage = nWrittenIn - nWithLanguage;
-  const nFilteredByVitality = nWithLanguage - nInVitality;
-  const nFilteredBySubstring = nInVitality - nMatchingSubstring;
-  const nFilteredByPopulation = nMatchingSubstring - nInPopulationRange;
+  const nFilteredByLanguageFamily = nWrittenIn - nWithLanguage;
+  const nFilteredByLanguage = nWithLanguage - nInVitality;
+  const nFilteredByVitality = nInVitality - nMatchingSubstring;
+  const nFilteredBySubstring = nMatchingSubstring - nInPopulationRange;
+  const nFilteredByPopulation = nInPopulationRange - nInPopulationRange;
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
@@ -160,6 +163,22 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the writing system filter"
                 onClick={() => updatePageParams({ writingSystemFilter: '' })}
+                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+              >
+                <XIcon size="1em" display="block" />
+              </HoverableButton>
+            </td>
+          </tr>
+        )}
+        {nFilteredByLanguageFamily > 0 && (
+          <tr>
+            <td>Not {filterLabels.languageFamilyFilter}:</td>
+            <td className="count">{(nFilteredByLanguageFamily * -1).toLocaleString()}</td>
+            <td>
+              <HoverableButton
+                buttonType="reset"
+                hoverContent="Clear the language family filter"
+                onClick={() => updatePageParams({ languageFamilyFilter: '' })}
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >
                 <XIcon size="1em" display="block" />

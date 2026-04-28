@@ -1,4 +1,6 @@
+import { ObjectType } from '@features/params/PageParamTypes';
 import { getLanguageForEntity } from '@features/transforms/fields/getEntityConnection';
+import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -11,7 +13,8 @@ export function getLanguageRootLanguageFamily(lang: LanguageData, depth = 0): La
 }
 
 export function getRootLanguageFamilyForEntity(ent: EntityData): LanguageData | undefined {
-  const lang = getLanguageForEntity(ent);
+  let lang = getLanguageForEntity(ent);
+  if (ent.type === ObjectType.Territory) lang = ent.locales?.sort(sortByPopulation)?.[0]?.language;
   if (!lang) return undefined;
   return getLanguageRootLanguageFamily(lang);
 }

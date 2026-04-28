@@ -5,6 +5,7 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport';
 import Field from '@features/transforms/fields/Field';
+import { getLanguageFamiliesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
 
 import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
@@ -71,7 +72,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       isInitiallyVisible: false,
     },
     {
-      key: 'Languages',
+      key: 'Language Count',
       render: (object) =>
         object.locales && (
           <HoverableEnumeration
@@ -97,6 +98,33 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       render: (object) => getTerritoryBiggestLocale(object)?.populationSpeakingPercent,
       isInitiallyVisible: false,
       field: Field.PopulationPercentInBiggestDescendantLanguage,
+      columnGroup: 'Language',
+    },
+    {
+      key: 'Language Families',
+      render: (object) => (
+        <CommaSeparated limit={1} limitText="short">
+          {getLanguageFamiliesRelevantToObject(object)
+            ?.filter((lf) => lf.parentLanguage == null)
+            .map((lf) => (
+              <HoverableObjectName key={lf.ID} object={lf} />
+            ))}
+        </CommaSeparated>
+      ),
+      field: Field.LanguageFamily,
+      columnGroup: 'Language',
+    },
+    {
+      key: 'Language Family Count',
+      render: (object) => (
+        <HoverableEnumeration
+          items={
+            getLanguageFamiliesRelevantToObject(object)
+              ?.filter((lf) => lf.parentLanguage == null)
+              .map((ws) => ws.nameDisplay) ?? []
+          }
+        />
+      ),
       columnGroup: 'Language',
     },
     {

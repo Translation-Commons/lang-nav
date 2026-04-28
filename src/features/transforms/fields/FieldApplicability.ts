@@ -34,7 +34,7 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  * the number of child language nodes.
  */
 export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
-  [ObjectType.Language]: [],
+  [ObjectType.Language]: [Field.Language],
   [ObjectType.Territory]: [Field.PopulationDirectlySourced],
   [ObjectType.WritingSystem]: [
     Field.WritingSystem,
@@ -105,6 +105,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.TerritoryScope,
 
         Field.Language,
+        Field.LanguageFamily,
         Field.WritingSystem,
         Field.Territory, // Equivalent to DisplayName for territories
         Field.Region,
@@ -309,6 +310,8 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.LanguageScope,
         Field.WritingSystemScope,
         Field.TerritoryScope,
+
+        Field.LanguageFamily,
       ];
     case Transform.Scale:
       return [
@@ -340,6 +343,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.Territory,
         Field.WritingSystem,
         Field.Language,
+        Field.LanguageFamily,
         Field.SourceForLanguage,
         Field.Modality,
         Field.LanguageScope,

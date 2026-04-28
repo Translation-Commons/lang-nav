@@ -23,16 +23,19 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
     const getMatchDistance = (object: ObjectData): number => {
       let dist = 0;
-      if (!filterBy[Field.Language]?.(object)) dist += 1;
-      if (!filterBy[Field.WritingSystem]?.(object)) dist += 2;
-      if (!filterBy[Field.Territory]?.(object)) dist += 4;
-      if (!filterBy[Field.TerritoryScope]?.(object)) dist += 8;
-      if (!filterBy[Field.Modality]?.(object)) dist += 16;
-      if (!filterBy[Field.LanguageScope]?.(object)) dist += 32;
+      if (!filterBy[Field.LanguageFamily]?.(object)) dist += 1;
+      if (!filterBy[Field.Language]?.(object)) dist += 2;
+      if (!filterBy[Field.WritingSystem]?.(object)) dist += 4;
+      if (!filterBy[Field.Territory]?.(object)) dist += 8;
+      if (!filterBy[Field.TerritoryScope]?.(object)) dist += 16;
+      if (!filterBy[Field.Modality]?.(object)) dist += 32;
+      if (!filterBy[Field.LanguageScope]?.(object)) dist += 64;
       return dist;
     };
     const getMatchGroup = (object: ObjectData): string => {
       if (!filterBy[Field.Language]?.(object)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy[Field.LanguageFamily]?.(object))
+        return 'not ' + filterLabels.languageFamilyFilter;
       if (!filterBy[Field.WritingSystem]?.(object))
         return 'not ' + filterLabels.writingSystemFilter;
       if (!filterBy[Field.Territory]?.(object)) return 'not ' + filterLabels.territoryFilter;
@@ -44,6 +47,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
     return [getMatchDistance, getMatchGroup];
   }, [
     filterBy[Field.Language],
+    filterBy[Field.LanguageFamily],
     filterBy[Field.WritingSystem],
     filterBy[Field.Territory],
     filterBy[Field.TerritoryScope],

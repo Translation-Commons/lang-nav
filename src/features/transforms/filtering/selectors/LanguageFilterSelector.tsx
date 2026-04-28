@@ -12,7 +12,7 @@ import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import Field from '../../fields/Field';
 import { sortByPopulation } from '../../sorting/sort';
@@ -29,6 +29,7 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
   const filterByScope = filterBy[Field.LanguageScope];
   const filterByTerritory = filterBy[Field.Territory];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
+  const filterByLanguageFamily = filterBy[Field.LanguageFamily];
   const filterLabels = getFilterLabels();
   const { display: inheritedDisplay } = useSelectorDisplay();
   const display = manualDisplay ?? inheritedDisplay;
@@ -39,21 +40,32 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
       if (!filterByWritingSystem(language)) dist += 1;
       if (!filterByTerritory(language)) dist += 2;
       if (!filterByScope(language)) dist += 4;
+      if (!filterByLanguageFamily(language)) dist += 8;
       return dist;
     };
     const getMatchGroup = (language: LanguageData): string => {
       if (!filterByWritingSystem(language)) return 'not ' + filterLabels.writingSystemFilter;
       if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
       if (!filterByScope(language)) return 'not ' + filterLabels.languageScope;
+      if (!filterByLanguageFamily(language)) return 'not ' + filterLabels.languageFamilyFilter;
       return 'matched';
     };
 
     return getSuggestionsFunction(
-      languages.sort(sortByPopulation),
+      languages
+        .filter((language) => language.scope !== LanguageScope.Family)
+        .sort(sortByPopulation),
       getMatchDistance,
       getMatchGroup,
     );
-  }, [languages, filterByScope, filterByTerritory, filterByWritingSystem, filterLabels]);
+  }, [
+    filterByLanguageFamily,
+    filterByScope,
+    filterByTerritory,
+    filterByWritingSystem,
+    filterLabels,
+    languages,
+  ]);
 
   return (
     <SelectorDisplayProvider display={display}>
