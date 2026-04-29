@@ -61,13 +61,13 @@
 .theme-transitioning *:not(.global-theme-toggle, .global-theme-toggle *)::after {
   /* Added only during manual toggles so theme changes animate without affecting every normal page update. */
   transition:
-          background-color 320ms ease-in-out,
-          background 320ms ease-in-out,
-          border-color 320ms ease-in-out,
-          box-shadow 320ms ease-in-out,
-          color 320ms ease-in-out,
-          fill 320ms ease-in-out,
-          stroke 320ms ease-in-out;
+          background-color 500ms ease-in-out,
+          background 500ms ease-in-out,
+          border-color 500ms ease-in-out,
+          box-shadow 500ms ease-in-out,
+          color 500ms ease-in-out,
+          fill 500ms ease-in-out,
+          stroke 500ms ease-in-out;
 }
 
 @media (prefers-color-scheme: dark) {
