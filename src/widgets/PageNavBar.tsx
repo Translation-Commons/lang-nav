@@ -8,6 +8,8 @@ import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
 
+import GlobalThemeToggle from './GlobalThemeToggle';
+
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
   const [feedbackOpen, setFeedbackOpen] = useState(false);
@@ -30,6 +32,7 @@ const PageNavBar: React.FC = () => {
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <SearchBar />
       </div>
+      <GlobalThemeToggle />
       <button
         className="primary"
         type="button"

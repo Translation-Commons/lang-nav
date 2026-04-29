@@ -7,6 +7,9 @@
 
 :root,
 :root.light {
+  /* Tell the browser to render built-in controls/scrollbars as light while these tokens are active. */
+  color-scheme: light;
+
   /* Primary text color */
   --color-text: #04355c;
   --color-text-secondary: #7f7f7f;
@@ -41,7 +44,8 @@
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
+  /* Default browser UI to light before any saved/manual theme class is applied. */
+  color-scheme: light;
   color: var(--color-text);
   background-color: var(--color-background);
 
@@ -51,8 +55,26 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.theme-transitioning,
+.theme-transitioning *,
+.theme-transitioning *::before,
+.theme-transitioning *::after {
+  /* Added only during manual toggles so theme changes animate without affecting every normal page update. */
+  transition:
+          background-color 320ms ease-in-out,
+          background 320ms ease-in-out,
+          border-color 320ms ease-in-out,
+          box-shadow 320ms ease-in-out,
+          color 320ms ease-in-out,
+          fill 320ms ease-in-out,
+          stroke 320ms ease-in-out;
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
+    /* When the user follows their device, native controls should also switch to dark. */
+    color-scheme: dark;
+
     --color-text: #f1f1f1;
     --color-text-secondary: #aaaaaa;
     --color-text-highlight: #575741;
@@ -76,6 +98,9 @@
 
 /* Keep this in sync with the above @media query */
 :root.dark {
+  /* Manual dark mode override; this wins over the device preference when the class is present. */
+  color-scheme: dark;
+
   --color-text: #f1f1f1;
   --color-text-secondary: #aaaaaa;
   --color-text-highlight: #575741;
