@@ -75,7 +75,7 @@ function ColumnSortControls<T extends EntityData>({ column }: { column: TableCol
             onClick={() => updatePageParams({ secondarySortBy: column.field })}
             style={{ padding: '0.25em 0.5em' }}
           >
-            Use as tie-breaker ({getSortingText(valueType, sortBehavior)})
+            use as tie-breaker ({getSortingText(valueType, sortBehavior)})
           </button>
         </td>
       </tr>

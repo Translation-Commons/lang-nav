@@ -1,5 +1,5 @@
 import { ArrowUpDownIcon } from 'lucide-react';
-import { useCallback, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePageParams from '@features/params/usePageParams';
@@ -18,6 +18,27 @@ type Props<T extends EntityData> = {
 function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>) {
   const { sortBy, secondarySortBy } = usePageParams();
 
+  return (
+    <HoverableContainer column={column} appearance={appearance}>
+      {column.label ?? column.key}{' '}
+      {sortBy === column.field || secondarySortBy === column.field ? (
+        <ArrowUpDownIcon
+          size={14}
+          style={{
+            color: 'var(--color-button-primary)',
+            opacity: secondarySortBy === column.field ? 0.5 : 1,
+          }}
+        />
+      ) : null}
+    </HoverableContainer>
+  );
+}
+
+function HoverableContainer<T extends EntityData>({
+  column,
+  children,
+  appearance,
+}: React.PropsWithChildren<Props<T>>) {
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const [isHovering, setIsHovering] = useState(false);
 
@@ -33,35 +54,35 @@ function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>)
     onMouseLeaveTriggeringElement();
   }, [onMouseLeaveTriggeringElement]);
 
+  if (appearance === 'th') {
+    return (
+      <th
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
+          cursor: 'default',
+          padding: '0.25em 0.5em',
+          maxWidth: MAX_COLUMN_WIDTH,
+          minHeight: '2em',
+          textAlign: 'start',
+        }}
+      >
+        {children}
+      </th>
+    );
+  }
+
   return (
-    <th
+    <span
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       style={{
-        color: 'var(--color-text)',
         backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
-
-        textAlign: 'start',
-        maxWidth: MAX_COLUMN_WIDTH,
-        minHeight: '2em',
-
-        cursor: appearance === 'text' ? 'pointer' : 'default',
-        display: appearance === 'text' ? 'inline' : undefined,
-        padding: appearance === 'th' ? '0.25em 0.5em' : undefined,
-        fontWeight: appearance === 'th' ? 'bold' : 'normal',
       }}
     >
-      {column.label ?? column.key}{' '}
-      {sortBy === column.field || secondarySortBy === column.field ? (
-        <ArrowUpDownIcon
-          size={14}
-          style={{
-            color: 'var(--color-button-primary)',
-            opacity: secondarySortBy === column.field ? 0.5 : 1,
-          }}
-        />
-      ) : null}
-    </th>
+      {children}
+    </span>
   );
 }
 
