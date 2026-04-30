@@ -59,15 +59,7 @@
 .theme-transitioning *:not(.global-theme-toggle, .global-theme-toggle *),
 .theme-transitioning *:not(.global-theme-toggle, .global-theme-toggle *)::before,
 .theme-transitioning *:not(.global-theme-toggle, .global-theme-toggle *)::after {
-  /* Added only during manual toggles so theme changes animate without affecting every normal page update. */
-  transition:
-    background-color 500ms ease-in-out,
-    background 500ms ease-in-out,
-    border-color 500ms ease-in-out,
-    box-shadow 500ms ease-in-out,
-    color 500ms ease-in-out,
-    fill 500ms ease-in-out,
-    stroke 500ms ease-in-out;
+  transition: background-color 500ms ease-out !important;
 }
 
 @media (prefers-color-scheme: dark) {

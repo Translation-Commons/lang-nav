@@ -7,7 +7,7 @@ import './GlobalThemeToggle.css';
 
 const THEME_TRANSITION_CLASS = 'theme-transitioning';
 const THEME_TRANSITION_MS = 520;
-const THEME_TOGGLE_COOLDOWN_MS = 4000;
+const THEME_TOGGLE_COOLDOWN_MS = 1000;
 
 const GlobalThemeToggle = () => {
   const { pageBrightness, setPreference } = usePageParams().brightness;
