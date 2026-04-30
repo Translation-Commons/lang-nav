@@ -2,6 +2,7 @@ import { MailIcon, XIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import ZIndex from '@features/layers/ZIndex';
 
 import { getFeedbackEmailBody } from './getFeedbackEmailBody';
 
@@ -33,7 +34,7 @@ export function FeedbackForm({ onClose }: Props) {
         position: 'fixed',
         top: '0.75em',
         right: '0.75em',
-        zIndex: 9999,
+        zIndex: ZIndex.FeedbackForm,
         width: '20em', // 320px
         backgroundColor: 'var(--color-background)',
         borderRadius: '0.5em',

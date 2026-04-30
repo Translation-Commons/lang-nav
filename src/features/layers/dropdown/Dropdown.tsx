@@ -1,6 +1,8 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 
+import ZIndex from '../ZIndex';
+
 import { useDropdownAnchor } from './DropdownAnchorContext';
 
 type Alignment = 'start' | 'center' | 'end';
@@ -131,7 +133,7 @@ const Dropdown: React.FC<Props> = ({
         position: 'fixed',
         left: ready ? position.left : -9999,
         top: ready ? position.top : -9999,
-        zIndex: 1000,
+        zIndex: ZIndex.Dropdown,
         pointerEvents: 'auto',
         ...style,
       }}

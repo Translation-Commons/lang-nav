@@ -1,4 +1,4 @@
-import { InfoIcon, SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
+import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
@@ -9,9 +9,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
 
-import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
-import TableSortButton from './TableSortButton';
+import TableColumnName from './TableColumnName';
 import { ColumnVisibilityModule } from './useColumnVisibility';
 
 function TableColumnSelector<T extends ObjectData>({
@@ -43,6 +42,8 @@ function TableColumnSelector<T extends ObjectData>({
         title="Select Columns"
         bodyStyle={{ width: '90vw', maxWidth: '85em', padding: '1em' }}
       >
+        Click to toggle the visibility of columns in the table. You can also hover over column names
+        for more info and sorting/filtering options.
         <div
           style={{
             display: 'grid',
@@ -143,15 +144,7 @@ function ColumnCheckbox<T extends ObjectData>({
   return (
     <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
       <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
-      {column.labelInColumnGroup ?? column.label ?? column.key}
-      {column.description && (
-        <Hoverable hoverContent={column.description} style={{ marginLeft: '0.25em' }}>
-          <InfoIcon size="1em" display="block" />
-        </Hoverable>
-      )}
-      {column.field && (
-        <TableSortButton columnSortBy={column.field} valueType={getValueTypeForColumn(column)} />
-      )}
+      <TableColumnName column={column} appearance="text" />
     </label>
   );
 }
