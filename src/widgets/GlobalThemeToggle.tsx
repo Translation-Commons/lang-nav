@@ -6,7 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 import './GlobalThemeToggle.css';
 
 const THEME_TRANSITION_CLASS = 'theme-transitioning';
-const THEME_TRANSITION_MS = 520;
+const THEME_TRANSITION_MS = 3000;
 const THEME_TOGGLE_COOLDOWN_MS = 1000;
 
 const GlobalThemeToggle = () => {
