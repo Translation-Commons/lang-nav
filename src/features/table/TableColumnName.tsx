@@ -1,109 +1,68 @@
-import Hoverable from '@features/layers/hovercard/Hoverable';
+import { ArrowUpDownIcon } from 'lucide-react';
+import { useCallback, useState } from 'react';
+
+import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePageParams from '@features/params/usePageParams';
-import { isFieldApplicable } from '@features/transforms/fields/FieldApplicability';
-import FilterSelector from '@features/transforms/filtering/selectors/FilterSelector';
-import { SortBehavior } from '@features/transforms/sorting/SortTypes';
-import TransformEnum from '@features/transforms/TransformEnum';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-
-import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
-import TableValueType from './TableValueType';
+import TableColumnHovercard from './TableColumnHovercard';
+import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 
-function TableColumnName<T extends EntityData>({ column }: { column: TableColumn<T> }) {
-  return (
-    <Hoverable
-      hoverContent={<ColumnDescriptionAndInteractives column={column} />}
-      style={{ color: 'var(--color-text)', display: 'inline' }}
-    >
-      {column.label ?? column.key}
-    </Hoverable>
-  );
-}
-
-function ColumnDescriptionAndInteractives<T extends EntityData>({
-  column,
-}: {
+type Props<T extends EntityData> = {
   column: TableColumn<T>;
-}) {
-  const isSortable = column.field && isFieldApplicable(column.field, TransformEnum.Sort);
-  const isFilterable = column.field && isFieldApplicable(column.field, TransformEnum.Filter);
+  appearance: 'th' | 'text';
+};
+
+function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>) {
+  const { sortBy, secondarySortBy } = usePageParams();
+
+  const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
+  const [isHovering, setIsHovering] = useState(false);
+
+  const handleMouseEnter = useCallback(
+    (e: React.MouseEvent) => {
+      setIsHovering(true);
+      showHoverCard(<TableColumnHovercard column={column} />, e.clientX, e.clientY);
+    },
+    [column, showHoverCard],
+  );
+  const handleMouseLeave = useCallback(() => {
+    setIsHovering(false);
+    onMouseLeaveTriggeringElement();
+  }, [onMouseLeaveTriggeringElement]);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-      <strong>{column.label ?? column.key}</strong>
-      {column.description && <div>{column.description}</div>}
-      {isSortable && <ColumnSortControls column={column} />}
-      {isFilterable && (
-        <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5em', alignItems: 'center' }}>
-          <strong>Filter:</strong>
-          <div>
-            <FilterSelector field={column.field!} />
-          </div>
-        </div>
-      )}
-    </div>
+    <th
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        color: 'var(--color-text)',
+        backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
+
+        textAlign: 'start',
+        maxWidth: MAX_COLUMN_WIDTH,
+        minHeight: '2em',
+
+        cursor: appearance === 'text' ? 'pointer' : 'default',
+        display: appearance === 'text' ? 'inline' : undefined,
+        padding: appearance === 'th' ? '0.25em 0.5em' : undefined,
+        fontWeight: appearance === 'th' ? 'bold' : 'normal',
+      }}
+    >
+      {column.label ?? column.key}{' '}
+      {sortBy === column.field || secondarySortBy === column.field ? (
+        <ArrowUpDownIcon
+          size={14}
+          style={{
+            color: 'var(--color-button-primary)',
+            opacity: secondarySortBy === column.field ? 0.5 : 1,
+          }}
+        />
+      ) : null}
+    </th>
   );
 }
 
-function ColumnSortControls<T extends EntityData>({ column }: { column: TableColumn<T> }) {
-  const { sortBy, secondarySortBy, sortBehavior, updatePageParams } = usePageParams();
-  const isActive = column.field === sortBy;
-  const isSecondary = column.field === secondarySortBy;
-
-  if (!column.field) return null;
-
-  const valueType = getValueTypeForColumn(column);
-
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-      <div>
-        <strong>Sort:</strong>{' '}
-        {sortBy === column.field
-          ? "It's currently sorting from " + getSortingText(valueType, sortBehavior)
-          : 'Click to sort by this column'}
-      </div>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5em' }}>
-        {[SortBehavior.Normal, SortBehavior.Reverse].map((sb) => (
-          <button
-            key={sb}
-            className={isActive && sortBehavior === sb ? 'primary' : ''}
-            onClick={() => updatePageParams({ sortBy: column.field, sortBehavior: sb })}
-            style={{ padding: '0.25em 0.5em' }}
-          >
-            Sort {getSortingText(valueType, sb)}
-          </button>
-        ))}
-      </div>
-      <div>... or tie break regular sorting by this column</div>
-      <div style={{ display: 'flex', flexDirection: 'row', gap: '0.5em' }}>
-        <button
-          className={isSecondary ? 'primary' : ''}
-          onClick={() => updatePageParams({ secondarySortBy: column.field })}
-          style={{ padding: '0.25em 0.5em' }}
-        >
-          Secondary sort {getSortingText(valueType, sortBehavior)}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function getSortingText(valueType: TableValueType, sortBehavior: SortBehavior) {
-  switch (valueType) {
-    case TableValueType.Population:
-    case TableValueType.Count:
-    case TableValueType.Decimal:
-    case TableValueType.Date:
-    case TableValueType.Enum:
-      return sortBehavior === SortBehavior.Normal ? 'high to low' : 'low to high';
-    case TableValueType.String:
-      return sortBehavior === SortBehavior.Normal ? 'A to Z' : 'Z to A';
-    default:
-      enforceExhaustiveSwitch(valueType);
-  }
-}
 export default TableColumnName;

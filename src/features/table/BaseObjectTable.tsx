@@ -11,6 +11,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
 import TableColumnName from './TableColumnName';
+import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 import TableID from './TableID';
 import TableValueType from './TableValueType';
 
@@ -19,8 +20,6 @@ type Props<T> = {
   objects: T[];
   tableID: TableID;
 };
-
-const MAX_COLUMN_WIDTH = '10em';
 
 function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
   return (
@@ -36,17 +35,7 @@ function BaseObjectTable<T extends ObjectData>({ visibleColumns, objects }: Prop
         >
           <tr>
             {visibleColumns.map((column) => (
-              <th
-                key={column.key}
-                style={{
-                  textAlign: 'start',
-                  maxWidth: MAX_COLUMN_WIDTH,
-                  padding: '0.25em 0.5em',
-                  minHeight: '2em',
-                }}
-              >
-                <TableColumnName column={column} />
-              </th>
+              <TableColumnName column={column} appearance="th" key={column.key} />
             ))}
           </tr>
         </thead>

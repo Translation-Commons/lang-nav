@@ -144,7 +144,7 @@ function ColumnCheckbox<T extends ObjectData>({
   return (
     <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
       <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
-      <TableColumnName column={column} />
+      <TableColumnName column={column} appearance="text" />
     </label>
   );
 }

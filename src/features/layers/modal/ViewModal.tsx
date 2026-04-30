@@ -1,8 +1,6 @@
 import { XIcon } from 'lucide-react';
 import React, { useEffect } from 'react';
 
-import { useClickOutside } from '@shared/hooks/useClickOutside';
-
 import HoverableButton from '../hovercard/HoverableButton';
 
 import './modal.css';
@@ -16,7 +14,8 @@ interface ModalProps {
 }
 
 const ViewModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, bodyStyle }) => {
-  const modalRef = useClickOutside(onClose);
+  // Turning off because of conflicts with hovercards that technically are outside of the modal
+  // const modalRef = useClickOutside(onClose);
 
   useEffect(() => {
     if (!isOpen) return;
@@ -33,7 +32,7 @@ const ViewModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, bod
 
   return (
     <div className="ModalOverlay">
-      <div className="Modal" aria-modal="true" role="dialog" ref={modalRef}>
+      <div className="Modal" aria-modal="true" role="dialog">
         <div className="ModalHeader">
           <div className="ModalTitle">{title}</div>
           <HoverableButton buttonType="reset" hoverContent="Close modal" onClick={onClose}>
