@@ -1,0 +1,32 @@
+#codeDisplay		#bs	ba2013
+#nameDisplay			Bosnia & Herzegovina 2013
+#isoRegionCode	BA		
+#yearCollected			2013
+#languageUse			Speaks
+#acquisitionOrder			L1
+#domain			Home
+#population			2,219,220
+#responsesPerIndividual			1
+#collectorType			Government
+#collectorName			Agency for Statistics of Bosnia and Herzegovina
+#documentName		KNJIGA 2 – ETNIČKANACIONALNA PRIPADNOST,VJEROISPOVJEST, MATERNJI JEZIK	NATIONALITY,RELIGION,LANGUAGE    
+#tableName		6. STANOVNIŠTVO PREMA MATERNJEM JEZIKU I SPOLU, PO KANTONIMA	POPULATION BY MOTHER TONGUE AND SEX, BY CANTONS
+#url	https://fzs.ba/index.php/popis-stanovnistva/popis-stanovnistva-2013/konacni-rezultati-popisa-2013/		
+Language Code	Language Name		Population
+hbs/bos	Bosnian	Bosanski	1,656,461
+hbs/hrv	Croatian	Hrvatski	478,624
+hbs/srp	Serbian	Srpski	43,845
+hbs/srp/hrv	#SerboCroatian	Srpskohrvatski	14,704
+rom	Roma	Romski	4,138
+sqi	Albanian	Albanski	2,215
+hbs/bos/hrv/srp	#Bosnian Croatian Serbian	Bosansko Hrvatsko Srpski	1,856
+tur	Turkish	Turski	1,222
+hbs/bos	Bosniak	Bošnjački	876
+hbs/bos/srp/hrv	#Bosnian Serbian Croatian	Bosansko Srpsko Hrvatski	857
+hbs/hrv/srp	#Croato-Serbian	Hrvatsko Srpski	789
+hbs/bos/hrv	#Bosnian Croatian	Bosansko-hrvatski	705
+hbs/bos	Bosnian Herzegovian	Bosansko-hercegovački	596
+deu	German	Njemački	440
+hbs/srp/hrv/bos	#Serbian Croatian Bosnian	Srpski Hrvatski Bosanski	405
+mul	Other	Ostali	6,830
+mis	Unknown	Nepoznato	4,657
