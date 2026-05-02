@@ -219,6 +219,7 @@ function parseValueByKey(
     case CensusMetadataField.presentedBy:
     case CensusMetadataField.url:
     case CensusMetadataField.documentName:
+    case CensusMetadataField.sectionName:
     case CensusMetadataField.tableName:
     case CensusMetadataField.columnName:
     case CensusMetadataField.citation:
