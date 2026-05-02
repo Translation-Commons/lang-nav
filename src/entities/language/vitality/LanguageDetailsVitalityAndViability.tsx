@@ -13,6 +13,7 @@ import ObjectWikipediaInfo from '../../ui/ObjectWikipediaInfo';
 import LanguageDigitalSupportCell from '../LanguageDigitalSupportCell';
 import { LanguageData } from '../LanguageTypes';
 
+import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 import LanguageVitalityMeter from './VitalityMeter';
 import { VitalitySource } from './VitalityTypes';
 
@@ -64,6 +65,9 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
         }
       >
         <ObjectWikipediaInfo object={lang} />
+      </DetailsField>
+      <DetailsField title="UDHR" description={LanguageUDHRDescription}>
+        <LanguageUDHRInfo lang={lang} size="long" />
       </DetailsField>
     </DetailsSection>
   );

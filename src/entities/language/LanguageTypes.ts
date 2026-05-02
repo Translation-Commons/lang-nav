@@ -14,7 +14,11 @@ import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
-import { ObjectBase, WikipediaData } from '../types/DataTypes';
+import {
+  ObjectBase,
+  UniversalDeclarationOfHumanRightsData,
+  WikipediaData,
+} from '../types/DataTypes';
 
 import { LanguageModality } from './LanguageModality';
 import {
@@ -114,6 +118,7 @@ export interface LanguageData extends ObjectBase {
 
   warnings: Partial<Record<LanguageField, string>>;
   wikipedia?: WikipediaData;
+  udhr?: UniversalDeclarationOfHumanRightsData[];
 
   latitude?: number;
   longitude?: number;

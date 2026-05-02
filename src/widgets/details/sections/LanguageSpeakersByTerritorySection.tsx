@@ -43,7 +43,7 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
             <HoverableObjectName object={locale} labelSource="territory" />
-            <span>
+            <span style={{ textAlign: 'end' }}>
               <CountOfPeople count={locale.populationAdjusted} />
               {locale.populationSpeakingPercent != null && (
                 <Deemphasized> ({locale.populationSpeakingPercent.toFixed(1)}%)</Deemphasized>

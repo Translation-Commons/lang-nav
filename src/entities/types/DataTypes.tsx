@@ -51,3 +51,10 @@ export type WikipediaData = {
   activeUsers: number;
   url: string;
 };
+
+export type UniversalDeclarationOfHumanRightsData = {
+  languageCodePath: string; // e.g. "som/afas1238" for the Af-Marka dialect of Somali
+  name: string; // e.g. "Af Marka"
+  variant: string; // e.g. "Latn", "Cyrl", or "" for undifferentiated
+  documentURL: string; // URL to the UDHR translation document -- maybe just the final path segment, like "af-marka" in "https://www.ohchr.org/en/human-rights/universal-declaration/translations/af-marka"
+};
