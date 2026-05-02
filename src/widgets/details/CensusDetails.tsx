@@ -125,6 +125,7 @@ function CensusSourceSection({ census }: { census: CensusData }) {
     datePublished,
     documentName,
     presentedBy,
+    sectionName,
     tableName,
     url,
   } = census;
@@ -141,6 +142,7 @@ function CensusSourceSection({ census }: { census: CensusData }) {
         </DetailsField>
       )}
       {documentName && <DetailsField title="Document Name">{documentName}</DetailsField>}
+      {sectionName && <DetailsField title="Section Name">{sectionName}</DetailsField>}
       {tableName && <DetailsField title="Table Name">{tableName}</DetailsField>}
       {columnName && <DetailsField title="Column Name">{columnName}</DetailsField>}
       {citation && <DetailsField title="Citation">{citation}</DetailsField>}

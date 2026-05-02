@@ -75,6 +75,7 @@ export interface CensusData extends ObjectBase {
   datePublished?: Date;
   dateAccessed?: Date;
   documentName?: string;
+  sectionName?: string;
   tableName?: string;
   columnName?: string;
   citation?: string; // The full citation, may be redundant if other fields are filled in

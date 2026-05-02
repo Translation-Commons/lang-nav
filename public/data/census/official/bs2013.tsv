@@ -1,32 +1,29 @@
-#codeDisplay		#bs	ba2013
-#nameDisplay			Bosnia & Herzegovina 2013
-#isoRegionCode	BA		
-#yearCollected			2013
-#languageUse			Speaks
-#acquisitionOrder			L1
-#domain			Home
-#population			2,219,220
-#responsesPerIndividual			1
-#collectorType			Government
-#collectorName			Agency for Statistics of Bosnia and Herzegovina
-#documentName		KNJIGA 2 – ETNIČKANACIONALNA PRIPADNOST,VJEROISPOVJEST, MATERNJI JEZIK	NATIONALITY,RELIGION,LANGUAGE    
-#tableName		6. STANOVNIŠTVO PREMA MATERNJEM JEZIKU I SPOLU, PO KANTONIMA	POPULATION BY MOTHER TONGUE AND SEX, BY CANTONS
-#url	https://fzs.ba/index.php/popis-stanovnistva/popis-stanovnistva-2013/konacni-rezultati-popisa-2013/		
-Language Code	Language Name		Population
-hbs/bos	Bosnian	Bosanski	1,656,461
-hbs/hrv	Croatian	Hrvatski	478,624
-hbs/srp	Serbian	Srpski	43,845
-hbs/srp/hrv	#SerboCroatian	Srpskohrvatski	14,704
-rom	Roma	Romski	4,138
-sqi	Albanian	Albanski	2,215
-hbs/bos/hrv/srp	#Bosnian Croatian Serbian	Bosansko Hrvatsko Srpski	1,856
-tur	Turkish	Turski	1,222
-hbs/bos	Bosniak	Bošnjački	876
-hbs/bos/srp/hrv	#Bosnian Serbian Croatian	Bosansko Srpsko Hrvatski	857
-hbs/hrv/srp	#Croato-Serbian	Hrvatsko Srpski	789
-hbs/bos/hrv	#Bosnian Croatian	Bosansko-hrvatski	705
-hbs/bos	Bosnian Herzegovian	Bosansko-hercegovački	596
-deu	German	Njemački	440
-hbs/srp/hrv/bos	#Serbian Croatian Bosnian	Srpski Hrvatski Bosanski	405
-mul	Other	Ostali	6,830
-mis	Unknown	Nepoznato	4,657
+#codeDisplay		#bs-ba2013	ba2013	#ba-bih	#ba-srp	#ba-brc	#bs-ba2023eth	ba2023eth	#ba-bih-eth	#ba-srp-eth	#ba-brc-eth
+#nameDisplay			Bosnia & Herzegovina 2013	Federation of Bosnia and Herzegovina 2013	Republika Srpska 2013	Brčko District 2013		Bosnia & Herzegovina 2013 Ethnicity	Federation of Bosnia and Herzegovina 2013	Republika Srpska 2013	Brčko District 2013
+#isoRegionCode	BA			BA-BIH	BA-SRP	BA-BRC			BA-BIH	BA-SRP	BA-BRC
+#yearCollected	2013										
+#languageUse		Speaks	Speaks	Speaks	Speaks	Speaks	Ethnicity	Ethnicity	Ethnicity	Ethnicity	Ethnicity
+#acquisitionOrder	L1										
+#domain	Home										
+#population	3531159			2,219,220	1,228,423	83,516			2,219,220	1,228,423	83,516
+#responsesPerIndividual	1										
+#geographicScope	Whole Country										
+#nationality	citizens and residents										
+#collectorType	Government										
+#collectorName	Agency for Statistics of Bosnia and Herzegovina	Agencija za statistiku Bosne i Hercegovine									
+#collectorNameShort	BHAS										
+#presentedBy	Web Archive										
+#url	https://web.archive.org/web/20160630143615/http://www.popis2013.ba/popis2013/doc/Popis2013prvoIzdanje.pdf										
+#datePublished	2016-06										
+#dateAccessed	2016-06-30										
+#documentName	Cenzus of Population, Households and Dwellings in Bosnia and Herzegovina, 2013	POPIS STANOVNIŠTVA, DOMAĆINSTAVA I STANOVA U BOSNI I HERCEGOVINI, 2013.									
+#sectionName		5. STANOVNIŠTVO PREMA MATERNJEM JEZIKU I SPOLU	Population by mother tongue and sex				3. STANOVNIŠTVO PREMA ETNIČKOJ/NACIONALNOJ PRIPADNOSTI I SPOLU	Population by ethnicity and sex			
+#tableName		5.1. Tabela : Nivo BIH, entiteti i DB	Population by mother tongue and sex, Level BiH, F BiH, RS and BD				3.1. Tabela : Nivo BIH, entiteti i DB	Population by ethnic / national affiliation and sex , Level BiH, F BiH, RS and BD			
+#columnName		Maternji jezik	Mother tongue				Etnička/Nacionalna pripadnost	Etnicity/Nationality			
+Language Code	Language Name		Bosnia & Herzegovina 2013					Bosnia & Herzegovina 2013 Ethnicity			
+hbs/bos	Bosnian	Bosanski	1866585	1656461	173764	36360	Bošnjaci	1769592	1562372	171839	35381
+hbs/hrv	Croatian	Hrvatski	515481	478624	20104	16753	Hrvati	544780	497883	29645	17252
+hbs/srp	Serbian	Srpski	1086027	43845	1013178	29004	Srbi	1086733	56550	1001299	28884
+mis	Not declared						Ne izjašnjava se	27055	18344	8189	522
+mul	Other	Ostali	55579	35633	18685	1261	Ostali	96539	79838	15324	1377
+mis	No answer	Bez odgovora	7487	4657	2692	138	Bez odgovora	6460	4,233	2,127	100
