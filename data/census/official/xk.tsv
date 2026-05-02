@@ -1,0 +1,24 @@
+#codeDisplay		xk2024	xk2011
+#nameDisplay		Kosovo 2024	Kosovo 2011
+#isoRegionCode	XK		
+#yearCollected		2024	2011
+#languageUse	Speaks		
+#domain	Home		
+#acquisitionOrder	L1		
+#population		1,602,515	1,739,825
+#documentName	Census population / Demographic characteristics		
+#collectorType	Government		
+#collectorName	Kosovo Agency of Statistics		
+#collectorNameShort	ASKdata		
+#url	https://askdata.rks-gov.net/pxweb/en/ASKdata/ASKdata__Census%20population__1_Demographic_Characteristics/census2024_22.px/table/tableViewLayout1/		
+#dateAccessed	2026-05-01		
+#tableName	Population by mother tongue and sex at the national and municipal level for the years 2011 and 2024		
+#notes	Serbian may be underestimated because of boycotts from Serb majority region		
+Language Code	Language Name	Kosovo 2024	Kosovo 2011
+sqi	Albanian	1,485,170	1,644,865
+hbs/srp	#Serb	55,168	27,983
+hbs/bos	Bosnian	28,854	28,989
+tur	Turkish	18,748	19,568
+rom	Romani	5,597	5,860
+mul	Other (specify)	8,978	10,308
+mis	Not available		2,252
