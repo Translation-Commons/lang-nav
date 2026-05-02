@@ -11,6 +11,7 @@
 Some data is imported directly from the CLDR JSON package, available by installing the `cldr-core` npm package.
 
 - supplemental/aliases.json
+- supplemental/languageMatching.json
 - supplemental/plurals.json
 - supplemental/territoryInfo.json
 
