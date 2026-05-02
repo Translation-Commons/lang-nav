@@ -13,7 +13,7 @@ import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTyp
 import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { CLDRCoverageData } from '../types/CLDRTypes';
+import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 import { ObjectBase, WikipediaData } from '../types/DataTypes';
 
 import { LanguageModality } from './LanguageModality';
@@ -142,6 +142,7 @@ export interface LanguageData extends ObjectBase {
   CLDR: LanguageDataInSource & {
     coverage?: CLDRCoverageData;
     dataProvider?: LanguageData | LocaleData;
+    languageMatch?: CLDRLanguageMatchData[];
   };
   Ethnologue: EthnologueLanguageData;
 }

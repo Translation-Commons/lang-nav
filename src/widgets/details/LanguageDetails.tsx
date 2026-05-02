@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
@@ -87,9 +88,19 @@ const FlexItem: React.FC<{ children: React.ReactNode; flex?: string }> = ({
 
 const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
+  const { getCLDRLanguage } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
   const { childLanguages, ISO, Glottolog, variants } = lang;
+  const relatedLanguages = (lang.CLDR.languageMatch ?? [])
+    .map((match) => ({
+      match,
+      relatedLanguage: getCLDRLanguage(match.supported),
+    }))
+    .filter(
+      (entry): entry is { match: (typeof entry)['match']; relatedLanguage: LanguageData } =>
+        entry.relatedLanguage != null,
+    );
 
   return (
     <DetailsSection title="Connections">
@@ -108,6 +119,17 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <CommaSeparated>
             {variants.map((tag) => (
               <HoverableObjectName key={tag.ID} object={tag} />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      {relatedLanguages.length > 0 && (
+        <DetailsField title="Related Languages (CLDR)">
+          <CommaSeparated>
+            {relatedLanguages.map(({ match, relatedLanguage }) => (
+              <span key={match.desired + ':' + match.supported + ':' + match.distance}>
+                <HoverableObjectName object={relatedLanguage} /> ({match.distance} CLDR)
+              </span>
             ))}
           </CommaSeparated>
         </DetailsField>
