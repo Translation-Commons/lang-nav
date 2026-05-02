@@ -43,6 +43,7 @@ describe('CensusMetadataField', () => {
 #datePublished	2014-01-15		
 #dateAccessed	2025-12-19		
 #documentName	Official Languages of Canada		
+#sectionName	Section 3		
 #tableName	Table 3a: The Languages people Speak in Canada		
 #columnName	Mothertongue		
 #citation	Example Citation		The full citation, may be redundant if other fields are filled in`;
@@ -95,6 +96,7 @@ describe('CensusMetadataField', () => {
     datePublished: new Date('2014-01-15'),
     dateAccessed: new Date('2025-12-19'),
     documentName: 'Official Languages of Canada',
+    sectionName: 'Section 3',
     tableName: 'Table 3a: The Languages people Speak in Canada',
     columnName: 'Mothertongue',
     citation: 'Example Citation', // The full citation, may be redundant if other fields are filled in
