@@ -53,6 +53,7 @@ describe('HoverableEnumeration', () => {
 
     const itemElement = getByText('20');
     expect(itemElement).toBeTruthy();
+    // Test altered since rendering is handled by CommaSeparated instead.
     // fireEvent.mouseEnter(itemElement, { clientX: 5, clientY: 15 });
     // expect(showHoverCard).toHaveBeenCalledWith('Item 1, Item 2, Item 3, Item 4, Item 5...', 5, 15);
   });

@@ -212,7 +212,6 @@ function checkFoundLanguage(l: LanguageNotes, foundLanguage?: EntityData) {
 function checkMacrolanguage(l: LanguageNotes) {
   if (!l.entry || !l.specificCode) return;
 
-  // const macrolanguage = getLanguageRootMacrolanguage(l.entry);
   const languageParents = getObjectParents(l.entry).filter(
     (p) => p && p.type === 'Language',
   ) as LanguageData[];
@@ -222,9 +221,7 @@ function checkMacrolanguage(l: LanguageNotes) {
   );
 
   if (!iso639parents) return; // If there is no macrolanguage or language parents, then there is no issue
-  // if (macrolanguage.ID === l.specificCode) return; // If the language itself is a macrolanguage, that's fine
   if (iso639parents.every((p) => l.codePath.includes(p.ID))) return; // If the macrolanguage code is already included in the code path, that's fine
-  // if (allSpecificCodes.includes(iso639parents[0].ID)) return; // If the macrolanguage is listed separately, don't warn
   if (OKAY_MACRO.includes(l.specificCode || '')) return; // If the specific code is in the list of exceptions, don't warn
 
   l.issues.push(

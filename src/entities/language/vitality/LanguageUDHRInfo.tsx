@@ -26,8 +26,8 @@ const LanguageUDHRInfo: React.FC<{ lang: LanguageData; size: 'long' | 'short' }>
   if (size === 'short') {
     return (
       <HoverableEnumeration
-        items={lang.udhr.map((udhrEntry) => (
-          <LanguageUDHRLink key={udhrEntry.name} udhrEntry={udhrEntry} />
+        items={lang.udhr.map((udhrEntry, index) => (
+          <LanguageUDHRLink key={index} udhrEntry={udhrEntry} />
         ))}
       />
     );
@@ -37,8 +37,8 @@ const LanguageUDHRInfo: React.FC<{ lang: LanguageData; size: 'long' | 'short' }>
     <div>
       {lang.udhr.length.toLocaleString()} translation{lang.udhr.length > 1 ? 's' : ''}:{' '}
       <CommaSeparated>
-        {lang.udhr.map((udhrEntry) => (
-          <LanguageUDHRLink key={udhrEntry.name} udhrEntry={udhrEntry} />
+        {lang.udhr.map((udhrEntry, index) => (
+          <LanguageUDHRLink key={index} udhrEntry={udhrEntry} />
         ))}
       </CommaSeparated>
     </div>
@@ -48,7 +48,6 @@ const LanguageUDHRInfo: React.FC<{ lang: LanguageData; size: 'long' | 'short' }>
 const LanguageUDHRLink = ({ udhrEntry }: { udhrEntry: UniversalDeclarationOfHumanRightsData }) => {
   return (
     <ExternalLink
-      key={udhrEntry.name}
       href={
         udhrEntry.documentURL.startsWith('https://')
           ? udhrEntry.documentURL
