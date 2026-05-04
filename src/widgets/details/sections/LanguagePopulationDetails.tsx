@@ -5,6 +5,8 @@ import { LanguagePopulationEstimate } from '@entities/language/population/Langua
 import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
 import DetailsSection from '@shared/containers/DetailsSection';
+import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
+import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = { lang: LanguageData };
@@ -16,9 +18,9 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
     <>
       Population
       {populationEstimateSource && (
-        <span style={{ fontSize: '0.75em', fontWeight: 'normal', marginLeft: '0.5em' }}>
-          (<PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />)
-        </span>
+        <div style={{ fontSize: '0.75em', fontWeight: 'normal', textTransform: 'lowercase' }}>
+          <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
+        </div>
       )}
     </>
   );
@@ -28,12 +30,11 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
       {populationEstimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
-        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-          <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>
+        <DetailsStatContainer>
+          <DetailsStatBlock label="Speakers">
             <LanguagePopulationEstimate lang={lang} />
-          </div>
-          <Deemphasized>Speakers</Deemphasized>
-        </div>
+          </DetailsStatBlock>
+        </DetailsStatContainer>
       )}
     </DetailsSection>
   );

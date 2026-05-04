@@ -5,8 +5,9 @@ import { WikipediaStatus } from '@entities/types/DataTypes';
 import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsSection from '@shared/containers/DetailsSection';
+import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
+import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
 import CountCompact from '@shared/ui/CountCompact';
-import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
 import Pill from '@shared/ui/Pill';
 
@@ -16,30 +17,22 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
 
   return (
     <DetailsSection title={<WikipediaSectionTitle lang={lang} />}>
-      <div
-        style={{
-          display: 'flex',
-          gap: '2em',
-          marginTop: 'auto',
-          paddingBottom: '0.5em',
-          justifyContent: 'center',
-        }}
-      >
-        <StatBlock label="Articles">
+      <DetailsStatContainer>
+        <DetailsStatBlock label="Articles">
           {isActive && wikipedia ? (
             <CountCompact count={wikipedia.articles} />
           ) : (
             <NotApplicableDisplay />
           )}
-        </StatBlock>
-        <StatBlock label="Active Users">
+        </DetailsStatBlock>
+        <DetailsStatBlock label="Active Users">
           {isActive && wikipedia ? (
             <CountCompact count={wikipedia.activeUsers} />
           ) : (
             <NotApplicableDisplay />
           )}
-        </StatBlock>
-      </div>
+        </DetailsStatBlock>
+      </DetailsStatContainer>
     </DetailsSection>
   );
 };
@@ -68,13 +61,6 @@ const WikipediaSectionTitle: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     </div>
   );
 };
-
-const StatBlock: React.FC<{ label: string; children: React.ReactNode }> = ({ label, children }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>{children}</div>
-    <Deemphasized>{label}</Deemphasized>
-  </div>
-);
 
 const NotApplicableDisplay = () => (
   <span style={{ fontSize: '0.6em', color: 'var(--color-text-secondary)' }}>N/A</span>

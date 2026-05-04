@@ -1,11 +1,12 @@
 import React, { ReactNode } from 'react';
 
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import Hoverable from './Hoverable';
 
 type Props = {
-  items?: string[];
+  items?: ReactNode[];
   label?: ReactNode;
   limit?: number;
 };
@@ -16,7 +17,11 @@ const HoverableEnumeration: React.FC<Props> = ({ items, label, limit = 20 }) => 
 
   return (
     <Hoverable
-      hoverContent={items.slice(0, limit).join(', ') + (items.length > limit ? '...' : '')}
+      hoverContent={
+        <div style={{ maxWidth: '300px' }}>
+          <CommaSeparated limit={limit}>{items}</CommaSeparated>
+        </div>
+      }
     >
       {items.length}
       {label && <span style={{ marginLeft: '0.25em' }}>{label}</span>}

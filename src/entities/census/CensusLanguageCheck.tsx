@@ -1,14 +1,17 @@
 import React, { ReactNode, useCallback } from 'react';
 
+import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
+
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { SearchableField } from '@features/params/PageParamTypes';
 import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringFilterOnQuery';
 
-import { getLanguageRootMacrolanguage } from '@entities/language/LanguageFamilyUtils';
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/DataTypes';
+
+import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { isIgnoredLanguageCode, parseCensusLanguageName } from './parseCensusLanguageRow';
 import { parseCensusMetadata } from './parseCensusMetadata';
@@ -89,7 +92,6 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
       } as LanguageNotes;
     })
     .filter((l) => l != null) as LanguageNotes[];
-  const allSpecificCodes = languages.map((l) => l.specificCode).filter((c) => c != null);
 
   languages.forEach((l) => {
     if (!l.name && !l.specificCode) {
@@ -110,7 +112,7 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
     checkName(l);
     checkStatusInName(l);
     checkFoundLanguage(l, l.name ? findLanguage(l.name) : undefined);
-    checkMacrolanguage(l, allSpecificCodes);
+    checkMacrolanguage(l);
   });
 
   if (!languages.some((l) => l.issues.length > 0)) {
@@ -207,24 +209,35 @@ function checkFoundLanguage(l: LanguageNotes, foundLanguage?: EntityData) {
   }
 }
 
-function checkMacrolanguage(l: LanguageNotes, allSpecificCodes: string[]) {
+function checkMacrolanguage(l: LanguageNotes) {
   if (!l.entry || !l.specificCode) return;
 
-  const macrolanguage = getLanguageRootMacrolanguage(l.entry);
-  if (!macrolanguage) return; // If there is no macrolanguage, then there is no issue
-  if (macrolanguage.ID === l.specificCode) return; // If the language itself is a macrolanguage, that's fine
-  if (l.codePath.includes(macrolanguage.ID)) return; // If the macrolanguage code is already included in the code path, that's fine
-  if (allSpecificCodes.includes(macrolanguage.ID)) return; // If the macrolanguage is listed separately, don't warn
+  const languageParents = getObjectParents(l.entry).filter(
+    (p) => p && p.type === 'Language',
+  ) as LanguageData[];
+  const iso639parents = languageParents.filter(
+    (p) =>
+      p.ISO.code && (p.scope === LanguageScope.Macrolanguage || p.scope === LanguageScope.Language),
+  );
+
+  if (!iso639parents) return; // If there is no macrolanguage or language parents, then there is no issue
+  if (iso639parents.every((p) => l.codePath.includes(p.ID))) return; // If the macrolanguage code is already included in the code path, that's fine
   if (OKAY_MACRO.includes(l.specificCode || '')) return; // If the specific code is in the list of exceptions, don't warn
 
   l.issues.push(
     <>
       Code may be{' '}
       <code>
-        {macrolanguage.ID}/{l.codePath}
+        {iso639parents.map((p) => p.ID).join('/')}/{l.specificCode}
       </code>
-      . <HoverableObjectName object={l.entry} /> is part of the{' '}
-      <HoverableObjectName object={macrolanguage} /> macrolanguage.
+      . <HoverableObjectName object={l.entry} /> is contained by language
+      {iso639parents.length > 1 ? ' categories ' : ' category '}
+      <CommaSeparated>
+        {iso639parents.map((p) => (
+          <HoverableObjectName key={p.ID} object={p} />
+        ))}
+      </CommaSeparated>
+      .
     </>,
   );
 }

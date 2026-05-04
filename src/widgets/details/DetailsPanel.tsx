@@ -25,7 +25,7 @@ const DetailsPanel: React.FC = () => {
     <ResizablePanel
       purpose="details"
       isOpen={objectID != null}
-      defaultWidth={600}
+      defaultWidth={900}
       title={<DetailsTitle object={object} />}
     >
       <DetailsBody>

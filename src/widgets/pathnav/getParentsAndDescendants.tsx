@@ -4,17 +4,20 @@ import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
-export function getObjectParents(object?: ObjectData): (ObjectData | undefined)[] {
-  if (object == null) return [];
+export function getObjectParents(
+  object?: ObjectData,
+  depth: number = 0, // to prevent infinite recursion in case of cycles
+): (ObjectData | undefined)[] {
+  if (object == null || depth > 20) return [];
   switch (object.type) {
     case ObjectType.Census:
       return [object.territory];
     case ObjectType.Language:
-      return [...getObjectParents(object.parentLanguage), object.parentLanguage];
+      return [...getObjectParents(object.parentLanguage, depth + 1), object.parentLanguage];
     case ObjectType.Locale:
       return [object.language, object.writingSystem, object.territory, ...(object.variants ?? [])];
     case ObjectType.Territory:
-      return [...getObjectParents(object.parentUNRegion), object.parentUNRegion];
+      return [...getObjectParents(object.parentUNRegion, depth + 1), object.parentUNRegion];
     case ObjectType.WritingSystem:
       return [object.parentWritingSystem];
     case ObjectType.Variant:

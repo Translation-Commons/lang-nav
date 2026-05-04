@@ -40,6 +40,7 @@ const NavTabs: React.FC<Props> = ({ label, options }) => {
             style={{
               padding: '0.5em 1em',
               color: isActive ? 'var(--color-button-primary)' : 'var(--color-text)',
+              fontWeight: 500,
               borderWidth: '2px',
               borderRadius: '0.5em 0.5em 0 0',
               borderBottomStyle: 'solid',

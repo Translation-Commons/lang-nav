@@ -5,6 +5,9 @@ import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguageUDHRInfo, {
+  LanguageUDHRDescription,
+} from '@entities/language/vitality/LanguageUDHRInfo';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
@@ -105,8 +108,14 @@ const columns: TableColumn<LanguageData>[] = [
       return isoCode ? `https://en.wikipedia.org/wiki/ISO_639:${isoCode}` : '';
     },
   },
+  {
+    key: 'UDHR Translations',
+    description: LanguageUDHRDescription,
+    render: (lang) => <LanguageUDHRInfo lang={lang} size="short" />,
+    exportValue: (lang) =>
+      lang.udhr ? lang.udhr.map((udhrEntry) => udhrEntry.name).join('; ') : 'None',
+  },
 ];
-
 export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = columns.map(
   (col: TableColumn<LanguageData>) => ({
     ...col,
