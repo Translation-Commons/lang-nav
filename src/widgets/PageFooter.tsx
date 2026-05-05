@@ -13,29 +13,27 @@ const PageFooter: React.FC = () => {
   const { reset } = useConsent();
   return (
     <footer>
-      <p>
+      <span>
         © {new Date().getFullYear()}{' '}
         <ExternalLink href="https://translationcommons.org">Translation Commons</ExternalLink>.
         Docs: <InternalLink page={LangNavPageName.About}>About</InternalLink> |{' '}
         <InternalLink page={LangNavPageName.TermsOfUse}>Terms of Use</InternalLink> |{' '}
         <InternalLink page={LangNavPageName.PrivacyPolicy}>Privacy Policy</InternalLink> |{' '}
-        <button
-          type="button"
+        <a
+          role="button"
+          tabIndex={0}
           onClick={reset}
-          style={{
-            background: 'none',
-            border: 'none',
-            padding: 0,
-            color: 'inherit',
-            font: 'inherit',
-            cursor: 'pointer',
-            textDecoration: 'underline',
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              reset();
+            }
           }}
         >
           Cookie settings
-        </button>
+        </a>
         .
-      </p>
+      </span>
       <CreativeCommonsLicense />
     </footer>
   );

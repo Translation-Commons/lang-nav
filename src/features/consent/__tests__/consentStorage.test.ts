@@ -10,13 +10,8 @@ import {
 } from '../consentStorage';
 
 describe('consentStorage', () => {
-  beforeEach(() => {
-    localStorage.clear();
-  });
-
-  afterEach(() => {
-    vi.useRealTimers();
-  });
+  beforeEach(() => localStorage.clear());
+  afterEach(() => vi.useRealTimers());
 
   describe('readConsentState', () => {
     it('returns null when nothing is stored', () => {

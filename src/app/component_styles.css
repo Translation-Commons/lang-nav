@@ -97,10 +97,6 @@ footer {
   width: 100%;
 }
 
-footer p {
-  margin: 0;
-}
-
 code {
   background-color: var(--color-button-secondary);
   border-radius: 0.25em;

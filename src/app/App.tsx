@@ -47,9 +47,9 @@ function App() {
         <HoverCardProvider>
           <AmplitudeTracker />
           <PageNavBar />
-          <main style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ flex: 1, minWidth: 0 }}>
             <PageRoutes />
-          </main>
+          </div>
           <PageFooter />
           <ConsentBanner />
         </HoverCardProvider>

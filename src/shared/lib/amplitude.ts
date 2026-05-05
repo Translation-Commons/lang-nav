@@ -34,11 +34,7 @@ export function initAmplitude() {
 
   if (hasInitializedAmplitude) {
     // SDK was initialized earlier and then opted out; re-enable tracking.
-    try {
-      amplitude.setOptOut(false);
-    } catch {
-      // Suppress: older SDK builds may not expose setOptOut.
-    }
+    amplitude.setOptOut(false);
     return;
   }
 
@@ -156,11 +152,7 @@ export function optOutAmplitude() {
     clearAmplitudeStorage();
     return;
   }
-  try {
-    amplitude.setOptOut(true);
-  } catch {
-    // Suppress: older SDK builds may not expose setOptOut.
-  }
+  amplitude.setOptOut(true);
   try {
     amplitude.reset();
   } catch {

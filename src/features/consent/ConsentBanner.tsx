@@ -18,22 +18,21 @@ const ConsentBanner: React.FC = () => {
       aria-label="Cookie consent"
       style={{
         position: 'fixed',
-        left: '1rem',
-        right: '1rem',
-        bottom: '1rem',
+        left: '1em',
+        right: '1em',
+        bottom: '1em',
         maxWidth: '640px',
         margin: '0 auto',
-        padding: '1rem 1.25rem',
+        padding: '1em',
         backgroundColor: 'var(--color-background)',
         color: 'var(--color-text)',
         border: '1px solid var(--color-text-secondary)',
-        borderRadius: '0.75rem',
+        borderRadius: '0.75em',
         boxShadow: '0 8px 24px var(--color-shadow)',
         zIndex: 1000,
         display: 'flex',
         flexDirection: 'column',
-        gap: '0.75rem',
-        fontSize: '0.95em',
+        gap: '0.75em',
       }}
     >
       <div>
@@ -41,8 +40,8 @@ const ConsentBanner: React.FC = () => {
         decline non-essential analytics. Read more in our{' '}
         <InternalLink page={LangNavPageName.PrivacyPolicy}>Privacy Policy</InternalLink>.
       </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', justifyContent: 'flex-end' }}>
-        <button type="button" onClick={decline}>
+      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em', justifyContent: 'flex-end' }}>
+        <button type="button" className="primary" onClick={decline}>
           Decline
         </button>
         <button type="button" className="primary" onClick={accept}>
