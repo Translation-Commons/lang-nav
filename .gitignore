@@ -35,3 +35,7 @@ playwright-report/
 
 # Claude Code local settings (machine-specific)
 .claude/settings.local.json
+CLAUDE.md
+
+# Screenshot comparison artifacts (local review only)
+public/comparison/

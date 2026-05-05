@@ -19,7 +19,7 @@
     "test:coverage": "vitest run --coverage",
     "test:screenshots": "npx playwright test",
     "test:screenshots:update": "npx playwright test --update-snapshots",
-    "update-screenshots": "npx playwright test e2e/update-screenshots.spec.ts",
+    "update-screenshots": "npx playwright test e2e/update-screenshots.spec.ts --reporter=list",
     "generate-diff": "npx playwright test e2e/generate-diff.spec.ts --reporter=list"
   },
   "dependencies": {
