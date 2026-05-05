@@ -14,6 +14,7 @@ const CensusesInTerritory: React.FC<Props> = ({ territory }) => {
   const [showAll, setShowAll] = React.useState(false);
 
   const censuses = (territory.censuses ?? [])
+    .slice()
     .sort((a, b) => b.yearCollected - a.yearCollected)
     .sort(
       (a, b) =>

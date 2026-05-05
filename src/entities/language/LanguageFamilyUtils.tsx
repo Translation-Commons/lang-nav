@@ -14,7 +14,8 @@ export function getLanguageRootLanguageFamily(lang: LanguageData, depth = 0): La
 
 export function getRootLanguageFamilyForEntity(ent: EntityData): LanguageData | undefined {
   let lang = getLanguageForEntity(ent);
-  if (ent.type === ObjectType.Territory) lang = ent.locales?.sort(sortByPopulation)?.[0]?.language;
+  if (ent.type === ObjectType.Territory)
+    lang = ent.locales?.slice().sort(sortByPopulation)?.[0]?.language;
   if (!lang) return undefined;
   return getLanguageRootLanguageFamily(lang);
 }

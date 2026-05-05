@@ -36,6 +36,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nInTerritoryScope,
     nInTerritory,
     nWrittenIn,
+    nInLanguageFamily,
     nWithLanguage,
     nInVitality,
     nMatchingSubstring,
@@ -71,11 +72,11 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const nFilteredByTerritoryScope = nInModality - nInTerritoryScope;
   const nFilteredByTerritory = nInTerritoryScope - nInTerritory;
   const nFilteredByWritingSystem = nInTerritory - nWrittenIn;
-  const nFilteredByLanguageFamily = nWrittenIn - nWithLanguage;
-  const nFilteredByLanguage = nWithLanguage - nInVitality;
-  const nFilteredByVitality = nInVitality - nMatchingSubstring;
-  const nFilteredBySubstring = nMatchingSubstring - nInPopulationRange;
-  const nFilteredByPopulation = nInPopulationRange - nInPopulationRange;
+  const nFilteredByLanguageFamily = nWrittenIn - nInLanguageFamily;
+  const nFilteredByLanguage = nInLanguageFamily - nWithLanguage;
+  const nFilteredByVitality = nWithLanguage - nInVitality;
+  const nFilteredBySubstring = nInVitality - nMatchingSubstring;
+  const nFilteredByPopulation = nMatchingSubstring - nInPopulationRange;
   if (nOverall === 0) {
     return 'Data is still loading. If you are waiting awhile there could be an error in the data.';
   }
