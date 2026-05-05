@@ -1,63 +1,41 @@
 import React from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import LanguagePopulationBreakdownButton from '@entities/language/population/LanguagePopulationBreakdownButton';
 import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
-import LanguagePopulationOfDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
-import LanguagePopulationFromEthnologue from '@entities/language/population/LanguagePopulationFromEthnologue';
-import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
-import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
-import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
+import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
+import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = { lang: LanguageData };
 
 const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
-  const {
-    populationEstimate,
-    populationEstimateSource,
-    populationFromLocales,
-    populationOfDescendants,
-    Ethnologue,
-  } = lang;
+  const { populationEstimate, populationEstimateSource } = lang;
+
+  const title = (
+    <>
+      Population
+      {populationEstimateSource && (
+        <div style={{ fontSize: '0.75em', fontWeight: 'normal', textTransform: 'lowercase' }}>
+          <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
+        </div>
+      )}
+    </>
+  );
 
   return (
-    <DetailsSection title="Population">
-      {populationEstimate != null && (
-        <DetailsField title="Best Estimate">
-          <LanguagePopulationEstimate lang={lang} />
-          <LanguagePopulationBreakdownButton lang={lang} />
-        </DetailsField>
+    <DetailsSection title={title}>
+      {populationEstimate == null ? (
+        <Deemphasized>No population data available.</Deemphasized>
+      ) : (
+        <DetailsStatContainer>
+          <DetailsStatBlock label="Speakers">
+            <LanguagePopulationEstimate lang={lang} />
+          </DetailsStatBlock>
+        </DetailsStatContainer>
       )}
-      {populationEstimateSource && (
-        <DetailsField title="Source" indent={1}>
-          <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
-        </DetailsField>
-      )}
-      {!populationEstimateSource && (
-        <>This language does not have any available population estimate.</>
-      )}
-      {populationOfDescendants &&
-        populationOfDescendants > 10 &&
-        populationEstimateSource !== PopulationSourceCategory.AggregatedFromLanguages && (
-          <DetailsField title="... of Descendants">
-            <LanguagePopulationOfDescendants lang={lang} />
-          </DetailsField>
-        )}
-      {populationFromLocales &&
-        populationEstimateSource !== PopulationSourceCategory.AggregatedFromTerritories && (
-          <DetailsField title="... from Locales">
-            <LanguagePopulationFromLocales lang={lang} />
-          </DetailsField>
-        )}
-      {Ethnologue.population != null &&
-        populationEstimateSource !== PopulationSourceCategory.Ethnologue && (
-          <DetailsField title="... from Ethnologue">
-            <LanguagePopulationFromEthnologue lang={lang} />
-          </DetailsField>
-        )}
     </DetailsSection>
   );
 };

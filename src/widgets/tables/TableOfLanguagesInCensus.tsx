@@ -173,6 +173,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               loc.language && (
                 <HoverableObjectName object={getLanguageRootLanguageFamily(loc.language)} />
               ),
+            field: Field.LanguageFamily,
             isInitiallyVisible: false,
           },
           {

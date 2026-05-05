@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
@@ -8,6 +9,7 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
+import LanguageVitalitySection from '@entities/language/vitality/LanguageVitalitySection';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
@@ -22,6 +24,8 @@ import LanguageCodes from './sections/LanguageCodes';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
+import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
+import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
 
 type Props = {
   lang: LanguageData;
@@ -32,20 +36,71 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
     <div className="Details">
       <LanguageNames lang={lang} />
       <LanguageCodes lang={lang} />
-      <LanguagePopulationDetails lang={lang} />
+
+      <FlexRow>
+        <FlexItem>
+          <LanguagePopulationDetails lang={lang} />
+        </FlexItem>
+        <FlexItem>
+          <LanguageWikipediaSection lang={lang} />
+        </FlexItem>
+        <FlexItem>
+          <LanguageVitalitySection lang={lang} />
+        </FlexItem>
+      </FlexRow>
+
+      <FlexRow>
+        <FlexItem flex="2 1 300px">
+          <LanguageSpeakersByTerritorySection lang={lang} />
+        </FlexItem>
+        <FlexItem>
+          <LanguageDetailsVitalityAndViability lang={lang} />
+        </FlexItem>
+      </FlexRow>
+
       <LanguageAttributes lang={lang} />
-      <LanguageDetailsVitalityAndViability lang={lang} />
       <LanguageConnections lang={lang} />
       <LanguageLocation lang={lang} />
     </div>
   );
 };
 
+export default LanguageDetails;
+
+const FlexRow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <div
+    style={{
+      display: 'flex',
+      flexWrap: 'wrap',
+      gap: '1em',
+      alignItems: 'stretch',
+      marginBottom: '1em',
+    }}
+  >
+    {children}
+  </div>
+);
+
+const FlexItem: React.FC<{ children: React.ReactNode; flex?: string }> = ({
+  children,
+  flex = '1 1 200px',
+}) => <div style={{ flex }}>{children}</div>;
+
 const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
+  const { getCLDRLanguage } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = getScopeFilter();
   const { childLanguages, ISO, Glottolog, variants } = lang;
+  const relatedLanguages = (lang.CLDR.languageMatch ?? [])
+    .map((match) => ({
+      match,
+      relatedLanguage: getCLDRLanguage(match.supported),
+    }))
+    .filter(
+      (entry): entry is { match: (typeof entry)['match']; relatedLanguage: LanguageData } =>
+        entry.relatedLanguage != null,
+    );
 
   return (
     <DetailsSection title="Connections">
@@ -64,6 +119,17 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <CommaSeparated>
             {variants.map((tag) => (
               <HoverableObjectName key={tag.ID} object={tag} />
+            ))}
+          </CommaSeparated>
+        </DetailsField>
+      )}
+      {relatedLanguages.length > 0 && (
+        <DetailsField title="Related Languages (CLDR)">
+          <CommaSeparated>
+            {relatedLanguages.map(({ match, relatedLanguage }) => (
+              <span key={match.desired + ':' + match.supported + ':' + match.distance}>
+                <HoverableObjectName object={relatedLanguage} /> ({match.distance} CLDR)
+              </span>
             ))}
           </CommaSeparated>
         </DetailsField>
@@ -102,5 +168,3 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     </DetailsSection>
   );
 };
-
-export default LanguageDetails;

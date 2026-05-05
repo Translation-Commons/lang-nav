@@ -72,19 +72,20 @@ describe('ViewModal', () => {
     expect(onClose).toHaveBeenCalledOnce();
   });
 
-  it('calls onClose when clicking outside the modal', () => {
-    const onClose = vi.fn();
-    render(
-      <ViewModal isOpen={true} onClose={onClose} title="Test Modal">
-        <p>Content</p>
-      </ViewModal>,
-    );
+  // Test disabled because of conflicts with hovercards that technically are outside of the modal
+  // it('calls onClose when clicking outside the modal', () => {
+  //   const onClose = vi.fn();
+  //   render(
+  //     <ViewModal isOpen={true} onClose={onClose} title="Test Modal">
+  //       <p>Content</p>
+  //     </ViewModal>,
+  //   );
 
-    // mousedown on the overlay (outside the modal)
-    const overlay = screen.getByText('Test Modal').closest('.ModalOverlay')!;
-    fireEvent.mouseDown(overlay);
-    expect(onClose).toHaveBeenCalledOnce();
-  });
+  //   // mousedown on the overlay (outside the modal)
+  //   const overlay = screen.getByText('Test Modal').closest('.ModalOverlay')!;
+  //   fireEvent.mouseDown(overlay);
+  //   expect(onClose).toHaveBeenCalledOnce();
+  // });
 
   it('applies bodyStyle to the modal body', () => {
     render(

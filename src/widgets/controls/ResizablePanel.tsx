@@ -1,5 +1,7 @@
 import React, { ReactNode, useCallback } from 'react';
 
+import ZIndex from '@features/layers/ZIndex';
+
 type Props = {
   purpose: 'filters' | 'details'; // filters on left, details on right
   defaultWidth: number;
@@ -106,7 +108,7 @@ const DraggableResizeBorder: React.FC<{
         width: '0.5em',
         height: '100%',
         cursor: 'ew-resize',
-        zIndex: 10,
+        zIndex: ZIndex.Sidepanel,
       }}
       onMouseDown={onMouseDown}
     />

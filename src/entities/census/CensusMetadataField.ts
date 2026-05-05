@@ -40,6 +40,7 @@ export enum CensusMetadataField {
   datePublished = 'datePublished',
   dateAccessed = 'dateAccessed',
   documentName = 'documentName',
+  sectionName = 'sectionName',
   tableName = 'tableName',
   columnName = 'columnName',
   citation = 'citation',

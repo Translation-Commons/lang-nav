@@ -102,6 +102,7 @@ function shouldUseLogarithmicScale(colorBy: Field): boolean {
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:

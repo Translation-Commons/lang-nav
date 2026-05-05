@@ -1,8 +1,19 @@
+import { getLanguageForEntity } from '@features/transforms/fields/getEntityConnection';
+
+import { EntityData } from '@entities/types/DataTypes';
+
 import { LanguageData, LanguageScope } from './LanguageTypes';
 
-export function getLanguageRootLanguageFamily(lang: LanguageData): LanguageData {
-  if (lang.parentLanguage) return getLanguageRootLanguageFamily(lang.parentLanguage);
+export function getLanguageRootLanguageFamily(lang: LanguageData, depth = 0): LanguageData {
+  if (depth > 30) return lang; // Prevent possible infinite loops in case of circular references
+  if (lang.parentLanguage) return getLanguageRootLanguageFamily(lang.parentLanguage, depth + 1);
   return lang;
+}
+
+export function getRootLanguageFamilyForEntity(ent: EntityData): LanguageData | undefined {
+  const lang = getLanguageForEntity(ent);
+  if (!lang) return undefined;
+  return getLanguageRootLanguageFamily(lang);
 }
 
 export function getLanguageRootMacrolanguage(

@@ -52,6 +52,16 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
       columnGroup: 'Related Objects',
     },
     {
+      key: 'Keyboard Count',
+      description: 'Number of keyboard layouts that output this writing system.',
+      render: (object) => (
+        <HoverableEnumeration items={object.outputKeyboards?.map((kb) => kb.nameDisplay)} />
+      ),
+      field: Field.CountOfKeyboards,
+      columnGroup: 'Related Objects',
+      isInitiallyVisible: false,
+    },
+    {
       key: 'Area of Origin',
       render: (object) => <HoverableObjectName object={object.territoryOfOrigin} />,
       field: Field.Territory,

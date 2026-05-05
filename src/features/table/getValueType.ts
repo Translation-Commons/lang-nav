@@ -28,6 +28,7 @@ export function getFieldValueType(field?: Field): TableValueType {
       return TableValueType.Date;
 
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:

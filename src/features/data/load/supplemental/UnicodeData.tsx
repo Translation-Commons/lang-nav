@@ -1,16 +1,25 @@
 import aliases from 'cldr-core/supplemental/aliases.json';
+import languageMatching from 'cldr-core/supplemental/languageMatching.json';
 import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
+import { setLanguageNames } from '@entities/language/setLanguageNames';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { CLDRCoverageImport, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 
 import { DataContextType } from '../../context/useDataContext';
 
 const DEBUG = false;
+
+type CLDRLanguageMatchImport = {
+  _desired: string;
+  _supported: string;
+  _distance: number;
+  _oneway?: boolean;
+};
 
 export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): void {
   // Start with the initialized
@@ -158,7 +167,39 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
       }
     });
 
+  addCLDRLanguageMatching(cldrLanguages);
   languagesBySource.CLDR = cldrLanguages;
+}
+
+function addCLDRLanguageMatching(cldrLanguages: LanguagesBySource['CLDR']): void {
+  const languageMatchEntries = languageMatching.supplemental.languageMatching['written-new']
+    .languageMatch as CLDRLanguageMatchImport[];
+
+  languageMatchEntries.forEach((match) => {
+    const desiredLanguageCode = getPureLanguageCode(match._desired);
+    const supportedLanguageCode = getPureLanguageCode(match._supported);
+    if (desiredLanguageCode == null || supportedLanguageCode == null) return;
+    if (desiredLanguageCode === supportedLanguageCode) return;
+
+    const desiredLanguage = cldrLanguages[desiredLanguageCode];
+    const supportedLanguage = cldrLanguages[supportedLanguageCode];
+    if (desiredLanguage == null || supportedLanguage == null) return;
+
+    desiredLanguage.CLDR.languageMatch ??= [];
+    desiredLanguage.CLDR.languageMatch.push({
+      desired: match._desired,
+      supported: match._supported,
+      distance: Number(match._distance),
+      oneway: match._oneway,
+    });
+  });
+}
+
+function getPureLanguageCode(languageTag: string): string | undefined {
+  // Keep only language-to-language matches in this PR.
+  // Locale/script/region-variable matches are intentionally deferred.
+  if (!/^[a-z]{2,3}$/i.test(languageTag)) return undefined;
+  return languageTag;
 }
 
 export async function loadCLDRCoverage(
@@ -191,6 +232,7 @@ export async function loadCLDRCoverage(
           actualCoverageLevel: cldrCov.actualCoverageLevel,
           inICU: cldrCov.inICU,
         };
+        setLanguageNames(lang);
       });
     })
     .catch((err) => console.error('Error loading TSV:', err));

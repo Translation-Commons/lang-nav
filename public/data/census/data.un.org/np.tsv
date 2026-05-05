@@ -10,7 +10,7 @@
 #collectorType	Government		
 #presentedBy	data.un.org		
 mul	#Total	22,736,934	26,494,504
-npi	Nepali	11,053,255	11,826,953
+nep/npi	Nepali	11,053,255	11,826,953
 mai	Maithali	2,797,582	3,092,530
 bho	Bhojpuri	1,712,536	1,584,958
 mul	#Other		1,596,760

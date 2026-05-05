@@ -1,8 +1,13 @@
+import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 import { ObjectType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
+import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguageUDHRInfo, {
+  LanguageUDHRDescription,
+} from '@entities/language/vitality/LanguageUDHRInfo';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
@@ -13,6 +18,8 @@ import {
   WikipediaLink,
   WikipediaStatusDisplay,
 } from '@entities/ui/ObjectWikipediaInfo';
+
+import ExternalLink from '@shared/ui/ExternalLink';
 
 const columns: TableColumn<LanguageData>[] = [
   // {
@@ -61,6 +68,12 @@ const columns: TableColumn<LanguageData>[] = [
     },
   },
   {
+    key: 'Keyboards',
+    description: 'Number of keyboard layouts available for this language.',
+    render: (lang) => <HoverableEnumeration items={lang.keyboards?.map((kb) => kb.nameDisplay)} />,
+    field: Field.CountOfKeyboards,
+  },
+  {
     key: 'Wikipedia Status',
     render: (object) => (
       <>
@@ -79,8 +92,30 @@ const columns: TableColumn<LanguageData>[] = [
     render: (object) => <WikipediaActiveUsers object={object} />,
     valueType: TableValueType.Population,
   },
+  {
+    key: 'Wikipedia Article',
+    render: (language) => {
+      const isoCode = language?.ISO?.code;
+      if (!isoCode) return '';
+      return (
+        <ExternalLink href={`https://en.wikipedia.org/wiki/ISO_639:${isoCode}`}>
+          wikipedia
+        </ExternalLink>
+      );
+    },
+    exportValue: (language) => {
+      const isoCode = language?.ISO?.code;
+      return isoCode ? `https://en.wikipedia.org/wiki/ISO_639:${isoCode}` : '';
+    },
+  },
+  {
+    key: 'UDHR Translations',
+    description: LanguageUDHRDescription,
+    render: (lang) => <LanguageUDHRInfo lang={lang} size="short" />,
+    exportValue: (lang) =>
+      lang.udhr ? lang.udhr.map((udhrEntry) => udhrEntry.name).join('; ') : 'None',
+  },
 ];
-
 export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = columns.map(
   (col: TableColumn<LanguageData>) => ({
     ...col,

@@ -1,5 +1,3 @@
-import { Transform } from 'stream';
-
 import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
@@ -12,6 +10,7 @@ import {
   UNINTERESTING_FIELD_COMBINATIONS,
 } from '@features/transforms/fields/FieldApplicability';
 import getField from '@features/transforms/fields/getField';
+import TransformEnum from '@features/transforms/TransformEnum';
 
 describe('getApplicableFields', () => {
   it('should not return duplicate Fields values for any ObjectType', () => {
@@ -50,7 +49,7 @@ describe('getApplicableFields', () => {
 
   it('getApplicableFields matches isFieldApplicable', () => {
     Object.values(ObjectType).forEach((objectType) => {
-      Object.values(Transform).forEach((transform) => {
+      Object.values(TransformEnum).forEach((transform) => {
         const applicableFields = getApplicableFields(transform, objectType);
 
         Object.values(Field).forEach((field) => {

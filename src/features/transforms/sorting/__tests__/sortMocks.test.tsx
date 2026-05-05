@@ -694,4 +694,35 @@ describe('getSortByParameterized', () => {
       'tolkorth',
     ]);
   });
+
+  it('sortBy: Language Family', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(Field.LanguageFamily, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      // Sindarin is the root language for the 2 languages and their locales
+      'sjn',
+      'dori0123',
+      'sjn_BE',
+      'sjn_ER',
+      'dori0123_ER',
+      'sjn_Teng_BE',
+      'sjn_123',
+      'sjn_Teng_123',
+      'dori0123_123',
+      'sjn_001',
+      'sjn_Teng_001',
+      'dori0123_001',
+
+      // Other objects don't have a language family, stable to input order
+      '123',
+      'BE',
+      'ER',
+      'HA',
+      'AM',
+      '001',
+      'be0590',
+      'Teng',
+      'tolkorth',
+    ]);
+  });
 });

@@ -112,6 +112,7 @@ export function getFieldIcon(field: Field): LucideIcon {
       return BracketsIcon;
 
     case Field.CountOfLanguages:
+    case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
     case Field.CountOfCountries:
     case Field.CountOfChildTerritories:

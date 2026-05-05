@@ -35,3 +35,10 @@ export type CLDRCoverageData = {
   actualCoverageLevel: CLDRCoverageLevel;
   inICU: boolean;
 };
+
+export type CLDRLanguageMatchData = {
+  desired: string;
+  supported: string;
+  distance: number;
+  oneway?: boolean;
+};

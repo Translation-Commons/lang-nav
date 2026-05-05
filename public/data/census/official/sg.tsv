@@ -29,8 +29,8 @@
 #columnName		Language Literate In		Total: 2000	Total: 2000	Language Literate In	Language Most / Second Most Frequently Spoken at Home	Language Most Frequently Spoken at Home	Language Second Most Frequently Spoken at Home
 Language Code	Language	Singapore 2010 Literacy	Singapore 2010 Primary Spoken	Singapore 2000 Literacy	Singapore 2000 Primary Spoken	Singapore 2020 Literacy	Singapore 2020 Primary or Secondary Spoken	Singapore 2020 Primary Spoken	Singapore 2020 Secondary Spoken
 mul	Total	3,105,748	3,399,054			3,459,093	3,596,284		
-	Not Literate	128,661				99,212			
-	Literate	2,977,088				3,359,881			
+zxx	Not Literate	128,661				99,212			
+mul	Literate	2,977,088				3,359,881			
 	#One Language Only	878,214				862,098			
 eng	#English Only	329,194				362,469	229,429		
 zho	#Chinese Only	485,511				438,279			

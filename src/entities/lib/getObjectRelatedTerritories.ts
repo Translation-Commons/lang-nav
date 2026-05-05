@@ -14,7 +14,7 @@ import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
 import { ObjectType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import {
   isTerritoryGroup,
@@ -75,8 +75,16 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
   }
 }
 
-export function getTerritoryBiggestLocale(territory: TerritoryData): LocaleData | undefined {
-  return (territory?.locales || []).sort(sortByPopulation)[0];
+/**
+ * By default only returns languages
+ */
+export function getTerritoryBiggestLocale(
+  territory: TerritoryData,
+  scopes: (LanguageScope | undefined)[] = [LanguageScope.Language],
+): LocaleData | undefined {
+  return (territory?.locales || [])
+    .filter((l) => !scopes || scopes?.includes(l.language?.scope))
+    .sort(sortByPopulation)[0];
 }
 
 export function getTerritoryChildren(territory: TerritoryData): TerritoryData[] {

@@ -67,7 +67,7 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
   for (lineNumber = 0; lineNumber < lines.length; lineNumber++) {
     const line = lines[lineNumber];
 
-    if (line.startsWith('##')) {
+    if (line.startsWith('##') || line.trim() === '') {
       // This is a line to break up the metadata into sections, it can be ignored for parsing purposes
       continue;
     }
@@ -219,6 +219,7 @@ function parseValueByKey(
     case CensusMetadataField.presentedBy:
     case CensusMetadataField.url:
     case CensusMetadataField.documentName:
+    case CensusMetadataField.sectionName:
     case CensusMetadataField.tableName:
     case CensusMetadataField.columnName:
     case CensusMetadataField.citation:

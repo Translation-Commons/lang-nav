@@ -50,6 +50,7 @@ enum Field {
   CountOfCountries = '# of Countries', // recursive, only counting countries
   CountOfCensuses = '# of Censuses',
   CountOfVariants = '# of Variants',
+  CountOfKeyboards = '# of Keyboards',
 
   // Quantity
   Coordinates = 'Coordinates', // Lat + Long

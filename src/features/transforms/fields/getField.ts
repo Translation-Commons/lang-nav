@@ -1,7 +1,9 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { getRootLanguageFamilyForEntity } from '@entities/language/LanguageFamilyUtils';
 import {
   getCountOfCensuses,
+  getCountOfKeyboards,
   getCountOfLanguages,
   getCountOfWritingSystems,
   getDepth,
@@ -112,7 +114,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Language:
       return getObjectMostImportantLanguageName(object);
     case Field.LanguageFamily:
-      return undefined; // Not yet defined
+      return getRootLanguageFamilyForEntity(object)?.nameDisplay;
     case Field.WritingSystem:
       return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
     case Field.OutputScript:
@@ -133,6 +135,8 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     // Counts of Related Objects
     case Field.CountOfLanguages:
       return getCountOfLanguages(object);
+    case Field.CountOfKeyboards:
+      return getCountOfKeyboards(object);
     case Field.CountOfCountries:
       return getCountOfCountries(object);
     case Field.CountOfChildTerritories:

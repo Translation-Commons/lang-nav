@@ -32,8 +32,10 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
     return null;
   }
 
+  const hasECRMLData = locales.some((locale) => locale.ecrmlProtection != null);
+
   return (
-    <LocalParamsProvider overrides={{ territoryScopes: [territory.scope] }}>
+    <LocalParamsProvider overrides={{ territoryScopes: [territory.scope], page: 1, limit: 10 }}>
       <InteractiveObjectTable<LocaleData>
         tableID={TableID.LanguagesInTerritory}
         objects={locales}
@@ -62,7 +64,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
             render: (loc) => <LocaleEcrmlCoverage locale={loc} />,
             field: Field.ECRMLProtection,
             valueType: TableValueType.Enum,
-            isInitiallyVisible: false,
+            isInitiallyVisible: hasECRMLData,
           },
           {
             key: 'Population',
