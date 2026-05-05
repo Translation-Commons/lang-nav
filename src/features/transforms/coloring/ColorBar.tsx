@@ -95,6 +95,7 @@ function getTicks(coloringFunctions: ColoringFunctions): { position: number; lab
     case Field.Endonym:
     case Field.Code:
     case Field.Language:
+    case Field.LanguageFamily:
     case Field.WritingSystem:
     case Field.Territory:
       return pickDistributedTicksFromRange(

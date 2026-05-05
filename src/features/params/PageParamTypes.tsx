@@ -71,6 +71,7 @@ export enum PageParamKey {
   isoStatus = 'isoStatus',
   fieldFocus = 'fieldFocus',
   languageFilter = 'languageFilter',
+  languageFamilyFilter = 'languageFamilyFilter',
   languageScopes = 'languageScopes',
   languageSource = 'languageSource',
   limit = 'limit',
@@ -105,6 +106,7 @@ export type PageParams = {
   isoStatus: LanguageISOStatus[];
   fieldFocus: Field; // To see data but not necessarily sort or color by it
   languageFilter: string;
+  languageFamilyFilter: string;
   languageScopes: LanguageScope[];
   modalityFilter: LanguageModality[];
   languageSource: LanguageSource;
@@ -137,6 +139,7 @@ export type PageParamsOptional = {
   isoStatus?: LanguageISOStatus[];
   fieldFocus?: Field;
   languageFilter?: string;
+  languageFamilyFilter?: string;
   languageScopes?: LanguageScope[];
   languageSource?: LanguageSource;
   limit?: number;

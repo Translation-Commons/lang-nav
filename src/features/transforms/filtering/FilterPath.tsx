@@ -34,6 +34,7 @@ const FilterPath: React.FC = () => {
   const {
     isoStatus,
     languageFilter,
+    languageFamilyFilter,
     languageScopes,
     modalityFilter,
     populationMax,
@@ -174,6 +175,19 @@ const FilterPath: React.FC = () => {
           onClick={() => updatePageParams({ languageFilter: '' })}
           style={{ padding: '0.25em' }}
           hoverContent="Clear language filter"
+        >
+          <XIcon size="1em" display="block" />
+        </HoverableButton>
+      </>
+    ),
+    languageFamilyFilter !== '' && (
+      <>
+        {filterLabels.languageFamilyFilter}
+        <HoverableButton
+          buttonType="reset"
+          onClick={() => updatePageParams({ languageFamilyFilter: '' })}
+          style={{ padding: '0.25em' }}
+          hoverContent="Clear language family filter"
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>

@@ -8,7 +8,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { LanguageData } from './LanguageTypes';
 
 const LanguageWritingSystems: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const writingSystems = Object.values(lang.writingSystems ?? {});
+  const writingSystems = Object.values(lang.writingSystems ?? {}).slice();
   if (writingSystems.length === 0) return <Deemphasized>—</Deemphasized>;
 
   // Reorder, putting the primary writing system first

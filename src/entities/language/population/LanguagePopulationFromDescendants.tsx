@@ -64,6 +64,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: Langua
       <table>
         <tbody>
           {lang.childLanguages
+            .slice()
             .sort(sortByPopulation)
             .slice(0, 10) // limit to first 10
             .map((descendant) => (

@@ -37,7 +37,7 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
     };
 
     return getSuggestionsFunction(
-      territories.sort(sortByPopulation),
+      territories.slice().sort(sortByPopulation),
       getMatchDistance,
       getMatchGroup,
     );
