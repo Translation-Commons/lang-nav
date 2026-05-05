@@ -33,9 +33,9 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       return dist;
     };
     const getMatchGroup = (object: ObjectData): string => {
-      if (!filterBy[Field.Language]?.(object)) return 'not ' + filterLabels.languageFilter;
       if (!filterBy[Field.LanguageFamily]?.(object))
         return 'not ' + filterLabels.languageFamilyFilter;
+      if (!filterBy[Field.Language]?.(object)) return 'not ' + filterLabels.languageFilter;
       if (!filterBy[Field.WritingSystem]?.(object))
         return 'not ' + filterLabels.writingSystemFilter;
       if (!filterBy[Field.Territory]?.(object)) return 'not ' + filterLabels.territoryFilter;

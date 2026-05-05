@@ -37,17 +37,17 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (language: LanguageData): number => {
       let dist = 0;
-      if (!filterByWritingSystem(language)) dist += 1;
-      if (!filterByTerritory(language)) dist += 2;
-      if (!filterByScope(language)) dist += 4;
-      if (!filterByLanguageFamily(language)) dist += 8;
+      if (!filterByLanguageFamily(language)) dist += 1;
+      if (!filterByWritingSystem(language)) dist += 2;
+      if (!filterByTerritory(language)) dist += 4;
+      if (!filterByScope(language)) dist += 8;
       return dist;
     };
     const getMatchGroup = (language: LanguageData): string => {
+      if (!filterByLanguageFamily(language)) return 'not ' + filterLabels.languageFamilyFilter;
       if (!filterByWritingSystem(language)) return 'not ' + filterLabels.writingSystemFilter;
       if (!filterByTerritory(language)) return 'not ' + filterLabels.territoryFilter;
       if (!filterByScope(language)) return 'not ' + filterLabels.languageScope;
-      if (!filterByLanguageFamily(language)) return 'not ' + filterLabels.languageFamilyFilter;
       return 'matched';
     };
 

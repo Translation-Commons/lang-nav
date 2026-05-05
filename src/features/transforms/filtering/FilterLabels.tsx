@@ -60,7 +60,8 @@ function getLanguageFilterLabel(): string {
   const { languageFilter } = usePageParams();
   if (!languageFilter) return 'any languoid';
   if (languageFilter.includes('[')) return 'related to ' + languageFilter.split('[')[0].trim();
-  if (languageFilter.match(/[a-z]{3}/)) return `related to language with code "${languageFilter}"`;
+  if (languageFilter.match(/^[a-z]{3}$/))
+    return `related to language with code "${languageFilter}"`;
   return `related to language "${languageFilter}*"`;
 }
 
@@ -69,7 +70,7 @@ function getLanguageFamilyFilterLabel(): string {
   if (!languageFamilyFilter) return 'any languoid';
   if (languageFamilyFilter.includes('['))
     return 'related to ' + languageFamilyFilter.split('[')[0].trim();
-  if (languageFamilyFilter.match(/[a-z]{3}/))
+  if (languageFamilyFilter.match(/^[a-z]{3}$/))
     return `related to language family with code "${languageFamilyFilter}"`;
   return `related to language family "${languageFamilyFilter}*"`;
 }
