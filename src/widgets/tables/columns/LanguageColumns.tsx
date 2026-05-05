@@ -99,7 +99,10 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       key: 'Dialects',
       render: (lang) => (
         <HoverableEnumeration
-          items={lang.childLanguages.sort(sortByPopulation).map((lang) => lang.nameDisplay)}
+          items={lang.childLanguages
+            .slice()
+            .sort(sortByPopulation)
+            .map((lang) => lang.nameDisplay)}
         />
       ),
       valueType: TableValueType.Count,

@@ -40,6 +40,7 @@ export function getTerritoryTreeNodes(
   filterByScope: (a: ObjectData) => boolean,
 ): TreeNodeData[] {
   return territories
+    .slice()
     .sort(sortFunction)
     .filter(filterByScope)
     .map((territory) => getTerritoryTreeNode(territory, sortFunction, filterByScope));

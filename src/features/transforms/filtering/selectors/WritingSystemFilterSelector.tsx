@@ -26,7 +26,7 @@ const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }
 
   const getSuggestions = useMemo(() => {
     return getSuggestionsFunction(
-      writingSystems.sort(sortByPopulation),
+      writingSystems.slice().sort(sortByPopulation),
       (ws) => (ws.scope === WritingSystemScope.IndividualScript ? 0 : 1),
       (ws) => (ws.scope === WritingSystemScope.IndividualScript ? '' : 'other types of scripts'),
     );

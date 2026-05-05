@@ -48,6 +48,7 @@ describe('FilterBreakdown', () => {
       territoryFilter: '',
       writingSystemFilter: '',
       languageFilter: '',
+      languageFamilyFilter: '',
       vitalityEthFine: [],
       searchString: '',
     });
@@ -60,7 +61,7 @@ describe('FilterBreakdown', () => {
     setupMockParams({
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
-      languageFilter: 'ine', // Indo-European family
+      languageFamilyFilter: 'ine', // Indo-European family
       vitalityEthFine: [VitalityEthnologueFine.National], // filters out fra
       searchString: 'spa',
     });
@@ -71,7 +72,7 @@ describe('FilterBreakdown', () => {
     expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();
     expect(screen.getByText(/Not found in territory with code "US":/i)).toBeTruthy();
     expect(screen.getByText(/Not written in script with code "Latn":/i)).toBeTruthy();
-    expect(screen.getByText(/Not related to language with code "ine":/i)).toBeTruthy();
+    expect(screen.getByText(/Not related to language family with code "ine":/i)).toBeTruthy();
     expect(screen.getByText(/Not passing vitality filter:/i)).toBeTruthy();
     expect(screen.getByText(/Not matching substring "spa":/i)).toBeTruthy();
 
@@ -152,7 +153,7 @@ describe('FilterBreakdown', () => {
     setupMockParams({
       territoryFilter: 'United States [US]',
       writingSystemFilter: 'Latin [Latn]',
-      languageFilter: 'Indo-European [ine]',
+      languageFamilyFilter: 'Indo-European [ine]',
     });
 
     const { container } = render(<FilterBreakdown objects={objects} />);

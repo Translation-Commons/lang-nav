@@ -51,6 +51,7 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
     case ObjectType.Language:
       return uniqueBy(
         object.locales
+          .slice()
           .sort(sortByPopulation)
           .map((l) => l.territory)
           .filter((t) => t != null)

@@ -6,6 +6,7 @@ import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 import { FilterFunctionType } from './filter';
 import {
   buildFilterByLanguage,
+  buildFilterByLanguageFamily,
   buildFilterByTerritory,
   buildFilterByWritingSystem,
 } from './filterByConnections';
@@ -30,6 +31,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const {
     isoStatus,
     languageFilter,
+    languageFamilyFilter,
     languageScopes,
     languageSource,
     modalityFilter,
@@ -50,6 +52,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
   const filterByModality = buildFilterByModality(modalityFilter);
   const filterByTerritory = buildFilterByTerritory(territoryFilter);
   const filterByLanguage = buildFilterByLanguage(languageFilter);
+  const filterByLanguageFamily = buildFilterByLanguageFamily(languageFamilyFilter);
   const filterByWritingSystem = buildFilterByWritingSystem(writingSystemFilter);
   const filterByLanguageSource = buildFilterByLanguageSource(languageSource);
 
@@ -77,9 +80,9 @@ function useFilters(): Record<Field, FilterFunctionType> {
 
     // Connections
     [Field.Language]: filterByLanguage,
+    [Field.LanguageFamily]: filterByLanguageFamily,
     [Field.WritingSystem]: filterByWritingSystem,
     [Field.Territory]: filterByTerritory,
-    [Field.LanguageFamily]: alwaysTrue,
     [Field.SourceForLanguage]: filterByLanguageSource,
 
     // Ranges

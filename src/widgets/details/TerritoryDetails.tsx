@@ -44,9 +44,12 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         {containsTerritories && containsTerritories.length > 0 && (
           <DetailsField title="Contains">
             <CommaSeparated>
-              {containsTerritories.sort(sortFunction).map((territory) => (
-                <HoverableObjectName key={territory.ID} object={territory} />
-              ))}
+              {containsTerritories
+                .slice()
+                .sort(sortFunction)
+                .map((territory) => (
+                  <HoverableObjectName key={territory.ID} object={territory} />
+                ))}
             </CommaSeparated>
           </DetailsField>
         )}
@@ -59,9 +62,12 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         {dependentTerritories && dependentTerritories.length > 0 && (
           <DetailsField title="Administers">
             <CommaSeparated>
-              {dependentTerritories.sort(sortFunction).map((territory) => (
-                <HoverableObjectName key={territory.ID} object={territory} />
-              ))}
+              {dependentTerritories
+                .slice()
+                .sort(sortFunction)
+                .map((territory) => (
+                  <HoverableObjectName key={territory.ID} object={territory} />
+                ))}
             </CommaSeparated>
           </DetailsField>
         )}
@@ -69,9 +75,12 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
         {censuses && censuses.length > 0 && (
           <DetailsField title="Census Tables">
             <CommaSeparated>
-              {censuses.sort(sortFunction).map((census) => (
-                <HoverableObjectName key={census.ID} object={census} />
-              ))}
+              {censuses
+                .slice()
+                .sort(sortFunction)
+                .map((census) => (
+                  <HoverableObjectName key={census.ID} object={census} />
+                ))}
             </CommaSeparated>
           </DetailsField>
         )}

@@ -151,7 +151,8 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
     case ObjectType.Territory:
       return uniqueBy(
         object.locales
-          ?.sort(sortByPopulation)
+          ?.slice()
+          .sort(sortByPopulation)
           .map((locale) => locale.writingSystem ?? locale.language?.primaryWritingSystem)
           .filter((ws) => !!ws) ?? [],
         (ws) => ws.ID,

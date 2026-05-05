@@ -8,6 +8,7 @@ import LanguageSourceSelector from '@features/transforms/filtering/selectors/Lan
 import SearchBar from '@features/transforms/search/SearchBar';
 import TransformEnum from '@features/transforms/TransformEnum';
 
+import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
 import LanguageFilterSelector from './LanguageFilterSelector';
 import LanguageModalitySelector from './LanguageModalitySelector';
 import LanguageScopeSelector from './LanguageScopeSelector';
@@ -23,6 +24,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
   switch (field) {
     case Field.Language:
       return <LanguageFilterSelector display={SelectorDisplay.ButtonList} />;
+    case Field.LanguageFamily:
+      return <LanguageFamilyFilterSelector display={SelectorDisplay.ButtonList} />;
     case Field.Territory:
       return <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />;
     case Field.WritingSystem:

@@ -699,9 +699,13 @@ describe('getSortByParameterized', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(Field.LanguageFamily, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      // Sindarin is the root language for the 2 languages and their locales
+      // Sindarin is the root language for the 2 languages and their locales, and is found in some territories
+      '123',
       'sjn',
       'dori0123',
+      'BE',
+      'ER',
+      '001',
       'sjn_BE',
       'sjn_ER',
       'dori0123_ER',
@@ -714,12 +718,8 @@ describe('getSortByParameterized', () => {
       'dori0123_001',
 
       // Other objects don't have a language family, stable to input order
-      '123',
-      'BE',
-      'ER',
       'HA',
       'AM',
-      '001',
       'be0590',
       'Teng',
       'tolkorth',

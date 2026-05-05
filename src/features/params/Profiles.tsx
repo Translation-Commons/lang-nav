@@ -44,6 +44,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   fieldFocus: Field.None,
   isoStatus: [],
   languageFilter: '',
+  languageFamilyFilter: '',
   languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
   languageSource: LanguageSource.Combined,
   limit: 12,

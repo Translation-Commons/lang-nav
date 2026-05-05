@@ -4,6 +4,7 @@ import getEntityMainTableColumns from '@widgets/tables/columns/getEntityMainTabl
 
 import useEntities from '@features/data/context/useEntities';
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import ZIndex from '@features/layers/ZIndex';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
@@ -34,7 +35,14 @@ const FieldCoverageTable: React.FC = () => {
           <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
           <col span={entityTypes.length} style={{ borderRight: '2px solid transparent' }} />
         </colgroup>
-        <thead>
+        <thead
+          style={{
+            position: 'sticky',
+            top: 0,
+            backgroundColor: 'var(--color-background)',
+            zIndex: ZIndex.TableStickyRow,
+          }}
+        >
           <tr>
             <th colSpan={3}>Field</th>
             <th colSpan={transforms.length}>Capabilities</th>

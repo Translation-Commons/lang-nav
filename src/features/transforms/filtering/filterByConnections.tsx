@@ -4,7 +4,7 @@ import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { getContainingTerritories } from '@entities/lib/getObjectRelatedTerritories';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -31,10 +31,14 @@ export function getFilterByConnections({
   const filterByTerritory = territory ? filterBy[Field.Territory] : () => true;
   const filterByWritingSystem = writing ? filterBy[Field.WritingSystem] : () => true;
   const filterByLanguage = lang ? filterBy[Field.Language] : () => true;
+  const filterByLanguageFamily = lang ? filterBy[Field.LanguageFamily] : () => true;
   return useCallback(
     (object: ObjectData) =>
-      filterByTerritory(object) && filterByWritingSystem(object) && filterByLanguage(object),
-    [filterByTerritory, filterByWritingSystem, filterByLanguage],
+      filterByTerritory(object) &&
+      filterByWritingSystem(object) &&
+      filterByLanguage(object) &&
+      filterByLanguageFamily(object),
+    [filterByTerritory, filterByWritingSystem, filterByLanguage, filterByLanguageFamily],
   );
 }
 
@@ -133,6 +137,26 @@ export function buildFilterByLanguage(languageFilter: string): FilterFunctionTyp
   };
 }
 
+export function buildFilterByLanguageFamily(languageFamilyFilter: string): FilterFunctionType {
+  // Split up strings like "German [deu]" into "deu" and "German"
+  const splitFilter = languageFamilyFilter.split('[');
+  const nameMatch = splitFilter[0]?.toLowerCase().trim();
+  let codeMatch = '';
+  if (languageFamilyFilter.length === 3 && languageFamilyFilter.match(/[a-z]{3}/)) {
+    codeMatch = languageFamilyFilter; // ISO 639 code
+  } else if (splitFilter.length > 1) {
+    const codeSection = splitFilter[1].split(']')[0];
+    if (codeSection) codeMatch = codeSection.toLowerCase();
+  }
+
+  return (object: ObjectData) => {
+    if (!languageFamilyFilter) return true;
+    const langs = getLanguageFamiliesRelevantToObject(object);
+    if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
+    return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
+  };
+}
+
 export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[] {
   switch (object.type) {
     case ObjectType.Territory:
@@ -156,5 +180,33 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
       return object.languages ?? [];
     case ObjectType.Keyboard:
       return object.languages ?? [];
+  }
+}
+
+export function getLanguageFamiliesRelevantToObject(object: ObjectData): LanguageData[] {
+  switch (object.type) {
+    case ObjectType.Territory:
+      return uniqueBy(
+        object.locales
+          ?.filter(
+            (loc) =>
+              (loc.populationSpeakingPercent || 0) > 1 &&
+              loc.language?.scope === LanguageScope.Family,
+          )
+          ?.map((loc) => loc.language)
+          .filter((lang) => !!lang) ?? [],
+        (lang) => lang.ID,
+      );
+    case ObjectType.Locale:
+      return object.language ? getLanguageFamiliesRelevantToObject(object.language) : [];
+    case ObjectType.Language:
+      // gets the language family
+      return [...(getObjectParents(object) as LanguageData[]), object].filter((lang) => !!lang);
+    case ObjectType.WritingSystem:
+      return Object.values(object.languages ?? {});
+    case ObjectType.Census:
+    case ObjectType.Variant:
+    case ObjectType.Keyboard:
+      return []; // Too computationally intensive to get
   }
 }

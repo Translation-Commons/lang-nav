@@ -96,9 +96,12 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         {localesWhereExplicit && localesWhereExplicit.length > 0 && (
           <DetailsField title="Locales (where writing system is explicit)">
             <CommaSeparated>
-              {localesWhereExplicit.sort(sortFunction).map((locale) => (
-                <HoverableObjectName key={locale.ID} object={locale} />
-              ))}
+              {localesWhereExplicit
+                .slice()
+                .sort(sortFunction)
+                .map((locale) => (
+                  <HoverableObjectName key={locale.ID} object={locale} />
+                ))}
             </CommaSeparated>
           </DetailsField>
         )}
@@ -111,9 +114,12 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         {childWritingSystems && childWritingSystems.length > 0 && (
           <DetailsField title="Inspired">
             <CommaSeparated>
-              {childWritingSystems.sort(sortFunction).map((writingSystem) => (
-                <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
-              ))}
+              {childWritingSystems
+                .slice()
+                .sort(sortFunction)
+                .map((writingSystem) => (
+                  <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
+                ))}
             </CommaSeparated>
           </DetailsField>
         )}
