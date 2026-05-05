@@ -29,6 +29,7 @@ vi.mock('@features/transforms/filtering/filter', () => ({
 vi.mock('@features/transforms/filtering/filterByConnections', () => ({
   getFilterByConnections: vi.fn(),
   buildFilterByLanguage: vi.fn().mockReturnValue(() => true),
+  buildFilterByLanguageFamily: vi.fn().mockReturnValue(() => true),
   buildFilterByWritingSystem: vi.fn().mockReturnValue(() => true),
   buildFilterByTerritory: vi.fn().mockReturnValue(() => true),
 }));

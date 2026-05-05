@@ -5,6 +5,8 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import { LanguageScope } from '@entities/language/LanguageTypes';
+
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import { getMockLanguages } from '../../__tests__/mockLanguagesForFilterTest.test';
@@ -56,27 +58,26 @@ describe('LanguageFilterSelector', () => {
 
     // After click the mocked TextInput will render suggestion items
     const items = screen.getByRole('listbox').children;
-    // Expect all 10 languages to be suggested and that the languages come first
-    expect(items.length).toBe(12);
-    expect(items[0]).toHaveTextContent('Pick a suggestion or type to filter');
-    expect(items[1]).toHaveTextContent('English');
-    expect(items[2]).toHaveTextContent('Spanish');
-    expect(items[3]).toHaveTextContent('French');
-    expect(items[4]).toHaveTextContent('German');
-    expect(items[5]).toHaveTextContent('Italian');
-    expect(items[6]).toHaveTextContent('Russian');
-    expect(items[7]).toHaveTextContent('Navajo');
-    expect(items[8]).toHaveTextContent('Chinese');
-    expect(items[9]).toHaveTextContent('not macrolanguage or individual language');
-    expect(items[10]).toHaveTextContent('Indo-European languages');
-    expect(items[11]).toHaveTextContent('Germanic');
-    // User types in German, suggestions should filter to German and Germanic
+    const rows = [
+      'Pick a suggestion or type to filter',
+      // Does not suggest language families
+      'English',
+      'Spanish',
+      'French',
+      'German',
+      'Italian',
+      'Russian',
+      'Navajo',
+      'Chinese',
+    ];
+    expect(items.length).toBe(rows.length);
+    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+
+    // User types in German, suggestions should filter to German
     await waitFor(async () => await user.type(input, 'German'));
-    expect(items.length).toBe(4);
-    expect(items[0]).toHaveTextContent('Pick a suggestion or press [enter] to filter by "German"');
-    expect(items[1]).toHaveTextContent('German');
-    expect(items[2]).toHaveTextContent('not macrolanguage or individual language');
-    expect(items[3]).toHaveTextContent('Germanic');
+    const rows2 = ['Pick a suggestion or press [enter] to filter by "German"', 'German'];
+    expect(items.length).toBe(rows2.length);
+    rows2.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
     expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
 
     // User clicks on German, the button text should update and updatePageParams called
@@ -95,18 +96,72 @@ describe('LanguageFilterSelector', () => {
 
     // After click the mocked TextInput will render suggestion items
     const items = screen.getByRole('listbox').children;
-    // Expect all 10 languages to be suggested and that the languages come first
-    expect(items.length).toBe(11);
-    expect(items[0]).toHaveTextContent('Pick a suggestion or type to filter');
-    expect(items[1]).toHaveTextContent('Indo-European languages');
-    expect(items[2]).toHaveTextContent('Germanic');
-    expect(items[3]).toHaveTextContent('English');
-    expect(items[4]).toHaveTextContent('Spanish');
-    expect(items[5]).toHaveTextContent('French');
-    expect(items[6]).toHaveTextContent('German');
-    expect(items[7]).toHaveTextContent('Italian');
-    expect(items[8]).toHaveTextContent('Russian');
-    expect(items[9]).toHaveTextContent('Navajo');
-    expect(items[10]).toHaveTextContent('Chinese');
+    const rows = [
+      'Pick a suggestion or type to filter',
+      'English',
+      'Spanish',
+      'French',
+      'German',
+      'Italian',
+      'Russian',
+      'Navajo',
+      'Chinese',
+    ];
+    expect(items.length).toBe(rows.length);
+    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+  });
+
+  it('when a language family is selected, results will partition languages in that family from ones not in that family', async () => {
+    setupMockParams({ languageFamilyFilter: 'gem' });
+    const user = userEvent.setup();
+    await waitFor(async () => render(<LanguageFilterSelector />));
+
+    const btn = screen.getByPlaceholderText('Name or code');
+    // Click to trigger getSuggestions('') and await
+    await waitFor(async () => await user.click(btn));
+
+    // After click the mocked TextInput will render suggestion items
+    const items = screen.getByRole('listbox').children;
+    const rows = [
+      'Pick a suggestion or type to filter',
+      'English',
+      'German',
+      'not related to language family with code "gem"',
+      'Spanish',
+      'French',
+      'Italian',
+      'Russian',
+      'Navajo',
+      'Chinese',
+    ];
+    expect(items.length).toBe(rows.length);
+    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+  });
+
+  it('when macrolanguages are filtered out, they appear still, but lower in the suggestion list', async () => {
+    setupMockParams({ languageScopes: [LanguageScope.Language] });
+    const user = userEvent.setup();
+    await waitFor(async () => render(<LanguageFilterSelector />));
+
+    const btn = screen.getByPlaceholderText('Name or code');
+    // Click to trigger getSuggestions('') and await
+    await waitFor(async () => await user.click(btn));
+
+    // After click the mocked TextInput will render suggestion items
+    const items = screen.getByRole('listbox').children;
+    const rows = [
+      'Pick a suggestion or type to filter',
+      'English',
+      'Spanish',
+      'French',
+      'German',
+      'Italian',
+      'Russian',
+      'Navajo',
+      'not individual language',
+      'Chinese',
+    ];
+    expect(items.length).toBe(rows.length);
+    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
   });
 });
