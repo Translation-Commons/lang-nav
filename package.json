@@ -19,8 +19,7 @@
     "test:coverage": "vitest run --coverage",
     "test:screenshots": "npx playwright test",
     "test:screenshots:update": "npx playwright test --update-snapshots",
-    "update-screenshots": "npx playwright test e2e/update-screenshots.spec.ts --reporter=list",
-    "generate-diff": "npx playwright test e2e/generate-diff.spec.ts --reporter=list"
+    "update-screenshots": "npx playwright test scripts/update-screenshots.spec.ts --reporter=list"
   },
   "dependencies": {
     "@amplitude/unified": "^1.0.3",
@@ -58,10 +57,7 @@
     "gh-pages": "^6.3.0",
     "globals": "^16.0.0",
     "jsdom": "^27.0.0",
-    "@types/pngjs": "^6.0.5",
     "msw": "^2.11.3",
-    "pixelmatch": "^7.2.0",
-    "pngjs": "^7.0.0",
     "prettier": "^3.6.2",
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.30.1",

@@ -71,6 +71,7 @@ test('capture table.png — data page in table view', async ({ page }) => {
   await page.goto('./data?view=Table');
   await waitForDataPage(page);
   const table = page.locator('main table').first();
+  await table.locator('tbody tr').first().waitFor({ state: 'visible' });
   await screenshotVisible(page, table, path.join(PUBLIC_DIR, 'table.png'));
 });
 
