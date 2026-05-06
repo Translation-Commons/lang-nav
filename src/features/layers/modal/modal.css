@@ -1,7 +1,7 @@
 .ModalOverlay {
   position: fixed;
   top: 0;
-  left: 0;
+  right: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.4);
@@ -13,8 +13,31 @@
   z-index: 50;
 }
 
+.overlay-right-top {
+  width: auto;
+  height: auto;
+  border-radius: 10px;
+  align-items: flex-start;
+  justify-content: flex-end;
+  transition:
+    transform 0.8s linear(0, 0.45, 0.74, 0.88, 0.96, 1, 1.03, 1.05, 1.03, 1, 0.99, 1),
+    opacity 0.3s;
+}
+
+.overlay-right-top-open {
+  transform-origin: top right;
+  transform: scale(1);
+}
+
+.overlay-right-top-close {
+  transform-origin: top right;
+  transform: scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
 .Modal {
-  margin: 0px auto;
+  margin: 0 auto;
   background-color: var(--color-background);
   border-radius: 10px;
   box-shadow: var(--color-shadow) 0 0 2em 1em;
@@ -23,12 +46,16 @@
   flex-direction: column;
 }
 
+.overlay-right-top .Modal {
+  margin: 0;
+}
+
 .ModalHeader {
   display: flex;
   justify-content: space-between;
   padding: 4px;
   background: var(--color-button-primary);
-  border-radius: 10px 10px 0px 0px;
+  border-radius: 10px 10px 0 0;
 }
 
 .ModalTitle {
@@ -37,6 +64,11 @@
   margin-right: 8px;
   font-size: 1.75em;
   text-align: left;
+}
+
+.overlay-right-top .ModalTitle {
+  margin: auto 20px;
+  font-size: 1.4em;
 }
 
 .ModalTitle .subtitle {

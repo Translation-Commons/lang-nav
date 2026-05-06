@@ -3,6 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
+import Settings from '@widgets/settings/Settings';
+
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
@@ -30,15 +32,18 @@ const PageNavBar: React.FC = () => {
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <SearchBar />
       </div>
-      <button
-        className="primary"
-        type="button"
-        style={{ padding: '0.5em', whiteSpace: 'nowrap' }}
-        onClick={() => setFeedbackOpen(true)}
-      >
-        Feedback
-      </button>
-      {feedbackOpen && <FeedbackForm onClose={() => setFeedbackOpen(false)} />}
+      <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center' }}>
+        <button
+          className="primary"
+          type="button"
+          style={{ padding: '0.5em', whiteSpace: 'nowrap' }}
+          onClick={() => setFeedbackOpen(true)}
+        >
+          Feedback
+        </button>
+        {feedbackOpen && <FeedbackForm onClose={() => setFeedbackOpen(false)} />}
+        <Settings />
+      </div>
     </NavBarContainer>
   );
 };

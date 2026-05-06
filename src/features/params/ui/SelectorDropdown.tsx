@@ -39,10 +39,15 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
             role="listbox"
             style={{
               display: 'flex',
-              flexDirection: 'column',
-              width: 'fit-content',
+              flexDirection: 'row',
+              width: 'min-content',
               borderRadius: '1em',
-              backgroundColor: 'var(--color-background)',
+              backgroundColor: 'rgba(0,0,0,0)',
+              maxHeight: '50vh',
+              overflow: 'auto',
+              paddingRight: '1em',
+              direction: 'rtl',
+              scrollbarWidth: 'thin',
             }}
           >
             {children}

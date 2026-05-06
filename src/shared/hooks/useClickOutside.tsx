@@ -17,3 +17,24 @@ export function useClickOutside(callback: () => void) {
   }, [callback]);
   return ref;
 }
+
+export function useClickOutsideTwo(callback: () => void) {
+  const triggerRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    function handleEvent(event: MouseEvent) {
+      const target = event.target as Node;
+      const clickedInsideTrigger = triggerRef.current?.contains(target);
+      const clickedInsideMenu = containerRef.current?.contains(target);
+      if (!clickedInsideMenu && !clickedInsideTrigger) {
+        callback();
+      }
+    }
+    document.addEventListener('mousedown', handleEvent);
+    return () => {
+      document.removeEventListener('mousedown', handleEvent);
+    };
+  }, [callback]);
+
+  return { triggerRef, containerRef };
+}
