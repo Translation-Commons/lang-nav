@@ -37,12 +37,7 @@ async function waitForDataPage(page: Page) {
  * Screenshot a 600×600 square starting at the top-left of the locator's
  * bounding box, with an optional x offset to shift the crop horizontally.
  */
-async function screenshotVisible(
-  page: Page,
-  locator: Locator,
-  filePath: string,
-  xOffset = 0,
-) {
+async function screenshotVisible(page: Page, locator: Locator, filePath: string, xOffset = 0) {
   await locator.waitFor({ state: 'visible' });
   const box = await locator.boundingBox();
   if (!box) throw new Error(`Element has no bounding box`);
