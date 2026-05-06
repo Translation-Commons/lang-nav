@@ -33,9 +33,7 @@ const Settings = (): React.ReactNode => {
     setIsOpen(false);
   }, [location.pathname]);
 
-  const isIntroOrAboutPage =
-    location.pathname === '/' + LangNavPageName.Intro ||
-    location.pathname === '/' + LangNavPageName.About;
+  const isDataPage = location.pathname === '/' + LangNavPageName.Data;
 
   return (
     <>
@@ -48,7 +46,7 @@ const Settings = (): React.ReactNode => {
       </HoverableButton>
       <div className={'view-settings'} style={{ fontSize: '0.9em' }}>
         <ViewModal
-          className="right-top"
+          className="top-right"
           isOpen={isOpen}
           onClose={onClose}
           title="View settings"
@@ -60,7 +58,7 @@ const Settings = (): React.ReactNode => {
           }}
         >
           <OptionsPanelSection title="View options" optionsName="view options" fullView={true}>
-            {!isIntroOrAboutPage && (
+            {isDataPage && (
               <>
                 <LimitInput />
                 <SortBySelector />

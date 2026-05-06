@@ -36,7 +36,7 @@ const ViewModal: React.FC<ModalProps> = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (className !== 'right-top' && !isOpen) return <></>;
+  if (!isOpen && className !== 'top-right') return <></>;
   const overlayClassName = className
     ? `ModalOverlay overlay-${className} overlay-${className}-${isOpen ? 'open' : 'close'}`
     : 'ModalOverlay';
