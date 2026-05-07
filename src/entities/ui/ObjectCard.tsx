@@ -6,6 +6,7 @@ import CensusCard from '@entities/census/CensusCard';
 import KeyboardCard from '@entities/keyboard/KeyboardCard';
 import LanguageCard from '@entities/language/LanguageCard';
 import LocaleCard from '@entities/locale/LocaleCard';
+import OrganizationCard from '@entities/org/OrganizationCard';
 import TerritoryCard from '@entities/territory/TerritoryCard';
 import { ObjectData } from '@entities/types/DataTypes';
 import VariantCard from '@entities/variant/VariantCard';
@@ -27,6 +28,8 @@ const ObjectCard: React.FC<{ object: ObjectData }> = ({ object }) => {
       return <WritingSystemCard writingSystem={object} />;
     case ObjectType.Keyboard:
       return <KeyboardCard keyboard={object} />;
+    case ObjectType.Org:
+      return <OrganizationCard org={object} />;
   }
 };
 

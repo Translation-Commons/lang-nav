@@ -45,6 +45,8 @@ function getObjectIDs(objectType: ObjectType): string[] {
         'gboard_fra_Latn_FR',
         'gboard_ara_Arab_SA',
       ];
+    case ObjectType.Org:
+      return ['un', 'unesco', 'unicode', 'cldr', 'afrobarometer'];
   }
 }
 

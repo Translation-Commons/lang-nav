@@ -32,6 +32,8 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
       return undefined;
     case ObjectType.Keyboard:
       return object.languages?.[0]?.nameDisplay;
+    case ObjectType.Org:
+      return undefined;
   }
 }
 
@@ -52,6 +54,7 @@ export function getObjectDate(object: ObjectData): Date | undefined {
     case ObjectType.WritingSystem:
     case ObjectType.Territory:
     case ObjectType.Keyboard:
+    case ObjectType.Org:
       return undefined;
   }
 }
@@ -75,6 +78,8 @@ export function getCountOfLanguages(object: ObjectData): number | undefined {
       return object.languageCodes?.length;
     case ObjectType.Keyboard:
       return object.languageCodes?.length;
+    case ObjectType.Org:
+      return undefined; // Too computationally intensive to get
   }
 }
 
@@ -92,6 +97,7 @@ export function getCountOfKeyboards(object: ObjectData): number | undefined {
     case ObjectType.Locale:
     case ObjectType.Variant:
     case ObjectType.Census:
+    case ObjectType.Org:
       return undefined;
     default:
       enforceExhaustiveSwitch(type);
@@ -101,18 +107,18 @@ export function getCountOfKeyboards(object: ObjectData): number | undefined {
 // Field.Literacy
 export function getObjectLiteracy(object: ObjectData): number | undefined {
   switch (object.type) {
-    case ObjectType.Census:
-    case ObjectType.WritingSystem:
-    case ObjectType.Variant:
-      // No literacy value to sort by
-      return undefined;
     case ObjectType.Language:
       return getLanguageLiteracy(object);
     case ObjectType.Locale:
       return object.literacyPercent;
     case ObjectType.Territory:
       return object.literacyPercent;
+    case ObjectType.Census:
+    case ObjectType.WritingSystem:
+    case ObjectType.Variant:
     case ObjectType.Keyboard:
+    case ObjectType.Org:
+      // No literacy value to sort by
       return undefined;
   }
 }
@@ -189,6 +195,8 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
         return [object.inputWritingSystem, object.outputWritingSystem];
       }
       return object.inputWritingSystem ? [object.inputWritingSystem] : undefined;
+    case ObjectType.Org:
+      return undefined; // Not well defined
     default:
       enforceExhaustiveSwitch(type);
   }
@@ -207,9 +215,10 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
     case ObjectType.Language:
     case ObjectType.WritingSystem:
     case ObjectType.Variant:
-      return undefined;
     case ObjectType.Keyboard:
       return undefined;
+    case ObjectType.Org:
+      return object.documents?.length ?? 0;
     default:
       enforceExhaustiveSwitch(type);
   }
@@ -231,9 +240,10 @@ export function getDepth(object: ObjectData): number | undefined {
       return object.parentWritingSystem ? getDepth(object.parentWritingSystem)! + 1 : 0;
     case ObjectType.Census:
     case ObjectType.Variant:
-      return undefined;
     case ObjectType.Keyboard:
       return undefined;
+    case ObjectType.Org:
+      return object.parent ? getDepth(object.parent)! + 1 : 0;
     default:
       enforceExhaustiveSwitch(type);
   }

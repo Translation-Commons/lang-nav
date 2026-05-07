@@ -132,6 +132,7 @@ function useDataCompletenessByFieldByEntityType(): Record<Field, Record<ObjectTy
     [ObjectType.Census]: useEntities(ObjectType.Census),
     [ObjectType.Variant]: useEntities(ObjectType.Variant),
     [ObjectType.Keyboard]: useEntities(ObjectType.Keyboard),
+    [ObjectType.Org]: useEntities(ObjectType.Org),
   };
   return Object.values(Field).reduce(
     (acc, field) => {

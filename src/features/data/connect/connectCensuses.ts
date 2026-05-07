@@ -4,6 +4,7 @@ import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { setLanguageNames } from '@entities/language/setLanguageNames';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { CensusImport } from '../load/extra_entities/loadCensusData';
@@ -16,6 +17,7 @@ export function addCensusData(
   getTerritory: (id: string) => TerritoryData | undefined,
   censuses: Record<string, CensusData>,
   censusImport: CensusImport,
+  organizations: OrganizationData[],
 ): void {
   // Report warnings to the console
   censusImport.warnings.forEach((warning) => {
@@ -26,26 +28,69 @@ export function addCensusData(
   addNewLanguageNames(getLanguage, censusImport);
 
   // Add the census records to the core data
-  for (const census of censusImport.censuses) {
+  censusImport.censuses.forEach((census) => {
     // Add the census to the core data if its not there yet
-    if (censuses[census.ID] == null) {
-      censuses[census.ID] = census;
+    if (censuses[census.ID] != null) return; // It's reloaded twice on dev mode, skip if it already exists
+    censuses[census.ID] = census;
 
-      // Add the territory reference to it
-      const territory = getTerritory(census.isoRegionCode);
-      if (territory != null && territory.type === ObjectType.Territory) {
-        census.territory = territory;
-        if (territory.censuses == null) territory.censuses = [];
-        territory.censuses.push(census);
-      }
-
-      // Create references to census from the locale data
-      addCensusRecordsToLocales(getLocale, census);
-    } else {
-      // It's reloaded twice on dev mode
-      // console.warn(`Census data for ${census.ID} already exists, skipping.`);
+    // Add the territory reference to it
+    const territory = getTerritory(census.isoRegionCode);
+    if (territory != null && territory.type === ObjectType.Territory) {
+      census.territory = territory;
+      if (territory.censuses == null) territory.censuses = [];
+      territory.censuses.push(census);
     }
-  }
+
+    // Add organization
+    const collectorOrg = organizations.find((org) => org.nameDisplay === census.collectorName);
+    if (!census.collectorName) {
+      console.warn(`Census ${census.ID} is missing collector name`);
+    } else if (collectorOrg == null) {
+      const codeDisplay = census.collectorNameShort ?? census.collectorName;
+      organizations.push({
+        type: ObjectType.Org,
+        ID: `org.${census.collectorName}`,
+        codeDisplay,
+        nameDisplay: census.collectorName,
+        // nameEndonym: '',
+        // parentID: '',
+        // hqID: '',
+        documents: [census],
+        names: [census.collectorName],
+        headquarters: territory,
+      });
+    } else {
+      if (collectorOrg.documents?.find((doc) => doc.ID === census.ID) == null)
+        // Avoid pushing the same census twice since it's reloaded twice in dev mode
+        collectorOrg.documents?.push(census);
+    }
+
+    // If the data was presented by a different organization than the collector, add that one too
+    const presentedByOrg = organizations.find((org) => org.nameDisplay === census.presentedBy);
+    if (!census.presentedBy) {
+      // Do nothing
+    } else if (presentedByOrg == null) {
+      const codeDisplay = census.presentedBy;
+      organizations.push({
+        type: ObjectType.Org,
+        ID: `org.${census.presentedBy}`,
+        codeDisplay,
+        nameDisplay: census.presentedBy,
+        // nameEndonym: '',
+        // parentID: '',
+        // hqID: '',
+        documents: [census],
+        names: [census.presentedBy],
+        headquarters: territory,
+      });
+    } else {
+      if (presentedByOrg.documents?.find((doc) => doc.ID === census.ID) == null)
+        presentedByOrg.documents?.push(census);
+    }
+
+    // Create references to census from the locale data
+    addCensusRecordsToLocales(getLocale, census);
+  });
 }
 
 function addNewLanguageNames(

@@ -9,6 +9,7 @@ import getCensusColumns from './CensusColumns';
 import getKeyboardColumns from './KeyboardColumns';
 import getLanguageColumns from './LanguageColumns';
 import getLocaleColumns from './LocaleColumns';
+import getOrganizationColumns from './OrganizationColumns';
 import getTerritoryColumns from './TerritoryColumns';
 import getVariantColumns from './VariantColumns';
 import getWritingSystemColumns from './WritingSystemColumns';
@@ -29,6 +30,8 @@ function getEntityMainTableColumns(entityType: ObjectType): TableColumn<ObjectDa
       return getKeyboardColumns() as TableColumn<ObjectData>[];
     case ObjectType.Census:
       return getCensusColumns() as TableColumn<ObjectData>[];
+    case ObjectType.Org:
+      return getOrganizationColumns() as TableColumn<ObjectData>[];
     default:
       enforceExhaustiveSwitch(entityType);
   }

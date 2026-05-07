@@ -114,6 +114,8 @@ export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSy
         [object.inputWritingSystem, object.outputWritingSystem].filter((ws) => !!ws),
         (ws) => ws.ID,
       );
+    case ObjectType.Org:
+      return []; // Not well defined
   }
 }
 
@@ -180,6 +182,8 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
       return object.languages ?? [];
     case ObjectType.Keyboard:
       return object.languages ?? [];
+    case ObjectType.Org:
+      return []; // Too computationally intensive to get
   }
 }
 
@@ -207,6 +211,7 @@ export function getLanguageFamiliesRelevantToObject(object: ObjectData): Languag
     case ObjectType.Census:
     case ObjectType.Variant:
     case ObjectType.Keyboard:
+    case ObjectType.Org:
       return []; // Too computationally intensive to get
   }
 }

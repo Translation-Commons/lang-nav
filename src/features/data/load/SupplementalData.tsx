@@ -53,6 +53,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
         dataContext.getTerritory,
         dataContext.censuses,
         censusImport,
+        dataContext.organizations,
       );
     }
   });
@@ -67,6 +68,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
       languageNames: {},
       warnings: [],
     },
+    dataContext.organizations,
   );
 
   // After loading all supplemental data, recompute derived stats

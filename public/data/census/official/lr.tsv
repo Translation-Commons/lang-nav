@@ -9,6 +9,7 @@
 #url	https://lisgis.gov.lr/censusreport/thematic/ThematicReportonPopulationSizeDistributionandStructure.pdf			
 #collectorType	Government			
 #collectorName	Liberia Institute of Statistics & Geo-Information Services			
+#collectorNameShort	LISGIS			
 Language Code	Language Name	Liberia Ethnicity 2022	Liberia Ethnicity 2008	Liberia Ethnicity 1984
 kpe/xpe	Kpelle	1,060,538	708,282	407,716
 bsq	Bassa	714,025	467,536	290,025

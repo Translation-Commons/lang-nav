@@ -10,6 +10,7 @@ import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -50,6 +51,7 @@ export type CoreDataArrays = {
   writingSystems: WritingSystemData[];
   keyboards: KeyboardData[];
   censuses: Record<CensusID, CensusData>;
+  organizations: OrganizationData[];
 };
 
 export type CoreData = CoreDataArrays & {
@@ -79,6 +81,7 @@ export function useCoreData(): {
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
+  const [organizations] = useState<OrganizationData[]>([]);
 
   async function loadCoreData(): Promise<void> {
     const [
@@ -186,6 +189,7 @@ export function useCoreData(): {
         (o): o is KeyboardData => o.type === ObjectType.Keyboard,
       ),
       censuses,
+      organizations,
       objects,
     },
   };

@@ -27,6 +27,7 @@ export type DataContextType = CoreDataArrays &
 export const DataContext = createContext<DataContextType | undefined>({
   allLanguoids: [],
   censuses: {},
+  organizations: [],
   languagesInSelectedSource: [],
   locales: [],
   territories: [],

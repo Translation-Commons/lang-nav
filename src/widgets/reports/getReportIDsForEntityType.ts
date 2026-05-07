@@ -24,12 +24,12 @@ function getReportIDsForEntityType(entityType: ObjectType): ReportID[] {
       return [ReportID.WritingSystemsLanguagesWithout];
     case ObjectType.Census:
       return [ReportID.CensusCountries, ReportID.CensusInputTool];
-    case ObjectType.Keyboard:
-      return [];
-    case ObjectType.Territory:
-      return [];
     case ObjectType.Variant:
       return [ReportID.VariantsAnnotationTool];
+    case ObjectType.Keyboard:
+    case ObjectType.Territory:
+    case ObjectType.Org:
+      return [];
     default:
       enforceExhaustiveSwitch(entityType);
   }

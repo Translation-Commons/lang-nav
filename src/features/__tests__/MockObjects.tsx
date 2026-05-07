@@ -270,6 +270,7 @@ export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArra
     variants: objectArray.filter((obj) => obj.type === ObjectType.Variant),
     censuses: { be0590: objects.be0590 as CensusData },
     keyboards: objectArray.filter((obj) => obj.type === ObjectType.Keyboard),
+    organizations: objectArray.filter((obj) => obj.type === ObjectType.Org),
   };
 }
 
@@ -419,6 +420,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     },
     {} as Record<string, CensusData>,
   );
+  const organizations = objectArray.filter((obj) => obj.type === ObjectType.Org);
 
   const dataContext: DataContextType = {
     allLanguoids: languages,
@@ -426,6 +428,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     keyboards: [],
     languagesInSelectedSource: languages,
     locales,
+    organizations,
     territories,
     writingSystems,
     variants,
