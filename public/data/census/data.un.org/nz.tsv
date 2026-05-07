@@ -14,7 +14,7 @@
 #sampleRate						
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27					
 #collectorType	Government					
-#presentedBy	data.un.org					
+#presentedBy	UNdata					
 Language Code	Language Name	nz1996	nz2001	nz2006	nz2013	nz2018
 mul	Total	3,452,937	3,563,796	4,027,947	4,242,048	4,699,755
 eng	English	3,290,454	3,425,304	3,673,626	3,819,972	4,482,132

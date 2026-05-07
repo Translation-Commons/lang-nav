@@ -10,7 +10,7 @@
 #sampleRate			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org		
+#presentedBy	UNdata		
 Language Code	Language Name	gh2000	gh2010
 mul	Total	17,436,592	23,823,594
 aka/twi/asan1239	Asante	2,578,829	3,820,807

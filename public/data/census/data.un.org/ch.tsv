@@ -12,7 +12,7 @@
 #sampleRate			0.0338	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
-#presentedBy	data.un.org			
+#presentedBy	UNdata			
 Language Code	Language Name	ch2000	ch2011	ch2020
 mul	Total	7,288,010	7,684,834	7,187,715
 deu	German	4,640,359	4,303,980	4,479,599
