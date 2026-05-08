@@ -448,6 +448,8 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
       objects[id]?.type === ObjectType.WritingSystem ? objects[id] : undefined,
     getVariant: (id: string) =>
       objects[id]?.type === ObjectType.Variant ? objects[id] : undefined,
+    getOrganization: (id: string) =>
+      objects[id]?.type === ObjectType.Org ? objects[id] : undefined,
   };
 
   return dataContext;

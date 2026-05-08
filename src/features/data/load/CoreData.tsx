@@ -82,7 +82,6 @@ export function useCoreData(): {
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
-  const [organizations, setOrganizations] = useState<Record<string, OrganizationData>>({});
 
   async function loadCoreData(): Promise<void> {
     const [
@@ -160,7 +159,6 @@ export function useCoreData(): {
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
-    setOrganizations(organizations || {});
     setAllLanguoids(Object.values(languagesBySource.Combined));
     setObjects({
       // All combined into one big object map for easy lookup but the ID formats are unique so its OK

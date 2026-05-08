@@ -169,6 +169,7 @@ const CensusCollectorNameDisplay: React.FC<{ census: CensusData }> = ({ census }
   if (!collectorName && !collectorNameShort && !collector) return null;
 
   if (collector) {
+    console.log(collector);
     return (
       <DetailsField title="Collected by">
         <HoverableObjectName object={collector} />

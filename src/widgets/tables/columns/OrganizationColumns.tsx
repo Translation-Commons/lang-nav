@@ -24,6 +24,7 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
       key: 'Parent Organization',
       render: (object) => <HoverableObjectName object={object.parent} />,
       exportValue: (object) => object.parent?.ID ?? '',
+      isInitiallyVisible: false,
     },
     {
       key: 'Census Tables',
@@ -44,6 +45,7 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
       key: 'URL',
       render: (object) => object.url && <ExternalLink href={object.url} />,
       exportValue: (object) => object.url ?? '',
+      isInitiallyVisible: false,
     },
   ];
 }

@@ -5,6 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -84,6 +85,20 @@ const DataProvider: React.FC<{
     },
     [coreData],
   );
+  const getOrganization = useCallback(
+    (id: string): OrganizationData | undefined => {
+      const obj = coreData.objects[id];
+      if (obj?.type === ObjectType.Org) return obj;
+
+      // Search with org. prefix
+      const obj2 = coreData.objects[`org.${id}`];
+      if (obj2?.type === ObjectType.Org) return obj2;
+
+      // Not found
+      return undefined;
+    },
+    [coreData],
+  );
   const languagesInSelectedSource = useMemo(() => {
     // Update dependent fields whenever language source or locale separator changes
     updateObjectsBasedOnDataParams(
@@ -110,6 +125,7 @@ const DataProvider: React.FC<{
       getTerritory,
       getWritingSystem,
       getVariant,
+      getOrganization,
     }),
     [coreData],
   );

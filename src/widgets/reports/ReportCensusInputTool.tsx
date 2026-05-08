@@ -12,7 +12,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import { countOccurrences } from '@shared/lib/setUtils';
 
 const ReportCensusInputTool: React.FC = () => {
-  const { getTerritory } = useDataContext();
+  const { getTerritory, getOrganization } = useDataContext();
   const [tsv, setTSV] = useState('');
   const [censuses, setCensuses] = useState<CensusData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -23,6 +23,9 @@ const ReportCensusInputTool: React.FC = () => {
       censuses.forEach((census) => {
         if (!census.nameDisplay) census.nameDisplay = 'MISSING NAME';
         census.territory = getTerritory(census.isoRegionCode) || undefined;
+        const collectorCode = census.collectorNameShort ?? census.collectorName;
+        if (collectorCode) census.collector = getOrganization(collectorCode);
+        if (census.presentedBy) census.presenter = getOrganization(census.presentedBy);
       });
       setCensuses(censuses);
 
@@ -35,7 +38,7 @@ const ReportCensusInputTool: React.FC = () => {
     } catch (e) {
       setErrorMessage((e as Error).message);
     }
-  }, [tsv, getTerritory]);
+  }, [tsv, getTerritory, getOrganization]);
 
   return (
     <div>

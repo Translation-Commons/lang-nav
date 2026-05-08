@@ -100,10 +100,16 @@ function addCensusRecordsToLocales(
 function addCensusToOrganizations(organizations: OrganizationData[], census: CensusData): void {
   const codeDisplay = census.collectorNameShort ?? census.collectorName;
   const collectorOrg = organizations.find((org) => org.codeDisplay === codeDisplay);
-  if (collectorOrg == null) {
+  if (collectorOrg) {
+    if (collectorOrg.censuses?.find((doc) => doc.ID === census.ID) == null) {
+      // Avoid pushing the same census twice since it's reloaded twice in dev mode
+      collectorOrg.censuses?.push(census);
+      census.collector = collectorOrg;
+    }
+  } else if (codeDisplay) {
     organizations.push({
       type: ObjectType.Org,
-      ID: `org.${census.codeDisplay}`,
+      ID: `org.${codeDisplay}`,
       codeDisplay: codeDisplay!,
       nameDisplay: census.collectorName ?? codeDisplay!,
       url: census.presentedBy == null ? census.url.replace(/(\.[a-z]+\/).*/, '$1') : undefined,
@@ -111,12 +117,6 @@ function addCensusToOrganizations(organizations: OrganizationData[], census: Cen
       names: [census.collectorNameShort, census.collectorName].filter((n) => n != null),
       headquarters: census.territory,
     });
-  } else {
-    if (collectorOrg.censuses?.find((doc) => doc.ID === census.ID) == null) {
-      // Avoid pushing the same census twice since it's reloaded twice in dev mode
-      collectorOrg.censuses?.push(census);
-      census.collector = collectorOrg;
-    }
   }
 
   // If the data was presented by a different organization than the collector, add that one too
