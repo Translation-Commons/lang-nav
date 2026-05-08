@@ -25,7 +25,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
         ? object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0)
         : undefined;
     case ObjectType.Org:
-      return object.documents?.length || undefined;
+      return object.censuses?.length || undefined;
   }
 }
 

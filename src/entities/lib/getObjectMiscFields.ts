@@ -218,7 +218,7 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
     case ObjectType.Keyboard:
       return undefined;
     case ObjectType.Org:
-      return object.documents?.length ?? 0;
+      return object.censuses?.length ?? 0;
     default:
       enforceExhaustiveSwitch(type);
   }

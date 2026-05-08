@@ -135,7 +135,11 @@ function CensusSourceSection({ census }: { census: CensusData }) {
       <DetailsField title="Source type">{collectorType}</DetailsField>
       <CensusCollectorNameDisplay census={census} />
       {author && <DetailsField title="Author">{author}</DetailsField>}
-      {presentedBy && <DetailsField title="Presented by">{presentedBy}</DetailsField>}
+      {(census.presenter || presentedBy) && (
+        <DetailsField title="Presented by">
+          {census.presenter ? <HoverableObjectName object={census.presenter} /> : presentedBy}
+        </DetailsField>
+      )}
       {url && (
         <DetailsField title="URL">
           <ExternalLink href={url} />
@@ -161,8 +165,16 @@ function CensusSourceSection({ census }: { census: CensusData }) {
 }
 
 const CensusCollectorNameDisplay: React.FC<{ census: CensusData }> = ({ census }) => {
-  const { collectorName, collectorNameShort } = census;
-  if (!collectorName && !collectorNameShort) return null;
+  const { collectorName, collectorNameShort, collector } = census;
+  if (!collectorName && !collectorNameShort && !collector) return null;
+
+  if (collector) {
+    return (
+      <DetailsField title="Collected by">
+        <HoverableObjectName object={collector} />
+      </DetailsField>
+    );
+  }
 
   return (
     <DetailsField title="Collected by">

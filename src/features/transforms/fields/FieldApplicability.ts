@@ -255,7 +255,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.SourceType,
 
-        Field.CountOfLanguages,
+        // Field.CountOfLanguages,
         Field.CountOfCensuses,
 
         Field.Territory,

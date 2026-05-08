@@ -355,6 +355,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     locales,
     variants,
     {},
+    {},
   );
 
   // Update the objects dictionary with the aggregated locales
@@ -368,6 +369,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     (id) => territories[id],
     {},
     { censuses: Object.values(censuses), languageNames: {}, warnings: [] },
+    [],
   );
 
   return objects;

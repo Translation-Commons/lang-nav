@@ -32,9 +32,9 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
         field={Field.CountOfCensuses}
         description="Tables of population information conducted by this organization and added to LangNav."
       >
-        {org.documents ? (
+        {org.censuses ? (
           <HoverableEnumeration
-            items={org.documents.map((doc) => (
+            items={org.censuses.map((doc) => (
               <HoverableObjectName key={doc.ID} object={doc} />
             ))}
           />

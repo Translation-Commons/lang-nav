@@ -42,51 +42,7 @@ export function addCensusData(
     }
 
     // Add organization
-    const collectorOrg = organizations.find((org) => org.nameDisplay === census.collectorName);
-    if (!census.collectorName) {
-      console.warn(`Census ${census.ID} is missing collector name`);
-    } else if (collectorOrg == null) {
-      const codeDisplay = census.collectorNameShort ?? census.collectorName;
-      organizations.push({
-        type: ObjectType.Org,
-        ID: `org.${census.collectorName}`,
-        codeDisplay,
-        nameDisplay: census.collectorName,
-        url: census.presentedBy == null ? census.url.replace(/(\.[a-z]+)\/.*/, '$1') : undefined,
-        documents: [census],
-        names: [census.collectorName],
-        headquarters: territory,
-      });
-    } else {
-      if (collectorOrg.documents?.find((doc) => doc.ID === census.ID) == null)
-        // Avoid pushing the same census twice since it's reloaded twice in dev mode
-        collectorOrg.documents?.push(census);
-    }
-
-    // If the data was presented by a different organization than the collector, add that one too
-    const presentedByOrg = organizations.find((org) => org.nameDisplay === census.presentedBy);
-    if (!census.presentedBy) {
-      // Do nothing
-    } else if (presentedByOrg == null) {
-      const codeDisplay = census.presentedBy;
-      organizations.push({
-        type: ObjectType.Org,
-        ID: `org.${census.presentedBy}`,
-        codeDisplay,
-        nameDisplay: census.presentedBy,
-        // nameEndonym: '',
-        // parentID: '',
-        // hqID: '',
-        // Get domain part of the URL
-        url: census.url.replace(/(\.[a-z]+)\/.*/, '$1'),
-        documents: [census],
-        names: [census.presentedBy],
-        headquarters: territory,
-      });
-    } else {
-      if (presentedByOrg.documents?.find((doc) => doc.ID === census.ID) == null)
-        presentedByOrg.documents?.push(census);
-    }
+    addCensusToOrganizations(organizations, census);
 
     // Create references to census from the locale data
     addCensusRecordsToLocales(getLocale, census);
@@ -139,4 +95,49 @@ function addCensusRecordsToLocales(
       // TODO: show warning in the "Reports" tool
     }
   });
+}
+
+function addCensusToOrganizations(organizations: OrganizationData[], census: CensusData): void {
+  const codeDisplay = census.collectorNameShort ?? census.collectorName;
+  const collectorOrg = organizations.find((org) => org.codeDisplay === codeDisplay);
+  if (collectorOrg == null) {
+    organizations.push({
+      type: ObjectType.Org,
+      ID: `org.${census.codeDisplay}`,
+      codeDisplay: codeDisplay!,
+      nameDisplay: census.collectorName ?? codeDisplay!,
+      url: census.presentedBy == null ? census.url.replace(/(\.[a-z]+\/).*/, '$1') : undefined,
+      censuses: [census],
+      names: [census.collectorNameShort, census.collectorName].filter((n) => n != null),
+      headquarters: census.territory,
+    });
+  } else {
+    if (collectorOrg.censuses?.find((doc) => doc.ID === census.ID) == null) {
+      // Avoid pushing the same census twice since it's reloaded twice in dev mode
+      collectorOrg.censuses?.push(census);
+      census.collector = collectorOrg;
+    }
+  }
+
+  // If the data was presented by a different organization than the collector, add that one too
+  const presentedByOrg = organizations.find((org) => org.codeDisplay === census.presentedBy);
+  if (!census.presentedBy) {
+    // Do nothing
+  } else if (presentedByOrg == null) {
+    const codeDisplay = census.presentedBy;
+    organizations.push({
+      type: ObjectType.Org,
+      ID: `org.${census.presentedBy}`,
+      codeDisplay,
+      nameDisplay: census.presentedBy,
+      url: census.url.replace(/(\.[a-z]+\/).*/, '$1'),
+      censuses: [census],
+      names: [census.presentedBy],
+    });
+  } else {
+    if (presentedByOrg.censuses?.find((doc) => doc.ID === census.ID) == null) {
+      presentedByOrg.censuses?.push(census);
+      census.presenter = presentedByOrg;
+    }
+  }
 }

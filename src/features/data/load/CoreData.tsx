@@ -23,6 +23,7 @@ import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
+import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTerritories } from './entities/loadTerritories';
 import { loadWritingSystems } from './entities/loadWritingSystems';
 import {
@@ -81,7 +82,7 @@ export function useCoreData(): {
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
-  const [organizations] = useState<OrganizationData[]>([]);
+  const [organizations, setOrganizations] = useState<Record<string, OrganizationData>>({});
 
   async function loadCoreData(): Promise<void> {
     const [
@@ -100,6 +101,7 @@ export function useCoreData(): {
       variants,
       keyboardsGBoard,
       keyboardsKeyman,
+      organizations,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -116,6 +118,7 @@ export function useCoreData(): {
       loadIANAVariants(),
       loadKeyboardsGBoard(),
       loadKeyboardsKeyman(),
+      loadOrganizations(),
     ]);
 
     if (
@@ -153,9 +156,11 @@ export function useCoreData(): {
       locales,
       variants,
       keyboards,
+      organizations || {},
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
+    setOrganizations(organizations || {});
     setAllLanguoids(Object.values(languagesBySource.Combined));
     setObjects({
       // All combined into one big object map for easy lookup but the ID formats are unique so its OK
@@ -168,6 +173,7 @@ export function useCoreData(): {
       ...writingSystems, // Aaaa
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
+      ...organizations,
     });
   }
 
@@ -189,7 +195,9 @@ export function useCoreData(): {
         (o): o is KeyboardData => o.type === ObjectType.Keyboard,
       ),
       censuses,
-      organizations,
+      organizations: Object.values(objects).filter(
+        (o): o is OrganizationData => o.type === ObjectType.Org,
+      ),
       objects,
     },
   };

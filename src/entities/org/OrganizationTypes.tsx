@@ -20,5 +20,5 @@ export interface OrganizationData extends ObjectBase {
   parent?: OrganizationData; // Sometimes an organization is contained in another, for instance UN -> UNESCO, Unicode -> CLDR
   children?: OrganizationData[]; // Inverse of parent
   headquarters?: TerritoryData; // The territory that this organization is headquartered in
-  documents?: CensusData[]; // The census documents that this organization has collected
+  censuses: CensusData[]; // The census documents that this organization has collected
 }

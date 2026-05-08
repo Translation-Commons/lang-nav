@@ -21,11 +21,16 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
       field: Field.Territory,
     },
     {
+      key: 'Parent Organization',
+      render: (object) => <HoverableObjectName object={object.parent} />,
+      exportValue: (object) => object.parent?.ID ?? '',
+    },
+    {
       key: 'Census Tables',
       render: (object) =>
-        object.documents ? (
+        object.censuses ? (
           <HoverableEnumeration
-            items={object.documents.map((doc) => (
+            items={object.censuses.map((doc) => (
               <HoverableObjectName key={doc.ID} object={doc} />
             ))}
             limit={5}
