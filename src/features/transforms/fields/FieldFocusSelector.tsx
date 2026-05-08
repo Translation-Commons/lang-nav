@@ -11,7 +11,7 @@ const FieldFocusSelector: React.FC = () => {
   const { fieldFocus, updatePageParams, view, objectType } = usePageParams();
 
   // Only applies to the TreeList view for now, but could be expanded to other views in the future
-  if (view !== View.Hierarchy) return null;
+  if (view !== View.Hierarchy && view !== View.Map) return null;
 
   return (
     <Selector<Field>

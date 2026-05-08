@@ -1,15 +1,19 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePagination from '@features/pagination/usePagination';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
+import Field from '@features/transforms/fields/Field';
+import ObjectFieldDisplay from '@features/transforms/fields/ObjectFieldDisplay';
 import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinates } from './getRobinsonCoordinates';
 import { MAP_ASPECT_RATIO } from './MapConsts';
+
+import './map.css';
 
 type Props = {
   drawableObjects: DrawableData[];
@@ -34,14 +38,12 @@ const MapCircles: React.FC<Props> = ({
     const currentObjects =
       objectType === ObjectType.Language ? getCurrentObjects(drawableObjects) : drawableObjects;
     const filteredObjects = currentObjects.filter(
-      (obj) =>
-        obj.type === ObjectType.Language ||
-        (obj.type === ObjectType.Territory && (obj.landArea ?? 0) < 20000),
+      (obj) => obj.type === ObjectType.Language || obj.type === ObjectType.Territory,
     );
 
     // Reverse so the "first" objects are drawn on top.
     return filteredObjects.reverse();
-  }, [drawableObjects, getCurrentObjects]);
+  }, [drawableObjects, getCurrentObjects, objectType]);
 
   const buildOnMouseEnter = useCallback(
     (obj: DrawableData) => (e: React.MouseEvent) => {
@@ -49,6 +51,7 @@ const MapCircles: React.FC<Props> = ({
     },
     [showHoverCard, getHoverContent],
   );
+  console.log('rendering map circles');
 
   return (
     <svg
@@ -65,7 +68,7 @@ const MapCircles: React.FC<Props> = ({
       }}
     >
       {renderableObjects.map((obj) => (
-        <HoverableCircle
+        <ObjectPoint
           key={obj.ID}
           color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
           object={obj}
@@ -78,46 +81,76 @@ const MapCircles: React.FC<Props> = ({
   );
 };
 
-const HoverableCircle: React.FC<{
+type PointProps = {
   color?: string;
   object: DrawableData;
   scale: number;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
-}> = ({ object, color, scale, onMouseEnter, onMouseLeave }) => {
-  const { updatePageParams } = usePageParams();
-  const [isActive, setIsActive] = useState(false);
+};
+const ObjectPoint: React.FC<PointProps> = ({
+  object,
+  color,
+  scale,
+  onMouseEnter,
+  onMouseLeave,
+}) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
-  if (object.latitude == null || object.longitude == null) {
-    return null;
-  }
+  if (object.latitude == null || object.longitude == null) return null;
+  // console.log('point');
 
   const { x, y } = getRobinsonCoordinates(
     object.latitude,
     // The map is 12 degrees rotated to preserve land borders
     (object.longitude < -168 ? object.longitude + 360 : object.longitude) - 12,
   );
+  const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
 
   return (
+    <g style={{ transform: `translate(${x * 180}px, ${y * -90}px)` }}>
+      {showCircle && (
+        <Circle
+          color={color}
+          object={object}
+          scale={scale}
+          onMouseEnter={onMouseEnter}
+          onMouseLeave={onMouseLeave}
+        />
+      )}
+      <Text object={object} scale={scale} showCircle={showCircle} />
+    </g>
+  );
+};
+
+const Circle: React.FC<PointProps> = ({ color, object, scale, onMouseEnter, onMouseLeave }) => {
+  const { updatePageParams } = usePageParams();
+  // console.log('circle');
+  return (
     <circle
-      cx={x * 180}
-      cy={-y * 90}
       r={scale + 1}
-      fill={color ?? (isActive ? 'var(--color-button-primary)' : 'transparent')}
+      fill={color ?? 'transparent'}
       stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
-      style={{ transition: 'fill 0.25s, stroke 0.25s', pointerEvents: 'fill', cursor: 'pointer' }}
-      className="object-map-circle"
-      strokeWidth="1px"
       onClick={() => updatePageParams({ objectID: object.ID })}
-      onMouseEnter={(e: React.MouseEvent) => {
-        onMouseEnter(e);
-        setIsActive(true);
-      }}
-      onMouseLeave={() => {
-        onMouseLeave();
-        setIsActive(false);
-      }}
+      onMouseEnter={(e: React.MouseEvent) => onMouseEnter(e)}
+      onMouseLeave={() => onMouseLeave()}
     />
+  );
+};
+
+type TextProps = { object: DrawableData; scale: number; showCircle: boolean };
+const Text: React.FC<TextProps> = ({ object, scale, showCircle }) => {
+  const { fieldFocus } = usePageParams();
+  if (fieldFocus === Field.None) return null;
+  return (
+    <text
+      y={showCircle ? 2 : 0}
+      fontSize={scale / 4 + 'em'}
+      textAnchor="middle"
+      alignmentBaseline={showCircle ? 'hanging' : 'middle'}
+    >
+      {/* Some of these may not render if they are React components and not primitives */}
+      <ObjectFieldDisplay object={object} field={fieldFocus} />
+    </text>
   );
 };
 

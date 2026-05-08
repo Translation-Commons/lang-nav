@@ -42,9 +42,17 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.Literacy:
     case Field.PercentOfOverallLanguageSpeakers:
     case Field.PercentOfTerritoryPopulation:
+      if (typeof fieldValue === 'number') return <DecimalNumber num={fieldValue} />;
+      return <>{fieldValue}</>;
+
     case Field.Longitude:
     case Field.Latitude:
-      if (typeof fieldValue === 'number') return <DecimalNumber num={fieldValue} />;
+      if (typeof fieldValue === 'number') return fieldValue.toFixed(2);
+      return <>{fieldValue}</>;
+    case Field.Coordinates:
+      if (object.type === ObjectType.Territory || object.type === ObjectType.Language) {
+        return `${object.latitude?.toFixed(1)}, ${object.longitude?.toFixed(1)}`;
+      }
       return <>{fieldValue}</>;
 
     case Field.CountOfLanguages:
@@ -117,7 +125,6 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.DigitalSupport:
     case Field.SourceType:
     case Field.WritingSystemScope:
-    case Field.Coordinates:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
     case Field.None:
