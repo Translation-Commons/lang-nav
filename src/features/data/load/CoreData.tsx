@@ -127,16 +127,14 @@ export function useCoreData(): {
       writingSystems == null ||
       variants == null ||
       keyboardsGBoard == null ||
-      keyboardsKeyman == null
+      keyboardsKeyman == null ||
+      organizations == null
     ) {
       alert('Error loading data. Please check the console for more details.');
       return;
     }
 
-    const keyboards = {
-      ...keyboardsGBoard,
-      ...keyboardsKeyman,
-    };
+    const keyboards = { ...keyboardsGBoard, ...keyboardsKeyman };
 
     addISODataToLanguages(initialLangs, isoLangs || []);
     addEthnologueDataToLanguages(initialLangs, ethnologueLangs || []);
@@ -155,7 +153,7 @@ export function useCoreData(): {
       locales,
       variants,
       keyboards,
-      organizations || {},
+      organizations,
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
@@ -171,7 +169,7 @@ export function useCoreData(): {
       ...writingSystems, // Aaaa
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
-      ...organizations,
+      ...organizations, // These should be prefixed by org.
     });
   }
 

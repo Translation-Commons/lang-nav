@@ -107,37 +107,41 @@ function addCensusToOrganizations(organizations: OrganizationData[], census: Cen
       census.collector = collectorOrg;
     }
   } else if (codeDisplay) {
-    organizations.push({
-      type: ObjectType.Org,
-      ID: `org.${codeDisplay}`,
-      codeDisplay: codeDisplay!,
-      nameDisplay: census.collectorName ?? codeDisplay!,
-      url: census.presentedBy == null ? census.url.replace(/(\.[a-z]+\/).*/, '$1') : undefined,
-      censuses: [census],
-      names: [census.collectorNameShort, census.collectorName].filter((n) => n != null),
-      headquarters: census.territory,
-    });
+    console.warn('Census loaded with new organization', codeDisplay);
+    /* Old creation command kept in case it is needed again */
+    // organizations.push({
+    //   type: ObjectType.Org,
+    //   ID: `org.${codeDisplay}`,
+    //   codeDisplay: codeDisplay!,
+    //   nameDisplay: census.collectorName ?? codeDisplay!,
+    //   url: census.presentedBy == null ? census.url.replace(/(\.[a-z]+\/).*/, '$1') : undefined,
+    //   censuses: [census],
+    //   names: [census.collectorNameShort, census.collectorName].filter((n) => n != null),
+    //   headquarters: census.territory,
+    // });
   }
 
   // If the data was presented by a different organization than the collector, add that one too
-  const presentedByOrg = organizations.find((org) => org.codeDisplay === census.presentedBy);
-  if (!census.presentedBy) {
-    // Do nothing
-  } else if (presentedByOrg == null) {
-    const codeDisplay = census.presentedBy;
-    organizations.push({
-      type: ObjectType.Org,
-      ID: `org.${census.presentedBy}`,
-      codeDisplay,
-      nameDisplay: census.presentedBy,
-      url: census.url.replace(/(\.[a-z]+\/).*/, '$1'),
-      censuses: [census],
-      names: [census.presentedBy],
-    });
-  } else {
+  const presenterCode = census.presentedBy;
+  if (!presenterCode) return; // No presenter, do nothing
+  const presentedByOrg = organizations.find((org) => org.codeDisplay === presenterCode);
+  if (presentedByOrg) {
     if (presentedByOrg.censuses?.find((doc) => doc.ID === census.ID) == null) {
+      // Avoid pushing the same census twice since it's reloaded twice in dev mode
       presentedByOrg.censuses?.push(census);
       census.presenter = presentedByOrg;
     }
+  } else {
+    console.warn('Census loaded with new organization', presenterCode);
+    /* Old creation command kept in case it is needed again */
+    // organizations.push({
+    //   type: ObjectType.Org,
+    //   ID: `org.${presenterCode}`,
+    //   codeDisplay: presenterCode,
+    //   nameDisplay: presenterCode,
+    //   url: census.url.replace(/(\.[a-z]+\/).*/, '$1'),
+    //   censuses: [census],
+    //   names: [presenterCode],
+    // });
   }
 }

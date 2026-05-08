@@ -29,7 +29,7 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
     {
       key: 'Census Tables',
       render: (object) =>
-        object.censuses ? (
+        object.censuses && object.censuses.length > 0 ? (
           <HoverableEnumeration
             items={object.censuses.map((doc) => (
               <HoverableObjectName key={doc.ID} object={doc} />

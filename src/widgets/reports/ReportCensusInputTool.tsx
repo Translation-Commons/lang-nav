@@ -23,6 +23,8 @@ const ReportCensusInputTool: React.FC = () => {
       censuses.forEach((census) => {
         if (!census.nameDisplay) census.nameDisplay = 'MISSING NAME';
         census.territory = getTerritory(census.isoRegionCode) || undefined;
+
+        // Add collector entities -- note if they are new they will have to be added to organizations.tsv
         const collectorCode = census.collectorNameShort ?? census.collectorName;
         if (collectorCode) census.collector = getOrganization(collectorCode);
         if (census.presentedBy) census.presenter = getOrganization(census.presentedBy);

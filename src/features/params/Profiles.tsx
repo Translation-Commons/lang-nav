@@ -158,6 +158,16 @@ export function getDefaultParams(
     params.colorGradient = getColorGradientForField(params.colorBy);
   }
 
+  if (params.objectType === ObjectType.Org) {
+    // Orgs don't have population, so sort by count of censuses by default
+    if (params.sortBy === Field.Population) params.sortBy = Field.CountOfCensuses;
+    if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.CountOfCensuses;
+  } else if (params.objectType === ObjectType.Keyboard) {
+    // Keyboards don't have population, so sort by name by default
+    if (params.sortBy === Field.Population) params.sortBy = Field.Name;
+    if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
+  }
+
   return params;
 }
 

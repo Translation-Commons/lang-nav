@@ -52,7 +52,7 @@ function getOrganizationTreeNode(
   filterByScope: (a: ObjectData) => boolean,
 ): TreeNodeData {
   return {
-    type: ObjectType.Language,
+    type: ObjectType.Org,
     object: org,
     children: org.children
       ? getOrganizationTreeNodes(org.children, sortFunction, filterByScope)
