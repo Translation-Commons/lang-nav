@@ -51,7 +51,6 @@ const MapCircles: React.FC<Props> = ({
     },
     [showHoverCard, getHoverContent],
   );
-  console.log('rendering map circles');
 
   return (
     <svg
@@ -97,17 +96,17 @@ const ObjectPoint: React.FC<PointProps> = ({
 }) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) return null;
-  // console.log('point');
 
   const { x, y } = getRobinsonCoordinates(
     object.latitude,
-    // The map is 12 degrees rotated to preserve land borders
-    (object.longitude < -168 ? object.longitude + 360 : object.longitude) - 12,
+    // The map is 11 degrees rotated to preserve land borders
+    (object.longitude < -169 ? object.longitude + 360 : object.longitude) - 11,
   );
   const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
 
   return (
-    <g style={{ transform: `translate(${x * 180}px, ${y * -90}px)` }}>
+    // ideally x would range -180 to 180 but it appears in practice our SVG is a bit thinner, so 178.5 looks better
+    <g style={{ transform: `translate(${x * 178.5}px, ${y * -90}px)` }}>
       {showCircle && (
         <Circle
           color={color}
@@ -124,7 +123,6 @@ const ObjectPoint: React.FC<PointProps> = ({
 
 const Circle: React.FC<PointProps> = ({ color, object, scale, onMouseEnter, onMouseLeave }) => {
   const { updatePageParams } = usePageParams();
-  // console.log('circle');
   return (
     <circle
       r={scale + 1}
