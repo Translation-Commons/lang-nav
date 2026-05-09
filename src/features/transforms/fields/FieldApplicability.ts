@@ -268,7 +268,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
   switch (transform) {
     case Transform.Sort:
       // Easier to list fields that aren't sortable than to list all that are, since most are
-      return Object.values(Field).filter((f) => ![Field.None].includes(f));
+      return Object.values(Field).filter((f) => ![Field.None, Field.Coordinates].includes(f));
     case Transform.Color:
       // Ordered by preferred UI grouping: quantitative first, then text fields
       return [

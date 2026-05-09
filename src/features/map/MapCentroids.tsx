@@ -6,7 +6,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldDisplay from '@features/transforms/fields/ObjectFieldDisplay';
+import { getFieldString } from '@features/transforms/fields/getFieldString';
 import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
@@ -22,7 +22,7 @@ type Props = {
   coloringFunctions: ColoringFunctions;
 };
 
-const MapCircles: React.FC<Props> = ({
+const MapCentroids: React.FC<Props> = ({
   drawableObjects,
   getHoverContent,
   scalar,
@@ -67,7 +67,7 @@ const MapCircles: React.FC<Props> = ({
       }}
     >
       {renderableObjects.map((obj) => (
-        <ObjectPoint
+        <ObjectNode
           key={obj.ID}
           color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
           object={obj}
@@ -80,20 +80,14 @@ const MapCircles: React.FC<Props> = ({
   );
 };
 
-type PointProps = {
+type NodeProps = {
   color?: string;
   object: DrawableData;
   scale: number;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
 };
-const ObjectPoint: React.FC<PointProps> = ({
-  object,
-  color,
-  scale,
-  onMouseEnter,
-  onMouseLeave,
-}) => {
+const ObjectNode: React.FC<NodeProps> = ({ object, color, scale, onMouseEnter, onMouseLeave }) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) return null;
 
@@ -106,7 +100,7 @@ const ObjectPoint: React.FC<PointProps> = ({
 
   return (
     // ideally x would range -180 to 180 but it appears in practice our SVG is a bit thinner, so 178.5 looks better
-    <g style={{ transform: `translate(${x * 178.5}px, ${y * -90}px)` }}>
+    <g transform={`translate(${x * 178.5}, ${y * -90})`}>
       {showCircle && (
         <Circle
           color={color}
@@ -121,7 +115,7 @@ const ObjectPoint: React.FC<PointProps> = ({
   );
 };
 
-const Circle: React.FC<PointProps> = ({ color, object, scale, onMouseEnter, onMouseLeave }) => {
+const Circle: React.FC<NodeProps> = ({ color, object, scale, onMouseEnter, onMouseLeave }) => {
   const { updatePageParams } = usePageParams();
   return (
     <circle
@@ -146,10 +140,9 @@ const Text: React.FC<TextProps> = ({ object, scale, showCircle }) => {
       textAnchor="middle"
       alignmentBaseline={showCircle ? 'hanging' : 'middle'}
     >
-      {/* Some of these may not render if they are React components and not primitives */}
-      <ObjectFieldDisplay object={object} field={fieldFocus} />
+      {getFieldString(object, fieldFocus)}
     </text>
   );
 };
 
-export default MapCircles;
+export default MapCentroids;

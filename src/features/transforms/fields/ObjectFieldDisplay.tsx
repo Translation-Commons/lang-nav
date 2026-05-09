@@ -47,7 +47,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
 
     case Field.Longitude:
     case Field.Latitude:
-      if (typeof fieldValue === 'number') return fieldValue.toFixed(2);
+      if (typeof fieldValue === 'number') return fieldValue.toFixed(1);
       return <>{fieldValue}</>;
     case Field.Coordinates:
       if (object.type === ObjectType.Territory || object.type === ObjectType.Language) {
