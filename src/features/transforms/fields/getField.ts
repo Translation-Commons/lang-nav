@@ -58,8 +58,12 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Literacy:
       return getObjectLiteracy(object);
 
-    case Field.Coordinates:
-      return undefined; // Poorly defined as a single value since its a 2D value
+    case Field.Coordinates: // Not for sorting, only for display
+      return (object.type === ObjectType.Language || object.type === ObjectType.Territory) &&
+        object.latitude != null &&
+        object.longitude != null
+        ? object.latitude?.toFixed(1) + ', ' + object.longitude?.toFixed(1)
+        : undefined;
     case Field.Latitude:
       return object.type === ObjectType.Language || object.type === ObjectType.Territory
         ? object.latitude

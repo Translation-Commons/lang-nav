@@ -14,7 +14,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
-import MapCircles from './MapCircles';
+import MapCentroids from './MapCentroids';
 import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
 import MapHoverContent from './MapHoverContent';
 import MapTerritories from './MapTerritories';
@@ -99,7 +99,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
               coloringFunctions={coloringFunctions}
             />
           )}
-          <MapCircles
+          <MapCentroids
             drawableObjects={drawableObjects}
             getHoverContent={getHoverContent}
             scalar={1200 / maxWidth}

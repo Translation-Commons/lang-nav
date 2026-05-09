@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 
 import ZIndex from '../ZIndex';
 
@@ -24,20 +24,20 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }
   });
   const [leftTriggeringElement, setLeftTriggeringElement] = useState<boolean>(false);
 
-  const showHoverCard = (content: React.ReactNode, x: number, y: number) => {
+  const showHoverCard = useCallback((content: React.ReactNode, x: number, y: number) => {
     setLeftTriggeringElement(false);
     setHoverCard({ content, x, y, visible: true });
-  };
+  }, []);
 
-  const hideHoverCard = () => {
+  const hideHoverCard = useCallback(() => {
     setHoverCard((prev) => ({ ...prev, visible: false }));
-  };
+  }, []);
 
   const cardRef = useRef<HTMLDivElement>(null);
 
-  const onMouseLeaveTriggeringElement = () => {
+  const onMouseLeaveTriggeringElement = useCallback(() => {
     setLeftTriggeringElement(true);
-  };
+  }, []);
 
   // Listen for mouse movements, if the hovercard is visible and the mouse moves too far away from it, hide it
   useEffect(() => {
@@ -84,10 +84,14 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }
     }
   }, [hoverCard.x, hoverCard.y, hoverCard.visible]);
 
+  // Memoize the context value to prevent unnecessary re-renders of consumers
+  const context = useMemo(
+    () => ({ showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement }),
+    [showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement],
+  );
+
   return (
-    <HoverCardContext.Provider
-      value={{ showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement }}
-    >
+    <HoverCardContext.Provider value={context}>
       {children}
       <EmptyHoverCardProvider>
         {/** Prevent hovercard propagation */}

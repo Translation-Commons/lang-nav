@@ -1,5 +1,6 @@
 import { isTerritoryGroup, TerritoryData } from '@entities/territory/TerritoryTypes';
 
+import averageCoordinates from '@shared/lib/averageCoordinates';
 import { sumBy } from '@shared/lib/setUtils';
 
 export function computeContainedTerritoryStats(terr: TerritoryData | undefined): void {
@@ -44,17 +45,7 @@ function computeRegionCoordinates(terr: TerritoryData): void {
     return;
   }
 
-  const containsTerritories = terr.containsTerritories ?? [];
-
-  const denominator = sumBy(containsTerritories, (t) => (t.landArea ?? 1) ** 0.25);
-  const latitude = sumBy(containsTerritories, (t) => (t.latitude ?? 0) * (t.landArea ?? 1) ** 0.25);
-  const longitude = sumBy(containsTerritories, (t) => {
-    // Handle wrap-around at the international date line
-    if (t.longitude != null && t.longitude < -120)
-      return (t.longitude + 360) * (t.landArea ?? 1) ** 0.25;
-
-    return (t.longitude ?? 0) * (t.landArea ?? 1) ** 0.25;
-  });
-  terr.latitude = latitude / denominator;
-  terr.longitude = (longitude > 180 ? -360 + longitude : longitude) / denominator;
+  const { latitude, longitude } = averageCoordinates(terr.containsTerritories ?? []);
+  terr.latitude = latitude;
+  terr.longitude = longitude;
 }

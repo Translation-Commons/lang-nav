@@ -1,6 +1,7 @@
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 
+import averageCoordinates from '@shared/lib/averageCoordinates';
 import { maxBy } from '@shared/lib/setUtils';
 
 /**
@@ -53,6 +54,25 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
   // Compute the meta score and store the results in the language object
   vitality.meta = getVitalityMetascore(lang);
   lang.vitality = vitality;
+
+  // Compute the lat/long coordinates
+  computeCoordinates(lang);
+}
+
+/**
+ * Compute the coordinates for a region based on the coordinates of the contained territories.
+ *
+ * Similar to computeRegionCoordinates used for territory groups
+ *
+ * Coordinates are weighted by the fourth root of the population
+ */
+function computeCoordinates(lang: LanguageData): void {
+  if (lang.latitude != null && lang.longitude != null) return; // Don't override if coordinates already exist
+  const children = lang.childLanguages ?? [];
+  if (children.length === 0) return;
+  const { latitude, longitude } = averageCoordinates(children);
+  lang.latitude = latitude;
+  lang.longitude = longitude;
 }
 
 export default computeRecursiveLanguageData;
