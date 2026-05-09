@@ -11,7 +11,7 @@
 #responsesPerIndividual	1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org		
+#presentedBy	UNdata		
 Language Code	Language Name	lv2000	lv2011
 mul	Total	2,377,383	2,070,371
 lav	Latvian	1,473,267	1,164,894

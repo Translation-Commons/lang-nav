@@ -11,7 +11,7 @@
 #responsesPerIndividual		1		1
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
-#presentedBy	data.un.org			
+#presentedBy	UNdata			
 Language Code	Language Name	mt2005	mt2011	mt2021
 mul	Total	362,376	377,952	497,265
 mlt	Maltese	326,703	357,692	352,346

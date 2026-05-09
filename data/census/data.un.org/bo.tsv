@@ -8,7 +8,7 @@
 #responsesPerIndividual	1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org			
+#presentedBy	UNdata			
 Language Code	Language Name	bo2001	bo2012
 mul	Total	8,274,325	10,059,856
 spa	Spanish	3,908,562	6,173,421

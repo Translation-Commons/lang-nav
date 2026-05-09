@@ -8,9 +8,10 @@
 #quantity		percent
 #url		https://data.humdata.org/dataset/cameroon-languages?
 #collectorType		Government
-#collectorName		Institut National de la Statistique (INS Cameroon)
+#collectorName		Institut National de la Statistique
+#collectorNameShort		INS Cameroon
 #notes		Original source apparently Cameroon 2005 Census
-#presentedBy	Translators Without Borders	
+#presentedBy	TWB	
 Language Code		Cameroon 2005
 fra	French	56.0%
 eng	English	23.1%

@@ -6,6 +6,7 @@
 #tableName	Dataset: ACS 1-Year Estimates Public Use Microdata Sample (2023)							
 #columnName		Language spoken at home	Language spoken at home x Ability to speak English Very well + Well	Language spoken at home x Ability to speak English Not well + Not at all	Very well	Well	Not well	Not at all
 #collectorName	United States Census Bureau							
+#collectorNameShort	US Census Bureau							
 #collectorType	Government							
 #dateAccessed	2025-08-11							
 #age	0+							

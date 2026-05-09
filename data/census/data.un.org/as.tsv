@@ -8,7 +8,7 @@
 #age		5+
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27	
 #collectorType	Government	
-#presentedBy	data.un.org	
+#presentedBy	UNdata	
 Language Code	Language Name	as2000
 mul	Total	49,471
 smo	Samoan	44,833
