@@ -24,6 +24,8 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
       return object.languages.length > 0
         ? object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0)
         : undefined;
+    case ObjectType.Org:
+      return undefined;
   }
 }
 
@@ -40,6 +42,8 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
       return object.population;
     case ObjectType.WritingSystem:
     case ObjectType.Variant:
+    case ObjectType.Keyboard:
+    case ObjectType.Org:
       // There are no sources for population numbers for these, the population
       // numbers above are derived analytically
       return undefined;

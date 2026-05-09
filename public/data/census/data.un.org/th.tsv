@@ -10,7 +10,7 @@
 #sampleRate			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org		
+#presentedBy	UNdata		
 Language Code	Language Name	th2000	th2010
 mul	Total	56,281,538	65,981,659
 tha	Thai	52,325,037	59,866,190

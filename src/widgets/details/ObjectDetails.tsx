@@ -9,6 +9,7 @@ import CensusDetails from './CensusDetails';
 import KeyboardDetails from './KeyboardDetails';
 import LanguageDetails from './LanguageDetails';
 import LocaleDetails from './LocaleDetails';
+import OrganizationDetails from './OrganizationDetails';
 import TerritoryDetails from './TerritoryDetails';
 import VariantDetails from './VariantDetails';
 import WritingSystemDetails from './WritingSystemDetails';
@@ -39,6 +40,8 @@ const ObjectDetails: React.FC<Props> = ({ object, objectID }) => {
       return <VariantDetails variant={object} />;
     case ObjectType.Keyboard:
       return <KeyboardDetails keyboard={object} />;
+    case ObjectType.Org:
+      return <OrganizationDetails org={object} />;
   }
 };
 

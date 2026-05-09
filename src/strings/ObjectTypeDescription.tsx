@@ -2,6 +2,8 @@ import React from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+
 const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   switch (objectType) {
     case ObjectType.Census:
@@ -62,6 +64,16 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           Currently showing GBoard layouts, which may support transliteration between scripts.
         </>
       );
+    case ObjectType.Org:
+      return (
+        <>
+          <label>Organization:</label>An incorporated entity that provides some service related to
+          language. This includes census agencies, language advocacy organizations, research
+          institutions, or tech companies.
+        </>
+      );
+    default:
+      enforceExhaustiveSwitch(objectType);
   }
 };
 

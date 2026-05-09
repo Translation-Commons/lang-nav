@@ -5,6 +5,7 @@
 #tableName	C-16: Population by mother tongue	
 #columnName	Number of persons who returned the language (and the mother tongues grouped under each) as their mother tongue)	
 #collectorName	Office of the Registrar General & Census Commissioner, India	
+#collectorNameShort	CensusIndia	
 #collectorType	Government	
 #dateAccessed	2025-03-21	
 #geographicScope	Whole Country	

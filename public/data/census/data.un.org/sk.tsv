@@ -9,7 +9,7 @@
 #responsesPerIndividual	1			
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
-#presentedBy	data.un.org			
+#presentedBy	UNdata			
 Language Code	Language Name	sk2001	sk2011	sk2021
 mul	Total	5,379,455	5,397,036	5,449,270
 slk	Slovak	4,512,217	4,240,453	4,456,102

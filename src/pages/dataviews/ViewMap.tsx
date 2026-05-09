@@ -29,7 +29,7 @@ function ViewMap() {
 
   const isDrawingTerritories = objectType !== ObjectType.Language;
 
-  if (objectType === ObjectType.Variant || objectType === ObjectType.Keyboard) {
+  if ([ObjectType.Variant, ObjectType.Keyboard, ObjectType.Org].includes(objectType)) {
     return (
       <div>
         Map view is not well-defined for {getObjectTypeLabelPlural(objectType)}. Please select a

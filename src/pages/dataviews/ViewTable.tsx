@@ -1,6 +1,7 @@
 import KeyboardTable from '@widgets/tables/KeyboardTable';
 import LanguageTable from '@widgets/tables/LanguageTable';
 import LocaleTable from '@widgets/tables/LocaleTable';
+import OrganizationTable from '@widgets/tables/OrganizationTable';
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 import TerritoryTable from '@widgets/tables/TerritoryTable';
 import VariantTable from '@widgets/tables/VariantTable';
@@ -27,6 +28,8 @@ function ViewTable() {
       return <VariantTable />;
     case ObjectType.Keyboard:
       return <KeyboardTable />;
+    case ObjectType.Org:
+      return <OrganizationTable />;
   }
 }
 

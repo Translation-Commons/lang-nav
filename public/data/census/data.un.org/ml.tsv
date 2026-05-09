@@ -12,7 +12,7 @@
 #responsesPerIndividual		1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org		
+#presentedBy	UNdata		
 Language Code	Language Name	ml1998	ml2009
 mul	Total	7,620,672	11,109,312
 man/bam	Bambara		5,165,830

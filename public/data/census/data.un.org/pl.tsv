@@ -11,7 +11,7 @@
 #responsesPerIndividual		1		
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
-#presentedBy	data.un.org			
+#presentedBy	UNdata			
 Language Code	Language Name	pl2002	pl2011	pl2021
 mul	Total	38,230,080	38,044,565	37,019,327
 pol	Polish	37,405,335	37,374,595	36,799,278

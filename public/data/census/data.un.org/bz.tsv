@@ -12,7 +12,7 @@
 #responsesPerIndividual		1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27		
 #collectorType	Government		
-#presentedBy	data.un.org		
+#presentedBy	UNdata		
 Language Code	Language Name	bz2000	bz2010
 mul	Total	205,123	
 eng	English	7,946	183,903

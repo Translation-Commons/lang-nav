@@ -1,6 +1,7 @@
 import { CensusHierarchy } from '@widgets/treelists/CensusHierarchy';
 import { LanguageHierarchy } from '@widgets/treelists/LanguageHierarchy';
 import { LocaleHierarchy } from '@widgets/treelists/LocaleHierarchy';
+import { OrganizationHierarchy } from '@widgets/treelists/OrganizationHierarchy';
 import { TerritoryHierarchy } from '@widgets/treelists/TerritoryHierarchy';
 import { VariantHierarchy } from '@widgets/treelists/VariantHierarchy';
 import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarchy';
@@ -24,6 +25,10 @@ function ViewFamilyTree() {
       return <WritingSystemHierarchy />;
     case ObjectType.Variant:
       return <VariantHierarchy />;
+    case ObjectType.Org:
+      return <OrganizationHierarchy />;
+    case ObjectType.Keyboard:
+      return 'Family trees are not defined well for this type';
   }
 }
 

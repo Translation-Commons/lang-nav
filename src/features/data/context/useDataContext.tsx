@@ -2,6 +2,7 @@ import { createContext, useContext } from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -17,6 +18,7 @@ type DataGetters = {
   getTerritory: (id: string) => TerritoryData | undefined;
   getWritingSystem: (id: string) => WritingSystemData | undefined;
   getVariant: (id: string) => VariantData | undefined;
+  getOrganization: (id: string) => OrganizationData | undefined;
 };
 
 export type DataContextType = CoreDataArrays &
@@ -27,6 +29,7 @@ export type DataContextType = CoreDataArrays &
 export const DataContext = createContext<DataContextType | undefined>({
   allLanguoids: [],
   censuses: {},
+  organizations: [],
   languagesInSelectedSource: [],
   locales: [],
   territories: [],
@@ -40,6 +43,7 @@ export const DataContext = createContext<DataContextType | undefined>({
   getTerritory: () => undefined,
   getWritingSystem: () => undefined,
   getVariant: () => undefined,
+  getOrganization: () => undefined,
 });
 
 export const useDataContext = () => {

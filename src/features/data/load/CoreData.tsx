@@ -10,6 +10,7 @@ import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData, LanguagesBySource } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -22,6 +23,7 @@ import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
 import { loadLocales } from './entities/loadLocales';
+import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTerritories } from './entities/loadTerritories';
 import { loadWritingSystems } from './entities/loadWritingSystems';
 import {
@@ -50,6 +52,7 @@ export type CoreDataArrays = {
   writingSystems: WritingSystemData[];
   keyboards: KeyboardData[];
   censuses: Record<CensusID, CensusData>;
+  organizations: OrganizationData[];
 };
 
 export type CoreData = CoreDataArrays & {
@@ -97,6 +100,7 @@ export function useCoreData(): {
       variants,
       keyboardsGBoard,
       keyboardsKeyman,
+      organizations,
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
@@ -113,6 +117,7 @@ export function useCoreData(): {
       loadIANAVariants(),
       loadKeyboardsGBoard(),
       loadKeyboardsKeyman(),
+      loadOrganizations(),
     ]);
 
     if (
@@ -122,16 +127,14 @@ export function useCoreData(): {
       writingSystems == null ||
       variants == null ||
       keyboardsGBoard == null ||
-      keyboardsKeyman == null
+      keyboardsKeyman == null ||
+      organizations == null
     ) {
       alert('Error loading data. Please check the console for more details.');
       return;
     }
 
-    const keyboards = {
-      ...keyboardsGBoard,
-      ...keyboardsKeyman,
-    };
+    const keyboards = { ...keyboardsGBoard, ...keyboardsKeyman };
 
     addISODataToLanguages(initialLangs, isoLangs || []);
     addEthnologueDataToLanguages(initialLangs, ethnologueLangs || []);
@@ -150,6 +153,7 @@ export function useCoreData(): {
       locales,
       variants,
       keyboards,
+      organizations,
     );
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
@@ -165,6 +169,7 @@ export function useCoreData(): {
       ...writingSystems, // Aaaa
       ...variants, // These may be arbitrary, but usually 6-8 alphabetic
       ...keyboards,
+      ...organizations, // These should be prefixed by org.
     });
   }
 
@@ -186,6 +191,9 @@ export function useCoreData(): {
         (o): o is KeyboardData => o.type === ObjectType.Keyboard,
       ),
       censuses,
+      organizations: Object.values(objects).filter(
+        (o): o is OrganizationData => o.type === ObjectType.Org,
+      ),
       objects,
     },
   };

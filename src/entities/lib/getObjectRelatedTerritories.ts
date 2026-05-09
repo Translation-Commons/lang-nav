@@ -73,6 +73,8 @@ export function getContainingTerritories(object: ObjectData): TerritoryData[] {
       return getChildTerritoriesInObject(object) ?? [];
     case ObjectType.Keyboard:
       return object.territory ? [object.territory] : [];
+    case ObjectType.Org:
+      return object.headquarters ? [object.headquarters] : [];
   }
 }
 
@@ -149,6 +151,8 @@ export function getCountriesInObject(object: ObjectData): TerritoryData[] | unde
           .filter((t): t is TerritoryData => !!t),
         (t) => t.ID,
       );
+    case ObjectType.Org:
+      return [object.headquarters].filter((t) => !!t);
   }
 }
 
@@ -176,6 +180,7 @@ export function getChildTerritoriesInObject(object: ObjectData): TerritoryData[]
     case ObjectType.Language:
     case ObjectType.WritingSystem:
     case ObjectType.Keyboard:
+    case ObjectType.Org:
       // child territories are not well defined for this, you probably want getCountriesInObject instead
       return undefined;
   }
@@ -196,6 +201,8 @@ export function getObjectLocales(object: ObjectData): LocaleData[] {
     case ObjectType.Variant:
       return object.locales;
     case ObjectType.Keyboard:
+      return [];
+    case ObjectType.Org:
       return [];
   }
 }

@@ -10,7 +10,7 @@
 #responsesPerIndividual		1	1	
 #url	https://data.un.org/Data.aspx?d=POP&f=tableCode:27			
 #collectorType	Government			
-#presentedBy	data.un.org			
+#presentedBy	UNdata			
 Language Code	Language Name	to1996	to2006	to2021
 mul	Total	80,198	85,575	89,254
 ton	Tongan	20,133	9,143	

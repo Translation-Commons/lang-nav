@@ -2,6 +2,8 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+
 export function getObjectSubtitle(object: ObjectData): string | undefined {
   switch (object.type) {
     case ObjectType.Language:
@@ -12,6 +14,7 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
     case ObjectType.Census:
     case ObjectType.Territory:
     case ObjectType.Keyboard:
+    case ObjectType.Org:
       return undefined;
   }
 }
@@ -32,5 +35,9 @@ export function getObjectTypeLabelPlural(objectType: ObjectType) {
       return 'variants';
     case ObjectType.Keyboard:
       return 'keyboards';
+    case ObjectType.Org:
+      return 'organizations';
+    default:
+      enforceExhaustiveSwitch(objectType);
   }
 }

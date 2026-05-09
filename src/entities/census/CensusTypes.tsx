@@ -1,5 +1,6 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
+import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { LanguageCode } from '../language/LanguageTypes';
@@ -86,6 +87,8 @@ export interface CensusData extends ObjectBase {
 
   // Connections to other objects loaded after the fact
   territory?: TerritoryData;
+  collector?: OrganizationData;
+  presenter?: OrganizationData;
 }
 
 export const getCensusCollectorTypeRank = (collectorType: CensusCollectorType): number => {

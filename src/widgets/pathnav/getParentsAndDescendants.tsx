@@ -24,6 +24,8 @@ export function getObjectParents(
       return [object.languages[0]];
     case ObjectType.Keyboard:
       return [];
+    case ObjectType.Org:
+      return [object.parent];
   }
 }
 
@@ -49,6 +51,8 @@ export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)
       return object.locales;
     case ObjectType.Keyboard:
       return [];
+    case ObjectType.Org:
+      return object.children ?? [];
   }
 }
 
@@ -97,5 +101,7 @@ export function getDescendantsName(object: ObjectData, count: number): string {
       return 'locale' + (count > 1 ? 's' : '');
     case ObjectType.Keyboard:
       return 'keyboard' + (count > 1 ? 's' : '');
+    case ObjectType.Org:
+      return 'organization' + (count > 1 ? 's' : '');
   }
 }

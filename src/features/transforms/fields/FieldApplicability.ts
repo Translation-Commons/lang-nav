@@ -49,6 +49,7 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
   ],
+  [ObjectType.Org]: [],
 };
 
 // Specific fields available per object type
@@ -247,6 +248,17 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.CountOfWritingSystems, // May be poorly defined
         Field.CountOfCountries, // 0 or 1
+      ];
+    case ObjectType.Org:
+      return [
+        Field.Endonym,
+
+        Field.SourceType,
+
+        // Field.CountOfLanguages,
+        Field.CountOfCensuses,
+
+        Field.Territory,
       ];
     default:
       return enforceExhaustiveSwitch(objectType);

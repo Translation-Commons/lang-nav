@@ -6,7 +6,8 @@
 #tableName	PROSPETTO 1. PERSONE DI 6 ANNI E PIÙ SECONDO IL LINGUAGGIO ABITUALMENTE USATO IN DIVERSI CONTESTI RELAZIONALI. 		PROSPETTO 4. PERSONE DI 6 ANNI E PIÙ PER LINGUA MADRE CONOSCIUTA, CONOSCENZA DI LINGUA STRANIERA, TIPO DI LINGUA CONOSCIUTA, SESSO E CLASSE D'ETÀ. 	PROSPETTO 5. PERSONE DI 6 ANNI E PIÙ PER LINGUA MADRE CONOSCIUTA, CONOSCENZA DI LINGUA STRANIERA, TIPO DI LINGUA CONOSCIUTA, SESSO E CLASSE D'ETÀ.	PROSPETTO 4. PERSONE DI 6 ANNI E PIÙ PER LINGUA MADRE CONOSCIUTA, CONOSCENZA DI LINGUA STRANIERA, TIPO DI LINGUA CONOSCIUTA, SESSO E CLASSE D'ETÀ. 										
 #columnName			Lingue straniere conosciute diverse da lingua madre		Lingua madre(a)										
 #url	https://www.istat.it/wp-content/uploads/2017/12/Report_Uso-italiano_dialetti_altrelingue_2015.pdf														
-#collectorName	ISTAT														
+#collectorName	Istituto nazionale di statistica														
+#collectorNameShort	ISTAT														
 #collectorType	Government														
 #dateAccessed	2025-11-29														
 #age	6+														

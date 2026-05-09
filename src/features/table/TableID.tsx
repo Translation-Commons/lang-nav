@@ -8,6 +8,7 @@ enum TableID {
   Variants,
   WritingSystems,
   Keyboards,
+  Organizations,
 
   // Specialized tables
   LanguagesInCensus,

@@ -8,7 +8,7 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { CensusCollectorType, CensusData } from './CensusTypes';
+import { CensusData } from './CensusTypes';
 
 interface Props {
   census: CensusData;
@@ -17,7 +17,6 @@ const CensusCard: React.FC<Props> = ({ census }) => {
   const {
     isoRegionCode,
     territory,
-    collectorType,
     yearCollected,
     languageUse,
     acquisitionOrder,
@@ -44,14 +43,16 @@ const CensusCard: React.FC<Props> = ({ census }) => {
       </CardField>
 
       <CardField
-        title="Collector Type"
+        title="Collector"
         field={Field.SourceType}
-        description="The type of organization that collected this census"
+        description="The type of organization that collected this census and/or presented it"
       >
-        {collectorType === CensusCollectorType.Secondary ? (
-          <Deemphasized>Secondary source</Deemphasized>
-        ) : (
-          collectorType
+        {census.collector && <HoverableObjectName object={census.collector} labelSource="code" />}
+        {census.presenter && (
+          <>
+            via
+            <HoverableObjectName object={census.presenter} labelSource="code" />
+          </>
         )}
       </CardField>
 

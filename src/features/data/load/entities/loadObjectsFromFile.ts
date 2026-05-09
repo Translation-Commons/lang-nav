@@ -15,6 +15,6 @@ export async function loadObjectsFromFile<T extends ObjectData>(
     .then((text) => text.split('\n').slice(1))
     .then((lines) => lines.map(parseLine))
     .then((objects) => objects.filter((obj) => obj != null))
-    .then((objects) => toDictionary(objects, (obj) => obj.ID))
+    .then((objects) => (objects != null ? toDictionary(objects, (obj) => obj.ID) : undefined))
     .catch((err) => console.error('Error loading TSV:', err));
 }

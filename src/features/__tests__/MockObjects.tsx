@@ -270,6 +270,7 @@ export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArra
     variants: objectArray.filter((obj) => obj.type === ObjectType.Variant),
     censuses: { be0590: objects.be0590 as CensusData },
     keyboards: objectArray.filter((obj) => obj.type === ObjectType.Keyboard),
+    organizations: objectArray.filter((obj) => obj.type === ObjectType.Org),
   };
 }
 
@@ -354,6 +355,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     locales,
     variants,
     {},
+    {},
   );
 
   // Update the objects dictionary with the aggregated locales
@@ -367,6 +369,7 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     (id) => territories[id],
     {},
     { censuses: Object.values(censuses), languageNames: {}, warnings: [] },
+    [],
   );
 
   return objects;
@@ -419,6 +422,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     },
     {} as Record<string, CensusData>,
   );
+  const organizations = objectArray.filter((obj) => obj.type === ObjectType.Org);
 
   const dataContext: DataContextType = {
     allLanguoids: languages,
@@ -426,6 +430,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     keyboards: [],
     languagesInSelectedSource: languages,
     locales,
+    organizations,
     territories,
     writingSystems,
     variants,
@@ -443,6 +448,8 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
       objects[id]?.type === ObjectType.WritingSystem ? objects[id] : undefined,
     getVariant: (id: string) =>
       objects[id]?.type === ObjectType.Variant ? objects[id] : undefined,
+    getOrganization: (id: string) =>
+      objects[id]?.type === ObjectType.Org ? objects[id] : undefined,
   };
 
   return dataContext;

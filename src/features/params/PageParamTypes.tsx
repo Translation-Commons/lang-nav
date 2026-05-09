@@ -15,17 +15,6 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { ProfileType } from './Profiles';
 
-export enum ExternalConcepts {
-  LanguageFamily = 'Language Family',
-  Language = 'Language',
-  Dialect = 'Dialect',
-  Orthography = 'Orthography',
-  Locale = 'Locale',
-  Census = 'Census',
-  Territory = 'Territory',
-  WritingSystem = 'Writing System',
-}
-
 export enum ObjectType {
   Language = 'Language',
   Locale = 'Locale',
@@ -34,6 +23,7 @@ export enum ObjectType {
   WritingSystem = 'Writing System',
   Variant = 'Variant',
   Keyboard = 'Keyboard',
+  Org = 'Organization',
 }
 
 export enum View {
