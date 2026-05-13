@@ -1,0 +1,44 @@
+		
+#codeDisplay		is2016.axl
+#nameDisplay		Iceland 2016 (AXL)
+#isoRegionCode	IS	
+#yearCollected	2016	
+### Language Criteria ###		
+#languageUse		Speaks
+#proficiency		L1 / Native
+#acquisitionOrder		L1
+#domain		Any
+### Population Surveyed ###		
+#population		332000
+#populationSource		https://www.axl.cefan.ulaval.ca/europe/islande.htm
+#responsesPerIndividual	1	
+### Data Constraints ###		
+#geographicScope	Whole country	
+#nationality		Residents
+#residenceBasis		de facto
+#quantity		count
+#age		0+
+### Creator ###		
+#collectorType		Secondary
+#presentedBy		AXL
+#author		Jacques Leclerc
+### Source Document ###		
+#url		https://www.axl.cefan.ulaval.ca/europe/islande.htm
+#datePublished		2024-02-18
+#dateAccessed		2026-05-13
+#tableName		Tableau 2.2: Données démolinguistiques — Islande
+#columnName		Population / Pourcentage
+#citation		Aménagement Linguistique dans le Monde (AXL/CEFAN), Université Laval. "Islande." https://www.axl.cefan.ulaval.ca/europe/islande.htm
+Language Code	Language	Population
+isl	Icelandic	304000
+pol	Polish	10000
+lit	Lithuanian	1700
+deu	German	900
+dan	Danish	900
+lav	Latvian	700
+eng	English	600
+hin	Hindi	600
+eng	English	600
+fil	#filipino (tagalog)	600
+tha	Thai	500
+mul	Autes(Ethnic Group)	11000

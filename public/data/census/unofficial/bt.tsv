@@ -1,0 +1,61 @@
+#codeDisplay		#Ethnic Group	bt_ulaval
+#nameDisplay			Bhutan – ULaval CEFAN
+#isoRegionCode	BT		
+#yearCollected			2024
+### Language Criteria ###			
+#languageUse			Speaks
+#proficiency			Native
+#acquisitionOrder			L1
+#domain			Any
+### Population Surveyed ###			
+#population	800,891		2193418
+#responsesPerIndividual	 		1
+### Data Constraints ###			
+#geographicScope	 		whole country
+#nationality			residents
+#languagesIncluded	 		All
+#residenceBasis			de facto
+#quantity			count
+### Creator ###			
+#collectorType			Secondary
+#presentedBy			AXL
+#author			Jacques Leclerc
+### Source Document ###			
+#url			https://www.axl.cefan.ulaval.ca/asie/bhoutan.htm
+#datePublished			2024-06-15
+#dateAccessed			2026-05-13
+#documentName			Bhoutan – Aménagement linguistique dans le monde
+#tableName			Demolinguistic data - Languages
+#columnName			Native Languages , Population , %
+#notes			Grouped by mothertongue for ethnic group
+Language Code	Language		Population
+dzo	Dzongkha	Bhotia bhoutanais du Centre	447860
+nep/npi	Nepali	Népalais (Paharia)	254876
+tsj	Tshangla (Sharchopkha)	Bhoutanais de l'Est (Sharchops)	243200
+dzo	Dzongkha	Bhoutanais de l'Ouest (Ngaloungs)	229389
+tsj	Tshangla(Sangla)	Sangla	151014
+xkz	Kurtokha	Gourtou	135934
+xkf	Khengkha	Khen	135722
+asm	Assamese	Assamais	106199
+sgt	Brokpake	Dakpa	84959
+dzl	Dzalakha	Dzalakha	67755
+gvr	Gurung (Western)	Gouroungs	42479
+kjz	Bumthangkha	Bumthangpa	36500
+lep	Lepcha	Lepcha	36214
+hin	Hindi	Indiens	31680
+lif	Limbu	Limbo	31860
+lif	#Kirati (Kuloung)	Kirati (Kuloung)	31860
+xkz	Kurtokha	Kurteops	22400
+mgp	Magar (Eastern)	Magars	21240
+aph	Kiranti Athpahariya	Rai athpahariya	19166
+sat	Santali	Santals	14868
+sip	Sikkimese	Bhotias sikkimais	10620
+tgf	Chalikha	Chali	8071
+tsk	Tsekou	Tsekou	6372
+bod	Tibetan	Tibétains	4673
+sgt	Brokpake	Brokpa	4300
+kru	Kurux (Kouroux)	Oraons	4248
+sdp	Sherdukpen	Sherdukpens	4248
+lop	Lopa	Loba	2124
+goe	Gongduk	Gongdouk	2100
+lhp	Lhokpu	Doya	1487

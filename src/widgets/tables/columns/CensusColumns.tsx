@@ -84,13 +84,25 @@ function getCensusColumns(): TableColumn<CensusData>[] {
       key: 'Collector Type',
       render: (census) => census.collectorType,
       isInitiallyVisible: false,
-      columnGroup: 'Location',
+      columnGroup: 'Collector',
     },
     {
       key: 'Collector Name',
-      render: (census) => census.collectorName,
+      render: (census) => <HoverableObjectName object={census.collector} labelSource="code" />,
       isInitiallyVisible: false,
-      columnGroup: 'Location',
+      columnGroup: 'Collector',
+    },
+    {
+      key: 'Author',
+      render: (census) => census.author,
+      isInitiallyVisible: false,
+      columnGroup: 'Collector',
+    },
+    {
+      key: 'Presented By',
+      render: (census) => <HoverableObjectName object={census.presenter} labelSource="code" />,
+      isInitiallyVisible: false,
+      columnGroup: 'Collector',
     },
     {
       key: 'Year Collected',
