@@ -19,7 +19,7 @@
     "test:coverage": "vitest run --coverage",
     "test:screenshots": "npx playwright test",
     "test:screenshots:update": "npx playwright test --update-snapshots",
-    "update-screenshots": "npx playwright test e2e/preview-screenshots.spec.ts --reporter=list"
+    "update-screenshots": "npx playwright test --config scripts/preview-screenshots.config.ts"
   },
   "dependencies": {
     "@amplitude/unified": "^1.0.3",
