@@ -9,6 +9,7 @@ import ConsentBanner from '@features/consent/ConsentBanner';
 import useConsent from '@features/consent/useConsent';
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 import PageParamsProvider from '@features/params/PageParamsProvider';
+import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
 
@@ -16,9 +17,11 @@ import PageRoutes from './PageRoutes';
 
 function AmplitudeTracker() {
   const location = useLocation();
-  const lastPageRef = useRef('');
+  const lastPathnameRef = useRef('');
   const { state } = useConsent();
   const analyticsConsent = state?.analytics === 'granted';
+
+  useAmplitudeParamEvents();
 
   useEffect(() => {
     if (!analyticsConsent) {
@@ -30,10 +33,9 @@ function AmplitudeTracker() {
 
     initAmplitude();
 
-    const page = `${location.pathname}${location.search}`;
-    if (lastPageRef.current === page) return;
+    if (lastPathnameRef.current === location.pathname) return;
 
-    lastPageRef.current = page;
+    lastPathnameRef.current = location.pathname;
     trackPageView(location.pathname, location.search);
   }, [analyticsConsent, location.pathname, location.search]);
 
