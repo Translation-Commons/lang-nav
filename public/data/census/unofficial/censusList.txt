@@ -2,9 +2,11 @@ af
 afrobarometer_r6
 afrobarometer_r9
 afrobarometer_r10
+bt
 ci
 cm
 ir
+is
 ke
 leclerc.sg
 sn

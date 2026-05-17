@@ -26,8 +26,22 @@ const ReportCensusInputTool: React.FC = () => {
 
         // Add collector entities -- note if they are new they will have to be added to organizations.tsv
         const collectorCode = census.collectorNameShort ?? census.collectorName;
-        if (collectorCode) census.collector = getOrganization(collectorCode);
-        if (census.presentedBy) census.presenter = getOrganization(census.presentedBy);
+        if (collectorCode) {
+          census.collector = getOrganization(collectorCode);
+          if (!census.collector) {
+            warnings.push(
+              `Collector "${collectorCode}" not found in organizations data. Add it to organizations.tsv to link them.`,
+            );
+          }
+        }
+        if (census.presentedBy) {
+          census.presenter = getOrganization(census.presentedBy);
+          if (!census.presenter) {
+            warnings.push(
+              `Presenter "${census.presentedBy}" not found in organizations data. Add it to organizations.tsv to link them.`,
+            );
+          }
+        }
       });
       setCensuses(censuses);
 
