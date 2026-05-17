@@ -1,4 +1,3 @@
-		
 #codeDisplay		is2016.axl
 #nameDisplay		Iceland 2016 (AXL)
 #isoRegionCode	IS	
@@ -36,9 +35,9 @@ lit	Lithuanian	1700
 deu	German	900
 dan	Danish	900
 lav	Latvian	700
-eng	English	600
+eng	#English (Americans)	600
 hin	Hindi	600
-eng	English	600
-fil	#filipino (tagalog)	600
+eng	#English (Britains)	600
+fil	#Filipino (tagalog)	600
 tha	Thai	500
 mul	Autes(Ethnic Group)	11000
