@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -14,26 +14,34 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
+import MapCard from './MapCard';
 import MapCentroids from './MapCentroids';
 import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
-import MapHoverContent from './MapHoverContent';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
 import ZoomControls from './ZoomControls';
 
 type Props = {
   objects: ObjectData[];
-  maxWidth?: number; // in pixels
+  maxWidth?: number;
 };
 
-// Aspect ratio (width/height) of the Robinson projection used in map_world.svg
+type FloatingCard = {
+  id: string;
+  object: DrawableData;
+  x: number;
+  y: number;
+};
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
     mapHeight: MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO,
   });
+
   const { colorBy, objectType } = usePageParams();
+  const [floatingCards, setFloatingCards] = useState<FloatingCard[]>([]);
+
   const drawableObjects = useMemo(() => {
     if (objectType === ObjectType.Language) {
       return objects.filter((obj) => obj.type === ObjectType.Language) as LanguageData[];
@@ -53,15 +61,35 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
       (t) => t.ID,
     ) as TerritoryData[];
   }, [objectType, objects]);
+
   const coloringFunctions = useColors({ objects: drawableObjects });
-  const getHoverContent = useCallback(
-    (obj: DrawableData) => <MapHoverContent drawnObject={obj} objectType={objectType} />,
-    [objects, objectType],
+
+  const getCard = useCallback(
+    (obj: DrawableData) => <MapCard drawnObject={obj} objectType={objectType} />,
+    [objectType],
   );
+
+  const openCard = useCallback(
+    (object: DrawableData, clientX: number, clientY: number) => {
+      const rect = containerRef.current?.getBoundingClientRect();
+      if (!rect) return;
+
+      setFloatingCards((prev) => [
+        ...prev,
+        { id: `${object.ID}-${Date.now()}`, object, x: clientX - rect.left, y: clientY - rect.top },
+      ]);
+    },
+    [containerRef],
+  );
+
+  useEffect(() => {
+    setFloatingCards([]);
+  }, [objectType, objects]);
 
   return (
     <div style={{ maxWidth, width: '100%', position: 'relative' }}>
       <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+
       <div
         ref={containerRef}
         style={{
@@ -72,6 +100,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
           cursor: 'grab',
           position: 'relative',
         }}
+        onClick={() => setFloatingCards([])}
       >
         <div
           ref={contentRef}
@@ -92,21 +121,43 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
               left: 0,
             }}
           />
+
           {objectType !== ObjectType.Language && (
             <MapTerritories
               drawableObjects={drawableObjects}
-              getHoverContent={getHoverContent}
+              getCard={getCard}
+              openCard={openCard}
               coloringFunctions={coloringFunctions}
             />
           )}
+
           <MapCentroids
             drawableObjects={drawableObjects}
-            getHoverContent={getHoverContent}
+            getCard={getCard}
+            openCard={openCard}
             scalar={1200 / maxWidth}
             coloringFunctions={coloringFunctions}
           />
         </div>
+
+        {floatingCards.map((card) => (
+          <div
+            key={card.id}
+            style={{
+              position: 'absolute',
+              left: `clamp(140px, ${card.x}px, calc(100% - 140px))`,
+              top: `clamp(12px, ${card.y + 12}px, calc(100% - 260px))`,
+              transform: 'translateX(-50%)',
+              zIndex: 10,
+              cursor: 'default',
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {getCard(card.object)}
+          </div>
+        ))}
       </div>
+
       {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
     </div>
   );
