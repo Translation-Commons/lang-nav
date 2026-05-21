@@ -16,7 +16,7 @@ const PageBrightnessSelector: React.FC = () => {
           color: 'var(--color-text-on-color)',
           backgroundColor: 'var(--color-button-primary)',
           border: '0',
-          width: '4rem',
+          width: '5.5rem',
           borderRadius: '2.25rem',
         }}
       >

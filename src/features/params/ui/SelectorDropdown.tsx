@@ -38,15 +38,11 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
             offset={12}
             role="listbox"
             style={{
-              display: 'flex',
-              flexDirection: 'row',
               width: 'min-content',
               borderRadius: '1em',
-              backgroundColor: 'rgba(0,0,0,0)',
-              maxHeight: '50vh',
+              backgroundColor: 'var(--color-background)',
+              maxHeight: '18em',
               overflow: 'auto',
-              paddingRight: '1em',
-              direction: 'rtl',
               scrollbarWidth: 'thin',
             }}
           >

@@ -1,6 +1,6 @@
 import React, { ReactNode, useState } from 'react';
 
-import { useClickOutsideTwo } from '@shared/hooks/useClickOutside';
+import { useClickOutside } from '@shared/hooks/useClickOutside';
 import { getPositionInGroup } from '@shared/lib/PositionInGroup';
 
 import {
@@ -40,20 +40,19 @@ function Selector<T extends React.Key>({
   selectorStyle,
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
-
-  const { triggerRef, containerRef } = useClickOutsideTwo(() => {
-    setExpanded(false);
+  const optionsRef = useClickOutside(() => {
+    setTimeout(() => setExpanded(false), 100);
   });
 
   return (
     <SelectorContainer manualStyle={selectorStyle} manualDisplay={display}>
       {selectorLabel && <SelectorLabel label={selectorLabel} description={selectorDescription} />}
 
-      <div ref={triggerRef} style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
         {/* The dropdown menu or the button list */}
         <OptionsContainer
           isExpanded={expanded}
-          containerRef={containerRef}
+          containerRef={optionsRef}
           hasSelectorLabel={!!selectorLabel}
         >
           <Options<T>

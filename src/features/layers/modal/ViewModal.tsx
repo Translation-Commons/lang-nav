@@ -11,17 +11,9 @@ interface ModalProps {
   title: React.ReactNode;
   children: React.ReactNode;
   bodyStyle?: React.CSSProperties;
-  className?: string;
 }
 
-const ViewModal: React.FC<ModalProps> = ({
-  isOpen,
-  onClose,
-  title,
-  children,
-  bodyStyle,
-  className,
-}) => {
+const ViewModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, bodyStyle }) => {
   // Turning off because of conflicts with hovercards that technically are outside of the modal
   // const modalRef = useClickOutside(onClose);
 
@@ -36,17 +28,14 @@ const ViewModal: React.FC<ModalProps> = ({
     return () => document.removeEventListener('keydown', handleKeyDown);
   }, [isOpen, onClose]);
 
-  if (!isOpen && className !== 'top-right') return <></>;
-  const overlayClassName = className
-    ? `ModalOverlay overlay-${className} overlay-${className}-${isOpen ? 'open' : 'close'}`
-    : 'ModalOverlay';
+  if (!isOpen) return <></>;
 
   return (
-    <div className={overlayClassName}>
+    <div className="ModalOverlay">
       <div className="Modal" aria-modal="true" role="dialog">
         <div className="ModalHeader">
           <div className="ModalTitle">{title}</div>
-          <HoverableButton buttonType="reset" onClick={onClose}>
+          <HoverableButton buttonType="reset" hoverContent="Close modal" onClick={onClose}>
             <XIcon size="1.5em" display="block" />
           </HoverableButton>
         </div>
