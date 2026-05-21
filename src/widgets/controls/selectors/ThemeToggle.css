@@ -5,7 +5,7 @@
   justify-content: center;
   border: 0;
   height: 2.25rem;
-  width: 4rem;
+  width: 5.5rem;
   padding: 0;
 }
 
@@ -23,7 +23,7 @@
   justify-content: space-between;
   position: relative;
   height: 2rem;
-  width: 3.75rem;
+  width: 5.25rem;
   padding: 0 0.45rem;
 }
 
@@ -72,6 +72,11 @@
   transform: rotate(-45deg) scale(0.55);
 }
 
+.theme-toggle__system {
+  opacity: 0;
+  transform: rotate(-30deg) scale(0.55);
+}
+
 .theme-toggle.dark .theme-toggle__sun {
   opacity: 0;
   transform: rotate(45deg) scale(0.55);
@@ -82,7 +87,23 @@
   transform: rotate(0deg) scale(1);
 }
 
+.theme-toggle.system .theme-toggle__sun,
+.theme-toggle.system .theme-toggle__moon {
+  opacity: 0;
+  transform: rotate(30deg) scale(0.55);
+}
+
+.theme-toggle.system .theme-toggle__system {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
 .theme-toggle.dark .theme-toggle__thumb {
   color: var(--color-blue);
-  transform: translate(1.75rem, 0);
+  transform: translate(1.625rem, 0);
+}
+
+.theme-toggle.system .theme-toggle__thumb {
+  color: var(--color-button-primary);
+  transform: translate(3.25rem, 0);
 }
