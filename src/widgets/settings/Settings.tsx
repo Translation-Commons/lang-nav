@@ -63,16 +63,12 @@ const Settings = (): React.ReactNode => {
             top: '0.75em',
             right: '0.75em',
             zIndex: ZIndex.FeedbackForm,
-            width: '21em',
-            maxWidth: '90vw',
-            maxHeight: 'calc(100vh - 1.5em)',
             backgroundColor: 'var(--color-background)',
             borderRadius: '0.5em',
             boxShadow: '0 4px 12px var(--color-shadow)',
             color: 'var(--color-text)',
             display: 'flex',
             flexDirection: 'column',
-            fontSize: '0.9em',
           }}
         >
           {/* Header */}
@@ -92,7 +88,7 @@ const Settings = (): React.ReactNode => {
           </div>
 
           {/* Body */}
-          <div style={{ padding: '16px', overflow: 'auto' }}>
+          <div style={{ padding: '16px', overflow: 'auto', fontSize: '0.9em' }}>
             <OptionsPanel title="View options" optionsName="view options">
               {isDataPage && (
                 <>
@@ -142,6 +138,7 @@ const OptionsPanel: React.FC<
           gap: '0.5em',
           flexDirection: 'column',
           alignItems: 'flex-end',
+          width: 'max-content',
         }}
       >
         {childArray}
