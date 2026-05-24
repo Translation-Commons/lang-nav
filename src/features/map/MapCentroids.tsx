@@ -17,7 +17,6 @@ import './map.css';
 
 type Props = {
   drawableObjects: DrawableData[];
-  getCard: (obj: DrawableData) => React.ReactNode;
   openCard: (obj: DrawableData, x: number, y: number) => void;
   scalar: number;
   coloringFunctions: ColoringFunctions;

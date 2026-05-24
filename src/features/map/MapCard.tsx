@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from 'lucide-react';
+import { ExternalLinkIcon, X } from 'lucide-react';
 import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
@@ -15,7 +15,8 @@ import DrawableData from './DrawableData';
 const MapCard: React.FC<{
   drawnObject: DrawableData;
   objectType: ObjectType;
-}> = ({ drawnObject, objectType }) => {
+  onClose: () => void;
+}> = ({ drawnObject, objectType, onClose }) => {
   const { updatePageParams } = usePageParams();
 
   const openDetails = () =>
@@ -43,21 +44,27 @@ const MapCard: React.FC<{
         background: 'var(--color-background)',
         borderRadius: '0.75em',
         boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)',
-        padding: '1em',
+        padding: '3.25em 1em 1em',
       }}
     >
-      <HoverableButton
+      <div
         style={{
           position: 'absolute',
           top: '0.5em',
           right: '0.5em',
-          padding: '0.25em',
+          display: 'flex',
+          gap: '0.25em',
           zIndex: 1,
         }}
-        onClick={openDetails}
       >
-        <ExternalLinkIcon size="1.5em" />
-      </HoverableButton>
+        <HoverableButton onClick={openDetails}>
+          <ExternalLinkIcon size="1.25em" />
+        </HoverableButton>
+
+        <HoverableButton onClick={onClose}>
+          <X size="1.25em" />
+        </HoverableButton>
+      </div>
 
       {content}
     </div>

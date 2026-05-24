@@ -13,7 +13,6 @@ import DrawableData from './DrawableData';
 type Props = {
   drawableObjects: DrawableData[];
   coloringFunctions: ColoringFunctions;
-  getCard: (obj: DrawableData) => React.ReactNode;
   openCard: (obj: DrawableData, x: number, y: number) => void;
 };
 

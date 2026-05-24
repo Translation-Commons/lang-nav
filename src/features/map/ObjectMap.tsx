@@ -34,13 +34,23 @@ type FloatingCard = {
 };
 
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
+  const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
+
   const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
-    mapHeight: MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO,
+    mapHeight,
   });
 
   const { colorBy, objectType } = usePageParams();
   const [floatingCards, setFloatingCards] = useState<FloatingCard[]>([]);
+  const [mapScale, setMapScale] = useState(1);
+
+  const updateMapScale = useCallback(() => {
+    const rect = contentRef.current?.getBoundingClientRect();
+    if (!rect) return;
+
+    setMapScale(rect.width / MAP_INTERNAL_WIDTH);
+  }, [contentRef]);
 
   const drawableObjects = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -64,31 +74,55 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
 
   const coloringFunctions = useColors({ objects: drawableObjects });
 
-  const getCard = useCallback(
-    (obj: DrawableData) => <MapCard drawnObject={obj} objectType={objectType} />,
-    [objectType],
-  );
-
   const openCard = useCallback(
     (object: DrawableData, clientX: number, clientY: number) => {
-      const rect = containerRef.current?.getBoundingClientRect();
+      const rect = contentRef.current?.getBoundingClientRect();
       if (!rect) return;
 
+      const scale = rect.width / MAP_INTERNAL_WIDTH;
+      setMapScale(scale);
+
+      const x = ((clientX - rect.left) / rect.width) * MAP_INTERNAL_WIDTH;
+      const y = ((clientY - rect.top) / rect.height) * mapHeight;
+
       setFloatingCards((prev) => [
-        ...prev,
-        { id: `${object.ID}-${Date.now()}`, object, x: clientX - rect.left, y: clientY - rect.top },
+        ...prev.filter((card) => card.id !== object.ID),
+        { id: object.ID, object, x, y },
       ]);
     },
-    [containerRef],
+    [contentRef, mapHeight],
   );
+
+  const closeCard = useCallback((id: string) => {
+    setFloatingCards((prev) => prev.filter((card) => card.id !== id));
+  }, []);
+
+  const handleZoomIn = useCallback(() => {
+    zoomIn();
+    requestAnimationFrame(updateMapScale);
+  }, [zoomIn, updateMapScale]);
+
+  const handleZoomOut = useCallback(() => {
+    zoomOut();
+    requestAnimationFrame(updateMapScale);
+  }, [zoomOut, updateMapScale]);
+
+  const handleResetTransform = useCallback(() => {
+    resetTransform();
+    requestAnimationFrame(updateMapScale);
+  }, [resetTransform, updateMapScale]);
 
   useEffect(() => {
     setFloatingCards([]);
-  }, [objectType, objects]);
+  }, [objectType]);
 
   return (
     <div style={{ maxWidth, width: '100%', position: 'relative' }}>
-      <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+      <ZoomControls
+        zoomIn={handleZoomIn}
+        zoomOut={handleZoomOut}
+        resetTransform={handleResetTransform}
+      />
 
       <div
         ref={containerRef}
@@ -106,7 +140,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
           ref={contentRef}
           style={{
             width: MAP_INTERNAL_WIDTH,
-            height: MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO,
+            height: mapHeight,
             position: 'relative',
           }}
         >
@@ -125,7 +159,6 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
           {objectType !== ObjectType.Language && (
             <MapTerritories
               drawableObjects={drawableObjects}
-              getCard={getCard}
               openCard={openCard}
               coloringFunctions={coloringFunctions}
             />
@@ -133,29 +166,32 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
 
           <MapCentroids
             drawableObjects={drawableObjects}
-            getCard={getCard}
             openCard={openCard}
             scalar={1200 / maxWidth}
             coloringFunctions={coloringFunctions}
           />
+          {floatingCards.map((card) => (
+            <div
+              key={card.id}
+              style={{
+                position: 'absolute',
+                left: card.x,
+                top: card.y + 12 / mapScale,
+                transform: `translateX(-50%) scale(${1 / mapScale})`,
+                transformOrigin: 'top center',
+                zIndex: 10,
+                cursor: 'default',
+              }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <MapCard
+                drawnObject={card.object}
+                objectType={objectType}
+                onClose={() => closeCard(card.id)}
+              />
+            </div>
+          ))}
         </div>
-
-        {floatingCards.map((card) => (
-          <div
-            key={card.id}
-            style={{
-              position: 'absolute',
-              left: `clamp(140px, ${card.x}px, calc(100% - 140px))`,
-              top: `clamp(12px, ${card.y + 12}px, calc(100% - 260px))`,
-              transform: 'translateX(-50%)',
-              zIndex: 10,
-              cursor: 'default',
-            }}
-            onClick={(e) => e.stopPropagation()}
-          >
-            {getCard(card.object)}
-          </div>
-        ))}
       </div>
 
       {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
