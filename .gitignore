@@ -32,3 +32,14 @@ coverage
 # Playwright
 test-results/
 playwright-report/
+
+# Claude Code local settings (machine-specific)
+.claude/settings.local.json
+CLAUDE.md
+
+# Playwright MCP debug artifacts
+.playwright-mcp/
+
+# Screenshot update artifacts (local review only)
+public/current/
+public/diff/
