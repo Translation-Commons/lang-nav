@@ -40,7 +40,9 @@ function Selector<T extends React.Key>({
   selectorStyle,
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
-  const optionsRef = useClickOutside(() => setExpanded(false));
+  const optionsRef = useClickOutside(() => {
+    setTimeout(() => setExpanded(false), 100);
+  });
 
   return (
     <SelectorContainer manualStyle={selectorStyle} manualDisplay={display}>
