@@ -1,6 +1,7 @@
 import ReportID from '@widgets/reports/ReportID';
 
 import { getParamsFromURL } from '@features/params/getParamsFromURL';
+import { PageParamKey } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
@@ -11,6 +12,67 @@ const PROPERTY_KEY_MAP: Record<string, string> = {
   objectType: 'entity',
   page: 'pagination_page',
 };
+
+/**
+ * URL params treated as "filters" for `explore_filter_changed`. searchString is
+ * intentionally not in this set; it has its own `explore_search_typed` event.
+ * View/sort/entity changes also have their own dedicated events.
+ */
+export const FILTER_PARAM_KEYS: ReadonlyArray<PageParamKey> = [
+  PageParamKey.languageFilter,
+  PageParamKey.languageFamilyFilter,
+  PageParamKey.territoryFilter,
+  PageParamKey.writingSystemFilter,
+  PageParamKey.languageScopes,
+  PageParamKey.territoryScopes,
+  PageParamKey.modalityFilter,
+  PageParamKey.vitalityEthCoarse,
+  PageParamKey.vitalityEthFine,
+  PageParamKey.isoStatus,
+  PageParamKey.populationMin,
+  PageParamKey.populationMax,
+];
+
+export type FilterAction = 'set' | 'cleared' | 'added' | 'removed' | 'changed';
+
+function isEmpty(value: unknown): boolean {
+  if (value == null) return true;
+  if (Array.isArray(value)) return value.length === 0;
+  if (typeof value === 'string') return value === '';
+  return false;
+}
+
+/**
+ * Derives a high-level action for a filter change. For array filters, single
+ * additions/removals are distinguished from larger edits so analysts can tell
+ * "user added a scope" from "user replaced the whole set".
+ */
+export function deriveFilterAction(previous: unknown, next: unknown): FilterAction {
+  const prevEmpty = isEmpty(previous);
+  const nextEmpty = isEmpty(next);
+  if (prevEmpty && !nextEmpty) return 'set';
+  if (!prevEmpty && nextEmpty) return 'cleared';
+  if (Array.isArray(previous) && Array.isArray(next)) {
+    const prevSet = new Set(previous);
+    const nextSet = new Set(next);
+    const added = next.filter((v) => !prevSet.has(v));
+    const removed = previous.filter((v) => !nextSet.has(v));
+    if (added.length === 1 && removed.length === 0) return 'added';
+    if (added.length === 0 && removed.length === 1) return 'removed';
+  }
+  return 'changed';
+}
+
+export function areFilterValuesEqual(a: unknown, b: unknown): boolean {
+  if (a === b) return true;
+  if (Array.isArray(a) && Array.isArray(b)) {
+    if (a.length !== b.length) return false;
+    const aSorted = [...a].sort();
+    const bSorted = [...b].sort();
+    return aSorted.every((v, i) => v === bSorted[i]);
+  }
+  return false;
+}
 
 // Default-param keys to exclude from the page_viewed event.
 const EXCLUDED_DEFAULT_KEYS = new Set<string>([
@@ -35,7 +97,7 @@ const NUMERIC_ENUM_BY_KEY: Record<string, Record<number, string>> = {
   reportID: ReportID as unknown as Record<number, string>,
 };
 
-function resolveEnumValue(key: string, val: unknown): unknown {
+export function resolveEnumValue(key: string, val: unknown): unknown {
   const enumMap = NUMERIC_ENUM_BY_KEY[key];
   if (!enumMap) return val;
   if (Array.isArray(val)) return val.map((v) => (typeof v === 'number' ? (enumMap[v] ?? v) : v));

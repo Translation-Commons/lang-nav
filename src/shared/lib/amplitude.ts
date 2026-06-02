@@ -15,7 +15,7 @@ const AMPLITUDE_API_KEY =
     : undefined;
 
 let hasInitializedAmplitude = false;
-let lastTrackedPage = '';
+let lastTrackedPathname = '';
 
 /**
  * Initialize the Amplitude SDK, gated on user consent.
@@ -63,20 +63,93 @@ export function trackEvent(eventType: string, eventProperties?: Record<string, u
   );
 }
 
+/**
+ * Fires once per route (pathname) change. Search-string changes from filter,
+ * search, or detail interactions are intentionally ignored here — they have
+ * their own `explore_*` events. The current search-string snapshot still
+ * rides on the event so an Amplitude analyst sees the entry state.
+ */
 export function trackPageView(pathname: string, search: string) {
   if (!AMPLITUDE_API_KEY) return;
+  if (pathname === lastTrackedPathname) return;
 
-  const page = `${pathname}${search}`;
-
-  if (page === lastTrackedPage) return;
-
-  lastTrackedPage = page;
+  lastTrackedPathname = pathname;
 
   trackEvent('page_viewed', {
     pathname,
     ...getLoggedDefaults(),
     ...parseSearchParams(search),
   });
+}
+
+type ExploreBaseProps = {
+  path: string;
+  view?: string;
+  entity?: string;
+};
+
+export function trackEntitySwitched(
+  props: ExploreBaseProps & { from_entity?: string; to_entity?: string },
+) {
+  trackEvent('explore_entity_switched', props);
+}
+
+export function trackViewSwitched(
+  props: ExploreBaseProps & { from_view?: string; to_view?: string },
+) {
+  trackEvent('explore_view_switched', props);
+}
+
+export function trackSortChanged(
+  props: ExploreBaseProps & {
+    sort_by?: string;
+    secondary_sort_by?: string;
+    sort_behavior?: string;
+    changed_keys: string[];
+  },
+) {
+  trackEvent('explore_sort_changed', props);
+}
+
+export function trackSearchTyped(
+  props: ExploreBaseProps & {
+    search_string: string;
+    search_by?: string;
+    cleared: boolean;
+  },
+) {
+  trackEvent('explore_search_typed', props);
+}
+
+export function trackFilterChanged(
+  props: ExploreBaseProps & {
+    filter_key: string;
+    filter_value: unknown;
+    previous_value: unknown;
+    filter_action: string;
+  },
+) {
+  trackEvent('explore_filter_changed', props);
+}
+
+export function trackDetailViewed(
+  props: ExploreBaseProps & {
+    object_id: string;
+    object_entity?: string;
+  },
+) {
+  trackEvent('explore_detail_viewed', props);
+}
+
+export function trackDetailSwitched(
+  props: ExploreBaseProps & {
+    from_object_id: string;
+    to_object_id: string;
+    from_object_entity?: string;
+    to_object_entity?: string;
+  },
+) {
+  trackEvent('explore_detail_switched', props);
 }
 
 const AMPLITUDE_STORAGE_KEY_PATTERN = /^(AMP_|amplitude_|amp_|amplitude)/i;
@@ -159,5 +232,5 @@ export function optOutAmplitude() {
     // Suppress: reset can throw if SDK never fully loaded.
   }
   clearAmplitudeStorage();
-  lastTrackedPage = '';
+  lastTrackedPathname = '';
 }
