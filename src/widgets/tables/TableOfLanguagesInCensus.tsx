@@ -63,10 +63,10 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           speaking: {
             adjusted: populationSpeaking,
             percent,
-            source: census.nameDisplay,
             unadjusted: populationSpeaking,
             census,
           },
+          writing: {},
         },
       } as LocaleData;
     })

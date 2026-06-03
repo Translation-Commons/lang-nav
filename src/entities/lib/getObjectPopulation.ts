@@ -35,7 +35,7 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
     case ObjectType.Language:
       return object.populationRough;
     case ObjectType.Locale:
-      return object.pop.speaking.adjusted;
+      return object.pop.speaking.unadjusted;
     case ObjectType.Territory:
       return object.populationFromUN;
     case ObjectType.Census:
