@@ -92,7 +92,7 @@ export function getWritingSystemsRelevantToObject(object: ObjectData): WritingSy
     case ObjectType.Territory:
       return uniqueBy(
         object.locales
-          ?.filter((loc) => (loc.populationWritingPercent || 0) > 1)
+          ?.filter((loc) => (loc.pop.writing.percent || 0) > 1)
           ?.map((loc) => loc.writingSystem ?? loc.language?.primaryWritingSystem)
           .filter((ws) => !!ws) ?? [],
         (ws) => ws.ID,
@@ -164,7 +164,7 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
     case ObjectType.Territory:
       return uniqueBy(
         object.locales
-          ?.filter((loc) => (loc.populationSpeakingPercent || 0) > 1)
+          ?.filter((loc) => (loc.pop.speaking.percent || 0) > 1)
           ?.map((loc) => loc.language)
           .filter((lang) => !!lang) ?? [],
         (lang) => lang.ID,
@@ -194,8 +194,7 @@ export function getLanguageFamiliesRelevantToObject(object: ObjectData): Languag
         object.locales
           ?.filter(
             (loc) =>
-              (loc.populationSpeakingPercent || 0) > 1 &&
-              loc.language?.scope === LanguageScope.Family,
+              (loc.pop.speaking.percent || 0) > 1 && loc.language?.scope === LanguageScope.Family,
           )
           ?.map((loc) => loc.language)
           .filter((lang) => !!lang) ?? [],

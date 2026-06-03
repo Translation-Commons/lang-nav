@@ -156,12 +156,10 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     codeDisplay: 'sjn-BE',
     nameDisplay: 'Sindarin (Beleriand)',
     names: ['Sindarin (Beleriand)'],
-    populationSpeaking: 9000,
-    populationSpeakingPercent: 75,
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'sjn',
     territoryCode: 'BE',
-    populationCensus: be0590, // Manually linked because otherwise its done in supplemental data
+    pop: { speaking: { unadjusted: 9000, percent: 75, census: be0590 }, writing: {} },
   };
   const sjn_ER: LocaleData = {
     type: ObjectType.Locale,
@@ -169,11 +167,10 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     codeDisplay: 'sjn-ER',
     nameDisplay: 'Sindarin (Eriador)',
     names: ['Sindarin (Eriador)'],
-    populationSpeaking: 1920,
-    populationSpeakingPercent: 80,
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'sjn',
     territoryCode: 'ER',
+    pop: { speaking: { unadjusted: 1920, percent: 80 }, writing: {} },
   };
   const dori0123_ER: LocaleData = {
     type: ObjectType.Locale,
@@ -181,11 +178,10 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     codeDisplay: 'dori0123-ER',
     nameDisplay: 'Doriathrin (Eriador)',
     names: ['Doriathrin (Eriador)'],
-    populationSpeaking: 1800,
-    populationSpeakingPercent: 75,
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'dori0123',
     territoryCode: 'ER',
+    pop: { speaking: { unadjusted: 1800, percent: 75 }, writing: {} },
   };
 
   // Writing Systems
@@ -205,11 +201,16 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameDisplay: 'Sindarin (Tengwar, Beleriand)',
     names: ['Sindarin (Tengwar, Beleriand)'],
     localeSource: LocaleSource.StableDatabase,
-    populationSpeaking: sjn_BE.populationSpeaking,
-    populationSpeakingPercent: sjn_BE.populationSpeakingPercent,
     languageCode: 'sjn',
     territoryCode: 'BE',
     scriptCode: 'Teng',
+    pop: {
+      speaking: {
+        unadjusted: sjn_BE.pop.speaking.unadjusted,
+        percent: sjn_BE.pop.speaking.percent,
+      },
+      writing: {},
+    },
   };
 
   // Variants

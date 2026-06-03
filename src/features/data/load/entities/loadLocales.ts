@@ -28,6 +28,7 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
   const { languageCode, scriptCode, territoryCode, variantCodes } = localeParts;
   const localeID = getLocaleCodeFromTags(localeParts, LocaleSeparator.Underscore);
   const nameEndonym = parts[2] || undefined;
+  const population = parts[4] !== '' ? Number.parseInt(parts[4]?.replace(/,/g, '')) : undefined;
 
   return {
     type: ObjectType.Locale,
@@ -42,8 +43,13 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
     territoryCode,
     scriptCode,
     variantCodes,
-    populationSource: parts[3] as PopulationSourceCategory,
-    populationSpeaking: parts[4] !== '' ? Number.parseInt(parts[4]?.replace(/,/g, '')) : undefined,
     officialStatus: (parts[5] || undefined) as OfficialStatus | undefined,
+    pop: {
+      speaking: {
+        unadjusted: population,
+        source: parts[3] as PopulationSourceCategory | undefined,
+      },
+      writing: {},
+    },
   };
 }

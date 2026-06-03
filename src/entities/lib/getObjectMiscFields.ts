@@ -127,13 +127,13 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
   const locales = uniqueBy(lang.locales, (loc) => loc.territoryCode ?? '').filter(
     (loc) => loc.territory?.scope === TerritoryScope.Country,
   );
-  const totalLocalePopulation = sumBy(locales, (loc) => loc.populationSpeaking) || 0;
+  const totalLocalePopulation = sumBy(locales, (loc) => loc.pop.speaking.adjusted) || 0;
   const computedLiteracy =
     sumBy(
       locales,
       (locale) =>
         (locale.literacyPercent ?? locale.territory?.literacyPercent ?? 0) *
-        (locale.populationSpeaking ?? 0),
+        (locale.pop.speaking.adjusted ?? 0),
     ) / totalLocalePopulation;
   return computedLiteracy || undefined;
 }

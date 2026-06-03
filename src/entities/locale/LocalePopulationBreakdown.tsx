@@ -6,11 +6,11 @@ import LocalePopulationBreakdownAdjusted from './LocalePopulationBreakdownAdjust
 import LocalePopulationBreakdownAggregated from './LocalePopulationBreakdownAggregated';
 
 const LocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  if (!locale.territory || !locale.populationAdjusted) return null;
+  if (!locale.territory || !locale.pop.speaking.adjusted) return null;
 
   if (
-    locale.populationSource === PopulationSourceCategory.AggregatedFromLanguages ||
-    locale.populationSource === PopulationSourceCategory.AggregatedFromTerritories
+    locale.pop.speaking.source === PopulationSourceCategory.AggregatedFromLanguages ||
+    locale.pop.speaking.source === PopulationSourceCategory.AggregatedFromTerritories
   ) {
     return <LocalePopulationBreakdownAggregated locale={locale} />;
   }

@@ -9,11 +9,11 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 
 const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  if (locale.populationAdjusted == null) return null;
+  if (locale.pop.speaking.adjusted == null) return null;
 
   return (
     <Hoverable hoverContent={<LocalePopulationBreakdown locale={locale} />}>
-      <CountOfPeople count={locale.populationAdjusted} />
+      <CountOfPeople count={locale.pop.speaking.adjusted} />
     </Hoverable>
   );
 };

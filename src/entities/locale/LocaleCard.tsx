@@ -23,7 +23,7 @@ interface Props {
   locale: LocaleData;
 }
 const LocaleCard: React.FC<Props> = ({ locale }) => {
-  const { populationAdjusted, officialStatus, populationSpeakingPercent, territory } = locale;
+  const { pop, officialStatus, territory } = locale;
 
   return (
     <div>
@@ -32,7 +32,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         <ObjectSubtitle object={locale} />
       </div>
 
-      {populationAdjusted != null && (
+      {pop.speaking.adjusted != null && (
         <CardField
           title="Population"
           field={Field.Population}
@@ -41,7 +41,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
           <LocalePopulationAdjusted locale={locale} />
         </CardField>
       )}
-      {populationAdjusted != null && (
+      {pop.speaking.adjusted != null && (
         <CardField
           title="Source"
           field={Field.SourceForPopulation}
@@ -51,13 +51,13 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         </CardField>
       )}
 
-      {populationSpeakingPercent != null && (
+      {pop.speaking.percent != null && (
         <CardField
           title="Percent population"
           field={Field.PercentOfTerritoryPopulation}
           description="Percent of the Territory population that use this locale."
         >
-          <DecimalNumber num={populationSpeakingPercent} alignFraction={false} />% of{' '}
+          <DecimalNumber num={pop.speaking.percent} alignFraction={false} />% of{' '}
           {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
         </CardField>
       )}

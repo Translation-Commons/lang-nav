@@ -30,6 +30,7 @@ export function getMockLanguages() {
     names: ['Multiple Languages'],
     type: ObjectType.Locale,
     localeSource: LocaleSource.CreateRegionalLocales,
+    pop: { speaking: {}, writing: {} },
   };
   const Latn: WritingSystemData = {
     ID: 'Latn',

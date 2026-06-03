@@ -50,7 +50,8 @@ function createLocalesForLanguageFamily(
 
     if (newLocale == null) {
       const population =
-        Math.min(childLocale.populationSpeaking || 0, territory.population) || undefined;
+        Math.min(childLocale.pop.speaking.unadjusted || 0, territory.population) || undefined;
+      const popPercent = population != null ? (population * 100) / territory.population : undefined;
 
       // It isn't found yet, create it
       newLocale = {
@@ -73,10 +74,14 @@ function createLocalesForLanguageFamily(
         variants: childLocale.variants != null ? [...childLocale.variants] : [], // dereference the array
 
         // Initialize the population
-        populationSpeaking: population,
-        populationSpeakingPercent:
-          population != null ? (population * 100) / territory.population : undefined,
-        populationSource: PopulationSourceCategory.AggregatedFromLanguages,
+        pop: {
+          speaking: {
+            unadjusted: population,
+            percent: popPercent,
+            source: PopulationSourceCategory.AggregatedFromLanguages,
+          },
+          writing: {},
+        },
 
         // Add stubs for required fields
         names: [],
@@ -93,21 +98,21 @@ function createLocalesForLanguageFamily(
       // Add up population estimates
       // But only for locales that were created in this function
       if (
-        childLocale.populationSpeaking != null &&
+        childLocale.pop.speaking.unadjusted != null &&
         newLocale.localeSource === LocaleSource.CreateFamilyLocales
       ) {
         // Most of this will be re-done in computeLanguageFamilyLocalePopulations after census data is added
 
-        if (newLocale.populationSpeaking == null) newLocale.populationSpeaking = 0;
+        if (newLocale.pop.speaking.unadjusted == null) newLocale.pop.speaking.unadjusted = 0;
         // Note this may double count populations when people speak multiple languages in the family
-        newLocale.populationSpeaking += childLocale.populationSpeaking || 0;
-        newLocale.populationSpeakingPercent =
-          (newLocale.populationSpeaking * 100) / territory.population;
+        newLocale.pop.speaking.unadjusted += childLocale.pop.speaking.unadjusted || 0;
+        newLocale.pop.speaking.percent =
+          (newLocale.pop.speaking.unadjusted * 100) / territory.population;
 
         // At least we can max out the percentage at 100%
-        if (newLocale.populationSpeakingPercent > 100) {
-          newLocale.populationSpeakingPercent = 100;
-          newLocale.populationSpeaking = territory.population;
+        if (newLocale.pop.speaking.percent > 100) {
+          newLocale.pop.speaking.percent = 100;
+          newLocale.pop.speaking.unadjusted = territory.population;
         }
       }
     }

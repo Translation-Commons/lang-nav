@@ -14,11 +14,10 @@ type Props = {
 };
 
 const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
-  const { populationCensus, populationSource } = locale;
+  const { census, source } = locale.pop.speaking;
 
-  if (populationCensus != null) return <CensusCitation census={populationCensus} size={size} />;
-  if (populationSource != null)
-    return <PopulationSource populationSource={populationSource} size={size} />;
+  if (census != null) return <CensusCitation census={census} size={size} />;
+  if (source != null) return <PopulationSource populationSource={source} size={size} />;
   return <Deemphasized>n/a</Deemphasized>;
 };
 

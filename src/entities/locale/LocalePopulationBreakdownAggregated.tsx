@@ -17,8 +17,8 @@ import { getLocaleName } from './LocaleStrings';
 const MAX_CONSTITUENTS_DISPLAYED = 5;
 
 const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { populationAdjusted, populationSource, populationSpeakingPercent } = locale;
-  const fromTerritories = populationSource === PopulationSourceCategory.AggregatedFromTerritories;
+  const { adjusted, percent, source } = locale.pop.speaking;
+  const fromTerritories = source === PopulationSourceCategory.AggregatedFromTerritories;
   const constituents = fromTerritories
     ? uniqueBy(locale.relatedLocales?.childTerritories || [], (l) => l.territoryCode || '')
     : uniqueBy(locale.relatedLocales?.childLanguages || [], (l) => l.languageCode).sort(
@@ -58,8 +58,8 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
                   labelSource={fromTerritories ? 'territory' : 'language'}
                 />
               </td>
-              <CellPopulation population={childLocale.populationAdjusted} />
-              <CellPercent percent={childLocale.populationSpeakingPercent} />
+              <CellPopulation population={childLocale.pop.speaking.adjusted} />
+              <CellPercent percent={childLocale.pop.speaking.percent} />
             </tr>
           ))}
         {showAllConstituents ? (
@@ -88,24 +88,23 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
               labelSource={fromTerritories ? 'territory' : 'language'}
             />
           </LabelTableCell>
-          <CellPopulation population={populationAdjusted} />
+          <CellPopulation population={adjusted} />
           <CellPercent
             leftContent={
-              (populationSpeakingPercent ?? 0) >= 99.9 && (
+              (percent ?? 0) >= 99.9 && (
                 <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
               )
             }
-            percent={populationSpeakingPercent}
+            percent={percent}
           />
         </tr>
-        {(populationSpeakingPercent ?? 0) >= 99.9 && (
+        {(percent ?? 0) >= 99.9 && (
           <tr>
             <td colSpan={3}>
-              The population of this locale{' '}
-              {(populationSpeakingPercent ?? 0) > 100 ? 'exceeds' : 'is'} 100% of the territory
-              population, which is likely not an accurate reflection of the people in the area.
-              Rather, constituents may be double-counted but without specific data this is the best
-              aggregate.
+              The population of this locale {(percent ?? 0) > 100 ? 'exceeds' : 'is'} 100% of the
+              territory population, which is likely not an accurate reflection of the people in the
+              area. Rather, constituents may be double-counted but without specific data this is the
+              best aggregate.
             </td>
           </tr>
         )}
@@ -119,7 +118,7 @@ const RowOfRemainingConstituents: React.FC<{
   setShowAllConstituents: (show: boolean) => void;
 }> = ({ locales, setShowAllConstituents }) => {
   if (locales.length === 0) return null;
-  const totalInRemainder = sumBy(locales, (locale) => locale.populationAdjusted ?? 0);
+  const totalInRemainder = sumBy(locales, (locale) => locale.pop.speaking.adjusted ?? 0);
   const percentInRemainder =
     (totalInRemainder * 100) / sumBy(locales, (locale) => locale.territory?.population || 0);
 

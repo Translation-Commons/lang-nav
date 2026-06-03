@@ -33,16 +33,16 @@ export function computeRegionalLocalesPopulation(territory: TerritoryData | unde
     // zh_Hans_SG and zh_Hant_SG). The adjusted population is corrected to the current year
     // to smooth out population growth between data collected in different years.
     relatedLocales.sumOfPopulationFromChildTerritories =
-      sumBy(uniqueContainedLocales, (loc) => loc.populationAdjusted) || undefined;
-    locale.populationAdjusted = relatedLocales.sumOfPopulationFromChildTerritories;
+      sumBy(uniqueContainedLocales, (loc) => loc.pop.speaking.adjusted) || undefined;
+    locale.pop.speaking.adjusted = relatedLocales.sumOfPopulationFromChildTerritories;
     // Set population speaking to be the sum of the unadjusted population
-    locale.populationSpeaking =
-      sumBy(uniqueContainedLocales, (loc) => loc.populationSpeaking || 0) || undefined;
+    locale.pop.speaking.unadjusted =
+      sumBy(uniqueContainedLocales, (loc) => loc.pop.speaking.unadjusted || 0) || undefined;
 
     // Compute the percent based on the adjusted population for regional locales.
-    if (locale.populationAdjusted) {
-      locale.populationSpeakingPercent =
-        (locale.populationAdjusted / (territory.population || 1)) * 100;
+    if (locale.pop.speaking.adjusted) {
+      locale.pop.speaking.percent =
+        (locale.pop.speaking.adjusted / (territory.population || 1)) * 100;
     }
   });
 }
@@ -67,7 +67,7 @@ function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
     (loc) => loc.languageCode,
   );
   relatedLocales.sumOfPopulationFromChildLanguages =
-    sumBy(uniqueChildLocales, (childLocale) => childLocale.populationAdjusted) || undefined;
+    sumBy(uniqueChildLocales, (childLocale) => childLocale.pop.speaking.adjusted) || undefined;
 
   // If the locale is for a language family, set its population to the sum of its children's populations
   if (
@@ -78,11 +78,11 @@ function getLanguageFamilyLocalePopulation(locale: LocaleData): void {
       (relatedLocales.sumOfPopulationFromChildLanguages * 100) /
       (locale.territory?.population || 1);
     if (percentOfTerritory > 100) {
-      locale.populationAdjusted = locale.territory?.population;
-      locale.populationSpeakingPercent = 100;
+      locale.pop.speaking.adjusted = locale.territory?.population;
+      locale.pop.speaking.percent = 100;
     } else {
-      locale.populationAdjusted = relatedLocales.sumOfPopulationFromChildLanguages;
-      locale.populationSpeakingPercent = percentOfTerritory;
+      locale.pop.speaking.adjusted = relatedLocales.sumOfPopulationFromChildLanguages;
+      locale.pop.speaking.percent = percentOfTerritory;
     }
   }
 }
