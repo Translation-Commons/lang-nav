@@ -159,7 +159,10 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'sjn',
     territoryCode: 'BE',
-    pop: { speaking: { unadjusted: 9000, percent: 75, census: be0590 }, writing: {} },
+    pop: {
+      speaking: { unadjusted: 9000, percent: 75, census: be0590 },
+      writing: { unadjusted: 8000 },
+    },
   };
   const sjn_ER: LocaleData = {
     type: ObjectType.Locale,
@@ -170,7 +173,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'sjn',
     territoryCode: 'ER',
-    pop: { speaking: { unadjusted: 1920, percent: 80 }, writing: {} },
+    pop: { speaking: { unadjusted: 1920, percent: 80 }, writing: { unadjusted: 1920 } },
   };
   const dori0123_ER: LocaleData = {
     type: ObjectType.Locale,
@@ -181,7 +184,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'dori0123',
     territoryCode: 'ER',
-    pop: { speaking: { unadjusted: 1800, percent: 75 }, writing: {} },
+    pop: { speaking: { unadjusted: 1800, percent: 75 }, writing: { unadjusted: 0 } },
   };
 
   // Writing Systems

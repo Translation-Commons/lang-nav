@@ -20,7 +20,9 @@ function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>)
 
   return (
     <HoverableContainer column={column} appearance={appearance}>
-      {column.label ?? column.key}{' '}
+      {(appearance === 'text' ? column.labelInColumnGroup : undefined) ??
+        column.label ??
+        column.key}{' '}
       {sortBy === column.field || secondarySortBy === column.field ? (
         <ArrowUpDownIcon
           size={14}
