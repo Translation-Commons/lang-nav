@@ -9,6 +9,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.None:
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.PercentOfOverallLanguageSpeakers:

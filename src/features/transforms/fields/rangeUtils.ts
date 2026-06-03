@@ -27,6 +27,7 @@ export function getMinimumValue(field?: Field, populationMin?: number): number {
     case Field.Population:
       return populationMin ?? -1;
     case Field.PopulationDirectlySourced:
+    case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.PercentOfOverallLanguageSpeakers:
@@ -125,6 +126,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.CountOfVariants:
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
     case Field.Area:

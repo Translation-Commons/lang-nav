@@ -25,6 +25,7 @@ import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import { LocalePopulationColumns } from './LocalePopulationColumns';
 import LocaleRelatedLocalesColumns from './LocaleRelatedLocalesColumns';
+import LocaleWritingColumns from './LocaleWritingColumns';
 
 function getLocaleColumns(): TableColumn<LocaleData>[] {
   return [
@@ -43,47 +44,7 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
       isInitiallyVisible: false,
     },
     ...LocalePopulationColumns,
-    {
-      key: 'Literacy',
-      render: (object) => object.literacyPercent,
-      isInitiallyVisible: false,
-      field: Field.Literacy,
-      columnGroup: 'Writing',
-    },
-    {
-      key: 'Writing System (specified)',
-      description: (
-        <>
-          Some locales specify a writing system, for instance{' '}
-          <code>
-            zh_<strong>Hant</strong>_TW
-          </code>{' '}
-          means it specifically refers to Traditional Han characters.
-        </>
-      ),
-      render: (object) => <HoverableObjectName object={object.writingSystem} />,
-      isInitiallyVisible: false,
-      columnGroup: 'Writing',
-    },
-    {
-      key: 'Writing System (inferred)',
-      description: (
-        <>
-          Some locales do not include a writing system but it can usually be inferred based on the
-          primary writing system for the language. For instance, <code>zh_CN</code> could be written
-          in <code>Hant</code> or <code>Hans</code> writing. Since the primary writing system in
-          China is the Simplified characters, it can be inferred to be <code>Hans</code>.
-        </>
-      ),
-      render: (object) => (
-        <HoverableObjectName
-          object={object.writingSystem ?? object.language?.primaryWritingSystem}
-        />
-      ),
-      isInitiallyVisible: false,
-      field: Field.WritingSystem,
-      columnGroup: 'Writing',
-    },
+    ...LocaleWritingColumns,
     {
       key: 'Language',
       render: (object) => <HoverableObjectName object={object.language} />,

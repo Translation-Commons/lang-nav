@@ -122,6 +122,7 @@ function useFilters(): Record<Field, FilterFunctionType> {
     [Field.CountOfVariants]: alwaysTrue,
 
     [Field.PopulationDirectlySourced]: alwaysTrue,
+    [Field.PopulationWriting]: alwaysTrue,
     [Field.PopulationOfDescendants]: alwaysTrue,
     [Field.PercentOfTerritoryPopulation]: alwaysTrue,
     [Field.PercentOfOverallLanguageSpeakers]: alwaysTrue,
