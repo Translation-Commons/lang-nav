@@ -23,22 +23,22 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
     key: 'Population (Direct)',
     description: 'This is the original population number cited from sourced data.',
-    render: (object) => object.populationSpeaking,
+    render: (object) => object.pop.speaking.unadjusted,
     field: Field.PopulationDirectlySourced,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
   },
   {
     key: '% in Territory',
-    render: (object) => object.populationSpeakingPercent,
+    render: (object) => object.pop.speaking.percent,
     field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
   },
   {
     key: '% of Global Language Speakers',
     render: (object) =>
-      object.populationSpeaking &&
-      (object.populationSpeaking * 100) / (object.language?.populationEstimate ?? 1),
+      object.pop.speaking.adjusted &&
+      (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate ?? 1),
     isInitiallyVisible: false,
     field: Field.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',

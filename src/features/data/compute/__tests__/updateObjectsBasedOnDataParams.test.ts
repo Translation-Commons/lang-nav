@@ -24,7 +24,7 @@ describe('updateObjectsBasedOnDataParams', () => {
     const sjn_001 = mockedDictionaries.locales.sjn_001;
     expect(sjn.populationEstimate).toBe(14400); // original value for populationEstimate
     expect(dori0123.populationEstimate).toBe(2500); // original value for populationEstimate
-    expect(sjn_001.populationSpeaking).toBe(10920); // original value added up from locales
+    expect(sjn_001.pop.speaking.unadjusted).toBe(10920); // original value added up from locales
 
     // Check the IDs and names
     expect(sjn.codeDisplay).toBe('sjn');
@@ -46,7 +46,7 @@ describe('updateObjectsBasedOnDataParams', () => {
     // After update, populationEstimate should consider populationFromLocales
     expect(sjn.populationEstimate).toBe(11220); // Updated to follow locales
     expect(dori0123.populationEstimate).toBe(1800); // Updated to follow locales
-    expect(sjn_001.populationSpeaking).toBe(11220); // updated since locales updated from census data
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // updated since locales updated from census data
 
     // Check the IDs and names again
     expect(sjn.codeDisplay).toBe('sjn');
@@ -62,11 +62,11 @@ describe('updateObjectsBasedOnDataParams', () => {
       ID: 'dori0123_AM',
       codeDisplay: 'dori0123-AM',
       languageCode: 'dori0123',
-      populationSpeaking: 100000,
       nameDisplay: 'Doriathrin (AM)',
       territoryCode: 'AM',
       names: [],
       localeSource: LocaleSource.Census,
+      pop: { speaking: { unadjusted: 100000 }, writing: {} },
     };
     mockedObjects[newLocale.ID] = newLocale;
     connectMockedObjects(mockedObjects); // Re-connect objects
@@ -83,6 +83,6 @@ describe('updateObjectsBasedOnDataParams', () => {
     // TODO computeLanguageDescendantPopulation needs to be revamped
     expect(sjn.populationOfDescendants).toBe(200000); // this should be computed from dori0123
     expect(dori0123.populationEstimate).toBe(100000); // updated to include new locale
-    expect(sjn_001.populationSpeaking).toBe(11220); // unchanged
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
   });
 });

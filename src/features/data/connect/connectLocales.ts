@@ -27,9 +27,9 @@ export default function connectLocales(
       if (!territory.locales) territory.locales = [];
       territory.locales.push(locale);
       locale.territory = territory;
-      if (locale.populationSpeaking)
-        locale.populationSpeakingPercent =
-          (locale.populationSpeaking * 100) / (territory.population || 1);
+      if (locale.pop.speaking.unadjusted)
+        locale.pop.speaking.percent =
+          (locale.pop.speaking.unadjusted * 100) / (territory.population || 1);
     }
     if (language != null) {
       language.locales.push(locale);
@@ -43,9 +43,12 @@ export default function connectLocales(
       if (language != null) {
         if (!writingSystem.languages) writingSystem.languages = {};
         writingSystem.languages[language.ID] = language;
-        if (language.primaryScriptCode != locale.scriptCode && locale.populationSpeaking != null) {
+        if (
+          language.primaryScriptCode != locale.scriptCode &&
+          locale.pop.speaking.unadjusted != null
+        ) {
           if (!writingSystem.populationUpperBound) writingSystem.populationUpperBound = 0;
-          writingSystem.populationUpperBound += locale.populationSpeaking;
+          writingSystem.populationUpperBound += locale.pop.speaking.unadjusted;
         }
 
         // Connect the writing system to the language if not already connected

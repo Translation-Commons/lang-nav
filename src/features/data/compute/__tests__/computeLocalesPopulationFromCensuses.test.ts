@@ -44,11 +44,11 @@ describe('computeLocalePopulationFromCensuses', () => {
       const localeRaw = mockRaw.locales.find((l) => l.ID === localeUpdated.ID);
 
       // The raw data does not come with adjusted populations
-      expect(localeRaw?.populationAdjusted).toBeUndefined();
-      expect(localeRaw?.populationSpeaking).not.toBeUndefined();
+      expect(localeRaw?.pop.speaking.adjusted).toBeUndefined();
+      expect(localeRaw?.pop.speaking.unadjusted).not.toBeUndefined();
 
       // The updated data should have adjusted populations that in these cases equal the speaking populations
-      expect(localeUpdated.populationAdjusted).toBe(localeUpdated.populationSpeaking);
+      expect(localeUpdated.pop.speaking.adjusted).toBe(localeUpdated.pop.speaking.unadjusted);
     });
   });
 
@@ -66,17 +66,17 @@ describe('computeLocalePopulationFromCensuses', () => {
 
       if (localeUpdated.ID === 'sjn_BE') {
         // This locale was updated from the census for BE
-        expect(localeUpdated.populationSpeaking).not.toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).not.toBe(localeRaw?.pop.speaking.unadjusted);
       } else if (['sjn_123', 'sjn_001'].includes(localeUpdated.ID)) {
         // The changes have not yet propagated to regional locales
-        expect(localeUpdated?.populationSpeaking).toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).toBe(localeRaw?.pop.speaking.unadjusted);
       } else if (['sjn_Teng_BE', 'sjn_Teng_123', 'sjn_Teng_001'].includes(localeUpdated.ID)) {
         // The locales with writing systems specificied are not modified by the census data
         // since it does assert that it also applies to sjn_Teng
-        expect(localeUpdated?.populationSpeaking).toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).toBe(localeRaw?.pop.speaking.unadjusted);
       } else {
         // All other locales are the same
-        expect(localeUpdated?.populationSpeaking).toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).toBe(localeRaw?.pop.speaking.unadjusted);
       }
     });
 
@@ -112,17 +112,17 @@ describe('computeLocalePopulationFromCensuses', () => {
 
       if (localeUpdated.ID === 'sjn_BE') {
         // This locale was updated from the census for BE
-        expect(localeUpdated.populationSpeaking).not.toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).not.toBe(localeRaw?.pop.speaking.unadjusted);
       } else if (['sjn_123', 'sjn_001'].includes(localeUpdated.ID)) {
         // The changes NOW HAVE propagated to regional locales
-        expect(localeUpdated?.populationSpeaking).not.toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).not.toBe(localeRaw?.pop.speaking.unadjusted);
       } else if (['sjn_Teng_BE', 'sjn_Teng_123', 'sjn_Teng_001'].includes(localeUpdated.ID)) {
         // The locales with writing systems specificied are not modified by the census data
         // since it does assert that it also applies to sjn_Teng
-        expect(localeUpdated?.populationSpeaking).toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).toBe(localeRaw?.pop.speaking.unadjusted);
       } else {
         // All other locales are the same
-        expect(localeUpdated?.populationSpeaking).toBe(localeRaw?.populationSpeaking);
+        expect(localeUpdated?.pop.speaking.unadjusted).toBe(localeRaw?.pop.speaking.unadjusted);
       }
     });
 
@@ -170,14 +170,14 @@ describe('computeLocalePopulationFromCensuses', () => {
 
     // Check the Locale sjn_BE
     const localeRaw = mockRaw.locales.find((l) => l.ID === 'sjn_BE');
-    expect(localeRaw?.populationSpeaking).toBe(9000); // Original value before census
-    expect(localeRaw?.populationSpeakingPercent).toBe(75);
-    expect(localeRaw?.populationAdjusted).toBeUndefined();
+    expect(localeRaw?.pop.speaking.unadjusted).toBe(9000); // Original value before census
+    expect(localeRaw?.pop.speaking.percent).toBe(75);
+    expect(localeRaw?.pop.speaking.adjusted).toBeUndefined();
 
     const localeUpdated = mockUpdated.locales.find((l) => l.ID === 'sjn_BE');
-    expect(localeUpdated?.populationSpeaking).toBe(50000); // crazy high
-    expect(localeUpdated?.populationSpeakingPercent).toBe(100);
-    expect(localeUpdated?.populationAdjusted).toBe(12000); // adjusted down since the territory BE is capped at 12000
+    expect(localeUpdated?.pop.speaking.unadjusted).toBe(50000); // crazy high
+    expect(localeUpdated?.pop.speaking.percent).toBe(100);
+    expect(localeUpdated?.pop.speaking.adjusted).toBe(12000); // adjusted down since the territory BE is capped at 12000
 
     // Check the Language sjn
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
@@ -217,10 +217,11 @@ describe('computeLocalePopulationFromCensuses', () => {
         codeDisplay: 'sjn-AM',
         languageCode: 'sjn',
         territoryCode: 'AM',
-        populationSpeaking: 2000, // let's say this is grossly underestimated before we get the census data
         nameDisplay: 'Sindarin (The Undying Lands)',
         names: [],
         localeSource: LocaleSource.StableDatabase,
+        // let's say this is grossly underestimated before we get the census data
+        pop: { speaking: { unadjusted: 2000 }, writing: {} },
       };
     }
 

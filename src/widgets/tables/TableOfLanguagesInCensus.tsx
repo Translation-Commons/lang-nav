@@ -45,6 +45,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         langsNotFound.push(langID);
         return null;
       }
+      const percent =
+        (populationSpeaking * 100) / (census.populationWithPositiveResponses || census.population);
       return {
         type: ObjectType.Locale,
         ID: langID + '_' + census.isoRegionCode,
@@ -57,13 +59,15 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         territory: census.territory,
         territoryCode: census.isoRegionCode,
 
-        populationSource: census.nameDisplay,
-        populationAdjusted: populationSpeaking,
-        populationSpeaking,
-        populationSpeakingPercent:
-          (populationSpeaking * 100) /
-          (census.populationWithPositiveResponses || census.population),
-        populationCensus: census,
+        pop: {
+          speaking: {
+            adjusted: populationSpeaking,
+            percent,
+            source: census.nameDisplay,
+            unadjusted: populationSpeaking,
+            census,
+          },
+        },
       } as LocaleData;
     })
     .filter((loc) => loc != null);
@@ -78,8 +82,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
   const getPopulationDifference = useCallback(
     (mockedLocale: LocaleData): React.ReactNode => (
       <PercentageDifference
-        percentNew={mockedLocale.populationSpeakingPercent || 0}
-        percentOld={getLocale(mockedLocale.ID)?.populationSpeakingPercent}
+        percentNew={mockedLocale.pop.speaking.percent || 0}
+        percentOld={getLocale(mockedLocale.ID)?.pop.speaking.percent}
       />
     ),
     [getLocale],
@@ -113,12 +117,12 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Population',
-            render: (loc) => loc.populationSpeaking,
+            render: (loc) => loc.pop.speaking.adjusted,
             field: Field.Population,
           },
           {
             key: 'Percent Within Territory',
-            render: (loc) => loc.populationSpeakingPercent,
+            render: (loc) => loc.pop.speaking.percent,
             field: Field.PercentOfTerritoryPopulation,
           },
           {
@@ -154,8 +158,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Percent of Worldwide in Language',
             render: (object) =>
-              object.populationSpeaking &&
-              (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
+              object.pop.speaking.adjusted &&
+              (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate || 1),
             isInitiallyVisible: false,
             field: Field.PercentOfOverallLanguageSpeakers,
           },

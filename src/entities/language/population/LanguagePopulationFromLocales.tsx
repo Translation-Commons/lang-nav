@@ -52,7 +52,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<{ lang: LanguageDa
                 <td>
                   <HoverableObjectName object={locale} labelSource="territory" />
                 </td>
-                <CellPopulation population={locale.populationAdjusted} />
+                <CellPopulation population={locale.pop.speaking.adjusted} />
               </tr>
             ))}
           {localesFromUniqueTerritories.length > 10 && (
@@ -61,7 +61,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<{ lang: LanguageDa
               <CellPopulation
                 population={sumBy(
                   localesFromUniqueTerritories.slice(10),
-                  (locale) => locale.populationAdjusted || 0,
+                  (locale) => locale.pop.speaking.adjusted || 0,
                 )}
               />
             </tr>

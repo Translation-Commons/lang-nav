@@ -12,13 +12,12 @@ export function computeLocalesWritingPopulation(locales: LocaleData[]): void {
     .forEach((locale) => {
       locale.literacyPercent = locale.territory?.literacyPercent ?? 100;
 
-      if (locale.populationSpeaking == null) return;
-      locale.populationWriting = Math.round(
-        (locale.populationSpeaking * locale.literacyPercent) / 100,
+      if (locale.pop.speaking.unadjusted == null) return;
+      locale.pop.writing.unadjusted = Math.round(
+        (locale.pop.speaking.unadjusted * locale.literacyPercent) / 100,
       );
-      if (locale.populationSpeakingPercent != null) {
-        locale.populationWritingPercent =
-          (locale.populationSpeakingPercent * locale.literacyPercent) / 100;
+      if (locale.pop.speaking.percent != null) {
+        locale.pop.writing.percent = (locale.pop.speaking.percent * locale.literacyPercent) / 100;
       }
     });
 
@@ -26,13 +25,13 @@ export function computeLocalesWritingPopulation(locales: LocaleData[]): void {
   locales
     .filter((l) => isTerritoryGroup(l.territory?.scope))
     .forEach((locale) => {
-      locale.populationWriting = sumBy(
+      locale.pop.writing.unadjusted = sumBy(
         uniqueBy(locale.relatedLocales?.childTerritories ?? [], (loc) => loc.territoryCode || ''),
-        (locale) => locale.populationWriting ?? 0,
+        (locale) => locale.pop.writing.unadjusted ?? 0,
       );
-      if (locale.populationSpeaking && locale.populationWriting) {
+      if (locale.pop.speaking.unadjusted && locale.pop.writing.unadjusted) {
         locale.literacyPercent = Math.round(
-          (locale.populationWriting * 100) / locale.populationSpeaking,
+          (locale.pop.writing.unadjusted * 100) / locale.pop.speaking.unadjusted,
         );
       }
     });

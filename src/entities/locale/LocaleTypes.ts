@@ -79,8 +79,6 @@ export interface LocaleData extends ObjectBase {
   scriptCode?: ScriptCode;
   variantCodes?: VariantIANATag[];
 
-  populationSource?: PopulationSourceCategory;
-  populationSpeaking?: number;
   officialStatus?: OfficialStatus;
   langFormedHere?: boolean; // Whether the language was formed in this territory, as opposed to being imported through state expansion, migration, etc.
   historicPresence?: boolean; // Whether the language or its antecedents were established in this territory before 1500 CE, as a rough proxy for indigeneity
@@ -106,12 +104,24 @@ export interface LocaleData extends ObjectBase {
     sumOfPopulationFromChildLanguages?: number;
   };
 
+  pop: {
+    speaking: {
+      adjusted?: number; // The best estimate of the population speaking this language in this territory, based on the most recent data from censuses, language family locales, or other sources
+      percent?: number; // The percentage this population represents out of the total population of the territory, based on the best estimate
+      unadjusted?: number; // Original number from the source
+      census?: CensusData; // The census record that provides the population estimate
+      source?: PopulationSourceCategory;
+    };
+    writing: {
+      // adjusted?: number; // The best estimate of the population speaking this language in this territory, based on the most recent data from censuses, language family locales, or other sources
+      percent?: number; // The percentage this population represents out of the total population of the territory, based on the best estimate
+      unadjusted?: number; // Original number from the source
+      // census?: CensusData;
+      // source?: PopulationSourceCategory;
+    };
+  };
+
   // Data computed from other references, particularly territories.tsv and censuses
-  populationAdjusted?: number; // Speaking population adjusted to latest territory population
-  populationSpeakingPercent?: number;
   literacyPercent?: number;
-  populationWriting?: number;
-  populationWritingPercent?: number;
-  populationCensus?: CensusData; // The census record that provides the population estimate
   censusRecords?: LocaleInCensus[]; // Maps census ID to population estimate
 }

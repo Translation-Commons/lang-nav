@@ -101,8 +101,8 @@ export function updateLanguagesPopulationFromLocale(territory: TerritoryData): v
   uniqueBy([...(territory?.locales ?? [])].sort(sortByPopulation), (l) => l.languageCode).forEach(
     (locale) => {
       const language = locale.language;
-      if (language == null || locale.populationAdjusted == null) return;
-      language.populationFromLocales = locale.populationAdjusted;
+      if (language == null || locale.pop.speaking.adjusted == null) return;
+      language.populationFromLocales = locale.pop.speaking.adjusted;
     },
   );
 }

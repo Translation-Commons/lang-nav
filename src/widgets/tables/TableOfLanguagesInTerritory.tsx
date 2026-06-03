@@ -68,7 +68,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           },
           {
             key: 'Population',
-            render: (loc) => loc.populationSpeaking,
+            render: (loc) => loc.pop.speaking.adjusted,
             valueType: TableValueType.Population,
             field: Field.Population,
           },
@@ -80,7 +80,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           },
           {
             key: 'Percent Within Territory',
-            render: (loc) => loc.populationSpeakingPercent,
+            render: (loc) => loc.pop.speaking.percent,
             valueType: TableValueType.Decimal,
             field: Field.PercentOfTerritoryPopulation,
           },

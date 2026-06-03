@@ -36,7 +36,7 @@ export function getTerritoryForEntity(object: ObjectData | undefined): Territory
 export function getCensusForEntity(object: ObjectData | undefined): CensusData | undefined {
   if (!object) return undefined;
   if (object.type === ObjectType.Census) return object;
-  if (object.type === ObjectType.Locale) return object.populationCensus;
+  if (object.type === ObjectType.Locale) return object.pop.speaking.census;
   return undefined;
 }
 

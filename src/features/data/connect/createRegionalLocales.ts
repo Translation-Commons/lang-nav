@@ -41,6 +41,10 @@ function createRegionalLocalesForTerritory(
         const newLocaleCode = getLocaleCode(loc, LocaleSeparator.Underscore, territory.ID);
         const newLocale = locs[newLocaleCode];
         if (newLocale == null) {
+          const percent =
+            loc.pop.speaking.unadjusted != null
+              ? (loc.pop.speaking.unadjusted * 100) / territory.population
+              : undefined;
           // It isn't found yet, create it
           locs[newLocaleCode] = {
             // Set a new locale code and territory code
@@ -62,23 +66,25 @@ function createRegionalLocalesForTerritory(
             variants: loc.variants != null ? [...loc.variants] : [], // dereference the array
 
             // Update the population
-            populationSpeaking: loc.populationSpeaking,
-            populationSpeakingPercent:
-              loc.populationSpeaking != null
-                ? (loc.populationSpeaking * 100) / territory.population
-                : undefined,
-            populationSource: PopulationSourceCategory.AggregatedFromTerritories,
+            pop: {
+              speaking: {
+                unadjusted: loc.pop.speaking.unadjusted,
+                percent,
+                source: PopulationSourceCategory.AggregatedFromTerritories,
+              },
+              writing: {},
+            },
 
             // Add stubs for required fields
             names: [],
             nameDisplay: newLocaleCode, // Will be computed later
           };
         } else {
-          if (loc.populationSpeaking != null) {
-            if (newLocale.populationSpeaking == null) newLocale.populationSpeaking = 0;
-            newLocale.populationSpeaking += loc.populationSpeaking || 0;
-            newLocale.populationSpeakingPercent =
-              (newLocale.populationSpeaking * 100) / territory.population;
+          if (loc.pop.speaking.unadjusted != null) {
+            if (newLocale.pop.speaking.unadjusted == null) newLocale.pop.speaking.unadjusted = 0;
+            newLocale.pop.speaking.unadjusted += loc.pop.speaking.unadjusted || 0;
+            newLocale.pop.speaking.percent =
+              (newLocale.pop.speaking.unadjusted * 100) / territory.population;
           }
         }
       });
@@ -90,9 +96,9 @@ function createRegionalLocalesForTerritory(
   // Save it to the territory
   territory.locales = Object.values(territoryLocales ?? {})
     // Avoid creating too many locale objects
-    .filter((loc) => (loc.populationSpeaking ?? 0) > 10)
+    .filter((loc) => (loc.pop.speaking.unadjusted ?? 0) > 10)
     // Don't use sortByPopulation because that uses the adjusted pop
-    .sort((a, b) => (b.populationSpeaking || 0) - (a.populationSpeaking || 0));
+    .sort((a, b) => (b.pop.speaking.unadjusted || 0) - (a.pop.speaking.unadjusted || 0));
 
   // Connect locale edges
   territory.locales.forEach((loc) => {

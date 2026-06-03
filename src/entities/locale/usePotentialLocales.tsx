@@ -67,22 +67,28 @@ function usePotentialLocales(
               territory: census.territory,
               territoryCode: census.isoRegionCode,
 
-              populationSource: PopulationSourceCategory.Official,
-              populationAdjusted: populationAdjusted,
-              populationSpeaking: populationEstimate,
-              populationSpeakingPercent: populationPercentInCountry,
-              populationCensus: census,
+              pop: {
+                speaking: {
+                  adjusted: populationAdjusted,
+                  unadjusted: populationEstimate,
+                  percent: populationPercentInCountry,
+                  source: PopulationSourceCategory.Official,
+                  census,
+                },
+                writing: {},
+              },
               censusRecords: [
                 { census, populationEstimate, populationPercent: populationPercentInCountry },
               ],
             };
           } else {
-            if ((missing[localeID].populationAdjusted ?? 0) < populationAdjusted) {
+            if ((missing[localeID].pop.speaking.adjusted ?? 0) < populationAdjusted) {
               // If we already have a locale but the population estimate is higher, update it
-              missing[localeID].populationSpeaking = populationEstimate;
-              missing[localeID].populationSpeakingPercent = populationPercentInCountry;
-              missing[localeID].populationAdjusted = populationAdjusted;
-              missing[localeID].populationCensus = census;
+              missing[localeID].pop.speaking.unadjusted = populationEstimate;
+              missing[localeID].pop.speaking.percent = populationPercentInCountry;
+              missing[localeID].pop.speaking.adjusted = populationAdjusted;
+              missing[localeID].pop.speaking.source = PopulationSourceCategory.Official;
+              missing[localeID].pop.speaking.census = census;
             }
             if (missing[localeID].censusRecords == null) missing[localeID].censusRecords = [];
             missing[localeID].censusRecords.push({
@@ -147,7 +153,7 @@ function partitionPotentialLocales(
   const localesSorted = localesOfTheSameLanguage.sort(sortByPopulation);
   const largestLocale = localesSorted.reduce(
     (max, locale) =>
-      (locale.populationAdjusted ?? 0) > (max.populationAdjusted ?? 0) ? locale : max,
+      (locale.pop.speaking.adjusted ?? 0) > (max.pop.speaking.adjusted ?? 0) ? locale : max,
     localesSorted[0],
   );
   // If the largest locale is from the census data (not in the regular input list) then suggest it as a locale here
