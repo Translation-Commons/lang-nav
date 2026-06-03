@@ -78,6 +78,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.VitalityEthnologueFine,
 
         Field.PopulationDirectlySourced,
+        Field.PopulationWriting,
         Field.Literacy,
         Field.PercentOfOverallLanguageSpeakers,
         Field.PercentOfTerritoryPopulation,

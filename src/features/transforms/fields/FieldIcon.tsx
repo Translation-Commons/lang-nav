@@ -33,6 +33,7 @@ import {
   ScrollTextIcon,
   TextIcon,
   UserCheckIcon,
+  UserPenIcon,
   UsersIcon,
   WholeWordIcon,
 } from 'lucide-react';
@@ -137,6 +138,8 @@ export function getFieldIcon(field: Field): LucideIcon {
       return UsersIcon;
     case Field.PopulationDirectlySourced:
       return UserCheckIcon;
+    case Field.PopulationWriting:
+      return UserPenIcon;
     case Field.PopulationOfDescendants:
       return BabyIcon;
     case Field.PercentOfTerritoryPopulation:

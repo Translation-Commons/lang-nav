@@ -71,6 +71,7 @@ export function getFieldGroup(field: Field): FieldGroup {
       return FieldGroup.Quantity;
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
       return FieldGroup.Quantity; // Population
     case Field.PercentOfTerritoryPopulation:
