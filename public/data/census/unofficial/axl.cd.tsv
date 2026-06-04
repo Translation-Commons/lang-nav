@@ -9,7 +9,7 @@
 #population	42,200,000						
 #populationSource	The page contains many population estimates (70,330,427 and 42,200,000) but 42.2million seems to be the reference in the Languages section						
 ### Data Constraints ###							
-#quantity	count					percent	
+#quantity	count					percent	percent
 ### Creator ###							
 #collectorType	Secondary						
 #author	Jacques LeClerc						

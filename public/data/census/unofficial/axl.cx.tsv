@@ -7,8 +7,8 @@
 #acquisitionOrder			L1	
 #domain			Home	
 ### Population Surveyed ###				
-#population	1692	1508	1508	
-#responsesPerIndividual		1	1	
+#population	1508			
+#responsesPerIndividual			1	
 ### Data Constraints ###				
 #geographicScope	Main Island			
 #age	0+			

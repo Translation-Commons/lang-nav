@@ -3,7 +3,7 @@
 #isoRegionCode	NO	 		
 #yearCollected	2021			
 ### Language Criteria ###				
-#language Use		Ethnicity	Speaks	Writes
+#languageUse		Ethnicity	Speaks	Writes
 #acquisitionOrder		L1	L1	
 #domain		Home	Home	
 ### Population Surveyed ###				
@@ -30,8 +30,8 @@ nor/nno	Nynorsk			17.50%
 sme	Northern Sámi	33000	15000	
 sms	Skolt Sami		100	
 smj	Lule Sami		500	
-sje	Pite Sami		extinct	
-sju	Um Sami		extinct	
+sje	Pite Sami		0	
+sju	Um Sami		0	
 sma	South Sami		300	
 pol	Polish	118,000		
 lit	Lithuanian	49,000		
