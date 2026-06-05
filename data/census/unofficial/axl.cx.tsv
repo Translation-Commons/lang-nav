@@ -1,0 +1,35 @@
+#codeDisplay		#original french names	axl.cx.eth	axl.cx.spoken
+#nameDisplay			Christmas Island 2001 Ethnicity	Christmas Island 2001 Spoken
+#isoRegionCode	CX			
+#yearCollected	2001			
+### Language Criteria ###				
+#languageUse			Ethnicity	Speaks
+#acquisitionOrder			L1	
+#domain			Home	
+### Population Surveyed ###				
+#population	1508			
+#responsesPerIndividual			1	
+### Data Constraints ###				
+#geographicScope	Main Island			
+#age	0+			
+#nationality	residents			
+#residenceBasis	de facto			
+#quantity			count	percent
+### Creator ###				
+#collectorType	Secondary			
+#collectorName	Australian Bureau of Statistics			
+#collectorNameShort	ABS			
+#presentedBy	AXL			
+### Source Document ###				
+#url	https://www.axl.cefan.ulaval.ca/pacifique/christmas-ile.htm			
+#tableName	Tableau 2.2 — Données démolinguistiques (Île Christmas)			
+#datePublished	2024-01-06			
+#documentName	Île Christmas — AXL/CEFAN			
+Language Code	Groupe ethnique	Langue maternelle	Population	
+zho/cmn	#Chinois (mandarins)	chinois mandarin	906	61
+msa/zlm	#Malais	malais	378	23.4
+eng	#Anglo-Australiens	anglais	150	12
+eng	#Européens	anglais	30	
+hin/urd	#Indo-Pakistanais	hindi-ourdou	26	
+msa/jav	#Javanais	javanais	18	
+	Total		1508	

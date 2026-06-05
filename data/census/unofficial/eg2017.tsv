@@ -1,0 +1,23 @@
+#codeDisplay		eg2017
+#nameDisplay	Egypt	
+#isoRegionCode	EG	
+#yearCollected	2017	
+#languageUse	Speaks	
+#proficiency	Fluent	
+#acquisitionOrder	L1	
+#population	103,696,057	
+#populationSource	https://www.worldometers.info/world-population/egypt-population/	
+#responsesPerIndividual	1	
+#quantity		percent
+#collectorType	Secondary	
+#presentedBy	WorldAtlas	
+#url	https://www.worldatlas.com/articles/languages-spoken-in-egypt.html	
+#datePublished	2017-04-25	
+Language Code	Language	
+ara/arz	Egyptian Arabic	68
+ara/aec	Sa'idi Arabic	29
+ara/arb	Arabic	1.6
+ara/apd	Sudanese Arabic	0.6
+rmt	Domari	0.3
+fia	Nobiin	0.3
+avl	Bedawi	0.15
