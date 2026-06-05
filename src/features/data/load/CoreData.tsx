@@ -27,6 +27,10 @@ import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTerritories } from './entities/loadTerritories';
 import { loadWritingSystems } from './entities/loadWritingSystems';
 import {
+  applyCombinedFamilyOverrides,
+  loadCombinedFamilyOverrides,
+} from './extra_entities/CombinedFamilyOverrides';
+import {
   addGlottologLanguages,
   loadGlottocodeToISO,
   loadGlottologLanguages,
@@ -94,6 +98,7 @@ export function useCoreData(): {
       ethnologueLangs,
       glottologImport,
       glottocodeToISO,
+      combinedFamilyOverrides,
       territories,
       locales,
       writingSystems,
@@ -111,6 +116,7 @@ export function useCoreData(): {
       loadEthnologueLanguages(),
       loadGlottologLanguages(),
       loadGlottocodeToISO(),
+      loadCombinedFamilyOverrides(),
       loadTerritories(),
       loadLocales(),
       loadWritingSystems(),
@@ -143,6 +149,7 @@ export function useCoreData(): {
     addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
     addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], glottocodeToISO || {});
+    applyCombinedFamilyOverrides(languagesBySource, combinedFamilyOverrides || []);
     addCLDRLanguageDetails(languagesBySource);
     addIANAVariantLocales(languagesBySource.BCP, locales, variants);
 
