@@ -18,5 +18,7 @@ ru2020
 sg
 us_asc
 us2023
+vi
 xk
 yt
+zm
