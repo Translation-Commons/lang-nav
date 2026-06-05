@@ -1,0 +1,158 @@
+#codeDisplay		zm2022_T1.0
+#nameDisplay		Zambia 2022
+#isoRegionCode	ZM	
+#yearCollected		2022
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		Any
+### Population Surveyed ###		
+#population		18,292,402
+#populationSurveyed		18,292,402
+#populationWithPositiveResponses		17,183,422
+#sampleRate		1
+#responsesPerIndividual		1
+### Data Constraints ###		
+#geographicScope		whole country
+#age		0+
+#nationality		residents
+#languagesIncluded		All
+#residenceBasis		de facto
+#quantity		count
+### Creator ###		
+#collectorType		Government
+#collectorName		Zambia Statistics Agency
+#collectorNameShort		ZamStats
+#author		Sheila S. Mudenda
+### Source Document ###		
+#url		https://www.zamstats.gov.zm/wp-content/uploads/2026/05/Languages-Descriptive-Tables.pdf
+#datePublished		2023
+#dateAccessed		2026-05-12
+#documentName		2022 Census of Population and Housing – Language Descriptive Tables
+#sectionName		Series C1 – Language Descriptive Tables
+#tableName		Table C1.0: Population (de facto) by the widely spoken language of communication
+#columnName		Total population by language (Zambia Total column)
+#citation		Zambia Statistics Agency. 2022 Census of Population and Housing, Series C1: Language Descriptive Tables, Table C1.0.
+#notes		Data represents the main language of communication (exclusive response). Each individual is assigned one primary language. Data is reported as population counts using de facto enumeration.
+Language Code	Language	Population
+	#Language Group A (Northern)	
+auh	Aushi	107,325
+bem/chis1242	Chishinga	31,845
+bem/kabe1244	Kabende	32,196
+bem/muku1240	Mukulu	557
+bem/ngum1254	Ngumbo	21,524
+bem/unga1253	Unga	21,391
+bem	Bemba	5,808,759
+bwc	Bwile	73,703
+bem/luun1238	Lunda (Luapula)	14,191
+tap/shil1264	Shila	8,347
+tap	Tabwa	20,838
+auh	Ushi	32,224
+	#Language Group A (borders Eastern & Northern)	
+kdn	Kunda	40,944
+leb/bisa1264	Bisa	139,208
+kdn	Chikunda	29,276
+	#Language Group A (borders Central & Eastern)	
+leb/lala1265	Lala	244,179
+leb/ambo1248	Ambo	8,988
+leb/luan1259	Luano	670
+leb/swak1238	Swaka	21,178
+	#Language Group A (borders Central & Copperbelt)	
+lam	Lamba	256,132
+lam/lima1247	Lima	700
+	#Language Group B (North-Western)	
+kqn	Kaonde	385,665
+	#Language Group C1 (Western)	
+loz	Lozi	920,876
+lyn	Luyana	751
+	#Language Group C2 (Western A)	
+lyn/kwan1274	Kwandi	763
+lyn/kwan1275	Kwangwa	1,939
+mxo	Mbowe	660
+lyn/mbum1255	Mbumi	94
+	Wina	67
+	#Language Group C2 (Western B)	
+sie	Simaa	815
+sie/imil1242	Imilangu	2,958
+sie/mwen1238	Mwenyi	4,592
+nye	Nyengo	21,192
+sie/mako1253	Koma	6,506
+sie/liyu1238	Liyuwa	5,011
+sie/mulo1238	Mulonga	3,395
+	#Language Group C2 (Western C)	
+mho	Mashi	28,574
+mhw	Mbukushu	6,628
+	#Language Group D (North-Western)	
+lun	Lunda (North-Western)	363,238
+lun/ndem1248	Ndembu	425
+	#Language Group E (Borders North-Western & Western)	
+lue	Luvale	274,086
+lch	Luchazi	46,374
+mck	Mbunda	157,491
+	#Language Group E (North-Western)	
+cjk	Chokwe	30,838
+	#Language Group F (Northern)	
+mgr/mamb1297	Mambwe	208,436
+mgr/rung1256	Lungu	76,652
+	#Language Group F (borders Eastern & Northern)	
+mwn	Namwanga	204,400
+mwn/iwaa1242	Iwa	232
+mwn/tamb1252	Tambo	2,100
+lai	Lambya	10,986
+	#Language Group G (borders Eastern & Northern)	
+nih	Nyiha	11,348
+nih/wand1265	Wandya	85
+	#Language Group H (North-Western & borders Southern & Western)	
+nka	Nkoya	62,072
+	Lukolwe (Mbwela)	545
+nka/lush1250	Lushangi	226
+nka/mash1265	Mashasha	173
+	#Language Group I (Eastern)	
+nse	Nsenga	450,334
+xnj	Ngoni	131,030
+	#Language Group J (Eastern)	
+nya/chew1246	Chewa	1,140,377
+nya/nucl1395	Nyanja	1,953,516
+	#Language Group K (Sourthern & borders Southern & Western)	
+toi	Tonga	2,182,528
+dov/toka1243	Toka	4,568
+ttl	Totela	1,073
+dov/leya1238	Toka-Leya	77,473
+sbs	Subiya	225
+leh/twaa1238	Twa	305
+fwe	Fwe	8,334
+	#Language Group K (borders Central & Southern)	
+ilb	Ila	142,640
+ilb/lund1265	Lundwe	739
+ilb/lumb1248	Lumbu	474
+shq	Sala	34,260
+ilb/mis	Gowa	17,883
+	#Language Group K (Central)	
+leh	Lenje	193,747
+sby	Soli	40,027
+	#Language Group L (Eastern)	
+tum	Tumbuka	419,746
+tum/fung1246	Fungwe	1,182
+tum/seng1277	Senga	126,972
+tum/yomb1245	Yombe	91
+	#Official Language	
+eng	English	322,957
+	#Other Language Groups	
+mul	Other Language	2,263
+	#Babies not able to speak	
+mul	#Babies not yet able to speak	1,108,980
+	#Foreign Languages	
+mul	American	99
+mul	European	296
+fra	French	1,605
+mul	Indian	3,539
+mul	Asian	2,222
+zho/cmn	Mandarin	170
+mul	Oceanian	62
+swa/swc	Swahili Congo	17,132
+swa/swh	Swahili Tanzania	2,676
+	#Sign Language	
+zsl	Sign Language	2,433
+	#Unable to Speak-Hearing Impaired and Dumb (Not Applicable)	
+zxx	Unable to Speak-Hearing Impaired and Dumb (Not Applicable)	107783
+	#Other African Language Groups	
+mul	Other African	38,293
