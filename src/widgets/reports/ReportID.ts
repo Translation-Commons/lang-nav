@@ -7,6 +7,7 @@ enum ReportID {
   LanguagesDubious,
   LanguageDescendants,
   LanguagePaths,
+  LanguageScopeIssues,
   LocaleCitationCompleteness,
   LocaleIndigeneity,
   LocalesPotential,
