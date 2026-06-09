@@ -19,6 +19,7 @@ type Props = {
   drawableObjects: DrawableData[];
   openCard: (obj: DrawableData, x: number, y: number) => void;
   scalar: number;
+  zoomFactor: number;
   coloringFunctions: ColoringFunctions;
 };
 
@@ -26,6 +27,7 @@ const MapCentroids: React.FC<Props> = ({
   drawableObjects,
   openCard,
   scalar,
+  zoomFactor,
   coloringFunctions: { getColor, colorBy },
 }) => {
   const { scaleBy, objectType } = usePageParams();
@@ -78,6 +80,7 @@ const MapCentroids: React.FC<Props> = ({
           color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
           object={obj}
           scale={scalar * getScale(obj)}
+          zoomFactor={zoomFactor}
           openCard={openCard}
           onMouseEnter={buildOnMouseEnter(obj)}
           onMouseLeave={onMouseLeaveTriggeringElement}
@@ -91,6 +94,7 @@ type NodeProps = {
   color?: string;
   object: DrawableData;
   scale: number;
+  zoomFactor: number;
   openCard: (obj: DrawableData, x: number, y: number) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
@@ -100,6 +104,7 @@ const ObjectNode: React.FC<NodeProps> = ({
   object,
   color,
   scale,
+  zoomFactor,
   openCard,
   onMouseEnter,
   onMouseLeave,
@@ -115,18 +120,19 @@ const ObjectNode: React.FC<NodeProps> = ({
   const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
 
   return (
-    <g transform={`translate(${x * 178.5}, ${y * -90})`}>
+    <g transform={`translate(${x * 178.5}, ${y * -90}) scale(${1 / zoomFactor})`}>
       {showCircle && (
         <Circle
           color={color}
           object={object}
           scale={scale}
+          zoomFactor={zoomFactor}
           openCard={openCard}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />
       )}
-      <Text object={object} scale={scale} showCircle={showCircle} />
+      <Text object={object} scale={scale} showCircle={showCircle} zoomFactor={zoomFactor} />
     </g>
   );
 };
@@ -140,7 +146,8 @@ const Circle: React.FC<NodeProps> = ({
   onMouseLeave,
 }) => (
   <circle
-    r={scale + 1}
+    r={scale + 1.5}
+    strokeWidth={0.4}
     fill={color ?? 'transparent'}
     stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
     onClick={(e) => {
@@ -156,17 +163,19 @@ type TextProps = {
   object: DrawableData;
   scale: number;
   showCircle: boolean;
+  zoomFactor: number;
 };
 
-const Text: React.FC<TextProps> = ({ object, scale, showCircle }) => {
+const Text: React.FC<TextProps> = ({ object, scale, showCircle, zoomFactor }) => {
   const { fieldFocus } = usePageParams();
 
   if (fieldFocus === Field.None) return null;
+  if (zoomFactor < 1.5) return null;
 
   return (
     <text
-      y={showCircle ? 2 : 0}
-      fontSize={scale / 4 + 'em'}
+      y={showCircle ? scale + 2.5 : 0}
+      fontSize={scale / 3 + 'em'}
       textAnchor="middle"
       alignmentBaseline={showCircle ? 'hanging' : 'middle'}
     >
