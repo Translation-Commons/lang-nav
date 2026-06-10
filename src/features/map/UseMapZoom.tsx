@@ -25,6 +25,7 @@ type UseMapZoomOptions = {
   mapHeight: number;
   /** Maximum zoom multiplier (default: 8) */
   maxZoomMultiplier?: number;
+  onZoom?: (zoomFactor: number) => void;
 };
 
 /** Zoom control handlers - shared with ZoomControls component */
@@ -68,6 +69,7 @@ export const useMapZoom = ({
   mapWidth,
   mapHeight,
   maxZoomMultiplier = 8,
+  onZoom,
 }: UseMapZoomOptions): UseMapZoomReturn => {
   // ---------------------------------------------------------------------------
   // REFS
@@ -138,6 +140,9 @@ export const useMapZoom = ({
         // Apply CSS transform directly to the content element
         content.style.transform = `translate(${transform.x}px, ${transform.y}px) scale(${transform.k})`;
         content.style.transformOrigin = '0 0';
+
+        const baseScale = container.clientWidth / mapWidth;
+        onZoom?.(transform.k / baseScale);
 
         // Update visibleRange based on current transform
         const containerWidth = container.clientWidth;

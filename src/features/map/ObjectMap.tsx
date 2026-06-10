@@ -36,9 +36,12 @@ type FloatingCard = {
 const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
 
+  const [zoomFactor, setZoomFactor] = useState(1);
+
   const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
     mapHeight,
+    onZoom: setZoomFactor,
   });
 
   const { colorBy, objectType } = usePageParams();
@@ -168,6 +171,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
             drawableObjects={drawableObjects}
             openCard={openCard}
             scalar={1200 / maxWidth}
+            zoomFactor={zoomFactor}
             coloringFunctions={coloringFunctions}
           />
           {floatingCards.map((card) => (
