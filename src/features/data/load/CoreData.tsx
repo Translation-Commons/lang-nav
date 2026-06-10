@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
   addIANAVariantLocales,
@@ -173,9 +173,8 @@ export function useCoreData(): {
     });
   }
 
-  return {
-    loadCoreData,
-    coreData: {
+  const coreData = useMemo(
+    () => ({
       allLanguoids,
       locales: Object.values(objects).filter((o): o is LocaleData => o.type === ObjectType.Locale),
       territories: Object.values(objects).filter(
@@ -195,6 +194,12 @@ export function useCoreData(): {
         (o): o is OrganizationData => o.type === ObjectType.Org,
       ),
       objects,
-    },
+    }),
+    [allLanguoids, objects, censuses],
+  );
+
+  return {
+    loadCoreData,
+    coreData,
   };
 }

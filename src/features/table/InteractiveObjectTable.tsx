@@ -1,16 +1,12 @@
-import { useMemo } from 'react';
-
 import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
-import useFilters from '@features/transforms/filtering/useFilters';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
+import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { useRenderCount } from '@shared/hooks/useRenderCount';
+
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
-import { getFilterByVitality, getScopeFilter } from '../transforms/filtering/filter';
-import { getSortFunction } from '../transforms/sorting/sort';
 
 import BaseObjectTable from './BaseObjectTable';
 import TableColumn from './TableColumn';
@@ -34,36 +30,19 @@ function InteractiveObjectTable<T extends ObjectData>({
   shouldFilterUsingSearchBar = true,
   tableID,
 }: Props<T>) {
-  const sortFunction = getSortFunction();
-  const filters = useFilters();
-  const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByConnections = getFilterByConnections();
-  const filterByVitality = getFilterByVitality();
-  const filterByPopulation = filters.Population;
-  const scopeFilter = getScopeFilter();
   const { getCurrentObjects } = usePagination<T>();
+  const objectsFilteredAndSorted = useFilteredObjects({
+    useScope: true,
+    useSubstring: shouldFilterUsingSearchBar,
+    useConnections: true,
+    useVitality: true,
+    usePopulation: true,
+    inputObjects: objects,
+  }).filteredObjects;
+  useRenderCount('InteractiveObjectTable');
+  const currentObjects = getCurrentObjects(objectsFilteredAndSorted);
 
   const visibilityModule = useColumnVisibility(columns, tableID);
-
-  // TODO don't filter objects for an unrelated page search on a different object type
-  const objectsFilteredAndSorted = useMemo(() => {
-    return objects
-      .filter(scopeFilter)
-      .filter(filterByVitality)
-      .filter(filterByConnections)
-      .filter(filterBySubstring)
-      .filter(filterByPopulation)
-      .sort(sortFunction);
-  }, [
-    filterByConnections,
-    filterByPopulation,
-    filterBySubstring,
-    filterByVitality,
-    objects,
-    scopeFilter,
-    sortFunction,
-  ]);
-  const currentObjects = getCurrentObjects(objectsFilteredAndSorted);
 
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
