@@ -1,12 +1,12 @@
 import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import ObjectMap from '@features/map/ObjectMap';
+import ObjectMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
@@ -57,7 +57,7 @@ type MapsProps = {
   updatePageParams: (newParams: PageParamsOptional) => void;
 };
 function Maps({ lang, updatePageParams }: MapsProps) {
-  const descendants = useFilteredObjects({}).filteredObjects.filter(
+  const descendants = useFilteredEntities({}).filteredEntities.filter(
     (l) => l.type == ObjectType.Language && l.latitude && l.longitude,
   );
   return (
@@ -68,7 +68,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
           Glottolog. This could be the centroid of the area where the language is spoken, or a
           significant location such as a major city where the language has a presence. It does not
           represent all the locations where the language is spoken.
-          <ObjectMap objects={[lang]} maxWidth={400} />
+          <ObjectMap entities={[lang]} maxWidth={400} />
         </>
       ) : null}
       {descendants.length > 0 && (
@@ -93,7 +93,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
               See the full map in explore panel
             </HoverableButton>
           </div>
-          <ObjectMap objects={descendants} maxWidth={1000} />
+          <ObjectMap entities={descendants} maxWidth={1000} />
         </>
       )}
     </>

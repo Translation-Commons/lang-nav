@@ -13,27 +13,27 @@ import WritingSystemsInTerritoryCard from '@entities/writingsystem/WritingSystem
 import DrawableData from './DrawableData';
 
 const MapCard: React.FC<{
-  drawnObject: DrawableData;
+  drawnEntity: DrawableData;
   objectType: ObjectType;
   onClose: () => void;
-}> = ({ drawnObject, objectType, onClose }) => {
+}> = ({ drawnEntity, objectType, onClose }) => {
   const { updatePageParams } = usePageParams();
 
   const openDetails = () =>
     updatePageParams(
       objectType === ObjectType.Census || objectType === ObjectType.WritingSystem
-        ? { territoryFilter: drawnObject.ID, view: View.Table }
-        : { objectID: drawnObject.ID },
+        ? { territoryFilter: drawnEntity.ID, view: View.Table }
+        : { objectID: drawnEntity.ID },
     );
 
   let content: React.ReactNode;
-  if (objectType === ObjectType.Census && drawnObject.type === ObjectType.Territory)
-    content = <CensusesInTerritory territory={drawnObject} />;
-  else if (objectType === ObjectType.Locale && drawnObject.type === ObjectType.Territory)
-    content = <LocalesInTerritoryCard territory={drawnObject} />;
-  else if (objectType === ObjectType.WritingSystem && drawnObject.type === ObjectType.Territory)
-    content = <WritingSystemsInTerritoryCard territory={drawnObject} />;
-  else content = <ObjectCard object={drawnObject} />;
+  if (objectType === ObjectType.Census && drawnEntity.type === ObjectType.Territory)
+    content = <CensusesInTerritory territory={drawnEntity} />;
+  else if (objectType === ObjectType.Locale && drawnEntity.type === ObjectType.Territory)
+    content = <LocalesInTerritoryCard territory={drawnEntity} />;
+  else if (objectType === ObjectType.WritingSystem && drawnEntity.type === ObjectType.Territory)
+    content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
+  else content = <ObjectCard object={drawnEntity} />;
 
   return (
     <div

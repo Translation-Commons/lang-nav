@@ -5,7 +5,7 @@ import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { SearchableField } from '@features/params/PageParamTypes';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringFilterOnQuery';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -39,8 +39,8 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
   const lines = fileInput.split('\n');
   const { endOfMetadataLine } = parseCensusMetadata(lines, 'census');
   const { getLanguage, languagesInSelectedSource } = useDataContext();
-  const { filteredObjects: languageEnts } = useFilteredObjects({
-    inputObjects: languagesInSelectedSource,
+  const { filteredEntities: languageEnts } = useFilteredEntities({
+    inputEntities: languagesInSelectedSource,
   });
   const findLanguage = useCallback(
     (searchString: string) => {

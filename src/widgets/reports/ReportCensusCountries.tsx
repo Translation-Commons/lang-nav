@@ -3,7 +3,7 @@ import React from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 
@@ -16,9 +16,9 @@ const ReportCensusCountries: React.FC = () => {
   const { territories } = useDataContext();
 
   return (
-    <InteractiveObjectTable<TerritoryData>
+    <InteractiveEntityTable<TerritoryData>
       tableID={TableID.CountriesWithCensuses}
-      objects={territories}
+      entities={territories}
       columns={[
         CodeColumn,
         NameColumn,

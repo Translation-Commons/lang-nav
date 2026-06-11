@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
-
-import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import getWritingSystemColumns from './columns/WritingSystemColumns';
 
@@ -13,9 +11,9 @@ const WritingSystemTable: React.FC = () => {
   const columns = getWritingSystemColumns();
 
   return (
-    <InteractiveObjectTable<WritingSystemData>
+    <InteractiveEntityTable
       tableID={TableID.WritingSystems}
-      objects={writingSystems}
+      entities={writingSystems}
       columns={columns}
     />
   );

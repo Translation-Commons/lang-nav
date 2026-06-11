@@ -1,12 +1,12 @@
 import React from 'react';
 
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 const ResultCount: React.FC = () => {
-  const { filteredObjects } = useFilteredObjects({});
+  const { filteredEntities } = useFilteredEntities({});
   return (
     <span style={{ color: 'var(--color-text)', whiteSpace: 'nowrap' }}>
-      {filteredObjects.length.toLocaleString()} Results{' '}
+      {filteredEntities.length.toLocaleString()} Results{' '}
     </span>
   );
 };

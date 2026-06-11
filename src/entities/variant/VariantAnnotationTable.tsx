@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { SearchableField } from '@features/params/PageParamTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
 import { getLanguagesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
@@ -90,8 +90,8 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
   );
 
   return (
-    <InteractiveObjectTable
-      objects={variants}
+    <InteractiveEntityTable
+      entities={variants}
       tableID={TableID.VariantAnnotation}
       columns={columns}
     />

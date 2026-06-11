@@ -14,7 +14,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import ObjectTable from '../InteractiveObjectTable';
+import EntityTable from '../InteractiveEntityTable';
 import TableColumn from '../TableColumn';
 import TableID from '../TableID';
 
@@ -48,7 +48,7 @@ vi.mock('@shared/hooks/useClickOutside', () => ({
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
 
-describe('InteractiveObjectTable', () => {
+describe('InteractiveEntityTable', () => {
   const mockObjects: ObjectData[] = [
     {
       ID: '1',
@@ -105,10 +105,10 @@ describe('InteractiveObjectTable', () => {
   });
 
   // Helper function to eliminate render wrapper duplication
-  const renderObjectTable = (props = {}) => {
+  const renderEntityTable = (props = {}) => {
     return render(
-      <ObjectTable
-        objects={mockObjects}
+      <EntityTable
+        entities={mockObjects}
         columns={mockColumns}
         tableID={TableID.Territories}
         {...props}
@@ -117,10 +117,10 @@ describe('InteractiveObjectTable', () => {
   };
 
   // Helper function to eliminate rerender duplication
-  const rerenderObjectTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
+  const rerenderEntityTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
     rerender(
-      <ObjectTable
-        objects={mockObjects}
+      <EntityTable
+        entities={mockObjects}
         columns={mockColumns}
         tableID={TableID.Territories}
         {...props}
@@ -136,7 +136,7 @@ describe('InteractiveObjectTable', () => {
   };
 
   it('renders table with all columns and data', () => {
-    renderObjectTable();
+    renderEntityTable();
 
     // Check column headers
     expectColumnHeaders();
@@ -161,7 +161,7 @@ describe('InteractiveObjectTable', () => {
     vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
     vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
 
-    renderObjectTable();
+    renderEntityTable();
 
     expect(mockSubstringFilter).toHaveBeenCalled();
     expect(mockConnectionsFilter).toHaveBeenCalled();
@@ -173,7 +173,7 @@ describe('InteractiveObjectTable', () => {
     const mockSort = vi.fn(() => 0);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(mockSort);
 
-    renderObjectTable();
+    renderEntityTable();
 
     expect(mockSort).toHaveBeenCalled();
   });
@@ -181,7 +181,7 @@ describe('InteractiveObjectTable', () => {
   it('handles filtering that excludes all objects', () => {
     vi.mocked(getFilterBySubstring).mockReturnValue(() => false);
 
-    renderObjectTable();
+    renderEntityTable();
 
     mockObjects.forEach((obj) => {
       expect(screen.queryByText(obj.nameDisplay)).not.toBeInTheDocument();
@@ -191,7 +191,7 @@ describe('InteractiveObjectTable', () => {
   it('applies pagination to filtered results', () => {
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ limit: 1, page: 2 }));
 
-    renderObjectTable();
+    renderEntityTable();
 
     expect(screen.queryByRole('cell', { name: 'Test Territory 1' })).not.toBeInTheDocument();
     expect(screen.getByRole('cell', { name: 'Test Territory 2' })).toBeInTheDocument();
@@ -203,7 +203,7 @@ describe('InteractiveObjectTable', () => {
       population: 1234567,
     };
 
-    renderObjectTable({ objects: [numericObject] });
+    renderEntityTable({ objects: [numericObject] });
 
     expect(screen.getByRole('cell', { name: '1,234,567' })).toBeInTheDocument();
   });
@@ -212,7 +212,7 @@ describe('InteractiveObjectTable', () => {
     const mockSubstringFilter = vi.fn();
     vi.mocked(getFilterBySubstring).mockReturnValue(mockSubstringFilter);
 
-    renderObjectTable({ shouldFilterUsingSearchBar: false });
+    renderEntityTable({ shouldFilterUsingSearchBar: false });
 
     expect(mockSubstringFilter).not.toHaveBeenCalled();
     mockObjects.forEach((obj) => {
@@ -221,7 +221,7 @@ describe('InteractiveObjectTable', () => {
   });
 
   it('handles column visibility toggling', async () => {
-    const { rerender } = renderObjectTable();
+    const { rerender } = renderEntityTable();
 
     // Initially, both columns should be visible
     expectColumnHeaders();
@@ -242,7 +242,7 @@ describe('InteractiveObjectTable', () => {
     );
 
     // Force rerender to ensure state updates are applied
-    rerenderObjectTable(rerender);
+    rerenderEntityTable(rerender);
 
     // Verify only Name column is visible
     expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
@@ -259,7 +259,7 @@ describe('InteractiveObjectTable', () => {
     );
 
     // Force rerender to ensure state updates are applied
-    rerenderObjectTable(rerender);
+    rerenderEntityTable(rerender);
 
     // Verify both columns are visible again
     expectColumnHeaders();
@@ -271,7 +271,7 @@ describe('InteractiveObjectTable', () => {
     });
 
     // Force rerender to ensure state updates are applied
-    rerenderObjectTable(rerender);
+    rerenderEntityTable(rerender);
 
     // Both columns should still be visible
     expectColumnHeaders();

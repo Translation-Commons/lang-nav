@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -13,9 +13,9 @@ const LanguageTable: React.FC = () => {
   const columns = useMemo(() => getLanguageColumns(), []);
 
   return (
-    <InteractiveObjectTable<LanguageData>
+    <InteractiveEntityTable<LanguageData>
       tableID={TableID.Languages}
-      objects={languagesInSelectedSource}
+      entities={languagesInSelectedSource}
       columns={columns}
     />
   );

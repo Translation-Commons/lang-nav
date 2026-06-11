@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
@@ -13,9 +13,9 @@ const OrganizationTable: React.FC = () => {
   const columns = useMemo(() => getOrganizationColumns(), []);
 
   return (
-    <InteractiveObjectTable<OrganizationData>
+    <InteractiveEntityTable<OrganizationData>
       tableID={TableID.Organizations}
-      objects={organizations}
+      entities={organizations}
       columns={columns}
     />
   );

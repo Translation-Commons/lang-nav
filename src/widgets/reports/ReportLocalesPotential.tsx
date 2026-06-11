@@ -6,7 +6,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
 import usePageParams from '@features/params/usePageParams';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
@@ -147,9 +147,9 @@ const PotentialLocalesTable: React.FC<{
   showRelatedLocales?: boolean;
 }> = ({ locales }) => {
   return (
-    <InteractiveObjectTable<LocaleData>
+    <InteractiveEntityTable<LocaleData>
       tableID={TableID.PotentialLocales}
-      objects={locales}
+      entities={locales}
       columns={[
         {
           key: 'Potential Locale',

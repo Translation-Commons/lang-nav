@@ -11,13 +11,13 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import DrawableData from './DrawableData';
 
 type Props = {
-  drawableObjects: DrawableData[];
+  drawableEntities: DrawableData[];
   coloringFunctions: ColoringFunctions;
   openCard: (obj: DrawableData, x: number, y: number) => void;
 };
 
 const MapTerritories: React.FC<Props> = ({
-  drawableObjects,
+  drawableEntities,
   coloringFunctions: { colorBy, getColor },
   openCard,
 }) => {
@@ -27,8 +27,8 @@ const MapTerritories: React.FC<Props> = ({
   const { territories } = useDataContext();
 
   const isTerritoryInList = useCallback(
-    (iso: string) => drawableObjects.some((obj) => obj.ID === iso),
-    [drawableObjects],
+    (iso: string) => drawableEntities.some((obj) => obj.ID === iso),
+    [drawableEntities],
   );
 
   function forEachTerritory(func: (territory: TerritoryData, element: SVGElement) => void) {

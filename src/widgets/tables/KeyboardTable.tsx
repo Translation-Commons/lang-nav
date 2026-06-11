@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
@@ -13,9 +13,9 @@ const KeyboardTable: React.FC = () => {
   const columns = useMemo(() => getKeyboardColumns(), []);
 
   return (
-    <InteractiveObjectTable<KeyboardData>
+    <InteractiveEntityTable<KeyboardData>
       tableID={TableID.Keyboards}
-      objects={keyboards}
+      entities={keyboards}
       columns={columns}
     />
   );

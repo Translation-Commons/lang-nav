@@ -22,18 +22,18 @@ import useMapZoom from './UseMapZoom';
 import ZoomControls from './ZoomControls';
 
 type Props = {
-  objects: ObjectData[];
+  entities: ObjectData[];
   maxWidth?: number;
 };
 
 type FloatingCard = {
   id: string;
-  object: DrawableData;
+  entity: DrawableData;
   x: number;
   y: number;
 };
 
-const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
+const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
 
   const [zoomFactor, setZoomFactor] = useState(1);
@@ -55,13 +55,13 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
     setMapScale(rect.width / MAP_INTERNAL_WIDTH);
   }, [contentRef]);
 
-  const drawableObjects = useMemo(() => {
+  const drawableEntities = useMemo(() => {
     if (objectType === ObjectType.Language) {
-      return objects.filter((obj) => obj.type === ObjectType.Language) as LanguageData[];
+      return entities.filter((obj) => obj.type === ObjectType.Language) as LanguageData[];
     }
 
     return uniqueBy(
-      objects
+      entities
         .flatMap((obj) => {
           if (obj.type === ObjectType.Territory) return obj;
           if (obj.type === ObjectType.Locale) return obj.territory;
@@ -73,12 +73,12 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
         .filter((t): t is TerritoryData => t !== undefined),
       (t) => t.ID,
     ) as TerritoryData[];
-  }, [objectType, objects]);
+  }, [objectType, entities]);
 
-  const coloringFunctions = useColors({ objects: drawableObjects });
+  const coloringFunctions = useColors({ objects: drawableEntities });
 
   const openCard = useCallback(
-    (object: DrawableData, clientX: number, clientY: number) => {
+    (entity: DrawableData, clientX: number, clientY: number) => {
       const rect = contentRef.current?.getBoundingClientRect();
       if (!rect) return;
 
@@ -89,8 +89,8 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
       const y = ((clientY - rect.top) / rect.height) * mapHeight;
 
       setFloatingCards((prev) => [
-        ...prev.filter((card) => card.id !== object.ID),
-        { id: object.ID, object, x, y },
+        ...prev.filter((card) => card.id !== entity.ID),
+        { id: entity.ID, entity, x, y },
       ]);
     },
     [contentRef, mapHeight],
@@ -161,14 +161,14 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
 
           {objectType !== ObjectType.Language && (
             <MapTerritories
-              drawableObjects={drawableObjects}
+              drawableEntities={drawableEntities}
               openCard={openCard}
               coloringFunctions={coloringFunctions}
             />
           )}
 
           <MapCentroids
-            drawableObjects={drawableObjects}
+            drawableEntities={drawableEntities}
             openCard={openCard}
             scalar={1200 / maxWidth}
             zoomFactor={zoomFactor}
@@ -189,7 +189,7 @@ const ObjectMap: React.FC<Props> = ({ objects, maxWidth = 2000 }) => {
               onClick={(e) => e.stopPropagation()}
             >
               <MapCard
-                drawnObject={card.object}
+                drawnEntity={card.entity}
                 objectType={objectType}
                 onClose={() => closeCard(card.id)}
               />

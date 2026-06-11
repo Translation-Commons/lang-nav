@@ -9,7 +9,7 @@ import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 import getField from '@features/transforms/fields/getField';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -20,17 +20,17 @@ import DecimalNumber from '@shared/ui/DecimalNumber';
 
 const ReportEntitiesMissingFields: React.FC = () => {
   const { objectType } = usePageParams();
-  const { filteredObjects } = useFilteredObjects({});
+  const { filteredEntities } = useFilteredEntities({});
 
   const fields = getApplicableFields(undefined, objectType).filter((f) => f !== Field.None);
 
-  const countTotal = filteredObjects.length;
+  const countTotal = filteredEntities.length;
   const resultsByField = useMemo(
     () =>
       fields.reduce(
         (acc, field) => {
-          const knownCount = filteredObjects.filter((obj) => getField(obj, field) != null).length;
-          const examples = filteredObjects
+          const knownCount = filteredEntities.filter((obj) => getField(obj, field) != null).length;
+          const examples = filteredEntities
             .filter((obj) => getField(obj, field) == null)
             .slice(0, 4);
           acc[field] = { knownCount, missingCount: countTotal - knownCount, examples };
@@ -38,7 +38,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
         },
         {} as Record<Field, { knownCount: number; missingCount: number; examples: ObjectData[] }>,
       ),
-    [fields, filteredObjects, countTotal],
+    [fields, filteredEntities, countTotal],
   );
 
   return (
