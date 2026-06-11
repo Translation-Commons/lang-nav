@@ -5,6 +5,7 @@ import {
   getCountOfCensuses,
   getCountOfKeyboards,
   getCountOfLanguages,
+  getCountOfVariants,
   getCountOfWritingSystems,
   getDepth,
   getObjectDateAsNumber,
@@ -37,6 +38,7 @@ import {
   getKeyboardForEntity,
   getLanguageForEntity,
   getTerritoryForEntity,
+  getVariantForEntity,
   getWritingSystemForEntity,
 } from './getEntityConnection';
 
@@ -82,7 +84,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
     case Field.VariantType:
-      return object.type === ObjectType.Variant ? object.variantType : undefined;
+      return getVariantForEntity(object)?.type;
     case Field.SourceType:
       return getCensusForEntity(object)?.collectorType;
 
@@ -130,7 +132,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Platform:
       return getKeyboardForEntity(object)?.platform;
     case Field.Variant:
-      return getKeyboardForEntity(object)?.variantCode;
+      return getVariantForEntity(object)?.nameDisplay;
     case Field.SourceForPopulation:
       return getCensusForEntity(object)?.collectorName;
     case Field.SourceForLanguage:
@@ -150,7 +152,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.CountOfCensuses:
       return getCountOfCensuses(object);
     case Field.CountOfVariants:
-      return undefined; // Not yet defined
+      return getCountOfVariants(object);
 
     // Population
     case Field.Population:

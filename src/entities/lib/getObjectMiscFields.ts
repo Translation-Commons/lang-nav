@@ -224,6 +224,27 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
   }
 }
 
+export function getCountOfVariants(object: ObjectData): number | undefined {
+  const { type } = object;
+  switch (type) {
+    case ObjectType.Language:
+      return object.variants?.length ?? 0;
+    case ObjectType.Locale:
+      return object.variants?.length ?? 0;
+    case ObjectType.Keyboard:
+      return object.variant ? 1 : 0;
+    case ObjectType.Variant:
+      return 1;
+    case ObjectType.Territory:
+    case ObjectType.Census:
+    case ObjectType.WritingSystem:
+    case ObjectType.Org:
+      return undefined;
+    default:
+      enforceExhaustiveSwitch(type);
+  }
+}
+
 // Field.Depth
 export function getDepth(object: ObjectData): number | undefined {
   const { type } = object;

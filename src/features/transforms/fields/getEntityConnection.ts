@@ -5,6 +5,7 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export function getLanguageForEntity(object: ObjectData | undefined): LanguageData | undefined {
@@ -43,5 +44,15 @@ export function getCensusForEntity(object: ObjectData | undefined): CensusData |
 export function getKeyboardForEntity(object: ObjectData | undefined): KeyboardData | undefined {
   if (!object) return undefined;
   if (object.type === ObjectType.Keyboard) return object;
+  return undefined;
+}
+
+export function getVariantForEntity(object: ObjectData | undefined): VariantData | undefined {
+  if (!object) return undefined;
+  if (object.type === ObjectType.Variant) return object;
+  if (object.type === ObjectType.Keyboard) return object.variant;
+
+  if (object.type === ObjectType.Locale && object.variants) return object.variants[0]; // Locales can have multiple variants, but for simplicity we just return the first one here
+  if (object.type === ObjectType.Language) return object.equivalentVariant;
   return undefined;
 }

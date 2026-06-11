@@ -14,7 +14,6 @@ const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Popula
 export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.VitalityEthnologueCoarse,
   Field.VitalityEthnologueFine,
-  Field.CountOfVariants,
   Field.SourceType,
   Field.Indigeneity,
   Field.CLDRCoverage,
@@ -88,7 +87,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.WritingSystem,
         Field.Territory,
         Field.Region,
-        // Field.Variant, // Data not available yet
+        Field.Variant,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
 
@@ -149,6 +148,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.LanguageFamily,
         Field.WritingSystem,
         Field.Territory,
+        Field.Variant,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
         // Field.Region, // TODO
@@ -157,7 +157,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfKeyboards,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
-        // Field.CountOfVariants, // TODO
+        Field.CountOfVariants,
 
         Field.Depth,
         Field.Literacy,
@@ -341,6 +341,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+        Field.CountOfVariants,
 
         Field.PopulationDirectlySourced,
         Field.PercentOfOverallLanguageSpeakers,

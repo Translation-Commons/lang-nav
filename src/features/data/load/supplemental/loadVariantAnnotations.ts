@@ -26,6 +26,7 @@ export async function loadVariantAnnotations(
           variant.languoid = getLanguage(variant.languoidCode);
           if (variant.languoid && variant.languoidCode !== 'mis') {
             variant.languoid.variants?.push(variant);
+            variant.languoid.equivalentVariant = variant; // Link back from language to variant for easy access when we only have the language
           }
         }
       }),
