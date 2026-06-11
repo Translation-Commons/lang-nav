@@ -1,50 +1,53 @@
 import { describe, expect, it } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
-
 import { getBaseLanguageData, LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
-import {
-  getCombinedLanguagePath,
-  getLanguageScopeIssues,
-  getSuggestedOverride,
-  LanguageScopeIssueType,
-} from '../getLanguageScopeIssues';
+import { getLanguagePath, getLanguageScopeIssues } from '../getLanguageScopeIssues';
 
 function makeLanguage(
   id: string,
   name: string,
   scope: LanguageScope,
-  parentLanguageCode?: string,
+  parentLanguage?: LanguageData,
 ): LanguageData {
   return {
     ...getBaseLanguageData(id, name),
     scope,
-    Combined: {
-      code: id,
-      name,
-      scope,
-      parentLanguageCode,
-    },
+    parentLanguage,
+    childLanguages: [],
   };
 }
 
 describe('getLanguageScopeIssues', () => {
-  it('detects all direct parent-child scope issue types', () => {
+  it('detects languages whose scope is broader than their parent', () => {
     const dialectParent = makeLanguage('dial1', 'Test Dialect Group', LanguageScope.Dialect);
     const individualChild = makeLanguage(
       'ind1',
       'Test Individual',
       LanguageScope.Language,
-      'dial1',
+      dialectParent,
     );
-    const macroChild = makeLanguage('mac1', 'Test Macro', LanguageScope.Macrolanguage, 'dial1');
+    const macroChild = makeLanguage(
+      'mac1',
+      'Test Macro',
+      LanguageScope.Macrolanguage,
+      dialectParent,
+    );
     const macroParent = makeLanguage('mac2', 'Another Macro', LanguageScope.Macrolanguage);
-    const familyChild = makeLanguage('fam1', 'Test Family', LanguageScope.Family, 'mac2');
+    const familyChild = makeLanguage('fam1', 'Test Family', LanguageScope.Family, macroParent);
     const individualParent = makeLanguage('ind2', 'Parent Individual', LanguageScope.Language);
-    const familyChild2 = makeLanguage('fam2', 'Nested Family', LanguageScope.Family, 'ind2');
+    const familyChild2 = makeLanguage(
+      'fam2',
+      'Nested Family',
+      LanguageScope.Family,
+      individualParent,
+    );
 
-    const languages = [
+    dialectParent.childLanguages = [individualChild, macroChild];
+    macroParent.childLanguages = [familyChild];
+    individualParent.childLanguages = [familyChild2];
+
+    const issues = getLanguageScopeIssues([
       dialectParent,
       individualChild,
       macroChild,
@@ -52,38 +55,20 @@ describe('getLanguageScopeIssues', () => {
       familyChild,
       individualParent,
       familyChild2,
-    ];
-
-    dialectParent.Combined.childLanguages = [individualChild, macroChild];
-    individualChild.Combined.parentLanguage = dialectParent;
-    macroChild.Combined.parentLanguage = dialectParent;
-    macroParent.Combined.childLanguages = [familyChild];
-    familyChild.Combined.parentLanguage = macroParent;
-    individualParent.Combined.childLanguages = [familyChild2];
-    familyChild2.Combined.parentLanguage = individualParent;
-
-    const issues = getLanguageScopeIssues(languages);
-
-    expect(issues).toHaveLength(4);
-    expect(issues.map((issue) => issue.issueType)).toEqual([
-      LanguageScopeIssueType.DialectContainsIndividualLanguage,
-      LanguageScopeIssueType.DialectContainsMacrolanguage,
-      LanguageScopeIssueType.IndividualLanguageContainsFamily,
-      LanguageScopeIssueType.MacrolanguageContainsFamily,
     ]);
+
+    expect(issues.map((lang) => lang.ID).sort()).toEqual(['fam1', 'fam2', 'ind1', 'mac1']);
   });
 
-  it('builds the Combined path from root to child', () => {
+  it('builds the language path from root to child using parentLanguage', () => {
     const root = makeLanguage('fam-root', 'Root Family', LanguageScope.Family);
-    const parent = makeLanguage('mac-root', 'Root Macro', LanguageScope.Macrolanguage, 'fam-root');
-    const child = makeLanguage('ind-root', 'Root Individual', LanguageScope.Language, 'mac-root');
+    const parent = makeLanguage('mac-root', 'Root Macro', LanguageScope.Macrolanguage, root);
+    const child = makeLanguage('ind-root', 'Root Individual', LanguageScope.Language, parent);
 
-    root.Combined.childLanguages = [parent];
-    parent.Combined.parentLanguage = root;
-    parent.Combined.childLanguages = [child];
-    child.Combined.parentLanguage = parent;
+    root.childLanguages = [parent];
+    parent.childLanguages = [child];
 
-    expect(getCombinedLanguagePath(child).map((lang) => lang.ID)).toEqual([
+    expect(getLanguagePath(child).map((lang) => lang.ID)).toEqual([
       'fam-root',
       'mac-root',
       'ind-root',
@@ -92,44 +77,41 @@ describe('getLanguageScopeIssues', () => {
 
   it('ignores valid parent-child scope pairs', () => {
     const family = makeLanguage('fam-valid', 'Valid Family', LanguageScope.Family);
-    const macro = makeLanguage(
-      'mac-valid',
-      'Valid Macro',
-      LanguageScope.Macrolanguage,
-      'fam-valid',
-    );
-    family.Combined.childLanguages = [macro];
-    macro.Combined.parentLanguage = family;
+    const macro = makeLanguage('mac-valid', 'Valid Macro', LanguageScope.Macrolanguage, family);
+    family.childLanguages = [macro];
 
     expect(getLanguageScopeIssues([family, macro])).toEqual([]);
   });
 
-  it('ignores languages without Combined codes', () => {
-    const parent = makeLanguage('par1', 'Parent', LanguageScope.Dialect);
-    const child: LanguageData = {
-      ...getBaseLanguageData('child1', 'Child'),
-      type: ObjectType.Language,
-      scope: LanguageScope.Language,
-      Combined: {
-        scope: LanguageScope.Language,
-        parentLanguageCode: 'par1',
-      },
-    };
-    parent.Combined.childLanguages = [child];
-    child.Combined.parentLanguage = parent;
+  it('ignores languages without a parent', () => {
+    const family = makeLanguage('fam-orphan', 'Root Family', LanguageScope.Family);
 
-    expect(getLanguageScopeIssues([parent, child])).toEqual([]);
+    expect(getLanguageScopeIssues([family])).toEqual([]);
   });
 
-  it('provides suggested overrides for each issue type', () => {
-    expect(
-      getSuggestedOverride(LanguageScopeIssueType.DialectContainsIndividualLanguage),
-    ).toContain('Language Family');
-    expect(getSuggestedOverride(LanguageScopeIssueType.MacrolanguageContainsFamily)).toContain(
-      'Review whether the child Language Family',
-    );
-    expect(getSuggestedOverride(LanguageScopeIssueType.IndividualLanguageContainsFamily)).toContain(
-      'Macrolanguage',
-    );
+  it('ignores languages with missing scope', () => {
+    const parent = makeLanguage('par1', 'Parent', LanguageScope.Dialect);
+    const childWithIssue = makeLanguage('child1', 'Child', LanguageScope.Language, parent);
+    const childMissingScope: LanguageData = {
+      ...getBaseLanguageData('child2', 'No Scope Child'),
+      parentLanguage: parent,
+      childLanguages: [],
+    };
+
+    expect(getLanguageScopeIssues([parent, childWithIssue, childMissingScope])).toEqual([
+      childWithIssue,
+    ]);
+  });
+
+  it('uses lang.parentLanguage and lang.scope instead of Combined fields', () => {
+    const dialectParent = makeLanguage('par1', 'Parent', LanguageScope.Dialect);
+    const child = makeLanguage('child1', 'Child', LanguageScope.Language, dialectParent);
+    const validCombinedParent = makeLanguage('valid-par', 'Valid Parent', LanguageScope.Family);
+
+    child.Combined.parentLanguage = validCombinedParent;
+    child.Combined.scope = LanguageScope.Language;
+    dialectParent.Combined.scope = LanguageScope.Dialect;
+
+    expect(getLanguageScopeIssues([dialectParent, child, validCombinedParent])).toEqual([child]);
   });
 });
