@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
-import Settings from '@widgets/settings/Settings';
+import Settings from '@widgets/controls/Settings';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import InternalLink from '@features/params/InternalLink';

@@ -178,7 +178,7 @@ describe('InteractiveEntityTable', () => {
     expect(mockSort).toHaveBeenCalled();
   });
 
-  it('handles filtering that excludes all objects', () => {
+  it('handles filtering that excludes all entities', () => {
     vi.mocked(getFilterBySubstring).mockReturnValue(() => false);
 
     renderEntityTable();
@@ -203,7 +203,7 @@ describe('InteractiveEntityTable', () => {
       population: 1234567,
     };
 
-    renderEntityTable({ objects: [numericObject] });
+    renderEntityTable({ entities: [numericObject] });
 
     expect(screen.getByRole('cell', { name: '1,234,567' })).toBeInTheDocument();
   });

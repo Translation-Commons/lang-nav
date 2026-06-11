@@ -135,7 +135,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, entities }: Props<T
         }
       })();
     },
-    [handleClipboardExport, handleExportFile, entities.length],
+    [handleClipboardExport, handleExportFile, entities, visibleColumns.length],
   );
   let validExportTypes = Object.values(ExportType).filter((et) => et !== ExportType.Unchosen);
   if (

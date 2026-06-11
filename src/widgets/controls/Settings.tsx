@@ -16,9 +16,9 @@ import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortB
 import SortBySelector from '@features/transforms/sorting/SortBySelector';
 import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
-import LocaleSeparatorSelector from '../controls/selectors/LocaleSeparatorSelector';
-import PageBrightnessSelector from '../controls/selectors/PageBrightnessSelector';
-import ProfileSelector from '../controls/selectors/ProfileSelector';
+import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
+import PageBrightnessSelector from './selectors/PageBrightnessSelector';
+import ProfileSelector from './selectors/ProfileSelector';
 
 const Settings = (): React.ReactNode => {
   const [isOpen, setIsOpen] = useState(false);
@@ -89,7 +89,7 @@ const Settings = (): React.ReactNode => {
 
           {/* Body */}
           <div style={{ padding: '16px', overflow: 'auto', fontSize: '0.9em' }}>
-            <OptionsPanel title="View options" optionsName="view options">
+            <ViewSettingsPanel title="View options" optionsName="view options">
               {isDataPage && (
                 <>
                   <LimitInput />
@@ -106,7 +106,7 @@ const Settings = (): React.ReactNode => {
               )}
               <SearchBySelector />
               <PageBrightnessSelector />
-            </OptionsPanel>
+            </ViewSettingsPanel>
           </div>
         </div>
       )}
@@ -114,7 +114,7 @@ const Settings = (): React.ReactNode => {
   );
 };
 
-const OptionsPanel: React.FC<
+const ViewSettingsPanel: React.FC<
   React.PropsWithChildren<{
     title: string;
     optionsName: string;

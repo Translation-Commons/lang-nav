@@ -11,7 +11,7 @@ import { getFilterByVitality, getScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 import useFilters from './useFilters';
 
-type UseFilteredObjectsParams<T extends ObjectData> = {
+type UseFilteredEntitiesParams<T extends ObjectData> = {
   // TODO use Fields to specify which filters should be used, not these generalized booleans
   useScope?: boolean;
   useSubstring?: boolean;
@@ -28,7 +28,7 @@ const useFilteredEntities = <T extends ObjectData>({
   useVitality = true,
   usePopulation = true,
   inputEntities,
-}: UseFilteredObjectsParams<T>): { filteredEntities: T[]; allEntities: T[] } => {
+}: UseFilteredEntitiesParams<T>): { filteredEntities: T[]; allEntities: T[] } => {
   // Implementation of filtering logic goes here
   const pageEntities = useEntities() as T[]; // Get all objects of the relevant type from context
   // TODO use useFilters for all of these

@@ -48,7 +48,7 @@ function InteractiveEntityTable<T extends ObjectData>({
           objects={entities}
           shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
         />
-        <TableExport visibleColumns={visibilityModule.visibleColumns} entities={entities} />
+        <TableExport visibleColumns={visibilityModule.visibleColumns} entities={filteredEntities} />
       </div>
       <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
 
@@ -73,7 +73,10 @@ function InteractiveEntityTable<T extends ObjectData>({
             objects={entities}
             shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
           />
-          <TableExport visibleColumns={visibilityModule.visibleColumns} entities={entities} />
+          <TableExport
+            visibleColumns={visibilityModule.visibleColumns}
+            entities={filteredEntities}
+          />
         </div>
       )}
     </div>
