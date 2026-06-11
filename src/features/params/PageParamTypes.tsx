@@ -104,7 +104,7 @@ export type PageParams = {
   localeSeparator: LocaleSeparator;
   objectID?: string;
   objectType: ObjectType;
-  page: number; // 0 indexed
+  page: number; // 1 indexed
   populationMax: number;
   populationMin: number;
   profile: ProfileType;
