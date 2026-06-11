@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import ObjectMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
-import ObjectMap from '@features/map/ObjectMap';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import { ObjectType } from '@features/params/PageParamTypes';
@@ -14,7 +14,7 @@ import usePageParams from '@features/params/usePageParams';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
 import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import Field from '@features/transforms/fields/Field';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
@@ -24,8 +24,8 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
-  const { filteredObjects, allObjectsInType } = useFilteredObjects({});
-  const { getCurrentObjects } = usePagination<ObjectData>();
+  const { filteredEntities, allEntities } = useFilteredEntities({});
+  const { getCurrentEntities } = usePagination<ObjectData>();
 
   const isDrawingTerritories = objectType !== ObjectType.Language;
 
@@ -38,11 +38,11 @@ function ViewMap() {
     );
   }
 
-  const objectsWithoutCoordinates =
+  const entsWithoutCoordinates =
     objectType == ObjectType.Language
-      ? getCurrentObjects(filteredObjects).filter(
-          (obj) =>
-            obj.type === ObjectType.Language && (obj.latitude == null || obj.longitude == null),
+      ? getCurrentEntities(filteredEntities).filter(
+          (ent) =>
+            ent.type === ObjectType.Language && (ent.latitude == null || ent.longitude == null),
         )
       : [];
 
@@ -50,8 +50,8 @@ function ViewMap() {
     <MapContainer>
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
-      {!isDrawingTerritories && <VisibleItemsMeter objects={allObjectsInType} />}
-      <ObjectMap objects={filteredObjects} />
+      {!isDrawingTerritories && <VisibleItemsMeter objects={allEntities} />}
+      <ObjectMap entities={filteredEntities} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>
@@ -62,12 +62,12 @@ function ViewMap() {
           <ColorGradientSelector />
         </div>
       </SelectorDisplayProvider>
-      {objectsWithoutCoordinates.length > 0 && (
+      {entsWithoutCoordinates.length > 0 && (
         <div>
           The following {getObjectTypeLabelPlural(objectType)} do not have defined coordinates:{' '}
           <CommaSeparated limit={10}>
-            {objectsWithoutCoordinates.map((obj) => (
-              <HoverableObjectName key={obj.ID} object={obj} />
+            {entsWithoutCoordinates.map((ent) => (
+              <HoverableObjectName key={ent.ID} object={ent} />
             ))}
           </CommaSeparated>
         </div>

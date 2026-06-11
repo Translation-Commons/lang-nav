@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageScope } from '@entities/language/LanguageTypes';
@@ -11,7 +11,7 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 const ReportLocaleCitationCompleteness: React.FC = () => {
-  const { filteredObjects: filteredLocales } = useFilteredObjects({});
+  const { filteredEntities: filteredLocales } = useFilteredEntities({});
 
   // Count locales with populationCensus
   const locales = filteredLocales.filter((obj) => obj.type === ObjectType.Locale);

@@ -11,26 +11,26 @@ import { getFilterByVitality, getScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 import useFilters from './useFilters';
 
-type UseFilteredObjectsParams<T extends ObjectData> = {
+type UseFilteredEntitiesParams<T extends ObjectData> = {
   // TODO use Fields to specify which filters should be used, not these generalized booleans
   useScope?: boolean;
   useSubstring?: boolean;
   useConnections?: boolean;
   useVitality?: boolean;
   usePopulation?: boolean;
-  inputObjects?: T[];
+  inputEntities?: T[];
 };
 
-const useFilteredObjects = <T extends ObjectData>({
+const useFilteredEntities = <T extends ObjectData>({
   useScope = true,
   useSubstring = true,
   useConnections = true,
   useVitality = true,
   usePopulation = true,
-  inputObjects,
-}: UseFilteredObjectsParams<T>): { filteredObjects: T[]; allObjectsInType: T[] } => {
+  inputEntities,
+}: UseFilteredEntitiesParams<T>): { filteredEntities: T[]; allEntities: T[] } => {
   // Implementation of filtering logic goes here
-  const pageObjects = useEntities() as T[]; // Get all objects of the relevant type from context
+  const pageEntities = useEntities() as T[]; // Get all objects of the relevant type from context
   // TODO use useFilters for all of these
   const filters = useFilters();
   const filterByScope = useScope ? getScopeFilter() : () => true;
@@ -39,10 +39,10 @@ const useFilteredObjects = <T extends ObjectData>({
   const filterByVitality = useVitality ? getFilterByVitality() : () => true;
   const filterByPopulation = usePopulation ? filters.Population : () => true;
   const sortFunction = getSortFunction();
-  const allObjectsInType = inputObjects ?? pageObjects;
+  const allEntities = inputEntities ?? pageEntities;
 
-  const filteredObjects = useMemo(() => {
-    return allObjectsInType
+  const filteredEntities = useMemo(() => {
+    return allEntities
       .filter(
         (obj) =>
           filterByScope(obj) &&
@@ -53,7 +53,7 @@ const useFilteredObjects = <T extends ObjectData>({
       )
       .sort(sortFunction);
   }, [
-    allObjectsInType,
+    allEntities,
     filterByScope,
     filterBySubstring,
     filterByConnections,
@@ -62,7 +62,7 @@ const useFilteredObjects = <T extends ObjectData>({
     sortFunction,
   ]);
 
-  return { filteredObjects, allObjectsInType };
+  return { filteredEntities, allEntities };
 };
 
-export default useFilteredObjects;
+export default useFilteredEntities;

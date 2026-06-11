@@ -1,14 +1,12 @@
 import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import { useRenderCount } from '@shared/hooks/useRenderCount';
-
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 
-import BaseObjectTable from './BaseObjectTable';
+import BaseEntityTable from './BaseEntityTable';
 import TableColumn from './TableColumn';
 import TableColumnSelector from './TableColumnSelector';
 import TableExport from './TableExport';
@@ -18,29 +16,28 @@ import useColumnVisibility from './useColumnVisibility';
 import './tableStyles.css';
 
 interface Props<T> {
-  objects: T[];
+  entities: T[];
   columns: TableColumn<T>[];
   shouldFilterUsingSearchBar?: boolean;
   tableID: TableID;
 }
 
-function InteractiveObjectTable<T extends ObjectData>({
-  objects,
+function InteractiveEntityTable<T extends ObjectData>({
+  entities,
   columns,
   shouldFilterUsingSearchBar = true,
   tableID,
 }: Props<T>) {
-  const { getCurrentObjects } = usePagination<T>();
-  const objectsFilteredAndSorted = useFilteredObjects({
+  const { getCurrentEntities } = usePagination<T>();
+  const { filteredEntities } = useFilteredEntities({
     useScope: true,
     useSubstring: shouldFilterUsingSearchBar,
     useConnections: true,
     useVitality: true,
     usePopulation: true,
-    inputObjects: objects,
-  }).filteredObjects;
-  useRenderCount('InteractiveObjectTable');
-  const currentObjects = getCurrentObjects(objectsFilteredAndSorted);
+    inputEntities: entities,
+  });
+  const currentEntities = getCurrentEntities(filteredEntities);
 
   const visibilityModule = useColumnVisibility(columns, tableID);
 
@@ -48,44 +45,41 @@ function InteractiveObjectTable<T extends ObjectData>({
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
         <VisibleItemsMeter
-          objects={objects}
+          objects={entities}
           shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
         />
-        <TableExport
-          visibleColumns={visibilityModule.visibleColumns}
-          objectsFilteredAndSorted={objectsFilteredAndSorted}
-        />
+        <TableExport visibleColumns={visibilityModule.visibleColumns} entities={filteredEntities} />
       </div>
       <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
 
       {/* The actual <table> component */}
-      <BaseObjectTable
+      <BaseEntityTable
         visibleColumns={visibilityModule.visibleColumns}
-        objects={currentObjects}
+        objects={currentEntities}
         tableID={tableID}
       />
 
-      {currentObjects.length === 0 && (
+      {currentEntities.length === 0 && (
         <div>
           All results are filtered out.
-          <FilterBreakdown objects={objects} />
+          <FilterBreakdown objects={entities} />
         </div>
       )}
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
-      {currentObjects.length > 10 && (
+      {currentEntities.length > 10 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
           <VisibleItemsMeter
-            objects={objects}
+            objects={entities}
             shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
           />
           <TableExport
             visibleColumns={visibilityModule.visibleColumns}
-            objectsFilteredAndSorted={objectsFilteredAndSorted}
+            entities={filteredEntities}
           />
         </div>
       )}
     </div>
   );
 }
-export default InteractiveObjectTable;
+export default InteractiveEntityTable;

@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { NameColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -26,9 +26,9 @@ const LocaleIndigeneityTable: React.FC<{
   addToChangedLocales: (locale: LocaleData) => void;
 }> = ({ locales, addToChangedLocales }) => {
   return (
-    <InteractiveObjectTable
+    <InteractiveEntityTable
       tableID={TableID.LocaleIndigeneity}
-      objects={locales}
+      entities={locales}
       columns={[
         {
           key: 'ID',

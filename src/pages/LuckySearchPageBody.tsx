@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import SearchBar from '@features/transforms/search/SearchBar';
 
 const SearchContainer: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({
@@ -30,7 +30,7 @@ const LuckySearchPageBody: React.FC = () => {
   const navigate = useNavigate();
   const { searchString } = usePageParams();
   const { getLanguage, languagesInSelectedSource } = useDataContext();
-  const { filteredObjects } = useFilteredObjects({});
+  const { filteredEntities } = useFilteredEntities({});
   const [isSearching, setIsSearching] = useState(true);
 
   useEffect(() => {
@@ -46,16 +46,16 @@ const LuckySearchPageBody: React.FC = () => {
       return;
     }
 
-    if (filteredObjects.length > 0) {
+    if (filteredEntities.length > 0) {
       // Navigate to data page with the first filtered result
       navigate(
-        `/data?searchString=${encodeURIComponent(searchString)}&objectID=${filteredObjects[0].ID}`,
+        `/data?searchString=${encodeURIComponent(searchString)}&objectID=${filteredEntities[0].ID}`,
       );
       return;
     }
 
     setIsSearching(false);
-  }, [searchString, getLanguage, languagesInSelectedSource, filteredObjects, navigate]);
+  }, [searchString, getLanguage, languagesInSelectedSource, filteredEntities, navigate]);
 
   if (isSearching) {
     return (

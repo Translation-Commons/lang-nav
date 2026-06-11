@@ -3,14 +3,13 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
-import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -36,9 +35,9 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
 
   return (
     <LocalParamsProvider overrides={{ territoryScopes: [territory.scope], page: 1, limit: 10 }}>
-      <InteractiveObjectTable<LocaleData>
+      <InteractiveEntityTable
         tableID={TableID.LanguagesInTerritory}
-        objects={locales}
+        entities={locales}
         shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,

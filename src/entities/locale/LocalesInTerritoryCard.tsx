@@ -1,11 +1,9 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-
-import { LocaleData } from './LocaleTypes';
 
 type Props = {
   territory: TerritoryData;
@@ -13,9 +11,7 @@ type Props = {
 
 const LocalesInTerritoryCard: React.FC<Props> = ({ territory }) => {
   const [showAll, setShowAll] = React.useState(false);
-  const locales = useFilteredObjects({
-    inputObjects: territory.locales,
-  }).filteredObjects as LocaleData[];
+  const locales = useFilteredEntities({ inputEntities: territory.locales }).filteredEntities;
 
   return (
     <div>

@@ -1,10 +1,9 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
-import { CensusData } from '@entities/census/CensusTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
 import getCensusColumns from './columns/CensusColumns';
@@ -22,11 +21,7 @@ const TableOfAllCensuses: React.FC<Props> = ({ organization }) => {
   }, [organization, allCensuses]);
 
   return (
-    <InteractiveObjectTable<CensusData>
-      tableID={TableID.Censuses}
-      objects={censuses}
-      columns={columns}
-    />
+    <InteractiveEntityTable tableID={TableID.Censuses} entities={censuses} columns={columns} />
   );
 };
 

@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
-
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import getTerritoryColumns from './columns/TerritoryColumns';
 
@@ -13,9 +11,9 @@ const TerritoryTable: React.FC = () => {
   const columns = getTerritoryColumns();
 
   return (
-    <InteractiveObjectTable<TerritoryData>
+    <InteractiveEntityTable
       tableID={TableID.Territories}
-      objects={territories}
+      entities={territories}
       columns={columns}
     />
   );

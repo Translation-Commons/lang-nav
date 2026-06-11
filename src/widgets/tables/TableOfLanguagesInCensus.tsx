@@ -7,7 +7,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -97,9 +97,9 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {langsNotFound.join(', ')}
         </div>
       )}
-      <InteractiveObjectTable<LocaleData>
+      <InteractiveEntityTable
         tableID={TableID.LanguagesInCensus}
-        objects={languagesInCensus}
+        entities={languagesInCensus}
         shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,

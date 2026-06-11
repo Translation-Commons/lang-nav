@@ -16,7 +16,7 @@ import { MAP_ASPECT_RATIO } from './MapConsts';
 import './map.css';
 
 type Props = {
-  drawableObjects: DrawableData[];
+  drawableEntities: DrawableData[];
   openCard: (obj: DrawableData, x: number, y: number) => void;
   scalar: number;
   zoomFactor: number;
@@ -24,27 +24,27 @@ type Props = {
 };
 
 const MapCentroids: React.FC<Props> = ({
-  drawableObjects,
+  drawableEntities,
   openCard,
   scalar,
   zoomFactor,
   coloringFunctions: { getColor, colorBy },
 }) => {
   const { scaleBy, objectType } = usePageParams();
-  const { getCurrentObjects } = usePagination<DrawableData>();
+  const { getCurrentEntities } = usePagination<DrawableData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const { getScale } = useScale({ objects: drawableObjects, scaleBy });
+  const { getScale } = useScale({ objects: drawableEntities, scaleBy });
 
-  const renderableObjects = useMemo(() => {
-    const currentObjects =
-      objectType === ObjectType.Language ? getCurrentObjects(drawableObjects) : drawableObjects;
+  const renderableEntities = useMemo(() => {
+    const currentEntities =
+      objectType === ObjectType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
 
-    const filteredObjects = currentObjects.filter(
+    const filteredEntities = currentEntities.filter(
       (obj) => obj.type === ObjectType.Language || obj.type === ObjectType.Territory,
     );
 
-    return filteredObjects.reverse();
-  }, [drawableObjects, getCurrentObjects, objectType]);
+    return filteredEntities.reverse();
+  }, [drawableEntities, getCurrentEntities, objectType]);
 
   const buildOnMouseEnter = useCallback(
     (obj: DrawableData) => (e: React.MouseEvent) => {
@@ -74,7 +74,7 @@ const MapCentroids: React.FC<Props> = ({
         pointerEvents: 'none',
       }}
     >
-      {renderableObjects.map((obj) => (
+      {renderableEntities.map((obj) => (
         <ObjectNode
           key={obj.ID}
           color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}

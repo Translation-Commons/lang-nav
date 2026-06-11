@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -15,9 +15,9 @@ const LocaleTable: React.FC = () => {
   const columns = getLocaleColumns();
 
   return (
-    <InteractiveObjectTable<LocaleData>
+    <InteractiveEntityTable<LocaleData>
       tableID={TableID.Locales}
-      objects={locales.filter((locale) => locale.language?.[languageSource].code != null)}
+      entities={locales.filter((locale) => locale.language?.[languageSource].code != null)}
       columns={columns}
     />
   );

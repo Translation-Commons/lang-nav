@@ -11,7 +11,7 @@ import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityType
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import useFilteredObjects from '../useFilteredObjects';
+import useFilteredEntities from '../useFilteredEntities';
 
 import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
@@ -32,11 +32,11 @@ function getHookResult(
     useVitality?: boolean;
   } = {},
 ) {
-  const res = renderHook(() => useFilteredObjects(params));
+  const res = renderHook(() => useFilteredEntities(params));
   return res.result.current;
 }
 
-describe('useFilteredObjects', () => {
+describe('useFilteredEntities', () => {
   const setupMockParams = (overrides: PageParamsOptional = {}) => {
     const mockUsePageParams = createMockUsePageParams(overrides);
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
@@ -48,8 +48,8 @@ describe('useFilteredObjects', () => {
   });
 
   it('returns default items when no filters are active', () => {
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual([
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual([
       // 'ine', // Indo-European family not included since its filtered out as family by default
       'eng',
       'spa',
@@ -67,37 +67,37 @@ describe('useFilteredObjects', () => {
       languageScopes: [], // allow all languoids including Indo-European family
       searchString: 'i', // I matches ine, ita
     });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['ine', 'ita']);
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual(['ine', 'ita']);
   });
 
   it('filters by vitality value', () => {
     setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
   });
 
   it('filters by territory', () => {
     setupMockParams({ territoryFilter: 'US' });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa', 'fra', 'rus', 'nav']);
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual(['eng', 'spa', 'fra', 'rus', 'nav']);
   });
 
   it('allows composite filters (territory + vitality)', () => {
     setupMockParams({ territoryFilter: 'US', vitalityEthFine: [VitalityEthnologueFine.National] });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
   });
 
   it('can change the language scope filter', () => {
     setupMockParams({ languageScopes: [LanguageScope.Macrolanguage] });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual(['zho']);
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual(['zho']);
   });
 
   it("if we don't want to filter by scope, it will allow the language family (ine) even though the page param wouldn't normally allow it", () => {
-    const { filteredObjects } = getHookResult({ useScope: false });
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual([
+    const { filteredEntities } = getHookResult({ useScope: false });
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual([
       'ine', // usually filtered out as family
       'gem',
       'eng',
@@ -113,8 +113,8 @@ describe('useFilteredObjects', () => {
 
   it('treats empty languageScopes as "any languoid" allowing languoid items through', () => {
     setupMockParams({ languageScopes: [] });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual([
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual([
       'ine',
       'gem',
       'eng',
@@ -130,8 +130,8 @@ describe('useFilteredObjects', () => {
 
   it('returns sorted items', () => {
     setupMockParams({ sortBy: Field.Name, sortBehavior: SortBehavior.Reverse });
-    const { filteredObjects } = getHookResult({});
-    expect(filteredObjects.map((obj) => obj.ID)).toEqual([
+    const { filteredEntities } = getHookResult({});
+    expect(filteredEntities.map((obj) => obj.ID)).toEqual([
       'spa', // Spanish
       'rus', // Russian
       'nav', // Navajo
