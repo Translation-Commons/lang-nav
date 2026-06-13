@@ -32,7 +32,7 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  * the number of child language nodes.
  */
 export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
-  [ObjectType.Language]: [Field.Language],
+  [ObjectType.Language]: [Field.Language, Field.VariantType],
   [ObjectType.Territory]: [Field.PopulationDirectlySourced],
   [ObjectType.WritingSystem]: [
     Field.WritingSystem,
@@ -96,6 +96,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+        Field.CountOfVariants,
 
         Field.Depth,
       ];
@@ -224,6 +225,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfWritingSystems, // May be poorly defined
         Field.CountOfChildTerritories,
         Field.CountOfCountries, // 0 or 1
+        Field.CountOfVariants,
 
         Field.Date,
         Field.Description,
@@ -248,6 +250,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.CountOfWritingSystems, // May be poorly defined
         Field.CountOfCountries, // 0 or 1
+        Field.CountOfVariants,
       ];
     case ObjectType.Org:
       return [

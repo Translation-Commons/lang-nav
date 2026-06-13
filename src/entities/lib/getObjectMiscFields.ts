@@ -1,6 +1,7 @@
 import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { ObjectType } from '@features/params/PageParamTypes';
+import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -228,7 +229,7 @@ export function getCountOfVariants(object: ObjectData): number | undefined {
   const { type } = object;
   switch (type) {
     case ObjectType.Language:
-      return object.variants?.length ?? 0;
+      return getVariantsForEntity(object)?.length ?? 0;
     case ObjectType.Locale:
       return object.variants?.length ?? 0;
     case ObjectType.Keyboard:

@@ -84,7 +84,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
     case Field.VariantType:
-      return getVariantsForEntity(object)?.[0]?.type;
+      return getVariantsForEntity(object)?.[0]?.variantType;
     case Field.SourceType:
       return getCensusForEntity(object)?.collectorType;
 

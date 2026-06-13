@@ -87,8 +87,10 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       </DetailsField>
       <DetailsField title="Locales">
         <TreeOrList
-          treeNodes={getLocaleTreeNodes([lang], sortFunction, filterByScope)}
-          listNodes={lang.locales?.map((v) => (
+          treeNodes={
+            lang.locales.length > 0 ? getLocaleTreeNodes([lang], sortFunction, filterByScope) : []
+          }
+          listNodes={(lang.locales ?? []).map((v) => (
             <HoverableObjectName key={v.ID} object={v} />
           ))}
           emptyMessage="No locales available for this language."
