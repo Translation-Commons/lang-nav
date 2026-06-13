@@ -10,7 +10,7 @@ import { getFieldString } from '@features/transforms/fields/getFieldString';
 import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
-import { getRobinsonCoordinates } from './getRobinsonCoordinates';
+import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
 import { MAP_ASPECT_RATIO } from './MapConsts';
 
 import './map.css';
@@ -112,10 +112,7 @@ const ObjectNode: React.FC<NodeProps> = ({
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) return null;
 
-  const { x, y } = getRobinsonCoordinates(
-    object.latitude,
-    (object.longitude < -169 ? object.longitude + 360 : object.longitude) - 11,
-  );
+  const { x, y } = getRobinsonCoordinatesShifted(object);
 
   const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
 
