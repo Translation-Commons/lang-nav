@@ -53,4 +53,3 @@ export function getRobinsonCoordinatesShifted(object: DrawableData) {
     (object.longitude < -169 ? object.longitude + 360 : object.longitude) - 11,
   );
 }
-
