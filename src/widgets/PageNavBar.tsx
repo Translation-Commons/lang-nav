@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
-import Settings from '@widgets/controls/Settings';
-
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
+
+import SettingsButton from './controls/SettingsButton';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
@@ -42,7 +42,7 @@ const PageNavBar: React.FC = () => {
           Feedback
         </button>
         {feedbackOpen && <FeedbackForm onClose={() => setFeedbackOpen(false)} />}
-        <Settings />
+        <SettingsButton />
       </div>
     </NavBarContainer>
   );

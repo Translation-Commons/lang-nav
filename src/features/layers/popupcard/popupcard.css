@@ -1,0 +1,42 @@
+.popupContainer {
+    position: relative;
+}
+
+.popupToggle {
+    /* Optional: Add styles for the button that opens the popup */
+}
+
+.popupCard {
+    position: absolute;
+    right: 0;
+
+    color: var(--color-text);
+    background-color: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    box-shadow: 0px 4px 8px var(--color-shadow);
+}
+
+.popupCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5em 1em;
+    border-bottom: 1px solid var(--color-shadow);
+}
+
+.popupCardTitle {
+    font-weight: 600;
+}
+
+.popupCardBody {
+    padding: 1em;
+    font-size: 0.9em;
+}
+
+.popupCardFooter {
+    display: flex;
+    gap: 0.5em;
+    padding: 0.5em;
+    border-top: 1px solid var(--color-shadow);
+}
