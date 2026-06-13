@@ -1,5 +1,6 @@
 .popupContainer {
     position: relative;
+    width: fit-content;
 }
 
 .popupToggle {

@@ -66,6 +66,7 @@ button:hover,
 button:focus,
 .option:focus,
 .ButtonFocused {
+  color: var(--color-text-on-color);
   border-color: var(--color-button-hover);
   background: var(--color-button-hover);
 }

@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import ViewModal from '../ViewModal';
+import ViewModal from '../ModalCard';
 
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
