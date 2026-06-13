@@ -23,7 +23,7 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
     case ObjectType.Language:
       return object.nameDisplay;
     case ObjectType.Variant:
-      return object.languages?.[0]?.nameDisplay;
+      return (object.equivalentLanguage ?? object.languages?.[0])?.nameDisplay;
     case ObjectType.WritingSystem:
       return object.languages
         ? Object.values(object.languages).sort(sortByPopulation)[0].nameDisplay

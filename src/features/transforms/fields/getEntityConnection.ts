@@ -8,6 +8,8 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
+import { uniqueBy } from '@shared/lib/setUtils';
+
 export function getLanguageForEntity(object: ObjectData | undefined): LanguageData | undefined {
   if (!object) return undefined;
   if (object.type === ObjectType.Language) return object;
@@ -47,12 +49,15 @@ export function getKeyboardForEntity(object: ObjectData | undefined): KeyboardDa
   return undefined;
 }
 
-export function getVariantForEntity(object: ObjectData | undefined): VariantData | undefined {
+export function getVariantsForEntity(object: ObjectData | undefined): VariantData[] | undefined {
   if (!object) return undefined;
-  if (object.type === ObjectType.Variant) return object;
-  if (object.type === ObjectType.Keyboard) return object.variant;
-
-  if (object.type === ObjectType.Locale && object.variants) return object.variants[0]; // Locales can have multiple variants, but for simplicity we just return the first one here
-  if (object.type === ObjectType.Language) return object.equivalentVariant;
+  if (object.type === ObjectType.Variant) return [object];
+  if (object.type === ObjectType.Keyboard) return object.variant ? [object.variant] : undefined;
+  if (object.type === ObjectType.Locale && object.variants) return object.variants;
+  if (object.type === ObjectType.Language)
+    return uniqueBy(
+      [object.equivalentVariant, ...(object.variants ?? [])].filter((v) => !!v),
+      (v) => v.ID,
+    );
   return undefined;
 }

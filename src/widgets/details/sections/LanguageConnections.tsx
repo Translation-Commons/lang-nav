@@ -72,30 +72,28 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <DetailsField title="Descendant Languages">
-          <TreeOrList
-            treeNodes={
-              childLanguages.length > 0
-                ? getLanguageTreeNodes([lang], languageSource, sortFunction)
-                : []
-            }
-            listNodes={childLanguages.map((l) => (
-              <HoverableObjectName key={l.ID} object={l} />
-            ))}
-            emptyMessage="No languages come from this language."
-          />
-        </DetailsField>
-        <DetailsField title="Locales">
-          <TreeOrList
-            treeNodes={getLocaleTreeNodes([lang], sortFunction, filterByScope)}
-            listNodes={lang.locales?.map((v) => (
-              <HoverableObjectName key={v.ID} object={v} />
-            ))}
-            emptyMessage="No locales available for this language."
-          />
-        </DetailsField>
-      </div>
+      <DetailsField title="Descendant Languages">
+        <TreeOrList
+          treeNodes={
+            childLanguages.length > 0
+              ? getLanguageTreeNodes([lang], languageSource, sortFunction)
+              : []
+          }
+          listNodes={childLanguages.map((l) => (
+            <HoverableObjectName key={l.ID} object={l} />
+          ))}
+          emptyMessage="No languages come from this language."
+        />
+      </DetailsField>
+      <DetailsField title="Locales">
+        <TreeOrList
+          treeNodes={getLocaleTreeNodes([lang], sortFunction, filterByScope)}
+          listNodes={lang.locales?.map((v) => (
+            <HoverableObjectName key={v.ID} object={v} />
+          ))}
+          emptyMessage="No locales available for this language."
+        />
+      </DetailsField>
       {lang.keyboards && lang.keyboards.length > 0 && (
         <DetailsField title="Keyboards">
           {lang.keyboards && lang.keyboards.length > 0 && (

@@ -38,7 +38,7 @@ import {
   getKeyboardForEntity,
   getLanguageForEntity,
   getTerritoryForEntity,
-  getVariantForEntity,
+  getVariantsForEntity,
   getWritingSystemForEntity,
 } from './getEntityConnection';
 
@@ -84,7 +84,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
     case Field.VariantType:
-      return getVariantForEntity(object)?.type;
+      return getVariantsForEntity(object)?.[0]?.type;
     case Field.SourceType:
       return getCensusForEntity(object)?.collectorType;
 
@@ -132,7 +132,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Platform:
       return getKeyboardForEntity(object)?.platform;
     case Field.Variant:
-      return getVariantForEntity(object)?.nameDisplay;
+      return getVariantsForEntity(object)?.[0]?.nameDisplay;
     case Field.SourceForPopulation:
       return getCensusForEntity(object)?.collectorName;
     case Field.SourceForLanguage:

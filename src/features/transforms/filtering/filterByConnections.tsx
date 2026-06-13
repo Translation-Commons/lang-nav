@@ -179,7 +179,10 @@ export function getLanguagesRelevantToObject(object: ObjectData): LanguageData[]
     case ObjectType.WritingSystem:
       return Object.values(object.languages ?? {});
     case ObjectType.Variant:
-      return object.languages ?? [];
+      return uniqueBy(
+        [object.equivalentLanguage, ...(object.languages ?? [])].filter((lang) => !!lang),
+        (lang) => lang.ID,
+      );
     case ObjectType.Keyboard:
       return object.languages ?? [];
     case ObjectType.Org:

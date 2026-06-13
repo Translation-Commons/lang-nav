@@ -2,6 +2,7 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
+import { getLanguagesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
 
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -18,9 +19,10 @@ interface Props {
 }
 
 const VariantCard: React.FC<Props> = ({ data }) => {
-  const { description, languages } = data;
+  const { description } = data;
   const shortDescription =
     description && description.length > 100 ? description.slice(0, 100) + '...' : description;
+  const languages = getLanguagesRelevantToObject(data);
 
   return (
     <div>
@@ -52,9 +54,9 @@ const VariantCard: React.FC<Props> = ({ data }) => {
         field={Field.Language}
         description="Languages that use this variant."
       >
-        {languages && Object.values(languages).length > 0 ? (
+        {languages.length > 0 ? (
           <CommaSeparated>
-            {Object.values(languages).map((lang) => (
+            {languages.map((lang) => (
               <HoverableObjectName key={lang.ID} object={lang} />
             ))}
           </CommaSeparated>
