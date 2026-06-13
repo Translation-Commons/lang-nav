@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { getBaseLanguageData, LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
-import { getLanguagePath, getLanguageScopeIssues } from '../getLanguageScopeIssues';
+import { filterLanguagesWithScopeIssues, getLanguagePath } from '../getLanguageScopeIssues';
 
 function makeLanguage(
   id: string,
@@ -18,7 +18,7 @@ function makeLanguage(
   };
 }
 
-describe('getLanguageScopeIssues', () => {
+describe('filterLanguagesWithScopeIssues', () => {
   it('detects languages whose scope is broader than their parent', () => {
     const dialectParent = makeLanguage('dial1', 'Test Dialect Group', LanguageScope.Dialect);
     const individualChild = makeLanguage(
@@ -47,7 +47,7 @@ describe('getLanguageScopeIssues', () => {
     macroParent.childLanguages = [familyChild];
     individualParent.childLanguages = [familyChild2];
 
-    const issues = getLanguageScopeIssues([
+    const issues = filterLanguagesWithScopeIssues([
       dialectParent,
       individualChild,
       macroChild,
@@ -80,13 +80,13 @@ describe('getLanguageScopeIssues', () => {
     const macro = makeLanguage('mac-valid', 'Valid Macro', LanguageScope.Macrolanguage, family);
     family.childLanguages = [macro];
 
-    expect(getLanguageScopeIssues([family, macro])).toEqual([]);
+    expect(filterLanguagesWithScopeIssues([family, macro])).toEqual([]);
   });
 
   it('ignores languages without a parent', () => {
     const family = makeLanguage('fam-orphan', 'Root Family', LanguageScope.Family);
 
-    expect(getLanguageScopeIssues([family])).toEqual([]);
+    expect(filterLanguagesWithScopeIssues([family])).toEqual([]);
   });
 
   it('ignores languages with missing scope', () => {
@@ -98,7 +98,7 @@ describe('getLanguageScopeIssues', () => {
       childLanguages: [],
     };
 
-    expect(getLanguageScopeIssues([parent, childWithIssue, childMissingScope])).toEqual([
+    expect(filterLanguagesWithScopeIssues([parent, childWithIssue, childMissingScope])).toEqual([
       childWithIssue,
     ]);
   });
@@ -112,6 +112,8 @@ describe('getLanguageScopeIssues', () => {
     child.Combined.scope = LanguageScope.Language;
     dialectParent.Combined.scope = LanguageScope.Dialect;
 
-    expect(getLanguageScopeIssues([dialectParent, child, validCombinedParent])).toEqual([child]);
+    expect(filterLanguagesWithScopeIssues([dialectParent, child, validCombinedParent])).toEqual([
+      child,
+    ]);
   });
 });

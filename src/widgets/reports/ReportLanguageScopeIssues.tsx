@@ -1,22 +1,23 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveObjectTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { getLanguagePath, getLanguageScopeIssues } from './getLanguageScopeIssues';
+import { filterLanguagesWithScopeIssues, getLanguagePath } from './getLanguageScopeIssues';
 
 const ReportLanguageScopeIssues: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
 
   const languagesWithIssues = useMemo(
-    () => getLanguageScopeIssues(languagesInSelectedSource),
+    () => filterLanguagesWithScopeIssues(languagesInSelectedSource),
     [languagesInSelectedSource],
   );
 
@@ -24,14 +25,13 @@ const ReportLanguageScopeIssues: React.FC = () => {
     <>
       This report flags languages in the current language source whose scope is broader than their
       direct parent&apos;s scope, which may indicate a hierarchy inconsistency.
-      <InteractiveObjectTable<LanguageData>
+      <InteractiveEntityTable<LanguageData>
         tableID={TableID.LanguageScopeIssues}
         shouldFilterUsingSearchBar={false}
         columns={[
           {
             key: 'Parent Code',
             render: (lang) => lang.parentLanguage?.codeDisplay,
-            exportValue: (lang) => lang.parentLanguage?.codeDisplay,
           },
           {
             key: 'Parent Name',
@@ -47,15 +47,10 @@ const ReportLanguageScopeIssues: React.FC = () => {
               lang.parentLanguage?.scope != null
                 ? getLanguageScopeLabel(lang.parentLanguage.scope)
                 : null,
-            exportValue: (lang) =>
-              lang.parentLanguage?.scope != null
-                ? getLanguageScopeLabel(lang.parentLanguage.scope)
-                : null,
           },
           {
             key: 'Child Code',
             render: (lang) => lang.codeDisplay,
-            exportValue: (lang) => lang.codeDisplay,
             field: Field.Code,
           },
           {
@@ -67,7 +62,6 @@ const ReportLanguageScopeIssues: React.FC = () => {
           {
             key: 'Child Scope',
             render: (lang) => (lang.scope != null ? getLanguageScopeLabel(lang.scope) : null),
-            exportValue: (lang) => (lang.scope != null ? getLanguageScopeLabel(lang.scope) : null),
             field: Field.LanguageScope,
           },
           {
@@ -82,7 +76,13 @@ const ReportLanguageScopeIssues: React.FC = () => {
   );
 };
 
-const LanguagePath: React.FC<{ path: LanguageData[] }> = ({ path }) => (
+const LanguagePath: React.FC<{ path: LanguageData[] }> = ({ path }) => {
+  const compact = path.map((lang) => getScopeChar(lang.scope)).join('/');
+
+  return <Hoverable hoverContent={<ExpandedLanguagePath path={path} />}>{compact}</Hoverable>;
+};
+
+const ExpandedLanguagePath: React.FC<{ path: LanguageData[] }> = ({ path }) => (
   <>
     {path.map((lang, index) => (
       <React.Fragment key={lang.ID}>
@@ -92,6 +92,23 @@ const LanguagePath: React.FC<{ path: LanguageData[] }> = ({ path }) => (
     ))}
   </>
 );
+
+function getScopeChar(scope: LanguageScope | undefined): string {
+  switch (scope) {
+    case LanguageScope.Family:
+      return 'F';
+    case LanguageScope.Macrolanguage:
+      return 'M';
+    case LanguageScope.Language:
+      return 'I';
+    case LanguageScope.Dialect:
+      return 'D';
+    case LanguageScope.SpecialCode:
+      return 'S';
+    default:
+      return '?';
+  }
+}
 
 function formatLanguagePath(path: LanguageData[]): string {
   return path.map((lang) => `${lang.nameDisplay} [${lang.codeDisplay}]`).join(' > ');
