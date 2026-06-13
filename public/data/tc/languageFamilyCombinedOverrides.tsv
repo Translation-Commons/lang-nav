@@ -1,0 +1,9 @@
+# Manual overrides for Combined language family hierarchy.
+# ISO-only groupings that Glottolog does not use need explicit Combined parent/child fixes.
+# rule (empty): set childLanguageCode's Combined.parentLanguageCode to parentLanguageCode
+# rule reparent-children-except:CODE: move direct children of parentLanguageCode to childLanguageCode; CODE and childLanguageCode stay under parentLanguageCode
+parentLanguageCode	childLanguageCode	rule	notes
+sqj	sqi		Albanian family to macrolanguage
+qwe	que		Quechuan family to macrolanguage
+euq	eus		Basque family to language
+map	fox	reparent-children-except:poz	Move Austronesian direct children under Formosan except poz
