@@ -15,19 +15,17 @@ export function getLanguagePath(child: LanguageData): LanguageData[] {
   return path;
 }
 
-export function getLanguageScopeIssues(languages: LanguageData[]): LanguageData[] {
-  return languages
-    .filter((lang) => {
-      const parent = lang.parentLanguage;
-      if (parent == null) return false;
+export function filterLanguagesWithScopeIssues(languages: LanguageData[]): LanguageData[] {
+  return languages.filter((lang) => {
+    const parent = lang.parentLanguage;
+    if (parent == null) return false;
 
-      const parentScope = parent.scope;
-      const childScope = lang.scope;
-      if (parentScope == null || childScope == null) return false;
+    const parentScope = parent.scope;
+    const childScope = lang.scope;
+    if (parentScope == null || childScope == null) return false;
 
-      // LanguageScope uses higher values for broader scopes (Family=5 > Dialect=2).
-      // Flag when the child scope is broader than its parent's scope.
-      return childScope > parentScope;
-    })
-    .sort((a, b) => a.ID.localeCompare(b.ID));
+    // LanguageScope uses higher values for broader scopes (Family=5 > Dialect=2).
+    // Flag when the child scope is broader than its parent's scope.
+    return childScope > parentScope;
+  });
 }
