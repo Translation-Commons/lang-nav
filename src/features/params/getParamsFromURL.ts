@@ -145,6 +145,11 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
         params.fieldFocus = value as Field;
         break;
 
+      //These are string arrays
+      case PageParamKey.pinned:
+        params.pinned = value.split(',');
+        break;
+
       // Freeform strings
       case PageParamKey.objectID:
       case PageParamKey.searchString:

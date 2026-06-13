@@ -53,6 +53,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   objectID: undefined,
   objectType: ObjectType.Language,
   page: 1,
+  pinned: [],
   profile: ProfileType.LanguageEthusiast,
   populationMax: 10_000_000_000, // higher than the world population
   populationMin: -1, // allow undefined population as well as definite 0s

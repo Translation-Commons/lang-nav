@@ -44,7 +44,7 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
     onZoom: setZoomFactor,
   });
 
-  const { colorBy, objectType } = usePageParams();
+  const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
   const [floatingCards, setFloatingCards] = useState<FloatingCard[]>([]);
   const [mapScale, setMapScale] = useState(1);
 
@@ -79,6 +79,7 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
   const openCard = useCallback(
     (entity: DrawableData, clientX: number, clientY: number) => {
+      updatePageParams({ pinned: [...pinned, entity.ID] });
       const rect = contentRef.current?.getBoundingClientRect();
       if (!rect) return;
 
@@ -93,12 +94,16 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
         { id: entity.ID, entity, x, y },
       ]);
     },
-    [contentRef, mapHeight],
+    [contentRef, mapHeight, pinned],
   );
 
-  const closeCard = useCallback((id: string) => {
-    setFloatingCards((prev) => prev.filter((card) => card.id !== id));
-  }, []);
+  const closeCard = useCallback(
+    (id: string) => {
+      updatePageParams({ pinned: pinned.filter((pin) => pin != id) });
+      setFloatingCards((prev) => prev.filter((card) => card.id !== id));
+    },
+    [pinned],
+  );
 
   const handleZoomIn = useCallback(() => {
     zoomIn();
