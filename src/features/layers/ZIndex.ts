@@ -6,7 +6,6 @@ const ZIndex = {
   Sidepanel: 40,
   Modal: 50, // in CSS
   PopupCard: 60,
-  FeedbackForm: 100,
   HoverCard: 101,
   Dropdown: 110,
   HoverCardInDropdown: 111,
