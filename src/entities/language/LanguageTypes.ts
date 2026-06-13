@@ -132,6 +132,7 @@ export interface LanguageData extends ObjectBase {
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
   variants?: VariantData[]; // links to IANA variants
+  equivalentVariant?: VariantData; // eg. variant "newfound" === languoid "newf1239"
   keyboards?: KeyboardData[];
 
   // Fields that change based on the language source

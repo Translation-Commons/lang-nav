@@ -27,7 +27,7 @@ const VariantLanguoidToggle: React.FC<{
   languageUncoded: LanguageData;
 }> = ({ variant, getPredictedLanguoid, addToChangedVariants, languageUncoded }) => {
   // getPredictedLanguoid is expensive to compute so we want to call it as little as possible and cache the result
-  const saved = variant.languoid;
+  const saved = variant.equivalentLanguage;
   const [predicted, setPredicted] = React.useState<LanguageData | undefined>(languageUncoded);
   const [languageSelectorMode, setLanguageSelectorMode] = React.useState<LanguageSelectorMode>(
     LanguageSelectorMode.Unset,
@@ -46,25 +46,32 @@ const VariantLanguoidToggle: React.FC<{
     switch (languageSelectorMode) {
       case LanguageSelectorMode.Current:
         setLanguageSelectorMode(LanguageSelectorMode.Manual);
-        variant.languoid = undefined;
+        variant.equivalentLanguage = undefined;
         break;
       case LanguageSelectorMode.Manual:
         setLanguageSelectorMode(LanguageSelectorMode.Uncoded);
-        variant.languoid = languageUncoded;
-        variant.languoidCode = languageUncoded.ID;
+        variant.equivalentLanguage = languageUncoded;
+        variant.equivalentLanguageCode = languageUncoded.ID;
         break;
       case LanguageSelectorMode.Uncoded:
         setLanguageSelectorMode(LanguageSelectorMode.Unset);
-        variant.languoid = undefined;
-        variant.languoidCode = undefined;
+        variant.equivalentLanguage = undefined;
+        variant.equivalentLanguageCode = undefined;
         break;
       case LanguageSelectorMode.Unset:
         setLanguageSelectorMode(LanguageSelectorMode.Current);
-        variant.languoid = predicted;
+        variant.equivalentLanguage = predicted;
         break;
     }
     addToChangedVariants(variant);
-  }, [variant.languoid, predicted, languageUncoded, addToChangedVariants, languageSelectorMode]);
+  }, [
+    variant.equivalentLanguage,
+    variant.equivalentLanguageCode,
+    predicted,
+    languageUncoded,
+    addToChangedVariants,
+    languageSelectorMode,
+  ]);
 
   if (variant.variantType === VariantType.Orthographic) return null;
 
@@ -79,7 +86,7 @@ const VariantLanguoidToggle: React.FC<{
           submit={(value) => {
             const id = value.split(/\[|\]/)[1]?.trim(); // In case they paste in something with extra info like "valencia [cat_valencia]"
             if (!id) return;
-            variant.languoidCode = id;
+            variant.equivalentLanguageCode = id;
             addToChangedVariants(variant);
           }}
         />

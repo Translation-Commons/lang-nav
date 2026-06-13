@@ -1,6 +1,7 @@
 import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { ObjectType } from '@features/params/PageParamTypes';
+import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -23,7 +24,7 @@ export function getObjectMostImportantLanguageName(object: ObjectData): string |
     case ObjectType.Language:
       return object.nameDisplay;
     case ObjectType.Variant:
-      return object.languages?.[0]?.nameDisplay;
+      return (object.equivalentLanguage ?? object.languages?.[0])?.nameDisplay;
     case ObjectType.WritingSystem:
       return object.languages
         ? Object.values(object.languages).sort(sortByPopulation)[0].nameDisplay
@@ -219,6 +220,27 @@ export function getCountOfCensuses(object: ObjectData): number | undefined {
       return undefined;
     case ObjectType.Org:
       return object.censuses?.length ?? 0;
+    default:
+      enforceExhaustiveSwitch(type);
+  }
+}
+
+export function getCountOfVariants(object: ObjectData): number | undefined {
+  const { type } = object;
+  switch (type) {
+    case ObjectType.Language:
+      return getVariantsForEntity(object)?.length ?? 0;
+    case ObjectType.Locale:
+      return object.variants?.length ?? 0;
+    case ObjectType.Keyboard:
+      return object.variant ? 1 : 0;
+    case ObjectType.Variant:
+      return 1;
+    case ObjectType.Territory:
+    case ObjectType.Census:
+    case ObjectType.WritingSystem:
+    case ObjectType.Org:
+      return undefined;
     default:
       enforceExhaustiveSwitch(type);
   }

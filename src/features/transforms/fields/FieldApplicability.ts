@@ -14,7 +14,6 @@ const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Popula
 export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.VitalityEthnologueCoarse,
   Field.VitalityEthnologueFine,
-  Field.CountOfVariants,
   Field.SourceType,
   Field.Indigeneity,
   Field.CLDRCoverage,
@@ -33,14 +32,14 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  * the number of child language nodes.
  */
 export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
-  [ObjectType.Language]: [Field.Language],
+  [ObjectType.Language]: [Field.Language, Field.VariantType],
   [ObjectType.Territory]: [Field.PopulationDirectlySourced],
   [ObjectType.WritingSystem]: [
     Field.WritingSystem,
     Field.CountOfWritingSystems,
     Field.PopulationOfDescendants,
   ],
-  [ObjectType.Variant]: [Field.Variant],
+  [ObjectType.Variant]: [Field.Variant, Field.CountOfVariants],
   [ObjectType.Locale]: [],
   [ObjectType.Keyboard]: [],
   [ObjectType.Census]: [
@@ -88,7 +87,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.WritingSystem,
         Field.Territory,
         Field.Region,
-        // Field.Variant, // Data not available yet
+        Field.Variant,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
 
@@ -97,6 +96,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+        Field.CountOfVariants,
 
         Field.Depth,
       ];
@@ -149,6 +149,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.LanguageFamily,
         Field.WritingSystem,
         Field.Territory,
+        Field.Variant,
         Field.SourceForPopulation,
         Field.SourceForLanguage,
         // Field.Region, // TODO
@@ -157,7 +158,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfKeyboards,
         Field.CountOfWritingSystems,
         Field.CountOfCountries,
-        // Field.CountOfVariants, // TODO
+        Field.CountOfVariants,
 
         Field.Depth,
         Field.Literacy,
@@ -224,6 +225,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfWritingSystems, // May be poorly defined
         Field.CountOfChildTerritories,
         Field.CountOfCountries, // 0 or 1
+        Field.CountOfVariants,
 
         Field.Date,
         Field.Description,
@@ -248,6 +250,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.CountOfWritingSystems, // May be poorly defined
         Field.CountOfCountries, // 0 or 1
+        Field.CountOfVariants,
       ];
     case ObjectType.Org:
       return [
@@ -341,6 +344,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.CountOfCountries,
         Field.CountOfChildTerritories,
         Field.CountOfCensuses,
+        Field.CountOfVariants,
 
         Field.PopulationDirectlySourced,
         Field.PercentOfOverallLanguageSpeakers,

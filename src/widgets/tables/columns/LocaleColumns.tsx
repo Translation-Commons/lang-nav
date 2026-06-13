@@ -92,6 +92,7 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
             ))}
           </CommaSeparated>
         ),
+      field: Field.Variant,
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
     },

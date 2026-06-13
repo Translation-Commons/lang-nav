@@ -64,7 +64,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
           ),
         },
         {
-          key: 'Languoid (Predicted)',
+          key: 'Equivalent Language (Predicted)',
           render: (variant) =>
             variant.variantType !== VariantType.Orthographic && (
               <VariantLanguoidToggle
