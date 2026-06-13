@@ -45,8 +45,8 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     {
       key: 'Equivalent Languoid',
       render: (object) => {
-        if (!object.languoid || object.languoid.ID === 'mis') return null;
-        return <HoverableObjectName object={object.languoid} />;
+        if (!object.equivalentLanguage || object.equivalentLanguage.ID === 'mis') return null;
+        return <HoverableObjectName object={object.equivalentLanguage} />;
       },
       columnGroup: 'Related Objects',
     },

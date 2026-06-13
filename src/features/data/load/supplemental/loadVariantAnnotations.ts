@@ -22,11 +22,13 @@ export async function loadVariantAnnotations(
         if (!variant || parts.length < 2) return;
         variant.variantType = getVariantTypeFromString(parts[1]);
         if (parts.length >= 3 && parts[2].trim()) {
-          variant.languoidCode = parts[2].trim();
-          variant.languoid = getLanguage(variant.languoidCode);
-          if (variant.languoid && variant.languoidCode !== 'mis') {
-            variant.languoid.variants?.push(variant);
-            variant.languoid.equivalentVariant = variant; // Link back from language to variant for easy access when we only have the language
+          variant.equivalentLanguageCode = parts[2].trim();
+          const equivalentLanguage = getLanguage(variant.equivalentLanguageCode);
+          if (equivalentLanguage && equivalentLanguage.ID !== 'mis') {
+            variant.equivalentLanguage = equivalentLanguage;
+            if (variant.equivalentLanguage) {
+              equivalentLanguage.equivalentVariant = variant; // Link back from language to variant for easy access when we only have the language
+            }
           }
         }
       }),

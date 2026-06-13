@@ -23,7 +23,7 @@ const ReportVariantsAnnotationTool: React.FC = () => {
       variants.filter((variant) => {
         const missingData =
           variant.variantType == null ||
-          (variant.variantType === VariantType.Dialect && variant.languoid == null);
+          (variant.variantType === VariantType.Dialect && variant.equivalentLanguageCode == null);
         if (includeCriteria === IncludeCriteria.Any) return true;
         if (includeCriteria === IncludeCriteria.HasData) return !missingData;
         if (includeCriteria === IncludeCriteria.MissingData) return missingData;
@@ -40,7 +40,11 @@ const ReportVariantsAnnotationTool: React.FC = () => {
       .filter((variant) => variant.variantType != null)
       .sort(sortByPopulation)
       .map((variant) =>
-        [variant.ID, variant.variantType, variant.languoid?.ID ?? variant.languoidCode].join('\t'),
+        [
+          variant.ID,
+          variant.variantType,
+          variant.equivalentLanguage?.ID ?? variant.equivalentLanguageCode,
+        ].join('\t'),
       )
       .join('\n');
     navigator.clipboard.writeText('ID\tVariantType\tLanguoid\n' + clipboardText);

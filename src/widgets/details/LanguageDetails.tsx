@@ -1,26 +1,12 @@
 import React from 'react';
 
-import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
-import { getSortFunction } from '@features/transforms/sorting/sort';
-import TreeListRoot from '@features/treelist/TreeListRoot';
-
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 import LanguageVitalitySection from '@entities/language/vitality/LanguageVitalitySection';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
-
-import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
-import { getLocaleTreeNodes } from '../treelists/LocaleHierarchy';
-
 import LanguageAttributes from './sections/LanguageAttributes';
 import LanguageCodes from './sections/LanguageCodes';
+import LanguageConnections from './sections/LanguageConnections';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
@@ -85,86 +71,3 @@ const FlexItem: React.FC<{ children: React.ReactNode; flex?: string }> = ({
   children,
   flex = '1 1 200px',
 }) => <div style={{ flex }}>{children}</div>;
-
-const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { languageSource } = usePageParams();
-  const { getCLDRLanguage } = useDataContext();
-  const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
-  const { childLanguages, ISO, Glottolog, variants } = lang;
-  const relatedLanguages = (lang.CLDR.languageMatch ?? [])
-    .map((match) => ({
-      match,
-      relatedLanguage: getCLDRLanguage(match.supported),
-    }))
-    .filter(
-      (entry): entry is { match: (typeof entry)['match']; relatedLanguage: LanguageData } =>
-        entry.relatedLanguage != null,
-    );
-
-  return (
-    <DetailsSection title="Connections">
-      {ISO.parentLanguage && (
-        <DetailsField title="ISO group">
-          <HoverableObjectName object={ISO.parentLanguage} />
-        </DetailsField>
-      )}
-      {Glottolog.parentLanguage && (
-        <DetailsField title="Glottolog group">
-          <HoverableObjectName object={Glottolog.parentLanguage} />
-        </DetailsField>
-      )}
-      {variants && variants.length > 0 && (
-        <DetailsField title="Variants">
-          <CommaSeparated>
-            {variants.map((tag) => (
-              <HoverableObjectName key={tag.ID} object={tag} />
-            ))}
-          </CommaSeparated>
-        </DetailsField>
-      )}
-      {relatedLanguages.length > 0 && (
-        <DetailsField title="Related Languages (CLDR)">
-          <CommaSeparated>
-            {relatedLanguages.map(({ match, relatedLanguage }) => (
-              <span key={match.desired + ':' + match.supported + ':' + match.distance}>
-                <HoverableObjectName object={relatedLanguage} /> ({match.distance} CLDR)
-              </span>
-            ))}
-          </CommaSeparated>
-        </DetailsField>
-      )}
-      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <DetailsField title="Descendant Languages">
-          {childLanguages.length > 0 ? (
-            <TreeListRoot rootNodes={getLanguageTreeNodes([lang], languageSource, sortFunction)} />
-          ) : (
-            <div>
-              <Deemphasized>No languages come from this language.</Deemphasized>
-            </div>
-          )}
-        </DetailsField>
-        <DetailsField title="Locales">
-          {lang.locales.length > 0 ? (
-            <TreeListRoot rootNodes={getLocaleTreeNodes([lang], sortFunction, filterByScope)} />
-          ) : (
-            <div>
-              <Deemphasized>There are no recorded locales for this language.</Deemphasized>
-            </div>
-          )}
-        </DetailsField>
-      </div>
-      {lang.keyboards && lang.keyboards.length > 0 && (
-        <DetailsField title="Keyboards">
-          {lang.keyboards && lang.keyboards.length > 0 && (
-            <CommaSeparated>
-              {lang.keyboards.map((keyboard) => (
-                <HoverableObjectName key={keyboard.ID} object={keyboard} />
-              ))}
-            </CommaSeparated>
-          )}
-        </DetailsField>
-      )}
-    </DetailsSection>
-  );
-};
