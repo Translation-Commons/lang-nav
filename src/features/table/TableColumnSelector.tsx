@@ -1,9 +1,9 @@
 import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
-import React, { useCallback, useState } from 'react';
+import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import ViewModal from '@features/layers/modal/ViewModal';
+import Modal from '@features/layers/modal/ModalButton';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -23,47 +23,37 @@ function TableColumnSelector<T extends ObjectData>({
   const { columnVisibility } = visibilityModule;
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
-  const [isOpen, setIsOpen] = useState(false);
-  const onClose = useCallback(() => setIsOpen(false), []);
 
   return (
-    <>
-      <HoverableButton
-        onClick={() => setIsOpen(true)}
-        hoverContent="Select which columns to show or hide"
-        style={{ padding: '0.25em 0.5em' }}
-      >
-        {nVisible}/{columns.length} columns visible. Click to configure.
-      </HoverableButton>
-
-      <ViewModal
-        isOpen={isOpen}
-        onClose={onClose}
-        title="Select Columns"
-        bodyStyle={{ width: '90vw', maxWidth: '85em', padding: '1em' }}
-      >
-        Click to toggle the visibility of columns in the table. You can also hover over column names
-        for more info and sorting/filtering options.
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(12em, 1fr))',
-            gap: '1em',
-            padding: '0.5em',
-          }}
-        >
-          {Object.entries(columnsByGroup).map(([group, columns]) => (
-            <ColumnGroup
-              columns={columns}
-              group={group}
-              key={group}
-              visibilityModule={visibilityModule}
-            />
-          ))}
-        </div>
-        <GlobalControls visibilityModule={visibilityModule} columns={columns} />
-      </ViewModal>
-    </>
+    <Modal
+      buttonLabel={`${nVisible}/${columns.length} columns visible. Click to configure.`}
+      description="Select which columns to show or hide"
+      title="Select Columns"
+      body={
+        <>
+          Click to toggle the visibility of columns in the table. You can also hover over column
+          names for more info and sorting/filtering options.
+          <div
+            style={{
+              display: 'grid',
+              gridTemplateColumns: 'repeat(auto-fit, minmax(12em, 1fr))',
+              gap: '1em',
+              padding: '0.5em',
+            }}
+          >
+            {Object.entries(columnsByGroup).map(([group, columns]) => (
+              <ColumnGroup
+                columns={columns}
+                group={group}
+                key={group}
+                visibilityModule={visibilityModule}
+              />
+            ))}
+          </div>
+          <GlobalControls columns={columns} visibilityModule={visibilityModule} />
+        </>
+      }
+    />
   );
 }
 

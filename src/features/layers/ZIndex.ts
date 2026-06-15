@@ -4,8 +4,8 @@ const ZIndex = {
   MapZoomControls: 5,
 
   Sidepanel: 40,
+  PopupCard: 45,
   Modal: 50, // in CSS
-  FeedbackForm: 100,
   HoverCard: 101,
   Dropdown: 110,
   HoverCardInDropdown: 111,

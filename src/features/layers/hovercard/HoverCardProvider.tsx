@@ -6,7 +6,7 @@ import EmptyHoverCardProvider from './EmptyHoverCardProvider';
 import HoverCardContext from './HoverCardContext';
 
 type HoverCardData = {
-  content: React.ReactNode;
+  content: React.ReactNode | (() => React.ReactNode);
   x: number;
   y: number;
   visible: boolean;
@@ -24,10 +24,13 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }
   });
   const [leftTriggeringElement, setLeftTriggeringElement] = useState<boolean>(false);
 
-  const showHoverCard = useCallback((content: React.ReactNode, x: number, y: number) => {
-    setLeftTriggeringElement(false);
-    setHoverCard({ content, x, y, visible: true });
-  }, []);
+  const showHoverCard = useCallback(
+    (content: React.ReactNode | (() => React.ReactNode), x: number, y: number) => {
+      setLeftTriggeringElement(false);
+      setHoverCard({ content, x, y, visible: true });
+    },
+    [],
+  );
 
   const hideHoverCard = useCallback(() => {
     setHoverCard((prev) => ({ ...prev, visible: false }));
@@ -117,7 +120,7 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }
             left: hoverCard.x + 5,
           }}
         >
-          {hoverCard.content}
+          {typeof hoverCard.content === 'function' ? hoverCard.content() : hoverCard.content}
         </div>
       </EmptyHoverCardProvider>
     </HoverCardContext.Provider>

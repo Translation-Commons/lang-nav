@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 
 type HoverCardContextType = {
-  showHoverCard: (content: React.ReactNode, x: number, y: number) => void;
+  showHoverCard: (content: React.ReactNode | (() => React.ReactNode), x: number, y: number) => void;
   hideHoverCard: () => void;
   onMouseLeaveTriggeringElement: () => void; // Callback when the mouse leaves the triggering element
 };
