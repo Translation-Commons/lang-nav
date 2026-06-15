@@ -75,7 +75,7 @@ export function FeedbackForm() {
       ctas={[
         <HoverableButton
           key="submit"
-          role="submit"
+          buttonType="submit"
           className={message.trim() ? 'primary' : ''}
           onClick={() => message.trim() && handleSubmit()}
           hoverContent={

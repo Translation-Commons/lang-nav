@@ -8,7 +8,7 @@ import Settings from './Settings';
 const SettingsButton = (): React.ReactNode => {
   return (
     <PopupCard
-      buttonLabel={<SettingsIcon size="1.5em" display="block" />}
+      buttonLabel={<SettingsIcon size="1.5em" display="block" aria-label="View settings" />}
       buttonClassName="primary"
       buttonStyle={{ padding: '0.5em' }}
       description="View settings"

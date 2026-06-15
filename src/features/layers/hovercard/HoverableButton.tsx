@@ -64,6 +64,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
           onClick();
         }
       }}
+      role={role}
       style={{
         cursor: onClick ? 'pointer' : 'auto',
         ...style,

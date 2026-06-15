@@ -24,14 +24,14 @@ const LayerComponents: React.FC = () => {
     <DocsSection title="Layers">
       <div>
         To make the website interactive but maintain a clean structure, we use various layer
-        components. These are reusable components that can be used as to maintain a consistent style
-        and user experience.
+        components. These are reusable components to maintain a consistent style and user
+        experience.
       </div>
       <DocsCard title="Hovercards">
         <div>
           Hovercards are used to show additional information when the user hovers over an element.
           They should be used for simple information that can be quickly consumed, such as a preview
-          of a linked page or a definition of a term. At the moment they main contain their own
+          of a linked page or a definition of a term. At the moment they may contain their own
           interactive elements, but there may be difficulties using the interactive elements without
           accidentally dismissing the hovercard.
         </div>
