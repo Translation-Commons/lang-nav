@@ -1,0 +1,1 @@
+thead{position:sticky;top:0;background-color:var(--color-background);z-index:10}.population,.count,.decimal{text-align:right;font-family:Avenir,Courier New,monospace;font-variant-numeric:tabular-nums}summary{padding:4px 8px;border-radius:4px;transition:background-color .2s ease-in-out}summary:hover{background-color:var(--color-button-hover)}summary:focus{outline:none}
