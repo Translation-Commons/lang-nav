@@ -6,7 +6,7 @@ import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import ResultCount from '@features/pagination/ResultCount';
 import FilterPath from '@features/transforms/filtering/FilterPath';
-import SortBySelector from '@features/transforms/sorting/SortBySelector';
+import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
@@ -42,7 +42,7 @@ const DataPageBody: React.FC = () => {
             gap: '0.5rem',
           }}
         >
-          <SortBySelector showLabel={false} />
+          <SortPopupCard />
           <ViewSelector />
         </div>
       </div>

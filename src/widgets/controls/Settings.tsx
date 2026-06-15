@@ -9,9 +9,6 @@ import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSe
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
-import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortBySelector';
-import SortBySelector from '@features/transforms/sorting/SortBySelector';
-import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
@@ -26,9 +23,6 @@ const Settings = (): React.ReactNode => {
       {isDataPage && (
         <>
           <LimitInput />
-          <SortBySelector />
-          <SecondarySortBySelector />
-          <SortDirectionSelector />
           <ColorBySelector />
           <ColorGradientSelector />
           <ScaleBySelector />
