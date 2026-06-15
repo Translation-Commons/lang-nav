@@ -10,6 +10,7 @@ const SettingsButton = (): React.ReactNode => {
     <PopupCard
       buttonLabel={<SettingsIcon size="1.5em" display="block" />}
       buttonClassName="primary"
+      buttonStyle={{ padding: '0.5em' }}
       description="View settings"
       title="View settings"
       body={() => <Settings />}

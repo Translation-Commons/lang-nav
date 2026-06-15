@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import Modal from '@features/layers/modal/Modal';
+import Modal from '@features/layers/modal/ModalButton';
 import PopupCard from '@features/layers/popupcard/PopupCard';
 import { getNewURL } from '@features/params/getNewURL';
 import Selector from '@features/params/ui/Selector';

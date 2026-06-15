@@ -5,13 +5,19 @@ import ModalCard from '@features/layers/modal/ModalCard';
 
 type Props = {
   buttonLabel: ReactNode;
-  description: ReactNode;
+  description?: ReactNode;
   buttonClassName?: string;
   title: ReactNode;
   body: ReactNode | (() => ReactNode);
 };
 
-const Modal: React.FC<Props> = ({ body, buttonLabel, description, buttonClassName, title }) => {
+const ModalButton: React.FC<Props> = ({
+  body,
+  buttonLabel,
+  description,
+  buttonClassName,
+  title,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const open = useCallback(() => setIsOpen(true), []);
   const close = useCallback(() => setIsOpen(false), []);
@@ -29,7 +35,6 @@ const Modal: React.FC<Props> = ({ body, buttonLabel, description, buttonClassNam
 
       {isOpen && (
         <ModalCard
-          isOpen={isOpen}
           onClose={close}
           title={title}
           bodyStyle={{ width: '90vw', maxWidth: '85em', padding: '1em' }}
@@ -41,4 +46,4 @@ const Modal: React.FC<Props> = ({ body, buttonLabel, description, buttonClassNam
   );
 };
 
-export default Modal;
+export default ModalButton;

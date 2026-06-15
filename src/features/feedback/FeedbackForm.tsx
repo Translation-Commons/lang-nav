@@ -28,6 +28,7 @@ export function FeedbackForm() {
     <PopupCard
       buttonLabel="Feedback"
       buttonClassName="primary"
+      buttonStyle={{ padding: '0.5em' }}
       description="Submit feedback to the LangNav team"
       title="Send feedback"
       body={

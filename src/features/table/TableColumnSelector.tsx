@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import Modal from '@features/layers/modal/Modal';
+import Modal from '@features/layers/modal/ModalButton';
 
 import { ObjectData } from '@entities/types/DataTypes';
 

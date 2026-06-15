@@ -7,9 +7,13 @@ import ZIndex from '../ZIndex';
 import './popupcard.css';
 
 type Props = {
+  // CTA
   buttonLabel: ReactNode;
-  description: ReactNode;
   buttonClassName?: string;
+  buttonStyle?: React.CSSProperties;
+  description?: ReactNode;
+
+  // Card content
   title: ReactNode;
   body: ReactNode | (() => ReactNode);
   ctas?: ReactNode[];
@@ -23,6 +27,7 @@ type Props = {
 const PopupCard: React.FC<Props> = ({
   buttonLabel,
   buttonClassName,
+  buttonStyle,
   description,
   title,
   body,
@@ -60,6 +65,7 @@ const PopupCard: React.FC<Props> = ({
         }
         hoverContent={description}
         onClick={() => setIsOpen((prev) => !prev)}
+        style={buttonStyle}
       >
         {buttonLabel}
       </HoverableButton>
@@ -68,21 +74,11 @@ const PopupCard: React.FC<Props> = ({
           <div className="popupCardHeader">
             <div className="popupCardTitle">{title}</div>
             <HoverableButton onClick={closeCard} style={{ padding: '0.5em' }}>
-              <XIcon size="1em" display="block" />
+              <XIcon size="1em" display="block" aria-label="Close" />
             </HoverableButton>
           </div>
           <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
-          {ctas.length > 0 && (
-            <div className="popupCardFooter">
-              {ctas}
-              {/* {[
-                ...ctas,
-                <HoverableButton key="close" onClick={closeCard}>
-                    Close
-                </HoverableButton>,
-                ]} */}
-            </div>
-          )}
+          {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
         </div>
       )}
     </div>

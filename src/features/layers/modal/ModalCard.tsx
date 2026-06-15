@@ -6,7 +6,6 @@ import HoverableButton from '../hovercard/HoverableButton';
 import './modal.css';
 
 interface ModalProps {
-  isOpen: boolean;
   onClose: () => void;
   title: React.ReactNode;
   children: React.ReactNode;

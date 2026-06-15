@@ -1,7 +1,7 @@
 import { cleanup, fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import ViewModal from '../ModalCard';
+import ModalCard from '../ModalCard';
 
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
@@ -12,23 +12,12 @@ beforeEach(() => {
   cleanup();
 });
 
-describe('ViewModal', () => {
-  it('renders nothing when isOpen is false', () => {
+describe('ModalCard', () => {
+  it('renders title and children', () => {
     render(
-      <ViewModal isOpen={false} onClose={vi.fn()} title="Test Modal">
+      <ModalCard onClose={vi.fn()} title="Test Modal">
         <p>Modal content</p>
-      </ViewModal>,
-    );
-
-    expect(screen.queryByText('Test Modal')).toBeNull();
-    expect(screen.queryByText('Modal content')).toBeNull();
-  });
-
-  it('renders title and children when isOpen is true', () => {
-    render(
-      <ViewModal isOpen={true} onClose={vi.fn()} title="Test Modal">
-        <p>Modal content</p>
-      </ViewModal>,
+      </ModalCard>,
     );
 
     expect(screen.getByText('Test Modal')).toBeTruthy();
@@ -37,9 +26,9 @@ describe('ViewModal', () => {
 
   it('renders with aria-modal and dialog role', () => {
     render(
-      <ViewModal isOpen={true} onClose={vi.fn()} title="Test Modal">
+      <ModalCard onClose={vi.fn()} title="Test Modal">
         <p>Content</p>
-      </ViewModal>,
+      </ModalCard>,
     );
 
     const dialog = screen.getByRole('dialog');
@@ -50,9 +39,9 @@ describe('ViewModal', () => {
   it('calls onClose when the close button is clicked', () => {
     const onClose = vi.fn();
     render(
-      <ViewModal isOpen={true} onClose={onClose} title="Test Modal">
+      <ModalCard onClose={onClose} title="Test Modal">
         <p>Content</p>
-      </ViewModal>,
+      </ModalCard>,
     );
 
     const closeButton = screen.getByRole('button');
@@ -63,9 +52,9 @@ describe('ViewModal', () => {
   it('calls onClose when Escape key is pressed', () => {
     const onClose = vi.fn();
     render(
-      <ViewModal isOpen={true} onClose={onClose} title="Test Modal">
+      <ModalCard onClose={onClose} title="Test Modal">
         <p>Content</p>
-      </ViewModal>,
+      </ModalCard>,
     );
 
     fireEvent.keyDown(document, { key: 'Escape' });
@@ -76,9 +65,9 @@ describe('ViewModal', () => {
   // it('calls onClose when clicking outside the modal', () => {
   //   const onClose = vi.fn();
   //   render(
-  //     <ViewModal isOpen={true} onClose={onClose} title="Test Modal">
+  //     <ModalCard onClose={onClose} title="Test Modal">
   //       <p>Content</p>
-  //     </ViewModal>,
+  //     </ModalCard>,
   //   );
 
   //   // mousedown on the overlay (outside the modal)
@@ -89,14 +78,13 @@ describe('ViewModal', () => {
 
   it('applies bodyStyle to the modal body', () => {
     render(
-      <ViewModal
-        isOpen={true}
+      <ModalCard
         onClose={vi.fn()}
         title="Test Modal"
         bodyStyle={{ maxWidth: 'none', padding: '2em' }}
       >
         <p>Content</p>
-      </ViewModal>,
+      </ModalCard>,
     );
 
     const body = screen.getByText('Content').closest('.ModalBody') as HTMLElement;
