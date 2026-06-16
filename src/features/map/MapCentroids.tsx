@@ -11,7 +11,7 @@ import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
-import { MAP_ASPECT_RATIO } from './MapConsts';
+import { MAP_ASPECT_RATIO, MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
 
 import './map.css';
 
@@ -117,7 +117,9 @@ const ObjectNode: React.FC<NodeProps> = ({
   const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
 
   return (
-    <g transform={`translate(${x * 178.5}, ${y * -90}) scale(${1 / zoomFactor})`}>
+    <g
+      transform={`translate(${x * MAP_ROBINSON_X_SCALE}, ${y * -MAP_ROBINSON_Y_SCALE}) scale(${1 / zoomFactor})`}
+    >
       {showCircle && (
         <Circle
           color={color}
