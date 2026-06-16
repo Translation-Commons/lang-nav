@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -52,7 +52,6 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
   const [mapScale, setMapScale] = useState(1);
-  const prevObjectTypeRef = useRef(objectType);
 
   const updateMapScale = useCallback(() => {
     const rect = contentRef.current?.getBoundingClientRect();
@@ -105,10 +104,11 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
   const openCard = useCallback(
     (entity: DrawableData) => {
+      updateMapScale();
       if (pinned.includes(entity.ID)) return;
       updatePageParams({ pinned: [...pinned, entity.ID] });
     },
-    [pinned, updatePageParams],
+    [pinned, updateMapScale,updatePageParams],
   );
 
   const closeCard = useCallback(
@@ -137,15 +137,6 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   useEffect(() => {
     requestAnimationFrame(updateMapScale);
   }, [updateMapScale]);
-
-  // Clear pinned cards when the object type changes, but not on the initial mount so that pinned
-  // cards can still be restored from the URL after a refresh.
-  useEffect(() => {
-    if (prevObjectTypeRef.current !== objectType) {
-      prevObjectTypeRef.current = objectType;
-      updatePageParams({ pinned: [] });
-    }
-  }, [objectType, updatePageParams]);
 
   return (
     <div style={{ maxWidth, width: '100%', position: 'relative' }}>
