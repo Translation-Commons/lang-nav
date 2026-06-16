@@ -108,7 +108,7 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
       if (pinned.includes(entity.ID)) return;
       updatePageParams({ pinned: [...pinned, entity.ID] });
     },
-    [pinned, updateMapScale,updatePageParams],
+    [pinned, updateMapScale, updatePageParams],
   );
 
   const closeCard = useCallback(
