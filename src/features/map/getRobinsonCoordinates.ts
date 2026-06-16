@@ -1,4 +1,7 @@
 // Official Robinson table from Snyder (1987), for every 5° of latitude.
+
+import DrawableData from './DrawableData';
+
 // Each row: [latitude_deg, x_coeff (A), y_coeff (B)]
 const ROBINSON = [
   [0, 1.0, 0.0],
@@ -39,4 +42,14 @@ export function getRobinsonCoordinates(lat: number, lon: number) {
   const y = Math.sign(lat) * B; // scaled like y=1 at 90°
 
   return { x, y };
+}
+
+// The coordinates are shifted 11 degrees east to center the map.
+export function getRobinsonCoordinatesShifted(object: DrawableData) {
+  if (object == null) return { x: 0, y: 0 };
+  if (object.latitude == null || object.longitude == null) return { x: 0, y: 0 };
+  return getRobinsonCoordinates(
+    object.latitude,
+    (object.longitude < -169 ? object.longitude + 360 : object.longitude) - 11,
+  );
 }
