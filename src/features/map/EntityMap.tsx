@@ -33,8 +33,9 @@ type FloatingCard = {
   y: number;
 };
 
-const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
+const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
+  const { pageBrightness } = usePageParams().brightness;
 
   const [zoomFactor, setZoomFactor] = useState(1);
 
@@ -130,7 +131,7 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
       <div
         ref={containerRef}
         style={{
-          border: '1px solid #ccc',
+          border: '1px solid var(--border-color)',
           width: '100%',
           aspectRatio: MAP_ASPECT_RATIO,
           overflow: 'hidden',
@@ -141,11 +142,7 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
       >
         <div
           ref={contentRef}
-          style={{
-            width: MAP_INTERNAL_WIDTH,
-            height: mapHeight,
-            position: 'relative',
-          }}
+          style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
         >
           <img
             alt="World map"
@@ -156,6 +153,7 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
               height: '100%',
               top: 0,
               left: 0,
+              filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined,
             }}
           />
 
@@ -203,4 +201,4 @@ const ObjectMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   );
 };
 
-export default ObjectMap;
+export default EntityMap;
