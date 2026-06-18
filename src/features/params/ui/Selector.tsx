@@ -26,6 +26,8 @@ type Props<T> = {
   selectorStyle?: React.CSSProperties;
 };
 
+const FILTER_LIST_INITIAL_COUNT = 4;
+
 function Selector<T extends React.Key>({
   display,
   getOptionDescription,
@@ -41,14 +43,33 @@ function Selector<T extends React.Key>({
 }: Props<T>) {
   const [expanded, setExpanded] = useState(false);
   const optionsRef = useClickOutside(() => {
-    setTimeout(() => setExpanded(false), 100);
+    // Only auto-collapse for dropdown modes; FilterList is a persistent filter UI
+    if (display !== SelectorDisplay.FilterList) {
+      setTimeout(() => setExpanded(false), 100);
+    }
   });
+
+  // For FilterList: collapse to first N items unless expanded
+  const isFilterList = display === SelectorDisplay.FilterList;
+  const filterListCollapsed =
+    isFilterList && !expanded && options.length > FILTER_LIST_INITIAL_COUNT;
+  const visibleOptions = filterListCollapsed
+    ? options.slice(0, FILTER_LIST_INITIAL_COUNT)
+    : options;
 
   return (
     <SelectorContainer manualStyle={selectorStyle} manualDisplay={display}>
       {selectorLabel && <SelectorLabel label={selectorLabel} description={selectorDescription} />}
 
-      <div style={{ position: 'relative', display: 'flex', alignItems: 'center' }}>
+      <div
+        style={{
+          position: isFilterList ? undefined : 'relative',
+          display: 'flex',
+          width: isFilterList ? '100%' : undefined,
+          alignItems: isFilterList ? 'flex-start' : 'center',
+          flexDirection: isFilterList ? 'column' : 'row',
+        }}
+      >
         {/* The dropdown menu or the button list */}
         <OptionsContainer
           isExpanded={expanded}
@@ -59,14 +80,21 @@ function Selector<T extends React.Key>({
             getOptionDescription={getOptionDescription}
             getOptionLabel={getOptionLabel}
             onClick={(option) => {
-              setExpanded(false);
+              if (!isFilterList) setExpanded(false);
               onChange(option);
             }}
             optionStyle={optionStyle}
-            options={options}
+            options={visibleOptions}
             selected={selected}
           />
         </OptionsContainer>
+
+        {/* "More / Less" toggle for FilterList when there are enough options */}
+        <FilterListMoreButton
+          totalCount={options.length}
+          isExpanded={expanded}
+          toggle={() => setExpanded((prev) => !prev)}
+        />
 
         {/* Standalone option to open/close the dropdown menu */}
         <DropdownButton<T>
@@ -93,7 +121,21 @@ const SelectorContainer: React.FC<
 
   // Prepare the container. If there was a manual display, then wrap in a provider.
   const container = (
-    <div className={'selector ' + display} style={{ ...manualStyle }}>
+    <div
+      className={'selector ' + display}
+      style={{
+        ...(display === SelectorDisplay.FilterList
+          ? {
+              display: 'flex',
+              flexDirection: 'column',
+              width: '100%',
+              alignItems: 'flex-start',
+              alignSelf: 'stretch',
+            }
+          : {}),
+        ...manualStyle,
+      }}
+    >
       {children}
     </div>
   );
@@ -126,6 +168,20 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
             flexWrap: 'wrap',
             gap: '0.25em',
             marginLeft: hasSelectorLabel ? '1em' : 'none',
+          }}
+        >
+          {children}
+        </div>
+      );
+    case SelectorDisplay.FilterList:
+      return (
+        <div
+          ref={containerRef}
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0',
+            alignItems: 'flex-start',
           }}
         >
           {children}
@@ -173,6 +229,38 @@ function Options<T extends React.Key>({
     />
   ));
 }
+
+type FilterListMoreButtonProps = {
+  totalCount: number;
+  isExpanded: boolean;
+  toggle: () => void;
+};
+
+const FilterListMoreButton: React.FC<FilterListMoreButtonProps> = ({
+  totalCount,
+  isExpanded,
+  toggle,
+}) => {
+  const { display } = useSelectorDisplay();
+  if (display !== SelectorDisplay.FilterList || totalCount <= FILTER_LIST_INITIAL_COUNT)
+    return null;
+
+  return (
+    <button
+      onClick={toggle}
+      style={{
+        width: 'fit-content',
+        borderRadius: '0.25em',
+        color: 'inherit',
+        cursor: 'pointer',
+        fontSize: '0.9em',
+        padding: '0.2em 3.5em',
+      }}
+    >
+      {isExpanded ? 'Collapse' : 'Expand All'}
+    </button>
+  );
+};
 
 type DropdownButtonProps<T> = {
   getOptionDescription?: (value: T) => React.ReactNode;

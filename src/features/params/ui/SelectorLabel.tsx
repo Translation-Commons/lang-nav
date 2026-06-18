@@ -50,6 +50,9 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
     case SelectorDisplay.InlineDropdown:
       style.padding = '0 0.5em';
       break;
+    case SelectorDisplay.FilterList:
+      style.padding = '0 0 0.5em 0.5em';
+      break;
     case SelectorDisplay.Dropdown:
       // nothing special
       break;
