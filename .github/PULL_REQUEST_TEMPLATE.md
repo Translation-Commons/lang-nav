@@ -1,25 +1,19 @@
 Fixes #ISSUE_NUMBER
 
-Summary: Replaced dropdown/button displays for enum filters with a new Filter List display mode that shows options as a compact vertical list, showing the first 4 with an "Expand All" toggle when there are 5 or more.
+Summary: ...
 
 ### Changes
 
 - User experience
-  - Enum filters (Language Authority, Modality, Languoid Type, Territory Type, ISO Language Status) now show as a vertical plain-text list instead of a dropdown or button group
-  - Options are visible at a glance without needing to open a dropdown
-  - "Expand All" / "Collapse" button appears when there are more than 4 options
+  - ...
 - Logical changes
-  - Added FilterList to the SelectorDisplay enum
-  - Selector now slices visible options to the first 4 when in FilterList mode and not expanded
-  - FilterListMoreButton component added to Selector for the expand/collapse toggle
-  - SelectorContainer renders as flex-column with full width for FilterList
-  - useClickOutside guarded to not collapse FilterList state on outside click
+  - ...
 - Data
-  - No data changes
+  - ...
 - Refactors
-  - LanguageModalitySelector, LanguageScopeSelector, TerritoryScopeSelector, VitalitySelector updated to accept and forward a display prop
+  - ...
 
-Out of scope/Future work: The dual meaning of expanded state (dropdown open vs filter list expanded) could be split into two separate state variables for clarity.
+Out of scope/Future work: ...
 
 ### Test Plan and Screenshots
 
