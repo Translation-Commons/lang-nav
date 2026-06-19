@@ -1,5 +1,7 @@
+import { PinIcon, PinOffIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -11,8 +13,21 @@ interface Props {
 }
 
 const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object }) => {
-  const { updatePageParams, objectID } = usePageParams();
+  const { updatePageParams, objectID, pinned } = usePageParams();
   const [isHovering, setIsHovering] = React.useState(false);
+  const [isHoveringPin, setIsHoveringPin] = React.useState(false);
+
+  const isPinned = pinned.includes(object.ID);
+  const togglePin = useCallback(() => {
+    updatePageParams({
+      pinned: isPinned ? pinned.filter((id) => id !== object.ID) : [...pinned, object.ID],
+    });
+  }, [isPinned, pinned, object.ID, updatePageParams]);
+
+  // The pin button is only visible while hovering the card or when the card is already pinned.
+  const showPinButton = isHovering || isPinned;
+  // When a pinned card's button is hovered, show the "unpin" affordance instead.
+  const PinButtonIcon = isPinned && isHoveringPin ? PinOffIcon : PinIcon;
   const borderColor = useMemo(() => {
     if (objectID === object.ID) return 'var(--color-button-primary)';
     if (isHovering) return 'var(--color-button-hover)';
@@ -55,6 +70,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
       onMouseLeave={() => setIsHovering(false)}
       role="button"
       style={{
+        position: 'relative',
         borderWidth: '2px',
         borderStyle: 'solid',
         borderRadius: '0.5em',
@@ -67,6 +83,32 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
       }}
       tabIndex={0}
     >
+      {showPinButton && (
+        <HoverableButton
+          hoverContent={isPinned ? 'Unpin from the page' : 'Pin to the page'}
+          onClick={togglePin}
+          className="CardPinButton"
+          style={{
+            position: 'absolute',
+            top: '0.5rem',
+            right: '0.5rem',
+            background: 'transparent',
+            border: 'none',
+            padding: '0.25rem',
+            lineHeight: 0,
+            color: isPinned ? 'var(--color-button-primary)' : 'var(--color-text)',
+          }}
+        >
+          <span
+            aria-label={isPinned ? 'Unpin from the page' : 'Pin to the page'}
+            onMouseEnter={() => setIsHoveringPin(true)}
+            onMouseLeave={() => setIsHoveringPin(false)}
+            style={{ display: 'inline-flex' }}
+          >
+            <PinButtonIcon size="1em" />
+          </span>
+        </HoverableButton>
+      )}
       {children}
     </div>
   );
