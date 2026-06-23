@@ -13,13 +13,15 @@ import DrawableData from './DrawableData';
 type Props = {
   drawableEntities: DrawableData[];
   coloringFunctions: ColoringFunctions;
-  openCard: (obj: DrawableData, x: number, y: number) => void;
+  pinCard: (obj: DrawableData) => void;
+  hoveredId?: string | null;
 };
 
 const MapTerritories: React.FC<Props> = ({
   drawableEntities,
   coloringFunctions: { colorBy, getColor },
-  openCard,
+  pinCard,
+  hoveredId,
 }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
@@ -61,8 +63,14 @@ const MapTerritories: React.FC<Props> = ({
       }
 
       element.style.cursor = 'pointer';
+
+      if (hoveredId === territory.ID) {
+        element.style.opacity = '0.7';
+      } else {
+        element.style.opacity = '1';
+      }
     });
-  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded]);
+  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded, hoveredId]);
 
   const buildOnMouseEnter = useCallback(
     (territory: TerritoryData, element: SVGElement) => (ev: MouseEvent) => {
@@ -96,7 +104,7 @@ const MapTerritories: React.FC<Props> = ({
     forEachTerritory((territory, element) => {
       const handleClick = (ev: MouseEvent) => {
         ev.stopPropagation();
-        openCard(territory, ev.clientX, ev.clientY);
+        pinCard(territory);
       };
 
       const handleMouseEnter = buildOnMouseEnter(territory, element);
@@ -114,7 +122,7 @@ const MapTerritories: React.FC<Props> = ({
     });
 
     return () => cleanupListeners.forEach((cleanup) => cleanup());
-  }, [buildOnMouseEnter, buildOnMouseLeave, openCard, territories, svgLoaded]);
+  }, [buildOnMouseEnter, buildOnMouseLeave, pinCard, territories, svgLoaded]);
 
   return (
     <div

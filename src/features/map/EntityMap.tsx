@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -14,15 +14,9 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
-import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
-import MapCard from './MapCard';
 import MapCentroids from './MapCentroids';
-import {
-  MAP_ASPECT_RATIO,
-  MAP_INTERNAL_WIDTH,
-  MAP_ROBINSON_X_SCALE,
-  MAP_ROBINSON_Y_SCALE,
-} from './MapConsts';
+import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
+import MapSidebar from './MapSidebar';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
 import ZoomControls from './ZoomControls';
@@ -32,16 +26,11 @@ type Props = {
   maxWidth?: number;
 };
 
-type FloatingCard = {
-  id: string;
-  entity: DrawableData;
-  x: number;
-  y: number;
-};
-
 const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
+
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const [zoomFactor, setZoomFactor] = useState(1);
 
@@ -52,14 +41,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   });
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
-  const [mapScale, setMapScale] = useState(1);
-
-  const updateMapScale = useCallback(() => {
-    const rect = contentRef.current?.getBoundingClientRect();
-    if (!rect) return;
-
-    setMapScale(rect.width / MAP_INTERNAL_WIDTH);
-  }, [contentRef]);
 
   const drawableEntities = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -83,135 +64,98 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
   const coloringFunctions = useColors({ objects: drawableEntities });
 
-  // Floating cards are derived from the pinned page param so they can be fully restored from the
-  // URL after a refresh. Each card is positioned at its entity's Robinson centroid.
-  const floatingCards = useMemo<FloatingCard[]>(() => {
+  const pinnedEntities = useMemo(() => {
     const drawableById = new Map(drawableEntities.map((entity) => [entity.ID, entity]));
     return pinned
-      .map((id) => {
-        const entity = drawableById.get(id);
-        if (entity == null || entity.latitude == null || entity.longitude == null) return undefined;
+      .map((id) => drawableById.get(id))
+      .filter((entity): entity is DrawableData => entity != null);
+  }, [pinned, drawableEntities]);
 
-        const { x: robinsonX, y: robinsonY } = getRobinsonCoordinatesShifted(entity);
-        return {
-          id,
-          entity,
-          x: MAP_INTERNAL_WIDTH / 2 + robinsonX * MAP_ROBINSON_X_SCALE,
-          y: mapHeight / 2 - robinsonY * MAP_ROBINSON_Y_SCALE,
-        };
-      })
-      .filter((card): card is FloatingCard => card != null);
-  }, [pinned, drawableEntities, mapHeight]);
-
-  const openCard = useCallback(
+  const pinCard = useCallback(
     (entity: DrawableData) => {
-      updateMapScale();
-      if (pinned.includes(entity.ID)) return;
-      updatePageParams({ pinned: [...pinned, entity.ID] });
+      if (pinned.includes(entity.ID)) {
+        updatePageParams({ pinned: pinned.filter((id) => id !== entity.ID) });
+      } else {
+        updatePageParams({ pinned: [...pinned, entity.ID] });
+      }
     },
-    [pinned, updateMapScale, updatePageParams],
+    [pinned, updatePageParams],
   );
 
-  const closeCard = useCallback(
+  const unpinCard = useCallback(
     (id: string) => {
       updatePageParams({ pinned: pinned.filter((pin) => pin !== id) });
     },
     [pinned, updatePageParams],
   );
 
-  const handleZoomIn = useCallback(() => {
-    zoomIn();
-    requestAnimationFrame(updateMapScale);
-  }, [zoomIn, updateMapScale]);
-
-  const handleZoomOut = useCallback(() => {
-    zoomOut();
-    requestAnimationFrame(updateMapScale);
-  }, [zoomOut, updateMapScale]);
-
-  const handleResetTransform = useCallback(() => {
-    resetTransform();
-    requestAnimationFrame(updateMapScale);
-  }, [resetTransform, updateMapScale]);
-
-  // Restore the map scale on mount so URL-restored cards are sized correctly before any zoom.
-  useEffect(() => {
-    requestAnimationFrame(updateMapScale);
-  }, [updateMapScale]);
-
   return (
     <div style={{ maxWidth, width: '100%', position: 'relative' }}>
-      <ZoomControls
-        zoomIn={handleZoomIn}
-        zoomOut={handleZoomOut}
-        resetTransform={handleResetTransform}
-      />
+      <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
 
       <div
-        ref={containerRef}
         style={{
           border: '1px solid var(--border-color)',
           width: '100%',
           aspectRatio: MAP_ASPECT_RATIO,
+          display: 'flex',
           overflow: 'hidden',
-          cursor: 'grab',
-          position: 'relative',
+          background: 'var(--color-background)',
         }}
-        onClick={() => updatePageParams({ pinned: [] })}
       >
+        <MapSidebar
+          pinnedEntities={pinnedEntities}
+          objectType={objectType}
+          onClose={unpinCard}
+          hoveredId={hoveredId}
+          setHoveredId={setHoveredId}
+        />
+
         <div
-          ref={contentRef}
-          style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
+          ref={containerRef}
+          style={{
+            flex: 1,
+            overflow: 'hidden',
+            cursor: 'grab',
+            position: 'relative',
+          }}
         >
-          <img
-            alt="World map"
-            src="./data/wiki/map_world.svg"
-            style={{
-              position: 'absolute',
-              width: '100%',
-              height: '100%',
-              top: 0,
-              left: 0,
-              filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined,
-            }}
-          />
-
-          {objectType !== ObjectType.Language && (
-            <MapTerritories
-              drawableEntities={drawableEntities}
-              openCard={openCard}
-              coloringFunctions={coloringFunctions}
-            />
-          )}
-
-          <MapCentroids
-            drawableEntities={drawableEntities}
-            openCard={openCard}
-            scalar={1200 / maxWidth}
-            zoomFactor={zoomFactor}
-            coloringFunctions={coloringFunctions}
-          />
-          {floatingCards.map((card) => (
-            <div
-              key={card.id}
+          <div
+            ref={contentRef}
+            style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
+          >
+            <img
+              alt="World map"
+              src="./data/wiki/map_world.svg"
               style={{
                 position: 'absolute',
-                left: card.x,
-                top: card.y + 12 / mapScale,
-                transform: `translateX(-50%) scale(${1 / mapScale})`,
-                transformOrigin: 'top center',
-                zIndex: 10,
-                cursor: 'default',
+                width: '100%',
+                height: '100%',
+                top: 0,
+                left: 0,
+                filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined,
               }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <MapCard
-                drawnEntity={card.entity}
-                objectType={objectType}
-                onClose={() => closeCard(card.id)}
+            />
+
+            {objectType !== ObjectType.Language && (
+              <MapTerritories
+                drawableEntities={drawableEntities}
+                pinCard={pinCard}
+                coloringFunctions={coloringFunctions}
+                hoveredId={hoveredId}
               />
-            </div>
-          ))}
+            )}
+
+            <MapCentroids
+              drawableEntities={drawableEntities}
+              pinCard={pinCard}
+              scalar={1200 / maxWidth}
+              zoomFactor={zoomFactor}
+              coloringFunctions={coloringFunctions}
+              hoveredId={hoveredId}
+              pinnedIds={pinned}
+            />
+          </div>
         </div>
       </div>
 
