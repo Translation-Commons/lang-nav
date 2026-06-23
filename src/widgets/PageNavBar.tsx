@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
@@ -12,6 +13,8 @@ import SettingsButton from './controls/SettingsButton';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
+  const [feedbackOpen, setFeedbackOpen] = React.useState(false);
+  const closeFeedback = React.useCallback(() => setFeedbackOpen(false), []);
 
   return (
     <NavBarContainer>
@@ -32,7 +35,17 @@ const PageNavBar: React.FC = () => {
         <SearchBar />
       </div>
       <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center', gap: '0.5em' }}>
-        <FeedbackForm />
+        <div style={{ position: 'relative' }}>
+          <HoverableButton
+            className={'primary' + (feedbackOpen ? ' ButtonFocused' : '')}
+            onClick={() => setFeedbackOpen((prev) => !prev)}
+            hoverContent="Send feedback to the LangNav team"
+            style={{ padding: '0.5em' }}
+          >
+            Feedback
+          </HoverableButton>
+          {feedbackOpen && <FeedbackForm onClose={closeFeedback} />}
+        </div>
         <SettingsButton />
       </div>
     </NavBarContainer>
