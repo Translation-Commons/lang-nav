@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import InteractiveEntityTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 
@@ -70,7 +70,7 @@ const ReportLanguageScopeIssues: React.FC = () => {
             exportValue: (lang) => formatLanguagePath(getLanguagePath(lang)),
           },
         ]}
-        objects={languagesWithIssues}
+        entities={languagesWithIssues}
       />
     </>
   );
