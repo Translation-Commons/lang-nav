@@ -1,0 +1,40 @@
+#nameDisplay		Curaçao 2023	Curaçao 2023 L1	Curaçao 2023 L2	Curaçao 2023 L3
+#isoRegionCode	CW				
+#yearCollected	2023				
+### Language Criteria ###					
+#languageUse	Speaks				
+#acquisitionOrder		Any	L1	L2	L3
+### Population Surveyed ###					
+#population	155,826				
+#populationSource					
+#populationWithPositiveResponses	147,498				
+#populationSurveyed	155,826				
+#sampleRate	1				
+#responsesPerIndividual			1	1	1
+### Data Constraints ###					
+#geographicScope	whole country				
+#age	0+				
+#nationality	residents				
+#residenceBasis	de jure				
+#quantity	percent				
+### Creator ###					
+#collectorType	Government				
+#collectorName	Centraal Bureau voor de Statistiek Curaçao				
+#collectorNameShort	CBS Curaçao				
+#author					
+### Source Document ###					
+#url	https://cuatro.sim-cdn.nl/sensocbs/uploads/04062024-publicatie-eerste-resultaten-census-2023.pdf				
+#datePublished	2024-06-04				
+#dateAccessed	2026-06-02				
+#documentName	Publicatie Eerste Resultaten Census 2023				
+#sectionName	Talen gesproken thuis				
+#tableName	Meest gesproken taal/talen thuis				
+#columnName		Gepsroken thuistaal (plaats onwillekeurig)	eerste taal	tweede taal	derde taal
+#citation	Centraal Bureau voor de Statistiek Curaçao (CBS Curaçao). Census 2023 – Talen gesproken thuis, tabel “Meest gesproken taal/talen thuis”, eerste taal.				
+#notes					
+Language Code	Language	Population			
+pap	Papiamentu	89.9%	78.0%	9.9%	2.0%
+nld	Dutch	26.4%	7.9%	11.6%	6.9%
+spa	Spanish	18.0%	8.4%	5.9%	3.7%
+eng	English	22.1%	3.8%	10.8%	7.5%
+mul	Other	3.6%	2.0%	1.1%	0.5%

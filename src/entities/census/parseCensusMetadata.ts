@@ -23,6 +23,9 @@ export type CensusMetadataResults = {
 
   // The column numbers (0-indexed) which contain census data (as opposed to metadata or context columns)
   tsvColumnsWithData: number[];
+
+  // If true, the file only has a single column of language names and no census data
+  singleColumnMode?: boolean;
 };
 
 export function parseCensusMetadata(lines: string[], filePath: string): CensusMetadataResults {
@@ -42,6 +45,18 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
   // This will be used to initialize metadatas and other arrays
   const tsvColumnsWithData = getColumnIndicesWithData(lines);
   if (tsvColumnsWithData.length <= 0) {
+    // See if its just 1 column of data
+    const singleColumnMode = lines.every((line) => line.includes('\t') === false);
+    if (singleColumnMode) {
+      return {
+        censuses: [],
+        warnings,
+        endOfMetadataLine: 0,
+        tsvColumnsWithData: [],
+        singleColumnMode: true,
+      };
+    }
+    // Otherwise it may be more data but the file is not formatted correctly, so we will return an error
     addWarning('No census data columns found. Check that the file has the correct format.');
   }
 
@@ -58,7 +73,7 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
     yearCollected: 0,
     population: 0,
     languageEstimates: {},
-    collectorType: CensusCollectorType.Government,
+    collectorType: CensusCollectorType.Unknown,
     url: '',
   }));
 
@@ -129,6 +144,8 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
     if (!census.population) addWarning('population is not specified');
     if (!census.nameDisplay) addWarning('nameDisplay is not specified');
     if (!census.url) addWarning('url is not specified');
+    if (census.collectorType === CensusCollectorType.Unknown)
+      addWarning('collectorType is not specified');
   });
 
   return {

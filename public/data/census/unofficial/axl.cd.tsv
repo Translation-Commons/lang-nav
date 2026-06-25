@@ -1,4 +1,4 @@
-#nameDisplay		Congo Kinshasa, Local Languages	Congo Kinshasa, National Languages	Congo Kinshasa, National Languages L1	Congo Kinshasa, National Languages L2	Congo Kinshasa, National Languages Percent	Congo Kinshasa, Official Languages
+#nameDisplay		AXL Congo Kinshasa, Local Languages	AXL Congo Kinshasa, National Languages	AXL Congo Kinshasa, National Languages L1	AXL Congo Kinshasa, National Languages L2	AXL Congo Kinshasa, National Languages Percent	AXL Congo Kinshasa, Official Languages
 #isoRegionCode	CD						
 #yearCollected	1996						
 ### Language Criteria ###							
@@ -12,7 +12,7 @@
 #quantity	count					percent	percent
 ### Creator ###							
 #collectorType	Secondary						
-#author	Jacques LeClerc						
+#author	Jacques Leclerc						
 #presentedBy	AXL						
 ### Source Document ###							
 #url	https://www.axl.cefan.ulaval.ca/afrique/czaire.htm						

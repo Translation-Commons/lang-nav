@@ -1,0 +1,55 @@
+#codeDisplay		#fr	axl.qa	#axl.qa.perc	#ethnic group
+#nameDisplay			AXL Qatar	Qatar 2025 percent	
+#isoRegionCode	QA				
+#yearCollected	2025				
+### Language Criteria ###					
+#languageUse	Speaks				
+#proficiency	Native				
+#acquisitionOrder	L1				
+#domain	Any				
+### Population Surveyed ###					
+#population	3,116,000				
+#sampleRate					
+#responsesPerIndividual			1		
+### Data Constraints ###					
+#geographicScope	Whole country				
+#age	0+				
+#nationality	Resident				
+#residenceBasis	de facto				
+#quantity			count 	percent	
+### Creator ###					
+#collectorType	Secondary				
+#author	Jacques Leclerc				
+#presentedBy	AXL				
+### Source Document ###					
+#url	https://www.axl.cefan.ulaval.ca/asie/qatar.htm		     		
+#tableName	Section 2.1: ethnic groups table (Ethnie / Langue maternelle / Population / Pourcentage / Affiliation linguistique / Religion principale)				
+#notes					
+Language Code	Languge		Population	Percentage	Ethnic Group 
+ara/afb	Qatari Arabic	arabe qatari (arabe du Golfe)	611000	19.6	Arabe qatari
+ara/apc/ajp	Palestinian Arabic	arabe palestinien	405000	13	Arabe palestinien
+fas/pes	Western Farsi	farsi de l'Ouest	302000	9.7	Iranien (Persan)
+ara/apc	Lebanese Arabic	arabe libanais	292000	9.4	Arabe libanais
+ara/apc	Syrian Arabic	arabe syrien	292000	9.4	Arabe syrien
+urd	Urdu	ourdou	191000	6.1	Ourdou
+nep	Nepali	népali	150000	4.8	Népalais
+fil	Filipino	philippin	135000	4.3	Philippin
+ara/afb	Gulf Arabic	arabe du Golfe	133000	4.3	Yéménite ou Akhdam
+mal	Malayalam	malayalam	84000	2.7	Malayali
+ara/ars	Najdi Arabic	arabe saoudien du Najdi	61000	2	Arabe saoudien du Najdi
+ara/arz	Egyptian Arabic	arabe égyptien	61000	2	Arabe égyptien
+sin	Sinhala	cinghalais	61000	2	Srilankais cinghalais
+bal/bcc	Southern Balochi	baloutchi du Sud	61000	2	Baloutche du Sud
+ara/apd	Sudanese Arabic	arabe soudanais	61000	2	Arabe soudanais
+msa/ind	Indonesian	indonésien	44000	1.4	Indonésien
+ara/acw	Hijazi Arabic	arabe hijazi	30000	1	Arabe saoudien
+tam	Tamil	tamoul	30000	1	Tamoul
+eng	English	anglais	29000	0.9	Britannique
+eng	English	anglais	15000	0.5	Américain
+fra	French	français	9100	0.3	Français
+hye	Armenian	arménien	9000	0.3	Arménien
+deu	German	allemand	6000	0.2	Allemand
+tig	Tigre	tigré	6000	0.2	Érythréen tigré
+tur	Turkish	turc	5600	0.2	Turc
+mul	other		35000	1.1	Autres
+	Total		3116000	100	

@@ -10,7 +10,7 @@
 #age		14+	15+	15+	9+	9+	9+	9+
 #responsesPerIndividual		1	1+	1+	1+	1+	1+	1+
 #url		https://data.un.org/Data.aspx?d=POP&f=tableCode:27	http://www.insee.fr/fr/insee_regions/mayotte/themes/dossiers/rp/rp2002/for5.xls	https://web.archive.org/web/20150924164057/https://www.insee.fr/fr/insee_regions/mayotte/themes/dossiers/rp/rp2002/for4.xls	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf	https://web.archive.org/web/20070614075940/http://www.ac-mayotte.fr/IMG/pdf/Interv_BARRETEAU_CM2.pdf
-#collectorType		Government	Government	Government	Study			
+#collectorType		Government	Government	Government	Study	Study	Study	Study
 #notes		Census - de jure - complete tabulation			Recomputed from a highly sampled sociolinguistic dataset. Targetting "Mothertongue"			
 swb	Mahorais/Shimaore		37840	80140	71789	115009	1480	2371
 fra	French/Français	6,696	50607	54784	1795	74166	37	1529
