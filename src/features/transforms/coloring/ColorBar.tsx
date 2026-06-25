@@ -51,7 +51,10 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
     return () => observer.disconnect();
   }, []);
 
-  const ticks = useMemo(() => getTicks(coloringFunctions), [coloringFunctions]);
+  const ticks = useMemo(
+    () => getTicks(coloringFunctions, containerWidth),
+    [coloringFunctions, containerWidth],
+  );
   const renormalize = isFieldWholeNumbersOnly(coloringFunctions.colorBy)
     ? (value: number) =>
         coloringFunctions.getNormalizedValue(
@@ -103,7 +106,10 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
  *
  * @returns An array of tuples where each tuple contains a normalized position (0 to 1) and its corresponding label.
  */
-function getTicks(coloringFunctions: ColoringFunctions): { position: number; label: string }[] {
+function getTicks(
+  coloringFunctions: ColoringFunctions,
+  widthPx: number,
+): { position: number; label: string }[] {
   const { colorBy, minValue, maxValue, getDenormalizedValue, getNormalizedValue } =
     coloringFunctions;
   if (colorBy === Field.None) return [];
@@ -193,7 +199,7 @@ function getTicks(coloringFunctions: ColoringFunctions): { position: number; lab
 
   const formatter = new Intl.NumberFormat(undefined, {
     notation: 'compact',
-    compactDisplay: 'long', // or 'long' for “thousand”, “million”
+    compactDisplay: widthPx < 700 ? 'short' : 'long',
     maximumFractionDigits: 1,
   });
 
