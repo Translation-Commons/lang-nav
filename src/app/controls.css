@@ -10,7 +10,6 @@
   display: flex;
   align-items: center;
   flex-direction: row;
-
 }
 
 .selector.buttonList .selectorOptions {
@@ -49,7 +48,6 @@
   font-size: 0.9em;
   padding: 0.25em 3.5em;
 }
-
 
 .selector.buttonList {
   flex-direction: column;
