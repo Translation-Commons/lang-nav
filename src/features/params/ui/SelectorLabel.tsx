@@ -36,7 +36,7 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
     margin: 'auto 0', // Vertically center
     whiteSpace: 'nowrap',
     borderRadius: '1em',
-    marginBottom: '-0.5em' // adjusted to have selector buttons closer to their label
+    marginBottom: '-0.5em', // adjusted to have selector buttons closer to their label
   };
 
   switch (display) {

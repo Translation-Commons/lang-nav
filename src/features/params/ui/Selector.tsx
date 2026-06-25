@@ -113,10 +113,7 @@ const SelectorContainer: React.FC<
 
   // Prepare the container. If there was a manual display, then wrap in a provider.
   const container = (
-    <div
-      className={'selector ' + display}
-      style={{ ...manualStyle }}
-    >
+    <div className={'selector ' + display} style={{ ...manualStyle }}>
       {children}
     </div>
   );
@@ -142,7 +139,8 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
   switch (display) {
     case SelectorDisplay.ButtonList:
       return (
-        <div className='selectorOptions'
+        <div
+          className="selectorOptions"
           ref={containerRef}
           style={{ marginLeft: hasSelectorLabel ? '1em' : 'none' }}
         >
@@ -151,7 +149,8 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
       );
     case SelectorDisplay.FilterList:
       return (
-        <div className="selectorOptions"
+        <div
+          className="selectorOptions"
           ref={containerRef}
           style={{ marginLeft: hasSelectorLabel ? '1em' : 'none' }}
         >
@@ -217,9 +216,7 @@ const FilterListMoreButton: React.FC<FilterListMoreButtonProps> = ({
     return null;
 
   return (
-    <button className="filterListMoreButton"
-      onClick={toggle}
-    >
+    <button className="filterListMoreButton" onClick={toggle}>
       {isExpanded ? 'Collapse' : 'Expand All'}
     </button>
   );
