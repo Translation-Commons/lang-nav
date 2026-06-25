@@ -1,0 +1,25 @@
+# Manual overrides for Combined language family hierarchy.
+# ISO-only groupings that Glottolog does not use need explicit Combined parent/child fixes.
+# Only Combined.parentLanguageCode is modified; ISO and Glottolog sources are unchanged.
+parentLanguageCode	childLanguageCode	notes
+sqj	sqi	Albanian macrolanguage in Albanian family
+qwe	que	Quechuan macrolanguage in Quechuan family
+euq	eus	Basque language in Basque family
+map	fox	Formosan in Austronesian
+fox	east2493	East Formosan in Formosan
+fox	atay1246	Atayalic in Formosan
+fox	pwn	Paiwan in Formosan
+fox	bnn	Bunun in Formosan
+fox	dru	Rukai in Formosan
+fox	nort2899	Northwest Formosan in Formosan
+fox	tsou1250	Tsouic in Formosan
+fox	pyu	Puyuma in Formosan
+fox	west2572	Western Plains Austronesian in Formosan
+sdv	nilo1247	Nilotic in Eastern Sudanic
+omv	gong1255	Ta-Ne-Omotic in Omotic
+omv	sout2845	South Omotic in Omotic
+sai	ayma1253	Aymaran in South American Indian
+sai	arau1255	Araucanian in South American Indian
+ssa	fura1235	Furan in Nilo-Saharan
+ssa	maba1274	Maban in Nilo-Saharan
+nic	dogo1299	Dogon in Niger-Kordofanian
