@@ -61,15 +61,7 @@ function Selector<T extends React.Key>({
     <SelectorContainer manualStyle={selectorStyle} manualDisplay={display}>
       {selectorLabel && <SelectorLabel label={selectorLabel} description={selectorDescription} />}
 
-      <div
-        style={{
-          position: isFilterList ? undefined : 'relative',
-          display: 'flex',
-          width: isFilterList ? '100%' : undefined,
-          alignItems: isFilterList ? 'flex-start' : 'center',
-          flexDirection: isFilterList ? 'column' : 'row',
-        }}
-      >
+      <div className="selectorButtons">
         {/* The dropdown menu or the button list */}
         <OptionsContainer
           isExpanded={expanded}
@@ -123,18 +115,7 @@ const SelectorContainer: React.FC<
   const container = (
     <div
       className={'selector ' + display}
-      style={{
-        ...(display === SelectorDisplay.FilterList
-          ? {
-              display: 'flex',
-              flexDirection: 'column',
-              width: '100%',
-              alignItems: 'flex-start',
-              alignSelf: 'stretch',
-            }
-          : {}),
-        ...manualStyle,
-      }}
+      style={{ ...manualStyle }}
     >
       {children}
     </div>
@@ -161,28 +142,18 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
   switch (display) {
     case SelectorDisplay.ButtonList:
       return (
-        <div
+        <div className='selectorOptions'
           ref={containerRef}
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '0.25em',
-            marginLeft: hasSelectorLabel ? '1em' : 'none',
-          }}
+          style={{ marginLeft: hasSelectorLabel ? '1em' : 'none' }}
         >
           {children}
         </div>
       );
     case SelectorDisplay.FilterList:
       return (
-        <div
+        <div className="selectorOptions"
           ref={containerRef}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0',
-            alignItems: 'flex-start',
-          }}
+          style={{ marginLeft: hasSelectorLabel ? '1em' : 'none' }}
         >
           {children}
         </div>
@@ -246,16 +217,8 @@ const FilterListMoreButton: React.FC<FilterListMoreButtonProps> = ({
     return null;
 
   return (
-    <button
+    <button className="filterListMoreButton"
       onClick={toggle}
-      style={{
-        width: 'fit-content',
-        borderRadius: '0.25em',
-        color: 'inherit',
-        cursor: 'pointer',
-        fontSize: '0.9em',
-        padding: '0.2em 3.5em',
-      }}
     >
       {isExpanded ? 'Collapse' : 'Expand All'}
     </button>
