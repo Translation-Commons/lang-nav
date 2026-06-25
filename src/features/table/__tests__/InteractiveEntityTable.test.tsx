@@ -205,7 +205,7 @@ describe('InteractiveEntityTable', () => {
 
     renderEntityTable({ entities: [numericObject] });
 
-    expect(screen.getByRole('cell', { name: '1,234,567' })).toBeInTheDocument();
+    expect(screen.getByRole('cell', { name: (1234567).toLocaleString() })).toBeInTheDocument();
   });
 
   it('disables search bar filter when shouldFilterUsingSearchBar is false', () => {

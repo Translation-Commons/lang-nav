@@ -11,7 +11,12 @@ type Props = {
   containerWidth?: number;
 };
 
-const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetTransform, containerWidth = 800 }) => {
+const ZoomControls: React.FC<Props> = ({
+  zoomIn,
+  zoomOut,
+  resetTransform,
+  containerWidth = 800,
+}) => {
   const iconSize = containerWidth < 500 ? 16 : containerWidth < 700 ? 20 : 24;
   const padding = containerWidth < 500 ? '0.25em' : containerWidth < 700 ? '0.35em' : '0.5em';
   const buttonStyle: React.CSSProperties = {
