@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 import { getFieldValueType } from '@features/table/getValueType';
@@ -37,10 +37,19 @@ type Props = {
 const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   const { minValue, maxValue } = coloringFunctions;
   const { colorGradient } = usePageParams();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(800);
 
-  if (minValue === undefined || maxValue === undefined) {
-    return null;
-  }
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (width) setContainerWidth(width);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const ticks = useMemo(() => getTicks(coloringFunctions), [coloringFunctions]);
   const renormalize = isFieldWholeNumbersOnly(coloringFunctions.colorBy)
@@ -50,12 +59,23 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
         )
     : undefined;
 
+  if (minValue === undefined || maxValue === undefined) {
+    return null;
+  }
+
   return (
-    <div style={{ width: '100%' }}>
+    <div ref={containerRef} style={{ width: '100%' }}>
       <div style={{ height: '1em', width: '100%' }}>
         <BaseColorBar colorGradient={colorGradient} renormalize={renormalize} />
       </div>
-      <div style={{ position: 'relative', height: '2.5em', width: '100%' }}>
+      <div
+        style={{
+          position: 'relative',
+          height: '2.5em',
+          width: '100%',
+          fontSize: `${Math.max(0.5, Math.min(1, containerWidth / 900))}em`,
+        }}
+      >
         {ticks.map(({ position, label }, index) => (
           <div
             key={index}
