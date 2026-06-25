@@ -1,0 +1,50 @@
+#codeDisplay		#nl	sr2012.L1	sr2012.L2	sr2012
+#nameDisplay	Suriname 2012				
+#isoRegionCode	SR				
+#yearCollected	2012				
+### Language Criteria ###					
+#languageUse	Speaks				
+#acquisitionOrder			L1	L2	Any
+### Population Surveyed ###					
+#population	140,367				
+#populationSource	2012 Suriname Census – Table 2 (households by most spoken language)				
+#populationWithPositiveResponses	137,174				
+#populationSurveyed	140,367				
+#sampleRate	1				
+#responsesPerIndividual			1	1	1+
+### Data Constraints ###					
+#geographicScope	whole country				
+#age	0+				
+#nationality	residents				
+#languagesIncluded	all				
+#residenceBasis	de facto				
+#quantity	count				
+### Creator ###					
+#collectorType	Government				
+#collectorName	Algemeen Bureau voor de Statistiek Suriname				
+#collectorNameShort	ABS Suriname				
+#author					
+### Source Document ###					
+#url	https://statistics-suriname.org/wp-content/uploads/2019/05/Publicatie-Census-8-Volume-3-Huishoudens-Gezinnen-en-Woonverblijven-Milieu-Criminaliteit.pdf				
+#datePublished	2019-05-01				
+#dateAccessed	2026-05-26				
+#documentName	Census 8 Volume 3: Huishoudens, Gezinnen en Woonverblijven, Milieu, Criminalite				
+#sectionName	Taal in het huishouden				
+#tableName	Tabel 2. Aantal huishoudens naar meest gesproken taal en tweede gesproken taal 				
+#columnName			Meest gesproken taal in het huishouden	Tweede gesproken taal in het huishouden	
+#citation	Algemeen Bureau voor de Statistiek Suriname. Census 8 Volume 3: Huishoudens, Gezinnen en Woonverblijven, Milieu, Criminaliteit. Table: Aantal huishoudens naar meest gesproken taal en tweede gesproken taal.				
+#notes	Counts are household-level, not individual population counts. Unknown responses were excluded from positive responses.				Data added up from prior columns
+Language Code	Language		Population		
+nld	Dutch	Nederlands	69,715	33883	103,598
+srn	Sranan Tongo	Sranan tongo	11,802	50143	61,945
+hns/sarn1238	Sarnami	Sarnami	19,830	10758	30,588
+jav	Javanese	Javaans	5,531	7436	12,967
+mul	Indigenous languages	Inheemse taal	368	329	697
+srm	Marron languages	Marrontaal	21,699	3508	25,207
+zho	Chinese	Chinees	1,564	371	1,935
+por	Portuguese	Portugees	1449	369	1818
+eng	English	Engels	3,222	3711	6,933
+fra	French	Frans	221	378	599
+mul	Other	Andere	1,773	535	2,308
+zxx	No second language	Geen 2e taal		25163	
+mis	Unknown	Onbekend	3,193	3783	

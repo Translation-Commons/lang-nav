@@ -13,6 +13,7 @@ import { EntityData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
+import CensusLanguageCheckRow from './CensusLanguageCheckRow';
 import { isIgnoredLanguageCode, parseCensusLanguageName } from './parseCensusLanguageRow';
 import { parseCensusMetadata } from './parseCensusMetadata';
 
@@ -23,11 +24,13 @@ const OVERRIDE_LANGUAGE_MATCH: Record<string, string> = {
   hokkien: 'taib1242',
   teochew: 'chao1238',
   malay: 'zlm',
+  other: 'mul',
 };
 
-type LanguageNotes = {
+export type CensusLanguageNotes = {
   lineNumber: number;
   codePath: string; // allowing for /-separated codes
+  codePathRec?: string;
   specificCode?: string; // the most specific code (eg. `srp` in `hbs/srp`) which will be used for the language name
   originalName: string;
   name?: string;
@@ -37,63 +40,65 @@ type LanguageNotes = {
 
 const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => {
   const lines = fileInput.split('\n');
-  const { endOfMetadataLine } = parseCensusMetadata(lines, 'census');
+  const { endOfMetadataLine, singleColumnMode } = parseCensusMetadata(lines, 'census');
   const { getLanguage, languagesInSelectedSource } = useDataContext();
   const { filteredEntities: languageEnts } = useFilteredEntities({
     inputEntities: languagesInSelectedSource,
   });
   const findLanguage = useCallback(
     (searchString: string) => {
-      if (OVERRIDE_LANGUAGE_MATCH[searchString.toLowerCase()]) {
-        const overrideCode = OVERRIDE_LANGUAGE_MATCH[searchString.toLowerCase()];
+      const searchLower = searchString.toLowerCase();
+      if (OVERRIDE_LANGUAGE_MATCH[searchLower]) {
+        const overrideCode = OVERRIDE_LANGUAGE_MATCH[searchLower];
         const overrideLang = languageEnts.find((l) => l.ID === overrideCode);
-        if (overrideLang) return overrideLang;
+        return overrideLang;
       }
       const ents = languageEnts.filter(
         getSubstringFilterOnQuery(searchString, SearchableField.NameAny),
       );
-      const exactMatch = ents.find(
-        (e) => e.nameDisplay.toLowerCase() === searchString.toLowerCase(),
-      );
+      const exactMatch = ents.find((e) => e.nameDisplay.toLowerCase() === searchLower);
       if (exactMatch) return exactMatch;
-      const matchInList = ents.find((e) =>
-        e.names.some((n) => n.toLowerCase() === searchString.toLowerCase()),
-      );
+      const matchInList = ents.find((e) => e.names.some((n) => n.toLowerCase() === searchLower));
       if (matchInList) return matchInList;
       return ents[0];
     },
     [languageEnts],
   );
 
-  const languages = lines
-    .splice(endOfMetadataLine)
-    .map((line, i) => {
-      if (line.trim() === '') return null; // Skip empty lines
-      const parts = line.split('\t');
-      if (parts.length < 3) return null; // Skip lines that do not have enough data
+  // If a use only passes a single column, we'll expect that to be a single column of language names
+  // const singleColumnMode;
 
-      // Most rows specify a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
-      const codes = parts[0]
+  const languages = lines.splice(endOfMetadataLine).map((line, i) => {
+    if (line.trim() === '') return null; // Skip empty lines
+    const parts = line.split('\t');
+    if (!singleColumnMode && parts.length < 1) return null; // Skip lines that do not have enough data
+
+    // Most rows specify a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
+    let codes: string[] = [];
+    if (!singleColumnMode) {
+      codes = parts[0]
         // split if it is not contained in parentheses
         .split(/\/(?![^(]*\))/)
         .map((code) => code.trim())
         .filter(Boolean);
-      // The most specific code is the last one (eg. `srp` in `hbs/srp`)
-      const specificCode = codes.length > 0 ? codes[codes.length - 1] : undefined;
+    }
+    // The most specific code is the last one (eg. `srp` in `hbs/srp`)
+    const specificCode = codes.length > 0 ? codes[codes.length - 1] : undefined;
+    const originalName = singleColumnMode ? parts[0].trim() : parts[1].trim();
 
-      return {
-        lineNumber: i + endOfMetadataLine + 1,
-        codePath: parts[0],
-        specificCode,
-        originalName: parts[1].trim(),
-        name: parseCensusLanguageName(parts[1].trim()),
-        entry: specificCode ? getLanguage(specificCode) : undefined,
-        issues: [],
-      } as LanguageNotes;
-    })
-    .filter((l) => l != null) as LanguageNotes[];
+    return {
+      lineNumber: i + endOfMetadataLine + 1,
+      codePath: !singleColumnMode ? parts[0] : '',
+      specificCode,
+      originalName,
+      name: parseCensusLanguageName(originalName),
+      entry: specificCode ? getLanguage(specificCode) : undefined,
+      issues: [],
+    } as CensusLanguageNotes;
+  }) as (CensusLanguageNotes | undefined)[];
 
   languages.forEach((l) => {
+    if (l == null) return;
     if (!l.name && !l.specificCode) {
       l.issues.push('Language name and code are missing but there appears to be data in the row.');
       return;
@@ -108,49 +113,47 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
 
     // Commented out codes and ones for special codes are there for documentation but are ignored in the import.
     if (l.specificCode && isIgnoredLanguageCode(l.specificCode)) return;
+    const foundLanguage = l.name ? findLanguage(l.name) : undefined;
 
     checkName(l);
     checkStatusInName(l);
-    checkFoundLanguage(l, l.name ? findLanguage(l.name) : undefined);
-    checkMacrolanguage(l);
+    checkFoundLanguage(l, foundLanguage);
+    checkMacrolanguage(l, foundLanguage);
   });
 
-  if (!languages.some((l) => l.issues.length > 0)) {
+  const copyLanguageCodes = useCallback(() => {
+    const codesToCopy = languages.map((l) => (l ? (l.codePathRec ?? l.codePath) : '')).join('\n');
+    navigator.clipboard.writeText(codesToCopy);
+  }, [languages]);
+
+  if (!languages.some((l) => l && l.issues.length > 0)) {
     return <div>No issues found with language codes or names.</div>;
   }
 
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>Line</th>
-          <th>Language Code(s)</th>
-          <th>Language Name in Census</th>
-          <th>Issues</th>
-        </tr>
-      </thead>
-      <tbody>
-        {languages.map(
-          (l, i) =>
-            l.issues.length > 0 && (
-              <tr key={i}>
-                <td>{l.lineNumber}</td>
-                <td>{l.codePath}</td>
-                <td>{l.name}</td>
-                <td>
-                  {l.issues.map((issue, index) => (
-                    <div key={index}>{issue}</div>
-                  ))}
-                </td>
-              </tr>
-            ),
-        )}
-      </tbody>
-    </table>
+    <>
+      <table>
+        <thead>
+          <tr>
+            <th>Line</th>
+            <th>Recommended Code(s)</th>
+            <th>Original Language Code(s)</th>
+            <th>Language Name in Census</th>
+            <th>Issues</th>
+          </tr>
+        </thead>
+        <tbody>
+          {languages.map(
+            (l, i) => l && l.issues.length > 0 && <CensusLanguageCheckRow key={i} notes={l} />,
+          )}
+        </tbody>
+      </table>
+      <button onClick={copyLanguageCodes}>Copy language codes after optimistic correction</button>
+    </>
   );
 };
 
-function checkName(l: LanguageNotes) {
+function checkName(l: CensusLanguageNotes) {
   if (l.originalName?.startsWith('#')) return; // Ignore names that are commented out
 
   if (!l.name) {
@@ -175,7 +178,7 @@ function checkName(l: LanguageNotes) {
   );
 }
 
-function checkStatusInName(l: LanguageNotes) {
+function checkStatusInName(l: CensusLanguageNotes) {
   if (!l.name) return;
   if (OKAY_STATUS.includes(l.specificCode || '')) return; // If the code is in the list of exceptions, don't raise an issue
   if (l.name.match(/official|indigenous|native/i)) {
@@ -185,8 +188,9 @@ function checkStatusInName(l: LanguageNotes) {
   }
 }
 
-function checkFoundLanguage(l: LanguageNotes, foundLanguage?: EntityData) {
+function checkFoundLanguage(l: CensusLanguageNotes, foundLanguage?: EntityData) {
   if (!foundLanguage) return;
+  l.codePathRec = foundLanguage.ID;
   if (l.entry?.ID === foundLanguage.ID) return; // If the found language is the same as the entry, that's fine
 
   if (l.entry) {
@@ -209,10 +213,12 @@ function checkFoundLanguage(l: LanguageNotes, foundLanguage?: EntityData) {
   }
 }
 
-function checkMacrolanguage(l: LanguageNotes) {
-  if (!l.entry || !l.specificCode) return;
+function checkMacrolanguage(l: CensusLanguageNotes, foundLanguage?: EntityData) {
+  const matchingLang = l.entry || foundLanguage;
+  const matchingCode = l.specificCode ?? l.codePathRec;
+  if (!matchingLang || !matchingCode) return;
 
-  const languageParents = getObjectParents(l.entry).filter(
+  const languageParents = getObjectParents(matchingLang).filter(
     (p) => p && p.type === 'Language',
   ) as LanguageData[];
   const iso639parents = languageParents.filter(
@@ -220,17 +226,16 @@ function checkMacrolanguage(l: LanguageNotes) {
       p.ISO.code && (p.scope === LanguageScope.Macrolanguage || p.scope === LanguageScope.Language),
   );
 
-  if (!iso639parents) return; // If there is no macrolanguage or language parents, then there is no issue
+  if (!iso639parents || iso639parents.length === 0) return; // If there is no macrolanguage or language parents, then there is no issue
+  if (OKAY_MACRO.includes(matchingCode || '')) return; // If the specific code is in the list of exceptions, don't warn
+  const codePathRecommended = [...iso639parents.map((p) => p.ID), matchingCode].join('/');
+  l.codePathRec = codePathRecommended;
   if (iso639parents.every((p) => l.codePath.includes(p.ID))) return; // If the macrolanguage code is already included in the code path, that's fine
-  if (OKAY_MACRO.includes(l.specificCode || '')) return; // If the specific code is in the list of exceptions, don't warn
 
   l.issues.push(
     <>
-      Code may be{' '}
-      <code>
-        {iso639parents.map((p) => p.ID).join('/')}/{l.specificCode}
-      </code>
-      . <HoverableObjectName object={l.entry} /> is contained by language
+      Code may be <code>{codePathRecommended}</code>
+      . <HoverableObjectName object={matchingLang} /> is contained by language
       {iso639parents.length > 1 ? ' categories ' : ' category '}
       <CommaSeparated>
         {iso639parents.map((p) => (

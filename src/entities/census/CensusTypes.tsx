@@ -16,6 +16,7 @@ export enum CensusCollectorType {
   NGO = 'NGO', // Non-governmental organization eg. Endangered Languages Project, Joshua Project
   Media = 'Media', // News article, blog, or other media sources
   Secondary = 'Secondary', // Data repackaged by secondary sources without a clear source of where it came from, eg. Ethnologue, Wikipedia, CLDR
+  Unknown = 'Unknown', // Unknown or unranked
 }
 
 export enum CensusLanguageUse {
@@ -103,6 +104,7 @@ export const getCensusCollectorTypeRank = (collectorType: CensusCollectorType): 
       return 4;
     case CensusCollectorType.Secondary:
       return 5; // Low priority
+    case CensusCollectorType.Unknown:
     default:
       return 6; // Unknown or unranked
   }
