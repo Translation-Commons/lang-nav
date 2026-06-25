@@ -71,7 +71,7 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
   const languages = lines.splice(endOfMetadataLine).map((line, i) => {
     if (line.trim() === '') return null; // Skip empty lines
     const parts = line.split('\t');
-    if (!singleColumnMode && parts.length < 1) return null; // Skip lines that do not have enough data
+    if (!singleColumnMode && parts.length < 2) return null; // Skip lines that do not have enough data
 
     // Most rows specify a single language code (eg. `eng`), but some specify multiple codes separated by a slash (eg. `hbs/srp`)
     let codes: string[] = [];

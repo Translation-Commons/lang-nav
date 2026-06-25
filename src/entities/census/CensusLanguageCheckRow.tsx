@@ -2,7 +2,7 @@ import React from 'react';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { CensusLanguageNotes } from './CensusLanguageCheck';
+import type { CensusLanguageNotes } from './CensusLanguageCheck';
 
 const CensusLanguageCheckRow: React.FC<{ notes: CensusLanguageNotes }> = ({ notes }) => {
   if (notes == null || !notes.issues) return null;

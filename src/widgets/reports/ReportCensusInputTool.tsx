@@ -61,11 +61,10 @@ const ReportCensusInputTool: React.FC = () => {
       <h2>TSV file</h2>
       <div>
         Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
-        edit changes inline to test them out. Changes update after clicking away.
+        edit changes inline to test them out.
       </div>
       <textarea
         onChange={(e) => setTSV(e.target.value)}
-        onBlur={(e) => setTSV(e.target.value)}
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
       <h3>Analysis</h3>
