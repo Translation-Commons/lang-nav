@@ -1,0 +1,36 @@
+.PinButton {
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  line-height: 0;
+  color: var(--color-text);
+}
+
+/* Keep the icon button transparent even when focused/hovered. Without this the
+   global `button:focus`/`button:hover` rules paint a blue background that lingers
+   (e.g. after clicking) until focus moves elsewhere. */
+.PinButton:hover,
+.PinButton:focus {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text);
+}
+
+.PinButton.pinned,
+.PinButton.pinned:hover,
+.PinButton.pinned:focus {
+  color: var(--color-button-primary);
+}
+
+/* Show the "unpin" affordance only while hovering an already-pinned button. */
+.PinButton-iconUnpin {
+  display: none;
+}
+
+.PinButton.pinned:hover .PinButton-iconPin {
+  display: none;
+}
+
+.PinButton.pinned:hover .PinButton-iconUnpin {
+  display: inline-block;
+}

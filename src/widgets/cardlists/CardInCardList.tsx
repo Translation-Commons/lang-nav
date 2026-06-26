@@ -4,7 +4,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import CardPinButton from './CardPinButton';
+import PinButton from '@shared/ui/PinButton';
 
 import './cardListStyles.css';
 
@@ -63,7 +63,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
       }}
       tabIndex={0}
     >
-      <CardPinButton isPinned={isPinned} onTogglePin={togglePin} />
+      <PinButton isPinned={isPinned} onTogglePin={togglePin} />
       {children}
     </div>
   );
