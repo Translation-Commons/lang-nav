@@ -1,7 +1,8 @@
-import { ExternalLinkIcon, X } from 'lucide-react';
+import { PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
+import ZIndex from '@features/layers/ZIndex';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -39,31 +40,33 @@ const MapCard: React.FC<{
     <div
       style={{
         position: 'relative',
-        maxWidth: 260,
+        maxWidth: 300,
         fontSize: '0.75em',
         background: 'var(--color-background)',
         borderRadius: '0.75em',
         boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)',
-        padding: '3.25em 1em 1em',
+        padding: '1em',
+        textAlign: 'left',
       }}
     >
       <div
         style={{
           position: 'absolute',
-          top: '0.5em',
+          top: '0',
           right: '0.5em',
+          transform: 'translateY(-50%)',
           display: 'flex',
-          gap: '0.25em',
-          zIndex: 1,
+          gap: '0.5em',
+          zIndex: ZIndex.MapZoomControls,
+          fontSize: '.8em',
         }}
       >
-        <HoverableButton onClick={openDetails}>
-          <ExternalLinkIcon size="1.25em" />
-        </HoverableButton>
-
-        <HoverableButton onClick={onClose}>
-          <X size="1.25em" />
-        </HoverableButton>
+        <HoverableIcon
+          Icon={SquareArrowUpRightIcon}
+          onClick={openDetails}
+          description="Open in details panel"
+        />
+        <HoverableIcon Icon={PinOffIcon} onClick={onClose} description="Unpin" />
       </div>
 
       {content}

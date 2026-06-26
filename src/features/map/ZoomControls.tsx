@@ -1,7 +1,7 @@
 import { Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import ZIndex from '@features/layers/ZIndex';
 
 type Props = {
@@ -13,17 +13,9 @@ type Props = {
 const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetTransform }) => {
   return (
     <div style={containerStyle}>
-      <HoverableButton onClick={zoomIn} style={buttonStyle} aria-label="Zoom in">
-        <ZoomInIcon />
-      </HoverableButton>
-
-      <HoverableButton onClick={zoomOut} style={buttonStyle} aria-label="Zoom out">
-        <ZoomOutIcon />
-      </HoverableButton>
-
-      <HoverableButton onClick={resetTransform} style={buttonStyle} aria-label="Reset">
-        <Maximize2Icon />
-      </HoverableButton>
+      <HoverableIcon onClick={zoomIn} description="Zoom in" Icon={ZoomInIcon} />
+      <HoverableIcon onClick={zoomOut} description="Zoom out" Icon={ZoomOutIcon} />
+      <HoverableIcon onClick={resetTransform} description="Reset" Icon={Maximize2Icon} />
     </div>
   );
 };
@@ -36,13 +28,6 @@ const containerStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5em',
-};
-
-const buttonStyle: React.CSSProperties = {
-  padding: '0.5em',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 };
 
 export default ZoomControls;
