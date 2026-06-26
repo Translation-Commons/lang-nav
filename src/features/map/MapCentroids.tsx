@@ -164,7 +164,7 @@ const Circle: React.FC<NodeProps> = ({
     fill={color ?? 'transparent'}
     stroke={
       isPinned
-        ? 'black'
+        ? 'var(--color-text)'
         : isHovered
           ? 'var(--color-button-primary)'
           : color == null

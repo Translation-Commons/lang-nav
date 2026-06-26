@@ -15,6 +15,7 @@ type Props = {
   coloringFunctions: ColoringFunctions;
   pinCard: (obj: DrawableData) => void;
   hoveredId?: string | null;
+  pinnedIds?: string[];
 };
 
 const MapTerritories: React.FC<Props> = ({
@@ -22,6 +23,7 @@ const MapTerritories: React.FC<Props> = ({
   coloringFunctions: { colorBy, getColor },
   pinCard,
   hoveredId,
+  pinnedIds = [],
 }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
@@ -58,6 +60,14 @@ const MapTerritories: React.FC<Props> = ({
         } else {
           element.style.fill = 'var(--color-button-primary)';
         }
+
+        if (pinnedIds.includes(territory.ID)) {
+          element.style.stroke = 'var(--color-text)';
+          element.style.strokeWidth = '2';
+        } else {
+          element.style.stroke = '';
+          element.style.strokeWidth = '';
+        }
       } else {
         element.style.fill = '#bcbcbc';
       }
@@ -70,7 +80,7 @@ const MapTerritories: React.FC<Props> = ({
         element.style.opacity = '1';
       }
     });
-  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded, hoveredId]);
+  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded, hoveredId, pinnedIds]);
 
   const buildOnMouseEnter = useCallback(
     (territory: TerritoryData, element: SVGElement) => (ev: MouseEvent) => {

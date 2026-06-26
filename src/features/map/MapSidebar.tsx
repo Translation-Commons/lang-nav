@@ -28,7 +28,7 @@ const MapSidebar: React.FC<Props> = ({
         width: '300px',
         height: '100%',
         overflowY: 'auto',
-        borderRight: '1px solid var(--border-color)',
+        borderRight: '1px solid var(--color-text-secondary)',
         display: 'flex',
         flexDirection: 'column',
         gap: '1em',

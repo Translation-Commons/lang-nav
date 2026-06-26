@@ -95,7 +95,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
       <div
         style={{
-          border: '1px solid var(--border-color)',
+          border: '1px solid var(--color-text-secondary)',
           width: '100%',
           aspectRatio: MAP_ASPECT_RATIO,
           display: 'flex',
@@ -143,6 +143,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
                 pinCard={pinCard}
                 coloringFunctions={coloringFunctions}
                 hoveredId={hoveredId}
+                pinnedIds={pinned}
               />
             )}
 
