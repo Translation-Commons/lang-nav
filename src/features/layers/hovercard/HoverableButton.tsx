@@ -30,6 +30,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
   if (hoverContent == null) {
     return (
       <button
+        aria-label={ariaLabel}
         className={className}
         disabled={disabled}
         onClick={onClick}

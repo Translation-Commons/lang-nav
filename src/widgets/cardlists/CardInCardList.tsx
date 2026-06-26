@@ -1,8 +1,12 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useCallback } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
+
+import CardPinButton from './CardPinButton';
+
+import './cardListStyles.css';
 
 interface Props {
   children: React.ReactNode;
@@ -11,13 +15,15 @@ interface Props {
 }
 
 const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object }) => {
-  const { updatePageParams, objectID } = usePageParams();
-  const [isHovering, setIsHovering] = React.useState(false);
-  const borderColor = useMemo(() => {
-    if (objectID === object.ID) return 'var(--color-button-primary)';
-    if (isHovering) return 'var(--color-button-hover)';
-    return 'transparent';
-  }, [getBackgroundColor, object, isHovering, objectID]);
+  const { updatePageParams, objectID, pinned } = usePageParams();
+
+  const isPinned = pinned.includes(object.ID);
+  const togglePin = useCallback(() => {
+    updatePageParams({
+      pinned: isPinned ? pinned.filter((id) => id !== object.ID) : [...pinned, object.ID],
+    });
+  }, [isPinned, pinned, object.ID, updatePageParams]);
+
   const openObject = useCallback(() => {
     if (object) updatePageParams({ objectID: object.ID });
   }, [object, updatePageParams]);
@@ -51,22 +57,13 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
       className={`CardInCardList ${object.ID === objectID ? 'selected' : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      onMouseEnter={() => setIsHovering(true)}
-      onMouseLeave={() => setIsHovering(false)}
       role="button"
       style={{
-        borderWidth: '2px',
-        borderStyle: 'solid',
-        borderRadius: '0.5em',
-        boxShadow: 'var(--color-shadow) 0 0 1rem 2px',
-        padding: '1rem',
-        textAlign: 'start',
-        cursor: 'pointer',
-        borderColor: borderColor,
         backgroundColor: getBackgroundColor ? (getBackgroundColor(object) ?? 'inherit') : undefined,
       }}
       tabIndex={0}
     >
+      <CardPinButton isPinned={isPinned} onTogglePin={togglePin} />
       {children}
     </div>
   );
