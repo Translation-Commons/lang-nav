@@ -27,14 +27,24 @@ const MapCard: React.FC<{
         : { objectID: drawnEntity.ID },
     );
 
-  let content: React.ReactNode;
-  if (objectType === ObjectType.Census && drawnEntity.type === ObjectType.Territory)
-    content = <CensusesInTerritory territory={drawnEntity} />;
-  else if (objectType === ObjectType.Locale && drawnEntity.type === ObjectType.Territory)
-    content = <LocalesInTerritoryCard territory={drawnEntity} />;
-  else if (objectType === ObjectType.WritingSystem && drawnEntity.type === ObjectType.Territory)
-    content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
-  else content = <ObjectCard object={drawnEntity} />;
+  let content: React.ReactNode = <ObjectCard object={drawnEntity} />;
+  let clickDescription = 'Open in details panel';
+  if (drawnEntity.type === ObjectType.Territory) {
+    switch (objectType) {
+      case ObjectType.Census:
+        content = <CensusesInTerritory territory={drawnEntity} />;
+        clickDescription = 'Open table of censuses in this territory';
+        break;
+      case ObjectType.Locale:
+        content = <LocalesInTerritoryCard territory={drawnEntity} />;
+        clickDescription = 'Open table of locales in this territory';
+        break;
+      case ObjectType.WritingSystem:
+        content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
+        clickDescription = 'Open table of writing systems in this territory';
+        break;
+    }
+  }
 
   return (
     <div
@@ -64,7 +74,7 @@ const MapCard: React.FC<{
         <HoverableIcon
           Icon={SquareArrowUpRightIcon}
           onClick={openDetails}
-          description="Open in details panel"
+          description={clickDescription}
         />
         <HoverableIcon Icon={PinOffIcon} onClick={onClose} description="Unpin" />
       </div>
