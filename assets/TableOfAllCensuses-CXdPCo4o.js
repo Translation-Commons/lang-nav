@@ -1,1 +1,0 @@
-import{al as r,r as t,o}from"./index-DRsbHD3D.js";import{I as a,T as l}from"./TableID-Y5exy42R.js";import{g as c}from"./CensusColumns-DEHKOQnV.js";const C=({organization:s})=>{const{censuses:e}=r(),n=t.useMemo(()=>c(),[]),u=t.useMemo(()=>s?s.censuses??[]:Object.values(e),[s,e]);return o.jsx(a,{tableID:l.Censuses,entities:u,columns:n})};export{C as T};
