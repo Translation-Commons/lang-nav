@@ -17,49 +17,17 @@
   border-color: var(--color-button-primary);
 }
 
-.CardPinButton {
+/* Position the shared pin button in the card's top-right corner. The button's
+   own appearance (colors, icon swap) lives in pinButton.css. */
+.CardInCardList .PinButton {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  padding: 0.25rem;
-  background: transparent;
-  border: none;
-  line-height: 0;
-  color: var(--color-text);
-  /* Hidden until the card is hovered (or the card is pinned, see below). */
+  /* Hidden until the card is hovered (or the item is pinned, see below). */
   visibility: hidden;
 }
 
-.CardInCardList:hover .CardPinButton,
-.CardPinButton.pinned {
+.CardInCardList:hover .PinButton,
+.CardInCardList .PinButton.pinned {
   visibility: visible;
-}
-
-/* Keep the icon button transparent even when focused/hovered. Without this the
-   global `button:focus`/`button:hover` rules paint a blue background that lingers
-   (e.g. after clicking) until focus moves elsewhere. */
-.CardPinButton:hover,
-.CardPinButton:focus {
-  background: transparent;
-  border-color: transparent;
-  color: var(--color-text);
-}
-
-.CardPinButton.pinned,
-.CardPinButton.pinned:hover,
-.CardPinButton.pinned:focus {
-  color: var(--color-button-primary);
-}
-
-/* Show the "unpin" affordance only while hovering an already-pinned button. */
-.CardPinButton-iconUnpin {
-  display: none;
-}
-
-.CardPinButton.pinned:hover .CardPinButton-iconPin {
-  display: none;
-}
-
-.CardPinButton.pinned:hover .CardPinButton-iconUnpin {
-  display: inline-block;
 }

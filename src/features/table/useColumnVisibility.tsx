@@ -5,6 +5,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';
 import TableID from './TableID';
 
@@ -35,7 +36,10 @@ function useColumnVisibility<T extends ObjectData>(
   );
 
   const visibleColumns = useMemo(
-    () => columns.filter((column) => columnVisibility[column.key]),
+    () => [
+      PinColumn as TableColumn<T>,
+      ...columns.filter((column) => columnVisibility[column.key]),
+    ],
     [columns, columnVisibility],
   );
 

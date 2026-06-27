@@ -29,3 +29,14 @@ summary:hover {
 summary:focus {
   outline: none;
 }
+
+/* The pin column button is only revealed when the row is hovered or the row is
+   pinned. The button's appearance lives in pinButton.css. */
+tbody tr .PinButton {
+  visibility: hidden;
+}
+
+tbody tr:hover .PinButton,
+tbody tr .PinButton.pinned {
+  visibility: visible;
+}
