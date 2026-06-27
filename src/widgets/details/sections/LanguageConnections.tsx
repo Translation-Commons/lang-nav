@@ -7,7 +7,8 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import Field from '@features/transforms/fields/Field';
+import useFilters from '@features/transforms/filtering/useFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListRoot from '@features/treelist/TreeListRoot';
@@ -23,7 +24,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const { getCLDRLanguage } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByScope = useFilters()[Field.TerritoryScope];
   const { childLanguages, ISO, Glottolog, variants, equivalentVariant } = lang;
   const relatedLanguages = (lang.CLDR.languageMatch ?? [])
     .map((match) => ({
@@ -72,17 +73,17 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
-      <DetailsField title="Descendant Languages">
+      <DetailsField title="Constituents">
         <TreeOrList
           treeNodes={
             childLanguages.length > 0
               ? getLanguageTreeNodes([lang], languageSource, sortFunction)
               : []
           }
-          listNodes={childLanguages.map((l) => (
+          listNodes={[...childLanguages].sort(sortFunction).map((l) => (
             <HoverableObjectName key={l.ID} object={l} />
           ))}
-          emptyMessage="No languages come from this language."
+          emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
         />
       </DetailsField>
       <DetailsField title="Locales">
@@ -90,9 +91,12 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           treeNodes={
             lang.locales.length > 0 ? getLocaleTreeNodes([lang], sortFunction, filterByScope) : []
           }
-          listNodes={(lang.locales ?? []).map((v) => (
-            <HoverableObjectName key={v.ID} object={v} />
-          ))}
+          listNodes={(lang.locales ?? [])
+            .filter(filterByScope)
+            .sort(sortFunction)
+            .map((v) => (
+              <HoverableObjectName key={v.ID} object={v} />
+            ))}
           emptyMessage="No locales available for this language."
         />
       </DetailsField>

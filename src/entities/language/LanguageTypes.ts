@@ -122,6 +122,7 @@ export interface LanguageData extends ObjectBase {
 
   latitude?: number;
   longitude?: number;
+  coordsSource?: LanguageSource;
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
   // References to other objects, filled in after loading the TSV
