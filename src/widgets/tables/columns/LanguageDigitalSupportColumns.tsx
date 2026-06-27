@@ -11,6 +11,7 @@ import LanguageUDHRInfo, {
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
+import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 import {
   WikipediaActiveUsers,
@@ -72,6 +73,15 @@ const columns: TableColumn<LanguageData>[] = [
     description: 'Number of keyboard layouts available for this language.',
     render: (lang) => <HoverableEnumeration items={lang.keyboards?.map((kb) => kb.nameDisplay)} />,
     field: Field.CountOfKeyboards,
+  },
+  {
+    key: 'Google Translate',
+    description: 'Language entries available in Google Translate.',
+    render: (lang) => <GoogleTranslateSupportStatus lang={lang} />,
+    exportValue: (lang) => {
+      if (!lang.googleTranslate || lang.googleTranslate.length === 0) return 'n/a';
+      return lang.googleTranslate.map((entry) => entry.name).join('; ');
+    },
   },
   {
     key: 'Wikipedia Status',
