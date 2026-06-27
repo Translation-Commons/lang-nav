@@ -1,6 +1,6 @@
 import { LocaleSeparator } from '@features/params/PageParamTypes';
 
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -66,6 +66,7 @@ function updateObjectNamesAndCodes(
     lang.codeDisplay = specific.code ?? lang.ID;
     lang.nameDisplay = specific.name ?? lang.nameCanonical;
     lang.scope = specific.scope ?? lang.scope;
+    if (lang.ID === 'myn') lang.scope = LanguageScope.Macrolanguage;
   });
 
   // Update locales too, their codes and their names

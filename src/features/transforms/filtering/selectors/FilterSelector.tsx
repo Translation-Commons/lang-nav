@@ -56,11 +56,28 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
   const { objectType } = usePageParams();
-  const filterBys = getApplicableFields(TransformEnum.Filter, objectType).filter(
-    (f) => f !== Field.Name,
-  ); // This shouldn't return the search bar
+  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, objectType).filter(
+    (f) => f !== Field.Name, // This should not return the search bar
+  );
+  const otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(
+    (f) => !primaryFilters.includes(f) && f !== Field.Name,
+  );
 
-  return filterBys.map((filterBy) => <FilterSelector field={filterBy} key={filterBy} />);
+  return (
+    <>
+      {primaryFilters.map((filterBy) => (
+        <FilterSelector field={filterBy} key={filterBy} />
+      ))}
+      {otherFilters.length > 0 && (
+        <details>
+          <summary>Filters for related entities</summary>
+          {otherFilters.map((filterBy) => (
+            <FilterSelector field={filterBy} key={filterBy} />
+          ))}
+        </details>
+      )}
+    </>
+  );
 };
 
 export default FilterSelector;
