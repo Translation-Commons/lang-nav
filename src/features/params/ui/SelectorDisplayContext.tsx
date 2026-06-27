@@ -5,6 +5,7 @@ export enum SelectorDisplay {
   InlineDropdown = 'inlineDropdown', // Used to be inline with text
   ButtonGroup = 'buttonGroup', // Unsure if we want to keep this
   ButtonList = 'buttonList',
+  FilterList = 'filterList',
 }
 
 export const SelectorDisplayContext = React.createContext<{
