@@ -19,6 +19,8 @@ interface Props<T> {
   entities: T[];
   columns: TableColumn<T>[];
   shouldFilterUsingSearchBar?: boolean;
+  /** When false, page language-scope filters do not hide table rows. */
+  useScope?: boolean;
   tableID: TableID;
 }
 
@@ -26,11 +28,12 @@ function InteractiveEntityTable<T extends ObjectData>({
   entities,
   columns,
   shouldFilterUsingSearchBar = true,
+  useScope = true,
   tableID,
 }: Props<T>) {
   const { getCurrentEntities } = usePagination<T>();
   const { filteredEntities } = useFilteredEntities({
-    useScope: true,
+    useScope,
     useSubstring: shouldFilterUsingSearchBar,
     useConnections: true,
     useVitality: true,
