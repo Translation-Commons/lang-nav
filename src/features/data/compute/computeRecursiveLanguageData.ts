@@ -1,4 +1,4 @@
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 
 import averageCoordinates from '@shared/lib/averageCoordinates';
@@ -73,6 +73,7 @@ function computeCoordinates(lang: LanguageData): void {
   const { latitude, longitude } = averageCoordinates(children);
   lang.latitude = latitude;
   lang.longitude = longitude;
+  if (lang.latitude != null && lang.longitude != null) lang.coordsSource = LanguageSource.Combined;
 }
 
 export default computeRecursiveLanguageData;
