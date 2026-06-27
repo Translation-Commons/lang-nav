@@ -80,10 +80,10 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               ? getLanguageTreeNodes([lang], languageSource, sortFunction)
               : []
           }
-          listNodes={childLanguages.sort(sortFunction).map((l) => (
+          listNodes={[...childLanguages].sort(sortFunction).map((l) => (
             <HoverableObjectName key={l.ID} object={l} />
           ))}
-          emptyMessage="No languages come from this language."
+          emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
         />
       </DetailsField>
       <DetailsField title="Locales">

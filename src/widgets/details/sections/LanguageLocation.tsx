@@ -28,7 +28,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <DetailsSection title="Location">
       <DetailsField title="Coordinates">
-        {lang.latitude && lang.longitude ? (
+        {lang.latitude != null && lang.longitude != null ? (
           <>
             {lang.latitude.toFixed(4)}°, {lang.longitude.toFixed(4)}°{' '}
             {lang.coordsSource && <Pill>{lang.coordsSource}</Pill>}
@@ -85,7 +85,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
       lang, // always show the selected language
       ...nodes.filter((l) => l.ID !== lang.ID && l.latitude != null && l.longitude != null),
     ],
-    [nodes],
+    [lang, nodes],
   );
   if (nodes.length === 0) return null;
   return (
