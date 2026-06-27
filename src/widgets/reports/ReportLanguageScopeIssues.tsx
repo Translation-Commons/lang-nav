@@ -24,12 +24,10 @@ const ReportLanguageScopeIssues: React.FC = () => {
   return (
     <>
       This report flags languages in the current language source whose scope is broader than their
-      direct parent&apos;s scope, which may indicate a hierarchy inconsistency. Results are shown
-      regardless of the sidebar Language Scope filter so dialect and family issues remain visible.
+      direct parent&apos;s scope, which may indicate a hierarchy inconsistency.
       <InteractiveEntityTable<LanguageData>
         tableID={TableID.LanguageScopeIssues}
         shouldFilterUsingSearchBar={false}
-        useScope={false}
         columns={[
           {
             key: 'Parent Code',
