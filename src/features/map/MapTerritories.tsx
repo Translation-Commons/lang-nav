@@ -13,13 +13,17 @@ import DrawableData from './DrawableData';
 type Props = {
   drawableEntities: DrawableData[];
   coloringFunctions: ColoringFunctions;
-  openCard: (obj: DrawableData, x: number, y: number) => void;
+  pinCard: (obj: DrawableData) => void;
+  hoveredId?: string | null;
+  pinnedIds?: string[];
 };
 
 const MapTerritories: React.FC<Props> = ({
   drawableEntities,
   coloringFunctions: { colorBy, getColor },
-  openCard,
+  pinCard,
+  hoveredId,
+  pinnedIds = [],
 }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
@@ -56,13 +60,27 @@ const MapTerritories: React.FC<Props> = ({
         } else {
           element.style.fill = 'var(--color-button-primary)';
         }
+
+        if (pinnedIds.includes(territory.ID)) {
+          element.style.stroke = 'var(--color-text)';
+          element.style.strokeWidth = '2';
+        } else {
+          element.style.stroke = '';
+          element.style.strokeWidth = '';
+        }
       } else {
         element.style.fill = '#bcbcbc';
       }
 
       element.style.cursor = 'pointer';
+
+      if (hoveredId === territory.ID) {
+        element.style.opacity = '0.7';
+      } else {
+        element.style.opacity = '1';
+      }
     });
-  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded]);
+  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded, hoveredId, pinnedIds]);
 
   const buildOnMouseEnter = useCallback(
     (territory: TerritoryData, element: SVGElement) => (ev: MouseEvent) => {
@@ -96,7 +114,7 @@ const MapTerritories: React.FC<Props> = ({
     forEachTerritory((territory, element) => {
       const handleClick = (ev: MouseEvent) => {
         ev.stopPropagation();
-        openCard(territory, ev.clientX, ev.clientY);
+        pinCard(territory);
       };
 
       const handleMouseEnter = buildOnMouseEnter(territory, element);
@@ -114,7 +132,7 @@ const MapTerritories: React.FC<Props> = ({
     });
 
     return () => cleanupListeners.forEach((cleanup) => cleanup());
-  }, [buildOnMouseEnter, buildOnMouseLeave, openCard, territories, svgLoaded]);
+  }, [buildOnMouseEnter, buildOnMouseLeave, pinCard, territories, svgLoaded]);
 
   return (
     <div

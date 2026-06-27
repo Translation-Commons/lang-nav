@@ -147,7 +147,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional
 
       //These are string arrays
       case PageParamKey.pinned:
-        params.pinned = value.split(',');
+        params.pinned = value.split(',').filter(Boolean);
         break;
 
       // Freeform strings

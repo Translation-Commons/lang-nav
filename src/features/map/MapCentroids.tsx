@@ -17,18 +17,22 @@ import './map.css';
 
 type Props = {
   drawableEntities: DrawableData[];
-  openCard: (obj: DrawableData, x: number, y: number) => void;
+  pinCard: (obj: DrawableData) => void;
   scalar: number;
   zoomFactor: number;
   coloringFunctions: ColoringFunctions;
+  hoveredId?: string | null;
+  pinnedIds?: string[];
 };
 
 const MapCentroids: React.FC<Props> = ({
   drawableEntities,
-  openCard,
+  pinCard,
   scalar,
   zoomFactor,
   coloringFunctions: { getColor, colorBy },
+  hoveredId,
+  pinnedIds = [],
 }) => {
   const { scaleBy, objectType } = usePageParams();
   const { getCurrentEntities } = usePagination<DrawableData>();
@@ -81,9 +85,11 @@ const MapCentroids: React.FC<Props> = ({
           object={obj}
           scale={scalar * getScale(obj)}
           zoomFactor={zoomFactor}
-          openCard={openCard}
+          pinCard={pinCard}
           onMouseEnter={buildOnMouseEnter(obj)}
           onMouseLeave={onMouseLeaveTriggeringElement}
+          isHovered={hoveredId === obj.ID}
+          isPinned={pinnedIds.includes(obj.ID)}
         />
       ))}
     </svg>
@@ -95,9 +101,11 @@ type NodeProps = {
   object: DrawableData;
   scale: number;
   zoomFactor: number;
-  openCard: (obj: DrawableData, x: number, y: number) => void;
+  pinCard: (obj: DrawableData) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
+  isHovered?: boolean;
+  isPinned?: boolean;
 };
 
 const ObjectNode: React.FC<NodeProps> = ({
@@ -105,9 +113,11 @@ const ObjectNode: React.FC<NodeProps> = ({
   color,
   scale,
   zoomFactor,
-  openCard,
+  pinCard,
   onMouseEnter,
   onMouseLeave,
+  isHovered,
+  isPinned,
 }) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) return null;
@@ -126,9 +136,11 @@ const ObjectNode: React.FC<NodeProps> = ({
           object={object}
           scale={scale}
           zoomFactor={zoomFactor}
-          openCard={openCard}
+          pinCard={pinCard}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
+          isHovered={isHovered}
+          isPinned={isPinned}
         />
       )}
       <Text object={object} scale={scale} showCircle={showCircle} zoomFactor={zoomFactor} />
@@ -140,18 +152,33 @@ const Circle: React.FC<NodeProps> = ({
   color,
   object,
   scale,
-  openCard,
+  pinCard,
   onMouseEnter,
   onMouseLeave,
+  isHovered,
+  isPinned,
 }) => (
   <circle
-    r={scale + 1.5}
-    strokeWidth={0.4}
+    r={scale + 1.5 + (isHovered ? 2 : 0) + (isPinned ? 0.8 : 0)}
+    strokeWidth={isPinned ? 2 : isHovered ? 1.5 : 0.4}
     fill={color ?? 'transparent'}
-    stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
+    stroke={
+      isPinned
+        ? 'var(--color-text)'
+        : isHovered
+          ? 'var(--color-button-primary)'
+          : color == null
+            ? 'var(--color-button-primary)'
+            : 'transparent'
+    }
+    style={
+      isHovered
+        ? { filter: 'brightness(1.2)', transition: 'all 0.15s ease-in-out' }
+        : { transition: 'all 0.15s ease-in-out' }
+    }
     onClick={(e) => {
       e.stopPropagation();
-      openCard(object, e.clientX, e.clientY);
+      pinCard(object);
     }}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
