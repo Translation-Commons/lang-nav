@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -53,19 +53,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
   const [mapScale, setMapScale] = useState(1);
-  const outerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(800);
-
-  useEffect(() => {
-    const el = outerRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setContainerWidth(width);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const updateMapScale = useCallback(() => {
     const rect = contentRef.current?.getBoundingClientRect();
@@ -153,12 +140,11 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   }, [updateMapScale]);
 
   return (
-    <div ref={outerRef} style={{ maxWidth, width: '100%', position: 'relative' }}>
+    <div style={{ maxWidth, width: '100%', position: 'relative' }}>
       <ZoomControls
         zoomIn={handleZoomIn}
         zoomOut={handleZoomOut}
         resetTransform={handleResetTransform}
-        containerWidth={containerWidth}
       />
 
       <div

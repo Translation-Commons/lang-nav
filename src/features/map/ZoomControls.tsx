@@ -8,40 +8,24 @@ type Props = {
   zoomIn: () => void;
   zoomOut: () => void;
   resetTransform: () => void;
-  containerWidth?: number;
 };
 
-const ZoomControls: React.FC<Props> = ({
-  zoomIn,
-  zoomOut,
-  resetTransform,
-  containerWidth = 800,
-}) => {
-  const fontSize = containerWidth < 500 ? '0.7em' : containerWidth < 700 ? '0.85em' : '1em';
+const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetTransform }) => {
   return (
-    <div style={{ ...containerStyle, fontSize }}>
+    <div style={containerStyle}>
       <HoverableButton onClick={zoomIn} style={buttonStyle} aria-label="Zoom in">
-        <ZoomInIcon style={iconStyle} />
+        <ZoomInIcon />
       </HoverableButton>
 
       <HoverableButton onClick={zoomOut} style={buttonStyle} aria-label="Zoom out">
-        <ZoomOutIcon style={iconStyle} />
+        <ZoomOutIcon />
       </HoverableButton>
 
       <HoverableButton onClick={resetTransform} style={buttonStyle} aria-label="Reset">
-        <Maximize2Icon style={iconStyle} />
+        <Maximize2Icon />
       </HoverableButton>
     </div>
   );
-};
-
-const iconStyle: React.CSSProperties = { width: '1em', height: '1em' };
-
-const buttonStyle: React.CSSProperties = {
-  padding: '0.5em',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
 };
 
 const containerStyle: React.CSSProperties = {
@@ -52,6 +36,13 @@ const containerStyle: React.CSSProperties = {
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5em',
+};
+
+const buttonStyle: React.CSSProperties = {
+  padding: '0.5em',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
 };
 
 export default ZoomControls;
