@@ -42,25 +42,25 @@ function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Prop
         <tbody>
           {objects.map((object, i) => (
             <tr key={object.ID || i}>
-              {visibleColumns.map((column, idx) => (
-                <td
-                  key={column.key}
-                  className={getValueTypeForColumn(column)}
-                  style={{
-                    maxWidth: MAX_COLUMN_WIDTH,
-                    padding: '0.25em 0.5em',
-                    position: idx === 0 ? 'sticky' : 'static',
-                    left: idx === 0 ? 0 : 'auto',
-                    backgroundColor: idx === 0 ? 'var(--color-background)' : 'inherit',
-                    zIndex: idx === 0 ? ZIndex.TableStickyColumn : 'auto',
-                  }}
-                >
-                  <FormattedContent
-                    content={column.render(object)}
-                    valueType={getValueTypeForColumn(column)}
-                  />
-                </td>
-              ))}
+              {visibleColumns.map((column, idx) => {
+                const valueType = getValueTypeForColumn(column);
+                // The pin column (idx 0) and the first data column (idx 1) stay pinned to the
+                // left while scrolling horizontally. Their sticky positioning, background, and
+                // row-hover highlight live in tableStyles.css under `.alwaysVisible`.
+                const isSticky = idx <= 1;
+                return (
+                  <td
+                    key={column.key}
+                    className={isSticky ? `${valueType} alwaysVisible` : valueType}
+                    style={{
+                      maxWidth: MAX_COLUMN_WIDTH,
+                      padding: '0.25em 0.5em',
+                    }}
+                  >
+                    <FormattedContent content={column.render(object)} valueType={valueType} />
+                  </td>
+                );
+              })}
             </tr>
           ))}
         </tbody>
