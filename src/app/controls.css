@@ -40,11 +40,6 @@
 }
 
 .selector.filterList .filterListMoreButton {
-  width: fit-content;
-  border-width: 0.2em;
-  border-radius: 0.35em;
-  color: inherit;
-  cursor: pointer;
   font-size: 0.9em;
   padding: 0.25em 3.5em;
 }
