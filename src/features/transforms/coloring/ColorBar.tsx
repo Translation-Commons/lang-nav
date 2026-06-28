@@ -37,23 +37,23 @@ type Props = {
 const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   const { minValue, maxValue } = coloringFunctions;
   const { colorGradient } = usePageParams();
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [containerWidth, setContainerWidth] = useState(800);
+  const colorBarRef = useRef<HTMLDivElement>(null);
+  const [colorBarWidth, setColorBarWidth] = useState(800);
 
   useEffect(() => {
-    const el = containerRef.current;
+    const el = colorBarRef.current;
     if (!el) return;
     const observer = new ResizeObserver((entries) => {
       const width = entries[0]?.contentRect.width;
-      if (width) setContainerWidth(width);
+      if (width) setColorBarWidth(width);
     });
     observer.observe(el);
     return () => observer.disconnect();
   }, []);
 
   const ticks = useMemo(
-    () => getTicks(coloringFunctions, containerWidth),
-    [coloringFunctions, containerWidth],
+    () => getTicks(coloringFunctions, colorBarWidth),
+    [coloringFunctions, colorBarWidth],
   );
   const renormalize = isFieldWholeNumbersOnly(coloringFunctions.colorBy)
     ? (value: number) =>
@@ -67,7 +67,7 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   }
 
   return (
-    <div ref={containerRef} style={{ width: '100%' }}>
+    <div ref={colorBarRef} style={{ width: '100%' }}>
       <div style={{ height: '1em', width: '100%' }}>
         <BaseColorBar colorGradient={colorGradient} renormalize={renormalize} />
       </div>
@@ -76,7 +76,7 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
           position: 'relative',
           height: '2.5em',
           width: '100%',
-          fontSize: `${Math.max(0.5, Math.min(1, containerWidth / 900))}em`,
+          fontSize: `${Math.max(0.5, Math.min(1, colorBarWidth / 900))}em`,
         }}
       >
         {ticks.map(({ position, label }, index) => (
