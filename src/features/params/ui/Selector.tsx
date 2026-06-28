@@ -212,7 +212,7 @@ const FilterListMoreButton: React.FC<FilterListMoreButtonProps> = ({
   toggle,
 }) => {
   const { display } = useSelectorDisplay();
-  if (display !== SelectorDisplay.FilterList || totalCount <= FILTER_LIST_INITIAL_COUNT)
+  if (display !== SelectorDisplay.FilterList || totalCount <= FILTER_LIST_INITIAL_COUNT + 1)
     return null;
 
   return (
