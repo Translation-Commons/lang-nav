@@ -26,7 +26,7 @@ type Props<T> = {
   selectorStyle?: React.CSSProperties;
 };
 
-const FILTER_LIST_INITIAL_COUNT = 4;
+const FILTER_LIST_INITIAL_COUNT = 5;
 
 function Selector<T extends React.Key>({
   display,

@@ -29,14 +29,12 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
   const style: React.CSSProperties = {
     display: 'flex',
     gap: '0.25em',
-    lineHeight: '2.25em', // more spacing for visibility
     alignItems: 'center',
     fontWeight: '800', // adjusted font weight for easier visibility
     padding: '0.5em',
     margin: 'auto 0', // Vertically center
     whiteSpace: 'nowrap',
     borderRadius: '1em',
-    marginBottom: '-0.5em', // adjusted to have selector buttons closer to their label
   };
 
   switch (display) {
@@ -53,6 +51,8 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
       break;
     case SelectorDisplay.FilterList:
       style.padding = '0 0 0.5em 0.5em';
+      style.lineHeight = '2.25em'; // more spacing for visibility
+      style.marginBottom = '-0.5em'; // adjusted to have selector buttons closer to their label
       break;
     case SelectorDisplay.Dropdown:
       // nothing special
