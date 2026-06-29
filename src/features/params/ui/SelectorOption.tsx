@@ -138,6 +138,13 @@ export function getOptionStyle(
       style.borderRadius = '1em';
       if (!isSelected) style.border = '0.125em solid var(--color-button-secondary)';
       break;
+    case SelectorDisplay.FilterList:
+      style.border = 'none';
+      style.borderRadius = '0.5em';
+      style.padding = '0.2em 0.4em';
+      style.lineHeight = '1.5em';
+      style.margin = '0.1em';
+      break;
     case SelectorDisplay.InlineDropdown:
       // The standalone option should match the regular page text
       if (position === PositionInGroup.Standalone) {
