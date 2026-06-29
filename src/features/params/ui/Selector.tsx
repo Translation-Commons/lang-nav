@@ -52,7 +52,7 @@ function Selector<T extends React.Key>({
   // For FilterList: collapse to first N items unless expanded
   const isFilterList = display === SelectorDisplay.FilterList;
   const filterListCollapsed =
-    isFilterList && !expanded && options.length > FILTER_LIST_INITIAL_COUNT;
+    isFilterList && !expanded && options.length > FILTER_LIST_INITIAL_COUNT. +1;
   const visibleOptions = filterListCollapsed
     ? options.slice(0, FILTER_LIST_INITIAL_COUNT)
     : options;
@@ -212,7 +212,7 @@ const FilterListMoreButton: React.FC<FilterListMoreButtonProps> = ({
   toggle,
 }) => {
   const { display } = useSelectorDisplay();
-  if (display !== SelectorDisplay.FilterList || totalCount <= FILTER_LIST_INITIAL_COUNT)
+  if (display !== SelectorDisplay.FilterList || totalCount <= FILTER_LIST_INITIAL_COUNT + 1)
     return null;
 
   return (
