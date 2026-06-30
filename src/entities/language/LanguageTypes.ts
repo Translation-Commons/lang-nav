@@ -117,7 +117,7 @@ export interface LanguageData extends ObjectBase {
   primaryScriptCode?: ScriptCode;
 
   warnings: Partial<Record<LanguageField, string>>;
-  wikipedia?: WikipediaData;
+  wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
 
   latitude?: number;

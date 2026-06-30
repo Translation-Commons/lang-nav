@@ -1,6 +1,7 @@
 import React from 'react';
 import { createPortal } from 'react-dom';
 
+import HoverCardProvider from '../hovercard/HoverCardProvider';
 import ZIndex from '../ZIndex';
 
 import { useDropdownAnchor } from './DropdownAnchorContext';
@@ -138,7 +139,7 @@ const Dropdown: React.FC<Props> = ({
         ...style,
       }}
     >
-      {children}
+      <HoverCardProvider zIndex={ZIndex.HoverCardInDropdown}>{children}</HoverCardProvider>
     </div>,
     document.body,
   );

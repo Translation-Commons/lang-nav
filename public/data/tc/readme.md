@@ -15,3 +15,9 @@ These have been contributed by hand. Often with insights from other datasets but
 - glottocodeToISO.tsv
 - indigeneity.tsv
 - wikipedias.tsv
+
+## Wikipedia.tsv
+
+The list of wikipedias for each language. The data comes from 2 wikipedia articles, <https://en.wikipedia.org/wiki/List_of_Wikipedias> and <https://incubator.wikimedia.org/wiki/Incubator:Wikis> . The rows have been given specific locale codes to reflect their identity in LangNav (eg. `aar` instead of `aa` for Afar) and sometimes wikipedias are labeled for multiple languages such as `zho/cmn` for Chinese in general, but also specifically Mandarin.
+
+Date accessed: 2026-06-30

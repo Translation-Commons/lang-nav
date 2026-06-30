@@ -2,11 +2,7 @@ import { ArrowDownUpIcon } from 'lucide-react';
 import React from 'react';
 
 import PopupCard from '@features/layers/popupcard/PopupCard';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
-import { getOptionStyle } from '@features/params/ui/SelectorOption';
 import usePageParams from '@features/params/usePageParams';
-
-import { PositionInGroup } from '@shared/lib/PositionInGroup';
 
 import SecondarySortBySelector from './SecondarySortBySelector';
 import SortBySelector from './SortBySelector';
@@ -16,23 +12,34 @@ const SortPopupCard: React.FC = () => {
   const { sortBy } = usePageParams();
 
   return (
-    <div className="selector" style={{ gap: '0.25em' }}>
-      <ArrowDownUpIcon size="1.2em" />
-      <PopupCard
-        buttonLabel={<>{sortBy} ▶</>}
-        buttonClassName="selected"
-        buttonStyle={getOptionStyle(SelectorDisplay.Dropdown, true, PositionInGroup.Standalone)}
-        description="Change how items are sorted."
-        title="Sort"
-        body={() => (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-            <SortBySelector />
-            <SecondarySortBySelector />
-            <SortDirectionSelector />
-          </div>
-        )}
-      />
-    </div>
+    <PopupCard
+      buttonLabel={
+        <div
+          style={{ display: 'flex', gap: '0.25em', alignContent: 'center', alignItems: 'center' }}
+        >
+          {sortBy} <ArrowDownUpIcon size="1.2em" />
+        </div>
+      }
+      buttonClassName="primary"
+      buttonStyle={{ borderRadius: '1em' }}
+      description="Change how items are sorted."
+      title="Sorting Options"
+      body={() => (
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '0.5em',
+            width: 'max-content',
+            alignItems: 'end',
+          }}
+        >
+          <SortBySelector />
+          <SecondarySortBySelector />
+          <SortDirectionSelector />
+        </div>
+      )}
+    />
   );
 };
 
