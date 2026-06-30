@@ -71,6 +71,7 @@ export function TurnstileWidget({ onToken }: Props) {
         if (cancelled || !window.turnstile || !containerRef.current) return;
         widgetId = window.turnstile.render(containerRef.current, {
           sitekey: TURNSTILE_SITE_KEY,
+          size: 'flexible',
           callback: (token) => onTokenRef.current(token),
           'error-callback': () => onTokenRef.current(''),
           'expired-callback': () => onTokenRef.current(''),
