@@ -1,1 +1,0 @@
-import{o as r}from"./index-CX6l9KkZ.js";const t=({title:e,children:o})=>r.jsxs("details",{className:"collapsible-report",children:[r.jsx("summary",{style:{width:"100%",backgroundColor:"var(--color-button-secondary)",padding:"0.5em",borderRadius:"0.5em",cursor:"pointer",textAlign:"left",fontSize:"1.2em"},children:e}),o]});export{t as C};
