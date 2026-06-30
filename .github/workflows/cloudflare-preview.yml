@@ -35,6 +35,8 @@ jobs:
         run: npm run build:cf
         env:
           VITE_AMPLITUDE_API_KEY: ${{ secrets.VITE_AMPLITUDE_API_KEY }}
+          VITE_FEEDBACK_API_URL: ${{ secrets.VITE_FEEDBACK_API_URL }}
+          VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
 
       - name: Deploy to Cloudflare Pages
         id: deploy
