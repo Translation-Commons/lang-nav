@@ -15,7 +15,7 @@ type Props = {
 
   // Card content
   title: ReactNode;
-  body: ReactNode | (() => ReactNode);
+  body: ReactNode | ((close: () => void) => ReactNode);
   ctas?: ReactNode[];
 };
 
@@ -77,7 +77,7 @@ const PopupCard: React.FC<Props> = ({
               <XIcon size="1em" display="block" aria-label="Close" />
             </HoverableButton>
           </div>
-          <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
+          <div className="popupCardBody">{typeof body === 'function' ? body(closeCard) : body}</div>
           {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
         </div>
       )}

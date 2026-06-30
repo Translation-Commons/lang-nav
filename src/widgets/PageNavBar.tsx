@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
-import { FeedbackForm } from '@features/feedback/FeedbackForm';
+import { FeedbackButton } from '@features/feedback/FeedbackButton';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
@@ -32,7 +32,7 @@ const PageNavBar: React.FC = () => {
         <SearchBar />
       </div>
       <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center', gap: '0.5em' }}>
-        <FeedbackForm />
+        <FeedbackButton />
         <SettingsButton />
       </div>
     </NavBarContainer>

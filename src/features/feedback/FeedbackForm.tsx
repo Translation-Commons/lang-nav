@@ -1,102 +1,87 @@
-import { MailIcon } from 'lucide-react';
+import { SendIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import PopupCard from '@features/layers/popupcard/PopupCard';
 
-import { getFeedbackEmailBody } from './getFeedbackEmailBody';
+import { FeedbackFields, FEEDBACK_TYPES } from './FeedbackFields';
+import { FeedbackSuccess } from './FeedbackSuccess';
+import { submitFeedback } from './submitFeedback';
+import { TURNSTILE_SITE_KEY } from './TurnstileWidget';
 
-const FEEDBACK_EMAIL = 'langnav-outreach@translationcommons.org';
+type Status = 'idle' | 'submitting' | 'success' | 'error';
 
-export function FeedbackForm() {
-  const [type, setType] = useState('General feedback');
+interface Props {
+  onClose: () => void;
+}
+
+export function FeedbackForm({ onClose }: Props) {
+  const [type, setType] = useState<string>(FEEDBACK_TYPES[FEEDBACK_TYPES.length - 1]);
   const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<Status>('idle');
+  const [error, setError] = useState<string | null>(null);
+  const [turnstileToken, setTurnstileToken] = useState('');
 
-  const handleSubmit = () => {
-    const subject = `[LangNav Feedback] ${type}`;
-    const body = getFeedbackEmailBody({ type, message });
+  const needsTurnstile = Boolean(TURNSTILE_SITE_KEY);
+  const canSubmit =
+    message.trim().length > 0 &&
+    status !== 'submitting' &&
+    (!needsTurnstile || turnstileToken.length > 0);
 
-    const mailtoUrl =
-      `mailto:${FEEDBACK_EMAIL}` +
-      `?subject=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    window.location.href = mailtoUrl;
+  const handleSubmit = async () => {
+    if (!canSubmit) return;
+    setStatus('submitting');
+    setError(null);
+    try {
+      await submitFeedback({
+        type,
+        message: message.trim(),
+        turnstileToken: turnstileToken || undefined,
+      });
+      setStatus('success');
+    } catch (e) {
+      setStatus('error');
+      setError(e instanceof Error ? e.message : 'Something went wrong. Please try again.');
+    }
   };
 
-  return (
-    <PopupCard
-      buttonLabel="Feedback"
-      buttonClassName="primary"
-      buttonStyle={{ padding: '0.5em' }}
-      description="Submit feedback to the LangNav team"
-      title="Send feedback"
-      body={
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', width: '300px' }}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
-            <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Type</label>
-            <select
-              value={type}
-              onChange={(e) => setType(e.target.value)}
-              style={{
-                padding: '0.5em',
-                border: '1px solid var(--color-shadow)',
-                borderRadius: '0.5em',
-                color: 'var(--color-text)',
-                backgroundColor: 'var(--color-background)',
-              }}
-            >
-              <option>Bug</option>
-              <option>Data issue</option>
-              <option>Feature request</option>
-              <option>General feedback</option>
-            </select>
-          </div>
+  if (status === 'success') return <FeedbackSuccess onClose={onClose} />;
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
-            <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Message</label>
-            <textarea
-              rows={5}
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              placeholder="What did you notice or suggest?"
-              style={{
-                padding: '0.5em',
-                color: 'var(--color-text)',
-                backgroundColor: 'var(--color-background)',
-                border: '1px solid var(--color-shadow)',
-                borderRadius: '0.5em',
-                resize: 'vertical',
-              }}
-            />
-          </div>
-        </div>
-      }
-      ctas={[
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+      <FeedbackFields
+        type={type}
+        message={message}
+        error={error}
+        showError={status === 'error'}
+        onTypeChange={setType}
+        onMessageChange={setMessage}
+        onToken={setTurnstileToken}
+      />
+      <div style={{ display: 'flex', justifyContent: 'flex-end', gap: '0.5em' }}>
         <HoverableButton
-          key="submit"
-          buttonType="submit"
-          className={message.trim() ? 'primary' : ''}
-          onClick={() => message.trim() && handleSubmit()}
-          hoverContent={
-            message.trim()
-              ? 'Open your email client to send this feedback'
-              : 'Please enter a message'
-          }
+          onClick={onClose}
+          style={{ backgroundColor: 'var(--color-button-secondary)' }}
+        >
+          Cancel
+        </HoverableButton>
+        <HoverableButton
+          onClick={handleSubmit}
+          disabled={!canSubmit}
           style={{
-            backgroundColor: message.trim()
+            backgroundColor: canSubmit
               ? 'var(--color-button-primary)'
               : 'var(--color-button-secondary)',
-            color: message.trim() ? 'var(--color-text-on-color)' : 'var(--color-text-secondary)',
+            color: canSubmit ? 'var(--color-text-on-color)' : 'var(--color-text-secondary)',
+            cursor: !canSubmit ? 'not-allowed' : undefined,
             display: 'flex',
             alignItems: 'center',
             gap: '0.5em',
           }}
         >
-          Open email
-          <MailIcon display="block" size="1em" />
-        </HoverableButton>,
-      ]}
-    />
+          {status === 'submitting' ? 'Sending...' : 'Send'}
+          <SendIcon display="block" size="1em" />
+        </HoverableButton>
+      </div>
+    </div>
   );
 }
