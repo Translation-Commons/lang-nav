@@ -5,7 +5,10 @@ import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+
+import { uniqueBy } from '@shared/lib/setUtils';
 
 export function getLanguageForEntity(object: ObjectData | undefined): LanguageData | undefined {
   if (!object) return undefined;
@@ -36,12 +39,25 @@ export function getTerritoryForEntity(object: ObjectData | undefined): Territory
 export function getCensusForEntity(object: ObjectData | undefined): CensusData | undefined {
   if (!object) return undefined;
   if (object.type === ObjectType.Census) return object;
-  if (object.type === ObjectType.Locale) return object.populationCensus;
+  if (object.type === ObjectType.Locale) return object.pop.speaking.census;
   return undefined;
 }
 
 export function getKeyboardForEntity(object: ObjectData | undefined): KeyboardData | undefined {
   if (!object) return undefined;
   if (object.type === ObjectType.Keyboard) return object;
+  return undefined;
+}
+
+export function getVariantsForEntity(object: ObjectData | undefined): VariantData[] | undefined {
+  if (!object) return undefined;
+  if (object.type === ObjectType.Variant) return [object];
+  if (object.type === ObjectType.Keyboard) return object.variant ? [object.variant] : undefined;
+  if (object.type === ObjectType.Locale && object.variants) return object.variants;
+  if (object.type === ObjectType.Language)
+    return uniqueBy(
+      [object.equivalentVariant, ...(object.variants ?? [])].filter((v) => !!v),
+      (v) => v.ID,
+    );
   return undefined;
 }

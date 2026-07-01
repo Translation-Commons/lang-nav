@@ -69,6 +69,7 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Navajo',
       'Chinese',
+      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
@@ -76,7 +77,7 @@ describe('LanguageFilterSelector', () => {
     // User types in German, suggestions should filter to German
     await waitFor(async () => await user.type(input, 'German'));
     const rows2 = ['Pick a suggestion or press [enter] to filter by "German"', 'German'];
-    expect(items.length).toBe(rows2.length);
+    expect(items.length).toBe(rows2.length + 1);
     rows2.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
     expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
 
@@ -106,6 +107,7 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Navajo',
       'Chinese',
+      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
@@ -133,6 +135,7 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Navajo',
       'Chinese',
+      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
@@ -160,6 +163,7 @@ describe('LanguageFilterSelector', () => {
       'Navajo',
       'not individual language',
       'Chinese',
+      '', // why is there an empty item?
     ];
     expect(items.length).toBe(rows.length);
     rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));

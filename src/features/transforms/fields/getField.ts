@@ -5,6 +5,7 @@ import {
   getCountOfCensuses,
   getCountOfKeyboards,
   getCountOfLanguages,
+  getCountOfVariants,
   getCountOfWritingSystems,
   getDepth,
   getObjectDateAsNumber,
@@ -37,6 +38,7 @@ import {
   getKeyboardForEntity,
   getLanguageForEntity,
   getTerritoryForEntity,
+  getVariantsForEntity,
   getWritingSystemForEntity,
 } from './getEntityConnection';
 
@@ -82,7 +84,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.TerritoryScope:
       return getTerritoryForEntity(object)?.scope;
     case Field.VariantType:
-      return object.type === ObjectType.Variant ? object.variantType : undefined;
+      return getVariantsForEntity(object)?.[0]?.variantType;
     case Field.SourceType:
       return getCensusForEntity(object)?.collectorType;
 
@@ -130,7 +132,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.Platform:
       return getKeyboardForEntity(object)?.platform;
     case Field.Variant:
-      return getKeyboardForEntity(object)?.variantCode;
+      return getVariantsForEntity(object)?.[0]?.nameDisplay;
     case Field.SourceForPopulation:
       return getCensusForEntity(object)?.collectorName;
     case Field.SourceForLanguage:
@@ -150,13 +152,16 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.CountOfCensuses:
       return getCountOfCensuses(object);
     case Field.CountOfVariants:
-      return undefined; // Not yet defined
+      return getCountOfVariants(object);
 
     // Population
     case Field.Population:
       return getObjectPopulation(object);
     case Field.PopulationDirectlySourced:
       return getObjectPopulationDirectlySourced(object);
+    case Field.PopulationWriting:
+      if (object.type === ObjectType.Locale) return object.pop.writing.unadjusted;
+      return undefined;
     case Field.PopulationOfDescendants:
       return getObjectPopulationOfDescendants(object);
     case Field.PopulationPercentInBiggestDescendantLanguage:

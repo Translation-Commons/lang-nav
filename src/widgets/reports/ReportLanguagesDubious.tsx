@@ -24,7 +24,7 @@ const ReportLanguagesDubious: React.FC = () => {
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
-  const { getCurrentObjects } = usePagination<LanguageData>();
+  const { getCurrentEntities } = usePagination<LanguageData>();
   const languagesFiltered = useMemo(
     () =>
       languagesInSelectedSource
@@ -63,16 +63,16 @@ const ReportLanguagesDubious: React.FC = () => {
       </div>
       <div style={{ marginTop: '1em', marginBottom: '1em' }}>
         <ResponsiveGrid>
-          {getCurrentObjects(languagesFiltered.sort(sortFunction)).map((lang) => {
+          {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
             const codePieces = lang.codeDisplay.split(/-|_/);
-            const relatedObjects = codePieces
+            const relatedEntities = codePieces
               .map(
                 (partialCode) =>
                   getLanguage(partialCode) ??
                   getTerritory(partialCode) ??
                   getWritingSystem(partialCode),
               )
-              .filter((object) => object != null);
+              .filter((entity) => entity != null);
             // TODO if its a language + territory, check if the locale exists
             // TODO check if there is an IANA variant.
             return (
@@ -92,10 +92,10 @@ const ReportLanguagesDubious: React.FC = () => {
                 <div>
                   <label>Potentially related objects:</label>
                   <ul style={{ margin: 0 }}>
-                    {relatedObjects.length > 0 ? (
-                      relatedObjects.map((obj) => (
-                        <li key={obj.ID}>
-                          <HoverableObjectName object={obj} labelSource="code" />
+                    {relatedEntities.length > 0 ? (
+                      relatedEntities.map((entity) => (
+                        <li key={entity.ID}>
+                          <HoverableObjectName object={entity} labelSource="code" />
                         </li>
                       ))
                     ) : (

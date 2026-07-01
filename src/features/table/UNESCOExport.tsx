@@ -40,11 +40,11 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
     pops.length > 1
       ? Math.min(...pops).toLocaleString() + ' - ' + Math.max(...pops).toLocaleString()
       : '';
-  let popYear = locale.populationCensus?.yearCollected.toString();
-  if (locale.populationCensus?.presentedBy === 'CLDR') popYear = '';
+  let popYear = locale.pop.speaking.census?.yearCollected.toString();
+  if (locale.pop.speaking.census?.presentedBy === 'CLDR') popYear = '';
   const hasWritingSystem = lang.primaryWritingSystem && lang.primaryWritingSystem.ID !== 'Zxxx';
-  let popSource = locale.populationCensus?.collectorName ?? locale.populationSource ?? '';
-  if (locale.populationCensus?.url) popSource += ' ' + locale.populationCensus?.url;
+  let popSource = locale.pop.speaking.census?.collectorName ?? locale.pop.speaking.source ?? '';
+  if (locale.pop.speaking.census?.url) popSource += ' ' + locale.pop.speaking.census?.url;
 
   return [
     'WAL-' + lang.ID,
@@ -112,7 +112,7 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
 
     //// Language Users - STEP 3
     // 1. Number: Please provide information about the approximate number of users
-    locale.populationSpeaking?.toLocaleString() ?? '', // Number_of_users
+    locale.pop.speaking.unadjusted?.toLocaleString() ?? '', // Number_of_users
     popRange, // Number_of_users_cited
     popYear ?? '', // Year
     popSource ?? '', // Source

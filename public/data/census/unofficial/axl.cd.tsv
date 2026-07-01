@@ -1,0 +1,50 @@
+#nameDisplay		AXL Congo Kinshasa, Local Languages	AXL Congo Kinshasa, National Languages	AXL Congo Kinshasa, National Languages L1	AXL Congo Kinshasa, National Languages L2	AXL Congo Kinshasa, National Languages Percent	AXL Congo Kinshasa, Official Languages
+#isoRegionCode	CD						
+#yearCollected	1996						
+### Language Criteria ###							
+#languageUse	Speaks						
+#acquisitionOrder		L1	Any	L1	L2	Any	L2
+#domain		Home					
+### Population Surveyed ###							
+#population	42,200,000						
+#populationSource	The page contains many population estimates (70,330,427 and 42,200,000) but 42.2million seems to be the reference in the Languages section						
+### Data Constraints ###							
+#quantity	count					percent	percent
+### Creator ###							
+#collectorType	Secondary						
+#author	Jacques Leclerc						
+#presentedBy	AXL						
+### Source Document ###							
+#url	https://www.axl.cefan.ulaval.ca/afrique/czaire.htm						
+#datePublished	2024-01-05						
+#dateAccessed	2026-05-11						
+#documentName	Congo-Kinshasa						
+#sectionName		Les langues locales	Les langues nationales	Les langues nationales	Les langues nationales	Les langues nationales	La langue officielle
+#citation	L’aménagement linguistique dans le monde, Québec, CEFAN, Université Laval						
+Language Code	Language Name	Population					
+fra							10%
+eng							1%
+swa/swc	Swahili/Kiswahili			9100000		40%	
+lin	Lingala		9000000	2000000	7000000		
+kon	Kikongo/Kinkonco		2000000				
+lua	Tshiluba/Tchilouba		6300000				
+bmb	Bembe	252000					
+brf	Bera	120000					
+buu	Budu	180000					
+bja	Budza	226000					
+cjk	Chokwe	504000					
+flr	Fulero	275000					
+kny	Kanyok	200000					
+lea	Lega-Shabunda	400000					
+lua	Luba-Shaba	1500000					
+mdq	Mbole	100000					
+lol	Mongo	400000					
+zmp	Mpuono	165000					
+lin	Ngala	3500000					
+nto	Ntoma	100000					
+pem	Phende	420000					
+kin	Kinyarwanda	250000					
+shr	Shi	654000					
+sop	Songe	1000000					
+tll	Tetela	750000					
+zne	Zande	73000					

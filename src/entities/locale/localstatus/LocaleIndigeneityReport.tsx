@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
@@ -18,8 +18,8 @@ enum IncludeCriteria {
 }
 
 const LocaleIndigeneityReport: React.FC = () => {
-  const locales = useFilteredObjects({})
-    .filteredObjects.filter((l) => l.type === ObjectType.Locale)
+  const locales = useFilteredEntities({})
+    .filteredEntities.filter((l) => l.type === ObjectType.Locale)
     .filter((l) => !l.writingSystem && !l.variants && l.territory) as LocaleData[];
 
   const [includeCriteria, setIncludeCriteria] = React.useState(IncludeCriteria.MissingData);

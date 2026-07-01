@@ -4,7 +4,7 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Selector from '@features/params/ui/Selector';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -56,7 +56,7 @@ const ReportLanguageDescendants: React.FC = () => {
           onChange={(value: number) => setMaximumPercentThreshold(value)}
         />
       </div>
-      <InteractiveObjectTable<LanguageData>
+      <InteractiveEntityTable<LanguageData>
         tableID={TableID.LanguagesLargestDescendant}
         columns={[
           CodeColumn,
@@ -94,7 +94,7 @@ const ReportLanguageDescendants: React.FC = () => {
             field: Field.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}
-        objects={filteredLanguages}
+        entities={filteredLanguages}
       />
     </>
   );

@@ -19,7 +19,7 @@ import { prepareUNESCODataForExport } from './UNESCOExport';
 
 interface Props<T> {
   visibleColumns: TableColumn<T>[];
-  objectsFilteredAndSorted: T[];
+  entities: T[];
 }
 
 enum ExportType {
@@ -43,7 +43,7 @@ type CopyExportType =
   | ExportType.CopyUNESCO
   | ExportType.CopyCLDR;
 
-function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndSorted }: Props<T>) {
+function TableExport<T extends ObjectData>({ visibleColumns, entities }: Props<T>) {
   // Track when the user initiates an export; used to disable the button while processing
   const [isExporting, setIsExporting] = useState(false);
   const pageParams = usePageParams();
@@ -53,13 +53,13 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
       const separator =
         exportType === ExportType.DownloadCSV || exportType === ExportType.CopyCSV ? ',' : '\t';
       if (exportType === ExportType.DownloadUNESCO || exportType === ExportType.CopyUNESCO) {
-        return prepareUNESCODataForExport(objectsFilteredAndSorted, pageParams.territoryFilter);
+        return prepareUNESCODataForExport(entities, pageParams.territoryFilter);
       }
       if (exportType === ExportType.CopyCLDR) {
-        return prepareCLDRLocalePopulationForExport(objectsFilteredAndSorted);
+        return prepareCLDRLocalePopulationForExport(entities);
       }
       const header = visibleColumns.map((c) => csvEscape(c.key)).join(separator);
-      const rows = objectsFilteredAndSorted.map((obj) => {
+      const rows = entities.map((obj) => {
         return visibleColumns
           .map(({ exportValue, render }) => {
             if (exportValue) return exportValue(obj);
@@ -75,7 +75,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
       });
       return [header, ...rows].join('\n');
     },
-    [objectsFilteredAndSorted, pageParams, visibleColumns],
+    [entities, pageParams, visibleColumns],
   );
 
   const handleExportFile = useCallback(
@@ -107,14 +107,14 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
 
   const handleExport = useCallback(
     (exportType: ExportType) => {
-      if (objectsFilteredAndSorted.length === 0) return;
+      if (entities.length === 0) return;
       setIsExporting(true);
       trackEvent('data_exported', {
         export_type: exportType,
         objectType: pageParams.objectType,
         view: pageParams.view,
         path: typeof window !== 'undefined' ? window.location.pathname : undefined,
-        row_count: objectsFilteredAndSorted.length,
+        row_count: entities.length,
         column_count: visibleColumns.length,
       });
       void (async () => {
@@ -137,7 +137,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, objectsFilteredAndS
         }
       })();
     },
-    [handleClipboardExport, handleExportFile, objectsFilteredAndSorted.length],
+    [handleClipboardExport, handleExportFile, entities, visibleColumns.length],
   );
   let validExportTypes = Object.values(ExportType).filter((et) => et !== ExportType.Unchosen);
   if (

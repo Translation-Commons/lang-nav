@@ -11,12 +11,13 @@ const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'Metascore',
     render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Metascore} />,
     field: Field.VitalityMetascore,
-    isInitiallyVisible: true,
+    isInitiallyVisible: false,
   },
   {
     key: 'ISO Status',
     render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.ISO} />,
     field: Field.ISOStatus,
+    isInitiallyVisible: true,
   },
   // {
   //   key: 'Vitality: Ethnologue (Fine)',

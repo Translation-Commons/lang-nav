@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
@@ -8,9 +8,10 @@ import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
 
+import SettingsButton from './controls/SettingsButton';
+
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
-  const [feedbackOpen, setFeedbackOpen] = useState(false);
 
   return (
     <NavBarContainer>
@@ -30,15 +31,10 @@ const PageNavBar: React.FC = () => {
       <div style={{ display: 'flex', flexGrow: 1 }}>
         <SearchBar />
       </div>
-      <button
-        className="primary"
-        type="button"
-        style={{ padding: '0.5em', whiteSpace: 'nowrap' }}
-        onClick={() => setFeedbackOpen(true)}
-      >
-        Feedback
-      </button>
-      {feedbackOpen && <FeedbackForm onClose={() => setFeedbackOpen(false)} />}
+      <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center', gap: '0.5em' }}>
+        <FeedbackForm />
+        <SettingsButton />
+      </div>
     </NavBarContainer>
   );
 };

@@ -1,0 +1,35 @@
+#codeDisplay		axl.gl.perc	axl.gl.count
+#nameDisplay		AXL Greenland by Percent	AXL Greenland Counts
+#isoRegionCode	GL		
+#yearCollected	2024		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	 	L1	
+#domain		Any	
+### Population Surveyed ###			
+#population	58,000		
+### Data Constraints ###			
+#geographicScope	Whole territory (coastal regions only; ice cap uninhabited)		 
+#nationality	Residents		
+#residenceBasis	de facto		
+#quantity		percent	count
+#age	0+		
+### Creator ###			
+#collectorType	Secondary		
+#collectorNameShort			
+#presentedBy	AXL		
+#author	Jacques Leclerc		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/amnord/groenland.htm		 
+#tableName	Données démolinguistiques — Groenland		 
+Language Code	Language Name	Population	
+iku/kal	Kalaallisut (Western Greenlandic / Inuktitut)	87.7%	50000
+dan	Danish	8.5%	5000
+eng	English	3.5%	
+iku/kal/nort3430	Avanersuarmiutut/Inuktun/North Greenlandic	 	1000
+iku/tunu1234	Tunumiutut/Tunumiisut	 	3800
+fil	Filipino		486
+tha	Thai		249
+isl	Icelandic		128
+pol	Polish		80
+zho	Chinese		80

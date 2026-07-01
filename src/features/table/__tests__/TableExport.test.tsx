@@ -31,7 +31,7 @@ describe('TableExport', () => {
   ];
 
   it('export buttons render correctly', async () => {
-    render(<TableExport visibleColumns={columns} objectsFilteredAndSorted={objects} />);
+    render(<TableExport visibleColumns={columns} entities={objects} />);
 
     // The options aren't initially visible, also there is no generic Export option
     expect(screen.queryByText('Copy TSV')).not.toBeTruthy();
@@ -55,7 +55,7 @@ describe('TableExport', () => {
   // so we only test copying to clipboard here.
 
   it('copies tsv format data to clipboard when Copy TSV is clicked', async () => {
-    render(<TableExport visibleColumns={columns} objectsFilteredAndSorted={objects} />);
+    render(<TableExport visibleColumns={columns} entities={objects} />);
 
     // Open the menu to show `Copy TSV` option
     act(() => {

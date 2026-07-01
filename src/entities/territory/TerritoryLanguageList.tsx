@@ -4,9 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
-
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { countBy, uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -28,8 +26,10 @@ const TerritoryLanguageList: React.FC<Props> = ({ territory }) => {
 
 const TerritoryLanguageListContents: React.FC<Props> = ({ territory }) => {
   const locales = territory.locales ?? [];
-  const filteredLocales = useFilteredObjects({ inputObjects: locales, useSubstring: false })
-    .filteredObjects as LocaleData[];
+  const filteredLocales = useFilteredEntities({
+    inputEntities: locales,
+    useSubstring: false,
+  }).filteredEntities;
 
   if (locales.length === 0) return <Deemphasized>Unknown</Deemphasized>;
   const numberOfLanguages = countBy(locales, (loc) => loc.languageCode);

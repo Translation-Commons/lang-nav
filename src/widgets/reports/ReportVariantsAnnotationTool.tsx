@@ -23,7 +23,7 @@ const ReportVariantsAnnotationTool: React.FC = () => {
       variants.filter((variant) => {
         const missingData =
           variant.variantType == null ||
-          (variant.variantType === VariantType.Dialect && variant.languoid == null);
+          (variant.variantType === VariantType.Dialect && variant.equivalentLanguageCode == null);
         if (includeCriteria === IncludeCriteria.Any) return true;
         if (includeCriteria === IncludeCriteria.HasData) return !missingData;
         if (includeCriteria === IncludeCriteria.MissingData) return missingData;
@@ -40,16 +40,21 @@ const ReportVariantsAnnotationTool: React.FC = () => {
       .filter((variant) => variant.variantType != null)
       .sort(sortByPopulation)
       .map((variant) =>
-        [variant.ID, variant.variantType, variant.languoid?.ID ?? variant.languoidCode].join('\t'),
+        [
+          variant.ID,
+          variant.variantType,
+          variant.equivalentLanguage?.ID ?? variant.equivalentLanguageCode,
+        ].join('\t'),
       )
       .join('\n');
-    navigator.clipboard.writeText('ID\tVariantType\tLanguoid\n' + clipboardText);
+    navigator.clipboard.writeText('ID\tVariantType\tEquivalentLanguageCode\n' + clipboardText);
   }, [variants]);
 
   return (
     <>
       This is a tool to help add annotations to variants, such as classifying it as orthographic or
-      dialectal. For dialects there is also an option to specify which languoid it corresponds to.
+      dialectal. For dialects there is also an option to specify which equivalent language it
+      corresponds to.
       <Selector<IncludeCriteria>
         selectorLabel="Filter variants"
         selected={includeCriteria}

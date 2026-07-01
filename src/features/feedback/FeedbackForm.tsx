@@ -1,18 +1,14 @@
-import { MailIcon, XIcon } from 'lucide-react';
+import { MailIcon } from 'lucide-react';
 import { useState } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import ZIndex from '@features/layers/ZIndex';
+import PopupCard from '@features/layers/popupcard/PopupCard';
 
 import { getFeedbackEmailBody } from './getFeedbackEmailBody';
 
 const FEEDBACK_EMAIL = 'langnav-outreach@translationcommons.org';
 
-interface Props {
-  onClose: () => void;
-}
-
-export function FeedbackForm({ onClose }: Props) {
+export function FeedbackForm() {
   const [type, setType] = useState('General feedback');
   const [message, setMessage] = useState('');
 
@@ -29,101 +25,69 @@ export function FeedbackForm({ onClose }: Props) {
   };
 
   return (
-    <div
-      style={{
-        position: 'fixed',
-        top: '0.75em',
-        right: '0.75em',
-        zIndex: ZIndex.FeedbackForm,
-        width: '20em', // 320px
-        backgroundColor: 'var(--color-background)',
-        borderRadius: '0.5em',
-        boxShadow: '0 4px 12px var(--color-shadow)',
-        color: 'var(--color-text)',
-      }}
-    >
-      {/* Header */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          padding: '0.5em 1em',
-          borderBottom: '1px solid var(--color-shadow)',
-        }}
-      >
-        <span style={{ fontWeight: 600 }}>Send feedback</span>
-        <HoverableButton onClick={onClose} style={{ padding: '0.5em' }}>
-          <XIcon size="1em" display="block" />
-        </HoverableButton>
-      </div>
+    <PopupCard
+      buttonLabel="Feedback"
+      buttonClassName="primary"
+      buttonStyle={{ padding: '0.5em' }}
+      description="Submit feedback to the LangNav team"
+      title="Send feedback"
+      body={
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', width: '300px' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
+            <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Type</label>
+            <select
+              value={type}
+              onChange={(e) => setType(e.target.value)}
+              style={{
+                padding: '0.5em',
+                border: '1px solid var(--color-shadow)',
+                borderRadius: '0.5em',
+                color: 'var(--color-text)',
+                backgroundColor: 'var(--color-background)',
+              }}
+            >
+              <option>Bug</option>
+              <option>Data issue</option>
+              <option>Feature request</option>
+              <option>General feedback</option>
+            </select>
+          </div>
 
-      {/* Body */}
-      <div style={{ padding: '16px', display: 'flex', flexDirection: 'column', gap: 12 }}>
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Type</label>
-          <select
-            value={type}
-            onChange={(e) => setType(e.target.value)}
-            style={{
-              padding: '0.5em',
-              border: '1px solid var(--color-shadow)',
-              borderRadius: '0.5em',
-              color: 'var(--color-text)',
-              backgroundColor: 'var(--color-background)',
-            }}
-          >
-            <option>Bug</option>
-            <option>Data issue</option>
-            <option>Feature request</option>
-            <option>General feedback</option>
-          </select>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
+            <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Message</label>
+            <textarea
+              rows={5}
+              value={message}
+              onChange={(e) => setMessage(e.target.value)}
+              placeholder="What did you notice or suggest?"
+              style={{
+                padding: '0.5em',
+                color: 'var(--color-text)',
+                backgroundColor: 'var(--color-background)',
+                border: '1px solid var(--color-shadow)',
+                borderRadius: '0.5em',
+                resize: 'vertical',
+              }}
+            />
+          </div>
         </div>
-
-        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Message</label>
-          <textarea
-            rows={5}
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            placeholder="What did you notice or suggest?"
-            style={{
-              padding: '0.5em',
-              color: 'var(--color-text)',
-              backgroundColor: 'var(--color-background)',
-              border: '1px solid var(--color-shadow)',
-              borderRadius: '0.5em',
-              resize: 'vertical',
-            }}
-          />
-        </div>
-      </div>
-
-      {/* Footer */}
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'flex-end',
-          gap: '0.5em',
-          padding: '.5em 1em',
-          borderTop: '1px solid var(--color-shadow)',
-        }}
-      >
+      }
+      ctas={[
         <HoverableButton
-          onClick={onClose}
-          style={{ backgroundColor: 'var(--color-button-secondary)' }}
-        >
-          Cancel
-        </HoverableButton>
-        <HoverableButton
-          onClick={handleSubmit}
-          disabled={!message.trim()}
+          key="submit"
+          buttonType="submit"
+          className={message.trim() ? 'primary' : ''}
+          onClick={() => message.trim() && handleSubmit()}
+          hoverContent={
+            message.trim()
+              ? 'Open your email client to send this feedback'
+              : 'Please enter a message'
+          }
           style={{
             backgroundColor: message.trim()
               ? 'var(--color-button-primary)'
               : 'var(--color-button-secondary)',
             color: message.trim() ? 'var(--color-text-on-color)' : 'var(--color-text-secondary)',
-            cursor: !message.trim() ? 'not-allowed' : undefined,
             display: 'flex',
             alignItems: 'center',
             gap: '0.5em',
@@ -131,8 +95,8 @@ export function FeedbackForm({ onClose }: Props) {
         >
           Open email
           <MailIcon display="block" size="1em" />
-        </HoverableButton>
-      </div>
-    </div>
+        </HoverableButton>,
+      ]}
+    />
   );
 }

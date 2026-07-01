@@ -70,6 +70,7 @@ export enum PageParamKey {
   objectID = 'objectID',
   objectType = 'objectType',
   page = 'page',
+  pinned = 'pinned',
   populationMax = 'populationMax',
   populationMin = 'populationMin',
   profile = 'profile',
@@ -104,7 +105,8 @@ export type PageParams = {
   localeSeparator: LocaleSeparator;
   objectID?: string;
   objectType: ObjectType;
-  page: number; // 0 indexed
+  page: number; // 1 indexed
+  pinned: string[];
   populationMax: number;
   populationMin: number;
   profile: ProfileType;
@@ -138,6 +140,7 @@ export type PageParamsOptional = {
   objectID?: string;
   objectType?: ObjectType;
   page?: number;
+  pinned?: string[];
   populationMax?: number;
   populationMin?: number;
   profile?: ProfileType;

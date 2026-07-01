@@ -6,7 +6,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
 import usePageParams from '@features/params/usePageParams';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
 import { getScopeFilter } from '@features/transforms/filtering/filter';
@@ -147,9 +147,9 @@ const PotentialLocalesTable: React.FC<{
   showRelatedLocales?: boolean;
 }> = ({ locales }) => {
   return (
-    <InteractiveObjectTable<LocaleData>
+    <InteractiveEntityTable<LocaleData>
       tableID={TableID.PotentialLocales}
-      objects={locales}
+      entities={locales}
       columns={[
         {
           key: 'Potential Locale',
@@ -168,25 +168,25 @@ const PotentialLocalesTable: React.FC<{
         },
         {
           key: 'Population (Adjusted)',
-          render: (object) => object.populationAdjusted,
+          render: (object) => object.pop.speaking.adjusted,
           field: Field.Population,
         },
         {
           key: 'Population (in Census)',
-          render: (object) => object.populationSpeaking,
+          render: (object) => object.pop.speaking.unadjusted,
           field: Field.PopulationDirectlySourced,
           isInitiallyVisible: false,
         },
         {
           key: '% in Territory',
-          render: (object) => object.populationSpeakingPercent,
+          render: (object) => object.pop.speaking.percent,
           field: Field.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
           render: (object) =>
-            object.populationAdjusted &&
-            (object.populationAdjusted * 100) / (object.language?.populationEstimate ?? 1),
+            object.pop.speaking.adjusted &&
+            (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate ?? 1),
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {
@@ -220,12 +220,12 @@ const PotentialLocalesTable: React.FC<{
 
 function getLocaleExportString(locale: LocaleData): string {
   let populationSource = '';
-  if (locale.populationCensus?.collectorType === CensusCollectorType.Government) {
+  if (locale.pop.speaking.census?.collectorType === CensusCollectorType.Government) {
     populationSource = PopulationSourceCategory.Official;
-  } else if (locale.populationCensus?.collectorType === CensusCollectorType.Study) {
+  } else if (locale.pop.speaking.census?.collectorType === CensusCollectorType.Study) {
     populationSource = PopulationSourceCategory.Study;
   }
-  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${populationSource}\t${locale.populationSpeaking}\t${locale.officialStatus ?? ''}\n`;
+  return `${locale.ID}\t${locale.nameDisplay} (${locale.territory?.nameDisplay})\t\t${populationSource}\t${locale.pop.speaking.unadjusted}\t${locale.officialStatus ?? ''}\n`;
 }
 
 export default ReportLocalesPotential;

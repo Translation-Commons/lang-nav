@@ -32,13 +32,15 @@ const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = 
   // for the same territory & language combination (eg. pan_PK and pan_Arab_PK for Punjabi in Pakistan)
   const biggestLocale = locales.reduce(
     (biggest, locale) =>
-      (locale.populationAdjusted ?? 0) > (biggest.populationAdjusted ?? 0) ? locale : biggest,
+      (locale.pop.speaking.adjusted ?? 0) > (biggest.pop.speaking.adjusted ?? 0) ? locale : biggest,
     locales[0],
   );
 
   return (
     <HoverableObject object={biggestLocale}>
-      <CountOfPeople count={Math.max(...locales.map((locale) => locale.populationAdjusted ?? 0))} />
+      <CountOfPeople
+        count={Math.max(...locales.map((locale) => locale.pop.speaking.adjusted ?? 0))}
+      />
     </HoverableObject>
   );
 };

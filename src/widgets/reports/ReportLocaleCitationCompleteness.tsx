@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { LanguageScope } from '@entities/language/LanguageTypes';
@@ -11,11 +11,11 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 const ReportLocaleCitationCompleteness: React.FC = () => {
-  const { filteredObjects: filteredLocales } = useFilteredObjects({});
+  const { filteredEntities: filteredLocales } = useFilteredEntities({});
 
   // Count locales with populationCensus
   const locales = filteredLocales.filter((obj) => obj.type === ObjectType.Locale);
-  const localesWithCensuses = locales.filter((loc) => loc.populationCensus != null);
+  const localesWithCensuses = locales.filter((loc) => loc.pop.speaking.census != null);
   const totalLocales = locales.length;
   const withCensusCount = localesWithCensuses.length;
   const citationPercent = totalLocales > 0 ? Math.round((withCensusCount / totalLocales) * 100) : 0;
@@ -23,7 +23,7 @@ const ReportLocaleCitationCompleteness: React.FC = () => {
   // Breakdown by collectorType: Government, CLDR, Study, Other
   const citationsByCollectorType = localesWithCensuses.reduce(
     (acc, loc) => {
-      const collector = loc.populationCensus?.collectorType;
+      const collector = loc.pop.speaking.census?.collectorType;
       if (collector != null) {
         acc[collector] = (acc[collector] ?? 0) + 1;
       } // locales without citations not counted
@@ -44,13 +44,13 @@ const ReportLocaleCitationCompleteness: React.FC = () => {
     const langScope = loc.language?.scope;
     if (langScope) {
       citationsByLangScope[langScope].total++;
-      if (loc.populationCensus != null) citationsByLangScope[langScope].withCensus++;
+      if (loc.pop.speaking.census != null) citationsByLangScope[langScope].withCensus++;
     }
 
     const terrScope = loc.territory?.scope;
     if (terrScope) {
       citationsByTerrScope[terrScope].total++;
-      if (loc.populationCensus != null) citationsByTerrScope[terrScope].withCensus++;
+      if (loc.pop.speaking.census != null) citationsByTerrScope[terrScope].withCensus++;
     }
   });
 

@@ -51,21 +51,21 @@ export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): voi
 
   // Compute the adjusted population for each locale
   locales.forEach((locale) => {
-    if (locale.populationSpeakingPercent == null) {
-      locale.populationAdjusted = locale.populationSpeaking;
-    } else if (locale.populationSpeakingPercent === 0) {
-      // locale.populationAdjusted = 0; skip
+    if (locale.pop.speaking.percent == null) {
+      locale.pop.speaking.adjusted = locale.pop.speaking.unadjusted;
+    } else if (locale.pop.speaking.percent === 0) {
+      // locale.pop.speaking.adjusted = 0; skip
     } else {
       // Re-compute the adjusted population based on the latest territory population
-      locale.populationAdjusted = Math.round(
-        (locale.populationSpeakingPercent / 100.0) * (locale.territory?.population || 1),
+      locale.pop.speaking.adjusted = Math.round(
+        (locale.pop.speaking.percent / 100.0) * (locale.territory?.population || 1),
       );
     }
   });
 }
 
 function setLocalePopulationEstimate(locale: LocaleData, record: LocaleInCensus): void {
-  locale.populationSpeaking = record.populationEstimate;
-  locale.populationSpeakingPercent = record.populationPercent;
-  locale.populationCensus = record.census;
+  locale.pop.speaking.unadjusted = record.populationEstimate;
+  locale.pop.speaking.percent = record.populationPercent;
+  locale.pop.speaking.census = record.census;
 }

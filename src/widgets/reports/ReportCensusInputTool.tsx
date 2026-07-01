@@ -26,8 +26,22 @@ const ReportCensusInputTool: React.FC = () => {
 
         // Add collector entities -- note if they are new they will have to be added to organizations.tsv
         const collectorCode = census.collectorNameShort ?? census.collectorName;
-        if (collectorCode) census.collector = getOrganization(collectorCode);
-        if (census.presentedBy) census.presenter = getOrganization(census.presentedBy);
+        if (collectorCode) {
+          census.collector = getOrganization(collectorCode);
+          if (!census.collector) {
+            warnings.push(
+              `Collector "${collectorCode}" not found in organizations data. Add it to organizations.tsv to link them.`,
+            );
+          }
+        }
+        if (census.presentedBy) {
+          census.presenter = getOrganization(census.presentedBy);
+          if (!census.presenter) {
+            warnings.push(
+              `Presenter "${census.presentedBy}" not found in organizations data. Add it to organizations.tsv to link them.`,
+            );
+          }
+        }
       });
       setCensuses(censuses);
 
@@ -47,23 +61,23 @@ const ReportCensusInputTool: React.FC = () => {
       <h2>TSV file</h2>
       <div>
         Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
-        edit changes inline to test them out. Changes update after clicking away.
+        edit changes inline to test them out.
       </div>
       <textarea
-        onChange={() => {}}
-        onBlur={(e) => setTSV(e.target.value)}
+        onChange={(e) => setTSV(e.target.value)}
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
       <h3>Analysis</h3>
       {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
-      <h4>Metadata</h4>
-      {warnings
-        ? warnings.map((warning, index) => (
-            <div key={index} style={{ color: 'var(--color-red)' }}>
-              {warning}
-            </div>
-          ))
-        : 'No issues found.'}
+      {censuses.length > 0 && <h4>Metadata</h4>}
+      {censuses.length > 0 &&
+        (warnings.length > 0
+          ? warnings.map((warning, index) => (
+              <div key={index} style={{ color: 'var(--color-red)' }}>
+                {warning}
+              </div>
+            ))
+          : 'No issues found.')}
       <h4>Language Codes & Language Names</h4>
       <CensusLanguageCheck fileInput={tsv} />
       <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>

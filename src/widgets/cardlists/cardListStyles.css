@@ -1,0 +1,65 @@
+.CardInCardList {
+  position: relative;
+  border: 2px solid transparent;
+  border-radius: 0.5em;
+  box-shadow: var(--color-shadow) 0 0 1rem 2px;
+  padding: 1rem;
+  text-align: start;
+  cursor: pointer;
+}
+
+.CardInCardList:hover {
+  border-color: var(--color-button-hover);
+}
+
+/* Selected takes priority over hover (declared later, equal specificity). */
+.CardInCardList.selected {
+  border-color: var(--color-button-primary);
+}
+
+.CardPinButton {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem;
+  background: transparent;
+  border: none;
+  line-height: 0;
+  color: var(--color-text);
+  /* Hidden until the card is hovered (or the card is pinned, see below). */
+  visibility: hidden;
+}
+
+.CardInCardList:hover .CardPinButton,
+.CardPinButton.pinned {
+  visibility: visible;
+}
+
+/* Keep the icon button transparent even when focused/hovered. Without this the
+   global `button:focus`/`button:hover` rules paint a blue background that lingers
+   (e.g. after clicking) until focus moves elsewhere. */
+.CardPinButton:hover,
+.CardPinButton:focus {
+  background: transparent;
+  border-color: transparent;
+  color: var(--color-text);
+}
+
+.CardPinButton.pinned,
+.CardPinButton.pinned:hover,
+.CardPinButton.pinned:focus {
+  color: var(--color-button-primary);
+}
+
+/* Show the "unpin" affordance only while hovering an already-pinned button. */
+.CardPinButton-iconUnpin {
+  display: none;
+}
+
+.CardPinButton.pinned:hover .CardPinButton-iconPin {
+  display: none;
+}
+
+.CardPinButton.pinned:hover .CardPinButton-iconUnpin {
+  display: inline-block;
+}

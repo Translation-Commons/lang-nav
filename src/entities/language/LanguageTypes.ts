@@ -117,11 +117,12 @@ export interface LanguageData extends ObjectBase {
   primaryScriptCode?: ScriptCode;
 
   warnings: Partial<Record<LanguageField, string>>;
-  wikipedia?: WikipediaData;
+  wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
 
   latitude?: number;
   longitude?: number;
+  coordsSource?: LanguageSource;
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
   // References to other objects, filled in after loading the TSV
@@ -132,6 +133,7 @@ export interface LanguageData extends ObjectBase {
   childLanguages: LanguageData[];
   largestDescendant?: LanguageData; // eg. Indo-European -> English, North Germanic -> Swedish
   variants?: VariantData[]; // links to IANA variants
+  equivalentVariant?: VariantData; // eg. variant "newfound" === languoid "newf1239"
   keyboards?: KeyboardData[];
 
   // Fields that change based on the language source

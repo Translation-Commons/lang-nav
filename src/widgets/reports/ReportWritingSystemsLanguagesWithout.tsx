@@ -29,7 +29,7 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   const filterByScope = getScopeFilter();
   const filterByVitality = getFilterByVitality();
   const sortFunction = getSortFunction();
-  const { getCurrentObjects } = usePagination<LanguageData>();
+  const { getCurrentEntities } = usePagination<LanguageData>();
 
   const languagesFiltered = useMemo(
     () =>
@@ -57,7 +57,7 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
       </div>
       <div style={{ marginTop: '1em', marginBottom: '1em' }}>
         <ResponsiveGrid>
-          {getCurrentObjects(languagesFiltered.sort(sortFunction)).map((lang) => {
+          {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
             const family = getLanguageRootLanguageFamily(lang);
             return (
               <CardInCardList key={lang.ID} object={lang}>

@@ -95,7 +95,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Biggest Language %',
-      render: (object) => getTerritoryBiggestLocale(object)?.populationSpeakingPercent,
+      render: (object) => getTerritoryBiggestLocale(object)?.pop.speaking.percent,
       isInitiallyVisible: false,
       field: Field.PopulationPercentInBiggestDescendantLanguage,
       columnGroup: 'Language',

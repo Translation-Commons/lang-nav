@@ -4,7 +4,7 @@ import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import useFilteredObjects from '@features/transforms/filtering/useFilteredObjects';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -17,14 +17,14 @@ vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: vi.fn().mockReturnValue({}),
 }));
-vi.mock('@features/transforms/filtering/useFilteredObjects', () => ({ default: vi.fn() }));
+vi.mock('@features/transforms/filtering/useFilteredEntities', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/coloring/useColors', () => ({
   default: vi.fn().mockReturnValue({ getColor: () => 'inherit' }),
 }));
 
 describe('CardList', () => {
-  const mockedObjects = getFullyInstantiatedMockedObjects();
-  const territories = Object.values(mockedObjects)
+  const mockedEntities = getFullyInstantiatedMockedObjects();
+  const territories = Object.values(mockedEntities)
     .filter((obj) => obj.type === ObjectType.Territory)
     .sort(sortByPopulation);
 
@@ -33,18 +33,18 @@ describe('CardList', () => {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams(overrides));
   }
 
-  function setupMockFilteredObjects(countryOnly: boolean = false) {
-    (useFilteredObjects as Mock).mockReturnValue({
-      filteredObjects: territories.filter(
+  function setupMockFilteredEntities(countryOnly: boolean = false) {
+    (useFilteredEntities as Mock).mockReturnValue({
+      filteredEntities: territories.filter(
         (obj) => !countryOnly || obj.scope === TerritoryScope.Country,
       ),
-      allObjectsInType: territories,
+      allEntities: territories,
     });
   }
 
   beforeEach(() => {
     setupMockParams();
-    setupMockFilteredObjects();
+    setupMockFilteredEntities();
   });
 
   afterEach(() => {
@@ -76,7 +76,7 @@ describe('CardList', () => {
   });
 
   it('when the objects are filtered, the visible item meter shows correct counts', () => {
-    setupMockFilteredObjects(true); // countryOnly = true
+    setupMockFilteredEntities(true); // countryOnly = true
 
     const { container, getAllByText } = render(<CardList />);
 

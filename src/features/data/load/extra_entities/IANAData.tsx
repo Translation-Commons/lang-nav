@@ -152,6 +152,7 @@ function addVariantLocale(
     // Names are withheld but they are added later when all of the locale objects have been linked
     nameDisplay: '',
     names: [],
+    pop: { speaking: {}, writing: {} },
   };
 }
 

@@ -1,0 +1,36 @@
+#codeDisplay		vi2020
+#nameDisplay		U.S Virgin Islands 2020
+#isoRegionCode	VI	
+#yearCollected	2020	
+### Language Criteria ###		
+#languageUse		Speaks
+#domain		Home
+### Population Surveyed ###		
+#population		80,430
+#populationSource		Same source table; population 5 years and over in households
+### Data Constraints ###		
+#geographicScope		whole territory: U.S. Virgin Islands
+#age		5+
+#nationality		Residents
+#languagesIncluded		Major groups only
+#quantity		count
+#responsesPerIndividual		1
+### Creator ###		
+#collectorType		Government
+#collectorName		US Census Bureau
+### Source Document ###		
+#url	https://www.uvi.edu/files/documents/Research_and_Public_Service/ECC/SRI/2020CensusUSVISelectedSocialCharacteristicsbyIsland.pdf	
+#datePublished	2022-10-20	
+#dateAccessed	2026-05-21	
+#documentName	2020 Census USVI Selected Social Characteristics by Island	
+#sectionName	Language Spoken at Home and Ability to Speak English	
+#tableName	Table: DECENNIALDPVI2020.DP2	
+#columnName		United States Virgin Islands - Number
+Language Code	Language	Population
+eng	#English Only	56,173
+spa/eng	#Spanish & English	9,309
+spa	#Spanish Only	4,498
+fra/eng	#French/Haitian/Cajun & English	4,883
+fra	#French/Haitian/Cajun	2,218
+mul/eng	#Other languages & English	2,854
+mul	#Other languages	495

@@ -27,10 +27,10 @@ export interface VariantData extends ObjectBase {
 
   // Additional data from Translation Commons
   variantType?: VariantType;
-  languoidCode?: LanguageCode; // When this variant has a direct match to a languoid, this is the code of that languoid. For example "valencia" can be expressed as a variant (cat_valencia) OR a languoid from glottolog vale1252
+  equivalentLanguageCode?: LanguageCode; // When this variant has a direct match to a languoid, this is the code of that languoid. For example "valencia" can be expressed as a variant (cat_valencia) OR a languoid from glottolog vale1252
 
   // References to other objects
   languages: LanguageData[]; // The languages that have this variation
   locales: LocaleData[];
-  languoid?: LanguageData; // The precise languoid that matches this variant
+  equivalentLanguage?: LanguageData; // The precise languoid that matches this variant
 }

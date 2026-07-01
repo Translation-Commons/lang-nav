@@ -8,6 +8,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
+import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import {
@@ -119,6 +120,21 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       valueType: TableValueType.Count,
       field: Field.Depth,
       columnGroup: 'Relations',
+    },
+    {
+      key: 'Variants',
+      description:
+        'Variations of the language (dialects or spelling conventions) that have been registered with the IANA and given codes.',
+      render: (lang) => (
+        <CommaSeparated limit={1} limitText="short">
+          {getVariantsForEntity(lang)?.map((variant) => (
+            <HoverableObjectName object={variant} key={variant.ID} />
+          ))}
+        </CommaSeparated>
+      ),
+      field: Field.Variant,
+      columnGroup: 'Relations',
+      isInitiallyVisible: false,
     },
     {
       key: 'Countries',

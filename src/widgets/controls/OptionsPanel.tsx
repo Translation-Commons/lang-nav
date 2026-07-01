@@ -1,27 +1,14 @@
 import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import LimitInput from '@features/pagination/LimitInput';
 import usePageArrowKeys from '@features/pagination/usePageArrowKeys';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
-import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
-import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
-import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import { AllApplicableFilterSelectors } from '@features/transforms/filtering/selectors/FilterSelector';
-import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
-import SearchBySelector from '@features/transforms/search/SearchBySelector';
-import SecondarySortBySelector from '@features/transforms/sorting/SecondarySortBySelector';
-import SortBySelector from '@features/transforms/sorting/SortBySelector';
-import SortDirectionSelector from '@features/transforms/sorting/SortDirectionSelector';
 
 import ResizablePanel from './ResizablePanel';
-import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
-import PageBrightnessSelector from './selectors/PageBrightnessSelector';
-import ProfileSelector from './selectors/ProfileSelector';
-import ViewSelector from './selectors/ViewSelector';
 import useFilterPanel from './useFilterPanel';
 
 const OptionsPanel: React.FC = () => {
@@ -39,22 +26,6 @@ const OptionsPanel: React.FC = () => {
       <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
         <OptionsPanelSection title="Filter" optionsName="filters">
           <AllApplicableFilterSelectors />
-        </OptionsPanelSection>
-
-        <OptionsPanelSection title="View" optionsName="view options">
-          <ViewSelector />
-          <LimitInput />
-          <SortBySelector />
-          <SecondarySortBySelector />
-          <SortDirectionSelector />
-          <ColorBySelector />
-          <ColorGradientSelector />
-          <ScaleBySelector />
-          <FieldFocusSelector />
-          <LocaleSeparatorSelector />
-          <PageBrightnessSelector />
-          <SearchBySelector />
-          <ProfileSelector />
         </OptionsPanelSection>
       </SelectorDisplayProvider>
     </ResizablePanel>

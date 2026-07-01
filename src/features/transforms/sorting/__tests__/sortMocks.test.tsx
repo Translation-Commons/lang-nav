@@ -245,6 +245,35 @@ describe('getSortByParameterized', () => {
     ]);
   });
 
+  it('sortBy: Population (Writing)', () => {
+    const objects = Object.values(mockedObjects) as ObjectData[];
+    const sort = getSortFunctionParameterized(Field.PopulationWriting, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+      'sjn_123',
+      'sjn_001',
+      'sjn_BE',
+      'sjn_Teng_BE',
+      'sjn_Teng_123',
+      'sjn_Teng_001',
+      'sjn_ER',
+      'dori0123_ER',
+      'dori0123_123',
+      'dori0123_001',
+      // Written population unavailable for these data types
+      '123',
+      'sjn',
+      'dori0123',
+      'BE',
+      'ER',
+      'HA',
+      'AM',
+      '001',
+      'be0590',
+      'Teng',
+      'tolkorth',
+    ]);
+  });
+
   it('sortBy: PopulationOfDescendants', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
     const sort = getSortFunctionParameterized(Field.PopulationOfDescendants, SortBehavior.Normal);

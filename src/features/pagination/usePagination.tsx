@@ -8,13 +8,13 @@ import usePageParams from '@features/params/usePageParams';
  * Note you do have to indicate the type of data being sliced for typescript.
  *
  * Example usage:
- * const getCurrentObjects = useSliceFunction<ObjectData>();
- * const currentObjects = getCurrentObjects(objects);
+ * const getCurrentEntities = useSliceFunction<ObjectData>();
+ * const currentEntities = getCurrentEntities(objects);
  */
-function usePagination<T>(): { getCurrentObjects: (arr: T[]) => T[] } {
+function usePagination<T>(): { getCurrentEntities: (arr: T[]) => T[] } {
   const { page, limit } = usePageParams();
 
-  const getCurrentObjects = useCallback(
+  const getCurrentEntities = useCallback(
     (arr: T[]) => {
       // If the limit is not a countable number, return all elements
       // Commonly -1 is used as a stand-in for infinity.
@@ -30,7 +30,7 @@ function usePagination<T>(): { getCurrentObjects: (arr: T[]) => T[] } {
     [page, limit],
   );
 
-  return { getCurrentObjects };
+  return { getCurrentEntities };
 }
 
 export default usePagination;

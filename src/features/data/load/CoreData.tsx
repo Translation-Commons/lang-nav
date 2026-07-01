@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import {
   addIANAVariantLocales,
@@ -26,6 +26,10 @@ import { loadLocales } from './entities/loadLocales';
 import { loadOrganizations } from './entities/loadOrganizations';
 import { loadTerritories } from './entities/loadTerritories';
 import { loadWritingSystems } from './entities/loadWritingSystems';
+import {
+  applyCombinedFamilyOverrides,
+  loadCombinedFamilyOverrides,
+} from './extra_entities/CombinedFamilyOverrides';
 import {
   addGlottologLanguages,
   loadGlottocodeToISO,
@@ -94,6 +98,7 @@ export function useCoreData(): {
       ethnologueLangs,
       glottologImport,
       glottocodeToISO,
+      combinedFamilyOverrides,
       territories,
       locales,
       writingSystems,
@@ -111,6 +116,7 @@ export function useCoreData(): {
       loadEthnologueLanguages(),
       loadGlottologLanguages(),
       loadGlottocodeToISO(),
+      loadCombinedFamilyOverrides(),
       loadTerritories(),
       loadLocales(),
       loadWritingSystems(),
@@ -143,6 +149,7 @@ export function useCoreData(): {
     addISOMacrolanguageData(languagesBySource.ISO, macroLangs || []);
     addISORetirementsToLanguages(languagesBySource, isoRetirements || []);
     addGlottologLanguages(languagesBySource, glottologImport || [], glottocodeToISO || {});
+    applyCombinedFamilyOverrides(languagesBySource, combinedFamilyOverrides || []);
     addCLDRLanguageDetails(languagesBySource);
     addIANAVariantLocales(languagesBySource.BCP, locales, variants);
 
@@ -173,9 +180,8 @@ export function useCoreData(): {
     });
   }
 
-  return {
-    loadCoreData,
-    coreData: {
+  const coreData = useMemo(
+    () => ({
       allLanguoids,
       locales: Object.values(objects).filter((o): o is LocaleData => o.type === ObjectType.Locale),
       territories: Object.values(objects).filter(
@@ -195,6 +201,12 @@ export function useCoreData(): {
         (o): o is OrganizationData => o.type === ObjectType.Org,
       ),
       objects,
-    },
+    }),
+    [allLanguoids, objects, censuses],
+  );
+
+  return {
+    loadCoreData,
+    coreData,
   };
 }

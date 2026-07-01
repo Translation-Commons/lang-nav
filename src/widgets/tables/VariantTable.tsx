@@ -1,10 +1,8 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
-
-import { VariantData } from '@entities/variant/VariantTypes';
 
 import getVariantColumns from './columns/VariantColumns';
 
@@ -13,11 +11,7 @@ const VariantTable: React.FC = () => {
   const columns = getVariantColumns();
 
   return (
-    <InteractiveObjectTable<VariantData>
-      tableID={TableID.Variants}
-      objects={variants}
-      columns={columns}
-    />
+    <InteractiveEntityTable tableID={TableID.Variants} entities={variants} columns={columns} />
   );
 };
 

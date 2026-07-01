@@ -5,6 +5,7 @@ import {
   LanguageData,
   LanguagesBySource,
   LanguageScope,
+  LanguageSource,
 } from '@entities/language/LanguageTypes';
 import { setLanguageNames } from '@entities/language/setLanguageNames';
 
@@ -130,6 +131,9 @@ export function addGlottologLanguages(
       lang.Glottolog.name = name;
       lang.latitude = latitude;
       lang.longitude = longitude;
+      if (lang.latitude != null && lang.longitude != null)
+        lang.coordsSource = LanguageSource.Glottolog;
+
       setLanguageNames(lang);
       if (lang.scope == null) {
         lang.scope = scope;

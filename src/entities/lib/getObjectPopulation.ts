@@ -13,7 +13,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
     case ObjectType.Language:
       return object.populationEstimate;
     case ObjectType.Locale:
-      return object.populationAdjusted;
+      return object.pop.speaking.adjusted;
     case ObjectType.Census:
       return object.population;
     case ObjectType.WritingSystem:
@@ -35,7 +35,7 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
     case ObjectType.Language:
       return object.populationRough;
     case ObjectType.Locale:
-      return object.populationSpeaking;
+      return object.pop.speaking.unadjusted;
     case ObjectType.Territory:
       return object.populationFromUN;
     case ObjectType.Census:
@@ -78,7 +78,7 @@ export function getObjectPopulationPercentInBiggestDescendantLanguage(
         ? ((object.largestDescendant.populationEstimate ?? 0) * 100) / object.populationEstimate
         : undefined;
     case ObjectType.Territory:
-      return getTerritoryBiggestLocale(object)?.populationSpeakingPercent;
+      return getTerritoryBiggestLocale(object)?.pop.speaking.percent;
     case ObjectType.Census:
     case ObjectType.Locale:
     case ObjectType.Variant:
@@ -93,8 +93,8 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
 ): number | undefined {
   switch (object.type) {
     case ObjectType.Locale:
-      return object.language && object.populationSpeaking
-        ? (object.populationSpeaking * 100) / (object.language.populationEstimate ?? 1)
+      return object.language && object.pop.speaking.adjusted
+        ? (object.pop.speaking.adjusted * 100) / (object.language.populationEstimate ?? 1)
         : undefined;
     case ObjectType.Language:
       return object.parentLanguage && object.populationEstimate
@@ -116,7 +116,7 @@ export function getObjectPercentOfTerritoryPopulation(object: ObjectData): numbe
         ? (object.population * 100) / (object.territory.population ?? 1)
         : undefined;
     case ObjectType.Locale:
-      return object.populationSpeakingPercent;
+      return object.pop.speaking.percent;
     case ObjectType.Territory:
       return object.parentUNRegion && object.population
         ? (object.population * 100) / object.parentUNRegion.population

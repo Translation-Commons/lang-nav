@@ -18,8 +18,8 @@ import {
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
-  useSelectorDisplay: vi.fn().mockReturnValue({ display: 'buttonList' }),
-  SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown' },
+  useSelectorDisplay: vi.fn().mockReturnValue({ display: 'filterList' }),
+  SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown', FilterList: 'filterList' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
@@ -59,9 +59,16 @@ describe('VitalitySelector', () => {
   });
 
   describe('LanguageISOStatusSelector', () => {
-    it('displays all ISO vitality options', () => {
+    it('displays all ISO vitality options', async () => {
+      const user = userEvent.setup();
       render(<LanguageISOStatusSelector />);
+
       const expected = Object.values(LanguageISOStatus).filter((v) => typeof v === 'number');
+
+      // If there are more than 4 options expand first so all are visible
+      if (expected.length > 5) {
+        await user.click(screen.getByText('Expand All'));
+      }
 
       expected.forEach((status) => {
         const label = getLanguageISOStatusLabel(status);

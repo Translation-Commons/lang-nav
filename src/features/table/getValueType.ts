@@ -10,6 +10,7 @@ export function getFieldValueType(field?: Field): TableValueType {
   switch (field) {
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
       return TableValueType.Population;
 

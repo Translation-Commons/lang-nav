@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { NameColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -26,9 +26,9 @@ const LocaleIndigeneityTable: React.FC<{
   addToChangedLocales: (locale: LocaleData) => void;
 }> = ({ locales, addToChangedLocales }) => {
   return (
-    <InteractiveObjectTable
+    <InteractiveEntityTable
       tableID={TableID.LocaleIndigeneity}
-      objects={locales}
+      entities={locales}
       columns={[
         {
           key: 'ID',
@@ -51,14 +51,15 @@ const LocaleIndigeneityTable: React.FC<{
         },
         {
           key: 'Population',
-          render: (locale) => <CountOfPeople count={locale.populationAdjusted} />,
+          render: (locale) => <CountOfPeople count={locale.pop.speaking.adjusted} />,
           field: Field.Population,
           isInitiallyVisible: false,
         },
         {
           key: '% of Worldwide Population',
           render: (locale) =>
-            ((locale.populationAdjusted ?? 0) * 100) / (locale.language?.populationEstimate || 1),
+            ((locale.pop.speaking.adjusted ?? 0) * 100) /
+            (locale.language?.populationEstimate || 1),
           valueType: TableValueType.Decimal,
           isInitiallyVisible: false,
           columnGroup: 'Population',
@@ -87,7 +88,7 @@ const LocaleIndigeneityTable: React.FC<{
           key: 'Pop of Language Biggest Territory',
           render: (locale) => (
             <CountOfPeople
-              count={getLanguagesBiggestCountryLocale(locale.language)?.populationAdjusted}
+              count={getLanguagesBiggestCountryLocale(locale.language)?.pop.speaking.adjusted}
             />
           ),
           valueType: TableValueType.Population,

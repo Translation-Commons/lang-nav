@@ -6,6 +6,7 @@ const ReportLabels: Record<ReportID, string> = {
   [ReportID.EntitiesMissingFields]: 'Missing Fields',
   [ReportID.LanguageDescendants]: 'Descendants',
   [ReportID.LanguagePaths]: 'Paths',
+  [ReportID.LanguageScopeIssues]: 'Scope Issues',
   [ReportID.LanguagesDubious]: 'Dubious Languages',
   [ReportID.LanguagesWithAmbiguousNames]: 'Ambiguous Names',
   [ReportID.LocaleCitationCompleteness]: 'Citation Completeness',

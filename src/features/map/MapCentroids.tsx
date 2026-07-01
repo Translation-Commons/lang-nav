@@ -10,51 +10,59 @@ import { getFieldString } from '@features/transforms/fields/getFieldString';
 import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
-import { getRobinsonCoordinates } from './getRobinsonCoordinates';
-import { MAP_ASPECT_RATIO } from './MapConsts';
+import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
+import { MAP_ASPECT_RATIO, MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
 
 import './map.css';
 
 type Props = {
-  drawableObjects: DrawableData[];
-  getHoverContent: (obj: DrawableData) => React.ReactNode;
+  drawableEntities: DrawableData[];
+  openCard: (obj: DrawableData, x: number, y: number) => void;
   scalar: number;
+  zoomFactor: number;
   coloringFunctions: ColoringFunctions;
 };
 
 const MapCentroids: React.FC<Props> = ({
-  drawableObjects,
-  getHoverContent,
+  drawableEntities,
+  openCard,
   scalar,
+  zoomFactor,
   coloringFunctions: { getColor, colorBy },
 }) => {
   const { scaleBy, objectType } = usePageParams();
-  const { getCurrentObjects } = usePagination<DrawableData>();
+  const { getCurrentEntities } = usePagination<DrawableData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const { getScale } = useScale({ objects: drawableObjects, scaleBy });
+  const { getScale } = useScale({ objects: drawableEntities, scaleBy });
 
-  const renderableObjects = useMemo(() => {
-    // Pagination only applies for languages because there can be thousands, other types have few enough
-    const currentObjects =
-      objectType === ObjectType.Language ? getCurrentObjects(drawableObjects) : drawableObjects;
-    const filteredObjects = currentObjects.filter(
+  const renderableEntities = useMemo(() => {
+    const currentEntities =
+      objectType === ObjectType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
+
+    const filteredEntities = currentEntities.filter(
       (obj) => obj.type === ObjectType.Language || obj.type === ObjectType.Territory,
     );
 
-    // Reverse so the "first" objects are drawn on top.
-    return filteredObjects.reverse();
-  }, [drawableObjects, getCurrentObjects, objectType]);
+    return filteredEntities.reverse();
+  }, [drawableEntities, getCurrentEntities, objectType]);
 
   const buildOnMouseEnter = useCallback(
     (obj: DrawableData) => (e: React.MouseEvent) => {
-      showHoverCard(getHoverContent(obj), e.clientX, e.clientY);
+      showHoverCard(
+        <div>
+          <strong>{obj.nameDisplay}</strong>
+          <div style={{ color: 'var(--color-text-secondary)' }}>Click for more</div>
+        </div>,
+        e.clientX,
+        e.clientY,
+      );
     },
-    [showHoverCard, getHoverContent],
+    [showHoverCard],
   );
 
   return (
     <svg
-      viewBox={`-180 -90 360 180`}
+      viewBox="-180 -90 360 180"
       preserveAspectRatio="xMidYMid meet"
       style={{
         display: 'block',
@@ -62,16 +70,18 @@ const MapCentroids: React.FC<Props> = ({
         left: 0,
         position: 'absolute',
         width: '100%',
-        aspectRatio: MAP_ASPECT_RATIO, // Aspect ratio of the map_world.svg
-        pointerEvents: 'none', // So that the svg doesn't block mouse events to the underlying map
+        aspectRatio: MAP_ASPECT_RATIO,
+        pointerEvents: 'none',
       }}
     >
-      {renderableObjects.map((obj) => (
+      {renderableEntities.map((obj) => (
         <ObjectNode
           key={obj.ID}
           color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
           object={obj}
           scale={scalar * getScale(obj)}
+          zoomFactor={zoomFactor}
+          openCard={openCard}
           onMouseEnter={buildOnMouseEnter(obj)}
           onMouseLeave={onMouseLeaveTriggeringElement}
         />
@@ -84,59 +94,87 @@ type NodeProps = {
   color?: string;
   object: DrawableData;
   scale: number;
+  zoomFactor: number;
+  openCard: (obj: DrawableData, x: number, y: number) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
 };
-const ObjectNode: React.FC<NodeProps> = ({ object, color, scale, onMouseEnter, onMouseLeave }) => {
+
+const ObjectNode: React.FC<NodeProps> = ({
+  object,
+  color,
+  scale,
+  zoomFactor,
+  openCard,
+  onMouseEnter,
+  onMouseLeave,
+}) => {
   if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
   if (object.latitude == null || object.longitude == null) return null;
 
-  const { x, y } = getRobinsonCoordinates(
-    object.latitude,
-    // The map is 11 degrees rotated to preserve land borders
-    (object.longitude < -169 ? object.longitude + 360 : object.longitude) - 11,
-  );
+  const { x, y } = getRobinsonCoordinatesShifted(object);
+
   const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
 
   return (
-    // ideally x would range -180 to 180 but it appears in practice our SVG is a bit thinner, so 178.5 looks better
-    <g transform={`translate(${x * 178.5}, ${y * -90})`}>
+    <g
+      transform={`translate(${x * MAP_ROBINSON_X_SCALE}, ${y * -MAP_ROBINSON_Y_SCALE}) scale(${1 / zoomFactor})`}
+    >
       {showCircle && (
         <Circle
           color={color}
           object={object}
           scale={scale}
+          zoomFactor={zoomFactor}
+          openCard={openCard}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
         />
       )}
-      <Text object={object} scale={scale} showCircle={showCircle} />
+      <Text object={object} scale={scale} showCircle={showCircle} zoomFactor={zoomFactor} />
     </g>
   );
 };
 
-const Circle: React.FC<NodeProps> = ({ color, object, scale, onMouseEnter, onMouseLeave }) => {
-  const { updatePageParams } = usePageParams();
-  return (
-    <circle
-      r={scale + 1}
-      fill={color ?? 'transparent'}
-      stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
-      onClick={() => updatePageParams({ objectID: object.ID })}
-      onMouseEnter={(e: React.MouseEvent) => onMouseEnter(e)}
-      onMouseLeave={() => onMouseLeave()}
-    />
-  );
+const Circle: React.FC<NodeProps> = ({
+  color,
+  object,
+  scale,
+  openCard,
+  onMouseEnter,
+  onMouseLeave,
+}) => (
+  <circle
+    r={scale + 1.5}
+    strokeWidth={0.4}
+    fill={color ?? 'transparent'}
+    stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
+    onClick={(e) => {
+      e.stopPropagation();
+      openCard(object, e.clientX, e.clientY);
+    }}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+  />
+);
+
+type TextProps = {
+  object: DrawableData;
+  scale: number;
+  showCircle: boolean;
+  zoomFactor: number;
 };
 
-type TextProps = { object: DrawableData; scale: number; showCircle: boolean };
-const Text: React.FC<TextProps> = ({ object, scale, showCircle }) => {
+const Text: React.FC<TextProps> = ({ object, scale, showCircle, zoomFactor }) => {
   const { fieldFocus } = usePageParams();
+
   if (fieldFocus === Field.None) return null;
+  if (zoomFactor < 1.5) return null;
+
   return (
     <text
-      y={showCircle ? 2 : 0}
-      fontSize={scale / 4 + 'em'}
+      y={showCircle ? scale + 2.5 : 0}
+      fontSize={scale / 3 + 'em'}
       textAnchor="middle"
       alignmentBaseline={showCircle ? 'hanging' : 'middle'}
     >

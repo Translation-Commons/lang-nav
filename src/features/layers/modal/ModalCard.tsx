@@ -6,19 +6,17 @@ import HoverableButton from '../hovercard/HoverableButton';
 import './modal.css';
 
 interface ModalProps {
-  isOpen: boolean;
   onClose: () => void;
   title: React.ReactNode;
   children: React.ReactNode;
   bodyStyle?: React.CSSProperties;
 }
 
-const ViewModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, bodyStyle }) => {
+const ModalCard: React.FC<ModalProps> = ({ onClose, title, children, bodyStyle }) => {
   // Turning off because of conflicts with hovercards that technically are outside of the modal
   // const modalRef = useClickOutside(onClose);
 
   useEffect(() => {
-    if (!isOpen) return;
     const handleKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
         onClose();
@@ -26,9 +24,7 @@ const ViewModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, bod
     };
     document.addEventListener('keydown', handleKeyDown);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, onClose]);
-
-  if (!isOpen) return <></>;
+  }, [onClose]);
 
   return (
     <div className="ModalOverlay">
@@ -47,4 +43,4 @@ const ViewModal: React.FC<ModalProps> = ({ isOpen, onClose, title, children, bod
   );
 };
 
-export default ViewModal;
+export default ModalCard;

@@ -1,5 +1,6 @@
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 import { ScriptCode } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -29,7 +30,7 @@ function parseWikipediaData(line: string): WikipediaData {
     languageName: parts[3],
     scriptCodes: parts[4] ? (parts[4].split('/') as ScriptCode[]) : [],
     wikipediaSubdomain: parts[5],
-    localeCode: parts[6] as StandardLocaleCode,
+    localeCodes: parts[6],
     articles: parseInt(parts[7].replace(/,/g, '')),
     activeUsers: parseInt(parts[8].replace(/,/g, '')),
     url: parts[9],
@@ -47,27 +48,38 @@ export function applyWikipediaData(
   wikiData: WikipediaData[],
 ): void {
   wikiData.forEach((wiki) => {
-    // Most Wikipedias simply correspond to a language, eg. eng
-    const lang = getLanguage(wiki.localeCode);
-    if (lang) {
-      lang.wikipedia = wiki;
-    }
+    // Wikipedias can be associated with 1 language but also sometimes multiple like
+    // Alemannic for Swiss German (gsw) and Swabian (swg)
+    const localeCodes = wiki.localeCodes.split('/');
+    localeCodes.forEach((localeCode) => {
+      // Most Wikipedias simply correspond to a language, eg. eng
+      const lang = getLanguage(localeCode);
+      if (lang) {
+        if (!lang.wikipedias) lang.wikipedias = [];
+        lang.wikipedias.push(wiki);
+      }
 
-    // Some have extra locale data eg. bel_tarask
-    const locale = getLocale(wiki.localeCode);
-    if (locale) {
-      locale.wikipedia = wiki;
-    }
+      // Some have extra locale data eg. bel_tarask
+      const locale = getLocale(localeCode);
+      if (locale) {
+        if (!locale.wikipedias) locale.wikipedias = [];
+        locale.wikipedias.push(wiki);
+      }
 
-    // And some can support multiple scripts eg. zh_Hans and zh_Hant
-    if (wiki.scriptCodes.length > 0) {
-      wiki.scriptCodes.forEach((script) => {
-        const scriptLocaleCode = `${wiki.localeCode}_${script}` as StandardLocaleCode;
-        const scriptLocale = getLocale(scriptLocaleCode);
-        if (scriptLocale) {
-          scriptLocale.wikipedia = wiki;
-        }
-      });
-    }
+      // And some can support multiple scripts eg. zh_Hans and zh_Hant
+      if (wiki.scriptCodes.length > 0) {
+        wiki.scriptCodes.forEach((script) => {
+          const scriptLocaleCode = getLocaleCodeFromTags({
+            ...parseLocaleCode(localeCode),
+            scriptCode: script,
+          });
+          const scriptLocale = getLocale(scriptLocaleCode);
+          if (scriptLocale) {
+            if (!scriptLocale.wikipedias) scriptLocale.wikipedias = [];
+            scriptLocale.wikipedias.push(wiki);
+          }
+        });
+      }
+    });
   });
 }

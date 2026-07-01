@@ -62,6 +62,7 @@ enum Field {
 
   // Quantity - Population
   PopulationDirectlySourced = 'Population Directly Sourced',
+  PopulationWriting = 'Population (Writing)',
   PopulationOfDescendants = 'Population of Descendants',
 
   // Quantity - Population Percent

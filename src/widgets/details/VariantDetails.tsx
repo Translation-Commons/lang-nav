@@ -45,9 +45,14 @@ const VariantAttributesSection: React.FC<{ variant: VariantData }> = ({ variant 
 };
 
 const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant }) => {
-  const { languages, locales, languoid, prefixes } = variant;
+  const { languages, locales, equivalentLanguage, prefixes } = variant;
 
-  if (languages.length === 0 && locales.length === 0 && !languoid && prefixes.length === 0) {
+  if (
+    languages.length === 0 &&
+    locales.length === 0 &&
+    !equivalentLanguage &&
+    prefixes.length === 0
+  ) {
     return null;
   }
 
@@ -76,9 +81,9 @@ const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant
           </CommaSeparated>
         </DetailsField>
       )}
-      {languoid && (
-        <DetailsField title="Languoid">
-          <HoverableObjectName object={languoid} />
+      {equivalentLanguage && equivalentLanguage.ID !== 'mis' && (
+        <DetailsField title="Equivalent Language">
+          <HoverableObjectName object={equivalentLanguage} />
         </DetailsField>
       )}
     </DetailsSection>

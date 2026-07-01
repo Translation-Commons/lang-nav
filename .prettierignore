@@ -1,2 +1,5 @@
 # Keep Markdown formatting as-is
 test-coverage.md
+
+# Playwright MCP session artifacts
+.playwright-mcp/

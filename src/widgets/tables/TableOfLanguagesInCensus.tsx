@@ -7,7 +7,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';
-import InteractiveObjectTable from '@features/table/InteractiveObjectTable';
+import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -45,6 +45,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         langsNotFound.push(langID);
         return null;
       }
+      const percent =
+        (populationSpeaking * 100) / (census.populationWithPositiveResponses || census.population);
       return {
         type: ObjectType.Locale,
         ID: langID + '_' + census.isoRegionCode,
@@ -57,13 +59,15 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
         territory: census.territory,
         territoryCode: census.isoRegionCode,
 
-        populationSource: census.nameDisplay,
-        populationAdjusted: populationSpeaking,
-        populationSpeaking,
-        populationSpeakingPercent:
-          (populationSpeaking * 100) /
-          (census.populationWithPositiveResponses || census.population),
-        populationCensus: census,
+        pop: {
+          speaking: {
+            adjusted: populationSpeaking,
+            percent,
+            unadjusted: populationSpeaking,
+            census,
+          },
+          writing: {},
+        },
       } as LocaleData;
     })
     .filter((loc) => loc != null);
@@ -78,8 +82,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
   const getPopulationDifference = useCallback(
     (mockedLocale: LocaleData): React.ReactNode => (
       <PercentageDifference
-        percentNew={mockedLocale.populationSpeakingPercent || 0}
-        percentOld={getLocale(mockedLocale.ID)?.populationSpeakingPercent}
+        percentNew={mockedLocale.pop.speaking.percent || 0}
+        percentOld={getLocale(mockedLocale.ID)?.pop.speaking.percent}
       />
     ),
     [getLocale],
@@ -93,9 +97,9 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {langsNotFound.join(', ')}
         </div>
       )}
-      <InteractiveObjectTable<LocaleData>
+      <InteractiveEntityTable
         tableID={TableID.LanguagesInCensus}
-        objects={languagesInCensus}
+        entities={languagesInCensus}
         shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
@@ -113,12 +117,12 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Population',
-            render: (loc) => loc.populationSpeaking,
+            render: (loc) => loc.pop.speaking.adjusted,
             field: Field.Population,
           },
           {
             key: 'Percent Within Territory',
-            render: (loc) => loc.populationSpeakingPercent,
+            render: (loc) => loc.pop.speaking.percent,
             field: Field.PercentOfTerritoryPopulation,
           },
           {
@@ -154,8 +158,8 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           {
             key: 'Percent of Worldwide in Language',
             render: (object) =>
-              object.populationSpeaking &&
-              (object.populationSpeaking * 100) / (object.language?.populationEstimate || 1),
+              object.pop.speaking.adjusted &&
+              (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate || 1),
             isInitiallyVisible: false,
             field: Field.PercentOfOverallLanguageSpeakers,
           },

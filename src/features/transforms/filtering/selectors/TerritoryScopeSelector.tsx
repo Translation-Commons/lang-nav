@@ -1,13 +1,16 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
-const TerritoryScopeSelector: React.FC = () => {
+type Props = { display?: SelectorDisplay };
+
+const TerritoryScopeSelector: React.FC<Props> = ({ display }) => {
   const { territoryScopes, updatePageParams } = usePageParams();
 
   const selectorDescription =
@@ -28,6 +31,7 @@ const TerritoryScopeSelector: React.FC = () => {
       }
       selected={territoryScopes}
       getOptionLabel={getTerritoryScopeLabel}
+      display={display}
     />
   );
 };

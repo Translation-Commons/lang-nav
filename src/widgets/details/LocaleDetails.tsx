@@ -123,22 +123,16 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 };
 
 const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const {
-    censusRecords,
-    populationAdjusted,
-    populationSpeaking,
-    populationSpeakingPercent,
-    populationWriting,
-    populationWritingPercent,
-    territory,
-  } = locale;
+  const { censusRecords, pop, territory } = locale;
   const [showPopulationBreakdown, setShowPopulationBreakdown] = React.useState(false);
 
   return (
     <DetailsSection title="Population">
-      {populationSpeaking == null && <Deemphasized>No population data available.</Deemphasized>}
+      {pop.speaking.unadjusted == null && (
+        <Deemphasized>No population data available.</Deemphasized>
+      )}
 
-      {populationAdjusted && (
+      {pop.speaking.adjusted && (
         <DetailsField title={`Population Adjusted to ${TerritoryDataYear}`}>
           <LocalePopulationAdjusted locale={locale} />
           <HoverableButton
@@ -155,15 +149,15 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         </DetailsField>
       )}
 
-      {populationSpeaking != null && (
+      {pop.speaking.unadjusted != null && (
         <DetailsField title="Speakers (from best cited source(s))">
-          <CountOfPeople count={populationSpeaking} />
+          <CountOfPeople count={pop.speaking.unadjusted} />
           {' ['}
           <LocaleCensusCitation locale={locale} />
           {']'}
         </DetailsField>
       )}
-      {populationSpeakingPercent != null && (
+      {pop.speaking.percent != null && (
         <DetailsField
           title={
             <span style={{ marginLeft: '2em' }}>
@@ -171,18 +165,18 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
             </span>
           }
         >
-          {numberToFixedUnlessSmall(populationSpeakingPercent)}%
+          {numberToFixedUnlessSmall(pop.speaking.percent)}%
         </DetailsField>
       )}
-      {populationWriting != null && territory && (
+      {pop.writing.unadjusted != null && territory && (
         <DetailsField title="Writers">
-          ~<CountOfPeople count={populationWriting} />
+          ~<CountOfPeople count={pop.writing.unadjusted} />
           {' [previous estimate * literacy'}
           {territory.literacyPercent != null && ` (${territory.literacyPercent.toFixed(1)}%)`}
           {']'}
         </DetailsField>
       )}
-      {populationWritingPercent != null && (
+      {pop.writing.percent != null && (
         <DetailsField
           title={
             <span style={{ marginLeft: '2em' }}>
@@ -190,7 +184,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
             </span>
           }
         >
-          {numberToFixedUnlessSmall(populationWritingPercent)}%
+          {numberToFixedUnlessSmall(pop.writing.percent)}%
         </DetailsField>
       )}
 
@@ -222,7 +216,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                     <td style={{ textAlign: 'right' }}>
                       <PercentageDifference
                         percentNew={censusEstimate.populationPercent}
-                        percentOld={populationSpeakingPercent}
+                        percentOld={pop.speaking.percent}
                       />
                     </td>
                   </tr>
@@ -236,7 +230,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 };
 
 const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { officialStatus, wikipedia, localeSource, relatedLocales } = locale;
+  const { officialStatus, wikipedias, localeSource, relatedLocales } = locale;
   return (
     <DetailsSection title="Other">
       {officialStatus && (
@@ -245,7 +239,7 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
       <DetailsField title="Indigeneity" description={getIndigeneityDescription()}>
         <LocaleIndigeneityDisplay loc={locale} />
       </DetailsField>
-      {wikipedia && (
+      {wikipedias && wikipedias.length > 0 && (
         <DetailsField title="Wikipedia">
           <ObjectWikipediaInfo object={locale} />
         </DetailsField>

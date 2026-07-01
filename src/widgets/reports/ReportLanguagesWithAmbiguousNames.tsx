@@ -25,7 +25,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const sortFunction = getSortFunction();
-  const { getCurrentObjects } = usePagination<[string, LanguageData[]]>();
+  const { getCurrentEntities } = usePagination<[string, LanguageData[]]>();
   const languagesByName = useMemo(() => {
     return languagesInSelectedSource
       .filter(filterBySubstring)
@@ -75,7 +75,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
         <LimitInput />
         <PaginationControls itemCount={Object.keys(langsWithDupNames).length} />
       </div>
-      {getCurrentObjects(
+      {getCurrentEntities(
         Object.entries(langsWithDupNames).sort((a, b) => {
           const aData = a[1][0];
           const bData = b[1][0];

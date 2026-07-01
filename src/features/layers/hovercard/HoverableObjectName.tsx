@@ -9,7 +9,13 @@ import HoverableObject from './HoverableObject';
 
 type Props = {
   object?: ObjectData;
-  labelSource?: 'name' | 'code' | 'territory' | 'language' | 'locale without territory';
+  labelSource?:
+    | 'name'
+    | 'code'
+    | 'territory'
+    | 'language'
+    | 'locale without territory'
+    | 'name and code';
   format?: 'text' | 'button';
   style?: React.CSSProperties;
 };
@@ -23,6 +29,9 @@ const HoverableObjectName: React.FC<Props> = ({
   if (!object) return null;
 
   let label = labelSource == 'code' ? object.codeDisplay : object.nameDisplay;
+  if (labelSource == 'name and code') {
+    label = `${object.nameDisplay} [${object.codeDisplay}]`;
+  }
   if (object.type === ObjectType.Locale) {
     if (labelSource == 'language') {
       label = object.language?.nameDisplay ?? object.languageCode;

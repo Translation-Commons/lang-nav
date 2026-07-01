@@ -1,9 +1,9 @@
-#codeDisplay		#fr: Langue maternelle	leclerc.sg2018
-#nameDisplay			LeClerc Singapore 2018
+#codeDisplay		#fr: Langue maternelle	axl.sg
+#nameDisplay			AXL Singapore
 #isoRegionCode			SG
 #yearCollected			2018
 ### Language Criteria ###			
-#languageUse			Speaks
+#languageUse			Ethnicity
 #acquisitionOrder			L1
 #domain			Home
 ### Population Surveyed ###			
@@ -14,7 +14,7 @@
 ### Creator ###			
 #collectorType			Secondary
 #author			Jacques LeClerc
-#presentedBy			CEFAN, ULaval
+#presentedBy			AXL
 ### Source Document ###			
 #url			https://www.axl.cefan.ulaval.ca/asie/singa.htm
 #datePublished			2023-12-23

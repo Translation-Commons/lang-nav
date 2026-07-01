@@ -5,7 +5,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -48,7 +48,7 @@ export type WikipediaData = {
   languageName: string;
   scriptCodes: ScriptCode[];
   wikipediaSubdomain: string; // eg. en, fr, simple, zh-classical, map-bms
-  localeCode: StandardLocaleCode; // eg. eng, fra, mis, lzh, bany1247
+  localeCodes: string; // eg. eng, fra, mis, lzh, jav/bany1247
   articles: number;
   activeUsers: number;
   url: string;
