@@ -66,7 +66,7 @@ describe('VitalitySelector', () => {
       const expected = Object.values(LanguageISOStatus).filter((v) => typeof v === 'number');
 
       // If there are more than 4 options expand first so all are visible
-      if (expected.length > 4) {
+      if (expected.length > 5) {
         await user.click(screen.getByText('Expand All'));
       }
 
