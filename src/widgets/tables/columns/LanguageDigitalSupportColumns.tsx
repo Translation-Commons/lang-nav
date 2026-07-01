@@ -75,6 +75,23 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Wikipedia Status',
+    description: (
+      <>
+        Sources:
+        <ul style={{ margin: '0' }}>
+          <li>
+            <ExternalLink href="https://en.wikipedia.org/wiki/List_of_Wikipedias">
+              List of Active and Closed Wikipedias
+            </ExternalLink>
+          </li>
+          <li>
+            <ExternalLink href="https://incubator.wikimedia.org/wiki/Incubator:Wikis">
+              List of test wikis in development on the Wikimedia Incubator
+            </ExternalLink>
+          </li>
+        </ul>
+      </>
+    ),
     render: (object) => (
       <>
         <WikipediaStatusDisplay object={object} />
@@ -84,11 +101,27 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Wikipedia Articles',
+    description: (
+      <>
+        From the{' '}
+        <ExternalLink href="https://en.wikipedia.org/wiki/List_of_Wikipedias">
+          List of Wikipedias
+        </ExternalLink>
+      </>
+    ),
     render: (object) => <WikipediaArticles object={object} />,
     valueType: TableValueType.Count,
   },
   {
     key: 'Wikipedia Active Users',
+    description: (
+      <>
+        From the{' '}
+        <ExternalLink href="https://en.wikipedia.org/wiki/List_of_Wikipedias">
+          List of Wikipedias
+        </ExternalLink>
+      </>
+    ),
     render: (object) => <WikipediaActiveUsers object={object} />,
     valueType: TableValueType.Population,
   },
