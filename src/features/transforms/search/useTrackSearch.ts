@@ -21,7 +21,9 @@ export default function useTrackSearch(): (query: string, trigger: SearchTrigger
   return useCallback(
     (query: string, trigger: SearchTrigger) => {
       const resultCount =
-        query === '' ? 0 : filteredEntities.filter(getSubstringFilterOnQuery(query, searchBy)).length;
+        query === ''
+          ? 0
+          : filteredEntities.filter(getSubstringFilterOnQuery(query, searchBy)).length;
       trackSearchTyped({
         path: location.pathname,
         entity: objectType,
