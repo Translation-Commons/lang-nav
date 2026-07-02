@@ -1,0 +1,45 @@
+#codeDisplay		za2022	za2011	za2001	za1996
+#nameDisplay		South Africa 2022 Home Language	South Africa 2011 Home Language	South Africa 2001 Home Language	South Africa 1996 Home Language
+#isoRegionCode	ZA				
+#yearCollected		2022	2011	2001	1996
+### Language Criteria ###					
+#languageUse	Speaks				
+#acquisitionOrder	L1				
+#domain	Home				
+### Population Surveyed ###					
+#population	61,991,368				
+#populationSource	Derived from the official Census 2022 total population (62,027,503) excluding the population younger than 1 year, as Table 2.8 applies to persons aged 1 year and older.				
+#responsesPerIndividual	1				
+### Data Constraints ###					
+#geographicScope	whole country				
+#age	1+				
+#quantity	percent				
+### Creator ###					
+#collectorType	Government				
+#collectorName	Statistics South Africa				
+#collectorNameShort	Stats SA				
+#author	South Africa				
+### Source Document ###					
+#url	https://census.statssa.gov.za/assets/documents/2022/P03014_Census_2022_Statistical_Release.pdf				
+#datePublished	2023-10-10				
+#dateAccessed	2026-06-30				
+#documentName	Census 2022 Statistical Release (P0301.4)				
+#sectionName	2.8 Language most often spoken in the household				
+#tableName	Table 2.8: Population distribution by language spoken most often in the household, Census 2022				
+#columnName		Census year 2022	Census year 2011	Census year 2001	Census year 1996
+#citation	Statistics South Africa. Census 2022 Statistical Release (P0301.4). Table 2.8: Population distribution by language spoken most often in the household, Census 2022.				
+#notes	Data represent the language spoken most often in the household for the population aged 1 year and older. The published table reports percentages; LangNav population counts are derived using the eligible population (excluding persons younger than 1 year). One response was recorded per individual.				
+Language Code	Language	Population			
+afr	Afrikaans	10.6	13.5	13.4	14.5
+eng	English	8.7	9.7	8.3	8.7
+nde	isiNdebele	1.7	2.1	1.6	1.5
+xho	isiXhosa	16.3	16	17.6	17.9
+zul	isiZulu	24.4	22.7	23.8	22.8
+nso	Sepedi	10	9	9.4	9.2
+sot	Sesotho	7.8	7.6	7.9	7.7
+tsn	Setswana	8.3	8	8.2	8.2
+sfs	South African Sign Language	0.02	0.5		
+ssw	siSwati	2.8	2.5	2.7	2.5
+ven	Tshivenda	2.5	2.4	2.3	2.2
+tso	Xitsonga	4.7	4.5	4.4	4.4
+mul	Other	2.1	1.6	0.5	0.6

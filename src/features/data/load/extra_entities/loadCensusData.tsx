@@ -18,6 +18,7 @@ export async function loadCensusData(): Promise<(CensusImport | void)[]> {
     getCensusFilepaths('data/census/official'),
     getCensusFilepaths('data/census/data.un.org'),
     getCensusFilepaths('data/census/unofficial'),
+    getCensusFilepaths('data/census/axl'),
   ]).then((arrays) => arrays.flat());
 
   return await Promise.all(
