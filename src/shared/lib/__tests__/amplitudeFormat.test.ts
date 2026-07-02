@@ -1,7 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
+import Field from '@features/transforms/fields/Field';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
+
 import {
   areFilterValuesEqual,
+  buildSortKeys,
   deriveFilterAction,
   FILTER_PARAM_KEYS,
   resolveEnumValue,
@@ -55,6 +59,44 @@ describe('resolveEnumValue', () => {
   it('leaves unknown keys untouched', () => {
     expect(resolveEnumValue('unknownKey', 5)).toBe(5);
     expect(resolveEnumValue('unknownKey', 'foo')).toBe('foo');
+  });
+
+  it('decodes numeric enum filter values to their names', () => {
+    // modalityFilter -> LanguageModality (includes negative-valued members)
+    expect(resolveEnumValue('modalityFilter', [2])).toEqual(['Spoken']);
+    expect(resolveEnumValue('modalityFilter', [-2])).toEqual(['Written']);
+    // isoStatus -> LanguageISOStatus
+    expect(resolveEnumValue('isoStatus', [9])).toEqual(['Living']);
+    // vitalityEthCoarse -> VitalityEthnologueCoarse
+    expect(resolveEnumValue('vitalityEthCoarse', [6])).toEqual(['Stable']);
+  });
+});
+
+describe('buildSortKeys', () => {
+  it("builds directional keys reflecting each field's natural direction", () => {
+    // Population sorts high-to-low by default (desc); Name sorts A-Z (asc).
+    expect(buildSortKeys(Field.Population, Field.Name, SortBehavior.Normal)).toEqual([
+      'population_desc',
+      'name_asc',
+    ]);
+  });
+
+  it('flips every direction when the sort behavior is reversed', () => {
+    expect(buildSortKeys(Field.Population, Field.Name, SortBehavior.Reverse)).toEqual([
+      'population_asc',
+      'name_desc',
+    ]);
+  });
+
+  it('omits None and a secondary that duplicates the primary', () => {
+    expect(buildSortKeys(Field.Name, Field.None, SortBehavior.Normal)).toEqual(['name_asc']);
+    expect(buildSortKeys(Field.Name, Field.Name, SortBehavior.Normal)).toEqual(['name_asc']);
+  });
+
+  it('slugifies multi-word field names', () => {
+    expect(buildSortKeys(Field.WritingSystem, Field.None, SortBehavior.Normal)).toEqual([
+      'writing_system_asc',
+    ]);
   });
 });
 

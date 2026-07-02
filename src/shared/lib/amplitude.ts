@@ -88,26 +88,17 @@ type ExploreBaseProps = {
   entity?: string;
 };
 
-export function trackEntitySwitched(
-  props: ExploreBaseProps & { from_entity?: string; to_entity?: string },
-) {
+export type SearchTrigger = 'typed' | 'suggestion';
+
+export function trackEntitySwitched(props: ExploreBaseProps & { previous_entity?: string }) {
   trackEvent('explore_entity_switched', props);
 }
 
-export function trackViewSwitched(
-  props: ExploreBaseProps & { from_view?: string; to_view?: string },
-) {
+export function trackViewSwitched(props: ExploreBaseProps & { previous_view?: string }) {
   trackEvent('explore_view_switched', props);
 }
 
-export function trackSortChanged(
-  props: ExploreBaseProps & {
-    sort_by?: string;
-    secondary_sort_by?: string;
-    sort_behavior?: string;
-    changed_keys: string[];
-  },
-) {
+export function trackSortChanged(props: ExploreBaseProps & { sort: string[] }) {
   trackEvent('explore_sort_changed', props);
 }
 
@@ -116,6 +107,8 @@ export function trackSearchTyped(
     search_string: string;
     search_by?: string;
     cleared: boolean;
+    result_count: number;
+    trigger: SearchTrigger;
   },
 ) {
   trackEvent('explore_search_typed', props);
@@ -132,22 +125,12 @@ export function trackFilterChanged(
   trackEvent('explore_filter_changed', props);
 }
 
-export function trackDetailViewed(
-  props: ExploreBaseProps & {
-    object_id: string;
-    object_entity?: string;
-  },
-) {
+export function trackDetailViewed(props: ExploreBaseProps & { object_id: string }) {
   trackEvent('explore_detail_viewed', props);
 }
 
 export function trackDetailSwitched(
-  props: ExploreBaseProps & {
-    from_object_id: string;
-    to_object_id: string;
-    from_object_entity?: string;
-    to_object_entity?: string;
-  },
+  props: ExploreBaseProps & { object: string; previous_object: string },
 ) {
   trackEvent('explore_detail_switched', props);
 }

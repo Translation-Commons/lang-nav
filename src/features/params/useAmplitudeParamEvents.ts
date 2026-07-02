@@ -6,12 +6,12 @@ import {
   trackDetailViewed,
   trackEntitySwitched,
   trackFilterChanged,
-  trackSearchTyped,
   trackSortChanged,
   trackViewSwitched,
 } from '@shared/lib/amplitude';
 import {
   areFilterValuesEqual,
+  buildSortKeys,
   deriveFilterAction,
   FILTER_PARAM_KEYS,
   resolveEnumValue,
@@ -19,22 +19,14 @@ import {
 
 import { getParamsFromURL } from './getParamsFromURL';
 import { PageParamsOptional } from './PageParamTypes';
+import { getDefaultParams } from './Profiles';
 
 /**
- * Emits granular `explore_*` events when URL params change. Mounted once
- * alongside the page-view tracker.
- *
- * Strategy: hold a ref to the previous param snapshot and diff it against the
- * current one on every render. This catches every code path that calls
- * `updatePageParams` (selectors, search bar, card/row clicks, programmatic
- * nav) from a single place, so we don't have to instrument each call site.
- *
- * Two intentional gaps:
- *   - First render: seed the ref and skip emitting, otherwise a deep link
- *     with non-default params would fire spurious `explore_*` events.
- *   - Pathname change: same treatment — `page_viewed` covers the entry, and
- *     reusing the previous page's snapshot would mis-attribute diffs across
- *     routes.
+ * Emits granular `explore_*` events by diffing the previous param snapshot
+ * against the current one, catching every `updatePageParams` call from one
+ * place. `explore_search_typed` is fired from the search component instead
+ * (see `useTrackSearch`). First render and pathname changes reseed without
+ * emitting, so deep links and cross-route diffs don't fire spurious events.
  */
 export default function useAmplitudeParamEvents() {
   const location = useLocation();
@@ -54,50 +46,40 @@ export default function useAmplitudeParamEvents() {
       return;
     }
 
+    // Defaults never appear in the URL; resolve per profile/entity so entity,
+    // view, sort, and the previous_* values are always populated correctly.
+    const currentDefaults = getDefaultParams(current.objectType, current.view, current.profile);
+    const previousDefaults = getDefaultParams(previous.objectType, previous.view, previous.profile);
+
     const base = {
       path: location.pathname,
-      view: current.view ?? previous.view,
-      entity: current.objectType ?? previous.objectType,
+      view: current.view ?? currentDefaults.view,
+      entity: current.objectType ?? currentDefaults.objectType,
     };
 
     if (current.objectType !== previous.objectType) {
       trackEntitySwitched({
         ...base,
-        from_entity: previous.objectType,
-        to_entity: current.objectType,
+        previous_entity: previous.objectType ?? previousDefaults.objectType,
       });
     }
 
     if (current.view !== previous.view) {
-      trackViewSwitched({
-        ...base,
-        from_view: previous.view,
-        to_view: current.view,
-      });
+      trackViewSwitched({ ...base, previous_view: previous.view ?? previousDefaults.view });
     }
 
-    const sortChangedKeys: string[] = [];
-    if (current.sortBy !== previous.sortBy) sortChangedKeys.push('sortBy');
-    if (current.secondarySortBy !== previous.secondarySortBy)
-      sortChangedKeys.push('secondarySortBy');
-    if (current.sortBehavior !== previous.sortBehavior) sortChangedKeys.push('sortBehavior');
-    if (sortChangedKeys.length > 0) {
+    const sortChanged =
+      current.sortBy !== previous.sortBy ||
+      current.secondarySortBy !== previous.secondarySortBy ||
+      current.sortBehavior !== previous.sortBehavior;
+    if (sortChanged) {
       trackSortChanged({
         ...base,
-        sort_by: current.sortBy,
-        secondary_sort_by: current.secondarySortBy,
-        sort_behavior: resolveEnumValue('sortBehavior', current.sortBehavior) as string | undefined,
-        changed_keys: sortChangedKeys,
-      });
-    }
-
-    if (current.searchString !== previous.searchString) {
-      const next = current.searchString ?? '';
-      trackSearchTyped({
-        ...base,
-        search_string: next,
-        search_by: current.searchBy,
-        cleared: next === '',
+        sort: buildSortKeys(
+          current.sortBy ?? currentDefaults.sortBy,
+          current.secondarySortBy ?? currentDefaults.secondarySortBy,
+          current.sortBehavior ?? currentDefaults.sortBehavior,
+        ),
       });
     }
 
@@ -117,19 +99,9 @@ export default function useAmplitudeParamEvents() {
     const prevID = previous.objectID;
     const nextID = current.objectID;
     if (prevID == null && nextID != null) {
-      trackDetailViewed({
-        ...base,
-        object_id: nextID,
-        object_entity: current.objectType,
-      });
+      trackDetailViewed({ ...base, object_id: nextID });
     } else if (prevID != null && nextID != null && prevID !== nextID) {
-      trackDetailSwitched({
-        ...base,
-        from_object_id: prevID,
-        to_object_id: nextID,
-        from_object_entity: previous.objectType,
-        to_object_entity: current.objectType,
-      });
+      trackDetailSwitched({ ...base, object: nextID, previous_object: prevID });
     }
 
     prevParamsRef.current = current;

@@ -20,7 +20,7 @@ vi.mock('react-router-dom', () => ({
   Navigate: vi.fn(),
   Route: vi.fn(),
   Routes: vi.fn(),
-  useLocation: vi.fn(),
+  useLocation: vi.fn(() => ({ pathname: '/data' })),
 }));
 
 describe('FilterSelector', () => {

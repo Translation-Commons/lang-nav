@@ -7,21 +7,30 @@ import {
   SelectorDisplay,
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
-import TextInput from '@features/params/ui/TextInput';
+import TextInput, { TextInputSubmitSource } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
 import useSearchSuggestions from './useSearchSuggestions';
+import useTrackSearch from './useTrackSearch';
 
 const SearchBar: React.FC = () => {
   const { searchString, updatePageParams } = usePageParams();
   const location = useLocation();
   const getSearchSuggestions = useSearchSuggestions();
+  const trackSearch = useTrackSearch();
   const setSearchString = useCallback(
-    (value: string) => {
-      // Only update the searchString param if we're already on the data page
-      if (location.pathname === '/data') updatePageParams({ searchString: value });
+    (value: string, source?: TextInputSubmitSource) => {
+      if (location.pathname !== '/data') return;
+      if (source === 'suggestion') {
+        // The suggestion's link already navigates; just record the search.
+        trackSearch(value, 'suggestion');
+        return;
+      }
+      if (value === searchString) return; // skip no-op submits (e.g. blur without an edit)
+      updatePageParams({ searchString: value });
+      trackSearch(value, 'typed');
     },
-    [updatePageParams],
+    [updatePageParams, location.pathname, searchString, trackSearch],
   );
   return (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>

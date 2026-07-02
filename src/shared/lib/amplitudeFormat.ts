@@ -3,8 +3,17 @@ import ReportID from '@widgets/reports/ReportID';
 import { getParamsFromURL } from '@features/params/getParamsFromURL';
 import { PageParamKey } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
+import Field from '@features/transforms/fields/Field';
+import { getNormalSortDirection } from '@features/transforms/sorting/sort';
+import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
+import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
+import {
+  LanguageISOStatus,
+  VitalityEthnologueCoarse,
+  VitalityEthnologueFine,
+} from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 // Rename keys before sending to Amplitude (internalKey to amplitudeKey).
@@ -93,9 +102,36 @@ const EXCLUDED_DEFAULT_KEYS = new Set<string>([
 const NUMERIC_ENUM_BY_KEY: Record<string, Record<number, string>> = {
   languageScopes: LanguageScope as unknown as Record<number, string>,
   territoryScopes: TerritoryScope as unknown as Record<number, string>,
+  modalityFilter: LanguageModality as unknown as Record<number, string>,
+  isoStatus: LanguageISOStatus as unknown as Record<number, string>,
+  vitalityEthCoarse: VitalityEthnologueCoarse as unknown as Record<number, string>,
+  vitalityEthFine: VitalityEthnologueFine as unknown as Record<number, string>,
   sortBehavior: { 1: 'asc', [-1]: 'desc' },
   reportID: ReportID as unknown as Record<number, string>,
 };
+
+// Builds the explore_sort_changed `sort` array, e.g. ['population_desc', 'name_asc'].
+export function buildSortKeys(
+  sortBy: Field,
+  secondarySortBy: Field | undefined,
+  sortBehavior: SortBehavior,
+): string[] {
+  const keys: string[] = [];
+  if (sortBy && sortBy !== Field.None) keys.push(toSortKey(sortBy, sortBehavior));
+  if (secondarySortBy && secondarySortBy !== Field.None && secondarySortBy !== sortBy) {
+    keys.push(toSortKey(secondarySortBy, sortBehavior));
+  }
+  return keys;
+}
+
+function toSortKey(field: Field, sortBehavior: SortBehavior): string {
+  const direction = getNormalSortDirection(field) * sortBehavior;
+  const slug = field
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+  return `${slug}_${direction < 0 ? 'desc' : 'asc'}`;
+}
 
 export function resolveEnumValue(key: string, val: unknown): unknown {
   const enumMap = NUMERIC_ENUM_BY_KEY[key];

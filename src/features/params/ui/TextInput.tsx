@@ -12,11 +12,14 @@ import SelectorDropdownLabel from './SelectorDropdownLabel';
 import { Suggestion, SUGGESTION_LIMIT } from './SelectorSuggestions';
 import SuggestionsDropdown from './SelectorSuggestionsDropdown';
 
+// Lets callers distinguish a clicked suggestion from a typed query.
+export type TextInputSubmitSource = 'input' | 'clear' | 'suggestion';
+
 type Props = {
   getSuggestions?: (query: string) => Promise<Suggestion[]>;
   inputStyle?: React.CSSProperties;
   label?: React.ReactNode;
-  onSubmit: (value: string) => void;
+  onSubmit: (value: string, source?: TextInputSubmitSource) => void;
   pageParameter?: PageParamKey;
   placeholder?: string;
   value: string;
@@ -55,7 +58,13 @@ const TextInput: React.FC<Props> = ({
   const submit = useCallback(
     (value: string, source: SubmissionSource) => {
       if (source !== SubmissionSource.Suggestion && isUpdatingFromSuggestions.current) return;
-      onSubmit(value);
+      const submitSource: TextInputSubmitSource =
+        source === SubmissionSource.Suggestion
+          ? 'suggestion'
+          : source === SubmissionSource.ClearButton
+            ? 'clear'
+            : 'input';
+      onSubmit(value, submitSource);
 
       // Hide suggestions after submission, with a slight delay to allow click events to register
       const timer = setTimeout(() => {

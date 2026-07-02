@@ -15,6 +15,7 @@ type HoverableProps = {
   hoverContent?: React.ReactNode;
   keepOldParams?: boolean;
   onClick?: () => void;
+  onMouseDown?: () => void;
   page?: LangNavPageName;
   params?: PageParamsOptional;
   role?: string;
@@ -26,6 +27,7 @@ const HoverableInternalLinkButton: React.FC<HoverableProps> = ({
   className,
   hoverContent,
   onClick,
+  onMouseDown,
   params,
   page = LangNavPageName.Data,
   keepOldParams = false,
@@ -56,6 +58,7 @@ const HoverableInternalLinkButton: React.FC<HoverableProps> = ({
       onMouseEnter={handleMouseEnter}
       onMouseMove={handleMouseMove}
       onMouseLeave={hideHoverCard}
+      onMouseDown={onMouseDown}
       onClick={() => {
         hideHoverCard();
         if (onClick != null) onClick();
