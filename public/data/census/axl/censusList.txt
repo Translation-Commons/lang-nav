@@ -1,0 +1,12 @@
+axl.cd
+axl.cx
+axl.gl
+axl.km
+axl.nf
+axl.no
+axl.pn
+axl.qa
+axl.sg
+axl.sl
+axl.sy
+axl.tg

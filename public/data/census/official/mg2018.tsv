@@ -1,0 +1,35 @@
+#codeDisplay		mg2018speaks	mg2018writes
+#nameDisplay		Madagascar 2018 Speaks	Madagascar 2018 Literacy
+#isoRegionCode	MG		
+#yearCollected	2018		
+### Language Criteria ###			
+#languageUse		Speaks	Writes
+#acquisitionOrder		Any	Any
+### Population Surveyed ###			
+#population	25,674,196	23,507,970	17,631,480
+#responsesPerIndividual	1+		
+### Data Constraints ###			
+#geographicScope	whole country		
+#age		3+	11+
+#nationality	residents		
+#residenceBasis	de jure		
+#quantity	percent		
+### Creator ###			
+#collectorType	Government		
+#collectorName	Institut National de la Statistique (INSTAT), Madagascar		
+#collectorNameShort	INSTAT Madagascar		
+### Source Document ###			
+#url	https://instat.mg/documents/upload/main/INSTAT-RGPH3_CompetencesLinguistiquesetScolarisation_Fev-2021.pdf		
+#datePublished	2021-10-01		
+#dateAccessed	2026-05-05		
+#documentName	Compétences linguistiques et scolarisation à Madagascar (RGPH-3)		
+#sectionName	Chapitre 2 : Compétences linguistiques		
+#tableName		Tableau 2.2. Répartition (en %) de la population âgée de 3 ans ou plus par région selon l’aptitude à parler la langue malagasy, française, anglaise et autres langues	Tableau 2.14. Répartition (en %) de la population âgée de 11 ans ou plus par milieu de résidence, sexe et groupe d’âge spécifique selon l’aptitude à lire et à écrire les langues malagasy, française, anglaise et autres
+#columnName		Population (%) parlant Malagasy, Français, Anglais et autres langues	
+#citation	INSTAT Madagascar. RGPH-3 (2018), Rapport thématique : Compétences linguistiques et scolarisation à Madagascar, 2021.		
+#notes	Data represents language proficiency (non-exclusive); individuals may report multiple languages. Malagasy is near-universal (99.9%), while French and English are secondary languages. Data is reported in percentages, not counts.		
+Language Code	Language	Population	
+mlg	Malagasy	99.9%	77.0%
+fra	French	23.6%	36.8%
+eng	English	8.2%	13.7%
+mul	Other	0.6%	0.8%

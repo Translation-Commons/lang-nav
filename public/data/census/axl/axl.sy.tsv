@@ -1,0 +1,55 @@
+#codeDisplay		#fr names	sy2014count	#sy2014perc
+#nameDisplay			Syria 2014 by count	Syria 2014 by percent
+#isoRegionCode	SY			
+#yearCollected	2014			
+### Language Criteria ###				
+#languageUse	Speaks			
+#proficiency	Native			
+#acquisitionOrder			L1	
+#domain			Any	
+### Population Surveyed ###				
+#population	23571500			
+#sampleRate				
+#responsesPerIndividual			1	
+### Data Constraints ###				
+#geographicScope	whole country			
+#nationality	Residents			
+#languagesIncluded	All			
+#quantity			count 	percent
+### Creator ###				
+#collectorType	Secondary			
+#author	Jacques Leclerc			
+#presentedBy	AXL			
+### Source Document ###				
+#url	https://www.axl.cefan.ulaval.ca/asie/syrie.htm	 		
+#tableName	Section 2: 'Le tableau ci-dessous présente les ethnies et les langues parlées en Syrie' (Ethnie / Population / Pourcentage / Langue maternelle / Affiliation linguistique / Religion)			
+#notes				
+Language Code	Language	Language	Population	Percentage
+ara/apc	North Levantine Arabic	arabe levantin du Nord	16031000	68
+kur/kmr	Kurmanji Kurdish	kurde krumanji	1888000	8
+ara/ars	Najdi Arabic	arabe nadji	1687000	7.1
+ara/apc	North Levantine Arabic	arabe levantin du Nord	1455000	6.1
+ara/apc	North Levantine Arabic	arabe levantin du Nord	661000	2.8
+ara/apc	North Levantine Arabic	arabe levantin du Nord	539000	2.2
+syr/aii	Assyrian Neo-Aramaic	assyrien néo-araméen	227000	0.9
+tuk	Turkmen	turkmène	150000	0.6
+ara/apc	North Levantine Arabic	arabe levantin du Nord	114000	0.4
+ara/avl	Eastern Egyptian Arabic	arabe égyptien oriental	98000	0.4
+ara/arz	Egyptian Arabic	arabe égyptien	97000	0.4
+hye	Armenian	arménien	83000	0.3
+oss	Ossetian	ossète	69000	0.2
+ara/acm	Iraqi (Mesopotamian) Arabic	arabe irakien (mésopotamien)	68000	0.2
+fas/pes	Iranian (Farsi)	iranien (farsi)	65000	0.2
+kbd	Circassian (Kabardian)	circassien (kabardien)	48000	0.2
+rmt	Domari	domari	46000	0.1
+ara/apc/ajp	South Levantine Arabic	arabe levantin du Sud	46000	0.1
+aze/azb	Azeri	azéri	44000	0.1
+ady	Circassian (Adyghe)	circassien (adiguéen)	35000	0.1
+tru	Turoyo (Aramaic)	turoyo (araméen)	32000	0.1
+amw	Neo-Aramaic	néo-araméen	24000	0.1
+kur/kmr	Kurmanji Kurdish	kurde kumanji	15000	0
+fra	French	français	14000	0
+syr/cld	Chaldean Neo-Aramaic	chaldéen néo-araméen	7500	0
+che	Chechen	tchétchène	6100	0
+	Other	other	21900	0.9
+	Total	Total	23571500	100

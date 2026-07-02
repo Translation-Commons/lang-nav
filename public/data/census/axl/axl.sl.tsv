@@ -1,0 +1,59 @@
+#codeDisplay		#fr language names	#ethnicity	
+#nameDisplay	Sierra Leone 2017			
+#isoRegionCode	SL			
+#yearCollected	2017			
+### Language Criteria ###				
+#languageUse	Speaks			
+#acquisitionOrder	L1			
+#domain	Home			
+### Population Surveyed ###				
+#population	6,300,000			
+#responsesPerIndividual	1			
+### Data Constraints ###				
+#quantity	count			
+#geographicScope	whole country			
+#nationality	residents			
+#languagesIncluded	All			
+### Creator ###				
+#collectorType	Secondary			
+#author	Jacques LeClerc			
+#presentedBy	AXL			
+### Source Document ###				
+#url	https://www.axl.cefan.ulaval.ca/afrique/sierra_leone.htm			
+#datePublished	2017-12-07			
+#dateAccessed	2026-05-15			
+#documentName	Sierra Leone			
+#tableName	Ethnie; Population; Pourcentage; Langue principale; Filiation linguistique; Religion principale			
+#columnName	État fédéré; Superficie; Population			
+#citation	L’aménagement linguistique dans le monde, Québec, CEFAN, Université Laval			
+Language code	Language Name		Ethnie	Population
+men	Mendé	mendé	Mendé	2 053 000
+tem	Themné	themné	Themné	1 573 000
+kri	Krio	krio	Krio	697 000
+lia	Limba	limba	Limba	445 000
+knk	Kuranko	kuranko	Kuranko	358 000
+kno	Kono	kono	Kono	272 000
+ful/fuf	Poular	poular	Fula Jalon	189 000
+lok	Loko	loko	Loko	179 000
+bun	Sherbro	sherbro	Sherbro	179 000
+sus	Soussou	soussou	Soussou	159 000
+man/emk	Eastern Maninkakan	maninkakan de l'Est	Maninka de l'Est	139 000
+kss	Southern Kissi	kissi du Sud	Kissi du Sud	113 000
+tem	Themne	themné	Banta-Themné	60 000
+kqs	Northern Kissi	kissi du Nord	Kissi du Nord	53 000
+ful/fuf	Poular	poular	Foulani	50 000
+ara/apc	Levantine Arabic	arabe leventin	Arabe libanais	40 000
+yal	Jalonké	jalonké	Yalunka	40 000
+vai	Vai	vai	Vai	20 000
+men	Mendé	mendé	Krim kimi	17 000
+hin	Hindi	hindi	Indo-Pakistanais	13 000
+gol	Gola	gola	Gola	13 000
+klu	Klao	klao	Krou	12 000
+bsq	Bassa	bassa	Bassa	7 300
+buy	Bullom So	bullom so	Bullom	6 600
+yor	Yoruba	yorouba	Yorouba	5 400
+eng	English	anglais	Britannique	2 400
+ell	Greek	Dgrec	Grec	1 000
+men	Mendé	mendé	Bom bum	800
+lia	Limba	limba	Limba de l'Est	700
+			Autres	35 000
