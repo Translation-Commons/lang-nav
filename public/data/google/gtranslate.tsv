@@ -1,0 +1,257 @@
+### Metadata ###			
+#topic		Availability of language in Google Translate	
+#url		https://translate.google.com/	
+#dateAccessed		2026-05-15	
+#author		Google LLC	
+#notes		Scraped from the website	
+			
+Language Code	Language	Locale	Writing System
+abk	Abkhaz		
+ace	Acehnese		
+ach	Acholi		
+aar	Afar		
+afr	Afrikaans		
+sqi	Albanian		
+alz	Alur		
+amh	Amharic		
+ara	Arabic		
+hye	Armenian		
+asm	Assamese		
+ava	Avar		
+awa	Awadhi		
+aym	Aymara		
+aze	Azerbaijani		
+ban	Balinese		
+bal	Baluchi		
+man/bam	Bambara		
+bci	Baoulé		
+bak	Bashkir		
+eus	Basque		
+btx	Batak Karo		
+bts	Batak Simalungun		
+bbc	Batak Toba		
+bel	Belarusian		
+bem	Bemba		
+ben	Bengali		
+msa/bew	Betawi		
+bho	Bhojpuri		
+bik	Bikol		
+hbs/bos	Bosnian		
+bre	Breton		
+bul	Bulgarian		
+bua	Buryat		
+zho/yue	Cantonese		
+cat	Catalan		
+ceb	Cebuano		
+cha	Chamorro		
+che	Chechen		
+nya	Chichewa		
+zho	Chinese (Simplified)		
+zho	Chinese (Traditional)		
+chk	Chuukese		
+chv	Chuvash		
+cos	Corsican		
+crh	Crimean Tatar (Cyrillic)		Cyrillic
+crh	Crimean Tatar (Latin		Latin
+hbs/hrv	Croatian		
+ces	Czech		
+dan	Danish		
+fas/prs	Dari		
+div	Dhivehi		
+din	Dinka		
+doi	Dogri		
+dov	Dombe		
+nld	Dutch		
+man/dyu	Dyula		
+dzo	Dzongkha		
+eng	English		
+epo	Esperanto		
+est	Estonian		
+ewe	Ewe		
+fao	Faroese		
+fij	Fijian		
+fil	Filipino		
+fin	Finnish		
+fon	Fon		
+fra	French		
+fra	French (Canada)	CA	
+fry	Frisian		
+fur	Friulian		
+ful	Fulani		
+gaa	Ga		
+glg	Galician		
+kat	Georgian		
+deu	German		
+ell	Greek		
+grn	Guarani		
+guj	Gujarati		
+hat	Haitian Creole		
+cnh	Hakha Chin		
+hau	Hausa		
+haw	Hawaiian		
+heb	Hebrew		
+hil	Hiligaynon		
+hin	Hindi		
+hmn	Hmong		
+hun	Hungarian		
+hrx	Hunsrik		
+msa/iba	Iban		
+isl	Icelandic		
+ibo	Igbo		
+ilo	Ilocano		
+msa/ind	Indonesian		
+iku	Inuktut (Latin)		Latin
+iku	Inuktut (Syllabics)		Syllabics
+gle	Irish		
+ita	Italian		
+jam	Jamaican Patois		
+jpn	Japanese		
+jav	Javanese		
+kac	Jingpo		
+iku/kal	Kalaallisut		
+kan	Kannada		
+kau	Kanuri		
+pam	Kapampangan		
+kaz	Kazakh		
+kha	Khasi		
+khm	Khmer		
+nyn	Kiga		
+kon	Kikongo		
+kin	Kinyarwanda		
+kon/mkw	Kituba		
+trp	Kokborok		
+kom	Komi		
+kok	Konkani		
+kor	Korean		
+kri	Krio		
+kmr	Kurdish (Kurmanji)		
+ckb	Kurdish (Sorani)		
+kir	Kyrgyz		
+lao	Lao		
+lav/ltg	Latgalian		
+lat	Latin		
+lav	Latvian		
+lij	Ligurian		
+lim	Limburgish		
+lin	Lingala		
+lit	Lithuanian		
+lmo	Lombard		
+lug	Luganda		
+luw	Luo		
+ltz	Luxembourgish		
+mkd	Macedonian		
+mad	Madurese		
+mai	Maithili		
+msa/mfp	Makassar		
+mlg	Malagasy		
+msa/zlm	Malay		
+zlm	Malay (Jawi)		Jawi
+mal	Malayalam		
+mlt	Maltese		
+mam	Mam		
+glv	Manx		
+mri	Maori		
+mar	Marathi		
+mah	Marshallese		
+mwr	Marwadi		
+mfe	Mauritian Creole		
+mhr	Meadow Mari		
+mni	Meiteilon (Manipuri)		
+xrg	Minang		
+lus	Mizo		
+mon	Mongolian		
+mya	Myanmar (Burmese)		
+nqo	NKo		
+nah	Nahuatl (Eastern Huasteca)		
+ndc	Ndau		
+nbl	Ndebele (South)		
+new	Nepalbhasa (Newari)		
+nep	Nepali		
+nor	Norwegian		
+nus	Nuer		
+oci	Occitan		
+ori	Odia (Oriya)		
+orm	Oromo		
+oss	Ossetian		
+pag	Pangasinan		
+pap	Papiamento		
+pus	Pashto		
+fas	Persian		
+pol	Polish		
+por	Portuguese (Brazil)	BR	
+por	Portuguese (Portugal)	PT	
+pan	Punjabi (Gurmukhi)		Gurmukhi
+pan	Punjabi (Shahmukhi)		Shahmukhi
+que	Quechua		
+kek	Qʼeqchiʼ		
+rom	Romani		
+ron	Romanian		
+run	Rundi		
+rus	Russian		
+sme	Sami (North)		
+smo	Samoan		
+sag	Sango		
+san	Sanskrit		
+sat	Santali (Latin)		Latin
+sat	Santali (Ol Chiki)		Ol Chiki
+gla	Scots Gaelic		
+nso	Sepedi		
+hbs/srp	Serbian		
+sot	Sesotho		
+crs	Seychellois Creole		
+shn	Shan		
+sna	Shona		
+scn	Sicilian		
+szl	Silesian		
+snd	Sindhi		
+sin	Sinhala		
+slk	Slovak		
+slv	Slovenian		
+som	Somali		
+spa	Spanish		
+sun	Sundanese		
+sus	Susu		
+swa	Swahili		
+ssw	Swati		
+swe	Swedish		
+tah	Tahitian		
+tgk	Tajik		
+zgh	Tamazight		
+zgh	Tamazight (Tifinagh)		Tifinagh
+tam	Tamil		
+tat	Tatar		
+tel	Telugu		
+tet	Tetum		
+tha	Thai		
+bod	Tibetan		
+tir	Tigrinya		
+tiv	Tiv		
+tpi	Tok Pisin		
+ton	Tongan		
+lua	Tshiluba		
+tso	Tsonga		
+tsn	Tswana		
+tcy	Tulu		
+tum	Tumbuka		
+tur	Turkish		
+tuk	Turkmen		
+tyv	Tuvan		
+aka/twi	Twi		
+udm	Udmurt		
+ukr	Ukrainian		
+urd	Urdu		
+uig	Uyghur		
+uzb	Uzbek		
+ven	Venda		
+vec	Venetian		
+vie	Vietnamese		
+war	Waray		
+cym	Welsh		
+wol	Wolof		
+xho	Xhosa		
+sah	Yakut		
+yid	Yiddish		
+yor	Yoruba		
+yua	Yucatec Maya		
+zap	Zapotec		
+zul	Zulu		
