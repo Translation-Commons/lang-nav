@@ -128,8 +128,9 @@ describe('InteractiveEntityTable', () => {
     );
   };
 
-  // Helper function to eliminate column header assertions
-  const expectColumnHeaders = (expectedCount = 2) => {
+  // Helper function to eliminate column header assertions. The count includes the
+  // always-present pin column that is prepended to every table.
+  const expectColumnHeaders = (expectedCount = 3) => {
     expect(screen.getAllByRole('columnheader')).toHaveLength(expectedCount);
     expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
     expect(screen.getByRole('columnheader', { name: /Population/i })).toBeInTheDocument();
@@ -244,10 +245,10 @@ describe('InteractiveEntityTable', () => {
     // Force rerender to ensure state updates are applied
     rerenderEntityTable(rerender);
 
-    // Verify only Name column is visible
+    // Verify only Name column is visible (plus the always-present pin column)
     expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
     expect(screen.queryByRole('columnheader', { name: /Population/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole('columnheader')).toHaveLength(1);
+    expect(screen.getAllByRole('columnheader')).toHaveLength(2);
 
     // Click checkbox to show Population column again
     act(() => {

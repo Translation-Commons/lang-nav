@@ -14,6 +14,7 @@ import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';
 import LoadingIcon from '@shared/ui/LoadingIcon';
 
+import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';
 import { prepareUNESCODataForExport } from './UNESCOExport';
 
@@ -58,9 +59,22 @@ function TableExport<T extends ObjectData>({ visibleColumns, entities }: Props<T
       if (exportType === ExportType.CopyCLDR) {
         return prepareCLDRLocalePopulationForExport(entities);
       }
-      const header = visibleColumns.map((c) => csvEscape(c.key)).join(separator);
+      // The pin column is always present in the table for the UI, but it carries no data on its
+      // own. Omit it entirely when nothing is pinned; otherwise export which rows are pinned.
+      const exportColumns =
+        pageParams.pinned.length > 0
+          ? visibleColumns.map((c) =>
+              c.key === PinColumn.key
+                ? {
+                    ...c,
+                    exportValue: (obj: T) => (pageParams.pinned.includes(obj.ID) ? 'Pinned' : ''),
+                  }
+                : c,
+            )
+          : visibleColumns.filter((c) => c.key !== PinColumn.key);
+      const header = exportColumns.map((c) => csvEscape(c.key)).join(separator);
       const rows = entities.map((obj) => {
-        return visibleColumns
+        return exportColumns
           .map(({ exportValue, render }) => {
             if (exportValue) return exportValue(obj);
             return reactNodeToString(
