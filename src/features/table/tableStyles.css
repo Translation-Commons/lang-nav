@@ -65,5 +65,5 @@ td.alwaysVisible:nth-child(2) {
 /* Sticky cells paint an opaque background that would otherwise hide the row
    hover highlight, so re-apply the highlight to them while the row is hovered. */
 tbody tr:hover td.alwaysVisible {
-  background-color: var(--color-background-primary);
+  background-color: var(--color-background-hover-opaque);
 }

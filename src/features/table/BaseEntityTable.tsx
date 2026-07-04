@@ -52,10 +52,7 @@ function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                   <td
                     key={column.key}
                     className={isSticky ? `${valueType} alwaysVisible` : valueType}
-                    style={{
-                      maxWidth: MAX_COLUMN_WIDTH,
-                      padding: '0.25em 0.5em',
-                    }}
+                    style={{ maxWidth: MAX_COLUMN_WIDTH, padding: '0.25em 0.5em' }}
                   >
                     <FormattedContent content={column.render(object)} valueType={valueType} />
                   </td>

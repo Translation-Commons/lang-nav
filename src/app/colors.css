@@ -28,6 +28,10 @@
   /* Light background effect for hovers where there could be interactive elements */
   /* --color-button-primary with low opacity */
   --color-background-hover: #007bff1f;
+  /* Opaque equivalent of --color-background-hover, for elements that paint over
+     the row behind them (e.g. sticky table cells) where transparency would let
+     the underlying content show through. */
+  --color-background-hover-opaque: #e4efff;
   /* Subtle shadow for depth */
   --color-shadow: #00000017;
 
@@ -67,6 +71,7 @@
 
     --color-background: #121212;
     --color-background-hover: #3399ff1f;
+    --color-background-hover-opaque: #16222f;
     --color-shadow: #ffffff17;
 
     --color-red: #ff6e6e;
@@ -91,6 +96,7 @@
 
   --color-background: #121212;
   --color-background-hover: #3399ff1f;
+  --color-background-hover-opaque: #16222f;
   --color-shadow: #ffffff17;
 
   --color-red: #ff6e6e;
