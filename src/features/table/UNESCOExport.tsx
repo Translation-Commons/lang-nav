@@ -153,7 +153,8 @@ export const ExportTerritoryLanguageDataButton: React.FC<{ territory: TerritoryD
     const locales = territory.locales ?? [];
     trackEvent('data_exported', {
       export_type: 'Copy UNESCO TSV (Territory)',
-      object_type: ObjectType.Territory,
+      objectType: ObjectType.Territory,
+      path: typeof window !== 'undefined' ? window.location.pathname : undefined,
       row_count: locales.length,
       territory_code: territory.ID,
     });

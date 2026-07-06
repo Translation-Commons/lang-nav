@@ -51,7 +51,7 @@ function ViewMap() {
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter objects={allEntities} />}
-      <ObjectMap entities={filteredEntities} />
+      <ObjectMap entities={filteredEntities} allowSidebar={true} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>

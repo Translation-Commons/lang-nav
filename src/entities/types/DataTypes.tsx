@@ -5,7 +5,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -48,7 +48,7 @@ export type WikipediaData = {
   languageName: string;
   scriptCodes: ScriptCode[];
   wikipediaSubdomain: string; // eg. en, fr, simple, zh-classical, map-bms
-  localeCode: StandardLocaleCode; // eg. eng, fra, mis, lzh, bany1247
+  localeCodes: string; // eg. eng, fra, mis, lzh, jav/bany1247
   articles: number;
   activeUsers: number;
   url: string;
@@ -59,4 +59,11 @@ export type UniversalDeclarationOfHumanRightsData = {
   name: string; // e.g. "Af Marka"
   variant: string; // e.g. "Latn", "Cyrl", or "" for undifferentiated
   documentURL: string; // URL to the UDHR translation document -- maybe just the final path segment, like "af-marka" in "https://www.ohchr.org/en/human-rights/universal-declaration/translations/af-marka"
+};
+
+export type GoogleTranslateData = {
+  languageCodePath: string; // e.g. "man/bam" when Google lists grouped or alternate code paths
+  name: string;
+  locale?: string;
+  writingSystem?: string;
 };

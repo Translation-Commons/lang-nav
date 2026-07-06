@@ -2,8 +2,6 @@ import React from 'react';
 
 import Dropdown from '@features/layers/dropdown/Dropdown';
 import DropdownAnchor from '@features/layers/dropdown/DropdownAnchor';
-import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
-import ZIndex from '@features/layers/ZIndex';
 
 import { SelectorDisplay, SelectorDisplayProvider } from './SelectorDisplayContext';
 
@@ -29,26 +27,24 @@ export const SelectorDropdown: React.FC<React.PropsWithChildren<Props>> = ({
           display: 'inline-block',
         }}
       >
-        <HoverCardProvider zIndex={ZIndex.HoverCardInDropdown}>
-          <Dropdown
-            aria-label="selector options"
-            className="dropdown selector"
-            containerRef={containerRef}
-            isOpen={isOpen}
-            offset={12}
-            role="listbox"
-            style={{
-              width: 'min-content',
-              borderRadius: '1em',
-              backgroundColor: 'var(--color-background)',
-              maxHeight: '18em',
-              overflow: 'auto',
-              scrollbarWidth: 'thin',
-            }}
-          >
-            {children}
-          </Dropdown>
-        </HoverCardProvider>
+        <Dropdown
+          aria-label="selector options"
+          className="dropdown selector"
+          containerRef={containerRef}
+          isOpen={isOpen}
+          offset={12}
+          role="listbox"
+          style={{
+            width: 'min-content',
+            borderRadius: '1em',
+            backgroundColor: 'var(--color-background)',
+            maxHeight: '18em',
+            overflow: 'auto',
+            scrollbarWidth: 'thin',
+          }}
+        >
+          {children}
+        </Dropdown>
       </DropdownAnchor>
     </SelectorDisplayProvider>
   );

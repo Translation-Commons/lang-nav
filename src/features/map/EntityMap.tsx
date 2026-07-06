@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -24,9 +24,10 @@ import ZoomControls from './ZoomControls';
 type Props = {
   entities: ObjectData[];
   maxWidth?: number;
+  allowSidebar?: boolean;
 };
 
-const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
+const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = false }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
 
@@ -41,6 +42,19 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   });
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
+  const mapContainerRef = useRef<HTMLDivElement>(null);
+  const [mapContainerWidth, setMapContainerWidth] = useState(800);
+
+  useEffect(() => {
+    const el = mapContainerRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      const width = entries[0]?.contentRect.width;
+      if (width) setMapContainerWidth(width);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   const drawableEntities = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -64,22 +78,19 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
 
   const coloringFunctions = useColors({ objects: drawableEntities });
 
-  const pinnedEntities = useMemo(() => {
-    const drawableById = new Map(drawableEntities.map((entity) => [entity.ID, entity]));
-    return pinned
-      .map((id) => drawableById.get(id))
-      .filter((entity): entity is DrawableData => entity != null);
-  }, [pinned, drawableEntities]);
-
-  const pinCard = useCallback(
+  const onClick = useCallback(
     (entity: DrawableData) => {
-      if (pinned.includes(entity.ID)) {
-        updatePageParams({ pinned: pinned.filter((id) => id !== entity.ID) });
+      if (allowSidebar) {
+        if (pinned.includes(entity.ID)) {
+          updatePageParams({ pinned: pinned.filter((id) => id !== entity.ID) });
+        } else {
+          updatePageParams({ pinned: [...pinned, entity.ID] });
+        }
       } else {
-        updatePageParams({ pinned: [...pinned, entity.ID] });
+        updatePageParams({ objectID: entity.ID });
       }
     },
-    [pinned, updatePageParams],
+    [pinned, updatePageParams, allowSidebar],
   );
 
   const unpinCard = useCallback(
@@ -90,12 +101,16 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
   );
 
   return (
-    <div style={{ maxWidth, width: '100%', position: 'relative' }}>
-      <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+    <div ref={mapContainerRef} style={{ maxWidth, width: '100%', position: 'relative' }}>
+      <ZoomControls
+        zoomIn={zoomIn}
+        zoomOut={zoomOut}
+        resetTransform={resetTransform}
+        containerWidth={mapContainerWidth}
+      />
 
       <div
         style={{
-          border: '1px solid var(--color-text-secondary)',
           width: '100%',
           aspectRatio: MAP_ASPECT_RATIO,
           display: 'flex',
@@ -103,13 +118,15 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
           background: 'var(--color-background)',
         }}
       >
-        <MapSidebar
-          pinnedEntities={pinnedEntities}
-          objectType={objectType}
-          onClose={unpinCard}
-          hoveredId={hoveredId}
-          setHoveredId={setHoveredId}
-        />
+        {allowSidebar && (
+          <MapSidebar
+            drawableEntities={drawableEntities}
+            objectType={objectType}
+            onClose={unpinCard}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+          />
+        )}
 
         <div
           ref={containerRef}
@@ -140,21 +157,22 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000 }) => {
             {objectType !== ObjectType.Language && (
               <MapTerritories
                 drawableEntities={drawableEntities}
-                pinCard={pinCard}
+                onClick={onClick}
                 coloringFunctions={coloringFunctions}
                 hoveredId={hoveredId}
-                pinnedIds={pinned}
+                pinnedIds={allowSidebar ? pinned : []}
               />
             )}
 
             <MapCentroids
               drawableEntities={drawableEntities}
-              pinCard={pinCard}
+              onClick={onClick}
               scalar={1200 / maxWidth}
               zoomFactor={zoomFactor}
               coloringFunctions={coloringFunctions}
               hoveredId={hoveredId}
-              pinnedIds={pinned}
+              pinnedIds={allowSidebar ? pinned : []}
+              allowSidebar={allowSidebar}
             />
           </div>
         </div>

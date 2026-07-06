@@ -15,6 +15,7 @@ import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSy
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 import {
+  GoogleTranslateData,
   ObjectBase,
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
@@ -117,11 +118,13 @@ export interface LanguageData extends ObjectBase {
   primaryScriptCode?: ScriptCode;
 
   warnings: Partial<Record<LanguageField, string>>;
-  wikipedia?: WikipediaData;
+  wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
+  googleTranslate?: GoogleTranslateData[];
 
   latitude?: number;
   longitude?: number;
+  coordsSource?: LanguageSource;
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
   // References to other objects, filled in after loading the TSV

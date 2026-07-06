@@ -1,13 +1,37 @@
+import React, { useCallback } from 'react';
+
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { SearchableField } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import PinButton from '@shared/ui/PinButton';
+
 import TableColumn from './TableColumn';
 
 const NAME_COLUMN_MAX_WIDTH = '20em';
+
+const TablePinCell: React.FC<{ object: ObjectData }> = ({ object }) => {
+  const { pinned, updatePageParams } = usePageParams();
+  const isPinned = pinned.includes(object.ID);
+  const togglePin = useCallback(() => {
+    updatePageParams({
+      pinned: isPinned ? pinned.filter((id) => id !== object.ID) : [...pinned, object.ID],
+    });
+  }, [isPinned, pinned, object.ID, updatePageParams]);
+
+  return <PinButton isPinned={isPinned} onTogglePin={togglePin} />;
+};
+
+export const PinColumn: TableColumn<ObjectData> = {
+  key: 'Pin',
+  label: '',
+  render: (object) => <TablePinCell object={object} />,
+  exportValue: () => '',
+};
 
 export const CodeColumn: TableColumn<ObjectData> = {
   key: 'ID',

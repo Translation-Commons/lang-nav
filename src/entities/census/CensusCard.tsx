@@ -47,13 +47,15 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         field={Field.SourceType}
         description="The type of organization that collected this census and/or presented it"
       >
-        {census.collector && <HoverableObjectName object={census.collector} labelSource="code" />}
-        {census.presenter && (
-          <>
-            via
-            <HoverableObjectName object={census.presenter} labelSource="code" />
-          </>
-        )}
+        <div>
+          {census.collector && <HoverableObjectName object={census.collector} />}
+          {census.presenter && (
+            <>
+              {' '}
+              via <HoverableObjectName object={census.presenter} style={{ display: 'inline' }} />
+            </>
+          )}
+        </div>
       </CardField>
 
       <CardField

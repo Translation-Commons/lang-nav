@@ -1,12 +1,15 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 
-const LanguageModalitySelector: React.FC = () => {
+type Props = { display?: SelectorDisplay };
+
+const LanguageModalitySelector: React.FC<Props> = ({ display }) => {
   const { modalityFilter, updatePageParams } = usePageParams();
 
   const selectorDescription =
@@ -29,6 +32,7 @@ const LanguageModalitySelector: React.FC = () => {
       }
       selected={modalityFilter}
       getOptionLabel={getModalityLabel}
+      display={display}
     />
   );
 };

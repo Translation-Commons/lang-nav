@@ -230,7 +230,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 };
 
 const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { officialStatus, wikipedia, localeSource, relatedLocales } = locale;
+  const { officialStatus, wikipedias, localeSource, relatedLocales } = locale;
   return (
     <DetailsSection title="Other">
       {officialStatus && (
@@ -239,7 +239,7 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
       <DetailsField title="Indigeneity" description={getIndigeneityDescription()}>
         <LocaleIndigeneityDisplay loc={locale} />
       </DetailsField>
-      {wikipedia && (
+      {wikipedias && wikipedias.length > 0 && (
         <DetailsField title="Wikipedia">
           <ObjectWikipediaInfo object={locale} />
         </DetailsField>

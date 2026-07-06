@@ -13,7 +13,7 @@ import DrawableData from './DrawableData';
 type Props = {
   drawableEntities: DrawableData[];
   coloringFunctions: ColoringFunctions;
-  pinCard: (obj: DrawableData) => void;
+  onClick: (obj: DrawableData) => void;
   hoveredId?: string | null;
   pinnedIds?: string[];
 };
@@ -21,7 +21,7 @@ type Props = {
 const MapTerritories: React.FC<Props> = ({
   drawableEntities,
   coloringFunctions: { colorBy, getColor },
-  pinCard,
+  onClick,
   hoveredId,
   pinnedIds = [],
 }) => {
@@ -54,36 +54,35 @@ const MapTerritories: React.FC<Props> = ({
 
     forEachTerritory((territory, element) => {
       if (isTerritoryInList(territory.ID)) {
+        element.classList.add('inList');
         if (colorBy !== Field.None) {
           const color = getColor(territory);
           element.style.fill = color || 'var(--color-button-secondary)';
         } else {
           element.style.fill = 'var(--color-button-primary)';
         }
-
-        if (pinnedIds.includes(territory.ID)) {
-          element.style.stroke = 'var(--color-text)';
-          element.style.strokeWidth = '2';
-        } else {
-          element.style.stroke = '';
-          element.style.strokeWidth = '';
-        }
       } else {
-        element.style.fill = '#bcbcbc';
-      }
-
-      element.style.cursor = 'pointer';
-
-      if (hoveredId === territory.ID) {
-        element.style.opacity = '0.7';
-      } else {
-        element.style.opacity = '1';
+        element.classList.remove('inList');
+        element.style.fill = '#bcbcbcbc';
       }
     });
-  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded, hoveredId, pinnedIds]);
+  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded]);
+
+  // Manage hovered and pinned states
+  useEffect(() => {
+    if (!svgLoaded) return;
+
+    forEachTerritory((territory, element) => {
+      element.classList.add('mapTerritory');
+      element.classList.remove('hovered');
+      element.classList.remove('pinned');
+      if (pinnedIds.includes(territory.ID)) element.classList.add('pinned');
+      if (hoveredId === territory.ID) element.classList.add('hovered');
+    });
+  }, [svgLoaded, hoveredId, pinnedIds]);
 
   const buildOnMouseEnter = useCallback(
-    (territory: TerritoryData, element: SVGElement) => (ev: MouseEvent) => {
+    (territory: TerritoryData) => (ev: MouseEvent) => {
       showHoverCard(
         <div>
           <strong>{territory.nameDisplay}</strong>
@@ -92,16 +91,13 @@ const MapTerritories: React.FC<Props> = ({
         ev.clientX,
         ev.clientY,
       );
-
-      element.style.opacity = '0.7';
     },
     [showHoverCard],
   );
 
   const buildOnMouseLeave = useCallback(
-    (element: SVGElement) => () => {
+    () => () => {
       onMouseLeaveTriggeringElement();
-      element.style.opacity = '1';
     },
     [onMouseLeaveTriggeringElement],
   );
@@ -114,11 +110,11 @@ const MapTerritories: React.FC<Props> = ({
     forEachTerritory((territory, element) => {
       const handleClick = (ev: MouseEvent) => {
         ev.stopPropagation();
-        pinCard(territory);
+        onClick(territory);
       };
 
-      const handleMouseEnter = buildOnMouseEnter(territory, element);
-      const handleMouseLeave = buildOnMouseLeave(element);
+      const handleMouseEnter = buildOnMouseEnter(territory);
+      const handleMouseLeave = buildOnMouseLeave();
 
       element.addEventListener('click', handleClick);
       element.addEventListener('mouseenter', handleMouseEnter);
@@ -132,7 +128,7 @@ const MapTerritories: React.FC<Props> = ({
     });
 
     return () => cleanupListeners.forEach((cleanup) => cleanup());
-  }, [buildOnMouseEnter, buildOnMouseLeave, pinCard, territories, svgLoaded]);
+  }, [buildOnMouseEnter, buildOnMouseLeave, onClick, territories, svgLoaded]);
 
   return (
     <div

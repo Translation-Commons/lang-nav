@@ -2,14 +2,15 @@ import React from 'react';
 
 type Props = {
   href: string;
+  title?: string;
 };
 
 /**
  * For external links
  */
-export default function LinkButton({ href, children }: React.PropsWithChildren<Props>) {
+export default function LinkButton({ href, children, title }: React.PropsWithChildren<Props>) {
   return (
-    <a href={href} target="_blank" rel="noopener noreferrer">
+    <a href={href} target="_blank" rel="noopener noreferrer" title={title ?? href}>
       <button
         role="link"
         style={{

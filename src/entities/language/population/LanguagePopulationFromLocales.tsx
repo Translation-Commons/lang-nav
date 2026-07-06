@@ -33,7 +33,11 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<{ lang: LanguageDa
   const localesFromUniqueTerritories = Object.values(
     groupBy(
       lang.locales
-        .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
+        .filter(
+          (loc) =>
+            loc.territory?.scope === TerritoryScope.Country ||
+            loc.territory?.scope === TerritoryScope.Dependency,
+        )
         .sort(sortByPopulation),
       (locale) => locale.territoryCode || '',
     ),

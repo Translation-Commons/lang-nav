@@ -41,7 +41,7 @@ describe('TextInput component', () => {
 
     // Submit input
     await user.keyboard('{Enter}');
-    await waitFor(() => expect(onSubmit).toHaveBeenCalledWith('test input'));
+    await waitFor(() => expect(onSubmit).toHaveBeenCalledWith('test input', 'input'));
   });
 
   it('shows suggestions and handles suggestion submit events', async () => {
@@ -75,8 +75,8 @@ describe('TextInput component', () => {
     await user.click(bananaOption);
     await flushTimers();
 
-    // Ensure onSubmit is called with suggestion value
-    expect(onSubmit).toHaveBeenCalledWith('banana');
+    // Ensure onSubmit is called with suggestion value and flagged as a suggestion
+    expect(onSubmit).toHaveBeenCalledWith('banana', 'suggestion');
 
     // If an input does not have suggestions, the listbox should not appear
     await user.click(input);
@@ -113,7 +113,7 @@ describe('TextInput component', () => {
     await user.type(input, 'another test');
     await user.keyboard('{Enter}');
     await flushTimers();
-    expect(onSubmit).toHaveBeenCalledWith('another test');
+    expect(onSubmit).toHaveBeenCalledWith('another test', 'input');
   });
 
   it('test that clicking outside hides suggestions', async () => {

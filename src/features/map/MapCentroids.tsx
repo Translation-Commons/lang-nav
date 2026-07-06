@@ -17,22 +17,24 @@ import './map.css';
 
 type Props = {
   drawableEntities: DrawableData[];
-  pinCard: (obj: DrawableData) => void;
+  onClick: (obj: DrawableData) => void;
   scalar: number;
   zoomFactor: number;
   coloringFunctions: ColoringFunctions;
   hoveredId?: string | null;
   pinnedIds?: string[];
+  allowSidebar?: boolean;
 };
 
 const MapCentroids: React.FC<Props> = ({
   drawableEntities,
-  pinCard,
+  onClick,
   scalar,
   zoomFactor,
   coloringFunctions: { getColor, colorBy },
   hoveredId,
   pinnedIds = [],
+  allowSidebar,
 }) => {
   const { scaleBy, objectType } = usePageParams();
   const { getCurrentEntities } = usePagination<DrawableData>();
@@ -55,13 +57,15 @@ const MapCentroids: React.FC<Props> = ({
       showHoverCard(
         <div>
           <strong>{obj.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>Click for more</div>
+          <div style={{ color: 'var(--color-text-secondary)' }}>
+            {allowSidebar ? 'Pin to sidebar' : 'Open in details panel'}
+          </div>
         </div>,
         e.clientX,
         e.clientY,
       );
     },
-    [showHoverCard],
+    [showHoverCard, allowSidebar],
   );
 
   return (
@@ -85,7 +89,7 @@ const MapCentroids: React.FC<Props> = ({
           object={obj}
           scale={scalar * getScale(obj)}
           zoomFactor={zoomFactor}
-          pinCard={pinCard}
+          onClick={onClick}
           onMouseEnter={buildOnMouseEnter(obj)}
           onMouseLeave={onMouseLeaveTriggeringElement}
           isHovered={hoveredId === obj.ID}
@@ -101,7 +105,7 @@ type NodeProps = {
   object: DrawableData;
   scale: number;
   zoomFactor: number;
-  pinCard: (obj: DrawableData) => void;
+  onClick: (obj: DrawableData) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
   isHovered?: boolean;
@@ -113,7 +117,7 @@ const ObjectNode: React.FC<NodeProps> = ({
   color,
   scale,
   zoomFactor,
-  pinCard,
+  onClick,
   onMouseEnter,
   onMouseLeave,
   isHovered,
@@ -136,7 +140,7 @@ const ObjectNode: React.FC<NodeProps> = ({
           object={object}
           scale={scale}
           zoomFactor={zoomFactor}
-          pinCard={pinCard}
+          onClick={onClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
           isHovered={isHovered}
@@ -152,33 +156,20 @@ const Circle: React.FC<NodeProps> = ({
   color,
   object,
   scale,
-  pinCard,
+  onClick,
   onMouseEnter,
   onMouseLeave,
   isHovered,
   isPinned,
 }) => (
   <circle
-    r={scale + 1.5 + (isHovered ? 2 : 0) + (isPinned ? 0.8 : 0)}
-    strokeWidth={isPinned ? 2 : isHovered ? 1.5 : 0.4}
+    className={(isHovered ? 'hovered' : '') + (isPinned ? ' pinned' : '')}
+    r={scale + 1.5}
     fill={color ?? 'transparent'}
-    stroke={
-      isPinned
-        ? 'var(--color-text)'
-        : isHovered
-          ? 'var(--color-button-primary)'
-          : color == null
-            ? 'var(--color-button-primary)'
-            : 'transparent'
-    }
-    style={
-      isHovered
-        ? { filter: 'brightness(1.2)', transition: 'all 0.15s ease-in-out' }
-        : { transition: 'all 0.15s ease-in-out' }
-    }
+    stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
     onClick={(e) => {
       e.stopPropagation();
-      pinCard(object);
+      onClick(object);
     }}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}

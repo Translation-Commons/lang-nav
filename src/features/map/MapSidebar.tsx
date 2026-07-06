@@ -1,12 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
 
 import DrawableData from './DrawableData';
 import MapCard from './MapCard';
 
 type Props = {
-  pinnedEntities: DrawableData[];
+  drawableEntities: DrawableData[];
   objectType: ObjectType;
   onClose: (id: string) => void;
   hoveredId: string | null;
@@ -14,12 +15,21 @@ type Props = {
 };
 
 const MapSidebar: React.FC<Props> = ({
-  pinnedEntities,
+  drawableEntities,
   objectType,
   onClose,
   hoveredId,
   setHoveredId,
 }) => {
+  const { pinned } = usePageParams();
+
+  const pinnedEntities = useMemo(() => {
+    const drawableById = new Map(drawableEntities.map((entity) => [entity.ID, entity]));
+    return pinned
+      .map((id) => drawableById.get(id))
+      .filter((entity): entity is DrawableData => entity != null);
+  }, [pinned, drawableEntities]);
+
   if (pinnedEntities.length === 0) return null;
 
   return (
@@ -28,7 +38,6 @@ const MapSidebar: React.FC<Props> = ({
         width: '300px',
         height: '100%',
         overflowY: 'auto',
-        borderRight: '1px solid var(--color-text-secondary)',
         display: 'flex',
         flexDirection: 'column',
         gap: '1em',

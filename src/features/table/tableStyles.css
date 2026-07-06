@@ -29,3 +29,41 @@ summary:hover {
 summary:focus {
   outline: none;
 }
+
+/* The pin column button is only revealed when the row is hovered or the row is
+   pinned. The button's appearance lives in pinButton.css. */
+tbody tr .PinButton {
+  visibility: hidden;
+}
+
+tbody tr:hover .PinButton,
+tbody tr .PinButton.pinned {
+  visibility: visible;
+}
+
+/* The first two body columns (the pin column and the first data column) stay
+   pinned to the left edge while the table is scrolled horizontally. */
+td.alwaysVisible {
+  /* Pin column width, reused as the left offset of the second sticky column. */
+  --pin-column-width: 2.75em;
+  position: sticky;
+  background-color: var(--color-background);
+  z-index: 5; /* ZIndex.TableStickyColumn */
+}
+
+td.alwaysVisible:first-child {
+  left: 0;
+  box-sizing: border-box;
+  width: var(--pin-column-width);
+  min-width: var(--pin-column-width);
+}
+
+td.alwaysVisible:nth-child(2) {
+  left: var(--pin-column-width);
+}
+
+/* Sticky cells paint an opaque background that would otherwise hide the row
+   hover highlight, so re-apply the highlight to them while the row is hovered. */
+tbody tr:hover td.alwaysVisible {
+  background-color: var(--color-background-hover-opaque);
+}

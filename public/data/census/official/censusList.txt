@@ -3,6 +3,7 @@ bs2013
 ca2021
 cl2024
 cn-cmn2020
+cw2023
 de
 es2021
 gn2014
@@ -11,14 +12,17 @@ in2011c16
 in2011c17
 it
 lr
+mg2018
 np2021
 pk2023
 py
 ru2020
 sg
+sr2012
 us_asc
 us2023
 vi
 xk
 yt
+za
 zm

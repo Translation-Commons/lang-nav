@@ -1,7 +1,8 @@
-import { ExternalLinkIcon, X } from 'lucide-react';
+import { PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
+import ZIndex from '@features/layers/ZIndex';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -26,44 +27,56 @@ const MapCard: React.FC<{
         : { objectID: drawnEntity.ID },
     );
 
-  let content: React.ReactNode;
-  if (objectType === ObjectType.Census && drawnEntity.type === ObjectType.Territory)
-    content = <CensusesInTerritory territory={drawnEntity} />;
-  else if (objectType === ObjectType.Locale && drawnEntity.type === ObjectType.Territory)
-    content = <LocalesInTerritoryCard territory={drawnEntity} />;
-  else if (objectType === ObjectType.WritingSystem && drawnEntity.type === ObjectType.Territory)
-    content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
-  else content = <ObjectCard object={drawnEntity} />;
+  let content: React.ReactNode = <ObjectCard object={drawnEntity} />;
+  let clickDescription = 'Open in details panel';
+  if (drawnEntity.type === ObjectType.Territory) {
+    switch (objectType) {
+      case ObjectType.Census:
+        content = <CensusesInTerritory territory={drawnEntity} />;
+        clickDescription = 'Open table of censuses in this territory';
+        break;
+      case ObjectType.Locale:
+        content = <LocalesInTerritoryCard territory={drawnEntity} />;
+        clickDescription = 'Open table of locales in this territory';
+        break;
+      case ObjectType.WritingSystem:
+        content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
+        clickDescription = 'Open table of writing systems in this territory';
+        break;
+    }
+  }
 
   return (
     <div
       style={{
         position: 'relative',
-        maxWidth: 260,
+        maxWidth: 300,
         fontSize: '0.75em',
         background: 'var(--color-background)',
         borderRadius: '0.75em',
         boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)',
-        padding: '3.25em 1em 1em',
+        padding: '1em',
+        textAlign: 'left',
       }}
     >
       <div
         style={{
           position: 'absolute',
-          top: '0.5em',
+          top: '0',
           right: '0.5em',
+          transform: 'translateY(-50%)',
           display: 'flex',
-          gap: '0.25em',
-          zIndex: 1,
+          gap: '0.5em',
+          zIndex: ZIndex.MapZoomControls,
+          fontSize: '.8em',
         }}
       >
-        <HoverableButton onClick={openDetails}>
-          <ExternalLinkIcon size="1.25em" />
-        </HoverableButton>
-
-        <HoverableButton onClick={onClose}>
-          <X size="1.25em" />
-        </HoverableButton>
+        <HoverableIcon
+          Icon={SquareArrowUpRightIcon}
+          onClick={openDetails}
+          description={clickDescription}
+        />
+        <HoverableIcon Icon={PinOffIcon} onClick={onClose} description="Unpin" />
       </div>
 
       {content}

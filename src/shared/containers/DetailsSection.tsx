@@ -14,7 +14,7 @@ const DetailsSection: React.FC<PropsWithChildren<{ title: ReactNode }>> = ({ chi
         flexDirection: 'column',
       }}
     >
-      <h3 style={{ marginBottom: '0.25em', textTransform: 'uppercase' }}>{title}</h3>
+      <h3 style={{ marginBottom: '0em', textTransform: 'uppercase' }}>{title}</h3>
       {children}
     </div>
   );

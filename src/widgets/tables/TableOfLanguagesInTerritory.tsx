@@ -73,7 +73,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           },
           {
             key: 'Population Source',
-            render: (loc) => <LocaleCensusCitation locale={loc} size="short" />,
+            render: (loc) => <LocaleCensusCitation locale={loc} />,
             valueType: TableValueType.Population,
             isInitiallyVisible: false,
           },

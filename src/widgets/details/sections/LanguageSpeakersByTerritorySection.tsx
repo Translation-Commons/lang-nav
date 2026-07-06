@@ -15,7 +15,11 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
   // Get locales from unique territories
   const locales = uniqueBy(
     lang.locales
-      .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
+      .filter(
+        (loc) =>
+          loc.territory?.scope === TerritoryScope.Country ||
+          loc.territory?.scope === TerritoryScope.Dependency,
+      )
       .sort(sortByPopulation),
     (locale) => locale.territoryCode || '',
   );

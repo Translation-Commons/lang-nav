@@ -3,6 +3,7 @@ import React from 'react';
 import useHoverCard from './useHoverCard';
 
 type HoverableProps = {
+  ariaLabel?: string;
   buttonType?: 'button' | 'submit' | 'reset';
   children: React.ReactNode;
   className?: string;
@@ -14,6 +15,7 @@ type HoverableProps = {
 };
 
 const HoverableButton: React.FC<HoverableProps> = ({
+  ariaLabel,
   buttonType = 'button',
   children,
   className,
@@ -28,6 +30,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
   if (hoverContent == null) {
     return (
       <button
+        aria-label={ariaLabel}
         className={className}
         disabled={disabled}
         onClick={onClick}
@@ -53,6 +56,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
 
   return (
     <button
+      aria-label={ariaLabel}
       className={className}
       disabled={disabled}
       onMouseEnter={handleMouseEnter}

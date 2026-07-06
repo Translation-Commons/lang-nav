@@ -16,35 +16,16 @@ type Props = {
 const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
   const { census, source } = locale.pop.speaking;
 
-  if (census != null) return <CensusCitation census={census} size={size} />;
+  if (census != null) return <CensusCitation census={census} />;
   if (source != null) return <PopulationSource populationSource={source} size={size} />;
   return <Deemphasized>n/a</Deemphasized>;
 };
 
-const CensusCitation: React.FC<{ census: CensusData; size: 'short' | 'full' }> = ({
-  census,
-  size,
-}) => {
-  const { yearCollected, collectorName, collectorType, presentedBy } = census;
-  if (presentedBy === 'CLDR') {
-    // Leave out the date from CLDR, it's not available from the source
-    return (
-      <HoverableObject object={census}>{collectorName ?? presentedBy ?? 'Unknown'}</HoverableObject>
-    );
-  }
-  let name = collectorName;
-  if (name == null || name === '' || size === 'short') {
-    switch (collectorType) {
-      case 'Government':
-        name = census.territory?.nameDisplay ?? census.isoRegionCode;
-        break;
-      default:
-        name = collectorType;
-    }
-  }
+const CensusCitation: React.FC<{ census: CensusData }> = ({ census }) => {
+  const { yearCollected, collector, presenter } = census;
   return (
     <HoverableObject object={census}>
-      {name} {yearCollected}
+      {collector?.codeDisplay ?? presenter?.codeDisplay ?? 'Unknown'} {yearCollected}
     </HoverableObject>
   );
 };

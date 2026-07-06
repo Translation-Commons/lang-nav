@@ -7249,7 +7249,7 @@ hvc	hait1241	Haitian Vodoun Culture Language			Latn	1		uncl1493	Yes
 ihb	ihab1241	Iha Based Pidgin	bahasa Iha Based Pidgin		Latn	1		ihab1242	Yes	
 iin	thii1234	Thiin			Latn	1		djiw1240	No	Extinct language
 ikr	ikar1243	Ikaranggal			Latn	1		cent2337	No	Extinct language
-ile	inte1260	Occidental	Interlingue	Spoken & Written	Latn	1		arti1236	Possibly	Constructed language
+ile	inte1260	Interlingue	Interlingue	Spoken & Written	Latn	1		arti1236	Possibly	Constructed language
 jan	jand1248	Jandai			Latn	1		yaga1256	No	Extinct language
 jbi	badj1244	Badjiri			Latn	1		badj1246	No	Extinct language
 jbw	yawi1239	Yawijibaya			Latn	1		worr1237	Yes, with caveat	Some sources report this as extinct, some as active
@@ -7739,7 +7739,7 @@ mwy	mosi1247	Mosiro						okie1247	No	Declared non-existent by ISO
 mxi	moza1249	Mozarabic	مُزَرَب		Latn			unsh1234	Probably not	Historical langauge
 mzg	mona1241	Monastic Sign Language		Sign	Zxxx			auxi1235	Possibly	This is more of a generalized grouping of many individual sign languages thoroughout Europe than a single language. It's probably also not active.
 nah		Nahuatl	Náhuatl	Spoken & Written					Possibly	ISO recognises Nahuatl as a language family. Huasteca Nahuatl [nhe] is one of the larger constituents and it is usually the expected version.
-nap-tara	pugl1238	Tarantino						neap1235	Possibly	It's arguably a dialect of a dialect -- but it does have its own Wikipedia, which is unusual
+pugl1238	pugl1238	Tarantino						neap1235	Possibly	It's arguably a dialect of a dialect -- but it does have its own Wikipedia, which is unusual
 nci	clas1250	Classical Nahuatl	Nāhuatlahtōlli	Mostly Written	Latn			cent2258	Possibly	Nahuatl has many spoken variations but it appears that most written content (eg. the Nahuatl Wikipedia) is written in Classical Nahuatl since it's the common denominator between the nahua communities.
 ndf		Nadruvian			Cyrl				Probably not	Historical langauge
 ned	ndeg1238	Nde-Gbite			Latn			book1242	Yes	

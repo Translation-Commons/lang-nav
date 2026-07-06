@@ -61,7 +61,10 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
       <DetailsField
         title="Wikipedia"
         endContent={
-          lang.wikipedia && <LinkButton href={lang.wikipedia.url}>{lang.wikipedia.url}</LinkButton>
+          lang.wikipedias &&
+          lang.wikipedias.length > 0 && (
+            <LinkButton href={lang.wikipedias[0].url}>{lang.wikipedias[0].url}</LinkButton>
+          )
         }
       >
         <ObjectWikipediaInfo object={lang} />

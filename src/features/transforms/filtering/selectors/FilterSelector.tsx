@@ -31,17 +31,17 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
     case Field.WritingSystem:
       return <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />;
     case Field.Modality:
-      return <LanguageModalitySelector />;
+      return <LanguageModalitySelector display={SelectorDisplay.FilterList} />;
     case Field.LanguageScope:
-      return <LanguageScopeSelector />;
+      return <LanguageScopeSelector display={SelectorDisplay.FilterList} />;
     case Field.TerritoryScope:
-      return <TerritoryScopeSelector />;
+      return <TerritoryScopeSelector display={SelectorDisplay.FilterList} />;
     case Field.ISOStatus:
-      return <LanguageISOStatusSelector />;
+      return <LanguageISOStatusSelector display={SelectorDisplay.FilterList} />;
     case Field.Name:
       return <SearchBar />; // Technically correct but not recommended usage
     case Field.SourceForLanguage:
-      return <LanguageSourceSelector display={SelectorDisplay.ButtonList} />;
+      return <LanguageSourceSelector display={SelectorDisplay.FilterList} />;
     case Field.Population:
       return <PopulationFilterSelector />;
     default:
@@ -56,11 +56,28 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
   const { objectType } = usePageParams();
-  const filterBys = getApplicableFields(TransformEnum.Filter, objectType).filter(
-    (f) => f !== Field.Name,
-  ); // This shouldn't return the search bar
+  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, objectType).filter(
+    (f) => f !== Field.Name, // This should not return the search bar
+  );
+  const otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(
+    (f) => !primaryFilters.includes(f) && f !== Field.Name,
+  );
 
-  return filterBys.map((filterBy) => <FilterSelector field={filterBy} key={filterBy} />);
+  return (
+    <>
+      {primaryFilters.map((filterBy) => (
+        <FilterSelector field={filterBy} key={filterBy} />
+      ))}
+      {otherFilters.length > 0 && (
+        <details>
+          <summary>Filters for related entities</summary>
+          {otherFilters.map((filterBy) => (
+            <FilterSelector field={filterBy} key={filterBy} />
+          ))}
+        </details>
+      )}
+    </>
+  );
 };
 
 export default FilterSelector;

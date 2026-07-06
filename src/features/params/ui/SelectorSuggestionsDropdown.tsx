@@ -84,7 +84,14 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
   );
   if (pageParameter === PageParamKey.searchString) {
     // Internal links to open the details page
-    return <SuggestionRowOpenDetails suggestion={suggestion} style={style} />;
+    return (
+      <SuggestionRowOpenDetails
+        suggestion={suggestion}
+        style={style}
+        onClick={onClick}
+        onMouseDown={onKeyDown}
+      />
+    );
   }
 
   return (
@@ -103,7 +110,9 @@ const SuggestionRow: React.FC<SuggestionRowProps> = ({
 const SuggestionRowOpenDetails: React.FC<{
   suggestion: Suggestion;
   style?: React.CSSProperties;
-}> = ({ style, suggestion }) => {
+  onClick?: (value: Suggestion) => void;
+  onMouseDown?: () => void;
+}> = ({ style, suggestion, onClick, onMouseDown }) => {
   const { objectID, searchString, label } = suggestion;
 
   return (
@@ -113,6 +122,8 @@ const SuggestionRowOpenDetails: React.FC<{
       keepOldParams={true}
       params={{ objectID, searchString }}
       style={style}
+      onMouseDown={onMouseDown}
+      onClick={onClick ? () => onClick(suggestion) : undefined}
     >
       {label}
     </HoverableInternalLinkButton>

@@ -14,9 +14,10 @@ const ObjectWikipediaInfo: React.FC<{ object: ObjectData }> = ({ object }) => {
 
   // If the object doesn't have a direct wikipedia, then we may be able to find the status
   // from the linked language (for locales) the logic is handled in WikipediaStatusDisplay
-  if (!object.wikipedia) return <WikipediaStatusDisplay object={object} />;
+  if (!object.wikipedias || object.wikipedias.length === 0)
+    return <WikipediaStatusDisplay object={object} />;
 
-  const wikipedia = object.wikipedia as WikipediaData;
+  const wikipedia = object.wikipedias[0] as WikipediaData;
 
   return (
     <>
@@ -33,8 +34,11 @@ const ObjectWikipediaInfo: React.FC<{ object: ObjectData }> = ({ object }) => {
 };
 
 export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (object?.type === ObjectType.Locale && !object.wikipedia) {
-    if (object.language?.wikipedia) {
+  if (
+    object?.type === ObjectType.Locale &&
+    (!object.wikipedias || object.wikipedias.length === 0)
+  ) {
+    if (object.language?.wikipedias && object.language.wikipedias.length > 0) {
       return (
         <>
           <WikipediaStatusDisplay object={object.language} /> (see{' '}
@@ -45,24 +49,28 @@ export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ obje
     return null;
   }
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  const { wikipedia } = object;
-  if (!wikipedia) return <Deemphasized>No wiki</Deemphasized>;
+  const { wikipedias } = object;
+  if (!wikipedias || wikipedias.length === 0) return <Deemphasized>No wiki</Deemphasized>;
 
-  return <span style={{ color: getStatusColor(wikipedia.status) }}>{wikipedia.status}</span>;
+  return (
+    <span style={{ color: getStatusColor(wikipedias[0].status) }}>{wikipedias[0].status}</span>
+  );
 };
 
 export const WikipediaArticles: React.FC<{ object?: ObjectData }> = ({ object }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
+  if (!object.wikipedias || object.wikipedias.length === 0) return null;
+  if (object.wikipedias[0].status !== WikipediaStatus.Active) return null;
 
-  return object.wikipedia.articles.toLocaleString();
+  return object.wikipedias[0].articles.toLocaleString();
 };
 
 export const WikipediaActiveUsers: React.FC<{ object?: ObjectData }> = ({ object }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  if (object.wikipedia?.status !== WikipediaStatus.Active) return null;
+  if (!object.wikipedias || object.wikipedias.length === 0) return null;
+  if (object.wikipedias[0].status !== WikipediaStatus.Active) return null;
 
-  return <CountOfPeople count={object.wikipedia.activeUsers} />;
+  return <CountOfPeople count={object.wikipedias[0].activeUsers} />;
 };
 
 export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }> = ({
@@ -70,9 +78,13 @@ export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }>
   showURL = false,
 }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  if (!object.wikipedia) return null;
+  if (!object.wikipedias || object.wikipedias.length === 0) return null;
 
-  return <LinkButton href={object.wikipedia.url}>{showURL && object.wikipedia.url}</LinkButton>;
+  return (
+    <LinkButton href={`https://${object.wikipedias[0].url}`}>
+      {showURL && object.wikipedias[0].url}
+    </LinkButton>
+  );
 };
 
 export function getStatusColor(status: WikipediaStatus) {
