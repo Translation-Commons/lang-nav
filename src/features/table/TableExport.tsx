@@ -125,7 +125,9 @@ function TableExport<T extends ObjectData>({ visibleColumns, entities }: Props<T
       setIsExporting(true);
       trackEvent('data_exported', {
         export_type: exportType,
-        object_type: pageParams.objectType,
+        objectType: pageParams.objectType,
+        view: pageParams.view,
+        path: typeof window !== 'undefined' ? window.location.pathname : undefined,
         row_count: entities.length,
         column_count: visibleColumns.length,
       });
