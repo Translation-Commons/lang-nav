@@ -1,11 +1,9 @@
-import { XIcon } from 'lucide-react';
 import React from 'react';
 
 import ResizablePanel from '@widgets/controls/ResizablePanel';
 import ObjectPath from '@widgets/pathnav/ObjectPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
@@ -18,7 +16,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 const ObjectDetails = React.lazy(() => import('./ObjectDetails'));
 
 const DetailsPanel: React.FC = () => {
-  const { objectID, objectType } = usePageParams();
+  const { objectID, objectType, updatePageParams } = usePageParams();
   const object = getObjectFromID(objectID);
 
   return (
@@ -27,6 +25,7 @@ const DetailsPanel: React.FC = () => {
       isOpen={objectID != null}
       defaultWidth={900}
       title={<DetailsTitle object={object} />}
+      onClose={() => updatePageParams({ objectID: undefined })}
     >
       <DetailsBody>
         <PathContainer style={{ marginTop: '0.5em' }}>
@@ -47,32 +46,11 @@ const DetailsPanel: React.FC = () => {
 };
 
 const DetailsTitle: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  const { updatePageParams } = usePageParams();
+  if (!object) return 'Details';
   return (
-    <div
-      style={{ display: 'flex', alignItems: 'start', gap: '1em', justifyContent: 'space-between' }}
-    >
-      <div style={{ padding: '0.125em' }}>
-        {/* Invisible but here to balance the padding for the title */}
-        <XIcon size="1em" style={{ color: 'var(--color-background)' }} />
-      </div>
-      {object ? (
-        <div>
-          <ObjectTitle object={object} highlightSearchMatches={false} />
-          <ObjectSubtitle object={object} highlightSearchMatches={false} />
-        </div>
-      ) : (
-        'Details'
-      )}
-      <HoverableButton
-        className="primary"
-        hoverContent="Close"
-        onClick={() => updatePageParams({ objectID: undefined })}
-        style={{ padding: '0.125em', display: 'flex' }}
-        aria-label="Close"
-      >
-        <XIcon size="1em" />
-      </HoverableButton>
+    <div>
+      <ObjectTitle object={object} highlightSearchMatches={false} />
+      <ObjectSubtitle object={object} highlightSearchMatches={false} />
     </div>
   );
 };

@@ -151,7 +151,7 @@ div h3:first-child {
 .hoverableText,
 .selector .hoverableText {
   background-color: transparent;
-  color: var(--color-button-primary);
+  text-decoration: underline dotted;
   cursor: pointer;
   border-radius: 0.5em;
   padding: 0 0.25em;
@@ -161,7 +161,6 @@ div h3:first-child {
 .hoverableText:hover,
 .selector .hoverableText:hover {
   color: var(--color-button-primary);
-  background-color: var(--color-background-hover);
 }
 
 tbody tr:hover {

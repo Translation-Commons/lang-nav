@@ -58,7 +58,7 @@
 .selector input,
 .selector label {
   border-width: 0.125em;
-  border-color: var(--color-button-primary);
+  border-color: var(--color-text);
   border-style: solid;
 }
 
@@ -69,12 +69,12 @@
 
 .selector button,
 .selector .option {
-  color: var(--color-button-primary);
+  /* color: var(--color-button-primary); */
   background-color: var(--color-background);
 }
 
 .selector input.empty {
-  color: var(--color-button-primary);
+  color: var(--color-text);
   background-color: var(--color-background);
 }
 

@@ -1,4 +1,4 @@
-circle {
+.mapCentroidCircle {
   transition:
     fill 0.25s,
     stroke 0.25s,
@@ -8,14 +8,14 @@ circle {
   stroke-width: 1px;
 }
 
-circle:hover,
-circle.hovered {
+.mapCentroidCircle:hover,
+.mapCentroidCircle.hovered {
   filter: brightness(1.2);
   scale: 1.5;
   stroke: var(--color-button-primary);
 }
 
-circle.pinned {
+.mapCentroidCircle.pinned {
   stroke: var(--color-button-primary);
 }
 

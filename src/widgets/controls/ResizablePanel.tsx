@@ -1,5 +1,7 @@
+import { XIcon } from 'lucide-react';
 import React, { ReactNode, useCallback } from 'react';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import ZIndex from '@features/layers/ZIndex';
 
 type Props = {
@@ -7,6 +9,7 @@ type Props = {
   defaultWidth: number;
   title: ReactNode;
   isOpen: boolean;
+  onClose: () => void;
 };
 
 const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
@@ -15,6 +18,7 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   isOpen,
   purpose,
   title,
+  onClose,
 }) => {
   const [panelWidth, setPanelWidth] = React.useState(defaultWidth);
   const panelSide = purpose === 'filters' ? 'left' : 'right';
@@ -28,7 +32,7 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         borderRight: panelSide === 'left' ? '2px solid var(--color-button-primary)' : undefined,
         borderLeft: panelSide === 'right' ? '2px solid var(--color-button-primary)' : undefined,
         transition: shouldEaseTransition ? 'max-width 0.3s ease-in-out' : undefined,
-        overflowX: 'hidden',
+        overflow: 'hidden',
         position: 'relative',
       }}
     >
@@ -50,13 +54,38 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
           width: panelWidth,
         }}
       >
-        <div style={{ textAlign: 'center', fontSize: '2em', padding: '0.25em' }}> {title}</div>
+        <div
+          style={{
+            textAlign: 'center',
+            fontSize: '2em',
+            padding: '0.25em 0.5em',
+            position: 'relative',
+          }}
+        >
+          <HoverableButton
+            hoverContent="Close"
+            onClick={onClose}
+            style={{
+              cursor: 'pointer',
+              padding: '0.125em',
+              position: 'absolute',
+              top: '0.25em',
+              right: panelSide === 'right' ? '0.25em' : '',
+              left: panelSide === 'left' ? '0.25em' : '',
+            }}
+            aria-label="Close"
+          >
+            <XIcon size=".75em" display="block" />
+          </HoverableButton>
+          {title}
+        </div>
         <div
           style={{
             overflowY: 'scroll',
             overflowX: 'hidden',
             height: '90vh',
             width: panelWidth,
+            padding: '0.5em',
           }}
         >
           {children}
