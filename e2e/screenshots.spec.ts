@@ -1,4 +1,4 @@
-import { Page, test, expect } from '@playwright/test';
+import { expect, Page, test } from '@playwright/test';
 
 async function disableAnimations(page: Page) {
   // Register an init script so animations/transitions are disabled on every
@@ -51,12 +51,51 @@ test.describe('screenshot tests', () => {
     await expect(page).toHaveScreenshot('intro-page.png');
   });
 
-  test('data page', async ({ page }) => {
+  test('data page: Card List', async ({ page }) => {
     await seedDeclinedConsent(page);
-    await page.goto('./data');
+    await page.goto('./data?view=Cards');
     // Wait for the loading spinner to disappear and real content to appear
     await expect(page.getByText('Loading...')).toBeHidden({ timeout: 30000 });
     await expect(page).toHaveScreenshot('data-page.png');
+  });
+  test('data page: Details', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?objectID=zho&searchString=Chinese');
+    // Wait for the loading spinner to disappear and real content to appear
+    await expect(page.getByText('Loading...')).toBeHidden({ timeout: 30000 });
+    await expect(page).toHaveScreenshot('data-page-details.png');
+  });
+
+  test('data page: Table', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?view=Table');
+    // Wait for the loading spinner to disappear and real content to appear
+    await expect(page.getByText('Loading...')).toBeHidden({ timeout: 30000 });
+    await expect(page).toHaveScreenshot('data-page-table.png');
+  });
+
+  test('data page: Tree List', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?view=Hierarchy');
+    // Wait for the loading spinner to disappear and real content to appear
+    await expect(page.getByText('Loading...')).toBeHidden({ timeout: 30000 });
+    await expect(page).toHaveScreenshot('data-page-treelist.png');
+  });
+
+  test('data page: Map', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?view=Map');
+    // Wait for the loading spinner to disappear and real content to appear
+    await expect(page.getByText('Loading...')).toBeHidden({ timeout: 30000 });
+    await expect(page).toHaveScreenshot('data-page-map.png');
+  });
+
+  test('data page: Reports', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?view=Reports');
+    // Wait for the loading spinner to disappear and real content to appear
+    await expect(page.getByText('Loading...')).toBeHidden({ timeout: 30000 });
+    await expect(page).toHaveScreenshot('data-page-reports.png');
   });
 
   test('lucky search page', async ({ page }) => {
