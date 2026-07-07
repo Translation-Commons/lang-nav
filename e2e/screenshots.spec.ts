@@ -45,7 +45,9 @@ test.describe('screenshot tests', () => {
   });
 
   async function waitToFinishLoadingData(page: Page) {
-    await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
+    await expect(page.locator('.LoadingStageDisplay')).toHaveText(
+      'Loading stage: 4 of 4, algorithms finished',
+    );
   }
 
   test('intro page', async ({ page }) => {

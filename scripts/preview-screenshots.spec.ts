@@ -49,7 +49,10 @@ async function dismissConsentBanner(page: Page) {
 
 /** Wait for the data page to finish loading. */
 async function waitToFinishLoadingData(page: Page) {
-  await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
+  // await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
+  await expect(page.locator('.LoadingStageDisplay')).toHaveText(
+    'Loading stage: 4 of 4, algorithms finished',
+  );
 }
 
 /** Wait for the locator to be visible and return its bounding box. */
