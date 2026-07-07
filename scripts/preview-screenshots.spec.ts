@@ -1,3 +1,5 @@
+/// <reference types="node" />
+
 /**
  * Script to capture/update preview images saved in public/.
  * Run via: npm run update-screenshots
@@ -5,11 +7,12 @@
  * This is NOT a visual regression test — it overwrites public/*.png in place.
  */
 
+import path from 'path';
+import { fileURLToPath } from 'url';
+
 import { Locator, Page, test } from '@playwright/test';
 
 type Clip = { x: number; y: number; width: number; height: number };
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.resolve(__dirname, '../public');
