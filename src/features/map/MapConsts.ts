@@ -1,4 +1,4 @@
-export const MAP_ASPECT_RATIO = 1.979;
+export const MAP_ASPECT_RATIO = 1.979; // Also in CSS
 export const MAP_INTERNAL_WIDTH = 360;
 
 // Robinson coordinates are normalized to roughly -1..1. These scalars map them onto the

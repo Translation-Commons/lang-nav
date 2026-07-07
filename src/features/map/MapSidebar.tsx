@@ -1,5 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -9,19 +10,12 @@ import MapCard from './MapCard';
 type Props = {
   drawableEntities: DrawableData[];
   objectType: ObjectType;
-  onClose: (id: string) => void;
   hoveredId: string | null;
   setHoveredId: (id: string | null) => void;
 };
 
-const MapSidebar: React.FC<Props> = ({
-  drawableEntities,
-  objectType,
-  onClose,
-  hoveredId,
-  setHoveredId,
-}) => {
-  const { pinned } = usePageParams();
+const MapSidebar: React.FC<Props> = ({ drawableEntities, objectType, hoveredId, setHoveredId }) => {
+  const { pinned, updatePageParams } = usePageParams();
 
   const pinnedEntities = useMemo(() => {
     const drawableById = new Map(drawableEntities.map((entity) => [entity.ID, entity]));
@@ -30,44 +24,45 @@ const MapSidebar: React.FC<Props> = ({
       .filter((entity): entity is DrawableData => entity != null);
   }, [pinned, drawableEntities]);
 
-  if (pinnedEntities.length === 0) return null;
+  const unpinCard = useCallback(
+    (id: string) => {
+      updatePageParams({ pinned: pinned.filter((pin) => pin !== id) });
+    },
+    [pinned, updatePageParams],
+  );
+
+  const [showItems, setShowItems] = React.useState(true);
 
   return (
-    <div
-      style={{
-        width: '300px',
-        height: '100%',
-        overflowY: 'auto',
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '1em',
-        padding: '1em',
-        background: 'var(--color-background)',
-      }}
-    >
-      <h3 style={{ margin: '0 0 0.5em 0' }}>
+    <div className="MapSidebar" style={{ width: pinnedEntities.length > 0 ? '300px' : '0' }}>
+      {/* <div> */}
+      <HoverableButton
+        className="MapSidebarTitle"
+        hoverContent="Click to toggle visibility of selected items"
+        onClick={() => setShowItems((prev) => !prev)}
+      >
         Selected {objectType === ObjectType.Language ? 'Languages' : 'Territories'}
-      </h3>
-      {pinnedEntities.map((entity) => (
-        <div
-          key={entity.ID}
-          onMouseEnter={() => setHoveredId(entity.ID)}
-          onMouseLeave={() => setHoveredId(null)}
-          style={{
-            transition: 'transform 0.15s ease-in-out',
-            transform: hoveredId === entity.ID ? 'scale(1.02)' : 'scale(1)',
-          }}
-        >
-          <MapCard
-            drawnEntity={entity}
-            objectType={objectType}
-            onClose={() => {
-              setHoveredId(null);
-              onClose(entity.ID);
-            }}
-          />
-        </div>
-      ))}
+      </HoverableButton>
+      {/* </div> */}
+      <div className={'MapSidebarContent' + (showItems ? ' growThenShow' : ' shrinkThenHide')}>
+        {pinnedEntities.map((entity) => (
+          <div
+            key={entity.ID}
+            className={'MapSidebarCard' + (hoveredId === entity.ID ? ' hovered' : '')}
+            onMouseEnter={() => setHoveredId(entity.ID)}
+            onMouseLeave={() => setHoveredId(null)}
+          >
+            <MapCard
+              drawnEntity={entity}
+              objectType={objectType}
+              onClose={() => {
+                setHoveredId(null);
+                unpinCard(entity.ID);
+              }}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

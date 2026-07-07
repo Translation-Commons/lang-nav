@@ -11,7 +11,7 @@ import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
-import { MAP_ASPECT_RATIO, MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
+import { MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
 
 import './map.css';
 
@@ -70,17 +70,10 @@ const MapCentroids: React.FC<Props> = ({
 
   return (
     <svg
+      className="MapLayer"
       viewBox="-180 -90 360 180"
       preserveAspectRatio="xMidYMid meet"
-      style={{
-        display: 'block',
-        top: 0,
-        left: 0,
-        position: 'absolute',
-        width: '100%',
-        aspectRatio: MAP_ASPECT_RATIO,
-        pointerEvents: 'none',
-      }}
+      style={{ pointerEvents: 'none' }}
     >
       {renderableEntities.map((obj) => (
         <ObjectNode
@@ -163,7 +156,7 @@ const Circle: React.FC<NodeProps> = ({
   isPinned,
 }) => (
   <circle
-    className={'mapCentroidCircle' + (isHovered ? ' hovered' : '') + (isPinned ? ' pinned' : '')}
+    className={'MapCentroidCircle' + (isHovered ? ' hovered' : '') + (isPinned ? ' pinned' : '')}
     r={scale + 1.5}
     fill={color ?? 'transparent'}
     stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
