@@ -10,7 +10,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-import { Locator, Page, test } from '@playwright/test';
+import { expect, Locator, Page, test } from '@playwright/test';
 
 type Clip = { x: number; y: number; width: number; height: number };
 
@@ -49,10 +49,7 @@ async function dismissConsentBanner(page: Page) {
 
 /** Wait for the data page to finish loading. */
 async function waitToFinishLoadingData(page: Page) {
-  await page.waitForSelector('text=Loading stage: 4 of 4, algorithms finished', {
-    state: 'hidden',
-    timeout: 30000,
-  });
+  await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
 }
 
 /** Wait for the locator to be visible and return its bounding box. */

@@ -12,6 +12,7 @@ const LoadingStageDisplay: React.FC = () => {
 
   return (
     <div
+      className="LoadingStageDisplay"
       style={{
         color:
           loadingStage === LoadingStage.AlgorithmsFinished ? 'var(--color-background)' : 'inherit',

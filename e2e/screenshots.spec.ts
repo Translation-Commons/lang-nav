@@ -45,10 +45,7 @@ test.describe('screenshot tests', () => {
   });
 
   async function waitToFinishLoadingData(page: Page) {
-    await page.waitForSelector('text=Loading stage: 4 of 4, algorithms finished', {
-      state: 'hidden',
-      timeout: 30000,
-    });
+    await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
   }
 
   test('intro page', async ({ page }) => {
