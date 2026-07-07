@@ -67,8 +67,8 @@ const AboutPage: React.FC = () => {
           >
             Browse the open-source codebase, report issues, or contribute to the project on GitHub.
           </DocsCard>
-          <DocsCard title="Code Style" page={LangNavPageName.CodeStyle}>
-            Learn about the coding standards and best practices followed in the LangNav project.
+          <DocsCard title="Style" page={LangNavPageName.CodeStyle}>
+            Learn about visual components used in the website including color values.
           </DocsCard>
           <DocsCard
             title="Contribution Guide"

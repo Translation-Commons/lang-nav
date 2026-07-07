@@ -13,10 +13,10 @@
 .PinButton:focus {
   background: transparent;
   border-color: transparent;
-  color: var(--color-text);
 }
 
-.PinButton.pinned,
+.PinButton:hover,
+.PinButton:focus,
 .PinButton.pinned:hover,
 .PinButton.pinned:focus {
   color: var(--color-button-primary);

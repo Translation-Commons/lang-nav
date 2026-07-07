@@ -120,7 +120,7 @@ const TextInput: React.FC<Props> = ({
         display: 'flex',
         alignItems: 'center',
         borderRadius: '.75em',
-        border: '0.125em solid var(--color-button-primary)',
+        border: '0.125em solid var(--color-text)',
       }}
     >
       {label}

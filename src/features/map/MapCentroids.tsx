@@ -163,7 +163,7 @@ const Circle: React.FC<NodeProps> = ({
   isPinned,
 }) => (
   <circle
-    className={(isHovered ? 'hovered' : '') + (isPinned ? ' pinned' : '')}
+    className={'mapCentroidCircle' + (isHovered ? ' hovered' : '') + (isPinned ? ' pinned' : '')}
     r={scale + 1.5}
     fill={color ?? 'transparent'}
     stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}

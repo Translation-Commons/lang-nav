@@ -5,6 +5,7 @@ import { computeContainedTerritoryStats } from '@features/data/compute/computeTe
 import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
 import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
 import { addCensusData } from '@features/data/connect/connectCensuses';
+import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
 import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
@@ -433,6 +434,7 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     censuses,
     keyboards: [],
     languagesInSelectedSource: languages,
+    loadingStage: LoadingStage.AlgorithmsFinished,
     locales,
     organizations,
     territories,

@@ -15,14 +15,8 @@ import { updateObjectsBasedOnDataParams } from '../compute/updateObjectsBasedOnD
 import { useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
 
+import LoadingStage from './LoadingStage';
 import { DataContext, DataContextType } from './useDataContext';
-
-enum LoadingStage {
-  Initial,
-  HasCoreData,
-  HasSupplementalData,
-  AlgorithmsFinished,
-}
 
 // Create a provider component
 const DataProvider: React.FC<{
@@ -118,6 +112,7 @@ const DataProvider: React.FC<{
     () => ({
       ...coreData,
       languagesInSelectedSource,
+      loadingStage: loadProgress,
       getObject,
       getLanguage,
       getCLDRLanguage,
@@ -127,7 +122,7 @@ const DataProvider: React.FC<{
       getVariant,
       getOrganization,
     }),
-    [coreData],
+    [coreData, loadProgress],
   );
 
   // After the main load, load additional data

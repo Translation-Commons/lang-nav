@@ -76,6 +76,10 @@ const LayerComponents: React.FC = () => {
             When you want to show all options but enable wrapping.
             <DropdownExample display={SelectorDisplay.ButtonList} />
           </DocsCard>
+          <DocsCard title="Vertical List">
+            When showing options in a vertical column. If the list is too long it is clipped.
+            <DropdownExample display={SelectorDisplay.FilterList} />
+          </DocsCard>
         </DocsCardGrid>
       </DocsCard>
       <DocsCard title="Modals">
