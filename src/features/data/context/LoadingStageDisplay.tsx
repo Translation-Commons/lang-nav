@@ -1,3 +1,5 @@
+import React from 'react';
+
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import LoadingStage from './LoadingStage';
@@ -12,6 +14,7 @@ const LoadingStageDisplay: React.FC = () => {
 
   return (
     <div
+      aria-hidden={loadingStage === LoadingStage.AlgorithmsFinished}
       className="LoadingStageDisplay"
       style={{
         color:

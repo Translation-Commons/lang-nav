@@ -77,7 +77,7 @@ const LayerComponents: React.FC = () => {
             <DropdownExample display={SelectorDisplay.ButtonList} />
           </DocsCard>
           <DocsCard title="Vertical List">
-            When showing options in a vertical column. If the list is too long its clipped.
+            When showing options in a vertical column. If the list is too long it is clipped.
             <DropdownExample display={SelectorDisplay.FilterList} />
           </DocsCard>
         </DocsCardGrid>

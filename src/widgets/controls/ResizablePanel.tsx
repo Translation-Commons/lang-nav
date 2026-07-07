@@ -70,8 +70,8 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
               padding: '0.125em',
               position: 'absolute',
               top: '0.25em',
-              right: panelSide === 'right' ? '0.25em' : '',
-              left: panelSide === 'left' ? '0.25em' : '',
+              right: panelSide === 'right' ? '0.25em' : undefined,
+              left: panelSide === 'left' ? '0.25em' : undefined,
             }}
             aria-label="Close"
           >
