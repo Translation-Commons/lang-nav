@@ -56,21 +56,21 @@ jobs:
 
       - name: Update screenshot baselines
         run: npm run test:screenshots:update
-
+ 
       - name: Commit updated baselines
         run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git config user.name "LangNav Bot"
+          git config user.email "noreply@github.com"
           git add e2e/screenshots.spec.ts-snapshots/
-          git diff --cached --quiet || git commit -m "Update screenshot baselines from CI"
+          git diff --cached --quiet || git commit -m "[automation] Update screenshot baselines from CI"
           git push
 
       - name: Verify updated baselines pass
         run: npm run test:screenshots
 
-      - name: Remove update-baselines label
+      - name: Remove update-baselines label and automatically add update-preview-images
         if: github.event_name == 'pull_request'
-        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label update-baselines
+        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label update-baselines --add-label update-preview-images 
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

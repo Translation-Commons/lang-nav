@@ -10,6 +10,8 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CoreDataArrays } from '../load/CoreData';
 
+import LoadingStage from './LoadingStage';
+
 type DataGetters = {
   getObject(id: string): ObjectData | undefined;
   getLanguage: (id: string) => LanguageData | undefined;
@@ -24,9 +26,11 @@ type DataGetters = {
 export type DataContextType = CoreDataArrays &
   DataGetters & {
     languagesInSelectedSource: LanguageData[];
+    loadingStage: LoadingStage;
   };
 
 export const DataContext = createContext<DataContextType | undefined>({
+  loadingStage: LoadingStage.Initial,
   allLanguoids: [],
   censuses: {},
   organizations: [],

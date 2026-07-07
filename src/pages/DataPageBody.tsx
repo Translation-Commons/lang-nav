@@ -4,6 +4,7 @@ import FilterPanelToggle from '@widgets/controls/FilterPanelToggle';
 import ViewSelector from '@widgets/controls/selectors/ViewSelector';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
+import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
 import ResultCount from '@features/pagination/ResultCount';
 import FilterPath from '@features/transforms/filtering/FilterPath';
 import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
@@ -58,6 +59,7 @@ const DataPageBody: React.FC = () => {
           <DataViews />
         </ContainErrorsAndSuspense>
       </div>
+      <LoadingStageDisplay />
     </main>
   );
 };

@@ -48,8 +48,11 @@ async function dismissConsentBanner(page: Page) {
 }
 
 /** Wait for the data page to finish loading. */
-async function waitForDataPage(page: Page) {
-  await page.waitForSelector('text=Loading...', { state: 'hidden', timeout: 30000 });
+async function waitToFinishLoadingData(page: Page) {
+  await page.waitForSelector('text=Loading stage: 4 of 4, algorithms finished', {
+    state: 'hidden',
+    timeout: 30000,
+  });
 }
 
 /** Wait for the locator to be visible and return its bounding box. */
@@ -70,8 +73,7 @@ test('capture preview.png — full data page with navbar (cards view)', async ({
   await disableAnimations(page);
   await dismissConsentBanner(page);
   await page.goto('./data?view=Cards');
-  await waitForDataPage(page);
-  await page.waitForTimeout(1000);
+  await waitToFinishLoadingData(page);
   await page.screenshot({
     path: path.join(PUBLIC_DIR, 'preview.png'),
     fullPage: false,
@@ -82,7 +84,7 @@ test('capture cardlist.png — card grid without navbar', async ({ page }) => {
   await disableAnimations(page);
   await dismissConsentBanner(page);
   await page.goto('./data?view=Cards');
-  await waitForDataPage(page);
+  await waitToFinishLoadingData(page);
   const firstCard = page.locator('.CardInCardList').first();
   await firstCard.waitFor({ state: 'visible' });
   const grid = firstCard.locator('xpath=..');
@@ -99,7 +101,7 @@ test('capture table.png — data page in table view', async ({ page }) => {
   await disableAnimations(page);
   await dismissConsentBanner(page);
   await page.goto('./data?view=Table');
-  await waitForDataPage(page);
+  await waitToFinishLoadingData(page);
   const table = page.locator('main table').first();
   await table.locator('tbody tr').first().waitFor({ state: 'visible' });
   const box = await getBox(table);
@@ -115,7 +117,7 @@ test('capture hierarchy.png — hierarchy/tree view', async ({ page }) => {
   await disableAnimations(page);
   await dismissConsentBanner(page);
   await page.goto('./data?view=Hierarchy');
-  await waitForDataPage(page);
+  await waitToFinishLoadingData(page);
   const tree = page.locator('.TreeListRoot').first();
   const box = await getBox(tree);
   await screenshotClip(page, path.join(PUBLIC_DIR, 'hierarchy.png'), {
@@ -130,7 +132,7 @@ test('capture map.png — territory map colored by number of languages', async (
   await disableAnimations(page);
   await dismissConsentBanner(page);
   await page.goto('./data?view=Map&objectType=Territory&colorBy=%23+of+Languages');
-  await waitForDataPage(page);
+  await waitToFinishLoadingData(page);
   const mapImg = page.locator('img[alt="World map"]');
   await mapImg.waitFor({ state: 'visible' });
   // grandparent = the bordered map container div
@@ -148,7 +150,7 @@ test('capture reports.png — reports page', async ({ page }) => {
   await disableAnimations(page);
   await dismissConsentBanner(page);
   await page.goto('./data?view=Reports');
-  await waitForDataPage(page);
+  await waitToFinishLoadingData(page);
   // Report content is lazy-loaded — wait for all suspense boundaries to resolve
   await page.waitForLoadState('networkidle');
   const reportSection = page.locator('[data-testid="reports-view"]');
