@@ -10,6 +10,7 @@ import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
+import ClearAllPinsButton from './selectors/ClearAllPinsButton';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
 import ProfileSelector from './selectors/ProfileSelector';
@@ -29,6 +30,7 @@ const Settings = (): React.ReactNode => {
           <FieldFocusSelector />
           <LocaleSeparatorSelector />
           <ProfileSelector />
+          <ClearAllPinsButton />
         </>
       )}
       <SearchBySelector />
