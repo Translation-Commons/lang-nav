@@ -67,3 +67,10 @@ export type GoogleTranslateData = {
   locale?: string;
   writingSystem?: string;
 };
+
+export type Win11LanguagePackData = {
+  languageCodePath: string; // e.g. "zho/cmn" when multiple codes are listed
+  name: string;
+  locale?: string;
+  writingSystem?: string;
+};

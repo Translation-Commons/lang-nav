@@ -46,13 +46,13 @@ ceb	Cebuano
 cha	Chamorro		
 che	Chechen		
 nya	Chichewa		
-zho	Chinese (Simplified)		
-zho	Chinese (Traditional)		
+zho/cmn	Chinese (Simplified)		
+zho/cmn	Chinese (Traditional)		
 chk	Chuukese		
 chv	Chuvash		
 cos	Corsican		
 crh	Crimean Tatar (Cyrillic)		Cyrillic
-crh	Crimean Tatar (Latin		Latin
+crh	Crimean Tatar (Latin)		Latin
 hbs/hrv	Croatian		
 ces	Czech		
 dan	Danish		
@@ -124,8 +124,8 @@ kom	Komi
 kok	Konkani		
 kor	Korean		
 kri	Krio		
-kmr	Kurdish (Kurmanji)		
-ckb	Kurdish (Sorani)		
+kur/kmr	Kurdish (Kurmanji)		
+kur/ckb	Kurdish (Sorani)		
 kir	Kyrgyz		
 lao	Lao		
 lav/ltg	Latgalian		
