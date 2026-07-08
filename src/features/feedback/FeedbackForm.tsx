@@ -7,15 +7,15 @@ import PopupCard from '@features/layers/popupcard/PopupCard';
 import { getFeedbackEmailBody } from './getFeedbackEmailBody';
 
 const FEEDBACK_EMAIL = 'langnav-outreach@translationcommons.org';
-const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6'
+const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6';
 
 export function FeedbackForm() {
   const [type, setType] = useState('General feedback');
   const [message, setMessage] = useState('');
 
   const handleSurveySubmit = () => {
-    window.open(SURVEY_LINK, '_blank')
-  }
+    window.open(SURVEY_LINK, '_blank');
+  };
 
   const handleSubmit = () => {
     const subject = `[LangNav Feedback] ${type}`;
@@ -38,7 +38,9 @@ export function FeedbackForm() {
       title="Shape the future of LangNav"
       body={
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', width: '300px' }}>
-          <label style={{ fontWeight: 500, color: 'var(--color-text-primary)' }}>Tell us about your goals, rate our data, and help us build better futures.</label>
+          <label style={{ fontWeight: 500, color: 'var(--color-text-primary)' }}>
+            Tell us about your goals, rate our data, and help us build better futures.
+          </label>
           <HoverableButton
             className={'SurveyButton'}
             onClick={handleSurveySubmit}
@@ -58,7 +60,9 @@ export function FeedbackForm() {
             <hr style={{ flex: 1 }} />
           </div>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <label style={{ fontWeight: 500, color: 'var(--color-text-primary)' }}>Report a specific Issue</label>
+            <label style={{ fontWeight: 500, color: 'var(--color-text-primary)' }}>
+              Report a specific Issue
+            </label>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em' }}>
             <label style={{ fontWeight: 500, color: 'var(--color-text-secondary)' }}>Type</label>
