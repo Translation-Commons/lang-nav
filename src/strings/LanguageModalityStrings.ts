@@ -1,15 +1,8 @@
-import {
-  HandIcon,
-  MessageCircleDashedIcon,
-  MessageCircleIcon,
-  NotepadTextDashedIcon,
-  NotepadTextIcon,
-} from 'lucide-react';
-import React from 'react';
+import { LanguageModality } from '@entities/language/LanguageModality';
 
-import { LanguageModality } from './LanguageModality';
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-function getModalityLabel(modality: LanguageModality | undefined): string | undefined {
+export function getModalityLabel(modality: LanguageModality | undefined): string | undefined {
   if (modality == null) return undefined;
   switch (modality) {
     case LanguageModality.Written:
@@ -47,7 +40,7 @@ export function getModalityFromLabel(label: string | undefined): LanguageModalit
   return undefined;
 }
 
-function getLanguageModalityDescription(modality: LanguageModality): string {
+export function getLanguageModalityDescription(modality: LanguageModality): string {
   switch (modality) {
     case LanguageModality.Written:
       return 'This language exists in a written form in modern times.';
@@ -64,49 +57,22 @@ function getLanguageModalityDescription(modality: LanguageModality): string {
   }
 }
 
-// Including a tooltip with the icon to explain the modality, can also be used for screen readers
-const LanguageModalityIcon: React.FC<{ modality: LanguageModality | undefined }> = ({
-  modality,
-}) => {
-  if (modality == null) return null;
-  return (
-    <span title={getLanguageModalityDescription(modality)}>
-      <LanguageModalityBaseIcon modality={modality} />
-    </span>
-  );
-};
-
-const LanguageModalityBaseIcon: React.FC<{ modality: LanguageModality }> = ({ modality }) => {
+export function getLanguageModalityUserLabel(
+  modality: LanguageModality | undefined,
+  plural: boolean = true,
+): string {
+  if (modality == null) return plural ? 'speakers' : 'speaker';
   switch (modality) {
-    case LanguageModality.Written:
-      return <NotepadTextIcon />;
-    case LanguageModality.MostlyWritten:
-      return (
-        <>
-          <NotepadTextIcon />
-          <MessageCircleDashedIcon style={{ color: 'var(--color-text-secondary)' }} />
-        </>
-      );
-    case LanguageModality.SpokenAndWritten:
-      return (
-        <>
-          <NotepadTextIcon />
-          <MessageCircleIcon />
-        </>
-      );
-    case LanguageModality.MostlySpoken:
-      return (
-        <>
-          <NotepadTextDashedIcon style={{ color: 'var(--color-text-secondary)' }} />
-          <MessageCircleIcon />
-        </>
-      );
     case LanguageModality.Spoken:
-      return <MessageCircleIcon />;
+    case LanguageModality.MostlySpoken:
+    case LanguageModality.SpokenAndWritten:
+      return plural ? 'speakers' : 'speaker';
     case LanguageModality.Sign:
-      // While HandMetalIcon would be more fun, we should be more serious here
-      return <HandIcon />;
+      return plural ? 'signers' : 'signer';
+    case LanguageModality.MostlyWritten:
+    case LanguageModality.Written:
+      return plural ? 'writers' : 'writer';
+    default:
+      enforceExhaustiveSwitch(modality);
   }
-};
-
-export { getModalityLabel, LanguageModalityIcon };
+}

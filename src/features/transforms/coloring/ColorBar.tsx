@@ -5,7 +5,6 @@ import { getFieldValueType } from '@features/table/getValueType';
 import TableValueType from '@features/table/TableValueType';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { getModalityFromLabel, getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
@@ -22,6 +21,7 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
 
+import { getModalityFromLabel, getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

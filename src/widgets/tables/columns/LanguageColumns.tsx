@@ -15,7 +15,6 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
-import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
@@ -28,6 +27,7 @@ import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { LanguageCodeColumns } from './LanguageCodeColumns';
@@ -70,7 +70,6 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       render: (lang) => getModalityLabel(lang.modality) ?? <Deemphasized>—</Deemphasized>,
       exportValue: (lang) => getModalityLabel(lang.modality), // Avoid exporting escaped html like &amp;
       isInitiallyVisible: false,
-      valueType: TableValueType.Enum,
       columnGroup: 'Context',
       field: Field.Modality,
     },
