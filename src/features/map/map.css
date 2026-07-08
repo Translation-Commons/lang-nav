@@ -1,4 +1,129 @@
-.mapCentroidCircle {
+:root {
+  --map-aspect-ratio: 1.979;
+}
+
+.MapContainer {
+  align-items: center;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  text-align: center;
+  min-width: 800px;
+}
+
+.EntityMap {
+  width: 100%;
+  position: relative;
+}
+
+.MapColorBarAndZoomContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.MapZoomContainer {
+  flex: 1;
+  overflow: hidden;
+  cursor: grab;
+  position: relative;
+  aspect-ratio: var(--map-aspect-ratio);
+}
+
+.MapSidebar {
+  height: 100%;
+  overflow: hidden;
+  /* overflow-y: auto; */
+  position: absolute;
+  transition: width 0.25s;
+  padding: 0 0.5em;
+  /* ZIndex.MapSidePanel */
+  z-index: 10;
+}
+
+.MapSidebarTitle {
+  width: 270px;
+  font-size: 1.5em;
+  padding: 0.25em;
+  margin: 0 0 0.5em 0;
+  background-color: var(--color-background);
+}
+
+.MapSidebarContent {
+  /* width: 270px; */
+  display: flex;
+  flex-direction: column;
+  gap: 1.5em;
+  padding: 1em 0.5em 0.5em 0.5em;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.growThenShow {
+  animation: growThenShow 0.25s forwards;
+}
+
+@keyframes growThenShow {
+  0% {
+    max-height: 0;
+    display: none;
+  }
+
+  1% {
+    max-height: 1%;
+    /* Keep it displayed right until the absolute last millisecond */
+    display: flex;
+  }
+
+  100% {
+    /* Instantly yank the element out of the layout flow completely */
+    max-height: 100%;
+    display: flex;
+  }
+}
+
+.shrinkThenHide {
+  animation: shrinkThenHide 0.25s forwards;
+}
+
+@keyframes shrinkThenHide {
+  0% {
+    max-height: 100%;
+    display: flex;
+  }
+
+  99% {
+    max-height: 0;
+    /* Keep it displayed right until the absolute last millisecond */
+    display: flex;
+  }
+
+  100% {
+    /* Instantly yank the element out of the layout flow completely */
+    display: none;
+    max-height: 0;
+  }
+}
+
+.MapSidebarCard {
+  transition: transform 0.15s ease-in-out;
+  transform: scale(1);
+}
+
+.MapSidebarCard.hovered {
+  transform: scale(1.02);
+}
+
+.MapLayer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.MapCentroidCircle {
   transition:
     fill 0.25s,
     stroke 0.25s,
@@ -8,30 +133,31 @@
   stroke-width: 1px;
 }
 
-.mapCentroidCircle:hover,
-.mapCentroidCircle.hovered {
+.MapCentroidCircle:hover,
+.MapCentroidCircle.hovered {
   filter: brightness(1.2);
   scale: 1.5;
   stroke: var(--color-button-primary);
 }
 
-.mapCentroidCircle.pinned {
+.MapCentroidCircle.pinned {
   stroke: var(--color-button-primary);
 }
 
-.mapTerritory {
+.MapTerritory {
   cursor: pointer;
 }
 
-.mapTerritory:hover,
-.mapTerritory.hovered {
-  filter: brightness(1.2);
+.MapTerritory.pinned {
+  filter: brightness(1.1);
   stroke: var(--color-button-primary);
   stroke-width: 2px;
 }
 
-.mapTerritory.pinned {
+.MapTerritory:hover,
+.MapTerritory.hovered,
+.MapTerritory.pinned.hovered {
+  filter: brightness(1.2);
   stroke: var(--color-button-primary);
-  filter: brightness(1.1);
   stroke-width: 2px;
 }

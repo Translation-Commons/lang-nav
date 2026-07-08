@@ -2,7 +2,7 @@ import { CheckSquare2Icon, SquareArrowUpLeftIcon, SquareIcon } from 'lucide-reac
 import React, { useMemo } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import ObjectMap from '@features/map/EntityMap';
+import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
@@ -128,7 +128,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
         )}
       </div>
       <div style={{ margin: '.5em 0' }}>
-        <ObjectMap entities={showConstituents ? drawableNodes : [lang]} maxWidth={1000} />
+        <EntityMap entities={showConstituents ? drawableNodes : [lang]} maxWidth={1000} />
       </div>
       {showConstituents && drawableNodes.length > 1 && (
         <LanguageScopeSelector display={SelectorDisplay.Dropdown} />

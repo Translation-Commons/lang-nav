@@ -21,6 +21,8 @@ import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
 import ZoomControls from './ZoomControls';
 
+import './map.css';
+
 type Props = {
   entities: ObjectData[];
   maxWidth?: number;
@@ -35,7 +37,13 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
 
   const [zoomFactor, setZoomFactor] = useState(1);
 
-  const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
+  const {
+    containerRef: zoomContainerRef,
+    contentRef,
+    zoomIn,
+    zoomOut,
+    resetTransform,
+  } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
     mapHeight,
     onZoom: setZoomFactor,
@@ -93,65 +101,34 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     [pinned, updatePageParams, allowSidebar],
   );
 
-  const unpinCard = useCallback(
-    (id: string) => {
-      updatePageParams({ pinned: pinned.filter((pin) => pin !== id) });
-    },
-    [pinned, updatePageParams],
-  );
-
   return (
-    <div ref={mapContainerRef} style={{ maxWidth, width: '100%', position: 'relative' }}>
+    <div ref={mapContainerRef} className="EntityMap" style={{ maxWidth: maxWidth }}>
       <ZoomControls
         zoomIn={zoomIn}
         zoomOut={zoomOut}
         resetTransform={resetTransform}
         containerWidth={mapContainerWidth}
       />
+      {allowSidebar && (
+        <MapSidebar
+          drawableEntities={drawableEntities}
+          objectType={objectType}
+          hoveredId={hoveredId}
+          setHoveredId={setHoveredId}
+        />
+      )}
 
-      <div
-        style={{
-          width: '100%',
-          aspectRatio: MAP_ASPECT_RATIO,
-          display: 'flex',
-          overflow: 'hidden',
-          background: 'var(--color-background)',
-        }}
-      >
-        {allowSidebar && (
-          <MapSidebar
-            drawableEntities={drawableEntities}
-            objectType={objectType}
-            onClose={unpinCard}
-            hoveredId={hoveredId}
-            setHoveredId={setHoveredId}
-          />
-        )}
-
-        <div
-          ref={containerRef}
-          style={{
-            flex: 1,
-            overflow: 'hidden',
-            cursor: 'grab',
-            position: 'relative',
-          }}
-        >
+      <div className="MapColorBarAndZoomContainer">
+        <div className="MapZoomContainer" ref={zoomContainerRef}>
           <div
             ref={contentRef}
             style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
           >
             <img
               alt="World map"
+              className="MapLayer"
               src="./data/wiki/map_world.svg"
-              style={{
-                position: 'absolute',
-                width: '100%',
-                height: '100%',
-                top: 0,
-                left: 0,
-                filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined,
-              }}
+              style={{ filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined }}
             />
 
             {objectType !== ObjectType.Language && (
@@ -176,9 +153,9 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
             />
           </div>
         </div>
-      </div>
 
-      {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
+        {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
+      </div>
     </div>
   );
 };

@@ -2,6 +2,7 @@ const ZIndex = {
   TableStickyColumn: 5,
   TableStickyRow: 10, // in CSS
   MapZoomControls: 5,
+  MapSidePanel: 10,
 
   Sidepanel: 40,
   PopupCard: 45,

@@ -73,7 +73,7 @@ const MapTerritories: React.FC<Props> = ({
     if (!svgLoaded) return;
 
     forEachTerritory((territory, element) => {
-      element.classList.add('mapTerritory');
+      element.classList.add('MapTerritory');
       element.classList.remove('hovered');
       element.classList.remove('pinned');
       if (pinnedIds.includes(territory.ID)) element.classList.add('pinned');
@@ -131,16 +131,7 @@ const MapTerritories: React.FC<Props> = ({
   }, [buildOnMouseEnter, buildOnMouseLeave, onClick, territories, svgLoaded]);
 
   return (
-    <div
-      ref={svgContainerRef}
-      style={{
-        position: 'absolute',
-        width: '100%',
-        height: 'auto',
-        top: 0,
-        left: 0,
-      }}
-    >
+    <div className="MapLayer" ref={svgContainerRef}>
       <SVG
         src="./data/wiki/map_countries.svg"
         preserveAspectRatio="none"

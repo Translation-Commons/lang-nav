@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import ObjectMap from '@features/map/EntityMap';
+import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
@@ -51,7 +51,7 @@ function ViewMap() {
       <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter objects={allEntities} />}
-      <ObjectMap entities={filteredEntities} allowSidebar={true} />
+      <EntityMap entities={filteredEntities} allowSidebar={true} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
           <div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ObjectMap from '@features/map/EntityMap';
+import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { ObjectType } from '@features/params/PageParamTypes';
@@ -30,7 +30,7 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
       <DetailsField title="Map">Showing {getMapLabel(territory)}</DetailsField>
       <LocalParamsProvider overrides={{ limit: -1, objectType: ObjectType.Territory }}>
         <MapContainer>
-          <ObjectMap
+          <EntityMap
             entities={[
               territory,
               ...getTerritoryDescendants(territory, territory.scope === TerritoryScope.Country),

@@ -99,6 +99,15 @@
   background-color: var(--color-button-primary);
 }
 
+.selector.inlineDropdown .selected {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.selector.inlineDropdown .selected:hover {
+  background-color: var(--color-background-hover);
+}
+
 .selector button:disabled,
 .selector button:disabled:hover,
 .selector .option:disabled,
