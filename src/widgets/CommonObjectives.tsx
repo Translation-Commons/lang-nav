@@ -3,12 +3,7 @@ import React, { useState } from 'react';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { getNewURL } from '@features/params/getNewURL';
-import {
-  ObjectType,
-  PageParamKey,
-  PageParamsOptional,
-  View,
-} from '@features/params/PageParamTypes';
+import { ObjectType, PageParamKey, PageParams, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 const CommonObjectives: React.FC = () => {
@@ -47,8 +42,8 @@ export const ObjectiveList: React.FC = () => {
 type ObjectiveProps = {
   label: string;
   inputPlaceholder?: string;
-  inputParam?: keyof PageParamsOptional;
-  urlParams?: PageParamsOptional;
+  inputParam?: keyof PageParams;
+  urlParams?: Partial<PageParams>;
   urlPath?: LangNavPageName;
 };
 
@@ -60,7 +55,7 @@ const Objective: React.FC<ObjectiveProps> = ({
   urlPath = LangNavPageName.Data,
 }) => {
   const [inputText, setInputText] = useState('');
-  let params: PageParamsOptional = { ...urlParams };
+  let params: Partial<PageParams> = { ...urlParams };
   if (inputParam) params = { [inputParam]: inputText, ...urlParams };
 
   return (
@@ -87,7 +82,7 @@ const Objective: React.FC<ObjectiveProps> = ({
   );
 };
 
-const GoButton: React.FC<{ params: PageParamsOptional; urlPath: LangNavPageName }> = ({
+const GoButton: React.FC<{ params: Partial<PageParams>; urlPath: LangNavPageName }> = ({
   params,
   urlPath,
 }) => {

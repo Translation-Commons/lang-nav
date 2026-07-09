@@ -22,9 +22,8 @@ import {
   LocaleSeparator,
   ObjectType,
   PageParams,
-  PageParamsOptional,
   SearchableField,
-  View,
+  View
 } from './PageParamTypes';
 
 export enum ProfileType {
@@ -72,7 +71,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   writingSystemFilter: '',
 };
 
-export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
+export const DEFAULTS_BY_PROFILE: Record<ProfileType, Partial<PageParams>> = {
   [ProfileType.LanguageEthusiast]: {
     // Nothing, default profile is based on this
   },

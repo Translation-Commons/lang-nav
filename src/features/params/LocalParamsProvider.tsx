@@ -3,7 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 
 import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
-import { PageParamsOptional } from './PageParamTypes';
+import { PageParams } from './PageParamTypes';
 import usePageParams from './usePageParams';
 
 /**
@@ -11,19 +11,19 @@ import usePageParams from './usePageParams';
  */
 const LocalParamsProvider: React.FC<{
   children: React.ReactNode;
-  overrides?: PageParamsOptional;
+  overrides?: Partial<PageParams>;
 }> = ({ children, overrides }) => {
   const globalParams = usePageParams();
-  const [localParams, setLocalParams] = useState<PageParamsOptional>({});
+  const [localParams, setLocalParams] = useState<Partial<PageParams>>({});
 
   // Instead of mutating the global page's parameters, have mutations in this context just override a local layer
   const updateLocalParams = useCallback(
-    (newParams: PageParamsOptional) => {
+    (newParams: Partial<PageParams>) => {
       setLocalParams((prev) => {
         const nextParams = { ...prev, ...newParams };
         Object.entries(nextParams).forEach(([key, value]) => {
           if (value === undefined) {
-            delete nextParams[key as keyof PageParamsOptional];
+            delete nextParams[key as keyof PageParams];
           }
         });
         return nextParams;

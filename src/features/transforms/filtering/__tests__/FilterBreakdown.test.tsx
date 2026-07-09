@@ -1,7 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { PageParamsOptional } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
@@ -18,10 +18,10 @@ vi.mock('@features/layers/hovercard/useHoverCard', () => ({
 }));
 
 describe('FilterBreakdown', () => {
-  let updatePageParams: (params: PageParamsOptional) => void;
+  let updatePageParams: (params: Partial<PageParams>) => void;
 
   // Helper function to eliminate mock setup duplication
-  const setupMockParams = (overrides: PageParamsOptional = {}) => {
+  const setupMockParams = (overrides: Partial<PageParams> = {}) => {
     const mockUsePageParams = createMockUsePageParams(overrides);
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
     updatePageParams = mockUsePageParams.updatePageParams;

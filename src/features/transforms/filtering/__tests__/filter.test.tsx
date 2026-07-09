@@ -1,6 +1,6 @@
 import { describe, expect, it, Mock, vi } from 'vitest';
 
-import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
+import { ObjectType, PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
@@ -40,7 +40,7 @@ describe('getFilterByVitality', () => {
     populationFromUN: 1000,
   };
 
-  function mockParams(params: PageParamsOptional) {
+  function mockParams(params: Partial<PageParams>) {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams(params));
   }
 

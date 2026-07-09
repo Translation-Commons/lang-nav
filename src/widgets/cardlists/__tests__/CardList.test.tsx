@@ -2,7 +2,7 @@ import { fireEvent, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
-import { ObjectType, PageParamsOptional } from '@features/params/PageParamTypes';
+import { ObjectType, PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
@@ -29,7 +29,7 @@ describe('CardList', () => {
     .sort(sortByPopulation);
 
   // Helper function to eliminate mock setup duplication
-  function setupMockParams(overrides: PageParamsOptional = {}) {
+  function setupMockParams(overrides: Partial<PageParams> = {}) {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams(overrides));
   }
 

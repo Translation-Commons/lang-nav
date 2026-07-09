@@ -4,7 +4,7 @@ import { Link, useSearchParams } from 'react-router';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
-import { PageParamsOptional } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 
 import useHoverCard from './useHoverCard';
 
@@ -17,7 +17,7 @@ type HoverableProps = {
   onClick?: () => void;
   onMouseDown?: () => void;
   page?: LangNavPageName;
-  params?: PageParamsOptional;
+  params?: Partial<PageParams>;
   role?: string;
   style?: React.CSSProperties;
 };
