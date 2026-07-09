@@ -8,7 +8,6 @@ import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
@@ -20,6 +19,7 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

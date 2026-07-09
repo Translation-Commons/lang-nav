@@ -3,7 +3,6 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
@@ -11,6 +10,8 @@ import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralG
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { getModalityLabel } from '@strings/LanguageModalityStrings';
 
 type Props = { lang: LanguageData };
 

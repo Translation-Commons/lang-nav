@@ -9,6 +9,8 @@ import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
 import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
+
 type Props = { lang: LanguageData };
 
 const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
@@ -31,7 +33,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
         <DetailsStatContainer>
-          <DetailsStatBlock label="Speakers">
+          <DetailsStatBlock label={getLanguageModalityUserLabel(lang.modality)}>
             <LanguagePopulationEstimate lang={lang} />
           </DetailsStatBlock>
         </DetailsStatContainer>

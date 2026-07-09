@@ -1,7 +1,6 @@
 import usePageParams from '@features/params/usePageParams';
 
-import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
-
+import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

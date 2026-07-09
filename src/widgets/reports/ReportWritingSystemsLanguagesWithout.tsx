@@ -15,12 +15,13 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { getLanguageRootLanguageFamily } from '@entities/language/LanguageFamilyUtils';
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { getModalityLabel } from '@entities/language/LanguageModalityDisplay';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
+
+import { getModalityLabel } from '@strings/LanguageModalityStrings';
 
 const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
