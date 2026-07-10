@@ -2,7 +2,7 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { PageParamsOptional, SearchableField } from '@features/params/PageParamTypes';
+import { PageParams, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import {
@@ -37,10 +37,10 @@ vi.mock('@features/layers/hovercard/HoverableButton', () => ({
 }));
 
 describe('FilterPath', () => {
-  let updatePageParams: (params: PageParamsOptional) => void;
+  let updatePageParams: (params: Partial<PageParams>) => void;
 
   // Helper function to eliminate mock setup duplication
-  const setupMockParams = (overrides: PageParamsOptional = {}) => {
+  const setupMockParams = (overrides: Partial<PageParams> = {}) => {
     const mockUsePageParams = createMockUsePageParams(overrides);
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
     updatePageParams = mockUsePageParams.updatePageParams;

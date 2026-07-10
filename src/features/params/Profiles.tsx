@@ -18,14 +18,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import {
-  LocaleSeparator,
-  ObjectType,
-  PageParams,
-  PageParamsOptional,
-  SearchableField,
-  View,
-} from './PageParamTypes';
+import { LocaleSeparator, ObjectType, PageParams, SearchableField, View } from './PageParamTypes';
 
 export enum ProfileType {
   LanguageEthusiast = 'Language Enthusiast', // Default
@@ -72,7 +65,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   writingSystemFilter: '',
 };
 
-export const DEFAULTS_BY_PROFILE: Record<ProfileType, PageParamsOptional> = {
+export const DEFAULTS_BY_PROFILE: Record<ProfileType, Partial<PageParams>> = {
   [ProfileType.LanguageEthusiast]: {
     // Nothing, default profile is based on this
   },

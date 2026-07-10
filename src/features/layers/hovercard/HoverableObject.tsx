@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { PageParamsOptional } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -20,7 +20,7 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
   }
 
   const onClick = useCallback(() => {
-    const params: PageParamsOptional = { objectID: object.ID };
+    const params: Partial<PageParams> = { objectID: object.ID };
     updatePageParams(params);
   }, [object, updatePageParams, view]);
 

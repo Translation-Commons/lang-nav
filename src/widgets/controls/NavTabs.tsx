@@ -1,13 +1,13 @@
 import React, { ReactNode, useCallback } from 'react';
 
 import HoverableInternalLinkButton from '@features/layers/hovercard/HoverableInternalLinkButton';
-import { PageParamsOptional } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 export type TabOption = {
   description?: ReactNode;
   label: string;
-  urlParams: PageParamsOptional;
+  urlParams: Partial<PageParams>;
 };
 
 type Props = {
@@ -20,7 +20,7 @@ const NavTabs: React.FC<Props> = ({ label, options }) => {
   const getIsActive = useCallback(
     (option: TabOption) =>
       Object.entries(option.urlParams).every(
-        ([key, value]) => params[key as keyof PageParamsOptional] === value,
+        ([key, value]) => params[key as keyof PageParams] === value,
       ),
     [params],
   );

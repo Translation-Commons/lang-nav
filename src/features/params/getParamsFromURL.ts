@@ -22,7 +22,7 @@ import {
   LocaleSeparator,
   ObjectType,
   PageParamKey,
-  PageParamsOptional,
+  PageParams,
   SearchableField,
   View,
 } from './PageParamTypes';
@@ -45,8 +45,8 @@ function parseNumericEnumArray<T extends number>(
 /**
  * This function is important for parsing the URL parameters
  */
-export function getParamsFromURL(urlParams: URLSearchParams): PageParamsOptional {
-  const params: PageParamsOptional = {};
+export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams> {
+  const params: Partial<PageParams> = {};
   urlParams.forEach((value, keyUntyped) => {
     const key = keyUntyped as PageParamKey;
     switch (key) {

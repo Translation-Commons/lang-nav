@@ -123,38 +123,3 @@ export type PageParams = {
   vitalityEthCoarse: VitalityEthnologueCoarse[];
   writingSystemFilter: string;
 };
-
-export type PageParamsOptional = {
-  colorBy?: Field;
-  colorGradient?: ColorGradient;
-  columns?: TableIDToBinarizedColumnVisibility;
-  isoStatus?: LanguageISOStatus[];
-  fieldFocus?: Field;
-  languageFilter?: string;
-  languageFamilyFilter?: string;
-  languageScopes?: LanguageScope[];
-  languageSource?: LanguageSource;
-  limit?: number;
-  localeSeparator?: LocaleSeparator;
-  modalityFilter?: LanguageModality[];
-  objectID?: string;
-  objectType?: ObjectType;
-  page?: number;
-  pinned?: string[];
-  populationMax?: number;
-  populationMin?: number;
-  profile?: ProfileType;
-  reportID?: ReportID;
-  scaleBy?: Field;
-  searchBy?: SearchableField;
-  searchString?: string;
-  secondarySortBy?: Field;
-  sortBehavior?: SortBehavior;
-  sortBy?: Field;
-  territoryFilter?: string;
-  territoryScopes?: TerritoryScope[];
-  view?: View;
-  vitalityEthCoarse?: VitalityEthnologueCoarse[];
-  vitalityEthFine?: VitalityEthnologueFine[];
-  writingSystemFilter?: string;
-};

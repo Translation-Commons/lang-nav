@@ -6,7 +6,7 @@ import { usePageBrightness } from '@shared/hooks/usePageBrightness';
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { getParamsFromURL } from './getParamsFromURL';
 import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
-import { PageParamsOptional } from './PageParamTypes';
+import type { PageParams } from './PageParamTypes';
 import { getDefaultParams } from './Profiles';
 
 const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -14,7 +14,7 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
   const pageBrightness = usePageBrightness();
 
   const updatePageParams = useCallback(
-    (newParams: PageParamsOptional) => {
+    (newParams: Partial<PageParams>) => {
       setURLPageParams((prev) => getNewURLSearchParams(newParams, prev));
     },
     [setURLPageParams],
@@ -31,7 +31,7 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     );
 
     Object.keys(instantiatedParams).forEach((key) => {
-      const typedKey = key as keyof PageParamsOptional;
+      const typedKey = key as keyof PageParams;
       if (instantiatedParams[typedKey] == null) delete instantiatedParams[typedKey];
     });
     return {
