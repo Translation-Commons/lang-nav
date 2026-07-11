@@ -15,7 +15,7 @@ const GoogleTranslateSupportStatus: React.FC<{ lang: LanguageData }> = ({ lang }
   const hoverContent = lang.googleTranslate.map((entry) => entry.name).join(', ');
 
   return (
-    <Hoverable hoverContent={hoverContent} style={{ display: 'inline-flex', alignItems: 'center' }}>
+    <Hoverable hoverContent={hoverContent}>
       <CheckCircle2Icon
         style={{ color: 'var(--color-green)', verticalAlign: 'middle' }}
         size={'1em'}
