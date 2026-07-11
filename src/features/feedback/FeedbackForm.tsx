@@ -1,10 +1,12 @@
 import { MessageSquareTextIcon } from 'lucide-react';
 
 import PopupCard from '@features/layers/popupcard/PopupCard';
+
 import LinkButton from '@shared/ui/LinkButton';
+
 import { FeedbackEmailForm } from './FeedbackEmailForm';
 
-const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6'
+const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6';
 
 export function FeedbackForm() {
   return (
@@ -17,7 +19,7 @@ export function FeedbackForm() {
       body={
         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em', width: '300px' }}>
           <label>Tell us about your goals, rate our data, and help us build better futures.</label>
-          <LinkButton href={SURVEY_LINK} title='Submit a Google survey'>
+          <LinkButton href={SURVEY_LINK} title="Submit a Google survey">
             <MessageSquareTextIcon display="block" size="1em" />
             Take 2-min Survey
           </LinkButton>
