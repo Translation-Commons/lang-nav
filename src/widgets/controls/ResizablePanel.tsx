@@ -27,13 +27,16 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <aside
       style={{
+        position: 'sticky',
+        top: 'var(--navbar-height, 0px)',
+        height: 'calc(100vh - var(--navbar-height, 0px))',
         width: panelWidth,
         maxWidth: isOpen ? panelWidth : '0',
         borderRight: panelSide === 'left' ? '2px solid var(--color-button-primary)' : undefined,
         borderLeft: panelSide === 'right' ? '2px solid var(--color-button-primary)' : undefined,
         transition: shouldEaseTransition ? 'max-width 0.3s ease-in-out' : undefined,
         overflow: 'hidden',
-        position: 'relative',
+        flexShrink: 0,
       }}
     >
       {isOpen && (
@@ -48,6 +51,7 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         style={{
           display: 'flex',
           flexDirection: 'column',
+          height: '100%',
           alignContent: panelSide === 'left' ? 'flex-start' : 'flex-end',
           right: panelSide === 'right' ? 0 : undefined,
           // keeps the inner content from shrinking when collapsing
@@ -81,9 +85,10 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         </div>
         <div
           style={{
-            overflowY: 'scroll',
+            flex: 1,
+            minHeight: 0,
+            overflowY: 'auto',
             overflowX: 'hidden',
-            height: '90vh',
             width: panelWidth,
             padding: '0.5em',
           }}
