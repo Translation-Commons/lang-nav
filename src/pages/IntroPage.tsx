@@ -1,47 +1,47 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import CommonObjectives from '@widgets/CommonObjectives';
-import LargeLangNavLogo from '@widgets/docs/LargeLangNavLogo';
+
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+
+import IntroHeroSection from './intro/IntroHeroSection';
+import IntroScrollContainer from './intro/IntroScrollContainer';
+import IntroScrollSection from './intro/IntroScrollSection';
+import IntroSectionNav from './intro/IntroSectionNav';
+import { useIntroSectionNav } from './intro/useIntroSectionNav';
+
+// Lazy-loaded so the map's d3 dependencies stay out of the initial bundle for this
+// (likely the app's most-visited) landing route, matching DataPageBody's precedent.
+const IntroMapSection = React.lazy(() => import('./intro/IntroMapSection'));
+
+const SECTION_LABELS = ['Home', 'Map', 'Common Objectives'];
 
 const IntroPage: React.FC = () => {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const { activeIndex, scrollToSection } = useIntroSectionNav(scrollRef, SECTION_LABELS.length);
+
   return (
-    <IntroPageContainer>
-      <div style={{ marginTop: '1em' }}>
-        <LargeLangNavLogo width={240} />
-      </div>
-      <div style={{ margin: '.5em 0', fontSize: '3em' }}>
-        Welcome to the <strong>Lang</strong>uage <strong>Nav</strong>igator
-      </div>
-      <p>
-        This website is a comprehensive resource for exploring and understanding languages. It
-        provides access to a wide range of linguistic data, including language classification,
-        geographic distribution, digital support, and writing systems. The website is in beta{' '}
-        <em>β</em> mode -- meaning that most functionality is present but there still may be errors,
-        particularly with data.
-      </p>
-      <p>
-        To get started, click on the &quot;Data&quot; tab in the navigation bar above. Or, choose
-        from the common objectives below.
-      </p>
-      <CommonObjectives />
-    </IntroPageContainer>
+    <>
+      <IntroScrollContainer ref={scrollRef}>
+        <IntroScrollSection animate={false}>
+          <IntroHeroSection onScrollDown={() => scrollToSection(1)} />
+        </IntroScrollSection>
+        <IntroScrollSection>
+          <ContainErrorsAndSuspense>
+            <IntroMapSection />
+          </ContainErrorsAndSuspense>
+        </IntroScrollSection>
+        <IntroScrollSection align="top">
+          <CommonObjectives />
+        </IntroScrollSection>
+      </IntroScrollContainer>
+      <IntroSectionNav
+        labels={SECTION_LABELS}
+        activeIndex={activeIndex}
+        onSelect={scrollToSection}
+      />
+    </>
   );
 };
-
-function IntroPageContainer({ children }: React.PropsWithChildren) {
-  return (
-    <div
-      style={{
-        padding: '1em',
-        textAlign: 'center',
-        minHeight: '80vh',
-        maxWidth: '1000px',
-        margin: '0 auto',
-      }}
-    >
-      {children}
-    </div>
-  );
-}
 
 export default IntroPage;

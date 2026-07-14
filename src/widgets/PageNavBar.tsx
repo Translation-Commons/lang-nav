@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
@@ -12,9 +12,24 @@ import SettingsButton from './controls/SettingsButton';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
+  const navRef = useRef<HTMLElement>(null);
+
+  // Publish the navbar's actual rendered height as a CSS var so other pages (e.g. the
+  // scroll-snapped Intro hero) can size full-viewport sections as calc(100vh - this).
+  // Measured rather than hardcoded since the navbar wraps to two rows on narrow viewports.
+  useEffect(() => {
+    const el = navRef.current;
+    if (!el) return;
+    const observer = new ResizeObserver((entries) => {
+      const height = entries[0]?.contentRect.height;
+      if (height) document.documentElement.style.setProperty('--navbar-height', `${height}px`);
+    });
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <NavBarContainer>
+    <NavBarContainer ref={navRef}>
       <NavBarTitle>
         <img
           src={`/lang-nav/logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
@@ -56,9 +71,13 @@ const NavBarLink: React.FC<React.PropsWithChildren<{ path: string }>> = ({ path,
   );
 };
 
-const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
+const NavBarContainer: React.FC<React.PropsWithChildren<{ ref?: React.Ref<HTMLElement> }>> = ({
+  children,
+  ref,
+}) => {
   return (
     <nav
+      ref={ref}
       className="NavBar"
       style={{
         alignItems: 'center',
