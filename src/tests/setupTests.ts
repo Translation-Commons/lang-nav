@@ -14,6 +14,15 @@ class ResizeObserver {
 
 window.ResizeObserver = ResizeObserver;
 
+// Mock IntersectionObserver for tests (used by useRevealOnScroll)
+class IntersectionObserver {
+  observe() {}
+  unobserve() {}
+  disconnect() {}
+}
+
+window.IntersectionObserver = IntersectionObserver as unknown as typeof window.IntersectionObserver;
+
 // Only if you want request mocking; otherwise remove this whole block + MSW deps
 beforeAll(async () => {
   const server = await getServer();

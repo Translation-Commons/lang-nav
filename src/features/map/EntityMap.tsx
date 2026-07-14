@@ -27,9 +27,20 @@ type Props = {
   entities: ObjectData[];
   maxWidth?: number;
   allowSidebar?: boolean;
+  // Fires on every zoom/pan change with the current zoom multiplier (1 = fully
+  // zoomed out). Lets callers react to zoom level, e.g. to progressively reveal
+  // more entities as the user zooms in. Should be a stable reference (e.g. a
+  // useState setter) — useMapZoom's internal effect only captures onZoom once
+  // on mount, so a callback that changes identity across renders would go stale.
+  onZoomChange?: (zoomFactor: number) => void;
 };
 
-const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = false }) => {
+const EntityMap: React.FC<Props> = ({
+  entities,
+  maxWidth = 2000,
+  allowSidebar = false,
+  onZoomChange,
+}) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
 
@@ -46,7 +57,10 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
     mapHeight,
-    onZoom: setZoomFactor,
+    onZoom: (factor) => {
+      setZoomFactor(factor);
+      onZoomChange?.(factor);
+    },
   });
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
