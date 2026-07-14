@@ -6,6 +6,8 @@ import { getNewURL } from '@features/params/getNewURL';
 import { ObjectType, PageParamKey, PageParams, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
+import './CommonObjectives.css';
+
 const CommonObjectives: React.FC = () => {
   return (
     <div style={{ textAlign: 'center', margin: '2em auto', maxWidth: '600px' }}>
@@ -17,7 +19,7 @@ const CommonObjectives: React.FC = () => {
 
 export const ObjectiveList: React.FC = () => {
   return (
-    <div style={{ textAlign: 'left', width: 'fit-content', margin: '0 auto' }}>
+    <div className="ObjectiveGrid">
       <Objective
         label="Find information about a language."
         inputPlaceholder="Enter a language name"
@@ -47,6 +49,11 @@ type ObjectiveProps = {
   urlPath?: LangNavPageName;
 };
 
+// Renders 2 top-level nodes (label span + form) directly into the parent's
+// grid: the form uses `display: contents` so it doesn't create its own box,
+// letting its own children (input-or-spacer, GoButton) land in the grid's
+// 2nd/3rd columns. This keeps every row's controls aligned regardless of
+// label length, while the form still fully works for submit/Enter-to-submit.
 const Objective: React.FC<ObjectiveProps> = ({
   inputPlaceholder,
   inputParam,
@@ -59,26 +66,28 @@ const Objective: React.FC<ObjectiveProps> = ({
   if (inputParam) params = { [inputParam]: inputText, ...urlParams };
 
   return (
-    <div style={{ marginBottom: '0.5em' }}>
-      {label}
+    <>
+      <span>{label}</span>
       <form
-        style={{ display: 'inline-flex' }}
+        style={{ display: 'contents' }}
         onSubmit={(e) => {
           e.preventDefault();
           window.location.href = `${urlPath}${getNewURL(params)}`;
         }}
       >
-        {inputParam && (
+        {inputParam ? (
           <input
-            style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
+            className="ObjectiveInput"
             placeholder={inputPlaceholder}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           />
+        ) : (
+          <span />
         )}
         <GoButton params={params} urlPath={urlPath} />
       </form>
-    </div>
+    </>
   );
 };
 
@@ -87,8 +96,8 @@ const GoButton: React.FC<{ params: Partial<PageParams>; urlPath: LangNavPageName
   urlPath,
 }) => {
   return (
-    <a href={`${urlPath}${getNewURL(params)}`} style={{ marginLeft: '0.5em' }}>
-      <button style={{ padding: '0.25em 0.5em' }} type="submit">
+    <a href={`${urlPath}${getNewURL(params)}`}>
+      <button className="ObjectiveGoButton" type="submit">
         GO
       </button>
     </a>

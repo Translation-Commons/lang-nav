@@ -1,0 +1,63 @@
+.ObjectiveGrid {
+  display: grid;
+  grid-template-columns: max-content 1fr auto;
+  align-items: center;
+  column-gap: 0.75em;
+  row-gap: 0.75em;
+  width: fit-content;
+  max-width: 100%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.ObjectiveInput,
+.ObjectiveGoButton {
+  border: 0.125em solid var(--color-text);
+  border-radius: 1.5em;
+  font-size: 1em;
+  font-family: inherit;
+}
+
+.ObjectiveInput {
+  padding: 0.35em 0.85em;
+  min-width: 12em;
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+.ObjectiveInput::placeholder {
+  color: var(--color-text-secondary);
+}
+
+.ObjectiveInput:focus {
+  outline: none;
+  border-color: var(--color-button-hover);
+}
+
+.ObjectiveGoButton {
+  padding: 0.35em 1em;
+  background-color: var(--color-background);
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.ObjectiveGoButton:hover,
+.ObjectiveGoButton:focus {
+  background-color: var(--color-button-hover);
+  color: var(--color-text-on-color);
+  border-color: var(--color-button-hover);
+}
+
+@media (max-width: 480px) {
+  .ObjectiveGrid {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+    text-align: center;
+    width: 100%;
+  }
+
+  .ObjectiveInput {
+    min-width: 0;
+    width: 100%;
+  }
+}
