@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -18,7 +18,7 @@ import MapCentroids from './MapCentroids';
 import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
 import MapSidebar from './MapSidebar';
 import MapTerritories from './MapTerritories';
-import useMapZoom from './UseMapZoom';
+import useMapZoom, { VisibleRange } from './UseMapZoom';
 import ZoomControls from './ZoomControls';
 
 type Props = {
@@ -34,27 +34,18 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const [zoomFactor, setZoomFactor] = useState(1);
+  const [visibleRange, setVisibleRange] = useState<VisibleRange | null>(null);
 
   const { containerRef, contentRef, zoomIn, zoomOut, resetTransform } = useMapZoom({
     mapWidth: MAP_INTERNAL_WIDTH,
     mapHeight,
-    onZoom: setZoomFactor,
+    onZoom: (zoom, range) => {
+      setZoomFactor(zoom);
+      setVisibleRange(range);
+    },
   });
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [mapContainerWidth, setMapContainerWidth] = useState(800);
-
-  useEffect(() => {
-    const el = mapContainerRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setMapContainerWidth(width);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const drawableEntities = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -101,13 +92,8 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   );
 
   return (
-    <div ref={mapContainerRef} style={{ maxWidth, width: '100%', position: 'relative' }}>
-      <ZoomControls
-        zoomIn={zoomIn}
-        zoomOut={zoomOut}
-        resetTransform={resetTransform}
-        containerWidth={mapContainerWidth}
-      />
+    <div style={{ maxWidth, width: '100%', position: 'relative' }}>
+      <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
 
       <div
         style={{
@@ -166,13 +152,13 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
 
             <MapCentroids
               drawableEntities={drawableEntities}
-              onClick={onClick}
+              pinCard={onClick}
               scalar={1200 / maxWidth}
               zoomFactor={zoomFactor}
+              visibleRange={visibleRange}
               coloringFunctions={coloringFunctions}
               hoveredId={hoveredId}
               pinnedIds={allowSidebar ? pinned : []}
-              allowSidebar={allowSidebar}
             />
           </div>
         </div>

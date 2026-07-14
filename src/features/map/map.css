@@ -1,37 +1,27 @@
+@keyframes fadein {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.centroid-node {
+  animation: fadein 300ms ease-in-out;
+  transition: opacity 300ms ease-in-out;
+  opacity: 1;
+}
+
+.centroid-node.exiting {
+  opacity: 0;
+}
+
 circle {
   transition:
     fill 0.25s,
-    stroke 0.25s,
-    scale 0.25s;
+    stroke 0.25s;
   pointer-events: fill;
   cursor: pointer;
   stroke-width: 1px;
 }
 
-circle:hover,
-circle.hovered {
-  filter: brightness(1.2);
-  scale: 1.5;
-  stroke: var(--color-button-primary);
-}
-
-circle.pinned {
-  stroke: var(--color-button-primary);
-}
-
-.mapTerritory {
-  cursor: pointer;
-}
-
-.mapTerritory:hover,
-.mapTerritory.hovered {
-  filter: brightness(1.2);
-  stroke: var(--color-button-primary);
-  stroke-width: 2px;
-}
-
-.mapTerritory.pinned {
-  stroke: var(--color-button-primary);
-  filter: brightness(1.1);
-  stroke-width: 2px;
+circle:hover {
+  fill: var(--color-button-primary);
 }
