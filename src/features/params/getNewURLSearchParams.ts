@@ -1,7 +1,7 @@
 import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 import Field from '@features/transforms/fields/Field';
 
-import { ObjectType, PageParamKey, PageParamsOptional, View } from './PageParamTypes';
+import { ObjectType, PageParamKey, PageParams, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
 /**
@@ -9,7 +9,7 @@ import { getDefaultParams, ProfileType } from './Profiles';
  */
 
 function buildNextURLSearchParams(
-  newParams: PageParamsOptional,
+  newParams: Partial<PageParams>,
   next: URLSearchParams,
 ): URLSearchParams {
   // Convert newParams to array for iterate
@@ -103,7 +103,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
 }
 
 function clearContextDependentParams(
-  newParams: PageParamsOptional,
+  newParams: Partial<PageParams>,
   next: URLSearchParams,
   prev?: URLSearchParams,
 ): URLSearchParams {
@@ -153,7 +153,7 @@ function clearContextDependentParams(
 }
 
 export function getNewURLSearchParams(
-  newParams: PageParamsOptional,
+  newParams: Partial<PageParams>,
   prev?: URLSearchParams,
 ): URLSearchParams {
   let next = new URLSearchParams(prev);

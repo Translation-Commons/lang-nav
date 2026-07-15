@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { PageParamsOptional } from '@features/params/PageParamTypes';
+import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
@@ -37,7 +37,7 @@ function getHookResult(
 }
 
 describe('useFilteredEntities', () => {
-  const setupMockParams = (overrides: PageParamsOptional = {}) => {
+  const setupMockParams = (overrides: Partial<PageParams> = {}) => {
     const mockUsePageParams = createMockUsePageParams(overrides);
     (usePageParams as Mock).mockReturnValue(mockUsePageParams);
   };

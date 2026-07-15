@@ -15,7 +15,6 @@ import { uniqueBy } from '@shared/lib/setUtils';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { getModalityLabel } from './LanguageModalityDisplay';
 import LanguageTerritoryList from './LanguageTerritoryList';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
 import LanguageVitalityMeter from './vitality/VitalityMeter';
@@ -28,7 +27,7 @@ interface Props {
 const LanguageCard: React.FC<Props> = ({ lang }) => {
   const { view } = usePageParams();
   const sortFunction = getSortFunction();
-  const { locales, modality, populationEstimate } = lang;
+  const { locales, populationEstimate } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode ?? '',
@@ -53,7 +52,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         <CardField
           title="Population"
           field={Field.Population}
-          description="Population: How many people know the language across the world."
+          description="How many people know the language across the world."
         >
           <LanguagePopulationEstimate lang={lang} />
         </CardField>
@@ -66,16 +65,6 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       >
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
       </CardField>
-
-      {modality != null && (
-        <CardField
-          title="Modality"
-          field={Field.Modality}
-          description="The ways in which people use the language."
-        >
-          {getModalityLabel(modality)}
-        </CardField>
-      )}
 
       {countryLocales.length > 0 && (
         <CardField

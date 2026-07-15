@@ -11,6 +11,8 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
+
 const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   // Get locales from unique territories
   const locales = uniqueBy(
@@ -31,7 +33,7 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
   const rows = Math.ceil(Math.min(locales.length, 10) / 2);
 
   return (
-    <DetailsSection title="Speakers by Territory">
+    <DetailsSection title={getLanguageModalityUserLabel(lang.modality) + ' by Territory'}>
       <div
         style={{
           display: 'grid',

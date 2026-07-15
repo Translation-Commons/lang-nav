@@ -18,7 +18,7 @@ import {
 } from '@shared/lib/amplitudeFormat';
 
 import { getParamsFromURL } from './getParamsFromURL';
-import { PageParamsOptional } from './PageParamTypes';
+import { PageParams } from './PageParamTypes';
 import { getDefaultParams } from './Profiles';
 
 /**
@@ -32,7 +32,7 @@ export default function useAmplitudeParamEvents() {
   const location = useLocation();
   const [urlParams] = useSearchParams();
 
-  const prevParamsRef = useRef<PageParamsOptional | null>(null);
+  const prevParamsRef = useRef<Partial<PageParams> | null>(null);
   const prevPathnameRef = useRef<string>(location.pathname);
 
   useEffect(() => {
@@ -84,8 +84,8 @@ export default function useAmplitudeParamEvents() {
     }
 
     for (const key of FILTER_PARAM_KEYS) {
-      const prevVal = previous[key as keyof PageParamsOptional];
-      const nextVal = current[key as keyof PageParamsOptional];
+      const prevVal = previous[key as keyof PageParams];
+      const nextVal = current[key as keyof PageParams];
       if (areFilterValuesEqual(prevVal, nextVal)) continue;
       trackFilterChanged({
         ...base,

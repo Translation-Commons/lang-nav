@@ -1,7 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
+import { getModalityFromLabel, getModalityLabel } from '@strings/LanguageModalityStrings';
+
 import { LanguageModality } from '../LanguageModality';
-import { getModalityFromLabel, getModalityLabel } from '../LanguageModalityDisplay';
 
 describe('Enum <-> Label conversions', () => {
   it('Enum <-> Label conversions are stable', () => {

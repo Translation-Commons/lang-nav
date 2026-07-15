@@ -19,6 +19,7 @@ import {
   WikipediaLink,
   WikipediaStatusDisplay,
 } from '@entities/ui/ObjectWikipediaInfo';
+import Win11LanguagePackSupportStatus from '@entities/ui/Win11LanguagePackSupportStatus';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 
@@ -81,6 +82,23 @@ const columns: TableColumn<LanguageData>[] = [
     exportValue: (lang) => {
       if (!lang.googleTranslate || lang.googleTranslate.length === 0) return 'n/a';
       return lang.googleTranslate.map((entry) => entry.name).join('; ');
+    },
+  },
+  {
+    key: 'Windows 11',
+    description:
+      'Language pack available in Windows 11 for viewing menus, dialog boxes, and supported apps and websites.',
+    render: (lang) => <Win11LanguagePackSupportStatus lang={lang} />,
+    exportValue: (lang) => {
+      if (!lang.win11LanguagePacks || lang.win11LanguagePacks.length === 0) return 'n/a';
+      return lang.win11LanguagePacks
+        .map((entry) => {
+          const parts = [entry.name];
+          if (entry.locale) parts.push(`(${entry.locale})`);
+          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
+          return parts.join(' ');
+        })
+        .join('; ');
     },
   },
   {

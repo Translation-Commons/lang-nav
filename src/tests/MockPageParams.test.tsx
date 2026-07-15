@@ -1,14 +1,14 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import { PageParamsContextState } from '@features/params/PageParamsContext';
-import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
+import { ObjectType, PageParams, View } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
 import Field from '@features/transforms/fields/Field';
 
 const mockUpdatePageParams = vi.fn();
 
 export const createMockUsePageParams = (
-  overrides: PageParamsOptional = {},
+  overrides: Partial<PageParams> = {},
 ): PageParamsContextState => {
   return {
     ...getDefaultParams(),
@@ -28,7 +28,7 @@ describe('createMockUsePageParams', () => {
   });
 
   it('overrides default values when provided', () => {
-    const overrides: PageParamsOptional = {
+    const overrides: Partial<PageParams> = {
       sortBy: Field.Name,
       objectType: ObjectType.Locale,
       limit: 25,

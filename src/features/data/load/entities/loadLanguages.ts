@@ -1,4 +1,3 @@
-import { getModalityFromLabel } from '@entities/language/LanguageModalityDisplay';
 import {
   getBaseLanguageData,
   LanguageData,
@@ -6,6 +5,8 @@ import {
 } from '@entities/language/LanguageTypes';
 
 import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
+
+import { getModalityFromLabel } from '@strings/LanguageModalityStrings';
 
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 

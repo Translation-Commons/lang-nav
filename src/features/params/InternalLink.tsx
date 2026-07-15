@@ -4,11 +4,11 @@ import { Link, useSearchParams } from 'react-router-dom';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { getNewURLSearchParams } from './getNewURLSearchParams';
-import { PageParamsOptional } from './PageParamTypes';
+import { PageParams } from './PageParamTypes';
 
 type Props = {
   page?: LangNavPageName;
-  params?: PageParamsOptional;
+  params?: Partial<PageParams>;
   children: React.ReactNode;
   style?: React.CSSProperties;
   keepOldParams?: boolean;

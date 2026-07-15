@@ -19,6 +19,7 @@ import {
   ObjectBase,
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
+  Win11LanguagePackData,
 } from '../types/DataTypes';
 
 import { LanguageModality } from './LanguageModality';
@@ -121,6 +122,7 @@ export interface LanguageData extends ObjectBase {
   wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
   googleTranslate?: GoogleTranslateData[];
+  win11LanguagePacks?: Win11LanguagePackData[];
 
   latitude?: number;
   longitude?: number;

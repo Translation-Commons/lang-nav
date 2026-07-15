@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { ObjectType, PageParamsOptional, View } from '@features/params/PageParamTypes';
+import { ObjectType, PageParams, View } from '@features/params/PageParamTypes';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
@@ -75,7 +75,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 type MapsProps = {
   lang: LanguageData;
   // Updating the global page params, not the local params
-  updatePageParams: (newParams: PageParamsOptional) => void;
+  updatePageParams: (newParams: Partial<PageParams>) => void;
 };
 function Maps({ lang, updatePageParams }: MapsProps) {
   const [showConstituents, setShowConstituents] = React.useState(true);
