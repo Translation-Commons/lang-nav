@@ -22,10 +22,20 @@ export function usePageBrightness(): PageBrightnessParams {
 
   const pageBrightness = preference === 'follow device' ? getSystemPageBrightness() : preference;
 
-  // Apply the resolved theme to <html> (or <body>)
+  // Apply the resolved theme to <html>, always setting an explicit class.
+  // When following the device, track OS changes live.
   useEffect(() => {
-    document.documentElement.classList.remove('light', 'dark');
-    if (preference !== 'follow device') document.documentElement.classList.add(preference);
+    const root = document.documentElement;
+    const mq = window.matchMedia('(prefers-color-scheme: dark)');
+    const apply = () => {
+      const resolved =
+        preference === 'follow device' ? (mq.matches ? 'dark' : 'light') : preference;
+      root.classList.remove('light', 'dark');
+      root.classList.add(resolved);
+    };
+    apply();
+    mq.addEventListener('change', apply);
+    return () => mq.removeEventListener('change', apply);
   }, [preference]);
 
   // Persist preference (not resolved value)
@@ -43,9 +53,6 @@ export function usePageBrightness(): PageBrightnessParams {
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
   }, []);
-
-  // Intentionally no listener for system theme changes when preference is 'follow device'
-  // Since the CSS will automatically pick up on it via the media query
 
   // Public API
   return {

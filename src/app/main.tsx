@@ -4,6 +4,8 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.tsx';
 
+import './tailwind.css';
+
 import './colors.css';
 import './controls.css';
 

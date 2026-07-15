@@ -12,6 +12,7 @@ import PageParamsProvider from '@features/params/PageParamsProvider';
 import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
+import { TooltipProvider } from '@shared/ui/tooltip';
 
 import PageRoutes from './PageRoutes';
 
@@ -44,19 +45,21 @@ function AmplitudeTracker() {
 
 function App() {
   return (
-    <PageParamsProvider>
-      <DeferredDataProvider>
-        <HoverCardProvider>
-          <AmplitudeTracker />
-          <PageNavBar />
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <PageRoutes />
-          </div>
-          <PageFooter />
-          <ConsentBanner />
-        </HoverCardProvider>
-      </DeferredDataProvider>
-    </PageParamsProvider>
+    <TooltipProvider delay={300}>
+      <PageParamsProvider>
+        <DeferredDataProvider>
+          <HoverCardProvider>
+            <AmplitudeTracker />
+            <PageNavBar />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <PageRoutes />
+            </div>
+            <PageFooter />
+            <ConsentBanner />
+          </HoverCardProvider>
+        </DeferredDataProvider>
+      </PageParamsProvider>
+    </TooltipProvider>
   );
 }
 
