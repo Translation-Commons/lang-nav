@@ -74,3 +74,9 @@ export type Win11LanguagePackData = {
   locale?: string;
   writingSystem?: string;
 };
+export type IosData = {
+  languageCodePath: string; // e.g. "man/bam" when Google lists grouped or alternate code paths
+  name: string;
+  locale?: string;
+  writingSystem?: string;
+};

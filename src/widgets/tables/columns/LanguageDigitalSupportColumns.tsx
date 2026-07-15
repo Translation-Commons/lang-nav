@@ -13,6 +13,7 @@ import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
+import IosSupportStatus from '@entities/ui/IosSupportStatus';
 import {
   WikipediaActiveUsers,
   WikipediaArticles,
@@ -92,6 +93,22 @@ const columns: TableColumn<LanguageData>[] = [
     exportValue: (lang) => {
       if (!lang.win11LanguagePacks || lang.win11LanguagePacks.length === 0) return 'n/a';
       return lang.win11LanguagePacks
+        .map((entry) => {
+          const parts = [entry.name];
+          if (entry.locale) parts.push(`(${entry.locale})`);
+          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
+          return parts.join(' ');
+        })
+        .join('; ');
+    },
+  },
+  {
+    key: 'iOS',
+    description: 'Language entries supported in iOS.',
+    render: (lang) => <IosSupportStatus lang={lang} />,
+    exportValue: (lang) => {
+      if (!lang.ios || lang.ios.length === 0) return 'n/a';
+      return lang.ios
         .map((entry) => {
           const parts = [entry.name];
           if (entry.locale) parts.push(`(${entry.locale})`);
