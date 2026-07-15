@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 

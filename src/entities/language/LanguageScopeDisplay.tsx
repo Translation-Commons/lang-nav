@@ -2,7 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Pill from '@shared/ui/Pill';
+import Pill from '@shared/ui/old/Pill';
 
 import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 

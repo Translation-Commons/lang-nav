@@ -3,7 +3,7 @@ import React from 'react';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import DetailsSection from '@shared/containers/DetailsSection';
-import ArcGauge from '@shared/ui/ArcGauge';
+import ArcGauge from '@shared/ui/old/ArcGauge';
 
 import { getVitalityScore } from './LanguageVitalityComputation';
 import { getVitalityLabel } from './VitalityStrings';

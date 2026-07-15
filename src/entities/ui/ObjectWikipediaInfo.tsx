@@ -5,9 +5,9 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 const ObjectWikipediaInfo: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;

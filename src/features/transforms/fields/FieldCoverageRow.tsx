@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
-import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
+import BackgroundProgressBar from '@shared/ui/old/BackgroundProgressBar';
 
 import BaseColorBar from '../coloring/BaseColorBar';
 import getColorGradientForField from '../coloring/getColorGradientForField';

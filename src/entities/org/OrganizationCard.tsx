@@ -7,7 +7,7 @@ import Field from '@features/transforms/fields/Field';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { OrganizationData } from './OrganizationTypes';
 

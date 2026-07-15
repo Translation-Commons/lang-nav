@@ -1,7 +1,7 @@
 import React from 'react';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 const CellPopulation: React.FC<{ population?: number; percent?: number }> = ({
   population,

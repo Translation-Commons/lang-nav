@@ -12,7 +12,7 @@ import LanguageRetirementReason from '@entities/language/LanguageRetirementReaso
 import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 

@@ -22,8 +22,8 @@ import {
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import { PercentageDifference } from '@shared/ui/PercentageDifference';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import { PercentageDifference } from '@shared/ui/old/PercentageDifference';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 

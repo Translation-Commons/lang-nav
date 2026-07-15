@@ -5,7 +5,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { getConditionFunction } from './LanguagePluralComputation';
 import PluralRuleSymbolExplanation, { SymbolToLabel } from './PluralRuleSymbolExplanation';

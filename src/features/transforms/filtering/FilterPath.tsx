@@ -17,7 +17,7 @@ import {
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';

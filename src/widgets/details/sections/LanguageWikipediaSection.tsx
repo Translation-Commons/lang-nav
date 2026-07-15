@@ -7,9 +7,9 @@ import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
 import DetailsSection from '@shared/containers/DetailsSection';
 import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
 import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
-import CountCompact from '@shared/ui/CountCompact';
-import ExternalLink from '@shared/ui/ExternalLink';
-import Pill from '@shared/ui/Pill';
+import CountCompact from '@shared/ui/old/CountCompact';
+import ExternalLink from '@shared/ui/old/ExternalLink';
+import Pill from '@shared/ui/old/Pill';
 
 const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { wikipedias } = lang;

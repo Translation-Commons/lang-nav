@@ -11,7 +11,7 @@ import Field from '@features/transforms/fields/Field';
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 function getCensusColumns(): TableColumn<CensusData>[] {
   return [

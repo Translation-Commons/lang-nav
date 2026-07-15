@@ -13,7 +13,7 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';

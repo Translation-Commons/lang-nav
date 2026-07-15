@@ -7,7 +7,7 @@ import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/Obje
 import { getObjectSubtitle } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 type Props = {
   object: ObjectData;

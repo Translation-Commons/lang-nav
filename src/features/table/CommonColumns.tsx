@@ -8,7 +8,7 @@ import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/Obje
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import PinButton from '@shared/ui/PinButton';
+import PinButton from '@shared/ui/old/PinButton';
 
 import TableColumn from './TableColumn';
 

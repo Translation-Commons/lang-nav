@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoadingIcon from '@shared/ui/LoadingIcon';
+import LoadingIcon from '@shared/ui/old/LoadingIcon';
 
 const LoadingPage: React.FC = () => {
   return (

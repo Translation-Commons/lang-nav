@@ -5,7 +5,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 import useConsent from '@features/consent/useConsent';
 import InternalLink from '@features/params/InternalLink';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 import CreativeCommonsLicense from './CreativeCommonsLicense';
 

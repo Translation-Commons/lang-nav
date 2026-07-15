@@ -4,9 +4,9 @@ import ZIndex from '@features/layers/ZIndex';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import DecimalNumber from '@shared/ui/DecimalNumber';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';

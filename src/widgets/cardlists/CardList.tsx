@@ -9,7 +9,7 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import CardInCardList from './CardInCardList';
 import ResponsiveGrid from './ResponsiveGrid';

@@ -7,8 +7,8 @@ import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
-import DecimalNumber from '@shared/ui/DecimalNumber';
-import Deemphasized from '@shared/ui/Deemphasized';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

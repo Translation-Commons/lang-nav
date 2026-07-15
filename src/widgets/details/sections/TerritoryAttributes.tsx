@@ -9,7 +9,7 @@ import {
   numberToFixedUnlessSmall,
   numberToSigFigs,
 } from '@shared/lib/numberUtils';
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   const { population, landArea, gdp, literacyPercent } = territory;

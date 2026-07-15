@@ -7,8 +7,8 @@ import { getLanguagesRelevantToObject } from '@features/transforms/filtering/fil
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import CardField from '@shared/containers/CardField';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
 

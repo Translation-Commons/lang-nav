@@ -6,7 +6,7 @@ import Field from '@features/transforms/fields/Field';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
 import CardField from '@shared/containers/CardField';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 interface Props {
   keyboard: KeyboardData;

@@ -3,7 +3,7 @@ import React from 'react';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 import DocsSection from '@widgets/docs/DocsSection';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 const PrivacyPolicyPage: React.FC = () => {
   return (

@@ -15,8 +15,8 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
 import { unique } from '@shared/lib/setUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 

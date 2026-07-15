@@ -7,8 +7,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
 
-import ExternalLink from '@shared/ui/ExternalLink';
-import LinkButton from '@shared/ui/LinkButton';
+import ExternalLink from '@shared/ui/old/ExternalLink';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 const LinkComponents: React.FC = () => {
   return (

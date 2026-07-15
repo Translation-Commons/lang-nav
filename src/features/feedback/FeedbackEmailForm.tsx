@@ -1,7 +1,7 @@
 import { MailIcon } from 'lucide-react';
 import { useState } from 'react';
 
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { getFeedbackEmailBody } from './getFeedbackEmailBody';
 

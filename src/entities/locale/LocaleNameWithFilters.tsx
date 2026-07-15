@@ -6,7 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import Highlightable from '@shared/ui/Highlightable';
+import Highlightable from '@shared/ui/old/Highlightable';
 
 import { getLocaleName } from './LocaleStrings';
 

@@ -8,7 +8,7 @@ import { OrganizationData } from '@entities/org/OrganizationTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 type Props = {
   org: OrganizationData;

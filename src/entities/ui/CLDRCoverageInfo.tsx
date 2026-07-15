@@ -5,7 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getCLDRCoverageColor } from './CLDRCoverageLevels';
 

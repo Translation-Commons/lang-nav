@@ -8,8 +8,8 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import DetailsSection from '@shared/containers/DetailsSection';
 import { uniqueBy } from '@shared/lib/setUtils';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 

@@ -12,7 +12,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';
-import LoadingIcon from '@shared/ui/LoadingIcon';
+import LoadingIcon from '@shared/ui/old/LoadingIcon';
 
 import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';

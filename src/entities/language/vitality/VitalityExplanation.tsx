@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { LanguageData } from '../LanguageTypes';
 

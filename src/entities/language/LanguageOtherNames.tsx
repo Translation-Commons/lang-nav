@@ -4,7 +4,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import Highlightable from '@shared/ui/Highlightable';
+import Highlightable from '@shared/ui/old/Highlightable';
 
 const LanguageOtherNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { searchString } = usePageParams();

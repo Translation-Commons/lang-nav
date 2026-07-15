@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 const DetailsStatBlock: React.FC<{ label: string; children: React.ReactNode }> = ({
   label,

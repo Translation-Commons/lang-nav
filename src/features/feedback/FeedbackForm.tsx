@@ -2,7 +2,7 @@ import { MessageSquareTextIcon } from 'lucide-react';
 
 import PopupCard from '@features/layers/popupcard/PopupCard';
 
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { FeedbackEmailForm } from './FeedbackEmailForm';
 

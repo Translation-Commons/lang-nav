@@ -4,7 +4,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 type Props = {
   locale: LocaleData;

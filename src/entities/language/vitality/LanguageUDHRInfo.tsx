@@ -4,9 +4,9 @@ import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeratio
 
 import { UniversalDeclarationOfHumanRightsData } from '@entities/types/DataTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
-import ExternalLink from '@shared/ui/ExternalLink';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 import { LanguageData, LanguageScope } from '../LanguageTypes';
 

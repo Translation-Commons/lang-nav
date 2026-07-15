@@ -14,9 +14,9 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import DecimalNumber from '@shared/ui/DecimalNumber';
+import BackgroundProgressBar from '@shared/ui/old/BackgroundProgressBar';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
 
 const ReportEntitiesMissingFields: React.FC = () => {
   const { objectType } = usePageParams();

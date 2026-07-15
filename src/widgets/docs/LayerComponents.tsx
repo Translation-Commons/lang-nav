@@ -10,7 +10,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import DocsCard from './DocsCard';
 import DocsCardGrid from './DocsCardGrid';

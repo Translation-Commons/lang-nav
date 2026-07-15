@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import type { CensusLanguageNotes } from './CensusLanguageCheck';
 

@@ -3,7 +3,7 @@ import TableColumn from '@features/table/TableColumn';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 const columns: TableColumn<LocaleData>[] = [
   {

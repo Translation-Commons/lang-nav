@@ -1,7 +1,7 @@
 import React from 'react';
 
-import ActivityLevelDisplay, { ActivityLevel } from '@shared/ui/ActivityLevelDisplay';
-import LinkButton from '@shared/ui/LinkButton';
+import ActivityLevelDisplay, { ActivityLevel } from '@shared/ui/old/ActivityLevelDisplay';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import {
   getDigitalSupportDescription,

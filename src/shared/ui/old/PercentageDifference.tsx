@@ -2,9 +2,9 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
-import { numberToFixedUnlessSmall } from '../lib/numberUtils';
+import { numberToFixedUnlessSmall } from '../../lib/numberUtils';
 
 export const PercentageDifference: React.FC<{
   percentNew: number;

@@ -6,7 +6,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import CensusesInTerritory from './CensusesInTerritory';
 

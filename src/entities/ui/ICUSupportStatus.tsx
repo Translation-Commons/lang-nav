@@ -5,7 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 const ICUSupportStatus: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object.type !== ObjectType.Language) return null;

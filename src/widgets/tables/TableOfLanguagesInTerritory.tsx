@@ -12,7 +12,7 @@ import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import LocaleEcrmlCoverage from './LocaleEcrmlCoverage';
 

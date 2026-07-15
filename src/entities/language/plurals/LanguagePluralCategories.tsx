@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { LanguageData } from '../LanguageTypes';
 

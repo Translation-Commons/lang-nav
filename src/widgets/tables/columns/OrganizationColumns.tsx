@@ -6,8 +6,8 @@ import Field from '@features/transforms/fields/Field';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import ExternalLink from '@shared/ui/ExternalLink';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 function getOrganizationColumns(): TableColumn<OrganizationData>[] {
   return [

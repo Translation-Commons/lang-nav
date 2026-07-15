@@ -1,6 +1,6 @@
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { LocaleData } from '../LocaleTypes';
 

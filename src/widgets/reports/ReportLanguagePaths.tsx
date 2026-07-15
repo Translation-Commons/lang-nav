@@ -10,7 +10,7 @@ import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 import { uniqueBy } from '@shared/lib/setUtils';
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 import LanguagePath from './LanguagePathSimple';
 import LanguagePathsReportMultipleRoutes from './LanguagePathsReportsMultipleRoutes';

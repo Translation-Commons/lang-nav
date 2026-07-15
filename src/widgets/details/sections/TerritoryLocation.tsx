@@ -9,8 +9,8 @@ import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryType
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

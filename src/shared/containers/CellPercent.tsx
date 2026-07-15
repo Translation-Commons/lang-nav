@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DecimalNumber from '@shared/ui/DecimalNumber';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
 
 type Props = {
   alignFraction?: boolean;

@@ -21,7 +21,7 @@ import {
 } from '@entities/ui/ObjectWikipediaInfo';
 import Win11LanguagePackSupportStatus from '@entities/ui/Win11LanguagePackSupportStatus';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 const columns: TableColumn<LanguageData>[] = [
   // {

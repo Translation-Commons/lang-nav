@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import Hoverable from './Hoverable';
 

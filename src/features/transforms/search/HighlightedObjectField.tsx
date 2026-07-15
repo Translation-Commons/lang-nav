@@ -4,8 +4,8 @@ import { SearchableField } from '@features/params/PageParamTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import Highlightable from '@shared/ui/Highlightable';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import Highlightable from '@shared/ui/old/Highlightable';
 
 import getSearchableField from './getSearchableField';
 

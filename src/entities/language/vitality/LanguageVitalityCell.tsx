@@ -1,6 +1,6 @@
 import React from 'react';
 
-import ActivityLevelDisplay, { ActivityLevel } from '@shared/ui/ActivityLevelDisplay';
+import ActivityLevelDisplay, { ActivityLevel } from '@shared/ui/old/ActivityLevelDisplay';
 
 import { LanguageData } from '../LanguageTypes';
 

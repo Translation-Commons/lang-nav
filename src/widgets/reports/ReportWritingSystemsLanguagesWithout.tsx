@@ -18,8 +18,8 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 

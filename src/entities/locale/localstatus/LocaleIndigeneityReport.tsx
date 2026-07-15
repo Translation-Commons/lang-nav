@@ -7,7 +7,7 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import LocaleIndigeneityTable from './LocaleIndigeneityTable';
 

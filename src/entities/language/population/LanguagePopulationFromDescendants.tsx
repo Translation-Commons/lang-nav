@@ -9,7 +9,7 @@ import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import CellPopulation from '@shared/containers/CellPopulation';
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 

@@ -8,7 +8,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import { getDepth } from '@entities/lib/getObjectMiscFields';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 const ObjectDepthDisplay: React.FC<{
   object: ObjectData;

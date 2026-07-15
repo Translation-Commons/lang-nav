@@ -4,7 +4,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
-import Pill from '@shared/ui/Pill';
+import Pill from '@shared/ui/old/Pill';
 
 type Props = {
   title: ReactNode;

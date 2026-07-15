@@ -9,8 +9,8 @@ import { LanguageData, LanguageField, LanguageSource } from '@entities/language/
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 

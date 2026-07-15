@@ -15,8 +15,8 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import Deemphasized from '@shared/ui/Deemphasized';
-import Pill from '@shared/ui/Pill';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import Pill from '@shared/ui/old/Pill';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 

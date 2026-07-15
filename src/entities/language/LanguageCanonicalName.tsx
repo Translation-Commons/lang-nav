@@ -3,9 +3,9 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import usePageParams from '@features/params/usePageParams';
 
-import Highlightable from '@shared/ui/Highlightable';
-import LinkButton from '@shared/ui/LinkButton';
-import Pill from '@shared/ui/Pill';
+import Highlightable from '@shared/ui/old/Highlightable';
+import LinkButton from '@shared/ui/old/LinkButton';
+import Pill from '@shared/ui/old/Pill';
 
 import { LanguageData } from './LanguageTypes';
 

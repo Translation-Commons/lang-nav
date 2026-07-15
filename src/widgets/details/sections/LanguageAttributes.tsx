@@ -9,7 +9,7 @@ import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralG
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 

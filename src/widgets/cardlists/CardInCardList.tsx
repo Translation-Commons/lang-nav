@@ -4,7 +4,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import PinButton from '@shared/ui/PinButton';
+import PinButton from '@shared/ui/old/PinButton';
 
 import './cardListStyles.css';
 

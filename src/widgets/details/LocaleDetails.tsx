@@ -18,12 +18,12 @@ import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import DecimalNumber from '@shared/ui/DecimalNumber';
-import Deemphasized from '@shared/ui/Deemphasized';
-import { PercentageDifference } from '@shared/ui/PercentageDifference';
-import Pill from '@shared/ui/Pill';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import { PercentageDifference } from '@shared/ui/old/PercentageDifference';
+import Pill from '@shared/ui/old/Pill';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

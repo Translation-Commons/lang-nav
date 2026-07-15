@@ -10,7 +10,7 @@ import Field from '@features/transforms/fields/Field';
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 const ReportCensusCountries: React.FC = () => {
   const { territories } = useDataContext();

@@ -7,7 +7,7 @@ import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCatego
 import DetailsSection from '@shared/containers/DetailsSection';
 import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
 import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 

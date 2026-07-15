@@ -6,8 +6,8 @@ import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/Obje
 import LanguageOtherNames from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 const LanguageNameColumns: TableColumn<LanguageData>[] = [
   { ...NameColumn, isInitiallyVisible: true },

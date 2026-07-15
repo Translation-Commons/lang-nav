@@ -4,8 +4,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { LanguageData } from '../LanguageTypes';
 

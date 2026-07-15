@@ -11,7 +11,7 @@ import DocsSection from '@widgets/docs/DocsSection';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import InternalLink from '@features/params/InternalLink';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 const TermsOfUsePage: React.FC = () => {
   const citation =
