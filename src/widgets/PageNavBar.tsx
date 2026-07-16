@@ -18,7 +18,7 @@ const PageNavBar: React.FC = () => {
       <NavBarTitle>
         <img
           src={`/lang-nav/logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
-          width="60px"
+          width="48px"
           alt="LangNav Logo"
         />
         <span>
@@ -41,7 +41,7 @@ const PageNavBar: React.FC = () => {
 
 const NavBarLink: React.FC<React.PropsWithChildren<{ path: string }>> = ({ path, children }) => {
   return (
-    <button className="primary" style={{ padding: '0.5em .5em', margin: '0 0.5em' }}>
+    <button className="primary" style={{ padding: '0.35em .5em', margin: '0 0.5em' }}>
       <NavLink
         to={path}
         style={({ isActive }) => ({
@@ -83,7 +83,7 @@ const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
       style={{
         fontSize: '1.5em',
         whiteSpace: 'nowrap',
-        lineHeight: '1.5',
+        lineHeight: '1.15',
         margin: '0em 0.5em',
         display: 'flex',
         alignItems: 'center',

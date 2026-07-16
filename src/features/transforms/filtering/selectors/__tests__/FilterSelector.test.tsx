@@ -21,6 +21,8 @@ vi.mock('react-router-dom', () => ({
   Route: vi.fn(),
   Routes: vi.fn(),
   useLocation: vi.fn(() => ({ pathname: '/data' })),
+  useNavigate: vi.fn(() => vi.fn()),
+  useSearchParams: vi.fn(() => [new URLSearchParams(), vi.fn()]),
 }));
 
 describe('FilterSelector', () => {
