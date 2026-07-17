@@ -35,6 +35,21 @@ export type ZoomControlHandlers = {
   resetTransform: () => void;
 };
 
+/** A bounding box expressed in map coordinates (same units as mapWidth/mapHeight). */
+export type MapBounds = {
+  minX: number;
+  minY: number;
+  maxX: number;
+  maxY: number;
+};
+
+type FitBoundsOptions = {
+  /** Fraction of the viewport to leave as margin around the bounds (0..1). Default 0.15. */
+  padding?: number;
+  /** Transition duration in ms. 0 (default) applies the transform instantly. */
+  duration?: number;
+};
+
 type UseMapZoomReturn = {
   /** Ref to attach to the container (viewport) element */
   containerRef: React.RefObject<HTMLDivElement | null>;
@@ -46,6 +61,8 @@ type UseMapZoomReturn = {
   zoomOut: () => void;
   /** Reset zoom handler */
   resetTransform: () => void;
+  /** Zoom/pan so the given bounds (in map coordinates) fill the viewport. */
+  fitBounds: (bounds: MapBounds, options?: FitBoundsOptions) => void;
 };
 
 // =============================================================================
@@ -228,12 +245,58 @@ export const useMapZoom = ({
     }
   }, [mapWidth]);
 
+  const fitBounds = useCallback(
+    (bounds: MapBounds, options?: FitBoundsOptions) => {
+      const selection = selectionRef.current;
+      const zoomBehavior = zoomBehaviorRef.current;
+      const container = containerRef.current;
+      if (!selection || !zoomBehavior || !container) return;
+
+      const containerWidth = container.clientWidth;
+      const containerHeight = container.clientHeight;
+      if (containerWidth === 0 || containerHeight === 0) return;
+
+      const padding = options?.padding ?? 0.15;
+      const duration = options?.duration ?? 0;
+
+      const boundsWidth = bounds.maxX - bounds.minX;
+      const boundsHeight = bounds.maxY - bounds.minY;
+      const centerX = (bounds.minX + bounds.maxX) / 2;
+      const centerY = (bounds.minY + bounds.maxY) / 2;
+
+      // The base scale shows the full map; never zoom out further than that, and cap
+      // zooming in at the same multiplier used by the manual zoom controls.
+      const baseScale = containerWidth / mapWidth;
+      const minScale = baseScale;
+      const maxScale = baseScale * maxZoomMultiplier;
+
+      const usableWidth = containerWidth * (1 - padding);
+      const usableHeight = containerHeight * (1 - padding);
+      const scaleX = boundsWidth > 0 ? usableWidth / boundsWidth : maxScale;
+      const scaleY = boundsHeight > 0 ? usableHeight / boundsHeight : maxScale;
+      let scale = Math.min(scaleX, scaleY);
+      scale = Math.max(minScale, Math.min(maxScale, scale));
+
+      const tx = containerWidth / 2 - centerX * scale;
+      const ty = containerHeight / 2 - centerY * scale;
+      const transform = zoomIdentity.translate(tx, ty).scale(scale);
+
+      if (duration > 0) {
+        selection.transition().duration(duration).call(zoomBehavior.transform, transform);
+      } else {
+        selection.call(zoomBehavior.transform, transform);
+      }
+    },
+    [mapWidth, maxZoomMultiplier],
+  );
+
   return {
     containerRef,
     contentRef,
     zoomIn,
     zoomOut,
     resetTransform,
+    fitBounds,
   };
 };
 
