@@ -16,7 +16,12 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
 import MapCentroids from './MapCentroids';
-import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH, MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
+import {
+  MAP_ASPECT_RATIO,
+  MAP_INTERNAL_WIDTH,
+  MAP_ROBINSON_X_SCALE,
+  MAP_ROBINSON_Y_SCALE,
+} from './MapConsts';
 import MapSidebar from './MapSidebar';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
