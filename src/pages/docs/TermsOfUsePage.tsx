@@ -29,7 +29,7 @@ const TermsOfUsePage: React.FC = () => {
       <DocsSection title="Typical Use">
         <DocsCard title="Permitted Use">
           You are welcome to use Language Navigator for personal or academic purposes, such as:
-          <ul style={{ margin: '0' }}>
+          <ul className="list-disc pl-6">
             <li>browse and search the site</li>
             <li>read and reference the information</li>
             <li>use it for research, education, planning, or general informational purposes</li>
@@ -41,7 +41,7 @@ const TermsOfUsePage: React.FC = () => {
         <DocsCard title="Prohibited Use">
           You should not use Language Navigator in a way that causes harm to the site, its users, or
           the data it provides. This includes but is not limited to:
-          <ul style={{ margin: '0' }}>
+          <ul className="list-disc pl-6">
             <li>redistribute data without attribution to us and all original sources</li>
             <li>attempt to access non-public areas of the site</li>
             <li>misrepresent the source of the data or content</li>
@@ -69,7 +69,7 @@ const TermsOfUsePage: React.FC = () => {
         </DocsCard>
         <DocsCard
           title={
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+            <div className="flex items-center gap-2">
               Content License
               <CreativeCommonsLicense />
             </div>
@@ -119,17 +119,11 @@ const TermsOfUsePage: React.FC = () => {
         </div>
         <HoverableButton
           hoverContent="Click to copy citation"
-          style={{
-            margin: '1em',
-            padding: '1em',
-            display: 'flex',
-            alignItems: 'center',
-            textAlign: 'left',
-          }}
+          className="m-4 flex items-center gap-4 rounded-lg border bg-muted/40 p-4 text-left"
           onClick={() => navigator.clipboard.writeText(citation)}
         >
           <div>{citation}</div>
-          <CopyIcon />
+          <CopyIcon className="size-4 shrink-0" />
         </HoverableButton>
       </DocsSection>
       <DocsSection title="Contact">

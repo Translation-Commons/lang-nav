@@ -21,7 +21,7 @@ const PrivacyPolicyPage: React.FC = () => {
         </div>
         <div>
           This may include:
-          <ul style={{ margin: '0' }}>
+          <ul className="list-disc pl-6">
             <li>Pages visited</li>
             <li>Query parameters and other URL details</li>
             <li>General device and browser information</li>
@@ -30,7 +30,7 @@ const PrivacyPolicyPage: React.FC = () => {
         </div>
         <div>
           We do not collect:
-          <ul style={{ margin: '0' }}>
+          <ul className="list-disc pl-6">
             <li>Names</li>
             <li>Email addresses</li>
             <li>Account information</li>
