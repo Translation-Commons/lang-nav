@@ -1,6 +1,6 @@
 import usePageParams from '@features/params/usePageParams';
 
-function LargeLangNavLogo({ width = 120 }: { width?: number }) {
+function LargeLangNavLogo({ width = 120, className }: { width?: number; className?: string }) {
   const { pageBrightness } = usePageParams().brightness;
 
   return (
@@ -9,6 +9,7 @@ function LargeLangNavLogo({ width = 120 }: { width?: number }) {
       width={`${width}px`}
       height={`${width / 2}px`}
       alt="LangNav Logo"
+      className={className}
     />
   );
 }

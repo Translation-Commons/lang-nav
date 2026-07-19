@@ -8,9 +8,13 @@ import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import { TextInputSubmitSource } from '@features/params/ui/TextInput';
 
-import { Button } from '@shared/ui/button';
 import { Command, CommandEmpty, CommandItem, CommandList } from '@shared/ui/command';
-import { Input } from '@shared/ui/input';
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@shared/ui/input-group';
 
 type Props = {
   getSuggestions: (query: string) => Promise<Suggestion[]>;
@@ -102,26 +106,18 @@ const SearchCombobox: React.FC<Props> = ({ getSuggestions, onSubmit, placeholder
   const isOpen = showSuggestions && (suggestions.length > 0 || currentValue !== '');
 
   return (
-    <div style={{ position: 'relative', margin: '0 auto' }}>
-      <div
-        style={{
-          display: 'inline-flex',
-          alignItems: 'center',
-          borderRadius: '1em',
-          paddingLeft: '0.5em',
-          backgroundColor: 'var(--color-background)',
-        }}
-      >
-        <SearchIcon size="1em" display="block" style={{ color: 'var(--color-text)' }} />
-        <Input
+    <div className="relative mx-auto w-80 max-w-full">
+      <InputGroup className="bg-background text-foreground dark:bg-background">
+        <InputGroupAddon>
+          <SearchIcon />
+        </InputGroupAddon>
+        <InputGroupInput
           ref={inputRef}
           type="text"
           role="combobox"
           aria-expanded={isOpen}
           aria-controls={SUGGESTION_LIST_ID}
           autoComplete="off"
-          className="border-0 bg-transparent shadow-none focus-visible:ring-0"
-          style={{ minWidth: '20em', color: 'var(--color-text)' }}
           onBlur={() => submit(currentValue, 'input')}
           onChange={(ev) => setCurrentValue(ev.target.value)}
           onFocus={() => setShowSuggestions(true)}
@@ -130,25 +126,23 @@ const SearchCombobox: React.FC<Props> = ({ getSuggestions, onSubmit, placeholder
           value={currentValue}
         />
         {currentValue !== '' && (
-          <Button
-            type="button"
-            variant="ghost"
-            size="icon-sm"
-            aria-label="Clear search"
-            onMouseDown={(e) => e.preventDefault()}
-            onClick={onClear}
-            style={{ color: 'var(--color-text)', marginRight: '0.25em' }}
-          >
-            <XIcon />
-          </Button>
+          <InputGroupAddon align="inline-end">
+            <InputGroupButton
+              size="icon-xs"
+              aria-label="Clear search"
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={onClear}
+            >
+              <XIcon />
+            </InputGroupButton>
+          </InputGroupAddon>
         )}
-      </div>
+      </InputGroup>
       {isOpen && (
         <Command
           shouldFilter={false}
           id={SUGGESTION_LIST_ID}
-          className="absolute mt-1 h-auto w-full border border-border shadow-md"
-          style={{ zIndex: 92 }}
+          className="absolute z-[92] mt-1 h-auto w-full border border-border shadow-md"
         >
           <CommandList>
             <div className="px-2 py-1.5 text-xs text-muted-foreground">

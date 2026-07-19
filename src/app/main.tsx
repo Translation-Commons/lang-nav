@@ -7,9 +7,10 @@ import App from './App.tsx';
 import './tailwind.css';
 
 import './colors.css';
-import './controls.css';
+// import './controls.css';
 
-import './component_styles.css';
+// TODO: legacy global styles being replaced by shadcn migration; delete file once fully ported
+// import './component_styles.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
