@@ -1,23 +1,15 @@
 import React, { PropsWithChildren } from 'react';
 
+import { Badge } from '@shared/ui/badge';
+
 const Pill: React.FC<PropsWithChildren<{ style?: React.CSSProperties }>> = ({
   children,
   style,
 }) => {
   return (
-    <div
-      style={{
-        display: 'inline-block',
-        padding: '0.25em 0.5em',
-        borderRadius: '.5em',
-        fontSize: '0.75em',
-        verticalAlign: 'middle',
-        backgroundColor: 'var(--color-button-secondary)',
-        ...style,
-      }}
-    >
+    <Badge variant="secondary" className="align-middle" style={style}>
       {children}
-    </div>
+    </Badge>
   );
 };
 
