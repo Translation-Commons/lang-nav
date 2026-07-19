@@ -1,9 +1,7 @@
 import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
-
-import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type Props = {
   label?: ReactNode;
@@ -11,55 +9,24 @@ type Props = {
 };
 
 const SelectorLabel: React.FC<Props> = ({ label, description }) => {
-  const { display } = useSelectorDisplay();
   if (label == null) return null;
   return (
-    <span style={getStyle(display)}>
-      <div>{label}</div>
+    <span className="flex items-center gap-1 py-1 text-sm font-bold whitespace-nowrap">
+      <span>{label}</span>
       {description && (
-        <Hoverable hoverContent={description}>
-          <InfoIcon size="1em" display="block" />
-        </Hoverable>
+        <HoverCard>
+          <HoverCardTrigger
+            render={
+              <span className="inline-flex cursor-help text-muted-foreground">
+                <InfoIcon size="1em" />
+              </span>
+            }
+          />
+          <HoverCardContent className="w-80">{description}</HoverCardContent>
+        </HoverCard>
       )}
     </span>
   );
 };
-
-function getStyle(display: SelectorDisplay): React.CSSProperties {
-  const style: React.CSSProperties = {
-    display: 'flex',
-    gap: '0.25em',
-    alignItems: 'center',
-    fontWeight: '800', // adjusted font weight for easier visibility
-    padding: '0.5em',
-    margin: 'auto 0', // Vertically center
-    whiteSpace: 'nowrap',
-    borderRadius: '1em',
-  };
-
-  switch (display) {
-    case SelectorDisplay.ButtonGroup:
-      style.borderRadius = '1em 0 0 1em';
-      style.marginLeft = '-0.125em'; // This may just be a remnant of the old style
-      style.marginRight = '-0.125em';
-      break;
-    case SelectorDisplay.ButtonList:
-      style.borderRadius = '1em 0 0 1em';
-      break;
-    case SelectorDisplay.InlineDropdown:
-      style.padding = '0 0.5em';
-      break;
-    case SelectorDisplay.FilterList:
-      style.padding = '0 0 0.5em 0.5em';
-      style.lineHeight = '2.25em'; // more spacing for visibility
-      style.marginBottom = '-0.5em'; // adjusted to have selector buttons closer to their label
-      break;
-    case SelectorDisplay.Dropdown:
-      // nothing special
-      break;
-  }
-
-  return style;
-}
 
 export default SelectorLabel;

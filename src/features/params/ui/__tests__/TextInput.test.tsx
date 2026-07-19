@@ -10,10 +10,10 @@ import TextInput from '../TextInput';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams({})),
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
+vi.mock('lucide-react', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('lucide-react')>()),
+  XIcon: () => 'X',
 }));
-vi.mock('lucide-react', () => ({ XIcon: () => 'X' }));
 
 describe('TextInput component', () => {
   const createUser = () => userEvent.setup();

@@ -1,5 +1,5 @@
-import { act, fireEvent, render, screen, waitFor } from '@testing-library/react';
-import React from 'react';
+import { render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
@@ -12,10 +12,6 @@ import TableExport from '../TableExport';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams()),
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
-}));
-vi.mock('@shared/hooks/useClickOutside', () => ({ useClickOutside: () => React.createRef() }));
 
 describe('TableExport', () => {
   beforeEach(() => {
@@ -30,37 +26,31 @@ describe('TableExport', () => {
     getBaseLanguageData('spa', 'Spanish'),
   ];
 
-  it('export buttons render correctly', async () => {
+  it('export options are hidden until the menu is opened', async () => {
+    const user = userEvent.setup();
     render(<TableExport visibleColumns={columns} entities={objects} />);
 
-    // The options aren't initially visible, also there is no generic Export option
-    expect(screen.queryByText('Copy TSV')).not.toBeTruthy();
-    expect(screen.queryByText('Download CSV')).not.toBeTruthy();
-    expect(screen.queryByText('Export')).not.toBeTruthy();
+    // The export options are not visible until the dropdown is opened.
+    expect(screen.queryByRole('option', { name: /Copy TSV/ })).toBeNull();
+    expect(screen.queryByRole('option', { name: /Download CSV/ })).toBeNull();
 
-    // Click export button to open the menu
-    const button = screen.queryByText('Export ▶');
-    expect(button).toBeTruthy();
-    act(() => {
-      fireEvent.click(button!);
-    });
+    // Open the dropdown menu.
+    await user.click(screen.getByRole('combobox'));
 
-    // Ensure options are now visible
-    expect(screen.queryByText('Copy TSV')).toBeTruthy();
-    expect(screen.queryByText('Download CSV')).toBeTruthy();
-    expect(screen.queryByText('Export')).not.toBeTruthy();
+    // Ensure options are now visible.
+    expect(await screen.findByRole('option', { name: /Copy TSV/ })).toBeTruthy();
+    expect(screen.getByRole('option', { name: /Download CSV/ })).toBeTruthy();
   });
 
   // Note: Downloading requires too many document APIs not available in jsdom/vitest,
   // so we only test copying to clipboard here.
 
   it('copies tsv format data to clipboard when Copy TSV is clicked', async () => {
+    const user = userEvent.setup();
     render(<TableExport visibleColumns={columns} entities={objects} />);
 
     // Open the menu to show `Copy TSV` option
-    act(() => {
-      fireEvent.click(screen.getByText('Export ▶'));
-    });
+    await user.click(screen.getByRole('combobox'));
 
     // Clicking on Copy TSV will copy data to clipboard
     // Ensure navigator.clipboard exists in the test environment (jsdom/vitest may not provide it)
@@ -71,10 +61,8 @@ describe('TableExport', () => {
       });
     }
     const writeTextSpy = vi.spyOn(navigator.clipboard, 'writeText').mockResolvedValue();
-    const copyTsvOption = screen.getByText('Copy TSV');
-    act(() => {
-      fireEvent.click(copyTsvOption);
-    });
+    vi.spyOn(window, 'alert').mockImplementation(() => {});
+    await user.click(await screen.findByRole('option', { name: /Copy TSV/ }));
     await waitFor(() => {
       expect(writeTextSpy).toHaveBeenCalledWith(
         'ID\tName\neng\tEnglish\nfra\tFrench\nspa\tSpanish',

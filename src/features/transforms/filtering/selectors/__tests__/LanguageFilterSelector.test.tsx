@@ -15,9 +15,6 @@ import LanguageFilterSelector from '../LanguageFilterSelector';
 const mockUpdatePageParams = vi.fn();
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({ hideHoverCard: vi.fn() }),
-}));
 
 // mock useDataContext to return languages
 vi.mock('@features/data/context/useDataContext', () => ({
@@ -26,6 +23,9 @@ vi.mock('@features/data/context/useDataContext', () => ({
     languagesInSelectedSource: getMockLanguages(),
   })),
 }));
+
+// Reads the visible suggestion labels (role="option") in DOM order.
+const optionTexts = () => screen.getAllByRole('option').map((o) => o.textContent ?? '');
 
 // Import component under test after mocks are defined
 describe('LanguageFilterSelector', () => {
@@ -53,14 +53,11 @@ describe('LanguageFilterSelector', () => {
     await waitFor(async () => render(<LanguageFilterSelector />));
 
     const input = screen.getByPlaceholderText('Name or code');
-    // Click to trigger getSuggestions('') and await
     await waitFor(async () => await user.click(input));
 
-    // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
-    const rows = [
-      'Pick a suggestion or type to filter',
-      // Does not suggest language families
+    // Language families (ine, gem) are excluded; individual languages appear in population order.
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(8));
+    const expectedOrder = [
       'English',
       'Spanish',
       'French',
@@ -69,20 +66,16 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Navajo',
       'Chinese',
-      '', // why is there an empty item?
     ];
-    expect(items.length).toBe(rows.length);
-    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+    optionTexts().forEach((text, i) => expect(text).toContain(expectedOrder[i]));
 
-    // User types in German, suggestions should filter to German
+    // Typing filters to the matching language; pressing Enter submits the typed value.
     await waitFor(async () => await user.type(input, 'German'));
-    const rows2 = ['Pick a suggestion or press [enter] to filter by "German"', 'German'];
-    expect(items.length).toBe(rows2.length + 1);
-    rows2.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
-    expect(updatePageParams).not.toHaveBeenCalled(); // it is no longer automatically called after input
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(1));
+    expect(optionTexts()[0]).toContain('German');
+    expect(updatePageParams).not.toHaveBeenCalled();
 
-    // User clicks on German, the button text should update and updatePageParams called
-    await waitFor(async () => await user.click(items[0]));
+    await user.keyboard('{Enter}');
     expect(updatePageParams).toHaveBeenCalledWith({ languageFilter: 'German' });
   });
 
@@ -91,14 +84,11 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
-    const btn = screen.getByPlaceholderText('Name or code');
-    // Click to trigger getSuggestions('') and await
-    await waitFor(async () => await user.click(btn));
+    const input = screen.getByPlaceholderText('Name or code');
+    await waitFor(async () => await user.click(input));
 
-    // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
-    const rows = [
-      'Pick a suggestion or type to filter',
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(8));
+    const expectedOrder = [
       'English',
       'Spanish',
       'French',
@@ -107,38 +97,32 @@ describe('LanguageFilterSelector', () => {
       'Russian',
       'Navajo',
       'Chinese',
-      '', // why is there an empty item?
     ];
-    expect(items.length).toBe(rows.length);
-    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+    optionTexts().forEach((text, i) => expect(text).toContain(expectedOrder[i]));
   });
 
-  it('when a language family is selected, results will partition languages in that family from ones not in that family', async () => {
+  it('when a language family is selected, results partition languages in that family from ones not in it', async () => {
     setupMockParams({ languageFamilyFilter: 'gem' });
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
-    const btn = screen.getByPlaceholderText('Name or code');
-    // Click to trigger getSuggestions('') and await
-    await waitFor(async () => await user.click(btn));
+    const input = screen.getByPlaceholderText('Name or code');
+    await waitFor(async () => await user.click(input));
 
-    // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
-    const rows = [
-      'Pick a suggestion or type to filter',
+    // Germanic languages (English, German) come first, then the partition label, then the rest.
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(8));
+    const expectedOrder = [
       'English',
       'German',
-      'not related to language family with code "gem"',
       'Spanish',
       'French',
       'Italian',
       'Russian',
       'Navajo',
       'Chinese',
-      '', // why is there an empty item?
     ];
-    expect(items.length).toBe(rows.length);
-    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+    optionTexts().forEach((text, i) => expect(text).toContain(expectedOrder[i]));
+    expect(screen.getByText('not related to language family with code "gem"')).toBeInTheDocument();
   });
 
   it('when macrolanguages are filtered out, they appear still, but lower in the suggestion list', async () => {
@@ -146,14 +130,12 @@ describe('LanguageFilterSelector', () => {
     const user = userEvent.setup();
     await waitFor(async () => render(<LanguageFilterSelector />));
 
-    const btn = screen.getByPlaceholderText('Name or code');
-    // Click to trigger getSuggestions('') and await
-    await waitFor(async () => await user.click(btn));
+    const input = screen.getByPlaceholderText('Name or code');
+    await waitFor(async () => await user.click(input));
 
-    // After click the mocked TextInput will render suggestion items
-    const items = screen.getByRole('listbox').children;
-    const rows = [
-      'Pick a suggestion or type to filter',
+    // Navajo (an individual language) stays before the partition; Chinese (a macrolanguage) drops below it.
+    await waitFor(() => expect(screen.getAllByRole('option')).toHaveLength(8));
+    const expectedOrder = [
       'English',
       'Spanish',
       'French',
@@ -161,11 +143,9 @@ describe('LanguageFilterSelector', () => {
       'Italian',
       'Russian',
       'Navajo',
-      'not individual language',
       'Chinese',
-      '', // why is there an empty item?
     ];
-    expect(items.length).toBe(rows.length);
-    rows.forEach((text, i) => expect(items[i]).toHaveTextContent(text));
+    optionTexts().forEach((text, i) => expect(text).toContain(expectedOrder[i]));
+    expect(screen.getByText('not individual language')).toBeInTheDocument();
   });
 });

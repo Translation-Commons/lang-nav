@@ -1,12 +1,10 @@
 import { BanIcon } from 'lucide-react';
 import React from 'react';
 
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
-import { getOptionStyle } from '@features/params/ui/SelectorOption';
 import usePageParams from '@features/params/usePageParams';
 
-import { PositionInGroup } from '@shared/lib/PositionInGroup';
+import { Button } from '@shared/ui/button';
 
 const ClearAllPinsButton: React.FC = () => {
   const { pinned, updatePageParams } = usePageParams();
@@ -17,19 +15,19 @@ const ClearAllPinsButton: React.FC = () => {
 
   return (
     pinned.length > 0 && (
-      <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="flex items-center gap-1">
         <SelectorLabel
           label="Clear All Pins"
           description="Remove all pinned cards from the page."
         />
-        <button
+        <Button
+          variant="outline"
+          size="icon"
           aria-label="Clear all pinned cards"
-          className="selected"
           onClick={onClearClick}
-          style={getOptionStyle(SelectorDisplay.Dropdown, true, PositionInGroup.Standalone)}
         >
-          <BanIcon className="ClearAllPinsButton-iconBan" size="1em" display="block" />
-        </button>
+          <BanIcon className="ClearAllPinsButton-iconBan" size="1em" />
+        </Button>
       </div>
     )
   );

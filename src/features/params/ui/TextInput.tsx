@@ -1,16 +1,18 @@
 import { XIcon } from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { PageParamKey } from '@features/params/PageParamTypes';
 
-import { useAutoAdjustedWidth } from '@shared/hooks/useAutoAdjustedWidth';
-import { PositionInGroup } from '@shared/lib/PositionInGroup';
+import {
+  Combobox,
+  ComboboxContent,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from '@shared/ui/combobox';
+import { InputGroupAddon, InputGroupButton } from '@shared/ui/input-group';
 
-import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
-import SelectorDropdownLabel from './SelectorDropdownLabel';
 import { Suggestion, SUGGESTION_LIMIT } from './SelectorSuggestions';
-import SuggestionsDropdown from './SelectorSuggestionsDropdown';
 
 // Lets callers distinguish a clicked suggestion from a typed query.
 export type TextInputSubmitSource = 'input' | 'clear' | 'suggestion';
@@ -25,12 +27,6 @@ type Props = {
   value: string;
 };
 
-const enum SubmissionSource {
-  InputBox,
-  ClearButton,
-  Suggestion,
-}
-
 const TextInput: React.FC<Props> = ({
   getSuggestions = async () => [],
   inputStyle,
@@ -40,153 +36,149 @@ const TextInput: React.FC<Props> = ({
   placeholder,
   value,
 }) => {
-  const { CalculateWidthFromHere, width } = useAutoAdjustedWidth(value);
-
-  // Using a new variable currentValue to allow users to edit the input box without causing computational
-  // changes that could slow down rendering and cause a bad UX.
   const [currentValue, setCurrentValue] = useState(value);
-  useEffect(() => {
-    // If the passed-in value of the text input changes (eg. on page nav) then update the current value
-    setCurrentValue(value);
-  }, [value, setCurrentValue]);
-  const isUpdatingFromSuggestions = useRef(false);
-
-  // Handle suggestions
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const isUpdatingFromSuggestions = useRef(false);
 
-  const submit = useCallback(
-    (value: string, source: SubmissionSource) => {
-      if (source !== SubmissionSource.Suggestion && isUpdatingFromSuggestions.current) return;
-      const submitSource: TextInputSubmitSource =
-        source === SubmissionSource.Suggestion
-          ? 'suggestion'
-          : source === SubmissionSource.ClearButton
-            ? 'clear'
-            : 'input';
-      onSubmit(value, submitSource);
-
-      // Hide suggestions after submission, with a slight delay to allow click events to register
-      const timer = setTimeout(() => {
-        {
-          setShowSuggestions(false);
-          setCurrentValue(value);
-          isUpdatingFromSuggestions.current = false;
-        }
-      }, 200);
-      return () => clearTimeout(timer);
-    },
-    [onSubmit, setShowSuggestions],
-  );
+  useEffect(() => {
+    // Keep in sync when the committed value changes (eg. on navigation).
+    setCurrentValue(value);
+  }, [value]);
 
   useEffect(() => {
     let active = true;
-    // Only keep the latest request for suggestions
     (async () => {
-      const suggestions = await getSuggestions(currentValue);
-      if (active) setSuggestions(suggestions.slice(0, SUGGESTION_LIMIT));
+      const next = await getSuggestions(currentValue);
+      if (active) setSuggestions(next.slice(0, SUGGESTION_LIMIT));
     })();
     return () => {
       active = false;
     };
   }, [getSuggestions, currentValue]);
-  const onKeyDown = useCallback(
-    (event: React.KeyboardEvent<HTMLInputElement>) => {
-      isUpdatingFromSuggestions.current = false;
-      setShowSuggestions(true);
-      if (event.key === 'Enter') {
-        // Prevent the page from reloading, and do a regular submit
-        event.preventDefault();
-        submit(currentValue, SubmissionSource.InputBox);
-      } else if (event.key === 'Escape') {
-        // Undoes the edits
-        setCurrentValue(value);
+
+  const submit = useCallback(
+    (nextValue: string, source: TextInputSubmitSource) => {
+      // Race guard: a suggestion press sets the ref before the input blurs, so
+      // the blur-submit is skipped and the suggestion selection wins.
+      if (source !== 'suggestion' && isUpdatingFromSuggestions.current) return;
+      onSubmit(nextValue, source);
+      // Delay hiding so suggestion clicks land before the panel unmounts.
+      setTimeout(() => {
         setShowSuggestions(false);
-      }
+        setCurrentValue(nextValue);
+        isUpdatingFromSuggestions.current = false;
+      }, 200);
     },
-    [submit, currentValue, setShowSuggestions, value],
+    [onSubmit],
   );
-  const onClickSuggestion = useCallback(
+
+  const selectSuggestion = useCallback(
     (suggestion: Suggestion) => {
       isUpdatingFromSuggestions.current = true;
-      submit(suggestion.searchString, SubmissionSource.Suggestion);
+      submit(suggestion.searchString, 'suggestion');
     },
     [submit],
   );
 
+  const onKeyDown = useCallback(
+    (event: React.KeyboardEvent<HTMLInputElement>) => {
+      isUpdatingFromSuggestions.current = false;
+      if (event.key === 'Enter') {
+        // Always submit the typed free text (filters accept values with no matching suggestion).
+        event.preventDefault();
+        submit(currentValue, 'input');
+      } else if (event.key === 'Escape') {
+        // Revert the edits without committing.
+        event.preventDefault();
+        setCurrentValue(value);
+        setShowSuggestions(false);
+      } else {
+        setShowSuggestions(true);
+      }
+    },
+    [currentValue, submit, value],
+  );
+
+  const onClear = useCallback(() => {
+    setCurrentValue('');
+    submit('', 'clear');
+  }, [submit]);
+
+  const isOpen = showSuggestions && suggestions.length > 0;
+
   return (
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        borderRadius: '.75em',
-        border: '0.125em solid var(--color-text)',
-      }}
-    >
+    <div className="flex items-center gap-1">
       {label}
-      <SuggestionsDropdown
-        pageParameter={pageParameter}
-        showSuggestions={showSuggestions}
-        suggestions={suggestions}
-        onClickSuggestion={onClickSuggestion}
-        onKeyDownSuggestion={() => (isUpdatingFromSuggestions.current = true)}
-        topLabel={
-          <SelectorDropdownLabel position={PositionInGroup.First}>
+      <Combobox<Suggestion, false>
+        value={null}
+        onValueChange={(suggestion) => {
+          if (suggestion) selectSuggestion(suggestion);
+        }}
+        inputValue={currentValue}
+        onInputValueChange={(next, details) => {
+          // Filters keep the typed free text: ignore Base UI's automatic input resets
+          // on Escape (handled in onKeyDown) and on close when nothing matches ('input-clear').
+          if (details.reason === 'escape-key' || details.reason === 'input-clear') return;
+          setCurrentValue(next);
+        }}
+        open={isOpen}
+        onOpenChange={(open) => setShowSuggestions(open)}
+        filter={null}
+        itemToStringLabel={(suggestion) => suggestion.searchString}
+        itemToStringValue={(suggestion) => suggestion.searchString}
+      >
+        <ComboboxInput
+          id={pageParameter}
+          className="bg-background text-foreground dark:bg-background"
+          placeholder={placeholder}
+          showTrigger={false}
+          showClear={false}
+          style={inputStyle}
+          onFocus={() => setShowSuggestions(true)}
+          onBlur={() => submit(currentValue, 'input')}
+          onKeyDown={onKeyDown}
+        >
+          {currentValue !== '' && (
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton
+                size="icon-xs"
+                aria-label="Clear the input"
+                onMouseDown={(e) => e.preventDefault()}
+                onClick={onClear}
+              >
+                <XIcon />
+              </InputGroupButton>
+            </InputGroupAddon>
+          )}
+        </ComboboxInput>
+        <ComboboxContent className="min-w-40">
+          <div className="px-2 py-1.5 text-xs text-muted-foreground">
             Pick a suggestion
             {currentValue !== ''
               ? ` or press [enter] to filter by "${currentValue}"`
               : ' or type to filter'}
-          </SelectorDropdownLabel>
-        }
-      />
-      <input
-        type="text"
-        aria-expanded={showSuggestions}
-        aria-controls="suggestion-list"
-        autoComplete="off" // It's already handled
-        className={currentValue === '' ? 'empty' : ''}
-        id={pageParameter}
-        onChange={(ev) => setCurrentValue(ev.target.value)}
-        onBlur={() => submit(currentValue, SubmissionSource.InputBox)}
-        onFocus={() => setShowSuggestions(true)}
-        onKeyDown={onKeyDown} // If enter key, submit
-        placeholder={placeholder}
-        role="combobox"
-        style={{
-          borderRadius: '0.75em',
-          borderWidth: 0,
-          padding: '0.5em',
-          lineHeight: '1.5em',
-          ...inputStyle,
-          width: width + 5,
-        }}
-        value={currentValue}
-      />
-      {CalculateWidthFromHere}
-      <ClearButton onClear={() => submit('', SubmissionSource.ClearButton)} />
+          </div>
+          <ComboboxList>
+            {suggestions.map((suggestion, i) => (
+              <React.Fragment key={i}>
+                {i > 0 && suggestions[i - 1].group !== suggestion.group && (
+                  <div className="px-2 py-1 text-xs font-medium text-muted-foreground">
+                    {suggestion.group}
+                  </div>
+                )}
+                <ComboboxItem
+                  value={suggestion}
+                  onMouseDown={() => (isUpdatingFromSuggestions.current = true)}
+                >
+                  {suggestion.label}
+                </ComboboxItem>
+              </React.Fragment>
+            ))}
+          </ComboboxList>
+        </ComboboxContent>
+      </Combobox>
     </div>
-  );
-};
-
-const ClearButton: React.FC<{
-  onClear: () => void;
-}> = ({ onClear }) => {
-  const { display } = useSelectorDisplay();
-  return (
-    <HoverableButton
-      buttonType="button"
-      hoverContent="Clear the input"
-      onClick={onClear}
-      style={{
-        ...(display === SelectorDisplay.ButtonList
-          ? { borderRadius: '0.5em', border: 'none' }
-          : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }),
-        marginLeft: '0em',
-        padding: '0.5em',
-      }}
-    >
-      <XIcon size="1em" display="block" />
-    </HoverableButton>
   );
 };
 

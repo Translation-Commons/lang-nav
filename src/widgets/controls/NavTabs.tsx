@@ -1,8 +1,10 @@
 import React, { ReactNode, useCallback } from 'react';
 
-import HoverableInternalLinkButton from '@features/layers/hovercard/HoverableInternalLinkButton';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 export type TabOption = {
   description?: ReactNode;
@@ -17,6 +19,7 @@ type Props = {
 
 const NavTabs: React.FC<Props> = ({ label, options }) => {
   const params = usePageParams();
+  const { updatePageParams } = params;
   const getIsActive = useCallback(
     (option: TabOption) =>
       Object.entries(option.urlParams).every(
@@ -25,33 +28,35 @@ const NavTabs: React.FC<Props> = ({ label, options }) => {
     [params],
   );
 
+  const activeOption = options.find(getIsActive);
+
   return (
-    <div style={{ display: 'flex', marginBottom: '0.5em', width: '100%' }}>
-      {label && <div style={{ padding: '0.5em 1em', border: 'none' }}>{label}</div>}
-      {options.map((option) => {
-        const isActive = getIsActive(option);
-        return (
-          <HoverableInternalLinkButton
-            params={option.urlParams}
-            key={option.label}
-            keepOldParams={true}
-            className="tab"
-            hoverContent={option.description}
-            style={{
-              padding: '0.5em 1em',
-              color: isActive ? 'var(--color-button-primary)' : 'var(--color-text)',
-              fontWeight: 500,
-              borderWidth: '2px',
-              borderRadius: '0.5em 0.5em 0 0',
-              borderBottomStyle: 'solid',
-              borderBottomColor: isActive ? 'var(--color-button-primary)' : 'transparent',
-              cursor: 'pointer',
-            }}
-          >
-            {option.label}
-          </HoverableInternalLinkButton>
-        );
-      })}
+    <div className="mb-2 flex w-full items-center">
+      {label && <div className="px-3 py-1 font-medium">{label}</div>}
+      <Tabs
+        value={activeOption?.label}
+        onValueChange={(value) => {
+          const option = options.find((opt) => opt.label === value);
+          if (option) updatePageParams(option.urlParams);
+        }}
+      >
+        <TabsList variant="line">
+          {options.map((option) => (
+            <TabsTrigger key={option.label} value={option.label}>
+              {option.description ? (
+                <HoverCard>
+                  <HoverCardTrigger render={<span className="inline-flex items-center" />}>
+                    {option.label}
+                  </HoverCardTrigger>
+                  <HoverCardContent className="w-80">{option.description}</HoverCardContent>
+                </HoverCard>
+              ) : (
+                option.label
+              )}
+            </TabsTrigger>
+          ))}
+        </TabsList>
+      </Tabs>
     </div>
   );
 };
