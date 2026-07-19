@@ -13,9 +13,6 @@ import FilterSelector from '../FilterSelector';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams({ objectType: ObjectType.Locale })),
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
-}));
 vi.mock('react-router-dom', () => ({
   Navigate: vi.fn(),
   Route: vi.fn(),

@@ -2,7 +2,6 @@ import { Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
-import ZIndex from '@features/layers/ZIndex';
 
 type Props = {
   zoomIn: () => void;
@@ -31,7 +30,7 @@ const containerStyle: React.CSSProperties = {
   position: 'absolute',
   top: '0.5em',
   right: '0.5em',
-  zIndex: ZIndex.MapZoomControls,
+  zIndex: 5, // above map layers
   display: 'flex',
   flexDirection: 'column',
   gap: '0.5em',

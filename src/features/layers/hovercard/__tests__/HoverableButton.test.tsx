@@ -1,87 +1,54 @@
-import { render, fireEvent } from '@testing-library/react';
-import { vi, describe, it, expect, beforeEach } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { describe, expect, it, vi } from 'vitest';
 
 import HoverableButton from '../HoverableButton';
 
-// Mock the hook used by the components
-const showHoverCard = vi.fn();
-const hideHoverCard = vi.fn();
-const onMouseLeaveTriggeringElement = vi.fn();
-
-vi.mock('../useHoverCard', () => ({
-  __esModule: true,
-  default: () => ({
-    showHoverCard,
-    hideHoverCard,
-    onMouseLeaveTriggeringElement,
-  }),
-}));
-
-beforeEach(() => {
-  showHoverCard.mockClear();
-  hideHoverCard.mockClear();
-  onMouseLeaveTriggeringElement.mockClear();
-});
-
 describe('HoverableButton', () => {
-  it('renders a button with children when hoverContent is null or undefined', () => {
-    const { getByText } = render(<HoverableButton>Click me</HoverableButton>);
-    const button = getByText('Click me');
-    expect(button).toBeTruthy();
+  it('renders a plain button when hoverContent is null or undefined', () => {
+    render(<HoverableButton>Click me</HoverableButton>);
+    const button = screen.getByText('Click me');
     expect(button.tagName).toBe('BUTTON');
-    // ensure the hook was not invoked
-    expect(showHoverCard).not.toHaveBeenCalled();
   });
 
-  it('calls showHoverCard with the provided content and coordinates on mouse enter and move', () => {
-    const { getByText } = render(
-      <HoverableButton hoverContent="tooltip text">hover me</HoverableButton>,
+  it('preserves ariaLabel, className and button type', () => {
+    render(
+      <HoverableButton ariaLabel="Do it" className="custom" buttonType="submit">
+        label
+      </HoverableButton>,
     );
-
-    const button = getByText('hover me');
-    fireEvent.mouseEnter(button, { clientX: 20, clientY: 30 });
-    expect(showHoverCard).toHaveBeenCalledWith('tooltip text', 20, 30);
-
-    fireEvent.mouseMove(button, { clientX: 25, clientY: 35 });
-    expect(showHoverCard).toHaveBeenCalledWith('tooltip text', 25, 35);
+    const button = screen.getByRole('button', { name: 'Do it' });
+    expect(button).toHaveClass('custom');
+    expect(button).toHaveAttribute('type', 'submit');
   });
 
-  it('calls hideHoverCard on mouse leave', () => {
-    const { getByText } = render(
-      <HoverableButton hoverContent="tooltip text">hover me</HoverableButton>,
-    );
-
-    const button = getByText('hover me');
-    fireEvent.mouseLeave(button);
-    expect(hideHoverCard).toHaveBeenCalledTimes(1);
-  });
-
-  it('hides hover card and forwards click to onClick handler when clicked', () => {
+  it('forwards clicks to onClick', () => {
     const onClick = vi.fn();
-    const { getByText } = render(
+    render(
       <HoverableButton hoverContent="tooltip" onClick={onClick}>
         clickable
       </HoverableButton>,
     );
-
-    const button = getByText('clickable');
-    fireEvent.click(button);
-
-    expect(hideHoverCard).toHaveBeenCalledTimes(1);
+    fireEvent.click(screen.getByText('clickable'));
     expect(onClick).toHaveBeenCalledTimes(1);
   });
 
-  it('applies pointer cursor when onClick provided and auto cursor when not', () => {
-    const { getByText: getWithClick } = render(
+  it('applies pointer cursor with onClick and auto cursor without', () => {
+    const { rerender } = render(
       <HoverableButton hoverContent="t" onClick={() => {}}>
         has click
       </HoverableButton>,
     );
-    expect(getWithClick('has click').getAttribute('style')).toContain('cursor: pointer');
+    expect(screen.getByText('has click').getAttribute('style')).toContain('cursor: pointer');
 
-    const { getByText: getNoClick } = render(
-      <HoverableButton hoverContent="t">no click</HoverableButton>,
-    );
-    expect(getNoClick('no click').getAttribute('style')).toContain('cursor: auto');
+    rerender(<HoverableButton hoverContent="t">no click</HoverableButton>);
+    expect(screen.getByText('no click').getAttribute('style')).toContain('cursor: auto');
+  });
+
+  it('reveals hoverContent on hover', async () => {
+    const user = userEvent.setup();
+    render(<HoverableButton hoverContent="the tip">hover me</HoverableButton>);
+    await user.hover(screen.getByText('hover me'));
+    await waitFor(() => expect(screen.getByText('the tip')).toBeInTheDocument());
   });
 });

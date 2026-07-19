@@ -2,7 +2,6 @@ import { PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
-import ZIndex from '@features/layers/ZIndex';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -67,7 +66,7 @@ const MapCard: React.FC<{
           transform: 'translateY(-50%)',
           display: 'flex',
           gap: '0.5em',
-          zIndex: ZIndex.MapZoomControls,
+          zIndex: 5, // map zoom controls above map layers
           fontSize: '.8em',
         }}
       >

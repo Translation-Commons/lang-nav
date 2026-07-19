@@ -22,10 +22,6 @@ vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
   SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown', FilterList: 'filterList' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
-}));
-
 describe('VitalitySelector', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
 

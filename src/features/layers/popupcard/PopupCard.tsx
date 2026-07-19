@@ -1,10 +1,8 @@
 import { XIcon } from 'lucide-react';
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ReactNode, useState } from 'react';
 
-import HoverableButton from '../hovercard/HoverableButton';
-import ZIndex from '../ZIndex';
-
-import './popupcard.css';
+import { Button } from '@shared/ui/button';
+import { Popover, PopoverContent, PopoverTitle, PopoverTrigger } from '@shared/ui/popover';
 
 type Props = {
   // CTA
@@ -18,6 +16,10 @@ type Props = {
   body: ReactNode | (() => ReactNode);
   ctas?: ReactNode[];
 };
+
+// Only these reasons close the popup; interactions inside it (typing, selecting a
+// sort key, clicking links) must not dismiss it.
+const EXPLICIT_DISMISSALS = new Set<string>(['escape-key', 'outside-press', 'trigger-press']);
 
 /**
  * Opens a card that displays on the page and does not close when the user moves their mouse.
@@ -33,55 +35,43 @@ const PopupCard: React.FC<Props> = ({
   body,
   ctas = [],
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const closeCard = useCallback(() => setIsOpen(false), []);
-
-  // Close the dropdown when the route changes
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
-
-  // Close the dropdown when the user presses the Escape key
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') closeCard();
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, closeCard]);
-
-  // Not done: Close the dropdown when the user clicks outside of it.
-  // This is tricky because clicking on a nested card in the dropdown (particularly
-  // a hovercard) should not close the dropdown.)
+  const [open, setOpen] = useState(false);
 
   return (
-    <div className="popupContainer">
-      <HoverableButton
-        className={
-          'popupToggle' +
-          (isOpen ? ' ButtonFocused' : '') +
-          (buttonClassName ? ` ${buttonClassName}` : '')
+    <Popover
+      open={open}
+      onOpenChange={(nextOpen, eventDetails) => {
+        if (nextOpen) {
+          setOpen(true);
+        } else if (EXPLICIT_DISMISSALS.has(eventDetails.reason)) {
+          setOpen(false);
         }
-        hoverContent={description}
-        onClick={() => setIsOpen((prev) => !prev)}
+      }}
+    >
+      <PopoverTrigger
+        className={buttonClassName}
         style={buttonStyle}
+        title={typeof description === 'string' ? description : undefined}
       >
         {buttonLabel}
-      </HoverableButton>
-      {isOpen && (
-        <div className="popupCard" role="dialog" style={{ zIndex: ZIndex.PopupCard }}>
-          <div className="popupCardHeader">
-            <div className="popupCardTitle">{title}</div>
-            <HoverableButton onClick={closeCard} style={{ padding: '0.5em' }}>
-              <XIcon size="1em" display="block" aria-label="Close" />
-            </HoverableButton>
-          </div>
-          <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
-          {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
+      </PopoverTrigger>
+      <PopoverContent align="start" className="w-auto max-w-[min(90vw,32rem)]">
+        <div className="flex items-center justify-between gap-2">
+          <PopoverTitle className="text-base font-medium">{title}</PopoverTitle>
+          <Button
+            type="button"
+            variant="ghost"
+            size="icon-sm"
+            aria-label="Close"
+            onClick={() => setOpen(false)}
+          >
+            <XIcon />
+          </Button>
         </div>
-      )}
-    </div>
+        <div>{typeof body === 'function' ? body() : body}</div>
+        {ctas.length > 0 && <div className="flex justify-end gap-2">{ctas}</div>}
+      </PopoverContent>
+    </Popover>
   );
 };
 

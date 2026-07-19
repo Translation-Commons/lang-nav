@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import ZIndex from '@features/layers/ZIndex';
-
 import { ObjectData } from '@entities/types/DataTypes';
 
 import CountOfPeople from '@shared/ui/old/CountOfPeople';
@@ -30,7 +28,7 @@ function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Prop
             position: 'sticky',
             top: 0,
             backgroundColor: 'var(--color-background)',
-            zIndex: ZIndex.TableStickyRow,
+            zIndex: 10, // sticky table header row
           }}
         >
           <tr>

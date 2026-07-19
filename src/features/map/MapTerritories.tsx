@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 import SVG from 'react-inlinesvg';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import DrawableData from './DrawableData';
+import useMapHoverCard from './MapHoverCard';
 
 type Props = {
   drawableEntities: DrawableData[];
@@ -27,7 +27,7 @@ const MapTerritories: React.FC<Props> = ({
 }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
-  const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
+  const { showHoverCard, hideHoverCard } = useMapHoverCard();
   const { territories } = useDataContext();
 
   const isTerritoryInList = useCallback(
@@ -97,9 +97,9 @@ const MapTerritories: React.FC<Props> = ({
 
   const buildOnMouseLeave = useCallback(
     () => () => {
-      onMouseLeaveTriggeringElement();
+      hideHoverCard();
     },
-    [onMouseLeaveTriggeringElement],
+    [hideHoverCard],
   );
 
   useEffect(() => {

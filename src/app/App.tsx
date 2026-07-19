@@ -7,7 +7,6 @@ import PageNavBar from '@widgets/PageNavBar';
 
 import ConsentBanner from '@features/consent/ConsentBanner';
 import useConsent from '@features/consent/useConsent';
-import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 import PageParamsProvider from '@features/params/PageParamsProvider';
 import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
@@ -48,15 +47,13 @@ function App() {
     <TooltipProvider delay={300}>
       <PageParamsProvider>
         <DeferredDataProvider>
-          <HoverCardProvider>
-            <AmplitudeTracker />
-            <PageNavBar />
-            <div style={{ flex: 1, minWidth: 0 }}>
-              <PageRoutes />
-            </div>
-            <PageFooter />
-            <ConsentBanner />
-          </HoverCardProvider>
+          <AmplitudeTracker />
+          <PageNavBar />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <PageRoutes />
+          </div>
+          <PageFooter />
+          <ConsentBanner />
         </DeferredDataProvider>
       </PageParamsProvider>
     </TooltipProvider>

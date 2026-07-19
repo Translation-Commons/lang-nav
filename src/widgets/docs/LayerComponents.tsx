@@ -36,10 +36,8 @@ const LayerComponents: React.FC = () => {
           accidentally dismissing the hovercard.
         </div>
         <div>
-          Usually there is 1 hovercard per page that is reused, but you can add a{' '}
-          <code className="rounded bg-secondary px-1 py-0.5">HoverCardProvider</code> to add a new
-          hovercard. Nested hovercards are discouraged (it is easy to provide a poor UX with
-          competing hover areas) but can also be done with an internal hovercard provider.
+          Each hovercard is anchored to the element that triggers it. Nested hovercards are
+          discouraged (it is easy to provide a poor UX with competing hover areas).
         </div>
         <div>
           <HoverableButton hoverContent="I show on hover">Hoverable button</HoverableButton>

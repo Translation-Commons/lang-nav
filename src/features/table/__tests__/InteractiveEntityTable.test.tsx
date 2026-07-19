@@ -39,9 +39,6 @@ vi.mock('@features/transforms/sorting/sort', () => ({
   getNormalSortDirection: vi.fn().mockReturnValue(1),
 }));
 
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
-}));
 vi.mock('@shared/hooks/useClickOutside', () => ({
   useClickOutside: vi.fn().mockReturnValue({ current: null }),
 }));

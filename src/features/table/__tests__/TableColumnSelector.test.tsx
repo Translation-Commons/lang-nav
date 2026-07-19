@@ -11,10 +11,6 @@ import TableColumnSelector from '../TableColumnSelector';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
-}));
-
 beforeEach(() => {
   vi.clearAllMocks();
   cleanup();

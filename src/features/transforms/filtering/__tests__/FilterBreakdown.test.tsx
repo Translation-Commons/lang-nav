@@ -13,10 +13,6 @@ import FilterBreakdown from '../FilterBreakdown';
 import { getMockLanguages } from './mockLanguagesForFilterTest.test';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({ hideHoverCard: vi.fn() }),
-}));
-
 describe('FilterBreakdown', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
 

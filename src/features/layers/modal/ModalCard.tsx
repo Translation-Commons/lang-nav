@@ -1,9 +1,6 @@
-import { XIcon } from 'lucide-react';
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import HoverableButton from '../hovercard/HoverableButton';
-
-import './modal.css';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@shared/ui/dialog';
 
 interface ModalProps {
   onClose: () => void;
@@ -13,33 +10,25 @@ interface ModalProps {
 }
 
 const ModalCard: React.FC<ModalProps> = ({ onClose, title, children, bodyStyle }) => {
-  // Turning off because of conflicts with hovercards that technically are outside of the modal
-  // const modalRef = useClickOutside(onClose);
-
-  useEffect(() => {
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') {
-        onClose();
-      }
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
-
   return (
-    <div className="ModalOverlay">
-      <div className="Modal" aria-modal="true" role="dialog">
-        <div className="ModalHeader">
-          <div className="ModalTitle">{title}</div>
-          <HoverableButton buttonType="reset" hoverContent="Close modal" onClick={onClose}>
-            <XIcon size="1.5em" display="block" />
-          </HoverableButton>
-        </div>
-        <div className="ModalBody" style={bodyStyle}>
+    <Dialog
+      open
+      // Non-modal: keep background content in the a11y tree and interactive, matching the
+      // previous overlay that intentionally did not trap focus or block outside hovercards.
+      modal={false}
+      onOpenChange={(nextOpen) => {
+        if (!nextOpen) onClose();
+      }}
+    >
+      <DialogContent className="flex max-h-[90vh] w-auto max-w-[calc(100%-2rem)] flex-col">
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
+        <div data-testid="modal-body" className="min-h-0 overflow-y-auto" style={bodyStyle}>
           {children}
         </div>
-      </div>
-    </div>
+      </DialogContent>
+    </Dialog>
   );
 };
 

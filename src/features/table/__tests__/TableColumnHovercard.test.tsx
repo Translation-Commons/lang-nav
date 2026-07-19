@@ -16,9 +16,6 @@ import TableValueType from '../TableValueType';
 
 // Mock dependencies
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
-}));
 vi.mock('@features/transforms/filtering/selectors/FilterSelector', () => ({
   default: vi.fn().mockReturnValue(<div data-testid="filter-selector" />),
 }));

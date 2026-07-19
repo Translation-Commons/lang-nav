@@ -1,10 +1,11 @@
 import { ArrowUpDownIcon } from 'lucide-react';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
-import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
+
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import TableColumn from './TableColumn';
 import TableColumnHovercard from './TableColumnHovercard';
@@ -41,26 +42,15 @@ function HoverableContainer<T extends EntityData>({
   children,
   appearance,
 }: React.PropsWithChildren<Props<T>>) {
-  const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const [isHovering, setIsHovering] = useState(false);
+  const onMouseEnter = () => setIsHovering(true);
+  const onMouseLeave = () => setIsHovering(false);
 
-  const handleMouseEnter = useCallback(
-    (e: React.MouseEvent) => {
-      setIsHovering(true);
-      showHoverCard(<TableColumnHovercard column={column} />, e.clientX, e.clientY);
-    },
-    [column, showHoverCard],
-  );
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-    onMouseLeaveTriggeringElement();
-  }, [onMouseLeaveTriggeringElement]);
-
-  if (appearance === 'th') {
-    return (
+  const trigger =
+    appearance === 'th' ? (
       <th
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
         style={{
           backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
           cursor: 'default',
@@ -69,22 +59,22 @@ function HoverableContainer<T extends EntityData>({
           minHeight: '2em',
           textAlign: 'start',
         }}
-      >
-        {children}
-      </th>
+      />
+    ) : (
+      <span
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        style={{ backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined }}
+      />
     );
-  }
 
   return (
-    <span
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
-      }}
-    >
-      {children}
-    </span>
+    <HoverCard>
+      <HoverCardTrigger render={trigger}>{children}</HoverCardTrigger>
+      <HoverCardContent className="w-auto max-w-96">
+        <TableColumnHovercard column={column} />
+      </HoverCardContent>
+    </HoverCard>
   );
 }
 

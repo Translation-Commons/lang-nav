@@ -1,11 +1,12 @@
-import { fireEvent, render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import PopupCard from '../PopupCard';
 
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
-}));
+const openPopup = async () => {
+  fireEvent.click(screen.getByText('Open Popup'));
+  return screen.findByText('Popup Title');
+};
 
 describe('PopupCard', () => {
   it('renders the button label', () => {
@@ -13,34 +14,51 @@ describe('PopupCard', () => {
     expect(screen.getByText('Open Popup')).toBeInTheDocument();
   });
 
-  it('opens the popup when the button is clicked', () => {
+  it('opens the popup when the button is clicked', async () => {
     render(<PopupCard buttonLabel="Open Popup" title="Popup Title" body={<p>Popup content</p>} />);
-    fireEvent.click(screen.getByText('Open Popup'));
-    expect(screen.getByText('Popup Title')).toBeInTheDocument();
+    await openPopup();
     expect(screen.getByText('Popup content')).toBeInTheDocument();
   });
 
-  it('closes the popup when the Escape key is pressed', () => {
-    render(<PopupCard buttonLabel="Open Popup" title="Popup Title" body={<p>Popup content</p>} />);
-    fireEvent.click(screen.getByText('Open Popup'));
-    expect(screen.getByText('Popup Title')).toBeInTheDocument();
-    fireEvent.keyDown(document, { key: 'Escape' });
-    expect(screen.queryByText('Popup Title')).not.toBeInTheDocument();
+  it('supports a lazy body thunk', async () => {
+    render(
+      <PopupCard buttonLabel="Open Popup" title="Popup Title" body={() => <p>Lazy body</p>} />,
+    );
+    await openPopup();
+    expect(screen.getByText('Lazy body')).toBeInTheDocument();
   });
 
-  it('closes the popup when the close button is clicked', () => {
+  it('stays open while interacting with content inside it (sort-key canary)', async () => {
+    render(
+      <PopupCard
+        buttonLabel="Open Popup"
+        title="Popup Title"
+        body={<button type="button">Sort key</button>}
+      />,
+    );
+    const title = await openPopup();
+    fireEvent.click(screen.getByText('Sort key'));
+    expect(title).toBeInTheDocument();
+  });
+
+  it('closes the popup when the Escape key is pressed', async () => {
     render(<PopupCard buttonLabel="Open Popup" title="Popup Title" body={<p>Popup content</p>} />);
-    fireEvent.click(screen.getByText('Open Popup'));
-    expect(screen.getByText('Popup Title')).toBeInTheDocument();
+    const title = await openPopup();
+    fireEvent.keyDown(title, { key: 'Escape' });
+    await waitFor(() => expect(screen.queryByText('Popup Title')).not.toBeInTheDocument());
+  });
+
+  it('closes the popup when the close button is clicked', async () => {
+    render(<PopupCard buttonLabel="Open Popup" title="Popup Title" body={<p>Popup content</p>} />);
+    await openPopup();
     fireEvent.click(screen.getByLabelText('Close'));
-    expect(screen.queryByText('Popup Title')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByText('Popup Title')).not.toBeInTheDocument());
   });
 
-  it('closes the popup when the opening button is clicked again', () => {
+  it('closes the popup when the opening button is pressed again', async () => {
     render(<PopupCard buttonLabel="Open Popup" title="Popup Title" body={<p>Popup content</p>} />);
+    await openPopup();
     fireEvent.click(screen.getByText('Open Popup'));
-    expect(screen.getByText('Popup Title')).toBeInTheDocument();
-    fireEvent.click(screen.getByText('Open Popup'));
-    expect(screen.queryByText('Popup Title')).not.toBeInTheDocument();
+    await waitFor(() => expect(screen.queryByText('Popup Title')).not.toBeInTheDocument());
   });
 });

@@ -4,7 +4,6 @@ import getEntityMainTableColumns from '@widgets/tables/columns/getEntityMainTabl
 
 import useEntities from '@features/data/context/useEntities';
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import ZIndex from '@features/layers/ZIndex';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
@@ -40,7 +39,7 @@ const FieldCoverageTable: React.FC = () => {
             position: 'sticky',
             top: 0,
             backgroundColor: 'var(--color-background)',
-            zIndex: ZIndex.TableStickyRow,
+            zIndex: 10, // sticky table header row
           }}
         >
           <tr>
