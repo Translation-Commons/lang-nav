@@ -1,9 +1,9 @@
 import { PinIcon, PinOffIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
-
-import './pinButton.css';
+import { cn } from '@shared/lib/utils';
+import { Button } from '@shared/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@shared/ui/tooltip';
 
 interface Props {
   className?: string;
@@ -16,15 +16,30 @@ const PinButton: React.FC<Props> = ({ className, isPinned, onTogglePin }) => {
   const label = isPinned ? 'Unpin from the page' : 'Pin to the page';
 
   return (
-    <HoverableButton
-      ariaLabel={label}
-      className={'PinButton' + (isPinned ? ' pinned' : '') + (className ? ' ' + className : '')}
-      hoverContent={label}
-      onClick={onTogglePin}
-    >
-      <PinIcon className="PinButton-iconPin" size="1em" />
-      <PinOffIcon className="PinButton-iconUnpin" size="1em" />
-    </HoverableButton>
+    <Tooltip>
+      <TooltipTrigger
+        render={
+          <Button
+            variant="ghost"
+            size="icon-xs"
+            aria-label={label}
+            aria-pressed={isPinned}
+            className={cn('group/pin text-muted-foreground hover:text-primary', className)}
+            onClick={onTogglePin}
+          />
+        }
+      >
+        {isPinned ? (
+          <>
+            <PinIcon className="group-hover/pin:hidden" />
+            <PinOffIcon className="hidden group-hover/pin:block" />
+          </>
+        ) : (
+          <PinIcon />
+        )}
+      </TooltipTrigger>
+      <TooltipContent>{label}</TooltipContent>
+    </Tooltip>
   );
 };
 

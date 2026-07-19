@@ -8,6 +8,8 @@ import Modal from '@features/layers/modal/ModalButton';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
+import { Checkbox } from '@shared/ui/checkbox';
+import { Label } from '@shared/ui/label';
 
 import TableColumn from './TableColumn';
 import TableColumnName from './TableColumnName';
@@ -132,10 +134,10 @@ function ColumnCheckbox<T extends ObjectData>({
   toggleColumn: (key: string) => void;
 }): React.ReactNode {
   return (
-    <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
-      <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
+    <Label key={column.key} className="cursor-pointer text-start font-normal">
+      <Checkbox checked={isChecked} onCheckedChange={() => toggleColumn(column.key)} />
       <TableColumnName column={column} appearance="text" />
-    </label>
+    </Label>
   );
 }
 

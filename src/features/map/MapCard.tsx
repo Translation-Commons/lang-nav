@@ -47,28 +47,12 @@ const MapCard: React.FC<{
 
   return (
     <div
-      style={{
-        position: 'relative',
-        maxWidth: 300,
-        fontSize: '0.75em',
-        background: 'var(--color-background)',
-        borderRadius: '0.75em',
-        boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)',
-        padding: '1em',
-        textAlign: 'left',
-      }}
+      className="relative max-w-[300px] rounded-xl border border-border bg-card p-4 text-left text-card-foreground"
+      style={{ fontSize: '0.75em' }}
     >
       <div
-        style={{
-          position: 'absolute',
-          top: '0',
-          right: '0.5em',
-          transform: 'translateY(-50%)',
-          display: 'flex',
-          gap: '0.5em',
-          zIndex: 5, // map zoom controls above map layers
-          fontSize: '.8em',
-        }}
+        className="absolute top-0 right-2 z-10 flex -translate-y-1/2 gap-2"
+        style={{ fontSize: '.8em' }}
       >
         <HoverableIcon
           Icon={SquareArrowUpRightIcon}

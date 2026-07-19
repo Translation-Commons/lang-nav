@@ -23,7 +23,13 @@ const TablePinCell: React.FC<{ object: ObjectData }> = ({ object }) => {
     });
   }, [isPinned, pinned, object.ID, updatePageParams]);
 
-  return <PinButton isPinned={isPinned} onTogglePin={togglePin} />;
+  return (
+    <PinButton
+      className={isPinned ? '' : 'invisible group-hover:visible'}
+      isPinned={isPinned}
+      onTogglePin={togglePin}
+    />
+  );
 };
 
 export const PinColumn: TableColumn<ObjectData> = {

@@ -5,6 +5,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import CountOfPeople from '@shared/ui/old/CountOfPeople';
 import DecimalNumber from '@shared/ui/old/DecimalNumber';
 import Deemphasized from '@shared/ui/old/Deemphasized';
+import { TableBody, TableCell, TableHeader, TableRow } from '@shared/ui/table';
 
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
@@ -19,46 +20,56 @@ type Props<T> = {
   tableID: TableID;
 };
 
+const NUMERIC_VALUE_TYPES = new Set([
+  TableValueType.Population,
+  TableValueType.Count,
+  TableValueType.Decimal,
+]);
+
 function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
   return (
-    <div style={{ width: '100%', position: 'relative' }}>
-      <table style={{ textAlign: 'start', borderCollapse: 'collapse', width: 'max-content' }}>
-        <thead
-          style={{
-            position: 'sticky',
-            top: 0,
-            backgroundColor: 'var(--color-background)',
-            zIndex: 10, // sticky table header row
-          }}
-        >
-          <tr>
+    // Only scroll horizontally where the table is too wide to fit (below lg). At lg+ the wrapper
+    // stays overflow-visible so `sticky top-0` on the header pins against the page scroll rather
+    // than a never-scrolling overflow container (rendering the generated <Table> root instead
+    // would force overflow-x:auto, which computes overflow-y to auto and breaks the sticky header).
+    <div className="w-full overflow-x-auto lg:overflow-visible">
+      <table data-slot="table" className="w-max caption-bottom text-start text-sm">
+        <TableHeader className="sticky top-0 z-10 bg-background">
+          <TableRow>
             {visibleColumns.map((column) => (
               <TableColumnName column={column} appearance="th" key={column.key} />
             ))}
-          </tr>
-        </thead>
-        <tbody>
+          </TableRow>
+        </TableHeader>
+        <TableBody>
           {objects.map((object, i) => (
-            <tr key={object.ID || i}>
+            <TableRow key={object.ID || i} className="group">
               {visibleColumns.map((column, idx) => {
                 const valueType = getValueTypeForColumn(column);
                 // The pin column (idx 0) and the first data column (idx 1) stay pinned to the
-                // left while scrolling horizontally. Their sticky positioning, background, and
-                // row-hover highlight live in tableStyles.css under `.alwaysVisible`.
+                // left while scrolling horizontally. Their sticky positioning and background live
+                // in tableStyles.css under `.alwaysVisible`.
                 const isSticky = idx <= 1;
+                const isNumeric = NUMERIC_VALUE_TYPES.has(valueType);
                 return (
-                  <td
+                  <TableCell
                     key={column.key}
-                    className={isSticky ? `${valueType} alwaysVisible` : valueType}
-                    style={{ maxWidth: MAX_COLUMN_WIDTH, padding: '0.25em 0.5em' }}
+                    className={[
+                      'align-top whitespace-normal',
+                      isSticky ? 'alwaysVisible' : '',
+                      isNumeric ? 'text-right tabular-nums' : '',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
+                    style={{ maxWidth: MAX_COLUMN_WIDTH }}
                   >
                     <FormattedContent content={column.render(object)} valueType={valueType} />
-                  </td>
+                  </TableCell>
                 );
               })}
-            </tr>
+            </TableRow>
           ))}
-        </tbody>
+        </TableBody>
       </table>
     </div>
   );

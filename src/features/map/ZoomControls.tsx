@@ -1,7 +1,8 @@
 import { Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
+import { Button } from '@shared/ui/button';
+import { Tooltip, TooltipContent, TooltipTrigger } from '@shared/ui/tooltip';
 
 type Props = {
   zoomIn: () => void;
@@ -10,30 +11,35 @@ type Props = {
   containerWidth?: number;
 };
 
-const ZoomControls: React.FC<Props> = ({
-  zoomIn,
-  zoomOut,
-  resetTransform,
-  containerWidth = 800,
-}) => {
-  const fontSize = containerWidth < 500 ? '0.7em' : containerWidth < 700 ? '0.85em' : '1em';
+const controls: { label: string; Icon: React.ElementType; action: keyof Props }[] = [
+  { label: 'Zoom in', Icon: ZoomInIcon, action: 'zoomIn' },
+  { label: 'Zoom out', Icon: ZoomOutIcon, action: 'zoomOut' },
+  { label: 'Reset', Icon: Maximize2Icon, action: 'resetTransform' },
+];
+
+const ZoomControls: React.FC<Props> = ({ zoomIn, zoomOut, resetTransform }) => {
+  const handlers = { zoomIn, zoomOut, resetTransform };
   return (
-    <div style={{ ...containerStyle, fontSize }}>
-      <HoverableIcon onClick={zoomIn} description="Zoom in" Icon={ZoomInIcon} />
-      <HoverableIcon onClick={zoomOut} description="Zoom out" Icon={ZoomOutIcon} />
-      <HoverableIcon onClick={resetTransform} description="Reset" Icon={Maximize2Icon} />
+    <div className="absolute top-2 right-2 z-10 flex flex-col gap-2">
+      {controls.map(({ label, Icon, action }) => (
+        <Tooltip key={label}>
+          <TooltipTrigger
+            render={
+              <Button
+                variant="outline"
+                size="icon"
+                aria-label={label}
+                onClick={handlers[action as 'zoomIn' | 'zoomOut' | 'resetTransform']}
+              />
+            }
+          >
+            <Icon />
+          </TooltipTrigger>
+          <TooltipContent side="left">{label}</TooltipContent>
+        </Tooltip>
+      ))}
     </div>
   );
-};
-
-const containerStyle: React.CSSProperties = {
-  position: 'absolute',
-  top: '0.5em',
-  right: '0.5em',
-  zIndex: 5, // above map layers
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.5em',
 };
 
 export default ZoomControls;

@@ -25,11 +25,8 @@ const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <div
       ref={containerRef}
-      style={{
-        display: 'grid',
-        gridGap: '1.5em',
-        gridTemplateColumns: `repeat(${nColumns}, 1fr)`,
-      }}
+      className="grid gap-6"
+      style={{ gridTemplateColumns: `repeat(${nColumns}, 1fr)` }}
     >
       {children}
     </div>

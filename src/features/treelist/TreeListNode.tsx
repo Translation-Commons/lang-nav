@@ -1,4 +1,4 @@
-import { InfoIcon } from 'lucide-react';
+import { ChevronDownIcon, ChevronRightIcon, InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
@@ -8,6 +8,8 @@ import Field from '@features/transforms/fields/Field';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { ObjectData } from '@entities/types/DataTypes';
+
+import { Button } from '@shared/ui/button';
 
 import TreeListNodeData from './TreeListNodeData';
 import { useTreeListOptionsContext } from './TreeListOptions';
@@ -56,17 +58,21 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
   return (
     <li>
       {children.length > 0 ? (
-        <button
-          className="TreeListExpandBranch"
+        <Button
+          variant="ghost"
+          size="icon-xs"
+          className="mr-1 align-middle"
+          aria-label={expanded ? 'Collapse' : 'Expand'}
+          aria-expanded={expanded}
           onClick={() => {
             setExpanded((prev) => !prev);
             setSeeAllChildren(false);
           }}
         >
-          {expanded ? `▼` : `▶`}
-        </button>
+          {expanded ? <ChevronDownIcon /> : <ChevronRightIcon />}
+        </Button>
       ) : (
-        <div className="TreeListExpandBranch empty" />
+        <span className="mr-1 inline-block size-6 align-middle" />
       )}
       <>
         <span style={labelStyle}>
@@ -94,12 +100,14 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
             ))}
           {limit > 0 && children.length > limit && !seeAllChildren && !allExpanded && (
             <li>
-              <button
-                className="TreeListSeeAllDescendants"
+              <Button
+                variant="link"
+                size="sm"
+                className="h-auto px-1"
                 onClick={() => setSeeAllChildren((prev) => !prev)}
               >
                 See {children.length - limit} more descendants
-              </button>
+              </Button>
             </li>
           )}
         </ul>
