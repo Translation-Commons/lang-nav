@@ -27,20 +27,20 @@ const DetailsPanel: React.FC = () => {
       title={<DetailsTitle object={object} />}
       onClose={() => updatePageParams({ objectID: undefined })}
     >
-      <DetailsBody>
-        <PathContainer style={{ marginTop: '0.5em' }}>
+      <div className="flex flex-col gap-2">
+        <PathContainer>
           <ObjectPath object={object} />
         </PathContainer>
         <ContainErrorsAndSuspense>
           {object && <ObjectDetails object={object} />}
         </ContainErrorsAndSuspense>
         {!object && (
-          <>
+          <p className="text-muted-foreground">
             In the comparison view, select a {objectType.toLowerCase()} by clicking on its name to
             see more information.
-          </>
+          </p>
         )}
-      </DetailsBody>
+      </div>
     </ResizablePanel>
   );
 };
@@ -53,10 +53,6 @@ const DetailsTitle: React.FC<{ object?: ObjectData }> = ({ object }) => {
       <ObjectSubtitle object={object} highlightSearchMatches={false} />
     </div>
   );
-};
-
-const DetailsBody: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return <div style={{ padding: '1em' }}>{children}</div>;
 };
 
 export default DetailsPanel;

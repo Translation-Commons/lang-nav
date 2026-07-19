@@ -40,19 +40,7 @@ const Settings = (): React.ReactNode => {
 };
 
 const ViewSettingsPanel: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '0.5em',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        width: 'max-content',
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className="flex w-max flex-col items-end gap-2">{children}</div>;
 };
 
 export default Settings;

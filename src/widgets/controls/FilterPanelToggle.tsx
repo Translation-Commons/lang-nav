@@ -1,6 +1,6 @@
 import { SlidersHorizontalIcon } from 'lucide-react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import { Button } from '@shared/ui/button';
 
 import useFilterPanel from './useFilterPanel';
 
@@ -9,15 +9,16 @@ const FilterPanelToggle: React.FC = () => {
   const label = isOpen ? 'Close filters panel' : 'Open filters panel';
 
   return (
-    <HoverableButton
-      className={isOpen ? 'selected primary' : 'primary'}
-      hoverContent={label}
-      onClick={() => setIsOpen((open) => !open)}
-      style={{ padding: '0.5em', display: 'flex' }}
+    <Button
+      variant={isOpen ? 'secondary' : 'outline'}
+      size="icon"
       aria-label={label}
+      aria-expanded={isOpen}
+      title={label}
+      onClick={() => setIsOpen((open) => !open)}
     >
-      <SlidersHorizontalIcon size="1.2em" />
-    </HoverableButton>
+      <SlidersHorizontalIcon />
+    </Button>
   );
 };
 

@@ -12,11 +12,8 @@ type Props = PropsWithChildren<{
 
 const CardField: React.FC<Props> = ({ children, title, field, description }) => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em', gap: '0.5em' }}>
-      <span
-        aria-label={title + ': ' + description}
-        style={{ display: 'inline-flex', verticalAlign: 'middle' }}
-      >
+    <div className="mb-2 flex items-center gap-2">
+      <span aria-label={title + ': ' + description} className="inline-flex align-middle">
         <Hoverable
           hoverContent={
             <>

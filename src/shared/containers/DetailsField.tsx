@@ -19,23 +19,19 @@ const DetailsField: React.FC<Props> = ({
 }) => {
   return (
     <div
-      style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        marginLeft: indent * 2 + 'em',
-      }}
+      className="flex flex-wrap items-center justify-between gap-x-2"
+      style={{ marginLeft: indent * 2 + 'em' }}
     >
-      <div style={{ minWidth: '200px' }}>
-        <div style={{ fontWeight: 600, marginRight: '0.25em', display: 'inline-flex' }}>
+      <div className="min-w-0">
+        <span className="mr-1 inline-flex items-center font-semibold">
           {title}
           {description && (
             <Hoverable hoverContent={description}>
               <InfoIcon size="1em" display="block" aria-label="More information" />
             </Hoverable>
           )}
-          <span style={{ fontWeight: 'normal' }}>:</span>
-        </div>
+          <span className="font-normal">:</span>
+        </span>{' '}
         {children}
       </div>
       {endContent}

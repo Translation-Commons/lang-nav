@@ -1,12 +1,19 @@
 import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectData } from '@entities/types/DataTypes';
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbPage,
+  BreadcrumbSeparator,
+} from '@shared/ui/breadcrumb';
 
 import ObjectPathChildren from './ObjectPathChildren';
 import ObjectPathParents from './ObjectPathParents';
@@ -34,25 +41,22 @@ const ObjectPath: React.FC<{ object: ObjectData | undefined; showChildren?: bool
   }
 
   return (
-    <>
-      <ObjectPathParents object={object} />
-      <ObjectName object={object} />
-      {showChildren && <ObjectPathChildren object={object} />}
-    </>
-  );
-};
-
-const ObjectName: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (!object) return null;
-  return (
-    <>
-      {object.type === ObjectType.Locale ? (
-        <span style={{ fontWeight: 'bold' }}>:</span>
-      ) : (
-        <SlashIcon size="1em" />
-      )}
-      <HoverableObjectName object={object} style={{ fontWeight: 'bold' }} />
-    </>
+    <Breadcrumb>
+      <BreadcrumbList>
+        <ObjectPathParents object={object} />
+        <BreadcrumbSeparator>
+          {object.type === ObjectType.Locale ? (
+            <span className="font-bold text-foreground">:</span>
+          ) : (
+            <SlashIcon size="1em" />
+          )}
+        </BreadcrumbSeparator>
+        <BreadcrumbItem>
+          <BreadcrumbPage className="font-bold">{object.nameDisplay}</BreadcrumbPage>
+        </BreadcrumbItem>
+        {showChildren && <ObjectPathChildren object={object} />}
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 };
 
