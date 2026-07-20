@@ -5,8 +5,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
-import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/old/CommaSeparated';
@@ -18,24 +18,13 @@ interface Props {
 }
 
 const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
-  const {
-    containsWritingSystems,
-    languages,
-    parentWritingSystem,
-    populationUpperBound,
-    rightToLeft,
-    sample,
-    scope,
-    unicodeVersion,
-  } = writingSystem;
+  const { languages, populationUpperBound, rightToLeft, sample, unicodeVersion } = writingSystem;
   const population =
     populationUpperBound != null && populationUpperBound >= 100 ? populationUpperBound : null;
 
   return (
     <div>
-      <div className="text-[1.5em] mb-2">
-        <ObjectTitle object={writingSystem} />
-      </div>
+      <CardTitleBlock object={writingSystem} />
 
       <CardField
         title="Sample"
@@ -43,43 +32,6 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         description="A single character from this writing system."
       >
         {sample?.trim() ? <span>{sample}</span> : <Deemphasized>Not available</Deemphasized>}
-      </CardField>
-
-      <CardField
-        title="Scope"
-        field={Field.WritingSystemScope}
-        description="How this writing system is categorized (e.g. a standalone system, a group of systems, or a variation of another system)."
-      >
-        {scope != null ? (
-          <div>
-            {scope}
-
-            {scope === WritingSystemScope.Variation && (
-              <div>
-                <Deemphasized>Variant of: </Deemphasized>
-                {parentWritingSystem ? (
-                  <HoverableObjectName object={parentWritingSystem} />
-                ) : (
-                  <Deemphasized>Unknown</Deemphasized>
-                )}
-              </div>
-            )}
-
-            {scope === WritingSystemScope.Group && containsWritingSystems?.length && (
-              <>
-                {' '}
-                containing{' '}
-                <CommaSeparated>
-                  {containsWritingSystems.map((w) => (
-                    <HoverableObjectName key={w.ID} object={w} />
-                  ))}
-                </CommaSeparated>
-              </>
-            )}
-          </div>
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
       </CardField>
 
       <CardField

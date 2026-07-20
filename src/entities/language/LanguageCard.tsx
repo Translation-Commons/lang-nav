@@ -7,13 +7,10 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
-
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import LanguageTerritoryList from './LanguageTerritoryList';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
@@ -35,18 +32,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
 
   return (
     <div>
-      <div className="text-[1.5em] mb-2">
-        <ObjectTitle object={lang} />
-        <ObjectSubtitle object={lang} />
-      </div>
-
-      <CardField
-        title="Language Type"
-        field={Field.LanguageScope}
-        description="Whether this is a Language Family, Macrolanguage, Individual Language, or Dialect."
-      >
-        {getLanguageScopeLabel(lang.scope)}
-      </CardField>
+      <CardTitleBlock object={lang} showEndonym />
 
       {populationEstimate != null && (
         <CardField

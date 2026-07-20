@@ -4,13 +4,11 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
 import CountOfPeople from '@shared/ui/old/CountOfPeople';
 import Deemphasized from '@shared/ui/old/Deemphasized';
-
-import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import TerritoryLanguageList from './TerritoryLanguageList';
 
@@ -19,29 +17,12 @@ interface Props {
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { population, sovereign, scope, parentUNRegion } = territory;
-  const isDependency = scope === TerritoryScope.Dependency;
+  const { population, scope, parentUNRegion } = territory;
   const isWorld = scope === TerritoryScope.World;
 
   return (
     <div>
-      <div className="text-[1.5em] mb-2">
-        <ObjectTitle object={territory} />
-      </div>
-      <CardField
-        title="Territory Type"
-        field={Field.TerritoryScope}
-        description="The kind of territory this is (e.g., country, dependency, region, continent)."
-      >
-        {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
-        {isDependency && sovereign ? (
-          <>
-            {' '}
-            of <HoverableObjectName object={sovereign} />
-          </>
-        ) : null}
-      </CardField>
-
+      <CardTitleBlock object={territory} />
       <CardField
         title="UN Region"
         field={Field.Region}

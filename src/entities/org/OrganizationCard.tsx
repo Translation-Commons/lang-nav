@@ -4,7 +4,7 @@ import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeratio
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/old/Deemphasized';
@@ -16,9 +16,7 @@ type Props = { org: OrganizationData };
 const OrganizationCard: React.FC<Props> = ({ org }) => {
   return (
     <div>
-      <div className="text-[1.5em] mb-2">
-        <ObjectTitle object={org} />
-      </div>
+      <CardTitleBlock object={org} />
       <CardField
         title="Headquartered In"
         field={Field.Territory}

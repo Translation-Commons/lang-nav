@@ -4,13 +4,11 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import Field from '@features/transforms/fields/Field';
 import { getLanguagesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/old/CommaSeparated';
 import Deemphasized from '@shared/ui/old/Deemphasized';
-
-import { getVariantTypeDisplay } from '@strings/VariantStrings';
 
 import { VariantData } from './VariantTypes';
 
@@ -26,21 +24,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
 
   return (
     <div>
-      <div className="text-[1.5em] mb-2">
-        <ObjectTitle object={data} />
-      </div>
-      <CardField
-        title="Type"
-        field={Field.VariantType}
-        description="What kind of variant it is, whether it's a dialectal or orthographic variation."
-      >
-        {data.variantType ? (
-          getVariantTypeDisplay(data.variantType)
-        ) : (
-          <Deemphasized>No type specified</Deemphasized>
-        )}
-      </CardField>
-
+      <CardTitleBlock object={data} />
       <CardField
         title="Description"
         field={Field.Description}

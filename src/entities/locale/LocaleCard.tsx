@@ -3,8 +3,7 @@ import React from 'react';
 import Field from '@features/transforms/fields/Field';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
 import DecimalNumber from '@shared/ui/old/DecimalNumber';
@@ -27,10 +26,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
   return (
     <div>
-      <div className="text-[1.5em] mb-2">
-        <ObjectTitle object={locale} />
-        <ObjectSubtitle object={locale} />
-      </div>
+      <CardTitleBlock object={locale} showEndonym />
 
       {pop.speaking.adjusted != null && (
         <CardField

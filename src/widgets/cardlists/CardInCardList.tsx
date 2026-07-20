@@ -56,11 +56,13 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
       role="button"
       tabIndex={0}
       data-selected={object.ID === objectID}
-      className="CardInCardList group relative cursor-pointer border p-4 text-start shadow-none ring-0 transition-colors hover:border-primary/50 hover:bg-accent/40 data-[selected=true]:border-primary data-[selected=true]:bg-primary/5"
+      className="CardInCardList group bg-card relative cursor-pointer border p-4 text-start shadow-none ring-0 transition-colors hover:border-primary/50 data-[selected=true]:border-primary data-[selected=true]:bg-primary/5"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       style={{
-        backgroundColor: getBackgroundColor ? (getBackgroundColor(object) ?? 'inherit') : undefined,
+        // Only override the elevated card surface when a coloring is active; otherwise fall through
+        // to bg-card so the card reads as raised above the page background.
+        backgroundColor: getBackgroundColor ? getBackgroundColor(object) : undefined,
       }}
     >
       <PinButton

@@ -32,8 +32,11 @@ const DataPageBody: React.FC = () => {
           <ViewSelector />
         </div>
       </div>
-      {/* Only this region scrolls; the tabs and toolbar above stay put. */}
-      <div className="min-h-0 flex-1 overflow-auto py-2 text-center">
+      {/* Only this region scrolls; the tabs and toolbar above stay put. `scrollbar-gutter: stable
+          both-edges` reserves the vertical scrollbar's width symmetrically on both sides, so
+          centered content (e.g. the Cards grid) keeps equal side gutters whether or not the
+          scrollbar is showing, and the layout never jumps as it appears/disappears. */}
+      <div className="min-h-0 flex-1 overflow-auto py-2 text-center [scrollbar-gutter:stable_both-edges]">
         <ContainErrorsAndSuspense>
           <DataViews />
         </ContainErrorsAndSuspense>
