@@ -146,7 +146,7 @@ function SelectMode<T extends React.Key>({
   selected,
 }: ModeProps<T> & { inline?: boolean; labelWhenEmpty?: string }) {
   const triggerClassName = inline
-    ? 'h-auto gap-0.5 border-0 bg-transparent px-1 py-0 font-inherit dark:bg-transparent dark:hover:bg-transparent'
+    ? 'h-auto gap-0.5 border-0 bg-transparent px-1 py-0 dark:bg-transparent dark:hover:bg-transparent'
     : undefined;
 
   const renderItems = () =>

@@ -23,7 +23,7 @@ const NAV_LINKS: { path: LangNavPageName; label: string }[] = [
 
 // Shared styling for interactive items sitting on the primary-colored navbar.
 const navItemClass =
-  'rounded-md px-2.5 py-1 text-base text-primary-foreground/90 transition-colors hover:bg-white/15';
+  'rounded-md px-2.5 py-1 text-base text-primary-foreground/90 transition-colors hover:bg-primary-foreground/15';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
@@ -61,7 +61,7 @@ const PageNavBar: React.FC = () => {
           type="button"
           variant="ghost"
           size="icon-sm"
-          className="text-primary-foreground hover:bg-white/15"
+          className="text-primary-foreground hover:bg-primary-foreground/15"
           aria-label="View settings"
           onClick={() => setSettingsOpen(true)}
         >
@@ -74,7 +74,7 @@ const PageNavBar: React.FC = () => {
         type="button"
         variant="ghost"
         size="icon"
-        className="mr-2 ml-auto text-primary-foreground hover:bg-white/15 md:hidden"
+        className="mr-2 ml-auto text-primary-foreground hover:bg-primary-foreground/15 md:hidden"
         aria-label="Open menu"
         onClick={() => setMenuOpen(true)}
       >

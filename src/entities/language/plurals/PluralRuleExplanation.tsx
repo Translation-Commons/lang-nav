@@ -122,7 +122,10 @@ const FormattedCondition: React.FC<{ condition: string; exampleNum?: string | nu
   return (
     <>
       {symbols.map((symbol, i) => (
-        <span key={i} className={cn('py-0 px-1', passes && 'highlighted')}>
+        <span
+          key={i}
+          className={cn('py-0 px-1', passes && 'rounded-xs bg-yellow-200 dark:bg-yellow-900')}
+        >
           <SymbolToFormat symbol={symbol} />
         </span>
       ))}

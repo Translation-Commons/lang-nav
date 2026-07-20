@@ -21,14 +21,14 @@ ul.TreeListBranch::before {
   position: absolute;
   bottom: 10px;
   left: 0;
-  border-left: 2px solid var(--color-button-primary);
+  border-left: 2px solid var(--primary);
   height: 100%;
   z-index: -1;
 }
 
 .TreeListRoot li {
   position: relative;
-  background-color: var(--color-background);
+  background-color: var(--background);
   z-index: 10;
 }
 
@@ -38,7 +38,7 @@ ul.TreeListBranch::before {
   top: 0.75em;
   left: -8px;
   width: 20px;
-  border-top: 2px solid var(--color-button-primary);
+  border-top: 2px solid var(--primary);
   background: transparent;
   z-index: -1;
 }
@@ -53,8 +53,8 @@ ul.TreeListBranch::before {
 }
 
 .TreeListExpandBranch {
-  color: var(--color-text-on-color);
-  background-color: var(--color-button-primary);
+  color: var(--primary-foreground);
+  background-color: var(--primary);
 }
 
 .TreeListExpandBranch.empty {
@@ -62,7 +62,7 @@ ul.TreeListBranch::before {
 }
 
 .TreeListExpandBranch:hover {
-  background-color: var(--color-button-hover);
+  background-color: var(--primary);
 }
 
 .TreeListPopulation {

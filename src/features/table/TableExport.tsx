@@ -190,7 +190,7 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.DownloadUNESCO:
       return (
         <>
-          <DownloadIcon className="button-inline-icon" /> {exportType}
+          <DownloadIcon className="inline size-[1em] align-sub" /> {exportType}
         </>
       );
     case ExportType.CopyCSV:
@@ -199,13 +199,17 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.CopyCLDR:
       return (
         <>
-          <CopyIcon className="button-inline-icon" /> {exportType}
+          <CopyIcon className="inline size-[1em] align-sub" /> {exportType}
         </>
       );
     case ExportType.Unchosen:
       return (
         <>
-          {isExporting ? <LoadingIcon /> : <ExternalLinkIcon className="button-inline-icon" />}{' '}
+          {isExporting ? (
+            <LoadingIcon />
+          ) : (
+            <ExternalLinkIcon className="inline size-[1em] align-sub" />
+          )}{' '}
           {exportType}
         </>
       );

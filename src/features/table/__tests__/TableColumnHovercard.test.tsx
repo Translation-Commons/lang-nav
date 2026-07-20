@@ -94,7 +94,7 @@ describe('TableColumnHovercard', () => {
       render(<TableColumnHovercard column={column} />);
 
       const primaryButton = screen.getAllByRole('button')[0];
-      expect(primaryButton).toHaveClass('primary');
+      expect(primaryButton).toHaveClass('bg-primary', 'text-primary-foreground');
     });
 
     it('should call updatePageParams when sort button is clicked', () => {
@@ -126,7 +126,7 @@ describe('TableColumnHovercard', () => {
       render(<TableColumnHovercard column={column} />);
 
       const tiebreaker = screen.getByText(/use as tie-breaker/);
-      expect(tiebreaker).toHaveClass('primary');
+      expect(tiebreaker).toHaveClass('bg-primary', 'text-primary-foreground');
     });
 
     it('should call updatePageParams when tie-breaker button is clicked', () => {

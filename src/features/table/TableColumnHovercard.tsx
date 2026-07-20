@@ -58,7 +58,9 @@ function ColumnSortControls<T extends EntityData>({ column }: { column: TableCol
           {[SortBehavior.Normal, SortBehavior.Reverse].map((sb) => (
             <button
               key={sb}
-              className={`mr-2 px-2 py-1 ${isActive && sortBehavior === sb ? 'primary' : ''}`}
+              className={`mr-2 px-2 py-1 ${
+                isActive && sortBehavior === sb ? 'bg-primary text-primary-foreground' : ''
+              }`}
               onClick={() => updatePageParams({ sortBy: column.field, sortBehavior: sb })}
             >
               {getSortingText(valueType, sb)}
@@ -70,7 +72,7 @@ function ColumnSortControls<T extends EntityData>({ column }: { column: TableCol
         <td className="text-center">or</td>
         <td>
           <button
-            className={`px-2 py-1 ${isSecondary ? 'primary' : ''}`}
+            className={`px-2 py-1 ${isSecondary ? 'bg-primary text-primary-foreground' : ''}`}
             onClick={() => updatePageParams({ secondarySortBy: column.field })}
           >
             use as tie-breaker ({getSortingText(valueType, sortBehavior)})

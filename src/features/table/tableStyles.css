@@ -4,7 +4,7 @@ td.alwaysVisible {
   /* Pin column width, reused as the left offset of the second sticky column. */
   --pin-column-width: 2.75em;
   position: sticky;
-  background-color: var(--color-background);
+  background-color: var(--background);
   z-index: 5; /* ZIndex.TableStickyColumn */
 }
 

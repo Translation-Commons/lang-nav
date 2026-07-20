@@ -96,7 +96,7 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
               <Button
                 variant="ghost"
                 size="icon-sm"
-                aria-label="Go to last page"
+                aria-label="Jump to last valid page"
                 title="This page number is out of range. Showing the first page instead. Click to go to the actual last page."
                 onClick={setPageToEnd}
               >

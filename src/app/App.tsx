@@ -47,13 +47,15 @@ function App() {
     <TooltipProvider delay={300}>
       <PageParamsProvider>
         <DeferredDataProvider>
-          <AmplitudeTracker />
-          <PageNavBar />
-          <div className="min-w-0 flex-1">
-            <PageRoutes />
+          <div className="flex min-h-screen flex-col">
+            <AmplitudeTracker />
+            <PageNavBar />
+            <div className="min-w-0 flex-1">
+              <PageRoutes />
+            </div>
+            <PageFooter />
+            <ConsentBanner />
           </div>
-          <PageFooter />
-          <ConsentBanner />
         </DeferredDataProvider>
       </PageParamsProvider>
     </TooltipProvider>

@@ -38,6 +38,8 @@ The data layer lives in `src/features/data/` and follows the flow documented in 
 
 ## Styles and conventions
 
+- Styling uses Tailwind CSS v4 with shadcn/ui components (built on Base UI). Generated primitives live in `src/shared/ui/` (added via `npx shadcn add`) and are not edited by hand; theme tokens live in `src/app/tailwind.css`.
+- Use semantic Tailwind tokens (`bg-background`, `text-muted-foreground`, `bg-primary`, ...) rather than raw hex, shadows, or gradients. Merge class names with `cn()` from `@shared/lib/utils`; use `lucide-react` for icons.
 - Prettier and ESLint enforce formatting and import rules; run `npm run lint` to check.
 - Keep components small, domain-aligned, and colocated with related helpers.
 - Favor descriptive types and module aliases; add comments only where intent is non-obvious.
