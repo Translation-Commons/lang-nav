@@ -11,6 +11,7 @@ import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
 import { loadGoogleTranslate } from './supplemental/loadGoogleTranslate';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
+import { loadIos } from './supplemental/loadIos';
 import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
@@ -43,6 +44,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadIndigeneity(dataContext.getLanguage),
     loadECRML(dataContext.getLanguage),
     loadGoogleTranslate(dataContext.getLanguage),
+    loadIos(dataContext.getLanguage),
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadWin11LanguagePacks(dataContext.getLanguage),

@@ -16,6 +16,7 @@ import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSy
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
 import {
   GoogleTranslateData,
+  IosData,
   ObjectBase,
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
@@ -123,6 +124,7 @@ export interface LanguageData extends ObjectBase {
   udhr?: UniversalDeclarationOfHumanRightsData[];
   googleTranslate?: GoogleTranslateData[];
   win11LanguagePacks?: Win11LanguagePackData[];
+  ios?: IosData[];
 
   latitude?: number;
   longitude?: number;
