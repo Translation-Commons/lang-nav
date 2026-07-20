@@ -40,6 +40,10 @@ const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = true
   }
   const subtitles = [objectSubtitle, searchNamesSubtitle].filter(Boolean);
 
+  if (subtitles.length === 0) {
+    return null;
+  }
+
   return (
     <SubtitleContainer style={style}>
       <CommaSeparated limit={null}>{subtitles}</CommaSeparated>

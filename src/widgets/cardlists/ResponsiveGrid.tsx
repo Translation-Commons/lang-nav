@@ -14,9 +14,12 @@ import React from 'react';
 // inline size equal to its flex-scroll container (the DataPageBody region, which carries
 // `scrollbar-gutter: stable both-edges` so the count stays scrollbar-stable); without it auto-fill
 // would size to content and over-count the columns, clipping the last one off the right edge.
+// Below sm (phones) that fixed-track grid would strand a card in the middle with wide side gaps, so
+// there we drop to a single full-width column (`grid-cols-1`) and only switch to the fixed-width
+// centered auto-fill flow at sm and up.
 const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div className="mx-auto grid w-full min-w-0 max-w-[107.1rem] justify-center gap-6 [grid-template-columns:repeat(auto-fill,min(16.6rem,100%))] [&>*]:max-w-full">
+    <div className="mx-auto grid w-full min-w-0 max-w-[107.1rem] grid-cols-1 justify-center gap-6 sm:[grid-template-columns:repeat(auto-fill,min(16.6rem,100%))] [&>*]:max-w-full">
       {children}
     </div>
   );

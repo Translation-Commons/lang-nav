@@ -17,10 +17,10 @@ const EntityTypeTabs: React.FC = () => {
       value={objectType}
       onValueChange={(value) => updatePageParams({ objectType: value as ObjectType })}
     >
-      <div className="w-full max-w-full overflow-x-auto">
-        <TabsList>
+      <div className="w-full max-w-full overflow-x-auto overflow-y-hidden">
+        <TabsList className="flex-nowrap">
           {Object.values(ObjectType).map((entityType) => (
-            <TabsTrigger key={entityType} value={entityType}>
+            <TabsTrigger key={entityType} value={entityType} className="shrink-0 whitespace-nowrap">
               <HoverCard>
                 <HoverCardTrigger render={<span className="inline-flex items-center" />}>
                   {entityType}

@@ -30,24 +30,48 @@ function renderBlock(object: ObjectData, showEndonym = true) {
 const subtitleSlot = (container: HTMLElement) =>
   container.querySelector('.italic') as HTMLElement | null;
 
-describe('CardTitleBlock endonym slot', () => {
+// The outermost element is the header group that carries the reserved min-height.
+const groupBlock = (container: HTMLElement) => container.firstElementChild as HTMLElement;
+
+// The title lives directly inside the group and carries the display name.
+const titleLine = (container: HTMLElement) =>
+  groupBlock(container).firstElementChild as HTMLElement;
+
+describe('CardTitleBlock header group', () => {
   afterEach(() => vi.clearAllMocks());
 
-  it('reserves the subtitle line height when showEndonym and an endonym exists', () => {
+  it('renders the endonym directly beneath the title with no intra-block reserved gap', () => {
     const { container } = renderBlock(makeLanguage({ nameEndonym: 'Tëstış' }));
 
+    const slot = subtitleSlot(container);
     expect(screen.getByText('Tëstış')).toBeInTheDocument();
-    expect(subtitleSlot(container)?.style.minHeight).toBe('0.86rem');
+    // The endonym itself reserves no height; spacing to the title is a fixed top margin only.
+    expect(slot?.style.minHeight).toBe('');
   });
 
-  it('still reserves the subtitle line height when showEndonym but NO endonym exists', () => {
-    // A language with no endonym/subtitle: the slot must remain to keep block height constant.
+  it('reserves a uniform header min-height on the group so first data rows align', () => {
+    const withEndonym = renderBlock(makeLanguage({ nameEndonym: 'Tëstış' }));
+    // The group carries a min-height (endonym cards reserve title + endonym lines).
+    expect(groupBlock(withEndonym.container).className).toMatch(/min-h-\[/);
+
+    withEndonym.unmount();
+
+    const noEndonym = renderBlock(makeLanguage(), false);
+    // Cards without an endonym still reserve a (smaller) uniform header height.
+    expect(groupBlock(noEndonym.container).className).toMatch(/min-h-\[/);
+  });
+
+  it('never truncates the title (no line clamp)', () => {
+    const { container } = renderBlock(makeLanguage({ nameDisplay: 'A very long name' }));
+
+    expect(titleLine(container).className).not.toMatch(/line-clamp/);
+  });
+
+  it('renders no subtitle slot when showEndonym but NO endonym exists (group still reserves height)', () => {
     const { container } = renderBlock(makeLanguage());
 
-    const slot = subtitleSlot(container);
-    expect(slot).not.toBeNull();
-    expect(slot?.style.minHeight).toBe('0.86rem');
-    expect(slot?.textContent?.trim()).toBe('');
+    expect(subtitleSlot(container)).toBeNull();
+    expect(groupBlock(container).className).toMatch(/min-h-\[/);
   });
 
   it('renders no subtitle slot when showEndonym is false', () => {

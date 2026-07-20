@@ -45,8 +45,9 @@ function AmplitudeTracker() {
 
 function App() {
   const location = useLocation();
-  // The Data page is a fixed-height app shell: its interior view scrolls, the page does not.
-  // Other pages keep the natural min-height document flow so long content scrolls the page.
+  // On lg+ the Data page is a fixed-height app shell: its interior view scrolls, the page does not.
+  // Below lg (and on every other page) the shell keeps the natural min-height document flow so the
+  // whole page scrolls and the footer flows after the content.
   const isDataPage = location.pathname.replace(/\/+$/, '') === '/' + LangNavPageName.Data;
 
   return (
@@ -54,11 +55,14 @@ function App() {
       <PageParamsProvider>
         <DeferredDataProvider>
           <div
-            className={cn('flex flex-col', isDataPage ? 'h-dvh overflow-hidden' : 'min-h-screen')}
+            className={cn(
+              'flex min-h-screen flex-col',
+              isDataPage && 'lg:h-dvh lg:min-h-0 lg:overflow-hidden',
+            )}
           >
             <AmplitudeTracker />
             <PageNavBar />
-            <div className={cn('flex min-w-0 flex-1 flex-col', isDataPage && 'min-h-0')}>
+            <div className={cn('flex min-w-0 flex-1 flex-col', isDataPage && 'lg:min-h-0')}>
               <PageRoutes />
             </div>
             <PageFooter />

@@ -5,6 +5,8 @@ import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/Obje
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { cn } from '@shared/lib/utils';
+
 import ObjectSubtitle from './ObjectSubtitle';
 
 type Props = {
@@ -14,19 +16,27 @@ type Props = {
 };
 
 /**
- * Fixed-height identity block shared by every entity card. The title clamps to two lines so the
- * first data row starts at the same vertical position across sibling cards, the full name is
- * available on title-attr hover, and the code renders as a muted monospace [code] suffix. When a
- * card opts into an endonym, the subtitle slot reserves one line of height (min-h derived from its
- * 0.72rem font at 1.2 line-height) so the block stays the same height whether or not an endonym
- * exists, keeping first data rows aligned across sibling cards.
+ * Identity block shared by every entity card. The title never truncates: long names wrap to as many
+ * lines as they need and the code renders as a muted monospace [code] suffix. The block is a flex
+ * column packed to the top, so the endonym (when shown) sits directly beneath the title with no gap.
+ * A min-height sized to the common case (a two-line title, plus an endonym line for entities that
+ * show one) reserves a uniform header height across sibling cards of the same entity type, so their
+ * first data row starts at the same vertical position; the slack sits at the BOTTOM (between the
+ * content and the divider). Titles that genuinely need three or more lines grow past the min-height,
+ * pushing their stats down naturally.
  */
 const CardTitleBlock: React.FC<Props> = ({ object, showCode = true, showEndonym = false }) => {
   return (
-    <div className="border-border mb-3 border-b pb-3">
+    <div
+      className={cn(
+        'border-border mb-3 flex flex-col justify-start border-b pb-3',
+        // Reserve two title lines; endonym cards also reserve the subtitle line beneath it.
+        showEndonym ? 'min-h-[4.4rem]' : 'min-h-[3.4rem]',
+      )}
+    >
       <div
         title={object.nameDisplay}
-        className="line-clamp-2 min-h-[2.6rem] pr-5 text-[1.09rem] leading-[1.2] font-semibold tracking-[-0.015em]"
+        className="pr-5 text-[1.09rem] leading-[1.2] font-semibold tracking-[-0.015em]"
       >
         <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
         {showCode && (
@@ -38,12 +48,7 @@ const CardTitleBlock: React.FC<Props> = ({ object, showCode = true, showEndonym 
       {showEndonym && (
         <ObjectSubtitle
           object={object}
-          style={{
-            fontSize: '0.72rem',
-            lineHeight: 1.2,
-            marginTop: '0.15rem',
-            minHeight: '0.86rem',
-          }}
+          style={{ fontSize: '0.72rem', lineHeight: 1.2, marginTop: '0.15rem' }}
         />
       )}
     </div>

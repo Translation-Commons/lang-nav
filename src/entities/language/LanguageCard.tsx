@@ -12,6 +12,8 @@ import CardTitleBlock from '@entities/ui/CardTitleBlock';
 import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
 
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
 import LanguageTerritoryList from './LanguageTerritoryList';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
 import LanguageVitalityMeter from './vitality/VitalityMeter';
@@ -33,6 +35,14 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
   return (
     <div>
       <CardTitleBlock object={lang} showEndonym />
+
+      <CardField
+        title="Language Type"
+        field={Field.LanguageScope}
+        description="Whether this is a Language Family, Macrolanguage, Individual Language, or Dialect."
+      >
+        {getLanguageScopeLabel(lang.scope)}
+      </CardField>
 
       {populationEstimate != null && (
         <CardField

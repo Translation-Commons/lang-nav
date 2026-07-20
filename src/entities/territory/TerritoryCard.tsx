@@ -10,6 +10,8 @@ import CardField from '@shared/containers/CardField';
 import CountOfPeople from '@shared/ui/old/CountOfPeople';
 import Deemphasized from '@shared/ui/old/Deemphasized';
 
+import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
 import TerritoryLanguageList from './TerritoryLanguageList';
 
 interface Props {
@@ -17,12 +19,27 @@ interface Props {
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { population, scope, parentUNRegion } = territory;
+  const { population, sovereign, scope, parentUNRegion } = territory;
+  const isDependency = scope === TerritoryScope.Dependency;
   const isWorld = scope === TerritoryScope.World;
 
   return (
     <div>
       <CardTitleBlock object={territory} />
+      <CardField
+        title="Territory Type"
+        field={Field.TerritoryScope}
+        description="The kind of territory this is (e.g., country, dependency, region, continent)."
+      >
+        {scope != null ? getTerritoryScopeLabel(scope) : <Deemphasized>Unknown</Deemphasized>}
+        {isDependency && sovereign ? (
+          <>
+            {' '}
+            of <HoverableObjectName object={sovereign} />
+          </>
+        ) : null}
+      </CardField>
+
       <CardField
         title="UN Region"
         field={Field.Region}
