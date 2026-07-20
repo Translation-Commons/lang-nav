@@ -1,33 +1,16 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-const CARD_MIN_WIDTH = 240;
-
+// Fixed-width cards that wrap to fill the row's OWN width (a flex container), not the viewport, so
+// the number per row tracks the space left by the filter/details panels and reflows live as they
+// open, close, or drag-resize. Cards never grow, shrink, or squish. `max-w-[88rem]` caps the row
+// at 6 columns on wide screens (6 x 13rem cards + gaps) and `mx-auto` centers that capped block in
+// the view region so surplus width splits evenly on both sides; rows stay start-aligned inside the
+// block so cards line up in columns (a partial last row aligns under the row above rather than
+// centering on its own). `max-w-full` lets a card fall back to the container width around 360px so
+// it stays a single readable column instead of overflowing.
 const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry.contentRect) {
-        setWidth(entry.contentRect.width);
-      }
-    });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const nColumns = width > 0 ? Math.floor(width / CARD_MIN_WIDTH) : 1;
-
   return (
-    <div
-      ref={containerRef}
-      className="grid gap-6"
-      style={{ gridTemplateColumns: `repeat(${nColumns}, 1fr)` }}
-    >
+    <div className="mx-auto flex max-w-[88rem] flex-wrap justify-start gap-6 [&>*]:w-[13rem] [&>*]:max-w-full [&>*]:shrink-0">
       {children}
     </div>
   );

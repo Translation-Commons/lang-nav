@@ -11,9 +11,10 @@ import PageParamsProvider from '@features/params/PageParamsProvider';
 import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
+import { cn } from '@shared/lib/utils';
 import { TooltipProvider } from '@shared/ui/tooltip';
 
-import PageRoutes from './PageRoutes';
+import PageRoutes, { LangNavPageName } from './PageRoutes';
 
 function AmplitudeTracker() {
   const location = useLocation();
@@ -43,14 +44,21 @@ function AmplitudeTracker() {
 }
 
 function App() {
+  const location = useLocation();
+  // The Data page is a fixed-height app shell: its interior view scrolls, the page does not.
+  // Other pages keep the natural min-height document flow so long content scrolls the page.
+  const isDataPage = location.pathname.replace(/\/+$/, '') === '/' + LangNavPageName.Data;
+
   return (
     <TooltipProvider delay={300}>
       <PageParamsProvider>
         <DeferredDataProvider>
-          <div className="flex min-h-screen flex-col">
+          <div
+            className={cn('flex flex-col', isDataPage ? 'h-dvh overflow-hidden' : 'min-h-screen')}
+          >
             <AmplitudeTracker />
             <PageNavBar />
-            <div className="min-w-0 flex-1">
+            <div className={cn('flex min-w-0 flex-1 flex-col', isDataPage && 'min-h-0')}>
               <PageRoutes />
             </div>
             <PageFooter />

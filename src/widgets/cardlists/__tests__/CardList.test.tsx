@@ -83,7 +83,7 @@ describe('CardList', () => {
 
     // There are 4 country-scope territories in the mocked data
     const meters = getAllByText(/Showing/);
-    expect(meters.length).toBe(2); // One at top and one at bottom
+    expect(meters.length).toBe(1); // Only the bottom pagination meter remains
 
     // Only the countries are shown
     const cards = container.getElementsByClassName('CardInCardList');

@@ -17,9 +17,9 @@ const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
   return (
-    <main className="w-full flex-1 overflow-auto p-4">
+    <main className="flex min-w-0 flex-1 flex-col overflow-hidden p-4">
       <EntityTypeTabs />
-      <div className="mb-4 flex w-full items-center justify-between">
+      <div className="mb-4 flex w-full shrink-0 items-center justify-between">
         <div className="flex items-center gap-2">
           <FilterPanelToggle />
           <ResultCount />
@@ -32,12 +32,13 @@ const DataPageBody: React.FC = () => {
           <ViewSelector />
         </div>
       </div>
-      <div className="mx-auto max-w-[1280px] px-8 py-4 text-center">
+      {/* Only this region scrolls; the tabs and toolbar above stay put. */}
+      <div className="min-h-0 flex-1 overflow-auto py-2 text-center">
         <ContainErrorsAndSuspense>
           <DataViews />
         </ContainErrorsAndSuspense>
+        <LoadingStageDisplay />
       </div>
-      <LoadingStageDisplay />
     </main>
   );
 };

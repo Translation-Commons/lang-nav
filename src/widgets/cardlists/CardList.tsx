@@ -25,7 +25,6 @@ const CardList: React.FC = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <VisibleItemsMeter objects={allEntities} />
       {currentEntities.length === 0 && <Deemphasized>No objects found.</Deemphasized>}
 
       {/* Main grid */}
@@ -39,7 +38,7 @@ const CardList: React.FC = () => {
         </ResponsiveGrid>
       )}
 
-      {/* Display another visible item meter at the bottom for convenience. */}
+      {/* Pagination + result count live below the cards only. */}
       {currentEntities.length > 3 && <VisibleItemsMeter objects={allEntities} />}
       {currentEntities.length === 0 && (
         <FilterBreakdown objects={allEntities} shouldFilterUsingSearchBar={true} />

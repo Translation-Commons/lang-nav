@@ -47,13 +47,9 @@ function InteractiveEntityTable<T extends ObjectData>({
   return (
     <div className="flex flex-col items-center gap-4">
       <div className="flex items-center gap-2">
-        <VisibleItemsMeter
-          objects={entities}
-          shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-        />
+        <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
         <TableExport visibleColumns={visibilityModule.visibleColumns} entities={filteredEntities} />
       </div>
-      <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
 
       {/* The actual <table> component */}
       <BaseEntityTable

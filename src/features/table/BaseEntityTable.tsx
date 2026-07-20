@@ -27,12 +27,15 @@ const NUMERIC_VALUE_TYPES = new Set([
 
 function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
   return (
-    // Only scroll horizontally where the table is too wide to fit (below lg). At lg+ the wrapper
-    // stays overflow-visible so `sticky top-0` on the header pins against the page scroll rather
-    // than a never-scrolling overflow container (rendering the generated <Table> root instead
-    // would force overflow-x:auto, which computes overflow-y to auto and breaks the sticky header).
-    <div className="w-full overflow-x-auto lg:overflow-visible">
-      <table data-slot="table" className="w-max caption-bottom text-start text-sm">
+    // The scrolling ancestor is the Data-page view region (both axes). This wrapper sets no
+    // overflow of its own, so `sticky top-0` on the header and `sticky left-0` on the pinned
+    // columns both pin against that single scroll container (an intermediate overflow wrapper
+    // here would compute overflow-y to auto and break the sticky header).
+    <div className="w-max min-w-full rounded-md border border-border">
+      <table
+        data-slot="table"
+        className="w-full caption-bottom text-start text-sm [&_td:last-child]:border-r-0 [&_td]:border-r [&_td]:border-border [&_th:last-child]:border-r-0 [&_th]:border-r [&_th]:border-border"
+      >
         <TableHeader className="sticky top-0 z-10 bg-background">
           <TableRow>
             {visibleColumns.map((column) => (
