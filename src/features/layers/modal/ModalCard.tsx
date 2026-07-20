@@ -20,7 +20,7 @@ const ModalCard: React.FC<ModalProps> = ({ onClose, title, children, bodyStyle }
         if (!nextOpen) onClose();
       }}
     >
-      <DialogContent className="flex max-h-[90vh] w-auto max-w-[calc(100%-2rem)] flex-col">
+      <DialogContent className="flex max-h-[90vh] w-auto max-w-[calc(100%-2rem)] flex-col sm:max-w-[calc(100%-2rem)]">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
         </DialogHeader>

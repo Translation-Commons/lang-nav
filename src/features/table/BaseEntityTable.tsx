@@ -27,16 +27,24 @@ const NUMERIC_VALUE_TYPES = new Set([
 
 function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
   return (
-    // The scrolling ancestor is the Data-page view region (both axes). This wrapper sets no
-    // overflow of its own, so `sticky top-0` on the header and `sticky left-0` on the pinned
-    // columns both pin against that single scroll container (an intermediate overflow wrapper
-    // here would compute overflow-y to auto and break the sticky header).
-    <div className="w-max min-w-full rounded-md border border-border">
+    // The table owns its own scroll box at every breakpoint: a bounded-height, both-axis
+    // `overflow-auto` container. Because the box has a bounded height it is a real scrollport, so
+    // `sticky top-0` on the header and `sticky left-0` on the pinned columns (header + body) anchor
+    // to THIS box and work at all widths. The height is capped in viewport units so the box scrolls
+    // internally instead of pushing the page: below lg the page still scrolls past it to the footer;
+    // at lg+ the cap is sized to nearly fill the view region (leaving room for the sibling status
+    // line) so the region itself does not also scroll — no double scrollbar. The 368px lg subtrahend
+    // sums the fixed vertical chrome outside the box: ~154px above the view region (navbar + main
+    // p-4 top + entity-type tabs + toolbar row) + ~16px region py-2 + ~136px of in-region siblings
+    // (column-selector row + gap + bottom items-meter row + gap + LoadingStageDisplay + its margin)
+    // + ~62px slack/below-region gap. Retune if that chrome changes. Cell backgrounds and the
+    // sticky-left offsets live in tableStyles.css.
+    <div className="entityTable w-full max-h-[70dvh] overflow-auto rounded-md border border-border lg:max-h-[calc(100dvh-368px)]">
       <table
         data-slot="table"
-        className="w-full caption-bottom text-start text-sm [&_td:last-child]:border-r-0 [&_td]:border-r [&_td]:border-border [&_th:last-child]:border-r-0 [&_th]:border-r [&_th]:border-border"
+        className="w-max min-w-full caption-bottom text-start text-sm [&_td:last-child]:border-r-0 [&_td]:border-r [&_td]:border-border [&_th:last-child]:border-r-0 [&_th]:border-r [&_th]:border-border"
       >
-        <TableHeader className="sticky top-0 z-10 bg-background">
+        <TableHeader className="sticky top-0 z-10">
           <TableRow>
             {visibleColumns.map((column) => (
               <TableColumnName column={column} appearance="th" key={column.key} />
