@@ -1,0 +1,153 @@
+#codeDisplay		co2005	co2018
+#nameDisplay		Colombia 2005 Ethnicity	Colombia 2018 Ethnicity
+#isoRegionCode	CO		
+#yearCollected		2005	2018
+### Language Criteria ###			
+#languageUse	Ethnicity		
+### Population Surveyed ###			
+#population		42,888,592	48,258,494
+#populationSource		from the Census total	from the Census total
+#populationSurveyed			1,905,617
+#responsesPerIndividual	1		
+### Data Constraints ###			
+#languagesIncluded	Indigenous		
+#quantity	count		
+### Creator ###			
+#collectorType	Government		
+#collectorName	Departamento Administrativo Nacional de Estadística		
+#collectorNameShort	DANE		
+#presentedBy	Internet Archive		
+### Source Document ###			
+#url	https://web.archive.org/web/20260529204203/https://www.dane.gov.co/files/investigaciones/boletines/grupos-etnicos/presentacion-grupos-etnicos-2019.pdf		
+#datePublished	2019-09-16		
+#dateAccessed	2026-05-29		
+#documentName	Población Indígena de Colombia – Resultados del Censo Nacional de Población y Vivienda 2018		
+#tableName	Población por pueblo indígena, CG 2005 - CNPV 2018		
+#columnName		CG 2005	CNPV 2018
+#citation	Departamento Administrativo Nacional de Estadística (DANE). Población Indígena de Colombia: Resultados del Censo Nacional de Población y Vivienda 2018. 16 September 2019.		
+#notes	This dataset represents indigenous people and whether they speak the native language of their own people. Rows represent Indigenous peoples (pueblos indígenas) reported in the DANE 2018 Census. These are official population counts by Indigenous people, not language speaker counts. The DANE publication does not provide population by individual language.		
+Language Code	Language		Population
+guc	Wayuu	270,413	380,460
+mis	Zenú	233,052	307,091
+pbb	Nasa	186,178	243,176
+mis	Pastos	129,801	163,873
+embe1258/cmi	Emberá Chamí	29,094	77,714
+embe1258/mul	Emberá	37327	56504
+guh	Sikuani	19,791	52,361
+pij	Pijao	58810	51635
+embe1258/cto	Emberá Katío	38,259	48,117
+kwi	Awá	25,813	44,516
+mis	Mokana	24,825	37,099
+yana1258	Yanacona	33,253	34,897
+arh	Arhuaco	22,134	34,711
+gum	Misak	21085	21713
+que/inb	Inga	15450	19561
+mbp	Wiwa	10703	18202
+gum	Coconuco	16492	18135
+kank1244	Kankuamo	12714	16986
+kog	Kogui	9173	15820
+noa	Wounaan	9066	14825
+pio	Piapoco	3508	14661
+cub	Cubeo	3926	14074
+tca	Tikuna	7879	13842
+huu	Murui	6444	12029
+kpc	Curripaco	4340	11946
+chb	Muisca	14051	11265
+tune1260	U’wa	7581	10649
+pui	Puinave	4318	8984
+ttk	Totoró	6289	8916
+kbh	Kamëntsá	4879	7521
+quil1251	Quillacinga		7333
+embe1258/sja	Eperara Siapidara	3853	7047
+slc	Sáliva	3035	4783
+embe1258/emp	Emberá Dobida		4233
+tuo	Tukano	2016	4075
+gum	Kizgó		3974
+que/qug	Kichwa	481	3688
+des	Desano	2179	3641
+yup	Yukpa	4761	3610
+gvc	Wanano	1305	3312
+gum	Ambaló		3278
+coe	Coreguaje	1767	3257
+cod/coca1260	Cocama	2204	3221
+mot	Bari	5923	3018
+guo	Guayabero	617	2960
+kvn	Cuna Tule	2383	2610
+snn	Siona	1829	2599
+mis	Polindara		2499
+embe1258/cmi	Cañamomo Lomaprieta	#21628 but data decided partially invalid	2225
+guh/amar1275	Amorúa	464	2211
+bmr	Muinane		2113
+myy	Makuna	612	1962
+con	Kofán	1657	1816
+mbn	Macahuan		1764
+cbg	Chimila	1614	1701
+sri	Siriano	544	1658
+ycn	Yukuna	396	1582
+tue	Tuyuca	444	1467
+pid	Piaroa	720	1127
+pir	Piratapuyo	814	1106
+tav	Tatuyo	381	1091
+mul	Indígenas Ecuador (diferente de otavaleños)	407	1088
+boa	Bora	933	1047
+cbc	Carapana	482	1040
+bao/pok	Bara	208	1004
+tnc	Tanimuka	342	991
+yad	Yagua	1007	984
+aca	Achagua	796	980
+yui	Yurutí	377	969
+bsn	Barasano	351	905
+cui	Cuiba	769	895
+ano	Andoke	136	820
+cbb	Kawiyarí	233	809
+boa/mira1254	Miraña	274	759
+mbr	Nukak	1080	744
+ycn	Matapí	71	618
+ten	Dujos	56	611
+yrl	Yeral		565
+cbd	Karijona	425	525
+cui	Masiguare	268	522
+mbn	Hitnu	676	513
+oca	Ocaina	285	412
+cui	Wipivi		299
+tnc	Letuama	202	285
+noj	Nonuya	31	258
+ana	Andakies		248
+que/qvi	Otavaleño	975	210
+tae	Tariano	197	210
+mis	Guane	812	200
+pisa1245	Pisamira	151	196
+bvv	Baniva		187
+mis	Nutabe		178
+mul	Indígenas Venezuela	8	157
+cbv	Kakua		147
+tit	Tanigua		145
+gob/maya1284	Yamalero	63	142
+yae	Yaruro		136
+beto1237	Betoye	394	127
+bsn/taiw1247	Taiwano	166	123
+ynu	Yauna	99	105
+mis	Mapayerri		104
+mis	Calima	76	102
+cca	Quimbaya	163	94
+cui/chir1287	Tsiripu	17	75
+myn	Maya (Guatemala)	7	65
+mis	Guariquema		62
+mis	Panches	8	55
+cbv/macu1261	Makú		50
+mul	Indígenas Peru	98	44
+mis	Tayronas	19	43
+mul	Indígenas Brasil	306	36
+jup	Jupda		33
+mis	Je’eruriwa		29
+mcl	Makaguaje	125	24
+mul	Indígenas Bolivia	3	22
+cui/chir1288	Chiricoa	46	19
+mul	Indígenas Panama		16
+mis	Guanaca	12	14
+yri	Yarí		14
+mis	Chitarero	161	10
+mul	Indígenas Mexico	12	5
+yab	Juhup		4
+jup	Hupdu		1
+juri1235	Yuri	26	
