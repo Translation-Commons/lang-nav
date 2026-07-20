@@ -106,7 +106,7 @@ const columns: TableColumn<LanguageData>[] = [
     description: (
       <>
         Sources:
-        <ul style={{ margin: '0' }}>
+        <ul className="m-0">
           <li>
             <ExternalLink href="https://en.wikipedia.org/wiki/List_of_Wikipedias">
               List of Active and Closed Wikipedias

@@ -106,7 +106,7 @@ const MultiplePathsList: React.FC<{
             </strong>
             <ul>
               {paths.map((path, j) => (
-                <li key={j} style={{ marginLeft: '0.5em' }}>
+                <li key={j} className="ml-2">
                   <LanguagePath path={path} getLanguage={getLanguage} />
                 </li>
               ))}

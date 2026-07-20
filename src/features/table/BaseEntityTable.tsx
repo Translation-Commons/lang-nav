@@ -10,7 +10,6 @@ import { TableBody, TableCell, TableHeader, TableRow } from '@shared/ui/table';
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
 import TableColumnName from './TableColumnName';
-import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 import TableID from './TableID';
 import TableValueType from './TableValueType';
 
@@ -55,13 +54,12 @@ function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Prop
                   <TableCell
                     key={column.key}
                     className={[
-                      'align-top whitespace-normal',
+                      'align-top whitespace-normal max-w-[10em]',
                       isSticky ? 'alwaysVisible' : '',
                       isNumeric ? 'text-right tabular-nums' : '',
                     ]
                       .filter(Boolean)
                       .join(' ')}
-                    style={{ maxWidth: MAX_COLUMN_WIDTH }}
                   >
                     <FormattedContent content={column.render(object)} valueType={valueType} />
                   </TableCell>

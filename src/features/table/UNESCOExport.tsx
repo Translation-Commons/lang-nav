@@ -170,7 +170,7 @@ export const ExportTerritoryLanguageDataButton: React.FC<{ territory: TerritoryD
     <button
       onClick={handleExport}
       title="Export language data for this territory in UNESCO format"
-      style={{ padding: '.25em' }}
+      className="p-1"
     >
       <CopyIcon size="1em" display="block" />
     </button>

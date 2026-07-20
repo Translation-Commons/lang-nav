@@ -45,7 +45,7 @@ const PopulationSource: React.FC<{
     case PopulationSourceCategory.Algorithmic:
       return (
         <Hoverable hoverContent={description}>
-          <span style={{ fontStyle: 'italic', color: 'var(--color-text-secondary)' }}>{label}</span>
+          <span className="italic text-muted-foreground">{label}</span>
         </Hoverable>
       );
     default:

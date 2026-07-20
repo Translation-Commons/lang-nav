@@ -40,7 +40,7 @@ function CodePathRecommendation({ notes }: { notes: CensusLanguageNotes }): Reac
       {newParts.map((part, i) => {
         const isDifferent = !oldParts.includes(part) && part !== '';
         return (
-          <span key={i} style={{ color: isDifferent ? 'var(--color-red)' : 'inherit' }}>
+          <span key={i} className={isDifferent ? 'text-red' : undefined}>
             {part}
             {i < newParts.length - 1 ? '/' : ''}
           </span>

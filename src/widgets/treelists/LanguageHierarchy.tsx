@@ -37,14 +37,7 @@ export const LanguageHierarchy: React.FC = () => {
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
           different sources disagree on what is a language/dialect/etc. The parent/child
           relationships come from the selected language source (
-          <div
-            style={{
-              display: 'inline-block',
-              height: '1em',
-              verticalAlign: 'top',
-              padding: '0.25em 0',
-            }}
-          >
+          <div className="inline-block h-[1em] py-1 align-top">
             <LanguageSourceSelector display={SelectorDisplay.InlineDropdown} />
           </div>
           ). <SourceWarning languageSource={languageSource} />

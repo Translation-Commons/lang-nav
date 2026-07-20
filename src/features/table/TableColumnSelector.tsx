@@ -15,6 +15,8 @@ import TableColumn from './TableColumn';
 import TableColumnName from './TableColumnName';
 import { ColumnVisibilityModule } from './useColumnVisibility';
 
+const GLOBAL_CONTROL_BUTTON_CLASS = 'p-1';
+
 function TableColumnSelector<T extends ObjectData>({
   columns,
   visibilityModule,
@@ -35,14 +37,7 @@ function TableColumnSelector<T extends ObjectData>({
         <>
           Click to toggle the visibility of columns in the table. You can also hover over column
           names for more info and sorting/filtering options.
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(12em, 1fr))',
-              gap: '1em',
-              padding: '0.5em',
-            }}
-          >
+          <div className="grid grid-cols-[repeat(auto-fit,minmax(12em,1fr))] gap-4 p-2">
             {Object.entries(columnsByGroup).map(([group, columns]) => (
               <ColumnGroup
                 columns={columns}
@@ -86,22 +81,15 @@ function ColumnGroup<T extends ObjectData>({
       : 'No columns visible. Click to show all columns in this group.';
 
   return (
-    <div
-      key={group}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'start',
-      }}
-    >
+    <div key={group} className="flex flex-col text-start">
       {columns.length > 1 && (
         <Hoverable
           hoverContent={toggleSelectHoverContent}
           onClick={toggleSelectAll}
-          style={{ display: 'flex', alignItems: 'center' }}
+          className="flex items-center"
         >
-          <div style={{ fontWeight: 'bold' }}>{group}</div>
-          <div style={{ marginLeft: '0.25em' }}>
+          <div className="font-bold">{group}</div>
+          <div className="ml-1">
             {allVisible ? (
               <SquareCheckIcon size="1em" display="block" />
             ) : someVisible ? (
@@ -162,32 +150,24 @@ function GlobalControls<T extends ObjectData>({
   }, [columns, setColumns]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'end',
-        gap: '0.5em',
-        padding: '0.5em',
-      }}
-    >
+    <div className="flex flex-row justify-end gap-2 p-2">
       <HoverableButton
         onClick={resetColumnVisibility}
-        style={{ padding: '0.25em' }}
+        className={GLOBAL_CONTROL_BUTTON_CLASS}
         hoverContent="Reset to default column visibility"
       >
         Reset
       </HoverableButton>
       <HoverableButton
         onClick={selectAll}
-        style={{ padding: '0.25em' }}
+        className={GLOBAL_CONTROL_BUTTON_CLASS}
         hoverContent="Show all columns"
       >
         Show all
       </HoverableButton>
       <HoverableButton
         onClick={deselectAll}
-        style={{ padding: '0.25em' }}
+        className={GLOBAL_CONTROL_BUTTON_CLASS}
         hoverContent="Hide all columns"
       >
         Hide all

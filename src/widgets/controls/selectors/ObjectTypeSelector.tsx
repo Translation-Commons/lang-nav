@@ -30,7 +30,7 @@ const ObjectTypeSelector: React.FC = () => {
       getOptionLabel={(option) => toTitleCase(getObjectTypeLabelPlural(option))}
       getOptionDescription={(objectType) => (
         <>
-          <div style={{ marginBottom: 8 }}>Click here to change the kind of entity viewed.</div>
+          <div className="mb-2">Click here to change the kind of entity viewed.</div>
           <ObjectTypeDescription objectType={objectType} />
         </>
       )}

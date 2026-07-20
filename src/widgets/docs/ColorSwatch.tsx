@@ -27,10 +27,10 @@ const ColorSwatch: React.FC<Props> = ({ variable, description }) => {
 
   return (
     <div>
-      <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.25em' }}>
+      <div className="mb-1 flex items-center">
         <ColorBox variable={variable} colorBoxRef={colorBoxRef} />
         <div>
-          <div style={{ fontWeight: 'bold' }}>{variable}</div>
+          <div className="font-bold">{variable}</div>
           <div>{colorHex}</div>
         </div>
       </div>
@@ -49,15 +49,8 @@ const ColorBox = ({
   return (
     <div
       ref={colorBoxRef}
-      style={{
-        flexShrink: 0,
-        width: '5em',
-        height: '5em',
-        borderRadius: '0.5em',
-        border: '1px solid var(--color-text-secondary)',
-        backgroundColor: `var(${variable})`,
-        marginRight: '1em',
-      }}
+      className="mr-4 h-20 w-20 shrink-0 rounded-lg border border-muted-foreground"
+      style={{ backgroundColor: `var(${variable})` }}
     />
   );
 };

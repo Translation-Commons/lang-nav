@@ -11,6 +11,7 @@ import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringF
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
+import { Button } from '@shared/ui/button';
 import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import CensusLanguageCheckRow from './CensusLanguageCheckRow';
@@ -148,7 +149,9 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
           )}
         </tbody>
       </table>
-      <button onClick={copyLanguageCodes}>Copy language codes after optimistic correction</button>
+      <Button variant="link" size="xs" onClick={copyLanguageCodes}>
+        Copy language codes after optimistic correction
+      </Button>
     </>
   );
 };

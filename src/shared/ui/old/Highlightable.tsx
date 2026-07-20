@@ -44,7 +44,7 @@ const Highlightable: React.FC<Props> = ({ text, searchPattern }) => {
 
     if (i % 2 === 0) {
       parts.push(
-        <span key={i} className="highlighted">
+        <span key={i} className="rounded-xs bg-yellow-200 dark:bg-yellow-900">
           {originalPart}
         </span>,
       );

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -51,19 +51,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   });
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [mapContainerWidth, setMapContainerWidth] = useState(800);
-
-  useEffect(() => {
-    const el = mapContainerRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setMapContainerWidth(width);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const drawableEntities = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -104,13 +91,8 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
 
   return (
     <MapTooltipProvider>
-      <div ref={mapContainerRef} className="EntityMap" style={{ maxWidth: maxWidth }}>
-        <ZoomControls
-          zoomIn={zoomIn}
-          zoomOut={zoomOut}
-          resetTransform={resetTransform}
-          containerWidth={mapContainerWidth}
-        />
+      <div className="EntityMap" style={{ maxWidth: maxWidth }}>
+        <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
         {allowSidebar && (
           <MapSidebar
             drawableEntities={drawableEntities}
@@ -124,7 +106,8 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
           <div className="MapZoomContainer" ref={zoomContainerRef}>
             <div
               ref={contentRef}
-              style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
+              className="relative"
+              style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight }}
             >
               <img
                 alt="World map"

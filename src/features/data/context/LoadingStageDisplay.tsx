@@ -1,6 +1,7 @@
 import React from 'react';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { cn } from '@shared/lib/utils';
 
 import LoadingStage from './LoadingStage';
 import { useDataContext } from './useDataContext';
@@ -15,13 +16,10 @@ const LoadingStageDisplay: React.FC = () => {
   return (
     <div
       aria-hidden={loadingStage === LoadingStage.AlgorithmsFinished}
-      className="LoadingStageDisplay"
-      style={{
-        color:
-          loadingStage === LoadingStage.AlgorithmsFinished ? 'var(--color-background)' : 'inherit',
-        textAlign: 'center',
-        marginTop: '1em',
-      }}
+      className={cn(
+        'LoadingStageDisplay mt-4 text-center',
+        loadingStage === LoadingStage.AlgorithmsFinished && 'text-background',
+      )}
     >
       Loading stage: {loadingStage + 1} of 4, {getLoadingStageLabel(loadingStage)}
     </div>

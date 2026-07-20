@@ -63,7 +63,7 @@ const ReportLocalesPotential: React.FC = () => {
         here may be worth considering.
       </p>
       Filter by minimum:
-      <div style={{ display: 'flex', gap: '1em', flexWrap: 'wrap', alignItems: 'start' }}>
+      <div className="flex flex-wrap items-start gap-4">
         {minInCountrySelector}
         <Selector<number>
           options={[0, 1]}
@@ -89,7 +89,7 @@ const ReportLocalesPotential: React.FC = () => {
         The locales represent the largest population of a language in a territory, but a language or
         dialect of that locale is already present for that locale, so it may not be necessary or it
         may be a language family not consistently listed in other censuses.
-        <div style={{ height: '0.5em' }} />
+        <div className="h-2" />
         For example, the Canadian [CA] census includes Indo-European [ine] as an entry. Since few
         censuses include Indo-European, it looks as if ine_CA is native to Canada. That is a data
         coverage issue -- not a real origin for the language group. Indo-European contains other
@@ -130,7 +130,7 @@ const SubReport: React.FC<{
     <CollapsibleReport title={`${title} (${locales.filter(filterByScope).length})`}>
       {children}{' '}
       <button
-        style={{ padding: '0.25em' }}
+        className="p-1"
         onClick={() => {
           navigator.clipboard.writeText(exportLocales);
         }}
@@ -206,7 +206,7 @@ const PotentialLocalesTable: React.FC<{
           key: 'Copy',
           render: (object) => (
             <button
-              style={{ padding: '0.25em' }}
+              className="p-1"
               onClick={() => navigator.clipboard.writeText(getLocaleExportString(object))}
             >
               <CopyIcon size="1em" display="block" />

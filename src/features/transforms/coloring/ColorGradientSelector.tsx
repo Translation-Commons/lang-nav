@@ -30,7 +30,7 @@ const ColorGradientSelector: React.FC = () => {
       onChange={(colorGradient) => updatePageParams({ colorGradient })}
       selected={colorGradient}
       getOptionLabel={(colorGradient) => (
-        <div style={{ minWidth: '4em', height: '16px', display: 'inline-block' }}>
+        <div className="inline-block h-4 min-w-[4em]">
           <BaseColorBar colorGradient={colorGradient} />
         </div>
       )}

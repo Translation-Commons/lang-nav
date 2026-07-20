@@ -46,14 +46,8 @@ const MapCard: React.FC<{
   }
 
   return (
-    <div
-      className="relative max-w-[300px] rounded-xl border border-border bg-card p-4 text-left text-card-foreground"
-      style={{ fontSize: '0.75em' }}
-    >
-      <div
-        className="absolute top-0 right-2 z-10 flex -translate-y-1/2 gap-2"
-        style={{ fontSize: '.8em' }}
-      >
+    <div className="text-card-foreground border-border bg-card relative max-w-[300px] rounded-xl border p-4 text-left text-[0.75em]">
+      <div className="absolute top-0 right-2 z-10 flex -translate-y-1/2 gap-2 text-[0.8em]">
         <HoverableIcon
           Icon={SquareArrowUpRightIcon}
           onClick={openDetails}

@@ -7,7 +7,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import Deemphasized from '@shared/ui/old/Deemphasized';
 
-import { getCLDRCoverageColor } from './CLDRCoverageLevels';
+import { getCLDRCoverageColorClass } from './CLDRCoverageLevels';
 
 export const ObjectCLDRCoverageLevel: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object.type !== ObjectType.Language) return null;
@@ -24,7 +24,7 @@ export const ObjectCLDRCoverageLevel: React.FC<{ object: ObjectData }> = ({ obje
 
   const coverageLevel = coverage.actualCoverageLevel;
   return (
-    <span style={{ color: getCLDRCoverageColor(coverageLevel) }}>{toTitleCase(coverageLevel)}</span>
+    <span className={getCLDRCoverageColorClass(coverageLevel)}>{toTitleCase(coverageLevel)}</span>
   );
 };
 

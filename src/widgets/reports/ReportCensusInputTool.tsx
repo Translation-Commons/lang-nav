@@ -63,17 +63,14 @@ const ReportCensusInputTool: React.FC = () => {
         Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
         edit changes inline to test them out.
       </div>
-      <textarea
-        onChange={(e) => setTSV(e.target.value)}
-        style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
-      />
+      <textarea onChange={(e) => setTSV(e.target.value)} className="mt-4 min-h-40 w-full" />
       <h3>Analysis</h3>
-      {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
+      {errorMessage && <div className="text-red">{errorMessage}</div>}
       {censuses.length > 0 && <h4>Metadata</h4>}
       {censuses.length > 0 &&
         (warnings.length > 0
           ? warnings.map((warning, index) => (
-              <div key={index} style={{ color: 'var(--color-red)' }}>
+              <div key={index} className="text-red">
                 {warning}
               </div>
             ))

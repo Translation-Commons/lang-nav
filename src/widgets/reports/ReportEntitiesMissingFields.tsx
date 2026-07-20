@@ -92,7 +92,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
         </tbody>
       </table>
       <InternalLink page={LangNavPageName.DataCoverage}>
-        <HoverableButton style={{ margin: '0.5em', width: 'fit-content', cursor: 'pointer' }}>
+        <HoverableButton className="m-2 w-fit cursor-pointer">
           Go to full data coverage report
         </HoverableButton>
       </InternalLink>

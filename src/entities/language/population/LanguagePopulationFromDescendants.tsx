@@ -30,18 +30,12 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
             </>
           }
         >
-          <TriangleAlertIcon
-            style={{ color: 'var(--color-yellow)', marginRight: '0.25em' }}
-            size="1em"
-          />
+          <TriangleAlertIcon className="text-yellow mr-1" size="1em" />
         </Hoverable>
       ) : null}
       {lang.populationOfDescendants < (lang.populationEstimate ?? 0) * 0.5 ? (
         <Hoverable hoverContent="The population of descendants is significantly lower than the estimate -- probably because most data is collected for this entry as a whole.">
-          <TriangleAlertIcon
-            style={{ color: 'var(--color-text-secondary)', marginRight: '0.25em' }}
-            size="1em"
-          />
+          <TriangleAlertIcon className="text-muted-foreground mr-1" size="1em" />
         </Hoverable>
       ) : null}
       <Hoverable hoverContent={<LanguagePopulationBreakdownFromDescendants lang={lang} />}>
@@ -95,7 +89,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: Langua
             objectType: ObjectType.Language,
           })
         }
-        style={{ display: 'block' }}
+        className="block"
       >
         See all descendants in the language table
       </HoverableButton>

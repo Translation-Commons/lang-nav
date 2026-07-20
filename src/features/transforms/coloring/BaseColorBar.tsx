@@ -13,12 +13,8 @@ function BaseColorBar({
     return (
       <div
         key={i}
-        style={{
-          backgroundColor: colorFunc(renormalize ? renormalize(i / 99) : i / 99),
-          width: '1%',
-          height: '100%',
-          display: 'inline-block',
-        }}
+        className="inline-block h-full w-[1%]"
+        style={{ backgroundColor: colorFunc(renormalize ? renormalize(i / 99) : i / 99) }}
       />
     );
   });

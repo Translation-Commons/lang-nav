@@ -50,13 +50,13 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
       writing system data due to data gaps, incomplete ingestion from upstream sources, or because
       they are primarily oral. Extinct and historical languages often have harder-to-find writing
       system information. Sign languages are excluded from this report.
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
+      <div className="mt-4 flex items-center gap-4">
         <LimitInput />
         <div>
           <PaginationControls itemCount={languagesFiltered.length} />
         </div>
       </div>
-      <div style={{ marginTop: '1em', marginBottom: '1em' }}>
+      <div className="mt-4 mb-4">
         <ResponsiveGrid>
           {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
             const family = getLanguageRootLanguageFamily(lang);

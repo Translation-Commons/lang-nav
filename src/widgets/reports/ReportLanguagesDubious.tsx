@@ -55,13 +55,13 @@ const ReportLanguagesDubious: React.FC = () => {
           writing system alternatives so we cannot add that data yet.
         </li>
       </ol>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
+      <div className="mt-4 flex items-center gap-4">
         <LimitInput />
         <div>
           <PaginationControls itemCount={languagesFiltered.length} />
         </div>
       </div>
-      <div style={{ marginTop: '1em', marginBottom: '1em' }}>
+      <div className="mt-4 mb-4">
         <ResponsiveGrid>
           {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
             const codePieces = lang.codeDisplay.split(/-|_/);
@@ -91,7 +91,7 @@ const ReportLanguagesDubious: React.FC = () => {
                 </div>
                 <div>
                   <label>Potentially related objects:</label>
-                  <ul style={{ margin: 0 }}>
+                  <ul className="m-0">
                     {relatedEntities.length > 0 ? (
                       relatedEntities.map((entity) => (
                         <li key={entity.ID}>

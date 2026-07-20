@@ -31,7 +31,7 @@ const ReportCensusCountries: React.FC = () => {
           key: collectorType,
           render: (territory: TerritoryData) => {
             return (
-              <div style={{ maxWidth: '10em' }}>
+              <div className="max-w-[10em]">
                 <CommaSeparated limit={1}>
                   {territory.censuses
                     ?.filter((census) => census.collectorType === collectorType)

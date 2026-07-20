@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { cn } from '@shared/lib/utils';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type HoverableProps = {
@@ -28,11 +29,11 @@ const HoverableButton: React.FC<HoverableProps> = ({
   const button = (
     <button
       aria-label={ariaLabel}
-      className={className}
+      className={cn(onClick ? 'cursor-pointer' : 'cursor-auto', className)}
       disabled={disabled}
       onClick={onClick}
       role={role}
-      style={{ cursor: onClick ? 'pointer' : 'auto', ...style }}
+      style={style}
       type={buttonType}
     >
       {children}

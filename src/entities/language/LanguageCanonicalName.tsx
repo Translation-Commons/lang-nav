@@ -14,7 +14,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { codeDisplay, nameCanonical, Glottolog, ISO, CLDR, Ethnologue } = lang;
 
   return (
-    <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
+    <div className="inline-flex items-center gap-1">
       <Highlightable text={nameCanonical} searchPattern={searchString}></Highlightable>
       {Glottolog.name === nameCanonical && (
         <Hoverable
@@ -26,7 +26,6 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               </LinkButton>
             </>
           }
-          style={{ backgroundColor: 'transparent' }}
         >
           <Pill>Glottolog</Pill>
         </Hoverable>
@@ -41,7 +40,6 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               </LinkButton>
             </>
           }
-          style={{ backgroundColor: 'transparent' }}
         >
           <Pill>ISO</Pill>
         </Hoverable>
@@ -58,7 +56,6 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               </LinkButton>
             </>
           }
-          style={{ backgroundColor: 'transparent' }}
         >
           <Pill>CLDR</Pill>
         </Hoverable>
@@ -73,7 +70,6 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               </LinkButton>
             </>
           }
-          style={{ backgroundColor: 'transparent' }}
         >
           <Pill>Ethnologue</Pill>
         </Hoverable>

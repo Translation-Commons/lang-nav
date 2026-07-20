@@ -14,7 +14,7 @@ const LocaleHistoricPresenceDisplay = ({ loc }: { loc: LocaleData }) => {
   return (
     <Hoverable
       hoverContent={getHistoricPresenceDescription(historicPresence)}
-      style={{ color: !historicPresence ? 'var(--color-text)' : undefined }}
+      className={!historicPresence ? 'text-foreground' : undefined}
     >
       {historicPresence ? 'Historic' : 'after 1500 CE'}
     </Hoverable>

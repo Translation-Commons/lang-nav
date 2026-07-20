@@ -72,12 +72,11 @@ const LocaleIndigeneityTable: React.FC<{
               <HoverableObjectName
                 object={biggestLocale}
                 labelSource="territory"
-                style={{
-                  color:
-                    biggestLocale?.territoryCode === locale.territoryCode
-                      ? 'var(--color-text-secondary)'
-                      : undefined,
-                }}
+                className={
+                  biggestLocale?.territoryCode === locale.territoryCode
+                    ? 'text-muted-foreground'
+                    : undefined
+                }
               />
             );
           },

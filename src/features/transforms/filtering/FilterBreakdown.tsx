@@ -19,6 +19,8 @@ type FilterExplanationProps = {
   shouldFilterUsingSearchBar?: boolean;
 };
 
+const RESET_BUTTON_CLASS = 'ml-1 p-1';
+
 const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   objects,
   shouldFilterUsingSearchBar = true,
@@ -85,7 +87,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   if (nOverall === nInPopulationRange) return null;
 
   return (
-    <table style={{ textAlign: 'left' }}>
+    <table className="text-left">
       <tbody>
         <tr>
           <td>All {getObjectTypeLabelPlural(objects[0].type)}</td>
@@ -100,7 +102,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the language scope filter"
                 onClick={() => updatePageParams({ languageScopes: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -116,7 +118,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the modality filter"
                 onClick={() => updatePageParams({ modalityFilter: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -132,7 +134,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the territory scope filter"
                 onClick={() => updatePageParams({ territoryScopes: [] })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -148,7 +150,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the territory filter"
                 onClick={() => updatePageParams({ territoryFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -164,7 +166,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the writing system filter"
                 onClick={() => updatePageParams({ writingSystemFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -180,7 +182,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the language family filter"
                 onClick={() => updatePageParams({ languageFamilyFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -196,7 +198,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the language filter"
                 onClick={() => updatePageParams({ languageFilter: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -214,7 +216,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 onClick={() =>
                   updatePageParams({ vitalityEthCoarse: [], isoStatus: [], vitalityEthFine: [] })
                 }
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -230,7 +232,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                 buttonType="reset"
                 hoverContent="Clear the search string filter"
                 onClick={() => updatePageParams({ searchString: '' })}
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -251,7 +253,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
                     populationMax: undefined,
                   })
                 }
-                style={{ padding: '0.25em', marginLeft: '0.25em' }}
+                className={RESET_BUTTON_CLASS}
               >
                 <XIcon size="1em" display="block" />
               </HoverableButton>
@@ -259,12 +261,8 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
           </tr>
         )}
         <tr>
-          <td style={{ fontWeight: 'bold', borderTop: '2px solid var(--color-button-primary)' }}>
-            Results
-          </td>
-          <td className="count" style={{ borderTop: '2px solid var(--color-button-primary)' }}>
-            {nInPopulationRange.toLocaleString()}
-          </td>
+          <td className="border-primary border-t-2 font-bold">Results</td>
+          <td className="count border-primary border-t-2">{nInPopulationRange.toLocaleString()}</td>
         </tr>
       </tbody>
     </table>

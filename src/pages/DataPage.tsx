@@ -13,7 +13,7 @@ const DataPage: React.FC = () => {
   return (
     <ContainErrorsAndSuspense>
       <FilterPanelProvider>
-        <div style={{ display: 'flex', height: '100vh' }}>
+        <div className="flex h-screen">
           <FilterPanel />
           <DataPageBody />
           <DetailsPanel />

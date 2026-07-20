@@ -57,7 +57,7 @@ const MapCentroids: React.FC<Props> = ({
       showHoverCard(
         <div>
           <strong>{obj.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>
+          <div className="text-muted-foreground">
             {allowSidebar ? 'Pin to sidebar' : 'Open in details panel'}
           </div>
         </div>,
@@ -70,10 +70,9 @@ const MapCentroids: React.FC<Props> = ({
 
   return (
     <svg
-      className="MapLayer"
+      className="MapLayer pointer-events-none"
       viewBox="-180 -90 360 180"
       preserveAspectRatio="xMidYMid meet"
-      style={{ pointerEvents: 'none' }}
     >
       {renderableEntities.map((obj) => (
         <ObjectNode
@@ -159,7 +158,7 @@ const Circle: React.FC<NodeProps> = ({
     className={'MapCentroidCircle' + (isHovered ? ' hovered' : '') + (isPinned ? ' pinned' : '')}
     r={scale + 1.5}
     fill={color ?? 'transparent'}
-    stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
+    stroke={color == null ? 'var(--primary)' : 'transparent'}
     onClick={(e) => {
       e.stopPropagation();
       onClick(object);

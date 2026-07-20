@@ -49,7 +49,7 @@ function App() {
         <DeferredDataProvider>
           <AmplitudeTracker />
           <PageNavBar />
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div className="min-w-0 flex-1">
             <PageRoutes />
           </div>
           <PageFooter />

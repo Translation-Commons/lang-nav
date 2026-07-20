@@ -8,7 +8,6 @@ type Props = {
   zoomIn: () => void;
   zoomOut: () => void;
   resetTransform: () => void;
-  containerWidth?: number;
 };
 
 const controls: { label: string; Icon: React.ElementType; action: keyof Props }[] = [

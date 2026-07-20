@@ -33,7 +33,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
+      <div className="text-[1.5em] mb-2">
         <ObjectTitle object={writingSystem} />
       </div>
 

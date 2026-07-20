@@ -4,6 +4,8 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import { cn } from '@shared/lib/utils';
+
 import DrawableData from './DrawableData';
 import MapCard from './MapCard';
 
@@ -34,7 +36,7 @@ const MapSidebar: React.FC<Props> = ({ drawableEntities, objectType, hoveredId, 
   const [showItems, setShowItems] = React.useState(true);
 
   return (
-    <div className="MapSidebar" style={{ width: pinnedEntities.length > 0 ? '300px' : '0' }}>
+    <div className={cn('MapSidebar', pinnedEntities.length > 0 ? 'w-[300px]' : 'w-0')}>
       {/* <div> */}
       <HoverableButton
         className="MapSidebarTitle"

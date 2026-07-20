@@ -2,6 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
+import { cn } from '@shared/lib/utils';
 import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { numberToFixedUnlessSmall } from '../../lib/numberUtils';
@@ -13,7 +14,7 @@ export const PercentageDifference: React.FC<{
   if (percentOld == null) {
     return (
       <Deemphasized>
-        <span style={{ fontSize: '0.8em' }}>n/a</span>
+        <span className="text-[0.8em]">n/a</span>
       </Deemphasized>
     );
   }
@@ -28,18 +29,18 @@ export const PercentageDifference: React.FC<{
   let renderedAmount = numberToFixedUnlessSmall(percentagePointDifference) + ' pp';
 
   // Styling differences
-  let color = 'var(--color-text-secondary)';
-  let fontSize = '1em';
+  let colorClass = 'text-muted-foreground';
+  let sizeClass = '';
   if (Math.abs(relativeDifference) > 10) {
     // Great difference, >10% compared to the old value
     if (percentagePointDifference > 0) {
-      color = 'var(--color-blue)';
+      colorClass = 'text-blue';
       renderedAmount = '+' + renderedAmount;
     } else {
-      color = 'var(--color-orange)';
+      colorClass = 'text-orange';
     }
   } else {
-    fontSize = '0.8em';
+    sizeClass = 'text-[0.8em]';
     if (Math.abs(relativeDifference) > 1) {
       // Minor difference
       if (percentagePointDifference > 0) {
@@ -56,7 +57,6 @@ export const PercentageDifference: React.FC<{
 
   return (
     <Hoverable
-      style={{ textDecoration: 'none', cursor: 'help' }}
       hoverContent={
         <>
           <label>Old value:</label>
@@ -76,7 +76,7 @@ export const PercentageDifference: React.FC<{
         </>
       }
     >
-      <span style={{ color, fontSize }}>{renderedAmount}</span>
+      <span className={cn(colorClass, sizeClass)}>{renderedAmount}</span>
     </Hoverable>
   );
 };

@@ -42,7 +42,7 @@ const ReportLanguageDescendants: React.FC = () => {
       language by population. This can help identify which languages are the most prominent within a
       family. It may also reveal some problems in the data, especially if the largest descendant has
       more population than is estimated for the language/language family itself.
-      <div style={{ display: 'flex' }}>
+      <div className="flex">
         <Selector
           selectorLabel="Minimum % of population"
           options={[0, 25, 50, 75, 90, 95, 99]}

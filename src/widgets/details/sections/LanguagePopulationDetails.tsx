@@ -20,7 +20,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
     <>
       Population
       {populationEstimateSource && (
-        <div style={{ fontSize: '0.75em', fontWeight: 'normal', textTransform: 'lowercase' }}>
+        <div className="text-[0.75em] font-normal lowercase">
           <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
         </div>
       )}

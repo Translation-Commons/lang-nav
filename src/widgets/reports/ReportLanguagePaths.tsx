@@ -36,15 +36,7 @@ const ReportLanguagesPaths: React.FC = () => {
         </button>{' '}
         view.
       </div>
-      <div
-        style={{
-          marginTop: '1em',
-          marginLeft: '1em',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.5em',
-        }}
-      >
+      <div className="mt-4 ml-4 flex flex-col gap-6">
         <CollapsibleReport title={`Languages with circular relationships (${cycles.length})`}>
           This shows the detected cycles in parent-child relationships among languages. Such cycles
           are usually the result of data errors, and can cause problems in tree visualizations and

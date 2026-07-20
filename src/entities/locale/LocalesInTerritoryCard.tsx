@@ -5,6 +5,8 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
+import { Button } from '@shared/ui/button';
+
 type Props = {
   territory: TerritoryData;
 };
@@ -15,7 +17,7 @@ const LocalesInTerritoryCard: React.FC<Props> = ({ territory }) => {
 
   return (
     <div>
-      <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
+      <h3 className="font-bold mb-1">
         Locales in <HoverableObjectName object={territory} />
       </h3>
       <>
@@ -26,16 +28,16 @@ const LocalesInTerritoryCard: React.FC<Props> = ({ territory }) => {
         {locales.length > 1 && `There are ${locales.length} languages in this territory:`}
       </>
       {locales.slice(0, showAll ? locales.length : 5).map((locale) => (
-        <div key={locale.ID} style={{ marginLeft: '1em' }}>
+        <div key={locale.ID} className="ml-4">
           <HoverableObjectName object={locale} labelSource="locale without territory" /> [
           {locale.codeDisplay}]
         </div>
       ))}
       {locales.length > 5 && (
-        <div style={{ marginLeft: '1em' }}>
-          <button onClick={() => setShowAll(!showAll)} style={{ padding: '0.25em' }}>
+        <div className="ml-4">
+          <Button variant="link" size="xs" onClick={() => setShowAll(!showAll)}>
             {showAll ? 'show less' : `+${locales.length - 5} more`}
-          </button>
+          </Button>
         </div>
       )}
     </div>

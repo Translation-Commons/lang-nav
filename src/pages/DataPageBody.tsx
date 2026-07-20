@@ -17,44 +17,22 @@ const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
   return (
-    <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
+    <main className="w-full flex-1 overflow-auto p-4">
       <EntityTypeTabs />
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          width: '100%',
-          marginBottom: '1rem',
-        }}
-      >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+      <div className="mb-4 flex w-full items-center justify-between">
+        <div className="flex items-center gap-2">
           <FilterPanelToggle />
           <ResultCount />
           <PathContainer>
             <FilterPath />
           </PathContainer>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'flex-end',
-            gap: '0.5rem',
-          }}
-        >
+        <div className="flex items-center justify-end gap-2">
           <SortPopupCard />
           <ViewSelector />
         </div>
       </div>
-      <div
-        style={{
-          maxWidth: '1280px',
-          margin: '0 auto',
-          padding: '1rem 2rem',
-          textAlign: 'center',
-        }}
-      >
+      <div className="mx-auto max-w-[1280px] px-8 py-4 text-center">
         <ContainErrorsAndSuspense>
           <DataViews />
         </ContainErrorsAndSuspense>

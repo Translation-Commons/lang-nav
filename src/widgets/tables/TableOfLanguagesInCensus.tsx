@@ -200,12 +200,12 @@ const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actua
   if (actualLocale == null) {
     return (
       <Deemphasized>
-        <span style={{ fontSize: '0.8em' }}>not found</span>
+        <span className="text-[0.8em]">not found</span>
       </Deemphasized>
     );
   }
   return (
-    <HoverableObject object={actualLocale} style={{ verticalAlign: 'middle' }}>
+    <HoverableObject object={actualLocale} className="align-middle">
       <InfoIcon size="1em" display="block" />
     </HoverableObject>
   );

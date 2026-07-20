@@ -4,6 +4,8 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
+import { Button } from '@shared/ui/button';
+
 import { getCensusCollectorTypeRank } from './CensusTypes';
 
 type Props = {
@@ -22,7 +24,7 @@ const CensusesInTerritory: React.FC<Props> = ({ territory }) => {
     );
   return (
     <div>
-      <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
+      <h3 className="font-bold mb-1">
         <HoverableObjectName object={territory} /> Census Tables
       </h3>
       <>
@@ -32,15 +34,15 @@ const CensusesInTerritory: React.FC<Props> = ({ territory }) => {
         {censuses.length > 1 && `There are ${censuses.length} census tables in this territory:`}
       </>
       {censuses.slice(0, showAll ? censuses.length : 5).map((census) => (
-        <div key={census.ID} style={{ marginLeft: '1em' }}>
+        <div key={census.ID} className="ml-4">
           <HoverableObjectName object={census} />
         </div>
       ))}
       {censuses.length > 5 && (
-        <div style={{ marginLeft: '1em' }}>
-          <button onClick={() => setShowAll(!showAll)} style={{ padding: '0.25em' }}>
+        <div className="ml-4">
+          <Button variant="link" size="xs" onClick={() => setShowAll(!showAll)}>
             {showAll ? 'show less' : `+${censuses.length - 5} more`}
-          </button>
+          </Button>
         </div>
       )}
     </div>

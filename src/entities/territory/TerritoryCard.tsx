@@ -25,7 +25,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
+      <div className="text-[1.5em] mb-2">
         <ObjectTitle object={territory} />
       </div>
       <CardField

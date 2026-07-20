@@ -5,11 +5,11 @@ import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
+import { cn } from '@shared/lib/utils';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import TableColumn from './TableColumn';
 import TableColumnHovercard from './TableColumnHovercard';
-import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 
 type Props<T extends EntityData> = {
   column: TableColumn<T>;
@@ -27,10 +27,7 @@ function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>)
       {sortBy === column.field || secondarySortBy === column.field ? (
         <ArrowUpDownIcon
           size={14}
-          style={{
-            color: 'var(--color-button-primary)',
-            opacity: secondarySortBy === column.field ? 0.5 : 1,
-          }}
+          className={cn('text-primary', secondarySortBy === column.field && 'opacity-50')}
         />
       ) : null}
     </HoverableContainer>
@@ -51,20 +48,16 @@ function HoverableContainer<T extends EntityData>({
       <th
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        style={{
-          backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
-          cursor: 'default',
-          padding: '0.25em 0.5em',
-          maxWidth: MAX_COLUMN_WIDTH,
-          minHeight: '2em',
-          textAlign: 'start',
-        }}
+        className={cn(
+          'max-w-[10em] min-h-[2em] cursor-default px-2 py-1 text-start',
+          isHovering && 'bg-accent',
+        )}
       />
     ) : (
       <span
         onMouseEnter={onMouseEnter}
         onMouseLeave={onMouseLeave}
-        style={{ backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined }}
+        className={cn(isHovering && 'bg-accent')}
       />
     );
 

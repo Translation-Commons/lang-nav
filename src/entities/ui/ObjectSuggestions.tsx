@@ -7,16 +7,7 @@ import getObjectFromID from '../lib/getObjectFromID';
 
 const ObjectSuggestions: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        flexWrap: 'wrap',
-        gap: '1em',
-        justifyContent: 'center',
-        marginTop: '1em',
-      }}
-    >
+    <div className="flex flex-row flex-wrap gap-4 justify-center mt-4">
       {getObjectIDs(objectType).map((id) => (
         <HoverableObjectName key={id} object={getObjectFromID(id)} format="button" />
       ))}

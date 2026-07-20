@@ -31,7 +31,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
+      <div className="text-[1.5em] mb-2">
         <ObjectTitle object={census} />
       </div>
       <CardField
@@ -52,7 +52,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
           {census.presenter && (
             <>
               {' '}
-              via <HoverableObjectName object={census.presenter} style={{ display: 'inline' }} />
+              via <HoverableObjectName object={census.presenter} />
             </>
           )}
         </div>

@@ -80,7 +80,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<{ lang: LanguageDa
             objectType: ObjectType.Locale,
           })
         }
-        style={{ display: 'block' }}
+        className="block"
       >
         See more details in the locale table
       </HoverableButton>

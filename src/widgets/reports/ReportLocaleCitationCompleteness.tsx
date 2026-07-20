@@ -64,7 +64,7 @@ const ReportLocaleCitationCompleteness: React.FC = () => {
       </p>
 
       {/* Census source breakdown */}
-      <div style={{ marginBottom: '1em' }}>
+      <div className="mb-4">
         <strong>Census source breakdown:</strong>
         <ul>
           {Object.entries(citationsByCollectorType).map(([type, count]) => {
@@ -80,7 +80,7 @@ const ReportLocaleCitationCompleteness: React.FC = () => {
       </div>
 
       {/* Breakdown by language scope */}
-      <div style={{ marginBottom: '1em' }}>
+      <div className="mb-4">
         <strong>Percent of locales with citations by language scope:</strong>
         <ul>
           {Object.entries(citationsByLangScope).map(([scope, counts]) => {

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { WikipediaStatus } from '@entities/types/DataTypes';
-import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
+import { getStatusColorClass } from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsSection from '@shared/containers/DetailsSection';
 import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
@@ -50,23 +50,14 @@ const WikipediaSectionTitle: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const wikipedia = wikipedias && wikipedias.length > 0 ? wikipedias[0] : undefined;
   return (
     <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
+      <div className="flex w-full items-center justify-between">
         <span>Wikipedia</span>
         {wikipedia && (
-          <Pill style={{ color: getStatusColor(wikipedia.status) }}>{wikipedia.status}</Pill>
+          <Pill className={getStatusColorClass(wikipedia.status)}>{wikipedia.status}</Pill>
         )}
       </div>
     </div>
   );
 };
 
-const NotApplicableDisplay = () => (
-  <span style={{ fontSize: '0.6em', color: 'var(--color-text-secondary)' }}>N/A</span>
-);
+const NotApplicableDisplay = () => <span className="text-[0.6em] text-muted-foreground">N/A</span>;

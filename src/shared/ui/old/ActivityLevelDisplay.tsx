@@ -3,6 +3,8 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
+import { cn } from '@shared/lib/utils';
+
 export enum ActivityLevel {
   High = 'High',
   Medium = 'Medium',
@@ -20,14 +22,7 @@ type Props = {
 const ActivityLevelDisplay: React.FC<Props> = ({ level, label, description }) => {
   return (
     <Hoverable hoverContent={description}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.25em',
-          color: getColor(level),
-        }}
-      >
+      <div className={cn('flex items-center gap-1', getColorClass(level))}>
         <ActivityIcon bucket={level} />
         <span>{label}</span>
       </div>
@@ -51,18 +46,18 @@ const ActivityIcon: React.FC<{ bucket: ActivityLevel }> = ({ bucket }) => {
   }
 };
 
-function getColor(level: ActivityLevel): string {
+function getColorClass(level: ActivityLevel): string {
   switch (level) {
     case ActivityLevel.High:
-      return 'var(--color-green)';
+      return 'text-green';
     case ActivityLevel.Medium:
-      return 'var(--color-yellow)';
+      return 'text-yellow';
     case ActivityLevel.Low:
-      return 'var(--color-orange)';
+      return 'text-orange';
     case ActivityLevel.Zero:
-      return 'var(--color-red)';
+      return 'text-red';
     case ActivityLevel.Unknown:
-      return 'var(--color-text-secondary)';
+      return 'text-muted-foreground';
   }
 }
 

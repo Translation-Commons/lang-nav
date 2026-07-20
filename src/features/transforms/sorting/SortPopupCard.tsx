@@ -14,26 +14,15 @@ const SortPopupCard: React.FC = () => {
   return (
     <PopupCard
       buttonLabel={
-        <div
-          style={{ display: 'flex', gap: '0.25em', alignContent: 'center', alignItems: 'center' }}
-        >
+        <div className="flex content-center items-center gap-1">
           {sortBy} <ArrowDownUpIcon size="1.2em" />
         </div>
       }
-      buttonClassName="primary"
-      buttonStyle={{ borderRadius: '1em' }}
+      buttonClassName="primary rounded-[1em]"
       description="Change how items are sorted."
       title="Sorting Options"
       body={() => (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '0.5em',
-            width: 'max-content',
-            alignItems: 'end',
-          }}
-        >
+        <div className="flex w-max flex-col items-end gap-2">
           <SortBySelector />
           <SecondarySortBySelector />
           <SortDirectionSelector />

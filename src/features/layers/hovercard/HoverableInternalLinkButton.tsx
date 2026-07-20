@@ -6,6 +6,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { PageParams } from '@features/params/PageParamTypes';
 
+import { cn } from '@shared/lib/utils';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type HoverableProps = {
@@ -42,10 +43,10 @@ const HoverableInternalLinkButton: React.FC<HoverableProps> = ({
 
   const link = (
     <Link
-      className={className}
+      className={cn('cursor-pointer no-underline', className)}
       onMouseDown={onMouseDown}
       onClick={() => onClick?.()}
-      style={{ cursor: 'pointer', textDecoration: 'none', ...style }}
+      style={style}
       to={to}
     >
       {children}

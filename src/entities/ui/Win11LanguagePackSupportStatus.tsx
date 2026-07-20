@@ -9,7 +9,7 @@ const Win11LanguagePackSupportStatus: React.FC<{ lang: LanguageData }> = ({ lang
   if (!lang.win11LanguagePacks || lang.win11LanguagePacks.length === 0) {
     return (
       <Hoverable hoverContent="No official language pack available.">
-        <XCircleIcon style={{ color: 'var(--color-red)', verticalAlign: 'middle' }} size={'1em'} />
+        <XCircleIcon className="text-red align-middle" size={'1em'} />
       </Hoverable>
     );
   }
@@ -25,10 +25,7 @@ const Win11LanguagePackSupportStatus: React.FC<{ lang: LanguageData }> = ({ lang
 
   return (
     <Hoverable hoverContent={hoverContent}>
-      <CheckCircle2Icon
-        style={{ color: 'var(--color-green)', verticalAlign: 'middle' }}
-        size={'1em'}
-      />
+      <CheckCircle2Icon className="text-green align-middle" size={'1em'} />
     </Hoverable>
   );
 };

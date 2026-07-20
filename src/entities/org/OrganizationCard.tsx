@@ -16,7 +16,7 @@ type Props = { org: OrganizationData };
 const OrganizationCard: React.FC<Props> = ({ org }) => {
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
+      <div className="text-[1.5em] mb-2">
         <ObjectTitle object={org} />
       </div>
       <CardField

@@ -1,6 +1,8 @@
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
 
+import { cn } from '@shared/lib/utils';
+
 import HoverableButton from './HoverableButton';
 
 type Props = {
@@ -17,12 +19,11 @@ const HoverableIcon: React.FC<Props> = ({ Icon, onClick, description, className 
   return (
     <HoverableButton
       ariaLabel={description}
-      className={className}
+      className={cn('p-2', className)}
       onClick={onClick}
       hoverContent={description}
-      style={{ padding: '0.5em' }}
     >
-      <Icon size="1.5em" style={{ display: 'block' }} />
+      <Icon size="1.5em" className="block" />
     </HoverableButton>
   );
 };

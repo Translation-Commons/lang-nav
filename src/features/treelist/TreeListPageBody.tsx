@@ -64,14 +64,14 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   return (
     <div className="TreeListView">
       <TreeListOptionsProvider>
-        <div style={{ marginBottom: '.5em' }}>
+        <div className="mb-2">
           {description}
           {limit < rootNodes.length && (
             <>
               {' '}
               <Hoverable
                 hoverContent={
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+                  <div className="flex flex-col gap-2">
                     <div>Set the number of root nodes that are shown.</div>
                     <LimitSelector />
                   </div>

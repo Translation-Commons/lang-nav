@@ -52,16 +52,7 @@ const SubtitleContainer: React.FC<React.PropsWithChildren<{ style?: React.CSSPro
   style,
 }) => {
   return (
-    <div
-      style={{
-        color: 'var(--color-text-secondary)',
-        fontSize: '0.6em',
-        fontStyle: 'italic',
-        fontWeight: 'normal',
-        marginTop: 0,
-        ...style,
-      }}
-    >
+    <div className="text-muted-foreground text-[0.6em] italic font-normal mt-0" style={style}>
       {children}
     </div>
   );

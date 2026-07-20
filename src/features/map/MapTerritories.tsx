@@ -57,9 +57,9 @@ const MapTerritories: React.FC<Props> = ({
         element.classList.add('inList');
         if (colorBy !== Field.None) {
           const color = getColor(territory);
-          element.style.fill = color || 'var(--color-button-secondary)';
+          element.style.fill = color || 'var(--secondary)';
         } else {
-          element.style.fill = 'var(--color-button-primary)';
+          element.style.fill = 'var(--primary)';
         }
       } else {
         element.classList.remove('inList');
@@ -86,7 +86,7 @@ const MapTerritories: React.FC<Props> = ({
       showHoverCard(
         <div>
           <strong>{territory.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>Click for more</div>
+          <div className="text-muted-foreground">Click for more</div>
         </div>,
         ev.clientX,
         ev.clientY,

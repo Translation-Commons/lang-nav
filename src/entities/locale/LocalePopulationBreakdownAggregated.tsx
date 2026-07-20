@@ -52,7 +52,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           .slice(0, showAllConstituents ? constituents.length : MAX_CONSTITUENTS_DISPLAYED)
           .map((childLocale) => (
             <tr key={childLocale.ID}>
-              <td style={{ paddingLeft: '1em' }}>
+              <td className="pl-4">
                 <HoverableObjectName
                   object={childLocale}
                   labelSource={fromTerritories ? 'territory' : 'language'}
@@ -66,10 +66,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           constituents.length > MAX_CONSTITUENTS_DISPLAYED && (
             <tr>
               <td colSpan={3}>
-                <HoverableButton
-                  style={{ padding: '0.25em', marginLeft: '1em' }}
-                  onClick={() => setShowAllConstituents(false)}
-                >
+                <HoverableButton className="p-1 ml-4" onClick={() => setShowAllConstituents(false)}>
                   Show less
                 </HoverableButton>
               </td>
@@ -91,9 +88,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           <CellPopulation population={adjusted} />
           <CellPercent
             leftContent={
-              (percent ?? 0) >= 99.9 && (
-                <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
-              )
+              (percent ?? 0) >= 99.9 && <TriangleAlertIcon size="1em" className="text-yellow" />
             }
             percent={percent}
           />
@@ -124,11 +119,8 @@ const RowOfRemainingConstituents: React.FC<{
 
   return (
     <tr>
-      <td style={{ paddingLeft: '1em' }}>
-        <HoverableButton
-          style={{ padding: '0.25em', fontWeight: 'normal' }}
-          onClick={() => setShowAllConstituents(true)}
-        >
+      <td className="pl-4">
+        <HoverableButton className="p-1 font-normal" onClick={() => setShowAllConstituents(true)}>
           +{locales.length} other{locales.length > 1 && 's'}
         </HoverableButton>
       </td>

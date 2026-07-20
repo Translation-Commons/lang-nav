@@ -6,6 +6,8 @@ import { getFilterByConnections } from '@features/transforms/filtering/filterByC
 import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
+import { Button } from '@shared/ui/button';
+
 type Props = {
   territory: TerritoryData;
 };
@@ -21,7 +23,7 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
   );
   return (
     <div>
-      <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
+      <h3 className="font-bold mb-1">
         Writing Systems used in <HoverableObjectName object={territory} />
       </h3>
       <>
@@ -32,18 +34,18 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
           `There are ${writingSystems.length} writing systems in this territory:`}
       </>
       {(showAll ? writingSystems : limitedWritingSystems).map((ws) => (
-        <div key={ws.ID} style={{ marginLeft: '1em' }}>
+        <div key={ws.ID} className="ml-4">
           <HoverableObjectName object={ws} /> [{ws.codeDisplay}]{' '}
           {ws.territoryOfOriginCode === territory.ID && '(originated here)'}
         </div>
       ))}
       {writingSystems && writingSystems.length > limitedWritingSystems.length && (
-        <div style={{ marginLeft: '1em' }}>
-          <button onClick={() => setShowAll(!showAll)} style={{ padding: '0.25em' }}>
+        <div className="ml-4">
+          <Button variant="link" size="xs" onClick={() => setShowAll(!showAll)}>
             {showAll
               ? 'show less'
               : `+${writingSystems.length - limitedWritingSystems.length} more`}
-          </button>
+          </Button>
         </div>
       )}
     </div>

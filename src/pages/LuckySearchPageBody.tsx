@@ -6,21 +6,14 @@ import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import SearchBar from '@features/transforms/search/SearchBar';
 
-const SearchContainer: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({
+import { cn } from '@shared/lib/utils';
+
+const SearchContainer: React.FC<{ children: React.ReactNode; className?: string }> = ({
   children,
-  style,
+  className,
 }) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        flexDirection: 'column',
-        ...style,
-      }}
-    >
+    <div className={cn('flex h-screen flex-col items-center justify-center', className)}>
       {children}
     </div>
   );
@@ -60,23 +53,23 @@ const LuckySearchPageBody: React.FC = () => {
   if (isSearching) {
     return (
       <SearchContainer>
-        <div style={{ fontSize: '1.5em', marginBottom: '1em' }}>Searching...</div>
+        <div className="mb-4 text-[1.5em]">Searching...</div>
       </SearchContainer>
     );
   }
 
   // Display SearchBar and message if no results found
   return (
-    <SearchContainer style={{ padding: '2em' }}>
-      <div style={{ fontSize: '1.5em', marginBottom: '1em' }}>No results found</div>
-      <div style={{ marginBottom: '1em' }}>
+    <SearchContainer className="p-8">
+      <div className="mb-4 text-[1.5em]">No results found</div>
+      <div className="mb-4">
         Sorry, we couldn&apos;t find any languages matching &quot;{searchString}&quot;.
       </div>
-      <div style={{ marginBottom: '1em' }}>Try searching again:</div>
+      <div className="mb-4">Try searching again:</div>
       <SearchBar />
-      <div style={{ marginTop: '1em' }}>
+      <div className="mt-4">
         <a href="/intro">
-          <button style={{ padding: '0.5em 1em' }}>Back to Home</button>
+          <button className="px-4 py-2">Back to Home</button>
         </a>
       </div>
     </SearchContainer>

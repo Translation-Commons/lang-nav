@@ -67,33 +67,24 @@ const ColorBar: React.FC<Props> = ({ coloringFunctions }) => {
   }
 
   return (
-    <div ref={colorBarRef} style={{ width: '100%' }}>
-      <div style={{ height: '1em', width: '100%' }}>
+    <div ref={colorBarRef} className="w-full">
+      <div className="h-[1em] w-full">
         <BaseColorBar colorGradient={colorGradient} renormalize={renormalize} />
       </div>
       <div
+        className="relative h-[2.5em] w-full"
         style={{
-          position: 'relative',
-          height: '2.5em',
-          width: '100%',
           fontSize: `${Math.max(0.5, Math.min(1, colorBarWidth / 900))}em`,
         }}
       >
         {ticks.map(({ position, label }, index) => (
           <div
             key={index}
-            style={{
-              position: 'absolute',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              top: '0',
-              left: `${position * 100}%`,
-              transform: 'translateX(-50%)', // center the tick label
-            }}
+            className="absolute top-0 flex -translate-x-1/2 flex-col items-center"
+            style={{ left: `${position * 100}%` }}
           >
-            <div style={{ height: '.25em', width: 1, backgroundColor: 'var(--color-text)' }} />
-            <div style={{ whiteSpace: 'nowrap' }}>{label}</div>
+            <div className="bg-foreground h-[0.25em] w-px" />
+            <div className="whitespace-nowrap">{label}</div>
           </div>
         ))}
       </div>

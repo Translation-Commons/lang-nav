@@ -35,7 +35,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
           object={object.inputWritingSystem}
           style={
             object.inputScriptCode === object.outputScriptCode
-              ? { color: 'var(--color-text)' }
+              ? { color: 'var(--foreground)' }
               : undefined
           }
         />
@@ -50,7 +50,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
           object={object.outputWritingSystem}
           style={
             object.inputScriptCode === object.outputScriptCode
-              ? { color: 'var(--color-text)' }
+              ? { color: 'var(--foreground)' }
               : undefined
           }
         />

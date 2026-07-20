@@ -4,6 +4,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import { cn } from '@shared/lib/utils';
+
 import { LanguageData } from '../LanguageTypes';
 
 import {
@@ -59,7 +61,7 @@ const LanguagePluralGrid: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               key={SMALL_NUMS[rowNum]}
               ruleKey={smallNumRules[rowNum]!}
               conditions={conditionsForRule(smallNumRules[rowNum]!)}
-              style={{ borderRight: '1em solid var(--color-background)' }}
+              className="border-r-[1em] border-r-background"
               num={SMALL_NUMS[rowNum]}
             />
             {Array.from({ length: 10 }, (_, colNum) => colNum).map((colNum) => {
@@ -76,7 +78,7 @@ const LanguagePluralGrid: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <ExampleCell
               key={LARGE_NUMS[rowNum]}
               ruleKey={largeNumRules[rowNum]!}
-              style={{ borderLeft: '1em solid var(--color-background)' }}
+              className="border-l-[1em] border-l-background"
               num={LARGE_NUMS[rowNum]}
               conditions={conditionsForRule(largeNumRules[rowNum]!)}
             />
@@ -95,22 +97,20 @@ const LanguagePluralGrid: React.FC<{ lang: LanguageData }> = ({ lang }) => {
 
 const ExampleCell: React.FC<{
   ruleKey: PluralRuleKey;
-  style?: React.CSSProperties;
+  className?: string;
   num: string | number;
   conditions: string;
-}> = ({ ruleKey, style, num, conditions }) => {
+}> = ({ ruleKey, className, num, conditions }) => {
   const { view } = usePageParams();
 
   return (
     <td
-      style={{
-        ...style,
-        color: ruleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-text-on-color)',
-        backgroundColor: getPluralRuleColor(ruleKey),
-        minWidth: '1em',
-        textAlign: 'right',
-        padding: '0 0.25em',
-      }}
+      className={cn(
+        'min-w-[1em] px-1 py-0 text-right',
+        ruleKey !== PluralRuleKey.Other && 'text-primary-foreground',
+        className,
+      )}
+      style={{ backgroundColor: getPluralRuleColor(ruleKey) }}
     >
       {view !== View.Table ? ( // Too many hoverables in the table view, will tank page performance
         <Hoverable
@@ -125,7 +125,7 @@ const ExampleCell: React.FC<{
                 Does not pass any plural rule conditions, rather is in group{' '}
                 <strong>{PluralRuleKey.Other}</strong>
                 {['n', 'i', 'v', 'w', 'f', 't', 'c', 'e'].map((symbol) => (
-                  <div key={symbol} style={{ marginTop: '0.25em' }}>
+                  <div key={symbol} className="mt-1">
                     <strong>{symbol}:</strong>{' '}
                     <PluralRuleSymbolExplanation symbol={symbol} exampleNum={num} />
                   </div>
@@ -133,7 +133,7 @@ const ExampleCell: React.FC<{
               </>
             )
           }
-          style={{ color: ruleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-background)' }}
+          className={ruleKey !== PluralRuleKey.Other ? 'text-background' : undefined}
         >
           {num}
         </Hoverable>

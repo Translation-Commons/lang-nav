@@ -24,10 +24,7 @@ const ViewReports: React.FC = () => {
   }, [reportID, reportIDs]);
 
   return (
-    <div
-      data-testid="reports-view"
-      style={{ textAlign: 'start', display: 'flex', flexDirection: 'column', gap: '1em' }}
-    >
+    <div data-testid="reports-view" className="flex flex-col gap-4 text-start">
       <NavTabs
         label="Reports:"
         options={reportIDs.map((reportID) => ({

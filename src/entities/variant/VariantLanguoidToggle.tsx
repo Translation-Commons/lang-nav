@@ -127,7 +127,7 @@ const LanguageSelector: React.FC<{
       inputStyle={{
         minWidth: '6em',
         backgroundColor: 'var(--color-background)',
-        color: 'var(--color-text)',
+        color: 'var(--foreground)',
       }}
       getSuggestions={getSuggestions}
       onSubmit={submit}

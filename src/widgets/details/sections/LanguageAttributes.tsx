@@ -40,9 +40,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
         </DetailsField>
       )}
       <DetailsField title="Plural Categories">
-        <div
-          style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}
-        >
+        <div className="inline-flex flex-wrap items-start gap-2">
           <LanguagePluralCategories lang={lang} />
           <LanguagePluralGridButton lang={lang} />
         </div>

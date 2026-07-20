@@ -47,7 +47,7 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
   // max=9   // National/Institutional/Living
   const color =
     ratio == null
-      ? 'var(--color-text-secondary)'
+      ? 'var(--muted-foreground)'
       : ratio >= 7 / 9
         ? 'var(--color-green)'
         : ratio >= 3 / 9
@@ -55,19 +55,15 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
           : 'var(--color-red)';
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: size }}>
-      <div style={{ fontSize: '0.8em', marginBottom: '0.25em', width: 'max-content' }}>{label}</div>
-      <div style={{ position: 'relative', width: size, height: size * 0.65 }}>
-        <svg
-          width={size}
-          height={size}
-          style={{ position: 'absolute', top: 0, left: 0, overflow: 'visible' }}
-        >
+    <div className="flex flex-col items-center" style={{ width: size }}>
+      <div className="mb-1 w-max text-[0.8em]">{label}</div>
+      <div className="relative" style={{ width: size, height: size * 0.65 }}>
+        <svg width={size} height={size} className="absolute top-0 left-0 overflow-visible">
           {/* Background arc */}
           <path
             d={bgArc}
             fill="none"
-            stroke="var(--color-button-secondary)"
+            stroke="var(--secondary)"
             strokeWidth={stroke}
             strokeLinecap="round"
           />
@@ -84,32 +80,14 @@ const ArcGauge: React.FC<Props> = ({ value, max, label, sublabel, size = 80 }) =
         </svg>
         {/* Score text centered inside arc */}
         <div
-          style={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            right: 0,
-            textAlign: 'center',
-            fontWeight: 700,
-            fontSize: size * 0.22,
-            lineHeight: 1,
-          }}
+          className="absolute inset-x-0 bottom-0 text-center leading-none font-bold"
+          style={{ fontSize: size * 0.22 }}
         >
           {value != null ? value : '—'}
-          <span
-            style={{ fontWeight: 400, fontSize: '0.6em', color: 'var(--color-text-secondary)' }}
-          >
-            /{max}
-          </span>
+          <span className="text-[0.6em] font-normal text-muted-foreground">/{max}</span>
         </div>
       </div>
-      {sublabel && (
-        <div
-          style={{ fontSize: '0.75em', color: 'var(--color-text-secondary)', marginTop: '0.25em' }}
-        >
-          {sublabel}
-        </div>
-      )}
+      {sublabel && <div className="mt-1 text-[0.75em] text-muted-foreground">{sublabel}</div>}
     </div>
   );
 };

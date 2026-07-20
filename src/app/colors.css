@@ -15,8 +15,6 @@
   --color-button-secondary: var(--secondary);
   --color-button-hover: var(--primary);
   --color-background-hover: var(--accent);
-  --color-background-hover-opaque: var(--muted);
-  --color-shadow: var(--border);
   --color-text-highlight: var(--color-yellow-200);
 }
 

@@ -27,7 +27,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
+      <div className="text-[1.5em] mb-2">
         <ObjectTitle object={locale} />
         <ObjectSubtitle object={locale} />
       </div>

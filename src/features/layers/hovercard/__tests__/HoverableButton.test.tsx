@@ -39,10 +39,10 @@ describe('HoverableButton', () => {
         has click
       </HoverableButton>,
     );
-    expect(screen.getByText('has click').getAttribute('style')).toContain('cursor: pointer');
+    expect(screen.getByText('has click').className).toContain('cursor-pointer');
 
     rerender(<HoverableButton hoverContent="t">no click</HoverableButton>);
-    expect(screen.getByText('no click').getAttribute('style')).toContain('cursor: auto');
+    expect(screen.getByText('no click').className).toContain('cursor-auto');
   });
 
   it('reveals hoverContent on hover', async () => {

@@ -1,6 +1,8 @@
 import { ChevronLeft } from 'lucide-react';
 import React, { useState } from 'react';
 
+import { Button } from '@shared/ui/button';
+
 type CommaSeparatedProps = {
   children: React.ReactNode;
   limit?: number | null; // Optionally will clamp the list
@@ -25,8 +27,10 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({
         </React.Fragment>
       ))}{' '}
       {limit != null && childArray.length > limit && (
-        <button
-          style={{ padding: '0em 0.25em', fontWeight: 'normal' }}
+        <Button
+          variant="link"
+          size="xs"
+          className="font-normal"
           onClick={() => setExpanded((prev) => !prev)}
         >
           {limitText === 'words' ? (
@@ -36,11 +40,11 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({
               '+' + countOverLimit + ' more'
             )
           ) : expanded ? (
-            <ChevronLeft size="1.25em" display="block" style={{ margin: '0em -0.25em' }} />
+            <ChevronLeft className="-mx-1 block size-5" />
           ) : (
             '+' + countOverLimit
           )}
-        </button>
+        </Button>
       )}
     </span>
   );

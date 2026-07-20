@@ -28,7 +28,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>{nameDisplay}</div>
+      <div className="text-[1.5em] mb-2">{nameDisplay}</div>
       <CardField
         title="Platform"
         field={Field.Platform}

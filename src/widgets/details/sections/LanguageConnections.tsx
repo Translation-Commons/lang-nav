@@ -131,7 +131,7 @@ const TreeOrList: React.FC<TreeOrListProps> = ({ treeNodes, listNodes, emptyMess
     <>
       <HoverableButton
         onClick={() => setViewAsTree((prev) => !prev)}
-        style={{ padding: '0.25em' }}
+        className="p-1"
         hoverContent={viewAsTree ? 'Click to view as list' : 'Click to view as tree'}
       >
         {viewAsTree ? 'as tree' : 'as list'}

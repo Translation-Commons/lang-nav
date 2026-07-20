@@ -34,7 +34,7 @@ const WritingSystemFilterSelector: React.FC<Props> = ({ display: manualDisplay }
 
   return (
     <SelectorDisplayProvider display={display}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+      <div className="selector flex flex-wrap items-center">
         <SelectorLabel
           label="Written in"
           description="Filter results by ones written in this script."

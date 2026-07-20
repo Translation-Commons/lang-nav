@@ -12,8 +12,6 @@ import PinButton from '@shared/ui/old/PinButton';
 
 import TableColumn from './TableColumn';
 
-const NAME_COLUMN_MAX_WIDTH = '20em';
-
 const TablePinCell: React.FC<{ object: ObjectData }> = ({ object }) => {
   const { pinned, updatePageParams } = usePageParams();
   const isPinned = pinned.includes(object.ID);
@@ -51,7 +49,7 @@ export const CodeColumn: TableColumn<ObjectData> = {
 export const NameColumn: TableColumn<ObjectData> = {
   key: 'Name',
   render: (object) => (
-    <HoverableObject object={object} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
+    <HoverableObject object={object} className="max-w-[20em]">
       <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
     </HoverableObject>
   ),

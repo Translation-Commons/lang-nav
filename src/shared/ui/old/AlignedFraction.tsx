@@ -15,7 +15,7 @@ const AlignedFraction: React.FC<AlignedFractionProps> = ({ value }) => {
     <>
       {numberToFixedUnlessSmall(value)}
       {/* If the number is greater than 10, add an invisible 0 for alignment */}
-      {value > 10 && <span style={{ visibility: 'hidden' }}>0</span>}
+      {value > 10 && <span className="invisible">0</span>}
     </>
   );
 };

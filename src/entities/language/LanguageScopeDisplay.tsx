@@ -12,12 +12,12 @@ const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const scopesBySource = getScopeBySource(lang);
 
   return (
-    <div style={{ display: 'inline-flex', gap: '0.5em', flexWrap: 'wrap' }}>
+    <div className="inline-flex gap-2 flex-wrap">
       {Object.values(LanguageScope)
         .filter((s) => typeof s === 'number')
         .filter((scope) => scopesBySource[scope]?.length > 0)
         .map((scope) => (
-          <div key={scope} style={{ display: 'flex', gap: '0.25em' }}>
+          <div key={scope} className="flex gap-1">
             {scopesBySource[scope]?.length > 0 && (
               <Hoverable hoverContent={getLanguageScopeDescription(scope)}>
                 {getLanguageScopeLabel(scope)}

@@ -14,9 +14,7 @@ const LocaleFormedHereDisplay = ({ loc }: { loc: LocaleData }) => {
   return (
     <Hoverable
       hoverContent={getLangFormedHereDescription(langFormedHere)}
-      style={{
-        color: !langFormedHere ? 'var(--color-text)' : undefined,
-      }}
+      className={!langFormedHere ? 'text-foreground' : undefined}
     >
       {langFormedHere ? 'Formed here' : 'From abroad'}
     </Hoverable>
