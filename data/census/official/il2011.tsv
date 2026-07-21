@@ -1,0 +1,30 @@
+#codeDisplay		il2011	il2011writing
+#nameDisplay	Israel		
+#isoRegionCode	IL		
+#yearCollected	2011		
+#languageUse		Speaks	Writes
+#proficiency		Native	Able to fill out a form or letter without difficulty
+#acquisitionOrder		L1	Any
+#domain		Home	Work
+#population		4,939,000	3,076,000
+#populationSource		https://www.cbs.gov.il/en/Statistical/mw2013_e.pdf	
+#age		20+	25-54
+#quantity		percent	percent
+#collectorType	Government		
+#collectorName	הלשכה המרכזית לסטטיסטיקה		
+#collectorNameShort	CBS Israel		
+#url	https://web.archive.org/web/20211022185417/https://www.cbs.gov.il/he/mediarelease/DocLib/2013/017/19_13_017b.pdf		
+#datePublished	2013		
+#dateAccessed	2021-10-22		
+#documentName	Selected Data from the 2011 Social Survey on Mastery of the Hebrew Language and Usage of Languages 		
+#tableName		Figure 1. People aged 20 and over by mother tongue and age, percentages	תרשים .4 בני 20 ומעלה, מתקשים במילוי טפסים ובכתיבת מכתבים רשמיים, לפי גיל ולפי קבוצת אוכלוסייה, אחוזים 
+#notes	There are more useful tables but they are bracketed by ethnicities	population eligible added up from age brackets	
+Language Code	Language	Estimate	
+heb	Hebrew	49%	73%
+ara	Arabic	18%	
+rus	Russian	15%	
+yid	Yiddish	2%	
+fra	French	2%	
+eng	English	2%	
+spa	Spanish	1.60%	
+mul	Other languages	10%	

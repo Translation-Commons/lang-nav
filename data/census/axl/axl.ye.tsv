@@ -1,0 +1,46 @@
+#codeDisplay		#fr names	ye2001count
+#nameDisplay			AXL Yemen
+#isoRegionCode	YE		
+#yearCollected	2001		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder			L1
+#domain			Any
+### Population Surveyed ###			
+#population	18,779,600		
+#responsesPerIndividual			1
+### Data Constraints ###			
+#geographicScope	Whole country		
+#age	0+		
+#nationality	Residents		
+#residenceBasis	de facto		
+#quantity			count
+### Creator ###			
+#collectorType	Secondary		
+#author	Jacques Leclerc		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/asie/yemen.htm		 
+#tableName	2.1 Les ethnies (Ethnie / Langue maternelle / Affiliation linguistique / Population / %)		 
+#notes			
+Language Code	Language Name		Population
+ara/acq	Taizzi-Aden Arabic	arabe taizzi-adeni	6760000
+ara/ayn	Sanaani Arabic	arabe sanaani	4000000
+ara/ayn	Sanaani Arabic	arabe sanaani	3750000
+ara/ayh	Hadrami Arabic	arabe hadrami	3200000
+som	Somali	somali	290000
+ara/apd	Sudanese Arabic	arabe soudanais	246000
+heb	Hebrew	hébreu	200000
+ara/acx	Omani Arabic	arabe omanais	98000
+sqt	Sokotri	sokotri	70000
+gdq	Mehri	mehri	58000
+msa	Malay	malais	28000
+ara/acm	Mesopotamian Arabic	arabe mésopotamien	25000
+ara/apc	North Levantine Arabic	arabe leventin du Nord	14000
+fas/pes	Western Farsi	farsi de l'Ouest	14000
+ara/arz	Egyptian Arabic	arabe égyptien	10000
+ara/afb	Gulf Arab	arabe du Golfe	10000
+ara/arb	Standard Arabic	arabe standard	5600
+ara/jye	Judeo-Yemeni Arab	arabe judéo-yéménite	1000
+hoh	Hobyot	hobyot	100
+	Total 		18779600
