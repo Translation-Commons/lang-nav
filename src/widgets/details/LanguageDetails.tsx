@@ -54,17 +54,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
 export default LanguageDetails;
 
 const FlexRow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div
-    style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1em',
-      alignItems: 'stretch',
-      marginBottom: '1em',
-    }}
-  >
-    {children}
-  </div>
+  <div className="mb-4 flex flex-wrap items-stretch gap-4">{children}</div>
 );
 
 const FlexItem: React.FC<{ children: React.ReactNode; flex?: string }> = ({

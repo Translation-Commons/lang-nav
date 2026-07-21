@@ -1,14 +1,15 @@
 import { ArrowUpDownIcon } from 'lucide-react';
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
-import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
+import { cn } from '@shared/lib/utils';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+
 import TableColumn from './TableColumn';
 import TableColumnHovercard from './TableColumnHovercard';
-import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 
 type Props<T extends EntityData> = {
   column: TableColumn<T>;
@@ -26,10 +27,7 @@ function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>)
       {sortBy === column.field || secondarySortBy === column.field ? (
         <ArrowUpDownIcon
           size={14}
-          style={{
-            color: 'var(--color-button-primary)',
-            opacity: secondarySortBy === column.field ? 0.5 : 1,
-          }}
+          className={cn('text-primary', secondarySortBy === column.field && 'opacity-50')}
         />
       ) : null}
     </HoverableContainer>
@@ -41,50 +39,35 @@ function HoverableContainer<T extends EntityData>({
   children,
   appearance,
 }: React.PropsWithChildren<Props<T>>) {
-  const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const [isHovering, setIsHovering] = useState(false);
+  const onMouseEnter = () => setIsHovering(true);
+  const onMouseLeave = () => setIsHovering(false);
 
-  const handleMouseEnter = useCallback(
-    (e: React.MouseEvent) => {
-      setIsHovering(true);
-      showHoverCard(<TableColumnHovercard column={column} />, e.clientX, e.clientY);
-    },
-    [column, showHoverCard],
-  );
-  const handleMouseLeave = useCallback(() => {
-    setIsHovering(false);
-    onMouseLeaveTriggeringElement();
-  }, [onMouseLeaveTriggeringElement]);
-
-  if (appearance === 'th') {
-    return (
+  const trigger =
+    appearance === 'th' ? (
       <th
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
-          cursor: 'default',
-          padding: '0.25em 0.5em',
-          maxWidth: MAX_COLUMN_WIDTH,
-          minHeight: '2em',
-          textAlign: 'start',
-        }}
-      >
-        {children}
-      </th>
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        className={cn(
+          'max-w-[10em] min-h-[2em] cursor-default px-2 py-1 text-start',
+          isHovering && 'bg-accent',
+        )}
+      />
+    ) : (
+      <span
+        onMouseEnter={onMouseEnter}
+        onMouseLeave={onMouseLeave}
+        className={cn(isHovering && 'bg-accent')}
+      />
     );
-  }
 
   return (
-    <span
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        backgroundColor: isHovering ? 'var(--color-background-hover)' : undefined,
-      }}
-    >
-      {children}
-    </span>
+    <HoverCard>
+      <HoverCardTrigger render={trigger}>{children}</HoverCardTrigger>
+      <HoverCardContent className="w-auto max-w-96">
+        <TableColumnHovercard column={column} />
+      </HoverCardContent>
+    </HoverCard>
   );
 }
 

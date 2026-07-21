@@ -2,7 +2,6 @@ import { PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
-import ZIndex from '@features/layers/ZIndex';
 import { ObjectType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -47,30 +46,8 @@ const MapCard: React.FC<{
   }
 
   return (
-    <div
-      style={{
-        position: 'relative',
-        maxWidth: 300,
-        fontSize: '0.75em',
-        background: 'var(--color-background)',
-        borderRadius: '0.75em',
-        boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)',
-        padding: '1em',
-        textAlign: 'left',
-      }}
-    >
-      <div
-        style={{
-          position: 'absolute',
-          top: '0',
-          right: '0.5em',
-          transform: 'translateY(-50%)',
-          display: 'flex',
-          gap: '0.5em',
-          zIndex: ZIndex.MapZoomControls,
-          fontSize: '.8em',
-        }}
-      >
+    <div className="text-card-foreground border-border bg-card relative max-w-[300px] rounded-xl border p-4 text-left text-[0.75em]">
+      <div className="absolute top-0 right-2 z-10 flex -translate-y-1/2 gap-2 text-[0.8em]">
         <HoverableIcon
           Icon={SquareArrowUpRightIcon}
           onClick={openDetails}

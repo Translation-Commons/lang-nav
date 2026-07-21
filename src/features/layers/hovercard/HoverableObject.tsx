@@ -10,19 +10,21 @@ import ObjectCard from '@entities/ui/ObjectCard';
 type Props = {
   object?: ObjectData;
   children: React.ReactNode;
+  className?: string;
   style?: React.CSSProperties;
 };
 
-const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
-  const { view, updatePageParams } = usePageParams();
+const HoverableObject: React.FC<Props> = ({ object, children, className, style }) => {
+  const { updatePageParams } = usePageParams();
+  const onClick = useCallback(() => {
+    if (object == null) return;
+    const params: Partial<PageParams> = { objectID: object.ID };
+    updatePageParams(params);
+  }, [object, updatePageParams]);
+
   if (object == null) {
     return <>{children}</>;
   }
-
-  const onClick = useCallback(() => {
-    const params: Partial<PageParams> = { objectID: object.ID };
-    updatePageParams(params);
-  }, [object, updatePageParams, view]);
 
   return (
     <Hoverable
@@ -36,6 +38,7 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
         </>
       }
       onClick={onClick}
+      className={className}
       style={style}
     >
       {children}

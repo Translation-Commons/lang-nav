@@ -1,7 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
 
-import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
-
 import { PageParamsContext, PageParamsContextState } from './PageParamsContext';
 import { PageParams } from './PageParamTypes';
 import usePageParams from './usePageParams';
@@ -45,12 +43,7 @@ const LocalParamsProvider: React.FC<{
     };
   }, [globalParams, updateLocalParams, localParams, overrides]);
 
-  return (
-    <PageParamsContext.Provider value={providerValue}>
-      {/* Need to provide a new hovercard that will use the local params */}
-      <HoverCardProvider>{children}</HoverCardProvider>
-    </PageParamsContext.Provider>
-  );
+  return <PageParamsContext.Provider value={providerValue}>{children}</PageParamsContext.Provider>;
 };
 
 export default LocalParamsProvider;

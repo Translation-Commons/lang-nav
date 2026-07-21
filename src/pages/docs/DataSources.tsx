@@ -8,7 +8,7 @@ import InternalLink from '@features/params/InternalLink';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 const DataSourcesPage: React.FC = () => {
   return (

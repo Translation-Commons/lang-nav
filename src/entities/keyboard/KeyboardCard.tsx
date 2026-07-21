@@ -4,31 +4,25 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import Field from '@features/transforms/fields/Field';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 interface Props {
   keyboard: KeyboardData;
 }
 
 const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
-  const {
-    nameDisplay,
-    platform,
-    languages,
-    territory,
-    inputWritingSystem,
-    outputWritingSystem,
-    variant,
-  } = keyboard;
+  const { platform, languages, territory, inputWritingSystem, outputWritingSystem, variant } =
+    keyboard;
 
   const sameScript = keyboard.inputScriptCode === keyboard.outputScriptCode;
   const hasLanguages = languages != null && languages.length > 0;
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>{nameDisplay}</div>
+      <CardTitleBlock object={keyboard} showCode={false} />
       <CardField
         title="Platform"
         field={Field.Platform}

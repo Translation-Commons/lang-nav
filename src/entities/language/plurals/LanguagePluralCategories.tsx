@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import { cn } from '@shared/lib/utils';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -19,7 +20,7 @@ const LanguagePluralCategories: React.FC<{ lang: LanguageData }> = ({ lang }) =>
   }
 
   return (
-    <div style={{ display: 'flex', gap: '0.25em', flexWrap: 'wrap', marginBottom: '0.25em' }}>
+    <div className="flex gap-1 flex-wrap mb-1">
       {pluralRules.map(([pluralRuleKey, rule]) => (
         <Hoverable
           key={pluralRuleKey}
@@ -28,13 +29,11 @@ const LanguagePluralCategories: React.FC<{ lang: LanguageData }> = ({ lang }) =>
               <PluralRuleExplanation rule={rule} />
             </>
           }
-          style={{
-            backgroundColor: getPluralRuleColor(pluralRuleKey),
-            borderRadius: '0.25em',
-            color: pluralRuleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-text-on-color)',
-            padding: '0.25em',
-            margin: '0',
-          }}
+          className={cn(
+            'm-0 rounded-sm p-1',
+            pluralRuleKey !== PluralRuleKey.Other && 'text-primary-foreground',
+          )}
+          style={{ backgroundColor: getPluralRuleColor(pluralRuleKey) }}
         >
           {getPluralRuleKeyLabel(pluralRuleKey)}
         </Hoverable>

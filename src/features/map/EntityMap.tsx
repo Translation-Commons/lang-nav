@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useMemo, useState } from 'react';
 
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -16,6 +16,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import DrawableData from './DrawableData';
 import MapCentroids from './MapCentroids';
 import { MAP_ASPECT_RATIO, MAP_INTERNAL_WIDTH } from './MapConsts';
+import { MapTooltipProvider } from './MapHoverCard';
 import MapSidebar from './MapSidebar';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
@@ -50,19 +51,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   });
 
   const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
-  const mapContainerRef = useRef<HTMLDivElement>(null);
-  const [mapContainerWidth, setMapContainerWidth] = useState(800);
-
-  useEffect(() => {
-    const el = mapContainerRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const width = entries[0]?.contentRect.width;
-      if (width) setMapContainerWidth(width);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   const drawableEntities = useMemo(() => {
     if (objectType === ObjectType.Language) {
@@ -102,61 +90,59 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   );
 
   return (
-    <div ref={mapContainerRef} className="EntityMap" style={{ maxWidth: maxWidth }}>
-      <ZoomControls
-        zoomIn={zoomIn}
-        zoomOut={zoomOut}
-        resetTransform={resetTransform}
-        containerWidth={mapContainerWidth}
-      />
-      {allowSidebar && (
-        <MapSidebar
-          drawableEntities={drawableEntities}
-          objectType={objectType}
-          hoveredId={hoveredId}
-          setHoveredId={setHoveredId}
-        />
-      )}
+    <MapTooltipProvider>
+      <div className="EntityMap" style={{ maxWidth: maxWidth }}>
+        <ZoomControls zoomIn={zoomIn} zoomOut={zoomOut} resetTransform={resetTransform} />
+        {allowSidebar && (
+          <MapSidebar
+            drawableEntities={drawableEntities}
+            objectType={objectType}
+            hoveredId={hoveredId}
+            setHoveredId={setHoveredId}
+          />
+        )}
 
-      <div className="MapColorBarAndZoomContainer">
-        <div className="MapZoomContainer" ref={zoomContainerRef}>
-          <div
-            ref={contentRef}
-            style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight, position: 'relative' }}
-          >
-            <img
-              alt="World map"
-              className="MapLayer"
-              src="./data/wiki/map_world.svg"
-              style={{ filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined }}
-            />
+        <div className="MapColorBarAndZoomContainer">
+          <div className="MapZoomContainer" ref={zoomContainerRef}>
+            <div
+              ref={contentRef}
+              className="relative"
+              style={{ width: MAP_INTERNAL_WIDTH, height: mapHeight }}
+            >
+              <img
+                alt="World map"
+                className="MapLayer"
+                src="./data/wiki/map_world.svg"
+                style={{ filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined }}
+              />
 
-            {objectType !== ObjectType.Language && (
-              <MapTerritories
+              {objectType !== ObjectType.Language && (
+                <MapTerritories
+                  drawableEntities={drawableEntities}
+                  onClick={onClick}
+                  coloringFunctions={coloringFunctions}
+                  hoveredId={hoveredId}
+                  pinnedIds={allowSidebar ? pinned : []}
+                />
+              )}
+
+              <MapCentroids
                 drawableEntities={drawableEntities}
                 onClick={onClick}
+                scalar={1200 / maxWidth}
+                zoomFactor={zoomFactor}
                 coloringFunctions={coloringFunctions}
                 hoveredId={hoveredId}
                 pinnedIds={allowSidebar ? pinned : []}
+                allowSidebar={allowSidebar}
               />
-            )}
-
-            <MapCentroids
-              drawableEntities={drawableEntities}
-              onClick={onClick}
-              scalar={1200 / maxWidth}
-              zoomFactor={zoomFactor}
-              coloringFunctions={coloringFunctions}
-              hoveredId={hoveredId}
-              pinnedIds={allowSidebar ? pinned : []}
-              allowSidebar={allowSidebar}
-            />
+            </div>
           </div>
-        </div>
 
-        {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
+          {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
+        </div>
       </div>
-    </div>
+    </MapTooltipProvider>
   );
 };
 

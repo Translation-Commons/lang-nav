@@ -7,8 +7,8 @@ import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { countBy, uniqueBy } from '@shared/lib/setUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { LanguageData } from './LanguageTypes';
 

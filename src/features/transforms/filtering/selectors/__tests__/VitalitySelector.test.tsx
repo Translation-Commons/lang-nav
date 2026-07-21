@@ -22,10 +22,6 @@ vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
   SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown', FilterList: 'filterList' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),
-}));
-
 describe('VitalitySelector', () => {
   let updatePageParams: (params: Partial<PageParams>) => void;
 
@@ -83,8 +79,8 @@ describe('VitalitySelector', () => {
       const { rerender } = render(<LanguageISOStatusSelector />);
 
       // Test selection
-      const livingButton = screen.getByRole('option', { name: 'Living' });
-      expect(livingButton).toHaveClass('selectorOption unselected');
+      const livingButton = screen.getByRole('button', { name: 'Living' });
+      expect(livingButton).toHaveAttribute('aria-pressed', 'false');
       await user.click(livingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [LanguageISOStatus.Living] });
 
@@ -94,8 +90,8 @@ describe('VitalitySelector', () => {
       rerender(<LanguageISOStatusSelector />);
 
       // Test deselection
-      const selectedLivingButton = screen.getByRole('option', { name: 'Living' });
-      expect(selectedLivingButton).toHaveClass('selectorOption selected');
+      const selectedLivingButton = screen.getByRole('button', { name: 'Living' });
+      expect(selectedLivingButton).toHaveAttribute('aria-pressed', 'true');
       await user.click(selectedLivingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
     });

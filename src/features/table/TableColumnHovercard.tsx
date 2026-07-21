@@ -21,7 +21,7 @@ function TableColumnHovercard<T extends EntityData>({ column }: Props<T>) {
   const isFilterable = column.field && isFieldApplicable(column.field, TransformEnum.Filter);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+    <div className="flex flex-col gap-2">
       <strong>{column.label ?? column.key}</strong>
       {column.description && <div>{column.description}</div>}
       <table>
@@ -58,9 +58,10 @@ function ColumnSortControls<T extends EntityData>({ column }: { column: TableCol
           {[SortBehavior.Normal, SortBehavior.Reverse].map((sb) => (
             <button
               key={sb}
-              className={isActive && sortBehavior === sb ? 'primary' : ''}
+              className={`mr-2 px-2 py-1 ${
+                isActive && sortBehavior === sb ? 'bg-primary text-primary-foreground' : ''
+              }`}
               onClick={() => updatePageParams({ sortBy: column.field, sortBehavior: sb })}
-              style={{ padding: '0.25em 0.5em', marginRight: '0.5em' }}
             >
               {getSortingText(valueType, sb)}
             </button>
@@ -68,12 +69,11 @@ function ColumnSortControls<T extends EntityData>({ column }: { column: TableCol
         </td>
       </tr>
       <tr>
-        <td style={{ textAlign: 'center' }}>or</td>
+        <td className="text-center">or</td>
         <td>
           <button
-            className={isSecondary ? 'primary' : ''}
+            className={`px-2 py-1 ${isSecondary ? 'bg-primary text-primary-foreground' : ''}`}
             onClick={() => updatePageParams({ secondarySortBy: column.field })}
-            style={{ padding: '0.25em 0.5em' }}
           >
             use as tie-breaker ({getSortingText(valueType, sortBehavior)})
           </button>

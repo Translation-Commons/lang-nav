@@ -24,8 +24,8 @@ import { getObjectLiteracy } from '@entities/lib/getObjectMiscFields';
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';

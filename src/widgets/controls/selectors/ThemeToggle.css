@@ -28,7 +28,7 @@
 }
 
 .theme-toggle__track-icon {
-  color: var(--color-text-on-color);
+  color: var(--primary-foreground);
   opacity: 0.72;
   stroke-width: 2.4;
   height: 0.9rem;
@@ -38,8 +38,8 @@
 .theme-toggle__thumb {
   position: absolute;
   align-items: center;
-  background: var(--color-background);
-  color: var(--color-button-primary);
+  background: var(--background);
+  color: var(--primary);
   display: grid;
   place-items: center;
   transition:
@@ -99,11 +99,11 @@
 }
 
 .theme-toggle.dark .theme-toggle__thumb {
-  color: var(--color-blue);
+  color: var(--color-blue-500);
   transform: translate(1.625rem, 0);
 }
 
 .theme-toggle.system .theme-toggle__thumb {
-  color: var(--color-button-primary);
+  color: var(--primary);
   transform: translate(3.25rem, 0);
 }

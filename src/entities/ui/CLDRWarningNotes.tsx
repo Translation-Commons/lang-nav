@@ -43,7 +43,7 @@ const NotesIcon: React.FC<{
   let formattedNotes = warningNotes ?? infoNotes;
   if (Array.isArray(formattedNotes)) {
     formattedNotes = (
-      <div style={{ display: 'flex', gap: '0.5em', flexDirection: 'column' }}>
+      <div className="flex gap-2 flex-col">
         {formattedNotes.map((note, index) => (
           <div key={index}>{note}</div>
         ))}
@@ -51,14 +51,11 @@ const NotesIcon: React.FC<{
     );
   }
   return (
-    <Hoverable hoverContent={formattedNotes} style={{ marginLeft: '0.25em' }}>
+    <Hoverable hoverContent={formattedNotes} className="ml-1">
       {warningNotes ? (
-        <AlertTriangleIcon
-          style={{ color: 'var(--color-yellow)', verticalAlign: 'sub' }}
-          size={'1em'}
-        />
+        <AlertTriangleIcon className="text-yellow align-sub" size={'1em'} />
       ) : (
-        <InfoIcon style={{ color: 'var(--color-blue)', verticalAlign: 'sub' }} size={'1em'} />
+        <InfoIcon className="text-blue align-sub" size={'1em'} />
       )}
     </Hoverable>
   );

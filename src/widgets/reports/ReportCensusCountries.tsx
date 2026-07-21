@@ -10,7 +10,7 @@ import Field from '@features/transforms/fields/Field';
 import { CensusCollectorType } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 const ReportCensusCountries: React.FC = () => {
   const { territories } = useDataContext();
@@ -31,7 +31,7 @@ const ReportCensusCountries: React.FC = () => {
           key: collectorType,
           render: (territory: TerritoryData) => {
             return (
-              <div style={{ maxWidth: '10em' }}>
+              <div className="max-w-[10em]">
                 <CommaSeparated limit={1}>
                   {territory.censuses
                     ?.filter((census) => census.collectorType === collectorType)

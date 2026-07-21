@@ -3,12 +3,11 @@ import React from 'react';
 import Field from '@features/transforms/fields/Field';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
-import DecimalNumber from '@shared/ui/DecimalNumber';
-import Deemphasized from '@shared/ui/Deemphasized';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
@@ -27,10 +26,7 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={locale} />
-        <ObjectSubtitle object={locale} />
-      </div>
+      <CardTitleBlock object={locale} showEndonym />
 
       {pop.speaking.adjusted != null && (
         <CardField

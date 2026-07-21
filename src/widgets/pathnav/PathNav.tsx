@@ -5,14 +5,14 @@ import {
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 
+import { cn } from '@shared/lib/utils';
+
 export const PathContainer: React.FC<{
   children: React.ReactNode;
-  style?: React.CSSProperties;
-}> = ({ children, style }) => {
+  className?: string;
+}> = ({ children, className }) => {
   return (
-    <div
-      style={{ display: 'flex', alignItems: 'center', gap: '0.5em', flexWrap: 'wrap', ...style }}
-    >
+    <div className={cn('flex flex-wrap items-center gap-2', className)}>
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         {children}
       </SelectorDisplayProvider>

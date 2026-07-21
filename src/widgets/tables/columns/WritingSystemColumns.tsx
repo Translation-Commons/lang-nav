@@ -8,7 +8,7 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
   return [

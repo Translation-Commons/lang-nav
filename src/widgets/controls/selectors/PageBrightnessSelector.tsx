@@ -6,20 +6,12 @@ import SelectorLabel from '@features/params/ui/SelectorLabel.tsx';
 
 const PageBrightnessSelector: React.FC = () => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+    <div className="flex flex-wrap items-center">
       <SelectorLabel
         label="Page Brightness"
         description="Choose how bright the page should be. This parameter is stored on your device."
       />
-      <div
-        style={{
-          color: 'var(--color-text-on-color)',
-          backgroundColor: 'var(--color-button-primary)',
-          border: '0',
-          width: '5.5rem',
-          borderRadius: '2.25rem',
-        }}
-      >
+      <div className="w-22 rounded-full bg-primary text-primary-foreground">
         <ThemeToggle />
       </div>
     </div>

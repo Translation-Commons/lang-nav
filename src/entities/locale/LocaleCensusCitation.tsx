@@ -6,7 +6,7 @@ import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 type Props = {
   locale: LocaleData;
@@ -45,7 +45,7 @@ const PopulationSource: React.FC<{
     case PopulationSourceCategory.Algorithmic:
       return (
         <Hoverable hoverContent={description}>
-          <span style={{ fontStyle: 'italic', color: 'var(--color-text-secondary)' }}>{label}</span>
+          <span className="italic text-muted-foreground">{label}</span>
         </Hoverable>
       );
     default:

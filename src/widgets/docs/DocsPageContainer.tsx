@@ -13,8 +13,8 @@ type Props = React.PropsWithChildren<{
 
 function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
   return (
-    <main style={{ margin: '2em auto', maxWidth: '800px', textAlign: 'start' }}>
-      <div style={{ display: 'flex', gap: '1em', flexDirection: 'column' }}>
+    <main className="mx-auto my-8 max-w-[800px] text-start">
+      <div className="flex flex-col gap-4">
         <TitleWithLogo title={title} />
         {showDocsLink && (
           <InternalLink page={LangNavPageName.About}>◀ Documentation Hub</InternalLink>
@@ -27,16 +27,7 @@ function DocsPageContainer({ children, title, showDocsLink = true }: Props) {
 
 function TitleWithLogo({ title }: { title?: ReactNode }) {
   return (
-    <div
-      style={{
-        alignItems: 'center',
-        display: 'flex',
-        fontSize: '2em',
-        padding: '0.25em',
-        marginBottom: '0.25em',
-        gap: '0.5em',
-      }}
-    >
+    <div className="mb-1 flex items-center gap-2 p-1 text-[2em]">
       <LargeLangNavLogo />
       <span>{title}</span>
     </div>

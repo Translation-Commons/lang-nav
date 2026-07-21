@@ -4,11 +4,11 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import Field from '@features/transforms/fields/Field';
 import { getLanguagesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
 
@@ -26,9 +26,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={data} />
-      </div>
+      <CardTitleBlock object={data} />
       <CardField
         title="Type"
         field={Field.VariantType}

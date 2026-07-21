@@ -5,13 +5,13 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import CardField from '@shared/containers/CardField';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 interface Props {
   writingSystem: WritingSystemData;
@@ -33,9 +33,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={writingSystem} />
-      </div>
+      <CardTitleBlock object={writingSystem} />
 
       <CardField
         title="Sample"
@@ -65,7 +63,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
               </div>
             )}
 
-            {scope === WritingSystemScope.Group && containsWritingSystems?.length && (
+            {scope === WritingSystemScope.Group && !!containsWritingSystems?.length && (
               <>
                 {' '}
                 containing{' '}

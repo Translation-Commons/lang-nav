@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -97,11 +97,11 @@ const VitalityExplanation: React.FC<{ source: VitalitySource; lang: LanguageData
           <div>
             <div>
               Average of 2 Ethnologue vitality estimates to score: {meta.toFixed(1)}/9.
-              <div style={{ marginLeft: '2em' }}>
+              <div className="ml-8">
                 <strong>{getVitalityEthnologueFineLabel(ethFine)}</strong> ({ethFine}){' '}
                 {getVitalityEthnologueFineDescription(ethFine)}
               </div>
-              <div style={{ marginLeft: '2em' }}>
+              <div className="ml-8">
                 <strong>{getVitalityEthnologueCoarseLabel(ethCoarse)}</strong> ({ethCoarse}){' '}
                 {getVitalityEthnologueCoarseDescription(ethCoarse)}
               </div>

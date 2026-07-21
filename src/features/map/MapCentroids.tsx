@@ -1,6 +1,5 @@
 import React, { useCallback, useMemo } from 'react';
 
-import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePagination from '@features/pagination/usePagination';
 import { ObjectType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -12,6 +11,7 @@ import useScale from '@features/transforms/scales/useScale';
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
 import { MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
+import useMapHoverCard from './MapHoverCard';
 
 import './map.css';
 
@@ -38,7 +38,7 @@ const MapCentroids: React.FC<Props> = ({
 }) => {
   const { scaleBy, objectType } = usePageParams();
   const { getCurrentEntities } = usePagination<DrawableData>();
-  const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
+  const { showHoverCard, hideHoverCard } = useMapHoverCard();
   const { getScale } = useScale({ objects: drawableEntities, scaleBy });
 
   const renderableEntities = useMemo(() => {
@@ -57,7 +57,7 @@ const MapCentroids: React.FC<Props> = ({
       showHoverCard(
         <div>
           <strong>{obj.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>
+          <div className="text-muted-foreground">
             {allowSidebar ? 'Pin to sidebar' : 'Open in details panel'}
           </div>
         </div>,
@@ -70,10 +70,9 @@ const MapCentroids: React.FC<Props> = ({
 
   return (
     <svg
-      className="MapLayer"
+      className="MapLayer pointer-events-none"
       viewBox="-180 -90 360 180"
       preserveAspectRatio="xMidYMid meet"
-      style={{ pointerEvents: 'none' }}
     >
       {renderableEntities.map((obj) => (
         <ObjectNode
@@ -84,7 +83,7 @@ const MapCentroids: React.FC<Props> = ({
           zoomFactor={zoomFactor}
           onClick={onClick}
           onMouseEnter={buildOnMouseEnter(obj)}
-          onMouseLeave={onMouseLeaveTriggeringElement}
+          onMouseLeave={hideHoverCard}
           isHovered={hoveredId === obj.ID}
           isPinned={pinnedIds.includes(obj.ID)}
         />
@@ -159,7 +158,7 @@ const Circle: React.FC<NodeProps> = ({
     className={'MapCentroidCircle' + (isHovered ? ' hovered' : '') + (isPinned ? ' pinned' : '')}
     r={scale + 1.5}
     fill={color ?? 'transparent'}
-    stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
+    stroke={color == null ? 'var(--primary)' : 'transparent'}
     onClick={(e) => {
       e.stopPropagation();
       onClick(object);

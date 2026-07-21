@@ -14,7 +14,7 @@ export function usePotentialLocaleThreshold(label: ReactNode): {
 
   const percentThresholdSelector = (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonGroup}>
-      <div style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}>
+      <div className="flex items-end mb-2">
         {label}
         <TextInput
           getSuggestions={async () => [

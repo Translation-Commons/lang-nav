@@ -7,6 +7,8 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
+import { BreadcrumbItem, BreadcrumbSeparator } from '@shared/ui/breadcrumb';
+
 import { getDescendantsName, getObjectChildren } from './getParentsAndDescendants';
 
 /*
@@ -31,16 +33,20 @@ const ObjectPathChildren: React.FC<{ object?: ObjectData }> = ({ object }) => {
 
   return (
     <>
-      <SlashIcon size="1em" />
-      <Selector<string>
-        onChange={(childID) => updatePageParams({ objectID: childID, objectType: object.type })}
-        selected={children.length + ' ' + descendantsName}
-        options={childIDs}
-        getOptionLabel={(childID) => {
-          const child = children.find((c) => c.ID === childID);
-          return child ? child.nameDisplay : childID;
-        }}
-      />
+      <BreadcrumbSeparator>
+        <SlashIcon size="1em" />
+      </BreadcrumbSeparator>
+      <BreadcrumbItem>
+        <Selector<string>
+          onChange={(childID) => updatePageParams({ objectID: childID, objectType: object.type })}
+          selected={children.length + ' ' + descendantsName}
+          options={childIDs}
+          getOptionLabel={(childID) => {
+            const child = children.find((c) => c.ID === childID);
+            return child ? child.nameDisplay : childID;
+          }}
+        />
+      </BreadcrumbItem>
     </>
   );
 };

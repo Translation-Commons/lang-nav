@@ -4,6 +4,9 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
+import { Button } from '@shared/ui/button';
+import { Card } from '@shared/ui/card';
+
 import useConsent from './useConsent';
 
 const ConsentBanner: React.FC = () => {
@@ -12,43 +15,32 @@ const ConsentBanner: React.FC = () => {
   if (!needsDecision) return null;
 
   return (
-    <div
+    <Card
       role="dialog"
       aria-modal="false"
       aria-label="Cookie consent"
-      style={{
-        position: 'fixed',
-        left: '1em',
-        right: '1em',
-        bottom: '1em',
-        maxWidth: '640px',
-        margin: '0 auto',
-        padding: '1em',
-        backgroundColor: 'var(--color-background)',
-        color: 'var(--color-text)',
-        border: '1px solid var(--color-text-secondary)',
-        borderRadius: '0.75em',
-        boxShadow: '0 8px 24px var(--color-shadow)',
-        zIndex: 1000,
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '0.75em',
-      }}
+      className="fixed inset-x-4 bottom-4 z-[1000] mx-auto flex max-w-2xl flex-col gap-3 border border-border/80 bg-accent/50 px-4 sm:flex-row sm:items-center sm:justify-between"
     >
-      <div>
+      <p className="text-sm">
         We use analytics to understand how people use this site and improve it. You can accept or
         decline non-essential analytics. Read more in our{' '}
-        <InternalLink page={LangNavPageName.PrivacyPolicy}>Privacy Policy</InternalLink>.
-      </div>
-      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5em', justifyContent: 'flex-end' }}>
-        <button type="button" className="primary" onClick={decline}>
+        <InternalLink
+          page={LangNavPageName.PrivacyPolicy}
+          className="font-medium underline underline-offset-4 hover:text-foreground"
+        >
+          Privacy Policy
+        </InternalLink>
+        .
+      </p>
+      <div className="flex shrink-0 flex-wrap justify-end gap-2">
+        <Button type="button" variant="outline" onClick={decline}>
           Decline
-        </button>
-        <button type="button" className="primary" onClick={accept}>
+        </Button>
+        <Button type="button" onClick={accept}>
           Accept
-        </button>
+        </Button>
       </div>
-    </div>
+    </Card>
   );
 };
 

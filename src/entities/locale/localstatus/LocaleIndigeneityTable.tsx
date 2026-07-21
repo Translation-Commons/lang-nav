@@ -12,8 +12,8 @@ import { LocaleData } from '@entities/locale/LocaleTypes';
 import { LangFormedHereFieldDescription } from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import { HistoricPresenceFieldDescription } from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import ExternalLink from '@shared/ui/ExternalLink';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 import { getLanguagesBiggestCountryLocale } from './LocaleIndigeneityPredictions';
 import {
@@ -72,12 +72,11 @@ const LocaleIndigeneityTable: React.FC<{
               <HoverableObjectName
                 object={biggestLocale}
                 labelSource="territory"
-                style={{
-                  color:
-                    biggestLocale?.territoryCode === locale.territoryCode
-                      ? 'var(--color-text-secondary)'
-                      : undefined,
-                }}
+                className={
+                  biggestLocale?.territoryCode === locale.territoryCode
+                    ? 'text-muted-foreground'
+                    : undefined
+                }
               />
             );
           },

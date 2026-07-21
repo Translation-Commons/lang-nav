@@ -31,7 +31,7 @@ const LanguageModalityBaseIcon: React.FC<{ modality: LanguageModality }> = ({ mo
       return (
         <>
           <NotepadTextIcon />
-          <MessageCircleDashedIcon style={{ color: 'var(--color-text-secondary)' }} />
+          <MessageCircleDashedIcon className="text-muted-foreground" />
         </>
       );
     case LanguageModality.SpokenAndWritten:
@@ -44,7 +44,7 @@ const LanguageModalityBaseIcon: React.FC<{ modality: LanguageModality }> = ({ mo
     case LanguageModality.MostlySpoken:
       return (
         <>
-          <NotepadTextDashedIcon style={{ color: 'var(--color-text-secondary)' }} />
+          <NotepadTextDashedIcon className="text-muted-foreground" />
           <MessageCircleIcon />
         </>
       );

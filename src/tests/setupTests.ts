@@ -14,6 +14,11 @@ class ResizeObserver {
 
 window.ResizeObserver = ResizeObserver;
 
+// jsdom does not implement scrollIntoView, which cmdk (Command) calls on mount.
+if (!Element.prototype.scrollIntoView) {
+  Element.prototype.scrollIntoView = () => {};
+}
+
 // Only if you want request mocking; otherwise remove this whole block + MSW deps
 beforeAll(async () => {
   const server = await getServer();

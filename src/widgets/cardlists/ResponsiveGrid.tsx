@@ -1,36 +1,25 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-const CARD_MIN_WIDTH = 240;
-
+// A CSS grid of fixed-width 16.6rem (265.6px) tracks that matches the card-variants.html design
+// showcase 1:1. `auto-fill` derives the column count from the container's OWN width (not the
+// viewport), so the number per row tracks the space left by the filter/details panels and reflows
+// live as they open, close, or drag-resize. Fixed tracks (not `minmax`) mean cards never grow,
+// shrink, or squish. `justify-center` centers the whole track set, so the leftover space splits
+// evenly into equal side gutters at EVERY column count (flex-wrap could only do this at the cap);
+// a partial last row stays aligned to the track columns rather than orphan-centering on its own.
+// `max-w-[107.1rem]` + `mx-auto` cap the grid at 6 columns on wide screens (6 x 16.6rem + 5 x 1.5rem
+// gap-6 = 99.6 + 7.5 = 107.1rem) and center that capped block. `min(16.6rem,100%)` lets the track
+// fall back to the container width below ~265px (e.g. 360px viewport with panels open) so the card
+// stays a single readable column instead of overflowing. `w-full min-w-0` give the grid a DEFINITE
+// inline size equal to its flex-scroll container (the DataPageBody region, which carries
+// `scrollbar-gutter: stable both-edges` so the count stays scrollbar-stable); without it auto-fill
+// would size to content and over-count the columns, clipping the last one off the right edge.
+// Below sm (phones) that fixed-track grid would strand a card in the middle with wide side gaps, so
+// there we drop to a single full-width column (`grid-cols-1`) and only switch to the fixed-width
+// centered auto-fill flow at sm and up.
 const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry.contentRect) {
-        setWidth(entry.contentRect.width);
-      }
-    });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const nColumns = width > 0 ? Math.floor(width / CARD_MIN_WIDTH) : 1;
-
   return (
-    <div
-      ref={containerRef}
-      style={{
-        display: 'grid',
-        gridGap: '1.5em',
-        gridTemplateColumns: `repeat(${nColumns}, 1fr)`,
-      }}
-    >
+    <div className="mx-auto grid w-full min-w-0 max-w-[107.1rem] grid-cols-1 justify-center gap-6 sm:[grid-template-columns:repeat(auto-fill,min(16.6rem,100%))] [&>*]:max-w-full">
       {children}
     </div>
   );

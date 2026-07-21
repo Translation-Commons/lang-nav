@@ -1,6 +1,6 @@
 import { LanguageSource } from '@entities/language/LanguageTypes';
 
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 function LanguageCodeDescriptionBySource({ languageSource }: { languageSource: LanguageSource }) {
   switch (languageSource) {

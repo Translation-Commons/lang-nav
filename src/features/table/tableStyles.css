@@ -1,69 +1,64 @@
-thead {
-  position: sticky;
-  top: 0;
-  background-color: var(--color-background);
-  z-index: 10;
-}
+/* These rules live in @layer components (before Tailwind's `utilities` layer) so that per-cell
+   utilities still win: e.g. TableColumnName applies `bg-accent` to the header <th> on hover, and
+   the sticky-header background below must NOT permanently defeat it. Unlayered rules beat any
+   layered utility regardless of specificity, so keeping these layered is required, not cosmetic. */
+@layer components {
+  /* Pin column width, reused as the left offset of the second pinned column and
+     shared by the header and body pinned cells (custom properties inherit). */
+  .entityTable {
+    --pin-column-width: 2.75em;
+  }
 
-.population,
-.count,
-.decimal {
-  /* align right for both LTR and RTL views */
-  text-align: right;
+  /* Sticky header cells paint their own opaque background: browsers do not paint
+     backgrounds set on <thead>/<tr> in border-collapse tables, so without this the
+     scrolled body rows show through the pinned header row. Being layered, the hover
+     `bg-accent` utility on the same <th> still overrides this. */
+  .entityTable thead th {
+    background-color: var(--background);
+  }
 
-  /* equalize the character width */
-  font-family: Avenir, 'Courier New', monospace;
-  font-variant-numeric: tabular-nums;
-}
+  /* The first two header cells (the pin column and the first data column) pin to
+     the left too, matching the sticky-left body columns so the header stays aligned
+     above them while the table is scrolled horizontally. They sit above the sibling
+     header cells; the sticky <thead> already stacks the whole header above the body. */
+  .entityTable thead th:first-child,
+  .entityTable thead th:nth-child(2) {
+    position: sticky;
+    z-index: 1;
+  }
+  .entityTable thead th:first-child {
+    left: 0;
+  }
+  .entityTable thead th:nth-child(2) {
+    left: var(--pin-column-width);
+  }
 
-summary {
-  padding: 4px 8px;
-  border-radius: 4px;
-  transition: background-color 0.2s ease-in-out;
-}
+  /* The first two body columns (the pin column and the first data column) stay
+     pinned to the left edge while the table is scrolled horizontally. The opaque
+     background keeps the scrolled data cells from showing through them. */
+  td.alwaysVisible {
+    position: sticky;
+    background-color: var(--background);
+    z-index: 5; /* ZIndex.TableStickyColumn */
+  }
 
-summary:hover {
-  background-color: var(--color-button-hover);
-}
+  td.alwaysVisible:first-child {
+    left: 0;
+    box-sizing: border-box;
+    width: var(--pin-column-width);
+    min-width: var(--pin-column-width);
+  }
 
-summary:focus {
-  outline: none;
-}
+  td.alwaysVisible:nth-child(2) {
+    left: var(--pin-column-width);
+  }
 
-/* The pin column button is only revealed when the row is hovered or the row is
-   pinned. The button's appearance lives in pinButton.css. */
-tbody tr .PinButton {
-  visibility: hidden;
-}
-
-tbody tr:hover .PinButton,
-tbody tr .PinButton.pinned {
-  visibility: visible;
-}
-
-/* The first two body columns (the pin column and the first data column) stay
-   pinned to the left edge while the table is scrolled horizontally. */
-td.alwaysVisible {
-  /* Pin column width, reused as the left offset of the second sticky column. */
-  --pin-column-width: 2.75em;
-  position: sticky;
-  background-color: var(--color-background);
-  z-index: 5; /* ZIndex.TableStickyColumn */
-}
-
-td.alwaysVisible:first-child {
-  left: 0;
-  box-sizing: border-box;
-  width: var(--pin-column-width);
-  min-width: var(--pin-column-width);
-}
-
-td.alwaysVisible:nth-child(2) {
-  left: var(--pin-column-width);
-}
-
-/* Sticky cells paint an opaque background that would otherwise hide the row
-   hover highlight, so re-apply the highlight to them while the row is hovered. */
-tbody tr:hover td.alwaysVisible {
-  background-color: var(--color-background-hover-opaque);
+  /* Sticky cells paint an opaque background that would otherwise hide the row
+     hover highlight, so re-apply the highlight to them while the row is hovered.
+     The body sticky-left cells carry no competing per-cell utility, but this rule
+     stays in the same layer for consistency (it still beats nothing, and would lose
+     to any future direct utility on the cell). */
+  tbody tr:hover td.alwaysVisible {
+    background-color: var(--muted);
+  }
 }

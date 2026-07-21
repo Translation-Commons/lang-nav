@@ -26,12 +26,12 @@ const LanguagePopulationBreakdownButton: React.FC<{ lang: LanguageData }> = ({ l
   return (
     <>
       <HoverableButton
-        style={{ marginLeft: '0.5em', padding: '0.25em', fontWeight: 'normal' }}
+        className="ml-2 p-1 font-normal"
         onClick={() => setShowPopulationBreakdown(!showPopulationBreakdown)}
       >
         {showPopulationBreakdown ? 'hide' : 'show'} breakdown
       </HoverableButton>
-      {showPopulationBreakdown && <div style={{ margin: '0em 1em 1em 1em' }}>{breakdown}</div>}
+      {showPopulationBreakdown && <div className="mt-0 mr-4 mb-4 ml-4">{breakdown}</div>}
     </>
   );
 };

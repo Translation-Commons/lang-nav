@@ -7,7 +7,7 @@ import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/Obje
 import { getObjectSubtitle } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 type Props = {
   object: ObjectData;
@@ -40,6 +40,10 @@ const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = true
   }
   const subtitles = [objectSubtitle, searchNamesSubtitle].filter(Boolean);
 
+  if (subtitles.length === 0) {
+    return null;
+  }
+
   return (
     <SubtitleContainer style={style}>
       <CommaSeparated limit={null}>{subtitles}</CommaSeparated>
@@ -52,16 +56,7 @@ const SubtitleContainer: React.FC<React.PropsWithChildren<{ style?: React.CSSPro
   style,
 }) => {
   return (
-    <div
-      style={{
-        color: 'var(--color-text-secondary)',
-        fontSize: '0.6em',
-        fontStyle: 'italic',
-        fontWeight: 'normal',
-        marginTop: 0,
-        ...style,
-      }}
-    >
+    <div className="text-muted-foreground text-[0.6em] italic font-normal mt-0" style={style}>
       {children}
     </div>
   );

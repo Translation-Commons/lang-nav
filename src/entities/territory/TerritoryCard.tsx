@@ -4,11 +4,11 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
@@ -25,9 +25,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={territory} />
-      </div>
+      <CardTitleBlock object={territory} />
       <CardField
         title="Territory Type"
         field={Field.TerritoryScope}

@@ -5,7 +5,7 @@ import Field from '@features/transforms/fields/Field';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 function getKeyboardColumns(): TableColumn<KeyboardData>[] {
   return [
@@ -35,7 +35,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
           object={object.inputWritingSystem}
           style={
             object.inputScriptCode === object.outputScriptCode
-              ? { color: 'var(--color-text)' }
+              ? { color: 'var(--foreground)' }
               : undefined
           }
         />
@@ -50,7 +50,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
           object={object.outputWritingSystem}
           style={
             object.inputScriptCode === object.outputScriptCode
-              ? { color: 'var(--color-text)' }
+              ? { color: 'var(--foreground)' }
               : undefined
           }
         />

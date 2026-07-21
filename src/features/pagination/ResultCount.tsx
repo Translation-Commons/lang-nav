@@ -5,7 +5,7 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 const ResultCount: React.FC = () => {
   const { filteredEntities } = useFilteredEntities({});
   return (
-    <span style={{ color: 'var(--color-text)', whiteSpace: 'nowrap' }}>
+    <span className="text-foreground whitespace-nowrap">
       {filteredEntities.length.toLocaleString()} Results{' '}
     </span>
   );

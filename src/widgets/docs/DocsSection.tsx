@@ -2,11 +2,8 @@ import { ReactNode } from 'react';
 
 function DocsSection({ title, children }: { title: string; children: ReactNode }) {
   return (
-    <section
-      id={title.toLowerCase().replace(/\s+/g, '-')}
-      style={{ display: 'flex', flexDirection: 'column', gap: '0.5em', marginBottom: '1em' }}
-    >
-      <h2 style={{ margin: 0 }}>{title}</h2>
+    <section id={title.toLowerCase().replace(/\s+/g, '-')} className="mb-4 flex flex-col gap-2">
+      <h2 className="m-0">{title}</h2>
       {children}
     </section>
   );

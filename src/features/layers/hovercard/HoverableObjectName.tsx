@@ -17,6 +17,7 @@ type Props = {
     | 'locale without territory'
     | 'name and code';
   format?: 'text' | 'button';
+  className?: string;
   style?: React.CSSProperties;
 };
 
@@ -24,6 +25,7 @@ const HoverableObjectName: React.FC<Props> = ({
   object,
   labelSource = 'name',
   format = 'text',
+  className,
   style,
 }) => {
   if (!object) return null;
@@ -44,7 +46,9 @@ const HoverableObjectName: React.FC<Props> = ({
 
   return (
     <HoverableObject object={object}>
-      <span style={style}>{format === 'text' ? label : <button>{label}</button>}</span>
+      <span className={className} style={style}>
+        {format === 'text' ? label : <button>{label}</button>}
+      </span>
     </HoverableObject>
   );
 };

@@ -22,8 +22,8 @@ import {
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-import { PercentageDifference } from '@shared/ui/PercentageDifference';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import { PercentageDifference } from '@shared/ui/old/PercentageDifference';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
@@ -200,12 +200,12 @@ const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actua
   if (actualLocale == null) {
     return (
       <Deemphasized>
-        <span style={{ fontSize: '0.8em' }}>not found</span>
+        <span className="text-[0.8em]">not found</span>
       </Deemphasized>
     );
   }
   return (
-    <HoverableObject object={actualLocale} style={{ verticalAlign: 'middle' }}>
+    <HoverableObject object={actualLocale} className="align-middle">
       <InfoIcon size="1em" display="block" />
     </HoverableObject>
   );

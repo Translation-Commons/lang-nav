@@ -17,8 +17,8 @@ import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHi
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';

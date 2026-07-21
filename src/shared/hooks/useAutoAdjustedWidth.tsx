@@ -17,15 +17,7 @@ export const useAutoAdjustedWidth = (
   }, [value]);
 
   const CalculateWidthFromHere = (
-    <span
-      ref={endCapRef}
-      style={{
-        position: 'absolute',
-        visibility: 'hidden',
-        whiteSpace: 'pre',
-        font: 'inherit',
-      }}
-    >
+    <span ref={endCapRef} className="absolute invisible whitespace-pre [font:inherit]">
       {value || ' '}
     </span>
   );

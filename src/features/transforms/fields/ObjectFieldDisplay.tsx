@@ -14,8 +14,8 @@ import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import DecimalNumber from '@shared/ui/DecimalNumber';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';

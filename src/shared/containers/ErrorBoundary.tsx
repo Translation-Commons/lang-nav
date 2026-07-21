@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { Button } from '@shared/ui/button';
+
 interface ErrorBoundaryProps {
   children: React.ReactNode;
 }
@@ -40,13 +42,13 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
 
 const ErrorFallback: React.FC<{ message: string }> = ({ message }) => {
   return (
-    <div style={{ height: '100vh', textAlign: 'center', paddingTop: '20vh' }}>
+    <div className="h-screen pt-[20vh] text-center">
       <h2>Something went wrong.</h2>
       <p>Please try refreshing the page or contact support if the issue persists.</p>
       <p>{message}</p>
-      <button onClick={() => window.location.reload()} style={{ padding: '0.5em 1em' }}>
+      <Button variant="outline" onClick={() => window.location.reload()}>
         Refresh Page
-      </button>
+      </Button>
     </div>
   );
 };

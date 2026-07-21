@@ -7,7 +7,7 @@ import { VariantData } from '@entities/variant/VariantTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
 

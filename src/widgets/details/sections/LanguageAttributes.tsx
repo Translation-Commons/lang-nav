@@ -9,7 +9,7 @@ import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralG
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 
@@ -40,9 +40,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
         </DetailsField>
       )}
       <DetailsField title="Plural Categories">
-        <div
-          style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}
-        >
+        <div className="inline-flex flex-wrap items-start gap-2">
           <LanguagePluralCategories lang={lang} />
           <LanguagePluralGridButton lang={lang} />
         </div>

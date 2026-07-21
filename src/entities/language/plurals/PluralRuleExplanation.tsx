@@ -5,7 +5,8 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 import useCopyToClipboard from '@shared/hooks/useCopyToClipboard';
-import LinkButton from '@shared/ui/LinkButton';
+import { cn } from '@shared/lib/utils';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import { getConditionFunction } from './LanguagePluralComputation';
 import PluralRuleSymbolExplanation, { SymbolToLabel } from './PluralRuleSymbolExplanation';
@@ -22,16 +23,16 @@ const PluralRuleExplanation: React.FC<{ rule: string; exampleNum?: string | numb
     .slice(1);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
+    <div className="flex flex-col gap-4">
       {conditions.trim() && (
         <div>
           <strong>Equation:</strong>
           <HoverableButton
             onClick={() => copy(conditions)}
             aria-label="Copy conditions"
-            style={{ marginLeft: '0.5em', padding: '0.25em' }}
+            className="ml-2 p-1"
           >
-            <CopyIcon size="1em" style={{ display: 'block' }} />
+            <CopyIcon size="1em" className="block" />
           </HoverableButton>{' '}
           <FormattedConditions conditions={conditions} exampleNum={exampleNum} />
         </div>
@@ -75,25 +76,14 @@ const FormattedConditions: React.FC<{ conditions: string; exampleNum?: string | 
     return <FormattedAndConditions conditions={conditions} exampleNum={exampleNum} />;
   }
   return (
-    <div style={{ display: 'flex', gap: '0.5em', flexWrap: 'wrap', flexDirection: 'column' }}>
+    <div className="flex gap-2 flex-wrap flex-col">
       {orConditions.map((conditions, index) => (
-        <div key={index} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
-          <div
-            style={{
-              border: '1px solid var(--color-text)',
-              height: '100%',
-              borderRadius: '0.25em',
-              borderTop: 0,
-              borderBottom: 0,
-              padding: '0 0.5em',
-            }}
-          >
+        <div key={index} className="inline-flex items-center gap-1">
+          <div className="border border-foreground h-full rounded-[0.25em] border-t-0 border-b-0 py-0 px-2">
             <FormattedAndConditions conditions={conditions} exampleNum={exampleNum} />
           </div>
 
-          {index < orConditions.length - 1 && (
-            <div style={{ color: 'var(--color-text-secondary)' }}>or</div>
-          )}
+          {index < orConditions.length - 1 && <div className="text-muted-foreground">or</div>}
         </div>
       ))}
     </div>
@@ -110,13 +100,11 @@ const FormattedAndConditions: React.FC<{ conditions: string; exampleNum?: string
     return <FormattedCondition condition={conditions} exampleNum={exampleNum} />;
   }
   return (
-    <div style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'center', gap: '0.25em' }}>
+    <div className="inline-flex flex-wrap items-center gap-1">
       {andConditions.map((cond, index) => (
         <Fragment key={index}>
-          {index > 0 && (
-            <span style={{ color: 'var(--color-text-secondary)', padding: '0 0.25em' }}>and</span>
-          )}
-          <div style={{ textWrap: 'nowrap' }}>
+          {index > 0 && <span className="text-muted-foreground py-0 px-1">and</span>}
+          <div className="[text-wrap:nowrap]">
             (<FormattedCondition key={index} condition={cond} exampleNum={exampleNum} />)
           </div>
         </Fragment>
@@ -134,7 +122,10 @@ const FormattedCondition: React.FC<{ condition: string; exampleNum?: string | nu
   return (
     <>
       {symbols.map((symbol, i) => (
-        <span style={{ padding: '0 0.25em' }} key={i} className={passes ? 'highlighted' : ''}>
+        <span
+          key={i}
+          className={cn('py-0 px-1', passes && 'rounded-xs bg-yellow-200 dark:bg-yellow-900')}
+        >
           <SymbolToFormat symbol={symbol} />
         </span>
       ))}
@@ -170,7 +161,7 @@ function SymbolToFormat({ symbol }: { symbol: string }): ReactNode {
     case 'e': // a deprecated synonym for ‘c’. Note: it may be redefined in the future.
       return <Hoverable hoverContent={<SymbolToLabel symbol="e" />}>e</Hoverable>;
     default:
-      return <div style={{ display: 'inline-block', color: 'var(--color-red)' }}>{symbol}</div>;
+      return <div className="inline-block text-red">{symbol}</div>;
   }
 }
 
@@ -189,7 +180,7 @@ const SymbolsExplanation: React.FC<{ conditions: string; exampleNum?: string | n
   return (
     <div>
       <strong>Equation Symbols: </strong>
-      <ul style={{ margin: '0.25em 0 0 1em', padding: 0 }}>
+      <ul className="mt-1 mr-0 mb-0 ml-4 p-0">
         {symbolsPresent.map((symbol) => (
           <li key={symbol}>
             <code>{symbol}</code>:{' '}

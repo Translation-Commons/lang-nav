@@ -7,13 +7,14 @@ import PageNavBar from '@widgets/PageNavBar';
 
 import ConsentBanner from '@features/consent/ConsentBanner';
 import useConsent from '@features/consent/useConsent';
-import HoverCardProvider from '@features/layers/hovercard/HoverCardProvider';
 import PageParamsProvider from '@features/params/PageParamsProvider';
 import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
+import { cn } from '@shared/lib/utils';
+import { TooltipProvider } from '@shared/ui/tooltip';
 
-import PageRoutes from './PageRoutes';
+import PageRoutes, { LangNavPageName } from './PageRoutes';
 
 function AmplitudeTracker() {
   const location = useLocation();
@@ -43,20 +44,33 @@ function AmplitudeTracker() {
 }
 
 function App() {
+  const location = useLocation();
+  // On lg+ the Data page is a fixed-height app shell: its interior view scrolls, the page does not.
+  // Below lg (and on every other page) the shell keeps the natural min-height document flow so the
+  // whole page scrolls and the footer flows after the content.
+  const isDataPage = location.pathname.replace(/\/+$/, '') === '/' + LangNavPageName.Data;
+
   return (
-    <PageParamsProvider>
-      <DeferredDataProvider>
-        <HoverCardProvider>
-          <AmplitudeTracker />
-          <PageNavBar />
-          <div style={{ flex: 1, minWidth: 0 }}>
-            <PageRoutes />
+    <TooltipProvider delay={300}>
+      <PageParamsProvider>
+        <DeferredDataProvider>
+          <div
+            className={cn(
+              'flex min-h-screen flex-col',
+              isDataPage && 'lg:h-dvh lg:min-h-0 lg:overflow-hidden',
+            )}
+          >
+            <AmplitudeTracker />
+            <PageNavBar />
+            <div className={cn('flex min-w-0 flex-1 flex-col', isDataPage && 'lg:min-h-0')}>
+              <PageRoutes />
+            </div>
+            <PageFooter />
+            <ConsentBanner />
           </div>
-          <PageFooter />
-          <ConsentBanner />
-        </HoverCardProvider>
-      </DeferredDataProvider>
-    </PageParamsProvider>
+        </DeferredDataProvider>
+      </PageParamsProvider>
+    </TooltipProvider>
   );
 }
 

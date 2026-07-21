@@ -11,10 +11,6 @@ import TableColumnSelector from '../TableColumnSelector';
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({ hideHoverCard: vi.fn() }),
-}));
-
 beforeEach(() => {
   vi.clearAllMocks();
   cleanup();
@@ -70,13 +66,13 @@ describe('TableColumnSelector', () => {
     // Open the modal
     fireEvent.click(screen.getByText(/columns visible/i));
 
-    const populationCheckbox = screen.getByLabelText('Population') as HTMLInputElement;
-    const nameCheckbox = screen.getByLabelText('Name') as HTMLInputElement;
+    const populationCheckbox = screen.getByRole('checkbox', { name: 'Population' });
+    const nameCheckbox = screen.getByRole('checkbox', { name: 'Name' });
 
     // 'Population' visible via columnVisibility
-    expect(populationCheckbox.checked).toBe(true);
+    expect(populationCheckbox).toBeChecked();
     // 'Name' used to be considered checked because sortBy === column.sortParam -- but it does separately
-    expect(nameCheckbox.checked).toBe(false);
+    expect(nameCheckbox).not.toBeChecked();
   });
 
   it('group header toggle calls toggleColumn for each column in the group and individual checkbox toggles call toggleColumn with only the key', () => {
@@ -116,7 +112,7 @@ describe('TableColumnSelector', () => {
     expect(setColumns).toHaveBeenCalledWith(['Population', 'Name'], false);
 
     // Clicking an individual checkbox should call toggleColumn with only the key
-    const idCheckbox = screen.getByLabelText('ID') as HTMLInputElement;
+    const idCheckbox = screen.getByRole('checkbox', { name: 'ID' });
     fireEvent.click(idCheckbox);
     expect(toggleColumn).toHaveBeenCalledWith('ID');
   });

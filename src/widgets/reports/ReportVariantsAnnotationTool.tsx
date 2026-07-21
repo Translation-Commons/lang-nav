@@ -65,10 +65,7 @@ const ReportVariantsAnnotationTool: React.FC = () => {
         variants={viewedVariants}
         addToChangedVariants={addToChangedVariants}
       />
-      <button
-        onClick={copyAnnotatedVariants}
-        style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}
-      >
+      <button onClick={copyAnnotatedVariants} className="flex items-center gap-2">
         <CopyIcon size="1em" />
         Copy annotated variants ({changedVariants.length})
       </button>

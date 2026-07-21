@@ -3,10 +3,10 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import CardTitleBlock from '@entities/ui/CardTitleBlock';
 
 import CardField from '@shared/containers/CardField';
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { CensusData } from './CensusTypes';
 
@@ -31,9 +31,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
 
   return (
     <div>
-      <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={census} />
-      </div>
+      <CardTitleBlock object={census} />
       <CardField
         title="Territory"
         field={Field.Territory}
@@ -52,7 +50,7 @@ const CensusCard: React.FC<Props> = ({ census }) => {
           {census.presenter && (
             <>
               {' '}
-              via <HoverableObjectName object={census.presenter} style={{ display: 'inline' }} />
+              via <HoverableObjectName object={census.presenter} />
             </>
           )}
         </div>

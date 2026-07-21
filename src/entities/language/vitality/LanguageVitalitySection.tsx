@@ -3,7 +3,7 @@ import React from 'react';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import DetailsSection from '@shared/containers/DetailsSection';
-import ArcGauge from '@shared/ui/ArcGauge';
+import ArcGauge from '@shared/ui/old/ArcGauge';
 
 import { getVitalityScore } from './LanguageVitalityComputation';
 import { getVitalityLabel } from './VitalityStrings';
@@ -14,15 +14,7 @@ const LanguageVitalitySection: React.FC<{ lang: LanguageData }> = ({ lang }) => 
 
   return (
     <DetailsSection title="Vitality">
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '2em',
-          marginTop: 'auto',
-          paddingBottom: '0.5em',
-        }}
-      >
+      <div className="flex justify-center gap-8 mt-auto pb-2">
         <ArcGauge value={null} max={9} label={'Digital Support'} sublabel="Coming Soon" />
         <ArcGauge
           value={isoScore}

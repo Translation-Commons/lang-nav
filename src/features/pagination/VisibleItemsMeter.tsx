@@ -13,7 +13,7 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';
@@ -64,20 +64,12 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   return (
     <div>
       <HighLimitWarning nShown={nShown} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '0.25em',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
+      <div className="flex flex-row flex-wrap justify-center gap-1">
         <div>
           Showing{' '}
           <Hoverable
             hoverContent={
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
+              <div className="flex flex-col gap-2">
                 <div>Set the maximum number of results that can appear.</div>
                 <LimitSelector />
               </div>
@@ -118,13 +110,10 @@ const HighLimitWarning: React.FC<{ nShown: number }> = ({ nShown }) => {
 
   return (
     <div>
-      <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} />
+      <TriangleAlertIcon size="1em" className="text-yellow" />
       There are <strong>{nShown?.toLocaleString()}</strong> items visible, this may impact page
       performance. Consider reducing the limit to{' '}
-      <HoverableButton
-        onClick={() => updatePageParams({ limit: threshold })}
-        style={{ padding: '0 0.25em' }}
-      >
+      <HoverableButton onClick={() => updatePageParams({ limit: threshold })} className="px-1 py-0">
         {threshold}
       </HoverableButton>
       .

@@ -30,6 +30,6 @@ export function getPluralRuleColor(key: PluralRuleKey): string {
     case PluralRuleKey.Many:
       return 'var(--color-red)';
     case PluralRuleKey.Other:
-      return 'var(--color-button-secondary)';
+      return 'var(--secondary)';
   }
 }

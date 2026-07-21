@@ -3,6 +3,8 @@ import React, { ReactNode, useCallback, useState } from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import ModalCard from '@features/layers/modal/ModalCard';
 
+import { cn } from '@shared/lib/utils';
+
 type Props = {
   buttonLabel: ReactNode;
   description?: ReactNode;
@@ -25,10 +27,9 @@ const ModalButton: React.FC<Props> = ({
   return (
     <>
       <HoverableButton
-        className={buttonClassName}
+        className={cn('px-2 py-1', buttonClassName)}
         onClick={open}
         hoverContent={description}
-        style={{ padding: '0.25em 0.5em' }}
       >
         {buttonLabel}
       </HoverableButton>

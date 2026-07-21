@@ -22,7 +22,7 @@ import {
 } from '@entities/ui/ObjectWikipediaInfo';
 import Win11LanguagePackSupportStatus from '@entities/ui/Win11LanguagePackSupportStatus';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 const columns: TableColumn<LanguageData>[] = [
   // {
@@ -123,7 +123,7 @@ const columns: TableColumn<LanguageData>[] = [
     description: (
       <>
         Sources:
-        <ul style={{ margin: '0' }}>
+        <ul className="m-0">
           <li>
             <ExternalLink href="https://en.wikipedia.org/wiki/List_of_Wikipedias">
               List of Active and Closed Wikipedias

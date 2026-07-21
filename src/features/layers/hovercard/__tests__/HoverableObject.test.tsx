@@ -8,35 +8,20 @@ import HoverableObjectName from '../HoverableObjectName';
 
 const mockedObjects = getFullyInstantiatedMockedObjects();
 
-const showHoverCard = vi.fn();
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({
-    showHoverCard,
-    hideHoverCard: vi.fn(),
-    onMouseLeaveTriggeringElement: vi.fn(),
-  }),
+vi.mock('@features/params/usePageParams', () => ({
+  default: vi.fn().mockReturnValue({ updatePageParams: vi.fn() }),
 }));
-vi.mock('@features/params/usePageParams', () => ({ default: vi.fn().mockReturnValue({}) }));
 
 describe('HoverableObject', () => {
-  it('an undefined object will just render the child elements', () => {
+  it('an undefined object will just render the child elements without a trigger', () => {
     render(<HoverableObject object={undefined}>undefined object</HoverableObject>);
-
     expect(screen.getByText(/undefined object/)).toBeInTheDocument();
-    // hovering does not trigger hover card since object is undefined
-    screen
-      .getByText(/undefined object/)
-      .dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).not.toHaveBeenCalled();
+    expect(screen.queryByTestId('hoverable')).not.toBeInTheDocument();
   });
 
-  it('a defined object will have a hover interaction', () => {
+  it('a defined object renders its children inside a hoverable trigger', () => {
     render(<HoverableObject object={mockedObjects.sjn}>Sindarin</HoverableObject>);
-
-    expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
-    // move the cursor over the element to trigger the hover card
-    screen.getByText(/Sindarin/).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).toHaveBeenCalled();
+    expect(screen.getByTestId('hoverable')).toHaveTextContent('Sindarin');
   });
 });
 
@@ -46,12 +31,9 @@ describe('HoverableObjectName', () => {
     expect(screen.queryByText(/./)).not.toBeInTheDocument();
   });
 
-  it('a defined object will render the object name with hover interaction', () => {
+  it('a defined object renders the object name', () => {
     render(<HoverableObjectName object={mockedObjects.sjn} />);
     expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
-    // move the cursor over the element to trigger the hover card
-    screen.getByText(/Sindarin/).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).toHaveBeenCalled();
   });
 
   it("instead of showing a name, the object's code can be shown", () => {
@@ -69,7 +51,7 @@ describe('HoverableObjectName', () => {
     expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
   });
 
-  it('locales can show just the language name if specified', () => {
+  it('locales can show the name without the territory if specified', () => {
     render(
       <HoverableObjectName
         object={mockedObjects.sjn_Teng_123}

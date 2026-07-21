@@ -9,8 +9,8 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 type Props = {
   writingSystem: WritingSystemData;

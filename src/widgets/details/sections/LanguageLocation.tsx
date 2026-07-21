@@ -15,8 +15,8 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import Deemphasized from '@shared/ui/Deemphasized';
-import Pill from '@shared/ui/Pill';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import Pill from '@shared/ui/old/Pill';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
@@ -95,7 +95,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
         {drawableNodes.length > 1 ? ' and its constituents' : ''}. It does not capture every
         location that the {getLanguageScopeLabel(lang.scope).toLowerCase()} is used.{' '}
         <HoverableButton
-          style={{ padding: '0.25em', display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}
+          className="inline-flex items-center gap-1 p-1"
           onClick={() =>
             updatePageParams({
               view: View.Map,
@@ -107,12 +107,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
         </HoverableButton>{' '}
         {drawableNodes.length > 1 && (
           <HoverableButton
-            style={{
-              padding: '0.25em',
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: '0.25em',
-            }}
+            className="inline-flex items-center gap-1 p-1"
             onClick={() => setShowConstituents((prev) => !prev)}
             hoverContent={showConstituents ? 'Hide constituents' : 'Show constituents'}
           >
@@ -127,7 +122,7 @@ function Maps({ lang, updatePageParams }: MapsProps) {
           </HoverableButton>
         )}
       </div>
-      <div style={{ margin: '.5em 0' }}>
+      <div className="my-2">
         <EntityMap entities={showConstituents ? drawableNodes : [lang]} maxWidth={1000} />
       </div>
       {showConstituents && drawableNodes.length > 1 && (

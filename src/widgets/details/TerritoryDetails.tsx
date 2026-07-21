@@ -9,7 +9,7 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import TerritoryAttributes from './sections/TerritoryAttributes';
 import TerritoryIdentification from './sections/TerritoryIdentification';

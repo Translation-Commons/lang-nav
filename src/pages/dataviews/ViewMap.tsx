@@ -20,7 +20,7 @@ import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 function ViewMap() {
   const { colorBy, objectType } = usePageParams();
@@ -48,12 +48,12 @@ function ViewMap() {
 
   return (
     <MapContainer>
-      <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
+      <h2 className="m-0">{toTitleCase(objectType)} Map</h2>
       <div>{getMapDescription(objectType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter objects={allEntities} />}
       <EntityMap entities={filteredEntities} allowSidebar={true} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-        <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
+        <div className="flex items-center gap-2">
           <div>
             {colorBy === Field.None ? `You can color the shapes by:` : `Shapes are colored by `}
           </div>

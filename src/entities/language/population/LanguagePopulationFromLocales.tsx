@@ -11,7 +11,7 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import CellPopulation from '@shared/containers/CellPopulation';
 import { groupBy, sumBy } from '@shared/lib/setUtils';
-import CountOfPeople from '@shared/ui/CountOfPeople';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -80,7 +80,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<{ lang: LanguageDa
             objectType: ObjectType.Locale,
           })
         }
-        style={{ display: 'block' }}
+        className="block"
       >
         See more details in the locale table
       </HoverableButton>

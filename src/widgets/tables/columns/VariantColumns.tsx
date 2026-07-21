@@ -11,7 +11,7 @@ import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
 import { VariantData } from '@entities/variant/VariantTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
 

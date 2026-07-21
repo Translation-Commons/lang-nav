@@ -10,12 +10,17 @@ type Props = PropsWithChildren<{
   description: React.ReactNode;
 }>;
 
+/**
+ * A single data row on an entity card. A fixed icon gutter (top-aligned to the first line of the
+ * value) sits beside the value, which lives in its own column so long values wrap cleanly instead
+ * of flowing back under the icon.
+ */
 const CardField: React.FC<Props> = ({ children, title, field, description }) => {
   return (
-    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.5em', gap: '0.5em' }}>
+    <div className="mb-2 grid grid-cols-[1rem_1fr] items-start gap-x-2">
       <span
         aria-label={title + ': ' + description}
-        style={{ display: 'inline-flex', verticalAlign: 'middle' }}
+        className="text-muted-foreground mt-[0.15rem] inline-flex"
       >
         <Hoverable
           hoverContent={
@@ -27,7 +32,7 @@ const CardField: React.FC<Props> = ({ children, title, field, description }) => 
           <FieldIcon field={field} />
         </Hoverable>
       </span>
-      {children}
+      <div className="min-w-0 text-[0.8rem] leading-snug">{children}</div>
     </div>
   );
 };

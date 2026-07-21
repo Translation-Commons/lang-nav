@@ -15,8 +15,8 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
 import { unique } from '@shared/lib/setUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLanguageTreeNodes } from '../treelists/LanguageHierarchy';
 
@@ -71,7 +71,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
           be removed.
         </li>
       </ol>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1em' }}>
+      <div className="flex items-center gap-4">
         <LimitInput />
         <PaginationControls itemCount={Object.keys(langsWithDupNames).length} />
       </div>
@@ -82,8 +82,8 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
           return aData != null && bData != null ? sortFunction(aData, bData) : 0;
         }),
       ).map(([name, langs]) => (
-        <div key={name} style={{ marginBottom: '1em' }}>
-          <h3 style={{ marginBottom: 0 }}>{name}</h3>
+        <div key={name} className="mb-4">
+          <h3 className="mb-0">{name}</h3>
           <div className="CardList">
             <ResponsiveGrid>
               {langs.map((lang) => {

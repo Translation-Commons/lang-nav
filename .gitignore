@@ -43,3 +43,7 @@ CLAUDE.md
 # Screenshot update artifacts (local review only)
 public/current/
 public/diff/
+
+# Local design/scratch artifacts
+card-variants.html
+--full-page

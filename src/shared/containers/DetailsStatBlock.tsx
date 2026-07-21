@@ -1,14 +1,12 @@
 import React from 'react';
 
-import Deemphasized from '@shared/ui/Deemphasized';
-
 const DetailsStatBlock: React.FC<{ label: string; children: React.ReactNode }> = ({
   label,
   children,
 }) => (
-  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-    <div style={{ fontSize: '2em', fontWeight: 700, lineHeight: 1 }}>{children}</div>
-    <Deemphasized>{label}</Deemphasized>
+  <div className="flex flex-col items-center gap-1 rounded-lg border border-border bg-muted/40 p-3">
+    <div className="text-2xl leading-none font-bold">{children}</div>
+    <span className="text-sm text-muted-foreground">{label}</span>
   </div>
 );
 

@@ -18,12 +18,12 @@ import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import DecimalNumber from '@shared/ui/DecimalNumber';
-import Deemphasized from '@shared/ui/Deemphasized';
-import { PercentageDifference } from '@shared/ui/PercentageDifference';
-import Pill from '@shared/ui/Pill';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import DecimalNumber from '@shared/ui/old/DecimalNumber';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import { PercentageDifference } from '@shared/ui/old/PercentageDifference';
+import Pill from '@shared/ui/old/Pill';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
@@ -136,13 +136,13 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
         <DetailsField title={`Population Adjusted to ${TerritoryDataYear}`}>
           <LocalePopulationAdjusted locale={locale} />
           <HoverableButton
-            style={{ marginLeft: '0.5em', padding: '0.25em', fontWeight: 'normal' }}
+            className="ml-2 p-1 font-normal"
             onClick={() => setShowPopulationBreakdown(!showPopulationBreakdown)}
           >
             {showPopulationBreakdown ? 'hide' : 'show'} breakdown
           </HoverableButton>
           {showPopulationBreakdown && (
-            <div style={{ margin: '0em 1em 1em 1em' }}>
+            <div className="mt-0 mr-4 mb-4 ml-4">
               <LocalePopulationBreakdown locale={locale} />
             </div>
           )}
@@ -160,7 +160,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {pop.speaking.percent != null && (
         <DetailsField
           title={
-            <span style={{ marginLeft: '2em' }}>
+            <span className="ml-8">
               % in {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
             </span>
           }
@@ -179,7 +179,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {pop.writing.percent != null && (
         <DetailsField
           title={
-            <span style={{ marginLeft: '2em' }}>
+            <span className="ml-8">
               % in {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
             </span>
           }
@@ -190,7 +190,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
       {censusRecords && censusRecords.length > 0 && (
         <DetailsField title="Other Censuses">
-          <table style={{ marginLeft: '2em', borderSpacing: '1em 0' }}>
+          <table className="ml-8 [border-spacing:1em_0]">
             <thead>
               <tr>
                 <th>Population</th>
@@ -204,16 +204,16 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 .sort((a, b) => b.populationPercent - a.populationPercent)
                 .map((censusEstimate) => (
                   <tr key={censusEstimate.census.ID}>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className="text-right">
                       <CountOfPeople count={censusEstimate.populationEstimate} />
                     </td>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className="text-right">
                       <DecimalNumber num={censusEstimate.populationPercent} />%
                     </td>
                     <td>
                       <HoverableObjectName object={censusEstimate.census} />
                     </td>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className="text-right">
                       <PercentageDifference
                         percentNew={censusEstimate.populationPercent}
                         percentOld={pop.speaking.percent}

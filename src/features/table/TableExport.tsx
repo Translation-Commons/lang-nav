@@ -1,7 +1,6 @@
 import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
 import React, { useCallback, useState } from 'react';
 
-import EmptyHoverCardProvider from '@features/layers/hovercard/EmptyHoverCardProvider';
 import { PageParamsContext } from '@features/params/PageParamsContext';
 import { ObjectType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
@@ -12,7 +11,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';
-import LoadingIcon from '@shared/ui/LoadingIcon';
+import LoadingIcon from '@shared/ui/old/LoadingIcon';
 
 import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';
@@ -80,7 +79,7 @@ function TableExport<T extends ObjectData>({ visibleColumns, entities }: Props<T
             return reactNodeToString(
               // Optimistically convert React nodes to text
               <PageParamsContext.Provider value={pageParams}>
-                <EmptyHoverCardProvider>{render(obj)}</EmptyHoverCardProvider>
+                {render(obj)}
               </PageParamsContext.Provider>,
             );
           })
@@ -191,7 +190,7 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.DownloadUNESCO:
       return (
         <>
-          <DownloadIcon className="button-inline-icon" /> {exportType}
+          <DownloadIcon className="inline size-[1em] align-sub" /> {exportType}
         </>
       );
     case ExportType.CopyCSV:
@@ -200,13 +199,17 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.CopyCLDR:
       return (
         <>
-          <CopyIcon className="button-inline-icon" /> {exportType}
+          <CopyIcon className="inline size-[1em] align-sub" /> {exportType}
         </>
       );
     case ExportType.Unchosen:
       return (
         <>
-          {isExporting ? <LoadingIcon /> : <ExternalLinkIcon className="button-inline-icon" />}{' '}
+          {isExporting ? (
+            <LoadingIcon />
+          ) : (
+            <ExternalLinkIcon className="inline size-[1em] align-sub" />
+          )}{' '}
           {exportType}
         </>
       );

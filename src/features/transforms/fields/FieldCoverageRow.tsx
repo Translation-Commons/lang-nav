@@ -4,7 +4,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
-import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
+import BackgroundProgressBar from '@shared/ui/old/BackgroundProgressBar';
 
 import BaseColorBar from '../coloring/BaseColorBar';
 import getColorGradientForField from '../coloring/getColorGradientForField';
@@ -42,7 +42,7 @@ const FieldCoverageRow: React.FC<{
           return <FieldColorBar key={transform} field={field} hasField={hasField} />;
         }
         return (
-          <td key={transform} style={{ textAlign: 'center' }}>
+          <td key={transform} className="text-center">
             {hasField ? '✓' : ''}
           </td>
         );
@@ -73,7 +73,7 @@ const FieldEntityCoverageCell: React.FC<{
   const isUninteresting = UNINTERESTING_FIELD_COMBINATIONS[entityType]?.includes(field);
   const missingColumn = (isApplicable || hasData) && !hasColumn;
   return (
-    <td key={entityType} style={{ textAlign: 'center' }}>
+    <td key={entityType} className="text-center">
       <BackgroundProgressBar
         percentage={dataCompleteness}
         backgroundColor={
@@ -122,20 +122,11 @@ const FieldEntityCoverageCell: React.FC<{
 
 const FieldColorBar: React.FC<{ field: Field; hasField: boolean }> = ({ field, hasField }) => {
   return (
-    <td style={{ position: 'relative', textAlign: 'center' }}>
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'var(--color-primary)',
-        }}
-      >
+    <td className="relative text-center">
+      <div className="absolute inset-0 bg-primary">
         <BaseColorBar colorGradient={getColorGradientForField(field)} />
       </div>
-      <span style={{ zIndex: 1, position: 'relative', color: 'black' }}>{hasField ? '✓' : ''}</span>
+      <span className="relative z-[1] text-black">{hasField ? '✓' : ''}</span>
     </td>
   );
 };

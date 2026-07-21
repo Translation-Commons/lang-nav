@@ -5,9 +5,9 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 const ObjectWikipediaInfo: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
@@ -52,9 +52,7 @@ export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ obje
   const { wikipedias } = object;
   if (!wikipedias || wikipedias.length === 0) return <Deemphasized>No wiki</Deemphasized>;
 
-  return (
-    <span style={{ color: getStatusColor(wikipedias[0].status) }}>{wikipedias[0].status}</span>
-  );
+  return <span className={getStatusColorClass(wikipedias[0].status)}>{wikipedias[0].status}</span>;
 };
 
 export const WikipediaArticles: React.FC<{ object?: ObjectData }> = ({ object }) => {
@@ -87,14 +85,14 @@ export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }>
   );
 };
 
-export function getStatusColor(status: WikipediaStatus) {
+export function getStatusColorClass(status: WikipediaStatus) {
   switch (status) {
     case WikipediaStatus.Active:
-      return 'var(--color-green)';
+      return 'text-green';
     case WikipediaStatus.Closed:
-      return 'var(--color-red)';
+      return 'text-red';
     case WikipediaStatus.Incubator:
-      return 'var(--color-yellow)';
+      return 'text-yellow';
   }
 }
 

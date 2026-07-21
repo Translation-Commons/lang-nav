@@ -2,19 +2,10 @@ import React, { PropsWithChildren, ReactNode } from 'react';
 
 const DetailsSection: React.FC<PropsWithChildren<{ title: ReactNode }>> = ({ children, title }) => {
   return (
-    <div
-      style={{
-        marginBottom: '1em',
-        border: '1px solid var(--color-button-secondary)',
-        borderRadius: '0.5em',
-        padding: '1em',
-        height: '100%',
-        boxSizing: 'border-box',
-        display: 'flex',
-        flexDirection: 'column',
-      }}
-    >
-      <h3 style={{ marginBottom: '0em', textTransform: 'uppercase' }}>{title}</h3>
+    <div className="mb-4 flex h-full flex-col rounded-lg border border-border bg-card p-4">
+      <h3 className="mb-1 text-sm font-semibold tracking-wide text-muted-foreground uppercase">
+        {title}
+      </h3>
       {children}
     </div>
   );

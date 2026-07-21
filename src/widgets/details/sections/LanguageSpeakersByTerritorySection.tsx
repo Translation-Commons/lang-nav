@@ -8,8 +8,8 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import DetailsSection from '@shared/containers/DetailsSection';
 import { uniqueBy } from '@shared/lib/setUtils';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
@@ -35,21 +35,16 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
   return (
     <DetailsSection title={getLanguageModalityUserLabel(lang.modality) + ' by Territory'}>
       <div
+        className="grid grid-flow-col gap-x-8 gap-y-2"
         style={{
-          display: 'grid',
-          gap: '0.5em 2em',
           gridTemplateColumns: `repeat(${locales.length > 1 ? 2 : 1}, 1fr)`,
           gridTemplateRows: `repeat(${rows}, auto)`,
-          gridAutoFlow: 'column',
         }}
       >
         {top10.map((locale) => (
-          <div
-            key={locale.ID}
-            style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
-          >
+          <div key={locale.ID} className="flex items-center justify-between">
             <HoverableObjectName object={locale} labelSource="territory" />
-            <span style={{ textAlign: 'end' }}>
+            <span className="text-end">
               <CountOfPeople count={locale.pop.speaking.adjusted} />
               {locale.pop.speaking.percent != null && (
                 <Deemphasized> ({locale.pop.speaking.percent.toFixed(1)}%)</Deemphasized>

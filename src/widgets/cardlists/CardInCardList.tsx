@@ -4,9 +4,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import PinButton from '@shared/ui/PinButton';
-
-import './cardListStyles.css';
+import { Card } from '@shared/ui/card';
+import PinButton from '@shared/ui/old/PinButton';
 
 interface Props {
   children: React.ReactNode;
@@ -52,20 +51,27 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
   );
 
   return (
-    <div
+    <Card
       aria-label={`${object.nameDisplay} card, click to open details`}
-      className={`CardInCardList ${object.ID === objectID ? 'selected' : ''}`}
+      role="button"
+      tabIndex={0}
+      data-selected={object.ID === objectID}
+      className="CardInCardList group bg-card relative cursor-pointer border p-4 text-start shadow-none ring-0 transition-colors hover:border-primary/50 data-[selected=true]:border-primary data-[selected=true]:bg-primary/5"
       onClick={handleClick}
       onKeyDown={handleKeyDown}
-      role="button"
       style={{
-        backgroundColor: getBackgroundColor ? (getBackgroundColor(object) ?? 'inherit') : undefined,
+        // Only override the elevated card surface when a coloring is active; otherwise fall through
+        // to bg-card so the card reads as raised above the page background.
+        backgroundColor: getBackgroundColor ? getBackgroundColor(object) : undefined,
       }}
-      tabIndex={0}
     >
-      <PinButton isPinned={isPinned} onTogglePin={togglePin} />
+      <PinButton
+        className={`absolute top-2 right-2 z-10 ${isPinned ? '' : 'invisible group-hover:visible'}`}
+        isPinned={isPinned}
+        onTogglePin={togglePin}
+      />
       {children}
-    </div>
+    </Card>
   );
 };
 

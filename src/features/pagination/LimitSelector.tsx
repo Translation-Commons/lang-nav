@@ -4,6 +4,9 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
+import { Button } from '@shared/ui/button';
+import { Input } from '@shared/ui/input';
+
 const LIMIT_OPTIONS: { [key: string]: number | undefined } = {
   '1': 1,
   '8': 8,
@@ -42,36 +45,22 @@ const LimitSelector: React.FC = () => {
         display={SelectorDisplay.ButtonList}
       />
       or pick it manually
-      <div
-        style={{
-          border: '2px solid var(--color-button-secondary)',
-          display: 'flex',
-          justifyContent: 'left',
-          width: 'fit-content',
-          borderRadius: '1em',
-          gap: '0.5em',
-        }}
-      >
-        <input
+      <div className="flex w-fit items-center gap-2">
+        <Input
           type="number"
+          className="w-20"
+          aria-label="Custom item limit"
           value={customInput ?? (limit === -1 ? '' : limit)}
           onChange={(e) => setCustomInput(e.target.value)}
-          style={{
-            width: '4em',
-            border: 'none',
-            lineHeight: '1.5em',
-            background: 'none',
-            marginLeft: '0.25em',
-          }}
           placeholder="∞"
         />
-        {/* Manual click because otherwise converting between a string and int causes an infinite loop  because of how useEffect*/}
-        <button
+        {/* Manual click because otherwise converting between a string and int causes an infinite loop because of how useEffect */}
+        <Button
+          variant={!selectedFromPresent ? 'default' : 'outline'}
           onClick={() => updatePageParams({ limit: parseInt(customInput || '') })}
-          className={!selectedFromPresent ? 'primary' : undefined}
         >
           Set Limit
-        </button>
+        </Button>
       </div>
     </>
   );

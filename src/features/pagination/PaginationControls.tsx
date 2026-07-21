@@ -7,8 +7,11 @@ import {
 } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
+
+import { Button } from '@shared/ui/button';
+import { Input } from '@shared/ui/input';
+import { Pagination, PaginationContent, PaginationItem } from '@shared/ui/pagination';
 
 type Props = {
   itemCount: number;
@@ -42,100 +45,91 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
 
   if (totalPages <= 1) return <></>;
 
-  const compactStyle: React.CSSProperties = {
-    lineHeight: '1.5',
-    padding: '0em 0.25em',
-    fontSize: '1em',
-    fontWeight: 'normal',
-    margin: '0 -0.125em',
-    borderRadius: '0',
-  };
-
   return (
-    <>
+    <span className="inline-flex items-center gap-1 align-middle">
       Page:
-      <div
-        className="selector"
-        style={{
-          marginBottom: 0,
-          marginLeft: '0.5em',
-          marginRight: '0.5em',
-          display: 'inline-flex',
-          verticalAlign: 'middle',
-          alignItems: 'normal',
-        }}
-      >
-        <button
-          onClick={setPageToBeginning}
-          disabled={currentPage === 1}
-          style={{ ...compactStyle, borderRadius: '1em 0 0 1em' }}
-        >
-          <SkipBackIcon size="1em" style={{ display: 'block' }} />
-        </button>
-        <HoverableButton
-          disabled={currentPage === 1}
-          hoverContent={
-            <>
-              Go to Previous Page.
-              <br />
-              Shortcut: Left Arrow Key ←
-            </>
-          }
-          onClick={() => incrementPage(-1)}
-          style={compactStyle}
-        >
-          <StepBackIcon size="1em" style={{ display: 'block' }} />
-        </HoverableButton>
-
-        <input
-          className={!currentPage || currentPage === 1 ? 'empty' : ''}
-          value={currentPage || ''}
-          onChange={(event) =>
-            event.target.value
-              ? setCurrentPage(parseInt(event.target.value))
-              : setCurrentPage(undefined)
-          }
-          onBlur={(event) =>
-            updatePageParams({
-              page: Math.min(Math.max(parseInt(event.target.value), 1), totalPages),
-            })
-          }
-          style={{ ...compactStyle, width: 50, textAlign: 'center' }}
-        />
-
-        {currentPage && currentPage > totalPages && (
-          <HoverableButton
-            onClick={setPageToEnd}
-            hoverContent="This page number is out of range. Showing the first page instead. Click to go to the actually last page."
-            style={{ margin: 'none', padding: 0, borderRadius: 0 }}
-          >
-            <TriangleAlertIcon size="1em" style={{ display: 'block' }} />
-          </HoverableButton>
-        )}
-
-        <HoverableButton
-          disabled={!currentPage || currentPage >= totalPages}
-          hoverContent={
-            <>
-              Go to Next Page.
-              <br />
-              Shortcut: Right Arrow Key →
-            </>
-          }
-          onClick={() => incrementPage(1)}
-          style={compactStyle}
-        >
-          <StepForwardIcon size="1em" style={{ display: 'block' }} />
-        </HoverableButton>
-        <button
-          onClick={setPageToEnd}
-          disabled={currentPage === totalPages}
-          style={{ ...compactStyle, borderRadius: '0 1em 1em 0' }}
-        >
-          <SkipForwardIcon size="1em" style={{ display: 'block' }} />
-        </button>
-      </div>
-    </>
+      <Pagination className="mx-1 w-auto">
+        <PaginationContent>
+          <PaginationItem>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Go to first page"
+              onClick={setPageToBeginning}
+              disabled={currentPage === 1}
+            >
+              <SkipBackIcon />
+            </Button>
+          </PaginationItem>
+          <PaginationItem>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Go to previous page"
+              title="Go to Previous Page. Shortcut: Left Arrow Key ←"
+              onClick={() => incrementPage(-1)}
+              disabled={currentPage === 1}
+            >
+              <StepBackIcon />
+            </Button>
+          </PaginationItem>
+          <PaginationItem>
+            <Input
+              type="number"
+              aria-label="Current page"
+              className="w-16 text-center"
+              value={currentPage || ''}
+              onChange={(event) =>
+                event.target.value
+                  ? setCurrentPage(parseInt(event.target.value))
+                  : setCurrentPage(undefined)
+              }
+              onBlur={(event) =>
+                updatePageParams({
+                  page: Math.min(Math.max(parseInt(event.target.value), 1), totalPages),
+                })
+              }
+            />
+          </PaginationItem>
+          {currentPage && currentPage > totalPages && (
+            <PaginationItem>
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                aria-label="Jump to last valid page"
+                title="This page number is out of range. Showing the first page instead. Click to go to the actual last page."
+                onClick={setPageToEnd}
+              >
+                <TriangleAlertIcon />
+              </Button>
+            </PaginationItem>
+          )}
+          <PaginationItem>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Go to next page"
+              title="Go to Next Page. Shortcut: Right Arrow Key →"
+              onClick={() => incrementPage(1)}
+              disabled={!currentPage || currentPage >= totalPages}
+            >
+              <StepForwardIcon />
+            </Button>
+          </PaginationItem>
+          <PaginationItem>
+            <Button
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Go to last page"
+              onClick={setPageToEnd}
+              disabled={currentPage === totalPages}
+            >
+              <SkipForwardIcon />
+            </Button>
+          </PaginationItem>
+        </PaginationContent>
+      </Pagination>
+    </span>
   );
 };
 

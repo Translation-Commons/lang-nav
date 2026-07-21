@@ -4,10 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import App from './App.tsx';
 
-import './colors.css';
-import './controls.css';
-
-import './component_styles.css';
+import './tailwind.css';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

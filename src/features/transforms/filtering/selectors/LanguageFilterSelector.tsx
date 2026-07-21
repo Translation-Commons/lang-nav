@@ -69,7 +69,7 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
 
   return (
     <SelectorDisplayProvider display={display}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+      <div className="selector flex flex-wrap items-center">
         <SelectorLabel
           label="Language"
           description={
@@ -81,7 +81,7 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
             </>
           }
         />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="flex items-center">
           <TextInput
             inputStyle={{ minWidth: '8em' }}
             getSuggestions={getSuggestions}
@@ -117,8 +117,8 @@ const LanguageFilterDescription: React.FC = () => {
     case ObjectType.Census:
       return (
         <>
-          <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} /> Censuses are not
-          currently supported by this filter.
+          <TriangleAlertIcon size="1em" className="text-yellow" /> Censuses are not currently
+          supported by this filter.
         </>
       );
   }

@@ -13,7 +13,7 @@ const PopulationWarning: React.FC = () => {
           languages can be properly compared.
         </>
       }
-      style={{ fontWeight: 'lighter' }}
+      className="font-light"
     >
       †
     </Hoverable>

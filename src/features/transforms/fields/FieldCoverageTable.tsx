@@ -4,7 +4,6 @@ import getEntityMainTableColumns from '@widgets/tables/columns/getEntityMainTabl
 
 import useEntities from '@features/data/context/useEntities';
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import ZIndex from '@features/layers/ZIndex';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
@@ -27,22 +26,15 @@ const FieldCoverageTable: React.FC = () => {
 
   return (
     <>
-      <table style={{ borderCollapse: 'collapse' }}>
+      <table className="border-collapse">
         <colgroup>
           <col span={2} />
-          <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
-          <col span={transforms.length - 1} style={{ borderRight: '2px solid transparent' }} />
-          <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
-          <col span={entityTypes.length} style={{ borderRight: '2px solid transparent' }} />
+          <col className="border-r-2 border-secondary" />
+          <col span={transforms.length - 1} className="border-r-2 border-transparent" />
+          <col className="border-r-2 border-secondary" />
+          <col span={entityTypes.length} className="border-r-2 border-transparent" />
         </colgroup>
-        <thead
-          style={{
-            position: 'sticky',
-            top: 0,
-            backgroundColor: 'var(--color-background)',
-            zIndex: ZIndex.TableStickyRow,
-          }}
-        >
+        <thead className="sticky top-0 z-10 bg-background">
           <tr>
             <th colSpan={3}>Field</th>
             <th colSpan={transforms.length}>Capabilities</th>
@@ -59,7 +51,6 @@ const FieldCoverageTable: React.FC = () => {
                     <Hoverable
                       onClick={() => setShowColorBars((prev) => !prev)}
                       hoverContent="Click to toggle colorbar display"
-                      style={{ cursor: 'pointer' }}
                     >
                       {toTitleCase(transform)}
                     </Hoverable>
@@ -82,11 +73,7 @@ const FieldCoverageTable: React.FC = () => {
                 {fields.map((field, fieldIndex) => (
                   <tr
                     key={field}
-                    style={
-                      fieldIndex === 0
-                        ? { borderTop: '2px solid var(--color-button-secondary)' }
-                        : {}
-                    }
+                    className={fieldIndex === 0 ? 'border-t-2 border-secondary' : undefined}
                   >
                     {fieldIndex === 0 && (
                       <th rowSpan={fields.length}>{getFieldGroupLabel(fieldGroup)}</th>

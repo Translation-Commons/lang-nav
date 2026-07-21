@@ -4,7 +4,8 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
-import Pill from '@shared/ui/Pill';
+import { cn } from '@shared/lib/utils';
+import Pill from '@shared/ui/old/Pill';
 
 type Props = {
   title: ReactNode;
@@ -22,27 +23,21 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
 }) => {
   const link = page ? `/${page}` : href;
   const external = href != null && href.startsWith('http');
-  const cardStyle: React.CSSProperties = {
-    padding: '0.5em 1em',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.5em',
-    opacity: isDisabled ? 0.72 : 1,
-  };
+  const cardClass = cn('flex flex-col gap-2 px-4 py-2', isDisabled && 'opacity-70');
 
   const body = (
     <>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-        <span style={{ fontWeight: 600 }}>{title}</span>
+      <div className="flex items-center gap-2">
+        <span className="font-semibold">{title}</span>
         {href != null && isDisabled && <Pill>Coming soon</Pill>}
         {external && !isDisabled ? <span aria-hidden="true">↗</span> : null}
       </div>
-      <div style={{ fontWeight: 'lighter' }}>{children}</div>
+      <div className="font-light">{children}</div>
     </>
   );
 
   if (link == null || isDisabled) {
-    return <div style={cardStyle}>{body}</div>;
+    return <div className={cardClass}>{body}</div>;
   }
   if (external) {
     return (
@@ -51,7 +46,7 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
         title={href}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ ...cardStyle, textDecoration: 'none' }}
+        className={cn(cardClass, 'no-underline')}
       >
         {body}
       </a>
@@ -59,7 +54,7 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
   }
 
   return (
-    <InternalLink page={page} style={{ ...cardStyle, textDecoration: 'none' }}>
+    <InternalLink page={page} className={cn(cardClass, 'no-underline')}>
       {body}
     </InternalLink>
   );

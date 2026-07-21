@@ -9,8 +9,8 @@ import { LanguageData, LanguageField, LanguageSource } from '@entities/language/
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import Deemphasized from '@shared/ui/Deemphasized';
-import LinkButton from '@shared/ui/LinkButton';
+import Deemphasized from '@shared/ui/old/Deemphasized';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 
@@ -47,9 +47,7 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <>
             <LanguageCodeDescriptionBySource languageSource={LanguageSource.ISO} />
             {ISO.code6391 && (
-              <div style={{ marginTop: '0.5em' }}>
-                There also is a 2-letter ISO 639-1 code for this language.
-              </div>
+              <div className="mt-2">There also is a 2-letter ISO 639-1 code for this language.</div>
             )}
           </>
         }
@@ -62,10 +60,7 @@ const LanguageCodes: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             {ISO.code}
             {ISO.code6391 ? ` | ${ISO.code6391}` : ''}
             {lang.warnings && lang.warnings[LanguageField.isoCode] && (
-              <Hoverable
-                hoverContent={<LanguageRetirementReason lang={lang} />}
-                style={{ marginLeft: '0.125em' }}
-              >
+              <Hoverable hoverContent={<LanguageRetirementReason lang={lang} />} className="ml-0.5">
                 <TriangleAlertIcon size="1em" color="var(--color-yellow)" />
               </Hoverable>
             )}

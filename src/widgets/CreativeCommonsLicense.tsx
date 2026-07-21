@@ -2,7 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 const CreativeCommonsLicense: React.FC = () => {
   return (

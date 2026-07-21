@@ -14,7 +14,7 @@ import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import ToggleablePrediction from '@entities/ui/ToggleablePrediction';
 import { VariantData, VariantType } from '@entities/variant/VariantTypes';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
 
 import { getVariantTypeDisplay } from '@strings/VariantStrings';
 

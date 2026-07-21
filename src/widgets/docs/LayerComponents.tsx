@@ -10,7 +10,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
-import LinkButton from '@shared/ui/LinkButton';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import DocsCard from './DocsCard';
 import DocsCardGrid from './DocsCardGrid';
@@ -36,10 +36,8 @@ const LayerComponents: React.FC = () => {
           accidentally dismissing the hovercard.
         </div>
         <div>
-          Usually there is 1 hovercard per page that is reused, but you can add a{' '}
-          <code>HoverCardProvider</code> to add a new hovercard. Nested hovercards are discouraged
-          (it is easy to provide a poor UX with competing hover areas) but can also be done with an
-          internal hovercard provider.
+          Each hovercard is anchored to the element that triggers it. Nested hovercards are
+          discouraged (it is easy to provide a poor UX with competing hover areas).
         </div>
         <div>
           <HoverableButton hoverContent="I show on hover">Hoverable button</HoverableButton>

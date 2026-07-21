@@ -5,7 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 const ICUSupportStatus: React.FC<{ object: ObjectData }> = ({ object }) => {
   if (object.type !== ObjectType.Language) return null;
@@ -20,12 +20,9 @@ const ICUSupportStatus: React.FC<{ object: ObjectData }> = ({ object }) => {
   }
 
   return coverage.inICU ? (
-    <CheckCircle2Icon
-      style={{ color: 'var(--color-green)', verticalAlign: 'middle' }}
-      size={'1em'}
-    />
+    <CheckCircle2Icon className="text-green align-middle" size={'1em'} />
   ) : (
-    <XCircleIcon style={{ color: 'var(--color-red)', verticalAlign: 'middle' }} size={'1em'} />
+    <XCircleIcon className="text-red align-middle" size={'1em'} />
   );
 };
 

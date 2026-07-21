@@ -1,6 +1,6 @@
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { LocaleData } from '../LocaleTypes';
 
@@ -14,7 +14,7 @@ const LocaleHistoricPresenceDisplay = ({ loc }: { loc: LocaleData }) => {
   return (
     <Hoverable
       hoverContent={getHistoricPresenceDescription(historicPresence)}
-      style={{ color: !historicPresence ? 'var(--color-text)' : undefined }}
+      className={!historicPresence ? 'text-foreground' : undefined}
     >
       {historicPresence ? 'Historic' : 'after 1500 CE'}
     </Hoverable>

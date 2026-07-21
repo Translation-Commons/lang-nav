@@ -31,10 +31,10 @@ const LanguagePluralGridButton: React.FC<{ lang: LanguageData }> = ({ lang }) =>
             <LanguagePluralGrid lang={lang} />
           </>
         }
-        style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
+        className="py-1 px-2 ml-2"
         onClick={() => setIsGridVisible((prev) => !prev)}
       >
-        <GridIcon size="1em" style={{ marginRight: '0.25em', verticalAlign: 'middle' }} />
+        <GridIcon size="1em" className="mr-1 align-middle" />
         examples
       </HoverableButton>
       {isGridVisible && <LanguagePluralGrid lang={lang} />}

@@ -5,8 +5,8 @@ import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import LinkButton from '@shared/ui/LinkButton';
-import Pill from '@shared/ui/Pill';
+import LinkButton from '@shared/ui/old/LinkButton';
+import Pill from '@shared/ui/old/Pill';
 
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
 import ObjectWikipediaInfo from '../../ui/ObjectWikipediaInfo';
@@ -49,7 +49,7 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
         <LanguageDigitalSupportCell lang={lang} />
       </DetailsField>
       <DetailsField title="CLDR Coverage">
-        <div style={{ display: 'inline-flex', flexDirection: 'row', gap: '0.5em' }}>
+        <div className="inline-flex flex-row gap-2">
           <CLDRWarningNotes object={lang} />
           <ObjectCLDRCoverageLevel object={lang} />
           <ObjectCLDRLocaleCount object={lang} verbose={true} />

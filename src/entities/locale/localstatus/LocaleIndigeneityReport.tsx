@@ -7,7 +7,8 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import LinkButton from '@shared/ui/LinkButton';
+import { Button } from '@shared/ui/button';
+import LinkButton from '@shared/ui/old/LinkButton';
 
 import LocaleIndigeneityTable from './LocaleIndigeneityTable';
 
@@ -75,13 +76,10 @@ const LocaleIndigeneityReport: React.FC = () => {
         options={Object.values(IncludeCriteria)}
       />
       <LocaleIndigeneityTable locales={viewedLocales} addToChangedLocales={addToChangedLocales} />
-      <button
-        onClick={copyChangedLocales}
-        style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}
-      >
+      <Button variant="link" size="xs" onClick={copyChangedLocales}>
         <CopyIcon size="1em" />
         Copy changed locales ({changedLocales.length})
-      </button>
+      </Button>
     </>
   );
 };

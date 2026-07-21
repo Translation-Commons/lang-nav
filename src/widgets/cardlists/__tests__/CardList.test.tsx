@@ -14,9 +14,6 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import CardList from '../CardList';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: vi.fn().mockReturnValue({}),
-}));
 vi.mock('@features/transforms/filtering/useFilteredEntities', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/coloring/useColors', () => ({
   default: vi.fn().mockReturnValue({ getColor: () => 'inherit' }),
@@ -86,7 +83,7 @@ describe('CardList', () => {
 
     // There are 4 country-scope territories in the mocked data
     const meters = getAllByText(/Showing/);
-    expect(meters.length).toBe(2); // One at top and one at bottom
+    expect(meters.length).toBe(1); // Only the bottom pagination meter remains
 
     // Only the countries are shown
     const cards = container.getElementsByClassName('CardInCardList');

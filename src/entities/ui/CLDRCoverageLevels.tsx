@@ -2,16 +2,16 @@ import React from 'react';
 
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 
-export function getCLDRCoverageColor(coverageLevel: CLDRCoverageLevel): string {
+export function getCLDRCoverageColorClass(coverageLevel: CLDRCoverageLevel): string {
   switch (coverageLevel) {
     case CLDRCoverageLevel.Core:
-      return 'var(--color-text-secondary)';
+      return 'text-muted-foreground';
     case CLDRCoverageLevel.Basic:
-      return 'var(--color-yellow)';
+      return 'text-yellow';
     case CLDRCoverageLevel.Moderate:
-      return 'var(--color-green)';
+      return 'text-green';
     case CLDRCoverageLevel.Modern:
-      return 'var(--color-blue)';
+      return 'text-blue';
   }
 }
 
@@ -33,7 +33,7 @@ export const CoverageLevelsExplanation: React.FC = () => {
     <ul>
       {Object.values(CLDRCoverageLevel).map((level) => (
         <li key={level}>
-          <strong style={{ color: getCLDRCoverageColor(level) }}>
+          <strong className={getCLDRCoverageColorClass(level)}>
             {level.charAt(0).toUpperCase() + level.slice(1)}
           </strong>
           : {getCoverageLevelExplanation(level)}

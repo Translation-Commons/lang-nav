@@ -16,7 +16,7 @@ const PopulationFilterSelector: React.FC = () => {
 
   return (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="selector flex items-center">
         <SelectorLabel
           description="Filter results to show only items with population above this threshold"
           label="Min Population"
@@ -45,7 +45,7 @@ const PopulationFilterSelector: React.FC = () => {
         />
       </div>
 
-      <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="selector flex items-center">
         <SelectorLabel
           description="Filter results to show only items with population below this threshold"
           label="Max Population"

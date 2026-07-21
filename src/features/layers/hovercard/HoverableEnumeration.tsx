@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import Hoverable from './Hoverable';
 
@@ -18,13 +18,13 @@ const HoverableEnumeration: React.FC<Props> = ({ items, label, limit = 20 }) => 
   return (
     <Hoverable
       hoverContent={
-        <div style={{ maxWidth: '300px' }}>
+        <div className="max-w-[300px]">
           <CommaSeparated limit={limit}>{items}</CommaSeparated>
         </div>
       }
     >
       {items.length}
-      {label && <span style={{ marginLeft: '0.25em' }}>{label}</span>}
+      {label && <span className="ml-1">{label}</span>}
     </Hoverable>
   );
 };

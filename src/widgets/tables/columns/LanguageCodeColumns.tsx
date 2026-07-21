@@ -12,7 +12,7 @@ import LanguageRetirementReason from '@entities/language/LanguageRetirementReaso
 import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 
@@ -22,7 +22,7 @@ const columns: TableColumn<LanguageData>[] = [
     field: Field.Code,
     description: <CodeDisplayDescription />,
     render: (lang: LanguageData): ReactNode => (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="flex items-center">
         <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.Code} />
         {<MaybeISOWarning lang={lang} />}
       </div>
@@ -43,7 +43,7 @@ const columns: TableColumn<LanguageData>[] = [
     key: 'ISO 639-3/5',
     description: <LanguageCodeDescriptionBySource languageSource={LanguageSource.ISO} />,
     render: (lang) => (
-      <div style={{ display: 'flex', alignItems: 'center' }}>
+      <div className="flex items-center">
         {lang.ISO.code}
         {<MaybeISOWarning lang={lang} />}
       </div>
@@ -89,10 +89,7 @@ export const LanguageCodeColumns: TableColumn<LanguageData>[] = columns.map(
 
 function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | null {
   return lang.warnings && lang.warnings[LanguageField.isoCode] ? (
-    <Hoverable
-      hoverContent={<LanguageRetirementReason lang={lang} />}
-      style={{ marginLeft: '0.125em' }}
-    >
+    <Hoverable hoverContent={<LanguageRetirementReason lang={lang} />} className="ml-0.5">
       <TriangleAlertIcon size="1em" display="block" color="var(--color-yellow)" />
     </Hoverable>
   ) : null;
@@ -104,7 +101,7 @@ function CodeDisplayDescription() {
     <>
       The short combination of alphabetic or alphanumeric characters to identify the language or
       languoid -- according to the {languageSource} language source:
-      <div style={{ height: '0.5em' }} />
+      <div className="h-2" />
       <LanguageCodeDescriptionBySource languageSource={languageSource} />
     </>
   );

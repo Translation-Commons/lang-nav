@@ -47,7 +47,7 @@
   font-size: 1.5em;
   padding: 0.25em;
   margin: 0 0 0.5em 0;
-  background-color: var(--color-background);
+  background-color: var(--background);
 }
 
 .MapSidebarContent {
@@ -137,11 +137,11 @@
 .MapCentroidCircle.hovered {
   filter: brightness(1.2);
   scale: 1.5;
-  stroke: var(--color-button-primary);
+  stroke: var(--primary);
 }
 
 .MapCentroidCircle.pinned {
-  stroke: var(--color-button-primary);
+  stroke: var(--primary);
 }
 
 .MapTerritory {
@@ -150,7 +150,7 @@
 
 .MapTerritory.pinned {
   filter: brightness(1.1);
-  stroke: var(--color-button-primary);
+  stroke: var(--primary);
   stroke-width: 2px;
 }
 
@@ -158,6 +158,6 @@
 .MapTerritory.hovered,
 .MapTerritory.pinned.hovered {
   filter: brightness(1.2);
-  stroke: var(--color-button-primary);
+  stroke: var(--primary);
   stroke-width: 2px;
 }

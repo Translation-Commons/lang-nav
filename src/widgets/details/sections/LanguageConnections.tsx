@@ -17,8 +17,8 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
-import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CommaSeparated from '@shared/ui/old/CommaSeparated';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
@@ -131,7 +131,7 @@ const TreeOrList: React.FC<TreeOrListProps> = ({ treeNodes, listNodes, emptyMess
     <>
       <HoverableButton
         onClick={() => setViewAsTree((prev) => !prev)}
-        style={{ padding: '0.25em' }}
+        className="p-1"
         hoverContent={viewAsTree ? 'Click to view as list' : 'Click to view as tree'}
       >
         {viewAsTree ? 'as tree' : 'as list'}

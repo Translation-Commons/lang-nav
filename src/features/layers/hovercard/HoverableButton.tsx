@@ -1,6 +1,7 @@
 import React from 'react';
 
-import useHoverCard from './useHoverCard';
+import { cn } from '@shared/lib/utils';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type HoverableProps = {
   ariaLabel?: string;
@@ -25,58 +26,29 @@ const HoverableButton: React.FC<HoverableProps> = ({
   role,
   style,
 }) => {
-  const { showHoverCard, hideHoverCard } = useHoverCard();
-
-  if (hoverContent == null) {
-    return (
-      <button
-        aria-label={ariaLabel}
-        className={className}
-        disabled={disabled}
-        onClick={onClick}
-        role={role}
-        style={{
-          cursor: onClick ? 'pointer' : 'auto',
-          ...style,
-        }}
-        type={buttonType}
-      >
-        {children}
-      </button>
-    );
-  }
-
-  const handleMouseEnter = (e: React.MouseEvent) => {
-    showHoverCard(hoverContent, e.clientX, e.clientY);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    showHoverCard(hoverContent, e.clientX, e.clientY);
-  };
-
-  return (
+  const button = (
     <button
       aria-label={ariaLabel}
-      className={className}
+      className={cn(onClick ? 'cursor-pointer' : 'cursor-auto', className)}
       disabled={disabled}
-      onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={hideHoverCard}
-      onClick={() => {
-        hideHoverCard();
-        if (onClick != null) {
-          onClick();
-        }
-      }}
+      onClick={onClick}
       role={role}
-      style={{
-        cursor: onClick ? 'pointer' : 'auto',
-        ...style,
-      }}
+      style={style}
       type={buttonType}
     >
       {children}
     </button>
+  );
+
+  if (hoverContent == null) {
+    return button;
+  }
+
+  return (
+    <HoverCard>
+      <HoverCardTrigger render={button} />
+      <HoverCardContent className="w-auto max-w-96">{hoverContent}</HoverCardContent>
+    </HoverCard>
   );
 };
 

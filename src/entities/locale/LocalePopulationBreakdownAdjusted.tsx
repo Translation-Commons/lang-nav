@@ -9,8 +9,8 @@ import CellLabel from '@shared/containers/CellLabel';
 import CellPercent from '@shared/containers/CellPercent';
 import CellPopulation from '@shared/containers/CellPopulation';
 import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import Deemphasized from '@shared/ui/Deemphasized';
+import CountOfPeople from '@shared/ui/old/CountOfPeople';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getLocaleName } from './LocaleStrings';
 

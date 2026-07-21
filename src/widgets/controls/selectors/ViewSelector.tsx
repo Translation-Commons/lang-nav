@@ -32,8 +32,8 @@ const ViewSelector: React.FC = () => {
 function getViewLabel(view: View): React.ReactNode {
   const isBeta = [View.Map, View.Reports].includes(view);
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-      <span style={{ display: 'flex', gap: '0.125rem' }}>
+    <div className="flex flex-col items-center gap-1">
+      <span className="flex gap-0.5">
         {view} {isBeta && <em>β</em>}
       </span>
       <img src={getImageSrc(view)} width={180} />

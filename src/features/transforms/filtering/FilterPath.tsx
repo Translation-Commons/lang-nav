@@ -17,7 +17,7 @@ import {
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
@@ -30,6 +30,8 @@ import { getFilterLabels } from './FilterLabels';
  *
  * For example: ISO Vitality: Extinct / Macrolanguage or Language or Dialect / In "United States [US]" / Name contains "n"
  */
+const CLEAR_BUTTON_CLASS = 'p-1';
+
 const FilterPath: React.FC = () => {
   const {
     isoStatus,
@@ -60,7 +62,7 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear the vitality filter based on ISO"
           onClick={() => updatePageParams({ isoStatus: [] })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>
@@ -75,7 +77,7 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear the vitality filter based on Ethnologue Fine"
           onClick={() => updatePageParams({ vitalityEthFine: [] })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>
@@ -90,7 +92,7 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear the vitality filter based on Ethnologue Coarse"
           onClick={() => updatePageParams({ vitalityEthCoarse: [] })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>
@@ -147,7 +149,7 @@ const FilterPath: React.FC = () => {
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ territoryFilter: '' })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
           hoverContent="Clear territory filter"
         >
           <XIcon size="1em" display="block" />
@@ -160,7 +162,7 @@ const FilterPath: React.FC = () => {
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ writingSystemFilter: '' })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
           hoverContent="Clear writing system filter"
         >
           <XIcon size="1em" display="block" />
@@ -173,7 +175,7 @@ const FilterPath: React.FC = () => {
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ languageFilter: '' })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
           hoverContent="Clear language filter"
         >
           <XIcon size="1em" display="block" />
@@ -186,7 +188,7 @@ const FilterPath: React.FC = () => {
         <HoverableButton
           buttonType="reset"
           onClick={() => updatePageParams({ languageFamilyFilter: '' })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
           hoverContent="Clear language family filter"
         >
           <XIcon size="1em" display="block" />
@@ -205,7 +207,7 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear the search substring filter"
           onClick={() => updatePageParams({ searchString: '' })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>
@@ -231,7 +233,7 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear population filters"
           onClick={() => updatePageParams({ populationMin: undefined, populationMax: undefined })}
-          style={{ padding: '0.25em' }}
+          className={CLEAR_BUTTON_CLASS}
         >
           <XIcon size="1em" display="block" />
         </HoverableButton>

@@ -7,19 +7,14 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 const GoogleTranslateSupportStatus: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   if (!lang.googleTranslate || lang.googleTranslate.length === 0) {
-    return (
-      <XCircleIcon style={{ color: 'var(--color-red)', verticalAlign: 'middle' }} size={'1em'} />
-    );
+    return <XCircleIcon className="text-red align-middle" size={'1em'} />;
   }
 
   const hoverContent = lang.googleTranslate.map((entry) => entry.name).join(', ');
 
   return (
     <Hoverable hoverContent={hoverContent}>
-      <CheckCircle2Icon
-        style={{ color: 'var(--color-green)', verticalAlign: 'middle' }}
-        size={'1em'}
-      />
+      <CheckCircle2Icon className="text-green align-middle" size={'1em'} />
     </Hoverable>
   );
 };

@@ -8,7 +8,7 @@ import { CensusData } from '@entities/census/CensusTypes';
 import DetailsField from '@shared/containers/DetailsField';
 import DetailsSection from '@shared/containers/DetailsSection';
 import { toTitleCase } from '@shared/lib/stringUtils';
-import ExternalLink from '@shared/ui/ExternalLink';
+import ExternalLink from '@shared/ui/old/ExternalLink';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
 

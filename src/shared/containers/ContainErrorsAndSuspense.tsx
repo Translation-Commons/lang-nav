@@ -1,6 +1,6 @@
 import React from 'react';
 
-import LoadingPage from '@shared/ui/LoadingPage';
+import LoadingPage from '@shared/ui/old/LoadingPage';
 
 import ErrorBoundary from './ErrorBoundary';
 

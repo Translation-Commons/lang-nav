@@ -6,6 +6,9 @@ import {
 } from '@features/params/ui/SelectorDisplayContext';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 
+import { Checkbox } from '@shared/ui/checkbox';
+import { Label } from '@shared/ui/label';
+
 interface TreeListOptions {
   allExpanded: boolean;
   showInfoButton: boolean;
@@ -58,39 +61,23 @@ export function TreeListOptionsSelectors() {
   } = useTreeListOptionsContext();
 
   return (
-    <div
-      style={{
-        marginTop: '1em',
-        display: 'flex',
-        gap: '0.5em',
-        flexWrap: 'wrap',
-      }}
-    >
+    <div className="mt-4 flex flex-wrap items-center gap-4">
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-        <label>
-          <input
-            type="checkbox"
-            checked={allExpanded}
-            onChange={(e) => setAllExpanded(e.target.checked)}
-          />
+        <Label className="cursor-pointer font-normal">
+          <Checkbox checked={allExpanded} onCheckedChange={(v) => setAllExpanded(v === true)} />
           Expand All
-        </label>
-        <label>
-          <input
-            type="checkbox"
+        </Label>
+        <Label className="cursor-pointer font-normal">
+          <Checkbox
             checked={showInfoButton}
-            onChange={(e) => setShowInfoButton(e.target.checked)}
+            onCheckedChange={(v) => setShowInfoButton(v === true)}
           />
           Show Info Button
-        </label>
-        <label>
-          <input
-            type="checkbox"
-            checked={showObjectIDs}
-            onChange={(e) => setShowObjectIDs(e.target.checked)}
-          />
+        </Label>
+        <Label className="cursor-pointer font-normal">
+          <Checkbox checked={showObjectIDs} onCheckedChange={(v) => setShowObjectIDs(v === true)} />
           Show Object IDs
-        </label>
+        </Label>
 
         <FieldFocusSelector />
       </SelectorDisplayProvider>

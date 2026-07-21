@@ -45,12 +45,12 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
 
   return (
     <SelectorDisplayProvider display={display}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
+      <div className="selector flex flex-wrap items-center">
         <SelectorLabel
           label="In Territory"
           description="Filter results by ones relevant in a territory."
         />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
+        <div className="flex items-center">
           <TextInput
             inputStyle={{ minWidth: '8em' }}
             getSuggestions={getSuggestions}

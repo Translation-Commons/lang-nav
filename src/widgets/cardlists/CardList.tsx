@@ -9,7 +9,7 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 import { ObjectData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
-import Deemphasized from '@shared/ui/Deemphasized';
+import Deemphasized from '@shared/ui/old/Deemphasized';
 
 import CardInCardList from './CardInCardList';
 import ResponsiveGrid from './ResponsiveGrid';
@@ -24,8 +24,7 @@ const CardList: React.FC = () => {
   const { getColor } = useColors({ objects: filteredEntities });
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em' }}>
-      <VisibleItemsMeter objects={allEntities} />
+    <div className="flex flex-col gap-4">
       {currentEntities.length === 0 && <Deemphasized>No objects found.</Deemphasized>}
 
       {/* Main grid */}
@@ -39,7 +38,7 @@ const CardList: React.FC = () => {
         </ResponsiveGrid>
       )}
 
-      {/* Display another visible item meter at the bottom for convenience. */}
+      {/* Pagination + result count live below the cards only. */}
       {currentEntities.length > 3 && <VisibleItemsMeter objects={allEntities} />}
       {currentEntities.length === 0 && (
         <FilterBreakdown objects={allEntities} shouldFilterUsingSearchBar={true} />
