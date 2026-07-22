@@ -1,7 +1,10 @@
+import {
+  WikipediaData,
+  WikipediaStatus,
+} from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import { WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
 import { ScriptCode } from '@entities/writingsystem/WritingSystemTypes';
 
 import { DataContextType } from '../../context/useDataContext';

@@ -100,17 +100,6 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           emptyMessage="No locales available for this language."
         />
       </DetailsField>
-      {lang.keyboards && lang.keyboards.length > 0 && (
-        <DetailsField title="Keyboards">
-          {lang.keyboards && lang.keyboards.length > 0 && (
-            <CommaSeparated>
-              {lang.keyboards.map((keyboard) => (
-                <HoverableObjectName key={keyboard.ID} object={keyboard} />
-              ))}
-            </CommaSeparated>
-          )}
-        </DetailsField>
-      )}
     </DetailsSection>
   );
 };

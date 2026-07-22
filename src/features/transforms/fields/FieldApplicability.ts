@@ -17,7 +17,6 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
   Field.SourceType,
   Field.Indigeneity,
   Field.CLDRCoverage,
-  Field.DigitalSupport,
   Field.WritingSystemScope,
 ];
 
@@ -63,7 +62,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.Modality,
 
-        Field.DigitalSupport,
+        // Field.DigitalSupport, // not yet supported
         Field.CLDRCoverage,
 
         Field.Indigeneity,

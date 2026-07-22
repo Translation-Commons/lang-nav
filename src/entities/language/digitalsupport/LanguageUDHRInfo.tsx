@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
 
-import { UniversalDeclarationOfHumanRightsData } from '@entities/types/DataTypes';
+import { UniversalDeclarationOfHumanRightsData } from '@entities/language/digitalsupport/DigitalSupportTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
