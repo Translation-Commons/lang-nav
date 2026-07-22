@@ -4,19 +4,25 @@ import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const dist = resolve(root, 'dist');
-const subdir = resolve(dist, 'lang-nav');
 
 rmSync(dist, { recursive: true, force: true });
 
 execSync('tsc -b', { cwd: root, stdio: 'inherit' });
-execSync(`vite build --outDir ${subdir} --emptyOutDir`, { cwd: root, stdio: 'inherit' });
+execSync('vite build', {
+  cwd: root,
+  stdio: 'inherit',
+  env: { ...process.env, VITE_BASE_PATH: '/' },
+});
+
+// Pages only enables its native SPA fallback (index.html on unknown paths)
+// when no top-level 404.html exists; 404.html is the GitHub Pages hack anyway.
+rmSync(resolve(dist, '404.html'), { force: true });
 
 const redirects = [
-  '/               /lang-nav/             301',
-  '/lang-nav       /lang-nav/             301',
-  '/lang-nav/*     /lang-nav/index.html   200',
+  '/lang-nav       /            301',
+  '/lang-nav/*     /:splat      301',
   '',
 ].join('\n');
 
 writeFileSync(resolve(dist, '_redirects'), redirects);
-console.log('\nBuilt for Cloudflare Pages at dist/lang-nav/ with _redirects at dist/_redirects');
+console.log('\nBuilt for Cloudflare Pages at dist/ (base /) with _redirects');

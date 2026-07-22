@@ -133,8 +133,8 @@ jobs:
             const body = [
               '### Cloudflare Pages preview',
               '',
-              `- Deploy URL: ${url}/lang-nav/`,
-              alias ? `- Branch alias: ${alias}/lang-nav/` : null,
+              `- Deploy URL: ${url}`,
+              alias ? `- Branch alias: ${alias}` : null,
               '',
               `Commit: \`${context.sha.slice(0, 7)}\``,
             ].filter(Boolean).join('\n');
