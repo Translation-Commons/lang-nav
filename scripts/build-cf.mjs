@@ -18,6 +18,7 @@ execSync('vite build', {
 // when no top-level 404.html exists; 404.html is the GitHub Pages hack anyway.
 rmSync(resolve(dist, '404.html'), { force: true });
 
+// prettier-ignore
 const redirects = [
   '/lang-nav       /            301',
   '/lang-nav/*     /:splat      301',
