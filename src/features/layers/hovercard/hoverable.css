@@ -1,0 +1,41 @@
+.NewHoverable {
+    position: relative;
+    text-decoration: underline dotted;
+}
+
+.NewHovercard {
+    position: absolute;
+    /* ZIndex.Hovercard */
+    z-index: 90;
+    /* top: calc(100% + 0.25rem); */
+    /* left: 0; */
+
+    display: block;
+    width: max-content;
+    /* min-width: 20rem; */
+    max-width: min(32rem, 80vw);
+    padding: 0.75rem;
+
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+        opacity 100ms ease-out,
+        visibility 100ms ease-out;
+
+    color: var(--color-text);
+    background: var(--color-background);
+    border-radius: 0.5em;
+    box-shadow: var(--color-shadow) 0 0 1rem 2px;
+
+    line-height: 1.35;
+    text-align: left;
+    white-space: normal;
+}
+
+.NewHoverable:hover .NewHovercard,
+.NewHoverable:focus-within .NewHovercard {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+}

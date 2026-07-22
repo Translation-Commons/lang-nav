@@ -20,6 +20,8 @@ export enum LanguageFocus {
   DigitizedLanguages = 'Digitized Languages',
   AllLanguages = 'All Languages',
   AllLanguoids = 'All Languages, Families, and Dialects',
+  Glottolog = 'Glottolog Languoids',
+  Dialects = 'Dialects',
 }
 
 const LanguageFocusTabs: React.FC = () => {
@@ -119,6 +121,14 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
         languageSource: LanguageSource.Combined,
         modalityFilter: [],
       };
+    case LanguageFocus.Glottolog:
+      return {
+        languageSource: LanguageSource.Glottolog,
+      };
+    case LanguageFocus.Dialects:
+      return {
+        languageScopes: [LanguageScope.Dialect],
+      };
     default:
       enforceExhaustiveSwitch(focus);
   }
@@ -133,8 +143,9 @@ function getExtraExplanation(focus: LanguageFocus): string {
     case LanguageFocus.DigitizedLanguages:
       return 'The table view will also show digital support & CLDR columns by default. Language codes shown will be in the CLDR format which is slightly different than the ISO definitions. For instance, `zh` will represent "Mandarin" not "Chinese" (in general) and `ms` will represent "Malay" not "Malayic" (including Indonesian).';
     case LanguageFocus.AllLanguages:
-      return '';
     case LanguageFocus.AllLanguoids:
+    case LanguageFocus.Glottolog:
+    case LanguageFocus.Dialects:
       return '';
     default:
       enforceExhaustiveSwitch(focus);
