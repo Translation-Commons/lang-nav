@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
@@ -75,9 +75,9 @@ const LuckySearchPageBody: React.FC = () => {
       <div style={{ marginBottom: '1em' }}>Try searching again:</div>
       <SearchBar />
       <div style={{ marginTop: '1em' }}>
-        <a href="/intro">
+        <Link to="/intro">
           <button style={{ padding: '0.5em 1em' }}>Back to Home</button>
-        </a>
+        </Link>
       </div>
     </SearchContainer>
   );

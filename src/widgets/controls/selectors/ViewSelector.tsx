@@ -42,17 +42,18 @@ function getViewLabel(view: View): React.ReactNode {
 }
 
 function getImageSrc(view: View): string {
+  const base = import.meta.env.BASE_URL;
   switch (view) {
     case View.CardList:
-      return '/lang-nav/cardlist.png';
+      return `${base}cardlist.png`;
     case View.Hierarchy:
-      return '/lang-nav/hierarchy.png';
+      return `${base}hierarchy.png`;
     case View.Map:
-      return '/lang-nav/map.png';
+      return `${base}map.png`;
     case View.Table:
-      return '/lang-nav/table.png';
+      return `${base}table.png`;
     case View.Reports:
-      return '/lang-nav/reports.png';
+      return `${base}reports.png`;
   }
 }
 
