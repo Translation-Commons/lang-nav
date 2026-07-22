@@ -16,20 +16,3 @@ export function getPluralRuleKeyLabel(key: PluralRuleKey): string {
       return 'Other';
   }
 }
-
-export function getPluralRuleColor(key: PluralRuleKey): string {
-  switch (key) {
-    case PluralRuleKey.Zero:
-      return 'var(--color-blue)';
-    case PluralRuleKey.One:
-      return 'var(--color-green)';
-    case PluralRuleKey.Two:
-      return 'var(--color-yellow)';
-    case PluralRuleKey.Few:
-      return 'var(--color-orange)';
-    case PluralRuleKey.Many:
-      return 'var(--color-red)';
-    case PluralRuleKey.Other:
-      return 'var(--color-button-secondary)';
-  }
-}

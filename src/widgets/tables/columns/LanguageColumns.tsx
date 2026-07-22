@@ -205,7 +205,12 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     },
     {
       key: 'Plural rule examples',
-      render: (lang) => <LanguagePluralRuleExamplesGrid lang={lang} />,
+      render: (lang) => (
+        <LanguagePluralRuleExamplesGrid
+          lang={lang}
+          showTooltips={false /* too many items to render for table view */}
+        />
+      ),
       isInitiallyVisible: false,
       columnGroup: 'Grammar',
     },

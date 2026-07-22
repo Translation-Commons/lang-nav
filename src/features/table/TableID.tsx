@@ -19,6 +19,7 @@ enum TableID {
   LocaleIndigeneity,
   VariantAnnotation,
   LanguageScopeIssues,
+  LanguagePlurals,
 }
 
 export default TableID;
