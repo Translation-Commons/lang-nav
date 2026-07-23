@@ -13,6 +13,7 @@ const ReportCensusInputTool = React.lazy(() => import('./ReportCensusInputTool')
 const ReportEntitiesMissingFields = React.lazy(() => import('./ReportEntitiesMissingFields'));
 const ReportLanguageDescendants = React.lazy(() => import('./ReportLanguageDescendants'));
 const ReportLanguagePaths = React.lazy(() => import('./ReportLanguagePaths'));
+const ReportLanguagePlurals = React.lazy(() => import('./ReportLanguagePlurals'));
 const ReportLanguageScopeIssues = React.lazy(() => import('./ReportLanguageScopeIssues'));
 const ReportLanguagesDubious = React.lazy(() => import('./ReportLanguagesDubious'));
 const ReportLanguagesWithAmbiguousNames = React.lazy(
@@ -45,6 +46,8 @@ const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
       return <ReportEntitiesMissingFields />;
     case ReportID.LanguagePaths:
       return <ReportLanguagePaths />;
+    case ReportID.LanguagePlurals:
+      return <ReportLanguagePlurals />;
     case ReportID.LanguageScopeIssues:
       return <ReportLanguageScopeIssues />;
     case ReportID.LanguageDescendants:

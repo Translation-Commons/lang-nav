@@ -3,6 +3,8 @@
 
 import plurals from 'cldr-core/supplemental/plurals.json';
 
+import { ObjectType } from '@features/params/PageParamTypes';
+
 import { LanguageData } from '../LanguageTypes';
 
 export enum PluralRuleKey {
@@ -30,7 +32,17 @@ export function findLanguagePluralRules(lang: LanguageData): PluralRuleFromCLDR[
 
   // Get plural rules
   const pluralRules = pluralRulesUntyped[lookupID] || pluralRulesUntyped[lookupIDAlt ?? ''];
-  if (!pluralRules) return null;
+  if (!pluralRules) {
+    const dataProvider = lang.CLDR.dataProvider;
+    // Try the CLDR data provider
+    if (
+      dataProvider != null &&
+      dataProvider.ID !== lang.ID &&
+      dataProvider.type === ObjectType.Language
+    )
+      return findLanguagePluralRules(dataProvider);
+    return null;
+  }
 
   // Convert to array with stable key order
   return Object.values(PluralRuleKey)
