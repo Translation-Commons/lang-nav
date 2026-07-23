@@ -12,13 +12,15 @@ import SortPopupCard from '@features/transforms/sorting/SortPopupCard';
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
+import LanguageFocusTabs from './dataviews/LanguageFocusTabs';
 
 const DataViews = React.lazy(() => import('./dataviews/DataViews'));
 
 const DataPageBody: React.FC = () => {
   return (
-    <main style={{ padding: '1em', flex: 1, overflow: 'auto', width: '100%' }}>
+    <main style={{ padding: '0.5em 1em', flex: 1, overflow: 'auto', width: '100%' }}>
       <EntityTypeTabs />
+      <LanguageFocusTabs />
       <div
         style={{
           display: 'flex',

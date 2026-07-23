@@ -18,7 +18,7 @@ const LanguageModalitySelector: React.FC<Props> = ({ display }) => {
 
   return (
     <Selector
-      selectorLabel="Modality"
+      selectorLabel="Medium of Use"
       labelWhenEmpty="Any"
       selectorDescription={selectorDescription}
       options={

@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
-import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
+import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
@@ -88,7 +88,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     <table style={{ textAlign: 'left' }}>
       <tbody>
         <tr>
-          <td>All {getObjectTypeLabelPlural(objects[0].type)}</td>
+          <td>All {getEntityTypeLabelPlural(objects[0].type)}</td>
           <td className="count">{nOverall.toLocaleString()}</td>
         </tr>
         {nFilteredByLanguageScope > 0 && (
