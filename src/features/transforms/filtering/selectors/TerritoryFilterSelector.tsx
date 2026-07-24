@@ -3,13 +3,10 @@ import React, { useMemo } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
 import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-  useSelectorDisplay,
+  SelectorDisplay
 } from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
+import EntityFilterSelector from './EntityFilterSelector';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
@@ -20,13 +17,11 @@ import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
 type Props = { display?: SelectorDisplay };
 
-const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
+const TerritoryFilterSelector: React.FC<Props> = ({ display }) => {
   const { territoryFilter, updatePageParams } = usePageParams();
   const { territories } = useDataContext();
   const filterByScope = getScopeFilter();
   const filterLabels = getFilterLabels();
-  const { display: inheritedDisplay } = useSelectorDisplay();
-  const display = manualDisplay ?? inheritedDisplay;
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (territory: TerritoryData): number =>
@@ -44,24 +39,15 @@ const TerritoryFilterSelector: React.FC<Props> = ({ display: manualDisplay }) =>
   }, [territories, filterByScope, filterLabels]);
 
   return (
-    <SelectorDisplayProvider display={display}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-        <SelectorLabel
-          label="In Territory"
-          description="Filter results by ones relevant in a territory."
-        />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <TextInput
-            inputStyle={{ minWidth: '8em' }}
-            getSuggestions={getSuggestions}
-            onSubmit={(territoryFilter: string) => updatePageParams({ territoryFilter })}
-            pageParameter={PageParamKey.territoryFilter}
-            placeholder="Name or code"
-            value={territoryFilter}
-          />
-        </div>
-      </div>
-    </SelectorDisplayProvider>
+    <EntityFilterSelector
+      display={display}
+      getSuggestions={getSuggestions}
+      selectorLabel="In Territory"
+      selectorDescription="Filter results by ones relevant in a territory."
+      onSubmit={(territoryFilter: string) => updatePageParams({ territoryFilter })}
+      value={territoryFilter}
+      pageParameter={PageParamKey.territoryFilter}
+    />
   );
 };
 
