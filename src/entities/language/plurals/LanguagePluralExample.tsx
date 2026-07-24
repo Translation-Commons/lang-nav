@@ -24,10 +24,21 @@ const LanguagePluralExample: React.FC<Props> = ({
   appearance = 'div',
   showTooltips = true,
 }) => {
+  if (appearance === 'td') {
+    return (
+      <td
+        className={'LanguagePluralExample ' + ruleKey}
+        style={{ ...style, borderRight: '1em solid var(--color-background)' }}
+      >
+        {showTooltips ? <WithToolTip ruleKey={ruleKey} conditions={conditions} num={num} /> : num}
+      </td>
+    );
+  }
+
   return (
     <div
       className={'LanguagePluralExample ' + ruleKey}
-      style={{ ...style, display: appearance === 'div' ? 'inline-block' : 'table-cell' }}
+      style={{ ...style, display: 'inline-block' }}
     >
       {showTooltips ? <WithToolTip ruleKey={ruleKey} conditions={conditions} num={num} /> : num}
     </div>

@@ -44,6 +44,42 @@ const FormattedConditions: React.FC<{ conditions: string; exampleNum?: string | 
   exampleNum,
 }) => {
   // eg. "i = 0 and v = 0"
+  // eg. "n % 10 = 1 and n % 100 != 11,71,91"
+  const orConditions = conditions.split(' or ');
+  if (orConditions.length <= 1) {
+    return <FormattedAndConditions conditions={conditions} exampleNum={exampleNum} />;
+  }
+  return (
+    <div style={{ display: 'flex', gap: '0.5em', flexWrap: 'wrap', flexDirection: 'column' }}>
+      {orConditions.map((conditions, index) => (
+        <div key={index} style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
+          <div
+            style={{
+              border: '1px solid var(--color-text)',
+              height: '100%',
+              borderRadius: '0.25em',
+              borderTop: 0,
+              borderBottom: 0,
+              padding: '0 0.5em',
+            }}
+          >
+            <FormattedAndConditions conditions={conditions} exampleNum={exampleNum} />
+          </div>
+
+          {index < orConditions.length - 1 && (
+            <div style={{ color: 'var(--color-text-secondary)' }}>or</div>
+          )}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+const FormattedAndConditions: React.FC<{ conditions: string; exampleNum?: string | number }> = ({
+  conditions,
+  exampleNum,
+}) => {
+  // eg. "i = 0 and v = 0"
   const andConditions = conditions.split(' and ');
   if (andConditions.length <= 1) {
     return <FormattedCondition condition={conditions} exampleNum={exampleNum} />;

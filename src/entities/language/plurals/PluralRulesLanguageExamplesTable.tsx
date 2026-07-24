@@ -42,8 +42,8 @@ function PluralRulesLanguageExamplesTable() {
             ruleKey={PluralRuleKey.Zero}
             explanation={
               <>
-                Literally &quot;no cat&quot;. A literal translation is &quot;ṣifru qiṭaṭin&quot;
-                (صِفْرُ قِطَطٍ) but that is an awkward form.
+                Literally &quot;no cat&quot;. A literal translation of &quot;0 cats&quot; is
+                &quot;ṣifru qiṭaṭin&quot; (صِفْرُ قِطَطٍ) but that less natural.
               </>
             }
           >

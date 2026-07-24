@@ -18,14 +18,13 @@ const PluralRuleExplanation: React.FC<{ rule: string; exampleNum?: string | numb
       {conditions && (
         <div>
           <strong>Equation:</strong>
-          <PluralRuleEquation rule={rule} includeCopyButton={true} />
+          <PluralRuleEquation rule={rule} includeCopyButton={true} exampleNum={exampleNum} />
         </div>
       )}
       {integerExamples && exampleNum == null && (
         <div>
           <strong>Integer examples:</strong>{' '}
           <PluralRuleExampleSet rule={rule} exampleSet="integer" />
-          <br />
         </div>
       )}
       {decimalExamples && exampleNum == null && (
