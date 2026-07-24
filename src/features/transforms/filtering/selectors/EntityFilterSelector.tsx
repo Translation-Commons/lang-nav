@@ -37,10 +37,7 @@ const EntityFilterSelector: React.FC<Props> = ({
   return (
     <SelectorDisplayProvider display={display}>
       <div className="selector filterList" style={{ display: 'flex', flexWrap: 'wrap' }}>
-        <SelectorLabel
-          label={selectorLabel}
-          description={selectorDescription}
-        />
+        <SelectorLabel label={selectorLabel} description={selectorDescription} />
         <EntityFilterSuggestionButtons
           getSuggestions={getSuggestions}
           onSubmit={onSubmit}
@@ -57,9 +54,8 @@ const EntityFilterSelector: React.FC<Props> = ({
           />
         </div>
       </div>
-
     </SelectorDisplayProvider>
   );
-}
+};
 
 export default EntityFilterSelector;
