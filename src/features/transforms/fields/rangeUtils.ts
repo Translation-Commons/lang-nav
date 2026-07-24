@@ -96,7 +96,7 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.HistoricPresence:
       return 1;
     case Field.Modality:
-      return LanguageModality.Spoken;
+      return LanguageModality.Sign;
     case Field.VitalityMetascore:
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:

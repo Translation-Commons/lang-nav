@@ -66,7 +66,31 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       columnGroup: 'Context',
     },
     {
-      key: 'Modality',
+      key: 'Medium of Use',
+      description: (
+        <>
+          In a modern context, how is the language used? Most common languages have both spoken and
+          written traditions. Sign languages are distinguished here. The spoken ↔ written axis is
+          divided into 5 levels, from Written only, Mostly Written, Spoken & Written, Mostly Spoken,
+          and Spoken only.
+          <div>
+            <strong>Standard v Community Forms</strong>: Some languages have a separate standardized
+            writing form (eg. Modern Standard Arabic) versus the common spoken form (eg. Sudanese
+            Arabic in Sudan). Often those are distinguished as languages/dialects but in cases like
+            the prior example they are significantly different to be considered separate languages,
+            albeit context-dependent.{' '}
+          </div>
+          <div>
+            <strong>Liturgical Languages</strong>: Some languages are only used in religious
+            contexts, like Latin or Sanskrit. Most of these are grouped as "Mostly Written".
+          </div>
+          <div>
+            <strong>Extinct Languages</strong>: Most extinct languages (eg. Sumerian) are only
+            perserved as written records and are not used by any communities. On the other hand,
+            languages in early revitalization projects like Ainu are
+          </div>
+        </>
+      ),
       render: (lang) => getModalityLabel(lang.modality) ?? <Deemphasized>—</Deemphasized>,
       exportValue: (lang) => getModalityLabel(lang.modality), // Avoid exporting escaped html like &amp;
       isInitiallyVisible: false,
