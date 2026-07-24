@@ -13,7 +13,7 @@ function LanguageModalityFullExplanation() {
         <strong>Standard v Community Forms</strong>: Some languages have a separate standardized
         writing form (eg. Modern Standard Arabic) versus the common spoken form (eg. Sudanese Arabic
         in Sudan). Often those are distinguished as languages versus dialects but in cases like the
-        prior example they are sufficiently different to be considered separate languages. The
+        Arabic variations, they are sufficiently different to be considered separate languages. The
         community languages are considered &quot;Spoken&quot; only if there is no established
         community practice of writing the language beyond transcription, linguistic documentation,
         religious texts, or occasional informal use. When there is an established written tradition
@@ -26,12 +26,12 @@ function LanguageModalityFullExplanation() {
         like Latin or Sanskrit. Most of these are grouped as &quot;Mostly Written&quot;.
       </div>
       <div>
-        <strong>Extinct Languages</strong>: Extinct languages are hard to classify here -- some
-        extinct languages (eg. Sumerian) are well preserved and now known by their written documents
-        -- most had oral forms (even Egyptian Hieroglyphs had a phonetic value value). On the other
-        hand, some extinct languages are known by descriptions of the language but not written
-        documents. Languages with only vocabularies collected by external observers are considered
-        &quot;Spoken&quot; only.
+        <strong>Extinct Languages</strong>: Extinct languages are hard to classify here. For
+        example, Egyptian Hieroglyphics are known for their documents but during its zenith the
+        glyphs were the written form of an oral language, most glyphs even have a phonetic value, so
+        it is not &quot;Written&quot; only. On the other hand, some extinct languages are known by
+        descriptions of the language but not written documents. Languages with only vocabularies
+        collected by external observers are considered &quot;Spoken&quot; only.
       </div>
       <div>
         <strong>Revitalized Languages</strong>: Languages in revitalization projects are usually

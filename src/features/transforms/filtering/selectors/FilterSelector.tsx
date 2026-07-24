@@ -20,9 +20,6 @@ import WritingSystemFilterSelector from './WritingSystemFilterSelector';
 
 type Props = { field: Field };
 
-// These filters are not shown in the main filters panel
-const LANGUAGE_FOCUS_FILTERS = [Field.Modality, Field.LanguageScope, Field.SourceForLanguage];
-
 const FilterSelector: React.FC<Props> = ({ field }) => {
   switch (field) {
     case Field.Language:
