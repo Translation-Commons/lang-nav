@@ -2,16 +2,15 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
-import {
-  SelectorDisplay
-} from '@features/params/ui/SelectorDisplayContext';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import EntityFilterSelector from './EntityFilterSelector';
 
 import { WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { sortByPopulation } from '../../sorting/sort';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
+
+import EntityFilterSelector from './EntityFilterSelector';
 
 type Props = { display?: SelectorDisplay };
 
