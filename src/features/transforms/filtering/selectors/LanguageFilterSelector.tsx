@@ -1,18 +1,14 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType, PageParamKey } from '@features/params/PageParamTypes';
 import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-  useSelectorDisplay,
+  SelectorDisplay
 } from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
-
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import EntityFilterSelector from './EntityFilterSelector';
 
 import Field from '../../fields/Field';
 import { sortByPopulation } from '../../sorting/sort';
@@ -22,7 +18,7 @@ import useFilters from '../useFilters';
 
 type Props = { display?: SelectorDisplay };
 
-const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
+const LanguageFilterSelector: React.FC<Props> = ({ display }) => {
   const { languageFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
@@ -31,8 +27,6 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterByLanguageFamily = filterBy[Field.LanguageFamily];
   const filterLabels = getFilterLabels();
-  const { display: inheritedDisplay } = useSelectorDisplay();
-  const display = manualDisplay ?? inheritedDisplay;
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (language: LanguageData): number => {
@@ -68,31 +62,22 @@ const LanguageFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => 
   ]);
 
   return (
-    <SelectorDisplayProvider display={display}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-        <SelectorLabel
-          label="Language"
-          description={
-            <>
-              Filter results to those relevant to a specific language, language family, or dialect.
-              You can enter either the language name or its code. For example, entering
-              &quot;Spanish&quot; or <code>spa</code> will filter to objects relevant to Spanish.{' '}
-              <LanguageFilterDescription />
-            </>
-          }
-        />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <TextInput
-            inputStyle={{ minWidth: '8em' }}
-            getSuggestions={getSuggestions}
-            onSubmit={(languageFilter: string) => updatePageParams({ languageFilter })}
-            pageParameter={PageParamKey.languageFilter}
-            placeholder="Name or code"
-            value={languageFilter}
-          />
-        </div>
-      </div>
-    </SelectorDisplayProvider>
+    <EntityFilterSelector
+      display={display}
+      getSuggestions={getSuggestions}
+      selectorLabel="Language"
+      selectorDescription={
+        <>
+          Filter results to those relevant to a specific language, language family, or dialect.
+          You can enter either the language name or its code. For example, entering
+          &quot;Spanish&quot; or <code>spa</code> will filter to objects relevant to Spanish.{' '}
+          <LanguageFilterDescription />
+        </>
+      }
+      onSubmit={(languageFilter: string) => updatePageParams({ languageFilter })}
+      value={languageFilter}
+      pageParameter={PageParamKey.languageFilter}
+    />
   );
 };
 
