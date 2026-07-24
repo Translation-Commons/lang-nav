@@ -57,6 +57,8 @@ export const SymbolToLabel: React.FC<{ symbol: string }> = ({ symbol }) => {
     case 'c':
     case 'e':
       return 'compact decimal exponent value: exponent of the power of 10 used in compact decimal formatting';
+    // e may be interpreted as scientific notation too
+    // return 'scientific decimal exponent value: exponent of the power of 10 used in scientific number formatting';
     default:
       return <>{symbol}</>;
   }
