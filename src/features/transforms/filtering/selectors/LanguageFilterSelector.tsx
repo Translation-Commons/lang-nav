@@ -1,20 +1,20 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType, PageParamKey } from '@features/params/PageParamTypes';
-import {
-  SelectorDisplay
-} from '@features/params/ui/SelectorDisplayContext';
+import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import EntityFilterSelector from './EntityFilterSelector';
+
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import Field from '../../fields/Field';
 import { sortByPopulation } from '../../sorting/sort';
 import { getFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 import useFilters from '../useFilters';
+
+import EntityFilterSelector from './EntityFilterSelector';
 
 type Props = { display?: SelectorDisplay };
 
@@ -68,9 +68,9 @@ const LanguageFilterSelector: React.FC<Props> = ({ display }) => {
       selectorLabel="Language"
       selectorDescription={
         <>
-          Filter results to those relevant to a specific language, language family, or dialect.
-          You can enter either the language name or its code. For example, entering
-          &quot;Spanish&quot; or <code>spa</code> will filter to objects relevant to Spanish.{' '}
+          Filter results to those relevant to a specific language, language family, or dialect. You
+          can enter either the language name or its code. For example, entering &quot;Spanish&quot;
+          or <code>spa</code> will filter to objects relevant to Spanish.{' '}
           <LanguageFilterDescription />
         </>
       }
