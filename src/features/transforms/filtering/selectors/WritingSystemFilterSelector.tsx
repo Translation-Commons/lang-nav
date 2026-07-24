@@ -2,15 +2,21 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
+import {
+  SelectorDisplay
+} from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
+import EntityFilterSelector from './EntityFilterSelector';
 
 import { WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { sortByPopulation } from '../../sorting/sort';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
-import EntityFilterSelector from './EntityFilterSelector';
+type Props = { display?: SelectorDisplay };
 
-const WritingSystemFilterSelector: React.FC = () => {
+const WritingSystemFilterSelector: React.FC<Props> = ({ display }) => {
+  const { writingSystemFilter, updatePageParams } = usePageParams();
   const { writingSystems } = useDataContext();
 
   const getSuggestions = useMemo(() => {
@@ -23,9 +29,12 @@ const WritingSystemFilterSelector: React.FC = () => {
 
   return (
     <EntityFilterSelector
+      display={display}
       getSuggestions={getSuggestions}
       selectorLabel="Written in"
       selectorDescription="Filter results by ones written in this script."
+      onSubmit={(writingSystemFilter: string) => updatePageParams({ writingSystemFilter })}
+      value={writingSystemFilter}
       pageParameter={PageParamKey.writingSystemFilter}
     />
   );

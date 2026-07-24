@@ -3,6 +3,10 @@ import React, { useMemo } from 'react';
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
+import {
+  SelectorDisplay
+} from '@features/params/ui/SelectorDisplayContext';
+import usePageParams from '@features/params/usePageParams';
 import EntityFilterSelector from './EntityFilterSelector';
 
 import Field from '../../fields/Field';
@@ -11,7 +15,10 @@ import { getFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 import useFilters from '../useFilters';
 
-const LanguageFamilyFilterSelector: React.FC = () => {
+type Props = { display?: SelectorDisplay };
+
+const LanguageFamilyFilterSelector: React.FC<Props> = ({ display }) => {
+  const { languageFamilyFilter, updatePageParams } = usePageParams();
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
   const filterByTerritory = filterBy[Field.Territory];
@@ -43,6 +50,7 @@ const LanguageFamilyFilterSelector: React.FC = () => {
 
   return (
     <EntityFilterSelector
+      display={display}
       getSuggestions={getSuggestions}
       selectorLabel="Language Family"
       selectorDescription={
@@ -51,6 +59,8 @@ const LanguageFamilyFilterSelector: React.FC = () => {
           includes ISO language families because we have the most data for them.
         </>
       }
+      onSubmit={(languageFamilyFilter: string) => updatePageParams({ languageFamilyFilter })}
+      value={languageFamilyFilter}
       pageParameter={PageParamKey.languageFamilyFilter}
     />
   );
