@@ -5,7 +5,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
-import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
+import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 
@@ -27,7 +27,7 @@ const ObjectTypeSelector: React.FC = () => {
       onChange={goToObjectType}
       selected={objectType}
       display={SelectorDisplay.ButtonList}
-      getOptionLabel={(option) => toTitleCase(getObjectTypeLabelPlural(option))}
+      getOptionLabel={(option) => toTitleCase(getEntityTypeLabelPlural(option))}
       getOptionDescription={(objectType) => (
         <>
           <div style={{ marginBottom: 8 }}>Click here to change the kind of entity viewed.</div>

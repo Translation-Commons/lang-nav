@@ -27,6 +27,7 @@ import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import LanguageModalityFullExplanation from '@strings/LanguageModalityFullExplanation';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
@@ -66,7 +67,8 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       columnGroup: 'Context',
     },
     {
-      key: 'Modality',
+      key: 'Medium of Use',
+      description: <LanguageModalityFullExplanation />,
       render: (lang) => getModalityLabel(lang.modality) ?? <Deemphasized>—</Deemphasized>,
       exportValue: (lang) => getModalityLabel(lang.modality), // Avoid exporting escaped html like &amp;
       isInitiallyVisible: false,

@@ -4,12 +4,12 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-export function getObjectSubtitle(object: ObjectData): string | undefined {
-  switch (object.type) {
+export function getEntitySubtitle(entity: ObjectData): string | undefined {
+  switch (entity.type) {
     case ObjectType.Language:
-      return object.nameEndonym ?? object.nameSubtitle ?? undefined;
+      return entity.nameEndonym ?? entity.nameSubtitle ?? undefined;
     case ObjectType.WritingSystem:
-      return object.nameDisplay != object.nameFull ? object.nameFull : undefined;
+      return entity.nameDisplay != entity.nameFull ? entity.nameFull : undefined;
     case ObjectType.Locale:
     case ObjectType.Census:
     case ObjectType.Territory:
@@ -19,14 +19,14 @@ export function getObjectSubtitle(object: ObjectData): string | undefined {
   }
 }
 
-export function getObjectTypeLabelPlural(objectType: ObjectType) {
-  switch (objectType) {
+export function getEntityTypeLabelPlural(entityType: ObjectType) {
+  switch (entityType) {
     case ObjectType.Census:
       return 'censuses';
     case ObjectType.Language:
       return 'languages';
     case ObjectType.Locale:
-      return 'locales';
+      return 'languages in territories';
     case ObjectType.Territory:
       return 'territories';
     case ObjectType.WritingSystem:
@@ -38,6 +38,6 @@ export function getObjectTypeLabelPlural(objectType: ObjectType) {
     case ObjectType.Org:
       return 'organizations';
     default:
-      enforceExhaustiveSwitch(objectType);
+      enforceExhaustiveSwitch(entityType);
   }
 }

@@ -21,7 +21,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
   return (
     <DetailsSection title="Attributes">
       {modality != null && (
-        <DetailsField title="Modality">{getModalityLabel(modality)}</DetailsField>
+        <DetailsField title="Medium of Use">{getModalityLabel(modality)}</DetailsField>
       )}
       {primaryWritingSystem && (
         <DetailsField title="Primary Writing System">

@@ -4,6 +4,8 @@ import HoverableInternalLinkButton from '@features/layers/hovercard/HoverableInt
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import './tabs.css';
+
 export type TabOption = {
   description?: ReactNode;
   label: string;
@@ -13,45 +15,37 @@ export type TabOption = {
 type Props = {
   label?: ReactNode;
   options: TabOption[];
+  size?: 'major' | 'minor';
 };
 
-const NavTabs: React.FC<Props> = ({ label, options }) => {
+const NavTabs: React.FC<Props> = ({ label, options, size = 'major' }) => {
   const params = usePageParams();
   const getIsActive = useCallback(
     (option: TabOption) =>
-      Object.entries(option.urlParams).every(
-        ([key, value]) => params[key as keyof PageParams] === value,
-      ),
+      Object.entries(option.urlParams).every(([key, value]) => {
+        const paramValue = params[key as keyof PageParams];
+        if (Array.isArray(paramValue) && Array.isArray(value)) {
+          return paramValue.sort().join(';') === value.sort().join(';');
+        }
+        return paramValue === value;
+      }),
     [params],
   );
 
   return (
-    <div style={{ display: 'flex', marginBottom: '0.5em', width: '100%' }}>
-      {label && <div style={{ padding: '0.5em 1em', border: 'none' }}>{label}</div>}
-      {options.map((option) => {
-        const isActive = getIsActive(option);
-        return (
-          <HoverableInternalLinkButton
-            params={option.urlParams}
-            key={option.label}
-            keepOldParams={true}
-            className="tab"
-            hoverContent={option.description}
-            style={{
-              padding: '0.5em 1em',
-              color: isActive ? 'var(--color-button-primary)' : 'var(--color-text)',
-              fontWeight: 500,
-              borderWidth: '2px',
-              borderRadius: '0.5em 0.5em 0 0',
-              borderBottomStyle: 'solid',
-              borderBottomColor: isActive ? 'var(--color-button-primary)' : 'transparent',
-              cursor: 'pointer',
-            }}
-          >
-            {option.label}
-          </HoverableInternalLinkButton>
-        );
-      })}
+    <div className={'NavTabs ' + size}>
+      {label && <div className="NavTabsLabel">{label}</div>}
+      {options.map((option) => (
+        <HoverableInternalLinkButton
+          params={option.urlParams}
+          key={option.label}
+          keepOldParams={true}
+          className={'Tab' + (getIsActive(option) ? ' active' : '')}
+          hoverContent={option.description}
+        >
+          {option.label}
+        </HoverableInternalLinkButton>
+      ))}
     </div>
   );
 };
