@@ -9,6 +9,7 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
@@ -16,8 +17,7 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 export enum LanguageFocus {
   SpokenLanguages = 'Spoken & Sign Languages',
   WrittenLanguages = 'Written Languages',
-  ISOLanguages = 'ISO 639-3 Languages',
-  // DigitalLanguages = 'Digital Languages', // TODO
+  DigitizedLanguages = 'Digitized Languages',
   AllLanguages = 'All Languages',
   AllLanguoids = 'All Languages, Families, and Dialects',
 }
@@ -27,6 +27,7 @@ const LanguageFocusTabs: React.FC = () => {
 
   return (
     <NavTabs
+      label="Language Focus:"
       size="minor"
       options={Object.values(LanguageFocus).map((focus) => {
         const urlParams = getParamsForEntityFocus(focus);
@@ -35,19 +36,38 @@ const LanguageFocusTabs: React.FC = () => {
           description: (
             <>
               Limit the languages and language-like categories shown on the page to:
-              <div>
-                <strong>Medium of Use</strong>:{' '}
-                {modalityFilter?.length ? modalityFilter.map(getModalityLabel).join(', ') : 'Any'}
-              </div>
-              <div>
-                <strong>Scope</strong>:{' '}
-                {languageScopes?.length
-                  ? languageScopes.map(getLanguageScopeLabel).join(', ')
-                  : 'Any'}
-              </div>
-              <div>
-                <strong>Language List</strong>: {languageSource ?? pageParams.languageSource}
-              </div>
+              {modalityFilter != null && (
+                <div>
+                  <strong>Medium of Use</strong>:{' '}
+                  {modalityFilter.length ? (
+                    <>
+                      {(modalityFilter ?? pageParams.modalityFilter)
+                        .map(getModalityLabel)
+                        .join(', ')}
+                      <Deemphasized>
+                        {' '}
+                        (note: this filter is not configured for most languages with a population
+                        less than 1 million)
+                      </Deemphasized>
+                    </>
+                  ) : (
+                    'Any'
+                  )}
+                </div>
+              )}
+              {languageScopes != null && (
+                <div>
+                  <strong>Scope</strong>:{' '}
+                  {languageScopes.length
+                    ? languageScopes.map(getLanguageScopeLabel).join(', ')
+                    : 'Any'}
+                </div>
+              )}
+              {languageSource != null && (
+                <div>
+                  <strong>Language List</strong>: {languageSource}
+                </div>
+              )}
             </>
           ),
           label: focus,
@@ -79,10 +99,11 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
           LanguageModality.SpokenAndWritten,
         ],
       };
-    case LanguageFocus.ISOLanguages:
+    case LanguageFocus.DigitizedLanguages:
       return {
         languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
         languageSource: LanguageSource.ISO,
+        // Add CLDR coverage level
       };
     case LanguageFocus.AllLanguages:
       return {
@@ -93,6 +114,7 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
     case LanguageFocus.AllLanguoids:
       return {
         languageScopes: [],
+        languageSource: LanguageSource.Combined,
         modalityFilter: [],
       };
     default:

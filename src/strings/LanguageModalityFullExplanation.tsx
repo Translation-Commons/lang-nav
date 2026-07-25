@@ -36,7 +36,7 @@ function LanguageModalityFullExplanation() {
       <div>
         <strong>Revitalized Languages</strong>: Languages in revitalization projects are usually
         classified as &quot;Mostly Written&quot; because they exist in education materials but have
-        no L1 communities (eg. Ainu). Some, like Hawaiian and Irish have L1 communities are
+        no L1 communities (eg. Ainu). Some, like Hawaiian and Irish, have L1 communities and are
         considered &quot;Spoken & Written&quot;.
       </div>
       <div>

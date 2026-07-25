@@ -1,12 +1,17 @@
 .NavTabs {
   display: flex;
   width: 100%;
+  gap: 0.25em;
 }
 
 .NavTabs.major {
   /* border-bottom: solid 2px var(--color-button-secondary); */
   border-bottom: solid 2px var(--color-button-primary);
   margin-bottom: 0.25em;
+}
+
+.NavTabs.minor {
+  font-size: 0.75em;
 }
 
 .NavTabsLabel {
@@ -16,20 +21,23 @@
 
 .Tab {
   background: none;
-  /* background: var(--color-button-secondary); */
   color: var(--color-text);
   font-weight: 500;
-  border: 2px solid;
-  /* border-width: 1px 1px 1px 4px; */
-  border-radius: 0.5em 0.5em 0 0;
-  /* border-bottom-style: solid; */
   border-color: transparent;
-  /* border-bottom-color: transparent; */
   padding: 0.5em;
   border-bottom: 2px solid transparent;
-  margin-bottom: -2px;
-  /* border-bottom-color: transparent; */
   cursor: pointer;
+}
+
+.major .Tab {
+  border: 2px solid transparent;
+  border-radius: 0.5em 0.5em 0 0;
+  margin-bottom: -2px;
+}
+
+.minor .Tab {
+  border-radius: 0.5em;
+  border: none;
 }
 
 .Tab:hover,
@@ -43,19 +51,10 @@
 
 .Tab.active {
   color: var(--color-button-primary);
-  /* border-bottom-color: var(--color-button-primary); */
   border-color: var(--color-button-primary);
   border-bottom-color: var(--color-background);
 }
 
-.minor .Tab {
-  border-radius: 0.5em;
-  border: none;
-  font-size: 0.75em;
-}
-
 .minor .Tab.active {
   background: var(--color-background-hover);
-  /* border-color: var(--color-button-primary);
-    border-bottom-color: var(--color-button-primary); */
 }

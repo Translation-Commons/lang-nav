@@ -25,10 +25,7 @@ const NavTabs: React.FC<Props> = ({ label, options, size = 'major' }) => {
       Object.entries(option.urlParams).every(([key, value]) => {
         const paramValue = params[key as keyof PageParams];
         if (Array.isArray(paramValue) && Array.isArray(value)) {
-          return (
-            paramValue.length === value.length &&
-            paramValue.every((v) => value.map(String).includes(v.toString()))
-          );
+          return paramValue.sort().join(';') === value.sort().join(';');
         }
         return paramValue === value;
       }),
