@@ -144,7 +144,9 @@ const columns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Documentation',
-    render: (lang) => <LanguageDigitalSupportMeter lang={lang} />,
+    render: (lang) => (
+      <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.Documentation} />
+    ),
     exportValue: (lang) => lang.digitalSupportScore?.documentation,
   },
   {

@@ -66,8 +66,8 @@ function computeWikipediaScore(lang: LanguageData): number {
   const { wikipedias } = lang;
   if (!wikipedias || wikipedias.length === 0) return 0;
   if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Active)) return 5;
-  if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Closed)) return 2; // incubator
-  return 1; // deleted (WikipediaStatus.Deleted)
+  if (wikipedias.some((wiki) => wiki.status === WikipediaStatus.Incubator)) return 2; // incubator
+  return 1; // deleted (WikipediaStatus.Closed)
 }
 
 function computeCLDRScore(lang: LanguageData): number {

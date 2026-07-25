@@ -56,7 +56,7 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
   vitality.meta = getVitalityMetascore(lang);
   lang.vitality = vitality;
 
-  // Compute the digital suppport scores
+  // Compute the digital support scores
   lang.digitalSupportScore = computeDigitalSupportScores(lang);
 
   // Compute the lat/long coordinates
