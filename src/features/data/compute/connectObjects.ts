@@ -45,6 +45,7 @@ export function connectObjectsAndCreateDerivedData(
   connectKeyboards(
     keyboards,
     languagesBySource.Combined,
+    languagesBySource.CLDR,
     territories,
     writingSystems,
     variants,

@@ -9,7 +9,7 @@ import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
-import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CensusData } from '../census/CensusTypes';
 import { LanguageData } from '../language/LanguageTypes';
@@ -34,49 +34,3 @@ export type EntityData =
   | OrganizationData;
 export type ObjectData = EntityData; // For now, all objects are entities
 export type ObjectDictionary = Record<string, ObjectData>;
-
-export enum WikipediaStatus {
-  Active = 'Active',
-  Closed = 'Closed',
-  Incubator = 'Incubator',
-}
-
-export type WikipediaData = {
-  titleEnglish: string;
-  titleLocal: string;
-  status: WikipediaStatus;
-  languageName: string;
-  scriptCodes: ScriptCode[];
-  wikipediaSubdomain: string; // eg. en, fr, simple, zh-classical, map-bms
-  localeCodes: string; // eg. eng, fra, mis, lzh, jav/bany1247
-  articles: number;
-  activeUsers: number;
-  url: string;
-};
-
-export type UniversalDeclarationOfHumanRightsData = {
-  languageCodePath: string; // e.g. "som/afas1238" for the Af-Marka dialect of Somali
-  name: string; // e.g. "Af Marka"
-  variant: string; // e.g. "Latn", "Cyrl", or "" for undifferentiated
-  documentURL: string; // URL to the UDHR translation document -- maybe just the final path segment, like "af-marka" in "https://www.ohchr.org/en/human-rights/universal-declaration/translations/af-marka"
-};
-
-export type GoogleTranslateData = {
-  languageCodePath: string; // e.g. "man/bam" when Google lists grouped or alternate code paths
-  name: string;
-  locale?: string;
-  writingSystem?: string;
-};
-
-export type Win11LanguagePackData = {
-  languageCodePath: string; // e.g. "zho/cmn" when multiple codes are listed
-  name: string;
-  locale?: string;
-  writingSystem?: string;
-};
-export type IosData = {
-  languageCodePath: string; // e.g. "man/bam" when Google lists grouped or alternate code paths
-  name: string;
-  locale?: string;
-  writingSystem?: string;
-};

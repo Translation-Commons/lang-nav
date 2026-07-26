@@ -1,4 +1,7 @@
+import { DigitalSupportDimension } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { EthnologueDigitalSupport } from '@entities/language/LanguageTypes';
+
+import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 // From https://www.ethnologue.com/methodology/#DLS
 export function getDigitalSupportLabel(support?: EthnologueDigitalSupport): string | undefined {
@@ -33,5 +36,24 @@ export function getDigitalSupportDescription(
       return 'The language has some content in digital form or some encoding tools.';
     case EthnologueDigitalSupport.Still:
       return 'The language shows no signs of digital support.';
+  }
+}
+
+export function getDigitalSupportDimensionLabel(dimension: DigitalSupportDimension): string {
+  switch (dimension) {
+    case DigitalSupportDimension.Overall:
+      return 'Overall';
+    case DigitalSupportDimension.Keyboards:
+      return 'Keyboards';
+    case DigitalSupportDimension.Documentation:
+      return 'Documentation';
+    case DigitalSupportDimension.I18nFrameworks:
+      return 'I18n Frameworks';
+    case DigitalSupportDimension.MachineTranslation:
+      return 'Machine Translation';
+    case DigitalSupportDimension.Interfaces:
+      return 'Interfaces';
+    default:
+      enforceExhaustiveSwitch(dimension);
   }
 }
