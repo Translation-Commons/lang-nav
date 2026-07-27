@@ -1,0 +1,34 @@
+.DataPageBody {
+  padding: 0.5em 1em;
+  flex: 1;
+  overflow: auto;
+  width: 100%;
+}
+
+.DataPageBodyResultCountAndViewOptions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.DataPageBodyResultCount {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.DataPageBodyViewOptions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.DataPageBodyContents {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  text-align: center;
+}

@@ -10,7 +10,7 @@ import LanguageDigitalSupportMetascore from '@entities/language/digitalsupport/L
 import LanguageUDHRInfo, {
   LanguageUDHRDescription,
 } from '@entities/language/digitalsupport/LanguageUDHRInfo';
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
@@ -33,6 +33,7 @@ const columns: TableColumn<LanguageData>[] = [
     render: (lang) => <LanguageDigitalSupportMetascore lang={lang} />,
     exportValue: (lang) => lang.digitalSupportScore?.overall,
     field: Field.DigitalSupport,
+    isInitiallyVisible: (params) => params.languageSource === LanguageSource.CLDR,
   },
   {
     key: 'I18n Frameworks',
@@ -56,6 +57,7 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     exportValue: (lang) => lang.CLDR.coverage?.actualCoverageLevel,
+    isInitiallyVisible: (params) => params.languageSource === LanguageSource.CLDR,
   },
   {
     key: 'CLDR Locales',
@@ -227,8 +229,8 @@ const columns: TableColumn<LanguageData>[] = [
 ];
 export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = columns.map(
   (col: TableColumn<LanguageData>) => ({
-    ...col,
     isInitiallyVisible: false,
+    ...col,
     columnGroup: 'Digital Support',
   }),
 );

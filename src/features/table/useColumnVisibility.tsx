@@ -1,6 +1,6 @@
 import { useCallback, useMemo } from 'react';
 
-import { TableIDToBinarizedColumnVisibility } from '@features/params/PageParamTypes';
+import { PageParams, TableIDToBinarizedColumnVisibility } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { ObjectData } from '@entities/types/DataTypes';
@@ -21,13 +21,14 @@ function useColumnVisibility<T extends ObjectData>(
   columns: TableColumn<T>[],
   tableID: TableID,
 ): ColumnVisibilityModule<T> {
-  const { updatePageParams, columns: columnsVisibleForAllTables } = usePageParams();
+  const params = usePageParams();
+  const { updatePageParams, columns: columnsVisibleForAllTables } = params;
 
   const columnVisibilityBinarized = useMemo(() => {
     const tableBinary = columnsVisibleForAllTables?.[tableID];
     if (tableBinary != null) return tableBinary;
-    return getDefaultColumnsBinary(columns);
-  }, [columnsVisibleForAllTables, tableID, columns]);
+    return getDefaultColumnsBinary(columns, params);
+  }, [columnsVisibleForAllTables, tableID, columns, params]);
 
   // columnVisibility maps column keys to whether they are visible
   const columnVisibility = useMemo(
@@ -106,11 +107,16 @@ function getBinaryForColumnVisibility<T extends ObjectData>(
   );
 }
 
-function getDefaultColumnsBinary<T extends ObjectData>(columns: TableColumn<T>[]): bigint {
-  return columns.reduce(
-    (bin, col, i) => (col.isInitiallyVisible !== false ? bin + (1n << BigInt(i)) : bin),
-    0n,
-  );
+function getDefaultColumnsBinary<T extends ObjectData>(
+  columns: TableColumn<T>[],
+  params: PageParams,
+): bigint {
+  return columns.reduce((bin, col, i) => {
+    if (typeof col.isInitiallyVisible === 'function') {
+      return col.isInitiallyVisible(params) ? bin + (1n << BigInt(i)) : bin;
+    }
+    return col.isInitiallyVisible !== false ? bin + (1n << BigInt(i)) : bin;
+  }, 0n);
 }
 
 export function stringifyColumnVisibilityBinaries(

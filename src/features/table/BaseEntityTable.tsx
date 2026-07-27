@@ -21,10 +21,13 @@ type Props<T> = {
   tableID: TableID;
 };
 
-function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects }: Props<T>) {
+function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects, tableID }: Props<T>) {
   return (
     <div style={{ width: '100%', position: 'relative' }}>
-      <table style={{ textAlign: 'start', borderCollapse: 'collapse', width: 'max-content' }}>
+      <table
+        className={'EntityTable Table' + tableID}
+        style={{ textAlign: 'start', borderCollapse: 'collapse', width: 'max-content' }}
+      >
         <thead
           style={{
             position: 'sticky',

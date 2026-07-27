@@ -95,6 +95,8 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     case Field.LanguageFormedHere:
     case Field.HistoricPresence:
       return 1;
+    case Field.DigitalSupport:
+      return 10;
     case Field.Modality:
       return LanguageModality.Sign;
     case Field.VitalityMetascore:
@@ -153,7 +155,6 @@ export function getMaximumValue(objects: ObjectData[], field?: Field): number {
     // Not yet defined on a continuous scale
     case Field.WritingSystemScope:
     case Field.Indigeneity:
-    case Field.DigitalSupport:
     case Field.GovernmentStatus:
     case Field.ECRMLProtection:
     case Field.SourceType:

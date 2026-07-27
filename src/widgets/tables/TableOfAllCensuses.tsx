@@ -15,13 +15,13 @@ type Props = {
 const TableOfAllCensuses: React.FC<Props> = ({ organization }) => {
   const { censuses: allCensuses } = useDataContext();
   const columns = useMemo(() => getCensusColumns(), []);
-  const censuses = useMemo(() => {
-    if (!organization) return Object.values(allCensuses);
-    return organization.censuses ?? [];
-  }, [organization, allCensuses]);
 
   return (
-    <InteractiveEntityTable tableID={TableID.Censuses} entities={censuses} columns={columns} />
+    <InteractiveEntityTable
+      tableID={TableID.Censuses}
+      entities={organization ? (organization?.censuses ?? []) : Object.values(allCensuses)}
+      columns={columns}
+    />
   );
 };
 

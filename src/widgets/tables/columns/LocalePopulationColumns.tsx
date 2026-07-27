@@ -46,6 +46,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
     key: 'Population Source',
     render: (object) => <LocaleCensusCitation locale={object} />,
+    field: Field.SourceForPopulation,
     columnGroup: 'Demographics',
   },
   {

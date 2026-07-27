@@ -107,6 +107,8 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: <PopulationInTerritoryLabel isShortened={true} />,
     description: <PopulationInTerritoryDescription />,
     render: (lang) => <LanguagePopulationInSelectedTerritory lang={lang} />,
+    isInitiallyVisible: (params) =>
+      !!params.territoryFilter.match(/(^[A-Za-z]{2}$)|(\W[A-Z]{2}\W)/),
     valueType: TableValueType.Population,
   },
 ];
