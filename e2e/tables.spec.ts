@@ -38,7 +38,7 @@ async function seedDeclinedConsent(page: Page) {
         }),
       );
     } catch {
-      // Supress: localStorage may not be available in all contexts
+      // Suppress: localStorage may not be available in all contexts
     }
   });
 }

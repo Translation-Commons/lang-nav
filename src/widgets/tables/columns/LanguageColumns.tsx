@@ -189,7 +189,9 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       ),
       render: (lang) => <LanguageWritingSystems lang={lang} />,
       isInitiallyVisible: (params) =>
-        params.modalityFilter.includes(LanguageModality.Written || LanguageModality.MostlyWritten),
+        params.modalityFilter.some(
+          (m) => m === LanguageModality.Written || m === LanguageModality.MostlyWritten,
+        ),
       field: Field.WritingSystem,
       columnGroup: 'Writing',
     },
