@@ -65,7 +65,7 @@ function getLanguagePluralsColumns(): TableColumn<LanguageData>[] {
     label?: string,
   ): TableColumn<LanguageData> {
     return {
-      key: group + num.toString(), // needs to be unique
+      key: group + ': ' + num.toString(), // needs to be unique
       label: label || num.toString(),
       render: (lang) => {
         const pluralRules = findLanguagePluralRules(lang);

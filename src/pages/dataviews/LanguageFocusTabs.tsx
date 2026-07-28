@@ -68,6 +68,7 @@ const LanguageFocusTabs: React.FC = () => {
                   <strong>Language List</strong>: {languageSource}
                 </div>
               )}
+              <div>{getExtraExplanation(focus)}</div>
             </>
           ),
           label: focus,
@@ -98,11 +99,12 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
           LanguageModality.MostlyWritten,
           LanguageModality.SpokenAndWritten,
         ],
+        languageSource: LanguageSource.ISO,
       };
     case LanguageFocus.DigitizedLanguages:
       return {
         languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
-        languageSource: LanguageSource.ISO,
+        languageSource: LanguageSource.CLDR,
         // Add CLDR coverage level
       };
     case LanguageFocus.AllLanguages:
@@ -117,6 +119,23 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
         languageSource: LanguageSource.Combined,
         modalityFilter: [],
       };
+    default:
+      enforceExhaustiveSwitch(focus);
+  }
+}
+
+function getExtraExplanation(focus: LanguageFocus): string {
+  switch (focus) {
+    case LanguageFocus.SpokenLanguages:
+      return 'Note LangNav does not yet have annotations for all spoken languages.';
+    case LanguageFocus.WrittenLanguages:
+      return 'Note LangNav does not yet have annotations for all written languages.';
+    case LanguageFocus.DigitizedLanguages:
+      return 'The table view will also show digital support & CLDR columns by default. Language codes shown will be in the CLDR format which is slightly different than the ISO definitions. For instance, `zh` will represent "Mandarin" not "Chinese" (in general) and `ms` will represent "Malay" not "Malayic" (including Indonesian).';
+    case LanguageFocus.AllLanguages:
+      return '';
+    case LanguageFocus.AllLanguoids:
+      return '';
     default:
       enforceExhaustiveSwitch(focus);
   }

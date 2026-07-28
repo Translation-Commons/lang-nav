@@ -5,7 +5,7 @@ const CollapsibleReport: React.FC<{
   title: ReactNode;
 }> = ({ title, children }) => {
   return (
-    <details className="collapsible-report">
+    <details className="collapsible-report" open>
       <summary
         style={{
           width: '100%',

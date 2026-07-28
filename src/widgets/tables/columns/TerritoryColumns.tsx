@@ -125,6 +125,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
           }
         />
       ),
+      isInitiallyVisible: false,
       columnGroup: 'Language',
     },
     {

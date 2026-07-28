@@ -15,6 +15,7 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
+import { LanguageModality } from '@entities/language/LanguageModality';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
@@ -187,7 +188,10 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
         </>
       ),
       render: (lang) => <LanguageWritingSystems lang={lang} />,
-      isInitiallyVisible: false,
+      isInitiallyVisible: (params) =>
+        params.modalityFilter.some(
+          (m) => m === LanguageModality.Written || m === LanguageModality.MostlyWritten,
+        ),
       field: Field.WritingSystem,
       columnGroup: 'Writing',
     },

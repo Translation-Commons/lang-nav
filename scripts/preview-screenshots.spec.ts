@@ -2,9 +2,9 @@
 
 /**
  * Script to capture/update preview images saved in public/.
- * Run via: npm run update-screenshots
+ * Run via: npm run update-previews
  *
- * This is NOT a visual regression test — it overwrites public/*.png in place.
+ * This is not a visual regression test — it overwrites public/*.png in place.
  */
 
 import path from 'path';
@@ -12,7 +12,7 @@ import { fileURLToPath } from 'url';
 
 import { expect, Locator, Page, test } from '@playwright/test';
 
-type Clip = { x: number; y: number; width: number; height: number };
+type Clip = { x: number; y: number };
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const PUBLIC_DIR = path.resolve(__dirname, '../public');
@@ -48,7 +48,10 @@ async function dismissConsentBanner(page: Page) {
 }
 
 /** Wait for the data page to finish loading. */
-async function waitToFinishLoadingData(page: Page) {
+async function loadPage(page: Page, paramString: string) {
+  await disableAnimations(page);
+  await dismissConsentBanner(page);
+  await page.goto(`./data?${paramString}`);
   // await expect(page.locator('.LoadingStageDisplay')).toBeHidden();
   await expect(page.locator('.LoadingStageDisplay')).toHaveText(
     'Loading stage: 4 of 4, algorithms finished',
@@ -64,101 +67,58 @@ async function getBox(locator: Locator) {
 }
 
 /** Screenshot the given clip rect after a short settle delay. */
-async function screenshotClip(page: Page, filePath: string, clip: Clip) {
+async function screenshotClip(page: Page, filename: string, clip: Clip) {
   await page.waitForTimeout(1000);
-  await page.screenshot({ path: filePath, clip });
+  await page.screenshot({
+    path: path.join(PUBLIC_DIR, filename + '.png'),
+    clip: { ...clip, width: 600, height: 600 },
+  });
 }
 
 test('capture preview.png — full data page with navbar (cards view)', async ({ page }) => {
-  await disableAnimations(page);
-  await dismissConsentBanner(page);
-  await page.goto('./data?view=Cards');
-  await waitToFinishLoadingData(page);
-  await page.screenshot({
-    path: path.join(PUBLIC_DIR, 'preview.png'),
-    fullPage: false,
-  });
+  await loadPage(page, 'view=Cards');
+  await page.screenshot({ path: path.join(PUBLIC_DIR, 'preview.png'), fullPage: false });
 });
 
 test('capture cardlist.png — card grid without navbar', async ({ page }) => {
-  await disableAnimations(page);
-  await dismissConsentBanner(page);
-  await page.goto('./data?view=Cards');
-  await waitToFinishLoadingData(page);
+  await loadPage(page, 'view=Cards');
   const firstCard = page.locator('.CardInCardList').first();
   await firstCard.waitFor({ state: 'visible' });
   const grid = firstCard.locator('xpath=..');
   const box = await getBox(grid);
-  await screenshotClip(page, path.join(PUBLIC_DIR, 'cardlist.png'), {
-    x: box.x - 5,
-    y: box.y - 5,
-    width: 600,
-    height: 600,
-  });
+  await screenshotClip(page, 'cardlist', { x: box.x - 5, y: box.y - 5 });
 });
 
 test('capture table.png — data page in table view', async ({ page }) => {
-  await disableAnimations(page);
-  await dismissConsentBanner(page);
-  await page.goto('./data?view=Table');
-  await waitToFinishLoadingData(page);
+  await loadPage(page, 'view=Table');
   const table = page.locator('main table').first();
   await table.locator('tbody tr').first().waitFor({ state: 'visible' });
   const box = await getBox(table);
-  await screenshotClip(page, path.join(PUBLIC_DIR, 'table.png'), {
-    x: box.x - 5,
-    y: box.y - 5,
-    width: 600,
-    height: 600,
-  });
+  await screenshotClip(page, 'table', { x: box.x - 5, y: box.y - 5 });
 });
 
 test('capture hierarchy.png — hierarchy/tree view', async ({ page }) => {
-  await disableAnimations(page);
-  await dismissConsentBanner(page);
-  await page.goto('./data?view=Hierarchy');
-  await waitToFinishLoadingData(page);
+  await loadPage(page, 'view=Hierarchy');
   const tree = page.locator('.TreeListRoot').first();
   const box = await getBox(tree);
-  await screenshotClip(page, path.join(PUBLIC_DIR, 'hierarchy.png'), {
-    x: box.x - 5,
-    y: box.y - 5,
-    width: 600,
-    height: 600,
-  });
+  await screenshotClip(page, 'hierarchy', { x: box.x - 5, y: box.y - 5 });
 });
 
 test('capture map.png — territory map colored by number of languages', async ({ page }) => {
-  await disableAnimations(page);
-  await dismissConsentBanner(page);
-  await page.goto('./data?view=Map&objectType=Territory&colorBy=%23+of+Languages');
-  await waitToFinishLoadingData(page);
+  await loadPage(page, 'view=Map&objectType=Territory&colorBy=%23+of+Languages');
   const mapImg = page.locator('img[alt="World map"]');
   await mapImg.waitFor({ state: 'visible' });
   // grandparent = the bordered map container div
   const mapContainer = mapImg.locator('xpath=../..');
   const box = await getBox(mapContainer);
-  await screenshotClip(page, path.join(PUBLIC_DIR, 'map.png'), {
-    x: box.x - 5 + 300,
-    y: box.y - 5,
-    width: 600,
-    height: 600,
-  });
+  await screenshotClip(page, 'map', { x: box.x - 5 + 300, y: box.y - 5 });
 });
 
 test('capture reports.png — reports page', async ({ page }) => {
-  await disableAnimations(page);
-  await dismissConsentBanner(page);
-  await page.goto('./data?view=Reports');
-  await waitToFinishLoadingData(page);
+  await loadPage(page, 'view=Reports');
   // Report content is lazy-loaded — wait for all suspense boundaries to resolve
   await page.waitForLoadState('networkidle');
   const reportSection = page.locator('[data-testid="reports-view"]');
   const box = await getBox(reportSection);
-  await screenshotClip(page, path.join(PUBLIC_DIR, 'reports.png'), {
-    x: box.x - 5,
-    y: box.y - 5,
-    width: 600,
-    height: 600,
-  });
+  await screenshotClip(page, 'reports', { x: box.x - 5, y: box.y - 5 });
 });
