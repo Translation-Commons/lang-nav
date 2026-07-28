@@ -4,7 +4,7 @@ import './hoverable.css';
 
 type HoverableProps = {
   children: React.ReactNode;
-  className: string;
+  className?: string;
   hoverContent?: React.ReactNode;
   onClick?: () => void;
   style?: React.CSSProperties;

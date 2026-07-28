@@ -64,7 +64,7 @@ const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOpti
         <Tab
           key={option.label}
           isActive={getIsActive(option)}
-          description={option.description ?? ''}
+          description={option.description}
           label={option.label}
           navTo={getNavTo(option)}
         />
