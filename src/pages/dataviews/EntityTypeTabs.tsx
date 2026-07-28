@@ -24,6 +24,7 @@ const ORDERED_OBJECTS = [
 const EntityTypeTabs: React.FC = () => {
   return (
     <NavTabs
+      extendedOptionsLabel="More entities that can be viewed"
       options={ORDERED_OBJECTS.map((entityType) => ({
         description: (
           <>
