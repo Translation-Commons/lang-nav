@@ -11,6 +11,9 @@ import LanguageConnections from './sections/LanguageConnections';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
+import LanguageRelationsWidget, {
+  LanguageRelationContextBanner,
+} from './sections/LanguageRelationsWidget';
 import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
 import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
 
@@ -23,6 +26,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
     <div className="Details">
       <LanguageNames lang={lang} />
       <LanguageCodes lang={lang} />
+      <LanguageRelationContextBanner lang={lang} />
 
       <FlexRow>
         <FlexItem>
@@ -35,6 +39,8 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
           <LanguageVitalitySection lang={lang} />
         </FlexItem>
       </FlexRow>
+
+      <LanguageRelationsWidget lang={lang} />
 
       <FlexRow>
         <FlexItem flex="2 1 300px">
