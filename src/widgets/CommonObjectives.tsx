@@ -72,7 +72,7 @@ const Objective: React.FC<ObjectiveProps> = ({
       >
         {inputParam && (
           <input
-            className="ml-2 h-7 rounded-md border border-border bg-transparent px-2 text-xs/relaxed outline-none transition-colors placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
+            className="ml-2 h-7 rounded-md border px-2 text-xs/relaxed outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
             placeholder={inputPlaceholder}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
