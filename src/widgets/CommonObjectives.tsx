@@ -6,6 +6,8 @@ import { getNewURL } from '@features/params/getNewURL';
 import { ObjectType, PageParamKey, PageParams, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
+import { Button } from '@shared/ui/button';
+
 const CommonObjectives: React.FC = () => {
   return (
     <div style={{ textAlign: 'center', margin: '2em auto', maxWidth: '600px' }}>
@@ -62,7 +64,7 @@ const Objective: React.FC<ObjectiveProps> = ({
     <div style={{ marginBottom: '0.5em' }}>
       {label}
       <form
-        style={{ display: 'inline-flex' }}
+        className="inline-flex items-center"
         onSubmit={(e) => {
           e.preventDefault();
           window.location.href = `${urlPath}${getNewURL(params)}`;
@@ -70,7 +72,7 @@ const Objective: React.FC<ObjectiveProps> = ({
       >
         {inputParam && (
           <input
-            style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
+            className="ml-2 h-7 rounded-md border px-2 text-xs/relaxed outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-ring/30"
             placeholder={inputPlaceholder}
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
@@ -87,10 +89,8 @@ const GoButton: React.FC<{ params: Partial<PageParams>; urlPath: LangNavPageName
   urlPath,
 }) => {
   return (
-    <a href={`${urlPath}${getNewURL(params)}`} style={{ marginLeft: '0.5em' }}>
-      <button style={{ padding: '0.25em 0.5em' }} type="submit">
-        GO
-      </button>
+    <a className="ml-2" href={`${urlPath}${getNewURL(params)}`}>
+      <Button type="submit">GO</Button>
     </a>
   );
 };

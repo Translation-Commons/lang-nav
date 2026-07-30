@@ -1,12 +1,13 @@
 import path from 'node:path';
 
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
 import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.VITE_BASE_PATH ?? '/lang-nav/',
-  plugins: [react()],
+  plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@app': path.resolve(__dirname, 'src/app'),
@@ -17,6 +18,7 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@strings': path.resolve(__dirname, 'src/strings'),
       '@tests': path.resolve(__dirname, 'src/tests'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 });

@@ -43,6 +43,7 @@ export default defineConfig({
       '@shared': path.resolve(__dirname, 'src/shared'),
       '@strings': path.resolve(__dirname, 'src/strings'),
       '@tests': path.resolve(__dirname, 'src/tests'),
+      '@': path.resolve(__dirname, 'src'),
     },
   },
 });
