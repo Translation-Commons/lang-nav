@@ -89,7 +89,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getCensusForEntity(object)?.collectorType;
 
     case Field.DigitalSupport:
-      return undefined; // Not yet defined
+      return object.type === ObjectType.Language ? object.digitalSupportScore?.overall : undefined;
     case Field.UnicodeVersion:
       return object.type === ObjectType.WritingSystem ? object.unicodeVersion : undefined;
     case Field.CLDRCoverage:

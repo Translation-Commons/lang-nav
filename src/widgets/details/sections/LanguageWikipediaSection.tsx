@@ -1,7 +1,7 @@
 import React from 'react';
 
+import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { WikipediaStatus } from '@entities/types/DataTypes';
 import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsSection from '@shared/containers/DetailsSection';

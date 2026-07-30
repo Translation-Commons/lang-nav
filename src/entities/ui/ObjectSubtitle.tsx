@@ -4,7 +4,7 @@ import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
-import { getObjectSubtitle } from '@entities/lib/getObjectName';
+import { getEntitySubtitle } from '@entities/lib/getEntityName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -17,7 +17,7 @@ type Props = {
 
 const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = true, style }) => {
   const { searchBy, searchString } = usePageParams();
-  const objectSubtitle = getObjectSubtitle(object);
+  const objectSubtitle = getEntitySubtitle(object);
 
   if (!highlightSearchMatches) {
     return <SubtitleContainer style={style}>{objectSubtitle}</SubtitleContainer>;

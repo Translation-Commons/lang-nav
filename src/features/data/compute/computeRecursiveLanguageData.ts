@@ -1,3 +1,4 @@
+import { computeDigitalSupportScores } from '@entities/language/digitalsupport/computeLanguageDigitalSupportScore';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { getVitalityMetascore } from '@entities/language/vitality/LanguageVitalityComputation';
 
@@ -54,6 +55,9 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
   // Compute the meta score and store the results in the language object
   vitality.meta = getVitalityMetascore(lang);
   lang.vitality = vitality;
+
+  // Compute the digital support scores
+  lang.digitalSupportScore = computeDigitalSupportScores(lang);
 
   // Compute the lat/long coordinates
   computeCoordinates(lang);

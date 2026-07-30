@@ -14,15 +14,14 @@ import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
+import { ObjectBase } from '../types/DataTypes';
+
 import {
-  GoogleTranslateData,
-  IosData,
-  ObjectBase,
+  DigitalSupportScore,
+  PlatformSupportData,
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
-  Win11LanguagePackData,
-} from '../types/DataTypes';
-
+} from './digitalsupport/DigitalSupportTypes';
 import { LanguageModality } from './LanguageModality';
 import {
   LanguageISOStatus,
@@ -120,11 +119,13 @@ export interface LanguageData extends ObjectBase {
   primaryScriptCode?: ScriptCode;
 
   warnings: Partial<Record<LanguageField, string>>;
+
+  digitalSupportScore?: DigitalSupportScore;
   wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
-  googleTranslate?: GoogleTranslateData[];
-  win11LanguagePacks?: Win11LanguagePackData[];
-  ios?: IosData[];
+  googleTranslate?: PlatformSupportData[];
+  win11LanguagePacks?: PlatformSupportData[];
+  ios?: PlatformSupportData[];
 
   latitude?: number;
   longitude?: number;

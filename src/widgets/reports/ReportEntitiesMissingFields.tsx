@@ -11,7 +11,7 @@ import { getApplicableFields } from '@features/transforms/fields/FieldApplicabil
 import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
+import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
@@ -44,7 +44,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
   return (
     <>
       This report shows which fields have the most missing data for the currently filtered{' '}
-      {getObjectTypeLabelPlural(objectType)}. This can help identify gaps in the data and potential
+      {getEntityTypeLabelPlural(objectType)}. This can help identify gaps in the data and potential
       areas for improvement.
       <table>
         <thead>

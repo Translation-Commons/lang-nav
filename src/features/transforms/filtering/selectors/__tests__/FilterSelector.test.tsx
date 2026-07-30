@@ -35,7 +35,7 @@ describe('FilterSelector', () => {
     expect(getByText(/Written in/)).toBeTruthy();
 
     rerender(<FilterSelector field={Field.Modality} />);
-    expect(getByText(/Modality/)).toBeTruthy();
+    expect(getByText(/Medium of Use/)).toBeTruthy();
   });
 
   it('returns null for unsupported fields', () => {

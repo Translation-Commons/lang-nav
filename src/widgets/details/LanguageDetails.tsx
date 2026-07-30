@@ -1,5 +1,6 @@
 import React from 'react';
 
+import LanguageDetailsDigitalSupport from '@entities/language/digitalsupport/LanguageDetailsDigitalSupport';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 import LanguageVitalitySection from '@entities/language/vitality/LanguageVitalitySection';
@@ -43,6 +44,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
           <LanguageDetailsVitalityAndViability lang={lang} />
         </FlexItem>
       </FlexRow>
+      <LanguageDetailsDigitalSupport lang={lang} />
 
       <LanguageAttributes lang={lang} />
       <LanguageConnections lang={lang} />

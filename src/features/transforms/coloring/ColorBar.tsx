@@ -139,7 +139,7 @@ function getTicks(
           LanguageModality.SpokenAndWritten,
           LanguageModality.MostlySpoken,
           LanguageModality.Spoken,
-          // For a continuum, we don't include 'Sign' here but we should come back to this and find a better way to show it
+          LanguageModality.Sign,
         ].map((v) => getModalityLabel(v)!),
         numberOfTicks,
       ).map((label) => ({

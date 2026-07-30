@@ -51,7 +51,7 @@ The images in `public/` (`preview.png`, `cardlist.png`, `table.png`, `hierarchy.
 **Locally:**
 
 ```bash
-npm run update-screenshots
+npm run update-previews
 ```
 
 This builds the app, launches a headless browser at 1920×1080, captures each view, and overwrites the images in `public/` in place.

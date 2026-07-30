@@ -7,8 +7,6 @@ import { getDefaultParams } from '@features/params/Profiles';
 import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
-import { LanguageScope } from '@entities/language/LanguageTypes';
 import {
   getLanguageISOStatusLabel,
   getVitalityEthnologueCoarseLabel,
@@ -19,8 +17,6 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { areArraysIdentical } from '@shared/lib/setUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { getModalityLabel } from '@strings/LanguageModalityStrings';
-import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import { getFilterLabels } from './FilterLabels';
@@ -35,8 +31,6 @@ const FilterPath: React.FC = () => {
     isoStatus,
     languageFilter,
     languageFamilyFilter,
-    languageScopes,
-    modalityFilter,
     populationMax,
     populationMin,
     searchBy,
@@ -97,36 +91,37 @@ const FilterPath: React.FC = () => {
       </>
     ),
 
-    !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
-      <Selector
-        selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(LanguageScope).filter((s) => typeof s === 'number')}
-        labelWhenEmpty="Any Languoid"
-        onChange={(scope: LanguageScope) =>
-          languageScopes.includes(scope)
-            ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
-            : updatePageParams({ languageScopes: [...languageScopes, scope] })
-        }
-        selected={languageScopes}
-        getOptionLabel={getLanguageScopeLabel}
-      />
-    ),
-    modalityFilter.length > 0 && (
-      <Selector
-        selectorStyle={{ marginLeft: '0' }}
-        options={Object.values(LanguageModality).filter((v) => typeof v === 'number')}
-        labelWhenEmpty="Any Modality"
-        getOptionLabel={getModalityLabel}
-        onChange={(modality: LanguageModality) =>
-          modalityFilter.includes(modality)
-            ? updatePageParams({
-                modalityFilter: modalityFilter.filter((m) => m !== modality),
-              })
-            : updatePageParams({ modalityFilter: [...modalityFilter, modality] })
-        }
-        selected={modalityFilter}
-      />
-    ),
+    // Turning off countries for language scope & modality to a different component
+    // !areArraysIdentical(languageScopes, defaultParams.languageScopes) && (
+    //   <Selector
+    //     selectorStyle={{ marginLeft: '0' }}
+    //     options={Object.values(LanguageScope).filter((s) => typeof s === 'number')}
+    //     labelWhenEmpty="Any Languoid"
+    //     onChange={(scope: LanguageScope) =>
+    //       languageScopes.includes(scope)
+    //         ? updatePageParams({ languageScopes: languageScopes.filter((s) => s != scope) })
+    //         : updatePageParams({ languageScopes: [...languageScopes, scope] })
+    //     }
+    //     selected={languageScopes}
+    //     getOptionLabel={getLanguageScopeLabel}
+    //   />
+    // ),
+    // modalityFilter.length > 0 && (
+    //   <Selector
+    //     selectorStyle={{ marginLeft: '0' }}
+    //     options={Object.values(LanguageModality).filter((v) => typeof v === 'number')}
+    //     labelWhenEmpty="Any Modality"
+    //     getOptionLabel={getModalityLabel}
+    //     onChange={(modality: LanguageModality) =>
+    //       modalityFilter.includes(modality)
+    //         ? updatePageParams({
+    //             modalityFilter: modalityFilter.filter((m) => m !== modality),
+    //           })
+    //         : updatePageParams({ modalityFilter: [...modalityFilter, modality] })
+    //     }
+    //     selected={modalityFilter}
+    //   />
+    // ),
     !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
       <Selector
         selectorStyle={{ marginLeft: '0' }}

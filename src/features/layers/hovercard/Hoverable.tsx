@@ -6,10 +6,17 @@ type HoverableProps = {
   children: React.ReactNode;
   hoverContent?: React.ReactNode;
   onClick?: () => void;
+  className?: string;
   style?: React.CSSProperties;
 };
 
-const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, style }) => {
+const Hoverable: React.FC<HoverableProps> = ({
+  children,
+  hoverContent,
+  onClick,
+  style,
+  className,
+}) => {
   const { showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
 
   if (hoverContent == null) {
@@ -24,7 +31,7 @@ const Hoverable: React.FC<HoverableProps> = ({ children, hoverContent, onClick, 
     <span
       data-testid="hoverable"
       aria-label={typeof hoverContent === 'string' ? hoverContent : undefined} // For screen readers
-      className="hoverableText"
+      className={`hoverableText${className ? ` ${className}` : ''}`}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={onMouseLeaveTriggeringElement}
       onClick={(e) => {

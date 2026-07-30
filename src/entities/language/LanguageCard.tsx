@@ -15,10 +15,9 @@ import { uniqueBy } from '@shared/lib/setUtils';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
+import LanguageDigitalSupportMetascore from './digitalsupport/LanguageDigitalSupportMetascore';
 import LanguageTerritoryList from './LanguageTerritoryList';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
-import LanguageVitalityMeter from './vitality/VitalityMeter';
-import { VitalitySource } from './vitality/VitalityTypes';
 
 interface Props {
   lang: LanguageData;
@@ -59,11 +58,11 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       )}
 
       <CardField
-        title="Vitality"
-        field={Field.VitalityMetascore}
-        description="An estimate of how active the language is in national and community spaces."
+        title="Digital Support"
+        field={Field.DigitalSupport}
+        description="An estimate of how well the language is supported digitally, including online presence, software, and digital resources."
       >
-        <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
+        <LanguageDigitalSupportMetascore lang={lang} />
       </CardField>
 
       {countryLocales.length > 0 && (

@@ -69,8 +69,9 @@ export const AllApplicableFilterSelectors: React.FC = () => {
         <FilterSelector field={filterBy} key={filterBy} />
       ))}
       {otherFilters.length > 0 && (
-        <details>
-          <summary>Filters for related entities</summary>
+        <details style={{ marginTop: '0.5em', fontSize: '0.8em' }}>
+          <summary>Extra filters</summary>
+          Entities shown on the page may be filtered by additional criteria.
           {otherFilters.map((filterBy) => (
             <FilterSelector field={filterBy} key={filterBy} />
           ))}

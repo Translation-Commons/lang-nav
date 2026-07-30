@@ -73,19 +73,6 @@ button:not([data-slot]):focus,
   background: var(--color-button-hover);
 }
 
-.tab {
-  background: none;
-}
-
-.tab:hover,
-.tab:focus {
-  background: var(--color-background-hover);
-}
-
-.tab:focus {
-  border-color: var(--color-button-primary);
-}
-
 footer {
   align-items: center;
   background-color: var(--color-button-secondary);

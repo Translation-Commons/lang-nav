@@ -1,14 +1,11 @@
 import React, { useMemo } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
-
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LanguageData } from '../LanguageTypes';
 
-import { findLanguagePluralRules, PluralRuleKey } from './LanguagePluralComputation';
-import PluralRuleExplanation from './PluralRuleExplanation';
-import { getPluralRuleColor, getPluralRuleKeyLabel } from './PluralStrings';
+import LanguagePluralCategory from './LanguagePluralCategory';
+import { findLanguagePluralRules } from './LanguagePluralComputation';
 
 const LanguagePluralCategories: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   // Find the plural rules for this language
@@ -21,23 +18,7 @@ const LanguagePluralCategories: React.FC<{ lang: LanguageData }> = ({ lang }) =>
   return (
     <div style={{ display: 'flex', gap: '0.25em', flexWrap: 'wrap', marginBottom: '0.25em' }}>
       {pluralRules.map(([pluralRuleKey, rule]) => (
-        <Hoverable
-          key={pluralRuleKey}
-          hoverContent={
-            <>
-              <PluralRuleExplanation rule={rule} />
-            </>
-          }
-          style={{
-            backgroundColor: getPluralRuleColor(pluralRuleKey),
-            borderRadius: '0.25em',
-            color: pluralRuleKey === PluralRuleKey.Other ? 'inherit' : 'var(--color-text-on-color)',
-            padding: '0.25em',
-            margin: '0',
-          }}
-        >
-          {getPluralRuleKeyLabel(pluralRuleKey)}
-        </Hoverable>
+        <LanguagePluralCategory key={pluralRuleKey} pluralRuleKey={pluralRuleKey} rule={rule} />
       ))}
     </div>
   );

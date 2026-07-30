@@ -1,5 +1,6 @@
 import React from 'react';
 
+import type { PageParams } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 import TableValueType from './TableValueType';
@@ -42,7 +43,7 @@ interface TableColumn<T> {
   readonly field?: Field;
 
   /** Whether the column is visible by default in the UI */
-  readonly isInitiallyVisible?: boolean;
+  readonly isInitiallyVisible?: boolean | ((params: PageParams) => boolean);
 }
 
 export default TableColumn;
