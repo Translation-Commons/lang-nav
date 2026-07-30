@@ -30,7 +30,9 @@ h4 {
   margin-bottom: 4px;
 }
 
-button,
+/* :not([data-slot]) exempts shadcn components - their utility classes live in @layer utilities,
+   which unlayered rules like these would otherwise always beat. */
+button:not([data-slot]),
 .option {
   border-radius: 8px;
   border: 1px solid transparent;
@@ -51,19 +53,19 @@ button,
   width: 1em;
 }
 
-button.primary,
+button.primary:not([data-slot]),
 .option.primary {
   color: var(--color-text-on-color);
   background-color: var(--color-button-primary);
 }
 
-button:hover,
+button:not([data-slot]):hover,
 .option:hover {
   color: var(--color-text-on-color);
   background: var(--color-button-hover);
 }
 
-button:focus,
+button:not([data-slot]):focus,
 .option:focus,
 .ButtonFocused {
   color: var(--color-text-on-color);
