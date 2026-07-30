@@ -6,7 +6,6 @@ import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
 
 import DetailsSection from '@shared/containers/DetailsSection';
 import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
-import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
 import CountCompact from '@shared/ui/CountCompact';
 import ExternalLink from '@shared/ui/ExternalLink';
 import Pill from '@shared/ui/Pill';
@@ -23,7 +22,7 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
           <ExternalLink href={'http://' + wikipedia.url}>{wikipedia.url}</ExternalLink>
         )}
       </div>
-      <DetailsStatContainer>
+      <div className="DetailsStatContainer">
         <DetailsStatBlock label="Articles">
           {isActive && wikipedia ? (
             <CountCompact count={wikipedia.articles} />
@@ -38,7 +37,7 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
             <NotApplicableDisplay />
           )}
         </DetailsStatBlock>
-      </DetailsStatContainer>
+      </div>
     </DetailsSection>
   );
 };

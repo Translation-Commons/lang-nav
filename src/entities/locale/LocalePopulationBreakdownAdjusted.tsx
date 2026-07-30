@@ -1,6 +1,7 @@
 import React from 'react';
 
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
@@ -14,20 +15,19 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLocaleName } from './LocaleStrings';
 
-const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const {
-    pop: {
-      speaking: { unadjusted, adjusted, percent, source, census },
-    },
-    territory,
-  } = locale;
+const LocalePopulationBreakdownAdjusted: React.FC<{
+  locale: LocaleData;
+  use: 'speaking' | 'writing';
+}> = ({ locale, use }) => {
+  const { pop, territory } = locale;
+  const { unadjusted, adjusted, percent, source, census, literacyDiscount, modalityDiscount } =
+    pop[use];
   if (!unadjusted || !adjusted || !territory || !percent) return null;
 
   const localeNameWithoutTerritory = getLocaleName(locale, false);
   const territoryName = locale.territory?.nameDisplay || 'territory';
   const fromCLDR = census?.presentedBy === 'CLDR' || source === PopulationSourceCategory.CLDR;
   const isAdjusted = adjusted !== unadjusted;
-
   return (
     <table>
       <tbody>
@@ -37,17 +37,8 @@ const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ l
           <CellLabel align="right">Value</CellLabel>
         </tr>
         <tr>
-          <td>{localeNameWithoutTerritory} population recorded</td>
-          <td>{(!fromCLDR && census?.yearCollected) || <Deemphasized>unknown</Deemphasized>}</td>
-          <CellPopulation population={unadjusted} />
-        </tr>
-        <tr>
-          <td colSpan={2}>% of {territoryName}</td>
-          <CellPercent percent={percent} showPercentSign alignFraction={false} />
-        </tr>
-        <tr>
-          <td colSpan={2}>Source</td>
-          <td>
+          <td>Source</td>
+          <td colSpan={2} style={{ textAlign: 'right' }}>
             {census ? (
               <HoverableObjectName object={census} />
             ) : (
@@ -55,6 +46,31 @@ const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ l
             )}
           </td>
         </tr>
+        <tr>
+          <td>Original {localeNameWithoutTerritory} estimate</td>
+          <td>{(!fromCLDR && census?.yearCollected) || <Deemphasized>unknown</Deemphasized>}</td>
+          <CellPopulation population={unadjusted} />
+        </tr>
+        <tr>
+          <td colSpan={2}>% of {territoryName} from estimate</td>
+          <CellPercent percent={percent} showPercentSign alignFraction={false} />
+        </tr>
+        {literacyDiscount != null && literacyDiscount != 1 && (
+          <tr>
+            <td colSpan={2}>Literacy in {territoryName}</td>
+            <CellPercent percent={literacyDiscount * 100} showPercentSign alignFraction={false} />
+          </tr>
+        )}
+        {modalityDiscount != null && modalityDiscount != 1 && (
+          <tr>
+            <td colSpan={2}>
+              <Hoverable hoverContent="When the original estimate doesn't specifically measure speaking or writing, we adjust the original population estimate based on if the language is primary spoken as opposed to written and vice-versa.">
+                Modality discount
+              </Hoverable>
+            </td>
+            <CellPercent percent={modalityDiscount * 100} showPercentSign alignFraction={false} />
+          </tr>
+        )}
         {/* Show the population of the territory used to compute the percent if there is a different number from the source */}
         {(fromCLDR || census?.yearCollected) && (
           <tr>
@@ -72,13 +88,20 @@ const LocalePopulationBreakdownAdjusted: React.FC<{ locale: LocaleData }> = ({ l
         {isAdjusted && (
           <>
             <tr>
-              <td colSpan={3}>
-                Assuming linear population growth, <CountOfPeople count={territory!.population} /> *{' '}
-                {numberToFixedUnlessSmall(percent!)}% =
+              <td colSpan={3} style={{ textAlign: 'right', paddingRight: '1em' }}>
+                <CountOfPeople count={territory!.population} />
+                <> * {numberToFixedUnlessSmall(percent!)}%</>
+                {literacyDiscount && literacyDiscount != 1 && (
+                  <> * {numberToFixedUnlessSmall(literacyDiscount * 100)}%</>
+                )}{' '}
+                {modalityDiscount && modalityDiscount != 1 && (
+                  <> * {numberToFixedUnlessSmall(modalityDiscount * 100)}%</>
+                )}{' '}
+                =
               </td>
             </tr>
             <tr>
-              <td>Language population, adjusted</td>
+              <td>Adjusted population</td>
               <td>{TerritoryDataYear}</td>
               <CellPopulation population={adjusted} />
             </tr>

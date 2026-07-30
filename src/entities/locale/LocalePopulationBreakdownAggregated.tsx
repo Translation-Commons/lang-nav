@@ -3,7 +3,6 @@ import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
@@ -16,13 +15,16 @@ import { getLocaleName } from './LocaleStrings';
 
 const MAX_CONSTITUENTS_DISPLAYED = 5;
 
-const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { adjusted, percent, source } = locale.pop.speaking;
+const LocalePopulationBreakdownAggregated: React.FC<{
+  locale: LocaleData;
+  use: 'speaking' | 'writing';
+}> = ({ locale, use }) => {
+  const { adjusted, percentAdjusted: percent, source } = locale.pop[use];
   const fromTerritories = source === PopulationSourceCategory.AggregatedFromTerritories;
   const constituents = fromTerritories
     ? uniqueBy(locale.relatedLocales?.childTerritories || [], (l) => l.territoryCode || '')
     : uniqueBy(locale.relatedLocales?.childLanguages || [], (l) => l.languageCode).sort(
-        sortByPopulation,
+        (a, b) => (b.pop[use].adjusted ?? 0) - (a.pop[use].adjusted ?? 0),
       );
   const [showAllConstituents, setShowAllConstituents] = React.useState(false);
 
@@ -58,8 +60,8 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
                   labelSource={fromTerritories ? 'territory' : 'language'}
                 />
               </td>
-              <CellPopulation population={childLocale.pop.speaking.adjusted} />
-              <CellPercent percent={childLocale.pop.speaking.percent} />
+              <CellPopulation population={childLocale.pop[use].adjusted} />
+              <CellPercent percent={childLocale.pop[use].percentAdjusted} />
             </tr>
           ))}
         {showAllConstituents ? (
@@ -79,6 +81,8 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
           <RowOfRemainingConstituents
             locales={constituents.slice(MAX_CONSTITUENTS_DISPLAYED)}
             setShowAllConstituents={setShowAllConstituents}
+            use={use}
+            fromTerritories={fromTerritories}
           />
         )}
         <tr>
@@ -116,9 +120,11 @@ const LocalePopulationBreakdownAggregated: React.FC<{ locale: LocaleData }> = ({
 const RowOfRemainingConstituents: React.FC<{
   locales: LocaleData[];
   setShowAllConstituents: (show: boolean) => void;
-}> = ({ locales, setShowAllConstituents }) => {
+  use: 'speaking' | 'writing';
+  fromTerritories: boolean;
+}> = ({ locales, setShowAllConstituents, use }) => {
   if (locales.length === 0) return null;
-  const totalInRemainder = sumBy(locales, (locale) => locale.pop.speaking.adjusted ?? 0);
+  const totalInRemainder = sumBy(locales, (locale) => locale.pop[use].adjusted ?? 0);
   const percentInRemainder =
     (totalInRemainder * 100) / sumBy(locales, (locale) => locale.territory?.population || 0);
 

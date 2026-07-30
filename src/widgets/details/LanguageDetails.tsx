@@ -14,6 +14,8 @@ import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
 import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
 import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
 
+import './details.css';
+
 type Props = {
   lang: LanguageData;
 };
@@ -24,28 +26,28 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageNames lang={lang} />
       <LanguageCodes lang={lang} />
 
-      <FlexRow>
-        <FlexItem>
+      <div className="DetailsRow">
+        <div className="DetailsBox">
           <LanguagePopulationDetails lang={lang} />
-        </FlexItem>
-        <FlexItem>
+        </div>
+        <div className="DetailsBox">
           <LanguageWikipediaSection lang={lang} />
-        </FlexItem>
-        <FlexItem>
+        </div>
+        <div className="DetailsBox">
           <LanguageVitalitySection lang={lang} />
-        </FlexItem>
-      </FlexRow>
+        </div>
+      </div>
 
-      <FlexRow>
-        <FlexItem flex="2 1 300px">
+      <div className="DetailsRow">
+        <div className="DetailsBox" style={{ flex: '2 1 300px' }}>
           <LanguageSpeakersByTerritorySection lang={lang} />
-        </FlexItem>
-        <FlexItem>
+        </div>
+        <div className="DetailsBox">
           <LanguageDetailsVitalityAndViability lang={lang} />
-        </FlexItem>
-      </FlexRow>
-      <LanguageDetailsDigitalSupport lang={lang} />
+        </div>
+      </div>
 
+      <LanguageDetailsDigitalSupport lang={lang} />
       <LanguageAttributes lang={lang} />
       <LanguageConnections lang={lang} />
       <LanguageLocation lang={lang} />
@@ -54,22 +56,3 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
 };
 
 export default LanguageDetails;
-
-const FlexRow: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <div
-    style={{
-      display: 'flex',
-      flexWrap: 'wrap',
-      gap: '1em',
-      alignItems: 'stretch',
-      marginBottom: '1em',
-    }}
-  >
-    {children}
-  </div>
-);
-
-const FlexItem: React.FC<{ children: React.ReactNode; flex?: string }> = ({
-  children,
-  flex = '1 1 200px',
-}) => <div style={{ flex }}>{children}</div>;

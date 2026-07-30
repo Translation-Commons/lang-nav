@@ -8,12 +8,18 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 
-const LocalePopulationAdjusted: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  if (locale.pop.speaking.adjusted == null) return null;
+type Props = {
+  locale: LocaleData;
+  use: 'speaking' | 'writing';
+};
+
+const LocalePopulationAdjusted: React.FC<Props> = ({ locale, use }) => {
+  const pop = locale.pop[use];
+  if (pop.adjusted == null) return null;
 
   return (
-    <Hoverable hoverContent={<LocalePopulationBreakdown locale={locale} />}>
-      <CountOfPeople count={locale.pop.speaking.adjusted} />
+    <Hoverable hoverContent={<LocalePopulationBreakdown locale={locale} use={use} />}>
+      <CountOfPeople count={pop.adjusted} />
     </Hoverable>
   );
 };

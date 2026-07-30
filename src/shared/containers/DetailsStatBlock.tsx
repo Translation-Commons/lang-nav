@@ -2,7 +2,7 @@ import React from 'react';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-const DetailsStatBlock: React.FC<{ label: string; children: React.ReactNode }> = ({
+const DetailsStatBlock: React.FC<{ label: React.ReactNode; children: React.ReactNode }> = ({
   label,
   children,
 }) => (

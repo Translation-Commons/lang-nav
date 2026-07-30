@@ -330,6 +330,8 @@ function convertCLDRLangPopToLangNavEntries(
   population: number,
   getLanguage: (code: string) => LanguageData | undefined,
 ): Record<string, number> {
+  if (population <= 0) return accumulator;
+
   // We have to do some messy language code parsing since entries here may be using 2-letter codes (eg. sr not srp) and
   // they may have script or other locale tags (eg. sr_Latn, ca_valencia, etc.), and they may be part of a macrolanguage
   // So we have to get the language code part and convert it to ISO 639-3 then add it back to the locale string.

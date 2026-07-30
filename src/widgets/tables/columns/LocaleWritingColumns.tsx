@@ -1,7 +1,10 @@
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import TableColumn from '@features/table/TableColumn';
+import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
+import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
+import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
 const columns: TableColumn<LocaleData>[] = [
@@ -41,9 +44,23 @@ const columns: TableColumn<LocaleData>[] = [
   {
     key: 'Population (Writing)',
     description:
-      'Coarse estimate, based on the spoken population × overall literacy in country, actual numbers may vary.',
-    render: (object) => object.pop.writing.unadjusted,
+      'Some of these are based on censuses with precise data about writing, but most are computed from spoken language usage estimates and converted to writing usage based on literacy rate and spoken traditions.',
+    render: (object) => <LocalePopulationAdjusted locale={object} use="writing" />,
+    exportValue: (object) => object.pop.writing.adjusted,
     field: Field.PopulationWriting,
+  },
+  {
+    key: 'Population (Writing, percent)',
+    description:
+      'The percent of people in the territory that read and/or write in the language, often computed from other estimates, these should be taken with a grain of salt.',
+    render: (object) => object.pop.writing.percentAdjusted,
+    valueType: TableValueType.Decimal,
+  },
+  {
+    key: 'Population (Writing, source)',
+    description:
+      'Coarse estimate, based on the spoken population × overall literacy in country, actual numbers may vary.',
+    render: (object) => <LocaleCensusCitation locale={object} use="writing" />,
   },
 ];
 
