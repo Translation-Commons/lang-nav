@@ -37,6 +37,6 @@ function computeLanguageDescendantPopulation(lang: LanguageData): number {
     (total, childLang) => total + computeLanguageDescendantPopulation(childLang),
     0.01,
   );
-  lang.populationOfDescendants = descendantPopulation;
-  return Math.max(lang.populationRough || 0, descendantPopulation) + 0.01; // Tiebreaker = number of child nodes
+  lang.pop.speaking.descendants = descendantPopulation;
+  return Math.max(lang.pop.rough || 0, descendantPopulation) + 0.01; // Tiebreaker = number of child nodes
 }

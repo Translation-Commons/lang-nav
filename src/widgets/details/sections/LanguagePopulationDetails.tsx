@@ -11,17 +11,17 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
-type Props = { lang: LanguageData };
+type Props = { lang: LanguageData; use: 'speaking' | 'writing' };
 
-const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
-  const { populationEstimate, populationEstimateSource } = lang;
+const LanguagePopulationDetails: React.FC<Props> = ({ lang, use }) => {
+  const pop = lang.pop[use];
 
   const title = (
     <>
-      Population
-      {populationEstimateSource && (
+      <span style={{ textTransform: 'titlecase' }}>{use} Population</span>
+      {pop.source && (
         <div style={{ fontSize: '0.75em', fontWeight: 'normal', textTransform: 'lowercase' }}>
-          <PopulationSourceCategoryDisplay sourceCategory={populationEstimateSource} />
+          <PopulationSourceCategoryDisplay sourceCategory={pop.source} />
         </div>
       )}
     </>
@@ -29,12 +29,12 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
 
   return (
     <DetailsSection title={title}>
-      {populationEstimate == null ? (
+      {pop.estimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
         <div className="DetailsStatContainer">
-          <DetailsStatBlock label={getLanguageModalityUserLabel(lang.modality)}>
-            <LanguagePopulationEstimate lang={lang} />
+          <DetailsStatBlock label={getLanguageModalityUserLabel(lang.modality, use)}>
+            <LanguagePopulationEstimate lang={lang} use={use} />
           </DetailsStatBlock>
         </div>
       )}

@@ -9,17 +9,23 @@ import { LanguageData } from '../LanguageTypes';
 import { LanguagePopulationBreakdownFromDescendants } from './LanguagePopulationFromDescendants';
 import { LanguagePopulationBreakdownFromLocales } from './LanguagePopulationFromLocales';
 
-const LanguagePopulationBreakdownButton: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { populationEstimate, populationEstimateSource } = lang;
+type Props = {
+  lang: LanguageData;
+  use?: 'speaking' | 'writing';
+};
+
+const LanguagePopulationBreakdownButton: React.FC<Props> = ({ lang, use }) => {
+  use = use ?? (lang.pop.overall === lang.pop.writing.estimate ? 'writing' : 'speaking');
+  const pop = lang.pop[use];
   const [showPopulationBreakdown, setShowPopulationBreakdown] = React.useState(false);
 
-  if (!populationEstimate || !populationEstimateSource) return null;
+  if (!pop.estimate || !pop.source) return null;
 
   let breakdown = null;
-  if (populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories) {
-    breakdown = <LanguagePopulationBreakdownFromLocales lang={lang} />;
-  } else if (populationEstimateSource === PopulationSourceCategory.AggregatedFromLanguages) {
-    breakdown = <LanguagePopulationBreakdownFromDescendants lang={lang} />;
+  if (pop.source === PopulationSourceCategory.AggregatedFromTerritories) {
+    breakdown = <LanguagePopulationBreakdownFromLocales lang={lang} use={use} />;
+  } else if (pop.source === PopulationSourceCategory.AggregatedFromLanguages) {
+    breakdown = <LanguagePopulationBreakdownFromDescendants lang={lang} use={use} />;
   }
   if (!breakdown) return null;
 

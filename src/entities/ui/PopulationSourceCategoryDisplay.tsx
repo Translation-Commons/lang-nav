@@ -10,13 +10,12 @@ const PopulationSourceCategoryDisplay: React.FC<{ sourceCategory?: PopulationSou
   if (sourceCategory == null) return <Deemphasized>no citation</Deemphasized>;
   switch (sourceCategory) {
     case PopulationSourceCategory.AggregatedFromTerritories:
-      return 'From Locales';
+      return 'aggregated from countries';
     case PopulationSourceCategory.AggregatedFromLanguages:
-      return 'From Dialects';
+      return 'aggregated from dialects';
     case PopulationSourceCategory.UnverifiedOfficial:
       return 'Official (but unverified)';
     case PopulationSourceCategory.Algorithmic:
-    case PopulationSourceCategory.Ethnologue:
     case PopulationSourceCategory.CLDR:
     case PopulationSourceCategory.EDL:
     case PopulationSourceCategory.Official:

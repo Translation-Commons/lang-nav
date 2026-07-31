@@ -7,7 +7,7 @@ import averageCoordinates from '../averageCoordinates';
 describe('averageCoordinates', () => {
   function makeLanguage(lat: number, lng: number) {
     const lang = getBaseLanguageData(lat + '-' + lng, '');
-    lang.populationEstimate = 1000; // population is needed for the averageCoordinates function to include the language in the average
+    lang.pop.overall = 1000; // population is needed for the averageCoordinates function to include the language in the average
     lang.latitude = lat;
     lang.longitude = lng;
     return lang;
@@ -60,10 +60,10 @@ describe('averageCoordinates', () => {
 
   it('weights coordinates by the population', () => {
     const smaller = makeLanguage(0, -10);
-    smaller.populationEstimate = 1;
+    smaller.pop.overall = 1;
 
     const larger = makeLanguage(0, 10);
-    larger.populationEstimate = 16;
+    larger.pop.overall = 16;
 
     const result = averageCoordinates([smaller, larger]);
     // The average should be much closer to l20_40 than l10_20 because it has a much higher population

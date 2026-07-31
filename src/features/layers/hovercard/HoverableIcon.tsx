@@ -7,7 +7,7 @@ type Props = {
   className?: string;
   description: string;
   Icon: LucideIcon;
-  onClick: () => void;
+  onClick?: () => void;
 };
 
 /**

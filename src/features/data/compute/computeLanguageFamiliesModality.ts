@@ -47,11 +47,9 @@ function determineCombinedModality(langs: LanguageData[]): LanguageModality | un
 
   // If there are multiple modalities, we'll probably want spoken & written but we will convert it to a score since there is a
   // continuum of modalities.
-  const totalPop = sumBy(langs, (lang) =>
-    lang.modality != null ? (lang.populationEstimate ?? 0) : 0,
-  );
+  const totalPop = sumBy(langs, (lang) => (lang.modality != null ? (lang.pop.overall ?? 0) : 0));
   const score = sumBy(langs, (lang) => {
-    const pop = lang.populationEstimate ?? 0;
+    const pop = lang.pop.overall ?? 0;
     return (lang.modality ?? 0) * (pop / totalPop);
   });
 

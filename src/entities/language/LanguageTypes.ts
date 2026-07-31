@@ -91,6 +91,20 @@ export type EthnologueLanguageData = LanguageDataInSource & {
   digitalSupport?: EthnologueDigitalSupport;
 };
 
+export type LanguageSpecificPopulationData = {
+  estimate?: number;
+  source?: PopulationSourceCategory;
+  fromLocales?: number;
+  descendants?: number;
+};
+
+export type LanguagePopulationData = {
+  overall?: number; // Higher of the 2: speaking or writing
+  speaking: LanguageSpecificPopulationData;
+  writing: LanguageSpecificPopulationData;
+  rough?: number; // from languages.tsv
+};
+
 export interface LanguageData extends ObjectBase {
   type: ObjectType.Language;
 
@@ -109,11 +123,7 @@ export interface LanguageData extends ObjectBase {
   viabilityConfidence?: string;
   viabilityExplanation?: string;
 
-  populationEstimate?: number;
-  populationEstimateSource?: PopulationSourceCategory;
-  populationRough?: number; // from languages.tsv
-  populationOfDescendants?: number; // computed from child languages
-  populationFromLocales?: number; // aggregated from locale data
+  pop: LanguagePopulationData;
 
   modality?: LanguageModality;
   primaryScriptCode?: ScriptCode;
@@ -175,6 +185,10 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     writingSystems: {},
     childLanguages: [],
     warnings: {},
+    pop: {
+      speaking: {},
+      writing: {},
+    },
 
     // Source-specific data
     Combined: {},

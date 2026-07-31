@@ -42,18 +42,15 @@ function getLargestDescendant(
     const childsLargest = getLargestDescendant(child, languageSource, depth + 1);
 
     // Skip language families and only consider languages with population
-    const isChildValid =
-      child.scope !== LanguageScope.Family && (child.populationEstimate || 0) > 0;
+    const isChildValid = child.scope !== LanguageScope.Family && (child.pop.overall || 0) > 0;
     const isChildsLargestValid =
-      childsLargest?.scope !== LanguageScope.Family && (childsLargest?.populationEstimate || 0) > 0;
+      childsLargest?.scope !== LanguageScope.Family && (childsLargest?.pop.overall || 0) > 0;
 
     // Pick the better candidate: prefer the one with larger population
     let candidateLargest: LanguageData | undefined;
     if (isChildsLargestValid && isChildValid) {
       candidateLargest =
-        (childsLargest?.populationEstimate || 0) > (child.populationEstimate || 0)
-          ? childsLargest
-          : child;
+        (childsLargest?.pop.overall || 0) > (child.pop.overall || 0) ? childsLargest : child;
     } else if (isChildsLargestValid) {
       candidateLargest = childsLargest;
     } else if (isChildValid) {
@@ -63,8 +60,7 @@ function getLargestDescendant(
     // Update largest if we found a better candidate
     if (
       candidateLargest &&
-      (largest == null ||
-        (candidateLargest.populationEstimate || 0) > (largest.populationEstimate || 0))
+      (largest == null || (candidateLargest.pop.overall || 0) > (largest.pop.overall || 0))
     ) {
       return candidateLargest;
     }

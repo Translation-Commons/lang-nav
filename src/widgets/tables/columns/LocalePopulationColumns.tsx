@@ -39,7 +39,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: '% of Global Language Speakers',
     render: (object) =>
       object.pop.speaking.adjusted &&
-      (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate ?? 1),
+      (object.pop.speaking.adjusted * 100) / (object.language?.pop.speaking.estimate ?? 1),
     isInitiallyVisible: false,
     field: Field.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',

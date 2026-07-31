@@ -5,15 +5,14 @@ import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { buildFilterByPopulation } from '../filterByRange';
 
 describe('buildFilterByPopulation', () => {
-  const langs = [
-    getBaseLanguageData('a', 'a'),
-    { ...getBaseLanguageData('b', 'b'), populationEstimate: 0 },
-    { ...getBaseLanguageData('c', 'c'), populationEstimate: 1 },
-    { ...getBaseLanguageData('d', 'd'), populationEstimate: 100 },
-    { ...getBaseLanguageData('e', 'e'), populationEstimate: 1000 },
-    { ...getBaseLanguageData('f', 'f'), populationEstimate: 10_000_000_000 },
-    { ...getBaseLanguageData('g', 'g'), populationEstimate: 100_000_000_000 }, // unrealistically high population to test upper bound
-  ];
+  const langs = ['a', 'b', 'c', 'd', 'e', 'f', 'g'].map((id) => getBaseLanguageData(id, id));
+  langs[0].pop.overall = undefined;
+  langs[1].pop.overall = 0;
+  langs[2].pop.overall = 1;
+  langs[3].pop.overall = 100;
+  langs[4].pop.overall = 1000;
+  langs[5].pop.overall = 10_000_000_000;
+  langs[6].pop.overall = 100_000_000_000; // unrealistically high population to test upper bound
 
   it('does not filter when range are defaults', () => {
     const filter = buildFilterByPopulation(-1, 10_000_000_000);

@@ -49,7 +49,7 @@ function getWeighted3DCoordinates(ent: LanguageData | TerritoryData): {
 }
 
 function getEntityWeight(ent: LanguageData | TerritoryData): number {
-  if (ent.type === ObjectType.Language) return (ent.populationEstimate || 0) ** 0.25;
+  if (ent.type === ObjectType.Language) return (ent.pop.overall || 0) ** 0.25;
   if (ent.type === ObjectType.Territory) return (ent.landArea || 0) ** 0.25;
   return 1;
 }

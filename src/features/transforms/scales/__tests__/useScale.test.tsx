@@ -25,10 +25,10 @@ describe('useScale', () => {
 
   it('applies sqrt + log transform for Population and handles missing values', () => {
     const small = getBaseLanguageData('s', 'Small');
-    small.populationEstimate = 10; // small population
+    small.pop.overall = 10; // small population
 
     const big = getBaseLanguageData('b', 'Big');
-    big.populationEstimate = 10000; // much larger
+    big.pop.overall = 10000; // much larger
 
     const missing = getBaseLanguageData('m', 'Missing');
     // no populationEstimate -> should be treated as not renderable -> getScale returns 0

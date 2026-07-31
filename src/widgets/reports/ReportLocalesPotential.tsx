@@ -186,7 +186,7 @@ const PotentialLocalesTable: React.FC<{
           key: '% of Global Language Speakers',
           render: (object) =>
             object.pop.speaking.adjusted &&
-            (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate ?? 1),
+            (object.pop.speaking.adjusted * 100) / (object.language?.pop.speaking.estimate ?? 1),
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {

@@ -59,7 +59,7 @@ const LocaleIndigeneityTable: React.FC<{
           key: '% of Worldwide Population',
           render: (locale) =>
             ((locale.pop.speaking.adjusted ?? 0) * 100) /
-            (locale.language?.populationEstimate || 1),
+            (locale.language?.pop.speaking.estimate || 1),
           valueType: TableValueType.Decimal,
           isInitiallyVisible: false,
           columnGroup: 'Population',
