@@ -2,9 +2,9 @@ import { CensusLanguageUse } from '@entities/census/CensusTypes';
 import getLanguageModalityDiscount from '@entities/language/population/getLanguageModalityDiscount';
 import { LocaleData, LocaleInCensus } from '@entities/locale/LocaleTypes';
 
-// Give population records a ranking based on various rules
-// That separately should add up to a value between 0 and 1, depending on the weight we want to give it.
-// Higher signifies that the record is more preferred
+// Give population records a ranking based on various rules.
+// Higher signifies that the record is more preferred.
+// The score is relative (generally, but not necessarily bounded to 0..1).
 export function getPopulationRecordRank(
   record: LocaleInCensus,
   use: 'speaking' | 'writing',
@@ -25,7 +25,7 @@ export function getPopulationRecordRank(
   }
   // Then we have other factors that are less important, mostly for tie-breaking.
   // rank += (6 - getCensusCollectorTypeRank(record.census.collectorType)) / 6;
-  rank += (yearCollected - 2000) / 20;
+  rank += (yearCollected - 2000) / 20; // 2025 -> 1.25, 2000 -> 0, 1990 -> -0.5, 1980 -> -1.25, maybe this is too strong
   if (acquisitionOrder === 'Any') rank += 0.12;
   if (acquisitionOrder === 'L1') rank += 0.1;
   if (acquisitionOrder === 'L2') rank += 0.05;
@@ -40,19 +40,24 @@ export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): voi
     const { censusRecords } = locale;
     if (!censusRecords || censusRecords.length === 0) {
       computePopulationWithoutCensusRecords(locale);
-      return;
+    } else {
+      const bestRecordForSpeaking = [...censusRecords].sort(
+        (a, b) => getPopulationRecordRank(b, 'speaking') - getPopulationRecordRank(a, 'speaking'),
+      )[0];
+      const bestRecordForWriting = [...censusRecords].sort(
+        (a, b) => getPopulationRecordRank(b, 'writing') - getPopulationRecordRank(a, 'writing'),
+      )[0];
+
+      // Computes a discounted percentage and adjusted population number
+      applyPopRecord(locale, bestRecordForSpeaking, 'speaking');
+      applyPopRecord(locale, bestRecordForWriting, 'writing');
     }
 
-    const bestRecordForSpeaking = [...censusRecords].sort(
-      (a, b) => getPopulationRecordRank(b, 'speaking') - getPopulationRecordRank(a, 'speaking'),
-    )[0];
-    const bestRecordForWriting = [...censusRecords].sort(
-      (a, b) => getPopulationRecordRank(b, 'writing') - getPopulationRecordRank(a, 'writing'),
-    )[0];
-
-    // Computes a discounted percentage and adjusted population number
-    applyPopRecord(locale, bestRecordForSpeaking, 'speaking');
-    applyPopRecord(locale, bestRecordForWriting, 'writing');
+    // Recompute the locale's specific literacy percent
+    locale.literacyPercent =
+      locale.pop.speaking.adjusted && locale.pop.writing.adjusted
+        ? Math.min((locale.pop.writing.adjusted * 100) / locale.pop.speaking.adjusted, 100)
+        : locale.territory?.literacyPercent;
   });
 }
 
@@ -66,7 +71,7 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
   speaking.percentAdjusted = speaking.percent * (speaking.modalityDiscount ?? 1);
   speaking.adjusted = speaking.unadjusted * (speaking.modalityDiscount ?? 1);
 
-  if (writing.percent == null) return; // Nothing to go from
+  if (writing.percent == null) writing.percent = speaking.percent;
   writing.literacyDiscount = (locale.territory?.literacyPercent ?? 100) / 100;
   writing.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, 'writing');
   writing.percentAdjusted =

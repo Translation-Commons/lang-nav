@@ -9,7 +9,7 @@ const LocalePopulationBreakdown: React.FC<{ locale: LocaleData; use: 'speaking' 
   locale,
   use,
 }) => {
-  if (!locale.territory || !locale.pop[use].adjusted) return null;
+  if (!locale.territory || locale.pop[use].adjusted == null) return null;
 
   if (
     locale.pop[use].source === PopulationSourceCategory.AggregatedFromLanguages ||

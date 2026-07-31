@@ -12,7 +12,6 @@ type Props = {
   locale: LocaleData;
   use: 'speaking' | 'writing';
   size?: 'short' | 'full';
-  showAdjustmentNote?: boolean;
 };
 
 const LocaleCensusCitation: React.FC<Props> = ({ locale, use, size = 'full' }) => {

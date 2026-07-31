@@ -25,8 +25,8 @@ describe('getWritingSystemsRelevantToObject', () => {
       ]),
     );
     expect(results).toEqual({
-      '001': '', // not available yet
-      '123': '', // not available yet
+      '001': 'Tengwar',
+      '123': 'Tengwar',
       AM: '',
       BE: 'Tengwar',
       ER: 'Tengwar',

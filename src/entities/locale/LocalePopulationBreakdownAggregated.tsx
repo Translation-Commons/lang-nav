@@ -21,15 +21,21 @@ const LocalePopulationBreakdownAggregated: React.FC<{
 }> = ({ locale, use }) => {
   const { adjusted, percentAdjusted: percent, source } = locale.pop[use];
   const fromTerritories = source === PopulationSourceCategory.AggregatedFromTerritories;
+  const sortFunction = (a: LocaleData, b: LocaleData) =>
+    (b.pop[use].adjusted ?? 0) - (a.pop[use].adjusted ?? 0);
   const constituents = fromTerritories
-    ? uniqueBy(locale.relatedLocales?.childTerritories || [], (l) => l.territoryCode || '')
-    : uniqueBy(locale.relatedLocales?.childLanguages || [], (l) => l.languageCode).sort(
-        (a, b) => (b.pop[use].adjusted ?? 0) - (a.pop[use].adjusted ?? 0),
+    ? uniqueBy(
+        locale.relatedLocales?.childTerritories?.sort(sortFunction) || [],
+        (l) => l.territoryCode || '',
+      )
+    : uniqueBy(
+        locale.relatedLocales?.childLanguages?.sort(sortFunction) || [],
+        (l) => l.languageCode,
       );
   const [showAllConstituents, setShowAllConstituents] = React.useState(false);
 
   return (
-    <table>
+    <table style={{ width: 'fit-content' }}>
       <tbody>
         <tr>
           {fromTerritories ? (

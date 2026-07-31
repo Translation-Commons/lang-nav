@@ -59,7 +59,7 @@ const columns: TableColumn<LocaleData>[] = [
   {
     key: 'Population (Writing, source)',
     description:
-      'Coarse estimate, based on the spoken population × overall literacy in country, actual numbers may vary.',
+      'Source for the writing-population estimate. This may come from a writing-specific census record, or be derived from broader usage estimates and adjusted using literacy rate and modality discounts.',
     render: (object) => <LocaleCensusCitation locale={object} use="writing" />,
   },
 ];

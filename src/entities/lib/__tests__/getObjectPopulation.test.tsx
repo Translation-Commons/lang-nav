@@ -31,16 +31,16 @@ describe('getObjectPopulation', () => {
       dori0123_ER: 1800,
       ER: 2400,
       HA: 15600,
-      sjn: 11220,
-      sjn_001: 11220,
-      sjn_123: 11220,
+      sjn: 11100,
+      sjn_001: 11100,
+      sjn_123: 11100,
       sjn_BE: 9300, // Increased by the be0590 census
-      sjn_ER: 1920,
+      sjn_ER: 1800, // from dori0123
       sjn_Teng_001: 9000,
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
       Teng: 26500, // some from sjn_Teng_BE, but also from the primary script for sjn & dori0123
-      tolkorth: 11220, // Estimated from sjn
+      tolkorth: 11100, // Estimated from sjn
     });
   });
 });
@@ -65,14 +65,14 @@ describe('getObjectPopulationDirectlySourced', () => {
       be0590: 12000,
       sjn: 24000,
       sjn_BE: 9300, // Increased by the be0590 census
-      sjn_ER: 1920, // no census but using the data from the locale database
+      sjn_ER: 1800, // no census but using the data from the locale database
 
       // Regional locales have data because they are summed up from the locales inside
       dori0123_001: 1800,
       dori0123_123: 1800,
       dori0123_ER: 1800,
-      sjn_001: 11220,
-      sjn_123: 11220,
+      sjn_001: 11100,
+      sjn_123: 11100,
       sjn_Teng_001: 9000,
       sjn_Teng_123: 9000,
       sjn_Teng_BE: 9000,
@@ -137,10 +137,10 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
       dori0123: undefined,
       ER: '8.0', // ER in 123
       HA: '52.0', // HA in 123
-      sjn_001: '22.4',
-      sjn_123: '37.4',
+      sjn_001: '22.2',
+      sjn_123: '37.0',
       sjn_BE: '77.5',
-      sjn_ER: '80.0',
+      sjn_ER: '75.0',
       sjn_Teng_001: '18.0',
       sjn_Teng_123: '30.0',
       sjn_Teng_BE: '75.0',
@@ -160,8 +160,8 @@ describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
       ]),
     );
     expect(results).toEqual({
-      '001': '22.4', // size of middle earth compared to world
-      '123': '37.4', // Beleriand is the biggest region in middle earth with this limited data
+      '001': '22.2', // size of middle earth compared to world
+      '123': '37.0', // Beleriand is the biggest region in middle earth with this limited data
       AM: undefined,
       BE: '77.5', // sjn_BE is 77.5% of BE -- increased because of the be0590 census
       be0590: undefined,
@@ -169,7 +169,7 @@ describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
       dori0123_123: undefined,
       dori0123_ER: undefined,
       dori0123: undefined,
-      ER: '80.0', // sjn_ER is 80% of ER
+      ER: '75.0', // sjn_ER is 75% of ER
       HA: undefined,
       sjn_001: undefined,
       sjn_123: undefined,
@@ -178,7 +178,7 @@ describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
       sjn_Teng_001: undefined,
       sjn_Teng_123: undefined,
       sjn_Teng_BE: undefined,
-      sjn: '16.0', // dori0123 (1800) is 16% of sjn speakers (11220)
+      sjn: '16.2', // dori0123 (1800) is 16% of sjn speakers (11220)
       Teng: undefined,
       tolkorth: undefined,
     });
@@ -199,7 +199,7 @@ describe('getObjectPopulationRelativeToOverallLanguageSpeakers', () => {
       AM: undefined,
       BE: undefined,
       be0590: undefined,
-      dori0123: '16.0',
+      dori0123: '16.2',
       dori0123_001: '100.0',
       dori0123_123: '100.0',
       dori0123_ER: '100.0',
@@ -207,11 +207,11 @@ describe('getObjectPopulationRelativeToOverallLanguageSpeakers', () => {
       HA: undefined,
       sjn_001: '100.0',
       sjn_123: '100.0',
-      sjn_BE: '82.9',
-      sjn_ER: '17.1',
-      sjn_Teng_001: '80.2',
-      sjn_Teng_123: '80.2',
-      sjn_Teng_BE: '80.2',
+      sjn_BE: '83.8',
+      sjn_ER: '16.2',
+      sjn_Teng_001: '81.1',
+      sjn_Teng_123: '81.1',
+      sjn_Teng_BE: '81.1',
       sjn: undefined,
       Teng: undefined,
       tolkorth: undefined,

@@ -1,9 +1,8 @@
 import { computeDescendantPopulation } from '@features/data/compute/computeDescendantPopulation';
-import { computeLocalesPopulationFromCensuses } from '@features/data/compute/computeLocalesPopulationFromCensuses';
-import { computeLocalesWritingPopulation } from '@features/data/compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
 import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
+import { updatePopulations } from '@features/data/compute/updatePopulations';
 import { addCensusData } from '@features/data/connect/connectCensuses';
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
@@ -141,6 +140,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     yearCollected: 2000,
     collectorType: CensusCollectorType.Government,
     collectorName: 'National Institute of Statistics',
+    collectorNameShort: 'NIS', // tbd make organization object for this
     url: 'https://en.wikipedia.org/wiki/Beleriand#Languages', // not a real part of the article
     isoRegionCode: 'BE',
     population: BE.population,
@@ -174,6 +174,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     localeSource: LocaleSource.StableDatabase,
     languageCode: 'sjn',
     territoryCode: 'ER',
+    // 1920 is now dropped because there is no census data backing it up
     pop: { speaking: { unadjusted: 1920, percent: 80 }, writing: { unadjusted: 1920 } },
   };
   const dori0123_ER: LocaleData = {
@@ -408,8 +409,14 @@ export function getFullyInstantiatedMockedObjects(
 
   // From SupplementalData
   computeContainedTerritoryStats(world);
-  computeLocalesWritingPopulation(Object.values(locales));
-  computeLocalesPopulationFromCensuses(Object.values(locales));
+  // computeLocalesWritingPopulation(Object.values(locales));
+  // computeLocalesPopulationFromCensuses(Object.values(locales));
+
+  updatePopulations(
+    Object.values(languagesBySource.Combined) as LanguageData[],
+    Object.values(locales),
+    world,
+  );
   return objects;
 }
 
