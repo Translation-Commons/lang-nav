@@ -71,6 +71,7 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
   speaking.percentAdjusted = speaking.percent * (speaking.modalityDiscount ?? 1);
   speaking.adjusted = speaking.unadjusted * (speaking.modalityDiscount ?? 1);
 
+  if (writing.unadjusted == null) writing.unadjusted = speaking.unadjusted;
   if (writing.percent == null) writing.percent = speaking.percent;
   writing.literacyDiscount = (locale.territory?.literacyPercent ?? 100) / 100;
   writing.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, 'writing');

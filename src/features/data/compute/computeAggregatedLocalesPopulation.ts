@@ -55,8 +55,9 @@ export function sumUpPopulationFromContainedTerritories(
     sumBy(uniqueContainedLocales, (loc) => loc.pop[use].unadjusted || 0) || undefined;
 
   // Compute the percent based on the adjusted population for regional locales.
-  if (pop.unadjusted) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
-  if (pop.adjusted) pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
+  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
+  if (pop.adjusted != null)
+    pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
 }
 
 export function computeLanguageFamilyLocalePopulations(locales: LocaleData[]): void {
@@ -108,6 +109,7 @@ function sumUpPopulationFromChildLanguages(locale: LocaleData, use: 'speaking' |
     pop.unadjusted = territory.population;
 
   // Compute the percent based on the adjusted population for regional locales.
-  if (pop.unadjusted) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
-  if (pop.adjusted) pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
+  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
+  if (pop.adjusted != null)
+    pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
 }

@@ -22,6 +22,7 @@ const LocalePopulationBreakdownAdjusted: React.FC<{
   const { pop, territory } = locale;
   const { unadjusted, adjusted, percent, source, census, literacyDiscount, modalityDiscount } =
     pop[use];
+  // Since our methodology is still improving, we are not yet rendering breakdowns for 0 values.
   if (!unadjusted || !adjusted || !territory || !percent) return null;
 
   const localeNameWithoutTerritory = getLocaleName(locale, false);
