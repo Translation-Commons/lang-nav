@@ -1,14 +1,14 @@
 import React from 'react';
 
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';

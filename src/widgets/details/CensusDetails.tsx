@@ -5,12 +5,13 @@ import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
 import { CensusData } from '@entities/census/CensusTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import ExternalLink from '@shared/ui/ExternalLink';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
+
+import DetailsField from './ui/DetailsField';
+import DetailsSection from './ui/DetailsSection';
 
 type Props = {
   census: CensusData;

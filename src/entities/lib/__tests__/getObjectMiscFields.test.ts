@@ -33,17 +33,17 @@ describe('getObjectLiteracy', () => {
       HA: '99.0',
       Teng: undefined,
       be0590: undefined,
-      dori0123: '95.0',
-      dori0123_001: '95.0', // Computed from constituent locales
-      dori0123_123: '95.0',
-      dori0123_ER: '95.0', // Locales use the country's literacy rate
-      sjn: '90.9', // averaged from locales
-      sjn_001: '91.0',
-      sjn_123: '91.0',
+      dori0123: '9.5', // Discounted from 95% because its a mostly spoken language
+      dori0123_001: '9.5', // Computed from constituent locales
+      dori0123_123: '9.5',
+      dori0123_ER: '9.5', // Locales use the country's literacy rate
+      sjn: '76.9', // averaged from locales
+      sjn_001: '76.9',
+      sjn_123: '76.9',
       sjn_Teng_001: '90.0',
       sjn_Teng_123: '90.0',
       sjn_Teng_BE: '90.0',
-      sjn_ER: '95.0',
+      sjn_ER: '9.5', // Since speakers are all dori0123
       sjn_BE: '90.0',
       tolkorth: undefined,
     });

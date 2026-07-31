@@ -10,11 +10,12 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = {
   locale: LocaleData;
+  use: 'speaking' | 'writing';
   size?: 'short' | 'full';
 };
 
-const LocaleCensusCitation: React.FC<Props> = ({ locale, size = 'full' }) => {
-  const { census, source } = locale.pop.speaking;
+const LocaleCensusCitation: React.FC<Props> = ({ locale, use, size = 'full' }) => {
+  const { census, source } = locale.pop[use];
 
   if (census != null) return <CensusCitation census={census} />;
   if (source != null) return <PopulationSource populationSource={source} size={size} />;

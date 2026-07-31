@@ -1,9 +1,10 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import {
   getCurrencyCompactLong,
   numberToFixedUnlessSmall,

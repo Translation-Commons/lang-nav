@@ -1,6 +1,5 @@
 import computeLanguageFamiliesModality from '../compute/computeLanguageFamiliesModality';
 import { computeLocalesPopulationFromCensuses } from '../compute/computeLocalesPopulationFromCensuses';
-import { computeLocalesWritingPopulation } from '../compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
 import { addCensusData } from '../connect/connectCensuses';
 import { DataContextType } from '../context/useDataContext';
@@ -81,6 +80,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   // 001 is the UN code for the World
   computeContainedTerritoryStats(dataContext.getTerritory('001'));
   computeLocalesPopulationFromCensuses(dataContext.locales);
-  computeLocalesWritingPopulation(dataContext.locales);
+  // Some more population computations moved to updatePopulations
   computeLanguageFamiliesModality(dataContext.languagesInSelectedSource);
 }

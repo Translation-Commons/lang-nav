@@ -6,9 +6,10 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import ExternalLink from '@shared/ui/ExternalLink';
+
+import DetailsField from './ui/DetailsField';
+import DetailsSection from './ui/DetailsSection';
 
 type Props = {
   org: OrganizationData;

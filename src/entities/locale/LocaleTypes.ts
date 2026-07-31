@@ -66,6 +66,17 @@ export type LocaleInCensus = {
   populationPercent: number;
 };
 
+export type LocalePopulationData = {
+  adjusted?: number; // The best estimate of the population using this language in this territory, based on the most recent data from censuses, language family locales, or other sources
+  percent?: number; // The percentage this population represents out of the total population of the territory, based on the best estimate
+  unadjusted?: number; // Original number from the source
+  census?: CensusData; // The census record that provides the population estimate
+  modalityDiscount?: number; // An adjustment factor based on how the language is used -- eg. if the data about a language refers to mostly spoken usage, then the number of writers is lowered and vice versa
+  literacyDiscount?: number; // An adjustment factor based on literacy rate if the data is for spoken language but the population is being estimated for writing
+  percentAdjusted?: number; // The percentage after applying discounts
+  source?: PopulationSourceCategory;
+};
+
 export interface LocaleData extends ObjectBase {
   type: ObjectType.Locale;
 
@@ -106,20 +117,8 @@ export interface LocaleData extends ObjectBase {
   };
 
   pop: {
-    speaking: {
-      adjusted?: number; // The best estimate of the population speaking this language in this territory, based on the most recent data from censuses, language family locales, or other sources
-      percent?: number; // The percentage this population represents out of the total population of the territory, based on the best estimate
-      unadjusted?: number; // Original number from the source
-      census?: CensusData; // The census record that provides the population estimate
-      source?: PopulationSourceCategory;
-    };
-    writing: {
-      // adjusted?: number; // The best estimate of the population speaking this language in this territory, based on the most recent data from censuses, language family locales, or other sources
-      percent?: number; // The percentage this population represents out of the total population of the territory, based on the best estimate
-      unadjusted?: number; // Original number from the source
-      // census?: CensusData;
-      // source?: PopulationSourceCategory;
-    };
+    speaking: LocalePopulationData;
+    writing: LocalePopulationData;
   };
 
   // Data computed from other references, particularly territories.tsv and censuses

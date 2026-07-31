@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
 import Field from '@features/transforms/fields/Field';
+import getField from '@features/transforms/fields/getField';
 
 import { ObjectData } from '@entities/types/DataTypes';
 
@@ -9,6 +10,13 @@ import { getSortFunctionParameterized } from '../sort';
 import { SortBehavior } from '../SortTypes';
 
 const mockedObjects = getFullyInstantiatedMockedObjects();
+
+// Convert Objects into their IDs and also add field data
+function toIDandValue(object: ObjectData, field: Field): string {
+  let value = getField(object, field);
+  if (typeof value === 'number') value = value.toFixed(1);
+  return object.ID.padEnd(15) + (value ?? '');
+}
 
 describe('getSortByParameterized', () => {
   it('sortBy: None', () => {
@@ -177,8 +185,8 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_123',
       'sjn_Teng_001',
       'ER',
-      'sjn_ER',
       'dori0123',
+      'sjn_ER',
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
@@ -192,10 +200,10 @@ describe('getSortByParameterized', () => {
     //   2) sort is stable to the input order
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'dori0123',
+      'sjn_ER',
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
-      'sjn_ER',
       'ER',
       'sjn_Teng_BE', // lower than sjn_BE because not updated by census
       'sjn_Teng_123',
@@ -247,30 +255,30 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Population (Writing)', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(Field.PopulationWriting, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'sjn_123',
-      'sjn_001',
-      'sjn_BE',
-      'sjn_Teng_BE',
-      'sjn_Teng_123',
-      'sjn_Teng_001',
-      'sjn_ER',
-      'dori0123_ER',
-      'dori0123_123',
-      'dori0123_001',
-      // Written population unavailable for these data types
-      '123',
-      'sjn',
-      'dori0123',
-      'BE',
-      'ER',
-      'HA',
-      'AM',
-      '001',
-      'be0590',
-      'Teng',
-      'tolkorth',
+    const field = Field.PopulationWriting;
+    const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+      'sjn_123        8541.0',
+      'sjn_001        8541.0',
+      'sjn_BE         8370.0',
+      'sjn_Teng_BE    8100.0',
+      'sjn_Teng_123   8100.0',
+      'sjn_Teng_001   8100.0',
+      'sjn_ER         171.0',
+      'dori0123_ER    171.0',
+      'dori0123_123   171.0',
+      'dori0123_001   171.0',
+      '123            ',
+      'sjn            ',
+      'dori0123       ',
+      'BE             ',
+      'ER             ',
+      'HA             ',
+      'AM             ',
+      '001            ',
+      'be0590         ',
+      'Teng           ',
+      'tolkorth       ',
     ]);
   });
 
@@ -305,64 +313,60 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: PercentOfTerritoryPopulation', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      Field.PercentOfTerritoryPopulation,
-      SortBehavior.Normal,
-    );
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'be0590', // 100.0% of Beleriand in the census
-      'sjn_ER', // 80.0,
-      'sjn_BE', // 75.0,
-      'dori0123_ER', // 75.0, // dori0123_ER is 75% of ER
-      'sjn_Teng_BE', // 75.0,
-      '123', // 60% of world
-      'HA', // 52.0 of middle earth
-      'BE', // 40.0 of middle earth
-      'AM', // 40 of world
-      'sjn_123', // 36.4 of middle earth
-      'sjn_Teng_123', // 30.0 of middle earth
-      'sjn_001', // 21.8 of world
-      'sjn_Teng_001', // 18 of world
-      'ER', // 8.0 of middle earth
-      'dori0123_123', // 6.0 of middle earth
-      'dori0123_001', // 0.2 of world
-      'sjn', // undefined,
-      'dori0123', // undefined,
-      '001', // undefined, // world is not contained in a larger territory
-      'Teng', // undefined,
-      'tolkorth', // undefined,
+    const field = Field.PercentOfTerritoryPopulation;
+    const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+      'be0590         100.0', // 100.0% of Beleriand in the census
+      'sjn_BE         77.5',
+      'sjn_ER         75.0',
+      'dori0123_ER    75.0', // dori0123_ER is 75% of ER
+      'sjn_Teng_BE    75.0',
+      '123            60.0', // 60% of world
+      'HA             52.0', // of middle earth
+      'BE             40.0', // of middle earth
+      'AM             40.0', // of world
+      'sjn_123        37.0', // of middle earth
+      'sjn_Teng_123   30.0', // of middle earth
+      'sjn_001        22.2', // of world
+      'sjn_Teng_001   18.0', // of world
+      'ER             8.0', // of middle earth
+      'dori0123_123   6.0', // of middle earth
+      'dori0123_001   3.6', // of world
+      'sjn            ', // undefined,
+      'dori0123       ', // undefined,
+      '001            ', // undefined, // world is not contained in a larger territory
+      'Teng           ', // undefined,
+      'tolkorth       ', // undefined,
     ]);
   });
 
   it('sortBy: PercentOfOverallLanguageSpeakers', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(
-      Field.PercentOfOverallLanguageSpeakers,
-      SortBehavior.Normal,
-    );
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'dori0123_ER', // 10.0
-      'sjn_123',
-      'dori0123_123',
-      'sjn_001',
-      'dori0123_001',
-      'sjn_BE', // 82.9
-      'sjn_Teng_BE', // 80.2
-      'sjn_Teng_123',
-      'sjn_Teng_001',
-      'sjn_ER', // 17.1
-      'dori0123', // 16.0
+    const field = Field.PercentOfOverallLanguageSpeakers;
+    const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+      'dori0123_ER    100.0',
+      'sjn_123        100.0',
+      'dori0123_123   100.0',
+      'sjn_001        100.0',
+      'dori0123_001   100.0',
+      'sjn_BE         83.8',
+      'sjn_Teng_BE    81.1',
+      'sjn_Teng_123   81.1',
+      'sjn_Teng_001   81.1',
+      'dori0123       16.2',
+      'sjn_ER         16.2',
       // All below undefined, stable to input order
-      '123',
-      'sjn',
-      'BE',
-      'ER',
-      'HA',
-      'AM',
-      '001',
-      'be0590',
-      'Teng',
-      'tolkorth',
+      '123            ',
+      'sjn            ',
+      'BE             ',
+      'ER             ',
+      'HA             ',
+      'AM             ',
+      '001            ',
+      'be0590         ',
+      'Teng           ',
+      'tolkorth       ',
     ]);
   });
 
@@ -373,8 +377,8 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'ER',
       'BE',
+      'ER',
       '123',
       '001',
       // All undefined after this, stable to input order
@@ -662,30 +666,31 @@ describe('getSortByParameterized', () => {
 
   it('sortBy: Literacy', () => {
     const objects = Object.values(mockedObjects) as ObjectData[];
-    const sort = getSortFunctionParameterized(Field.Literacy, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'HA', // 99.0
-      'AM', // 98.0
-      '001', // 96.2, averaged from Aman & Middle Earth by computeContainedTerritoryStats
-      '123', // 95.1, averaged from territories by computeContainedTerritoryStats
-      'dori0123', // 95.0, only in Eriador
-      'ER', // 95.0 literacy rate for Eriador
-      'sjn_ER', // 95.0
-      'dori0123_ER', // 75.0
-      'dori0123_123',
-      'dori0123_001',
-      'sjn_123', // 90.9, averaged from locales
-      'sjn_001',
-      'sjn',
-      'BE', // 90.0 literacy rate for Beleriand
-      'sjn_BE',
-      'sjn_Teng_BE',
-      'sjn_Teng_123',
-      'sjn_Teng_001',
+    const field = Field.Literacy;
+    const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
+    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+      'HA             99.0',
+      'AM             98.0',
+      '001            96.2', // averaged from Aman & Middle Earth by computeContainedTerritoryStats
+      '123            95.1', // averaged from territories by computeContainedTerritoryStats
+      'ER             95.0', // literacy rate for Eriador
+      'sjn_Teng_BE    90.0',
+      'sjn_Teng_123   90.0',
+      'sjn_Teng_001   90.0',
+      'BE             90.0', // literacy rate for Beleriand
+      'sjn_BE         90.0',
+      'sjn            76.9', // aggregated from locales
+      'sjn_123        76.9',
+      'sjn_001        76.9',
+      'dori0123       9.5', // Discounted for being a mostly spoken language
+      'sjn_ER         9.5',
+      'dori0123_ER    9.5',
+      'dori0123_123   9.5',
+      'dori0123_001   9.5',
       // All below undefined, stable to input order
-      'be0590',
-      'Teng',
-      'tolkorth',
+      'be0590         ',
+      'Teng           ',
+      'tolkorth       ',
     ]);
   });
 

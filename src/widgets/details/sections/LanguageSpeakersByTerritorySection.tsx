@@ -1,12 +1,13 @@
 import React from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import DetailsSection from '@shared/containers/DetailsSection';
 import { uniqueBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';

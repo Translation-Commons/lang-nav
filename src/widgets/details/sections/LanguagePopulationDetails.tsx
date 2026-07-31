@@ -1,12 +1,12 @@
 import React from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
 import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
-import DetailsSection from '@shared/containers/DetailsSection';
-import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
-import DetailsStatContainer from '@shared/containers/DetailsStatContainer';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
@@ -32,11 +32,11 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang }) => {
       {populationEstimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (
-        <DetailsStatContainer>
+        <div className="DetailsStatContainer">
           <DetailsStatBlock label={getLanguageModalityUserLabel(lang.modality)}>
             <LanguagePopulationEstimate lang={lang} />
           </DetailsStatBlock>
-        </DetailsStatContainer>
+        </div>
       )}
     </DetailsSection>
   );

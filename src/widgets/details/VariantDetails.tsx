@@ -5,11 +5,12 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 
 import { VariantData } from '@entities/variant/VariantTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
+
+import DetailsField from './ui/DetailsField';
+import DetailsSection from './ui/DetailsSection';
 
 type Props = {
   variant: VariantData;

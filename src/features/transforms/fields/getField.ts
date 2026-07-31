@@ -160,7 +160,7 @@ function getField(object: ObjectData, field: Field): string | number | undefined
     case Field.PopulationDirectlySourced:
       return getObjectPopulationDirectlySourced(object);
     case Field.PopulationWriting:
-      if (object.type === ObjectType.Locale) return object.pop.writing.unadjusted;
+      if (object.type === ObjectType.Locale) return object.pop.writing.adjusted;
       return undefined;
     case Field.PopulationOfDescendants:
       return getObjectPopulationOfDescendants(object);
