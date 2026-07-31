@@ -7,10 +7,10 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

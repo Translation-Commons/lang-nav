@@ -1,11 +1,12 @@
 import React from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+
 import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
 
-import DetailsSection from '@shared/containers/DetailsSection';
-import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
 import CountCompact from '@shared/ui/CountCompact';
 import ExternalLink from '@shared/ui/ExternalLink';
 import Pill from '@shared/ui/Pill';

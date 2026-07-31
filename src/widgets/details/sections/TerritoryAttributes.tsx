@@ -2,14 +2,14 @@ import React from 'react';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import {
-  getCurrencyCompactLong,
-  numberToFixedUnlessSmall,
-  numberToSigFigs,
+    getCurrencyCompactLong,
+    numberToFixedUnlessSmall,
+    numberToSigFigs,
 } from '@shared/lib/numberUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   const { population, landArea, gdp, literacyPercent } = territory;

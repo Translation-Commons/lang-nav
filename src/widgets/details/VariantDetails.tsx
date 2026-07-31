@@ -5,9 +5,9 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 
 import { VariantData } from '@entities/variant/VariantTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { getVariantTypeDescription, getVariantTypeDisplay } from '@strings/VariantStrings';
 

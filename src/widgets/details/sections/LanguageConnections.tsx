@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
 import { getLocaleTreeNodes } from '@widgets/treelists/LocaleHierarchy';
 
@@ -15,8 +17,6 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 

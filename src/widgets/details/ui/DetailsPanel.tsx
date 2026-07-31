@@ -13,7 +13,7 @@ import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
-const ObjectDetails = React.lazy(() => import('./ObjectDetails'));
+const ObjectDetails = React.lazy(() => import('../ObjectDetails'));
 
 const DetailsPanel: React.FC = () => {
   const { objectID, objectType, updatePageParams } = usePageParams();

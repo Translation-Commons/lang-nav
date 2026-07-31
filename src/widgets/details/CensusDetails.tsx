@@ -5,10 +5,10 @@ import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
 import { CensusData } from '@entities/census/CensusTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import ExternalLink from '@shared/ui/ExternalLink';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
 

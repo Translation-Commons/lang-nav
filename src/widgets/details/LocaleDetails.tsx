@@ -1,5 +1,8 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
@@ -10,8 +13,6 @@ import LocaleIndigeneityDisplay, {
 } from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import Pill from '@shared/ui/Pill';

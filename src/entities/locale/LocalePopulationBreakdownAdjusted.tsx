@@ -91,10 +91,10 @@ const LocalePopulationBreakdownAdjusted: React.FC<{
               <td colSpan={3} style={{ textAlign: 'right', paddingRight: '1em' }}>
                 <CountOfPeople count={territory!.population} />
                 <> * {numberToFixedUnlessSmall(percent!)}%</>
-                {literacyDiscount && literacyDiscount != 1 && (
+                {literacyDiscount != null && literacyDiscount !== 1 && (
                   <> * {numberToFixedUnlessSmall(literacyDiscount * 100)}%</>
                 )}{' '}
-                {modalityDiscount && modalityDiscount != 1 && (
+                {modalityDiscount != null && modalityDiscount !== 1 && (
                   <> * {numberToFixedUnlessSmall(modalityDiscount * 100)}%</>
                 )}{' '}
                 =

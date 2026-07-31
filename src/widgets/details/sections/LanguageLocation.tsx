@@ -13,10 +13,10 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
 import Deemphasized from '@shared/ui/Deemphasized';
 import Pill from '@shared/ui/Pill';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 

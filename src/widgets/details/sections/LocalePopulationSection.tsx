@@ -1,6 +1,9 @@
 import { SearchIcon } from 'lucide-react';
 import React, { PropsWithChildren, useState } from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
+
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
@@ -8,8 +11,6 @@ import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import DetailsSection from '@shared/containers/DetailsSection';
-import DetailsStatBlock from '@shared/containers/DetailsStatBlock';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -42,7 +43,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       </div>
       <DetailsSection title="All Population Records">
         {censusRecords && censusRecords.length > 0 && (
-          <table style={{ borderSpacing: '1em 1em', width: 'fit-content' }}>
+          <table style={{ width: 'fit-content' }}>
             <thead>
               <tr>
                 <th>Population</th>
@@ -56,16 +57,16 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 .sort((a, b) => b.populationPercent - a.populationPercent)
                 .map((censusEstimate) => (
                   <tr key={censusEstimate.census.ID}>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className="px-2 text-right">
                       <CountOfPeople count={censusEstimate.populationEstimate} />
                     </td>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className="px-2 text-right">
                       <DecimalNumber num={censusEstimate.populationPercent} />%
                     </td>
-                    <td>
+                    <td className="px-2">
                       <HoverableObjectName object={censusEstimate.census} />
                     </td>
-                    <td style={{ textAlign: 'right' }}>
+                    <td className="px-2 text-right">
                       <PercentageDifference
                         percentNew={censusEstimate.populationPercent}
                         percentOld={pop.speaking.percent}

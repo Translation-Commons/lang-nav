@@ -11,7 +11,7 @@ export function getPopulationRecordRank(
 ): number {
   const { languageUse, yearCollected, acquisitionOrder } = record.census;
   let rank = 0;
-  // The biggest source is what kind of data the census proports to have.
+  // The biggest source is what kind of data the census purports to have.
   if (use === 'speaking') {
     rank += languageUse === CensusLanguageUse.Speaks ? 1 : 0;
     rank += languageUse === CensusLanguageUse.Uses ? 0.5 : 0;
@@ -36,7 +36,7 @@ export function getPopulationRecordRank(
 
 export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): void {
   // Find the best population estimate for each locale based on its population records
-  locales.map((locale) => {
+  locales.forEach((locale) => {
     const { censusRecords } = locale;
     if (!censusRecords || censusRecords.length === 0) {
       computePopulationWithoutCensusRecords(locale);
