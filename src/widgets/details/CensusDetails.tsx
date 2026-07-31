@@ -1,8 +1,5 @@
 import React from 'react';
 
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
-
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
@@ -12,6 +9,9 @@ import { toTitleCase } from '@shared/lib/stringUtils';
 import ExternalLink from '@shared/ui/ExternalLink';
 
 import TableOfLanguagesInCensus from '../tables/TableOfLanguagesInCensus';
+
+import DetailsField from './ui/DetailsField';
+import DetailsSection from './ui/DetailsSection';
 
 type Props = {
   census: CensusData;

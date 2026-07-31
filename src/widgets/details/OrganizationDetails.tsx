@@ -1,7 +1,5 @@
 import React from 'react';
 
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -9,6 +7,9 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
 import ExternalLink from '@shared/ui/ExternalLink';
+
+import DetailsField from './ui/DetailsField';
+import DetailsSection from './ui/DetailsSection';
 
 type Props = {
   org: OrganizationData;

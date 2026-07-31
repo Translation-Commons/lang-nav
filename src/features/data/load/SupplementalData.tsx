@@ -80,6 +80,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   // 001 is the UN code for the World
   computeContainedTerritoryStats(dataContext.getTerritory('001'));
   computeLocalesPopulationFromCensuses(dataContext.locales);
-  // computeLocalesWritingPopulation(dataContext.locales);
+  // Some more population computations moved to updatePopulations
   computeLanguageFamiliesModality(dataContext.languagesInSelectedSource);
 }

@@ -409,9 +409,6 @@ export function getFullyInstantiatedMockedObjects(
 
   // From SupplementalData
   computeContainedTerritoryStats(world);
-  // computeLocalesWritingPopulation(Object.values(locales));
-  // computeLocalesPopulationFromCensuses(Object.values(locales));
-
   updatePopulations(
     Object.values(languagesBySource.Combined) as LanguageData[],
     Object.values(locales),
