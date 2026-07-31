@@ -21,8 +21,15 @@ describe('ThemeSwitcher', () => {
     expect(optionFor('Dark theme')).toBeInTheDocument();
   });
 
+  it('presents the options as one named group', () => {
+    render(<ThemeSwitcher aria-label="Page Brightness" />);
+
+    // Without this a screen reader reads three unrelated toggle buttons.
+    expect(screen.getByRole('group', { name: 'Page Brightness' })).toBeInTheDocument();
+  });
+
   it('marks exactly one option as active', () => {
-    render(<ThemeSwitcher value="dark" />);
+    render(<ThemeSwitcher value="dark" onChange={vi.fn()} />);
 
     expect(pressed()).toEqual(['Dark theme']);
   });

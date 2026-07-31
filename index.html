@@ -10,18 +10,20 @@
       // off this class, so without it a dark-device visitor sees a white flash until React
       // mounts. usePageBrightness takes over from here -- keep the storage key in sync.
       (function () {
+        var preference = 'follow device';
         try {
-          var preference = localStorage.getItem('page-brightness') || 'follow device';
-          var resolved =
-            preference === 'follow device'
-              ? window.matchMedia('(prefers-color-scheme: dark)').matches
-                ? 'dark'
-                : 'light'
-              : preference;
-          document.documentElement.classList.add(resolved);
+          preference = localStorage.getItem('page-brightness') || preference;
         } catch (e) {
-          document.documentElement.classList.add('light');
+          // Site data can be blocked for the origin. Fall through to the device setting
+          // rather than assuming light, which would be wrong on a dark device.
         }
+        var resolved =
+          preference === 'follow device'
+            ? window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+            : preference;
+        document.documentElement.classList.add(resolved);
       })();
     </script>
   </head>

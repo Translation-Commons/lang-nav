@@ -29,6 +29,8 @@ export type ThemeSwitcherProps = {
   onChange?: (theme: Theme) => void;
   defaultValue?: Theme;
   className?: string;
+  /** Names the group of options. Screen readers announce it before each option. */
+  'aria-label'?: string;
 };
 
 export const ThemeSwitcher = ({
@@ -36,6 +38,7 @@ export const ThemeSwitcher = ({
   onChange,
   defaultValue = 'system',
   className,
+  'aria-label': ariaLabel = 'Theme',
 }: ThemeSwitcherProps) => {
   const [theme, setTheme] = useControllableState<Theme>({
     defaultProp: defaultValue,
@@ -56,6 +59,10 @@ export const ThemeSwitcher = ({
 
   return (
     <div
+      // The options are one setting, not three unrelated toggles. Without a group a screen
+      // reader announces them with nothing tying them together.
+      role="group"
+      aria-label={ariaLabel}
       data-slot="theme-switcher"
       className={cn(
         'relative isolate flex h-8 w-fit rounded-full bg-background p-1 ring-1 ring-border',

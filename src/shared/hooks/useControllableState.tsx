@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 type UseControllableStateParams<T> = {
   /** The controlled value. Leave undefined to let the hook own the state. */
@@ -24,13 +24,31 @@ export function useControllableState<T>({
   const isControlled = prop !== undefined;
   const value = isControlled ? prop : uncontrolledValue;
 
+  // Read onChange through a ref so setValue stays referentially stable even when callers
+  // pass an inline arrow, which is the common case. Depending on onChange directly would
+  // make this useCallback -- and every memo built on top of it -- do nothing.
+  const onChangeRef = useRef(onChange);
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  });
+
   const setValue = useCallback(
     (next: T) => {
       if (!isControlled) setUncontrolledValue(next);
-      onChange?.(next);
+      onChangeRef.current?.(next);
     },
-    [isControlled, onChange],
+    [isControlled],
   );
+
+  useEffect(() => {
+    if (import.meta.env.DEV && isControlled && onChange == null) {
+      console.warn(
+        'useControllableState: a value was passed without an onChange, so the component is ' +
+          'stuck on that value and user interaction cannot change it. Pass onChange to ' +
+          'control it, or defaultProp to leave it uncontrolled.',
+      );
+    }
+  }, [isControlled, onChange]);
 
   return [value, setValue];
 }

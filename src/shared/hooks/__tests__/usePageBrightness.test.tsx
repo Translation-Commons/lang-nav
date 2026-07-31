@@ -30,6 +30,7 @@ const htmlClasses = () => document.documentElement.classList;
 describe('usePageBrightness', () => {
   afterEach(() => {
     vi.unstubAllGlobals();
+    vi.restoreAllMocks();
     localStorage.clear();
     htmlClasses().remove('light', 'dark');
   });
@@ -74,6 +75,24 @@ describe('usePageBrightness', () => {
 
     expect(htmlClasses().contains('dark')).toBe(true);
     expect(result.current.pageBrightness).toBe('dark');
+  });
+
+  it('still themes the page when the browser blocks site data', () => {
+    mockDevicePrefersDark(true);
+    // Blocking site data for an origin makes both reads and writes throw. This hook runs
+    // in the app's outermost provider, so an escaping error takes down every page.
+    vi.spyOn(Storage.prototype, 'getItem').mockImplementation(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+    vi.spyOn(Storage.prototype, 'setItem').mockImplementation(() => {
+      throw new DOMException('denied', 'SecurityError');
+    });
+
+    const { result } = renderHook(() => usePageBrightness());
+
+    expect(result.current.preference).toBe('follow device');
+    expect(result.current.pageBrightness).toBe('dark');
+    expect(htmlClasses().contains('dark')).toBe(true);
   });
 
   it('ignores device changes once a preference is set', () => {

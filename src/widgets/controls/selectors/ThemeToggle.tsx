@@ -16,6 +16,7 @@ const ThemeToggle = () => {
 
   return (
     <ThemeSwitcher
+      aria-label="Page Brightness"
       value={toTheme(preference)}
       onChange={(theme) => setPreference(toPreference(theme))}
     />
