@@ -11,17 +11,7 @@ const PageBrightnessSelector: React.FC = () => {
         label="Page Brightness"
         description="Choose how bright the page should be. This parameter is stored on your device."
       />
-      <div
-        style={{
-          color: 'var(--color-text-on-color)',
-          backgroundColor: 'var(--color-button-primary)',
-          border: '0',
-          width: '5.5rem',
-          borderRadius: '2.25rem',
-        }}
-      >
-        <ThemeToggle />
-      </div>
+      <ThemeToggle />
     </div>
   );
 };

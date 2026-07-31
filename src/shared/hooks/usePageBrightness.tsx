@@ -9,9 +9,11 @@ export type PageBrightnessParams = {
   setPreference: (newPref: PageBrightnessPreference) => void;
 };
 
+const DARK_MEDIA_QUERY = '(prefers-color-scheme: dark)';
+
 export function usePageBrightness(): PageBrightnessParams {
   const getSystemPageBrightness = (): PageBrightness =>
-    window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    window.matchMedia(DARK_MEDIA_QUERY).matches ? 'dark' : 'light';
 
   const [preference, setPreference] = useState<PageBrightnessPreference>(() => {
     return (
@@ -19,14 +21,29 @@ export function usePageBrightness(): PageBrightnessParams {
       'follow device'
     );
   });
+  const [systemBrightness, setSystemBrightness] = useState<PageBrightness>(getSystemPageBrightness);
 
-  const pageBrightness = preference === 'follow device' ? getSystemPageBrightness() : preference;
+  // Track the device setting so consumers re-render when it flips. Reading the media
+  // query during render instead would leave pageBrightness stale until something else
+  // caused a render -- the navbar logo and map tiles would keep their old variant.
+  useEffect(() => {
+    const mediaQuery = window.matchMedia(DARK_MEDIA_QUERY);
+    const apply = () => setSystemBrightness(mediaQuery.matches ? 'dark' : 'light');
+    apply();
+    mediaQuery.addEventListener('change', apply);
+    return () => mediaQuery.removeEventListener('change', apply);
+  }, []);
 
-  // Apply the resolved theme to <html> (or <body>)
+  const pageBrightness = preference === 'follow device' ? systemBrightness : preference;
+
+  // Always put an explicit class on <html>, even when following the device. Tailwind's
+  // `dark:` variant and the shadcn token overrides in tailwind.css key off that class,
+  // not the media query, so leaving it off renders shadcn components in light colors on
+  // a dark page. colors.css keeps its own media query as the pre-hydration fallback.
   useEffect(() => {
     document.documentElement.classList.remove('light', 'dark');
-    if (preference !== 'follow device') document.documentElement.classList.add(preference);
-  }, [preference]);
+    document.documentElement.classList.add(pageBrightness);
+  }, [pageBrightness]);
 
   // Persist preference (not resolved value)
   useEffect(() => {
@@ -43,9 +60,6 @@ export function usePageBrightness(): PageBrightnessParams {
     window.addEventListener('storage', onStorage);
     return () => window.removeEventListener('storage', onStorage);
   }, []);
-
-  // Intentionally no listener for system theme changes when preference is 'follow device'
-  // Since the CSS will automatically pick up on it via the media query
 
   // Public API
   return {

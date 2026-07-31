@@ -5,6 +5,25 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="/logo/LangNavCompass.png" />
     <title>Language Navigator</title>
+    <script type="text/javascript">
+      // Set the brightness class before first paint. The theme tokens in tailwind.css key
+      // off this class, so without it a dark-device visitor sees a white flash until React
+      // mounts. usePageBrightness takes over from here -- keep the storage key in sync.
+      (function () {
+        try {
+          var preference = localStorage.getItem('page-brightness') || 'follow device';
+          var resolved =
+            preference === 'follow device'
+              ? window.matchMedia('(prefers-color-scheme: dark)').matches
+                ? 'dark'
+                : 'light'
+              : preference;
+          document.documentElement.classList.add(resolved);
+        } catch (e) {
+          document.documentElement.classList.add('light');
+        }
+      })();
+    </script>
   </head>
 
   <body>

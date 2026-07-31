@@ -13,7 +13,12 @@ vi.mock('@features/params/usePageParams', () => ({
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ showHoverCard: vi.fn(), hideHoverCard: vi.fn() }),
 }));
-vi.mock('lucide-react', () => ({ XIcon: () => 'X' }));
+// Only XIcon is stubbed, so the clear button can be found by text. Keep the rest of the
+// library intact -- a total mock breaks any other icon reachable from this import graph.
+vi.mock('lucide-react', async (importOriginal) => ({
+  ...(await importOriginal<typeof import('lucide-react')>()),
+  XIcon: () => 'X',
+}));
 
 describe('TextInput component', () => {
   const createUser = () => userEvent.setup();
