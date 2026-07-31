@@ -1,5 +1,8 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
@@ -9,8 +12,6 @@ import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryType
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 

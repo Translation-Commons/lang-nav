@@ -1,6 +1,9 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
@@ -9,8 +12,6 @@ import { LanguageData, LanguageField, LanguageSource } from '@entities/language/
 
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 

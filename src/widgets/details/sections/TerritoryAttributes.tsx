@@ -1,15 +1,16 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import {
-    getCurrencyCompactLong,
-    numberToFixedUnlessSmall,
-    numberToSigFigs,
+  getCurrencyCompactLong,
+  numberToFixedUnlessSmall,
+  numberToSigFigs,
 } from '@shared/lib/numberUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   const { population, landArea, gdp, literacyPercent } = territory;

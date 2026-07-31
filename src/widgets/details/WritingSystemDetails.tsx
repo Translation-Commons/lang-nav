@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 import PopulationWarning from '@widgets/PopulationWarning';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -9,8 +11,6 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import CountOfPeople from '@shared/ui/CountOfPeople';
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 type Props = {
   writingSystem: WritingSystemData;

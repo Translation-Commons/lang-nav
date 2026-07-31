@@ -1,5 +1,8 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
@@ -8,8 +11,6 @@ import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralC
 import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 

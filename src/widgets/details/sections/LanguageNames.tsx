@@ -1,14 +1,14 @@
 import React from 'react';
 
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import { SearchableField } from '@features/params/PageParamTypes';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import LanguageCanonicalName from '@entities/language/LanguageCanonicalName';
 import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
-
-import DetailsField from '@widgets/details/ui/DetailsField';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { nameDisplay, nameCanonical, nameEndonym, nameFrench, Glottolog, ISO, CLDR, Ethnologue } =

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
@@ -9,7 +11,6 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
-import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 

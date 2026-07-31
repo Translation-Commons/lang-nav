@@ -1,8 +1,9 @@
 import React from 'react';
 
-import Deemphasized from '@shared/ui/Deemphasized';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
+
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { LanguageData } from '../LanguageTypes';
 
