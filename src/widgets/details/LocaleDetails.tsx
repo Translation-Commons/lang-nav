@@ -1,13 +1,11 @@
 import React from 'react';
 
-import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
-import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
-import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
-import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import LocaleIndigeneityDisplay, {
@@ -15,17 +13,11 @@ import LocaleIndigeneityDisplay, {
 } from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
-import { numberToFixedUnlessSmall } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import CountOfPeople from '@shared/ui/CountOfPeople';
-import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
-import { PercentageDifference } from '@shared/ui/PercentageDifference';
 import Pill from '@shared/ui/Pill';
 
-import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+import LocalePopulationSection from './sections/LocalePopulationSection';
 
 type Props = {
   locale: LocaleData;
@@ -116,113 +108,6 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
               {variantCodes.join(', ')} <Deemphasized>[variant not in database]</Deemphasized>
             </span>
           )}
-        </DetailsField>
-      )}
-    </DetailsSection>
-  );
-};
-
-const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { censusRecords, pop, territory } = locale;
-  const [showPopulationBreakdown, setShowPopulationBreakdown] = React.useState(false);
-
-  return (
-    <DetailsSection title="Population">
-      {pop.speaking.unadjusted == null && (
-        <Deemphasized>No population data available.</Deemphasized>
-      )}
-
-      {pop.speaking.adjusted && (
-        <DetailsField title={`Population Adjusted to ${TerritoryDataYear}`}>
-          <LocalePopulationAdjusted locale={locale} />
-          <HoverableButton
-            style={{ marginLeft: '0.5em', padding: '0.25em', fontWeight: 'normal' }}
-            onClick={() => setShowPopulationBreakdown(!showPopulationBreakdown)}
-          >
-            {showPopulationBreakdown ? 'hide' : 'show'} breakdown
-          </HoverableButton>
-          {showPopulationBreakdown && (
-            <div style={{ margin: '0em 1em 1em 1em' }}>
-              <LocalePopulationBreakdown locale={locale} />
-            </div>
-          )}
-        </DetailsField>
-      )}
-
-      {pop.speaking.unadjusted != null && (
-        <DetailsField title="Speakers (from best cited source(s))">
-          <CountOfPeople count={pop.speaking.unadjusted} />
-          {' ['}
-          <LocaleCensusCitation locale={locale} />
-          {']'}
-        </DetailsField>
-      )}
-      {pop.speaking.percent != null && (
-        <DetailsField
-          title={
-            <span style={{ marginLeft: '2em' }}>
-              % in {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
-            </span>
-          }
-        >
-          {numberToFixedUnlessSmall(pop.speaking.percent)}%
-        </DetailsField>
-      )}
-      {pop.writing.unadjusted != null && territory && (
-        <DetailsField title="Writers">
-          ~<CountOfPeople count={pop.writing.unadjusted} />
-          {' [previous estimate * literacy'}
-          {territory.literacyPercent != null && ` (${territory.literacyPercent.toFixed(1)}%)`}
-          {']'}
-        </DetailsField>
-      )}
-      {pop.writing.percent != null && (
-        <DetailsField
-          title={
-            <span style={{ marginLeft: '2em' }}>
-              % in {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
-            </span>
-          }
-        >
-          {numberToFixedUnlessSmall(pop.writing.percent)}%
-        </DetailsField>
-      )}
-
-      {censusRecords && censusRecords.length > 0 && (
-        <DetailsField title="Other Censuses">
-          <table style={{ marginLeft: '2em', borderSpacing: '1em 0' }}>
-            <thead>
-              <tr>
-                <th>Population</th>
-                <th>Percent</th>
-                <th>Census</th>
-                <th>Difference</th>
-              </tr>
-            </thead>
-            <tbody>
-              {censusRecords
-                .sort((a, b) => b.populationPercent - a.populationPercent)
-                .map((censusEstimate) => (
-                  <tr key={censusEstimate.census.ID}>
-                    <td style={{ textAlign: 'right' }}>
-                      <CountOfPeople count={censusEstimate.populationEstimate} />
-                    </td>
-                    <td style={{ textAlign: 'right' }}>
-                      <DecimalNumber num={censusEstimate.populationPercent} />%
-                    </td>
-                    <td>
-                      <HoverableObjectName object={censusEstimate.census} />
-                    </td>
-                    <td style={{ textAlign: 'right' }}>
-                      <PercentageDifference
-                        percentNew={censusEstimate.populationPercent}
-                        percentOld={pop.speaking.percent}
-                      />
-                    </td>
-                  </tr>
-                ))}
-            </tbody>
-          </table>
         </DetailsField>
       )}
     </DetailsSection>

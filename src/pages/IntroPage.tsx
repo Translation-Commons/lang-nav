@@ -6,7 +6,7 @@ import LargeLangNavLogo from '@widgets/docs/LargeLangNavLogo';
 const IntroPage: React.FC = () => {
   return (
     <IntroPageContainer>
-      <div style={{ marginTop: '1em' }}>
+      <div className="flex justify-center" style={{ marginTop: '1em' }}>
         <LargeLangNavLogo width={240} />
       </div>
       <div style={{ margin: '.5em 0', fontSize: '3em' }}>

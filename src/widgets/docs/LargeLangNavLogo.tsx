@@ -5,7 +5,7 @@ function LargeLangNavLogo({ width = 120 }: { width?: number }) {
 
   return (
     <img
-      src={`/lang-nav/logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
+      src={`${import.meta.env.BASE_URL}logo/LangNavLogo${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
       width={`${width}px`}
       height={`${width / 2}px`}
       alt="LangNav Logo"

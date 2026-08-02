@@ -1,0 +1,47 @@
+#nameDisplay		Isle of Man 2021 Home Language	Isle of Man 2021 Speaks Manx	Isle of Man 2021 Reads Manx	Isle of Man 2021 Writes Manx
+#isoRegionCode	IM				
+#yearCollected	2021				
+### Language Criteria ###					
+#languageUse		Speaks	Speaks	Reads	Writes
+#acquisitionOrder		Any			
+#domain		Home			
+### Population Surveyed ###					
+#population	84,069				
+#populationSource		Isle of Man Census 2021			
+#populationWithPositiveResponses		84,028			
+#populationSurveyed		84,069	2223	2223	2223
+#sampleRate		1			
+#responsesPerIndividual		1			
+### Data Constraints ###					
+#age	0+				
+#nationality	Residents				
+#languagesIncluded	All				
+#residenceBasis	de facto				
+#quantity	count				
+### Creator ###					
+#collectorType	Government				
+#collectorName	Isle of Man Cabinet Office				
+#collectorNameShort	IOM Cabinet Office				
+### Source Document ###					
+#url	https://www.gov.im/media/1375604/2021-01-27-census-report-part-i-final-2.pdf				
+#datePublished	2022-01-27				
+#dateAccessed	2026-06-02				
+#documentName	Isle of Man Census Report 2021 – Part I				
+#tableName		Table 2.11: Language Mainly Spoken at Home	Table 2.13: Manx Language Ability by Area	Table 2.13: Manx Language Ability by Area	Table 2.13: Manx Language Ability by Area
+#columnName		Number of Speakers	Can speak in Manx + Can both speak & read in Manx + Can both speak & write in Manx + Can speak, read, & write in Manx	Can read in Manx + Can both speak & read in Manx + Can both read & write in Manx + Can speak, read, & write in Manx	Can write in Manx + Can both speak & write in Manx + Can both read & write in Manx + Can speak, read, & write in Manx
+#notes					
+Language Code	Language	Population			
+eng	English	80,781			
+pol	Polish	504			
+fil	Filipino	435			
+bul	Bulgarian	376			
+zho	Chinese	349			
+por	Portuguese	125			
+afr	Afrikaans	99			
+ron	Romanian	96			
+spa	Spanish	79			
+hun	Hungarian	77			
+ita	Italian	72			
+mul	Other	1,035			
+mis	Unknown	41			
+glv	Manx		2023	1174	783

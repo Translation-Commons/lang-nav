@@ -16,7 +16,7 @@ import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSe
 import Field from '@features/transforms/fields/Field';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { getObjectTypeLabelPlural } from '@entities/lib/getObjectName';
+import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { ObjectData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
@@ -32,7 +32,7 @@ function ViewMap() {
   if ([ObjectType.Variant, ObjectType.Keyboard, ObjectType.Org].includes(objectType)) {
     return (
       <div>
-        Map view is not well-defined for {getObjectTypeLabelPlural(objectType)}. Please select a
+        Map view is not well-defined for {getEntityTypeLabelPlural(objectType)}. Please select a
         different object type.
       </div>
     );
@@ -64,7 +64,7 @@ function ViewMap() {
       </SelectorDisplayProvider>
       {entsWithoutCoordinates.length > 0 && (
         <div>
-          The following {getObjectTypeLabelPlural(objectType)} do not have defined coordinates:{' '}
+          The following {getEntityTypeLabelPlural(objectType)} do not have defined coordinates:{' '}
           <CommaSeparated limit={10}>
             {entsWithoutCoordinates.map((ent) => (
               <HoverableObjectName key={ent.ID} object={ent} />

@@ -18,9 +18,9 @@ import { ProfileType } from './Profiles';
 export enum ObjectType {
   Language = 'Language',
   Locale = 'Locale',
-  Census = 'Census',
   Territory = 'Territory',
   WritingSystem = 'Writing System',
+  Census = 'Census',
   Variant = 'Variant',
   Keyboard = 'Keyboard',
   Org = 'Organization',

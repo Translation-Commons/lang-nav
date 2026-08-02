@@ -1,8 +1,9 @@
 import React from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import DetailsSection from '@shared/containers/DetailsSection';
 import ArcGauge from '@shared/ui/ArcGauge';
 
 import { getVitalityScore } from './LanguageVitalityComputation';

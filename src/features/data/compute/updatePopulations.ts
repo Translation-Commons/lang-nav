@@ -19,11 +19,13 @@ export function updatePopulations(
 ): void {
   computeLocalesPopulationFromCensuses(locales);
 
+  // First compute language family populations for locales
+  computeLanguageFamilyLocalePopulations(locales);
+
+  // Then compute regional locale populations
   // Start with the world territory (001) and then go down to groups
   // This will update regional locales AND the languages themselves
   computeRegionalLocalesPopulation(world);
-
-  computeLanguageFamilyLocalePopulations(locales);
 
   updateLanguagesPopulationFromLocale(world);
 

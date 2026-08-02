@@ -1,0 +1,48 @@
+#codeDisplay		ao2014
+#nameDisplay		Angola 2014 Home Language
+#isoRegionCode	AO	
+#yearCollected		2014
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		Any
+#domain		Home
+### Population Surveyed ###		
+#population		23,739,971
+#populationSource		
+#populationWithPositiveResponses		23,620,614
+#sampleRate		1
+#responsesPerIndividual		1+
+### Data Constraints ###		
+#geographicScope		whole country
+#age		2+
+#languagesIncluded		All
+#nationality		Residents
+#residenceBasis		de facto
+#quantity		count
+### Creator ###		
+#collectorType		Government
+#collectorName		Instituto Nacional de Estatística de Angola
+#collectorNameShort		INE Angola
+### Source Document ###		
+#url		https://andine.ine.gov.ao/nada/index.php/catalog/3/download/49
+#datePublished		2016
+#dateAccessed		2026-06-16
+#documentName		Resultados Definitivos do Recenseamento Geral da População e Habitação 2014
+#sectionName		7.1.10 Línguas Habitualmente Faladas em Casa
+#tableName		Quadro 6 - População com 2 ou mais anos de idade por grupo de idade e área de residência, segundo as línguas faladas
+#columnName		Percentagem da população residente
+#citation		Instituto Nacional de Estatística de Angola (INE). Resultados Definitivos do Recenseamento Geral da População e Habitação 2014. Secção 7.1.10: Línguas Habitualmente Faladas em Casa.
+Language Code	Language	Population
+por	Português	16890741
+umb	Umbundu	5449819
+kon	Kikongo	1855951
+kmb	Kimbundu	1956191
+cjk	Côkwe	1553019
+nyk	Nyaneka	812357
+nba	Ngangela	739070
+kon/kng/mis	Fiote	568296
+kua	Kwanhama	537533
+khu	Muhumbi	502881
+lue	Luvale	248002
+mul	Outra Língua	854045
+zxx	Surdo/mudo	119357

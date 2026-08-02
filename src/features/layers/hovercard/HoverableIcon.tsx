@@ -22,7 +22,7 @@ const HoverableIcon: React.FC<Props> = ({ Icon, onClick, description, className 
       hoverContent={description}
       style={{ padding: '0.5em' }}
     >
-      <Icon size="1.5em" style={{ display: 'block' }} />
+      <Icon style={{ display: 'block' }} />
     </HoverableButton>
   );
 };

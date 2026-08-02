@@ -191,7 +191,7 @@ const PotentialLocalesTable: React.FC<{
         },
         {
           key: 'Population Source',
-          render: (object) => <LocaleCensusCitation locale={object} />,
+          render: (object) => <LocaleCensusCitation locale={object} use="speaking" />,
         },
         {
           key: 'Related Locale',

@@ -33,7 +33,7 @@ const PageNavBar: React.FC = () => {
     <NavBarContainer ref={navRef}>
       <NavBarTitle>
         <img
-          src={`/lang-nav/logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
+          src={`${import.meta.env.BASE_URL}logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
           width="60px"
           alt="LangNav Logo"
         />

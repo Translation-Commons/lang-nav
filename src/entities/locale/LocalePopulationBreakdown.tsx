@@ -5,17 +5,20 @@ import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTyp
 import LocalePopulationBreakdownAdjusted from './LocalePopulationBreakdownAdjusted';
 import LocalePopulationBreakdownAggregated from './LocalePopulationBreakdownAggregated';
 
-const LocalePopulationBreakdown: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  if (!locale.territory || !locale.pop.speaking.adjusted) return null;
+const LocalePopulationBreakdown: React.FC<{ locale: LocaleData; use: 'speaking' | 'writing' }> = ({
+  locale,
+  use,
+}) => {
+  if (!locale.territory || locale.pop[use].adjusted == null) return null;
 
   if (
-    locale.pop.speaking.source === PopulationSourceCategory.AggregatedFromLanguages ||
-    locale.pop.speaking.source === PopulationSourceCategory.AggregatedFromTerritories
+    locale.pop[use].source === PopulationSourceCategory.AggregatedFromLanguages ||
+    locale.pop[use].source === PopulationSourceCategory.AggregatedFromTerritories
   ) {
-    return <LocalePopulationBreakdownAggregated locale={locale} />;
+    return <LocalePopulationBreakdownAggregated locale={locale} use={use} />;
   }
 
-  return <LocalePopulationBreakdownAdjusted locale={locale} />;
+  return <LocalePopulationBreakdownAdjusted locale={locale} use={use} />;
 };
 
 export default LocalePopulationBreakdown;

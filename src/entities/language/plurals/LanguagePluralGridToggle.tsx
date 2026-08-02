@@ -8,7 +8,12 @@ import { LanguageData } from '../LanguageTypes';
 import { findLanguagePluralRules } from './LanguagePluralComputation';
 import LanguagePluralGrid from './LanguagePluralGrid';
 
-const LanguagePluralGridButton: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+type Props = {
+  lang: LanguageData;
+  showTooltips?: boolean;
+};
+
+const LanguagePluralGridButton: React.FC<Props> = ({ lang, showTooltips }) => {
   const [isGridVisible, setIsGridVisible] = useState(false);
 
   if (!lang) return null;
@@ -28,7 +33,7 @@ const LanguagePluralGridButton: React.FC<{ lang: LanguageData }> = ({ lang }) =>
         hoverContent={
           <>
             click to persist
-            <LanguagePluralGrid lang={lang} />
+            <LanguagePluralGrid lang={lang} showTooltips={showTooltips} />
           </>
         }
         style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
@@ -37,7 +42,7 @@ const LanguagePluralGridButton: React.FC<{ lang: LanguageData }> = ({ lang }) =>
         <GridIcon size="1em" style={{ marginRight: '0.25em', verticalAlign: 'middle' }} />
         examples
       </HoverableButton>
-      {isGridVisible && <LanguagePluralGrid lang={lang} />}
+      {isGridVisible && <LanguagePluralGrid lang={lang} showTooltips={showTooltips} />}
     </>
   );
 };

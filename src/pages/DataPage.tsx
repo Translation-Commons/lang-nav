@@ -1,7 +1,7 @@
 import React from 'react';
 
 import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
-import DetailsPanel from '@widgets/details/DetailsPanel';
+import DetailsPanel from '@widgets/details/ui/DetailsPanel';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 

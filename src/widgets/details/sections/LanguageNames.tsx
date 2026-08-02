@@ -7,8 +7,8 @@ import LanguageCanonicalName from '@entities/language/LanguageCanonicalName';
 import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
+import DetailsField from '../ui/DetailsField';
+import DetailsSection from '../ui/DetailsSection';
 
 const LanguageNames: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { nameDisplay, nameCanonical, nameEndonym, nameFrench, Glottolog, ISO, CLDR, Ethnologue } =

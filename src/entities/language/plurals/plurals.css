@@ -1,0 +1,48 @@
+/* Colors */
+.pluralRule-count-zero {
+  color: var(--color-text-on-color) !important;
+  background-color: var(--color-blue);
+}
+
+.pluralRule-count-one {
+  color: var(--color-text-on-color) !important;
+  background-color: var(--color-green);
+}
+
+.pluralRule-count-two {
+  color: var(--color-text-on-color) !important;
+  background-color: var(--color-yellow);
+}
+
+.pluralRule-count-few {
+  color: var(--color-text-on-color) !important;
+  background-color: var(--color-orange);
+}
+
+.pluralRule-count-many {
+  color: var(--color-text-on-color) !important;
+  background-color: var(--color-red);
+}
+
+.pluralRule-count-other {
+  color: var(--color-text) !important;
+  background-color: var(--color-button-secondary);
+}
+
+/* Components */
+.LanguagePluralExample {
+  border-radius: 0.25em;
+  min-width: 1em;
+  text-align: right;
+  padding: 0 0.25em;
+}
+
+.LanguagePluralCategory {
+  border-radius: 0.25em;
+  padding: 0 0.25em;
+}
+
+.LanguagePluralCategory.hoverableText {
+  /* avoiding negative margins on regular hoverable text */
+  margin: 0;
+}

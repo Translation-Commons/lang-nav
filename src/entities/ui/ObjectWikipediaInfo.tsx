@@ -3,7 +3,11 @@ import React from 'react';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { ObjectType } from '@features/params/PageParamTypes';
 
-import { ObjectData, WikipediaData, WikipediaStatus } from '@entities/types/DataTypes';
+import {
+  WikipediaData,
+  WikipediaStatus,
+} from '@entities/language/digitalsupport/DigitalSupportTypes';
+import { ObjectData } from '@entities/types/DataTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';

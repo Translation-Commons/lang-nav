@@ -257,36 +257,36 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(
       langOriginal?.populationFromLocales,
       'langOriginal?.populationFromLocales, Prior value w/ ER & BE',
-    ).toBe(11220);
+    ).toBe(11100);
     expect(
       langOnlyCensus?.populationFromLocales,
       'langOnlyCensus?.populationFromLocales, No new locale added so AM not counted',
-    ).toBe(11220);
+    ).toBe(11100);
     expect(
       langOnlyLocale?.populationFromLocales,
       'langOnlyLocale?.populationFromLocales, New locale added so AM counted but not adjusted ',
-    ).toBe(13220); // <-- UPDATED VALUE
+    ).toBe(13100); // <-- UPDATED VALUE
     expect(
       langBothNewEntities?.populationFromLocales,
       'langBothNewEntities?.populationFromLocales, New locale added so AM counted and adjusted',
-    ).toBe(29220); // <-- UPDATED VALUE
+    ).toBe(29100); // <-- UPDATED VALUE
 
     // The ultimate population estimate will always be upcated because there is census data now
     expect(
       langOriginal?.populationEstimate,
       'langOriginal?.populationEstimate, updated value from locales',
-    ).toBe(11220);
+    ).toBe(11100);
     expect(
       langOnlyCensus?.populationEstimate,
       'langOnlyCensus?.populationEstimate, updated value from locales',
-    ).toBe(11220);
+    ).toBe(11100);
     expect(
       langOnlyLocale?.populationEstimate,
       'langOnlyLocale?.populationEstimate, updated value from locales',
-    ).toBe(13220);
+    ).toBe(13100);
     expect(
       langBothNewEntities?.populationEstimate,
       'langBothNewEntities?.populationEstimate, updated value from locales',
-    ).toBe(29220);
+    ).toBe(29100);
   });
 });

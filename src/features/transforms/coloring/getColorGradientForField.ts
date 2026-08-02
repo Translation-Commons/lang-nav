@@ -16,7 +16,6 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.PercentOfTerritoryPopulation:
     case Field.Date:
     case Field.Area:
-    case Field.Modality:
       // Low values are blue, high values are orange
       return ColorGradient.DivergingBlueToOrange;
 
@@ -60,6 +59,7 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.SourceType:
     case Field.Description:
     case Field.Example:
+    case Field.Modality:
       // Continuous spectrum
       return ColorGradient.OklabRainbowBlueToRed;
 

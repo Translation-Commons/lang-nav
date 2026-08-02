@@ -15,6 +15,7 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
+import { LanguageModality } from '@entities/language/LanguageModality';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
@@ -27,6 +28,7 @@ import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
+import LanguageModalityFullExplanation from '@strings/LanguageModalityFullExplanation';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
@@ -66,7 +68,8 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       columnGroup: 'Context',
     },
     {
-      key: 'Modality',
+      key: 'Medium of Use',
+      description: <LanguageModalityFullExplanation />,
       render: (lang) => getModalityLabel(lang.modality) ?? <Deemphasized>—</Deemphasized>,
       exportValue: (lang) => getModalityLabel(lang.modality), // Avoid exporting escaped html like &amp;
       isInitiallyVisible: false,
@@ -185,7 +188,10 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
         </>
       ),
       render: (lang) => <LanguageWritingSystems lang={lang} />,
-      isInitiallyVisible: false,
+      isInitiallyVisible: (params) =>
+        params.modalityFilter.some(
+          (m) => m === LanguageModality.Written || m === LanguageModality.MostlyWritten,
+        ),
       field: Field.WritingSystem,
       columnGroup: 'Writing',
     },
@@ -205,7 +211,12 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     },
     {
       key: 'Plural rule examples',
-      render: (lang) => <LanguagePluralRuleExamplesGrid lang={lang} />,
+      render: (lang) => (
+        <LanguagePluralRuleExamplesGrid
+          lang={lang}
+          showTooltips={false /* too many items to render for table view */}
+        />
+      ),
       isInitiallyVisible: false,
       columnGroup: 'Grammar',
     },

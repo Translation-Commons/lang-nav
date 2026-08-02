@@ -54,8 +54,11 @@ jobs:
         if: steps.playwright-cache.outputs.cache-hit == 'true'
         run: npx playwright install-deps chromium
 
-      - name: Update screenshot baselines
+      - name: Update testing screenshot baselines
         run: npm run test:screenshots:update
+
+      - name: Re-capture preview images
+        run: npm run update-previews
 
       - name: Commit changes
         uses: stefanzweifel/git-auto-commit-action@v5
@@ -68,9 +71,9 @@ jobs:
       - name: Verify updated baselines pass
         run: npm run test:screenshots
 
-      - name: Remove update-baselines label and automatically add update-preview-images
+      - name: Remove update-baselines label
         if: github.event_name == 'pull_request'
-        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label update-baselines --add-label update-preview-images
+        run: gh pr edit ${{ github.event.pull_request.number }} --remove-label update-baselines
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

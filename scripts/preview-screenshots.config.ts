@@ -12,7 +12,7 @@ export default defineConfig({
   reporter: 'list',
 
   use: {
-    baseURL: 'http://localhost:4173/lang-nav/',
+    baseURL: 'http://localhost:4173/',
     trace: 'on-first-retry',
   },
 
@@ -28,8 +28,8 @@ export default defineConfig({
   ],
 
   webServer: {
-    command: 'npm run build && npm run preview',
-    url: 'http://localhost:4173/lang-nav/',
+    command: 'VITE_BASE_PATH=/ npm run build && VITE_BASE_PATH=/ npm run preview',
+    url: 'http://localhost:4173/',
     reuseExistingServer: !process.env.CI,
   },
 });

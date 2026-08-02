@@ -16,7 +16,8 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
         time of the census and multiply it by the current population of the territory.
       </>
     ),
-    render: (object) => <LocalePopulationAdjusted locale={object} />,
+    render: (object) => <LocalePopulationAdjusted locale={object} use="speaking" />,
+    exportValue: (object) => object.pop.speaking.adjusted,
     field: Field.Population,
     columnGroup: 'Demographics',
   },
@@ -30,7 +31,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   },
   {
     key: '% in Territory',
-    render: (object) => object.pop.speaking.percent,
+    render: (object) => object.pop.speaking.percentAdjusted,
     field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
   },
@@ -45,7 +46,8 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   },
   {
     key: 'Population Source',
-    render: (object) => <LocaleCensusCitation locale={object} />,
+    render: (object) => <LocaleCensusCitation locale={object} use="speaking" />,
+    field: Field.SourceForPopulation,
     columnGroup: 'Demographics',
   },
   {

@@ -18,7 +18,8 @@ import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionByS
 
 const columns: TableColumn<LanguageData>[] = [
   {
-    key: 'Code',
+    key: 'ID',
+    label: 'Code',
     field: Field.Code,
     description: <CodeDisplayDescription />,
     render: (lang: LanguageData): ReactNode => (

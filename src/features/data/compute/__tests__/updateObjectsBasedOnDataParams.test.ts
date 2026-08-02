@@ -44,9 +44,9 @@ describe('updateObjectsBasedOnDataParams', () => {
     );
 
     // After update, populationEstimate should consider populationFromLocales
-    expect(sjn.populationEstimate).toBe(11220); // Updated to follow locales
+    expect(sjn.populationEstimate).toBe(11100); // Updated to follow locales
     expect(dori0123.populationEstimate).toBe(1800); // Updated to follow locales
-    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // updated since locales updated from census data
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11100); // updated since locales updated from census data
 
     // Check the IDs and names again
     expect(sjn.codeDisplay).toBe('sjn');
@@ -79,10 +79,11 @@ describe('updateObjectsBasedOnDataParams', () => {
       LocaleSeparator.Hyphen,
     );
 
-    expect(sjn.populationEstimate).toBe(11220); // unchanged
+    expect(sjn.populationEstimate).toBe(11100); // unchanged
     // TODO computeLanguageDescendantPopulation needs to be revamped
     expect(sjn.populationOfDescendants).toBe(200000); // this should be computed from dori0123
     expect(dori0123.populationEstimate).toBe(100000); // updated to include new locale
-    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
+    expect(sjn_001.pop.speaking.unadjusted).toBe(1800); // unchanged
+    expect(sjn_001.pop.speaking.adjusted).toBe(1800); // unchanged
   });
 });

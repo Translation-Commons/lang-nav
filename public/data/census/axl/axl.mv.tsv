@@ -1,0 +1,22 @@
+#codeDisplay		axl.mv
+#nameDisplay		AXL Maldives
+#isoRegionCode	MV	
+#yearCollected	2004	
+#languageUse	Speaks	
+#acquisitionOrder	L1	
+#domain	Home	
+#population	314,175	
+#quantity		count
+#responsesPerIndividual	1+	
+#collectorType	Secondary	
+#presentedBy	AXL	
+#url	https://www.axl.cefan.ulaval.ca/asie/maldives.htm	
+#dateAccessed	2026-07-20	
+div	Dhivehi	310000
+sin	Sinhalese	2000
+guj	Gujarati	572
+mal	Malayalam	458
+tam	Tamil	430
+ara	Arabic	372
+msa	Malay	229
+eng	English	114

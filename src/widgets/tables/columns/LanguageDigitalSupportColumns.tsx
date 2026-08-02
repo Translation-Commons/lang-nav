@@ -4,15 +4,19 @@ import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/DigitalSupportMeter';
+import { DigitalSupportDimension } from '@entities/language/digitalsupport/DigitalSupportTypes';
+import LanguageDigitalSupportMetascore from '@entities/language/digitalsupport/LanguageDigitalSupportMetascore';
 import LanguageUDHRInfo, {
   LanguageUDHRDescription,
-} from '@entities/language/vitality/LanguageUDHRInfo';
+} from '@entities/language/digitalsupport/LanguageUDHRInfo';
+import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
+import IosSupportStatus from '@entities/ui/IosSupportStatus';
 import {
   WikipediaActiveUsers,
   WikipediaArticles,
@@ -24,12 +28,20 @@ import Win11LanguagePackSupportStatus from '@entities/ui/Win11LanguagePackSuppor
 import ExternalLink from '@shared/ui/ExternalLink';
 
 const columns: TableColumn<LanguageData>[] = [
-  // {
-  //   key: 'Digital Support (Ethnologue)',
-  //   description: <LanguageDigitalSupportDescription />,
-  //   render: (lang) => <LanguageDigitalSupportCell lang={lang} />,
-  //   exportValue: (lang) => getDigitalSupportLabel(lang.Ethnologue.digitalSupport),
-  // },
+  {
+    key: 'Overall Digital Support',
+    render: (lang) => <LanguageDigitalSupportMetascore lang={lang} />,
+    exportValue: (lang) => lang.digitalSupportScore?.overall,
+    field: Field.DigitalSupport,
+    isInitiallyVisible: (params) => params.languageSource === LanguageSource.CLDR,
+  },
+  {
+    key: 'I18n Frameworks',
+    render: (lang) => (
+      <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.I18nFrameworks} />
+    ),
+    exportValue: (lang) => lang.digitalSupportScore?.i18nFrameworks,
+  },
   {
     key: 'CLDR Coverage Level',
     description: (
@@ -45,6 +57,7 @@ const columns: TableColumn<LanguageData>[] = [
       </>
     ),
     exportValue: (lang) => lang.CLDR.coverage?.actualCoverageLevel,
+    isInitiallyVisible: (params) => params.languageSource === LanguageSource.CLDR,
   },
   {
     key: 'CLDR Locales',
@@ -76,6 +89,13 @@ const columns: TableColumn<LanguageData>[] = [
     field: Field.CountOfKeyboards,
   },
   {
+    key: 'Machine Translation',
+    render: (lang) => (
+      <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.MachineTranslation} />
+    ),
+    exportValue: (lang) => lang.digitalSupportScore?.machineTranslation,
+  },
+  {
     key: 'Google Translate',
     description: 'Language entries available in Google Translate.',
     render: (lang) => <GoogleTranslateSupportStatus lang={lang} />,
@@ -83,6 +103,13 @@ const columns: TableColumn<LanguageData>[] = [
       if (!lang.googleTranslate || lang.googleTranslate.length === 0) return 'n/a';
       return lang.googleTranslate.map((entry) => entry.name).join('; ');
     },
+  },
+  {
+    key: 'Interface Support',
+    render: (lang) => (
+      <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.Interfaces} />
+    ),
+    exportValue: (lang) => lang.digitalSupportScore?.interfaces,
   },
   {
     key: 'Windows 11',
@@ -100,6 +127,29 @@ const columns: TableColumn<LanguageData>[] = [
         })
         .join('; ');
     },
+  },
+  {
+    key: 'iOS',
+    description: 'Language entries supported in iOS.',
+    render: (lang) => <IosSupportStatus lang={lang} />,
+    exportValue: (lang) => {
+      if (!lang.ios || lang.ios.length === 0) return 'n/a';
+      return lang.ios
+        .map((entry) => {
+          const parts = [entry.name];
+          if (entry.locale) parts.push(`(${entry.locale})`);
+          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
+          return parts.join(' ');
+        })
+        .join('; ');
+    },
+  },
+  {
+    key: 'Documentation',
+    render: (lang) => (
+      <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.Documentation} />
+    ),
+    exportValue: (lang) => lang.digitalSupportScore?.documentation,
   },
   {
     key: 'Wikipedia Status',
@@ -179,8 +229,8 @@ const columns: TableColumn<LanguageData>[] = [
 ];
 export const LanguageDigitalSupportColumns: TableColumn<LanguageData>[] = columns.map(
   (col: TableColumn<LanguageData>) => ({
-    ...col,
     isInitiallyVisible: false,
+    ...col,
     columnGroup: 'Digital Support',
   }),
 );

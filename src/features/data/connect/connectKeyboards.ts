@@ -1,5 +1,6 @@
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { LanguageDictionary } from '@entities/language/LanguageTypes';
+import { getLanguageRootMacrolanguage } from '@entities/language/LanguageFamilyUtils';
+import { LanguageData, LanguageDictionary } from '@entities/language/LanguageTypes';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
@@ -10,6 +11,7 @@ import { getLessSpecificLocaleTags } from '../compute/searchLocalesForMissingLin
 export function connectKeyboards(
   keyboards: Record<string, KeyboardData>,
   languages: LanguageDictionary,
+  languagesCLDR: LanguageDictionary,
   territoriesByCode: Record<TerritoryCode, TerritoryData>,
   writingSystems: Record<ScriptCode, WritingSystemData>,
   variants: Record<string, VariantData>,
@@ -32,20 +34,23 @@ export function connectKeyboards(
       outputWritingSystem.outputKeyboards.push(keyboard);
     }
     if (variant != null) keyboard.variant = variant;
-    // Connect languages (GBoard: 1 language, Keyman: 1 or more)
-    keyboard.languages = [];
-    for (const langCode of languageCodes) {
-      const language = languages[langCode] ?? null;
-      if (language == null) continue;
 
-      keyboard.languages.push(language);
-      if (!language.keyboards) language.keyboards = [];
-      language.keyboards.push(keyboard);
+    // Connect languages (GBoard: 1 language, Keyman: 1 or more)
+    for (const langCode of languageCodes) {
+      const language = languages[langCode] ?? languagesCLDR[langCode] ?? null;
+      if (language == null) continue;
+      addKeyboardToLanguage(keyboard, language);
+
+      // Associate a language's macrolanguage (for now, not always a safe bet)
+      const macrolanguage = getLanguageRootMacrolanguage(language);
+      if (macrolanguage != null && macrolanguage.ID !== language.ID)
+        addKeyboardToLanguage(keyboard, macrolanguage);
     }
 
     // Locale resolution — one locale per language code
     keyboard.locales = [];
-    for (const langCode of languageCodes) {
+    for (const langCodeBase of languageCodes) {
+      const langCode = languages[langCodeBase]?.ID ?? languagesCLDR[langCodeBase]?.ID ?? null;
       const localeTags = {
         languageCode: langCode,
         scriptCode: outputScriptCode,
@@ -61,4 +66,12 @@ export function connectKeyboards(
       if (locale != null) keyboard.locales.push(locale);
     }
   });
+}
+
+function addKeyboardToLanguage(keyboard: KeyboardData, language: LanguageData) {
+  if (!keyboard.languages) keyboard.languages = [];
+  if (keyboard.languages.includes(language)) return; // already associated
+  keyboard.languages.push(language);
+  if (!language.keyboards) language.keyboards = [];
+  language.keyboards.push(keyboard);
 }

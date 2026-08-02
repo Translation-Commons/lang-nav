@@ -1,31 +1,28 @@
 import React from 'react';
 
-import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
-import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
+import DetailsField from '@widgets/details/ui/DetailsField';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import DetailsField from '@shared/containers/DetailsField';
-import DetailsSection from '@shared/containers/DetailsSection';
-import LinkButton from '@shared/ui/LinkButton';
-import Pill from '@shared/ui/Pill';
+import Deemphasized from '@shared/ui/Deemphasized';
 
-import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
-import ObjectWikipediaInfo from '../../ui/ObjectWikipediaInfo';
-import LanguageDigitalSupportCell from '../LanguageDigitalSupportCell';
 import { LanguageData } from '../LanguageTypes';
 
-import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 import LanguageVitalityMeter from './VitalityMeter';
 import { VitalitySource } from './VitalityTypes';
 
 const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { viabilityConfidence, viabilityExplanation, vitality = {}, Ethnologue } = lang;
+  const { viabilityConfidence, viabilityExplanation } = lang;
 
   return (
     <DetailsSection title="Vitality & Viability">
       <DetailsField title="Vitality Metascore">
-        <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} />
+        <Deemphasized>Under construction</Deemphasized>
+        {/* <LanguageVitalityMeter lang={lang} src={VitalitySource.Metascore} /> */}
       </DetailsField>
-      <DetailsField title="Ethnologue (2012)">
+      <DetailsField title="ISO Status">
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.ISO} />
+      </DetailsField>
+      {/* <DetailsField title="Ethnologue (2012)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2012} />{' '}
         {vitality.ethFine != null &&
           (Ethnologue.vitality2012 != null ? <Pill>Ethnologue 2012</Pill> : <Pill>Derived</Pill>)}
@@ -34,43 +31,10 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2025} />{' '}
         {vitality.ethCoarse != null &&
           (Ethnologue.vitality2025 != null ? <Pill>Ethnologue 2025</Pill> : <Pill>Derived</Pill>)}
-      </DetailsField>
-      <DetailsField title="Should use in World Atlas">
-        {viabilityConfidence} ... {viabilityExplanation}
-      </DetailsField>
-      <DetailsField
-        title="Digital Support (Ethnologue)"
-        endContent={
-          <LinkButton href="https://www.ethnologue.com/insights/digital-language-divide/">
-            Ethnologue
-          </LinkButton>
-        }
-      >
-        <LanguageDigitalSupportCell lang={lang} />
-      </DetailsField>
-      <DetailsField title="CLDR Coverage">
-        <div style={{ display: 'inline-flex', flexDirection: 'row', gap: '0.5em' }}>
-          <CLDRWarningNotes object={lang} />
-          <ObjectCLDRCoverageLevel object={lang} />
-          <ObjectCLDRLocaleCount object={lang} verbose={true} />
-        </div>
-      </DetailsField>
-      <DetailsField title="ICU Support">
-        <ICUSupportStatus object={lang} />
-      </DetailsField>
-      <DetailsField
-        title="Wikipedia"
-        endContent={
-          lang.wikipedias &&
-          lang.wikipedias.length > 0 && (
-            <LinkButton href={lang.wikipedias[0].url}>{lang.wikipedias[0].url}</LinkButton>
-          )
-        }
-      >
-        <ObjectWikipediaInfo object={lang} />
-      </DetailsField>
-      <DetailsField title="UDHR" description={LanguageUDHRDescription}>
-        <LanguageUDHRInfo lang={lang} size="long" />
+      </DetailsField> */}
+      <DetailsField title="Good language category?">
+        {viabilityConfidence} {viabilityExplanation && ' ... '}
+        {viabilityExplanation}
       </DetailsField>
     </DetailsSection>
   );

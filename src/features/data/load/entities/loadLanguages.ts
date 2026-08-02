@@ -40,8 +40,8 @@ function parseLanguageLine(line: string): LanguageData {
     names: [nameDisplay, nameEndonym].filter((s) => s != null),
 
     vitality: {}, // Filled in later
-    viabilityConfidence: parts[13] || undefined,
-    viabilityExplanation: parts[14] || undefined,
+    viabilityConfidence: parts[9] || undefined,
+    viabilityExplanation: parts[10] || undefined,
 
     populationRough,
 

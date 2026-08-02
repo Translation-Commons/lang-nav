@@ -1,6 +1,5 @@
 import computeLanguageFamiliesModality from '../compute/computeLanguageFamiliesModality';
 import { computeLocalesPopulationFromCensuses } from '../compute/computeLocalesPopulationFromCensuses';
-import { computeLocalesWritingPopulation } from '../compute/computeLocalesWritingPopulation';
 import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats';
 import { addCensusData } from '../connect/connectCensuses';
 import { DataContextType } from '../context/useDataContext';
@@ -11,6 +10,7 @@ import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
 import { loadGoogleTranslate } from './supplemental/loadGoogleTranslate';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
+import { loadIos } from './supplemental/loadIos';
 import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
@@ -43,6 +43,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadIndigeneity(dataContext.getLanguage),
     loadECRML(dataContext.getLanguage),
     loadGoogleTranslate(dataContext.getLanguage),
+    loadIos(dataContext.getLanguage),
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadWin11LanguagePacks(dataContext.getLanguage),
@@ -79,6 +80,6 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
   // 001 is the UN code for the World
   computeContainedTerritoryStats(dataContext.getTerritory('001'));
   computeLocalesPopulationFromCensuses(dataContext.locales);
-  computeLocalesWritingPopulation(dataContext.locales);
+  // Some more population computations moved to updatePopulations
   computeLanguageFamiliesModality(dataContext.languagesInSelectedSource);
 }
