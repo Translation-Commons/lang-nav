@@ -166,6 +166,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Latitude,
         Field.Longitude,
 
+        Field.PopulationWriting,
         Field.PopulationDirectlySourced,
         Field.PopulationOfDescendants,
         Field.PopulationPercentInBiggestDescendantLanguage,

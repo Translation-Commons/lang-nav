@@ -41,7 +41,7 @@ export function connectObjectsAndCreateDerivedData(
   createFamilyLocales(languagesBySource.Combined, locales); // create them before regional locales
   createRegionalLocales(territories, locales); // create them after connecting them
   searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
-  computeDescendantPopulation(languagesBySource, writingSystems);
+  computeDescendantPopulation(writingSystems);
   connectKeyboards(
     keyboards,
     languagesBySource.Combined,

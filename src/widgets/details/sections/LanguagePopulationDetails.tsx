@@ -18,7 +18,7 @@ const LanguagePopulationDetails: React.FC<Props> = ({ lang, use }) => {
 
   const title = (
     <>
-      <span style={{ textTransform: 'titlecase' }}>{use} Population</span>
+      <span>{use} Population</span>
       {pop.source && (
         <div style={{ fontSize: '0.75em', fontWeight: 'normal', textTransform: 'lowercase' }}>
           <PopulationSourceCategoryDisplay sourceCategory={pop.source} />

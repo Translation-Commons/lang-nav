@@ -68,7 +68,7 @@ export function getLanguageModalityUserLabel(
     return plural ? 'speakers' : 'speaker';
   }
 
-  // Old functionality before we distingu
+  // Old functionality in case you're not focused on a specific use, just the modality of the language itself
   if (modality == null) return plural ? 'speakers' : 'speaker';
   switch (modality) {
     case LanguageModality.Spoken:

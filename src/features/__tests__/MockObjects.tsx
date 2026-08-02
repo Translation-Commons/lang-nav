@@ -1,4 +1,3 @@
-import { computeDescendantPopulation } from '@features/data/compute/computeDescendantPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
 import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
@@ -402,8 +401,7 @@ export function getFullyInstantiatedMockedObjects(
 
   // Initial connections and algorithms
   connectMockedObjects(objects);
-  const { languagesBySource, writingSystems, locales } = getMockedObjectDictionaries(objects);
-  computeDescendantPopulation(languagesBySource, writingSystems);
+  const { languagesBySource, locales } = getMockedObjectDictionaries(objects);
 
   // From DataContext
   const world = objects['001'] as TerritoryData;

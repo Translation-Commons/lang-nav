@@ -32,8 +32,7 @@ export function updatePopulations(
 
   computeLanguagesPopulations(languages);
 
-  // Temporarily turned off
-  // discountPopulationEstimatesIfSimilarToParent(languages);
+  discountPopulationEstimatesIfSimilarToParent(languages);
 }
 
 function computeLanguagesPopulations(languages: LanguageData[]): void {
@@ -95,20 +94,41 @@ function computeLanguagePopulationEstimate(lang: LanguageData, use: 'speaking' |
   }
 }
 
-// function discountPopulationEstimatesIfSimilarToParent(languages: LanguageData[]): void {
-//   // Discount populations if the population is greater than or same of its parent
-//   languages.forEach((lang) => {
-//     const parent = lang.parentLanguage;
-//     if (parent && lang.populationEstimate != null && parent.populationEstimate != null) {
-//       if (lang.populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories)
-//         return; // Do not adjust if from locale data
-//       if (lang.populationEstimate >= parent.populationEstimate) {
-//         lang.populationEstimate = parent.populationEstimate - 0.01;
-//         lang.populationEstimateSource = PopulationSourceCategory.Algorithmic;
-//       }
-//     }
-//   });
-// }
+// Discount populations if the population is greater than or same of its parent
+function discountPopulationEstimatesIfSimilarToParent(languages: LanguageData[]): void {
+  languages
+    .filter((lang) => lang.parentLanguage == null)
+    .forEach(discountPopulationEstimatesIfSimilarToParentRecursive);
+}
+
+function discountPopulationEstimatesIfSimilarToParentRecursive(
+  lang: LanguageData,
+  depth: number = 0,
+): void {
+  const parent = lang.parentLanguage;
+  if (parent && lang.pop.overall != null && parent.pop.overall != null) {
+    // Discount population if the population is greater than or same of its parent
+    ['speaking', 'writing'].forEach((use) => {
+      const pop = lang.pop[use as 'speaking' | 'writing'];
+      const parentPop = parent.pop[use as 'speaking' | 'writing'];
+      if (pop.estimate == null || parentPop.estimate == null) return;
+      if (
+        pop.source !== PopulationSourceCategory.AggregatedFromTerritories &&
+        pop.estimate >= parentPop.estimate
+      ) {
+        pop.estimate = parentPop.estimate - 0.01; // Subtract a small amount to avoid ties
+        pop.source = PopulationSourceCategory.Algorithmic;
+      }
+    });
+    lang.pop.overall =
+      Math.max(lang.pop.speaking.estimate ?? 0, lang.pop.writing.estimate ?? 0) || undefined;
+  }
+
+  // Now investigate contained langauges
+  lang.childLanguages.forEach((child) =>
+    discountPopulationEstimatesIfSimilarToParentRecursive(child, depth + 1),
+  );
+}
 
 // Take the value for the world languages (eg. eng_001) and if higher than the current estimate,
 //  update the language population estimates.

@@ -85,14 +85,14 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
     expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
-    expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
     expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined); // Not updated
-    expect(langUpdated?.pop.speaking.descendants, 'pop.descendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langUpdated?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
   });
 
   it('Computing regional locale data is necessary to propagate the new data', () => {
@@ -131,14 +131,14 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
     expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
-    expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
     expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
     expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
     expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(11220); // <-- UPDATED VALUE
-    expect(langUpdated?.pop.speaking.descendants, 'pop.descendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langUpdated?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
   });
 
   it('If we have a census with a crazy estimate it changes some values but is capped', () => {
@@ -164,9 +164,6 @@ describe('computeLocalePopulationFromCensuses', () => {
     const mockUpdated = getMockedData({ be9999: getHighPopulationCensus() }); // Will perform computations on this one
 
     // Update populations from census data AND re-compute regional populations
-    // computeLocalesPopulationFromCensuses(mockUpdated.locales);
-    // computeRegionalLocalesPopulation(mockUpdated.territories.find((t) => t.ID === '001'));
-    // updateLanguagesPopulationFromLocale(mockUpdated.territories.find((t) => t.ID === '001')!);
     updatePopulations(
       mockUpdated.allLanguoids,
       mockUpdated.locales,

@@ -258,19 +258,19 @@ describe('getSortByParameterized', () => {
     const field = Field.PopulationWriting;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+      'sjn            8541.0',
       'sjn_123        8541.0',
       'sjn_001        8541.0',
       'sjn_BE         8370.0',
       'sjn_Teng_BE    8100.0',
       'sjn_Teng_123   8100.0',
       'sjn_Teng_001   8100.0',
+      'dori0123       171.0',
       'sjn_ER         171.0',
       'dori0123_ER    171.0',
       'dori0123_123   171.0',
       'dori0123_001   171.0',
       '123            ',
-      'sjn            ',
-      'dori0123       ',
       'BE             ',
       'ER             ',
       'HA             ',
