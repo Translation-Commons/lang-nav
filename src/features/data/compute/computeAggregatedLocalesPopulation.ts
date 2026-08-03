@@ -100,7 +100,7 @@ function sumUpPopulationFromChildLanguages(locale: LocaleData, use: 'speaking' |
   // to smooth out population growth between data collected in different years.
   pop.source = PopulationSourceCategory.AggregatedFromLanguages;
   pop.adjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].adjusted) || undefined;
-  const maxPopulation = territory.pop[use] || territory.pop.overall || 0;
+  const maxPopulation = territory.pop[use] || territory.pop.overall;
   if (pop.adjusted && pop.adjusted > maxPopulation) pop.adjusted = maxPopulation;
   relatedLocales.sumOfPopulationFromChildLanguages = pop.adjusted;
 

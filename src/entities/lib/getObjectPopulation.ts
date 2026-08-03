@@ -14,7 +14,9 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
     case ObjectType.Language:
       return object.pop.overall;
     case ObjectType.Locale:
-      return object.pop.speaking.adjusted;
+      return (
+        Math.max(object.pop.speaking.adjusted || 0, object.pop.writing.adjusted || 0) || undefined
+      );
     case ObjectType.Census:
       return object.population;
     case ObjectType.WritingSystem:

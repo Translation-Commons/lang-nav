@@ -2,6 +2,7 @@ import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
 import CensusCountForLocale from '@entities/census/CensusCountForLocale';
+import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -22,7 +23,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     render: (object) => (
       <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Overall} />
     ),
-    exportValue: (object) => object.pop.speaking.adjusted,
+    exportValue: (object) => getObjectPopulation(object),
     field: Field.Population,
     columnGroup: 'Demographics',
   },

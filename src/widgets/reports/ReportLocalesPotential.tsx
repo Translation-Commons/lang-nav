@@ -169,7 +169,7 @@ const PotentialLocalesTable: React.FC<{
         },
         {
           key: 'Population (Adjusted)',
-          render: (object) => object.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locaels
+          render: (object) => object.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locales
           field: Field.Population,
         },
         {
