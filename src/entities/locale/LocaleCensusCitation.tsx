@@ -64,8 +64,6 @@ function getPopulationSourceLabel(
       return 'census';
     case PopulationSourceCategory.Study:
       return 'study';
-    case PopulationSourceCategory.Ethnologue:
-      return 'Ethnologue';
     case PopulationSourceCategory.EDL:
       return size === 'short' ? 'EDL' : 'Endangered Languages Project';
     case PopulationSourceCategory.CLDR:
@@ -89,8 +87,6 @@ function getPopulationSourceDescription(source: PopulationSourceCategory): strin
       return 'The population figure is reported to be from an official census or government source, but from a secondary source.';
     case PopulationSourceCategory.Study:
       return 'The population figure is taken from a linguistic or demographic study.';
-    case PopulationSourceCategory.Ethnologue:
-      return 'The population figure is taken from Ethnologue.';
     case PopulationSourceCategory.EDL:
       return 'The population figure is taken from the Endangered Languages Project.';
     case PopulationSourceCategory.CLDR:

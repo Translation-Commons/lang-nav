@@ -66,7 +66,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             unadjusted: populationSpeaking,
             census,
           },
-          writing: {},
+          writing: {}, // storing values under speaking for simplicity -- regardless of the census type
         },
       } as LocaleData;
     })
@@ -159,7 +159,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             key: 'Percent of Worldwide in Language',
             render: (object) =>
               object.pop.speaking.adjusted &&
-              (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate || 1),
+              (object.pop.speaking.adjusted * 100) / (object.language?.pop.overall || 1),
             isInitiallyVisible: false,
             field: Field.PercentOfOverallLanguageSpeakers,
           },

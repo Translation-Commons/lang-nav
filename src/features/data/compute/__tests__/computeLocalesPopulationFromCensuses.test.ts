@@ -82,17 +82,17 @@ describe('computeLocalePopulationFromCensuses', () => {
 
     // Finally check if the sjn language was updated
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langRaw?.populationRough, 'populationRough').toBe(24000);
-    expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
-    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
+    expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
+    expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
+    expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
-    expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(undefined); // Not updated
-    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
+    expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
+    expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined); // Not updated
+    expect(langUpdated?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
   });
 
   it('Computing regional locale data is necessary to propagate the new data', () => {
@@ -128,17 +128,17 @@ describe('computeLocalePopulationFromCensuses', () => {
 
     // Finally check if the sjn language was updated
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langRaw?.populationRough, 'populationRough').toBe(24000);
-    expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
-    expect(langRaw?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
+    expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
+    expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
+    expect(langRaw?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
 
     // Finally check if the sjn language was updated
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
-    expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(11220); // <-- UPDATED VALUE
-    expect(langUpdated?.populationOfDescendants, 'populationOfDescendants').toBe(0.01); // 0.01 since there is a descendant
+    expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
+    expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
+    expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(11220); // <-- UPDATED VALUE
+    expect(langUpdated?.pop.speaking.descendants, 'pop.descendants').toBe(undefined);
   });
 
   it('If we have a census with a crazy estimate it changes some values but is capped', () => {
@@ -164,9 +164,11 @@ describe('computeLocalePopulationFromCensuses', () => {
     const mockUpdated = getMockedData({ be9999: getHighPopulationCensus() }); // Will perform computations on this one
 
     // Update populations from census data AND re-compute regional populations
-    computeLocalesPopulationFromCensuses(mockUpdated.locales);
-    computeRegionalLocalesPopulation(mockUpdated.territories.find((t) => t.ID === '001'));
-    updateLanguagesPopulationFromLocale(mockUpdated.territories.find((t) => t.ID === '001')!);
+    updatePopulations(
+      mockUpdated.allLanguoids,
+      mockUpdated.locales,
+      mockUpdated.territories.find((t) => t.ID === '001')!,
+    );
 
     // Check the Locale sjn_BE
     const localeRaw = mockRaw.locales.find((l) => l.ID === 'sjn_BE');
@@ -181,14 +183,14 @@ describe('computeLocalePopulationFromCensuses', () => {
 
     // Check the Language sjn
     const langRaw = mockRaw.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langRaw?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langRaw?.populationRough, 'populationRough').toBe(24000);
-    expect(langRaw?.populationFromLocales, 'populationFromLocales').toBe(undefined);
+    expect(langRaw?.pop.speaking.estimate, 'pop.speaking').toBe(undefined);
+    expect(langRaw?.pop.rough, 'pop.rough').toBe(24000);
+    expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
 
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langUpdated?.populationEstimate, 'populationEstimate').toBe(14400);
-    expect(langUpdated?.populationRough, 'populationRough').toBe(24000);
-    expect(langUpdated?.populationFromLocales, 'populationFromLocales').toBe(13920); // <-- UPDATED VALUE
+    expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(13800);
+    expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
+    expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(13800); // <-- UPDATED VALUE
   });
 
   it('adding a census for the other region will cascade correctly', () => {
@@ -246,47 +248,45 @@ describe('computeLocalePopulationFromCensuses', () => {
     });
 
     // Rough Population will all stay to the original entry
-    expect(langOriginal?.populationRough, 'langOriginal?.populationRough').toBe(24000);
-    expect(langOnlyCensus?.populationRough, 'langOnlyCensus?.populationRough').toBe(24000);
-    expect(langOnlyLocale?.populationRough, 'langOnlyLocale?.populationRough').toBe(24000);
-    expect(langBothNewEntities?.populationRough, 'langBothNewEntities?.populationRough').toBe(
-      24000,
-    );
+    expect(langOriginal?.pop.rough, 'langOriginal?.pop.rough').toBe(24000);
+    expect(langOnlyCensus?.pop.rough, 'langOnlyCensus?.pop.rough').toBe(24000);
+    expect(langOnlyLocale?.pop.rough, 'langOnlyLocale?.pop.rough').toBe(24000);
+    expect(langBothNewEntities?.pop.rough, 'langBothNewEntities?.pop.rough').toBe(24000);
 
     // Population from Locales will be updated
     expect(
-      langOriginal?.populationFromLocales,
-      'langOriginal?.populationFromLocales, Prior value w/ ER & BE',
+      langOriginal?.pop.speaking.fromLocales,
+      'langOriginal?.pop.fromLocales, Prior value w/ ER & BE',
     ).toBe(11100);
     expect(
-      langOnlyCensus?.populationFromLocales,
-      'langOnlyCensus?.populationFromLocales, No new locale added so AM not counted',
+      langOnlyCensus?.pop.speaking.fromLocales,
+      'langOnlyCensus?.pop.fromLocales, No new locale added so AM not counted',
     ).toBe(11100);
     expect(
-      langOnlyLocale?.populationFromLocales,
-      'langOnlyLocale?.populationFromLocales, New locale added so AM counted but not adjusted ',
+      langOnlyLocale?.pop.speaking.fromLocales,
+      'langOnlyLocale?.pop.fromLocales, New locale added so AM counted but not adjusted ',
     ).toBe(13100); // <-- UPDATED VALUE
     expect(
-      langBothNewEntities?.populationFromLocales,
-      'langBothNewEntities?.populationFromLocales, New locale added so AM counted and adjusted',
+      langBothNewEntities?.pop.speaking.fromLocales,
+      'langBothNewEntities?.pop.fromLocales, New locale added so AM counted and adjusted',
     ).toBe(29100); // <-- UPDATED VALUE
 
     // The ultimate population estimate will always be upcated because there is census data now
     expect(
-      langOriginal?.populationEstimate,
-      'langOriginal?.populationEstimate, updated value from locales',
+      langOriginal?.pop.speaking.estimate,
+      'langOriginal?.pop.speaking, updated value from locales',
     ).toBe(11100);
     expect(
-      langOnlyCensus?.populationEstimate,
-      'langOnlyCensus?.populationEstimate, updated value from locales',
+      langOnlyCensus?.pop.speaking.estimate,
+      'langOnlyCensus?.pop.speaking, updated value from locales',
     ).toBe(11100);
     expect(
-      langOnlyLocale?.populationEstimate,
-      'langOnlyLocale?.populationEstimate, updated value from locales',
+      langOnlyLocale?.pop.speaking.estimate,
+      'langOnlyLocale?.pop.speaking, updated value from locales',
     ).toBe(13100);
     expect(
-      langBothNewEntities?.populationEstimate,
-      'langBothNewEntities?.populationEstimate, updated value from locales',
+      langBothNewEntities?.pop.speaking.estimate,
+      'langBothNewEntities?.pop.speaking, updated value from locales',
     ).toBe(29100);
   });
 });

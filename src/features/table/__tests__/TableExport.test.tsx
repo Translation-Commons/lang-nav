@@ -33,13 +33,12 @@ describe('TableExport', () => {
   it('export buttons render correctly', async () => {
     render(<TableExport visibleColumns={columns} entities={objects} />);
 
-    // The options aren't initially visible, also there is no generic Export option
+    // The options aren't initially visible
     expect(screen.queryByText('Copy TSV')).not.toBeTruthy();
     expect(screen.queryByText('Download CSV')).not.toBeTruthy();
-    expect(screen.queryByText('Export')).not.toBeTruthy();
 
     // Click export button to open the menu
-    const button = screen.queryByText('Export ▶');
+    const button = screen.queryByText('Export');
     expect(button).toBeTruthy();
     act(() => {
       fireEvent.click(button!);
@@ -48,7 +47,6 @@ describe('TableExport', () => {
     // Ensure options are now visible
     expect(screen.queryByText('Copy TSV')).toBeTruthy();
     expect(screen.queryByText('Download CSV')).toBeTruthy();
-    expect(screen.queryByText('Export')).not.toBeTruthy();
   });
 
   // Note: Downloading requires too many document APIs not available in jsdom/vitest,
@@ -59,7 +57,7 @@ describe('TableExport', () => {
 
     // Open the menu to show `Copy TSV` option
     act(() => {
-      fireEvent.click(screen.getByText('Export ▶'));
+      fireEvent.click(screen.getByText('Export'));
     });
 
     // Clicking on Copy TSV will copy data to clipboard

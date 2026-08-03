@@ -30,7 +30,7 @@ describe('ReportLanguagePaths', () => {
       ...getBaseLanguageData('elv', 'Elvish'), // fictional language family code
       nameEndonym: 'ɛlvɪʃ',
       names: ['Elvish', 'Elven Languages', 'ɛlvɪʃ'],
-      populationRough: 50000,
+      pop: { rough: 50000, speaking: {}, writing: {} },
       // Only a parent in CLDR to create a cycle there
       CLDR: { parentLanguageCode: 'dori0123' },
     };
@@ -38,7 +38,7 @@ describe('ReportLanguagePaths', () => {
       ...getBaseLanguageData('qya', 'Quenya'), // fictional Elvish language
       nameEndonym: 'kwɛnjɑ',
       names: ['Quenya', 'High Elvish', 'kwɛnjɑ'],
-      populationRough: 10000,
+      pop: { rough: 10000, speaking: {}, writing: {} },
       Combined: { parentLanguageCode: 'elv' },
       ISO: { parentLanguageCode: 'elv' },
       Glottolog: { parentLanguageCode: 'sjn' },

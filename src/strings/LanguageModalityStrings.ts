@@ -59,8 +59,16 @@ export function getLanguageModalityDescription(modality: LanguageModality): stri
 
 export function getLanguageModalityUserLabel(
   modality: LanguageModality | undefined,
+  use?: 'speaking' | 'writing', // eg. writing population even for a mostly spoken language
   plural: boolean = true,
 ): string {
+  if (use != null) {
+    if (use === 'writing') return plural ? 'writers' : 'writer';
+    if (modality === LanguageModality.Sign) return plural ? 'signers' : 'signer';
+    return plural ? 'speakers' : 'speaker';
+  }
+
+  // Old functionality in case you're not focused on a specific use, just the modality of the language itself
   if (modality == null) return plural ? 'speakers' : 'speaker';
   switch (modality) {
     case LanguageModality.Spoken:

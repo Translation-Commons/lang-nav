@@ -190,25 +190,25 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.DownloadTSV:
     case ExportType.DownloadUNESCO:
       return (
-        <>
+        <div style={{ display: 'flex' }}>
           <DownloadIcon className="button-inline-icon" /> {exportType}
-        </>
+        </div>
       );
     case ExportType.CopyCSV:
     case ExportType.CopyTSV:
     case ExportType.CopyUNESCO:
     case ExportType.CopyCLDR:
       return (
-        <>
+        <div style={{ display: 'flex' }}>
           <CopyIcon className="button-inline-icon" /> {exportType}
-        </>
+        </div>
       );
     case ExportType.Unchosen:
       return (
-        <>
+        <div style={{ display: 'flex' }}>
           {isExporting ? <LoadingIcon /> : <ExternalLinkIcon className="button-inline-icon" />}{' '}
           {exportType}
-        </>
+        </div>
       );
   }
 };

@@ -43,8 +43,6 @@ function parseLanguageLine(line: string): LanguageData {
     viabilityConfidence: parts[9] || undefined,
     viabilityExplanation: parts[10] || undefined,
 
-    populationRough,
-
     modality,
     primaryScriptCode: parts[5] || undefined,
     Combined: { code, name: nameDisplay, parentLanguageCode },
@@ -53,6 +51,7 @@ function parseLanguageLine(line: string): LanguageData {
       parentLanguageCode: parentGlottocode,
     },
   };
+  language.pop.rough = populationRough;
 
   if (code.length <= 3) {
     language.ISO = { code, parentLanguageCode: parentISOCode };

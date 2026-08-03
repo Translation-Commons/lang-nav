@@ -10,32 +10,32 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { LanguageData } from '../LanguageTypes';
 
 import LanguagePopulationOfDescendants from './LanguagePopulationFromDescendants';
-import LanguagePopulationFromEthnologue from './LanguagePopulationFromEthnologue';
 import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';
 
-export const LanguagePopulationEstimate: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { populationEstimate, populationEstimateSource } = lang;
+export const LanguagePopulationEstimate: React.FC<{
+  lang: LanguageData;
+  use?: 'speaking' | 'writing';
+}> = ({ lang, use }) => {
+  use = use ?? (lang.pop.overall === lang.pop.writing.estimate ? 'writing' : 'speaking');
+  const pop = lang.pop[use];
 
-  if (!populationEstimate && populationEstimateSource !== PopulationSourceCategory.Ethnologue)
-    return <Deemphasized>no data</Deemphasized>;
+  if (pop.estimate == null) return <Deemphasized>no data</Deemphasized>;
 
-  switch (populationEstimateSource ?? PopulationSourceCategory.Other) {
+  switch (pop.source ?? PopulationSourceCategory.Other) {
     case PopulationSourceCategory.AggregatedFromTerritories:
-      return <LanguagePopulationFromLocales lang={lang} />;
+      return <LanguagePopulationFromLocales lang={lang} use={use} />;
     case PopulationSourceCategory.AggregatedFromLanguages:
-      return <LanguagePopulationOfDescendants lang={lang} />;
+      return <LanguagePopulationOfDescendants lang={lang} use={use} />;
     case PopulationSourceCategory.Algorithmic:
       return (
         <Hoverable hoverContent="Algorithmically derived estimate based on various data sources.">
-          <CountOfPeople count={populationEstimate} />
+          <CountOfPeople count={pop.estimate} />
         </Hoverable>
       );
-    case PopulationSourceCategory.Ethnologue:
-      return <LanguagePopulationFromEthnologue lang={lang} />;
     case PopulationSourceCategory.Other:
       return (
         <Hoverable hoverContent="From various internet databases, working to get more citations">
-          <CountOfPeople count={populationEstimate} />
+          <CountOfPeople count={pop.estimate} />
         </Hoverable>
       );
   }

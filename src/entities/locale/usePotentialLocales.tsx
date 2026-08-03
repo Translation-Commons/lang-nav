@@ -45,7 +45,7 @@ function usePotentialLocales(
           }
           const populationPercentInCountry = (populationEstimate * 100) / census.population;
           const populationPercentOfLanguageWorldwide =
-            (populationEstimate * 100) / (lang.populationEstimate ?? 1);
+            (populationEstimate * 100) / (lang.pop.overall ?? 1);
           if (!isPercentEnough(populationPercentInCountry, populationPercentOfLanguageWorldwide)) {
             return; // Skip if the population percentage is below the threshold
           }

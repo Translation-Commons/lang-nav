@@ -1,4 +1,3 @@
-import { computeDescendantPopulation } from '@features/data/compute/computeDescendantPopulation';
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
 import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
 import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
@@ -32,8 +31,12 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'sɪndarɪn', // using IPA because Tengwar letters aren't usually supported
     names: ['Sindarin', 'sɪndarɪn', '', 'Elvish', 'Elven Tongue', 'Edhellen'],
     scope: LanguageScope.Language,
-    populationEstimate: 14400,
-    populationRough: 24000,
+    pop: {
+      overall: 14400,
+      speaking: {},
+      writing: {},
+      rough: 24000,
+    },
     primaryScriptCode: 'Teng',
     modality: LanguageModality.SpokenAndWritten,
     Combined: { parentLanguageCode: 'elv' },
@@ -44,8 +47,12 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'dorjaθɪn', // using IPA because Tengwar letters aren't usually supported
     names: ['Central Sindarin', 'Doriathrin', '', 'dorjaθɪn'],
     scope: LanguageScope.Dialect,
-    populationEstimate: 2500,
-    populationRough: 2500,
+    pop: {
+      overall: 2500,
+      speaking: {},
+      writing: {},
+      rough: 2500,
+    },
     primaryScriptCode: 'Teng',
     modality: LanguageModality.MostlySpoken,
     Combined: { parentLanguageCode: 'sjn' },
@@ -394,8 +401,7 @@ export function getFullyInstantiatedMockedObjects(
 
   // Initial connections and algorithms
   connectMockedObjects(objects);
-  const { languagesBySource, writingSystems, locales } = getMockedObjectDictionaries(objects);
-  computeDescendantPopulation(languagesBySource, writingSystems);
+  const { languagesBySource, locales } = getMockedObjectDictionaries(objects);
 
   // From DataContext
   const world = objects['001'] as TerritoryData;

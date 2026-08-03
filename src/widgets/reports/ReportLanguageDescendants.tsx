@@ -21,16 +21,10 @@ const ReportLanguageDescendants: React.FC = () => {
   const filteredLanguages = useMemo(
     () =>
       languagesInSelectedSource.filter((lang) => {
-        if (
-          lang.largestDescendant == null ||
-          lang.populationEstimate == null ||
-          lang.populationEstimate === 0
-        ) {
+        if (lang.largestDescendant == null || lang.pop.overall == null || lang.pop.overall === 0)
           return false;
-        }
         const percent =
-          ((lang.largestDescendant?.populationEstimate || 0) / (lang.populationEstimate || 1)) *
-          100;
+          ((lang.largestDescendant?.pop.overall || 0) / (lang.pop.overall || 1)) * 100;
         return percent >= minimumPercentThreshold && percent <= maximumPercentThreshold;
       }),
     [languagesInSelectedSource, minimumPercentThreshold, maximumPercentThreshold],
@@ -63,13 +57,19 @@ const ReportLanguageDescendants: React.FC = () => {
           NameColumn,
           {
             key: 'Population',
-            render: (lang: LanguageData) => lang.populationEstimate,
+            render: (lang: LanguageData) => lang.pop.overall,
             field: Field.Population,
           },
           {
             key: 'Estimated Population of Descendants',
-            render: (lang: LanguageData) => lang.populationOfDescendants,
+            render: (lang: LanguageData) => lang.pop.speaking.descendants,
             field: Field.PopulationOfDescendants,
+          },
+          {
+            key: 'Estimated Population of Descendants (Writing)',
+            render: (lang: LanguageData) => lang.pop.writing.descendants,
+            valueType: TableValueType.Population,
+            isInitiallyVisible: false,
           },
           {
             key: 'Largest Descendant',
@@ -83,7 +83,7 @@ const ReportLanguageDescendants: React.FC = () => {
           },
           {
             key: 'Descendant Population',
-            render: (lang: LanguageData) => lang.largestDescendant?.populationEstimate || null,
+            render: (lang: LanguageData) => lang.largestDescendant?.pop.overall || null,
             valueType: TableValueType.Population,
           },
 

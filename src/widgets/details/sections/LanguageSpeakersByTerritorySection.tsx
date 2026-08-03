@@ -15,15 +15,13 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
 const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const use = lang.pop.overall == lang.pop.speaking.estimate ? 'speaking' : 'writing';
   // Get locales from unique territories
+  const filterFunc = (loc: (typeof lang.locales)[number]) =>
+    loc.territory?.scope === TerritoryScope.Country ||
+    loc.territory?.scope === TerritoryScope.Dependency;
   const locales = uniqueBy(
-    lang.locales
-      .filter(
-        (loc) =>
-          loc.territory?.scope === TerritoryScope.Country ||
-          loc.territory?.scope === TerritoryScope.Dependency,
-      )
-      .sort(sortByPopulation),
+    lang.locales.filter(filterFunc).sort(sortByPopulation),
     (locale) => locale.territoryCode || '',
   );
 
@@ -34,7 +32,7 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
   const rows = Math.ceil(Math.min(locales.length, 10) / 2);
 
   return (
-    <DetailsSection title={getLanguageModalityUserLabel(lang.modality) + ' by Territory'}>
+    <DetailsSection title={getLanguageModalityUserLabel(lang.modality, use) + ' by Territory'}>
       <div
         style={{
           display: 'grid',
@@ -51,9 +49,9 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
           >
             <HoverableObjectName object={locale} labelSource="territory" />
             <span style={{ textAlign: 'end' }}>
-              <CountOfPeople count={locale.pop.speaking.adjusted} />
-              {locale.pop.speaking.percent != null && (
-                <Deemphasized> ({locale.pop.speaking.percent.toFixed(1)}%)</Deemphasized>
+              <CountOfPeople count={locale.pop[use].adjusted} />
+              {locale.pop[use].percent != null && (
+                <Deemphasized> ({locale.pop[use].percent.toFixed(1)}%)</Deemphasized>
               )}
             </span>
           </div>

@@ -52,7 +52,8 @@ export function connectWritingSystems(
         primaryWritingSystem.languages[language.ID] = language;
         if (!primaryWritingSystem.populationUpperBound)
           primaryWritingSystem.populationUpperBound = 0;
-        primaryWritingSystem.populationUpperBound += language.populationRough || 0;
+        // TODO use the new language writing estimates
+        primaryWritingSystem.populationUpperBound += language.pop.rough || 0;
         language.primaryWritingSystem = primaryWritingSystem;
         language.writingSystems[primaryWritingSystem.ID] = primaryWritingSystem;
       }

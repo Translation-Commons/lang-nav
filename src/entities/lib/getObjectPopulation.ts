@@ -11,7 +11,7 @@ import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
 export function getObjectPopulation(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return object.populationEstimate;
+      return object.pop.overall;
     case ObjectType.Locale:
       return object.pop.speaking.adjusted;
     case ObjectType.Census:
@@ -22,7 +22,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
       return object.population;
     case ObjectType.Variant:
       return object.languages.length > 0
-        ? object.languages.reduce((sum, lang) => sum + (lang.populationEstimate || 0), 0)
+        ? object.languages.reduce((sum, lang) => sum + (lang.pop.overall || 0), 0)
         : undefined;
     case ObjectType.Org:
       return undefined;
@@ -33,7 +33,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
 export function getObjectPopulationDirectlySourced(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return object.populationRough;
+      return object.pop.rough;
     case ObjectType.Locale:
       return object.pop.speaking.unadjusted;
     case ObjectType.Territory:
@@ -54,7 +54,10 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
 export function getObjectPopulationOfDescendants(object: ObjectData): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return object.populationOfDescendants;
+      return (
+        Math.max(object.pop.speaking.descendants || 0, object.pop.writing.descendants || 0) ||
+        undefined
+      );
     case ObjectType.WritingSystem:
       return object.populationOfDescendants;
     case ObjectType.Territory:
@@ -74,8 +77,8 @@ export function getObjectPopulationPercentInBiggestDescendantLanguage(
 ): number | undefined {
   switch (object.type) {
     case ObjectType.Language:
-      return object.populationEstimate && object.largestDescendant
-        ? ((object.largestDescendant.populationEstimate ?? 0) * 100) / object.populationEstimate
+      return object.pop.overall && object.largestDescendant
+        ? ((object.largestDescendant.pop.overall ?? 0) * 100) / object.pop.overall
         : undefined;
     case ObjectType.Territory:
       return getTerritoryBiggestLocale(object)?.pop.speaking.percent;
@@ -94,11 +97,11 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
   switch (object.type) {
     case ObjectType.Locale:
       return object.language && object.pop.speaking.adjusted
-        ? (object.pop.speaking.adjusted * 100) / (object.language.populationEstimate ?? 1)
+        ? (object.pop.speaking.adjusted * 100) / (object.language.pop.speaking.estimate ?? 1)
         : undefined;
     case ObjectType.Language:
-      return object.parentLanguage && object.populationEstimate
-        ? (object.populationEstimate * 100) / (object.parentLanguage.populationEstimate ?? 1)
+      return object.parentLanguage && object.pop.speaking.estimate
+        ? (object.pop.speaking.estimate * 100) / (object.parentLanguage.pop.speaking.estimate ?? 1)
         : undefined;
     case ObjectType.Census:
     case ObjectType.Territory:

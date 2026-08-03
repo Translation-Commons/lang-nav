@@ -64,7 +64,7 @@ const ReportLanguagesPaths: React.FC = () => {
             {orphanedLanguages.map((lang) => (
               <li key={lang?.ID}>
                 <HoverableObjectName object={lang} /> (
-                <CountOfPeople count={lang?.populationEstimate} />)
+                <CountOfPeople count={lang?.pop.overall} />)
               </li>
             ))}
           </ul>

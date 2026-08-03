@@ -26,7 +26,7 @@ interface Props {
 const LanguageCard: React.FC<Props> = ({ lang }) => {
   const { view } = usePageParams();
   const sortFunction = getSortFunction();
-  const { locales, populationEstimate } = lang;
+  const { locales, pop } = lang;
   const countryLocales = uniqueBy(
     locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode ?? '',
@@ -47,7 +47,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         {getLanguageScopeLabel(lang.scope)}
       </CardField>
 
-      {populationEstimate != null && (
+      {pop.overall != null && (
         <CardField
           title="Population"
           field={Field.Population}

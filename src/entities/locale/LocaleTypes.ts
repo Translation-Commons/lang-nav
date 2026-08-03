@@ -25,7 +25,6 @@ export enum PopulationSourceCategory {
   Official = 'Official', // Has a cited source
   UnverifiedOfficial = 'Unverified Official', // Source lost in merge but allegedly official
   Study = 'Study',
-  Ethnologue = 'Ethnologue',
   EDL = 'EDL', // Endangered Languages Project
   CLDR = 'CLDR', // Unicode's Common Locale Data Repository
   Other = 'Other',
