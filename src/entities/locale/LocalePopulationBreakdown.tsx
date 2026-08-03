@@ -5,20 +5,26 @@ import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTyp
 import LocalePopulationBreakdownAdjusted from './LocalePopulationBreakdownAdjusted';
 import LocalePopulationBreakdownAggregated from './LocalePopulationBreakdownAggregated';
 
-const LocalePopulationBreakdown: React.FC<{ locale: LocaleData; use: 'speaking' | 'writing' }> = ({
-  locale,
-  use,
-}) => {
-  if (!locale.territory || locale.pop[use].adjusted == null) return null;
+type Props = {
+  locale: LocaleData;
+  speakingOrWriting: 'speaking' | 'writing';
+};
+
+const LocalePopulationBreakdown: React.FC<Props> = ({ locale, speakingOrWriting }) => {
+  if (!locale.territory || locale.pop[speakingOrWriting].adjusted == null) return null;
 
   if (
-    locale.pop[use].source === PopulationSourceCategory.AggregatedFromLanguages ||
-    locale.pop[use].source === PopulationSourceCategory.AggregatedFromTerritories
+    locale.pop[speakingOrWriting].source === PopulationSourceCategory.AggregatedFromLanguages ||
+    locale.pop[speakingOrWriting].source === PopulationSourceCategory.AggregatedFromTerritories
   ) {
-    return <LocalePopulationBreakdownAggregated locale={locale} use={use} />;
+    return (
+      <LocalePopulationBreakdownAggregated locale={locale} speakingOrWriting={speakingOrWriting} />
+    );
   }
 
-  return <LocalePopulationBreakdownAdjusted locale={locale} use={use} />;
+  return (
+    <LocalePopulationBreakdownAdjusted locale={locale} speakingOrWriting={speakingOrWriting} />
+  );
 };
 
 export default LocalePopulationBreakdown;

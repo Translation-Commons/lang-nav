@@ -120,7 +120,10 @@ export function getObjectPercentOfTerritoryPopulation(object: ObjectData): numbe
         ? (object.population * 100) / (object.territory.pop.overall ?? 1)
         : undefined;
     case ObjectType.Locale:
-      return object.pop.speaking.percentAdjusted;
+      // Not discriminating between spoken & written
+      return (
+        Math.max(object.pop.speaking.percent ?? 0, object.pop.writing.percent ?? 0) || undefined
+      );
     case ObjectType.Territory:
       return object.parentUNRegion && object.pop.overall
         ? (object.pop.overall * 100) / object.parentUNRegion.pop.overall

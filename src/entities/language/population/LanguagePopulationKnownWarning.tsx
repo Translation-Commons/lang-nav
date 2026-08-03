@@ -7,17 +7,17 @@ import { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;
-  use: 'speaking' | 'writing';
+  speakingOrWriting: 'speaking' | 'writing';
 };
 
 /**
  * Now that we are showing a LOT of data, some datapoints just don't match the same quality.
  * This component gets ahead of that and puts warning over data that is known to be off.
  */
-const LanguagePopulationKnownWarning: React.FC<Props> = ({ lang, use }) => {
-  if (use === 'speaking') {
+const LanguagePopulationKnownWarning: React.FC<Props> = ({ lang, speakingOrWriting }) => {
+  if (speakingOrWriting === 'speaking') {
     if (!['kmb', 'nob', 'ndc'].includes(lang.ID)) return null;
-  } else if (use === 'writing') {
+  } else if (speakingOrWriting === 'writing') {
     if (!['lah', 'arb', 'san'].includes(lang.ID)) return null;
   }
 

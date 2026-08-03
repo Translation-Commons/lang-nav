@@ -12,6 +12,7 @@ import {
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { ProfileType } from './Profiles';
 
@@ -58,10 +59,10 @@ export enum PageParamKey {
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
   columns = 'columns',
-  isoStatus = 'isoStatus',
   fieldFocus = 'fieldFocus',
-  languageFilter = 'languageFilter',
+  isoStatus = 'isoStatus',
   languageFamilyFilter = 'languageFamilyFilter',
+  languageFilter = 'languageFilter',
   languageScopes = 'languageScopes',
   languageSource = 'languageSource',
   limit = 'limit',
@@ -71,6 +72,7 @@ export enum PageParamKey {
   objectType = 'objectType',
   page = 'page',
   pinned = 'pinned',
+  populationFocus = 'populationFocus',
   populationMax = 'populationMax',
   populationMin = 'populationMin',
   profile = 'profile',
@@ -107,6 +109,7 @@ export type PageParams = {
   objectType: ObjectType;
   page: number; // 1 indexed
   pinned: string[];
+  populationFocus: PopulationFocus;
   populationMax: number;
   populationMin: number;
   profile: ProfileType;

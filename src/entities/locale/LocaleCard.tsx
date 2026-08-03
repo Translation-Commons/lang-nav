@@ -1,7 +1,10 @@
 import React from 'react';
 
+import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
+import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
 
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
@@ -23,7 +26,10 @@ interface Props {
   locale: LocaleData;
 }
 const LocaleCard: React.FC<Props> = ({ locale }) => {
-  const { pop, officialStatus, territory } = locale;
+  const { officialStatus, territory } = locale;
+  const { populationFocus } = usePageParams();
+  const speakingOrWriting = getSpeakingOrWritingFocus(locale, populationFocus);
+  const pop = locale.pop[speakingOrWriting];
 
   return (
     <div>
@@ -32,32 +38,32 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
         <ObjectSubtitle object={locale} />
       </div>
 
-      {pop.speaking.adjusted != null && (
+      {pop.adjusted != null && (
         <CardField
           title="Population"
-          field={Field.Population}
+          field={getFieldForPopulationFocus(populationFocus)}
           description="How many people in this territory that use this language. Adjusted to 2025 population and including citation."
         >
-          <LocalePopulationAdjusted locale={locale} use="speaking" />
+          <LocalePopulationAdjusted locale={locale} focus={populationFocus} />
         </CardField>
       )}
-      {pop.speaking.adjusted != null && (
+      {pop.adjusted != null && (
         <CardField
           title="Source"
           field={Field.SourceForPopulation}
           description="The source of the population data."
         >
-          <LocaleCensusCitation locale={locale} size="short" use="speaking" />
+          <LocaleCensusCitation locale={locale} size="short" focus={populationFocus} />
         </CardField>
       )}
 
-      {pop.speaking.percent != null && (
+      {pop.percent != null && (
         <CardField
           title="Percent population"
           field={Field.PercentOfTerritoryPopulation}
           description="Percent of the Territory population that use this locale."
         >
-          <DecimalNumber num={pop.speaking.percent} alignFraction={false} />% of{' '}
+          <DecimalNumber num={pop.percent} alignFraction={false} />% of{' '}
           {getTerritoryScopeLabel(territory?.scope).toLowerCase()}
         </CardField>
       )}

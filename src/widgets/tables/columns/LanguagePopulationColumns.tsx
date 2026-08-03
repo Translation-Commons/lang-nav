@@ -15,6 +15,7 @@ import LanguagePopulationFromLocales from '@entities/language/population/Languag
 import LanguagePopulationInSelectedTerritory from '@entities/language/population/LanguagePopulationInSelectedTerritory';
 import LanguagePopulationKnownWarning from '@entities/language/population/LanguagePopulationKnownWarning';
 import LanguagePopulationSource from '@entities/language/population/LanguagePopulationSource';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({
   isShortened = false,
@@ -53,8 +54,9 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
         census data and/or aggregated data from dialects.
       </>
     ),
-    render: (lang) => <LanguagePopulationEstimate lang={lang} />,
+    render: (lang) => <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Overall} />,
     field: Field.Population,
+    isInitiallyVisible: false,
   },
   {
     key: 'Speakers (est.)',
@@ -67,12 +69,12 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => (
       <>
-        <LanguagePopulationKnownWarning lang={lang} use="speaking" />
-        <LanguagePopulationEstimate lang={lang} use="speaking" />
+        <LanguagePopulationKnownWarning lang={lang} speakingOrWriting="speaking" />
+        <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Speaking} />
       </>
     ),
     field: Field.PopulationSpeaking,
-    isInitiallyVisible: true,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: 'Writers (est.)',
@@ -86,12 +88,12 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => (
       <>
-        <LanguagePopulationKnownWarning lang={lang} use="writing" />
-        <LanguagePopulationEstimate lang={lang} use="writing" />
+        <LanguagePopulationKnownWarning lang={lang} speakingOrWriting="writing" />
+        <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Writing} />
       </>
     ),
     field: Field.PopulationWriting,
-    isInitiallyVisible: true,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
   {
     key: 'Best Estimate Source',
@@ -111,7 +113,9 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: '... from Dialects',
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
-    render: (lang) => <LanguagePopulationFromDescendants lang={lang} use="speaking" />,
+    render: (lang) => (
+      <LanguagePopulationFromDescendants lang={lang} speakingOrWriting="speaking" />
+    ),
     field: Field.PopulationOfDescendants,
   },
   {
@@ -123,7 +127,7 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
         population from locales have been adjusted to {TerritoryDataYear} estimates.
       </>
     ),
-    render: (lang) => <LanguagePopulationFromLocales lang={lang} use="speaking" />,
+    render: (lang) => <LanguagePopulationFromLocales lang={lang} speakingOrWriting="speaking" />,
     valueType: TableValueType.Population,
   },
   {

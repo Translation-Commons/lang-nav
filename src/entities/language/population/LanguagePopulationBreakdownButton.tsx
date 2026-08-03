@@ -2,6 +2,7 @@ import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import { LanguageData } from '../LanguageTypes';
@@ -11,21 +12,28 @@ import { LanguagePopulationBreakdownFromLocales } from './LanguagePopulationFrom
 
 type Props = {
   lang: LanguageData;
-  use?: 'speaking' | 'writing';
+  speakingOrWriting?: 'speaking' | 'writing';
 };
 
-const LanguagePopulationBreakdownButton: React.FC<Props> = ({ lang, use }) => {
-  use = use ?? (lang.pop.overall === lang.pop.writing.estimate ? 'writing' : 'speaking');
-  const pop = lang.pop[use];
+const LanguagePopulationBreakdownButton: React.FC<Props> = ({ lang, speakingOrWriting }) => {
+  speakingOrWriting = speakingOrWriting ?? getSpeakingOrWritingFocus(lang);
+  const pop = lang.pop[speakingOrWriting];
   const [showPopulationBreakdown, setShowPopulationBreakdown] = React.useState(false);
 
   if (!pop.estimate || !pop.source) return null;
 
   let breakdown = null;
   if (pop.source === PopulationSourceCategory.AggregatedFromTerritories) {
-    breakdown = <LanguagePopulationBreakdownFromLocales lang={lang} use={use} />;
+    breakdown = (
+      <LanguagePopulationBreakdownFromLocales lang={lang} speakingOrWriting={speakingOrWriting} />
+    );
   } else if (pop.source === PopulationSourceCategory.AggregatedFromLanguages) {
-    breakdown = <LanguagePopulationBreakdownFromDescendants lang={lang} use={use} />;
+    breakdown = (
+      <LanguagePopulationBreakdownFromDescendants
+        lang={lang}
+        speakingOrWriting={speakingOrWriting}
+      />
+    );
   }
   if (!breakdown) return null;
 

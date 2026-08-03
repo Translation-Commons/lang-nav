@@ -7,6 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -33,7 +34,7 @@ const LanguageFocusTabs: React.FC = () => {
       size="minor"
       options={Object.values(LanguageFocus).map((focus) => {
         const urlParams = getParamsForEntityFocus(focus);
-        const { modalityFilter, languageScopes, languageSource } = urlParams;
+        const { modalityFilter, languageScopes, languageSource, populationFocus } = urlParams;
         return {
           description: (
             <>
@@ -70,6 +71,11 @@ const LanguageFocusTabs: React.FC = () => {
                   <strong>Language List</strong>: {languageSource}
                 </div>
               )}
+              {populationFocus != null && (
+                <div>
+                  <strong>Compute population focusing on people</strong>: {populationFocus}
+                </div>
+              )}
               <div>{getExtraExplanation(focus)}</div>
             </>
           ),
@@ -92,21 +98,24 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
           LanguageModality.SpokenAndWritten,
           LanguageModality.Sign,
         ],
+        populationFocus: PopulationFocus.Speaking,
       };
     case LanguageFocus.WrittenLanguages:
       return {
         languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
+        languageSource: LanguageSource.ISO,
         modalityFilter: [
           LanguageModality.Written,
           LanguageModality.MostlyWritten,
           LanguageModality.SpokenAndWritten,
         ],
-        languageSource: LanguageSource.ISO,
+        populationFocus: PopulationFocus.Writing,
       };
     case LanguageFocus.DigitizedLanguages:
       return {
         languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
         languageSource: LanguageSource.CLDR,
+        populationFocus: PopulationFocus.Writing,
         // Add CLDR coverage level
       };
     case LanguageFocus.AllLanguages:
@@ -114,12 +123,14 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
         languageScopes: [LanguageScope.Macrolanguage, LanguageScope.Language],
         languageSource: LanguageSource.Combined,
         modalityFilter: [],
+        populationFocus: PopulationFocus.Overall,
       };
     case LanguageFocus.AllLanguoids:
       return {
         languageScopes: [],
         languageSource: LanguageSource.Combined,
         modalityFilter: [],
+        populationFocus: PopulationFocus.Overall,
       };
     case LanguageFocus.Glottolog:
       return {
@@ -128,6 +139,7 @@ function getParamsForEntityFocus(focus: LanguageFocus): Partial<PageParams> {
     case LanguageFocus.Dialects:
       return {
         languageScopes: [LanguageScope.Dialect],
+        populationFocus: PopulationFocus.Speaking,
       };
     default:
       enforceExhaustiveSwitch(focus);

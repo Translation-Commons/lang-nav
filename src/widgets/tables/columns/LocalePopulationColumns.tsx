@@ -5,6 +5,7 @@ import CensusCountForLocale from '@entities/census/CensusCountForLocale';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
@@ -18,7 +19,9 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
         territory.
       </>
     ),
-    render: (object) => <LocalePopulationAdjusted locale={object} />,
+    render: (object) => (
+      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Overall} />
+    ),
     exportValue: (object) => object.pop.speaking.adjusted,
     field: Field.Population,
     columnGroup: 'Demographics',
@@ -33,7 +36,9 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
         multiply it by the current population of the territory.
       </>
     ),
-    render: (object) => <LocalePopulationAdjusted locale={object} use="speaking" />,
+    render: (object) => (
+      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Speaking} />
+    ),
     exportValue: (object) => object.pop.speaking.adjusted,
     field: Field.PopulationSpeaking,
     columnGroup: 'Demographics',
@@ -63,7 +68,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   },
   {
     key: 'Population Source',
-    render: (object) => <LocaleCensusCitation locale={object} use="speaking" />,
+    render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />,
     field: Field.SourceForPopulation,
     columnGroup: 'Demographics',
   },

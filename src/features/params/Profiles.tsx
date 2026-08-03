@@ -17,6 +17,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { LocaleSeparator, ObjectType, PageParams, SearchableField, View } from './PageParamTypes';
 
@@ -48,6 +49,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   page: 1,
   pinned: [],
   profile: ProfileType.LanguageEthusiast,
+  populationFocus: PopulationFocus.Overall,
   populationMax: 10_000_000_000, // higher than the world population
   populationMin: -1, // allow undefined population as well as definite 0s
   reportID: ReportID.EntitiesMissingFields,
@@ -80,6 +82,7 @@ export const DEFAULTS_BY_PROFILE: Record<ProfileType, Partial<PageParams>> = {
   [ProfileType.TechDeveloper]: {
     view: View.Table,
     languageSource: LanguageSource.CLDR,
+    populationFocus: PopulationFocus.Writing,
     territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.PolicyMaker]: {

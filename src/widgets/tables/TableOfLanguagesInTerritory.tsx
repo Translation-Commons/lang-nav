@@ -11,6 +11,7 @@ import Field from '@features/transforms/fields/Field';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -62,19 +63,16 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
               'Whether the language is covered by the European Charter for Regional or Minority Languages in this territory.',
             render: (loc) => <LocaleEcrmlCoverage locale={loc} />,
             field: Field.ECRMLProtection,
-            valueType: TableValueType.Enum,
             isInitiallyVisible: hasECRMLData,
           },
           {
-            key: 'Population',
+            key: 'Population (Speaking)',
             render: (loc) => loc.pop.speaking.adjusted,
-            valueType: TableValueType.Population,
-            field: Field.Population,
+            field: Field.PopulationSpeaking,
           },
           {
             key: 'Population Source',
-            render: (loc) => <LocaleCensusCitation locale={loc} use="speaking" />,
-            valueType: TableValueType.Population,
+            render: (loc) => <LocaleCensusCitation locale={loc} focus={PopulationFocus.Speaking} />,
             isInitiallyVisible: false,
           },
           {
@@ -82,6 +80,12 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
             render: (loc) => loc.pop.speaking.percent,
             valueType: TableValueType.Decimal,
             field: Field.PercentOfTerritoryPopulation,
+          },
+          {
+            key: 'Population (Writing)',
+            render: (loc) => loc.pop.writing.adjusted,
+            field: Field.PopulationWriting,
+            isInitiallyVisible: false,
           },
         ]}
       />

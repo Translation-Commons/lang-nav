@@ -98,11 +98,6 @@ export type LanguageSpecificPopulationData = {
   descendants?: number;
 };
 
-export enum LanguageUseFocus {
-  Speaking = 'speaking',
-  Writing = 'writing',
-}
-
 export type LanguagePopulationData = {
   overall?: number; // Higher of the 2: speaking or writing
   speaking: LanguageSpecificPopulationData;
