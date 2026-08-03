@@ -140,7 +140,7 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
       sjn_001: '22.2',
       sjn_123: '37.0',
       sjn_BE: '77.5',
-      sjn_ER: '75.0',
+      sjn_ER: '80.0',
       sjn_Teng_001: '18.0',
       sjn_Teng_123: '30.0',
       sjn_Teng_BE: '75.0',

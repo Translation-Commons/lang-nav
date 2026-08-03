@@ -197,7 +197,7 @@ describe('InteractiveEntityTable', () => {
   it('formats numeric values correctly', () => {
     const numericObject = {
       ...mockObjects[0],
-      population: 1234567,
+      pop: { overall: 1234567 },
     };
 
     renderEntityTable({ entities: [numericObject] });

@@ -232,6 +232,9 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfCountries, // 0 or 1
         Field.CountOfVariants,
 
+        Field.PopulationSpeaking,
+        Field.PopulationWriting,
+
         Field.Date,
         Field.Description,
       ];

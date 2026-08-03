@@ -87,6 +87,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     literacyPercent: 95.0,
     pop: {
       overall: 2400,
+      fromUN: 2400,
       writing: 2400 * 0.95, // 2280
     },
     scope: TerritoryScope.Country,
@@ -102,6 +103,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     literacyPercent: 99.0,
     pop: {
       overall: 15600,
+      fromUN: 15600,
       writing: 15444, // 15600 * 0.99
     },
     scope: TerritoryScope.Country,
@@ -116,7 +118,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     names: ['Middle Earth', 'Ennorath', 'Endor'],
     scope: TerritoryScope.Continent,
     containedUNRegionCode: '001',
-    pop: { overall: 30000 },
+    pop: { overall: 30000, fromUN: 30000 },
   };
   const AM: TerritoryData = {
     // The lands west of Middle-earth
@@ -129,6 +131,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     scope: TerritoryScope.Country, // not really a country, but for our purposes here we need to treat it as one
     pop: {
       overall: 20000,
+      fromUN: 20000,
       writing: 20000 * 0.98, // 19600
     },
     literacyPercent: 98.0,
@@ -142,7 +145,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'arda',
     names: ['Arda', 'World', 'Aþāraphelūn', 'Ardhon'],
     scope: TerritoryScope.World,
-    pop: { overall: 50000 },
+    pop: { overall: 50000, fromUN: 50000 },
   };
 
   // Censuses

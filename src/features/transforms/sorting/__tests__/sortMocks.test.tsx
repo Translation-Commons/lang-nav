@@ -258,6 +258,12 @@ describe('getSortByParameterized', () => {
     const field = Field.PopulationWriting;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+      '001            48124.0',
+      '123            28524.0',
+      'Teng           26500.0',
+      'AM             19600.0',
+      'HA             15444.0',
+      'BE             10800.0',
       'sjn            8541.0',
       'sjn_123        8541.0',
       'sjn_001        8541.0',
@@ -265,19 +271,13 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_BE    8100.0',
       'sjn_Teng_123   8100.0',
       'sjn_Teng_001   8100.0',
+      'ER             2280.0',
       'dori0123       171.0',
       'sjn_ER         171.0',
       'dori0123_ER    171.0',
       'dori0123_123   171.0',
       'dori0123_001   171.0',
-      '123            ',
-      'BE             ',
-      'ER             ',
-      'HA             ',
-      'AM             ',
-      '001            ',
       'be0590         ',
-      'Teng           ',
       'tolkorth       ',
     ]);
   });
@@ -317,8 +317,8 @@ describe('getSortByParameterized', () => {
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
       'be0590         100.0', // 100.0% of Beleriand in the census
+      'sjn_ER         80.0',
       'sjn_BE         77.5',
-      'sjn_ER         75.0',
       'dori0123_ER    75.0', // dori0123_ER is 75% of ER
       'sjn_Teng_BE    75.0',
       '123            60.0', // 60% of world

@@ -13,6 +13,7 @@ import ReportID from '@widgets/reports/ReportID';
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import getColorGradientForField from '@features/transforms/coloring/getColorGradientForField';
 import Field from '@features/transforms/fields/Field';
+import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
@@ -101,6 +102,7 @@ export function getDefaultParams(
   objectType?: ObjectType,
   view?: View | undefined,
   profile?: ProfileType | undefined,
+  populationFocus?: PopulationFocus | undefined,
   colorBy?: Field,
 ): PageParams {
   let params = GLOBAL_DEFAULTS;
@@ -111,12 +113,13 @@ export function getDefaultParams(
     params.profile = profile;
   }
 
-  // Clone to avoid mutating the defaults
+  // Clone to avoid mutating the defaults (eg. arrays)
   params = structuredClone(params);
 
   // Directly set the view & objectType if provided
   if (view != null) params.view = view;
   if (objectType != null) params.objectType = objectType;
+  if (populationFocus != null) params.populationFocus = populationFocus;
   if (colorBy != null) params.colorBy = colorBy;
 
   // Apply a few view-specific overrides
@@ -155,6 +158,7 @@ export function getDefaultParams(
     params.colorGradient = getColorGradientForField(params.colorBy);
   }
 
+  // Set population sorting behavior
   if (params.objectType === ObjectType.Org) {
     // Orgs don't have population, so sort by count of censuses by default
     if (params.sortBy === Field.Population) params.sortBy = Field.CountOfCensuses;
@@ -163,6 +167,18 @@ export function getDefaultParams(
     // Keyboards don't have population, so sort by name by default
     if (params.sortBy === Field.Population) params.sortBy = Field.Name;
     if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
+  } else if (params.objectType === ObjectType.WritingSystem) {
+    // Keyboards don't have population, so sort by name by default
+    if (params.sortBy === Field.Population) params.sortBy = Field.PopulationWriting;
+    if (params.secondarySortBy === Field.Population)
+      params.secondarySortBy = Field.PopulationWriting;
+  } else if (params.sortBy === Field.Population) {
+    // If there is a specified population focus, the default sort should make the population focus.
+    if (populationFocus != null) {
+      if (params.sortBy === Field.Population)
+        params.sortBy = getFieldForPopulationFocus(populationFocus);
+      // Note: Secondary sort by remains as population (overall) for tie-breaking
+    }
   }
 
   return params;

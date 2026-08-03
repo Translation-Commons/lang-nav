@@ -169,7 +169,7 @@ export function getObjectPopulationWriting(object: ObjectData): number | undefin
     case ObjectType.Territory:
       return object.pop.writing;
     case ObjectType.Variant:
-      return object.variantType === VariantType.Dialect
+      return object.variantType === VariantType.Orthographic
         ? object.languages.length > 0
           ? object.languages.reduce((sum, lang) => sum + (lang.pop.writing.estimate || 0), 0)
           : undefined

@@ -13,6 +13,7 @@ import SearchBySelector from '@features/transforms/search/SearchBySelector';
 import ClearAllPinsButton from './selectors/ClearAllPinsButton';
 import LocaleSeparatorSelector from './selectors/LocaleSeparatorSelector';
 import PageBrightnessSelector from './selectors/PageBrightnessSelector';
+import PopulationFocusSelector from './selectors/PopulationFocusSelector';
 import ProfileSelector from './selectors/ProfileSelector';
 
 const Settings = (): React.ReactNode => {
@@ -28,6 +29,7 @@ const Settings = (): React.ReactNode => {
           <ColorGradientSelector />
           <ScaleBySelector />
           <FieldFocusSelector />
+          <PopulationFocusSelector />
           <LocaleSeparatorSelector />
           <ProfileSelector />
           <ClearAllPinsButton />
