@@ -50,7 +50,7 @@ function usePotentialLocales(
             return; // Skip if the population percentage is below the threshold
           }
           const populationAdjusted = Math.round(
-            (populationPercentInCountry / 100.0) * (census.territory?.population || 1),
+            (populationPercentInCountry / 100.0) * (census.territory?.pop.overall || 1),
           );
 
           if (missing[localeID] == null) {

@@ -26,6 +26,7 @@ function createRegionalLocalesForTerritory(
   allLocales: Record<StandardLocaleCode, LocaleData>,
 ): void {
   if (!territory) return;
+  const territoryPop = territory.pop.speaking ?? territory.pop.overall;
 
   // Make sure that territories within are processed first
   const containsTerritories = territory.containsTerritories ?? [];
@@ -43,7 +44,7 @@ function createRegionalLocalesForTerritory(
         if (newLocale == null) {
           const percent =
             loc.pop.speaking.unadjusted != null
-              ? (loc.pop.speaking.unadjusted * 100) / territory.population
+              ? (loc.pop.speaking.unadjusted * 100) / territoryPop
               : undefined;
           // It isn't found yet, create it
           locs[newLocaleCode] = {
@@ -84,7 +85,7 @@ function createRegionalLocalesForTerritory(
             if (newLocale.pop.speaking.unadjusted == null) newLocale.pop.speaking.unadjusted = 0;
             newLocale.pop.speaking.unadjusted += loc.pop.speaking.unadjusted || 0;
             newLocale.pop.speaking.percent =
-              (newLocale.pop.speaking.unadjusted * 100) / territory.population;
+              (newLocale.pop.speaking.unadjusted * 100) / territoryPop;
           }
         }
       });

@@ -55,9 +55,9 @@ export function sumUpPopulationFromContainedTerritories(
     sumBy(uniqueContainedLocales, (loc) => loc.pop[use].unadjusted || 0) || undefined;
 
   // Compute the percent based on the adjusted population for regional locales.
-  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
+  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.pop.overall || 1)) * 100;
   if (pop.adjusted != null)
-    pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
+    pop.percentAdjusted = (pop.adjusted / (territory.pop.overall || 1)) * 100;
 }
 
 export function computeLanguageFamilyLocalePopulations(locales: LocaleData[]): void {
@@ -100,16 +100,16 @@ function sumUpPopulationFromChildLanguages(locale: LocaleData, use: 'speaking' |
   // to smooth out population growth between data collected in different years.
   pop.source = PopulationSourceCategory.AggregatedFromLanguages;
   pop.adjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].adjusted) || undefined;
-  if (pop.adjusted && pop.adjusted > territory.population) pop.adjusted = territory.population;
+  const maxPopulation = territory.pop[use] || territory.pop.overall || 0;
+  if (pop.adjusted && pop.adjusted > maxPopulation) pop.adjusted = maxPopulation;
   relatedLocales.sumOfPopulationFromChildLanguages = pop.adjusted;
 
   // Set population to be the sum of the unadjusted population
   pop.unadjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].unadjusted || 0) || undefined;
-  if (pop.unadjusted && pop.unadjusted > territory.population)
-    pop.unadjusted = territory.population;
+  if (pop.unadjusted && pop.unadjusted > maxPopulation) pop.unadjusted = maxPopulation;
 
   // Compute the percent based on the adjusted population for regional locales.
-  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
+  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.pop.overall || 1)) * 100;
   if (pop.adjusted != null)
-    pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
+    pop.percentAdjusted = (pop.adjusted / (territory.pop.overall || 1)) * 100;
 }

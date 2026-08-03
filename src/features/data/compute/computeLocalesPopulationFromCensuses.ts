@@ -66,7 +66,7 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
   if (speaking.unadjusted == null) return; // Nothing to go from
 
   if (speaking.percent == null)
-    speaking.percent = (speaking.unadjusted / (locale.territory?.population || 1)) * 100;
+    speaking.percent = (speaking.unadjusted / (locale.territory?.pop.overall || 1)) * 100;
   speaking.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, 'speaking');
   speaking.percentAdjusted = speaking.percent * (speaking.modalityDiscount ?? 1);
   speaking.adjusted = speaking.unadjusted * (speaking.modalityDiscount ?? 1);
@@ -77,7 +77,7 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
   writing.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, 'writing');
   writing.percentAdjusted =
     writing.percent * (writing.literacyDiscount ?? 1) * (writing.modalityDiscount ?? 1);
-  writing.adjusted = (writing.percentAdjusted / 100.0) * (locale.territory?.population || 1);
+  writing.adjusted = (writing.percentAdjusted / 100.0) * (locale.territory?.pop.overall || 1);
 }
 
 function applyPopRecord(
@@ -104,7 +104,7 @@ function applyPopRecord(
   // Compute the percent, adjusted by the discount factors, and a corrected absolute population number
   pop.percent = record.populationPercent;
   pop.percentAdjusted = pop.percent * (pop.literacyDiscount ?? 1) * (pop.modalityDiscount ?? 1);
-  pop.adjusted = Math.round((pop.percentAdjusted / 100.0) * (territory?.population || 1));
+  pop.adjusted = Math.round((pop.percentAdjusted / 100.0) * (territory?.pop.overall || 1));
 }
 
 function isRecordPrecise(record: LocaleInCensus, use: 'speaking' | 'writing'): boolean {

@@ -16,8 +16,7 @@ export function getMockLanguages() {
     names: ['United States', 'USA', 'US'],
     type: ObjectType.Territory,
     scope: TerritoryScope.Country,
-    population: 331002651,
-    populationFromUN: 331000000,
+    pop: { overall: 331002651, fromUN: 331000000 },
   };
   // To simplify, all languages share the same locale for the US
   const mul_US: LocaleData = {

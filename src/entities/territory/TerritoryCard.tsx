@@ -19,7 +19,7 @@ interface Props {
 }
 
 const TerritoryCard: React.FC<Props> = ({ territory }) => {
-  const { population, sovereign, scope, parentUNRegion } = territory;
+  const { pop, sovereign, scope, parentUNRegion } = territory;
   const isDependency = scope === TerritoryScope.Dependency;
   const isWorld = scope === TerritoryScope.World;
 
@@ -61,11 +61,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         field={Field.Population}
         description="How many people live in this territory."
       >
-        {population != null ? (
-          <CountOfPeople count={population} />
-        ) : (
-          <Deemphasized>Unknown</Deemphasized>
-        )}
+        {pop != null ? <CountOfPeople count={pop.overall} /> : <Deemphasized>Unknown</Deemphasized>}
       </CardField>
 
       <CardField

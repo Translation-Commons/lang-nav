@@ -50,8 +50,7 @@ describe('getLocaleName', () => {
         codeDisplay: 'CN',
         nameDisplay: 'China',
         scope: TerritoryScope.Country,
-        population: 1e9,
-        populationFromUN: 1e9,
+        pop: { overall: 1_000_000_000 },
         names: ['China'],
       },
       writingSystem: {

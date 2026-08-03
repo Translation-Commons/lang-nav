@@ -84,13 +84,13 @@ const LocalePopulationBreakdownAdjusted: React.FC<{
         <tr>
           <td>{territoryName} population</td>
           <td>{TerritoryDataYear}</td>
-          <CellPopulation population={territory.population} />
+          <CellPopulation population={territory.pop.overall} />
         </tr>
         {isAdjusted && (
           <>
             <tr>
               <td colSpan={3} style={{ textAlign: 'right', paddingRight: '1em' }}>
-                <CountOfPeople count={territory!.population} />
+                <CountOfPeople count={territory!.pop.overall} />
                 <> * {numberToFixedUnlessSmall(percent!)}%</>
                 {literacyDiscount != null && literacyDiscount !== 1 && (
                   <> * {numberToFixedUnlessSmall(literacyDiscount * 100)}%</>

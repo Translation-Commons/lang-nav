@@ -57,8 +57,7 @@ describe('InteractiveEntityTable', () => {
       nameDisplay: 'Test Territory 1',
       names: ['Test Territory 1'],
       scope: TerritoryScope.Country,
-      population: 1000,
-      populationFromUN: 1000,
+      pop: { overall: 1000 },
     },
     {
       ID: '2',
@@ -67,8 +66,7 @@ describe('InteractiveEntityTable', () => {
       nameDisplay: 'Test Territory 2',
       names: ['Test Territory 2'],
       scope: TerritoryScope.Country,
-      population: 2000,
-      populationFromUN: 2000,
+      pop: { overall: 2000 },
     },
   ];
 
@@ -81,9 +79,7 @@ describe('InteractiveEntityTable', () => {
     {
       key: 'Population',
       render: (obj) => {
-        if (obj.type === ObjectType.Territory) {
-          return obj.population.toLocaleString();
-        }
+        if (obj.type === ObjectType.Territory) return obj.pop.overall.toLocaleString();
         return '';
       },
       field: Field.Population,
@@ -146,7 +142,7 @@ describe('InteractiveEntityTable', () => {
     mockObjects.forEach((obj) => {
       expect(screen.getByText(obj.nameDisplay)).toBeInTheDocument();
       if (obj.type === ObjectType.Territory) {
-        expect(screen.getByText(obj.population.toLocaleString())).toBeInTheDocument();
+        expect(screen.getByText(obj.pop.overall.toLocaleString())).toBeInTheDocument();
       }
     });
   });

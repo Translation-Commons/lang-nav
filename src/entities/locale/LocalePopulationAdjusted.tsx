@@ -10,10 +10,14 @@ import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 
 type Props = {
   locale: LocaleData;
-  use: 'speaking' | 'writing';
+  use?: 'speaking' | 'writing';
 };
 
 const LocalePopulationAdjusted: React.FC<Props> = ({ locale, use }) => {
+  use ??=
+    (locale.pop.writing.adjusted ?? 0) > (locale.pop.speaking.adjusted ?? 0)
+      ? 'writing'
+      : 'speaking';
   const pop = locale.pop[use];
   if (pop.adjusted == null) return null;
 

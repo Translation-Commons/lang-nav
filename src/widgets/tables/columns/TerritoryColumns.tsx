@@ -54,9 +54,16 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Population',
-      render: (object) => object.population,
+      render: (object) => object.pop.overall,
       field: Field.Population,
       columnGroup: 'Demographics',
+    },
+    {
+      key: 'Population (Writing)',
+      render: (object) => object.pop.writing,
+      field: Field.PopulationWriting,
+      columnGroup: 'Demographics',
+      isInitiallyVisible: false,
     },
     {
       key: 'Literacy',
@@ -168,7 +175,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       render: (object) =>
         object.dependentTerritories &&
         object.dependentTerritories.length > 0 &&
-        sumBy(object.dependentTerritories, (t) => t.population ?? 0),
+        sumBy(object.dependentTerritories, (t) => t.pop.overall ?? 0),
       isInitiallyVisible: false,
       field: Field.PopulationOfDescendants,
       columnGroup: 'Relations',
@@ -202,7 +209,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       key: 'Density',
       description: 'People per square kilometer',
       render: (object) =>
-        object.landArea && object.population && object.population / object.landArea,
+        object.landArea && object.pop.overall && object.pop.overall / object.landArea,
       isInitiallyVisible: false,
       valueType: TableValueType.Decimal,
       columnGroup: 'Location',

@@ -11,14 +11,31 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     key: 'Population (Adjusted)',
     description: (
       <>
-        Most population records become outdated over time. In order to figure out the current
-        population, we take the percent of the territory population that spoke the language at the
-        time of the census and multiply it by the current population of the territory.
+        This shows the number of people who speak or write the language (the max of the 2
+        estimates), adjusted. Most population records become outdated over time. In order to figure
+        out the current population, we take the percent of the territory population that spoke the
+        language at the time of the census and multiply it by the current population of the
+        territory.
+      </>
+    ),
+    render: (object) => <LocalePopulationAdjusted locale={object} />,
+    exportValue: (object) => object.pop.speaking.adjusted,
+    field: Field.Population,
+    columnGroup: 'Demographics',
+  },
+  {
+    key: 'Population (Speaking)',
+    description: (
+      <>
+        This shows the number of people who speak the language, adjusted. Most population records
+        become outdated over time. In order to figure out the current population, we take the
+        percent of the territory population that spoke the language at the time of the census and
+        multiply it by the current population of the territory.
       </>
     ),
     render: (object) => <LocalePopulationAdjusted locale={object} use="speaking" />,
     exportValue: (object) => object.pop.speaking.adjusted,
-    field: Field.Population,
+    field: Field.PopulationSpeaking,
     columnGroup: 'Demographics',
   },
   {

@@ -1,6 +1,7 @@
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { ObjectData } from '@entities/types/DataTypes';
+import { VariantType } from '@entities/variant/VariantTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
 
@@ -19,7 +20,7 @@ export function getObjectPopulation(object: ObjectData): number | undefined {
     case ObjectType.WritingSystem:
       return object.populationUpperBound;
     case ObjectType.Territory:
-      return object.population;
+      return object.pop.overall;
     case ObjectType.Variant:
       return object.languages.length > 0
         ? object.languages.reduce((sum, lang) => sum + (lang.pop.overall || 0), 0)
@@ -37,7 +38,7 @@ export function getObjectPopulationDirectlySourced(object: ObjectData): number |
     case ObjectType.Locale:
       return object.pop.speaking.unadjusted;
     case ObjectType.Territory:
-      return object.populationFromUN;
+      return object.pop.fromUN;
     case ObjectType.Census:
       return object.population;
     case ObjectType.WritingSystem:
@@ -62,7 +63,7 @@ export function getObjectPopulationOfDescendants(object: ObjectData): number | u
       return object.populationOfDescendants;
     case ObjectType.Territory:
       return object.dependentTerritories && object.dependentTerritories.length > 0
-        ? sumBy(object.dependentTerritories, (t) => t.population ?? 0)
+        ? sumBy(object.dependentTerritories, (t) => t.pop.overall ?? 0)
         : undefined;
     case ObjectType.Census:
     case ObjectType.Locale:
@@ -116,17 +117,62 @@ export function getObjectPercentOfTerritoryPopulation(object: ObjectData): numbe
   switch (object.type) {
     case ObjectType.Census:
       return object.territory && object.population
-        ? (object.population * 100) / (object.territory.population ?? 1)
+        ? (object.population * 100) / (object.territory.pop.overall ?? 1)
         : undefined;
     case ObjectType.Locale:
       return object.pop.speaking.percentAdjusted;
     case ObjectType.Territory:
-      return object.parentUNRegion && object.population
-        ? (object.population * 100) / object.parentUNRegion.population
+      return object.parentUNRegion && object.pop.overall
+        ? (object.pop.overall * 100) / object.parentUNRegion.pop.overall
         : undefined;
     case ObjectType.Language:
     case ObjectType.WritingSystem:
     case ObjectType.Variant:
+      return undefined;
+  }
+}
+
+// Field.PopulationSpeaking
+export function getObjectPopulationSpeaking(object: ObjectData): number | undefined {
+  switch (object.type) {
+    case ObjectType.Locale:
+      return object.pop.speaking.adjusted;
+    case ObjectType.Language:
+      return object.pop.speaking.estimate;
+    case ObjectType.Territory:
+      return object.pop.speaking;
+    case ObjectType.Variant:
+      return object.variantType === VariantType.Dialect
+        ? object.languages.length > 0
+          ? object.languages.reduce((sum, lang) => sum + (lang.pop.speaking.estimate || 0), 0)
+          : undefined
+        : undefined;
+    case ObjectType.Census:
+    case ObjectType.WritingSystem:
+    case ObjectType.Org:
+      return undefined;
+  }
+}
+
+// Field.PopulationWriting
+export function getObjectPopulationWriting(object: ObjectData): number | undefined {
+  switch (object.type) {
+    case ObjectType.Locale:
+      return object.pop.writing.adjusted;
+    case ObjectType.Language:
+      return object.pop.writing.estimate;
+    case ObjectType.WritingSystem:
+      return object.populationUpperBound;
+    case ObjectType.Territory:
+      return object.pop.writing;
+    case ObjectType.Variant:
+      return object.variantType === VariantType.Dialect
+        ? object.languages.length > 0
+          ? object.languages.reduce((sum, lang) => sum + (lang.pop.writing.estimate || 0), 0)
+          : undefined
+        : undefined;
+    case ObjectType.Census:
+    case ObjectType.Org:
       return undefined;
   }
 }

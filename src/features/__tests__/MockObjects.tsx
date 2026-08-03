@@ -67,9 +67,13 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameDisplay: 'Beleriand',
     nameEndonym: 'beˈlerjand',
     names: ['Beleriand', 'beˈlerjand'],
-    population: 12000,
-    populationFromUN: 12000,
     literacyPercent: 90.0,
+    pop: {
+      overall: 12000,
+      fromUN: 12000,
+      speaking: 12000,
+      writing: 10800, // 12000 * 0.9
+    },
     scope: TerritoryScope.Country,
     containedUNRegionCode: '123',
   };
@@ -80,9 +84,11 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameDisplay: 'Eriador',
     nameEndonym: 'erjador',
     names: ['Eriador', 'The Lone-lands'],
-    population: 2400,
-    populationFromUN: 2400,
     literacyPercent: 95.0,
+    pop: {
+      overall: 2400,
+      writing: 2400 * 0.95, // 2280
+    },
     scope: TerritoryScope.Country,
     containedUNRegionCode: '123',
   };
@@ -93,9 +99,11 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameDisplay: 'Harad',
     nameEndonym: 'ha-rad',
     names: ['Harad', 'Haradwaith', 'Hyarmen', 'the Sunlands', 'ha-rad'],
-    population: 15600,
-    populationFromUN: 15600,
     literacyPercent: 99.0,
+    pop: {
+      overall: 15600,
+      writing: 15444, // 15600 * 0.99
+    },
     scope: TerritoryScope.Country,
     containedUNRegionCode: '123',
   };
@@ -107,9 +115,8 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'endor',
     names: ['Middle Earth', 'Ennorath', 'Endor'],
     scope: TerritoryScope.Continent,
-    population: 30000, // will be recomputed later
-    populationFromUN: 30000, // This is a gross underestimate, just here to keep the numbers smaller so its easier to read
     containedUNRegionCode: '001',
+    pop: { overall: 30000 },
   };
   const AM: TerritoryData = {
     // The lands west of Middle-earth
@@ -120,8 +127,10 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'aman',
     names: ['Aman', 'The Undying Lands', 'aman'],
     scope: TerritoryScope.Country, // not really a country, but for our purposes here we need to treat it as one
-    population: 20000,
-    populationFromUN: 20000,
+    pop: {
+      overall: 20000,
+      writing: 20000 * 0.98, // 19600
+    },
     literacyPercent: 98.0,
     containedUNRegionCode: '001',
   };
@@ -133,8 +142,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     nameEndonym: 'arda',
     names: ['Arda', 'World', 'Aþāraphelūn', 'Ardhon'],
     scope: TerritoryScope.World,
-    population: 50000,
-    populationFromUN: 50000,
+    pop: { overall: 50000 },
   };
 
   // Censuses
@@ -150,7 +158,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     collectorNameShort: 'NIS', // tbd make organization object for this
     url: 'https://en.wikipedia.org/wiki/Beleriand#Languages', // not a real part of the article
     isoRegionCode: 'BE',
-    population: BE.population,
+    population: BE.pop.overall, // 12000
     languageEstimates: {
       sjn: 9300, // 77.5%, increased to test out the population recomputation
     },

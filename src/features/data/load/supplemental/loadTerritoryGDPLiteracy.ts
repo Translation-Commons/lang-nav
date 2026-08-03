@@ -24,6 +24,8 @@ export async function loadTerritoryGDPLiteracy(
           return;
         }
         territory.literacyPercent = newTerrData.literacyPercent;
+        territory.pop.speaking = territory.pop.overall;
+        territory.pop.writing = territory.pop.overall * (newTerrData.literacyPercent / 100);
         territory.gdp = newTerrData.gdp;
       });
     })

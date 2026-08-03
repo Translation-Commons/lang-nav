@@ -88,7 +88,6 @@ const LocalePopulationBreakdownAggregated: React.FC<{
             locales={constituents.slice(MAX_CONSTITUENTS_DISPLAYED)}
             setShowAllConstituents={setShowAllConstituents}
             use={use}
-            fromTerritories={fromTerritories}
           />
         )}
         <tr>
@@ -127,12 +126,11 @@ const RowOfRemainingConstituents: React.FC<{
   locales: LocaleData[];
   setShowAllConstituents: (show: boolean) => void;
   use: 'speaking' | 'writing';
-  fromTerritories: boolean;
 }> = ({ locales, setShowAllConstituents, use }) => {
   if (locales.length === 0) return null;
   const totalInRemainder = sumBy(locales, (locale) => locale.pop[use].adjusted ?? 0);
   const percentInRemainder =
-    (totalInRemainder * 100) / sumBy(locales, (locale) => locale.territory?.population || 0);
+    (totalInRemainder * 100) / sumBy(locales, (locale) => locale.territory?.pop.overall || 0);
 
   return (
     <tr>

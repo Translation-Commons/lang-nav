@@ -27,7 +27,7 @@ export function prepareCLDRLocalePopulationForExport(objects: ObjectData[]) {
       return [
         locale.territory?.nameDisplay, // CName
         locale.territoryCode, // CCode
-        '"' + locale.territory?.population?.toLocaleString() + '"', // CPopulation
+        '"' + locale.territory?.pop.overall?.toLocaleString() + '"', // CPopulation
         Math.round(locale.territory?.literacyPercent ?? 0) + '%', // CLiteracy
         '"' + locale.territory?.gdp?.toLocaleString() + '"', // CGdp
         locale.officialStatus, // OfficialStatus

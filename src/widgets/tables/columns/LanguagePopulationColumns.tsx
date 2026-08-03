@@ -45,6 +45,18 @@ const PopulationInTerritoryDescription: React.FC = () => {
 
 const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
   {
+    key: 'Population (est.)',
+    description: (
+      <>
+        The overall amount of people that speak, write, or sign this language. This is estimated
+        from one of 3 possible sources: inputted data aggregated from language databases, aggregated
+        census data and/or aggregated data from dialects.
+      </>
+    ),
+    render: (lang) => <LanguagePopulationEstimate lang={lang} />,
+    field: Field.Population,
+  },
+  {
     key: 'Speakers (est.)',
     description: (
       <>
@@ -59,7 +71,7 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
         <LanguagePopulationEstimate lang={lang} use="speaking" />
       </>
     ),
-    field: Field.Population,
+    field: Field.PopulationSpeaking,
     isInitiallyVisible: true,
   },
   {
