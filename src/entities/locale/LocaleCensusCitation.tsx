@@ -4,20 +4,28 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 
 import { CensusData } from '@entities/census/CensusTypes';
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
 type Props = {
   locale: LocaleData;
-  use: 'speaking' | 'writing';
+  focus: PopulationFocus;
   size?: 'short' | 'full';
 };
 
-const LocaleCensusCitation: React.FC<Props> = ({ locale, use, size = 'full' }) => {
-  const { census, source } = locale.pop[use];
+const LocaleCensusCitation: React.FC<Props> = ({ locale, focus, size = 'full' }) => {
+  const speakingOrWriting = getSpeakingOrWritingFocus(locale, focus);
+  const { census, source } = locale.pop[speakingOrWriting];
 
-  if (census != null) return <CensusCitation census={census} />;
+  if (
+    census != null &&
+    source !== PopulationSourceCategory.AggregatedFromLanguages &&
+    source !== PopulationSourceCategory.AggregatedFromTerritories
+  )
+    return <CensusCitation census={census} />;
   if (source != null) return <PopulationSource populationSource={source} size={size} />;
   return <Deemphasized>n/a</Deemphasized>;
 };
@@ -64,8 +72,6 @@ function getPopulationSourceLabel(
       return 'census';
     case PopulationSourceCategory.Study:
       return 'study';
-    case PopulationSourceCategory.Ethnologue:
-      return 'Ethnologue';
     case PopulationSourceCategory.EDL:
       return size === 'short' ? 'EDL' : 'Endangered Languages Project';
     case PopulationSourceCategory.CLDR:
@@ -89,8 +95,6 @@ function getPopulationSourceDescription(source: PopulationSourceCategory): strin
       return 'The population figure is reported to be from an official census or government source, but from a secondary source.';
     case PopulationSourceCategory.Study:
       return 'The population figure is taken from a linguistic or demographic study.';
-    case PopulationSourceCategory.Ethnologue:
-      return 'The population figure is taken from Ethnologue.';
     case PopulationSourceCategory.EDL:
       return 'The population figure is taken from the Endangered Languages Project.';
     case PopulationSourceCategory.CLDR:

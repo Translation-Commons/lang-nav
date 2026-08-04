@@ -29,7 +29,8 @@ export default function connectLocales(
       locale.territory = territory;
       if (locale.pop.speaking.unadjusted)
         locale.pop.speaking.percent =
-          (locale.pop.speaking.unadjusted * 100) / (territory.population || 1);
+          (locale.pop.speaking.unadjusted * 100) /
+          (territory.pop.speaking || territory.pop.overall || 1);
     }
     if (language != null) {
       language.locales.push(locale);

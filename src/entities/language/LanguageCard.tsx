@@ -7,6 +7,7 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
@@ -26,9 +27,8 @@ interface Props {
 const LanguageCard: React.FC<Props> = ({ lang }) => {
   const { view } = usePageParams();
   const sortFunction = getSortFunction();
-  const { locales, populationEstimate } = lang;
   const countryLocales = uniqueBy(
-    locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
+    lang.locales.filter((l) => l.territory?.scope === TerritoryScope.Country).sort(sortFunction),
     (l) => l.territoryCode ?? '',
   );
 
@@ -47,15 +47,7 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
         {getLanguageScopeLabel(lang.scope)}
       </CardField>
 
-      {populationEstimate != null && (
-        <CardField
-          title="Population"
-          field={Field.Population}
-          description="How many people know the language across the world."
-        >
-          <LanguagePopulationEstimate lang={lang} />
-        </CardField>
-      )}
+      <PopulationField lang={lang} />
 
       <CardField
         title="Digital Support"
@@ -86,6 +78,45 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
       )}
     </div>
   );
+};
+
+const PopulationField: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+  const { populationFocus } = usePageParams();
+  switch (populationFocus) {
+    case PopulationFocus.Speaking:
+      if (lang.pop.speaking.estimate == null) return null;
+      return (
+        <CardField
+          title="Speakers"
+          field={Field.PopulationSpeaking}
+          description="How many people speak the language across the world."
+        >
+          <LanguagePopulationEstimate lang={lang} focus={populationFocus} />
+        </CardField>
+      );
+    case PopulationFocus.Writing:
+      if (lang.pop.writing.estimate == null) return null;
+      return (
+        <CardField
+          title="Writers"
+          field={Field.PopulationWriting}
+          description="How many people write in the language across the world."
+        >
+          <LanguagePopulationEstimate lang={lang} focus={populationFocus} />
+        </CardField>
+      );
+    case PopulationFocus.Overall:
+      if (lang.pop.overall == null) return null;
+      return (
+        <CardField
+          title="Population"
+          field={Field.Population}
+          description="How many people know the language across the world."
+        >
+          <LanguagePopulationEstimate lang={lang} focus={populationFocus} />
+        </CardField>
+      );
+  }
 };
 
 export default LanguageCard;

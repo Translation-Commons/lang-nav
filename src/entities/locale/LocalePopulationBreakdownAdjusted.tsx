@@ -17,11 +17,11 @@ import { getLocaleName } from './LocaleStrings';
 
 const LocalePopulationBreakdownAdjusted: React.FC<{
   locale: LocaleData;
-  use: 'speaking' | 'writing';
-}> = ({ locale, use }) => {
+  speakingOrWriting: 'speaking' | 'writing';
+}> = ({ locale, speakingOrWriting }) => {
   const { pop, territory } = locale;
   const { unadjusted, adjusted, percent, source, census, literacyDiscount, modalityDiscount } =
-    pop[use];
+    pop[speakingOrWriting];
   // Since our methodology is still improving, we are not yet rendering breakdowns for 0 values.
   if (!unadjusted || !adjusted || !territory || !percent) return null;
 
@@ -84,13 +84,13 @@ const LocalePopulationBreakdownAdjusted: React.FC<{
         <tr>
           <td>{territoryName} population</td>
           <td>{TerritoryDataYear}</td>
-          <CellPopulation population={territory.population} />
+          <CellPopulation population={territory.pop.overall} />
         </tr>
         {isAdjusted && (
           <>
             <tr>
               <td colSpan={3} style={{ textAlign: 'right', paddingRight: '1em' }}>
-                <CountOfPeople count={territory!.population} />
+                <CountOfPeople count={territory!.pop.overall} />
                 <> * {numberToFixedUnlessSmall(percent!)}%</>
                 {literacyDiscount != null && literacyDiscount !== 1 && (
                   <> * {numberToFixedUnlessSmall(literacyDiscount * 100)}%</>

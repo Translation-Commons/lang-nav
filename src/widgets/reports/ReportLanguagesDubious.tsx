@@ -87,7 +87,7 @@ const ReportLanguagesDubious: React.FC = () => {
                 </div>
                 <div>
                   <label>Population:</label>
-                  {lang.populationEstimate || <Deemphasized>no population</Deemphasized>}
+                  {lang.pop.overall || <Deemphasized>no population</Deemphasized>}
                 </div>
                 <div>
                   <label>Potentially related objects:</label>

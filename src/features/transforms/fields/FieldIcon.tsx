@@ -31,6 +31,7 @@ import {
   RulerDimensionLineIcon,
   RulerIcon,
   ScrollTextIcon,
+  SpeechIcon,
   TextIcon,
   UserCheckIcon,
   UserPenIcon,
@@ -138,6 +139,8 @@ export function getFieldIcon(field: Field): LucideIcon {
       return UsersIcon;
     case Field.PopulationDirectlySourced:
       return UserCheckIcon;
+    case Field.PopulationSpeaking:
+      return SpeechIcon;
     case Field.PopulationWriting:
       return UserPenIcon;
     case Field.PopulationOfDescendants:

@@ -15,11 +15,17 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import { LanguageData } from '../LanguageTypes';
 
-const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  if (!lang.populationOfDescendants) return null;
+type Props = {
+  lang: LanguageData;
+  speakingOrWriting: 'speaking' | 'writing';
+};
+
+const LanguagePopulationFromDescendants: React.FC<Props> = ({ lang, speakingOrWriting }) => {
+  const pop = lang.pop[speakingOrWriting];
+  if (pop.estimate == null || pop.descendants == null) return null;
   return (
     <>
-      {lang.populationOfDescendants > (lang.populationEstimate ?? 0) ? (
+      {(pop.descendants ?? 0) > (pop.estimate ?? 0) ? (
         <Hoverable
           hoverContent={
             <>
@@ -36,7 +42,7 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
           />
         </Hoverable>
       ) : null}
-      {lang.populationOfDescendants < (lang.populationEstimate ?? 0) * 0.5 ? (
+      {pop.descendants < (pop.estimate ?? 0) * 0.5 ? (
         <Hoverable hoverContent="The population of descendants is significantly lower than the estimate -- probably because most data is collected for this entry as a whole.">
           <TriangleAlertIcon
             style={{ color: 'var(--color-text-secondary)', marginRight: '0.25em' }}
@@ -44,18 +50,26 @@ const LanguagePopulationFromDescendants: React.FC<{ lang: LanguageData }> = ({ l
           />
         </Hoverable>
       ) : null}
-      <Hoverable hoverContent={<LanguagePopulationBreakdownFromDescendants lang={lang} />}>
-        <CountOfPeople count={lang.populationOfDescendants} />
+      <Hoverable
+        hoverContent={
+          <LanguagePopulationBreakdownFromDescendants
+            lang={lang}
+            speakingOrWriting={speakingOrWriting}
+          />
+        }
+      >
+        <CountOfPeople count={pop.descendants} />
       </Hoverable>
     </>
   );
 };
 
-export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: LanguageData }> = ({
+export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({
   lang,
+  speakingOrWriting,
 }) => {
   const { updatePageParams } = usePageParams();
-  if (!lang.populationOfDescendants) return null;
+  if (!lang.pop[speakingOrWriting].descendants) return null;
 
   return (
     <>
@@ -72,7 +86,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: Langua
                 <td>
                   <HoverableObjectName object={descendant} />
                 </td>
-                <CellPopulation population={descendant.populationEstimate} />
+                <CellPopulation population={descendant.pop[speakingOrWriting].estimate} />
               </tr>
             ))}
           {lang.childLanguages.length > 10 && (
@@ -81,7 +95,10 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<{ lang: Langua
               <CellPopulation
                 population={lang.childLanguages
                   .slice(10)
-                  .reduce((sum, descendant) => sum + (descendant.populationEstimate || 0), 0)}
+                  .reduce(
+                    (sum, descendant) => sum + (descendant.pop[speakingOrWriting].estimate || 0),
+                    0,
+                  )}
               />
             </tr>
           )}

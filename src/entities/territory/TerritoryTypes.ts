@@ -44,8 +44,15 @@ export interface TerritoryData extends ObjectBase {
 
   nameDisplay: string;
   scope: TerritoryScope;
-  population: number; // May be reduced when re-computing with dependent territories
-  populationFromUN: number; // Imported by the TSV
+
+  // Demographics
+  pop: {
+    overall: number; // algorithmically re-computed
+    fromUN?: number; // imported from TSV of UN data
+    speaking?: number; // overall
+    writing?: number; // overall * literacy
+  };
+  literacyPercent?: number;
 
   // Supplemental data
   nameEndonym?: string;
@@ -53,7 +60,6 @@ export interface TerritoryData extends ObjectBase {
   nameOtherExonyms?: string[];
   containedUNRegionCode?: UNM49Code;
   sovereignCode?: ISO3166Code;
-  literacyPercent?: number;
   gdp?: number;
   latitude?: number;
   longitude?: number;

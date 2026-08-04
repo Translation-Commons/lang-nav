@@ -43,6 +43,7 @@ function createLocalesForLanguageFamily(
 
     const { territory, territoryCode } = childLocale;
     if (!territory) return;
+    const territoryPop = territory.pop.speaking ?? territory.pop.overall;
 
     // Create a new locale or update an existing family
     const newLocaleCode = `${language.ID}_${territoryCode}`;
@@ -50,8 +51,8 @@ function createLocalesForLanguageFamily(
 
     if (newLocale == null) {
       const population =
-        Math.min(childLocale.pop.speaking.unadjusted || 0, territory.population) || undefined;
-      const popPercent = population != null ? (population * 100) / territory.population : undefined;
+        Math.min(childLocale.pop.speaking.unadjusted || 0, territoryPop) || undefined;
+      const popPercent = population != null ? (population * 100) / territoryPop : undefined;
 
       // It isn't found yet, create it
       newLocale = {
@@ -106,13 +107,12 @@ function createLocalesForLanguageFamily(
         if (newLocale.pop.speaking.unadjusted == null) newLocale.pop.speaking.unadjusted = 0;
         // Note this may double count populations when people speak multiple languages in the family
         newLocale.pop.speaking.unadjusted += childLocale.pop.speaking.unadjusted || 0;
-        newLocale.pop.speaking.percent =
-          (newLocale.pop.speaking.unadjusted * 100) / territory.population;
+        newLocale.pop.speaking.percent = (newLocale.pop.speaking.unadjusted * 100) / territoryPop;
 
         // At least we can max out the percentage at 100%
         if (newLocale.pop.speaking.percent > 100) {
           newLocale.pop.speaking.percent = 100;
-          newLocale.pop.speaking.unadjusted = territory.population;
+          newLocale.pop.speaking.unadjusted = territoryPop;
         }
       }
     }

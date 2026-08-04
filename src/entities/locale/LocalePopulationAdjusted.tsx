@@ -2,7 +2,9 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
@@ -10,15 +12,20 @@ import LocalePopulationBreakdown from './LocalePopulationBreakdown';
 
 type Props = {
   locale: LocaleData;
-  use: 'speaking' | 'writing';
+  focus: PopulationFocus;
 };
 
-const LocalePopulationAdjusted: React.FC<Props> = ({ locale, use }) => {
-  const pop = locale.pop[use];
+const LocalePopulationAdjusted: React.FC<Props> = ({ locale, focus }) => {
+  const speakingOrWriting = getSpeakingOrWritingFocus(locale, focus);
+  const pop = locale.pop[speakingOrWriting];
   if (pop.adjusted == null) return null;
 
   return (
-    <Hoverable hoverContent={<LocalePopulationBreakdown locale={locale} use={use} />}>
+    <Hoverable
+      hoverContent={
+        <LocalePopulationBreakdown locale={locale} speakingOrWriting={speakingOrWriting} />
+      }
+    >
       <CountOfPeople count={pop.adjusted} />
     </Hoverable>
   );

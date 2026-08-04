@@ -20,6 +20,8 @@ import {
   getObjectPopulationOfDescendants,
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
+  getObjectPopulationSpeaking,
+  getObjectPopulationWriting,
 } from '@entities/lib/getObjectPopulation';
 import {
   getContainingTerritories,
@@ -159,9 +161,10 @@ function getField(object: ObjectData, field: Field): string | number | undefined
       return getObjectPopulation(object);
     case Field.PopulationDirectlySourced:
       return getObjectPopulationDirectlySourced(object);
+    case Field.PopulationSpeaking:
+      return getObjectPopulationSpeaking(object);
     case Field.PopulationWriting:
-      if (object.type === ObjectType.Locale) return object.pop.writing.adjusted;
-      return undefined;
+      return getObjectPopulationWriting(object);
     case Field.PopulationOfDescendants:
       return getObjectPopulationOfDescendants(object);
     case Field.PopulationPercentInBiggestDescendantLanguage:

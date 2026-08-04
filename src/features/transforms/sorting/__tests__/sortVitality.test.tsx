@@ -74,9 +74,9 @@ describe('Vitality Sorting', () => {
         createLanguageWithVitality('b', 'B', { eth2012: VitalityEthnologueFine.Threatened }),
         createLanguageWithVitality('c', 'C', { eth2012: VitalityEthnologueFine.Threatened }),
       ];
-      langs[0].populationEstimate = 100;
-      langs[1].populationEstimate = 300;
-      langs[2].populationEstimate = 200;
+      langs[0].pop.overall = 100;
+      langs[1].pop.overall = 300;
+      langs[2].pop.overall = 200;
       computeRecursiveLanguageData(langs);
 
       const sortFn = getSortFunctionParameterized(
@@ -103,8 +103,7 @@ describe('Vitality Sorting', () => {
         nameDisplay: 'United States',
         names: ['United States'],
         scope: TerritoryScope.Country,
-        population: 0,
-        populationFromUN: 0,
+        pop: { overall: 0 },
       };
       computeRecursiveLanguageData([lang]);
 

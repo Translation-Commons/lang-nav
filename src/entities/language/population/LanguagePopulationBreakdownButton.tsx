@@ -2,6 +2,7 @@ import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
 import { LanguageData } from '../LanguageTypes';
@@ -9,17 +10,30 @@ import { LanguageData } from '../LanguageTypes';
 import { LanguagePopulationBreakdownFromDescendants } from './LanguagePopulationFromDescendants';
 import { LanguagePopulationBreakdownFromLocales } from './LanguagePopulationFromLocales';
 
-const LanguagePopulationBreakdownButton: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { populationEstimate, populationEstimateSource } = lang;
+type Props = {
+  lang: LanguageData;
+  speakingOrWriting?: 'speaking' | 'writing';
+};
+
+const LanguagePopulationBreakdownButton: React.FC<Props> = ({ lang, speakingOrWriting }) => {
+  speakingOrWriting = speakingOrWriting ?? getSpeakingOrWritingFocus(lang);
+  const pop = lang.pop[speakingOrWriting];
   const [showPopulationBreakdown, setShowPopulationBreakdown] = React.useState(false);
 
-  if (!populationEstimate || !populationEstimateSource) return null;
+  if (!pop.estimate || !pop.source) return null;
 
   let breakdown = null;
-  if (populationEstimateSource === PopulationSourceCategory.AggregatedFromTerritories) {
-    breakdown = <LanguagePopulationBreakdownFromLocales lang={lang} />;
-  } else if (populationEstimateSource === PopulationSourceCategory.AggregatedFromLanguages) {
-    breakdown = <LanguagePopulationBreakdownFromDescendants lang={lang} />;
+  if (pop.source === PopulationSourceCategory.AggregatedFromTerritories) {
+    breakdown = (
+      <LanguagePopulationBreakdownFromLocales lang={lang} speakingOrWriting={speakingOrWriting} />
+    );
+  } else if (pop.source === PopulationSourceCategory.AggregatedFromLanguages) {
+    breakdown = (
+      <LanguagePopulationBreakdownFromDescendants
+        lang={lang}
+        speakingOrWriting={speakingOrWriting}
+      />
+    );
   }
   if (!breakdown) return null;
 

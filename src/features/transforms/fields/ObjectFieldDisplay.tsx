@@ -34,6 +34,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
   switch (field) {
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationSpeaking:
     case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:

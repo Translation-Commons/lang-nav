@@ -17,6 +17,7 @@ import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 import { usePotentialLocaleThreshold } from '@entities/locale/PotentialLocaleThreshold';
 import usePotentialLocales from '@entities/locale/usePotentialLocales';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
 
@@ -168,7 +169,7 @@ const PotentialLocalesTable: React.FC<{
         },
         {
           key: 'Population (Adjusted)',
-          render: (object) => object.pop.speaking.adjusted,
+          render: (object) => object.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locales
           field: Field.Population,
         },
         {
@@ -186,12 +187,14 @@ const PotentialLocalesTable: React.FC<{
           key: '% of Global Language Speakers',
           render: (object) =>
             object.pop.speaking.adjusted &&
-            (object.pop.speaking.adjusted * 100) / (object.language?.populationEstimate ?? 1),
+            (object.pop.speaking.adjusted * 100) / (object.language?.pop.speaking.estimate ?? 1),
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',
-          render: (object) => <LocaleCensusCitation locale={object} use="speaking" />,
+          render: (object) => (
+            <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />
+          ),
         },
         {
           key: 'Related Locale',

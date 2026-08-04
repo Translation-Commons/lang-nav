@@ -6,6 +6,7 @@ import Field from '@features/transforms/fields/Field';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 const columns: TableColumn<LocaleData>[] = [
   {
@@ -45,9 +46,12 @@ const columns: TableColumn<LocaleData>[] = [
     key: 'Population (Writing)',
     description:
       'Some of these are based on censuses with precise data about writing, but most are computed from spoken language usage estimates and converted to writing usage based on literacy rate and spoken traditions.',
-    render: (object) => <LocalePopulationAdjusted locale={object} use="writing" />,
+    render: (object) => (
+      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Writing} />
+    ),
     exportValue: (object) => object.pop.writing.adjusted,
     field: Field.PopulationWriting,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
   {
     key: 'Population (Writing, percent)',
@@ -55,17 +59,19 @@ const columns: TableColumn<LocaleData>[] = [
       'The percent of people in the territory that read and/or write in the language, often computed from other estimates, these should be taken with a grain of salt.',
     render: (object) => object.pop.writing.percentAdjusted,
     valueType: TableValueType.Decimal,
+    isInitiallyVisible: (params) => params.populationFocus === PopulationFocus.Writing,
   },
   {
     key: 'Population (Writing, source)',
     description:
       'Source for the writing-population estimate. This may come from a writing-specific census record, or be derived from broader usage estimates and adjusted using literacy rate and modality discounts.',
-    render: (object) => <LocaleCensusCitation locale={object} use="writing" />,
+    render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Writing} />,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
 ];
 
 export default columns.map((col) => ({
   ...col,
-  isInitiallyVisible: false,
+  isInitiallyVisible: col.isInitiallyVisible ?? false,
   columnGroup: 'Writing',
 }));

@@ -3,7 +3,6 @@ import React from 'react';
 import LanguageDetailsDigitalSupport from '@entities/language/digitalsupport/LanguageDetailsDigitalSupport';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
-import LanguageVitalitySection from '@entities/language/vitality/LanguageVitalitySection';
 
 import LanguageAttributes from './sections/LanguageAttributes';
 import LanguageCodes from './sections/LanguageCodes';
@@ -28,14 +27,17 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
 
       <div className="DetailsRow">
         <div className="DetailsBox">
-          <LanguagePopulationDetails lang={lang} />
+          <LanguagePopulationDetails lang={lang} speakingOrWriting="speaking" />
+        </div>
+        <div className="DetailsBox">
+          <LanguagePopulationDetails lang={lang} speakingOrWriting="writing" />
         </div>
         <div className="DetailsBox">
           <LanguageWikipediaSection lang={lang} />
         </div>
-        <div className="DetailsBox">
+        {/* <div className="DetailsBox">
           <LanguageVitalitySection lang={lang} />
-        </div>
+        </div> */}
       </div>
 
       <div className="DetailsRow">

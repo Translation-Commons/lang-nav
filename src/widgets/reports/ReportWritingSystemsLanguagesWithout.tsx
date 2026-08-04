@@ -90,7 +90,7 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
                 </div>
                 <div>
                   <label>Population:</label>
-                  <CountOfPeople count={lang.populationEstimate} />
+                  <CountOfPeople count={lang.pop.overall} />
                 </div>
               </CardInCardList>
             );

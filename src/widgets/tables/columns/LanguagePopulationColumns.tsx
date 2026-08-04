@@ -11,10 +11,11 @@ import Field from '@features/transforms/fields/Field';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
 import LanguagePopulationFromDescendants from '@entities/language/population/LanguagePopulationFromDescendants';
-import LanguagePopulationFromEthnologue from '@entities/language/population/LanguagePopulationFromEthnologue';
 import LanguagePopulationFromLocales from '@entities/language/population/LanguagePopulationFromLocales';
 import LanguagePopulationInSelectedTerritory from '@entities/language/population/LanguagePopulationInSelectedTerritory';
-import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
+import LanguagePopulationKnownWarning from '@entities/language/population/LanguagePopulationKnownWarning';
+import LanguagePopulationSource from '@entities/language/population/LanguagePopulationSource';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 const PopulationInTerritoryLabel: React.FC<{ isShortened?: boolean }> = ({
   isShortened = false,
@@ -45,32 +46,66 @@ const PopulationInTerritoryDescription: React.FC = () => {
 
 const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
   {
-    key: 'Best Population Estimate',
-    labelInColumnGroup: 'Best Estimate',
+    key: 'Population (est.)',
     description: (
       <>
-        The number of people that use this language (probably speak). This is estimated from one of
-        3 possible sources: inputted data aggregated from language databases, aggregated census data
-        and/or aggregated data from dialects. Click on the language&apos;s name to see more details.
+        The overall amount of people that speak, write, or sign this language. This is estimated
+        from one of 3 possible sources: inputted data aggregated from language databases, aggregated
+        census data and/or aggregated data from dialects.
       </>
     ),
-    render: (lang) => <LanguagePopulationEstimate lang={lang} />,
+    render: (lang) => <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Overall} />,
     field: Field.Population,
-    isInitiallyVisible: true,
+    isInitiallyVisible: false,
+  },
+  {
+    key: 'Speakers (est.)',
+    description: (
+      <>
+        The estimated number of people that speak this language. This is estimated from one of 3
+        possible sources: inputted data aggregated from language databases, aggregated census data
+        and/or aggregated data from dialects.
+      </>
+    ),
+    render: (lang) => (
+      <>
+        <LanguagePopulationKnownWarning lang={lang} speakingOrWriting="speaking" />
+        <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Speaking} />
+      </>
+    ),
+    field: Field.PopulationSpeaking,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
+  },
+  {
+    key: 'Writers (est.)',
+    description: (
+      <>
+        The estimated number of people that write in this language. For many people, this may not be
+        their mothertongue (L1), rather their second language (L2). This is estimated from one of 3
+        possible sources: inputted data aggregated from language databases, aggregated census data
+        and/or aggregated data from dialects.
+      </>
+    ),
+    render: (lang) => (
+      <>
+        <LanguagePopulationKnownWarning lang={lang} speakingOrWriting="writing" />
+        <LanguagePopulationEstimate lang={lang} focus={PopulationFocus.Writing} />
+      </>
+    ),
+    field: Field.PopulationWriting,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
   {
     key: 'Best Estimate Source',
-    description: 'The source category for the population estimate value.',
-    render: (lang) => (
-      <PopulationSourceCategoryDisplay sourceCategory={lang.populationEstimateSource} />
-    ),
+    description: 'The source category for the overall population estimate.',
+    render: (lang) => <LanguagePopulationSource lang={lang} />,
   },
   {
     key: 'Population (Rough)',
     labelInColumnGroup: '... rough estimate',
     description:
       'This is a rough estimate from variable internet databases (citations not available).',
-    render: (lang) => lang.populationRough,
+    render: (lang) => lang.pop.rough,
     field: Field.PopulationDirectlySourced,
   },
   {
@@ -78,7 +113,9 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: '... from Dialects',
     description:
       'Some of these languages may have data from constituent dialects/locales. They have been added up here.',
-    render: (lang) => <LanguagePopulationFromDescendants lang={lang} />,
+    render: (lang) => (
+      <LanguagePopulationFromDescendants lang={lang} speakingOrWriting="speaking" />
+    ),
     field: Field.PopulationOfDescendants,
   },
   {
@@ -90,15 +127,7 @@ const LanguagePopulationColumns: TableColumn<LanguageData>[] = [
         population from locales have been adjusted to {TerritoryDataYear} estimates.
       </>
     ),
-    render: (lang) => <LanguagePopulationFromLocales lang={lang} />,
-    valueType: TableValueType.Population,
-  },
-  {
-    key: 'Population (Ethnologue)',
-    labelInColumnGroup: '... from Ethnologue',
-    description:
-      'This is a lower bound estimate from Ethnologue, data from 2025. It may vastly underestimate the actual population.',
-    render: (lang) => <LanguagePopulationFromEthnologue lang={lang} />,
+    render: (lang) => <LanguagePopulationFromLocales lang={lang} speakingOrWriting="speaking" />,
     valueType: TableValueType.Population,
   },
   {

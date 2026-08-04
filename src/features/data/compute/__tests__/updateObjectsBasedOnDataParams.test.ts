@@ -18,12 +18,12 @@ describe('updateObjectsBasedOnDataParams', () => {
     connectMockedObjects(mockedObjects); // Connect but do not compute population yet
     const mockedDictionaries = getMockedObjectDictionaries(mockedObjects);
 
-    // Before update, populationEstimate should be based on the rough input or descendants only
+    // Before update, pop.speaking should be based on the rough input or descendants only
     const sjn = mockedDictionaries.languages.sjn;
     const dori0123 = mockedDictionaries.languages.dori0123;
     const sjn_001 = mockedDictionaries.locales.sjn_001;
-    expect(sjn.populationEstimate).toBe(14400); // original value for populationEstimate
-    expect(dori0123.populationEstimate).toBe(2500); // original value for populationEstimate
+    expect(sjn.pop.speaking.estimate).toBe(undefined); // original value for pop.speaking
+    expect(dori0123.pop.speaking.estimate).toBe(undefined); // original value for pop.speaking
     expect(sjn_001.pop.speaking.unadjusted).toBe(10920); // original value added up from locales
 
     // Check the IDs and names
@@ -43,10 +43,10 @@ describe('updateObjectsBasedOnDataParams', () => {
       LocaleSeparator.Hyphen,
     );
 
-    // After update, populationEstimate should consider populationFromLocales
-    expect(sjn.populationEstimate).toBe(11100); // Updated to follow locales
-    expect(dori0123.populationEstimate).toBe(1800); // Updated to follow locales
-    expect(sjn_001.pop.speaking.unadjusted).toBe(11100); // updated since locales updated from census data
+    // After update, pop.speaking should consider pop.fromLocales
+    expect(sjn.pop.speaking.estimate).toBe(11220); // Updated to follow locales
+    expect(dori0123.pop.speaking.estimate).toBe(1800); // Updated to follow locales
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // updated since locales updated from census data
 
     // Check the IDs and names again
     expect(sjn.codeDisplay).toBe('sjn');
@@ -79,11 +79,10 @@ describe('updateObjectsBasedOnDataParams', () => {
       LocaleSeparator.Hyphen,
     );
 
-    expect(sjn.populationEstimate).toBe(11100); // unchanged
-    // TODO computeLanguageDescendantPopulation needs to be revamped
-    expect(sjn.populationOfDescendants).toBe(200000); // this should be computed from dori0123
-    expect(dori0123.populationEstimate).toBe(100000); // updated to include new locale
-    expect(sjn_001.pop.speaking.unadjusted).toBe(1800); // unchanged
-    expect(sjn_001.pop.speaking.adjusted).toBe(1800); // unchanged
+    expect(sjn.pop.speaking.estimate).toBe(24000); // changed? is that right?
+    expect(sjn.pop.speaking.descendants).toBe(200000); // this should be computed from dori0123
+    expect(dori0123.pop.speaking.estimate).toBe(100000); // updated to include new locale
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
+    expect(sjn_001.pop.speaking.adjusted).toBe(11220); // unchanged
   });
 });

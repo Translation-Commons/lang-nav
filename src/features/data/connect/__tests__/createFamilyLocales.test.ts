@@ -23,7 +23,7 @@ describe('createFamilyLocales', () => {
       ...getBaseLanguageData('elv', 'Elvish'), // fictional language family code
       nameEndonym: 'ɛlvɪʃ',
       names: ['Elvish', 'Elven Languages', 'ɛlvɪʃ'],
-      populationRough: 50000,
+      pop: { rough: 50000, writing: {}, speaking: {} },
     };
     inputObjects['elv'] = elv;
     expect(getLocaleIDs(inputObjects)).toBe('sjn_BE sjn_ER dori0123_ER sjn_Teng_BE');

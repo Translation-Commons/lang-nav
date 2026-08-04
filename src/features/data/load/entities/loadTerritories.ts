@@ -22,8 +22,10 @@ export function parseTerritoryLine(line: string): TerritoryData {
     nameDisplay: parts[1],
     names: [parts[1]],
     scope: parseTerritoryScope(parts[2])!, // Throw if its not a valid scope, since this is a required field
-    population, // This may be recomputed later
-    populationFromUN: population,
+    pop: {
+      overall: population,
+      fromUN: population,
+    },
     containedUNRegionCode: parts[4] || undefined,
     sovereignCode: parts[5] || undefined,
   };
