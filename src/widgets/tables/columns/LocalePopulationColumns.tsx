@@ -26,6 +26,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     exportValue: (object) => getObjectPopulation(object),
     field: Field.Population,
     columnGroup: 'Demographics',
+    isInitiallyVisible: false,
   },
   {
     key: 'Population (Speaking)',
@@ -43,6 +44,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     exportValue: (object) => object.pop.speaking.adjusted,
     field: Field.PopulationSpeaking,
     columnGroup: 'Demographics',
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: 'Population (Direct)',
@@ -57,6 +59,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     render: (object) => object.pop.speaking.percentAdjusted,
     field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: '% of Global Language Speakers',
@@ -72,6 +75,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />,
     field: Field.SourceForPopulation,
     columnGroup: 'Demographics',
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: 'Population Records',

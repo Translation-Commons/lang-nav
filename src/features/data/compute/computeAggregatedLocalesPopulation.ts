@@ -88,21 +88,31 @@ function sumUpPopulationFromChildLanguages(locale: LocaleData, use: 'speaking' |
   const pop = locale.pop[use];
   if (!relatedLocales || !territory || pop.census) return;
 
+  // Add up the adjusted population of unique child locales (eg don't double count
+  // zh_Hans_SG and zh_Hant_SG). The adjusted population is corrected to the current year
+  // to smooth out population growth between data collected in different years.
   const uniqueChildLocales = uniqueBy(
     [...(relatedLocales.childLanguages ?? [])].sort(
       (a, b) => (b.pop[use].adjusted ?? 0) - (a.pop[use].adjusted ?? 0),
     ),
     (loc) => loc.languageCode || '',
   ).filter((loc) => loc.languageCode !== '');
+  let newPopulationEstimate =
+    sumBy(uniqueChildLocales, (loc) => loc.pop[use].adjusted) || undefined;
+  if (!newPopulationEstimate) return; // do nothing if its 0 or undefined
 
-  // Add up the adjusted population of unique child locales (eg don't double count
-  // zh_Hans_SG and zh_Hant_SG). The adjusted population is corrected to the current year
-  // to smooth out population growth between data collected in different years.
-  pop.source = PopulationSourceCategory.AggregatedFromLanguages;
-  pop.adjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].adjusted) || undefined;
+  // Limit the new estimate if it is greater than the population
   const maxPopulation = territory.pop[use] || territory.pop.overall;
-  if (pop.adjusted && pop.adjusted > maxPopulation) pop.adjusted = maxPopulation;
-  relatedLocales.sumOfPopulationFromChildLanguages = pop.adjusted;
+  if (newPopulationEstimate > maxPopulation) newPopulationEstimate = maxPopulation;
+  relatedLocales.sumOfPopulationFromChildLanguages = newPopulationEstimate;
+
+  // Don't use it if there already is a population estimate that is close
+  // For instance, a macrolanguage may already have data from a census
+  if (pop.adjusted && newPopulationEstimate <= pop.adjusted) return;
+
+  // Otherwise great! We got a new value
+  pop.adjusted = newPopulationEstimate;
+  pop.source = PopulationSourceCategory.AggregatedFromLanguages;
 
   // Set population to be the sum of the unadjusted population
   pop.unadjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].unadjusted || 0) || undefined;

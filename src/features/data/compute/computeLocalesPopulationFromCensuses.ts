@@ -1,4 +1,5 @@
 import { CensusLanguageUse } from '@entities/census/CensusTypes';
+import getPopulationSourceCategoryForCensus from '@entities/census/getPopulationSourceCategoryForCensus';
 import getLanguageModalityDiscount from '@entities/language/population/getLanguageModalityDiscount';
 import { LocaleData, LocaleInCensus } from '@entities/locale/LocaleTypes';
 
@@ -25,7 +26,7 @@ export function getPopulationRecordRank(
   }
   // Then we have other factors that are less important, mostly for tie-breaking.
   // rank += (6 - getCensusCollectorTypeRank(record.census.collectorType)) / 6;
-  rank += (yearCollected - 2000) / 20; // 2025 -> 1.25, 2000 -> 0, 1990 -> -0.5, 1980 -> -1.25, maybe this is too strong
+  rank += (yearCollected - 2000) / 40; // 2025 -> 1.25, 2000 -> 0, 1990 -> -0.5, 1980 -> -1.25, maybe this is too strong
   if (acquisitionOrder === 'Any') rank += 0.12;
   if (acquisitionOrder === 'L1') rank += 0.1;
   if (acquisitionOrder === 'L2') rank += 0.05;
@@ -83,19 +84,23 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
 function applyPopRecord(
   locale: LocaleData,
   record: LocaleInCensus,
-  use: 'speaking' | 'writing',
+  speakingOrWriting: 'speaking' | 'writing',
 ): void {
   const territory = locale.territory;
-  const pop = locale.pop[use];
+  const pop = locale.pop[speakingOrWriting];
   pop.census = record.census;
+  pop.source = getPopulationSourceCategoryForCensus(record.census);
   pop.unadjusted = record.populationEstimate;
 
   // If the census record is not specifically about speaking a language, apply a discount factor
   // based on the regular medium of use and (for writing) the literacy rate of the territory
-  if (!isRecordPrecise(record, use)) {
+  if (!isRecordPrecise(record, speakingOrWriting)) {
     pop.literacyDiscount =
-      use === 'writing' ? (territory?.literacyPercent ?? 100) / 100 : undefined;
-    pop.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, use);
+      speakingOrWriting === 'writing' ? (territory?.literacyPercent ?? 100) / 100 : undefined;
+    pop.modalityDiscount = getLanguageModalityDiscount(
+      locale.language?.modality,
+      speakingOrWriting,
+    );
   } else {
     pop.literacyDiscount = undefined;
     pop.modalityDiscount = undefined;

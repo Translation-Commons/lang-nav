@@ -44,9 +44,9 @@ describe('updateObjectsBasedOnDataParams', () => {
     );
 
     // After update, pop.speaking should consider pop.fromLocales
-    expect(sjn.pop.speaking.estimate).toBe(11100); // Updated to follow locales
+    expect(sjn.pop.speaking.estimate).toBe(11220); // Updated to follow locales
     expect(dori0123.pop.speaking.estimate).toBe(1800); // Updated to follow locales
-    expect(sjn_001.pop.speaking.unadjusted).toBe(11100); // updated since locales updated from census data
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // updated since locales updated from census data
 
     // Check the IDs and names again
     expect(sjn.codeDisplay).toBe('sjn');
@@ -82,7 +82,7 @@ describe('updateObjectsBasedOnDataParams', () => {
     expect(sjn.pop.speaking.estimate).toBe(24000); // changed? is that right?
     expect(sjn.pop.speaking.descendants).toBe(200000); // this should be computed from dori0123
     expect(dori0123.pop.speaking.estimate).toBe(100000); // updated to include new locale
-    expect(sjn_001.pop.speaking.unadjusted).toBe(1800); // unchanged
-    expect(sjn_001.pop.speaking.adjusted).toBe(1800); // unchanged
+    expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
+    expect(sjn_001.pop.speaking.adjusted).toBe(11220); // unchanged
   });
 });

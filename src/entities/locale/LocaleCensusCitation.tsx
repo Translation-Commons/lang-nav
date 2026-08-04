@@ -20,7 +20,12 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, focus, size = 'full' })
   const speakingOrWriting = getSpeakingOrWritingFocus(locale, focus);
   const { census, source } = locale.pop[speakingOrWriting];
 
-  if (census != null) return <CensusCitation census={census} />;
+  if (
+    census != null &&
+    source !== PopulationSourceCategory.AggregatedFromLanguages &&
+    source !== PopulationSourceCategory.AggregatedFromTerritories
+  )
+    return <CensusCitation census={census} />;
   if (source != null) return <PopulationSource populationSource={source} size={size} />;
   return <Deemphasized>n/a</Deemphasized>;
 };

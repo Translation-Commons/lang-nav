@@ -51,6 +51,7 @@ const columns: TableColumn<LocaleData>[] = [
     ),
     exportValue: (object) => object.pop.writing.adjusted,
     field: Field.PopulationWriting,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
   {
     key: 'Population (Writing, percent)',
@@ -58,17 +59,19 @@ const columns: TableColumn<LocaleData>[] = [
       'The percent of people in the territory that read and/or write in the language, often computed from other estimates, these should be taken with a grain of salt.',
     render: (object) => object.pop.writing.percentAdjusted,
     valueType: TableValueType.Decimal,
+    isInitiallyVisible: (params) => params.populationFocus === PopulationFocus.Writing,
   },
   {
     key: 'Population (Writing, source)',
     description:
       'Source for the writing-population estimate. This may come from a writing-specific census record, or be derived from broader usage estimates and adjusted using literacy rate and modality discounts.',
     render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Writing} />,
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
 ];
 
 export default columns.map((col) => ({
   ...col,
-  isInitiallyVisible: false,
+  isInitiallyVisible: col.isInitiallyVisible ?? false,
   columnGroup: 'Writing',
 }));

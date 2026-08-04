@@ -188,9 +188,9 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(langRaw?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(undefined);
 
     const langUpdated = mockUpdated.allLanguoids.find((l) => l.ID === 'sjn');
-    expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(13800);
+    expect(langUpdated?.pop.speaking.estimate, 'pop.speaking').toBe(13920);
     expect(langUpdated?.pop.rough, 'pop.rough').toBe(24000);
-    expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(13800); // <-- UPDATED VALUE
+    expect(langUpdated?.pop.speaking.fromLocales, 'pop.fromLocales').toBe(13920); // <-- UPDATED VALUE
   });
 
   it('adding a census for the other region will cascade correctly', () => {
@@ -257,36 +257,36 @@ describe('computeLocalePopulationFromCensuses', () => {
     expect(
       langOriginal?.pop.speaking.fromLocales,
       'langOriginal?.pop.fromLocales, Prior value w/ ER & BE',
-    ).toBe(11100);
+    ).toBe(11220);
     expect(
       langOnlyCensus?.pop.speaking.fromLocales,
       'langOnlyCensus?.pop.fromLocales, No new locale added so AM not counted',
-    ).toBe(11100);
+    ).toBe(11220);
     expect(
       langOnlyLocale?.pop.speaking.fromLocales,
       'langOnlyLocale?.pop.fromLocales, New locale added so AM counted but not adjusted ',
-    ).toBe(13100); // <-- UPDATED VALUE
+    ).toBe(13220); // <-- UPDATED VALUE
     expect(
       langBothNewEntities?.pop.speaking.fromLocales,
       'langBothNewEntities?.pop.fromLocales, New locale added so AM counted and adjusted',
-    ).toBe(29100); // <-- UPDATED VALUE
+    ).toBe(29220); // <-- UPDATED VALUE
 
     // The ultimate population estimate will always be upcated because there is census data now
     expect(
       langOriginal?.pop.speaking.estimate,
       'langOriginal?.pop.speaking, updated value from locales',
-    ).toBe(11100);
+    ).toBe(11220);
     expect(
       langOnlyCensus?.pop.speaking.estimate,
       'langOnlyCensus?.pop.speaking, updated value from locales',
-    ).toBe(11100);
+    ).toBe(11220);
     expect(
       langOnlyLocale?.pop.speaking.estimate,
       'langOnlyLocale?.pop.speaking, updated value from locales',
-    ).toBe(13100);
+    ).toBe(13220);
     expect(
       langBothNewEntities?.pop.speaking.estimate,
       'langBothNewEntities?.pop.speaking, updated value from locales',
-    ).toBe(29100);
+    ).toBe(29220);
   });
 });
