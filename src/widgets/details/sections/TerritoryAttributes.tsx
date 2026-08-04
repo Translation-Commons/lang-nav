@@ -13,13 +13,18 @@ import {
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
 const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
-  const { population, landArea, gdp, literacyPercent } = territory;
+  const { pop, landArea, gdp, literacyPercent } = territory;
 
   return (
     <DetailsSection title="Attributes">
-      {!Number.isNaN(population) && (
+      {pop.overall > 0 && (
         <DetailsField title="Population">
-          <CountOfPeople count={population} />
+          <CountOfPeople count={pop.overall} />
+        </DetailsField>
+      )}
+      {(pop.writing ?? 0) > 0 && (
+        <DetailsField title="Population (Writing)">
+          <CountOfPeople count={pop.writing} />
         </DetailsField>
       )}
       {literacyPercent && !Number.isNaN(literacyPercent) && (
@@ -33,9 +38,9 @@ const TerritoryAttributes: React.FC<{ territory: TerritoryData }> = ({ territory
           {numberToSigFigs(landArea, 3)?.toLocaleString()} km²
         </DetailsField>
       )}
-      {landArea && population && (
+      {landArea && pop.overall && (
         <DetailsField title="Density">
-          {numberToFixedUnlessSmall(population / landArea, 3)} people/km²
+          {numberToFixedUnlessSmall(pop.overall / landArea, 3)} people/km²
         </DetailsField>
       )}
     </DetailsSection>

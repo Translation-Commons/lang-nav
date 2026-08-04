@@ -46,7 +46,7 @@ const ReportCensusCountries: React.FC = () => {
         })),
         {
           key: 'Population',
-          render: (territory) => territory.population,
+          render: (territory) => territory.pop.overall,
           field: Field.Population,
         },
         {

@@ -1,7 +1,7 @@
 enum Field {
   // Common, put these first
   None = 'None', // Empty
-  Population = 'Population',
+  Population = 'Population', // Overall population, can be speaking and/or writing
   Code = 'Code',
   Name = 'Name',
 
@@ -62,6 +62,7 @@ enum Field {
 
   // Quantity - Population
   PopulationDirectlySourced = 'Population Directly Sourced',
+  PopulationSpeaking = 'Population (Speaking)',
   PopulationWriting = 'Population (Writing)',
   PopulationOfDescendants = 'Population of Descendants',
 

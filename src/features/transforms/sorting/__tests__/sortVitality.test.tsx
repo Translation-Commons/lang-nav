@@ -103,8 +103,7 @@ describe('Vitality Sorting', () => {
         nameDisplay: 'United States',
         names: ['United States'],
         scope: TerritoryScope.Country,
-        population: 0,
-        populationFromUN: 0,
+        pop: { overall: 0 },
       };
       computeRecursiveLanguageData([lang]);
 

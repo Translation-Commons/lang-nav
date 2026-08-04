@@ -2,7 +2,9 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { PopulationSourceCategory } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -14,18 +16,18 @@ import LanguagePopulationFromLocales from './LanguagePopulationFromLocales';
 
 export const LanguagePopulationEstimate: React.FC<{
   lang: LanguageData;
-  use?: 'speaking' | 'writing';
-}> = ({ lang, use }) => {
-  use = use ?? (lang.pop.overall === lang.pop.writing.estimate ? 'writing' : 'speaking');
-  const pop = lang.pop[use];
+  focus: PopulationFocus;
+}> = ({ lang, focus }) => {
+  const speakingOrWriting = getSpeakingOrWritingFocus(lang, focus);
+  const pop = lang.pop[speakingOrWriting];
 
   if (pop.estimate == null) return <Deemphasized>no data</Deemphasized>;
 
   switch (pop.source ?? PopulationSourceCategory.Other) {
     case PopulationSourceCategory.AggregatedFromTerritories:
-      return <LanguagePopulationFromLocales lang={lang} use={use} />;
+      return <LanguagePopulationFromLocales lang={lang} speakingOrWriting={speakingOrWriting} />;
     case PopulationSourceCategory.AggregatedFromLanguages:
-      return <LanguagePopulationOfDescendants lang={lang} use={use} />;
+      return <LanguagePopulationOfDescendants lang={lang} speakingOrWriting={speakingOrWriting} />;
     case PopulationSourceCategory.Algorithmic:
       return (
         <Hoverable hoverContent="Algorithmically derived estimate based on various data sources.">

@@ -27,10 +27,10 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
 
       <div className="DetailsRow">
         <div className="DetailsBox">
-          <LanguagePopulationDetails lang={lang} use="speaking" />
+          <LanguagePopulationDetails lang={lang} speakingOrWriting="speaking" />
         </div>
         <div className="DetailsBox">
-          <LanguagePopulationDetails lang={lang} use="writing" />
+          <LanguagePopulationDetails lang={lang} speakingOrWriting="writing" />
         </div>
         <div className="DetailsBox">
           <LanguageWikipediaSection lang={lang} />

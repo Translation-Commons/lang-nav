@@ -13,10 +13,12 @@ import ReportID from '@widgets/reports/ReportID';
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import getColorGradientForField from '@features/transforms/coloring/getColorGradientForField';
 import Field from '@features/transforms/fields/Field';
+import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { LocaleSeparator, ObjectType, PageParams, SearchableField, View } from './PageParamTypes';
 
@@ -48,6 +50,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   page: 1,
   pinned: [],
   profile: ProfileType.LanguageEthusiast,
+  populationFocus: PopulationFocus.Overall,
   populationMax: 10_000_000_000, // higher than the world population
   populationMin: -1, // allow undefined population as well as definite 0s
   reportID: ReportID.EntitiesMissingFields,
@@ -80,6 +83,7 @@ export const DEFAULTS_BY_PROFILE: Record<ProfileType, Partial<PageParams>> = {
   [ProfileType.TechDeveloper]: {
     view: View.Table,
     languageSource: LanguageSource.CLDR,
+    populationFocus: PopulationFocus.Writing,
     territoryFilter: '', // Default to none but included here since its an important filter
   },
   [ProfileType.PolicyMaker]: {
@@ -98,6 +102,7 @@ export function getDefaultParams(
   objectType?: ObjectType,
   view?: View | undefined,
   profile?: ProfileType | undefined,
+  populationFocus?: PopulationFocus | undefined,
   colorBy?: Field,
 ): PageParams {
   let params = GLOBAL_DEFAULTS;
@@ -108,12 +113,13 @@ export function getDefaultParams(
     params.profile = profile;
   }
 
-  // Clone to avoid mutating the defaults
+  // Clone to avoid mutating the defaults (eg. arrays)
   params = structuredClone(params);
 
   // Directly set the view & objectType if provided
   if (view != null) params.view = view;
   if (objectType != null) params.objectType = objectType;
+  if (populationFocus != null) params.populationFocus = populationFocus;
   if (colorBy != null) params.colorBy = colorBy;
 
   // Apply a few view-specific overrides
@@ -152,6 +158,7 @@ export function getDefaultParams(
     params.colorGradient = getColorGradientForField(params.colorBy);
   }
 
+  // Set population sorting behavior
   if (params.objectType === ObjectType.Org) {
     // Orgs don't have population, so sort by count of censuses by default
     if (params.sortBy === Field.Population) params.sortBy = Field.CountOfCensuses;
@@ -160,6 +167,18 @@ export function getDefaultParams(
     // Keyboards don't have population, so sort by name by default
     if (params.sortBy === Field.Population) params.sortBy = Field.Name;
     if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
+  } else if (params.objectType === ObjectType.WritingSystem) {
+    // For writing sytems, the population == population (writing) but its more accurate to refer to it as the writing population
+    if (params.sortBy === Field.Population) params.sortBy = Field.PopulationWriting;
+    if (params.secondarySortBy === Field.Population)
+      params.secondarySortBy = Field.PopulationWriting;
+  } else if (params.sortBy === Field.Population) {
+    // If there is a specified population focus, the default sort should make the population focus.
+    if (populationFocus != null) {
+      if (params.sortBy === Field.Population)
+        params.sortBy = getFieldForPopulationFocus(populationFocus);
+      // Note: Secondary sort by remains as population (overall) for tie-breaking
+    }
   }
 
   return params;

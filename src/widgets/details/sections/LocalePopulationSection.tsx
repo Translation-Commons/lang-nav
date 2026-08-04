@@ -7,9 +7,11 @@ import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
+import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
@@ -30,13 +32,13 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       <div className="DetailsRow">
         <MajorPopulationBox
           locale={locale}
-          use="speaking"
+          focus={PopulationFocus.Speaking}
           toggleBreakdown={toggleBreakdown}
           showBreakdown={showBreakdown}
         />
         <MajorPopulationBox
           locale={locale}
-          use="writing"
+          focus={PopulationFocus.Writing}
           toggleBreakdown={toggleBreakdown}
           showBreakdown={showBreakdown}
         />
@@ -84,22 +86,21 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
 
 const MajorPopulationBox: React.FC<{
   locale: LocaleData;
-  use: 'speaking' | 'writing';
+  focus: PopulationFocus;
   toggleBreakdown: () => void;
   showBreakdown: boolean;
-}> = ({ locale, use, toggleBreakdown, showBreakdown }) => {
-  const pop = locale.pop[use];
+}> = ({ locale, focus, toggleBreakdown, showBreakdown }) => {
+  const speakingOrWriting = getSpeakingOrWritingFocus(locale, focus);
+  const pop = locale.pop[speakingOrWriting];
 
   return (
     <div className="DetailsBox">
       <DetailsSection
-        title={
-          <Title toggleBreakdown={toggleBreakdown}>
-            Population ({use === 'writing' ? 'Writing' : 'Speaking'})
-          </Title>
-        }
+        title={<Title toggleBreakdown={toggleBreakdown}>Population ({speakingOrWriting})</Title>}
       >
-        {showBreakdown && <LocalePopulationBreakdown locale={locale} use={use} />}
+        {showBreakdown && (
+          <LocalePopulationBreakdown locale={locale} speakingOrWriting={speakingOrWriting} />
+        )}
         {pop.adjusted == null ? (
           <Deemphasized>No population data available.</Deemphasized>
         ) : (
@@ -107,7 +108,7 @@ const MajorPopulationBox: React.FC<{
             <DetailsStatBlock
               label={
                 <>
-                  <LocaleCensusCitation locale={locale} use={use} />
+                  <LocaleCensusCitation locale={locale} focus={focus} />
                   {pop.adjusted != pop.unadjusted && <span>, adjusted</span>}
                 </>
               }

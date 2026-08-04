@@ -95,6 +95,7 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.Date:
     case Field.Population:
     case Field.PopulationDirectlySourced:
+    case Field.PopulationSpeaking:
     case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:

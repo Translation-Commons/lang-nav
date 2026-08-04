@@ -76,6 +76,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.VitalityEthnologueFine,
 
         Field.PopulationDirectlySourced,
+        Field.PopulationSpeaking,
         Field.PopulationWriting,
         Field.Literacy,
         Field.PercentOfOverallLanguageSpeakers,
@@ -125,6 +126,8 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Longitude,
 
         Field.PopulationDirectlySourced,
+        Field.PopulationSpeaking,
+        Field.PopulationWriting,
         Field.PopulationOfDescendants,
         Field.PercentOfTerritoryPopulation,
         Field.PopulationPercentInBiggestDescendantLanguage,
@@ -166,6 +169,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Latitude,
         Field.Longitude,
 
+        Field.PopulationSpeaking,
         Field.PopulationWriting,
         Field.PopulationDirectlySourced,
         Field.PopulationOfDescendants,
@@ -205,6 +209,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfCountries,
         Field.CountOfWritingSystems,
 
+        Field.PopulationWriting,
         Field.PopulationOfDescendants,
 
         Field.Depth,
@@ -226,6 +231,9 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfChildTerritories,
         Field.CountOfCountries, // 0 or 1
         Field.CountOfVariants,
+
+        Field.PopulationSpeaking,
+        Field.PopulationWriting,
 
         Field.Date,
         Field.Description,
@@ -313,6 +321,8 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.Longitude,
 
         Field.PopulationDirectlySourced,
+        Field.PopulationSpeaking,
+        Field.PopulationWriting,
         Field.PercentOfOverallLanguageSpeakers,
         Field.PercentOfTerritoryPopulation,
         Field.PopulationOfDescendants,
@@ -347,6 +357,8 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.CountOfVariants,
 
         Field.PopulationDirectlySourced,
+        Field.PopulationSpeaking,
+        Field.PopulationWriting,
         Field.PercentOfOverallLanguageSpeakers,
       ];
     case Transform.Search:

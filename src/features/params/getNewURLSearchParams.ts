@@ -1,6 +1,8 @@
 import { stringifyColumnVisibilityBinaries } from '@features/table/useColumnVisibility';
 import Field from '@features/transforms/fields/Field';
 
+import PopulationFocus from '@entities/types/PopulationFocus';
+
 import { ObjectType, PageParamKey, PageParams, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
@@ -77,6 +79,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     next.get('objectType') as ObjectType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
+    next.get('populationFocus') as PopulationFocus,
     next.get('colorBy') as Field,
   );
 
@@ -87,6 +90,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     if (key === 'objectType' && value !== ObjectType.Language) return;
     if (key === 'view') return;
     if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
+    if (key === 'populationFocus' && value !== PopulationFocus.Overall) return;
     if (key === 'colorBy' && value !== Field.None) return;
 
     // If the default is the empty array you can remove it
@@ -111,6 +115,7 @@ function clearContextDependentParams(
     prev?.get('objectType') as ObjectType,
     prev?.get('view') as View,
     prev?.get('profile') as ProfileType,
+    prev?.get('populationFocus') as PopulationFocus,
     prev?.get('colorBy') as Field,
   );
 

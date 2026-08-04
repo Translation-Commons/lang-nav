@@ -36,8 +36,7 @@ describe('getFilterByVitality', () => {
     nameDisplay: 'Test Territory',
     names: ['Test Territory'],
     scope: TerritoryScope.Country,
-    population: 1000,
-    populationFromUN: 1000,
+    pop: { overall: 1000 },
   };
 
   function mockParams(params: Partial<PageParams>) {

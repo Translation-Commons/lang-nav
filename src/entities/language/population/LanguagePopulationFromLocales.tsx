@@ -16,12 +16,12 @@ import { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;
-  use: 'speaking' | 'writing';
+  speakingOrWriting: 'speaking' | 'writing';
 };
 
-const LanguagePopulationFromLocales: React.FC<Props> = ({ lang, use }) => {
+const LanguagePopulationFromLocales: React.FC<Props> = ({ lang, speakingOrWriting }) => {
   const { updatePageParams } = usePageParams();
-  if (!lang.pop[use].fromLocales) return null;
+  if (!lang.pop[speakingOrWriting].fromLocales) return null;
   const onClick = useCallback(() => {
     updatePageParams({
       languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
@@ -32,19 +32,24 @@ const LanguagePopulationFromLocales: React.FC<Props> = ({ lang, use }) => {
 
   return (
     <Hoverable
-      hoverContent={<LanguagePopulationBreakdownFromLocales lang={lang} use={use} />}
+      hoverContent={
+        <LanguagePopulationBreakdownFromLocales lang={lang} speakingOrWriting={speakingOrWriting} />
+      }
       onClick={onClick}
     >
-      <CountOfPeople count={lang.pop[use].fromLocales} />
+      <CountOfPeople count={lang.pop[speakingOrWriting].fromLocales} />
     </Hoverable>
   );
 };
 
-export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({ lang, use }) => {
+export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({
+  lang,
+  speakingOrWriting,
+}) => {
   const filterFunc = (scope?: TerritoryScope) =>
     scope === TerritoryScope.Country || scope === TerritoryScope.Dependency;
   const sortFunc = (a: LocaleData, b: LocaleData) =>
-    (b.pop[use].adjusted || 0) - (a.pop[use].adjusted || 0);
+    (b.pop[speakingOrWriting].adjusted || 0) - (a.pop[speakingOrWriting].adjusted || 0);
 
   const localesFromUniqueTerritories = Object.values(
     groupBy(
@@ -55,8 +60,8 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({ lang, 
 
   return (
     <>
-      Computed by adding up the {use} populations from data in countries across the world, linearly
-      adjusted to 2025 numbers. Click to see the full table.
+      Computed by adding up the {speakingOrWriting} populations from data in countries across the
+      world, linearly adjusted to 2025 numbers. Click to see the full table.
       <table>
         <tbody>
           {localesFromUniqueTerritories
@@ -66,7 +71,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({ lang, 
                 <td>
                   <HoverableObjectName object={locale} labelSource="territory" />
                 </td>
-                <CellPopulation population={locale.pop[use].adjusted} />
+                <CellPopulation population={locale.pop[speakingOrWriting].adjusted} />
               </tr>
             ))}
           {localesFromUniqueTerritories.length > 10 && (
@@ -75,7 +80,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({ lang, 
               <CellPopulation
                 population={sumBy(
                   localesFromUniqueTerritories.slice(10),
-                  (locale) => locale.pop[use].adjusted || 0,
+                  (locale) => locale.pop[speakingOrWriting].adjusted || 0,
                 )}
               />
             </tr>

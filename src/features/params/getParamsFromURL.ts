@@ -12,6 +12,7 @@ import {
   VitalityEthnologueCoarse,
   VitalityEthnologueFine,
 } from '@entities/language/vitality/VitalityTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -123,6 +124,9 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.reportID:
         params.reportID = parseInt(value) as ReportID;
+        break;
+      case PageParamKey.populationFocus:
+        params.populationFocus = value as PopulationFocus;
         break;
 
       // Fields

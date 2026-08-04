@@ -12,8 +12,8 @@ export function computeContainedTerritoryStats(terr: TerritoryData | undefined):
 
   // Compute region data that is added up from data within it.
   if (isTerritoryGroup(terr.scope)) {
-    const newPopulation = sumBy(containsTerritories, (t) => t.population ?? 0);
-    if (newPopulation) terr.population = newPopulation;
+    const newPopulation = sumBy(containsTerritories, (t) => t.pop.overall ?? 0);
+    if (newPopulation) terr.pop.overall = newPopulation;
 
     const landArea = sumBy(containsTerritories, (t) => t.landArea ?? 0);
     if (landArea) terr.landArea = landArea;
@@ -27,9 +27,10 @@ export function computeContainedTerritoryStats(terr: TerritoryData | undefined):
   // For literacy we will combine proportional to the population
   terr.literacyPercent ??=
     (containsTerritories.reduce(
-      (sum, t) => sum + (t.literacyPercent ?? 0) * (t.population ?? 0),
+      (sum, t) => sum + (t.literacyPercent ?? 0) * (t.pop.overall ?? 0),
       0,
-    ) ?? 0) / terr.population;
+    ) ?? 0) / terr.pop.overall;
+  terr.pop.writing ??= Math.round(((terr.pop.overall ?? 0) * (terr.literacyPercent ?? 0)) / 100.0);
 }
 
 /**

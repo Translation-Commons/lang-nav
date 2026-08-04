@@ -185,8 +185,8 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_123',
       'sjn_Teng_001',
       'ER',
-      'dori0123',
       'sjn_ER',
+      'dori0123',
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
@@ -200,10 +200,10 @@ describe('getSortByParameterized', () => {
     //   2) sort is stable to the input order
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
       'dori0123',
-      'sjn_ER',
       'dori0123_ER',
       'dori0123_123',
       'dori0123_001',
+      'sjn_ER',
       'ER',
       'sjn_Teng_BE', // lower than sjn_BE because not updated by census
       'sjn_Teng_123',
@@ -258,26 +258,26 @@ describe('getSortByParameterized', () => {
     const field = Field.PopulationWriting;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
-      'sjn            8541.0',
-      'sjn_123        8541.0',
-      'sjn_001        8541.0',
+      '001            48124.0',
+      '123            28524.0',
+      'Teng           26500.0',
+      'AM             19600.0',
+      'HA             15444.0',
+      'BE             10800.0',
+      'sjn            10194.0',
+      'sjn_123        10194.0',
+      'sjn_001        10194.0',
       'sjn_BE         8370.0',
       'sjn_Teng_BE    8100.0',
       'sjn_Teng_123   8100.0',
       'sjn_Teng_001   8100.0',
+      'ER             2280.0',
+      'sjn_ER         1824.0',
       'dori0123       171.0',
-      'sjn_ER         171.0',
       'dori0123_ER    171.0',
       'dori0123_123   171.0',
       'dori0123_001   171.0',
-      '123            ',
-      'BE             ',
-      'ER             ',
-      'HA             ',
-      'AM             ',
-      '001            ',
       'be0590         ',
-      'Teng           ',
       'tolkorth       ',
     ]);
   });
@@ -317,17 +317,17 @@ describe('getSortByParameterized', () => {
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
     expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
       'be0590         100.0', // 100.0% of Beleriand in the census
+      'sjn_ER         80.0',
       'sjn_BE         77.5',
-      'sjn_ER         75.0',
       'dori0123_ER    75.0', // dori0123_ER is 75% of ER
       'sjn_Teng_BE    75.0',
       '123            60.0', // 60% of world
       'HA             52.0', // of middle earth
       'BE             40.0', // of middle earth
       'AM             40.0', // of world
-      'sjn_123        37.0', // of middle earth
+      'sjn_123        37.4', // of middle earth
       'sjn_Teng_123   30.0', // of middle earth
-      'sjn_001        22.2', // of world
+      'sjn_001        22.4', // of world
       'sjn_Teng_001   18.0', // of world
       'ER             8.0', // of middle earth
       'dori0123_123   6.0', // of middle earth
@@ -350,12 +350,12 @@ describe('getSortByParameterized', () => {
       'dori0123_123   100.0',
       'sjn_001        100.0',
       'dori0123_001   100.0',
-      'sjn_BE         83.8',
-      'sjn_Teng_BE    81.1',
-      'sjn_Teng_123   81.1',
-      'sjn_Teng_001   81.1',
-      'dori0123       16.2',
-      'sjn_ER         16.2',
+      'sjn_BE         82.9',
+      'sjn_Teng_BE    80.2',
+      'sjn_Teng_123   80.2',
+      'sjn_Teng_001   80.2',
+      'sjn_ER         17.1',
+      'dori0123       16.0',
       // All below undefined, stable to input order
       '123            ',
       'sjn            ',
@@ -377,8 +377,8 @@ describe('getSortByParameterized', () => {
       SortBehavior.Normal,
     );
     expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
-      'BE',
       'ER',
+      'BE',
       '123',
       '001',
       // All undefined after this, stable to input order
@@ -674,16 +674,16 @@ describe('getSortByParameterized', () => {
       '001            96.2', // averaged from Aman & Middle Earth by computeContainedTerritoryStats
       '123            95.1', // averaged from territories by computeContainedTerritoryStats
       'ER             95.0', // literacy rate for Eriador
+      'sjn_ER         95.0',
+      'sjn            90.9', // aggregated from locales
+      'sjn_123        90.9',
+      'sjn_001        90.9',
       'sjn_Teng_BE    90.0',
       'sjn_Teng_123   90.0',
       'sjn_Teng_001   90.0',
       'BE             90.0', // literacy rate for Beleriand
       'sjn_BE         90.0',
-      'sjn            76.9', // aggregated from locales
-      'sjn_123        76.9',
-      'sjn_001        76.9',
       'dori0123       9.5', // Discounted for being a mostly spoken language
-      'sjn_ER         9.5',
       'dori0123_ER    9.5',
       'dori0123_123   9.5',
       'dori0123_001   9.5',

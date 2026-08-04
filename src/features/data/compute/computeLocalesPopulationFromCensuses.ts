@@ -1,4 +1,5 @@
 import { CensusLanguageUse } from '@entities/census/CensusTypes';
+import getPopulationSourceCategoryForCensus from '@entities/census/getPopulationSourceCategoryForCensus';
 import getLanguageModalityDiscount from '@entities/language/population/getLanguageModalityDiscount';
 import { LocaleData, LocaleInCensus } from '@entities/locale/LocaleTypes';
 
@@ -25,7 +26,7 @@ export function getPopulationRecordRank(
   }
   // Then we have other factors that are less important, mostly for tie-breaking.
   // rank += (6 - getCensusCollectorTypeRank(record.census.collectorType)) / 6;
-  rank += (yearCollected - 2000) / 20; // 2025 -> 1.25, 2000 -> 0, 1990 -> -0.5, 1980 -> -1.25, maybe this is too strong
+  rank += (yearCollected - 2000) / 40; // 2025 -> 1.25, 2000 -> 0, 1990 -> -0.5, 1980 -> -1.25, maybe this is too strong
   if (acquisitionOrder === 'Any') rank += 0.12;
   if (acquisitionOrder === 'L1') rank += 0.1;
   if (acquisitionOrder === 'L2') rank += 0.05;
@@ -66,7 +67,7 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
   if (speaking.unadjusted == null) return; // Nothing to go from
 
   if (speaking.percent == null)
-    speaking.percent = (speaking.unadjusted / (locale.territory?.population || 1)) * 100;
+    speaking.percent = (speaking.unadjusted / (locale.territory?.pop.overall || 1)) * 100;
   speaking.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, 'speaking');
   speaking.percentAdjusted = speaking.percent * (speaking.modalityDiscount ?? 1);
   speaking.adjusted = speaking.unadjusted * (speaking.modalityDiscount ?? 1);
@@ -77,25 +78,29 @@ function computePopulationWithoutCensusRecords(locale: LocaleData): void {
   writing.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, 'writing');
   writing.percentAdjusted =
     writing.percent * (writing.literacyDiscount ?? 1) * (writing.modalityDiscount ?? 1);
-  writing.adjusted = (writing.percentAdjusted / 100.0) * (locale.territory?.population || 1);
+  writing.adjusted = (writing.percentAdjusted / 100.0) * (locale.territory?.pop.overall || 1);
 }
 
 function applyPopRecord(
   locale: LocaleData,
   record: LocaleInCensus,
-  use: 'speaking' | 'writing',
+  speakingOrWriting: 'speaking' | 'writing',
 ): void {
   const territory = locale.territory;
-  const pop = locale.pop[use];
+  const pop = locale.pop[speakingOrWriting];
   pop.census = record.census;
+  pop.source = getPopulationSourceCategoryForCensus(record.census);
   pop.unadjusted = record.populationEstimate;
 
   // If the census record is not specifically about speaking a language, apply a discount factor
   // based on the regular medium of use and (for writing) the literacy rate of the territory
-  if (!isRecordPrecise(record, use)) {
+  if (!isRecordPrecise(record, speakingOrWriting)) {
     pop.literacyDiscount =
-      use === 'writing' ? (territory?.literacyPercent ?? 100) / 100 : undefined;
-    pop.modalityDiscount = getLanguageModalityDiscount(locale.language?.modality, use);
+      speakingOrWriting === 'writing' ? (territory?.literacyPercent ?? 100) / 100 : undefined;
+    pop.modalityDiscount = getLanguageModalityDiscount(
+      locale.language?.modality,
+      speakingOrWriting,
+    );
   } else {
     pop.literacyDiscount = undefined;
     pop.modalityDiscount = undefined;
@@ -104,7 +109,7 @@ function applyPopRecord(
   // Compute the percent, adjusted by the discount factors, and a corrected absolute population number
   pop.percent = record.populationPercent;
   pop.percentAdjusted = pop.percent * (pop.literacyDiscount ?? 1) * (pop.modalityDiscount ?? 1);
-  pop.adjusted = Math.round((pop.percentAdjusted / 100.0) * (territory?.population || 1));
+  pop.adjusted = Math.round((pop.percentAdjusted / 100.0) * (territory?.pop.overall || 1));
 }
 
 function isRecordPrecise(record: LocaleInCensus, use: 'speaking' | 'writing'): boolean {

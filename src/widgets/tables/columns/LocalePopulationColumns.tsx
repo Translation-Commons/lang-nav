@@ -2,24 +2,49 @@ import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
 import CensusCountForLocale from '@entities/census/CensusCountForLocale';
+import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/locale/LocaleTypes';
+import PopulationFocus from '@entities/types/PopulationFocus';
 
 export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
     key: 'Population (Adjusted)',
     description: (
       <>
-        Most population records become outdated over time. In order to figure out the current
-        population, we take the percent of the territory population that spoke the language at the
-        time of the census and multiply it by the current population of the territory.
+        This shows the number of people who speak or write the language (the max of the 2
+        estimates), adjusted. Most population records become outdated over time. In order to figure
+        out the current population, we take the percent of the territory population that spoke the
+        language at the time of the census and multiply it by the current population of the
+        territory.
       </>
     ),
-    render: (object) => <LocalePopulationAdjusted locale={object} use="speaking" />,
-    exportValue: (object) => object.pop.speaking.adjusted,
+    render: (object) => (
+      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Overall} />
+    ),
+    exportValue: (object) => getObjectPopulation(object),
     field: Field.Population,
     columnGroup: 'Demographics',
+    isInitiallyVisible: false,
+  },
+  {
+    key: 'Population (Speaking)',
+    description: (
+      <>
+        This shows the number of people who speak the language, adjusted. Most population records
+        become outdated over time. In order to figure out the current population, we take the
+        percent of the territory population that spoke the language at the time of the census and
+        multiply it by the current population of the territory.
+      </>
+    ),
+    render: (object) => (
+      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Speaking} />
+    ),
+    exportValue: (object) => object.pop.speaking.adjusted,
+    field: Field.PopulationSpeaking,
+    columnGroup: 'Demographics',
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: 'Population (Direct)',
@@ -34,6 +59,7 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
     render: (object) => object.pop.speaking.percentAdjusted,
     field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: '% of Global Language Speakers',
@@ -46,9 +72,10 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   },
   {
     key: 'Population Source',
-    render: (object) => <LocaleCensusCitation locale={object} use="speaking" />,
+    render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />,
     field: Field.SourceForPopulation,
     columnGroup: 'Demographics',
+    isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: 'Population Records',

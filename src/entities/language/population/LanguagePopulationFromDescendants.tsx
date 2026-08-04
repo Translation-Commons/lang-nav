@@ -17,11 +17,11 @@ import { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;
-  use: 'speaking' | 'writing';
+  speakingOrWriting: 'speaking' | 'writing';
 };
 
-const LanguagePopulationFromDescendants: React.FC<Props> = ({ lang, use }) => {
-  const pop = lang.pop[use];
+const LanguagePopulationFromDescendants: React.FC<Props> = ({ lang, speakingOrWriting }) => {
+  const pop = lang.pop[speakingOrWriting];
   if (pop.estimate == null || pop.descendants == null) return null;
   return (
     <>
@@ -51,7 +51,12 @@ const LanguagePopulationFromDescendants: React.FC<Props> = ({ lang, use }) => {
         </Hoverable>
       ) : null}
       <Hoverable
-        hoverContent={<LanguagePopulationBreakdownFromDescendants lang={lang} use={use} />}
+        hoverContent={
+          <LanguagePopulationBreakdownFromDescendants
+            lang={lang}
+            speakingOrWriting={speakingOrWriting}
+          />
+        }
       >
         <CountOfPeople count={pop.descendants} />
       </Hoverable>
@@ -59,9 +64,12 @@ const LanguagePopulationFromDescendants: React.FC<Props> = ({ lang, use }) => {
   );
 };
 
-export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({ lang, use }) => {
+export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({
+  lang,
+  speakingOrWriting,
+}) => {
   const { updatePageParams } = usePageParams();
-  if (!lang.pop[use].descendants) return null;
+  if (!lang.pop[speakingOrWriting].descendants) return null;
 
   return (
     <>
@@ -78,7 +86,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({ la
                 <td>
                   <HoverableObjectName object={descendant} />
                 </td>
-                <CellPopulation population={descendant.pop[use].estimate} />
+                <CellPopulation population={descendant.pop[speakingOrWriting].estimate} />
               </tr>
             ))}
           {lang.childLanguages.length > 10 && (
@@ -87,7 +95,10 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({ la
               <CellPopulation
                 population={lang.childLanguages
                   .slice(10)
-                  .reduce((sum, descendant) => sum + (descendant.pop[use].estimate || 0), 0)}
+                  .reduce(
+                    (sum, descendant) => sum + (descendant.pop[speakingOrWriting].estimate || 0),
+                    0,
+                  )}
               />
             </tr>
           )}

@@ -55,9 +55,9 @@ export function sumUpPopulationFromContainedTerritories(
     sumBy(uniqueContainedLocales, (loc) => loc.pop[use].unadjusted || 0) || undefined;
 
   // Compute the percent based on the adjusted population for regional locales.
-  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
+  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.pop.overall || 1)) * 100;
   if (pop.adjusted != null)
-    pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
+    pop.percentAdjusted = (pop.adjusted / (territory.pop.overall || 1)) * 100;
 }
 
 export function computeLanguageFamilyLocalePopulations(locales: LocaleData[]): void {
@@ -88,28 +88,38 @@ function sumUpPopulationFromChildLanguages(locale: LocaleData, use: 'speaking' |
   const pop = locale.pop[use];
   if (!relatedLocales || !territory || pop.census) return;
 
+  // Add up the adjusted population of unique child locales (eg don't double count
+  // zh_Hans_SG and zh_Hant_SG). The adjusted population is corrected to the current year
+  // to smooth out population growth between data collected in different years.
   const uniqueChildLocales = uniqueBy(
     [...(relatedLocales.childLanguages ?? [])].sort(
       (a, b) => (b.pop[use].adjusted ?? 0) - (a.pop[use].adjusted ?? 0),
     ),
     (loc) => loc.languageCode || '',
   ).filter((loc) => loc.languageCode !== '');
+  let newPopulationEstimate =
+    sumBy(uniqueChildLocales, (loc) => loc.pop[use].adjusted) || undefined;
+  if (!newPopulationEstimate) return; // do nothing if its 0 or undefined
 
-  // Add up the adjusted population of unique child locales (eg don't double count
-  // zh_Hans_SG and zh_Hant_SG). The adjusted population is corrected to the current year
-  // to smooth out population growth between data collected in different years.
+  // Limit the new estimate if it is greater than the population
+  const maxPopulation = territory.pop[use] || territory.pop.overall;
+  if (newPopulationEstimate > maxPopulation) newPopulationEstimate = maxPopulation;
+  relatedLocales.sumOfPopulationFromChildLanguages = newPopulationEstimate;
+
+  // Don't use it if there already is a population estimate that is close
+  // For instance, a macrolanguage may already have data from a census
+  if (pop.adjusted && newPopulationEstimate <= pop.adjusted) return;
+
+  // Otherwise great! We got a new value
+  pop.adjusted = newPopulationEstimate;
   pop.source = PopulationSourceCategory.AggregatedFromLanguages;
-  pop.adjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].adjusted) || undefined;
-  if (pop.adjusted && pop.adjusted > territory.population) pop.adjusted = territory.population;
-  relatedLocales.sumOfPopulationFromChildLanguages = pop.adjusted;
 
   // Set population to be the sum of the unadjusted population
   pop.unadjusted = sumBy(uniqueChildLocales, (loc) => loc.pop[use].unadjusted || 0) || undefined;
-  if (pop.unadjusted && pop.unadjusted > territory.population)
-    pop.unadjusted = territory.population;
+  if (pop.unadjusted && pop.unadjusted > maxPopulation) pop.unadjusted = maxPopulation;
 
   // Compute the percent based on the adjusted population for regional locales.
-  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.population || 1)) * 100;
+  if (pop.unadjusted != null) pop.percent = (pop.unadjusted / (territory.pop.overall || 1)) * 100;
   if (pop.adjusted != null)
-    pop.percentAdjusted = (pop.adjusted / (territory.population || 1)) * 100;
+    pop.percentAdjusted = (pop.adjusted / (territory.pop.overall || 1)) * 100;
 }
