@@ -1,18 +1,17 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import { useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 
 import { getLanguageModalityDescription, getModalityLabel } from '@strings/LanguageModalityStrings';
 
-type Props = { display?: SelectorDisplay };
 
-const LanguageModalitySelector: React.FC<Props> = ({ display }) => {
+const LanguageModalitySelector: React.FC = () => {
   const { modalityFilter, updatePageParams } = usePageParams();
-
+  const { display } = useSelectorDisplay()
   const selectorDescription =
     'Filter by how the language is primarily used: written, spoken, sign, or a combination.';
 
@@ -27,8 +26,8 @@ const LanguageModalitySelector: React.FC<Props> = ({ display }) => {
       onChange={(modality: LanguageModality) =>
         modalityFilter.includes(modality)
           ? updatePageParams({
-              modalityFilter: modalityFilter.filter((m) => m !== modality),
-            })
+            modalityFilter: modalityFilter.filter((m) => m !== modality),
+          })
           : updatePageParams({ modalityFilter: [...modalityFilter, modality] })
       }
       selected={modalityFilter}

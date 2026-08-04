@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import { SelectorDisplay, SelectorDisplayProvider } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
@@ -23,21 +23,21 @@ type Props = { field: Field };
 const FilterSelector: React.FC<Props> = ({ field }) => {
   switch (field) {
     case Field.Language:
-      return <LanguageFilterSelector display={SelectorDisplay.ButtonList} />;
+      return <LanguageFilterSelector />;
     case Field.LanguageFamily:
-      return <LanguageFamilyFilterSelector display={SelectorDisplay.ButtonList} />;
+      return <LanguageFamilyFilterSelector />;
     case Field.Territory:
-      return <TerritoryFilterSelector display={SelectorDisplay.ButtonList} />;
+      return <TerritoryFilterSelector />;
     case Field.WritingSystem:
-      return <WritingSystemFilterSelector display={SelectorDisplay.ButtonList} />;
+      return <WritingSystemFilterSelector />;
     case Field.Modality:
-      return <LanguageModalitySelector display={SelectorDisplay.FilterList} />;
+      return <LanguageModalitySelector />;
     case Field.LanguageScope:
       return <LanguageScopeSelector display={SelectorDisplay.FilterList} />;
     case Field.TerritoryScope:
-      return <TerritoryScopeSelector display={SelectorDisplay.FilterList} />;
+      return <TerritoryScopeSelector />;
     case Field.ISOStatus:
-      return <LanguageISOStatusSelector display={SelectorDisplay.FilterList} />;
+      return <LanguageISOStatusSelector />;
     case Field.Name:
       return <SearchBar />; // Technically correct but not recommended usage
     case Field.SourceForLanguage:
@@ -64,7 +64,7 @@ export const AllApplicableFilterSelectors: React.FC = () => {
   );
 
   return (
-    <>
+    <SelectorDisplayProvider display={SelectorDisplay.FilterList}>
       {primaryFilters.map((filterBy) => (
         <FilterSelector field={filterBy} key={filterBy} />
       ))}
@@ -77,7 +77,7 @@ export const AllApplicableFilterSelectors: React.FC = () => {
           ))}
         </details>
       )}
-    </>
+    </ SelectorDisplayProvider >
   );
 };
 

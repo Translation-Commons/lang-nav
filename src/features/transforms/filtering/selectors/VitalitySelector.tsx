@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import { useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import {
@@ -19,11 +19,9 @@ import {
 
 const ETH_DISABLED = true;
 
-type Props = { display?: SelectorDisplay };
-
-export const LanguageISOStatusSelector: React.FC<Props> = ({ display }) => {
+export const LanguageISOStatusSelector: React.FC = () => {
   const { isoStatus, updatePageParams } = usePageParams();
-
+  const { display } = useSelectorDisplay();
   return (
     <Selector
       selectorLabel="ISO Language Status"
