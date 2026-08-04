@@ -4151,7 +4151,7 @@ neh_BT	Nyenkha (Bhutan)		EDL	8,692
 hau_US	Hausa (United States)	Hausa	Unverified Official	8,565	
 lav_RU	Latvian (Russia)	Latviešu	Official	8,565	
 yan_NI	Mayangna (Nicaragua)		Official	8,537	
-kmw_ET	Komo (Ethiopia)		Official	8,534	
+xom_ET	Komo (Ethiopia)		Official	8,534	
 ara_MT	Arabic (Malta)		Official	8,514	
 kht_IN	Khamti (India)		CLDR	8,455	
 rue_PL	Rusyn / Lemko (Poland)	русин	Unverified Official	8,444	
@@ -10860,3 +10860,29 @@ jup_CO	Hupdu (Colombia)		Official	34
 yae_CO	Yaruro (Colombia)		Official	136	
 vmw_KM	Makhuwa (Comoros)			13000	
 hoh_YE	Hobyót (Yemen)			100	
+gng_BJ	Ngangam (Benin)			104602	
+acx_YE	Omani Arabic (Yemen)			98000	
+ife_BJ	Ifè (Benin)		Official	111130	
+tum_TZ	Tumbuka (Tanzania)			1078800	
+gej_BJ	Gen (Benin)		Official	134985	
+som_YE	Somali (Yemen)			290000	
+heb_YE	Hebrew (Yemen)			200000	
+tuk_SY	Turkmen (Syria)			150000	
+dje_BJ	Zarma (Benin)		Official	69318	
+wci_BJ	Waci Gbe (Benin)			36574	
+gux_BJ	Gourmanchéma (Benin)			36476	
+cko_BJ	Anufo (Benin)			20342	
+kbp_BJ	Kabiyè (Benin)		Official	28481	
+kdh_BJ	Tem (Benin)		Official	24441	
+yor_TG	Yoruba (Togo)			105000	
+zne_SS	Common Zande (South Sudan)			706000	
+keo_SS	Kakwa (South Sudan)			98000	
+bfl_SS	Banda-Ndélé (South Sudan)			22000	
+xom_SS	Komo (South Sudan)			17000	
+lno_SS	Lango (South Sudan)			42000	
+apd_SS	Sudanese Arabic (South Sudan)			400000	
+anu_SS	Anuak (South Sudan)			86000	
+lgg_SS	Lugbara (South Sudan)			49000	
+wti_SS	Berta (South Sudan)			22000	
+mhi_SS	Ma'di (South Sudan)			22000	
+gba_SS	Gbaya (South Sudan)			13000	
