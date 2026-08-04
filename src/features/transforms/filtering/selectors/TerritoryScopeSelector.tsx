@@ -10,7 +10,7 @@ import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 const TerritoryScopeSelector: React.FC = () => {
   const { territoryScopes, updatePageParams } = usePageParams();
-  const { display } = useSelectorDisplay();
+  const { display } = useSelectorDisplay()
   const selectorDescription =
     'Filter what level of territories are shown, such as countries, regions, and dependencies.';
 

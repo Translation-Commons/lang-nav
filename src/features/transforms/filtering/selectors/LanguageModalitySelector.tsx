@@ -8,9 +8,10 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 
 import { getLanguageModalityDescription, getModalityLabel } from '@strings/LanguageModalityStrings';
 
+
 const LanguageModalitySelector: React.FC = () => {
   const { modalityFilter, updatePageParams } = usePageParams();
-  const { display } = useSelectorDisplay();
+  const { display } = useSelectorDisplay()
   const selectorDescription =
     'Filter by how the language is primarily used: written, spoken, sign, or a combination.';
 
@@ -25,8 +26,8 @@ const LanguageModalitySelector: React.FC = () => {
       onChange={(modality: LanguageModality) =>
         modalityFilter.includes(modality)
           ? updatePageParams({
-              modalityFilter: modalityFilter.filter((m) => m !== modality),
-            })
+            modalityFilter: modalityFilter.filter((m) => m !== modality),
+          })
           : updatePageParams({ modalityFilter: [...modalityFilter, modality] })
       }
       selected={modalityFilter}

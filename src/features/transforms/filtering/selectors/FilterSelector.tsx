@@ -1,9 +1,6 @@
 import React from 'react';
 
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
+import { SelectorDisplay, SelectorDisplayProvider } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
@@ -80,7 +77,7 @@ export const AllApplicableFilterSelectors: React.FC = () => {
           ))}
         </details>
       )}
-    </SelectorDisplayProvider>
+    </ SelectorDisplayProvider >
   );
 };
 

@@ -3,7 +3,6 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType, PageParamKey } from '@features/params/PageParamTypes';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -16,10 +15,7 @@ import useFilters from '../useFilters';
 
 import EntityFilterSelector from './EntityFilterSelector';
 
-type Props = { display?: SelectorDisplay };
-
-const LanguageFilterSelector: React.FC<Props> = ({ display }) => {
-  const { languageFilter, updatePageParams } = usePageParams();
+const LanguageFilterSelector: React.FC = () => {
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
   const filterByScope = filterBy[Field.LanguageScope];
@@ -63,7 +59,6 @@ const LanguageFilterSelector: React.FC<Props> = ({ display }) => {
 
   return (
     <EntityFilterSelector
-      display={display}
       getSuggestions={getSuggestions}
       selectorLabel="Language"
       selectorDescription={
@@ -74,8 +69,6 @@ const LanguageFilterSelector: React.FC<Props> = ({ display }) => {
           <LanguageFilterDescription />
         </>
       }
-      onSubmit={(languageFilter: string) => updatePageParams({ languageFilter })}
-      value={languageFilter}
       pageParameter={PageParamKey.languageFilter}
     />
   );
