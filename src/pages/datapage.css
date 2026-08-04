@@ -1,8 +1,9 @@
 .DataPageBody {
   padding: 0.5em 1em;
   flex: 1;
-  overflow: auto;
   width: 100%;
+  height: calc(100vh - var(--navbar-height, 0px) - var(--footer-height, 0px));
+  overflow: auto;
 }
 
 .DataPageBodyResultCountAndViewOptions {

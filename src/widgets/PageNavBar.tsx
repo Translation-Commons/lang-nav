@@ -21,8 +21,10 @@ const PageNavBar: React.FC = () => {
   useEffect(() => {
     const el = navRef.current;
     if (!el) return;
-    const observer = new ResizeObserver((entries) => {
-      const height = entries[0]?.contentRect.height;
+    const observer = new ResizeObserver(() => {
+      // getBoundingClientRect, not contentRect, so the border is included -- this value feeds
+      // calc(100vh - ...) layouts elsewhere that need to add up exactly to avoid a stray scrollbar.
+      const height = el.getBoundingClientRect().height;
       if (height) document.documentElement.style.setProperty('--navbar-height', `${height}px`);
     });
     observer.observe(el);
