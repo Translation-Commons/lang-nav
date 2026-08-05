@@ -2,14 +2,6 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-  useSelectorDisplay,
-} from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput from '@features/params/ui/TextInput';
-import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
@@ -19,17 +11,14 @@ import { getFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 import useFilters from '../useFilters';
 
-type Props = { display?: SelectorDisplay };
+import EntityFilterSelector from './EntityFilterSelector';
 
-const LanguageFamilyFilterSelector: React.FC<Props> = ({ display: manualDisplay }) => {
-  const { languageFamilyFilter, updatePageParams } = usePageParams();
+const LanguageFamilyFilterSelector: React.FC = () => {
   const { languagesInSelectedSource: languages } = useDataContext();
   const filterBy = useFilters();
   const filterByTerritory = filterBy[Field.Territory];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterLabels = getFilterLabels();
-  const { display: inheritedDisplay } = useSelectorDisplay();
-  const display = manualDisplay ?? inheritedDisplay;
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (language: LanguageData): number => {
@@ -55,29 +44,17 @@ const LanguageFamilyFilterSelector: React.FC<Props> = ({ display: manualDisplay 
   }, [languages, filterByTerritory, filterByWritingSystem, filterLabels]);
 
   return (
-    <SelectorDisplayProvider display={display}>
-      <div className="selector" style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
-        <SelectorLabel
-          label="Language Family"
-          description={
-            <>
-              Filter results to those relevant to a specific language family. This list only
-              includes ISO language families because we have the most data for them.
-            </>
-          }
-        />
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <TextInput
-            inputStyle={{ minWidth: '8em' }}
-            getSuggestions={getSuggestions}
-            onSubmit={(languageFamilyFilter: string) => updatePageParams({ languageFamilyFilter })}
-            pageParameter={PageParamKey.languageFamilyFilter}
-            placeholder="Name or code"
-            value={languageFamilyFilter}
-          />
-        </div>
-      </div>
-    </SelectorDisplayProvider>
+    <EntityFilterSelector
+      getSuggestions={getSuggestions}
+      selectorLabel="Language Family"
+      selectorDescription={
+        <>
+          Filter results to those relevant to a specific language family. This list only includes
+          ISO language families because we have the most data for them.
+        </>
+      }
+      pageParameter={PageParamKey.languageFamilyFilter}
+    />
   );
 };
 
