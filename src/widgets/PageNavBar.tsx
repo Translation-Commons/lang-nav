@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
@@ -13,26 +13,9 @@ import SettingsButton from './controls/SettingsButton';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
-  const navRef = useRef<HTMLElement>(null);
-
-  // Publish the navbar's actual rendered height as a CSS var so other layouts (e.g.
-  // the Data page's sticky sidebar) can size themselves as calc(100vh - this).
-  // Measured rather than hardcoded since the navbar wraps to two rows on narrow viewports.
-  useEffect(() => {
-    const el = navRef.current;
-    if (!el) return;
-    const observer = new ResizeObserver(() => {
-      // getBoundingClientRect, not contentRect, so the border is included -- this value feeds
-      // calc(100vh - ...) layouts elsewhere that need to add up exactly to avoid a stray scrollbar.
-      const height = el.getBoundingClientRect().height;
-      if (height) document.documentElement.style.setProperty('--navbar-height', `${height}px`);
-    });
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, []);
 
   return (
-    <NavBarContainer ref={navRef}>
+    <NavBarContainer>
       <NavBarTitle>
         <img
           src={`${import.meta.env.BASE_URL}logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
@@ -74,13 +57,9 @@ const NavBarLink: React.FC<React.PropsWithChildren<{ path: string }>> = ({ path,
   );
 };
 
-const NavBarContainer: React.FC<React.PropsWithChildren<{ ref?: React.Ref<HTMLElement> }>> = ({
-  children,
-  ref,
-}) => {
+const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
     <nav
-      ref={ref}
       className="NavBar"
       style={{
         position: 'sticky',

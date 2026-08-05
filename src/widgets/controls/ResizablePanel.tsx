@@ -27,9 +27,11 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <aside
       style={{
-        position: 'sticky',
-        top: 'var(--navbar-height, 0px)',
-        height: 'calc(100vh - var(--navbar-height, 0px) - var(--footer-height, 0px))',
+        // Anchors DraggableResizeBorder's `position: absolute` to this element -- without it,
+        // the drag handle positions against a distant ancestor instead and silently inflates
+        // the page's real scrollable height.
+        position: 'relative',
+        height: '100%',
         width: panelWidth,
         maxWidth: isOpen ? panelWidth : '0',
         borderRight: panelSide === 'left' ? '2px solid var(--color-button-primary)' : undefined,
