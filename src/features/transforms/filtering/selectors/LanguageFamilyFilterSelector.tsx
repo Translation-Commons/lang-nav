@@ -1,15 +1,17 @@
 import React, { useMemo } from 'react';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import { useDataContext } from '@features/data/context/useDataContext';
 import { PageParamKey } from '@features/params/PageParamTypes';
-import EntityFilterSelector from './EntityFilterSelector';
+
+import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import Field from '../../fields/Field';
 import { sortByPopulation } from '../../sorting/sort';
 import { getFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 import useFilters from '../useFilters';
+
+import EntityFilterSelector from './EntityFilterSelector';
 
 const LanguageFamilyFilterSelector: React.FC = () => {
   const { languagesInSelectedSource: languages } = useDataContext();
@@ -47,8 +49,8 @@ const LanguageFamilyFilterSelector: React.FC = () => {
       selectorLabel="Language Family"
       selectorDescription={
         <>
-          Filter results to those relevant to a specific language family. This list only
-          includes ISO language families because we have the most data for them.
+          Filter results to those relevant to a specific language family. This list only includes
+          ISO language families because we have the most data for them.
         </>
       }
       pageParameter={PageParamKey.languageFamilyFilter}

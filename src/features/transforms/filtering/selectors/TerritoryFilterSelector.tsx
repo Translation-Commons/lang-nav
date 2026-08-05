@@ -12,7 +12,6 @@ import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
 import EntityFilterSelector from './EntityFilterSelector';
 
-
 const TerritoryFilterSelector: React.FC = () => {
   const { territories } = useDataContext();
   const filterByScope = getScopeFilter();
