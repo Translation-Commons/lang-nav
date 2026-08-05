@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
+import ZIndex from '@features/layers/ZIndex';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
@@ -61,6 +62,9 @@ const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
     <nav
       className="NavBar"
       style={{
+        position: 'sticky',
+        top: 0,
+        zIndex: ZIndex.NavBar,
         alignItems: 'center',
         display: 'flex',
         flexWrap: 'wrap',
