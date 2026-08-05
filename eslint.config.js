@@ -32,8 +32,9 @@ export default defineConfig([
       prettier: prettierPlugin,
     },
     rules: {
-      'prettier/prettier': 'warn',
+      'prettier/prettier': 'error',
       'react/react-in-jsx-scope': 'off',
+      indent: [2, 'error'],
     },
     settings: {
       react: {

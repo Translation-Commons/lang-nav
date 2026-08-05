@@ -50,6 +50,7 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
         source: parts[3] as PopulationSourceCategory | undefined,
       },
       writing: {},
+      rough: population,
     },
   };
 }
