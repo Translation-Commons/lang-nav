@@ -3,37 +3,7 @@ import getPopulationSourceCategoryForCensus from '@entities/census/getPopulation
 import getLanguageModalityDiscount from '@entities/language/population/getLanguageModalityDiscount';
 import { LocaleData, LocaleInCensus } from '@entities/locale/LocaleTypes';
 
-// Give population records a ranking based on various rules.
-// Higher signifies that the record is more preferred.
-// The score is relative (generally, but not necessarily bounded to 0..1).
-export function getPopulationRecordRank(
-  record: LocaleInCensus,
-  use: 'speaking' | 'writing',
-): number {
-  const { languageUse, yearCollected, acquisitionOrder } = record.census;
-  let rank = 0;
-  // The biggest source is what kind of data the census purports to have.
-  if (use === 'speaking') {
-    rank += languageUse === CensusLanguageUse.Speaks ? 1 : 0;
-    rank += languageUse === CensusLanguageUse.Uses ? 0.5 : 0;
-    rank += languageUse === CensusLanguageUse.Understands ? 0.5 : 0;
-    rank += languageUse === CensusLanguageUse.Ethnicity ? 0.05 : 0;
-  } else if (use === 'writing') {
-    rank += languageUse === CensusLanguageUse.Writes ? 1 : 0;
-    rank += languageUse === CensusLanguageUse.Uses ? 0.75 : 0;
-    rank += languageUse === CensusLanguageUse.Reads ? 0.5 : 0;
-    rank += languageUse === CensusLanguageUse.Ethnicity ? -0.05 : 0;
-  }
-  // Then we have other factors that are less important, mostly for tie-breaking.
-  // rank += (6 - getCensusCollectorTypeRank(record.census.collectorType)) / 6;
-  rank += (yearCollected - 2000) / 40; // 2025 -> 1.25, 2000 -> 0, 1990 -> -0.5, 1980 -> -1.25, maybe this is too strong
-  if (acquisitionOrder === 'Any') rank += 0.12;
-  if (acquisitionOrder === 'L1') rank += 0.1;
-  if (acquisitionOrder === 'L2') rank += 0.05;
-  if (acquisitionOrder === 'L3') rank += 0;
-  rank += record.populationPercent / 100.0 / 10;
-  return rank;
-}
+import computeCensusRecordPriority from './computeCensusRecordPriority';
 
 export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): void {
   // Find the best population estimate for each locale based on its population records
@@ -43,10 +13,12 @@ export function computeLocalesPopulationFromCensuses(locales: LocaleData[]): voi
       computePopulationWithoutCensusRecords(locale);
     } else {
       const bestRecordForSpeaking = [...censusRecords].sort(
-        (a, b) => getPopulationRecordRank(b, 'speaking') - getPopulationRecordRank(a, 'speaking'),
+        (a, b) =>
+          computeCensusRecordPriority(b, 'speaking') - computeCensusRecordPriority(a, 'speaking'),
       )[0];
       const bestRecordForWriting = [...censusRecords].sort(
-        (a, b) => getPopulationRecordRank(b, 'writing') - getPopulationRecordRank(a, 'writing'),
+        (a, b) =>
+          computeCensusRecordPriority(b, 'writing') - computeCensusRecordPriority(a, 'writing'),
       )[0];
 
       // Computes a discounted percentage and adjusted population number
