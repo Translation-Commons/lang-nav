@@ -4151,7 +4151,7 @@ neh_BT	Nyenkha (Bhutan)		EDL	8,692
 hau_US	Hausa (United States)	Hausa	Unverified Official	8,565	
 lav_RU	Latvian (Russia)	Latviešu	Official	8,565	
 yan_NI	Mayangna (Nicaragua)		Official	8,537	
-kmw_ET	Komo (Ethiopia)		Official	8,534	
+xom_ET	Komo (Ethiopia)		Official	8,534	
 ara_MT	Arabic (Malta)		Official	8,514	
 kht_IN	Khamti (India)		CLDR	8,455	
 rue_PL	Rusyn / Lemko (Poland)	русин	Unverified Official	8,444	
@@ -7822,10 +7822,10 @@ rit_AU	Ritharrngu (Australia)		Unverified Official	12
 ywg_AU	Yinhawangka (Australia)		Official	12	
 dtd_CA	Diitiidʔaatx̣ (Nitinat) (Canada)		EDL	11	
 sag_RU	Sango (Russia)	Sängö	Official	11	
-alc_CL	Kawésqar (Chile)	alacalufe	EDL	10	
+alc_CL	Kawésqar (Chile)	alacalufe	Official	656	
 aua_SB	Asumboa (Solomon Islands)		EDL	10	
 bsr_NG	Bassa-Kontagora (Nigeria)		EDL	10	
-cbd_CO	Carijona (Colombia)	tsahá	EDL	10	
+cbd_CO	Carijona (Colombia)	tsahá	Official	525	
 hti_ID	Hoti (Indonesia)	bahasa Hoti	EDL	10	
 huk_ID	Hulung (Indonesia)		EDL	10	
 jbo_US	Lojban (United States)	la .lojban.	Other	10	
@@ -7873,7 +7873,7 @@ cic_US	Chickasaw (United States)	Chikasha	Other	10
 gpn_PG	Taiap (Papua New Guinea)		Other	10	
 lix_ID	Liabuku (Indonesia)	bahasa Liabuku	Other	10	
 psd_US	Plains Indian Sign Language (United States)		Other	10	
-ttc_MX	Tectitec (Mexico)		Other	10	
+ttc_MX	Tectitec (Mexico)		Official	78	
 awr_ID	Awera (Indonesia)	bahasa Awera	Other	10	
 bdx_ID	Budong-Budong (Indonesia)	bahasa Budong-Budong	Other	10	
 bhe_PK	Bhaya (Pakistan)		Other	10	
@@ -7920,7 +7920,7 @@ mpu_BR	Makurap (Brazil)		Other	10
 mqv_PG	Mosimo (Papua New Guinea)		Other	10	
 mvq_PG	Moere (Papua New Guinea)		Other	10	
 oca_PE	Ocaina (Peru)	Xáfahxajoh'	Other	10	
-oru_AF	Ormuri (Afghanistan)		Other	10	
+oru_AF	Ormuri (Afghanistan)			50	
 plh_ID	Paulohi (Indonesia)	bahasa Paulohi	Other	10	
 pmr_PG	Manat (Papua New Guinea)		Other	10	
 ppq_PG	Pei (Papua New Guinea)		Other	10	
@@ -7971,7 +7971,7 @@ tns_PG	Tenis (Papua New Guinea)		Other	10
 twn_CM	Twendi (Cameroon)		Other	10	
 wua_AU	Kugu-Nganhcara (Australia)		Other	10	
 car_BR	Galibi (Brazil)		Other	10	
-djd_AU	Jaminjung (Australia)		Other	10	
+djd_AU	Jaminjung (Australia)		Official	90	
 grw_PG	Gweda (Papua New Guinea)		Other	10	
 xor_BR	Korubo (Brazil)		Other	10	
 mjj_PG	Mawak (Papua New Guinea)		Other	10	
@@ -7986,7 +7986,7 @@ aem_VN	Arem (Vietnam)		Other	10
 bvh_NG	Bure (Nigeria)		Other	10	
 gae_BR	Guarequena (Brazil)		Other	10	
 giw_VN	Gelao, White (Vietnam)		Other	10	
-kkp_AU	Koko-Bera (Australia)		Other	10	
+kkp_AU	Koko-Bera (Australia)		Official	18	
 mnc_CN	Manchu (China)	ᠮᠠᠨᠵᡠ ᡤᡳᠰᡠᠨ	Other	10	
 mqr_ID	Mander (Indonesia)	bahasa Mander	Other	10	
 oda_NG	Odut (Nigeria)		Other	10	
@@ -8020,13 +8020,13 @@ atz_PH	Arta (Philippines)		Other	10
 lio_ID	Liki (Indonesia)	bahasa Liki	Other	10	
 akq_PG	Ak (Papua New Guinea)		Other	10	
 dda_AU	Dadi Dadi (Australia)		Other	10	
-dif_AU	Diyari (Australia)		Other	10	
+dif_AU	Diyari (Australia)		Official	34	
 faj_PG	Kursav (Papua New Guinea)		Other	10	
 ibh_VN	Bih (Vietnam)		Other	10	
 ism_ID	Masimasi (Indonesia)	bahasa Masimasi	Other	10	
 khd_ID	Bädi Kanum (Indonesia)		Other	10	
 kjh_CN	Manchurian Kirghiz (China)	Хакасча	Other	10	
-klb_MX	Kiliwa (Mexico)		Other	10	
+klb_MX	Kiliwa (Mexico)		Official	46	
 kqq_BR	Krenak (Brazil)		Other	10	
 kuq_BR	Karipuna (Brazil)		Other	10	
 leo_CM	Leti (Cameroon) (Cameroon)		Other	10	
@@ -8055,7 +8055,7 @@ bju_CM	Busuu (Cameroon)		EDL	8
 bxe_ET	Ongota (Ethiopia)		EDL	8	
 eus_RU	Basque (Russia)	Euskara	Official	8	
 ibo_RU	Igbo (Russia)	Igbo	Official	8	
-kim_RU	Karagas (Russia)	Тоъфа	Official	8	
+kim_RU	Karagas (Russia)	Тоъфа	Official	93	
 kjj_RU	Khinalugh (Russia)		Official	8	
 que_RU	Quechua (Russia)	Qhichwa	Official	8	
 qwm_RU	Kuman (Russia) (Russia)		Official	8	
@@ -8076,7 +8076,7 @@ ayd_AU	Ayapathu (Australia)		EDL	6
 bal_RU	Baluchi (Russia)	بلۆچی	Official	6	
 dsn_ID	Dusner (Indonesia)	bahasa Dusner	EDL	6	
 gma_AU	Gamberre (Australia)		EDL	6	
-lrg_AU	Larrakiya (Australia)		EDL	6	
+lrg_AU	Larrakiya (Australia)		Official	41	
 mos_RU	Mossi (Russia)	Mòoré	Official	6	
 nor_BV	Norwegian (Bouvet Island)	norsk	Other	6	
 ota_RU	Ottoman Turkish (1500-1928) (Russia)	لسان عثمانى	Official	6	
@@ -8110,7 +8110,7 @@ dyu_RU	Dyula (Russia)	Julakan	Official	4
 fao_RU	Faroese (Russia)	Føroyskt	Official	4	
 fat_RU	Fanti (Russia)		Official	4	
 gudj1237_AU	Gudjala (Australia)		Official	4	
-gva_PY	Guana (Paraguay) (Paraguay)		EDL	4	
+gva_PY	Guana (Paraguay) (Paraguay)		Official	16	
 krk_RU	Kerek (Russia)		Official	4	
 kzl_ID	Kayeli (Indonesia)		EDL	4	
 lgi_ID	Lengilu (Indonesia)	bahasa Lengilu	EDL	4	
@@ -8160,7 +8160,7 @@ wgy_AU	Warrgamay (Australia)		EDL	3
 wie_AU	Wik-Epa (Australia)		EDL	3	
 wif_AU	Wik-Keyangan (Australia)		EDL	3	
 wrb_AU	Warluwarra (Australia)		EDL	3	
-xny_AU	Nyiyaparli (Australia)		Unverified Official	3	
+xny_AU	Nyiyaparli (Australia)		Official	12	
 xut_AU	Kuthant (Australia)		EDL	3	
 zmv_AU	Mbariman-Gudhinma (Australia)		EDL	3	
 aea_AU	Ariba (Australia)		EDL	2	
@@ -8177,7 +8177,7 @@ hit_RU	Hittite (Russia)	𒌷𒉌𒅆𒇷	Official	2
 hns_RU	Caribbean Hindustani (Russia)		Official	2	
 jbi_AU	Badjiri (Australia)		EDL	2	
 kea_RU	Kabuverdianu (Russia)	kabuverdianu	Official	2	
-kmb_RU	Kimbundu (Russia)		Official	2	
+kmb_RU	Kimbundu (Russia)		Official	82	
 ktu_RU	Kituba (Democratic Republic of Congo) (Russia)		Official	2	
 ldd_NG	Luri (Nigeria)		EDL	2	
 lrz_VU	Lemerig (Vanuatu)		EDL	2	
@@ -8200,18 +8200,18 @@ xmy_AU	Mayi-Kutuna (Australia)		EDL	2
 ynd_AU	Yandruwandha (Australia)		EDL	2	
 ysr_RU	Sirenik Yupik (Russia)		Official	2	
 aas_TZ	Aasáx (Tanzania)		EDL	1	
-ace_US	Achinese (United States)	Aceh	Unverified Official	1	
-acv_US	Achumawi (United States)	Ajúmmááwí	Unverified Official	1	
+ace_US	Achinese (United States)	Aceh	Official	32	
+acv_US	Achumawi (United States)	Ajúmmááwí	Official	68	
 aed_AR	Argentine Sign Language (Argentina)		EDL	1	
 ahg_ET	Hwarasa (Ethiopia)		EDL	1	
 ako_SR	Akuriyo (Suriname)		EDL	1	
-amw_SY	Western Neo-Aramaic (Syria)	ܐܪܡܝܬ, آرامي	EDL	1	
+amw_SY	Western Neo-Aramaic (Syria)	ܐܪܡܝܬ, آرامي		24000	
 anb_PE	Andoa (Peru)		EDL	1	
-ano_CO	Andoque (Colombia)		EDL	1	
+ano_CO	Andoque (Colombia)		Official	820	
 aor_VU	Aore (Vanuatu)		EDL	1	
 apl_US	Lipan (United States)		EDL	1	
 ash_PE	Tequiraca (Peru)		EDL	1	
-atw_US	Atsugewi (United States)		Unverified Official	1	
+atw_US	Atsugewi (United States)		Official	15	
 avk_001	Kotava (World)	Kotava	Other	1	
 awk_AU	Awabakal (Australia)		EDL	1	
 axe_AU	Ayerreyenge (Australia)		EDL	1	
@@ -8241,16 +8241,16 @@ cah_PE	Cahuarano (Peru)		EDL	1
 caw_BO	Kallawaya (Bolivia)	Callawalla	EDL	1	
 cay_US	Cayuga (United States)	Goyogo̱hó:nǫ’	Unverified Official	1	
 caz_BO	Canichana (Bolivia)		EDL	1	
-cbb_CO	Cabiyarí (Colombia)		EDL	1	
-cbg_CO	Chimila (Colombia)		EDL	1	
-cbv_CO	Kakua (Colombia)		EDL	1	
+cbb_CO	Cabiyarí (Colombia)		Official	809	
+cbg_CO	Chimila (Colombia)		Official	1701	
+cbv_CO	Kakua (Colombia)		Official	197	
 cby_CO	Carabayo (Colombia)		EDL	1	
 ccc_PE	Chamicuro (Peru)		EDL	1	
 ccj_GW	Kasanga (Guinea-Bissau)		EDL	1	
 chc_US	Catawba (United States)	Iyeye	EDL	1	
 ckv_TW	Kavalan (Taiwan)		EDL	1	
-coe_CO	Coreguaje (Colombia)		EDL	1	
-col_US	Columbia-Wenatchi (United States)		Unverified Official	1	
+coe_CO	Coreguaje (Colombia)		Official	3257	
+col_US	Columbia-Wenatchi (United States)		Official	17	
 cpi_NR	Nauru Pacific Pidgin (Nauru)		EDL	1	
 csi_US	Coast Miwok (United States)		EDL	1	
 csn_CO	Colombian Sign Language (Colombia)		EDL	1	
@@ -8267,7 +8267,7 @@ doi_PK	Dogri (Pakistan)	डोगरी	Other	1
 dsk_NG	Dokshi (Nigeria)		EDL	1	
 dth_AU	Adithinngithigh (Australia)		EDL	1	
 dyb_AU	Jabirr-Jabirr (Australia)		EDL	1	
-dyn_AU	Dhanggati (Australia)		EDL	1	
+dyn_AU	Dhanggati (Australia)		Official	135	
 dze_AU	Jiwarli (Australia)		EDL	1	
 ecy_CY	Eteocypriot (Cyprus)		CLDR	1	
 elo_KE	El Molo (Kenya)		EDL	1	
@@ -8291,13 +8291,13 @@ ful_Adlm_NE	Fulah (Adlam) (Niger, Adlam)	Fula	Other	1
 ful_Adlm_NG	Fulah (Adlam) (Nigeria, Adlam)	Fula	Other	1	
 ful_Adlm_SL	Fulah (Adlam) (Sierra Leone, Adlam)	Fula	Other	1	
 ful_Adlm_SN	Fulah (Adlam) (Senegal, Adlam)	Fula	Other	1	
-ful_BF	Fulah (Burkina Faso)	Fula	Other	1	
-ful_GM	Fulah (Gambia)	Fula	Other	1	
+ful_BF	Fulah (Burkina Faso)	Fula		574000	
+ful_GM	Fulah (Gambia)	Fula		609712	
 ful_GW	Fulah (Guinea-Bissau)	Fula	Other	1	
 ful_LR	Fulah (Liberia)	Fula	Other	1	
-ful_NE	Fulah (Niger)	Fula	Other	1	
-ful_NG	Fulah (Nigeria)	Fula	Other	1	
-ful_SL	Fulah (Sierra Leone)	Fula	Other	1	
+ful_NE	Fulah (Niger)	Fula		1121232	
+ful_NG	Fulah (Nigeria)	Fula		5332527	
+ful_SL	Fulah (Sierra Leone)	Fula		136080	
 gbu_AU	Gagudju (Australia)		EDL	1	
 gbw_AU	Gubbi Gubbi (Australia)		EDL	1	
 gez_ET	Geez (Ethiopia)	ግዕዝ	Other	1	
@@ -8313,8 +8313,8 @@ gnr_AU	Gureng Gureng (Australia)		EDL	1
 grc_GR	Ancient Greek (Greece)	Ἑλληνική ἀρχαία	Other	1	
 grz_PG	Guramalum (Papua New Guinea)		EDL	1	
 gtu_AU	Aghu-Tharnggala (Australia)		EDL	1	
-gum_CO	Guambiano (Colombia)	namuy wam	EDL	1	
-guo_CO	Guayabero (Colombia)		EDL	1	
+gum_CO	Guambiano (Colombia)	namuy wam	Official	47100	
+guo_CO	Guayabero (Colombia)		Official	2960	
 gvy_AU	Kuyani (Australia)		EDL	1	
 gwm_AU	Awngthim (Australia)		EDL	1	
 gwu_AU	Guwamu (Australia)		EDL	1	
@@ -8331,7 +8331,7 @@ ile_001	Interlingue (World)	Interlingue	Other	1
 ile_EE	Interlingue (Estonia)	Interlingue	CLDR	1	
 ina_001	Interlingua (World)	Interlingua	Other	1	
 ina_SE	Interlingua (Sweden)	Interlingua	Other	1	
-inb_CO	Inga (Colombia)		EDL	1	
+inb_CO	Inga (Colombia)		Official	19561	
 ito_BO	Itonama (Bolivia)		EDL	1	
 jaj_SB	Zazao (Solomon Islands)		EDL	1	
 jan_AU	Janday (Australia)		EDL	1	
@@ -8343,7 +8343,7 @@ kau_RU	Kanuri (Russia)	kanuri	Official	1
 kaw_ID	Kawi (Indonesia)	Bhāṣa Kawi	Other	1	
 kik_RU	Kikuyu (Russia)	Gĩkũyũ	Official	1	
 kof_NG	Kubi (Nigeria)		EDL	1	
-kog_CO	Cogui (Colombia)		EDL	1	
+kog_CO	Cogui (Colombia)		Official	15820	
 kpe_RU	Kpelle (Russia)	Kpɛlɛɛ	Official	1	
 kri_RU	Krio (Russia)	Krio	Official	1	
 kry_RU	Kryts (Russia)		Official	1	
@@ -8365,26 +8365,26 @@ luo_RU	Luo (Kenya and Tanzania) (Russia)	Dholuo	Official	1
 luw_CM	Luo (Cameroon)		EDL	1	
 lzh_CN	Literary Chinese (China)	文言文	Other	1	
 mas_RU	Masai (Russia)	ɔl Maa	Official	1	
-mcl_CO	Macaguaje (Colombia)		EDL	1	
+mcl_CO	Macaguaje (Colombia)		Official	24	
 mhg_AU	Marrgu (Australia)		EDL	1	
 mhq_US	Mandan (United States)	Rų́ʼeta:re	EDL	1	
-mjd_US	Northwest Maidu (United States)		Unverified Official	1	
+mjd_US	Northwest Maidu (United States)		Official	32	
 mkm_TH	Moklen (Thailand)		EDL	1	
 mre_US	Martha's Vineyard Sign Language (United States)		EDL	1	
-mrl_US	Mortlockese (United States)	kapasen Mwoshulók	Unverified Official	1	
-msa_US	Malay (United States)	Bahasa Melayu	Unverified Official	1	
+mrl_US	Mortlockese (United States)	kapasen Mwoshulók	Official	40	
+msa_US	Malay (United States)	Bahasa Melayu	Official	83659	
 mud_RU	Mednyj Aleut (Russia)		EDL	1	
-mwr_PK	Marwari (Pakistan)	मारवाड़ी	Other	1	
+mwr_PK	Marwari (Pakistan)	मारवाड़ी		100000	
 myr_PE	Munichi (Peru)		EDL	1	
 mys_ET	Mesmes (Ethiopia)		EDL	1	
 nau_US	Nauru (United States)	dorerin Naoero	Official	1	
 nig_AU	Ngalakgan (Australia)		EDL	1	
-niu_US	Niuean (United States)	Vagahau Niuē	Unverified Official	1	
+niu_US	Niuean (United States)	Vagahau Niuē	Official	17	
 njt_SR	Ndyuka-Trio Pidgin (Suriname)		EDL	1	
 nmr_CM	Nimbari (Cameroon)		EDL	1	
 nnv_AU	Nukunu (Australia)		EDL	1	
 nny_AU	Yangkaal (Australia)		EDL	1	
-nol_US	Nomlaki (United States)		Unverified Official	1	
+nol_US	Nomlaki (United States)		Official	38	
 nov_001	Novial (World)	Novial	Other	1	
 nrx_AU	Ngomburr (Australia)		EDL	1	
 nsz_US	Nisenan (United States)		Other	1	
@@ -8398,7 +8398,7 @@ okg_AU	Koko Babangk (Australia)		EDL	1
 ona_AR	Ona (Argentina)		EDL	1	
 onu_VU	Unua (Vanuatu)		EDL	1	
 pbg_VE	Paraujano (Venezuela)		EDL	1	
-pcb_KH	Pear (Cambodia)		EDL	1	
+pcb_KH	Pear (Cambodia)		Official	944	
 peb_US	Eastern Pomo (United States)		EDL	1	
 pej_US	Northern Pomo (United States)		EDL	1	
 pfl_DE	Palatine German (Germany)	Pälzisch	Other	1	
@@ -8415,7 +8415,7 @@ quc_RU	K'iche' (Russia)	K’iche’	Official	1
 qui_US	Quileute (United States)		EDL	1	
 rnr_AU	Nari Nari (Australia)		EDL	1	
 roh_CH_JAUER	Rumantsch (Switzerland, Jauer)		Other	1	
-roh_US	Romansh (United States)	Rumantsch	Unverified Official	1	
+roh_US	Romansh (United States)	Rumantsch	Official	39	
 sar_BO	Saraveca (Bolivia)		EDL	1	
 sbo_MY	Sabüm (Malaysia)		EDL	1	
 sci_LK	Sri Lanka Malay (Sri Lanka)		EDL	1	
@@ -8426,7 +8426,7 @@ sih_NC	Sîshëë (New Caledonia)		EDL	1
 slr_RU	Salar (Russia)	撒拉语	Official	1	
 snd_RU	Sindhi (Russia)	سِنڌِي	Official	1	
 soa_TH	Thai Song (Thailand)		EDL	1	
-spo_US	Spokane (United States)		Unverified Official	1	
+spo_US	Spokane (United States)		Official	20	
 sqh_NG	Shau (Nigeria)		EDL	1	
 sqn_US	Susquehannock (United States)		EDL	1	
 sta_ZM	Settla (Zambia)		EDL	1	
@@ -8441,14 +8441,14 @@ tgx_CA	Tagish (Canada)	Tāgizi	EDL	1
 tgz_AU	Tagalaka (Australia)		EDL	1	
 tig_RU	Tigre (Russia)	ትግሬ	Official	1	
 til_US	Tillamook (United States)		Official	1	
-tit_CO	Tinigua (Colombia)		EDL	1	
+tit_CO	Tinigua (Colombia)		Official	145	
 tju_AU	Jurruru (Australia)		EDL	1	
 tkw_SB	Teanu (Solomon Islands)		EDL	1	
 tno_BO	Toromona (Bolivia)		EDL	1	
 tol_US	Tolowa (United States)		EDL	1	
 tou_RU	Tho (Russia)		Official	1	
 toz_CM	To (Cameroon)		EDL	1	
-ttk_CO	Totoró (Colombia)		EDL	1	
+ttk_CO	Totoró (Colombia)		Official	8916	
 tub_US	Tubatulabal (United States)		EDL	1	
 tun_US	Tunica (United States)		EDL	1	
 typ_AU	Awu Laya (Australia)		EDL	1	
@@ -8472,7 +8472,7 @@ wam_US	Wampanoag (United States)		EDL	1
 wao_US	Wappo (United States)		EDL	1	
 wdu_AU	Wadjigu (Australia)		EDL	1	
 wgg_AU	Wangganguru (Australia)		EDL	1	
-wic_US	Wichita (United States)		Unverified Official	1	
+wic_US	Wichita (United States)		Official	242	
 wiy_US	Wiyot (United States)	Wiyot	EDL	1	
 wka_TZ	Kw'adza (Tanzania)		EDL	1	
 wmi_AU	Agwamin (Australia)		EDL	1	
@@ -8495,7 +8495,7 @@ xgg_AU	Goreng (Australia)		EDL	1
 xgm_AU	Dharumbal (Australia)		EDL	1	
 xgu_AU	Unggumi (Australia)		EDL	1	
 xgw_AU	Guwa (Australia)		EDL	1	
-xjb_AU	Minjungbal (Australia)		EDL	1	
+xjb_AU	Minjungbal (Australia)		Official	208	
 xmq_AU	Kuku-Mangk (Australia)		EDL	1	
 xni_AU	Ngarigu (Australia)		EDL	1	
 xnm_AU	Ngumbarl (Australia)		EDL	1	
@@ -8515,7 +8515,7 @@ xya_AU	Yaygir (Australia)		EDL	1
 xyj_AU	Mayi-Yapi (Australia)		EDL	1	
 xyk_AU	Mayi-Kulan (Australia)		EDL	1	
 xyt_AU	Mayi-Thakurti (Australia)		EDL	1	
-yag_CL	Yagan (Chile)		EDL	1	
+yag_CL	Yagan (Chile)		Official	785	
 yah_RU	Yazgulyam (Russia)		Official	1	
 yau_VE	Jotí (Venezuela)		EDL	1	
 yda_AU	Yanda (Australia)		EDL	1	
@@ -8524,7 +8524,7 @@ yga_AU	Malyangapa (Australia)		EDL	1
 yil_AU	Yindjilandji (Australia)		EDL	1	
 ylr_AU	Yalarnnga (Australia)		EDL	1	
 yme_PE	Yaméo (Peru)	Nijyamïï Nikyejaada	EDL	1	
-ynu_CO	Yahuna (Colombia)		EDL	1	
+ynu_CO	Yahuna (Colombia)		Official	105	
 yry_AU	Yarluyandi (Australia)		EDL	1	
 yub_AU	Yugambal (Australia)		EDL	1	
 yvt_VE	Yavitero (Venezuela)		EDL	1	
@@ -8538,7 +8538,7 @@ zme_AU	Mangerr (Australia)		EDL	1
 zmh_PG	Makolkol (Papua New Guinea)		EDL	1	
 zmk_AU	Mandandanyi (Australia)		EDL	1	
 zuy_CM	Zumaya (Cameroon)		EDL	1	
-ixc_MX	Ixcatec (Mexico)		Other	1	
+ixc_MX	Ixcatec (Mexico)		Official	190	
 mcd_BR	Sharanahua (Brazil)		Other	1	
 swo_BR	Shanenawa (Brazil)		Other	1	
 ate_PG	Mand (Papua New Guinea)		Other	1	
@@ -8635,7 +8635,7 @@ cnk_IN	Chin, Khumi (India)		Other	1
 cob_GT	Chicomuceltec (Guatemala)		Other	1	
 cob_MX	Chicomuceltec (Mexico)		Other	1	
 cod_BR	Cocama-Cocamilla (Brazil)		Other	1	
-coj_MX	Cochimi (Mexico)	Tipai	Other	1	
+coj_MX	Cochimi (Mexico)	Tipai	Official	88	
 csa_MX	Chinantec, Chiltepec (Mexico)		Other	1	
 csf_CU	Cuba Sign Language (Cuba)		Other	1	
 csr_SV	Costa Rican Sign Language (El Salvador)		Other	1	
@@ -8656,7 +8656,7 @@ giu_CN	Mulao (China)		Other	1
 gku_ZA	‡Ungkue (South Africa)		Other	1	
 goz_IR	Gozarkhani (Iran)		Other	1	
 gqn_BR	Guana (Brazil) (Brazil)		Other	1	
-grr_MA	Taznatit (Morocco)		Other	1	
+grr_MA	Taznatit (Morocco)			16000	
 guj_PK	Gujarathi (Pakistan)	ગુજરાતી	Other	1	
 gww_AU	Gunin (Australia)		Other	1	
 hmf_VN	Hmong Don (Vietnam)		Other	1	
@@ -8784,7 +8784,7 @@ vms_ID	Moksela (Indonesia)		Other	1
 waf_BR	Wakoná (Brazil)		Other	1	
 wea_MM	Wewaw (Myanmar)		Other	1	
 wir_BR	Wiraféd (Brazil)		Other	1	
-wny_AU	Waanyi (Australia)		Other	1	
+wny_AU	Waanyi (Australia)		Official	26	
 wsu_BR	Wasu (Brazil)		Other	1	
 wsv_AF	Wotapuri-Katarqalai (Afghanistan)		Other	1	
 xai_BR	Kaimbé (Brazil)		Other	1	
@@ -8821,7 +8821,7 @@ acb_NG	Áncá (Nigeria)
 acf_LC	Saint Lucian Creole French (St. Lucia)	kwéyòl			
 ach_SS	Acoli (South Sudan)				
 acm_IQ	Mesopotamian Arabic (Iraq)	لهجة عراقية			
-acq_YE	Ta'izzi-Adeni Arabic (Yemen)				
+acq_YE	Ta'izzi-Adeni Arabic (Yemen) (Yemen)			6760000	
 act_NL	Achterhoeks (Netherlands)	Achterhooks			
 acw_SA	Hijazi Arabic (Saudi Arabia)				
 acx_OM	Omani Arabic (Oman)	اللهجات العمانية			
@@ -8880,7 +8880,7 @@ arw_SR	Arawak (Suriname)	Lokono
 asq_AT	Austrian Sign Language (Austria)	Österreichische Gebärdensprache			
 asw_AU	Australian Aborigines Sign Language (Australia)				
 atc_PE	Atsahuaca (Peru)				
-atu_SS	Reel (South Sudan)				
+atu_SS	Reel (South Sudan)			76,000	
 auo_NG	Auyokawa (Nigeria)				
 avl_JO	Eastern Egyptian Bedawi Arabic (Jordan)				
 avm_AU	Angkamuthi (Australia)				
@@ -8894,7 +8894,7 @@ ayb_BJ	Ayizo Gbe (Benin)
 ayg_TG	Ginyanga (Togo)				
 ayh_YE	Hadrami Arabic (Yemen)	اللهجة الحضرمية			
 ayk_NG	Akuku (Nigeria)				
-ayn_YE	Sanaani Arabic (Yemen)				
+ayn_YE	Sanaani Arabic (Yemen) (Yemen)			7750000	
 ayo_PY	Ayoreo (Paraguay)				
 ayp_IQ	North Mesopotamian Arabic (Iraq)				
 ayp_SY	North Mesopotamian Arabic (Syria)				
@@ -9083,21 +9083,21 @@ dgs_BF	Dogoso (Burkina Faso)
 dgt_AU	Ndra'ngith (Australia)				
 dhm_AO	Zemba (Angola)				
 dhv_NC	Dehu (New Caledonia)	drehu			
-dib_SS	South Central Dinka (South Sudan)				
+dib_SS	South Central Dinka (South Sudan)			559,000	
 did_SS	Didinga (South Sudan)				
 dig_KE	Digo (Kenya)				
-dik_SS	Southwestern Dinka (South Sudan)				
-din_SS	Dinka (South Sudan)	Thuɔŋjäŋ			
-dip_SS	Northeastern Dinka (South Sudan)				
+dik_SS	Southwestern Dinka (South Sudan)			900,000	
+din_SS	Dinka (South Sudan)	Thuɔŋjäŋ		2,774,000	
+dip_SS	Northeastern Dinka (South Sudan)			606,000	
 dit_AU	Dirari (Australia)				
 diu_NA	Diriku (Namibia)				
-diw_SS	Northwestern Dinka (South Sudan)				
+diw_SS	Northwestern Dinka (South Sudan)			61,000	
 dja_AU	Djadjawurrung (Australia)				
 djk_SR	Eastern Maroon Creole (Suriname)				
 djm_ML	Jamsay Dogon (Mali)				
 dka_BT	Dakpakha (Bhutan)				
 dkg_NG	Kadung (Nigeria)				
-dks_SS	Southeastern Dinka (South Sudan)				
+dks_SS	Southeastern Dinka (South Sudan)			648,000	
 dlm_HR	Dalmatian (Croatia)				
 dma_GA	Duma (Gabon)				
 dmf_NG	Medefaidrin (Nigeria)				
@@ -10860,3 +10860,32 @@ jup_CO	Hupdu (Colombia)		Official	34
 yae_CO	Yaruro (Colombia)		Official	136	
 vmw_KM	Makhuwa (Comoros)			13000	
 hoh_YE	Hobyót (Yemen)			100	
+gng_BJ	Ngangam (Benin)			104602	
+acx_YE	Omani Arabic (Yemen)			98000	
+ife_BJ	Ifè (Benin)		Official	111130	
+tum_TZ	Tumbuka (Tanzania)			1078800	
+gej_BJ	Gen (Benin)		Official	134985	
+som_YE	Somali (Yemen)			290000	
+heb_YE	Hebrew (Yemen)			200000	
+tuk_SY	Turkmen (Syria)			150000	
+dje_BJ	Zarma (Benin)		Official	69318	
+wci_BJ	Waci Gbe (Benin)			36574	
+gux_BJ	Gourmanchéma (Benin)			36476	
+cko_BJ	Anufo (Benin)			20342	
+kbp_BJ	Kabiyè (Benin)		Official	28481	
+kdh_BJ	Tem (Benin)		Official	24441	
+yor_TG	Yoruba (Togo)			105000	
+zne_SS	Common Zande (South Sudan)			706000	
+keo_SS	Kakwa (South Sudan)			98000	
+bfl_SS	Banda-Ndélé (South Sudan)			22000	
+xom_SS	Komo (South Sudan)			17000	
+lno_SS	Lango (South Sudan)			42000	
+apd_SS	Sudanese Arabic (South Sudan)			400000	
+anu_SS	Anuak (South Sudan)			86000	
+lgg_SS	Lugbara (South Sudan)			49000	
+wti_SS	Berta (South Sudan)			22000	
+mhi_SS	Ma'di (South Sudan)			22000	
+gba_SS	Gbaya (South Sudan)			13000	
+shy_MA	Tachawit (Morocco)			27000	
+apc_MA	Levantine Arabic (Morocco)			587000	
+arq_MA	Algerian Arabic (Morocco)			224000	

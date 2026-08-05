@@ -1,0 +1,80 @@
+#codeDisplay		#fr names	axl.ss
+#nameDisplay			AXL South Sudan
+#isoRegionCode	SS		
+#yearCollected	2008		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder			L1
+#domain			Any
+### Population Surveyed ###			
+#population	8260000		
+#sampleRate			
+#responsesPerIndividual			1
+### Data Constraints ###			
+#geographicScope	Whole country		
+#age	0+		
+#nationality	Residents		
+#residenceBasis	de facto		
+#quantity			count
+### Creator ###			
+#collectorType	Secondary		
+#author	Jacques Leclerc		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/afrique/soudan-Sud.htm		
+#tableName	Section 2: Données démolinguistiques (Ethnie SOUDAN DU SUD / Langue maternelle / Affiliation linguistique / Population / %)		
+#datePublished	2025-08-13		
+#notes			
+Language Code	Language Name (English)	Language Name (French)	Population
+nus	Nuer	nuer	1021000
+din/dik	Southwestern Dinka	dinka du Sud-Ouest	900000
+zne	Zande	zande (azande)	706000
+din/dks	Southeastern Dinka	dinka du Sud-Est	648000
+din/dip	Northeastern Dinka	dinka du Nord-Est	586000
+din/dib	South-Central Dinka	dinka du Centre-Sud	516000
+bfa	Bari	bari	503000
+ara/apd	Sudanese Arabic	arabe soudanais parlé	400000
+shk	Shilluk	shilluk	377000
+toq	Toposa	toposa	205000
+lot	Otuho (Latuka)	otuho	205000
+lwo	Luwo	luwo	169000
+mqu	Mandari	mandari	160000
+mgd	Moru	moru	151000
+mur	Murle	murle	129000
+bex	Jur Modo	jur modo	118000
+keo	Kakwa	kakwa	98000
+anu	Anuak	anuak	86000
+lpx	Lopit	lopit	77000
+atu	Reel	reel	76000
+mfz	Mabaan	mabaan	70000
+did	Didinga	didinga	66000
+din/diw	Northwestern Dinka	dinka du Nord-Ouest	61000
+ach	Acholi	acholi	58000
+lky	Lokoya	lokoya	56000
+lkr	Pari	péri	52000
+muh	#Mèndè	mèndè	50000
+avu	Avokaya	avokaya	49000
+lgg	Lugbara	lugbara	49000
+bvi	Belanda Viri	belanda-viri	48000
+din/dib	South-Central Dinka	Dinka du Centre-Sud	43000
+lno/lgo	Lango	lango	42000
+bdh	Baka	baka	40000
+bfa	Bari (Kuku)	bari	34000
+ndz	Ndogo	ndogo	32000
+lul	Olubo	olubo	22000
+mhi	Ma'di	ma'di	22000
+bfl	Banda-Ndélé	banda-ndélé	22000
+wti	Berta	berta	22000
+din/dip	Northeastern Dinka	dinka du Nord-Est	20000
+ara/pga	Juba Arabic	arabe de Djouba	19000
+bxb	Belanda Bor	belanda bor	17000
+xom	Komo	komo	17000
+fer	Feroge	feroge	17000
+nwm	Nyamusa-Molo	nyamusa-molo	15000
+bot	Bongo	bongo	14000
+blm	Beli	beli	14000
+gba	Gbaya	gbaya	13000
+koe	Kacipo-Balesi	kacipo-balesi	12000
+kbo	Keliko	keliko	11000
+mul	Other languages (not individually listed)	Autres langues	122000
+	Total		8260000
