@@ -33,8 +33,8 @@ export default defineConfig([
     },
     rules: {
       'prettier/prettier': 'error',
-      'react/react-in-jsx-scope': 'off', 
-      'indent': [2, 'error'],
+      'react/react-in-jsx-scope': 'off',
+      indent: [2, 'error'],
     },
     settings: {
       react: {
