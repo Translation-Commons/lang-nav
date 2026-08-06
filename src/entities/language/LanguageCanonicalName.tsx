@@ -3,9 +3,9 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import usePageParams from '@features/params/usePageParams';
 
+import { Badge } from '@shared/ui/badge';
 import Highlightable from '@shared/ui/Highlightable';
 import LinkButton from '@shared/ui/LinkButton';
-import Pill from '@shared/ui/Pill';
 
 import { LanguageData } from './LanguageTypes';
 
@@ -28,7 +28,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>Glottolog</Pill>
+          <Badge variant="secondary">Glottolog</Badge>
         </Hoverable>
       )}
       {ISO.name === nameCanonical && (
@@ -43,7 +43,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>ISO</Pill>
+          <Badge variant="secondary">ISO</Badge>
         </Hoverable>
       )}
       {CLDR.name === nameCanonical && (
@@ -60,7 +60,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>CLDR</Pill>
+          <Badge variant="secondary">CLDR</Badge>
         </Hoverable>
       )}
       {Ethnologue.name === nameCanonical && (
@@ -75,7 +75,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>Ethnologue</Pill>
+          <Badge variant="secondary">Ethnologue</Badge>
         </Hoverable>
       )}
     </div>

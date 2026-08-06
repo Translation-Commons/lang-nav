@@ -13,9 +13,9 @@ import LocaleIndigeneityDisplay, {
 } from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
 
+import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Pill from '@shared/ui/Pill';
 
 import LocalePopulationSection from './sections/LocalePopulationSection';
 
@@ -91,7 +91,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
               </>
             }
           >
-            <Pill>inferred</Pill>
+            <Badge variant="secondary">inferred</Badge>
           </Hoverable>
         </DetailsField>
       )}
