@@ -18,7 +18,7 @@ const ColorStyles: React.FC = () => {
         Use CSS variables for colors to maintain consistency and make it easy to update the color
         scheme across the site. Colors should be chosen to ensure sufficient contrast for
         readability and accessibility. These colors adapt to the page brightness setting:
-        <div style={{ display: 'inline-block' }}>
+        <div className="inline-block">
           <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
             <PageBrightnessSelector />
           </SelectorDisplayProvider>
@@ -79,17 +79,7 @@ const ColorStyles: React.FC = () => {
 };
 
 const SwatchesGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <div
-      style={{
-        display: 'grid',
-        gridTemplateColumns: 'repeat(3, minmax(200px, 1fr))',
-        gap: '0.5em',
-      }}
-    >
-      {children}
-    </div>
-  );
+  return <div className="grid grid-cols-[repeat(3,minmax(200px,1fr))] gap-2">{children}</div>;
 };
 
 export default ColorStyles;
