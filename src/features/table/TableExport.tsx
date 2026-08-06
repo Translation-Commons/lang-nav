@@ -12,7 +12,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';
-import LoadingIcon from '@shared/ui/LoadingIcon';
+import { Spinner } from '@shared/ui/spinner';
 
 import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';
@@ -206,7 +206,11 @@ const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = 
     case ExportType.Unchosen:
       return (
         <div style={{ display: 'flex' }}>
-          {isExporting ? <LoadingIcon /> : <ExternalLinkIcon className="button-inline-icon" />}{' '}
+          {isExporting ? (
+            <Spinner className="button-inline-icon" />
+          ) : (
+            <ExternalLinkIcon className="button-inline-icon" />
+          )}{' '}
           {exportType}
         </div>
       );
