@@ -10,6 +10,7 @@ type Props = {
   page?: LangNavPageName;
   params?: Partial<PageParams>;
   children: React.ReactNode;
+  className?: string;
   style?: React.CSSProperties;
   keepOldParams?: boolean;
 };
@@ -18,6 +19,7 @@ const InternalLink: React.FC<Props> = ({
   page = LangNavPageName.Data,
   params,
   children,
+  className,
   style,
   keepOldParams = false, // Assuming internal link should reset old page parameters by default
 }) => {
@@ -27,7 +29,7 @@ const InternalLink: React.FC<Props> = ({
     : '';
   const to = ['/', page, paramsStr].join('');
   return (
-    <Link to={to} title={to} style={style}>
+    <Link to={to} title={to} className={className} style={style}>
       {children}
     </Link>
   );
