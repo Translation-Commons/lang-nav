@@ -9,6 +9,7 @@ import InternalLink from '@features/params/InternalLink';
 
 import ExternalLink from '@shared/ui/ExternalLink';
 import LinkButton from '@shared/ui/LinkButton';
+import { Table, TableBody, TableCell, TableRow } from '@shared/ui/table';
 
 const LinkComponents: React.FC = () => {
   return (
@@ -43,44 +44,44 @@ const LinkComponents: React.FC = () => {
         links.
       </DocsCard>
       <DocsCard title="Component examples">
-        <table style={{ tableLayout: 'fixed' }}>
-          <tbody>
-            <tr>
-              <td style={{ fontFamily: 'monospace' }}>&lt;ExternalLink&gt;</td>
-              <td>
+        <Table className="table-fixed">
+          <TableBody>
+            <TableRow>
+              <TableCell className="font-mono">&lt;ExternalLink&gt;</TableCell>
+              <TableCell>
                 <ExternalLink href="https://example.com">I&apos;m a link</ExternalLink>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ fontFamily: 'monospace' }}>&lt;InternalLink&gt;</td>
-              <td>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-mono">&lt;InternalLink&gt;</TableCell>
+              <TableCell>
                 <InternalLink>I&apos;m a link</InternalLink>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ fontFamily: 'monospace' }}>&lt;Hoverable&gt;</td>
-              <td>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-mono">&lt;Hoverable&gt;</TableCell>
+              <TableCell>
                 <Hoverable hoverContent="I show on hover" onClick={() => alert('Clicked!')}>
                   I&apos;m hoverable and clickable
                 </Hoverable>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ fontFamily: 'monospace' }}>&lt;LinkButton&gt;</td>
-              <td>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-mono">&lt;LinkButton&gt;</TableCell>
+              <TableCell>
                 <LinkButton href="https://example.com">I&apos;m a link</LinkButton>
-              </td>
-            </tr>
-            <tr>
-              <td style={{ fontFamily: 'monospace' }}>&lt;HoverableButton&gt;</td>
-              <td>
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell className="font-mono">&lt;HoverableButton&gt;</TableCell>
+              <TableCell>
                 <HoverableButton hoverContent="I show on hover" onClick={() => alert('Clicked!')}>
                   I&apos;m hoverable and clickable
                 </HoverableButton>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
       </DocsCard>
     </DocsSection>
   );

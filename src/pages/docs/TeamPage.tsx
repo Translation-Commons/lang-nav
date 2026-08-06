@@ -25,15 +25,15 @@ const TeamPage: React.FC = () => {
         more intuitive and engaging way.
       </div>
       <a
+        className="mx-auto"
         href="https://translationcommons.org"
-        style={{ margin: '0 auto' }}
         target="_blank"
         rel="noopener noreferrer"
       >
         <img
+          className="w-[400px] max-w-full"
           src="https://translationcommons.org/wp-content/uploads/2022/07/TC-logo.png"
           alt="Translation Commons Logo"
-          style={{ width: '400px' }}
         />
       </a>
       <DocsSection title="Translation Commons">
