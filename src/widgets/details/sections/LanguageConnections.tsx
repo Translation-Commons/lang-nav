@@ -3,8 +3,9 @@ import React from 'react';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
-import { getLocaleTreeNodes } from '@widgets/treelists/LocaleHierarchy';
 
+import { LanguageData } from '@entities/language/LanguageTypes';
+import LocaleGrid from '@entities/locale/LocaleGrid';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -14,8 +15,6 @@ import useFilters from '@features/transforms/filtering/useFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListRoot from '@features/treelist/TreeListRoot';
-
-import { LanguageData } from '@entities/language/LanguageTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -87,16 +86,9 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         />
       </DetailsField>
       <DetailsField title="Locales">
-        <TreeOrList
-          treeNodes={
-            lang.locales.length > 0 ? getLocaleTreeNodes([lang], sortFunction, filterByScope) : []
-          }
-          listNodes={(lang.locales ?? [])
-            .filter(filterByScope)
-            .sort(sortFunction)
-            .map((v) => (
-              <HoverableObjectName key={v.ID} object={v} />
-            ))}
+        <LocaleGrid locales={(lang.locales ?? [])
+          .filter(filterByScope)
+          .sort(sortFunction)}
           emptyMessage="No locales available for this language."
         />
       </DetailsField>
