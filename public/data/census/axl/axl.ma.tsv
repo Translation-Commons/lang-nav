@@ -1,0 +1,59 @@
+#codeDisplay		# fr names	axl.ma.ara	axl.ma.ber	axl.ma.total
+#nameDisplay			AXL Morocco Arabic Varieties	AXL Morocco Berber Varieties	AXL Morocco Total
+#isoRegionCode	MA				
+#yearCollected	2014				
+### Language Criteria ###					
+#languageUse	Speaks				
+#acquisitionOrder	L1				
+#domain	Home				
+### Population Surveyed ###					
+#population	39695000				
+#responsesPerIndividual	1				
+### Data Constraints ###					
+#geographicScope	whole country				
+#age	0+				
+#nationality	residents				
+#languagesIncluded	All				
+#residenceBasis	de facto				
+#quantity					
+### Creator ###					
+#collectorType	Secondary				
+#author	Jacques Leclerc				
+#presentedBy	AXL				
+### Source Document ###					
+#url	https://www.axl.cefan.ulaval.ca/afrique/maroc-1demo.htm				
+#dateAccessed	2026-08-04				
+#documentName	Maroc (1) Situation démolinguistique				
+#sectionName			2.2 La langue arabe	2.3 Les langues berbères	2.6 L'ensemble des langues
+Language Code	Language	Language			
+ary	Moroccan Arabic	arabe marocain	25 913 000		
+ary/jebl1238	#Moroccan Arabic	arabe marocain	1 329 000		
+apc	Lebanese Arabic	arabe marocain	587 000		
+mey	Hassaniya Arabic	arabe hassanya	196 000		
+arq	Algerian Arabic	arabe algérien	119 000		
+mey	#Hassaniya Arabic (Sahrawi)	arabe hassanya	92 000		
+mey	Hassaniya Arabic	arabe hassanya	60 000		
+arq	Algerian Arabic	arabe algérien	54 000		
+arq	Algerian Arabic	arabe algérien	51 000		
+ary	Moroccan Arabic	arabe marocain	41 000		
+aju	Judeo-Moroccan Arabic	arabe judéo-marocain	21 000		
+mey	Hassaniya Arabic	arabe hassanya	20 000		
+ary	Moroccan Arabic	arabe marocain	19 000		
+shi	Tachelhit	tachelhit		3 556 000	
+tzm	Amazigh	amazigh		2 937 000	
+rif	Rifian (Tarifit)	rifain (tarifit)		1 649 000	
+shi	Tachelhit	tachelhit		524 000	
+shi	Tachelhit	tachelhit		393 000	
+tzm	Amazigh	amazigh		342 000	
+tzm	Amazigh	amazigh		159 000	
+sjs	Tasenhajit	tasenhajit		97 000	
+tzm	Amazigh	amazigh		78 000	
+tzm	Amazigh	amazigh		78 000	
+shy	Chaoui	chaoui		27 000	
+grr	Taznati	taznati		16 000	
+gho	Ghomari	ghomari		12 000	
+ara	Arabic	arabe + variétés			28 502 000
+ber	Amazigh	amazigh + variétés			10 868 000
+spa	Spanish	espagnol			7 200
+fra	French	français			5 800
+mul	Miscellaneous	diverses			312 000

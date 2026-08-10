@@ -1,6 +1,7 @@
 import { CopyIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
+import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
@@ -41,19 +42,22 @@ const ReportLocalesPotential: React.FC = () => {
   );
   const isPercentEnough = useCallback(
     (percInCountry: number | undefined, percOfLangWorldWide: number | undefined) => {
-      if (requireBothPercents) {
-        return (
-          (percInCountry ?? 0) >= minInCountry && (percOfLangWorldWide ?? 0) >= minOfLangWorldWide
-        );
-      } else {
-        return (
-          (percInCountry ?? 0) >= minInCountry || (percOfLangWorldWide ?? 0) >= minOfLangWorldWide
-        );
-      }
+      const enoughInCountry = (percInCountry ?? 0) >= minInCountry;
+      const enoughOfLangWorldWide = (percOfLangWorldWide ?? 0) >= minOfLangWorldWide;
+      if (requireBothPercents) return enoughInCountry && enoughOfLangWorldWide;
+      return enoughInCountry || enoughOfLangWorldWide;
     },
     [minInCountry, minOfLangWorldWide, requireBothPercents],
   );
   const potentialLocales = usePotentialLocales(isPercentEnough);
+  const { locales } = useDataContext();
+  const localesMissingOriginalPopData = useMemo(
+    () =>
+      locales.filter(
+        (locale) => (locale.pop.rough ?? 0) <= 10 && (locale.pop.speaking.unadjusted ?? 0) > 10,
+      ),
+    [locales],
+  );
 
   return (
     <div>
@@ -107,6 +111,11 @@ const ReportLocalesPotential: React.FC = () => {
         Locales in this table reflect languages that already have other locales in territories but a
         consistent of the same language not necessarily the same locale. For example, they may have
         an entry with a writing system specified.
+      </SubReport>
+      <SubReport title="Locales missing pop data in table" locales={localesMissingOriginalPopData}>
+        The database stores locale data and based on the initial data does some changes to make
+        computed data like regional locales. That relies on having rough estimates before censuses
+        are loaded and these locales are missing them in the original locale declaration.
       </SubReport>
     </div>
   );
@@ -187,7 +196,7 @@ const PotentialLocalesTable: React.FC<{
           key: '% of Global Language Speakers',
           render: (object) =>
             object.pop.speaking.adjusted &&
-            (object.pop.speaking.adjusted * 100) / (object.language?.pop.speaking.estimate ?? 1),
+            (object.pop.speaking.adjusted * 100) / (object.language?.pop.overall ?? 1),
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {

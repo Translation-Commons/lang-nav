@@ -1,0 +1,47 @@
+#codeDisplay		axl.tz.eth	axl.tz.l2	axl.tz.overall	wiki.tz2001	wiki.tz2007	wiki.tz2009	wiki.tz2016
+#nameDisplay		AXL Tanzania Ethnicity	AXL Tanzania L2	AXL Tanzania Overall	Wikipedia Tanzania 2001	Wikipedia Tanzania 2007	Wikipedia Tanzania 2009	Wikipedia Tanzania 2016
+#isoRegionCode	TZ							
+#yearCollected		2003	2003	2003	2001	2007	2009	2016
+### Language Criteria ###								
+#languageUse		Ethnicity	Speaks	Speaks	Speaks	Speaks	Speaks	Speaks
+#acquisitionOrder		L1	L2	Any				
+#domain								
+### Population Surveyed ###								
+#population		34,800,000	34,800,000	34,800,000	35,414,000	41,716,000	43,958,000	54,402,000
+#populationSource					https://en.wikipedia.org/wiki/Demographics_of_Tanzania	https://en.wikipedia.org/wiki/Demographics_of_Tanzania	https://en.wikipedia.org/wiki/Demographics_of_Tanzania	https://en.wikipedia.org/wiki/Demographics_of_Tanzania
+### Data Constraints ###								
+#quantity		percent	percent	percent	count	count	count	count
+### Creator ###								
+#collectorType	Secondary							
+#author		Jacques Leclerc	Jacques Leclerc	Jacques Leclerc				
+#presentedBy		AXL	AXL	AXL	Wikipedia	Wikipedia	Wikipedia	Wikipedia
+### Source Document ###								
+#url		https://www.axl.cefan.ulaval.ca/afrique/tanzanie.htm	https://www.axl.cefan.ulaval.ca/afrique/tanzanie.htm	https://www.axl.cefan.ulaval.ca/afrique/tanzanie.htm	https://en.wikipedia.org/wiki/Languages_of_Tanzania	https://en.wikipedia.org/wiki/Languages_of_Tanzania	https://en.wikipedia.org/wiki/Languages_of_Tanzania	https://en.wikipedia.org/wiki/Languages_of_Tanzania
+#datePublished		2024-06-21	2024-06-21	2024-06-21				
+#dateAccessed		2026-07-31	2026-07-31	2026-07-31	2026-07-31	2026-07-31	2026-07-31	2026-07-31
+#sectionName		2.1 Les ethnies	2.3 Le swahili, l'anglais et l'arabe	2.3 Le swahili, l'anglais et l'arabe	Language families	Language families	Language families	Language families
+								
+Language code	Ethnic group	Percentage						
+swa/swh	Swahili	1%	95%	96%				
+eng	English		4.5%					
+suk	Sukuma	15.5%						8130000
+gog	Gogo	4.1%					1080000	
+hay	Haya	3.7%						1940000
+tum	Tumbuka	3.1%				400000		
+nym	Nyamwezi	2.8%						1470000
+kde	Makonde	2.8%						1470000
+heh	Hehe	2.3%						1210000
+nyy	Nyakyusa-Ngondé	2.3%						
+chag1250	Chagga	1.8%						
+rim	Nyaturu	1.7%						
+mas	Maasai	1.3%						682000
+nim	Nilamba	1.3%						
+yao	Yao	1.2%						630000
+mgh	Makhuwa-Meetto	1.1%						
+bez	Bena						592000	
+dig	Digo						166000	
+ruf	Luguru						404000	
+lag	Rangi					410000		
+sbk	Safwa						322000	
+ksb	Sambaa				660000			
+luo	Luo						185000	

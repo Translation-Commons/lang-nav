@@ -4,9 +4,11 @@ import React, { PropsWithChildren, useState } from 'react';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 
+import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
+import CensusRecordPriority from '@entities/census/CensusRecordPriority';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationBreakdown from '@entities/locale/LocalePopulationBreakdown';
@@ -52,6 +54,11 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                 <th>Percent</th>
                 <th>Census</th>
                 <th>Difference</th>
+                <th colSpan={2}>
+                  <Hoverable hoverContent="When comparing censuses, this indicates which estimate is used for the canonical population count. The first rank is for the speaking population, the second rank is for the writing population.">
+                    Priority
+                  </Hoverable>
+                </th>
               </tr>
             </thead>
             <tbody>
@@ -73,6 +80,12 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                         percentNew={censusEstimate.populationPercent}
                         percentOld={pop.speaking.percent}
                       />
+                    </td>
+                    <td className="px-2">
+                      <CensusRecordPriority record={censusEstimate} focus="speaking" />
+                    </td>
+                    <td className="px-2">
+                      <CensusRecordPriority record={censusEstimate} focus="writing" />
                     </td>
                   </tr>
                 ))}

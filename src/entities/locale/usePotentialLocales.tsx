@@ -72,6 +72,7 @@ function usePotentialLocales(
                   adjusted: populationAdjusted,
                   unadjusted: populationEstimate,
                   percent: populationPercentInCountry,
+                  percentAdjusted: populationPercentInCountry,
                   source: PopulationSourceCategory.Official,
                   census,
                 },
@@ -86,6 +87,7 @@ function usePotentialLocales(
               // If we already have a locale but the population estimate is higher, update it
               missing[localeID].pop.speaking.unadjusted = populationEstimate;
               missing[localeID].pop.speaking.percent = populationPercentInCountry;
+              missing[localeID].pop.speaking.percentAdjusted = populationPercentInCountry;
               missing[localeID].pop.speaking.adjusted = populationAdjusted;
               missing[localeID].pop.speaking.source = PopulationSourceCategory.Official;
               missing[localeID].pop.speaking.census = census;

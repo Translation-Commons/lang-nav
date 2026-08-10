@@ -1,0 +1,99 @@
+#codeDisplay		#fr names	axl.ng	axl.ng.broad
+#nameDisplay			AXL Nigeria 2017	AXL Nigeria 2017 Pidgin
+#isoRegionCode	NG			
+#yearCollected	2017			
+### Language Criteria ###				
+#languageUse	Speaks 			
+#acquisitionOrder			L1	Any
+### Population Surveyed ###				
+#population	191836000			
+#responsesPerIndividual			1	
+### Data Constraints ###				
+#geographicScope	Whole country			
+#age	0+			
+#nationality	Residents			
+#languagesIncluded	Ethnic groups with more than 200,000 individuals (71 groups = 90.0% of population). 	  		
+#residenceBasis	de facto			
+#quantity			count	
+### Creator ###				
+#collectorType	Secondary			
+#author	Jacques Leclerc			
+#presentedBy	AXL			
+### Source Document ###				
+#url	https://www.axl.cefan.ulaval.ca/afrique/nigeria.htm			
+#datePublished	2024-06-21			
+#dateAccessed	2026-08-04			
+#sectionName	Section 2.1 Les ethnies dominantes — table: Ethnie / Population / Pourcentage / Langue / Affiliation / Religion			2.2 Les langues
+Language Code	Language Name (English)	Language Name (French)	Population	
+yor	Yoruba	yoruba	39647000	
+hau	Hausa	haoussa	35230000	
+ibo	Igbo	igbo	28533000	
+ful/fuv	Fula / Fulfulde	peul/fulfudé	15311000	
+kau/knc	Kanuri	kanouri	7120000	
+ibb	Ibibio	ibibio	5772000	
+tiv	Tiv	tiv	4242000	
+anw	Anaang	anaang	2687000	
+ijc	Izon	izon	2270000	
+igb	Ebira	ébira	2061000	
+bin	Edo	édo	1888000	
+pcm	Nigerian Pidgin	pidgin english	1732000	60000000
+nup	Nupe	nupé-nupé-tako	1694000	
+igl	Igala	igala	1510000	
+bom	Berom	berom	1230000	
+gbr	Gbagyi	gbagyi	1201000	
+urh	Urhobo	urhobo	1030000	
+idu	Idoma	idoma	908000	
+its	Isekiri	isekiri	875000	
+mzm	Mumuye	mumuye	730000	
+eza	Ezaa	ezaa	687000	
+anc	Angas	angas	645000	
+efi	Efik	éfik	645000	
+iso	Isoko	isoko	634000	
+izz	Izii	izii	629000	
+ish	Esan	ésan	606000	
+ikw	Ikwere	ikwere	606000	
+kaj	Jju	jju	568000	
+hig	Kamwe	kamwe	565000	
+sur	Mwaghavul	mwaghavul	539000	
+gby	Gbari	gbari	512000	
+yer	Tarok	tarok	484000	
+ets	Yekhee	yekhee	476000	
+bwr	Bura-Pabir	bura-pabir	472000	
+ijn	Kalabari	kalabari	472000	
+okr	Kirike	kirike	431000	
+ige	Igede	igede	429000	
+guw	Gun	gun	427000	
+tkq	Tee	tee	416000	
+eke	Ekit	ekit	412000	
+ogo	Khana	khana	404000	
+gew	Gera	gera	389000	
+ogb	Ogbia	ogbia	366000	
+kad	Adara	adara	358000	
+kai	Karekare	karekare	358000	
+ank	Goemai	goemai	354000	
+bde	Bade	bade	331000	
+hbb	Nya Huba	nya huba	330000	
+say	Saya	saya	323000	
+ogc	Ogbah	ogbah	311000	
+ara/shu	Chadian Arabic	arabe tchadien	303000	
+bzw	Basa	basa	303000	
+iqw	Ikwo	ikwo	303000	
+ukw	Ukwuani-Aboh-Ndoni	ukwuani-aboh-ndoni	293000	
+ann	Obolo	obolo	291000	
+bcy	Bacama	bacama	283000	
+bta	Bata	bata	281000	
+yba	Yala	yala	259000	
+bky	Bokyi	bokyi	256000	
+tan	Tangale	tangale	253000	
+ego	Eggon	eggon	249000	
+kcg	Tyap	tyap	237000	
+bium1270	Marghi	marghi	221000	
+mfn	Cross River Mbembe	mbembe, Cross River	220000	
+gmz	Mgbolizhia	mgbolizhia	219000	
+yaz	Lokaa	lokaa	216000	
+ema	Emai-Iuleha-Ora	emai-Iuleha-ora	215000	
+kez	Kukele	kukélé	215000	
+bol	Bole	bole	212000	
+cla	Ron	ron	212000	
+dio	Dibo	dibo	200000	
+mul	Other (~180 ethnic groups)	Autres	17369000	

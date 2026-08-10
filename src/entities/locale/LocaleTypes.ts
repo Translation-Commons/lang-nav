@@ -118,6 +118,7 @@ export interface LocaleData extends ObjectBase {
   pop: {
     speaking: LocalePopulationData;
     writing: LocalePopulationData;
+    rough?: number; // Saved in the locales table, not adjusted or imported from censuses
   };
 
   // Data computed from other references, particularly territories.tsv and censuses

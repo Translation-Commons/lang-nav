@@ -1,0 +1,73 @@
+#codeDisplay		axl.bj	axl.bj.fr
+#nameDisplay		AXL Benin	AXL Benin French
+#isoRegionCode	BJ		
+#yearCollected	2002		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder		L1	L2
+#domain		Home	
+### Population Surveyed ###			
+#population	6769914		
+### Data Constraints ###			
+#quantity		count	percent
+### Creator ###			
+#collectorType	Secondary		
+#author	Jacques Leclerc		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/afrique/benin.htm		
+#datePublished	2026-05-19		
+#dateAccessed	2026-08-03		
+#sectionName	2.2 Les langues nationales		
+			
+Language Code	Language	Nombre des locuteurs	
+fon	Fon	1 194 082	
+ajg	Adja	590 819	
+bba	Bariba	564 489	
+guw	Goun	423 175	
+nqg	Nago	459 148	
+ful/fue	Fulfulde	374 892	
+ayb	Aïzo/Ayizo	289 441	
+mxl	Mahi	214 597	
+sxw	Sahoué	174 771	
+wem	Ouémé	169 126	
+ayb/ayiz1247	Tory	162 051	
+ddn	Dendi	159 983	
+pil	Yoa/Yom/Pila-Pila	124 974	
+yor	Yoruba	124 813	
+idd	Idaasha	101 492	
+beh	Berba	96 998	
+kqk	Kotafon	96 594	
+xwl	Xwla-Pla	95 713	
+gng	Gando	95 650	
+ijj	Holli-Djé	92 376	
+tbz	Ditamari (Besorabé)	88 295	
+tfi	Tofin	85 106	
+dop	Dompago/Lokpa	83 355	
+gej	Mina	77 893	
+wwa	Waama	68 555	
+nta	Natimba	60 987	
+bqc	Boo	51 713	
+xwe	Péda	50 534	
+tbz	Ottamari	37 630	
+gux	Gourmantché	36 476	
+wci	Ouatchi	36 574	
+ife	Ifé/Itcha	27 312	
+mkl	Mokolé	21 440	
+blo	Ani	23 569	
+cko	Sèto	20 342	
+kdh	Koto-Koli	13 261	
+mis	Yendé	12 538	
+fod	Windjii/Foodo	12 361	
+kbp	Kabyé	9 301	
+gng	Gaganba	8 952	
+dje	Djerma	8 880	
+gbh	Défi	4 381	
+bqc	Boko	3 738	
+pil/mis	Taneka/Tamba	2 876	
+cbj	Tchabè	2 239	
+soy	Soruba/Biyobè	1 347	
+mis	Hossori	1 241	
+mul	Others	96 317	
+	Total	6 769 914	
+fra	French		34%
