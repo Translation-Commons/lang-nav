@@ -19,7 +19,7 @@ function getScoreColor(ratio: number | null): string {
 const ScoreRing: React.FC<Props> = ({ value, max, size = 44, label }) => {
   const gradientId = useId();
   const glowId = useId();
-  const stroke = size * 0.120;
+  const stroke = size * 0.12;
   const radius = (size - stroke) / 2;
   const circumference = 2 * Math.PI * radius;
   const ratio = value != null ? Math.min(Math.max(value / max, 0), 1) : null;
