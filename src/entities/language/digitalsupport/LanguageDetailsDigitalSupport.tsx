@@ -13,6 +13,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
+import ScoreRing from '@shared/ui/ScoreRing';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 
@@ -20,7 +21,6 @@ import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '../../ui/CLDRCov
 import ObjectWikipediaInfo from '../../ui/ObjectWikipediaInfo';
 import { LanguageData } from '../LanguageTypes';
 
-import LanguageDigitalSupportMeter from './DigitalSupportMeter';
 import { DigitalSupportDimension } from './DigitalSupportTypes';
 import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 
@@ -37,12 +37,21 @@ const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
             key={dimension}
             style={{
               gridColumn: dimension === DigitalSupportDimension.Overall ? '1 / -1' : 'span 1',
+              display: 'flex',
+              // The Overall row has no breakdown, so its title reads better beside the ring
+              alignItems: dimension === DigitalSupportDimension.Overall ? 'center' : 'flex-start',
+              gap: '0.6em',
             }}
           >
-            <strong>{getDigitalSupportDimensionLabel(dimension)}:</strong>{' '}
-            {Math.floor(digitalSupportScore[dimension])}/10
-            <LanguageDigitalSupportMeter lang={lang} dim={dimension} />
-            <DigitalSupportDimensionBreakdown key={dimension} lang={lang} dimension={dimension} />
+            <ScoreRing
+              value={Math.floor(digitalSupportScore[dimension])}
+              max={10}
+              label={`${getDigitalSupportDimensionLabel(dimension)} score`}
+            />
+            <div style={{ flex: 1, minWidth: 0 }}>
+              <div style={{ fontWeight: 600 }}>{getDigitalSupportDimensionLabel(dimension)}</div>
+              <DigitalSupportDimensionBreakdown lang={lang} dimension={dimension} />
+            </div>
           </div>
         ))}
       </ResponsiveGrid>
