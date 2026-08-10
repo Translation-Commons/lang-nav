@@ -11,7 +11,6 @@ import CreativeCommonsLicense from './CreativeCommonsLicense';
 
 const PageFooter: React.FC = () => {
   const { reset } = useConsent();
-
   return (
     <footer>
       <span>
