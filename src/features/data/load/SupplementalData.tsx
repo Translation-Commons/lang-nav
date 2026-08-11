@@ -48,7 +48,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadWin11LanguagePacks(dataContext.getLanguage),
-    loadLangTags(dataContext.getLanguage)
+    loadLangTags(dataContext.getLanguage),
   ]);
 
   const censusImports = await loadCensusData();
