@@ -18,6 +18,11 @@ These datasets are aggregated and curated by the LangNav team. In some places th
 - ECRML (European Charter for Regional or Minority Languages)
   - https://www.coe.int/en/web/european-charter-regional-or-minority-languages/languages-covered
   - accessed 2025-11-20
+- langtags.json
+  - https://github.com/silnrsi/langtags/blob/master/doc/langtags.md
+  - https://ldml.api.sil.org/langtags.json
+  - public domain
+  - accessed 2026-08-10
 
 Additionally, there are folders containing multiple datasets, grouped by the originating source:
 
