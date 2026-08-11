@@ -12,6 +12,7 @@ import { loadGoogleTranslate } from './supplemental/loadGoogleTranslate';
 import { loadIndigeneity } from './supplemental/loadIndigeneity';
 import { loadIos } from './supplemental/loadIos';
 import { loadLandArea } from './supplemental/loadLandArea';
+import { loadLangTags } from './supplemental/loadLangTags';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
@@ -47,6 +48,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadWin11LanguagePacks(dataContext.getLanguage),
+    loadLangTags(dataContext.getLanguage)
   ]);
 
   const censusImports = await loadCensusData();
