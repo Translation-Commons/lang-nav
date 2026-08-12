@@ -7,9 +7,9 @@ import { LangNavPageName } from '@app/PageRoutes';
 import NewHoverable from '@features/layers/hovercard/NewHoverable';
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { PageParams } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
 
 import './tabs.css';
+import useAreParamsCurrent from './useAreParamsCurrent';
 
 export type TabOption = {
   description?: ReactNode;
@@ -27,28 +27,17 @@ type Props = {
 const ITEM_LIMIT = 4;
 
 const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOptionsLabel }) => {
-  const params = usePageParams();
   const [oldParams] = useSearchParams({});
-  const getIsActive = useCallback(
-    (option: TabOption) =>
-      Object.entries(option.urlParams).every(([key, value]) => {
-        const paramValue = params[key as keyof PageParams];
-        if (Array.isArray(paramValue) && Array.isArray(value)) {
-          return paramValue.sort().join(';') === value.sort().join(';');
-        }
-        return paramValue === value;
-      }),
-    [params],
-  );
+  const getIsActive = useAreParamsCurrent();
 
-  const countShown = options.slice(0, ITEM_LIMIT - 1).some(getIsActive)
+  const countShown = options.slice(0, ITEM_LIMIT - 1).some((o) => getIsActive(o.urlParams))
     ? ITEM_LIMIT
     : ITEM_LIMIT - 1;
   const visibleOptions = options.filter(
-    (option, index) => getIsActive(option) || index < countShown,
+    (option, index) => getIsActive(option.urlParams) || index < countShown,
   );
   const hiddenOptions = options.filter(
-    (option, index) => !getIsActive(option) && index >= countShown,
+    (option, index) => !getIsActive(option.urlParams) && index >= countShown,
   );
   const getNavTo = useCallback(
     (option: TabOption) => {
@@ -63,7 +52,7 @@ const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOpti
       {visibleOptions.map((option) => (
         <Tab
           key={option.label}
-          isActive={getIsActive(option)}
+          isActive={getIsActive(option.urlParams)}
           description={option.description}
           label={option.label}
           navTo={getNavTo(option)}
@@ -77,7 +66,7 @@ const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOpti
               {hiddenOptions.map((option) => (
                 <Tab
                   key={option.label}
-                  isActive={getIsActive(option)}
+                  isActive={getIsActive(option.urlParams)}
                   label={option.label}
                   navTo={getNavTo(option)}
                 />

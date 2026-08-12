@@ -9,6 +9,7 @@ import usePageParams from '@features/params/usePageParams';
 import ObjectTitle from '@entities/ui/ObjectTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+import Deemphasized from '@shared/ui/Deemphasized';
 
 import { CensusData } from './CensusTypes';
 
@@ -32,7 +33,7 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
           borderRadius: '0.5em',
         }}
       >
-        {censuses.length > 0 && page <= censuses.length && censuses[page - 1] && (
+        {censuses.length > 0 && page <= censuses.length && censuses[page - 1] ? (
           <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
             <ContainErrorsAndSuspense>
               <h2>
@@ -41,6 +42,8 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
               <CensusDetails census={censuses[page - 1]} />
             </ContainErrorsAndSuspense>
           </LocalParamsProvider>
+        ) : (
+          <Deemphasized>No censuses from input</Deemphasized>
         )}
       </div>
     </>

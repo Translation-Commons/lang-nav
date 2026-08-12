@@ -1,107 +1,80 @@
+import { SearchIcon } from 'lucide-react';
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { FeedbackForm } from '@features/feedback/FeedbackForm';
-import ZIndex from '@features/layers/ZIndex';
+import PopupCard from '@features/layers/popupcard/PopupCard';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import SearchBar from '@features/transforms/search/SearchBar';
 
+import NavBarToolsMenu from './controls/NavBarToolsMenu';
 import SettingsButton from './controls/SettingsButton';
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
 
   return (
-    <NavBarContainer>
+    <nav className="flex flex-wrap items-center gap-x-2 text-lg text-(--color-text-on-color) bg-(--color-button-primary)">
       <NavBarTitle>
         <img
           src={`${import.meta.env.BASE_URL}logo/LangNavLogoNavBar${pageBrightness === 'dark' ? 'Dark' : ''}.svg`}
           width="60px"
           alt="LangNav Logo"
         />
-        <span>
+        <span className="hidden sm:inline md:hidden">
+          <strong>LangNav</strong> <em>β</em>
+        </span>
+        <span className="hidden md:inline">
           <strong>Lang</strong>uage <strong>Nav</strong>igator <em>β</em>
         </span>
       </NavBarTitle>
-      <NavBarLink path={'/' + LangNavPageName.Intro}>Intro</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.About}>About</NavBarLink>
-      <div style={{ display: 'flex', flexGrow: 1 }}>
-        <SearchBar />
+      <NavBarToolsMenu />
+      <PopupCard
+        buttonClassName="primary lg:hidden"
+        buttonLabel={<SearchIcon />}
+        buttonStyle={{ padding: '8px' }}
+        justifyCard="center"
+        body={<SearchBar />}
+      />
+      <div className="flex-1">
+        <div className="hidden lg:flex">
+          <SearchBar />
+        </div>
       </div>
-      <div style={{ display: 'flex', marginLeft: 'auto', alignItems: 'center', gap: '0.5em' }}>
-        <FeedbackForm />
-        <SettingsButton />
-      </div>
-    </NavBarContainer>
+      <FeedbackForm />
+      <SettingsButton />
+    </nav>
   );
 };
 
 const NavBarLink: React.FC<React.PropsWithChildren<{ path: string }>> = ({ path, children }) => {
   return (
-    <button className="primary" style={{ padding: '0.5em .5em', margin: '0 0.5em' }}>
-      <NavLink
-        to={path}
-        style={({ isActive }) => ({
-          textDecoration: 'none',
-          fontSize: '1.2em',
-          fontWeight: isActive ? 'bold' : 'lighter',
-        })}
-      >
-        {children}
-      </NavLink>
-    </button>
-  );
-};
-
-const NavBarContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <nav
-      className="NavBar"
-      style={{
-        position: 'sticky',
-        top: 0,
-        zIndex: ZIndex.NavBar,
-        alignItems: 'center',
-        display: 'flex',
-        flexWrap: 'wrap',
-        marginTop: '0em',
-        borderBottom: '0.125em solid var(--color-button-primary)',
-        width: '100%',
-        rowGap: '0.5em',
-        color: 'var(--color-text-on-color)',
-        backgroundColor: 'var(--color-button-primary)',
-      }}
+    <NavLink
+      className="primary text-xl p-2 rounded-sm hover:bg-(--color-button-hover) active:no-underline"
+      to={path}
+      style={({ isActive }) => ({
+        textDecoration: 'none',
+        fontWeight: isActive ? 'bold' : 'lighter',
+      })}
     >
       {children}
-    </nav>
+    </NavLink>
   );
 };
 
 const NavBarTitle: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <h1
-      style={{
-        fontSize: '1.5em',
-        whiteSpace: 'nowrap',
-        lineHeight: '1.5',
-        margin: '0em 0.5em',
-        display: 'flex',
-        alignItems: 'center',
-        marginLeft: '0.25em',
-        gap: '0.25em',
-      }}
+    <InternalLink
+      className="primary flex gap-1 items-center text-2xl p-2 rounded-sm hover:bg-(--color-button-hover) active:no-underline overflow-nowrap"
+      page={LangNavPageName.Intro}
     >
-      <InternalLink
-        page={LangNavPageName.Intro}
-        style={{ alignItems: 'center', display: 'flex', gap: '0.25em' }}
-      >
-        {children}
-      </InternalLink>
-    </h1>
+      {children}
+    </InternalLink>
   );
 };
 

@@ -14,21 +14,10 @@ const SortPopupCard: React.FC = () => {
   return (
     <NewHoverable
       hoverContent={
-        <div>
-          <div style={{ fontSize: '1.5em', paddingBottom: '0.5em' }}>Sorting Options</div>
-          <div
-            style={{
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '0.5em',
-              width: 'max-content',
-              alignItems: 'end',
-            }}
-          >
-            <SortBySelector />
-            <SecondarySortBySelector />
-            <SortDirectionSelector />
-          </div>
+        <div className="flex flex-col gap-2 w-max items-end">
+          <SortBySelector />
+          <SecondarySortBySelector />
+          <SortDirectionSelector />
         </div>
       }
     >

@@ -16,6 +16,8 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }
   children,
   zIndex = ZIndex.HoverCard,
 }) => {
+  const cardRef = useRef<HTMLDivElement>(null);
+
   const [hoverCard, setHoverCard] = useState<HoverCardData>({
     content: null,
     x: 0,
@@ -36,11 +38,21 @@ const HoverCardProvider: React.FC<{ children: React.ReactNode; zIndex?: number }
     setHoverCard((prev) => ({ ...prev, visible: false }));
   }, []);
 
-  const cardRef = useRef<HTMLDivElement>(null);
-
   const onMouseLeaveTriggeringElement = useCallback(() => {
     setLeftTriggeringElement(true);
   }, []);
+
+  // Trigger blur event and close all hovercards (and popupcards) when the user clicks escape
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        (event.target as HTMLElement)?.blur();
+        hideHoverCard();
+      }
+    };
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [hideHoverCard]);
 
   // Listen for mouse movements, if the hovercard is visible and the mouse moves too far away from it, hide it
   useEffect(() => {
