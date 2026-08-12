@@ -27,13 +27,18 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
   return (
     <aside
       style={{
+        // Anchors DraggableResizeBorder's `position: absolute` to this element -- without it,
+        // the drag handle positions against a distant ancestor instead and silently inflates
+        // the page's real scrollable height.
+        position: 'relative',
+        height: '100%',
         width: panelWidth,
         maxWidth: isOpen ? panelWidth : '0',
         borderRight: panelSide === 'left' ? '2px solid var(--color-button-primary)' : undefined,
         borderLeft: panelSide === 'right' ? '2px solid var(--color-button-primary)' : undefined,
         transition: shouldEaseTransition ? 'max-width 0.3s ease-in-out' : undefined,
         overflow: 'hidden',
-        position: 'relative',
+        flexShrink: 0,
       }}
     >
       {isOpen && (
@@ -48,6 +53,7 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         style={{
           display: 'flex',
           flexDirection: 'column',
+          height: '100%',
           alignContent: panelSide === 'left' ? 'flex-start' : 'flex-end',
           right: panelSide === 'right' ? 0 : undefined,
           // keeps the inner content from shrinking when collapsing
@@ -81,9 +87,10 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         </div>
         <div
           style={{
-            overflowY: 'scroll',
+            flex: 1,
+            minHeight: 0,
+            overflowY: 'auto',
             overflowX: 'hidden',
-            height: '90vh',
             width: panelWidth,
             padding: '0.5em',
           }}

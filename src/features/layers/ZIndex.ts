@@ -5,6 +5,7 @@ const ZIndex = {
   MapSidePanel: 10,
 
   Sidepanel: 40,
+  NavBar: 41,
   PopupCard: 45,
   Modal: 50, // in CSS
   HoverCard: 90,
