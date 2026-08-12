@@ -41,8 +41,13 @@ LangTags.forEach((LangTag) => {
   const tagExtraCode = LangTag.iso639_3extra ?? [];
   const tagNames = Array.isArray(LangTag.names) ? LangTag.names : [];
 
-  if (tagNames.length > 0 || tagExtraCode.length > 0) output.push(tagCode + '\t' + tagExtraCode.join(';') + '\t' + tagNames.join(';'));
+  if (tagNames.length > 0 || tagExtraCode.length > 0)
+    output.push(tagCode + '\t' + tagExtraCode.join(';') + '\t' + tagNames.join(';'));
 });
 
-fs.writeFileSync('public/data/other_sources/langtags.tsv', uniqueBy(output, (line) => line).join('\n'), 'utf-8');
+fs.writeFileSync(
+  'public/data/other_sources/langtags.tsv',
+  uniqueBy(output, (line) => line).join('\n'),
+  'utf-8',
+);
 console.log('langtags.json converted to tsv!');
