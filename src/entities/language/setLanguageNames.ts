@@ -1,4 +1,4 @@
-import { unique } from '@shared/lib/setUtils';
+import { uniqueBy } from '@shared/lib/setUtils';
 
 import { LanguageData, LanguageSource } from './LanguageTypes';
 
@@ -14,12 +14,14 @@ export function setLanguageNames(lang: LanguageData, additionalNames: string[] =
   // Remove parentheticals if its a standard for an alternative language name
   // eg. ["Mandarin", "Putonghua (Mandarin)"] -> ["Mandarin", "Putonghua"]
   // but keep if its is an elaboration eg. ["Cantonese", "Cantonese (inc. Teochew, Taiwanese)"]
-  const namesRemovingParentheticalDuplicates = unique(
+  const namesRemovingParentheticalDuplicates = uniqueBy(
     names.map((name) => {
       const [preParens, inParens] = name.split(/\(|\)/);
       if (inParens && names.includes(inParens.trim())) return preParens.trim();
       return name;
     }),
+    // added to make sure languages that are the same with different casings don't go through twice
+    (name) => name.toLowerCase(),
   );
 
   // Set the value

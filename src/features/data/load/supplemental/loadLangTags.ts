@@ -1,35 +1,34 @@
-// Source: https://ldml.api.sil.org/langtags.json (SIL langtags dataset, public domain)
-// Docs: https://github.com/silnrsi/langtags/blob/master/doc/langtags.md
-// A local copy is bundled at data/other_sources/langtags.json as a fallback / for
+// A local copy is bundled at data/other_sources/langtags.tsv as a fallback / for
 // offline builds. If refreshing this file, re-fetch from the URL above.
+// See scripts/convertLangTagsToTsv.mjs for the JSON -> TSV conversion.
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import { setLanguageNames } from '@entities/language/setLanguageNames';
-
-export interface SILLanguage {
-    iso639_3?: string;
-    name?: string;
-    names?: string[]
-
-}
 
 export async function loadLangTags(
     getLanguage: (id: string) => LanguageData | undefined,
 ): Promise<void> {
-    return fetch('data/other_sources/langtags.json')
-        .then((res) => res.json())
-        .then((languages: SILLanguage[]) => {
-            languages.forEach((language) => {
-                if (!language.iso639_3) { return; }
+    return fetch('data/other_sources/langtags.tsv')
+        .then((res) => res.text())
+        .then((text) =>
+            text
+                .split('\n')
+                .slice(1) // Remove "iso639_3\tiso639_3extra\tnames" header row
+                .filter((line) => line.trim() !== '' && !line.startsWith('#')),
+        )
+        .then((lines) => {
+            lines.forEach((line) => {
+                const [isoCode, isoCodeExtra, namesColumn] = line.split('\t');
 
-                const lang = getLanguage(language.iso639_3)
-                if (lang === undefined) { return; }
+                const targetCodes = isoCodeExtra ? isoCodeExtra.split(';') : [isoCode];
+                const names = namesColumn ? namesColumn.split(';') : [];
 
-                if (lang.scope === LanguageScope.Macrolanguage) { return; }
-
-                setLanguageNames(lang, language.names || [])
+                targetCodes.forEach((code) => {
+                    const lang = getLanguage(code);
+                    if (!lang) return;
+                    setLanguageNames(lang, names);
+                });
             });
         })
         .catch((err) => console.error('Error loading langtags data:', err));
 }
-
