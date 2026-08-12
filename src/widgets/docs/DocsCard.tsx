@@ -4,7 +4,7 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
-import Pill from '@shared/ui/Pill';
+import { Badge } from '@shared/ui/badge';
 
 type Props = {
   title: ReactNode;
@@ -34,7 +34,7 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
     <>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
         <span style={{ fontWeight: 600 }}>{title}</span>
-        {href != null && isDisabled && <Pill>Coming soon</Pill>}
+        {href != null && isDisabled && <Badge variant="secondary">Coming soon</Badge>}
         {external && !isDisabled ? <span aria-hidden="true">↗</span> : null}
       </div>
       <div style={{ fontWeight: 'lighter' }}>{children}</div>

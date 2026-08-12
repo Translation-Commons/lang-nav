@@ -25,12 +25,12 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
       {/* <DetailsField title="Ethnologue (2012)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2012} />{' '}
         {vitality.ethFine != null &&
-          (Ethnologue.vitality2012 != null ? <Pill>Ethnologue 2012</Pill> : <Pill>Derived</Pill>)}
+          (Ethnologue.vitality2012 != null ? <Badge variant="secondary">Ethnologue 2012</Badge> : <Badge variant="secondary">Derived</Badge>)}
       </DetailsField>
       <DetailsField title="Ethnologue (2025)">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2025} />{' '}
         {vitality.ethCoarse != null &&
-          (Ethnologue.vitality2025 != null ? <Pill>Ethnologue 2025</Pill> : <Pill>Derived</Pill>)}
+          (Ethnologue.vitality2025 != null ? <Badge variant="secondary">Ethnologue 2025</Badge> : <Badge variant="secondary">Derived</Badge>)}
       </DetailsField> */}
       <DetailsField title="Good language category?">
         {viabilityConfidence} {viabilityExplanation && ' ... '}
