@@ -1,4 +1,4 @@
-import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import React, { ReactNode } from 'react';
 
 import HoverableButton from '../hovercard/HoverableButton';
 import ZIndex from '../ZIndex';
@@ -34,28 +34,6 @@ const PopupCard: React.FC<Props> = ({
   body,
   ctas = [],
 }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const closeCard = useCallback(() => setIsOpen(false), []);
-
-  // Close the dropdown when the route changes
-  useEffect(() => {
-    setIsOpen(false);
-  }, [location.pathname]);
-
-  // Close the dropdown when the user presses the Escape key
-  useEffect(() => {
-    if (!isOpen) return;
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === 'Escape') closeCard();
-    };
-    document.addEventListener('keydown', handleKeyDown);
-    return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [isOpen, closeCard]);
-
-  // Not done: Close the dropdown when the user clicks outside of it.
-  // This is tricky because clicking on a nested card in the dropdown (particularly
-  // a hovercard) should not close the dropdown.)
-
   return (
     <div className="popupContainer">
       <HoverableButton
