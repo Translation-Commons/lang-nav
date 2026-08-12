@@ -16,6 +16,41 @@
   border: 1px solid var(--color-border);
   border-radius: 4px;
   box-shadow: 0px 4px 8px var(--color-shadow);
+
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    opacity 100ms ease-out,
+    visibility 100ms ease-out;
+}
+
+.popupCardAlign-left {
+  left: 0;
+  right: auto;
+}
+
+.popupCardAlign-center {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+}
+
+.popupContainer:focus-within .popupCard,
+.popupCard:hover {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* On small screens, allow the popup to be centered in the page */
+@media (max-width: 600px) {
+  .popupCard {
+    position: fixed;
+    left: 50%;
+    width: fit-content;
+    transform: translate(-50%, 0%);
+  }
 }
 
 .popupCardHeader {

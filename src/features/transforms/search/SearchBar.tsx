@@ -10,11 +10,13 @@ import {
 import TextInput, { TextInputSubmitSource } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
+import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
+
 import useSearchSuggestions from './useSearchSuggestions';
 import useTrackSearch from './useTrackSearch';
 
 const SearchBar: React.FC = () => {
-  const { searchString, updatePageParams } = usePageParams();
+  const { objectType, searchString, updatePageParams } = usePageParams();
   const location = useLocation();
   const getSearchSuggestions = useSearchSuggestions();
   const trackSearch = useTrackSearch();
@@ -35,7 +37,7 @@ const SearchBar: React.FC = () => {
   return (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
       <form
-        className="selector"
+        className="selector text-sm"
         style={{
           display: 'inline-flex',
           alignItems: 'center',
@@ -61,7 +63,7 @@ const SearchBar: React.FC = () => {
           }}
           getSuggestions={getSearchSuggestions}
           onSubmit={setSearchString}
-          placeholder="search"
+          placeholder={'search ' + getEntityTypeLabelPlural(objectType)}
           pageParameter={PageParamKey.searchString}
           value={searchString}
         />

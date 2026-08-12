@@ -126,8 +126,8 @@ function clearContextDependentParams(
   }
 
   if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
-    next.delete('reportID');
     next.delete('pinned');
+    if (newParams.reportID == null) next.delete('reportID');
     if (newParams.page == null) next.delete('page');
     const oldSearchString = prev?.get('searchString');
     if (oldSearchString) {

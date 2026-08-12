@@ -1,4 +1,3 @@
-import { XIcon } from 'lucide-react';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 
 import HoverableButton from '../hovercard/HoverableButton';
@@ -14,7 +13,8 @@ type Props = {
   description?: ReactNode;
 
   // Card content
-  title: ReactNode;
+  justifyCard?: 'left' | 'right' | 'center';
+  title?: ReactNode;
   body: ReactNode | (() => ReactNode);
   ctas?: ReactNode[];
 };
@@ -29,6 +29,7 @@ const PopupCard: React.FC<Props> = ({
   buttonClassName,
   buttonStyle,
   description,
+  justifyCard = 'right',
   title,
   body,
   ctas = [],
@@ -58,29 +59,26 @@ const PopupCard: React.FC<Props> = ({
   return (
     <div className="popupContainer">
       <HoverableButton
-        className={
-          'popupToggle' +
-          (isOpen ? ' ButtonFocused' : '') +
-          (buttonClassName ? ` ${buttonClassName}` : '')
-        }
+        className={'popupToggle' + (buttonClassName ? ` ${buttonClassName}` : '')}
         hoverContent={description}
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={() => {}} /* Set in CSS */
         style={buttonStyle}
       >
         {buttonLabel}
       </HoverableButton>
-      {isOpen && (
-        <div className="popupCard" role="dialog" style={{ zIndex: ZIndex.PopupCard }}>
+      <div
+        className={`popupCard popupCardAlign-${justifyCard}`}
+        role="dialog"
+        style={{ zIndex: ZIndex.PopupCard }}
+      >
+        {title != null && (
           <div className="popupCardHeader">
             <div className="popupCardTitle">{title}</div>
-            <HoverableButton onClick={closeCard} style={{ padding: '0.5em' }}>
-              <XIcon size="1em" display="block" aria-label="Close" />
-            </HoverableButton>
           </div>
-          <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
-          {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
-        </div>
-      )}
+        )}
+        <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
+        {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
+      </div>
     </div>
   );
 };

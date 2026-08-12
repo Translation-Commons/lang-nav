@@ -64,6 +64,7 @@ const ReportCensusInputTool: React.FC = () => {
         edit changes inline to test them out.
       </div>
       <textarea
+        className="border border-gray-300 rounded p-2"
         onChange={(e) => setTSV(e.target.value)}
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
