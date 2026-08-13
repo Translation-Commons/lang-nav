@@ -8,14 +8,11 @@ import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
-import Field from '@features/transforms/fields/Field';
-import useFilters from '@features/transforms/filtering/useFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import LocaleGrid from '@entities/locale/LocaleGrid';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -24,7 +21,6 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const { getCLDRLanguage } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = useFilters()[Field.TerritoryScope];
   const { childLanguages, ISO, Glottolog, variants, equivalentVariant } = lang;
   const relatedLanguages = (lang.CLDR.languageMatch ?? [])
     .map((match) => ({
@@ -84,12 +80,6 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <HoverableObjectName key={l.ID} object={l} />
           ))}
           emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
-        />
-      </DetailsField>
-      <DetailsField title="Locales">
-        <LocaleGrid
-          locales={(lang.locales ?? []).filter(filterByScope).sort(sortFunction)}
-          emptyMessage="No locales available for this language."
         />
       </DetailsField>
     </DetailsSection>

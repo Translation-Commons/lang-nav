@@ -1,44 +1,25 @@
-import React from 'react';
-
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
-
 import { LocaleData } from '@entities/locale/LocaleTypes';
-
-import Deemphasized from '@shared/ui/Deemphasized';
-
-import './LocaleGrid.css';
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import React from 'react';
 import LocaleGridCell from './LocaleGridCell';
 
 type Props = {
   locales: LocaleData[];
-  emptyMessage: string;
 };
 
-const LocaleGrid: React.FC<Props> = ({ locales, emptyMessage }) => {
-  const [isOpen, setIsOpen] = React.useState(true);
+const LocaleGrid: React.FC<Props> = ({ locales }) => {
 
-  if ((locales.length ?? 0) === 0) {
-    return <Deemphasized>{emptyMessage}</Deemphasized>;
-  }
+  if (locales.length === 0) return null;
+
   return (
-    <>
-      {' '}
-      {/* was <div>, now a Fragment (or inline-flex div) */}
-      <HoverableButton
-        onClick={() => setIsOpen((prev) => !prev)}
-        style={{ padding: '0.25em' }}
-        hoverContent={isOpen ? 'Click to hide locales' : 'Click to show locales'}
-      >
-        {isOpen ? 'hide locales' : 'show locales'}
-      </HoverableButton>
-      {isOpen && (
-        <div className="localeGrid">
-          {locales.map((locale) => (
-            <LocaleGridCell key={locale.ID} locale={locale} />
-          ))}
-        </div>
-      )}
-    </>
+    <DetailsSection title="Locales" >
+      {/* 3x3 grid with max height and scrollable */}
+      <div className="grid grid-cols-3 gap-3 p-2.5 max-h-64 overflow-y-auto">
+        {locales.map((locale) => (
+          <LocaleGridCell key={locale.ID} locale={locale} />
+        ))}
+      </div>
+    </DetailsSection>
   );
 };
 
