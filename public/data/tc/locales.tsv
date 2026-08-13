@@ -8846,7 +8846,6 @@ ais_TW	Sakizaya (Taiwan)
 aiy_CF	Ali (Central African Republic)				
 aja_CF	Aja (South Sudan) (Central African Republic)				
 aja_SS	Aja (South Sudan) (South Sudan)				
-ajg_BJ	Aja (Benin) (Benin)				
 aji_NC	Ajië (New Caledonia)				
 ajs_DZ	Algerian Jewish Sign Language (Algeria)				
 aju_IL	Judeo-Moroccan Arabic (Israel)				
@@ -8892,7 +8891,7 @@ axm_AM	Middle Armenian (Armenia)
 axx_NC	Xârâgurè (New Caledonia)				
 ayb_BJ	Ayizo Gbe (Benin)				
 ayg_TG	Ginyanga (Togo)				
-ayh_YE	Hadrami Arabic (Yemen)	اللهجة الحضرمية			
+ayh_YE	Hadrami Arabic (Yemen)	اللهجة الحضرمية		3200000	
 ayk_NG	Akuku (Nigeria)				
 ayn_YE	Sanaani Arabic (Yemen) (Yemen)			7750000	
 ayo_PY	Ayoreo (Paraguay)				
@@ -8900,13 +8899,12 @@ ayp_IQ	North Mesopotamian Arabic (Iraq)
 ayp_SY	North Mesopotamian Arabic (Syria)				
 ayr_BO	Central Aymara (Bolivia)				
 ayy_PH	Ayta, Tayabas (Philippines)				
-azj_AZ	North Azerbaijani (Azerbaijan)				
+azj_AZ	North Azerbaijani (Azerbaijan)		Official	9431757	
 baa_SB	Babatana (Solomon Islands)				
 bab_GW	Bainouk-Gunyuño (Guinea-Bissau)				
 bae_VE	Baré (Venezuela)				
 bah_BS	Bahamas Creole English (Bahamas)				
 bao_CO	Waimaha (Colombia)				
-bba_BJ	Baatonum (Benin)				
 bbg_GA	Barama (Gabon)				
 bbo_BF	Northern Bobo Madaré (Burkina Faso)				
 bcz_SN	Bainouk-Gunyaamolo (Senegal)				
@@ -9021,7 +9019,7 @@ cib_BJ	Ci Gbe (Benin)
 cid_US	Chimariko (United States)				
 cir_NC	Tiri (New Caledonia)				
 ciy_VE	Chaima (Venezuela)				
-cjk_AO	Chokwe (Angola)				
+cjk_AO	Chokwe (Angola)		Official	1553019	
 ckm_HR	Chakavian (Croatia)				
 cks_NC	Tayo (New Caledonia)				
 cld_IQ	Chaldean Neo-Aramaic (Iraq)	ܟܠܕܝܐ			
@@ -9176,9 +9174,9 @@ frm_FR	Middle French (ca. 1400-1600) (France)
 fro_FR	Old French (842-ca. 1400) (France)				
 frp_IT	Arpitan (Italy)	patoué			
 fsl_FR	French Sign Language (France)	langue des signes française			
-fuc_SN	Pulaar (Senegal)	Pulaar			
+fuc_SN	Pulaar (Senegal)	Pulaar		4022754	
 fue_BJ	Borgu Fulfulde (Benin)				
-fuf_GN	Pular (Guinea)	Pular			
+fuf_GN	Pular (Guinea)	Pular	Official	3266056	
 fuh_NE	Western Niger Fulfulde (Niger)				
 fum_NG	Fum (Nigeria)				
 fur_SI	Friulian (Slovenia)	Furlan			
@@ -9238,13 +9236,12 @@ grv_LR	Central Grebo (Liberia)
 gry_LR	Barclayville Grebo (Liberia)				
 gsg_DE	German Sign Language (Germany)				
 gss_GR	Greek Sign Language (Greece)				
-gug_PY	Paraguayan Guaraní (Paraguay)				
+gug_PY	Paraguayan Guaraní (Paraguay)		Official	3742455	
 guh_CO	Guahibo (Colombia)				
 gui_BO	Eastern Bolivian Guaraní (Bolivia)				
 gus_GN	Guinean Sign Language (Guinea)				
 guu_VE	Yanomamö (Venezuela)	Yanomamɨ			
 guw_BJ	Gun (Benin)	Gungbe			
-gux_BF	Gourmanchéma (Burkina Faso)				
 gwd_ET	Gawwada (Ethiopia)				
 gwr_UG	Gwere (Uganda)				
 gyl_ET	Gayil (Ethiopia)				
@@ -9255,8 +9252,7 @@ hae_ET	Eastern Oromo (Ethiopia)
 hax_CA	Southern Haida (Canada)				
 hbn_SD	Heiban (Sudan)				
 hbo_IL	Ancient Hebrew (Israel)	עִבְרִית מִקְרָאִית			
-hbs_BA	Serbo-Croatian (Bosnia and Herzegovina)				
-hbs_RS	Serbo-Croatian (Serbia)	hrvatskosrpski			
+hbs_BA	Serbo-Croatian (Bosnia and Herzegovina)		Official	3488881	
 hdn_CA	Northern Haida (Canada)				
 hgm_NA	Hai//om (Namibia)				
 hhr_SN	Kerak (Senegal)				
@@ -9441,7 +9437,6 @@ ldi_CG	Laari (Congo - Brazzaville)
 ldn_001	Láadan (World)	Láadan			
 lee_BF	Lyélé (Burkina Faso)				
 lga_SB	Lungga (Solomon Islands)				
-lgg_UG	Lugbara (Uganda)				
 lgk_VU	Lingarak (Vanuatu)				
 lgl_SB	Wala (Solomon Islands)				
 lgn_ET	T'apo (Ethiopia)				
@@ -9542,7 +9537,6 @@ mjy_US	Mahican (United States)
 mkl_BJ	Mokole (Benin)				
 mkq_US	Bay Miwok (United States)				
 mku_GN	Konyanka Maninka (Guinea)				
-mkw_CG	Kituba (Congo) (Congo - Brazzaville)				
 mkz_TL	Makasae (Timor-Leste)				
 mlf_LA	Mal (Laos)				
 mln_SB	Malango (Solomon Islands)				
@@ -9700,8 +9694,6 @@ nyd_KE	Nyore (Kenya)
 nye_AO	Nyengo (Angola)				
 nyf_KE	Giryama (Kenya)				
 nyi_SD	Ama (Sudan) (Sudan)				
-nyk_AO	Nyaneka (Angola)				
-nyo_UG	Nyoro (Uganda)	Orunyoro			
 nyr_MW	Nyiha (Malawi) (Malawi)				
 nyu_MZ	Nyungwe (Mozambique)				
 nyw_TH	Nyaw (Thailand)				
@@ -10889,3 +10881,43 @@ gba_SS	Gbaya (South Sudan)			13000
 shy_MA	Tachawit (Morocco)			27000	
 apc_MA	Levantine Arabic (Morocco)			587000	
 arq_MA	Algerian Arabic (Morocco)			224000	
+deu_SE	German (Sweden)			2630389	
+spa_NL	Spanish (Netherlands)			1603016	
+ara_FR	Arabic (France)			1368720	
+spa_BE	Spanish (Belgium)			1056852	
+rus_SK	Russian (Slovakia)			760031	
+deu_HR	German (Croatia)			577634	
+deu_LV	German (Latvia)			341143	
+deu_EE	German (Estonia)			191224	
+nld_LU	Dutch (Luxembourg)			19824	
+spa_SE	Spanish (Sweden)			841724	
+ita_BE	Italian (Belgium)			587140	
+spa_DK	Spanish (Denmark)			533939	
+deu_IE	German (Ireland)			368998	
+spa_IE	Spanish (Ireland)			316284	
+spa_LU	Spanish (Luxembourg)			79297	
+deu_CY	German (Cyprus)			66436	
+ita_LU	Italian (Luxembourg)			46257	
+kur_IQ	Kurdish (Iraq) (Iraq)			8416680	
+kon_AO	Kongo (Angola) (Angola)		Official	2424247	
+eng_SV	English (El Salvador)		Official	414888	
+knw_NA	Kung-Ekoka (Namibia)			10000	
+yey_NA	Yeyi (Namibia)			7300	
+dhm_NA	Zemba (Namibia)			7300	
+nhr_NA	Naro (Namibia)			2100	
+nmn_NA	!Xóõ (Namibia)			500	
+nba_NA	Nyemba (Namibia)			15000	
+cjk_NA	Chokwe (Namibia)			8100	
+umb_NA	Umbundu (Namibia)			4500	
+lch_NA	Luchazi (Namibia)			1300	
+hbs_RS	Serbo-Croatian (Serbia)		Official	5770235	
+lgg_UG	Lugbara (Uganda)			2226356	
+nyo_UG	Nyoro (Uganda)			2226356	
+kau_TD	Kanuri (Chad)			1860420	
+mkw_CG	Kituba (Congo - Brazzaville)			1704780	
+ajg_BJ	Aja (Benin)			1783250	
+gux_BF	Gourmanchéma (Burkina Faso)			1400560	
+man_SN	Mandingo (Senegal)			1402428	
+bba_BJ	Baatonum (Benin)			1355270	
+nyk_AO	Nyaneka (Angola)		Official	812357
+kjv_HR	Goranski (Croatia)		Official	185	

@@ -1,0 +1,73 @@
+#codeDisplay	eu.2023.alllangs	#eu.EU27.2023.alllangs	eu.AT.2023.alllangs	eu.BE.2023.alllangs	eu.BG.2023.alllangs	eu.CY.2023.alllangs	eu.CZ.2023.alllangs	eu.DE.2023.alllangs	eu.DK.2023.alllangs	eu.EE.2023.alllangs	eu.EL.2023.alllangs	eu.ES.2023.alllangs	eu.FI.2023.alllangs	eu.FR.2023.alllangs	eu.HR.2023.alllangs	eu.HU.2023.alllangs	eu.IE.2023.alllangs	eu.IT.2023.alllangs	eu.LT.2023.alllangs	eu.LU.2023.alllangs	eu.LV.2023.alllangs	eu.MT.2023.alllangs	eu.NL.2023.alllangs	eu.PL.2023.alllangs	eu.PT.2023.alllangs	eu.RO.2023.alllangs	eu.SE.2023.alllangs	eu.SI.2023.alllangs	eu.SK.2023.alllangs
+#nameDisplay	Eurobarometer 2023 All Langs	Eurobarometer 2023 All Langs EU27	Eurobarometer 2023 All Langs AT	Eurobarometer 2023 All Langs BE	Eurobarometer 2023 All Langs BG	Eurobarometer 2023 All Langs CY	Eurobarometer 2023 All Langs CZ	Eurobarometer 2023 All Langs DE	Eurobarometer 2023 All Langs DK	Eurobarometer 2023 All Langs EE	Eurobarometer 2023 All Langs EL	Eurobarometer 2023 All Langs ES	Eurobarometer 2023 All Langs FI	Eurobarometer 2023 All Langs FR	Eurobarometer 2023 All Langs HR	Eurobarometer 2023 All Langs HU	Eurobarometer 2023 All Langs IE	Eurobarometer 2023 All Langs IT	Eurobarometer 2023 All Langs LT	Eurobarometer 2023 All Langs LU	Eurobarometer 2023 All Langs LV	Eurobarometer 2023 All Langs MT	Eurobarometer 2023 All Langs NL	Eurobarometer 2023 All Langs PL	Eurobarometer 2023 All Langs PT	Eurobarometer 2023 All Langs RO	Eurobarometer 2023 All Langs SE	Eurobarometer 2023 All Langs SI	Eurobarometer 2023 All Langs SK
+#isoRegionCode		EU27	AT	BE	BG	CY	CZ	DE	DK	EE	GR	ES	FI	FR	HR	HU	IE	IT	LT	LU	LV	MT	NL	PL	PT	RO	SE	SI	SK
+#yearCollected	2023																												
+### Language Criteria ###																													
+#languageUse	Speaks																												
+#proficiency	Conversational																												
+#acquisitionOrder	Any																												
+### Population Surveyed ###																													
+#population	447805685	447805685	9104772	11742796	6447710	949084	10827529	83118501	5932654	1365884	10401868	48085361	5563970	68436003	3850894	9599744	5271395	58997201	2857279	660809	1895239	542051	17811291	36753736	10929704	19055228	10521556	2116972	5428792
+#populationSource	https://ec.europa.eu/eurostat/databrowser/view/tps00001/default/table?lang=en&category=t_demo.t_demo_pop																												
+#populationSurveyed		26523																											
+#sampleRate	0.0059%																												
+#responsesPerIndividual	1+																												
+### Data Constraints ###																													
+#age	15+																												
+#nationality	Citizen																												
+#quantity	percent																												
+### Creator ###																													
+#collectorType	NGO																												
+#collectorName	Eurobarometer																												
+#collectorNameShort	Eurobarometer																												
+### Source Document ###																													
+#url	https://europa.eu/eurobarometer/api/deliverable/download/file?deliverableId=92148																												
+#datePublished	2024																												
+#dateAccessed	2026-08-12																												
+#documentName	Special Eurobarometer 540 Europeans and their languages																												
+#tableName	D48.alllang. Thinking about the languages that you speak, which langauge is your mother tongue? And which other language, if any, do you speak well enough in order to be able to have a conversation?																												
+Language Code	Language	EU27	AT	BE	BG	CY	CZ	DE	DK	EE	GR	ES	FI	FR	HR	HU	IE	IT	LT	LU	LV	MT	NL	PL	PT	RO	SE	SI	SK
+	English	50	59	61	30	80	43	66	90	59	52	39	82	42	45	31	97	34	45	71	55	91	95	31	42	27	91	62	40
+	German	29	98	18	5	7	20	98	50	14	7	3	19	6	15	13	7	4	12	66	18	4	61	5	1	3	25	33	21
+	French	25	11	83	3	9	5	16	11	2	6	13	4	97	4	2	13	10	3	94	3	13	27	1	13	7	12	2	2
+	Spanish	17	4	10	3	1	3	8	9	2	2	97	4	14	1	2	7	6	1	15	2	4	9	1	9	3	10	4	2
+	Italian	16	9	7	1	3	2	4	1	1	3	4	2	5	8	2	2	97	1	10	1	52	1	1	1	3	3	13	2
+	Polish	9		1			4	2		1							3		14	1	3			97			1		2
+	Dutch	6	1	63	1	1		1	1							1	1			4			98				1		
+	Romanian	5		1	1	2		1			1	1					1	1		1		1				95			
+	Russian	4	1	2	14	5	15	4		74	2		4	1	1	2	1	1	66	1	91	1		5		1	1	2	15
+	Other	4	1	4	2	4	2	7	8	4	1	4	3	5	2		3	2	3	4	6	2	8		1	1	10	3	2
+	Czech	3	2				97								1			1											25
+	Greek	3	1	1	1	95	1	1	1		99							1		1		1							
+	Hungarian	3	1				1									99	1									7		1	18
+	Portuguese	3	1	1					1			3		2			1			24			1		99		1		
+	Swedish	3							14	2			52		1				1	1		1				98			
+	Danish	2						1	97						1					1	1						8		
+	Bulgarian	2	1		98	1									1						1								
+	Catalan	2										18		1				1											
+	Slovak	2	1			1	17								1		1												95
+	Croatian	1	2				1	1							96				1									56	1
+	Finnish	1								19			98														2		
+	Lithuanian	1															2		97		4								
+	Arabic	1	1	3		1		2	2			2		4						1		1	1				2		
+	Galician	1										7																	
+	Chinese	1					1	1	1			1					1	2				1	1						
+	Slovenian	1	1												2			1										98	
+	Turkish	1	2	1	10	1		3			3			1									1						
+	Estonian									89			1		1						1								
+	Latvian									1									1		94								
+	Luxembourgish																			66									
+	Maltese																					95							
+	Irish/Gaelic																21												
+	Romany				5											1										1			2
+	Albanian					1		1			2									1								1	
+	Low German			1											1			1			1	1							
+	Serbian/Bosnian/Montenegrin		1		1									11					2									26	
+	Frisian																						4						
+	Kurdish																												
+	Basque											3																	
+	Sami																												
+	Sardinian																	2											
+	Ukrainian		1				1			2									1		4						1		1
+	Yiddish																												
+	Japanese			1								1															1		

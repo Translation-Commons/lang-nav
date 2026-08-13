@@ -1,0 +1,33 @@
+#codeDisplay		#es-names	sv.2024
+#nameDisplay			El Salvador 2024
+#isoRegionCode	SV		
+#yearCollected			2024
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	Any		
+### Population Surveyed ###			
+#population			5634803
+### Data Constraints ###			
+#age	3+		
+#quantity			count
+#responsesPerIndividual			1+
+### Creator ###			
+#collectorType			Government
+#collectorName			BCR SV
+### Source Document ###			
+#url			https://censo2024.bcr.gob.sv/wp-content/uploads/tablas-geoportal/idiomas.xlsx?download=1
+#dateAccessed			2026-08-13
+#documentName			Censo de Población y Vivienda El Salvador 2024
+#columnName	# of speakers		
+#citation	2007 Census Of El Salvador - 8 Main languages spoken in the country other than Spanish		The census focuses on "other" langauges, so the Spanish estimate comes from combining the number of people that "don't speak another language" which is implicitly Spanish Only + 
+Language Code	Language		
+spa	#Spanish Only	Distribución departamental de Población de 3 años o más que habla otro idioma: no	5,207,429
+spa	#Spanish as a second language	Español	3,174
+eng	English	Inglés	414,888
+ccr	Cacaopera	Pisbi (Cacaopera)	24
+ppl	Nawat	Náhuatl	1135
+fra	French	Francés	16,741
+esn	Salvadoran Sign Language	Lengua de señas (LESSA)	2,025
+len	Lenca	Potón (Lenca)	32
+ita	Italian	Italiano	6,911
+mul	Other languages	Otro Especifique	13,326

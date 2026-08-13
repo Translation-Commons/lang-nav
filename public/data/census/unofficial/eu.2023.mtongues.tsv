@@ -1,0 +1,61 @@
+#codeDisplay	eu.2023.mtongues	#eu.EU27.2023.L1	eu.AT.2023.L1	eu.BE.2023.L1	eu.BG.2023.L1	eu.CY.2023.L1	eu.CZ.2023.L1	eu.DE.2023.L1	eu.DK.2023.L1	eu.EE.2023.L1	eu.EL.2023.L1	eu.ES.2023.L1	eu.FI.2023.L1	eu.FR.2023.L1	eu.HR.2023.L1	eu.HU.2023.L1	eu.IE.2023.L1	eu.IT.2023.L1	eu.LT.2023.L1	eu.LU.2023.L1	eu.LV.2023.L1	eu.MT.2023.L1	eu.NL.2023.L1	eu.PL.2023.L1	eu.PT.2023.L1	eu.RO.2023.L1	eu.SE.2023.L1	eu.SI.2023.L1	eu.SK.2023.L1
+#nameDisplay	Eurobarometer 2023 Mothertongue	Eurobarometer 2023 Mothertongue EU27	Eurobarometer 2023 Mothertongue AT	Eurobarometer 2023 Mothertongue BE	Eurobarometer 2023 Mothertongue BG	Eurobarometer 2023 Mothertongue CY	Eurobarometer 2023 Mothertongue CZ	Eurobarometer 2023 Mothertongue DE	Eurobarometer 2023 Mothertongue DK	Eurobarometer 2023 Mothertongue EE	Eurobarometer 2023 Mothertongue EL	Eurobarometer 2023 Mothertongue ES	Eurobarometer 2023 Mothertongue FI	Eurobarometer 2023 Mothertongue FR	Eurobarometer 2023 Mothertongue HR	Eurobarometer 2023 Mothertongue HU	Eurobarometer 2023 Mothertongue IE	Eurobarometer 2023 Mothertongue IT	Eurobarometer 2023 Mothertongue LT	Eurobarometer 2023 Mothertongue LU	Eurobarometer 2023 Mothertongue LV	Eurobarometer 2023 Mothertongue MT	Eurobarometer 2023 Mothertongue NL	Eurobarometer 2023 Mothertongue PL	Eurobarometer 2023 Mothertongue PT	Eurobarometer 2023 Mothertongue RO	Eurobarometer 2023 Mothertongue SE	Eurobarometer 2023 Mothertongue SI	Eurobarometer 2023 Mothertongue SK
+#isoRegionCode		EU27	AT	BE	BG	CY	CZ	DE	DK	EE	GR	ES	FI	FR	HR	HU	IE	IT	LT	LU	LV	MT	NL	PL	PT	RO	SE	SI	SK
+#yearCollected	2023																												
+### Language Criteria ###																													
+#languageUse	Speaks																												
+#proficiency	Native																												
+#acquisitionOrder	L1																												
+#domain	Home																												
+### Population Surveyed ###																													
+#population	447805685	447805685	9104772	11742796	6447710	949084	10827529	83118501	5932654	1365884	10401868	48085361	5563970	68436003	3850894	9599744	5271395	58997201	2857279	660809	1895239	542051	17811291	36753736	10929704	19055228	10521556	2116972	5428792
+#populationSource	https://ec.europa.eu/eurostat/databrowser/view/tps00001/default/table?lang=en&category=t_demo.t_demo_pop																												
+#populationSurveyed		26523																											
+#sampleRate	0.0059%																												
+#responsesPerIndividual	1+																												
+### Data Constraints ###																													
+#age	15+																												
+#nationality	Citizen																												
+#quantity	percent																												
+### Creator ###																													
+#collectorType	NGO																												
+#collectorName	Eurobarometer																												
+#collectorNameShort	Eurobarometer																												
+### Source Document ###																													
+#url	https://europa.eu/eurobarometer/api/deliverable/download/file?deliverableId=92148																												
+#datePublished	2024																												
+#dateAccessed	2026-08-12																												
+#documentName	Special Eurobarometer 540 Europeans and their languages																												
+#tableName	D48a.f.mtongues.ex.NNDK																												
+Language Code	Language	EU27	AT	BE	BG	CY	CZ	DE	DK	EE	GR	ES	FI	FR	HR	HU	IE	IT	LT	LU	LV	MT	NL	PL	PT	RO	SE	SI	SK
+deu	German	19	92	1			1	89	2									1		9							1	1	1
+fra	French	15	1	39					1			1		91			1			19					1				
+ita	Italian	13	1	2				1										94		4		1							
+pol	Polish	9		1				2									3		4	1				97					
+spa	Spanish	9		1				1				84		1			1			3							1		
+nld	Dutch	5		52					1											1			94						
+ron	Romanian	4		1		1		1				1					1	1		1						92			
+ell	Greek	3				90					95									1									
+hun	Hungarian	3	1													99	1									6			9
+por	Portuguese	3		1										1			1			19					98				
+ces	Czech	2	1				96																						1
+eng	English	2	2	3	1	7	2	1	7	1	1	1	2	2	3	1	83	1		4	2	14	4	3		2	3	1	2
+bul	Bulgarian	2			87																								
+swe	Swedish	2							1				6														94		
+dan	Danish	1							94																				
+fin	Finnish	1								1			94														1		
+hbs/hrv	Croatian	1	1					1							93													1	
+cat	Catalan	1										7																	
+ara	Arabic	1		1				1				1		2									1				1		
+lit	Lithuanian	1															1		92		1								
+rus	Russian	1		1		1		1		25									4	1	28	1							
+slk	Slovak	1					1										1												87
+slv	Slovenian	1																										94	
+tur	Turkish	1	2		9			2			2																		
+glg	Galician											4																	
+lav	Latvian																				72								
+est	Estonian									73																			
+mlt	Maltese																					92							
+rom	Romany				4																								
+hbs	Serbian/Bosnian/Montenegrin		1												2					2								3	
+gle	Irish/Gaelic																4												

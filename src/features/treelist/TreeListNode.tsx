@@ -58,6 +58,7 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
       {children.length > 0 ? (
         <button
           className="TreeListExpandBranch"
+          style={{ padding: '0 0.5em' }}
           onClick={() => {
             setExpanded((prev) => !prev);
             setSeeAllChildren(false);

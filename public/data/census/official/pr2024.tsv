@@ -1,0 +1,35 @@
+#codeDisplay		pr2024
+#nameDisplay		Puerto Rico 2024
+#isoRegionCode	PR	
+#yearCollected	2024	
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		L1
+#domain		Home
+### Population Surveyed ###		
+#population		3,113,015
+#populationSource		Same source table; population 5 years and over in households
+### Data Constraints ###		
+#geographicScope		whole territory: Puerto Rico
+#age		5+
+#nationality		residents
+#languagesIncluded		major groups only
+#quantity		count
+#responsesPerIndividual		1
+### Creator ###		
+#collectorType		Government
+#collectorName		US Census Bureau
+#presentedBy		CensusReporter
+### Source Document ###		
+#url	https://censusreporter.org/data/table/?table=B16007&geo_ids=04000US72&primary_geo_id=04000US72#valueType|estimate	
+#datePublished	2024	
+#dateAccessed	2026-06-23	
+#tableName	Age by Language Spoken at Home for the Population 5 Years and Over	
+#columnName	Population 5 years and over	
+#citation	U.S. Census Bureau (2024). Age by Language Spoken at Home for the Population 5 Years and Over American Community Survey 1-year estimates. Retrieved from <https://censusreporter.org>	
+Language Code	Language	Population
+ine/eng	#English Only	157,245
+ine/spa	Spanish	2,951,905
+ine	Indo-European languages	2,320
+mul	Asian and Pacific Island languages	1,294
+mul	Other languages	251
