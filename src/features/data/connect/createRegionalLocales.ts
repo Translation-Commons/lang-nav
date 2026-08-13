@@ -32,9 +32,7 @@ function createRegionalLocalesForTerritory(
   const containsTerritories = territory.containsTerritories ?? [];
   containsTerritories?.forEach((t) => createRegionalLocalesForTerritory(t, allLocales));
 
-  if (!isTerritoryGroup(territory.scope)) {
-    return; // Only going this for regions/continents
-  }
+  if (!isTerritoryGroup(territory.scope)) return; // Only going this for regions/continents
 
   const territoryLocales = containsTerritories?.reduce<Record<StandardLocaleCode, LocaleData>>(
     (locs, childTerritory) => {
