@@ -1,5 +1,4 @@
-import React from 'react';
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import PageFooter from '@widgets/PageFooter';
@@ -13,7 +12,7 @@ import useAmplitudeParamEvents from '@features/params/useAmplitudeParamEvents';
 
 import { initAmplitude, optOutAmplitude, trackPageView } from '@shared/lib/amplitude';
 
-import PageRoutes from './PageRoutes';
+import PageRoutes, { LangNavPageName } from './PageRoutes';
 
 function AmplitudeTracker() {
   const location = useLocation();
@@ -42,14 +41,34 @@ function AmplitudeTracker() {
   return null;
 }
 
+// Intro and Data are meant to fit within the viewport, scrolling their own content
+// internally, rather than growing the whole document like a normal page of text.
+const VIEWPORT_FITTED_PAGES = [LangNavPageName.Intro, LangNavPageName.Data];
+
 function App() {
+  const location = useLocation();
+  const fitsViewport = VIEWPORT_FITTED_PAGES.some((page) => location.pathname === `/${page}`);
+
   return (
     <PageParamsProvider>
       <DeferredDataProvider>
         <HoverCardProvider>
           <AmplitudeTracker />
           <PageNavBar />
-          <div style={{ flex: 1, minWidth: 0 }}>
+          <div
+            style={
+              fitsViewport
+                ? {
+                    flex: 1,
+                    minWidth: 0,
+                    minHeight: 0,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    overflow: 'auto',
+                  }
+                : { flex: 1, minWidth: 0 }
+            }
+          >
             <PageRoutes />
           </div>
           <PageFooter />

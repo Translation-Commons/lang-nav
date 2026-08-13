@@ -1,8 +1,7 @@
 #root {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  /* Guarantee it always spans the viewport */
+  height: 100dvh;
 }
 
 :root {

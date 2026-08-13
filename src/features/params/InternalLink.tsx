@@ -6,15 +6,16 @@ import { LangNavPageName } from '@app/PageRoutes';
 import { getNewURLSearchParams } from './getNewURLSearchParams';
 import { PageParams } from './PageParamTypes';
 
-type Props = {
+type Props = React.PropsWithChildren<{
+  className?: string;
   page?: LangNavPageName;
   params?: Partial<PageParams>;
-  children: React.ReactNode;
   style?: React.CSSProperties;
   keepOldParams?: boolean;
-};
+}>;
 
 const InternalLink: React.FC<Props> = ({
+  className,
   page = LangNavPageName.Data,
   params,
   children,
@@ -27,7 +28,7 @@ const InternalLink: React.FC<Props> = ({
     : '';
   const to = ['/', page, paramsStr].join('');
   return (
-    <Link to={to} title={to} style={style}>
+    <Link className={className} to={to} title={to} style={style}>
       {children}
     </Link>
   );

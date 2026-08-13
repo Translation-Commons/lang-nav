@@ -26,14 +26,16 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
 
   return (
     <aside
+      className="relative h-full flex-shrink-0 overflow-hidden"
       style={{
+        // Anchors DraggableResizeBorder's `position: absolute` to this element -- without it,
+        // the drag handle positions against a distant ancestor instead and silently inflates
+        // the page's real scrollable height.
         width: panelWidth,
         maxWidth: isOpen ? panelWidth : '0',
         borderRight: panelSide === 'left' ? '2px solid var(--color-button-primary)' : undefined,
         borderLeft: panelSide === 'right' ? '2px solid var(--color-button-primary)' : undefined,
         transition: shouldEaseTransition ? 'max-width 0.3s ease-in-out' : undefined,
-        overflow: 'hidden',
-        position: 'relative',
       }}
     >
       {isOpen && (
@@ -45,23 +47,15 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         />
       )}
       <div
+        className="flex flex-col h-full"
         style={{
-          display: 'flex',
-          flexDirection: 'column',
           alignContent: panelSide === 'left' ? 'flex-start' : 'flex-end',
           right: panelSide === 'right' ? 0 : undefined,
           // keeps the inner content from shrinking when collapsing
           width: panelWidth,
         }}
       >
-        <div
-          style={{
-            textAlign: 'center',
-            fontSize: '2em',
-            padding: '0.25em 0.5em',
-            position: 'relative',
-          }}
-        >
+        <div className="w-full flex justify-center text-center relative pt-3 px-2 text-3xl">
           <HoverableButton
             hoverContent="Close"
             onClick={onClose}
@@ -80,13 +74,8 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
           {title}
         </div>
         <div
-          style={{
-            overflowY: 'scroll',
-            overflowX: 'hidden',
-            height: '90vh',
-            width: panelWidth,
-            padding: '0.5em',
-          }}
+          className="flex-1 overflow-y-auto overflow-x-hidden min-h-0 p-2"
+          style={{ width: panelWidth }}
         >
           {children}
         </div>

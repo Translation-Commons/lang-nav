@@ -64,9 +64,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
       onMouseLeave={hideHoverCard}
       onClick={() => {
         hideHoverCard();
-        if (onClick != null) {
-          onClick();
-        }
+        if (onClick != null) onClick();
       }}
       role={role}
       style={{

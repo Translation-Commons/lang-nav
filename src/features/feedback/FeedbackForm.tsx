@@ -1,4 +1,4 @@
-import { MessageSquareTextIcon } from 'lucide-react';
+import { MessageCircleQuestionMarkIcon, MessageSquareTextIcon } from 'lucide-react';
 
 import PopupCard from '@features/layers/popupcard/PopupCard';
 
@@ -11,8 +11,15 @@ const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6';
 export function FeedbackForm() {
   return (
     <PopupCard
-      buttonLabel="Feedback"
-      buttonClassName="primary"
+      buttonLabel={
+        <>
+          <div className="hidden md:inline">Feedback</div>
+          <div className="inline md:hidden">
+            <MessageCircleQuestionMarkIcon />
+          </div>
+        </>
+      }
+      buttonClassName="primary place-self-end"
       buttonStyle={{ padding: '0.5em' }}
       description="Submit feedback to the LangNav team"
       title="Shape the future of LangNav"
