@@ -1,0 +1,31 @@
+#codeDisplay		axl.aw.l1	axl.aw
+#nameDisplay		AXL Aruba L1	AXL Aruba
+#isoRegionCode	AW		
+#yearCollected	2020		
+### Language Criteria ###			
+#languageUse		Speaks	Speaks
+#acquisitionOrder		L1	Any
+#domain		Home	Home
+#responsesPerIndividual		1	1+
+### Population Surveyed ###			
+#population	108,166		
+### Data Constraints ###			
+#geographicScope	Whole island		
+#quantity	percent		
+### Creator ###			
+#collectorType	Secondary		
+#presentedBy	AXL		
+### Source Document ###			
+#url	https://www.axl.cefan.ulaval.ca/amsudant/aruba.htm		
+#dateAccessed	2026-08-12		
+#sectionName		2.1 Les langues parlées à Aruba	2.1 Les langues parlées à Aruba
+#tableName		Tableau 1	Tableau 2
+#notes			Small fractions from top of page, source undetermined
+Language Code	Language		
+pap	Papiamento	72	92
+eng	English	7	15
+spa	Spanish	14	14
+nld	Dutch	6	10
+fil	Filipino		0.4
+zho	Chinese		0.3
+tur	Turkish		0.2

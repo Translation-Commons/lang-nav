@@ -1,0 +1,34 @@
+#codeDisplay		mt2021
+#nameDisplay		Malta 2021
+#isoRegionCode	MT	
+#yearCollected		2021
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		L1
+### Population Surveyed ###		
+#population		519,562
+#populationSource		https://nso.gov.mt/wp-content/uploads/Final-Report-Volume-1-Chapter-1.xlsx
+#sampleRate		1
+#responsesPerIndividual		1
+### Data Constraints ###		
+#geographicScope		whole country
+#age		5+
+#residenceBasis		de jure
+#quantity		count
+### Creator ###		
+#collectorType		Government
+#collectorName		National Statistics Office Malta (NSO Malta / Uffiċċju Nazzjonali tal-Istatistika)
+#collectorNameShort		NSO Malta
+### Source Document ###		
+#url		https://nso.gov.mt/wp-content/uploads/volume3-Census-of-Population-2021.pdf
+#datePublished		2024-01-19
+#dateAccessed		2026-07-13
+#tableName		Table 3.1 — Population aged 5 and over by main language spoken from early childhood, type of citizenship and sex (Chapter 3, p.53)
+Language Code	Language	Population
+mlt	Maltese	352,346
+eng	English	50,242
+mul	Other languages 	57,818
+ita	Italian	13,397
+ara	Arabic	8,514
+deu	German	10,427
+fra	French	4,521

@@ -10,6 +10,7 @@ cw2023
 de
 es2021
 gn2014
+hr2021
 id
 il2011
 im2021
@@ -18,12 +19,15 @@ in2011c17
 it
 lr
 mg2018
+mt2021
 np2021
 pk2023
+pr2024
 py
 ru2020
 sg
 sr2012
+sv2024
 us_asc
 us2023
 vi

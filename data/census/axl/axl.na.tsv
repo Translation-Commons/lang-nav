@@ -1,0 +1,54 @@
+#codeDisplay		axl.na
+#nameDisplay		AXL Namibia
+#isoRegionCode	NA	
+#yearCollected	2018	
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		L1
+#domain		Home
+### Population Surveyed ###		
+#population		2,569,200
+#responsesPerIndividual		1
+### Data Constraints ###		
+#quantity		count
+### Creator ###		
+#collectorType	Secondary	
+#presentedBy	AXL	
+### Source Document ###		
+#url		https://www.axl.cefan.ulaval.ca/afrique/namibie.htm
+#dateAccessed		2026-07-06
+#sectionName		2.2 Les langues
+#columnName	Language	Population
+Language Code		
+kua	Oshivambo	950,000
+ndo	Ndonga	560,000
+naq	Khoekhoe	195,000
+her	Héréro	173,000
+kwn	Kwangali	133,000
+vaj	Northwest Kung	76,000
+afr	Afrikaans	75,000
+afr	Afrikaans	57,000
+ktz	Ju'hoansi	41,000
+kwm	Kwambi	41,000
+loz	Lozi	35,000
+sbs	Kuhane	33,000
+eng	English	30,000
+hgm	Kaikom	23,000
+nba	Nyemba	15,000
+fwe	Fwé	14,000
+diu	Diriku	14,000
+deu	German	12,000
+knw	Kung-ékoka	10,000
+mhw	Mbukushu	8,600
+cjk	Cokwe	8,100
+dhm	Dhimba	7,300
+yey	Yéyi	7,300
+tsn	Setswana	5,800
+umb	Umbundu	4,500
+xuu	Khwedam	4,300
+eng	English	2,100
+nhr	Naro	2,100
+lch	Lucazi	1,300
+nmn	!xóõ	500
+lnb	Mbalanhu	300
+mul	Others	30000

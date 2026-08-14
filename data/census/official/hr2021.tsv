@@ -1,0 +1,78 @@
+#codeDisplay		#hr-names	hr2021
+#nameDisplay			Croatia 2021 count
+#isoRegionCode	HR		
+#yearCollected	2021		
+### Language Criteria ###			
+#languageUse	Speaks		
+#acquisitionOrder	L1		
+#domain	Home		
+### Population Surveyed ###			
+#population	3,871,833		
+#responsesPerIndividual	1		
+### Data Constraints ###			
+#quantity	count		
+### Creator ###			
+#collectorType	Government		
+#collectorName	Croatian Bureau of Statistics (Državni zavod za statistiku — DZS)		
+#collectorNameShort	DZS Croatia		
+### Source Document ###			
+#url	https://podaci.dzs.hr/media/3hue4q5v/popis_2021-stanovnistvo_rh.xlsx		
+#datePublished	2022-09-22		
+#dateAccessed	2026-07-20		
+#documentName	CENSUS OF POPULATION, HOUSEHOLDS AND DWELLINGS IN 2021 – POPULATION OF REPUBLIC OF CROATIA	STANOVNIŠTVO PREMA MATERINSKOM JEZIKU – DETALJNA KLASIFIKACIJA, POPIS 2021.	
+#tableName	Sheet 3: Population by Mother Tongue 	STANOVNIŠTVO PREMA MATERINSKOM JEZIKU – DETALJNA KLASIFIKACIJA, POPIS 2021.	
+#columnName	Mother tongue / Materinski jezik — Ukupno (Total)		
+Language Code	Language		Population
+hbs/hrv	Croatian	hrvatski	3,687,735
+hbs	Croato-Serbian	hrvatsko-srpski	4,278
+sqi	Albanian	albanski	13,503
+hbs/bos	Bosnian	bosanski	17,531
+bul	Bulgarian	bugarski	263
+hbs/cnr	Montenegrin	crnogorski	943
+ces	Czech	češki	4,915
+hun	Hungarian	mađarski	7,218
+mkd	Macedonian	makedonski	3,334
+deu	German	njemački	3,358
+pol	Polish	poljski	730
+rom	Romani	romski	15,269
+ron	Romanian	rumunjski	671
+rus	Russian	ruski	2,081
+rue/rsk	Ruthenian	rusinski	1,011
+slk	Slovak	slovački	2,859
+slv	Slovenian	slovenski	7,620
+hbs/srp	Serbian	srpski	45,004
+hbs	Serbo-Croatian	srpsko-hrvatski	8,182
+ita	Italian	talijanski	12,890
+tur	Turkish	turski	368
+ukr	Ukrainian	ukrajinski	1,198
+rup	Vlach	vlaški	40
+heb	Hebrew	hebrejski	82
+vls	Flemish	flamanski	44
+bel	Belarusian	bjeloruski	29
+dan	Danish	danski	39
+eng	English	engleski	2,863
+fin	Finnish	finski	38
+fra	French	francuski	756
+gle	Irish	irski	4
+nld	Dutch	nizozemski	362
+nor/nob	Norwegian	norveški	42
+por	Portuguese	portugalski	264
+spa	Spanish	španjolski	991
+swe	Swedish	švedski	121
+ell	Greek	grčki	106
+lit	Lithuanian	litavski	47
+lav	Latvian	latvijski	20
+est	Estonian	estonski	14
+ron	Moldavian	moldavski	34
+kjv	Goranski	goranski	185
+ara	Arabic	arapski	852
+hye	Armenian	armenski	34
+hin	Hindi	hindski	215
+zho	Chinese	kineski	589
+jpn	Japanese	japanski	76
+kor	Korean	korejski	59
+fas	Persian	perzijski	83
+kat	Georgian	gruzijski	13
+fil	Filipino	filipinski	363
+mul	Other languages	ostali jezici	1,667
+und	Unknown	nepoznato	20,840
