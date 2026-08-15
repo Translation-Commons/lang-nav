@@ -46,3 +46,20 @@ public/diff/
 
 # Wrangler local cache (wrangler pages dev)
 .wrangler/
+
+# Python (backend ETL)
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+
+# PostgREST: a downloaded binary, and a config file holding the database
+# password. Neither belongs in git. See backend/README.md for the setup.
+backend/tools/
+
+# Local agent and editor tooling. Each developer's own; none of it is shared.
+.claude
+.mcp.json
+.repowise/
+.private/
