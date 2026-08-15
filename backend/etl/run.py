@@ -271,9 +271,11 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           lambda v: v == 0)
 
     # D4, locale populations from censuses.
-    check("D4 locales with a winning speaking census (expect ~3100)",
+    # ~3100 before PR #755 added the Eurobarometer and four national censuses
+    # (2026-08-15). More censuses means more locales that have one to win.
+    check("D4 locales with a winning speaking census (expect ~3378)",
           "SELECT count(pop_speaking_census_id) FROM locale",
-          lambda v: 2900 <= v <= 3300)
+          lambda v: 3200 <= v <= 3600)
     # Scoped to StableDatabase from D5 onward. Every check below that counts a
     # DERIVED column has to be, because D5 adds ~21,500 generated rows that
     # legitimately carry one. An unscoped count would silently stop testing
@@ -336,10 +338,11 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # what lets D5's > 10 cutoff pick family locales up unchanged. Unscoped,
     # this check would count those 1,173 rows and stop describing locales.tsv.
     # 9040 before PR #745 revised locales.tsv (2026-08-11).
-    check("D4 curated pop_speaking_unadjusted preserved (expect 9078)",
+    # 9078 before PR #755 revised locales.tsv again (2026-08-15).
+    check("D4 curated pop_speaking_unadjusted preserved (expect 9397)",
           """SELECT count(pop_speaking_unadjusted) FROM locale
               WHERE locale_source = 'StableDatabase'""",
-          lambda v: v == 9078)
+          lambda v: v == 9397)
     # Now that pop_speaking_adjusted exists, territory_stats can order by
     # something real for COUNTRIES. Territory groups stay meaningless until D5
     # creates their locales.
@@ -358,17 +361,19 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # locales it raises, so the D4 count has to exclude that value or it drifts
     # upward every time the family sums reach one more macrolanguage.
     # 3100 before PR #745 added six census files (2026-08-11).
-    check("D4 derived population source filled for census locales (expect 3243)",
+    # 3243 before PR #755 added the Eurobarometer and four more (2026-08-15).
+    check("D4 derived population source filled for census locales (expect 3378)",
           """SELECT count(*) FROM locale
               WHERE locale_source = 'StableDatabase'
                 AND pop_speaking_source_derived IS NOT NULL
                 AND pop_speaking_source_derived <> 'Aggregated from Languages'""",
-          lambda v: v == 3243)
+          lambda v: v == 3378)
     # The curated attribution from locales.tsv must survive D4 untouched. The
     # frontend overwrites its in-memory equivalent; we deliberately do not.
     # 8844 before PR #745 revised locales.tsv (2026-08-11).
-    check("D4 curated pop_speaking_source preserved (expect 8840)",
-          "SELECT count(pop_speaking_source) FROM locale", lambda v: v == 8840)
+    # 8840 before PR #755 revised locales.tsv again (2026-08-15).
+    check("D4 curated pop_speaking_source preserved (expect 8965)",
+          "SELECT count(pop_speaking_source) FROM locale", lambda v: v == 8965)
     # Not an error: a contributor's attribution disagreeing with what the
     # winning census implies is exactly the signal keeping both columns buys.
     check("D4 curated vs derived source disagreements (bounded, expect < 2000)",
@@ -395,10 +400,12 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
 
     # D5, the regional locales. This step CREATES ROWS, so the checks are about
     # existence and arithmetic rather than about columns being filled.
-    check("D5 regional locale rows (measured 21555)",
+    # 21555 before PR #755 (2026-08-15). The regional rows are generated from
+    # the curated ones, so more censuses upstream means more of them here.
+    check("D5 regional locale rows (measured 23379)",
           """SELECT count(*) FROM locale
               WHERE locale_source = 'createRegionalLocales'""",
-          lambda v: 20000 <= v <= 23000)
+          lambda v: 22000 <= v <= 25000)
     check("D5 territory groups given locales (expect 32)",
           """SELECT count(DISTINCT territory_id) FROM locale
               WHERE locale_source = 'createRegionalLocales'""",
@@ -420,10 +427,15 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     #                        afrobarometer record from winning, promoting one
     #                        estimating 103,320.
     # Net -43,669,147, matching the observed move to the digit.
-    check("D5 English worldwide speakers (measured 1188624618)",
+    # 1,188,624,618 before PR #755 (2026-08-15). The Eurobarometer reports
+    # English across the EU, and 27 eng locales now take their figure from a
+    # eu.2023 census, together summing 224,132,980. Those locales already had
+    # figures from lower-ranked sources, so the worldwide roll-up moves by the
+    # difference, +96,122,451, not by the full sum.
+    check("D5 English worldwide speakers (measured 1284747069)",
           """SELECT pop_speaking_adjusted FROM locale
               WHERE id = 'reg.eng_001'""",
-          lambda v: v is not None and abs(int(v) - 1_188_624_618) < 1_000_000)
+          lambda v: v is not None and abs(int(v) - 1_284_747_069) < 1_000_000)
     check("D5 Hindi worldwide speakers (measured 810041889)",
           """SELECT pop_speaking_adjusted FROM locale
               WHERE id = 'reg.hin_001'""",
