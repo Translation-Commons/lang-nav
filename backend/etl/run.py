@@ -271,11 +271,27 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           lambda v: v == 0)
 
     # D4, locale populations from censuses.
-    # ~3100 before PR #755 added the Eurobarometer and four national censuses
-    # (2026-08-15). More censuses means more locales that have one to win.
-    check("D4 locales with a winning speaking census (expect ~3378)",
+    #
+    # The exact count moves whenever a census PR lands (~3100 before PR #745,
+    # 3243 after it, 3378 after PR #755), so pinning it just guarantees a
+    # re-baseline every time real data arrives. The assertion here is only a
+    # collapse guard; the invariant below is what actually tests the step.
+    check("D4 locales with a winning speaking census (collapse guard)",
           "SELECT count(pop_speaking_census_id) FROM locale",
-          lambda v: 3200 <= v <= 3600)
+          lambda v: v > 2000)
+    # Self-updating. Every locale the census join reaches must leave D4 with a
+    # winner, whatever the totals happen to be. Adding census files keeps this
+    # passing; breaking the join or the ranking fails it. The join is repeated
+    # from 003_derive.sql D4 Pass 1 deliberately - if the two ever disagree,
+    # this check is measuring something the step does not do.
+    check("D4 locales with census records but no winning census (expect 0)",
+          """SELECT count(*) FROM (
+               SELECT DISTINCT lo.id
+                 FROM census_language_estimate cle
+                 JOIN census c  ON c.id = cle.census_id
+                 JOIN locale lo ON lo.id = cle.language_id || '_' || c.territory_id
+                WHERE lo.pop_speaking_census_id IS NULL) x""",
+          lambda v: v == 0)
     # Scoped to StableDatabase from D5 onward. Every check below that counts a
     # DERIVED column has to be, because D5 adds ~21,500 generated rows that
     # legitimately carry one. An unscoped count would silently stop testing
@@ -339,6 +355,16 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # this check would count those 1,173 rows and stop describing locales.tsv.
     # 9040 before PR #745 revised locales.tsv (2026-08-11).
     # 9078 before PR #755 revised locales.tsv again (2026-08-15).
+    #
+    # Deliberately still an exact count, unlike the pop_speaking_source pair
+    # below, because neither invariant that replaced those is available here:
+    #   * "curated column only on curated rows" does not hold - D6 writes
+    #     pop_speaking_unadjusted on 19,343 generated rows by design;
+    #   * "curated differs from derived" does not hold either - the two agree
+    #     on 8,026 of these 9,397 rows, because the curated figure often came
+    #     from the same census in the first place.
+    # So the count is the only detector left for D4 overwriting this column,
+    # and re-baselining one line when locales.tsv changes is the price.
     check("D4 curated pop_speaking_unadjusted preserved (expect 9397)",
           """SELECT count(pop_speaking_unadjusted) FROM locale
               WHERE locale_source = 'StableDatabase'""",
@@ -360,20 +386,30 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # D6 writes the same column with 'Aggregated from Languages' on the curated
     # locales it raises, so the D4 count has to exclude that value or it drifts
     # upward every time the family sums reach one more macrolanguage.
-    # 3100 before PR #745 added six census files (2026-08-11).
-    # 3243 before PR #755 added the Eurobarometer and four more (2026-08-15).
-    check("D4 derived population source filled for census locales (expect 3378)",
+    # Was an exact count, re-baselined twice (3100, 3243, 3378) as census files
+    # landed. The number was never the point: what matters is that D4 fills the
+    # derived source wherever a census won. Stated that way it never needs
+    # re-baselining, and it is a stricter test - the old count would pass if
+    # 3378 rows were filled but they were the wrong 3378.
+    check("D4 census winners missing a derived population source (expect 0)",
           """SELECT count(*) FROM locale
               WHERE locale_source = 'StableDatabase'
-                AND pop_speaking_source_derived IS NOT NULL
-                AND pop_speaking_source_derived <> 'Aggregated from Languages'""",
-          lambda v: v == 3378)
+                AND pop_speaking_census_id IS NOT NULL
+                AND pop_speaking_source_derived IS NULL""",
+          lambda v: v == 0)
     # The curated attribution from locales.tsv must survive D4 untouched. The
     # frontend overwrites its in-memory equivalent; we deliberately do not.
-    # 8844 before PR #745 revised locales.tsv (2026-08-11).
-    # 8840 before PR #755 revised locales.tsv again (2026-08-15).
-    check("D4 curated pop_speaking_source preserved (expect 8965)",
-          "SELECT count(pop_speaking_source) FROM locale", lambda v: v == 8965)
+    # The count tracks locales.tsv (8844, then 8840, then 8965), so it is a
+    # floor here rather than a pin. The invariant below carries the meaning the
+    # exact number was standing in for: the curated column is written by the
+    # loader and by nothing downstream.
+    check("D4 curated pop_speaking_source present (floor)",
+          "SELECT count(pop_speaking_source) FROM locale", lambda v: v > 8000)
+    check("D4 curated pop_speaking_source on a generated row (expect 0)",
+          """SELECT count(*) FROM locale
+              WHERE pop_speaking_source IS NOT NULL
+                AND locale_source <> 'StableDatabase'""",
+          lambda v: v == 0)
     # Not an error: a contributor's attribution disagreeing with what the
     # winning census implies is exactly the signal keeping both columns buys.
     check("D4 curated vs derived source disagreements (bounded, expect < 2000)",
