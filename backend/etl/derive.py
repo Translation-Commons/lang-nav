@@ -1,6 +1,7 @@
 """Derived structures.
 
-This pass implements eleven of the thirteen derive steps:
+This pass implements twelve of the thirteen numbered derive steps. D12 is not
+among them because it is not a real step; see the NOT_IMPLEMENTED block below.
 
     D1   rebuild_language_ancestry   (plus the cycle assertion)
     D2   rebuild_territory_ancestry  (both hierarchies)
@@ -15,6 +16,7 @@ This pass implements eleven of the thirteen derive steps:
     D9   rebuild_largest_descendants      (Combined tree only)
     D10  rebuild_language_depth           (ALL sources)
          + rebuild_recursive_language_data (Combined tree only)
+    D11  rebuild_language_modality        (Combined tree only)
     D13  REFRESH MATERIALIZED VIEW territory_stats
 
 plus census.language_count, which is a plain aggregate rather than a recursive
@@ -47,11 +49,18 @@ Combined, and the coordinate weights come from D8 - so that half is Combined
 only. Its third output, the digital support score, is not implemented at all
 and is declared below: three of its five inputs have no destination table.
 
-Step D11 is NOT implemented, nor is D10's per-source half, nor a regional
-roll-up per classification source: D6 generates family locales for every
-source, but D5 aggregates the ISO ones only. They are declared below so that
-calling one raises instead of silently leaving a column NULL and letting a
-caller believe the number is real.
+D11 IS COMBINED-TREE ONLY, for a reason none of the earlier steps had. It is
+neither blocked nor deferred: there is no per-source semantics to port.
+computeLanguageFamiliesModality traverses the Combined child lists whatever
+source is selected, so the Combined answer is the only one the live site has
+ever produced, and inventing a Glottolog one needs a maintainer decision before
+it needs code.
+
+What is NOT implemented is D11 for the six non-Combined trees, D10's per-source
+half, and a regional roll-up per classification source: D6 generates family
+locales for every source, but D5 aggregates the ISO ones only. They are
+declared below so that calling one raises instead of silently leaving a column
+NULL and letting a caller believe the number is real.
 
 The heavy steps run inside Postgres rather than in Python on purpose. The
 language graph is a DAG, not a tree: the same languoid can be reachable by more
@@ -252,7 +261,7 @@ def rebuild_regional_locales(conn: psycopg.Connection, run_id: str) -> dict[str,
     """D5. Synthesise the locale rows for territory GROUPS. Returns counts.
 
     This step CREATES ROWS rather than filling columns, which is easy to miss
-    when auditing: `locale` looks populated because the 10,860 curated rows are
+    when auditing: `locale` looks populated because the 10,978 curated rows are
     already there.
 
     Depends on D3 for territory.population, which is the percentage's
@@ -446,7 +455,9 @@ def rebuild_descendant_counts(conn: psycopg.Connection, run_id: str) -> dict[str
             SELECT count(*) FROM language_source_attribute WHERE descendant_count > 0
         """,
         # NULL here means the languoid has no Combined row, so it is not in that
-        # tree at all. 18,957 of 27,299 measured 2026-08-06.
+        # tree at all. 8,342 of 27,299 measured 2026-08-15, against 18,957 on
+        # 2026-08-06. The drop has not been traced to a specific change; treat
+        # the older figure as unreliable rather than as evidence of a loss.
         "language_mirrored": "SELECT count(descendant_count) FROM language",
         "language_with_descendants": """
             SELECT count(*) FROM language WHERE descendant_count > 0
@@ -586,7 +597,7 @@ def rebuild_recursive_language_data(
         "vitality_eth_coarse": "SELECT count(vitality_eth_coarse) FROM language",
         "vitality_meta": "SELECT count(vitality_meta) FROM language",
         # Split by provenance, because the failure that matters here is the
-        # loaded figure going DOWN. An unscoped clear deletes 1,137 Glottolog
+        # loaded figure going DOWN. An unscoped clear deletes 8,907 Glottolog
         # positions and a single total would hide it behind the derived gain.
         "coords_loaded": """
             SELECT count(*) FROM language WHERE coords_source = 'Glottolog'

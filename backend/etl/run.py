@@ -156,13 +156,14 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           "SELECT count(*) FROM territory", lambda v: v == 289)
     check("writing_system (expect 225)",
           "SELECT count(*) FROM writing_system", lambda v: v == 225)
-    check("locale, StableDatabase (expect ~10806)",
+    check("locale, StableDatabase (expect ~10978)",
           "SELECT count(*) FROM locale WHERE locale_source = 'StableDatabase'",
           lambda v: 10000 <= v <= 11000)
-    # Measured at 246,830 on 2026-08-02. The design estimate was ~300k; the
-    # upper bound stays loose because the real failure mode is a cycle, which
-    # inflates this by orders of magnitude rather than by a few percent.
-    check("language_ancestry (measured ~247k, far more means a cycle)",
+    # Measured at 280,835 on 2026-08-15, up from 246,830 on 2026-08-02. The
+    # design estimate was ~300k; the upper bound stays loose because the real
+    # failure mode is a cycle, which inflates this by orders of magnitude
+    # rather than by a few percent.
+    check("language_ancestry (measured ~281k, far more means a cycle)",
           "SELECT count(*) FROM language_ancestry", lambda v: 0 < v < 5_000_000)
     check("territory_stats (expect 289)",
           "SELECT count(*) FROM territory_stats", lambda v: v == 289)
@@ -293,7 +294,7 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
                 WHERE lo.pop_speaking_census_id IS NULL) x""",
           lambda v: v == 0)
     # Scoped to StableDatabase from D5 onward. Every check below that counts a
-    # DERIVED column has to be, because D5 adds ~21,500 generated rows that
+    # DERIVED column has to be, because D5 adds ~23,400 generated rows that
     # legitimately carry one. An unscoped count would silently stop testing
     # what it was written to test.
     check("D4 locales with a speaking population (expect ~9301)",
@@ -352,7 +353,7 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # on a GENERATED row: a family locale's pre-census sum has exactly the
     # meaning this column carries for a curated one, and storing it there is
     # what lets D5's > 10 cutoff pick family locales up unchanged. Unscoped,
-    # this check would count those 1,173 rows and stop describing locales.tsv.
+    # this check would count those 19,343 rows and stop describing locales.tsv.
     # 9040 before PR #745 revised locales.tsv (2026-08-11).
     # 9078 before PR #755 revised locales.tsv again (2026-08-15).
     #

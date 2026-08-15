@@ -26,7 +26,7 @@ def connect(cfg: DbConfig, autocommit: bool = False) -> Iterator[psycopg.Connect
     necessary. A local PostgreSQL defaults to 0, meaning no limit, so this
     changes nothing there. Supabase sets a 2 minute default on the database,
     and several derive steps are single statements that legitimately run longer
-    than that - `rebuild_family_locales` for Glottolog builds 16,836 rows in
+    than that - `rebuild_family_locales` for Glottolog builds 16,926 rows in
     one call. The first Supabase load died exactly there, with
     `canceling statement due to statement timeout`, after every COPY had
     already succeeded.

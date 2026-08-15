@@ -13,24 +13,29 @@ groundwork for moving that work to a database.
 | Piece | State |
 | --- | --- |
 | `schema/001_schema.sql` | 36 tables, 14 enum types, 10 triggers, 1 view, 1 materialized view. Verified against a live PostgreSQL 18 server. |
-| `schema/002_indexes.sql` | 51 indexes (97 total including constraint-backed ones), applied after loading |
-| `etl/` | Loads all source files. Full run: **120 seconds**, 0 errors, 175 warnings. |
+| `schema/002_indexes.sql` | 74 indexes (120 total including constraint-backed ones), applied after loading |
+| `etl/` | Loads all source files. Full run: 0 errors, 172 warnings. |
 | Derive steps D1, D2, D13 | Implemented (both closure tables, `territory_stats`) |
-| Derive steps D3 to D12 | **Not implemented.** Populations and synthesised locales are still NULL. See `etl/derive.py`. |
+| Derive steps D3 to D11 | Implemented for the Combined tree. Populations, synthesised locales, depth, vitality and modality are all filled. |
+| Remaining gaps | D11 for the six non-Combined trees, D10's per-source half and its digital support score, and a regional roll-up per classification source (D5 aggregates the ISO ones only). D12 is deliberately absent; it was never a real step. See `etl/derive.py`. |
 
 Loaded row counts:
 
 | Table | Rows | | Table | Rows |
 | --- | ---: | --- | --- | ---: |
-| `entity` | 41,297 | | `entity_name` | 71,475 |
+| `entity` | 85,870 | | `entity_name` | 72,005 |
 | `language` | 27,299 | | `language_source_attribute` | 60,173 |
-| `locale` | 10,860 | | `language_ancestry` | 280,835 |
+| `locale` | 55,322 | | `language_ancestry` | 280,835 |
 | `territory` | 289 | | `territory_ancestry` | 1,585 |
-| `writing_system` | 225 | | `census` | 445 |
-| `keyboard` | 2,001 | | `census_language_estimate` | 12,079 |
+| `writing_system` | 225 | | `census` | 549 |
+| `keyboard` | 2,001 | | `census_language_estimate` | 13,147 |
 
-Database size: about 124 MB, which matches the sizing estimate that the whole
-dataset fits comfortably in RAM on the smallest managed instance.
+Measured after a full rebuild on 2026-08-15. `locale` counts both the ~10,800
+curated rows and the ~23,400 regional ones D5 generates, so an earlier figure
+of 10,860 was this table before D5 existed rather than a shrinking dataset.
+
+Database size: about 199 MB, which still matches the sizing estimate that the
+whole dataset fits comfortably in RAM on the smallest managed instance.
 
 ## Schema changes made during the first live execution
 
@@ -189,7 +194,7 @@ Development will never notice. Over a real link:
 | `locale`, realistic | **13.9 MB** | 1.0 MB | **5.6 s** | 0.4 s |
 
 Compression is worth **13 to 14x**, because JSON repeats every key on every one
-of 27,299 or 54,731 rows and that is precisely what a compressor removes.
+of 27,299 or 55,322 rows and that is precisely what a compressor removes.
 
 ```nginx
 gzip on;

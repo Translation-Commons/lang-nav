@@ -178,8 +178,8 @@ def _index_by_language_territory(ds: Dataset) -> dict[tuple[str, str], str]:
     """Build (language, territory) -> locale id once, instead of scanning per row.
 
     indigeneity.tsv and ecrml.tsv are both keyed by a language/territory pair
-    rather than by locale id. Scanning the ~10,800 locales for each of the
-    ~4,100 rows in those two files would be roughly 44 million comparisons;
+    rather than by locale id. Scanning the ~11,000 locales for each of the
+    ~4,100 rows in those two files would be roughly 45 million comparisons;
     one index makes it a hash lookup per row.
     """
     index: dict[tuple[str, str], str] = {}
