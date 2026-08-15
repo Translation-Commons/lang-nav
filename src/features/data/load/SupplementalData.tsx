@@ -4,6 +4,7 @@ import { computeContainedTerritoryStats } from '../compute/computeTerritoryStats
 import { addCensusData } from '../connect/connectCensuses';
 import { DataContextType } from '../context/useDataContext';
 
+import { isApiEnabled } from './api/apiConfig';
 import { loadCensusData } from './extra_entities/loadCensusData';
 import { loadEthnologue2012Data } from './extra_entities/SILData';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
@@ -30,15 +31,27 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     return; // won't load anything while data is empty
   }
 
+  // These four fill territory fields that the ETL already merged into the
+  // `territory` table, so loadTerritories() has them when it reads from the
+  // API. Running them anyway would refetch four files to write values that are
+  // already there. Skipping them is where Phase 1's "5 requests become 1" is
+  // actually banked; the branch in loadTerritories only changes where the first
+  // one comes from.
+  const territorySupplements = isApiEnabled()
+    ? []
+    : [
+        loadTerritoryGDPLiteracy(dataContext.getTerritory),
+        loadCountryCoordinates(dataContext.getTerritory),
+        loadLandArea(dataContext.getTerritory),
+        loadTerritoryNames(dataContext.getTerritory),
+      ];
+
   // Load multiple supplemental data sources in parallel, these changes will modify objects
   // but they should not modify the same fields.
   await Promise.all([
+    ...territorySupplements,
     loadCLDRCoverage(dataContext.getCLDRLanguage),
-    loadTerritoryGDPLiteracy(dataContext.getTerritory),
-    loadCountryCoordinates(dataContext.getTerritory),
     loadAndApplyWikipediaData(dataContext),
-    loadLandArea(dataContext.getTerritory),
-    loadTerritoryNames(dataContext.getTerritory),
     loadLanguageNamesFrench(dataContext.getLanguage),
     loadEthnologue2012Data(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),

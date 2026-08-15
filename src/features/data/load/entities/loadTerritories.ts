@@ -4,9 +4,17 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadTerritoriesFromApi } from '../api/loadTerritoriesFromApi';
+
 import { loadObjectsFromFile } from './loadObjectsFromFile';
 
 export async function loadTerritories(): Promise<Record<string, TerritoryData> | void> {
+  // With VITE_API_URL set, one request replaces this file AND the four
+  // supplemental territory files, which SupplementalData.tsx then skips.
+  if (isApiEnabled()) {
+    return await loadTerritoriesFromApi();
+  }
   return await loadObjectsFromFile<TerritoryData>('data/tc/territories.tsv', parseTerritoryLine);
 }
 
