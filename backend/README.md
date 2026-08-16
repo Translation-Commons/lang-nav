@@ -15,9 +15,47 @@ groundwork for moving that work to a database.
 | `schema/001_schema.sql` | 36 tables, 14 enum types, 10 triggers, 1 view, 1 materialized view. Verified against a live PostgreSQL 18 server. |
 | `schema/002_indexes.sql` | 74 indexes (120 total including constraint-backed ones), applied after loading |
 | `etl/` | Loads all source files. Full run: 0 errors, 172 warnings. |
-| Derive steps D1, D2, D13 | Implemented (both closure tables, `territory_stats`) |
-| Derive steps D3 to D11 | Implemented for the Combined tree. Populations, synthesised locales, depth, vitality and modality are all filled. |
-| Remaining gaps | D11 for the six non-Combined trees, D10's per-source half and its digital support score, and a regional roll-up per classification source (D5 aggregates the ISO ones only). D12 is deliberately absent; it was never a real step. See `etl/derive.py`. |
+| Derive steps | **All of them run.** D1 to D11 plus D13; D12 was never a real step. Populations, synthesised locales, writing-system reach, depth, vitality and modality are filled |
+| Coverage | Complete for the Combined tree. **Four steps answer for Combined only**, and one for ISO only - see below |
+| Remaining gaps | Seven, each declared in `NOT_IMPLEMENTED` in `etl/derive.py` so that calling one raises instead of leaving a column silently NULL |
+
+Every step is built. What is incomplete is **coverage across the seven
+classification sources**, which matters because the whole point of the schema is
+that the authorities disagree. Measured per source:
+
+| Step | Combined | ISO / BCP / UNESCO / Glottolog / CLDR |
+| --- | --- | --- |
+| D7 `descendant_count` | 8,342 | **filled for all** (8,421 / 8,204 / 8,100 / 26,953 / 153) |
+| D10 `depth` | 8,342 | **filled for all** (same counts) |
+| D8 `population_estimate` | 7,635 | **0 - not implemented** |
+| D11 `modality` | 1,028 | **0 - not implemented** |
+
+D9 (largest descendant) and D10's vitality and coordinate half are Combined-only
+for the same reason. D5's regional roll-up aggregates the ISO tree only.
+
+**Why the gaps exist**, since none of them is an oversight:
+
+- **D8 and D11 per source are deferred.** Both SQL functions already take a
+  source parameter, so widening them is a call-site change. Nothing consumes a
+  per-source language estimate until the API exposes one.
+- **D9 per source is blocked, not deferred.** It ranks descendants by the
+  estimates D8 writes, so it cannot run until D8 does.
+- **D11 per source has no semantics to port.** The frontend function traverses
+  the Combined child lists whatever source is selected, so the Combined answer
+  is the only one the live site has ever produced. A Glottolog modality would be
+  an invention and needs a maintainer's decision before it needs code.
+- **D5 per source needs a schema decision.** It groups leaf locales by
+  (language, script, variant) with no source dimension, so five copies of one
+  family locale would sum into a single bucket.
+- **The digital support score is a load gap, not a derive gap.** Three of its
+  five inputs (`google/gtranslate.tsv`, `other_sources/ios.tsv`,
+  `other_sources/win11_language_packs.tsv`) have no destination table, so a
+  partial implementation would publish a score wrong by construction.
+
+One further entry is a deliberate non-port: the frontend rewrites any child
+population estimate at or above its parent's down to `parent - 0.01`. Q1 in
+`schema/001_schema.sql` §0.2 says not to reproduce that, so our numbers
+legitimately differ from the live site wherever it fires.
 
 Loaded row counts:
 
