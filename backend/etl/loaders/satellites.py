@@ -218,15 +218,38 @@ def _french_names(ds: Dataset, path: Path) -> None:
     This lands on language.name_french AND in entity_name. That duplication is
     deliberate and documented in the schema, but it only holds while French is
     the ONLY translation language. A second one means dropping the column.
+
+    A few codes appear TWICE in the file with different names. entity_name can
+    hold both, because it is keyed to allow several names per entity; the single
+    name_french column cannot, so the last row wins and the first is lost. That
+    would be unremarkable except that the winner is sometimes the ENGLISH name -
+    'northern frisian' beats 'frison septentrional'. Recorded rather than
+    resolved: picking between two supplied names is an upstream data decision,
+    and silently taking the last one is what made it invisible.
     """
     known = ds["language"].ids()
+    seen: dict[str, str] = {}
+    conflicts: list[str] = []
     for row in read_table(path, header_startswith="Code\t"):
         lid = row.get("Code")
         name = row.get("Nom en français")
         if not lid or not name or lid not in known:
             continue
+        if seen.get(lid, name) != name:
+            conflicts.append(f"{lid}: {seen[lid]!r} then {name!r}")
+        seen[lid] = name
         ds["language"].upsert(id=lid, name_french=name)
         ds.add_name(lid, LANGUAGE, name, "translation", language_tag="fr")
+
+    if conflicts:
+        ds.warn(
+            None,
+            "language.name_french",
+            f"{path.name}: {len(conflicts)} language code(s) appear twice with "
+            f"different names. The later row wins in name_french and the earlier "
+            f"one survives only in entity_name; some winners are the English "
+            f"name rather than the French one: {sorted(conflicts)}",
+        )
 
 
 def _unmapped(ds: Dataset) -> None:

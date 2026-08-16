@@ -14,7 +14,7 @@ groundwork for moving that work to a database.
 | --- | --- |
 | `schema/001_schema.sql` | 36 tables, 14 enum types, 10 triggers, 1 view, 1 materialized view. Verified against a live PostgreSQL 18 server. |
 | `schema/002_indexes.sql` | 74 indexes (120 total including constraint-backed ones), applied after loading |
-| `etl/` | Loads all source files. Full run: 0 errors, 172 warnings. |
+| `etl/` | Loads all source files. Full run: 0 errors, 173 warnings. |
 | Derive steps | **All of them run.** D1 to D11 plus D13; D12 was never a real step. Populations, synthesised locales, writing-system reach, depth, vitality and modality are filled |
 | Coverage | Complete for the Combined tree. **Four steps answer for Combined only**, and one for ISO only - see below |
 | Remaining gaps | Seven, each declared in `NOT_IMPLEMENTED` in `etl/derive.py` so that calling one raises instead of leaving a column silently NULL |
