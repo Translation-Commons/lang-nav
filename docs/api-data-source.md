@@ -67,7 +67,13 @@ The mapping has unit tests that need no network
 (`src/features/data/load/api/__tests__/loadTerritoriesFromApi.test.ts`).
 
 Those cannot tell you whether the API path AGREES with the file path, which is
-the question that matters. For that, load both and compare every field of all
-289 territories. Do not spot-check: the differences found while building this
-were on 2, 6 and 30 territories respectively, and every one of them would have
-survived a handful of samples.
+the question that matters. For that,
+`src/features/data/load/api/__tests__/loadTerritoriesParity.test.ts` loads
+both and compares every field of all 289 territories. Do not spot-check: the
+differences found while building this were on 2, 6 and 30 territories
+respectively, and every one of them would have survived a handful of samples.
+
+The parity test needs a running backend, so it only runs when `VITE_API_URL`
+is both set and reachable - unset, or set with the backend stopped, it skips
+itself rather than failing. Start PostgREST (see `backend/README.md`) and run
+`npm run test` to exercise it for real.

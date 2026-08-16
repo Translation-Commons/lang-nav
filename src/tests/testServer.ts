@@ -12,6 +12,21 @@ function readFile(filePath: string) {
   return fs.readFileSync(absolutePath, 'utf8');
 }
 
+/** Serves a file under `public/` for a relative fetch, exactly as the dev
+ *  server does. Exported so tests can register handlers for files beyond the
+ *  fixed set below, e.g. the supplemental territory files. */
+export async function makeFileAvailable(filePath: string) {
+  const { http, HttpResponse } = await import('msw');
+  return http.get(
+    `*/${filePath}`,
+    () =>
+      new HttpResponse(readFile(filePath), {
+        status: 200,
+        headers: { 'Content-Type': 'text/tab-separated-values; charset=utf-8' },
+      }),
+  );
+}
+
 export async function getServer(): Promise<SetupServer> {
   if (server) return server;
   const [{ http, HttpResponse }, { setupServer }] = await Promise.all([
@@ -19,24 +34,18 @@ export async function getServer(): Promise<SetupServer> {
     import('msw/node'),
   ]);
 
-  const makeFileAvailable = (filePath: string) =>
-    http.get(
-      `*/${filePath}`,
-      () =>
-        new HttpResponse(readFile(filePath), {
-          status: 200,
-          headers: { 'Content-Type': 'text/tab-separated-values; charset=utf-8' },
-        }),
-    );
+  const fileHandlers = await Promise.all(
+    [
+      'data/tc/languages.tsv',
+      'data/tc/locales.tsv',
+      'data/tc/writingSystems.tsv',
+      'data/tc/territories.tsv',
+    ].map(makeFileAvailable),
+  );
 
-  const handlers = [
+  server = setupServer(
     http.get('/api/health', () => HttpResponse.json({ ok: true })),
-    makeFileAvailable('data/tc/languages.tsv'),
-    makeFileAvailable('data/tc/locales.tsv'),
-    makeFileAvailable('data/tc/writingSystems.tsv'),
-    makeFileAvailable('data/tc/territories.tsv'),
-  ];
-
-  server = setupServer(...handlers);
+    ...fileHandlers,
+  );
   return server;
 }
