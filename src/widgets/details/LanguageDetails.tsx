@@ -4,16 +4,16 @@ import LanguageDetailsDigitalSupport from '@entities/language/digitalsupport/Lan
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageDetailsVitalityAndViability from '@entities/language/vitality/LanguageDetailsVitalityAndViability';
 
+import './details.css';
 import LanguageAttributes from './sections/LanguageAttributes';
 import LanguageCodes from './sections/LanguageCodes';
 import LanguageConnections from './sections/LanguageConnections';
+import LanguageLocales from './sections/LanguageLocales';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguageNames from './sections/LanguageNames';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
 import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
 import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
-
-import './details.css';
 
 type Props = {
   lang: LanguageData;
@@ -49,6 +49,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
         </div>
       </div>
 
+      <LanguageLocales lang={lang} />
       <LanguageDetailsDigitalSupport lang={lang} />
       <LanguageAttributes lang={lang} />
       <LanguageConnections lang={lang} />
