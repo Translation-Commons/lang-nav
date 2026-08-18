@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+import CensusLanguageCheck from '@widgets/decoder/CensusLanguageCheck';
+
 import { useDataContext } from '@features/data/context/useDataContext';
 import { parseCensusImport } from '@features/data/load/extra_entities/loadCensusData';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
-import CensusLanguageCheck from '@entities/census/CensusLanguageCheck';
 import CensusPreview from '@entities/census/CensusPreview';
 import { CensusData } from '@entities/census/CensusTypes';
 
