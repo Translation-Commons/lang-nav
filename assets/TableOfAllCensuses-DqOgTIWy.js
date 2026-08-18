@@ -1,1 +1,0 @@
-import{G as u,v as l,r as m}from"./index-CDEI-was.js";import{I as c,T as r}from"./TableID-DL2o5PpG.js";import{g as a}from"./PopulationSourceCategoryDisplay-sD_sFCEV.js";const x=({organization:s})=>{const{censuses:e}=u(),t=l.useMemo(()=>a(),[]);return m.jsx(c,{tableID:r.Censuses,entities:s?(s==null?void 0:s.censuses)??[]:Object.values(e),columns:t})};export{x as T};
