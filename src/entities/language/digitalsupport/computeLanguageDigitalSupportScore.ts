@@ -49,7 +49,12 @@ function computeDigitalSupportScore(
     case DigitalSupportDimension.Documentation:
       return (lang.udhr?.length ? 5 : 0) + computeWikipediaScore(lang);
     case DigitalSupportDimension.Interfaces:
-      return (lang.win11LanguagePacks?.length ? 5 : 0) + (lang.ios?.length ? 5 : 0);
+      return (
+        ((lang.win11LanguagePacks?.length ? 1 : 0) +
+          (lang.ios?.length ? 1 : 0) +
+          (lang.macos?.length ? 1 : 0)) *
+        (10 / 3)
+      );
     case DigitalSupportDimension.Keyboards:
       return lang.keyboards?.length ? 10 : 0;
     case DigitalSupportDimension.I18nFrameworks:

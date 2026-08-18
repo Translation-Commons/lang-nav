@@ -6,10 +6,10 @@
 #notes				
 				
 Language Code	Language	 Locale	Writing System	notes
-ara	Arabic			
+ara/arb	Arabic			
 cat	Catalan			
 zho/cmn	Chinese, Simplified			
-zho/cmn	Chinese, Traditional 	(Hong Kong)		
+zho/yue	Chinese, Traditional 	(Hong Kong)		
 zho/cmn	Chinese, Traditional 	(Taiwan)		
 hbs/hrv	Croatian			
 ces	Czech			
@@ -36,8 +36,8 @@ msa/ind	Indonesian
 ita	Italian			
 jpn	Japanese			
 kor	Korean			
-msa/zlm	Malay			
-nor	Norwegian			
+msa/zsm	Malay			
+nor/nob	Norwegian			
 pol	Polish			
 por	Portuguese 	(Brazil)		
 por	Portuguese 	(Portugal)		

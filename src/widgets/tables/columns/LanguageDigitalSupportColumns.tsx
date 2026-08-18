@@ -146,7 +146,7 @@ const columns: TableColumn<LanguageData>[] = [
     },
   },
   {
-    key: 'macOS',
+    key: 'MacOS',
     description: 'Language entries supported in macOS.',
     render: (lang) => <MacosSupportStatus lang={lang} />,
     exportValue: (lang) => {

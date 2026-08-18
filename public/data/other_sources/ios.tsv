@@ -6,13 +6,13 @@
 #notes		Accessed from language settings on iphone	
 			
 Language Code	Language	Locale	Writing System
-ara	Arabic		
+ara/arb	Arabic		
 ben	Bangla		
 bul	Bulgarian		
 cat	Catalan		
 zho/cmn	Chinese, Simplified		
 zho/cmn	Chinese, Traditional	Taiwan	
-zho/cmn	Chinese, Traditional	Hong Kong	
+zho/yue	Chinese, Traditional	Hong Kong	
 hbs/hrv	Croatian		
 ces	Czech		
 dan	Danish		
@@ -37,7 +37,7 @@ kan	Kannada
 kaz	Kazakh		
 kor	Korean		
 lit	Lithuanian		
-msa/zlm	Malay		
+msa/zsm	Malay		
 mal	Malayalam		
 mar	Marathi		
 nor/nob	Norwegian 		
