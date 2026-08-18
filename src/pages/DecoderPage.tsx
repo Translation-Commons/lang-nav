@@ -4,18 +4,18 @@ import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
-const DataPageBody = React.lazy(() => import('./DataPageBody'));
+const DecoderPageBody = React.lazy(() => import('@widgets/decoder/DecoderPageBody'));
 const FilterPanel = React.lazy(() => import('@widgets/controls/FilterPanel'));
 const DetailsPanel = React.lazy(() => import('@widgets/details/ui/DetailsPanel'));
 
-const DataPage: React.FC = () => {
+const DecoderPage: React.FC = () => {
   /* Many data components have more lines of code so they are loaded lazily */
   return (
     <ContainErrorsAndSuspense>
       <FilterPanelProvider>
         <div style={{ display: 'flex', alignItems: 'flex-start', height: '100%' }}>
           <FilterPanel />
-          <DataPageBody />
+          <DecoderPageBody />
           <DetailsPanel />
         </div>
       </FilterPanelProvider>
@@ -23,4 +23,4 @@ const DataPage: React.FC = () => {
   );
 };
 
-export default DataPage;
+export default DecoderPage;
