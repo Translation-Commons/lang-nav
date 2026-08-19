@@ -1,9 +1,9 @@
 import { DecoderDataProvider } from './DecoderDataContext';
 import DecoderExplanation from './DecoderExplanation';
 import DecoderInput from './DecoderInput';
-import DecoderOptions from './DecoderOptions';
-import { DecoderOptionsProvider } from './DecoderOptionsContext';
 import DecoderTable from './DecoderTable';
+import DecoderOptions from './options/DecoderOptions';
+import { DecoderOptionsProvider } from './options/DecoderOptionsContext';
 
 const DecoderPageBody = () => {
   return (

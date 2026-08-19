@@ -6,14 +6,17 @@ import { ObjectType } from '@features/params/PageParamTypes';
 import type { LanguageData } from '@entities/language/LanguageTypes';
 
 import { getDecoderMacroCode } from './DecoderMacrolanguage';
-import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
 import DecoderResult from './DecoderResult';
+import { DecoderDirection, useDecoderOptionsContext } from './options/DecoderOptionsContext';
 import useFindLanguage from './useFindLanguageFromName';
 
 const EXAMPLE_NAMES =
-  'English,Spanish,French,Chinese,Mandarin,Cantonese,Hokkien,Taiwanese,Arabic,Darija,Standard Arabic,Egyptian Arabic' +
+  'English,Spanish,French' +
+  ',Chinese,Mandarin,Putonghua,Cantonese,Hokkien,Taiwanese' +
+  ',Arabic,Darija,Standard Arabic,Egyptian Arabic' +
   ',Malay,Indonesian,Bahasa' +
-  ',Bembe,Bemb,Tonga,Tonga (Tonga),Tonga (Tonga Islands),Elvish,Sindarin,Quenya';
+  ',Bembe,Bemb,Tonga,Tonga (Tonga),Tonga (Tonga Islands)' +
+  ',Elvish,Sindarin,Quenya';
 
 type DecoderDataContextType = {
   inputBlob: string;
@@ -57,7 +60,7 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
       let alts: LanguageData[] = [];
 
       if (direction === DecoderDirection.NamesToCodes) {
-        const found = findLanguage(searchLower);
+        const found = await findLanguage(searchLower);
         lang = found[0];
         alts = found.slice(1, 10);
       } else {

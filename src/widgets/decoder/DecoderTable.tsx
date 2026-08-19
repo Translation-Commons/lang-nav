@@ -12,7 +12,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import LoadingIcon from '@shared/ui/LoadingIcon';
 
 import { useDecoderDataContext } from './DecoderDataContext';
-import { useDecoderOptionsContext } from './DecoderOptionsContext';
+import { useDecoderOptionsContext } from './options/DecoderOptionsContext';
 
 const DecoderTable: React.FC = () => {
   const { inputLines, getResult } = useDecoderDataContext();

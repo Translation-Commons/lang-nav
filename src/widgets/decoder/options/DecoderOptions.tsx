@@ -4,7 +4,7 @@ import {
   SelectorDisplay,
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
-import LanguageScopeSelector from '@features/transforms/filtering/selectors/LanguageScopeSelector';
+import TerritoryFilterSelector from '@features/transforms/filtering/selectors/TerritoryFilterSelector';
 
 import DecoderLanguageSourceSelector from './DecoderLanguageSourceSelector';
 import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
@@ -25,9 +25,9 @@ const DecoderOptions: React.FC = () => {
         <div className="flex flex-col gap-2 ">
           <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
             <DecoderLanguageSourceSelector />
-            <div className="flex flex-row gap-1">
-              Language level:
-              <LanguageScopeSelector />
+            <div className="flex flex-row gap-1 items-center">
+              Relevant to territory:
+              <TerritoryFilterSelector />
             </div>
           </SelectorDisplayProvider>
           <div className="flex gap-2">
