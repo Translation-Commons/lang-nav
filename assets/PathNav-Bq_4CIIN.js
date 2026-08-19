@@ -1,0 +1,1 @@
+import{r as e,ac as s,C as t}from"./index-BqcHVklK.js";const l=({children:r,style:a})=>e.jsx("div",{style:{display:"flex",alignItems:"center",gap:"0.5em",flexWrap:"wrap",...a},children:e.jsx(s,{display:t.InlineDropdown,children:r})});export{l as P};
