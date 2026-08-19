@@ -7,7 +7,7 @@ import DecoderTable from './DecoderTable';
 
 const DecoderPageBody = () => {
   return (
-    <div className="min-w-[900px] mx-auto px-4 py-4">
+    <div className="min-w-[900px] mx-auto px-4 py-4 overflow-auto">
       <DecoderOptionsProvider>
         <DecoderDataProvider>
           <div className="text-3xl">Language Tag Decoder</div>

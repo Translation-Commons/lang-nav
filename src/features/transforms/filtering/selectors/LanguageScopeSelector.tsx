@@ -1,24 +1,23 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
 import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-type Props = { display?: SelectorDisplay };
-
-const LanguageScopeSelector: React.FC<Props> = ({ display }) => {
+const LanguageScopeSelector: React.FC = () => {
   const { languageScopes, updatePageParams } = usePageParams();
+  const { display } = useSelectorDisplay();
 
   const selectorDescription =
     'Filter what level of language-type objects are shown, such as families, macrolanguages, languages, dialects, and special codes.';
 
   return (
     <Selector
-      selectorLabel="Languoid Type"
+      selectorLabel={display !== SelectorDisplay.InlineDropdown ? 'Language Level' : undefined}
       labelWhenEmpty="Any"
       selectorDescription={selectorDescription}
       options={Object.values(LanguageScope).filter((s) => typeof s === 'number') as LanguageScope[]}

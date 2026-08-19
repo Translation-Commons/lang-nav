@@ -5,6 +5,8 @@ import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { SearchableField } from '@features/params/PageParamTypes';
 import HighlightedObjectField from '@features/transforms/search/HighlightedObjectField';
 
+import { LanguageData } from '@entities/language/LanguageTypes';
+
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LoadingIcon from '@shared/ui/LoadingIcon';
@@ -13,17 +15,17 @@ import { useDecoderDataContext } from './DecoderDataContext';
 import { useDecoderOptionsContext } from './DecoderOptionsContext';
 
 const DecoderTable: React.FC = () => {
-  const { inputLines, results } = useDecoderDataContext();
+  const { inputLines, getResult } = useDecoderDataContext();
 
   // Export functionality
   const copyToClipboard = (text: string | string[]) =>
     navigator.clipboard.writeText(Array.isArray(text) ? text.join('\n') : text);
   const copyResultingNames = useCallback(() => {
-    copyToClipboard(inputLines.map((l) => results[l]?.lang?.nameDisplay ?? ''));
-  }, [results]);
+    copyToClipboard(inputLines.map((l) => getResult(l)?.lang?.nameDisplay ?? ''));
+  }, [inputLines, getResult]);
   const copyResultingCodes = useCallback(() => {
-    copyToClipboard(inputLines.map((l) => results[l]?.lang?.codeDisplay ?? ''));
-  }, [results]);
+    copyToClipboard(inputLines.map((l) => getResult(l)?.lang?.codeDisplay ?? ''));
+  }, [inputLines, getResult]);
 
   return (
     <table className="h-fit">
@@ -57,51 +59,65 @@ const DecoderTable: React.FC = () => {
 
 const ResultRow: React.FC<{ input: string }> = ({ input }) => {
   const { includeMacroCodes } = useDecoderOptionsContext();
-  const { results, isSearchActive } = useDecoderDataContext();
-  const { lang, codeWithMacro, alts } = results[input.toLowerCase().trim()] ?? {};
+  const { getResult, isSearchActive } = useDecoderDataContext();
+  const { lang, codeWithMacro, alts } = getResult(input) ?? {};
+
+  if (input.trim() === '' || input.startsWith('#'))
+    return (
+      <tr>
+        <td></td>
+        <td>{input.slice(1)}</td>
+        <td></td>
+      </tr>
+    );
 
   return (
     <tr>
-      <td>{(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay ?? input}</td>
-      <td className="relative">
+      <td>{(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay}</td>
+      <td className="truncate">
         {isSearchActive && (
           <div className="absolute right-0 top-0 mr-1 mt-1">
             <LoadingIcon />
           </div>
         )}
         {lang ? (
-          <HoverableObject object={lang}>
-            <HighlightedObjectField
-              object={lang}
-              query={input}
-              field={SearchableField.NameAny}
-              showOriginalName={true}
-            />
-          </HoverableObject>
+          <LanguageLabel lang={lang} input={input} />
         ) : (
-          <Deemphasized>
-            <div className="flex items-center gap-1">
-              <TriangleAlertIcon display="inline-block" />
-              <span className="font-bold">{input}</span> not found
-            </div>
-          </Deemphasized>
+          input && (
+            <Deemphasized>
+              <div className="flex items-center gap-1">
+                <TriangleAlertIcon display="inline-block" />
+                <span className="font-bold">{input}</span> not found
+              </div>
+            </Deemphasized>
+          )
         )}
       </td>
-      <td>
+      <td className="truncate">
         <CommaSeparated>
           {alts?.map((alt) => (
-            <HoverableObject object={alt} key={alt.ID}>
-              <HighlightedObjectField
-                object={alt}
-                query={input}
-                field={SearchableField.NameAny}
-                showOriginalName={true}
-              />
-            </HoverableObject>
+            <LanguageLabel key={alt.ID} lang={alt} input={input} />
           ))}
         </CommaSeparated>
       </td>
     </tr>
+  );
+};
+
+const LanguageLabel: React.FC<{ lang: LanguageData; input: string }> = ({ lang, input }) => {
+  return (
+    <HoverableObject object={lang}>
+      {lang.nameDisplay.toLowerCase() != input.toLowerCase() ? (
+        <HighlightedObjectField
+          object={lang}
+          query={input}
+          field={SearchableField.NameAny}
+          showOriginalName={true}
+        />
+      ) : (
+        lang.nameDisplay
+      )}
+    </HoverableObject>
   );
 };
 

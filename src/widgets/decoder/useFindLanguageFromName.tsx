@@ -24,7 +24,7 @@ const useFindLanguage = (): ((searchString: string) => LanguageData[]) => {
   const { filteredEntities: languageEnts } = useFilteredEntities({
     inputEntities: languagesInSelectedSource,
   });
-  return (searchString: string) => {
+  const search = (searchString: string) => {
     const searchLower = searchString.toLowerCase();
     if (OVERRIDE_LANGUAGE_MATCH[searchLower]) {
       const overrideCode = OVERRIDE_LANGUAGE_MATCH[searchLower];
@@ -41,12 +41,20 @@ const useFindLanguage = (): ((searchString: string) => LanguageData[]) => {
     const ents = languageEnts.filter(
       getSubstringFilterOnQuery(searchString, SearchableField.NameAny),
     );
+    if (ents.length === 0 && searchString.includes('('))
+      return search(searchString.split('(')[0].trim()); // If no results, try removing parenthetical
+
     const exactMatch = ents.filter((e) => e.nameDisplay.toLowerCase() === searchLower);
-    if (exactMatch.length) return exactMatch;
+    if (exactMatch.length)
+      return [
+        exactMatch,
+        ...ents.filter((e) => e.nameDisplay.toLowerCase() !== searchLower),
+      ].flat();
     const matchAnyName = ents.filter((e) => e.names.some((n) => n.toLowerCase() === searchLower));
     if (matchAnyName.length) return matchAnyName;
     return ents;
   };
+  return search;
 };
 
 export default useFindLanguage;

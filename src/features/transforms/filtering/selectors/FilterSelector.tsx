@@ -36,7 +36,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
     case Field.Modality:
       return <LanguageModalitySelector />;
     case Field.LanguageScope:
-      return <LanguageScopeSelector display={SelectorDisplay.FilterList} />;
+      return <LanguageScopeSelector />;
     case Field.TerritoryScope:
       return <TerritoryScopeSelector />;
     case Field.ISOStatus:
@@ -44,7 +44,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
     case Field.Name:
       return <SearchBar />; // Technically correct but not recommended usage
     case Field.SourceForLanguage:
-      return <LanguageSourceSelector display={SelectorDisplay.FilterList} />;
+      return <LanguageSourceSelector />;
     case Field.Population:
       return <PopulationFilterSelector />;
     default:

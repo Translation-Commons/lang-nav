@@ -10,14 +10,18 @@ import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsCont
 import DecoderResult from './DecoderResult';
 import useFindLanguage from './useFindLanguageFromName';
 
-const EXAMPLE_NAMES = `English,Spanish,French,Chinese,Mandarin,Cantonese,Arabic,Darija,Standard Arabic,Egyptian Arabic`;
+const EXAMPLE_NAMES =
+  'English,Spanish,French,Chinese,Mandarin,Cantonese,Hokkien,Taiwanese,Arabic,Darija,Standard Arabic,Egyptian Arabic' +
+  ',Malay,Indonesian,Bahasa' +
+  ',Bembe,Bemb,Tonga,Tonga (Tonga),Tonga (Tonga Islands),Elvish,Sindarin,Quenya';
 
 type DecoderDataContextType = {
   inputBlob: string;
   setInputBlob: React.Dispatch<React.SetStateAction<string>>;
   inputLines: string[];
   setInputLines: React.Dispatch<React.SetStateAction<string[]>>;
-  results: Record<string, DecoderResult>;
+  // results: Record<string, DecoderResult>;
+  getResult: (input: string) => DecoderResult | undefined;
   isSearchActive: boolean;
 };
 
@@ -26,7 +30,7 @@ const DecoderDataContext = React.createContext<DecoderDataContextType>({
   setInputBlob: () => {},
   inputLines: [],
   setInputLines: () => {},
-  results: {},
+  getResult: () => undefined,
   isSearchActive: false,
 });
 
@@ -42,10 +46,12 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const [inputLines, setInputLines] = useState(EXAMPLE_NAMES.split(','));
   const [results, setResults] = useState<Record<string, DecoderResult>>({});
 
+  const getResult = useCallback((input: string) => results[input.toLowerCase().trim()], [results]);
   const search = useCallback(
     async (searchString: string): Promise<DecoderResult> => {
       const searchLower = searchString.toLowerCase().trim();
-      if (searchLower === '') return { input: searchLower, lang: undefined, alts: [] };
+      if (searchLower === '' || searchLower.startsWith('#'))
+        return { input: searchLower, lang: undefined, alts: [] };
 
       let lang = undefined;
       let alts: LanguageData[] = [];
@@ -53,7 +59,7 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
       if (direction === DecoderDirection.NamesToCodes) {
         const found = findLanguage(searchLower);
         lang = found[0];
-        alts = found.slice(1);
+        alts = found.slice(1, 10);
       } else {
         lang = getLanguage(searchLower);
         if (lang?.CLDR.dataProvider?.type === ObjectType.Language) alts = [lang.CLDR.dataProvider];
@@ -63,7 +69,6 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
     },
     [getLanguage, findLanguage, direction],
   );
-
   const searchAndAdd = useCallback(
     async (searchString: string) => {
       if (results[searchString]) return;
@@ -97,7 +102,7 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
 
   return (
     <DecoderDataContext.Provider
-      value={{ inputBlob, setInputBlob, inputLines, setInputLines, results, isSearchActive }}
+      value={{ inputBlob, setInputBlob, inputLines, setInputLines, getResult, isSearchActive }}
     >
       {children}
     </DecoderDataContext.Provider>

@@ -18,7 +18,7 @@ const DecoderInput = () => {
       Paste languages here
       <textarea
         id="decoder-input"
-        className="w-full border p-2 min-h-100 h-stretch"
+        className="w-full min-w-50 border p-2 min-h-100 field-sizing-content"
         value={inputBlob}
         onChange={(e) => setInputBlob(e.target.value)}
         placeholder="Paste a newline separated list of languages..."
