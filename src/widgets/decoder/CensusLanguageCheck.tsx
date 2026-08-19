@@ -85,7 +85,7 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
 
     // Commented out codes and ones for special codes are there for documentation but are ignored in the import.
     if (l.specificCode && isIgnoredLanguageCode(l.specificCode)) return;
-    const foundLanguage = l.name ? findLanguageFromName(l.name) : undefined;
+    const foundLanguage = l.name ? findLanguageFromName(l.name)[0] : undefined;
 
     checkName(l);
     checkStatusInName(l);

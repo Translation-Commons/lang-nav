@@ -13,7 +13,7 @@ const LocaleGridCell: React.FC<Props> = ({ locale }) => {
     <div className="LocaleGridCell">
       {/* to match the design doc */}
       <code>{locale.codeDisplay}</code>{' '}
-      <HoverableObjectName object={locale} labelSource="locale without territory" />
+      <HoverableObjectName object={locale} labelSource="locale without language" />
     </div>
   );
 };

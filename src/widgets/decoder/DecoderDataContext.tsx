@@ -1,6 +1,9 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
+import { ObjectType } from '@features/params/PageParamTypes';
+
+import type { LanguageData } from '@entities/language/LanguageTypes';
 
 import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
 import DecoderResult from './DecoderResult';
@@ -31,23 +34,30 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const [lookupCache, setLookupCache] = useState<Record<string, DecoderResult>>({});
   const [results, setResults] = useState<DecoderResult[]>([]);
 
-  // TODO: Show alternative suggestions if the exact match is not found
   const search = useCallback(
     async (searchString: string) => {
-      const searchLower = searchString.toLowerCase();
+      const searchLower = searchString.toLowerCase().trim();
+      if (searchLower === '') return { input: searchLower, lang: undefined, alts: [] };
       if (lookupCache[searchLower]) return lookupCache[searchLower];
 
-      const lang =
-        direction === DecoderDirection.NamesToCodes
-          ? findLanguage(searchLower)
-          : getLanguage(searchLower);
+      let lang = undefined;
+      let alts: LanguageData[] = [];
+
+      if (direction === DecoderDirection.NamesToCodes) {
+        const found = findLanguage(searchLower);
+        lang = found[0];
+        alts = found.slice(1);
+      } else {
+        lang = getLanguage(searchLower);
+        if (lang?.CLDR.dataProvider?.type === ObjectType.Language) alts = [lang.CLDR.dataProvider];
+      }
       if (lang) {
         setLookupCache((prev) => ({
           ...prev,
-          [searchLower]: { input: searchLower, lang },
+          [searchLower]: { input: searchLower, lang, alts },
         }));
       }
-      return { input: searchLower, lang };
+      return { input: searchLower, lang, alts };
     },
     [getLanguage, findLanguage, direction],
   );

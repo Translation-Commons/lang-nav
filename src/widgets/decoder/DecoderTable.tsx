@@ -2,6 +2,7 @@ import React, { useCallback } from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
+import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { useDecoderDataContext } from './DecoderDataContext';
@@ -28,6 +29,7 @@ const DecoderTable: React.FC = () => {
         <tr>
           <th>Code</th>
           <th>LangNav Entry</th>
+          <th>Alternatives</th>
         </tr>
       </thead>
       <tbody>
@@ -38,13 +40,20 @@ const DecoderTable: React.FC = () => {
 
           return (
             <tr key={i}>
-              <td>{codeWithMacro ?? r.lang?.codeDisplay}</td>
+              <td>{codeWithMacro ?? r.lang?.codeDisplay ?? r.input}</td>
               <td>
                 {r.lang ? (
-                  <HoverableObjectName object={r.lang} labelSource="name" />
+                  <HoverableObjectName object={r.lang} />
                 ) : (
                   <Deemphasized>Not found</Deemphasized>
                 )}
+              </td>
+              <td>
+                <CommaSeparated>
+                  {r.alts?.map((alt) => (
+                    <HoverableObjectName object={alt} key={alt.ID} />
+                  ))}
+                </CommaSeparated>
               </td>
             </tr>
           );
