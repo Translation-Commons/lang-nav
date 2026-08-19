@@ -5,6 +5,7 @@ import { ObjectType } from '@features/params/PageParamTypes';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
 
+import { getDecoderMacroCode } from './DecoderMacrolanguage';
 import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
 import DecoderResult from './DecoderResult';
 import useFindLanguage from './useFindLanguageFromName';
@@ -12,15 +13,21 @@ import useFindLanguage from './useFindLanguageFromName';
 const EXAMPLE_NAMES = `English,Spanish,French,Chinese,Mandarin,Cantonese,Arabic,Darija,Standard Arabic,Egyptian Arabic`;
 
 type DecoderDataContextType = {
-  inputLines: string;
-  setInputLines: React.Dispatch<React.SetStateAction<string>>;
-  results: DecoderResult[];
+  inputBlob: string;
+  setInputBlob: React.Dispatch<React.SetStateAction<string>>;
+  inputLines: string[];
+  setInputLines: React.Dispatch<React.SetStateAction<string[]>>;
+  results: Record<string, DecoderResult>;
+  isSearchActive: boolean;
 };
 
 const DecoderDataContext = React.createContext<DecoderDataContextType>({
-  inputLines: '',
+  inputBlob: '',
+  setInputBlob: () => {},
+  inputLines: [],
   setInputLines: () => {},
-  results: [],
+  results: {},
+  isSearchActive: false,
 });
 
 export const useDecoderDataContext = () => React.useContext(DecoderDataContext);
@@ -30,15 +37,15 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const findLanguage = useFindLanguage();
   const { direction } = useDecoderOptionsContext();
 
-  const [inputLines, setInputLines] = useState(EXAMPLE_NAMES.split(',').join('\n'));
-  const [lookupCache, setLookupCache] = useState<Record<string, DecoderResult>>({});
-  const [results, setResults] = useState<DecoderResult[]>([]);
+  const [isSearchActive, setIsSearchActive] = useState(false);
+  const [inputBlob, setInputBlob] = useState(EXAMPLE_NAMES.split(',').join('\n'));
+  const [inputLines, setInputLines] = useState(EXAMPLE_NAMES.split(','));
+  const [results, setResults] = useState<Record<string, DecoderResult>>({});
 
   const search = useCallback(
-    async (searchString: string) => {
+    async (searchString: string): Promise<DecoderResult> => {
       const searchLower = searchString.toLowerCase().trim();
       if (searchLower === '') return { input: searchLower, lang: undefined, alts: [] };
-      if (lookupCache[searchLower]) return lookupCache[searchLower];
 
       let lang = undefined;
       let alts: LanguageData[] = [];
@@ -51,38 +58,47 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
         lang = getLanguage(searchLower);
         if (lang?.CLDR.dataProvider?.type === ObjectType.Language) alts = [lang.CLDR.dataProvider];
       }
-      if (lang) {
-        setLookupCache((prev) => ({
-          ...prev,
-          [searchLower]: { input: searchLower, lang, alts },
-        }));
-      }
-      return { input: searchLower, lang, alts };
+      const { codeWithMacro } = getDecoderMacroCode(lang, lang?.codeDisplay) ?? {};
+      return { input: searchLower, lang, alts, codeWithMacro };
     },
     [getLanguage, findLanguage, direction],
   );
 
+  const searchAndAdd = useCallback(
+    async (searchString: string) => {
+      if (results[searchString]) return;
+
+      const result = await search(searchString);
+      setResults((prev) => ({ ...prev, [result.input]: result }));
+    },
+    [search],
+  );
+
   // Effects, update the data when new input is provided or the direction changes
   useEffect(() => {
-    // Clear the cache and results
-    setLookupCache({});
-
-    // Move results to the input box
-    if (results.length > 0)
-      setInputLines(
+    // Swap the input lines from names to the codes currently matched
+    if (Object.keys(results).length && inputLines.length) {
+      const newBlob =
         direction === DecoderDirection.NamesToCodes
-          ? results.map((r) => r.lang?.nameDisplay ?? '').join('\n')
-          : results.map((r) => r.lang?.codeDisplay ?? '').join('\n'),
-      );
+          ? inputLines
+              .map((l) => results[l.toLowerCase().trim()]?.lang?.nameDisplay ?? '')
+              .join('\n')
+          : inputLines
+              .map((l) => results[l.toLowerCase().trim()]?.lang?.codeDisplay ?? '')
+              .join('\n');
+      setInputBlob(newBlob);
+      setResults({});
+    }
   }, [direction]);
   useEffect(() => {
-    const lines = inputLines.split('\n').map((line) => line.trim());
-    Promise.all(lines.map((line) => search(line))).then(setResults);
-    // intentionally not updating when search updates
+    setIsSearchActive(true);
+    Promise.all(inputLines.map((line) => searchAndAdd(line))).then(() => setIsSearchActive(false));
   }, [inputLines]);
 
   return (
-    <DecoderDataContext.Provider value={{ inputLines, setInputLines, results }}>
+    <DecoderDataContext.Provider
+      value={{ inputBlob, setInputBlob, inputLines, setInputLines, results, isSearchActive }}
+    >
       {children}
     </DecoderDataContext.Provider>
   );

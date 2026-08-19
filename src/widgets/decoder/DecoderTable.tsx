@@ -1,26 +1,28 @@
+import { TriangleAlertIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import { SearchableField } from '@features/params/PageParamTypes';
+import HighlightedObjectField from '@features/transforms/search/HighlightedObjectField';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
+import LoadingIcon from '@shared/ui/LoadingIcon';
 
 import { useDecoderDataContext } from './DecoderDataContext';
-import { getDecoderMacroCode } from './DecoderMacrolanguage';
 import { useDecoderOptionsContext } from './DecoderOptionsContext';
 
 const DecoderTable: React.FC = () => {
-  const { includeMacroCodes } = useDecoderOptionsContext();
-  const { results } = useDecoderDataContext();
+  const { inputLines, results } = useDecoderDataContext();
 
   // Export functionality
   const copyToClipboard = (text: string | string[]) =>
     navigator.clipboard.writeText(Array.isArray(text) ? text.join('\n') : text);
   const copyResultingNames = useCallback(() => {
-    copyToClipboard(results.map((r) => r?.lang?.nameDisplay ?? ''));
+    copyToClipboard(inputLines.map((l) => results[l]?.lang?.nameDisplay ?? ''));
   }, [results]);
   const copyResultingCodes = useCallback(() => {
-    copyToClipboard(results.map((r) => r?.lang?.codeDisplay ?? ''));
+    copyToClipboard(inputLines.map((l) => results[l]?.lang?.codeDisplay ?? ''));
   }, [results]);
 
   return (
@@ -33,31 +35,9 @@ const DecoderTable: React.FC = () => {
         </tr>
       </thead>
       <tbody>
-        {results.map((r, i) => {
-          const { codeWithMacro } = includeMacroCodes
-            ? (getDecoderMacroCode(r.lang, r.lang?.codeDisplay) ?? {})
-            : {};
-
-          return (
-            <tr key={i}>
-              <td>{codeWithMacro ?? r.lang?.codeDisplay ?? r.input}</td>
-              <td>
-                {r.lang ? (
-                  <HoverableObjectName object={r.lang} />
-                ) : (
-                  <Deemphasized>Not found</Deemphasized>
-                )}
-              </td>
-              <td>
-                <CommaSeparated>
-                  {r.alts?.map((alt) => (
-                    <HoverableObjectName object={alt} key={alt.ID} />
-                  ))}
-                </CommaSeparated>
-              </td>
-            </tr>
-          );
-        })}
+        {inputLines.map((l, i) => (
+          <ResultRow key={i} input={l} />
+        ))}
         <tr>
           <td>
             <button className="primary p-1! mr-1" onClick={copyResultingCodes}>
@@ -72,6 +52,56 @@ const DecoderTable: React.FC = () => {
         </tr>
       </tbody>
     </table>
+  );
+};
+
+const ResultRow: React.FC<{ input: string }> = ({ input }) => {
+  const { includeMacroCodes } = useDecoderOptionsContext();
+  const { results, isSearchActive } = useDecoderDataContext();
+  const { lang, codeWithMacro, alts } = results[input.toLowerCase().trim()] ?? {};
+
+  return (
+    <tr>
+      <td>{(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay ?? input}</td>
+      <td className="relative">
+        {isSearchActive && (
+          <div className="absolute right-0 top-0 mr-1 mt-1">
+            <LoadingIcon />
+          </div>
+        )}
+        {lang ? (
+          <HoverableObject object={lang}>
+            <HighlightedObjectField
+              object={lang}
+              query={input}
+              field={SearchableField.NameAny}
+              showOriginalName={true}
+            />
+          </HoverableObject>
+        ) : (
+          <Deemphasized>
+            <div className="flex items-center gap-1">
+              <TriangleAlertIcon display="inline-block" />
+              <span className="font-bold">{input}</span> not found
+            </div>
+          </Deemphasized>
+        )}
+      </td>
+      <td>
+        <CommaSeparated>
+          {alts?.map((alt) => (
+            <HoverableObject object={alt} key={alt.ID}>
+              <HighlightedObjectField
+                object={alt}
+                query={input}
+                field={SearchableField.NameAny}
+                showOriginalName={true}
+              />
+            </HoverableObject>
+          ))}
+        </CommaSeparated>
+      </td>
+    </tr>
   );
 };
 
