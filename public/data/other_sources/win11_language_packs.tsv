@@ -9,10 +9,10 @@ Language Code	Language	Locale	Writing System
 afr	Afrikaans		
 sqi	Albanian		
 amh	Amharic		
-ara	Arabic		
+ara/arb	Arabic		
 hye	Armenian		
 asm	Assamese		
-aze	Azerbaijani 		Latin
+aze/azj	Azerbaijani 		Latin
 ben	Bangla 	India	
 eus	Basque		
 bel	Belarusian		
@@ -27,7 +27,7 @@ ces	Czech
 dan	Danish		
 nld	Dutch		
 eng	English		
-est	Estonian		
+est/ekk	Estonian		
 fil	Filipino		
 fin	Finnish		
 fra	French		
@@ -58,7 +58,7 @@ mal	Malayalam
 mlt	Maltese		
 mri	Maori		
 mar	Marathi		
-nep	Nepali		
+nep/npi	Nepali		
 nor/nob	Norwegian Bokmål		
 nor/nno	Norwegian Nynorsk		
 ori	Odia		

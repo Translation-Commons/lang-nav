@@ -17,6 +17,7 @@ import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 import IosSupportStatus from '@entities/ui/IosSupportStatus';
+import MacosSupportStatus from '@entities/ui/MacosSupportStatus';
 import {
   WikipediaActiveUsers,
   WikipediaArticles,
@@ -135,6 +136,22 @@ const columns: TableColumn<LanguageData>[] = [
     exportValue: (lang) => {
       if (!lang.ios || lang.ios.length === 0) return 'n/a';
       return lang.ios
+        .map((entry) => {
+          const parts = [entry.name];
+          if (entry.locale) parts.push(`(${entry.locale})`);
+          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
+          return parts.join(' ');
+        })
+        .join('; ');
+    },
+  },
+  {
+    key: 'MacOS',
+    description: 'Language entries supported in macOS.',
+    render: (lang) => <MacosSupportStatus lang={lang} />,
+    exportValue: (lang) => {
+      if (!lang.macos || lang.macos.length === 0) return 'n/a';
+      return lang.macos
         .map((entry) => {
           const parts = [entry.name];
           if (entry.locale) parts.push(`(${entry.locale})`);
