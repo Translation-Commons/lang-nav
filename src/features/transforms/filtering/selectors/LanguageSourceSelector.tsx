@@ -22,7 +22,7 @@ const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
 
   return (
     <Selector
-      selectorLabel={display !== SelectorDisplay.InlineDropdown ? 'Language Authority' : undefined}
+      selectorLabel={display === SelectorDisplay.FilterList ? 'Language Authority' : undefined}
       selectorDescription={<LanguageSourceSelectorDescription />}
       options={values}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}

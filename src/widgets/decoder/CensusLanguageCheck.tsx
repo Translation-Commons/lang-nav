@@ -1,7 +1,5 @@
 import React, { ReactNode, useCallback } from 'react';
 
-import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
-
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
@@ -10,17 +8,17 @@ import {
   parseCensusLanguageName,
 } from '@entities/census/parseCensusLanguageRow';
 import { parseCensusMetadata } from '@entities/census/parseCensusMetadata';
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 import CensusLanguageCheckRow from './CensusLanguageCheckRow';
+import { getDecoderMacroCode } from './DecoderMacrolanguage';
 import useFindLanguageFromName from './useFindLanguageFromName';
 
 // These language codes won't raise errors because the issues are known to be misleading
 const OKAY_STATUS = ['aus'];
-const OKAY_MACRO = ['mlt', 'mar', 'tgk'];
 
 export type CensusLanguageNotes = {
   lineNumber: number;
@@ -87,7 +85,7 @@ const CensusLanguageCheck: React.FC<{ fileInput: string }> = ({ fileInput }) => 
 
     // Commented out codes and ones for special codes are there for documentation but are ignored in the import.
     if (l.specificCode && isIgnoredLanguageCode(l.specificCode)) return;
-    const foundLanguage = l.name ? findLanguageFromName(l.name) : undefined;
+    const foundLanguage = l.name ? findLanguageFromName(l.name)[0] : undefined;
 
     checkName(l);
     checkStatusInName(l);
@@ -187,32 +185,23 @@ function checkFoundLanguage(l: CensusLanguageNotes, foundLanguage?: EntityData) 
   }
 }
 
-function checkMacrolanguage(l: CensusLanguageNotes, foundLanguage?: EntityData) {
+function checkMacrolanguage(l: CensusLanguageNotes, foundLanguage?: LanguageData) {
   const matchingLang = l.entry || foundLanguage;
   const matchingCode = l.specificCode ?? l.codePathRec;
   if (!matchingLang || !matchingCode) return;
 
-  const languageParents = getObjectParents(matchingLang).filter(
-    (p) => p && p.type === 'Language',
-  ) as LanguageData[];
-  const iso639parents = languageParents.filter(
-    (p) =>
-      p.ISO.code && (p.scope === LanguageScope.Macrolanguage || p.scope === LanguageScope.Language),
-  );
-
-  if (!iso639parents || iso639parents.length === 0) return; // If there is no macrolanguage or language parents, then there is no issue
-  if (OKAY_MACRO.includes(matchingCode || '')) return; // If the specific code is in the list of exceptions, don't warn
-  const codePathRecommended = [...iso639parents.map((p) => p.ID), matchingCode].join('/');
-  l.codePathRec = codePathRecommended;
-  if (iso639parents.every((p) => l.codePath.includes(p.ID))) return; // If the macrolanguage code is already included in the code path, that's fine
+  const { codeWithMacro, parentLangs } = getDecoderMacroCode(matchingLang, matchingCode) || {};
+  if (!codeWithMacro || !parentLangs) return; // If there is no recommended code path, then there is no issue
+  l.codePathRec = codeWithMacro;
+  if (parentLangs.every((p) => l.codePath.includes(p.ID))) return; // If the macrolanguage code is already included in the code path, that's fine
 
   l.issues.push(
     <>
-      Code may be <code>{codePathRecommended}</code>
+      Code may be <code>{codeWithMacro}</code>
       . <HoverableObjectName object={matchingLang} /> is contained by language
-      {iso639parents.length > 1 ? ' categories ' : ' category '}
+      {parentLangs.length > 1 ? ' categories ' : ' category '}
       <CommaSeparated>
-        {iso639parents.map((p) => (
+        {parentLangs.map((p) => (
           <HoverableObjectName key={p.ID} object={p} />
         ))}
       </CommaSeparated>
