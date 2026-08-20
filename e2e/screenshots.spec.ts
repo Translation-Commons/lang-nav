@@ -108,6 +108,13 @@ test.describe('screenshot tests', () => {
     await expect(page).toHaveScreenshot('data-page-reports.png');
   });
 
+  test('decoder page', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./decoder');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('decoder-page.png');
+  });
+
   test('lucky search page', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto('./lucky');

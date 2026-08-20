@@ -2,9 +2,12 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { useScopeFilter } from '@features/transforms/filtering/filter';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
@@ -17,7 +20,7 @@ export const LanguageHierarchy: React.FC = () => {
   const { languageSource } = usePageParams();
   const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByScope = useScopeFilter();
 
   const rootNodes = getLanguageTreeNodes(
     languagesInSelectedSource.filter(
@@ -37,15 +40,10 @@ export const LanguageHierarchy: React.FC = () => {
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
           different sources disagree on what is a language/dialect/etc. The parent/child
           relationships come from the selected language source (
-          <div
-            style={{
-              display: 'inline-block',
-              height: '1em',
-              verticalAlign: 'top',
-              padding: '0.25em 0',
-            }}
-          >
-            <LanguageSourceSelector display={SelectorDisplay.InlineDropdown} />
+          <div className="inline-block align-top px-1 h-6">
+            <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+              <LanguageSourceSelector />
+            </SelectorDisplayProvider>
           </div>
           ). <SourceWarning languageSource={languageSource} />
         </>

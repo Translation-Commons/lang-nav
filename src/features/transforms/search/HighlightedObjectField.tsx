@@ -23,7 +23,7 @@ const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
   showOriginalName,
 }) => {
   const searchResult = getSearchableField(object, field, query);
-  if (showOriginalName && object.nameDisplay !== searchResult)
+  if (showOriginalName && object.nameDisplay !== searchResult && searchResult) {
     return (
       <>
         {object.nameDisplay}{' '}
@@ -32,7 +32,8 @@ const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
         </Deemphasized>
       </>
     );
-  return <Highlightable text={searchResult} searchPattern={query} />;
+  }
+  return <Highlightable text={searchResult || object.nameDisplay} searchPattern={query} />;
 };
 
 export default HighlightedObjectField;

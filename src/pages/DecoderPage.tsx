@@ -5,7 +5,6 @@ import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 const DecoderPageBody = React.lazy(() => import('@widgets/decoder/DecoderPageBody'));
-const FilterPanel = React.lazy(() => import('@widgets/controls/FilterPanel'));
 const DetailsPanel = React.lazy(() => import('@widgets/details/ui/DetailsPanel'));
 
 const DecoderPage: React.FC = () => {
@@ -14,7 +13,6 @@ const DecoderPage: React.FC = () => {
     <ContainErrorsAndSuspense>
       <FilterPanelProvider>
         <div style={{ display: 'flex', alignItems: 'flex-start', height: '100%' }}>
-          <FilterPanel />
           <DecoderPageBody />
           <DetailsPanel />
         </div>

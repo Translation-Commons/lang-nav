@@ -1,31 +1,32 @@
+import { renderHook } from '@testing-library/react';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
 import { ObjectType, PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import { getFilterByVitality } from '../filter';
+import { useFilterByVitality } from '../filter';
 
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn(),
 }));
 
-describe('getFilterByVitality', () => {
+// Helper to get hook result
+function getFilterByVitalityHook() {
+  const res = renderHook(() => useFilterByVitality());
+  return res.result.current;
+}
+
+describe('useFilterByVitality', () => {
   const mockLanguage = {
     ...getBaseLanguageData('test-lang', 'Test Language'),
     vitality: {
       iso: LanguageISOStatus.Living,
-      ethFine: VitalityEthnologueFine.National,
-      ethCoarse: VitalityEthnologueCoarse.Institutional,
     },
   };
 
@@ -45,23 +46,23 @@ describe('getFilterByVitality', () => {
 
   it('returns true for non-language objects', () => {
     mockParams({ isoStatus: [] });
-    const filter = getFilterByVitality();
+    const filter = getFilterByVitalityHook();
     expect(filter(mockNonLanguage)).toBe(true);
   });
 
   it('returns true when no vitality filters are active', () => {
     mockParams({ isoStatus: [] });
-    const filter = getFilterByVitality();
+    const filter = getFilterByVitalityHook();
     expect(filter(mockLanguage)).toBe(true);
   });
 
   it('filters by ISO vitality', () => {
     mockParams({ isoStatus: [LanguageISOStatus.Living] });
-    const filterMatch = getFilterByVitality();
+    const filterMatch = getFilterByVitalityHook();
     expect(filterMatch(mockLanguage)).toBe(true);
 
     mockParams({ isoStatus: [LanguageISOStatus.Extinct] });
-    const filterNoMatch = getFilterByVitality();
+    const filterNoMatch = getFilterByVitalityHook();
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 
@@ -72,17 +73,17 @@ describe('getFilterByVitality', () => {
     };
     mockParams({ isoStatus: [LanguageISOStatus.Living] });
 
-    const filter = getFilterByVitality();
+    const filter = getFilterByVitalityHook();
     expect(filter(mockIncompleteLanguage)).toBe(false);
   });
 
   it('handles multiple values for same vitality type', () => {
     mockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
-    const filterMatch = getFilterByVitality();
+    const filterMatch = getFilterByVitalityHook();
     expect(filterMatch(mockLanguage)).toBe(true);
 
     mockParams({ isoStatus: [LanguageISOStatus.Extinct, LanguageISOStatus.Constructed] });
-    const filterNoMatch = getFilterByVitality();
+    const filterNoMatch = getFilterByVitalityHook();
     expect(filterNoMatch(mockLanguage)).toBe(false);
   });
 });

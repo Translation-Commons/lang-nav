@@ -6,7 +6,7 @@ import { PageParamKey } from '@features/params/PageParamTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sortByPopulation } from '../../sorting/sort';
-import { getScopeFilter } from '../filter';
+import { useScopeFilter } from '../filter';
 import { getFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
@@ -14,7 +14,7 @@ import EntityFilterSelector from './EntityFilterSelector';
 
 const TerritoryFilterSelector: React.FC = () => {
   const { territories } = useDataContext();
-  const filterByScope = getScopeFilter();
+  const filterByScope = useScopeFilter();
   const filterLabels = getFilterLabels();
 
   const getSuggestions = useMemo(() => {

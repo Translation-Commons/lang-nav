@@ -23,7 +23,7 @@ export function getDecoderMacroCode(
   if (!iso639parents.length) return; // If there is no macrolanguage or language parents, then there is no issue
   if (OKAY_MACRO.includes(code || '')) return undefined; // If the specific code is in the list of exceptions, don't warn
   return {
-    codeWithMacro: [...iso639parents.map((p) => p.ID), code].join('/'),
+    codeWithMacro: [...iso639parents.map((p) => p.codeDisplay), code].join('/'),
     parentLangs: iso639parents,
   };
 }

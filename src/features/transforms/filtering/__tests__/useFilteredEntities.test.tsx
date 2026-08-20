@@ -7,7 +7,7 @@ import Field from '@features/transforms/fields/Field';
 import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -72,7 +72,7 @@ describe('useFilteredEntities', () => {
   });
 
   it('filters by vitality value', () => {
-    setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
+    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
     const { filteredEntities } = getHookResult({});
     expect(filteredEntities.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
   });
@@ -84,7 +84,7 @@ describe('useFilteredEntities', () => {
   });
 
   it('allows composite filters (territory + vitality)', () => {
-    setupMockParams({ territoryFilter: 'US', vitalityEthFine: [VitalityEthnologueFine.National] });
+    setupMockParams({ territoryFilter: 'US', isoStatus: [LanguageISOStatus.Living] });
     const { filteredEntities } = getHookResult({});
     expect(filteredEntities.map((obj) => obj.ID)).toEqual(['eng', 'spa']);
   });

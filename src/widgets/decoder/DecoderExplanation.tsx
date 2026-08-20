@@ -1,4 +1,4 @@
-import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
+import { DecoderDirection, useDecoderOptionsContext } from './options/DecoderOptionsContext';
 
 const DecoderExplanation = () => {
   const { direction } = useDecoderOptionsContext();
@@ -8,10 +8,7 @@ const DecoderExplanation = () => {
       This tool allows you to get language names from language codes, and vice versa. You can paste
       a list of languages separated by newline.{' '}
       {direction === DecoderDirection.NamesToCodes ? (
-        <>
-          To find the proper language codes for language names, there may be multiple spellings or
-          name constructions, so this will honor filter settings and find the best match.
-        </>
+        <>Note that most languages have multiple names and ways to spell those names.</>
       ) : (
         <>
           Language codes are matched to language names deterministically, following the ISO 639

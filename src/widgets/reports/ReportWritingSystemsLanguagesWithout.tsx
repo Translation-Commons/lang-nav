@@ -8,7 +8,7 @@ import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName'
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getFilterByVitality, getScopeFilter } from '@features/transforms/filtering/filter';
+import { useFilterByVitality, useScopeFilter } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 import { getSortFunction } from '@features/transforms/sorting/sort';
@@ -27,8 +27,8 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
-  const filterByScope = getScopeFilter();
-  const filterByVitality = getFilterByVitality();
+  const filterByScope = useScopeFilter();
+  const filterByVitality = useFilterByVitality();
   const sortFunction = getSortFunction();
   const { getCurrentEntities } = usePagination<LanguageData>();
 
