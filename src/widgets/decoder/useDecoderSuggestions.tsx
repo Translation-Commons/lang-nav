@@ -14,7 +14,7 @@ import { anyWordStartsWith } from '@shared/lib/stringUtils';
 type GetDecoderSuggestions = (query: string) => Promise<LanguageData[]>;
 
 /**
- * Instead the full filter for `useSearchSuggestions` this is limited to the decoder-specific fields.
+ * Instead of the full filter for `useSearchSuggestions` this is limited to the decoder-specific fields.
  * Additionally, instead of limiting strictly by the search query, it will just prioritize by it.
  */
 const useDecoderSuggestions = (): GetDecoderSuggestions => {

@@ -88,7 +88,7 @@ const ResultRow: React.FC<{ input: string }> = ({ input }) => {
       <td className="px-1">
         {(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay}
       </td>
-      <td className="px-1">
+      <td className="px-1 relative">
         {isSearchActive && (
           <div className="absolute right-0 top-0 mr-1 mt-1">
             <LoadingIcon />

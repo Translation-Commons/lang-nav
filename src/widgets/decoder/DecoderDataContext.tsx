@@ -74,10 +74,11 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   );
   const searchAndAdd = useCallback(
     async (searchString: string) => {
-      if (results[searchString]) return;
+      const key = searchString.toLowerCase().trim();
+      if (results[key]) return;
 
       const result = await search(searchString);
-      setResults((prev) => ({ ...prev, [result.input]: result }));
+      setResults((prev) => ({ ...prev, [key]: result }));
     },
     [search],
   );
