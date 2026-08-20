@@ -16,13 +16,14 @@ import Deemphasized from '@shared/ui/Deemphasized';
 type Props = {
   record: LocaleInCensus;
   focus: 'speaking' | 'writing';
-  allRecords: LocaleInCensus[];
+  topCensusPriority?: { speaking: number; writing: number };
 };
 
-const CensusRecordPriority: React.FC<Props> = ({ record, focus, allRecords }) => {
+const CensusRecordPriority: React.FC<Props> = ({ record, focus, topCensusPriority }) => {
   const priority = computeCensusRecordPriority(record, focus);
   const priorityParts = buildCensusRecordPriorityInformation(record, focus);
-  const highestPriority = Math.max(...allRecords.map((r) => computeCensusRecordPriority(r, focus)));
+  const backgroundColor =
+    topCensusPriority?.[focus] === priority ? 'var(--color-highlight)' : 'transparent';
 
   return (
     <Hoverable
@@ -47,9 +48,7 @@ const CensusRecordPriority: React.FC<Props> = ({ record, focus, allRecords }) =>
           </tbody>
         </table>
       }
-      style={{
-        backgroundColor: highestPriority === priority ? 'var(--color-highlight)' : 'transparent',
-      }}
+      style={{ backgroundColor }}
     >
       <DecimalNumber num={priority} />
     </Hoverable>

@@ -4,6 +4,7 @@ import React, { PropsWithChildren, useState } from 'react';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 
+import computeCensusRecordPriority from '@features/data/compute/computeCensusRecordPriority';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
@@ -28,6 +29,12 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
   const toggleBreakdown = () => setShowBreakdown((prev) => !prev);
 
   if (pop.speaking.unadjusted == null && pop.writing.unadjusted == null) return null;
+  const topCensusPriority = censusRecords?.concat.length
+    ? {
+        speaking: Math.max(...censusRecords.map((r) => computeCensusRecordPriority(r, 'speaking'))),
+        writing: Math.max(...censusRecords.map((r) => computeCensusRecordPriority(r, 'writing'))),
+      }
+    : undefined;
 
   return (
     <>
@@ -85,14 +92,14 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                       <CensusRecordPriority
                         record={censusEstimate}
                         focus="speaking"
-                        allRecords={censusRecords}
+                        topCensusPriority={topCensusPriority}
                       />
                     </td>
                     <td className="px-2">
                       <CensusRecordPriority
                         record={censusEstimate}
                         focus="writing"
-                        allRecords={censusRecords}
+                        topCensusPriority={topCensusPriority}
                       />
                     </td>
                   </tr>

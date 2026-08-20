@@ -21,9 +21,9 @@
 #collectorType	Government			
 #collectorNameShort	US Census Bureau			
 ### Source Document ###				
-#url	2024-02-15	https://data.census.gov/table/DECENNIALCROSSTABAS2020.CT25		
-#datePublished	2026-07-29			
-#dateAccessed	DECIA American Samoa Detailed Crosstabulations			
+#url	https://data.census.gov/table/DECENNIALCROSSTABAS2020.CT25			
+#datePublished	2024-02-15			
+#dateAccessed	2026-07-29			
 #documentName	2020 Island Areas Censuses: American Samoa			
 #tableName	CT25: Language Spoken at Home and Ability to Speak English by Age			
 #notes	Universe is population 5 years and over in households. Use the “Total” column for language counts. This is language spoken at home, not mother tongue.		Ability to Speak English: Speaks other languages: Very well	
