@@ -2,6 +2,7 @@ axl.aw
 axl.bj
 axl.bt
 axl.cd
+axl.cg
 axl.cx
 axl.gl
 axl.is

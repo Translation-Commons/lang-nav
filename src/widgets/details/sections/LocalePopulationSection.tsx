@@ -82,10 +82,18 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                       />
                     </td>
                     <td className="px-2">
-                      <CensusRecordPriority record={censusEstimate} focus="speaking" />
+                      <CensusRecordPriority
+                        record={censusEstimate}
+                        focus="speaking"
+                        allRecords={censusRecords}
+                      />
                     </td>
                     <td className="px-2">
-                      <CensusRecordPriority record={censusEstimate} focus="writing" />
+                      <CensusRecordPriority
+                        record={censusEstimate}
+                        focus="writing"
+                        allRecords={censusRecords}
+                      />
                     </td>
                   </tr>
                 ))}

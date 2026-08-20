@@ -1,0 +1,68 @@
+#codeDisplay			#fr-name	#ethnicity
+#nameDisplay	AXL Congo-Brazzaville			
+#isoRegionCode	CG			
+#yearCollected	2014			
+### Language Criteria ###				
+#languageUse	Speaks			
+#acquisitionOrder	L1			
+#domain	Home			
+### Population Surveyed ###				
+#population	4,579,800			
+#responsesPerIndividual	1			
+### Data Constraints ###				
+#quantity	count			
+#geographicScope	whole country			
+#age	0+			
+#languagesIncluded	All			
+### Creator ###				
+#collectorType	Secondary			
+#author	Jacques LeClerc			
+#presentedBy	AXL			
+### Source Document ###				
+#url	https://www.axl.cefan.ulaval.ca/afrique/congo.htm			
+#datePublished	2026-05-19			
+#dateAccessed	2026-08-14			
+#documentName	Congo-Brazzaville			
+#tableName	Demolinguistic Data			
+#columnName		Population		Ethnic group
+Language Code	Language Name	Population	Langue	Ethnic group
+kon/mkw	kituba	1,488,000	kituba	Kongo
+moye1234	Teke (and varieties)	572,000	téké (et variétés)	Tekes
+kon/yom	yombe	517,000	yombé	Yombe
+kon/sdj	soundi	183,000	soundi	Soundi
+mdw	Mbochi	161,000	mbochi	Mbochi
+kon/ldi	lari	135,000	lari	Lali
+lin	Lingala	135,000	lingala	Ngala
+nbm	ngbaka ma'bo (bouaka)	135,000	ngbaka ma'bo (bouaka)	Ngbaka mabo
+njx	Kunyi	116,000	Kunyi	Kunyi
+sag	sango	99,000	sango	Sango
+kon/dde	dondo	94,000	dondo	Dondo
+bni	bangi	90,000	bangi	Bangi (or Bobangi)
+mdt	mbété	90,000	mbété	Mbété
+kwc	likouala	67,000	likouala	Likouala
+beq	bembé	50,000	bembé	Bembe
+bxg	bangala	46,000	bangala	Ngala
+kxx	likuba (kuba)	45,000	likuba (kuba)	Kuba
+bmw	boumoali (bomwali)	42,000	boumoali (bomwali)	Boumoali
+mdu	mboko	40,000	mboko	Mbuku
+akw	akwa	36,000	akwa	Akwa
+iyx	yaka	31,000	yaka	Bayaka Pygmy
+loq	lobala	23,000	lobala	Lobala
+kon	Kongo	21,000	kongo	Kongo, Congo
+mdt/mbm	mbama (ombamba)	20,000	mbama (ombamba)	Mbamba
+tsa	tsangi	20,000	tsangi	Tsangi
+nzb	njebi	20,000	njebi	Njebi
+zmx	bomitaba	14,000	bomitaba	Bomitaba
+koq	kota	14,000	kota	Kota
+kon/puu	pouno (punu)	14,000	pouno (punu)	Pouno
+moj	monzombo	12,000	monzombo	Monzombo
+zmz	banja	12,000	banja	Mbanza
+bkw	bekwel	12,000	bekwel	Bakwelé
+kkj	kako	11,000	kako	Kako
+kon/vif	vili (fiot)	11,000	vili (fiot)	Vili
+fan	fang	10,000	fang	Fang
+bui	bongili	9,800	bongili	Bongili
+fra	French	9,200	français	French
+hau	Hausa	9,100	haoussa	Houssa
+wum	wumbvu	9,000	wumbvu	Wumbvu
+mul	-	156,700	-	Others

@@ -14,8 +14,8 @@ const DecoderInput = () => {
   }, [inputBlob, setInputLines]);
 
   return (
-    <div>
-      Paste languages here
+    <div className="flex flex-col">
+      <strong>Paste languages here</strong>
       <textarea
         id="decoder-input"
         className="min-w-10 border p-2 min-h-100 field-sizing-content"

@@ -30,7 +30,7 @@ const ReportLocalesPotential: React.FC = () => {
         description="Limit results by the minimum percent population in a territory that uses the language."
       />,
     );
-  const [requireBothPercents, setRequireBothPercents] = React.useState(true);
+  const [requireBothPercents, setRequireBothPercents] = React.useState(false);
   const {
     percentThreshold: minOfLangWorldWide,
     percentThresholdSelector: minOfLangWorldWideSelector,

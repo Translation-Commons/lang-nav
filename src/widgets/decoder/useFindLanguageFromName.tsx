@@ -32,7 +32,9 @@ const useFindLanguage = (): FindLanguage => {
 
   const findLanguage: FindLanguage = useCallback(
     async (searchString: string) => {
-      const searchLower = searchString.toLowerCase();
+      const searchLower = searchString.toLowerCase().trim();
+      if (searchLower === '' || searchLower.startsWith('#')) return [];
+
       if (OVERRIDE_LANGUAGE_MATCH[searchLower]) {
         const overrideCode = OVERRIDE_LANGUAGE_MATCH[searchLower];
         const overrideLang = getLanguage(overrideCode);

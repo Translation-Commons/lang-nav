@@ -1,0 +1,37 @@
+#codeDisplay		gu2020.home	gu2020.l2	gu2020.eng
+#nameDisplay		Guam 2020 Home Language	Guam 2020 L2	Guam 2020 English proficiency
+#isoRegionCode	GU			
+#yearCollected	2020			
+### Language Criteria ###				
+#languageUse	Speaks			
+#acquisitionOrder		L1	L2	Any
+#domain		Home		
+### Population Surveyed ###				
+#population	135,770			
+#sampleRate	1			
+#responsesPerIndividual	1			
+### Data Constraints ###				
+#geographicScope	island not counting military bases			
+#age	5+			
+#nationality	residents			
+#languagesIncluded	all			
+#residenceBasis	de facto			
+#quantity	count			
+### Creator ###				
+#collectorType	Government			
+#collectorNameShort	US Census Bureau			
+### Source Document ###				
+#url	https://data.census.gov/table/DECENNIALCROSSTABGU2020.CT25			
+#datePublished	2024-02-15			
+#dateAccessed	2026-07-29			
+#documentName	DECIA Guam Detailed Crosstabulations			
+#sectionName	2020 Island Areas Censuses: Guam			
+#tableName	CT25: Language Spoken at Home and Ability to Speak English by Age			
+#notes	Universe is population 5 years and over. Use the “Total” column for language counts. This is language spoken at home, not mother tongue.		Ability to Speak English: Speaks other languages: Very well	
+Language Code	Language	Population		
+eng	English	57,906	51312	109,218
+cha	Chamorro	21,390		
+phi	Philippine languages	33,297		
+mul	Other Pacific Island languages	12,519		
+mul	Asian languages	8751		
+mul	Other languages	1,907		
