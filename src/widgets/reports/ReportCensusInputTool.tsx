@@ -89,7 +89,7 @@ const ReportCensusInputTool: React.FC = () => {
               </div>
             ))
           : 'No issues found.')}
-      <h4>Language Codes & Language Names</h4>
+      <span className="font-bold">Language Codes & Language Names</span>
       <ContainErrorsAndSuspense>
         <CensusLanguageCheck fileInput={tsv} />
       </ContainErrorsAndSuspense>

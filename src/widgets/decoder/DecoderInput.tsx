@@ -9,7 +9,7 @@ const DecoderInput = () => {
   useEffect(() => {
     const timeout = setTimeout(() => {
       setInputLines(inputBlob.split('\n'));
-    }, 300);
+    }, 1000);
     return () => clearTimeout(timeout);
   }, [inputBlob, setInputLines]);
 
@@ -18,7 +18,7 @@ const DecoderInput = () => {
       Paste languages here
       <textarea
         id="decoder-input"
-        className="w-full min-w-50 border p-2 min-h-100 field-sizing-content"
+        className="min-w-10 border p-2 min-h-100 field-sizing-content"
         value={inputBlob}
         onChange={(e) => setInputBlob(e.target.value)}
         placeholder="Paste a newline separated list of languages..."

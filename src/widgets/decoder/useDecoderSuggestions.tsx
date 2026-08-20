@@ -29,15 +29,15 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
 
       // Check if the query makes the object name fully or partially matches
       if (object.nameDisplay.toLowerCase() !== query) {
-        dist += anyWordStartsWith(object.nameDisplay, query) ? 2 : 4;
+        dist += anyWordStartsWith(object.nameDisplay, query) ? 1 : 2;
 
         // Check if any of the other names fully or partially match
         if (!object.names.some((n) => n.toLowerCase() === query))
-          dist += object.names.some((n) => anyWordStartsWith(n, query)) ? 1 : 2;
+          dist += object.names.some((n) => anyWordStartsWith(n, query)) ? 2 : 10;
       }
 
       // Check if the language code partially or fully matches the query
-      if (object.codeDisplay !== query) dist += object.codeDisplay.startsWith(query) ? 1 : 2;
+      if (object.codeDisplay !== query) dist += object.codeDisplay.startsWith(query) ? 1 : 5;
 
       // Check if the language is known to be found in the territory
       if (!filterBy[Field.Territory]?.(object)) dist += 10;
@@ -54,16 +54,8 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
     async (query: string) => {
       const queryLower = query.toLowerCase().trim();
       const substringFilter = getSubstringFilterOnQuery(queryLower, searchBy);
-      if (queryLower === 'banja') {
-        console.log(
-          pageObjects
-            ?.filter(substringFilter)
-            .map((l) => [l, getMatchDistance(queryLower, l)])
-            .sort((a, b) => (a[1] as number) - (b[1] as number)),
-        );
-      }
       return (pageObjects || [])
-        .filter(substringFilter)
+        .filter(substringFilter) // Require at least any name to match
         .sort((a, b) => getMatchDistance(queryLower, a) - getMatchDistance(queryLower, b))
         .slice(0, SUGGESTION_LIMIT);
     },

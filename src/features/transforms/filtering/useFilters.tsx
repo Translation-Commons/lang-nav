@@ -2,7 +2,6 @@ import { useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-
 import Field from '../fields/Field';
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
 

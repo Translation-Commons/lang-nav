@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 
 import HoverableObject from '@features/layers/hovercard/HoverableObject';
 import { SearchableField } from '@features/params/PageParamTypes';
-import HighlightedObjectField from '@features/transforms/search/HighlightedObjectField';
+import getSearchableField from '@features/transforms/search/getSearchableField';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
@@ -16,6 +16,7 @@ import { useDecoderOptionsContext } from './options/DecoderOptionsContext';
 
 const DecoderTable: React.FC = () => {
   const { inputLines, getResult } = useDecoderDataContext();
+  const { includeMacroCodes } = useDecoderOptionsContext();
 
   // Export functionality
   const copyToClipboard = (text: string | string[]) =>
@@ -24,13 +25,21 @@ const DecoderTable: React.FC = () => {
     copyToClipboard(inputLines.map((l) => getResult(l)?.lang?.nameDisplay ?? ''));
   }, [inputLines, getResult]);
   const copyResultingCodes = useCallback(() => {
-    copyToClipboard(inputLines.map((l) => getResult(l)?.lang?.codeDisplay ?? ''));
-  }, [inputLines, getResult]);
+    copyToClipboard(
+      inputLines.map((l) => {
+        const result = getResult(l);
+        const code = result?.lang?.codeDisplay ?? '';
+        if (includeMacroCodes) return result?.codeWithMacro ?? code;
+        return code;
+      }),
+    );
+  }, [inputLines, getResult, includeMacroCodes]);
 
   return (
     <table className="h-fit">
       <thead>
         <tr>
+          <th>Input</th>
           <th>Code</th>
           <th>LangNav Entry</th>
           <th>Alternatives</th>
@@ -41,6 +50,7 @@ const DecoderTable: React.FC = () => {
           <ResultRow key={i} input={l} />
         ))}
         <tr>
+          <td></td>
           <td>
             <button className="primary p-1! mr-1" onClick={copyResultingCodes}>
               Copy codes
@@ -65,16 +75,20 @@ const ResultRow: React.FC<{ input: string }> = ({ input }) => {
   if (input.trim() === '' || input.startsWith('#'))
     return (
       <tr>
+        <td>{input}</td>
         <td></td>
-        <td>{input.slice(1)}</td>
+        <td></td>
         <td></td>
       </tr>
     );
 
   return (
     <tr>
-      <td>{(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay}</td>
-      <td className="truncate">
+      <td className="px-1">{input}</td>
+      <td className="px-1">
+        {(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay}
+      </td>
+      <td className="px-1">
         {isSearchActive && (
           <div className="absolute right-0 top-0 mr-1 mt-1">
             <LoadingIcon />
@@ -83,17 +97,12 @@ const ResultRow: React.FC<{ input: string }> = ({ input }) => {
         {lang ? (
           <LanguageLabel lang={lang} input={input} />
         ) : (
-          input && (
-            <Deemphasized>
-              <div className="flex items-center gap-1">
-                <TriangleAlertIcon display="inline-block" />
-                <span className="font-bold">{input}</span> not found
-              </div>
-            </Deemphasized>
-          )
+          <div className="flex items-center gap-1 text-(--color-text-secondary) italic">
+            <TriangleAlertIcon display="inline-block" size="1em" /> not found
+          </div>
         )}
       </td>
-      <td className="truncate">
+      <td className="px-1 max-w-200">
         <CommaSeparated>
           {alts?.map((alt) => (
             <LanguageLabel key={alt.ID} lang={alt} input={input} />
@@ -105,17 +114,12 @@ const ResultRow: React.FC<{ input: string }> = ({ input }) => {
 };
 
 const LanguageLabel: React.FC<{ lang: LanguageData; input: string }> = ({ lang, input }) => {
+  const searchResult = getSearchableField(lang, SearchableField.NameAny, input.toLowerCase());
   return (
     <HoverableObject object={lang}>
-      {lang.nameDisplay.toLowerCase() != input.toLowerCase() ? (
-        <HighlightedObjectField
-          object={lang}
-          query={input}
-          field={SearchableField.NameAny}
-          showOriginalName={true}
-        />
-      ) : (
-        lang.nameDisplay
+      {lang.nameDisplay}
+      {searchResult && lang.nameDisplay.toLowerCase() !== searchResult.toLowerCase() && (
+        <Deemphasized> ({searchResult})</Deemphasized>
       )}
     </HoverableObject>
   );

@@ -2,7 +2,6 @@ import React, { ReactNode, useCallback } from 'react';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-
 import CensusLanguageCheckRow from './CensusLanguageCheckRow';
 import useCensusLanguageCheck from './useCensusLanguageCheck';
 

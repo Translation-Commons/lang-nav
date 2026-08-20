@@ -4,7 +4,6 @@ import { useDataContext } from '@features/data/context/useDataContext';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
-
 import useDecoderSuggestions from './useDecoderSuggestions';
 
 // These language codes won't raise errors because the issues are known to be misleading

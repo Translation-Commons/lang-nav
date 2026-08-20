@@ -41,25 +41,14 @@ const useCensusLanguageCheck = (fileInput: string): (CensusLanguageNotes | undef
   >([]);
 
   useEffect(() => {
-    lines.map((line, i) => {
-      // Create a copy to avoid mutating state directly
-      const ln = getBaseNotes(line, i, endOfMetadataLine, singleColumnMode === true, getLanguage);
-      if (ln) {
-        advancedEvaluation(ln, findLanguageFromName).then(() => {
-          setLanguageEvaluations((prev) => {
-            const newEval = [...prev];
-            newEval[i] = ln;
-            return newEval;
-          });
-        });
-      } else {
-        setLanguageEvaluations((prev) => {
-          const newEval = [...prev];
-          newEval[i] = undefined;
-          return newEval;
-        });
-      }
-    });
+    Promise.all(
+      lines.map((line, i) => {
+        // Create a copy to avoid mutating state directly
+        const ln = getBaseNotes(line, i, endOfMetadataLine, singleColumnMode === true, getLanguage);
+        if (!ln) return undefined;
+        return advancedEvaluation(ln, findLanguageFromName);
+      }),
+    ).then((results) => setLanguageEvaluations(results));
   }, [lines, singleColumnMode, endOfMetadataLine, getLanguage, findLanguageFromName]);
 
   return languageEvaluations;
@@ -104,12 +93,12 @@ function getBaseNotes(
 async function advancedEvaluation(
   ln: CensusLanguageNotes,
   findLanguageFromName: (code: string) => Promise<LanguageData[]>,
-) {
-  if (!ln) return;
+): Promise<CensusLanguageNotes | undefined> {
+  if (!ln) return undefined;
 
   if (!ln.name && !ln.specificCode) {
     ln.issues.push('Language name and code are missing but there appears to be data in the row.');
-    return;
+    return ln;
   }
   if (ln.name && !ln.name.startsWith('#')) {
     if (!ln.specificCode) {
@@ -120,7 +109,7 @@ async function advancedEvaluation(
   }
 
   // Commented out codes and ones for special codes are there for documentation but are ignored in the import.
-  if (ln.specificCode && isIgnoredLanguageCode(ln.specificCode)) return;
+  if (ln.specificCode && isIgnoredLanguageCode(ln.specificCode)) return ln;
 
   await findLanguageFromName(ln.name ?? '').then((foundLanguages) => {
     const foundLanguage = foundLanguages?.[0];
@@ -129,6 +118,7 @@ async function advancedEvaluation(
     checkFoundLanguage(ln, foundLanguage);
     checkMacrolanguage(ln, foundLanguage);
   });
+  return ln;
 }
 
 function checkName(l: CensusLanguageNotes) {
