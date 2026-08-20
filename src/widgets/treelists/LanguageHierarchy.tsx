@@ -7,7 +7,7 @@ import {
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { useScopeFilter } from '@features/transforms/filtering/filter';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
@@ -20,7 +20,7 @@ export const LanguageHierarchy: React.FC = () => {
   const { languageSource } = usePageParams();
   const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByScope = useScopeFilter();
 
   const rootNodes = getLanguageTreeNodes(
     languagesInSelectedSource.filter(

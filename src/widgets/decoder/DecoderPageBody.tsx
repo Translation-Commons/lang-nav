@@ -1,3 +1,5 @@
+import LoadingStageDisplay from '@features/data/context/LoadingStageDisplay';
+
 import { DecoderDataProvider } from './DecoderDataContext';
 import DecoderExplanation from './DecoderExplanation';
 import DecoderInput from './DecoderInput';
@@ -19,6 +21,7 @@ const DecoderPageBody = () => {
               <DecoderInput />
               <DecoderTable />
             </div>
+            <LoadingStageDisplay />
           </div>
         </DecoderDataProvider>
       </DecoderOptionsProvider>

@@ -8,7 +8,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
-import { getFilterByVitality, getScopeFilter } from './filter';
+import { useFilterByVitality, useScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 import useFilters from './useFilters';
 
@@ -35,10 +35,10 @@ const useFilteredEntities = <T extends ObjectData>({
   const { pinned } = usePageParams();
   // TODO use useFilters for all of these
   const filters = useFilters();
-  const filterByScope = useScope ? getScopeFilter() : () => true;
+  const filterByScope = useScope ? useScopeFilter() : () => true;
   const filterBySubstring = useSubstring ? getFilterBySubstring() : () => true;
   const filterByConnections = useConnections ? getFilterByConnections() : () => true;
-  const filterByVitality = useVitality ? getFilterByVitality() : () => true;
+  const filterByVitality = useVitality ? useFilterByVitality() : () => true;
   const filterByPopulation = usePopulation ? filters.Population : () => true;
   const sortFunction = getSortFunction();
   const allEntities = inputEntities ?? pageEntities;
