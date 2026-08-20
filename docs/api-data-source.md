@@ -20,10 +20,10 @@ Read by `src/features/data/load/api/apiConfig.ts`. Unset means files.
 
 ## What has moved so far
 
-| Entity | Source when `VITE_API_URL` is set |
-| --- | --- |
-| Territories | API, one request |
-| Everything else | still TSV files |
+| Entity          | Source when `VITE_API_URL` is set |
+| --------------- | --------------------------------- |
+| Territories     | API, one request                  |
+| Everything else | still TSV files                   |
 
 Territories were first because they are small (289 rows), self-contained, and
 exercise the awkward parts: natural text primary keys, two self-referencing

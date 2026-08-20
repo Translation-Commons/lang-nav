@@ -10,25 +10,25 @@ groundwork for moving that work to a database.
 
 ## Status
 
-| Piece | State |
-| --- | --- |
-| `schema/001_schema.sql` | 36 tables, 14 enum types, 10 triggers, 1 view, 1 materialized view. Verified against a live PostgreSQL 18 server. |
-| `schema/002_indexes.sql` | 74 indexes (120 total including constraint-backed ones), applied after loading |
-| `etl/` | Loads all source files. Full run: 0 errors, 173 warnings. |
-| Derive steps | **All of them run.** D1 to D11 plus D13; D12 was never a real step. Populations, synthesised locales, writing-system reach, depth, vitality and modality are filled |
-| Coverage | Complete for the Combined tree. **Four steps answer for Combined only**, and one for ISO only - see below |
-| Remaining gaps | Seven, each declared in `NOT_IMPLEMENTED` in `etl/derive.py` so that calling one raises instead of leaving a column silently NULL |
+| Piece                    | State                                                                                                                                                               |
+| ------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `schema/001_schema.sql`  | 36 tables, 14 enum types, 10 triggers, 1 view, 1 materialized view. Verified against a live PostgreSQL 18 server.                                                   |
+| `schema/002_indexes.sql` | 74 indexes (120 total including constraint-backed ones), applied after loading                                                                                      |
+| `etl/`                   | Loads all source files. Full run: 0 errors, 173 warnings.                                                                                                           |
+| Derive steps             | **All of them run.** D1 to D11 plus D13; D12 was never a real step. Populations, synthesised locales, writing-system reach, depth, vitality and modality are filled |
+| Coverage                 | Complete for the Combined tree. **Four steps answer for Combined only**, and one for ISO only - see below                                                           |
+| Remaining gaps           | Seven, each declared in `NOT_IMPLEMENTED` in `etl/derive.py` so that calling one raises instead of leaving a column silently NULL                                   |
 
 Every step is built. What is incomplete is **coverage across the seven
 classification sources**, which matters because the whole point of the schema is
 that the authorities disagree. Measured per source:
 
-| Step | Combined | ISO / BCP / UNESCO / Glottolog / CLDR |
-| --- | --- | --- |
-| D7 `descendant_count` | 8,342 | **filled for all** (8,421 / 8,204 / 8,100 / 26,953 / 153) |
-| D10 `depth` | 8,342 | **filled for all** (same counts) |
-| D8 `population_estimate` | 7,635 | **0 - not implemented** |
-| D11 `modality` | 1,028 | **0 - not implemented** |
+| Step                     | Combined | ISO / BCP / UNESCO / Glottolog / CLDR                     |
+| ------------------------ | -------- | --------------------------------------------------------- |
+| D7 `descendant_count`    | 8,342    | **filled for all** (8,421 / 8,204 / 8,100 / 26,953 / 153) |
+| D10 `depth`              | 8,342    | **filled for all** (same counts)                          |
+| D8 `population_estimate` | 7,635    | **0 - not implemented**                                   |
+| D11 `modality`           | 1,028    | **0 - not implemented**                                   |
 
 D9 (largest descendant) and D10's vitality and coordinate half are Combined-only
 for the same reason. D5's regional roll-up aggregates the ISO tree only.
@@ -59,14 +59,14 @@ legitimately differ from the live site wherever it fires.
 
 Loaded row counts:
 
-| Table | Rows | | Table | Rows |
-| --- | ---: | --- | --- | ---: |
-| `entity` | 85,870 | | `entity_name` | 72,005 |
-| `language` | 27,299 | | `language_source_attribute` | 60,173 |
-| `locale` | 55,322 | | `language_ancestry` | 280,835 |
-| `territory` | 289 | | `territory_ancestry` | 1,585 |
-| `writing_system` | 225 | | `census` | 549 |
-| `keyboard` | 2,001 | | `census_language_estimate` | 13,147 |
+| Table            |   Rows |     | Table                       |    Rows |
+| ---------------- | -----: | --- | --------------------------- | ------: |
+| `entity`         | 85,870 |     | `entity_name`               |  72,005 |
+| `language`       | 27,299 |     | `language_source_attribute` |  60,173 |
+| `locale`         | 55,322 |     | `language_ancestry`         | 280,835 |
+| `territory`      |    289 |     | `territory_ancestry`        |   1,585 |
+| `writing_system` |    225 |     | `census`                    |     549 |
+| `keyboard`       |  2,001 |     | `census_language_estimate`  |  13,147 |
 
 Measured after a full rebuild on 2026-08-15. `locale` counts both the ~10,800
 curated rows and the ~23,400 regional ones D5 generates, so an earlier figure
@@ -152,9 +152,9 @@ needs nor notices it, and an installation that skips this section runs normally.
 PostgREST does not connect as the role whose privileges it uses. It logs in as
 one role and `SET ROLE`s to another for each request, so this needs two:
 
-| Role | | |
-| --- | --- | --- |
-| `langnav_read` | `NOLOGIN` | holds every `SELECT` grant. PostgREST's `db-anon-role` |
+| Role                    |                   |                                                                            |
+| ----------------------- | ----------------- | -------------------------------------------------------------------------- |
+| `langnav_read`          | `NOLOGIN`         | holds every `SELECT` grant. PostgREST's `db-anon-role`                     |
 | `langnav_authenticator` | `LOGIN NOINHERIT` | what connects. Owns nothing, reads nothing until it assumes `langnav_read` |
 
 `NOINHERIT` is the point: the authenticator carries no privilege of its own, so
@@ -225,11 +225,11 @@ the realistic `language` query takes 1.12 s of which 1.03 s is time-to-first-byt
 so the transfer is about 10 ms and the cost is the server building the response.
 Development will never notice. Over a real link:
 
-| Response | Raw | Gzipped | 4G, 20 Mbit raw | gzipped |
-| --- | ---: | ---: | ---: | ---: |
-| `territory`, all 289 | 148 KB | 23 KB | 0.06 s | 0.01 s |
-| `language`, realistic | **12.9 MB** | 906 KB | **5.2 s** | 0.4 s |
-| `locale`, realistic | **13.9 MB** | 1.0 MB | **5.6 s** | 0.4 s |
+| Response              |         Raw | Gzipped | 4G, 20 Mbit raw | gzipped |
+| --------------------- | ----------: | ------: | --------------: | ------: |
+| `territory`, all 289  |      148 KB |   23 KB |          0.06 s |  0.01 s |
+| `language`, realistic | **12.9 MB** |  906 KB |       **5.2 s** |   0.4 s |
+| `locale`, realistic   | **13.9 MB** |  1.0 MB |       **5.6 s** |   0.4 s |
 
 Compression is worth **13 to 14x**, because JSON repeats every key on every one
 of 27,299 or 55,322 rows and that is precisely what a compressor removes.
@@ -288,7 +288,7 @@ host unrelated databases, so it is written to be narrow:
 One honest caveat about the role. PostgreSQL grants `CONNECT` on every database
 to `PUBLIC` by default, so `langnav_admin` **can** open a connection to other
 databases on the same server and read the system catalogs, which means it can
-see table *names*. It cannot read any data: verified on this machine against
+see table _names_. It cannot read any data: verified on this machine against
 two unrelated databases, where every `SELECT` was refused at the schema level
 and the role held `SELECT` on zero tables. To close even the connection, an
 administrator would have to
@@ -316,15 +316,15 @@ with it as an error. Everything found is written to `data_quality_finding`
 against the run's `run_id`, and the process exits non-zero if any error-level
 finding was recorded.
 
-| Module | Responsibility |
-| --- | --- |
-| `etl/config.py` | `.env` loading, connection targets, paths |
-| `etl/sources.py` | File readers and value coercion (commas, percents, `#` blocks, the IANA format) |
-| `etl/registry.py` | Table specs, the merge layer, FK resolution, findings |
-| `etl/db.py` | Connections, `COPY`, object counts |
-| `etl/loaders/` | One module per source group, run in dependency order |
-| `etl/derive.py` | Closure rebuilds, matview refresh, stubs for the rest |
-| `etl/run.py` | CLI orchestrator and the golden-value checks |
+| Module            | Responsibility                                                                  |
+| ----------------- | ------------------------------------------------------------------------------- |
+| `etl/config.py`   | `.env` loading, connection targets, paths                                       |
+| `etl/sources.py`  | File readers and value coercion (commas, percents, `#` blocks, the IANA format) |
+| `etl/registry.py` | Table specs, the merge layer, FK resolution, findings                           |
+| `etl/db.py`       | Connections, `COPY`, object counts                                              |
+| `etl/loaders/`    | One module per source group, run in dependency order                            |
+| `etl/derive.py`   | Closure rebuilds, matview refresh, stubs for the rest                           |
+| `etl/run.py`      | CLI orchestrator and the golden-value checks                                    |
 
 ## Tests
 
