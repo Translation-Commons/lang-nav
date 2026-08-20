@@ -33,8 +33,12 @@ const MapSidebar: React.FC<Props> = ({ drawableEntities, objectType, hoveredId, 
 
   const [showItems, setShowItems] = React.useState(true);
 
+  if (pinnedEntities.length === 0) {
+    return null;
+  }
+
   return (
-    <div className="MapSidebar" style={{ width: pinnedEntities.length > 0 ? '300px' : '0' }}>
+    <div className="MapSidebar" style={{ width: '300px' }}>
       {/* <div> */}
       <HoverableButton
         className="MapSidebarTitle"

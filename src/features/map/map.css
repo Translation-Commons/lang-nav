@@ -67,19 +67,23 @@
 @keyframes growThenShow {
   0% {
     max-height: 0;
-    display: none;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
   }
 
   1% {
     max-height: 1%;
-    /* Keep it displayed right until the absolute last millisecond */
-    display: flex;
+    padding: 1em 0.5em 0.5em 0.5em;
+    opacity: 0;
+    visibility: visible;
   }
 
   100% {
-    /* Instantly yank the element out of the layout flow completely */
-    max-height: 100%;
-    display: flex;
+    max-height: 100vh;
+    padding: 1em 0.5em 0.5em 0.5em;
+    opacity: 1;
+    visibility: visible;
   }
 }
 
@@ -89,20 +93,24 @@
 
 @keyframes shrinkThenHide {
   0% {
-    max-height: 100%;
-    display: flex;
+    max-height: 100vh;
+    padding: 1em 0.5em 0.5em 0.5em;
+    opacity: 1;
+    visibility: visible;
   }
 
   99% {
     max-height: 0;
-    /* Keep it displayed right until the absolute last millisecond */
-    display: flex;
+    padding: 0;
+    opacity: 0;
+    visibility: visible;
   }
 
   100% {
-    /* Instantly yank the element out of the layout flow completely */
-    display: none;
     max-height: 0;
+    padding: 0;
+    opacity: 0;
+    visibility: hidden;
   }
 }
 
