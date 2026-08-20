@@ -14,6 +14,7 @@ const OVERRIDE_LANGUAGE_MATCH: Record<string, string> = {
   malay: 'zlm',
   other: 'mul',
   darija: 'ary',
+  italian: 'ita',
 };
 
 const OVERRIDE_ALTS: Record<string, string[]> = {
@@ -22,6 +23,7 @@ const OVERRIDE_ALTS: Record<string, string[]> = {
   mandarin: ['zho'],
   darija: ['arq', 'aeb'],
   malay: ['msa', 'zsm'],
+  italian: ['ise', 'slf', 'itk'],
 };
 
 type FindLanguage = (searchString: string) => Promise<LanguageData[]>;

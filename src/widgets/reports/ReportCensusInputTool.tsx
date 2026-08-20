@@ -80,7 +80,7 @@ const ReportCensusInputTool: React.FC = () => {
       />
       <h3>Analysis</h3>
       {errorMessage && <div style={{ color: 'var(--color-red)' }}>{errorMessage}</div>}
-      {censuses.length > 0 && <h4>Metadata</h4>}
+      {censuses.length > 0 && <div className="font-bold">Metadata</div>}
       {censuses.length > 0 &&
         (warnings.length > 0
           ? warnings.map((warning, index) => (
@@ -89,7 +89,7 @@ const ReportCensusInputTool: React.FC = () => {
               </div>
             ))
           : 'No issues found.')}
-      <span className="font-bold">Language Codes & Language Names</span>
+      <div className="font-bold">Language Codes & Language Names</div>
       <ContainErrorsAndSuspense>
         <CensusLanguageCheck fileInput={tsv} />
       </ContainErrorsAndSuspense>

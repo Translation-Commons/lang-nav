@@ -34,10 +34,10 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
         // Check if any of the other names fully or partially match
         if (!object.names.some((n) => n.toLowerCase() === query))
           dist += object.names.some((n) => anyWordStartsWith(n, query)) ? 2 : 10;
-      }
 
-      // Check if the language code partially or fully matches the query
-      if (object.codeDisplay !== query) dist += object.codeDisplay.startsWith(query) ? 1 : 5;
+        // Check if the language code partially or fully matches the query
+        if (object.codeDisplay !== query) dist += object.codeDisplay.startsWith(query) ? 1 : 5;
+      }
 
       // Check if the language is known to be found in the territory
       if (!filterBy[Field.Territory]?.(object)) dist += 10;

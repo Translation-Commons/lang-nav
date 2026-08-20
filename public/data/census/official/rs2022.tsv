@@ -1,0 +1,58 @@
+#codeDisplay		rs2022.L1
+#nameDisplay		Serbia 2022 L1
+#isoRegionCode	RS	
+#yearCollected		2022
+### Language Criteria ###		
+#languageUse		Speaks
+#proficiency		
+#acquisitionOrder		L1
+#domain		Any
+### Population Surveyed ###		
+#population		6,647,003
+#populationSource		
+#populationWithPositiveResponses		6,255,702
+#sampleRate		1
+#responsesPerIndividual		1
+### Data Constraints ###		
+#geographicScope		whole country (excluding AP Kosovo and Metohija)
+#age		0+
+#nationality		residents
+#languagesIncluded		all
+#residenceBasis		de jure
+#quantity		count
+### Creator ###		
+#collectorType		Government
+#collectorName		Statistical Office of the Republic of Serbia
+#collectorNameShort		SORS
+### Source Document ###		
+#url		https://data.stat.gov.rs/Home/Result/3104020302?languageCode=en-US
+#datePublished		2023-06-16
+#dateAccessed		2026-08-12
+#documentName		Dissemination database
+#sectionName		2022 Census of Population, Households and Dwellings
+#tableName		Population by mother tongue
+#columnName		Total
+#citation		Statistical Office of the Republic of Serbia. Population by mother tongue. Table 3104020302. 2022 Census of Population, Households and Dwellings. Published 16 June 2023.
+#notes		Use the “Total” column for both sexes. The 2022 census data exclude AP Kosovo and Metohija. 
+Language Code	Language	Population
+hbs/srp	Serbian	5,607,558
+sqi	Albanian	65,475
+hbs/bos	Bosnian	145,329
+bul	Bulgarian	7,939
+hbs/bos	#Bosniaks	3,319
+rup	Vlach	23216
+hun	Hungarian	170,875
+mkd	Macedonian	8375
+deu	German	1,389
+rom	Romany	79,687
+ron	Romanian	21,477
+rus	Russian	11,255
+rue	#Rusyns	8,725
+slk	Slovak	38584
+slv	Slovenian	1302
+ukr	Ukrainian	1527
+hbs/hrv	Croatian	12048
+hbs/cnr	Montenegrin	1981
+mul	Other languages	45641
+mul	Not declared	88122
+mul	Unknown	303179

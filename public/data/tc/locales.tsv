@@ -8407,7 +8407,7 @@ pnj_AU	Pinjarup (Australia)		EDL	1
 pnk_BO	Paunaka (Bolivia)		EDL	1	
 pnv_AU	Pinikura (Australia)		EDL	1	
 poo_US	Central Pomo (United States)		EDL	1	
-prl_PE	Peruvian Sign Language (Peru)		EDL	1	
+prl_PE	Peruvian Sign Language (Peru)		Official	13,326	
 pue_AR	Gününa-Küne (Argentina)		EDL	1	
 qua_US	Quapaw (United States)		Unverified Official	1	
 quc_RU	K'iche' (Russia)	K’iche’	Official	1	
@@ -8451,7 +8451,7 @@ ttk_CO	Totoró (Colombia)		Official	8916
 tub_US	Tubatulabal (United States)		EDL	1	
 tun_US	Tunica (United States)		EDL	1	
 typ_AU	Awu Laya (Australia)		EDL	1	
-ukr_RS	Ukrainian (Serbia)	Українська	Other	1	official_regional
+ukr_RS	Ukrainian (Serbia)	Українська	Official	1527	official_regional
 uky_AU	Kuuk-Yak (Australia)		EDL	1	
 uly_NG	Buli (Nigeria)		EDL	1	
 umr_AU	Umbugarla (Australia)		EDL	1	
@@ -8908,7 +8908,7 @@ bhn_GE	Bohtan Neo-Aramaic (Georgia)
 bhr_MG	Bara Malagasy (Madagascar)				
 bjg_GW	Bidyogo (Guinea-Bissau)				
 bjm_IQ	Bajelani (Iraq)				
-bjs_BB	Bajan (Barbados)				
+bjs_BB	Bajan (Barbados)			286000	
 bjy_AU	Bayali (Australia)				
 blb_SB	Bilua (Solomon Islands)				
 ble_GW	Balanta-Kentohe (Guinea-Bissau)				
@@ -9156,7 +9156,7 @@ gnc_ES	Guanche (Spain)
 gnl_AU	Gangulu (Australia)				
 gnw_BO	Western Bolivian Guaraní (Bolivia)				
 goh_DE	Old High German (ca. 750-1050) (Germany)	Althochdeutsch			
-goo_FJ	Gone Dau (Fiji)				
+goo_FJ	Gone Dau (Fiji)			830	
 got_UA	Gothic (Ukraine)				
 gov_CI	Goo (Côte d’Ivoire)				
 gri_SB	Ghari (Solomon Islands)				
@@ -9342,11 +9342,11 @@ lli_CG	Teke-Laali (Congo - Brazzaville)
 llp_VU	North Efate (Vanuatu)				
 lls_LT	Lithuanian Sign Language (Lithuania)				
 llu_SB	Lau (Solomon Islands)				
-llx_FJ	Lauan (Fiji)				
+llx_FJ	Lauan (Fiji)			21,795	
 lma_GN	East Limba (Guinea)				
 lmh_NP	Lambichhong (Nepal)				
 lml_VU	Hano (Vanuatu)				
-lmv_FJ	Lomaiviti (Fiji)				
+lmv_FJ	Lomaiviti (Fiji)			1,764	
 lmz_US	Lumbee (United States)				
 lng_HU	Langobardic (Hungary)				
 lnw_AU	Lanima (Australia)				
@@ -9943,7 +9943,7 @@ wur_AU	Wurrugu (Australia)
 wwb_AU	Wakabunga (Australia)				
 wya_US	Wyandot (United States)				
 wym_PL	Wymysorys (Poland)	Wymysiöeryś			
-wyy_FJ	Western Fijian (Fiji)				
+wyy_FJ	Western Fijian (Fiji)		86,143		
 xaa_ES	Andalusian Arabic (Spain)	عربية أندلسية			
 xad_US	Adai (United States)				
 xae_IT	Aequian (Italy)				
@@ -10987,3 +10987,15 @@ bkw_CG	Bekwel (Congo - Brazzaville)			12000
 moj_CG	Monzombo (Congo - Brazzaville)			12000	
 vif_CG	Vili (Congo - Brazzaville)			11000	
 bui_CG	Bongili (Congo - Brazzaville)			9800	
+por_AD	Portuguese (Andorra)		Official	14694	
+pidg1237_FJ	Pidgin Fijian (Fiji)			7000	
+soy_TG	Miyobe (Togo)			3000	
+puu_CG	Punu (Congo - Brazzaville)			14000	
+wls_FJ	Wallisian (Fiji)			900	
+cld_SY	Chaldean Neo-Aramaic (Syria)			7500	
+gil_FJ	Gilbertese (Fiji)			6400	
+kkj_CG	Kako (Congo - Brazzaville)			11000	
+tvl_FJ	Tuvaluan (Fiji)			500	
+lit_LV	Lithuanian (Latvia)			75810	
+ukr_LV	Ukrainian (Latvia)			75810	
+tam_FJ	Tamil (Fiji)			75000	

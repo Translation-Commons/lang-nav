@@ -3,6 +3,7 @@ import React from 'react';
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
@@ -50,7 +51,9 @@ const OrganizationDetails: React.FC<Props> = ({ org }) => {
       </DetailsSection>
       {censuses && censuses.length > 0 && (
         <DetailsSection title="Census Tables">
-          <TableOfAllCensuses organization={org} />
+          <LocalParamsProvider overrides={{ page: 1, limit: 20, searchString: '' }}>
+            <TableOfAllCensuses organization={org} />
+          </LocalParamsProvider>
         </DetailsSection>
       )}
     </div>
