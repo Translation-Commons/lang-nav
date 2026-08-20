@@ -8407,7 +8407,7 @@ pnj_AU	Pinjarup (Australia)		EDL	1
 pnk_BO	Paunaka (Bolivia)		EDL	1	
 pnv_AU	Pinikura (Australia)		EDL	1	
 poo_US	Central Pomo (United States)		EDL	1	
-prl_PE	Peruvian Sign Language (Peru)		EDL	1	
+prl_PE	Peruvian Sign Language (Peru)		Official	13,326	
 pue_AR	Gününa-Küne (Argentina)		EDL	1	
 qua_US	Quapaw (United States)		Unverified Official	1	
 quc_RU	K'iche' (Russia)	K’iche’	Official	1	
@@ -8451,7 +8451,7 @@ ttk_CO	Totoró (Colombia)		Official	8916
 tub_US	Tubatulabal (United States)		EDL	1	
 tun_US	Tunica (United States)		EDL	1	
 typ_AU	Awu Laya (Australia)		EDL	1	
-ukr_RS	Ukrainian (Serbia)	Українська	Other	1	official_regional
+ukr_RS	Ukrainian (Serbia)	Українська	Official	1527	official_regional
 uky_AU	Kuuk-Yak (Australia)		EDL	1	
 uly_NG	Buli (Nigeria)		EDL	1	
 umr_AU	Umbugarla (Australia)		EDL	1	
@@ -8845,7 +8845,6 @@ aju_IL	Judeo-Moroccan Arabic (Israel)
 ajw_NG	Ajawa (Nigeria)				
 ake_GY	Akawaio (Guyana)				
 akk_IQ	Akkadian (Iraq)	𒀝 𒅗 𒁺 𒌑			
-akw_CG	Akwa (Congo - Brazzaville)				
 alk_LA	Alak (Laos)				
 als_AL	Tosk Albanian (Albania)	Toskë			
 alu_SB	Are'are (Solomon Islands)				
@@ -8897,7 +8896,6 @@ bdc_CO	Emberá-Baudó (Colombia)	Êbêrâ 'Βe'dea
 bdi_SD	Burun (Sudan)				
 beg_BN	Belait (Brunei)				
 bej_ER	Beja (Eritrea)	بداوية			
-beq_CG	Beembe (Congo - Brazzaville)				
 bfi_GB	British Sign Language (United Kingdom)	British Sign Language			
 bfo_BF	Malba Birifor (Burkina Faso)				
 bgl_LA	Bo (Laos) (Laos)				
@@ -8910,9 +8908,8 @@ bhn_GE	Bohtan Neo-Aramaic (Georgia)
 bhr_MG	Bara Malagasy (Madagascar)				
 bjg_GW	Bidyogo (Guinea-Bissau)				
 bjm_IQ	Bajelani (Iraq)				
-bjs_BB	Bajan (Barbados)				
+bjs_BB	Bajan (Barbados)			286000	
 bjy_AU	Bayali (Australia)				
-bkw_CG	Bekwel (Congo - Brazzaville)				
 blb_SB	Bilua (Solomon Islands)				
 ble_GW	Balanta-Kentohe (Guinea-Bissau)				
 bll_US	Biloxi (United States)				
@@ -8921,7 +8918,6 @@ bme_CF	Limassa (Central African Republic)
 bmm_MG	Northern Betsimisaraka Malagasy (Madagascar)				
 bmn_PG	Bina (Papua New Guinea) (Papua New Guinea)				
 bms_NE	Bilma Kanuri (Niger)				
-bmw_CG	Bomwali (Congo - Brazzaville)				
 bng_GQ	Benga (Equatorial Guinea)				
 bnm_GQ	Batanga (Equatorial Guinea)				
 bnn_TW	Bunun (Taiwan)	Bunun			
@@ -8944,7 +8940,6 @@ bsv_GN	Baga Sobané (Guinea)
 bte_NG	Gamo-Ningi (Nigeria)				
 btr_VU	Baetora (Vanuatu)				
 bue_CA	Beothuk (Canada)				
-bui_CG	Bongili (Congo - Brazzaville)				
 buw_GA	Bubi (Gabon)				
 bvc_SB	Baelelea (Solomon Islands)				
 bvd_SB	Baeggu (Solomon Islands)				
@@ -9023,7 +9018,6 @@ dbr_SO	Dabarre (Somalia)
 dcr_VG	Negerhollands (British Virgin Islands)				
 dcr_VI	Negerhollands (U.S. Virgin Islands)				
 ddd_SS	Dongotono (South Sudan)				
-dde_CG	Doondo (Congo - Brazzaville)				
 ddr_AU	Dhudhuroa (Australia)				
 dds_ML	Donno So Dogon (Mali)				
 dec_SD	Dagik (Sudan)				
@@ -9162,7 +9156,7 @@ gnc_ES	Guanche (Spain)
 gnl_AU	Gangulu (Australia)				
 gnw_BO	Western Bolivian Guaraní (Bolivia)				
 goh_DE	Old High German (ca. 750-1050) (Germany)	Althochdeutsch			
-goo_FJ	Gone Dau (Fiji)				
+goo_FJ	Gone Dau (Fiji)			830	
 got_UA	Gothic (Ukraine)				
 gov_CI	Goo (Côte d’Ivoire)				
 gri_SB	Ghari (Solomon Islands)				
@@ -9237,7 +9231,6 @@ ise_IT	Italian Sign Language (Italy)
 isg_IE	Irish Sign Language (Ireland)	Teanga Chomharthaíochta na hÉireann			
 isr_IL	Israeli Sign Language (Israel)				
 isv_001	Interslavic (World)	Medžuslovjansky			
-iyx_CG	Yaka (Congo) (Congo - Brazzaville)				
 izm_NG	Kizamani (Nigeria)				
 jas_NC	New Caledonian Javanese (New Caledonia)				
 jaz_NC	Jawe (New Caledonia)				
@@ -9309,7 +9302,6 @@ kuf_LA	Western Katu (Laos)
 kun_ER	Kunama (Eritrea)				
 kvk_KR	Korean Sign Language (South Korea)	한국 수화 언어			
 kvs_AU	Kunggara (Australia)				
-kwc_CG	Likwala (Congo - Brazzaville)				
 kwd_SB	Kwaio (Solomon Islands)				
 kwf_SB	Kwara'ae (Solomon Islands)				
 kww_SR	Kwinti (Suriname)				
@@ -9317,7 +9309,6 @@ kwy_AO	San Salvador Kongo (Angola)
 kwz_AO	Kwadi (Angola)				
 kxl_NP	Nepali Kurux (Nepal)				
 kxu_IN	Kui (India) (India)				
-kxx_CG	Likuba (Congo - Brazzaville)				
 kyv_NP	Kayort (Nepal)				
 kza_BF	Western Karaboro (Burkina Faso)				
 kzg_JP	Kikai (Japan)	シマユミタ			
@@ -9351,11 +9342,11 @@ lli_CG	Teke-Laali (Congo - Brazzaville)
 llp_VU	North Efate (Vanuatu)				
 lls_LT	Lithuanian Sign Language (Lithuania)				
 llu_SB	Lau (Solomon Islands)				
-llx_FJ	Lauan (Fiji)				
+llx_FJ	Lauan (Fiji)			21,795	
 lma_GN	East Limba (Guinea)				
 lmh_NP	Lambichhong (Nepal)				
 lml_VU	Hano (Vanuatu)				
-lmv_FJ	Lomaiviti (Fiji)				
+lmv_FJ	Lomaiviti (Fiji)			1,764	
 lmz_US	Lumbee (United States)				
 lng_HU	Langobardic (Hungary)				
 lnw_AU	Lanima (Australia)				
@@ -9387,15 +9378,11 @@ lww_VU	Lewo (Vanuatu)
 lya_BT	Layakha (Bhutan)				
 mbe_US	Molale (United States)				
 mbf_SG	Baba Malay (Singapore)				
-mbm_CG	Ombamba (Congo - Brazzaville)				
 mbv_GN	Mbulungish (Guinea)				
 mcd_BO	Sharanahua (Bolivia)				
 mch_VE	Maquiritari (Venezuela)				
 mck_AO	Mbunda (Angola)				
 mdl_MT	Maltese Sign Language (Malta)				
-mdt_CG	Mbere (Congo - Brazzaville)				
-mdu_CG	Mboko (Congo - Brazzaville)				
-mdw_CG	Mbosi (Congo - Brazzaville)				
 meg_NC	Mea (New Caledonia)	#N/A			
 mei_SD	Midob (Sudan)				
 mes_TD	Masmaje (Chad)				
@@ -9418,9 +9405,7 @@ mnl_VU	Tiale (Vanuatu)
 mnv_SB	Rennell-Bellona (Solomon Islands)				
 mny_MZ	Manyawa (Mozambique)				
 mod_US	Mobilian (United States)				
-moj_CG	Monzombo (Congo - Brazzaville)				
 mom_NI	Mangue (Nicaragua)				
-mow_CG	Moi (Congo) (Congo - Brazzaville)				
 moy_ET	Shekkacho (Ethiopia)				
 mpr_SB	Vangunu (Solomon Islands)				
 mra_TH	Mlabri (Thailand)				
@@ -9480,7 +9465,6 @@ ngz_CG	Ngungwel (Congo - Brazzaville)
 nhr_BW	Naro (Botswana)				
 niq_KE	Nandi (Kenya)				
 nju_AU	Ngadjunmaya (Australia)				
-njx_CG	Kunyi (Congo - Brazzaville)				
 nke_SB	Duke (Solomon Islands)				
 nkn_AO	Nkangala (Angola)				
 nkp_TO	Niuatoputapu (Tonga)				
@@ -9510,7 +9494,6 @@ nra_GA	Ngom (Gabon)
 nrb_ER	Nara (Eritrea)				
 nrc_AT	Noric (Austria)				
 nrc_SI	Noric (Slovenia)				
-nrf_JE	Jèrriais (Jersey)	Normaund			
 nrn_GB	Norn (United Kingdom)				
 nrp_IT	North Picene (Italy)				
 nrt_US	Northern Kalapuya (United States)				
@@ -9729,7 +9712,7 @@ sct_LA	Southern Katang (Laos)
 scx_IT	Sicel (Italy)				
 sdb_IQ	Shabak (Iraq)				
 sdf_IQ	Sarli (Iraq)				
-sdj_CG	Suundi (Congo - Brazzaville)				
+sdj_CG	Suundi (Congo - Brazzaville)			183000	
 sdl_SA	Saudi Arabian Sign Language (Saudi Arabia)				
 sdq_ID	Semandang (Indonesia)	bahasa Kualan-Semandang			
 sdt_FR	Shuadit (France)	שואדית			
@@ -9853,7 +9836,6 @@ trf_TT	Trinidadian Creole English (Trinidad & Tobago)
 trg_IL	Lishán Didán (Israel)				
 tri_SR	Trió (Suriname)				
 trl_GB	Traveller Scottish (United Kingdom)				
-tsa_CG	Tsaangi (Congo - Brazzaville)				
 tsm_TR	Turkish Sign Language (Turkey)				
 tsp_BF	Northern Toussian (Burkina Faso)				
 tsq_TH	Thai Sign Language (Thailand)				
@@ -9917,7 +9899,6 @@ vao_VU	Vao (Vanuatu)
 vel_NL	Veluws (Netherlands)				
 veo_US	Ventureño (United States)				
 vic_VG	Virgin Islands Creole English (British Virgin Islands)				
-vif_CG	Vili (Congo - Brazzaville)				
 vig_BF	Viemo (Burkina Faso)				
 vit_NG	Viti (Nigeria)				
 vjk_IN	Bajjika (India)				
@@ -9962,7 +9943,7 @@ wur_AU	Wurrugu (Australia)
 wwb_AU	Wakabunga (Australia)				
 wya_US	Wyandot (United States)				
 wym_PL	Wymysorys (Poland)	Wymysiöeryś			
-wyy_FJ	Western Fijian (Fiji)				
+wyy_FJ	Western Fijian (Fiji)		86,143		
 xaa_ES	Andalusian Arabic (Spain)	عربية أندلسية			
 xad_US	Adai (United States)				
 xae_IT	Aequian (Italy)				
@@ -10166,7 +10147,6 @@ zkv_LV	Krevinian (Latvia)
 zkz_RU	Khazar (Russia)				
 zla_CD	Zula (Congo - Kinshasa)				
 zmn_GA	Mbangwe (Gabon)				
-zmx_CG	Bomitaba (Congo - Brazzaville)				
 znk_AU	Manangkari (Australia)				
 zra_KR	Kara (Korea) (South Korea)				
 zrp_FR	Zarphatic (France)				
@@ -10779,7 +10759,7 @@ tmh_BF	Tamashek (Burkina Faso)		Official	122019
 pil_BJ	Yom (Benin)		Official	166893	
 bex_SS	Jur Modo (South Sudan)			118000	
 ldi_CG	Laari (Congo - Brazzaville)			220990	
-kon_CG	Kongo (Congo - Brazzaville)			220990	
+kon_CG	Kongo (Congo - Brazzaville)		Official	3,303,242	
 las_TG	Lama (Togo)			232726	
 toh_MZ	Gitonga (Mozambique)			212058	
 wmw_MZ	Mwani (Mozambique)			212058	
@@ -10977,3 +10957,45 @@ gob_CO	Playero (Colombia)		Official	142
 bal_IN	Baluchi (India)			100	
 lah_RU	Panjabic (Russia)		Official	45	
 man_RU	Mandingo (Russia)		Official	23	
+yom_CG	Yombe (Congo - Brazzaville)			517000	
+nbm_CG	Ngbaka Ma'bo (Congo - Brazzaville)			135000	
+bni_CG	Bangi (Congo - Brazzaville)			90000	
+loq_CG	Lobala (Congo - Brazzaville)			23000	
+wum_CG	Wumbvu (Congo - Brazzaville)			9000	
+nzb_CG	Njebi (Congo - Brazzaville)			20000	
+koq_CG	Kota (Congo - Brazzaville)			14000	
+zmz_CG	Mbandja (Congo - Brazzaville)			12000	
+fra_JE	French (Jersey)		Official	17988	
+por_JE	Portuguese (Jersey)		Official	7305	
+nrf_JE	Jèrriais (Jersey)	Normaund	Official	2874	
+eng_GT	English (Guatemala)		Official	393389	
+mdw_CG	Mbosi (Congo - Brazzaville)			161000	
+njx_CG	Kunyi (Congo - Brazzaville)			116000	
+mdt_CG	Mbere (Congo - Brazzaville)			110000	
+dde_CG	Doondo (Congo - Brazzaville)			94000	
+kwc_CG	Likwala (Congo - Brazzaville)			67000	
+beq_CG	Beembe (Congo - Brazzaville)			50000	
+kxx_CG	Likuba (Congo - Brazzaville)			45000	
+bmw_CG	Bomwali (Congo - Brazzaville)			42000	
+mdu_CG	Mboko (Congo - Brazzaville)			40000	
+akw_CG	Akwa (Congo - Brazzaville)			36000	
+iyx_CG	Yaka (Congo - Brazzaville)			31000	
+mbm_CG	Ombamba (Congo - Brazzaville)			20000	
+tsa_CG	Tsaangi (Congo - Brazzaville)			20000	
+zmx_CG	Bomitaba (Congo - Brazzaville)			14000	
+bkw_CG	Bekwel (Congo - Brazzaville)			12000	
+moj_CG	Monzombo (Congo - Brazzaville)			12000	
+vif_CG	Vili (Congo - Brazzaville)			11000	
+bui_CG	Bongili (Congo - Brazzaville)			9800	
+por_AD	Portuguese (Andorra)		Official	14694	
+pidg1237_FJ	Pidgin Fijian (Fiji)			7000	
+soy_TG	Miyobe (Togo)			3000	
+puu_CG	Punu (Congo - Brazzaville)			14000	
+wls_FJ	Wallisian (Fiji)			900	
+cld_SY	Chaldean Neo-Aramaic (Syria)			7500	
+gil_FJ	Gilbertese (Fiji)			6400	
+kkj_CG	Kako (Congo - Brazzaville)			11000	
+tvl_FJ	Tuvaluan (Fiji)			500	
+lit_LV	Lithuanian (Latvia)			75810	
+ukr_LV	Ukrainian (Latvia)			75810	
+tam_FJ	Tamil (Fiji)			75000	

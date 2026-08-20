@@ -1,0 +1,38 @@
+#codeDisplay		mp2020.home	mp2020.l2	mp2020.eng
+#nameDisplay		Northern Mariana Islands 2020 Home Language	Northern Mariana Islands 2020 L2	Northern Mariana Islands 2020 English
+#isoRegionCode	MP			
+#yearCollected	2020			
+### Language Criteria ###				
+#languageUse	Speaks			
+#acquisitionOrder		L1	L2	Any
+#domain		Home		
+### Population Surveyed ###				
+#population	44,111			
+#responsesPerIndividual	1			
+### Data Constraints ###				
+#geographicScope	whole country			
+#age	5+			
+#nationality	residents			
+#languagesIncluded	all			
+#residenceBasis	de facto			
+#quantity	count			
+### Creator ###				
+#collectorType	Government			
+#collectorNameShort	US Census Bureau			
+### Source Document ###				
+#url	https://data.census.gov/table/DECENNIALCROSSTABMP2020.CT25			
+#datePublished	2024-02-15			
+#dateAccessed	2026-07-29			
+#documentName	DECIA Commonwealth of the Northern Mariana Islands Detailed Crosstabulations			
+#sectionName	2020 Island Areas Censuses: Commonwealth of the Northern Mariana Islands			
+#tableName	CT25: Language Spoken at Home and Ability to Speak English by Age			
+#columnName			Ability to Speak English: Speaks other languages: Very well	
+#notes	Universe is population 5 years and over in households. Use the “Total” column for language counts. This is language spoken at home, not mother tongue.			
+Language Code	Language	Population		
+eng	English	11,466	17133	28,599
+cha	Chamorro	9,579		
+phi	Philippine languages	12,726		
+mul	Other Pacific Island languages	4,051		
+zho	Chinese	3,060		
+mul	Other Asian languages	2147		
+mul	Other languages	1,082		

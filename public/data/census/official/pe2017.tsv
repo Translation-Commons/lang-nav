@@ -1,0 +1,41 @@
+#codeDisplay		#es-lang	pe2017.age5andup	pe2017.age3andup
+#nameDisplay			Peru 2017 L1 Age 5+	Peru 2017 L1 Age 3+
+#isoRegionCode	PE			
+#yearCollected	2017			
+### Language Criteria ###				
+#languageUse	Speaks			
+#acquisitionOrder	L1			
+### Population Surveyed ###				
+#population			26,887,584	27946060
+#populationWithPositiveResponses			26,683,755	27741759
+#responsesPerIndividual	1			
+### Data Constraints ###				
+#age			5+	3+
+#quantity	count			
+### Creator ###				
+#collectorType	Government			
+#collectorName	Instituto Nacional de Estadística e Informática			
+#collectorNameShort	INEI PE			
+### Source Document ###				
+#url	https://www.gob.pe/institucion/inei/informes-publicaciones/4227182-peru-resultados-definitivos-del-censo-2017			
+#datePublished	2018-10-01			
+#dateAccessed	2026-08-20			
+#documentName	Perú: Resultados Definitivos de los Censos Nacionales 2017 – Tomo I			
+#tableName			CUADRO Nº 2.21 PERÚ: POBLACIÓN CENSADA DE 5 Y MÁS AÑOS DE EDAD, POR IDIOMA O LENGUA MATERNA CON EL QUE APRENDIÓ A HABLAR, SEGÚN DEPARTAMENTO, 2017	CUADRO Nº 1 POBLACIÓN CENSADA DE 3 Y MÁS AÑOS DE EDAD, POR GRUPOS DE EDAD, SEGÚN DEPARTAMENTO, ÁREA URBANA Y RURAL, SEXO E IDIOMA O LENGUA MATERNA CON EL QUE APRENDIÓ A HABLAR EN SU NIÑEZ
+#columnName			Total	Total
+Language Code	Language in english	Language		
+spa	Spanish	Castellano	22209686	23178478
+que	Quechua	Quechua	3735682	3799780
+aym	Aymara	Aimara	444389	450010
+cni	Asháninka	Ashaninka	68667	73567
+agr	Awajún (Aguaruna)	Awajún / Aguaruna		56584
+shp	Shipibo-Konibo	Shipibo-Konibo		34152
+cbt	Shawi (Chayahuita)	Shawi / Chayahuita		17241
+mcb	Matsigenka (Machiguenga)	Matsigenka / Machiguenga		6629
+acu	Achuar	Achuar		3809
+mul	Other Native or Indigenous Language	Otra lengua nativa u originaria	141350	35423
+por	Portuguese	Portugués		7956
+mul	Other Foreign Language	Otra lengua extranjera	48910	41920
+prl	Peruvian Sign Language	Lengua de Señas Peruanas	10447	10447
+zxx	Does Not Hear or Speak	No escucha / Ni habla	24624	25763
+mis	Does not know, does not respond	No sabe/ No responde	203829	204301

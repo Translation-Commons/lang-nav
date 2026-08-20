@@ -16,11 +16,15 @@ import Deemphasized from '@shared/ui/Deemphasized';
 type Props = {
   record: LocaleInCensus;
   focus: 'speaking' | 'writing';
+  topCensusPriority?: { speaking: number; writing: number };
 };
 
-const CensusRecordPriority: React.FC<Props> = ({ record, focus }) => {
+const CensusRecordPriority: React.FC<Props> = ({ record, focus, topCensusPriority }) => {
   const priority = computeCensusRecordPriority(record, focus);
   const priorityParts = buildCensusRecordPriorityInformation(record, focus);
+  const backgroundColor =
+    topCensusPriority?.[focus] === priority ? 'var(--color-highlight)' : 'transparent';
+
   return (
     <Hoverable
       hoverContent={
@@ -44,6 +48,7 @@ const CensusRecordPriority: React.FC<Props> = ({ record, focus }) => {
           </tbody>
         </table>
       }
+      style={{ backgroundColor }}
     >
       <DecimalNumber num={priority} />
     </Hoverable>

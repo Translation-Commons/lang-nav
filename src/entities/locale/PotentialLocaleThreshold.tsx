@@ -10,7 +10,7 @@ export function usePotentialLocaleThreshold(label: ReactNode): {
   percentThreshold: number;
   percentThresholdSelector: ReactNode;
 } {
-  const [percentThreshold, setPercentThreshold] = React.useState(0.05);
+  const [percentThreshold, setPercentThreshold] = React.useState(1);
 
   const percentThresholdSelector = (
     <SelectorDisplayProvider display={SelectorDisplay.ButtonGroup}>
