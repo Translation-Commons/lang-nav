@@ -1,0 +1,62 @@
+#codeDisplay		gt2028speaks.l1	gt2028speaks.l2	gt2028speaks.l3	gt2028speaks.l4	gt2028speaks	gt2028writes.l1	gt2028writes.l2	gt2028writes.l3	gt2028writes
+#nameDisplay		Guatemala 2018 Speaks L1	Guatemala 2018 Speaks L2	Guatemala 2018 Speaks L3	Guatemala 2018 Speaks L4	Guatemala 2018 Speaks	Guatemala 2018 Writes L1	Guatemala 2018 Writes L2	Guatemala 2018 Writes L3	Guatemala 2018 Writes
+#isoRegionCode	GT									
+#yearCollected	2018									
+### Language Criteria ###										
+#languageUse		Speaks	Speaks	Speaks	Speaks	Speaks	Writes	Writes	Writes	Writes
+#acquisitionOrder		L1	L2	L3	L4	Any	L1	L2	L3	Any
+### Population Surveyed ###										
+#population	12,528,937									
+#responsesPerIndividual	1					1+				1+
+### Data Constraints ###										
+#age	7+									
+#nationality	residents									
+#languagesIncluded	All									
+#quantity	count									
+### Creator ###										
+#collectorType	Government									
+#collectorNameShort	INE GT									
+#presentedBy	Internet Archive									
+### Source Document ###										
+#url	https://web.archive.org/web/20240205043157/https://www.censopoblacion.gt/archivos/resultados_censo2018.pdf									
+#datePublished	2019-12									
+#dateAccessed	2024-10-31									
+#documentName	Resultados Censo 2018									
+#sectionName		3.8 IDIOMAS EN LOS Q UE SABE H ABLAR LA POBLACIÓN DE 7 AÑOS O MÁS	3.8 IDIOMAS EN LOS Q UE SABE H ABLAR LA POBLACIÓN DE 7 AÑOS O MÁS	3.8 IDIOMAS EN LOS Q UE SABE H ABLAR LA POBLACIÓN DE 7 AÑOS O MÁS	3.8 IDIOMAS EN LOS Q UE SABE H ABLAR LA POBLACIÓN DE 7 AÑOS O MÁS	3.8 IDIOMAS EN LOS Q UE SABE H ABLAR LA POBLACIÓN DE 7 AÑOS O MÁS				
+#tableName		Cuadro 14 Población de 7 años o más según idiomas en los que sabe hablar, Census 2018	Cuadro 14 Población de 7 años o más según idiomas en los que sabe hablar, Census 2018	Cuadro 14 Población de 7 años o más según idiomas en los que sabe hablar, Census 2018	Cuadro 14 Población de 7 años o más según idiomas en los que sabe hablar, Census 2018	Cuadro 14 Población de 7 años o más según idiomas en los que sabe hablar, Census 2018	Cuadro 18 Población de 7 años o más de edad por idiomas en que sabe leer y escribir, Census 2018			
+#columnName		Idioma materno	Segundo idioma	Tercer idioma	Cuarto idioma		Idioma 1	Idioma 2	Idioma 3	Total
+#citation										
+#notes						Combined from the L1-L4 columns				
+Language Code	Idioma	Idioma materno	Segundo idioma	Tercer idioma	Cuarto idioma	Total	Idioma 1	Idioma 2	Idioma 3	Total
+	Total	12,528,937	2,995,963	95,412	4,358	15,624,670				
+	Idioma maya									
+acr	Achi	116,654	21,485	4,089	556	142,784	17464	8968	5312	31744
+knj	Akateko	49,688	18,690	3,434	1,276	73,088	13274	21571	1103	35948
+agu	Awakateko	9,582	1,384	660	34	11,660	1423	1560	139	3122
+caa	Ch'orti’	15,275	1,139	34	5	16,453	538	803	13	1354
+agu	Chalchiteko	19,967	1,268	253	25	21,513	3636	1008	28	4672
+cac	Chuj	52,407	1,180	352	19	53,958	8413	2528	104	11045
+itz	Itza’	367	175	72	13	627	103	77	9	189
+ixl	Ixil	105,873	4,482	1,060	25	111,440	9045	5682	99	14826
+jac	Jakalteko/Popti’	30,788	7,979	403	18	39,188	4993	5218	62	10273
+quc	K’iche’	981,525	91,622	4,728	236	1,078,111	58668	39044	1049	98761
+cak	Kaqchikel	392,534	89,240	4,045	244	486,063	15167	21331	1435	37933
+mam	Mam	539,519	30,725	1,077	98	571,419	47771	16461	237	64469
+mop	Mopan	1,916	190	75	4	2,185	305	169	15	489
+poc	Poqomam	10,367	3,565	356	30	14,318	947	1045	107	2099
+poh	Poqomchi’	122,718	17,268	4,351	100	144,437	5292	3820	619	9731
+kjb	Q’anjob’al	150,564	6,655	944	61	158,224	24830	8312	186	33328
+kek	Q’eqchi’	1,024,587	67,075	9,101	212	1,100,975	310621	92146	945	403712
+quv	Sakapulteko	6,339	1,538	144	7	8,028	354	709	47	1110
+qum	Sipakapense	3,965	1,278	47	-	5,290	135	255	12	402
+ttc	Tektiteko	2,816	1,080	73	10	3,979	1640	613	32	2285
+tzj	Tz'utujil	69,249	7,218	502	78	77,047	7611	3857	135	11603
+usp	Uspanteko	4,732	1,045	236	24	6,037	1349	360	50	1759
+	Otro idiomas									
+xin	Xinka	2,550	756	96	7	3,409	2087	378	56	2521
+cab	Garifuna	2,668	1,341	136	6	4,151	1240	779	72	2091
+spa	Español	8,766,476	2,232,202	27,471	681	11,026,830	9651231	425937	3485	10080653
+eng	#Inglés	7,382	373,126	12,578	303	393,389	17560	199721	5151	222432
+gsm	Señas	2,094	1,131	279	27	3,531	712	362	99	1173
+mis	Otro idioma	24,356	11,126	18,816	262	54,560	8608	7570	11623	27801
+zxx	No habla	11,979	-	-	-	11,979				

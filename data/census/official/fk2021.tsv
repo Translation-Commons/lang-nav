@@ -1,0 +1,81 @@
+#codeDisplay		fk2021.noneng	fk2021.engl1	fk2021.engl2	fk2021.eng
+#nameDisplay		Falkland Islands 2021 Non-English	Falkland Islands 2021 English L1	Falkland Islands 2021 English L2	Falkland Islands 2021 English
+#isoRegionCode	FK				
+#yearCollected	2021				
+#languageUse	Speaks				
+#acquisitionOrder			L1	L2	Any
+#proficiency				Very Well & Well	
+#domain		Home			
+#population	3142				
+#age	5+				
+#nationality	resident and present				
+#languagesIncluded		Non-English	English	English	English
+#sampleRate	1				
+#responsesPerIndividual	1				
+#collectorType	Government				
+#collectorNameShort	FK Gov				
+#url	https://www.falklands.gov.fk/policy/2021-census/census				
+#dateAccessed	2026-08-20				
+#documentName	2021 Census Tables				
+#tableName		Table 5c: Population by language other than English spoken in the home, by location	Table 5d: English as a first language	Table 5b: Proficiency of spoken English as non-primary language by 5-year age group	
+#notes					Data summed from other tables
+Language Code	Language	Population	Population	Population	Population
+eng	#First language is English		2,562		2,562
+eng	#Table 5b: Proficiency of spoken English as non-primary language by 5-year age group: Very Well			263	263
+eng	#Table 5b: Proficiency of spoken English as non-primary language by 5-year age group: Well			248	248
+mul	#First language is other than English		580		
+afr	Afrikaans	41			
+afr/nld	#Afrikaans/Dutch	2			
+sqi	Albanian	4			
+hbs/bos	Bosnian	2			
+spa	Castilian	5			
+zho	Chinese	1			
+hbs/hrv/spa	#Croatian/Spanish	1			
+dan/nor	#Danish/Norwegian/German/Spanish	1			
+ara	#English/Arabic	1			
+fil	#Filipino languages/dialects	145			
+fra	French	11			
+fra/ara	#French/Arabic	1			
+fra/rus/spa	#French/Russian/Spanish	1			
+fra/cym	#French/Welsh	1			
+deu	German	7			
+deu/swe/fra/spa	#German/Swedish/French/Spanish	1			
+guj	Gujrati	1			
+hin	Hindi	3			
+hin/kok	#Hindi/Konkani	1			
+hin/nep/npi	#Hindi/Nepalese	1			
+msa/ind	Indonesian	1			
+ita	Italian	6			
+swa	Kiswahili	1			
+kok	Konkani	3			
+lit	Lithuanian	2			
+lug	Luganda	1			
+nde/sna	#Ndebele/Shona	1			
+nep/npi	Nepalese	2			
+her	Otjiherero	1			
+#spa/sai?	Peruvian	4			
+pol	Polish	1			
+pol/ita	#Polish/Italian	1			
+por	Portuguese	7			
+lah/pan	Punjabi	1			
+ron	Romanian	1			
+ron/fra	#Romanian/French	1			
+rus	Russian	3			
+gla	Scots Gaelic	1			
+sna	Shona	51			
+sna/afr/zul	#Shona/Afrikaans/Zulu	1			
+sna/nde	#Shona/Ndebele	1			
+sna/zul	#Shona/Zulu	1			
+sin	Singhalease	1			
+spa	Spanish	287			
+spa/eus	#Spanish/Basque	1			
+spa/fil	#Spanish/Filipino	1			
+spa/deu	#Spanish/German	3			
+spa/ita/ell	#Spanish/Italian/Greek	1			
+spa/lat	#Spanish/Latin	1			
+spa/por	#Spanish/Portuguese	4			
+swa	Swahili	4			
+tha	Thai	3			
+ukr	Ukrainian	2			
+urd	Urdu	6			
+cym	Welsh	3			
