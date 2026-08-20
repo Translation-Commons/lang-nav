@@ -4,7 +4,10 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
+import {
+  LanguageISOStatus,
+  VitalityEthnologueFine,
+} from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -62,7 +65,7 @@ describe('FilterBreakdown', () => {
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
       languageFamilyFilter: 'ine', // Indo-European family
-      vitalityEthFine: [VitalityEthnologueFine.National], // filters out fra
+      isoStatus: [LanguageISOStatus.Living], // filters out fra
       searchString: 'spa',
     });
 

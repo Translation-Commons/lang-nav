@@ -19,11 +19,8 @@ import TableColumn from '../TableColumn';
 import TableID from '../TableID';
 
 vi.mock('@features/transforms/filtering/filter', () => ({
-  getFilterByVitality: vi.fn(),
-  getScopeFilter: vi.fn(),
-  getFilterByLanguageScope: vi.fn(),
-  getFilterByModality: vi.fn(),
-  getFilterByTerritoryScope: vi.fn(),
+  useFilterByVitality: vi.fn(),
+  useScopeFilter: vi.fn(),
 }));
 
 vi.mock('@features/transforms/filtering/filterByConnections', () => ({
@@ -90,8 +87,8 @@ describe('InteractiveEntityTable', () => {
     // Set up default mock implementations
     vi.mocked(getFilterBySubstring).mockReturnValue(() => true);
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(() => true);
-    vi.mocked(FilterModule.getScopeFilter).mockReturnValue(() => true);
+    vi.mocked(FilterModule.useFilterByVitality).mockReturnValue(() => true);
+    vi.mocked(FilterModule.useScopeFilter).mockReturnValue(() => true);
     vi.mocked(SortModule.getSortFunction).mockReturnValue(() => 0);
     vi.mocked(usePageParams).mockReturnValue(createMockUsePageParams({ sortBy: Field.Name }));
   });
@@ -155,8 +152,8 @@ describe('InteractiveEntityTable', () => {
 
     vi.mocked(getFilterBySubstring).mockReturnValue(mockSubstringFilter);
     vi.mocked(ConnectionFilters.getFilterByConnections).mockReturnValue(mockConnectionsFilter);
-    vi.mocked(FilterModule.getFilterByVitality).mockReturnValue(mockVitalityFilter);
-    vi.mocked(FilterModule.getScopeFilter).mockReturnValue(mockScopeFilter);
+    vi.mocked(FilterModule.useFilterByVitality).mockReturnValue(mockVitalityFilter);
+    vi.mocked(FilterModule.useScopeFilter).mockReturnValue(mockScopeFilter);
 
     renderEntityTable();
 

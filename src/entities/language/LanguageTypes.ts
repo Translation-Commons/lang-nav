@@ -136,6 +136,7 @@ export interface LanguageData extends ObjectBase {
   googleTranslate?: PlatformSupportData[];
   win11LanguagePacks?: PlatformSupportData[];
   ios?: PlatformSupportData[];
+  macos?: PlatformSupportData[];
 
   latitude?: number;
   longitude?: number;

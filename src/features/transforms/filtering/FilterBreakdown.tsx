@@ -10,7 +10,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
-import { getFilterByVitality } from './filter';
+import { useFilterByVitality } from './filter';
 import { getFilterLabels } from './FilterLabels';
 import useFilters from './useFilters';
 
@@ -26,7 +26,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const { updatePageParams, searchString } = usePageParams();
   const filterBy = useFilters();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
-  const filterByVitality = getFilterByVitality();
+  const filterByVitality = useFilterByVitality();
   const filterLabels = getFilterLabels();
   const filterByPopulation = filterBy.Population;
 

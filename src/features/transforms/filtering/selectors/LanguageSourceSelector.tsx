@@ -1,13 +1,11 @@
 import React from 'react';
 
 import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
 import LanguageSourceDescription from '@entities/language/LanguageSourceDescription';
 import { LanguageSource } from '@entities/language/LanguageTypes';
-
-type Props = { display: SelectorDisplay };
 
 const values = [
   LanguageSource.Combined,
@@ -17,12 +15,13 @@ const values = [
   LanguageSource.CLDR,
 ];
 
-const LanguageSourceSelector: React.FC<Props> = ({ display }) => {
+const LanguageSourceSelector: React.FC = () => {
   const { languageSource, updatePageParams } = usePageParams();
+  const { display } = useSelectorDisplay();
 
   return (
     <Selector
-      selectorLabel={display !== SelectorDisplay.InlineDropdown ? 'Language Authority' : undefined}
+      selectorLabel={display === SelectorDisplay.FilterList ? 'Language Authority' : undefined}
       selectorDescription={<LanguageSourceSelectorDescription />}
       options={values}
       onChange={(languageSource: LanguageSource) => updatePageParams({ languageSource })}

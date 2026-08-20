@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 import { LangNavPageName } from '@app/PageRoutes';
 
 import ReportID from '@widgets/reports/ReportID';
@@ -8,7 +10,7 @@ import { ObjectType, View } from '@features/params/PageParamTypes';
 
 import useAreParamsCurrent from './useAreParamsCurrent';
 
-const TOOLS = [
+const NOTABLE_REPORTS = [
   {
     label: 'Census Validation',
     params: {
@@ -29,6 +31,7 @@ const TOOLS = [
 
 const NavBarToolsMenu: React.FC = () => {
   const areParamsCurrent = useAreParamsCurrent();
+  const location = useLocation();
 
   return (
     <PopupCard
@@ -39,7 +42,14 @@ const NavBarToolsMenu: React.FC = () => {
       justifyCard="left"
       body={
         <div className="flex flex-col gap-2 text-lg">
-          {TOOLS.map((tool) => (
+          <InternalLink
+            page={LangNavPageName.Decoder}
+            className={'text-nowrap' + (location.pathname === '/decoder' ? ' font-bold' : '')}
+            params={{ objectType: ObjectType.Language }}
+          >
+            Language Decoder
+          </InternalLink>
+          {NOTABLE_REPORTS.map((tool) => (
             <InternalLink
               key={tool.label}
               page={LangNavPageName.Data}

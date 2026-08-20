@@ -3,14 +3,11 @@ import React from 'react';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
-import { getLocaleTreeNodes } from '@widgets/treelists/LocaleHierarchy';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import usePageParams from '@features/params/usePageParams';
-import Field from '@features/transforms/fields/Field';
-import useFilters from '@features/transforms/filtering/useFilters';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListRoot from '@features/treelist/TreeListRoot';
@@ -24,7 +21,6 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { languageSource } = usePageParams();
   const { getCLDRLanguage } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = useFilters()[Field.TerritoryScope];
   const { childLanguages, ISO, Glottolog, variants, equivalentVariant } = lang;
   const relatedLanguages = (lang.CLDR.languageMatch ?? [])
     .map((match) => ({
@@ -84,20 +80,6 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             <HoverableObjectName key={l.ID} object={l} />
           ))}
           emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
-        />
-      </DetailsField>
-      <DetailsField title="Locales">
-        <TreeOrList
-          treeNodes={
-            lang.locales.length > 0 ? getLocaleTreeNodes([lang], sortFunction, filterByScope) : []
-          }
-          listNodes={(lang.locales ?? [])
-            .filter(filterByScope)
-            .sort(sortFunction)
-            .map((v) => (
-              <HoverableObjectName key={v.ID} object={v} />
-            ))}
-          emptyMessage="No locales available for this language."
         />
       </DetailsField>
     </DetailsSection>

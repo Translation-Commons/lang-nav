@@ -3,7 +3,10 @@ import { describe, expect, it } from 'vitest';
 import { ObjectType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-import { VitalityEthnologueFine } from '@entities/language/vitality/VitalityTypes';
+import {
+  LanguageISOStatus,
+  VitalityEthnologueFine,
+} from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
@@ -62,18 +65,18 @@ export function getMockLanguages() {
   eng.locales = [mul_US];
   eng.writingSystems = { Latn };
   eng.primaryWritingSystem = Latn;
-  eng.vitality = { ethFine: VitalityEthnologueFine.National };
+  eng.vitality = { iso: LanguageISOStatus.Living };
   eng.parentLanguage = gem;
   const spa = getBaseLanguageData('spa', 'Spanish');
   spa.scope = LanguageScope.Language;
   spa.locales = [mul_US];
-  spa.vitality = { ethFine: VitalityEthnologueFine.National };
+  spa.vitality = { iso: LanguageISOStatus.Living };
   spa.writingSystems = { Latn };
   spa.parentLanguage = ine;
   const fra = getBaseLanguageData('fra', 'French');
   fra.scope = LanguageScope.Language;
   fra.locales = [mul_US];
-  fra.vitality = { ethFine: VitalityEthnologueFine.Regional };
+  fra.vitality = { iso: LanguageISOStatus.Historical };
   fra.writingSystems = { Latn };
   fra.parentLanguage = ine;
   const deu = getBaseLanguageData('deu', 'German');

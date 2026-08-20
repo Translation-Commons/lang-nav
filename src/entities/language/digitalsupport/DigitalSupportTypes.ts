@@ -45,4 +45,5 @@ export type PlatformSupportData = {
   name: string;
   locale?: string;
   writingSystem?: string;
+  notes?: string;
 };

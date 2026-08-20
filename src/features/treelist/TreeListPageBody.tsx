@@ -3,7 +3,7 @@ import React, { useCallback, useMemo } from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import LimitSelector from '@features/pagination/LimitSelector';
 import usePageParams from '@features/params/usePageParams';
-import { getFilterByVitality } from '@features/transforms/filtering/filter';
+import { useFilterByVitality } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
@@ -34,7 +34,7 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
   } = usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
-  const filterByVitality = getFilterByVitality();
+  const filterByVitality = useFilterByVitality();
   const filterActive = useMemo(
     () =>
       searchString ||

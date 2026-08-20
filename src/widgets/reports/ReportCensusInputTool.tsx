@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 
+import CensusLanguageCheck from '@widgets/decoder/CensusLanguageCheck';
+
 import { useDataContext } from '@features/data/context/useDataContext';
 import { parseCensusImport } from '@features/data/load/extra_entities/loadCensusData';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
-import CensusLanguageCheck from '@entities/census/CensusLanguageCheck';
 import CensusPreview from '@entities/census/CensusPreview';
 import { CensusData } from '@entities/census/CensusTypes';
 
@@ -13,10 +14,19 @@ import { countOccurrences } from '@shared/lib/setUtils';
 
 const ReportCensusInputTool: React.FC = () => {
   const { getTerritory, getOrganization } = useDataContext();
-  const [tsv, setTSV] = useState('');
+  const [tsv, setTSV] = useState(''); // Debounced input from the user, used for analysis
+  const [input, setInput] = useState(''); // The raw input from the user
   const [censuses, setCensuses] = useState<CensusData[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [warnings, setWarnings] = useState<string[]>([]);
+
+  // Synchronize the raw input with the debounced TSV input
+  useEffect(() => {
+    const handler = setTimeout(() => setTSV(input), 1000);
+    return () => clearTimeout(handler);
+  }, [input]);
+
+  // Update the analysis
   useEffect(() => {
     try {
       const { censuses, warnings } = parseCensusImport(tsv, '');
@@ -58,14 +68,14 @@ const ReportCensusInputTool: React.FC = () => {
 
   return (
     <div>
-      <h2>TSV file</h2>
+      <h3>TSV File</h3>
       <div>
         Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can
         edit changes inline to test them out.
       </div>
       <textarea
         className="border border-gray-300 rounded p-2"
-        onChange={(e) => setTSV(e.target.value)}
+        onChange={(e) => setInput(e.target.value)}
         style={{ width: '100%', minHeight: '10em', marginTop: '1em' }}
       />
       <h3>Analysis</h3>
@@ -79,8 +89,10 @@ const ReportCensusInputTool: React.FC = () => {
               </div>
             ))
           : 'No issues found.')}
-      <h4>Language Codes & Language Names</h4>
-      <CensusLanguageCheck fileInput={tsv} />
+      <span className="font-bold">Language Codes & Language Names</span>
+      <ContainErrorsAndSuspense>
+        <CensusLanguageCheck fileInput={tsv} />
+      </ContainErrorsAndSuspense>
       <LocalParamsProvider overrides={{ page: 1, limit: 1 }}>
         <ContainErrorsAndSuspense>
           <CensusPreview censuses={censuses} />

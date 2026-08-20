@@ -15,6 +15,7 @@ import { loadIos } from './supplemental/loadIos';
 import { loadLandArea } from './supplemental/loadLandArea';
 import { loadLangTags } from './supplemental/loadLangTags';
 import { loadLanguageNamesFrench } from './supplemental/loadLanguageNamesFrench';
+import { loadMacos } from './supplemental/loadMacos';
 import { loadTerritoryGDPLiteracy } from './supplemental/loadTerritoryGDPLiteracy';
 import { loadTerritoryNames } from './supplemental/loadTerritoryNames';
 import { loadUDHR } from './supplemental/loadUDHR';
@@ -58,6 +59,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     loadECRML(dataContext.getLanguage),
     loadGoogleTranslate(dataContext.getLanguage),
     loadIos(dataContext.getLanguage),
+    loadMacos(dataContext.getLanguage),
     loadUDHR(dataContext.getLanguage),
     loadVariantAnnotations(dataContext.getVariant, dataContext.getLanguage),
     loadWin11LanguagePacks(dataContext.getLanguage),

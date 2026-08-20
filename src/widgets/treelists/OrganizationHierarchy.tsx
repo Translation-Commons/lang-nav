@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { ObjectType } from '@features/params/PageParamTypes';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { useScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
@@ -13,7 +13,7 @@ import { ObjectData } from '@entities/types/DataTypes';
 export const OrganizationHierarchy: React.FC = () => {
   const { organizations } = useDataContext();
   const sortFunction = getSortFunction();
-  const filterByScope = getScopeFilter();
+  const filterByScope = useScopeFilter();
 
   const rootNodes = getOrganizationTreeNodes(
     organizations.filter((org) => org.parent == null),

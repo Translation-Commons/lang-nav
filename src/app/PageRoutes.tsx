@@ -1,6 +1,7 @@
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
 
 import DataPage from '@pages/DataPage';
+import DecoderPage from '@pages/DecoderPage';
 import AboutPage from '@pages/docs/AboutPage';
 import CodeStylePage from '@pages/docs/CodeStylePage';
 import DataCoveragePage from '@pages/docs/DataCoveragePage';
@@ -29,6 +30,7 @@ export default function PageRoutes() {
         <Route path={LangNavPageName.CodeStyle} element={<CodeStylePage />} />
         <Route path={LangNavPageName.DataCoverage} element={<DataCoveragePage />} />
         <Route path={LangNavPageName.DataSources} element={<DataSourcesPage />} />
+        <Route path={LangNavPageName.Decoder} element={<DecoderPage />} />
       </Routes>
     </>
   );
@@ -56,6 +58,7 @@ export enum LangNavPageName {
   Intro = 'intro',
   Data = 'data',
   Lucky = 'lucky',
+  Decoder = 'decoder',
 
   About = 'about',
   Team = 'team',

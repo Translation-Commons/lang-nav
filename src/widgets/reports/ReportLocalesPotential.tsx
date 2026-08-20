@@ -10,7 +10,7 @@ import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
-import { getScopeFilter } from '@features/transforms/filtering/filter';
+import { useScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
@@ -126,7 +126,7 @@ const SubReport: React.FC<{
   locales: LocaleData[];
   title: string;
 }> = ({ title, children, locales }) => {
-  const filterByScope = getScopeFilter();
+  const filterByScope = useScopeFilter();
   const sortFunction = getSortFunction();
   const { limit, page } = usePageParams();
   const exportLocales = locales

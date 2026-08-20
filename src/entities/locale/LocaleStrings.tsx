@@ -1,6 +1,10 @@
 import { ECRMLProtectionLevel, LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
 
-export function getLocaleName(locale: LocaleData, includeTerritory: boolean = true): string {
+export function getLocaleName(
+  locale: LocaleData,
+  includeTerritory: boolean = true,
+  includeLanguage: boolean = true,
+): string {
   const languageName = locale.language?.nameDisplay ?? locale.languageCode;
   const territoryName = includeTerritory
     ? (locale.territory?.nameDisplay ?? locale.territoryCode)
@@ -10,6 +14,7 @@ export function getLocaleName(locale: LocaleData, includeTerritory: boolean = tr
     locale.variants?.map((tag) => tag.nameDisplay).join(', ') ?? locale.variantCodes?.join(', ');
   const extraBits = [territoryName, scriptName, variantNames].filter(Boolean).join(', ');
 
+  if (!includeLanguage) return extraBits;
   return extraBits ? languageName + ' (' + extraBits + ')' : languageName;
 }
 

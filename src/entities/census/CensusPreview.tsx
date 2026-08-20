@@ -17,7 +17,7 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
   const { page } = usePageParams();
   return (
     <>
-      <h2>Census Preview</h2>
+      <h3>Census Preview</h3>
       <div>
         Please check over this data to make sure it makes sense. Check that the metadata makes
         sense. Check the population numbers, percent in territory, language names, language codes.
@@ -36,9 +36,9 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
         {censuses.length > 0 && page <= censuses.length && censuses[page - 1] ? (
           <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
             <ContainErrorsAndSuspense>
-              <h2>
+              <h3>
                 <ObjectTitle object={censuses[page - 1]} highlightSearchMatches={false} />
-              </h2>
+              </h3>
               <CensusDetails census={censuses[page - 1]} />
             </ContainErrorsAndSuspense>
           </LocalParamsProvider>

@@ -8,7 +8,10 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { ObjectType, PageParams, View } from '@features/params/PageParamTypes';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
+import {
+  SelectorDisplay,
+  SelectorDisplayProvider,
+} from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import LanguageScopeSelector from '@features/transforms/filtering/selectors/LanguageScopeSelector';
@@ -132,7 +135,9 @@ function Maps({ lang, updatePageParams }: MapsProps) {
         <EntityMap entities={showConstituents ? drawableNodes : [lang]} maxWidth={1000} />
       </div>
       {showConstituents && drawableNodes.length > 1 && (
-        <LanguageScopeSelector display={SelectorDisplay.Dropdown} />
+        <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
+          <LanguageScopeSelector />
+        </SelectorDisplayProvider>
       )}
     </>
   );

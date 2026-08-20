@@ -14,6 +14,7 @@ type Props = {
     | 'code'
     | 'territory'
     | 'language'
+    | 'locale without language'
     | 'locale without territory'
     | 'name and code';
   format?: 'text' | 'button';
@@ -38,7 +39,9 @@ const HoverableObjectName: React.FC<Props> = ({
     } else if (labelSource == 'territory') {
       label = object.territory?.nameDisplay ?? object.territoryCode ?? '[no territory]';
     } else if (labelSource == 'locale without territory') {
-      label = getLocaleName(object, false /* withTerritory */);
+      label = getLocaleName(object, false /* includeTerritory */);
+    } else if (labelSource == 'locale without language') {
+      label = getLocaleName(object, true, false /* includeLanguage */);
     }
   }
 
