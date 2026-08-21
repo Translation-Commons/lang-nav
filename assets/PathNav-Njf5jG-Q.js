@@ -1,1 +1,0 @@
-import{r as e,ab as s,C as t}from"./index-CH_orwmk.js";const l=({children:r,style:a})=>e.jsx("div",{style:{display:"flex",alignItems:"center",gap:"0.5em",flexWrap:"wrap",...a},children:e.jsx(s,{display:t.InlineDropdown,children:r})});export{l as P};
