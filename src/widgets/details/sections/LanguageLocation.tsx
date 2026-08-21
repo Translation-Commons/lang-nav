@@ -19,8 +19,8 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 
+import { Badge } from '@shared/ui/badge';
 import Deemphasized from '@shared/ui/Deemphasized';
-import Pill from '@shared/ui/Pill';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
@@ -35,7 +35,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         {lang.latitude != null && lang.longitude != null ? (
           <>
             {lang.latitude.toFixed(4)}°, {lang.longitude.toFixed(4)}°{' '}
-            {lang.coordsSource && <Pill>{lang.coordsSource}</Pill>}
+            {lang.coordsSource && <Badge variant="secondary">{lang.coordsSource}</Badge>}
             {lang.coordsSource === LanguageSource.Glottolog && (
               <>
                 {' '}

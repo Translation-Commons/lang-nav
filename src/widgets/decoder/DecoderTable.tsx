@@ -9,7 +9,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
-import LoadingIcon from '@shared/ui/LoadingIcon';
+import { Spinner } from '@shared/ui/spinner';
 
 import { useDecoderDataContext } from './DecoderDataContext';
 import { DecoderDirection, useDecoderOptionsContext } from './options/DecoderOptionsContext';
@@ -88,12 +88,8 @@ const ResultRow: React.FC<{ input: string }> = ({ input }) => {
       <td className="px-1">
         {(includeMacroCodes ? codeWithMacro : undefined) ?? lang?.codeDisplay}
       </td>
-      <td className="px-1 relative">
-        {isSearchActive && (
-          <div className="absolute right-0 top-0 mr-1 mt-1">
-            <LoadingIcon />
-          </div>
-        )}
+      <td className="px-1">
+        {isSearchActive && <Spinner aria-hidden="true" className="inline size-[1em]" />}
         {lang ? (
           <LanguageLabel lang={lang} input={input} />
         ) : (
