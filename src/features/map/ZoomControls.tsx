@@ -1,8 +1,12 @@
-import { Maximize2Icon, ZoomInIcon, ZoomOutIcon } from 'lucide-react';
+import { Maximize2Icon, ZoomInIcon, ZoomOutIcon, Settings2 } from 'lucide-react';
 import React from 'react';
 
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
+import PopupCard from '@features/layers/popupcard/PopupCard';
 import ZIndex from '@features/layers/ZIndex';
+import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
+import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
+import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 
 type Props = {
   zoomIn: () => void;
@@ -23,6 +27,20 @@ const ZoomControls: React.FC<Props> = ({
       <HoverableIcon onClick={zoomIn} description="Zoom in" Icon={ZoomInIcon} />
       <HoverableIcon onClick={zoomOut} description="Zoom out" Icon={ZoomOutIcon} />
       <HoverableIcon onClick={resetTransform} description="Reset" Icon={Maximize2Icon} />
+      <PopupCard
+        buttonLabel={<Settings2 style={{ display: 'block' }} />}
+        buttonStyle={{ padding: '0.5em' }}
+        description="Map Display Options"
+        body={
+          <div
+            style={{ display: 'flex', flexDirection: 'column', gap: '0.5em', width: 'max-content' }}
+          >
+            <ColorBySelector />
+            <ColorGradientSelector />
+            <ScaleBySelector />
+          </div>
+        }
+      />
     </div>
   );
 };

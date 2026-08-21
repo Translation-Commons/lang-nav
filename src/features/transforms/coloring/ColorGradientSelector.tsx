@@ -24,7 +24,7 @@ const ColorGradientSelector: React.FC = () => {
 
   return (
     <Selector<ColorGradient>
-      selectorLabel={display === SelectorDisplay.Dropdown ? 'Color gradient' : undefined}
+      selectorLabel={display === SelectorDisplay.Dropdown ? 'Color Gradient' : undefined}
       selectorDescription="Choose the range of colors used to represent values."
       options={Object.values(ColorGradient).filter((cg) => typeof cg === 'number')}
       onChange={(colorGradient) => updatePageParams({ colorGradient })}
