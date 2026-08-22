@@ -16,7 +16,7 @@ const SortPopupCard: React.FC = () => {
     <Popover>
       <PopoverTrigger
         render={
-          <Button className="py-4 max-w-60 rounded-xl flex items-center text-lg gap-2">
+          <Button className="py-4 max-w-60 rounded-xl flex items-center text-lg gap-2 cursor-pointer">
             <ArrowDownUpIcon />
             <div className="truncate text-ellipsis">{sortBy}</div>
           </Button>
