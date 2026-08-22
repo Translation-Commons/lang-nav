@@ -191,7 +191,7 @@ eng_ZA	English (South Africa)	English	Other	10,000,000	official
 zha_CN	Zhuang (China)	Vahcuengh	Other	10,000,000	official_regional
 arb_MA	Arabic, Standard (Morocco)	العربية الفصحى	Other	10,000,000	
 nso_ZA	Northern Sotho (South Africa)	Sesotho sa Leboa	Other	10,000,000	official_regional
-zlm_MY	Malay (individual language) (Malaysia)		Other	10,000,000	
+zsm_MY	Malay (Malaysia)	bahasa Melayu Standard	Other	10,000,000	
 ctg_BD	Chittagonian (Bangladesh)	চাঁটগাঁইয়া	Other	10,000,000	
 wes_CM	Cameroon Pidgin (Cameroon)		Other	10,000,000	
 tsn_ZA	Tswana (South Africa)	Setswana	Other	10,000,000	official_regional
@@ -701,7 +701,8 @@ tso_ZA	Tsonga (South Africa)	Xitsonga	Other	1,000,000	official_regional
 gpe_GH	Ghanaian Pidgin English (Ghana)		Other	1,000,000	
 kab_DZ	Kabyle (Algeria)	Taqbaylit	Other	1,000,000	
 ktu_CD	Kituba (Democratic Republic of Congo) (Congo - Kinshasa)		Other	1,000,000	
-zlm_ID	Malay (Indonesia)		Other	1,000,000	
+zsm_ID	Standard Malay (Indonesia)		Other	1,000,000	
+zlm_ID	Riau Malay (Indonesia)		Other	1,000,000	
 czh_CN	Chinese, Huizhou (China)	徽州话	Other	1,000,000	
 mey_DZ	Arabic, Hassaniyya (Algeria)		Other	1,000,000	
 tzm_MA	Central Atlas Tamazight (Morocco)	ⵜⴰⵎⴰⵣⵉⵖⵜ	Other	1,000,000	official
@@ -4510,7 +4511,7 @@ bee_NP	Byansi (Nepal)		Official	2,935
 cjs_RU	Shor (Russia)	Шор	Official	2,927	
 muk_NP	Mugali (Nepal)		Official	2,914	
 msa_TH	Malay (Thailand)		Official	2,913	
-zlm_TH	Malay (Thailand)		Official	2,913	
+zsm_TH	Malay (Thailand)		Official	2,913	
 tix_US	Southern Tiwa (United States)		Official	2,888	
 tly_RU	Talysh (Russia)	تؤلشه زوؤن	Official	2,888	
 tur_PL	Turkish (Poland)	Türkçe	Unverified Official	2,883	
@@ -10151,7 +10152,7 @@ znk_AU	Manangkari (Australia)
 zra_KR	Kara (Korea) (South Korea)				
 zrp_FR	Zarphatic (France)				
 zsk_TR	Kaskean (Turkey)				
-zsm_MY	Standard Malay (Malaysia)	bahasa Melayu Standard			
+zlm_MY	Riau Malay (Malaysia)				
 zua_NG	Zeem (Nigeria)				
 zxx_001	No linguistic content (World)	no linguistic content			
 gon_Telu_IN	Gondi (Telugu script, India)				
@@ -10475,7 +10476,8 @@ cou_GN	Wamey (Guinea)		Official	18879
 knk_GN	Kuranko (Guinea)		Official	179350	
 aym_CL	Aymara (Chile)		Official	178637	
 cmn_SG	Mandarin Chinese (Singapore)		Official	1211505	
-zlm_SG	Malay (Singapore)		Official	550485	
+zsm_SG	Malay (Singapore)		Official	550485	
+zlm_SG	Malay (Singapore)				
 nan_SG	Min Nan Chinese (Singapore)		Official	333145	
 yue_SG	Cantonese (Singapore)		Official	121136	
 snk_GN	Soninke (Guinea)		Official	18879	
@@ -10521,7 +10523,7 @@ iku_GL	Inuktitut (Greenland)			54800
 zho_CX	Chinese languages (Christmas Island)			1032	
 cmn_CX	Mandarin Chinese (Christmas Island)			1032	
 msa_CX	Malayic (Christmas Island)			396	
-zlm_CX	Common Malay (Christmas Island)			378	
+zsm_CX	Malay (Christmas Island)			378	
 sma_NO	Southern Sami (Norway)			300	
 sje_NO	Pite Sami (Norway)			0	
 smj_NO	Lule Sami (Norway)			500	
