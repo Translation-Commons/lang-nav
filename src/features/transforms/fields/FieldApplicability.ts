@@ -12,8 +12,6 @@ const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Popula
 
 // Fields that are in development and not yet available for use in transforms but there may be placeholder values
 export const FIELDS_IN_DEVELOPMENT: Field[] = [
-  Field.VitalityEthnologueCoarse,
-  Field.VitalityEthnologueFine,
   Field.SourceType,
   Field.Indigeneity,
   Field.CLDRCoverage,
@@ -72,8 +70,6 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.VitalityMetascore, // not particularly useful
         Field.ISOStatus,
-        Field.VitalityEthnologueCoarse,
-        Field.VitalityEthnologueFine,
 
         Field.PopulationDirectlySourced,
         Field.PopulationSpeaking,
@@ -144,8 +140,6 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
 
         Field.VitalityMetascore,
         Field.ISOStatus,
-        Field.VitalityEthnologueFine,
-        Field.VitalityEthnologueCoarse,
 
         Field.Language, // Equivalent to DisplayName for languages
         Field.LanguageFamily,
@@ -308,8 +302,6 @@ function getFieldsForTransform(transform: Transform): Field[] {
 
         Field.VitalityMetascore,
         Field.ISOStatus,
-        Field.VitalityEthnologueFine,
-        Field.VitalityEthnologueCoarse,
 
         Field.Indigeneity,
         Field.LanguageFormedHere,
@@ -377,8 +369,6 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.LanguageScope,
         Field.TerritoryScope,
         Field.ISOStatus,
-        Field.VitalityEthnologueFine,
-        Field.VitalityEthnologueCoarse,
         Field.Name, // Technically filters name and code right now, depending on SearchBy
         Field.Population,
       ];

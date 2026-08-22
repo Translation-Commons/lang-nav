@@ -57,7 +57,7 @@ describe('useFilteredEntities', () => {
       'deu',
       'ita',
       'rus',
-      'nav',
+      'epo',
       'zho',
     ]);
   });
@@ -80,7 +80,7 @@ describe('useFilteredEntities', () => {
   it('filters by territory', () => {
     setupMockParams({ territoryFilter: 'US' });
     const { filteredEntities } = getHookResult({});
-    expect(filteredEntities.map((ent) => ent.ID)).toEqual(['eng', 'spa', 'fra', 'rus', 'nav']);
+    expect(filteredEntities.map((ent) => ent.ID)).toEqual(['eng', 'spa', 'fra', 'rus', 'epo']);
   });
 
   it('allows composite filters (territory + vitality)', () => {
@@ -106,7 +106,7 @@ describe('useFilteredEntities', () => {
       'deu',
       'ita',
       'rus',
-      'nav',
+      'epo',
       'zho',
     ]);
   });
@@ -123,7 +123,7 @@ describe('useFilteredEntities', () => {
       'deu',
       'ita',
       'rus',
-      'nav',
+      'epo',
       'zho',
     ]);
   });
@@ -134,11 +134,11 @@ describe('useFilteredEntities', () => {
     expect(filteredEntities.map((ent) => ent.ID)).toEqual([
       'spa', // Spanish
       'rus', // Russian
-      'nav', // Navajo
       'ita', // Italian
       'deu', // German
       // 'ine', // Indo-European not included since its filtered out as family
       'fra', // French
+      'epo', // Esperanto
       'eng', // English
       'zho', // Chinese
     ]);

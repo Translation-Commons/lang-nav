@@ -23,11 +23,7 @@ import {
   WikipediaData,
 } from './digitalsupport/DigitalSupportTypes';
 import { LanguageModality } from './LanguageModality';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from './vitality/VitalityTypes';
+import { LanguageISOStatus } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
@@ -37,7 +33,6 @@ export enum LanguageSource {
   ISO = 'ISO', // ISO 639-3, 639-5
   BCP = 'BCP', // ISO but preferring 639-1 codes
   UNESCO = 'UNESCO', //  limiting to languages in the UNESCO World Atlas of Languages
-  Ethnologue = 'Ethnologue', // limiting to languages present in Ethnologue, a subset of ISO
   Glottolog = 'Glottolog',
   CLDR = 'CLDR', // ISO but with some CLDR-specific aliasing
 }
@@ -72,23 +67,7 @@ export enum LanguageField {
 export type LanguageVitality = {
   meta?: number; // 0-9 based on other vitality scores
   iso?: LanguageISOStatus; // Derived
-  ethFine?: VitalityEthnologueFine; // Extended Graded Intergenerational Disruption Scale, from Ethnologue or computed from other factors
-  ethCoarse?: VitalityEthnologueCoarse; // Computed from other factors
-};
-
-export enum EthnologueDigitalSupport {
-  Thriving = 5,
-  Vital = 4,
-  Ascending = 3,
-  Emerging = 2,
-  Still = 1,
-}
-
-export type EthnologueLanguageData = LanguageDataInSource & {
-  population?: number;
-  vitality2012?: VitalityEthnologueFine;
-  vitality2025?: VitalityEthnologueCoarse;
-  digitalSupport?: EthnologueDigitalSupport;
+  // potential other vitality estimates go here
 };
 
 export type LanguageSpecificPopulationData = {
@@ -169,7 +148,6 @@ export interface LanguageData extends EntityBase {
     dataProvider?: LanguageData | LocaleData;
     languageMatch?: CLDRLanguageMatchData[];
   };
-  Ethnologue: EthnologueLanguageData;
 }
 
 // Used to create a new language entity with minimal data
@@ -198,7 +176,6 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     UNESCO: {},
     Glottolog: {},
     CLDR: {},
-    Ethnologue: {},
   };
 }
 

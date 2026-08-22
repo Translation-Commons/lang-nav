@@ -28,8 +28,6 @@ enum Field {
   // Status - Vitality
   VitalityMetascore = 'Vitality: Metascore',
   ISOStatus = 'ISO Status',
-  VitalityEthnologueFine = 'Vitality: Ethnologue Fine',
-  VitalityEthnologueCoarse = 'Vitality: Ethnologue Coarse',
 
   // Relation - Objects
   Language = 'Language',

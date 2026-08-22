@@ -67,8 +67,6 @@ describe('resolveEnumValue', () => {
     expect(resolveEnumValue('modalityFilter', [-2])).toEqual(['Written']);
     // isoStatus -> LanguageISOStatus
     expect(resolveEnumValue('isoStatus', [9])).toEqual(['Living']);
-    // vitalityEthCoarse -> VitalityEthnologueCoarse
-    expect(resolveEnumValue('vitalityEthCoarse', [6])).toEqual(['Stable']);
   });
 });
 

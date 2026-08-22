@@ -9,11 +9,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 // Rename keys before sending to Amplitude (internalKey to amplitudeKey).
@@ -35,8 +31,6 @@ export const FILTER_PARAM_KEYS: ReadonlyArray<PageParamKey> = [
   PageParamKey.languageScopes,
   PageParamKey.territoryScopes,
   PageParamKey.modalityFilter,
-  PageParamKey.vitalityEthCoarse,
-  PageParamKey.vitalityEthFine,
   PageParamKey.isoStatus,
   PageParamKey.populationMin,
   PageParamKey.populationMax,
@@ -93,8 +87,6 @@ const EXCLUDED_DEFAULT_KEYS = new Set<string>([
   'modalityFilter',
   'searchString',
   'territoryFilter',
-  'vitalityEthCoarse',
-  'vitalityEthFine',
   'writingSystemFilter',
 ]);
 
@@ -104,8 +96,6 @@ const NUMERIC_ENUM_BY_KEY: Record<string, Record<number, string>> = {
   territoryScopes: TerritoryScope as unknown as Record<number, string>,
   modalityFilter: LanguageModality as unknown as Record<number, string>,
   isoStatus: LanguageISOStatus as unknown as Record<number, string>,
-  vitalityEthCoarse: VitalityEthnologueCoarse as unknown as Record<number, string>,
-  vitalityEthFine: VitalityEthnologueFine as unknown as Record<number, string>,
   sortBehavior: { 1: 'asc', [-1]: 'desc' },
   reportID: ReportID as unknown as Record<number, string>,
 };

@@ -1,6 +1,6 @@
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import { VitalityEthnologueCoarse } from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -35,8 +35,6 @@ export function getMinimumValue(field?: Field, populationMin?: number): number {
     case Field.PercentOfTerritoryPopulation:
     case Field.Literacy:
     case Field.VitalityMetascore:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
     case Field.CountOfLanguages:
     case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
@@ -102,9 +100,7 @@ export function getMaximumValue(ents: EntityData[], field?: Field): number {
       return LanguageModality.Sign;
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
-      return VitalityEthnologueCoarse.Institutional; // 9;
+      return LanguageISOStatus.Living; // 9;
     case Field.LanguageScope:
       return LanguageScope.Family; // Larger value = broader scope
     case Field.Latitude:

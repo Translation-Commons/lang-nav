@@ -87,8 +87,6 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
       return <VitalityField ent={ent} field={field} />;
 
     case Field.Modality:
@@ -139,19 +137,13 @@ const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
 
 type VitalityFieldProps = {
   ent: EntityData;
-  field:
-    | Field.VitalityMetascore
-    | Field.VitalityEthnologueFine
-    | Field.VitalityEthnologueCoarse
-    | Field.ISOStatus;
+  field: Field.VitalityMetascore | Field.ISOStatus;
 };
 
 function VitalityField({ ent, field }: VitalityFieldProps) {
   if (ent.type !== EntityType.Language) return null;
   let src = VitalitySource.Metascore;
-  if (field === Field.VitalityEthnologueFine) src = VitalitySource.Eth2012;
-  else if (field === Field.VitalityEthnologueCoarse) src = VitalitySource.Eth2025;
-  else if (field === Field.ISOStatus) src = VitalitySource.ISO;
+  if (field === Field.ISOStatus) src = VitalitySource.ISO;
   return <LanguageVitalityMeter lang={ent} src={src} />;
 }
 

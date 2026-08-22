@@ -26,7 +26,5 @@ export default function getSearchableField(
       return ent.type === EntityType.Language ? (ent.CLDR?.name ?? '') : '';
     case SearchableField.NameGlottolog:
       return ent.type === EntityType.Language ? (ent.Glottolog?.name ?? '') : '';
-    case SearchableField.NameEthnologue:
-      return ent.type === EntityType.Language ? (ent.Ethnologue?.name ?? '') : '';
   }
 }

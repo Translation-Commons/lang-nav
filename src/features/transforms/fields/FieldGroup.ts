@@ -40,8 +40,6 @@ export function getFieldGroup(field: Field): FieldGroup {
       return FieldGroup.Status; // Status - Digital Support
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
       return FieldGroup.Status; // Vitality
 
     case Field.Language:

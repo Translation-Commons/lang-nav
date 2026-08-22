@@ -111,8 +111,6 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.CountOfVariants:
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
     case Field.Area:
     case Field.LanguageScope:
     case Field.WritingSystemScope:

@@ -15,7 +15,7 @@ const DataSourcesPage: React.FC = () => {
     <DocsPageContainer title="Data Sources">
       <div>
         The data used in this application is sourced from various linguistic databases, including
-        Glottolog, Ethnologue, and CLDR. This data is meant to be as public and freely available as
+        Glottolog, LangTags and CLDR. This data is meant to be as public and freely available as
         possible so that all people can understand languages in context and make informed decisions
         about languages across the world.
       </div>
@@ -48,17 +48,6 @@ const DataSourcesPage: React.FC = () => {
           <ExternalLink href="https://doi.org/10.5281/zenodo.10804357" /> (Available online at{' '}
           <ExternalLink href="http://glottolog.org/">Glottolog</ExternalLink>, Accessed on
           2024-10-29.)
-        </DocsCard>
-        <DocsCard title="Ethnologue" href="https://www.ethnologue.com/">
-          Ethnologue is a reference work cataloging all of the world&apos;s known living languages.
-          It provides information about the number of speakers, language families, and geographical
-          distribution of languages. Ethnologue contains much more complete academic citations for
-          similar information provided by this website. <strong>Citation:</strong> Eberhard, David
-          M., Gary F. Simons, and Charles D. Fennig (eds.). 2025. Ethnologue: Languages of the
-          World. Twenty-eighth edition. Dallas, Texas: SIL International. Online version:{' '}
-          <ExternalLink href="https://www.ethnologue.com/" />. Note: Currently we have removed data
-          from Ethnologue pending clarifications on the proper way to redistribute their data if
-          any.
         </DocsCard>
         <DocsCard title="United Nations: UNESCO, UNStats, and UNData">
           <ExternalLink href="https://www.unesco.org/">

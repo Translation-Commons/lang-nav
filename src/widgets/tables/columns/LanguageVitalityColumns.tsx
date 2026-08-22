@@ -19,22 +19,6 @@ const LanguageVitalityColumns: TableColumn<LanguageData>[] = [
     field: Field.ISOStatus,
     isInitiallyVisible: true,
   },
-  // {
-  //   key: 'Vitality: Ethnologue (Fine)',
-  //   labelInColumnGroup: 'from Ethnologue (Fine)',
-  //   description:
-  //     'Vitality as scored on the Extended Graded Intergenerational Disruption Scale directly from or derived from Ethnologue in 2012',
-  //   render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Eth2012} />,
-  //   field: Field.VitalityEthnologueFine,
-  // },
-  // {
-  //   key: 'Vitality: Ethnologue (Coarse)',
-  //   labelInColumnGroup: 'from Ethnologue (Coarse)',
-  //   description:
-  //     'Vitality as scored on the Extended Graded Intergenerational Disruption Scale, grouped into coarse categories directly from or derived from Ethnologue in 2025',
-  //   render: (lang) => <LanguageVitalityCell lang={lang} src={VitalitySource.Eth2025} />,
-  //   field: Field.VitalityEthnologueCoarse,
-  // },
 ];
 
 export default LanguageVitalityColumns.map((col) => ({

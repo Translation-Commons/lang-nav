@@ -59,8 +59,6 @@ export function getFieldValueType(field?: Field): TableValueType {
 
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
     case Field.Modality:
     case Field.LanguageScope:
     case Field.WritingSystemScope:
