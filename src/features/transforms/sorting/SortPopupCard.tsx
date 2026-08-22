@@ -4,8 +4,7 @@ import React from 'react';
 import NewHoverable from '@features/layers/hovercard/NewHoverable';
 import usePageParams from '@features/params/usePageParams';
 
-import SecondarySortBySelector from './SecondarySortBySelector';
-import SortBySelector from './SortBySelector';
+import FieldDropdown from './FieldDropdown';
 import SortDirectionSelector from './SortDirectionSelector';
 
 const SortPopupCard: React.FC = () => {
@@ -14,9 +13,12 @@ const SortPopupCard: React.FC = () => {
   return (
     <NewHoverable
       hoverContent={
-        <div className="flex flex-col gap-2 w-max items-end">
-          <SortBySelector />
-          <SecondarySortBySelector />
+        <div className="grid grid-cols-2">
+          <div>Sort By</div>
+          <FieldDropdown pageParam="sortBy" />
+          <div>Secondary Sort By</div>
+          <FieldDropdown pageParam="secondarySortBy" />
+          <div>Sort Direction</div>
           <SortDirectionSelector />
         </div>
       }

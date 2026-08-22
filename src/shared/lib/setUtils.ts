@@ -31,6 +31,14 @@ export function groupBy<T, K extends string | number>(
   );
 }
 
+export function groupByArray<T, K extends string | number>(
+  items: T[],
+  keyFn: (item: T) => K,
+): [K, T[]][] {
+  const grouped = groupBy(items, keyFn);
+  return Object.entries(grouped) as [K, T[]][];
+}
+
 export function toDictionary<T, K extends string | number>(
   items: T[],
   keyFn: (item: T) => K,
