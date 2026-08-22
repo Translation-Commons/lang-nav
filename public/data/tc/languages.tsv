@@ -14,10 +14,10 @@ rus	russ1263	Russian	русский	Spoken & Written	Cyrl	192,723,175		east1426	
 urd	urdu1245	Urdu	اردو	Spoken & Written	Arab	177,411,858		hind1270	Yes	
 swa	swah1254	Swahili	Kiswahili	Spoken & Written	Latn	152,711,966		saba1282	Yes	There is a language code for the individual language, but most usages will just use this
 deu	stan1295	German	Deutsch	Spoken & Written	Latn	129,811,629		glob1243	Yes	
-pan	panj1256	Punjabi	ਪੰਜਾਬੀ	Spoken & Written	Guru	128,655,912	lah	east2727	Yes	
+pan	panj1256	Punjabi	ਪੰਜਾਬੀ	Spoken & Written	Guru	128,655,912	inc	east2727	Yes	
 jpn	nucl1643	Japanese	日本語	Spoken & Written	Jpan	120,858,498		japa1258	Yes	
 arb	stan1318	Modern Standard Arabic	العربية الفصحى	Mostly Written	Arab	120,650,002	ara	arab1395	Yes, with caveat	To distinguish written dialect. Technically this is not a spoken language but virtually all literate Arabic dialect speakers use this for writing Arabic
-lah	lahn1241	Panjabic	ਲਹਿੰਦੀ	Mostly Spoken	Arab	104,863,350		sind1278	Probably not	This language grouping is academically disputed
+lah		Lahnda	ਲਹਿੰਦੀ	Mostly Spoken	Arab	128,220,482		sind1278	Probably not	This language grouping is academically disputed
 mar	mara1378	Marathi	मराठी	Spoken & Written	Deva	99,241,607		mode1268	Yes	
 tel	telu1262	Telugu	తెలుగు	Spoken & Written	Telu	95,058,027		telu1265	Yes	
 pnb	west2386	Western Panjabi	ਪੰਜਾਬੀ	Mostly Spoken	Arab	92,610,000	lah	lahn1241	Possibly	May overlap with "pa"
