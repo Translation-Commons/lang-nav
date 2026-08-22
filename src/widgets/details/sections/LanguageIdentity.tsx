@@ -23,7 +23,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const cldrWarningNotes = getCLDRWarningNotes(lang);
 
   return (
-    <DetailsSection title="Language Identity">
+    <DetailsSection title="Identity">
       <IdentityTable>
         <IdentityRow
           sourceLabel="LangNav System"
