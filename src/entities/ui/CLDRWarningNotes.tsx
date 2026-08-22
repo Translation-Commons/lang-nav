@@ -29,6 +29,18 @@ const CLDRWarningNotes: React.FC<{
   return <NotesIcon warningNotes={parentNotes} infoNotes={CLDR.notes} />;
 };
 
+// Returns an array because it could pick up notes from data providers
+export function getCLDRWarningNotes(object: ObjectData): React.ReactNode[] {
+  if (object.type !== ObjectType.Language) return [];
+
+  const { CLDR } = object;
+  const { coverage, dataProvider } = CLDR;
+  if (coverage == null && dataProvider != null) {
+    return [...getCLDRWarningNotes(dataProvider), CLDR.notes].filter((n) => n != null);
+  }
+  return [CLDR.notes].filter((n) => n != null);
+}
+
 export default CLDRWarningNotes;
 
 // CLDR support may have special notes, like something is not directly supported but its supported by a similar language.

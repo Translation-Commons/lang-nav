@@ -6,11 +6,10 @@ import LanguageDetailsVitalityAndViability from '@entities/language/vitality/Lan
 
 import './details.css';
 import LanguageAttributes from './sections/LanguageAttributes';
-import LanguageCodes from './sections/LanguageCodes';
 import LanguageConnections from './sections/LanguageConnections';
+import LanguageIdentity from './sections/LanguageIdentity';
 import LanguageLocales from './sections/LanguageLocales';
 import LanguageLocation from './sections/LanguageLocation';
-import LanguageNames from './sections/LanguageNames';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
 import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
 import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
@@ -22,9 +21,6 @@ type Props = {
 const LanguageDetails: React.FC<Props> = ({ lang }) => {
   return (
     <div className="Details">
-      <LanguageNames lang={lang} />
-      <LanguageCodes lang={lang} />
-
       <div className="DetailsRow">
         <div className="DetailsBox">
           <LanguagePopulationDetails lang={lang} speakingOrWriting="speaking" />
@@ -39,6 +35,8 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
           <LanguageVitalitySection lang={lang} />
         </div> */}
       </div>
+
+      <LanguageIdentity lang={lang} />
 
       <div className="DetailsRow">
         <div className="DetailsBox" style={{ flex: '2 1 300px' }}>

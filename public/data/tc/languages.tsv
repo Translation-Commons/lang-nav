@@ -14,10 +14,10 @@ rus	russ1263	Russian	русский	Spoken & Written	Cyrl	192,723,175		east1426	
 urd	urdu1245	Urdu	اردو	Spoken & Written	Arab	177,411,858		hind1270	Yes	
 swa	swah1254	Swahili	Kiswahili	Spoken & Written	Latn	152,711,966		saba1282	Yes	There is a language code for the individual language, but most usages will just use this
 deu	stan1295	German	Deutsch	Spoken & Written	Latn	129,811,629		glob1243	Yes	
-pan	panj1256	Punjabi	ਪੰਜਾਬੀ	Spoken & Written	Guru	128,655,912	lah	east2727	Yes	
+pan	panj1256	Punjabi	ਪੰਜਾਬੀ	Spoken & Written	Guru	128,655,912	inc	east2727	Yes	
 jpn	nucl1643	Japanese	日本語	Spoken & Written	Jpan	120,858,498		japa1258	Yes	
 arb	stan1318	Modern Standard Arabic	العربية الفصحى	Mostly Written	Arab	120,650,002	ara	arab1395	Yes, with caveat	To distinguish written dialect. Technically this is not a spoken language but virtually all literate Arabic dialect speakers use this for writing Arabic
-lah	lahn1241	Panjabic	ਲਹਿੰਦੀ	Mostly Spoken	Arab	104,863,350		sind1278	Probably not	This language grouping is academically disputed
+lah		Lahnda	ਲਹਿੰਦੀ	Mostly Spoken	Arab	128,220,482		sind1278	Probably not	This language grouping is academically disputed
 mar	mara1378	Marathi	मराठी	Spoken & Written	Deva	99,241,607		mode1268	Yes	
 tel	telu1262	Telugu	తెలుగు	Spoken & Written	Telu	95,058,027		telu1265	Yes	
 pnb	west2386	Western Panjabi	ਪੰਜਾਬੀ	Mostly Spoken	Arab	92,610,000	lah	lahn1241	Possibly	May overlap with "pa"
@@ -83,7 +83,7 @@ csl	chin1283	Chinese Sign Language	中國手語	Sign	Zxxx	20,040,000		nucl1761	Y
 ron	roma1327	Romanian	română	Spoken & Written	Latn	19,610,518		east2865	Yes	
 xho	xhos1239	Xhosa	isiXhosa	Spoken & Written	Latn	19,169,500		ngun1267	Yes	
 afr	afri1274	Afrikaans	Afrikaans	Spoken & Written	Latn	19,147,812		afri1273	Yes	
-zlm	mala1479	Common Malay		Spoken & Written	Latn	18,410,000	msa	sing1270	Probably not	It is the "individual" version of the macrolanguage code
+zlm	mala1479	Riau Malay		Spoken & Written	Latn	18,410,000	msa	sing1270	Probably not	It is the "individual" version of the macrolanguage code
 ful	fula1264	Fulah	Fulfulde	Spoken & Written	Latn	18,152,738		peul1234	Yes, with caveat	Member languages may be very different
 mai	mait1250	Maithili	मैथिली	Spoken & Written	Deva	17,774,304		mait1254	Yes	
 kur	kurd1259	Kurdish	Kurdî (Kurmancî)	Spoken & Written	Latn	17,064,332		laki1246	Yes	
