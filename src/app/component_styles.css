@@ -53,13 +53,14 @@ button:not([data-slot]),
   width: 1em;
 }
 
-button.primary:not([data-slot]),
+button.primary,
 .option.primary {
   color: var(--color-text-on-color);
   background-color: var(--color-button-primary);
 }
 
 button:not([data-slot]):hover,
+.primary:hover,
 .option:hover {
   color: var(--color-text-on-color);
   background: var(--color-button-hover);
@@ -126,7 +127,7 @@ div h3:first-child {
   margin-top: 0px;
 }
 
-.collapsible-report > summary {
+.collapsible-report>summary {
   width: 100%;
   background-color: var(--color-button-secondary);
   padding: 0.5em;

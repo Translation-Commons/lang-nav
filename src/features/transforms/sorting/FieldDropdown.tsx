@@ -18,7 +18,7 @@ import {
 } from '@shared/ui/dropdown-menu';
 
 import Field from '../fields/Field';
-import { getFieldGroup, getFieldGroupLabel } from '../fields/FieldGroup';
+import { FieldGroup, getFieldGroup, getFieldGroupLabel } from '../fields/FieldGroup';
 import { getTransformForPageParam } from '../TransformEnum';
 
 type Props = {
@@ -37,28 +37,44 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline">{currentValue}</Button>} />
+      <DropdownMenuTrigger
+        render={
+          <Button variant="outline">
+            <div className="truncate text-ellipsis">{currentValue}</div>
+          </Button>
+        }
+      />
       <DropdownMenuContent className="z-200">
-        {groupedFields.map(([group, fields]) => (
-          <DropdownMenuSub key={group}>
-            <DropdownMenuSubTrigger className={group === activeGroup ? ' primary ' : ''}>
-              {getFieldGroupLabel(group)}
-            </DropdownMenuSubTrigger>
-            <DropdownMenuPortal>
-              <DropdownMenuSubContent>
-                {fields.map((field) => (
-                  <DropdownMenuCheckboxItem
-                    checked={field === currentValue}
-                    key={field}
-                    onCheckedChange={() => updatePageParams({ [pageParam]: field })}
-                  >
-                    {field}
-                  </DropdownMenuCheckboxItem>
-                ))}
-              </DropdownMenuSubContent>
-            </DropdownMenuPortal>
-          </DropdownMenuSub>
-        ))}
+        {groupedFields.map(([group, fields]) => {
+          const fieldGroup = Number(group) as FieldGroup;
+          const isActiveGroup = fieldGroup === activeGroup;
+
+          return (
+            <DropdownMenuSub key={group}>
+              <DropdownMenuSubTrigger
+                className={isActiveGroup ? 'bg-accent font-medium text-accent-foreground' : ''}
+              >
+                {getFieldGroupLabel(fieldGroup)}
+              </DropdownMenuSubTrigger>
+              <DropdownMenuPortal>
+                <DropdownMenuSubContent>
+                  {fields.map((field) => (
+                    <DropdownMenuCheckboxItem
+                      className={
+                        field === currentValue ? 'bg-accent font-medium text-accent-foreground' : ''
+                      }
+                      checked={field === currentValue}
+                      key={field}
+                      onCheckedChange={() => updatePageParams({ [pageParam]: field })}
+                    >
+                      {field}
+                    </DropdownMenuCheckboxItem>
+                  ))}
+                </DropdownMenuSubContent>
+              </DropdownMenuPortal>
+            </DropdownMenuSub>
+          );
+        })}
       </DropdownMenuContent>
     </DropdownMenu>
   );
