@@ -33,30 +33,28 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
         />
 
-        {lang.Glottolog.code && (
-          <IdentityRow
-            sourceLabel="Glottolog"
-            name={
-              lang.Glottolog.code ? (
-                <ObjectFieldHighlightedByPageSearch
-                  object={lang}
-                  field={SearchableField.NameGlottolog}
-                />
-              ) : (
-                <Deemphasized>Not in Glottolog</Deemphasized>
-              )
-            }
-            scope={lang.Glottolog.scope}
-            code={lang.Glottolog.code}
-            codeDescription={
-              <LanguageCodeDescriptionBySource languageSource={LanguageSource.Glottolog} />
-            }
-            link={
-              lang.Glottolog.code &&
-              `https://glottolog.org/resource/languoid/id/${lang.Glottolog.code}`
-            }
-          />
-        )}
+        <IdentityRow
+          sourceLabel="Glottolog"
+          name={
+            lang.Glottolog.code ? (
+              <ObjectFieldHighlightedByPageSearch
+                object={lang}
+                field={SearchableField.NameGlottolog}
+              />
+            ) : (
+              <Deemphasized>Not in Glottolog</Deemphasized>
+            )
+          }
+          scope={lang.Glottolog.scope}
+          code={lang.Glottolog.code}
+          codeDescription={
+            <LanguageCodeDescriptionBySource languageSource={LanguageSource.Glottolog} />
+          }
+          link={
+            lang.Glottolog.code &&
+            `https://glottolog.org/resource/languoid/id/${lang.Glottolog.code}`
+          }
+        />
 
         <IdentityRow
           sourceLabel="ISO"
@@ -86,7 +84,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           link={lang.ISO.code && `https://iso639-3.sil.org/code/${lang.ISO.code}`}
         />
-        {(lang.CLDR.code || lang.CLDR.name) && (
+        {lang.CLDR.code && (
           <IdentityRow
             sourceLabel="CLDR"
             name={
@@ -104,7 +102,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             codeDescription={
               <LanguageCodeDescriptionBySource languageSource={LanguageSource.CLDR} />
             }
-            link={`https://github.com/unicode-org/cldr/blob/main/common/main/${lang.CLDR.code}.xml`}
+            link={`https://github.com/unicode-org/cldr/blob/main/common/main/${lang.CLDR.code.replace('*', '')}.xml`}
           />
         )}
 
