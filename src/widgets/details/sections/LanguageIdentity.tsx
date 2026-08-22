@@ -3,10 +3,12 @@ import React from 'react';
 import { SearchableField } from '@features/params/PageParamTypes';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
+import useCLDRXMLLink from '@entities/language/digitalsupport/useCLDRXMLLink';
 import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 import LanguageWikipediaIdentityRow from '@entities/language/LanguageWikipediaEntry';
+import { getCLDRWarningNotes } from '@entities/ui/CLDRWarningNotes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -17,6 +19,8 @@ import IdentityRow from '../ui/IdentityRow';
 
 const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const otherNames = getLanguageOtherNames(lang);
+  const cldrLink = useCLDRXMLLink(lang);
+  const cldrWarningNotes = getCLDRWarningNotes(lang);
 
   return (
     <DetailsSection title="Language Identity">
@@ -97,12 +101,13 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
                 <Deemphasized>Not in CLDR</Deemphasized>
               )
             }
+            codeWarning={cldrWarningNotes.length ? cldrWarningNotes[0] : null} // showing just 1 note because there is some confusing overlap sometimes
             scope={lang.CLDR.scope}
-            code={lang.CLDR.code}
+            code={lang.CLDR.code?.replace('*', '')}
             codeDescription={
               <LanguageCodeDescriptionBySource languageSource={LanguageSource.CLDR} />
             }
-            link={`https://github.com/unicode-org/cldr/blob/main/common/main/${lang.CLDR.code.replace('*', '')}.xml`}
+            link={cldrLink || undefined}
           />
         )}
 
