@@ -1,26 +1,19 @@
-import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import { SearchableField } from '@features/params/PageParamTypes';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
-import {
-  LanguageData,
-  LanguageField,
-  LanguageScope,
-  LanguageSource,
-} from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
+import LanguageWikipediaIdentityRow from '@entities/language/LanguageWikipediaEntry';
 
 import Deemphasized from '@shared/ui/Deemphasized';
-import ExternalLink from '@shared/ui/ExternalLink';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
-import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import DetailsSection from '../ui/DetailsSection';
+import IdentityRow from '../ui/IdentityRow';
 
 const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const otherNames = getLanguageOtherNames(lang);
@@ -137,13 +130,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         {otherNames.length > 0 && (
           <IdentityRow sourceLabel="Other names" name={<LanguageOtherNames lang={lang} />} />
         )}
-        {lang.ISO.code && (
-          <IdentityRow
-            sourceLabel="Wikipedia"
-            name="???"
-            link={`https://en.wikipedia.org/wiki/ISO_639:${lang.ISO.code}`}
-          />
-        )}
+        {lang.ISO.code && <LanguageWikipediaIdentityRow isoCode={lang.ISO.code} />}
       </IdentityTable>
     </DetailsSection>
   );
@@ -194,63 +181,6 @@ const IdentityTable: React.FC<React.PropsWithChildren> = ({ children }) => {
         </tbody>
       </table>
     </div>
-  );
-};
-
-const IdentityRow: React.FC<{
-  sourceLabel: string;
-  name: React.ReactNode;
-  code?: React.ReactNode;
-  codeAlt?: string;
-  codeWarning?: React.ReactNode;
-  codeDescription?: React.ReactNode;
-  link?: string;
-  scope?: LanguageScope;
-}> = ({ sourceLabel, name, code, codeAlt, codeDescription, codeWarning, link, scope }) => {
-  return (
-    <tr className="border-b border-[color-mix(in_srgb,var(--color-button-secondary)_45%,transparent)] last:border-b-0">
-      <td className="px-1 py-1 align-top">
-        <div className="font-semibold">{sourceLabel}</div>
-      </td>
-      <td className="px-1 py-1 align-top" colSpan={sourceLabel === 'Other names' ? 4 : 1}>
-        {name}
-      </td>
-      <td className="px-1 py-1 align-top">
-        {scope && (
-          <>
-            {getLanguageScopeLabel(scope)}{' '}
-            <Hoverable hoverContent={getLanguageScopeDescription(scope)}>
-              <InfoIcon className="h-3.5 w-3.5 text-[var(--color-text-secondary)]" />
-            </Hoverable>
-          </>
-        )}
-      </td>
-      <td className="px-1 py-1 align-top">
-        {code && (
-          <div className="inline-flex items-center gap-1.5 text-sm">
-            <code className="rounded bg-[color-mix(in_srgb,var(--color-button-secondary)_14%,transparent)] px-1.5 py-0.5 text-xs">
-              {code}
-            </code>
-            {codeAlt && (
-              <code className="rounded bg-[color-mix(in_srgb,var(--color-button-secondary)_14%,transparent)] px-1.5 py-0.5 text-xs">
-                {codeAlt}
-              </code>
-            )}
-            {codeWarning && (
-              <Hoverable hoverContent={codeWarning}>
-                <TriangleAlertIcon className="h-3.5 w-3.5 text-[var(--color-text-secondary)]" />
-              </Hoverable>
-            )}
-            {codeDescription && (
-              <Hoverable hoverContent={codeDescription}>
-                <InfoIcon className="h-3.5 w-3.5 text-[var(--color-text-secondary)]" />
-              </Hoverable>
-            )}
-          </div>
-        )}
-      </td>
-      <td className="px-1 py-1 align-top">{link && <ExternalLink href={link} showDomainOnly />}</td>
-    </tr>
   );
 };
 
