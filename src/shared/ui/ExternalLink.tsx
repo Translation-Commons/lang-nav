@@ -1,9 +1,17 @@
 import { MailIcon } from 'lucide-react';
 import React from 'react';
 
-const ExternalLink = ({ href, children }: { href: string; children?: React.ReactNode }) => {
+type Props = {
+  href: string;
+  children?: React.ReactNode;
+  showDomainOnly?: boolean;
+};
+
+const ExternalLink = ({ href, children, showDomainOnly = false }: Props) => {
+  const displayText = showDomainOnly ? new URL(href).hostname : (children ?? href);
+
   if (children == null) {
-    return <ExternalLink href={href}>{href}</ExternalLink>;
+    return <ExternalLink href={href}>{displayText}</ExternalLink>;
   }
   if (href.startsWith('mailto')) {
     return (
@@ -13,7 +21,7 @@ const ExternalLink = ({ href, children }: { href: string; children?: React.React
         style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}
         rel="noreferrer"
       >
-        {children}{' '}
+        {displayText}{' '}
         <span aria-hidden="true">
           <MailIcon display="block" size="1em" />
         </span>
@@ -22,7 +30,7 @@ const ExternalLink = ({ href, children }: { href: string; children?: React.React
   }
   return (
     <a href={href} target="_blank" rel="noopener noreferrer">
-      {children} <span aria-hidden="true">↗</span>
+      {displayText} <span aria-hidden="true">↗</span>
     </a>
   );
 };
