@@ -1,0 +1,1 @@
+import{r as t}from"./index-B_9gtGEA.js";const i=({percentage:o,backgroundColor:s="var(--color-button-secondary)",children:e})=>t.jsxs("div",{style:{position:"relative"},children:[t.jsx("div",{style:{position:"absolute",zIndex:0,top:0,left:0,height:"100%",width:`${o}%`,backgroundColor:s}}),t.jsx("div",{style:{zIndex:1,position:"relative"},children:e})]});export{i as B};
