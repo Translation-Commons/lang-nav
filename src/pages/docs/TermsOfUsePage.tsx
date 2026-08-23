@@ -29,7 +29,7 @@ const TermsOfUsePage: React.FC = () => {
       <DocsSection title="Typical Use">
         <DocsCard title="Permitted Use">
           You are welcome to use Language Navigator for personal or academic purposes, such as:
-          <ul className="m-0">
+          <ul className="m-0 list-disc pl-6">
             <li>browse and search the site</li>
             <li>read and reference the information</li>
             <li>use it for research, education, planning, or general informational purposes</li>
@@ -41,7 +41,7 @@ const TermsOfUsePage: React.FC = () => {
         <DocsCard title="Prohibited Use">
           You should not use Language Navigator in a way that causes harm to the site, its users, or
           the data it provides. This includes but is not limited to:
-          <ul className="m-0">
+          <ul className="m-0 list-disc pl-6">
             <li>redistribute data without attribution to us and all original sources</li>
             <li>attempt to access non-public areas of the site</li>
             <li>misrepresent the source of the data or content</li>

@@ -29,7 +29,7 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
   const card = (
     <Card
       className={cn(
-        'h-full',
+        'h-full bg-muted/50 ring-0',
         isDisabled && 'opacity-72',
         isLinked && 'transition-colors hover:bg-accent',
       )}
