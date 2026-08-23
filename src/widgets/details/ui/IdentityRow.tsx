@@ -19,14 +19,25 @@ const IdentityRow: React.FC<{
   link?: string;
   scope?: LanguageScope;
 }> = ({ sourceLabel, name, code, codeAlt, codeDescription, codeWarning, link, scope }) => {
+  if (sourceLabel === 'Other names') {
+    return (
+      <tr className="border-b border-[color-mix(in_srgb,var(--color-button-secondary)_45%,transparent)] last:border-b-0">
+        <td className="px-1 py-1 align-top">
+          <div className="font-semibold">{sourceLabel}</div>
+        </td>
+        <td className="px-1 py-1 align-top" colSpan={sourceLabel === 'Other names' ? 4 : 1}>
+          {name}
+        </td>
+      </tr>
+    );
+  }
+
   return (
     <tr className="border-b border-[color-mix(in_srgb,var(--color-button-secondary)_45%,transparent)] last:border-b-0">
       <td className="px-1 py-1 align-top">
         <div className="font-semibold">{sourceLabel}</div>
       </td>
-      <td className="px-1 py-1 align-top" colSpan={sourceLabel === 'Other names' ? 4 : 1}>
-        {name}
-      </td>
+      <td className="px-1 py-1 align-top">{name}</td>
       <td className="px-1 py-1 align-top">
         {scope && (
           <>

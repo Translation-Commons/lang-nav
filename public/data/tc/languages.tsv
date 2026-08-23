@@ -9,7 +9,7 @@ fra	stan1290	French	français	Spoken & Written	Latn	314,723,138		glob1239	Yes
 ben	beng1280	Bengali	বাংলা	Spoken & Written	Beng	269,324,750		gaud1238	Yes	
 por	port1283	Portuguese	português	Spoken & Written	Latn	237,766,546		braz1247	Yes	
 msa	mala1538	Malayic	Melayu	Spoken & Written	Latn	215,343,873		mala1554	Yes	There is a language code for the individual language, but most usages will just use this
-ind	indo1316	Indonesian	Indonesia	Spoken & Written	Latn	198,413,080	msa	stan1327	Yes	Well established variant of the macrolanguage
+ind	indo1316	Indonesian	bahasa Indonesia	Spoken & Written	Latn	198,413,080	msa	stan1327	Yes	Well established variant of the macrolanguage
 rus	russ1263	Russian	русский	Spoken & Written	Cyrl	192,723,175		east1426	Yes	
 urd	urdu1245	Urdu	اردو	Spoken & Written	Arab	177,411,858		hind1270	Yes	
 swa	swah1254	Swahili	Kiswahili	Spoken & Written	Latn	152,711,966		saba1282	Yes	There is a language code for the individual language, but most usages will just use this
