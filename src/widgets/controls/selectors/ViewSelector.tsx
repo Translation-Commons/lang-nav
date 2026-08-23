@@ -2,73 +2,43 @@ import { ChartColumnBigIcon, Grid2x2Icon, ListTreeIcon, MapIcon, Table2Icon } fr
 import React from 'react';
 
 import { View } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
+import { Button } from '@shared/ui/button';
+import { ButtonGroup } from '@shared/ui/button-group';
+
 const ViewSelector: React.FC = () => {
-  const { view, updatePageParams } = usePageParams();
+  const { view: currentView, updatePageParams } = usePageParams();
 
   return (
-    <Selector
-      options={Object.values(View)}
-      selected={view}
-      onChange={(nextView: View) => updatePageParams({ view: nextView })}
-      getOptionLabel={(option) => getViewIcon(option)}
-      getOptionDescription={(option) => getViewLabel(option)}
-      display={SelectorDisplay.ButtonGroup}
-      optionStyle={{
-        width: 'fit-content',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        padding: '0.5rem',
-      }}
-      selectorStyle={{ gap: '0.25rem' }}
-    />
+    <ButtonGroup aria-label="Button group">
+      {Object.values(View).map((view) => (
+        <Button
+          key={view}
+          variant={currentView === view ? 'default' : 'secondary'}
+          className="flex h-fit! cursor-pointer flex-col gap-0"
+          onClick={() => updatePageParams({ view })}
+        >
+          <div className="pt-1">{getViewIcon(view)}</div>
+          {view}
+        </Button>
+      ))}
+    </ButtonGroup>
   );
 };
-
-function getViewLabel(view: View): React.ReactNode {
-  const isBeta = [View.Map, View.Reports].includes(view);
-  return (
-    <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '0.25rem' }}>
-      <span style={{ display: 'flex', gap: '0.125rem' }}>
-        {view} {isBeta && <em>β</em>}
-      </span>
-      <img src={getImageSrc(view)} width={180} />
-    </div>
-  );
-}
-
-function getImageSrc(view: View): string {
-  const base = import.meta.env.BASE_URL;
-  switch (view) {
-    case View.CardList:
-      return `${base}cardlist.png`;
-    case View.Hierarchy:
-      return `${base}hierarchy.png`;
-    case View.Map:
-      return `${base}map.png`;
-    case View.Table:
-      return `${base}table.png`;
-    case View.Reports:
-      return `${base}reports.png`;
-  }
-}
 
 function getViewIcon(view: View): React.ReactNode {
   switch (view) {
     case View.CardList:
-      return <Grid2x2Icon size="1.2em" />;
+      return <Grid2x2Icon />;
     case View.Hierarchy:
-      return <ListTreeIcon size="1.2em" />;
+      return <ListTreeIcon />;
     case View.Map:
-      return <MapIcon size="1.2em" />;
+      return <MapIcon />;
     case View.Table:
-      return <Table2Icon size="1.2em" />;
+      return <Table2Icon />;
     case View.Reports:
-      return <ChartColumnBigIcon size="1.2em" />;
+      return <ChartColumnBigIcon />;
   }
 }
 
