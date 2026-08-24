@@ -124,16 +124,6 @@ export function getOptionStyle(
   };
   // Customize based on position and display type
   switch (display) {
-    case SelectorDisplay.ButtonGroup:
-      if (position === PositionInGroup.Last) {
-        style.marginLeft = '-0.125em';
-        style.borderRadius = '0 1em 1em 0';
-      } else if (position === PositionInGroup.First) {
-        style.borderRadius = '1em 0 0 1em';
-      } else if (position === PositionInGroup.Middle) {
-        style.marginLeft = '-0.125em';
-      }
-      break;
     case SelectorDisplay.ButtonList:
       style.borderRadius = '1em';
       if (!isSelected) style.border = '0.125em solid var(--color-button-secondary)';

@@ -24,6 +24,7 @@
   "dependencies": {
     "@amplitude/unified": "^1.0.3",
     "@base-ui/react": "^1.6.0",
+    "@shadcn/react": "^0.3.0",
     "@tailwindcss/vite": "^4.3.3",
     "class-variance-authority": "^0.7.1",
     "cldr-core": "^47.0.0",

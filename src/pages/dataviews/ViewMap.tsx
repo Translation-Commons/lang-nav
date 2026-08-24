@@ -19,7 +19,6 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { EntityData } from '@entities/types/DataTypes';
 
-import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 function ViewMap() {
@@ -48,7 +47,6 @@ function ViewMap() {
 
   return (
     <MapContainer>
-      <h2 style={{ margin: 0 }}>{toTitleCase(entType)} Map</h2>
       <div>{getMapDescription(entType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
       <EntityMap entities={filteredEntities} allowSidebar={true} />

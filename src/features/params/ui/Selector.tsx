@@ -157,8 +157,6 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
           {children}
         </div>
       );
-    case SelectorDisplay.ButtonGroup:
-      return <>{children}</>;
     case SelectorDisplay.Dropdown:
     case SelectorDisplay.InlineDropdown:
       return (

@@ -10,6 +10,8 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
+import { Button } from '@shared/ui/button';
+import { ButtonGroup } from '@shared/ui/button-group';
 import LinkButton from '@shared/ui/LinkButton';
 
 import DocsCard from './DocsCard';
@@ -69,8 +71,13 @@ const LayerComponents: React.FC = () => {
             <DropdownExample display={SelectorDisplay.InlineDropdown} />
           </DocsCard>
           <DocsCard title="Button Group">
-            When you want to show all options. Best with short options.
-            <DropdownExample display={SelectorDisplay.ButtonGroup} />
+            When you want to show all options. Best with short options. Use the shadcn{' '}
+            <code>&lt;ButtonGroup&gt;</code> component.
+            <ButtonGroup>
+              <Button>Default</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+            </ButtonGroup>
           </DocsCard>
           <DocsCard title="Button List">
             When you want to show all options but enable wrapping.
