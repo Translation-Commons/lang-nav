@@ -85,15 +85,15 @@ const DataSourcesPage: React.FC = () => {
           their respective original database (ISO, Glottolog, CLDR). When an object has multiple
           identities, it has been manually matched by the Language Navigator team to a single
           entity. For instance, English is represented in CLDR by the ISO 639-1 code{' '}
-          <InternalLink params={{ languageSource: LanguageSource.CLDR, objectID: 'eng' }}>
+          <InternalLink params={{ languageSource: LanguageSource.CLDR, entID: 'eng' }}>
             en
           </InternalLink>
           , the ISO 639-3 code{' '}
-          <InternalLink params={{ languageSource: LanguageSource.ISO, objectID: 'eng' }}>
+          <InternalLink params={{ languageSource: LanguageSource.ISO, entID: 'eng' }}>
             eng
           </InternalLink>
           , and the Glottocode{' '}
-          <InternalLink params={{ languageSource: LanguageSource.Glottolog, objectID: 'eng' }}>
+          <InternalLink params={{ languageSource: LanguageSource.Glottolog, entID: 'eng' }}>
             stan1293
           </InternalLink>
           .

@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
@@ -9,7 +9,7 @@ import Field from '@features/transforms/fields/Field';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 
@@ -30,7 +30,7 @@ import ZoomControls from './ZoomControls';
 import './map.css';
 
 type Props = {
-  entities: ObjectData[];
+  entities: EntityData[];
   maxWidth?: number;
   allowSidebar?: boolean;
 };
@@ -56,7 +56,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     onZoom: setZoomFactor,
   });
 
-  const { colorBy, objectType, pinned, updatePageParams } = usePageParams();
+  const { colorBy, entityType, pinned, updatePageParams } = usePageParams();
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const [mapContainerWidth, setMapContainerWidth] = useState(800);
 
@@ -72,24 +72,24 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   }, []);
 
   const drawableEntities = useMemo(() => {
-    if (objectType === ObjectType.Language) {
-      return entities.filter((obj) => obj.type === ObjectType.Language) as LanguageData[];
+    if (entityType === EntityType.Language) {
+      return entities.filter((ent) => ent.type === EntityType.Language) as LanguageData[];
     }
 
     return uniqueBy(
       entities
-        .flatMap((obj) => {
-          if (obj.type === ObjectType.Territory) return obj;
-          if (obj.type === ObjectType.Locale) return obj.territory;
-          if (obj.type === ObjectType.Census) return obj.territory;
-          if (obj.type === ObjectType.WritingSystem)
-            return getObjectLocales(obj).map((l) => l.territory);
+        .flatMap((ent) => {
+          if (ent.type === EntityType.Territory) return ent;
+          if (ent.type === EntityType.Locale) return ent.territory;
+          if (ent.type === EntityType.Census) return ent.territory;
+          if (ent.type === EntityType.WritingSystem)
+            return getObjectLocales(ent).map((l) => l.territory);
           return undefined;
         })
         .filter((t): t is TerritoryData => t !== undefined),
       (t) => t.ID,
     ) as TerritoryData[];
-  }, [objectType, entities]);
+  }, [entityType, entities]);
 
   // Bounding box (in map coordinates) of the entities that will be drawn as centroids,
   // so we can zoom the map to fit them instead of always showing the whole world.
@@ -106,9 +106,9 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     let maxY = -Infinity;
     let count = 0;
 
-    drawableEntities.forEach((obj) => {
-      if (obj.latitude == null || obj.longitude == null) return;
-      const { x, y } = getRobinsonCoordinatesShifted(obj);
+    drawableEntities.forEach((ent) => {
+      if (ent.latitude == null || ent.longitude == null) return;
+      const { x, y } = getRobinsonCoordinatesShifted(ent);
       const mapX = (x * MAP_ROBINSON_X_SCALE + 180) * svgScale + offsetX;
       const mapY = (-y * MAP_ROBINSON_Y_SCALE + 90) * svgScale + offsetY;
       minX = Math.min(minX, mapX);
@@ -131,7 +131,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     hasInitialFitRef.current = true;
   }, [entityBounds, fitBounds]);
 
-  const coloringFunctions = useColors({ objects: drawableEntities });
+  const coloringFunctions = useColors({ ents: drawableEntities });
 
   const onClick = useCallback(
     (entity: DrawableData) => {
@@ -142,7 +142,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
           updatePageParams({ pinned: [...pinned, entity.ID] });
         }
       } else {
-        updatePageParams({ objectID: entity.ID });
+        updatePageParams({ entID: entity.ID });
       }
     },
     [pinned, updatePageParams, allowSidebar],
@@ -159,7 +159,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
       {allowSidebar && (
         <MapSidebar
           drawableEntities={drawableEntities}
-          objectType={objectType}
+          entityType={entityType}
           hoveredId={hoveredId}
           setHoveredId={setHoveredId}
         />
@@ -178,7 +178,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
               style={{ filter: pageBrightness === 'dark' ? 'invert(100%)' : undefined }}
             />
 
-            {objectType !== ObjectType.Language && (
+            {entityType !== EntityType.Language && (
               <MapTerritories
                 drawableEntities={drawableEntities}
                 onClick={onClick}

@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -15,7 +15,7 @@ export function parseWritingSystem(line: string): WritingSystemData {
   const parts = line.split('\t');
   const nameEndonym = parts[3] || undefined;
   return {
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
 
     ID: parts[0],
     codeDisplay: parts[0],

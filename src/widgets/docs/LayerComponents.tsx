@@ -101,7 +101,7 @@ const LayerComponents: React.FC = () => {
         secondary to the main content and can be temporarily hidden. Right now the only available
         panel is the entity details.
         <div>
-          <LinkButton href={LangNavPageName.Data + getNewURL({ objectID: '1' })}>
+          <LinkButton href={LangNavPageName.Data + getNewURL({ entID: '1' })}>
             Open data page with a right-hand panel open
           </LinkButton>
         </div>

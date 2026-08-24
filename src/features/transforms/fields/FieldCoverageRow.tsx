@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
@@ -20,8 +20,8 @@ import FieldIcon from './FieldIcon';
 
 const FieldCoverageRow: React.FC<{
   field: Field;
-  dataCompleteness: Record<ObjectType, number>;
-  tableColumnCoverage: ObjectType[];
+  dataCompleteness: Record<EntityType, number>;
+  tableColumnCoverage: EntityType[];
   showColorBar: boolean;
 }> = ({ field, dataCompleteness, tableColumnCoverage, showColorBar }) => {
   return (
@@ -47,7 +47,7 @@ const FieldCoverageRow: React.FC<{
           </td>
         );
       })}
-      {Object.values(ObjectType).map((entityType) => (
+      {Object.values(EntityType).map((entityType) => (
         <FieldEntityCoverageCell
           key={entityType}
           field={field}
@@ -62,7 +62,7 @@ const FieldCoverageRow: React.FC<{
 
 const FieldEntityCoverageCell: React.FC<{
   field: Field;
-  entityType: ObjectType;
+  entityType: EntityType;
   dataCompleteness: number;
   hasColumn: boolean;
 }> = ({ field, entityType, dataCompleteness, hasColumn }) => {

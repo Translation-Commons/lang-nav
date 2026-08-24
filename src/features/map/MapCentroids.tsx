@@ -2,7 +2,7 @@ import React, { useCallback, useMemo } from 'react';
 
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import usePagination from '@features/pagination/usePagination';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
@@ -17,7 +17,7 @@ import './map.css';
 
 type Props = {
   drawableEntities: DrawableData[];
-  onClick: (obj: DrawableData) => void;
+  onClick: (ent: DrawableData) => void;
   scalar: number;
   zoomFactor: number;
   coloringFunctions: ColoringFunctions;
@@ -36,27 +36,27 @@ const MapCentroids: React.FC<Props> = ({
   pinnedIds = [],
   allowSidebar,
 }) => {
-  const { scaleBy, objectType } = usePageParams();
+  const { scaleBy, entityType } = usePageParams();
   const { getCurrentEntities } = usePagination<DrawableData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-  const { getScale } = useScale({ objects: drawableEntities, scaleBy });
+  const { getScale } = useScale({ ents: drawableEntities, scaleBy });
 
   const renderableEntities = useMemo(() => {
     const currentEntities =
-      objectType === ObjectType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
+      entityType === EntityType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
 
     const filteredEntities = currentEntities.filter(
-      (obj) => obj.type === ObjectType.Language || obj.type === ObjectType.Territory,
+      (ent) => ent.type === EntityType.Language || ent.type === EntityType.Territory,
     );
 
     return filteredEntities.reverse();
-  }, [drawableEntities, getCurrentEntities, objectType]);
+  }, [drawableEntities, getCurrentEntities, entityType]);
 
   const buildOnMouseEnter = useCallback(
-    (obj: DrawableData) => (e: React.MouseEvent) => {
+    (ent: DrawableData) => (e: React.MouseEvent) => {
       showHoverCard(
         <div>
-          <strong>{obj.nameDisplay}</strong>
+          <strong>{ent.nameDisplay}</strong>
           <div style={{ color: 'var(--color-text-secondary)' }}>
             {allowSidebar ? 'Pin to sidebar' : 'Open in details panel'}
           </div>
@@ -75,18 +75,18 @@ const MapCentroids: React.FC<Props> = ({
       preserveAspectRatio="xMidYMid meet"
       style={{ pointerEvents: 'none' }}
     >
-      {renderableEntities.map((obj) => (
+      {renderableEntities.map((ent) => (
         <ObjectNode
-          key={obj.ID}
-          color={colorBy === 'None' ? undefined : (getColor(obj) ?? 'transparent')}
-          object={obj}
-          scale={scalar * getScale(obj)}
+          key={ent.ID}
+          color={colorBy === 'None' ? undefined : (getColor(ent) ?? 'transparent')}
+          ent={ent}
+          scale={scalar * getScale(ent)}
           zoomFactor={zoomFactor}
           onClick={onClick}
-          onMouseEnter={buildOnMouseEnter(obj)}
+          onMouseEnter={buildOnMouseEnter(ent)}
           onMouseLeave={onMouseLeaveTriggeringElement}
-          isHovered={hoveredId === obj.ID}
-          isPinned={pinnedIds.includes(obj.ID)}
+          isHovered={hoveredId === ent.ID}
+          isPinned={pinnedIds.includes(ent.ID)}
         />
       ))}
     </svg>
@@ -95,10 +95,10 @@ const MapCentroids: React.FC<Props> = ({
 
 type NodeProps = {
   color?: string;
-  object: DrawableData;
+  ent: DrawableData;
   scale: number;
   zoomFactor: number;
-  onClick: (obj: DrawableData) => void;
+  onClick: (ent: DrawableData) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
   isHovered?: boolean;
@@ -106,7 +106,7 @@ type NodeProps = {
 };
 
 const ObjectNode: React.FC<NodeProps> = ({
-  object,
+  ent,
   color,
   scale,
   zoomFactor,
@@ -116,12 +116,12 @@ const ObjectNode: React.FC<NodeProps> = ({
   isHovered,
   isPinned,
 }) => {
-  if (object.type !== ObjectType.Language && object.type !== ObjectType.Territory) return null;
-  if (object.latitude == null || object.longitude == null) return null;
+  if (ent.type !== EntityType.Language && ent.type !== EntityType.Territory) return null;
+  if (ent.latitude == null || ent.longitude == null) return null;
 
-  const { x, y } = getRobinsonCoordinatesShifted(object);
+  const { x, y } = getRobinsonCoordinatesShifted(ent);
 
-  const showCircle = !(object.type === ObjectType.Territory && (object?.landArea || 0) >= 20000);
+  const showCircle = !(ent.type === EntityType.Territory && (ent?.landArea || 0) >= 20000);
 
   return (
     <g
@@ -130,7 +130,7 @@ const ObjectNode: React.FC<NodeProps> = ({
       {showCircle && (
         <Circle
           color={color}
-          object={object}
+          ent={ent}
           scale={scale}
           zoomFactor={zoomFactor}
           onClick={onClick}
@@ -140,14 +140,14 @@ const ObjectNode: React.FC<NodeProps> = ({
           isPinned={isPinned}
         />
       )}
-      <Text object={object} scale={scale} showCircle={showCircle} zoomFactor={zoomFactor} />
+      <Text ent={ent} scale={scale} showCircle={showCircle} zoomFactor={zoomFactor} />
     </g>
   );
 };
 
 const Circle: React.FC<NodeProps> = ({
   color,
-  object,
+  ent,
   scale,
   onClick,
   onMouseEnter,
@@ -162,7 +162,7 @@ const Circle: React.FC<NodeProps> = ({
     stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}
     onClick={(e) => {
       e.stopPropagation();
-      onClick(object);
+      onClick(ent);
     }}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
@@ -170,13 +170,13 @@ const Circle: React.FC<NodeProps> = ({
 );
 
 type TextProps = {
-  object: DrawableData;
+  ent: DrawableData;
   scale: number;
   showCircle: boolean;
   zoomFactor: number;
 };
 
-const Text: React.FC<TextProps> = ({ object, scale, showCircle, zoomFactor }) => {
+const Text: React.FC<TextProps> = ({ ent, scale, showCircle, zoomFactor }) => {
   const { fieldFocus } = usePageParams();
 
   if (fieldFocus === Field.None) return null;
@@ -189,7 +189,7 @@ const Text: React.FC<TextProps> = ({ object, scale, showCircle, zoomFactor }) =>
       textAnchor="middle"
       alignmentBaseline={showCircle ? 'hanging' : 'middle'}
     >
-      {getFieldString(object, fieldFocus)}
+      {getFieldString(ent, fieldFocus)}
     </text>
   );
 };

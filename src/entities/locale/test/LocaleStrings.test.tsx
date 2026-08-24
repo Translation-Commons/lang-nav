@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -10,9 +10,9 @@ import { getLocaleName } from '../LocaleStrings';
 import { LocaleData, LocaleSource, PopulationSourceCategory } from '../LocaleTypes';
 
 describe('getLocaleName', () => {
-  it('Language with tags but no linked objects', () => {
+  it('Language with tags but no linked entities', () => {
     const locale: LocaleData = {
-      type: ObjectType.Locale,
+      type: EntityType.Locale,
       ID: 'zh_Latn_CN_pinyin',
       codeDisplay: 'zh_Latn_CN_pinyin',
       pop: { speaking: { unadjusted: 0, source: PopulationSourceCategory.NoSource }, writing: {} },
@@ -28,9 +28,9 @@ describe('getLocaleName', () => {
     expect(getLocaleName(locale)).toBe('zh (CN, Latn, pinyin)');
   });
 
-  it('Language with tags and linked objects', () => {
+  it('Language with tags and linked entities', () => {
     const locale: LocaleData = {
-      type: ObjectType.Locale,
+      type: EntityType.Locale,
       ID: 'zh_Latn_CN_pinyin',
       codeDisplay: 'zh_Latn_CN_pinyin',
       pop: { speaking: { unadjusted: 0, source: PopulationSourceCategory.NoSource }, writing: {} },
@@ -45,7 +45,7 @@ describe('getLocaleName', () => {
 
       language: getBaseLanguageData('zh', 'Chinese'),
       territory: {
-        type: ObjectType.Territory,
+        type: EntityType.Territory,
         ID: 'CN',
         codeDisplay: 'CN',
         nameDisplay: 'China',
@@ -54,7 +54,7 @@ describe('getLocaleName', () => {
         names: ['China'],
       },
       writingSystem: {
-        type: ObjectType.WritingSystem,
+        type: EntityType.WritingSystem,
         ID: 'Latn',
         scope: WritingSystemScope.IndividualScript,
         codeDisplay: 'Latn',

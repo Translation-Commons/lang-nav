@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import getObjectFromID from '@entities/lib/getObjectFromID';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import CensusDetails from './CensusDetails';
 import KeyboardDetails from './KeyboardDetails';
@@ -15,33 +15,33 @@ import VariantDetails from './VariantDetails';
 import WritingSystemDetails from './WritingSystemDetails';
 
 // You can get the details by an object or just its ID
-type Props = { object?: ObjectData; objectID?: string };
+type Props = { ent?: EntityData; entID?: string };
 
-const ObjectDetails: React.FC<Props> = ({ object, objectID }) => {
-  if (object == null) {
-    if (objectID != null) {
-      return <ObjectDetails object={getObjectFromID(objectID)} />;
+const ObjectDetails: React.FC<Props> = ({ ent, entID }) => {
+  if (ent == null) {
+    if (entID != null) {
+      return <ObjectDetails ent={getObjectFromID(entID)} />;
     }
     return <></>;
   }
 
-  switch (object.type) {
-    case ObjectType.Census:
-      return <CensusDetails census={object} />;
-    case ObjectType.Language:
-      return <LanguageDetails lang={object} />;
-    case ObjectType.Locale:
-      return <LocaleDetails locale={object} />;
-    case ObjectType.Territory:
-      return <TerritoryDetails territory={object} />;
-    case ObjectType.WritingSystem:
-      return <WritingSystemDetails writingSystem={object} />;
-    case ObjectType.Variant:
-      return <VariantDetails variant={object} />;
-    case ObjectType.Keyboard:
-      return <KeyboardDetails keyboard={object} />;
-    case ObjectType.Org:
-      return <OrganizationDetails org={object} />;
+  switch (ent.type) {
+    case EntityType.Census:
+      return <CensusDetails census={ent} />;
+    case EntityType.Language:
+      return <LanguageDetails lang={ent} />;
+    case EntityType.Locale:
+      return <LocaleDetails locale={ent} />;
+    case EntityType.Territory:
+      return <TerritoryDetails territory={ent} />;
+    case EntityType.WritingSystem:
+      return <WritingSystemDetails writingSystem={ent} />;
+    case EntityType.Variant:
+      return <VariantDetails variant={ent} />;
+    case EntityType.Keyboard:
+      return <KeyboardDetails keyboard={ent} />;
+    case EntityType.Org:
+      return <OrganizationDetails org={ent} />;
   }
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { CensusCollectorType } from '@entities/census/CensusTypes';
@@ -14,7 +14,7 @@ const ReportLocaleCitationCompleteness: React.FC = () => {
   const { filteredEntities: filteredLocales } = useFilteredEntities({});
 
   // Count locales with populationCensus
-  const locales = filteredLocales.filter((obj) => obj.type === ObjectType.Locale);
+  const locales = filteredLocales.filter((ent) => ent.type === EntityType.Locale);
   const localesWithCensuses = locales.filter((loc) => loc.pop.speaking.census != null);
   const totalLocales = locales.length;
   const withCensusCount = localesWithCensuses.length;

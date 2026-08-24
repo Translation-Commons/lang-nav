@@ -36,24 +36,24 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     <DetailsSection title="Connections">
       {ISO.parentLanguage && (
         <DetailsField title="ISO group">
-          <HoverableObjectName object={ISO.parentLanguage} />
+          <HoverableObjectName ent={ISO.parentLanguage} />
         </DetailsField>
       )}
       {Glottolog.parentLanguage && (
         <DetailsField title="Glottolog group">
-          <HoverableObjectName object={Glottolog.parentLanguage} />
+          <HoverableObjectName ent={Glottolog.parentLanguage} />
         </DetailsField>
       )}
       {equivalentVariant && (
         <DetailsField title="Equivalent Variant">
-          <HoverableObjectName object={equivalentVariant} labelSource="name and code" />
+          <HoverableObjectName ent={equivalentVariant} labelSource="name and code" />
         </DetailsField>
       )}
       {variants && variants.length > 0 && (
         <DetailsField title="Variants">
           <CommaSeparated>
             {variants.map((v) => (
-              <HoverableObjectName key={v.ID} object={v} labelSource="name and code" />
+              <HoverableObjectName key={v.ID} ent={v} labelSource="name and code" />
             ))}
           </CommaSeparated>
         </DetailsField>
@@ -63,7 +63,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <CommaSeparated>
             {relatedLanguages.map(({ match, relatedLanguage }) => (
               <span key={match.desired + ':' + match.supported + ':' + match.distance}>
-                <HoverableObjectName object={relatedLanguage} /> ({match.distance} CLDR)
+                <HoverableObjectName ent={relatedLanguage} /> ({match.distance} CLDR)
               </span>
             ))}
           </CommaSeparated>
@@ -77,7 +77,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               : []
           }
           listNodes={[...childLanguages].sort(sortFunction).map((l) => (
-            <HoverableObjectName key={l.ID} object={l} />
+            <HoverableObjectName key={l.ID} ent={l} />
           ))}
           emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
         />

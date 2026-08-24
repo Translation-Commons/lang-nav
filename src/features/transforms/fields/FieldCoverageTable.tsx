@@ -5,7 +5,7 @@ import getEntityMainTableColumns from '@widgets/tables/columns/getEntityMainTabl
 import useEntities from '@features/data/context/useEntities';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import ZIndex from '@features/layers/ZIndex';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -20,7 +20,7 @@ import getField from './getField';
 
 const FieldCoverageTable: React.FC = () => {
   const transforms = Object.values(TransformEnum);
-  const entityTypes = Object.values(ObjectType);
+  const entityTypes = Object.values(EntityType);
   const dataCompletenessByFieldByEntityType = useDataCompletenessByFieldByEntityType();
   const tableColumnCoverage = getTableColumnCoverage();
   const [showColorBars, setShowColorBars] = React.useState(false);
@@ -122,21 +122,21 @@ const FieldCoverageTable: React.FC = () => {
   );
 };
 
-function useDataCompletenessByFieldByEntityType(): Record<Field, Record<ObjectType, number>> {
-  const entitiesByType: Record<ObjectType, EntityData[]> = {
+function useDataCompletenessByFieldByEntityType(): Record<Field, Record<EntityType, number>> {
+  const entitiesByType: Record<EntityType, EntityData[]> = {
     // Note: hooks shouldn't be called in loops so they are listed out manually here
-    [ObjectType.Language]: useEntities(ObjectType.Language),
-    [ObjectType.Locale]: useEntities(ObjectType.Locale),
-    [ObjectType.Territory]: useEntities(ObjectType.Territory),
-    [ObjectType.WritingSystem]: useEntities(ObjectType.WritingSystem),
-    [ObjectType.Census]: useEntities(ObjectType.Census),
-    [ObjectType.Variant]: useEntities(ObjectType.Variant),
-    [ObjectType.Keyboard]: useEntities(ObjectType.Keyboard),
-    [ObjectType.Org]: useEntities(ObjectType.Org),
+    [EntityType.Language]: useEntities(EntityType.Language),
+    [EntityType.Locale]: useEntities(EntityType.Locale),
+    [EntityType.Territory]: useEntities(EntityType.Territory),
+    [EntityType.WritingSystem]: useEntities(EntityType.WritingSystem),
+    [EntityType.Census]: useEntities(EntityType.Census),
+    [EntityType.Variant]: useEntities(EntityType.Variant),
+    [EntityType.Keyboard]: useEntities(EntityType.Keyboard),
+    [EntityType.Org]: useEntities(EntityType.Org),
   };
   return Object.values(Field).reduce(
     (acc, field) => {
-      acc[field] = Object.values(ObjectType).reduce(
+      acc[field] = Object.values(EntityType).reduce(
         (entityAcc, entityType) => {
           const entities = entitiesByType[entityType];
           const totalEntities = entities.length;
@@ -146,16 +146,16 @@ function useDataCompletenessByFieldByEntityType(): Record<Field, Record<ObjectTy
           entityAcc[entityType] = totalEntities > 0 ? (entitiesWithField / totalEntities) * 100 : 0;
           return entityAcc;
         },
-        {} as Record<ObjectType, number>,
+        {} as Record<EntityType, number>,
       );
       return acc;
     },
-    {} as Record<Field, Record<ObjectType, number>>,
+    {} as Record<Field, Record<EntityType, number>>,
   );
 }
 
-function getTableColumnCoverage(): Record<Field, ObjectType[]> {
-  return Object.values(ObjectType).reduce(
+function getTableColumnCoverage(): Record<Field, EntityType[]> {
+  return Object.values(EntityType).reduce(
     (acc, entityType) => {
       const columns = getEntityMainTableColumns(entityType);
       columns.forEach((column) => {
@@ -167,7 +167,7 @@ function getTableColumnCoverage(): Record<Field, ObjectType[]> {
       });
       return acc;
     },
-    {} as Record<Field, ObjectType[]>,
+    {} as Record<Field, EntityType[]>,
   );
 }
 

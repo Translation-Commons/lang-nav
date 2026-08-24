@@ -5,7 +5,7 @@ import {
   getDisconnectedMockedObjects,
   getMockedObjectDictionaries,
 } from '@features/__tests__/MockObjects';
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
@@ -14,9 +14,9 @@ import { updateObjectsBasedOnDataParams } from '../updateObjectsBasedOnDataParam
 
 describe('updateObjectsBasedOnDataParams', () => {
   it('updates language population estimates based on locales', () => {
-    const mockedObjects = getDisconnectedMockedObjects();
-    connectMockedObjects(mockedObjects); // Connect but do not compute population yet
-    const mockedDictionaries = getMockedObjectDictionaries(mockedObjects);
+    const mockedEntities = getDisconnectedMockedObjects();
+    connectMockedObjects(mockedEntities); // Connect but do not compute population yet
+    const mockedDictionaries = getMockedObjectDictionaries(mockedEntities);
 
     // Before update, pop.speaking should be based on the rough input or descendants only
     const sjn = mockedDictionaries.languages.sjn;
@@ -58,7 +58,7 @@ describe('updateObjectsBasedOnDataParams', () => {
 
     // Add a another locale to increase dori0123 population dramatically
     const newLocale: LocaleData = {
-      type: ObjectType.Locale,
+      type: EntityType.Locale,
       ID: 'dori0123_AM',
       codeDisplay: 'dori0123-AM',
       languageCode: 'dori0123',
@@ -68,8 +68,8 @@ describe('updateObjectsBasedOnDataParams', () => {
       localeSource: LocaleSource.Census,
       pop: { speaking: { unadjusted: 100000 }, writing: {} },
     };
-    mockedObjects[newLocale.ID] = newLocale;
-    connectMockedObjects(mockedObjects); // Re-connect objects
+    mockedEntities[newLocale.ID] = newLocale;
+    connectMockedObjects(mockedEntities); // Re-connect entities
 
     updateObjectsBasedOnDataParams(
       [sjn, dori0123],

@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
@@ -15,7 +15,7 @@ export function parseTerritoryLine(line: string): TerritoryData {
   const population = parts[3] != '' ? Number.parseInt(parts[3].replace(/,/g, '')) : 0;
 
   return {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
 
     ID: parts[0],
     codeDisplay: parts[0],

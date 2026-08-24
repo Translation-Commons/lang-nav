@@ -102,7 +102,7 @@ const MultiplePathsList: React.FC<{
         .map(([langId, paths], i) => (
           <li key={i}>
             <strong>
-              <HoverableObjectName object={getLanguage(langId)} />
+              <HoverableObjectName ent={getLanguage(langId)} />
             </strong>
             <ul>
               {paths.map((path, j) => (

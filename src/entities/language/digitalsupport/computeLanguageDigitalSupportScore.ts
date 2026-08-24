@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 
@@ -80,7 +80,7 @@ function computeCLDRScore(lang: LanguageData): number {
     CLDR: { coverage, dataProvider },
   } = lang;
   if (coverage == null) {
-    if (dataProvider?.type == ObjectType.Language && dataProvider.CLDR.coverage != null)
+    if (dataProvider?.type == EntityType.Language && dataProvider.CLDR.coverage != null)
       return computeCLDRScore(dataProvider);
     return 0;
   }

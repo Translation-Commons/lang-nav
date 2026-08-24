@@ -1,6 +1,6 @@
 import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
@@ -13,7 +13,7 @@ export function getDecoderMacroCode(
   if (!lang || !code) return undefined;
 
   const languageParents = getObjectParents(lang).filter(
-    (p) => p && p.type === ObjectType.Language,
+    (p) => p && p.type === EntityType.Language,
   ) as LanguageData[];
   const iso639parents = languageParents.filter(
     (p) =>

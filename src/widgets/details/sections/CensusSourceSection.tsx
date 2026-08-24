@@ -35,7 +35,7 @@ const CensusSourceSection: React.FC<Props> = ({ census }) => {
       {author && <DetailsField title="Author">{author}</DetailsField>}
       {(census.presenter || presentedBy) && (
         <DetailsField title="Presented by">
-          {census.presenter ? <HoverableObjectName object={census.presenter} /> : presentedBy}
+          {census.presenter ? <HoverableObjectName ent={census.presenter} /> : presentedBy}
         </DetailsField>
       )}
       {url && (
@@ -69,7 +69,7 @@ const CensusCollectorNameDisplay: React.FC<Props> = ({ census }) => {
   if (collector) {
     return (
       <DetailsField title="Collected by">
-        <HoverableObjectName object={collector} />
+        <HoverableObjectName ent={collector} />
       </DetailsField>
     );
   }

@@ -1,4 +1,4 @@
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { getLocaleCodeFromTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
 import {
@@ -31,7 +31,7 @@ export function parseLocaleLine(line: string): LocaleData | undefined {
   const population = parts[4] !== '' ? Number.parseInt(parts[4]?.replace(/,/g, '')) : undefined;
 
   return {
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     ID: localeID,
     codeDisplay: localeID,
     localeSource: LocaleSource.StableDatabase,

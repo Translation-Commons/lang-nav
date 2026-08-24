@@ -32,14 +32,14 @@ const CensusCard: React.FC<Props> = ({ census }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={census} />
+        <ObjectTitle ent={census} />
       </div>
       <CardField
         title="Territory"
         field={Field.Territory}
         description="Where this census was conducted."
       >
-        {territory != null ? <HoverableObjectName object={territory} /> : isoRegionCode}
+        {territory != null ? <HoverableObjectName ent={territory} /> : isoRegionCode}
       </CardField>
 
       <CardField
@@ -48,11 +48,11 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         description="The type of organization that collected this census and/or presented it"
       >
         <div>
-          {census.collector && <HoverableObjectName object={census.collector} />}
+          {census.collector && <HoverableObjectName ent={census.collector} />}
           {census.presenter && (
             <>
               {' '}
-              via <HoverableObjectName object={census.presenter} style={{ display: 'inline' }} />
+              via <HoverableObjectName ent={census.presenter} style={{ display: 'inline' }} />
             </>
           )}
         </div>

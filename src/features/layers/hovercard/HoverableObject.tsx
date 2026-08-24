@@ -4,25 +4,25 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import ObjectCard from '@entities/ui/ObjectCard';
 
 type Props = {
-  object?: ObjectData;
+  ent?: EntityData;
   children: React.ReactNode;
   style?: React.CSSProperties;
 };
 
-const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
+const HoverableObject: React.FC<Props> = ({ ent, children, style }) => {
   const { view, updatePageParams } = usePageParams();
-  if (object == null) {
+  if (ent == null) {
     return <>{children}</>;
   }
 
   const onClick = useCallback(() => {
-    const params: Partial<PageParams> = { objectID: object.ID };
+    const params: Partial<PageParams> = { entID: ent.ID };
     updatePageParams(params);
-  }, [object, updatePageParams, view]);
+  }, [ent, updatePageParams, view]);
 
   return (
     <Hoverable
@@ -30,9 +30,9 @@ const HoverableObject: React.FC<Props> = ({ object, children, style }) => {
         <>
           Click to see more information in the details panel.
           <div>
-            <strong>{object.type}</strong>
+            <strong>{ent.type}</strong>
           </div>
-          <ObjectCard object={object} />
+          <ObjectCard ent={ent} />
         </>
       }
       onClick={onClick}

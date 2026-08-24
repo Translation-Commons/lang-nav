@@ -55,7 +55,7 @@ describe('applyCombinedFamilyOverrides', () => {
     expect(poz.Combined.parentLanguageCode).toBe('map');
   });
 
-  it('skips entries missing Combined source objects', () => {
+  it('skips entries missing Combined source entities', () => {
     const child = makeLang('sqi', 'clas1257');
     const parent = makeLang('sqj', 'ine');
     (child as LanguageData).Combined = undefined as unknown as LanguageData['Combined'];

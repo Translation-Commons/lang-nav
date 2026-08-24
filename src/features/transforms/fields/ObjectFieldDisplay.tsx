@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import LanguageModalityIcon from '@entities/language/LanguageModalityIcon';
@@ -9,7 +9,7 @@ import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
 
@@ -25,12 +25,12 @@ import Field from './Field';
 import getField from './getField';
 
 type Props = {
-  object: ObjectData;
+  ent: EntityData;
   field: Field;
 };
 
-const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
-  const fieldValue = getField(object, field);
+const ObjectFieldDisplay: React.FC<Props> = ({ ent, field }) => {
+  const fieldValue = getField(ent, field);
   switch (field) {
     case Field.Population:
     case Field.PopulationDirectlySourced:
@@ -52,8 +52,8 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       if (typeof fieldValue === 'number') return fieldValue.toFixed(1);
       return <>{fieldValue}</>;
     case Field.Coordinates:
-      if (object.type === ObjectType.Territory || object.type === ObjectType.Language) {
-        return `${object.latitude?.toFixed(1)}, ${object.longitude?.toFixed(1)}`;
+      if (ent.type === EntityType.Territory || ent.type === EntityType.Language) {
+        return `${ent.latitude?.toFixed(1)}, ${ent.longitude?.toFixed(1)}`;
       }
       return <>{fieldValue}</>;
 
@@ -89,20 +89,20 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
     case Field.ISOStatus:
     case Field.VitalityEthnologueFine:
     case Field.VitalityEthnologueCoarse:
-      return <VitalityField obj={object} field={field} />;
+      return <VitalityField ent={ent} field={field} />;
 
     case Field.Modality:
       return <LanguageModalityIcon modality={fieldValue as LanguageModality} />;
 
     case Field.Date:
-      if (object.type === ObjectType.Census)
+      if (ent.type === EntityType.Census)
         return fieldValue
           ? new Date(fieldValue).toLocaleDateString(undefined, { year: 'numeric' })
           : '';
       return fieldValue ? new Date(fieldValue).toLocaleDateString() : '';
 
     case Field.Depth:
-      return <ObjectDepthDisplay object={object} />;
+      return <ObjectDepthDisplay ent={ent} />;
 
     case Field.LanguageScope:
       return typeof fieldValue === 'number' && getLanguageScopeLabel(fieldValue);
@@ -110,11 +110,11 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
       return typeof fieldValue === 'number' && getTerritoryScopeLabel(fieldValue);
 
     case Field.Indigeneity:
-      return object.type === ObjectType.Locale && <LocaleIndigeneityDisplay loc={object} />;
+      return ent.type === EntityType.Locale && <LocaleIndigeneityDisplay loc={ent} />;
     case Field.LanguageFormedHere:
-      return object.type === ObjectType.Locale && <LocaleFormedHereDisplay loc={object} />;
+      return ent.type === EntityType.Locale && <LocaleFormedHereDisplay loc={ent} />;
     case Field.HistoricPresence:
-      return object.type === ObjectType.Locale && <LocaleHistoricPresenceDisplay loc={object} />;
+      return ent.type === EntityType.Locale && <LocaleHistoricPresenceDisplay loc={ent} />;
     case Field.VariantType:
       return fieldValue === VariantType.Dialect || fieldValue === VariantType.Orthographic
         ? getVariantTypeDisplay(fieldValue)
@@ -137,23 +137,22 @@ const ObjectFieldDisplay: React.FC<Props> = ({ object, field }) => {
   }
 };
 
-function VitalityField({
-  obj,
-  field,
-}: {
-  obj: ObjectData;
+type VitalityFieldProps = {
+  ent: EntityData;
   field:
     | Field.VitalityMetascore
     | Field.VitalityEthnologueFine
     | Field.VitalityEthnologueCoarse
     | Field.ISOStatus;
-}) {
-  if (obj.type !== ObjectType.Language) return null;
+};
+
+function VitalityField({ ent, field }: VitalityFieldProps) {
+  if (ent.type !== EntityType.Language) return null;
   let src = VitalitySource.Metascore;
   if (field === Field.VitalityEthnologueFine) src = VitalitySource.Eth2012;
   else if (field === Field.VitalityEthnologueCoarse) src = VitalitySource.Eth2025;
   else if (field === Field.ISOStatus) src = VitalitySource.ISO;
-  return <LanguageVitalityMeter lang={obj} src={src} />;
+  return <LanguageVitalityMeter lang={ent} src={src} />;
 }
 
 export default ObjectFieldDisplay;

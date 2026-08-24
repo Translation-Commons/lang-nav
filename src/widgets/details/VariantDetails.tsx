@@ -68,7 +68,7 @@ const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant
         <DetailsField title="Languages">
           <CommaSeparated>
             {Object.values(languages).map((lang) => (
-              <HoverableObjectName key={lang.ID} object={lang} />
+              <HoverableObjectName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         </DetailsField>
@@ -77,14 +77,14 @@ const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant
         <DetailsField title="Locales">
           <CommaSeparated>
             {Object.values(locales).map((locale) => (
-              <HoverableObjectName key={locale.ID} object={locale} />
+              <HoverableObjectName key={locale.ID} ent={locale} />
             ))}
           </CommaSeparated>
         </DetailsField>
       )}
       {equivalentLanguage && equivalentLanguage.ID !== 'mis' && (
         <DetailsField title="Equivalent Language">
-          <HoverableObjectName object={equivalentLanguage} />
+          <HoverableObjectName ent={equivalentLanguage} />
         </DetailsField>
       )}
     </DetailsSection>

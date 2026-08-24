@@ -16,10 +16,10 @@ vi.mock('@features/params/usePageParams', () => ({
 describe('useScale', () => {
   it('returns default multiplier when scaleBy is undefined or "None"', () => {
     const lang = getBaseLanguageData('eng', 'English');
-    const { result: r1 } = renderHook(() => useScale({ objects: [lang], scaleBy: undefined }));
+    const { result: r1 } = renderHook(() => useScale({ ents: [lang], scaleBy: undefined }));
     expect(r1.current.getScale(lang)).toBe(1);
 
-    const { result: r2 } = renderHook(() => useScale({ objects: [lang], scaleBy: Field.None }));
+    const { result: r2 } = renderHook(() => useScale({ ents: [lang], scaleBy: Field.None }));
     expect(r2.current.getScale(lang)).toBe(1);
   });
 
@@ -34,7 +34,7 @@ describe('useScale', () => {
     // no populationEstimate -> should be treated as not renderable -> getScale returns 0
 
     const { result } = renderHook(() =>
-      useScale({ objects: [small, big, missing], scaleBy: Field.Population }),
+      useScale({ ents: [small, big, missing], scaleBy: Field.Population }),
     );
 
     const scaleSmall = result.current.getScale(small);

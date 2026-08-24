@@ -10,7 +10,7 @@ import { getApplicableFields } from '../fields/FieldApplicability';
 import TransformEnum from '../TransformEnum';
 
 const ScaleBySelector: React.FC = () => {
-  const { scaleBy, updatePageParams, objectType, view } = usePageParams();
+  const { scaleBy, updatePageParams, entityType, view } = usePageParams();
   const { display } = useSelectorDisplay();
 
   // Only applicable to the map view
@@ -20,7 +20,7 @@ const ScaleBySelector: React.FC = () => {
     <Selector<Field>
       selectorLabel={display === SelectorDisplay.Dropdown ? 'Scale By' : undefined}
       selectorDescription="Choose a field to scale items by (map circles)."
-      options={getApplicableFields(TransformEnum.Scale, objectType)}
+      options={getApplicableFields(TransformEnum.Scale, entityType)}
       onChange={(scaleBy) => updatePageParams({ scaleBy })}
       selected={scaleBy}
     />

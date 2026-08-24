@@ -81,19 +81,19 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     ...LanguageDigitalSupportColumns,
     {
       key: 'Parent Language',
-      render: (lang) => lang.parentLanguage && <HoverableObjectName object={lang.parentLanguage} />,
+      render: (lang) => lang.parentLanguage && <HoverableObjectName ent={lang.parentLanguage} />,
       isInitiallyVisible: false,
       columnGroup: 'Relations',
     },
     {
       key: 'Macrolanguage',
-      render: (lang) => <HoverableObjectName object={getLanguageRootMacrolanguage(lang)} />,
+      render: (lang) => <HoverableObjectName ent={getLanguageRootMacrolanguage(lang)} />,
       isInitiallyVisible: false,
       columnGroup: 'Relations',
     },
     {
       key: 'Language Family',
-      render: (lang) => <HoverableObjectName object={getLanguageRootLanguageFamily(lang)} />,
+      render: (lang) => <HoverableObjectName ent={getLanguageRootLanguageFamily(lang)} />,
       isInitiallyVisible: false,
       field: Field.LanguageFamily,
       columnGroup: 'Relations',
@@ -116,7 +116,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     {
       key: 'Depth',
       description: 'How deep in a language family tree this language is.',
-      render: (lang) => <ObjectDepthDisplay object={lang} />,
+      render: (lang) => <ObjectDepthDisplay ent={lang} />,
       exportValue: (lang) => lang.depth ?? '', // Export as blank instead of "—"
       isInitiallyVisible: false,
       valueType: TableValueType.Count,
@@ -130,7 +130,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       render: (lang) => (
         <CommaSeparated limit={1} limitText="short">
           {getVariantsForEntity(lang)?.map((variant) => (
-            <HoverableObjectName object={variant} key={variant.ID} />
+            <HoverableObjectName ent={variant} key={variant.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -143,7 +143,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       render: (lang) => (
         <CommaSeparated limit={1} limitText="short">
           {getCountriesInObject(lang)?.map((territory) => (
-            <HoverableObjectName object={territory} key={territory.ID} />
+            <HoverableObjectName ent={territory} key={territory.ID} />
           ))}
         </CommaSeparated>
       ),

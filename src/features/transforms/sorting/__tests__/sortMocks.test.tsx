@@ -4,25 +4,25 @@ import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjec
 import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { getSortFunctionParameterized } from '../sort';
 import { SortBehavior } from '../SortTypes';
 
-const mockedObjects = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedObjects();
 
 // Convert Objects into their IDs and also add field data
-function toIDandValue(object: ObjectData, field: Field): string {
-  let value = getField(object, field);
+function toIDandValue(ent: EntityData, field: Field): string {
+  let value = getField(ent, field);
   if (typeof value === 'number') value = value.toFixed(1);
-  return object.ID.padEnd(15) + (value ?? '');
+  return ent.ID.padEnd(15) + (value ?? '');
 }
 
 describe('getSortByParameterized', () => {
   it('sortBy: None', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.None, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       // Original input order
       '123',
       'sjn',
@@ -49,9 +49,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Code', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Code, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       '001',
       '123',
       'AM',
@@ -77,9 +77,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Name', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Name, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'AM', // Aman
       '001', // Arda
       'BE', // Beleriand
@@ -105,9 +105,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Endonym', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Endonym, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'AM', // aman
       '001', // arda
       'BE', // beˈlerjand
@@ -134,12 +134,12 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Endonym. Also, reversed', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Endonym, SortBehavior.Reverse);
     // Not exactly the reverse of the above test because
     //   1) undefined values stay at the end
     //   2) sort is stable to the input order
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'Teng', // tîw
       'sjn', // sɪndarɪn
       'HA', // ha-rad
@@ -166,9 +166,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Population', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Population, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       '001',
       '123',
       'Teng',
@@ -194,11 +194,11 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Population. Also, reversed', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Population, SortBehavior.Reverse);
     // Not exactly the reverse of the above test because
     //   2) sort is stable to the input order
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'dori0123',
       'dori0123_ER',
       'dori0123_123',
@@ -224,9 +224,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: PopulationDirectlySourced', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.PopulationDirectlySourced, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       // These entities were created with a rough population estimate, before it was computed by algorithms
       '001',
       '123',
@@ -254,10 +254,10 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Population (Writing)', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const field = Field.PopulationWriting;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+    expect(ents.sort(sort).map((ent) => toIDandValue(ent, field))).toEqual([
       '001            48124.0',
       '123            28524.0',
       'Teng           26500.0',
@@ -283,9 +283,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: PopulationOfDescendants', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.PopulationOfDescendants, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'sjn', // 1800 from dori0123
       '123',
       'dori0123',
@@ -312,10 +312,10 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: PercentOfTerritoryPopulation', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const field = Field.PercentOfTerritoryPopulation;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+    expect(ents.sort(sort).map((ent) => toIDandValue(ent, field))).toEqual([
       'be0590         100.0', // 100.0% of Beleriand in the census
       'sjn_ER         80.0',
       'sjn_BE         77.5',
@@ -341,10 +341,10 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: PercentOfOverallLanguageSpeakers', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const field = Field.PercentOfOverallLanguageSpeakers;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+    expect(ents.sort(sort).map((ent) => toIDandValue(ent, field))).toEqual([
       'dori0123_ER    100.0',
       'sjn_123        100.0',
       'dori0123_123   100.0',
@@ -371,12 +371,12 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: PopulationPercentInBiggestDescendantLanguage', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(
       Field.PopulationPercentInBiggestDescendantLanguage,
       SortBehavior.Normal,
     );
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'ER',
       'BE',
       '123',
@@ -403,9 +403,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Language', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Language, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'dori0123', // Doriathrin
       'dori0123_ER',
       'dori0123_123',
@@ -432,9 +432,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Writing System', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.WritingSystem, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       // Tengwar
       '123',
       'sjn',
@@ -462,9 +462,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Territory', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Territory, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'AM', // Aman
       '001', // Arda
       'sjn_001',
@@ -491,9 +491,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Date', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Date, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'tolkorth', // 2020-01-01
       'be0590', // 2000-01-02
       // All below have no associated date, stable to input order
@@ -520,9 +520,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: CountOfLanguages', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.CountOfLanguages, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'sjn_123', // 4 locales: sjn_ER, sjn_BE, sjn_Teng_123, dori0123_123
       'sjn_001', // 3 locales: sjn_123, sjn_Teng_001, dori0123_001
       '123', // 2 languages: sjn, dori0123
@@ -548,9 +548,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: CountOfWritingSystems', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.CountOfWritingSystems, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       // 1 writing system: Tengwar
       '123',
       'sjn',
@@ -578,9 +578,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: CountOfCountries', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.CountOfCountries, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       '001', // 4 countries: AM, BE, ER, HA
       '123', // 3 countries: ER, BE, HA
       'sjn', // 2 countries: ER, BE
@@ -607,9 +607,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: CountOfChildTerritories', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.CountOfChildTerritories, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       '123', // 3 territories: ER, BE, HA
       '001', // 2 territories: 123, AM
       'be0590', // 1 territory: BE
@@ -636,9 +636,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: CountOfCensuses', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.CountOfCensuses, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       'BE', // 1, has be0590
       'be0590', // 1, it is a census
       'sjn_BE', // 1, featured in be0590
@@ -665,10 +665,10 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Literacy', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const field = Field.Literacy;
     const sort = getSortFunctionParameterized(field, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => toIDandValue(obj, field))).toEqual([
+    expect(ents.sort(sort).map((ent) => toIDandValue(ent, field))).toEqual([
       'HA             99.0',
       'AM             98.0',
       '001            96.2', // averaged from Aman & Middle Earth by computeContainedTerritoryStats
@@ -695,9 +695,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Depth', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.Depth, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       // Depth 0 (root nodes)
       'sjn',
       '001',
@@ -730,9 +730,9 @@ describe('getSortByParameterized', () => {
   });
 
   it('sortBy: Language Family', () => {
-    const objects = Object.values(mockedObjects) as ObjectData[];
+    const ents = Object.values(mockedEnts) as EntityData[];
     const sort = getSortFunctionParameterized(Field.LanguageFamily, SortBehavior.Normal);
-    expect(objects.sort(sort).map((obj) => obj.ID)).toEqual([
+    expect(ents.sort(sort).map((ent) => ent.ID)).toEqual([
       // Sindarin is the root language for the 2 languages and their locales, and is found in some territories
       '123',
       'sjn',
@@ -751,7 +751,7 @@ describe('getSortByParameterized', () => {
       'sjn_Teng_001',
       'dori0123_001',
 
-      // Other objects don't have a language family, stable to input order
+      // Other entities don't have a language family, stable to input order
       'HA',
       'AM',
       'be0590',

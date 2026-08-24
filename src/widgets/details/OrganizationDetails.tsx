@@ -28,18 +28,18 @@ const OrganizationDetails: React.FC<Props> = ({ org }) => {
         {nameEndonym && <DetailsField title="Endonym">{nameEndonym}</DetailsField>}
         {headquarters && (
           <DetailsField title="Headquartered in">
-            <HoverableObjectName object={headquarters} />
+            <HoverableObjectName ent={headquarters} />
           </DetailsField>
         )}
         {parent && (
           <DetailsField title="Parent">
-            <HoverableObjectName object={parent} />
+            <HoverableObjectName ent={parent} />
           </DetailsField>
         )}
         {children && children.length > 0 && (
           <DetailsField title="Child Organizations">
             {children.map((child) => (
-              <HoverableObjectName key={child.ID} object={child} />
+              <HoverableObjectName key={child.ID} ent={child} />
             ))}
           </DetailsField>
         )}

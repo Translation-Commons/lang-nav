@@ -1,59 +1,54 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   WikipediaData,
   WikipediaStatus,
 } from '@entities/language/digitalsupport/DigitalSupportTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
-const ObjectWikipediaInfo: React.FC<{ object: ObjectData }> = ({ object }) => {
-  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
+const ObjectWikipediaInfo: React.FC<{ ent: EntityData }> = ({ ent }) => {
+  if (ent?.type !== EntityType.Language && ent?.type !== EntityType.Locale) return null;
 
-  // If the object doesn't have a direct wikipedia, then we may be able to find the status
+  // If the entity doesn't have a direct wikipedia, then we may be able to find the status
   // from the linked language (for locales) the logic is handled in WikipediaStatusDisplay
-  if (!object.wikipedias || object.wikipedias.length === 0)
-    return <WikipediaStatusDisplay object={object} />;
+  if (!ent.wikipedias || ent.wikipedias.length === 0) return <WikipediaStatusDisplay ent={ent} />;
 
-  const wikipedia = object.wikipedias[0] as WikipediaData;
+  const wikipedia = ent.wikipedias[0] as WikipediaData;
 
   return (
     <>
-      <WikipediaStatusDisplay object={object} />
+      <WikipediaStatusDisplay ent={ent} />
       {wikipedia.status === WikipediaStatus.Active && (
         <>
           {': '}
-          <WikipediaArticles object={object} /> articles, <WikipediaActiveUsers object={object} />{' '}
-          active users
+          <WikipediaArticles ent={ent} /> articles, <WikipediaActiveUsers ent={ent} /> active users
         </>
       )}
     </>
   );
 };
 
-export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (
-    object?.type === ObjectType.Locale &&
-    (!object.wikipedias || object.wikipedias.length === 0)
-  ) {
-    if (object.language?.wikipedias && object.language.wikipedias.length > 0) {
+export const WikipediaStatusDisplay: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  if (ent?.type === EntityType.Locale && (!ent.wikipedias || ent.wikipedias.length === 0)) {
+    if (ent.language?.wikipedias && ent.language.wikipedias.length > 0) {
       return (
         <>
-          <WikipediaStatusDisplay object={object.language} /> (see{' '}
-          <HoverableObjectName object={object.language} labelSource="code" />)
+          <WikipediaStatusDisplay ent={ent.language} /> (see{' '}
+          <HoverableObjectName ent={ent.language} labelSource="code" />)
         </>
       );
     }
     return null;
   }
-  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  const { wikipedias } = object;
+  if (ent?.type !== EntityType.Language && ent?.type !== EntityType.Locale) return null;
+  const { wikipedias } = ent;
   if (!wikipedias || wikipedias.length === 0) return <Deemphasized>No wiki</Deemphasized>;
 
   return (
@@ -61,32 +56,32 @@ export const WikipediaStatusDisplay: React.FC<{ object?: ObjectData }> = ({ obje
   );
 };
 
-export const WikipediaArticles: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  if (!object.wikipedias || object.wikipedias.length === 0) return null;
-  if (object.wikipedias[0].status !== WikipediaStatus.Active) return null;
+export const WikipediaArticles: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  if (ent?.type !== EntityType.Language && ent?.type !== EntityType.Locale) return null;
+  if (!ent.wikipedias || ent.wikipedias.length === 0) return null;
+  if (ent.wikipedias[0].status !== WikipediaStatus.Active) return null;
 
-  return object.wikipedias[0].articles.toLocaleString();
+  return ent.wikipedias[0].articles.toLocaleString();
 };
 
-export const WikipediaActiveUsers: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  if (!object.wikipedias || object.wikipedias.length === 0) return null;
-  if (object.wikipedias[0].status !== WikipediaStatus.Active) return null;
+export const WikipediaActiveUsers: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  if (ent?.type !== EntityType.Language && ent?.type !== EntityType.Locale) return null;
+  if (!ent.wikipedias || ent.wikipedias.length === 0) return null;
+  if (ent.wikipedias[0].status !== WikipediaStatus.Active) return null;
 
-  return <CountOfPeople count={object.wikipedias[0].activeUsers} />;
+  return <CountOfPeople count={ent.wikipedias[0].activeUsers} />;
 };
 
-export const WikipediaLink: React.FC<{ object?: ObjectData; showURL?: boolean }> = ({
-  object,
+export const WikipediaLink: React.FC<{ ent?: EntityData; showURL?: boolean }> = ({
+  ent,
   showURL = false,
 }) => {
-  if (object?.type !== ObjectType.Language && object?.type !== ObjectType.Locale) return null;
-  if (!object.wikipedias || object.wikipedias.length === 0) return null;
+  if (ent?.type !== EntityType.Language && ent?.type !== EntityType.Locale) return null;
+  if (!ent.wikipedias || ent.wikipedias.length === 0) return null;
 
   return (
-    <LinkButton href={`https://${object.wikipedias[0].url}`}>
-      {showURL && object.wikipedias[0].url}
+    <LinkButton href={`https://${ent.wikipedias[0].url}`}>
+      {showURL && ent.wikipedias[0].url}
     </LinkButton>
   );
 };

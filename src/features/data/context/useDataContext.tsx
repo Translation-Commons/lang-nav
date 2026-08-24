@@ -4,7 +4,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -13,7 +13,7 @@ import { CoreDataArrays } from '../load/CoreData';
 import LoadingStage from './LoadingStage';
 
 type DataGetters = {
-  getObject(id: string): ObjectData | undefined;
+  getObject(id: string): EntityData | undefined;
   getLanguage: (id: string) => LanguageData | undefined;
   getCLDRLanguage: (id: string) => LanguageData | undefined;
   getLocale: (id: string) => LocaleData | undefined;

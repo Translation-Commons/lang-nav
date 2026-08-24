@@ -78,7 +78,7 @@ const VariantLanguoidToggle: React.FC<{
   let predictedText = undefined;
   switch (languageSelectorMode) {
     case LanguageSelectorMode.Current:
-      predictedText = <HoverableObjectName object={saved ?? predicted} />;
+      predictedText = <HoverableObjectName ent={saved ?? predicted} />;
       break;
     case LanguageSelectorMode.Manual:
       predictedText = (
@@ -93,10 +93,10 @@ const VariantLanguoidToggle: React.FC<{
       );
       break;
     case LanguageSelectorMode.Uncoded:
-      predictedText = <HoverableObjectName object={languageUncoded} />;
+      predictedText = <HoverableObjectName ent={languageUncoded} />;
       break;
     case LanguageSelectorMode.Unset:
-      predictedText = <HoverableObjectName object={saved ?? predicted} />;
+      predictedText = <HoverableObjectName ent={saved ?? predicted} />;
       break;
   }
 

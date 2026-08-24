@@ -1,10 +1,10 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { LanguageCode } from '../language/LanguageTypes';
-import { ObjectBase } from '../types/DataTypes';
+import { EntityBase } from '../types/DataTypes';
 
 // Unique identifier for the census or other source of population data
 export type CensusID = string; // eg. 'ca2021.2', 'us2013.1'
@@ -33,8 +33,8 @@ export enum CensusQuantity {
   Percent = 'percent',
 }
 
-export interface CensusData extends ObjectBase {
-  type: ObjectType.Census;
+export interface CensusData extends EntityBase {
+  type: EntityType.Census;
   ID: CensusID;
   codeDisplay: CensusID;
   nameDisplay: string;
@@ -86,7 +86,7 @@ export interface CensusData extends ObjectBase {
   languageCount: number; // Number of languages in this collection
   languageEstimates: Record<LanguageCode, number>; // Language code to population estimate mapping
 
-  // Connections to other objects loaded after the fact
+  // Connections to other entities loaded after the fact
   territory?: TerritoryData;
   collector?: OrganizationData;
   presenter?: OrganizationData;

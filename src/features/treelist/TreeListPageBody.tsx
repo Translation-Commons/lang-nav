@@ -7,7 +7,7 @@ import { useFilterByVitality } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { filterBranch } from './filterBranch';
 import { TreeNodeData } from './TreeListNode';
@@ -55,8 +55,8 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
     ],
   );
   const filterFunction = useCallback(
-    (object: ObjectData) => {
-      return filterBySubstring(object) && filterByConnections(object) && filterByVitality(object);
+    (ent: EntityData) => {
+      return filterBySubstring(ent) && filterByConnections(ent) && filterByVitality(ent);
     },
     [filterBySubstring, filterByConnections, filterByVitality],
   );

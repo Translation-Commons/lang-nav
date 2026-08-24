@@ -11,7 +11,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 const columns: TableColumn<LocaleData>[] = [
   {
     key: 'Literacy',
-    render: (object) => object.literacyPercent,
+    render: (ent) => ent.literacyPercent,
     field: Field.Literacy,
   },
   {
@@ -25,7 +25,7 @@ const columns: TableColumn<LocaleData>[] = [
         means it specifically refers to Traditional Han characters.
       </>
     ),
-    render: (object) => <HoverableObjectName object={object.writingSystem} />,
+    render: (ent) => <HoverableObjectName ent={ent.writingSystem} />,
   },
   {
     key: 'Writing System (inferred)',
@@ -37,8 +37,8 @@ const columns: TableColumn<LocaleData>[] = [
         is the Simplified characters, it can be inferred to be <code>Hans</code>.
       </>
     ),
-    render: (object) => (
-      <HoverableObjectName object={object.writingSystem ?? object.language?.primaryWritingSystem} />
+    render: (ent) => (
+      <HoverableObjectName ent={ent.writingSystem ?? ent.language?.primaryWritingSystem} />
     ),
     field: Field.WritingSystem,
   },
@@ -46,10 +46,8 @@ const columns: TableColumn<LocaleData>[] = [
     key: 'Population (Writing)',
     description:
       'Some of these are based on censuses with precise data about writing, but most are computed from spoken language usage estimates and converted to writing usage based on literacy rate and spoken traditions.',
-    render: (object) => (
-      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Writing} />
-    ),
-    exportValue: (object) => object.pop.writing.adjusted,
+    render: (ent) => <LocalePopulationAdjusted locale={ent} focus={PopulationFocus.Writing} />,
+    exportValue: (ent) => ent.pop.writing.adjusted,
     field: Field.PopulationWriting,
     isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
@@ -57,7 +55,7 @@ const columns: TableColumn<LocaleData>[] = [
     key: 'Population (Writing, percent)',
     description:
       'The percent of people in the territory that read and/or write in the language, often computed from other estimates, these should be taken with a grain of salt.',
-    render: (object) => object.pop.writing.percentAdjusted,
+    render: (ent) => ent.pop.writing.percentAdjusted,
     valueType: TableValueType.Decimal,
     isInitiallyVisible: (params) => params.populationFocus === PopulationFocus.Writing,
   },
@@ -65,7 +63,7 @@ const columns: TableColumn<LocaleData>[] = [
     key: 'Population (Writing, source)',
     description:
       'Source for the writing-population estimate. This may come from a writing-specific census record, or be derived from broader usage estimates and adjusted using literacy rate and modality discounts.',
-    render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Writing} />,
+    render: (ent) => <LocaleCensusCitation locale={ent} focus={PopulationFocus.Writing} />,
     isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Speaking,
   },
 ];

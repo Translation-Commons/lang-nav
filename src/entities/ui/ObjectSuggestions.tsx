@@ -1,11 +1,11 @@
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import getObjectFromID from '../lib/getObjectFromID';
 
-const ObjectSuggestions: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
+const ObjectSuggestions: React.FC<{ entityType: EntityType }> = ({ entityType }) => {
   return (
     <div
       style={{
@@ -17,35 +17,35 @@ const ObjectSuggestions: React.FC<{ objectType: ObjectType }> = ({ objectType })
         marginTop: '1em',
       }}
     >
-      {getObjectIDs(objectType).map((id) => (
-        <HoverableObjectName key={id} object={getObjectFromID(id)} format="button" />
+      {getObjectIDs(entityType).map((id) => (
+        <HoverableObjectName key={id} ent={getObjectFromID(id)} format="button" />
       ))}
     </div>
   );
 };
 
-function getObjectIDs(objectType: ObjectType): string[] {
-  switch (objectType) {
-    case ObjectType.Census:
+function getObjectIDs(entityType: EntityType): string[] {
+  switch (entityType) {
+    case EntityType.Census:
       return ['ca2021.1', 'ca2021.4', 'in2011c16.1', 'in2011c17.4'];
-    case ObjectType.Language:
+    case EntityType.Language:
       return ['eng', 'spa', 'fra', 'rus', 'zho', 'ara'];
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return ['eng_US', 'spa_419', 'fra_FR', 'rus_RU', 'arb_001', 'zho_Hans_CN', 'cmn_CN'];
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return ['US', 'MX', 'FR', 'RU', 'EG', 'CN'];
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return ['valencia', 'grclass', 'rumgr', 'pinyin'];
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return ['Latn', 'Cyrl', 'Arab', 'Hans', 'Hant'];
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return [
         'gboard_eng_Latn_US',
         'gboard_spa_Latn_ES',
         'gboard_fra_Latn_FR',
         'gboard_ara_Arab_SA',
       ];
-    case ObjectType.Org:
+    case EntityType.Org:
       return [];
   }
 }

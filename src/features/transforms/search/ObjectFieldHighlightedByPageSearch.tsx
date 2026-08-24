@@ -3,13 +3,13 @@ import React from 'react';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import getSearchableField from './getSearchableField';
 import HighlightedObjectField from './HighlightedObjectField';
 
 interface Props {
-  object: ObjectData;
+  ent: EntityData;
   field: SearchableField;
 }
 
@@ -17,11 +17,11 @@ interface Props {
  * Use this if you want to highlight something based on the page search.
  * Use HighlightedObjectField if you want to highlight on arbitrary queries unrelated to the current search.
  */
-const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ object, field }) => {
+const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ ent, field }) => {
   const { searchBy: pageSearchBy, searchString } = usePageParams();
 
   if (pageSearchBy === field) {
-    return <HighlightedObjectField object={object} query={searchString} field={field} />;
+    return <HighlightedObjectField ent={ent} query={searchString} field={field} />;
   } else if (
     pageSearchBy === SearchableField.NameAny &&
     [
@@ -34,13 +34,13 @@ const ObjectFieldHighlightedByPageSearch: React.FC<Props> = ({ object, field }) 
     ].includes(field)
   ) {
     // If searching on all names, also highlight fields for English Name or Endonym
-    return <HighlightedObjectField object={object} query={searchString} field={field} />;
+    return <HighlightedObjectField ent={ent} query={searchString} field={field} />;
   } else if (pageSearchBy === SearchableField.CodeOrNameAny) {
     // If searching on name or code, also highlight fields for English Name or Code
-    return <HighlightedObjectField object={object} query={searchString} field={field} />;
+    return <HighlightedObjectField ent={ent} query={searchString} field={field} />;
   }
   // Otherwise don't highlight, just return the field value
-  return getSearchableField(object, field, searchString);
+  return getSearchableField(ent, field, searchString);
 };
 
 export default ObjectFieldHighlightedByPageSearch;

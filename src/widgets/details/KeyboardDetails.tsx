@@ -43,7 +43,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
           {languages && languages.length > 0 ? (
             <CommaSeparated>
               {languages.map((lang) => (
-                <HoverableObjectName key={lang.ID} object={lang} />
+                <HoverableObjectName key={lang.ID} ent={lang} />
               ))}
             </CommaSeparated>
           ) : (
@@ -56,7 +56,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
         {(territory || territoryCode) && (
           <DetailsField title="Territory">
             {territory ? (
-              <HoverableObjectName object={territory} />
+              <HoverableObjectName ent={territory} />
             ) : (
               <span>
                 {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
@@ -68,7 +68,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
         {sameScript ? (
           <DetailsField title="Writing System">
             {inputWritingSystem ? (
-              <HoverableObjectName object={inputWritingSystem} />
+              <HoverableObjectName ent={inputWritingSystem} />
             ) : (
               <span>
                 {inputScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
@@ -79,7 +79,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
           <>
             <DetailsField title="Input Script">
               {inputWritingSystem ? (
-                <HoverableObjectName object={inputWritingSystem} />
+                <HoverableObjectName ent={inputWritingSystem} />
               ) : (
                 <span>
                   {inputScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
@@ -88,7 +88,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
             </DetailsField>
             <DetailsField title="Output Script">
               {outputWritingSystem ? (
-                <HoverableObjectName object={outputWritingSystem} />
+                <HoverableObjectName ent={outputWritingSystem} />
               ) : (
                 <span>
                   {outputScriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
@@ -117,7 +117,7 @@ const KeyboardDetails: React.FC<Props> = ({ keyboard }) => {
           <DetailsField title="Locale">
             <CommaSeparated>
               {locales.map((locale) => (
-                <HoverableObjectName key={locale.ID} object={locale} />
+                <HoverableObjectName key={locale.ID} ent={locale} />
               ))}
             </CommaSeparated>
           </DetailsField>

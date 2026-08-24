@@ -12,31 +12,31 @@ import getField from '@features/transforms/fields/getField';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import BackgroundProgressBar from '@shared/ui/BackgroundProgressBar';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
 const ReportEntitiesMissingFields: React.FC = () => {
-  const { objectType } = usePageParams();
+  const { entityType } = usePageParams();
   const { filteredEntities } = useFilteredEntities({});
 
-  const fields = getApplicableFields(undefined, objectType).filter((f) => f !== Field.None);
+  const fields = getApplicableFields(undefined, entityType).filter((f) => f !== Field.None);
 
   const countTotal = filteredEntities.length;
   const resultsByField = useMemo(
     () =>
       fields.reduce(
         (acc, field) => {
-          const knownCount = filteredEntities.filter((obj) => getField(obj, field) != null).length;
+          const knownCount = filteredEntities.filter((ent) => getField(ent, field) != null).length;
           const examples = filteredEntities
-            .filter((obj) => getField(obj, field) == null)
+            .filter((ent) => getField(ent, field) == null)
             .slice(0, 4);
           acc[field] = { knownCount, missingCount: countTotal - knownCount, examples };
           return acc;
         },
-        {} as Record<Field, { knownCount: number; missingCount: number; examples: ObjectData[] }>,
+        {} as Record<Field, { knownCount: number; missingCount: number; examples: EntityData[] }>,
       ),
     [fields, filteredEntities, countTotal],
   );
@@ -44,7 +44,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
   return (
     <>
       This report shows which fields have the most missing data for the currently filtered{' '}
-      {getEntityTypeLabelPlural(objectType)}. This can help identify gaps in the data and potential
+      {getEntityTypeLabelPlural(entityType)}. This can help identify gaps in the data and potential
       areas for improvement.
       <table>
         <thead>
@@ -83,7 +83,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
                 <td>
                   <CommaSeparated>
                     {resultsByField[field].examples.map((example, index) => (
-                      <HoverableObjectName key={index} object={example} labelSource="code" />
+                      <HoverableObjectName key={index} ent={example} labelSource="code" />
                     ))}
                   </CommaSeparated>
                 </td>

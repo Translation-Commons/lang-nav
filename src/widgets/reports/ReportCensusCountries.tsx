@@ -18,7 +18,7 @@ const ReportCensusCountries: React.FC = () => {
   return (
     <InteractiveEntityTable<TerritoryData>
       tableID={TableID.CountriesWithCensuses}
-      entities={territories}
+      ents={territories}
       columns={[
         CodeColumn,
         NameColumn,
@@ -36,7 +36,7 @@ const ReportCensusCountries: React.FC = () => {
                   {territory.censuses
                     ?.filter((census) => census.collectorType === collectorType)
                     .map((census) => (
-                      <HoverableObjectName key={census.ID} object={census} />
+                      <HoverableObjectName key={census.ID} ent={census} />
                     ))}
                 </CommaSeparated>
               </div>

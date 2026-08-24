@@ -21,21 +21,21 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     NameColumn,
     {
       key: 'Type',
-      render: (object) => (object.variantType ? getVariantTypeDisplay(object.variantType) : '—'),
+      render: (ent) => (ent.variantType ? getVariantTypeDisplay(ent.variantType) : '—'),
       field: Field.VariantType,
     },
     {
       key: 'Date Added',
-      render: (object) => object.dateAdded?.toLocaleDateString(),
+      render: (ent) => ent.dateAdded?.toLocaleDateString(),
       isInitiallyVisible: false,
       field: Field.Date,
     },
     {
       key: 'Languages',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {object.languages.map((lang) => (
-            <HoverableObjectName object={lang} key={lang.ID} />
+          {ent.languages.map((lang) => (
+            <HoverableObjectName ent={lang} key={lang.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -43,17 +43,17 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     },
     {
       key: 'Equivalent Language',
-      render: (object) => {
-        if (!object.equivalentLanguage || object.equivalentLanguage.ID === 'mis') return null;
-        return <HoverableObjectName object={object.equivalentLanguage} />;
+      render: (ent) => {
+        if (!ent.equivalentLanguage || ent.equivalentLanguage.ID === 'mis') return null;
+        return <HoverableObjectName ent={ent.equivalentLanguage} />;
       },
       field: Field.Language,
       columnGroup: 'Related Objects',
     },
     {
       key: 'Language Count',
-      render: (object) => (
-        <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
+      render: (ent) => (
+        <HoverableEnumeration items={ent.languages.map((lang) => lang.nameDisplay)} />
       ),
       field: Field.CountOfLanguages,
       isInitiallyVisible: false,
@@ -61,10 +61,10 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     },
     {
       key: 'Writing Systems',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {getWritingSystemsInObject(object)?.map((ws) => (
-            <HoverableObjectName object={ws} key={ws.ID} />
+          {getWritingSystemsInObject(ent)?.map((ws) => (
+            <HoverableObjectName ent={ws} key={ws.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -74,10 +74,10 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     },
     {
       key: 'Specific to Territories',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {getChildTerritoriesInObject(object)?.map((territory) => (
-            <HoverableObjectName object={territory} key={territory.ID} />
+          {getChildTerritoriesInObject(ent)?.map((territory) => (
+            <HoverableObjectName ent={territory} key={territory.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -95,7 +95,7 @@ function getVariantColumns(): TableColumn<VariantData>[] {
           only be a small group of people or only found in manuscripts.
         </>
       ),
-      render: (object) => getObjectPopulation(object),
+      render: (ent) => getObjectPopulation(ent),
       isInitiallyVisible: false,
       field: Field.Population,
     },

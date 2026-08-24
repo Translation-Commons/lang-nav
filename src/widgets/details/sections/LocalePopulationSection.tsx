@@ -80,7 +80,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                       <DecimalNumber num={censusEstimate.populationPercent} />%
                     </td>
                     <td className="px-2">
-                      <HoverableObjectName object={censusEstimate.census} />
+                      <HoverableObjectName ent={censusEstimate.census} />
                     </td>
                     <td className="px-2 text-right">
                       <PercentageDifference

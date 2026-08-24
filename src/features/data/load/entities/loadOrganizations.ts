@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
@@ -23,7 +23,7 @@ function parseOrganizationLine(line: string): OrganizationData | undefined {
   const [codeDisplay, nameDisplay, nameEndonym, headquartersCode, parentCode, url] = parts;
 
   return {
-    type: ObjectType.Org,
+    type: EntityType.Org,
     ID: `org.${codeDisplay}`,
     codeDisplay,
     nameDisplay,

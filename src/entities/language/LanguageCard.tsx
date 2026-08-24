@@ -35,8 +35,8 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={lang} />
-        <ObjectSubtitle object={lang} />
+        <ObjectTitle ent={lang} />
+        <ObjectSubtitle ent={lang} />
       </div>
 
       <CardField

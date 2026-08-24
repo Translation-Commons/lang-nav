@@ -10,11 +10,7 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
   return (
     <DetailsSection title="Primary Information">
       <DetailsField title="Territory">
-        {territory != null ? (
-          <HoverableObjectName object={territory} />
-        ) : (
-          <span>{isoRegionCode}</span>
-        )}
+        {territory != null ? <HoverableObjectName ent={territory} /> : <span>{isoRegionCode}</span>}
       </DetailsField>
       <DetailsField title="Year">{census.yearCollected}</DetailsField>
       {languageUse != null && <DetailsField title="Language Use">{languageUse}</DetailsField>}

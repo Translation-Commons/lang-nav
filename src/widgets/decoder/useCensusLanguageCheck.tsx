@@ -140,8 +140,8 @@ function checkName(l: CensusLanguageNotes) {
 
   l.issues.push(
     <>
-      Name does not match an existing name for <HoverableObjectName object={l.entry} /> -- it will
-      be added as an alternate name for search but should be checked for accuracy.
+      Name does not match an existing name for <HoverableObjectName ent={l.entry} /> -- it will be
+      added as an alternate name for search but should be checked for accuracy.
     </>,
   );
 }
@@ -165,17 +165,17 @@ function checkFoundLanguage(l: CensusLanguageNotes, foundLanguage?: EntityData) 
     l.issues.push(
       <>
         Code may be <code>{foundLanguage.ID}</code>? The language name matches{' '}
-        <HoverableObjectName object={foundLanguage} /> but the code is for{' '}
-        <HoverableObjectName object={l.entry} />. Check if the correct language is associated with
-        this census entry.
+        <HoverableObjectName ent={foundLanguage} /> but the code is for{' '}
+        <HoverableObjectName ent={l.entry} />. Check if the correct language is associated with this
+        census entry.
       </>,
     );
   } else {
     l.issues.push(
       <>
         Code may be <code>{foundLanguage.ID}</code>? The language name matches{' '}
-        <HoverableObjectName object={foundLanguage} /> and the code does not match a language. Check
-        if the correct language is associated with this census entry.
+        <HoverableObjectName ent={foundLanguage} /> and the code does not match a language. Check if
+        the correct language is associated with this census entry.
       </>,
     );
   }
@@ -194,11 +194,11 @@ function checkMacrolanguage(l: CensusLanguageNotes, foundLanguage?: LanguageData
   l.issues.push(
     <>
       Code may be <code>{codeWithMacro}</code>
-      . <HoverableObjectName object={matchingLang} /> is contained by language
+      . <HoverableObjectName ent={matchingLang} /> is contained by language
       {parentLangs.length > 1 ? ' categories ' : ' category '}
       <CommaSeparated>
         {parentLangs.map((p) => (
-          <HoverableObjectName key={p.ID} object={p} />
+          <HoverableObjectName key={p.ID} ent={p} />
         ))}
       </CommaSeparated>
       .

@@ -4,7 +4,7 @@ import useEntities from '@features/data/context/useEntities';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
 import { getFilterLabels } from '../filtering/FilterLabels';
@@ -21,27 +21,25 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const filterLabels = getFilterLabels();
 
   const [getMatchDistance, getMatchGroup] = useMemo(() => {
-    const getMatchDistance = (object: ObjectData): number => {
+    const getMatchDistance = (ent: EntityData): number => {
       let dist = 0;
-      if (!filterBy[Field.LanguageFamily]?.(object)) dist += 1;
-      if (!filterBy[Field.Language]?.(object)) dist += 2;
-      if (!filterBy[Field.WritingSystem]?.(object)) dist += 4;
-      if (!filterBy[Field.Territory]?.(object)) dist += 8;
-      if (!filterBy[Field.TerritoryScope]?.(object)) dist += 16;
-      if (!filterBy[Field.Modality]?.(object)) dist += 32;
-      if (!filterBy[Field.LanguageScope]?.(object)) dist += 64;
+      if (!filterBy[Field.LanguageFamily]?.(ent)) dist += 1;
+      if (!filterBy[Field.Language]?.(ent)) dist += 2;
+      if (!filterBy[Field.WritingSystem]?.(ent)) dist += 4;
+      if (!filterBy[Field.Territory]?.(ent)) dist += 8;
+      if (!filterBy[Field.TerritoryScope]?.(ent)) dist += 16;
+      if (!filterBy[Field.Modality]?.(ent)) dist += 32;
+      if (!filterBy[Field.LanguageScope]?.(ent)) dist += 64;
       return dist;
     };
-    const getMatchGroup = (object: ObjectData): string => {
-      if (!filterBy[Field.LanguageFamily]?.(object))
-        return 'not ' + filterLabels.languageFamilyFilter;
-      if (!filterBy[Field.Language]?.(object)) return 'not ' + filterLabels.languageFilter;
-      if (!filterBy[Field.WritingSystem]?.(object))
-        return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterBy[Field.Territory]?.(object)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterBy[Field.TerritoryScope]?.(object)) return 'not ' + filterLabels.territoryScope;
-      if (!filterBy[Field.Modality]?.(object)) return 'not ' + filterLabels.modalityFilter;
-      if (!filterBy[Field.LanguageScope]?.(object)) return 'not ' + filterLabels.languageScope;
+    const getMatchGroup = (ent: EntityData): string => {
+      if (!filterBy[Field.LanguageFamily]?.(ent)) return 'not ' + filterLabels.languageFamilyFilter;
+      if (!filterBy[Field.Language]?.(ent)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy[Field.WritingSystem]?.(ent)) return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterBy[Field.Territory]?.(ent)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterBy[Field.TerritoryScope]?.(ent)) return 'not ' + filterLabels.territoryScope;
+      if (!filterBy[Field.Modality]?.(ent)) return 'not ' + filterLabels.modalityFilter;
+      if (!filterBy[Field.LanguageScope]?.(ent)) return 'not ' + filterLabels.languageScope;
       return 'matched';
     };
     return [getMatchDistance, getMatchGroup];
@@ -63,17 +61,17 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
         .filter(substringFilter)
         .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
         .slice(0, SUGGESTION_LIMIT)
-        .map((object) => {
+        .map((ent) => {
           const label = (
             <HighlightedObjectField
-              object={object}
+              ent={ent}
               field={searchBy}
               query={query}
               showOriginalName={true}
             />
           );
-          const searchString = getSearchableField(object, searchBy);
-          return { objectID: object.ID, searchString, label, group: getMatchGroup(object) };
+          const searchString = getSearchableField(ent, searchBy);
+          return { entID: ent.ID, searchString, label, group: getMatchGroup(ent) };
         });
     },
     [pageObjects, searchBy, getMatchDistance, getMatchGroup],

@@ -23,18 +23,18 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
           adding up the population for all of the languages that use the writing system.
         </>
       ),
-      render: (object) => object.populationUpperBound,
+      render: (ent) => ent.populationUpperBound,
       field: Field.Population,
     },
     {
       key: 'Languages',
-      render: (object) =>
-        object.languages && (
+      render: (ent) =>
+        ent.languages && (
           <CommaSeparated limit={1} limitText="short">
-            {Object.values(object.languages)
+            {Object.values(ent.languages)
               .sort(sortByPopulation)
               .map((l) => (
-                <HoverableObjectName object={l} key={l.ID} />
+                <HoverableObjectName ent={l} key={l.ID} />
               ))}
           </CommaSeparated>
         ),
@@ -43,9 +43,9 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     },
     {
       key: 'Language Count',
-      render: (object) =>
-        object.languages && (
-          <HoverableEnumeration items={Object.values(object.languages).map((l) => l.nameDisplay)} />
+      render: (ent) =>
+        ent.languages && (
+          <HoverableEnumeration items={Object.values(ent.languages).map((l) => l.nameDisplay)} />
         ),
       field: Field.CountOfLanguages,
       isInitiallyVisible: false,
@@ -54,8 +54,8 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     {
       key: 'Keyboard Count',
       description: 'Number of keyboard layouts that output this writing system.',
-      render: (object) => (
-        <HoverableEnumeration items={object.outputKeyboards?.map((kb) => kb.nameDisplay)} />
+      render: (ent) => (
+        <HoverableEnumeration items={ent.outputKeyboards?.map((kb) => kb.nameDisplay)} />
       ),
       field: Field.CountOfKeyboards,
       columnGroup: 'Related Objects',
@@ -63,15 +63,15 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     },
     {
       key: 'Area of Origin',
-      render: (object) => <HoverableObjectName object={object.territoryOfOrigin} />,
+      render: (ent) => <HoverableObjectName ent={ent.territoryOfOrigin} />,
       field: Field.Territory,
       isInitiallyVisible: false,
       columnGroup: 'Related Objects',
     },
     {
       key: 'Used in Countries',
-      render: (object) => (
-        <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
+      render: (ent) => (
+        <HoverableEnumeration items={getCountriesInObject(ent)?.map((t) => t.nameDisplay)} />
       ),
       isInitiallyVisible: false,
       field: Field.CountOfCountries,

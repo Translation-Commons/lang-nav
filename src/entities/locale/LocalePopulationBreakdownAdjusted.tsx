@@ -41,7 +41,7 @@ const LocalePopulationBreakdownAdjusted: React.FC<{
           <td>Source</td>
           <td colSpan={2} style={{ textAlign: 'right' }}>
             {census ? (
-              <HoverableObjectName object={census} />
+              <HoverableObjectName ent={census} />
             ) : (
               <Deemphasized>No citation</Deemphasized>
             )}

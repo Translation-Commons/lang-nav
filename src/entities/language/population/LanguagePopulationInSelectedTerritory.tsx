@@ -37,7 +37,7 @@ const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = 
   );
 
   return (
-    <HoverableObject object={biggestLocale}>
+    <HoverableObject ent={biggestLocale}>
       <CountOfPeople
         count={Math.max(...locales.map((locale) => locale.pop.speaking.adjusted ?? 0))}
       />

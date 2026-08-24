@@ -26,7 +26,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
       )}
       {primaryWritingSystem && (
         <DetailsField title="Primary Writing System">
-          <HoverableObjectName object={primaryWritingSystem} />
+          <HoverableObjectName ent={primaryWritingSystem} />
         </DetailsField>
       )}
       {Object.values(writingSystems).length > 0 && (
@@ -35,7 +35,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
             {Object.values(writingSystems)
               .sort(getSortFunction())
               .map((writingSystem) => (
-                <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
+                <HoverableObjectName key={writingSystem.ID} ent={writingSystem} />
               ))}
           </CommaSeparated>
         </DetailsField>

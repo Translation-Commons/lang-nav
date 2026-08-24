@@ -20,7 +20,7 @@ const LanguageWritingSystems: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <CommaSeparated limit={1} limitText="short">
       {writingSystems.map((ws) => (
-        <HoverableObjectName key={ws.ID} object={ws} />
+        <HoverableObjectName key={ws.ID} ent={ws} />
       ))}
     </CommaSeparated>
   );

@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   KeyboardData,
@@ -37,7 +37,7 @@ export function parseKeyboardKeymanLine(line: string): KeyboardData | undefined 
   const languageCodes = langCodesRaw !== '' ? langCodesRaw.split(',') : [];
 
   return {
-    type: ObjectType.Keyboard,
+    type: EntityType.Keyboard,
     ID: id,
     codeDisplay: id,
     nameDisplay,

@@ -80,7 +80,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
           render: (variant) => (
             <CommaSeparated limit={1} limitText="short">
               {variant.languages.map((l) => (
-                <HoverableObjectName key={l.ID} object={l} />
+                <HoverableObjectName key={l.ID} ent={l} />
               ))}
             </CommaSeparated>
           ),
@@ -90,11 +90,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
   );
 
   return (
-    <InteractiveEntityTable
-      entities={variants}
-      tableID={TableID.VariantAnnotation}
-      columns={columns}
-    />
+    <InteractiveEntityTable ents={variants} tableID={TableID.VariantAnnotation} columns={columns} />
   );
 };
 

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
@@ -11,7 +11,7 @@ import getObjectFromID from '../../lib/getObjectFromID';
 import ObjectSuggestions from '../ObjectSuggestions';
 
 vi.mock('../../lib/getObjectFromID', () => ({
-  default: vi.fn((id: string) => getBaseLanguageData(id, `OBJ:${id}`)),
+  default: vi.fn((id: string) => getBaseLanguageData(id, `ENT:${id}`)),
 }));
 vi.mock('@features/params/usePageParams', () => ({
   default: vi.fn().mockReturnValue(createMockUsePageParams({})),
@@ -21,17 +21,17 @@ vi.mock('@features/layers/hovercard/useHoverCard', () => ({
 }));
 
 describe('ObjectSuggestions', () => {
-  it('renders suggestion buttons for ObjectType.Language and calls getObjectFromID for each id', () => {
-    render(<ObjectSuggestions objectType={ObjectType.Language} />);
+  it('renders suggestion buttons for EntityType.Language and calls getObjectFromID for each id', () => {
+    render(<ObjectSuggestions entityType={EntityType.Language} />);
 
     const buttons = screen.getAllByRole('button');
     // Expect the six language IDs from the component implementation
     expect(buttons).toHaveLength(6);
 
     // Verify specific items rendered
-    expect(screen.getByText('OBJ:eng')).toBeTruthy();
-    expect(screen.getByText('OBJ:spa')).toBeTruthy();
-    expect(screen.getByText('OBJ:zho')).toBeTruthy();
+    expect(screen.getByText('ENT:eng')).toBeTruthy();
+    expect(screen.getByText('ENT:spa')).toBeTruthy();
+    expect(screen.getByText('ENT:zho')).toBeTruthy();
 
     // Verify getObjectFromID was called for each expected id
     const mock = getObjectFromID as Mock;
@@ -43,16 +43,16 @@ describe('ObjectSuggestions', () => {
     expect(mock).toHaveBeenCalledWith('ara');
   });
 
-  it('renders suggestion buttons for ObjectType.Locale and includes expected locale ids', () => {
-    render(<ObjectSuggestions objectType={ObjectType.Locale} />);
+  it('renders suggestion buttons for EntityType.Locale and includes expected locale ids', () => {
+    render(<ObjectSuggestions entityType={EntityType.Locale} />);
 
     const buttons = screen.getAllByRole('button');
     // Expect the seven locale IDs from the component implementation
     expect(buttons).toHaveLength(7);
 
     // Check a couple of locale renders
-    expect(screen.getByText('OBJ:eng_US')).toBeTruthy();
-    expect(screen.getByText('OBJ:zho_Hans_CN')).toBeTruthy();
+    expect(screen.getByText('ENT:eng_US')).toBeTruthy();
+    expect(screen.getByText('ENT:zho_Hans_CN')).toBeTruthy();
 
     const mock = getObjectFromID as Mock;
     expect(mock).toHaveBeenCalledWith('eng_US');

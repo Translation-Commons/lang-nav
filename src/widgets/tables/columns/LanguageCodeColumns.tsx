@@ -24,7 +24,7 @@ const columns: TableColumn<LanguageData>[] = [
     description: <CodeDisplayDescription />,
     render: (lang: LanguageData): ReactNode => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.Code} />
+        <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.Code} />
         {<MaybeISOWarning lang={lang} />}
       </div>
     ),
@@ -67,7 +67,7 @@ const columns: TableColumn<LanguageData>[] = [
       lang.CLDR.code !== lang.ISO.code ? (
         <>
           {lang.CLDR.code}
-          <CLDRWarningNotes object={lang} />
+          <CLDRWarningNotes ent={lang} />
         </>
       ) : (
         <Deemphasized>{lang.CLDR.code}</Deemphasized>

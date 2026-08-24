@@ -1,14 +1,14 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getLocaleName } from '@entities/locale/LocaleStrings';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import HoverableObject from './HoverableObject';
 
 type Props = {
-  object?: ObjectData;
+  ent?: EntityData;
   labelSource?:
     | 'name'
     | 'code'
@@ -22,31 +22,31 @@ type Props = {
 };
 
 const HoverableObjectName: React.FC<Props> = ({
-  object,
+  ent,
   labelSource = 'name',
   format = 'text',
   style,
 }) => {
-  if (!object) return null;
+  if (!ent) return null;
 
-  let label = labelSource == 'code' ? object.codeDisplay : object.nameDisplay;
+  let label = labelSource == 'code' ? ent.codeDisplay : ent.nameDisplay;
   if (labelSource == 'name and code') {
-    label = `${object.nameDisplay} [${object.codeDisplay}]`;
+    label = `${ent.nameDisplay} [${ent.codeDisplay}]`;
   }
-  if (object.type === ObjectType.Locale) {
+  if (ent.type === EntityType.Locale) {
     if (labelSource == 'language') {
-      label = object.language?.nameDisplay ?? object.languageCode;
+      label = ent.language?.nameDisplay ?? ent.languageCode;
     } else if (labelSource == 'territory') {
-      label = object.territory?.nameDisplay ?? object.territoryCode ?? '[no territory]';
+      label = ent.territory?.nameDisplay ?? ent.territoryCode ?? '[no territory]';
     } else if (labelSource == 'locale without territory') {
-      label = getLocaleName(object, false /* includeTerritory */);
+      label = getLocaleName(ent, false /* includeTerritory */);
     } else if (labelSource == 'locale without language') {
-      label = getLocaleName(object, true, false /* includeLanguage */);
+      label = getLocaleName(ent, true, false /* includeLanguage */);
     }
   }
 
   return (
-    <HoverableObject object={object}>
+    <HoverableObject ent={ent}>
       <span style={style}>{format === 'text' ? label : <button>{label}</button>}</span>
     </HoverableObject>
   );

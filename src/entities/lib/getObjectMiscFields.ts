@@ -1,12 +1,12 @@
 import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -15,90 +15,90 @@ import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
 
 // Field.Language
-export function getObjectMostImportantLanguageName(object: ObjectData): string | undefined {
-  switch (object.type) {
-    case ObjectType.Territory:
-      return getTerritoryBiggestLocale(object)?.language?.nameDisplay;
-    case ObjectType.Locale:
-      return object.language?.nameDisplay;
-    case ObjectType.Language:
-      return object.nameDisplay;
-    case ObjectType.Variant:
-      return (object.equivalentLanguage ?? object.languages?.[0])?.nameDisplay;
-    case ObjectType.WritingSystem:
-      return object.languages
-        ? Object.values(object.languages).sort(sortByPopulation)[0].nameDisplay
+export function getObjectMostImportantLanguageName(ent: EntityData): string | undefined {
+  switch (ent.type) {
+    case EntityType.Territory:
+      return getTerritoryBiggestLocale(ent)?.language?.nameDisplay;
+    case EntityType.Locale:
+      return ent.language?.nameDisplay;
+    case EntityType.Language:
+      return ent.nameDisplay;
+    case EntityType.Variant:
+      return (ent.equivalentLanguage ?? ent.languages?.[0])?.nameDisplay;
+    case EntityType.WritingSystem:
+      return ent.languages
+        ? Object.values(ent.languages).sort(sortByPopulation)[0].nameDisplay
         : undefined;
-    case ObjectType.Census:
+    case EntityType.Census:
       return undefined;
-    case ObjectType.Keyboard:
-      return object.languages?.[0]?.nameDisplay;
-    case ObjectType.Org:
+    case EntityType.Keyboard:
+      return ent.languages?.[0]?.nameDisplay;
+    case EntityType.Org:
       return undefined;
   }
 }
 
 // Field.Date
-export function getObjectDateAsNumber(object: ObjectData): number | undefined {
-  const date = getObjectDate(object);
+export function getObjectDateAsNumber(ent: EntityData): number | undefined {
+  const date = getObjectDate(ent);
   return date ? date.getTime() : undefined;
 }
 
-export function getObjectDate(object: ObjectData): Date | undefined {
-  switch (object.type) {
-    case ObjectType.Census:
-      return new Date(object.yearCollected + '-01-02'); // The 2nd so timezone changes don't affect the year
-    case ObjectType.Variant:
-      return object.dateAdded;
-    case ObjectType.Language:
-    case ObjectType.Locale:
-    case ObjectType.WritingSystem:
-    case ObjectType.Territory:
-    case ObjectType.Keyboard:
-    case ObjectType.Org:
+export function getObjectDate(ent: EntityData): Date | undefined {
+  switch (ent.type) {
+    case EntityType.Census:
+      return new Date(ent.yearCollected + '-01-02'); // The 2nd so timezone changes don't affect the year
+    case EntityType.Variant:
+      return ent.dateAdded;
+    case EntityType.Language:
+    case EntityType.Locale:
+    case EntityType.WritingSystem:
+    case EntityType.Territory:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       return undefined;
   }
 }
 
 // Field.CountOfLanguages
-export function getCountOfLanguages(object: ObjectData): number | undefined {
-  switch (object.type) {
-    case ObjectType.Language:
-      return object.childLanguages.length;
-    case ObjectType.Locale:
-      return getObjectChildren(object).length;
-    case ObjectType.Census:
-      return object.languageCount;
-    case ObjectType.WritingSystem:
-      return object.languages ? Object.values(object.languages).length : undefined;
-    case ObjectType.Territory:
-      return object.locales && object.locales.length > 0
-        ? uniqueBy(object.locales, (loc) => loc.languageCode).length
+export function getCountOfLanguages(ent: EntityData): number | undefined {
+  switch (ent.type) {
+    case EntityType.Language:
+      return ent.childLanguages.length;
+    case EntityType.Locale:
+      return getObjectChildren(ent).length;
+    case EntityType.Census:
+      return ent.languageCount;
+    case EntityType.WritingSystem:
+      return ent.languages ? Object.values(ent.languages).length : undefined;
+    case EntityType.Territory:
+      return ent.locales && ent.locales.length > 0
+        ? uniqueBy(ent.locales, (loc) => loc.languageCode).length
         : undefined;
-    case ObjectType.Variant:
-      return object.languageCodes?.length;
-    case ObjectType.Keyboard:
-      return object.languageCodes?.length;
-    case ObjectType.Org:
+    case EntityType.Variant:
+      return ent.languageCodes?.length;
+    case EntityType.Keyboard:
+      return ent.languageCodes?.length;
+    case EntityType.Org:
       return undefined; // Too computationally intensive to get
   }
 }
 
 // Field.CountOfKeyboards
-export function getCountOfKeyboards(object: ObjectData): number | undefined {
-  const { type } = object;
+export function getCountOfKeyboards(ent: EntityData): number | undefined {
+  const { type } = ent;
   switch (type) {
-    case ObjectType.Language:
-      return object.keyboards?.length ?? 0;
-    case ObjectType.WritingSystem:
-      return object.outputKeyboards?.length ?? 0;
-    case ObjectType.Keyboard:
+    case EntityType.Language:
+      return ent.keyboards?.length ?? 0;
+    case EntityType.WritingSystem:
+      return ent.outputKeyboards?.length ?? 0;
+    case EntityType.Keyboard:
       return 1; // A keyboard counts as 1 keyboard
-    case ObjectType.Territory:
-    case ObjectType.Locale:
-    case ObjectType.Variant:
-    case ObjectType.Census:
-    case ObjectType.Org:
+    case EntityType.Territory:
+    case EntityType.Locale:
+    case EntityType.Variant:
+    case EntityType.Census:
+    case EntityType.Org:
       return undefined;
     default:
       enforceExhaustiveSwitch(type);
@@ -106,19 +106,19 @@ export function getCountOfKeyboards(object: ObjectData): number | undefined {
 }
 
 // Field.Literacy
-export function getObjectLiteracy(object: ObjectData): number | undefined {
-  switch (object.type) {
-    case ObjectType.Language:
-      return getLanguageLiteracy(object);
-    case ObjectType.Locale:
-      return object.literacyPercent;
-    case ObjectType.Territory:
-      return object.literacyPercent;
-    case ObjectType.Census:
-    case ObjectType.WritingSystem:
-    case ObjectType.Variant:
-    case ObjectType.Keyboard:
-    case ObjectType.Org:
+export function getObjectLiteracy(ent: EntityData): number | undefined {
+  switch (ent.type) {
+    case EntityType.Language:
+      return getLanguageLiteracy(ent);
+    case EntityType.Locale:
+      return ent.literacyPercent;
+    case EntityType.Territory:
+      return ent.literacyPercent;
+    case EntityType.Census:
+    case EntityType.WritingSystem:
+    case EntityType.Variant:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       // No literacy value to sort by
       return undefined;
   }
@@ -140,63 +140,57 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
 }
 
 // Field.CountOfWritingSystems
-export function getCountOfWritingSystems(object: ObjectData): number | undefined {
-  return getWritingSystemsInObject(object)?.length;
+export function getCountOfWritingSystems(ent: EntityData): number | undefined {
+  return getWritingSystemsInObject(ent)?.length;
 }
 
-export function getWritingSystemsInObject(object: ObjectData): WritingSystemData[] | undefined {
-  const { type } = object;
+export function getWritingSystemsInObject(ent: EntityData): WritingSystemData[] | undefined {
+  const { type } = ent;
   switch (type) {
-    case ObjectType.Language:
+    case EntityType.Language:
       // Putting the primary writing system first
       return uniqueBy(
-        [object.primaryWritingSystem, ...Object.values(object.writingSystems ?? {})].filter(
-          (ws) => !!ws,
-        ),
+        [ent.primaryWritingSystem, ...Object.values(ent.writingSystems ?? {})].filter((ws) => !!ws),
         (ws) => ws.ID,
       );
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return uniqueBy(
-        object.locales
+        ent.locales
           ?.slice()
           .sort(sortByPopulation)
           .map((locale) => locale.writingSystem ?? locale.language?.primaryWritingSystem)
           .filter((ws) => !!ws) ?? [],
         (ws) => ws.ID,
       );
-    case ObjectType.Locale:
-      if (object.writingSystem) return [object.writingSystem];
+    case EntityType.Locale:
+      if (ent.writingSystem) return [ent.writingSystem];
       // Not certain if we should include the fallback writing system here
       // For instance, for `pan_PK` it's probably `Arab`, but for pan its `Guru` but we don't have
       // those inferences in the system right now
-      if (object.language?.primaryWritingSystem) return [object.language.primaryWritingSystem];
+      if (ent.language?.primaryWritingSystem) return [ent.language.primaryWritingSystem];
       return undefined;
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       // returns the number of contained writing systems + 1 for itself
-      return [
-        object,
-        ...(object.childWritingSystems ?? []),
-        ...(object.containsWritingSystems ?? []),
-      ];
-    case ObjectType.Variant:
+      return [ent, ...(ent.childWritingSystems ?? []), ...(ent.containsWritingSystems ?? [])];
+    case EntityType.Variant:
       return uniqueBy(
-        object.locales
+        ent.locales
           ?.map((locale) => locale.writingSystem)
           .filter((ws): ws is WritingSystemData => ws != null) ?? undefined,
         (ws) => ws.ID,
       );
-    case ObjectType.Census:
+    case EntityType.Census:
       return undefined; // Potentially derivable, but computationally expensive
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       if (
-        object.inputWritingSystem &&
-        object.outputWritingSystem &&
-        object.inputScriptCode !== object.outputScriptCode
+        ent.inputWritingSystem &&
+        ent.outputWritingSystem &&
+        ent.inputScriptCode !== ent.outputScriptCode
       ) {
-        return [object.inputWritingSystem, object.outputWritingSystem];
+        return [ent.inputWritingSystem, ent.outputWritingSystem];
       }
-      return object.inputWritingSystem ? [object.inputWritingSystem] : undefined;
-    case ObjectType.Org:
+      return ent.inputWritingSystem ? [ent.inputWritingSystem] : undefined;
+    case EntityType.Org:
       return undefined; // Not well defined
     default:
       enforceExhaustiveSwitch(type);
@@ -204,42 +198,42 @@ export function getWritingSystemsInObject(object: ObjectData): WritingSystemData
 }
 
 // Field.CountOfCensuses
-export function getCountOfCensuses(object: ObjectData): number | undefined {
-  const { type } = object;
+export function getCountOfCensuses(ent: EntityData): number | undefined {
+  const { type } = ent;
   switch (type) {
-    case ObjectType.Territory:
-      return object.censuses?.length ?? 0;
-    case ObjectType.Locale:
-      return object.censusRecords?.length ?? 0;
-    case ObjectType.Census:
+    case EntityType.Territory:
+      return ent.censuses?.length ?? 0;
+    case EntityType.Locale:
+      return ent.censusRecords?.length ?? 0;
+    case EntityType.Census:
       return 1;
-    case ObjectType.Language:
-    case ObjectType.WritingSystem:
-    case ObjectType.Variant:
-    case ObjectType.Keyboard:
+    case EntityType.Language:
+    case EntityType.WritingSystem:
+    case EntityType.Variant:
+    case EntityType.Keyboard:
       return undefined;
-    case ObjectType.Org:
-      return object.censuses?.length ?? 0;
+    case EntityType.Org:
+      return ent.censuses?.length ?? 0;
     default:
       enforceExhaustiveSwitch(type);
   }
 }
 
-export function getCountOfVariants(object: ObjectData): number | undefined {
-  const { type } = object;
+export function getCountOfVariants(ent: EntityData): number | undefined {
+  const { type } = ent;
   switch (type) {
-    case ObjectType.Language:
-      return getVariantsForEntity(object)?.length ?? 0;
-    case ObjectType.Locale:
-      return object.variants?.length ?? 0;
-    case ObjectType.Keyboard:
-      return object.variant ? 1 : 0;
-    case ObjectType.Variant:
+    case EntityType.Language:
+      return getVariantsForEntity(ent)?.length ?? 0;
+    case EntityType.Locale:
+      return ent.variants?.length ?? 0;
+    case EntityType.Keyboard:
+      return ent.variant ? 1 : 0;
+    case EntityType.Variant:
       return 1;
-    case ObjectType.Territory:
-    case ObjectType.Census:
-    case ObjectType.WritingSystem:
-    case ObjectType.Org:
+    case EntityType.Territory:
+    case EntityType.Census:
+    case EntityType.WritingSystem:
+    case EntityType.Org:
       return undefined;
     default:
       enforceExhaustiveSwitch(type);
@@ -247,25 +241,25 @@ export function getCountOfVariants(object: ObjectData): number | undefined {
 }
 
 // Field.Depth
-export function getDepth(object: ObjectData): number | undefined {
-  const { type } = object;
+export function getDepth(ent: EntityData): number | undefined {
+  const { type } = ent;
   switch (type) {
-    case ObjectType.Language:
-      return object.depth;
-    case ObjectType.Locale:
+    case EntityType.Language:
+      return ent.depth;
+    case EntityType.Locale:
       // Locales are named like language_territory_variant, so depth is number of underscores
-      return object.ID.split('_').length - 1;
-    case ObjectType.Territory:
+      return ent.ID.split('_').length - 1;
+    case EntityType.Territory:
       // Root territories with no parent region have depth 0, otherwise depth is parent's depth + 1
-      return object.parentUNRegion != null ? getDepth(object.parentUNRegion)! + 1 : 0;
-    case ObjectType.WritingSystem:
-      return object.parentWritingSystem ? getDepth(object.parentWritingSystem)! + 1 : 0;
-    case ObjectType.Census:
-    case ObjectType.Variant:
-    case ObjectType.Keyboard:
+      return ent.parentUNRegion != null ? getDepth(ent.parentUNRegion)! + 1 : 0;
+    case EntityType.WritingSystem:
+      return ent.parentWritingSystem ? getDepth(ent.parentWritingSystem)! + 1 : 0;
+    case EntityType.Census:
+    case EntityType.Variant:
+    case EntityType.Keyboard:
       return undefined;
-    case ObjectType.Org:
-      return object.parent ? getDepth(object.parent)! + 1 : 0;
+    case EntityType.Org:
+      return ent.parent ? getDepth(ent.parent)! + 1 : 0;
     default:
       enforceExhaustiveSwitch(type);
   }

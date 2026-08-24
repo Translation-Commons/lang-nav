@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 import {
   FIELDS_IN_DEVELOPMENT,
@@ -13,33 +13,33 @@ import getField from '@features/transforms/fields/getField';
 import TransformEnum from '@features/transforms/TransformEnum';
 
 describe('getApplicableFields', () => {
-  it('should not return duplicate Fields values for any ObjectType', () => {
-    Object.values(ObjectType).forEach((objectType) => {
-      const fields = getApplicableFields(undefined, objectType);
+  it('should not return duplicate Fields values for any EntityType', () => {
+    Object.values(EntityType).forEach((entityType) => {
+      const fields = getApplicableFields(undefined, entityType);
       const uniqueFields = new Set(fields);
       expect(uniqueFields.size).toBe(fields.length);
     });
   });
 
   it('Check that all possible Fields are returned for each object type. Literally, if a field is not returned by getApplicableFields intersected with object type, then getField should not return a truthy value for it.', () => {
-    const mockedObjects = getFullyInstantiatedMockedObjects();
+    const mockedEnts = getFullyInstantiatedMockedObjects();
 
-    Object.values(ObjectType).forEach((objectType) => {
-      const objectsInType = Object.values(mockedObjects).filter((obj) => obj.type === objectType);
-      const fieldsForType = getApplicableFields(undefined, objectType);
+    Object.values(EntityType).forEach((entityType) => {
+      const entsInType = Object.values(mockedEnts).filter((ent) => ent.type === entityType);
+      const fieldsForType = getApplicableFields(undefined, entityType);
 
       Object.values(Field).forEach((field) => {
-        objectsInType.forEach((obj) => {
-          const fieldValue = getField(obj, field);
+        entsInType.forEach((ent) => {
+          const fieldValue = getField(ent, field);
           if (
             !fieldsForType.includes(field) &&
-            !UNINTERESTING_FIELD_COMBINATIONS[objectType]?.includes(field) &&
+            !UNINTERESTING_FIELD_COMBINATIONS[entityType]?.includes(field) &&
             !FIELDS_IN_DEVELOPMENT.includes(field)
           ) {
             // The value is not supposed to be applicable
             expect(
               fieldValue,
-              `ObjectType (${objectType}) should not return a value for ${field} but it has a getField value so it should be applicable. Failed on object: ${obj.nameDisplay} [${obj.ID}]`,
+              `EntityType (${entityType}) should not return a value for ${field} but it has a getField value so it should be applicable. Failed on ent: ${ent.nameDisplay} [${ent.ID}]`,
             ).toBeFalsy();
           }
         });
@@ -48,16 +48,16 @@ describe('getApplicableFields', () => {
   });
 
   it('getApplicableFields matches isFieldApplicable', () => {
-    Object.values(ObjectType).forEach((objectType) => {
+    Object.values(EntityType).forEach((entityType) => {
       Object.values(TransformEnum).forEach((transform) => {
-        const applicableFields = getApplicableFields(transform, objectType);
+        const applicableFields = getApplicableFields(transform, entityType);
 
         Object.values(Field).forEach((field) => {
           const isApplicable = applicableFields.includes(field);
           if (isApplicable) {
-            expect(isFieldApplicable(field, transform, objectType)).toBe(true);
+            expect(isFieldApplicable(field, transform, entityType)).toBe(true);
           } else {
-            expect(isFieldApplicable(field, transform, objectType)).toBe(false);
+            expect(isFieldApplicable(field, transform, entityType)).toBe(false);
           }
         });
       });

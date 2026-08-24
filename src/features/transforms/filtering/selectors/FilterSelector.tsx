@@ -58,8 +58,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  * apply. Censuses would not show the filter for languages because that has not been set up yet.
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
-  const { objectType } = usePageParams();
-  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, objectType).filter(
+  const { entityType } = usePageParams();
+  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, entityType).filter(
     (f) => f !== Field.Name, // This should not return the search bar
   );
   const otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(

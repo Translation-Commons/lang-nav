@@ -33,7 +33,7 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, focus, size = 'full' })
 const CensusCitation: React.FC<{ census: CensusData }> = ({ census }) => {
   const { yearCollected, collector, presenter } = census;
   return (
-    <HoverableObject object={census}>
+    <HoverableObject ent={census}>
       {collector?.codeDisplay ?? presenter?.codeDisplay ?? 'Unknown'} {yearCollected}
     </HoverableObject>
   );

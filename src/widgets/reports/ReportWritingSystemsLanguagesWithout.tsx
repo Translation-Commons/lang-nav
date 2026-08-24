@@ -61,19 +61,19 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
           {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
             const family = getLanguageRootLanguageFamily(lang);
             return (
-              <CardInCardList key={lang.ID} object={lang}>
+              <CardInCardList key={lang.ID} ent={lang}>
                 <div>
                   <label>Language ID:</label>
                   {lang.ID}
                 </div>
                 <div>
                   <label>Language Name:</label>
-                  <HoverableObjectName object={lang} />
+                  <HoverableObjectName ent={lang} />
                 </div>
                 <div>
                   <label>Language Family:</label>
                   {family ? (
-                    <HoverableObjectName object={family} />
+                    <HoverableObjectName ent={family} />
                   ) : (
                     <Deemphasized>None</Deemphasized>
                   )}

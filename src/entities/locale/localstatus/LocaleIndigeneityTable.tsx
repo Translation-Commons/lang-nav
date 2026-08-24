@@ -28,24 +28,24 @@ const LocaleIndigeneityTable: React.FC<{
   return (
     <InteractiveEntityTable
       tableID={TableID.LocaleIndigeneity}
-      entities={locales}
+      ents={locales}
       columns={[
         {
           key: 'ID',
-          render: (locale) => <HoverableObjectName object={locale} labelSource="code" />,
+          render: (locale) => <HoverableObjectName ent={locale} labelSource="code" />,
           field: Field.Code,
           columnGroup: 'Identity',
         },
         { ...NameColumn, isInitiallyVisible: false, columnGroup: 'Identity' },
         {
           key: 'Language',
-          render: (locale) => <HoverableObjectName object={locale.language} />,
+          render: (locale) => <HoverableObjectName ent={locale.language} />,
           field: Field.Language,
           columnGroup: 'Identity',
         },
         {
           key: 'Territory',
-          render: (locale) => <HoverableObjectName object={locale.territory} />,
+          render: (locale) => <HoverableObjectName ent={locale.territory} />,
           field: Field.Territory,
           columnGroup: 'Identity',
         },
@@ -70,7 +70,7 @@ const LocaleIndigeneityTable: React.FC<{
             const biggestLocale = getLanguagesBiggestCountryLocale(locale.language);
             return (
               <HoverableObjectName
-                object={biggestLocale}
+                ent={biggestLocale}
                 labelSource="territory"
                 style={{
                   color:

@@ -1,10 +1,10 @@
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { TreeNodeData } from './TreeListNode';
 
 export function filterBranch(
   node: TreeNodeData,
-  filterFunction?: (a: ObjectData) => boolean,
+  filterFunction?: (a: EntityData) => boolean,
 ): TreeNodeData | undefined {
   if (!filterFunction) {
     // If there is no filter function, don't change the node or filter descendants
@@ -24,7 +24,7 @@ export function filterBranch(
     node.descendantsPassFilter = false;
   }
 
-  if (!filterFunction(node.object)) {
+  if (!filterFunction(node.ent)) {
     // If it does not pass the filter, we may drop this branch from the tree if there are no descendants that pass the filter
     if (filteredChildren.length === 0) {
       return undefined;

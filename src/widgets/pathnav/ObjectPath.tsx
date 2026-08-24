@@ -2,22 +2,22 @@ import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import ObjectPathChildren from './ObjectPathChildren';
 import ObjectPathParents from './ObjectPathParents';
 
-const ObjectPath: React.FC<{ object: ObjectData | undefined; showChildren?: boolean }> = ({
-  object,
+const ObjectPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean }> = ({
+  ent,
   showChildren = true,
 }) => {
   const { languageSource } = usePageParams();
-  if (!object) return null;
-  if (object.type === ObjectType.Language) {
+  if (!ent) return null;
+  if (ent.type === EntityType.Language) {
     // Not all language sources have parent/child data
     switch (languageSource) {
       case LanguageSource.Combined:
@@ -35,23 +35,23 @@ const ObjectPath: React.FC<{ object: ObjectData | undefined; showChildren?: bool
 
   return (
     <>
-      <ObjectPathParents object={object} />
-      <ObjectName object={object} />
-      {showChildren && <ObjectPathChildren object={object} />}
+      <ObjectPathParents ent={ent} />
+      <ObjectName ent={ent} />
+      {showChildren && <ObjectPathChildren ent={ent} />}
     </>
   );
 };
 
-const ObjectName: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (!object) return null;
+const ObjectName: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  if (!ent) return null;
   return (
     <>
-      {object.type === ObjectType.Locale ? (
+      {ent.type === EntityType.Locale ? (
         <span style={{ fontWeight: 'bold' }}>:</span>
       ) : (
         <SlashIcon size="1em" />
       )}
-      <HoverableObjectName object={object} style={{ fontWeight: 'bold' }} />
+      <HoverableObjectName ent={ent} style={{ fontWeight: 'bold' }} />
     </>
   );
 };

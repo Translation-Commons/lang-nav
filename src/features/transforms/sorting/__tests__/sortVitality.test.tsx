@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import computeRecursiveLanguageData from '@features/data/compute/computeRecursiveLanguageData';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 import { getBaseLanguageData, LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -92,12 +92,12 @@ describe('Vitality Sorting', () => {
       expect(sorted[2].codeDisplay).toBe('a');
     });
 
-    it('sorts non-language objects to the end', () => {
+    it('sorts non-language entities to the end', () => {
       const lang = createLanguageWithVitality('en', 'English', {
         eth2012: VitalityEthnologueFine.National,
       });
       const territory: TerritoryData = {
-        type: ObjectType.Territory,
+        type: EntityType.Territory,
         ID: 'US',
         codeDisplay: 'US',
         nameDisplay: 'United States',
@@ -110,8 +110,8 @@ describe('Vitality Sorting', () => {
       const sortFn = getSortFunctionParameterized(Field.VitalityMetascore, SortBehavior.Normal);
       const sorted = [territory, lang].sort(sortFn);
 
-      expect(sorted[0].type).toBe(ObjectType.Language); // language first
-      expect(sorted[1].type).toBe(ObjectType.Territory); // territory last
+      expect(sorted[0].type).toBe(EntityType.Language); // language first
+      expect(sorted[1].type).toBe(EntityType.Territory); // territory last
     });
   });
 

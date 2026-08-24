@@ -13,7 +13,7 @@ import DrawableData from './DrawableData';
 type Props = {
   drawableEntities: DrawableData[];
   coloringFunctions: ColoringFunctions;
-  onClick: (obj: DrawableData) => void;
+  onClick: (ent: DrawableData) => void;
   hoveredId?: string | null;
   pinnedIds?: string[];
 };
@@ -31,7 +31,7 @@ const MapTerritories: React.FC<Props> = ({
   const { territories } = useDataContext();
 
   const isTerritoryInList = useCallback(
-    (iso: string) => drawableEntities.some((obj) => obj.ID === iso),
+    (iso: string) => drawableEntities.some((ent) => ent.ID === iso),
     [drawableEntities],
   );
 

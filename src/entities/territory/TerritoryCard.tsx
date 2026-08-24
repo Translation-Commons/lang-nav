@@ -26,7 +26,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={territory} />
+        <ObjectTitle ent={territory} />
       </div>
       <CardField
         title="Territory Type"
@@ -37,7 +37,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         {isDependency && sovereign ? (
           <>
             {' '}
-            of <HoverableObjectName object={sovereign} />
+            of <HoverableObjectName ent={sovereign} />
           </>
         ) : null}
       </CardField>
@@ -48,7 +48,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         description="The United Nations regional grouping this territory belongs to."
       >
         {parentUNRegion ? (
-          <HoverableObjectName object={parentUNRegion} />
+          <HoverableObjectName ent={parentUNRegion} />
         ) : isWorld ? (
           <Deemphasized>Global</Deemphasized>
         ) : (

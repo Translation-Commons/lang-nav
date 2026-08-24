@@ -11,7 +11,7 @@ import { getFilterByConnections } from '@features/transforms/filtering/filterByC
 import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -19,11 +19,11 @@ import LimitSelector from './LimitSelector';
 import PaginationControls from './PaginationControls';
 
 interface Props {
-  objects: ObjectData[];
+  ents: EntityData[];
   shouldFilterUsingSearchBar?: boolean;
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBar = true }) => {
+const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar = true }) => {
   const { page: pageParam, limit } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByConnections = getFilterByConnections();
@@ -32,16 +32,16 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   const filterByPopulation = useFilters().Population;
 
   // Compute the number of filtered items
-  const nOverall = objects.length;
+  const nOverall = ents.length;
   const nFiltered = useMemo(() => {
-    return objects
+    return ents
       .filter(filterByScope)
       .filter(filterByConnections)
       .filter(filterByVitality)
       .filter(filterByPopulation)
       .filter(filterBySubstring).length;
   }, [
-    objects,
+    ents,
     filterByScope,
     filterByConnections,
     filterByVitality,
@@ -91,7 +91,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
           <Hoverable
             hoverContent={
               <FilterBreakdown
-                objects={objects}
+                ents={ents}
                 shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
               />
             }

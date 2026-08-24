@@ -29,10 +29,10 @@ type Props = {
 const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
   const params = usePageParams();
   const currentValue = params[pageParam] as Field;
-  const { updatePageParams, objectType } = params;
+  const { updatePageParams, entityType } = params;
 
   const transform = getTransformForPageParam(pageParam);
-  const applicableFields = getApplicableFields(transform, objectType);
+  const applicableFields = getApplicableFields(transform, entityType);
   if (pageParam === PageParamKey.secondarySortBy) applicableFields.push(Field.None);
   const groupedFields = groupByArray(applicableFields, (field) => getFieldGroup(field));
   const activeGroup = getFieldGroup(currentValue);

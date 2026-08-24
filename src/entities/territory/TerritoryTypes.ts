@@ -2,11 +2,11 @@
  * Enums and types related to territories, which are the main geographic unit in the app.
  */
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import { ObjectBase } from '@entities/types/DataTypes';
+import { EntityBase } from '@entities/types/DataTypes';
 
 // ISO 3166 territory code OR UN M49 code
 export type TerritoryCode = ISO3166Code | UNM49Code;
@@ -35,8 +35,8 @@ export const isTerritoryGroup = (scope?: TerritoryScope): boolean => {
   );
 };
 
-export interface TerritoryData extends ObjectBase {
-  type: ObjectType.Territory;
+export interface TerritoryData extends EntityBase {
+  type: EntityType.Territory;
   ID: TerritoryCode;
   codeDisplay: TerritoryCode;
   codeAlpha3?: string; // ISO 3166-1 alpha-3 code, eg. USA, CAN, etc.
@@ -65,7 +65,7 @@ export interface TerritoryData extends ObjectBase {
   longitude?: number;
   landArea?: number; // in square kilometers
 
-  // References to other objects, filled in after loading the TSV
+  // References to other entities, filled in after loading the TSV
   parentUNRegion?: TerritoryData;
   containsTerritories?: TerritoryData[];
   sovereign?: TerritoryData;

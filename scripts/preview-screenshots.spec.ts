@@ -105,7 +105,7 @@ test('capture hierarchy.png — hierarchy/tree view', async ({ page }) => {
 });
 
 test('capture map.png — territory map colored by number of languages', async ({ page }) => {
-  await loadPage(page, 'view=Map&objectType=Territory&colorBy=%23+of+Languages');
+  await loadPage(page, 'view=Map&entityType=Territory&colorBy=%23+of+Languages');
   const mapImg = page.locator('img[alt="World map"]');
   await mapImg.waitFor({ state: 'visible' });
   // grandparent = the bordered map container div

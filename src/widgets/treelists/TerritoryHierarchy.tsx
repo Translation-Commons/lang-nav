@@ -1,14 +1,14 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 export const TerritoryHierarchy: React.FC = () => {
   const { territories } = useDataContext();
@@ -36,8 +36,8 @@ export const TerritoryHierarchy: React.FC = () => {
 
 export function getTerritoryTreeNodes(
   territories: TerritoryData[],
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterByScope: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterByScope: (a: EntityData) => boolean,
 ): TreeNodeData[] {
   return territories
     .slice()
@@ -48,12 +48,12 @@ export function getTerritoryTreeNodes(
 
 function getTerritoryTreeNode(
   territory: TerritoryData,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterByScope: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterByScope: (a: EntityData) => boolean,
 ): TreeNodeData {
   return {
-    type: ObjectType.Language,
-    object: territory,
+    type: EntityType.Language,
+    ent: territory,
     children: territory.containsTerritories
       ? getTerritoryTreeNodes(territory.containsTerritories, sortFunction, filterByScope)
       : [],

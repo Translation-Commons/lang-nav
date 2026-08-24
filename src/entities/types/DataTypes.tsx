@@ -2,7 +2,7 @@
  * This file provides types for the data used in the application.
  */
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -14,11 +14,11 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { CensusData } from '../census/CensusTypes';
 import { LanguageData } from '../language/LanguageTypes';
 
-export interface ObjectBase {
-  readonly type: ObjectType;
+export interface EntityBase {
+  readonly type: EntityType;
   readonly ID: string; // A stable ID to use with indexing
-  codeDisplay: string; // The code for the object -- may change, like if the language schema changes
-  nameDisplay: string; // The name for the object -- may change with data from different sources
+  codeDisplay: string; // The code for the entity -- may change, like if the language schema changes
+  nameDisplay: string; // The name for the entity -- may change with data from different sources
   nameEndonym?: string;
   names: string[];
 }
@@ -32,5 +32,5 @@ export type EntityData =
   | VariantData
   | KeyboardData
   | OrganizationData;
-export type ObjectData = EntityData; // For now, all objects are entities
-export type ObjectDictionary = Record<string, ObjectData>;
+
+export type EntityDictionary = Record<string, EntityData>;

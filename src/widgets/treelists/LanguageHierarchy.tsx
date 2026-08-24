@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
@@ -14,7 +14,7 @@ import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 export const LanguageHierarchy: React.FC = () => {
   const { languageSource } = usePageParams();
@@ -55,8 +55,8 @@ export const LanguageHierarchy: React.FC = () => {
 export function getLanguageTreeNodes(
   languages: LanguageData[],
   languageSource: LanguageSource,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean = () => true,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean = () => true,
   depth: number = 0,
 ): TreeNodeData[] {
   if (depth > 30) {
@@ -76,13 +76,13 @@ export function getLanguageTreeNodes(
 function getLanguageTreeNode(
   lang: LanguageData,
   languageSource: LanguageSource,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
   depth: number,
 ): TreeNodeData {
   return {
-    type: ObjectType.Language,
-    object: lang,
+    type: EntityType.Language,
+    ent: lang,
     children: getLanguageTreeNodes(
       lang[languageSource].childLanguages ?? [],
       languageSource,

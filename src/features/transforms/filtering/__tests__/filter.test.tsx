@@ -1,7 +1,7 @@
 import { renderHook } from '@testing-library/react';
 import { describe, expect, it, Mock, vi } from 'vitest';
 
-import { ObjectType, PageParams } from '@features/params/PageParamTypes';
+import { EntityType, PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
@@ -31,7 +31,7 @@ describe('useFilterByVitality', () => {
   };
 
   const mockNonLanguage: TerritoryData = {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: 'TEST',
     codeDisplay: 'TEST',
     nameDisplay: 'Test Territory',
@@ -44,7 +44,7 @@ describe('useFilterByVitality', () => {
     (usePageParams as Mock).mockReturnValue(createMockUsePageParams(params));
   }
 
-  it('returns true for non-language objects', () => {
+  it('returns true for non-language entities', () => {
     mockParams({ isoStatus: [] });
     const filter = getFilterByVitalityHook();
     expect(filter(mockNonLanguage)).toBe(true);

@@ -1,34 +1,32 @@
-import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import { EntityType, SearchableField } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { anyWordStartsWith } from '@shared/lib/stringUtils';
 
 export default function getSearchableField(
-  object: ObjectData,
+  ent: EntityData,
   field: SearchableField,
   query?: string,
 ): string {
   switch (field) {
     case SearchableField.CodeOrNameAny:
-      return (
-        object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? object.codeDisplay
-      );
+      return ent.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? ent.codeDisplay;
     case SearchableField.NameAny:
-      return object.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? '';
+      return ent.names.filter((name) => anyWordStartsWith(name, query ?? ''))[0] ?? '';
     case SearchableField.Code:
-      return object.codeDisplay;
+      return ent.codeDisplay;
     case SearchableField.NameEndonym:
-      return object.nameEndonym ?? '';
+      return ent.nameEndonym ?? '';
     case SearchableField.NameDisplay:
-      return object.nameDisplay;
+      return ent.nameDisplay;
     case SearchableField.NameISO:
-      return object.type === ObjectType.Language ? (object.ISO?.name ?? '') : '';
+      return ent.type === EntityType.Language ? (ent.ISO?.name ?? '') : '';
     case SearchableField.NameCLDR:
-      return object.type === ObjectType.Language ? (object.CLDR?.name ?? '') : '';
+      return ent.type === EntityType.Language ? (ent.CLDR?.name ?? '') : '';
     case SearchableField.NameGlottolog:
-      return object.type === ObjectType.Language ? (object.Glottolog?.name ?? '') : '';
+      return ent.type === EntityType.Language ? (ent.Glottolog?.name ?? '') : '';
     case SearchableField.NameEthnologue:
-      return object.type === ObjectType.Language ? (object.Ethnologue?.name ?? '') : '';
+      return ent.type === EntityType.Language ? (ent.Ethnologue?.name ?? '') : '';
   }
 }

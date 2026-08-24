@@ -6,28 +6,28 @@ import { TerritoryHierarchy } from '@widgets/treelists/TerritoryHierarchy';
 import { VariantHierarchy } from '@widgets/treelists/VariantHierarchy';
 import { WritingSystemHierarchy } from '@widgets/treelists/WritingSystemHierarchy';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 function ViewFamilyTree() {
-  const { objectType } = usePageParams();
+  const { entityType } = usePageParams();
 
-  switch (objectType) {
-    case ObjectType.Census:
+  switch (entityType) {
+    case EntityType.Census:
       return <CensusHierarchy />;
-    case ObjectType.Language:
+    case EntityType.Language:
       return <LanguageHierarchy />;
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return <LocaleHierarchy />;
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return <TerritoryHierarchy />;
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return <WritingSystemHierarchy />;
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return <VariantHierarchy />;
-    case ObjectType.Org:
+    case EntityType.Org:
       return <OrganizationHierarchy />;
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return 'Family trees are not defined well for this type';
   }
 }

@@ -6,7 +6,7 @@ import { addCensusData } from '@features/data/connect/connectCensuses';
 import LoadingStage from '@features/data/context/LoadingStage';
 import { DataContextType } from '@features/data/context/useDataContext';
 import { CoreDataArrays } from '@features/data/load/CoreData';
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageModality } from '@entities/language/LanguageModality';
@@ -18,13 +18,13 @@ import {
 } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { ObjectDictionary } from '@entities/types/DataTypes';
+import { EntityDictionary } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';
 
-export function getDisconnectedMockedObjects(): ObjectDictionary {
+export function getDisconnectedMockedObjects(): EntityDictionary {
   // Languages
   const sjn: LanguageData = {
     ...getBaseLanguageData('sjn', 'Sindarin'), // sjn
@@ -61,7 +61,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
 
   // Territories
   const BE: TerritoryData = {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: 'BE',
     codeDisplay: 'BE',
     nameDisplay: 'Beleriand',
@@ -78,7 +78,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     containedUNRegionCode: '123',
   };
   const ER: TerritoryData = {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: 'ER',
     codeDisplay: 'ER',
     nameDisplay: 'Eriador',
@@ -94,7 +94,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     containedUNRegionCode: '123',
   };
   const HA: TerritoryData = {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: 'HA',
     codeDisplay: 'HA',
     nameDisplay: 'Harad',
@@ -110,7 +110,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     containedUNRegionCode: '123',
   };
   const middleEarth: TerritoryData = {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: '123',
     codeDisplay: '123',
     nameDisplay: 'Middle Earth',
@@ -122,7 +122,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
   };
   const AM: TerritoryData = {
     // The lands west of Middle-earth
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: 'AM',
     codeDisplay: 'Aman',
     nameDisplay: 'Aman',
@@ -138,7 +138,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     containedUNRegionCode: '001',
   };
   const world: TerritoryData = {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     ID: '001',
     codeDisplay: '001',
     nameDisplay: 'Arda',
@@ -150,7 +150,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
 
   // Censuses
   const be0590: CensusData = {
-    type: ObjectType.Census,
+    type: EntityType.Census,
     ID: 'be0590',
     codeDisplay: 'be0590',
     nameDisplay: 'Beleriand YS 590 Census',
@@ -158,7 +158,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     yearCollected: 2000,
     collectorType: CensusCollectorType.Government,
     collectorName: 'National Institute of Statistics',
-    collectorNameShort: 'NIS', // tbd make organization object for this
+    collectorNameShort: 'NIS', // tbd make organization entity for this
     url: 'https://en.wikipedia.org/wiki/Beleriand#Languages', // not a real part of the article
     isoRegionCode: 'BE',
     population: BE.pop.overall, // 12000
@@ -170,7 +170,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
 
   // Locales
   const sjn_BE: LocaleData = {
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     ID: 'sjn_BE',
     codeDisplay: 'sjn-BE',
     nameDisplay: 'Sindarin (Beleriand)',
@@ -184,7 +184,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     },
   };
   const sjn_ER: LocaleData = {
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     ID: 'sjn_ER',
     codeDisplay: 'sjn-ER',
     nameDisplay: 'Sindarin (Eriador)',
@@ -196,7 +196,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     pop: { speaking: { unadjusted: 1920, percent: 80 }, writing: { unadjusted: 1920 } },
   };
   const dori0123_ER: LocaleData = {
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     ID: 'dori0123_ER',
     codeDisplay: 'dori0123-ER',
     nameDisplay: 'Doriathrin (Eriador)',
@@ -209,7 +209,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
 
   // Writing Systems
   const Teng: WritingSystemData = {
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
     scope: WritingSystemScope.IndividualScript,
     ID: 'Teng', // A real language code!
     codeDisplay: 'Teng',
@@ -218,7 +218,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
     names: ['Tengwar', 'Fëanorian alphabet'],
   };
   const sjn_Teng_BE: LocaleData = {
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     ID: 'sjn_Teng_BE',
     codeDisplay: 'sjn-Teng-BE',
     nameDisplay: 'Sindarin (Tengwar, Beleriand)',
@@ -238,7 +238,7 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
 
   // Variants
   const tolkorth: VariantData = {
-    type: ObjectType.Variant,
+    type: EntityType.Variant,
     ID: 'tolkorth',
     codeDisplay: 'tolkorth',
     nameDisplay: 'Tolkienian Transcribed Orthography',
@@ -283,23 +283,23 @@ export function getDisconnectedMockedObjects(): ObjectDictionary {
   };
 }
 
-export function getMockedCoreData(inputObjects?: ObjectDictionary): CoreDataArrays {
-  const objects = inputObjects ?? getDisconnectedMockedObjects();
-  const objectArray = Object.values(objects);
+export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays {
+  const ents = inputEnts ?? getDisconnectedMockedObjects();
+  const entArray = Object.values(ents);
   return {
-    allLanguoids: objectArray.filter((obj) => obj.type === ObjectType.Language),
-    locales: objectArray.filter((obj) => obj.type === ObjectType.Locale),
-    territories: objectArray.filter((obj) => obj.type === ObjectType.Territory),
-    writingSystems: objectArray.filter((obj) => obj.type === ObjectType.WritingSystem),
-    variants: objectArray.filter((obj) => obj.type === ObjectType.Variant),
-    censuses: { be0590: objects.be0590 as CensusData },
-    keyboards: objectArray.filter((obj) => obj.type === ObjectType.Keyboard),
-    organizations: objectArray.filter((obj) => obj.type === ObjectType.Org),
+    allLanguoids: entArray.filter((ent) => ent.type === EntityType.Language),
+    locales: entArray.filter((ent) => ent.type === EntityType.Locale),
+    territories: entArray.filter((ent) => ent.type === EntityType.Territory),
+    writingSystems: entArray.filter((ent) => ent.type === EntityType.WritingSystem),
+    variants: entArray.filter((ent) => ent.type === EntityType.Variant),
+    censuses: { be0590: ents.be0590 as CensusData },
+    keyboards: entArray.filter((ent) => ent.type === EntityType.Keyboard),
+    organizations: entArray.filter((ent) => ent.type === EntityType.Org),
   };
 }
 
-export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
-  objects: ObjectDictionary;
+export function getMockedObjectDictionaries(inputEnts?: EntityDictionary): {
+  ents: EntityDictionary;
   censuses: Record<string, CensusData>;
   languagesBySource: Record<LanguageSource, Record<string, LanguageData>>;
   languages: Record<string, LanguageData>;
@@ -308,15 +308,15 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
   writingSystems: Record<string, WritingSystemData>;
   variants: Record<string, VariantData>;
 } {
-  const objects = inputObjects ?? getDisconnectedMockedObjects();
-  const objectsArray = Object.values(objects);
+  const ents = inputEnts ?? getDisconnectedMockedObjects();
+  const entsArray = Object.values(ents);
   const languagesBySource: Record<LanguageSource, Record<string, LanguageData>> = {
     Combined: toDictionary(
-      objectsArray.filter((obj) => obj.type === ObjectType.Language),
-      (obj) => obj.ID,
+      entsArray.filter((ent) => ent.type === EntityType.Language),
+      (ent) => ent.ID,
     ),
     BCP: {
-      sjn: objects.sjn as LanguageData,
+      sjn: ents.sjn as LanguageData,
     },
     ISO: {},
     UNESCO: {},
@@ -324,38 +324,38 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
     CLDR: {},
     Ethnologue: {},
   };
-  const territories: Record<string, TerritoryData> = objectsArray
-    .filter((obj) => obj.type === ObjectType.Territory)
+  const territories: Record<string, TerritoryData> = entsArray
+    .filter((ent) => ent.type === EntityType.Territory)
     .reduce<Record<string, TerritoryData>>((acc, territory) => {
       acc[territory.ID] = territory;
       return acc;
     }, {});
-  const writingSystems: Record<string, WritingSystemData> = objectsArray
-    .filter((obj) => obj.type === ObjectType.WritingSystem)
+  const writingSystems: Record<string, WritingSystemData> = entsArray
+    .filter((ent) => ent.type === EntityType.WritingSystem)
     .reduce<Record<string, WritingSystemData>>((acc, writingSystem) => {
       acc[writingSystem.ID] = writingSystem;
       return acc;
     }, {});
-  const locales: Record<string, LocaleData> = objectsArray
-    .filter((obj) => obj.type === ObjectType.Locale)
+  const locales: Record<string, LocaleData> = entsArray
+    .filter((ent) => ent.type === EntityType.Locale)
     .reduce<Record<string, LocaleData>>((acc, locale) => {
       acc[locale.ID] = locale;
       return acc;
     }, {});
-  const variants: Record<string, VariantData> = objectsArray
-    .filter((obj) => obj.type === ObjectType.Variant)
+  const variants: Record<string, VariantData> = entsArray
+    .filter((ent) => ent.type === EntityType.Variant)
     .reduce<Record<string, VariantData>>((acc, variant) => {
       acc[variant.ID] = variant;
       return acc;
     }, {});
-  const censuses: Record<string, CensusData> = objectsArray
-    .filter((obj) => obj.type === ObjectType.Census)
+  const censuses: Record<string, CensusData> = entsArray
+    .filter((ent) => ent.type === EntityType.Census)
     .reduce<Record<string, CensusData>>((acc, census) => {
       acc[census.ID] = census;
       return acc;
     }, {});
   return {
-    objects,
+    ents,
     censuses,
     languagesBySource,
     languages: languagesBySource.Combined,
@@ -366,11 +366,11 @@ export function getMockedObjectDictionaries(inputObjects?: ObjectDictionary): {
   };
 }
 
-// Makes all of the symbolic connections between the various objects
+// Makes all of the symbolic connections between the various entities
 // Also creates the aggregated locales, eg. sjn_BE -> sjn_123 & -> sjn_001
-export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDictionary {
-  const { objects, languagesBySource, territories, writingSystems, locales, variants, censuses } =
-    getMockedObjectDictionaries(inputObjects);
+export function connectMockedObjects(inputEnts: EntityDictionary): EntityDictionary {
+  const { ents, languagesBySource, territories, writingSystems, locales, variants, censuses } =
+    getMockedObjectDictionaries(inputEnts);
 
   connectObjectsAndCreateDerivedData(
     languagesBySource,
@@ -382,9 +382,8 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     {},
   );
 
-  // Update the objects dictionary with the aggregated locales
-  Object.values(locales).forEach((loc) => (objects[loc.ID] = loc));
-  // console.log('Locales after connection:', Object.keys(locales));
+  // Update the entity dictionary with the aggregated locales
+  Object.values(locales).forEach((loc) => (ents[loc.ID] = loc));
 
   // Usually does in the supplemental data load step, we will add censuses connections here
   addCensusData(
@@ -396,26 +395,24 @@ export function connectMockedObjects(inputObjects: ObjectDictionary): ObjectDict
     [],
   );
 
-  return objects;
+  return ents;
 }
 
 /**
  * This function generates a set of data to quickly mock in tests without needing to load in the TSVs.
  *
- * @returns A set of mock objects for testing purposes. These have been processed to connect
- * child objects to eachother and also with attributes computed by the various algorithms.
+ * @returns A set of mock entities for testing purposes. These have been processed to connect
+ * child entities to eachother and also with attributes computed by the various algorithms.
  */
-export function getFullyInstantiatedMockedObjects(
-  inputObjects?: ObjectDictionary,
-): ObjectDictionary {
-  const objects = inputObjects ?? getDisconnectedMockedObjects();
+export function getFullyInstantiatedMockedObjects(inputEnts?: EntityDictionary): EntityDictionary {
+  const ents = inputEnts ?? getDisconnectedMockedObjects();
 
   // Initial connections and algorithms
-  connectMockedObjects(objects);
-  const { languagesBySource, locales } = getMockedObjectDictionaries(objects);
+  connectMockedObjects(ents);
+  const { languagesBySource, locales } = getMockedObjectDictionaries(ents);
 
   // From DataContext
-  const world = objects['001'] as TerritoryData;
+  const world = ents['001'] as TerritoryData;
   updateObjectsBasedOnDataParams(
     Object.values(languagesBySource.Combined) as LanguageData[],
     Object.values(locales),
@@ -431,24 +428,24 @@ export function getFullyInstantiatedMockedObjects(
     Object.values(locales),
     world,
   );
-  return objects;
+  return ents;
 }
 
-export function getMockedDataContext(objects: ObjectDictionary): DataContextType {
-  const objectArray = Object.values(objects);
-  const languages = objectArray.filter((obj) => obj.type === ObjectType.Language);
-  const locales = objectArray.filter((obj) => obj.type === ObjectType.Locale);
-  const territories = objectArray.filter((obj) => obj.type === ObjectType.Territory);
-  const writingSystems = objectArray.filter((obj) => obj.type === ObjectType.WritingSystem);
-  const variants = objectArray.filter((obj) => obj.type === ObjectType.Variant);
-  const censuses = objectArray.reduce(
-    (acc, obj) => {
-      if (obj.type === ObjectType.Census) acc[obj.ID] = obj;
+export function getMockedDataContext(ents: EntityDictionary): DataContextType {
+  const entArray = Object.values(ents);
+  const languages = entArray.filter((ent) => ent.type === EntityType.Language);
+  const locales = entArray.filter((ent) => ent.type === EntityType.Locale);
+  const territories = entArray.filter((ent) => ent.type === EntityType.Territory);
+  const writingSystems = entArray.filter((ent) => ent.type === EntityType.WritingSystem);
+  const variants = entArray.filter((ent) => ent.type === EntityType.Variant);
+  const censuses = entArray.reduce(
+    (acc, ent) => {
+      if (ent.type === EntityType.Census) acc[ent.ID] = ent;
       return acc;
     },
     {} as Record<string, CensusData>,
   );
-  const organizations = objectArray.filter((obj) => obj.type === ObjectType.Org);
+  const organizations = entArray.filter((ent) => ent.type === EntityType.Org);
 
   const dataContext: DataContextType = {
     allLanguoids: languages,
@@ -461,22 +458,18 @@ export function getMockedDataContext(objects: ObjectDictionary): DataContextType
     territories,
     writingSystems,
     variants,
-    getObject: (id: string) => objects[id],
-    getLanguage: (id: string) =>
-      objects[id]?.type === ObjectType.Language ? objects[id] : undefined,
+    getObject: (id: string) => ents[id],
+    getLanguage: (id: string) => (ents[id]?.type === EntityType.Language ? ents[id] : undefined),
     getCLDRLanguage: (id: string) =>
-      Object.values(objects).find(
-        (obj) => obj.type === ObjectType.Language && (obj as LanguageData).CLDR?.code === id,
+      Object.values(ents).find(
+        (ent) => ent.type === EntityType.Language && (ent as LanguageData).CLDR?.code === id,
       ) as LanguageData | undefined,
-    getLocale: (id: string) => (objects[id]?.type === ObjectType.Locale ? objects[id] : undefined),
-    getTerritory: (id: string) =>
-      objects[id]?.type === ObjectType.Territory ? objects[id] : undefined,
+    getLocale: (id: string) => (ents[id]?.type === EntityType.Locale ? ents[id] : undefined),
+    getTerritory: (id: string) => (ents[id]?.type === EntityType.Territory ? ents[id] : undefined),
     getWritingSystem: (id: string) =>
-      objects[id]?.type === ObjectType.WritingSystem ? objects[id] : undefined,
-    getVariant: (id: string) =>
-      objects[id]?.type === ObjectType.Variant ? objects[id] : undefined,
-    getOrganization: (id: string) =>
-      objects[id]?.type === ObjectType.Org ? objects[id] : undefined,
+      ents[id]?.type === EntityType.WritingSystem ? ents[id] : undefined,
+    getVariant: (id: string) => (ents[id]?.type === EntityType.Variant ? ents[id] : undefined),
+    getOrganization: (id: string) => (ents[id]?.type === EntityType.Org ? ents[id] : undefined),
   };
 
   return dataContext;

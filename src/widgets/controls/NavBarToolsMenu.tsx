@@ -6,7 +6,7 @@ import ReportID from '@widgets/reports/ReportID';
 
 import PopupCard from '@features/layers/popupcard/PopupCard';
 import InternalLink from '@features/params/InternalLink';
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 
 import useAreParamsCurrent from './useAreParamsCurrent';
 
@@ -14,7 +14,7 @@ const NOTABLE_REPORTS = [
   {
     label: 'Census Validation',
     params: {
-      objectType: ObjectType.Census,
+      entityType: EntityType.Census,
       view: View.Reports,
       reportID: ReportID.CensusInputTool,
     },
@@ -22,7 +22,7 @@ const NOTABLE_REPORTS = [
   {
     label: 'Plurals',
     params: {
-      objectType: ObjectType.Language,
+      entityType: EntityType.Language,
       view: View.Reports,
       reportID: ReportID.LanguagePlurals,
     },
@@ -45,7 +45,7 @@ const NavBarToolsMenu: React.FC = () => {
           <InternalLink
             page={LangNavPageName.Decoder}
             className={'text-nowrap' + (location.pathname === '/decoder' ? ' font-bold' : '')}
-            params={{ objectType: ObjectType.Language }}
+            params={{ entityType: EntityType.Language }}
           >
             Language Decoder
           </InternalLink>

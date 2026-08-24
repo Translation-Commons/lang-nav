@@ -2,23 +2,23 @@ import React from 'react';
 
 import NavTabs from '@widgets/controls/NavTabs';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 
-import ObjectTypeDescription from '@strings/ObjectTypeDescription';
+import EntityTypeDescription from '@strings/EntityTypeDescription';
 
 const ORDERED_OBJECTS = [
-  ObjectType.Language,
-  ObjectType.Territory,
-  ObjectType.Locale,
-  ObjectType.WritingSystem,
-  ObjectType.Variant,
-  ObjectType.Keyboard,
-  ObjectType.Census,
-  ObjectType.Org,
+  EntityType.Language,
+  EntityType.Territory,
+  EntityType.Locale,
+  EntityType.WritingSystem,
+  EntityType.Variant,
+  EntityType.Keyboard,
+  EntityType.Census,
+  EntityType.Org,
 ];
 
 const EntityTypeTabs: React.FC = () => {
@@ -31,11 +31,11 @@ const EntityTypeTabs: React.FC = () => {
             <div style={{ marginBottom: '0.5em' }}>
               Click here to change the kind of entity viewed.
             </div>{' '}
-            <ObjectTypeDescription objectType={entityType} />
+            <EntityTypeDescription entityType={entityType} />
           </>
         ),
         label: toTitleCase(getEntityTypeLabelPlural(entityType)),
-        urlParams: { objectType: entityType },
+        urlParams: { entityType: entityType },
       }))}
     />
   );

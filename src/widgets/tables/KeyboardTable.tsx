@@ -15,7 +15,7 @@ const KeyboardTable: React.FC = () => {
   return (
     <InteractiveEntityTable<KeyboardData>
       tableID={TableID.Keyboards}
-      entities={keyboards}
+      ents={keyboards}
       columns={columns}
     />
   );

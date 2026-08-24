@@ -15,7 +15,7 @@ const LanguagePath: React.FC<{
         return (
           <React.Fragment key={positionInCycle}>
             {positionInCycle > 0 && ' > '}
-            <HoverableObjectName object={lang} />
+            <HoverableObjectName ent={lang} />
           </React.Fragment>
         );
       })}

@@ -28,7 +28,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         <IdentityRow
           sourceLabel="LangNav System"
           name={
-            <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameDisplay} />
+            <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameDisplay} />
           }
           scope={lang.scope}
           code={lang.ID}
@@ -42,7 +42,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           name={
             lang.Glottolog.code ? (
               <ObjectFieldHighlightedByPageSearch
-                object={lang}
+                ent={lang}
                 field={SearchableField.NameGlottolog}
               />
             ) : (
@@ -64,7 +64,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           sourceLabel="ISO"
           name={
             lang.ISO.name ? (
-              <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
+              <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameISO} />
             ) : (
               <Deemphasized>Not in ISO catalog</Deemphasized>
             )
@@ -93,10 +93,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             sourceLabel="CLDR"
             name={
               lang.CLDR.name ? (
-                <ObjectFieldHighlightedByPageSearch
-                  object={lang}
-                  field={SearchableField.NameCLDR}
-                />
+                <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameCLDR} />
               ) : (
                 <Deemphasized>Not in CLDR</Deemphasized>
               )
@@ -117,7 +114,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             name={
               lang.Ethnologue.name ? (
                 <ObjectFieldHighlightedByPageSearch
-                  object={lang}
+                  ent={lang}
                   field={SearchableField.NameEthnologue}
                 />
               ) : (

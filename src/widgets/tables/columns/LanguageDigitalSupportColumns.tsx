@@ -1,5 +1,5 @@
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -53,8 +53,8 @@ const columns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => (
       <>
-        <ObjectCLDRCoverageLevel object={lang} />
-        <CLDRWarningNotes object={lang} />
+        <ObjectCLDRCoverageLevel ent={lang} />
+        <CLDRWarningNotes ent={lang} />
       </>
     ),
     exportValue: (lang) => lang.CLDR.coverage?.actualCoverageLevel,
@@ -69,16 +69,16 @@ const columns: TableColumn<LanguageData>[] = [
         <code>it_SM</code>, and <code>it_VA</code>.
       </>
     ),
-    render: (lang) => <ObjectCLDRLocaleCount object={lang} />,
+    render: (lang) => <ObjectCLDRLocaleCount ent={lang} />,
     valueType: TableValueType.Count,
     exportValue: (lang) => lang.CLDR.coverage?.countOfCLDRLocales,
   },
   {
     key: 'ICU Support',
-    render: (lang) => <ICUSupportStatus object={lang} />,
+    render: (lang) => <ICUSupportStatus ent={lang} />,
     exportValue: (lang) => {
       if (lang.CLDR.coverage?.inICU !== undefined) return lang.CLDR.coverage.inICU;
-      if (lang.CLDR.dataProvider?.type === ObjectType.Language)
+      if (lang.CLDR.dataProvider?.type === EntityType.Language)
         return lang.CLDR.dataProvider.CLDR.coverage?.inICU;
       return undefined;
     },
@@ -187,10 +187,10 @@ const columns: TableColumn<LanguageData>[] = [
         </ul>
       </>
     ),
-    render: (object) => (
+    render: (ent) => (
       <>
-        <WikipediaStatusDisplay object={object} />
-        <WikipediaLink object={object} />
+        <WikipediaStatusDisplay ent={ent} />
+        <WikipediaLink ent={ent} />
       </>
     ),
   },
@@ -204,7 +204,7 @@ const columns: TableColumn<LanguageData>[] = [
         </ExternalLink>
       </>
     ),
-    render: (object) => <WikipediaArticles object={object} />,
+    render: (ent) => <WikipediaArticles ent={ent} />,
     valueType: TableValueType.Count,
   },
   {
@@ -217,7 +217,7 @@ const columns: TableColumn<LanguageData>[] = [
         </ExternalLink>
       </>
     ),
-    render: (object) => <WikipediaActiveUsers object={object} />,
+    render: (ent) => <WikipediaActiveUsers ent={ent} />,
     valueType: TableValueType.Population,
   },
   {

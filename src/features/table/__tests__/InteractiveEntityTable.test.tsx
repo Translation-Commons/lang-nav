@@ -1,7 +1,7 @@
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import * as FilterModule from '@features/transforms/filtering/filter';
@@ -10,7 +10,7 @@ import getFilterBySubstring from '@features/transforms/search/getFilterBySubstri
 import * as SortModule from '@features/transforms/sorting/sort';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -46,10 +46,10 @@ vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/transforms/search/getFilterBySubstring', () => ({ default: vi.fn() }));
 
 describe('InteractiveEntityTable', () => {
-  const mockObjects: ObjectData[] = [
+  const mockEnts: EntityData[] = [
     {
       ID: '1',
-      type: ObjectType.Territory,
+      type: EntityType.Territory,
       codeDisplay: 'T1',
       nameDisplay: 'Test Territory 1',
       names: ['Test Territory 1'],
@@ -58,7 +58,7 @@ describe('InteractiveEntityTable', () => {
     },
     {
       ID: '2',
-      type: ObjectType.Territory,
+      type: EntityType.Territory,
       codeDisplay: 'T2',
       nameDisplay: 'Test Territory 2',
       names: ['Test Territory 2'],
@@ -67,16 +67,16 @@ describe('InteractiveEntityTable', () => {
     },
   ];
 
-  const mockColumns: TableColumn<ObjectData>[] = [
+  const mockColumns: TableColumn<EntityData>[] = [
     {
       key: 'Name',
-      render: (obj) => obj.nameDisplay,
+      render: (ent) => ent.nameDisplay,
       field: Field.Name,
     },
     {
       key: 'Population',
-      render: (obj) => {
-        if (obj.type === ObjectType.Territory) return obj.pop.overall.toLocaleString();
+      render: (ent) => {
+        if (ent.type === EntityType.Territory) return ent.pop.overall.toLocaleString();
         return '';
       },
       field: Field.Population,
@@ -101,7 +101,7 @@ describe('InteractiveEntityTable', () => {
   const renderEntityTable = (props = {}) => {
     return render(
       <EntityTable
-        entities={mockObjects}
+        ents={mockEnts}
         columns={mockColumns}
         tableID={TableID.Territories}
         {...props}
@@ -113,7 +113,7 @@ describe('InteractiveEntityTable', () => {
   const rerenderEntityTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
     rerender(
       <EntityTable
-        entities={mockObjects}
+        ents={mockEnts}
         columns={mockColumns}
         tableID={TableID.Territories}
         {...props}
@@ -136,10 +136,10 @@ describe('InteractiveEntityTable', () => {
     expectColumnHeaders();
 
     // Check data rows
-    mockObjects.forEach((obj) => {
-      expect(screen.getByText(obj.nameDisplay)).toBeInTheDocument();
-      if (obj.type === ObjectType.Territory) {
-        expect(screen.getByText(obj.pop.overall.toLocaleString())).toBeInTheDocument();
+    mockEnts.forEach((ent) => {
+      expect(screen.getByText(ent.nameDisplay)).toBeInTheDocument();
+      if (ent.type === EntityType.Territory) {
+        expect(screen.getByText(ent.pop.overall.toLocaleString())).toBeInTheDocument();
       }
     });
   });
@@ -177,8 +177,8 @@ describe('InteractiveEntityTable', () => {
 
     renderEntityTable();
 
-    mockObjects.forEach((obj) => {
-      expect(screen.queryByText(obj.nameDisplay)).not.toBeInTheDocument();
+    mockEnts.forEach((ent) => {
+      expect(screen.queryByText(ent.nameDisplay)).not.toBeInTheDocument();
     });
   });
 
@@ -193,11 +193,11 @@ describe('InteractiveEntityTable', () => {
 
   it('formats numeric values correctly', () => {
     const numericObject = {
-      ...mockObjects[0],
+      ...mockEnts[0],
       pop: { overall: 1234567 },
     };
 
-    renderEntityTable({ entities: [numericObject] });
+    renderEntityTable({ ents: [numericObject] });
 
     expect(screen.getByRole('cell', { name: (1234567).toLocaleString() })).toBeInTheDocument();
   });
@@ -209,8 +209,8 @@ describe('InteractiveEntityTable', () => {
     renderEntityTable({ shouldFilterUsingSearchBar: false });
 
     expect(mockSubstringFilter).not.toHaveBeenCalled();
-    mockObjects.forEach((obj) => {
-      expect(screen.getByText(obj.nameDisplay)).toBeInTheDocument();
+    mockEnts.forEach((ent) => {
+      expect(screen.getByText(ent.nameDisplay)).toBeInTheDocument();
     });
   });
 

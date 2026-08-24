@@ -6,11 +6,11 @@ import { FilterPanelContext } from './FilterPanelContext';
 
 const FilterPanelProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [isOpen, setIsOpen] = useState(true);
-  const { objectID } = usePageParams();
+  const { entID } = usePageParams();
 
   useEffect(() => {
-    if (objectID) setIsOpen(false);
-  }, [objectID]);
+    if (entID) setIsOpen(false);
+  }, [entID]);
 
   return (
     <FilterPanelContext.Provider value={{ isOpen, setIsOpen }}>

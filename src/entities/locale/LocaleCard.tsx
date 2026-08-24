@@ -34,8 +34,8 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={locale} />
-        <ObjectSubtitle object={locale} />
+        <ObjectTitle ent={locale} />
+        <ObjectSubtitle ent={locale} />
       </div>
 
       {pop.adjusted != null && (

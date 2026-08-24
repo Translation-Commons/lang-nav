@@ -27,7 +27,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={data} />
+        <ObjectTitle ent={data} />
       </div>
       <CardField
         title="Type"
@@ -57,7 +57,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
         {languages.length > 0 ? (
           <CommaSeparated>
             {languages.map((lang) => (
-              <HoverableObjectName key={lang.ID} object={lang} />
+              <HoverableObjectName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         ) : (

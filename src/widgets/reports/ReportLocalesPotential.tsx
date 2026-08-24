@@ -159,67 +159,58 @@ const PotentialLocalesTable: React.FC<{
   return (
     <InteractiveEntityTable<LocaleData>
       tableID={TableID.PotentialLocales}
-      entities={locales}
+      ents={locales}
       columns={[
         {
           key: 'Potential Locale',
-          render: (object) => <HoverableObjectName object={object} labelSource="code" />,
+          render: (ent) => <HoverableObjectName ent={ent} labelSource="code" />,
           field: Field.Code,
         },
         {
           key: 'Language',
-          render: (object) =>
-            object.language ? (
-              <HoverableObjectName object={object.language} />
-            ) : (
-              object.languageCode
-            ),
+          render: (ent) =>
+            ent.language ? <HoverableObjectName ent={ent.language} /> : ent.languageCode,
           field: Field.Name,
         },
         {
           key: 'Population (Adjusted)',
-          render: (object) => object.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locales
+          render: (ent) => ent.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locales
           field: Field.Population,
         },
         {
           key: 'Population (in Census)',
-          render: (object) => object.pop.speaking.unadjusted,
+          render: (ent) => ent.pop.speaking.unadjusted,
           field: Field.PopulationDirectlySourced,
           isInitiallyVisible: false,
         },
         {
           key: '% in Territory',
-          render: (object) => object.pop.speaking.percent,
+          render: (ent) => ent.pop.speaking.percent,
           field: Field.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
-          render: (object) =>
-            object.pop.speaking.adjusted &&
-            (object.pop.speaking.adjusted * 100) / (object.language?.pop.overall ?? 1),
+          render: (ent) =>
+            ent.pop.speaking.adjusted &&
+            (ent.pop.speaking.adjusted * 100) / (ent.language?.pop.overall ?? 1),
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',
-          render: (object) => (
-            <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />
-          ),
+          render: (ent) => <LocaleCensusCitation locale={ent} focus={PopulationFocus.Speaking} />,
         },
         {
           key: 'Related Locale',
-          render: (object) => (
-            <HoverableObjectName
-              object={object.relatedLocales?.childLanguages?.[0]}
-              labelSource="code"
-            />
+          render: (ent) => (
+            <HoverableObjectName ent={ent.relatedLocales?.childLanguages?.[0]} labelSource="code" />
           ),
         },
         {
           key: 'Copy',
-          render: (object) => (
+          render: (ent) => (
             <button
               style={{ padding: '0.25em' }}
-              onClick={() => navigator.clipboard.writeText(getLocaleExportString(object))}
+              onClick={() => navigator.clipboard.writeText(getLocaleExportString(ent))}
             >
               <CopyIcon size="1em" display="block" />
             </button>

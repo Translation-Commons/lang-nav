@@ -76,7 +76,7 @@ const ReportLanguageDescendants: React.FC = () => {
             render: (lang: LanguageData) =>
               lang.largestDescendant && (
                 <>
-                  <HoverableObjectName object={lang.largestDescendant} /> [
+                  <HoverableObjectName ent={lang.largestDescendant} /> [
                   {lang.largestDescendant.codeDisplay}]
                 </>
               ),
@@ -94,7 +94,7 @@ const ReportLanguageDescendants: React.FC = () => {
             field: Field.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}
-        entities={filteredLanguages}
+        ents={filteredLanguages}
       />
     </>
   );

@@ -1,41 +1,41 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-export function getEntitySubtitle(entity: ObjectData): string | undefined {
+export function getEntitySubtitle(entity: EntityData): string | undefined {
   switch (entity.type) {
-    case ObjectType.Language:
+    case EntityType.Language:
       return entity.nameEndonym ?? entity.nameSubtitle ?? undefined;
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return entity.nameDisplay != entity.nameFull ? entity.nameFull : undefined;
-    case ObjectType.Locale:
-    case ObjectType.Census:
-    case ObjectType.Territory:
-    case ObjectType.Keyboard:
-    case ObjectType.Org:
+    case EntityType.Locale:
+    case EntityType.Census:
+    case EntityType.Territory:
+    case EntityType.Keyboard:
+    case EntityType.Org:
       return undefined;
   }
 }
 
-export function getEntityTypeLabelPlural(entityType: ObjectType) {
+export function getEntityTypeLabelPlural(entityType: EntityType) {
   switch (entityType) {
-    case ObjectType.Census:
+    case EntityType.Census:
       return 'censuses';
-    case ObjectType.Language:
+    case EntityType.Language:
       return 'languages';
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return 'languages in territories';
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return 'territories';
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return 'writing systems';
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return 'variants';
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return 'keyboards';
-    case ObjectType.Org:
+    case EntityType.Org:
       return 'organizations';
     default:
       enforceExhaustiveSwitch(entityType);

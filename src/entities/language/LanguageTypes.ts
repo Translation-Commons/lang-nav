@@ -6,7 +6,7 @@
 import React from 'react';
 
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
@@ -14,7 +14,7 @@ import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
-import { ObjectBase } from '../types/DataTypes';
+import { EntityBase } from '../types/DataTypes';
 
 import {
   DigitalSupportScore,
@@ -105,8 +105,8 @@ export type LanguagePopulationData = {
   rough?: number; // from languages.tsv
 };
 
-export interface LanguageData extends ObjectBase {
-  type: ObjectType.Language;
+export interface LanguageData extends EntityBase {
+  type: EntityType.Language;
 
   // Provided by the TSV files
   ID: LanguageCode; // Stable ID, favors ISO
@@ -143,7 +143,7 @@ export interface LanguageData extends ObjectBase {
   coordsSource?: LanguageSource;
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
-  // References to other objects, filled in after loading the TSV
+  // References to other entities, filled in after loading the TSV
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
@@ -172,10 +172,10 @@ export interface LanguageData extends ObjectBase {
   Ethnologue: EthnologueLanguageData;
 }
 
-// Used to create a new language object with minimal data
+// Used to create a new language entity with minimal data
 export function getBaseLanguageData(code: LanguageCode, name: string): LanguageData {
   return {
-    type: ObjectType.Language,
+    type: EntityType.Language,
     ID: code,
     codeDisplay: code,
     nameCanonical: name,

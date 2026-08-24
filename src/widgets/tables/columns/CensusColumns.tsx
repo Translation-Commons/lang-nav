@@ -75,7 +75,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Territory',
-      render: (census) => <HoverableObjectName object={census.territory} />,
+      render: (census) => <HoverableObjectName ent={census.territory} />,
       isInitiallyVisible: false,
       field: Field.Territory,
       columnGroup: 'Location',
@@ -88,7 +88,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Collector Name',
-      render: (census) => <HoverableObjectName object={census.collector} labelSource="code" />,
+      render: (census) => <HoverableObjectName ent={census.collector} labelSource="code" />,
       isInitiallyVisible: false,
       columnGroup: 'Collector',
     },
@@ -100,7 +100,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Presented By',
-      render: (census) => <HoverableObjectName object={census.presenter} labelSource="code" />,
+      render: (census) => <HoverableObjectName ent={census.presenter} labelSource="code" />,
       isInitiallyVisible: false,
       columnGroup: 'Collector',
     },

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import { getNewURL } from '@features/params/getNewURL';
-import { ObjectType, PageParamKey, PageParams, View } from '@features/params/PageParamTypes';
+import { EntityType, PageParamKey, PageParams, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 import { Button } from '@shared/ui/button';
@@ -30,7 +30,7 @@ export const ObjectiveList: React.FC = () => {
         label="See the languages in a country."
         inputPlaceholder="Enter a country"
         inputParam={PageParamKey.territoryFilter}
-        urlParams={{ view: View.Table, objectType: ObjectType.Locale }}
+        urlParams={{ view: View.Table, entityType: EntityType.Locale }}
       />
       <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
       <Objective

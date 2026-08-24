@@ -28,9 +28,9 @@ const LocalParamsProvider: React.FC<{
         });
         return nextParams;
       });
-      if (newParams.objectID) {
-        // Keep the global objectID in sync so that object name links can update the details panel
-        globalParams.updatePageParams({ objectID: newParams.objectID });
+      if (newParams.entID) {
+        // Keep the global entID in sync so that object name links can update the details panel
+        globalParams.updatePageParams({ entID: newParams.entID });
       }
     },
     [setLocalParams],

@@ -1,12 +1,12 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export const WritingSystemHierarchy: React.FC = () => {
@@ -38,8 +38,8 @@ export const WritingSystemHierarchy: React.FC = () => {
 
 export function getWritingSystemTreeNodes(
   writingSystems: WritingSystemData[],
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean = () => true,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean = () => true,
 ): TreeNodeData[] {
   return writingSystems
     .filter(filterFunction)
@@ -50,12 +50,12 @@ export function getWritingSystemTreeNodes(
 
 function getWritingSystemTreeNode(
   writingSystem: WritingSystemData,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData {
   return {
-    type: ObjectType.WritingSystem,
-    object: writingSystem,
+    type: EntityType.WritingSystem,
+    ent: writingSystem,
     children: writingSystem.childWritingSystems
       ? getWritingSystemTreeNodes(writingSystem.childWritingSystems, sortFunction, filterFunction)
       : [],

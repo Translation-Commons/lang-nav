@@ -31,7 +31,7 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
     return; // won't load anything while data is empty
   }
 
-  // Load multiple supplemental data sources in parallel, these changes will modify objects
+  // Load multiple supplemental data sources in parallel, these changes will modify entities
   // but they should not modify the same fields.
   await Promise.all([
     loadCLDRCoverage(dataContext.getCLDRLanguage),

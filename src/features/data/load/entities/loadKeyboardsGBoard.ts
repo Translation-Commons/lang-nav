@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   KeyboardData,
@@ -28,7 +28,7 @@ export function parseKeyboardGBoardLine(line: string): KeyboardData | undefined 
   const variantCode = parts[6] !== '' ? parts[6] : undefined;
 
   return {
-    type: ObjectType.Keyboard,
+    type: EntityType.Keyboard,
     ID: id,
     codeDisplay: id,
     nameDisplay,

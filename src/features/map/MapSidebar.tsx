@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import DrawableData from './DrawableData';
@@ -9,12 +9,12 @@ import MapCard from './MapCard';
 
 type Props = {
   drawableEntities: DrawableData[];
-  objectType: ObjectType;
+  entityType: EntityType;
   hoveredId: string | null;
   setHoveredId: (id: string | null) => void;
 };
 
-const MapSidebar: React.FC<Props> = ({ drawableEntities, objectType, hoveredId, setHoveredId }) => {
+const MapSidebar: React.FC<Props> = ({ drawableEntities, entityType, hoveredId, setHoveredId }) => {
   const { pinned, updatePageParams } = usePageParams();
 
   const pinnedEntities = useMemo(() => {
@@ -45,7 +45,7 @@ const MapSidebar: React.FC<Props> = ({ drawableEntities, objectType, hoveredId, 
         hoverContent="Click to toggle visibility of selected items"
         onClick={() => setShowItems((prev) => !prev)}
       >
-        Selected {objectType === ObjectType.Language ? 'Languages' : 'Territories'}
+        Selected {entityType === EntityType.Language ? 'Languages' : 'Territories'}
       </HoverableButton>
       {/* </div> */}
       <div className={'MapSidebarContent' + (showItems ? ' growThenShow' : ' shrinkThenHide')}>
@@ -58,7 +58,7 @@ const MapSidebar: React.FC<Props> = ({ drawableEntities, objectType, hoveredId, 
           >
             <MapCard
               drawnEntity={entity}
-              objectType={objectType}
+              entityType={entityType}
               onClose={() => {
                 setHoveredId(null);
                 unpinCard(entity.ID);

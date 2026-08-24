@@ -4,7 +4,7 @@ import {
   addIANAVariantLocales,
   loadIANAVariants,
 } from '@features/data/load/extra_entities/IANAData';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData, CensusID } from '@entities/census/CensusTypes';
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
@@ -12,7 +12,7 @@ import { LanguageData, LanguagesBySource } from '@entities/language/LanguageType
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -60,7 +60,7 @@ export type CoreDataArrays = {
 };
 
 export type CoreData = CoreDataArrays & {
-  objects: Record<string, ObjectData>;
+  ents: Record<string, EntityData>;
 };
 
 export const EMPTY_LANGUAGES_BY_SCHEMA: LanguagesBySource = {
@@ -82,7 +82,7 @@ export function useCoreData(): {
   coreData: CoreData;
 } {
   const [allLanguoids, setAllLanguoids] = useState<LanguageData[]>([]);
-  const [objects, setObjects] = useState<Record<string, ObjectData>>({});
+  const [ents, setEnts] = useState<Record<string, EntityData>>({});
 
   // Censuses are not populated here, but this seems necessary because the state affects the page.
   const [censuses, setCensuses] = useState<Record<CensusID, CensusData>>({});
@@ -165,8 +165,8 @@ export function useCoreData(): {
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));
-    setObjects({
-      // All combined into one big object map for easy lookup but the ID formats are unique so its OK
+    setEnts({
+      // All combined into one big entity map for easy lookup but the ID formats are unique so its OK
       ...languagesBySource.Glottolog, // aaaa0000
       ...languagesBySource.ISO, // aaa
       ...languagesBySource.BCP, // aa | aaa
@@ -183,26 +183,24 @@ export function useCoreData(): {
   const coreData = useMemo(
     () => ({
       allLanguoids,
-      locales: Object.values(objects).filter((o): o is LocaleData => o.type === ObjectType.Locale),
-      territories: Object.values(objects).filter(
-        (o): o is TerritoryData => o.type === ObjectType.Territory,
+      locales: Object.values(ents).filter((e): e is LocaleData => e.type === EntityType.Locale),
+      territories: Object.values(ents).filter(
+        (e): e is TerritoryData => e.type === EntityType.Territory,
       ),
-      variants: Object.values(objects).filter(
-        (o): o is VariantData => o.type === ObjectType.Variant,
+      variants: Object.values(ents).filter((e): e is VariantData => e.type === EntityType.Variant),
+      writingSystems: Object.values(ents).filter(
+        (e): e is WritingSystemData => e.type === EntityType.WritingSystem,
       ),
-      writingSystems: Object.values(objects).filter(
-        (o): o is WritingSystemData => o.type === ObjectType.WritingSystem,
-      ),
-      keyboards: Object.values(objects).filter(
-        (o): o is KeyboardData => o.type === ObjectType.Keyboard,
+      keyboards: Object.values(ents).filter(
+        (e): e is KeyboardData => e.type === EntityType.Keyboard,
       ),
       censuses,
-      organizations: Object.values(objects).filter(
-        (o): o is OrganizationData => o.type === ObjectType.Org,
+      organizations: Object.values(ents).filter(
+        (e): e is OrganizationData => e.type === EntityType.Org,
       ),
-      objects,
+      ents,
     }),
-    [allLanguoids, objects, censuses],
+    [allLanguoids, ents, censuses],
   );
 
   return {

@@ -34,7 +34,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={writingSystem} />
+        <ObjectTitle ent={writingSystem} />
       </div>
 
       <CardField
@@ -58,7 +58,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
               <div>
                 <Deemphasized>Variant of: </Deemphasized>
                 {parentWritingSystem ? (
-                  <HoverableObjectName object={parentWritingSystem} />
+                  <HoverableObjectName ent={parentWritingSystem} />
                 ) : (
                   <Deemphasized>Unknown</Deemphasized>
                 )}
@@ -71,7 +71,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
                 containing{' '}
                 <CommaSeparated>
                   {containsWritingSystems.map((w) => (
-                    <HoverableObjectName key={w.ID} object={w} />
+                    <HoverableObjectName key={w.ID} ent={w} />
                   ))}
                 </CommaSeparated>
               </>
@@ -98,7 +98,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         {languages && Object.values(languages).length > 0 ? (
           <CommaSeparated>
             {Object.values(languages).map((lang) => (
-              <HoverableObjectName key={lang.ID} object={lang} />
+              <HoverableObjectName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         ) : (

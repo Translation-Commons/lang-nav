@@ -52,7 +52,7 @@ function computeRecursiveDataOnLanguage(lang: LanguageData, depth = 0): void {
     vitality.ethCoarse = maxBy(descendants, (child) => child.vitality?.ethCoarse);
   }
 
-  // Compute the meta score and store the results in the language object
+  // Compute the meta score and store the results in the language entity
   vitality.meta = getVitalityMetascore(lang);
   lang.vitality = vitality;
 

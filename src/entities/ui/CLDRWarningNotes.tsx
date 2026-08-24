@@ -2,25 +2,25 @@ import { AlertTriangleIcon, InfoIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 /** accumulates notes about oddities with CLDR coverage */
 const CLDRWarningNotes: React.FC<{
-  object: ObjectData;
+  ent: EntityData;
   parentNotes?: React.ReactNode;
-}> = ({ object, parentNotes }) => {
-  if (object.type !== ObjectType.Language) return null;
+}> = ({ ent, parentNotes }) => {
+  if (ent.type !== EntityType.Language) return null;
 
-  const { CLDR } = object;
+  const { CLDR } = ent;
   const { coverage, dataProvider } = CLDR;
 
   if (coverage == null && dataProvider != null) {
     // The CLDR data comes from something else, load those notes too
     return (
       <CLDRWarningNotes
-        object={dataProvider}
+        ent={dataProvider}
         parentNotes={[parentNotes, CLDR.notes].filter((n) => n != null)}
       />
     );
@@ -30,10 +30,10 @@ const CLDRWarningNotes: React.FC<{
 };
 
 // Returns an array because it could pick up notes from data providers
-export function getCLDRWarningNotes(object: ObjectData): React.ReactNode[] {
-  if (object.type !== ObjectType.Language) return [];
+export function getCLDRWarningNotes(ent: EntityData): React.ReactNode[] {
+  if (ent.type !== EntityType.Language) return [];
 
-  const { CLDR } = object;
+  const { CLDR } = ent;
   const { coverage, dataProvider } = CLDR;
   if (coverage == null && dataProvider != null) {
     return [...getCLDRWarningNotes(dataProvider), CLDR.notes].filter((n) => n != null);

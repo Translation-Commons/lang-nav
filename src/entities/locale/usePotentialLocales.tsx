@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
@@ -56,7 +56,7 @@ function usePotentialLocales(
           if (missing[localeID] == null) {
             missing[localeID] = {
               localeSource: LocaleSource.Census,
-              type: ObjectType.Locale,
+              type: EntityType.Locale,
               ID: langID + '_' + census.isoRegionCode,
               codeDisplay: lang.codeDisplay + localeSeparator + census.isoRegionCode,
               languageCode: langID,

@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageDictionary, LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
@@ -57,7 +57,7 @@ function createLocalesForLanguageFamily(
       // It isn't found yet, create it
       newLocale = {
         // Set a new locale code and territory code
-        type: ObjectType.Locale,
+        type: EntityType.Locale,
         ID: newLocaleCode,
         codeDisplay: newLocaleCode,
         localeSource: LocaleSource.CreateFamilyLocales,

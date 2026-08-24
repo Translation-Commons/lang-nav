@@ -1,14 +1,14 @@
 import { useDataContext } from '@features/data/context/useDataContext';
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
-export default function getObjectFromID(inputObjectID?: string): ObjectData | undefined {
-  const { objectID: pageObjectID } = usePageParams();
+export default function getObjectFromID(inputObjectID?: string): EntityData | undefined {
+  const { entID: pageObjectID } = usePageParams();
   const { censuses, getObject } = useDataContext();
-  const objectID = inputObjectID ?? pageObjectID;
+  const entID = inputObjectID ?? pageObjectID;
 
-  if (objectID == null) return undefined;
+  if (entID == null) return undefined;
 
-  return censuses[objectID] ?? getObject(objectID);
+  return censuses[entID] ?? getObject(entID);
 }

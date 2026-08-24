@@ -17,7 +17,7 @@ const LocaleTable: React.FC = () => {
   return (
     <InteractiveEntityTable<LocaleData>
       tableID={TableID.Locales}
-      entities={locales.filter((locale) => locale.language?.[languageSource].code != null)}
+      ents={locales.filter((locale) => locale.language?.[languageSource].code != null)}
       columns={columns}
     />
   );

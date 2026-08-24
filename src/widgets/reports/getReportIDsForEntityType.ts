@@ -1,13 +1,13 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import ReportID from './ReportID';
 
 /** Output should be sorted by how it should appear in the UI */
-function getReportIDsForEntityType(entityType: ObjectType): ReportID[] {
+function getReportIDsForEntityType(entityType: EntityType): ReportID[] {
   switch (entityType) {
-    case ObjectType.Language:
+    case EntityType.Language:
       return [
         ReportID.LanguagesDubious,
         ReportID.LanguagesWithAmbiguousNames,
@@ -16,21 +16,21 @@ function getReportIDsForEntityType(entityType: ObjectType): ReportID[] {
         ReportID.LanguageScopeIssues,
         ReportID.LanguagePlurals,
       ];
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return [
         ReportID.LocalesPotential,
         ReportID.LocaleCitationCompleteness,
         ReportID.LocaleIndigeneity,
       ];
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return [ReportID.WritingSystemsLanguagesWithout];
-    case ObjectType.Census:
+    case EntityType.Census:
       return [ReportID.CensusCountries, ReportID.CensusInputTool];
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return [ReportID.VariantsAnnotationTool];
-    case ObjectType.Keyboard:
-    case ObjectType.Territory:
-    case ObjectType.Org:
+    case EntityType.Keyboard:
+    case EntityType.Territory:
+    case EntityType.Org:
       return [];
     default:
       enforceExhaustiveSwitch(entityType);

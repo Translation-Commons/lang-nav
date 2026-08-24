@@ -3,15 +3,15 @@ import React from 'react';
 import { SearchableField } from '@features/params/PageParamTypes';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 type Props = {
-  object: ObjectData;
+  ent: EntityData;
   highlightSearchMatches?: boolean;
 };
 
-const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true }) => {
-  const { codeDisplay, nameDisplay } = object;
+const ObjectTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) => {
+  const { codeDisplay, nameDisplay } = ent;
 
   if (!highlightSearchMatches) {
     return (
@@ -24,10 +24,10 @@ const ObjectTitle: React.FC<Props> = ({ object, highlightSearchMatches = true })
   return (
     <>
       <strong>
-        <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
+        <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
       </strong>{' '}
       [
-      <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />]
+      <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
     </>
   );
 };

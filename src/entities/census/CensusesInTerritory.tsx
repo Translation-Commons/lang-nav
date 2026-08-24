@@ -23,7 +23,7 @@ const CensusesInTerritory: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
-        <HoverableObjectName object={territory} /> Census Tables
+        <HoverableObjectName ent={territory} /> Census Tables
       </h3>
       <>
         Click to see a table with all census tables for this territory available in LangNav.{' '}
@@ -33,7 +33,7 @@ const CensusesInTerritory: React.FC<Props> = ({ territory }) => {
       </>
       {censuses.slice(0, showAll ? censuses.length : 5).map((census) => (
         <div key={census.ID} style={{ marginLeft: '1em' }}>
-          <HoverableObjectName object={census} />
+          <HoverableObjectName ent={census} />
         </div>
       ))}
       {censuses.length > 5 && (

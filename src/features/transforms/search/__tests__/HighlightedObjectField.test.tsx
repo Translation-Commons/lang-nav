@@ -15,7 +15,7 @@ describe('HighlightedObjectField', () => {
   it('renders highlighted text', () => {
     render(
       <HighlightedObjectField
-        object={mockedLanguage}
+        ent={mockedLanguage}
         field={SearchableField.NameDisplay}
         query="Eng"
       />,
@@ -28,11 +28,7 @@ describe('HighlightedObjectField', () => {
 
   it('renders highlighted that contained accent marks', () => {
     render(
-      <HighlightedObjectField
-        object={mockedLanguage}
-        field={SearchableField.NameAny}
-        query="Ingle"
-      />,
+      <HighlightedObjectField ent={mockedLanguage} field={SearchableField.NameAny} query="Ingle" />,
     );
     // There is no component with "Inglés" because it is split into two spans
     expect(screen.queryByText('Inglés')).not.toBeInTheDocument();

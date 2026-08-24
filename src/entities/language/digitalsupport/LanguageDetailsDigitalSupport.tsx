@@ -60,7 +60,7 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
       return lang.keyboards?.length ? (
         <CommaSeparated>
           {lang.keyboards.map((keyboard) => (
-            <HoverableObjectName key={keyboard.ID} object={keyboard} />
+            <HoverableObjectName key={keyboard.ID} ent={keyboard} />
           ))}
         </CommaSeparated>
       ) : (
@@ -78,7 +78,7 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
               )
             }
           >
-            <ObjectWikipediaInfo object={lang} />
+            <ObjectWikipediaInfo ent={lang} />
           </DetailsField>
           <DetailsField title="UDHR" description={LanguageUDHRDescription}>
             <LanguageUDHRInfo lang={lang} size="long" />
@@ -90,13 +90,13 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
         <>
           <DetailsField title="CLDR Coverage">
             <div style={{ display: 'inline-flex', flexDirection: 'row', gap: '0.5em' }}>
-              <CLDRWarningNotes object={lang} />
-              <ObjectCLDRCoverageLevel object={lang} />
-              <ObjectCLDRLocaleCount object={lang} verbose={true} />
+              <CLDRWarningNotes ent={lang} />
+              <ObjectCLDRCoverageLevel ent={lang} />
+              <ObjectCLDRLocaleCount ent={lang} verbose={true} />
             </div>
           </DetailsField>
           <DetailsField title="ICU Support">
-            <ICUSupportStatus object={lang} />
+            <ICUSupportStatus ent={lang} />
           </DetailsField>
         </>
       );

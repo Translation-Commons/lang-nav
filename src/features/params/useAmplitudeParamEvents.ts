@@ -48,19 +48,19 @@ export default function useAmplitudeParamEvents() {
 
     // Defaults never appear in the URL; resolve per profile/entity so entity,
     // view, sort, and the previous_* values are always populated correctly.
-    const currentDefaults = getDefaultParams(current.objectType, current.view, current.profile);
-    const previousDefaults = getDefaultParams(previous.objectType, previous.view, previous.profile);
+    const currentDefaults = getDefaultParams(current.entityType, current.view, current.profile);
+    const previousDefaults = getDefaultParams(previous.entityType, previous.view, previous.profile);
 
     const base = {
       path: location.pathname,
       view: current.view ?? currentDefaults.view,
-      entity: current.objectType ?? currentDefaults.objectType,
+      entity: current.entityType ?? currentDefaults.entityType,
     };
 
-    if (current.objectType !== previous.objectType) {
+    if (current.entityType !== previous.entityType) {
       trackEntitySwitched({
         ...base,
-        previous_entity: previous.objectType ?? previousDefaults.objectType,
+        previous_entity: previous.entityType ?? previousDefaults.entityType,
       });
     }
 
@@ -96,12 +96,12 @@ export default function useAmplitudeParamEvents() {
       });
     }
 
-    const prevID = previous.objectID;
-    const nextID = current.objectID;
+    const prevID = previous.entID;
+    const nextID = current.entID;
     if (prevID == null && nextID != null) {
       trackDetailViewed({ ...base, object_id: nextID });
     } else if (prevID != null && nextID != null && prevID !== nextID) {
-      trackDetailSwitched({ ...base, object: nextID, previous_object: prevID });
+      trackDetailSwitched({ ...base, ent: nextID, previous_ent: prevID });
     }
 
     prevParamsRef.current = current;

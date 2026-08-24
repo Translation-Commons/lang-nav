@@ -13,15 +13,15 @@ import {
   getCountriesInObject,
 } from '../getObjectRelatedTerritories';
 
-const mockedObjects = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedObjects();
 
 describe('getContainingTerritories', () => {
-  it('returns the containing territories for objects', () => {
+  it('returns the containing territories for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getContainingTerritories(obj)
-          .map((obj) => obj.nameDisplay)
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getContainingTerritories(ent)
+          .map((ent) => ent.nameDisplay)
           .join(', '),
       ]),
     );
@@ -52,12 +52,12 @@ describe('getContainingTerritories', () => {
 });
 
 describe('getChildTerritoriesInObject', () => {
-  it('returns the child territories for objects', () => {
+  it('returns the child territories for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getChildTerritoriesInObject(obj)
-          ?.map((obj) => obj.nameDisplay)
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getChildTerritoriesInObject(ent)
+          ?.map((ent) => ent.nameDisplay)
           .join(', ') ?? undefined,
       ]),
     );
@@ -88,12 +88,12 @@ describe('getChildTerritoriesInObject', () => {
 });
 
 describe('getCountriesInObject', () => {
-  it('returns the countries for objects', () => {
+  it('returns the countries for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getCountriesInObject(obj)
-          ?.map((obj) => obj.nameDisplay)
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getCountriesInObject(ent)
+          ?.map((ent) => ent.nameDisplay)
           .join(', ') ?? 'undefined',
       ]),
     );

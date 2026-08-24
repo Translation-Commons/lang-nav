@@ -7,28 +7,28 @@ import TerritoryTable from '@widgets/tables/TerritoryTable';
 import VariantTable from '@widgets/tables/VariantTable';
 import WritingSystemTable from '@widgets/tables/WritingSystemTable';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 function ViewTable() {
-  const { objectType } = usePageParams();
+  const { entityType } = usePageParams();
 
-  switch (objectType) {
-    case ObjectType.Census:
+  switch (entityType) {
+    case EntityType.Census:
       return <TableOfAllCensuses />;
-    case ObjectType.Language:
+    case EntityType.Language:
       return <LanguageTable />;
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return <LocaleTable />;
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return <TerritoryTable />;
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return <WritingSystemTable />;
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return <VariantTable />;
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return <KeyboardTable />;
-    case ObjectType.Org:
+    case EntityType.Org:
       return <OrganizationTable />;
   }
 }

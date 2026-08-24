@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -26,7 +26,7 @@ const LanguagePopulationFromLocales: React.FC<Props> = ({ lang, speakingOrWritin
     updatePageParams({
       languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
       view: View.Table,
-      objectType: ObjectType.Locale,
+      entityType: EntityType.Locale,
     });
   }, [updatePageParams, lang]);
 
@@ -69,7 +69,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({
             .map((locale) => (
               <tr key={locale.ID}>
                 <td>
-                  <HoverableObjectName object={locale} labelSource="territory" />
+                  <HoverableObjectName ent={locale} labelSource="territory" />
                 </td>
                 <CellPopulation population={locale.pop[speakingOrWriting].adjusted} />
               </tr>

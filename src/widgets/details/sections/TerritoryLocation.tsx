@@ -6,7 +6,7 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -29,7 +29,7 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
       </DetailsField>
 
       <DetailsField title="Map">Showing {getMapLabel(territory)}</DetailsField>
-      <LocalParamsProvider overrides={{ limit: -1, objectType: ObjectType.Territory }}>
+      <LocalParamsProvider overrides={{ limit: -1, entityType: EntityType.Territory }}>
         <MapContainer>
           <EntityMap
             entities={[

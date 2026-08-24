@@ -20,9 +20,9 @@ import { computeDescendantPopulation } from './computeDescendantPopulation';
 import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
 
 /**
- * During the core data loading process, after all objects have been loaded, this function connects them together.
+ * During the core data loading process, after all entities have been loaded, this function connects them together.
  *
- * It also creates some additional derived objects, such as family locales and regional locales.
+ * It also creates some additional derived entities, such as family locales and regional locales.
  */
 export function connectObjectsAndCreateDerivedData(
   languagesBySource: LanguagesBySource,

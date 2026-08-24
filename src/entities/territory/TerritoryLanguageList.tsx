@@ -27,7 +27,7 @@ const TerritoryLanguageList: React.FC<Props> = ({ territory }) => {
 const TerritoryLanguageListContents: React.FC<Props> = ({ territory }) => {
   const locales = territory.locales ?? [];
   const filteredLocales = useFilteredEntities({
-    inputEntities: locales,
+    inputEnts: locales,
     useSubstring: false,
   }).filteredEntities;
 
@@ -38,10 +38,10 @@ const TerritoryLanguageListContents: React.FC<Props> = ({ territory }) => {
   return locales.length > 0 ? (
     <CommaSeparated>
       {uniqueBy(filteredLocales, (loc) => loc.languageCode).map((locale) => (
-        <HoverableObjectName key={locale.ID} labelSource="language" object={locale} />
+        <HoverableObjectName key={locale.ID} labelSource="language" ent={locale} />
       ))}
       {numberOfLanguages > numberOfFilteredLanguages && (
-        <Hoverable hoverContent={<FilterBreakdown objects={locales} />}>
+        <Hoverable hoverContent={<FilterBreakdown ents={locales} />}>
           +{(numberOfLanguages - numberOfFilteredLanguages).toLocaleString()}
         </Hoverable>
       )}

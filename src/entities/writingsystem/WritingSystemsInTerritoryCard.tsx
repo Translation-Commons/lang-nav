@@ -22,7 +22,7 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
-        Writing Systems used in <HoverableObjectName object={territory} />
+        Writing Systems used in <HoverableObjectName ent={territory} />
       </h3>
       <>
         Click to see a table with all writing systems known to be used in {territory.nameDisplay}.{' '}
@@ -33,7 +33,7 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
       </>
       {(showAll ? writingSystems : limitedWritingSystems).map((ws) => (
         <div key={ws.ID} style={{ marginLeft: '1em' }}>
-          <HoverableObjectName object={ws} /> [{ws.codeDisplay}]{' '}
+          <HoverableObjectName ent={ws} /> [{ws.codeDisplay}]{' '}
           {ws.territoryOfOriginCode === territory.ID && '(originated here)'}
         </div>
       ))}

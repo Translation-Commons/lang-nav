@@ -10,14 +10,13 @@ import {
   getObjectPopulationPercentInBiggestDescendantLanguage,
   getObjectPopulationRelativeToOverallLanguageSpeakers,
 } from '@entities/lib/getObjectPopulation';
-import { ObjectData } from '@entities/types/DataTypes';
 
-const mockedObjects = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedObjects();
 
 describe('getObjectPopulation', () => {
-  it('returns population for objects', () => {
+  it('returns population for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getObjectPopulation(obj as ObjectData)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectPopulation(ent)]),
     );
     expect(results).toEqual({
       '001': 50000, // recomputed 123+AM
@@ -46,12 +45,9 @@ describe('getObjectPopulation', () => {
 });
 
 describe('getObjectPopulationDirectlySourced', () => {
-  it('returns the directly sourced population for objects', () => {
+  it('returns the directly sourced population for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getObjectPopulationDirectlySourced(obj as ObjectData),
-      ]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectPopulationDirectlySourced(ent)]),
     );
     expect(results).toEqual({
       '001': 50000,
@@ -84,12 +80,9 @@ describe('getObjectPopulationDirectlySourced', () => {
 });
 
 describe('getObjectPopulationOfDescendants', () => {
-  it('returns population of descendants for objects', () => {
+  it('returns population of descendants for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getObjectPopulationOfDescendants(obj as ObjectData),
-      ]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectPopulationOfDescendants(ent)]),
     );
     expect(results).toEqual({
       '001': undefined,
@@ -118,11 +111,11 @@ describe('getObjectPopulationOfDescendants', () => {
 });
 
 describe('getObjectPercentOfTerritoryPopulation', () => {
-  it('returns percent of territory population for objects', () => {
+  it('returns percent of territory population for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getObjectPercentOfTerritoryPopulation(obj as ObjectData)?.toFixed(1),
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getObjectPercentOfTerritoryPopulation(ent)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({
@@ -152,11 +145,11 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
 });
 
 describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
-  it('returns population percent in biggest descendant language for objects', () => {
+  it('returns population percent in biggest descendant language for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getObjectPopulationPercentInBiggestDescendantLanguage(obj as ObjectData)?.toFixed(1),
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getObjectPopulationPercentInBiggestDescendantLanguage(ent)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({
@@ -186,11 +179,11 @@ describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
 });
 
 describe('getObjectPopulationRelativeToOverallLanguageSpeakers', () => {
-  it('returns population relative to overall language speakers for objects', () => {
+  it('returns population relative to overall language speakers for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getObjectPopulationRelativeToOverallLanguageSpeakers(obj as ObjectData)?.toFixed(1),
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getObjectPopulationRelativeToOverallLanguageSpeakers(ent)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({

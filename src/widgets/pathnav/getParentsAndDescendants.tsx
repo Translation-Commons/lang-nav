@@ -1,74 +1,74 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 export function getObjectParents(
-  object?: ObjectData,
+  ent?: EntityData,
   depth: number = 0, // to prevent infinite recursion in case of cycles
-): (ObjectData | undefined)[] {
-  if (object == null || depth > 20) return [];
-  switch (object.type) {
-    case ObjectType.Census:
-      return [object.territory];
-    case ObjectType.Language:
-      return [...getObjectParents(object.parentLanguage, depth + 1), object.parentLanguage];
-    case ObjectType.Locale:
-      return [object.language, object.writingSystem, object.territory, ...(object.variants ?? [])];
-    case ObjectType.Territory:
-      return [...getObjectParents(object.parentUNRegion, depth + 1), object.parentUNRegion];
-    case ObjectType.WritingSystem:
-      return [object.parentWritingSystem];
-    case ObjectType.Variant:
-      return [object.languages[0]];
-    case ObjectType.Keyboard:
+): (EntityData | undefined)[] {
+  if (ent == null || depth > 20) return [];
+  switch (ent.type) {
+    case EntityType.Census:
+      return [ent.territory];
+    case EntityType.Language:
+      return [...getObjectParents(ent.parentLanguage, depth + 1), ent.parentLanguage];
+    case EntityType.Locale:
+      return [ent.language, ent.writingSystem, ent.territory, ...(ent.variants ?? [])];
+    case EntityType.Territory:
+      return [...getObjectParents(ent.parentUNRegion, depth + 1), ent.parentUNRegion];
+    case EntityType.WritingSystem:
+      return [ent.parentWritingSystem];
+    case EntityType.Variant:
+      return [ent.languages[0]];
+    case EntityType.Keyboard:
       return [];
-    case ObjectType.Org:
-      return [object.parent];
+    case EntityType.Org:
+      return [ent.parent];
   }
 }
 
-export function getObjectChildren(object?: ObjectData): (ObjectData | undefined)[] {
-  if (object == null) return [];
-  switch (object.type) {
-    case ObjectType.Census:
-      return (object.territory?.censuses ?? []).filter((c) => c.ID !== object.ID);
-    case ObjectType.Language:
-      return object.childLanguages;
-    case ObjectType.Locale:
-      if (!object.relatedLocales) return [];
+export function getObjectChildren(ent?: EntityData): (EntityData | undefined)[] {
+  if (ent == null) return [];
+  switch (ent.type) {
+    case EntityType.Census:
+      return (ent.territory?.censuses ?? []).filter((c) => c.ID !== ent.ID);
+    case EntityType.Language:
+      return ent.childLanguages;
+    case EntityType.Locale:
+      if (!ent.relatedLocales) return [];
       return [
-        ...(object.relatedLocales.moreSpecific ?? []),
-        ...(object.relatedLocales.childLanguages ?? []),
-        ...(object.relatedLocales.childTerritories ?? []),
+        ...(ent.relatedLocales.moreSpecific ?? []),
+        ...(ent.relatedLocales.childLanguages ?? []),
+        ...(ent.relatedLocales.childTerritories ?? []),
       ];
-    case ObjectType.Territory:
-      return [...(object.containsTerritories ?? []), ...(object.dependentTerritories ?? [])];
-    case ObjectType.WritingSystem:
-      return object.childWritingSystems ?? [];
-    case ObjectType.Variant:
-      return object.locales;
-    case ObjectType.Keyboard:
+    case EntityType.Territory:
+      return [...(ent.containsTerritories ?? []), ...(ent.dependentTerritories ?? [])];
+    case EntityType.WritingSystem:
+      return ent.childWritingSystems ?? [];
+    case EntityType.Variant:
+      return ent.locales;
+    case EntityType.Keyboard:
       return [];
-    case ObjectType.Org:
-      return object.children ?? [];
+    case EntityType.Org:
+      return ent.children ?? [];
   }
 }
 
-export function getObjectFullDescendants(object: ObjectData): ObjectData[] {
-  return getObjectChildren(object).reduce<ObjectData[]>(
+export function getObjectFullDescendants(ent: EntityData): EntityData[] {
+  return getObjectChildren(ent).reduce<EntityData[]>(
     (all, child) => (child ? all.concat([child], getObjectFullDescendants(child)) : all),
     [],
   );
 }
 
-export function getDescendantsName(object: ObjectData, count: number): string {
-  switch (object.type) {
-    case ObjectType.Census:
+export function getDescendantsName(ent: EntityData, count: number): string {
+  switch (ent.type) {
+    case EntityType.Census:
       return 'other census' + (count > 1 ? 'es' : '') + ' in the territory';
-    case ObjectType.Language:
-      switch (object.scope) {
+    case EntityType.Language:
+      switch (ent.scope) {
         case LanguageScope.Family:
           return count > 1 ? 'languages or subfamilies' : 'language or subfamily';
         case LanguageScope.Macrolanguage:
@@ -79,10 +79,10 @@ export function getDescendantsName(object: ObjectData, count: number): string {
           return 'dialect' + (count > 1 ? 's' : '');
       }
       return 'dialect' + (count > 1 ? 's' : '');
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return 'related locale' + (count > 1 ? 's' : '');
-    case ObjectType.Territory:
-      switch (object.scope) {
+    case EntityType.Territory:
+      switch (ent.scope) {
         case TerritoryScope.World:
           return 'continent' + (count > 1 ? 's' : '');
         case TerritoryScope.Continent:
@@ -95,13 +95,13 @@ export function getDescendantsName(object: ObjectData, count: number): string {
         default:
           return 'territor' + (count > 1 ? 'ies' : 'y');
       }
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return 'child writing system' + (count > 1 ? 's' : '');
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return 'locale' + (count > 1 ? 's' : '');
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return 'keyboard' + (count > 1 ? 's' : '');
-    case ObjectType.Org:
+    case EntityType.Org:
       return 'organization' + (count > 1 ? 's' : '');
   }
 }

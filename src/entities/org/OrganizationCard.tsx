@@ -17,14 +17,14 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={org} />
+        <ObjectTitle ent={org} />
       </div>
       <CardField
         title="Headquartered In"
         field={Field.Territory}
         description="The territory where this organization is headquartered."
       >
-        <HoverableObjectName object={org.headquarters} />
+        <HoverableObjectName ent={org.headquarters} />
       </CardField>
 
       <CardField
@@ -35,7 +35,7 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
         {org.censuses && org.censuses.length > 0 ? (
           <HoverableEnumeration
             items={org.censuses.map((doc) => (
-              <HoverableObjectName key={doc.ID} object={doc} />
+              <HoverableObjectName key={doc.ID} ent={doc} />
             ))}
           />
         ) : (

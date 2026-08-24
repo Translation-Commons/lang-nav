@@ -112,7 +112,7 @@ describe('useAmplitudeParamEvents', () => {
 
   it('emits explore_entity_switched with entity and previous_entity (defaulting from Language)', () => {
     render(<Harness initialURL="/data" />);
-    go('/data?objectType=Locale');
+    go('/data?entityType=Locale');
     expect(trackers.entity).toHaveBeenCalledTimes(1);
     expect(trackers.entity.mock.calls[0][0]).toMatchObject({
       entity: 'Locale',
@@ -127,27 +127,27 @@ describe('useAmplitudeParamEvents', () => {
     expect(trackers.sort.mock.calls[0][0].sort).toEqual(['name_desc']);
   });
 
-  it('emits explore_detail_viewed when objectID goes from undefined to defined', () => {
+  it('emits explore_detail_viewed when entID goes from undefined to defined', () => {
     render(<Harness initialURL="/data" />);
-    go('/data?objectID=zho');
+    go('/data?entID=zho');
     expect(trackers.detailViewed).toHaveBeenCalledTimes(1);
     expect(trackers.detailViewed.mock.calls[0][0]).toMatchObject({ object_id: 'zho' });
     expect(trackers.detailSwitched).not.toHaveBeenCalled();
   });
 
-  it('emits explore_detail_switched with object and previous_object when objectID changes', () => {
-    render(<Harness initialURL="/data?objectID=zho" />);
-    go('/data?objectID=spa');
+  it('emits explore_detail_switched with object and previous_object when entID changes', () => {
+    render(<Harness initialURL="/data?entID=zho" />);
+    go('/data?entID=spa');
     expect(trackers.detailSwitched).toHaveBeenCalledTimes(1);
     expect(trackers.detailSwitched.mock.calls[0][0]).toMatchObject({
-      object: 'spa',
-      previous_object: 'zho',
+      ent: 'spa',
+      previous_ent: 'zho',
     });
     expect(trackers.detailViewed).not.toHaveBeenCalled();
   });
 
-  it('does not emit any detail event when objectID is cleared', () => {
-    render(<Harness initialURL="/data?objectID=zho" />);
+  it('does not emit any detail event when entID is cleared', () => {
+    render(<Harness initialURL="/data?entID=zho" />);
     go('/data');
     expect(trackers.detailViewed).not.toHaveBeenCalled();
     expect(trackers.detailSwitched).not.toHaveBeenCalled();
@@ -155,7 +155,7 @@ describe('useAmplitudeParamEvents', () => {
 
   it('emits multiple events when several concepts change in one navigation', () => {
     render(<Harness initialURL="/data" />);
-    go('/data?view=Map&objectID=zho&territoryFilter=ES');
+    go('/data?view=Map&entID=zho&territoryFilter=ES');
     expect(trackers.view).toHaveBeenCalledTimes(1);
     expect(trackers.filter).toHaveBeenCalledTimes(1);
     expect(trackers.detailViewed).toHaveBeenCalledTimes(1);

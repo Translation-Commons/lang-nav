@@ -12,15 +12,15 @@ import {
   getWritingSystemsRelevantToObject,
 } from '../filterByConnections';
 
-const mockedObjects = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedObjects();
 
 describe('getWritingSystemsRelevantToObject', () => {
-  it('returns the writing systems for objects', () => {
+  it('returns the writing systems for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getWritingSystemsRelevantToObject(obj)
-          .map((obj) => obj.nameDisplay)
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getWritingSystemsRelevantToObject(ent)
+          .map((ent) => ent.nameDisplay)
           .join(', '),
       ]),
     );
@@ -51,12 +51,12 @@ describe('getWritingSystemsRelevantToObject', () => {
 });
 
 describe('getLanguagesRelevantToObject', () => {
-  it('returns the languages for objects', () => {
+  it('returns the languages for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [
-        obj.ID,
-        getLanguagesRelevantToObject(obj)
-          .map((obj) => obj.nameDisplay)
+      Object.values(mockedEnts).map((ent) => [
+        ent.ID,
+        getLanguagesRelevantToObject(ent)
+          .map((ent) => ent.nameDisplay)
           .join(', '),
       ]),
     );

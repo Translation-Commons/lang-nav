@@ -5,22 +5,22 @@ import usePageParams from '@features/params/usePageParams';
 import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
 
 import { getEntitySubtitle } from '@entities/lib/getEntityName';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 type Props = {
-  object: ObjectData;
+  ent: EntityData;
   highlightSearchMatches?: boolean;
   style?: React.CSSProperties;
 };
 
-const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = true, style }) => {
+const ObjectSubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true, style }) => {
   const { searchBy, searchString } = usePageParams();
-  const objectSubtitle = getEntitySubtitle(object);
+  const entSubtitle = getEntitySubtitle(ent);
 
   if (!highlightSearchMatches) {
-    return <SubtitleContainer style={style}>{objectSubtitle}</SubtitleContainer>;
+    return <SubtitleContainer style={style}>{entSubtitle}</SubtitleContainer>;
   }
 
   // Add to the subtitle are if we are searching by all names and we have to find the value by searching a new name
@@ -28,17 +28,17 @@ const ObjectSubtitle: React.FC<Props> = ({ object, highlightSearchMatches = true
   if (searchBy === SearchableField.NameAny) {
     const lowercaseSearchString = searchString.toLowerCase();
     if (
-      !object.nameDisplay.toLowerCase().includes(lowercaseSearchString) &&
-      !object.nameEndonym?.toLowerCase().includes(lowercaseSearchString)
+      !ent.nameDisplay.toLowerCase().includes(lowercaseSearchString) &&
+      !ent.nameEndonym?.toLowerCase().includes(lowercaseSearchString)
     ) {
       searchNamesSubtitle = (
         <>
-          aka <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameAny} />
+          aka <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameAny} />
         </>
       );
     }
   }
-  const subtitles = [objectSubtitle, searchNamesSubtitle].filter(Boolean);
+  const subtitles = [entSubtitle, searchNamesSubtitle].filter(Boolean);
 
   return (
     <SubtitleContainer style={style}>

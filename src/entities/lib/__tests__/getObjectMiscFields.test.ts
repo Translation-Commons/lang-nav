@@ -17,12 +17,12 @@ import {
   getObjectMostImportantLanguageName,
 } from '@entities/lib/getObjectMiscFields';
 
-const mockedObjects = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedObjects();
 
 describe('getObjectLiteracy', () => {
-  it('returns literacy for objects', () => {
+  it('returns literacy for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getObjectLiteracy(obj)?.toFixed(1)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectLiteracy(ent)?.toFixed(1)]),
     );
     expect(results).toEqual({
       '001': '96.2', // averaged from Aman & Middle Earth by computeContainedTerritoryStats
@@ -51,9 +51,9 @@ describe('getObjectLiteracy', () => {
 });
 
 describe('getObjectMostImportantLanguageName', () => {
-  it('returns most important language name for objects', () => {
+  it('returns most important language name for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getObjectMostImportantLanguageName(obj)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectMostImportantLanguageName(ent)]),
     );
     expect(results).toEqual({
       '001': 'Sindarin',
@@ -82,9 +82,9 @@ describe('getObjectMostImportantLanguageName', () => {
 });
 
 describe('getObjectDate', () => {
-  it('returns date for objects', () => {
+  it('returns date for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getObjectDate(obj)?.toISOString()]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectDate(ent)?.toISOString()]),
     );
     expect(results).toEqual({
       '001': undefined,
@@ -113,9 +113,9 @@ describe('getObjectDate', () => {
 });
 
 describe('getCountOfLanguages', () => {
-  it('returns count of languages for objects', () => {
+  it('returns count of languages for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getCountOfLanguages(obj)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getCountOfLanguages(ent)]),
     );
     expect(results).toEqual({
       '001': 2, // sjn, dori0123
@@ -144,9 +144,9 @@ describe('getCountOfLanguages', () => {
 });
 
 describe('getCountOfWritingSystems', () => {
-  it('returns count of writing systems for objects', () => {
+  it('returns count of writing systems for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getCountOfWritingSystems(obj)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getCountOfWritingSystems(ent)]),
     );
     expect(results).toEqual({
       '001': 1, // Teng is used by sjn_Teng_001
@@ -175,9 +175,9 @@ describe('getCountOfWritingSystems', () => {
 });
 
 describe('getCountOfCensuses', () => {
-  it('returns count of censuses for objects', () => {
+  it('returns count of censuses for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getCountOfCensuses(obj)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getCountOfCensuses(ent)]),
     );
     expect(results).toEqual({
       '001': 0, // no censuses for this territory
@@ -206,9 +206,9 @@ describe('getCountOfCensuses', () => {
 });
 
 describe('getDepth', () => {
-  it('returns depth for objects', () => {
+  it('returns depth for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedObjects).map((obj) => [obj.ID, getDepth(obj)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getDepth(ent)]),
     );
     expect(results).toEqual({
       '001': 0, // top-level territory

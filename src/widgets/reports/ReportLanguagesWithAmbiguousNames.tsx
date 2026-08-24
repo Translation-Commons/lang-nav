@@ -92,7 +92,7 @@ const ReportLanguagesWithAmbiguousNames: React.FC = () => {
                   (name) => name !== lang.nameDisplay && name !== lang.nameEndonym,
                 );
                 return (
-                  <CardInCardList key={lang.ID} object={lang}>
+                  <CardInCardList key={lang.ID} ent={lang}>
                     <div>
                       <label>ID(s):</label>{' '}
                       {unique(

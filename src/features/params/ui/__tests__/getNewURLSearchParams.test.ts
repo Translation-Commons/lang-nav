@@ -1,17 +1,17 @@
 import { describe, expect, it } from 'vitest';
 
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 
 describe('getNewURLSearchParams', () => {
   it('migrates searchString to languageFilter when switching from Language', () => {
     const prev = new URLSearchParams({
-      objectType: ObjectType.Language,
+      entityType: EntityType.Language,
       searchString: 'chinese',
     });
 
-    const result = getNewURLSearchParams({ objectType: ObjectType.Territory }, prev);
+    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
 
     expect(result.get('searchString')).toBeNull();
     expect(result.get('languageFilter')).toBe('chinese');
@@ -19,32 +19,32 @@ describe('getNewURLSearchParams', () => {
 
   it('keep searchString to territoryFilter when switching from Territory', () => {
     const prev = new URLSearchParams({
-      objectType: ObjectType.Territory,
+      entityType: EntityType.Territory,
       searchString: 'China',
     });
-    const result = getNewURLSearchParams({ objectType: ObjectType.Language }, prev);
+    const result = getNewURLSearchParams({ entityType: EntityType.Language }, prev);
     expect(result.get('searchString')).toBeNull();
     expect(result.get('territoryFilter')).toBe('China');
   });
 
   it('keep searchString to writingSystemFilter when switching from WritingSystem', () => {
     const prev = new URLSearchParams({
-      objectType: ObjectType.WritingSystem,
+      entityType: EntityType.WritingSystem,
       searchString: 'Latin',
     });
-    const result = getNewURLSearchParams({ objectType: ObjectType.Territory }, prev);
+    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
     expect(result.get('searchString')).toBeNull();
     expect(result.get('writingSystemFilter')).toBe('Latin');
   });
 
-  it('keeps objectID when switching objectType', () => {
+  it('keeps entID when switching entityType', () => {
     const prev = new URLSearchParams({
-      objectType: ObjectType.Language,
+      entityType: EntityType.Language,
       searchString: 'chinese',
-      objectID: '123',
+      entID: '123',
     });
-    const result = getNewURLSearchParams({ objectType: ObjectType.Territory }, prev);
-    expect(result.get('objectID')).toBe('123');
+    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
+    expect(result.get('entID')).toBe('123');
   });
 
   it('clears page when view changes', () => {
@@ -58,13 +58,13 @@ describe('getNewURLSearchParams', () => {
     expect(result.get('page')).toBeNull();
   });
 
-  it('does not migrate searchString when objectType does not change', () => {
+  it('does not migrate searchString when entityType does not change', () => {
     const prev = new URLSearchParams({
-      objectType: ObjectType.Language,
+      entityType: EntityType.Language,
       searchString: 'English',
     });
 
-    const result = getNewURLSearchParams({ objectType: ObjectType.Language }, prev);
+    const result = getNewURLSearchParams({ entityType: EntityType.Language }, prev);
 
     expect(result.get('searchString')).toBe('English');
     expect(result.get('languageFilter')).toBeNull();
@@ -72,10 +72,10 @@ describe('getNewURLSearchParams', () => {
 
   it('does not create a filter when searchString is missing', () => {
     const prev = new URLSearchParams({
-      objectType: ObjectType.Language,
+      entityType: EntityType.Language,
     });
 
-    const result = getNewURLSearchParams({ objectType: ObjectType.Territory }, prev);
+    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
 
     expect(result.get('searchString')).toBeNull();
     expect(result.get('languageFilter')).toBeNull();

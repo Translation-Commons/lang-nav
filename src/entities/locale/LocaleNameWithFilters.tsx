@@ -18,7 +18,7 @@ const LocaleNameWithFilters: React.FC<{ locale: LocaleData }> = ({ locale }) => 
   const searchPattern = searchBy !== SearchableField.Code ? searchString : '';
 
   return (
-    <HoverableObject object={locale}>
+    <HoverableObject ent={locale}>
       <Highlightable text={name} searchPattern={searchPattern} />
     </HoverableObject>
   );

@@ -130,7 +130,7 @@ export function trackDetailViewed(props: ExploreBaseProps & { object_id: string 
 }
 
 export function trackDetailSwitched(
-  props: ExploreBaseProps & { object: string; previous_object: string },
+  props: ExploreBaseProps & { ent: string; previous_ent: string },
 ) {
   trackEvent('explore_detail_switched', props);
 }

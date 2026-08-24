@@ -1,10 +1,10 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { WikipediaData } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectBase } from '@entities/types/DataTypes';
+import { EntityBase } from '@entities/types/DataTypes';
 import { VariantData, VariantIANATag } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -76,8 +76,8 @@ export type LocalePopulationData = {
   source?: PopulationSourceCategory;
 };
 
-export interface LocaleData extends ObjectBase {
-  type: ObjectType.Locale;
+export interface LocaleData extends EntityBase {
+  type: EntityType.Locale;
 
   ID: StandardLocaleCode;
   codeDisplay: StandardLocaleCode; // Changes based on the language schema
@@ -96,7 +96,7 @@ export interface LocaleData extends ObjectBase {
   ecrmlProtection?: ECRMLProtectionLevel; // Level of protection under the European Charter for Regional or Minority Languages
   wikipedias?: WikipediaData[];
 
-  // References to other objects, filled in after loading the TSV
+  // References to other entities, filled in after loading the TSV
   language?: LanguageData;
   territory?: TerritoryData;
   writingSystem?: WritingSystemData;

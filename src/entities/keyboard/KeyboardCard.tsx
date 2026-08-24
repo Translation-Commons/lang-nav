@@ -45,7 +45,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         >
           <CommaSeparated>
             {languages.map((lang) => (
-              <HoverableObjectName key={lang.ID} object={lang} />
+              <HoverableObjectName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         </CardField>
@@ -62,12 +62,12 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
           }
         >
           {sameScript ? (
-            <HoverableObjectName object={inputWritingSystem} />
+            <HoverableObjectName ent={inputWritingSystem} />
           ) : (
             <>
-              <HoverableObjectName object={inputWritingSystem} />
+              <HoverableObjectName ent={inputWritingSystem} />
               {' → '}
-              {outputWritingSystem != null && <HoverableObjectName object={outputWritingSystem} />}
+              {outputWritingSystem != null && <HoverableObjectName ent={outputWritingSystem} />}
             </>
           )}
         </CardField>
@@ -80,8 +80,8 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
           description="Territory or variant that further specifies this keyboard layout."
         >
           <CommaSeparated>
-            {territory != null && <HoverableObjectName object={territory} />}
-            {variant != null && <HoverableObjectName object={variant} />}
+            {territory != null && <HoverableObjectName ent={territory} />}
+            {variant != null && <HoverableObjectName ent={variant} />}
           </CommaSeparated>
         </CardField>
       )}

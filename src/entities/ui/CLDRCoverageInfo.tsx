@@ -1,22 +1,22 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { toTitleCase } from '@shared/lib/stringUtils';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getCLDRCoverageColor } from './CLDRCoverageLevels';
 
-export const ObjectCLDRCoverageLevel: React.FC<{ object: ObjectData }> = ({ object }) => {
-  if (object.type !== ObjectType.Language) return null;
+export const ObjectCLDRCoverageLevel: React.FC<{ ent: EntityData }> = ({ ent }) => {
+  if (ent.type !== EntityType.Language) return null;
 
-  const { coverage, dataProvider } = object.CLDR;
+  const { coverage, dataProvider } = ent.CLDR;
 
   if (!coverage) {
     if (dataProvider != null) {
-      return <ObjectCLDRCoverageLevel object={dataProvider} />;
+      return <ObjectCLDRCoverageLevel ent={dataProvider} />;
     } else {
       return <Deemphasized>not in CLDR</Deemphasized>;
     }
@@ -28,17 +28,17 @@ export const ObjectCLDRCoverageLevel: React.FC<{ object: ObjectData }> = ({ obje
   );
 };
 
-export const ObjectCLDRLocaleCount: React.FC<{ object: ObjectData; verbose?: boolean }> = ({
-  object,
+export const ObjectCLDRLocaleCount: React.FC<{ ent: EntityData; verbose?: boolean }> = ({
+  ent,
   verbose = false,
 }) => {
-  if (object.type !== ObjectType.Language) return null;
+  if (ent.type !== EntityType.Language) return null;
 
-  const { coverage, dataProvider } = object.CLDR;
+  const { coverage, dataProvider } = ent.CLDR;
 
   if (!coverage) {
     if (dataProvider != null) {
-      return <ObjectCLDRLocaleCount object={dataProvider} verbose={verbose} />;
+      return <ObjectCLDRLocaleCount ent={dataProvider} verbose={verbose} />;
     } else {
       return <Deemphasized>—</Deemphasized>;
     }

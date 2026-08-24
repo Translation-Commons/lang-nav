@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -19,7 +19,7 @@ const CensusCountForTerritory: React.FC<{ territory: TerritoryData }> = ({ terri
       onClick={() =>
         updatePageParams({
           view: View.Table,
-          objectType: ObjectType.Census,
+          entityType: EntityType.Census,
           territoryFilter: territory.ID,
         })
       }

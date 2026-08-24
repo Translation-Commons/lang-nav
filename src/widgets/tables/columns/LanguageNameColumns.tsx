@@ -17,7 +17,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in ISO',
     render: (lang) =>
       lang.nameDisplay !== lang.ISO.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
+        <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameISO} />
       ) : (
         <Deemphasized>{lang.ISO.name}</Deemphasized>
       ),
@@ -34,7 +34,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in CLDR',
     render: (lang) =>
       lang.nameDisplay !== lang.CLDR.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
+        <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameCLDR} />
       ) : (
         <Deemphasized>{lang.CLDR.name}</Deemphasized>
       ),
@@ -44,7 +44,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in Glottolog',
     render: (lang) =>
       lang.nameDisplay !== lang.Glottolog.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
+        <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameGlottolog} />
       ) : (
         <Deemphasized>{lang.Glottolog.name}</Deemphasized>
       ),
@@ -54,7 +54,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in Ethnologue',
     render: (lang) =>
       lang.nameDisplay !== lang.Ethnologue.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEthnologue} />
+        <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameEthnologue} />
       ) : (
         <Deemphasized>{lang.Ethnologue.name}</Deemphasized>
       ),

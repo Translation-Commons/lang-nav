@@ -1,19 +1,19 @@
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectType }) => {
-  switch (objectType) {
-    case ObjectType.Census:
+const EntityTypeDescription: React.FC<{ entityType: EntityType }> = ({ entityType }) => {
+  switch (entityType) {
+    case EntityType.Census:
       return (
         <>
           <label>Census:</label> A count of people in a given area -- for this site this is
           typically the count of people that speak or understand a language.
         </>
       );
-    case ObjectType.Language:
+    case EntityType.Language:
       return (
         <>
           <label>Language (Languoid):</label>A verbal communication system used by multiple people.
@@ -23,7 +23,7 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           &quot;Languoids&quot;.
         </>
       );
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return (
         <>
           <label>Locale:</label>The combination of a language and territory -- used to express how
@@ -32,7 +32,7 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           orthography...).
         </>
       );
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return (
         <>
           <label>Territory:</label>A geographical unit. Some may not have universal recognition.
@@ -40,7 +40,7 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           separate ISO codes.
         </>
       );
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return (
         <>
           <label>Writing System:</label>A system for writing a language to a persistent visual
@@ -48,7 +48,7 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           may contain other systems.
         </>
       );
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return (
         <>
           <label>Variant:</label>The Internet Assigned Numbers Authority (IANA) maintains an
@@ -57,14 +57,14 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
           These are typically used to specify a particular orthography or dialect.
         </>
       );
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return (
         <>
           <label>Keyboard:</label>A keyboard layout for inputting text in a given language.
           Currently showing GBoard layouts, which may support transliteration between scripts.
         </>
       );
-    case ObjectType.Org:
+    case EntityType.Org:
       return (
         <>
           <label>Organization:</label>An incorporated entity that provides some service related to
@@ -73,8 +73,8 @@ const ObjectTypeDescription: React.FC<{ objectType: ObjectType }> = ({ objectTyp
         </>
       );
     default:
-      enforceExhaustiveSwitch(objectType);
+      enforceExhaustiveSwitch(entityType);
   }
 };
 
-export default ObjectTypeDescription;
+export default EntityTypeDescription;

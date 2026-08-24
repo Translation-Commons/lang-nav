@@ -16,7 +16,7 @@ import useSearchSuggestions from './useSearchSuggestions';
 import useTrackSearch from './useTrackSearch';
 
 const SearchBar: React.FC = () => {
-  const { objectType, searchString, updatePageParams } = usePageParams();
+  const { entityType, searchString, updatePageParams } = usePageParams();
   const location = useLocation();
   const getSearchSuggestions = useSearchSuggestions();
   const trackSearch = useTrackSearch();
@@ -63,7 +63,7 @@ const SearchBar: React.FC = () => {
           }}
           getSuggestions={getSearchSuggestions}
           onSubmit={setSearchString}
-          placeholder={'search ' + getEntityTypeLabelPlural(objectType)}
+          placeholder={'search ' + getEntityTypeLabelPlural(entityType)}
           pageParameter={PageParamKey.searchString}
           value={searchString}
         />
