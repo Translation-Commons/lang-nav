@@ -16,7 +16,7 @@ import LinkButton from '@shared/ui/LinkButton';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 
-import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
+import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
 import EntityWikipediaInfo from '../../ui/EntityWikipediaInfo';
 import { LanguageData } from '../LanguageTypes';
 
@@ -91,8 +91,8 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
           <DetailsField title="CLDR Coverage">
             <div style={{ display: 'inline-flex', flexDirection: 'row', gap: '0.5em' }}>
               <CLDRWarningNotes ent={lang} />
-              <ObjectCLDRCoverageLevel ent={lang} />
-              <ObjectCLDRLocaleCount ent={lang} verbose={true} />
+              <EntityCLDRCoverageLevel ent={lang} />
+              <EntityCLDRLocaleCount ent={lang} verbose={true} />
             </div>
           </DetailsField>
           <DetailsField title="ICU Support">

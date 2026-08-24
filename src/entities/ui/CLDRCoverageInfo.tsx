@@ -9,14 +9,14 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getCLDRCoverageColor } from './CLDRCoverageLevels';
 
-export const ObjectCLDRCoverageLevel: React.FC<{ ent: EntityData }> = ({ ent }) => {
+export const EntityCLDRCoverageLevel: React.FC<{ ent: EntityData }> = ({ ent }) => {
   if (ent.type !== EntityType.Language) return null;
 
   const { coverage, dataProvider } = ent.CLDR;
 
   if (!coverage) {
     if (dataProvider != null) {
-      return <ObjectCLDRCoverageLevel ent={dataProvider} />;
+      return <EntityCLDRCoverageLevel ent={dataProvider} />;
     } else {
       return <Deemphasized>not in CLDR</Deemphasized>;
     }
@@ -28,7 +28,7 @@ export const ObjectCLDRCoverageLevel: React.FC<{ ent: EntityData }> = ({ ent }) 
   );
 };
 
-export const ObjectCLDRLocaleCount: React.FC<{ ent: EntityData; verbose?: boolean }> = ({
+export const EntityCLDRLocaleCount: React.FC<{ ent: EntityData; verbose?: boolean }> = ({
   ent,
   verbose = false,
 }) => {
@@ -38,7 +38,7 @@ export const ObjectCLDRLocaleCount: React.FC<{ ent: EntityData; verbose?: boolea
 
   if (!coverage) {
     if (dataProvider != null) {
-      return <ObjectCLDRLocaleCount ent={dataProvider} verbose={verbose} />;
+      return <EntityCLDRLocaleCount ent={dataProvider} verbose={verbose} />;
     } else {
       return <Deemphasized>—</Deemphasized>;
     }

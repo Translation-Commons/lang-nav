@@ -8,17 +8,17 @@ import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/Digit
 import { DigitalSupportDimension } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import LanguageDigitalSupportMetascore from '@entities/language/digitalsupport/LanguageDigitalSupportMetascore';
 import LanguageUDHRInfo, {
-  LanguageUDHRDescription,
+    LanguageUDHRDescription,
 } from '@entities/language/digitalsupport/LanguageUDHRInfo';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
-import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
+import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import {
-  WikipediaActiveUsers,
-  WikipediaArticles,
-  WikipediaLink,
-  WikipediaStatusDisplay,
+    WikipediaActiveUsers,
+    WikipediaArticles,
+    WikipediaLink,
+    WikipediaStatusDisplay,
 } from '@entities/ui/EntityWikipediaInfo';
 import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
@@ -53,7 +53,7 @@ const columns: TableColumn<LanguageData>[] = [
     ),
     render: (lang) => (
       <>
-        <ObjectCLDRCoverageLevel ent={lang} />
+        <EntityCLDRCoverageLevel ent={lang} />
         <CLDRWarningNotes ent={lang} />
       </>
     ),
@@ -69,7 +69,7 @@ const columns: TableColumn<LanguageData>[] = [
         <code>it_SM</code>, and <code>it_VA</code>.
       </>
     ),
-    render: (lang) => <ObjectCLDRLocaleCount ent={lang} />,
+    render: (lang) => <EntityCLDRLocaleCount ent={lang} />,
     valueType: TableValueType.Count,
     exportValue: (lang) => lang.CLDR.coverage?.countOfCLDRLocales,
   },

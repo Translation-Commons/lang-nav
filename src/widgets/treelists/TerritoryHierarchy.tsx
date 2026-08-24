@@ -52,7 +52,7 @@ function getTerritoryTreeNode(
   filterByScope: (a: EntityData) => boolean,
 ): TreeNodeData {
   return {
-    type: EntityType.Language,
+    type: EntityType.Territory,
     ent: territory,
     children: territory.containsTerritories
       ? getTerritoryTreeNodes(territory.containsTerritories, sortFunction, filterByScope)

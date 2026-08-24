@@ -89,7 +89,7 @@ export function TreeListOptionsSelectors() {
             checked={showEntIDs}
             onChange={(e) => setShowEntIDs(e.target.checked)}
           />
-          Show Object IDs
+          Show Entity IDs
         </label>
 
         <FieldFocusSelector />
