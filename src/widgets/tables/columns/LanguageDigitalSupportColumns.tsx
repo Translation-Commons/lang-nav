@@ -8,17 +8,17 @@ import LanguageDigitalSupportMeter from '@entities/language/digitalsupport/Digit
 import { DigitalSupportDimension } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import LanguageDigitalSupportMetascore from '@entities/language/digitalsupport/LanguageDigitalSupportMetascore';
 import LanguageUDHRInfo, {
-    LanguageUDHRDescription,
+  LanguageUDHRDescription,
 } from '@entities/language/digitalsupport/LanguageUDHRInfo';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { EntityCLDRCoverageLevel, EntityCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import {
-    WikipediaActiveUsers,
-    WikipediaArticles,
-    WikipediaLink,
-    WikipediaStatusDisplay,
+  WikipediaActiveUsers,
+  WikipediaArticles,
+  WikipediaLink,
+  WikipediaStatusDisplay,
 } from '@entities/ui/EntityWikipediaInfo';
 import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
