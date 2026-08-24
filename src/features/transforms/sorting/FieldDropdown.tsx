@@ -7,15 +7,15 @@ import { getApplicableFields } from '@features/transforms/fields/FieldApplicabil
 import { groupByArray } from '@shared/lib/setUtils';
 import { Button } from '@shared/ui/button';
 import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuPortal,
-    DropdownMenuRadioGroup,
-    DropdownMenuRadioItem,
-    DropdownMenuSub,
-    DropdownMenuSubContent,
-    DropdownMenuSubTrigger,
-    DropdownMenuTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuPortal,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
 
 import Field from '../fields/Field';

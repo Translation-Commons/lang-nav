@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {
-    SelectorDisplay,
-    SelectorDisplayProvider,
+  SelectorDisplay,
+  SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';

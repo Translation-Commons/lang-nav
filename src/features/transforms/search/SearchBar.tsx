@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
 import {
-    SelectorDisplay,
-    SelectorDisplayProvider,
+  SelectorDisplay,
+  SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import TextInput, { TextInputSubmitSource } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';

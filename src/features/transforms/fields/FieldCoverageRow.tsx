@@ -12,9 +12,9 @@ import TransformEnum from '../TransformEnum';
 
 import Field from './Field';
 import {
-    FIELDS_IN_DEVELOPMENT,
-    isFieldApplicable,
-    UNINTERESTING_FIELD_COMBINATIONS,
+  FIELDS_IN_DEVELOPMENT,
+  isFieldApplicable,
+  UNINTERESTING_FIELD_COMBINATIONS,
 } from './FieldApplicability';
 import FieldIcon from './FieldIcon';
 

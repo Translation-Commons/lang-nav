@@ -1,10 +1,10 @@
 import {
-    Building2Icon,
-    ExpandIcon,
-    LandmarkIcon,
-    LaughIcon,
-    PersonStandingIcon,
-    SchoolIcon,
+  Building2Icon,
+  ExpandIcon,
+  LandmarkIcon,
+  LaughIcon,
+  PersonStandingIcon,
+  SchoolIcon,
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -126,8 +126,7 @@ export function getDefaultParams(
   switch (params.view) {
     case View.Hierarchy:
       // Show parents in the hierarchy that we usually do not show
-      if (params.entType === EntityType.Language)
-        params.languageScopes.push(LanguageScope.Family);
+      if (params.entType === EntityType.Language) params.languageScopes.push(LanguageScope.Family);
       if (params.entType === EntityType.Territory)
         params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
       break;

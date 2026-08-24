@@ -9,8 +9,8 @@ import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
 import {
-    SelectorDisplay,
-    SelectorDisplayProvider,
+  SelectorDisplay,
+  SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';

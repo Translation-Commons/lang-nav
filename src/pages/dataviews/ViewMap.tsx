@@ -7,8 +7,8 @@ import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import { EntityType } from '@features/params/PageParamTypes';
 import {
-    SelectorDisplay,
-    SelectorDisplayProvider,
+  SelectorDisplay,
+  SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
