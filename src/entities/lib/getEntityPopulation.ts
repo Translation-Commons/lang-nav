@@ -5,11 +5,11 @@ import { VariantType } from '@entities/variant/VariantTypes';
 
 import { sumBy } from '@shared/lib/setUtils';
 
-import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
+import { getTerritoryBiggestLocale } from './getEntityRelatedTerritories';
 
 // TODO make better upperbound/lowerbound population estimates when we don't have exact numbers
 // Field.Population
-export function getObjectPopulation(ent: EntityData): number | undefined {
+export function getEntityPopulation(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Language:
       return ent.pop.overall;
@@ -31,7 +31,7 @@ export function getObjectPopulation(ent: EntityData): number | undefined {
 }
 
 // Field.PopulationDirectlySourced
-export function getObjectPopulationDirectlySourced(ent: EntityData): number | undefined {
+export function getEntityPopulationDirectlySourced(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Language:
       return ent.pop.rough;
@@ -52,7 +52,7 @@ export function getObjectPopulationDirectlySourced(ent: EntityData): number | un
 }
 
 // Field.PopulationOfDescendants
-export function getObjectPopulationOfDescendants(ent: EntityData): number | undefined {
+export function getEntityPopulationOfDescendants(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Language:
       return (
@@ -72,7 +72,7 @@ export function getObjectPopulationOfDescendants(ent: EntityData): number | unde
 }
 
 // Field.PopulationPercentInBiggestDescendantLanguage
-export function getObjectPopulationPercentInBiggestDescendantLanguage(
+export function getEntityPopulationPercentInBiggestDescendantLanguage(
   ent: EntityData,
 ): number | undefined {
   switch (ent.type) {
@@ -91,7 +91,7 @@ export function getObjectPopulationPercentInBiggestDescendantLanguage(
 }
 
 // Field.PercentOfOverallLanguageSpeakers
-export function getObjectPopulationRelativeToOverallLanguageSpeakers(
+export function getEntityPopulationRelativeToOverallLanguageSpeakers(
   ent: EntityData,
 ): number | undefined {
   switch (ent.type) {
@@ -112,7 +112,7 @@ export function getObjectPopulationRelativeToOverallLanguageSpeakers(
 }
 
 // Field.PercentOfTerritoryPopulation
-export function getObjectPercentOfTerritoryPopulation(ent: EntityData): number | undefined {
+export function getEntityPercentOfTerritoryPopulation(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Census:
       return ent.territory && ent.population
@@ -133,7 +133,7 @@ export function getObjectPercentOfTerritoryPopulation(ent: EntityData): number |
 }
 
 // Field.PopulationSpeaking
-export function getObjectPopulationSpeaking(ent: EntityData): number | undefined {
+export function getEntityPopulationSpeaking(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Locale:
       return ent.pop.speaking.adjusted;
@@ -155,7 +155,7 @@ export function getObjectPopulationSpeaking(ent: EntityData): number | undefined
 }
 
 // Field.PopulationWriting
-export function getObjectPopulationWriting(ent: EntityData): number | undefined {
+export function getEntityPopulationWriting(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Locale:
       return ent.pop.writing.adjusted;

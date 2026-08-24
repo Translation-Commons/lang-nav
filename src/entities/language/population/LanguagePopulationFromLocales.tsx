@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -69,7 +69,7 @@ export const LanguagePopulationBreakdownFromLocales: React.FC<Props> = ({
             .map((locale) => (
               <tr key={locale.ID}>
                 <td>
-                  <HoverableObjectName ent={locale} labelSource="territory" />
+                  <HoverableEntityName ent={locale} labelSource="territory" />
                 </td>
                 <CellPopulation population={locale.pop[speakingOrWriting].adjusted} />
               </tr>

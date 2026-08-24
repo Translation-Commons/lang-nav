@@ -10,7 +10,7 @@ import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHe
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
 import { EntityData } from '@entities/types/DataTypes';
-import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
+import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 import { VariantType } from '@entities/variant/VariantTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -29,7 +29,7 @@ type Props = {
   field: Field;
 };
 
-const ObjectFieldDisplay: React.FC<Props> = ({ ent, field }) => {
+const EntityFieldDisplay: React.FC<Props> = ({ ent, field }) => {
   const fieldValue = getField(ent, field);
   switch (field) {
     case Field.Population:
@@ -102,7 +102,7 @@ const ObjectFieldDisplay: React.FC<Props> = ({ ent, field }) => {
       return fieldValue ? new Date(fieldValue).toLocaleDateString() : '';
 
     case Field.Depth:
-      return <ObjectDepthDisplay ent={ent} />;
+      return <EntityDepthDisplay ent={ent} />;
 
     case Field.LanguageScope:
       return typeof fieldValue === 'number' && getLanguageScopeLabel(fieldValue);
@@ -155,4 +155,4 @@ function VitalityField({ ent, field }: VitalityFieldProps) {
   return <LanguageVitalityMeter lang={ent} src={src} />;
 }
 
-export default ObjectFieldDisplay;
+export default EntityFieldDisplay;

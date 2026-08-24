@@ -3,7 +3,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
@@ -84,7 +84,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({
             .map((descendant) => (
               <tr key={descendant.ID}>
                 <td>
-                  <HoverableObjectName ent={descendant} />
+                  <HoverableEntityName ent={descendant} />
                 </td>
                 <CellPopulation population={descendant.pop[speakingOrWriting].estimate} />
               </tr>

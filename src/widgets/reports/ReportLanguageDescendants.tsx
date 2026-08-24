@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Selector from '@features/params/ui/Selector';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
@@ -10,7 +10,7 @@ import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { getObjectPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getObjectPopulation';
+import { getEntityPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getEntityPopulation';
 
 const ReportLanguageDescendants: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
@@ -76,7 +76,7 @@ const ReportLanguageDescendants: React.FC = () => {
             render: (lang: LanguageData) =>
               lang.largestDescendant && (
                 <>
-                  <HoverableObjectName ent={lang.largestDescendant} /> [
+                  <HoverableEntityName ent={lang.largestDescendant} /> [
                   {lang.largestDescendant.codeDisplay}]
                 </>
               ),
@@ -90,7 +90,7 @@ const ReportLanguageDescendants: React.FC = () => {
           {
             key: '% Descendant',
             render: (lang: LanguageData) =>
-              getObjectPopulationPercentInBiggestDescendantLanguage(lang),
+              getEntityPopulationPercentInBiggestDescendantLanguage(lang),
             field: Field.PopulationPercentInBiggestDescendantLanguage,
           },
         ]}

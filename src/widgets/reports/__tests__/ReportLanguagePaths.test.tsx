@@ -1,11 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  getDisconnectedMockedObjects,
-  getFullyInstantiatedMockedObjects,
+  getDisconnectedMockedEntities,
+  getFullyInstantiatedMockedEntities,
   getMockedDataContext,
-} from '@features/__tests__/MockObjects';
-import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
+} from '@features/__tests__/MockEntities';
+import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
 import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import {
@@ -18,14 +18,14 @@ import { EntityDictionary } from '@entities/types/DataTypes';
 import { getExtremeLanguagePaths } from '../ReportLanguagePaths';
 
 describe('ReportLanguagePaths', () => {
-  function generateObjects(): EntityDictionary {
+  function generateEntities(): EntityDictionary {
     // Get regular data and add a language family so there is more data to process
     // Each source will have a different family structure, some of which have cycles
     // Combined: elv -> sjn -> dori0123, elv -> qya (a typical branching tree)
     // ISO: elv -> qya && sjn -> dori0123 -> sjn (a cycle)
     // Glottolog: sjn -> dori0123, sjn -> qya (a tree branching differently, no lang family)
     // CLDR: elv -> sjn -> dori0123 -> elv (a bad cycle but will be missed since there is no root)
-    const inputEnts = getDisconnectedMockedObjects();
+    const inputEnts = getDisconnectedMockedEntities();
     const elv: LanguageData = {
       ...getBaseLanguageData('elv', 'Elvish'), // fictional language family code
       nameEndonym: 'ɛlvɪʃ',
@@ -62,16 +62,16 @@ describe('ReportLanguagePaths', () => {
     }
 
     // Generate the data
-    return getFullyInstantiatedMockedObjects(inputEnts);
+    return getFullyInstantiatedMockedEntities(inputEnts);
   }
 
   it('getExtremeLanguagePaths', () => {
-    const ents = generateObjects();
+    const ents = generateEntities();
     const { allLanguoids, locales, getTerritory } = getMockedDataContext(ents);
 
     Object.values(LanguageSource).forEach((languageSource) => {
       // This shouldn't throw an error even in the presence of cycles
-      updateObjectsBasedOnDataParams(
+      updateEntitiesBasedOnDataParams(
         allLanguoids,
         locales,
         getTerritory('001')!,

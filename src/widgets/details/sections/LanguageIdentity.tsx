@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import useCLDRXMLLink from '@entities/language/digitalsupport/useCLDRXMLLink';
 import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
@@ -28,7 +28,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
         <IdentityRow
           sourceLabel="LangNav System"
           name={
-            <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameDisplay} />
+            <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameDisplay} />
           }
           scope={lang.scope}
           code={lang.ID}
@@ -41,7 +41,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           sourceLabel="Glottolog"
           name={
             lang.Glottolog.code ? (
-              <ObjectFieldHighlightedByPageSearch
+              <EntityFieldHighlightedByPageSearch
                 ent={lang}
                 field={SearchableField.NameGlottolog}
               />
@@ -64,7 +64,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           sourceLabel="ISO"
           name={
             lang.ISO.name ? (
-              <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameISO} />
+              <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameISO} />
             ) : (
               <Deemphasized>Not in ISO catalog</Deemphasized>
             )
@@ -93,7 +93,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             sourceLabel="CLDR"
             name={
               lang.CLDR.name ? (
-                <ObjectFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameCLDR} />
+                <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameCLDR} />
               ) : (
                 <Deemphasized>Not in CLDR</Deemphasized>
               )
@@ -113,7 +113,7 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             sourceLabel="Ethnologue"
             name={
               lang.Ethnologue.name ? (
-                <ObjectFieldHighlightedByPageSearch
+                <EntityFieldHighlightedByPageSearch
                   ent={lang}
                   field={SearchableField.NameEthnologue}
                 />

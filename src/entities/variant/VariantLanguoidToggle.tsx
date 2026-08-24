@@ -1,7 +1,7 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { PageParamKey } from '@features/params/PageParamTypes';
 import TextInput from '@features/params/ui/TextInput';
 import { getSuggestionsFunction } from '@features/transforms/filtering/getSuggestionsFunction';
@@ -78,7 +78,7 @@ const VariantLanguoidToggle: React.FC<{
   let predictedText = undefined;
   switch (languageSelectorMode) {
     case LanguageSelectorMode.Current:
-      predictedText = <HoverableObjectName ent={saved ?? predicted} />;
+      predictedText = <HoverableEntityName ent={saved ?? predicted} />;
       break;
     case LanguageSelectorMode.Manual:
       predictedText = (
@@ -93,10 +93,10 @@ const VariantLanguoidToggle: React.FC<{
       );
       break;
     case LanguageSelectorMode.Uncoded:
-      predictedText = <HoverableObjectName ent={languageUncoded} />;
+      predictedText = <HoverableEntityName ent={languageUncoded} />;
       break;
     case LanguageSelectorMode.Unset:
-      predictedText = <HoverableObjectName ent={saved ?? predicted} />;
+      predictedText = <HoverableEntityName ent={saved ?? predicted} />;
       break;
   }
 

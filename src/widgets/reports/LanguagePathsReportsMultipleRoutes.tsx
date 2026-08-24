@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
@@ -102,7 +102,7 @@ const MultiplePathsList: React.FC<{
         .map(([langId, paths], i) => (
           <li key={i}>
             <strong>
-              <HoverableObjectName ent={getLanguage(langId)} />
+              <HoverableEntityName ent={getLanguage(langId)} />
             </strong>
             <ul>
               {paths.map((path, j) => (

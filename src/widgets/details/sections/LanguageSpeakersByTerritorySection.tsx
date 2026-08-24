@@ -2,7 +2,7 @@ import React from 'react';
 
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -47,7 +47,7 @@ const LanguageSpeakersByTerritorySection: React.FC<{ lang: LanguageData }> = ({ 
             key={locale.ID}
             style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}
           >
-            <HoverableObjectName ent={locale} labelSource="territory" />
+            <HoverableEntityName ent={locale} labelSource="territory" />
             <span style={{ textAlign: 'end' }}>
               <CountOfPeople count={locale.pop[use].adjusted} />
               {locale.pop[use].percent != null && (

@@ -5,15 +5,15 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 
 import {
-  getChildTerritoriesInObject,
+  getChildTerritoriesInEntity,
   getContainingTerritories,
-  getCountriesInObject,
-} from '../getObjectRelatedTerritories';
+  getCountriesInEntity,
+} from '../getEntityRelatedTerritories';
 
-const mockedEnts = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedEntities();
 
 describe('getContainingTerritories', () => {
   it('returns the containing territories for entities', () => {
@@ -51,12 +51,12 @@ describe('getContainingTerritories', () => {
   });
 });
 
-describe('getChildTerritoriesInObject', () => {
+describe('getChildTerritoriesInEntity', () => {
   it('returns the child territories for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getChildTerritoriesInObject(ent)
+        getChildTerritoriesInEntity(ent)
           ?.map((ent) => ent.nameDisplay)
           .join(', ') ?? undefined,
       ]),
@@ -87,12 +87,12 @@ describe('getChildTerritoriesInObject', () => {
   });
 });
 
-describe('getCountriesInObject', () => {
+describe('getCountriesInEntity', () => {
   it('returns the countries for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getCountriesInObject(ent)
+        getCountriesInEntity(ent)
           ?.map((ent) => ent.nameDisplay)
           .join(', ') ?? 'undefined',
       ]),

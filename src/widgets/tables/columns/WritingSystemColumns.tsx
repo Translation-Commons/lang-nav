@@ -1,11 +1,11 @@
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
+import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -34,7 +34,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
             {Object.values(ent.languages)
               .sort(sortByPopulation)
               .map((l) => (
-                <HoverableObjectName ent={l} key={l.ID} />
+                <HoverableEntityName ent={l} key={l.ID} />
               ))}
           </CommaSeparated>
         ),
@@ -63,7 +63,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     },
     {
       key: 'Area of Origin',
-      render: (ent) => <HoverableObjectName ent={ent.territoryOfOrigin} />,
+      render: (ent) => <HoverableEntityName ent={ent.territoryOfOrigin} />,
       field: Field.Territory,
       isInitiallyVisible: false,
       columnGroup: 'Related Objects',
@@ -71,7 +71,7 @@ function getWritingSystemColumns(): TableColumn<WritingSystemData>[] {
     {
       key: 'Used in Countries',
       render: (ent) => (
-        <HoverableEnumeration items={getCountriesInObject(ent)?.map((t) => t.nameDisplay)} />
+        <HoverableEnumeration items={getCountriesInEntity(ent)?.map((t) => t.nameDisplay)} />
       ),
       isInitiallyVisible: false,
       field: Field.CountOfCountries,

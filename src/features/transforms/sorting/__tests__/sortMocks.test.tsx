@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 import Field from '@features/transforms/fields/Field';
 import getField from '@features/transforms/fields/getField';
 
@@ -9,7 +9,7 @@ import { EntityData } from '@entities/types/DataTypes';
 import { getSortFunctionParameterized } from '../sort';
 import { SortBehavior } from '../SortTypes';
 
-const mockedEnts = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedEntities();
 
 // Convert Objects into their IDs and also add field data
 function toIDandValue(ent: EntityData, field: Field): string {

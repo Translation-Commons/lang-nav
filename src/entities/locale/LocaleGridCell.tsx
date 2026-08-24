@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
@@ -13,7 +13,7 @@ const LocaleGridCell: React.FC<Props> = ({ locale }) => {
     <div className="LocaleGridCell">
       {/* to match the design doc */}
       <code>{locale.codeDisplay}</code>{' '}
-      <HoverableObjectName ent={locale} labelSource="locale without language" />
+      <HoverableEntityName ent={locale} labelSource="locale without language" />
     </div>
   );
 };

@@ -6,7 +6,7 @@ import { EntityData } from '@entities/types/DataTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';
 
-export async function loadObjectsFromFile<T extends EntityData>(
+export async function loadEntitiesFromFile<T extends EntityData>(
   filePath: string,
   parseLine: (line: string) => T | undefined,
 ): Promise<Record<string, T> | void> {

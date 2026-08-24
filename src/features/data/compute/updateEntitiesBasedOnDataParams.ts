@@ -27,7 +27,7 @@ import { updatePopulations } from './updatePopulations';
  *
  * This function recomputes those dependent values based on the current source selections.
  */
-export function updateObjectsBasedOnDataParams(
+export function updateEntitiesBasedOnDataParams(
   languages: LanguageData[],
   locales: LocaleData[],
   world: TerritoryData,
@@ -36,7 +36,7 @@ export function updateObjectsBasedOnDataParams(
 ): void {
   updateParentsAndDescendants(languages, languageSource);
   updatePopulations(languages, locales, world);
-  updateObjectNamesAndCodes(languages, locales, languageSource, localeSeparator);
+  updateEntityNamesAndCodes(languages, locales, languageSource, localeSeparator);
   computeRecursiveLanguageData(languages);
   computeLargestDescendant(languages, languageSource);
 }
@@ -54,7 +54,7 @@ function updateParentsAndDescendants(
   });
 }
 
-function updateObjectNamesAndCodes(
+function updateEntityNamesAndCodes(
   languages: LanguageData[],
   locales: LocaleData[],
   languageSource: LanguageSource,

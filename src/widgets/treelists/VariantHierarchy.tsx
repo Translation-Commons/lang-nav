@@ -6,7 +6,7 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import getObjectFromID from '@entities/lib/getObjectFromID';
+import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 
@@ -75,7 +75,7 @@ export function getTreeNodes(
 }
 
 export function getVariantTreeNode(VariantBranch: VariantBranch): TreeNodeData | null {
-  const ent = getObjectFromID(VariantBranch.key);
+  const ent = getEntityFromID(VariantBranch.key);
   if (ent == null) return null;
   return {
     type: ent?.type ?? EntityType.Variant,

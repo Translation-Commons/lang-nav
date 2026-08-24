@@ -3,8 +3,8 @@ import {
   RetirementReason,
 } from '@features/data/load/extra_entities/ISORetirements';
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -21,9 +21,9 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
-import { getObjectLiteracy } from '@entities/lib/getObjectMiscFields';
-import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
-import ObjectDepthDisplay from '@entities/ui/ObjectDepthDisplay';
+import { getEntityLiteracy } from '@entities/lib/getEntityMiscFields';
+import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
+import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -81,19 +81,19 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     ...LanguageDigitalSupportColumns,
     {
       key: 'Parent Language',
-      render: (lang) => lang.parentLanguage && <HoverableObjectName ent={lang.parentLanguage} />,
+      render: (lang) => lang.parentLanguage && <HoverableEntityName ent={lang.parentLanguage} />,
       isInitiallyVisible: false,
       columnGroup: 'Relations',
     },
     {
       key: 'Macrolanguage',
-      render: (lang) => <HoverableObjectName ent={getLanguageRootMacrolanguage(lang)} />,
+      render: (lang) => <HoverableEntityName ent={getLanguageRootMacrolanguage(lang)} />,
       isInitiallyVisible: false,
       columnGroup: 'Relations',
     },
     {
       key: 'Language Family',
-      render: (lang) => <HoverableObjectName ent={getLanguageRootLanguageFamily(lang)} />,
+      render: (lang) => <HoverableEntityName ent={getLanguageRootLanguageFamily(lang)} />,
       isInitiallyVisible: false,
       field: Field.LanguageFamily,
       columnGroup: 'Relations',
@@ -116,7 +116,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     {
       key: 'Depth',
       description: 'How deep in a language family tree this language is.',
-      render: (lang) => <ObjectDepthDisplay ent={lang} />,
+      render: (lang) => <EntityDepthDisplay ent={lang} />,
       exportValue: (lang) => lang.depth ?? '', // Export as blank instead of "—"
       isInitiallyVisible: false,
       valueType: TableValueType.Count,
@@ -130,7 +130,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       render: (lang) => (
         <CommaSeparated limit={1} limitText="short">
           {getVariantsForEntity(lang)?.map((variant) => (
-            <HoverableObjectName ent={variant} key={variant.ID} />
+            <HoverableEntityName ent={variant} key={variant.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -142,8 +142,8 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       key: 'Countries',
       render: (lang) => (
         <CommaSeparated limit={1} limitText="short">
-          {getCountriesInObject(lang)?.map((territory) => (
-            <HoverableObjectName ent={territory} key={territory.ID} />
+          {getCountriesInEntity(lang)?.map((territory) => (
+            <HoverableEntityName ent={territory} key={territory.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -154,7 +154,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       key: 'Country Count',
       render: (lang) => (
         <HoverableEnumeration
-          items={getCountriesInObject(lang)?.map((territory) => territory.nameDisplay)}
+          items={getCountriesInEntity(lang)?.map((territory) => territory.nameDisplay)}
         />
       ),
       isInitiallyVisible: false,
@@ -197,7 +197,7 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
     },
     {
       key: 'Literacy',
-      render: (lang) => getObjectLiteracy(lang),
+      render: (lang) => getEntityLiteracy(lang),
       isInitiallyVisible: false,
       field: Field.Literacy,
       valueType: TableValueType.Decimal,

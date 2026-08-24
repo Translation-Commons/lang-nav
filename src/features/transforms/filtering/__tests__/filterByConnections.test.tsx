@@ -5,21 +5,21 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 
 import {
-  getLanguagesRelevantToObject,
-  getWritingSystemsRelevantToObject,
+  getLanguagesRelevantToEntity,
+  getWritingSystemsRelevantToEntity,
 } from '../filterByConnections';
 
-const mockedEnts = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedEntities();
 
-describe('getWritingSystemsRelevantToObject', () => {
+describe('getWritingSystemsRelevantToEntity', () => {
   it('returns the writing systems for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getWritingSystemsRelevantToObject(ent)
+        getWritingSystemsRelevantToEntity(ent)
           .map((ent) => ent.nameDisplay)
           .join(', '),
       ]),
@@ -50,12 +50,12 @@ describe('getWritingSystemsRelevantToObject', () => {
   });
 });
 
-describe('getLanguagesRelevantToObject', () => {
+describe('getLanguagesRelevantToEntity', () => {
   it('returns the languages for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getLanguagesRelevantToObject(ent)
+        getLanguagesRelevantToEntity(ent)
           .map((ent) => ent.nameDisplay)
           .join(', '),
       ]),

@@ -1,7 +1,7 @@
 import React from 'react';
 
+import EntityFieldDisplay from '@features/transforms/fields/EntityFieldDisplay';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldDisplay from '@features/transforms/fields/ObjectFieldDisplay';
 
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -15,7 +15,7 @@ const TreeListNodeData: React.FC<Props> = ({ ent, field }) => {
 
   return (
     <div style={{ display: 'inline-block', position: 'absolute', right: 0 }}>
-      <ObjectFieldDisplay ent={ent} field={field} />
+      <EntityFieldDisplay ent={ent} field={field} />
     </div>
   );
 };

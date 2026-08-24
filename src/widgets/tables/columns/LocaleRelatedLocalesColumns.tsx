@@ -1,4 +1,4 @@
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import TableColumn from '@features/table/TableColumn';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -11,7 +11,7 @@ const columns: TableColumn<LocaleData>[] = [
     render: (ent) => (
       <CommaSeparated limit={1} limitText="short">
         {ent.relatedLocales?.moreGeneral?.map((locale) => (
-          <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
         ))}
       </CommaSeparated>
     ),
@@ -21,7 +21,7 @@ const columns: TableColumn<LocaleData>[] = [
     render: (ent) => (
       <CommaSeparated limit={1} limitText="short">
         {ent.relatedLocales?.moreSpecific?.map((locale) => (
-          <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
         ))}
       </CommaSeparated>
     ),
@@ -29,7 +29,7 @@ const columns: TableColumn<LocaleData>[] = [
   {
     key: 'Parent Language Locale',
     render: (ent) => (
-      <HoverableObjectName ent={ent.relatedLocales?.parentLanguage} labelSource="code" />
+      <HoverableEntityName ent={ent.relatedLocales?.parentLanguage} labelSource="code" />
     ),
   },
   {
@@ -37,7 +37,7 @@ const columns: TableColumn<LocaleData>[] = [
     render: (ent) => (
       <CommaSeparated limit={1} limitText="short">
         {ent.relatedLocales?.childLanguages?.map((locale) => (
-          <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
         ))}
       </CommaSeparated>
     ),
@@ -45,7 +45,7 @@ const columns: TableColumn<LocaleData>[] = [
   {
     key: 'Encapsulating Territory Locale',
     render: (ent) => (
-      <HoverableObjectName ent={ent.relatedLocales?.parentTerritory} labelSource="code" />
+      <HoverableEntityName ent={ent.relatedLocales?.parentTerritory} labelSource="code" />
     ),
   },
   {
@@ -53,7 +53,7 @@ const columns: TableColumn<LocaleData>[] = [
     render: (ent) => (
       <CommaSeparated limit={1} limitText="short">
         {ent.relatedLocales?.childTerritories?.map((locale) => (
-          <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+          <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
         ))}
       </CommaSeparated>
     ),

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -20,7 +20,7 @@ const LanguageWritingSystems: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   return (
     <CommaSeparated limit={1} limitText="short">
       {writingSystems.map((ws) => (
-        <HoverableObjectName key={ws.ID} ent={ws} />
+        <HoverableEntityName key={ws.ID} ent={ws} />
       ))}
     </CommaSeparated>
   );

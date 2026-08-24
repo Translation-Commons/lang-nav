@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import usePagination from '@features/pagination/usePagination';
@@ -33,7 +33,7 @@ function ViewMap() {
     return (
       <div>
         Map view is not well-defined for {getEntityTypeLabelPlural(entityType)}. Please select a
-        different object type.
+        different entity type.
       </div>
     );
   }
@@ -67,7 +67,7 @@ function ViewMap() {
           The following {getEntityTypeLabelPlural(entityType)} do not have defined coordinates:{' '}
           <CommaSeparated limit={10}>
             {entsWithoutCoordinates.map((ent) => (
-              <HoverableObjectName key={ent.ID} ent={ent} />
+              <HoverableEntityName key={ent.ID} ent={ent} />
             ))}
           </CommaSeparated>
         </div>

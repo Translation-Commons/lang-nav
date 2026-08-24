@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -36,7 +36,7 @@ const ReportCensusCountries: React.FC = () => {
                   {territory.censuses
                     ?.filter((census) => census.collectorType === collectorType)
                     .map((census) => (
-                      <HoverableObjectName key={census.ID} ent={census} />
+                      <HoverableEntityName key={census.ID} ent={census} />
                     ))}
                 </CommaSeparated>
               </div>

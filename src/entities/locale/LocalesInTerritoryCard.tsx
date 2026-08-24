@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -16,7 +16,7 @@ const LocalesInTerritoryCard: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
-        Locales in <HoverableObjectName ent={territory} />
+        Locales in <HoverableEntityName ent={territory} />
       </h3>
       <>
         Click to see a table with all languages and locales for this territory available in LangNav.{' '}
@@ -27,7 +27,7 @@ const LocalesInTerritoryCard: React.FC<Props> = ({ territory }) => {
       </>
       {locales.slice(0, showAll ? locales.length : 5).map((locale) => (
         <div key={locale.ID} style={{ marginLeft: '1em' }}>
-          <HoverableObjectName ent={locale} labelSource="locale without territory" /> [
+          <HoverableEntityName ent={locale} labelSource="locale without territory" /> [
           {locale.codeDisplay}]
         </div>
       ))}

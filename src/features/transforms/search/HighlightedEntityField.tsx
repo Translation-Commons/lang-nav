@@ -9,14 +9,14 @@ import Highlightable from '@shared/ui/Highlightable';
 
 import getSearchableField from './getSearchableField';
 
-interface HighlightedObjectFieldProps {
+interface HighlightedEntityFieldProps {
   ent: EntityData;
   field: SearchableField;
   query: string;
   showOriginalName?: boolean;
 }
 
-const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
+const HighlightedEntityField: React.FC<HighlightedEntityFieldProps> = ({
   ent,
   field,
   query,
@@ -36,4 +36,4 @@ const HighlightedObjectField: React.FC<HighlightedObjectFieldProps> = ({
   return <Highlightable text={searchResult || ent.nameDisplay} searchPattern={query} />;
 };
 
-export default HighlightedObjectField;
+export default HighlightedEntityField;

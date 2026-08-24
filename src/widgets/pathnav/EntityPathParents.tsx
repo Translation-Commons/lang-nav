@@ -2,41 +2,41 @@ import { EllipsisIcon, SlashIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { getObjectParents } from './getParentsAndDescendants';
+import { getEntityParents } from './getParentsAndDescendants';
 
-const ObjectPathParents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+const EntityPathParents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   if (!ent) return null;
 
-  const parents = getObjectParents(ent).filter((o) => o != null);
+  const parents = getEntityParents(ent).filter((o) => o != null);
   if (parents.length > 2) {
-    return <ObjectPathParentsCompressed parents={parents} />;
+    return <EntityPathParentsCompressed parents={parents} />;
   }
 
   return parents.map((o, i) => (
     <Fragment key={i}>
       <SlashIcon size="1em" />
-      <HoverableObjectName ent={o} />
+      <HoverableEntityName ent={o} />
     </Fragment>
   ));
 };
 
 // If there are too many parents, keep the root and the direct parent -- then hide the rest
-const ObjectPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ parents }) => {
+const EntityPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ parents }) => {
   const [showFullAncestry, setShowFullAncestry] = React.useState(false);
   const hiddenAncestors = parents.slice(1, -1).map((p, i) => (
     <React.Fragment key={'ancestor' + i}>
       {i !== 0 && <SlashIcon size="1em" />}
-      <HoverableObjectName ent={p} />
+      <HoverableEntityName ent={p} />
     </React.Fragment>
   ));
   return (
     <>
       <SlashIcon size="1em" />
-      <HoverableObjectName ent={parents[0]} />
+      <HoverableEntityName ent={parents[0]} />
       <Hoverable
         onClick={() => setShowFullAncestry((prev) => !prev)}
         hoverContent={
@@ -52,9 +52,9 @@ const ObjectPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ pare
       </Hoverable>
       {showFullAncestry && <>{hiddenAncestors}</>}
       <SlashIcon size="1em" />
-      <HoverableObjectName ent={parents[parents.length - 1]} />
+      <HoverableEntityName ent={parents[parents.length - 1]} />
     </>
   );
 };
 
-export default ObjectPathParents;
+export default EntityPathParents;

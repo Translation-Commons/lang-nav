@@ -5,7 +5,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 import { getLocaleName } from '@entities/locale/LocaleStrings';
 import { EntityData } from '@entities/types/DataTypes';
 
-import HoverableObject from './HoverableObject';
+import HoverableEntity from './HoverableEntity';
 
 type Props = {
   ent?: EntityData;
@@ -21,7 +21,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const HoverableObjectName: React.FC<Props> = ({
+const HoverableEntityName: React.FC<Props> = ({
   ent,
   labelSource = 'name',
   format = 'text',
@@ -46,10 +46,10 @@ const HoverableObjectName: React.FC<Props> = ({
   }
 
   return (
-    <HoverableObject ent={ent}>
+    <HoverableEntity ent={ent}>
       <span style={style}>{format === 'text' ? label : <button>{label}</button>}</span>
-    </HoverableObject>
+    </HoverableEntity>
   );
 };
 
-export default HoverableObjectName;
+export default HoverableEntityName;

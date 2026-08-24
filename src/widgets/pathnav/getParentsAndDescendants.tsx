@@ -4,7 +4,7 @@ import { LanguageScope } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
-export function getObjectParents(
+export function getEntityParents(
   ent?: EntityData,
   depth: number = 0, // to prevent infinite recursion in case of cycles
 ): (EntityData | undefined)[] {
@@ -13,11 +13,11 @@ export function getObjectParents(
     case EntityType.Census:
       return [ent.territory];
     case EntityType.Language:
-      return [...getObjectParents(ent.parentLanguage, depth + 1), ent.parentLanguage];
+      return [...getEntityParents(ent.parentLanguage, depth + 1), ent.parentLanguage];
     case EntityType.Locale:
       return [ent.language, ent.writingSystem, ent.territory, ...(ent.variants ?? [])];
     case EntityType.Territory:
-      return [...getObjectParents(ent.parentUNRegion, depth + 1), ent.parentUNRegion];
+      return [...getEntityParents(ent.parentUNRegion, depth + 1), ent.parentUNRegion];
     case EntityType.WritingSystem:
       return [ent.parentWritingSystem];
     case EntityType.Variant:
@@ -29,7 +29,7 @@ export function getObjectParents(
   }
 }
 
-export function getObjectChildren(ent?: EntityData): (EntityData | undefined)[] {
+export function getEntityChildren(ent?: EntityData): (EntityData | undefined)[] {
   if (ent == null) return [];
   switch (ent.type) {
     case EntityType.Census:
@@ -56,9 +56,9 @@ export function getObjectChildren(ent?: EntityData): (EntityData | undefined)[] 
   }
 }
 
-export function getObjectFullDescendants(ent: EntityData): EntityData[] {
-  return getObjectChildren(ent).reduce<EntityData[]>(
-    (all, child) => (child ? all.concat([child], getObjectFullDescendants(child)) : all),
+export function getEntityFullDescendants(ent: EntityData): EntityData[] {
+  return getEntityChildren(ent).reduce<EntityData[]>(
+    (all, child) => (child ? all.concat([child], getEntityFullDescendants(child)) : all),
     [],
   );
 }

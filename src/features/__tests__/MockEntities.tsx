@@ -1,6 +1,6 @@
 import { computeContainedTerritoryStats } from '@features/data/compute/computeTerritoryStats';
-import { connectObjectsAndCreateDerivedData } from '@features/data/compute/connectObjects';
-import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
+import { connectEntitiesAndCreateDerivedData } from '@features/data/compute/connectEntities';
+import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
 import { updatePopulations } from '@features/data/compute/updatePopulations';
 import { addCensusData } from '@features/data/connect/connectCensuses';
 import LoadingStage from '@features/data/context/LoadingStage';
@@ -24,7 +24,7 @@ import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/W
 
 import { toDictionary } from '@shared/lib/setUtils';
 
-export function getDisconnectedMockedObjects(): EntityDictionary {
+export function getDisconnectedMockedEntities(): EntityDictionary {
   // Languages
   const sjn: LanguageData = {
     ...getBaseLanguageData('sjn', 'Sindarin'), // sjn
@@ -284,7 +284,7 @@ export function getDisconnectedMockedObjects(): EntityDictionary {
 }
 
 export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays {
-  const ents = inputEnts ?? getDisconnectedMockedObjects();
+  const ents = inputEnts ?? getDisconnectedMockedEntities();
   const entArray = Object.values(ents);
   return {
     allLanguoids: entArray.filter((ent) => ent.type === EntityType.Language),
@@ -298,7 +298,7 @@ export function getMockedCoreData(inputEnts?: EntityDictionary): CoreDataArrays 
   };
 }
 
-export function getMockedObjectDictionaries(inputEnts?: EntityDictionary): {
+export function getMockedEntityDictionaries(inputEnts?: EntityDictionary): {
   ents: EntityDictionary;
   censuses: Record<string, CensusData>;
   languagesBySource: Record<LanguageSource, Record<string, LanguageData>>;
@@ -308,7 +308,7 @@ export function getMockedObjectDictionaries(inputEnts?: EntityDictionary): {
   writingSystems: Record<string, WritingSystemData>;
   variants: Record<string, VariantData>;
 } {
-  const ents = inputEnts ?? getDisconnectedMockedObjects();
+  const ents = inputEnts ?? getDisconnectedMockedEntities();
   const entsArray = Object.values(ents);
   const languagesBySource: Record<LanguageSource, Record<string, LanguageData>> = {
     Combined: toDictionary(
@@ -368,11 +368,11 @@ export function getMockedObjectDictionaries(inputEnts?: EntityDictionary): {
 
 // Makes all of the symbolic connections between the various entities
 // Also creates the aggregated locales, eg. sjn_BE -> sjn_123 & -> sjn_001
-export function connectMockedObjects(inputEnts: EntityDictionary): EntityDictionary {
+export function connectMockedEntities(inputEnts: EntityDictionary): EntityDictionary {
   const { ents, languagesBySource, territories, writingSystems, locales, variants, censuses } =
-    getMockedObjectDictionaries(inputEnts);
+    getMockedEntityDictionaries(inputEnts);
 
-  connectObjectsAndCreateDerivedData(
+  connectEntitiesAndCreateDerivedData(
     languagesBySource,
     territories,
     writingSystems,
@@ -404,16 +404,16 @@ export function connectMockedObjects(inputEnts: EntityDictionary): EntityDiction
  * @returns A set of mock entities for testing purposes. These have been processed to connect
  * child entities to eachother and also with attributes computed by the various algorithms.
  */
-export function getFullyInstantiatedMockedObjects(inputEnts?: EntityDictionary): EntityDictionary {
-  const ents = inputEnts ?? getDisconnectedMockedObjects();
+export function getFullyInstantiatedMockedEntities(inputEnts?: EntityDictionary): EntityDictionary {
+  const ents = inputEnts ?? getDisconnectedMockedEntities();
 
   // Initial connections and algorithms
-  connectMockedObjects(ents);
-  const { languagesBySource, locales } = getMockedObjectDictionaries(ents);
+  connectMockedEntities(ents);
+  const { languagesBySource, locales } = getMockedEntityDictionaries(ents);
 
   // From DataContext
   const world = ents['001'] as TerritoryData;
-  updateObjectsBasedOnDataParams(
+  updateEntitiesBasedOnDataParams(
     Object.values(languagesBySource.Combined) as LanguageData[],
     Object.values(locales),
     world,
@@ -458,7 +458,7 @@ export function getMockedDataContext(ents: EntityDictionary): DataContextType {
     territories,
     writingSystems,
     variants,
-    getObject: (id: string) => ents[id],
+    getEntity: (id: string) => ents[id],
     getLanguage: (id: string) => (ents[id]?.type === EntityType.Language ? ents[id] : undefined),
     getCLDRLanguage: (id: string) =>
       Object.values(ents).find(

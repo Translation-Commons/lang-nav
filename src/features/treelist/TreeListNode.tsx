@@ -1,11 +1,11 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { EntityType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -35,16 +35,16 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
   const {
     allExpanded,
     showInfoButton,
-    showObjectIDs: showObjectIDsSetting,
+    showEntIDs: showEntIDsSetting,
   } = useTreeListOptionsContext();
   const [expanded, setExpanded] = useState(isExpandedInitially || allExpanded);
-  let showObjectIDs = showObjectIDsSetting;
+  let showEntIDs = showEntIDsSetting;
   if (
     searchString != '' &&
     view === View.Hierarchy &&
     [SearchableField.Code, SearchableField.CodeOrNameAny].includes(searchBy)
   ) {
-    showObjectIDs = true;
+    showEntIDs = true;
   }
 
   // Update the initial opening if a user is typing things in the search box
@@ -71,18 +71,18 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
       )}
       <>
         <span style={labelStyle}>
-          <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
+          <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
         </span>
-        {showObjectIDs && (
+        {showEntIDs && (
           <>
             {' '}
-            [<ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
+            [<EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
           </>
         )}
         {showInfoButton && (
-          <HoverableObject ent={ent} style={{ marginLeft: '0.125em' }}>
+          <HoverableEntity ent={ent} style={{ marginLeft: '0.125em' }}>
             <InfoIcon size="1em" />
-          </HoverableObject>
+          </HoverableEntity>
         )}
         {fieldFocus !== Field.None && <TreeListNodeData ent={ent} field={fieldFocus} />}
       </>

@@ -4,7 +4,7 @@ import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
@@ -95,7 +95,7 @@ const ReportLanguagesDubious: React.FC = () => {
                     {relatedEntities.length > 0 ? (
                       relatedEntities.map((entity) => (
                         <li key={entity.ID}>
-                          <HoverableObjectName ent={entity} labelSource="code" />
+                          <HoverableEntityName ent={entity} labelSource="code" />
                         </li>
                       ))
                     ) : (

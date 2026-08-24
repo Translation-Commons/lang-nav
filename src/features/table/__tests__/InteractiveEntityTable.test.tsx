@@ -192,12 +192,12 @@ describe('InteractiveEntityTable', () => {
   });
 
   it('formats numeric values correctly', () => {
-    const numericObject = {
+    const numericEnt = {
       ...mockEnts[0],
       pop: { overall: 1234567 },
     };
 
-    renderEntityTable({ ents: [numericObject] });
+    renderEntityTable({ ents: [numericEnt] });
 
     expect(screen.getByRole('cell', { name: (1234567).toLocaleString() })).toBeInTheDocument();
   });

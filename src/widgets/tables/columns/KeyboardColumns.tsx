@@ -1,4 +1,4 @@
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
@@ -21,7 +21,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
       render: (ent) => (
         <CommaSeparated>
           {(ent.languages ?? []).map((lang) => (
-            <HoverableObjectName key={lang.ID} ent={lang} />
+            <HoverableEntityName key={lang.ID} ent={lang} />
           ))}
         </CommaSeparated>
       ),
@@ -31,7 +31,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     {
       key: 'Input Script',
       render: (ent) => (
-        <HoverableObjectName
+        <HoverableEntityName
           ent={ent.inputWritingSystem}
           style={
             ent.inputScriptCode === ent.outputScriptCode
@@ -46,7 +46,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     {
       key: 'Output Script',
       render: (ent) => (
-        <HoverableObjectName
+        <HoverableEntityName
           ent={ent.outputWritingSystem}
           style={
             ent.inputScriptCode === ent.outputScriptCode
@@ -60,7 +60,7 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     },
     {
       key: 'Territory',
-      render: (ent) => <HoverableObjectName ent={ent.territory} />,
+      render: (ent) => <HoverableEntityName ent={ent.territory} />,
       field: Field.Territory,
       columnGroup: 'Related Objects',
       isInitiallyVisible: false,

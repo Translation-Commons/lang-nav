@@ -1,4 +1,4 @@
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
@@ -25,7 +25,7 @@ const columns: TableColumn<LocaleData>[] = [
         means it specifically refers to Traditional Han characters.
       </>
     ),
-    render: (ent) => <HoverableObjectName ent={ent.writingSystem} />,
+    render: (ent) => <HoverableEntityName ent={ent.writingSystem} />,
   },
   {
     key: 'Writing System (inferred)',
@@ -38,7 +38,7 @@ const columns: TableColumn<LocaleData>[] = [
       </>
     ),
     render: (ent) => (
-      <HoverableObjectName ent={ent.writingSystem ?? ent.language?.primaryWritingSystem} />
+      <HoverableEntityName ent={ent.writingSystem ?? ent.language?.primaryWritingSystem} />
     ),
     field: Field.WritingSystem,
   },

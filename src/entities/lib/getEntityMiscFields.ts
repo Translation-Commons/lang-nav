@@ -1,4 +1,4 @@
-import { getObjectChildren } from '@widgets/pathnav/getParentsAndDescendants';
+import { getEntityChildren } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType } from '@features/params/PageParamTypes';
 import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
@@ -12,10 +12,10 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { sumBy, uniqueBy } from '@shared/lib/setUtils';
 
-import { getTerritoryBiggestLocale } from './getObjectRelatedTerritories';
+import { getTerritoryBiggestLocale } from './getEntityRelatedTerritories';
 
 // Field.Language
-export function getObjectMostImportantLanguageName(ent: EntityData): string | undefined {
+export function getEntityMostImportantLanguageName(ent: EntityData): string | undefined {
   switch (ent.type) {
     case EntityType.Territory:
       return getTerritoryBiggestLocale(ent)?.language?.nameDisplay;
@@ -39,12 +39,12 @@ export function getObjectMostImportantLanguageName(ent: EntityData): string | un
 }
 
 // Field.Date
-export function getObjectDateAsNumber(ent: EntityData): number | undefined {
-  const date = getObjectDate(ent);
+export function getEntityDateAsNumber(ent: EntityData): number | undefined {
+  const date = getEntityDate(ent);
   return date ? date.getTime() : undefined;
 }
 
-export function getObjectDate(ent: EntityData): Date | undefined {
+export function getEntityDate(ent: EntityData): Date | undefined {
   switch (ent.type) {
     case EntityType.Census:
       return new Date(ent.yearCollected + '-01-02'); // The 2nd so timezone changes don't affect the year
@@ -66,7 +66,7 @@ export function getCountOfLanguages(ent: EntityData): number | undefined {
     case EntityType.Language:
       return ent.childLanguages.length;
     case EntityType.Locale:
-      return getObjectChildren(ent).length;
+      return getEntityChildren(ent).length;
     case EntityType.Census:
       return ent.languageCount;
     case EntityType.WritingSystem:
@@ -106,7 +106,7 @@ export function getCountOfKeyboards(ent: EntityData): number | undefined {
 }
 
 // Field.Literacy
-export function getObjectLiteracy(ent: EntityData): number | undefined {
+export function getEntityLiteracy(ent: EntityData): number | undefined {
   switch (ent.type) {
     case EntityType.Language:
       return getLanguageLiteracy(ent);
@@ -141,10 +141,10 @@ function getLanguageLiteracy(lang: LanguageData): number | undefined {
 
 // Field.CountOfWritingSystems
 export function getCountOfWritingSystems(ent: EntityData): number | undefined {
-  return getWritingSystemsInObject(ent)?.length;
+  return getWritingSystemsInEntity(ent)?.length;
 }
 
-export function getWritingSystemsInObject(ent: EntityData): WritingSystemData[] | undefined {
+export function getWritingSystemsInEntity(ent: EntityData): WritingSystemData[] | undefined {
   const { type } = ent;
   switch (type) {
     case EntityType.Language:

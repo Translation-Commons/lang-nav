@@ -7,7 +7,7 @@ import Transform from '../TransformEnum';
 
 import Field from './Field';
 
-// Common fields available across most object types
+// Common fields available across most entity types
 const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Population];
 
 // Fields that are in development and not yet available for use in transforms but there may be placeholder values
@@ -49,8 +49,8 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
   [EntityType.Org]: [],
 };
 
-// Specific fields available per object type
-function getSpecificFieldsForObjectType(entityType: EntityType): Field[] {
+// Specific fields available per entity type
+function getSpecificFieldsForEntityType(entityType: EntityType): Field[] {
   switch (entityType) {
     case EntityType.Locale:
       return [
@@ -388,23 +388,23 @@ function getFieldsForTransform(transform: Transform): Field[] {
 }
 
 /**
- * Returns all fields available for a given object type.
+ * Returns all fields available for a given entity type.
  * This is the authoritative list that other UIs (sorting, coloring, scaling) intersect with.
  */
-function getFieldsForObjectType(entityType: EntityType): Field[] {
-  const specific = getSpecificFieldsForObjectType(entityType);
+function getFieldsForEntityType(entityType: EntityType): Field[] {
+  const specific = getSpecificFieldsForEntityType(entityType);
   return unique([...COMMON_FIELDS, ...specific]).filter(
     (f) => !UNINTERESTING_FIELD_COMBINATIONS[entityType].includes(f),
   );
 }
 
 /**
- * Helper to intersect the fields available for a transform with fields that exist for an object type.
+ * Helper to intersect the fields available for a transform with fields that exist for an entity type.
  * Preserves the order from the transform list.
  */
 export function getApplicableFields(transform?: Transform, entityType?: EntityType): Field[] {
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
-  const entFields = entityType ? getFieldsForObjectType(entityType) : Object.values(Field);
+  const entFields = entityType ? getFieldsForEntityType(entityType) : Object.values(Field);
   return transformFields.filter((f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f));
 }
 
@@ -415,7 +415,7 @@ export function isFieldApplicable(
 ): boolean {
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&
-    (entityType ? getFieldsForObjectType(entityType).includes(field) : true) &&
+    (entityType ? getFieldsForEntityType(entityType).includes(field) : true) &&
     !FIELDS_IN_DEVELOPMENT.includes(field) &&
     (entityType ? !UNINTERESTING_FIELD_COMBINATIONS[entityType].includes(field) : true)
   );

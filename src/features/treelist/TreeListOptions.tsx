@@ -9,32 +9,32 @@ import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 interface TreeListOptions {
   allExpanded: boolean;
   showInfoButton: boolean;
-  showObjectIDs: boolean;
+  showEntIDs: boolean;
   setAllExpanded: (value: boolean) => void;
   setShowInfoButton: (value: boolean) => void;
-  setShowObjectIDs: (value: boolean) => void;
+  setShowEntIDs: (value: boolean) => void;
 }
 const TreeListOptionsContext = React.createContext<TreeListOptions>({
   allExpanded: false,
   showInfoButton: true,
-  showObjectIDs: false,
+  showEntIDs: false,
   setAllExpanded: () => {},
   setShowInfoButton: () => {},
-  setShowObjectIDs: () => {},
+  setShowEntIDs: () => {},
 });
 
 export const TreeListOptionsProvider: React.FC<React.PropsWithChildren> = ({ children }) => {
   const [allExpanded, setAllExpanded] = React.useState(false);
   const [showInfoButton, setShowInfoButton] = React.useState(true);
-  const [showObjectIDs, setShowObjectIDs] = React.useState(false);
+  const [showEntIDs, setShowEntIDs] = React.useState(false);
 
   const value = {
     allExpanded,
     showInfoButton,
-    showObjectIDs,
+    showEntIDs,
     setAllExpanded,
     setShowInfoButton,
-    setShowObjectIDs,
+    setShowEntIDs,
   };
 
   return (
@@ -51,10 +51,10 @@ export function TreeListOptionsSelectors() {
   const {
     allExpanded,
     showInfoButton,
-    showObjectIDs,
+    showEntIDs,
     setAllExpanded,
     setShowInfoButton,
-    setShowObjectIDs,
+    setShowEntIDs,
   } = useTreeListOptionsContext();
 
   return (
@@ -86,8 +86,8 @@ export function TreeListOptionsSelectors() {
         <label>
           <input
             type="checkbox"
-            checked={showObjectIDs}
-            onChange={(e) => setShowObjectIDs(e.target.checked)}
+            checked={showEntIDs}
+            onChange={(e) => setShowEntIDs(e.target.checked)}
           />
           Show Object IDs
         </label>

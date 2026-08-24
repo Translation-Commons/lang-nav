@@ -16,7 +16,7 @@ import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { connectObjectsAndCreateDerivedData } from '../compute/connectObjects';
+import { connectEntitiesAndCreateDerivedData } from '../compute/connectEntities';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
@@ -153,7 +153,7 @@ export function useCoreData(): {
     addCLDRLanguageDetails(languagesBySource);
     addIANAVariantLocales(languagesBySource.BCP, locales, variants);
 
-    connectObjectsAndCreateDerivedData(
+    connectEntitiesAndCreateDerivedData(
       languagesBySource,
       territories,
       writingSystems,

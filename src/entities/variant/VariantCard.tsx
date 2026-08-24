@@ -1,10 +1,10 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
-import { getLanguagesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
+import { getLanguagesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -22,12 +22,12 @@ const VariantCard: React.FC<Props> = ({ data }) => {
   const { description } = data;
   const shortDescription =
     description && description.length > 100 ? description.slice(0, 100) + '...' : description;
-  const languages = getLanguagesRelevantToObject(data);
+  const languages = getLanguagesRelevantToEntity(data);
 
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle ent={data} />
+        <EntityTitle ent={data} />
       </div>
       <CardField
         title="Type"
@@ -57,7 +57,7 @@ const VariantCard: React.FC<Props> = ({ data }) => {
         {languages.length > 0 ? (
           <CommaSeparated>
             {languages.map((lang) => (
-              <HoverableObjectName key={lang.ID} ent={lang} />
+              <HoverableEntityName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         ) : (

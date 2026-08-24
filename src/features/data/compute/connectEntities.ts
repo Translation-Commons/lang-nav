@@ -24,7 +24,7 @@ import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
  *
  * It also creates some additional derived entities, such as family locales and regional locales.
  */
-export function connectObjectsAndCreateDerivedData(
+export function connectEntitiesAndCreateDerivedData(
   languagesBySource: LanguagesBySource,
   territories: Record<string, TerritoryData>,
   writingSystems: Record<string, WritingSystemData>,

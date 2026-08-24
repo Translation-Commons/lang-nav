@@ -4,14 +4,14 @@ import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import LocaleIndigeneityDisplay, {
   getIndigeneityDescription,
 } from '@entities/locale/localstatus/LocaleIndigeneityDisplay';
-import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
+import EntityWikipediaInfo from '@entities/ui/EntityWikipediaInfo';
 
 import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -49,7 +49,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
     <DetailsSection title="Definition">
       <DetailsField title="Language">
         {language ? (
-          <HoverableObjectName ent={language} />
+          <HoverableEntityName ent={language} />
         ) : (
           <span>
             {languageCode} <Deemphasized>[language not in database]</Deemphasized>
@@ -59,7 +59,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {(territory || territoryCode) && (
         <DetailsField title="Territory">
           {territory ? (
-            <HoverableObjectName ent={territory} />
+            <HoverableEntityName ent={territory} />
           ) : (
             <span>
               {territoryCode} <Deemphasized>[territory not in database]</Deemphasized>
@@ -70,7 +70,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       {scriptCode && (
         <DetailsField title="Writing System">
           {writingSystem ? (
-            <HoverableObjectName ent={writingSystem} />
+            <HoverableEntityName ent={writingSystem} />
           ) : (
             <span>
               {scriptCode} <Deemphasized>[writing system not in database]</Deemphasized>
@@ -80,14 +80,14 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
       )}
       {!scriptCode && language?.primaryWritingSystem && (
         <DetailsField title="Writing System">
-          <HoverableObjectName ent={language?.primaryWritingSystem} />{' '}
+          <HoverableEntityName ent={language?.primaryWritingSystem} />{' '}
           <Hoverable
             hoverContent={
               <>
                 The locale does not include an explicit writing system code. Depending on the
                 context it may mean there is no specific writing system (this locale refers to any).
                 In practice in most IT systems it assumes the primary writing system for the
-                language <HoverableObjectName ent={language} />.
+                language <HoverableEntityName ent={language} />.
               </>
             }
           >
@@ -100,7 +100,7 @@ const LocaleDefinitionSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
           {variants ? (
             <CommaSeparated>
               {variants.map((tag) => (
-                <HoverableObjectName key={tag.ID} ent={tag} />
+                <HoverableEntityName key={tag.ID} ent={tag} />
               ))}
             </CommaSeparated>
           ) : (
@@ -126,7 +126,7 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
       </DetailsField>
       {wikipedias && wikipedias.length > 0 && (
         <DetailsField title="Wikipedia">
-          <ObjectWikipediaInfo ent={locale} />
+          <EntityWikipediaInfo ent={locale} />
         </DetailsField>
       )}
       <DetailsField title="Locale Source">
@@ -136,7 +136,7 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
         <DetailsField title="More General Locales">
           <CommaSeparated>
             {relatedLocales.moreGeneral.map((locale) => (
-              <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+              <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
             ))}
           </CommaSeparated>
         </DetailsField>
@@ -145,35 +145,35 @@ const LocaleOtherSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
         <DetailsField title="More Specific Locales">
           <CommaSeparated>
             {relatedLocales.moreSpecific.map((locale) => (
-              <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+              <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
             ))}
           </CommaSeparated>
         </DetailsField>
       )}
       {relatedLocales?.parentLanguage && (
         <DetailsField title="Parent Language Locale">
-          <HoverableObjectName ent={relatedLocales.parentLanguage} labelSource="code" />
+          <HoverableEntityName ent={relatedLocales.parentLanguage} labelSource="code" />
         </DetailsField>
       )}
       {relatedLocales?.childLanguages && relatedLocales.childLanguages.length > 0 && (
         <DetailsField title="Child Language Locales">
           <CommaSeparated>
             {relatedLocales.childLanguages.map((locale) => (
-              <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+              <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
             ))}
           </CommaSeparated>
         </DetailsField>
       )}
       {relatedLocales?.parentTerritory && (
         <DetailsField title="Encapsulating Territory Locale">
-          <HoverableObjectName ent={relatedLocales.parentTerritory} labelSource="code" />
+          <HoverableEntityName ent={relatedLocales.parentTerritory} labelSource="code" />
         </DetailsField>
       )}
       {relatedLocales?.childTerritories && relatedLocales.childTerritories.length > 0 && (
         <DetailsField title="Contained Territory Locales">
           <CommaSeparated>
             {relatedLocales.childTerritories.map((locale) => (
-              <HoverableObjectName key={locale.ID} ent={locale} labelSource="code" />
+              <HoverableEntityName key={locale.ID} ent={locale} labelSource="code" />
             ))}
           </CommaSeparated>
         </DetailsField>

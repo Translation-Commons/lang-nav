@@ -19,7 +19,7 @@ type GetDecoderSuggestions = (query: string) => Promise<LanguageData[]>;
  */
 const useDecoderSuggestions = (): GetDecoderSuggestions => {
   const searchBy = SearchableField.CodeOrNameAny;
-  const pageObjects = useEntities(EntityType.Language) as LanguageData[];
+  const pageEntities = useEntities(EntityType.Language) as LanguageData[];
   const filterBy = useFilters();
 
   const getMatchDistance = useCallback(
@@ -27,7 +27,7 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
     (query: string, ent: LanguageData): number => {
       let dist = 0; // Low is good
 
-      // Check if the query makes the object name fully or partially matches
+      // Check if the query makes the entity name fully or partially matches
       if (ent.nameDisplay.toLowerCase() !== query) {
         dist += anyWordStartsWith(ent.nameDisplay, query) ? 1 : 2;
 
@@ -54,12 +54,12 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
     async (query: string) => {
       const queryLower = query.toLowerCase().trim();
       const substringFilter = getSubstringFilterOnQuery(queryLower, searchBy);
-      return (pageObjects || [])
+      return (pageEntities || [])
         .filter(substringFilter) // Require at least any name to match
         .sort((a, b) => getMatchDistance(queryLower, a) - getMatchDistance(queryLower, b))
         .slice(0, SUGGESTION_LIMIT);
     },
-    [pageObjects, searchBy, getMatchDistance],
+    [pageEntities, searchBy, getMatchDistance],
   );
 
   return getSuggestions;

@@ -1,22 +1,22 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  connectMockedObjects,
-  getDisconnectedMockedObjects,
-  getMockedObjectDictionaries,
-} from '@features/__tests__/MockObjects';
+  connectMockedEntities,
+  getDisconnectedMockedEntities,
+  getMockedEntityDictionaries,
+} from '@features/__tests__/MockEntities';
 import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 
-import { updateObjectsBasedOnDataParams } from '../updateObjectsBasedOnDataParams';
+import { updateEntitiesBasedOnDataParams } from '../updateEntitiesBasedOnDataParams';
 
-describe('updateObjectsBasedOnDataParams', () => {
+describe('updateEntitiesBasedOnDataParams', () => {
   it('updates language population estimates based on locales', () => {
-    const mockedEntities = getDisconnectedMockedObjects();
-    connectMockedObjects(mockedEntities); // Connect but do not compute population yet
-    const mockedDictionaries = getMockedObjectDictionaries(mockedEntities);
+    const mockedEntities = getDisconnectedMockedEntities();
+    connectMockedEntities(mockedEntities); // Connect but do not compute population yet
+    const mockedDictionaries = getMockedEntityDictionaries(mockedEntities);
 
     // Before update, pop.speaking should be based on the rough input or descendants only
     const sjn = mockedDictionaries.languages.sjn;
@@ -35,7 +35,7 @@ describe('updateObjectsBasedOnDataParams', () => {
     expect(sjn_001.nameDisplay).toBe('sjn_001'); // A readable name has not been computed yet
 
     // Perform the update
-    updateObjectsBasedOnDataParams(
+    updateEntitiesBasedOnDataParams(
       [sjn, dori0123],
       Object.values(mockedDictionaries.locales),
       mockedDictionaries.territories['001'],
@@ -69,9 +69,9 @@ describe('updateObjectsBasedOnDataParams', () => {
       pop: { speaking: { unadjusted: 100000 }, writing: {} },
     };
     mockedEntities[newLocale.ID] = newLocale;
-    connectMockedObjects(mockedEntities); // Re-connect entities
+    connectMockedEntities(mockedEntities); // Re-connect entities
 
-    updateObjectsBasedOnDataParams(
+    updateEntitiesBasedOnDataParams(
       [sjn, dori0123],
       [...Object.values(mockedDictionaries.locales), newLocale], // Include the new locale
       mockedDictionaries.territories['001'],

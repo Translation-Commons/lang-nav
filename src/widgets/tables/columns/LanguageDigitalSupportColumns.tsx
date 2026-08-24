@@ -14,16 +14,16 @@ import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '@entities/ui/CLDRCoverageInfo';
 import { CoverageLevelsExplanation } from '@entities/ui/CLDRCoverageLevels';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
-import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
-import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
-import IosSupportStatus from '@entities/ui/IosSupportStatus';
-import MacosSupportStatus from '@entities/ui/MacosSupportStatus';
 import {
   WikipediaActiveUsers,
   WikipediaArticles,
   WikipediaLink,
   WikipediaStatusDisplay,
-} from '@entities/ui/ObjectWikipediaInfo';
+} from '@entities/ui/EntityWikipediaInfo';
+import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
+import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
+import IosSupportStatus from '@entities/ui/IosSupportStatus';
+import MacosSupportStatus from '@entities/ui/MacosSupportStatus';
 import Win11LanguagePackSupportStatus from '@entities/ui/Win11LanguagePackSupportStatus';
 
 import ExternalLink from '@shared/ui/ExternalLink';

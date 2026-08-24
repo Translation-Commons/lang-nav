@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  getDisconnectedMockedObjects,
-  getFullyInstantiatedMockedObjects,
-} from '@features/__tests__/MockObjects';
+  getDisconnectedMockedEntities,
+  getFullyInstantiatedMockedEntities,
+} from '@features/__tests__/MockEntities';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageData } from '@entities/language/LanguageTypes';
@@ -18,7 +18,7 @@ describe('createFamilyLocales', () => {
   }
 
   it('should create family locales correctly', () => {
-    const inputEnts = getDisconnectedMockedObjects();
+    const inputEnts = getDisconnectedMockedEntities();
     const elv: LanguageData = {
       ...getBaseLanguageData('elv', 'Elvish'), // fictional language family code
       nameEndonym: 'ɛlvɪʃ',
@@ -28,9 +28,9 @@ describe('createFamilyLocales', () => {
     inputEnts['elv'] = elv;
     expect(getLocaleIDs(inputEnts)).toBe('sjn_BE sjn_ER dori0123_ER sjn_Teng_BE');
 
-    // getFullyInstantiatedMockedObjects will run connectMockedObjects which runs
-    // connectObjectsAndCreateDerivedData which includes createFamilyLocales
-    const ents = getFullyInstantiatedMockedObjects(inputEnts);
+    // getFullyInstantiatedMockedEntities will run connectMockedEntities which runs
+    // connectEntitiesAndCreateDerivedData which includes createFamilyLocales
+    const ents = getFullyInstantiatedMockedEntities(inputEnts);
 
     // Now check that the family locales were created along with the regional locales
     expect(ents['elv_001'].nameDisplay).toBe('Elvish (Arda)');

@@ -2,7 +2,7 @@ import React from 'react';
 
 import PopulationWarning from '@widgets/PopulationWarning';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
@@ -70,7 +70,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
         {primaryLanguageCode != null && (
           <DetailsField title="Primary language">
             {primaryLanguage != null ? (
-              <HoverableObjectName ent={primaryLanguage} />
+              <HoverableEntityName ent={primaryLanguage} />
             ) : (
               primaryLanguageCode
             )}
@@ -82,7 +82,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
               {Object.values(languages)
                 .sort(sortFunction)
                 .map((lang) => (
-                  <HoverableObjectName key={lang.ID} ent={lang} />
+                  <HoverableEntityName key={lang.ID} ent={lang} />
                 ))}
             </CommaSeparated>
           </DetailsField>
@@ -90,7 +90,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
 
         {territoryOfOrigin && (
           <DetailsField title="Territory of Origin">
-            <HoverableObjectName ent={territoryOfOrigin} />
+            <HoverableEntityName ent={territoryOfOrigin} />
           </DetailsField>
         )}
 
@@ -101,7 +101,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
                 .slice()
                 .sort(sortFunction)
                 .map((locale) => (
-                  <HoverableObjectName key={locale.ID} ent={locale} />
+                  <HoverableEntityName key={locale.ID} ent={locale} />
                 ))}
             </CommaSeparated>
           </DetailsField>
@@ -109,7 +109,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
 
         {parentWritingSystem && (
           <DetailsField title="Originated from">
-            <HoverableObjectName ent={parentWritingSystem} />
+            <HoverableEntityName ent={parentWritingSystem} />
           </DetailsField>
         )}
         {childWritingSystems && childWritingSystems.length > 0 && (
@@ -119,7 +119,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
                 .slice()
                 .sort(sortFunction)
                 .map((writingSystem) => (
-                  <HoverableObjectName key={writingSystem.ID} ent={writingSystem} />
+                  <HoverableEntityName key={writingSystem.ID} ent={writingSystem} />
                 ))}
             </CommaSeparated>
           </DetailsField>
@@ -128,7 +128,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           <DetailsField title="Contains">
             <CommaSeparated>
               {containsWritingSystems.sort(sortFunction).map((writingSystem) => (
-                <HoverableObjectName key={writingSystem.ID} ent={writingSystem} />
+                <HoverableEntityName key={writingSystem.ID} ent={writingSystem} />
               ))}
             </CommaSeparated>
           </DetailsField>
@@ -137,7 +137,7 @@ const WritingSystemDetails: React.FC<Props> = ({ writingSystem }) => {
           <DetailsField title="Keyboards">
             <CommaSeparated>
               {writingSystem.outputKeyboards.map((keyboard) => (
-                <HoverableObjectName key={keyboard.ID} ent={keyboard} />
+                <HoverableEntityName key={keyboard.ID} ent={keyboard} />
               ))}
             </CommaSeparated>
           </DetailsField>

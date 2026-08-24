@@ -2,10 +2,10 @@ import { PilcrowLeftIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
 import CardField from '@shared/containers/CardField';
@@ -34,7 +34,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle ent={writingSystem} />
+        <EntityTitle ent={writingSystem} />
       </div>
 
       <CardField
@@ -58,7 +58,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
               <div>
                 <Deemphasized>Variant of: </Deemphasized>
                 {parentWritingSystem ? (
-                  <HoverableObjectName ent={parentWritingSystem} />
+                  <HoverableEntityName ent={parentWritingSystem} />
                 ) : (
                   <Deemphasized>Unknown</Deemphasized>
                 )}
@@ -71,7 +71,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
                 containing{' '}
                 <CommaSeparated>
                   {containsWritingSystems.map((w) => (
-                    <HoverableObjectName key={w.ID} ent={w} />
+                    <HoverableEntityName key={w.ID} ent={w} />
                   ))}
                 </CommaSeparated>
               </>
@@ -98,7 +98,7 @@ const WritingSystemCard: React.FC<Props> = ({ writingSystem }) => {
         {languages && Object.values(languages).length > 0 ? (
           <CommaSeparated>
             {Object.values(languages).map((lang) => (
-              <HoverableObjectName key={lang.ID} ent={lang} />
+              <HoverableEntityName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         ) : (

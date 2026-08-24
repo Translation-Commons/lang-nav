@@ -2,7 +2,7 @@ import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
@@ -47,7 +47,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{
             <td colSpan={3}>
               Since the locale is a language family grouping, the data is added up from the
               populations of all constituent languages in{' '}
-              {<HoverableObjectName ent={locale.territory} />}. This may cause double-counting.
+              {<HoverableEntityName ent={locale.territory} />}. This may cause double-counting.
             </td>
           )}
         </tr>
@@ -61,7 +61,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{
           .map((childLocale) => (
             <tr key={childLocale.ID}>
               <td style={{ paddingLeft: '1em' }}>
-                <HoverableObjectName
+                <HoverableEntityName
                   ent={childLocale}
                   labelSource={fromTerritories ? 'territory' : 'language'}
                 />
@@ -92,7 +92,7 @@ const LocalePopulationBreakdownAggregated: React.FC<{
         )}
         <tr>
           <LabelTableCell>
-            <HoverableObjectName
+            <HoverableEntityName
               ent={locale}
               labelSource={fromTerritories ? 'territory' : 'language'}
             />

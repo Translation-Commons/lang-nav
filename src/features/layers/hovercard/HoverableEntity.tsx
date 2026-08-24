@@ -5,7 +5,7 @@ import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
-import ObjectCard from '@entities/ui/ObjectCard';
+import EntityCard from '@entities/ui/EntityCard';
 
 type Props = {
   ent?: EntityData;
@@ -13,7 +13,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const HoverableObject: React.FC<Props> = ({ ent, children, style }) => {
+const HoverableEntity: React.FC<Props> = ({ ent, children, style }) => {
   const { view, updatePageParams } = usePageParams();
   if (ent == null) {
     return <>{children}</>;
@@ -32,7 +32,7 @@ const HoverableObject: React.FC<Props> = ({ ent, children, style }) => {
           <div>
             <strong>{ent.type}</strong>
           </div>
-          <ObjectCard ent={ent} />
+          <EntityCard ent={ent} />
         </>
       }
       onClick={onClick}
@@ -43,4 +43,4 @@ const HoverableObject: React.FC<Props> = ({ ent, children, style }) => {
   );
 };
 
-export default HoverableObject;
+export default HoverableEntity;

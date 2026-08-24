@@ -4,7 +4,7 @@ import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
@@ -68,12 +68,12 @@ const ReportWritingSystemsLanguagesWithout: React.FC = () => {
                 </div>
                 <div>
                   <label>Language Name:</label>
-                  <HoverableObjectName ent={lang} />
+                  <HoverableEntityName ent={lang} />
                 </div>
                 <div>
                   <label>Language Family:</label>
                   {family ? (
-                    <HoverableObjectName ent={family} />
+                    <HoverableEntityName ent={family} />
                   ) : (
                     <Deemphasized>None</Deemphasized>
                   )}

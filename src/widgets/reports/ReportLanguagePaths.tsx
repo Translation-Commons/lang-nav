@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
@@ -63,7 +63,7 @@ const ReportLanguagesPaths: React.FC = () => {
           <ul>
             {orphanedLanguages.map((lang) => (
               <li key={lang?.ID}>
-                <HoverableObjectName ent={lang} /> (
+                <HoverableEntityName ent={lang} /> (
                 <CountOfPeople count={lang?.pop.overall} />)
               </li>
             ))}

@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  connectMockedObjects,
-  getDisconnectedMockedObjects,
+  connectMockedEntities,
+  getDisconnectedMockedEntities,
   getMockedCoreData,
-} from '@features/__tests__/MockObjects';
+} from '@features/__tests__/MockEntities';
 import { CoreData } from '@features/data/load/CoreData';
 import { EntityType } from '@features/params/PageParamTypes';
 
@@ -18,14 +18,14 @@ import { updateLanguagesPopulationFromLocale, updatePopulations } from '../updat
 
 describe('computeLocalePopulationFromCensuses', () => {
   // Gets a small test of entities to test on. We can run this function multiple time to get multiple batches of entities
-  function getMockedData(extraObjects: EntityDictionary = {}): CoreData {
+  function getMockedData(extraEntities: EntityDictionary = {}): CoreData {
     // Provides 4 base locales: sjn_BE, sjn_ER, dori0123_ER and sjn_Teng_BE
-    const baseObjects = getDisconnectedMockedObjects();
+    const baseEntities = getDisconnectedMockedEntities();
 
     // Create symbolic links between entities and create regional locales
     // So how we have 3 ones for the region: sjn_123, dori0123_123, sjn_Teng_123
     // and 3 for the world: sjn_001, dori0123_001, sjn_Teng_001
-    const connectedEnts = connectMockedObjects({ ...baseObjects, ...extraObjects });
+    const connectedEnts = connectMockedEntities({ ...baseEntities, ...extraEntities });
 
     // No algorithms have been applied on this data yet so we can test them.
     return { ents: connectedEnts, ...getMockedCoreData(connectedEnts) };
@@ -227,8 +227,8 @@ describe('computeLocalePopulationFromCensuses', () => {
       };
     }
 
-    function generateLanguage(extraObjects: EntityDictionary = {}) {
-      const mockedEnts = getMockedData(extraObjects);
+    function generateLanguage(extraEntities: EntityDictionary = {}) {
+      const mockedEnts = getMockedData(extraEntities);
       const world = mockedEnts.territories.find((t) => t.ID === '001')!;
       // Update both population, noting one has a different census
       computeLocalesPopulationFromCensuses(mockedEnts.locales);

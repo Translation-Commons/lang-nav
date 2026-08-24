@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { NameColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -32,20 +32,20 @@ const LocaleIndigeneityTable: React.FC<{
       columns={[
         {
           key: 'ID',
-          render: (locale) => <HoverableObjectName ent={locale} labelSource="code" />,
+          render: (locale) => <HoverableEntityName ent={locale} labelSource="code" />,
           field: Field.Code,
           columnGroup: 'Identity',
         },
         { ...NameColumn, isInitiallyVisible: false, columnGroup: 'Identity' },
         {
           key: 'Language',
-          render: (locale) => <HoverableObjectName ent={locale.language} />,
+          render: (locale) => <HoverableEntityName ent={locale.language} />,
           field: Field.Language,
           columnGroup: 'Identity',
         },
         {
           key: 'Territory',
-          render: (locale) => <HoverableObjectName ent={locale.territory} />,
+          render: (locale) => <HoverableEntityName ent={locale.territory} />,
           field: Field.Territory,
           columnGroup: 'Identity',
         },
@@ -69,7 +69,7 @@ const LocaleIndigeneityTable: React.FC<{
           render: (locale) => {
             const biggestLocale = getLanguagesBiggestCountryLocale(locale.language);
             return (
-              <HoverableObjectName
+              <HoverableEntityName
                 ent={biggestLocale}
                 labelSource="territory"
                 style={{

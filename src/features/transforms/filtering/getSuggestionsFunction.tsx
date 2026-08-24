@@ -4,7 +4,7 @@ import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSugges
 import { EntityData } from '@entities/types/DataTypes';
 
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
-import HighlightedObjectField from '../search/HighlightedObjectField';
+import HighlightedEntityField from '../search/HighlightedEntityField';
 
 export function getSuggestionsFunction<T extends EntityData>(
   ents: T[],
@@ -20,7 +20,7 @@ export function getSuggestionsFunction<T extends EntityData>(
       .slice(0, SUGGESTION_LIMIT)
       .map((ent) => {
         const label = (
-          <HighlightedObjectField
+          <HighlightedEntityField
             ent={ent}
             field={SearchableField.CodeOrNameAny}
             query={trimmedQuery}

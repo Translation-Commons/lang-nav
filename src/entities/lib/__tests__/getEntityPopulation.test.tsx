@@ -1,22 +1,22 @@
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 
 import {
-  getObjectPercentOfTerritoryPopulation,
-  getObjectPopulation,
-  getObjectPopulationDirectlySourced,
-  getObjectPopulationOfDescendants,
-  getObjectPopulationPercentInBiggestDescendantLanguage,
-  getObjectPopulationRelativeToOverallLanguageSpeakers,
-} from '@entities/lib/getObjectPopulation';
+  getEntityPercentOfTerritoryPopulation,
+  getEntityPopulation,
+  getEntityPopulationDirectlySourced,
+  getEntityPopulationOfDescendants,
+  getEntityPopulationPercentInBiggestDescendantLanguage,
+  getEntityPopulationRelativeToOverallLanguageSpeakers,
+} from '@entities/lib/getEntityPopulation';
 
-const mockedEnts = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedEntities();
 
-describe('getObjectPopulation', () => {
+describe('getEntityPopulation', () => {
   it('returns population for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectPopulation(ent)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityPopulation(ent)]),
     );
     expect(results).toEqual({
       '001': 50000, // recomputed 123+AM
@@ -44,10 +44,10 @@ describe('getObjectPopulation', () => {
   });
 });
 
-describe('getObjectPopulationDirectlySourced', () => {
+describe('getEntityPopulationDirectlySourced', () => {
   it('returns the directly sourced population for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectPopulationDirectlySourced(ent)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityPopulationDirectlySourced(ent)]),
     );
     expect(results).toEqual({
       '001': 50000,
@@ -79,10 +79,10 @@ describe('getObjectPopulationDirectlySourced', () => {
   });
 });
 
-describe('getObjectPopulationOfDescendants', () => {
+describe('getEntityPopulationOfDescendants', () => {
   it('returns population of descendants for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectPopulationOfDescendants(ent)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityPopulationOfDescendants(ent)]),
     );
     expect(results).toEqual({
       '001': undefined,
@@ -110,12 +110,12 @@ describe('getObjectPopulationOfDescendants', () => {
   });
 });
 
-describe('getObjectPercentOfTerritoryPopulation', () => {
+describe('getEntityPercentOfTerritoryPopulation', () => {
   it('returns percent of territory population for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getObjectPercentOfTerritoryPopulation(ent)?.toFixed(1),
+        getEntityPercentOfTerritoryPopulation(ent)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({
@@ -144,12 +144,12 @@ describe('getObjectPercentOfTerritoryPopulation', () => {
   });
 });
 
-describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
+describe('getEntityPopulationPercentInBiggestDescendantLanguage', () => {
   it('returns population percent in biggest descendant language for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getObjectPopulationPercentInBiggestDescendantLanguage(ent)?.toFixed(1),
+        getEntityPopulationPercentInBiggestDescendantLanguage(ent)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({
@@ -178,12 +178,12 @@ describe('getObjectPopulationPercentInBiggestDescendantLanguage', () => {
   });
 });
 
-describe('getObjectPopulationRelativeToOverallLanguageSpeakers', () => {
+describe('getEntityPopulationRelativeToOverallLanguageSpeakers', () => {
   it('returns population relative to overall language speakers for entities', () => {
     const results = Object.fromEntries(
       Object.values(mockedEnts).map((ent) => [
         ent.ID,
-        getObjectPopulationRelativeToOverallLanguageSpeakers(ent)?.toFixed(1),
+        getEntityPopulationRelativeToOverallLanguageSpeakers(ent)?.toFixed(1),
       ]),
     );
     expect(results).toEqual({

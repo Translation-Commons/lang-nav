@@ -1,11 +1,11 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType } from '@features/params/PageParamTypes';
 
-import getObjectFromID from '../lib/getObjectFromID';
+import getEntityFromID from '../lib/getEntityFromID';
 
-const ObjectSuggestions: React.FC<{ entityType: EntityType }> = ({ entityType }) => {
+const EntitySuggestions: React.FC<{ entityType: EntityType }> = ({ entityType }) => {
   return (
     <div
       style={{
@@ -17,14 +17,14 @@ const ObjectSuggestions: React.FC<{ entityType: EntityType }> = ({ entityType })
         marginTop: '1em',
       }}
     >
-      {getObjectIDs(entityType).map((id) => (
-        <HoverableObjectName key={id} ent={getObjectFromID(id)} format="button" />
+      {getEntityIDs(entityType).map((id) => (
+        <HoverableEntityName key={id} ent={getEntityFromID(id)} format="button" />
       ))}
     </div>
   );
 };
 
-function getObjectIDs(entityType: EntityType): string[] {
+function getEntityIDs(entityType: EntityType): string[] {
   switch (entityType) {
     case EntityType.Census:
       return ['ca2021.1', 'ca2021.4', 'in2011c16.1', 'in2011c17.4'];
@@ -50,4 +50,4 @@ function getObjectIDs(entityType: EntityType): string[] {
   }
 }
 
-export default ObjectSuggestions;
+export default EntitySuggestions;

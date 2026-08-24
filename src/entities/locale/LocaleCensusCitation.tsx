@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
@@ -33,9 +33,9 @@ const LocaleCensusCitation: React.FC<Props> = ({ locale, focus, size = 'full' })
 const CensusCitation: React.FC<{ census: CensusData }> = ({ census }) => {
   const { yearCollected, collector, presenter } = census;
   return (
-    <HoverableObject ent={census}>
+    <HoverableEntity ent={census}>
       {collector?.codeDisplay ?? presenter?.codeDisplay ?? 'Unknown'} {yearCollected}
-    </HoverableObject>
+    </HoverableEntity>
   );
 };
 

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 import { EntityType } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';
 import {
@@ -21,8 +21,8 @@ describe('getApplicableFields', () => {
     });
   });
 
-  it('Check that all possible Fields are returned for each object type. Literally, if a field is not returned by getApplicableFields intersected with object type, then getField should not return a truthy value for it.', () => {
-    const mockedEnts = getFullyInstantiatedMockedObjects();
+  it('Check that all possible Fields are returned for each entity type. Literally, if a field is not returned by getApplicableFields intersected with entity type, then getField should not return a truthy value for it.', () => {
+    const mockedEnts = getFullyInstantiatedMockedEntities();
 
     Object.values(EntityType).forEach((entityType) => {
       const entsInType = Object.values(mockedEnts).filter((ent) => ent.type === entityType);

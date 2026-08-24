@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { LangNavPageName } from '@app/PageRoutes';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
@@ -83,7 +83,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
                 <td>
                   <CommaSeparated>
                     {resultsByField[field].examples.map((example, index) => (
-                      <HoverableObjectName key={index} ent={example} labelSource="code" />
+                      <HoverableEntityName key={index} ent={example} labelSource="code" />
                     ))}
                   </CommaSeparated>
                 </td>

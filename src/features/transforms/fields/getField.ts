@@ -8,26 +8,26 @@ import {
   getCountOfVariants,
   getCountOfWritingSystems,
   getDepth,
-  getObjectDateAsNumber,
-  getObjectLiteracy,
-  getObjectMostImportantLanguageName,
-  getWritingSystemsInObject,
-} from '@entities/lib/getObjectMiscFields';
+  getEntityDateAsNumber,
+  getEntityLiteracy,
+  getEntityMostImportantLanguageName,
+  getWritingSystemsInEntity,
+} from '@entities/lib/getEntityMiscFields';
 import {
-  getObjectPercentOfTerritoryPopulation,
-  getObjectPopulation,
-  getObjectPopulationDirectlySourced,
-  getObjectPopulationOfDescendants,
-  getObjectPopulationPercentInBiggestDescendantLanguage,
-  getObjectPopulationRelativeToOverallLanguageSpeakers,
-  getObjectPopulationSpeaking,
-  getObjectPopulationWriting,
-} from '@entities/lib/getObjectPopulation';
+  getEntityPercentOfTerritoryPopulation,
+  getEntityPopulation,
+  getEntityPopulationDirectlySourced,
+  getEntityPopulationOfDescendants,
+  getEntityPopulationPercentInBiggestDescendantLanguage,
+  getEntityPopulationRelativeToOverallLanguageSpeakers,
+  getEntityPopulationSpeaking,
+  getEntityPopulationWriting,
+} from '@entities/lib/getEntityPopulation';
 import {
   getContainingTerritories,
   getCountOfChildTerritories,
   getCountOfCountries,
-} from '@entities/lib/getObjectRelatedTerritories';
+} from '@entities/lib/getEntityRelatedTerritories';
 import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -60,7 +60,7 @@ function getField(ent: EntityData, field: Field): string | number | undefined {
     case Field.Depth:
       return getDepth(ent);
     case Field.Literacy:
-      return getObjectLiteracy(ent);
+      return getEntityLiteracy(ent);
 
     case Field.Coordinates: // Not for sorting, only for display
       return (ent.type === EntityType.Language || ent.type === EntityType.Territory) &&
@@ -118,11 +118,11 @@ function getField(ent: EntityData, field: Field): string | number | undefined {
 
     // Related entities
     case Field.Language:
-      return getObjectMostImportantLanguageName(ent);
+      return getEntityMostImportantLanguageName(ent);
     case Field.LanguageFamily:
       return getRootLanguageFamilyForEntity(ent)?.nameDisplay;
     case Field.WritingSystem:
-      return getWritingSystemsInObject(ent)?.[0]?.nameDisplay;
+      return getWritingSystemsInEntity(ent)?.[0]?.nameDisplay;
     case Field.OutputScript:
       return getKeyboardForEntity(ent)?.outputWritingSystem?.nameDisplay;
     case Field.Region:
@@ -156,21 +156,21 @@ function getField(ent: EntityData, field: Field): string | number | undefined {
 
     // Population
     case Field.Population:
-      return getObjectPopulation(ent);
+      return getEntityPopulation(ent);
     case Field.PopulationDirectlySourced:
-      return getObjectPopulationDirectlySourced(ent);
+      return getEntityPopulationDirectlySourced(ent);
     case Field.PopulationSpeaking:
-      return getObjectPopulationSpeaking(ent);
+      return getEntityPopulationSpeaking(ent);
     case Field.PopulationWriting:
-      return getObjectPopulationWriting(ent);
+      return getEntityPopulationWriting(ent);
     case Field.PopulationOfDescendants:
-      return getObjectPopulationOfDescendants(ent);
+      return getEntityPopulationOfDescendants(ent);
     case Field.PopulationPercentInBiggestDescendantLanguage:
-      return getObjectPopulationPercentInBiggestDescendantLanguage(ent);
+      return getEntityPopulationPercentInBiggestDescendantLanguage(ent);
     case Field.PercentOfTerritoryPopulation:
-      return getObjectPercentOfTerritoryPopulation(ent);
+      return getEntityPercentOfTerritoryPopulation(ent);
     case Field.PercentOfOverallLanguageSpeakers:
-      return getObjectPopulationRelativeToOverallLanguageSpeakers(ent);
+      return getEntityPopulationRelativeToOverallLanguageSpeakers(ent);
 
     // Vitality
     case Field.VitalityMetascore:
@@ -185,7 +185,7 @@ function getField(ent: EntityData, field: Field): string | number | undefined {
       return getLanguageForEntity(ent)?.modality;
 
     case Field.Date:
-      return getObjectDateAsNumber(ent);
+      return getEntityDateAsNumber(ent);
 
     case Field.Description:
       return ent.type === EntityType.Variant ? ent.description : undefined;

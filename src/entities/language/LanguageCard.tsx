@@ -8,8 +8,8 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntitySubtitle from '@entities/ui/EntitySubtitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
 import { uniqueBy } from '@shared/lib/setUtils';
@@ -35,8 +35,8 @@ const LanguageCard: React.FC<Props> = ({ lang }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle ent={lang} />
-        <ObjectSubtitle ent={lang} />
+        <EntityTitle ent={lang} />
+        <EntitySubtitle ent={lang} />
       </div>
 
       <CardField

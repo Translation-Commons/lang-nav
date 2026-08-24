@@ -1,23 +1,23 @@
 import React from 'react';
 
 import ResizablePanel from '@widgets/controls/ResizablePanel';
-import ObjectPath from '@widgets/pathnav/ObjectPath';
+import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import usePageParams from '@features/params/usePageParams';
 
-import getObjectFromID from '@entities/lib/getObjectFromID';
+import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntitySubtitle from '@entities/ui/EntitySubtitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
-const ObjectDetails = React.lazy(() => import('../ObjectDetails'));
+const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
 const DetailsPanel: React.FC = () => {
   const { entID, entityType, updatePageParams } = usePageParams();
-  const ent = getObjectFromID(entID);
+  const ent = getEntityFromID(entID);
 
   return (
     <ResizablePanel
@@ -29,9 +29,11 @@ const DetailsPanel: React.FC = () => {
     >
       <DetailsBody>
         <PathContainer style={{ marginTop: '0.5em' }}>
-          <ObjectPath ent={ent} />
+          <EntityPath ent={ent} />
         </PathContainer>
-        <ContainErrorsAndSuspense>{ent && <ObjectDetails ent={ent} />}</ContainErrorsAndSuspense>
+        <ContainErrorsAndSuspense>
+          {ent && <EntityDetailsBody ent={ent} />}
+        </ContainErrorsAndSuspense>
         {!ent && (
           <>
             In the comparison view, select a {entityType.toLowerCase()} by clicking on its name to
@@ -47,8 +49,8 @@ const DetailsTitle: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   if (!ent) return 'Details';
   return (
     <div>
-      <ObjectTitle ent={ent} highlightSearchMatches={false} />
-      <ObjectSubtitle ent={ent} highlightSearchMatches={false} />
+      <EntityTitle ent={ent} highlightSearchMatches={false} />
+      <EntitySubtitle ent={ent} highlightSearchMatches={false} />
     </div>
   );
 };

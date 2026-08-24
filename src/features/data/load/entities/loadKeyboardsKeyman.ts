@@ -6,10 +6,10 @@ import {
   KeyboardPlatform,
 } from '@entities/keyboard/KeyboardTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadKeyboardsKeyman(): Promise<KeyboardDictionary | void> {
-  return await loadObjectsFromFile<KeyboardData>(
+  return await loadEntitiesFromFile<KeyboardData>(
     'data/keyman/keyboards.tsv',
     parseKeyboardKeymanLine,
   );

@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 
-import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
+import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
-import { getContainingTerritories } from '@entities/lib/getObjectRelatedTerritories';
+import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
+import { getContainingTerritories } from '@entities/lib/getEntityRelatedTerritories';
 import { EntityData } from '@entities/types/DataTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -80,14 +80,14 @@ export function buildFilterByWritingSystem(writingSystemFilter: string): FilterF
 
   return (ent: EntityData) => {
     if (!writingSystemFilter) return true;
-    const scripts = getWritingSystemsRelevantToObject(ent);
+    const scripts = getWritingSystemsRelevantToEntity(ent);
     if (codeMatch !== '') return scripts.some((ws) => ws.codeDisplay === codeMatch);
     return scripts.some((ws) => ws.nameDisplay.toLowerCase().startsWith(nameMatch));
   };
 }
 
-// Similar to getObjectMiscFields's getWritingSystemsInObject, but includes parents not children
-export function getWritingSystemsRelevantToObject(ent: EntityData): WritingSystemData[] {
+// Similar to getEntityMiscFields's getWritingSystemsInEntity, but includes parents not children
+export function getWritingSystemsRelevantToEntity(ent: EntityData): WritingSystemData[] {
   switch (ent.type) {
     case EntityType.Territory:
       return uniqueBy(
@@ -106,7 +106,7 @@ export function getWritingSystemsRelevantToObject(ent: EntityData): WritingSyste
     case EntityType.Language:
     case EntityType.Variant:
       // Same functionality
-      return getWritingSystemsInObject(ent) ?? [];
+      return getWritingSystemsInEntity(ent) ?? [];
     case EntityType.Census:
       return []; // Not easy to get
     case EntityType.Keyboard:
@@ -133,7 +133,7 @@ export function buildFilterByLanguage(languageFilter: string): FilterFunctionTyp
 
   return (ent: EntityData) => {
     if (!languageFilter) return true;
-    const langs = getLanguagesRelevantToObject(ent);
+    const langs = getLanguagesRelevantToEntity(ent);
     if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
     return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
   };
@@ -153,13 +153,13 @@ export function buildFilterByLanguageFamily(languageFamilyFilter: string): Filte
 
   return (ent: EntityData) => {
     if (!languageFamilyFilter) return true;
-    const langs = getLanguageFamiliesRelevantToObject(ent);
+    const langs = getLanguageFamiliesRelevantToEntity(ent);
     if (codeMatch !== '') return langs.some((lang) => lang.codeDisplay === codeMatch);
     return langs.some((lang) => lang.nameDisplay.toLowerCase().startsWith(nameMatch));
   };
 }
 
-export function getLanguagesRelevantToObject(ent: EntityData): LanguageData[] {
+export function getLanguagesRelevantToEntity(ent: EntityData): LanguageData[] {
   switch (ent.type) {
     case EntityType.Territory:
       return uniqueBy(
@@ -175,7 +175,7 @@ export function getLanguagesRelevantToObject(ent: EntityData): LanguageData[] {
       return []; // Not easy to get
     case EntityType.Language:
       // gets the language family
-      return [...(getObjectParents(ent) as LanguageData[]), ent].filter((lang) => !!lang);
+      return [...(getEntityParents(ent) as LanguageData[]), ent].filter((lang) => !!lang);
     case EntityType.WritingSystem:
       return Object.values(ent.languages ?? {});
     case EntityType.Variant:
@@ -190,7 +190,7 @@ export function getLanguagesRelevantToObject(ent: EntityData): LanguageData[] {
   }
 }
 
-export function getLanguageFamiliesRelevantToObject(ent: EntityData): LanguageData[] {
+export function getLanguageFamiliesRelevantToEntity(ent: EntityData): LanguageData[] {
   switch (ent.type) {
     case EntityType.Territory:
       return uniqueBy(
@@ -204,10 +204,10 @@ export function getLanguageFamiliesRelevantToObject(ent: EntityData): LanguageDa
         (lang) => lang.ID,
       );
     case EntityType.Locale:
-      return ent.language ? getLanguageFamiliesRelevantToObject(ent.language) : [];
+      return ent.language ? getLanguageFamiliesRelevantToEntity(ent.language) : [];
     case EntityType.Language:
       // gets the language family
-      return [...(getObjectParents(ent) as LanguageData[]), ent].filter((lang) => !!lang);
+      return [...(getEntityParents(ent) as LanguageData[]), ent].filter((lang) => !!lang);
     case EntityType.WritingSystem:
       return Object.values(ent.languages ?? {});
     case EntityType.Census:

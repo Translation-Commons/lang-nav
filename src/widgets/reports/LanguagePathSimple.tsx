@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 
@@ -15,7 +15,7 @@ const LanguagePath: React.FC<{
         return (
           <React.Fragment key={positionInCycle}>
             {positionInCycle > 0 && ' > '}
-            <HoverableObjectName ent={lang} />
+            <HoverableEntityName ent={lang} />
           </React.Fragment>
         );
       })}

@@ -29,7 +29,7 @@ const LocalParamsProvider: React.FC<{
         return nextParams;
       });
       if (newParams.entID) {
-        // Keep the global entID in sync so that object name links can update the details panel
+        // Keep the global entID in sync so that entity name links can update the details panel
         globalParams.updatePageParams({ entID: newParams.entID });
       }
     },

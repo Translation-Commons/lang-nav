@@ -24,17 +24,17 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
     });
   }, [isPinned, pinned, ent.ID, updatePageParams]);
 
-  const openObject = useCallback(() => {
+  const openEntity = useCallback(() => {
     if (ent) updatePageParams({ entID: ent.ID });
   }, [ent, updatePageParams]);
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      // Don't open the object if the user clicked on an interactive element inside the card (e.g. a button or link).
+      // Don't open the entity if the user clicked on an interactive element inside the card (e.g. a button or link).
       const target = event.target as HTMLElement | null;
       if (target && target.closest('button,a,input,select,textarea')) return;
-      openObject();
+      openEntity();
     },
-    [openObject],
+    [openEntity],
   );
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -42,13 +42,13 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
       const target = event.target as HTMLElement | null;
       if (target && target.closest('button,a,input,select,textarea')) return;
 
-      // Allow opening the object by pressing Enter or Space when the card is focused,
+      // Allow opening the entity by pressing Enter or Space when the card is focused,
       if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
         event.preventDefault();
-        openObject();
+        openEntity();
       }
     },
-    [openObject],
+    [openEntity],
   );
 
   return (

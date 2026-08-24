@@ -2,7 +2,7 @@ import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
@@ -163,13 +163,13 @@ const PotentialLocalesTable: React.FC<{
       columns={[
         {
           key: 'Potential Locale',
-          render: (ent) => <HoverableObjectName ent={ent} labelSource="code" />,
+          render: (ent) => <HoverableEntityName ent={ent} labelSource="code" />,
           field: Field.Code,
         },
         {
           key: 'Language',
           render: (ent) =>
-            ent.language ? <HoverableObjectName ent={ent.language} /> : ent.languageCode,
+            ent.language ? <HoverableEntityName ent={ent.language} /> : ent.languageCode,
           field: Field.Name,
         },
         {
@@ -202,7 +202,7 @@ const PotentialLocalesTable: React.FC<{
         {
           key: 'Related Locale',
           render: (ent) => (
-            <HoverableObjectName ent={ent.relatedLocales?.childLanguages?.[0]} labelSource="code" />
+            <HoverableEntityName ent={ent.relatedLocales?.childLanguages?.[0]} labelSource="code" />
           ),
         },
         {

@@ -12,11 +12,11 @@ import useFilters from '../filtering/useFilters';
 
 import getSearchableField from './getSearchableField';
 import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
-import HighlightedObjectField from './HighlightedObjectField';
+import HighlightedEntityField from './HighlightedEntityField';
 
 export default function useSearchSuggestions(): (query: string) => Promise<Suggestion[]> {
   const { searchBy } = usePageParams();
-  const pageObjects = useEntities();
+  const pageEntities = useEntities();
   const filterBy = useFilters();
   const filterLabels = getFilterLabels();
 
@@ -57,13 +57,13 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const getSuggestions = useCallback(
     async (query: string) => {
       const substringFilter = getSubstringFilterOnQuery(query, searchBy);
-      return (pageObjects || [])
+      return (pageEntities || [])
         .filter(substringFilter)
         .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
         .slice(0, SUGGESTION_LIMIT)
         .map((ent) => {
           const label = (
-            <HighlightedObjectField
+            <HighlightedEntityField
               ent={ent}
               field={searchBy}
               query={query}
@@ -74,7 +74,7 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
           return { entID: ent.ID, searchString, label, group: getMatchGroup(ent) };
         });
     },
-    [pageObjects, searchBy, getMatchDistance, getMatchGroup],
+    [pageEntities, searchBy, getMatchDistance, getMatchGroup],
   );
 
   return getSuggestions;

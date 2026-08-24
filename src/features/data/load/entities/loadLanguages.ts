@@ -8,10 +8,10 @@ import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
 
 import { getModalityFromLabel } from '@strings/LanguageModalityStrings';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadLanguages(): Promise<LanguageDictionary | void> {
-  return await loadObjectsFromFile<LanguageData>('data/tc/languages.tsv', parseLanguageLine);
+  return await loadEntitiesFromFile<LanguageData>('data/tc/languages.tsv', parseLanguageLine);
 }
 
 function parseLanguageLine(line: string): LanguageData {

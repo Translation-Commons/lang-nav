@@ -7,7 +7,7 @@ import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { EntityData } from '@entities/types/DataTypes';
-import ObjectCard from '@entities/ui/ObjectCard';
+import EntityCard from '@entities/ui/EntityCard';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -33,7 +33,7 @@ const CardList: React.FC = () => {
         <ResponsiveGrid>
           {currentEntities.map((ent) => (
             <CardInCardList key={ent.ID} getBackgroundColor={getColor} ent={ent}>
-              <ObjectCard ent={ent} />
+              <EntityCard ent={ent} />
             </CardInCardList>
           ))}
         </ResponsiveGrid>

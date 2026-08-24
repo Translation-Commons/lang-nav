@@ -1,6 +1,6 @@
 import { getDefaultParams } from '@features/params/Profiles';
 
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
+import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
 import { EntityData } from '@entities/types/DataTypes';
 
 import { FilterFunctionType } from './filter';
@@ -18,7 +18,7 @@ export function buildFilterByPopulation(
     return () => true;
 
   return (ent: EntityData): boolean => {
-    const population = getObjectPopulation(ent) ?? -1; // treat undefined population as -1 for optional filtering
+    const population = getEntityPopulation(ent) ?? -1; // treat undefined population as -1 for optional filtering
     return population >= populationMin && population <= populationUpperBound;
   };
 }

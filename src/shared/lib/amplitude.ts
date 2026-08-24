@@ -125,7 +125,7 @@ export function trackFilterChanged(
   trackEvent('explore_filter_changed', props);
 }
 
-export function trackDetailViewed(props: ExploreBaseProps & { object_id: string }) {
+export function trackDetailViewed(props: ExploreBaseProps & { entity_id: string }) {
   trackEvent('explore_detail_viewed', props);
 }
 

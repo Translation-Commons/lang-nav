@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
@@ -45,7 +45,7 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
           EndonymColumn,
           {
             key: 'Language',
-            render: (loc) => <HoverableObjectName ent={loc} labelSource="language" />,
+            render: (loc) => <HoverableEntityName ent={loc} labelSource="language" />,
             field: Field.Name,
           },
           {

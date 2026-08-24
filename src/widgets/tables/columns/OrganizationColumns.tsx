@@ -1,5 +1,5 @@
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
@@ -16,13 +16,13 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
     EndonymColumn,
     {
       key: 'Headquarters',
-      render: (ent) => <HoverableObjectName ent={ent.headquarters} />,
+      render: (ent) => <HoverableEntityName ent={ent.headquarters} />,
       exportValue: (ent) => ent.headquarters?.ID ?? '',
       field: Field.Territory,
     },
     {
       key: 'Parent Organization',
-      render: (ent) => <HoverableObjectName ent={ent.parent} />,
+      render: (ent) => <HoverableEntityName ent={ent.parent} />,
       exportValue: (ent) => ent.parent?.ID ?? '',
       isInitiallyVisible: false,
     },
@@ -32,7 +32,7 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
         ent.censuses && ent.censuses.length > 0 ? (
           <HoverableEnumeration
             items={ent.censuses.map((doc) => (
-              <HoverableObjectName key={doc.ID} ent={doc} />
+              <HoverableEntityName key={doc.ID} ent={doc} />
             ))}
             limit={5}
           />

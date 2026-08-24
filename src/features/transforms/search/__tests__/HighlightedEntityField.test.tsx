@@ -5,16 +5,16 @@ import { SearchableField } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
 
-import HighlightedObjectField from '../HighlightedObjectField';
+import HighlightedEntityField from '../HighlightedEntityField';
 
 const mockedLanguage = getBaseLanguageData('en', 'English');
 mockedLanguage.nameEndonym = 'ENGLISH';
 mockedLanguage.names = ['English', 'Anglais', 'Inglés', 'Englisch', 'Inglese'];
 
-describe('HighlightedObjectField', () => {
+describe('HighlightedEntityField', () => {
   it('renders highlighted text', () => {
     render(
-      <HighlightedObjectField
+      <HighlightedEntityField
         ent={mockedLanguage}
         field={SearchableField.NameDisplay}
         query="Eng"
@@ -28,7 +28,7 @@ describe('HighlightedObjectField', () => {
 
   it('renders highlighted that contained accent marks', () => {
     render(
-      <HighlightedObjectField ent={mockedLanguage} field={SearchableField.NameAny} query="Ingle" />,
+      <HighlightedEntityField ent={mockedLanguage} field={SearchableField.NameAny} query="Ingle" />,
     );
     // There is no component with "Inglés" because it is split into two spans
     expect(screen.queryByText('Inglés')).not.toBeInTheDocument();

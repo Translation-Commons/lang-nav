@@ -2,7 +2,7 @@ import React from 'react';
 
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
 
@@ -41,7 +41,7 @@ const LocalePopulationBreakdownAdjusted: React.FC<{
           <td>Source</td>
           <td colSpan={2} style={{ textAlign: 'right' }}>
             {census ? (
-              <HoverableObjectName ent={census} />
+              <HoverableEntityName ent={census} />
             ) : (
               <Deemphasized>No citation</Deemphasized>
             )}

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
@@ -45,7 +45,7 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
         >
           <CommaSeparated>
             {languages.map((lang) => (
-              <HoverableObjectName key={lang.ID} ent={lang} />
+              <HoverableEntityName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         </CardField>
@@ -62,12 +62,12 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
           }
         >
           {sameScript ? (
-            <HoverableObjectName ent={inputWritingSystem} />
+            <HoverableEntityName ent={inputWritingSystem} />
           ) : (
             <>
-              <HoverableObjectName ent={inputWritingSystem} />
+              <HoverableEntityName ent={inputWritingSystem} />
               {' → '}
-              {outputWritingSystem != null && <HoverableObjectName ent={outputWritingSystem} />}
+              {outputWritingSystem != null && <HoverableEntityName ent={outputWritingSystem} />}
             </>
           )}
         </CardField>
@@ -80,8 +80,8 @@ const KeyboardCard: React.FC<Props> = ({ keyboard }) => {
           description="Territory or variant that further specifies this keyboard layout."
         >
           <CommaSeparated>
-            {territory != null && <HoverableObjectName ent={territory} />}
-            {variant != null && <HoverableObjectName ent={variant} />}
+            {territory != null && <HoverableEntityName ent={territory} />}
+            {variant != null && <HoverableEntityName ent={variant} />}
           </CommaSeparated>
         </CardField>
       )}

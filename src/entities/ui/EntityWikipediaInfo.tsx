@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import {
@@ -13,7 +13,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
-const ObjectWikipediaInfo: React.FC<{ ent: EntityData }> = ({ ent }) => {
+const EntityWikipediaInfo: React.FC<{ ent: EntityData }> = ({ ent }) => {
   if (ent?.type !== EntityType.Language && ent?.type !== EntityType.Locale) return null;
 
   // If the entity doesn't have a direct wikipedia, then we may be able to find the status
@@ -41,7 +41,7 @@ export const WikipediaStatusDisplay: React.FC<{ ent?: EntityData }> = ({ ent }) 
       return (
         <>
           <WikipediaStatusDisplay ent={ent.language} /> (see{' '}
-          <HoverableObjectName ent={ent.language} labelSource="code" />)
+          <HoverableEntityName ent={ent.language} labelSource="code" />)
         </>
       );
     }
@@ -97,4 +97,4 @@ export function getStatusColor(status: WikipediaStatus) {
   }
 }
 
-export default ObjectWikipediaInfo;
+export default EntityWikipediaInfo;

@@ -99,7 +99,7 @@ export default function useAmplitudeParamEvents() {
     const prevID = previous.entID;
     const nextID = current.entID;
     if (prevID == null && nextID != null) {
-      trackDetailViewed({ ...base, object_id: nextID });
+      trackDetailViewed({ ...base, entity_id: nextID });
     } else if (prevID != null && nextID != null && prevID !== nextID) {
       trackDetailSwitched({ ...base, ent: nextID, previous_ent: prevID });
     }

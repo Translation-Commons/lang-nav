@@ -41,7 +41,7 @@ const LuckySearchPageBody: React.FC = () => {
 
     const directMatch = getLanguage(searchString);
     if (directMatch) {
-      // Navigate to data page with the exact object ID
+      // Navigate to data page with the exact entity ID
       navigate(`/data?searchString=${encodeURIComponent(searchString)}&entID=${directMatch.ID}`);
       return;
     }

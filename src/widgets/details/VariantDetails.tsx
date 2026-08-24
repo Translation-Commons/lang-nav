@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { VariantData } from '@entities/variant/VariantTypes';
 
@@ -68,7 +68,7 @@ const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant
         <DetailsField title="Languages">
           <CommaSeparated>
             {Object.values(languages).map((lang) => (
-              <HoverableObjectName key={lang.ID} ent={lang} />
+              <HoverableEntityName key={lang.ID} ent={lang} />
             ))}
           </CommaSeparated>
         </DetailsField>
@@ -77,14 +77,14 @@ const VariantConnectionsSection: React.FC<{ variant: VariantData }> = ({ variant
         <DetailsField title="Locales">
           <CommaSeparated>
             {Object.values(locales).map((locale) => (
-              <HoverableObjectName key={locale.ID} ent={locale} />
+              <HoverableEntityName key={locale.ID} ent={locale} />
             ))}
           </CommaSeparated>
         </DetailsField>
       )}
       {equivalentLanguage && equivalentLanguage.ID !== 'mis' && (
         <DetailsField title="Equivalent Language">
-          <HoverableObjectName ent={equivalentLanguage} />
+          <HoverableEntityName ent={equivalentLanguage} />
         </DetailsField>
       )}
     </DetailsSection>

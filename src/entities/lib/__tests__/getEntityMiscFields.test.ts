@@ -5,24 +5,24 @@
 
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 
 import {
   getCountOfCensuses,
   getCountOfLanguages,
   getCountOfWritingSystems,
   getDepth,
-  getObjectDate,
-  getObjectLiteracy,
-  getObjectMostImportantLanguageName,
-} from '@entities/lib/getObjectMiscFields';
+  getEntityDate,
+  getEntityLiteracy,
+  getEntityMostImportantLanguageName,
+} from '@entities/lib/getEntityMiscFields';
 
-const mockedEnts = getFullyInstantiatedMockedObjects();
+const mockedEnts = getFullyInstantiatedMockedEntities();
 
-describe('getObjectLiteracy', () => {
+describe('getEntityLiteracy', () => {
   it('returns literacy for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectLiteracy(ent)?.toFixed(1)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityLiteracy(ent)?.toFixed(1)]),
     );
     expect(results).toEqual({
       '001': '96.2', // averaged from Aman & Middle Earth by computeContainedTerritoryStats
@@ -50,10 +50,10 @@ describe('getObjectLiteracy', () => {
   });
 });
 
-describe('getObjectMostImportantLanguageName', () => {
+describe('getEntityMostImportantLanguageName', () => {
   it('returns most important language name for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectMostImportantLanguageName(ent)]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityMostImportantLanguageName(ent)]),
     );
     expect(results).toEqual({
       '001': 'Sindarin',
@@ -81,10 +81,10 @@ describe('getObjectMostImportantLanguageName', () => {
   });
 });
 
-describe('getObjectDate', () => {
+describe('getEntityDate', () => {
   it('returns date for entities', () => {
     const results = Object.fromEntries(
-      Object.values(mockedEnts).map((ent) => [ent.ID, getObjectDate(ent)?.toISOString()]),
+      Object.values(mockedEnts).map((ent) => [ent.ID, getEntityDate(ent)?.toISOString()]),
     );
     expect(results).toEqual({
       '001': undefined,

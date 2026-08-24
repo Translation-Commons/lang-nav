@@ -131,11 +131,11 @@ describe('useAmplitudeParamEvents', () => {
     render(<Harness initialURL="/data" />);
     go('/data?entID=zho');
     expect(trackers.detailViewed).toHaveBeenCalledTimes(1);
-    expect(trackers.detailViewed.mock.calls[0][0]).toMatchObject({ object_id: 'zho' });
+    expect(trackers.detailViewed.mock.calls[0][0]).toMatchObject({ entity_id: 'zho' });
     expect(trackers.detailSwitched).not.toHaveBeenCalled();
   });
 
-  it('emits explore_detail_switched with object and previous_object when entID changes', () => {
+  it('emits explore_detail_switched with ent and previous_ent when entID changes', () => {
     render(<Harness initialURL="/data?entID=zho" />);
     go('/data?entID=spa');
     expect(trackers.detailSwitched).toHaveBeenCalledTimes(1);

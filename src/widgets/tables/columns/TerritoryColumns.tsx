@@ -1,19 +1,19 @@
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import { ExportTerritoryLanguageDataButton } from '@features/table/UNESCOExport';
 import Field from '@features/transforms/fields/Field';
-import { getLanguageFamiliesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
+import { getLanguageFamiliesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
 
 import CensusCountForTerritory from '@entities/census/CensusCountForTerritory';
-import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
+import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
 import {
   getTerritoryBiggestLocale,
   getTerritoryChildren,
   getTerritoryCountries,
-} from '@entities/lib/getObjectRelatedTerritories';
+} from '@entities/lib/getEntityRelatedTerritories';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
@@ -94,7 +94,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       render: (ent) =>
         ent.locales &&
         ent.locales.length > 0 && (
-          <HoverableObjectName labelSource="language" ent={getTerritoryBiggestLocale(ent)} />
+          <HoverableEntityName labelSource="language" ent={getTerritoryBiggestLocale(ent)} />
         ),
       isInitiallyVisible: false,
       field: Field.Language,
@@ -111,10 +111,10 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       key: 'Language Families',
       render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {getLanguageFamiliesRelevantToObject(ent)
+          {getLanguageFamiliesRelevantToEntity(ent)
             ?.filter((lf) => lf.parentLanguage == null)
             .map((lf) => (
-              <HoverableObjectName key={lf.ID} ent={lf} />
+              <HoverableEntityName key={lf.ID} ent={lf} />
             ))}
         </CommaSeparated>
       ),
@@ -126,7 +126,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       render: (ent) => (
         <HoverableEnumeration
           items={
-            getLanguageFamiliesRelevantToObject(ent)
+            getLanguageFamiliesRelevantToEntity(ent)
               ?.filter((lf) => lf.parentLanguage == null)
               .map((ws) => ws.nameDisplay) ?? []
           }
@@ -139,7 +139,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
       key: 'Writing Systems',
       render: (ent) => (
         <HoverableEnumeration
-          items={getWritingSystemsInObject(ent)?.map((ws) => ws.nameDisplay) ?? []}
+          items={getWritingSystemsInEntity(ent)?.map((ws) => ws.nameDisplay) ?? []}
         />
       ),
       field: Field.CountOfWritingSystems,
@@ -147,7 +147,7 @@ function getTerritoryColumns(): TableColumn<TerritoryData>[] {
     },
     {
       key: 'Contained UN Region',
-      render: (ent) => <HoverableObjectName ent={ent.parentUNRegion} />,
+      render: (ent) => <HoverableEntityName ent={ent.parentUNRegion} />,
       isInitiallyVisible: false,
       field: Field.Region,
       columnGroup: 'Relations',

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
@@ -17,7 +17,7 @@ const CensusRecordsForLocale: React.FC<Props> = ({ locale }) => {
   return (
     <div>
       <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
-        <HoverableObjectName ent={locale} /> Population Records
+        <HoverableEntityName ent={locale} /> Population Records
       </h3>
       <div>
         {censusRecords.length === 0 &&
@@ -29,7 +29,7 @@ const CensusRecordsForLocale: React.FC<Props> = ({ locale }) => {
       </div>
       {censusRecords.slice(0, showAll ? censusRecords.length : 5).map((censusRecord) => (
         <div key={censusRecord.census.ID} style={{ marginLeft: '1em' }}>
-          <HoverableObjectName ent={censusRecord.census} /> (
+          <HoverableEntityName ent={censusRecord.census} /> (
           <CountOfPeople count={censusRecord.populationEstimate} />)
         </div>
       ))}

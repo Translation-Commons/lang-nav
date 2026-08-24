@@ -1,6 +1,6 @@
 import usePageParams from '@features/params/usePageParams';
 
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
+import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
 import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -132,8 +132,8 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
 }
 
 export function sortByPopulation(a: EntityData, b: EntityData): number {
-  const aPopulation = getObjectPopulation(a);
-  const bPopulation = getObjectPopulation(b);
+  const aPopulation = getEntityPopulation(a);
+  const bPopulation = getEntityPopulation(b);
   if (aPopulation == null) return bPopulation == null ? 0 : 1;
   if (bPopulation == null) return -1;
   if (aPopulation > bPopulation) return -1;

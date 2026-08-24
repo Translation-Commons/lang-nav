@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -10,7 +10,7 @@ type Props = {
   highlightSearchMatches?: boolean;
 };
 
-const ObjectTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) => {
+const EntityTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) => {
   const { codeDisplay, nameDisplay } = ent;
 
   if (!highlightSearchMatches) {
@@ -24,12 +24,12 @@ const ObjectTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) =>
   return (
     <>
       <strong>
-        <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
+        <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
       </strong>{' '}
       [
-      <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
+      <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
     </>
   );
 };
 
-export default ObjectTitle;
+export default EntityTitle;

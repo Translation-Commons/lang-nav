@@ -3,13 +3,13 @@
  * The main 3 functions are:
  * - getContainingTerritories: Returns territories that contain the ent.
  *     For example Denmark [DK] is in Northern Europe [154], Europe [150], and the World [001]
- * - getChildTerritoriesInObject: Returns child territories associated with the ent.
+ * - getChildTerritoriesInEntity: Returns child territories associated with the ent.
  *     For example Denmark [DK] contains the Faroe Islands [FO] and Greenland [GL].
- * - getCountriesInObject: Returns countries associated with the ent.
+ * - getCountriesInEntity: Returns countries associated with the ent.
  *     For example Denmark [DK] contains itself as a country. Meanwhile Europe [150] contains many.
  */
 
-import { getObjectParents } from '@widgets/pathnav/getParentsAndDescendants';
+import { getEntityParents } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
@@ -39,7 +39,7 @@ export function getContainingTerritories(ent: EntityData): TerritoryData[] {
     case EntityType.Territory:
       return [
         ent,
-        ...getObjectParents(ent).filter(
+        ...getEntityParents(ent).filter(
           (t): t is TerritoryData => t?.type === EntityType.Territory,
         ),
         ent.sovereign,
@@ -70,7 +70,7 @@ export function getContainingTerritories(ent: EntityData): TerritoryData[] {
         (t) => t.ID,
       );
     case EntityType.Variant:
-      return getChildTerritoriesInObject(ent) ?? [];
+      return getChildTerritoriesInEntity(ent) ?? [];
     case EntityType.Keyboard:
       return ent.territory ? [ent.territory] : [];
     case EntityType.Org:
@@ -127,10 +127,10 @@ function getLocaleCountries(locale: LocaleData): TerritoryData[] {
 
 // Field.CountOfCountries
 export function getCountOfCountries(ent: EntityData): number | undefined {
-  return getCountriesInObject(ent)?.length;
+  return getCountriesInEntity(ent)?.length;
 }
 
-export function getCountriesInObject(ent: EntityData): TerritoryData[] | undefined {
+export function getCountriesInEntity(ent: EntityData): TerritoryData[] | undefined {
   switch (ent.type) {
     case EntityType.Territory:
       return getTerritoryCountries(ent);
@@ -144,7 +144,7 @@ export function getCountriesInObject(ent: EntityData): TerritoryData[] | undefin
     case EntityType.Keyboard:
       // Computationally a bit expensive, be careful using this application
       return uniqueBy(
-        getObjectLocales(ent)
+        getEntityLocales(ent)
           .filter((loc) => loc.territory?.scope === TerritoryScope.Country)
           .sort(sortByPopulation)
           .map((loc) => loc.territory)
@@ -158,10 +158,10 @@ export function getCountriesInObject(ent: EntityData): TerritoryData[] | undefin
 
 // Field.CountOfChildTerritories
 export function getCountOfChildTerritories(ent: EntityData): number | undefined {
-  return getChildTerritoriesInObject(ent)?.length;
+  return getChildTerritoriesInEntity(ent)?.length;
 }
 
-export function getChildTerritoriesInObject(ent: EntityData): TerritoryData[] | undefined {
+export function getChildTerritoriesInEntity(ent: EntityData): TerritoryData[] | undefined {
   switch (ent.type) {
     case EntityType.Territory:
       return getTerritoryChildren(ent);
@@ -179,12 +179,12 @@ export function getChildTerritoriesInObject(ent: EntityData): TerritoryData[] | 
     case EntityType.WritingSystem:
     case EntityType.Keyboard:
     case EntityType.Org:
-      // child territories are not well defined for this, you probably want getCountriesInObject instead
+      // child territories are not well defined for this, you probably want getCountriesInEntity instead
       return undefined;
   }
 }
 
-export function getObjectLocales(ent: EntityData): LocaleData[] {
+export function getEntityLocales(ent: EntityData): LocaleData[] {
   switch (ent.type) {
     case EntityType.Territory:
       return ent.locales ?? [];

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import { getEntitySubtitle } from '@entities/lib/getEntityName';
 import { EntityData } from '@entities/types/DataTypes';
@@ -15,7 +15,7 @@ type Props = {
   style?: React.CSSProperties;
 };
 
-const ObjectSubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true, style }) => {
+const EntitySubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true, style }) => {
   const { searchBy, searchString } = usePageParams();
   const entSubtitle = getEntitySubtitle(ent);
 
@@ -33,7 +33,7 @@ const ObjectSubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true, s
     ) {
       searchNamesSubtitle = (
         <>
-          aka <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameAny} />
+          aka <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameAny} />
         </>
       );
     }
@@ -67,4 +67,4 @@ const SubtitleContainer: React.FC<React.PropsWithChildren<{ style?: React.CSSPro
   );
 };
 
-export default ObjectSubtitle;
+export default EntitySubtitle;

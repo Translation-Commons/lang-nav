@@ -2,10 +2,10 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadOrganizations(): Promise<Record<string, OrganizationData> | void> {
-  return await loadObjectsFromFile<OrganizationData>(
+  return await loadEntitiesFromFile<OrganizationData>(
     'data/tc/organizations.tsv',
     parseOrganizationLine,
   );

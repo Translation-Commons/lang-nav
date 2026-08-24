@@ -8,7 +8,7 @@ import usePageParams from '@features/params/usePageParams';
 
 import CensusesInTerritory from '@entities/census/CensusesInTerritory';
 import LocalesInTerritoryCard from '@entities/locale/LocalesInTerritoryCard';
-import ObjectCard from '@entities/ui/ObjectCard';
+import EntityCard from '@entities/ui/EntityCard';
 import WritingSystemsInTerritoryCard from '@entities/writingsystem/WritingSystemsInTerritoryCard';
 
 import DrawableData from './DrawableData';
@@ -27,7 +27,7 @@ const MapCard: React.FC<{
         : { entID: drawnEntity.ID },
     );
 
-  let content: React.ReactNode = <ObjectCard ent={drawnEntity} />;
+  let content: React.ReactNode = <EntityCard ent={drawnEntity} />;
   let clickDescription = 'Open in details panel';
   if (drawnEntity.type === EntityType.Territory) {
     switch (entityType) {

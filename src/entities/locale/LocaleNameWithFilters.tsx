@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
@@ -18,9 +18,9 @@ const LocaleNameWithFilters: React.FC<{ locale: LocaleData }> = ({ locale }) => 
   const searchPattern = searchBy !== SearchableField.Code ? searchString : '';
 
   return (
-    <HoverableObject ent={locale}>
+    <HoverableEntity ent={locale}>
       <Highlightable text={name} searchPattern={searchPattern} />
-    </HoverableObject>
+    </HoverableEntity>
   );
 };
 

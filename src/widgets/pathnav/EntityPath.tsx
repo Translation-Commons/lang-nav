@@ -1,17 +1,17 @@
 import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
-import ObjectPathChildren from './ObjectPathChildren';
-import ObjectPathParents from './ObjectPathParents';
+import EntityPathChildren from './EntityPathChildren';
+import EntityPathParents from './EntityPathParents';
 
-const ObjectPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean }> = ({
+const EntityPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean }> = ({
   ent,
   showChildren = true,
 }) => {
@@ -35,9 +35,9 @@ const ObjectPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean
 
   return (
     <>
-      <ObjectPathParents ent={ent} />
+      <EntityPathParents ent={ent} />
       <ObjectName ent={ent} />
-      {showChildren && <ObjectPathChildren ent={ent} />}
+      {showChildren && <EntityPathChildren ent={ent} />}
     </>
   );
 };
@@ -51,9 +51,9 @@ const ObjectName: React.FC<{ ent?: EntityData }> = ({ ent }) => {
       ) : (
         <SlashIcon size="1em" />
       )}
-      <HoverableObjectName ent={ent} style={{ fontWeight: 'bold' }} />
+      <HoverableEntityName ent={ent} style={{ fontWeight: 'bold' }} />
     </>
   );
 };
 
-export default ObjectPath;
+export default EntityPath;

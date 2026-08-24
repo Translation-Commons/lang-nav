@@ -11,7 +11,7 @@ import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { updateObjectsBasedOnDataParams } from '../compute/updateObjectsBasedOnDataParams';
+import { updateEntitiesBasedOnDataParams } from '../compute/updateEntitiesBasedOnDataParams';
 import { useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
 
@@ -34,7 +34,7 @@ const DataProvider: React.FC<{
     loadPrimaryData();
   }, []); // this is called once after page load
 
-  const getObject = useCallback(
+  const getEntity = useCallback(
     (id: string): EntityData | undefined => coreData.ents[id],
     [coreData],
   );
@@ -95,7 +95,7 @@ const DataProvider: React.FC<{
   );
   const languagesInSelectedSource = useMemo(() => {
     // Update dependent fields whenever language source or locale separator changes
-    updateObjectsBasedOnDataParams(
+    updateEntitiesBasedOnDataParams(
       coreData.allLanguoids,
       coreData.locales,
       coreData.ents['001'] as TerritoryData, // The world territory
@@ -113,7 +113,7 @@ const DataProvider: React.FC<{
       ...coreData,
       languagesInSelectedSource,
       loadingStage: loadProgress,
-      getObject,
+      getEntity,
       getLanguage,
       getCLDRLanguage,
       getLocale,

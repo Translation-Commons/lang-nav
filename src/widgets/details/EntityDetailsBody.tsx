@@ -2,7 +2,7 @@ import React from 'react';
 
 import { EntityType } from '@features/params/PageParamTypes';
 
-import getObjectFromID from '@entities/lib/getObjectFromID';
+import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
 
 import CensusDetails from './CensusDetails';
@@ -14,13 +14,13 @@ import TerritoryDetails from './TerritoryDetails';
 import VariantDetails from './VariantDetails';
 import WritingSystemDetails from './WritingSystemDetails';
 
-// You can get the details by an object or just its ID
+// You can get the details by an entity or just its ID
 type Props = { ent?: EntityData; entID?: string };
 
-const ObjectDetails: React.FC<Props> = ({ ent, entID }) => {
+const EntityDetailsBody: React.FC<Props> = ({ ent, entID }) => {
   if (ent == null) {
     if (entID != null) {
-      return <ObjectDetails ent={getObjectFromID(entID)} />;
+      return <EntityDetailsBody ent={getEntityFromID(entID)} />;
     }
     return <></>;
   }
@@ -45,4 +45,4 @@ const ObjectDetails: React.FC<Props> = ({ ent, entID }) => {
   }
 };
 
-export default ObjectDetails;
+export default EntityDetailsBody;

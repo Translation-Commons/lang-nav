@@ -6,7 +6,7 @@ import PaginationControls from '@features/pagination/PaginationControls';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import usePageParams from '@features/params/usePageParams';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -37,7 +37,7 @@ const CensusPreview: React.FC<{ censuses: CensusData[] }> = ({ censuses }) => {
           <LocalParamsProvider overrides={{ page: 1, limit: 20 }}>
             <ContainErrorsAndSuspense>
               <h3>
-                <ObjectTitle ent={censuses[page - 1]} highlightSearchMatches={false} />
+                <EntityTitle ent={censuses[page - 1]} highlightSearchMatches={false} />
               </h3>
               <CensusDetails census={censuses[page - 1]} />
             </ContainErrorsAndSuspense>

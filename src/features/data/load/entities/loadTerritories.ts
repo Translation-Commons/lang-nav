@@ -4,10 +4,10 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadTerritories(): Promise<Record<string, TerritoryData> | void> {
-  return await loadObjectsFromFile<TerritoryData>('data/tc/territories.tsv', parseTerritoryLine);
+  return await loadEntitiesFromFile<TerritoryData>('data/tc/territories.tsv', parseTerritoryLine);
 }
 
 export function parseTerritoryLine(line: string): TerritoryData {

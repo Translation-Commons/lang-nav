@@ -2,10 +2,10 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadWritingSystems(): Promise<Record<string, WritingSystemData> | void> {
-  return await loadObjectsFromFile<WritingSystemData>(
+  return await loadEntitiesFromFile<WritingSystemData>(
     'data/tc/writingSystems.tsv',
     parseWritingSystem,
   );

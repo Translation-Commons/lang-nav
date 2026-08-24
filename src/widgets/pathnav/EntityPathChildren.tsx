@@ -7,20 +7,20 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { getDescendantsName, getObjectChildren } from './getParentsAndDescendants';
+import { getDescendantsName, getEntityChildren } from './getParentsAndDescendants';
 
 /*
- * Displays the children of an object in the path navigation.
+ * Displays the children of an entity in the path navigation.
  * If there are no children, it returns null.
  * If there are children, it displays a selector to navigate to a child ent.
  */
-const ObjectPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+const EntityPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   const { updatePageParams } = usePageParams();
   const sortFunction = getSortFunction();
   if (!ent) return null;
 
   // Get child nodes
-  const children = getObjectChildren(ent)
+  const children = getEntityChildren(ent)
     .filter((c) => c != null)
     .sort(sortFunction);
 
@@ -45,4 +45,4 @@ const ObjectPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   );
 };
 
-export default ObjectPathChildren;
+export default EntityPathChildren;

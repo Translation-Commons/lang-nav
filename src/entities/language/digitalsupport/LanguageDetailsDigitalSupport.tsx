@@ -4,7 +4,7 @@ import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
@@ -17,7 +17,7 @@ import LinkButton from '@shared/ui/LinkButton';
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 
 import { ObjectCLDRCoverageLevel, ObjectCLDRLocaleCount } from '../../ui/CLDRCoverageInfo';
-import ObjectWikipediaInfo from '../../ui/ObjectWikipediaInfo';
+import EntityWikipediaInfo from '../../ui/EntityWikipediaInfo';
 import { LanguageData } from '../LanguageTypes';
 
 import LanguageDigitalSupportMeter from './DigitalSupportMeter';
@@ -60,7 +60,7 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
       return lang.keyboards?.length ? (
         <CommaSeparated>
           {lang.keyboards.map((keyboard) => (
-            <HoverableObjectName key={keyboard.ID} ent={keyboard} />
+            <HoverableEntityName key={keyboard.ID} ent={keyboard} />
           ))}
         </CommaSeparated>
       ) : (
@@ -78,7 +78,7 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
               )
             }
           >
-            <ObjectWikipediaInfo ent={lang} />
+            <EntityWikipediaInfo ent={lang} />
           </DetailsField>
           <DetailsField title="UDHR" description={LanguageUDHRDescription}>
             <LanguageUDHRInfo lang={lang} size="long" />

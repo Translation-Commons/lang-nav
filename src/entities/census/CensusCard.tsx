@@ -1,9 +1,9 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -32,14 +32,14 @@ const CensusCard: React.FC<Props> = ({ census }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle ent={census} />
+        <EntityTitle ent={census} />
       </div>
       <CardField
         title="Territory"
         field={Field.Territory}
         description="Where this census was conducted."
       >
-        {territory != null ? <HoverableObjectName ent={territory} /> : isoRegionCode}
+        {territory != null ? <HoverableEntityName ent={territory} /> : isoRegionCode}
       </CardField>
 
       <CardField
@@ -48,11 +48,11 @@ const CensusCard: React.FC<Props> = ({ census }) => {
         description="The type of organization that collected this census and/or presented it"
       >
         <div>
-          {census.collector && <HoverableObjectName ent={census.collector} />}
+          {census.collector && <HoverableEntityName ent={census.collector} />}
           {census.presenter && (
             <>
               {' '}
-              via <HoverableObjectName ent={census.presenter} style={{ display: 'inline' }} />
+              via <HoverableEntityName ent={census.presenter} style={{ display: 'inline' }} />
             </>
           )}
         </div>

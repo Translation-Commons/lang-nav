@@ -1,12 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { getLocaleFormedHerePrediction } from '../LocaleIndigeneityPredictions';
 
 describe('getLocaleFormedHerePrediction', () => {
-  const mockedEnts = getFullyInstantiatedMockedObjects();
+  const mockedEnts = getFullyInstantiatedMockedEntities();
 
   it('predicts true for a locale in the biggest country for its language', () => {
     [mockedEnts.sjn_BE, mockedEnts.dori0123_ER, mockedEnts.sjn_Teng_BE].forEach((locale) => {

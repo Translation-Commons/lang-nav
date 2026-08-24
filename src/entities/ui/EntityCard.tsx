@@ -12,7 +12,7 @@ import { EntityData } from '@entities/types/DataTypes';
 import VariantCard from '@entities/variant/VariantCard';
 import WritingSystemCard from '@entities/writingsystem/WritingSystemCard';
 
-const ObjectCard: React.FC<{ ent: EntityData }> = ({ ent }) => {
+const EntityCard: React.FC<{ ent: EntityData }> = ({ ent }) => {
   switch (ent.type) {
     case EntityType.Census:
       return <CensusCard census={ent} />;
@@ -33,4 +33,4 @@ const ObjectCard: React.FC<{ ent: EntityData }> = ({ ent }) => {
   }
 };
 
-export default ObjectCard;
+export default EntityCard;

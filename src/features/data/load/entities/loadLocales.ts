@@ -8,10 +8,10 @@ import {
   PopulationSourceCategory,
 } from '@entities/locale/LocaleTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadLocales(): Promise<Record<string, LocaleData> | void> {
-  return await loadObjectsFromFile<LocaleData>('data/tc/locales.tsv', parseLocaleLine);
+  return await loadEntitiesFromFile<LocaleData>('data/tc/locales.tsv', parseLocaleLine);
 }
 
 export function parseLocaleLine(line: string): LocaleData | undefined {

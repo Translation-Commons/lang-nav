@@ -1,7 +1,7 @@
 import { fireEvent, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 import { EntityType, PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
@@ -23,7 +23,7 @@ vi.mock('@features/transforms/coloring/useColors', () => ({
 }));
 
 describe('CardList', () => {
-  const mockedEntities = getFullyInstantiatedMockedObjects();
+  const mockedEntities = getFullyInstantiatedMockedEntities();
   const territories = Object.values(mockedEntities)
     .filter((ent) => ent.type === EntityType.Territory)
     .sort(sortByPopulation);

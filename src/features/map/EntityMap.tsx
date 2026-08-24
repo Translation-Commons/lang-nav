@@ -7,7 +7,7 @@ import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { getObjectLocales } from '@entities/lib/getObjectRelatedTerritories';
+import { getEntityLocales } from '@entities/lib/getEntityRelatedTerritories';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -83,7 +83,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
           if (ent.type === EntityType.Locale) return ent.territory;
           if (ent.type === EntityType.Census) return ent.territory;
           if (ent.type === EntityType.WritingSystem)
-            return getObjectLocales(ent).map((l) => l.territory);
+            return getEntityLocales(ent).map((l) => l.territory);
           return undefined;
         })
         .filter((t): t is TerritoryData => t !== undefined),

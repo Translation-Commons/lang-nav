@@ -1,10 +1,10 @@
 import React, { useCallback } from 'react';
 
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -35,7 +35,7 @@ export const PinColumn: TableColumn<EntityData> = {
 
 export const CodeColumn: TableColumn<EntityData> = {
   key: 'ID',
-  render: (ent) => <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />,
+  render: (ent) => <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />,
   field: Field.Code,
   columnGroup: 'Codes',
 };
@@ -43,9 +43,9 @@ export const CodeColumn: TableColumn<EntityData> = {
 export const NameColumn: TableColumn<EntityData> = {
   key: 'Name',
   render: (ent) => (
-    <HoverableObject ent={ent} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
-      <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
-    </HoverableObject>
+    <HoverableEntity ent={ent} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
+      <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
+    </HoverableEntity>
   ),
   exportValue: (ent) => ent.nameDisplay, // avoid html escapes like &amp;
   field: Field.Name,
@@ -55,7 +55,7 @@ export const NameColumn: TableColumn<EntityData> = {
 export const EndonymColumn: TableColumn<EntityData> = {
   key: 'Endonym',
   render: (ent) => (
-    <ObjectFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameEndonym} />
+    <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameEndonym} />
   ),
   field: Field.Endonym,
   isInitiallyVisible: false,

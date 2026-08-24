@@ -4,7 +4,7 @@ import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import TableOfLanguagesInTerritory from '@widgets/tables/TableOfLanguagesInTerritory';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -38,7 +38,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
       <DetailsSection title="Connections">
         {parentUNRegion != null && (
           <DetailsField title="In UN region">
-            <HoverableObjectName ent={parentUNRegion} />
+            <HoverableEntityName ent={parentUNRegion} />
           </DetailsField>
         )}
         {containsTerritories && containsTerritories.length > 0 && (
@@ -48,7 +48,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
                 .slice()
                 .sort(sortFunction)
                 .map((territory) => (
-                  <HoverableObjectName key={territory.ID} ent={territory} />
+                  <HoverableEntityName key={territory.ID} ent={territory} />
                 ))}
             </CommaSeparated>
           </DetailsField>
@@ -56,7 +56,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
 
         {sovereign != null && (
           <DetailsField title="Administered by">
-            <HoverableObjectName ent={sovereign} />
+            <HoverableEntityName ent={sovereign} />
           </DetailsField>
         )}
         {dependentTerritories && dependentTerritories.length > 0 && (
@@ -66,7 +66,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
                 .slice()
                 .sort(sortFunction)
                 .map((territory) => (
-                  <HoverableObjectName key={territory.ID} ent={territory} />
+                  <HoverableEntityName key={territory.ID} ent={territory} />
                 ))}
             </CommaSeparated>
           </DetailsField>
@@ -79,7 +79,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
                 .slice()
                 .sort(sortFunction)
                 .map((census) => (
-                  <HoverableObjectName key={census.ID} ent={census} />
+                  <HoverableEntityName key={census.ID} ent={census} />
                 ))}
             </CommaSeparated>
           </DetailsField>
