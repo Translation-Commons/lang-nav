@@ -1,43 +1,43 @@
 import React from 'react';
 
 import ResizablePanel from '@widgets/controls/ResizablePanel';
-import ObjectPath from '@widgets/pathnav/ObjectPath';
+import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import usePageParams from '@features/params/usePageParams';
 
-import getObjectFromID from '@entities/lib/getObjectFromID';
-import { ObjectData } from '@entities/types/DataTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import getEntityFromID from '@entities/lib/getEntityFromID';
+import { EntityData } from '@entities/types/DataTypes';
+import EntitySubtitle from '@entities/ui/EntitySubtitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
-const ObjectDetails = React.lazy(() => import('../ObjectDetails'));
+const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
 const DetailsPanel: React.FC = () => {
-  const { objectID, objectType, updatePageParams } = usePageParams();
-  const object = getObjectFromID(objectID);
+  const { entID, entType, updatePageParams } = usePageParams();
+  const ent = getEntityFromID(entID);
 
   return (
     <ResizablePanel
       purpose="details"
-      isOpen={objectID != null}
+      isOpen={entID != null}
       defaultWidth={900}
-      title={<DetailsTitle object={object} />}
-      onClose={() => updatePageParams({ objectID: undefined })}
+      title={<DetailsTitle ent={ent} />}
+      onClose={() => updatePageParams({ entID: undefined })}
     >
       <DetailsBody>
         <PathContainer style={{ marginTop: '0.5em' }}>
-          <ObjectPath object={object} />
+          <EntityPath ent={ent} />
         </PathContainer>
         <ContainErrorsAndSuspense>
-          {object && <ObjectDetails object={object} />}
+          {ent && <EntityDetailsBody ent={ent} />}
         </ContainErrorsAndSuspense>
-        {!object && (
+        {!ent && (
           <>
-            In the comparison view, select a {objectType.toLowerCase()} by clicking on its name to
-            see more information.
+            In the comparison view, select a {entType.toLowerCase()} by clicking on its name to see
+            more information.
           </>
         )}
       </DetailsBody>
@@ -45,12 +45,12 @@ const DetailsPanel: React.FC = () => {
   );
 };
 
-const DetailsTitle: React.FC<{ object?: ObjectData }> = ({ object }) => {
-  if (!object) return 'Details';
+const DetailsTitle: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  if (!ent) return 'Details';
   return (
     <div>
-      <ObjectTitle object={object} highlightSearchMatches={false} />
-      <ObjectSubtitle object={object} highlightSearchMatches={false} />
+      <EntityTitle ent={ent} highlightSearchMatches={false} />
+      <EntitySubtitle ent={ent} highlightSearchMatches={false} />
     </div>
   );
 };

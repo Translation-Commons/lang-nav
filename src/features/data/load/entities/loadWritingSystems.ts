@@ -1,11 +1,11 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadWritingSystems(): Promise<Record<string, WritingSystemData> | void> {
-  return await loadObjectsFromFile<WritingSystemData>(
+  return await loadEntitiesFromFile<WritingSystemData>(
     'data/tc/writingSystems.tsv',
     parseWritingSystem,
   );
@@ -15,7 +15,7 @@ export function parseWritingSystem(line: string): WritingSystemData {
   const parts = line.split('\t');
   const nameEndonym = parts[3] || undefined;
   return {
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
 
     ID: parts[0],
     codeDisplay: parts[0],

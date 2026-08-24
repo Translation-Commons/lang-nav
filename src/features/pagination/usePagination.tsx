@@ -8,8 +8,8 @@ import usePageParams from '@features/params/usePageParams';
  * Note you do have to indicate the type of data being sliced for typescript.
  *
  * Example usage:
- * const getCurrentEntities = useSliceFunction<ObjectData>();
- * const currentEntities = getCurrentEntities(objects);
+ * const getCurrentEntities = useSliceFunction<EntityData>();
+ * const currentEntities = getCurrentEntities(ents);
  */
 function usePagination<T>(): { getCurrentEntities: (arr: T[]) => T[] } {
   const { page, limit } = usePageParams();

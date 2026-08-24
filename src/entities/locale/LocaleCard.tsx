@@ -6,8 +6,8 @@ import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForP
 
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import ObjectSubtitle from '@entities/ui/ObjectSubtitle';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntitySubtitle from '@entities/ui/EntitySubtitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
 import DecimalNumber from '@shared/ui/DecimalNumber';
@@ -34,8 +34,8 @@ const LocaleCard: React.FC<Props> = ({ locale }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={locale} />
-        <ObjectSubtitle object={locale} />
+        <EntityTitle ent={locale} />
+        <EntitySubtitle ent={locale} />
       </div>
 
       {pop.adjusted != null && (

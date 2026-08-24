@@ -6,7 +6,7 @@ import { LanguageScope } from '@entities/language/LanguageTypes';
 import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
@@ -20,8 +20,8 @@ import getField from './getField';
  *
  * Converts enum values to their corresponding labels.
  */
-export function getFieldString(object: ObjectData, field: Field): string | undefined {
-  const value = getField(object, field);
+export function getFieldString(ent: EntityData, field: Field): string | undefined {
+  const value = getField(ent, field);
   if (value == null) return value;
   switch (getFieldValueType(field)) {
     case TableValueType.Date:

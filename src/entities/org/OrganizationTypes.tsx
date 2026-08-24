@@ -1,11 +1,11 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectBase } from '@entities/types/DataTypes';
+import { EntityBase } from '@entities/types/DataTypes';
 
-export interface OrganizationData extends ObjectBase {
-  type: ObjectType.Org;
+export interface OrganizationData extends EntityBase {
+  type: EntityType.Org;
   ID: string; // A stable ID to use with indexing, eg. "org.StatCAN" -- should always be prefixed by `org.` to avoid conflicts and have the short name
   codeDisplay: string; // the short name, no org. prefix eg. "StatCAN"
   nameDisplay: string; // long name eg. "Statistics Canada"

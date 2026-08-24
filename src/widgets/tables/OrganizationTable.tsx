@@ -15,7 +15,7 @@ const OrganizationTable: React.FC = () => {
   return (
     <InteractiveEntityTable<OrganizationData>
       tableID={TableID.Organizations}
-      entities={organizations}
+      ents={organizations}
       columns={columns}
     />
   );

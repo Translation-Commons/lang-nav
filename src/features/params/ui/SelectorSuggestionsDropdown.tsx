@@ -113,14 +113,14 @@ const SuggestionRowOpenDetails: React.FC<{
   onClick?: (value: Suggestion) => void;
   onMouseDown?: () => void;
 }> = ({ style, suggestion, onClick, onMouseDown }) => {
-  const { objectID, searchString, label } = suggestion;
+  const { entID, searchString, label } = suggestion;
 
   return (
     <HoverableInternalLinkButton
       className="option"
       hoverContent={<>Open the details pane for {searchString}</>}
       keepOldParams={true}
-      params={{ objectID, searchString }}
+      params={{ entID, searchString }}
       style={style}
       onMouseDown={onMouseDown}
       onClick={onClick ? () => onClick(suggestion) : undefined}

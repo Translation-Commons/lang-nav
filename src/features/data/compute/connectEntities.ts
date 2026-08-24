@@ -1,0 +1,55 @@
+import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
+import { LanguagesBySource } from '@entities/language/LanguageTypes';
+import { LocaleData } from '@entities/locale/LocaleTypes';
+import { OrganizationData } from '@entities/org/OrganizationTypes';
+import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { VariantData } from '@entities/variant/VariantTypes';
+import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
+
+import { connectKeyboards } from '../connect/connectKeyboards';
+import { connectLanguagesToParent } from '../connect/connectLanguagesToParent';
+import connectLocales from '../connect/connectLocales';
+import { connectOrganizations } from '../connect/connectOrganizations';
+import { connectTerritoriesToParent } from '../connect/connectTerritoriesToParent';
+import { connectWritingSystems } from '../connect/connectWritingSystems';
+import { createFamilyLocales } from '../connect/createFamilyLocales';
+import { createRegionalLocales } from '../connect/createRegionalLocales';
+import { connectVariants } from '../load/extra_entities/IANAData';
+
+import { computeDescendantPopulation } from './computeDescendantPopulation';
+import { searchLocalesForMissingLinks } from './searchLocalesForMissingLinks';
+
+/**
+ * During the core data loading process, after all entities have been loaded, this function connects them together.
+ *
+ * It also creates some additional derived entities, such as family locales and regional locales.
+ */
+export function connectEntitiesAndCreateDerivedData(
+  languagesBySource: LanguagesBySource,
+  territories: Record<string, TerritoryData>,
+  writingSystems: Record<string, WritingSystemData>,
+  locales: Record<string, LocaleData>,
+  variants: Record<string, VariantData>,
+  keyboards: Record<string, KeyboardData>,
+  organizations: Record<string, OrganizationData>,
+): void {
+  connectLanguagesToParent(languagesBySource);
+  connectTerritoriesToParent(territories);
+  connectWritingSystems(languagesBySource.Combined, territories, writingSystems);
+  connectLocales(languagesBySource.Combined, territories, writingSystems, locales);
+  connectVariants(variants, languagesBySource.BCP, locales);
+  createFamilyLocales(languagesBySource.Combined, locales); // create them before regional locales
+  createRegionalLocales(territories, locales); // create them after connecting them
+  searchLocalesForMissingLinks(locales); // try to find missing links after creating new locales
+  computeDescendantPopulation(writingSystems);
+  connectKeyboards(
+    keyboards,
+    languagesBySource.Combined,
+    languagesBySource.CLDR,
+    territories,
+    writingSystems,
+    variants,
+    locales,
+  );
+  connectOrganizations(organizations, territories);
+}

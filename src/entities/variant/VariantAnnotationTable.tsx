@@ -1,13 +1,13 @@
 import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { SearchableField } from '@features/params/PageParamTypes';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableColumn from '@features/table/TableColumn';
 import TableID from '@features/table/TableID';
-import { getLanguagesRelevantToObject } from '@features/transforms/filtering/filterByConnections';
+import { getLanguagesRelevantToEntity } from '@features/transforms/filtering/filterByConnections';
 import getSubstringFilterOnQuery from '@features/transforms/search/getSubstringFilterOnQuery';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -39,7 +39,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
       const connectedLanguoids = languagesInSelectedSource.filter(
         (languoid) =>
           languoid.scope !== LanguageScope.Family &&
-          getLanguagesRelevantToObject(languoid).some((relevant) =>
+          getLanguagesRelevantToEntity(languoid).some((relevant) =>
             variant.languages.some((l) => l.ID === relevant.ID),
           ),
       );
@@ -80,7 +80,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
           render: (variant) => (
             <CommaSeparated limit={1} limitText="short">
               {variant.languages.map((l) => (
-                <HoverableObjectName key={l.ID} object={l} />
+                <HoverableEntityName key={l.ID} ent={l} />
               ))}
             </CommaSeparated>
           ),
@@ -90,11 +90,7 @@ const VariantAnnotationTable: React.FC<Props> = ({ variants, addToChangedVariant
   );
 
   return (
-    <InteractiveEntityTable
-      entities={variants}
-      tableID={TableID.VariantAnnotation}
-      columns={columns}
-    />
+    <InteractiveEntityTable ents={variants} tableID={TableID.VariantAnnotation} columns={columns} />
   );
 };
 

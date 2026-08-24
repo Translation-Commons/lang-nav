@@ -2,16 +2,16 @@ import { InfoIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import { EntityType, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import { CodeColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { CensusData } from '@entities/census/CensusTypes';
@@ -37,7 +37,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
 
   const langsNotFound: string[] = [];
 
-  // Create new locale data objects based on the census results
+  // Create new locale data ents based on the census results
   const languagesInCensus: LocaleData[] = Object.entries(census.languageEstimates)
     .map(([langID, populationSpeaking]) => {
       const lang = getLanguage(langID);
@@ -48,7 +48,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
       const percent =
         (populationSpeaking * 100) / (census.populationWithPositiveResponses || census.population);
       return {
-        type: ObjectType.Locale,
+        type: EntityType.Locale,
         ID: langID + '_' + census.isoRegionCode,
         codeDisplay: lang.codeDisplay + localeSeparator + census.isoRegionCode,
         languageCode: langID,
@@ -99,19 +99,16 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
       )}
       <InteractiveEntityTable
         tableID={TableID.LanguagesInCensus}
-        entities={languagesInCensus}
+        ents={languagesInCensus}
         shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
           {
             key: 'Languages',
-            render: (object) => (
-              <HoverableObject object={object.language}>
-                <ObjectFieldHighlightedByPageSearch
-                  object={object}
-                  field={SearchableField.NameDisplay}
-                />
-              </HoverableObject>
+            render: (ent) => (
+              <HoverableEntity ent={ent.language}>
+                <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
+              </HoverableEntity>
             ),
             field: Field.Name,
           },
@@ -157,9 +154,9 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
           },
           {
             key: 'Percent of Worldwide in Language',
-            render: (object) =>
-              object.pop.speaking.adjusted &&
-              (object.pop.speaking.adjusted * 100) / (object.language?.pop.overall || 1),
+            render: (ent) =>
+              ent.pop.speaking.adjusted &&
+              (ent.pop.speaking.adjusted * 100) / (ent.language?.pop.overall || 1),
             isInitiallyVisible: false,
             field: Field.PercentOfOverallLanguageSpeakers,
           },
@@ -167,7 +164,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             key: 'Macrolanguage',
             render: (loc) =>
               loc.language && (
-                <HoverableObjectName object={getLanguageRootMacrolanguage(loc.language)} />
+                <HoverableEntityName ent={getLanguageRootMacrolanguage(loc.language)} />
               ),
             isInitiallyVisible: false,
           },
@@ -175,7 +172,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
             key: 'Language Family',
             render: (loc) =>
               loc.language && (
-                <HoverableObjectName object={getLanguageRootLanguageFamily(loc.language)} />
+                <HoverableEntityName ent={getLanguageRootLanguageFamily(loc.language)} />
               ),
             field: Field.LanguageFamily,
             isInitiallyVisible: false,
@@ -186,7 +183,7 @@ const TableOfLanguagesInCensus: React.FC<Props> = ({ census }) => {
               const territory = loc.language?.locales
                 .filter((l) => l.territory?.scope === TerritoryScope.Country)
                 .sort(sortByPopulation)[0]?.territory;
-              return territory ? <HoverableObjectName object={territory} /> : null;
+              return territory ? <HoverableEntityName ent={territory} /> : null;
             },
             isInitiallyVisible: true,
           },
@@ -205,9 +202,9 @@ const ActualLocaleInfoButton: React.FC<{ actualLocale?: LocaleData }> = ({ actua
     );
   }
   return (
-    <HoverableObject object={actualLocale} style={{ verticalAlign: 'middle' }}>
+    <HoverableEntity ent={actualLocale} style={{ verticalAlign: 'middle' }}>
       <InfoIcon size="1em" display="block" />
-    </HoverableObject>
+    </HoverableEntity>
   );
 };
 

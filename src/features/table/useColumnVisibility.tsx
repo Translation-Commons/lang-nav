@@ -3,13 +3,13 @@ import { useCallback, useMemo } from 'react';
 import { PageParams, TableIDToBinarizedColumnVisibility } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { PinColumn } from './CommonColumns';
 import TableColumn from './TableColumn';
 import TableID from './TableID';
 
-export type ColumnVisibilityModule<T extends ObjectData> = {
+export type ColumnVisibilityModule<T extends EntityData> = {
   toggleColumn: (columnKey: string, isVisible?: boolean) => void;
   setColumns: (columnKeys: string[], isVisible: boolean) => void;
   visibleColumns: TableColumn<T>[];
@@ -17,7 +17,7 @@ export type ColumnVisibilityModule<T extends ObjectData> = {
   resetColumnVisibility: () => void;
 };
 
-function useColumnVisibility<T extends ObjectData>(
+function useColumnVisibility<T extends EntityData>(
   columns: TableColumn<T>[],
   tableID: TableID,
 ): ColumnVisibilityModule<T> {
@@ -87,7 +87,7 @@ function useColumnVisibility<T extends ObjectData>(
 
 export default useColumnVisibility;
 
-function getColumnVisibilityFromBinary<T extends ObjectData>(
+function getColumnVisibilityFromBinary<T extends EntityData>(
   columns: TableColumn<T>[],
   binary: bigint,
 ): Record<string, boolean> {
@@ -97,7 +97,7 @@ function getColumnVisibilityFromBinary<T extends ObjectData>(
   }, {});
 }
 
-function getBinaryForColumnVisibility<T extends ObjectData>(
+function getBinaryForColumnVisibility<T extends EntityData>(
   columns: TableColumn<T>[],
   columnVisibility: Record<string, boolean>,
 ): bigint {
@@ -107,7 +107,7 @@ function getBinaryForColumnVisibility<T extends ObjectData>(
   );
 }
 
-function getDefaultColumnsBinary<T extends ObjectData>(
+function getDefaultColumnsBinary<T extends EntityData>(
   columns: TableColumn<T>[],
   params: PageParams,
 ): bigint {

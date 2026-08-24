@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
@@ -29,7 +29,7 @@ const LanguageTerritoryList: React.FC<Props> = ({ lang }) => {
 const LanguageTerritoryListContents: React.FC<Props> = ({ lang }) => {
   const locales = lang.locales?.filter((loc) => loc.territoryCode != null) ?? [];
   const filteredLocales = useFilteredEntities({
-    inputEntities: locales,
+    inputEnts: locales,
     useSubstring: false,
     useConnections: false,
   }).filteredEntities;
@@ -41,10 +41,10 @@ const LanguageTerritoryListContents: React.FC<Props> = ({ lang }) => {
   return locales.length > 0 ? (
     <CommaSeparated>
       {uniqueBy(filteredLocales, (loc) => loc.territoryCode ?? '').map((locale) => (
-        <HoverableObjectName key={locale.ID} labelSource="territory" object={locale} />
+        <HoverableEntityName key={locale.ID} labelSource="territory" ent={locale} />
       ))}
       {numberOfTerritories > numberOfFilteredTerritories && (
-        <Hoverable hoverContent={<FilterBreakdown objects={locales} />}>
+        <Hoverable hoverContent={<FilterBreakdown ents={locales} />}>
           +{(numberOfTerritories - numberOfFilteredTerritories).toLocaleString()}
         </Hoverable>
       )}

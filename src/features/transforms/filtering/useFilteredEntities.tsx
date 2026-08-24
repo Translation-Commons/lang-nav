@@ -4,7 +4,7 @@ import useEntities from '@features/data/context/useEntities';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
@@ -12,26 +12,26 @@ import { useFilterByVitality, useScopeFilter } from './filter';
 import { getFilterByConnections } from './filterByConnections';
 import useFilters from './useFilters';
 
-type UseFilteredEntitiesParams<T extends ObjectData> = {
+type UseFilteredEntitiesParams<T extends EntityData> = {
   // TODO use Fields to specify which filters should be used, not these generalized booleans
   useScope?: boolean;
   useSubstring?: boolean;
   useConnections?: boolean;
   useVitality?: boolean;
   usePopulation?: boolean;
-  inputEntities?: T[];
+  inputEnts?: T[];
 };
 
-const useFilteredEntities = <T extends ObjectData>({
+const useFilteredEntities = <T extends EntityData>({
   useScope = true,
   useSubstring = true,
   useConnections = true,
   useVitality = true,
   usePopulation = true,
-  inputEntities,
+  inputEnts,
 }: UseFilteredEntitiesParams<T>): { filteredEntities: T[]; allEntities: T[] } => {
   // Implementation of filtering logic goes here
-  const pageEntities = useEntities() as T[]; // Get all objects of the relevant type from context
+  const pageEntities = useEntities() as T[]; // Get all entities of the relevant type from context
   const { pinned } = usePageParams();
   // TODO use useFilters for all of these
   const filters = useFilters();
@@ -41,19 +41,19 @@ const useFilteredEntities = <T extends ObjectData>({
   const filterByVitality = useVitality ? useFilterByVitality() : () => true;
   const filterByPopulation = usePopulation ? filters.Population : () => true;
   const sortFunction = getSortFunction();
-  const allEntities = inputEntities ?? pageEntities;
+  const allEntities = inputEnts ?? pageEntities;
 
   const filteredEntities = useMemo(() => {
     return allEntities
       .filter(
-        (obj) =>
+        (ent) =>
           // Pinned entities always remain visible regardless of the active filters.
-          pinned.includes(obj.ID) ||
-          (filterByScope(obj) &&
-            filterBySubstring(obj) &&
-            filterByConnections(obj) &&
-            filterByVitality(obj) &&
-            filterByPopulation(obj)),
+          pinned.includes(ent.ID) ||
+          (filterByScope(ent) &&
+            filterBySubstring(ent) &&
+            filterByConnections(ent) &&
+            filterByVitality(ent) &&
+            filterByPopulation(ent)),
       )
       .sort((a, b) => {
         const aIndex = pinned.indexOf(a.ID);

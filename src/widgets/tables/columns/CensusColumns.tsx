@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
 import Field from '@features/transforms/fields/Field';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
-import { getObjectPercentOfTerritoryPopulation } from '@entities/lib/getObjectPopulation';
+import { getEntityPercentOfTerritoryPopulation } from '@entities/lib/getEntityPopulation';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -30,7 +30,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: '% of Current Population',
-      render: (census) => census.population && getObjectPercentOfTerritoryPopulation(census),
+      render: (census) => census.population && getEntityPercentOfTerritoryPopulation(census),
       isInitiallyVisible: false,
       field: Field.PercentOfTerritoryPopulation,
       columnGroup: 'Population',
@@ -75,7 +75,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Territory',
-      render: (census) => <HoverableObjectName object={census.territory} />,
+      render: (census) => <HoverableEntityName ent={census.territory} />,
       isInitiallyVisible: false,
       field: Field.Territory,
       columnGroup: 'Location',
@@ -88,7 +88,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Collector Name',
-      render: (census) => <HoverableObjectName object={census.collector} labelSource="code" />,
+      render: (census) => <HoverableEntityName ent={census.collector} labelSource="code" />,
       isInitiallyVisible: false,
       columnGroup: 'Collector',
     },
@@ -100,7 +100,7 @@ function getCensusColumns(): TableColumn<CensusData>[] {
     },
     {
       key: 'Presented By',
-      render: (census) => <HoverableObjectName object={census.presenter} labelSource="code" />,
+      render: (census) => <HoverableEntityName ent={census.presenter} labelSource="code" />,
       isInitiallyVisible: false,
       columnGroup: 'Collector',
     },

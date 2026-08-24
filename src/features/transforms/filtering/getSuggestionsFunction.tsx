@@ -1,38 +1,38 @@
 import { SearchableField } from '@features/params/PageParamTypes';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import getSubstringFilterOnQuery from '../search/getSubstringFilterOnQuery';
-import HighlightedObjectField from '../search/HighlightedObjectField';
+import HighlightedEntityField from '../search/HighlightedEntityField';
 
-export function getSuggestionsFunction<T extends ObjectData>(
-  objects: T[],
-  getMatchDistance: (object: T) => number,
-  getMatchGroup: (object: T) => string,
+export function getSuggestionsFunction<T extends EntityData>(
+  ents: T[],
+  getMatchDistance: (ent: T) => number,
+  getMatchGroup: (ent: T) => string,
 ): (query: string) => Promise<Suggestion[]> {
   return async (query: string): Promise<Suggestion[]> => {
     const trimmedQuery = query.split('[')[0].trim();
     const filterFunction = getSubstringFilterOnQuery(trimmedQuery, SearchableField.CodeOrNameAny);
-    return objects
+    return ents
       .filter(filterFunction)
       .sort((a, b) => getMatchDistance(a) - getMatchDistance(b))
       .slice(0, SUGGESTION_LIMIT)
-      .map((object) => {
+      .map((ent) => {
         const label = (
-          <HighlightedObjectField
-            object={object}
+          <HighlightedEntityField
+            ent={ent}
             field={SearchableField.CodeOrNameAny}
             query={trimmedQuery}
             showOriginalName={true}
           />
         );
-        const searchString = object.nameDisplay + ' [' + object.ID + ']';
+        const searchString = ent.nameDisplay + ' [' + ent.ID + ']';
         return {
-          objectID: object.ID,
+          entID: ent.ID,
           searchString,
           label,
-          group: getMatchGroup(object),
+          group: getMatchGroup(ent),
         };
       });
   };

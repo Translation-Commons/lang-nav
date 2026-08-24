@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   CensusCollectorType,
@@ -61,7 +61,7 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
   }
 
   const censuses: CensusData[] = tsvColumnsWithData.map((_tsvColumnNumber, index) => ({
-    type: ObjectType.Census,
+    type: EntityType.Census,
     ID: filePath + '.' + (index + 1), // stable unique ID based on the full file path and column number
     codeDisplay: filename + '.' + (index + 1), // May be overridden later
 
@@ -121,7 +121,7 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
     });
   }
 
-  // Set other fields required for objects and report an error if an important one is missing
+  // Set other fields required for entities and report an error if an important one is missing
   censuses.forEach((census, index) => {
     // Collect names for the census
     census.names = [census.nameDisplay, census.documentName, census.tableName].filter(

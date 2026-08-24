@@ -1,4 +1,4 @@
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
@@ -13,15 +13,15 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     NameColumn,
     {
       key: 'Platform',
-      render: (object) => object.platform,
+      render: (ent) => ent.platform,
       field: Field.Platform,
     },
     {
       key: 'Language(s)',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated>
-          {(object.languages ?? []).map((lang) => (
-            <HoverableObjectName key={lang.ID} object={lang} />
+          {(ent.languages ?? []).map((lang) => (
+            <HoverableEntityName key={lang.ID} ent={lang} />
           ))}
         </CommaSeparated>
       ),
@@ -30,11 +30,11 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     },
     {
       key: 'Input Script',
-      render: (object) => (
-        <HoverableObjectName
-          object={object.inputWritingSystem}
+      render: (ent) => (
+        <HoverableEntityName
+          ent={ent.inputWritingSystem}
           style={
-            object.inputScriptCode === object.outputScriptCode
+            ent.inputScriptCode === ent.outputScriptCode
               ? { color: 'var(--color-text)' }
               : undefined
           }
@@ -45,11 +45,11 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     },
     {
       key: 'Output Script',
-      render: (object) => (
-        <HoverableObjectName
-          object={object.outputWritingSystem}
+      render: (ent) => (
+        <HoverableEntityName
+          ent={ent.outputWritingSystem}
           style={
-            object.inputScriptCode === object.outputScriptCode
+            ent.inputScriptCode === ent.outputScriptCode
               ? { color: 'var(--color-text)' }
               : undefined
           }
@@ -60,14 +60,14 @@ function getKeyboardColumns(): TableColumn<KeyboardData>[] {
     },
     {
       key: 'Territory',
-      render: (object) => <HoverableObjectName object={object.territory} />,
+      render: (ent) => <HoverableEntityName ent={ent.territory} />,
       field: Field.Territory,
       columnGroup: 'Related Objects',
       isInitiallyVisible: false,
     },
     {
       key: 'Variant',
-      render: (object) => object.variantCode,
+      render: (ent) => ent.variantCode,
       field: Field.Variant,
       columnGroup: 'Related Objects',
       isInitiallyVisible: false,

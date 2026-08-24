@@ -1,20 +1,20 @@
 import { CheckCircle2Icon, XCircleIcon } from 'lucide-react';
 import React from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-const ICUSupportStatus: React.FC<{ object: ObjectData }> = ({ object }) => {
-  if (object.type !== ObjectType.Language) return null;
+const ICUSupportStatus: React.FC<{ ent: EntityData }> = ({ ent }) => {
+  if (ent.type !== EntityType.Language) return null;
 
-  const { coverage, dataProvider } = object.CLDR;
+  const { coverage, dataProvider } = ent.CLDR;
 
   if (coverage == null) {
     if (dataProvider != null) {
-      return <ICUSupportStatus object={dataProvider} />;
+      return <ICUSupportStatus ent={dataProvider} />;
     }
     return <Deemphasized>n/a</Deemphasized>;
   }

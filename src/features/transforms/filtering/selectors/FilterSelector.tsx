@@ -53,13 +53,13 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
 };
 
 /**
- * Limits filters by the ones applicable to the current object type. For example, if we're
+ * Limits filters by the ones applicable to the current entity type. For example, if we're
  * looking at censuses, we don't need to show filter for writing system because that does not
  * apply. Censuses would not show the filter for languages because that has not been set up yet.
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
-  const { objectType } = usePageParams();
-  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, objectType).filter(
+  const { entType } = usePageParams();
+  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, entType).filter(
     (f) => f !== Field.Name, // This should not return the search bar
   );
   const otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(

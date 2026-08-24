@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 import { useDataContext } from '@features/data/context/useDataContext';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 
@@ -40,7 +40,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       </DetailsSection>
       <DetailsSection title="Languages on Map">
         <LocalParamsProvider
-          overrides={{ objectType: ObjectType.Language, limit: 1000, searchString: '' }}
+          overrides={{ entType: EntityType.Language, limit: 1000, searchString: '' }}
         >
           <EntityMap entities={languages} maxWidth={1000} />
         </LocalParamsProvider>

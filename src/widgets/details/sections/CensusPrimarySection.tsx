@@ -1,4 +1,4 @@
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { CensusData } from '@entities/census/CensusTypes';
 
@@ -10,11 +10,7 @@ function CensusPrimarySection({ census }: { census: CensusData }) {
   return (
     <DetailsSection title="Primary Information">
       <DetailsField title="Territory">
-        {territory != null ? (
-          <HoverableObjectName object={territory} />
-        ) : (
-          <span>{isoRegionCode}</span>
-        )}
+        {territory != null ? <HoverableEntityName ent={territory} /> : <span>{isoRegionCode}</span>}
       </DetailsField>
       <DetailsField title="Year">{census.yearCollected}</DetailsField>
       {languageUse != null && <DetailsField title="Language Use">{languageUse}</DetailsField>}

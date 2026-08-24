@@ -7,7 +7,7 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { ObjectType, PageParams, View } from '@features/params/PageParamTypes';
+import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
 import {
   SelectorDisplay,
   SelectorDisplayProvider,
@@ -64,7 +64,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <LocalParamsProvider
         overrides={{
           limit: MAP_CIRCLE_LIMIT,
-          objectType: ObjectType.Language,
+          entType: EntityType.Language,
           languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
           sortBy: Field.Population,
           searchString: '',

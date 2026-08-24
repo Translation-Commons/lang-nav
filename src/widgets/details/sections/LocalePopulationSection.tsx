@@ -6,8 +6,8 @@ import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 
 import computeCensusRecordPriority from '@features/data/compute/computeCensusRecordPriority';
 import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 
 import CensusRecordPriority from '@entities/census/CensusRecordPriority';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
@@ -80,7 +80,7 @@ const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) =
                       <DecimalNumber num={censusEstimate.populationPercent} />%
                     </td>
                     <td className="px-2">
-                      <HoverableObjectName object={censusEstimate.census} />
+                      <HoverableEntityName ent={censusEstimate.census} />
                     </td>
                     <td className="px-2 text-right">
                       <PercentageDifference

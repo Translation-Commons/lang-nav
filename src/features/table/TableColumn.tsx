@@ -22,7 +22,7 @@ interface TableColumn<T> {
   readonly labelInColumnGroup?: React.ReactNode;
 
   /** Function that renders rich React content for a cell */
-  readonly render: (object: T) => React.ReactNode;
+  readonly render: (ent: T) => React.ReactNode;
 
   /**
    * Supply an explicit plain value for CSV export.
@@ -31,13 +31,13 @@ interface TableColumn<T> {
    * links, or other complex markup and you want a clean text representation in
    * the exported CSV.
    */
-  readonly exportValue?: (object: T) => string | number | boolean | null | undefined;
+  readonly exportValue?: (ent: T) => string | number | boolean | null | undefined;
 
   /** Indicate the type of data in the column; influences sorting and alignment */
   readonly valueType?: TableValueType;
 
   /**
-   * Most columns should have a corresponding common object Field that can use
+   * Most columns should have a corresponding common entity Field that can use
    * a common function to access the relevant data for sorting and other purposes.
    */
   readonly field?: Field;

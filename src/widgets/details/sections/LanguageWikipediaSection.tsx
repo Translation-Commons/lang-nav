@@ -5,7 +5,7 @@ import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 
 import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
+import { getStatusColor } from '@entities/ui/EntityWikipediaInfo';
 
 import { Badge } from '@shared/ui/badge';
 import CountCompact from '@shared/ui/CountCompact';

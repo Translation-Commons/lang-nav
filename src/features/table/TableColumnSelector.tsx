@@ -5,7 +5,7 @@ import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import Modal from '@features/layers/modal/ModalButton';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
 
@@ -13,7 +13,7 @@ import TableColumn from './TableColumn';
 import TableColumnName from './TableColumnName';
 import { ColumnVisibilityModule } from './useColumnVisibility';
 
-function TableColumnSelector<T extends ObjectData>({
+function TableColumnSelector<T extends EntityData>({
   columns,
   visibilityModule,
 }: {
@@ -57,7 +57,7 @@ function TableColumnSelector<T extends ObjectData>({
   );
 }
 
-function ColumnGroup<T extends ObjectData>({
+function ColumnGroup<T extends EntityData>({
   columns,
   visibilityModule: { columnVisibility, toggleColumn, setColumns },
   group,
@@ -122,7 +122,7 @@ function ColumnGroup<T extends ObjectData>({
   );
 }
 
-function ColumnCheckbox<T extends ObjectData>({
+function ColumnCheckbox<T extends EntityData>({
   column,
   isChecked,
   toggleColumn,
@@ -139,7 +139,7 @@ function ColumnCheckbox<T extends ObjectData>({
   );
 }
 
-function GlobalControls<T extends ObjectData>({
+function GlobalControls<T extends EntityData>({
   columns,
   visibilityModule: { setColumns, resetColumnVisibility },
 }: {

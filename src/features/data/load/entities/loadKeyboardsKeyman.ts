@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   KeyboardData,
@@ -6,10 +6,10 @@ import {
   KeyboardPlatform,
 } from '@entities/keyboard/KeyboardTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadKeyboardsKeyman(): Promise<KeyboardDictionary | void> {
-  return await loadObjectsFromFile<KeyboardData>(
+  return await loadEntitiesFromFile<KeyboardData>(
     'data/keyman/keyboards.tsv',
     parseKeyboardKeymanLine,
   );
@@ -37,7 +37,7 @@ export function parseKeyboardKeymanLine(line: string): KeyboardData | undefined 
   const languageCodes = langCodesRaw !== '' ? langCodesRaw.split(',') : [];
 
   return {
-    type: ObjectType.Keyboard,
+    type: EntityType.Keyboard,
     ID: id,
     codeDisplay: id,
     nameDisplay,

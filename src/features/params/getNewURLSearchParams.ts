@@ -3,7 +3,7 @@ import Field from '@features/transforms/fields/Field';
 
 import PopulationFocus from '@entities/types/PopulationFocus';
 
-import { ObjectType, PageParamKey, PageParams, View } from './PageParamTypes';
+import { EntityType, PageParamKey, PageParams, View } from './PageParamTypes';
 import { getDefaultParams, ProfileType } from './Profiles';
 
 /**
@@ -76,7 +76,7 @@ function buildNextURLSearchParams(
 
 function clearDefaultParams(next: URLSearchParams): URLSearchParams {
   const defaults = getDefaultParams(
-    next.get('objectType') as ObjectType,
+    next.get('entType') as EntityType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
     next.get('populationFocus') as PopulationFocus,
@@ -87,7 +87,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     const defaultValue = defaults[key as PageParamKey];
 
     // Don't remove view or profile because they change on defaults
-    if (key === 'objectType' && value !== ObjectType.Language) return;
+    if (key === 'entType' && value !== EntityType.Language) return;
     if (key === 'view') return;
     if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
     if (key === 'populationFocus' && value !== PopulationFocus.Overall) return;
@@ -112,7 +112,7 @@ function clearContextDependentParams(
   prev?: URLSearchParams,
 ): URLSearchParams {
   const prevOrDefault = getDefaultParams(
-    prev?.get('objectType') as ObjectType,
+    prev?.get('entType') as EntityType,
     prev?.get('view') as View,
     prev?.get('profile') as ProfileType,
     prev?.get('populationFocus') as PopulationFocus,
@@ -125,18 +125,18 @@ function clearContextDependentParams(
     if (newParams.colorBy == null) next.delete('colorBy');
   }
 
-  if (newParams.objectType !== undefined && newParams.objectType !== prevOrDefault.objectType) {
+  if (newParams.entType !== undefined && newParams.entType !== prevOrDefault.entType) {
     next.delete('pinned');
     if (newParams.reportID == null) next.delete('reportID');
     if (newParams.page == null) next.delete('page');
     const oldSearchString = prev?.get('searchString');
     if (oldSearchString) {
       next.delete('searchString');
-      if (prevOrDefault.objectType === ObjectType.Language) {
+      if (prevOrDefault.entType === EntityType.Language) {
         next.set('languageFilter', oldSearchString);
-      } else if (prevOrDefault.objectType === ObjectType.Territory) {
+      } else if (prevOrDefault.entType === EntityType.Territory) {
         next.set('territoryFilter', oldSearchString);
-      } else if (prevOrDefault.objectType === ObjectType.WritingSystem) {
+      } else if (prevOrDefault.entType === EntityType.WritingSystem) {
         next.set('writingSystemFilter', oldSearchString);
       }
     }

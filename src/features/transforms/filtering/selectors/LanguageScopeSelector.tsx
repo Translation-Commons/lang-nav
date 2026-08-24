@@ -13,7 +13,7 @@ const LanguageScopeSelector: React.FC = () => {
   const { display } = useSelectorDisplay();
 
   const selectorDescription =
-    'Filter what level of language-type objects are shown, such as families, macrolanguages, languages, dialects, and special codes.';
+    'Filter what level of language-type entities are shown, such as families, macrolanguages, languages, dialects, and special codes.';
 
   return (
     <Selector

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
 import Field from '@features/transforms/fields/Field';
@@ -37,7 +37,7 @@ const ReportLanguageScopeIssues: React.FC = () => {
             key: 'Parent Name',
             render: (lang) =>
               lang.parentLanguage != null ? (
-                <HoverableObjectName object={lang.parentLanguage} />
+                <HoverableEntityName ent={lang.parentLanguage} />
               ) : null,
             exportValue: (lang) => lang.parentLanguage?.nameDisplay,
           },
@@ -55,7 +55,7 @@ const ReportLanguageScopeIssues: React.FC = () => {
           },
           {
             key: 'Child Name',
-            render: (lang) => <HoverableObjectName object={lang} />,
+            render: (lang) => <HoverableEntityName ent={lang} />,
             exportValue: (lang) => lang.nameDisplay,
             field: Field.Name,
           },
@@ -70,7 +70,7 @@ const ReportLanguageScopeIssues: React.FC = () => {
             exportValue: (lang) => formatLanguagePath(getLanguagePath(lang)),
           },
         ]}
-        entities={languagesWithIssues}
+        ents={languagesWithIssues}
       />
     </>
   );
@@ -87,7 +87,7 @@ const ExpandedLanguagePath: React.FC<{ path: LanguageData[] }> = ({ path }) => (
     {path.map((lang, index) => (
       <React.Fragment key={lang.ID}>
         {index > 0 && ' > '}
-        <HoverableObjectName object={lang} /> [{lang.codeDisplay}]
+        <HoverableEntityName ent={lang} /> [{lang.codeDisplay}]
       </React.Fragment>
     ))}
   </>

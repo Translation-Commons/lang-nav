@@ -6,7 +6,7 @@ import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
@@ -36,24 +36,24 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     <DetailsSection title="Connections">
       {ISO.parentLanguage && (
         <DetailsField title="ISO group">
-          <HoverableObjectName object={ISO.parentLanguage} />
+          <HoverableEntityName ent={ISO.parentLanguage} />
         </DetailsField>
       )}
       {Glottolog.parentLanguage && (
         <DetailsField title="Glottolog group">
-          <HoverableObjectName object={Glottolog.parentLanguage} />
+          <HoverableEntityName ent={Glottolog.parentLanguage} />
         </DetailsField>
       )}
       {equivalentVariant && (
         <DetailsField title="Equivalent Variant">
-          <HoverableObjectName object={equivalentVariant} labelSource="name and code" />
+          <HoverableEntityName ent={equivalentVariant} labelSource="name and code" />
         </DetailsField>
       )}
       {variants && variants.length > 0 && (
         <DetailsField title="Variants">
           <CommaSeparated>
             {variants.map((v) => (
-              <HoverableObjectName key={v.ID} object={v} labelSource="name and code" />
+              <HoverableEntityName key={v.ID} ent={v} labelSource="name and code" />
             ))}
           </CommaSeparated>
         </DetailsField>
@@ -63,7 +63,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           <CommaSeparated>
             {relatedLanguages.map(({ match, relatedLanguage }) => (
               <span key={match.desired + ':' + match.supported + ':' + match.distance}>
-                <HoverableObjectName object={relatedLanguage} /> ({match.distance} CLDR)
+                <HoverableEntityName ent={relatedLanguage} /> ({match.distance} CLDR)
               </span>
             ))}
           </CommaSeparated>
@@ -77,7 +77,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
               : []
           }
           listNodes={[...childLanguages].sort(sortFunction).map((l) => (
-            <HoverableObjectName key={l.ID} object={l} />
+            <HoverableEntityName key={l.ID} ent={l} />
           ))}
           emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
         />

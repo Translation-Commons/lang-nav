@@ -20,8 +20,8 @@ import { parseLanguageScope } from '@strings/LanguageScopeStrings';
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
 import {
+  EntityType,
   LocaleSeparator,
-  ObjectType,
   PageParamKey,
   PageParams,
   SearchableField,
@@ -101,8 +101,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
 
       // Enum values
-      case PageParamKey.objectType:
-        params.objectType = value as ObjectType;
+      case PageParamKey.entType:
+        params.entType = value as EntityType;
         break;
       case PageParamKey.view:
         params.view = value as View;
@@ -155,7 +155,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
 
       // Freeform strings
-      case PageParamKey.objectID:
+      case PageParamKey.entID:
       case PageParamKey.searchString:
       case PageParamKey.languageFilter:
       case PageParamKey.languageFamilyFilter:

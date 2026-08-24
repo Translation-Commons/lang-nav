@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import {
@@ -17,7 +17,7 @@ export function getMockLanguages() {
     codeDisplay: 'US',
     nameDisplay: 'United States',
     names: ['United States', 'USA', 'US'],
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     scope: TerritoryScope.Country,
     pop: { overall: 331002651, fromUN: 331000000 },
   };
@@ -30,7 +30,7 @@ export function getMockLanguages() {
     territory: US,
     nameDisplay: 'Multiple Languages (USA)',
     names: ['Multiple Languages'],
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     localeSource: LocaleSource.CreateRegionalLocales,
     pop: { speaking: {}, writing: {} },
   };
@@ -39,7 +39,7 @@ export function getMockLanguages() {
     codeDisplay: 'Latn',
     nameDisplay: 'Latin',
     names: ['Latin'],
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
     scope: WritingSystemScope.IndividualScript,
   };
   const Cyrl: WritingSystemData = {
@@ -47,7 +47,7 @@ export function getMockLanguages() {
     codeDisplay: 'Cyrl',
     nameDisplay: 'Cyrillic',
     names: ['Cyrillic'],
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
     scope: WritingSystemScope.IndividualScript,
   };
 

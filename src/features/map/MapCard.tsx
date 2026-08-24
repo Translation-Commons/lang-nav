@@ -3,43 +3,43 @@ import React from 'react';
 
 import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import ZIndex from '@features/layers/ZIndex';
-import { ObjectType, View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import CensusesInTerritory from '@entities/census/CensusesInTerritory';
 import LocalesInTerritoryCard from '@entities/locale/LocalesInTerritoryCard';
-import ObjectCard from '@entities/ui/ObjectCard';
+import EntityCard from '@entities/ui/EntityCard';
 import WritingSystemsInTerritoryCard from '@entities/writingsystem/WritingSystemsInTerritoryCard';
 
 import DrawableData from './DrawableData';
 
 const MapCard: React.FC<{
   drawnEntity: DrawableData;
-  objectType: ObjectType;
+  entType: EntityType;
   onClose: () => void;
-}> = ({ drawnEntity, objectType, onClose }) => {
+}> = ({ drawnEntity, entType, onClose }) => {
   const { updatePageParams } = usePageParams();
 
   const openDetails = () =>
     updatePageParams(
-      objectType === ObjectType.Census || objectType === ObjectType.WritingSystem
+      entType === EntityType.Census || entType === EntityType.WritingSystem
         ? { territoryFilter: drawnEntity.ID, view: View.Table }
-        : { objectID: drawnEntity.ID },
+        : { entID: drawnEntity.ID },
     );
 
-  let content: React.ReactNode = <ObjectCard object={drawnEntity} />;
+  let content: React.ReactNode = <EntityCard ent={drawnEntity} />;
   let clickDescription = 'Open in details panel';
-  if (drawnEntity.type === ObjectType.Territory) {
-    switch (objectType) {
-      case ObjectType.Census:
+  if (drawnEntity.type === EntityType.Territory) {
+    switch (entType) {
+      case EntityType.Census:
         content = <CensusesInTerritory territory={drawnEntity} />;
         clickDescription = 'Open table of censuses in this territory';
         break;
-      case ObjectType.Locale:
+      case EntityType.Locale:
         content = <LocalesInTerritoryCard territory={drawnEntity} />;
         clickDescription = 'Open table of locales in this territory';
         break;
-      case ObjectType.WritingSystem:
+      case EntityType.WritingSystem:
         content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
         clickDescription = 'Open table of writing systems in this territory';
         break;

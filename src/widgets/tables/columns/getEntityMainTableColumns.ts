@@ -1,7 +1,7 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import TableColumn from '@features/table/TableColumn';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -14,26 +14,26 @@ import getTerritoryColumns from './TerritoryColumns';
 import getVariantColumns from './VariantColumns';
 import getWritingSystemColumns from './WritingSystemColumns';
 
-function getEntityMainTableColumns(entityType: ObjectType): TableColumn<ObjectData>[] {
-  switch (entityType) {
-    case ObjectType.Language:
-      return getLanguageColumns() as TableColumn<ObjectData>[];
-    case ObjectType.Locale:
-      return getLocaleColumns() as TableColumn<ObjectData>[];
-    case ObjectType.Territory:
-      return getTerritoryColumns() as TableColumn<ObjectData>[];
-    case ObjectType.WritingSystem:
-      return getWritingSystemColumns() as TableColumn<ObjectData>[];
-    case ObjectType.Variant:
-      return getVariantColumns() as TableColumn<ObjectData>[];
-    case ObjectType.Keyboard:
-      return getKeyboardColumns() as TableColumn<ObjectData>[];
-    case ObjectType.Census:
-      return getCensusColumns() as TableColumn<ObjectData>[];
-    case ObjectType.Org:
-      return getOrganizationColumns() as TableColumn<ObjectData>[];
+function getEntityMainTableColumns(entType: EntityType): TableColumn<EntityData>[] {
+  switch (entType) {
+    case EntityType.Language:
+      return getLanguageColumns() as TableColumn<EntityData>[];
+    case EntityType.Locale:
+      return getLocaleColumns() as TableColumn<EntityData>[];
+    case EntityType.Territory:
+      return getTerritoryColumns() as TableColumn<EntityData>[];
+    case EntityType.WritingSystem:
+      return getWritingSystemColumns() as TableColumn<EntityData>[];
+    case EntityType.Variant:
+      return getVariantColumns() as TableColumn<EntityData>[];
+    case EntityType.Keyboard:
+      return getKeyboardColumns() as TableColumn<EntityData>[];
+    case EntityType.Census:
+      return getCensusColumns() as TableColumn<EntityData>[];
+    case EntityType.Org:
+      return getOrganizationColumns() as TableColumn<EntityData>[];
     default:
-      enforceExhaustiveSwitch(entityType);
+      enforceExhaustiveSwitch(entType);
   }
 }
 

@@ -1,5 +1,5 @@
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
@@ -8,13 +8,13 @@ import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '@entities/language/LanguageFamilyUtils';
-import { getCountriesInObject } from '@entities/lib/getObjectRelatedTerritories';
+import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import LocaleNameWithFilters from '@entities/locale/LocaleNameWithFilters';
 import { getOfficialLabel } from '@entities/locale/LocaleStrings';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
-import ObjectWikipediaInfo from '@entities/ui/ObjectWikipediaInfo';
+import EntityWikipediaInfo from '@entities/ui/EntityWikipediaInfo';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -32,14 +32,14 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
     CodeColumn,
     {
       key: 'Name',
-      render: (object) => <LocaleNameWithFilters locale={object} />,
+      render: (ent) => <LocaleNameWithFilters locale={ent} />,
       field: Field.Name,
       columnGroup: 'Names',
     },
     EndonymColumn,
     {
       key: 'Language Names',
-      render: (object) => <CommaSeparated>{object.language?.names}</CommaSeparated>,
+      render: (ent) => <CommaSeparated>{ent.language?.names}</CommaSeparated>,
       columnGroup: 'Names',
       isInitiallyVisible: false,
     },
@@ -47,36 +47,36 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
     ...LocaleWritingColumns,
     {
       key: 'Language',
-      render: (object) => <HoverableObjectName object={object.language} />,
+      render: (ent) => <HoverableEntityName ent={ent.language} />,
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
       field: Field.Language,
     },
     {
       key: 'Language Scope',
-      render: (object) => getLanguageScopeLabel(object.language?.scope),
+      render: (ent) => getLanguageScopeLabel(ent.language?.scope),
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
       field: Field.LanguageScope,
     },
     {
       key: 'Territory',
-      render: (object) => <HoverableObjectName object={object.territory} />,
+      render: (ent) => <HoverableEntityName ent={ent.territory} />,
       isInitiallyVisible: false,
       field: Field.Territory,
       columnGroup: 'Linked Data',
     },
     {
       key: 'Territory Scope',
-      render: (object) => getTerritoryScopeLabel(object.territory?.scope),
+      render: (ent) => getTerritoryScopeLabel(ent.territory?.scope),
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
       field: Field.TerritoryScope,
     },
     {
       key: 'Countries',
-      render: (object) => (
-        <HoverableEnumeration items={getCountriesInObject(object)?.map((t) => t.nameDisplay)} />
+      render: (ent) => (
+        <HoverableEnumeration items={getCountriesInEntity(ent)?.map((t) => t.nameDisplay)} />
       ),
       isInitiallyVisible: false,
       field: Field.CountOfCountries,
@@ -84,11 +84,11 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
     },
     {
       key: 'Variants',
-      render: (object) =>
-        object.variants && (
+      render: (ent) =>
+        ent.variants && (
           <CommaSeparated limit={1}>
-            {object.variants.map((vt) => (
-              <HoverableObjectName object={vt} key={vt.ID} />
+            {ent.variants.map((vt) => (
+              <HoverableEntityName ent={vt} key={vt.ID} />
             ))}
           </CommaSeparated>
         ),
@@ -100,16 +100,14 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
     {
       key: 'Macrolanguage',
       render: (loc) =>
-        loc.language && <HoverableObjectName object={getLanguageRootMacrolanguage(loc.language)} />,
+        loc.language && <HoverableEntityName ent={getLanguageRootMacrolanguage(loc.language)} />,
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
     },
     {
       key: 'Language Family',
       render: (loc) =>
-        loc.language && (
-          <HoverableObjectName object={getLanguageRootLanguageFamily(loc.language)} />
-        ),
+        loc.language && <HoverableEntityName ent={getLanguageRootLanguageFamily(loc.language)} />,
       field: Field.LanguageFamily,
       isInitiallyVisible: false,
       columnGroup: 'Linked Data',
@@ -141,12 +139,12 @@ function getLocaleColumns(): TableColumn<LocaleData>[] {
     },
     {
       key: 'Wikipedia',
-      render: (object) => <ObjectWikipediaInfo object={object} />,
+      render: (ent) => <EntityWikipediaInfo ent={ent} />,
       isInitiallyVisible: false,
     },
     {
       key: 'Locale Source',
-      render: (object) => toSentenceCase(object.localeSource),
+      render: (ent) => toSentenceCase(ent.localeSource),
       isInitiallyVisible: false,
     },
   ];

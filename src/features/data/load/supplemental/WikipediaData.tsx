@@ -40,7 +40,7 @@ function parseWikipediaData(line: string): WikipediaData {
   } as WikipediaData;
 }
 
-// Add wikipedia data to corresponding objects (languages, locales)
+// Add wikipedia data to corresponding entities (languages, locales)
 //
 // Note there are a few cases there are multiple Wikipedia, for instance there is
 // both a closed Muscogee wikipedia as well as a new one with Incubator status -- the

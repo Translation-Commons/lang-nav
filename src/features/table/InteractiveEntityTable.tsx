@@ -2,7 +2,7 @@ import usePagination from '@features/pagination/usePagination';
 import FilterBreakdown from '@features/transforms/filtering/FilterBreakdown';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import VisibleItemsMeter from '../pagination/VisibleItemsMeter';
 
@@ -16,7 +16,7 @@ import useColumnVisibility from './useColumnVisibility';
 import './tableStyles.css';
 
 interface Props<T> {
-  entities: T[];
+  ents: T[];
   columns: TableColumn<T>[];
   shouldFilterUsingSearchBar?: boolean;
   /** When false, page language-scope filters do not hide table rows. */
@@ -24,8 +24,8 @@ interface Props<T> {
   tableID: TableID;
 }
 
-function InteractiveEntityTable<T extends ObjectData>({
-  entities,
+function InteractiveEntityTable<T extends EntityData>({
+  ents,
   columns,
   shouldFilterUsingSearchBar = true,
   useScope = true,
@@ -38,7 +38,7 @@ function InteractiveEntityTable<T extends ObjectData>({
     useConnections: true,
     useVitality: true,
     usePopulation: true,
-    inputEntities: entities,
+    inputEnts: ents,
   });
   const currentEntities = getCurrentEntities(filteredEntities);
 
@@ -47,39 +47,30 @@ function InteractiveEntityTable<T extends ObjectData>({
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
       <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-        <VisibleItemsMeter
-          objects={entities}
-          shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-        />
-        <TableExport visibleColumns={visibilityModule.visibleColumns} entities={filteredEntities} />
+        <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+        <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
       </div>
       <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
 
       {/* The actual <table> component */}
       <BaseEntityTable
         visibleColumns={visibilityModule.visibleColumns}
-        objects={currentEntities}
+        ents={currentEntities}
         tableID={tableID}
       />
 
       {currentEntities.length === 0 && (
         <div>
           All results are filtered out.
-          <FilterBreakdown objects={entities} />
+          <FilterBreakdown ents={ents} />
         </div>
       )}
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
       {currentEntities.length > 10 && (
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-          <VisibleItemsMeter
-            objects={entities}
-            shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
-          />
-          <TableExport
-            visibleColumns={visibilityModule.visibleColumns}
-            entities={filteredEntities}
-          />
+          <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
+          <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
         </div>
       )}
     </div>

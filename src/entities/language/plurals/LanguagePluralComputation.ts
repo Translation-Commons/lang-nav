@@ -3,7 +3,7 @@
 
 import plurals from 'cldr-core/supplemental/plurals.json';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -38,7 +38,7 @@ export function findLanguagePluralRules(lang: LanguageData): PluralRuleFromCLDR[
     if (
       dataProvider != null &&
       dataProvider.ID !== lang.ID &&
-      dataProvider.type === ObjectType.Language
+      dataProvider.type === EntityType.Language
     )
       return findLanguagePluralRules(dataProvider);
     return null;

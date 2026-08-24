@@ -2,7 +2,7 @@ import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
 import CensusCountForLocale from '@entities/census/CensusCountForLocale';
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
+import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
 import LocaleCensusCitation from '@entities/locale/LocaleCensusCitation';
 import LocalePopulationAdjusted from '@entities/locale/LocalePopulationAdjusted';
 import { LocaleData } from '@entities/locale/LocaleTypes';
@@ -20,10 +20,8 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
         territory.
       </>
     ),
-    render: (object) => (
-      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Overall} />
-    ),
-    exportValue: (object) => getObjectPopulation(object),
+    render: (ent) => <LocalePopulationAdjusted locale={ent} focus={PopulationFocus.Overall} />,
+    exportValue: (ent) => getEntityPopulation(ent),
     field: Field.Population,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
@@ -38,10 +36,8 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
         multiply it by the current population of the territory.
       </>
     ),
-    render: (object) => (
-      <LocalePopulationAdjusted locale={object} focus={PopulationFocus.Speaking} />
-    ),
-    exportValue: (object) => object.pop.speaking.adjusted,
+    render: (ent) => <LocalePopulationAdjusted locale={ent} focus={PopulationFocus.Speaking} />,
+    exportValue: (ent) => ent.pop.speaking.adjusted,
     field: Field.PopulationSpeaking,
     columnGroup: 'Demographics',
     isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
@@ -49,37 +45,37 @@ export const LocalePopulationColumns: TableColumn<LocaleData>[] = [
   {
     key: 'Population (Direct)',
     description: 'This is the original population number cited from sourced data.',
-    render: (object) => object.pop.speaking.unadjusted,
+    render: (ent) => ent.pop.speaking.unadjusted,
     field: Field.PopulationDirectlySourced,
     columnGroup: 'Demographics',
     isInitiallyVisible: false,
   },
   {
     key: '% in Territory',
-    render: (object) => object.pop.speaking.percentAdjusted,
+    render: (ent) => ent.pop.speaking.percentAdjusted,
     field: Field.PercentOfTerritoryPopulation,
     columnGroup: 'Demographics',
     isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: '% of Global Language Speakers',
-    render: (object) =>
-      object.pop.speaking.adjusted &&
-      (object.pop.speaking.adjusted * 100) / (object.language?.pop.speaking.estimate ?? 1),
+    render: (ent) =>
+      ent.pop.speaking.adjusted &&
+      (ent.pop.speaking.adjusted * 100) / (ent.language?.pop.speaking.estimate ?? 1),
     isInitiallyVisible: false,
     field: Field.PercentOfOverallLanguageSpeakers,
     columnGroup: 'Demographics',
   },
   {
     key: 'Population Source',
-    render: (object) => <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />,
+    render: (ent) => <LocaleCensusCitation locale={ent} focus={PopulationFocus.Speaking} />,
     field: Field.SourceForPopulation,
     columnGroup: 'Demographics',
     isInitiallyVisible: (params) => params.populationFocus !== PopulationFocus.Writing,
   },
   {
     key: 'Population Records',
-    render: (object) => <CensusCountForLocale locale={object} />,
+    render: (ent) => <CensusCountForLocale locale={ent} />,
     columnGroup: 'Demographics',
     field: Field.CountOfCensuses,
     isInitiallyVisible: false,

@@ -16,7 +16,7 @@ import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { ProfileType } from './Profiles';
 
-export enum ObjectType {
+export enum EntityType {
   Language = 'Language',
   Locale = 'Locale',
   Territory = 'Territory',
@@ -68,8 +68,8 @@ export enum PageParamKey {
   limit = 'limit',
   localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
-  objectID = 'objectID',
-  objectType = 'objectType',
+  entID = 'entID',
+  entType = 'entType',
   page = 'page',
   pinned = 'pinned',
   populationFocus = 'populationFocus',
@@ -105,8 +105,8 @@ export type PageParams = {
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
-  objectID?: string;
-  objectType: ObjectType;
+  entID?: string;
+  entType: EntityType;
   page: number; // 1 indexed
   pinned: string[];
   populationFocus: PopulationFocus;

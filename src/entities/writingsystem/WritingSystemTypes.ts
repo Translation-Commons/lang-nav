@@ -2,13 +2,13 @@
  * Enums and types related to writing systems
  */
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectBase } from '@entities/types/DataTypes';
+import { EntityBase } from '@entities/types/DataTypes';
 
 export type ScriptCode = string; // ISO 15924 script code, eg. Latn, Cyrl, etc.
 
@@ -19,8 +19,8 @@ export enum WritingSystemScope {
   SpecialCode = 'Special Code',
 }
 
-export interface WritingSystemData extends ObjectBase {
-  type: ObjectType.WritingSystem;
+export interface WritingSystemData extends EntityBase {
+  type: EntityType.WritingSystem;
 
   ID: ScriptCode;
   codeDisplay: ScriptCode; // This should be stable
@@ -44,7 +44,7 @@ export interface WritingSystemData extends ObjectBase {
   populationUpperBound?: number;
   populationOfDescendants?: number;
 
-  // References to other objects, filled in after loading the TSV
+  // References to other entities, filled in after loading the TSV
   primaryLanguage?: LanguageData;
   territoryOfOrigin?: TerritoryData;
   languages?: Record<LanguageCode, LanguageData>;

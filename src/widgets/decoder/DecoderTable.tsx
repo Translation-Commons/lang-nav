@@ -1,7 +1,7 @@
 import { TriangleAlertIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
 import getSearchableField from '@features/transforms/search/getSearchableField';
 
@@ -112,12 +112,12 @@ const ResultRow: React.FC<{ input: string }> = ({ input }) => {
 const LanguageLabel: React.FC<{ lang: LanguageData; input: string }> = ({ lang, input }) => {
   const searchResult = getSearchableField(lang, SearchableField.NameAny, input.toLowerCase());
   return (
-    <HoverableObject object={lang}>
+    <HoverableEntity ent={lang}>
       {lang.nameDisplay}
       {searchResult && lang.nameDisplay.toLowerCase() !== searchResult.toLowerCase() && (
         <Deemphasized> ({searchResult})</Deemphasized>
       )}
-    </HoverableObject>
+    </HoverableEntity>
   );
 };
 

@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-const useEntities = (entityType?: ObjectType): EntityData[] => {
-  const { objectType: pageEntityType } = usePageParams();
+const useEntities = (entType?: EntityType): EntityData[] => {
+  const { entType: pageEntityType } = usePageParams();
   const {
     languagesInSelectedSource,
     locales,
@@ -18,27 +18,27 @@ const useEntities = (entityType?: ObjectType): EntityData[] => {
     keyboards,
     organizations,
   } = useDataContext();
-  const objects = useMemo(() => {
-    switch (entityType ?? pageEntityType) {
-      case ObjectType.Census:
+  const ents = useMemo(() => {
+    switch (entType ?? pageEntityType) {
+      case EntityType.Census:
         return Object.values(censuses);
-      case ObjectType.Language:
+      case EntityType.Language:
         return languagesInSelectedSource;
-      case ObjectType.Locale:
+      case EntityType.Locale:
         return locales;
-      case ObjectType.Territory:
+      case EntityType.Territory:
         return territories;
-      case ObjectType.WritingSystem:
+      case EntityType.WritingSystem:
         return writingSystems;
-      case ObjectType.Variant:
+      case EntityType.Variant:
         return variants;
-      case ObjectType.Keyboard:
+      case EntityType.Keyboard:
         return keyboards;
-      case ObjectType.Org:
+      case EntityType.Org:
         return organizations;
     }
   }, [
-    entityType,
+    entType,
     pageEntityType,
     censuses,
     languagesInSelectedSource,
@@ -49,7 +49,7 @@ const useEntities = (entityType?: ObjectType): EntityData[] => {
     keyboards,
     organizations,
   ]);
-  return objects;
+  return ents;
 };
 
 export default useEntities;

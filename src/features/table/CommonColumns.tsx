@@ -1,12 +1,12 @@
 import React, { useCallback } from 'react';
 
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import PinButton from '@shared/ui/PinButton';
 
@@ -14,50 +14,48 @@ import TableColumn from './TableColumn';
 
 const NAME_COLUMN_MAX_WIDTH = '20em';
 
-const TablePinCell: React.FC<{ object: ObjectData }> = ({ object }) => {
+const TablePinCell: React.FC<{ ent: EntityData }> = ({ ent }) => {
   const { pinned, updatePageParams } = usePageParams();
-  const isPinned = pinned.includes(object.ID);
+  const isPinned = pinned.includes(ent.ID);
   const togglePin = useCallback(() => {
     updatePageParams({
-      pinned: isPinned ? pinned.filter((id) => id !== object.ID) : [...pinned, object.ID],
+      pinned: isPinned ? pinned.filter((id) => id !== ent.ID) : [...pinned, ent.ID],
     });
-  }, [isPinned, pinned, object.ID, updatePageParams]);
+  }, [isPinned, pinned, ent.ID, updatePageParams]);
 
   return <PinButton isPinned={isPinned} onTogglePin={togglePin} />;
 };
 
-export const PinColumn: TableColumn<ObjectData> = {
+export const PinColumn: TableColumn<EntityData> = {
   key: 'Pin',
   label: '',
-  render: (object) => <TablePinCell object={object} />,
+  render: (ent) => <TablePinCell ent={ent} />,
   exportValue: () => '',
 };
 
-export const CodeColumn: TableColumn<ObjectData> = {
+export const CodeColumn: TableColumn<EntityData> = {
   key: 'ID',
-  render: (object) => (
-    <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />
-  ),
+  render: (ent) => <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />,
   field: Field.Code,
   columnGroup: 'Codes',
 };
 
-export const NameColumn: TableColumn<ObjectData> = {
+export const NameColumn: TableColumn<EntityData> = {
   key: 'Name',
-  render: (object) => (
-    <HoverableObject object={object} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
-      <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
-    </HoverableObject>
+  render: (ent) => (
+    <HoverableEntity ent={ent} style={{ maxWidth: NAME_COLUMN_MAX_WIDTH }}>
+      <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
+    </HoverableEntity>
   ),
-  exportValue: (object) => object.nameDisplay, // avoid html escapes like &amp;
+  exportValue: (ent) => ent.nameDisplay, // avoid html escapes like &amp;
   field: Field.Name,
   columnGroup: 'Names',
 };
 
-export const EndonymColumn: TableColumn<ObjectData> = {
+export const EndonymColumn: TableColumn<EntityData> = {
   key: 'Endonym',
-  render: (object) => (
-    <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameEndonym} />
+  render: (ent) => (
+    <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameEndonym} />
   ),
   field: Field.Endonym,
   isInitiallyVisible: false,

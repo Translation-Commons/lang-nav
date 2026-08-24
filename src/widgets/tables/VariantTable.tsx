@@ -10,9 +10,7 @@ const VariantTable: React.FC = () => {
   const { variants } = useDataContext();
   const columns = getVariantColumns();
 
-  return (
-    <InteractiveEntityTable tableID={TableID.Variants} entities={variants} columns={columns} />
-  );
+  return <InteractiveEntityTable tableID={TableID.Variants} ents={variants} columns={columns} />;
 };
 
 export default VariantTable;

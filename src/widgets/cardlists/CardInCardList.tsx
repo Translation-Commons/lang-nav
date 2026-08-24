@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import PinButton from '@shared/ui/PinButton';
 
@@ -10,31 +10,31 @@ import './cardListStyles.css';
 
 interface Props {
   children: React.ReactNode;
-  getBackgroundColor?: (object: ObjectData) => string | undefined;
-  object: ObjectData;
+  getBackgroundColor?: (ent: EntityData) => string | undefined;
+  ent: EntityData;
 }
 
-const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object }) => {
-  const { updatePageParams, objectID, pinned } = usePageParams();
+const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) => {
+  const { updatePageParams, entID, pinned } = usePageParams();
 
-  const isPinned = pinned.includes(object.ID);
+  const isPinned = pinned.includes(ent.ID);
   const togglePin = useCallback(() => {
     updatePageParams({
-      pinned: isPinned ? pinned.filter((id) => id !== object.ID) : [...pinned, object.ID],
+      pinned: isPinned ? pinned.filter((id) => id !== ent.ID) : [...pinned, ent.ID],
     });
-  }, [isPinned, pinned, object.ID, updatePageParams]);
+  }, [isPinned, pinned, ent.ID, updatePageParams]);
 
-  const openObject = useCallback(() => {
-    if (object) updatePageParams({ objectID: object.ID });
-  }, [object, updatePageParams]);
+  const openEntity = useCallback(() => {
+    if (ent) updatePageParams({ entID: ent.ID });
+  }, [ent, updatePageParams]);
   const handleClick = useCallback(
     (event: React.MouseEvent<HTMLDivElement>) => {
-      // Don't open the object if the user clicked on an interactive element inside the card (e.g. a button or link).
+      // Don't open the entity if the user clicked on an interactive element inside the card (e.g. a button or link).
       const target = event.target as HTMLElement | null;
       if (target && target.closest('button,a,input,select,textarea')) return;
-      openObject();
+      openEntity();
     },
-    [openObject],
+    [openEntity],
   );
   const handleKeyDown = useCallback(
     (event: React.KeyboardEvent<HTMLDivElement>) => {
@@ -42,24 +42,24 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, object 
       const target = event.target as HTMLElement | null;
       if (target && target.closest('button,a,input,select,textarea')) return;
 
-      // Allow opening the object by pressing Enter or Space when the card is focused,
+      // Allow opening the entity by pressing Enter or Space when the card is focused,
       if (event.key === 'Enter' || event.key === ' ' || event.key === 'Spacebar') {
         event.preventDefault();
-        openObject();
+        openEntity();
       }
     },
-    [openObject],
+    [openEntity],
   );
 
   return (
     <div
-      aria-label={`${object.nameDisplay} card, click to open details`}
-      className={`CardInCardList ${object.ID === objectID ? 'selected' : ''}`}
+      aria-label={`${ent.nameDisplay} card, click to open details`}
+      className={`CardInCardList ${ent.ID === entID ? 'selected' : ''}`}
       onClick={handleClick}
       onKeyDown={handleKeyDown}
       role="button"
       style={{
-        backgroundColor: getBackgroundColor ? (getBackgroundColor(object) ?? 'inherit') : undefined,
+        backgroundColor: getBackgroundColor ? (getBackgroundColor(ent) ?? 'inherit') : undefined,
       }}
       tabIndex={0}
     >

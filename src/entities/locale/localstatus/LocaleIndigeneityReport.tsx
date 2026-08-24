@@ -1,7 +1,7 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
@@ -19,7 +19,7 @@ enum IncludeCriteria {
 
 const LocaleIndigeneityReport: React.FC = () => {
   const locales = useFilteredEntities({})
-    .filteredEntities.filter((l) => l.type === ObjectType.Locale)
+    .filteredEntities.filter((l) => l.type === EntityType.Locale)
     .filter((l) => !l.writingSystem && !l.variants && l.territory) as LocaleData[];
 
   const [includeCriteria, setIncludeCriteria] = React.useState(IncludeCriteria.MissingData);

@@ -2,7 +2,7 @@ import { CircleAlertIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
@@ -37,11 +37,11 @@ const LanguagePopulationInSelectedTerritory: React.FC<{ lang: LanguageData }> = 
   );
 
   return (
-    <HoverableObject object={biggestLocale}>
+    <HoverableEntity ent={biggestLocale}>
       <CountOfPeople
         count={Math.max(...locales.map((locale) => locale.pop.speaking.adjusted ?? 0))}
       />
-    </HoverableObject>
+    </HoverableEntity>
   );
 };
 

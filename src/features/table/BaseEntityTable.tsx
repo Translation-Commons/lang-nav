@@ -2,7 +2,7 @@ import React, { ReactNode } from 'react';
 
 import ZIndex from '@features/layers/ZIndex';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
@@ -17,11 +17,11 @@ import TableValueType from './TableValueType';
 
 type Props<T> = {
   visibleColumns: TableColumn<T>[];
-  objects: T[];
+  ents: T[];
   tableID: TableID;
 };
 
-function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects, tableID }: Props<T>) {
+function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }: Props<T>) {
   return (
     <div style={{ width: '100%', position: 'relative' }}>
       <table
@@ -43,8 +43,8 @@ function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects, tableI
           </tr>
         </thead>
         <tbody>
-          {objects.map((object, i) => (
-            <tr key={object.ID || i}>
+          {ents.map((ent, i) => (
+            <tr key={ent.ID || i}>
               {visibleColumns.map((column, idx) => {
                 const valueType = getValueTypeForColumn(column);
                 // The pin column (idx 0) and the first data column (idx 1) stay pinned to the
@@ -57,7 +57,7 @@ function BaseEntityTable<T extends ObjectData>({ visibleColumns, objects, tableI
                     className={isSticky ? `${valueType} alwaysVisible` : valueType}
                     style={{ maxWidth: MAX_COLUMN_WIDTH, padding: '0.25em 0.5em' }}
                   >
-                    <FormattedContent content={column.render(object)} valueType={valueType} />
+                    <FormattedContent content={column.render(ent)} valueType={valueType} />
                   </td>
                 );
               })}

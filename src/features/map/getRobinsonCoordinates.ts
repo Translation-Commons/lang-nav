@@ -45,11 +45,11 @@ export function getRobinsonCoordinates(lat: number, lon: number) {
 }
 
 // The coordinates are shifted 11 degrees east to center the map.
-export function getRobinsonCoordinatesShifted(object: DrawableData) {
-  if (object == null) return { x: 0, y: 0 };
-  if (object.latitude == null || object.longitude == null) return { x: 0, y: 0 };
+export function getRobinsonCoordinatesShifted(ent: DrawableData) {
+  if (ent == null) return { x: 0, y: 0 };
+  if (ent.latitude == null || ent.longitude == null) return { x: 0, y: 0 };
   return getRobinsonCoordinates(
-    object.latitude,
-    (object.longitude < -169 ? object.longitude + 360 : object.longitude) - 11,
+    ent.latitude,
+    (ent.longitude < -169 ? ent.longitude + 360 : ent.longitude) - 11,
   );
 }

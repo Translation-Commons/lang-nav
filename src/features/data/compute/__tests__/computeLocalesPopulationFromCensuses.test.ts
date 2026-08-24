@@ -1,34 +1,34 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  connectMockedObjects,
-  getDisconnectedMockedObjects,
+  connectMockedEntities,
+  getDisconnectedMockedEntities,
   getMockedCoreData,
-} from '@features/__tests__/MockObjects';
+} from '@features/__tests__/MockEntities';
 import { CoreData } from '@features/data/load/CoreData';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
-import { ObjectDictionary } from '@entities/types/DataTypes';
+import { EntityDictionary } from '@entities/types/DataTypes';
 
 import { computeRegionalLocalesPopulation } from '../computeAggregatedLocalesPopulation';
 import { computeLocalesPopulationFromCensuses } from '../computeLocalesPopulationFromCensuses';
 import { updateLanguagesPopulationFromLocale, updatePopulations } from '../updatePopulations';
 
 describe('computeLocalePopulationFromCensuses', () => {
-  // Gets a small test of objects to test on. We can run this function multiple time to get multiple batches of objects
-  function getMockedData(extraObjects: ObjectDictionary = {}): CoreData {
+  // Gets a small test of entities to test on. We can run this function multiple time to get multiple batches of entities
+  function getMockedData(extraEntities: EntityDictionary = {}): CoreData {
     // Provides 4 base locales: sjn_BE, sjn_ER, dori0123_ER and sjn_Teng_BE
-    const baseObjects = getDisconnectedMockedObjects();
+    const baseEntities = getDisconnectedMockedEntities();
 
-    // Create symbolic links between objects and create regional locales
+    // Create symbolic links between entities and create regional locales
     // So how we have 3 ones for the region: sjn_123, dori0123_123, sjn_Teng_123
     // and 3 for the world: sjn_001, dori0123_001, sjn_Teng_001
-    const connectedObjects = connectMockedObjects({ ...baseObjects, ...extraObjects });
+    const connectedEnts = connectMockedEntities({ ...baseEntities, ...extraEntities });
 
     // No algorithms have been applied on this data yet so we can test them.
-    return { objects: connectedObjects, ...getMockedCoreData(connectedObjects) };
+    return { ents: connectedEnts, ...getMockedCoreData(connectedEnts) };
   }
 
   it('computes adjusted populations for all locales', () => {
@@ -145,7 +145,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     function getHighPopulationCensus(): CensusData {
       // Function so it create a new instance each time
       return {
-        type: ObjectType.Census,
+        type: EntityType.Census,
         ID: 'be9999',
         codeDisplay: 'be9999',
         isoRegionCode: 'BE',
@@ -198,7 +198,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     function getAMCensus(): CensusData {
       // Function so it create a new instance each time
       return {
-        type: ObjectType.Census,
+        type: EntityType.Census,
         ID: 'am0590',
         codeDisplay: 'am0590',
         isoRegionCode: 'AM',
@@ -214,7 +214,7 @@ describe('computeLocalePopulationFromCensuses', () => {
     }
     function getSindarinInAMLocale(): LocaleData {
       return {
-        type: ObjectType.Locale,
+        type: EntityType.Locale,
         ID: 'sjn_AM',
         codeDisplay: 'sjn-AM',
         languageCode: 'sjn',
@@ -227,15 +227,15 @@ describe('computeLocalePopulationFromCensuses', () => {
       };
     }
 
-    function generateLanguage(extraObjects: ObjectDictionary = {}) {
-      const mockedObjects = getMockedData(extraObjects);
-      const world = mockedObjects.territories.find((t) => t.ID === '001')!;
+    function generateLanguage(extraEntities: EntityDictionary = {}) {
+      const mockedEnts = getMockedData(extraEntities);
+      const world = mockedEnts.territories.find((t) => t.ID === '001')!;
       // Update both population, noting one has a different census
-      computeLocalesPopulationFromCensuses(mockedObjects.locales);
+      computeLocalesPopulationFromCensuses(mockedEnts.locales);
       computeRegionalLocalesPopulation(world);
-      updatePopulations(mockedObjects.allLanguoids, mockedObjects.locales, world);
+      updatePopulations(mockedEnts.allLanguoids, mockedEnts.locales, world);
 
-      return mockedObjects.allLanguoids.find((l) => l.ID === 'sjn');
+      return mockedEnts.allLanguoids.find((l) => l.ID === 'sjn');
     }
 
     // Check the Language sjn

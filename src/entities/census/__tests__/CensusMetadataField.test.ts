@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusMetadataField } from '../CensusMetadataField';
 import { CensusCollectorType, CensusData, CensusLanguageUse } from '../CensusTypes';
@@ -31,7 +31,7 @@ describe('CensusMetadataField', () => {
 #nationality	Citizens		eg. Citizens, Residents, Visitors
 #residenceBasis	de jure		eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
 #quantity	percent		Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
-#notes	Test object		Any additional notes about the census
+#notes	Test entity		Any additional notes about the census
 ### Creator ###			
 #collectorType	Government		Type of organization (e.g., Government, CLDR)
 #collectorName	Statistics Canada		Name of the organization or journal presenting the data
@@ -48,7 +48,7 @@ describe('CensusMetadataField', () => {
 #columnName	Mothertongue		
 #citation	Example Citation		The full citation, may be redundant if other fields are filled in`;
   const fullMockedCensus: CensusData = {
-    type: ObjectType.Census,
+    type: EntityType.Census,
     ID: 'test.1',
     codeDisplay: 'ca1999',
     nameDisplay: 'Canada 1999',
@@ -82,7 +82,7 @@ describe('CensusMetadataField', () => {
     nationality: 'Citizens', // eg. Citizens, Residents, Visitors
     residenceBasis: 'de jure', // eg. de jure (people located by their usual residence), de facto (people located immediately, including visitors)
     quantity: 'percent', // Whether the data is given as a count of people (e.g., 1000) or a percentage of the overall population (e.g., 50%)
-    notes: 'Test object', // Any additional notes about the census
+    notes: 'Test entity', // Any additional notes about the census
 
     // Author
     collectorType: CensusCollectorType.Government, // Type of organization (e.g., Government, CLDR)
@@ -105,7 +105,7 @@ describe('CensusMetadataField', () => {
     languageCount: 2, // Number of languages in this collection
     languageEstimates: { en: 0.8, fr: 0.1 }, // Language code to population estimate mapping
 
-    // Connections to other objects loaded after the fact
+    // Connections to other entities loaded after the fact
     // territory: undefined,
   };
 

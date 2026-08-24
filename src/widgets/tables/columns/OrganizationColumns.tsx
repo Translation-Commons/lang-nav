@@ -1,5 +1,5 @@
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
@@ -16,23 +16,23 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
     EndonymColumn,
     {
       key: 'Headquarters',
-      render: (object) => <HoverableObjectName object={object.headquarters} />,
-      exportValue: (object) => object.headquarters?.ID ?? '',
+      render: (ent) => <HoverableEntityName ent={ent.headquarters} />,
+      exportValue: (ent) => ent.headquarters?.ID ?? '',
       field: Field.Territory,
     },
     {
       key: 'Parent Organization',
-      render: (object) => <HoverableObjectName object={object.parent} />,
-      exportValue: (object) => object.parent?.ID ?? '',
+      render: (ent) => <HoverableEntityName ent={ent.parent} />,
+      exportValue: (ent) => ent.parent?.ID ?? '',
       isInitiallyVisible: false,
     },
     {
       key: 'Census Tables',
-      render: (object) =>
-        object.censuses && object.censuses.length > 0 ? (
+      render: (ent) =>
+        ent.censuses && ent.censuses.length > 0 ? (
           <HoverableEnumeration
-            items={object.censuses.map((doc) => (
-              <HoverableObjectName key={doc.ID} object={doc} />
+            items={ent.censuses.map((doc) => (
+              <HoverableEntityName key={doc.ID} ent={doc} />
             ))}
             limit={5}
           />
@@ -43,8 +43,8 @@ function getOrganizationColumns(): TableColumn<OrganizationData>[] {
     },
     {
       key: 'URL',
-      render: (object) => object.url && <ExternalLink href={object.url} />,
-      exportValue: (object) => object.url ?? '',
+      render: (ent) => ent.url && <ExternalLink href={ent.url} />,
+      exportValue: (ent) => ent.url ?? '',
       isInitiallyVisible: false,
     },
   ];

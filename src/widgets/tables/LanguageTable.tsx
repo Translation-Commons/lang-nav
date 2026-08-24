@@ -15,7 +15,7 @@ const LanguageTable: React.FC = () => {
   return (
     <InteractiveEntityTable<LanguageData>
       tableID={TableID.Languages}
-      entities={languagesInSelectedSource}
+      ents={languagesInSelectedSource}
       columns={columns}
     />
   );

@@ -2,7 +2,7 @@ import { TriangleAlertIcon } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType, PageParamKey } from '@features/params/PageParamTypes';
+import { EntityType, PageParamKey } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
@@ -65,7 +65,7 @@ const LanguageFilterSelector: React.FC = () => {
         <>
           Filter results to those relevant to a specific language, language family, or dialect. You
           can enter either the language name or its code. For example, entering &quot;Spanish&quot;
-          or <code>spa</code> will filter to objects relevant to Spanish.{' '}
+          or <code>spa</code> will filter to entities relevant to Spanish.{' '}
           <LanguageFilterDescription />
         </>
       }
@@ -75,24 +75,24 @@ const LanguageFilterSelector: React.FC = () => {
 };
 
 const LanguageFilterDescription: React.FC = () => {
-  const { objectType } = usePageParams();
-  switch (objectType) {
-    case ObjectType.Language:
+  const { entType } = usePageParams();
+  switch (entType) {
+    case EntityType.Language:
       return (
         <>
           <strong>Language view only:</strong> Selecting a language family will show the languages
           in the family. Dialects will also appear if they are enabled.
         </>
       );
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return <>This will filter territories to ones where the selected language is used.</>;
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return <>This will filter writing systems to ones used for the selected language.</>;
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return <>This will filter variants for ones that are intended for this language.</>;
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return <>This will filter locales with the selected language.</>;
-    case ObjectType.Census:
+    case EntityType.Census:
       return (
         <>
           <TriangleAlertIcon size="1em" style={{ color: 'var(--color-yellow)' }} /> Censuses are not

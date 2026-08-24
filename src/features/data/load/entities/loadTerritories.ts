@@ -1,13 +1,13 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadTerritories(): Promise<Record<string, TerritoryData> | void> {
-  return await loadObjectsFromFile<TerritoryData>('data/tc/territories.tsv', parseTerritoryLine);
+  return await loadEntitiesFromFile<TerritoryData>('data/tc/territories.tsv', parseTerritoryLine);
 }
 
 export function parseTerritoryLine(line: string): TerritoryData {
@@ -15,7 +15,7 @@ export function parseTerritoryLine(line: string): TerritoryData {
   const population = parts[3] != '' ? Number.parseInt(parts[3].replace(/,/g, '')) : 0;
 
   return {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
 
     ID: parts[0],
     codeDisplay: parts[0],

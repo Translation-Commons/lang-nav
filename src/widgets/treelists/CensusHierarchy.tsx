@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
@@ -9,7 +9,7 @@ import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 export const CensusHierarchy: React.FC = () => {
   const { territories } = useDataContext();
@@ -33,8 +33,8 @@ export const CensusHierarchy: React.FC = () => {
 
 export function getCensusTreeNodes(
   territories: TerritoryData[],
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean = () => true,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean = () => true,
 ): TreeNodeData[] {
   return territories
     .filter(filterFunction ?? (() => true))
@@ -45,20 +45,20 @@ export function getCensusTreeNodes(
 
 function getTerritoryTreeNode(
   territory: TerritoryData,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData {
   return {
-    type: ObjectType.Census,
-    object: territory,
+    type: EntityType.Census,
+    ent: territory,
     children: getCensusNodesForTerritory(territory, sortFunction, filterFunction),
   };
 }
 
 function getCensusNodesForTerritory(
   territory: TerritoryData,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData[] {
   if (!territory.censuses) return [];
   return territory.censuses
@@ -69,8 +69,8 @@ function getCensusNodesForTerritory(
 
 function getCensusNode(census: CensusData): TreeNodeData {
   return {
-    type: ObjectType.Census,
-    object: census,
+    type: EntityType.Census,
+    ent: census,
     labelStyle: { fontWeight: 'bold' },
     children: [], // Languages could be listed here -- but if there are many censuses loaded this could add up to a lot of data
   };

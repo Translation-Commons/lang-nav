@@ -1,13 +1,13 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
-import getObjectFromID from '@entities/lib/getObjectFromID';
-import { ObjectData } from '@entities/types/DataTypes';
+import getEntityFromID from '@entities/lib/getEntityFromID';
+import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 
 export const VariantHierarchy: React.FC = () => {
@@ -66,21 +66,21 @@ export function getNodeHierarchy(variants: VariantData[]): Record<string, Varian
 
 export function getTreeNodes(
   nodeHierarchy: Record<string, VariantBranch>,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
+  sortFunction: (a: EntityData, b: EntityData) => number,
 ): TreeNodeData[] {
   return Object.values(nodeHierarchy)
     .map(getVariantTreeNode)
     .filter((node) => node != null)
-    .sort((a, b) => sortFunction(a.object, b.object));
+    .sort((a, b) => sortFunction(a.ent, b.ent));
 }
 
 export function getVariantTreeNode(VariantBranch: VariantBranch): TreeNodeData | null {
-  const object = getObjectFromID(VariantBranch.key);
-  if (object == null) return null;
+  const ent = getEntityFromID(VariantBranch.key);
+  if (ent == null) return null;
   return {
-    type: object?.type ?? ObjectType.Variant,
-    object: VariantBranch.variant ?? object,
+    type: ent?.type ?? EntityType.Variant,
+    ent: VariantBranch.variant ?? ent,
     children: getTreeNodes(VariantBranch.branches, getSortFunction()),
-    labelStyle: { fontWeight: object?.type === ObjectType.Variant ? 'normal' : 'bold' },
+    labelStyle: { fontWeight: ent?.type === EntityType.Variant ? 'normal' : 'bold' },
   };
 }

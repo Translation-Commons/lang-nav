@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import type { LanguageData } from '@entities/language/LanguageTypes';
 
@@ -65,7 +65,7 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
         alts = found.slice(1, 10);
       } else {
         lang = getLanguage(searchLower);
-        if (lang?.CLDR.dataProvider?.type === ObjectType.Language) alts = [lang.CLDR.dataProvider];
+        if (lang?.CLDR.dataProvider?.type === EntityType.Language) alts = [lang.CLDR.dataProvider];
       }
       const { codeWithMacro } = getDecoderMacroCode(lang, lang?.codeDisplay) ?? {};
       return { input: searchLower, lang, alts, codeWithMacro };

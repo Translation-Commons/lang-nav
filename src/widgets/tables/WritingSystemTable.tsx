@@ -13,7 +13,7 @@ const WritingSystemTable: React.FC = () => {
   return (
     <InteractiveEntityTable
       tableID={TableID.WritingSystems}
-      entities={writingSystems}
+      ents={writingSystems}
       columns={columns}
     />
   );

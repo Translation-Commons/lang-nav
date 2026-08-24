@@ -1,31 +1,31 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { EthnologueDigitalSupport } from '@entities/language/LanguageTypes';
 import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 
 // Customized for UNESCO use
-export function prepareUNESCODataForExport(objects: ObjectData[], territoryFilter: string): string {
+export function prepareUNESCODataForExport(ents: EntityData[], territoryFilter: string): string {
   const territoryCode = (
     territoryFilter.split('[')[1]?.slice(0, 2) || territoryFilter
   ).toUpperCase();
 
-  return objects
-    .map((obj) => {
-      if (obj.type === ObjectType.Locale) return obj as LocaleData;
-      if (obj.type === ObjectType.Language)
-        return obj.locales.find((l) => l.territoryCode === territoryCode);
+  return ents
+    .map((ent) => {
+      if (ent.type === EntityType.Locale) return ent as LocaleData;
+      if (ent.type === EntityType.Language)
+        return ent.locales.find((l) => l.territoryCode === territoryCode);
       return undefined;
     })
-    .filter((obj) => obj != null)
+    .filter((ent) => ent != null)
     .sort(sortByPopulation) // Sort by number of users descending
     .map(getLocaleUNESCOData)
     .map((row) => row.join('\t'))
@@ -153,7 +153,7 @@ export const ExportTerritoryLanguageDataButton: React.FC<{ territory: TerritoryD
     const locales = territory.locales ?? [];
     trackEvent('data_exported', {
       export_type: 'Copy UNESCO TSV (Territory)',
-      objectType: ObjectType.Territory,
+      entType: EntityType.Territory,
       path: typeof window !== 'undefined' ? window.location.pathname : undefined,
       row_count: locales.length,
       territory_code: territory.ID,

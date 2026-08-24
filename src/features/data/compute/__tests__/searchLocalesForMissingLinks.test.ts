@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getMockedObjectDictionaries } from '@features/__tests__/MockObjects';
+import { getMockedEntityDictionaries } from '@features/__tests__/MockEntities';
 import { connectLanguagesToParent } from '@features/data/connect/connectLanguagesToParent';
 import connectLocales from '@features/data/connect/connectLocales';
 import { connectTerritoriesToParent } from '@features/data/connect/connectTerritoriesToParent';
@@ -18,13 +18,13 @@ import {
 describe('searchLocalesForMissingLinks', () => {
   it('should connect locales that are missing links based on language and territory codes', () => {
     const { languagesBySource, territories, writingSystems, locales, variants } =
-      getMockedObjectDictionaries();
+      getMockedEntityDictionaries();
     expect(
       Object.values(locales).length,
       "Initially there are 4 locales:  ['sjn_BE', 'sjn_ER', 'dori0123_ER', 'sjn_Teng_BE']",
     ).toBe(4);
 
-    // Run the other connection functions in connectObjects
+    // Run the other connection functions in connectEntities
     connectLanguagesToParent(languagesBySource);
     connectTerritoriesToParent(territories);
     connectWritingSystems(languagesBySource.Combined, territories, writingSystems);

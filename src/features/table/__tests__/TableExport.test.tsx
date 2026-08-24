@@ -24,14 +24,14 @@ describe('TableExport', () => {
 
   const columns = [CodeColumn, NameColumn];
 
-  const objects = [
+  const ents = [
     getBaseLanguageData('eng', 'English'),
     getBaseLanguageData('fra', 'French'),
     getBaseLanguageData('spa', 'Spanish'),
   ];
 
   it('export buttons render correctly', async () => {
-    render(<TableExport visibleColumns={columns} entities={objects} />);
+    render(<TableExport visibleColumns={columns} ents={ents} />);
 
     // The options aren't initially visible
     expect(screen.queryByText('Copy TSV')).not.toBeTruthy();
@@ -53,7 +53,7 @@ describe('TableExport', () => {
   // so we only test copying to clipboard here.
 
   it('copies tsv format data to clipboard when Copy TSV is clicked', async () => {
-    render(<TableExport visibleColumns={columns} entities={objects} />);
+    render(<TableExport visibleColumns={columns} ents={ents} />);
 
     // Open the menu to show `Copy TSV` option
     act(() => {

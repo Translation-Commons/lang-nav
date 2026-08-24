@@ -1,13 +1,13 @@
 import { InfoIcon } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
-import HoverableObject from '@features/layers/hovercard/HoverableObject';
-import { ObjectType, SearchableField, View } from '@features/params/PageParamTypes';
+import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
+import { EntityType, SearchableField, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import TreeListNodeData from './TreeListNodeData';
 import { useTreeListOptionsContext } from './TreeListOptions';
@@ -16,8 +16,8 @@ import './treelist.css';
 
 export type TreeNodeData = {
   children: TreeNodeData[];
-  object: ObjectData;
-  type: ObjectType;
+  ent: EntityData;
+  type: EntityType;
   labelStyle?: React.CSSProperties;
   descendantsPassFilter?: boolean;
 };
@@ -28,23 +28,23 @@ type Props = {
 };
 
 const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }) => {
-  const { children, object, labelStyle } = nodeData;
+  const { children, ent, labelStyle } = nodeData;
   const { view, searchBy, searchString, fieldFocus } = usePageParams();
   const [seeAllChildren, setSeeAllChildren] = useState(false);
   const { limit } = usePageParams();
   const {
     allExpanded,
     showInfoButton,
-    showObjectIDs: showObjectIDsSetting,
+    showEntIDs: showEntIDsSetting,
   } = useTreeListOptionsContext();
   const [expanded, setExpanded] = useState(isExpandedInitially || allExpanded);
-  let showObjectIDs = showObjectIDsSetting;
+  let showEntIDs = showEntIDsSetting;
   if (
     searchString != '' &&
     view === View.Hierarchy &&
     [SearchableField.Code, SearchableField.CodeOrNameAny].includes(searchBy)
   ) {
-    showObjectIDs = true;
+    showEntIDs = true;
   }
 
   // Update the initial opening if a user is typing things in the search box
@@ -71,27 +71,27 @@ const TreeListNode: React.FC<Props> = ({ nodeData, isExpandedInitially = false }
       )}
       <>
         <span style={labelStyle}>
-          <ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.NameDisplay} />
+          <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
         </span>
-        {showObjectIDs && (
+        {showEntIDs && (
           <>
             {' '}
-            [<ObjectFieldHighlightedByPageSearch object={object} field={SearchableField.Code} />]
+            [<EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
           </>
         )}
         {showInfoButton && (
-          <HoverableObject object={object} style={{ marginLeft: '0.125em' }}>
+          <HoverableEntity ent={ent} style={{ marginLeft: '0.125em' }}>
             <InfoIcon size="1em" />
-          </HoverableObject>
+          </HoverableEntity>
         )}
-        {fieldFocus !== Field.None && <TreeListNodeData object={object} field={fieldFocus} />}
+        {fieldFocus !== Field.None && <TreeListNodeData ent={ent} field={fieldFocus} />}
       </>
       {expanded && children.length > 0 && (
         <ul className="TreeListBranch">
           {children
             .slice(0, limit > 0 && !seeAllChildren && !allExpanded ? limit : undefined)
             .map((child, i) => (
-              <TreeListNode key={child.object.ID} nodeData={child} isExpandedInitially={i === 0} />
+              <TreeListNode key={child.ent.ID} nodeData={child} isExpandedInitially={i === 0} />
             ))}
           {limit > 0 && children.length > limit && !seeAllChildren && !allExpanded && (
             <li>

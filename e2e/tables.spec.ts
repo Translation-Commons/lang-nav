@@ -1,6 +1,6 @@
 import { expect, Page, test } from '@playwright/test';
 
-import { ObjectType } from '../src/features/params/PageParamTypes';
+import { EntityType } from '../src/features/params/PageParamTypes';
 import TableID from '../src/features/table/TableID';
 import ReportID from '../src/widgets/reports/ReportID';
 
@@ -66,12 +66,12 @@ test.describe('screenshot tests', () => {
   }
 
   // Regular Entity Tables
-  Object.values(ObjectType).forEach((objectType) => {
-    test(`${objectType} Table`, async ({ page }) => {
+  Object.values(EntityType).forEach((entType) => {
+    test(`${entType} Table`, async ({ page }) => {
       await snapshotTable(
         page,
-        `view=Table&objectType=${objectType}`,
-        // TableID[`${objectType}Table`],
+        `view=Table&entType=${entType}`,
+        // TableID[`${entType}Table`],
       );
     });
   });
@@ -90,38 +90,29 @@ test.describe('screenshot tests', () => {
   });
 
   test(`Census Countries Table`, async ({ page }) => {
-    await snapshotTable(
-      page,
-      `view=Reports&objectType=Census&reportID=` + ReportID.CensusCountries,
-    );
+    await snapshotTable(page, `view=Reports&entType=Census&reportID=` + ReportID.CensusCountries);
   });
 
   test(`Indigeneity Table`, async ({ page }) => {
-    await snapshotTable(
-      page,
-      `view=Reports&objectType=Locale&reportID=` + ReportID.LocaleIndigeneity,
-    );
+    await snapshotTable(page, `view=Reports&entType=Locale&reportID=` + ReportID.LocaleIndigeneity);
   });
 
   test(`Potential Locales Table`, async ({ page }) => {
-    await snapshotTable(
-      page,
-      `view=Reports&objectType=Locale&reportID=` + ReportID.LocalesPotential,
-    );
+    await snapshotTable(page, `view=Reports&entType=Locale&reportID=` + ReportID.LocalesPotential);
   });
 
   test(`Variant Annotation Table`, async ({ page }) => {
     await snapshotTable(
       page,
-      `view=Reports&objectType=Variant&reportID=` + ReportID.VariantsAnnotationTool,
+      `view=Reports&entType=Variant&reportID=` + ReportID.VariantsAnnotationTool,
     );
   });
 
   test('Languages in Territory Table', async ({ page }) => {
-    await snapshotTable(page, `objectID=IN`, TableID.LanguagesInTerritory);
+    await snapshotTable(page, `entID=IN`, TableID.LanguagesInTerritory);
   });
 
   test('Languages in Census Table', async ({ page }) => {
-    await snapshotTable(page, `objectID=cldr.IN`, TableID.LanguagesInCensus);
+    await snapshotTable(page, `entID=cldr.IN`, TableID.LanguagesInCensus);
   });
 });

@@ -2,26 +2,26 @@ import { useCallback, useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
 import getField from '../fields/getField';
 import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
 
-type Props = { objects: ObjectData[]; scaleBy?: Field };
+type Props = { ents: EntityData[]; scaleBy?: Field };
 
 export type ScalingFunctions = {
   scaleBy: Field | undefined;
-  getScale: (object: ObjectData) => number; // returns radius multiplier (to be multiplied by scalar)
+  getScale: (ent: EntityData) => number; // returns radius multiplier (to be multiplied by scalar)
   maxValue: number;
   minValue: number;
 };
 
-const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
+const useScale = ({ ents, scaleBy }: Props): ScalingFunctions => {
   const { populationMin } = usePageParams();
   // If caller didn't pass, they'd use page params via usePageParams normally
   const minValue = getMinimumValue(scaleBy, populationMin);
-  const maxValue = useMemo(() => getMaximumValue(objects, scaleBy), [objects, scaleBy]);
+  const maxValue = useMemo(() => getMaximumValue(ents, scaleBy), [ents, scaleBy]);
 
   const transformValue = (v: number) => Math.pow(Math.max(v, 0), 0.5);
 
@@ -49,10 +49,10 @@ const useScale = ({ objects, scaleBy }: Props): ScalingFunctions => {
   );
 
   const getScale = useCallback(
-    (object: ObjectData) => {
+    (ent: EntityData) => {
       if (!scaleBy || scaleBy === Field.None) return 1; // default radius multiplier
 
-      const val = getField(object, scaleBy);
+      const val = getField(ent, scaleBy);
       if (val == null) return 0; // not renderable
 
       const normalized = getNormalizedValue(val as number);
