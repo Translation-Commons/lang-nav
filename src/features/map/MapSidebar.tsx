@@ -9,12 +9,12 @@ import MapCard from './MapCard';
 
 type Props = {
   drawableEntities: DrawableData[];
-  entityType: EntityType;
+  entType: EntityType;
   hoveredId: string | null;
   setHoveredId: (id: string | null) => void;
 };
 
-const MapSidebar: React.FC<Props> = ({ drawableEntities, entityType, hoveredId, setHoveredId }) => {
+const MapSidebar: React.FC<Props> = ({ drawableEntities, entType, hoveredId, setHoveredId }) => {
   const { pinned, updatePageParams } = usePageParams();
 
   const pinnedEntities = useMemo(() => {
@@ -45,7 +45,7 @@ const MapSidebar: React.FC<Props> = ({ drawableEntities, entityType, hoveredId, 
         hoverContent="Click to toggle visibility of selected items"
         onClick={() => setShowItems((prev) => !prev)}
       >
-        Selected {entityType === EntityType.Language ? 'Languages' : 'Territories'}
+        Selected {entType === EntityType.Language ? 'Languages' : 'Territories'}
       </HoverableButton>
       {/* </div> */}
       <div className={'MapSidebarContent' + (showItems ? ' growThenShow' : ' shrinkThenHide')}>
@@ -58,7 +58,7 @@ const MapSidebar: React.FC<Props> = ({ drawableEntities, entityType, hoveredId, 
           >
             <MapCard
               drawnEntity={entity}
-              entityType={entityType}
+              entType={entType}
               onClose={() => {
                 setHoveredId(null);
                 unpinCard(entity.ID);

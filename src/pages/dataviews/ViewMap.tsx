@@ -7,8 +7,8 @@ import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import { EntityType } from '@features/params/PageParamTypes';
 import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
+    SelectorDisplay,
+    SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
@@ -23,23 +23,23 @@ import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 function ViewMap() {
-  const { colorBy, entityType } = usePageParams();
+  const { colorBy, entType } = usePageParams();
   const { filteredEntities, allEntities } = useFilteredEntities({});
   const { getCurrentEntities } = usePagination<EntityData>();
 
-  const isDrawingTerritories = entityType !== EntityType.Language;
+  const isDrawingTerritories = entType !== EntityType.Language;
 
-  if ([EntityType.Variant, EntityType.Keyboard, EntityType.Org].includes(entityType)) {
+  if ([EntityType.Variant, EntityType.Keyboard, EntityType.Org].includes(entType)) {
     return (
       <div>
-        Map view is not well-defined for {getEntityTypeLabelPlural(entityType)}. Please select a
+        Map view is not well-defined for {getEntityTypeLabelPlural(entType)}. Please select a
         different entity type.
       </div>
     );
   }
 
   const entsWithoutCoordinates =
-    entityType == EntityType.Language
+    entType == EntityType.Language
       ? getCurrentEntities(filteredEntities).filter(
           (ent) =>
             ent.type === EntityType.Language && (ent.latitude == null || ent.longitude == null),
@@ -48,8 +48,8 @@ function ViewMap() {
 
   return (
     <MapContainer>
-      <h2 style={{ margin: 0 }}>{toTitleCase(entityType)} Map</h2>
-      <div>{getMapDescription(entityType)}</div>
+      <h2 style={{ margin: 0 }}>{toTitleCase(entType)} Map</h2>
+      <div>{getMapDescription(entType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
       <EntityMap entities={filteredEntities} allowSidebar={true} />
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
@@ -57,14 +57,14 @@ function ViewMap() {
           <div>
             {colorBy === Field.None ? `You can color the shapes by:` : `Shapes are colored by `}
           </div>
-          <ColorBySelector entityType={isDrawingTerritories ? EntityType.Territory : entityType} />
+          <ColorBySelector entType={isDrawingTerritories ? EntityType.Territory : entType} />
           <div>{colorBy !== Field.None && 'using the color gradient'}</div>
           <ColorGradientSelector />
         </div>
       </SelectorDisplayProvider>
       {entsWithoutCoordinates.length > 0 && (
         <div>
-          The following {getEntityTypeLabelPlural(entityType)} do not have defined coordinates:{' '}
+          The following {getEntityTypeLabelPlural(entType)} do not have defined coordinates:{' '}
           <CommaSeparated limit={10}>
             {entsWithoutCoordinates.map((ent) => (
               <HoverableEntityName key={ent.ID} ent={ent} />
@@ -76,8 +76,8 @@ function ViewMap() {
   );
 }
 
-function getMapDescription(entityType: EntityType): ReactNode {
-  switch (entityType) {
+function getMapDescription(entType: EntityType): ReactNode {
+  switch (entType) {
     case EntityType.Language:
       return (
         <>

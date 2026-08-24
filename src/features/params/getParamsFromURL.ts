@@ -101,8 +101,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
 
       // Enum values
-      case PageParamKey.entityType:
-        params.entityType = value as EntityType;
+      case PageParamKey.entType:
+        params.entType = value as EntityType;
         break;
       case PageParamKey.view:
         params.view = value as View;

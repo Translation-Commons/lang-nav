@@ -12,9 +12,9 @@ import TransformEnum from '../TransformEnum';
 
 import Field from './Field';
 import {
-  FIELDS_IN_DEVELOPMENT,
-  isFieldApplicable,
-  UNINTERESTING_FIELD_COMBINATIONS,
+    FIELDS_IN_DEVELOPMENT,
+    isFieldApplicable,
+    UNINTERESTING_FIELD_COMBINATIONS,
 } from './FieldApplicability';
 import FieldIcon from './FieldIcon';
 
@@ -47,13 +47,13 @@ const FieldCoverageRow: React.FC<{
           </td>
         );
       })}
-      {Object.values(EntityType).map((entityType) => (
+      {Object.values(EntityType).map((entType) => (
         <FieldEntityCoverageCell
-          key={entityType}
+          key={entType}
           field={field}
-          entityType={entityType}
-          dataCompleteness={dataCompleteness[entityType]}
-          hasColumn={tableColumnCoverage.includes(entityType)}
+          entType={entType}
+          dataCompleteness={dataCompleteness[entType]}
+          hasColumn={tableColumnCoverage.includes(entType)}
         />
       ))}
     </>
@@ -62,18 +62,18 @@ const FieldCoverageRow: React.FC<{
 
 const FieldEntityCoverageCell: React.FC<{
   field: Field;
-  entityType: EntityType;
+  entType: EntityType;
   dataCompleteness: number;
   hasColumn: boolean;
-}> = ({ field, entityType, dataCompleteness, hasColumn }) => {
-  const isApplicable = isFieldApplicable(field, undefined, entityType);
+}> = ({ field, entType, dataCompleteness, hasColumn }) => {
+  const isApplicable = isFieldApplicable(field, undefined, entType);
   const hasData = dataCompleteness > 0;
 
   const shouldBeApplicable = hasData && !isApplicable;
-  const isUninteresting = UNINTERESTING_FIELD_COMBINATIONS[entityType]?.includes(field);
+  const isUninteresting = UNINTERESTING_FIELD_COMBINATIONS[entType]?.includes(field);
   const missingColumn = (isApplicable || hasData) && !hasColumn;
   return (
-    <td key={entityType} style={{ textAlign: 'center' }}>
+    <td key={entType} style={{ textAlign: 'center' }}>
       <BackgroundProgressBar
         percentage={dataCompleteness}
         backgroundColor={
@@ -86,7 +86,7 @@ const FieldEntityCoverageCell: React.FC<{
           hoverContent={
             shouldBeApplicable || missingColumn || isUninteresting ? (
               <>
-                Issues for {field} on {entityType} entities
+                Issues for {field} on {entType} entities
                 {shouldBeApplicable && (
                   <div>
                     <strong>a</strong>: <code>getField()</code> gets non-null data for this value
@@ -95,7 +95,7 @@ const FieldEntityCoverageCell: React.FC<{
                 )}
                 {missingColumn && (
                   <div>
-                    <strong>c</strong>: <code>{entityType}Table</code> does not supply a column for
+                    <strong>c</strong>: <code>{entType}Table</code> does not supply a column for
                     this field.
                   </div>
                 )}

@@ -1,10 +1,10 @@
 import {
-  Building2Icon,
-  ExpandIcon,
-  LandmarkIcon,
-  LaughIcon,
-  PersonStandingIcon,
-  SchoolIcon,
+    Building2Icon,
+    ExpandIcon,
+    LandmarkIcon,
+    LaughIcon,
+    PersonStandingIcon,
+    SchoolIcon,
 } from 'lucide-react';
 import { ReactNode } from 'react';
 
@@ -46,7 +46,7 @@ const GLOBAL_DEFAULTS: PageParams = {
   localeSeparator: LocaleSeparator.Underscore,
   modalityFilter: [],
   entID: undefined,
-  entityType: EntityType.Language,
+  entType: EntityType.Language,
   page: 1,
   pinned: [],
   profile: ProfileType.LanguageEthusiast,
@@ -99,7 +99,7 @@ export const DEFAULTS_BY_PROFILE: Record<ProfileType, Partial<PageParams>> = {
 };
 
 export function getDefaultParams(
-  entityType?: EntityType,
+  entType?: EntityType,
   view?: View | undefined,
   profile?: ProfileType | undefined,
   populationFocus?: PopulationFocus | undefined,
@@ -116,9 +116,9 @@ export function getDefaultParams(
   // Clone to avoid mutating the defaults (eg. arrays)
   params = structuredClone(params);
 
-  // Directly set the view & entityType if provided
+  // Directly set the view & entType if provided
   if (view != null) params.view = view;
-  if (entityType != null) params.entityType = entityType;
+  if (entType != null) params.entType = entType;
   if (populationFocus != null) params.populationFocus = populationFocus;
   if (colorBy != null) params.colorBy = colorBy;
 
@@ -126,9 +126,9 @@ export function getDefaultParams(
   switch (params.view) {
     case View.Hierarchy:
       // Show parents in the hierarchy that we usually do not show
-      if (params.entityType === EntityType.Language)
+      if (params.entType === EntityType.Language)
         params.languageScopes.push(LanguageScope.Family);
-      if (params.entityType === EntityType.Territory)
+      if (params.entType === EntityType.Territory)
         params.territoryScopes = Object.values(TerritoryScope).filter((s) => typeof s === 'number');
       break;
     case View.Table:
@@ -141,9 +141,9 @@ export function getDefaultParams(
 
       // Add default colorBys since we're showing X in territories
       if (params.colorBy === Field.None) {
-        if (params.entityType === EntityType.Census) params.colorBy = Field.CountOfCensuses;
-        if (params.entityType === EntityType.Locale) params.colorBy = Field.CountOfLanguages;
-        if (params.entityType === EntityType.WritingSystem)
+        if (params.entType === EntityType.Census) params.colorBy = Field.CountOfCensuses;
+        if (params.entType === EntityType.Locale) params.colorBy = Field.CountOfLanguages;
+        if (params.entType === EntityType.WritingSystem)
           params.colorBy = Field.CountOfWritingSystems;
       }
       break;
@@ -159,15 +159,15 @@ export function getDefaultParams(
   }
 
   // Set population sorting behavior
-  if (params.entityType === EntityType.Org) {
+  if (params.entType === EntityType.Org) {
     // Orgs don't have population, so sort by count of censuses by default
     if (params.sortBy === Field.Population) params.sortBy = Field.CountOfCensuses;
     if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.CountOfCensuses;
-  } else if (params.entityType === EntityType.Keyboard) {
+  } else if (params.entType === EntityType.Keyboard) {
     // Keyboards don't have population, so sort by name by default
     if (params.sortBy === Field.Population) params.sortBy = Field.Name;
     if (params.secondarySortBy === Field.Population) params.secondarySortBy = Field.Name;
-  } else if (params.entityType === EntityType.WritingSystem) {
+  } else if (params.entType === EntityType.WritingSystem) {
     // For writing sytems, the population == population (writing) but its more accurate to refer to it as the writing population
     if (params.sortBy === Field.Population) params.sortBy = Field.PopulationWriting;
     if (params.secondarySortBy === Field.Population)

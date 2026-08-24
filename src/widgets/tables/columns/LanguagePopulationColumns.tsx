@@ -37,7 +37,7 @@ const PopulationInTerritoryDescription: React.FC = () => {
   return (
     <>
       The population of this language in {formattedTerritory}. For more details and sorting, see the{' '}
-      <HoverableButton onClick={() => updatePageParams({ entityType: EntityType.Locale })}>
+      <HoverableButton onClick={() => updatePageParams({ entType: EntityType.Locale })}>
         Locale Table
       </HoverableButton>
     </>

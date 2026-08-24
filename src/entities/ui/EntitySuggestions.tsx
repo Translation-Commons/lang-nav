@@ -5,7 +5,7 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import getEntityFromID from '../lib/getEntityFromID';
 
-const EntitySuggestions: React.FC<{ entityType: EntityType }> = ({ entityType }) => {
+const EntitySuggestions: React.FC<{ entType: EntityType }> = ({ entType }) => {
   return (
     <div
       style={{
@@ -17,15 +17,15 @@ const EntitySuggestions: React.FC<{ entityType: EntityType }> = ({ entityType })
         marginTop: '1em',
       }}
     >
-      {getEntityIDs(entityType).map((id) => (
+      {getEntityIDs(entType).map((id) => (
         <HoverableEntityName key={id} ent={getEntityFromID(id)} format="button" />
       ))}
     </div>
   );
 };
 
-function getEntityIDs(entityType: EntityType): string[] {
-  switch (entityType) {
+function getEntityIDs(entType: EntityType): string[] {
+  switch (entType) {
     case EntityType.Census:
       return ['ca2021.1', 'ca2021.4', 'in2011c16.1', 'in2011c17.4'];
     case EntityType.Language:

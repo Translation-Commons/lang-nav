@@ -4,8 +4,8 @@ import { useLocation } from 'react-router-dom';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
 import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
+    SelectorDisplay,
+    SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import TextInput, { TextInputSubmitSource } from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
@@ -16,7 +16,7 @@ import useSearchSuggestions from './useSearchSuggestions';
 import useTrackSearch from './useTrackSearch';
 
 const SearchBar: React.FC = () => {
-  const { entityType, searchString, updatePageParams } = usePageParams();
+  const { entType, searchString, updatePageParams } = usePageParams();
   const location = useLocation();
   const getSearchSuggestions = useSearchSuggestions();
   const trackSearch = useTrackSearch();
@@ -63,7 +63,7 @@ const SearchBar: React.FC = () => {
           }}
           getSuggestions={getSearchSuggestions}
           onSubmit={setSearchString}
-          placeholder={'search ' + getEntityTypeLabelPlural(entityType)}
+          placeholder={'search ' + getEntityTypeLabelPlural(entType)}
           pageParameter={PageParamKey.searchString}
           value={searchString}
         />

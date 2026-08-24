@@ -48,19 +48,19 @@ export default function useAmplitudeParamEvents() {
 
     // Defaults never appear in the URL; resolve per profile/entity so entity,
     // view, sort, and the previous_* values are always populated correctly.
-    const currentDefaults = getDefaultParams(current.entityType, current.view, current.profile);
-    const previousDefaults = getDefaultParams(previous.entityType, previous.view, previous.profile);
+    const currentDefaults = getDefaultParams(current.entType, current.view, current.profile);
+    const previousDefaults = getDefaultParams(previous.entType, previous.view, previous.profile);
 
     const base = {
       path: location.pathname,
       view: current.view ?? currentDefaults.view,
-      entity: current.entityType ?? currentDefaults.entityType,
+      entity: current.entType ?? currentDefaults.entType,
     };
 
-    if (current.entityType !== previous.entityType) {
+    if (current.entType !== previous.entType) {
       trackEntitySwitched({
         ...base,
-        previous_entity: previous.entityType ?? previousDefaults.entityType,
+        previous_entity: previous.entType ?? previousDefaults.entType,
       });
     }
 

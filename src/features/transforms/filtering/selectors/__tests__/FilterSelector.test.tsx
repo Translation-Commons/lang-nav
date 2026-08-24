@@ -11,7 +11,7 @@ import { createMockUsePageParams } from '@tests/MockPageParams.test';
 import FilterSelector from '../FilterSelector';
 
 vi.mock('@features/params/usePageParams', () => ({
-  default: vi.fn().mockReturnValue(createMockUsePageParams({ entityType: EntityType.Locale })),
+  default: vi.fn().mockReturnValue(createMockUsePageParams({ entType: EntityType.Locale })),
 }));
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({
   default: () => ({ hideHoverCard: vi.fn(), showHoverCard: vi.fn() }),

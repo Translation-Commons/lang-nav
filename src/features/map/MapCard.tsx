@@ -15,14 +15,14 @@ import DrawableData from './DrawableData';
 
 const MapCard: React.FC<{
   drawnEntity: DrawableData;
-  entityType: EntityType;
+  entType: EntityType;
   onClose: () => void;
-}> = ({ drawnEntity, entityType, onClose }) => {
+}> = ({ drawnEntity, entType, onClose }) => {
   const { updatePageParams } = usePageParams();
 
   const openDetails = () =>
     updatePageParams(
-      entityType === EntityType.Census || entityType === EntityType.WritingSystem
+      entType === EntityType.Census || entType === EntityType.WritingSystem
         ? { territoryFilter: drawnEntity.ID, view: View.Table }
         : { entID: drawnEntity.ID },
     );
@@ -30,7 +30,7 @@ const MapCard: React.FC<{
   let content: React.ReactNode = <EntityCard ent={drawnEntity} />;
   let clickDescription = 'Open in details panel';
   if (drawnEntity.type === EntityType.Territory) {
-    switch (entityType) {
+    switch (entType) {
       case EntityType.Census:
         content = <CensusesInTerritory territory={drawnEntity} />;
         clickDescription = 'Open table of censuses in this territory';

@@ -40,7 +40,7 @@ const CensusDetails: React.FC<Props> = ({ census }) => {
       </DetailsSection>
       <DetailsSection title="Languages on Map">
         <LocalParamsProvider
-          overrides={{ entityType: EntityType.Language, limit: 1000, searchString: '' }}
+          overrides={{ entType: EntityType.Language, limit: 1000, searchString: '' }}
         >
           <EntityMap entities={languages} maxWidth={1000} />
         </LocalParamsProvider>

@@ -30,7 +30,7 @@ export const ObjectiveList: React.FC = () => {
         label="See the languages in a country."
         inputPlaceholder="Enter a country"
         inputParam={PageParamKey.territoryFilter}
-        urlParams={{ view: View.Table, entityType: EntityType.Locale }}
+        urlParams={{ view: View.Table, entType: EntityType.Locale }}
       />
       <Objective label="Explore language families." urlParams={{ view: View.Hierarchy }} />
       <Objective

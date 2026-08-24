@@ -5,8 +5,8 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import ReportID from './ReportID';
 
 /** Output should be sorted by how it should appear in the UI */
-function getReportIDsForEntityType(entityType: EntityType): ReportID[] {
-  switch (entityType) {
+function getReportIDsForEntityType(entType: EntityType): ReportID[] {
+  switch (entType) {
     case EntityType.Language:
       return [
         ReportID.LanguagesDubious,
@@ -33,7 +33,7 @@ function getReportIDsForEntityType(entityType: EntityType): ReportID[] {
     case EntityType.Org:
       return [];
     default:
-      enforceExhaustiveSwitch(entityType);
+      enforceExhaustiveSwitch(entType);
   }
 }
 

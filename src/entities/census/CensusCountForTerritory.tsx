@@ -19,7 +19,7 @@ const CensusCountForTerritory: React.FC<{ territory: TerritoryData }> = ({ terri
       onClick={() =>
         updatePageParams({
           view: View.Table,
-          entityType: EntityType.Census,
+          entType: EntityType.Census,
           territoryFilter: territory.ID,
         })
       }

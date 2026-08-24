@@ -25,17 +25,17 @@ const EntityTypeTabs: React.FC = () => {
   return (
     <NavTabs
       extendedOptionsLabel="More entities that can be viewed"
-      options={ORDERED_OBJECTS.map((entityType) => ({
+      options={ORDERED_OBJECTS.map((entType) => ({
         description: (
           <>
             <div style={{ marginBottom: '0.5em' }}>
               Click here to change the kind of entity viewed.
             </div>{' '}
-            <EntityTypeDescription entityType={entityType} />
+            <EntityTypeDescription entType={entType} />
           </>
         ),
-        label: toTitleCase(getEntityTypeLabelPlural(entityType)),
-        urlParams: { entityType: entityType },
+        label: toTitleCase(getEntityTypeLabelPlural(entType)),
+        urlParams: { entType: entType },
       }))}
     />
   );

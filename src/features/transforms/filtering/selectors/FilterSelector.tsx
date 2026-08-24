@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
+    SelectorDisplay,
+    SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
@@ -58,8 +58,8 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
  * apply. Censuses would not show the filter for languages because that has not been set up yet.
  */
 export const AllApplicableFilterSelectors: React.FC = () => {
-  const { entityType } = usePageParams();
-  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, entityType).filter(
+  const { entType } = usePageParams();
+  const primaryFilters: Field[] = getApplicableFields(TransformEnum.Filter, entType).filter(
     (f) => f !== Field.Name, // This should not return the search bar
   );
   const otherFilters: Field[] = getApplicableFields(TransformEnum.Filter).filter(

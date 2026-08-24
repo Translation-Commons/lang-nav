@@ -11,9 +11,9 @@ import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 function ViewTable() {
-  const { entityType } = usePageParams();
+  const { entType } = usePageParams();
 
-  switch (entityType) {
+  switch (entType) {
     case EntityType.Census:
       return <TableOfAllCensuses />;
     case EntityType.Language:

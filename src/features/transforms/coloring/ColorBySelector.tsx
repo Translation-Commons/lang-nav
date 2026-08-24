@@ -10,11 +10,11 @@ import { getApplicableFields } from '../fields/FieldApplicability';
 import TransformEnum from '../TransformEnum';
 
 type Props = {
-  entityType?: EntityType;
+  entType?: EntityType;
 };
 
-const ColorBySelector: React.FC<Props> = ({ entityType }) => {
-  const { colorBy, updatePageParams, view, entityType: pageEntityType } = usePageParams();
+const ColorBySelector: React.FC<Props> = ({ entType }) => {
+  const { colorBy, updatePageParams, view, entType: pageEntityType } = usePageParams();
   const { display } = useSelectorDisplay();
 
   // Only applicable to the card list and map views
@@ -24,7 +24,7 @@ const ColorBySelector: React.FC<Props> = ({ entityType }) => {
     <Selector<Field>
       selectorLabel={display === SelectorDisplay.Dropdown ? 'Color By' : undefined}
       selectorDescription="Choose the color coding for items in the view."
-      options={getApplicableFields(TransformEnum.Color, entityType ?? pageEntityType)}
+      options={getApplicableFields(TransformEnum.Color, entType ?? pageEntityType)}
       onChange={(colorBy) => updatePageParams({ colorBy })}
       selected={colorBy}
     />

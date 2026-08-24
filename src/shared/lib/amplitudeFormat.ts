@@ -18,7 +18,7 @@ import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 // Rename keys before sending to Amplitude (internalKey to amplitudeKey).
 const PROPERTY_KEY_MAP: Record<string, string> = {
-  entityType: 'entity',
+  entType: 'entity',
   page: 'pagination_page',
 };
 

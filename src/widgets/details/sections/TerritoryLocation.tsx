@@ -29,7 +29,7 @@ const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }
       </DetailsField>
 
       <DetailsField title="Map">Showing {getMapLabel(territory)}</DetailsField>
-      <LocalParamsProvider overrides={{ limit: -1, entityType: EntityType.Territory }}>
+      <LocalParamsProvider overrides={{ limit: -1, entType: EntityType.Territory }}>
         <MapContainer>
           <EntityMap
             entities={[

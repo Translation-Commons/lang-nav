@@ -112,7 +112,7 @@ describe('useAmplitudeParamEvents', () => {
 
   it('emits explore_entity_switched with entity and previous_entity (defaulting from Language)', () => {
     render(<Harness initialURL="/data" />);
-    go('/data?entityType=Locale');
+    go('/data?entType=Locale');
     expect(trackers.entity).toHaveBeenCalledTimes(1);
     expect(trackers.entity.mock.calls[0][0]).toMatchObject({
       entity: 'Locale',

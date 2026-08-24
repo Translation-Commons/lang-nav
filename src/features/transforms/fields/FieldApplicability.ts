@@ -50,8 +50,8 @@ export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
 };
 
 // Specific fields available per entity type
-function getSpecificFieldsForEntityType(entityType: EntityType): Field[] {
-  switch (entityType) {
+function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
+  switch (entType) {
     case EntityType.Locale:
       return [
         Field.Endonym,
@@ -272,7 +272,7 @@ function getSpecificFieldsForEntityType(entityType: EntityType): Field[] {
         Field.Territory,
       ];
     default:
-      return enforceExhaustiveSwitch(entityType);
+      return enforceExhaustiveSwitch(entType);
   }
 }
 
@@ -391,10 +391,10 @@ function getFieldsForTransform(transform: Transform): Field[] {
  * Returns all fields available for a given entity type.
  * This is the authoritative list that other UIs (sorting, coloring, scaling) intersect with.
  */
-function getFieldsForEntityType(entityType: EntityType): Field[] {
-  const specific = getSpecificFieldsForEntityType(entityType);
+function getFieldsForEntityType(entType: EntityType): Field[] {
+  const specific = getSpecificFieldsForEntityType(entType);
   return unique([...COMMON_FIELDS, ...specific]).filter(
-    (f) => !UNINTERESTING_FIELD_COMBINATIONS[entityType].includes(f),
+    (f) => !UNINTERESTING_FIELD_COMBINATIONS[entType].includes(f),
   );
 }
 
@@ -402,21 +402,21 @@ function getFieldsForEntityType(entityType: EntityType): Field[] {
  * Helper to intersect the fields available for a transform with fields that exist for an entity type.
  * Preserves the order from the transform list.
  */
-export function getApplicableFields(transform?: Transform, entityType?: EntityType): Field[] {
+export function getApplicableFields(transform?: Transform, entType?: EntityType): Field[] {
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
-  const entFields = entityType ? getFieldsForEntityType(entityType) : Object.values(Field);
+  const entFields = entType ? getFieldsForEntityType(entType) : Object.values(Field);
   return transformFields.filter((f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f));
 }
 
 export function isFieldApplicable(
   field: Field,
   transform?: Transform,
-  entityType?: EntityType,
+  entType?: EntityType,
 ): boolean {
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&
-    (entityType ? getFieldsForEntityType(entityType).includes(field) : true) &&
+    (entType ? getFieldsForEntityType(entType).includes(field) : true) &&
     !FIELDS_IN_DEVELOPMENT.includes(field) &&
-    (entityType ? !UNINTERESTING_FIELD_COMBINATIONS[entityType].includes(field) : true)
+    (entType ? !UNINTERESTING_FIELD_COMBINATIONS[entType].includes(field) : true)
   );
 }

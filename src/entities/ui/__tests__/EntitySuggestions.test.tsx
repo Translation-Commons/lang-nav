@@ -22,7 +22,7 @@ vi.mock('@features/layers/hovercard/useHoverCard', () => ({
 
 describe('EntitySuggestions', () => {
   it('renders suggestion buttons for EntityType.Language and calls getEntityFromID for each id', () => {
-    render(<EntitySuggestions entityType={EntityType.Language} />);
+    render(<EntitySuggestions entType={EntityType.Language} />);
 
     const buttons = screen.getAllByRole('button');
     // Expect the six language IDs from the component implementation
@@ -44,7 +44,7 @@ describe('EntitySuggestions', () => {
   });
 
   it('renders suggestion buttons for EntityType.Locale and includes expected locale ids', () => {
-    render(<EntitySuggestions entityType={EntityType.Locale} />);
+    render(<EntitySuggestions entType={EntityType.Locale} />);
 
     const buttons = screen.getAllByRole('button');
     // Expect the seven locale IDs from the component implementation

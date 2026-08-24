@@ -7,15 +7,15 @@ import { getApplicableFields } from '@features/transforms/fields/FieldApplicabil
 import { groupByArray } from '@shared/lib/setUtils';
 import { Button } from '@shared/ui/button';
 import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuPortal,
-  DropdownMenuRadioGroup,
-  DropdownMenuRadioItem,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-  DropdownMenuTrigger,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuPortal,
+    DropdownMenuRadioGroup,
+    DropdownMenuRadioItem,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
 } from '@shared/ui/dropdown-menu';
 
 import Field from '../fields/Field';
@@ -29,10 +29,10 @@ type Props = {
 const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
   const params = usePageParams();
   const currentValue = params[pageParam] as Field;
-  const { updatePageParams, entityType } = params;
+  const { updatePageParams, entType } = params;
 
   const transform = getTransformForPageParam(pageParam);
-  const applicableFields = getApplicableFields(transform, entityType);
+  const applicableFields = getApplicableFields(transform, entType);
   if (pageParam === PageParamKey.secondarySortBy) applicableFields.push(Field.None);
   const groupedFields = groupByArray(applicableFields, (field) => getFieldGroup(field));
   const activeGroup = getFieldGroup(currentValue);

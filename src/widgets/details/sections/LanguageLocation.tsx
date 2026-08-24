@@ -9,8 +9,8 @@ import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
 import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
+    SelectorDisplay,
+    SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
@@ -64,7 +64,7 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       <LocalParamsProvider
         overrides={{
           limit: MAP_CIRCLE_LIMIT,
-          entityType: EntityType.Language,
+          entType: EntityType.Language,
           languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
           sortBy: Field.Population,
           searchString: '',

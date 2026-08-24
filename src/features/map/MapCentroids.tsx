@@ -36,21 +36,21 @@ const MapCentroids: React.FC<Props> = ({
   pinnedIds = [],
   allowSidebar,
 }) => {
-  const { scaleBy, entityType } = usePageParams();
+  const { scaleBy, entType } = usePageParams();
   const { getCurrentEntities } = usePagination<DrawableData>();
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { getScale } = useScale({ ents: drawableEntities, scaleBy });
 
   const renderableEntities = useMemo(() => {
     const currentEntities =
-      entityType === EntityType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
+      entType === EntityType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
 
     const filteredEntities = currentEntities.filter(
       (ent) => ent.type === EntityType.Language || ent.type === EntityType.Territory,
     );
 
     return filteredEntities.reverse();
-  }, [drawableEntities, getCurrentEntities, entityType]);
+  }, [drawableEntities, getCurrentEntities, entType]);
 
   const buildOnMouseEnter = useCallback(
     (ent: DrawableData) => (e: React.MouseEvent) => {

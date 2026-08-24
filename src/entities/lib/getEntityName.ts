@@ -19,8 +19,8 @@ export function getEntitySubtitle(entity: EntityData): string | undefined {
   }
 }
 
-export function getEntityTypeLabelPlural(entityType: EntityType) {
-  switch (entityType) {
+export function getEntityTypeLabelPlural(entType: EntityType) {
+  switch (entType) {
     case EntityType.Census:
       return 'censuses';
     case EntityType.Language:
@@ -38,6 +38,6 @@ export function getEntityTypeLabelPlural(entityType: EntityType) {
     case EntityType.Org:
       return 'organizations';
     default:
-      enforceExhaustiveSwitch(entityType);
+      enforceExhaustiveSwitch(entType);
   }
 }

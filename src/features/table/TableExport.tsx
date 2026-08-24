@@ -125,7 +125,7 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
       setIsExporting(true);
       trackEvent('data_exported', {
         export_type: exportType,
-        entityType: pageParams.entityType,
+        entType: pageParams.entType,
         view: pageParams.view,
         path: typeof window !== 'undefined' ? window.location.pathname : undefined,
         row_count: ents.length,
@@ -154,17 +154,14 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
     [handleClipboardExport, handleExportFile, ents, visibleColumns.length],
   );
   let validExportTypes = Object.values(ExportType).filter((et) => et !== ExportType.Unchosen);
-  if (
-    pageParams.entityType !== EntityType.Language &&
-    pageParams.entityType !== EntityType.Locale
-  ) {
+  if (pageParams.entType !== EntityType.Language && pageParams.entType !== EntityType.Locale) {
     validExportTypes = validExportTypes.filter(
       (et) =>
         et !== ExportType.DownloadUNESCO &&
         et !== ExportType.CopyUNESCO &&
         et !== ExportType.CopyCLDR,
     );
-  } else if (pageParams.entityType === EntityType.Language) {
+  } else if (pageParams.entType === EntityType.Language) {
     validExportTypes = validExportTypes.filter((et) => et !== ExportType.CopyCLDR);
   }
 

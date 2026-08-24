@@ -23,20 +23,20 @@ describe('createMockUsePageParams', () => {
     const mockParams = createMockUsePageParams();
 
     expect(mockParams.sortBy).toBe(Field.Population);
-    expect(mockParams.entityType).toBe(EntityType.Language);
+    expect(mockParams.entType).toBe(EntityType.Language);
     expect(mockParams.view).toBe(View.CardList);
   });
 
   it('overrides default values when provided', () => {
     const overrides: Partial<PageParams> = {
       sortBy: Field.Name,
-      entityType: EntityType.Locale,
+      entType: EntityType.Locale,
       limit: 25,
     };
     const mockParams = createMockUsePageParams(overrides);
 
     expect(mockParams.sortBy).toBe(Field.Name);
-    expect(mockParams.entityType).toBe(EntityType.Locale);
+    expect(mockParams.entType).toBe(EntityType.Locale);
     expect(mockParams.limit).toBe(25);
   });
 });

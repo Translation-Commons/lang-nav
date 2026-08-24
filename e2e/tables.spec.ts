@@ -66,12 +66,12 @@ test.describe('screenshot tests', () => {
   }
 
   // Regular Entity Tables
-  Object.values(EntityType).forEach((entityType) => {
-    test(`${entityType} Table`, async ({ page }) => {
+  Object.values(EntityType).forEach((entType) => {
+    test(`${entType} Table`, async ({ page }) => {
       await snapshotTable(
         page,
-        `view=Table&entityType=${entityType}`,
-        // TableID[`${entityType}Table`],
+        `view=Table&entType=${entType}`,
+        // TableID[`${entType}Table`],
       );
     });
   });
@@ -90,30 +90,21 @@ test.describe('screenshot tests', () => {
   });
 
   test(`Census Countries Table`, async ({ page }) => {
-    await snapshotTable(
-      page,
-      `view=Reports&entityType=Census&reportID=` + ReportID.CensusCountries,
-    );
+    await snapshotTable(page, `view=Reports&entType=Census&reportID=` + ReportID.CensusCountries);
   });
 
   test(`Indigeneity Table`, async ({ page }) => {
-    await snapshotTable(
-      page,
-      `view=Reports&entityType=Locale&reportID=` + ReportID.LocaleIndigeneity,
-    );
+    await snapshotTable(page, `view=Reports&entType=Locale&reportID=` + ReportID.LocaleIndigeneity);
   });
 
   test(`Potential Locales Table`, async ({ page }) => {
-    await snapshotTable(
-      page,
-      `view=Reports&entityType=Locale&reportID=` + ReportID.LocalesPotential,
-    );
+    await snapshotTable(page, `view=Reports&entType=Locale&reportID=` + ReportID.LocalesPotential);
   });
 
   test(`Variant Annotation Table`, async ({ page }) => {
     await snapshotTable(
       page,
-      `view=Reports&entityType=Variant&reportID=` + ReportID.VariantsAnnotationTool,
+      `view=Reports&entType=Variant&reportID=` + ReportID.VariantsAnnotationTool,
     );
   });
 

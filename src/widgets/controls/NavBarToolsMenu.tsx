@@ -14,7 +14,7 @@ const NOTABLE_REPORTS = [
   {
     label: 'Census Validation',
     params: {
-      entityType: EntityType.Census,
+      entType: EntityType.Census,
       view: View.Reports,
       reportID: ReportID.CensusInputTool,
     },
@@ -22,7 +22,7 @@ const NOTABLE_REPORTS = [
   {
     label: 'Plurals',
     params: {
-      entityType: EntityType.Language,
+      entType: EntityType.Language,
       view: View.Reports,
       reportID: ReportID.LanguagePlurals,
     },
@@ -45,7 +45,7 @@ const NavBarToolsMenu: React.FC = () => {
           <InternalLink
             page={LangNavPageName.Decoder}
             className={'text-nowrap' + (location.pathname === '/decoder' ? ' font-bold' : '')}
-            params={{ entityType: EntityType.Language }}
+            params={{ entType: EntityType.Language }}
           >
             Language Decoder
           </InternalLink>

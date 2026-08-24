@@ -105,9 +105,9 @@ describe('FILTER_PARAM_KEYS', () => {
     expect(FILTER_PARAM_KEYS).not.toContain('searchString');
   });
 
-  it('does not include view/sort/entityType (which have their own events)', () => {
+  it('does not include view/sort/entType (which have their own events)', () => {
     expect(FILTER_PARAM_KEYS).not.toContain('view');
     expect(FILTER_PARAM_KEYS).not.toContain('sortBy');
-    expect(FILTER_PARAM_KEYS).not.toContain('entityType');
+    expect(FILTER_PARAM_KEYS).not.toContain('entType');
   });
 });

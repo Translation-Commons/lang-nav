@@ -109,7 +109,7 @@ export const LanguagePopulationBreakdownFromDescendants: React.FC<Props> = ({
           updatePageParams({
             languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
             view: View.Table,
-            entityType: EntityType.Language,
+            entType: EntityType.Language,
           })
         }
         style={{ display: 'block' }}

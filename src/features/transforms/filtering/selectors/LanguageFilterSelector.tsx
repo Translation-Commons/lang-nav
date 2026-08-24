@@ -75,8 +75,8 @@ const LanguageFilterSelector: React.FC = () => {
 };
 
 const LanguageFilterDescription: React.FC = () => {
-  const { entityType } = usePageParams();
-  switch (entityType) {
+  const { entType } = usePageParams();
+  switch (entType) {
     case EntityType.Language:
       return (
         <>

@@ -13,10 +13,10 @@ import usePageParams from '@features/params/usePageParams';
  * It may also show metrics about the data we have too.
  */
 const ViewReports: React.FC = () => {
-  const { entityType, reportID } = usePageParams();
+  const { entType, reportID } = usePageParams();
   const reportIDs = useMemo(
-    () => [ReportID.EntitiesMissingFields, ...getReportIDsForEntityType(entityType)],
-    [entityType],
+    () => [ReportID.EntitiesMissingFields, ...getReportIDsForEntityType(entType)],
+    [entType],
   );
   const currentReportID = useMemo(() => {
     if (reportID && reportIDs.includes(reportID)) return reportID;

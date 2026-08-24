@@ -10,9 +10,9 @@ import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 function ViewFamilyTree() {
-  const { entityType } = usePageParams();
+  const { entType } = usePageParams();
 
-  switch (entityType) {
+  switch (entType) {
     case EntityType.Census:
       return <CensusHierarchy />;
     case EntityType.Language:

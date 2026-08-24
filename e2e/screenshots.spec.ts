@@ -93,7 +93,7 @@ test.describe('screenshot tests', () => {
   test('data page: Map Selection', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto(
-      './data?view=Map&entityType=Territory&territoryFilter=Africa+%5B002%5D&colorBy=%23+of+Languages&pinned=NG%2CBJ%2CTG%2CGH%2CCI&colorGradient=33',
+      './data?view=Map&entType=Territory&territoryFilter=Africa+%5B002%5D&colorBy=%23+of+Languages&pinned=NG%2CBJ%2CTG%2CGH%2CCI&colorGradient=33',
     );
     await waitToFinishLoadingData(page);
     const mapComponent = page.locator('.EntityMap');

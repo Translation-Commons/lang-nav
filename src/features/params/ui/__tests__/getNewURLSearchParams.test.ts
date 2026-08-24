@@ -7,11 +7,11 @@ import Field from '@features/transforms/fields/Field';
 describe('getNewURLSearchParams', () => {
   it('migrates searchString to languageFilter when switching from Language', () => {
     const prev = new URLSearchParams({
-      entityType: EntityType.Language,
+      entType: EntityType.Language,
       searchString: 'chinese',
     });
 
-    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
 
     expect(result.get('searchString')).toBeNull();
     expect(result.get('languageFilter')).toBe('chinese');
@@ -19,31 +19,31 @@ describe('getNewURLSearchParams', () => {
 
   it('keep searchString to territoryFilter when switching from Territory', () => {
     const prev = new URLSearchParams({
-      entityType: EntityType.Territory,
+      entType: EntityType.Territory,
       searchString: 'China',
     });
-    const result = getNewURLSearchParams({ entityType: EntityType.Language }, prev);
+    const result = getNewURLSearchParams({ entType: EntityType.Language }, prev);
     expect(result.get('searchString')).toBeNull();
     expect(result.get('territoryFilter')).toBe('China');
   });
 
   it('keep searchString to writingSystemFilter when switching from WritingSystem', () => {
     const prev = new URLSearchParams({
-      entityType: EntityType.WritingSystem,
+      entType: EntityType.WritingSystem,
       searchString: 'Latin',
     });
-    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
     expect(result.get('searchString')).toBeNull();
     expect(result.get('writingSystemFilter')).toBe('Latin');
   });
 
-  it('keeps entID when switching entityType', () => {
+  it('keeps entID when switching entType', () => {
     const prev = new URLSearchParams({
-      entityType: EntityType.Language,
+      entType: EntityType.Language,
       searchString: 'chinese',
       entID: '123',
     });
-    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
     expect(result.get('entID')).toBe('123');
   });
 
@@ -58,13 +58,13 @@ describe('getNewURLSearchParams', () => {
     expect(result.get('page')).toBeNull();
   });
 
-  it('does not migrate searchString when entityType does not change', () => {
+  it('does not migrate searchString when entType does not change', () => {
     const prev = new URLSearchParams({
-      entityType: EntityType.Language,
+      entType: EntityType.Language,
       searchString: 'English',
     });
 
-    const result = getNewURLSearchParams({ entityType: EntityType.Language }, prev);
+    const result = getNewURLSearchParams({ entType: EntityType.Language }, prev);
 
     expect(result.get('searchString')).toBe('English');
     expect(result.get('languageFilter')).toBeNull();
@@ -72,10 +72,10 @@ describe('getNewURLSearchParams', () => {
 
   it('does not create a filter when searchString is missing', () => {
     const prev = new URLSearchParams({
-      entityType: EntityType.Language,
+      entType: EntityType.Language,
     });
 
-    const result = getNewURLSearchParams({ entityType: EntityType.Territory }, prev);
+    const result = getNewURLSearchParams({ entType: EntityType.Territory }, prev);
 
     expect(result.get('searchString')).toBeNull();
     expect(result.get('languageFilter')).toBeNull();

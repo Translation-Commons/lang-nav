@@ -24,7 +24,7 @@ const PageParamsProvider: React.FC<{ children: React.ReactNode }> = ({ children 
     const instantiatedParams = getParamsFromURL(urlPageParams);
 
     const defaults = getDefaultParams(
-      instantiatedParams.entityType,
+      instantiatedParams.entType,
       instantiatedParams.view,
       instantiatedParams.profile,
       instantiatedParams.populationFocus,

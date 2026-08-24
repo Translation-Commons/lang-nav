@@ -14,8 +14,8 @@ import getTerritoryColumns from './TerritoryColumns';
 import getVariantColumns from './VariantColumns';
 import getWritingSystemColumns from './WritingSystemColumns';
 
-function getEntityMainTableColumns(entityType: EntityType): TableColumn<EntityData>[] {
-  switch (entityType) {
+function getEntityMainTableColumns(entType: EntityType): TableColumn<EntityData>[] {
+  switch (entType) {
     case EntityType.Language:
       return getLanguageColumns() as TableColumn<EntityData>[];
     case EntityType.Locale:
@@ -33,7 +33,7 @@ function getEntityMainTableColumns(entityType: EntityType): TableColumn<EntityDa
     case EntityType.Org:
       return getOrganizationColumns() as TableColumn<EntityData>[];
     default:
-      enforceExhaustiveSwitch(entityType);
+      enforceExhaustiveSwitch(entType);
   }
 }
 

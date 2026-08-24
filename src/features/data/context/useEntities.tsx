@@ -6,8 +6,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-const useEntities = (entityType?: EntityType): EntityData[] => {
-  const { entityType: pageEntityType } = usePageParams();
+const useEntities = (entType?: EntityType): EntityData[] => {
+  const { entType: pageEntityType } = usePageParams();
   const {
     languagesInSelectedSource,
     locales,
@@ -19,7 +19,7 @@ const useEntities = (entityType?: EntityType): EntityData[] => {
     organizations,
   } = useDataContext();
   const ents = useMemo(() => {
-    switch (entityType ?? pageEntityType) {
+    switch (entType ?? pageEntityType) {
       case EntityType.Census:
         return Object.values(censuses);
       case EntityType.Language:
@@ -38,7 +38,7 @@ const useEntities = (entityType?: EntityType): EntityData[] => {
         return organizations;
     }
   }, [
-    entityType,
+    entType,
     pageEntityType,
     censuses,
     languagesInSelectedSource,

@@ -20,7 +20,7 @@ import getField from './getField';
 
 const FieldCoverageTable: React.FC = () => {
   const transforms = Object.values(TransformEnum);
-  const entityTypes = Object.values(EntityType);
+  const entTypes = Object.values(EntityType);
   const dataCompletenessByFieldByEntityType = useDataCompletenessByFieldByEntityType();
   const tableColumnCoverage = getTableColumnCoverage();
   const [showColorBars, setShowColorBars] = React.useState(false);
@@ -33,7 +33,7 @@ const FieldCoverageTable: React.FC = () => {
           <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
           <col span={transforms.length - 1} style={{ borderRight: '2px solid transparent' }} />
           <col style={{ borderRight: '2px solid var(--color-button-secondary)' }} />
-          <col span={entityTypes.length} style={{ borderRight: '2px solid transparent' }} />
+          <col span={entTypes.length} style={{ borderRight: '2px solid transparent' }} />
         </colgroup>
         <thead
           style={{
@@ -46,7 +46,7 @@ const FieldCoverageTable: React.FC = () => {
           <tr>
             <th colSpan={3}>Field</th>
             <th colSpan={transforms.length}>Capabilities</th>
-            <th colSpan={entityTypes.length}>Coverage across all Entities</th>
+            <th colSpan={entTypes.length}>Coverage across all Entities</th>
           </tr>
           <tr>
             <th>Group</th>
@@ -69,8 +69,8 @@ const FieldCoverageTable: React.FC = () => {
                 return <th key={transform}>{toTitleCase(transform)}</th>;
               }
             })}
-            {entityTypes.map((entityType) => (
-              <th key={entityType}>{toTitleCase(entityType)}</th>
+            {entTypes.map((entType) => (
+              <th key={entType}>{toTitleCase(entType)}</th>
             ))}
           </tr>
         </thead>
@@ -137,13 +137,13 @@ function useDataCompletenessByFieldByEntityType(): Record<Field, Record<EntityTy
   return Object.values(Field).reduce(
     (acc, field) => {
       acc[field] = Object.values(EntityType).reduce(
-        (entityAcc, entityType) => {
-          const entities = entitiesByType[entityType];
+        (entityAcc, entType) => {
+          const entities = entitiesByType[entType];
           const totalEntities = entities.length;
           const entitiesWithField = entities.filter(
             (entity) => getField(entity, field) !== undefined,
           ).length;
-          entityAcc[entityType] = totalEntities > 0 ? (entitiesWithField / totalEntities) * 100 : 0;
+          entityAcc[entType] = totalEntities > 0 ? (entitiesWithField / totalEntities) * 100 : 0;
           return entityAcc;
         },
         {} as Record<EntityType, number>,
@@ -156,13 +156,13 @@ function useDataCompletenessByFieldByEntityType(): Record<Field, Record<EntityTy
 
 function getTableColumnCoverage(): Record<Field, EntityType[]> {
   return Object.values(EntityType).reduce(
-    (acc, entityType) => {
-      const columns = getEntityMainTableColumns(entityType);
+    (acc, entType) => {
+      const columns = getEntityMainTableColumns(entType);
       columns.forEach((column) => {
         const field = column.field;
         if (field) {
           if (!acc[field]) acc[field] = [];
-          acc[field].push(entityType);
+          acc[field].push(entType);
         }
       });
       return acc;

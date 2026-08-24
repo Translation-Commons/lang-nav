@@ -69,7 +69,7 @@ export enum PageParamKey {
   localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
   entID = 'entID',
-  entityType = 'entityType',
+  entType = 'entType',
   page = 'page',
   pinned = 'pinned',
   populationFocus = 'populationFocus',
@@ -106,7 +106,7 @@ export type PageParams = {
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
   entID?: string;
-  entityType: EntityType;
+  entType: EntityType;
   page: number; // 1 indexed
   pinned: string[];
   populationFocus: PopulationFocus;

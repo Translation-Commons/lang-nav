@@ -19,10 +19,10 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 
 const ReportEntitiesMissingFields: React.FC = () => {
-  const { entityType } = usePageParams();
+  const { entType } = usePageParams();
   const { filteredEntities } = useFilteredEntities({});
 
-  const fields = getApplicableFields(undefined, entityType).filter((f) => f !== Field.None);
+  const fields = getApplicableFields(undefined, entType).filter((f) => f !== Field.None);
 
   const countTotal = filteredEntities.length;
   const resultsByField = useMemo(
@@ -44,7 +44,7 @@ const ReportEntitiesMissingFields: React.FC = () => {
   return (
     <>
       This report shows which fields have the most missing data for the currently filtered{' '}
-      {getEntityTypeLabelPlural(entityType)}. This can help identify gaps in the data and potential
+      {getEntityTypeLabelPlural(entType)}. This can help identify gaps in the data and potential
       areas for improvement.
       <table>
         <thead>

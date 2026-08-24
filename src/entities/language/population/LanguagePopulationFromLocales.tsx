@@ -26,7 +26,7 @@ const LanguagePopulationFromLocales: React.FC<Props> = ({ lang, speakingOrWritin
     updatePageParams({
       languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
       view: View.Table,
-      entityType: EntityType.Locale,
+      entType: EntityType.Locale,
     });
   }, [updatePageParams, lang]);
 

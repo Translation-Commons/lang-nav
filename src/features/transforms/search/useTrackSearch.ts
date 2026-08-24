@@ -13,7 +13,7 @@ import getSubstringFilterOnQuery from './getSubstringFilterOnQuery';
 // result_count and whether the search was typed or a suggestion click.
 export default function useTrackSearch(): (query: string, trigger: SearchTrigger) => void {
   const location = useLocation();
-  const { entityType, view, searchBy } = usePageParams();
+  const { entType, view, searchBy } = usePageParams();
   // Entities passing every active filter except search, so result_count
   // reflects the results shown for the query rather than raw substring matches.
   const { filteredEntities } = useFilteredEntities({ useSubstring: false });
@@ -26,7 +26,7 @@ export default function useTrackSearch(): (query: string, trigger: SearchTrigger
           : filteredEntities.filter(getSubstringFilterOnQuery(query, searchBy)).length;
       trackSearchTyped({
         path: location.pathname,
-        entity: entityType,
+        entity: entType,
         view,
         search_string: query,
         search_by: searchBy,
@@ -35,6 +35,6 @@ export default function useTrackSearch(): (query: string, trigger: SearchTrigger
         trigger,
       });
     },
-    [location.pathname, entityType, view, searchBy, filteredEntities],
+    [location.pathname, entType, view, searchBy, filteredEntities],
   );
 }

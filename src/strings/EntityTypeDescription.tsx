@@ -4,8 +4,8 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-const EntityTypeDescription: React.FC<{ entityType: EntityType }> = ({ entityType }) => {
-  switch (entityType) {
+const EntityTypeDescription: React.FC<{ entType: EntityType }> = ({ entType }) => {
+  switch (entType) {
     case EntityType.Census:
       return (
         <>
@@ -73,7 +73,7 @@ const EntityTypeDescription: React.FC<{ entityType: EntityType }> = ({ entityTyp
         </>
       );
     default:
-      enforceExhaustiveSwitch(entityType);
+      enforceExhaustiveSwitch(entType);
   }
 };
 

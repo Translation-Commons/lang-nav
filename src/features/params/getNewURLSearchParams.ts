@@ -76,7 +76,7 @@ function buildNextURLSearchParams(
 
 function clearDefaultParams(next: URLSearchParams): URLSearchParams {
   const defaults = getDefaultParams(
-    next.get('entityType') as EntityType,
+    next.get('entType') as EntityType,
     next.get('view') as View,
     next.get('profile') as ProfileType,
     next.get('populationFocus') as PopulationFocus,
@@ -87,7 +87,7 @@ function clearDefaultParams(next: URLSearchParams): URLSearchParams {
     const defaultValue = defaults[key as PageParamKey];
 
     // Don't remove view or profile because they change on defaults
-    if (key === 'entityType' && value !== EntityType.Language) return;
+    if (key === 'entType' && value !== EntityType.Language) return;
     if (key === 'view') return;
     if (key === 'profile' && value !== ProfileType.LanguageEthusiast) return;
     if (key === 'populationFocus' && value !== PopulationFocus.Overall) return;
@@ -112,7 +112,7 @@ function clearContextDependentParams(
   prev?: URLSearchParams,
 ): URLSearchParams {
   const prevOrDefault = getDefaultParams(
-    prev?.get('entityType') as EntityType,
+    prev?.get('entType') as EntityType,
     prev?.get('view') as View,
     prev?.get('profile') as ProfileType,
     prev?.get('populationFocus') as PopulationFocus,
@@ -125,18 +125,18 @@ function clearContextDependentParams(
     if (newParams.colorBy == null) next.delete('colorBy');
   }
 
-  if (newParams.entityType !== undefined && newParams.entityType !== prevOrDefault.entityType) {
+  if (newParams.entType !== undefined && newParams.entType !== prevOrDefault.entType) {
     next.delete('pinned');
     if (newParams.reportID == null) next.delete('reportID');
     if (newParams.page == null) next.delete('page');
     const oldSearchString = prev?.get('searchString');
     if (oldSearchString) {
       next.delete('searchString');
-      if (prevOrDefault.entityType === EntityType.Language) {
+      if (prevOrDefault.entType === EntityType.Language) {
         next.set('languageFilter', oldSearchString);
-      } else if (prevOrDefault.entityType === EntityType.Territory) {
+      } else if (prevOrDefault.entType === EntityType.Territory) {
         next.set('territoryFilter', oldSearchString);
-      } else if (prevOrDefault.entityType === EntityType.WritingSystem) {
+      } else if (prevOrDefault.entType === EntityType.WritingSystem) {
         next.set('writingSystemFilter', oldSearchString);
       }
     }

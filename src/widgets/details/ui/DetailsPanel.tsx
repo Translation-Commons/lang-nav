@@ -16,7 +16,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
 const DetailsPanel: React.FC = () => {
-  const { entID, entityType, updatePageParams } = usePageParams();
+  const { entID, entType, updatePageParams } = usePageParams();
   const ent = getEntityFromID(entID);
 
   return (
@@ -36,8 +36,8 @@ const DetailsPanel: React.FC = () => {
         </ContainErrorsAndSuspense>
         {!ent && (
           <>
-            In the comparison view, select a {entityType.toLowerCase()} by clicking on its name to
-            see more information.
+            In the comparison view, select a {entType.toLowerCase()} by clicking on its name to see
+            more information.
           </>
         )}
       </DetailsBody>

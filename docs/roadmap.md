@@ -1,6 +1,6 @@
 ## Major Versions
 
-- 2026-Q2: v1.0 release with user feedback, database backend, UX revamp, keyboard data.
+- 2026-08-31 (target!): v1.0 release with database backend, UX revamp, digital support scores
 - 2025-11-08: Beta release with censuses, IANA variants, maps, filters and advanced search.
 - 2025-Summer: Alpha release with core functionality for exploring languages, territories, locales, and writing systems.
 
@@ -8,7 +8,7 @@
 
 Here's a list of planned functionality. Completed functions are checked off.
 
-- [x] Language-adjacent objects
+- [x] Language-adjacent entities
   - [x] Languages
     - [x] Core attributes
     - [x] ISO parent/child connections
@@ -16,7 +16,7 @@ Here's a list of planned functionality. Completed functions are checked off.
     - [x] Glottolog
     - [x] Digital Support details
     - [x] Vitality details
-    - [ ] Keyboard availability details
+    - [x] Keyboard availability details
   - [x] Territories
     - [x] Countries & Dependencies
     - [x] Continents & other regions
@@ -32,20 +32,26 @@ Here's a list of planned functionality. Completed functions are checked off.
     - [x] Regular censuses
     - [x] Include citation information
     - [x] Continue importing new censuses
-    - [ ] Convert other imported datasets into census-like objects
+  - [x] Organizations
+    - [x] Census-collectors
+    - [ ] Language lists
+  - [ ] Documents
+    - [ ] Make all fact-sheets catalogued with proper metadata
+  - [ ] Platforms
 - [x] Views
   - [x] Cards
   - [x] Details
   - [x] Hierarchy
   - [x] Table
   - [x] Map
-    - [ ] Extend for more data layers
+    - [x] Extend for more data layers
+    - [ ] Languages in Territories
   - [ ] Graphs
   - [x] Reports
     - [x] Language name overlap
-    - [ ] Invalid languages
+    - [x] Invalid languages
     - [x] Locales that should be added
-    - [ ] Metrics on the data we have
+    - [x] Metrics on the data we have
 - [x] Interactivity
   - [x] Search
     - [x] By Code
@@ -67,6 +73,7 @@ Here's a list of planned functionality. Completed functions are checked off.
   - [x] Visual options
     - [x] Change locale separator (\_ or -)
   - [ ] Selection
+    - [x] partially done with pinning but not quite finished
   - [x] Export
 - [ ] Manage data sources
   - [x] Show results based on different definitions of what a language is

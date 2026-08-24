@@ -12,10 +12,10 @@ import { toTitleCase } from '@shared/lib/stringUtils';
 import EntityTypeDescription from '@strings/EntityTypeDescription';
 
 const EntityTypeSelector: React.FC = () => {
-  const { entityType, updatePageParams } = usePageParams();
+  const { entType, updatePageParams } = usePageParams();
   const goToEntityType = useCallback(
-    (entityType: EntityType) => {
-      updatePageParams({ entityType });
+    (entType: EntityType) => {
+      updatePageParams({ entType });
     },
     [updatePageParams],
   );
@@ -25,13 +25,13 @@ const EntityTypeSelector: React.FC = () => {
       selectorLabel="Entity"
       options={Object.values(EntityType)}
       onChange={goToEntityType}
-      selected={entityType}
+      selected={entType}
       display={SelectorDisplay.ButtonList}
       getOptionLabel={(option) => toTitleCase(getEntityTypeLabelPlural(option))}
-      getOptionDescription={(entityType) => (
+      getOptionDescription={(entType) => (
         <>
           <div style={{ marginBottom: 8 }}>Click here to change the kind of entity viewed.</div>
-          <EntityTypeDescription entityType={entityType} />
+          <EntityTypeDescription entType={entType} />
         </>
       )}
     />

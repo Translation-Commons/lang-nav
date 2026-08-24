@@ -33,7 +33,7 @@ const EntityPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
     <>
       <SlashIcon size="1em" />
       <Selector<string>
-        onChange={(childID) => updatePageParams({ entID: childID, entityType: ent.type })}
+        onChange={(childID) => updatePageParams({ entID: childID, entType: ent.type })}
         selected={children.length + ' ' + descendantsName}
         options={childIDs}
         getOptionLabel={(childID) => {
