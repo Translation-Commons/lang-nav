@@ -99,12 +99,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
             <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
           </Hoverable>
         )}
-        {nPages > 1 && (
-          <div>
-            On <PaginationControls itemCount={nFiltered} />
-            of {nPages.toLocaleString()}.
-          </div>
-        )}
+        {nPages > 1 && <PaginationControls itemCount={nFiltered} />}
       </div>
     </div>
   );
