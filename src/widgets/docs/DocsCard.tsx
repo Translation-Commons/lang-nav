@@ -4,7 +4,9 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import InternalLink from '@features/params/InternalLink';
 
+import { cn } from '@shared/lib/utils';
 import { Badge } from '@shared/ui/badge';
+import { Card, CardContent, CardHeader, CardTitle } from '@shared/ui/card';
 
 type Props = {
   title: ReactNode;
@@ -22,45 +24,46 @@ const DocsCard: React.FC<PropsWithChildren<Props>> = ({
 }) => {
   const link = page ? `/${page}` : href;
   const external = href != null && href.startsWith('http');
-  const cardStyle: React.CSSProperties = {
-    padding: '0.5em 1em',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.5em',
-    opacity: isDisabled ? 0.72 : 1,
-  };
+  const isLinked = link != null && !isDisabled;
 
-  const body = (
-    <>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-        <span style={{ fontWeight: 600 }}>{title}</span>
+  const card = (
+    <Card
+      className={cn(
+        'h-full bg-muted/50 ring-0',
+        isDisabled && 'opacity-72',
+        isLinked && 'transition-colors hover:bg-accent',
+      )}
+      size="sm"
+    >
+      <CardHeader className="flex flex-row items-center gap-2">
+        <CardTitle>{title}</CardTitle>
         {href != null && isDisabled && <Badge variant="secondary">Coming soon</Badge>}
         {external && !isDisabled ? <span aria-hidden="true">↗</span> : null}
-      </div>
-      <div style={{ fontWeight: 'lighter' }}>{children}</div>
-    </>
+      </CardHeader>
+      <CardContent className="font-light">{children}</CardContent>
+    </Card>
   );
 
-  if (link == null || isDisabled) {
-    return <div style={cardStyle}>{body}</div>;
+  if (!isLinked) {
+    return card;
   }
   if (external) {
     return (
       <a
+        className="no-underline hover:no-underline"
         href={href}
         title={href}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ ...cardStyle, textDecoration: 'none' }}
       >
-        {body}
+        {card}
       </a>
     );
   }
 
   return (
-    <InternalLink page={page} style={{ ...cardStyle, textDecoration: 'none' }}>
-      {body}
+    <InternalLink className="no-underline hover:no-underline" page={page}>
+      {card}
     </InternalLink>
   );
 };

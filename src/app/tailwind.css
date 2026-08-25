@@ -71,21 +71,21 @@
   color-scheme: light;
 
   --background: #ffffff;
-  --foreground: #04355c;
+  --foreground: #171717;
   --card: #ffffff;
-  --card-foreground: #04355c;
+  --card-foreground: #171717;
   --popover: #ffffff;
-  --popover-foreground: #04355c;
+  --popover-foreground: #171717;
   --primary: #007bff;
   --primary-foreground: #ffffff;
   --primary-hover: #3399ff;
   --secondary: #f0f0f0;
-  --secondary-foreground: #04355c;
+  --secondary-foreground: #171717;
   --muted: #f0f0f0;
   --muted-foreground: #7f7f7f;
   /* Hover surface for rows and cells that paint over content behind them */
   --accent: #e4efff;
-  --accent-foreground: #04355c;
+  --accent-foreground: #171717;
   /* Translucent hover wash for elements that can sit on any background */
   --accent-subtle: #007bff1f;
   --destructive: #df7e7c;
@@ -109,11 +109,11 @@
 
   --radius: 0.625rem;
   --sidebar: #ffffff;
-  --sidebar-foreground: #04355c;
+  --sidebar-foreground: #171717;
   --sidebar-primary: #007bff;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #e4efff;
-  --sidebar-accent-foreground: #04355c;
+  --sidebar-accent-foreground: #171717;
   --sidebar-border: #00000017;
   --sidebar-ring: #007bff;
 }

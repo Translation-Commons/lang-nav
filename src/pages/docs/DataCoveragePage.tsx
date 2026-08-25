@@ -16,11 +16,21 @@ const DataCoveragePage: React.FC = () => {
         both the capabilities for different fields as well as potential gaps in user experience or
         data.
       </p>
-      <ContainErrorsAndSuspense>
-        <FilterPanelProvider>
-          <FieldCoverageTable />
-        </FilterPanelProvider>
-      </ContainErrorsAndSuspense>
+      {/*
+        The prose stays in the page's 800px column; only the table breaks out of it. The negative
+        margin widens this block to 1400px and, being symmetric, keeps it centered. It only applies
+        from 2xl up, where the viewport can actually fit 1400px -- below that the table stays in the
+        column and scrolls horizontally instead.
+      */}
+      <div className="overflow-x-auto 2xl:-mx-[300px]">
+        <div className="mx-auto w-fit">
+          <ContainErrorsAndSuspense>
+            <FilterPanelProvider>
+              <FieldCoverageTable />
+            </FilterPanelProvider>
+          </ContainErrorsAndSuspense>
+        </div>
+      </div>
     </DocsPageContainer>
   );
 };
