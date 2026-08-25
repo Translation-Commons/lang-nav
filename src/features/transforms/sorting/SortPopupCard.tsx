@@ -3,7 +3,6 @@ import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-
 import TransformOptionsPopup from '../TransformOptionsPopup';
 
 import FieldDropdown from './FieldDropdown';

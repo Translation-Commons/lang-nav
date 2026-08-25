@@ -1,10 +1,9 @@
 import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
-import React, { useCallback, useState } from 'react';
+import { useCallback, useTransition } from 'react';
 
 import EmptyHoverCardProvider from '@features/layers/hovercard/EmptyHoverCardProvider';
 import { PageParamsContext } from '@features/params/PageParamsContext';
 import { EntityType } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
 import { prepareCLDRLocalePopulationForExport } from '@entities/locale/localstatus/LocaleCLDRExport';
@@ -12,6 +11,13 @@ import { EntityData } from '@entities/types/DataTypes';
 
 import { trackEvent } from '@shared/lib/amplitude';
 import { csvEscape, reactNodeToString } from '@shared/lib/stringExportUtils';
+import { Button } from '@shared/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@shared/ui/dropdown-menu';
 import { Spinner } from '@shared/ui/spinner';
 
 import { PinColumn } from './CommonColumns';
@@ -31,7 +37,6 @@ enum ExportType {
   CopyTSV = 'Copy TSV',
   CopyUNESCO = 'Copy UNESCO TSV',
   CopyCLDR = 'Copy CLDR TSV',
-  Unchosen = 'Export',
 }
 
 type DownloadExportType =
@@ -45,9 +50,8 @@ type CopyExportType =
   | ExportType.CopyCLDR;
 
 function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
-  // Track when the user initiates an export; used to disable the button while processing
-  const [isExporting, setIsExporting] = useState(false);
   const pageParams = usePageParams();
+  const [isPending, startTransition] = useTransition();
 
   const prepareDataForExport = useCallback(
     (exportType: ExportType) => {
@@ -122,7 +126,6 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   const handleExport = useCallback(
     (exportType: ExportType) => {
       if (ents.length === 0) return;
-      setIsExporting(true);
       trackEvent('data_exported', {
         export_type: exportType,
         entType: pageParams.entType,
@@ -131,29 +134,25 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
         row_count: ents.length,
         column_count: visibleColumns.length,
       });
-      void (async () => {
-        try {
-          switch (exportType) {
-            case ExportType.DownloadCSV:
-            case ExportType.DownloadTSV:
-            case ExportType.DownloadUNESCO:
-              await handleExportFile(exportType);
-              break;
-            case ExportType.CopyCSV:
-            case ExportType.CopyTSV:
-            case ExportType.CopyUNESCO:
-            case ExportType.CopyCLDR:
-              await handleClipboardExport(exportType);
-              break;
-          }
-        } finally {
-          setIsExporting(false);
+      startTransition(() => {
+        switch (exportType) {
+          case ExportType.DownloadCSV:
+          case ExportType.DownloadTSV:
+          case ExportType.DownloadUNESCO:
+            handleExportFile(exportType);
+            break;
+          case ExportType.CopyCSV:
+          case ExportType.CopyTSV:
+          case ExportType.CopyUNESCO:
+          case ExportType.CopyCLDR:
+            handleClipboardExport(exportType);
+            break;
         }
-      })();
+      });
     },
     [handleClipboardExport, handleExportFile, ents, visibleColumns.length],
   );
-  let validExportTypes = Object.values(ExportType).filter((et) => et !== ExportType.Unchosen);
+  let validExportTypes = Object.values(ExportType);
   if (pageParams.entType !== EntityType.Language && pageParams.entType !== EntityType.Locale) {
     validExportTypes = validExportTypes.filter(
       (et) =>
@@ -166,73 +165,29 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   }
 
   return (
-    <Selector
-      options={validExportTypes}
-      onChange={handleExport}
-      selected={ExportType.Unchosen}
-      getOptionLabel={(exportType: ExportType) => (
-        <ExportLabel exportType={exportType} isExporting={isExporting} />
-      )}
-      getOptionDescription={getExportDescription}
-    />
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          render={
+            <Button className="cursor-pointer">
+              {isPending ? <Spinner /> : <ExternalLinkIcon />} Export
+            </Button>
+          }
+        />
+        <DropdownMenuContent className="w-fit">
+          {validExportTypes.map((exportType) => (
+            <DropdownMenuItem
+              className="cursor-pointer"
+              key={exportType}
+              onClick={() => handleExport(exportType)}
+            >
+              {exportType.startsWith('Download') ? <DownloadIcon /> : <CopyIcon />} {exportType}
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
   );
-}
-
-const ExportLabel: React.FC<{ exportType: ExportType; isExporting: boolean }> = ({
-  exportType,
-  isExporting,
-}) => {
-  switch (exportType) {
-    case ExportType.DownloadCSV:
-    case ExportType.DownloadTSV:
-    case ExportType.DownloadUNESCO:
-      return (
-        <div style={{ display: 'flex' }}>
-          <DownloadIcon className="button-inline-icon" /> {exportType}
-        </div>
-      );
-    case ExportType.CopyCSV:
-    case ExportType.CopyTSV:
-    case ExportType.CopyUNESCO:
-    case ExportType.CopyCLDR:
-      return (
-        <div style={{ display: 'flex' }}>
-          <CopyIcon className="button-inline-icon" /> {exportType}
-        </div>
-      );
-    case ExportType.Unchosen:
-      return (
-        <div style={{ display: 'flex' }}>
-          {isExporting ? (
-            <Spinner className="button-inline-icon" />
-          ) : (
-            <ExternalLinkIcon className="button-inline-icon" />
-          )}{' '}
-          {exportType}
-        </div>
-      );
-  }
-};
-
-function getExportDescription(exportType: ExportType) {
-  switch (exportType) {
-    case ExportType.DownloadCSV:
-      return 'Export visible rows & columns to comma-separated values (CSV) file';
-    case ExportType.DownloadTSV:
-      return 'Export visible rows & columns to tab-separated values (TSV) file';
-    case ExportType.CopyCSV:
-      return 'Copy visible rows & columns to clipboard as comma-separated values (CSV)';
-    case ExportType.CopyTSV:
-      return 'Copy visible rows & columns to clipboard as tab-separated values (TSV)';
-    case ExportType.DownloadUNESCO:
-      return 'Export data prepared for UNESCO in a TSV file format.';
-    case ExportType.CopyUNESCO:
-      return 'Copy data prepared for UNESCO in TSV format to clipboard.';
-    case ExportType.CopyCLDR:
-      return "Copy data prepared for CLDR's country_language_population.tsv to clipboard.";
-    case ExportType.Unchosen:
-      return 'Export data: selected columns and filtered rows to CSV or TSV';
-  }
 }
 
 export default TableExport;
