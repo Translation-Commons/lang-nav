@@ -1,0 +1,1 @@
+import{aJ as r}from"./index-NpDy0Swu.js";function s(i){const{iso:t}=i.vitality||{};if(t!=null)return t}function c(i,t){var e,a;switch(i){case r.ISO:return(e=t.vitality)==null?void 0:e.iso;case r.Metascore:return(a=t.vitality)==null?void 0:a.meta}}export{c as a,s as g};

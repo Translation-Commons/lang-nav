@@ -1,0 +1,21 @@
+import{A as h,x as f,r as d,R as k,q as e,B as b,C as u,cx as v,bO as P,bQ as C,cy as B,aQ as w,ap as N,_ as F,bM as M,ak as L,H as _,V as x}from"./index-NpDy0Swu.js";import{a as S,L as I}from"./LimitInput-D6EIacn3.js";/**
+ * @license lucide-react v0.525.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const T=[["polygon",{points:"19 20 9 12 19 4 19 20",key:"o2sva"}],["line",{x1:"5",x2:"5",y1:"19",y2:"5",key:"1ocqjk"}]],E=h("skip-back",T);/**
+ * @license lucide-react v0.525.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const V=[["polygon",{points:"5 4 15 12 5 20 5 4",key:"16p6eg"}],["line",{x1:"19",x2:"19",y1:"5",y2:"19",key:"futhcm"}]],H=h("skip-forward",V);/**
+ * @license lucide-react v0.525.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const R=[["line",{x1:"18",x2:"18",y1:"20",y2:"4",key:"cun8e5"}],["polygon",{points:"14,20 4,12 14,4",key:"ypakod"}]],q=h("step-back",R);/**
+ * @license lucide-react v0.525.0 - ISC
+ *
+ * This source code is licensed under the ISC license.
+ * See the LICENSE file in the root directory of this source tree.
+ */const A=[["line",{x1:"6",x2:"6",y1:"4",y2:"20",key:"fy8qot"}],["polygon",{points:"10,4 20,12 10,20",key:"1mc1pf"}]],$=h("step-forward",A);function W(){const{page:s,limit:a}=f();return{getCurrentEntities:d.useCallback(t=>a<1||t.length<a?t:t.length<=a*(s-1)?t.slice(0,a):t.slice(a*(s-1),a*s),[s,a])}}const z=({itemCount:s})=>{const{page:a,limit:o,updatePageParams:t}=f(),i=o<1?1:Math.ceil(s/o),[r,l]=k.useState(a);d.useEffect(()=>{l(a)},[a]);const m=d.useCallback(()=>{l(1),t({page:1})},[t]),p=d.useCallback(n=>{const c=Math.min(Math.max((r||1)+n,1),i);l(c),t({page:c})},[t,r,i]),g=d.useCallback(()=>{l(i),t({page:i})},[t,i]);return i<=1?e.jsx(e.Fragment,{}):e.jsx("span",{className:"inline text-nowrap",children:e.jsxs(b,{children:[e.jsx(u,{disabled:!0,variant:"outline",children:"Page"}),e.jsx(u,{className:"cursor-pointer",disabled:r===1,onClick:m,variant:"secondary",children:e.jsx(E,{})}),e.jsx(u,{className:"cursor-pointer",disabled:r===1,onClick:()=>p(-1),variant:"secondary",children:e.jsx(q,{})}),e.jsx(S,{value:r||"",onChange:n=>n.target.value?l(parseInt(n.target.value)):l(void 0),onBlur:n=>t({page:Math.min(Math.max(parseInt(n.target.value),1),i)}),style:{width:50,textAlign:"center"}}),e.jsx(u,{className:"cursor-pointer",disabled:!r||r>=i,onClick:()=>p(1),variant:"secondary",children:e.jsx($,{})}),e.jsx(u,{className:"cursor-pointer",disabled:r===i,onClick:g,variant:"secondary",children:e.jsx(H,{})}),e.jsxs(u,{disabled:!0,variant:"outline",children:["/ ",i]})]})})},J=({ents:s,shouldFilterUsingSearchBar:a=!0})=>{const{page:o,limit:t}=f(),i=a?v():()=>!0,r=P(),l=C(),m=B(),p=w().Population,g=s.length,n=d.useMemo(()=>s.filter(l).filter(r).filter(m).filter(p).filter(i).length,[s,l,r,m,p,i]),c=t<1?1:Math.ceil(n/t),j=o>c||o<1?1:o;if(g===0)return"Data is still loading. If you are waiting awhile there could be an error in the data.";let y=t;return t<1&&(y=n),j===c&&(y=n-(c-1)*t),e.jsxs("div",{children:[e.jsx(D,{nShown:y}),e.jsxs("div",{className:"flex flex-row flex-wrap gap-2 items-center justify-center",children:[e.jsxs("div",{className:"flex flex-nowrap gap-2 text-sm items-center",children:["Showing up to ",e.jsx(I,{showTitle:!1}),n>y&&e.jsxs(e.Fragment,{children:[" of ",n.toLocaleString()]})," results."]}),g>n&&e.jsx(N,{className:"text-sm",hoverContent:e.jsx(M,{ents:s,shouldFilterUsingSearchBar:a}),children:e.jsxs(F,{children:[(g-n).toLocaleString()," filtered out."]})}),c>1&&e.jsx(z,{itemCount:n})]})]})},D=({nShown:s})=>{const{view:a,updatePageParams:o}=f(),t=O(a);return s<=t?null:e.jsxs("div",{children:[e.jsx(L,{size:"1em",style:{color:"var(--color-yellow)"}}),"There are ",e.jsx("strong",{children:s==null?void 0:s.toLocaleString()})," items visible, this may impact page performance. Consider reducing the limit to"," ",e.jsx(_,{onClick:()=>o({limit:t}),style:{padding:"0 0.25em"},children:t}),"."]})};function O(s){switch(s){case x.Map:return 1e3;case x.Table:return 200;case x.CardList:return 20;case x.Hierarchy:case x.Reports:return 10}}export{z as P,J as V,W as u};
