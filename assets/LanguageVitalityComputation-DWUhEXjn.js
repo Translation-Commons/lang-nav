@@ -1,0 +1,1 @@
+import{bh as a}from"./index-PYIOARMH.js";function s(i){const{iso:t}=i.vitality||{};if(t!=null)return t}function c(i,t){var e,r;switch(i){case a.ISO:return(e=t.vitality)==null?void 0:e.iso;case a.Metascore:return(r=t.vitality)==null?void 0:r.meta}}export{c as a,s as g};

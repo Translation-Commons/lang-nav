@@ -1,0 +1,1 @@
+import{q as e}from"./index-PYIOARMH.js";const s=({title:r,children:o})=>e.jsxs("details",{className:"collapsible-report",open:!0,children:[e.jsx("summary",{style:{width:"100%",backgroundColor:"var(--color-button-secondary)",padding:"0.5em",borderRadius:"0.5em",cursor:"pointer",textAlign:"left",fontSize:"1.2em"},children:r}),o]});export{s as C};
