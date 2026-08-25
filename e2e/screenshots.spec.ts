@@ -62,11 +62,26 @@ test.describe('screenshot tests', () => {
     await waitToFinishLoadingData(page);
     await expect(page).toHaveScreenshot('data-page.png');
   });
-  test('data page: Details', async ({ page }) => {
+
+  test('data page: Language Details', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto('./data?entID=zho&searchString=Chinese');
     await waitToFinishLoadingData(page);
     await expect(page).toHaveScreenshot('data-page-details.png');
+  });
+
+  test('data page: Locale Details', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?entID=eng_IN&searchString=English&entType=Locale');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-details-locale.png');
+  });
+
+  test('data page: Territory Details', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?entID=ID&searchString=Ind&entType=Territory');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-details-territory.png');
   });
 
   test('data page: Table', async ({ page }) => {

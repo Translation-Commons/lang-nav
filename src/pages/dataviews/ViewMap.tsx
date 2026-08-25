@@ -6,24 +6,16 @@ import MapContainer from '@features/map/MapContainer';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
 import { EntityType } from '@features/params/PageParamTypes';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
-import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
-import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
-import Field from '@features/transforms/fields/Field';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
 import { EntityData } from '@entities/types/DataTypes';
 
-import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 function ViewMap() {
-  const { colorBy, entType } = usePageParams();
+  const { entType } = usePageParams();
   const { filteredEntities, allEntities } = useFilteredEntities({});
   const { getCurrentEntities } = usePagination<EntityData>();
 
@@ -48,20 +40,9 @@ function ViewMap() {
 
   return (
     <MapContainer>
-      <h2 style={{ margin: 0 }}>{toTitleCase(entType)} Map</h2>
       <div>{getMapDescription(entType)}</div>
       {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
       <EntityMap entities={filteredEntities} allowSidebar={true} />
-      <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-        <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
-          <div>
-            {colorBy === Field.None ? `You can color the shapes by:` : `Shapes are colored by `}
-          </div>
-          <ColorBySelector entType={isDrawingTerritories ? EntityType.Territory : entType} />
-          <div>{colorBy !== Field.None && 'using the color gradient'}</div>
-          <ColorGradientSelector />
-        </div>
-      </SelectorDisplayProvider>
       {entsWithoutCoordinates.length > 0 && (
         <div>
           The following {getEntityTypeLabelPlural(entType)} do not have defined coordinates:{' '}

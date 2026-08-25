@@ -29,25 +29,6 @@ describe('Selector component', () => {
     expect(screen.getByText('My Label')).toBeTruthy();
   });
 
-  it('renders all options in ButtonList display', () => {
-    render(
-      <Selector
-        options={['a', 'b']}
-        selected={'a'}
-        onChange={() => {}}
-        getOptionLabel={(str) => `option-${str}`}
-        display={SelectorDisplay.ButtonList}
-      />,
-    );
-
-    expect(screen.getByText('option-a')).toBeTruthy();
-    expect(screen.getByText('option-b')).toBeTruthy();
-
-    // The selected option should have data-selected true
-    expect(screen.getByText('option-a').getAttribute('class')).toBe('selectorOption selected');
-    expect(screen.getByText('option-b').getAttribute('class')).toBe('selectorOption unselected');
-  });
-
   it('toggles dropdown when standalone option is clicked and calls onChange for options inside dropdown', () => {
     const handleChange = vi.fn();
     render(
@@ -76,20 +57,5 @@ describe('Selector component', () => {
     expect(handleChange).toHaveBeenCalledTimes(1);
     expect(handleChange).toHaveBeenCalledWith('two');
     expect(screen.queryByRole('listbox')).toBeNull();
-  });
-
-  it('supports multiple selection state (selected as array) and marks appropriate options', () => {
-    render(
-      <Selector
-        options={['x', 'y', 'z']}
-        selected={['x', 'z']}
-        onChange={() => {}}
-        display={SelectorDisplay.ButtonList}
-      />,
-    );
-
-    expect(screen.getByText('x').getAttribute('class')).toBe('selectorOption selected');
-    expect(screen.getByText('y').getAttribute('class')).toBe('selectorOption unselected');
-    expect(screen.getByText('z').getAttribute('class')).toBe('selectorOption selected');
   });
 });

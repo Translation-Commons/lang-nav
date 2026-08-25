@@ -15,7 +15,7 @@ import { LanguageISOStatusSelector } from '../VitalitySelector';
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
   useSelectorDisplay: vi.fn().mockReturnValue({ display: 'filterList' }),
-  SelectorDisplay: { ButtonList: 'buttonList', Dropdown: 'dropdown', FilterList: 'filterList' },
+  SelectorDisplay: { Dropdown: 'dropdown', FilterList: 'filterList' },
   SelectorDisplayProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 vi.mock('@features/layers/hovercard/useHoverCard', () => ({

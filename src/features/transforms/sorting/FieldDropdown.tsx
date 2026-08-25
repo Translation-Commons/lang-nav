@@ -35,7 +35,6 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
   const applicableFields = getApplicableFields(transform, entType);
   if (pageParam === PageParamKey.secondarySortBy) applicableFields.push(Field.None);
   const groupedFields = groupByArray(applicableFields, (field) => getFieldGroup(field));
-  const activeGroup = getFieldGroup(currentValue);
 
   return (
     <DropdownMenu>
@@ -53,38 +52,65 @@ const FieldDropdown: React.FC<Props> = ({ pageParam }) => {
         >
           {groupedFields.map(([group, fields]) => {
             const fieldGroup = Number(group) as FieldGroup;
-            const isActiveGroup = fieldGroup === activeGroup;
 
             return (
-              <DropdownMenuSub key={group}>
-                <DropdownMenuSubTrigger
-                  className={isActiveGroup ? 'bg-accent font-medium text-accent-foreground' : ''}
-                >
-                  {getFieldGroupLabel(fieldGroup)}
-                </DropdownMenuSubTrigger>
-                <DropdownMenuPortal>
-                  <DropdownMenuSubContent>
-                    {fields.map((field) => (
-                      <DropdownMenuRadioItem
-                        className={`cursor-pointer ${
-                          field === currentValue
-                            ? 'bg-accent font-medium text-accent-foreground'
-                            : ''
-                        }`}
-                        value={field}
-                        key={field}
-                      >
-                        {field}
-                      </DropdownMenuRadioItem>
-                    ))}
-                  </DropdownMenuSubContent>
-                </DropdownMenuPortal>
-              </DropdownMenuSub>
+              <DropdownGroup
+                key={group}
+                group={fieldGroup}
+                fields={fields}
+                currentValue={currentValue}
+              />
             );
           })}
         </DropdownMenuRadioGroup>
       </DropdownMenuContent>
     </DropdownMenu>
+  );
+};
+
+const DropdownGroup: React.FC<{
+  group: FieldGroup;
+  fields: Field[];
+  currentValue: Field;
+}> = ({ group, fields, currentValue }) => {
+  const isActiveGroup = group === getFieldGroup(currentValue);
+
+  if (fields.length === 1)
+    return (
+      <DropdownMenuRadioItem
+        className={`cursor-pointer ${
+          fields[0] === currentValue ? 'bg-accent font-medium text-accent-foreground' : ''
+        }`}
+        value={fields[0]}
+        key={fields[0]}
+      >
+        {fields[0]}
+      </DropdownMenuRadioItem>
+    );
+
+  return (
+    <DropdownMenuSub key={group}>
+      <DropdownMenuSubTrigger
+        className={isActiveGroup ? 'bg-accent font-medium text-accent-foreground' : ''}
+      >
+        {getFieldGroupLabel(group)}
+      </DropdownMenuSubTrigger>
+      <DropdownMenuPortal>
+        <DropdownMenuSubContent>
+          {fields.map((field) => (
+            <DropdownMenuRadioItem
+              className={`cursor-pointer ${
+                field === currentValue ? 'bg-accent font-medium text-accent-foreground' : ''
+              }`}
+              value={field}
+              key={field}
+            >
+              {field}
+            </DropdownMenuRadioItem>
+          ))}
+        </DropdownMenuSubContent>
+      </DropdownMenuPortal>
+    </DropdownMenuSub>
   );
 };
 

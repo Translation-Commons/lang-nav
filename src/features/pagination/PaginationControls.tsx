@@ -1,14 +1,11 @@
-import {
-  SkipBackIcon,
-  SkipForwardIcon,
-  StepBackIcon,
-  StepForwardIcon,
-  TriangleAlertIcon,
-} from 'lucide-react';
+import { SkipBackIcon, SkipForwardIcon, StepBackIcon, StepForwardIcon } from 'lucide-react';
 import React, { useCallback, useEffect } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
+
+import { Button } from '@shared/ui/button';
+import { ButtonGroup } from '@shared/ui/button-group';
+import { Input } from '@shared/ui/input';
 
 type Props = {
   itemCount: number;
@@ -42,53 +39,29 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
 
   if (totalPages <= 1) return <></>;
 
-  const compactStyle: React.CSSProperties = {
-    lineHeight: '1.5',
-    padding: '0em 0.25em',
-    fontSize: '1em',
-    fontWeight: 'normal',
-    margin: '0 -0.125em',
-    borderRadius: '0',
-  };
-
   return (
-    <>
-      Page:
-      <div
-        className="selector"
-        style={{
-          marginBottom: 0,
-          marginLeft: '0.5em',
-          marginRight: '0.5em',
-          display: 'inline-flex',
-          verticalAlign: 'middle',
-          alignItems: 'normal',
-        }}
-      >
-        <button
+    <span className="inline text-nowrap">
+      <ButtonGroup>
+        <Button disabled variant="outline">
+          Page
+        </Button>
+        <Button
+          className="cursor-pointer"
+          disabled={currentPage === 1}
           onClick={setPageToBeginning}
-          disabled={currentPage === 1}
-          style={{ ...compactStyle, borderRadius: '1em 0 0 1em' }}
+          variant="secondary"
         >
-          <SkipBackIcon size="1em" style={{ display: 'block' }} />
-        </button>
-        <HoverableButton
+          <SkipBackIcon />
+        </Button>
+        <Button
+          className="cursor-pointer"
           disabled={currentPage === 1}
-          hoverContent={
-            <>
-              Go to Previous Page.
-              <br />
-              Shortcut: Left Arrow Key ←
-            </>
-          }
           onClick={() => incrementPage(-1)}
-          style={compactStyle}
+          variant="secondary"
         >
-          <StepBackIcon size="1em" style={{ display: 'block' }} />
-        </HoverableButton>
-
-        <input
-          className={!currentPage || currentPage === 1 ? 'empty' : ''}
+          <StepBackIcon />
+        </Button>
+        <Input
           value={currentPage || ''}
           onChange={(event) =>
             event.target.value
@@ -100,42 +73,29 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
               page: Math.min(Math.max(parseInt(event.target.value), 1), totalPages),
             })
           }
-          style={{ ...compactStyle, width: 50, textAlign: 'center' }}
+          style={{ width: 50, textAlign: 'center' }}
         />
-
-        {currentPage && currentPage > totalPages && (
-          <HoverableButton
-            onClick={setPageToEnd}
-            hoverContent="This page number is out of range. Showing the first page instead. Click to go to the actually last page."
-            style={{ margin: 'none', padding: 0, borderRadius: 0 }}
-          >
-            <TriangleAlertIcon size="1em" style={{ display: 'block' }} />
-          </HoverableButton>
-        )}
-
-        <HoverableButton
+        <Button
+          className="cursor-pointer"
           disabled={!currentPage || currentPage >= totalPages}
-          hoverContent={
-            <>
-              Go to Next Page.
-              <br />
-              Shortcut: Right Arrow Key →
-            </>
-          }
           onClick={() => incrementPage(1)}
-          style={compactStyle}
+          variant="secondary"
         >
-          <StepForwardIcon size="1em" style={{ display: 'block' }} />
-        </HoverableButton>
-        <button
-          onClick={setPageToEnd}
+          <StepForwardIcon />
+        </Button>
+        <Button
+          className="cursor-pointer"
           disabled={currentPage === totalPages}
-          style={{ ...compactStyle, borderRadius: '0 1em 1em 0' }}
+          onClick={setPageToEnd}
+          variant="secondary"
         >
-          <SkipForwardIcon size="1em" style={{ display: 'block' }} />
-        </button>
-      </div>
-    </>
+          <SkipForwardIcon />
+        </Button>
+        <Button disabled variant="outline">
+          / {totalPages}
+        </Button>
+      </ButtonGroup>
+    </span>
   );
 };
 

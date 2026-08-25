@@ -3,9 +3,6 @@ import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -21,24 +18,21 @@ import usePotentialLocales from '@entities/locale/usePotentialLocales';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 const ReportLocalesPotential: React.FC = () => {
   const { percentThreshold: minInCountry, percentThresholdSelector: minInCountrySelector } =
     usePotentialLocaleThreshold(
-      <SelectorLabel
-        label="% in Country:"
-        description="Limit results by the minimum percent population in a territory that uses the language."
-      />,
+      '% in Country:',
+      'Limit results by the minimum percent population in a territory that uses the language.',
     );
   const [requireBothPercents, setRequireBothPercents] = React.useState(false);
   const {
     percentThreshold: minOfLangWorldWide,
     percentThresholdSelector: minOfLangWorldWideSelector,
   } = usePotentialLocaleThreshold(
-    <SelectorLabel
-      label="% of Lang Worldwide:"
-      description="Limit results by the minimum percent population of the language compared worldwide."
-    />,
+    '% of Lang Worldwide:',
+    'Limit results by the minimum percent population of the language compared worldwide.',
   );
   const isPercentEnough = useCallback(
     (percInCountry: number | undefined, percOfLangWorldWide: number | undefined) => {
@@ -68,15 +62,17 @@ const ReportLocalesPotential: React.FC = () => {
         here may be worth considering.
       </p>
       Filter by minimum:
-      <div style={{ display: 'flex', gap: '1em', flexWrap: 'wrap', alignItems: 'start' }}>
+      <div className="flex flex-wrap gap-2 items-center p-4 text-sm">
         {minInCountrySelector}
-        <Selector<number>
-          options={[0, 1]}
-          onChange={(value) => setRequireBothPercents(value === 1)}
-          display={SelectorDisplay.ButtonGroup}
-          selected={requireBothPercents ? 1 : 0}
-          getOptionLabel={(v) => (v ? 'and' : 'or')}
-        />
+        <Tabs
+          value={requireBothPercents ? '1' : '0'}
+          onValueChange={(value) => setRequireBothPercents(value === '1')}
+        >
+          <TabsList>
+            <TabsTrigger value="1">and</TabsTrigger>
+            <TabsTrigger value="0">or</TabsTrigger>
+          </TabsList>
+        </Tabs>
         {minOfLangWorldWideSelector}
       </div>
       <SubReport title="Largest Populations" locales={potentialLocales.largest}>

@@ -137,16 +137,6 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
   const { display } = useSelectorDisplay();
 
   switch (display) {
-    case SelectorDisplay.ButtonList:
-      return (
-        <div
-          className="selectorOptions"
-          ref={containerRef}
-          style={{ marginLeft: hasSelectorLabel ? '1em' : 'none' }}
-        >
-          {children}
-        </div>
-      );
     case SelectorDisplay.FilterList:
       return (
         <div
@@ -157,8 +147,6 @@ const OptionsContainer: React.FC<React.PropsWithChildren<OptionsContainerProps>>
           {children}
         </div>
       );
-    case SelectorDisplay.ButtonGroup:
-      return <>{children}</>;
     case SelectorDisplay.Dropdown:
     case SelectorDisplay.InlineDropdown:
       return (

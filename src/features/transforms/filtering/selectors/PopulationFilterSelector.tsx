@@ -2,10 +2,6 @@ import React from 'react';
 
 import { PageParamKey } from '@features/params/PageParamTypes';
 import { getDefaultParams } from '@features/params/Profiles';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import SelectorLabel from '@features/params/ui/SelectorLabel';
 import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
@@ -15,7 +11,7 @@ const PopulationFilterSelector: React.FC = () => {
   const defaults = getDefaultParams();
 
   return (
-    <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
+    <>
       <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
         <SelectorLabel
           description="Filter results to show only items with population above this threshold"
@@ -73,7 +69,7 @@ const PopulationFilterSelector: React.FC = () => {
           }
         />
       </div>
-    </SelectorDisplayProvider>
+    </>
   );
 };
 
