@@ -124,10 +124,6 @@ export function getOptionStyle(
   };
   // Customize based on position and display type
   switch (display) {
-    case SelectorDisplay.ButtonList:
-      style.borderRadius = '1em';
-      if (!isSelected) style.border = '0.125em solid var(--color-button-secondary)';
-      break;
     case SelectorDisplay.FilterList:
       style.border = 'none';
       style.borderRadius = '0.5em';

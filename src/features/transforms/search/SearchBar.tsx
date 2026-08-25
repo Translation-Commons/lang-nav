@@ -35,7 +35,7 @@ const SearchBar: React.FC = () => {
     [updatePageParams, location.pathname, searchString, trackSearch],
   );
   return (
-    <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
+    <SelectorDisplayProvider display={SelectorDisplay.FilterList}>
       <form
         className="selector text-sm"
         style={{

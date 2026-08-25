@@ -3,7 +3,6 @@ import React from 'react';
 export enum SelectorDisplay {
   Dropdown = 'dropdown', // Formatting is still off for these
   InlineDropdown = 'inlineDropdown', // Used to be inline with text
-  ButtonList = 'buttonList',
   FilterList = 'filterList',
 }
 

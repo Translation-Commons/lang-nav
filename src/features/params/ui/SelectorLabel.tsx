@@ -38,9 +38,6 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
   };
 
   switch (display) {
-    case SelectorDisplay.ButtonList:
-      style.borderRadius = '1em 0 0 1em';
-      break;
     case SelectorDisplay.InlineDropdown:
       style.padding = '0 0.5em';
       break;
