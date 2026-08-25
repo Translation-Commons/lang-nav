@@ -7,7 +7,6 @@ import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 import computeCensusRecordPriority from '@features/data/compute/computeCensusRecordPriority';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 
 import CensusRecordPriority from '@entities/census/CensusRecordPriority';
 import { getSpeakingOrWritingFocus } from '@entities/lib/getSpeakingOrWritingFocus';
@@ -20,7 +19,7 @@ import CountOfPeople from '@shared/ui/CountOfPeople';
 import DecimalNumber from '@shared/ui/DecimalNumber';
 import Deemphasized from '@shared/ui/Deemphasized';
 import { PercentageDifference } from '@shared/ui/PercentageDifference';
-
+import { Toggle } from '@shared/ui/toggle';
 import '../details.css';
 
 const LocalePopulationSection: React.FC<{ locale: LocaleData }> = ({ locale }) => {
@@ -124,7 +123,11 @@ const MajorPopulationBox: React.FC<{
   return (
     <div className="DetailsBox">
       <DetailsSection
-        title={<Title toggleBreakdown={toggleBreakdown}>Population ({speakingOrWriting})</Title>}
+        title={
+          <Title toggleBreakdown={toggleBreakdown} showBreakdown={showBreakdown}>
+            Population ({speakingOrWriting})
+          </Title>
+        }
       >
         {showBreakdown && (
           <LocalePopulationBreakdown locale={locale} speakingOrWriting={speakingOrWriting} />
@@ -150,16 +153,22 @@ const MajorPopulationBox: React.FC<{
   );
 };
 
-const Title: React.FC<PropsWithChildren<{ toggleBreakdown: () => void }>> = ({
-  toggleBreakdown,
-  children,
-}) => {
+const Title: React.FC<
+  PropsWithChildren<{ toggleBreakdown: () => void; showBreakdown: boolean }>
+> = ({ toggleBreakdown, showBreakdown, children }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+    <div className="flex justify-between">
       {children}
-      <div style={{ fontSize: '0.5em' }}>
-        <HoverableIcon Icon={SearchIcon} onClick={toggleBreakdown} description="Show breakdown" />
-      </div>
+      <Toggle
+        aria-label="Toggle population breakdown"
+        title="Toggle population breakdown"
+        onClick={toggleBreakdown}
+        pressed={showBreakdown}
+        size="sm"
+        variant="outline"
+      >
+        <SearchIcon className="group-aria-pressed/toggle:fill-foreground" />
+      </Toggle>
     </div>
   );
 };
