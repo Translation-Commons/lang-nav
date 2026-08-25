@@ -7,7 +7,7 @@ import useFilteredEntities from '@features/transforms/filtering/useFilteredEntit
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import LinkButton from '@shared/ui/LinkButton';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import LocaleIndigeneityTable from './LocaleIndigeneityTable';
 
@@ -62,10 +62,10 @@ const LocaleIndigeneityReport: React.FC = () => {
         reliable. Predictions are shown in a lighter colored text than user-entered data. You can
         click the cycle button to accept a prediction, switch to the other state, or switch back to
         unknown. To save these changes to langnav, use the button at the bottom to copy the changed
-        data and submit a PR to update
-        <LinkButton href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
+        data and submit a PR to update{' '}
+        <ExternalLink href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
           indigeneity.tsv
-        </LinkButton>
+        </ExternalLink>
         .
       </div>
       <Selector<IncludeCriteria>

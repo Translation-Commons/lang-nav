@@ -1,7 +1,6 @@
 import React, { useCallback, useMemo } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
-import LimitSelector from '@features/pagination/LimitSelector';
+import LimitInput from '@features/pagination/LimitInput';
 import usePageParams from '@features/params/usePageParams';
 import { useFilterByVitality } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
@@ -45,17 +44,8 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
           {limit < rootNodes.length && (
             <>
               {' '}
-              <Hoverable
-                hoverContent={
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-                    <div>Set the number of root nodes that are shown.</div>
-                    <LimitSelector />
-                  </div>
-                }
-              >
-                {limit.toLocaleString()}
-              </Hoverable>{' '}
-              of {rootNodes.length.toLocaleString()} root nodes are shown.
+              Up to <LimitInput className="inline-block" showTitle={false} /> of{' '}
+              {rootNodes.length.toLocaleString()} root nodes are shown.
             </>
           )}
         </div>

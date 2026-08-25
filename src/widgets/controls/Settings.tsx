@@ -3,7 +3,6 @@ import { useLocation } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes.tsx';
 
-import LimitInput from '@features/pagination/LimitInput';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
@@ -21,7 +20,6 @@ const Settings = (): React.ReactNode => {
     <ViewSettingsPanel>
       {isDataPage && (
         <>
-          <LimitInput />
           <FieldFocusSelector />
           <PopulationFocusSelector />
           <LocaleSeparatorSelector />

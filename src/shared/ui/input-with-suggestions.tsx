@@ -5,9 +5,10 @@ import { Input } from './input';
 import { Popover, PopoverContent, PopoverTrigger } from './popover';
 
 type Props = {
-  value: string;
+  placeholder?: string;
   setValue: (value: string) => void;
   suggestions: string[];
+  value: string;
 };
 
 /**
@@ -17,15 +18,15 @@ type Props = {
  *
  * At the component, shadcn's combobox does not allow freeform entry (it must match a suggestion)
  */
-export function InputWithSuggestion({ value, setValue, suggestions }: Props) {
+export function InputWithSuggestion({ value, setValue, suggestions, placeholder }: Props) {
   return (
     <Popover>
       <PopoverTrigger>
         <Input
           className="w-14"
-          value={value}
           onChange={(e) => setValue(e.target.value)}
-          placeholder="Type or select an option..."
+          placeholder={placeholder ?? 'Type or select an option...'}
+          value={value}
         />
       </PopoverTrigger>
       <PopoverContent className="w-fit p-1" align="start">
@@ -33,9 +34,9 @@ export function InputWithSuggestion({ value, setValue, suggestions }: Props) {
           {suggestions.map((item) => (
             <Button
               key={item}
-              variant="outline"
               className="text-sm cursor-pointer"
               onClick={() => setValue(item)}
+              variant="outline"
             >
               {item}
             </Button>

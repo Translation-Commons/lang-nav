@@ -1,31 +1,25 @@
 import React from 'react';
 
-import { PageParamKey } from '@features/params/PageParamTypes';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
-import TextInput from '@features/params/ui/TextInput';
 import usePageParams from '@features/params/usePageParams';
 
-const LimitInput: React.FC = () => {
+import { InputWithSuggestion } from '@shared/ui/input-with-suggestions';
+
+const LIMITS = [4, 8, 12, 20, 50, 100, 200, 1000, 2000, '∞'];
+
+const LimitInput: React.FC<{ className?: string; showTitle?: boolean }> = ({
+  className,
+  showTitle = true,
+}) => {
   const { limit, updatePageParams } = usePageParams();
 
   return (
-    <div className="selector" style={{ display: 'flex', alignItems: 'center' }}>
-      <SelectorLabel description="Limit how many results are shown." label="Item Limit" />
-      <TextInput
-        inputStyle={{ minWidth: '3em' }}
-        getSuggestions={async () => [
-          { searchString: '8', label: '8' },
-          { searchString: '20', label: '20' },
-          { searchString: '100', label: '100' },
-          { searchString: '200', label: '200' },
-          { searchString: '1000', label: '1000' },
-          { searchString: '-1', label: '∞' },
-          { searchString: '', label: 'default' },
-        ]}
-        onSubmit={(limit: string) => updatePageParams({ limit: parseInt(limit) })}
-        pageParameter={PageParamKey.limit}
+    <div className={className}>
+      {showTitle && 'Item limit: '}
+      <InputWithSuggestion
+        value={limit < 0 ? '∞' : limit.toString()}
+        setValue={(value) => updatePageParams({ limit: parseInt(value) || -1 })}
+        suggestions={LIMITS.map(String)}
         placeholder="∞"
-        value={limit.toString()}
       />
     </div>
   );

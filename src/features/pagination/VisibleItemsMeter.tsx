@@ -15,7 +15,7 @@ import { EntityData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import LimitSelector from './LimitSelector';
+import LimitInput from './LimitInput';
 import PaginationControls from './PaginationControls';
 
 interface Props {
@@ -64,31 +64,14 @@ const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar =
   return (
     <div>
       <HighLimitWarning nShown={nShown} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '0.25em',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        <div>
-          Showing{' '}
-          <Hoverable
-            hoverContent={
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-                <div>Set the maximum number of results that can appear.</div>
-                <LimitSelector />
-              </div>
-            }
-          >
-            {nShown?.toLocaleString()}
-          </Hoverable>
-          {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
+      <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
+        <div className="flex flex-nowrap gap-2 text-sm items-center">
+          Showing up to <LimitInput showTitle={false} />
+          {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
         </div>
         {nOverall > nFiltered && (
           <Hoverable
+            className="text-sm"
             hoverContent={
               <FilterBreakdown
                 ents={ents}
