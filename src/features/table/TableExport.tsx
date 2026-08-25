@@ -1,5 +1,5 @@
 import { CopyIcon, DownloadIcon, ExternalLinkIcon } from 'lucide-react';
-import { useCallback, useTransition } from 'react';
+import { useCallback, useState, useTransition } from 'react';
 
 import EmptyHoverCardProvider from '@features/layers/hovercard/EmptyHoverCardProvider';
 import { PageParamsContext } from '@features/params/PageParamsContext';
@@ -52,6 +52,7 @@ type CopyExportType =
 function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   const pageParams = usePageParams();
   const [isPending, startTransition] = useTransition();
+  const [open, setOpen] = useState(false);
 
   const prepareDataForExport = useCallback(
     (exportType: ExportType) => {
@@ -115,7 +116,7 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   );
 
   const handleClipboardExport = useCallback(
-    async (exportType: CopyExportType) => {
+    (exportType: CopyExportType) => {
       const data = prepareDataForExport(exportType);
       navigator.clipboard.writeText(data);
       alert('Data copied to clipboard');
@@ -125,6 +126,8 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
 
   const handleExport = useCallback(
     (exportType: ExportType) => {
+      setOpen(false);
+
       if (ents.length === 0) return;
       trackEvent('data_exported', {
         export_type: exportType,
@@ -165,28 +168,26 @@ function TableExport<T extends EntityData>({ visibleColumns, ents }: Props<T>) {
   }
 
   return (
-    <>
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          render={
-            <Button className="cursor-pointer">
-              {isPending ? <Spinner /> : <ExternalLinkIcon />} Export
-            </Button>
-          }
-        />
-        <DropdownMenuContent className="w-fit">
-          {validExportTypes.map((exportType) => (
-            <DropdownMenuItem
-              className="cursor-pointer"
-              key={exportType}
-              onClick={() => handleExport(exportType)}
-            >
-              {exportType.startsWith('Download') ? <DownloadIcon /> : <CopyIcon />} {exportType}
-            </DropdownMenuItem>
-          ))}
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger
+        render={
+          <Button className="cursor-pointer">
+            {isPending ? <Spinner /> : <ExternalLinkIcon />} Export
+          </Button>
+        }
+      />
+      <DropdownMenuContent className="w-fit">
+        {validExportTypes.map((exportType) => (
+          <DropdownMenuItem
+            className="cursor-pointer"
+            key={exportType}
+            onClick={() => handleExport(exportType)}
+          >
+            {exportType.startsWith('Download') ? <DownloadIcon /> : <CopyIcon />} {exportType}
+          </DropdownMenuItem>
+        ))}
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 }
 

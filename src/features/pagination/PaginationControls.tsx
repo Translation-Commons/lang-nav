@@ -40,7 +40,7 @@ const PaginationControls: React.FC<Props> = ({ itemCount }) => {
   if (totalPages <= 1) return <></>;
 
   return (
-    <span className="inline text-nowrap overflow-none">
+    <span className="inline text-nowrap">
       <ButtonGroup>
         <Button disabled variant="outline">
           Page
