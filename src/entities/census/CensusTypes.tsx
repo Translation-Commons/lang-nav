@@ -15,7 +15,7 @@ export enum CensusCollectorType {
   Study = 'Study', // Academic study
   NGO = 'NGO', // Non-governmental organization eg. Endangered Languages Project, Joshua Project
   Media = 'Media', // News article, blog, or other media sources
-  Secondary = 'Secondary', // Data repackaged by secondary sources without a clear source of where it came from, eg. Ethnologue, Wikipedia, CLDR
+  Secondary = 'Secondary', // Data repackaged by secondary sources without a clear source of where it came from, eg. Wikipedia, CLDR
   Unknown = 'Unknown', // Unknown or unranked
 }
 

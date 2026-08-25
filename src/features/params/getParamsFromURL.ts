@@ -7,11 +7,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -87,12 +83,6 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
       case PageParamKey.isoStatus:
         params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);
-        break;
-      case PageParamKey.vitalityEthFine:
-        params.vitalityEthFine = parseNumericEnumArray(value, VitalityEthnologueFine);
-        break;
-      case PageParamKey.vitalityEthCoarse:
-        params.vitalityEthCoarse = parseNumericEnumArray(value, VitalityEthnologueCoarse);
         break;
 
       // Object mapping (columns)

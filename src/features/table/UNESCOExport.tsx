@@ -5,7 +5,6 @@ import { EntityType } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { EthnologueDigitalSupport } from '@entities/language/LanguageTypes';
 import { LocaleData, OfficialStatus } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
@@ -45,6 +44,7 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
   const hasWritingSystem = lang.primaryWritingSystem && lang.primaryWritingSystem.ID !== 'Zxxx';
   let popSource = locale.pop.speaking.census?.collectorName ?? locale.pop.speaking.source ?? '';
   if (locale.pop.speaking.census?.url) popSource += ' ' + locale.pop.speaking.census?.url;
+  const digitalSupportScore = lang.digitalSupportScore?.overall ?? 0;
 
   return [
     'WAL-' + lang.ID,
@@ -103,11 +103,9 @@ function getLocaleUNESCOData(locale: LocaleData): (number | string | boolean | u
     '', // digital_spaces
 
     // Universal Acceptance: Is this language (and its script, if applicable) supported and correctly displayed in digital systems such as websites, domain names, URLs, email addresses, and online applications?
-    lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Thriving ||
-      lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Vital, // yes
-    lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Ascending ||
-      lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Emerging, // partially
-    lang.Ethnologue.digitalSupport === EthnologueDigitalSupport.Still, // no
+    digitalSupportScore > 0.75, // yes
+    digitalSupportScore > 0.25 && digitalSupportScore <= 0.75, // partially
+    digitalSupportScore <= 0.25, // no
     '', // not_sure
 
     //// Language Users - STEP 3

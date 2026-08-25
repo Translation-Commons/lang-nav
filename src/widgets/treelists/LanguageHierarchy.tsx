@@ -113,8 +113,6 @@ const SourceWarning: React.FC<{ languageSource: LanguageSource }> = ({ languageS
           However constituent languages are organized under their macrolanguages.
         </>
       );
-    case LanguageSource.Ethnologue:
-      return <>We have not extracted language family data from Ethnologue yet.</>;
     case LanguageSource.UNESCO:
       return (
         <>

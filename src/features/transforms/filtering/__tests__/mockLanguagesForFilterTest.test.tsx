@@ -3,10 +3,7 @@ import { describe, expect, it } from 'vitest';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
@@ -94,15 +91,15 @@ export function getMockLanguages() {
   rus.parentLanguage = ine;
 
   // Non Indo-European languages
-  const nav = getBaseLanguageData('nav', 'Navajo');
-  nav.scope = LanguageScope.Language;
-  nav.writingSystems = { Latn };
-  nav.locales = [mul_US];
-  nav.vitality = { ethFine: VitalityEthnologueFine.Threatened };
+  const epo = getBaseLanguageData('epo', 'Esperanto');
+  epo.scope = LanguageScope.Language;
+  epo.writingSystems = { Latn };
+  epo.locales = [mul_US];
+  epo.vitality = { iso: LanguageISOStatus.Constructed };
   const zho = getBaseLanguageData('zho', 'Chinese');
   zho.scope = LanguageScope.Macrolanguage;
 
-  return [ine, gem, eng, spa, fra, deu, ita, rus, nav, zho];
+  return [ine, gem, eng, spa, fra, deu, ita, rus, epo, zho];
 }
 
 describe('Mock Languages for Filter Tests', () => {

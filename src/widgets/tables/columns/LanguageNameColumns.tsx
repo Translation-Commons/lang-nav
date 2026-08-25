@@ -50,16 +50,6 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
       ),
   },
   {
-    key: 'Ethnologue Name',
-    labelInColumnGroup: 'in Ethnologue',
-    render: (lang) =>
-      lang.nameDisplay !== lang.Ethnologue.name ? (
-        <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameEthnologue} />
-      ) : (
-        <Deemphasized>{lang.Ethnologue.name}</Deemphasized>
-      ),
-  },
-  {
     key: 'Other Names',
     render: (lang) => <LanguageOtherNames lang={lang} />,
   },

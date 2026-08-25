@@ -25,7 +25,6 @@ const EntityPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean
       case LanguageSource.ISO:
         break; // These all have parent/child data, continue
       case LanguageSource.CLDR:
-      case LanguageSource.Ethnologue:
       case LanguageSource.UNESCO:
       case LanguageSource.BCP:
         // These sources do not support language families

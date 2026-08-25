@@ -18,7 +18,6 @@ export default function getSubstringFilterOnQuery(
     case SearchableField.NameISO:
     case SearchableField.NameCLDR:
     case SearchableField.NameGlottolog:
-    case SearchableField.NameEthnologue:
     case SearchableField.NameAny:
       return (a: EntityData) =>
         a.names

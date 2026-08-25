@@ -6,16 +6,8 @@ import TableValueType from '@features/table/TableValueType';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope } from '@entities/language/LanguageTypes';
-import {
-  getLanguageISOStatusLabel,
-  getVitalityEthnologueCoarseLabel,
-  getVitalityEthnologueFineLabel,
-} from '@entities/language/vitality/VitalityStrings';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
@@ -158,22 +150,6 @@ function getTicks(
       ).map((value) => ({
         position: getNormalizedValue(value),
         label: getLanguageISOStatusLabel(value),
-      }));
-    case Field.VitalityEthnologueFine:
-      return pickDistributedTicksFromRange(
-        Object.values(VitalityEthnologueFine).filter((value) => typeof value === 'number'),
-        numberOfTicks,
-      ).map((value) => ({
-        position: getNormalizedValue(value),
-        label: getVitalityEthnologueFineLabel(value),
-      }));
-    case Field.VitalityEthnologueCoarse:
-      return pickDistributedTicksFromRange(
-        Object.values(VitalityEthnologueCoarse).filter((value) => typeof value === 'number'),
-        numberOfTicks,
-      ).map((value) => ({
-        position: getNormalizedValue(value),
-        label: getVitalityEthnologueCoarseLabel(value),
       }));
     case Field.LanguageScope:
       return pickDistributedTicksFromRange(

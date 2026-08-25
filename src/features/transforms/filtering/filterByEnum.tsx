@@ -1,10 +1,6 @@
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -47,36 +43,6 @@ export function buildFilterByISOStatus(isoStatuses: LanguageISOStatus[]): Filter
     const language = getLanguageForEntity(ent);
     if (!language) return true;
     return language.vitality?.iso != null && isoStatuses.includes(language.vitality.iso);
-  };
-}
-
-export function buildFilterByVitalityEthnologueFine(
-  ethnologueFineStatuses: VitalityEthnologueFine[],
-): FilterFunctionType {
-  if (ethnologueFineStatuses.length === 0) return () => true;
-
-  return (ent: EntityData): boolean => {
-    const language = getLanguageForEntity(ent);
-    if (!language) return true;
-    return (
-      language.vitality?.ethFine != null &&
-      ethnologueFineStatuses.includes(language.vitality.ethFine)
-    );
-  };
-}
-
-export function buildFilterByVitalityEthnologueCoarse(
-  ethnologueCoarseStatuses: VitalityEthnologueCoarse[],
-): FilterFunctionType {
-  if (ethnologueCoarseStatuses.length === 0) return () => true;
-
-  return (ent: EntityData): boolean => {
-    const language = getLanguageForEntity(ent);
-    if (!language) return true;
-    return (
-      language.vitality?.ethCoarse != null &&
-      ethnologueCoarseStatuses.includes(language.vitality.ethCoarse)
-    );
   };
 }
 

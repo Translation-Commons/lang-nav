@@ -87,8 +87,6 @@ export function getFieldIcon(field: Field): LucideIcon {
 
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
       return ActivityIcon;
 
     // Relation

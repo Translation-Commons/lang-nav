@@ -322,7 +322,6 @@ export function getMockedEntityDictionaries(inputEnts?: EntityDictionary): {
     UNESCO: {},
     Glottolog: {},
     CLDR: {},
-    Ethnologue: {},
   };
   const territories: Record<string, TerritoryData> = entsArray
     .filter((ent) => ent.type === EntityType.Territory)

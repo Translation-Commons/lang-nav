@@ -177,10 +177,6 @@ function getField(ent: EntityData, field: Field): string | number | undefined {
       return getLanguageForEntity(ent)?.vitality?.meta;
     case Field.ISOStatus:
       return getLanguageForEntity(ent)?.vitality?.iso;
-    case Field.VitalityEthnologueFine:
-      return getLanguageForEntity(ent)?.vitality?.ethFine;
-    case Field.VitalityEthnologueCoarse:
-      return getLanguageForEntity(ent)?.vitality?.ethCoarse;
     case Field.Modality:
       return getLanguageForEntity(ent)?.modality;
 

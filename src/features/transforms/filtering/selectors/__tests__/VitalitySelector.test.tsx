@@ -10,11 +10,7 @@ import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
-import {
-  LanguageISOStatusSelector,
-  VitalityEthCoarseSelector,
-  VitalityEthFineSelector,
-} from '../VitalitySelector';
+import { LanguageISOStatusSelector } from '../VitalitySelector';
 
 vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 vi.mock('@features/params/ui/SelectorDisplayContext', () => ({
@@ -42,20 +38,6 @@ describe('VitalitySelector', () => {
 
   afterEach(() => {
     vi.clearAllMocks();
-  });
-
-  it('renders all three vitality selectors', () => {
-    render(
-      <>
-        <LanguageISOStatusSelector />
-        <VitalityEthFineSelector />
-        <VitalityEthCoarseSelector />
-      </>,
-    );
-
-    expect(screen.getByText('ISO Language Status')).toBeInTheDocument();
-    expect(screen.queryByText('Vitality Eth (Fine)')).not.toBeInTheDocument();
-    expect(screen.queryByText('Vitality Eth (Coarse)')).not.toBeInTheDocument();
   });
 
   describe('LanguageISOStatusSelector', () => {
@@ -95,101 +77,10 @@ describe('VitalitySelector', () => {
 
       // Test deselection
       const selectedLivingButton = screen.getByRole('option', { name: 'Living' });
-      expect(selectedLivingButton).toHaveClass('selectorOption selected');
+      expect(selectedLivingButton).toHaveClass('selected');
+      expect(selectedLivingButton).not.toHaveClass('unselected');
       await user.click(selectedLivingButton);
       expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
     });
   });
-
-  // describe('VitalityEthFineSelector', () => {
-  //   it('displays all Ethnologue fine vitality options', () => {
-  //     render(<VitalityEthFineSelector />);
-
-  //     const expected = Object.values(VitalityEthnologueFine).filter((v) => typeof v === 'number');
-
-  //     expected.forEach((status) => {
-  //       const label = getVitalityEthnologueFineLabel(status);
-  //       expect(screen.getByText(label)).toBeInTheDocument();
-  //     });
-  //   });
-
-  //   it('handles selection and deselection of options', async () => {
-  //     const user = userEvent.setup();
-
-  //     // Initial render with empty selection
-  //     const { rerender } = render(<VitalityEthFineSelector />);
-
-  //     // Test selection
-  //     const nationalButton = screen.getByText('National');
-  //     expect(nationalButton).toHaveClass('selectorOption unselected');
-  //     await user.click(nationalButton);
-  //     expect(updatePageParams).toHaveBeenCalledWith({
-  //       vitalityEthFine: [VitalityEthnologueFine.National],
-  //     });
-
-  //     // Update mock to simulate selected state and rerender
-  //     setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
-
-  //     rerender(<VitalityEthFineSelector />);
-
-  //     // Test deselection
-  //     const selectedNational = screen.getByText('National');
-  //     expect(selectedNational).toHaveClass('selectorOption selected');
-
-  //     // Click to deselect
-  //     await user.click(selectedNational);
-
-  //     // Verify the expected state after deselection
-  //     expect(updatePageParams).toHaveBeenCalledWith({
-  //       vitalityEthFine: [],
-  //     });
-  //   });
-  // });
-
-  // describe('VitalityEthCoarseSelector', () => {
-  //   it('displays all Ethnologue 2025 vitality options', () => {
-  //     render(<VitalityEthCoarseSelector />);
-
-  //     const expected = Object.values(VitalityEthnologueCoarse).filter((v) => typeof v === 'number');
-
-  //     expected.forEach((status) => {
-  //       const label = getVitalityEthnologueCoarseLabel(status);
-  //       expect(screen.getByText(label)).toBeInTheDocument();
-  //     });
-  //   });
-
-  //   it('handles selection and deselection of options', async () => {
-  //     const user = userEvent.setup();
-
-  //     // Initial render with empty selection
-  //     const { rerender } = render(<VitalityEthCoarseSelector />);
-
-  //     // Test selection
-  //     const institutionalButton = screen.getByText('Institutional');
-  //     expect(institutionalButton).toHaveClass('selectorOption unselected');
-  //     await user.click(institutionalButton);
-  //     expect(updatePageParams).toHaveBeenCalledWith({
-  //       vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional],
-  //     });
-
-  //     // Update mock to simulate selected state and rerender
-  //     vi.mocked(usePageParams).mockReturnValue(
-  //       createMockUsePageParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Institutional] }),
-  //     );
-
-  //     rerender(<VitalityEthCoarseSelector />);
-
-  //     // Test deselection
-  //     const selectedInstitutional = screen.getByText('Institutional');
-  //     expect(selectedInstitutional).toHaveClass('selectorOption selected');
-
-  //     // Click to deselect
-  //     await user.click(selectedInstitutional);
-
-  //     // The mock should be called with empty array for deselection
-  //     expect(updatePageParams).toHaveBeenCalledWith({
-  //       vitalityEthCoarse: [],
-  //     });
-  //   });
-  // });
 });

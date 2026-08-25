@@ -22,42 +22,18 @@ type Props = {
 };
 
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
-  const {
-    limit,
-    searchString,
-    territoryFilter,
-    writingSystemFilter,
-    languageFilter,
-    vitalityEthFine,
-    vitalityEthCoarse,
-    isoStatus,
-  } = usePageParams();
+  const { limit, searchString, territoryFilter, writingSystemFilter, languageFilter, isoStatus } =
+    usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const filterByVitality = useFilterByVitality();
   const filterActive = useMemo(
-    () =>
-      searchString ||
-      territoryFilter ||
-      writingSystemFilter ||
-      languageFilter ||
-      vitalityEthFine ||
-      vitalityEthCoarse ||
-      isoStatus,
-    [
-      searchString,
-      territoryFilter,
-      writingSystemFilter,
-      languageFilter,
-      vitalityEthFine,
-      vitalityEthCoarse,
-      isoStatus,
-    ],
+    () => searchString || territoryFilter || writingSystemFilter || languageFilter || isoStatus,
+    [searchString, territoryFilter, writingSystemFilter, languageFilter, isoStatus],
   );
   const filterFunction = useCallback(
-    (ent: EntityData) => {
-      return filterBySubstring(ent) && filterByConnections(ent) && filterByVitality(ent);
-    },
+    (ent: EntityData) =>
+      filterBySubstring(ent) && filterByConnections(ent) && filterByVitality(ent),
     [filterBySubstring, filterByConnections, filterByVitality],
   );
 

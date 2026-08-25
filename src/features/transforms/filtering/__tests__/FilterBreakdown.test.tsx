@@ -4,10 +4,7 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import {
-  LanguageISOStatus,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -52,7 +49,7 @@ describe('FilterBreakdown', () => {
       writingSystemFilter: '',
       languageFilter: '',
       languageFamilyFilter: '',
-      vitalityEthFine: [],
+      isoStatus: [],
       searchString: '',
     });
     const { container } = render(<FilterBreakdown ents={ents} />);
@@ -87,7 +84,7 @@ describe('FilterBreakdown', () => {
     expect(numericCells[2].textContent).toBe('-3'); // deu, ita, zho are not in US in the test data
     expect(numericCells[3].textContent).toBe('-1'); // rus is not written in the Latin script
     expect(numericCells[4].textContent).toBe('-1'); // nav is not in the Indo-European language family
-    expect(numericCells[5].textContent).toBe('-1'); // fra fails vitality "National"
+    expect(numericCells[5].textContent).toBe('-1'); // fra fails the ISO vitality filter
     expect(numericCells[6].textContent).toBe('-1'); // eng fails substring "spa"
     expect(numericCells[7].textContent).toBe('1'); // spa is the only language left
 
@@ -112,7 +109,7 @@ describe('FilterBreakdown', () => {
     const ents = getMockLanguages();
     setupMockParams({
       territoryFilter: 'US',
-      vitalityEthFine: [VitalityEthnologueFine.National],
+      isoStatus: [LanguageISOStatus.Living],
       searchString: 'spa',
     });
 

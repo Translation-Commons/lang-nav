@@ -22,16 +22,6 @@ const LanguageDetailsVitalityAndViability: React.FC<{ lang: LanguageData }> = ({
       <DetailsField title="ISO Status">
         <LanguageVitalityMeter lang={lang} src={VitalitySource.ISO} />
       </DetailsField>
-      {/* <DetailsField title="Ethnologue (2012)">
-        <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2012} />{' '}
-        {vitality.ethFine != null &&
-          (Ethnologue.vitality2012 != null ? <Badge variant="secondary">Ethnologue 2012</Badge> : <Badge variant="secondary">Derived</Badge>)}
-      </DetailsField>
-      <DetailsField title="Ethnologue (2025)">
-        <LanguageVitalityMeter lang={lang} src={VitalitySource.Eth2025} />{' '}
-        {vitality.ethCoarse != null &&
-          (Ethnologue.vitality2025 != null ? <Badge variant="secondary">Ethnologue 2025</Badge> : <Badge variant="secondary">Derived</Badge>)}
-      </DetailsField> */}
       <DetailsField title="Good language category?">
         {viabilityConfidence} {viabilityExplanation && ' ... '}
         {viabilityExplanation}

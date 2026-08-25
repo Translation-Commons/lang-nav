@@ -6,11 +6,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
@@ -45,7 +41,6 @@ export enum SearchableField {
   NameISO = 'ISO Name',
   NameCLDR = 'CLDR Name',
   NameGlottolog = 'Glottolog Name',
-  NameEthnologue = 'Ethnologue Name',
 }
 
 export enum LocaleSeparator {
@@ -86,8 +81,6 @@ export enum PageParamKey {
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
   view = 'view',
-  vitalityEthCoarse = 'vitalityEthCoarse',
-  vitalityEthFine = 'vitalityEthFine',
   writingSystemFilter = 'writingSystemFilter',
 }
 
@@ -122,7 +115,5 @@ export type PageParams = {
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
-  vitalityEthFine: VitalityEthnologueFine[];
-  vitalityEthCoarse: VitalityEthnologueCoarse[];
   writingSystemFilter: string;
 };

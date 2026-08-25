@@ -107,25 +107,6 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
             link={cldrLink || undefined}
           />
         )}
-
-        {(lang.Ethnologue.code || lang.Ethnologue.name) && (
-          <IdentityRow
-            sourceLabel="Ethnologue"
-            name={
-              lang.Ethnologue.name ? (
-                <EntityFieldHighlightedByPageSearch
-                  ent={lang}
-                  field={SearchableField.NameEthnologue}
-                />
-              ) : (
-                <Deemphasized>Not in Ethnologue</Deemphasized>
-              )
-            }
-            scope={lang.Ethnologue.scope}
-            code={lang.Ethnologue.code}
-            link={`https://www.ethnologue.com/language/${lang.Ethnologue.code}`}
-          />
-        )}
         {lang.nameFrench && <IdentityRow sourceLabel="French" name={lang.nameFrench} />}
         {otherNames.length > 0 && (
           <IdentityRow sourceLabel="Other names" name={<LanguageOtherNames lang={lang} />} />

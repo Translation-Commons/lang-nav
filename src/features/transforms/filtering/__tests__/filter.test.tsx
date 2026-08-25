@@ -69,7 +69,7 @@ describe('useFilterByVitality', () => {
   it('handles missing vitality data', () => {
     const mockIncompleteLanguage = {
       ...getBaseLanguageData('test-lang-incomplete', 'Test Language Incomplete'),
-      ISO: {}, // empty ISO vitality data
+      vitality: {}, // no derived vitality data
     };
     mockParams({ isoStatus: [LanguageISOStatus.Living] });
 

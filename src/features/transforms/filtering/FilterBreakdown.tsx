@@ -211,9 +211,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
               <HoverableButton
                 buttonType="reset"
                 hoverContent="Clear the vitality filters"
-                onClick={() =>
-                  updatePageParams({ vitalityEthCoarse: [], isoStatus: [], vitalityEthFine: [] })
-                }
+                onClick={() => updatePageParams({ isoStatus: [] })}
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >
                 <XIcon size="1em" display="block" />
