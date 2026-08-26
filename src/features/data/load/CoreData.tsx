@@ -39,6 +39,7 @@ import {
   addISODataToLanguages,
   addISOLanguageFamilyData,
   addISOMacrolanguageData,
+  getUniqueISO6392bLanguages,
   loadISOFamiliesToLanguages,
   loadISOLanguageFamilies,
   loadISOLanguages,
@@ -160,10 +161,12 @@ export function useCoreData(): {
 
     setCensuses({}); // Censuses are not loaded here, but this is needed to enable the page updates.
     setAllLanguoids(Object.values(languagesBySource.Combined));
+
     setEnts({
       // All combined into one big entity map for easy lookup but the ID formats are unique so its OK
       ...languagesBySource.Glottolog, // aaaa0000
       ...languagesBySource.ISO, // aaa
+      ...getUniqueISO6392bLanguages(languagesBySource), // ISO 639-2b codes
       ...languagesBySource.BCP, // aa | aaa
       ...languagesBySource.Combined, // A few languages like `mol` aren't in those sets but should still be indexed
       ...territories, // AA | 000

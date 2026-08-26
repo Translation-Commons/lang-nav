@@ -599,7 +599,6 @@ aar_ET	Afar (Ethiopia)	Afar-af	Official	1,281,284
 sqi_RS	Albanian (Serbia)	Shqip	CLDR	1,263,920	
 zho_Hant_TH	Chinese (Traditional) (Thailand, Han (Traditional variant))	中文	CLDR	1,258,578	
 hdy_ET	Hadiyya (Ethiopia)		Official	1,253,894	
-maga1261_NP	Magar (Nepal)		Official	1,248,003	
 eng_TT	English (Trinidad & Tobago)	English	CLDR	1,239,894	official
 eng_SI	English (Slovenia)	English	CLDR	1,237,755	
 bqi_IR	Bakhtiari (Iran)	زون بَختیاری	CLDR	1,237,417	
@@ -1010,7 +1009,7 @@ ukr_MD	Ukrainian (Moldova)	Українська	CLDR	503,934	recognized
 szl_PL	Silesian (Poland)	ślōnskŏ gŏdka	CLDR	503,702	
 ita_US	Italian (United States)	Italiano	Official	503,405	
 mey_ML	Hassaniyya (Mali)		Official	502,201	
-mgp_NP	Eastern Magar (Nepal)		Unverified Official	500,476	official_regional
+mgp_NP	Magar (Nepal)		Official	1,248,003	official_regional
 awn_ET	Awngi (Ethiopia)		EDL	500,000	
 mhr_RU	Eastern Mari (Russia)	олык марий	EDL	500,000	
 src_IT	Logudorese Sardinian (Italy)		EDL	500,000	
@@ -10992,3 +10991,9 @@ tvl_FJ	Tuvaluan (Fiji)			500
 lit_LV	Lithuanian (Latvia)			75810	
 ukr_LV	Ukrainian (Latvia)			75810	
 tam_FJ	Tamil (Fiji)			75000	
+lfb_CM	Buu (Cameroon)			100	
+dyl_BT	Bhutanese Sign Language (Bhutan)				
+osd_RU	Digor Ossetic (Russia)			100,000	
+scz_GB	Shaetlan (Great Britain)			10,000	
+tvg_ID	Tugunese (Indonesia)			0	
+zhk_IQ	Kurdish Sign Language (Iraq)			1000	

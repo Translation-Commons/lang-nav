@@ -628,7 +628,7 @@ ewo	ewon1239	Ewondo	ewondo		Latn	578,000		ewon1241	Yes
 hnj	hmon1264	Mong Njua	𞄀𞄄𞄰𞄩𞄍𞄜𞄰		Laoo	577,201	hmn	huam1250	Yes	Well established variant of the macrolanguage
 unx	mund1321	Munda			Nagm	575,099		book1242	Yes	
 nus	nuer1246	Nuer	Thok Nath		Latn	572,947		nuer1245	Yes	
-mgp	east2352	Eastern Magar			Deva	572,176		maga1261	Yes	
+mgp	east2352	Magar			Deva	572,176		maga1261	Yes	
 ksb	sham1280	Shambala	Kishambaa		Latn	565,000		bond1249	Yes	
 kxp	wadi1248	Wadiyara Koli			Arab	563,000		west2830	Yes	
 rcf	reun1238	Réunion Creole French	Kréol Rénioné	Mostly Spoken	Latn	559,185		macr1273	Yes	
@@ -689,7 +689,7 @@ plk	kohi1248	Kohistani Shina			Arab	458,000		kohi1247	Yes
 mlt	malt1254	Maltese	Malti	Spoken & Written	Latn	455,598		malt1259	Yes	
 lch	luch1239	Luchazi			Latn	455,400		ngan1306	Yes	
 nzu	teke1279	Teke-Nzikou			Latn	454,000		teke1278	Yes	
-oss	iron1242	Ossetian	Ирон ӕвзаг	Spoken & Written	Cyrl	453,957		osse1243	Yes	
+oss	iron1242	Iron Ossetic	Ирон ӕвзаг	Spoken & Written	Cyrl	453,957		osse1243	Yes	
 rtw	rath1243	Rathawi			Deva	451,000		rath1244	Yes	
 ahk	akha1245	Akha			Latn	447,000		akha1246	Yes	
 zap	zapo1437	Zapotec			Latn	446,282		zapo1436	Yes	
@@ -762,7 +762,7 @@ mji	kimm1245	Kim Mun			Latn	370,000		mien1243	Yes
 zlq	liuq1235	Liuqian Zhuang			Hani	370,000	zha	hong1247	Possibly	But probably want to use macrolanguage
 fij	fiji1243	Fijian	vosa Vakaviti	Spoken & Written	Latn	368,768		viwa1234	Yes	
 jit	jita1239	Jita			Latn	365,000		sugu1245	Yes	
-mrd	west2418	Western Magar			Deva	363,982		maga1261	Yes	
+mrd	west2418	Western Magar			Deva	363,982		maga1261	No	Merged with Eastern Magar to just have 1 Magar [mgp]
 gof	gofa1235	Gofa			Ethi	363,000		dawr1235	Yes	
 dar	darg1241	Dargwa	дарган		Cyrl	362,156		darg1242	Yes	
 old	moch1256	Mochi			Latn	362,000		cent2286	Yes	
@@ -1677,7 +1677,7 @@ smy	semn1249	Semnani			Arab	65,000		nort3177	Yes
 wlo	woli1241	Wolio			Arab	65,000		woli1240	Yes	
 xwe	xwel1235	Xwela Gbe			Latn	65,000		west2934	Yes	
 piw	pimb1238	Pimbwe			Latn	64,600		mwik1240	Yes	
-mrh	mara1382	Mara Chin			Latn	64,578		nucl1757	Yes	
+mrh	mara1382	Mara			Latn	64,578		nucl1757	Yes	
 gec	gbol1235	Gboloo Grebo			Latn	64,400	grb	gbol1236	Possibly	But probably want to use macrolanguage
 cnk	khum1248	Khumi Chin			Latn	64,001		khom1240	Yes	
 erh	eruw1238	Eruwa			Latn	64,000		sout2805	Yes	
@@ -1798,7 +1798,7 @@ byd	beny1237	Benyadu'			Latn	54,000		beny1238	Yes
 gid	gida1247	Gidar			Latn	54,000		nort3156	Yes	
 ukl	ukra1235	Ukrainian Sign Language	українська жестова мова	Sign	Zxxx	54,000		cent2419	Yes	
 yiz	azhe1235	Azhe				54,000		sani1275	Yes	
-mdy	male1284	Male (Ethiopia)			Ethi	53,800		nort3161	Yes	
+mdy	male1284	Male			Ethi	53,800		nort3161	Yes	
 agr	agua1253	Aguaruna	awajun		Latn	53,400		jiva1245	Yes	
 aza	azha1235	Azha				53,000		sani1266	Yes	
 ppa	paoo1245	Pao				53,000	bfy	book1242	No	ISO merged this into bfy
@@ -2780,7 +2780,7 @@ dup	duan1242	Duano	bahasa Duano		Latn	15,600	msa	mala1538	Possibly	But probably 
 kul	kule1247	Kulere			Latn	15,600		roni1235	Yes	
 hoo	holo1240	Holoholo			Latn	15,500		nyan1317	Yes	
 ril	rian1261	Riang (Myanmar)			Latn	15,500		rian1260	Yes	
-isu	isum1240	Isu (Menchum Division)			Latn	15,400		aghe1240	Yes	
+isu	isum1240	Isu			Latn	15,400		aghe1240	Yes	
 kia	kimm1246	Kim			Latn	15,400		kimb1240	Yes	
 kyc	kyak1244	Kyaka			Latn	15,400		enga1251	Yes	
 mrj	west2392	Western Mari	Мары йӹлмӹ	Spoken & Written	Cyrl	15,352	chm	mari1278	Possibly	But probably want to use macrolanguage
@@ -3729,7 +3729,7 @@ ekm	elip1238	Elip			Latn	6,400		elip1240	Yes
 nyb	nyan1302	Nyangbo			Latn	6,400		nyan1316	Yes	
 vmj	ixta1235	Ixtayutla Mixtec			Latn	6,380		coas1316	Yes	
 byx	qaqe1238	Qaqet			Latn	6,350		bain1263	Yes	
-kjo	hari1246	Harijan Kinnauri			Deva	6,330		nucl1728	Yes	
+kjo	hari1246	Kinnauri Pahari			Deva	6,330		nucl1728	Yes	
 efa	efai1241	Efai			Latn	6,320		cent2253	Yes	
 bcf	bamu1257	Bamu			Latn	6,310		kiwa1251	Yes	
 hrc	niwe1234	Niwer Mil			Latn	6,300		niwe1235	Yes	
@@ -4668,7 +4668,7 @@ sqq	souu1238	Sou			Laoo	2,360		love1237	Yes
 xko	kior1239	Kiorr				2,360		book1242	Yes	
 tbx	kapi1250	Kapin			Latn	2,350		buan1245	Yes	
 lsh	lish1235	Lish				2,340		chug1251	Yes	
-den	slav1253	Slave (Athapascan)			Latn	2,330		hare1243	Yes	
+den	slav1253	Slavey			Latn	2,330		hare1243	Yes	
 dev	domu1246	Domung			Latn	2,330		bwan1242	Yes	
 nmm	mana1288	Manangba			Deva	2,326		mana1287	Yes	
 kce	kaiv1238	Kaivi			Latn	2,320		atla1280	Yes	
@@ -4716,7 +4716,7 @@ sgy	sang1344	Sanglechi			Arab	2,200		sang1343	Yes
 soq	kana1288	Kanasi			Latn	2,200		sout3380	Yes	
 uve	west2516	West Uvean			Latn	2,200		vanu1245	Yes	
 wed	weda1241	Wedau			Latn	2,200		weda1242	Yes	
-yko	yasa1242	Yasa			Latn	2,200		yasa1241	Yes	
+yko	yasa1242	Iyasa			Latn	2,200		yasa1241	Yes	
 zka	kaim1241	Kaimbulawa			Latn	2,200		muni1259	Yes	
 zpy	maza1294	Mazaltepec Zapotec			Latn	2,200	zap	cent2146	Possibly	Will be hard to find specific data, may be better to use macrolanguage
 ddi	diod1237	West Goodenough			Latn	2,180		bwai1241	Yes	
@@ -5451,7 +5451,7 @@ nib	naka1264	Nakame			Latn	980		boan1245	Yes
 one	onei1249	Oneida	Onʌyota’a:ka		Latn	980		moha1257	Yes	
 sel	selk1253	Selkup	шӧльӄумыт		Cyrl	975		kama1376	Yes	
 gvp	para1315	Pará Gavião			Latn	970		sout3244	Yes	
-mdc	male1291	Male (Papua New Guinea)			Latn	970		inla1274	Yes	
+mdc	male1291	Soq			Latn	970		inla1274	Yes	
 stk	aram1253	Arammba			Latn	970		tond1250	Yes	
 ahb	axam1237	Axamb			Latn	968		port1295	Yes	
 aif	agii1245	Agi			Latn	960		agiy1234	Yes	
@@ -5572,7 +5572,7 @@ nun	nung1282	Anong			Latn	800		guno1235	Yes
 psn	pana1303	Panasuan	bahasa Panasuan		Latn	800		pana1302	Yes	
 ret	rett1240	Retta	bahasa Retta		Latn	800		blag1241	Yes	
 ssv	shar1244	Shark Bay			Latn	800		shar1251	Yes	
-szv	isuf1235	Isu (Fako Division)			Latn	800		kole1239	Yes	
+szv	isuf1235	Isubu			Latn	800		kole1239	Yes	
 tue	tuyu1244	Tuyuca	Docapúaraye		Latn	800		tuyu1245	Yes	
 twg	tere1277	Tereweng	bahasa Tereweng		Latn	800		blag1241	Yes	
 urb	urub1250	Urubú-Kaapor			Latn	800		guaj1258	Yes	
@@ -5827,7 +5827,7 @@ abf	abai1240	Abai Sungai			Latn	500		pait1248	Yes
 aoc	pemo1248	Pemon	kamarakotos		Latn	500		pemo1247	Yes	
 aos	taik1255	Taikat	bahasa Arso		Latn	500		taik1254	Yes	
 bgk	bitt1240	Buxinhua				500		khao1243	Yes	
-boe	mund1328	Mundabli			Latn	500		jiii1234	Yes	
+boe	mund1328	Mundabli-Mufu			Latn	500		jiii1234	Yes	
 caf	sout2958	Southern Carrier	ᑕᗸᒡ		Latn	500		carr1248	Yes	
 cog	chon1284	Chong			Thai	500		west2394	Yes	
 cxh	dans1239	Chaari			Latn	500		nucl1831	Yes	
@@ -5935,7 +5935,7 @@ coz	choc1279	Chochotec			Latn	440		choc1278	Yes
 cvn	vall1253	Chinanteco			Latn	440		chin1485	Yes	
 dbe	dabe1239	Dabe	bahasa Dabe		Latn	440		coas1312	Yes	
 ayq	ayip1235	Ayi (Papua New Guinea)			Latn	430		yimi1235	Yes	
-kut	kute1249	Kutenai	Ktunaxa		Latn	430			Yes	
+kut	kute1249	Ktunaxa	Ktunaxa		Latn	430			Yes	
 mch	maqu1238	Maquiritari			Latn	430		maqu1239	Yes	
 mvt	mpot1241	Mpotovoro			Latn	430		boto1250	Yes	
 nht	omet1237	Ometepec Nahuatl		Spoken	Latn	430		east2720	Yes	
@@ -6365,7 +6365,7 @@ stf	seta1245	Seta			Latn	180		west2580	Yes
 wbh	wand1264	Wanda			Latn	180		malu1251	Yes	
 xsp	silo1240	Silopi			Latn	180		silo1241	Yes	
 yde	yang1297	Yangum Dey			Latn	180		yang1303	Yes	
-srs	sars1236	Sarsi			Latn	175		atha1247	Yes	
+srs	sars1236	Tsuut'ina			Latn	175		atha1247	Yes	
 alr	alut1245	Alutor			Cyrl	172		chuk1272	Yes	
 ain	ainu1240	Ainu (Japan)	アイヌ イタㇰ	Mostly Written	Kana	170		hokk1250	Yes	
 awe	awet1244	Awetí			Latn	170		awet1245	Yes	
@@ -6449,7 +6449,7 @@ pup	pula1267	Pulabu			Latn	120		kabe1245	Yes
 tmi	tutu1241	Tutuba			Latn	120		mafe1238	Yes	
 ttn	towe1240	Towei			Latn	120		west2611	Yes	
 umi	ukit1237	Ukit			Latn	120		buka1263	Yes	
-wab	wabb1237	Wab			Latn	120		astr1247	Yes	
+wab	wabb1237	Yote			Latn	120		astr1247	Yes	
 cad	cadd1256	Caddo	Hasí:nay		Latn	115		cadd1255	Yes	
 mia	miam1252	Miami	myaamia		Latn	115		east2765	Yes	
 adt	adny1235	Adnyamathanha	Yura Ngawarla		Latn	110		nort2752	Yes	
@@ -6568,7 +6568,7 @@ afi	akru1241	Akrukay			Latn	75		tamo1242	Yes
 cic	chic1270	Chickasaw	Chikasha		Latn	75		west2614	Yes	
 gpn	taia1239	Taiap			Latn	75			Yes	
 lix	liab1237	Liabuku	bahasa Liabuku		Latn	75		west2847	Yes	
-lui	luis1253	Luiseno			Latn	75		cupa1239	Yes, with caveat	Some sources report this as extinct, some as active
+lui	luis1253	Luiseño			Latn	75		cupa1239	Yes, with caveat	Some sources report this as extinct, some as active
 mhm	makh1265	Makhuwa-Moniga			Latn	75		maku1279	Yes	
 ono	onon1246	Onondaga	Onǫta’kéka’		Latn	75		nort2947	Yes	
 psd	plai1235	Plains Indian Sign Language		Sign	Zxxx	75		auxi1235	Yes	
@@ -6989,7 +6989,7 @@ xny	nija1241	Nyiyaparli			Latn	10		cent2248	Yes
 yhs		Yan-nhaŋu Sign Language		Sign	Zxxx	10			Yes	
 yii	yidi1250	Yidiny			Latn	10		yidi1249	Yes	
 ykh	kham1281	Khamnigan Mongol			Cyrl	10		oira1260	Yes	
-yol	east2834	Yola			Latn	10		merc1242	Yes, with caveat	Some sources report this as extinct, some as active
+yol	east2834	Yola			Latn	10	enm	merc1242	No	Merged with Middle English [enm]
 yoy	yoyy1238	Yoy			Thai	10		sako1234	Yes	
 zbu	zara1252	Bu (Bauchi State)			Latn	10		geji1246	Yes	
 zmd	mari1422	Maridan			Latn	10		mari1420	Yes	
@@ -7348,7 +7348,7 @@ ruh	ruga1238	Ruga				1		koch1249	Yes
 sar	sara1331	Saraveca			Latn	1		pare1273	No	Extinct language
 sbo	sabu1253	Sabüm			Latn	1		lano1247	Yes	
 sds	sene1271	Sened			Arab	1		zuar1239	No	Extinct language
-shl	shen1247	Shendu				1		nucl1757	Yes	
+shl	shen1247	Shendu				1	mrh	nucl1757	No	Retired
 shm	shah1254	Shahrudi			Arab	1		khal1276	Yes	
 sia	akka1237	Akkala Sami			Cyrl	1	smi	main1280	Yes, with caveat	Some sources report this as extinct, some as active
 sih	zire1240	Zire			Latn	1		mids1246	Yes	
@@ -7569,7 +7569,6 @@ chan1329	chan1329	Changgan					hnm	hain1238	No	Inexplicable language code from D
 chao1238	chao1238	Teochew					nan	chao1239	Yes, with caveat	Some linguists separate Teochew from the larger language definition Min Nan [nan]
 chao1239	chao1239	Chaoshan					nan	minn1241	No	Inexplicable language code from DLD. Teochew is nan-teo
 chg	chag1247	Chagatai	جغتای		Arab			uygh1241	No	Extinct language
-chi		Chinese (Bibliographic)					zho		No	Redundant and comes from a different naming scheme
 cht	chol1284	Cholón	Seeptsá		Latn			hibi1242	No	Extinct language
 cid	chim1301	Chimariko							No	Extinct language
 cls		Classical Sanskrit		Written			san		Possibly	But probably want to use macrolanguage
@@ -8207,3 +8206,9 @@ zxx		Not applicable	no linguistic content						No	Control code
 mol	mold1248	Moldavian		Spoken & Written	Latn			east2865	Probably not	Old ISO system considered it its own language. Now it is just considered a dialect of Romanian by ISO
 bvs	belg1242	Belgian Sign Language		Sign			sgn	dutc1259	No	Deprecated from ISO
 mhv	arak1255	Arakanese-Marma					sit	nucl1811	No	Deprecated from ISO
+dyl	bhut1234	Bhutanese Sign Language		Sign			sgn	bhut1234	Yes, with caveat	New to ISO
+lfb	buuu1246	Buu (Cameroon)	Nubabo			100	bnt	jiii1234	Yes, with caveat	New to ISO
+osd	digo1242	Digor Ossetic	дигорон ӕвзаг		Cyrl	100,000	ira	osse1243	Yes, with caveat	New to ISO
+scz	shet1241	Shaetlan	Shaetlan		Latn	10,000			Yes, with caveat	New to ISO
+tvg	tugu1234	Tugunese	Mardijker		Latn	0	crp	mala1533	No	Extinct
+zhk	kurd1260	Kurdish Sign Language		Sign		1000	sgn	leva1240	Yes, with caveat	New to ISO
