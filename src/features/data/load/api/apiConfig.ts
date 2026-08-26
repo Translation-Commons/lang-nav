@@ -47,7 +47,7 @@ function apiHeaders(): HeadersInit {
  *
  * THROWS on a bad status or an unreachable host, so callers can attach context
  * before deciding what to do. **Every entity loader must catch it and resolve
- * to undefined**, which is the contract `loadObjectsFromFile` already has and
+ * to undefined**, which is the contract `loadEntitiesFromFile` already has and
  * the one `CoreData.tsx` is built around: it awaits all the loaders in a single
  * `Promise.all`, then checks the results for null and alerts.
  *

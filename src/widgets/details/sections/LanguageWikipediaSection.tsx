@@ -5,11 +5,11 @@ import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 
 import { WikipediaStatus } from '@entities/language/digitalsupport/DigitalSupportTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
-import { getStatusColor } from '@entities/ui/ObjectWikipediaInfo';
+import { getStatusColor } from '@entities/ui/EntityWikipediaInfo';
 
+import { Badge } from '@shared/ui/badge';
 import CountCompact from '@shared/ui/CountCompact';
 import ExternalLink from '@shared/ui/ExternalLink';
-import Pill from '@shared/ui/Pill';
 
 const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { wikipedias } = lang;
@@ -60,7 +60,9 @@ const WikipediaSectionTitle: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       >
         <span>Wikipedia</span>
         {wikipedia && (
-          <Pill style={{ color: getStatusColor(wikipedia.status) }}>{wikipedia.status}</Pill>
+          <Badge variant="secondary" style={{ color: getStatusColor(wikipedia.status) }}>
+            {wikipedia.status}
+          </Badge>
         )}
       </div>
     </div>

@@ -7,11 +7,7 @@ import { getDefaultParams } from '@features/params/Profiles';
 import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
-import {
-  getLanguageISOStatusLabel,
-  getVitalityEthnologueCoarseLabel,
-  getVitalityEthnologueFineLabel,
-} from '@entities/language/vitality/VitalityStrings';
+import { getLanguageISOStatusLabel } from '@entities/language/vitality/VitalityStrings';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { areArraysIdentical } from '@shared/lib/setUtils';
@@ -38,8 +34,6 @@ const FilterPath: React.FC = () => {
     territoryFilter,
     territoryScopes,
     updatePageParams,
-    vitalityEthCoarse,
-    vitalityEthFine,
     writingSystemFilter,
   } = usePageParams();
   const defaultParams = getDefaultParams();
@@ -54,36 +48,6 @@ const FilterPath: React.FC = () => {
           buttonType="reset"
           hoverContent="Clear the vitality filter based on ISO"
           onClick={() => updatePageParams({ isoStatus: [] })}
-          style={{ padding: '0.25em' }}
-        >
-          <XIcon size="1em" display="block" />
-        </HoverableButton>
-      </>
-    ),
-
-    // Ethnologue Fine Filter
-    vitalityEthFine.length > 0 && (
-      <>
-        Ethnologue Fine: {vitalityEthFine.map(getVitalityEthnologueFineLabel).join(', ')}
-        <HoverableButton
-          buttonType="reset"
-          hoverContent="Clear the vitality filter based on Ethnologue Fine"
-          onClick={() => updatePageParams({ vitalityEthFine: [] })}
-          style={{ padding: '0.25em' }}
-        >
-          <XIcon size="1em" display="block" />
-        </HoverableButton>
-      </>
-    ),
-
-    // Ethnologue Coarse Filter
-    vitalityEthCoarse.length > 0 && (
-      <>
-        Ethnologue Coarse: {vitalityEthCoarse.map(getVitalityEthnologueCoarseLabel).join(', ')}
-        <HoverableButton
-          buttonType="reset"
-          hoverContent="Clear the vitality filter based on Ethnologue Coarse"
-          onClick={() => updatePageParams({ vitalityEthCoarse: [] })}
           style={{ padding: '0.25em' }}
         >
           <XIcon size="1em" display="block" />

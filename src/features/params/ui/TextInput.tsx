@@ -178,7 +178,7 @@ const ClearButton: React.FC<{
       hoverContent="Clear the input"
       onClick={onClear}
       style={{
-        ...(display === SelectorDisplay.ButtonList || SelectorDisplay.FilterList
+        ...(display === SelectorDisplay.FilterList
           ? { borderRadius: '0.5em', border: 'none' }
           : { marginRight: '0em', borderRadius: '0 1em 1em 0', borderLeft: 'none' }),
         marginLeft: '0em',

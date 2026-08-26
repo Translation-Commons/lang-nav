@@ -5,11 +5,7 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { PageParams, SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -68,54 +64,11 @@ describe('FilterPath', () => {
     expect(screen.getByText(/Living/)).toBeInTheDocument();
   });
 
-  it('displays Ethnologue fine vitality filter when selected', () => {
-    setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
-    render(<FilterPath />);
-    expect(screen.getByText(/Ethnologue Fine:/)).toBeInTheDocument();
-    expect(screen.getByText(/National/)).toBeInTheDocument();
-  });
-
-  it('displays Ethnologue coarse filter when selected', () => {
-    setupMockParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Stable] });
-    render(<FilterPath />);
-    expect(screen.getByText(/Ethnologue Coarse:/)).toBeInTheDocument();
-    expect(screen.getByText(/Stable/)).toBeInTheDocument();
-  });
-
   it('clears ISO vitality filter when X button is clicked', () => {
     setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
     render(<FilterPath />);
     clickClearButton();
     expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
-  });
-
-  it('clears Ethnologue fine vitality filter when X button is clicked', () => {
-    setupMockParams({ vitalityEthFine: [VitalityEthnologueFine.National] });
-    render(<FilterPath />);
-    clickClearButton();
-    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEthFine: [] });
-  });
-
-  it('clears Ethnologue coarse filter when X button is clicked', () => {
-    setupMockParams({ vitalityEthCoarse: [VitalityEthnologueCoarse.Stable] });
-    render(<FilterPath />);
-    clickClearButton();
-    expect(updatePageParams).toHaveBeenCalledWith({ vitalityEthCoarse: [] });
-  });
-
-  it('displays multiple vitality filters correctly', () => {
-    setupMockParams({
-      isoStatus: [LanguageISOStatus.Living],
-      vitalityEthFine: [VitalityEthnologueFine.National],
-      vitalityEthCoarse: [VitalityEthnologueCoarse.Stable],
-    });
-    render(<FilterPath />);
-    expect(screen.getByText(/ISO Status:/)).toBeInTheDocument();
-    expect(screen.getByText(/Living/)).toBeInTheDocument();
-    expect(screen.getByText(/Ethnologue Fine:/)).toBeInTheDocument();
-    expect(screen.getByText(/National/)).toBeInTheDocument();
-    expect(screen.getByText(/Ethnologue Coarse:/)).toBeInTheDocument();
-    expect(screen.getByText(/Stable/)).toBeInTheDocument();
   });
 
   it('displays multiple values within same vitality type', () => {

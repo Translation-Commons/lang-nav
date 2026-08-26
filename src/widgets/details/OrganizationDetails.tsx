@@ -2,7 +2,8 @@ import React from 'react';
 
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import LocalParamsProvider from '@features/params/LocalParamsProvider';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
@@ -27,18 +28,18 @@ const OrganizationDetails: React.FC<Props> = ({ org }) => {
         {nameEndonym && <DetailsField title="Endonym">{nameEndonym}</DetailsField>}
         {headquarters && (
           <DetailsField title="Headquartered in">
-            <HoverableObjectName object={headquarters} />
+            <HoverableEntityName ent={headquarters} />
           </DetailsField>
         )}
         {parent && (
           <DetailsField title="Parent">
-            <HoverableObjectName object={parent} />
+            <HoverableEntityName ent={parent} />
           </DetailsField>
         )}
         {children && children.length > 0 && (
           <DetailsField title="Child Organizations">
             {children.map((child) => (
-              <HoverableObjectName key={child.ID} object={child} />
+              <HoverableEntityName key={child.ID} ent={child} />
             ))}
           </DetailsField>
         )}
@@ -50,7 +51,9 @@ const OrganizationDetails: React.FC<Props> = ({ org }) => {
       </DetailsSection>
       {censuses && censuses.length > 0 && (
         <DetailsSection title="Census Tables">
-          <TableOfAllCensuses organization={org} />
+          <LocalParamsProvider overrides={{ page: 1, limit: 20, searchString: '' }}>
+            <TableOfAllCensuses organization={org} />
+          </LocalParamsProvider>
         </DetailsSection>
       )}
     </div>

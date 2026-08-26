@@ -2,7 +2,7 @@ import React from 'react';
 
 import TerritoryDataYear from '@features/data/context/TerritoryDataYear';
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
 import TableValueType from '@features/table/TableValueType';
@@ -37,7 +37,7 @@ const PopulationInTerritoryDescription: React.FC = () => {
   return (
     <>
       The population of this language in {formattedTerritory}. For more details and sorting, see the{' '}
-      <HoverableButton onClick={() => updatePageParams({ objectType: ObjectType.Locale })}>
+      <HoverableButton onClick={() => updatePageParams({ entType: EntityType.Locale })}>
         Locale Table
       </HoverableButton>
     </>

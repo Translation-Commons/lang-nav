@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { convertAlphaToNumber } from '@shared/lib/stringUtils';
@@ -13,23 +13,23 @@ import { getMaximumValue, getMinimumValue } from '../fields/rangeUtils';
 
 import { getColorGradientFunction } from './getColorGradientFunction';
 
-type Props = { objects: ObjectData[]; colorBy?: Field };
+type Props = { ents: EntityData[]; colorBy?: Field };
 
 export type ColoringFunctions = {
   colorBy: Field;
-  getColor: (object: ObjectData) => string | undefined;
+  getColor: (ent: EntityData) => string | undefined;
   getNormalizedValue: (value: number) => number;
   getDenormalizedValue: (normalized: number) => number;
   maxValue: number;
   minValue: number;
 };
 
-const useColors = ({ objects, colorBy: colorByInput }: Props): ColoringFunctions => {
+const useColors = ({ ents, colorBy: colorByInput }: Props): ColoringFunctions => {
   const { colorBy: colorByParam, colorGradient, populationMin } = usePageParams();
   const colorBy = colorByInput ?? colorByParam ?? Field.None;
 
   const minValue = getMinimumValue(colorBy, populationMin);
-  const maxValue = useMemo(() => getMaximumValue(objects, colorBy), [objects, colorBy]);
+  const maxValue = useMemo(() => getMaximumValue(ents, colorBy), [ents, colorBy]);
   const shouldUseLogScale = shouldUseLogarithmicScale(colorBy);
   const range = shouldUseLogScale ? Math.log10(maxValue - minValue) : maxValue - minValue;
   const applyColorGradient = getColorGradientFunction(colorGradient);
@@ -72,8 +72,8 @@ const useColors = ({ objects, colorBy: colorByInput }: Props): ColoringFunctions
   );
 
   const getColor = useCallback(
-    (object: ObjectData): string | undefined => {
-      const value = getField(object, colorBy);
+    (ent: EntityData): string | undefined => {
+      const value = getField(ent, colorBy);
       if (value == null) return undefined; // Will be off the color scale, usually gray
 
       const num = getNormalizedValue(value);

@@ -1,12 +1,9 @@
 import { describe, expect, it } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getBaseLanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { LocaleData, LocaleSource } from '@entities/locale/LocaleTypes';
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
@@ -17,7 +14,7 @@ export function getMockLanguages() {
     codeDisplay: 'US',
     nameDisplay: 'United States',
     names: ['United States', 'USA', 'US'],
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
     scope: TerritoryScope.Country,
     pop: { overall: 331002651, fromUN: 331000000 },
   };
@@ -30,7 +27,7 @@ export function getMockLanguages() {
     territory: US,
     nameDisplay: 'Multiple Languages (USA)',
     names: ['Multiple Languages'],
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     localeSource: LocaleSource.CreateRegionalLocales,
     pop: { speaking: {}, writing: {} },
   };
@@ -39,7 +36,7 @@ export function getMockLanguages() {
     codeDisplay: 'Latn',
     nameDisplay: 'Latin',
     names: ['Latin'],
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
     scope: WritingSystemScope.IndividualScript,
   };
   const Cyrl: WritingSystemData = {
@@ -47,7 +44,7 @@ export function getMockLanguages() {
     codeDisplay: 'Cyrl',
     nameDisplay: 'Cyrillic',
     names: ['Cyrillic'],
-    type: ObjectType.WritingSystem,
+    type: EntityType.WritingSystem,
     scope: WritingSystemScope.IndividualScript,
   };
 
@@ -94,15 +91,15 @@ export function getMockLanguages() {
   rus.parentLanguage = ine;
 
   // Non Indo-European languages
-  const nav = getBaseLanguageData('nav', 'Navajo');
-  nav.scope = LanguageScope.Language;
-  nav.writingSystems = { Latn };
-  nav.locales = [mul_US];
-  nav.vitality = { ethFine: VitalityEthnologueFine.Threatened };
+  const epo = getBaseLanguageData('epo', 'Esperanto');
+  epo.scope = LanguageScope.Language;
+  epo.writingSystems = { Latn };
+  epo.locales = [mul_US];
+  epo.vitality = { iso: LanguageISOStatus.Constructed };
   const zho = getBaseLanguageData('zho', 'Chinese');
   zho.scope = LanguageScope.Macrolanguage;
 
-  return [ine, gem, eng, spa, fra, deu, ita, rus, nav, zho];
+  return [ine, gem, eng, spa, fra, deu, ita, rus, epo, zho];
 }
 
 describe('Mock Languages for Filter Tests', () => {

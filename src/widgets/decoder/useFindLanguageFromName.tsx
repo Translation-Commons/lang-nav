@@ -11,9 +11,10 @@ const OVERRIDE_LANGUAGE_MATCH: Record<string, string> = {
   hokkien: 'taib1242',
   teochew: 'chao1238',
   mandarin: 'cmn',
-  malay: 'zlm',
+  malay: 'zsm',
   other: 'mul',
   darija: 'ary',
+  italian: 'ita',
 };
 
 const OVERRIDE_ALTS: Record<string, string[]> = {
@@ -21,7 +22,8 @@ const OVERRIDE_ALTS: Record<string, string[]> = {
   teochew: ['nan'],
   mandarin: ['zho'],
   darija: ['arq', 'aeb'],
-  malay: ['msa', 'zsm'],
+  malay: ['msa', 'zlm'],
+  italian: ['ise', 'slf', 'itk'],
 };
 
 type FindLanguage = (searchString: string) => Promise<LanguageData[]>;
@@ -32,7 +34,9 @@ const useFindLanguage = (): FindLanguage => {
 
   const findLanguage: FindLanguage = useCallback(
     async (searchString: string) => {
-      const searchLower = searchString.toLowerCase();
+      const searchLower = searchString.toLowerCase().trim();
+      if (searchLower === '' || searchLower.startsWith('#')) return [];
+
       if (OVERRIDE_LANGUAGE_MATCH[searchLower]) {
         const overrideCode = OVERRIDE_LANGUAGE_MATCH[searchLower];
         const overrideLang = getLanguage(overrideCode);

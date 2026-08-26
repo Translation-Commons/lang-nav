@@ -4,7 +4,7 @@ interface Props {
   value: number | null | undefined;
   max: number;
   label: string; // eg. "Institutional", "Living"
-  sublabel?: string; // eg. "Ethnologue", "ISO"
+  sublabel?: string; // eg. "ISO"
   size?: number; // diameter in px, default 80
 }
 

@@ -37,7 +37,7 @@ We've partnered with various organizations to get data and to provide data to. U
 
 ## Data
 
-The data comes from multiple sources, primarily [CLDR](https://github.com/unicode-org/cldr/), [Ethnologue](https://www.ethnologue.com/), and [Glottolog](https://glottolog.org/).
+The data comes from multiple sources, primarily [CLDR](https://github.com/unicode-org/cldr/) and [Glottolog](https://glottolog.org/).
 
 ## Development Instructions
 

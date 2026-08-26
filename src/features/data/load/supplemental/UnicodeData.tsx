@@ -2,7 +2,7 @@ import aliases from 'cldr-core/supplemental/aliases.json';
 import languageMatching from 'cldr-core/supplemental/languageMatching.json';
 import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
@@ -115,7 +115,7 @@ export function addCLDRLanguageDetails(languagesBySource: LanguagesBySource): vo
         macroLang.CLDR.scope = LanguageScope.Macrolanguage;
         macroLang.CLDR.notes = notes;
         macroLang.CLDR.name = macroLang.nameCanonical + ' (macrolanguage)';
-        // Remove the regular symbolic reference in the CLDR list to the macrolanguage object (since it will be replaced below)
+        // Remove the regular symbolic reference in the CLDR list to the macrolanguage entity (since it will be replaced below)
         delete cldrLanguages[macroLangCode];
         cldrLanguages[macroLangAltCode] = macroLang; // But put it back in with the alternative code to distinguish it
 
@@ -215,7 +215,7 @@ export async function loadCLDRCoverage(
         .map(parseCLDRCoverageLine);
       cldrCoverage.forEach((cldrCov) => {
         const lang = getCLDRLanguage(cldrCov.languageCode);
-        if (lang?.type !== ObjectType.Language) {
+        if (lang?.type !== EntityType.Language) {
           console.debug('During CLDR import ', cldrCov.languageCode, 'missing from languages');
           return;
         }
@@ -300,7 +300,7 @@ export function getLanguageCountsFromCLDR(dataContext: DataContextType): CensusD
       const territory = dataContext.getTerritory(territoryCode);
 
       const census: CensusData = {
-        type: ObjectType.Census,
+        type: EntityType.Census,
         ID: 'cldr.' + territoryCode,
         codeDisplay: 'cldr.' + territoryCode,
         nameDisplay: 'CLDR ' + (territory?.nameDisplay ?? territoryCode),

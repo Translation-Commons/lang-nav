@@ -1,17 +1,17 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
-import { updateObjectsBasedOnDataParams } from '../compute/updateObjectsBasedOnDataParams';
+import { updateEntitiesBasedOnDataParams } from '../compute/updateEntitiesBasedOnDataParams';
 import { useCoreData } from '../load/CoreData';
 import { loadSupplementalData } from '../load/SupplementalData';
 
@@ -34,14 +34,14 @@ const DataProvider: React.FC<{
     loadPrimaryData();
   }, []); // this is called once after page load
 
-  const getObject = useCallback(
-    (id: string): ObjectData | undefined => coreData.objects[id],
+  const getEntity = useCallback(
+    (id: string): EntityData | undefined => coreData.ents[id],
     [coreData],
   );
   const getLanguage = useCallback(
     (id: string): LanguageData | undefined => {
-      const obj = coreData.objects[id];
-      return obj?.type === ObjectType.Language ? (obj as LanguageData) : undefined;
+      const ent = coreData.ents[id];
+      return ent?.type === EntityType.Language ? (ent as LanguageData) : undefined;
     },
     [coreData],
   );
@@ -53,40 +53,40 @@ const DataProvider: React.FC<{
   );
   const getLocale = useCallback(
     (id: string): LocaleData | undefined => {
-      const obj = coreData.objects[id];
-      return obj?.type === ObjectType.Locale ? (obj as LocaleData) : undefined;
+      const ent = coreData.ents[id];
+      return ent?.type === EntityType.Locale ? (ent as LocaleData) : undefined;
     },
     [coreData],
   );
   const getTerritory = useCallback(
     (id: string): TerritoryData | undefined => {
-      const obj = coreData.objects[id];
-      return obj?.type === ObjectType.Territory ? (obj as TerritoryData) : undefined;
+      const ent = coreData.ents[id];
+      return ent?.type === EntityType.Territory ? (ent as TerritoryData) : undefined;
     },
     [coreData],
   );
   const getWritingSystem = useCallback(
     (id: string): WritingSystemData | undefined => {
-      const obj = coreData.objects[id];
-      return obj?.type === ObjectType.WritingSystem ? (obj as WritingSystemData) : undefined;
+      const ent = coreData.ents[id];
+      return ent?.type === EntityType.WritingSystem ? (ent as WritingSystemData) : undefined;
     },
     [coreData],
   );
   const getVariant = useCallback(
     (id: string): VariantData | undefined => {
-      const obj = coreData.objects[id];
-      return obj?.type === ObjectType.Variant ? (obj as VariantData) : undefined;
+      const ent = coreData.ents[id];
+      return ent?.type === EntityType.Variant ? (ent as VariantData) : undefined;
     },
     [coreData],
   );
   const getOrganization = useCallback(
     (id: string): OrganizationData | undefined => {
-      const obj = coreData.objects[id];
-      if (obj?.type === ObjectType.Org) return obj;
+      const ent = coreData.ents[id];
+      if (ent?.type === EntityType.Org) return ent;
 
       // Search with org. prefix
-      const obj2 = coreData.objects[`org.${id}`];
-      if (obj2?.type === ObjectType.Org) return obj2;
+      const ent2 = coreData.ents[`org.${id}`];
+      if (ent2?.type === EntityType.Org) return ent2;
 
       // Not found
       return undefined;
@@ -95,10 +95,10 @@ const DataProvider: React.FC<{
   );
   const languagesInSelectedSource = useMemo(() => {
     // Update dependent fields whenever language source or locale separator changes
-    updateObjectsBasedOnDataParams(
+    updateEntitiesBasedOnDataParams(
       coreData.allLanguoids,
       coreData.locales,
-      coreData.objects['001'] as TerritoryData, // The world territory
+      coreData.ents['001'] as TerritoryData, // The world territory
       languageSource,
       localeSeparator,
     );
@@ -113,7 +113,7 @@ const DataProvider: React.FC<{
       ...coreData,
       languagesInSelectedSource,
       loadingStage: loadProgress,
-      getObject,
+      getEntity,
       getLanguage,
       getCLDRLanguage,
       getLocale,

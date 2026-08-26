@@ -19,7 +19,7 @@ const TableOfAllCensuses: React.FC<Props> = ({ organization }) => {
   return (
     <InteractiveEntityTable
       tableID={TableID.Censuses}
-      entities={organization ? (organization?.censuses ?? []) : Object.values(allCensuses)}
+      ents={organization ? (organization?.censuses ?? []) : Object.values(allCensuses)}
       columns={columns}
     />
   );

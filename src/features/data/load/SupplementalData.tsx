@@ -6,7 +6,6 @@ import { DataContextType } from '../context/useDataContext';
 
 import { isApiEnabled } from './api/apiConfig';
 import { loadCensusData } from './extra_entities/loadCensusData';
-import { loadEthnologue2012Data } from './extra_entities/SILData';
 import { loadCountryCoordinates } from './supplemental/loadCountryCoordinates';
 import { loadECRML } from './supplemental/loadECRML';
 import { loadGoogleTranslate } from './supplemental/loadGoogleTranslate';
@@ -47,14 +46,13 @@ export async function loadSupplementalData(dataContext: DataContextType): Promis
         loadTerritoryNames(dataContext.getTerritory),
       ];
 
-  // Load multiple supplemental data sources in parallel, these changes will modify objects
+  // Load multiple supplemental data sources in parallel, these changes will modify entities
   // but they should not modify the same fields.
   await Promise.all([
     ...territorySupplements,
     loadCLDRCoverage(dataContext.getCLDRLanguage),
     loadAndApplyWikipediaData(dataContext),
     loadLanguageNamesFrench(dataContext.getLanguage),
-    loadEthnologue2012Data(dataContext.getLanguage),
     loadIndigeneity(dataContext.getLanguage),
     loadECRML(dataContext.getLanguage),
     loadGoogleTranslate(dataContext.getLanguage),

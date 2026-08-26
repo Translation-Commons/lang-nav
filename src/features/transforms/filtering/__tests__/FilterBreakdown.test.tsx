@@ -4,10 +4,7 @@ import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 import { PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
-import {
-  LanguageISOStatus,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
@@ -35,8 +32,8 @@ describe('FilterBreakdown', () => {
     setupMockParams();
   });
 
-  it('shows loading message when no objects are provided', () => {
-    render(<FilterBreakdown objects={[]} />);
+  it('shows loading message when no entities are provided', () => {
+    render(<FilterBreakdown ents={[]} />);
     expect(
       screen.getByText(
         /Data is still loading\. If you are waiting awhile there could be an error in the data\./i,
@@ -45,22 +42,22 @@ describe('FilterBreakdown', () => {
   });
 
   it('returns an empty fragment when nothing is filtered', () => {
-    const objects = getMockLanguages();
+    const ents = getMockLanguages();
     setupMockParams({
       languageScopes: [],
       territoryFilter: '',
       writingSystemFilter: '',
       languageFilter: '',
       languageFamilyFilter: '',
-      vitalityEthFine: [],
+      isoStatus: [],
       searchString: '',
     });
-    const { container } = render(<FilterBreakdown objects={objects} />);
+    const { container } = render(<FilterBreakdown ents={ents} />);
     expect(container.firstChild).toBeNull();
   });
 
   it('renders breakdown counts and clear buttons; clicking clears calls updatePageParams', () => {
-    const objects = getMockLanguages();
+    const ents = getMockLanguages();
     setupMockParams({
       territoryFilter: 'US',
       writingSystemFilter: 'Latn',
@@ -69,7 +66,7 @@ describe('FilterBreakdown', () => {
       searchString: 'spa',
     });
 
-    const { container } = render(<FilterBreakdown objects={objects} />);
+    const { container } = render(<FilterBreakdown ents={ents} />);
 
     // Expected all of the filters to be shown
     expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();
@@ -87,7 +84,7 @@ describe('FilterBreakdown', () => {
     expect(numericCells[2].textContent).toBe('-3'); // deu, ita, zho are not in US in the test data
     expect(numericCells[3].textContent).toBe('-1'); // rus is not written in the Latin script
     expect(numericCells[4].textContent).toBe('-1'); // nav is not in the Indo-European language family
-    expect(numericCells[5].textContent).toBe('-1'); // fra fails vitality "National"
+    expect(numericCells[5].textContent).toBe('-1'); // fra fails the ISO vitality filter
     expect(numericCells[6].textContent).toBe('-1'); // eng fails substring "spa"
     expect(numericCells[7].textContent).toBe('1'); // spa is the only language left
 
@@ -109,14 +106,14 @@ describe('FilterBreakdown', () => {
   });
 
   it('does not apply substring filter when shouldFilterUsingSearchBar is false', () => {
-    const objects = getMockLanguages();
+    const ents = getMockLanguages();
     setupMockParams({
       territoryFilter: 'US',
-      vitalityEthFine: [VitalityEthnologueFine.National],
+      isoStatus: [LanguageISOStatus.Living],
       searchString: 'spa',
     });
 
-    render(<FilterBreakdown objects={objects} shouldFilterUsingSearchBar={false} />);
+    render(<FilterBreakdown ents={ents} shouldFilterUsingSearchBar={false} />);
 
     // Since substring filtering is disabled, the "Not matching substring" line should not be present
     expect(screen.queryByText(/Not matching substring/i)).toBeNull();
@@ -130,10 +127,10 @@ describe('FilterBreakdown', () => {
     }
   });
 
-  it('shows a subset of the possible filters when only some affect the objects shown', () => {
-    const objects = getMockLanguages();
+  it('shows a subset of the possible filters when only some affect the entities shown', () => {
+    const ents = getMockLanguages();
     setupMockParams({});
-    const { container } = render(<FilterBreakdown objects={objects} />);
+    const { container } = render(<FilterBreakdown ents={ents} />);
 
     // No filters are applied, so no breakdown should be shown
     expect(screen.queryByText(/Not macrolanguage or individual language:/i)).toBeTruthy(); // ine
@@ -152,14 +149,14 @@ describe('FilterBreakdown', () => {
   });
 
   it('when filters are written out, renders the readable names and not the codes', () => {
-    const objects = getMockLanguages();
+    const ents = getMockLanguages();
     setupMockParams({
       territoryFilter: 'United States [US]',
       writingSystemFilter: 'Latin [Latn]',
       languageFamilyFilter: 'Indo-European [ine]',
     });
 
-    const { container } = render(<FilterBreakdown objects={objects} />);
+    const { container } = render(<FilterBreakdown ents={ents} />);
 
     // Expected all of the filters to be shown
     expect(screen.getByText(/Not macrolanguage or individual language:/i)).toBeTruthy();

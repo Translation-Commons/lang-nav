@@ -1,5 +1,5 @@
 export type Suggestion = {
-  objectID?: string;
+  entID?: string;
   searchString: string;
   label: React.ReactNode;
   group?: string; // Used to label suggestions into groups, particularly when the primary search fails

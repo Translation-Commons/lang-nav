@@ -62,11 +62,26 @@ test.describe('screenshot tests', () => {
     await waitToFinishLoadingData(page);
     await expect(page).toHaveScreenshot('data-page.png');
   });
-  test('data page: Details', async ({ page }) => {
+
+  test('data page: Language Details', async ({ page }) => {
     await seedDeclinedConsent(page);
-    await page.goto('./data?objectID=zho&searchString=Chinese');
+    await page.goto('./data?entID=zho&searchString=Chinese');
     await waitToFinishLoadingData(page);
     await expect(page).toHaveScreenshot('data-page-details.png');
+  });
+
+  test('data page: Locale Details', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?entID=eng_IN&searchString=English&entType=Locale');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-details-locale.png');
+  });
+
+  test('data page: Territory Details', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?entID=ID&searchString=Ind&entType=Territory');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-details-territory.png');
   });
 
   test('data page: Table', async ({ page }) => {
@@ -93,7 +108,7 @@ test.describe('screenshot tests', () => {
   test('data page: Map Selection', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto(
-      './data?view=Map&objectType=Territory&territoryFilter=Africa+%5B002%5D&colorBy=%23+of+Languages&pinned=NG%2CBJ%2CTG%2CGH%2CCI&colorGradient=33',
+      './data?view=Map&entType=Territory&territoryFilter=Africa+%5B002%5D&colorBy=%23+of+Languages&pinned=NG%2CBJ%2CTG%2CGH%2CCI&colorGradient=33',
     );
     await waitToFinishLoadingData(page);
     const mapComponent = page.locator('.EntityMap');

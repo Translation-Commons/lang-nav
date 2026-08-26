@@ -1,34 +1,30 @@
 import { ArrowDownUpIcon } from 'lucide-react';
 import React from 'react';
 
-import NewHoverable from '@features/layers/hovercard/NewHoverable';
 import usePageParams from '@features/params/usePageParams';
 
-import SecondarySortBySelector from './SecondarySortBySelector';
-import SortBySelector from './SortBySelector';
+import TransformOptionsPopup from '../TransformOptionsPopup';
+
+import FieldDropdown from './FieldDropdown';
 import SortDirectionSelector from './SortDirectionSelector';
 
 const SortPopupCard: React.FC = () => {
   const { sortBy } = usePageParams();
 
   return (
-    <NewHoverable
-      hoverContent={
-        <div className="flex flex-col gap-2 w-max items-end">
-          <SortBySelector />
-          <SecondarySortBySelector />
-          <SortDirectionSelector />
-        </div>
+    <TransformOptionsPopup
+      label={
+        <>
+          <ArrowDownUpIcon />
+          <div className="truncate text-ellipsis">{sortBy}</div>
+        </>
       }
-    >
-      <button className="primary" style={{ borderRadius: '1em', cursor: 'auto' }}>
-        <div
-          style={{ display: 'flex', gap: '0.25em', alignContent: 'center', alignItems: 'center' }}
-        >
-          {sortBy} <ArrowDownUpIcon size="1.2em" />
-        </div>
-      </button>
-    </NewHoverable>
+      options={{
+        'Sort By': <FieldDropdown pageParam="sortBy" />,
+        'Secondary Sort By': <FieldDropdown pageParam="secondarySortBy" />,
+        'Sort Direction': <SortDirectionSelector />,
+      }}
+    />
   );
 };
 

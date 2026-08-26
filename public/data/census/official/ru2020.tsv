@@ -206,7 +206,7 @@ ltz	Luxembourgish	Люксембургский	9	5
 myn/yua	Maya	Майя	16	10	
 mkd	Macedonian	Македонский	260	112	138
 mlg	Malagasy	Малагасийский	15	9	
-msa/zlm/zsm	Malay	Малайский	101	46	36
+msa/zsm	Malay	Малайский	101	46	36
 mal	Malayalam	Малаялам	158	133	
 gcc	Mali	Малийский	30	19	
 man/mnk	Malinke	Малинке	4	3	
@@ -253,7 +253,7 @@ oss	Ossetian	Осетинский	344907	332,068	456,564
 ota	Ottoman	Османский	6	3	
 mul	Pakistani	Пакистанский	106	66	
 sgh	Pamir	Памирский	432	292	
-lah/pan	Punjabi	Панджаби	45	23	
+pan	Punjabi	Панджаби	45	23	
 fas	Persian	Персидский	6011	2,685	3,399
 #poz	Polynesian	Полинезийский	5	4	
 qwm	Polovtsian	Половецкий	8	6	

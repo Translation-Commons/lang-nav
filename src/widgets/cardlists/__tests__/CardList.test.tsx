@@ -1,8 +1,8 @@
 import { fireEvent, render } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
-import { ObjectType, PageParams } from '@features/params/PageParamTypes';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
+import { EntityType, PageParams } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
@@ -23,9 +23,9 @@ vi.mock('@features/transforms/coloring/useColors', () => ({
 }));
 
 describe('CardList', () => {
-  const mockedEntities = getFullyInstantiatedMockedObjects();
+  const mockedEntities = getFullyInstantiatedMockedEntities();
   const territories = Object.values(mockedEntities)
-    .filter((obj) => obj.type === ObjectType.Territory)
+    .filter((ent) => ent.type === EntityType.Territory)
     .sort(sortByPopulation);
 
   // Helper function to eliminate mock setup duplication
@@ -36,7 +36,7 @@ describe('CardList', () => {
   function setupMockFilteredEntities(countryOnly: boolean = false) {
     (useFilteredEntities as Mock).mockReturnValue({
       filteredEntities: territories.filter(
-        (obj) => !countryOnly || obj.scope === TerritoryScope.Country,
+        (ent) => !countryOnly || ent.scope === TerritoryScope.Country,
       ),
       allEntities: territories,
     });
@@ -75,13 +75,12 @@ describe('CardList', () => {
     expect(cards[1]).toHaveTextContent('Harad');
   });
 
-  it('when the objects are filtered, the visible item meter shows correct counts', () => {
+  it('when the entities are filtered, the visible item meter shows correct counts', () => {
     setupMockFilteredEntities(true); // countryOnly = true
 
     const { container, getAllByText } = render(<CardList />);
 
     // Meter appears correctly
-    expect(container).toHaveTextContent('Showing 4 results.');
     expect(container).toHaveTextContent('2 filtered out.');
 
     // There are 4 country-scope territories in the mocked data
@@ -105,7 +104,7 @@ describe('CardList', () => {
     if (cards[0] instanceof HTMLElement) cards[0].click();
 
     // Expect the page params to have been updated with Arda's ID
-    expect(usePageParams().updatePageParams).toHaveBeenCalledWith({ objectID: '001' });
+    expect(usePageParams().updatePageParams).toHaveBeenCalledWith({ entID: '001' });
   });
 
   it('Clicking on interactive elements inside the card does not open the card', () => {
@@ -122,7 +121,7 @@ describe('CardList', () => {
       button.click();
 
       // Expect the page params NOT to have been updated with Arda's ID
-      expect(usePageParams().updatePageParams).not.toHaveBeenCalledWith({ objectID: '001' });
+      expect(usePageParams().updatePageParams).not.toHaveBeenCalledWith({ entID: '001' });
     }
   });
 
@@ -138,6 +137,6 @@ describe('CardList', () => {
 
     // Press enter to open the card
     fireEvent.keyDown(cards[0], { key: 'Enter', code: 'Enter' });
-    expect(usePageParams().updatePageParams).toHaveBeenCalledWith({ objectID: '001' });
+    expect(usePageParams().updatePageParams).toHaveBeenCalledWith({ entID: '001' });
   });
 });

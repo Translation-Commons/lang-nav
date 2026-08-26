@@ -1,10 +1,10 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -26,7 +26,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={territory} />
+        <EntityTitle ent={territory} />
       </div>
       <CardField
         title="Territory Type"
@@ -37,7 +37,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         {isDependency && sovereign ? (
           <>
             {' '}
-            of <HoverableObjectName object={sovereign} />
+            of <HoverableEntityName ent={sovereign} />
           </>
         ) : null}
       </CardField>
@@ -48,7 +48,7 @@ const TerritoryCard: React.FC<Props> = ({ territory }) => {
         description="The United Nations regional grouping this territory belongs to."
       >
         {parentUNRegion ? (
-          <HoverableObjectName object={parentUNRegion} />
+          <HoverableEntityName ent={parentUNRegion} />
         ) : isWorld ? (
           <Deemphasized>Global</Deemphasized>
         ) : (

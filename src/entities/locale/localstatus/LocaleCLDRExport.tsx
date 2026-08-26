@@ -1,11 +1,11 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 
-export function prepareCLDRLocalePopulationForExport(objects: ObjectData[]) {
-  const locales = objects.filter((obj) => obj.type === ObjectType.Locale);
+export function prepareCLDRLocalePopulationForExport(ents: EntityData[]) {
+  const locales = ents.filter((ent) => ent.type === EntityType.Locale);
 
   // CLDR repository' country_language_population.tsv
   // #CName	CCode	CPopulation	CLiteracy	CGdp	OfficialStatus	Language	LCode	LPopulation	WritingPop	References	Notes

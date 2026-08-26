@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
@@ -9,7 +9,7 @@ import TreeListPageBody from '@features/treelist/TreeListPageBody';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 export const LocaleHierarchy: React.FC = () => {
@@ -35,8 +35,8 @@ export const LocaleHierarchy: React.FC = () => {
 
 export function getLocaleTreeNodes(
   languages: LanguageData[],
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean = () => true,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean = () => true,
 ): TreeNodeData[] {
   return languages
     .filter(filterFunction ?? (() => true))
@@ -47,12 +47,12 @@ export function getLocaleTreeNodes(
 
 function getLanguageTreeNode(
   lang: LanguageData,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData {
   return {
-    type: ObjectType.Locale,
-    object: lang,
+    type: EntityType.Locale,
+    ent: lang,
     children: getWritingSystemNodesForLanguage(lang, sortFunction, filterFunction),
   };
 }
@@ -60,8 +60,8 @@ function getLanguageTreeNode(
 // Note the filterFunction here is causing some problems. EG if you search for Latin then you see which languages support latin but not which
 function getWritingSystemNodesForLanguage(
   lang: LanguageData,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData[] {
   const territoryNodesWithoutWritingSystems = lang.locales
     .filter((locale) => locale.scriptCode == null)
@@ -86,7 +86,7 @@ function getWritingSystemNodesForLanguage(
     defaultWritingSystemNode.children = [
       ...territoryNodesWithoutWritingSystems,
       ...defaultWritingSystemNode.children,
-    ].sort((a, b) => sortFunction(a.object, b.object));
+    ].sort((a, b) => sortFunction(a.ent, b.ent));
 
     // Put the default writing system first, then the rest
     return [defaultWritingSystemNode, ...otherWritingSystemNodes];
@@ -100,12 +100,12 @@ function getWritingSystemNodesForLanguage(
 function getLocaleNodeForWritingSystem(
   writingSystem: WritingSystemData,
   languageID: LanguageCode,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData {
   return {
-    type: ObjectType.Locale,
-    object: writingSystem,
+    type: EntityType.Locale,
+    ent: writingSystem,
     children: getTerritoryNodesForWritingSystem(
       writingSystem,
       languageID,
@@ -118,8 +118,8 @@ function getLocaleNodeForWritingSystem(
 function getTerritoryNodesForWritingSystem(
   writingSystem: WritingSystemData,
   languageID: LanguageCode,
-  sortFunction: (a: ObjectData, b: ObjectData) => number,
-  filterFunction: (a: ObjectData) => boolean,
+  sortFunction: (a: EntityData, b: EntityData) => number,
+  filterFunction: (a: EntityData) => boolean,
 ): TreeNodeData[] {
   if (!writingSystem.localesWhereExplicit) return [];
   return writingSystem.localesWhereExplicit
@@ -131,8 +131,8 @@ function getTerritoryNodesForWritingSystem(
 
 function getLocaleNodeForTerritory(locale: LocaleData): TreeNodeData {
   return {
-    type: ObjectType.Locale,
-    object: locale,
+    type: EntityType.Locale,
+    ent: locale,
     children: [],
   };
 }

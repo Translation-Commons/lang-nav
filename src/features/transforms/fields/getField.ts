@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { getRootLanguageFamilyForEntity } from '@entities/language/LanguageFamilyUtils';
 import {
@@ -8,27 +8,27 @@ import {
   getCountOfVariants,
   getCountOfWritingSystems,
   getDepth,
-  getObjectDateAsNumber,
-  getObjectLiteracy,
-  getObjectMostImportantLanguageName,
-  getWritingSystemsInObject,
-} from '@entities/lib/getObjectMiscFields';
+  getEntityDateAsNumber,
+  getEntityLiteracy,
+  getEntityMostImportantLanguageName,
+  getWritingSystemsInEntity,
+} from '@entities/lib/getEntityMiscFields';
 import {
-  getObjectPercentOfTerritoryPopulation,
-  getObjectPopulation,
-  getObjectPopulationDirectlySourced,
-  getObjectPopulationOfDescendants,
-  getObjectPopulationPercentInBiggestDescendantLanguage,
-  getObjectPopulationRelativeToOverallLanguageSpeakers,
-  getObjectPopulationSpeaking,
-  getObjectPopulationWriting,
-} from '@entities/lib/getObjectPopulation';
+  getEntityPercentOfTerritoryPopulation,
+  getEntityPopulation,
+  getEntityPopulationDirectlySourced,
+  getEntityPopulationOfDescendants,
+  getEntityPopulationPercentInBiggestDescendantLanguage,
+  getEntityPopulationRelativeToOverallLanguageSpeakers,
+  getEntityPopulationSpeaking,
+  getEntityPopulationWriting,
+} from '@entities/lib/getEntityPopulation';
 import {
   getContainingTerritories,
   getCountOfChildTerritories,
   getCountOfCountries,
-} from '@entities/lib/getObjectRelatedTerritories';
-import { ObjectData } from '@entities/types/DataTypes';
+} from '@entities/lib/getEntityRelatedTerritories';
+import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -44,155 +44,149 @@ import {
   getWritingSystemForEntity,
 } from './getEntityConnection';
 
-// Get's a primitive value for a given object and field, used for sorting and filtering.
-// Returns undefined if the field is not applicable to the object type or if the value is missing.
-function getField(object: ObjectData, field: Field): string | number | undefined {
+// Get's a primitive value for a given entity and field, used for sorting and filtering.
+// Returns undefined if the field is not applicable to the entity type or if the value is missing.
+function getField(ent: EntityData, field: Field): string | number | undefined {
   switch (field) {
     case Field.None:
       return undefined;
     case Field.Code:
-      return object.codeDisplay;
+      return ent.codeDisplay;
     case Field.Name:
-      return object.nameDisplay;
+      return ent.nameDisplay;
     case Field.Endonym:
-      return object.nameEndonym;
+      return ent.nameEndonym;
 
     case Field.Depth:
-      return getDepth(object);
+      return getDepth(ent);
     case Field.Literacy:
-      return getObjectLiteracy(object);
+      return getEntityLiteracy(ent);
 
     case Field.Coordinates: // Not for sorting, only for display
-      return (object.type === ObjectType.Language || object.type === ObjectType.Territory) &&
-        object.latitude != null &&
-        object.longitude != null
-        ? object.latitude?.toFixed(1) + ', ' + object.longitude?.toFixed(1)
+      return (ent.type === EntityType.Language || ent.type === EntityType.Territory) &&
+        ent.latitude != null &&
+        ent.longitude != null
+        ? ent.latitude?.toFixed(1) + ', ' + ent.longitude?.toFixed(1)
         : undefined;
     case Field.Latitude:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? object.latitude
+      return ent.type === EntityType.Language || ent.type === EntityType.Territory
+        ? ent.latitude
         : undefined;
     case Field.Longitude:
-      return object.type === ObjectType.Language || object.type === ObjectType.Territory
-        ? object.longitude
+      return ent.type === EntityType.Language || ent.type === EntityType.Territory
+        ? ent.longitude
         : undefined;
     case Field.Area:
-      return object.type === ObjectType.Territory ? object.landArea : undefined;
+      return ent.type === EntityType.Territory ? ent.landArea : undefined;
 
     case Field.LanguageScope:
-      return getLanguageForEntity(object)?.scope;
+      return getLanguageForEntity(ent)?.scope;
     case Field.WritingSystemScope:
-      return getWritingSystemForEntity(object)?.scope;
+      return getWritingSystemForEntity(ent)?.scope;
     case Field.TerritoryScope:
-      return getTerritoryForEntity(object)?.scope;
+      return getTerritoryForEntity(ent)?.scope;
     case Field.VariantType:
-      return getVariantsForEntity(object)?.[0]?.variantType;
+      return getVariantsForEntity(ent)?.[0]?.variantType;
     case Field.SourceType:
-      return getCensusForEntity(object)?.collectorType;
+      return getCensusForEntity(ent)?.collectorType;
 
     case Field.DigitalSupport:
-      return object.type === ObjectType.Language ? object.digitalSupportScore?.overall : undefined;
+      return ent.type === EntityType.Language ? ent.digitalSupportScore?.overall : undefined;
     case Field.UnicodeVersion:
-      return object.type === ObjectType.WritingSystem ? object.unicodeVersion : undefined;
+      return ent.type === EntityType.WritingSystem ? ent.unicodeVersion : undefined;
     case Field.CLDRCoverage:
-      return object.type === ObjectType.Language
-        ? object.CLDR.coverage?.actualCoverageLevel
-        : undefined; // Not yet defined
+      return ent.type === EntityType.Language ? ent.CLDR.coverage?.actualCoverageLevel : undefined; // Not yet defined
 
     case Field.Indigeneity:
       return undefined; // Not yet defined
     case Field.LanguageFormedHere:
-      return object.type !== ObjectType.Locale || object.langFormedHere == null
+      return ent.type !== EntityType.Locale || ent.langFormedHere == null
         ? undefined
-        : object.langFormedHere
+        : ent.langFormedHere
           ? 1
           : 0;
     case Field.HistoricPresence:
-      return object.type !== ObjectType.Locale || object.historicPresence == null
+      return ent.type !== EntityType.Locale || ent.historicPresence == null
         ? undefined
-        : object.historicPresence
+        : ent.historicPresence
           ? 1
           : 0;
     case Field.ECRMLProtection:
-      return object.type === ObjectType.Locale ? object.ecrmlProtection : undefined;
+      return ent.type === EntityType.Locale ? ent.ecrmlProtection : undefined;
     case Field.GovernmentStatus:
-      return object.type === ObjectType.Locale ? object.officialStatus : undefined; // Not yet defined
+      return ent.type === EntityType.Locale ? ent.officialStatus : undefined; // Not yet defined
 
-    // Related objects
+    // Related entities
     case Field.Language:
-      return getObjectMostImportantLanguageName(object);
+      return getEntityMostImportantLanguageName(ent);
     case Field.LanguageFamily:
-      return getRootLanguageFamilyForEntity(object)?.nameDisplay;
+      return getRootLanguageFamilyForEntity(ent)?.nameDisplay;
     case Field.WritingSystem:
-      return getWritingSystemsInObject(object)?.[0]?.nameDisplay;
+      return getWritingSystemsInEntity(ent)?.[0]?.nameDisplay;
     case Field.OutputScript:
-      return getKeyboardForEntity(object)?.outputWritingSystem?.nameDisplay;
+      return getKeyboardForEntity(ent)?.outputWritingSystem?.nameDisplay;
     case Field.Region:
-      return getTerritoryForEntity(object)?.parentUNRegion?.nameDisplay;
+      return getTerritoryForEntity(ent)?.parentUNRegion?.nameDisplay;
     case Field.Territory:
-      return getContainingTerritories(object)?.[0]?.nameDisplay;
+      return getContainingTerritories(ent)?.[0]?.nameDisplay;
     case Field.Platform:
-      return getKeyboardForEntity(object)?.platform;
+      return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:
-      return getVariantsForEntity(object)?.[0]?.nameDisplay;
+      return getVariantsForEntity(ent)?.[0]?.nameDisplay;
     case Field.SourceForPopulation:
-      return getCensusForEntity(object)?.collectorName;
+      return getCensusForEntity(ent)?.collectorName;
     case Field.SourceForLanguage:
-      return getLanguageSourcesForEntity(object)?.join(', ') || undefined;
+      return getLanguageSourcesForEntity(ent)?.join(', ') || undefined;
 
     // Counts of Related Objects
     case Field.CountOfLanguages:
-      return getCountOfLanguages(object);
+      return getCountOfLanguages(ent);
     case Field.CountOfKeyboards:
-      return getCountOfKeyboards(object);
+      return getCountOfKeyboards(ent);
     case Field.CountOfCountries:
-      return getCountOfCountries(object);
+      return getCountOfCountries(ent);
     case Field.CountOfChildTerritories:
-      return getCountOfChildTerritories(object);
+      return getCountOfChildTerritories(ent);
     case Field.CountOfWritingSystems:
-      return getCountOfWritingSystems(object);
+      return getCountOfWritingSystems(ent);
     case Field.CountOfCensuses:
-      return getCountOfCensuses(object);
+      return getCountOfCensuses(ent);
     case Field.CountOfVariants:
-      return getCountOfVariants(object);
+      return getCountOfVariants(ent);
 
     // Population
     case Field.Population:
-      return getObjectPopulation(object);
+      return getEntityPopulation(ent);
     case Field.PopulationDirectlySourced:
-      return getObjectPopulationDirectlySourced(object);
+      return getEntityPopulationDirectlySourced(ent);
     case Field.PopulationSpeaking:
-      return getObjectPopulationSpeaking(object);
+      return getEntityPopulationSpeaking(ent);
     case Field.PopulationWriting:
-      return getObjectPopulationWriting(object);
+      return getEntityPopulationWriting(ent);
     case Field.PopulationOfDescendants:
-      return getObjectPopulationOfDescendants(object);
+      return getEntityPopulationOfDescendants(ent);
     case Field.PopulationPercentInBiggestDescendantLanguage:
-      return getObjectPopulationPercentInBiggestDescendantLanguage(object);
+      return getEntityPopulationPercentInBiggestDescendantLanguage(ent);
     case Field.PercentOfTerritoryPopulation:
-      return getObjectPercentOfTerritoryPopulation(object);
+      return getEntityPercentOfTerritoryPopulation(ent);
     case Field.PercentOfOverallLanguageSpeakers:
-      return getObjectPopulationRelativeToOverallLanguageSpeakers(object);
+      return getEntityPopulationRelativeToOverallLanguageSpeakers(ent);
 
     // Vitality
     case Field.VitalityMetascore:
-      return getLanguageForEntity(object)?.vitality?.meta;
+      return getLanguageForEntity(ent)?.vitality?.meta;
     case Field.ISOStatus:
-      return getLanguageForEntity(object)?.vitality?.iso;
-    case Field.VitalityEthnologueFine:
-      return getLanguageForEntity(object)?.vitality?.ethFine;
-    case Field.VitalityEthnologueCoarse:
-      return getLanguageForEntity(object)?.vitality?.ethCoarse;
+      return getLanguageForEntity(ent)?.vitality?.iso;
     case Field.Modality:
-      return getLanguageForEntity(object)?.modality;
+      return getLanguageForEntity(ent)?.modality;
 
     case Field.Date:
-      return getObjectDateAsNumber(object);
+      return getEntityDateAsNumber(ent);
 
     case Field.Description:
-      return object.type === ObjectType.Variant ? object.description : undefined;
+      return ent.type === EntityType.Variant ? ent.description : undefined;
     case Field.Example:
-      return object.type === ObjectType.WritingSystem ? object.sample : undefined;
+      return ent.type === EntityType.WritingSystem ? ent.sample : undefined;
 
     default:
       enforceExhaustiveSwitch(field);

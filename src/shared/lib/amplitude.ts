@@ -125,12 +125,12 @@ export function trackFilterChanged(
   trackEvent('explore_filter_changed', props);
 }
 
-export function trackDetailViewed(props: ExploreBaseProps & { object_id: string }) {
+export function trackDetailViewed(props: ExploreBaseProps & { entity_id: string }) {
   trackEvent('explore_detail_viewed', props);
 }
 
 export function trackDetailSwitched(
-  props: ExploreBaseProps & { object: string; previous_object: string },
+  props: ExploreBaseProps & { ent: string; previous_ent: string },
 ) {
   trackEvent('explore_detail_switched', props);
 }

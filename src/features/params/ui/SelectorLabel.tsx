@@ -38,14 +38,6 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
   };
 
   switch (display) {
-    case SelectorDisplay.ButtonGroup:
-      style.borderRadius = '1em 0 0 1em';
-      style.marginLeft = '-0.125em'; // This may just be a remnant of the old style
-      style.marginRight = '-0.125em';
-      break;
-    case SelectorDisplay.ButtonList:
-      style.borderRadius = '1em 0 0 1em';
-      break;
     case SelectorDisplay.InlineDropdown:
       style.padding = '0 0.5em';
       break;

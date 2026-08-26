@@ -15,7 +15,7 @@ const DataSourcesPage: React.FC = () => {
     <DocsPageContainer title="Data Sources">
       <div>
         The data used in this application is sourced from various linguistic databases, including
-        Glottolog, Ethnologue, and CLDR. This data is meant to be as public and freely available as
+        Glottolog, LangTags and CLDR. This data is meant to be as public and freely available as
         possible so that all people can understand languages in context and make informed decisions
         about languages across the world.
       </div>
@@ -49,17 +49,6 @@ const DataSourcesPage: React.FC = () => {
           <ExternalLink href="http://glottolog.org/">Glottolog</ExternalLink>, Accessed on
           2024-10-29.)
         </DocsCard>
-        <DocsCard title="Ethnologue" href="https://www.ethnologue.com/">
-          Ethnologue is a reference work cataloging all of the world&apos;s known living languages.
-          It provides information about the number of speakers, language families, and geographical
-          distribution of languages. Ethnologue contains much more complete academic citations for
-          similar information provided by this website. <strong>Citation:</strong> Eberhard, David
-          M., Gary F. Simons, and Charles D. Fennig (eds.). 2025. Ethnologue: Languages of the
-          World. Twenty-eighth edition. Dallas, Texas: SIL International. Online version:{' '}
-          <ExternalLink href="https://www.ethnologue.com/" />. Note: Currently we have removed data
-          from Ethnologue pending clarifications on the proper way to redistribute their data if
-          any.
-        </DocsCard>
         <DocsCard title="United Nations: UNESCO, UNStats, and UNData">
           <ExternalLink href="https://www.unesco.org/">
             United Nations Educational, Scientific and Cultural Organization (UNESCO)
@@ -82,18 +71,18 @@ const DataSourcesPage: React.FC = () => {
       <DocsSection title="Concepts">
         <DocsCard title="IDs">
           The various language IDs (eg. ISO 3166 territory codes or language glottocodes) come from
-          their respective original database (ISO, Glottolog, CLDR). When an object has multiple
+          their respective original database (ISO, Glottolog, CLDR). When an entity has multiple
           identities, it has been manually matched by the Language Navigator team to a single
           entity. For instance, English is represented in CLDR by the ISO 639-1 code{' '}
-          <InternalLink params={{ languageSource: LanguageSource.CLDR, objectID: 'eng' }}>
+          <InternalLink params={{ languageSource: LanguageSource.CLDR, entID: 'eng' }}>
             en
           </InternalLink>
           , the ISO 639-3 code{' '}
-          <InternalLink params={{ languageSource: LanguageSource.ISO, objectID: 'eng' }}>
+          <InternalLink params={{ languageSource: LanguageSource.ISO, entID: 'eng' }}>
             eng
           </InternalLink>
           , and the Glottocode{' '}
-          <InternalLink params={{ languageSource: LanguageSource.Glottolog, objectID: 'eng' }}>
+          <InternalLink params={{ languageSource: LanguageSource.Glottolog, entID: 'eng' }}>
             stan1293
           </InternalLink>
           .

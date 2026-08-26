@@ -1,6 +1,6 @@
-# Core object data
+# Core entity data
 
-Curated from various sources, these are the core data files that power the main objects in Language Navigator. They have been edited for consistency and to fit our data model. Some columns are completely original, some are new.
+Curated from various sources, these are the core data files that power the main entities in Language Navigator. They have been edited for consistency and to fit our data model. Some columns are completely original, some are new.
 
 - languages.tsv
 - locales.tsv

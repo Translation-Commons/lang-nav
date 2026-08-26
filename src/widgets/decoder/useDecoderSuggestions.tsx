@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
-import { ObjectType, SearchableField } from '@features/params/PageParamTypes';
+import { EntityType, SearchableField } from '@features/params/PageParamTypes';
 import { SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
 import Field from '@features/transforms/fields/Field';
 import useFilters from '@features/transforms/filtering/useFilters';
@@ -19,33 +19,33 @@ type GetDecoderSuggestions = (query: string) => Promise<LanguageData[]>;
  */
 const useDecoderSuggestions = (): GetDecoderSuggestions => {
   const searchBy = SearchableField.CodeOrNameAny;
-  const pageObjects = useEntities(ObjectType.Language) as LanguageData[];
+  const pageEntities = useEntities(EntityType.Language) as LanguageData[];
   const filterBy = useFilters();
 
   const getMatchDistance = useCallback(
     // presuming query is already lowercased and trimmed
-    (query: string, object: LanguageData): number => {
+    (query: string, ent: LanguageData): number => {
       let dist = 0; // Low is good
 
-      // Check if the query makes the object name fully or partially matches
-      if (object.nameDisplay.toLowerCase() !== query) {
-        dist += anyWordStartsWith(object.nameDisplay, query) ? 1 : 2;
+      // Check if the query makes the entity name fully or partially matches
+      if (ent.nameDisplay.toLowerCase() !== query) {
+        dist += anyWordStartsWith(ent.nameDisplay, query) ? 1 : 2;
 
         // Check if any of the other names fully or partially match
-        if (!object.names.some((n) => n.toLowerCase() === query))
-          dist += object.names.some((n) => anyWordStartsWith(n, query)) ? 2 : 10;
+        if (!ent.names.some((n) => n.toLowerCase() === query))
+          dist += ent.names.some((n) => anyWordStartsWith(n, query)) ? 2 : 10;
+
+        // Check if the language code partially or fully matches the query
+        if (ent.codeDisplay !== query) dist += ent.codeDisplay.startsWith(query) ? 1 : 5;
       }
 
-      // Check if the language code partially or fully matches the query
-      if (object.codeDisplay !== query) dist += object.codeDisplay.startsWith(query) ? 1 : 5;
-
       // Check if the language is known to be found in the territory
-      if (!filterBy[Field.Territory]?.(object)) dist += 10;
+      if (!filterBy[Field.Territory]?.(ent)) dist += 10;
 
       // Check if the language is at the right scope level
-      if (!filterBy[Field.LanguageScope]?.(object)) dist += 4;
+      if (!filterBy[Field.LanguageScope]?.(ent)) dist += 4;
 
-      return dist - Math.log(object.pop.overall || 1) / 10; // Include a small population tiebreaker
+      return dist - Math.log(ent.pop.overall || 1) / 10; // Include a small population tiebreaker
     },
     [filterBy[Field.Territory], filterBy[Field.LanguageScope]],
   );
@@ -54,12 +54,12 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
     async (query: string) => {
       const queryLower = query.toLowerCase().trim();
       const substringFilter = getSubstringFilterOnQuery(queryLower, searchBy);
-      return (pageObjects || [])
+      return (pageEntities || [])
         .filter(substringFilter) // Require at least any name to match
         .sort((a, b) => getMatchDistance(queryLower, a) - getMatchDistance(queryLower, b))
         .slice(0, SUGGESTION_LIMIT);
     },
-    [pageObjects, searchBy, getMatchDistance],
+    [pageEntities, searchBy, getMatchDistance],
   );
 
   return getSuggestions;

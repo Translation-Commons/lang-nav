@@ -1,47 +1,54 @@
 import React from 'react';
 
-import { View } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 
-import { toSentenceCase } from '@shared/lib/stringUtils';
+import { Button } from '@shared/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuTrigger,
+} from '@shared/ui/dropdown-menu';
 
 import Field from '../fields/Field';
 
 import BaseColorBar from './BaseColorBar';
 
 const ColorGradientSelector: React.FC = () => {
-  const { colorBy, colorGradient, updatePageParams, view } = usePageParams();
-  const { display } = useSelectorDisplay();
-
-  // Only showing if coloring is enabled
-  if (colorBy == Field.None) return null;
-
-  // Only applicable to the card list and map views
-  if (view !== View.Map && view !== View.CardList) return null;
+  const { colorBy, colorGradient, updatePageParams } = usePageParams();
 
   return (
-    <Selector<ColorGradient>
-      selectorLabel={display === SelectorDisplay.Dropdown ? 'Color gradient' : undefined}
-      selectorDescription="Choose the range of colors used to represent values."
-      options={Object.values(ColorGradient).filter((cg) => typeof cg === 'number')}
-      onChange={(colorGradient) => updatePageParams({ colorGradient })}
-      selected={colorGradient}
-      getOptionLabel={(colorGradient) => (
-        <div style={{ minWidth: '4em', height: '16px', display: 'inline-block' }}>
-          <BaseColorBar colorGradient={colorGradient} />
-        </div>
-      )}
-      getOptionDescription={getGradientLabel}
-    />
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        disabled={colorBy == Field.None}
+        render={
+          <Button className="cursor-pointer" variant="outline">
+            <div className="min-w-[4em] w-full h-[16px]">
+              <BaseColorBar colorGradient={colorGradient} />
+            </div>
+          </Button>
+        }
+      />
+      <DropdownMenuContent>
+        <DropdownMenuRadioGroup
+          value={colorGradient}
+          onValueChange={(value) => updatePageParams({ colorGradient: value })}
+        >
+          {Object.values(ColorGradient)
+            .filter((cg) => typeof cg === 'number')
+            .map((cg) => (
+              <DropdownMenuRadioItem key={cg} value={cg}>
+                <div className="min-w-[4em] w-full h-[16px]">
+                  <BaseColorBar colorGradient={cg} />
+                </div>
+              </DropdownMenuRadioItem>
+            ))}
+        </DropdownMenuRadioGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
-
-function getGradientLabel(colorGradient: ColorGradient): string {
-  const key = Object.entries(ColorGradient).find(([, value]) => value === colorGradient)?.[0] || '';
-  return toSentenceCase(key).toLowerCase();
-}
 
 export default ColorGradientSelector;

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getFullyInstantiatedMockedObjects } from '@features/__tests__/MockObjects';
+import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { getBaseLanguageData } from '@entities/language/LanguageTypes';
@@ -39,7 +39,7 @@ describe('computeLanguageFamiliesModality', () => {
     lsl.pop.rough = 100000;
 
     const languages = { ine, sla, bat, lav, lit, ltg, svx, lsl };
-    getFullyInstantiatedMockedObjects(languages);
+    getFullyInstantiatedMockedEntities(languages);
     computeLanguageFamiliesModality(Object.values(languages));
 
     expect(ine.modality).toBe(LanguageModality.SpokenAndWritten);
@@ -64,7 +64,7 @@ describe('computeLanguageFamiliesModality', () => {
     cpi.pop.rough = 5000;
 
     const languages = { crp, cpe, tpi, lir, cpi };
-    getFullyInstantiatedMockedObjects(languages);
+    getFullyInstantiatedMockedEntities(languages);
     computeLanguageFamiliesModality(Object.values(languages));
 
     expect(crp.modality).toBe(LanguageModality.MostlySpoken);
@@ -95,7 +95,7 @@ describe('computeLanguageFamiliesModality', () => {
     avl.pop.rough = 1000000;
 
     const languages = { ara, arb, ary, arz, arq, avl };
-    getFullyInstantiatedMockedObjects(languages);
+    getFullyInstantiatedMockedEntities(languages);
     computeLanguageFamiliesModality(Object.values(languages));
 
     expect(ara.modality).toBe(LanguageModality.SpokenAndWritten);
@@ -114,7 +114,7 @@ describe('computeLanguageFamiliesModality', () => {
     ase.pop.rough = 100000;
 
     const languages = { sgn, ase };
-    getFullyInstantiatedMockedObjects(languages);
+    getFullyInstantiatedMockedEntities(languages);
     computeLanguageFamiliesModality(Object.values(languages));
 
     expect(sgn.modality).toBe(LanguageModality.Sign);

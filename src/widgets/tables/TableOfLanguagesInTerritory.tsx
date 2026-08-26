@@ -1,6 +1,6 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { CodeColumn, EndonymColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
@@ -38,14 +38,14 @@ const TableOfLanguagesInTerritory: React.FC<Props> = ({ territory }) => {
     <LocalParamsProvider overrides={{ territoryScopes: [territory.scope], page: 1, limit: 10 }}>
       <InteractiveEntityTable
         tableID={TableID.LanguagesInTerritory}
-        entities={locales}
+        ents={locales}
         shouldFilterUsingSearchBar={false}
         columns={[
           CodeColumn,
           EndonymColumn,
           {
             key: 'Language',
-            render: (loc) => <HoverableObjectName object={loc} labelSource="language" />,
+            render: (loc) => <HoverableEntityName ent={loc} labelSource="language" />,
             field: Field.Name,
           },
           {

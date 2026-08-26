@@ -67,7 +67,7 @@ describe('LanguageFilterSelector', () => {
       'German',
       'Italian',
       'Russian',
-      'Navajo',
+      'Esperanto',
       'Chinese',
       '', // why is there an empty item?
     ];
@@ -105,7 +105,7 @@ describe('LanguageFilterSelector', () => {
       'German',
       'Italian',
       'Russian',
-      'Navajo',
+      'Esperanto',
       'Chinese',
       '', // why is there an empty item?
     ];
@@ -133,7 +133,7 @@ describe('LanguageFilterSelector', () => {
       'French',
       'Italian',
       'Russian',
-      'Navajo',
+      'Esperanto',
       'Chinese',
       '', // why is there an empty item?
     ];
@@ -160,7 +160,7 @@ describe('LanguageFilterSelector', () => {
       'German',
       'Italian',
       'Russian',
-      'Navajo',
+      'Esperanto',
       'not individual language',
       'Chinese',
       '', // why is there an empty item?

@@ -1,39 +1,36 @@
+import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
-import TextInput from '@features/params/ui/TextInput';
+import Hoverable from '@features/layers/hovercard/Hoverable';
 
-export function usePotentialLocaleThreshold(label: ReactNode): {
+import { InputWithSuggestion } from '@shared/ui/input-with-suggestions';
+
+const SUGGESTIONS = ['0.001', '0.005', '0.01', '0.05', '0.1', '0.5', '1', '5', '10', '0'];
+
+export function usePotentialLocaleThreshold(
+  label: ReactNode,
+  description: string,
+): {
   percentThreshold: number;
   percentThresholdSelector: ReactNode;
 } {
-  const [percentThreshold, setPercentThreshold] = React.useState(0.05);
+  const [percentThreshold, setPercentThreshold] = React.useState(1);
 
   const percentThresholdSelector = (
-    <SelectorDisplayProvider display={SelectorDisplay.ButtonGroup}>
-      <div style={{ display: 'flex', alignItems: 'end', marginBottom: '0.5em' }}>
+    <>
+      <div>
         {label}
-        <TextInput
-          getSuggestions={async () => [
-            { searchString: '0.001', label: '0.001%' },
-            { searchString: '0.005', label: '0.005%' },
-            { searchString: '0.01', label: '0.01%' },
-            { searchString: '0.05', label: '0.05%' },
-            { searchString: '0.1', label: '0.1%' },
-            { searchString: '0.5', label: '0.5%' },
-            { searchString: '1', label: '1%' },
-            { searchString: '5', label: '5%' },
-            { searchString: '10', label: '10%' },
-          ]}
-          onSubmit={(percent: string) => setPercentThreshold(Number(percent))}
-          placeholder=""
-          value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}
-        />
+        <Hoverable hoverContent={description}>
+          <InfoIcon size="1em" />
+        </Hoverable>
       </div>
-    </SelectorDisplayProvider>
+
+      <InputWithSuggestion
+        suggestions={SUGGESTIONS}
+        value={Number.isNaN(percentThreshold) ? '' : percentThreshold.toString()}
+        setValue={(val) => setPercentThreshold(Number(val))}
+      />
+    </>
   );
 
   return { percentThreshold, percentThresholdSelector };

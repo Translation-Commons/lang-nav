@@ -6,7 +6,7 @@ import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
@@ -24,7 +24,7 @@ const columns: TableColumn<LanguageData>[] = [
     description: <CodeDisplayDescription />,
     render: (lang: LanguageData): ReactNode => (
       <div style={{ display: 'flex', alignItems: 'center' }}>
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.Code} />
+        <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.Code} />
         {<MaybeISOWarning lang={lang} />}
       </div>
     ),
@@ -67,7 +67,7 @@ const columns: TableColumn<LanguageData>[] = [
       lang.CLDR.code !== lang.ISO.code ? (
         <>
           {lang.CLDR.code}
-          <CLDRWarningNotes object={lang} />
+          <CLDRWarningNotes ent={lang} />
         </>
       ) : (
         <Deemphasized>{lang.CLDR.code}</Deemphasized>

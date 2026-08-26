@@ -96,8 +96,6 @@ function useFilters(): Record<Field, FilterFunctionType> {
 
       // Vitality
       [Field.ISOStatus]: filterByISOStatus,
-      [Field.VitalityEthnologueCoarse]: alwaysTrue,
-      [Field.VitalityEthnologueFine]: alwaysTrue,
 
       // Connections
       [Field.Language]: filterByLanguage,

@@ -1,6 +1,6 @@
 import { SearchableField } from '@features/params/PageParamTypes';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { anyWordStartsWith } from '@shared/lib/stringUtils';
 
@@ -18,14 +18,13 @@ export default function getSubstringFilterOnQuery(
     case SearchableField.NameISO:
     case SearchableField.NameCLDR:
     case SearchableField.NameGlottolog:
-    case SearchableField.NameEthnologue:
     case SearchableField.NameAny:
-      return (a: ObjectData) =>
+      return (a: EntityData) =>
         a.names
           .map((name) => anyWordStartsWith(name, query))
           .reduce((anyPasses, thisPasses) => anyPasses || thisPasses, false);
     case SearchableField.CodeOrNameAny:
-      return (a: ObjectData) =>
+      return (a: EntityData) =>
         a.names
           .map((name) => anyWordStartsWith(name, query))
           .reduce((anyPasses, thisPasses) => anyPasses || thisPasses, false) ||

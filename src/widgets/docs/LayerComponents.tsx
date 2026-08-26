@@ -10,6 +10,8 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 
 import { toSentenceCase } from '@shared/lib/stringUtils';
+import { Button } from '@shared/ui/button';
+import { ButtonGroup } from '@shared/ui/button-group';
 import LinkButton from '@shared/ui/LinkButton';
 
 import DocsCard from './DocsCard';
@@ -69,12 +71,13 @@ const LayerComponents: React.FC = () => {
             <DropdownExample display={SelectorDisplay.InlineDropdown} />
           </DocsCard>
           <DocsCard title="Button Group">
-            When you want to show all options. Best with short options.
-            <DropdownExample display={SelectorDisplay.ButtonGroup} />
-          </DocsCard>
-          <DocsCard title="Button List">
-            When you want to show all options but enable wrapping.
-            <DropdownExample display={SelectorDisplay.ButtonList} />
+            When you want to show all options. Best with short options. Use the shadcn{' '}
+            <code>&lt;ButtonGroup&gt;</code> component.
+            <ButtonGroup>
+              <Button>Default</Button>
+              <Button variant="secondary">Secondary</Button>
+              <Button variant="outline">Outline</Button>
+            </ButtonGroup>
           </DocsCard>
           <DocsCard title="Vertical List">
             When showing options in a vertical column. If the list is too long it is clipped.
@@ -101,7 +104,7 @@ const LayerComponents: React.FC = () => {
         secondary to the main content and can be temporarily hidden. Right now the only available
         panel is the entity details.
         <div>
-          <LinkButton href={LangNavPageName.Data + getNewURL({ objectID: '1' })}>
+          <LinkButton href={LangNavPageName.Data + getNewURL({ entID: '1' })}>
             Open data page with a right-hand panel open
           </LinkButton>
         </div>

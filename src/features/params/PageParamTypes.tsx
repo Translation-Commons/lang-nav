@@ -6,17 +6,13 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { ProfileType } from './Profiles';
 
-export enum ObjectType {
+export enum EntityType {
   Language = 'Language',
   Locale = 'Locale',
   Territory = 'Territory',
@@ -45,7 +41,6 @@ export enum SearchableField {
   NameISO = 'ISO Name',
   NameCLDR = 'CLDR Name',
   NameGlottolog = 'Glottolog Name',
-  NameEthnologue = 'Ethnologue Name',
 }
 
 export enum LocaleSeparator {
@@ -68,8 +63,8 @@ export enum PageParamKey {
   limit = 'limit',
   localeSeparator = 'localeSeparator',
   modalityFilter = 'modalityFilter',
-  objectID = 'objectID',
-  objectType = 'objectType',
+  entID = 'entID',
+  entType = 'entType',
   page = 'page',
   pinned = 'pinned',
   populationFocus = 'populationFocus',
@@ -86,8 +81,6 @@ export enum PageParamKey {
   territoryFilter = 'territoryFilter',
   territoryScopes = 'territoryScopes',
   view = 'view',
-  vitalityEthCoarse = 'vitalityEthCoarse',
-  vitalityEthFine = 'vitalityEthFine',
   writingSystemFilter = 'writingSystemFilter',
 }
 
@@ -105,8 +98,8 @@ export type PageParams = {
   languageSource: LanguageSource;
   limit: number; // < 1 means show all
   localeSeparator: LocaleSeparator;
-  objectID?: string;
-  objectType: ObjectType;
+  entID?: string;
+  entType: EntityType;
   page: number; // 1 indexed
   pinned: string[];
   populationFocus: PopulationFocus;
@@ -122,7 +115,5 @@ export type PageParams = {
   territoryFilter: string;
   territoryScopes: TerritoryScope[];
   view: View;
-  vitalityEthFine: VitalityEthnologueFine[];
-  vitalityEthCoarse: VitalityEthnologueCoarse[];
   writingSystemFilter: string;
 };

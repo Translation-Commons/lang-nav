@@ -6,11 +6,11 @@ import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSy
 
 /**
  * Connects locales to their languages and territories
- * @param languagesByCode - A map of language codes to LanguageData objects
- * @param territoriesByCode - A map of territory codes to TerritoryData objects
- * @param locales - An array of LocaleData objects
+ * @param languagesByCode - A map of language codes to LanguageData ents
+ * @param territoriesByCode - A map of territory codes to TerritoryData ents
+ * @param locales - An array of LocaleData ents
  *
- * @returns - The updated array of LocaleData objects -- with some locales removed, if they were missing a match to a territory or language.
+ * @returns - The updated array of LocaleData ents -- with some locales removed, if they were missing a match to a territory or language.
  */
 export default function connectLocales(
   languages: LanguageDictionary,

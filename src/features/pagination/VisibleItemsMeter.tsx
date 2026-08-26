@@ -11,19 +11,19 @@ import { getFilterByConnections } from '@features/transforms/filtering/filterByC
 import useFilters from '@features/transforms/filtering/useFilters';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import LimitSelector from './LimitSelector';
+import LimitInput from './LimitInput';
 import PaginationControls from './PaginationControls';
 
 interface Props {
-  objects: ObjectData[];
+  ents: EntityData[];
   shouldFilterUsingSearchBar?: boolean;
 }
 
-const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBar = true }) => {
+const VisibleItemsMeter: React.FC<Props> = ({ ents, shouldFilterUsingSearchBar = true }) => {
   const { page: pageParam, limit } = usePageParams();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByConnections = getFilterByConnections();
@@ -32,16 +32,16 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   const filterByPopulation = useFilters().Population;
 
   // Compute the number of filtered items
-  const nOverall = objects.length;
+  const nOverall = ents.length;
   const nFiltered = useMemo(() => {
-    return objects
+    return ents
       .filter(filterByScope)
       .filter(filterByConnections)
       .filter(filterByVitality)
       .filter(filterByPopulation)
       .filter(filterBySubstring).length;
   }, [
-    objects,
+    ents,
     filterByScope,
     filterByConnections,
     filterByVitality,
@@ -64,34 +64,17 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
   return (
     <div>
       <HighLimitWarning nShown={nShown} />
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'row',
-          gap: '0.25em',
-          flexWrap: 'wrap',
-          justifyContent: 'center',
-        }}
-      >
-        <div>
-          Showing{' '}
-          <Hoverable
-            hoverContent={
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-                <div>Set the maximum number of results that can appear.</div>
-                <LimitSelector />
-              </div>
-            }
-          >
-            {nShown?.toLocaleString()}
-          </Hoverable>
-          {nFiltered > nShown && <> of {<strong>{nFiltered.toLocaleString()}</strong>}</>} results.
+      <div className="flex flex-row flex-wrap gap-2 items-center justify-center">
+        <div className="flex flex-nowrap gap-2 text-sm items-center">
+          Showing up to <LimitInput showTitle={false} />
+          {nFiltered > nShown && <> of {nFiltered.toLocaleString()}</>} results.
         </div>
         {nOverall > nFiltered && (
           <Hoverable
+            className="text-sm"
             hoverContent={
               <FilterBreakdown
-                objects={objects}
+                ents={ents}
                 shouldFilterUsingSearchBar={shouldFilterUsingSearchBar}
               />
             }
@@ -99,12 +82,7 @@ const VisibleItemsMeter: React.FC<Props> = ({ objects, shouldFilterUsingSearchBa
             <Deemphasized>{(nOverall - nFiltered).toLocaleString()} filtered out.</Deemphasized>
           </Hoverable>
         )}
-        {nPages > 1 && (
-          <div>
-            On <PaginationControls itemCount={nFiltered} />
-            of {nPages.toLocaleString()}.
-          </div>
-        )}
+        {nPages > 1 && <PaginationControls itemCount={nFiltered} />}
       </div>
     </div>
   );

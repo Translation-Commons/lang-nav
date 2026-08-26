@@ -2,7 +2,7 @@ import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 
-import Pill from '@shared/ui/Pill';
+import { Badge } from '@shared/ui/badge';
 
 import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
@@ -23,9 +23,15 @@ const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
                 {getLanguageScopeLabel(scope)}
               </Hoverable>
             )}
-            {scopesBySource[scope]?.includes(LanguageSource.ISO) && <Pill>ISO</Pill>}
-            {scopesBySource[scope]?.includes(LanguageSource.CLDR) && <Pill>CLDR</Pill>}
-            {scopesBySource[scope]?.includes(LanguageSource.Glottolog) && <Pill>Glottolog</Pill>}
+            {scopesBySource[scope]?.includes(LanguageSource.ISO) && (
+              <Badge variant="secondary">ISO</Badge>
+            )}
+            {scopesBySource[scope]?.includes(LanguageSource.CLDR) && (
+              <Badge variant="secondary">CLDR</Badge>
+            )}
+            {scopesBySource[scope]?.includes(LanguageSource.Glottolog) && (
+              <Badge variant="secondary">Glottolog</Badge>
+            )}
           </div>
         ))}
     </div>

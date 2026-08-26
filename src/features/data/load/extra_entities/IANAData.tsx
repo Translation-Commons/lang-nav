@@ -1,4 +1,4 @@
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { LanguageDictionary } from '@entities/language/LanguageTypes';
 import { getLocaleCodeFromTags, LocaleTags, parseLocaleCode } from '@entities/locale/LocaleParsing';
@@ -90,7 +90,7 @@ export function parseIANAVariant(input: string): VariantData | null {
 
   if (ianaTag && name) {
     return {
-      type: ObjectType.Variant,
+      type: EntityType.Variant,
       ID: ianaTag,
       codeDisplay: ianaTag,
       nameDisplay: name,
@@ -143,13 +143,13 @@ function addVariantLocale(
   if (locales[localeCode]) return; // Already exists
 
   locales[localeCode] = {
-    type: ObjectType.Locale,
+    type: EntityType.Locale,
     ID: localeCode,
     codeDisplay: localeCode,
     ...localeTags, // languageCode, scriptCode, territoryCode, variantCodes
     localeSource: LocaleSource.IANA,
 
-    // Names are withheld but they are added later when all of the locale objects have been linked
+    // Names are withheld but they are added later when all of the locale entities have been linked
     nameDisplay: '',
     names: [],
     pop: { speaking: {}, writing: {} },

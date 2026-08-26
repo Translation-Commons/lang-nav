@@ -53,6 +53,10 @@ button:not([data-slot]),
   width: 1em;
 }
 
+button.flat {
+  background-color: transparent;
+}
+
 button.primary:not([data-slot]),
 .option.primary {
   color: var(--color-text-on-color);
@@ -60,6 +64,7 @@ button.primary:not([data-slot]),
 }
 
 button:not([data-slot]):hover,
+.primary:hover,
 .option:hover {
   color: var(--color-text-on-color);
   background: var(--color-button-hover);

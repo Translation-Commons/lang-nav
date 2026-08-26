@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusData } from '@entities/census/CensusTypes';
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -35,7 +35,7 @@ export function addCensusData(
 
     // Add the territory reference to it
     const territory = getTerritory(census.isoRegionCode);
-    if (territory != null && territory.type === ObjectType.Territory) {
+    if (territory != null && territory.type === EntityType.Territory) {
       census.territory = territory;
       if (territory.censuses == null) territory.censuses = [];
       territory.censuses.push(census);
@@ -81,7 +81,7 @@ function addCensusRecordsToLocales(
   Object.entries(census.languageEstimates).forEach(([languageCode, populationEstimate]) => {
     // Assuming languageCode is using the canonical ID (eg. eng not en or stan1293)
     const locale = getLocale(languageCode + '_' + census.isoRegionCode);
-    if (locale?.type === ObjectType.Locale) {
+    if (locale?.type === EntityType.Locale) {
       // Add the census to the locale
       if (locale.censusRecords == null) locale.censusRecords = [];
       locale.censusRecords.push({
@@ -110,7 +110,7 @@ function addCensusToOrganizations(organizations: OrganizationData[], census: Cen
     console.warn('Census loaded with new organization', codeDisplay);
     /* Old creation command kept in case it is needed again */
     // organizations.push({
-    //   type: ObjectType.Org,
+    //   type: EntityType.Org,
     //   ID: `org.${codeDisplay}`,
     //   codeDisplay: codeDisplay!,
     //   nameDisplay: census.collectorName ?? codeDisplay!,
@@ -135,7 +135,7 @@ function addCensusToOrganizations(organizations: OrganizationData[], census: Cen
     console.warn('Census loaded with new organization', presenterCode);
     /* Old creation command kept in case it is needed again */
     // organizations.push({
-    //   type: ObjectType.Org,
+    //   type: EntityType.Org,
     //   ID: `org.${presenterCode}`,
     //   codeDisplay: presenterCode,
     //   nameDisplay: presenterCode,

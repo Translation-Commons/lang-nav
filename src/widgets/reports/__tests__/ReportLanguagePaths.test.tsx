@@ -1,31 +1,31 @@
 import { describe, expect, it } from 'vitest';
 
 import {
-  getDisconnectedMockedObjects,
-  getFullyInstantiatedMockedObjects,
+  getDisconnectedMockedEntities,
+  getFullyInstantiatedMockedEntities,
   getMockedDataContext,
-} from '@features/__tests__/MockObjects';
-import { updateObjectsBasedOnDataParams } from '@features/data/compute/updateObjectsBasedOnDataParams';
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+} from '@features/__tests__/MockEntities';
+import { updateEntitiesBasedOnDataParams } from '@features/data/compute/updateEntitiesBasedOnDataParams';
+import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import {
   getBaseLanguageData,
   LanguageData,
   LanguageSource,
 } from '@entities/language/LanguageTypes';
-import { ObjectDictionary } from '@entities/types/DataTypes';
+import { EntityDictionary } from '@entities/types/DataTypes';
 
 import { getExtremeLanguagePaths } from '../ReportLanguagePaths';
 
 describe('ReportLanguagePaths', () => {
-  function generateObjects(): ObjectDictionary {
+  function generateEntities(): EntityDictionary {
     // Get regular data and add a language family so there is more data to process
     // Each source will have a different family structure, some of which have cycles
     // Combined: elv -> sjn -> dori0123, elv -> qya (a typical branching tree)
     // ISO: elv -> qya && sjn -> dori0123 -> sjn (a cycle)
     // Glottolog: sjn -> dori0123, sjn -> qya (a tree branching differently, no lang family)
     // CLDR: elv -> sjn -> dori0123 -> elv (a bad cycle but will be missed since there is no root)
-    const inputObjects = getDisconnectedMockedObjects();
+    const inputEnts = getDisconnectedMockedEntities();
     const elv: LanguageData = {
       ...getBaseLanguageData('elv', 'Elvish'), // fictional language family code
       nameEndonym: 'ɛlvɪʃ',
@@ -44,34 +44,34 @@ describe('ReportLanguagePaths', () => {
       Glottolog: { parentLanguageCode: 'sjn' },
       // No parent for CLDR, UNESCO or BCP
     };
-    inputObjects['qya'] = qya;
-    inputObjects['elv'] = elv;
+    inputEnts['qya'] = qya;
+    inputEnts['elv'] = elv;
     // Edit existing mocked languages to change language branching
-    if (inputObjects['sjn'].type === ObjectType.Language) {
-      inputObjects['sjn'].Combined.parentLanguageCode = 'elv';
-      inputObjects['sjn'].ISO.parentLanguageCode = 'dori0123'; // making a loop in ISO
-      inputObjects['sjn'].CLDR.parentLanguageCode = 'elv';
+    if (inputEnts['sjn'].type === EntityType.Language) {
+      inputEnts['sjn'].Combined.parentLanguageCode = 'elv';
+      inputEnts['sjn'].ISO.parentLanguageCode = 'dori0123'; // making a loop in ISO
+      inputEnts['sjn'].CLDR.parentLanguageCode = 'elv';
       // no parent for Glottolog, UNESCO or BCP
     }
-    if (inputObjects['dori0123'].type === ObjectType.Language) {
-      inputObjects['dori0123'].Combined.parentLanguageCode = 'sjn';
-      inputObjects['dori0123'].ISO.parentLanguageCode = 'sjn';
-      inputObjects['dori0123'].CLDR.parentLanguageCode = 'sjn';
-      inputObjects['dori0123'].Glottolog.parentLanguageCode = 'sjn';
+    if (inputEnts['dori0123'].type === EntityType.Language) {
+      inputEnts['dori0123'].Combined.parentLanguageCode = 'sjn';
+      inputEnts['dori0123'].ISO.parentLanguageCode = 'sjn';
+      inputEnts['dori0123'].CLDR.parentLanguageCode = 'sjn';
+      inputEnts['dori0123'].Glottolog.parentLanguageCode = 'sjn';
       // no parent for UNESCO or BCP
     }
 
     // Generate the data
-    return getFullyInstantiatedMockedObjects(inputObjects);
+    return getFullyInstantiatedMockedEntities(inputEnts);
   }
 
   it('getExtremeLanguagePaths', () => {
-    const objects = generateObjects();
-    const { allLanguoids, locales, getTerritory } = getMockedDataContext(objects);
+    const ents = generateEntities();
+    const { allLanguoids, locales, getTerritory } = getMockedDataContext(ents);
 
     Object.values(LanguageSource).forEach((languageSource) => {
       // This shouldn't throw an error even in the presence of cycles
-      updateObjectsBasedOnDataParams(
+      updateEntitiesBasedOnDataParams(
         allLanguoids,
         locales,
         getTerritory('001')!,
@@ -112,7 +112,6 @@ describe('ReportLanguagePaths', () => {
           break;
         case LanguageSource.UNESCO: // No connections from these sources, all languages are orphans
         case LanguageSource.BCP:
-        case LanguageSource.Ethnologue:
           expect(orphans.join(' ')).toEqual('sjn dori0123 qya elv');
           expect(longestPaths).toEqual([]);
           expect(cycles).toEqual([]); // there are no cycles

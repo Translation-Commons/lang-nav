@@ -7,11 +7,7 @@ import { SortBehavior } from '@features/transforms/sorting/SortTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
 import { LanguageSource } from '@entities/language/LanguageTypes';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from '@entities/language/vitality/VitalityTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -20,8 +16,8 @@ import { parseLanguageScope } from '@strings/LanguageScopeStrings';
 import { parseTerritoryScope } from '@strings/TerritoryScopeStrings';
 
 import {
+  EntityType,
   LocaleSeparator,
-  ObjectType,
   PageParamKey,
   PageParams,
   SearchableField,
@@ -88,12 +84,6 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
       case PageParamKey.isoStatus:
         params.isoStatus = parseNumericEnumArray(value, LanguageISOStatus);
         break;
-      case PageParamKey.vitalityEthFine:
-        params.vitalityEthFine = parseNumericEnumArray(value, VitalityEthnologueFine);
-        break;
-      case PageParamKey.vitalityEthCoarse:
-        params.vitalityEthCoarse = parseNumericEnumArray(value, VitalityEthnologueCoarse);
-        break;
 
       // Object mapping (columns)
       case PageParamKey.columns:
@@ -101,8 +91,8 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
 
       // Enum values
-      case PageParamKey.objectType:
-        params.objectType = value as ObjectType;
+      case PageParamKey.entType:
+        params.entType = value as EntityType;
         break;
       case PageParamKey.view:
         params.view = value as View;
@@ -155,7 +145,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
         break;
 
       // Freeform strings
-      case PageParamKey.objectID:
+      case PageParamKey.entID:
       case PageParamKey.searchString:
       case PageParamKey.languageFilter:
       case PageParamKey.languageFamilyFilter:

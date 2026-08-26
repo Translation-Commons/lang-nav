@@ -6,7 +6,9 @@ export enum FieldGroup {
   Identity,
   Status,
   Relation,
+  CountOf,
   Quantity,
+  Population,
   Other,
 }
 
@@ -38,8 +40,6 @@ export function getFieldGroup(field: Field): FieldGroup {
       return FieldGroup.Status; // Status - Digital Support
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
       return FieldGroup.Status; // Vitality
 
     case Field.Language:
@@ -53,6 +53,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.SourceForLanguage:
     case Field.SourceForPopulation:
       return FieldGroup.Relation;
+
     case Field.CountOfLanguages:
     case Field.CountOfKeyboards:
     case Field.CountOfWritingSystems:
@@ -60,7 +61,7 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.CountOfCountries:
     case Field.CountOfCensuses:
     case Field.CountOfVariants:
-      return FieldGroup.Relation; // Count
+      return FieldGroup.CountOf; // Count
 
     case Field.Area:
     case Field.Depth:
@@ -69,16 +70,17 @@ export function getFieldGroup(field: Field): FieldGroup {
     case Field.Longitude:
     case Field.Literacy:
       return FieldGroup.Quantity;
+
     case Field.Population:
     case Field.PopulationDirectlySourced:
     case Field.PopulationSpeaking:
     case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
-      return FieldGroup.Quantity; // Population
+      return FieldGroup.Population; // Population
     case Field.PercentOfTerritoryPopulation:
     case Field.PercentOfOverallLanguageSpeakers:
     case Field.PopulationPercentInBiggestDescendantLanguage:
-      return FieldGroup.Quantity; // Population Percent
+      return FieldGroup.Population; // Population Percent
 
     case Field.Date:
     case Field.None:

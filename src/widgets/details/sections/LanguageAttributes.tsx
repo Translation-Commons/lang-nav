@@ -3,7 +3,7 @@ import React from 'react';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -26,7 +26,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
       )}
       {primaryWritingSystem && (
         <DetailsField title="Primary Writing System">
-          <HoverableObjectName object={primaryWritingSystem} />
+          <HoverableEntityName ent={primaryWritingSystem} />
         </DetailsField>
       )}
       {Object.values(writingSystems).length > 0 && (
@@ -35,7 +35,7 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
             {Object.values(writingSystems)
               .sort(getSortFunction())
               .map((writingSystem) => (
-                <HoverableObjectName key={writingSystem.ID} object={writingSystem} />
+                <HoverableEntityName key={writingSystem.ID} ent={writingSystem} />
               ))}
           </CommaSeparated>
         </DetailsField>

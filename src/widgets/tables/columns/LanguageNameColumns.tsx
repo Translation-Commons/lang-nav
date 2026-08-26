@@ -1,7 +1,7 @@
 import { SearchableField } from '@features/params/PageParamTypes';
 import { EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
-import ObjectFieldHighlightedByPageSearch from '@features/transforms/search/ObjectFieldHighlightedByPageSearch';
+import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
 import LanguageOtherNames from '@entities/language/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
@@ -17,7 +17,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in ISO',
     render: (lang) =>
       lang.nameDisplay !== lang.ISO.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameISO} />
+        <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameISO} />
       ) : (
         <Deemphasized>{lang.ISO.name}</Deemphasized>
       ),
@@ -34,7 +34,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in CLDR',
     render: (lang) =>
       lang.nameDisplay !== lang.CLDR.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameCLDR} />
+        <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameCLDR} />
       ) : (
         <Deemphasized>{lang.CLDR.name}</Deemphasized>
       ),
@@ -44,19 +44,9 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
     labelInColumnGroup: 'in Glottolog',
     render: (lang) =>
       lang.nameDisplay !== lang.Glottolog.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameGlottolog} />
+        <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameGlottolog} />
       ) : (
         <Deemphasized>{lang.Glottolog.name}</Deemphasized>
-      ),
-  },
-  {
-    key: 'Ethnologue Name',
-    labelInColumnGroup: 'in Ethnologue',
-    render: (lang) =>
-      lang.nameDisplay !== lang.Ethnologue.name ? (
-        <ObjectFieldHighlightedByPageSearch object={lang} field={SearchableField.NameEthnologue} />
-      ) : (
-        <Deemphasized>{lang.Ethnologue.name}</Deemphasized>
       ),
   },
   {

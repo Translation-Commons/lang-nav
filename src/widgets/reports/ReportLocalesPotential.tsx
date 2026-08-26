@@ -2,10 +2,7 @@ import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
-import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
-import SelectorLabel from '@features/params/ui/SelectorLabel';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -21,24 +18,21 @@ import usePotentialLocales from '@entities/locale/usePotentialLocales';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CollapsibleReport from '@shared/containers/CollapsibleReport';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 const ReportLocalesPotential: React.FC = () => {
   const { percentThreshold: minInCountry, percentThresholdSelector: minInCountrySelector } =
     usePotentialLocaleThreshold(
-      <SelectorLabel
-        label="% in Country:"
-        description="Limit results by the minimum percent population in a territory that uses the language."
-      />,
+      '% in Country:',
+      'Limit results by the minimum percent population in a territory that uses the language.',
     );
-  const [requireBothPercents, setRequireBothPercents] = React.useState(true);
+  const [requireBothPercents, setRequireBothPercents] = React.useState(false);
   const {
     percentThreshold: minOfLangWorldWide,
     percentThresholdSelector: minOfLangWorldWideSelector,
   } = usePotentialLocaleThreshold(
-    <SelectorLabel
-      label="% of Lang Worldwide:"
-      description="Limit results by the minimum percent population of the language compared worldwide."
-    />,
+    '% of Lang Worldwide:',
+    'Limit results by the minimum percent population of the language compared worldwide.',
   );
   const isPercentEnough = useCallback(
     (percInCountry: number | undefined, percOfLangWorldWide: number | undefined) => {
@@ -68,15 +62,17 @@ const ReportLocalesPotential: React.FC = () => {
         here may be worth considering.
       </p>
       Filter by minimum:
-      <div style={{ display: 'flex', gap: '1em', flexWrap: 'wrap', alignItems: 'start' }}>
+      <div className="flex flex-wrap gap-2 items-center p-4 text-sm">
         {minInCountrySelector}
-        <Selector<number>
-          options={[0, 1]}
-          onChange={(value) => setRequireBothPercents(value === 1)}
-          display={SelectorDisplay.ButtonGroup}
-          selected={requireBothPercents ? 1 : 0}
-          getOptionLabel={(v) => (v ? 'and' : 'or')}
-        />
+        <Tabs
+          value={requireBothPercents ? '1' : '0'}
+          onValueChange={(value) => setRequireBothPercents(value === '1')}
+        >
+          <TabsList>
+            <TabsTrigger value="1">and</TabsTrigger>
+            <TabsTrigger value="0">or</TabsTrigger>
+          </TabsList>
+        </Tabs>
         {minOfLangWorldWideSelector}
       </div>
       <SubReport title="Largest Populations" locales={potentialLocales.largest}>
@@ -159,67 +155,58 @@ const PotentialLocalesTable: React.FC<{
   return (
     <InteractiveEntityTable<LocaleData>
       tableID={TableID.PotentialLocales}
-      entities={locales}
+      ents={locales}
       columns={[
         {
           key: 'Potential Locale',
-          render: (object) => <HoverableObjectName object={object} labelSource="code" />,
+          render: (ent) => <HoverableEntityName ent={ent} labelSource="code" />,
           field: Field.Code,
         },
         {
           key: 'Language',
-          render: (object) =>
-            object.language ? (
-              <HoverableObjectName object={object.language} />
-            ) : (
-              object.languageCode
-            ),
+          render: (ent) =>
+            ent.language ? <HoverableEntityName ent={ent.language} /> : ent.languageCode,
           field: Field.Name,
         },
         {
           key: 'Population (Adjusted)',
-          render: (object) => object.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locales
+          render: (ent) => ent.pop.speaking.adjusted, // All pop numbers are saved in the "speaking" field for potential locales
           field: Field.Population,
         },
         {
           key: 'Population (in Census)',
-          render: (object) => object.pop.speaking.unadjusted,
+          render: (ent) => ent.pop.speaking.unadjusted,
           field: Field.PopulationDirectlySourced,
           isInitiallyVisible: false,
         },
         {
           key: '% in Territory',
-          render: (object) => object.pop.speaking.percent,
+          render: (ent) => ent.pop.speaking.percent,
           field: Field.PercentOfTerritoryPopulation,
         },
         {
           key: '% of Global Language Speakers',
-          render: (object) =>
-            object.pop.speaking.adjusted &&
-            (object.pop.speaking.adjusted * 100) / (object.language?.pop.overall ?? 1),
+          render: (ent) =>
+            ent.pop.speaking.adjusted &&
+            (ent.pop.speaking.adjusted * 100) / (ent.language?.pop.overall ?? 1),
           field: Field.PercentOfOverallLanguageSpeakers,
         },
         {
           key: 'Population Source',
-          render: (object) => (
-            <LocaleCensusCitation locale={object} focus={PopulationFocus.Speaking} />
-          ),
+          render: (ent) => <LocaleCensusCitation locale={ent} focus={PopulationFocus.Speaking} />,
         },
         {
           key: 'Related Locale',
-          render: (object) => (
-            <HoverableObjectName
-              object={object.relatedLocales?.childLanguages?.[0]}
-              labelSource="code"
-            />
+          render: (ent) => (
+            <HoverableEntityName ent={ent.relatedLocales?.childLanguages?.[0]} labelSource="code" />
           ),
         },
         {
           key: 'Copy',
-          render: (object) => (
+          render: (ent) => (
             <button
               style={{ padding: '0.25em' }}
-              onClick={() => navigator.clipboard.writeText(getLocaleExportString(object))}
+              onClick={() => navigator.clipboard.writeText(getLocaleExportString(ent))}
             >
               <CopyIcon size="1em" display="block" />
             </button>

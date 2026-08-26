@@ -4,6 +4,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import ReportID from './ReportID';
+import ReportLocalesPotential from './ReportLocalesPotential';
 
 const LocaleIndigeneityReport = React.lazy(
   () => import('@entities/locale/localstatus/LocaleIndigeneityReport'),
@@ -22,7 +23,8 @@ const ReportLanguagesWithAmbiguousNames = React.lazy(
 const ReportLocaleCitationCompleteness = React.lazy(
   () => import('./ReportLocaleCitationCompleteness'),
 );
-const ReportLocalesPotential = React.lazy(() => import('./ReportLocalesPotential'));
+// const ReportLocalesPotential = React.lazy(() => import('./ReportLocalesPotential'));
+
 const ReportWritingSystemsLanguagesWithout = React.lazy(
   () => import('./ReportWritingSystemsLanguagesWithout'),
 );

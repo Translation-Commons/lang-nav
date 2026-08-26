@@ -1,11 +1,11 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { OrganizationData } from '@entities/org/OrganizationTypes';
 
-import { loadObjectsFromFile } from './loadObjectsFromFile';
+import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadOrganizations(): Promise<Record<string, OrganizationData> | void> {
-  return await loadObjectsFromFile<OrganizationData>(
+  return await loadEntitiesFromFile<OrganizationData>(
     'data/tc/organizations.tsv',
     parseOrganizationLine,
   );
@@ -23,7 +23,7 @@ function parseOrganizationLine(line: string): OrganizationData | undefined {
   const [codeDisplay, nameDisplay, nameEndonym, headquartersCode, parentCode, url] = parts;
 
   return {
-    type: ObjectType.Org,
+    type: EntityType.Org,
     ID: `org.${codeDisplay}`,
     codeDisplay,
     nameDisplay,

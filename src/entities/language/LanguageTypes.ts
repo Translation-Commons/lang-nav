@@ -6,7 +6,7 @@
 import React from 'react';
 
 import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
 import { LocaleData, PopulationSourceCategory } from '@entities/locale/LocaleTypes';
@@ -14,7 +14,7 @@ import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
 import { CLDRCoverageData, CLDRLanguageMatchData } from '../types/CLDRTypes';
-import { ObjectBase } from '../types/DataTypes';
+import { EntityBase } from '../types/DataTypes';
 
 import {
   DigitalSupportScore,
@@ -23,11 +23,7 @@ import {
   WikipediaData,
 } from './digitalsupport/DigitalSupportTypes';
 import { LanguageModality } from './LanguageModality';
-import {
-  LanguageISOStatus,
-  VitalityEthnologueCoarse,
-  VitalityEthnologueFine,
-} from './vitality/VitalityTypes';
+import { LanguageISOStatus } from './vitality/VitalityTypes';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;
@@ -37,7 +33,6 @@ export enum LanguageSource {
   ISO = 'ISO', // ISO 639-3, 639-5
   BCP = 'BCP', // ISO but preferring 639-1 codes
   UNESCO = 'UNESCO', //  limiting to languages in the UNESCO World Atlas of Languages
-  Ethnologue = 'Ethnologue', // limiting to languages present in Ethnologue, a subset of ISO
   Glottolog = 'Glottolog',
   CLDR = 'CLDR', // ISO but with some CLDR-specific aliasing
 }
@@ -72,23 +67,7 @@ export enum LanguageField {
 export type LanguageVitality = {
   meta?: number; // 0-9 based on other vitality scores
   iso?: LanguageISOStatus; // Derived
-  ethFine?: VitalityEthnologueFine; // Extended Graded Intergenerational Disruption Scale, from Ethnologue or computed from other factors
-  ethCoarse?: VitalityEthnologueCoarse; // Computed from other factors
-};
-
-export enum EthnologueDigitalSupport {
-  Thriving = 5,
-  Vital = 4,
-  Ascending = 3,
-  Emerging = 2,
-  Still = 1,
-}
-
-export type EthnologueLanguageData = LanguageDataInSource & {
-  population?: number;
-  vitality2012?: VitalityEthnologueFine;
-  vitality2025?: VitalityEthnologueCoarse;
-  digitalSupport?: EthnologueDigitalSupport;
+  // potential other vitality estimates go here
 };
 
 export type LanguageSpecificPopulationData = {
@@ -105,8 +84,8 @@ export type LanguagePopulationData = {
   rough?: number; // from languages.tsv
 };
 
-export interface LanguageData extends ObjectBase {
-  type: ObjectType.Language;
+export interface LanguageData extends EntityBase {
+  type: EntityType.Language;
 
   // Provided by the TSV files
   ID: LanguageCode; // Stable ID, favors ISO
@@ -143,7 +122,7 @@ export interface LanguageData extends ObjectBase {
   coordsSource?: LanguageSource;
   depth?: number; // Computed depth in the language family tree, with 0 being a root language
 
-  // References to other objects, filled in after loading the TSV
+  // References to other entities, filled in after loading the TSV
   locales: LocaleData[];
   primaryWritingSystem?: WritingSystemData;
   writingSystems: Record<ScriptCode, WritingSystemData>;
@@ -169,13 +148,12 @@ export interface LanguageData extends ObjectBase {
     dataProvider?: LanguageData | LocaleData;
     languageMatch?: CLDRLanguageMatchData[];
   };
-  Ethnologue: EthnologueLanguageData;
 }
 
-// Used to create a new language object with minimal data
+// Used to create a new language entity with minimal data
 export function getBaseLanguageData(code: LanguageCode, name: string): LanguageData {
   return {
-    type: ObjectType.Language,
+    type: EntityType.Language,
     ID: code,
     codeDisplay: code,
     nameCanonical: name,
@@ -198,7 +176,6 @@ export function getBaseLanguageData(code: LanguageCode, name: string): LanguageD
     UNESCO: {},
     Glottolog: {},
     CLDR: {},
-    Ethnologue: {},
   };
 }
 

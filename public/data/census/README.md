@@ -203,7 +203,7 @@ Note that this example shows a rare but possible case where the language row sho
 
 Put the new `.tsv` file in the appropriate directory (official, unofficial, or another subfolder to group common sources). Add the new file's filename to the `censusList.txt` file in its directory. Test out that the new data is loaded by running the project locally (instructions in the [README](/README.md)).
 
-Check the census table view at your local domain eg. `https://localhost:5173/lang-nav/data?objectType=Census&view=Table` to make sure your new censuses appear and there are roughly as many languages as you expected. Noting that `mis`/`und`/`mul` languages have already been filtered out.
+Check the census table view at your local domain eg. `https://localhost:5173/lang-nav/data?entType=Census&view=Table` to make sure your new censuses appear and there are roughly as many languages as you expected. Noting that `mis`/`und`/`mul` languages have already been filtered out.
 
-It's recommended to check the details view `https://localhost:5173/lang-nav/?view=Details&objectID=<censusID>` for each census table you added.
+It's recommended to check the details view `https://localhost:5173/lang-nav/?view=Details&entID=<censusID>` for each census table you added.
 Once the file is read in with the others, test it out on your local host and if it looks good, then you submit a pull request to the main project.

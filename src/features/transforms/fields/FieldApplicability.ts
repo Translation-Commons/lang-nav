@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import { unique } from '@shared/lib/setUtils';
@@ -7,13 +7,11 @@ import Transform from '../TransformEnum';
 
 import Field from './Field';
 
-// Common fields available across most object types
+// Common fields available across most entity types
 const COMMON_FIELDS: Field[] = [Field.None, Field.Code, Field.Name, Field.Population];
 
 // Fields that are in development and not yet available for use in transforms but there may be placeholder values
 export const FIELDS_IN_DEVELOPMENT: Field[] = [
-  Field.VitalityEthnologueCoarse,
-  Field.VitalityEthnologueFine,
   Field.SourceType,
   Field.Indigeneity,
   Field.CLDRCoverage,
@@ -30,29 +28,29 @@ export const FIELDS_IN_DEVELOPMENT: Field[] = [
  * Sometimes though we re-interpret the field meaning, eg. Language.CountOfLanguages is
  * the number of child language nodes.
  */
-export const UNINTERESTING_FIELD_COMBINATIONS: Record<ObjectType, Field[]> = {
-  [ObjectType.Language]: [Field.Language, Field.VariantType],
-  [ObjectType.Territory]: [Field.PopulationDirectlySourced],
-  [ObjectType.WritingSystem]: [
+export const UNINTERESTING_FIELD_COMBINATIONS: Record<EntityType, Field[]> = {
+  [EntityType.Language]: [Field.Language, Field.VariantType],
+  [EntityType.Territory]: [Field.PopulationDirectlySourced],
+  [EntityType.WritingSystem]: [
     Field.WritingSystem,
     Field.CountOfWritingSystems,
     Field.PopulationOfDescendants,
   ],
-  [ObjectType.Variant]: [Field.Variant, Field.CountOfVariants],
-  [ObjectType.Locale]: [],
-  [ObjectType.Keyboard]: [],
-  [ObjectType.Census]: [
+  [EntityType.Variant]: [Field.Variant, Field.CountOfVariants],
+  [EntityType.Locale]: [],
+  [EntityType.Keyboard]: [],
+  [EntityType.Census]: [
     Field.CountOfCensuses,
     Field.CountOfChildTerritories,
     Field.CountOfCountries,
   ],
-  [ObjectType.Org]: [],
+  [EntityType.Org]: [],
 };
 
-// Specific fields available per object type
-function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
-  switch (objectType) {
-    case ObjectType.Locale:
+// Specific fields available per entity type
+function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
+  switch (entType) {
+    case EntityType.Locale:
       return [
         Field.Endonym,
         Field.LanguageScope,
@@ -72,8 +70,6 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.VitalityMetascore, // not particularly useful
         Field.ISOStatus,
-        Field.VitalityEthnologueCoarse,
-        Field.VitalityEthnologueFine,
 
         Field.PopulationDirectlySourced,
         Field.PopulationSpeaking,
@@ -100,7 +96,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.Depth,
       ];
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return [
         Field.Endonym,
         Field.TerritoryScope,
@@ -132,7 +128,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.PercentOfTerritoryPopulation,
         Field.PopulationPercentInBiggestDescendantLanguage,
       ];
-    case ObjectType.Language:
+    case EntityType.Language:
       return [
         Field.Endonym,
         Field.LanguageScope,
@@ -144,8 +140,6 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
 
         Field.VitalityMetascore,
         Field.ISOStatus,
-        Field.VitalityEthnologueFine,
-        Field.VitalityEthnologueCoarse,
 
         Field.Language, // Equivalent to DisplayName for languages
         Field.LanguageFamily,
@@ -176,7 +170,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.PopulationPercentInBiggestDescendantLanguage,
         Field.PercentOfOverallLanguageSpeakers,
       ];
-    case ObjectType.Census:
+    case EntityType.Census:
       return [
         Field.TerritoryScope,
         Field.SourceType,
@@ -188,14 +182,14 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfLanguages,
         Field.CountOfChildTerritories, // 0 or 1
         Field.CountOfCountries, // 0 or 1
-        Field.CountOfCensuses, // always 1 for census objects, but useful for transforms that look at related objects
+        Field.CountOfCensuses, // always 1 for census entities, but useful for transforms that look at related entities
 
         Field.PopulationDirectlySourced,
         Field.PercentOfTerritoryPopulation,
 
         Field.Date,
       ];
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return [
         Field.Endonym,
         Field.WritingSystemScope,
@@ -217,7 +211,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Example,
         // Field.Literacy, Data not available yet
       ];
-    case ObjectType.Variant:
+    case EntityType.Variant:
       return [
         Field.VariantType,
 
@@ -238,7 +232,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Date,
         Field.Description,
       ];
-    case ObjectType.Keyboard:
+    case EntityType.Keyboard:
       return [
         Field.LanguageScope,
         Field.WritingSystemScope, // Technically possible but uninteresting
@@ -260,7 +254,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.CountOfCountries, // 0 or 1
         Field.CountOfVariants,
       ];
-    case ObjectType.Org:
+    case EntityType.Org:
       return [
         Field.Endonym,
 
@@ -272,7 +266,7 @@ function getSpecificFieldsForObjectType(objectType: ObjectType): Field[] {
         Field.Territory,
       ];
     default:
-      return enforceExhaustiveSwitch(objectType);
+      return enforceExhaustiveSwitch(entType);
   }
 }
 
@@ -308,8 +302,6 @@ function getFieldsForTransform(transform: Transform): Field[] {
 
         Field.VitalityMetascore,
         Field.ISOStatus,
-        Field.VitalityEthnologueFine,
-        Field.VitalityEthnologueCoarse,
 
         Field.Indigeneity,
         Field.LanguageFormedHere,
@@ -377,8 +369,6 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.LanguageScope,
         Field.TerritoryScope,
         Field.ISOStatus,
-        Field.VitalityEthnologueFine,
-        Field.VitalityEthnologueCoarse,
         Field.Name, // Technically filters name and code right now, depending on SearchBy
         Field.Population,
       ];
@@ -388,37 +378,35 @@ function getFieldsForTransform(transform: Transform): Field[] {
 }
 
 /**
- * Returns all fields available for a given object type.
+ * Returns all fields available for a given entity type.
  * This is the authoritative list that other UIs (sorting, coloring, scaling) intersect with.
  */
-function getFieldsForObjectType(objectType: ObjectType): Field[] {
-  const specific = getSpecificFieldsForObjectType(objectType);
+function getFieldsForEntityType(entType: EntityType): Field[] {
+  const specific = getSpecificFieldsForEntityType(entType);
   return unique([...COMMON_FIELDS, ...specific]).filter(
-    (f) => !UNINTERESTING_FIELD_COMBINATIONS[objectType].includes(f),
+    (f) => !UNINTERESTING_FIELD_COMBINATIONS[entType].includes(f),
   );
 }
 
 /**
- * Helper to intersect the fields available for a transform with fields that exist for an object type.
+ * Helper to intersect the fields available for a transform with fields that exist for an entity type.
  * Preserves the order from the transform list.
  */
-export function getApplicableFields(transform?: Transform, objectType?: ObjectType): Field[] {
+export function getApplicableFields(transform?: Transform, entType?: EntityType): Field[] {
   const transformFields = transform ? getFieldsForTransform(transform) : Object.values(Field);
-  const objectFields = objectType ? getFieldsForObjectType(objectType) : Object.values(Field);
-  return transformFields.filter(
-    (f) => objectFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f),
-  );
+  const entFields = entType ? getFieldsForEntityType(entType) : Object.values(Field);
+  return transformFields.filter((f) => entFields.includes(f) && !FIELDS_IN_DEVELOPMENT.includes(f));
 }
 
 export function isFieldApplicable(
   field: Field,
   transform?: Transform,
-  objectType?: ObjectType,
+  entType?: EntityType,
 ): boolean {
   return (
     (transform ? getFieldsForTransform(transform).includes(field) : true) &&
-    (objectType ? getFieldsForObjectType(objectType).includes(field) : true) &&
+    (entType ? getFieldsForEntityType(entType).includes(field) : true) &&
     !FIELDS_IN_DEVELOPMENT.includes(field) &&
-    (objectType ? !UNINTERESTING_FIELD_COMBINATIONS[objectType].includes(field) : true)
+    (entType ? !UNINTERESTING_FIELD_COMBINATIONS[entType].includes(field) : true)
   );
 }

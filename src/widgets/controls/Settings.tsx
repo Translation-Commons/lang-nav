@@ -3,11 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { LangNavPageName } from '@app/PageRoutes.tsx';
 
-import LimitInput from '@features/pagination/LimitInput';
-import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
-import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
-import ScaleBySelector from '@features/transforms/scales/ScaleBySelector';
 import SearchBySelector from '@features/transforms/search/SearchBySelector';
 
 import ClearAllPinsButton from './selectors/ClearAllPinsButton';
@@ -24,10 +20,6 @@ const Settings = (): React.ReactNode => {
     <ViewSettingsPanel>
       {isDataPage && (
         <>
-          <LimitInput />
-          <ColorBySelector />
-          <ColorGradientSelector />
-          <ScaleBySelector />
           <FieldFocusSelector />
           <PopulationFocusSelector />
           <LocaleSeparatorSelector />

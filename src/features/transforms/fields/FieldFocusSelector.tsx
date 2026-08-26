@@ -8,7 +8,7 @@ import Field from './Field';
 import { getApplicableFields } from './FieldApplicability';
 
 const FieldFocusSelector: React.FC = () => {
-  const { fieldFocus, updatePageParams, view, objectType } = usePageParams();
+  const { fieldFocus, updatePageParams, view, entType } = usePageParams();
 
   // Only applies to the TreeList view for now, but could be expanded to other views in the future
   if (view !== View.Hierarchy && view !== View.Map) return null;
@@ -17,7 +17,7 @@ const FieldFocusSelector: React.FC = () => {
     <Selector<Field>
       selectorLabel="Show Data"
       selectorDescription="Choose data to show to the right side of the tree list nodes."
-      options={getApplicableFields(undefined, objectType)}
+      options={getApplicableFields(undefined, entType)}
       onChange={(field) => updatePageParams({ fieldFocus: field })}
       selected={fieldFocus}
     />

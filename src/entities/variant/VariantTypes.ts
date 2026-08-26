@@ -1,8 +1,8 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
-import { ObjectBase } from '@entities/types/DataTypes';
+import { EntityBase } from '@entities/types/DataTypes';
 
 export type VariantIANATag = string; // IANA tag, eg. valencia in cat-ES-valencia
 
@@ -13,8 +13,8 @@ export enum VariantType {
   Dialect = 'd',
 }
 
-export interface VariantData extends ObjectBase {
-  type: ObjectType.Variant;
+export interface VariantData extends EntityBase {
+  type: EntityType.Variant;
   ID: VariantIANATag;
   codeDisplay: VariantIANATag;
   nameDisplay: string;
@@ -29,7 +29,7 @@ export interface VariantData extends ObjectBase {
   variantType?: VariantType;
   equivalentLanguageCode?: LanguageCode; // When this variant has a direct match to a languoid, this is the code of that languoid. For example "valencia" can be expressed as a variant (cat_valencia) OR a languoid from glottolog vale1252
 
-  // References to other objects
+  // References to other entities
   languages: LanguageData[]; // The languages that have this variation
   locales: LocaleData[];
   equivalentLanguage?: LanguageData; // The precise languoid that matches this variant

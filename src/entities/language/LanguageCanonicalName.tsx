@@ -3,15 +3,15 @@ import React from 'react';
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import usePageParams from '@features/params/usePageParams';
 
+import { Badge } from '@shared/ui/badge';
 import Highlightable from '@shared/ui/Highlightable';
 import LinkButton from '@shared/ui/LinkButton';
-import Pill from '@shared/ui/Pill';
 
 import { LanguageData } from './LanguageTypes';
 
 const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { searchString } = usePageParams();
-  const { codeDisplay, nameCanonical, Glottolog, ISO, CLDR, Ethnologue } = lang;
+  const { codeDisplay, nameCanonical, Glottolog, ISO, CLDR } = lang;
 
   return (
     <div style={{ display: 'inline-flex', alignItems: 'center', gap: '0.25em' }}>
@@ -28,7 +28,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>Glottolog</Pill>
+          <Badge variant="secondary">Glottolog</Badge>
         </Hoverable>
       )}
       {ISO.name === nameCanonical && (
@@ -43,7 +43,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>ISO</Pill>
+          <Badge variant="secondary">ISO</Badge>
         </Hoverable>
       )}
       {CLDR.name === nameCanonical && (
@@ -60,22 +60,7 @@ const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           style={{ backgroundColor: 'transparent' }}
         >
-          <Pill>CLDR</Pill>
-        </Hoverable>
-      )}
-      {Ethnologue.name === nameCanonical && (
-        <Hoverable
-          hoverContent={
-            <>
-              <div>Same name as is in the Ethnologue data</div>
-              <LinkButton href={`https://www.ethnologue.com/language/${Ethnologue.code}`}>
-                View Ethnologue Entry
-              </LinkButton>
-            </>
-          }
-          style={{ backgroundColor: 'transparent' }}
-        >
-          <Pill>Ethnologue</Pill>
+          <Badge variant="secondary">CLDR</Badge>
         </Hoverable>
       )}
     </div>

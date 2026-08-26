@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
@@ -49,8 +49,8 @@ function getWeighted3DCoordinates(ent: LanguageData | TerritoryData): {
 }
 
 function getEntityWeight(ent: LanguageData | TerritoryData): number {
-  if (ent.type === ObjectType.Language) return (ent.pop.overall || 0) ** 0.25;
-  if (ent.type === ObjectType.Territory) return (ent.landArea || 0) ** 0.25;
+  if (ent.type === EntityType.Language) return (ent.pop.overall || 0) ** 0.25;
+  if (ent.type === EntityType.Territory) return (ent.landArea || 0) ** 0.25;
   return 1;
 }
 

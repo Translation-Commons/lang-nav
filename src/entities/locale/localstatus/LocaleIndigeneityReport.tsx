@@ -1,13 +1,13 @@
 import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo } from 'react';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 import Selector from '@features/params/ui/Selector';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
-import LinkButton from '@shared/ui/LinkButton';
+import ExternalLink from '@shared/ui/ExternalLink';
 
 import LocaleIndigeneityTable from './LocaleIndigeneityTable';
 
@@ -19,7 +19,7 @@ enum IncludeCriteria {
 
 const LocaleIndigeneityReport: React.FC = () => {
   const locales = useFilteredEntities({})
-    .filteredEntities.filter((l) => l.type === ObjectType.Locale)
+    .filteredEntities.filter((l) => l.type === EntityType.Locale)
     .filter((l) => !l.writingSystem && !l.variants && l.territory) as LocaleData[];
 
   const [includeCriteria, setIncludeCriteria] = React.useState(IncludeCriteria.MissingData);
@@ -62,10 +62,10 @@ const LocaleIndigeneityReport: React.FC = () => {
         reliable. Predictions are shown in a lighter colored text than user-entered data. You can
         click the cycle button to accept a prediction, switch to the other state, or switch back to
         unknown. To save these changes to langnav, use the button at the bottom to copy the changed
-        data and submit a PR to update
-        <LinkButton href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
+        data and submit a PR to update{' '}
+        <ExternalLink href="https://github.com/Translation-Commons/lang-nav/blob/master/public/data/indigeneity.tsv">
           indigeneity.tsv
-        </LinkButton>
+        </ExternalLink>
         .
       </div>
       <Selector<IncludeCriteria>

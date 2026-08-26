@@ -1,73 +1,54 @@
 import { ReactNode } from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
-import { ObjectType } from '@features/params/PageParamTypes';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
-import ColorBySelector from '@features/transforms/coloring/ColorBySelector';
-import ColorGradientSelector from '@features/transforms/coloring/ColorGradientSelector';
-import Field from '@features/transforms/fields/Field';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
-import { toTitleCase } from '@shared/lib/stringUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
 function ViewMap() {
-  const { colorBy, objectType } = usePageParams();
+  const { entType } = usePageParams();
   const { filteredEntities, allEntities } = useFilteredEntities({});
-  const { getCurrentEntities } = usePagination<ObjectData>();
+  const { getCurrentEntities } = usePagination<EntityData>();
 
-  const isDrawingTerritories = objectType !== ObjectType.Language;
+  const isDrawingTerritories = entType !== EntityType.Language;
 
-  if ([ObjectType.Variant, ObjectType.Keyboard, ObjectType.Org].includes(objectType)) {
+  if ([EntityType.Variant, EntityType.Keyboard, EntityType.Org].includes(entType)) {
     return (
       <div>
-        Map view is not well-defined for {getEntityTypeLabelPlural(objectType)}. Please select a
-        different object type.
+        Map view is not well-defined for {getEntityTypeLabelPlural(entType)}. Please select a
+        different entity type.
       </div>
     );
   }
 
   const entsWithoutCoordinates =
-    objectType == ObjectType.Language
+    entType == EntityType.Language
       ? getCurrentEntities(filteredEntities).filter(
           (ent) =>
-            ent.type === ObjectType.Language && (ent.latitude == null || ent.longitude == null),
+            ent.type === EntityType.Language && (ent.latitude == null || ent.longitude == null),
         )
       : [];
 
   return (
     <MapContainer>
-      <h2 style={{ margin: 0 }}>{toTitleCase(objectType)} Map</h2>
-      <div>{getMapDescription(objectType)}</div>
-      {!isDrawingTerritories && <VisibleItemsMeter objects={allEntities} />}
+      <div>{getMapDescription(entType)}</div>
+      {!isDrawingTerritories && <VisibleItemsMeter ents={allEntities} />}
       <EntityMap entities={filteredEntities} allowSidebar={true} />
-      <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-        <div style={{ display: 'flex', gap: '0.5em', alignItems: 'center' }}>
-          <div>
-            {colorBy === Field.None ? `You can color the shapes by:` : `Shapes are colored by `}
-          </div>
-          <ColorBySelector objectType={isDrawingTerritories ? ObjectType.Territory : objectType} />
-          <div>{colorBy !== Field.None && 'using the color gradient'}</div>
-          <ColorGradientSelector />
-        </div>
-      </SelectorDisplayProvider>
       {entsWithoutCoordinates.length > 0 && (
         <div>
-          The following {getEntityTypeLabelPlural(objectType)} do not have defined coordinates:{' '}
+          The following {getEntityTypeLabelPlural(entType)} do not have defined coordinates:{' '}
           <CommaSeparated limit={10}>
             {entsWithoutCoordinates.map((ent) => (
-              <HoverableObjectName key={ent.ID} object={ent} />
+              <HoverableEntityName key={ent.ID} ent={ent} />
             ))}
           </CommaSeparated>
         </div>
@@ -76,9 +57,9 @@ function ViewMap() {
   );
 }
 
-function getMapDescription(objectType: ObjectType): ReactNode {
-  switch (objectType) {
-    case ObjectType.Language:
+function getMapDescription(entType: EntityType): ReactNode {
+  switch (entType) {
+    case EntityType.Language:
       return (
         <>
           These coordinates show the &quot;primary&quot; location of the languages, as defined by
@@ -87,7 +68,7 @@ function getMapDescription(objectType: ObjectType): ReactNode {
           represent all the locations where the language is spoken.
         </>
       );
-    case ObjectType.Territory:
+    case EntityType.Territory:
       return (
         <>
           Large territories are polygons, smaller territories are represented by circles at their
@@ -95,7 +76,7 @@ function getMapDescription(objectType: ObjectType): ReactNode {
           to see the territory details.
         </>
       );
-    case ObjectType.Census:
+    case EntityType.Census:
       return (
         <>
           While we do not yet have official censuses tables for every country, you can see here the
@@ -103,14 +84,14 @@ function getMapDescription(objectType: ObjectType): ReactNode {
           countries have CLDR data.
         </>
       );
-    case ObjectType.Locale:
+    case EntityType.Locale:
       return (
         <>
           The current view shows the territories of the world with how many languages or locales we
           have associated with them. Hover over the countries to see the list.
         </>
       );
-    case ObjectType.WritingSystem:
+    case EntityType.WritingSystem:
       return (
         <>
           The current view shows the territories of the world with how many writing systems are

@@ -5,7 +5,7 @@ import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import usePageParams from '@features/params/usePageParams';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
@@ -15,12 +15,12 @@ import { getFilterLabels } from './FilterLabels';
 import useFilters from './useFilters';
 
 type FilterExplanationProps = {
-  objects: ObjectData[];
+  ents: EntityData[];
   shouldFilterUsingSearchBar?: boolean;
 };
 
 const FilterBreakdown: React.FC<FilterExplanationProps> = ({
-  objects,
+  ents,
   shouldFilterUsingSearchBar = true,
 }) => {
   const { updatePageParams, searchString } = usePageParams();
@@ -42,7 +42,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     nMatchingSubstring,
     nInPopulationRange,
   ] = useMemo(() => {
-    const filteredByLanguageScope = objects.filter(filterBy[Field.LanguageScope]);
+    const filteredByLanguageScope = ents.filter(filterBy[Field.LanguageScope]);
     const filteredByModality = filteredByLanguageScope.filter(filterBy[Field.Modality]);
     const filteredByTerritoryScope = filteredByModality.filter(filterBy[Field.TerritoryScope]);
     const filteredByTerritory = filteredByTerritoryScope.filter(filterBy[Field.Territory]);
@@ -64,9 +64,9 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
       filteredBySubstring.length,
       filteredByPopulation.length,
     ];
-  }, [objects, filterBy, filterByVitality, filterBySubstring, filterByPopulation]);
+  }, [ents, filterBy, filterByVitality, filterBySubstring, filterByPopulation]);
 
-  const nOverall = objects.length;
+  const nOverall = ents.length;
   const nFilteredByLanguageScope = nOverall - nInLanguageScope;
   const nFilteredByModality = nInLanguageScope - nInModality;
   const nFilteredByTerritoryScope = nInModality - nInTerritoryScope;
@@ -88,7 +88,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
     <table style={{ textAlign: 'left' }}>
       <tbody>
         <tr>
-          <td>All {getEntityTypeLabelPlural(objects[0].type)}</td>
+          <td>All {getEntityTypeLabelPlural(ents[0].type)}</td>
           <td className="count">{nOverall.toLocaleString()}</td>
         </tr>
         {nFilteredByLanguageScope > 0 && (
@@ -211,9 +211,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
               <HoverableButton
                 buttonType="reset"
                 hoverContent="Clear the vitality filters"
-                onClick={() =>
-                  updatePageParams({ vitalityEthCoarse: [], isoStatus: [], vitalityEthFine: [] })
-                }
+                onClick={() => updatePageParams({ isoStatus: [] })}
                 style={{ padding: '0.25em', marginLeft: '0.25em' }}
               >
                 <XIcon size="1em" display="block" />

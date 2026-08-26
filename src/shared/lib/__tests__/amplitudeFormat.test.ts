@@ -67,8 +67,6 @@ describe('resolveEnumValue', () => {
     expect(resolveEnumValue('modalityFilter', [-2])).toEqual(['Written']);
     // isoStatus -> LanguageISOStatus
     expect(resolveEnumValue('isoStatus', [9])).toEqual(['Living']);
-    // vitalityEthCoarse -> VitalityEthnologueCoarse
-    expect(resolveEnumValue('vitalityEthCoarse', [6])).toEqual(['Stable']);
   });
 });
 
@@ -105,9 +103,9 @@ describe('FILTER_PARAM_KEYS', () => {
     expect(FILTER_PARAM_KEYS).not.toContain('searchString');
   });
 
-  it('does not include view/sort/objectType (which have their own events)', () => {
+  it('does not include view/sort/entType (which have their own events)', () => {
     expect(FILTER_PARAM_KEYS).not.toContain('view');
     expect(FILTER_PARAM_KEYS).not.toContain('sortBy');
-    expect(FILTER_PARAM_KEYS).not.toContain('objectType');
+    expect(FILTER_PARAM_KEYS).not.toContain('entType');
   });
 });

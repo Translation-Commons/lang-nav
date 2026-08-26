@@ -1,7 +1,7 @@
 import usePageParams from '@features/params/usePageParams';
 
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
-import { ObjectData } from '@entities/types/DataTypes';
+import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
+import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
@@ -10,7 +10,7 @@ import getField from '../fields/getField';
 
 import { SortBehavior, SortDirection } from './SortTypes';
 
-export type SortByFunctionType = (a: ObjectData, b: ObjectData) => number;
+export type SortByFunctionType = (a: EntityData, b: EntityData) => number;
 
 export function getSortFunction(): SortByFunctionType {
   const { sortBy, secondarySortBy, sortBehavior } = usePageParams();
@@ -34,7 +34,7 @@ export function getSortFunctionParameterized(
       ? secondarySortBy
       : null;
 
-  return (a: ObjectData, b: ObjectData) => {
+  return (a: EntityData, b: EntityData) => {
     const compareSecondary = (): number => {
       if (secondaryDirection == null || effectiveSecondary == null) return 0;
       const aSecondary = getField(a, effectiveSecondary);
@@ -111,8 +111,6 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
     case Field.CountOfVariants:
     case Field.VitalityMetascore:
     case Field.ISOStatus:
-    case Field.VitalityEthnologueFine:
-    case Field.VitalityEthnologueCoarse:
     case Field.Area:
     case Field.LanguageScope:
     case Field.WritingSystemScope:
@@ -131,9 +129,9 @@ export function getNormalSortDirection(sortBy: Field): SortDirection {
   }
 }
 
-export function sortByPopulation(a: ObjectData, b: ObjectData): number {
-  const aPopulation = getObjectPopulation(a);
-  const bPopulation = getObjectPopulation(b);
+export function sortByPopulation(a: EntityData, b: EntityData): number {
+  const aPopulation = getEntityPopulation(a);
+  const bPopulation = getEntityPopulation(b);
   if (aPopulation == null) return bPopulation == null ? 0 : 1;
   if (bPopulation == null) return -1;
   if (aPopulation > bPopulation) return -1;

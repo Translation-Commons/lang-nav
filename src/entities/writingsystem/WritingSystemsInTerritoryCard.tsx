@@ -1,9 +1,9 @@
 import React from 'react';
 
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 
-import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
+import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 type Props = {
@@ -14,7 +14,7 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
   const [showAll, setShowAll] = React.useState(false);
   const filterByConnections = getFilterByConnections();
 
-  const writingSystems = getWritingSystemsInObject(territory)?.filter(filterByConnections) ?? [];
+  const writingSystems = getWritingSystemsInEntity(territory)?.filter(filterByConnections) ?? [];
   // Make an array to show the top 5 and ones originating to show in the card by default if it is not expanded
   const limitedWritingSystems = writingSystems.filter(
     (ws, i) => i < 5 || (ws.territoryOfOriginCode === territory.ID && i < 10),
@@ -22,7 +22,7 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
   return (
     <div>
       <h3 style={{ fontWeight: 'bold', marginBottom: '0.25em' }}>
-        Writing Systems used in <HoverableObjectName object={territory} />
+        Writing Systems used in <HoverableEntityName ent={territory} />
       </h3>
       <>
         Click to see a table with all writing systems known to be used in {territory.nameDisplay}.{' '}
@@ -33,7 +33,7 @@ const WritingSystemsInTerritoryCard: React.FC<Props> = ({ territory }) => {
       </>
       {(showAll ? writingSystems : limitedWritingSystems).map((ws) => (
         <div key={ws.ID} style={{ marginLeft: '1em' }}>
-          <HoverableObjectName object={ws} /> [{ws.codeDisplay}]{' '}
+          <HoverableEntityName ent={ws} /> [{ws.codeDisplay}]{' '}
           {ws.territoryOfOriginCode === territory.ID && '(originated here)'}
         </div>
       ))}

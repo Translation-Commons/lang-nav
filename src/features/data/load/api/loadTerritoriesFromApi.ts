@@ -73,7 +73,7 @@ const TERRITORY_QUERY =
   '&entity.entity_name.order=id.asc&order=id.asc';
 
 export async function loadTerritoriesFromApi(): Promise<Record<string, TerritoryData> | void> {
-  // Resolves to undefined on failure, exactly as loadObjectsFromFile does.
+  // Resolves to undefined on failure, exactly as loadEntitiesFromFile does.
   //
   // This is not defensive tidiness, it is the difference between an error
   // message and a hang. CoreData.tsx awaits every loader in one Promise.all and

@@ -5,6 +5,8 @@ import usePageParams from '@features/params/usePageParams';
 
 import PopulationFocus from '@entities/types/PopulationFocus';
 
+import { toTitleCase } from '@shared/lib/stringUtils';
+
 const PopulationFocusSelector: React.FC = () => {
   const { populationFocus, updatePageParams } = usePageParams();
 
@@ -15,6 +17,7 @@ const PopulationFocusSelector: React.FC = () => {
       options={Object.values(PopulationFocus)}
       onChange={(populationFocus: PopulationFocus) => updatePageParams({ populationFocus })}
       selected={populationFocus}
+      getOptionLabel={toTitleCase}
     />
   );
 };

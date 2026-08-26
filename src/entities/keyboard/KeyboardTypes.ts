@@ -1,12 +1,12 @@
 /**
  * Enums and types related to keyboards
  */
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageCode, LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
-import { ObjectBase } from '@entities/types/DataTypes';
+import { EntityBase } from '@entities/types/DataTypes';
 import { VariantData } from '@entities/variant/VariantTypes';
 import { ScriptCode, WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 
@@ -17,8 +17,8 @@ export enum KeyboardPlatform {
 
 export type KeyboardDictionary = Record<string, KeyboardData>;
 
-export interface KeyboardData extends ObjectBase {
-  type: ObjectType.Keyboard;
+export interface KeyboardData extends EntityBase {
+  type: EntityType.Keyboard;
 
   // From TSV
   ID: string; // eg. gboard_ahr_Deva_t_k0_Latn

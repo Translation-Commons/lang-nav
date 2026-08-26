@@ -1,14 +1,14 @@
 import { TriangleAlertIcon } from 'lucide-react';
 
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import Field from '@features/transforms/fields/Field';
 
-import { getWritingSystemsInObject } from '@entities/lib/getObjectMiscFields';
-import { getObjectPopulation } from '@entities/lib/getObjectPopulation';
-import { getChildTerritoriesInObject } from '@entities/lib/getObjectRelatedTerritories';
+import { getWritingSystemsInEntity } from '@entities/lib/getEntityMiscFields';
+import { getEntityPopulation } from '@entities/lib/getEntityPopulation';
+import { getChildTerritoriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import { VariantData } from '@entities/variant/VariantTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -21,21 +21,21 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     NameColumn,
     {
       key: 'Type',
-      render: (object) => (object.variantType ? getVariantTypeDisplay(object.variantType) : '—'),
+      render: (ent) => (ent.variantType ? getVariantTypeDisplay(ent.variantType) : '—'),
       field: Field.VariantType,
     },
     {
       key: 'Date Added',
-      render: (object) => object.dateAdded?.toLocaleDateString(),
+      render: (ent) => ent.dateAdded?.toLocaleDateString(),
       isInitiallyVisible: false,
       field: Field.Date,
     },
     {
       key: 'Languages',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {object.languages.map((lang) => (
-            <HoverableObjectName object={lang} key={lang.ID} />
+          {ent.languages.map((lang) => (
+            <HoverableEntityName ent={lang} key={lang.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -43,17 +43,17 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     },
     {
       key: 'Equivalent Language',
-      render: (object) => {
-        if (!object.equivalentLanguage || object.equivalentLanguage.ID === 'mis') return null;
-        return <HoverableObjectName object={object.equivalentLanguage} />;
+      render: (ent) => {
+        if (!ent.equivalentLanguage || ent.equivalentLanguage.ID === 'mis') return null;
+        return <HoverableEntityName ent={ent.equivalentLanguage} />;
       },
       field: Field.Language,
       columnGroup: 'Related Objects',
     },
     {
       key: 'Language Count',
-      render: (object) => (
-        <HoverableEnumeration items={object.languages.map((lang) => lang.nameDisplay)} />
+      render: (ent) => (
+        <HoverableEnumeration items={ent.languages.map((lang) => lang.nameDisplay)} />
       ),
       field: Field.CountOfLanguages,
       isInitiallyVisible: false,
@@ -61,10 +61,10 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     },
     {
       key: 'Writing Systems',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {getWritingSystemsInObject(object)?.map((ws) => (
-            <HoverableObjectName object={ws} key={ws.ID} />
+          {getWritingSystemsInEntity(ent)?.map((ws) => (
+            <HoverableEntityName ent={ws} key={ws.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -74,10 +74,10 @@ function getVariantColumns(): TableColumn<VariantData>[] {
     },
     {
       key: 'Specific to Territories',
-      render: (object) => (
+      render: (ent) => (
         <CommaSeparated limit={1} limitText="short">
-          {getChildTerritoriesInObject(object)?.map((territory) => (
-            <HoverableObjectName object={territory} key={territory.ID} />
+          {getChildTerritoriesInEntity(ent)?.map((territory) => (
+            <HoverableEntityName ent={territory} key={territory.ID} />
           ))}
         </CommaSeparated>
       ),
@@ -95,7 +95,7 @@ function getVariantColumns(): TableColumn<VariantData>[] {
           only be a small group of people or only found in manuscripts.
         </>
       ),
-      render: (object) => getObjectPopulation(object),
+      render: (ent) => getEntityPopulation(ent),
       isInitiallyVisible: false,
       field: Field.Population,
     },

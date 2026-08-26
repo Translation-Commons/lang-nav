@@ -1,13 +1,12 @@
 import React, { useCallback, useMemo } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
-import LimitSelector from '@features/pagination/LimitSelector';
+import LimitInput from '@features/pagination/LimitInput';
 import usePageParams from '@features/params/usePageParams';
 import { useFilterByVitality } from '@features/transforms/filtering/filter';
 import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
 import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
 
-import { ObjectData } from '@entities/types/DataTypes';
+import { EntityData } from '@entities/types/DataTypes';
 
 import { filterBranch } from './filterBranch';
 import { TreeNodeData } from './TreeListNode';
@@ -22,42 +21,18 @@ type Props = {
 };
 
 const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
-  const {
-    limit,
-    searchString,
-    territoryFilter,
-    writingSystemFilter,
-    languageFilter,
-    vitalityEthFine,
-    vitalityEthCoarse,
-    isoStatus,
-  } = usePageParams();
+  const { limit, searchString, territoryFilter, writingSystemFilter, languageFilter, isoStatus } =
+    usePageParams();
   const filterBySubstring = getFilterBySubstring();
   const filterByConnections = getFilterByConnections();
   const filterByVitality = useFilterByVitality();
   const filterActive = useMemo(
-    () =>
-      searchString ||
-      territoryFilter ||
-      writingSystemFilter ||
-      languageFilter ||
-      vitalityEthFine ||
-      vitalityEthCoarse ||
-      isoStatus,
-    [
-      searchString,
-      territoryFilter,
-      writingSystemFilter,
-      languageFilter,
-      vitalityEthFine,
-      vitalityEthCoarse,
-      isoStatus,
-    ],
+    () => searchString || territoryFilter || writingSystemFilter || languageFilter || isoStatus,
+    [searchString, territoryFilter, writingSystemFilter, languageFilter, isoStatus],
   );
   const filterFunction = useCallback(
-    (object: ObjectData) => {
-      return filterBySubstring(object) && filterByConnections(object) && filterByVitality(object);
-    },
+    (ent: EntityData) =>
+      filterBySubstring(ent) && filterByConnections(ent) && filterByVitality(ent),
     [filterBySubstring, filterByConnections, filterByVitality],
   );
 
@@ -69,17 +44,8 @@ const TreeListPageBody: React.FC<Props> = ({ rootNodes, description }) => {
           {limit < rootNodes.length && (
             <>
               {' '}
-              <Hoverable
-                hoverContent={
-                  <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5em' }}>
-                    <div>Set the number of root nodes that are shown.</div>
-                    <LimitSelector />
-                  </div>
-                }
-              >
-                {limit.toLocaleString()}
-              </Hoverable>{' '}
-              of {rootNodes.length.toLocaleString()} root nodes are shown.
+              Up to <LimitInput className="inline-block" showTitle={false} /> of{' '}
+              {rootNodes.length.toLocaleString()} root nodes are shown.
             </>
           )}
         </div>

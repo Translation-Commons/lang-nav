@@ -1,0 +1,36 @@
+#codeDisplay		je2001.1st	je2001.2nd	je2001.Overall
+#nameDisplay		Jersey 2001 Primary	Jersey 2001 Secondary	Jersey 2001 Overall
+#isoRegionCode	JE			
+#yearCollected	2001			
+### Language Criteria ###				
+#languageUse	Speaks			
+#domain		Primary	Secondary	Any
+### Population Surveyed ###				
+#population	87,186			
+#sampleRate	1			
+#responsesPerIndividual		1	1+	1+
+### Data Constraints ###				
+#geographicScope	whole Island			
+#nationality	residents			
+#languagesIncluded	All			
+#residenceBasis	de jure			
+#quantity	count			
+### Creator ###				
+#collectorType	Government			
+#collectorName	States Assembly of Jersey — Statistics Unit, Policy and Resources Department			
+#collectorNameShort	States Assembly Jersey			
+#author	John Imber			
+### Source Document ###				
+#url	https://statesassembly.je/getmedia/f17e59f7-1b62-4ec7-bbc2-583f8fd711fb/S-20421-45461-30122009.pdf			
+#datePublished	2002-10-22			
+#dateAccessed	2026-06-08			
+#documentName	Microsoft Word - 2001 Census Report.doc			
+#sectionName	2: Population Characteristics			
+#tableName	Table 2.13: Population by languages spoken.			
+Language Code	Language	Population		
+Language code	Language name	Main language	Other (secondary)	Total
+eng	English	82,349	3,443	85,792
+por	Portuguese	4,002	3,300	7,305
+fra	French	338	14,776	15,114
+fra/nrf	Jersey French	113	2,761	2,874
+mul	Other	384	4,496	4,880

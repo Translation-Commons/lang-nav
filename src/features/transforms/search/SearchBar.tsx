@@ -16,7 +16,7 @@ import useSearchSuggestions from './useSearchSuggestions';
 import useTrackSearch from './useTrackSearch';
 
 const SearchBar: React.FC = () => {
-  const { objectType, searchString, updatePageParams } = usePageParams();
+  const { entType, searchString, updatePageParams } = usePageParams();
   const location = useLocation();
   const getSearchSuggestions = useSearchSuggestions();
   const trackSearch = useTrackSearch();
@@ -35,7 +35,7 @@ const SearchBar: React.FC = () => {
     [updatePageParams, location.pathname, searchString, trackSearch],
   );
   return (
-    <SelectorDisplayProvider display={SelectorDisplay.ButtonList}>
+    <SelectorDisplayProvider display={SelectorDisplay.FilterList}>
       <form
         className="selector text-sm"
         style={{
@@ -63,7 +63,7 @@ const SearchBar: React.FC = () => {
           }}
           getSuggestions={getSearchSuggestions}
           onSubmit={setSearchString}
-          placeholder={'search ' + getEntityTypeLabelPlural(objectType)}
+          placeholder={'search ' + getEntityTypeLabelPlural(entType)}
           pageParameter={PageParamKey.searchString}
           value={searchString}
         />

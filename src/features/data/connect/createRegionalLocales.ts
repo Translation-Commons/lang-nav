@@ -1,4 +1,4 @@
-import { LocaleSeparator, ObjectType } from '@features/params/PageParamTypes';
+import { EntityType, LocaleSeparator } from '@features/params/PageParamTypes';
 
 import { getLocaleCode } from '@entities/locale/LocaleParsing';
 import {
@@ -47,7 +47,7 @@ function createRegionalLocalesForTerritory(
           // It isn't found yet, create it
           locs[newLocaleCode] = {
             // Set a new locale code and territory code
-            type: ObjectType.Locale,
+            type: EntityType.Locale,
             ID: newLocaleCode,
             codeDisplay: newLocaleCode,
             localeSource: LocaleSource.CreateRegionalLocales,
@@ -94,7 +94,7 @@ function createRegionalLocalesForTerritory(
 
   // Save it to the territory
   territory.locales = Object.values(territoryLocales ?? {})
-    // Avoid creating too many locale objects
+    // Avoid creating too many locale entities
     .filter((loc) => (loc.pop.speaking.unadjusted ?? 0) > 10)
     // Don't use sortByPopulation because that uses the adjusted pop
     .sort((a, b) => (b.pop.speaking.unadjusted || 0) - (a.pop.speaking.unadjusted || 0));

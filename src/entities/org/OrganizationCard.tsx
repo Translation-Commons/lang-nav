@@ -1,10 +1,10 @@
 import React from 'react';
 
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import HoverableEnumeration from '@features/layers/hovercard/HoverableEnumeration';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
 import Field from '@features/transforms/fields/Field';
 
-import ObjectTitle from '@entities/ui/ObjectTitle';
+import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -17,14 +17,14 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
   return (
     <div>
       <div style={{ fontSize: '1.5em', marginBottom: '0.5em' }}>
-        <ObjectTitle object={org} />
+        <EntityTitle ent={org} />
       </div>
       <CardField
         title="Headquartered In"
         field={Field.Territory}
         description="The territory where this organization is headquartered."
       >
-        <HoverableObjectName object={org.headquarters} />
+        <HoverableEntityName ent={org.headquarters} />
       </CardField>
 
       <CardField
@@ -35,7 +35,7 @@ const OrganizationCard: React.FC<Props> = ({ org }) => {
         {org.censuses && org.censuses.length > 0 ? (
           <HoverableEnumeration
             items={org.censuses.map((doc) => (
-              <HoverableObjectName key={doc.ID} object={doc} />
+              <HoverableEntityName key={doc.ID} ent={doc} />
             ))}
           />
         ) : (

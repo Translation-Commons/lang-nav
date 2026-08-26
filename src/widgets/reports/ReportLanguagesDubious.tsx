@@ -4,7 +4,7 @@ import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableObjectName from '@features/layers/hovercard/HoverableObjectName';
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
@@ -76,7 +76,7 @@ const ReportLanguagesDubious: React.FC = () => {
             // TODO if its a language + territory, check if the locale exists
             // TODO check if there is an IANA variant.
             return (
-              <CardInCardList key={lang.ID} object={lang}>
+              <CardInCardList key={lang.ID} ent={lang}>
                 <div>
                   <label>Names:</label>
                   {lang.nameDisplay}
@@ -90,12 +90,12 @@ const ReportLanguagesDubious: React.FC = () => {
                   {lang.pop.overall || <Deemphasized>no population</Deemphasized>}
                 </div>
                 <div>
-                  <label>Potentially related objects:</label>
+                  <label>Potentially related entities:</label>
                   <ul style={{ margin: 0 }}>
                     {relatedEntities.length > 0 ? (
                       relatedEntities.map((entity) => (
                         <li key={entity.ID}>
-                          <HoverableObjectName object={entity} labelSource="code" />
+                          <HoverableEntityName ent={entity} labelSource="code" />
                         </li>
                       ))
                     ) : (
