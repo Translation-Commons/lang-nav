@@ -1,4 +1,4 @@
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import {
   isTerritoryGroup,
@@ -58,7 +58,7 @@ export type ApiTerritory = {
 // `population` is deliberately NOT selected. It is D3's rolled-up value, and
 // the frontend recomputes the same roll-up in computeContainedTerritoryStats.
 // What the frontend needs here is the RAW figure, which is population_from_un:
-// it feeds pop.fromUN, which getObjectPopulationDirectlySourced surfaces as its
+// it feeds pop.fromUN, which getEntityPopulationDirectlySourced surfaces as its
 // own field. Sending the roll-up would put a computed number under a label that
 // promises a sourced one, and nothing would look wrong.
 // entity_name is ordered explicitly. Postgres makes no promise about the order
@@ -153,7 +153,7 @@ export function parseApiTerritory(row: ApiTerritory): TerritoryData {
   const literacyPercent = isGroup ? undefined : orUndefined(row.literacy_percent);
 
   return {
-    type: ObjectType.Territory,
+    type: EntityType.Territory,
 
     ID: row.id,
     codeDisplay: row.id,

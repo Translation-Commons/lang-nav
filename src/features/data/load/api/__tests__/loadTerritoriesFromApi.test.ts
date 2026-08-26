@@ -1,6 +1,6 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
-import { ObjectType } from '@features/params/PageParamTypes';
+import { EntityType } from '@features/params/PageParamTypes';
 
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
@@ -64,7 +64,7 @@ const world: ApiTerritory = {
 describe('parseApiTerritory', () => {
   it('maps the identity fields', () => {
     const t = parseApiTerritory(india);
-    expect(t.type).toBe(ObjectType.Territory);
+    expect(t.type).toBe(EntityType.Territory);
     expect(t.ID).toBe('IN');
     expect(t.codeDisplay).toBe('IN');
     expect(t.nameDisplay).toBe('India');
@@ -79,7 +79,7 @@ describe('parseApiTerritory', () => {
 
   // The one that would be plausible and wrong. `population` in the database is
   // D3's rolled-up figure; `population_from_un` is the raw one. pop.fromUN is
-  // surfaced by getObjectPopulationDirectlySourced as its own field, so feeding
+  // surfaced by getEntityPopulationDirectlySourced as its own field, so feeding
   // it the roll-up would label a computed number as sourced.
   it('takes population from the RAW UN column, into both overall and fromUN', () => {
     const t = parseApiTerritory(india);
