@@ -13,8 +13,9 @@ const ReportLabels: Record<ReportID, string> = {
   [ReportID.LocaleCitationCompleteness]: 'Citation Completeness',
   [ReportID.LocaleIndigeneity]: 'Indigeneity',
   [ReportID.LocalesPotential]: 'Potential Locales',
+  [ReportID.LocalesLanguagesWithout]: 'Languages without Locales',
   [ReportID.VariantsAnnotationTool]: 'Annotation Tool',
-  [ReportID.WritingSystemsLanguagesWithout]: 'Languages Without Writing Systems',
+  [ReportID.WritingSystemsLanguagesWithout]: 'Languages without Writing Systems',
 };
 
 export default ReportLabels;

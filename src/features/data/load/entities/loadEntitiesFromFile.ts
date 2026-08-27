@@ -13,6 +13,7 @@ export async function loadEntitiesFromFile<T extends EntityData>(
   return await fetch(filePath)
     .then((res) => res.text())
     .then((text) => text.split('\n').slice(1))
+    .then((lines) => lines.filter((line) => line.trim() !== '' && !line.startsWith('#')))
     .then((lines) => lines.map(parseLine))
     .then((ents) => ents.filter((ent) => ent != null))
     .then((ents) => (ents != null ? toDictionary(ents, (ent) => ent.ID) : undefined))

@@ -4,10 +4,10 @@ From ISO https://iso639-3.sil.org/code_tables/download_tables
 
 - iso-639-3_Retirements.tab
   - https://iso639-3.sil.org/code_tables/download_tables
-  - Last updated: 2025-07-15
+  - Last updated: 2026-08-26
 - iso-639-3.tab
   - https://iso639-3.sil.org/code_tables/download_tables
-  - Last updated: 2025-07-15
+  - Last updated: 2026-08-26
 
 From Library of Congress https://www.loc.gov/standards/iso639-5/id.php
 

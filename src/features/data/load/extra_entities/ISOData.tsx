@@ -15,7 +15,7 @@ import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 type ISOLanguage6393Data = {
   codeISO6393: ISO6393LanguageCode; // ISO 639-3
-  //   codeBibliographic: LanguageCode; // ISO 639-2b
+  codeISO6392b: LanguageCode; // ISO 639-2b
   //   codeTerminological: LanguageCode; // ISO 639-2t
   codeISO6391: ISO6391LanguageCode | undefined;
   scope: LanguageScope | undefined;
@@ -42,8 +42,8 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
   const parts = line.split('\t');
   return {
     codeISO6393: parts[0],
-    // codeBibliographic: parts[1], // Not used
-    // codeTerminological: parts[2], // Not used
+    codeISO6392b: parts[1], // ISO 639-2b
+    // codeTerminological: parts[2], // Not used, its the canonical language code
     codeISO6391: parts[3] != '' ? parts[3] : undefined,
     scope: getScopeFromLetterCode(parts[4]),
     vitality: parseLanguageISOStatus(parts[5]),
@@ -54,7 +54,8 @@ function parseISOLanguage6393Line(line: string): ISOLanguage6393Data {
 export async function loadISOLanguages(): Promise<ISOLanguage6393Data[] | void> {
   return await fetch('data/iso/iso-639-3.tab')
     .then((res) => res.text())
-    .then((text) => text.split('\n').slice(1).map(parseISOLanguage6393Line))
+    .then(splitAndRemoveHeaders)
+    .then((lines) => lines.map(parseISOLanguage6393Line))
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -63,16 +64,23 @@ type ISOMacrolanguageData = {
   codeConstituent: ISO6393LanguageCode;
 };
 
+function splitAndRemoveHeaders(text: string): string[] {
+  return text
+    .split('\n')
+    .filter((l) => l.trim() !== '' && !l.startsWith('#'))
+    .slice(1);
+}
+
 export async function loadISOMacrolanguages(): Promise<ISOMacrolanguageData[] | void> {
   return await fetch('data/iso/macrolanguages.tsv')
     .then((res) => res.text())
-    .then((text) => text.split('\n').slice(1))
-    .then((lines) => {
-      return lines.map((line) => {
+    .then(splitAndRemoveHeaders)
+    .then((lines) =>
+      lines.map((line) => {
         const parts = line.split('\t');
         return { codeMacro: parts[0], codeConstituent: parts[1] };
-      });
-    })
+      }),
+    )
     .catch((err) => console.error('Error loading TSV:', err));
 }
 
@@ -85,7 +93,7 @@ type ISOLanguageFamilyData = {
 export async function loadISOLanguageFamilies(): Promise<ISOLanguageFamilyData[] | void> {
   return await fetch('data/iso/families639-5.tsv')
     .then((res) => res.text())
-    .then((text) => text.split('\n').slice(3)) // First 3 lines are headers and comments
+    .then(splitAndRemoveHeaders)
     .then((lines) =>
       lines.map((line) => {
         const parts = line.split('\t');
@@ -101,7 +109,7 @@ export async function loadISOFamiliesToLanguages(): Promise<Record<
 > | void> {
   return await fetch('data/tc/familiesToLanguages.tsv')
     .then((res) => res.text())
-    .then((text) => text.split('\n').slice(4)) // First 4 lines are headers and comments
+    .then(splitAndRemoveHeaders)
     .then((lines) => lines.map((line) => line.split('\t')))
     .then((entries) => entries.map(([family, languages]) => [family, languages.split(' ')]))
     .then((entries) => Object.fromEntries(entries))
@@ -112,6 +120,7 @@ export function addISODataToLanguages(
   languages: LanguageDictionary,
   isoLanguages: ISOLanguage6393Data[],
 ): void {
+  // Add ISO data
   isoLanguages.forEach((isoLang) => {
     const lang = languages[isoLang.codeISO6393];
     if (lang == null) {
@@ -120,7 +129,9 @@ export function addISODataToLanguages(
     }
 
     // Fill out ISO information on the language data
+    lang.ISO.code = isoLang.codeISO6393;
     lang.ISO.code6391 = isoLang.codeISO6391;
+    lang.ISO.code6392b = isoLang.codeISO6392b;
     lang.ISO.status = isoLang.vitality;
     lang.scope = isoLang.scope;
     lang.ISO.scope = isoLang.scope;
@@ -129,7 +140,18 @@ export function addISODataToLanguages(
     lang.BCP.name = isoLang.name;
     lang.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    lang.UNESCO.code = isoLang.codeISO6393;
     setLanguageNames(lang);
+  });
+
+  // Scan through language entries that are scoped as individual languages that have 3-letter codes but are not actually in ISO
+  Object.values(languages).forEach((lang) => {
+    if (lang.scope === LanguageScope.Language && lang.ID.match(/^[a-z]{3}$/) && !lang.ISO.code) {
+      if (DEBUG)
+        console.debug(
+          `Individual language ${lang.ID} has a 3-letter ISO code but is not actually in ISO`,
+        );
+    }
   });
 }
 
@@ -223,7 +245,10 @@ export function addISOLanguageFamilyData(
   Object.entries(isoLangsToFamilies).forEach(([familyCode, constituentLanguages]) => {
     constituentLanguages.forEach((langCode) => {
       // Get the language using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
-      const lang = languagesBySource.BCP[langCode] ?? languagesBySource.ISO[langCode];
+      const lang =
+        languagesBySource.BCP[langCode] ??
+        languagesBySource.ISO[langCode] ??
+        languagesBySource.Combined[langCode];
       if (lang == null) {
         console.debug(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;
@@ -234,4 +259,27 @@ export function addISOLanguageFamilyData(
       lang.BCP.parentLanguageCode ??= familyCode;
     });
   });
+}
+
+export function getUniqueISO6392bLanguages(
+  languagesBySource: Record<string, Record<string, LanguageData>>,
+) {
+  const iso6392bLanguages: Record<string, LanguageData> = {};
+
+  Object.values(languagesBySource.ISO).map((l) => {
+    // Only for languages with 639-2b codes
+    if (!l.ISO.code6392b) return;
+
+    // If there is a 639-2b code and it is not the same as the 639-3 code
+    const existingLang = languagesBySource.Combined[l.ISO.code6392b];
+    if (existingLang != null && existingLang.ID !== l.ID) {
+      console.debug(
+        `ISO 639-2b code ${l.ISO.code6392b} for ${l.ID} overlaps with an existing entry`,
+      );
+    }
+
+    // Add the language to the collection of unique 639-2b languages
+    iso6392bLanguages[l.ISO.code6392b] = l;
+  });
+  return iso6392bLanguages;
 }
