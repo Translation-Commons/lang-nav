@@ -43,9 +43,12 @@ const useDecoderSuggestions = (): GetDecoderSuggestions => {
       if (!filterBy[Field.Territory]?.(ent)) dist += 10;
 
       // Check if the language is at the right scope level
-      if (!filterBy[Field.LanguageScope]?.(ent)) dist += 4;
+      if (!filterBy[Field.LanguageScope]?.(ent)) dist += 10;
 
-      return dist - Math.log(ent.pop.overall || 1) / 10; // Include a small population tiebreaker
+      // Include a small population tiebreaker
+      const popDiscount = Math.log(ent.pop.overall || 1) / 20;
+
+      return dist - popDiscount;
     },
     [filterBy[Field.Territory], filterBy[Field.LanguageScope]],
   );

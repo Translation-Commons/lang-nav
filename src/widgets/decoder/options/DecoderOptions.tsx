@@ -27,6 +27,24 @@ const DecoderOptions: React.FC = () => {
       {showOptions && (
         <table>
           <tbody>
+            <tr>
+              <td>Direction</td>
+              <td>
+                <Tabs
+                  value={direction}
+                  onValueChange={(value) => setDirection(value as DecoderDirection)}
+                >
+                  <TabsList>
+                    <TabsTrigger className="cursor-pointer" value={DecoderDirection.NamesToCodes}>
+                      Names → Codes
+                    </TabsTrigger>
+                    <TabsTrigger className="cursor-pointer" value={DecoderDirection.CodesToNames}>
+                      Codes → Names
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </td>
+            </tr>
             <DecoderLanguageSourceSelector />
             <tr>
               <td>Relevant to territory</td>
@@ -36,32 +54,20 @@ const DecoderOptions: React.FC = () => {
                 </SelectorDisplayProvider>
               </td>
             </tr>
-            <tr>
-              <td>Direction</td>
-              <td>
-                <Tabs
-                  value={direction}
-                  onValueChange={(value) => setDirection(value as DecoderDirection)}
-                >
-                  <TabsList>
-                    <TabsTrigger value={DecoderDirection.NamesToCodes}>Names → Codes</TabsTrigger>
-                    <TabsTrigger value={DecoderDirection.CodesToNames}>Codes → Names</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </td>
-            </tr>
-            <tr>
-              <td>Macrolanguage codes</td>
-              <td>
-                <Toggle
-                  pressed={includeMacroCodes}
-                  onPressedChange={() => setIncludeMacroCodes((prev) => !prev)}
-                >
-                  {includeMacroCodes ? <SquareCheckIcon /> : <SquareIcon />} include codes? eg.{' '}
-                  <code>zho/cmn</code>
-                </Toggle>
-              </td>
-            </tr>
+            {direction === DecoderDirection.NamesToCodes && (
+              <tr>
+                <td>Include macro codes</td>
+                <td>
+                  <Toggle
+                    pressed={includeMacroCodes}
+                    onPressedChange={() => setIncludeMacroCodes((prev) => !prev)}
+                  >
+                    {includeMacroCodes ? <SquareCheckIcon /> : <SquareIcon />} include codes? eg.{' '}
+                    <code>zho/cmn</code>
+                  </Toggle>
+                </td>
+              </tr>
+            )}
           </tbody>
         </table>
       )}

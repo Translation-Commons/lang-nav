@@ -12,7 +12,6 @@ enum ReportID {
   LocaleCitationCompleteness,
   LocaleIndigeneity,
   LocalesPotential,
-  LocalesLanguagesWithout,
   VariantsAnnotationTool,
   WritingSystemsLanguagesWithout,
   LanguagePlurals,

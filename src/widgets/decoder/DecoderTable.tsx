@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 
+import { Button } from '@shared/ui/button';
+
 import { useDecoderDataContext } from './DecoderDataContext';
 import DecoderRow from './DecoderRow';
 import { useDecoderOptionsContext } from './options/DecoderOptionsContext';
@@ -28,10 +30,8 @@ const DecoderTable: React.FC = () => {
   return (
     <table className="h-fit">
       <thead>
-        <tr>
-          {/* <th>Input</th> */}
-          <th>Code</th>
-          <th>LangNav Entry</th>
+        <tr className="leading-[30px]">
+          <th className="min-w-30">Best Match</th>
           <th>Alternatives</th>
         </tr>
       </thead>
@@ -40,16 +40,13 @@ const DecoderTable: React.FC = () => {
           <DecoderRow key={i} input={l} />
         ))}
         <tr>
-          {/* <td></td> */}
-          <td>
-            <button className="primary p-1! mr-1" onClick={copyResultingCodes}>
+          <td colSpan={2}>
+            <Button className="cursor-pointer" onClick={copyResultingCodes}>
               Copy codes
-            </button>
-          </td>
-          <td>
-            <button className="primary p-1!" onClick={copyResultingNames}>
+            </Button>
+            <Button className="cursor-pointer" onClick={copyResultingNames}>
               Copy names
-            </button>
+            </Button>
           </td>
         </tr>
       </tbody>

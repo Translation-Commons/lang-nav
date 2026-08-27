@@ -11,12 +11,13 @@ import { DecoderDirection, useDecoderOptionsContext } from './options/DecoderOpt
 import useFindLanguage from './useFindLanguageFromName';
 
 const EXAMPLE_NAMES =
-  'English,Spanish,French' +
-  ',Chinese,Mandarin,Putonghua,Cantonese,Hokkien,Taiwanese' +
-  ',Arabic,Darija,Standard Arabic,Egyptian Arabic' +
-  ',Malay,Indonesian,Bahasa' +
-  ',Bembe,Bemb,Tonga,Tonga (Tonga),Tonga (Tonga Islands)' +
-  ',Elvish,Sindarin,Quenya';
+  'English\nSpanish\nFrench\n' +
+  'Chinese\nMandarin\nPutonghua\nCantonese\nHokkien\nTaiwanese\n' +
+  'Arabic\nDarija\nStandard Arabic\nEgyptian Arabic\n' +
+  'Malay\nIndonesian\nBahasa\n' +
+  'Bembe\nBemb\nTonga\nTonga (Tonga)\nTonga (Tonga Islands)\n' +
+  'Naʼvi\nSindarin\nQuenya';
+const EXAMPLE_CODES = 'en\neng\ncmn\nzh-cmn\nzh\nchi\nzho\nclas1255\nzhx\nsit';
 
 type DecoderDataContextType = {
   inputBlob: string;
@@ -47,12 +48,13 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
 
   const [isTransitionPending, startTransition] = useTransition();
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [inputBlob, setInputBlob] = useState(EXAMPLE_NAMES.split(',').join('\n'));
+  const [inputBlob, setInputBlob] = useState(EXAMPLE_NAMES);
   const [results, setResults] = useState<Record<string, DecoderResult>>({});
+  const [searchVersion, setSearchVersion] = useState(0);
+  const hasInitializedSearchRef = useRef(false);
   const resultsRef = useRef(results);
   const deferredInputBlob = React.useDeferredValue(inputBlob);
   const inputLines = useMemo(() => deferredInputBlob.split('\n'), [deferredInputBlob]);
-  console.log(inputLines);
   const isInputPending = inputBlob !== deferredInputBlob || isTransitionPending;
 
   useEffect(() => {
@@ -94,8 +96,26 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   );
 
   useEffect(() => {
-    startTransition(() => setResults({}));
+    startTransition(() => {
+      setInputBlob(direction === DecoderDirection.NamesToCodes ? EXAMPLE_NAMES : EXAMPLE_CODES);
+      setResults({});
+    });
+    resultsRef.current = {};
+    setSearchVersion((prev) => prev + 1);
   }, [direction, startTransition]);
+
+  useEffect(() => {
+    if (!hasInitializedSearchRef.current) {
+      hasInitializedSearchRef.current = true;
+      return;
+    }
+
+    startTransition(() => {
+      setResults({});
+    });
+    resultsRef.current = {};
+    setSearchVersion((prev) => prev + 1);
+  }, [search, startTransition]);
 
   useEffect(() => {
     let cancelled = false;
@@ -115,7 +135,7 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
     return () => {
       cancelled = true;
     };
-  }, [inputLines, searchAndAdd]);
+  }, [inputLines, searchAndAdd, searchVersion]);
 
   return (
     <DecoderDataContext.Provider
