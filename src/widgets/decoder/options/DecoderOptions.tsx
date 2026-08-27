@@ -1,4 +1,4 @@
-import { RefreshCwIcon, SquareCheckIcon, SquareIcon } from 'lucide-react';
+import { SquareCheckIcon, SquareIcon } from 'lucide-react';
 import React from 'react';
 
 import {
@@ -11,31 +11,26 @@ import { Button } from '@shared/ui/button';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 import { Toggle } from '@shared/ui/toggle';
 
-import { useDecoderDataContext } from '../DecoderDataContext';
-
 import DecoderLanguageSourceSelector from './DecoderLanguageSourceSelector';
 import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
 
 const DecoderOptions: React.FC = () => {
   const { direction, setDirection, includeMacroCodes, setIncludeMacroCodes } =
     useDecoderOptionsContext();
-  const { refresh } = useDecoderDataContext();
   const [showOptions, setShowOptions] = React.useState(true);
 
   return (
     <div className="flex flex-row gap-4 items-center m-2">
-      <div className="font-bold">
-        <Button onClick={() => setShowOptions(!showOptions)}>
-          Options {showOptions ? '▶' : '◀'}
-        </Button>
-      </div>
+      <Button className="cursor-pointer" onClick={() => setShowOptions(!showOptions)}>
+        Options {showOptions ? '▶' : '◀'}
+      </Button>
       {showOptions && (
         <table>
           <tbody>
             <DecoderLanguageSourceSelector />
             <tr>
-              <td>Relevant to territory:</td>
-              <td>
+              <td>Relevant to territory</td>
+              <td className="text-sm">
                 <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
                   <TerritoryFilterSelector />
                 </SelectorDisplayProvider>
@@ -70,9 +65,6 @@ const DecoderOptions: React.FC = () => {
           </tbody>
         </table>
       )}
-      <Button onClick={refresh}>
-        <RefreshCwIcon /> Refresh
-      </Button>
     </div>
   );
 };

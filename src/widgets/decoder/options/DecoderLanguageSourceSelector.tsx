@@ -24,7 +24,7 @@ const DecoderLanguageSourceSelector: React.FC = () => {
 
   return (
     <tr>
-      <td>Language code format and list of languages:</td>
+      <td>Language code format</td>
       <td>
         <DropdownMenu>
           <DropdownMenuTrigger

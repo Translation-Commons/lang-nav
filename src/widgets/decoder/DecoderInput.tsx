@@ -1,21 +1,13 @@
-import { useEffect } from 'react';
+import { Spinner } from '@shared/ui/spinner';
 
 import { useDecoderDataContext } from './DecoderDataContext';
 
 const DecoderInput = () => {
-  const { setInputLines, setInputBlob, inputBlob } = useDecoderDataContext();
-
-  // Debounce the input to update the input lines only after the input blob changes
-  useEffect(() => {
-    const timeout = setTimeout(() => {
-      setInputLines(inputBlob.split('\n'));
-    }, 1000);
-    return () => clearTimeout(timeout);
-  }, [inputBlob, setInputLines]);
+  const { setInputBlob, inputBlob, isInputPending } = useDecoderDataContext();
 
   return (
-    <div className="flex flex-col">
-      <strong>Paste languages here</strong>
+    <div className="flex flex-col w-40 flex-shrink-0">
+      <div className="flex items-center gap-2">Enter languages {isInputPending && <Spinner />}</div>
       <textarea
         id="decoder-input"
         className="min-w-10 border p-2 min-h-100 field-sizing-content"

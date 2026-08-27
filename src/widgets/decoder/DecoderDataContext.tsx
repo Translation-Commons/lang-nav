@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { EntityType } from '@features/params/PageParamTypes';
@@ -22,10 +22,9 @@ type DecoderDataContextType = {
   inputBlob: string;
   setInputBlob: React.Dispatch<React.SetStateAction<string>>;
   inputLines: string[];
-  setInputLines: React.Dispatch<React.SetStateAction<string[]>>;
-  // results: Record<string, DecoderResult>;
   getResult: (input: string) => DecoderResult | undefined;
-  refresh: () => void;
+  search: (input: string) => Promise<DecoderResult>;
+  isInputPending: boolean;
   isSearchActive: boolean;
 };
 
@@ -33,9 +32,9 @@ const DecoderDataContext = React.createContext<DecoderDataContextType>({
   inputBlob: '',
   setInputBlob: () => {},
   inputLines: [],
-  setInputLines: () => {},
   getResult: () => undefined,
-  refresh: () => {},
+  search: async (input: string) => ({ input, lang: undefined, alts: [] }),
+  isInputPending: false,
   isSearchActive: false,
 });
 
@@ -46,10 +45,19 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const findLanguage = useFindLanguage();
   const { direction } = useDecoderOptionsContext();
 
+  const [isTransitionPending, startTransition] = useTransition();
   const [isSearchActive, setIsSearchActive] = useState(false);
   const [inputBlob, setInputBlob] = useState(EXAMPLE_NAMES.split(',').join('\n'));
-  const [inputLines, setInputLines] = useState(EXAMPLE_NAMES.split(','));
   const [results, setResults] = useState<Record<string, DecoderResult>>({});
+  const resultsRef = useRef(results);
+  const deferredInputBlob = React.useDeferredValue(inputBlob);
+  const inputLines = useMemo(() => deferredInputBlob.split('\n'), [deferredInputBlob]);
+  console.log(inputLines);
+  const isInputPending = inputBlob !== deferredInputBlob || isTransitionPending;
+
+  useEffect(() => {
+    resultsRef.current = results;
+  }, [results]);
 
   const getResult = useCallback((input: string) => results[input.toLowerCase().trim()], [results]);
   const search = useCallback(
@@ -77,37 +85,36 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const searchAndAdd = useCallback(
     async (searchString: string) => {
       const key = searchString.toLowerCase().trim();
-      if (results[key]) return;
+      if (resultsRef.current[key]) return;
 
       const result = await search(searchString);
-      setResults((prev) => ({ ...prev, [key]: result }));
+      startTransition(() => setResults((prev) => ({ ...prev, [key]: result })));
     },
-    [search],
+    [search, startTransition],
   );
 
-  // Effects, update the data when new input is provided or the direction changes
   useEffect(() => {
-    // Swap the input lines from names to the codes currently matched
-    if (Object.keys(results).length && inputLines.length) {
-      const newBlob =
-        direction === DecoderDirection.NamesToCodes
-          ? inputLines
-              .map((l) => results[l.toLowerCase().trim()]?.lang?.nameDisplay ?? '')
-              .join('\n')
-          : inputLines
-              .map((l) => results[l.toLowerCase().trim()]?.lang?.codeDisplay ?? '')
-              .join('\n');
-      setInputBlob(newBlob);
-      setResults({});
+    startTransition(() => setResults({}));
+  }, [direction, startTransition]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const linesToSearch = [...new Set(inputLines.map((line) => line.toLowerCase().trim()))];
+    const missingLines = linesToSearch.filter((line) => !resultsRef.current[line]);
+
+    if (missingLines.length === 0) {
+      setIsSearchActive(false);
+      return;
     }
-  }, [direction]);
-  useEffect(() => {
+
     setIsSearchActive(true);
-    Promise.all(inputLines.map((line) => searchAndAdd(line))).then(() => setIsSearchActive(false));
-  }, [inputLines]);
-  const refresh = useCallback(() => {
-    setResults({});
-    Promise.all(inputLines.map((line) => searchAndAdd(line)));
+    Promise.all(missingLines.map((line) => searchAndAdd(line))).finally(() => {
+      if (!cancelled) setIsSearchActive(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
   }, [inputLines, searchAndAdd]);
 
   return (
@@ -116,10 +123,10 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
         inputBlob,
         setInputBlob,
         inputLines,
-        setInputLines,
         getResult,
+        isInputPending,
         isSearchActive,
-        refresh,
+        search,
       }}
     >
       {children}
