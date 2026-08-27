@@ -4,7 +4,6 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
 import ReportID from './ReportID';
-import ReportLocalesPotential from './ReportLocalesPotential';
 
 const LocaleIndigeneityReport = React.lazy(
   () => import('@entities/locale/localstatus/LocaleIndigeneityReport'),
@@ -23,7 +22,8 @@ const ReportLanguagesWithAmbiguousNames = React.lazy(
 const ReportLocaleCitationCompleteness = React.lazy(
   () => import('./ReportLocaleCitationCompleteness'),
 );
-// const ReportLocalesPotential = React.lazy(() => import('./ReportLocalesPotential'));
+const ReportLocalesPotential = React.lazy(() => import('./ReportLocalesPotential'));
+const ReportLocalesLanguagesWithout = React.lazy(() => import('./ReportLocalesLanguagesWithout'));
 
 const ReportWritingSystemsLanguagesWithout = React.lazy(
   () => import('./ReportWritingSystemsLanguagesWithout'),
@@ -64,6 +64,8 @@ const SpecificReport: React.FC<{ reportID: ReportID }> = ({ reportID }) => {
       return <LocaleIndigeneityReport />;
     case ReportID.LocalesPotential:
       return <ReportLocalesPotential />;
+    case ReportID.LocalesLanguagesWithout:
+      return <ReportLocalesLanguagesWithout />;
     case ReportID.WritingSystemsLanguagesWithout:
       return <ReportWritingSystemsLanguagesWithout />;
     case ReportID.VariantsAnnotationTool:

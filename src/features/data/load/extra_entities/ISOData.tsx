@@ -120,6 +120,7 @@ export function addISODataToLanguages(
   languages: LanguageDictionary,
   isoLanguages: ISOLanguage6393Data[],
 ): void {
+  // Add ISO data
   isoLanguages.forEach((isoLang) => {
     const lang = languages[isoLang.codeISO6393];
     if (lang == null) {
@@ -128,6 +129,7 @@ export function addISODataToLanguages(
     }
 
     // Fill out ISO information on the language data
+    lang.ISO.code = isoLang.codeISO6393;
     lang.ISO.code6391 = isoLang.codeISO6391;
     lang.ISO.code6392b = isoLang.codeISO6392b;
     lang.ISO.status = isoLang.vitality;
@@ -138,7 +140,18 @@ export function addISODataToLanguages(
     lang.BCP.name = isoLang.name;
     lang.BCP.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
     lang.CLDR.code = isoLang.codeISO6391 ?? isoLang.codeISO6393;
+    lang.UNESCO.code = isoLang.codeISO6393;
     setLanguageNames(lang);
+  });
+
+  // Scan through language entries that are scoped as individual languages that have 3-letter codes but are not actually in ISO
+  Object.values(languages).forEach((lang) => {
+    if (lang.scope === LanguageScope.Language && lang.ID.match(/^[a-z]{3}$/) && !lang.ISO.code) {
+      if (DEBUG)
+        console.debug(
+          `Individual language ${lang.ID} has a 3-letter ISO code but is not actually in ISO`,
+        );
+    }
   });
 }
 
@@ -232,7 +245,10 @@ export function addISOLanguageFamilyData(
   Object.entries(isoLangsToFamilies).forEach(([familyCode, constituentLanguages]) => {
     constituentLanguages.forEach((langCode) => {
       // Get the language using BCP-47 codes (preferring 2-letter ISO 639-1, otherwise 3-letter ISO 639-3)
-      const lang = languagesBySource.BCP[langCode] ?? languagesBySource.ISO[langCode];
+      const lang =
+        languagesBySource.BCP[langCode] ??
+        languagesBySource.ISO[langCode] ??
+        languagesBySource.Combined[langCode];
       if (lang == null) {
         console.debug(`${langCode} should be part of ${familyCode} but ${langCode} does not exist`);
         return;

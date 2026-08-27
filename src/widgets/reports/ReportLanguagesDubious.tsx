@@ -4,36 +4,27 @@ import CardInCardList from '@widgets/cardlists/CardInCardList';
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 
 import { useDataContext } from '@features/data/context/useDataContext';
+import useEntities from '@features/data/context/useEntities';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LimitInput from '@features/pagination/LimitInput';
 import PaginationControls from '@features/pagination/PaginationControls';
 import usePagination from '@features/pagination/usePagination';
-import { getFilterByConnections } from '@features/transforms/filtering/filterByConnections';
-import useFilters from '@features/transforms/filtering/useFilters';
-import getFilterBySubstring from '@features/transforms/search/getFilterBySubstring';
-import { getSortFunction } from '@features/transforms/sorting/sort';
+import { EntityType } from '@features/params/PageParamTypes';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
 const ReportLanguagesDubious: React.FC = () => {
-  const { getLanguage, getTerritory, getWritingSystem, languagesInSelectedSource } =
-    useDataContext();
-  const filters = useFilters();
-  const filterBySubstring = getFilterBySubstring();
-  const filterByConnections = getFilterByConnections();
-  const sortFunction = getSortFunction();
-  const { getCurrentEntities } = usePagination<LanguageData>();
-  const languagesFiltered = useMemo(
-    () =>
-      languagesInSelectedSource
-        .filter(filterBySubstring)
-        .filter(filterByConnections)
-        .filter(filters.Population)
-        .filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
-    [languagesInSelectedSource, filterBySubstring, filterByConnections, filters.Population],
+  const { getLanguage, getTerritory, getWritingSystem } = useDataContext();
+  const ents = useEntities(EntityType.Language) as LanguageData[];
+  const filteredLangs = useFilteredEntities({ useScope: false, inputEnts: ents }).filteredEntities;
+  const langs = useMemo(
+    () => filteredLangs.filter((lang) => lang.codeDisplay.match('xx.-|^[0-9]')),
+    [filteredLangs],
   );
+  const { getCurrentEntities } = usePagination<LanguageData>();
 
   return (
     <>
@@ -58,12 +49,12 @@ const ReportLanguagesDubious: React.FC = () => {
       <div style={{ display: 'flex', alignItems: 'center', gap: '1em', marginTop: '1em' }}>
         <LimitInput />
         <div>
-          <PaginationControls itemCount={languagesFiltered.length} />
+          <PaginationControls itemCount={langs.length} />
         </div>
       </div>
       <div style={{ marginTop: '1em', marginBottom: '1em' }}>
         <ResponsiveGrid>
-          {getCurrentEntities(languagesFiltered.sort(sortFunction)).map((lang) => {
+          {getCurrentEntities(langs).map((lang) => {
             const codePieces = lang.codeDisplay.split(/-|_/);
             const relatedEntities = codePieces
               .map(

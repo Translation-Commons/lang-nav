@@ -958,7 +958,7 @@ jbn	nafu1238	Nafusi			Arab	234,000		berb1260	Yes
 bkm	komc1235	Kom (Cameroon)			Latn	233,000		komk1239	Yes	
 pll	shwe1236	Shwe Palaung			Mymr	233,000		pala1336	Yes	
 zea	zeeu1238	Zeeuws	Zeêuws	Spoken & Written	Latn	232,000		zeeu1239	Yes	
-ilp	phil1247	Iranun			Latn	231,120		iran1262	Yes	
+ilp	phil1247	Iranun			Latn	231,120		iran1262	Yes
 ecs	ecua1243	Ecuadorian Sign Language		Sign	Zxxx	231,000		west2886	Yes	
 her	here1253	Herero	Otsiherero		Latn	230,523		here1252	Yes	
 enq	enga1252	Enga			Latn	230,000		enga1251	Yes	
@@ -7646,7 +7646,7 @@ guv	geya1234	Gey					duz	book1242	No	ISO merged this into duz
 hib	hibi1243	Hibito	Šiwi		Latn			hibi1242	No	Extinct language
 hlu	hier1240	Hieroglyphic Luwian			Hluw			luvi1235	Probably not	Historical langauge
 hmk		Maek							Probably not	Historical langauge
-hnm	hain1238	Hainanese		Mostly Spoken			zho	qion1239	Yes, with caveat	New to ISO 20250115
+hnm	hain1238	Hainanese		Mostly Spoken		5,000,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 hod	holm1250	Holma			Latn			nzan1241	No	Extinct language
 hokk1242	hokk1242	Quanzhang						minn1241	No	Group of multiple languages
 hom	homa1239	Homa			Latn			ngen1255	No	Extinct language
@@ -7710,7 +7710,7 @@ lnw		Lanima			Latn				No	Extinct language
 lre	laur1250	Laurentian						nort2947	No	Extinct language
 lsg	lyon1239	Lyons Sign Language		Sign				book1242	No	Declared non-existent by ISO
 ltc	midd1344	Late Middle Chinese			Hant			midd1354	Probably not	Historical langauge
-luh	leiz1236	Leizhou Chinese					zho	qion1239	Yes, with caveat	New to ISO 20250115
+luh	leiz1236	Leizhou Chinese				2,800,000	zho	qion1239	Yes, with caveat	New to ISO 20250115
 luvi1235	luvi1235	Luwian						luvi1234		
 mand1471	mand1471	Mandarinic						nort3155	No	Group of multiple languages
 maza1295	maza1295	Macatecan						popo1293		
@@ -7847,7 +7847,7 @@ puq	puqu1242	Puquina			Latn				No	Extinct language
 puy	puri1259	Purisimeño			Latn			cent2139	Yes, with caveat	Some sources report this as extinct, some as active
 pyx	burm1262	Pyu (Myanmar)			Mymr			uncl1508	Probably not	Historical langauge
 pzh	kulo1237	Pazeh	Pazeh		Latn			nort2899	Yes	
-qer	dale1238	Elfdalian						east2780		
+qer	dale1238	Dalecarlian				3,000		east2780	No	While it is registered in Glottolog with an ISO code of `qer` -- there is no ISO code `qer`
 qhy		Nabataean								
 qion1239	qion1239	Qiong-Lei						minn1241	No	Group of multiple languages
 quq	quin1236	Quinqui			Latn			uncl1493	Yes	

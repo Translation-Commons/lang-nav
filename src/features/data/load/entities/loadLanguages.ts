@@ -53,16 +53,22 @@ function parseLanguageLine(line: string): LanguageData {
   };
   language.pop.rough = populationRough;
 
-  if (code.length <= 3) {
-    language.ISO = { code, parentLanguageCode: parentISOCode };
-    language.BCP = { code, parentLanguageCode: parentISOCode };
-    // UNESCO may have different requirements
-    language.UNESCO = {
-      code,
-      name: nameDisplay,
-      parentLanguageCode: parentISOCode,
-    };
+  // No longer assuming all 3-letter language codes are valid ISO
+  if (parentISOCode) {
+    language.ISO.parentLanguageCode = parentISOCode;
+    language.BCP.parentLanguageCode = parentISOCode;
+    language.UNESCO.parentLanguageCode = parentISOCode;
   }
+  // if (code.length <= 3) {
+  //   language.ISO = { code, parentLanguageCode: parentISOCode };
+  //   language.BCP = { code, parentLanguageCode: parentISOCode };
+  //   // UNESCO may have different requirements
+  //   language.UNESCO = {
+  //     code,
+  //     name: nameDisplay,
+  //     parentLanguageCode: parentISOCode,
+  //   };
+  // }
 
   return language;
 }
