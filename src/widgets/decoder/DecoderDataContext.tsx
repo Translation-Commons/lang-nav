@@ -25,6 +25,7 @@ type DecoderDataContextType = {
   setInputLines: React.Dispatch<React.SetStateAction<string[]>>;
   // results: Record<string, DecoderResult>;
   getResult: (input: string) => DecoderResult | undefined;
+  refresh: () => void;
   isSearchActive: boolean;
 };
 
@@ -34,6 +35,7 @@ const DecoderDataContext = React.createContext<DecoderDataContextType>({
   inputLines: [],
   setInputLines: () => {},
   getResult: () => undefined,
+  refresh: () => {},
   isSearchActive: false,
 });
 
@@ -103,10 +105,22 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
     setIsSearchActive(true);
     Promise.all(inputLines.map((line) => searchAndAdd(line))).then(() => setIsSearchActive(false));
   }, [inputLines]);
+  const refresh = useCallback(() => {
+    setResults({});
+    Promise.all(inputLines.map((line) => searchAndAdd(line)));
+  }, [inputLines, searchAndAdd]);
 
   return (
     <DecoderDataContext.Provider
-      value={{ inputBlob, setInputBlob, inputLines, setInputLines, getResult, isSearchActive }}
+      value={{
+        inputBlob,
+        setInputBlob,
+        inputLines,
+        setInputLines,
+        getResult,
+        isSearchActive,
+        refresh,
+      }}
     >
       {children}
     </DecoderDataContext.Provider>
