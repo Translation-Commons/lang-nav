@@ -1,0 +1,1 @@
+import{ai as u,r as l,q as m}from"./index-BPm2QGYr.js";import{I as c,T as r}from"./TableID-CqleXW2y.js";import{g as a}from"./PopulationSourceCategoryDisplay-CXB2nOj2.js";const x=({organization:s})=>{const{censuses:e}=u(),t=l.useMemo(()=>a(),[]);return m.jsx(c,{tableID:r.Censuses,ents:s?(s==null?void 0:s.censuses)??[]:Object.values(e),columns:t})};export{x as T};
