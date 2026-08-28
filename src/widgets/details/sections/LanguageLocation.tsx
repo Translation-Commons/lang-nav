@@ -72,6 +72,19 @@ const LanguageLocation: React.FC<{ lang: LanguageData }> = ({ lang }) => {
       >
         <Maps lang={lang} updatePageParams={updatePageParams} />
       </LocalParamsProvider>
+
+      <LocalParamsProvider
+        overrides={{
+          limit: MAP_CIRCLE_LIMIT,
+          entType: EntityType.Locale,
+          languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
+          sortBy: Field.PercentOfTerritoryPopulation,
+          colorBy: Field.PercentOfTerritoryPopulation,
+          searchString: '',
+        }}
+      >
+        <EntityMap entities={lang.locales} maxWidth={1000} />
+      </LocalParamsProvider>
     </DetailsSection>
   );
 };

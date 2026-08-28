@@ -1,12 +1,15 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import SVG from 'react-inlinesvg';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
+import { EntityType } from '@features/params/PageParamTypes';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
+
+import { groupBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
 
@@ -30,8 +33,11 @@ const MapTerritories: React.FC<Props> = ({
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { territories } = useDataContext();
 
-  const isTerritoryInList = useCallback(
-    (iso: string) => drawableEntities.some((ent) => ent.ID === iso),
+  const territoriesToColoringEntities = useMemo(
+    () =>
+      groupBy(drawableEntities, (ent) =>
+        ent.type === EntityType.Locale && ent.territory ? ent.territory.ID : ent.ID,
+      ),
     [drawableEntities],
   );
 
@@ -53,10 +59,11 @@ const MapTerritories: React.FC<Props> = ({
     if (!svgLoaded) return;
 
     forEachTerritory((territory, element) => {
-      if (isTerritoryInList(territory.ID)) {
+      const coloringEnt = territoriesToColoringEntities[territory.ID]?.[0];
+      if (coloringEnt != null) {
         element.classList.add('inList');
         if (colorBy !== Field.None) {
-          const color = getColor(territory);
+          const color = getColor(coloringEnt);
           element.style.fill = color || 'var(--color-button-secondary)';
         } else {
           element.style.fill = 'var(--color-button-primary)';
@@ -66,7 +73,7 @@ const MapTerritories: React.FC<Props> = ({
         element.style.fill = '#bcbcbcbc';
       }
     });
-  }, [territories, getColor, isTerritoryInList, colorBy, svgLoaded]);
+  }, [territories, getColor, territoriesToColoringEntities, colorBy, svgLoaded]);
 
   // Manage hovered and pinned states
   useEffect(() => {
@@ -83,16 +90,17 @@ const MapTerritories: React.FC<Props> = ({
 
   const buildOnMouseEnter = useCallback(
     (territory: TerritoryData) => (ev: MouseEvent) => {
+      const interactiveEnt = territoriesToColoringEntities[territory.ID]?.[0] ?? territory;
       showHoverCard(
         <div>
-          <strong>{territory.nameDisplay}</strong>
+          <strong>{interactiveEnt.nameDisplay}</strong>
           <div style={{ color: 'var(--color-text-secondary)' }}>Click for more</div>
         </div>,
         ev.clientX,
         ev.clientY,
       );
     },
-    [showHoverCard],
+    [showHoverCard, territoriesToColoringEntities],
   );
 
   const buildOnMouseLeave = useCallback(
@@ -108,9 +116,10 @@ const MapTerritories: React.FC<Props> = ({
     const cleanupListeners: Array<() => void> = [];
 
     forEachTerritory((territory, element) => {
+      const interactiveEnt = territoriesToColoringEntities[territory.ID]?.[0] ?? territory;
       const handleClick = (ev: MouseEvent) => {
         ev.stopPropagation();
-        onClick(territory);
+        onClick(interactiveEnt);
       };
 
       const handleMouseEnter = buildOnMouseEnter(territory);
@@ -128,7 +137,14 @@ const MapTerritories: React.FC<Props> = ({
     });
 
     return () => cleanupListeners.forEach((cleanup) => cleanup());
-  }, [buildOnMouseEnter, buildOnMouseLeave, onClick, territories, svgLoaded]);
+  }, [
+    buildOnMouseEnter,
+    buildOnMouseLeave,
+    onClick,
+    territories,
+    svgLoaded,
+    territoriesToColoringEntities,
+  ]);
 
   return (
     <div className="MapLayer" ref={svgContainerRef}>

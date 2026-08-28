@@ -1,5 +1,7 @@
 // Official Robinson table from Snyder (1987), for every 5° of latitude.
 
+import { EntityType } from '@features/params/PageParamTypes';
+
 import DrawableData from './DrawableData';
 
 // Each row: [latitude_deg, x_coeff (A), y_coeff (B)]
@@ -47,6 +49,11 @@ export function getRobinsonCoordinates(lat: number, lon: number) {
 // The coordinates are shifted 11 degrees east to center the map.
 export function getRobinsonCoordinatesShifted(ent: DrawableData) {
   if (ent == null) return { x: 0, y: 0 };
+  if (ent.type === EntityType.Locale) {
+    if (!ent.territory) return { x: 0, y: 0 };
+    return getRobinsonCoordinatesShifted(ent.territory);
+  }
+
   if (ent.latitude == null || ent.longitude == null) return { x: 0, y: 0 };
   return getRobinsonCoordinates(
     ent.latitude,

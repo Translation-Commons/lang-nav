@@ -87,8 +87,10 @@ function getMapDescription(entType: EntityType): ReactNode {
     case EntityType.Locale:
       return (
         <>
-          The current view shows the territories of the world with how many languages or locales we
-          have associated with them. Hover over the countries to see the list.
+          This map colors each of the countries by the top locale in each territory. Hover over a
+          country to see more details about its top locale. To get the best out of this view, use
+          the filters to limit the locales, for instance "Show the language Mandarin" or "Show the
+          top language written in Devanagari".
         </>
       );
     case EntityType.WritingSystem:

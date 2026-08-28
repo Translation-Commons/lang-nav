@@ -139,7 +139,8 @@ export function getDefaultParams(
       // Add default colorBys since we're showing X in territories
       if (params.colorBy === Field.None) {
         if (params.entType === EntityType.Census) params.colorBy = Field.CountOfCensuses;
-        if (params.entType === EntityType.Locale) params.colorBy = Field.CountOfLanguages;
+        if (params.entType === EntityType.Locale)
+          params.colorBy = Field.PercentOfTerritoryPopulation;
         if (params.entType === EntityType.WritingSystem)
           params.colorBy = Field.CountOfWritingSystems;
       }
