@@ -63,7 +63,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
       }}
       tabIndex={0}
     >
-      <PinButton isPinned={isPinned} onTogglePin={togglePin} />
+      <PinButton className="bg-transparent!" isPinned={isPinned} onTogglePin={togglePin} />
       {children}
     </div>
   );

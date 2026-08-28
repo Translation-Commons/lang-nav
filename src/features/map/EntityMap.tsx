@@ -141,7 +141,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     if (!entityBounds) return;
     // Instant on first load to avoid a flash from full-map to fitted; animate afterwards
     // when the visible entities change.
-    fitBounds(entityBounds, { duration: hasInitialFitRef.current ? 400 : 0 });
+    fitBounds(entityBounds, { duration: hasInitialFitRef.current ? 200 : 0 });
     hasInitialFitRef.current = true;
   }, [entityBounds, fitBounds]);
 
