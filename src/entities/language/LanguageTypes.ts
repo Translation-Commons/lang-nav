@@ -137,6 +137,7 @@ export interface LanguageData extends EntityBase {
   Combined: LanguageDataInSource;
   ISO: LanguageDataInSource & {
     code6391?: string;
+    code6392b?: string; // Bibliographic codes
     status?: LanguageISOStatus;
     retirementReason?: RetirementReason;
   };

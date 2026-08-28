@@ -88,6 +88,30 @@ const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           }
           link={lang.ISO.code && `https://iso639-3.sil.org/code/${lang.ISO.code}`}
         />
+        {lang.ISO.code6392b && lang.ISO.code6392b !== lang.ISO.code && (
+          <IdentityRow
+            sourceLabel="ISO (Bibliographic)"
+            name={
+              lang.ISO.name ? (
+                <EntityFieldHighlightedByPageSearch ent={lang} field={SearchableField.NameISO} />
+              ) : (
+                <Deemphasized>Not in ISO catalog</Deemphasized>
+              )
+            }
+            scope={lang.ISO.scope}
+            code={lang.ISO.code6392b}
+            codeWarning="This should not be used, prefer the ISO 639-3 code."
+            codeDescription={
+              <>
+                The ISO 639-2 standard supports 2 different options for some language codes:
+                bibliographic or terminology. This was created to help support legacy library
+                systems before widespread adoption of the standard ISO 639-3 codes. A handful of
+                languages get these codes.
+              </>
+            }
+            link="https://www.loc.gov/standards/iso639-2/php/code_list.php"
+          />
+        )}
         {lang.CLDR.code && (
           <IdentityRow
             sourceLabel="CLDR"

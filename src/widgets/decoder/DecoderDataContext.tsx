@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState, useTransition } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { EntityType } from '@features/params/PageParamTypes';
@@ -11,20 +11,21 @@ import { DecoderDirection, useDecoderOptionsContext } from './options/DecoderOpt
 import useFindLanguage from './useFindLanguageFromName';
 
 const EXAMPLE_NAMES =
-  'English,Spanish,French' +
-  ',Chinese,Mandarin,Putonghua,Cantonese,Hokkien,Taiwanese' +
-  ',Arabic,Darija,Standard Arabic,Egyptian Arabic' +
-  ',Malay,Indonesian,Bahasa' +
-  ',Bembe,Bemb,Tonga,Tonga (Tonga),Tonga (Tonga Islands)' +
-  ',Elvish,Sindarin,Quenya';
+  'English\nSpanish\nFrench\n' +
+  'Chinese\nMandarin\nPutonghua\nCantonese\nHokkien\nTaiwanese\n' +
+  'Arabic\nDarija\nStandard Arabic\nEgyptian Arabic\n' +
+  'Malay\nIndonesian\nBahasa\n' +
+  'Bembe\nBemb\nTonga\nTonga (Tonga)\nTonga (Tonga Islands)\n' +
+  'Naʼvi\nSindarin\nQuenya';
+const EXAMPLE_CODES = 'en\neng\ncmn\nzh-cmn\nzh\nchi\nzho\nclas1255\nzhx\nsit';
 
 type DecoderDataContextType = {
   inputBlob: string;
   setInputBlob: React.Dispatch<React.SetStateAction<string>>;
   inputLines: string[];
-  setInputLines: React.Dispatch<React.SetStateAction<string[]>>;
-  // results: Record<string, DecoderResult>;
   getResult: (input: string) => DecoderResult | undefined;
+  search: (input: string) => Promise<DecoderResult>;
+  isInputPending: boolean;
   isSearchActive: boolean;
 };
 
@@ -32,8 +33,9 @@ const DecoderDataContext = React.createContext<DecoderDataContextType>({
   inputBlob: '',
   setInputBlob: () => {},
   inputLines: [],
-  setInputLines: () => {},
   getResult: () => undefined,
+  search: async (input: string) => ({ input, lang: undefined, alts: [] }),
+  isInputPending: false,
   isSearchActive: false,
 });
 
@@ -44,10 +46,20 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const findLanguage = useFindLanguage();
   const { direction } = useDecoderOptionsContext();
 
+  const [isTransitionPending, startTransition] = useTransition();
   const [isSearchActive, setIsSearchActive] = useState(false);
-  const [inputBlob, setInputBlob] = useState(EXAMPLE_NAMES.split(',').join('\n'));
-  const [inputLines, setInputLines] = useState(EXAMPLE_NAMES.split(','));
+  const [inputBlob, setInputBlob] = useState(EXAMPLE_NAMES);
   const [results, setResults] = useState<Record<string, DecoderResult>>({});
+  const [searchVersion, setSearchVersion] = useState(0);
+  const hasInitializedSearchRef = useRef(false);
+  const resultsRef = useRef(results);
+  const deferredInputBlob = React.useDeferredValue(inputBlob);
+  const inputLines = useMemo(() => deferredInputBlob.split('\n'), [deferredInputBlob]);
+  const isInputPending = inputBlob !== deferredInputBlob || isTransitionPending;
+
+  useEffect(() => {
+    resultsRef.current = results;
+  }, [results]);
 
   const getResult = useCallback((input: string) => results[input.toLowerCase().trim()], [results]);
   const search = useCallback(
@@ -75,38 +87,67 @@ export const DecoderDataProvider: React.FC<React.PropsWithChildren> = ({ childre
   const searchAndAdd = useCallback(
     async (searchString: string) => {
       const key = searchString.toLowerCase().trim();
-      if (results[key]) return;
+      if (resultsRef.current[key]) return;
 
       const result = await search(searchString);
-      setResults((prev) => ({ ...prev, [key]: result }));
+      startTransition(() => setResults((prev) => ({ ...prev, [key]: result })));
     },
-    [search],
+    [search, startTransition],
   );
 
-  // Effects, update the data when new input is provided or the direction changes
   useEffect(() => {
-    // Swap the input lines from names to the codes currently matched
-    if (Object.keys(results).length && inputLines.length) {
-      const newBlob =
-        direction === DecoderDirection.NamesToCodes
-          ? inputLines
-              .map((l) => results[l.toLowerCase().trim()]?.lang?.nameDisplay ?? '')
-              .join('\n')
-          : inputLines
-              .map((l) => results[l.toLowerCase().trim()]?.lang?.codeDisplay ?? '')
-              .join('\n');
-      setInputBlob(newBlob);
+    startTransition(() => {
+      setInputBlob(direction === DecoderDirection.NamesToCodes ? EXAMPLE_NAMES : EXAMPLE_CODES);
       setResults({});
-    }
-  }, [direction]);
+    });
+    resultsRef.current = {};
+    setSearchVersion((prev) => prev + 1);
+  }, [direction, startTransition]);
+
   useEffect(() => {
+    if (!hasInitializedSearchRef.current) {
+      hasInitializedSearchRef.current = true;
+      return;
+    }
+
+    startTransition(() => {
+      setResults({});
+    });
+    resultsRef.current = {};
+    setSearchVersion((prev) => prev + 1);
+  }, [search, startTransition]);
+
+  useEffect(() => {
+    let cancelled = false;
+    const linesToSearch = [...new Set(inputLines.map((line) => line.toLowerCase().trim()))];
+    const missingLines = linesToSearch.filter((line) => !resultsRef.current[line]);
+
+    if (missingLines.length === 0) {
+      setIsSearchActive(false);
+      return;
+    }
+
     setIsSearchActive(true);
-    Promise.all(inputLines.map((line) => searchAndAdd(line))).then(() => setIsSearchActive(false));
-  }, [inputLines]);
+    Promise.all(missingLines.map((line) => searchAndAdd(line))).finally(() => {
+      if (!cancelled) setIsSearchActive(false);
+    });
+
+    return () => {
+      cancelled = true;
+    };
+  }, [inputLines, searchAndAdd, searchVersion]);
 
   return (
     <DecoderDataContext.Provider
-      value={{ inputBlob, setInputBlob, inputLines, setInputLines, getResult, isSearchActive }}
+      value={{
+        inputBlob,
+        setInputBlob,
+        inputLines,
+        getResult,
+        isInputPending,
+        isSearchActive,
+        search,
+      }}
     >
       {children}
     </DecoderDataContext.Provider>

@@ -21,6 +21,7 @@ function getReportIDsForEntityType(entType: EntityType): ReportID[] {
         ReportID.LocalesPotential,
         ReportID.LocaleCitationCompleteness,
         ReportID.LocaleIndigeneity,
+        ReportID.LocalesLanguagesWithout,
       ];
     case EntityType.WritingSystem:
       return [ReportID.WritingSystemsLanguagesWithout];

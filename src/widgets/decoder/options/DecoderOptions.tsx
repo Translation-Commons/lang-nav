@@ -1,3 +1,4 @@
+import { SquareCheckIcon, SquareIcon } from 'lucide-react';
 import React from 'react';
 
 import {
@@ -5,6 +6,10 @@ import {
   SelectorDisplayProvider,
 } from '@features/params/ui/SelectorDisplayContext';
 import TerritoryFilterSelector from '@features/transforms/filtering/selectors/TerritoryFilterSelector';
+
+import { Button } from '@shared/ui/button';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
+import { Toggle } from '@shared/ui/toggle';
 
 import DecoderLanguageSourceSelector from './DecoderLanguageSourceSelector';
 import { DecoderDirection, useDecoderOptionsContext } from './DecoderOptionsContext';
@@ -16,47 +21,55 @@ const DecoderOptions: React.FC = () => {
 
   return (
     <div className="flex flex-row gap-4 items-center m-2">
-      <div className="font-bold">
-        <button onClick={() => setShowOptions(!showOptions)}>
-          Options {showOptions ? '▶' : '◀'}
-        </button>
-      </div>
+      <Button className="cursor-pointer" onClick={() => setShowOptions(!showOptions)}>
+        Options {showOptions ? '▶' : '◀'}
+      </Button>
       {showOptions && (
-        <div className="flex flex-col gap-2 ">
-          <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+        <table>
+          <tbody>
+            <tr>
+              <td>Direction</td>
+              <td>
+                <Tabs
+                  value={direction}
+                  onValueChange={(value) => setDirection(value as DecoderDirection)}
+                >
+                  <TabsList>
+                    <TabsTrigger className="cursor-pointer" value={DecoderDirection.NamesToCodes}>
+                      Names → Codes
+                    </TabsTrigger>
+                    <TabsTrigger className="cursor-pointer" value={DecoderDirection.CodesToNames}>
+                      Codes → Names
+                    </TabsTrigger>
+                  </TabsList>
+                </Tabs>
+              </td>
+            </tr>
             <DecoderLanguageSourceSelector />
-            <div className="flex flex-row gap-1 items-center">
-              Relevant to territory:
-              <TerritoryFilterSelector />
-            </div>
-          </SelectorDisplayProvider>
-          <div className="flex gap-2">
-            <button
-              className={(direction === DecoderDirection.NamesToCodes ? 'primary' : '') + ' py-1!'}
-              onClick={() => setDirection(DecoderDirection.NamesToCodes)}
-            >
-              Names → Codes
-            </button>
-            <button
-              className={(direction === DecoderDirection.CodesToNames ? 'primary' : '') + ' py-1!'}
-              onClick={() => setDirection(DecoderDirection.CodesToNames)}
-            >
-              Codes → Names
-            </button>
-          </div>
-          <div>
-            <label className="font-normal!">
-              <input
-                className="mr-2"
-                type="checkbox"
-                checked={includeMacroCodes}
-                onChange={(e) => setIncludeMacroCodes(e.target.checked)}
-              />
-              Include macrolanguage codes (eg. <code>zho/cmn</code> instead of just <code>cmn</code>
-              )
-            </label>
-          </div>
-        </div>
+            <tr>
+              <td>Relevant to territory</td>
+              <td className="text-sm">
+                <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+                  <TerritoryFilterSelector />
+                </SelectorDisplayProvider>
+              </td>
+            </tr>
+            {direction === DecoderDirection.NamesToCodes && (
+              <tr>
+                <td>Include macro codes</td>
+                <td>
+                  <Toggle
+                    pressed={includeMacroCodes}
+                    onPressedChange={() => setIncludeMacroCodes((prev) => !prev)}
+                  >
+                    {includeMacroCodes ? <SquareCheckIcon /> : <SquareIcon />} include codes? eg.{' '}
+                    <code>zho/cmn</code>
+                  </Toggle>
+                </td>
+              </tr>
+            )}
+          </tbody>
+        </table>
       )}
     </div>
   );

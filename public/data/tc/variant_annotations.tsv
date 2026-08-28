@@ -1,5 +1,6 @@
 ID	VariantType	EquivalentLanguageCode
 spanglis	d	mis
+taglish	d	
 unifon	o	
 basiceng	d	mis
 boont	d	mis
@@ -45,18 +46,26 @@ bornholm	d	born1251
 synnejyl	d	mis
 akuapem	d	akua1239
 asante	d	asan1239
-akhmimic	d	akhm1237
-bohairic	d	boha1242
-fayyumic	d	fayy1237
-lycopol	d	lyco1237
-mesokem	d	oxyr1237
-sahidic	d	sahi1241
+stadi	d	
 arevela	d	hye
 arevmda	d	hyw
+moderat	o	
+radikalt	o	
 bauddha	d	budd1234
 itihasa	d	mis
 laukika	d	cls
 vaidika	d	vsn
+1994	o	
+biske	d	mis
+bohoric	o	
+dajnko	o	
+lipaw	o	
+metelko	o	
+nedis	d	mis
+njiva	d	mis
+osojs	d	mis
+rozaj	d	resi1246
+solba	d	mis
 aranes	d	aran1260
 auvern	d	auve1239
 cisaup	d	cisa1238
@@ -70,24 +79,19 @@ lengadoc	d	lang1309
 nicard	d	nica1249
 provenc	d	prov1235
 vivaraup	d	viva1235
-1994	o	
-biske	d	mis
-bohoric	o	
-dajnko	o	
-lipaw	o	
-metelko	o	
-nedis	d	mis
-njiva	d	mis
-osojs	d	mis
-rozaj	d	resi1246
-solba	d	mis
 pahawh2	o	
 pahawh3	o	
 pahawh4	o	
+vecdruka	o	
 ulster	d	ulst1239
 biscayan	d	bisc1236
 hognorsk	d	mis
-vecdruka	o	
+akhmimic	d	akhm1237
+bohairic	d	boha1242
+fayyumic	d	fayy1237
+lycopol	d	lyco1237
+mesokem	d	oxyr1237
+sahidic	d	sahi1241
 barla	d	barl1241
 sotav	d	kabu1257
 ltg1929	o	mis
@@ -102,7 +106,6 @@ vallader	d	lowe1386
 kleinsch	o	
 tunumiit	d	tunu1234
 balanka	d	bala1303
-peano	d	mis
 aluku	d	aluk1239
 ndyuka	d	mis
 pamaka	d	mis
@@ -111,6 +114,8 @@ fascia	d	fass1244
 fodom	d	livi1241
 gherd	d	gard1241
 valbadia	d	badi1244
+peano	d	mis
+slepe	d	schl1238
 arkaika	d	mis
 hsistemo	o	
 xsistemo	o	

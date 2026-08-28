@@ -8,23 +8,10 @@ import useDecoderSuggestions from './useDecoderSuggestions';
 
 // These language codes won't raise errors because the issues are known to be misleading
 const OVERRIDE_LANGUAGE_MATCH: Record<string, string> = {
-  hokkien: 'taib1242',
-  teochew: 'chao1238',
-  mandarin: 'cmn',
-  malay: 'zsm',
   other: 'mul',
-  darija: 'ary',
-  italian: 'ita',
 };
 
-const OVERRIDE_ALTS: Record<string, string[]> = {
-  hokkien: ['nan'],
-  teochew: ['nan'],
-  mandarin: ['zho'],
-  darija: ['arq', 'aeb'],
-  malay: ['msa', 'zlm'],
-  italian: ['ise', 'slf', 'itk'],
-};
+const OVERRIDE_ALTS: Record<string, string[]> = {};
 
 type FindLanguage = (searchString: string) => Promise<LanguageData[]>;
 
