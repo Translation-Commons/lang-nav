@@ -104,9 +104,7 @@ const MapTerritories: React.FC<Props> = ({
         <MapHoverCard
           ent={interactiveEnt ?? territory}
           allowSidebar={allowSidebar}
-          noResultsDescription={
-            !interactiveEnt && entType == EntityType.Locale && 'No languages passing filters'
-          }
+          showData={entType !== EntityType.Locale || interactiveEnt != null}
         />,
         ev.clientX,
         ev.clientY,
