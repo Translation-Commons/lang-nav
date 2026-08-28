@@ -328,6 +328,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.WritingSystemScope,
         Field.TerritoryScope,
 
+        Field.Language,
         Field.LanguageFamily,
       ];
     case Transform.Scale:
