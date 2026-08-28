@@ -13,8 +13,6 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.PopulationWriting:
     case Field.PopulationOfDescendants:
     case Field.PopulationPercentInBiggestDescendantLanguage:
-    case Field.PercentOfOverallLanguageSpeakers:
-    case Field.PercentOfTerritoryPopulation:
     case Field.Date:
     case Field.Area:
       // Low values are blue, high values are orange
@@ -46,6 +44,8 @@ function getColorGradientForField(colorBy: Field): ColorGradient {
     case Field.WritingSystemScope:
     case Field.TerritoryScope:
     case Field.VariantType:
+    case Field.PercentOfOverallLanguageSpeakers:
+    case Field.PercentOfTerritoryPopulation:
       // Preferred color schema for ordinals
       // Low values are light blue, high values are dark blue
       return ColorGradient.SequentialBlue;

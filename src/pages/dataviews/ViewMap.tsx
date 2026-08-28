@@ -5,8 +5,10 @@ import EntityMap from '@features/map/EntityMap';
 import MapContainer from '@features/map/MapContainer';
 import usePagination from '@features/pagination/usePagination';
 import VisibleItemsMeter from '@features/pagination/VisibleItemsMeter';
+import InternalLink from '@features/params/InternalLink';
 import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
+import Field from '@features/transforms/fields/Field';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 
 import { getEntityTypeLabelPlural } from '@entities/lib/getEntityName';
@@ -87,10 +89,31 @@ function getMapDescription(entType: EntityType): ReactNode {
     case EntityType.Locale:
       return (
         <>
-          This map colors each of the countries by the top locale in each territory. Hover over a
-          country to see more details about its top locale. To get the best out of this view, use
-          the filters to limit the locales, for instance "Show the language Mandarin" or "Show the
-          top language written in Devanagari".
+          This map shows countries by the top language in each area. Hover over a country to see
+          more details about its top locale. To get the best out of this view, use the coloring
+          option and modify the filters to limit the locales. For instance{' '}
+          <InternalLink
+            params={{
+              languageFilter: 'French [fra]',
+              writingSystemFilter: '',
+              colorBy: Field.PercentOfTerritoryPopulation,
+            }}
+            keepOldParams={true}
+          >
+            [show the countries where French is spoken]
+          </InternalLink>{' '}
+          or{' '}
+          <InternalLink
+            params={{
+              languageFilter: '',
+              writingSystemFilter: 'Devanagari [Deva]',
+              colorBy: Field.PercentOfTerritoryPopulation,
+            }}
+            keepOldParams={true}
+          >
+            [show the countries by the largest language there written in Devanagari]
+          </InternalLink>
+          .
         </>
       );
     case EntityType.WritingSystem:

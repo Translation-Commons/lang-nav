@@ -199,6 +199,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
                 coloringFunctions={coloringFunctions}
                 hoveredId={hoveredId}
                 pinnedIds={allowSidebar ? pinned : []}
+                allowSidebar={allowSidebar}
               />
             )}
 

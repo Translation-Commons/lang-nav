@@ -57,8 +57,8 @@ const MapCard: React.FC<{
         </Button>
         {/* Similar to PinButton but matching local styling */}
         <Button className="cursor-pointer h-8 w-8" variant="secondary" onClick={onClose}>
-          <PinIcon className="group-hover/button:hidden" />
-          <PinOffIcon className="hidden group-hover/button:inline-block" />
+          <PinIcon className="fill-foreground group-hover/button:hidden" />
+          <PinOffIcon className="fill-foreground hidden group-hover/button:inline-block" />
         </Button>
       </div>
 

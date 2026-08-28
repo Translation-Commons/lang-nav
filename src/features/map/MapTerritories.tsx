@@ -4,6 +4,8 @@ import SVG from 'react-inlinesvg';
 import { useDataContext } from '@features/data/context/useDataContext';
 import useHoverCard from '@features/layers/hovercard/useHoverCard';
 import { EntityType } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+import { getColorGradientFunction } from '@features/transforms/coloring/getColorGradientFunction';
 import { ColoringFunctions } from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
 
@@ -12,6 +14,7 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { groupBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
+import MapHoverCard from './MapHoverCard';
 
 type Props = {
   drawableEntities: DrawableData[];
@@ -19,19 +22,24 @@ type Props = {
   onClick: (ent: DrawableData) => void;
   hoveredId?: string | null;
   pinnedIds?: string[];
+  allowSidebar: boolean;
 };
 
 const MapTerritories: React.FC<Props> = ({
   drawableEntities,
-  coloringFunctions: { colorBy, getColor },
+  coloringFunctions: { colorBy, getColor, minValue },
   onClick,
   hoveredId,
   pinnedIds = [],
+  allowSidebar,
 }) => {
   const svgContainerRef = useRef<HTMLDivElement>(null);
   const [svgLoaded, setSvgLoaded] = useState(false);
   const { showHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
   const { territories } = useDataContext();
+  const { entType, colorGradient } = usePageParams();
+  const applyColorGradient = getColorGradientFunction(colorGradient);
+  const noDataColor = entType == EntityType.Locale ? applyColorGradient(minValue) : '#bcbcbcbc';
 
   const territoriesToColoringEntities = useMemo(
     () =>
@@ -70,10 +78,11 @@ const MapTerritories: React.FC<Props> = ({
         }
       } else {
         element.classList.remove('inList');
-        element.style.fill = '#bcbcbcbc';
+        element.style.fill = noDataColor;
+        element.style.fillOpacity = '.8';
       }
     });
-  }, [territories, getColor, territoriesToColoringEntities, colorBy, svgLoaded]);
+  }, [territories, getColor, territoriesToColoringEntities, colorBy, svgLoaded, noDataColor]);
 
   // Manage hovered and pinned states
   useEffect(() => {
@@ -90,12 +99,15 @@ const MapTerritories: React.FC<Props> = ({
 
   const buildOnMouseEnter = useCallback(
     (territory: TerritoryData) => (ev: MouseEvent) => {
-      const interactiveEnt = territoriesToColoringEntities[territory.ID]?.[0] ?? territory;
+      const interactiveEnt = territoriesToColoringEntities[territory.ID]?.[0];
       showHoverCard(
-        <div>
-          <strong>{interactiveEnt.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>Click for more</div>
-        </div>,
+        <MapHoverCard
+          ent={interactiveEnt ?? territory}
+          allowSidebar={allowSidebar}
+          noResultsDescription={
+            !interactiveEnt && entType == EntityType.Locale && 'No languages passing filters'
+          }
+        />,
         ev.clientX,
         ev.clientY,
       );

@@ -11,9 +11,9 @@ import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
-import { MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
-
 import './map.css';
+import { MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
+import MapHoverCard from './MapHoverCard';
 
 type Props = {
   drawableEntities: DrawableData[];
@@ -57,16 +57,7 @@ const MapCentroids: React.FC<Props> = ({
 
   const buildOnMouseEnter = useCallback(
     (ent: DrawableData) => (e: React.MouseEvent) => {
-      showHoverCard(
-        <div>
-          <strong>{ent.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>
-            {allowSidebar ? 'Pin to sidebar' : 'Open in details panel'}
-          </div>
-        </div>,
-        e.clientX,
-        e.clientY,
-      );
+      showHoverCard(<MapHoverCard ent={ent} allowSidebar={allowSidebar} />, e.clientX, e.clientY);
     },
     [showHoverCard, allowSidebar],
   );
