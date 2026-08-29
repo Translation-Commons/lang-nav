@@ -12,6 +12,7 @@ import LanguageLocales from './sections/LanguageLocales';
 import LanguageLocation from './sections/LanguageLocation';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
 import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
+import LanguageTerritoriesSection from './sections/LanguageTerritoriesSection';
 import LanguageWikipediaSection from './sections/LanguageWikipediaSection';
 
 type Props = {
@@ -52,6 +53,7 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
       <LanguageAttributes lang={lang} />
       <LanguageConnections lang={lang} />
       <LanguageLocation lang={lang} />
+      <LanguageTerritoriesSection lang={lang} />
     </div>
   );
 };

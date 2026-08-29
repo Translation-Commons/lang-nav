@@ -95,6 +95,9 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.CountOfVariants,
 
         Field.Depth,
+        Field.Coordinates,
+        Field.Latitude,
+        Field.Longitude,
       ];
     case EntityType.Territory:
       return [
@@ -328,6 +331,7 @@ function getFieldsForTransform(transform: Transform): Field[] {
         Field.WritingSystemScope,
         Field.TerritoryScope,
 
+        Field.Language,
         Field.LanguageFamily,
       ];
     case Transform.Scale:

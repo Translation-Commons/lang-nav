@@ -1,10 +1,10 @@
 import { LucideIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from './HoverableButton';
+import { Button } from '@shared/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type Props = {
-  className?: string;
   description: string;
   Icon: LucideIcon;
   onClick?: () => void;
@@ -13,17 +13,25 @@ type Props = {
 /**
  * Provides an icon that is correctly centered in a button
  */
-const HoverableIcon: React.FC<Props> = ({ Icon, onClick, description, className }) => {
+const HoverableIcon: React.FC<Props> = ({ Icon, onClick, description }) => {
   return (
-    <HoverableButton
-      ariaLabel={description}
-      className={className}
-      onClick={onClick}
-      hoverContent={description}
-      style={{ padding: '0.5em' }}
-    >
-      <Icon style={{ display: 'block' }} />
-    </HoverableButton>
+    <HoverCard>
+      <HoverCardTrigger
+        delay={10}
+        closeDelay={100}
+        render={
+          <Button
+            aria-label={description}
+            className="cursor-pointer p-2"
+            onClick={onClick}
+            variant="secondary"
+          >
+            <Icon />
+          </Button>
+        }
+      />
+      <HoverCardContent className="flex w-fit flex-col gap-0.5">{description}</HoverCardContent>
+    </HoverCard>
   );
 };
 

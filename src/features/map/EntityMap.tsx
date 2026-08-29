@@ -5,9 +5,11 @@ import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
 import useColors from '@features/transforms/coloring/useColors';
 import Field from '@features/transforms/fields/Field';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getEntityLocales } from '@entities/lib/getEntityRelatedTerritories';
+import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryData } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
@@ -38,6 +40,7 @@ type Props = {
 const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = false }) => {
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
+  const sortFunction = getSortFunction();
 
   const [hoveredId, setHoveredId] = useState<string | null>(null);
 
@@ -71,16 +74,27 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     return () => observer.disconnect();
   }, []);
 
+  const sortedEntities = useMemo(() => [...entities].sort(sortFunction), [entities, sortFunction]);
+
   const drawableEntities = useMemo(() => {
     if (entType === EntityType.Language) {
-      return entities.filter((ent) => ent.type === EntityType.Language) as LanguageData[];
+      return sortedEntities.filter((ent) => ent.type === EntityType.Language) as LanguageData[];
+    }
+
+    if (entType === EntityType.Locale) {
+      return uniqueBy(
+        sortedEntities.filter(
+          (ent) => ent.type === EntityType.Locale && ent.territory != null,
+        ) as LocaleData[],
+        (l) => l.territory?.ID || '',
+      ) as LocaleData[];
     }
 
     return uniqueBy(
-      entities
+      sortedEntities
         .flatMap((ent) => {
           if (ent.type === EntityType.Territory) return ent;
-          if (ent.type === EntityType.Locale) return ent.territory;
+          if (ent.type === EntityType.Locale) return ent;
           if (ent.type === EntityType.Census) return ent.territory;
           if (ent.type === EntityType.WritingSystem)
             return getEntityLocales(ent).map((l) => l.territory);
@@ -89,7 +103,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
         .filter((t): t is TerritoryData => t !== undefined),
       (t) => t.ID,
     ) as TerritoryData[];
-  }, [entType, entities]);
+  }, [entType, sortedEntities]);
 
   // Bounding box (in map coordinates) of the entities that will be drawn as centroids,
   // so we can zoom the map to fit them instead of always showing the whole world.
@@ -107,8 +121,8 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     let count = 0;
 
     drawableEntities.forEach((ent) => {
-      if (ent.latitude == null || ent.longitude == null) return;
       const { x, y } = getRobinsonCoordinatesShifted(ent);
+      if (x == 0 && y == 0) return; // Sorry null island, not today
       const mapX = (x * MAP_ROBINSON_X_SCALE + 180) * svgScale + offsetX;
       const mapY = (-y * MAP_ROBINSON_Y_SCALE + 90) * svgScale + offsetY;
       minX = Math.min(minX, mapX);
@@ -123,12 +137,22 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   }, [drawableEntities, mapHeight]);
 
   const hasInitialFitRef = useRef(false);
+  const lastAutoFitBoundsRef = useRef<string | null>(null);
   useEffect(() => {
     if (!entityBounds) return;
+    const boundsKey = [
+      entityBounds.minX.toFixed(2),
+      entityBounds.minY.toFixed(2),
+      entityBounds.maxX.toFixed(2),
+      entityBounds.maxY.toFixed(2),
+    ].join(':');
+    if (lastAutoFitBoundsRef.current === boundsKey) return;
+
     // Instant on first load to avoid a flash from full-map to fitted; animate afterwards
     // when the visible entities change.
     fitBounds(entityBounds, { duration: hasInitialFitRef.current ? 400 : 0 });
     hasInitialFitRef.current = true;
+    lastAutoFitBoundsRef.current = boundsKey;
   }, [entityBounds, fitBounds]);
 
   const coloringFunctions = useColors({ ents: drawableEntities });
@@ -185,6 +209,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
                 coloringFunctions={coloringFunctions}
                 hoveredId={hoveredId}
                 pinnedIds={allowSidebar ? pinned : []}
+                allowSidebar={allowSidebar}
               />
             )}
 
