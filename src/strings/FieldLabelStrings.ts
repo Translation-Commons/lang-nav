@@ -3,6 +3,7 @@ import Field from '@features/transforms/fields/Field';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
+// To be filled out later
 export function getFieldLabel(field: Field, entType: EntityType): string {
   switch (field) {
     case Field.Code:
@@ -21,7 +22,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
     case Field.SourceType:
       return '';
 
-    // Statuc
+    // Status
     case Field.Modality:
       return '';
 
@@ -98,6 +99,7 @@ export function getFieldLabel(field: Field, entType: EntityType): string {
   }
 }
 
+// To be filled out later
 export function getFieldDescription(field: Field, entType: EntityType): string | undefined {
   switch (field) {
     case Field.Code:
@@ -118,7 +120,7 @@ export function getFieldDescription(field: Field, entType: EntityType): string |
     case Field.SourceType:
       return '';
 
-    // Statuc
+    // Status
     case Field.Modality:
       return '';
 

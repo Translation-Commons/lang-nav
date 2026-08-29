@@ -74,16 +74,16 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     return () => observer.disconnect();
   }, []);
 
-  const drawableEntities = useMemo(() => {
-    entities.sort(sortFunction);
+  const sortedEntities = useMemo(() => [...entities].sort(sortFunction), [entities, sortFunction]);
 
+  const drawableEntities = useMemo(() => {
     if (entType === EntityType.Language) {
-      return entities.filter((ent) => ent.type === EntityType.Language) as LanguageData[];
+      return sortedEntities.filter((ent) => ent.type === EntityType.Language) as LanguageData[];
     }
 
     if (entType === EntityType.Locale) {
       return uniqueBy(
-        entities.filter(
+        sortedEntities.filter(
           (ent) => ent.type === EntityType.Locale && ent.territory != null,
         ) as LocaleData[],
         (l) => l.territory?.ID || '',
@@ -91,7 +91,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
     }
 
     return uniqueBy(
-      entities
+      sortedEntities
         .flatMap((ent) => {
           if (ent.type === EntityType.Territory) return ent;
           if (ent.type === EntityType.Locale) return ent;
@@ -103,7 +103,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
         .filter((t): t is TerritoryData => t !== undefined),
       (t) => t.ID,
     ) as TerritoryData[];
-  }, [entType, entities, sortFunction]);
+  }, [entType, sortedEntities]);
 
   // Bounding box (in map coordinates) of the entities that will be drawn as centroids,
   // so we can zoom the map to fit them instead of always showing the whole world.
@@ -137,12 +137,22 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   }, [drawableEntities, mapHeight]);
 
   const hasInitialFitRef = useRef(false);
+  const lastAutoFitBoundsRef = useRef<string | null>(null);
   useEffect(() => {
     if (!entityBounds) return;
+    const boundsKey = [
+      entityBounds.minX.toFixed(2),
+      entityBounds.minY.toFixed(2),
+      entityBounds.maxX.toFixed(2),
+      entityBounds.maxY.toFixed(2),
+    ].join(':');
+    if (lastAutoFitBoundsRef.current === boundsKey) return;
+
     // Instant on first load to avoid a flash from full-map to fitted; animate afterwards
     // when the visible entities change.
-    fitBounds(entityBounds, { duration: hasInitialFitRef.current ? 200 : 0 });
+    fitBounds(entityBounds, { duration: hasInitialFitRef.current ? 400 : 0 });
     hasInitialFitRef.current = true;
+    lastAutoFitBoundsRef.current = boundsKey;
   }, [entityBounds, fitBounds]);
 
   const coloringFunctions = useColors({ ents: drawableEntities });

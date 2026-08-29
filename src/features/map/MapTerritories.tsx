@@ -27,7 +27,7 @@ type Props = {
 
 const MapTerritories: React.FC<Props> = ({
   drawableEntities,
-  coloringFunctions: { colorBy, getColor, minValue },
+  coloringFunctions: { colorBy, getColor },
   onClick,
   hoveredId,
   pinnedIds = [],
@@ -39,7 +39,7 @@ const MapTerritories: React.FC<Props> = ({
   const { territories } = useDataContext();
   const { entType, colorGradient } = usePageParams();
   const applyColorGradient = getColorGradientFunction(colorGradient);
-  const noDataColor = entType == EntityType.Locale ? applyColorGradient(minValue) : '#bcbcbcbc';
+  const noDataColor = entType === EntityType.Locale ? applyColorGradient(0) : '#bcbcbc';
 
   const territoriesToColoringEntities = useMemo(
     () =>
@@ -70,6 +70,7 @@ const MapTerritories: React.FC<Props> = ({
       const coloringEnt = territoriesToColoringEntities[territory.ID]?.[0];
       if (coloringEnt != null) {
         element.classList.add('inList');
+        element.style.fillOpacity = '1';
         if (colorBy !== Field.None) {
           const color = getColor(coloringEnt);
           element.style.fill = color || 'var(--color-button-secondary)';
@@ -110,7 +111,7 @@ const MapTerritories: React.FC<Props> = ({
         ev.clientY,
       );
     },
-    [showHoverCard, territoriesToColoringEntities],
+    [showHoverCard, territoriesToColoringEntities, allowSidebar, entType],
   );
 
   const buildOnMouseLeave = useCallback(

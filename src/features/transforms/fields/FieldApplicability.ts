@@ -95,6 +95,9 @@ function getSpecificFieldsForEntityType(entType: EntityType): Field[] {
         Field.CountOfVariants,
 
         Field.Depth,
+        Field.Coordinates,
+        Field.Latitude,
+        Field.Longitude,
       ];
     case EntityType.Territory:
       return [
