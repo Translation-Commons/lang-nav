@@ -6,13 +6,17 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
+import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
 
+import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+import Deemphasized from '@shared/ui/Deemphasized';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
+import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 type Props = { lang: LanguageData };
 
@@ -40,6 +44,42 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
+
+      <DetailsField title="Centroid Coordinates">
+        {lang.latitude != null && lang.longitude != null ? (
+          <>
+            {lang.latitude.toFixed(4)}°, {lang.longitude.toFixed(4)}°{' '}
+            <HoverCard>
+              <HoverCardTrigger>
+                <Badge className="cursor-help" variant="secondary">
+                  {lang.coordsSource}
+                </Badge>
+              </HoverCardTrigger>
+              <HoverCardContent>
+                {lang.coordsSource === LanguageSource.Glottolog && (
+                  <>
+                    These coordinates represent the &quot;primary&quot; location of the{' '}
+                    {getLanguageScopeLabel(lang.scope).toLowerCase()}. This could be the centroid of
+                    the area where the language is spoken or a significant location such as a major
+                    city for which the language is known.
+                  </>
+                )}
+                {lang.coordsSource === LanguageSource.Combined && (
+                  <>
+                    These coordinates represent the average location of the constituents of this{' '}
+                    {getLanguageScopeLabel(lang.scope).toLowerCase()}.
+                  </>
+                )}
+              </HoverCardContent>
+            </HoverCard>
+          </>
+        ) : (
+          <Deemphasized>
+            No coordinate data for this {getLanguageScopeLabel(lang.scope).toLowerCase()} available.
+          </Deemphasized>
+        )}
+      </DetailsField>
+
       <DetailsField title="Plural Categories">
         <div
           style={{ display: 'inline-flex', flexWrap: 'wrap', alignItems: 'start', gap: '0.5em' }}

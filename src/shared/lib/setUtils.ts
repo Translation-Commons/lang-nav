@@ -103,3 +103,14 @@ export function countOccurrences<T extends string | number>(items: T[]): Record<
 export function countBy<T>(items: T[], keyFn: (item: T) => string | number): number {
   return uniqueBy(items, keyFn).length;
 }
+
+export function partition<T>(items: T[], partFn: (item: T) => boolean): [T[], T[]] {
+  return items.reduce<[T[], T[]]>(
+    ([a, b], v) => {
+      if (partFn(v)) a.push(v);
+      else b.push(v);
+      return [a, b];
+    },
+    [[], []],
+  );
+}

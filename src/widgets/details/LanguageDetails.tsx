@@ -7,9 +7,8 @@ import LanguageDetailsVitalityAndViability from '@entities/language/vitality/Lan
 import './details.css';
 import LanguageAttributes from './sections/LanguageAttributes';
 import LanguageConnections from './sections/LanguageConnections';
+import LanguageDialectsSection from './sections/LanguageDialectsSection';
 import LanguageIdentity from './sections/LanguageIdentity';
-import LanguageLocales from './sections/LanguageLocales';
-import LanguageLocation from './sections/LanguageLocation';
 import LanguagePopulationDetails from './sections/LanguagePopulationDetails';
 import LanguageSpeakersByTerritorySection from './sections/LanguageSpeakersByTerritorySection';
 import LanguageTerritoriesSection from './sections/LanguageTerritoriesSection';
@@ -48,12 +47,11 @@ const LanguageDetails: React.FC<Props> = ({ lang }) => {
         </div>
       </div>
 
-      <LanguageLocales lang={lang} />
       <LanguageDetailsDigitalSupport lang={lang} />
+      <LanguageDialectsSection lang={lang} />
+      <LanguageTerritoriesSection lang={lang} />
       <LanguageAttributes lang={lang} />
       <LanguageConnections lang={lang} />
-      <LanguageLocation lang={lang} />
-      <LanguageTerritoriesSection lang={lang} />
     </div>
   );
 };
