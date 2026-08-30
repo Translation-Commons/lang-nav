@@ -222,6 +222,7 @@ export const useMapZoom = ({
     const selection = selectionRef.current;
     const zoomBehavior = zoomBehaviorRef.current;
     if (selection && zoomBehavior) {
+      selection.interrupt();
       selection.transition().duration(300).call(zoomBehavior.scaleBy, 1.5);
     }
   }, []);
@@ -230,6 +231,7 @@ export const useMapZoom = ({
     const selection = selectionRef.current;
     const zoomBehavior = zoomBehaviorRef.current;
     if (selection && zoomBehavior) {
+      selection.interrupt();
       selection.transition().duration(300).call(zoomBehavior.scaleBy, 0.67);
     }
   }, []);
@@ -241,6 +243,7 @@ export const useMapZoom = ({
     if (selection && zoomBehavior && container) {
       const baseScale = container.clientWidth / mapWidth;
       const resetTransform = zoomIdentity.scale(baseScale);
+      selection.interrupt();
       selection.transition().duration(300).call(zoomBehavior.transform, resetTransform);
     }
   }, [mapWidth]);
@@ -282,6 +285,7 @@ export const useMapZoom = ({
       const transform = zoomIdentity.translate(tx, ty).scale(scale);
 
       if (duration > 0) {
+        selection.interrupt();
         selection.transition().duration(duration).call(zoomBehavior.transform, transform);
       } else {
         selection.call(zoomBehavior.transform, transform);

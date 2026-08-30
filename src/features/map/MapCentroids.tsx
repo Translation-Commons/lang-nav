@@ -11,9 +11,9 @@ import useScale from '@features/transforms/scales/useScale';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
-import { MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
-
 import './map.css';
+import { MAP_ROBINSON_X_SCALE, MAP_ROBINSON_Y_SCALE } from './MapConsts';
+import MapHoverCard from './MapHoverCard';
 
 type Props = {
   drawableEntities: DrawableData[];
@@ -46,7 +46,10 @@ const MapCentroids: React.FC<Props> = ({
       entType === EntityType.Language ? getCurrentEntities(drawableEntities) : drawableEntities;
 
     const filteredEntities = currentEntities.filter(
-      (ent) => ent.type === EntityType.Language || ent.type === EntityType.Territory,
+      (ent) =>
+        ent.type === EntityType.Language ||
+        ent.type === EntityType.Territory ||
+        ent.type === EntityType.Locale,
     );
 
     return filteredEntities.reverse();
@@ -54,16 +57,7 @@ const MapCentroids: React.FC<Props> = ({
 
   const buildOnMouseEnter = useCallback(
     (ent: DrawableData) => (e: React.MouseEvent) => {
-      showHoverCard(
-        <div>
-          <strong>{ent.nameDisplay}</strong>
-          <div style={{ color: 'var(--color-text-secondary)' }}>
-            {allowSidebar ? 'Pin to sidebar' : 'Open in details panel'}
-          </div>
-        </div>,
-        e.clientX,
-        e.clientY,
-      );
+      showHoverCard(<MapHoverCard ent={ent} allowSidebar={allowSidebar} />, e.clientX, e.clientY);
     },
     [showHoverCard, allowSidebar],
   );
@@ -116,12 +110,16 @@ const ObjectNode: React.FC<NodeProps> = ({
   isHovered,
   isPinned,
 }) => {
-  if (ent.type !== EntityType.Language && ent.type !== EntityType.Territory) return null;
-  if (ent.latitude == null || ent.longitude == null) return null;
+  const locatedEnt = ent.type === EntityType.Locale && ent.territory ? ent.territory : ent;
+  if (locatedEnt.type !== EntityType.Language && locatedEnt.type !== EntityType.Territory)
+    return null;
+  if (locatedEnt.latitude == null || locatedEnt.longitude == null) return null;
 
-  const { x, y } = getRobinsonCoordinatesShifted(ent);
+  const { x, y } = getRobinsonCoordinatesShifted(locatedEnt);
 
-  const showCircle = !(ent.type === EntityType.Territory && (ent?.landArea || 0) >= 20000);
+  const showCircle = !(
+    locatedEnt.type === EntityType.Territory && (locatedEnt?.landArea || 0) >= 20000
+  );
 
   return (
     <g

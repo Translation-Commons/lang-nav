@@ -1,7 +1,6 @@
-import { PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
+import { PinIcon, PinOffIcon, SquareArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableIcon from '@features/layers/hovercard/HoverableIcon';
 import ZIndex from '@features/layers/ZIndex';
 import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
@@ -10,6 +9,8 @@ import CensusesInTerritory from '@entities/census/CensusesInTerritory';
 import LocalesInTerritoryCard from '@entities/locale/LocalesInTerritoryCard';
 import EntityCard from '@entities/ui/EntityCard';
 import WritingSystemsInTerritoryCard from '@entities/writingsystem/WritingSystemsInTerritoryCard';
+
+import { Button } from '@shared/ui/button';
 
 import DrawableData from './DrawableData';
 
@@ -28,55 +29,37 @@ const MapCard: React.FC<{
     );
 
   let content: React.ReactNode = <EntityCard ent={drawnEntity} />;
-  let clickDescription = 'Open in details panel';
   if (drawnEntity.type === EntityType.Territory) {
     switch (entType) {
       case EntityType.Census:
         content = <CensusesInTerritory territory={drawnEntity} />;
-        clickDescription = 'Open table of censuses in this territory';
         break;
       case EntityType.Locale:
         content = <LocalesInTerritoryCard territory={drawnEntity} />;
-        clickDescription = 'Open table of locales in this territory';
         break;
       case EntityType.WritingSystem:
         content = <WritingSystemsInTerritoryCard territory={drawnEntity} />;
-        clickDescription = 'Open table of writing systems in this territory';
         break;
     }
   }
 
   return (
     <div
-      style={{
-        position: 'relative',
-        maxWidth: 300,
-        fontSize: '0.75em',
-        background: 'var(--color-background)',
-        borderRadius: '0.75em',
-        boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)',
-        padding: '1em',
-        textAlign: 'left',
-      }}
+      className="relative max-w-[300px] text-xs bg-background rounded-lg text-left p-4"
+      style={{ boxShadow: '0 0.25em 1em rgba(0, 0, 0, 0.18)' }}
     >
       <div
-        style={{
-          position: 'absolute',
-          top: '0',
-          right: '0.5em',
-          transform: 'translateY(-50%)',
-          display: 'flex',
-          gap: '0.5em',
-          zIndex: ZIndex.MapZoomControls,
-          fontSize: '.8em',
-        }}
+        className="absolute top-0 right-[0.5em] flex gap-1 text-xs translate-y-[-50%]"
+        style={{ zIndex: ZIndex.MapZoomControls }}
       >
-        <HoverableIcon
-          Icon={SquareArrowUpRightIcon}
-          onClick={openDetails}
-          description={clickDescription}
-        />
-        <HoverableIcon Icon={PinOffIcon} onClick={onClose} description="Unpin" />
+        <Button className="cursor-pointer h-8 w-8" onClick={openDetails} variant="secondary">
+          <SquareArrowUpRightIcon />
+        </Button>
+        {/* Similar to PinButton but matching local styling */}
+        <Button className="cursor-pointer h-8 w-8" variant="secondary" onClick={onClose}>
+          <PinIcon className="fill-foreground group-hover/button:hidden" />
+          <PinOffIcon className="fill-foreground hidden group-hover/button:inline-block" />
+        </Button>
       </div>
 
       {content}

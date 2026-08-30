@@ -46,7 +46,8 @@ import {
 
 // Get's a primitive value for a given entity and field, used for sorting and filtering.
 // Returns undefined if the field is not applicable to the entity type or if the value is missing.
-function getField(ent: EntityData, field: Field): string | number | undefined {
+function getField(ent: EntityData | undefined, field: Field): string | number | undefined {
+  if (!ent) return undefined;
   switch (field) {
     case Field.None:
       return undefined;
@@ -63,16 +64,19 @@ function getField(ent: EntityData, field: Field): string | number | undefined {
       return getEntityLiteracy(ent);
 
     case Field.Coordinates: // Not for sorting, only for display
+      if (ent.type === EntityType.Locale) return getField(ent.territory, field);
       return (ent.type === EntityType.Language || ent.type === EntityType.Territory) &&
         ent.latitude != null &&
         ent.longitude != null
         ? ent.latitude?.toFixed(1) + ', ' + ent.longitude?.toFixed(1)
         : undefined;
     case Field.Latitude:
+      if (ent.type === EntityType.Locale) return getField(ent.territory, field);
       return ent.type === EntityType.Language || ent.type === EntityType.Territory
         ? ent.latitude
         : undefined;
     case Field.Longitude:
+      if (ent.type === EntityType.Locale) return getField(ent.territory, field);
       return ent.type === EntityType.Language || ent.type === EntityType.Territory
         ? ent.longitude
         : undefined;

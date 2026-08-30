@@ -18,7 +18,7 @@
 }
 
 /* Position the shared pin button in the card's top-right corner. The button's
-   own appearance (colors, icon swap) lives in pinButton.css. */
+   own appearance (colors, icon swap) lives in PinButton.tsx. */
 .CardInCardList .PinButton {
   position: absolute;
   top: 0.5rem;

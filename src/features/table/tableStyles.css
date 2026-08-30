@@ -31,7 +31,7 @@ summary:focus {
 }
 
 /* The pin column button is only revealed when the row is hovered or the row is
-   pinned. The button's appearance lives in pinButton.css. */
+   pinned. The button's appearance lives in PinButton.tsx. */
 tbody tr .PinButton {
   visibility: hidden;
 }
@@ -48,7 +48,8 @@ td.alwaysVisible {
   --pin-column-width: 2.75em;
   position: sticky;
   background-color: var(--color-background);
-  z-index: 5; /* ZIndex.TableStickyColumn */
+  z-index: 5;
+  /* ZIndex.TableStickyColumn */
 }
 
 td.alwaysVisible:first-child {

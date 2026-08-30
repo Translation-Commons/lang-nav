@@ -23,7 +23,7 @@ const TablePinCell: React.FC<{ ent: EntityData }> = ({ ent }) => {
     });
   }, [isPinned, pinned, ent.ID, updatePageParams]);
 
-  return <PinButton isPinned={isPinned} onTogglePin={togglePin} />;
+  return <PinButton className="bg-transparent!" isPinned={isPinned} onTogglePin={togglePin} />;
 };
 
 export const PinColumn: TableColumn<EntityData> = {

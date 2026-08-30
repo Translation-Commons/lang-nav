@@ -1,9 +1,7 @@
 import { PinIcon, PinOffIcon } from 'lucide-react';
 import React from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
-
-import './pinButton.css';
+import { Toggle } from './toggle';
 
 interface Props {
   className?: string;
@@ -16,15 +14,21 @@ const PinButton: React.FC<Props> = ({ className, isPinned, onTogglePin }) => {
   const label = isPinned ? 'Unpin from the page' : 'Pin to the page';
 
   return (
-    <HoverableButton
-      ariaLabel={label}
-      className={'PinButton' + (isPinned ? ' pinned' : '') + (className ? ' ' + className : '')}
-      hoverContent={label}
-      onClick={onTogglePin}
+    <Toggle
+      className={
+        'PinButton cursor-pointer px-0 ' +
+        (isPinned ? ' pinned' : '') +
+        (className ? ' ' + className : '')
+      }
+      aria-label={label}
+      variant="default"
+      pressed={isPinned}
+      onPressedChange={onTogglePin}
     >
-      <PinIcon className="PinButton-iconPin" size="1em" />
-      <PinOffIcon className="PinButton-iconUnpin" size="1em" />
-    </HoverableButton>
+      {/* 2 Icons are specified but only 1 is visible at a time. If the toggle button is pressed + the user is hovering over the toggle button then we switch to the PinOff icon being visible */}
+      <PinIcon className="group-hover/toggle:fill-foreground  group-aria-pressed/toggle:fill-foreground group-aria-pressed/toggle:group-hover/toggle:hidden" />
+      <PinOffIcon className="fill-foreground hidden group-aria-pressed/toggle:group-hover/toggle:inline-block" />
+    </Toggle>
   );
 };
 
