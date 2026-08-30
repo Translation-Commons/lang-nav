@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import ResponsiveGrid from '@widgets/cardlists/ResponsiveGrid';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
+import Field from '@features/transforms/fields/Field';
+import useFilters from '@features/transforms/filtering/useFilters';
+import { getSortFunction } from '@features/transforms/sorting/sort';
 
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
@@ -13,6 +16,7 @@ import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 
@@ -26,26 +30,47 @@ import LanguageUDHRInfo, { LanguageUDHRDescription } from './LanguageUDHRInfo';
 
 type Props = { lang: LanguageData };
 
+type SectionView = 'scores' | 'locales';
+
 const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
   const { digitalSupportScore } = lang;
+  const [sectionView, setSectionView] = React.useState<SectionView>('scores');
+
   if (!digitalSupportScore) return null; // Withhold the section
+
   return (
-    <DetailsSection title="Digital Support">
-      <ResponsiveGrid>
-        {Object.values(DigitalSupportDimension).map((dimension) => (
-          <div
-            key={dimension}
-            style={{
-              gridColumn: dimension === DigitalSupportDimension.Overall ? '1 / -1' : 'span 1',
-            }}
-          >
-            <strong>{getDigitalSupportDimensionLabel(dimension)}:</strong>{' '}
-            {Math.floor(digitalSupportScore[dimension])}/10
-            <LanguageDigitalSupportMeter lang={lang} dim={dimension} />
-            <DigitalSupportDimensionBreakdown key={dimension} lang={lang} dimension={dimension} />
-          </div>
-        ))}
-      </ResponsiveGrid>
+    <DetailsSection
+      title="Digital Support"
+      viewSelector={
+        <Tabs value={sectionView} onValueChange={setSectionView}>
+          <TabsList>
+            {['scores', 'locales'].map((v) => (
+              <TabsTrigger key={v} value={v} className="cursor-pointer">
+                {v === 'scores' ? 'Scores' : 'Locales'}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      }
+    >
+      {sectionView === 'locales' && <Locales lang={lang} />}
+      {sectionView === 'scores' && (
+        <ResponsiveGrid>
+          {Object.values(DigitalSupportDimension).map((dimension) => (
+            <div
+              key={dimension}
+              style={{
+                gridColumn: dimension === DigitalSupportDimension.Overall ? '1 / -1' : 'span 1',
+              }}
+            >
+              <strong>{getDigitalSupportDimensionLabel(dimension)}:</strong>{' '}
+              {Math.floor(digitalSupportScore[dimension])}/10
+              <LanguageDigitalSupportMeter lang={lang} dim={dimension} />
+              <DigitalSupportDimensionBreakdown key={dimension} lang={lang} dimension={dimension} />
+            </div>
+          ))}
+        </ResponsiveGrid>
+      )}
     </DetailsSection>
   );
 };
@@ -144,5 +169,29 @@ const DigitalSupportDimensionBreakdown: React.FC<DimProps> = ({ lang, dimension 
       enforceExhaustiveSwitch(dimension);
   }
 };
+
+function Locales({ lang }: { lang: LanguageData }) {
+  const sortFunction = getSortFunction();
+  const filterByScope = useFilters()[Field.TerritoryScope];
+  const locales = useMemo(
+    () => (lang.locales ?? []).filter(filterByScope).sort(sortFunction),
+    [lang.locales, filterByScope, sortFunction],
+  );
+
+  return (
+    <div className="@container text-xs">
+      {/* 3x3 grid with max height and scrollable */}
+      <div className="grid grid-cols-3 gap-3 p-2.5 max-h-64 overflow-y-auto">
+        {locales.map((locale) => (
+          <div key={locale.ID}>
+            {/* to match the design doc */}
+            <code>{locale.codeDisplay}</code>{' '}
+            <HoverableEntityName ent={locale} labelSource="locale without language" />
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default LanguageDetailsDigitalSupport;

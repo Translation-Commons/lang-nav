@@ -1,6 +1,7 @@
 import { SquareArrowUpLeftIcon } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 
+import MiniCardList from '@widgets/cardlists/MiniCardList';
 import { getViewIcon } from '@widgets/controls/selectors/ViewSelector';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
@@ -20,7 +21,6 @@ import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
-import MiniCard from '@shared/containers/MiniCard';
 import { partition } from '@shared/lib/setUtils';
 import { Button } from '@shared/ui/button';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -80,7 +80,7 @@ const LanguageDialectsSection: React.FC<{ lang: LanguageData }> = ({ lang }) => 
           )}
           {sectionView === View.Hierarchy && <TreeList lang={lang} />}
           {sectionView === View.Table && <Table dialects={dialects} />}
-          {sectionView === View.CardList && <CardList dialects={dialects} />}
+          {sectionView === View.CardList && <MiniCardList ents={dialects} />}
         </LocalParamsProvider>
       </div>
     </DetailsSection>
@@ -154,32 +154,6 @@ function TreeList({ lang }: { lang: LanguageData }) {
     [lang, languageSource, sortFunction],
   );
   return <TreeListRoot rootNodes={nodes} />;
-}
-
-function CardList({ dialects }: { dialects: LanguageData[] }) {
-  const [showAll, setShowAll] = useState(false);
-
-  // TODO: vertical middle?
-  return (
-    <div className="@container">
-      <div className="grid gap-6 grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-6">
-        {dialects.slice(0, showAll ? 1000 : 11).map((d) => (
-          <div className="shadow-sm rounded-md p-4 hover:bg-accent cursor-pointer" key={d.ID}>
-            <MiniCard ent={d} />
-          </div>
-        ))}
-        {dialects.length > 11 && (
-          <div
-            role="button"
-            className="shadow-sm rounded-md p-4 text-center vertical-middle hover:bg-accent cursor-pointer"
-            onClick={() => setShowAll((prev) => !prev)}
-          >
-            +{dialects.length - 11}
-          </div>
-        )}
-      </div>
-    </div>
-  );
 }
 
 export default LanguageDialectsSection;
