@@ -40,7 +40,7 @@ const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => 
             (l.scope === LanguageScope.Dialect || l.scope === LanguageScope.Language),
         )
         .sort(sortFunction) as LanguageData[],
-    [lang],
+    [lang, sortFunction],
   );
 
   return (
@@ -61,8 +61,8 @@ const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => 
       }
     >
       <div className="text-xs">
-        These dialects come from ISO or Glottolog -- there very likely are more dialects (help us
-        out by feedback in the top-right).
+        These dialects come from ISO or Glottolog. Likely, there are more dialects but we are
+        waiting for them to be codified by a recognized authority first.
       </div>
       <div className="text-xs">
         {/* Show inner views with local params to customize this for the language without interfering with explore surface params */}

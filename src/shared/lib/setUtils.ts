@@ -105,12 +105,10 @@ export function countBy<T>(items: T[], keyFn: (item: T) => string | number): num
 }
 
 export function partition<T>(items: T[], partFn: (item: T) => boolean): [T[], T[]] {
-  return items.reduce<[T[], T[]]>(
-    ([a, b], v) => {
-      if (partFn(v)) a.push(v);
-      else b.push(v);
-      return [a, b];
-    },
-    [[], []],
-  );
+  const a: T[] = [];
+  const b: T[] = [];
+  for (const v of items) {
+    (partFn(v) ? a : b).push(v);
+  }
+  return [a, b];
 }

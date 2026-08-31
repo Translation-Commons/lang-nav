@@ -22,7 +22,7 @@ const DetailsSection: React.FC<PropsWithChildren<Props>> = ({
   const [isOpen, setIsOpen] = React.useState(!startCollapsed);
   // if the section is in the URL anchor
   React.useEffect(() => {
-    if (window.location.hash === '#details-' + title) {
+    if (window.location.hash === '#details-' + encodeURIComponent(title)) {
       setIsOpen(true);
     }
   }, [title]);
@@ -37,12 +37,12 @@ const DetailsSection: React.FC<PropsWithChildren<Props>> = ({
         }
         aria-level={2}
         aria-label={title}
-        id={'details-' + title}
+        id={'details-' + encodeURIComponent(title)}
         onClick={() => isCollapsible && setIsOpen((prev) => !prev)}
       >
         <span className="uppercase text-xl tracking-tight">
           {title}
-          {score && ` (${score})`}
+          {score != null && score !== '' && ` (${score})`}
         </span>
         <div className="flex items-center gap-2 self-start">
           <div
@@ -56,6 +56,7 @@ const DetailsSection: React.FC<PropsWithChildren<Props>> = ({
           </div>
           {isCollapsible && (
             <Toggle
+              aria-label={isOpen ? 'Collapse section' : 'Expand section'}
               className="cursor-pointer px-0 hover:bg-accent!"
               pressed={isOpen}
               variant="outline"
