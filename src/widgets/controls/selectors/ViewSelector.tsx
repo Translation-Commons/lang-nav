@@ -27,7 +27,7 @@ const ViewSelector: React.FC = () => {
   );
 };
 
-function getViewIcon(view: View): React.ReactNode {
+export function getViewIcon(view: View): React.ReactNode {
   switch (view) {
     case View.CardList:
       return <Grid2x2Icon />;

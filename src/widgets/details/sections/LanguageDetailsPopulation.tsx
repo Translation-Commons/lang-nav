@@ -6,7 +6,6 @@ import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
 import PopulationFocus from '@entities/types/PopulationFocus';
-import PopulationSourceCategoryDisplay from '@entities/ui/PopulationSourceCategoryDisplay';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
@@ -17,19 +16,8 @@ type Props = { lang: LanguageData; speakingOrWriting: 'speaking' | 'writing' };
 const LanguagePopulationDetails: React.FC<Props> = ({ lang, speakingOrWriting }) => {
   const pop = lang.pop[speakingOrWriting];
 
-  const title = (
-    <>
-      <span>{speakingOrWriting} Population</span>
-      {pop.source && (
-        <div style={{ fontSize: '0.75em', fontWeight: 'normal', textTransform: 'lowercase' }}>
-          <PopulationSourceCategoryDisplay sourceCategory={pop.source} />
-        </div>
-      )}
-    </>
-  );
-
   return (
-    <DetailsSection title={title}>
+    <DetailsSection title={`${speakingOrWriting} Population`} isCollapsible={false}>
       {pop.estimate == null ? (
         <Deemphasized>No population data available.</Deemphasized>
       ) : (

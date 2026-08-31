@@ -28,7 +28,7 @@ const DetailsPanel: React.FC = () => {
       onClose={() => updatePageParams({ entID: undefined })}
     >
       <DetailsBody>
-        <PathContainer style={{ marginTop: '0.5em' }}>
+        <PathContainer className="mb-2">
           <EntityPath ent={ent} />
         </PathContainer>
         <ContainErrorsAndSuspense>

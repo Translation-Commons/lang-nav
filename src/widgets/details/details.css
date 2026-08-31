@@ -13,7 +13,5 @@
 .DetailsStatContainer {
   display: flex;
   gap: 2em;
-  margin-top: auto;
-  padding-bottom: 0.5em;
   justify-content: center;
 }

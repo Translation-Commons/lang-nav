@@ -17,7 +17,8 @@ import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import LocalePopulationSection from './sections/LocalePopulationSection';
+import LocaleDetailsCensuses from './sections/LocaleDetailsCensuses';
+import LocaleDetailsPopulation from './sections/LocaleDetailsPopulation';
 
 type Props = {
   locale: LocaleData;
@@ -27,7 +28,8 @@ const LocaleDetails: React.FC<Props> = ({ locale }) => {
   return (
     <div className="Details">
       <LocaleDefinitionSection locale={locale} />
-      <LocalePopulationSection locale={locale} />
+      <LocaleDetailsPopulation locale={locale} />
+      <LocaleDetailsCensuses locale={locale} />
       <LocaleOtherSection locale={locale} />
     </div>
   );

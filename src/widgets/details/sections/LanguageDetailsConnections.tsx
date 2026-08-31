@@ -2,26 +2,17 @@ import React from 'react';
 
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
-import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import usePageParams from '@features/params/usePageParams';
-import { getSortFunction } from '@features/transforms/sorting/sort';
-import { TreeNodeData } from '@features/treelist/TreeListNode';
-import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
-import Deemphasized from '@shared/ui/Deemphasized';
 
-const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { languageSource } = usePageParams();
+const LanguageDetailsConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { getCLDRLanguage } = useDataContext();
-  const sortFunction = getSortFunction();
-  const { childLanguages, ISO, Glottolog, variants, equivalentVariant } = lang;
+  const { ISO, Glottolog, variants, equivalentVariant } = lang;
   const relatedLanguages = (lang.CLDR.languageMatch ?? [])
     .map((match) => ({
       match,
@@ -33,7 +24,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     );
 
   return (
-    <DetailsSection title="Connections">
+    <DetailsSection startCollapsed={true} title="Connections">
       {ISO.parentLanguage && (
         <DetailsField title="ISO group">
           <HoverableEntityName ent={ISO.parentLanguage} />
@@ -69,51 +60,8 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
           </CommaSeparated>
         </DetailsField>
       )}
-      <DetailsField title="Constituents">
-        <TreeOrList
-          treeNodes={
-            childLanguages.length > 0
-              ? getLanguageTreeNodes([lang], languageSource, sortFunction)
-              : []
-          }
-          listNodes={[...childLanguages].sort(sortFunction).map((l) => (
-            <HoverableEntityName key={l.ID} ent={l} />
-          ))}
-          emptyMessage={`${lang.nameDisplay} has no constituent languages or dialects.`}
-        />
-      </DetailsField>
     </DetailsSection>
   );
 };
 
-type TreeOrListProps = {
-  treeNodes: TreeNodeData[];
-  listNodes: React.ReactNode[];
-  emptyMessage: string;
-};
-const TreeOrList: React.FC<TreeOrListProps> = ({ treeNodes, listNodes, emptyMessage }) => {
-  const [viewAsTree, setViewAsTree] = React.useState(false);
-
-  if ((treeNodes.length ?? 0) === 0 && (listNodes.length ?? 0) === 0) {
-    return <Deemphasized>{emptyMessage}</Deemphasized>;
-  }
-
-  return (
-    <>
-      <HoverableButton
-        onClick={() => setViewAsTree((prev) => !prev)}
-        style={{ padding: '0.25em' }}
-        hoverContent={viewAsTree ? 'Click to view as list' : 'Click to view as tree'}
-      >
-        {viewAsTree ? 'as tree' : 'as list'}
-      </HoverableButton>{' '}
-      {viewAsTree ? (
-        <TreeListRoot rootNodes={treeNodes} />
-      ) : (
-        <CommaSeparated>{listNodes}</CommaSeparated>
-      )}
-    </>
-  );
-};
-
-export default LanguageConnections;
+export default LanguageDetailsConnections;
