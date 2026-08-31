@@ -1,0 +1,1 @@
+import{q as s}from"./index-CTpytAYz.js";const o=({children:r})=>s.jsx("div",{className:"@container",children:s.jsx("div",{className:"grid gap-6 grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4",children:r})});export{o as R};
