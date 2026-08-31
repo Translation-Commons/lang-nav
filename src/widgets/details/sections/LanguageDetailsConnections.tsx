@@ -10,7 +10,7 @@ import { LanguageData } from '@entities/language/LanguageTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+const LanguageDetailsConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { getCLDRLanguage } = useDataContext();
   const { ISO, Glottolog, variants, equivalentVariant } = lang;
   const relatedLanguages = (lang.CLDR.languageMatch ?? [])
@@ -24,7 +24,7 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
     );
 
   return (
-    <DetailsSection title="Connections">
+    <DetailsSection startCollapsed={true} title="Connections">
       {ISO.parentLanguage && (
         <DetailsField title="ISO group">
           <HoverableEntityName ent={ISO.parentLanguage} />
@@ -64,4 +64,4 @@ const LanguageConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   );
 };
 
-export default LanguageConnections;
+export default LanguageDetailsConnections;

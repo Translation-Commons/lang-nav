@@ -9,6 +9,8 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
 import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
 import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
+import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
+import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
 
 import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -20,11 +22,25 @@ import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 type Props = { lang: LanguageData };
 
-const LanguageAttributes: React.FC<Props> = ({ lang }) => {
-  const { modality, primaryWritingSystem, writingSystems } = lang;
+const LanguageDetailsAttributes: React.FC<Props> = ({ lang }) => {
+  const {
+    modality,
+    primaryWritingSystem,
+    writingSystems,
+    viabilityConfidence,
+    viabilityExplanation,
+  } = lang;
 
   return (
-    <DetailsSection title="Attributes">
+    <DetailsSection startCollapsed={true} title="Attributes">
+      <DetailsField title="ISO Status">
+        <LanguageVitalityMeter lang={lang} src={VitalitySource.ISO} />
+      </DetailsField>
+      <DetailsField title="Good language category?">
+        {viabilityConfidence} {viabilityExplanation && ' ... '}
+        {viabilityExplanation}
+      </DetailsField>
+
       {modality != null && (
         <DetailsField title="Medium of Use">{getModalityLabel(modality)}</DetailsField>
       )}
@@ -92,4 +108,4 @@ const LanguageAttributes: React.FC<Props> = ({ lang }) => {
   );
 };
 
-export default LanguageAttributes;
+export default LanguageDetailsAttributes;

@@ -13,6 +13,7 @@ import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
+import { numberToSigFigs } from '@shared/lib/numberUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
@@ -40,8 +41,10 @@ const LanguageDetailsDigitalSupport: React.FC<Props> = ({ lang }) => {
 
   return (
     <DetailsSection
+      startCollapsed={true}
       title="Digital Support"
-      viewSelector={
+      score={numberToSigFigs(digitalSupportScore.overall, 2) + '/10'}
+      headerOptions={
         <Tabs value={sectionView} onValueChange={setSectionView}>
           <TabsList>
             {['scores', 'locales'].map((v) => (

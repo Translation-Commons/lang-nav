@@ -26,7 +26,7 @@ import { Button } from '@shared/ui/button';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
-const LanguageDialectsSection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { updatePageParams } = usePageParams();
   const [sectionView, setSectionView] = useState(View.Map);
   const sortFunction = getSortFunction();
@@ -45,8 +45,10 @@ const LanguageDialectsSection: React.FC<{ lang: LanguageData }> = ({ lang }) => 
 
   return (
     <DetailsSection
-      title={'Dialects (' + dialects.length + ')'}
-      viewSelector={
+      startCollapsed={true}
+      score={dialects.length}
+      title="Dialects"
+      headerOptions={
         <Tabs value={sectionView} onValueChange={setSectionView}>
           <TabsList>
             {Object.values([View.CardList, View.Hierarchy, View.Table, View.Map]).map((v) => (
@@ -156,4 +158,4 @@ function TreeList({ lang }: { lang: LanguageData }) {
   return <TreeListRoot rootNodes={nodes} />;
 }
 
-export default LanguageDialectsSection;
+export default LanguageDetailsDialects;

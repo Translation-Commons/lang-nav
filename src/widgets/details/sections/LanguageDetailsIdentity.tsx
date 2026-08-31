@@ -17,7 +17,7 @@ import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionByS
 import DetailsSection from '../ui/DetailsSection';
 import IdentityRow from '../ui/IdentityRow';
 
-const LanguageIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+const LanguageDetailsIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const otherNames = getLanguageOtherNames(lang);
   const cldrLink = useCLDRXMLLink(lang);
   const cldrWarningNotes = getCLDRWarningNotes(lang);
@@ -189,4 +189,4 @@ const IdentityTable: React.FC<React.PropsWithChildren> = ({ children }) => {
   );
 };
 
-export default LanguageIdentity;
+export default LanguageDetailsIdentity;

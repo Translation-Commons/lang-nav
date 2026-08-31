@@ -7,12 +7,10 @@ import {
 
 export const PathContainer: React.FC<{
   children: React.ReactNode;
-  style?: React.CSSProperties;
-}> = ({ children, style }) => {
+  className?: string;
+}> = ({ children, className }) => {
   return (
-    <div
-      style={{ display: 'flex', alignItems: 'center', gap: '0.5em', flexWrap: 'wrap', ...style }}
-    >
+    <div className={'flex items-center gap-2 flex-wrap ' + className}>
       <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
         {children}
       </SelectorDisplayProvider>

@@ -23,7 +23,7 @@ import { LocaleData } from '@entities/locale/LocaleTypes';
 import { uniqueBy } from '@shared/lib/setUtils';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
-const LanguageTerritoriesSection: React.FC<{ lang: LanguageData }> = ({ lang }) => {
+const LanguageDetailsTerritories: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const sortFunction = getSortFunction();
   const filterByScope = useFilters()[Field.TerritoryScope];
   const [sectionView, setSectionView] = React.useState(View.CardList);
@@ -57,8 +57,10 @@ const LanguageTerritoriesSection: React.FC<{ lang: LanguageData }> = ({ lang }) 
 
   return (
     <DetailsSection
-      title={'Territories (' + locales.length + ')'}
-      viewSelector={
+      score={locales.length}
+      startCollapsed={true}
+      title="Territories"
+      headerOptions={
         <Tabs value={sectionView} onValueChange={setSectionView}>
           <TabsList>
             {Object.values([View.CardList, View.Table, View.Map]).map((v) => (
@@ -109,4 +111,4 @@ function Table({ locales }: { locales: LocaleData[] }) {
   );
 }
 
-export default LanguageTerritoriesSection;
+export default LanguageDetailsTerritories;
