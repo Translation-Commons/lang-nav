@@ -1,4 +1,11 @@
-import { ChartColumnBigIcon, Grid2x2Icon, ListTreeIcon, MapIcon, Table2Icon } from 'lucide-react';
+import {
+  ChartColumnBigIcon,
+  FileIcon,
+  Grid2x2Icon,
+  ListTreeIcon,
+  MapIcon,
+  Table2Icon,
+} from 'lucide-react';
 import React from 'react';
 
 import { View } from '@features/params/PageParamTypes';
@@ -35,6 +42,8 @@ export function getViewIcon(view: View): React.ReactNode {
       return <ListTreeIcon />;
     case View.Map:
       return <MapIcon />;
+    case View.Details:
+      return <FileIcon />;
     case View.Table:
       return <Table2Icon />;
     case View.Reports:

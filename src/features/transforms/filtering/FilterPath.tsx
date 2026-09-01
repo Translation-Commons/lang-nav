@@ -15,7 +15,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
-import { getFilterLabels } from './FilterLabels';
+import { useFilterLabels } from './FilterLabels';
 
 /**
  * Shows the current active filters as a path-like breadcrumb.
@@ -37,7 +37,7 @@ const FilterPath: React.FC = () => {
     writingSystemFilter,
   } = usePageParams();
   const defaultParams = getDefaultParams();
-  const filterLabels = getFilterLabels();
+  const filterLabels = useFilterLabels();
 
   const filters = [
     // Vitality ISO Filter

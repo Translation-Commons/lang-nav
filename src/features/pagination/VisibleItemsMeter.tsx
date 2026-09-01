@@ -117,6 +117,7 @@ function getLimitThreshold(view: View): number {
     case View.Table:
       return 200;
     case View.CardList:
+    case View.Details:
       return 20;
     case View.Hierarchy:
     case View.Reports:

@@ -10,6 +10,7 @@ const ViewMap = React.lazy(() => import('./ViewMap'));
 const ViewReports = React.lazy(() => import('./ViewReports'));
 const ViewFamilyTree = React.lazy(() => import('./ViewFamilyTree'));
 const ViewTable = React.lazy(() => import('./ViewTable'));
+const ViewDetails = React.lazy(() => import('./ViewDetails'));
 
 function DataViews() {
   const { view } = usePageParams();
@@ -29,6 +30,8 @@ function SpecificDataView({ view }: { view: View }) {
       return <ViewFamilyTree />;
     case View.Table:
       return <ViewTable />;
+    case View.Details:
+      return <ViewDetails />;
     case View.Reports:
       return <ViewReports />;
     case View.Map:
