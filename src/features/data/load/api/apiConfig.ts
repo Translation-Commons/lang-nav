@@ -74,3 +74,9 @@ export async function fetchFromApi<T>(path: string, schema?: string): Promise<T>
   }
   return (await response.json()) as T;
 }
+
+/** JSON `null` means absent; every optional field these API loaders map onto
+ *  is `?:`, not nullable. */
+export function orUndefined<T>(value: T | null): T | undefined {
+  return value ?? undefined;
+}
