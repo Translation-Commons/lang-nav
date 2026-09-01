@@ -97,7 +97,12 @@ export async function loadISOLanguageFamilies(): Promise<ISOLanguageFamilyData[]
     .then((lines) =>
       lines.map((line) => {
         const parts = line.split('\t');
-        return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
+        return {
+          code: parts[0],
+          name: parts[1],
+          parent: parts[2] != '' ? parts[2] : undefined,
+          scope: LanguageScope.Family,
+        };
       }),
     )
     .catch((err) => console.error('Error loading TSV:', err));
@@ -208,9 +213,23 @@ export function addISOLanguageFamilyData(
     // If the entry is missing, create a new one
     if (familyEntry == null) {
       const sourceSpecific = {
-        Combined: { code: family.code, parentLanguageCode: family.parent },
-        ISO: { code: family.code, name, parentLanguageCode: family.parent },
-        BCP: { code: family.code, name, parentLanguageCode: family.parent },
+        Combined: {
+          code: family.code,
+          parentLanguageCode: family.parent,
+          scope: LanguageScope.Family,
+        },
+        ISO: {
+          code: family.code,
+          name,
+          parentLanguageCode: family.parent,
+          scope: LanguageScope.Family,
+        },
+        BCP: {
+          code: family.code,
+          name,
+          parentLanguageCode: family.parent,
+          scope: LanguageScope.Family,
+        },
       };
 
       const familyEntry: LanguageData = {

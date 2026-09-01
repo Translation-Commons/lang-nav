@@ -1,4 +1,3 @@
-import { SquareArrowUpLeftIcon } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 
 import MiniCardList from '@widgets/cardlists/MiniCardList';
@@ -8,10 +7,8 @@ import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescenda
 import getLanguageColumns from '@widgets/tables/columns/LanguageColumns';
 import { getLanguageTreeNodes } from '@widgets/treelists/LanguageHierarchy';
 
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import EntityMap from '@features/map/EntityMap';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
-import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -20,14 +17,11 @@ import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
 import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
+import LanguageDialectsMap from '@entities/language/relations/LanguageDialectsMap';
 
-import { partition } from '@shared/lib/setUtils';
-import { Button } from '@shared/ui/button';
-import CommaSeparated from '@shared/ui/CommaSeparated';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { updatePageParams } = usePageParams();
   const [sectionView, setSectionView] = useState(View.Map);
   const sortFunction = getSortFunction();
 
@@ -77,9 +71,7 @@ const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => 
             languageScopes: [],
           }}
         >
-          {sectionView === View.Map && (
-            <Maps lang={lang} updatePageParams={updatePageParams} dialects={dialects} />
-          )}
+          {sectionView === View.Map && <LanguageDialectsMap lang={lang} />}
           {sectionView === View.Hierarchy && <TreeList lang={lang} />}
           {sectionView === View.Table && <Table dialects={dialects} />}
           {sectionView === View.CardList && <MiniCardList ents={dialects} />}
@@ -88,50 +80,6 @@ const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => 
     </DetailsSection>
   );
 };
-
-type MapsProps = {
-  lang: LanguageData;
-  dialects: LanguageData[];
-  // Updating the global page params, not the local params
-  updatePageParams: (newParams: Partial<PageParams>) => void;
-};
-function Maps({ lang, updatePageParams, dialects }: MapsProps) {
-  const [dialectsWithCoords, dialectsWithoutCoords] = partition(
-    [lang, ...dialects],
-    (d) => d.latitude != null && d.longitude != null,
-  );
-  return (
-    <div className="flex flex-col gap-2">
-      <div>
-        This map shows the center of the dialect. It does not capture every location that the
-        dialect is used.{' '}
-        <Button
-          className="cursor-pointer"
-          onClick={() =>
-            updatePageParams({
-              view: View.Map,
-              languageFilter: lang.nameCanonical + ' [' + lang.ID + ']',
-            })
-          }
-          variant="secondary"
-        >
-          <SquareArrowUpLeftIcon /> See the full map in the explore panel
-        </Button>
-      </div>
-      <EntityMap entities={dialectsWithCoords} maxWidth={1000} />
-      {dialectsWithoutCoords.length > 0 && (
-        <div>
-          Dialects without coordinates:{' '}
-          <CommaSeparated>
-            {dialectsWithoutCoords.map((d) => (
-              <HoverableEntityName ent={d} key={d.ID} />
-            ))}
-          </CommaSeparated>
-        </div>
-      )}
-    </div>
-  );
-}
 
 function Table({ dialects }: { dialects: LanguageData[] }) {
   const columns = useMemo(() => getLanguageColumns(), []);

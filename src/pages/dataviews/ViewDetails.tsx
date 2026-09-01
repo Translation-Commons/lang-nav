@@ -13,14 +13,14 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 
 const EntityDetailsBody = React.lazy(() => import('@widgets/details/EntityDetailsBody'));
 
-const DetailsPanel: React.FC = () => {
+const ViewDetails: React.FC = () => {
   const { cmpID, entType } = usePageParams();
   const ent = getEntityFromID(cmpID);
 
   if (!ent) return <EmptyDetails />;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4 max-w-[900px] mx-auto">
       <div className="w-full flex flex-col justify-center text-center relative pt-3 px-2">
         <div className="text-4xl font-bold">
           <EntityTitle ent={ent} highlightSearchMatches={false} />
@@ -49,4 +49,4 @@ const EmptyDetails: React.FC = () => {
   return <SearchCombobox />;
 };
 
-export default DetailsPanel;
+export default ViewDetails;

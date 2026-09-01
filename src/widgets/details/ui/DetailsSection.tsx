@@ -1,6 +1,9 @@
 import { ChevronRightIcon } from 'lucide-react';
 import React, { PropsWithChildren, ReactNode } from 'react';
 
+import { View } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+
 import { Toggle } from '@shared/ui/toggle';
 
 type Props = {
@@ -19,7 +22,8 @@ const DetailsSection: React.FC<PropsWithChildren<Props>> = ({
   score,
   title,
 }) => {
-  const [isOpen, setIsOpen] = React.useState(!startCollapsed);
+  const { view } = usePageParams();
+  const [isOpen, setIsOpen] = React.useState(!startCollapsed || view === View.Details);
   // if the section is in the URL anchor
   React.useEffect(() => {
     if (window.location.hash === '#details-' + encodeURIComponent(title)) {

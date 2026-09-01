@@ -7,7 +7,9 @@ import { PathContainer } from '@widgets/pathnav/PathNav';
 import { View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
+import LanguageDrawerContents from '@entities/language/LanguageDrawerContents';
 import getEntityFromID from '@entities/lib/getEntityFromID';
+import { EntityData } from '@entities/types/DataTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
@@ -47,23 +49,7 @@ const EntityDetailsDrawer: React.FC = () => {
               </Button>
             }
           />
-          {ent && <DrawerDescription>{ent.type}</DrawerDescription>}
-          <DrawerTitle className="text-xl">
-            {ent ? <EntityTitle ent={ent} highlightSearchMatches={false} /> : 'Details'}
-          </DrawerTitle>
-          {ent?.nameEndonym && <DrawerDescription>{ent.nameEndonym}</DrawerDescription>}
-          {ent && (
-            <Button
-              className="mt-2 self-start"
-              variant="outline"
-              onClick={() =>
-                updatePageParams({ cmpID: ent.ID, entID: undefined, view: View.Details })
-              }
-            >
-              <ArrowUpLeftIcon data-icon="inline-start" />
-              Open details page
-            </Button>
-          )}
+          <DrawerHeaderContents ent={ent} />
         </DrawerHeader>
         <div className="min-h-0 overflow-y-auto p-4 pt-3">
           {ent ? (
@@ -72,7 +58,11 @@ const EntityDetailsDrawer: React.FC = () => {
                 <EntityPath ent={ent} />
               </PathContainer>
               <ContainErrorsAndSuspense>
-                <EntityDetailsBody entID={ent.ID} />
+                {ent.type === 'Language' ? (
+                  <LanguageDrawerContents lang={ent} />
+                ) : (
+                  <EntityDetailsBody entID={ent.ID} />
+                )}
               </ContainErrorsAndSuspense>
             </>
           ) : (
@@ -81,6 +71,33 @@ const EntityDetailsDrawer: React.FC = () => {
         </div>
       </DrawerContent>
     </Drawer>
+  );
+};
+
+const DrawerHeaderContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  const { updatePageParams } = usePageParams();
+  if (!ent) return <DrawerTitle className="text-xl">Details</DrawerTitle>;
+
+  return (
+    <>
+      {ent && <DrawerDescription>{ent.type}</DrawerDescription>}
+      <DrawerTitle className="text-xl">
+        {ent ? <EntityTitle ent={ent} highlightSearchMatches={false} /> : 'Details'}
+      </DrawerTitle>
+      {ent.nameEndonym && ent.nameEndonym !== ent.nameDisplay && (
+        <DrawerDescription>{ent.nameEndonym}</DrawerDescription>
+      )}
+      {ent && (
+        <Button
+          className="mt-2 self-start"
+          variant="outline"
+          onClick={() => updatePageParams({ cmpID: ent.ID, entID: undefined, view: View.Details })}
+        >
+          <ArrowUpLeftIcon data-icon="inline-start" />
+          Open details page
+        </Button>
+      )}
+    </>
   );
 };
 
