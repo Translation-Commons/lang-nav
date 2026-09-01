@@ -4,7 +4,7 @@ import React from 'react';
 import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
-import { View } from '@features/params/PageParamTypes';
+import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 
 import LanguageDrawerContents from '@entities/language/LanguageDrawerContents';
@@ -55,10 +55,10 @@ const EntityDetailsDrawer: React.FC = () => {
           {ent ? (
             <>
               <PathContainer className="mb-2">
-                <EntityPath ent={ent} />
+                <EntityPath ent={ent} showChildren={ent.type !== EntityType.Language} />
               </PathContainer>
               <ContainErrorsAndSuspense>
-                {ent.type === 'Language' ? (
+                {ent.type === EntityType.Language ? (
                   <LanguageDrawerContents lang={ent} />
                 ) : (
                   <EntityDetailsBody entID={ent.ID} />

@@ -136,7 +136,6 @@ type LanguageDrawerPopRowProps = {
 };
 
 const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, populationFocus }) => {
-  const { updatePageParams } = usePageParams();
   const baseParams: Partial<PageParams> = {
     entType: EntityType.Locale,
     populationFocus: populationFocus,
@@ -151,40 +150,29 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
   }
 
   const speakingOrWriting = populationFocus === PopulationFocus.Speaking ? 'speaking' : 'writing';
+  const popEstimate = lang.pop[speakingOrWriting].estimate;
 
   return (
     <DrawerDetailsField
       label={toTitleCase(getLanguageModalityUserLabel(lang.modality, speakingOrWriting))}
       actions={
-        <>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => updatePageParams({ view: View.Map, ...baseParams })}
-          >
-            <MapIcon />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => updatePageParams({ view: View.Table, ...baseParams })}
-          >
-            <TableIcon />
-          </Button>
-        </>
+        popEstimate && [
+          <DrawerActionButton key="map" view={View.Map} baseParams={baseParams} />,
+          <DrawerActionButton key="table" view={View.Table} baseParams={baseParams} />,
+        ]
       }
     >
-      <CountOfPeople count={lang.pop[speakingOrWriting].estimate} />
+      <CountOfPeople count={popEstimate} />
     </DrawerDetailsField>
   );
 };
 
 const LanguageDrawerDialectsRow: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { updatePageParams } = usePageParams();
   const baseParams: Partial<PageParams> = {
     entType: EntityType.Language,
     populationFocus: PopulationFocus.Overall,
     languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
+    languageScopes: [],
   };
   const dialects = useMemo(
     () =>
@@ -205,33 +193,29 @@ const LanguageDrawerDialectsRow: React.FC<{ lang: LanguageData }> = ({ lang }) =
     <DrawerDetailsField
       label={childrenString}
       actions={
-        <>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => updatePageParams({ view: View.Hierarchy, ...baseParams })}
-          >
-            <ListTreeIcon />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => updatePageParams({ view: View.Map, ...baseParams })}
-          >
-            <MapIcon />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => updatePageParams({ view: View.Table, ...baseParams })}
-          >
-            <TableIcon />
-          </Button>
-        </>
+        dialects.length > 0 && [
+          <DrawerActionButton key="hierarchy" view={View.Hierarchy} baseParams={baseParams} />,
+          <DrawerActionButton key="map" view={View.Map} baseParams={baseParams} />,
+          <DrawerActionButton key="table" view={View.Table} baseParams={baseParams} />,
+        ]
       }
     >
       {dialects.length > 0 ? dialects.length : <Deemphasized>No dialects</Deemphasized>}
     </DrawerDetailsField>
+  );
+};
+
+const DrawerActionButton: React.FC<{ view: View; baseParams: Partial<PageParams> }> = ({
+  view,
+  baseParams,
+}) => {
+  const { updatePageParams } = usePageParams();
+  return (
+    <Button variant="ghost" size="sm" onClick={() => updatePageParams({ view, ...baseParams })}>
+      {view === View.Hierarchy && <ListTreeIcon />}
+      {view === View.Map && <MapIcon />}
+      {view === View.Table && <TableIcon />}
+    </Button>
   );
 };
 
