@@ -16,7 +16,7 @@ const EntityTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) =>
   if (!highlightSearchMatches) {
     return (
       <>
-        <strong>{nameDisplay}</strong> [{codeDisplay}]
+        <strong>{nameDisplay}</strong> <Code>{codeDisplay}</Code>
       </>
     );
   }
@@ -26,10 +26,15 @@ const EntityTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) =>
       <strong>
         <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.NameDisplay} />
       </strong>{' '}
-      [
-      <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />]
+      <Code>
+        <EntityFieldHighlightedByPageSearch ent={ent} field={SearchableField.Code} />
+      </Code>
     </>
   );
 };
+
+const Code: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+  <span className="font-mono text-muted-foreground font-thin">[{children}]</span>
+);
 
 export default EntityTitle;

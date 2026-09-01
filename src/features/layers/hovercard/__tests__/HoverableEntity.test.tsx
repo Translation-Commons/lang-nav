@@ -8,35 +8,24 @@ import HoverableEntityName from '../HoverableEntityName';
 
 const mockedEnts = getFullyInstantiatedMockedEntities();
 
-const showHoverCard = vi.fn();
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({
-    showHoverCard,
-    hideHoverCard: vi.fn(),
-    onMouseLeaveTriggeringElement: vi.fn(),
-  }),
+const updatePageParams = vi.fn();
+vi.mock('@features/params/usePageParams', () => ({
+  default: vi.fn().mockReturnValue({ updatePageParams }),
 }));
-vi.mock('@features/params/usePageParams', () => ({ default: vi.fn().mockReturnValue({}) }));
 
 describe('HoverableEntity', () => {
   it('an undefined entity will just render the child elements', () => {
     render(<HoverableEntity ent={undefined}>undefined entity</HoverableEntity>);
 
     expect(screen.getByText(/undefined entity/)).toBeInTheDocument();
-    // hovering does not trigger hover card since entity is undefined
-    screen
-      .getByText(/undefined entity/)
-      .dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).not.toHaveBeenCalled();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
-  it('a defined entity will have a hover interaction', () => {
+  it('opens the selected entity in the details drawer', () => {
     render(<HoverableEntity ent={mockedEnts.sjn}>Sindarin</HoverableEntity>);
 
-    expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
-    // move the cursor over the element to trigger the hover card
-    screen.getByText(/Sindarin/).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).toHaveBeenCalled();
+    screen.getByRole('button', { name: 'Sindarin' }).click();
+    expect(updatePageParams).toHaveBeenCalledWith({ entID: mockedEnts.sjn.ID });
   });
 });
 
@@ -46,12 +35,9 @@ describe('HoverableEntityName', () => {
     expect(screen.queryByText(/./)).not.toBeInTheDocument();
   });
 
-  it('a defined entity will render the entity name with hover interaction', () => {
+  it('a defined entity will render the entity name as a details drawer trigger', () => {
     render(<HoverableEntityName ent={mockedEnts.sjn} />);
-    expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
-    // move the cursor over the element to trigger the hover card
-    screen.getByText(/Sindarin/).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Sindarin' })).toBeInTheDocument();
   });
 
   it("instead of showing a name, the entity's code can be shown", () => {
