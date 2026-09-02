@@ -8189,7 +8189,7 @@ zba		Balaibalan			Arab				Possibly	Constructed language
 zbl	blis1239	Blissymbols						arti1236	Possibly	Constructed language
 zem	zeem1242	Zeem			Latn			nucl1831	Yes	
 zhon1236	zhon1236	Zhongyuan						mand1471	No	Group of multiple languages
-zhx	sini1245	Chinese (family)						sino1245	No	Language family -- there mare many other languages that are part of this
+zhx	sini1245	Sinitic					sit	sino1245	No	Language family -- there mare many other languages that are part of this
 zkb	samo1299	Koibal					kjh	kama1351	No	ISO considers this a duplicate of kjh
 zkg	kogu1234	Koguryo	고구려어					uncl1493	Probably not	Historical langauge
 zkh		Khorezmian							Probably not	Historical langauge
@@ -8205,10 +8205,11 @@ zsk		Kaskean							Probably not	Historical langauge
 zxx		Not applicable	no linguistic content						No	Control code
 mol	mold1248	Moldavian		Spoken & Written	Latn			east2865	Probably not	Old ISO system considered it its own language. Now it is just considered a dialect of Romanian by ISO
 bvs	belg1242	Belgian Sign Language		Sign			sgn	dutc1259	No	Deprecated from ISO
-mhv	arak1255	Arakanese-Marma					sit	nucl1811	No	Deprecated from ISO
 dyl	bhut1234	Bhutanese Sign Language		Sign			sgn	bhut1234	Yes, with caveat	New to ISO
 lfb	buuu1246	Buu (Cameroon)	Nubabo			100	bnt	jiii1234	Yes, with caveat	New to ISO
 osd	digo1242	Digor Ossetic	дигорон ӕвзаг		Cyrl	100,000	ira	osse1243	Yes, with caveat	New to ISO
 scz	shet1241	Shaetlan	Shaetlan		Latn	10,000			Yes, with caveat	New to ISO
 tvg	tugu1234	Tugunese	Mardijker		Latn	0	crp	mala1533	No	Extinct
 zhk	kurd1260	Kurdish Sign Language		Sign		1000	sgn	leva1240	Yes, with caveat	New to ISO
+ccq	chau1262	Chaungtha				186000	rki	rakh1245	No	Combined into Rahkine in ISO
+mhv	arak1256	Arakanese					tbq	arak1255	No	Language group, not recognized by ISO anymore

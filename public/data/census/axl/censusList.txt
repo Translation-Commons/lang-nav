@@ -9,6 +9,7 @@ axl.gl
 axl.is
 axl.km
 axl.ma
+axl.mm
 axl.mv
 axl.na
 axl.nf
@@ -21,4 +22,5 @@ axl.sl
 axl.ss
 axl.sy
 axl.tg
+axl.tt
 axl.ye

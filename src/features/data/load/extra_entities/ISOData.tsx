@@ -206,7 +206,8 @@ export function addISOLanguageFamilyData(
 ): void {
   // Add new language entries for language families, otherwise fill in missing data
   families.forEach((family) => {
-    const familyEntry = languagesBySource.ISO[family.code];
+    const familyEntry =
+      languagesBySource.ISO[family.code] ?? languagesBySource.Combined[family.code];
     // trim excess from the name
     const name = family.name.replace(/ languages| \(family\)/gi, '');
 
@@ -248,14 +249,14 @@ export function addISOLanguageFamilyData(
       if (!familyEntry.nameDisplay || familyEntry.nameDisplay === '0') {
         familyEntry.nameDisplay = family.name;
       }
-      familyEntry.Combined.parentLanguageCode = family.parent;
+      familyEntry.Combined.parentLanguageCode ??= family.parent;
       familyEntry.ISO.parentLanguageCode = family.parent;
       familyEntry.ISO.scope = LanguageScope.Family;
       familyEntry.ISO.name = name;
       familyEntry.BCP.parentLanguageCode = family.parent;
       familyEntry.BCP.scope = LanguageScope.Family;
       familyEntry.BCP.name = name;
-      familyEntry.scope = LanguageScope.Family;
+      familyEntry.scope ??= LanguageScope.Family;
     }
   });
 

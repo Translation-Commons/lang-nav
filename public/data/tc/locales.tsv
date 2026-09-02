@@ -422,7 +422,7 @@ fat_GH	Fanti (Ghana)		Official	2,757,219
 eng_PT	English (Portugal)	English	CLDR	2,755,944	
 sas_ID	Sasak (Indonesia)	ᬪᬵᬲᬵᬲᬓ᭄ᬱᬓ᭄	CLDR	2,731,151	
 bej_SD	Beja (Sudan)	بداوية	CLDR	2,725,234	
-fbl_PH	Albay Bicolano (Philippines)	#N/A	CLDR	2,720,371	
+fbl_PH	Albay Bicolano (Philippines)		CLDR	2,720,371	
 pam_PH	Pampanga (Philippines)	Kapampángan	CLDR	2,720,371	
 glg_ES	Galician (Spain)	Galego	Official	2,701,703	official_regional
 bfy_IN	Bagheli (India)		Official	2,679,129	
@@ -6603,7 +6603,7 @@ kmq_ET	Kwama (Ethiopia)		Official	319
 eng_UM	English (U.S. Outlying Islands)	English	CLDR	316	de_facto_official
 nbj_AU	Ngarinyman (Australia)		Official	313	
 nau_AU	Nauruan (Australia)			312	
-nub_US	Yuanga (United States)	#N/A	Official	305	
+nub_US	Yuanga (United States)		Official	305	
 sco_PL	Scots (Poland)	Scots	Unverified Official	304	
 mkd_PL	Macedonian (Poland)	Македонски	Unverified Official	302	
 lbz_AU	Lardil (Australia)		Official	301	
@@ -6668,7 +6668,7 @@ tus_US	Tuscarora (United States)	Skarù∙rę’	Official	240
 coo_CA	Éy7á7juuthem (Comox) (Canada)	Saɬuɬtxʷ	EDL	238	
 twa_US	Twana (United States)		Official	236	
 tht_CA	Tahltan (Canada)	Tāłtān	Official	235	
-tuw_US	Turkana (United States)	#N/A	Official	235	
+tuw_US	Turkana (United States)		Official	235	
 jav_US	Javanese (United States)	Basa Jawa	Unverified Official	233	
 bod_RU	Tibetan (Russia)	བོད་སྐད་	Official	232	
 cay_CA	Cayuga (Canada)	Goyogo̱hó:nǫ’	Official	230	
@@ -9378,7 +9378,7 @@ mcd_BO	Sharanahua (Bolivia)
 mch_VE	Maquiritari (Venezuela)				
 mck_AO	Mbunda (Angola)				
 mdl_MT	Maltese Sign Language (Malta)				
-meg_NC	Mea (New Caledonia)	#N/A			
+meg_NC	Mea (New Caledonia)				
 mei_SD	Midob (Sudan)				
 mes_TD	Masmaje (Chad)				
 mfa_MY	Pattani Malay (Malaysia)	Bahasa Melayu Patani			
@@ -9466,7 +9466,7 @@ nkp_TO	Niuatoputapu (Tonga)
 nkv_MW	Nyika (Malawi and Zambia) (Malawi)				
 nle_KE	East Nyala (Kenya)				
 nlg_SB	Gela (Solomon Islands)				
-nlr_AU	Ngarla (Australia)	#N/A			
+nlr_AU	Ngarla (Australia)				
 nlw_AU	Walangama (Australia)				
 nlz_SB	Nalögo (Solomon Islands)				
 nmb_VU	Big Nambas (Vanuatu)				
@@ -9474,7 +9474,6 @@ nmd_GA	Ndumu (Gabon)
 nmi_NG	Nyam (Nigeria)				
 nmk_VU	Namakura (Vanuatu)				
 nmn_BW	ǃXóõ (Botswana)				
-nmq_ZW	Nambya (Zimbabwe)				
 nnd_VU	West Ambae (Vanuatu)				
 nne_AO	Ngandyera (Angola)				
 nns_NG	Ningye (Nigeria)				
@@ -9629,7 +9628,7 @@ pnd_AO	Mpinda (Angola)
 pnl_BF	Paleni (Burkina Faso)				
 pno_PE	Panobo (Peru)				
 pox_DE	Polabian (Germany)	Pülabsťĕ			
-ppr_ID	Piru (Indonesia)	#N/A			
+ppr_ID	Piru (Indonesia)				
 ppu_TW	Papora (Taiwan)	Papora			
 pre_ST	Principense (São Tomé & Príncipe)	lunguyê			
 pri_NC	Paicî (New Caledonia)				
@@ -9680,7 +9679,6 @@ rms_RO	Romanian Sign Language (Romania)
 rmv_001	Romanova (World)				
 rmw_GB	Welsh Romani (United Kingdom)				
 rmy_RO	Vlax Romani (Romania)	Romani			
-rmz_MM	Marma (Myanmar)				
 rod_NG	Rogo (Nigeria)				
 rrm_NZ	Moriori (New Zealand)	Ta Rē Moriori			
 rrt_AU	Arritinngithigh (Australia)				
@@ -9794,7 +9792,6 @@ tdt_ID	Tetun Dili (Indonesia)
 tdx_MG	Tandroy-Mahafaly Malagasy (Madagascar)				
 tec_KE	Terik (Kenya)				
 teg_GA	Teke-Tege (Gabon)				
-tgh_TT	Tobagonian Creole English (Trinidad & Tobago)				
 tgr_LA	Tareng (Laos)				
 tgy_SS	Togoyo (South Sudan)				
 thi_LA	Tai Long (Laos)				
@@ -9827,7 +9824,6 @@ tpj_PY	Tapieté (Paraguay)
 tpn_BR	Tupinambá (Brazil)	abáñe'enga			
 tqr_SD	Torona (Sudan)				
 tqu_SB	Touo (Solomon Islands)				
-trf_TT	Trinidadian Creole English (Trinidad & Tobago)				
 trg_IL	Lishán Didán (Israel)				
 tri_SR	Trió (Suriname)				
 trl_GB	Traveller Scottish (United Kingdom)				
@@ -10104,7 +10100,7 @@ ygi_AU	Yiningayi (Australia)
 ygu_AU	Yugul (Australia)				
 yhd_IL	Judeo-Iraqi Arabic (Israel)				
 yih_IL	Western Yiddish (Israel)				
-yiy_AU	Yir-Yoront (Australia)	#N/A			
+yiy_AU	Yir-Yoront (Australia)				
 ykh_MN	Khamnigan Mongol (Mongolia)				
 ymk_MZ	Makwe (Mozambique)				
 ymm_SO	Maay (Somalia)				
@@ -10131,7 +10127,7 @@ zbu_NG	Bu (Bauchi State) (Nigeria)
 zcd_MX	Las Delicias Zapotec (Mexico)				
 zem_NG	Zeem (Nigeria)				
 zhi_NG	Zhire (Nigeria)				
-zib_ZW	Zimbabwe Sign Language (Zimbabwe)				
+zib_ZW	Zimbabwe Sign Language (Zimbabwe)		Official	1,620	
 zir_NG	Ziriya (Nigeria)				
 zkg_KP	Koguryo (North Korea)	고구려어			
 zkh_RU	Khorezmian (Russia)				
@@ -11006,3 +11002,11 @@ luh_CN	Leizhou Chinese (China)			2,800,000
 qer_SE	Dalecarlian (Sweden)			3,000	
 sjc_CN	Shao–Jiang (China)			850,000	
 ynb_PG	Yamben (Papua New Guinea)			100	
+bwg_ZW	Barwe (Zimbabwe)		Official	3298	
+lah_IN	Lahnda (India)		Official	119279	
+nmq_ZW	Nambya (Zimbabwe)		Official	38302	
+trf_TT	Trinidadian Creole English (Trinidad & Tobago)			1250000	
+tgh_TT	Tobagonian Creole English (Trinidad & Tobago)			36000	
+acf_TT	Saint Lucian Creole French (Trinidad & Tobago)			9600	
+hns_TT	Caribbean Hindustani (Trinidad & Tobago)			20000	
+rmz_MM	Marma (Myanmar)			158000	
