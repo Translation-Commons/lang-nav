@@ -6,7 +6,6 @@ import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-
 import Field from '../fields/Field';
 import { useFilterLabels } from '../filtering/FilterLabels';
 import useFilters from '../filtering/useFilters';

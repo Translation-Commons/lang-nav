@@ -1,4 +1,3 @@
-
 import HoverableEntity from '@features/layers/hovercard/HoverableEntity';
 import { SearchableField } from '@features/params/PageParamTypes';
 import Field from '@features/transforms/fields/Field';

@@ -11,7 +11,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbList,
-  BreadcrumbSeparator
+  BreadcrumbSeparator,
 } from '@shared/ui/breadcrumb';
 
 import EntityPathChildren from './EntityPathChildren';
