@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 
 import MiniCardList from '@widgets/cardlists/MiniCardList';
-import { getViewIcon } from '@widgets/controls/selectors/ViewSelector';
+import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
 import getLanguageColumns from '@widgets/tables/columns/LanguageColumns';

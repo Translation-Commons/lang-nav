@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 
-import { getViewIcon } from '@widgets/controls/selectors/ViewSelector';
+import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { View } from '@features/params/PageParamTypes';

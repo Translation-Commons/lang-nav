@@ -1,7 +1,7 @@
 import React from 'react';
 
 import MiniCardList from '@widgets/cardlists/MiniCardList';
-import { getViewIcon } from '@widgets/controls/selectors/ViewSelector';
+import { getViewIcon } from '@widgets/controls/selectors/ViewDisplay';
 import TableOfAllCensuses from '@widgets/tables/TableOfAllCensuses';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';

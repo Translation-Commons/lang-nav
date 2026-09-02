@@ -11,13 +11,9 @@ export default defineConfig({
   build: {
     rollupOptions: {
       output: {
-        manualChunks(id: string) {
-          if (id.includes('node_modules')) {
-            if (id.includes('react-dom')) return 'react-dom-vendor';
-            if (id.includes('lucide')) return 'lucide-vendor';
-            if (id.includes('base-ui')) return 'base-ui-vendor';
-            if (id.includes('react')) return 'react-vendor';
-          }
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-lucide': ['lucide-react'],
         },
       },
     },
