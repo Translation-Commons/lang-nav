@@ -1,19 +1,34 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
+import { PageParams } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import HoverableEntity from '../HoverableEntity';
 import HoverableEntityName from '../HoverableEntityName';
 
 const mockedEnts = getFullyInstantiatedMockedEntities();
 
-const updatePageParams = vi.fn();
-vi.mock('@features/params/usePageParams', () => ({
-  default: vi.fn().mockReturnValue({ updatePageParams }),
-}));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
 describe('HoverableEntity', () => {
+  let updatePageParams: (params: Partial<PageParams>) => void;
+
+  // Helper function to eliminate mock setup duplication
+  const setupMockParams = (overrides: Partial<PageParams> = {}) => {
+    const mockUsePageParams = createMockUsePageParams(overrides);
+    (usePageParams as Mock).mockReturnValue(mockUsePageParams);
+    updatePageParams = mockUsePageParams.updatePageParams;
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    setupMockParams();
+  });
+
   it('an undefined entity will just render the child elements', () => {
     render(<HoverableEntity ent={undefined}>undefined entity</HoverableEntity>);
 

@@ -11,12 +11,14 @@ type Props = React.PropsWithChildren<{
 const ContextIcon: React.FC<Props> = ({ children, severity = 'info' }) => {
   return (
     <HoverCard>
-      <HoverCardTrigger>
-        <Button variant="ghost" size="sm" className="px-1 cursor-help border-none!">
-          {severity === 'warning' && <TriangleAlertIcon />}
-          {severity === 'info' && <InfoIcon />}
-        </Button>
-      </HoverCardTrigger>
+      <HoverCardTrigger
+        render={
+          <Button variant="ghost" size="sm" className="px-1 cursor-help border-none!">
+            {severity === 'warning' && <TriangleAlertIcon />}
+            {severity === 'info' && <InfoIcon />}
+          </Button>
+        }
+      />
       <HoverCardContent>{children}</HoverCardContent>
     </HoverCard>
   );

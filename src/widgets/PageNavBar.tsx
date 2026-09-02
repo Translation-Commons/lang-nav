@@ -9,6 +9,8 @@ import PopupCard from '@features/layers/popupcard/PopupCard';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
 
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
+
 import NavBarToolsMenu from './controls/NavBarToolsMenu';
 import SettingsButton from './controls/SettingsButton';
 
@@ -35,18 +37,20 @@ const PageNavBar: React.FC = () => {
       <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.About}>About</NavBarLink>
       <NavBarToolsMenu />
-      <PopupCard
-        buttonClassName="primary lg:hidden"
-        buttonLabel={<SearchIcon />}
-        buttonStyle={{ padding: '8px' }}
-        justifyCard="center"
-        body={<SearchBar />}
-      />
-      <div className="flex-1">
-        <div className="hidden lg:flex">
-          <SearchBar />
+      <ContainErrorsAndSuspense>
+        <PopupCard
+          buttonClassName="primary lg:hidden"
+          buttonLabel={<SearchIcon />}
+          buttonStyle={{ padding: '8px' }}
+          justifyCard="center"
+          body={<SearchBar />}
+        />
+        <div className="flex-1">
+          <div className="hidden lg:flex">
+            <SearchBar />
+          </div>
         </div>
-      </div>
+      </ContainErrorsAndSuspense>
       <FeedbackForm />
       <SettingsButton />
     </nav>

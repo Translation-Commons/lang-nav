@@ -46,3 +46,6 @@ public/diff/
 
 # Wrangler local cache (wrangler pages dev)
 .wrangler/
+
+# Rollup visualizer output
+stats.html

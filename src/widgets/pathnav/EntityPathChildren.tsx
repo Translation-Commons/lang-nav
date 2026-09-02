@@ -39,9 +39,9 @@ const EntityPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
     <>
       <BreadcrumbSeparator />
       <DropdownMenu>
-        <DropdownMenuTrigger>
-          <Button variant="ghost">{children.length + ' ' + descendantsName}</Button>
-        </DropdownMenuTrigger>
+        <DropdownMenuTrigger
+          render={<Button variant="ghost">{children.length + ' ' + descendantsName}</Button>}
+        />
         <DropdownMenuContent>
           {children.map((child) => (
             <DropdownMenuItem

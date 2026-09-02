@@ -1,9 +1,8 @@
 import React from 'react';
 
-import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
-
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
+const FilterPanelProvider = React.lazy(() => import('@widgets/controls/FilterPanelProvider'));
 const DecoderPageBody = React.lazy(() => import('@widgets/decoder/DecoderPageBody'));
 const EntityDetailsDrawer = React.lazy(() => import('@widgets/details/ui/EntityDetailsDrawer'));
 

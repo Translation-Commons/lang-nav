@@ -19,7 +19,7 @@ const EntityPathParents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
 
   return parents.map((o, i) => (
     <Fragment key={i}>
-      <BreadcrumbSeparator />
+      {i != 0 && <BreadcrumbSeparator />}
       <BreadcrumbItem>
         <HoverableEntityName ent={o} />
       </BreadcrumbItem>
@@ -40,7 +40,6 @@ const EntityPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ pare
   ));
   return (
     <>
-      <BreadcrumbSeparator />
       <BreadcrumbItem>
         <HoverableEntityName ent={parents[0]} />
       </BreadcrumbItem>

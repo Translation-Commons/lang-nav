@@ -4,6 +4,7 @@ import React, { useMemo } from 'react';
 import { DrawerDetailsField, DrawerDetailsSection } from '@widgets/details/ui/DrawerDetailsSection';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
 
+import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
 import usePageParamNavigation from '@features/params/usePageParamNavigation';
 
@@ -20,6 +21,7 @@ import ContextIcon from '@shared/ui/ContextIcon';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 import { getLanguageModalityUserLabel, getModalityLabel } from '@strings/LanguageModalityStrings';
@@ -37,6 +39,7 @@ type Props = {
 const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
   const { ISO } = lang;
   const digitalSupport = lang.digitalSupportScore;
+  const writingSystems = Object.values(lang.writingSystems);
 
   return (
     <div className="flex flex-col gap-3">
@@ -48,6 +51,26 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
         {lang.modality != null ? (
           <DrawerDetailsField label="Medium of Use">
             {getModalityLabel(lang.modality)}
+          </DrawerDetailsField>
+        ) : null}
+        {writingSystems.length > 0 ? (
+          <DrawerDetailsField
+            label="Writing Systems"
+            actions={
+              <DrawerActionButton
+                key="table"
+                view={View.Table}
+                baseParams={{
+                  entType: EntityType.WritingSystem,
+                  entID: lang.ID,
+                  languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
+                  languageScopes: [],
+                }}
+              />
+            }
+          >
+            <HoverableEntityName ent={writingSystems[0]} />
+            {writingSystems.length > 1 ? ` + ${writingSystems.length - 1} more` : ''}
           </DrawerDetailsField>
         ) : null}
       </DrawerDetailsSection>
@@ -131,6 +154,7 @@ type LanguageDrawerPopRowProps = {
 const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, populationFocus }) => {
   const baseParams: Partial<PageParams> = {
     entType: EntityType.Locale,
+    entID: lang.ID, // Kept the drawer open, letting people manually close it
     populationFocus,
     languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
   };
@@ -168,6 +192,7 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
 const LanguageDrawerDialectsRow: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const baseParams: Partial<PageParams> = {
     entType: EntityType.Language,
+    entID: lang.ID, // Kept the drawer open, letting people manually close it
     populationFocus: PopulationFocus.Overall,
     languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
     languageScopes: [],
@@ -209,11 +234,22 @@ const DrawerActionButton: React.FC<{ view: View; baseParams: Partial<PageParams>
 }) => {
   const updatePage = usePageParamNavigation({});
   return (
-    <Button variant="ghost" size="sm" onClick={() => updatePage({ view, ...baseParams })}>
-      {view === View.Hierarchy && <ListTreeIcon />}
-      {view === View.Map && <MapIcon />}
-      {view === View.Table && <TableIcon />}
-    </Button>
+    <HoverCard>
+      <HoverCardTrigger
+        delay={10}
+        render={
+          <Button variant="ghost" size="sm" onClick={() => updatePage({ view, ...baseParams })}>
+            {view === View.Hierarchy && <ListTreeIcon />}
+            {view === View.Map && <MapIcon />}
+            {view === View.Table && <TableIcon />}
+          </Button>
+        }
+      />
+      <HoverCardContent className="w-fit">
+        {view} of{' '}
+        {baseParams.entType === EntityType.Language ? 'dialects' : 'territories with this language'}
+      </HoverCardContent>
+    </HoverCard>
   );
 };
 
