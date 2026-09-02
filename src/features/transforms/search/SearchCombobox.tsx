@@ -47,7 +47,6 @@ const SearchCombobox: React.FC = () => {
 
   return (
     <Combobox
-      // items={groupedItems}
       filter={null}
       itemToStringValue={(item: Suggestion) => item.ent.nameDisplay + ' [' + item.entID + ']'}
       onValueChange={(value) => {
@@ -58,29 +57,34 @@ const SearchCombobox: React.FC = () => {
       autoHighlight
     >
       <ComboboxInput
+        className="min-w-[300px]"
         placeholder={'search ' + getEntityTypeLabelPlural(entType)}
         showClear
         value={searchString}
         onChange={(e) => setSearchString(e.target.value)}
       />
       <ComboboxContent>
-        {/* <ComboboxEmpty>No {getEntityTypeLabelPlural(entType)} found.</ComboboxEmpty> */}
-        {Object.entries(groupedItems).map(([group, items]: [string, Suggestion[]]) => (
-          <ComboboxGroup key={group}>
-            {group && group != 'matched' && (
-              <ComboboxLabel className="px-2 py-1 text-xs font-semibold text-gray-500">
-                {group}
-              </ComboboxLabel>
-            )}
-            <ComboboxList>
+        <ComboboxList>
+          {Object.entries(groupedItems).map(([group, items]: [string, Suggestion[]]) => (
+            <ComboboxGroup key={group}>
+              {group && group != 'matched' && (
+                <ComboboxLabel className="px-2 py-1 text-xs font-semibold text-gray-500">
+                  {group}
+                </ComboboxLabel>
+              )}
               {items.map((suggestion) => (
-                <ComboboxItem key={suggestion.entID} value={suggestion} className="cursor-pointer">
-                  {suggestion.label}
+                <ComboboxItem
+                  key={suggestion.entID}
+                  value={suggestion}
+                  className="cursor-pointer justify-between"
+                >
+                  <div>{suggestion.label}</div>
+                  <div className="text-[10px] text-gray-400 font-mono">{suggestion.entID}</div>
                 </ComboboxItem>
               ))}
-            </ComboboxList>
-          </ComboboxGroup>
-        ))}
+            </ComboboxGroup>
+          ))}
+        </ComboboxList>
       </ComboboxContent>
     </Combobox>
   );

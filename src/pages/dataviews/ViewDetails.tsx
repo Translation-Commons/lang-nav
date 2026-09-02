@@ -1,9 +1,11 @@
 import React from 'react';
 
+import MiniCardList from '@widgets/cardlists/MiniCardList';
 import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import usePageParams from '@features/params/usePageParams';
+import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
 import SearchCombobox from '@features/transforms/search/SearchCombobox';
 
 import getEntityFromID from '@entities/lib/getEntityFromID';
@@ -46,7 +48,22 @@ const ViewDetails: React.FC = () => {
 };
 
 const EmptyDetails: React.FC = () => {
-  return <SearchCombobox />;
+  const { entType } = usePageParams();
+  const { filteredEntities } = useFilteredEntities({});
+
+  return (
+    <div className="flex flex-col gap-8 max-w-[900px] mx-auto">
+      <div className="text-4xl font-bold">{entType} Details</div>
+      <div className="text-center text-muted-foreground">
+        No {entType.toLowerCase()} selected. Please use the search box below to find an entity or
+        select one from the list below.
+      </div>
+      <div className="flex justify-center">
+        <SearchCombobox />
+      </div>
+      <MiniCardList ents={filteredEntities} />
+    </div>
+  );
 };
 
 export default ViewDetails;

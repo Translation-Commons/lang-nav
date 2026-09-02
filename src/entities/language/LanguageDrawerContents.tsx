@@ -37,9 +37,6 @@ type Props = {
 const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
   const { ISO } = lang;
   const digitalSupport = lang.digitalSupportScore;
-  const otherNames = lang.names.filter(
-    (name) => ![lang.nameDisplay, lang.nameEndonym, lang.nameCanonical].includes(name),
-  );
 
   return (
     <div className="flex flex-col gap-3">
@@ -104,9 +101,6 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
             {lang.CLDR.code != ISO.code && lang.CLDR.code}
             <CLDRWarningNotes ent={lang} /> <EntityCLDRCoverageLevel ent={lang} />
           </DrawerDetailsField>
-        )}
-        {otherNames.length > 0 && (
-          <DrawerDetailsField label="Other names">{otherNames.join(', ')}</DrawerDetailsField>
         )}
       </DrawerDetailsSection>
 
