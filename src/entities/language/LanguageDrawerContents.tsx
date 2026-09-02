@@ -5,7 +5,7 @@ import { DrawerDetailsField, DrawerDetailsSection } from '@widgets/details/ui/Dr
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
 
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
-import usePageParams from '@features/params/usePageParams';
+import usePageParamNavigation from '@features/params/usePageParamNavigation';
 
 import { LanguageData, LanguageField, LanguageScope } from '@entities/language/LanguageTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
@@ -132,7 +132,7 @@ type LanguageDrawerPopRowProps = {
 const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, populationFocus }) => {
   const baseParams: Partial<PageParams> = {
     entType: EntityType.Locale,
-    populationFocus: populationFocus,
+    populationFocus,
     languageFilter: lang.nameDisplay + ' [' + lang.ID + ']',
   };
   if (lang.scope === LanguageScope.Family) {
@@ -145,15 +145,20 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
 
   const speakingOrWriting = populationFocus === PopulationFocus.Speaking ? 'speaking' : 'writing';
   const popEstimate = lang.pop[speakingOrWriting].estimate;
+  const hasLocalesWithData = lang.locales?.filter(
+    (l) => l.pop[speakingOrWriting].adjusted != null,
+  ).length;
 
   return (
     <DrawerDetailsField
       label={toTitleCase(getLanguageModalityUserLabel(lang.modality, speakingOrWriting))}
       actions={
-        popEstimate && [
-          <DrawerActionButton key="map" view={View.Map} baseParams={baseParams} />,
-          <DrawerActionButton key="table" view={View.Table} baseParams={baseParams} />,
-        ]
+        popEstimate && hasLocalesWithData
+          ? [
+              <DrawerActionButton key="map" view={View.Map} baseParams={baseParams} />,
+              <DrawerActionButton key="table" view={View.Table} baseParams={baseParams} />,
+            ]
+          : undefined
       }
     >
       <CountOfPeople count={popEstimate} />
@@ -203,9 +208,9 @@ const DrawerActionButton: React.FC<{ view: View; baseParams: Partial<PageParams>
   view,
   baseParams,
 }) => {
-  const { updatePageParams } = usePageParams();
+  const updatePage = usePageParamNavigation({});
   return (
-    <Button variant="ghost" size="sm" onClick={() => updatePageParams({ view, ...baseParams })}>
+    <Button variant="ghost" size="sm" onClick={() => updatePage({ view, ...baseParams })}>
       {view === View.Hierarchy && <ListTreeIcon />}
       {view === View.Map && <MapIcon />}
       {view === View.Table && <TableIcon />}

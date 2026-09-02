@@ -1,10 +1,11 @@
-import { ArrowUpLeftIcon, XIcon } from 'lucide-react';
+import { ArrowUpLeftSquareIcon, XIcon } from 'lucide-react';
 import React from 'react';
 
 import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
 import { EntityType, View } from '@features/params/PageParamTypes';
+import usePageParamNavigation from '@features/params/usePageParamNavigation';
 import usePageParams from '@features/params/usePageParams';
 
 import LanguageDrawerContents from '@entities/language/LanguageDrawerContents';
@@ -22,11 +23,14 @@ import {
   DrawerHeader,
   DrawerTitle,
 } from '@shared/ui/drawer';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
+import PinButton from '@shared/ui/PinButton';
 
 const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
 const EntityDetailsDrawer: React.FC = () => {
   const { entID, entType, updatePageParams } = usePageParams();
+  const updatePage = usePageParamNavigation({});
   const ent = getEntityFromID(entID);
 
   return (
@@ -40,15 +44,35 @@ const EntityDetailsDrawer: React.FC = () => {
     >
       <DrawerContent className="sm:[--drawer-content-width:32rem]">
         <DrawerHeader className="relative pr-12">
-          <DrawerClose
-            aria-label="Close details"
-            className="absolute top-3 right-3"
-            render={
-              <Button size="icon-sm" variant="ghost">
-                <XIcon />
-              </Button>
-            }
-          />
+          <div className="absolute top-3 right-3 flex gap-2 ">
+            {ent && (
+              <HoverCard>
+                <HoverCardTrigger
+                  delay={10}
+                  render={
+                    <Button
+                      variant="ghost"
+                      onClick={() =>
+                        updatePage({ cmpID: ent.ID, entType: ent.type, view: View.Details })
+                      }
+                    >
+                      <ArrowUpLeftSquareIcon data-icon="inline-start" />
+                    </Button>
+                  }
+                />
+                <HoverCardContent className="w-fit">See all details in main view</HoverCardContent>
+              </HoverCard>
+            )}
+            {ent?.type === entType && <PinButton ent={ent} />}
+            <DrawerClose
+              aria-label="Close details"
+              render={
+                <Button size="icon" variant="ghost">
+                  <XIcon />
+                </Button>
+              }
+            />
+          </div>
           <DrawerHeaderContents ent={ent} />
         </DrawerHeader>
         <div className="min-h-0 overflow-y-auto p-4 pt-3">
@@ -75,27 +99,16 @@ const EntityDetailsDrawer: React.FC = () => {
 };
 
 const DrawerHeaderContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
-  const { updatePageParams } = usePageParams();
   if (!ent) return <DrawerTitle className="text-xl">Details</DrawerTitle>;
 
   return (
     <>
       {ent && <DrawerDescription>{ent.type}</DrawerDescription>}
-      <DrawerTitle className="text-xl">
+      <DrawerTitle className="text-2xl justify-between flex items-center gap-2">
         {ent ? <EntityTitle ent={ent} highlightSearchMatches={false} /> : 'Details'}
       </DrawerTitle>
       {ent.nameEndonym && ent.nameEndonym !== ent.nameDisplay && (
         <DrawerDescription>{ent.nameEndonym}</DrawerDescription>
-      )}
-      {ent && (
-        <Button
-          className="mt-2 self-start"
-          variant="outline"
-          onClick={() => updatePageParams({ cmpID: ent.ID, entID: undefined, view: View.Details })}
-        >
-          <ArrowUpLeftIcon data-icon="inline-start" />
-          Open details page
-        </Button>
       )}
     </>
   );

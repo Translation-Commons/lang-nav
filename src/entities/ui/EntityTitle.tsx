@@ -34,7 +34,7 @@ const EntityTitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) =>
 };
 
 const Code: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-  <span className="font-mono text-muted-foreground font-thin">[{children}]</span>
+  <span className="font-mono text-muted-foreground font-thin text-[0.8em]">{children}</span>
 );
 
 export default EntityTitle;
