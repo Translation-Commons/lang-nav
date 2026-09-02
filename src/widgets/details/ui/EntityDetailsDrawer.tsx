@@ -1,9 +1,10 @@
-import { ArrowUpLeftSquareIcon, XIcon } from 'lucide-react';
+import { ArrowLeftIcon, ArrowRightIcon, ArrowUpLeftSquareIcon, XIcon } from 'lucide-react';
 import React from 'react';
 
 import EntityPath from '@widgets/pathnav/EntityPath';
 import { PathContainer } from '@widgets/pathnav/PathNav';
 
+import usePrevNextEntities from '@features/data/context/usePrevNextEntities';
 import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParamNavigation from '@features/params/usePageParamNavigation';
 import usePageParams from '@features/params/usePageParams';
@@ -30,7 +31,6 @@ const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
 const EntityDetailsDrawer: React.FC = () => {
   const { entID, entType, updatePageParams } = usePageParams();
-  const updatePage = usePageParamNavigation({});
   const ent = getEntityFromID(entID);
 
   return (
@@ -44,36 +44,8 @@ const EntityDetailsDrawer: React.FC = () => {
     >
       <DrawerContent className="sm:[--drawer-content-width:32rem]">
         <DrawerHeader className="relative pr-12">
-          <div className="absolute top-3 right-3 flex gap-2 ">
-            {ent && (
-              <HoverCard>
-                <HoverCardTrigger
-                  delay={10}
-                  render={
-                    <Button
-                      variant="ghost"
-                      onClick={() =>
-                        updatePage({ cmpID: ent.ID, entType: ent.type, view: View.Details })
-                      }
-                    >
-                      <ArrowUpLeftSquareIcon data-icon="inline-start" />
-                    </Button>
-                  }
-                />
-                <HoverCardContent className="w-fit">See all details in main view</HoverCardContent>
-              </HoverCard>
-            )}
-            {ent?.type === entType && <PinButton ent={ent} />}
-            <DrawerClose
-              aria-label="Close details"
-              render={
-                <Button size="icon" variant="ghost">
-                  <XIcon />
-                </Button>
-              }
-            />
-          </div>
           <DrawerHeaderContents ent={ent} />
+          <DrawerHeaderActions ent={ent} />
         </DrawerHeader>
         <div className="min-h-0 overflow-y-auto p-4 pt-3">
           {ent ? (
@@ -95,6 +67,52 @@ const EntityDetailsDrawer: React.FC = () => {
         </div>
       </DrawerContent>
     </Drawer>
+  );
+};
+
+const DrawerHeaderActions: React.FC<{ ent?: EntityData }> = ({ ent }) => {
+  const { entType, updatePageParams } = usePageParams();
+  const updatePage = usePageParamNavigation({});
+  const { prev, next } = usePrevNextEntities({ ent });
+
+  return (
+    <div className="absolute top-2 right-3 flex gap-2 ">
+      {prev && (
+        <Button variant="ghost" onClick={() => updatePageParams({ entID: prev.ID })}>
+          <ArrowLeftIcon />
+        </Button>
+      )}
+      {next && (
+        <Button variant="ghost" onClick={() => updatePageParams({ entID: next.ID })}>
+          <ArrowRightIcon />
+        </Button>
+      )}
+      {ent && (
+        <HoverCard>
+          <HoverCardTrigger
+            delay={10}
+            render={
+              <Button
+                variant="ghost"
+                onClick={() => updatePage({ cmpID: ent.ID, entType: ent.type, view: View.Details })}
+              >
+                <ArrowUpLeftSquareIcon />
+              </Button>
+            }
+          />
+          <HoverCardContent className="w-fit">See all details in main view</HoverCardContent>
+        </HoverCard>
+      )}
+      {ent?.type === entType && <PinButton ent={ent} />}
+      <DrawerClose
+        aria-label="Close details"
+        render={
+          <Button size="icon" variant="ghost">
+            <XIcon />
+          </Button>
+        }
+      />
+    </div>
   );
 };
 

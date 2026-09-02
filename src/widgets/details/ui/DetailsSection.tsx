@@ -32,7 +32,7 @@ const DetailsSection: React.FC<PropsWithChildren<Props>> = ({
   }, [title]);
 
   return (
-    <div className="flex flex-col mb-4 h-full box-border border border-[--color-button-secondary] rounded-xl">
+    <div className="flex flex-col mb-4 h-full box-border border border-[--color-button-secondary] rounded-xl text-left">
       <div
         role="heading"
         className={
