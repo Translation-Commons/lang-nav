@@ -9,7 +9,6 @@ import { EntityType, View } from '@features/params/PageParamTypes';
 import usePageParamNavigation from '@features/params/usePageParamNavigation';
 import usePageParams from '@features/params/usePageParams';
 
-import LanguageDrawerContents from '@entities/language/LanguageDrawerContents';
 import getEntityFromID from '@entities/lib/getEntityFromID';
 import { EntityData } from '@entities/types/DataTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
@@ -27,6 +26,9 @@ import {
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 import PinButton from '@shared/ui/PinButton';
 
+const LanguageDrawerContents = React.lazy(
+  () => import('@entities/language/LanguageDrawerContents'),
+);
 const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
 const EntityDetailsDrawer: React.FC = () => {

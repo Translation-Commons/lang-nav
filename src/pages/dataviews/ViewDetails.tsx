@@ -61,7 +61,7 @@ const EmptyDetails: React.FC = () => {
       <div className="flex justify-center">
         <SearchCombobox />
       </div>
-      <MiniCardList ents={filteredEntities} />
+      <MiniCardList ents={filteredEntities.slice(0, 12)} />
     </div>
   );
 };

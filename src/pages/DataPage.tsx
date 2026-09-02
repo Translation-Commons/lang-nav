@@ -1,12 +1,11 @@
 import React from 'react';
 
-import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
-
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 const DataPageBody = React.lazy(() => import('./DataPageBody'));
 const FilterPanel = React.lazy(() => import('@widgets/controls/FilterPanel'));
 const EntityDetailsDrawer = React.lazy(() => import('@widgets/details/ui/EntityDetailsDrawer'));
+const FilterPanelProvider = React.lazy(() => import('@widgets/controls/FilterPanelProvider'));
 
 const DataPage: React.FC = () => {
   /* Many data components have more lines of code so they are loaded lazily */

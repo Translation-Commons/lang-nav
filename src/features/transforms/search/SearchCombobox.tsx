@@ -48,7 +48,9 @@ const SearchCombobox: React.FC = () => {
   return (
     <Combobox
       filter={null}
-      itemToStringValue={(item: Suggestion) => item.ent.nameDisplay + ' [' + item.entID + ']'}
+      itemToStringValue={(item: Suggestion) =>
+        (item.ent?.nameDisplay ?? '') + ' [' + item.entID + ']'
+      }
       onValueChange={(value) => {
         if (!value) return;
         trackSearch(value.searchString + value.entID, 'suggestion');

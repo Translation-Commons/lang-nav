@@ -64,25 +64,39 @@ test.describe('screenshot tests', () => {
     await expect(page).toHaveScreenshot('data-page.png');
   });
 
-  test('data page: Language Details', async ({ page }) => {
+  test('data page: Details', async ({ page }) => {
     await seedDeclinedConsent(page);
-    await page.goto('./data?entID=zho&searchString=Chinese');
+    await page.goto('./data?view=Details');
     await waitToFinishLoadingData(page);
     await expect(page).toHaveScreenshot('data-page-details.png');
   });
 
-  test('data page: Locale Details', async ({ page }) => {
+  test('data page: Details', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?view=Details&cmpID=zho');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-details-language.png');
+  });
+
+  test('data page: Language Drawer', async ({ page }) => {
+    await seedDeclinedConsent(page);
+    await page.goto('./data?entID=zho&searchString=Chinese');
+    await waitToFinishLoadingData(page);
+    await expect(page).toHaveScreenshot('data-page-drawer-language.png');
+  });
+
+  test('data page: Locale Drawer', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto('./data?entID=eng_IN&searchString=English&entType=Locale');
     await waitToFinishLoadingData(page);
-    await expect(page).toHaveScreenshot('data-page-details-locale.png');
+    await expect(page).toHaveScreenshot('data-page-drawer-locale.png');
   });
 
-  test('data page: Territory Details', async ({ page }) => {
+  test('data page: Territory Drawer', async ({ page }) => {
     await seedDeclinedConsent(page);
     await page.goto('./data?entID=ID&searchString=Ind&entType=Territory');
     await waitToFinishLoadingData(page);
-    await expect(page).toHaveScreenshot('data-page-details-territory.png');
+    await expect(page).toHaveScreenshot('data-page-drawer-territory.png');
   });
 
   test('data page: Table', async ({ page }) => {

@@ -1,6 +1,5 @@
 import React from 'react';
 
-import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
@@ -34,7 +33,6 @@ const EntityPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
 
   // Prepare data
   if (children.length < 1) return null;
-  const childIDs = children.map((child) => child.ID);
   const descendantsName = getDescendantsName(ent, children.length);
 
   return (
@@ -56,15 +54,6 @@ const EntityPathChildren: React.FC<{ ent?: EntityData }> = ({ ent }) => {
           ))}
         </DropdownMenuContent>
       </DropdownMenu>
-      <Selector<string>
-        onChange={(childID) => updatePageParams({ entID: childID, entType: ent.type })}
-        selected={children.length + ' ' + descendantsName}
-        options={childIDs}
-        getOptionLabel={(childID) => {
-          const child = children.find((c) => c.ID === childID);
-          return child ? child.nameDisplay : childID;
-        }}
-      />
     </>
   );
 };

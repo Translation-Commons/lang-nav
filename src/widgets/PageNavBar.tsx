@@ -8,10 +8,11 @@ import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import PopupCard from '@features/layers/popupcard/PopupCard';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
-import SearchBar from '@features/transforms/search/SearchBar';
 
 import NavBarToolsMenu from './controls/NavBarToolsMenu';
 import SettingsButton from './controls/SettingsButton';
+
+const SearchBar = React.lazy(() => import('@features/transforms/search/SearchBar'));
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
