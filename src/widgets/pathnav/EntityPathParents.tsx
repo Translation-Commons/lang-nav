@@ -1,10 +1,11 @@
-import { EllipsisIcon, SlashIcon } from 'lucide-react';
 import React, { Fragment } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { EntityData } from '@entities/types/DataTypes';
+
+import { BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbSeparator } from '@shared/ui/breadcrumb';
 
 import { getEntityParents } from './getParentsAndDescendants';
 
@@ -18,8 +19,10 @@ const EntityPathParents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
 
   return parents.map((o, i) => (
     <Fragment key={i}>
-      <SlashIcon size="1em" />
-      <HoverableEntityName ent={o} />
+      {i != 0 && <BreadcrumbSeparator />}
+      <BreadcrumbItem>
+        <HoverableEntityName ent={o} />
+      </BreadcrumbItem>
     </Fragment>
   ));
 };
@@ -29,14 +32,17 @@ const EntityPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ pare
   const [showFullAncestry, setShowFullAncestry] = React.useState(false);
   const hiddenAncestors = parents.slice(1, -1).map((p, i) => (
     <React.Fragment key={'ancestor' + i}>
-      {i !== 0 && <SlashIcon size="1em" />}
-      <HoverableEntityName ent={p} />
+      {i !== 0 && <BreadcrumbSeparator />}
+      <BreadcrumbItem>
+        <HoverableEntityName ent={p} />
+      </BreadcrumbItem>
     </React.Fragment>
   ));
   return (
     <>
-      <SlashIcon size="1em" />
-      <HoverableEntityName ent={parents[0]} />
+      <BreadcrumbItem>
+        <HoverableEntityName ent={parents[0]} />
+      </BreadcrumbItem>
       <Hoverable
         onClick={() => setShowFullAncestry((prev) => !prev)}
         hoverContent={
@@ -46,13 +52,15 @@ const EntityPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ pare
         }
       >
         <div style={{ display: 'flex', gap: '.25em' }}>
-          <SlashIcon size="1em" display="block" />
-          <EllipsisIcon size="1em" display="block" />
+          <BreadcrumbSeparator />
+          <BreadcrumbEllipsis />
         </div>
       </Hoverable>
       {showFullAncestry && <>{hiddenAncestors}</>}
-      <SlashIcon size="1em" />
-      <HoverableEntityName ent={parents[parents.length - 1]} />
+      <BreadcrumbSeparator />
+      <BreadcrumbItem>
+        <HoverableEntityName ent={parents[parents.length - 1]} />
+      </BreadcrumbItem>
     </>
   );
 };

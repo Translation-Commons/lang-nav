@@ -1,4 +1,3 @@
-import { SlashIcon } from 'lucide-react';
 import React from 'react';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
@@ -7,6 +6,13 @@ import usePageParams from '@features/params/usePageParams';
 
 import { LanguageSource } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/DataTypes';
+
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbList,
+  BreadcrumbSeparator,
+} from '@shared/ui/breadcrumb';
 
 import EntityPathChildren from './EntityPathChildren';
 import EntityPathParents from './EntityPathParents';
@@ -33,11 +39,13 @@ const EntityPath: React.FC<{ ent: EntityData | undefined; showChildren?: boolean
   }
 
   return (
-    <>
-      <EntityPathParents ent={ent} />
-      <ObjectName ent={ent} />
-      {showChildren && <EntityPathChildren ent={ent} />}
-    </>
+    <Breadcrumb>
+      <BreadcrumbList>
+        <EntityPathParents ent={ent} />
+        <ObjectName ent={ent} />
+        {showChildren && <EntityPathChildren ent={ent} />}
+      </BreadcrumbList>
+    </Breadcrumb>
   );
 };
 
@@ -48,9 +56,11 @@ const ObjectName: React.FC<{ ent?: EntityData }> = ({ ent }) => {
       {ent.type === EntityType.Locale ? (
         <span style={{ fontWeight: 'bold' }}>:</span>
       ) : (
-        <SlashIcon size="1em" />
+        <BreadcrumbSeparator />
       )}
-      <HoverableEntityName ent={ent} style={{ fontWeight: 'bold' }} />
+      <BreadcrumbItem>
+        <HoverableEntityName ent={ent} style={{ fontWeight: 'bold' }} />
+      </BreadcrumbItem>
     </>
   );
 };

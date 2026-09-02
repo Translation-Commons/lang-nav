@@ -271,7 +271,7 @@ gla	Scottish Gaelic	2,170			910
 cym	Welsh	2,165			850
 und	Gaelic, n.o.s.				330
 und	Celtic languages, n.i.e.	910			
-gem	Germanic languages	658,705			330,025
+#gem	Germanic languages	658,705			330,025
 fris1239	Frisian languages				1,140
 fry	Frisian	2,835			1,095
 stq	Saterfriesisch				50

@@ -1,13 +1,14 @@
 import React from 'react';
 
-import FilterPanelProvider from '@widgets/controls/FilterPanelProvider';
 import DocsPageContainer from '@widgets/docs/DocsPageContainer';
 
 import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
+const FilterPanelProvider = React.lazy(() => import('@widgets/controls/FilterPanelProvider'));
 const FieldCoverageTable = React.lazy(
   () => import('@features/transforms/fields/FieldCoverageTable'),
 );
+
 const DataCoveragePage: React.FC = () => {
   return (
     <DocsPageContainer title="Data Coverage">

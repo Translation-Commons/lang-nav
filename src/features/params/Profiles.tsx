@@ -33,6 +33,7 @@ export enum ProfileType {
 }
 
 const GLOBAL_DEFAULTS: PageParams = {
+  cmpID: '',
   colorBy: Field.None,
   colorGradient: ColorGradient.DivergingBlueToOrange,
   columns: {},

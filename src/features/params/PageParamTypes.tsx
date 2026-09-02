@@ -29,6 +29,7 @@ export enum View {
   Hierarchy = 'Hierarchy',
   Map = 'Map',
   Reports = 'Reports',
+  Details = 'Details',
 }
 
 export enum SearchableField {
@@ -51,6 +52,7 @@ export enum LocaleSeparator {
 export type TableIDToBinarizedColumnVisibility = { [key: number]: bigint };
 
 export enum PageParamKey {
+  cmpID = 'cmpID',
   colorBy = 'colorBy',
   colorGradient = 'colorGradient',
   columns = 'columns',
@@ -85,6 +87,7 @@ export enum PageParamKey {
 }
 
 export type PageParams = {
+  cmpID: string;
   colorBy: Field;
   scaleBy: Field;
   colorGradient: ColorGradient;
