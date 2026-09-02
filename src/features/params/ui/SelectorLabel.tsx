@@ -1,7 +1,6 @@
-import { InfoIcon } from 'lucide-react';
 import React, { ReactNode } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
+import ContextIcon from '@shared/ui/ContextIcon';
 
 import { SelectorDisplay, useSelectorDisplay } from './SelectorDisplayContext';
 
@@ -16,11 +15,7 @@ const SelectorLabel: React.FC<Props> = ({ label, description }) => {
   return (
     <span style={getStyle(display)}>
       <div>{label}</div>
-      {description && (
-        <Hoverable hoverContent={description}>
-          <InfoIcon size="1em" display="block" />
-        </Hoverable>
-      )}
+      {description && <ContextIcon>{description}</ContextIcon>}
     </span>
   );
 };

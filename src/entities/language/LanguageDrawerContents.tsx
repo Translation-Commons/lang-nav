@@ -16,10 +16,10 @@ import { numberToSigFigs } from '@shared/lib/numberUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
+import ContextIcon from '@shared/ui/ContextIcon';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 import Deemphasized from '@shared/ui/Deemphasized';
 import ExternalLink from '@shared/ui/ExternalLink';
-import { HoverCard, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import { getDigitalSupportDimensionLabel } from '@strings/DigitalSupportStrings';
 import { getLanguageModalityUserLabel, getModalityLabel } from '@strings/LanguageModalityStrings';
@@ -75,10 +75,9 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
             {ISO.code}
             {ISO.code6391 && ` | ${ISO.code6391}`}
             {lang.warnings[LanguageField.isoCode] && (
-              <HoverCard>
-                <HoverCardTrigger>⚠️</HoverCardTrigger>
+              <ContextIcon severity="warning">
                 <LanguageRetirementReason lang={lang} />
-              </HoverCard>
+              </ContextIcon>
             )}
           </DrawerDetailsField>
         )}
