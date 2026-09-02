@@ -1,1 +1,0 @@
-import{q as e,ab as s,ac as t}from"./index-CTpytAYz.js";const o=({children:a,className:r})=>e.jsx("div",{className:"flex items-center gap-2 flex-wrap "+(r??""),children:e.jsx(s,{display:t.InlineDropdown,children:a})});export{o as P};

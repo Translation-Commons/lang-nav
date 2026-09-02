@@ -1,0 +1,1 @@
+var e=(r=>(r.Overall="overall",r.Keyboards="keyboards",r.Documentation="documentation",r.I18nFrameworks="i18nFrameworks",r.MachineTranslation="machineTranslation",r.Interfaces="interfaces",r))(e||{}),a=(r=>(r.Active="Active",r.Closed="Closed",r.Incubator="Incubator",r))(a||{});export{e as D,a as W};
