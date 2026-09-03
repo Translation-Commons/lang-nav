@@ -33,16 +33,19 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
     <div className="flex flex-col gap-3">
       <LanguageDrawerSummary lang={lang} />
 
-      <DrawerDetailsSection title="Systems">
-        <DrawerDetailsField label="ISO status">
-          {ISO.status || ISO.scope === LanguageScope.Family ? (
+      <DrawerDetailsSection title="Technical Details">
+        <DrawerDetailsField
+          label="ISO Status"
+          hasData={!!ISO.status || ISO.scope === LanguageScope.Family}
+        >
+          {ISO.status ? (
             ISO.status ? (
               getLanguageISOStatusLabel(ISO.status)
             ) : (
               getLanguageScopeLabel(ISO.scope)
             )
           ) : (
-            <Deemphasized>not in ISO</Deemphasized>
+            <Deemphasized>Not in ISO</Deemphasized>
           )}
           {ISO.scope && ISO.scope !== lang.scope && <Badge>{ISO.scope}</Badge>}
         </DrawerDetailsField>
@@ -50,7 +53,9 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
           <DrawerDetailsField
             label="ISO code"
             actions={
-              <ExternalLink href={`https://iso639-3.sil.org/code/${ISO.code}`}> </ExternalLink>
+              <ExternalLink href={`https://iso639-3.sil.org/code/${ISO.code}`}>
+                ISO catalog
+              </ExternalLink>
             }
           >
             {ISO.code}
@@ -69,7 +74,7 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
               <ExternalLink
                 href={`https://glottolog.org/resource/languoid/id/${lang.Glottolog.code}`}
               >
-                {' '}
+                glottolog.org
               </ExternalLink>
             }
           >
@@ -82,24 +87,39 @@ const LanguageDrawerContents: React.FC<Props> = ({ lang }) => {
             <CLDRWarningNotes ent={lang} /> <EntityCLDRCoverageLevel ent={lang} />
           </DrawerDetailsField>
         )}
-      </DrawerDetailsSection>
 
-      {lang.digitalSupportScore && (
-        <DrawerDetailsSection title="Digital support">
-          {Object.values(DigitalSupportDimension).map((dimension) => (
-            <DrawerDetailsField key={dimension} label={getDigitalSupportDimensionLabel(dimension)}>
-              <div className="flex flex-row gap-1 items-center">
-                {digitalSupport?.[dimension] == null ? (
-                  <Deemphasized>No data</Deemphasized>
-                ) : (
-                  `${numberToSigFigs(digitalSupport?.[dimension], 2)}/10`
-                )}
-                <LanguageDigitalSupportMeter lang={lang} dim={dimension} />
-              </div>
-            </DrawerDetailsField>
-          ))}
-        </DrawerDetailsSection>
-      )}
+        <DrawerDetailsField
+          label="Digital support"
+          hasData={!!lang.digitalSupportScore}
+          expandedContent={
+            <table>
+              <tbody>
+                {Object.values(DigitalSupportDimension)
+                  .filter(
+                    (dimension) =>
+                      digitalSupport?.[dimension] != null &&
+                      dimension !== DigitalSupportDimension.Overall,
+                  )
+                  .map((dimension) => (
+                    <tr key={dimension}>
+                      <td>{getDigitalSupportDimensionLabel(dimension)}</td>
+                      <td>{numberToSigFigs(digitalSupport?.[dimension] ?? 0, 2)}/10</td>
+                      <td>
+                        <LanguageDigitalSupportMeter lang={lang} dim={dimension} />
+                      </td>
+                    </tr>
+                  ))}
+              </tbody>
+            </table>
+          }
+        >
+          <div className="flex flex-row gap-1 items-center">
+            {digitalSupport?.[DigitalSupportDimension.Overall] != null &&
+              `${numberToSigFigs(digitalSupport?.[DigitalSupportDimension.Overall], 2)}/10`}
+            <LanguageDigitalSupportMeter lang={lang} dim={DigitalSupportDimension.Overall} />
+          </div>
+        </DrawerDetailsField>
+      </DrawerDetailsSection>
     </div>
   );
 };
