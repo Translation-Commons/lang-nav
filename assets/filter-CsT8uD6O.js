@@ -1,1 +1,0 @@
-import{F as e}from"./index-DKnf6WVt.js";import{a as i}from"./useFilters-DmYj1Pza.js";function s(){const t=i();return r=>t[e.TerritoryScope](r)&&t[e.LanguageScope](r)&&t[e.Modality](r)}function u(){const t=i();return r=>t[e.ISOStatus](r)}export{u as a,s as u};

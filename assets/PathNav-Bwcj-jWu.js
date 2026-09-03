@@ -1,0 +1,1 @@
+import{r as e,ad as s,ae as t}from"./index-DcqU9AHt.js";const o=({children:r,className:a})=>e.jsx("div",{className:"flex items-center gap-2 flex-wrap "+(a??""),children:e.jsx(s,{display:t.InlineDropdown,children:r})});export{o as P};
