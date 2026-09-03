@@ -28,6 +28,7 @@ import {
   getCountOfChildTerritories,
   getCountOfCountries,
 } from '@entities/lib/getEntityRelatedTerritories';
+import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
@@ -126,17 +127,21 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     case Field.LanguageFamily:
       return getRootLanguageFamilyForEntity(ent)?.nameDisplay;
     case Field.WritingSystem:
-      return getWritingSystemsInEntity(ent)?.[0]?.nameDisplay;
+      return getFirstNamePlus(getWritingSystemsInEntity(ent));
     case Field.OutputScript:
       return getKeyboardForEntity(ent)?.outputWritingSystem?.nameDisplay;
     case Field.Region:
       return getTerritoryForEntity(ent)?.parentUNRegion?.nameDisplay;
     case Field.Territory:
-      return getContainingTerritories(ent)?.[0]?.nameDisplay;
+      return getFirstNamePlus(
+        getContainingTerritories(ent)?.filter(
+          (t) => t.scope === TerritoryScope.Country || t.scope === TerritoryScope.Dependency,
+        ),
+      );
     case Field.Platform:
       return getKeyboardForEntity(ent)?.platform;
     case Field.Variant:
-      return getVariantsForEntity(ent)?.[0]?.nameDisplay;
+      return getFirstNamePlus(getVariantsForEntity(ent));
     case Field.SourceForPopulation:
       return getCensusForEntity(ent)?.collectorName;
     case Field.SourceForLanguage:
@@ -195,6 +200,13 @@ function getField(ent: EntityData | undefined, field: Field): string | number | 
     default:
       enforceExhaustiveSwitch(field);
   }
+}
+
+function getFirstNamePlus(ents?: EntityData[]): string | undefined {
+  if (!ents || ents.length === 0) return undefined;
+  const firstName = ents[0].nameDisplay;
+  if (ents.length === 1) return firstName;
+  return `${firstName} +${ents.length - 1}`;
 }
 
 export default getField;

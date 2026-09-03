@@ -5316,7 +5316,7 @@ bcd	nort2860	North Babar			Latn	1,000		nort2859	Yes
 bcm	bann1247	Bannoni			Latn	1,000		piva1237	Yes	
 bdk	budu1248	Budukh			Latn	1,000		sout2753	Yes	
 beg	bela1260	Belait				1,000		cent2272	Yes	
-ber		Berber languages				20,000,000			Probably not	Language family encompassing all Berber languages -- may only be used if the data does not break down the languages
+ber	berb1260	Berber languages			Tfng	20,000,000			No	Language family encompassing all Berber languages -- may only be used if the data does not break down the languages
 bgm	baga1276	Baga Mboteni				1,000	bcg	baga1275	No	ISO considers this a duplicate of bcg
 bhn	boht1238	Bohtan Neo-Aramaic			Syrc	1,000		boht1239	Yes	
 bkf	beek1238	Beeke			Latn	1,000		bali1286	Yes	
@@ -6000,7 +6000,7 @@ xau	kauw1242	Kauwera	bahasa Kabera		Latn	400		kwer1262	Yes
 ynl	yang1298	Yangulam			Latn	400		nuru1240	Yes	
 yoi	yona1241	Yonaguni	与那国物言		Jpan	400		macr1267	Yes	
 ysd	sama1295	Samatao			Yiii	400		kazh1234	Yes	
-zua		Zeem		Spoken & Written		400	zem		Probably not	Split into [tvi] Tulai, [dyr] Dyarim, [dsk] Dokshi, [cxh] Cha'ari, and [zem] Zeem
+zua	zeem1243	Zeem		Spoken & Written		400	zem		Probably not	Split into [tvi] Tulai, [dyr] Dyarim, [dsk] Dokshi, [cxh] Cha'ari, and [zem] Zeem
 mpo	miuu1237	Miu			Latn	395		pasi1254	Yes	
 mbr	nuka1242	Nukak Makú	Nɨkák náu'		Latn	390		kaku1242	Yes	
 myp	pira1253	Pirahã	Hi'aiti'ihi'		Latn	390			Yes	
@@ -6973,7 +6973,7 @@ uln	unse1236	Unserdeutsch			Latn	10		glob1243	Yes
 uly	buli1260	Buli			Latn	10		polc1245	Yes	
 uni	unii1234	Uni			Latn	10		lago1243	Yes	
 urc	urni1239	Urningangg			Latn	10		urni1238	No	Extinct language
-uun		Kulon-Pazeh				10			Probably not	Split into separate language codes
+uun	nort2899	Kulon-Pazeh				10			Probably not	Split into separate language codes
 vkn	koro1323	Koro Nulu			Latn	10		uncl1532	Yes	
 vku	kurr1243	Kurrama			Latn	10		yind1249	Yes	
 vsi	mold1243	Moldova Sign Language		Sign	Zxxx	10		cent2419	Yes	

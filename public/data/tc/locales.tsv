@@ -9110,7 +9110,7 @@ frp_IT	Arpitan (Italy)	patoué
 fsl_FR	French Sign Language (France)	langue des signes française			
 fuc_SN	Pulaar (Senegal)	Pulaar		4022754	
 fuf_GN	Pular (Guinea)	Pular	Official	3266056	
-fuh_NE	Western Niger Fulfulde (Niger)				
+fuh_NE	Western Niger Fulfulde (Niger)			688000	
 fum_NG	Fum (Nigeria)				
 fur_SI	Friulian (Slovenia)	Furlan			
 fut_VU	Futuna-Aniwa (Vanuatu)				
@@ -9798,7 +9798,6 @@ thi_LA	Tai Long (Laos)
 thk_KE	Tharaka (Kenya)				
 thm_TH	Aheu (Thailand)				
 thu_SS	Thuri (South Sudan)				
-thz_NE	Tayart Tamajeq (Niger)				
 tic_SD	Tira (Sudan)				
 tja_LR	Tajuasohn (Liberia)				
 tjm_US	Timucua (United States)				
@@ -11010,3 +11009,10 @@ tgh_TT	Tobagonian Creole English (Trinidad & Tobago)			36000
 acf_TT	Saint Lucian Creole French (Trinidad & Tobago)			9600	
 hns_TT	Caribbean Hindustani (Trinidad & Tobago)			20000	
 rmz_MM	Marma (Myanmar)			158000	
+bdm_NE	Buduma (Niger)			9700	
+arq_NE	Algerian Arabic (Niger)			646000	
+mos_NE	Mossi (Niger)			174000	
+ddn_NE	Dendi (Niger)			102000	
+dzg_NE	Dazaga (Niger)			86000	
+kbl_NE	Kanembu (Niger)			25000	
+thz_NE	Tayart Tamajeq (Niger)			833000	
