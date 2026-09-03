@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { PageParams } from '@features/params/PageParamTypes';
 import { Suggestion } from '@features/params/ui/SelectorSuggestions';
 import usePageParams from '@features/params/usePageParams';
 
@@ -19,12 +20,25 @@ import {
 import useSearchSuggestions from './useSearchSuggestions';
 import useTrackSearch from './useTrackSearch';
 
-const SearchCombobox: React.FC = () => {
+type Props = {
+  getNewParams?: (value: Suggestion) => Partial<PageParams>;
+};
+
+const SearchCombobox: React.FC<Props> = ({ getNewParams }) => {
   const { entType, updatePageParams } = usePageParams();
   const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [searchString, setSearchString] = useState('');
   const getSearchSuggestions = useSearchSuggestions();
   const trackSearch = useTrackSearch();
+
+  const onSubmit = useCallback(
+    (value: Suggestion | null) => {
+      if (!value) return;
+      trackSearch(value.searchString + value.entID, 'suggestion');
+      updatePageParams(getNewParams?.(value) ?? { cmpID: value.entID });
+    },
+    [trackSearch, updatePageParams, getNewParams],
+  );
 
   useEffect(() => {
     let isActive = true; // Flag to track component mount status
@@ -51,15 +65,11 @@ const SearchCombobox: React.FC = () => {
       itemToStringValue={(item: Suggestion) =>
         (item.ent?.nameDisplay ?? '') + ' [' + item.entID + ']'
       }
-      onValueChange={(value) => {
-        if (!value) return;
-        trackSearch(value.searchString + value.entID, 'suggestion');
-        updatePageParams({ cmpID: value.entID });
-      }}
+      onValueChange={onSubmit}
       autoHighlight
     >
       <ComboboxInput
-        className="min-w-[300px]"
+        className="min-w-[300px] text-(--foreground)! bg-(--background)! mx-auto"
         placeholder={'search ' + getEntityTypeLabelPlural(entType)}
         showClear
         value={searchString}

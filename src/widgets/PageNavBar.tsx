@@ -14,7 +14,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import NavBarToolsMenu from './controls/NavBarToolsMenu';
 import SettingsButton from './controls/SettingsButton';
 
-const SearchBar = React.lazy(() => import('@features/transforms/search/SearchBar'));
+const SearchCombobox = React.lazy(() => import('@features/transforms/search/SearchCombobox'));
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
@@ -43,11 +43,17 @@ const PageNavBar: React.FC = () => {
           buttonLabel={<SearchIcon />}
           buttonStyle={{ padding: '8px' }}
           justifyCard="center"
-          body={<SearchBar />}
+          body={
+            <SearchCombobox
+              getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}
+            />
+          }
         />
         <div className="flex-1">
           <div className="hidden lg:flex">
-            <SearchBar />
+            <SearchCombobox
+              getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}
+            />
           </div>
         </div>
       </ContainErrorsAndSuspense>

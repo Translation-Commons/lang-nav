@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { useDataContext } from '@features/data/context/useDataContext';
+import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import useFilteredEntities from '@features/transforms/filtering/useFilteredEntities';
-import SearchBar from '@features/transforms/search/SearchBar';
+import SearchCombobox from '@features/transforms/search/SearchCombobox';
 
 const SearchContainer: React.FC<{ children: React.ReactNode; style?: React.CSSProperties }> = ({
   children,
@@ -73,7 +74,13 @@ const LuckySearchPageBody: React.FC = () => {
         Sorry, we couldn&apos;t find any languages matching &quot;{searchString}&quot;.
       </div>
       <div style={{ marginBottom: '1em' }}>Try searching again:</div>
-      <SearchBar />
+      <SearchCombobox
+        getNewParams={(value) => ({
+          entID: value.entID,
+          entType: value.ent?.type,
+          languageFilter: value.ent?.type === EntityType.Language ? value.ent?.ID : undefined,
+        })}
+      />
       <div style={{ marginTop: '1em' }}>
         <Link to="/intro">
           <button style={{ padding: '0.5em 1em' }}>Back to Home</button>
