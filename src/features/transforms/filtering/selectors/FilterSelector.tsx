@@ -8,7 +8,7 @@ import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getApplicableFields } from '@features/transforms/fields/FieldApplicability';
 import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
-import SearchBar from '@features/transforms/search/SearchBar';
+import SearchCombobox from '@features/transforms/search/SearchCombobox';
 import TransformEnum from '@features/transforms/TransformEnum';
 
 import LanguageFamilyFilterSelector from './LanguageFamilyFilterSelector';
@@ -42,7 +42,7 @@ const FilterSelector: React.FC<Props> = ({ field }) => {
     case Field.ISOStatus:
       return <LanguageISOStatusSelector />;
     case Field.Name:
-      return <SearchBar />; // Technically correct but not recommended usage
+      return <SearchCombobox />; // Technically correct but not recommended usage
     case Field.SourceForLanguage:
       return <LanguageSourceSelector />;
     case Field.Population:
