@@ -14,6 +14,11 @@ type Props = {
   setHoveredId: (id: string | null) => void;
 };
 
+/**
+ * The aim of this component was to keep a list of pinned entities visible as a sidebar on the map.
+ * However when the conversion to shadcn components, this became less stylistically consistent and it
+ * is a candidate for removal or redesign.
+ */
 const MapSidebar: React.FC<Props> = ({ drawableEntities, entType, hoveredId, setHoveredId }) => {
   const { pinned, updatePageParams } = usePageParams();
 

@@ -23,7 +23,7 @@ const MapHoverCard: React.FC<Props> = ({ ent, allowSidebar, showData = true }) =
 
   const getDescription = () => {
     if (showData === false) return 'No languages passing filters';
-    if (allowSidebar) return 'Click to open in sidebar';
+    if (allowSidebar) return 'Click to pin to cardlist below';
     return 'Click to open in details panel';
   };
 
