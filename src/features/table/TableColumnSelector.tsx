@@ -1,17 +1,61 @@
-import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
-import React, { useCallback } from 'react';
+import { ArrowUpDownIcon, Columns3Icon } from 'lucide-react';
+import React, { useCallback, useMemo } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
-import Modal from '@features/layers/modal/ModalButton';
+import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { groupBy } from '@shared/lib/setUtils';
+import { areArraysIdentical, groupBy } from '@shared/lib/setUtils';
+import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
+import { Checkbox } from '@shared/ui/checkbox';
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@shared/ui/command';
+import { Drawer, DrawerContent, DrawerHeader, DrawerTrigger } from '@shared/ui/drawer';
 
 import TableColumn from './TableColumn';
-import TableColumnName from './TableColumnName';
+import TableColumnPresets from './TableColumnPresets';
 import { ColumnVisibilityModule } from './useColumnVisibility';
+
+const columnPresetsToColumns: Record<string, string[]> = {
+  Overview: [
+    'ID',
+    'Name',
+    'Endonym',
+    'Speakers (est.)',
+    'Writers (est.)',
+    'ISO Status',
+    'Overall Digital Support',
+    'Countries',
+  ],
+  'Language Codes': [
+    'ID',
+    'Canonical ID',
+    'ISO 639-1',
+    'ISO 639-3/5',
+    'BCP Code',
+    'CLDR Code',
+    'Glottocode',
+    'Name',
+  ],
+  Names: ['ID', 'Name', 'Endonym', 'ISO Name', 'CLDR Name', 'Glottolog Name', 'Other Names'],
+  'Digital Support': [
+    'ID',
+    'Name',
+    'Overall Digital Support',
+    'Keyboards',
+    'Machine Translation',
+    'I18n Frameworks',
+    'Interface Support',
+    'Documentation',
+  ],
+};
 
 function TableColumnSelector<T extends EntityData>({
   columns,
@@ -24,149 +68,109 @@ function TableColumnSelector<T extends EntityData>({
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
+  const activePreset = useMemo(() => {
+    console.log(
+      Object.entries(columnVisibility)
+        .filter(([, value]) => value)
+        .map(([key]) => key),
+    );
+    const preset = Object.entries(columnPresetsToColumns).find(([, cols]) =>
+      areArraysIdentical(
+        cols,
+        Object.entries(columnVisibility)
+          .filter(([, value]) => value)
+          .map(([key]) => key),
+      ),
+    );
+    return preset ? preset[0] : 'custom';
+  }, [columnVisibility]);
+  const applyPreset = useCallback(
+    (presetId: string | null) => {
+      if (presetId === null) return;
+      const columns = columnPresetsToColumns[presetId];
+      if (columns) visibilityModule.setColumns(columns);
+    },
+    [visibilityModule],
+  );
+  const selectAll = useCallback(() => {
+    visibilityModule.setColumns(columns.map((col) => col.key));
+  }, [columns, visibilityModule]);
+  const deselectAll = useCallback(() => {
+    visibilityModule.setColumns([]);
+  }, [visibilityModule]);
+
   return (
-    <Modal
-      buttonLabel={`${nVisible}/${columns.length} columns visible. Click to configure.`}
-      description="Select which columns to show or hide"
-      title="Select Columns"
-      body={
-        <>
-          Click to toggle the visibility of columns in the table. You can also hover over column
-          names for more info and sorting/filtering options.
-          <div className="p-2 grid grid-cols-[repeat(auto-fit,minmax(12em,1fr))] gap-2">
+    <Drawer modal={false} swipeDirection="right">
+      <DrawerTrigger
+        render={
+          <Button variant="outline">
+            <Columns3Icon />
+            Columns
+            <Badge variant="secondary">{nVisible}</Badge>
+          </Button>
+        }
+      />
+
+      <DrawerContent className="w-60">
+        <DrawerHeader className="text-lg font-bold">Column Selector</DrawerHeader>
+        <TableColumnPresets columns={columns} visibilityModule={visibilityModule} />
+        <Command>
+          <CommandInput placeholder="Search columns..." />
+
+          <CommandList className="max-h-160 overflow-y-auto">
+            <CommandEmpty>No columns found.</CommandEmpty>
+
             {Object.entries(columnsByGroup).map(([group, columns]) => (
-              <ColumnGroup
-                columns={columns}
-                group={group}
-                key={group}
-                visibilityModule={visibilityModule}
-              />
+              <CommandGroup heading={group} key={group}>
+                <ColumnGroup columns={columns} group={group} visibilityModule={visibilityModule} />
+              </CommandGroup>
             ))}
-          </div>
-          <GlobalControls columns={columns} visibilityModule={visibilityModule} />
-        </>
-      }
-    />
+          </CommandList>
+        </Command>
+      </DrawerContent>
+    </Drawer>
   );
 }
 
 function ColumnGroup<T extends EntityData>({
   columns,
-  visibilityModule: { columnVisibility, toggleColumn, setColumns },
+  visibilityModule: { columnVisibility, toggleColumn },
   group,
 }: {
   columns: TableColumn<T>[];
   visibilityModule: ColumnVisibilityModule<T>;
   group: string;
 }): React.ReactNode {
-  // If all columns are visible, this function will turn them all off
-  // If no columns are visible, this function will turn them all on
-  // If some columns are visible, this function will turn them all on
-  const allVisible = columns.every((col) => columnVisibility[col.key]);
-  const someVisible = columns.some((col) => columnVisibility[col.key]);
-  const toggleSelectAll = useCallback(() => {
-    setColumns(
-      columns.map((col) => col.key),
-      !allVisible,
-    );
-  }, [columns, setColumns, allVisible]);
-  const toggleSelectHoverContent = allVisible
-    ? 'All columns visible. Click to hide all columns in this group.'
-    : someVisible
-      ? 'Some columns visible. Click to show all columns in this group.'
-      : 'No columns visible. Click to show all columns in this group.';
+  const { sortBy, secondarySortBy } = usePageParams();
 
   return (
-    <div
-      key={group}
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        textAlign: 'start',
-      }}
-    >
-      {columns.length > 1 && (
-        <Hoverable
-          hoverContent={toggleSelectHoverContent}
-          onClick={toggleSelectAll}
-          style={{ display: 'flex', alignItems: 'center' }}
-        >
-          <div style={{ fontWeight: 'bold' }}>{group}</div>
-          <div style={{ marginLeft: '0.25em' }}>
-            {allVisible ? (
-              <SquareCheckIcon size="1em" display="block" />
-            ) : someVisible ? (
-              <SquareMinusIcon size="1em" display="block" />
-            ) : (
-              <SquareIcon size="1em" display="block" />
-            )}
-          </div>
-        </Hoverable>
-      )}
+    <div key={group}>
       {columns.map((column) => (
-        <ColumnCheckbox
+        <CommandItem
           key={column.key}
-          column={column}
-          isChecked={columnVisibility[column.key] || false}
-          toggleColumn={toggleColumn}
-        />
+          value={column.key + ' ' + group}
+          onSelect={() => toggleColumn(column.key)}
+          className="flex items-center gap-2 w-full"
+        >
+          <Checkbox
+            checked={columnVisibility[column.key] || false}
+            tabIndex={-1}
+            aria-hidden="true"
+          />
+
+          <div>{column.label ?? column.key}</div>
+
+          {sortBy === column.field || secondarySortBy === column.field ? (
+            <ArrowUpDownIcon
+              className="justify-self-end"
+              style={{
+                color: 'var(--color-button-primary)',
+                opacity: secondarySortBy === column.field ? 0.5 : 1,
+              }}
+            />
+          ) : null}
+        </CommandItem>
       ))}
-    </div>
-  );
-}
-
-function ColumnCheckbox<T extends EntityData>({
-  column,
-  isChecked,
-  toggleColumn,
-}: {
-  column: TableColumn<T>;
-  isChecked: boolean;
-  toggleColumn: (key: string) => void;
-}): React.ReactNode {
-  return (
-    <label
-      key={column.key}
-      className="cursor-pointer text-left flex gap-1"
-      style={{ fontWeight: 'normal' }}
-    >
-      <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
-      <TableColumnName column={column} appearance="text" />
-    </label>
-  );
-}
-
-function GlobalControls<T extends EntityData>({
-  columns,
-  visibilityModule: { setColumns, resetColumnVisibility },
-}: {
-  columns: TableColumn<T>[];
-  visibilityModule: ColumnVisibilityModule<T>;
-}): React.ReactNode {
-  const selectAll = useCallback(() => {
-    setColumns(
-      columns.map((col) => col.key),
-      true,
-    );
-  }, [columns, setColumns]);
-  const deselectAll = useCallback(() => {
-    setColumns(
-      columns.map((col) => col.key),
-      false,
-    );
-  }, [columns, setColumns]);
-
-  return (
-    <div className="flex flex-row justify-end gap-2 p-2">
-      <Button onClick={resetColumnVisibility} variant="secondary">
-        Reset
-      </Button>
-      <Button onClick={selectAll} variant="secondary">
-        Show all
-      </Button>
-      <Button onClick={deselectAll} variant="secondary">
-        Hide all
-      </Button>
     </div>
   );
 }
