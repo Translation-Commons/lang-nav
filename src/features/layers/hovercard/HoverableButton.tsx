@@ -13,7 +13,7 @@ type HoverableProps = {
   onClick?: () => void;
   role?: string;
   style?: React.CSSProperties;
-  variant: 'secondary' | 'default' | 'outline' | 'ghost' | 'link' | 'destructive';
+  variant?: 'secondary' | 'default' | 'outline' | 'ghost' | 'link' | 'destructive';
 };
 
 const HoverableButton: React.FC<HoverableProps> = ({

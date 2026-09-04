@@ -1,10 +1,6 @@
 import React from 'react';
 
 import usePageArrowKeys from '@features/pagination/usePageArrowKeys';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import { AllApplicableFilterSelectors } from '@features/transforms/filtering/selectors/FilterSelector';
 
 import ResizablePanel from './ResizablePanel';
@@ -23,9 +19,7 @@ const FilterPanel: React.FC = () => {
       isOpen={filterPanel.isOpen}
       onClose={() => filterPanel.setIsOpen(false)}
     >
-      <SelectorDisplayProvider display={SelectorDisplay.Dropdown}>
-        <AllApplicableFilterSelectors />
-      </SelectorDisplayProvider>
+      <AllApplicableFilterSelectors />
     </ResizablePanel>
   );
 };

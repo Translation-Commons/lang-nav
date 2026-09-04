@@ -14,6 +14,7 @@ type Props = {
 export default function LinkButton({ href, children, title }: React.PropsWithChildren<Props>) {
   return (
     <Button
+      nativeButton={false}
       role="link"
       variant="secondary"
       render={
