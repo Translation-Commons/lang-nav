@@ -1,0 +1,1 @@
+import{r}from"./vendor-react-CxwveuaZ.js";import{F as t}from"./FilterPanelContext-BAJ33gEJ.js";const s=()=>{const e=r.useContext(t);if(!e)throw new Error("useFilterPanel must be used within FilterPanelProvider");return e};export{s as u};
