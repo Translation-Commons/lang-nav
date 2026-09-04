@@ -42,7 +42,6 @@ const PageNavBar: React.FC = () => {
           buttonClassName="primary lg:hidden"
           buttonLabel={<SearchIcon />}
           buttonStyle={{ padding: '8px' }}
-          justifyCard="center"
           body={
             <SearchCombobox
               getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}

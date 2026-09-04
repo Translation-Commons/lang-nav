@@ -12,9 +12,9 @@ type Props = {
 const IsSupportedIcon: React.FC<Props> = ({ isSupported, description }) => {
   if (!description) {
     return isSupported ? (
-      <CheckCircle2Icon className="size-8 p-2 text-(--color-green)" />
+      <CheckCircle2Icon className="size-8 p-2 text-(--color-green)" aria-label="Supported" />
     ) : (
-      <XCircleIcon className="size-8 p-2 text-(--color-red)" />
+      <XCircleIcon className="size-8 p-2 text-(--color-red)" aria-label="Not supported" />
     );
   }
 
@@ -23,9 +23,9 @@ const IsSupportedIcon: React.FC<Props> = ({ isSupported, description }) => {
       <HoverCardTrigger delay={10} closeDelay={100}>
         <Button variant="ghost" size="icon-lg" className="p-0 cursor-help">
           {isSupported ? (
-            <CheckCircle2Icon style={{ color: 'var(--color-green)' }} />
+            <CheckCircle2Icon style={{ color: 'var(--color-green)' }} aria-label="Supported" />
           ) : (
-            <XCircleIcon style={{ color: 'var(--color-red)' }} />
+            <XCircleIcon style={{ color: 'var(--color-red)' }} aria-label="Not supported" />
           )}
         </Button>
       </HoverCardTrigger>

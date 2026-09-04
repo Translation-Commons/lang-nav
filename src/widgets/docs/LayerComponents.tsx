@@ -4,7 +4,6 @@ import { LangNavPageName } from '@app/PageRoutes';
 
 import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import Modal from '@features/layers/modal/ModalButton';
-import PopupCard from '@features/layers/popupcard/PopupCard';
 import { getNewURL } from '@features/params/getNewURL';
 import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
@@ -49,18 +48,6 @@ const LayerComponents: React.FC = () => {
           <div>
             <HoverableButton hoverContent="I show on hover">Hoverable button</HoverableButton>
           </div>
-        </DocsCard>
-        <DocsCard title="Popup Cards">
-          Popup cards are used to show more complex information that the user may want to interact
-          with, such as a list of view options. They include their own close button and persist on
-          the page until the original button is clicked again, the close button is clicked, or the
-          escape key is pressed.
-          <PopupCard
-            buttonLabel="Open popup card"
-            description="Description of the popup card goes here."
-            title="Popup Card Example"
-            body="I am the content of the popup card. I can include interactive elements like buttons."
-          />
         </DocsCard>
         <DocsCard title="Selector">
           Selectors are used for selecting from a list of options. There are various display styles:

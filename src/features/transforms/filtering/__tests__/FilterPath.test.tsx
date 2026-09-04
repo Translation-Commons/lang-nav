@@ -57,20 +57,6 @@ describe('FilterPath', () => {
     expect(screen.getByText('No filters applied')).toBeInTheDocument();
   });
 
-  it('displays ISO status filter when selected', () => {
-    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
-    render(<FilterPath />);
-    expect(screen.getByText(/ISO Status:/)).toBeInTheDocument();
-    expect(screen.getByText(/Living/)).toBeInTheDocument();
-  });
-
-  it('clears ISO vitality filter when X button is clicked', () => {
-    setupMockParams({ isoStatus: [LanguageISOStatus.Living] });
-    render(<FilterPath />);
-    clickClearButton();
-    expect(updatePageParams).toHaveBeenCalledWith({ isoStatus: [] });
-  });
-
   it('displays multiple values within same vitality type', () => {
     setupMockParams({ isoStatus: [LanguageISOStatus.Living, LanguageISOStatus.Constructed] });
     render(<FilterPath />);

@@ -24,6 +24,7 @@ const Hoverable: React.FC<HoverableProps> = ({
   return (
     <HoverCard>
       <HoverCardTrigger
+        data-testid="hoverable"
         onClick={onClick}
         className={'hoverableText ' + (className ?? '')}
         style={{
