@@ -1,5 +1,7 @@
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeftIcon } from 'lucide-react';
 import React, { useState } from 'react';
+
+import { Button } from './button';
 
 type CommaSeparatedProps = {
   children: React.ReactNode;
@@ -25,25 +27,31 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({
         </React.Fragment>
       ))}{' '}
       {limit != null && childArray.length > limit && (
-        <button
-          style={{ padding: '0em 0.25em', fontWeight: 'normal' }}
+        <Button
+          className="size-6 font-normal"
           onClick={() => setExpanded((prev) => !prev)}
+          variant="secondary"
         >
-          {limitText === 'words' ? (
-            expanded ? (
-              'see less'
-            ) : (
-              '+' + countOverLimit + ' more'
-            )
-          ) : expanded ? (
-            <ChevronLeft size="1.25em" display="block" style={{ margin: '0em -0.25em' }} />
-          ) : (
-            '+' + countOverLimit
-          )}
-        </button>
+          <ButtonText isExpanded={expanded} countOverLimit={countOverLimit} limitText={limitText} />
+        </Button>
       )}
     </span>
   );
 };
+
+function ButtonText({
+  isExpanded,
+  countOverLimit,
+  limitText,
+}: {
+  isExpanded: boolean;
+  countOverLimit: number;
+  limitText: 'words' | 'short';
+}) {
+  if (limitText === 'words') {
+    return isExpanded ? <>see less</> : <>+{countOverLimit} more</>;
+  }
+  return isExpanded ? <ChevronLeftIcon /> : <>+{countOverLimit}</>;
+}
 
 export default CommaSeparated;

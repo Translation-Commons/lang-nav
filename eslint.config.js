@@ -68,6 +68,18 @@ export default defineConfig([
           warnOnUnassignedImports: false,
         },
       ],
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['lucide-react'],
+              importNamePattern: '^(?!.*Icon$).*',
+              message: "Use Lucide's *Icon export, e.g. BadgeIcon instead of Badge.",
+            },
+          ],
+        },
+      ],
     },
   },
   prettierConfig,
