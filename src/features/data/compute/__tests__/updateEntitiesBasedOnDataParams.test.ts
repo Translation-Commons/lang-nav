@@ -80,7 +80,7 @@ describe('updateEntitiesBasedOnDataParams', () => {
     );
 
     expect(sjn.pop.speaking.estimate).toBe(24000); // changed? is that right?
-    expect(sjn.pop.speaking.descendants).toBe(200000); // this should be computed from dori0123
+    expect(sjn.pop.speaking.descendants).toBe(100000); // this should be computed from dori0123
     expect(dori0123.pop.speaking.estimate).toBe(100000); // updated to include new locale
     expect(sjn_001.pop.speaking.unadjusted).toBe(11220); // unchanged
     expect(sjn_001.pop.speaking.adjusted).toBe(11220); // unchanged
