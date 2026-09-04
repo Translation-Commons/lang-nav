@@ -1,1 +1,0 @@
-import{x as a,r as i}from"./index-DcqU9AHt.js";import{r}from"./vendor-react-ClaVNT3E.js";import{F as n}from"./FilterPanelContext-BEmva5NH.js";import"./vendor-lucide-CDKP50nt.js";const l=({children:s})=>{const[o,e]=r.useState(!0),{entID:t}=a();return r.useEffect(()=>{t&&e(!1)},[t]),i.jsx(n.Provider,{value:{isOpen:o,setIsOpen:e},children:s})};export{l as default};

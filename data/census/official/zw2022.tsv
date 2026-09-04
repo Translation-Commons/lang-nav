@@ -1,0 +1,52 @@
+#codeDisplay		zw2022.L1
+#nameDisplay		Zimbabwe 2022 L1
+#isoRegionCode	ZW	
+#yearCollected		2022
+### Language Criteria ###		
+#languageUse		Speaks
+#acquisitionOrder		L1
+### Population Surveyed ###		
+#population		13,913,253
+#populationWithPositiveResponses		13,913,253
+#sampleRate		1
+#responsesPerIndividual		1
+### Data Constraints ###		
+#geographicScope		whole country
+#age		3+
+#nationality		residents
+#languagesIncluded		all
+#residenceBasis		de facto
+#quantity		count
+### Creator ###		
+#collectorType		Government
+#collectorName		Zimbabwe National Statistics Agency
+#collectorNameShort		ZIMSTAT
+#presentedBy		Internet Archive
+### Source Document ###		
+#url		https://web.archive.org/web/20250206214211/https://zimstat.co.zw/wp-content/uploads/Demography/Census/2022_PHC_Report_27012023_Final.pdf
+#datePublished		2023-01-16
+#dateAccessed		2025-02-06
+#documentName		2022 Population and Housing Census Report
+#sectionName		Population Characteristics
+#tableName		Table 2.17: Distribution of Population by Mother Tongue and Province
+#columnName		Total
+#citation		Zimbabwe National Statistics Agency (ZIMSTAT). 2022 Population and Housing Census Report. Table 2.17: Distribution of Population by Mother Tongue and Province.
+#notes		Official ZIMSTAT 2022 Population and Housing Census data. The language values are original person counts from the national Total column of Table 2.17 and have not been converted or estimated. Mother tongue is the census language variable used for this dataset.
+Language Code	Language	Population
+sna	Shona	11,251,734
+nde	Ndebele	1,599,324
+eng	English	43,909
+kck	Kalanga	52,296
+hio	Koisan	305
+nmq	Nambya	38,302
+ndc	Ndau	372607
+bwg	Chibarwe	3,298
+tso	Shangani	115,133
+nya/chew1246	Chewa	35,817
+zib	Sign Language	1,620
+sot	Sotho	39,155
+toi	Tonga	231159
+tsn	Tswana	2247
+ven	Venda	71647
+xho	Xhosa	11304
+mul	#Other	43396
