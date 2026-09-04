@@ -115,7 +115,7 @@ export function getOptionStyle(
 ): React.CSSProperties {
   // Standard option style
   const style: React.CSSProperties = {
-    border: '0.125em solid var(--color-button-primary)',
+    // border: '0.125em solid var(--color-button-primary)',
     // borderRadius: '0px',
     // cursor: 'pointer',
     lineHeight: '1em',

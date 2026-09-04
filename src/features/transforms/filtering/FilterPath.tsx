@@ -74,6 +74,7 @@ const FilterPath: React.FC = () => {
         onChange={(newValue: LanguageModality[]) => updatePageParams({ modalityFilter: newValue })}
         getLabel={(v) => getModalityLabel(v) ?? ''}
         options={Object.values(LanguageModality).filter((s) => typeof s === 'number')}
+        noneSelectedLabel="Any modality"
       />
     ),
     !areArraysIdentical(territoryScopes, defaultParams.territoryScopes) && (
@@ -82,6 +83,7 @@ const FilterPath: React.FC = () => {
         onChange={(newValue: TerritoryScope[]) => updatePageParams({ territoryScopes: newValue })}
         getLabel={getTerritoryScopeLabel}
         options={Object.values(TerritoryScope).filter((s) => typeof s === 'number')}
+        noneSelectedLabel="Any territory"
       />
     ),
     territoryFilter !== '' && (
@@ -187,7 +189,7 @@ const FilterPath: React.FC = () => {
   }
 
   return (
-    <span className="text-xs flex gap-1 items-center">
+    <span className="text-xs flex flex-wrap gap-1 items-center">
       {filters
         .filter((f) => f)
         .map((filter, i) => (
