@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useHoverCard from './useHoverCard';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type HoverableProps = {
   children: React.ReactNode;
@@ -14,39 +14,27 @@ const Hoverable: React.FC<HoverableProps> = ({
   children,
   hoverContent,
   onClick,
-  style,
   className,
+  style,
 }) => {
-  const { showHoverCard, hideHoverCard, onMouseLeaveTriggeringElement } = useHoverCard();
-
   if (hoverContent == null) {
     return <>{children}</>;
   }
 
-  const handleMouseEnter = (e: React.MouseEvent) => {
-    showHoverCard(hoverContent, e.clientX, e.clientY);
-  };
-
   return (
-    <span
-      data-testid="hoverable"
-      aria-label={typeof hoverContent === 'string' ? hoverContent : undefined} // For screen readers
-      className={`hoverableText${className ? ` ${className}` : ''}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={onMouseLeaveTriggeringElement}
-      onClick={(e) => {
-        e.stopPropagation(); // Prevent triggering parent click handlers
-        hideHoverCard();
-        if (onClick != null) onClick();
-      }}
-      style={{
-        display: 'inline-block',
-        cursor: onClick ? 'pointer' : 'help',
-        ...style,
-      }}
-    >
-      {children}
-    </span>
+    <HoverCard>
+      <HoverCardTrigger
+        onClick={onClick}
+        className={'hoverableText ' + (className ?? '')}
+        style={{
+          cursor: onClick ? 'pointer' : 'help',
+          ...style,
+        }}
+      >
+        {children}
+      </HoverCardTrigger>
+      <HoverCardContent className="w-fit max-w-[400px]">{hoverContent}</HoverCardContent>
+    </HoverCard>
   );
 };
 

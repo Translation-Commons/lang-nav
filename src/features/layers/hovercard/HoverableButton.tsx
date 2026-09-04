@@ -1,6 +1,7 @@
 import React from 'react';
 
-import useHoverCard from './useHoverCard';
+import { Button } from '@shared/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 type HoverableProps = {
   ariaLabel?: string;
@@ -25,56 +26,41 @@ const HoverableButton: React.FC<HoverableProps> = ({
   role,
   style,
 }) => {
-  const { showHoverCard, hideHoverCard } = useHoverCard();
-
   if (hoverContent == null) {
     return (
-      <button
+      <Button
         aria-label={ariaLabel}
+        variant="secondary"
         className={className}
         disabled={disabled}
         onClick={onClick}
         role={role}
-        style={{
-          cursor: onClick ? 'pointer' : 'auto',
-          ...style,
-        }}
+        style={{ cursor: onClick ? 'pointer' : 'auto', ...style }}
         type={buttonType}
       >
         {children}
-      </button>
+      </Button>
     );
   }
 
-  const handleMouseEnter = (e: React.MouseEvent) => {
-    showHoverCard(hoverContent, e.clientX, e.clientY);
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    showHoverCard(hoverContent, e.clientX, e.clientY);
-  };
-
   return (
-    <button
-      aria-label={ariaLabel}
-      className={className}
-      disabled={disabled}
-      onMouseEnter={handleMouseEnter}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={hideHoverCard}
-      onClick={() => {
-        hideHoverCard();
-        if (onClick != null) onClick();
-      }}
-      role={role}
-      style={{
-        cursor: onClick ? 'pointer' : 'auto',
-        ...style,
-      }}
-      type={buttonType}
-    >
-      {children}
-    </button>
+    <HoverCard>
+      <HoverCardTrigger>
+        <Button
+          variant="secondary"
+          aria-label={ariaLabel}
+          className={className}
+          disabled={disabled}
+          onClick={onClick}
+          role={role}
+          style={{ cursor: onClick ? 'pointer' : 'auto', ...style }}
+          type={buttonType}
+        >
+          {children}
+        </Button>
+      </HoverCardTrigger>
+      <HoverCardContent className="w-fit max-w-[400px]">{hoverContent}</HoverCardContent>
+    </HoverCard>
   );
 };
 
