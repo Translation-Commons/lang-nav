@@ -1,8 +1,8 @@
 import { MessageCircleQuestionMarkIcon, MessageSquareTextIcon } from 'lucide-react';
 
-import PopupCard from '@features/layers/popupcard/PopupCard';
-
+import { Button } from '@shared/ui/button';
 import LinkButton from '@shared/ui/LinkButton';
+import { Popover, PopoverContent, PopoverTrigger } from '@shared/ui/popover';
 
 import { FeedbackEmailForm } from './FeedbackEmailForm';
 
@@ -10,34 +10,31 @@ const SURVEY_LINK = 'https://forms.gle/a4Zr2dkdc1TiEAdq6';
 
 export function FeedbackForm() {
   return (
-    <PopupCard
-      buttonLabel={
-        <>
-          <div className="hidden md:inline">Feedback</div>
-          <div className="inline md:hidden">
-            <MessageCircleQuestionMarkIcon />
-          </div>
-        </>
-      }
-      buttonClassName="primary place-self-end"
-      buttonStyle={{ padding: '0.5em' }}
-      description="Submit feedback to the LangNav team"
-      title="Shape the future of LangNav"
-      body={
-        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25em', width: '300px' }}>
+    <>
+      <Popover>
+        <PopoverTrigger>
+          <Button
+            aria-label="View settings"
+            className="py-2 rounded-md h-full text-md font-light hover:bg-accent/10 "
+          >
+            <div className="hidden md:inline">Feedback</div>
+            <MessageCircleQuestionMarkIcon className="inline md:hidden" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="flex flex-col gap-1 w-[300px] p-4">
           <label>Tell us about your goals, rate our data, and help us build better futures.</label>
           <LinkButton href={SURVEY_LINK} title="Submit a Google survey">
-            <MessageSquareTextIcon display="block" size="1em" />
+            <MessageSquareTextIcon />
             Take 2-min Survey
           </LinkButton>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-            <hr style={{ flex: 1 }} />
+          <div className="flex items-center gap-2">
+            <hr className="flex-1" />
             <span>OR</span>
-            <hr style={{ flex: 1 }} />
+            <hr className="flex-1" />
           </div>
           <FeedbackEmailForm />
-        </div>
-      }
-    />
+        </PopoverContent>
+      </Popover>
+    </>
   );
 }

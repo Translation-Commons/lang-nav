@@ -13,6 +13,7 @@ type HoverableProps = {
   onClick?: () => void;
   role?: string;
   style?: React.CSSProperties;
+  variant: 'secondary' | 'default' | 'outline' | 'ghost' | 'link' | 'destructive';
 };
 
 const HoverableButton: React.FC<HoverableProps> = ({
@@ -25,12 +26,13 @@ const HoverableButton: React.FC<HoverableProps> = ({
   onClick,
   role,
   style,
+  variant = 'secondary',
 }) => {
   if (hoverContent == null) {
     return (
       <Button
         aria-label={ariaLabel}
-        variant="secondary"
+        variant={variant}
         className={className}
         disabled={disabled}
         onClick={onClick}
@@ -47,7 +49,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
     <HoverCard>
       <HoverCardTrigger>
         <Button
-          variant="secondary"
+          variant={variant}
           aria-label={ariaLabel}
           className={className}
           disabled={disabled}

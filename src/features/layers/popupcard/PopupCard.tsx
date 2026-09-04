@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import HoverableButton from '../hovercard/HoverableButton';
-import ZIndex from '../ZIndex';
+import { Button } from '@shared/ui/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@shared/ui/popover';
 
 import './popupcard.css';
 
@@ -28,36 +28,29 @@ const PopupCard: React.FC<Props> = ({
   buttonLabel,
   buttonClassName,
   buttonStyle,
-  description,
-  justifyCard = 'right',
   title,
   body,
   ctas = [],
 }) => {
   return (
-    <div className="popupContainer">
-      <HoverableButton
-        className={'popupToggle' + (buttonClassName ? ` ${buttonClassName}` : '')}
-        hoverContent={description}
-        onClick={() => {}} /* Set in CSS */
-        style={buttonStyle}
-      >
-        {buttonLabel}
-      </HoverableButton>
-      <div
-        className={`popupCard popupCardAlign-${justifyCard}`}
-        role="dialog"
-        style={{ zIndex: ZIndex.PopupCard }}
-      >
-        {title != null && (
-          <div className="popupCardHeader">
-            <div className="popupCardTitle">{title}</div>
-          </div>
-        )}
-        <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
-        {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
-      </div>
-    </div>
+    <Popover>
+      <PopoverTrigger delay={10}>
+        <Button className={buttonClassName} style={buttonStyle} variant="default">
+          {buttonLabel}
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent>
+        <div className="popupContainer">
+          {title != null && (
+            <div className="popupCardHeader">
+              <div className="popupCardTitle">{title}</div>
+            </div>
+          )}
+          <div className="popupCardBody">{typeof body === 'function' ? body() : body}</div>
+          {ctas.length > 0 && <div className="popupCardFooter">{ctas}</div>}
+        </div>
+      </PopoverContent>
+    </Popover>
   );
 };
 
