@@ -2,11 +2,13 @@ import { CopyIcon } from 'lucide-react';
 import React, { useCallback, useMemo, useState } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
-import Selector from '@features/params/ui/Selector';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import VariantAnnotationTable from '@entities/variant/VariantAnnotationTable';
 import { VariantData, VariantType } from '@entities/variant/VariantTypes';
+
+import { Button } from '@shared/ui/button';
+import EnumDropdown from '@shared/ui/EnumDropdown';
 
 enum IncludeCriteria {
   HasData = 'has data',
@@ -55,23 +57,26 @@ const ReportVariantsAnnotationTool: React.FC = () => {
       This is a tool to help add annotations to variants, such as classifying it as orthographic or
       dialectal. For dialects there is also an option to specify which equivalent language it
       corresponds to.
-      <Selector<IncludeCriteria>
-        selectorLabel="Filter variants"
-        selected={includeCriteria}
-        onChange={setIncludeCriteria}
-        options={Object.values(IncludeCriteria)}
-      />
+      <div>
+        Filter variants:{' '}
+        <EnumDropdown<IncludeCriteria>
+          value={includeCriteria}
+          onChange={setIncludeCriteria}
+          options={Object.values(IncludeCriteria)}
+        />
+      </div>
       <VariantAnnotationTable
         variants={viewedVariants}
         addToChangedVariants={addToChangedVariants}
       />
-      <button
+      <Button
         onClick={copyAnnotatedVariants}
-        style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}
+        disabled={changedVariants.length === 0}
+        variant="secondary"
       >
-        <CopyIcon size="1em" />
+        <CopyIcon />
         Copy annotated variants ({changedVariants.length})
-      </button>
+      </Button>
     </>
   );
 };

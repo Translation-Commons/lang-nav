@@ -2,7 +2,6 @@ import React, { useMemo } from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import Selector from '@features/params/ui/Selector';
 import { CodeColumn, NameColumn } from '@features/table/CommonColumns';
 import InteractiveEntityTable from '@features/table/InteractiveEntityTable';
 import TableID from '@features/table/TableID';
@@ -11,6 +10,8 @@ import Field from '@features/transforms/fields/Field';
 
 import { LanguageData } from '@entities/language/LanguageTypes';
 import { getEntityPopulationPercentInBiggestDescendantLanguage } from '@entities/lib/getEntityPopulation';
+
+import EnumDropdown from '@shared/ui/EnumDropdown';
 
 const ReportLanguageDescendants: React.FC = () => {
   const { languagesInSelectedSource } = useDataContext();
@@ -36,17 +37,17 @@ const ReportLanguageDescendants: React.FC = () => {
       language by population. This can help identify which languages are the most prominent within a
       family. It may also reveal some problems in the data, especially if the largest descendant has
       more population than is estimated for the language/language family itself.
-      <div style={{ display: 'flex' }}>
-        <Selector
-          selectorLabel="Minimum % of population"
+      <div className="flex gap-4 items-center">
+        Minimum % of population
+        <EnumDropdown<number>
           options={[0, 25, 50, 75, 90, 95, 99]}
-          selected={minimumPercentThreshold}
+          value={minimumPercentThreshold}
           onChange={(value: number) => setMinimumPercentThreshold(value)}
         />
-        <Selector
-          selectorLabel="Maximum % of population"
+        Maximum % of population
+        <EnumDropdown<number>
           options={[75, 90, 95, 99, 99.5, 99.9, 99.99, 100, 1e6]}
-          selected={maximumPercentThreshold}
+          value={maximumPercentThreshold}
           onChange={(value: number) => setMaximumPercentThreshold(value)}
         />
       </div>

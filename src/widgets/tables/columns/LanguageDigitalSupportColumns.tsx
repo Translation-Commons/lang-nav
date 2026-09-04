@@ -20,13 +20,10 @@ import {
   WikipediaLink,
   WikipediaStatusDisplay,
 } from '@entities/ui/EntityWikipediaInfo';
-import GoogleTranslateSupportStatus from '@entities/ui/GoogleTranslateSupportStatus';
 import ICUSupportStatus from '@entities/ui/ICUSupportStatus';
-import IosSupportStatus from '@entities/ui/IosSupportStatus';
-import MacosSupportStatus from '@entities/ui/MacosSupportStatus';
-import Win11LanguagePackSupportStatus from '@entities/ui/Win11LanguagePackSupportStatus';
 
 import ExternalLink from '@shared/ui/ExternalLink';
+import IsSupportedIcon from '@shared/ui/IsSupportedIcon';
 
 const columns: TableColumn<LanguageData>[] = [
   {
@@ -99,7 +96,7 @@ const columns: TableColumn<LanguageData>[] = [
   {
     key: 'Google Translate',
     description: 'Language entries available in Google Translate.',
-    render: (lang) => <GoogleTranslateSupportStatus lang={lang} />,
+    render: (lang) => <IsSupportedIcon isSupported={!!lang.googleTranslate?.length} />,
     exportValue: (lang) => {
       if (!lang.googleTranslate || lang.googleTranslate.length === 0) return 'n/a';
       return lang.googleTranslate.map((entry) => entry.name).join('; ');
@@ -116,7 +113,7 @@ const columns: TableColumn<LanguageData>[] = [
     key: 'Windows 11',
     description:
       'Language pack available in Windows 11 for viewing menus, dialog boxes, and supported apps and websites.',
-    render: (lang) => <Win11LanguagePackSupportStatus lang={lang} />,
+    render: (lang) => <IsSupportedIcon isSupported={!!lang.win11LanguagePacks?.length} />,
     exportValue: (lang) => {
       if (!lang.win11LanguagePacks || lang.win11LanguagePacks.length === 0) return 'n/a';
       return lang.win11LanguagePacks
@@ -132,7 +129,7 @@ const columns: TableColumn<LanguageData>[] = [
   {
     key: 'iOS',
     description: 'Language entries supported in iOS.',
-    render: (lang) => <IosSupportStatus lang={lang} />,
+    render: (lang) => <IsSupportedIcon isSupported={!!lang.ios?.length} />,
     exportValue: (lang) => {
       if (!lang.ios || lang.ios.length === 0) return 'n/a';
       return lang.ios
@@ -148,7 +145,7 @@ const columns: TableColumn<LanguageData>[] = [
   {
     key: 'MacOS',
     description: 'Language entries supported in macOS.',
-    render: (lang) => <MacosSupportStatus lang={lang} />,
+    render: (lang) => <IsSupportedIcon isSupported={!!lang.macos?.length} />,
     exportValue: (lang) => {
       if (!lang.macos || lang.macos.length === 0) return 'n/a';
       return lang.macos

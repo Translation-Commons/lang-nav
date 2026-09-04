@@ -8,8 +8,10 @@ enum TransformEnum {
   Filter = 'filter',
 }
 
-export function getTransformForPageParam(key: keyof PageParams): TransformEnum {
+export function getTransformForPageParam(key: keyof PageParams): TransformEnum | undefined {
   switch (key) {
+    case PageParamKey.fieldFocus:
+      return undefined; // Not a transform, available for all data
     case PageParamKey.sortBy:
     case PageParamKey.secondarySortBy:
       return TransformEnum.Sort;

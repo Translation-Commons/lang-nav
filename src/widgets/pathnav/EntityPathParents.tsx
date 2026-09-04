@@ -1,11 +1,12 @@
 import React, { Fragment } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
 import { EntityData } from '@entities/types/DataTypes';
 
 import { BreadcrumbEllipsis, BreadcrumbItem, BreadcrumbSeparator } from '@shared/ui/breadcrumb';
+import { Button } from '@shared/ui/button';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-card';
 
 import { getEntityParents } from './getParentsAndDescendants';
 
@@ -43,19 +44,25 @@ const EntityPathParentsCompressed: React.FC<{ parents: EntityData[] }> = ({ pare
       <BreadcrumbItem>
         <HoverableEntityName ent={parents[0]} />
       </BreadcrumbItem>
-      <Hoverable
-        onClick={() => setShowFullAncestry((prev) => !prev)}
-        hoverContent={
-          showFullAncestry
-            ? 'Hide intermediate ancestors'
-            : `Show ${hiddenAncestors.length} more ancestors`
-        }
-      >
-        <div style={{ display: 'flex', gap: '.25em' }}>
-          <BreadcrumbSeparator />
-          <BreadcrumbEllipsis />
-        </div>
-      </Hoverable>
+      <BreadcrumbItem>
+        <HoverCard>
+          <HoverCardTrigger delay={10}>
+            <Button
+              className="flex gap-1 p-0"
+              onClick={() => setShowFullAncestry((prev) => !prev)}
+              variant="ghost"
+            >
+              <BreadcrumbSeparator />
+              <BreadcrumbEllipsis />
+            </Button>
+          </HoverCardTrigger>
+          <HoverCardContent className="w-fit">
+            {showFullAncestry
+              ? 'Hide intermediate ancestors'
+              : `Show ${hiddenAncestors.length} more ancestors`}
+          </HoverCardContent>
+        </HoverCard>
+      </BreadcrumbItem>
       {showFullAncestry && <>{hiddenAncestors}</>}
       <BreadcrumbSeparator />
       <BreadcrumbItem>

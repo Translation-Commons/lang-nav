@@ -17,7 +17,7 @@ const Settings = (): React.ReactNode => {
   const isDataPage = location.pathname === '/' + LangNavPageName.Data;
 
   return (
-    <ViewSettingsPanel>
+    <div className="grid grid-cols-2 gap-2 items-center">
       {isDataPage && (
         <>
           <FieldFocusSelector />
@@ -29,22 +29,6 @@ const Settings = (): React.ReactNode => {
       )}
       <SearchBySelector />
       <PageBrightnessSelector />
-    </ViewSettingsPanel>
-  );
-};
-
-const ViewSettingsPanel: React.FC<React.PropsWithChildren> = ({ children }) => {
-  return (
-    <div
-      style={{
-        display: 'flex',
-        gap: '0.5em',
-        flexDirection: 'column',
-        alignItems: 'flex-end',
-        width: 'max-content',
-      }}
-    >
-      {children}
     </div>
   );
 };

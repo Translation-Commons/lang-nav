@@ -60,7 +60,7 @@ const HoverableEntity: React.FC<Props> = ({ ent, children, style }) => {
           </span>
         }
       />
-      <HoverCardContent className="max-w-[300px]  w-fit">
+      <HoverCardContent className="max-w-[300px] w-fit">
         <div className="flex flex-col gap-1">
           <div>
             <EntityTitle ent={ent} highlightSearchMatches={false} />

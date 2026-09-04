@@ -1,9 +1,5 @@
 import React from 'react';
 
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import FieldFocusSelector from '@features/transforms/fields/FieldFocusSelector';
 
 interface TreeListOptions {
@@ -58,15 +54,8 @@ export function TreeListOptionsSelectors() {
   } = useTreeListOptionsContext();
 
   return (
-    <div
-      style={{
-        marginTop: '1em',
-        display: 'flex',
-        gap: '0.5em',
-        flexWrap: 'wrap',
-      }}
-    >
-      <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
+    <div className="mt-4 flex flex-col gap-2">
+      <div>
         <label>
           <input
             type="checkbox"
@@ -91,9 +80,10 @@ export function TreeListOptionsSelectors() {
           />
           Show Entity IDs
         </label>
-
+      </div>
+      <div className="flex gap-2">
         <FieldFocusSelector />
-      </SelectorDisplayProvider>
+      </div>
     </div>
   );
 }

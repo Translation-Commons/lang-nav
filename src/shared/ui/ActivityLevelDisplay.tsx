@@ -20,14 +20,7 @@ type Props = {
 const ActivityLevelDisplay: React.FC<Props> = ({ level, label, description }) => {
   return (
     <Hoverable hoverContent={description}>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.25em',
-          color: getColor(level),
-        }}
-      >
+      <div className="flex items-center gap-1" style={{ color: getColor(level) }}>
         <ActivityIcon bucket={level} />
         <span>{label}</span>
       </div>

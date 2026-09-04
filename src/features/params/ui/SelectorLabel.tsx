@@ -41,9 +41,6 @@ function getStyle(display: SelectorDisplay): React.CSSProperties {
       style.lineHeight = '2.25em'; // more spacing for visibility
       style.marginBottom = '-0.5em'; // adjusted to have selector buttons closer to their label
       break;
-    case SelectorDisplay.Dropdown:
-      // nothing special
-      break;
   }
 
   return style;

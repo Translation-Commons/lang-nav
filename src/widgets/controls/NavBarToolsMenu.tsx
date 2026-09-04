@@ -35,13 +35,10 @@ const NavBarToolsMenu: React.FC = () => {
 
   return (
     <PopupCard
-      buttonClassName="primary"
+      buttonClassName="primary h-full p-2 text-xl font-normal"
       buttonLabel="Tools"
-      // Lots of hardcoded styles to override button differences
-      buttonStyle={{ padding: '8px', fontSize: '20px', fontWeight: 'normal', border: 'none' }}
-      justifyCard="left"
       body={
-        <div className="flex flex-col gap-2 text-lg">
+        <div className="flex flex-col gap-2 text-sm">
           <InternalLink
             page={LangNavPageName.Decoder}
             className={'text-nowrap' + (location.pathname === '/decoder' ? ' font-bold' : '')}

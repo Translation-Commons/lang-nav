@@ -2,12 +2,12 @@ import { SquareCheckIcon, SquareIcon, SquareMinusIcon } from 'lucide-react';
 import React, { useCallback } from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import Modal from '@features/layers/modal/ModalButton';
 
 import { EntityData } from '@entities/types/DataTypes';
 
 import { groupBy } from '@shared/lib/setUtils';
+import { Button } from '@shared/ui/button';
 
 import TableColumn from './TableColumn';
 import TableColumnName from './TableColumnName';
@@ -33,14 +33,7 @@ function TableColumnSelector<T extends EntityData>({
         <>
           Click to toggle the visibility of columns in the table. You can also hover over column
           names for more info and sorting/filtering options.
-          <div
-            style={{
-              display: 'grid',
-              gridTemplateColumns: 'repeat(auto-fit, minmax(12em, 1fr))',
-              gap: '1em',
-              padding: '0.5em',
-            }}
-          >
+          <div className="p-2 grid grid-cols-[repeat(auto-fit,minmax(12em,1fr))] gap-2">
             {Object.entries(columnsByGroup).map(([group, columns]) => (
               <ColumnGroup
                 columns={columns}
@@ -132,7 +125,11 @@ function ColumnCheckbox<T extends EntityData>({
   toggleColumn: (key: string) => void;
 }): React.ReactNode {
   return (
-    <label key={column.key} style={{ cursor: 'pointer', fontWeight: 'normal', textAlign: 'start' }}>
+    <label
+      key={column.key}
+      className="cursor-pointer text-left flex gap-1"
+      style={{ fontWeight: 'normal' }}
+    >
       <input type="checkbox" checked={isChecked} onChange={() => toggleColumn(column.key)} />
       <TableColumnName column={column} appearance="text" />
     </label>
@@ -160,36 +157,16 @@ function GlobalControls<T extends EntityData>({
   }, [columns, setColumns]);
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'end',
-        gap: '0.5em',
-        padding: '0.5em',
-      }}
-    >
-      <HoverableButton
-        onClick={resetColumnVisibility}
-        style={{ padding: '0.25em' }}
-        hoverContent="Reset to default column visibility"
-      >
+    <div className="flex flex-row justify-end gap-2 p-2">
+      <Button onClick={resetColumnVisibility} variant="secondary">
         Reset
-      </HoverableButton>
-      <HoverableButton
-        onClick={selectAll}
-        style={{ padding: '0.25em' }}
-        hoverContent="Show all columns"
-      >
+      </Button>
+      <Button onClick={selectAll} variant="secondary">
         Show all
-      </HoverableButton>
-      <HoverableButton
-        onClick={deselectAll}
-        style={{ padding: '0.25em' }}
-        hoverContent="Hide all columns"
-      >
+      </Button>
+      <Button onClick={deselectAll} variant="secondary">
         Hide all
-      </HoverableButton>
+      </Button>
     </div>
   );
 }

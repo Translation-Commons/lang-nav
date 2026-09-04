@@ -20,7 +20,6 @@ type Props = {
   drawableEntities: DrawableData[];
   coloringFunctions: ColoringFunctions;
   onClick: (ent: DrawableData) => void;
-  hoveredId?: string | null;
   pinnedIds?: string[];
   allowSidebar: boolean;
 };
@@ -29,7 +28,6 @@ const MapTerritories: React.FC<Props> = ({
   drawableEntities,
   coloringFunctions: { colorBy, getColor },
   onClick,
-  hoveredId,
   pinnedIds = [],
   allowSidebar,
 }) => {
@@ -85,18 +83,16 @@ const MapTerritories: React.FC<Props> = ({
     });
   }, [territories, getColor, territoriesToColoringEntities, colorBy, svgLoaded, noDataColor]);
 
-  // Manage hovered and pinned states
+  // Manage pinned states
   useEffect(() => {
     if (!svgLoaded) return;
 
     forEachTerritory((territory, element) => {
       element.classList.add('MapTerritory');
-      element.classList.remove('hovered');
       element.classList.remove('pinned');
       if (pinnedIds.includes(territory.ID)) element.classList.add('pinned');
-      if (hoveredId === territory.ID) element.classList.add('hovered');
     });
-  }, [svgLoaded, hoveredId, pinnedIds]);
+  }, [svgLoaded, pinnedIds]);
 
   const buildOnMouseEnter = useCallback(
     (territory: TerritoryData) => (ev: MouseEvent) => {
