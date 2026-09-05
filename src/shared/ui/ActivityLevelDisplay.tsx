@@ -1,7 +1,7 @@
 import { WifiHighIcon, WifiIcon, WifiLowIcon, WifiZeroIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
+import HoverableButton from '@features/layers/hovercard/HoverableButton';
 
 export enum ActivityLevel {
   High = 'High',
@@ -19,12 +19,10 @@ type Props = {
 
 const ActivityLevelDisplay: React.FC<Props> = ({ level, label, description }) => {
   return (
-    <Hoverable hoverContent={description}>
-      <div className="flex items-center gap-1" style={{ color: getColor(level) }}>
-        <ActivityIcon bucket={level} />
-        <span>{label}</span>
-      </div>
-    </Hoverable>
+    <HoverableButton hoverContent={description} variant="ghost" style={{ color: getColor(level) }}>
+      <ActivityIcon bucket={level} />
+      {label}
+    </HoverableButton>
   );
 };
 

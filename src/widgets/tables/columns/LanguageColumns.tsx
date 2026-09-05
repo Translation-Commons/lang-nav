@@ -19,8 +19,6 @@ import { LanguageModality } from '@entities/language/LanguageModality';
 import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
 import { LanguageData } from '@entities/language/LanguageTypes';
 import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
-import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
-import LanguagePluralRuleExamplesGrid from '@entities/language/plurals/LanguagePluralGrid';
 import { getEntityLiteracy } from '@entities/lib/getEntityMiscFields';
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';
@@ -37,6 +35,30 @@ import { LanguageDigitalSupportColumns } from './LanguageDigitalSupportColumns';
 import LanguageNameColumns from './LanguageNameColumns';
 import LanguagePopulationColumns from './LanguagePopulationColumns';
 import LanguageVitalityColumns from './LanguageVitalityColumns';
+
+export const LanguageColumnPresets: Record<string, string[]> = {
+  'Language Codes': [
+    'ID',
+    'Canonical ID',
+    'ISO 639-1',
+    'ISO 639-3/5',
+    'BCP Code',
+    'CLDR Code',
+    'Glottocode',
+    'Name',
+  ],
+  Names: ['ID', 'Name', 'Endonym', 'ISO Name', 'CLDR Name', 'Glottolog Name', 'Other Names'],
+  'Digital Support': [
+    'ID',
+    'Name',
+    'Overall Digital Support',
+    'Keyboards',
+    'Machine Translation',
+    'I18n Frameworks',
+    'Interface Support',
+    'Documentation',
+  ],
+};
 
 function getLanguageColumns(): TableColumn<LanguageData>[] {
   return [
@@ -202,23 +224,6 @@ function getLanguageColumns(): TableColumn<LanguageData>[] {
       field: Field.Literacy,
       valueType: TableValueType.Decimal,
       columnGroup: 'Writing',
-    },
-    {
-      key: 'Plural rules',
-      render: (lang) => <LanguagePluralCategories lang={lang} />,
-      isInitiallyVisible: false,
-      columnGroup: 'Grammar',
-    },
-    {
-      key: 'Plural rule examples',
-      render: (lang) => (
-        <LanguagePluralRuleExamplesGrid
-          lang={lang}
-          showTooltips={false /* too many items to render for table view */}
-        />
-      ),
-      isInitiallyVisible: false,
-      columnGroup: 'Grammar',
     },
   ];
 }
