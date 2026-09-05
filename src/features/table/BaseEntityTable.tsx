@@ -21,7 +21,7 @@ type Props<T> = {
 
 function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }: Props<T>) {
   return (
-    <div className="w-full relative text-xs overflow-x-auto">
+    <div className="w-full h-screen relative text-xs overflow-x-auto">
       <table className={'EntityTable Table' + tableID + ' text-left w-max mx-auto'}>
         <thead className="sticky top-0 bg-background z-10">
           <tr>

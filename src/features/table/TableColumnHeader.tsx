@@ -39,6 +39,10 @@ function HoverableContainer<T extends EntityData>({
   column,
   children,
 }: React.PropsWithChildren<Props<T>>) {
+  // Empty but sticky cell so keep alignment
+  // potentially can change this to add pinning controls
+  if (column.key === 'Pin') return <th className="alwaysVisible" />;
+
   return (
     <HoverCard>
       <HoverCardTrigger
@@ -46,7 +50,10 @@ function HoverableContainer<T extends EntityData>({
         delay={10}
         render={
           <th
-            className="hover:bg-accent py-1 px-2 text-left text-sm font-semibold text-muted-foreground"
+            className={
+              'hover:bg-accent py-1 px-2 text-left text-sm font-semibold text-muted-foreground' +
+              (column.key === 'ID' ? ' alwaysVisible' : '')
+            }
             style={{ maxWidth: MAX_COLUMN_WIDTH }}
           >
             {children}
