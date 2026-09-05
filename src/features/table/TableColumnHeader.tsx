@@ -13,17 +13,14 @@ import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 
 type Props<T extends EntityData> = {
   column: TableColumn<T>;
-  appearance: 'th' | 'text';
 };
 
-function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>) {
+function TableColumnHeader<T extends EntityData>({ column }: Props<T>) {
   const { sortBy, secondarySortBy } = usePageParams();
 
   return (
-    <HoverableContainer column={column} appearance={appearance}>
-      {(appearance === 'text' ? column.labelInColumnGroup : undefined) ??
-        column.label ??
-        column.key}{' '}
+    <HoverableContainer column={column}>
+      {column.label ?? column.key}{' '}
       {sortBy === column.field || secondarySortBy === column.field ? (
         <ArrowUpDownIcon
           size={14}
@@ -41,34 +38,21 @@ function TableColumnName<T extends EntityData>({ column, appearance }: Props<T>)
 function HoverableContainer<T extends EntityData>({
   column,
   children,
-  appearance,
 }: React.PropsWithChildren<Props<T>>) {
-  if (appearance === 'th') {
-    return (
-      <HoverCard>
-        <HoverCardTrigger
-          data-testid="hoverable"
-          render={
-            <th
-              className="hover:bg-accent py-1 px-2 text-left text-sm font-semibold text-muted-foreground"
-              style={{ maxWidth: MAX_COLUMN_WIDTH }}
-            >
-              {children}
-            </th>
-          }
-        />
-        <HoverCardContent className="max-w-[20rem] w-fit">
-          <TableColumnHovercard column={column} />
-        </HoverCardContent>
-      </HoverCard>
-    );
-  }
-
   return (
     <HoverCard>
-      <HoverCardTrigger data-testid="hoverable" className="hover:bg-accent">
-        {children}
-      </HoverCardTrigger>
+      <HoverCardTrigger
+        data-testid="hoverable"
+        delay={10}
+        render={
+          <th
+            className="hover:bg-accent py-1 px-2 text-left text-sm font-semibold text-muted-foreground"
+            style={{ maxWidth: MAX_COLUMN_WIDTH }}
+          >
+            {children}
+          </th>
+        }
+      />
       <HoverCardContent className="max-w-[20rem] w-fit">
         <TableColumnHovercard column={column} />
       </HoverCardContent>
@@ -76,4 +60,4 @@ function HoverableContainer<T extends EntityData>({
   );
 }
 
-export default TableColumnName;
+export default TableColumnHeader;

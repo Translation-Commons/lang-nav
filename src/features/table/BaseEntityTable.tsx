@@ -8,7 +8,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getValueTypeForColumn } from './getValueType';
 import TableColumn from './TableColumn';
-import TableColumnName from './TableColumnName';
+import TableColumnHeader from './TableColumnHeader';
 import { MAX_COLUMN_WIDTH } from './TableColumnWidth';
 import TableID from './TableID';
 import TableValueType from './TableValueType';
@@ -26,7 +26,7 @@ function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }
         <thead className="sticky top-0 bg-background z-10">
           <tr>
             {visibleColumns.map((column) => (
-              <TableColumnName column={column} appearance="th" key={column.key} />
+              <TableColumnHeader column={column} key={column.key} />
             ))}
           </tr>
         </thead>
