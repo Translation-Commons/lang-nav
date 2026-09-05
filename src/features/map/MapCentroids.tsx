@@ -21,7 +21,6 @@ type Props = {
   scalar: number;
   zoomFactor: number;
   coloringFunctions: ColoringFunctions;
-  hoveredId?: string | null;
   pinnedIds?: string[];
   allowSidebar?: boolean;
 };
@@ -32,7 +31,6 @@ const MapCentroids: React.FC<Props> = ({
   scalar,
   zoomFactor,
   coloringFunctions: { getColor, colorBy },
-  hoveredId,
   pinnedIds = [],
   allowSidebar,
 }) => {
@@ -79,7 +77,6 @@ const MapCentroids: React.FC<Props> = ({
           onClick={onClick}
           onMouseEnter={buildOnMouseEnter(ent)}
           onMouseLeave={onMouseLeaveTriggeringElement}
-          isHovered={hoveredId === ent.ID}
           isPinned={pinnedIds.includes(ent.ID)}
         />
       ))}
@@ -95,7 +92,6 @@ type NodeProps = {
   onClick: (ent: DrawableData) => void;
   onMouseEnter: (e: React.MouseEvent) => void;
   onMouseLeave: () => void;
-  isHovered?: boolean;
   isPinned?: boolean;
 };
 
@@ -107,7 +103,6 @@ const ObjectNode: React.FC<NodeProps> = ({
   onClick,
   onMouseEnter,
   onMouseLeave,
-  isHovered,
   isPinned,
 }) => {
   const locatedEnt = ent.type === EntityType.Locale && ent.territory ? ent.territory : ent;
@@ -134,7 +129,6 @@ const ObjectNode: React.FC<NodeProps> = ({
           onClick={onClick}
           onMouseEnter={onMouseEnter}
           onMouseLeave={onMouseLeave}
-          isHovered={isHovered}
           isPinned={isPinned}
         />
       )}
@@ -150,11 +144,10 @@ const Circle: React.FC<NodeProps> = ({
   onClick,
   onMouseEnter,
   onMouseLeave,
-  isHovered,
   isPinned,
 }) => (
   <circle
-    className={'MapCentroidCircle' + (isHovered ? ' hovered' : '') + (isPinned ? ' pinned' : '')}
+    className={'MapCentroidCircle' + (isPinned ? ' pinned' : '')}
     r={scale + 1.5}
     fill={color ?? 'transparent'}
     stroke={color == null ? 'var(--color-button-primary)' : 'transparent'}

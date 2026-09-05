@@ -1,4 +1,3 @@
-import { TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
 
 import Hoverable from '@features/layers/hovercard/Hoverable';
@@ -9,6 +8,7 @@ import usePageParams from '@features/params/usePageParams';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import CellPopulation from '@shared/containers/CellPopulation';
+import ContextIcon from '@shared/ui/ContextIcon';
 import CountOfPeople from '@shared/ui/CountOfPeople';
 
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
@@ -26,29 +26,19 @@ const LanguagePopulationFromDescendants: React.FC<Props> = ({ lang, speakingOrWr
   return (
     <>
       {(pop.descendants ?? 0) > (pop.estimate ?? 0) ? (
-        <Hoverable
-          hoverContent={
-            <>
-              The sum of people that use this languoid&apos;s descendants is higher than the
-              population estimate for this {getLanguageScopeLabel(lang.scope).toLowerCase()} --
-              probably because of multilingualism. For example, a simple sum for Arabic would double
-              count people that understand both Standard Arabic and Vernacular Arabic.
-            </>
-          }
-        >
-          <TriangleAlertIcon
-            style={{ color: 'var(--color-yellow)', marginRight: '0.25em' }}
-            size="1em"
-          />
-        </Hoverable>
+        <ContextIcon severity="warning">
+          The sum of people that use this languoid&apos;s descendants is higher than the population
+          estimate for this {getLanguageScopeLabel(lang.scope).toLowerCase()} -- probably because of
+          multilingualism. For example, a simple sum for Arabic would double count people that
+          understand both Standard Arabic and Vernacular Arabic.
+        </ContextIcon>
       ) : null}
-      {pop.descendants < (pop.estimate ?? 0) * 0.5 ? (
-        <Hoverable hoverContent="The population of descendants is significantly lower than the estimate -- probably because most data is collected for this entry as a whole.">
-          <TriangleAlertIcon
-            style={{ color: 'var(--color-text-secondary)', marginRight: '0.25em' }}
-            size="1em"
-          />
-        </Hoverable>
+      {(pop.descendants ?? 0) < (pop.estimate ?? 0) * 0.5 ? (
+        <ContextIcon severity="warning">
+          The sum of people that use this languoid&apos;s descendants is significantly lower than
+          the population estimate for this {getLanguageScopeLabel(lang.scope).toLowerCase()} --
+          probably because most data is collected for this entry as a whole.
+        </ContextIcon>
       ) : null}
       <Hoverable
         hoverContent={

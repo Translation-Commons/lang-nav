@@ -88,7 +88,7 @@ const TerritoryDetails: React.FC<Props> = ({ territory }) => {
 
       {/* Languages table for the territory */}
       {locales && locales.length > 0 && (
-        <DetailsSection title="Languages">
+        <DetailsSection title="Languages" score={locales.length}>
           <TableOfLanguagesInTerritory territory={territory} />
         </DetailsSection>
       )}

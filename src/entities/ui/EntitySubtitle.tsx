@@ -12,15 +12,14 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 type Props = {
   ent: EntityData;
   highlightSearchMatches?: boolean;
-  style?: React.CSSProperties;
 };
 
-const EntitySubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true, style }) => {
+const EntitySubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true }) => {
   const { searchBy, searchString } = usePageParams();
   const entSubtitle = getEntitySubtitle(ent);
 
   if (!highlightSearchMatches) {
-    return <SubtitleContainer style={style}>{entSubtitle}</SubtitleContainer>;
+    return <SubtitleContainer>{entSubtitle}</SubtitleContainer>;
   }
 
   // Add to the subtitle are if we are searching by all names and we have to find the value by searching a new name
@@ -41,29 +40,15 @@ const EntitySubtitle: React.FC<Props> = ({ ent, highlightSearchMatches = true, s
   const subtitles = [entSubtitle, searchNamesSubtitle].filter(Boolean);
 
   return (
-    <SubtitleContainer style={style}>
+    <SubtitleContainer>
       <CommaSeparated limit={null}>{subtitles}</CommaSeparated>
     </SubtitleContainer>
   );
 };
 
-const SubtitleContainer: React.FC<React.PropsWithChildren<{ style?: React.CSSProperties }>> = ({
-  children,
-  style,
-}) => {
+const SubtitleContainer: React.FC<React.PropsWithChildren> = ({ children }) => {
   return (
-    <div
-      style={{
-        color: 'var(--color-text-secondary)',
-        fontSize: '0.6em',
-        fontStyle: 'italic',
-        fontWeight: 'normal',
-        marginTop: 0,
-        ...style,
-      }}
-    >
-      {children}
-    </div>
+    <div className="text-(--color-text-secondary) text-sm italic mt-0 font-normal">{children}</div>
   );
 };
 

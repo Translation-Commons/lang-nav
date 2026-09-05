@@ -1,41 +1,45 @@
+import { useMemo } from 'react';
+
+import { PageParamsContextState } from '@features/params/PageParamsContext';
 import usePageParams from '@features/params/usePageParams';
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
-export function getFilterLabels() {
-  return {
-    languageScope: getLanguageScopesLabel(),
-    modalityFilter: getModalityFilterLabel(),
-    territoryScope: getTerritoryScopesLabel(),
-    territoryFilter: getTerritoryFilterLabel(),
-    writingSystemFilter: getWritingSystemFilterLabel(),
-    languageFilter: getLanguageFilterLabel(),
-    languageFamilyFilter: getLanguageFamilyFilterLabel(),
-  };
+export function useFilterLabels() {
+  const params = usePageParams();
+  const filterLabels = useMemo(
+    () => ({
+      languageScope: getLanguageScopesLabel(params),
+      modalityFilter: getModalityFilterLabel(params),
+      territoryScope: getTerritoryScopesLabel(params),
+      territoryFilter: getTerritoryFilterLabel(params),
+      writingSystemFilter: getWritingSystemFilterLabel(params),
+      languageFilter: getLanguageFilterLabel(params),
+      languageFamilyFilter: getLanguageFamilyFilterLabel(params),
+    }),
+    [params],
+  );
+  return filterLabels;
 }
 
-function getModalityFilterLabel(): string {
-  const { modalityFilter } = usePageParams();
+function getModalityFilterLabel({ modalityFilter }: PageParamsContextState): string {
   if (modalityFilter.length === 0) return 'any modality';
   return modalityFilter.map((m) => getModalityLabel(m) ?? 'modality').join(' or ');
 }
 
-function getLanguageScopesLabel(): string {
-  const { languageScopes } = usePageParams();
+function getLanguageScopesLabel({ languageScopes }: PageParamsContextState): string {
   if (languageScopes.length === 0) return 'any languoid';
   return languageScopes.map(getLanguageScopeLabel).join(' or ').toLowerCase();
 }
 
-function getTerritoryScopesLabel(): string {
-  const { territoryScopes } = usePageParams();
+function getTerritoryScopesLabel({ territoryScopes }: PageParamsContextState): string {
   if (territoryScopes.length === 0) return 'any territory';
   return territoryScopes.map(getTerritoryScopeLabel).join(' or ').toLowerCase();
 }
 
-function getTerritoryFilterLabel(): string {
-  const { territoryFilter } = usePageParams();
+function getTerritoryFilterLabel({ territoryFilter }: PageParamsContextState): string {
   if (!territoryFilter) return 'found in any territory';
   if (territoryFilter.includes('[')) return 'found in ' + territoryFilter.split('[')[0].trim();
   if (territoryFilter.match(/^[A-Za-z]{2}$/))
@@ -45,8 +49,7 @@ function getTerritoryFilterLabel(): string {
   return `found in "${territoryFilter}*"`;
 }
 
-function getWritingSystemFilterLabel(): string {
-  const { writingSystemFilter } = usePageParams();
+function getWritingSystemFilterLabel({ writingSystemFilter }: PageParamsContextState): string {
   if (!writingSystemFilter) return 'written in any script';
   if (writingSystemFilter.includes('['))
     return 'written in ' + writingSystemFilter.split('[')[0].trim();
@@ -55,8 +58,7 @@ function getWritingSystemFilterLabel(): string {
   return `written in "${writingSystemFilter}*"`;
 }
 
-function getLanguageFilterLabel(): string {
-  const { languageFilter } = usePageParams();
+function getLanguageFilterLabel({ languageFilter }: PageParamsContextState): string {
   if (!languageFilter) return 'any languoid';
   if (languageFilter.includes('[')) return 'related to ' + languageFilter.split('[')[0].trim();
   if (languageFilter.match(/^[a-z]{3}$/))
@@ -64,8 +66,7 @@ function getLanguageFilterLabel(): string {
   return `related to language "${languageFilter}*"`;
 }
 
-function getLanguageFamilyFilterLabel(): string {
-  const { languageFamilyFilter } = usePageParams();
+function getLanguageFamilyFilterLabel({ languageFamilyFilter }: PageParamsContextState): string {
   if (!languageFamilyFilter) return 'any languoid';
   if (languageFamilyFilter.includes('['))
     return 'related to ' + languageFamilyFilter.split('[')[0].trim();

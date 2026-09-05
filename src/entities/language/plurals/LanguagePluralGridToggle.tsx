@@ -1,7 +1,7 @@
 import { GridIcon } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
+import { Toggle } from '@shared/ui/toggle';
 
 import { LanguageData } from '../LanguageTypes';
 
@@ -28,20 +28,15 @@ const LanguagePluralGridButton: React.FC<Props> = ({ lang, showTooltips }) => {
 
   return (
     <>
-      {/* TODO: make a toggle button */}
-      <HoverableButton
-        hoverContent={
-          <>
-            click to persist
-            <LanguagePluralGrid lang={lang} showTooltips={showTooltips} />
-          </>
-        }
-        style={{ padding: '0.25em 0.5em', marginLeft: '0.5em' }}
-        onClick={() => setIsGridVisible((prev) => !prev)}
+      <Toggle
+        className="cursor-pointer"
+        pressed={isGridVisible}
+        onPressedChange={() => setIsGridVisible((prev) => !prev)}
+        variant="outline"
       >
-        <GridIcon size="1em" style={{ marginRight: '0.25em', verticalAlign: 'middle' }} />
-        examples
-      </HoverableButton>
+        <GridIcon />
+        show grid
+      </Toggle>
       {isGridVisible && <LanguagePluralGrid lang={lang} showTooltips={showTooltips} />}
     </>
   );

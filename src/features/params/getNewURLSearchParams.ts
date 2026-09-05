@@ -123,6 +123,7 @@ function clearContextDependentParams(
     if (newParams.limit == null) next.delete('limit');
     if (newParams.page == null) next.delete('page');
     if (newParams.colorBy == null) next.delete('colorBy');
+    if (newParams.cmpID == null) next.delete('cmpID');
   }
 
   if (newParams.entType !== undefined && newParams.entType !== prevOrDefault.entType) {

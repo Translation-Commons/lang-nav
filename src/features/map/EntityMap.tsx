@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
+import PinnedMiniCardList from '@widgets/cardlists/PinnedMiniCardList';
+
 import { EntityType } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import ColorBar from '@features/transforms/coloring/ColorBar';
@@ -17,6 +19,7 @@ import { uniqueBy } from '@shared/lib/setUtils';
 
 import DrawableData from './DrawableData';
 import { getRobinsonCoordinatesShifted } from './getRobinsonCoordinates';
+import './map.css';
 import MapCentroids from './MapCentroids';
 import {
   MAP_ASPECT_RATIO,
@@ -24,12 +27,9 @@ import {
   MAP_ROBINSON_X_SCALE,
   MAP_ROBINSON_Y_SCALE,
 } from './MapConsts';
-import MapSidebar from './MapSidebar';
 import MapTerritories from './MapTerritories';
 import useMapZoom from './UseMapZoom';
 import ZoomControls from './ZoomControls';
-
-import './map.css';
 
 type Props = {
   entities: EntityData[];
@@ -41,8 +41,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
   const mapHeight = MAP_INTERNAL_WIDTH / MAP_ASPECT_RATIO;
   const { pageBrightness } = usePageParams().brightness;
   const sortFunction = getSortFunction();
-
-  const [hoveredId, setHoveredId] = useState<string | null>(null);
 
   const [zoomFactor, setZoomFactor] = useState(1);
 
@@ -180,14 +178,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
         resetTransform={resetTransform}
         containerWidth={mapContainerWidth}
       />
-      {allowSidebar && (
-        <MapSidebar
-          drawableEntities={drawableEntities}
-          entType={entType}
-          hoveredId={hoveredId}
-          setHoveredId={setHoveredId}
-        />
-      )}
 
       <div className="MapColorBarAndZoomContainer">
         <div className="MapZoomContainer" ref={zoomContainerRef}>
@@ -207,7 +197,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
                 drawableEntities={drawableEntities}
                 onClick={onClick}
                 coloringFunctions={coloringFunctions}
-                hoveredId={hoveredId}
                 pinnedIds={allowSidebar ? pinned : []}
                 allowSidebar={allowSidebar}
               />
@@ -219,7 +208,6 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
               scalar={1200 / maxWidth}
               zoomFactor={zoomFactor}
               coloringFunctions={coloringFunctions}
-              hoveredId={hoveredId}
               pinnedIds={allowSidebar ? pinned : []}
               allowSidebar={allowSidebar}
             />
@@ -227,6 +215,7 @@ const EntityMap: React.FC<Props> = ({ entities, maxWidth = 2000, allowSidebar = 
         </div>
 
         {colorBy !== Field.None && <ColorBar coloringFunctions={coloringFunctions} />}
+        {allowSidebar && <PinnedMiniCardList />}
       </div>
     </div>
   );

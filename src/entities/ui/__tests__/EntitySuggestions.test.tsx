@@ -26,7 +26,7 @@ describe('EntitySuggestions', () => {
 
     const buttons = screen.getAllByRole('button');
     // Expect the six language IDs from the component implementation
-    expect(buttons).toHaveLength(6);
+    expect(buttons).toHaveLength(12);
 
     // Verify specific items rendered
     expect(screen.getByText('ENT:eng')).toBeTruthy();
@@ -48,7 +48,7 @@ describe('EntitySuggestions', () => {
 
     const buttons = screen.getAllByRole('button');
     // Expect the seven locale IDs from the component implementation
-    expect(buttons).toHaveLength(7);
+    expect(buttons).toHaveLength(14);
 
     // Check a couple of locale renders
     expect(screen.getByText('ENT:eng_US')).toBeTruthy();

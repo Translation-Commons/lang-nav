@@ -1,10 +1,8 @@
-import { InfoIcon, TriangleAlertIcon } from 'lucide-react';
 import React from 'react';
-
-import Hoverable from '@features/layers/hovercard/Hoverable';
 
 import { LanguageScope } from '@entities/language/LanguageTypes';
 
+import ContextIcon from '@shared/ui/ContextIcon';
 import ExternalLink from '@shared/ui/ExternalLink';
 
 import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
@@ -42,9 +40,7 @@ const IdentityRow: React.FC<{
         {scope && (
           <>
             {getLanguageScopeLabel(scope)}{' '}
-            <Hoverable hoverContent={getLanguageScopeDescription(scope)}>
-              <InfoIcon className="h-3.5 w-3.5 text-[var(--color-text-secondary)]" />
-            </Hoverable>
+            <ContextIcon>{getLanguageScopeDescription(scope)}</ContextIcon>
           </>
         )}
       </td>
@@ -59,16 +55,8 @@ const IdentityRow: React.FC<{
                 {codeAlt}
               </code>
             )}
-            {codeWarning && (
-              <Hoverable hoverContent={codeWarning}>
-                <TriangleAlertIcon className="h-3.5 w-3.5 text-[var(--color-text-secondary)]" />
-              </Hoverable>
-            )}
-            {codeDescription && (
-              <Hoverable hoverContent={codeDescription}>
-                <InfoIcon className="h-3.5 w-3.5 text-[var(--color-text-secondary)]" />
-              </Hoverable>
-            )}
+            {codeWarning && <ContextIcon severity="warning">{codeWarning}</ContextIcon>}
+            {codeDescription && <ContextIcon>{codeDescription}</ContextIcon>}
           </div>
         )}
       </td>

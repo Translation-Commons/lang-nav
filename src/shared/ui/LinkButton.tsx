@@ -1,4 +1,7 @@
+import { ArrowUpRightIcon } from 'lucide-react';
 import React from 'react';
+
+import { Button } from '@shared/ui/button';
 
 type Props = {
   href: string;
@@ -10,26 +13,15 @@ type Props = {
  */
 export default function LinkButton({ href, children, title }: React.PropsWithChildren<Props>) {
   return (
-    // added textDecoration to be none to avoid black underline when hovering over text on the button
-    <a
-      href={href}
-      target="_blank"
-      rel="noopener noreferrer"
-      title={title ?? href}
-      style={{ textDecoration: 'none' }}
-    >
-      <button
-        role="link"
-        style={{
-          padding: children !== '' ? '0.25em' : '0',
-          alignItems: 'center',
-          gap: '0.5em',
-          display: 'flex',
-          marginTop: '0.25em',
-        }}
-      >
-        {children} <span aria-hidden={true}>↗</span>
-      </button>
-    </a>
+    <Button
+      nativeButton={false}
+      role="link"
+      variant="secondary"
+      render={
+        <a href={href} target="_blank" rel="noopener noreferrer" title={title ?? href}>
+          {children} <ArrowUpRightIcon />
+        </a>
+      }
+    />
   );
 }

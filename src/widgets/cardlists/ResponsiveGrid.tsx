@@ -1,37 +1,14 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 
-const CARD_MIN_WIDTH = 240;
-
+/**
+ * Designed for full cards
+ */
 const ResponsiveGrid: React.FC<React.PropsWithChildren> = ({ children }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const [width, setWidth] = useState(0);
-
-  useEffect(() => {
-    const observer = new ResizeObserver(([entry]) => {
-      if (entry.contentRect) {
-        setWidth(entry.contentRect.width);
-      }
-    });
-
-    if (containerRef.current) {
-      observer.observe(containerRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
-
-  const nColumns = width > 0 ? Math.floor(width / CARD_MIN_WIDTH) : 1;
-
   return (
-    <div
-      ref={containerRef}
-      style={{
-        display: 'grid',
-        gridGap: '1.5em',
-        gridTemplateColumns: `repeat(${nColumns}, 1fr)`,
-      }}
-    >
-      {children}
+    <div className="@container">
+      <div className="grid gap-6 grid-cols-1 @md:grid-cols-2 @2xl:grid-cols-3 @4xl:grid-cols-4">
+        {children}
+      </div>
     </div>
   );
 };

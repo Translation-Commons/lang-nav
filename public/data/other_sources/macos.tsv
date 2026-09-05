@@ -9,25 +9,25 @@ Language Code	Language	 Locale	Writing System	notes
 ara/arb	Arabic			
 cat	Catalan			
 zho/cmn	Chinese, Simplified			
-zho/yue	Chinese, Traditional 	(Hong Kong)		
-zho/cmn	Chinese, Traditional 	(Taiwan)		
+zho/yue	Chinese, Traditional 	Hong Kong		
+zho/cmn	Chinese, Traditional 	Taiwan		
 hbs/hrv	Croatian			
 ces	Czech			
 dan	Danish			
 nld	Dutch			
-eng	English 	(Australia)		
-eng	English 	(Canada)		
-eng	English 	(India)		
-eng	English 	(Ireland)		
-eng	English 	(New Zealand)		
-eng	English 	(Singapore)		
-eng	English 	(South Africa)		
-eng	English 	(United Kingdom)		
-eng	English 	(United States)		
+eng	English 	Australia		
+eng	English 	Canada		
+eng	English 	India		
+eng	English 	Ireland		
+eng	English 	New Zealand		
+eng	English 	Singapore		
+eng	English 	South Africa		
+eng	English 	United Kingdom		
+eng	English 	United States		
 fin	Finnish			
-fra	French 	(Canada)		
-fra	French 	(France)		
-deu	German 	(Germany)		
+fra	French 	Canada		
+fra	French 	France		
+deu	German 	Germany		
 ell	Greek			
 heb	Hebrew			
 hin	Hindi			
@@ -39,16 +39,16 @@ kor	Korean
 msa/zsm	Malay			
 nor/nob	Norwegian			
 pol	Polish			
-por	Portuguese 	(Brazil)		
-por	Portuguese 	(Portugal)		
+por	Portuguese 	Brazil		
+por	Portuguese 	Portugal		
 ron	Romanian			
 rus	Russian			
 slk	Slovak			
 slv	Slovenian			
-spa	Spanish 	(Latin America)		419
-spa	Spanish 	(Mexico)		
-spa	Spanish 	(Spain)		
-spa	Spanish 	(United States)		
+spa	Spanish 	Latin America		419
+spa	Spanish 	Mexico		
+spa	Spanish 	Spain		
+spa	Spanish 	United States		
 swe	Swedish			
 tha	Thai			
 tur	Turkish			

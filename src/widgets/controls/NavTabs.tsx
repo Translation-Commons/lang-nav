@@ -8,7 +8,9 @@ import NewHoverable from '@features/layers/hovercard/NewHoverable';
 import { getNewURLSearchParams } from '@features/params/getNewURLSearchParams';
 import { PageParams } from '@features/params/PageParamTypes';
 
+import { Button } from '@shared/ui/button';
 import './tabs.css';
+
 import useAreParamsCurrent from './useAreParamsCurrent';
 
 export type TabOption = {
@@ -74,9 +76,9 @@ const NavTabs: React.FC<Props> = ({ label, options, size = 'major', extendedOpti
             </div>
           }
         >
-          <button style={{ padding: '0.25em', cursor: 'pointer' }}>
+          <Button variant="outline" size="lg">
             <EllipsisIcon display="block" />
-          </button>
+          </Button>
         </NewHoverable>
       )}
     </div>

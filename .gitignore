@@ -63,3 +63,6 @@ backend/tools/
 .mcp.json
 .repowise/
 .private/
+
+# Rollup visualizer output
+stats.html

@@ -97,7 +97,12 @@ export async function loadISOLanguageFamilies(): Promise<ISOLanguageFamilyData[]
     .then((lines) =>
       lines.map((line) => {
         const parts = line.split('\t');
-        return { code: parts[0], name: parts[1], parent: parts[2] != '' ? parts[2] : undefined };
+        return {
+          code: parts[0],
+          name: parts[1],
+          parent: parts[2] != '' ? parts[2] : undefined,
+          scope: LanguageScope.Family,
+        };
       }),
     )
     .catch((err) => console.error('Error loading TSV:', err));
@@ -201,16 +206,31 @@ export function addISOLanguageFamilyData(
 ): void {
   // Add new language entries for language families, otherwise fill in missing data
   families.forEach((family) => {
-    const familyEntry = languagesBySource.ISO[family.code];
+    const familyEntry =
+      languagesBySource.ISO[family.code] ?? languagesBySource.Combined[family.code];
     // trim excess from the name
     const name = family.name.replace(/ languages| \(family\)/gi, '');
 
     // If the entry is missing, create a new one
     if (familyEntry == null) {
       const sourceSpecific = {
-        Combined: { code: family.code, parentLanguageCode: family.parent },
-        ISO: { code: family.code, name, parentLanguageCode: family.parent },
-        BCP: { code: family.code, name, parentLanguageCode: family.parent },
+        Combined: {
+          code: family.code,
+          parentLanguageCode: family.parent,
+          scope: LanguageScope.Family,
+        },
+        ISO: {
+          code: family.code,
+          name,
+          parentLanguageCode: family.parent,
+          scope: LanguageScope.Family,
+        },
+        BCP: {
+          code: family.code,
+          name,
+          parentLanguageCode: family.parent,
+          scope: LanguageScope.Family,
+        },
       };
 
       const familyEntry: LanguageData = {
@@ -229,14 +249,14 @@ export function addISOLanguageFamilyData(
       if (!familyEntry.nameDisplay || familyEntry.nameDisplay === '0') {
         familyEntry.nameDisplay = family.name;
       }
-      familyEntry.Combined.parentLanguageCode = family.parent;
+      familyEntry.Combined.parentLanguageCode ??= family.parent;
       familyEntry.ISO.parentLanguageCode = family.parent;
       familyEntry.ISO.scope = LanguageScope.Family;
       familyEntry.ISO.name = name;
       familyEntry.BCP.parentLanguageCode = family.parent;
       familyEntry.BCP.scope = LanguageScope.Family;
       familyEntry.BCP.name = name;
-      familyEntry.scope = LanguageScope.Family;
+      familyEntry.scope ??= LanguageScope.Family;
     }
   });
 

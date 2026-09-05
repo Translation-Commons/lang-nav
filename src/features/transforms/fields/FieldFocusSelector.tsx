@@ -1,26 +1,21 @@
 import React from 'react';
 
 import { View } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
 
-import Field from './Field';
-import { getApplicableFields } from './FieldApplicability';
+import FieldDropdown from '../sorting/FieldDropdown';
 
 const FieldFocusSelector: React.FC = () => {
-  const { fieldFocus, updatePageParams, view, entType } = usePageParams();
+  const { view } = usePageParams();
 
   // Only applies to the TreeList view for now, but could be expanded to other views in the future
   if (view !== View.Hierarchy && view !== View.Map) return null;
 
   return (
-    <Selector<Field>
-      selectorLabel="Show Data"
-      selectorDescription="Choose data to show to the right side of the tree list nodes."
-      options={getApplicableFields(undefined, entType)}
-      onChange={(field) => updatePageParams({ fieldFocus: field })}
-      selected={fieldFocus}
-    />
+    <>
+      <div className="text-right">Show this data always</div>
+      <FieldDropdown pageParam="fieldFocus" />
+    </>
   );
 };
 

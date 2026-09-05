@@ -17,7 +17,16 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
   const isActive = wikipedia && wikipedia.status === WikipediaStatus.Active;
 
   return (
-    <DetailsSection title={<WikipediaSectionTitle lang={lang} />}>
+    <DetailsSection
+      title="Wikipedia"
+      headerOptions={
+        wikipedia && (
+          <Badge variant="secondary" style={{ color: getStatusColor(wikipedia.status) }}>
+            {wikipedia.status}
+          </Badge>
+        )
+      }
+    >
       <div>
         {wikipedia?.url && (
           <ExternalLink href={'http://' + wikipedia.url}>{wikipedia.url}</ExternalLink>
@@ -44,30 +53,6 @@ const LanguageWikipediaSection: React.FC<{ lang: LanguageData }> = ({ lang }) =>
 };
 
 export default LanguageWikipediaSection;
-
-const WikipediaSectionTitle: React.FC<{ lang: LanguageData }> = ({ lang }) => {
-  const { wikipedias } = lang;
-  const wikipedia = wikipedias && wikipedias.length > 0 ? wikipedias[0] : undefined;
-  return (
-    <div>
-      <div
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-          width: '100%',
-        }}
-      >
-        <span>Wikipedia</span>
-        {wikipedia && (
-          <Badge variant="secondary" style={{ color: getStatusColor(wikipedia.status) }}>
-            {wikipedia.status}
-          </Badge>
-        )}
-      </div>
-    </div>
-  );
-};
 
 const NotApplicableDisplay = () => (
   <span style={{ fontSize: '0.6em', color: 'var(--color-text-secondary)' }}>N/A</span>

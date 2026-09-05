@@ -1,7 +1,5 @@
-import { TriangleAlertIcon } from 'lucide-react';
 import { ReactNode } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import { SearchableField } from '@features/params/PageParamTypes';
 import usePageParams from '@features/params/usePageParams';
 import TableColumn from '@features/table/TableColumn';
@@ -12,6 +10,7 @@ import LanguageRetirementReason from '@entities/language/LanguageRetirementReaso
 import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
 
+import ContextIcon from '@shared/ui/ContextIcon';
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
@@ -90,12 +89,9 @@ export const LanguageCodeColumns: TableColumn<LanguageData>[] = columns.map(
 
 function MaybeISOWarning({ lang }: { lang: LanguageData }): React.ReactNode | null {
   return lang.warnings && lang.warnings[LanguageField.isoCode] ? (
-    <Hoverable
-      hoverContent={<LanguageRetirementReason lang={lang} />}
-      style={{ marginLeft: '0.125em' }}
-    >
-      <TriangleAlertIcon size="1em" display="block" color="var(--color-yellow)" />
-    </Hoverable>
+    <ContextIcon severity="warning">
+      <LanguageRetirementReason lang={lang} />
+    </ContextIcon>
   ) : null;
 }
 

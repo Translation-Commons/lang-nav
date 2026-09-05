@@ -2,6 +2,7 @@ import React, { ReactNode, useState } from 'react';
 
 import { useClickOutside } from '@shared/hooks/useClickOutside';
 import { getPositionInGroup } from '@shared/lib/PositionInGroup';
+import { Button } from '@shared/ui/button';
 
 import {
   SelectorDisplay,
@@ -204,9 +205,9 @@ const FilterListMoreButton: React.FC<FilterListMoreButtonProps> = ({
     return null;
 
   return (
-    <button className="filterListMoreButton" onClick={toggle}>
+    <Button className="filterListMoreButton" onClick={toggle} variant="secondary">
       {isExpanded ? 'Collapse' : 'Expand All'}
-    </button>
+    </Button>
   );
 };
 

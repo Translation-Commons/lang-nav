@@ -2,11 +2,6 @@ import React from 'react';
 
 import PageBrightnessSelector from '@widgets/controls/selectors/PageBrightnessSelector';
 
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
-
 import ColorSwatch from './ColorSwatch';
 import DocsCard from './DocsCard';
 import DocsSection from './DocsSection';
@@ -18,10 +13,8 @@ const ColorStyles: React.FC = () => {
         Use CSS variables for colors to maintain consistency and make it easy to update the color
         scheme across the site. Colors should be chosen to ensure sufficient contrast for
         readability and accessibility. These colors adapt to the page brightness setting:
-        <div className="inline-block">
-          <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-            <PageBrightnessSelector />
-          </SelectorDisplayProvider>
+        <div className="inline-flex flex-row items-center gap-2 ml-2">
+          <PageBrightnessSelector />
         </div>
       </div>
       <DocsCard title="Text">

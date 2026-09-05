@@ -1,20 +1,38 @@
 import React from 'react';
 
 import { LocaleSeparator } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
 import usePageParams from '@features/params/usePageParams';
+
+import ContextIcon from '@shared/ui/ContextIcon';
+import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
 
 const LocaleSeparatorSelector: React.FC = () => {
   const { localeSeparator, updatePageParams } = usePageParams();
 
   return (
-    <Selector
-      selectorLabel="Locale Separator"
-      selectorDescription="Choose the separator in locale codes, eg. 'ar-EG' or 'ar_EG'"
-      options={Object.values(LocaleSeparator)}
-      onChange={(localeSeparator: LocaleSeparator) => updatePageParams({ localeSeparator })}
-      selected={localeSeparator}
-    />
+    <>
+      <div className="text-right">
+        Locale Separator{' '}
+        <ContextIcon>
+          Choose how locale codes are separated, for example using a hyphen (&quot;ar-EG&quot;) or
+          an underscore (&quot;ar_EG&quot;). This setting affects how locale codes are displayed
+          throughout the application.
+        </ContextIcon>
+      </div>
+      <Tabs
+        value={localeSeparator}
+        onValueChange={(localeSeparator) => updatePageParams({ localeSeparator })}
+      >
+        <TabsList>
+          <TabsTrigger value={LocaleSeparator.Hyphen} className="cursor-pointer">
+            {LocaleSeparator.Hyphen}
+          </TabsTrigger>
+          <TabsTrigger value={LocaleSeparator.Underscore} className="cursor-pointer">
+            {LocaleSeparator.Underscore}
+          </TabsTrigger>
+        </TabsList>
+      </Tabs>
+    </>
   );
 };
 

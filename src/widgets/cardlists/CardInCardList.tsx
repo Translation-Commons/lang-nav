@@ -15,14 +15,7 @@ interface Props {
 }
 
 const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) => {
-  const { updatePageParams, entID, pinned } = usePageParams();
-
-  const isPinned = pinned.includes(ent.ID);
-  const togglePin = useCallback(() => {
-    updatePageParams({
-      pinned: isPinned ? pinned.filter((id) => id !== ent.ID) : [...pinned, ent.ID],
-    });
-  }, [isPinned, pinned, ent.ID, updatePageParams]);
+  const { updatePageParams, entID } = usePageParams();
 
   const openEntity = useCallback(() => {
     if (ent) updatePageParams({ entID: ent.ID });
@@ -63,7 +56,7 @@ const CardInCardList: React.FC<Props> = ({ children, getBackgroundColor, ent }) 
       }}
       tabIndex={0}
     >
-      <PinButton className="bg-transparent!" isPinned={isPinned} onTogglePin={togglePin} />
+      <PinButton className="bg-transparent!" ent={ent} />
       {children}
     </div>
   );

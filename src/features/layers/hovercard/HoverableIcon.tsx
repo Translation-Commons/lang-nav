@@ -20,12 +20,7 @@ const HoverableIcon: React.FC<Props> = ({ Icon, onClick, description }) => {
         delay={10}
         closeDelay={100}
         render={
-          <Button
-            aria-label={description}
-            className="cursor-pointer p-2"
-            onClick={onClick}
-            variant="secondary"
-          >
+          <Button aria-label={description} className="p-2" onClick={onClick} variant="secondary">
             <Icon />
           </Button>
         }

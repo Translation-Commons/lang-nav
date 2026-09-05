@@ -7,7 +7,7 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import { sortByPopulation } from '../../sorting/sort';
 import { useScopeFilter } from '../filter';
-import { getFilterLabels } from '../FilterLabels';
+import { useFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 
 import EntityFilterSelector from './EntityFilterSelector';
@@ -15,7 +15,7 @@ import EntityFilterSelector from './EntityFilterSelector';
 const TerritoryFilterSelector: React.FC = () => {
   const { territories } = useDataContext();
   const filterByScope = useScopeFilter();
-  const filterLabels = getFilterLabels();
+  const filterLabels = useFilterLabels();
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (territory: TerritoryData): number =>

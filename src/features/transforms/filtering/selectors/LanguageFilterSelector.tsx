@@ -9,7 +9,7 @@ import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import Field from '../../fields/Field';
 import { sortByPopulation } from '../../sorting/sort';
-import { getFilterLabels } from '../FilterLabels';
+import { useFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 import useFilters from '../useFilters';
 
@@ -22,7 +22,7 @@ const LanguageFilterSelector: React.FC = () => {
   const filterByTerritory = filterBy[Field.Territory];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
   const filterByLanguageFamily = filterBy[Field.LanguageFamily];
-  const filterLabels = getFilterLabels();
+  const filterLabels = useFilterLabels();
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (language: LanguageData): number => {

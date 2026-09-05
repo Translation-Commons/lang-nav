@@ -38,6 +38,9 @@ function SelectorOption<T extends React.Key>({
 
   return (
     <HoverableButton
+      variant={
+        isSelected ? 'default' : display === SelectorDisplay.InlineDropdown ? 'ghost' : 'secondary'
+      }
       className={className}
       hoverContent={
         getOptionDescription && (
@@ -112,9 +115,9 @@ export function getOptionStyle(
 ): React.CSSProperties {
   // Standard option style
   const style: React.CSSProperties = {
-    border: '0.125em solid var(--color-button-primary)',
-    borderRadius: '0px',
-    cursor: 'pointer',
+    // border: '0.125em solid var(--color-button-primary)',
+    // borderRadius: '0px',
+    // cursor: 'pointer',
     lineHeight: '1em',
     padding: '0.5em',
     whiteSpace: 'nowrap',
@@ -125,7 +128,7 @@ export function getOptionStyle(
   // Customize based on position and display type
   switch (display) {
     case SelectorDisplay.FilterList:
-      style.border = 'none';
+      // style.border = 'none';
       style.borderRadius = '0.5em';
       style.padding = '0.2em 0.4em';
       style.lineHeight = '1.5em';

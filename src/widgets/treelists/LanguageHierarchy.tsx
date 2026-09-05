@@ -2,13 +2,8 @@ import React from 'react';
 
 import { useDataContext } from '@features/data/context/useDataContext';
 import { EntityType } from '@features/params/PageParamTypes';
-import {
-  SelectorDisplay,
-  SelectorDisplayProvider,
-} from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 import { useScopeFilter } from '@features/transforms/filtering/filter';
-import LanguageSourceSelector from '@features/transforms/filtering/selectors/LanguageSourceSelector';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import { TreeNodeData } from '@features/treelist/TreeListNode';
 import TreeListPageBody from '@features/treelist/TreeListPageBody';
@@ -16,8 +11,10 @@ import TreeListPageBody from '@features/treelist/TreeListPageBody';
 import { LanguageData, LanguageScope, LanguageSource } from '@entities/language/LanguageTypes';
 import { EntityData } from '@entities/types/DataTypes';
 
+import EnumDropdown from '@shared/ui/EnumDropdown';
+
 export const LanguageHierarchy: React.FC = () => {
-  const { languageSource } = usePageParams();
+  const { languageSource, updatePageParams } = usePageParams();
   const { languagesInSelectedSource } = useDataContext();
   const sortFunction = getSortFunction();
   const filterByScope = useScopeFilter();
@@ -40,11 +37,11 @@ export const LanguageHierarchy: React.FC = () => {
           Showing <strong>languages</strong>, language families, and <em>dialects</em>. Note that
           different sources disagree on what is a language/dialect/etc. The parent/child
           relationships come from the selected language source (
-          <div className="inline-block align-top px-1 h-6">
-            <SelectorDisplayProvider display={SelectorDisplay.InlineDropdown}>
-              <LanguageSourceSelector />
-            </SelectorDisplayProvider>
-          </div>
+          <EnumDropdown<LanguageSource>
+            value={languageSource}
+            onChange={(newValue) => updatePageParams({ languageSource: newValue })}
+            options={Object.values(LanguageSource).filter((s) => s !== 'UNESCO')}
+          />
           ). <SourceWarning languageSource={languageSource} />
         </>
       }

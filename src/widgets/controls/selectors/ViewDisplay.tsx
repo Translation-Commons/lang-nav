@@ -1,0 +1,45 @@
+import {
+  ChartColumnBigIcon,
+  FileIcon,
+  Grid2x2Icon,
+  ListTreeIcon,
+  MapIcon,
+  Table2Icon,
+} from 'lucide-react';
+import React from 'react';
+
+import { View } from '@features/params/PageParamTypes';
+
+export function getViewIcon(view: View): React.ReactNode {
+  switch (view) {
+    case View.CardList:
+      return <Grid2x2Icon />;
+    case View.Hierarchy:
+      return <ListTreeIcon />;
+    case View.Map:
+      return <MapIcon />;
+    case View.Details:
+      return <FileIcon />;
+    case View.Table:
+      return <Table2Icon />;
+    case View.Reports:
+      return <ChartColumnBigIcon />;
+  }
+}
+
+export function getViewLabel(view: View): string {
+  switch (view) {
+    case View.CardList:
+      return 'Card List';
+    case View.Hierarchy:
+      return 'Hierarchy';
+    case View.Map:
+      return 'Map';
+    case View.Details:
+      return 'Single-Item Details';
+    case View.Table:
+      return 'Table';
+    case View.Reports:
+      return 'Reports';
+  }
+}

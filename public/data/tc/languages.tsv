@@ -5316,7 +5316,7 @@ bcd	nort2860	North Babar			Latn	1,000		nort2859	Yes
 bcm	bann1247	Bannoni			Latn	1,000		piva1237	Yes	
 bdk	budu1248	Budukh			Latn	1,000		sout2753	Yes	
 beg	bela1260	Belait				1,000		cent2272	Yes	
-ber		Berber languages				20,000,000			Probably not	Language family encompassing all Berber languages -- may only be used if the data does not break down the languages
+ber	berb1260	Berber languages			Tfng	20,000,000			No	Language family encompassing all Berber languages -- may only be used if the data does not break down the languages
 bgm	baga1276	Baga Mboteni				1,000	bcg	baga1275	No	ISO considers this a duplicate of bcg
 bhn	boht1238	Bohtan Neo-Aramaic			Syrc	1,000		boht1239	Yes	
 bkf	beek1238	Beeke			Latn	1,000		bali1286	Yes	
@@ -6000,7 +6000,7 @@ xau	kauw1242	Kauwera	bahasa Kabera		Latn	400		kwer1262	Yes
 ynl	yang1298	Yangulam			Latn	400		nuru1240	Yes	
 yoi	yona1241	Yonaguni	与那国物言		Jpan	400		macr1267	Yes	
 ysd	sama1295	Samatao			Yiii	400		kazh1234	Yes	
-zua		Zeem		Spoken & Written		400	zem		Probably not	Split into [tvi] Tulai, [dyr] Dyarim, [dsk] Dokshi, [cxh] Cha'ari, and [zem] Zeem
+zua	zeem1243	Zeem		Spoken & Written		400	zem		Probably not	Split into [tvi] Tulai, [dyr] Dyarim, [dsk] Dokshi, [cxh] Cha'ari, and [zem] Zeem
 mpo	miuu1237	Miu			Latn	395		pasi1254	Yes	
 mbr	nuka1242	Nukak Makú	Nɨkák náu'		Latn	390		kaku1242	Yes	
 myp	pira1253	Pirahã	Hi'aiti'ihi'		Latn	390			Yes	
@@ -6973,7 +6973,7 @@ uln	unse1236	Unserdeutsch			Latn	10		glob1243	Yes
 uly	buli1260	Buli			Latn	10		polc1245	Yes	
 uni	unii1234	Uni			Latn	10		lago1243	Yes	
 urc	urni1239	Urningangg			Latn	10		urni1238	No	Extinct language
-uun		Kulon-Pazeh				10			Probably not	Split into separate language codes
+uun	nort2899	Kulon-Pazeh				10			Probably not	Split into separate language codes
 vkn	koro1323	Koro Nulu			Latn	10		uncl1532	Yes	
 vku	kurr1243	Kurrama			Latn	10		yind1249	Yes	
 vsi	mold1243	Moldova Sign Language		Sign	Zxxx	10		cent2419	Yes	
@@ -7548,7 +7548,7 @@ bsl	basa1280	Basa-Gumna			Latn			gumn1234	No	Extinct language
 bsv	baga1274	Baga Sobané			Latn			book1242	No	Extinct language
 btb	beti1250	Beti (Cameroon)						book1242	Probably not	This language was determined to be a duplicate of `beb`
 bte	gamo1241	Gamo-Ningi			Latn			ning1277	Yes, with caveat	Some sources report this as extinct, some as active
-btk	toba1265	Batak languages						suma1277	Probably not	Language family -- there mare many other languages that are part of this
+btk	toba1265	Batak languages						suma1277	Probably not	Language family -- there are many other languages that are part of this
 bue	beot1247	Beothuk			Latn				No	Extinct language
 bvv	bani1254	Baniva			Latn			maip1247	No	Extinct language
 bxx	born1252	Borna (DRC)						book1242	No	Declared non-existent by ISO
@@ -7884,7 +7884,7 @@ sjn	sind1281	Sindarin						arti1236	Possibly	Constructed language
 skw	skep1238	Skepi Creole Dutch			Latn			zeeu1239	No	Extinct language
 sln	sali1253	Salinan			Latn				Yes, with caveat	Some sources report this as extinct, some as active
 slq	salc1238	Salchuq						book1242	No	Declared non-existent by ISO
-smi	saam1281	Sami languages						ural1272	Probably not	Language family -- there mare many other languages that are part of this
+smi	saam1281	Sami languages						ural1272	Probably not	Language family -- there are many other languages that are part of this
 smp	sama1313	Samaritan	עברית שומרונית		Samr			hebr1246	Yes, with caveat	Some sources report this as extinct, some as active
 snh	shin1267	Shinabo						pano1260	No	Declared non-existent by ISO
 sni	sens1242	Sensi			Latn			cham1314	No	Extinct language
@@ -8189,7 +8189,7 @@ zba		Balaibalan			Arab				Possibly	Constructed language
 zbl	blis1239	Blissymbols						arti1236	Possibly	Constructed language
 zem	zeem1242	Zeem			Latn			nucl1831	Yes	
 zhon1236	zhon1236	Zhongyuan						mand1471	No	Group of multiple languages
-zhx	sini1245	Chinese (family)						sino1245	No	Language family -- there mare many other languages that are part of this
+zhx	sini1245	Sinitic					sit	sino1245	No	Language family -- there are many other languages that are part of this
 zkb	samo1299	Koibal					kjh	kama1351	No	ISO considers this a duplicate of kjh
 zkg	kogu1234	Koguryo	고구려어					uncl1493	Probably not	Historical langauge
 zkh		Khorezmian							Probably not	Historical langauge
@@ -8205,10 +8205,11 @@ zsk		Kaskean							Probably not	Historical langauge
 zxx		Not applicable	no linguistic content						No	Control code
 mol	mold1248	Moldavian		Spoken & Written	Latn			east2865	Probably not	Old ISO system considered it its own language. Now it is just considered a dialect of Romanian by ISO
 bvs	belg1242	Belgian Sign Language		Sign			sgn	dutc1259	No	Deprecated from ISO
-mhv	arak1255	Arakanese-Marma					sit	nucl1811	No	Deprecated from ISO
 dyl	bhut1234	Bhutanese Sign Language		Sign			sgn	bhut1234	Yes, with caveat	New to ISO
 lfb	buuu1246	Buu (Cameroon)	Nubabo			100	bnt	jiii1234	Yes, with caveat	New to ISO
 osd	digo1242	Digor Ossetic	дигорон ӕвзаг		Cyrl	100,000	ira	osse1243	Yes, with caveat	New to ISO
 scz	shet1241	Shaetlan	Shaetlan		Latn	10,000			Yes, with caveat	New to ISO
 tvg	tugu1234	Tugunese	Mardijker		Latn	0	crp	mala1533	No	Extinct
 zhk	kurd1260	Kurdish Sign Language		Sign		1000	sgn	leva1240	Yes, with caveat	New to ISO
+ccq	chau1262	Chaungtha				186000	rki	rakh1245	No	Combined into Rakhine in ISO
+mhv	arak1256	Arakanese					tbq	arak1255	No	Language group, not recognized by ISO anymore

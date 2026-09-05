@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import useEntities from '@features/data/context/useEntities';
 import { Suggestion, SUGGESTION_LIMIT } from '@features/params/ui/SelectorSuggestions';
@@ -7,7 +7,7 @@ import usePageParams from '@features/params/usePageParams';
 import { EntityData } from '@entities/types/DataTypes';
 
 import Field from '../fields/Field';
-import { getFilterLabels } from '../filtering/FilterLabels';
+import { useFilterLabels } from '../filtering/FilterLabels';
 import useFilters from '../filtering/useFilters';
 
 import getSearchableField from './getSearchableField';
@@ -18,10 +18,33 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
   const { searchBy } = usePageParams();
   const pageEntities = useEntities();
   const filterBy = useFilters();
-  const filterLabels = getFilterLabels();
+  const filterLabels = useFilterLabels();
 
-  const [getMatchDistance, getMatchGroup] = useMemo(() => {
-    const getMatchDistance = (ent: EntityData): number => {
+  const getMatchGroup = useCallback(
+    (ent: EntityData): string => {
+      if (!filterBy[Field.LanguageFamily]?.(ent)) return 'not ' + filterLabels.languageFamilyFilter;
+      if (!filterBy[Field.Language]?.(ent)) return 'not ' + filterLabels.languageFilter;
+      if (!filterBy[Field.WritingSystem]?.(ent)) return 'not ' + filterLabels.writingSystemFilter;
+      if (!filterBy[Field.Territory]?.(ent)) return 'not ' + filterLabels.territoryFilter;
+      if (!filterBy[Field.TerritoryScope]?.(ent)) return 'not ' + filterLabels.territoryScope;
+      if (!filterBy[Field.Modality]?.(ent)) return 'not ' + filterLabels.modalityFilter;
+      if (!filterBy[Field.LanguageScope]?.(ent)) return 'not ' + filterLabels.languageScope;
+      return 'matched';
+    },
+    [
+      filterBy[Field.Language],
+      filterBy[Field.LanguageFamily],
+      filterBy[Field.WritingSystem],
+      filterBy[Field.Territory],
+      filterBy[Field.TerritoryScope],
+      filterBy[Field.Modality],
+      filterBy[Field.LanguageScope],
+      filterLabels,
+    ],
+  );
+
+  const getMatchDistance = useCallback(
+    (ent: EntityData): number => {
       let dist = 0;
       if (!filterBy[Field.LanguageFamily]?.(ent)) dist += 1;
       if (!filterBy[Field.Language]?.(ent)) dist += 2;
@@ -31,28 +54,18 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
       if (!filterBy[Field.Modality]?.(ent)) dist += 32;
       if (!filterBy[Field.LanguageScope]?.(ent)) dist += 64;
       return dist;
-    };
-    const getMatchGroup = (ent: EntityData): string => {
-      if (!filterBy[Field.LanguageFamily]?.(ent)) return 'not ' + filterLabels.languageFamilyFilter;
-      if (!filterBy[Field.Language]?.(ent)) return 'not ' + filterLabels.languageFilter;
-      if (!filterBy[Field.WritingSystem]?.(ent)) return 'not ' + filterLabels.writingSystemFilter;
-      if (!filterBy[Field.Territory]?.(ent)) return 'not ' + filterLabels.territoryFilter;
-      if (!filterBy[Field.TerritoryScope]?.(ent)) return 'not ' + filterLabels.territoryScope;
-      if (!filterBy[Field.Modality]?.(ent)) return 'not ' + filterLabels.modalityFilter;
-      if (!filterBy[Field.LanguageScope]?.(ent)) return 'not ' + filterLabels.languageScope;
-      return 'matched';
-    };
-    return [getMatchDistance, getMatchGroup];
-  }, [
-    filterBy[Field.Language],
-    filterBy[Field.LanguageFamily],
-    filterBy[Field.WritingSystem],
-    filterBy[Field.Territory],
-    filterBy[Field.TerritoryScope],
-    filterBy[Field.Modality],
-    filterBy[Field.LanguageScope],
-    filterLabels,
-  ]);
+    },
+    [
+      filterBy[Field.Language],
+      filterBy[Field.LanguageFamily],
+      filterBy[Field.WritingSystem],
+      filterBy[Field.Territory],
+      filterBy[Field.TerritoryScope],
+      filterBy[Field.Modality],
+      filterBy[Field.LanguageScope],
+      filterLabels,
+    ],
+  );
 
   const getSuggestions = useCallback(
     async (query: string) => {
@@ -71,7 +84,13 @@ export default function useSearchSuggestions(): (query: string) => Promise<Sugge
             />
           );
           const searchString = getSearchableField(ent, searchBy);
-          return { entID: ent.ID, searchString, label, group: getMatchGroup(ent) };
+          return {
+            entID: ent.ID,
+            searchString,
+            label,
+            group: getMatchGroup(ent),
+            ent,
+          };
         });
     },
     [pageEntities, searchBy, getMatchDistance, getMatchGroup],

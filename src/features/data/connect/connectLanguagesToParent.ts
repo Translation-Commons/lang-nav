@@ -11,7 +11,8 @@ export function connectLanguagesToParent(languagesBySource: LanguagesBySource): 
         if (parent != null) {
           lang[source].parentLanguage = parent;
           if (parent[source].childLanguages == null) parent[source].childLanguages = [];
-          parent[source].childLanguages.push(lang);
+          if (!parent[source].childLanguages.find((l) => l.ID === lang.ID))
+            parent[source].childLanguages.push(lang);
         }
       }
     });

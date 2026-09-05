@@ -11,9 +11,9 @@ import Highlightable from '@shared/ui/Highlightable';
 import { getLocaleName } from './LocaleStrings';
 
 const LocaleNameWithFilters: React.FC<{ locale: LocaleData }> = ({ locale }) => {
-  const { territoryFilter, searchBy, searchString } = usePageParams();
+  const { territoryFilter, languageFilter, searchBy, searchString } = usePageParams();
 
-  const name = getLocaleName(locale, !territoryFilter);
+  const name = getLocaleName(locale, !territoryFilter, !languageFilter);
 
   const searchPattern = searchBy !== SearchableField.Code ? searchString : '';
 

@@ -146,6 +146,7 @@ export function getParamsFromURL(urlParams: URLSearchParams): Partial<PageParams
 
       // Freeform strings
       case PageParamKey.entID:
+      case PageParamKey.cmpID:
       case PageParamKey.searchString:
       case PageParamKey.languageFilter:
       case PageParamKey.languageFamilyFilter:

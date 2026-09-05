@@ -1,8 +1,9 @@
 import { XIcon } from 'lucide-react';
 import React, { ReactNode, useCallback } from 'react';
 
-import HoverableButton from '@features/layers/hovercard/HoverableButton';
 import ZIndex from '@features/layers/ZIndex';
+
+import { Button } from '@shared/ui/button';
 
 type Props = {
   purpose: 'filters' | 'details'; // filters on left, details on right
@@ -56,21 +57,18 @@ const ResizablePanel: React.FC<React.PropsWithChildren<Props>> = ({
         }}
       >
         <div className="w-full flex justify-center text-center relative pt-3 px-2 text-3xl">
-          <HoverableButton
-            hoverContent="Close"
+          <Button
+            variant="secondary"
+            className="absolute top-0 right-0 size-6"
             onClick={onClose}
             style={{
-              cursor: 'pointer',
-              padding: '0.125em',
-              position: 'absolute',
-              top: '0.25em',
               right: panelSide === 'right' ? '0.25em' : undefined,
               left: panelSide === 'left' ? '0.25em' : undefined,
             }}
             aria-label="Close"
           >
-            <XIcon size=".75em" display="block" />
-          </HoverableButton>
+            <XIcon />
+          </Button>
           {title}
         </div>
         <div

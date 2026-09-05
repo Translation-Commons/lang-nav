@@ -2,12 +2,23 @@ import path from 'node:path';
 
 import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 export default defineConfig({
   base: process.env.VITE_BASE_PATH ?? '/lang-nav/',
-  plugins: [react(), tailwindcss()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          'vendor-react': ['react', 'react-dom', 'react-router-dom'],
+          'vendor-lucide': ['lucide-react'],
+        },
+      },
+    },
+  },
+  plugins: [react(), tailwindcss(), visualizer()],
   resolve: {
     alias: {
       '@app': path.resolve(__dirname, 'src/app'),

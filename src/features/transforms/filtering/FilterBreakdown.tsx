@@ -11,7 +11,7 @@ import Field from '../fields/Field';
 import getFilterBySubstring from '../search/getFilterBySubstring';
 
 import { useFilterByVitality } from './filter';
-import { getFilterLabels } from './FilterLabels';
+import { useFilterLabels } from './FilterLabels';
 import useFilters from './useFilters';
 
 type FilterExplanationProps = {
@@ -27,7 +27,7 @@ const FilterBreakdown: React.FC<FilterExplanationProps> = ({
   const filterBy = useFilters();
   const filterBySubstring = shouldFilterUsingSearchBar ? getFilterBySubstring() : () => true;
   const filterByVitality = useFilterByVitality();
-  const filterLabels = getFilterLabels();
+  const filterLabels = useFilterLabels();
   const filterByPopulation = filterBy.Population;
 
   const [

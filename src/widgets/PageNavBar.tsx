@@ -8,10 +8,13 @@ import { FeedbackForm } from '@features/feedback/FeedbackForm';
 import PopupCard from '@features/layers/popupcard/PopupCard';
 import InternalLink from '@features/params/InternalLink';
 import usePageParams from '@features/params/usePageParams';
-import SearchBar from '@features/transforms/search/SearchBar';
+
+import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspense';
 
 import NavBarToolsMenu from './controls/NavBarToolsMenu';
 import SettingsButton from './controls/SettingsButton';
+
+const SearchCombobox = React.lazy(() => import('@features/transforms/search/SearchCombobox'));
 
 const PageNavBar: React.FC = () => {
   const { pageBrightness } = usePageParams().brightness;
@@ -34,18 +37,25 @@ const PageNavBar: React.FC = () => {
       <NavBarLink path={'/' + LangNavPageName.Data}>Data</NavBarLink>
       <NavBarLink path={'/' + LangNavPageName.About}>About</NavBarLink>
       <NavBarToolsMenu />
-      <PopupCard
-        buttonClassName="primary lg:hidden"
-        buttonLabel={<SearchIcon />}
-        buttonStyle={{ padding: '8px' }}
-        justifyCard="center"
-        body={<SearchBar />}
-      />
-      <div className="flex-1">
-        <div className="hidden lg:flex">
-          <SearchBar />
+      <ContainErrorsAndSuspense>
+        <PopupCard
+          buttonClassName="primary lg:hidden"
+          buttonLabel={<SearchIcon />}
+          buttonStyle={{ padding: '8px' }}
+          body={
+            <SearchCombobox
+              getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}
+            />
+          }
+        />
+        <div className="flex-1">
+          <div className="hidden lg:flex">
+            <SearchCombobox
+              getNewParams={(value) => ({ entID: value.entID, entType: value.ent?.type })}
+            />
+          </div>
         </div>
-      </div>
+      </ContainErrorsAndSuspense>
       <FeedbackForm />
       <SettingsButton />
     </nav>

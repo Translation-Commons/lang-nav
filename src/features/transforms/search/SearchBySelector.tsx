@@ -1,22 +1,22 @@
 import React from 'react';
 
 import { SearchableField } from '@features/params/PageParamTypes';
-import Selector from '@features/params/ui/Selector';
-import { SelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
+
+import EnumDropdown from '@shared/ui/EnumDropdown';
 
 const SearchBySelector: React.FC = () => {
   const { updatePageParams, searchBy } = usePageParams();
 
   return (
-    <Selector
-      selectorLabel="Search by"
-      options={Object.values(SearchableField)}
-      onChange={(searchBy) => updatePageParams({ searchBy })}
-      selected={searchBy}
-      display={SelectorDisplay.Dropdown}
-      selectorStyle={{ marginBottom: '0em' }}
-    />
+    <>
+      <div className="text-right">Search by</div>
+      <EnumDropdown
+        options={Object.values(SearchableField)}
+        value={searchBy}
+        onChange={(value) => updatePageParams({ searchBy: value })}
+      />
+    </>
   );
 };
 

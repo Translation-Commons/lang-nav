@@ -7,7 +7,7 @@ import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 
 import Field from '../../fields/Field';
 import { sortByPopulation } from '../../sorting/sort';
-import { getFilterLabels } from '../FilterLabels';
+import { useFilterLabels } from '../FilterLabels';
 import { getSuggestionsFunction } from '../getSuggestionsFunction';
 import useFilters from '../useFilters';
 
@@ -18,7 +18,7 @@ const LanguageFamilyFilterSelector: React.FC = () => {
   const filterBy = useFilters();
   const filterByTerritory = filterBy[Field.Territory];
   const filterByWritingSystem = filterBy[Field.WritingSystem];
-  const filterLabels = getFilterLabels();
+  const filterLabels = useFilterLabels();
 
   const getSuggestions = useMemo(() => {
     const getMatchDistance = (language: LanguageData): number => {

@@ -1,7 +1,6 @@
-import { InfoIcon } from 'lucide-react';
 import React, { PropsWithChildren, ReactNode } from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
+import ContextIcon from '@shared/ui/ContextIcon';
 
 type Props = PropsWithChildren<{
   title: ReactNode;
@@ -29,11 +28,7 @@ const DetailsField: React.FC<Props> = ({
       <div style={{ minWidth: '200px' }}>
         <div style={{ fontWeight: 600, marginRight: '0.25em', display: 'inline-flex' }}>
           {title}
-          {description && (
-            <Hoverable hoverContent={description}>
-              <InfoIcon size="1em" display="block" aria-label="More information" />
-            </Hoverable>
-          )}
+          {description && <ContextIcon>{description}</ContextIcon>}
           <span style={{ fontWeight: 'normal' }}>:</span>
         </div>
         {children}

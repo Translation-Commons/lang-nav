@@ -61,7 +61,7 @@ export function FeedbackEmailForm() {
         />
       </div>
       <LinkButton href={mailtoUrl} title="Send us an email!">
-        <MailIcon display="block" size="1em" />
+        <MailIcon />
         Open email
       </LinkButton>
     </div>

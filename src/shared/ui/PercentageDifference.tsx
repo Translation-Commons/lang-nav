@@ -56,7 +56,6 @@ export const PercentageDifference: React.FC<{
 
   return (
     <Hoverable
-      style={{ textDecoration: 'none', cursor: 'help' }}
       hoverContent={
         <>
           <label>Old value:</label>
@@ -75,8 +74,9 @@ export const PercentageDifference: React.FC<{
           <br />
         </>
       }
+      style={{ textDecoration: 'none', color, fontSize }}
     >
-      <span style={{ color, fontSize }}>{renderedAmount}</span>
+      {renderedAmount}
     </Hoverable>
   );
 };

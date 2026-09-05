@@ -1,10 +1,10 @@
-import { AlertTriangleIcon, InfoIcon } from 'lucide-react';
 import React from 'react';
 
-import Hoverable from '@features/layers/hovercard/Hoverable';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { EntityData } from '@entities/types/DataTypes';
+
+import ContextIcon from '@shared/ui/ContextIcon';
 
 /** accumulates notes about oddities with CLDR coverage */
 const CLDRWarningNotes: React.FC<{
@@ -62,16 +62,5 @@ const NotesIcon: React.FC<{
       </div>
     );
   }
-  return (
-    <Hoverable hoverContent={formattedNotes} style={{ marginLeft: '0.25em' }}>
-      {warningNotes ? (
-        <AlertTriangleIcon
-          style={{ color: 'var(--color-yellow)', verticalAlign: 'sub' }}
-          size={'1em'}
-        />
-      ) : (
-        <InfoIcon style={{ color: 'var(--color-blue)', verticalAlign: 'sub' }} size={'1em'} />
-      )}
-    </Hoverable>
-  );
+  return <ContextIcon severity={warningNotes ? 'warning' : 'info'}>{formattedNotes}</ContextIcon>;
 };

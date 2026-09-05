@@ -1,42 +1,46 @@
 import { render, screen } from '@testing-library/react';
-import { describe, expect, it, vi } from 'vitest';
+import { beforeEach, describe, expect, it, Mock, vi } from 'vitest';
 
 import { getFullyInstantiatedMockedEntities } from '@features/__tests__/MockEntities';
+import { PageParams } from '@features/params/PageParamTypes';
+import usePageParams from '@features/params/usePageParams';
+
+import { createMockUsePageParams } from '@tests/MockPageParams.test';
 
 import HoverableEntity from '../HoverableEntity';
 import HoverableEntityName from '../HoverableEntityName';
 
 const mockedEnts = getFullyInstantiatedMockedEntities();
 
-const showHoverCard = vi.fn();
-vi.mock('@features/layers/hovercard/useHoverCard', () => ({
-  default: () => ({
-    showHoverCard,
-    hideHoverCard: vi.fn(),
-    onMouseLeaveTriggeringElement: vi.fn(),
-  }),
-}));
-vi.mock('@features/params/usePageParams', () => ({ default: vi.fn().mockReturnValue({}) }));
+vi.mock('@features/params/usePageParams', () => ({ default: vi.fn() }));
 
 describe('HoverableEntity', () => {
+  let updatePageParams: (params: Partial<PageParams>) => void;
+
+  // Helper function to eliminate mock setup duplication
+  const setupMockParams = (overrides: Partial<PageParams> = {}) => {
+    const mockUsePageParams = createMockUsePageParams(overrides);
+    (usePageParams as Mock).mockReturnValue(mockUsePageParams);
+    updatePageParams = mockUsePageParams.updatePageParams;
+  };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    setupMockParams();
+  });
+
   it('an undefined entity will just render the child elements', () => {
     render(<HoverableEntity ent={undefined}>undefined entity</HoverableEntity>);
 
     expect(screen.getByText(/undefined entity/)).toBeInTheDocument();
-    // hovering does not trigger hover card since entity is undefined
-    screen
-      .getByText(/undefined entity/)
-      .dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).not.toHaveBeenCalled();
+    expect(screen.queryByRole('button')).not.toBeInTheDocument();
   });
 
-  it('a defined entity will have a hover interaction', () => {
+  it('opens the selected entity in the details drawer', () => {
     render(<HoverableEntity ent={mockedEnts.sjn}>Sindarin</HoverableEntity>);
 
-    expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
-    // move the cursor over the element to trigger the hover card
-    screen.getByText(/Sindarin/).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).toHaveBeenCalled();
+    screen.getByRole('button', { name: 'Sindarin' }).click();
+    expect(updatePageParams).toHaveBeenCalledWith({ entID: mockedEnts.sjn.ID });
   });
 });
 
@@ -46,12 +50,9 @@ describe('HoverableEntityName', () => {
     expect(screen.queryByText(/./)).not.toBeInTheDocument();
   });
 
-  it('a defined entity will render the entity name with hover interaction', () => {
+  it('a defined entity will render the entity name as a details drawer trigger', () => {
     render(<HoverableEntityName ent={mockedEnts.sjn} />);
-    expect(screen.getByText(/Sindarin/)).toBeInTheDocument();
-    // move the cursor over the element to trigger the hover card
-    screen.getByText(/Sindarin/).dispatchEvent(new MouseEvent('mouseover', { bubbles: true }));
-    expect(showHoverCard).toHaveBeenCalled();
+    expect(screen.getByRole('button', { name: 'Sindarin' })).toBeInTheDocument();
   });
 
   it("instead of showing a name, the entity's code can be shown", () => {
