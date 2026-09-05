@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 
-import ZIndex from '@features/layers/ZIndex';
-
 import { EntityData } from '@entities/types/DataTypes';
 
 import CountOfPeople from '@shared/ui/CountOfPeople';
@@ -23,19 +21,9 @@ type Props<T> = {
 
 function BaseEntityTable<T extends EntityData>({ visibleColumns, ents, tableID }: Props<T>) {
   return (
-    <div style={{ width: '100%', position: 'relative' }}>
-      <table
-        className={'EntityTable Table' + tableID}
-        style={{ textAlign: 'start', borderCollapse: 'collapse', width: 'max-content' }}
-      >
-        <thead
-          style={{
-            position: 'sticky',
-            top: 0,
-            backgroundColor: 'var(--color-background)',
-            zIndex: ZIndex.TableStickyRow,
-          }}
-        >
+    <div className="w-full relative text-xs overflow-x-auto">
+      <table className={'EntityTable Table' + tableID + ' text-left w-max mx-auto'}>
+        <thead className="sticky top-0 bg-background z-10">
           <tr>
             {visibleColumns.map((column) => (
               <TableColumnName column={column} appearance="th" key={column.key} />

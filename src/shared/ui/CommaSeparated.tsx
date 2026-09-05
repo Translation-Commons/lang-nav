@@ -28,7 +28,7 @@ const CommaSeparated: React.FC<CommaSeparatedProps> = ({
       ))}{' '}
       {limit != null && childArray.length > limit && (
         <Button
-          className="size-6 font-normal"
+          className="px-1 py-0 h-5 font-normal"
           onClick={() => setExpanded((prev) => !prev)}
           variant="secondary"
         >

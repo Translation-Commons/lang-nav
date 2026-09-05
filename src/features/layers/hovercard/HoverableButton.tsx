@@ -37,7 +37,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
         disabled={disabled}
         onClick={onClick}
         role={role}
-        style={{ cursor: onClick ? 'pointer' : 'auto', ...style }}
+        style={{ cursor: onClick ? 'pointer' : 'help', ...style }}
         type={buttonType}
       >
         {children}
@@ -55,7 +55,7 @@ const HoverableButton: React.FC<HoverableProps> = ({
           disabled={disabled}
           onClick={onClick}
           role={role}
-          style={{ cursor: onClick ? 'pointer' : 'auto', ...style }}
+          style={{ cursor: onClick ? 'pointer' : 'help', ...style }}
           type={buttonType}
         >
           {children}

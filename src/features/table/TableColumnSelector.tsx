@@ -1,11 +1,11 @@
 import { ArrowUpDownIcon, Columns3Icon } from 'lucide-react';
-import React, { useCallback, useMemo } from 'react';
+import React from 'react';
 
 import usePageParams from '@features/params/usePageParams';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { areArraysIdentical, groupBy } from '@shared/lib/setUtils';
+import { groupBy } from '@shared/lib/setUtils';
 import { Badge } from '@shared/ui/badge';
 import { Button } from '@shared/ui/button';
 import { Checkbox } from '@shared/ui/checkbox';
@@ -68,42 +68,11 @@ function TableColumnSelector<T extends EntityData>({
   const columnsByGroup = groupBy(columns, (column) => column.columnGroup || column.key);
   const nVisible = columns.filter((col) => columnVisibility[col.key]).length;
 
-  const activePreset = useMemo(() => {
-    console.log(
-      Object.entries(columnVisibility)
-        .filter(([, value]) => value)
-        .map(([key]) => key),
-    );
-    const preset = Object.entries(columnPresetsToColumns).find(([, cols]) =>
-      areArraysIdentical(
-        cols,
-        Object.entries(columnVisibility)
-          .filter(([, value]) => value)
-          .map(([key]) => key),
-      ),
-    );
-    return preset ? preset[0] : 'custom';
-  }, [columnVisibility]);
-  const applyPreset = useCallback(
-    (presetId: string | null) => {
-      if (presetId === null) return;
-      const columns = columnPresetsToColumns[presetId];
-      if (columns) visibilityModule.setColumns(columns);
-    },
-    [visibilityModule],
-  );
-  const selectAll = useCallback(() => {
-    visibilityModule.setColumns(columns.map((col) => col.key));
-  }, [columns, visibilityModule]);
-  const deselectAll = useCallback(() => {
-    visibilityModule.setColumns([]);
-  }, [visibilityModule]);
-
   return (
     <Drawer modal={false} swipeDirection="right">
       <DrawerTrigger
         render={
-          <Button variant="outline">
+          <Button variant="default">
             <Columns3Icon />
             Columns
             <Badge variant="secondary">{nVisible}</Badge>
