@@ -23,40 +23,6 @@ import TableColumn from './TableColumn';
 import TableColumnPresets from './TableColumnPresets';
 import { ColumnVisibilityModule } from './useColumnVisibility';
 
-const columnPresetsToColumns: Record<string, string[]> = {
-  Overview: [
-    'ID',
-    'Name',
-    'Endonym',
-    'Speakers (est.)',
-    'Writers (est.)',
-    'ISO Status',
-    'Overall Digital Support',
-    'Countries',
-  ],
-  'Language Codes': [
-    'ID',
-    'Canonical ID',
-    'ISO 639-1',
-    'ISO 639-3/5',
-    'BCP Code',
-    'CLDR Code',
-    'Glottocode',
-    'Name',
-  ],
-  Names: ['ID', 'Name', 'Endonym', 'ISO Name', 'CLDR Name', 'Glottolog Name', 'Other Names'],
-  'Digital Support': [
-    'ID',
-    'Name',
-    'Overall Digital Support',
-    'Keyboards',
-    'Machine Translation',
-    'I18n Frameworks',
-    'Interface Support',
-    'Documentation',
-  ],
-};
-
 function TableColumnSelector<T extends EntityData>({
   columns,
   visibilityModule,

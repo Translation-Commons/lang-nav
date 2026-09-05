@@ -32,7 +32,7 @@ function TableColumnPresets<T extends EntityData>({
       const columns = columnPresets[presetId];
       if (columns) setColumns(columns);
     },
-    [setColumns],
+    [setColumns, columnPresets],
   );
   const selectAll = useCallback(() => {
     setColumns(columns.map((col) => col.key));
