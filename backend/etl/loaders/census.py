@@ -18,6 +18,7 @@ context for a human reader and are excluded from the load entirely.
 
 from __future__ import annotations
 
+import math
 import re
 from collections import Counter
 from pathlib import Path
@@ -124,8 +125,12 @@ def _load_file(ds: Dataset, path: Path, id_prefix: str) -> None:
         )
         return
 
+    # `quantity` is left unset rather than defaulted to 'count'. An unset value
+    # means the file did not say, which the frontend represents as undefined -
+    # _population_estimate treats anything that is not 'percent' as a count, so
+    # the arithmetic does not need a default to be filled in here.
     censuses: list[dict] = [
-        {"id": f"{id_prefix}.{i + 1}", "quantity": "count", "collector_type": "Unknown"}
+        {"id": f"{id_prefix}.{i + 1}", "collector_type": "Unknown"}
         for i in range(len(columns))
     ]
 
@@ -207,9 +212,12 @@ def _assign(ds: Dataset, path: Path, census: dict, key: str, value: str) -> None
     elif key == "quantity":
         low = value.lower()
         if low not in ("count", "percent"):
+            # Left unset rather than coerced to 'count': the column is nullable
+            # and a value that was never valid should not become the one value
+            # that changes how estimates are read.
             ds.warn(None, "census.quantity",
-                    f"{path.name}: invalid quantity {value!r}; used 'count'")
-            low = "count"
+                    f"{path.name}: invalid quantity {value!r}; left NULL")
+            return
         census["quantity"] = low
     elif key in ("datePublished", "dateAccessed"):
         census["date_published" if key == "datePublished" else "date_accessed"] = (
@@ -307,7 +315,7 @@ def _register_censuses(ds: Dataset, path: Path, censuses: list[dict]) -> dict[in
             residence_basis=census.get("residence_basis"),
             languages_included=census.get("languages_included"),
             geographic_scope=census.get("geographic_scope"),
-            quantity=census.get("quantity", "count"),
+            quantity=census.get("quantity"),
             notes=census.get("notes"),
             collector_type=census.get("collector_type", "Unknown"),
             collector_org_id=collector_org if collector_org in known_orgs else None,
@@ -351,12 +359,16 @@ def _parse_language_rows(
 
         # A row may name several codes ('hbs/srp'); the estimate applies to
         # every one of them, which is what the frontend does.
-        codes = [c.strip() for c in _CODE_SPLIT.split(parts[0]) if c.strip()]
-        codes = [c for c in codes if not is_ignored_language_code(c)]
+        all_codes = [c.strip() for c in _CODE_SPLIT.split(parts[0]) if c.strip()]
+        codes = [c for c in all_codes if not is_ignored_language_code(c)]
         if not codes:
             continue
 
         source_name = _clean_language_name(parts[1])
+
+        # Only one code carries the name into the frontend's search index, and
+        # code order is not recoverable from (census_id, language_id) later.
+        name_bearing = _name_bearing_code(all_codes)
 
         for index, column in enumerate(columns):
             if index not in kept:
@@ -378,14 +390,34 @@ def _parse_language_rows(
                     # The same language listed twice in one census accumulates,
                     # matching the frontend's behaviour.
                     existing["population_estimate"] += estimate
+                    # The NAME accumulates too. parseCensusLanguageRow.ts joins
+                    # repeats with ' / ', and a later row may be the first to
+                    # carry a usable name at all: pr2024.tsv lists 'ine/eng'
+                    # named '#English Only' (rejected) before 'ine' named
+                    # 'Indo-European languages'. Keeping only the first row's
+                    # name left ine unnamed on the API path and named on the
+                    # TSV path.
+                    if source_name is not None and code == name_bearing:
+                        if existing["source_name"] is None:
+                            existing["source_name"] = source_name
+                        elif source_name not in existing["source_name"].split(" / "):
+                            existing["source_name"] += f" / {source_name}"
+                        existing["is_name_bearing"] = True
                     continue
+                # source_name is stored ONLY on the code the name belongs to.
+                # zm.tsv lists 'bem/chis1242' named Chishinga before 'bem'
+                # named Bemba; storing Chishinga against bem too would hand the
+                # frontend's search index a name for a language the TSV path
+                # never gives it.
+                names_this_code = code == name_bearing
                 ds["census_language_estimate"].upsert(
                     census_id=kept[index],
                     language_id=code,
                     population_estimate=estimate,
                     raw_value=raw.strip(),
                     is_suppressed=suppressed,
-                    source_name=source_name,
+                    source_name=source_name if names_this_code else None,
+                    is_name_bearing=names_this_code,
                 )
 
     if unknown:
@@ -421,11 +453,32 @@ def _population_estimate(raw: str, census: dict) -> tuple[int | None, bool]:
         base = census.get("population")
         if not base:
             return None, False
-        value = round(value / 100.0 * base)
+        # math.floor(x + 0.5), not round(): Python's round() is BANKER'S
+        # rounding, which breaks ties toward the even number, while the
+        # frontend's Math.round() breaks them upward. 10% of 79,705 is exactly
+        # 7970.5, and the two produced 7970 and 7971 for the same census.
+        value = math.floor(value / 100.0 * base + 0.5)
 
     if not numeric or value <= 0:
         return 1, True
     return int(value), False
+
+
+def _name_bearing_code(all_codes: list[str]) -> str | None:
+    """Which of a row's codes carries the census's own language name.
+
+    Mirrors parseCensusLanguageRow.ts, which takes codes[codes.length - 1]
+    ("usually the most specific") from the UNFILTERED list and only then tests
+    isIgnoredLanguageCode. So a row ending in an ignored code ('pil/mis',
+    'eng/mul') contributes no name at all, rather than falling back to the
+    preceding code - 19 rows differ between those two readings.
+
+    The estimate, unlike the name, applies to every code in the row.
+    """
+    if not all_codes:
+        return None
+    last = all_codes[-1]
+    return None if is_ignored_language_code(last) else last
 
 
 def _clean_language_name(name: str) -> str | None:

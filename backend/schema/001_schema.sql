@@ -767,7 +767,11 @@ CREATE TABLE census (
   population_source                  text,
   population_surveyed                bigint,
   population_with_positive_responses bigint,
-  sample_rate                        numeric(6,4),
+  -- 12 decimal places, not 4: the source files carry rates like
+  -- '0.02061584481' (11 decimals), and numeric(6,4) silently rounded that to
+  -- 0.0206. The frontend does not round, so the two paths disagreed on the
+  -- value shown. Two spare digits so the next longer rate does not repeat this.
+  sample_rate                        numeric(14,12),
   sample_rate_note                   text,  -- CensusData.sampleRate is `number | string`;
                                             -- non-numeric values land here rather than being lost
   responses_per_individual text,   -- '1' | '1+' | '2+'
@@ -779,8 +783,13 @@ CREATE TABLE census (
   -- Scope
   languages_included text,   -- 'All' | 'Indigenous' | 'Official'
   geographic_scope   text,
-  quantity           text NOT NULL DEFAULT 'count'
-                       CHECK (quantity IN ('count', 'percent')),
+  -- NULL means the source file did not say, which is NOT the same as saying
+  -- 'count'. 257 census columns carry an empty '#quantity' line and 88 declare
+  -- 'count' explicitly; parseCensusMetadata.ts skips empty metadata values, so
+  -- the frontend leaves the first group undefined. A NOT NULL DEFAULT 'count'
+  -- here collapsed the two groups and made a detail-page field appear on 257
+  -- censuses that do not show it when loaded from the TSVs.
+  quantity           text CHECK (quantity IN ('count', 'percent')),
   notes              text,
 
   -- Who produced it
@@ -1065,6 +1074,14 @@ CREATE TABLE census_language_estimate (
   is_suppressed boolean NOT NULL DEFAULT false,
 
   source_name text,   -- the language name the census itself used
+
+  -- A source row may name several codes ('ful/fue'), and the estimate applies
+  -- to every one of them. The NAME does not: parseCensusLanguageRow.ts assigns
+  -- it to the LAST code only, and the frontend feeds those names into search.
+  -- Code order is not otherwise recoverable here - in 494 of 846 multi-code
+  -- rows the last code is not the alphabetically last - so without this flag
+  -- the API path would name ~1,128 languages the file path never names.
+  is_name_bearing boolean NOT NULL DEFAULT false,
 
   PRIMARY KEY (census_id, language_id)
 );

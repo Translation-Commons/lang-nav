@@ -9,6 +9,7 @@ from etl.loaders.census import (
     _census_paths,
     _clean_language_name,
     _data_columns,
+    _name_bearing_code,
     _population_estimate,
     _assign_id_prefixes,
 )
@@ -128,6 +129,46 @@ def test_blank_cell_yields_nothing():
 
 def test_percent_without_a_population_base_is_dropped():
     assert _population_estimate("12.5", {"quantity": "percent"}) == (None, False)
+
+
+def test_percent_ties_round_up_like_the_frontend():
+    """Python's round() is banker's rounding; Math.round() is not.
+
+    10% of 79,705 is exactly 7970.5. round() breaks the tie toward the even
+    number and gives 7970; the frontend gives 7971. Andorra's census hit this.
+    """
+    census = {"quantity": "percent", "population": 79705}
+    assert _population_estimate("10", census) == (7971, False)
+    # 0.5 exactly, from a different base, to pin the rule rather than the case.
+    assert _population_estimate("50", {"quantity": "percent", "population": 3}) == (2, False)
+
+
+# --- which code carries the census's own language name ---------------------
+
+
+def test_name_bearing_code_is_the_last_one():
+    """The estimate goes to every code in a row; the name goes to the last.
+
+    parseCensusLanguageRow.ts calls it "usually the most specific". In 494 of
+    846 multi-code rows the last code is NOT the alphabetically last, so
+    without this flag the API path cannot reproduce the choice.
+    """
+    assert _name_bearing_code(["ful", "fue"]) == "fue"
+    assert _name_bearing_code(["hbs", "srp"]) == "srp"
+    assert _name_bearing_code(["zho", "cmn"]) == "cmn"
+    assert _name_bearing_code(["eng"]) == "eng"
+
+
+def test_row_ending_in_an_ignored_code_names_nothing():
+    """The frontend reads codes[length - 1] BEFORE filtering ignored codes.
+
+    So 'pil/mis' records no name at all rather than falling back to 'pil'.
+    Filtering first would name the preceding code, which differs on 19 rows.
+    """
+    assert _name_bearing_code(["pil", "mis"]) is None
+    assert _name_bearing_code(["eng", "mul"]) is None
+    assert _name_bearing_code(["kon", "kng", "mis"]) is None
+    assert _name_bearing_code([]) is None
 
 
 def test_clean_language_name_strips_row_numbers_and_fixes_caps():

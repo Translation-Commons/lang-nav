@@ -441,7 +441,7 @@ TABLE_SPECS: tuple[TableSpec, ...] = (
     TableSpec(
         "census_language_estimate",
         ("census_id", "language_id", "population_estimate", "raw_value",
-         "is_suppressed", "source_name"),
+         "is_suppressed", "source_name", "is_name_bearing"),
         ("census_id", "language_id"),
         (("census_id", "census", False), ("language_id", "language", False)),
     ),

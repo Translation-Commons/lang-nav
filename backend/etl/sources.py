@@ -79,7 +79,16 @@ def to_bool(value: str | None) -> bool | None:
     return None
 
 
-_DATE_FORMATS = ("%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%Y/%m/%d", "%m/%d/%y", "%Y")
+_DATE_FORMATS = (
+    "%Y-%m-%d", "%d/%m/%Y", "%m/%d/%Y", "%Y/%m/%d", "%m/%d/%y", "%Y",
+    # Partial dates. The census files use both, and dropping them silently cost
+    # 30 publication dates: `new Date()` in the frontend accepts each one and
+    # resolves it to the first of the period, so a value the TSV path shows was
+    # arriving NULL from the database.
+    "%Y-%m",       # '2016-06'
+    "%B %Y",       # 'October 2015'
+    "%b %Y",       # 'Oct 2015'
+)
 
 
 def to_date(value: str | None) -> date | None:

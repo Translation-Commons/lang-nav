@@ -156,6 +156,26 @@ export function parseCensusMetadata(lines: string[], filePath: string): CensusMe
   };
 }
 
+/**
+ * Parses a census date as UTC, whatever shape the file uses.
+ *
+ * `new Date('October 2015')` is parsed as LOCAL time and then read back in UTC,
+ * which lands on 2015-09-30 in any timezone behind UTC - a published date in
+ * the wrong month. Four files use a month-name date and were affected. ISO
+ * shapes ('2015-10-01', '2015-10') are already parsed as UTC by the spec, so
+ * they were always right and stay unchanged here.
+ */
+export function parseCensusDate(value: string): Date {
+  const monthName = value.trim().match(/^([A-Za-z]+)\s+(\d{4})$/);
+  if (monthName != null) {
+    const month = new Date(`${monthName[1]} 1, 2000`).getMonth();
+    if (!Number.isNaN(month)) {
+      return new Date(Date.UTC(Number(monthName[2]), month, 1));
+    }
+  }
+  return new Date(value);
+}
+
 function getColumnIndicesWithData(lines: string[]): number[] {
   return lines[0]
     .split('\t')
@@ -181,7 +201,7 @@ function parseValueByKey(
     // Dates
     case CensusMetadataField.datePublished:
     case CensusMetadataField.dateAccessed:
-      census[key] = new Date(value);
+      census[key] = parseCensusDate(value);
       break;
 
     // Numbers

@@ -171,6 +171,37 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           "SELECT count(*) FROM census", lambda v: v > 0)
     check("census_language_estimate rows",
           "SELECT count(*) FROM census_language_estimate", lambda v: v > 0)
+    # The name a census used goes to ONE code per source row, not to every code
+    # the row lists - see _name_bearing_code(). A multi-code row's other codes
+    # get the estimate and no name, so a strict majority of estimates carry a
+    # name and the rest carry none. If this reaches 1.0 the flag has stopped
+    # discriminating and the API path would feed search names to languages the
+    # TSV path never names.
+    check("census estimates carrying a name (expect a strict subset)",
+          """SELECT count(*) FILTER (WHERE source_name IS NOT NULL)::float
+                     / NULLIF(count(*), 0)
+               FROM census_language_estimate""",
+          lambda v: v is not None and 0.5 < v < 1.0)
+    check("census estimates with a name but not flagged (expect 0)",
+          """SELECT count(*) FROM census_language_estimate
+              WHERE source_name IS NOT NULL AND NOT is_name_bearing""",
+          lambda v: v == 0)
+    # A multi-code row names its LAST code. 'ful/fue' in axl.bj.tsv must name
+    # fue, which is also the case where alphabetical order gives the wrong
+    # answer - it would pick ful.
+    check("axl.bj.1 'ful/fue' names fue, the LAST code (expect 1)",
+          """SELECT count(*) FROM census_language_estimate
+              WHERE census_id = 'axl.bj.1' AND language_id = 'fue'
+                AND is_name_bearing""",
+          lambda v: v == 1)
+    # The same row, and the case alphabetical order gets wrong: 'ful' sorts
+    # after 'fue', so any implementation picking the alphabetically last code
+    # would name ful here instead.
+    check("axl.bj.1 'ful/fue' does NOT name ful (expect 0)",
+          """SELECT count(*) FROM census_language_estimate
+              WHERE census_id = 'axl.bj.1' AND language_id = 'ful'
+                AND is_name_bearing""",
+          lambda v: v == 0)
     check("orphaned entity ids (expect 0)",
           """SELECT count(*) FROM entity e
               WHERE NOT EXISTS (SELECT 1 FROM language     WHERE id = e.id)

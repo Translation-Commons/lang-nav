@@ -3,6 +3,9 @@ import { parseCensusLanguageRow } from '@entities/census/parseCensusLanguageRow'
 import { parseCensusMetadata } from '@entities/census/parseCensusMetadata';
 import { LanguageCode } from '@entities/language/LanguageTypes';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadCensusFromApi } from '../api/loadCensusFromApi';
+
 export async function getCensusFilepaths(directory: string): Promise<string[]> {
   // Load census filenames from the text file
   return await fetch(`${directory}/censusList.txt`)
@@ -13,6 +16,19 @@ export async function getCensusFilepaths(directory: string): Promise<string[]> {
 }
 
 export async function loadCensusData(): Promise<(CensusImport | void)[]> {
+  // With VITE_API_URL set, ONE request replaces the four censusList.txt
+  // manifests and the 169 files they name - the largest reduction in the
+  // migration. The API returns a single CensusImport rather than one per file,
+  // which is invisible to the caller: SupplementalData already loops over the
+  // array and addCensusData's effects accumulate across the calls.
+  //
+  // parseCensusImport below is deliberately NOT deleted along with the fetches.
+  // ReportCensusInputTool parses user-pasted TSV with it, which is not a
+  // network path and has to keep working whichever way the app is configured.
+  if (isApiEnabled()) {
+    return await loadCensusFromApi();
+  }
+
   // Load census filenames from the text file
   const FILEPATHS = await Promise.all([
     getCensusFilepaths('data/census/official'),
