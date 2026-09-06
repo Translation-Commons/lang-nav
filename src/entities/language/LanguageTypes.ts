@@ -113,6 +113,7 @@ export interface LanguageData extends EntityBase {
   wikipedias?: WikipediaData[];
   udhr?: UniversalDeclarationOfHumanRightsData[];
   googleTranslate?: PlatformSupportData[];
+  android?: PlatformSupportData[];
   win11LanguagePacks?: PlatformSupportData[];
   ios?: PlatformSupportData[];
   macos?: PlatformSupportData[];
