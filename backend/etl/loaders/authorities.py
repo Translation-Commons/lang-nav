@@ -50,6 +50,16 @@ def load(ds: Dataset, root: Path) -> None:
     _iso_639_3(ds, root / "iso" / "iso-639-3.tab")
     _families_639_5(ds, root / "iso" / "families639-5.tsv")
     _families_to_languages(ds, root / "tc" / "familiesToLanguages.tsv")
+    # HERE, and not at the end of the pipeline. languages.tsv's Combined
+    # parents name families that the two calls above have just created, so they
+    # could not be applied when languages.load() ran. They must still be
+    # applied BEFORE Glottolog and the manual overrides, both of which
+    # legitimately overwrite them - running this last instead made 296
+    # previously-silent overwrites collide in the opposite order and report as
+    # conflicts.
+    from . import languages as _languages
+
+    _languages.apply_parents(ds)
     _macrolanguages(ds, root / "iso" / "macrolanguages.tsv")
     _glottolog(ds, root / "glottolog" / "glottolog.tsv")
     _glottocode_to_iso(ds, root / "tc" / "glottocodeToISO.tsv")
@@ -457,6 +467,26 @@ def _combined_overrides(ds: Dataset, path: Path) -> None:
                 "language_source_attribute.parent_language_id",
                 f"{row.origin()}: override {parent!r} -> {child!r} references "
                 f"an unknown language; skipped",
+            )
+            continue
+        # The parent must also EXIST IN THE COMBINED TREE, not merely be a
+        # language. Four overrides name Glottolog-only family nodes -
+        # lahn1241 Greater Panjabic, arak1255 Arakanese-Marma, newa1247 Newar,
+        # chep1244 Chepangic - which have a Glottolog row and no Combined one.
+        # Writing the edge anyway left the child pointing at a node absent from
+        # its own tree: depth stayed 0 while parent_language_id was set, which
+        # is the invariant `D10 depth 0 disagreeing with having no parent`
+        # asserts.
+        #
+        # The frontend already refuses these. setCombinedParent() requires both
+        # child.Combined and parent.Combined and returns early otherwise, so
+        # skipping here is what makes the two paths agree.
+        if (parent, SOURCE_COMBINED) not in ds["language_source_attribute"].rows:
+            ds.warn(
+                child,
+                "language_source_attribute.parent_language_id",
+                f"{row.origin()}: override parent {parent!r} of {child!r} has "
+                f"no Combined row of its own; skipped, matching the frontend",
             )
             continue
         ds["language_source_attribute"].upsert(

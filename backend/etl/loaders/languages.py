@@ -128,34 +128,83 @@ def load(ds: Dataset, root: Path) -> None:
             if parent and len(parent) <= 3:
                 short_code_parents.append((lid, parent))
 
-    # Parents are applied after every language id is known, so a parent that
-    # does not exist is reported here rather than silently surviving to become
-    # a foreign-key failure with no file context.
-    known = ds["language"].ids()
-    for lid, parent in combined_parents:
-        if parent not in known:
-            ds.warn(
-                lid,
-                "language_source_attribute.parent_language_id",
-                f"{path.name}: Combined parent {parent!r} of {lid!r} is not a "
-                f"known language; left NULL",
-            )
-            continue
-        if parent == lid:
-            continue  # lsa_not_own_parent
-        ds["language_source_attribute"].upsert(
-            language_id=lid, source=SOURCE_COMBINED, parent_language_id=parent
-        )
-
     # ISO, BCP and UNESCO share this parent. It is the BASE, not a fallback:
     # the family file fills only what is still empty afterwards (??= in the
     # frontend), and the macrolanguage file cross-checks rather than assigns.
+    #
+    # These stay HERE rather than being deferred with the Combined ones. The
+    # macrolanguage step in the authorities loader fills any ISO parent that is
+    # still NULL when it runs, so deferring these past it would hand it 278
+    # empty rows to fill and change which file wins - a behaviour change well
+    # beyond the ordering bug being fixed.
+    known = ds["language"].ids()
     for lid, parent in short_code_parents:
         if parent not in known or parent == lid:
             continue
         for source in (SOURCE_ISO, SOURCE_BCP, SOURCE_UNESCO):
             ds["language_source_attribute"].upsert(
                 language_id=lid, source=source, parent_language_id=parent
+            )
+
+    # The COMBINED parents are deferred. See apply_parents().
+    _PENDING_PARENTS.append((path.name, combined_parents))
+
+
+# Parent links parsed out of languages.tsv, held until every loader has run.
+#
+# THEY CANNOT BE APPLIED INSIDE load(). A parent is validated against
+# ds["language"].ids(), and this loader runs THIRD - families639-5.tsv and
+# glottolog.tsv are read by the authorities loader, which runs FOURTH. So a
+# parent that is a language family was checked before it existed and dropped.
+#
+# That cost nine languages their parent, silently, including `pan` (Punjabi,
+# 176.6M speakers), whose parent `inc` is a 639-5 family. Punjabi became a ROOT
+# of the Combined tree rather than a descendant of Indo-European, which moved
+# every figure that ranks or sums `ine`'s descendants: D9 reported Bhojpuri at
+# 61.2M as Indo-European's largest descendant instead of Punjabi at 176.6M.
+#
+# The list is module-level rather than passed through, because LOADERS is a
+# tuple of (label, callable) pairs with no shared state, and threading a
+# context object through every loader to fix one ordering bug is a larger
+# change than the bug warrants.
+_PENDING_PARENTS: list[tuple[str, list[tuple[str, str]]]] = []
+
+
+def apply_parents(ds: Dataset) -> None:
+    """Apply languages.tsv's COMBINED parent links, after every language exists.
+
+    Called from the authorities loader, immediately after the two family files
+    are read and BEFORE Glottolog and the manual overrides - those two
+    legitimately overwrite these parents, and running this after them instead
+    reverses that precedence and turns 296 silent overwrites into conflicts.
+
+    A parent still unknown here is genuinely absent from every source file,
+    which is worth a warning; before this was deferred the same warning also
+    fired for families that simply had not been loaded yet.
+
+    Only the Combined source is deferred. The ISO/BCP/UNESCO parents are still
+    written inside load(), because the macrolanguage cross-check fills any ISO
+    parent that is NULL when it runs and moving them past it would change which
+    file wins for 278 languages.
+    """
+    known = ds["language"].ids()
+
+    while _PENDING_PARENTS:
+        filename, combined_parents = _PENDING_PARENTS.pop(0)
+
+        for lid, parent in combined_parents:
+            if parent not in known:
+                ds.warn(
+                    lid,
+                    "language_source_attribute.parent_language_id",
+                    f"{filename}: Combined parent {parent!r} of {lid!r} is not "
+                    f"a known language; left NULL",
+                )
+                continue
+            if parent == lid:
+                continue  # lsa_not_own_parent
+            ds["language_source_attribute"].upsert(
+                language_id=lid, source=SOURCE_COMBINED, parent_language_id=parent
             )
 
 
