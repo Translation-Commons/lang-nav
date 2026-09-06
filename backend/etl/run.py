@@ -134,6 +134,33 @@ def _preflight_not_null(conn: psycopg.Connection, ds: Dataset) -> None:
         )
 
 
+def _census_columns_in_source() -> int:
+    """How many censuses the census files describe.
+
+    One file is many censuses - each data column is a separate survey - so this
+    counts COLUMNS across every manifest-listed file, not files. It reuses the
+    loader's own `_census_paths` and `_data_columns` rather than reimplementing
+    them, so the '#'-prefixed context columns are excluded by exactly the same
+    rule that excludes them at load time and the two cannot drift apart.
+
+    Returns -1 if the source files are not reachable, which makes the check
+    report rather than crash when `--verify` runs against a database whose
+    source tree is not on this machine.
+    """
+    try:
+        from .loaders.census import _census_paths, _data_columns
+
+        total = 0
+        for path in _census_paths(data_root() / "census"):
+            lines = path.read_text(encoding="utf-8-sig").split("\n")
+            if not lines or not lines[0].strip():
+                continue
+            total += len(_data_columns(lines[0]))
+        return total
+    except (OSError, ConfigError):
+        return -1
+
+
 def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     """The post-install golden-value checks. Read-only.
 
@@ -167,8 +194,27 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           "SELECT count(*) FROM language_ancestry", lambda v: 0 < v < 5_000_000)
     check("territory_stats (expect 289)",
           "SELECT count(*) FROM territory_stats", lambda v: v == 289)
-    check("census rows",
-          "SELECT count(*) FROM census", lambda v: v > 0)
+    # Counted from the source files rather than pinned to a literal, so adding
+    # a census file does not turn this red the way the hardcoded counts above
+    # have gone stale.
+    #
+    # THIS CHECK EXISTS BECAUSE A STALE DATABASE IS INVISIBLE. The census table
+    # held 602 rows against 607 in the files for a while, because the schema
+    # and loader had changed and nobody had reloaded. Nothing failed: the API
+    # answered every request, the parity test passed (it compares the censuses
+    # that exist on both sides), and the shortfall showed only as "200 of 864"
+    # in the browser against 859 from the API. A row count is the one thing
+    # that catches a load which never ran.
+    expected_censuses = _census_columns_in_source()
+    if expected_censuses < 0:
+        # Source files not reachable from here. Fall back to the weaker check
+        # rather than failing, so --verify still works against a remote
+        # database, and say which one ran.
+        check("census rows (source files unreachable, count not verified)",
+              "SELECT count(*) FROM census", lambda v: v > 0)
+    else:
+        check(f"census rows match the source files (expect {expected_censuses})",
+              "SELECT count(*) FROM census", lambda v: v == expected_censuses)
     check("census_language_estimate rows",
           "SELECT count(*) FROM census_language_estimate", lambda v: v > 0)
     # The name a census used goes to ONE code per source row, not to every code

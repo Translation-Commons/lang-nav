@@ -146,6 +146,20 @@ def test_percent_ties_round_up_like_the_frontend():
 # --- which code carries the census's own language name ---------------------
 
 
+def test_census_columns_in_source_counts_columns_not_files():
+    """The golden check's expected census count comes from the files.
+
+    One file is many censuses, so this must count data COLUMNS across every
+    manifest-listed file. A literal would go stale the moment a census file is
+    added, which is the failure mode this check exists to catch.
+    """
+    from etl.run import _census_columns_in_source
+
+    total = _census_columns_in_source()
+    # Either the real count, or -1 when the source tree is not reachable.
+    assert total == -1 or total > 500
+
+
 def test_name_bearing_code_is_the_last_one():
     """The estimate goes to every code in a row; the name goes to the last.
 
