@@ -1,7 +1,7 @@
 import React from 'react';
 
 import DrawerActionButton from '@widgets/details/ui/DrawerActionButton';
-import { DrawerDetailsField } from '@widgets/details/ui/DrawerDetailsSection';
+import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType, View } from '@features/params/PageParamTypes';

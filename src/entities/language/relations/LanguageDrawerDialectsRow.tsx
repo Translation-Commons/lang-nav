@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
 import DrawerActionButton from '@widgets/details/ui/DrawerActionButton';
-import { DrawerDetailsField } from '@widgets/details/ui/DrawerDetailsSection';
+import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 import { getEntityFullDescendants } from '@widgets/pathnav/getParentsAndDescendants';
 
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { DrawerDetailsField } from '@widgets/details/ui/DrawerDetailsSection';
+import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 
 import { numberToSigFigs } from '@shared/lib/numberUtils';
 

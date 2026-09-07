@@ -1,6 +1,7 @@
 import React from 'react';
 
-import { DrawerDetailsField, DrawerDetailsSection } from '@widgets/details/ui/DrawerDetailsSection';
+import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
+import DrawerDetailsSection from '@widgets/details/ui/DrawerDetailsSection';
 
 import { EntityCLDRCoverageLevel } from '@entities/ui/CLDRCoverageInfo';
 import CLDRWarningNotes from '@entities/ui/CLDRWarningNotes';
