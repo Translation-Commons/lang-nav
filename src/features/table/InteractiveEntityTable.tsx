@@ -45,12 +45,12 @@ function InteractiveEntityTable<T extends EntityData>({
   const visibilityModule = useColumnVisibility(columns, tableID);
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '1em', alignItems: 'center' }}>
-      <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+    <div className="flex flex-col gap-4 items-center">
+      <div className="flex items-center gap-2">
         <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
         <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
+        <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
       </div>
-      <TableColumnSelector columns={columns} visibilityModule={visibilityModule} />
 
       {/* The actual <table> component */}
       <BaseEntityTable
@@ -68,7 +68,7 @@ function InteractiveEntityTable<T extends EntityData>({
 
       {/* Repeat the visible item meter and export button at the bottom for convenience. */}
       {currentEntities.length > 10 && (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+        <div className="flex items-center gap-2">
           <VisibleItemsMeter ents={ents} shouldFilterUsingSearchBar={shouldFilterUsingSearchBar} />
           <TableExport visibleColumns={visibilityModule.visibleColumns} ents={filteredEntities} />
         </div>

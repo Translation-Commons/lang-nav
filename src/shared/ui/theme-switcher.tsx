@@ -1,4 +1,4 @@
-import { Monitor, Moon, Sun } from 'lucide-react';
+import { MonitorIcon, MoonIcon, SunIcon } from 'lucide-react';
 import { useCallback } from 'react';
 
 import { useControllableState } from '@shared/hooks/useControllableState';
@@ -9,17 +9,17 @@ export type Theme = 'light' | 'dark' | 'system';
 const themes = [
   {
     key: 'system',
-    icon: Monitor,
+    icon: MonitorIcon,
     label: 'System theme',
   },
   {
     key: 'light',
-    icon: Sun,
+    icon: SunIcon,
     label: 'Light theme',
   },
   {
     key: 'dark',
-    icon: Moon,
+    icon: MoonIcon,
     label: 'Dark theme',
   },
 ] as const;

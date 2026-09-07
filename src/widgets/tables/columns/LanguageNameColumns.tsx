@@ -51,7 +51,7 @@ const LanguageNameColumns: TableColumn<LanguageData>[] = [
   },
   {
     key: 'Other Names',
-    render: (lang) => <LanguageOtherNames lang={lang} />,
+    render: (lang) => <LanguageOtherNames lang={lang} size="narrow" />,
   },
 ];
 
