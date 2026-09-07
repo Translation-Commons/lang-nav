@@ -8,9 +8,18 @@ import {
   PopulationSourceCategory,
 } from '@entities/locale/LocaleTypes';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadLocalesFromApi } from '../api/loadLocalesFromApi';
+
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadLocales(): Promise<Record<string, LocaleData> | void> {
+  // The file path is kept, not replaced. With VITE_API_URL unset - the default,
+  // and how anyone without a database runs the app - this is unchanged, and it
+  // is also the side the parity test compares against.
+  if (isApiEnabled()) {
+    return await loadLocalesFromApi();
+  }
   return await loadEntitiesFromFile<LocaleData>('data/tc/locales.tsv', parseLocaleLine);
 }
 
