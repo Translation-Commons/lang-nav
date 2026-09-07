@@ -6,18 +6,28 @@ import { DrawerDetailsField } from '@widgets/details/ui/DrawerDetailsSection';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { EntityType, View } from '@features/params/PageParamTypes';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-
+import { sortBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;
 };
 
 const LanguageDrawerWritingSystemsRow: React.FC<Props> = ({ lang }) => {
-  const writingSystems = Object.values(lang.writingSystems);
+  const writingSystems = sortBy(Object.values(lang.writingSystems), (l) =>
+    l.ID === lang.primaryWritingSystem?.ID ? 1 : 0,
+  );
 
   if (writingSystems.length === 0) return null;
+
+  if (writingSystems.length === 1)
+    return (
+      <DrawerDetailsField label="Writing Systems">
+        <HoverableEntityName ent={writingSystems[0]} />
+      </DrawerDetailsField>
+    );
 
   return (
     <DrawerDetailsField

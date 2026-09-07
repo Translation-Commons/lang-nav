@@ -10,7 +10,7 @@ import { countBy, uniqueBy } from '@shared/lib/setUtils';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from './LanguageTypes';
+import { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

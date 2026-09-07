@@ -6,6 +6,7 @@ import { DrawerDetailsField } from '@widgets/details/ui/DrawerDetailsSection';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
+import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
 
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
@@ -78,8 +79,13 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
       }
       expandedContent={
         showableLocales.length > 0 && (
-          <LocalParamsProvider overrides={{ populationFocus }}>
-            <LocaleTable showableLocales={showableLocales} speakingOrWriting={speakingOrWriting} />
+          <LocalParamsProvider
+            overrides={{ populationFocus, sortBy: getFieldForPopulationFocus(populationFocus) }}
+          >
+            <SimpleLocaleTable
+              showableLocales={showableLocales}
+              speakingOrWriting={speakingOrWriting}
+            />
           </LocalParamsProvider>
         )
       }
@@ -89,7 +95,7 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
   );
 };
 
-const LocaleTable: React.FC<{
+const SimpleLocaleTable: React.FC<{
   showableLocales: LocaleData[];
   speakingOrWriting: 'speaking' | 'writing';
 }> = ({ showableLocales, speakingOrWriting }) => {

@@ -8,10 +8,11 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { LanguageData, LanguageScope } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;

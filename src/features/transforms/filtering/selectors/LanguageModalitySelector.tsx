@@ -4,7 +4,7 @@ import Selector from '@features/params/ui/Selector';
 import { useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import { getLanguageModalityDescription, getModalityLabel } from '@strings/LanguageModalityStrings';
 

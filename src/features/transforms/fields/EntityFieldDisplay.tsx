@@ -2,10 +2,10 @@ import React from 'react';
 
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { LanguageModality } from '@entities/language/LanguageModality';
-import LanguageModalityIcon from '@entities/language/LanguageModalityIcon';
 import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
 import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
+import LanguageModalityIcon from '@entities/language/writing/LanguageModalityIcon';
 import LocaleFormedHereDisplay from '@entities/locale/localstatus/LocaleFormedHereDisplay';
 import LocaleHistoricPresenceDisplay from '@entities/locale/localstatus/LocaleHistoricPresenceDisplay';
 import LocaleIndigeneityDisplay from '@entities/locale/localstatus/LocaleIndigeneityDisplay';

@@ -22,8 +22,8 @@ import {
   UniversalDeclarationOfHumanRightsData,
   WikipediaData,
 } from './digitalsupport/DigitalSupportTypes';
-import { LanguageModality } from './LanguageModality';
 import { LanguageISOStatus } from './vitality/VitalityTypes';
+import { LanguageModality } from './writing/LanguageModality';
 
 export type LanguageDictionary = Record<LanguageCode, LanguageData>;
 export type LanguagesBySource = Record<LanguageSource, LanguageDictionary>;

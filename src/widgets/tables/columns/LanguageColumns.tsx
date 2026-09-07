@@ -11,14 +11,14 @@ import Field from '@features/transforms/fields/Field';
 import { getVariantsForEntity } from '@features/transforms/fields/getEntityConnection';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
+import LanguageRetirementReason from '@entities/language/identity/LanguageRetirementReason';
+import { LanguageData } from '@entities/language/LanguageTypes';
 import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
-} from '@entities/language/LanguageFamilyUtils';
-import { LanguageModality } from '@entities/language/LanguageModality';
-import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
-import { LanguageData } from '@entities/language/LanguageTypes';
-import LanguageWritingSystems from '@entities/language/LanguageWritingSystems';
+} from '@entities/language/relations/LanguageFamilyUtils';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
+import LanguageWritingSystems from '@entities/language/writing/LanguageWritingSystems';
 import { getEntityLiteracy } from '@entities/lib/getEntityMiscFields';
 import { getCountriesInEntity } from '@entities/lib/getEntityRelatedTerritories';
 import EntityDepthDisplay from '@entities/ui/EntityDepthDisplay';

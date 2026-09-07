@@ -6,7 +6,7 @@ import { Badge } from '@shared/ui/badge';
 
 import { getLanguageScopeDescription, getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
-import { LanguageData, LanguageScope, LanguageSource } from './LanguageTypes';
+import { LanguageData, LanguageScope, LanguageSource } from '../LanguageTypes';
 
 const LanguageScopeDisplay: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const scopesBySource = getScopeBySource(lang);

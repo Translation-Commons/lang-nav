@@ -6,9 +6,9 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import { useDataContext } from '@features/data/context/useDataContext';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-
 import CommaSeparated from '@shared/ui/CommaSeparated';
+
+import { LanguageData } from '../LanguageTypes';
 
 const LanguageDetailsConnections: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { getCLDRLanguage } = useDataContext();

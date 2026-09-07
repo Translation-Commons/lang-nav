@@ -5,7 +5,6 @@ import usePageParams from '@features/params/usePageParams';
 import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 import EntitySubtitle from '@entities/ui/EntitySubtitle';
@@ -17,8 +16,9 @@ import { uniqueBy } from '@shared/lib/setUtils';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
 import LanguageDigitalSupportMetascore from './digitalsupport/LanguageDigitalSupportMetascore';
-import LanguageTerritoryList from './LanguageTerritoryList';
+import { LanguageData } from './LanguageTypes';
 import { LanguagePopulationEstimate } from './population/LanguagePopulationEstimate';
+import LanguageTerritoryList from './relations/LanguageTerritoryList';
 
 interface Props {
   lang: LanguageData;

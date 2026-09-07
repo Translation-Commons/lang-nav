@@ -5,8 +5,8 @@ import territoryInfo from 'cldr-core/supplemental/territoryInfo.json';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { CensusCollectorType, CensusData } from '@entities/census/CensusTypes';
+import { setLanguageNames } from '@entities/language/identity/setLanguageNames';
 import { LanguageData, LanguagesBySource, LanguageScope } from '@entities/language/LanguageTypes';
-import { setLanguageNames } from '@entities/language/setLanguageNames';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { CLDRCoverageImport, CLDRCoverageLevel } from '@entities/types/CLDRTypes';
 

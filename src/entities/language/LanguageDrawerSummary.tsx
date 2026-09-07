@@ -2,7 +2,6 @@ import React from 'react';
 
 import { DrawerDetailsField, DrawerDetailsSection } from '@widgets/details/ui/DrawerDetailsSection';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
@@ -10,9 +9,10 @@ import CommaSeparated from '@shared/ui/CommaSeparated';
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
 
+import { LanguageData } from './LanguageTypes';
 import LanguageDrawerPopRow from './population/LanguageDrawerPopRow';
 import LanguageDrawerDialectsRow from './relations/LanguageDrawerDialectsRow';
-import LanguageDrawerWritingSystemsRow from './relations/LanguageDrawerWritingSystemsRow';
+import LanguageDrawerWritingSystemsRow from './writing/LanguageDrawerWritingSystemsRow';
 
 type Props = {
   lang: LanguageData;

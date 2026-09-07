@@ -4,7 +4,7 @@ import Selector from '@features/params/ui/Selector';
 import { SelectorDisplay, useSelectorDisplay } from '@features/params/ui/SelectorDisplayContext';
 import usePageParams from '@features/params/usePageParams';
 
-import LanguageSourceDescription from '@entities/language/LanguageSourceDescription';
+import LanguageSourceDescription from '@entities/language/identity/LanguageSourceDescription';
 import { LanguageSource } from '@entities/language/LanguageTypes';
 
 const values = [

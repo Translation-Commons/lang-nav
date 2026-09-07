@@ -6,12 +6,6 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 
-import { LanguageData, LanguageSource } from '@entities/language/LanguageTypes';
-import LanguagePluralCategories from '@entities/language/plurals/LanguagePluralCategories';
-import LanguagePluralGridButton from '@entities/language/plurals/LanguagePluralGridToggle';
-import LanguageVitalityMeter from '@entities/language/vitality/VitalityMeter';
-import { VitalitySource } from '@entities/language/vitality/VitalityTypes';
-
 import { Badge } from '@shared/ui/badge';
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
@@ -19,6 +13,12 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@shared/ui/hover-
 
 import { getModalityLabel } from '@strings/LanguageModalityStrings';
 import { getLanguageScopeLabel } from '@strings/LanguageScopeStrings';
+
+import { LanguageData, LanguageSource } from './LanguageTypes';
+import LanguagePluralCategories from './plurals/LanguagePluralCategories';
+import LanguagePluralGridButton from './plurals/LanguagePluralGridToggle';
+import LanguageVitalityMeter from './vitality/VitalityMeter';
+import { VitalitySource } from './vitality/VitalityTypes';
 
 type Props = { lang: LanguageData };
 

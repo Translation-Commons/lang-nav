@@ -5,12 +5,13 @@ import DetailsSection from '@widgets/details/ui/DetailsSection';
 
 import { View } from '@features/params/PageParamTypes';
 
-import LanguageTerritories from '@entities/language/LanguageTerritories';
-import { LanguageData } from '@entities/language/LanguageTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
+
+import { LanguageData } from '../LanguageTypes';
+import LanguageTerritories from '../relations/LanguageTerritories';
 
 const LanguageDetailsTerritories: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const [sectionView, setSectionView] = React.useState(View.CardList);
