@@ -8,9 +8,18 @@ import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
 
 import { getModalityFromLabel } from '@strings/LanguageModalityStrings';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadLanguagesFromApi } from '../api/loadLanguagesFromApi';
+
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadLanguages(): Promise<LanguageDictionary | void> {
+  // The file path is kept, not replaced. With VITE_API_URL unset - the default,
+  // and how anyone without a database runs the app - this is unchanged, and it
+  // is also the side the parity test compares against.
+  if (isApiEnabled()) {
+    return await loadLanguagesFromApi();
+  }
   return await loadEntitiesFromFile<LanguageData>('data/tc/languages.tsv', parseLanguageLine);
 }
 

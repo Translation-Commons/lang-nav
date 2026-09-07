@@ -19,6 +19,7 @@ import { WritingSystemData } from '@entities/writingsystem/WritingSystemTypes';
 import { connectEntitiesAndCreateDerivedData } from '../compute/connectEntities';
 import { groupLanguagesBySource } from '../connect/connectLanguages';
 
+import { isApiEnabled } from './api/apiConfig';
 import { loadKeyboardsGBoard } from './entities/loadKeyboardsGBoard';
 import { loadKeyboardsKeyman } from './entities/loadKeyboardsKeyman';
 import { loadLanguages } from './entities/loadLanguages';
@@ -107,7 +108,27 @@ export function useCoreData(): {
     ] = await Promise.all([
       loadLanguages(),
       loadISOLanguages(),
-      loadISOMacrolanguages(),
+      // ONE of the eight language files is skipped when the API is on.
+      //
+      // macrolanguages.tsv feeds addISOMacrolanguageData, which assigns
+      // NOTHING: every branch of that function is a `console.debug` behind
+      // `DEBUG = false`, so it is a no-op at runtime on either path. Skipping
+      // the fetch is therefore free, and it is the only one of the eight that
+      // is.
+      //
+      // The other seven STAY, and the reasons are not the same:
+      //
+      //  - Five create languoids or delete them from the per-source
+      //    dictionaries, and the two paths do not agree on languoid IDENTITY -
+      //    390 differ. See DevLog 14_Phase2_Language_API §7.
+      //  - languageFamilyCombinedOverrides.tsv looked safe and is NOT. The
+      //    database holds all 70 override parents correctly, but
+      //    addGlottologLanguages runs FIRST and overwrites them from
+      //    glottolog.tsv - `atay1246` goes to `map` - and this file is what
+      //    restores `fox` afterwards. It is load-bearing for as long as the
+      //    Glottolog step runs. Measured: skipping it moved the Combined
+      //    parent of dozens of languages.
+      isApiEnabled() ? Promise.resolve([]) : loadISOMacrolanguages(),
       loadISOLanguageFamilies(),
       loadISOFamiliesToLanguages(),
       loadISORetirements(),
