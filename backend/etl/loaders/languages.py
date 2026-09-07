@@ -15,6 +15,7 @@ from .vocab import (
     LANGUAGE_MODALITY,
     SOURCE_BCP,
     SOURCE_COMBINED,
+    SOURCE_GLOTTOLOG,
     SOURCE_ISO,
     SOURCE_UNESCO,
 )
@@ -42,6 +43,8 @@ def load(ds: Dataset, root: Path) -> None:
         )
 
     combined_parents: list[tuple[str, str]] = []
+
+    glottolog_rows: list[tuple[str, str, str | None]] = []
     # (language, parent) pairs that apply to ISO, BCP and UNESCO alike.
     short_code_parents: list[tuple[str, str]] = []
 
@@ -90,6 +93,11 @@ def load(ds: Dataset, root: Path) -> None:
             ds["language_code_alias"].upsert(
                 language_id=lid, alias_code=glottocode, alias_kind="glottocode"
             )
+            # Held for apply_glottolog_gaps(). The alias alone is not enough:
+            # the frontend reads this column into Glottolog.code directly, and
+            # column 9 into Glottolog.parentLanguageCode, so both have to reach
+            # language_source_attribute or the API cannot serve them.
+            glottolog_rows.append((lid, glottocode, row.get("Parent Glottocode")))
 
         parent = row.get("Parent Language")
         if parent:
@@ -148,6 +156,8 @@ def load(ds: Dataset, root: Path) -> None:
 
     # The COMBINED parents are deferred. See apply_parents().
     _PENDING_PARENTS.append((path.name, combined_parents))
+    # The Glottolog rows are deferred too. See apply_glottolog_gaps().
+    _PENDING_GLOTTOLOG.append((path.name, glottolog_rows))
 
 
 # Parent links parsed out of languages.tsv, held until every loader has run.
@@ -168,6 +178,10 @@ def load(ds: Dataset, root: Path) -> None:
 # context object through every loader to fix one ordering bug is a larger
 # change than the bug warrants.
 _PENDING_PARENTS: list[tuple[str, list[tuple[str, str]]]] = []
+
+# languages.tsv's Glottocode / Parent Glottocode columns, held until
+# glottolog.tsv has been read. See apply_glottolog_gaps().
+_PENDING_GLOTTOLOG: list[tuple[str, list[tuple[str, str, str | None]]]] = []
 
 
 def apply_parents(ds: Dataset) -> None:
@@ -206,6 +220,91 @@ def apply_parents(ds: Dataset) -> None:
             ds["language_source_attribute"].upsert(
                 language_id=lid, source=SOURCE_COMBINED, parent_language_id=parent
             )
+
+
+def apply_glottolog_gaps(ds: Dataset) -> None:
+    """Give a Glottolog attribute row to languages glottolog.tsv did not cover.
+
+    Called from the authorities loader immediately AFTER _glottolog, and it only
+    ever fills gaps - a language that already has a Glottolog row keeps it, so
+    glottolog.tsv stays authoritative wherever the two files disagree.
+
+    _glottolog() writes one row per node in glottolog.tsv, keyed on the
+    glottocode found THERE. languages.tsv also carries a Glottocode column, and
+    when the two disagree the language gets no row at all: `zho` points at
+    `clas1255`, which glottolog.tsv lists as a family node of its own with no
+    ISO code, so `clas1255` becomes its own languoid and `zho` is left with
+    nothing. 56 languages are affected, the macrolanguages among them - `ara`,
+    `aze`, `bal`, `fas`, `msa`, `grn`, `zho` - plus the private-use tags.
+
+    Until now that was invisible, because the frontend merged glottolog.tsv
+    itself and filled the field client-side. It stops being invisible the moment
+    the browser stops doing that merge: `Glottolog.parentLanguageCode` for these
+    56 exists in NO column, so the API cannot serve it and the family links
+    disappear with no error. The alias table carries the code but has no room
+    for a parent, and its (alias_code, alias_kind) key means a glottocode
+    contested by two languages resolves to only one of them anyway - see the
+    `zua`/`zem` case in FP-037.
+
+    Parents are resolved through the same alias-or-id lookup the frontend uses,
+    so a parent glottocode naming a node that exists under its ISO code still
+    links up.
+    """
+    # glottocode -> language id, for resolving the parent column.
+    #
+    # A GLOTTOCODE THAT IS ITSELF A LANGUAGE ID WINS, and the order matters.
+    # _glottolog builds the same map as "the node's ISO code if it has one,
+    # otherwise its own glottocode", so a node with no ISO code stays under its
+    # glottocode and the rows already in the table point at it that way -
+    # `sini1245` is the parent of `clas1255`, `wxa`, `minn1248` and `och`.
+    #
+    # `sini1245` is ALSO an alias of `zhx`, so resolving through the aliases
+    # first would make these 56 point at `zhx` while every pre-existing row
+    # points at `sini1245`: the same parent under two different ids, which no
+    # consumer would reconcile. The alias is the fallback, for a parent that
+    # exists only under an ISO code.
+    known_ids = ds["language"].ids()
+    by_glottocode: dict[str, str] = {}
+    for alias in ds["language_code_alias"].rows.values():
+        if alias.get("alias_kind") == "glottocode":
+            by_glottocode.setdefault(alias["alias_code"], alias["language_id"])
+
+    # language_source_attribute's primary key is (language_id, source), so
+    # membership is a direct key lookup rather than a scan.
+    attributes = ds["language_source_attribute"].rows
+
+    while _PENDING_GLOTTOLOG:
+        filename, rows = _PENDING_GLOTTOLOG.pop(0)
+
+        for lid, glottocode, parent_code in rows:
+            if (lid, SOURCE_GLOTTOLOG) in attributes:
+                continue  # glottolog.tsv already spoke; it wins
+
+            parent_id = None
+            if parent_code:
+                parent_id = (
+                    parent_code
+                    if parent_code in known_ids
+                    else by_glottocode.get(parent_code, parent_code)
+                )
+                if parent_id not in known_ids:
+                    ds.warn(
+                        lid,
+                        "language_source_attribute.parent_language_id",
+                        f"{filename}: Glottolog parent {parent_code!r} of "
+                        f"{lid!r} is not a known language; left NULL",
+                    )
+                    parent_id = None
+                elif parent_id == lid:
+                    parent_id = None  # lsa_not_own_parent
+
+            ds["language_source_attribute"].upsert(
+                language_id=lid,
+                source=SOURCE_GLOTTOLOG,
+                code=glottocode,
+                parent_language_id=parent_id,
+            )
+
 
 
 def _split_subtitle(display: str) -> tuple[str, str | None]:

@@ -923,10 +923,15 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           """SELECT count(*) - count(descendant_count)
                FROM language_source_attribute""",
           lambda v: v == 0)
-    check("D7 attribute rows with descendants (expect 9588, 2026-09-03)",
+    # 9588 -> 9590 on 2026-09-07: apply_glottolog_gaps() gave the 56 languages
+    # glottolog.tsv never covered a Glottolog row of their own, and two of them
+    # are parents of something. The structural check below is what actually
+    # guards this - it asserts the per-node counts agree with the closure D1
+    # built, which a wrong number could not satisfy.
+    check("D7 attribute rows with descendants (expect 9590, 2026-09-07)",
           """SELECT count(*) FROM language_source_attribute
               WHERE descendant_count > 0""",
-          lambda v: v == 9588)
+          lambda v: v == 9590)
     # Two independent routes to one number: the sum of the per-node counts must
     # equal the number of ancestor edges in the closure D1 built. A grouping
     # error moves one without the other.
@@ -940,10 +945,12 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
                  GROUP BY a.source) x
              WHERE x.counted <> x.edges""",
           lambda v: v == 0)
-    check("D7 Glottolog descendant edges (expect 182385)",
+    # 182385 -> 182739 on 2026-09-07, for the same reason: the 56 new Glottolog
+    # rows carry parent links, so their ancestors each gained descendants.
+    check("D7 Glottolog descendant edges (expect 182739, 2026-09-07)",
           """SELECT sum(descendant_count) FROM language_source_attribute
               WHERE source = 'Glottolog'""",
-          lambda v: v == 182385)
+          lambda v: v == 182739)
     # STRUCTURAL, and the strongest check here. A parent's descendant set
     # strictly contains each child's plus the child itself, so a parent must
     # count MORE than any of its children in the same source. An off-by-one or a

@@ -62,6 +62,10 @@ def load(ds: Dataset, root: Path) -> None:
     _languages.apply_parents(ds)
     _macrolanguages(ds, root / "iso" / "macrolanguages.tsv")
     _glottolog(ds, root / "glottolog" / "glottolog.tsv")
+    # Immediately after _glottolog, so glottolog.tsv wins wherever the two
+    # files name a different glottocode, and before _glottocode_to_iso, which
+    # only adds aliases.
+    _languages.apply_glottolog_gaps(ds)
     _glottocode_to_iso(ds, root / "tc" / "glottocodeToISO.tsv")
     _ethnologue(ds, root / "sil")
     _combined_overrides(ds, root / "tc" / "languageFamilyCombinedOverrides.tsv")
