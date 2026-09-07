@@ -240,7 +240,12 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     const server = await getServer();
     server.use(
       await makeFileAvailable('data/tc/languages.tsv'),
-      http.get(`${API_URL}/*`, () => passthrough()),
+      // Scoped to the path this loader requests, NOT `${API_URL}/*`. jsdom's
+      // base URL is also http://localhost:3000, so a wildcard here matches the
+      // relative fetch of data/tc/languages.tsv too - and server.use()
+      // PREPENDS, so it would shadow the file handler, send that request to
+      // PostgREST, and leave the file path loading nothing. See FP-041.
+      http.get(`${API_URL}/language`, () => passthrough()),
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
@@ -260,6 +265,14 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     vi.unstubAllEnvs();
 
     if (fromFiles == null) return null;
+
+    // The file side must be non-empty before anything is compared. Both
+    // field-by-field tests below iterate the FILE path's keys, so a file path
+    // that loaded nothing compares zero pairs and passes - green against a
+    // comparison that never happened. This is the general guard: it catches
+    // any cause of an empty side, not just the FP-041 handler shadowing.
+    expect(Object.keys(fromFiles).length).toBeGreaterThan(0);
+
     return { fromApi, fromFiles };
   }
 

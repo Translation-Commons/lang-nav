@@ -81,7 +81,11 @@ describe.skipIf(!API_URL)('territory API/TSV parity', () => {
       await makeFileAvailable('data/other_sources/country-coord.csv'),
       await makeFileAvailable('data/wiki/country_land_area.tsv'),
       await makeFileAvailable('data/wiki/territory_names.tsv'),
-      http.get(`${API_URL}/*`, () => passthrough()),
+      // Scoped to the path this loader requests, NOT `${API_URL}/*`. jsdom's
+      // base URL is also http://localhost:3000, so a wildcard matches the
+      // relative file fetches too and, because server.use() PREPENDS, would
+      // shadow the file handlers registered beside it. See FP-041.
+      http.get(`${API_URL}/territory`, () => passthrough()),
     );
 
     vi.stubEnv('VITE_API_URL', API_URL);
@@ -96,6 +100,10 @@ describe.skipIf(!API_URL)('territory API/TSV parity', () => {
     }
 
     const fromFiles = await loadFromFiles();
+
+    // The file side must be non-empty before anything is compared: a field
+    // loop over zero keys compares nothing and passes. See FP-041.
+    expect(Object.keys(fromFiles).length).toBeGreaterThan(0);
 
     expect(Object.keys(fromApi).sort()).toEqual(Object.keys(fromFiles).sort());
 
