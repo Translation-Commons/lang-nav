@@ -11,7 +11,7 @@ import TableID from './TableID';
 
 export type ColumnVisibilityModule<T extends EntityData> = {
   toggleColumn: (columnKey: string, isVisible?: boolean) => void;
-  setColumns: (columnKeys: string[], isVisible: boolean) => void;
+  setColumns: (columnKeys: string[]) => void;
   visibleColumns: TableColumn<T>[];
   columnVisibility: Record<string, boolean>;
   resetColumnVisibility: () => void;
@@ -61,10 +61,9 @@ function useColumnVisibility<T extends EntityData>(
   );
 
   const setColumns = useCallback(
-    (columnKeys: string[], isVisible: boolean) => {
+    (columnKeys: string[]) => {
       const binary = getBinaryForColumnVisibility(columns, {
-        ...columnVisibility,
-        ...Object.fromEntries(columnKeys.map((key) => [key, isVisible])),
+        ...Object.fromEntries(columnKeys.map((key) => [key, true])),
       });
       updatePageParams({
         columns: {
@@ -73,7 +72,7 @@ function useColumnVisibility<T extends EntityData>(
         },
       });
     },
-    [columnsVisibleForAllTables, tableID, columnVisibility, columns, updatePageParams],
+    [columnsVisibleForAllTables, tableID, columns, updatePageParams],
   );
 
   const resetColumnVisibility = useCallback(() => {

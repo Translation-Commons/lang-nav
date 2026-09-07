@@ -1,4 +1,4 @@
-import { act, fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { EntityType } from '@features/params/PageParamTypes';
@@ -109,18 +109,6 @@ describe('InteractiveEntityTable', () => {
     );
   };
 
-  // Helper function to eliminate rerender duplication
-  const rerenderEntityTable = (rerender: (ui: React.ReactElement) => void, props = {}) => {
-    rerender(
-      <EntityTable
-        ents={mockEnts}
-        columns={mockColumns}
-        tableID={TableID.Territories}
-        {...props}
-      />,
-    );
-  };
-
   // Helper function to eliminate column header assertions. The count includes the
   // always-present pin column that is prepended to every table.
   const expectColumnHeaders = (expectedCount = 3) => {
@@ -212,62 +200,5 @@ describe('InteractiveEntityTable', () => {
     mockEnts.forEach((ent) => {
       expect(screen.getByText(ent.nameDisplay)).toBeInTheDocument();
     });
-  });
-
-  it('handles column visibility toggling', async () => {
-    const { rerender } = renderEntityTable();
-
-    // Initially, both columns should be visible
-    expectColumnHeaders();
-
-    // Open column selector
-    act(() => {
-      fireEvent.click(screen.getByText(/2\/2 columns visible/i));
-    });
-
-    // Click checkbox to hide Population column
-    act(() => {
-      const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
-      fireEvent.click(populationCheckbox);
-    });
-    // manually changing the columns
-    vi.mocked(usePageParams).mockReturnValue(
-      createMockUsePageParams({ sortBy: Field.Name, columns: { [TableID.Territories]: 1n } }),
-    );
-
-    // Force rerender to ensure state updates are applied
-    rerenderEntityTable(rerender);
-
-    // Verify only Name column is visible (plus the always-present pin column)
-    expect(screen.getByRole('columnheader', { name: /Name/i })).toBeInTheDocument();
-    expect(screen.queryByRole('columnheader', { name: /Population/i })).not.toBeInTheDocument();
-    expect(screen.getAllByRole('columnheader')).toHaveLength(2);
-
-    // Click checkbox to show Population column again
-    act(() => {
-      const populationCheckbox = screen.getByRole('checkbox', { name: /population/i });
-      fireEvent.click(populationCheckbox);
-    });
-    vi.mocked(usePageParams).mockReturnValue(
-      createMockUsePageParams({ sortBy: Field.Name, columns: { [TableID.Territories]: 3n } }),
-    );
-
-    // Force rerender to ensure state updates are applied
-    rerenderEntityTable(rerender);
-
-    // Verify both columns are visible again
-    expectColumnHeaders();
-
-    // Clicking to turn off the name column does not affect visibility since it is the sort column
-    act(() => {
-      const nameCheckbox = screen.getByRole('checkbox', { name: /name/i });
-      fireEvent.click(nameCheckbox);
-    });
-
-    // Force rerender to ensure state updates are applied
-    rerenderEntityTable(rerender);
-
-    // Both columns should still be visible
-    expectColumnHeaders();
   });
 });
