@@ -119,8 +119,14 @@ export function useCoreData(): {
       // The other seven STAY, and the reasons are not the same:
       //
       //  - Five create languoids or delete them from the per-source
-      //    dictionaries, and the two paths do not agree on languoid IDENTITY -
-      //    390 differ. See DevLog 14_Phase2_Language_API §7.
+      //    dictionaries, and the two paths do not agree on languoid IDENTITY.
+      //    The ETL gives every Glottolog node whose ISO column is empty a
+      //    language row of its own (`arab1395` "Arabic", `azer1255` "Central
+      //    Oghuz"); addGlottologLanguages instead merges that node into the
+      //    ISO language the curated files name, because the app shows one
+      //    language under several classification schemes and that needs ONE
+      //    object carrying several identities. 390 languoids differ, and
+      //    language IDs are the key for ents[] lookups, URLs and search.
       //  - languageFamilyCombinedOverrides.tsv looked safe and is NOT. The
       //    database holds all 70 override parents correctly, but
       //    addGlottologLanguages runs FIRST and overwrites them from
