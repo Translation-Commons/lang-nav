@@ -2,6 +2,7 @@ import {
   getBaseLanguageData,
   LanguageData,
   LanguageDictionary,
+  MAX_ISO_LANG_CODE_LENGTH,
 } from '@entities/language/LanguageTypes';
 
 import { separateTitleAndSubtitle } from '@shared/lib/stringUtils';
@@ -62,8 +63,18 @@ function parseLanguageLine(line: string): LanguageData {
   };
   language.pop.rough = populationRough;
 
-  // No longer assuming all 3-letter language codes are valid ISO
-  if (parentISOCode) {
+  // TWO conditions, not one. The parent must be short enough to be an ISO code
+  // AND the languoid must be in those three sources at all.
+  //
+  // Six rows in languages.tsv are keyed by GLOTTOCODE and still name a 3-letter
+  // parent in column 8 - `chan1329` -> `hnm`, `coas1318` -> `zho`, and the four
+  // Min varieties beside them. Testing only the parent gave those an ISO, BCP
+  // and UNESCO parent while they have no code in any of the three, so the edge
+  // pointed into a tree its own node was not part of. The database declines to
+  // write those rows for the same reason (backend/etl/loaders/languages.py
+  // guards on the languoid's own id length), and a parent without a node is
+  // exactly the dangling edge that breaks a per-source hierarchy.
+  if (parentISOCode && code.length <= MAX_ISO_LANG_CODE_LENGTH) {
     language.ISO.parentLanguageCode = parentISOCode;
     language.BCP.parentLanguageCode = parentISOCode;
     language.UNESCO.parentLanguageCode = parentISOCode;

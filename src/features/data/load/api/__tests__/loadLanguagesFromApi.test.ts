@@ -69,7 +69,7 @@ const spanish: ApiLanguage = {
       code_6391: null,
     },
   ],
-  language_code_alias: [{ alias_code: 'stan1288' }],
+  language_code_alias: [{ alias_code: 'stan1288', alias_kind: 'glottocode' }],
 };
 
 /** Marwari: the name is ALREADY split by the ETL. */
@@ -125,7 +125,7 @@ const chinese: ApiLanguage = {
       code_6391: 'zh',
     },
   ],
-  language_code_alias: [{ alias_code: 'clas1255' }],
+  language_code_alias: [{ alias_code: 'clas1255', alias_kind: 'glottocode' }],
 };
 
 describe('parseApiLanguage', () => {

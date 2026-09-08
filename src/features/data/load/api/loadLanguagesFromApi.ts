@@ -1,7 +1,13 @@
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
-import { LanguageData, LanguageDictionary, LanguageSource } from '@entities/language/LanguageTypes';
+import {
+  LanguageData,
+  LanguageDictionary,
+  LanguageScope,
+  LanguageSource,
+} from '@entities/language/LanguageTypes';
+import { LanguageISOStatus } from '@entities/language/vitality/VitalityTypes';
 
 import { toDictionary } from '@shared/lib/setUtils';
 
@@ -10,37 +16,45 @@ import { fetchFromApi } from './apiConfig';
 /**
  * Loads languages from the API instead of from `languages.tsv`.
  *
- * SCOPE: this replaces `parseLanguageLine` ONLY. The eight merge steps in
- * CoreData.tsx still run - ISO codes, families, macrolanguages, retirements,
- * Glottolog, the Combined overrides, CLDR and IANA variants all still arrive
- * from their own files and still overwrite what this returns. That is
- * deliberate for this step: `__tests__/loadLanguagesParity.test.ts` compares
- * loader output, and a loader that returned the post-merge state could not be
- * compared against anything.
+ * SCOPE: this replaces `parseLanguageLine` AND the three merge steps that no
+ * longer run when the API is on - iso-639-3.tab, families639-5.tsv and
+ * macrolanguages.tsv. So it sends more than the columns of languages.tsv: the
+ * per-source name, scope, 639-1 code, 639-2b code and retirement reason all
+ * arrive here now, because they are what those files used to supply.
  *
- * Consequently this sends the RAW columns languages.tsv carries and nothing
- * else. The `language` table also holds D7-D10's derived populations, depths,
- * descendant counts and largest-descendant links; none of them are selected,
- * because the browser still computes all of them.
+ * Which files could go was settled by measurement rather than by reading -
+ * each was withheld from the API path in turn and the result diffed against
+ * the full file path. iso-639-3.tab alone accounted for 31,866 field
+ * differences. The reasons the other five stay are recorded beside the loader
+ * list in CoreData.tsx; none of them is a missing column.
  *
- * The request count therefore does NOT drop yet: one file becomes one request,
- * and the eight merge steps still fetch their own files. Banking that saving
- * means deleting those steps, which is a separate change - and FP-036 has to be
- * fixed first, because `Glottolog.parentLanguageCode` for 56 languages is
- * currently supplied by `addGlottologLanguages` and is in no column the API can
- * return.
+ * The `language` table also holds D7-D10's derived populations, depths,
+ * descendant counts and largest-descendant links. None is selected, because
+ * the browser still computes all of them.
+ *
+ * TWO TESTS GUARD THIS, and they ask different questions.
+ * `__tests__/loadLanguagesParity.test.ts` compares LOADER OUTPUT, so a field
+ * this mapper now leads on is a converging key there rather than a mismatch.
+ * `__tests__/loadLanguagesMergedParity.test.ts` compares the END STATE with
+ * exactly the files CoreData.tsx still fetches, and that is the one that has
+ * to stay green when a merge step is removed.
  */
 
-/** One `language_code_alias` row. Only the glottocode kind is selected. */
+/** One `language_code_alias` row. Only the kinds this mapper reads are selected. */
 type ApiLanguageCodeAlias = {
   alias_code: string;
+  alias_kind: string;
 };
 
 /** One `language_source_attribute` row, one per (language, source) pair. */
 type ApiLanguageSourceAttribute = {
   source: string;
   code: string | null;
+  name: string | null;
+  scope: number | null;
   parent_language_id: string | null;
+  code_6391: string | null;
+  retirement_reason: string | null;
 };
 
 export type ApiLanguage = {
@@ -54,6 +68,7 @@ export type ApiLanguage = {
   // NOT viability_confidence / viability_explanation. See RECOMMENDATION_COLUMNS.
   recommendation: string | null;
   recommendation_reason: string | null;
+  iso_status: number | null;
   language_source_attribute: ApiLanguageSourceAttribute[];
   language_code_alias: ApiLanguageCodeAlias[];
 };
@@ -75,9 +90,12 @@ export type ApiLanguage = {
  * Reading the same-sounding column would not fail loudly. It would return
  * undefined for every language, and `groupLanguagesBySource` filters the entire
  * UNESCO dictionary on `viabilityConfidence != null && != 'No'`, so the UNESCO
- * source would silently come back EMPTY. See FP-034.
+ * source would silently come back EMPTY.
  */
 const RECOMMENDATION_COLUMNS = 'recommendation,recommendation_reason';
+
+/** `LanguageScope.Family`, as the smallint the database stores. */
+const FAMILY_SCOPE = 5;
 
 /**
  * One request, one embed.
@@ -87,7 +105,7 @@ const RECOMMENDATION_COLUMNS = 'recommendation,recommendation_reason';
  * `largest_descendant_id` - and PostgREST refuses to guess between them,
  * failing with PGRST201. The constraint name in this URL is more brittle than a
  * column name would be; if it starts appearing in more loaders that is the
- * trigger for the `api` schema of views (FP-021).
+ * trigger for moving these loaders onto a dedicated `api` schema of views.
  *
  * SELECT ONLY WHAT IS PARSED. The embed carries `source`, `code` and
  * `parent_language_id` and nothing else - adding `name`, `scope` and
@@ -107,11 +125,11 @@ const RECOMMENDATION_COLUMNS = 'recommendation,recommendation_reason';
  */
 const LANGUAGE_QUERY =
   '/language?select=id,name_canonical,name_subtitle,name_endonym,modality,' +
-  `primary_script_id,population_rough,${RECOMMENDATION_COLUMNS},` +
+  `primary_script_id,population_rough,iso_status,${RECOMMENDATION_COLUMNS},` +
   'language_source_attribute!language_source_attribute_language_id_fkey' +
-  '(source,code,parent_language_id),' +
-  'language_code_alias(alias_code)' +
-  '&language_code_alias.alias_kind=eq.glottocode' +
+  '(source,code,name,scope,parent_language_id,code_6391,retirement_reason),' +
+  'language_code_alias(alias_code,alias_kind)' +
+  '&language_code_alias.alias_kind=in.(glottocode,iso639-2b)' +
   '&language_source_attribute.order=source.asc' +
   '&language_code_alias.order=alias_code.asc&order=id.asc';
 
@@ -164,7 +182,16 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // Where a language carries several glottocode aliases the attribute row's own
   // code wins above; this only ever supplies one for a language that has no
   // Glottolog row at all, so the first is the only one on offer.
-  const glottocodeAlias = orUndefined(row.language_code_alias[0]?.alias_code ?? null);
+  const glottocodeAlias = orUndefined(
+    row.language_code_alias.find((a) => a.alias_kind === 'glottocode')?.alias_code ?? null,
+  );
+
+  // `code6392b` is '' for most languages on the file path, not undefined:
+  // parseISOLanguage6393Line reads iso-639-3.tab column 2 unconditionally and
+  // that column is empty for all but 420 rows. The database stores only the
+  // 420 real ones, as `iso639-2b` aliases, so the empty string has to be put
+  // back or every language without a 639-2b code would differ.
+  const iso6392bAlias = row.language_code_alias.find((a) => a.alias_kind === 'iso639-2b');
 
   const parentLanguageCode = orUndefined(combined?.parent_language_id);
 
@@ -222,7 +249,7 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
       //
       // The file path has no such gap - parseLanguageLine reads column 2
       // unconditionally - so the alias is what reproduces it. It is the same
-      // column, not a derived value. See FP-036.
+      // column, not a derived value.
       code: orUndefined(glottolog?.code) ?? glottocodeAlias,
       parentLanguageCode: orUndefined(glottolog?.parent_language_id),
     },
@@ -232,8 +259,8 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
     CLDR: {},
   };
   // Each source's parent comes from ITS OWN row. No fallback: the ETL now
-  // defers the languages.tsv column-8 parents until the families exist
-  // (FP-035), so ISO and BCP hold everything the file gives them.
+  // defers the languages.tsv column-8 parents until the families exist, so
+  // ISO and BCP hold everything the file gives them.
   //
   // A Combined-parent fallback was tried and removed. It fired on 71
   // languages: 13 correctly and 58 WRONGLY, because a Combined parent that
@@ -243,9 +270,9 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   // it here front-ran that step and handed `que`, `eus` and `pbb` a UNESCO
   // parent the file path never gives them.
   //
-  // `dyl` and `lfb` still lack a UNESCO parent the file gives them. That is
-  // FP-043, two rows, and it needs an answer about the UNESCO tree rather than
-  // a rule here.
+  // `dyl` and `lfb` still lack a UNESCO parent the file gives them. Two rows,
+  // and it needs an answer about what the UNESCO tree contains rather than a
+  // rule here.
   const isoParent = orUndefined(attributes.get(LanguageSource.ISO)?.parent_language_id);
   const bcpParent = orUndefined(attributes.get(LanguageSource.BCP)?.parent_language_id);
   const unescoParent = orUndefined(attributes.get(LanguageSource.UNESCO)?.parent_language_id);
@@ -253,6 +280,105 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
   if (isoParent) language.ISO.parentLanguageCode = isoParent;
   if (bcpParent) language.BCP.parentLanguageCode = bcpParent;
   if (unescoParent) language.UNESCO.parentLanguageCode = unescoParent;
+
+  // THE FIELDS THE MERGE STEPS USED TO SUPPLY.
+  //
+  // Everything above this point is a column of languages.tsv. Everything below
+  // arrives in the browser from one of the seven supplemental files, and it is
+  // what kept them load-bearing: measured by withholding each file from the API
+  // path, iso-639-3.tab alone accounted for 31,866 field differences and
+  // glottolog.tsv for 47,227, while the languoid SET was identical either way.
+  // The data was in the database the whole time - `language_source_attribute`
+  // carries name, scope, code_6391 and retirement_reason per source - and the
+  // query simply never asked for it.
+  //
+  // Each assignment below mirrors one line of a merge step, named beside it, so
+  // the two can be diffed when either changes.
+  const iso = attributes.get(LanguageSource.ISO);
+  const bcp = attributes.get(LanguageSource.BCP);
+  const unesco = attributes.get(LanguageSource.UNESCO);
+
+  // `iso_status` IS THE TEST FOR "is this languoid in iso-639-3.tab".
+  //
+  // It is non-null for exactly the 8,000-odd rows of that file and null for
+  // everything else, so it is what separates the two branches of
+  // addISOLanguageFamilyData. That distinction is load-bearing rather than
+  // cosmetic: a 639-5 family like `ber`, `sit` or `zhx` gets a NAME, a SCOPE
+  // and a PARENT from families639-5.tsv but never a CODE in any ISO-based
+  // source, because addISODataToLanguages - the only thing that assigns those
+  // codes - never sees it. Setting `ISO.code` for them anyway put a code on 10
+  // families the file path leaves bare, and `UNESCO.code` and `CLDR.code` with
+  // it, which would then have changed which languoids groupLanguagesBySource
+  // indexes into those two dictionaries.
+  const isInIso6393 = row.iso_status != null;
+
+  // addISODataToLanguages, from iso-639-3.tab.
+  if (iso != null) {
+    if (isInIso6393) {
+      language.ISO.code = orUndefined(iso.code);
+      language.ISO.code6391 = orUndefined(iso.code_6391);
+      language.ISO.code6392b = iso6392bAlias?.alias_code ?? '';
+      // A column of `language`, not of the ISO attribute row - it is a property
+      // of the languoid rather than of its ISO identity.
+      language.ISO.status = orUndefined(row.iso_status) as LanguageISOStatus | undefined;
+    }
+    language.ISO.name = orUndefined(iso.name);
+    language.ISO.scope = orUndefined(iso.scope) as LanguageScope | undefined;
+    // addISODataToLanguages sets the TOP-LEVEL scope from the ISO row too, and
+    // groupLanguagesBySource filters the CLDR dictionary on it.
+    if (isInIso6393) language.scope = orUndefined(iso.scope) as LanguageScope | undefined;
+  }
+  if (bcp != null) {
+    if (isInIso6393) language.BCP.code = orUndefined(bcp.code);
+    language.BCP.name = orUndefined(bcp.name);
+    language.BCP.scope = orUndefined(bcp.scope) as LanguageScope | undefined;
+  }
+  if (unesco != null && isInIso6393) {
+    language.UNESCO.code = orUndefined(unesco.code);
+  }
+
+  // addISORetirementsToLanguages, from iso-639-3_Retirements.tab.
+  const retirementReason = orUndefined(iso?.retirement_reason);
+  if (retirementReason) language.ISO.retirementReason = retirementReason;
+
+  // addGlottologLanguages, from glottolog.tsv.
+  if (glottolog != null) {
+    language.Glottolog.name = orUndefined(glottolog.name);
+    language.Glottolog.scope = orUndefined(glottolog.scope) as LanguageScope | undefined;
+  }
+
+  // The Combined SCOPE, which no column of languages.tsv carries - and only for
+  // a languoid the file path would actually give one.
+  //
+  // It reaches the browser from addISORetirementsToLanguages, which stamps
+  // SpecialCode on a retired code it has to CREATE (`cca` Cauca). The
+  // families are the exception and the reason for the guard:
+  // addISOLanguageFamilyData sets Combined.scope only in its `familyEntry ==
+  // null` branch, so a 639-5 family that languages.tsv already carries - `ber`,
+  // `sit`, `zhx` and 5 more - keeps an UNDEFINED Combined.scope even though its
+  // top-level scope becomes Family. The database records the scope either way,
+  // so copying it unguarded gave those 8 a value the file path never gives them.
+  if (combined != null && combined.scope !== FAMILY_SCOPE) {
+    language.Combined.scope = orUndefined(combined.scope) as LanguageScope | undefined;
+  }
+
+  // The TOP-LEVEL scope for a family, which is the other half of the same
+  // split. addISOLanguageFamilyData sets `familyEntry.scope ??= Family` in BOTH
+  // its branches even though only one of them sets Combined.scope, so a 639-5
+  // family ends up with a top-level Family scope and no Combined one. With
+  // families639-5.tsv no longer fetched, this is what supplies it - and it
+  // matters beyond display, because groupLanguagesBySource excludes a Family
+  // from the CLDR dictionary.
+  if (language.scope == null && combined?.scope === FAMILY_SCOPE) {
+    language.scope = LanguageScope.Family;
+  }
+
+  // addISODataToLanguages again: CLDR is keyed on the BCP-47 code, and only for
+  // languoids that file actually names.
+  if (isInIso6393) {
+    const cldrCode = orUndefined(iso?.code_6391) ?? orUndefined(iso?.code);
+    if (cldrCode) language.CLDR.code = cldrCode;
+  }
 
   return language;
 }

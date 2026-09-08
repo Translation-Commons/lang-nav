@@ -35,7 +35,15 @@ const API_URL = import.meta.env.VITE_API_URL;
 const COMPARED_FIELDS = [
   'ID',
   'codeDisplay',
-  'scope',
+  // `scope` is NOT here any more. addISODataToLanguages set it from
+  // iso-639-3.tab on both paths; with that file no longer fetched when the API
+  // is on, the mapper supplies it and the API leads by one step. The merged
+  // parity test compares it after the merges, which is where it has to agree.
+  //
+  // Removing it from the strict list is not the same as dropping coverage: an
+  // unset scope changes which languoids groupLanguagesBySource puts in the CLDR
+  // dictionary, and that shows up there.
+
   'nameCanonical',
   'nameDisplay',
   'nameSubtitle',
@@ -61,7 +69,32 @@ const COMPARED_SOURCES = ['Combined', 'Glottolog', 'ISO', 'BCP', 'UNESCO', 'CLDR
  * late - removing the alias fallback in the mapper, a 56-language defect, then
  * passes green. Verified by breaking the mapper on purpose.
  */
-const CONVERGING_KEYS = ['parentLanguageCode'];
+const CONVERGING_KEYS = [
+  'parentLanguageCode',
+  // THE KEYS THE WIDENED QUERY MOVED FROM "after the merge" TO "at load time".
+  //
+  // `loadLanguagesFromApi` used to send the raw columns of languages.tsv and
+  // nothing else, so at this point only Combined and Glottolog carried
+  // anything. It now also sends the per-source name, scope and codes, because
+  // that is what made iso-639-3.tab and families639-5.tsv skippable - measured
+  // at 31,866 and 230 field differences respectively.
+  //
+  // The file path still acquires all of them, one step later, from those two
+  // files. So these are converging keys in exactly the sense the rule below
+  // already handles: one side leads, both agree after the merge, and
+  // `loadLanguagesMergedParity.test.ts` is what asserts the agreement.
+  //
+  // They stay compared when BOTH sides hold a value, which is the half that
+  // catches a wrong name or a wrong scope.
+  'name',
+  'scope',
+  'code6391',
+  'code6392b',
+  'status',
+  // Arrives from iso-639-3_Retirements.tab on the file path, which IS still
+  // fetched - so here the API merely leads, rather than replacing the file.
+  'retirementReason',
+];
 
 /**
  * Five languages where languages.tsv and glottolog.tsv genuinely DISAGREE, and
@@ -97,8 +130,8 @@ const GLOTTOLOG_OVERRIDES_THE_FILE = ['bvs', 'ccq', 'dyl', 'mhv', 'mol', 'wxa'];
  * and addGlottologLanguages assigns that unconditionally, so both paths finish
  * at `deaf1237` - only the load-time value differs.
  *
- * It became visible when the ETL started merging on the curated mappings
- * (FP-038): before that the API had no Glottolog row for `dyl` at all, so the
+ * It became visible when the ETL started merging on the curated mappings:
+ * before that the API had no Glottolog row for `dyl` at all, so the
  * "one side is null" rule covered it.
  */
 
@@ -117,7 +150,7 @@ const GLOTTOLOG_OVERRIDES_THE_FILE = ['bvs', 'ccq', 'dyl', 'mhv', 'mol', 'wxa'];
  * fires when nothing holds the code yet - so `zua` keeps it permanently.
  *
  * A source-data conflict, not a mapper defect, and it does NOT converge. One
- * row in 8,214. See FP-037.
+ * row in 8,214.
  */
 const GLOTTOCODE_CLAIMED_BY_ANOTHER_LANGUAGE = ['zua'];
 
@@ -160,7 +193,7 @@ const GLOTTOCODE_CLAIMED_BY_ANOTHER_LANGUAGE = ['zua'];
  *   separate gap.
  *
  * Listed individually rather than skipped wholesale so a SIXTEENTH - a real
- * regression - still fails. See FP-035.
+ * regression - still fails.
  */
 const ETL_DROPS_THE_PARENT = [
   'bvs',
@@ -256,7 +289,7 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
       // base URL is also http://localhost:3000, so a wildcard here matches the
       // relative fetch of data/tc/languages.tsv too - and server.use()
       // PREPENDS, so it would shadow the file handler, send that request to
-      // PostgREST, and leave the file path loading nothing. See FP-041.
+      // PostgREST, and leave the file path loading nothing.
       http.get(`${API_URL}/language`, () => passthrough()),
     );
 
@@ -282,7 +315,7 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     // field-by-field tests below iterate the FILE path's keys, so a file path
     // that loaded nothing compares zero pairs and passes - green against a
     // comparison that never happened. This is the general guard: it catches
-    // any cause of an empty side, not just the FP-041 handler shadowing.
+    // any cause of an empty side, not just the handler shadowing above.
     expect(Object.keys(fromFiles).length).toBeGreaterThan(0);
 
     return { fromApi, fromFiles };
@@ -392,6 +425,17 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
           }
         }
 
+        // The ISO-FAMILY codes converge the same way the names and scopes do.
+        //
+        // addISODataToLanguages assigned ISO.code, BCP.code, UNESCO.code and
+        // CLDR.code from iso-639-3.tab on both paths; that file is no longer
+        // fetched when the API is on, so the mapper supplies them and the API
+        // leads by one step. Scoped to these four sources deliberately -
+        // Glottolog.code stays strict, for the reason on CONVERGING_KEYS.
+        if (source === 'ISO' || source === 'BCP' || source === 'UNESCO' || source === 'CLDR') {
+          if (fileValue.code == null && apiValue.code != null) delete apiValue.code;
+        }
+
         // `code` is compared strictly, with two named exceptions, so that a
         // MISSING glottocode still fails (see CONVERGING_KEYS):
         //  - the API leading on the 26 languoids whose glottocode reaches it
@@ -439,7 +483,7 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
 
     // These fifteen lost their ISO-tree parent because languages.load()
     // validates each one against the languages read so far and runs before the
-    // family files, so a parent like `sgn` or `inc` did not exist yet. FP-035.
+    // family files, so a parent like `sgn` or `inc` did not exist yet.
     //
     // The ETL now defers the UNESCO half of that assignment until the families
     // exist, which is why this asserts the parent is PRESENT rather than that
@@ -456,9 +500,9 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     //
     // Storing the UNESCO edge was tried and reverted: those families never get
     // a UNESCO row, so it pointed outside its own tree and D10's depth
-    // invariant broke on 9 rows. See FP-035.
+    // invariant broke on 9 rows.
     //
-    // The deeper question is FP-043: only languages.tsv column 8 reaches
+    // The deeper question: only languages.tsv column 8 reaches
     // UNESCO at all, while familiesToLanguages.tsv never does, so 279
     // languages have a UNESCO parent and ~5,500 comparable ones do not. Two of
     // the three ways that could be answered remove this exemption instead of

@@ -107,35 +107,51 @@ export function useCoreData(): {
       organizations,
     ] = await Promise.all([
       loadLanguages(),
-      loadISOLanguages(),
-      // ONE of the eight language files is skipped when the API is on.
+      // THREE of the eight language files are skipped when the API is on, and
+      // the other five are not. Which is which was settled by measurement, not
+      // by reading: each file was withheld from the API path in turn and the
+      // result diffed against the full file path, since the question is never
+      // "does the database hold this data" but "does a LATER step overwrite
+      // what the database supplied".
       //
-      // macrolanguages.tsv feeds addISOMacrolanguageData, which assigns
-      // NOTHING: every branch of that function is a `console.debug` behind
-      // `DEBUG = false`, so it is a no-op at runtime on either path. Skipping
-      // the fetch is therefore free, and it is the only one of the eight that
-      // is.
+      // SKIPPED - withholding these changes nothing:
       //
-      // The other seven STAY, and the reasons are not the same:
+      //  - iso-639-3.tab. It supplied ISO/BCP/UNESCO/CLDR codes, names, scopes
+      //    and 639-1/639-2b codes - 31,866 field differences before the loader
+      //    sent them. They are all columns of `language_source_attribute`, and
+      //    the query now selects them.
+      //  - families639-5.tsv. Family names, scopes and parents, 230 of them,
+      //    likewise now carried on the ISO and BCP attribute rows.
+      //  - macrolanguages.tsv. addISOMacrolanguageData assigns NOTHING: every
+      //    branch of it is a console.debug behind `DEBUG = false`.
       //
-      //  - Five create languoids or delete them from the per-source
-      //    dictionaries, and the two paths do not agree on languoid IDENTITY.
-      //    The ETL gives every Glottolog node whose ISO column is empty a
-      //    language row of its own (`arab1395` "Arabic", `azer1255` "Central
-      //    Oghuz"); addGlottologLanguages instead merges that node into the
-      //    ISO language the curated files name, because the app shows one
-      //    language under several classification schemes and that needs ONE
-      //    object carrying several identities. 390 languoids differ, and
-      //    language IDs are the key for ents[] lookups, URLs and search.
-      //  - languageFamilyCombinedOverrides.tsv looked safe and is NOT. The
-      //    database holds all 70 override parents correctly, but
-      //    addGlottologLanguages runs FIRST and overwrites them from
-      //    glottolog.tsv - `atay1246` goes to `map` - and this file is what
-      //    restores `fox` afterwards. It is load-bearing for as long as the
-      //    Glottolog step runs. Measured: skipping it moved the Combined
-      //    parent of dozens of languages.
+      // KEPT, and none of it is a missing column:
+      //
+      //  - iso-639-3_Retirements.tab DELETES retired codes from the ISO, BCP,
+      //    CLDR and UNESCO dictionaries and rebuilds their Combined entry from
+      //    scratch. The database keeps those languoids fully populated - `ajp`
+      //    has a name, a scope and a parent in every source - because stripping
+      //    them is a display decision, not a fact about the data. No payload
+      //    can express a deletion the receiver is supposed to perform.
+      //  - glottolog.tsv sets Combined.parentLanguageCode to a GLOTTOCODE
+      //    (`kor` -> `kore1284`). The database deliberately never writes that:
+      //    there a parent is a foreign key, so the same value grafts the
+      //    Glottolog forest onto the Combined tree - language_ancestry 281k ->
+      //    477k, D10 failing on 994 rows.
+      //  - familiesToLanguages.tsv lists members by their ISO 639-1 code where
+      //    they have one (`zhx` contains `zh`, not `zho`), and the ETL's
+      //    `member not in known` check drops all 182 of those, so `zho` has no
+      //    ISO parent in the database while the file path gives it `zhx`.
+      //  - glottocodeToISO.tsv and languageFamilyCombinedOverrides.tsv are both
+      //    RESTORATIVE. They run after addGlottologLanguages and put back what
+      //    it overwrote. `cca` is the clearest case: the API delivers its
+      //    Combined parent `sai` correctly, addISORetirementsToLanguages then
+      //    replaces the whole languoid because `cca` is retired with no
+      //    changeTo, and the overrides file is what restores `sai`. Load-
+      //    bearing for exactly as long as the two steps before them run.
+      isApiEnabled() ? Promise.resolve([]) : loadISOLanguages(),
       isApiEnabled() ? Promise.resolve([]) : loadISOMacrolanguages(),
-      loadISOLanguageFamilies(),
+      isApiEnabled() ? Promise.resolve([]) : loadISOLanguageFamilies(),
       loadISOFamiliesToLanguages(),
       loadISORetirements(),
       loadGlottologLanguages(),

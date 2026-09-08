@@ -91,8 +91,6 @@ export function addGlottologLanguages(
   glottologImport.forEach((importedLanguage) => {
     const { glottoCode, parentGlottocode, scope, name, latitude, longitude } = importedLanguage;
     const lang = languagesBySource.Glottolog[glottoCode];
-    const parentLanguageCode =
-      parentGlottocode != null ? languagesBySource.Glottolog[parentGlottocode]?.ID : undefined;
 
     if (lang == null) {
       // Create new LanguageData
@@ -100,7 +98,6 @@ export function addGlottologLanguages(
         Combined: {
           code: glottoCode,
           scope,
-          parentLanguageCode: parentLanguageCode ?? parentGlottocode,
         },
         Glottolog: {
           code: glottoCode,
@@ -124,7 +121,6 @@ export function addGlottologLanguages(
     } else {
       // Fill in missing data
       if (parentGlottocode != null) {
-        lang.Combined.parentLanguageCode = parentLanguageCode ?? parentGlottocode; // Prefer original parentage
         lang.Glottolog.parentLanguageCode = parentGlottocode;
       }
       lang.Glottolog.scope = scope;
@@ -141,5 +137,42 @@ export function addGlottologLanguages(
         console.debug(`${glottoCode} scope is ${scope} in glottolog but ${lang.scope} in ISO`);
       }
     }
+  });
+
+  // SECOND PASS, for the Combined parent only.
+  //
+  // Three things are deliberate here and each one was a bug first.
+  //
+  // 1. A SECOND PASS, because resolving a glottocode to a languoid ID needs
+  //    every node to be in the dictionary already. glottolog.tsv is sorted
+  //    alphabetically and 12,931 of its 26,523 parent references name a row
+  //    that appears LATER in the file, so in one pass those lookups all miss.
+  //    The old code fell back to `?? parentGlottocode` and stored the raw
+  //    glottocode: `cmn` got `mand1471` where the database has `zho`.
+  //
+  // 2. NO FALLBACK to the glottocode. Here the field is a plain string and an
+  //    unresolvable value is harmless; in the database it
+  //    is a FOREIGN KEY, so the same value grafts the Glottolog forest onto the
+  //    Combined tree - language_ancestry 281k -> 477k. `_glottolog` therefore
+  //    never writes a Combined parent at all, and this leaves it unset rather
+  //    than storing an edge neither tree can follow.
+  //
+  // 3. `??=`, NOT `=`, matching addISOLanguageFamilyData right above it.
+  //    Overwriting put `emil1243` on `rgn` where familiesToLanguages.tsv had
+  //    already said `eml`, and `azte1234` on `xpo` where it had said `nah`.
+  //
+  // The parent is resolved through glottocodeToISO.tsv even for nodes the first
+  // loop could not merge - it says `azte1234` is `nah` and `east2872` is `ekc`,
+  // and the database follows it. Merging those nodes outright was tried and
+  // reverted: it changes which languoids EXIST. Resolving only the parent edge
+  // moves no ids.
+  glottologImport.forEach(({ glottoCode, parentGlottocode }) => {
+    if (parentGlottocode == null) return;
+    const lang = languagesBySource.Glottolog[glottoCode];
+    const parentID =
+      languagesBySource.Combined[glottocodeToISO[parentGlottocode]]?.ID ??
+      languagesBySource.Glottolog[parentGlottocode]?.ID;
+    if (lang == null || parentID == null || parentID === lang.ID) return;
+    lang.Combined.parentLanguageCode ??= parentID;
   });
 }
