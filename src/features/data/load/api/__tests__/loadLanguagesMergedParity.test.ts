@@ -310,7 +310,12 @@ type MergeStepFile =
  * change something no column can supply. The reasons are recorded beside the
  * loader list in CoreData.tsx.
  */
-const SKIPPED_WHEN_THE_API_IS_ON: MergeStepFile[] = ['isoLanguages', 'macrolanguages', 'families'];
+const SKIPPED_WHEN_THE_API_IS_ON: MergeStepFile[] = [
+  'isoLanguages',
+  'macrolanguages',
+  'families',
+  'familiesToLanguages',
+];
 
 async function loadAndMerge(skip: MergeStepFile[] = []): Promise<LanguageDictionary | null> {
   const without = (f: MergeStepFile) => skip.includes(f);

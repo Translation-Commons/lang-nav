@@ -107,8 +107,8 @@ export function useCoreData(): {
       organizations,
     ] = await Promise.all([
       loadLanguages(),
-      // THREE of the eight language files are skipped when the API is on, and
-      // the other five are not. Which is which was settled by measurement, not
+      // FOUR of the eight language files are skipped when the API is on, and
+      // the other four are not. Which is which was settled by measurement, not
       // by reading: each file was withheld from the API path in turn and the
       // result diffed against the full file path, since the question is never
       // "does the database hold this data" but "does a LATER step overwrite
@@ -124,6 +124,12 @@ export function useCoreData(): {
       //    likewise now carried on the ISO and BCP attribute rows.
       //  - macrolanguages.tsv. addISOMacrolanguageData assigns NOTHING: every
       //    branch of it is a console.debug behind `DEBUG = false`.
+      //  - familiesToLanguages.tsv. It lists members by their ISO 639-1 code
+      //    where they have one - `zhx` contains `zh`, not `zho` - and the ETL
+      //    read the cell literally, so 182 of those edges were dropped and
+      //    `zho` had no ISO parent at all. The loader now resolves each member
+      //    through the 639-1 alias first, exactly as the frontend resolves it
+      //    through languagesBySource.BCP, and the edges are in the database.
       //
       // KEPT, and none of it is a missing column:
       //
@@ -138,10 +144,6 @@ export function useCoreData(): {
       //    there a parent is a foreign key, so the same value grafts the
       //    Glottolog forest onto the Combined tree - language_ancestry 281k ->
       //    477k, D10 failing on 994 rows.
-      //  - familiesToLanguages.tsv lists members by their ISO 639-1 code where
-      //    they have one (`zhx` contains `zh`, not `zho`), and the ETL's
-      //    `member not in known` check drops all 182 of those, so `zho` has no
-      //    ISO parent in the database while the file path gives it `zhx`.
       //  - glottocodeToISO.tsv and languageFamilyCombinedOverrides.tsv are both
       //    RESTORATIVE. They run after addGlottologLanguages and put back what
       //    it overwrote. `cca` is the clearest case: the API delivers its
@@ -152,7 +154,7 @@ export function useCoreData(): {
       isApiEnabled() ? Promise.resolve([]) : loadISOLanguages(),
       isApiEnabled() ? Promise.resolve([]) : loadISOMacrolanguages(),
       isApiEnabled() ? Promise.resolve([]) : loadISOLanguageFamilies(),
-      loadISOFamiliesToLanguages(),
+      isApiEnabled() ? Promise.resolve({}) : loadISOFamiliesToLanguages(),
       loadISORetirements(),
       loadGlottologLanguages(),
       loadGlottocodeToISO(),

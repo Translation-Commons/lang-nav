@@ -202,15 +202,45 @@ def _trim_family_name(name: str | None) -> str | None:
     return _re.sub(r"\s+languages|\s+\(family\)", "", name, flags=_re.I).strip() or name
 
 
+def _iso_639_1_to_id(ds: Dataset) -> dict[str, str]:
+    """ISO 639-1 code -> language id, from the aliases _iso_639_3 recorded.
+
+    `zh` -> `zho`, `en` -> `eng`. Built once per call rather than per member,
+    which turns a scan of every alias row into one dict lookup.
+    """
+    return {
+        row["alias_code"]: row["language_id"]
+        for row in ds["language_code_alias"].rows.values()
+        if row.get("alias_kind") == "iso639-1"
+    }
+
+
 def _families_to_languages(ds: Dataset, path: Path) -> None:
-    """Family -> member edges, one space-separated cell per family."""
+    """Family -> member edges, one space-separated cell per family.
+
+    Members are named by their BCP-47 code, which is the TWO-LETTER 639-1 code
+    wherever one exists: `zhx` contains `zh`, not `zho`. Reading the cell
+    literally therefore missed 182 of them, `zho` -> `zhx` included, because no
+    language has the id `zh`.
+
+    The frontend resolves the same cell through `languagesBySource.BCP` first,
+    which is keyed on 639-1, and falls back to the ISO and Combined
+    dictionaries. `_iso_639_1_to_id` below is that lookup: the alias table
+    already records the equivalence, written by _iso_639_3 further up this
+    file, so this consults what was loaded rather than deriving anything new.
+    """
     known = ds["language"].ids()
+    by_6391 = _iso_639_1_to_id(ds)
     missing = 0
     for row in read_table(path):
         family = row.get("ISO 639-5")
         if not family or family not in known:
             continue
         for member in split_multi(row.get("Constituents"), seps=" "):
+            # The 639-1 code first, matching the frontend's BCP-then-ISO order.
+            # A two-letter code is never itself a language id here, so this
+            # cannot shadow one.
+            member = by_6391.get(member, member)
             if member not in known:
                 missing += 1
                 continue
@@ -510,8 +540,8 @@ def _glottolog(
             # `zeem1243` is the case. glottocodeToISO.tsv line 141 maps it onto
             # `zem`, while languages.tsv gives `zem` the code `zeem1242` and
             # `zeem1243` to `zua`. Acting on the first would move `zem` off the
-            # glottocode glottolog.tsv assigns it. That contradiction is FP-037
-            # and belongs in the source files, not in a silent override here.
+            # glottocode glottolog.tsv assigns it. That contradiction belongs
+            # in the source files, not in a silent override here.
             if mapped and mapped != glottocode and mapped not in taken:
                 iso = mapped
         code_to_id[glottocode] = iso if iso else glottocode
@@ -558,9 +588,11 @@ def _glottolog(
         # 477k, which the check itself calls a cycle signal; D10 depth failed
         # on 994 rows; D6, D7, D8 and D9 all moved wholesale.
         #
-        # 7,710 languages therefore hold a Combined parent in the browser that
-        # the database does not have. That is a real difference between the two
-        # paths and it is not resolvable by writing the edge - see FP-044.
+        # The browser reaches the same state a different way: it resolves each
+        # parent glottocode to a languoid id in a second pass and fills the
+        # Combined parent with `??=`, so an unresolvable glottocode is simply
+        # left unset rather than stored. Neither side writes an edge it cannot
+        # follow, which is why the two trees agree without either storing this.
 
         lat = to_decimal(row.raw("latitude"))
         lon = to_decimal(row.raw("longitude"))
@@ -579,8 +611,8 @@ def _retired_languages(ds: Dataset, path: Path) -> None:
     codes take that branch - `fri`, `amd`, `jap`, and the rest withdrawn before
     they ever reached languages.tsv.
 
-    Without these the two paths hold different languoids, which is half of
-    FP-038. They are SpecialCode, so the default view - Macrolanguage and
+    Without these the two paths hold different languoids. They are
+    SpecialCode, so the default view - Macrolanguage and
     Language - does not show them: this changes what the API serves, not what
     the site displays.
 

@@ -695,21 +695,28 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # D6, the family locales. Like D5 this CREATES ROWS, so most of these are
     # about which rows exist rather than about columns being filled. Every count
     # here has to be source-aware: D6 runs once per classification source.
-    check("D6 family locale rows, all sources (measured 21118)",
+    # -> the 182 family members that familiesToLanguages.tsv names by their
+    # ISO 639-1 code. The file lists `zh` under `zhx`, not `zho`, and the
+    # loader read the cell literally, so those edges were never created. It
+    # now resolves each member through the 639-1 alias, matching the
+    # frontend's languagesBySource.BCP lookup, and the tree gained real
+    # edges: language_ancestry 281,241 -> 283,963, under 1%, with all four
+    # structural guards still passing.
+    check("D6 family locale rows, all sources (measured 24694, 2026-09-08)",
           """SELECT count(*) FROM locale
               WHERE locale_source = 'createFamilyLocales'""",
-          lambda v: 19000 <= v <= 23000)
+          lambda v: 23000 <= v <= 26000)
     check("D6 sources that produced rows (expect 5 of 7)",
           """SELECT count(DISTINCT language_source) FROM locale
               WHERE locale_source = 'createFamilyLocales'""",
           lambda v: v == 5)
     # The ISO count is pinned separately because it is the only one the live
     # site can be compared against, and because D5 aggregates ISO alone.
-    check("D6 ISO family locale rows (measured 1388)",
+    check("D6 ISO family locale rows (measured 2542, 2026-09-08)",
           """SELECT count(*) FROM locale
               WHERE locale_source = 'createFamilyLocales'
                 AND language_source = 'ISO'""",
-          lambda v: 1200 <= v <= 1600)
+          lambda v: 2300 <= v <= 2800)
     check("D6 Glottolog family locale rows (measured 16836)",
           """SELECT count(*) FROM locale
               WHERE locale_source = 'createFamilyLocales'
@@ -911,7 +918,7 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
                  + COALESCE(c.population_upper_bound, 0)""",
           lambda v: v == 0)
 
-    # ── D7, descendant counts (Q1(a), FP-010) ──────────────────────────────
+    # ── D7, descendant counts ──────────────────────────────────────────────
     # Until 2026-08-06 both columns were NOT NULL DEFAULT 0, so a plain count()
     # reported them fully populated while D7 had never run and every value was
     # 0. Now that they are nullable, count() is the honest audit again - and if
@@ -936,10 +943,13 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # -> 9591 later the same day: the languages.tsv column-8 parents that the
     # family-ordering bug used to drop are now deferred and applied to ISO and
     # BCP, so `inc` gained Punjabi and two other families gained a child.
-    check("D7 attribute rows with descendants (expect 9591, 2026-09-08)",
+    #
+    # -> 9596 the same day: five more families gained a child once the
+    # 639-1-coded members above were resolved.
+    check("D7 attribute rows with descendants (expect 9596, 2026-09-08)",
           """SELECT count(*) FROM language_source_attribute
               WHERE descendant_count > 0""",
-          lambda v: v == 9591)
+          lambda v: v == 9596)
     # Two independent routes to one number: the sum of the per-node counts must
     # equal the number of ancestor edges in the closure D1 built. A grouping
     # error moves one without the other.
@@ -1028,7 +1038,7 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
           lambda v: v == 0)
     # Far fewer than the 260 languoids that HAVE children, because the
     # descendants branch is the last resort - a family D5 gave a World row takes
-    # the territories branch. What survives here is the FP-014 gap.
+    # the territories branch. What survives here is the remainder.
     #
     # THIS IS A SUM COMPUTED, NOT A BRANCH TAKEN. Every node in the level loop
     # gets a descendant sum whenever its children have estimates, whether or
@@ -1045,7 +1055,7 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # speaking estimate came from the descendants branch, not merely languoids
     # that had a sum available. Nearly all 234 above lost to a higher-precedence
     # branch - a World locale or the rough languages.tsv figure - so this is
-    # smaller by two orders of magnitude, and that gap is the FP-014 story: the
+    # smaller by two orders of magnitude, and that gap is the whole point: the
     # descendants branch is the last resort, and it is rarely reached.
     check("D8 languages whose speaking estimate IS the descendant sum (measured 8)",
           """SELECT count(*) FROM language
@@ -1085,19 +1095,31 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     check("D9 zho largest descendant (expect cmn)",
           "SELECT largest_descendant_id FROM language WHERE id = 'zho'",
           lambda v: v == "cmn")
-    # Indo-European resolves to Punjabi, which looks wrong and is not. English
-    # is a ROOT in the Combined tree - it has no parent there - so its
-    # 1,188,624,618 is correctly not a candidate for `ine`. If this ever starts
-    # returning eng, the Combined tree has gained edges and D8's numbers move
-    # with it.
-    check("D9 ine largest descendant (expect pan, NOT eng)",
+    # Indo-European resolves to English, and getting here took a fix.
+    #
+    # This check used to expect `pan` Punjabi and to say so at length: English
+    # was a ROOT in the Combined tree, with no parent, so its billion speakers
+    # were correctly not a candidate for `ine`. The comment then warned that if
+    # this ever started returning `eng`, the Combined tree had gained edges.
+    #
+    # It has, and they are edges that should always have been there.
+    # familiesToLanguages.tsv puts `en` under `gmw` West Germanic, which sits
+    # under `ine` - but it names members by their ISO 639-1 code where they have
+    # one, and the loader was reading the cell literally, so `en` matched no
+    # language and 182 such edges were dropped. English was a root only because
+    # of that bug. The frontend never had it: it resolves the same cell through
+    # languagesBySource.BCP, which is keyed on 639-1.
+    #
+    # So the expectation is inverted deliberately. `eng` is now the honest
+    # answer, and `pan` would mean the 639-1 resolution has regressed.
+    check("D9 ine largest descendant (expect eng, since en is under gmw)",
           "SELECT largest_descendant_id FROM language WHERE id = 'ine'",
-          lambda v: v == "pan")
-    check("D9 ine largest descendant population (measured 176654800)",
+          lambda v: v == "eng")
+    check("D9 ine largest descendant population (measured 1283547634)",
           """SELECT population_estimate FROM language
               WHERE id = (SELECT largest_descendant_id FROM language
                            WHERE id = 'ine')""",
-          lambda v: v == 176654800)
+          lambda v: v == 1283547634)
     # THE CHECK THAT PROVES THE BASE-SCOPE FALLBACK IS LIVE. tid and kgd carry
     # no scope on their Combined row and are Families only via ISO/Glottolog.
     # Without the fallback these two ancestors name a language family as their
@@ -1330,16 +1352,19 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # ── D11, family modality ───────────────────────────────────────────────
     # 946 declared plus 82 derived. The effective value is what the frontend
     # exposes as lang.modality and is what an API should serve.
-    check("D11 effective modality on Combined (measured 1032, 2026-09-03)",
+    # -> 1045 on 2026-09-08, when familiesToLanguages.tsv's 639-1-coded
+    # members were finally resolved (see D9 ine). More families have
+    # children, so more of them derive an answer.
+    check("D11 effective modality on Combined (measured 1045, 2026-09-08)",
           """SELECT count(modality) FROM language_source_attribute
               WHERE source = 'Combined'""",
-          lambda v: v == 1032)
-    check("D11 modalities derived, not declared (measured 83, 2026-09-03)",
+          lambda v: v == 1045)
+    check("D11 modalities derived, not declared (measured 96, 2026-09-08)",
           """SELECT count(*) FROM language_source_attribute a
               JOIN language l ON l.id = a.language_id
              WHERE a.source = 'Combined'
                AND a.modality IS NOT NULL AND l.modality IS NULL""",
-          lambda v: v == 83)
+          lambda v: v == 96)
     # THE LOADED COLUMN MUST NOT MOVE, and for two reasons rather than one.
     # language.modality holds the 946 values from languages.tsv, and
     # language_modality_discount() reads it when D8 estimates a population from
@@ -1366,12 +1391,21 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # THE LEVEL-LOOP TRIPWIRE. ine has no child that DECLARES a modality - iir
     # and gem carry the weight and both are themselves derived - so a single
     # bottom-up pass leaves this NULL and moves 27 other answers without
-    # failing any other check here. 1 is MostlySpoken.
-    check("D11 ine Indo-European is Mostly Spoken, from two derived children",
+    # failing any other check here.
+    #
+    # The VALUE moved from 1 MostlySpoken to 0 SpokenAndWritten on 2026-09-08,
+    # and the tripwire still works: what matters here is that ine derives an
+    # answer at all, from children that are themselves derived. English entered
+    # the subtree that day - familiesToLanguages.tsv puts `en` under `gmw`, and
+    # the loader had been dropping every member the file names by its 639-1
+    # code - so a very large written-language population now sits under gem,
+    # and the weighted balance crossed. NOT NULL is the property being guarded;
+    # the literal is pinned so a further shift is still reported.
+    check("D11 ine Indo-European is Spoken & Written, from two derived children",
           """SELECT modality FROM language_source_attribute
               WHERE source = 'Combined' AND language_id = 'ine'""",
-          lambda v: v == 1)
-    check("D11 derived answers with no declared-modality child (measured 12)",
+          lambda v: v == 0)
+    check("D11 derived answers with no declared-modality child (measured 11)",
           """SELECT count(*) FROM language_source_attribute a
               JOIN language l ON l.id = a.language_id
              WHERE a.source = 'Combined'
@@ -1382,12 +1416,12 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
                       WHERE c.source = 'Combined'
                         AND c.parent_language_id = a.language_id
                         AND cl.modality IS NOT NULL)""",
-          lambda v: v == 12)
+          lambda v: v == 11)
     # THE RESULT MOST LIKELY TO BE REPORTED AS A BUG, and it is faithful.
     # Australian has 279 children, 5 with a modality, and exactly one of those
     # with a nonzero population: rsm Miriwoong Sign Language, population 3. The
     # average is taken over the children that HAVE a modality, so those 3
-    # speakers carry 100% of the weight. 3 is Sign. See FP-019.
+    # speakers carry 100% of the weight. 3 is Sign.
     check("D11 aus Australian is Sign, on one 3-speaker sign language",
           """SELECT modality FROM language_source_attribute
               WHERE source = 'Combined' AND language_id = 'aus'""",
@@ -1410,10 +1444,16 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # The check did its job - a threshold this close is exactly what should
     # move when the tree changes - so it is re-baselined rather than loosened.
     # If it flips back, the tree has changed again and that is worth knowing.
-    check("D11 tbq Tibeto-Burman is Mostly Spoken, just over the boundary (2026-09-03)",
+    #
+    # It flipped back on 2026-09-08, and the tree had indeed changed again:
+    # familiesToLanguages.tsv names members by their ISO 639-1 code where they
+    # have one, the loader was reading the cell literally, and resolving those
+    # 182 edges moved 13 more families onto a derived answer. tbq is the one
+    # sitting closest to the 0.5 boundary, so it is the one that reports it.
+    check("D11 tbq Tibeto-Burman is Spoken & Written, back over the boundary (2026-09-08)",
           """SELECT modality FROM language_source_attribute
               WHERE source = 'Combined' AND language_id = 'tbq'""",
-          lambda v: v == 1)
+          lambda v: v == 0)
     # The dialect early return skips the languoid AND its whole subtree in the
     # TypeScript; the SQL guard is node-level, which is exact only while no
     # dialect has children. It does not today, under the same ISO-then-
