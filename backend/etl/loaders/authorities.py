@@ -66,14 +66,12 @@ def load(ds: Dataset, root: Path) -> None:
 
     _languages.apply_parents(ds)
     _macrolanguages(ds, root / "iso" / "macrolanguages.tsv")
+    iso_index = _frontend_iso_index(root)
     _glottolog(
         ds,
         root / "glottolog" / "glottolog.tsv",
-        _curated_glottocode_map(root),
-        _codes_only_in_retirements(
-            root / "iso" / "iso-639-3_Retirements.tab",
-            root / "tc" / "languages.tsv",
-        ),
+        _curated_glottocode_map(root, iso_index),
+        iso_index,
     )
     # Immediately after _glottolog, so glottolog.tsv wins wherever the two
     # files name a different glottocode, and before _glottocode_to_iso, which
@@ -278,7 +276,42 @@ def _macrolanguages(ds: Dataset, path: Path) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _curated_glottocode_map(root: Path) -> dict[str, str]:
+def _frontend_iso_index(root: Path) -> set[str]:
+    """The codes that reach `languagesBySource.ISO` in the frontend.
+
+    Two sources, and the second is not obvious:
+
+    - every code in `iso-639-3.tab`, because addISODataToLanguages sets
+      `ISO.code` from it and groupLanguagesBySource indexes on that;
+    - a 639-5 family code ONLY IF it is absent from languages.tsv.
+      addISOLanguageFamilyData creates a languoid for a family it cannot find
+      and registers it in ISO, BCP and Combined - but when languages.tsv
+      already has a row for that code it takes the else branch, which fills
+      fields and never touches the ISO index.
+
+    So `bnt` and `ine` are in it and `nah`, `ijo` and `kro` are not, even
+    though all five are 639-5 families. That difference decides whether
+    glottocodeToISO.tsv merges a glottocode onto them: `bant1294` becomes
+    `bnt`, while `azte1234` stays a languoid of its own.
+    """
+    codes = {
+        row.get("Id")
+        for row in read_table(root / "iso" / "iso-639-3.tab")
+        if row.get("Id")
+    }
+    in_languages_tsv = {
+        row.get("Language Code")
+        for row in read_table(root / "tc" / "languages.tsv")
+        if row.get("Language Code")
+    }
+    for row in read_table(root / "iso" / "families639-5.tsv"):
+        code = row.get("ISO 639-5")
+        if code and code not in in_languages_tsv:
+            codes.add(code)
+    return codes
+
+
+def _curated_glottocode_map(root: Path, iso_index: set[str]) -> dict[str, str]:
     """glottocode -> ISO code, from the two files that curate that equivalence.
 
     `glottolog.tsv` names an ISO code for most nodes but not all, and where it
@@ -298,6 +331,59 @@ def _curated_glottocode_map(root: Path) -> dict[str, str]:
         glottocode = row.get("Glottocode")
         iso = row.get("ISO Code")
         if not glottocode or not iso or glottocode.startswith("<"):
+            continue
+        # ONLY where the ISO code reaches the frontend's ISO index.
+        #
+        # addGlottologLanguages applies this file as
+        # `languagesBySource.ISO[isoCode]`, so a mapping onto a code that is
+        # not in that index finds nothing and never merges - the glottocode
+        # stays a languoid of its own. See _frontend_iso_index for which codes
+        # get there and why `bnt` does while `nah` does not.
+        if iso not in iso_index:
+            continue
+        curated[glottocode] = iso
+
+    # languages.tsv is the weaker source of the two: glottocodeToISO.tsv exists
+    # for nothing else, so it wins where both name a code. setdefault, not [].
+    for row in read_table(root / "tc" / "languages.tsv"):
+        glottocode = row.get("Glottocode")
+        lid = row.get("Language Code")
+        if not glottocode or not lid:
+            continue
+        curated.setdefault(glottocode, lid)
+
+    return curated
+
+
+def _curated_glottocode_map(root: Path, iso_index: set[str]) -> dict[str, str]:
+    """glottocode -> ISO code, from the two files that curate that equivalence.
+
+    `glottolog.tsv` names an ISO code for most nodes but not all, and where it
+    is silent this project says so itself, in two places:
+
+    - `glottocodeToISO.tsv`, whose entire purpose is this mapping - the header
+      is `Glottocode / ISO Code / Name`. `<contested>` is a marker, not a code.
+    - `languages.tsv`'s Glottocode column, read the other way round.
+
+    Both are human-curated statements that a Glottolog node and an ISO language
+    are the same thing, and the frontend acts on them. Returned as one map so
+    `_glottolog` can consult them where glottolog.tsv gives it nothing.
+    """
+    curated: dict[str, str] = {}
+
+    for row in read_table(root / "tc" / "glottocodeToISO.tsv"):
+        glottocode = row.get("Glottocode")
+        iso = row.get("ISO Code")
+        if not glottocode or not iso or glottocode.startswith("<"):
+            continue
+        # ONLY where the ISO code reaches the frontend's ISO index.
+        #
+        # addGlottologLanguages applies this file as
+        # `languagesBySource.ISO[isoCode]`, so a mapping onto a code that is
+        # not in that index finds nothing and never merges - the glottocode
+        # stays a languoid of its own. See _frontend_iso_index for which codes
+        # get there and why `bnt` does while `nah` does not.
+        if iso not in iso_index:
             continue
         curated[glottocode] = iso
 
@@ -335,7 +421,7 @@ def _codes_only_in_retirements(retirements: Path, languages: Path) -> set[str]:
 
 
 def _glottolog(
-    ds: Dataset, path: Path, curated: dict[str, str], retired_only: set[str]
+    ds: Dataset, path: Path, curated: dict[str, str], iso_index: set[str]
 ) -> None:
     """Glottolog's ~27,000 nodes.
 
@@ -391,16 +477,26 @@ def _glottolog(
         # code as a SpecialCode entry. 192 of the glottocode ones are in the
         # default view.
         #
-        # The test is `in retired`, NOT "not a known language": _retired_
-        # languages() runs before this and creates all 221 of them, so by now
-        # they ARE known and an existence check would let every one through.
+        # The same test covers glottolog.tsv's PRIVATE-USE codes. It puts `qbb`
+        # in the ISO column of `oldl1238` Old Latin, and nine more in the `q`
+        # range reserved for local use. None is in iso-639-3.tab, so none
+        # reaches the frontend's ISO index either, and the frontend keys those
+        # nodes by glottocode for exactly the same reason.
         #
-        # So the node is keyed on its own glottocode, matching that. Whether a
-        # withdrawn code should appear beside the languages that replaced it is
-        # a data-quality question for the maintainers - FP-042 - and answering
-        # it here would change what the site shows rather than what the API
-        # serves.
-        if iso and iso in retired_only:
+        # `in iso_index`, NOT "is a known language": _retired_languages() runs
+        # before this and creates all 221 retired codes, so by now they ARE
+        # languages and an existence check would let every one through.
+        #
+        # Whether a withdrawn code should appear beside the languages that
+        # replaced it is a data-quality question for the maintainers, and
+        # answering it here would change what the site shows rather than what
+        # the API serves.
+        # `curated` carries languages.tsv column 2, which is the OTHER route:
+        # the frontend files a languoid under its own glottocode there, so
+        # addGlottologLanguages finds it and merges even when the ISO index has
+        # nothing. `adp` reaches its node that way - it is a languages.tsv row
+        # with the glottocode adap1234 and no iso-639-3.tab entry at all.
+        if iso and iso not in iso_index and curated.get(glottocode) != iso:
             iso = None
 
         if not iso:

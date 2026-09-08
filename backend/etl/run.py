@@ -950,13 +950,14 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
              WHERE x.counted <> x.edges""",
           lambda v: v == 0)
     # 182385 -> 182739 on 2026-09-07 (the 56 new rows carry parent links, so
-    # their ancestors gained descendants), -> 182401 on 2026-09-08: merging
-    # languoids onto their ISO code removes them and their edges, while the 221
-    # retirement-only codes add theirs. Net slightly above the original.
-    check("D7 Glottolog descendant edges (expect 182401, 2026-09-08)",
+    # their ancestors gained descendants), -> 182405 on 2026-09-08: the ETL now
+    # builds the same languoid set the frontend does, so nodes it used to
+    # duplicate are merged and nodes it used to merge stand on their own. The
+    # net is 20 edges above the original.
+    check("D7 Glottolog descendant edges (expect 182405, 2026-09-08)",
           """SELECT sum(descendant_count) FROM language_source_attribute
               WHERE source = 'Glottolog'""",
-          lambda v: v == 182401)
+          lambda v: v == 182405)
     # STRUCTURAL, and the strongest check here. A parent's descendant set
     # strictly contains each child's plus the child itself, so a parent must
     # count MORE than any of its children in the same source. An off-by-one or a

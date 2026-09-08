@@ -147,7 +147,22 @@ def load(ds: Dataset, root: Path) -> None:
     # beyond the ordering bug being fixed.
     known = ds["language"].ids()
     for lid, parent in short_code_parents:
-        if parent not in known or parent == lid:
+        if parent == lid:
+            continue
+        if parent not in known:
+            # The parent is a language family, created later by the authorities
+            # loader - the FP-035 ordering bug. Deferring the UNESCO half was
+            # tried and REVERTED: those families never get a UNESCO row of
+            # their own (addISOLanguageFamilyData writes families to Combined,
+            # ISO and BCP but not UNESCO), so the deferred edge pointed at a
+            # node outside its own tree. D10 could not assign a depth and its
+            # structural check "depth 0 disagreeing with having no parent"
+            # went from 0 to 9.
+            #
+            # The frontend holds the same value harmlessly, because there it is
+            # a plain string with no tree to be consistent with. Here it is a
+            # foreign key into a per-source hierarchy, so the mapper reproduces
+            # it instead - see loadLanguagesFromApi's UNESCO fallback.
             continue
         for source in (SOURCE_ISO, SOURCE_BCP, SOURCE_UNESCO):
             ds["language_source_attribute"].upsert(
