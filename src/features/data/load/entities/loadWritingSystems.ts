@@ -2,9 +2,19 @@ import { EntityType } from '@features/params/PageParamTypes';
 
 import { WritingSystemData, WritingSystemScope } from '@entities/writingsystem/WritingSystemTypes';
 
+import { isApiEnabled } from '../api/apiConfig';
+import { loadWritingSystemsFromApi } from '../api/loadWritingSystemsFromApi';
+
 import { loadEntitiesFromFile } from './loadEntitiesFromFile';
 
 export async function loadWritingSystems(): Promise<Record<string, WritingSystemData> | void> {
+  if (isApiEnabled()) {
+    const fromApi = await loadWritingSystemsFromApi();
+    if (fromApi != null) {
+      return fromApi;
+    }
+    console.warn('Writing system API load failed; falling back to TSV files.');
+  }
   return await loadEntitiesFromFile<WritingSystemData>(
     'data/tc/writingSystems.tsv',
     parseWritingSystem,
