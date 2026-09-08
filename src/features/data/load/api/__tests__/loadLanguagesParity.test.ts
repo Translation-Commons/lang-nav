@@ -447,14 +447,12 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     // dropped - deferring them too would push them past the macrolanguage
     // cross-check and change which file wins for 278 languages - so the mapper
     // keeps a Combined fallback for those two alone.
-    // `dyl` and `lfb` are excluded, and the reason is a real limit rather than
-    // an oversight. In the database they are INDISTINGUISHABLE from `bho`:
-    // Combined and ISO both carry the family parent, UNESCO carries NULL. But
-    // the file gives the first two a UNESCO parent and the third none, because
-    // parseLanguageLine reads languages.tsv column 8 - which `dyl` and `lfb`
-    // have and `bho` does not - while `bho`'s Combined parent arrived from
-    // familiesToLanguages.tsv instead. No column stores that distinction, so
-    // no mapper rule can recover it.
+    // ISO, not UNESCO. The ETL now defers these parents until the families
+    // exist and applies them to ISO and BCP - never to UNESCO, because those
+    // families have no UNESCO row of their own and an edge pointing at one
+    // lands outside its own tree: D10's depth check went 0 -> 9 when that was
+    // tried. So the database holds the ISO half of what the file gives, and
+    // this asserts that half.
     //
     // Storing the UNESCO edge was tried and reverted: those families never get
     // a UNESCO row, so it pointed outside its own tree and D10's depth
@@ -465,12 +463,15 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     // languages have a UNESCO parent and ~5,500 comparable ones do not. Two of
     // the three ways that could be answered remove this exemption instead of
     // needing a provenance column, so it is worth answering first.
-    const indistinguishableFromFamiliesToLanguages = ['dyl', 'lfb'];
-    const missing = ETL_DROPS_THE_PARENT.filter(
-      (id) =>
-        !indistinguishableFromFamiliesToLanguages.includes(id) &&
-        fromApi[id] != null &&
-        fromApi[id].UNESCO.parentLanguageCode == null,
+    // Only the nine with an ISO-shaped id. languages.py writes ISO, BCP and
+    // UNESCO rows solely for codes of three characters or fewer, while
+    // parseLanguageLine gates on the PARENT's length instead - so the six
+    // glottocode-keyed ones here (`chan1329`, `chao1238`...) get those rows on
+    // the file path and have none at all in the database. A different rule
+    // from the deferral this test is about, and one the API cannot serve.
+    const isoShaped = ETL_DROPS_THE_PARENT.filter((id) => id.length <= 3);
+    const missing = isoShaped.filter(
+      (id) => fromApi[id] != null && fromApi[id].ISO.parentLanguageCode == null,
     );
     expect(missing).toEqual([]);
   }, 120_000);
