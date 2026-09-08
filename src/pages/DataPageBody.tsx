@@ -16,6 +16,7 @@ import ContainErrorsAndSuspense from '@shared/containers/ContainErrorsAndSuspens
 import EntityTypeTabs from './dataviews/EntityTypeTabs';
 import LanguageFocusTabs from './dataviews/LanguageFocusTabs';
 
+import TransformsPopup from '@features/transforms/TransformsPopup';
 import './datapage.css';
 
 const DataViews = React.lazy(() => import('./dataviews/DataViews'));
@@ -37,6 +38,7 @@ const DataPageBody: React.FC = () => {
           <ScalePopupCard />
           <ColorPopupCard />
           <SortPopupCard />
+          <TransformsPopup />
           <ViewSelector />
         </div>
       </div>
