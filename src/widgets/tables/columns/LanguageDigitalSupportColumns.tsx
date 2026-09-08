@@ -127,6 +127,22 @@ const columns: TableColumn<LanguageData>[] = [
     },
   },
   {
+    key: 'Android',
+    description: 'Language entries supported in Android.',
+    render: (lang) => <IsSupportedIcon isSupported={!!lang.android?.length} />,
+    exportValue: (lang) => {
+      if (!lang.android || lang.android.length === 0) return 'n/a';
+      return lang.android
+        .map((entry) => {
+          const parts = [entry.name];
+          if (entry.locale) parts.push(`(${entry.locale})`);
+          if (entry.writingSystem) parts.push(`(${entry.writingSystem})`);
+          return parts.join(' ');
+        })
+        .join('; ');
+    },
+  },
+  {
     key: 'iOS',
     description: 'Language entries supported in iOS.',
     render: (lang) => <IsSupportedIcon isSupported={!!lang.ios?.length} />,
