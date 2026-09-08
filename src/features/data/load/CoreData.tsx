@@ -114,6 +114,10 @@ export function useCoreData(): {
       // "does the database hold this data" but "does a LATER step overwrite
       // what the database supplied".
       //
+      // ALL LANGUAGE DATA COMES FROM THE DATABASE. The four files below run
+      // transformations; they do not carry facts the API lacks. See the note
+      // above that list.
+      //
       // SKIPPED - withholding these changes nothing:
       //
       //  - iso-639-3.tab. It supplied ISO/BCP/UNESCO/CLDR codes, names, scopes
@@ -131,7 +135,34 @@ export function useCoreData(): {
       //    through the 639-1 alias first, exactly as the frontend resolves it
       //    through languagesBySource.BCP, and the edges are in the database.
       //
-      // KEPT, and none of it is a missing column:
+      // KEPT - and THE DATABASE HOLDS EVERY FACT THESE FOUR FILES CONTAIN.
+      //
+      // That is worth stating plainly, because the obvious reading of this list
+      // is "four columns still missing" and it is wrong. Verified against a
+      // loaded database: language_retirement has all 388 retirement rows with
+      // their remedy text and effective dates, language_code_alias has all
+      // 9,157 glottocode and ISO aliases, and 69 attribute rows carry
+      // is_manual_override for the override file. Nothing here is waiting on a
+      // schema change.
+      //
+      // What these four still supply is LOGIC, not data: a display rule, a
+      // browser-only convention, and two files that repair what the other two
+      // overwrite. Reproducing them in the mapper means reproducing the ORDER
+      // in which CoreData mutates the dictionaries, and that is what defeats
+      // it - groupLanguagesBySource runs BEFORE the retirement step and AFTER
+      // the mapper, so a glottocode the mapper must supply for the dictionary
+      // to register it is the same glottocode the end state must not have.
+      //
+      // Measured, on the file path: of 26,740 Combined parents, exactly ONE
+      // points at a languoid the Combined dictionary does not hold. So the two
+      // trees are not far apart - what differs is which layer applies the rule,
+      // not what the answer is.
+      //
+      // Five parallel requests is the deliberate stopping point. These files
+      // are static, CDN-cacheable and about 755 KB gzipped, against a query
+      // that already sends 16 MB raw to absorb the three that did move. The
+      // remaining saving is round trips at page load, and it is not worth
+      // changing what the Combined tree means to collect it.
       //
       //  - iso-639-3_Retirements.tab DELETES retired codes from the ISO, BCP,
       //    CLDR and UNESCO dictionaries and rebuilds their Combined entry from
