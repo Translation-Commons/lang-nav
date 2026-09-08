@@ -88,7 +88,19 @@ const CONVERGING_KEYS = ['parentLanguageCode'];
  *
  * Listed individually so a SIXTH still fails.
  */
-const GLOTTOLOG_OVERRIDES_THE_FILE = ['bvs', 'ccq', 'mhv', 'mol', 'wxa'];
+const GLOTTOLOG_OVERRIDES_THE_FILE = ['bvs', 'ccq', 'dyl', 'mhv', 'mol', 'wxa'];
+
+/**
+ * `dyl` joined that list on 2026-09-08, and for a slightly different reason
+ * than the rest: languages.tsv gives it the parent glottocode `bhut1234`, which
+ * is its OWN glottocode. glottolog.tsv gives `bhut1234` the parent `deaf1237`,
+ * and addGlottologLanguages assigns that unconditionally, so both paths finish
+ * at `deaf1237` - only the load-time value differs.
+ *
+ * It became visible when the ETL started merging on the curated mappings
+ * (FP-038): before that the API had no Glottolog row for `dyl` at all, so the
+ * "one side is null" rule covered it.
+ */
 
 /**
  * The ONE language where the two paths hold a different glottocode for good.
