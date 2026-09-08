@@ -370,6 +370,44 @@ def _parse_language_rows(
         # code order is not recoverable from (census_id, language_id) later.
         name_bearing = _name_bearing_code(all_codes)
 
+        # A ROW CAN CARRY A NAME AND NO FIGURES, and it still contributes that
+        # name to search.
+        #
+        # parseCensusLanguageRow records the name BEFORE it looks at any
+        # population column, so a row whose every column is empty still adds an
+        # alias. This loop only ever wrote the name from inside the column loop,
+        # after `estimate is None: continue`, so such a row was dropped whole.
+        #
+        # `cjm` in us_asc.tsv is the case: line 269 is "Cham" with figures and
+        # line 270 is "Eastern Cham" with nothing at all, so the API path
+        # offered one name where the file path offers both. It is the only
+        # duplicate code in that file whose second row is dataless - the other
+        # 19 all carry figures - which is why it was the only one that showed.
+        #
+        # Attached to the rows this language already has rather than stored on
+        # its own, because population_estimate is NOT NULL and a nameless
+        # estimate row would be a worse lie than a missing one. The accumulation
+        # rule is the frontend's: join with ' / ', skip a repeat.
+        if source_name is not None and name_bearing in known_languages:
+            has_estimate_here = any(
+                index in kept
+                and column < len(parts)
+                and parts[column].strip()
+                and _population_estimate(parts[column], censuses[index])[0] is not None
+                for index, column in enumerate(columns)
+            )
+            if not has_estimate_here:
+                for (existing_census, existing_code), existing in ds[
+                    "census_language_estimate"
+                ].rows.items():
+                    if existing_code != name_bearing or existing_census not in kept.values():
+                        continue
+                    if existing["source_name"] is None:
+                        existing["source_name"] = source_name
+                    elif source_name not in existing["source_name"].split(" / "):
+                        existing["source_name"] += f" / {source_name}"
+                    existing["is_name_bearing"] = True
+
         for index, column in enumerate(columns):
             if index not in kept:
                 continue
