@@ -2,7 +2,6 @@ import React from 'react';
 
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-
 import LocalePopulationRecords from '@entities/locale/LocalePopulationRecords';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 
