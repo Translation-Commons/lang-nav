@@ -63,7 +63,10 @@ const LanguageTerritories: React.FC<Props> = ({ lang, view }) => {
     <LocalParamsProvider overrides={params}>
       <div className="text-xs">
         {view === View.CardList && (
-          <MiniCardList ents={uniqueBy(locales, (l) => l.territoryCode || '')} />
+          <MiniCardList
+            ents={uniqueBy(locales, (l) => l.territoryCode || '')}
+            labelSource="territory"
+          />
         )}
         {view === View.Map && (
           <>
