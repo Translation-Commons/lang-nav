@@ -234,14 +234,55 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
     CLDR: {},
   };
 
-  // Matches parseLanguageLine exactly, including the empty-object default above:
-  // a language whose parent is not ISO-shaped keeps three empty sub-objects
-  // rather than gaining a parent the file path would not have given it.
-  if (parentISOCode) {
-    language.ISO.parentLanguageCode = parentISOCode;
-    language.BCP.parentLanguageCode = parentISOCode;
-    language.UNESCO.parentLanguageCode = parentISOCode;
-  }
+  // Each source's parent comes from ITS OWN row, falling back to the derived
+  // ISO-shaped Combined parent only where the database has none.
+  //
+  // Deriving all three from the Combined parent - which is what
+  // parseLanguageLine does, reading one file column - stopped being equivalent
+  // once the ETL learned to fill Combined from familiesToLanguages.tsv. That
+  // file gives `bho` the parent `bih`, and the ETL writes it to Combined, ISO
+  // and BCP but deliberately NOT to UNESCO, because addISOLanguageFamilyData
+  // does not either: UNESCO holds only what languages.tsv seeds. Re-deriving
+  // handed UNESCO a parent the file path never gives it, on 40+ languages.
+  //
+  // The fallback keeps the 15 languages of FP-035, whose ISO-tree parent the
+  // ETL drops entirely and whose Combined parent is the only record of it.
+  const isoParent = orUndefined(attributes.get(LanguageSource.ISO)?.parent_language_id);
+  const bcpParent = orUndefined(attributes.get(LanguageSource.BCP)?.parent_language_id);
+  const unescoParent = orUndefined(attributes.get(LanguageSource.UNESCO)?.parent_language_id);
+
+  // ISO and BCP still fall back to the Combined parent where the database has
+  // none: languages.load() drops those two when the parent is a family that
+  // does not exist yet, deliberately, because the macrolanguage cross-check
+  // fills any ISO parent still NULL when it runs. UNESCO needs no fallback -
+  // it is deferred and applied in full - so reading its own column is what
+  // keeps `bho` from gaining a parent the file path never gives it.
+  const droppedByEtl = isoParent == null ? parentISOCode : undefined;
+
+  if (isoParent ?? droppedByEtl) language.ISO.parentLanguageCode = isoParent ?? droppedByEtl;
+  if (bcpParent ?? droppedByEtl) language.BCP.parentLanguageCode = bcpParent ?? droppedByEtl;
+  // UNESCO takes its own parent, and falls back only where the database CANNOT
+  // hold the file's answer. Two such cases, and the distinction matters:
+  //
+  //  - `droppedByEtl`: the ISO row has no parent either, so languages.load()
+  //    discarded the edge because the family did not exist yet (FP-035). The
+  //    ETL cannot simply defer it: those families never get a UNESCO row -
+  //    addISOLanguageFamilyData writes them to Combined, ISO and BCP only - so
+  //    a stored edge would point outside its own tree and D10's depth
+  //    invariant breaks. Measured: 9 rows at depth 0 with a parent set.
+  //  - No UNESCO row at all: languages.py writes ISO, BCP and UNESCO rows only
+  //    for codes of three characters or fewer, while parseLanguageLine gates
+  //    on the PARENT's length. So `chan1329`, whose column 8 names `hnm`, gets
+  //    all three on the file path and none in the database. Six languoids.
+  //
+  // A row that EXISTS and holds NULL is a deliberate absence - that is `bho`,
+  // whose parent came from familiesToLanguages.tsv, which the ETL applies to
+  // Combined, ISO and BCP but not UNESCO - and is left alone.
+  const noUnescoRow = attributes.get(LanguageSource.UNESCO) == null;
+  const unescoFallback = droppedByEtl ?? (noUnescoRow ? parentISOCode : undefined);
+
+  if (unescoParent ?? unescoFallback)
+    language.UNESCO.parentLanguageCode = unescoParent ?? unescoFallback;
 
   return language;
 }

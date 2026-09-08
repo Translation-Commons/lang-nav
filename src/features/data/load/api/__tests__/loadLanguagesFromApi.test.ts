@@ -49,8 +49,24 @@ const spanish: ApiLanguage = {
       code: 'spa',
       name: 'Spanish',
       scope: 3,
-      parent_language_id: null,
+      parent_language_id: 'roa',
       code_6391: 'es',
+    },
+    {
+      source: 'BCP',
+      code: 'es',
+      name: 'Spanish',
+      scope: 3,
+      parent_language_id: 'roa',
+      code_6391: 'es',
+    },
+    {
+      source: 'UNESCO',
+      code: 'spa',
+      name: 'Spanish',
+      scope: 3,
+      parent_language_id: 'roa',
+      code_6391: null,
     },
   ],
   language_code_alias: [{ alias_code: 'stan1288' }],
@@ -160,9 +176,11 @@ describe('parseApiLanguage', () => {
     expect(language.nameSubtitle).toBeUndefined();
   });
 
-  it('derives the ISO-family parents from the Combined parent', () => {
-    // parseLanguageLine applies column 8 to ISO, BCP and UNESCO only when it is
-    // short enough to be an ISO code.
+  it('reads each source parent from its own row', () => {
+    // Not derived from the Combined parent any more. The ETL fills Combined
+    // from familiesToLanguages.tsv, which it deliberately does NOT apply to
+    // UNESCO, so re-deriving gave 40+ languages a UNESCO parent the file path
+    // never gives them.
     const language = parseApiLanguage(spanish);
     expect(language.Combined.parentLanguageCode).toBe('roa');
     expect(language.ISO.parentLanguageCode).toBe('roa');
