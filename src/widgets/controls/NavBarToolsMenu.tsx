@@ -1,64 +1,65 @@
-import { useLocation } from 'react-router-dom';
+import { ChevronDownIcon } from 'lucide-react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import { LangNavPageName } from '@app/PageRoutes';
+import { cn } from '@shared/lib/utils';
+import { Button } from '@shared/ui/button';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from '@shared/ui/dropdown-menu';
 
-import ReportID from '@widgets/reports/ReportID';
-
-import PopupCard from '@features/layers/popupcard/PopupCard';
-import InternalLink from '@features/params/InternalLink';
-import { EntityType, View } from '@features/params/PageParamTypes';
-
-import useAreParamsCurrent from './useAreParamsCurrent';
-
-const NOTABLE_REPORTS = [
-  {
-    label: 'Census Validation',
-    params: {
-      entType: EntityType.Census,
-      view: View.Reports,
-      reportID: ReportID.CensusInputTool,
-    },
-  },
-  {
-    label: 'Plurals',
-    params: {
-      entType: EntityType.Language,
-      view: View.Reports,
-      reportID: ReportID.LanguagePlurals,
-    },
-  },
-];
+import { navBarItemClassName } from './NavBarLink';
+import {
+  DECODER_TOOL,
+  getToolURL,
+  NAV_BAR_TOOLS,
+  NavBarTool,
+  REPORT_TOOLS,
+  useIsToolOpen,
+} from './navBarTools';
 
 const NavBarToolsMenu: React.FC = () => {
-  const areParamsCurrent = useAreParamsCurrent();
-  const location = useLocation();
+  const isToolOpen = useIsToolOpen();
+  const isAnyToolOpen = NAV_BAR_TOOLS.some(isToolOpen);
 
   return (
-    <PopupCard
-      buttonClassName="primary h-full p-2 text-xl font-normal"
-      buttonLabel="Tools"
-      body={
-        <div className="flex flex-col gap-2 text-sm">
-          <InternalLink
-            page={LangNavPageName.Decoder}
-            className={'text-nowrap' + (location.pathname === '/decoder' ? ' font-bold' : '')}
-            params={{ entType: EntityType.Language }}
-          >
-            Language Decoder
-          </InternalLink>
-          {NOTABLE_REPORTS.map((tool) => (
-            <InternalLink
-              key={tool.label}
-              page={LangNavPageName.Data}
-              className={'text-nowrap' + (areParamsCurrent(tool.params) ? ' font-bold' : '')}
-              params={tool.params}
-            >
-              {tool.label}
-            </InternalLink>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        aria-current={isAnyToolOpen ? 'page' : undefined}
+        render={
+          <Button variant="ghost" size="lg" className={navBarItemClassName(isAnyToolOpen)}>
+            Tools
+            <ChevronDownIcon className="size-3.5" />
+          </Button>
+        }
+      />
+      <DropdownMenuContent className="w-max">
+        <ToolMenuItem tool={DECODER_TOOL} isActive={isToolOpen(DECODER_TOOL)} />
+        <DropdownMenuGroup>
+          <DropdownMenuLabel>Reports</DropdownMenuLabel>
+          {REPORT_TOOLS.map((tool) => (
+            <ToolMenuItem key={tool.label} tool={tool} isActive={isToolOpen(tool)} />
           ))}
-        </div>
-      }
-    />
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+};
+
+const ToolMenuItem: React.FC<{ tool: NavBarTool; isActive: boolean }> = ({ tool, isActive }) => {
+  return (
+    <DropdownMenuItem
+      className={cn('cursor-pointer', isActive && 'font-medium')}
+      aria-current={isActive ? 'page' : undefined}
+      render={<Link to={getToolURL(tool)} />}
+    >
+      {tool.label}
+    </DropdownMenuItem>
   );
 };
 
