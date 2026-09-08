@@ -458,8 +458,13 @@ describe.skipIf(!API_URL)('language API/TSV parity', () => {
     //
     // Storing the UNESCO edge was tried and reverted: those families never get
     // a UNESCO row, so it pointed outside its own tree and D10's depth
-    // invariant broke on 9 rows. Fixing this properly needs a provenance
-    // column, which is a schema change. See FP-035.
+    // invariant broke on 9 rows. See FP-035.
+    //
+    // The deeper question is FP-043: only languages.tsv column 8 reaches
+    // UNESCO at all, while familiesToLanguages.tsv never does, so 279
+    // languages have a UNESCO parent and ~5,500 comparable ones do not. Two of
+    // the three ways that could be answered remove this exemption instead of
+    // needing a provenance column, so it is worth answering first.
     const indistinguishableFromFamiliesToLanguages = ['dyl', 'lfb'];
     const missing = ETL_DROPS_THE_PARENT.filter(
       (id) =>
