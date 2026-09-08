@@ -544,6 +544,24 @@ def _glottolog(
             parent_language_id=parent_id if parent_id != lid else None,
         )
 
+        # The Combined parent is deliberately NOT written here, and it is
+        # worth saying why, because addGlottologLanguages does write it:
+        #
+        #     lang.Combined.parentLanguageCode = parentLanguageCode ?? parentGlottocode
+        #
+        # Doing the same was tried and reverted. In the browser that value is a
+        # plain STRING: connectLanguagesToParent looks it up in the Combined
+        # dictionary and a languoid whose parent glottocode is not a key there
+        # simply ends up with no parent object. Here it is a FOREIGN KEY into
+        # the Combined tree, so writing `eng` -> `macr1271` grafts the whole
+        # Glottolog forest onto Combined. Measured: language_ancestry 281k ->
+        # 477k, which the check itself calls a cycle signal; D10 depth failed
+        # on 994 rows; D6, D7, D8 and D9 all moved wholesale.
+        #
+        # 7,710 languages therefore hold a Combined parent in the browser that
+        # the database does not have. That is a real difference between the two
+        # paths and it is not resolvable by writing the edge - see FP-044.
+
         lat = to_decimal(row.raw("latitude"))
         lon = to_decimal(row.raw("longitude"))
         if lat is not None and lon is not None:

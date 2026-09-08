@@ -163,6 +163,7 @@ def load(ds: Dataset, root: Path) -> None:
             # a plain string with no tree to be consistent with. Here it is a
             # foreign key into a per-source hierarchy, so the mapper reproduces
             # it instead - see loadLanguagesFromApi's UNESCO fallback.
+            _PENDING_ISO_TREE_PARENTS.append((lid, parent))
             continue
         for source in (SOURCE_ISO, SOURCE_BCP, SOURCE_UNESCO):
             ds["language_source_attribute"].upsert(
@@ -196,6 +197,10 @@ _PENDING_PARENTS: list[tuple[str, list[tuple[str, str]]]] = []
 
 # languages.tsv's Glottocode / Parent Glottocode columns, held until
 # glottolog.tsv has been read. See apply_glottolog_gaps().
+# (language, parent) pairs from languages.tsv column 8 whose parent is a family
+# that does not exist yet. Applied to ISO and BCP by apply_parents().
+_PENDING_ISO_TREE_PARENTS: list[tuple[str, str]] = []
+
 _PENDING_GLOTTOLOG: list[tuple[str, list[tuple[str, str, str | None]]]] = []
 
 
@@ -217,6 +222,20 @@ def apply_parents(ds: Dataset) -> None:
     file wins for 278 languages.
     """
     known = ds["language"].ids()
+
+    # The ISO-tree parents held back in load() because the family did not exist
+    # yet. `pan` -> `inc` is the one that matters most: Punjabi, 176.6M
+    # speakers, whose Combined equivalent 4deb11f7 already had to restore.
+    #
+    # ISO and BCP only - see the note at the deferral site for why UNESCO is
+    # excluded and what that costs.
+    while _PENDING_ISO_TREE_PARENTS:
+        lid, parent = _PENDING_ISO_TREE_PARENTS.pop(0)
+        if parent in known and parent != lid:
+            for source in (SOURCE_ISO, SOURCE_BCP):
+                ds["language_source_attribute"].upsert(
+                    language_id=lid, source=source, parent_language_id=parent
+                )
 
     while _PENDING_PARENTS:
         filename, combined_parents = _PENDING_PARENTS.pop(0)

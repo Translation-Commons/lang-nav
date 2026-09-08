@@ -932,10 +932,14 @@ def verify(conn: psycopg.Connection) -> list[tuple[str, str, bool]]:
     # The structural check below is what actually guards this - it asserts the
     # per-node counts agree with the closure D1 built, which a wrong number
     # could not satisfy, and it passed across every one of those changes.
-    check("D7 attribute rows with descendants (expect 9589, 2026-09-08)",
+    #
+    # -> 9591 later the same day: the languages.tsv column-8 parents that the
+    # family-ordering bug used to drop are now deferred and applied to ISO and
+    # BCP, so `inc` gained Punjabi and two other families gained a child.
+    check("D7 attribute rows with descendants (expect 9591, 2026-09-08)",
           """SELECT count(*) FROM language_source_attribute
               WHERE descendant_count > 0""",
-          lambda v: v == 9589)
+          lambda v: v == 9591)
     # Two independent routes to one number: the sum of the per-node counts must
     # equal the number of ancestor edges in the closure D1 built. A grouping
     # error moves one without the other.
