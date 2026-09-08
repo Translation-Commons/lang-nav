@@ -66,7 +66,13 @@ GRANT USAGE ON SCHEMA api TO langnav_read;
 -- The per-source blocks stay in `language_source_attribute` and are embedded by
 -- PostgREST as before; this view adds only what the merge steps computed.
 
-CREATE OR REPLACE VIEW api.language AS
+-- DROP then CREATE, not CREATE OR REPLACE. Postgres only lets REPLACE add
+-- columns at the END of the list, so inserting one in the middle fails with
+-- "cannot change name of view column". Dropping first keeps the column order
+-- readable instead of forcing every later addition to the bottom.
+DROP VIEW IF EXISTS api.language;
+
+CREATE VIEW api.language AS
 SELECT
     l.id,
     l.name_canonical,
@@ -112,10 +118,26 @@ SELECT
     -- tree needs to.
     (combined.parent_language_id IS NOT NULL) AS parent_is_in_combined_tree,
 
+    -- SET BY languageFamilyCombinedOverrides.tsv, and the reason the flag was
+    -- put on the table in the first place: it tells a later step not to clobber
+    -- a hand-curated parent.
+    --
+    -- The frontend needs it for the same reason. `cca` Cauca is retired with no
+    -- changeTo, so addISORetirementsToLanguages REPLACES the whole languoid and
+    -- its parent goes with it; the overrides file then restores `sai`. Serving
+    -- the flag lets the mapper keep the parent through the retirement rebuild
+    -- instead, which is what makes that file droppable.
+    COALESCE(combined.is_manual_override, false) AS parent_is_manual_override,
+
     -- RETIREMENT, which drives addISORetirementsToLanguages. Serving these lets
     -- the frontend build the same warning text from the same four fields rather
     -- than re-reading the file - the split-language list is parsed out of
     -- `remedy` by regex, so the text carries the list with it.
+    -- The name AS THE RETIREMENT FILE SPELLS IT, which is not always the one
+    -- on `language`. addISORetirementsToLanguages rebuilds the languoid from
+    -- `retirement.languageName`, so `myi` reads "Mina (India)" there against
+    -- "Mina" here.
+    ret.name                AS retirement_name,
     ret.reason              AS retirement_reason,
     ret.change_to_language_id AS retirement_change_to,
     ret.remedy              AS retirement_remedy,
