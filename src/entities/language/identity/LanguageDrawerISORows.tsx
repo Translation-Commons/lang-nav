@@ -27,7 +27,7 @@ const LanguageDrawerISORows: React.FC<Props> = ({ lang }) => {
         label="ISO Status"
         hasData={!!ISO.status || ISO.scope === LanguageScope.Family}
       >
-        {ISO.status
+        {ISO.status || ISO.scope === LanguageScope.Family
           ? ISO.status
             ? getLanguageISOStatusLabel(ISO.status)
             : getLanguageScopeLabel(ISO.scope)

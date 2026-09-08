@@ -37,7 +37,7 @@ const DrawerDetailsField: React.FC<FieldProps> = ({
         <PageParamsContext.Provider value={pageParams}>{children}</PageParamsContext.Provider>,
       ),
     );
-  }, [children]);
+  }, [children, pageParams]);
 
   return (
     <div>

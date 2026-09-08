@@ -39,7 +39,7 @@ const PopulationField: React.FC<{
     <>
       <DrawerDetailsField
         label={`Population (${speakingOrWriting})`}
-        hasData={pop?.adjusted !== null}
+        hasData={pop?.adjusted != null}
         expandedContent={
           <div className="w-fit">
             <LocalePopulationBreakdown locale={locale} speakingOrWriting={speakingOrWriting} />

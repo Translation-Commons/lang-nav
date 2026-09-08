@@ -4,7 +4,7 @@ function getTerritoryDescendants(
   territory: TerritoryData,
   includeDependencies: boolean,
 ): TerritoryData[] {
-  const children = territory.containsTerritories ?? [];
+  const children = [...(territory.containsTerritories ?? [])];
   if (includeDependencies) {
     const dependencies = territory.dependentTerritories ?? [];
     children.push(...dependencies);
