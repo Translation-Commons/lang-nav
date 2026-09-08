@@ -30,30 +30,39 @@ export async function loadISORetirements(): Promise<ISORetirementData[] | void> 
   return await fetch('data/iso/iso-639-3_Retirements.tab')
     .then((res) => res.text())
     .then((text) => {
-      return text
-        .split('\n')
-        .slice(1)
-        .map((line) => {
-          const parts = line.split('\t');
-          if (parts.length < 6) return null;
-          const [id, refName, retReason, changeTo, retRemedy, effective] = line.split('\t');
-          const reason = retReason.trim() as RetirementReason;
-          let splitLanguages: LanguageCode[] = [];
-          if (reason === RetirementReason.Split) {
-            // eg. Split into six languages: Alapmunte [apv]; Lakondê [lkd]; Latundê [ltn]; Mamaindé [wmd]; Tawandê [xtw]; Yalakalore [xyl]
-            splitLanguages = retRemedy.match(/\[([a-z]{3})\]/g)?.map((s) => s.slice(1, -1)) || [];
-          }
-          return {
-            id: id.trim(),
-            languageName: refName.trim(),
-            reason,
-            changeTo: changeTo.trim() as LanguageCode,
-            remedy: retRemedy.trim(),
-            effectiveDate: new Date(effective.trim()),
-            splitLanguages,
-          } as ISORetirementData;
-        })
-        .filter((item) => item !== null);
+      return (
+        text
+          .split('\n')
+          // Comment lines FIRST, then the header. This file opens with three
+          // `#` lines before its column header, so slicing one line off the top
+          // left all three - and the header row survived the length guard below
+          // because it has exactly six columns, becoming a languoid with ID 'Id'
+          // named 'Ref_Name'. The sibling loaders in ISOData.tsx have always
+          // filtered this way. Found by the API/TSV identity diff. See FP-042.
+          .filter((line) => line.trim() !== '' && !line.startsWith('#'))
+          .slice(1)
+          .map((line) => {
+            const parts = line.split('\t');
+            if (parts.length < 6) return null;
+            const [id, refName, retReason, changeTo, retRemedy, effective] = line.split('\t');
+            const reason = retReason.trim() as RetirementReason;
+            let splitLanguages: LanguageCode[] = [];
+            if (reason === RetirementReason.Split) {
+              // eg. Split into six languages: Alapmunte [apv]; Lakondê [lkd]; Latundê [ltn]; Mamaindé [wmd]; Tawandê [xtw]; Yalakalore [xyl]
+              splitLanguages = retRemedy.match(/\[([a-z]{3})\]/g)?.map((s) => s.slice(1, -1)) || [];
+            }
+            return {
+              id: id.trim(),
+              languageName: refName.trim(),
+              reason,
+              changeTo: changeTo.trim() as LanguageCode,
+              remedy: retRemedy.trim(),
+              effectiveDate: new Date(effective.trim()),
+              splitLanguages,
+            } as ISORetirementData;
+          })
+          .filter((item) => item !== null)
+      );
     })
     .catch((err) => console.error('Error loading TSV:', err));
 }
