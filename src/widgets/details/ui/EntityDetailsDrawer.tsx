@@ -24,6 +24,9 @@ import DrawerHeaderActions from './DrawerHeaderActions';
 const LanguageDrawerContents = React.lazy(
   () => import('@entities/language/LanguageDrawerContents'),
 );
+const TerritoryDrawerContents = React.lazy(
+  () => import('@entities/territory/TerritoryDrawerContents'),
+);
 const LocaleDrawerContents = React.lazy(() => import('@entities/locale/LocaleDrawerContents'));
 const EntityDetailsBody = React.lazy(() => import('../EntityDetailsBody'));
 
@@ -49,7 +52,14 @@ const EntityDetailsDrawer: React.FC = () => {
           {ent ? (
             <>
               <PathContainer className="mb-2">
-                <EntityPath ent={ent} showChildren={ent.type !== EntityType.Language} />
+                <EntityPath
+                  ent={ent}
+                  showChildren={
+                    ![EntityType.Language, EntityType.Territory, EntityType.Locale].includes(
+                      ent.type,
+                    )
+                  }
+                />
               </PathContainer>
               <ContainErrorsAndSuspense>
                 <DrawerBodyContents ent={ent} />
@@ -84,6 +94,7 @@ const DrawerBodyContents: React.FC<{ ent?: EntityData }> = ({ ent }) => {
   if (!ent) return null;
   if (ent.type === EntityType.Language) return <LanguageDrawerContents lang={ent} />;
   if (ent.type === EntityType.Locale) return <LocaleDrawerContents locale={ent} />;
+  if (ent.type === EntityType.Territory) return <TerritoryDrawerContents territory={ent} />;
 
   return <EntityDetailsBody entID={ent.ID} />;
 };

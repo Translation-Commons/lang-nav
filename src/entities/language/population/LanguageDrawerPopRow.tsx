@@ -3,19 +3,15 @@ import React from 'react';
 import DrawerActionButton from '@widgets/details/ui/DrawerActionButton';
 import DrawerDetailsField from '@widgets/details/ui/DrawerDetailsField';
 
-import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
-import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { EntityType, PageParams, View } from '@features/params/PageParamTypes';
-import getFieldForPopulationFocus from '@features/transforms/fields/getFieldForPopulationFocus';
 
-import { LocaleData } from '@entities/locale/LocaleTypes';
+import SimpleLocaleTable from '@entities/locale/SimpleLocaleTable';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import { sortBy, uniqueBy } from '@shared/lib/setUtils';
 import { toTitleCase } from '@shared/lib/stringUtils';
 import CountOfPeople from '@shared/ui/CountOfPeople';
-import DecimalNumber from '@shared/ui/DecimalNumber';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
 
@@ -79,55 +75,16 @@ const LanguageDrawerPopRow: React.FC<LanguageDrawerPopRowProps> = ({ lang, popul
       }
       expandedContent={
         showableLocales.length > 0 && (
-          <LocalParamsProvider
-            overrides={{ populationFocus, sortBy: getFieldForPopulationFocus(populationFocus) }}
-          >
-            <SimpleLocaleTable
-              showableLocales={showableLocales}
-              speakingOrWriting={speakingOrWriting}
-            />
-          </LocalParamsProvider>
+          <SimpleLocaleTable
+            locales={showableLocales}
+            populationFocus={populationFocus}
+            labelSource="territory"
+          />
         )
       }
     >
       <CountOfPeople count={popEstimate} />
     </DrawerDetailsField>
-  );
-};
-
-const SimpleLocaleTable: React.FC<{
-  showableLocales: LocaleData[];
-  speakingOrWriting: 'speaking' | 'writing';
-}> = ({ showableLocales, speakingOrWriting }) => {
-  return (
-    <table className="w-fit">
-      <tbody>
-        {showableLocales.slice(0, 10).map((l) => (
-          <tr key={l.ID}>
-            <td className="pr-4">
-              <HoverableEntityName key={l.ID} ent={l} labelSource="territory" />
-            </td>
-            <td className="pr-4 text-right">
-              <DecimalNumber
-                num={l.pop[speakingOrWriting].percentAdjusted ?? 0}
-                alignFraction={false}
-              />
-              %
-            </td>
-            <td className="text-right">
-              <CountOfPeople count={l.pop[speakingOrWriting].adjusted ?? 0} />
-            </td>
-          </tr>
-        ))}
-        {showableLocales.length > 10 && (
-          <tr>
-            <td colSpan={3} className="text-center text-muted-foreground">
-              and {showableLocales.length - 10} more...
-            </td>
-          </tr>
-        )}
-      </tbody>
-    </table>
   );
 };
 

@@ -12,7 +12,7 @@ const DrawerActionButton: React.FC<{ view: View; baseParams: Partial<PageParams>
   view,
   baseParams,
 }) => {
-  const updatePage = usePageParamNavigation({});
+  const updatePage = usePageParamNavigation({ keepOldParams: false });
   return (
     <Button variant="outline" size="sm" onClick={() => updatePage({ view, ...baseParams })}>
       <ArrowUpLeftIcon />

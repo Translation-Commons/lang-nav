@@ -11,9 +11,9 @@ import { TerritoryData } from '@entities/territory/TerritoryTypes';
 
 import CommaSeparated from '@shared/ui/CommaSeparated';
 
-import TerritoryAttributes from './sections/TerritoryAttributes';
-import TerritoryIdentification from './sections/TerritoryIdentification';
-import TerritoryLocation from './sections/TerritoryLocation';
+import TerritoryAttributes from '../../entities/territory/TerritoryAttributes';
+import TerritoryIdentification from '../../entities/territory/TerritoryIdentification';
+import TerritoryLocation from '../../entities/territory/TerritoryLocation';
 
 type Props = {
   territory: TerritoryData;

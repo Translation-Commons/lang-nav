@@ -8,12 +8,13 @@ import MapContainer from '@features/map/MapContainer';
 import LocalParamsProvider from '@features/params/LocalParamsProvider';
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
-
 import Deemphasized from '@shared/ui/Deemphasized';
 import LinkButton from '@shared/ui/LinkButton';
 
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
+
+import getTerritoryDescendants from './getTerritoryDescendants';
+import { TerritoryData, TerritoryScope } from './TerritoryTypes';
 
 const TerritoryLocation: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   return (
@@ -70,18 +71,6 @@ function getMapLabel(territory: TerritoryData): React.ReactNode {
     default:
       return 'territory';
   }
-}
-
-function getTerritoryDescendants(
-  territory: TerritoryData,
-  includeDependencies: boolean,
-): TerritoryData[] {
-  const children = territory.containsTerritories ?? [];
-  if (includeDependencies) {
-    const dependencies = territory.dependentTerritories ?? [];
-    children.push(...dependencies);
-  }
-  return [...children, ...children.flatMap((t) => getTerritoryDescendants(t, includeDependencies))];
 }
 
 export default TerritoryLocation;
