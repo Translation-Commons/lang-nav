@@ -1,3 +1,4 @@
+import { RetirementReason } from '@features/data/load/extra_entities/ISORetirements';
 import { EntityType } from '@features/params/PageParamTypes';
 
 import { LanguageModality } from '@entities/language/LanguageModality';
@@ -373,8 +374,12 @@ export function parseApiLanguage(row: ApiLanguage): LanguageData {
     language.UNESCO.code = orUndefined(unesco.c);
   }
 
-  // addISORetirementsToLanguages, from iso-639-3_Retirements.tab.
-  const retirementReason = orUndefined(iso?.rr);
+  // addISORetirementsToLanguages, from iso-639-3_Retirements.tab. The cast is
+  // what the file path already does with the same column - ISORetirements.tsx
+  // parses `Ret_Reason` straight to the enum without checking it - so casting
+  // here keeps the two paths producing identical values, which is what the
+  // parity tests compare.
+  const retirementReason = orUndefined(iso?.rr) as RetirementReason | undefined;
   if (retirementReason) language.ISO.retirementReason = retirementReason;
 
   // addGlottologLanguages, from glottolog.tsv.

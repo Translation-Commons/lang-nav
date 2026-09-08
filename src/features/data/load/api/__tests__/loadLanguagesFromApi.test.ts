@@ -29,6 +29,9 @@ const spanish: ApiLanguage = {
   retirement_change_to: null,
   retirement_remedy: null,
   retirement_effective_date: null,
+  // NULL means "not in iso-639-3.tab", which is what gates the ISO-family
+  // codes and the top-level scope.
+  iso_status: null,
   latitude: null,
   longitude: null,
   coords_source: null,
@@ -48,6 +51,7 @@ const spanish: ApiLanguage = {
       sc: 3,
       p: 'roa',
       c1: null,
+      rr: null,
     },
     {
       s: 'Glottolog',
@@ -56,6 +60,7 @@ const spanish: ApiLanguage = {
       sc: 3,
       p: 'ibe',
       c1: null,
+      rr: null,
     },
     {
       s: 'ISO',
@@ -64,6 +69,7 @@ const spanish: ApiLanguage = {
       sc: 3,
       p: 'roa',
       c1: 'es',
+      rr: null,
     },
     {
       s: 'BCP',
@@ -72,6 +78,7 @@ const spanish: ApiLanguage = {
       sc: 3,
       p: 'roa',
       c1: 'es',
+      rr: null,
     },
     {
       s: 'UNESCO',
@@ -80,6 +87,7 @@ const spanish: ApiLanguage = {
       sc: 3,
       p: 'roa',
       c1: null,
+      rr: null,
     },
   ],
   aliases: [{ a: 'stan1288', k: 'glottocode' }],
@@ -98,6 +106,9 @@ const marwari: ApiLanguage = {
   retirement_change_to: null,
   retirement_remedy: null,
   retirement_effective_date: null,
+  // NULL means "not in iso-639-3.tab", which is what gates the ISO-family
+  // codes and the top-level scope.
+  iso_status: null,
   latitude: null,
   longitude: null,
   coords_source: null,
@@ -117,6 +128,7 @@ const marwari: ApiLanguage = {
       sc: 3,
       p: 'mwr',
       c1: null,
+      rr: null,
     },
   ],
   aliases: [],
@@ -135,6 +147,9 @@ const chinese: ApiLanguage = {
   retirement_change_to: null,
   retirement_remedy: null,
   retirement_effective_date: null,
+  // NULL means "not in iso-639-3.tab", which is what gates the ISO-family
+  // codes and the top-level scope.
+  iso_status: null,
   latitude: null,
   longitude: null,
   coords_source: null,
@@ -154,6 +169,7 @@ const chinese: ApiLanguage = {
       sc: 4,
       p: null,
       c1: null,
+      rr: null,
     },
     {
       s: 'ISO',
@@ -162,6 +178,7 @@ const chinese: ApiLanguage = {
       sc: 4,
       p: null,
       c1: 'zh',
+      rr: null,
     },
   ],
   aliases: [{ a: 'clas1255', k: 'glottocode' }],
@@ -243,6 +260,7 @@ describe('parseApiLanguage', () => {
           sc: 3,
           p: 'indo1319',
           c1: null,
+          rr: null,
         },
       ],
     });
@@ -330,6 +348,7 @@ describe('loadLanguagesFromApi', () => {
                     sc: 3,
                     p: 'ibe',
                     c1: null,
+                    rr: null,
                   },
                 ],
               },
@@ -344,6 +363,7 @@ describe('loadLanguagesFromApi', () => {
                     sc: 5,
                     p: null,
                     c1: null,
+                    rr: null,
                   },
                 ],
               },
