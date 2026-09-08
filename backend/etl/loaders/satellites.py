@@ -188,11 +188,41 @@ def _cldr_coverage(ds: Dataset, path: Path) -> None:
 
 
 def _retirements(ds: Dataset, path: Path) -> None:
+    """ISO 639-3 retirements.
+
+    A retired code that is not already a language is CREATED here, as a
+    SpecialCode entry, matching addISORetirementsToLanguages: when
+    languagesBySource.ISO has no entry for the code the frontend builds one
+    with LanguageScope.SpecialCode, a Combined row carrying the retirement
+    name and the Change_To parent, and an ISO row holding the code.
+
+    221 codes take that branch - `fri`, `amd`, `jap` and the rest of the ones
+    withdrawn before they reached languages.tsv. Skipping them left the two
+    paths with different languoids, which is half of FP-038; the other half is
+    the glottocodes glottolog.tsv names them by, handled in _glottolog.
+
+    They are SpecialCode, so the default view (Macrolanguage and Language) does
+    not show them. Creating them changes what the API serves, not what the site
+    displays.
+    """
+    # _ensure_language registers the entity row as well as the language row,
+    # and data_quality_finding.entity_id is a foreign key onto entity - so
+    # reusing it rather than writing the language row directly is what keeps a
+    # later finding about one of these codes from aborting the load.
+    from .vocab import SOURCE_ISO
+
+    # The languages themselves are created in the authorities loader, by
+    # create_retired_languages(). They cannot be created HERE: this loader runs
+    # eleventh and `locales` runs sixth, so a locale naming a retired code
+    # would be dropped for referencing an unknown language before this ran.
+    # Five locales - chs_US, meg_NC, nlr_AU, ppr_ID, yiy_AU - do exactly that.
     known = ds["language"].ids()
+
     for row in read_table(path):
         lid = row.get("Id")
         if not lid or lid not in known:
             continue
+
         change_to = row.get("Change_To")
         ds["language_retirement"].upsert(
             language_id=lid,
@@ -203,8 +233,6 @@ def _retirements(ds: Dataset, path: Path) -> None:
             effective_date=to_date(row.get("Effective")),
         )
         # Also recorded on the ISO source row, where retirement is an ISO fact.
-        from .vocab import SOURCE_ISO
-
         ds["language_source_attribute"].upsert(
             language_id=lid,
             source=SOURCE_ISO,

@@ -75,8 +75,14 @@ def _core(ds: Dataset, path: Path) -> None:
 
         language, script, territory, variants = parse_locale_id(lid)
         if language not in known_languages:
+            # NOT attached to `lid`. The row is being dropped, so that locale
+            # never becomes an entity, and data_quality_finding.entity_id is a
+            # foreign key onto entity - reporting it against the dropped id
+            # aborts the whole load with a ForeignKeyViolation, AFTER --fresh
+            # has already truncated every table. The message still names the
+            # locale, which is what anyone reading the finding needs.
             ds.warn(
-                lid,
+                None,
                 "locale.language_id",
                 f"{row.origin()}: locale {lid!r} references unknown language "
                 f"{language!r}; row dropped because language_id is NOT NULL",

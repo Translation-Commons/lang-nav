@@ -48,6 +48,11 @@ FAMILY_SOURCES = (SOURCE_COMBINED, SOURCE_ISO, SOURCE_BCP)
 
 def load(ds: Dataset, root: Path) -> None:
     _iso_639_3(ds, root / "iso" / "iso-639-3.tab")
+    # Before everything else that resolves a language id. The `locales` loader
+    # runs after this one and drops any locale whose language is unknown, so a
+    # retired code has to exist by now or five locales - chs_US, meg_NC,
+    # nlr_AU, ppr_ID, yiy_AU - are silently lost.
+    _retired_languages(ds, root / "iso" / "iso-639-3_Retirements.tab")
     _families_639_5(ds, root / "iso" / "families639-5.tsv")
     _families_to_languages(ds, root / "tc" / "familiesToLanguages.tsv")
     # HERE, and not at the end of the pipeline. languages.tsv's Combined
@@ -61,7 +66,15 @@ def load(ds: Dataset, root: Path) -> None:
 
     _languages.apply_parents(ds)
     _macrolanguages(ds, root / "iso" / "macrolanguages.tsv")
-    _glottolog(ds, root / "glottolog" / "glottolog.tsv")
+    _glottolog(
+        ds,
+        root / "glottolog" / "glottolog.tsv",
+        _curated_glottocode_map(root),
+        _codes_only_in_retirements(
+            root / "iso" / "iso-639-3_Retirements.tab",
+            root / "tc" / "languages.tsv",
+        ),
+    )
     # Immediately after _glottolog, so glottolog.tsv wins wherever the two
     # files name a different glottocode, and before _glottocode_to_iso, which
     # only adds aliases.
@@ -265,7 +278,65 @@ def _macrolanguages(ds: Dataset, path: Path) -> None:
 # ---------------------------------------------------------------------------
 
 
-def _glottolog(ds: Dataset, path: Path) -> None:
+def _curated_glottocode_map(root: Path) -> dict[str, str]:
+    """glottocode -> ISO code, from the two files that curate that equivalence.
+
+    `glottolog.tsv` names an ISO code for most nodes but not all, and where it
+    is silent this project says so itself, in two places:
+
+    - `glottocodeToISO.tsv`, whose entire purpose is this mapping - the header
+      is `Glottocode / ISO Code / Name`. `<contested>` is a marker, not a code.
+    - `languages.tsv`'s Glottocode column, read the other way round.
+
+    Both are human-curated statements that a Glottolog node and an ISO language
+    are the same thing, and the frontend acts on them. Returned as one map so
+    `_glottolog` can consult them where glottolog.tsv gives it nothing.
+    """
+    curated: dict[str, str] = {}
+
+    for row in read_table(root / "tc" / "glottocodeToISO.tsv"):
+        glottocode = row.get("Glottocode")
+        iso = row.get("ISO Code")
+        if not glottocode or not iso or glottocode.startswith("<"):
+            continue
+        curated[glottocode] = iso
+
+    # languages.tsv is the weaker source of the two: glottocodeToISO.tsv exists
+    # for nothing else, so it wins where both name a code. setdefault, not [].
+    for row in read_table(root / "tc" / "languages.tsv"):
+        glottocode = row.get("Glottocode")
+        lid = row.get("Language Code")
+        if not glottocode or not lid:
+            continue
+        curated.setdefault(glottocode, lid)
+
+    return curated
+
+
+def _codes_only_in_retirements(retirements: Path, languages: Path) -> set[str]:
+    """Retired ISO codes that are NOT languages in languages.tsv.
+
+    The distinction matters. `adp`, `mhv`, `aam` and 200-odd others carry a
+    retirement record AND a languages.tsv row - they are real languages here,
+    and glottolog.tsv naming them is correct. Only a code that appears solely
+    in the retirements file has no languoid of its own, and it is those the
+    frontend gives a glottocode entry to instead.
+    """
+    known = {
+        row.get("Language Code")
+        for row in read_table(languages)
+        if row.get("Language Code")
+    }
+    return {
+        row.get("Id")
+        for row in read_table(retirements)
+        if row.get("Id") and row.get("Id") not in known
+    }
+
+
+def _glottolog(
+    ds: Dataset, path: Path, curated: dict[str, str], retired_only: set[str]
+) -> None:
     """Glottolog's ~27,000 nodes.
 
     Two passes. The first builds glottocode -> language id so that parent
@@ -275,14 +346,78 @@ def _glottolog(ds: Dataset, path: Path) -> None:
     """
     rows = list(read_table(path))
 
-    # Pass 1: a glottolog node maps onto its ISO code when it has one, and
-    # onto its own glottocode otherwise.
+    # Pass 1: a glottolog node maps onto its ISO code when it has one, onto the
+    # ISO code THIS PROJECT gives it when glottolog.tsv does not, and onto its
+    # own glottocode only when nobody names one.
+    #
+    # The middle case is the whole point. Without it a node whose ISO Code cell
+    # is empty becomes a language of its own even when languages.tsv or
+    # glottocodeToISO.tsv says it IS an existing ISO language - `arab1395`
+    # "Arabic" alongside `ara`, `azer1255` "Central Oghuz" alongside `aze`, 162
+    # in total. The frontend has always merged these (addGlottologLanguages
+    # finds the languoid already filed under that glottocode and fills it in
+    # rather than creating one), because showing one language under several
+    # classification schemes needs ONE object carrying several identities.
+    # Commit 2c8607b7 added the mapping file for exactly that purpose.
+    #
+    # A self-mapping is skipped: `aben1250 -> aben1250` in languages.tsv says
+    # only that the languoid is known by its glottocode, not that it is some
+    # other language.
+    # Every ISO code glottolog.tsv assigns directly. Gathered first because the
+    # fallback below must not contradict one.
+    taken = {
+        row.get("ISO Code")
+        for row in rows
+        if row.get("Glottocode") and row.get("ISO Code")
+    }
+
     code_to_id: dict[str, str] = {}
     for row in rows:
         glottocode = row.get("Glottocode")
         if not glottocode:
             continue
         iso = row.get("ISO Code")
+
+        # RETIRED CODES KEEP THEIR GLOTTOCODE.
+        #
+        # glottolog.tsv names an ISO code for 226 nodes that no language here
+        # has: 216 are RETIRED (`azr` Adzera, split into three; `mzf` Aiku,
+        # split into four) and 10 are private-use `q...` tags. None is a live
+        # ISO code.
+        #
+        # The frontend keeps BOTH: addGlottologLanguages finds nothing filed
+        # under the glottocode and creates the languoid under the GLOTTOCODE,
+        # while addISORetirementsToLanguages separately creates the retired
+        # code as a SpecialCode entry. 192 of the glottocode ones are in the
+        # default view.
+        #
+        # The test is `in retired`, NOT "not a known language": _retired_
+        # languages() runs before this and creates all 221 of them, so by now
+        # they ARE known and an existence check would let every one through.
+        #
+        # So the node is keyed on its own glottocode, matching that. Whether a
+        # withdrawn code should appear beside the languages that replaced it is
+        # a data-quality question for the maintainers - FP-042 - and answering
+        # it here would change what the site shows rather than what the API
+        # serves.
+        if iso and iso in retired_only:
+            iso = None
+
+        if not iso:
+            mapped = curated.get(glottocode)
+            # `taken` holds the ISO codes glottolog.tsv itself assigns, gathered
+            # in the loop below. A curated mapping is only ever a FALLBACK for
+            # a node glottolog.tsv leaves unnamed, so one that would hand this
+            # node an ISO code glottolog.tsv has already given to a DIFFERENT
+            # node is ignored.
+            #
+            # `zeem1243` is the case. glottocodeToISO.tsv line 141 maps it onto
+            # `zem`, while languages.tsv gives `zem` the code `zeem1242` and
+            # `zeem1243` to `zua`. Acting on the first would move `zem` off the
+            # glottocode glottolog.tsv assigns it. That contradiction is FP-037
+            # and belongs in the source files, not in a silent override here.
+            if mapped and mapped != glottocode and mapped not in taken:
+                iso = mapped
         code_to_id[glottocode] = iso if iso else glottocode
 
     # Pass 2
@@ -319,6 +454,52 @@ def _glottolog(ds: Dataset, path: Path) -> None:
             ds["language"].upsert(
                 id=lid, latitude=lat, longitude=lon, coords_source=SOURCE_GLOTTOLOG
             )
+
+
+def _retired_languages(ds: Dataset, path: Path) -> None:
+    """Create a languoid for every retired ISO code that is not already one.
+
+    Mirrors addISORetirementsToLanguages, which builds an entry with
+    LanguageScope.SpecialCode, a Combined row carrying the retirement name, and
+    an ISO row holding the code, whenever languagesBySource.ISO has none. 221
+    codes take that branch - `fri`, `amd`, `jap`, and the rest withdrawn before
+    they ever reached languages.tsv.
+
+    Without these the two paths hold different languoids, which is half of
+    FP-038. They are SpecialCode, so the default view - Macrolanguage and
+    Language - does not show them: this changes what the API serves, not what
+    the site displays.
+
+    The retirement FACTS (reason, remedy, change_to, effective date) are loaded
+    separately by satellites._retirements, which is where language_retirement
+    lives. Only the languoid is created here, and only because it has to exist
+    before the locales loader validates against it.
+    """
+    from .vocab import LANGUAGE_SCOPE_BY_NAME, SOURCE_COMBINED, SOURCE_ISO
+
+    special_code = LANGUAGE_SCOPE_BY_NAME["SpecialCode"]
+    known = ds["language"].ids()
+
+    for row in read_table(path):
+        lid = row.get("Id")
+        if not lid or lid in known:
+            continue
+
+        name = row.get("Ref_Name")
+        # scope is per-source on language_source_attribute; `language` has no
+        # scope column of its own.
+        _ensure_language(ds, lid, name, path.name)
+        ds["language_source_attribute"].upsert(
+            language_id=lid,
+            source=SOURCE_COMBINED,
+            code=lid,
+            name=name,
+            scope=special_code,
+        )
+        ds["language_source_attribute"].upsert(
+            language_id=lid, source=SOURCE_ISO, code=lid
+        )
+        known.add(lid)
 
 
 def _glottocode_to_iso(ds: Dataset, path: Path) -> None:
@@ -466,8 +647,18 @@ def _combined_overrides(ds: Dataset, path: Path) -> None:
         if not parent or not child:
             continue
         if parent not in known or child not in known or parent == child:
+            # Attach the finding to whichever id EXISTS. This warning fires
+            # precisely when one of them does not, and data_quality_finding
+            # .entity_id is a foreign key onto entity - so reporting it against
+            # the missing id aborts the whole load with a ForeignKeyViolation,
+            # after the --fresh truncate has already emptied the database.
+            #
+            # `nort2899` is the live case: glottocodeToISO.tsv and languages.tsv
+            # both map it onto `uun`, so _glottolog now merges it away and the
+            # override file's line 14 names an id that no longer exists.
+            subject = child if child in known else parent
             ds.warn(
-                child,
+                subject if subject in known else None,
                 "language_source_attribute.parent_language_id",
                 f"{row.origin()}: override {parent!r} -> {child!r} references "
                 f"an unknown language; skipped",
