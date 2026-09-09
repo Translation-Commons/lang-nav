@@ -3,7 +3,7 @@ import { EndonymColumn, NameColumn } from '@features/table/CommonColumns';
 import TableColumn from '@features/table/TableColumn';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import LanguageOtherNames from '@entities/language/LanguageOtherNames';
+import LanguageOtherNames from '@entities/language/identity/LanguageOtherNames';
 import { LanguageData } from '@entities/language/LanguageTypes';
 
 import Deemphasized from '@shared/ui/Deemphasized';

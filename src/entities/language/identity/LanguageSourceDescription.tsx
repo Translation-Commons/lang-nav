@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LanguageSource } from './LanguageTypes';
+import { LanguageSource } from '../LanguageTypes';
 
 type Props = {
   languageSource: LanguageSource;

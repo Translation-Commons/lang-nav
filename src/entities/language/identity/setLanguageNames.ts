@@ -1,6 +1,6 @@
 import { uniqueBy } from '@shared/lib/setUtils';
 
-import { LanguageData, LanguageSource } from './LanguageTypes';
+import { LanguageData, LanguageSource } from '../LanguageTypes';
 
 export function setLanguageNames(lang: LanguageData, additionalNames: string[] = []): void {
   const names = [

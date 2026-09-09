@@ -1,14 +1,16 @@
 import { useState } from 'react';
 
 import { EntityData } from '@entities/types/DataTypes';
+import { EntityNameLabelSource } from '@entities/ui/EntityName';
 
 import MiniCard from './MiniCard';
 
 type Props = {
   ents: EntityData[];
+  labelSource?: EntityNameLabelSource;
 };
 
-function MiniCardList({ ents }: Props) {
+function MiniCardList({ ents, labelSource }: Props) {
   const [showAll, setShowAll] = useState(false);
   const lastEntShown = showAll ? ents.length : ents.length > 12 ? 11 : ents.length;
 
@@ -18,7 +20,7 @@ function MiniCardList({ ents }: Props) {
       <div className="grid gap-6 grid-cols-1 @xs:grid-cols-2 @sm:grid-cols-3 @md:grid-cols-4 @lg:grid-cols-4 @xl:grid-cols-6">
         {ents.slice(0, lastEntShown).map((d) => (
           <div className="shadow-sm rounded-md p-4 hover:bg-accent cursor-pointer" key={d.ID}>
-            <MiniCard ent={d} />
+            <MiniCard ent={d} labelSource={labelSource} />
           </div>
         ))}
         {ents.length > 12 && (

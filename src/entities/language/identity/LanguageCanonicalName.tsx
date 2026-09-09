@@ -7,7 +7,7 @@ import { Badge } from '@shared/ui/badge';
 import Highlightable from '@shared/ui/Highlightable';
 import LinkButton from '@shared/ui/LinkButton';
 
-import { LanguageData } from './LanguageTypes';
+import { LanguageData } from '../LanguageTypes';
 
 const LanguageCanonicalName: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const { searchString } = usePageParams();

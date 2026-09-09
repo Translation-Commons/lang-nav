@@ -16,10 +16,10 @@ import Field from '@features/transforms/fields/Field';
 import { getSortFunction } from '@features/transforms/sorting/sort';
 import TreeListRoot from '@features/treelist/TreeListRoot';
 
-import { LanguageData, LanguageScope } from '@entities/language/LanguageTypes';
-import LanguageDialectsMap from '@entities/language/relations/LanguageDialectsMap';
-
 import { Tabs, TabsList, TabsTrigger } from '@shared/ui/tabs';
+
+import { LanguageData, LanguageScope } from '../LanguageTypes';
+import LanguageDialectsMap from '../relations/LanguageDialectsMap';
 
 const LanguageDetailsDialects: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const [sectionView, setSectionView] = useState(View.Map);

@@ -14,11 +14,12 @@ import { ColorGradient } from '@features/transforms/coloring/ColorTypes';
 import Field from '@features/transforms/fields/Field';
 import { sortByPopulation } from '@features/transforms/sorting/sort';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
 import { LocaleData } from '@entities/locale/LocaleTypes';
 import { TerritoryScope } from '@entities/territory/TerritoryTypes';
 
 import { uniqueBy } from '@shared/lib/setUtils';
+
+import { LanguageData } from '../LanguageTypes';
 
 type Props = {
   lang: LanguageData;
@@ -62,7 +63,10 @@ const LanguageTerritories: React.FC<Props> = ({ lang, view }) => {
     <LocalParamsProvider overrides={params}>
       <div className="text-xs">
         {view === View.CardList && (
-          <MiniCardList ents={uniqueBy(locales, (l) => l.territoryCode || '')} />
+          <MiniCardList
+            ents={uniqueBy(locales, (l) => l.territoryCode || '')}
+            labelSource="territory"
+          />
         )}
         {view === View.Map && (
           <>

@@ -1,21 +1,23 @@
 import React from 'react';
 
+import DetailsSection from '@widgets/details/ui/DetailsSection';
+import IdentityRow from '@widgets/details/ui/IdentityRow';
+
 import { SearchableField } from '@features/params/PageParamTypes';
 import EntityFieldHighlightedByPageSearch from '@features/transforms/search/EntityFieldHighlightedByPageSearch';
 
-import useCLDRXMLLink from '@entities/language/digitalsupport/useCLDRXMLLink';
-import LanguageOtherNames, { getLanguageOtherNames } from '@entities/language/LanguageOtherNames';
-import LanguageRetirementReason from '@entities/language/LanguageRetirementReason';
-import { LanguageData, LanguageField, LanguageSource } from '@entities/language/LanguageTypes';
-import LanguageWikipediaIdentityRow from '@entities/language/LanguageWikipediaEntry';
 import { getCLDRWarningNotes } from '@entities/ui/CLDRWarningNotes';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import LanguageCodeDescriptionBySource from '@strings/LanguageCodeDescriptionBySource';
 
-import DetailsSection from '../ui/DetailsSection';
-import IdentityRow from '../ui/IdentityRow';
+import useCLDRXMLLink from '../digitalsupport/useCLDRXMLLink';
+import { LanguageData, LanguageField, LanguageSource } from '../LanguageTypes';
+import LanguageWikipediaIdentityRow from '../writing/LanguageWikipediaEntry';
+
+import LanguageOtherNames, { getLanguageOtherNames } from './LanguageOtherNames';
+import LanguageRetirementReason from './LanguageRetirementReason';
 
 const LanguageDetailsIdentity: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const otherNames = getLanguageOtherNames(lang);

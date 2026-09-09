@@ -3,13 +3,15 @@ import React from 'react';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 import DetailsStatBlock from '@widgets/details/ui/DetailsStatBlock';
 
-import { LanguageData } from '@entities/language/LanguageTypes';
-import { LanguagePopulationEstimate } from '@entities/language/population/LanguagePopulationEstimate';
 import PopulationFocus from '@entities/types/PopulationFocus';
 
 import Deemphasized from '@shared/ui/Deemphasized';
 
 import { getLanguageModalityUserLabel } from '@strings/LanguageModalityStrings';
+
+import { LanguageData } from '../LanguageTypes';
+
+import { LanguagePopulationEstimate } from './LanguagePopulationEstimate';
 
 type Props = { lang: LanguageData; speakingOrWriting: 'speaking' | 'writing' };
 

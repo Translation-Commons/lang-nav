@@ -1,6 +1,6 @@
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 
-import { LanguageModality } from '../LanguageModality';
+import { LanguageModality } from '../writing/LanguageModality';
 
 /**
  * When computing population numbers, sometimes sources report general numbers (eg. Population: 314,000)

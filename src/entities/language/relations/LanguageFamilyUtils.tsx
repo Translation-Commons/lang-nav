@@ -4,7 +4,7 @@ import { sortByPopulation } from '@features/transforms/sorting/sort';
 
 import { EntityData } from '@entities/types/DataTypes';
 
-import { LanguageData, LanguageScope } from './LanguageTypes';
+import { LanguageData, LanguageScope } from '../LanguageTypes';
 
 export function getLanguageRootLanguageFamily(lang: LanguageData, depth = 0): LanguageData {
   if (depth > 30) return lang; // Prevent possible infinite loops in case of circular references

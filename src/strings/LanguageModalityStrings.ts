@@ -1,4 +1,4 @@
-import { LanguageModality } from '@entities/language/LanguageModality';
+import { LanguageModality } from '@entities/language/writing/LanguageModality';
 
 import enforceExhaustiveSwitch from '@shared/lib/enforceExhaustiveness';
 

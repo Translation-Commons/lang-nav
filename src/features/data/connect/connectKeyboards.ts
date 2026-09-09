@@ -1,6 +1,6 @@
 import { KeyboardData } from '@entities/keyboard/KeyboardTypes';
-import { getLanguageRootMacrolanguage } from '@entities/language/LanguageFamilyUtils';
 import { LanguageData, LanguageDictionary } from '@entities/language/LanguageTypes';
+import { getLanguageRootMacrolanguage } from '@entities/language/relations/LanguageFamilyUtils';
 import { LocaleData, StandardLocaleCode } from '@entities/locale/LocaleTypes';
 import { TerritoryCode, TerritoryData } from '@entities/territory/TerritoryTypes';
 import { VariantData } from '@entities/variant/VariantTypes';

@@ -112,3 +112,11 @@ export function partition<T>(items: T[], partFn: (item: T) => boolean): [T[], T[
   }
   return [a, b];
 }
+
+export function sortBy<T>(items: T[], valueFn: (item: T) => number | undefined): T[] {
+  return [...items].sort((a, b) => {
+    const aValue = valueFn(a) ?? 0;
+    const bValue = valueFn(b) ?? 0;
+    return bValue - aValue;
+  });
+}

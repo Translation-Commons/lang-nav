@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { getBaseLanguageData } from '../LanguageTypes';
+import { getBaseLanguageData } from '../../LanguageTypes';
 import { setLanguageNames } from '../setLanguageNames';
 
 describe('setLanguageNames', () => {

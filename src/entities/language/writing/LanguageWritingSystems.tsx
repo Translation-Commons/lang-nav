@@ -5,7 +5,7 @@ import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName'
 import CommaSeparated from '@shared/ui/CommaSeparated';
 import Deemphasized from '@shared/ui/Deemphasized';
 
-import { LanguageData } from './LanguageTypes';
+import { LanguageData } from '../LanguageTypes';
 
 const LanguageWritingSystems: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const writingSystems = Object.values(lang.writingSystems ?? {}).slice();

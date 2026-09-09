@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 
+import { getBaseLanguageData, LanguageScope } from '../../LanguageTypes';
 import {
   getLanguageRootLanguageFamily,
   getLanguageRootMacrolanguage,
 } from '../LanguageFamilyUtils';
-import { getBaseLanguageData, LanguageScope } from '../LanguageTypes';
 
 function generateLanguages() {
   const afa = getBaseLanguageData('afa', 'Afro-Asiatic Languages');

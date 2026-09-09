@@ -68,6 +68,8 @@ const ReportCensusInputTool: React.FC = () => {
 
   return (
     <div>
+      Language Navigator expects a certain format for census files to add information about
+      populations. This tool helps you validate and preview your data before importing it.
       <h3>TSV File</h3>
       <div>
         Copy-paste work-in-progress TSV files to load the data and see if it is correct. You can

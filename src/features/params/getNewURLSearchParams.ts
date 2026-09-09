@@ -141,6 +141,7 @@ function clearContextDependentParams(
         next.set('writingSystemFilter', oldSearchString);
       }
     }
+    if (newParams.cmpID == null) next.delete('cmpID');
   }
 
   // When user changes primary sortBy, promote old sortBy to secondarySortBy (tie-breaker).

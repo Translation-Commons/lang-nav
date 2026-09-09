@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { LanguageData, LanguageField } from './LanguageTypes';
+import { LanguageData, LanguageField } from '../LanguageTypes';
 
 const LanguageRetirementReason: React.FC<{ lang: LanguageData }> = ({ lang }) => {
   const explanation = lang.warnings?.[LanguageField.isoCode];

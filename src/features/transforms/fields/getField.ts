@@ -1,6 +1,6 @@
 import { EntityType } from '@features/params/PageParamTypes';
 
-import { getRootLanguageFamilyForEntity } from '@entities/language/LanguageFamilyUtils';
+import { getRootLanguageFamilyForEntity } from '@entities/language/relations/LanguageFamilyUtils';
 import {
   getCountOfCensuses,
   getCountOfKeyboards,

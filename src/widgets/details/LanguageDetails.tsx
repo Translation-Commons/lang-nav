@@ -1,16 +1,16 @@
 import React from 'react';
 
 import LanguageDetailsDigitalSupport from '@entities/language/digitalsupport/LanguageDetailsDigitalSupport';
+import LanguageDetailsIdentity from '@entities/language/identity/LanguageDetailsIdentity';
+import LanguageDetailsAttributes from '@entities/language/LanguageDetailsAttributes';
 import { LanguageData } from '@entities/language/LanguageTypes';
+import LanguageDetailsPopulation from '@entities/language/population/LanguageDetailsPopulation';
+import LanguageDetailsConnections from '@entities/language/relations/LanguageDetailsConnections';
+import LanguageDialectsSection from '@entities/language/relations/LanguageDetailsDialects';
+import LanguageDetailsTerritories from '@entities/language/relations/LanguageDetailsTerritories';
 import LanguageDetailsVitality from '@entities/language/vitality/LanguageDetailsVitality';
-import './details.css';
 
-import LanguageDetailsAttributes from './sections/LanguageDetailsAttributes';
-import LanguageDetailsConnections from './sections/LanguageDetailsConnections';
-import LanguageDialectsSection from './sections/LanguageDetailsDialects';
-import LanguageDetailsIdentity from './sections/LanguageDetailsIdentity';
-import LanguageDetailsPopulation from './sections/LanguageDetailsPopulation';
-import LanguageDetailsTerritories from './sections/LanguageDetailsTerritories';
+import './details.css';
 
 type Props = {
   lang: LanguageData;

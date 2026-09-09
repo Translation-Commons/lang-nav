@@ -3,7 +3,7 @@ import React from 'react';
 import DetailsField from '@widgets/details/ui/DetailsField';
 import DetailsSection from '@widgets/details/ui/DetailsSection';
 
-import { TerritoryData } from '@entities/territory/TerritoryTypes';
+import { TerritoryData } from './TerritoryTypes';
 
 const TerritoryIdentification: React.FC<{ territory: TerritoryData }> = ({ territory }) => {
   const {

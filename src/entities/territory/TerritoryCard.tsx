@@ -3,7 +3,6 @@ import React from 'react';
 import HoverableEntityName from '@features/layers/hovercard/HoverableEntityName';
 import Field from '@features/transforms/fields/Field';
 
-import { TerritoryData, TerritoryScope } from '@entities/territory/TerritoryTypes';
 import EntityTitle from '@entities/ui/EntityTitle';
 
 import CardField from '@shared/containers/CardField';
@@ -13,6 +12,7 @@ import Deemphasized from '@shared/ui/Deemphasized';
 import { getTerritoryScopeLabel } from '@strings/TerritoryScopeStrings';
 
 import TerritoryLanguageList from './TerritoryLanguageList';
+import { TerritoryData, TerritoryScope } from './TerritoryTypes';
 
 interface Props {
   territory: TerritoryData;
